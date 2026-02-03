@@ -1,10 +1,14 @@
 {
   "date": "2026-02-03",
   "marketOverview": {
+    "shanghai": { "index": 3250, "change_pct": 1.29 },
+    "shenzhen": { "index": 10521, "change_pct": 1.50 },
+    "chinext": { "index": 2156, "change_pct": 2.93 },
+    "northbound": null,
     "sentiment": "bullish",
-    "hotSectors": ["黄金珠宝", "光通信CPO", "半导体设备", "海风电设备"],
+    "hotSectors": ["黄金珠宝", "光通信CPO", "半导体设备", "海上风电", "有色金属"],
     "coldSectors": [],
-    "notes": "春节后首日开门红，市场情绪高涨。黄金股集体涨停（湖南黄金+10%），CPO概念强势（天孚通信+13.21%）"
+    "notes": "春节后首日开门红，市场情绪高涨。黄金股集体涨停（湖南黄金+10%、菜百股份+10%），CPO概念强势（天孚通信+13.21%），紫金矿业+6.01%受益业绩预增。"
   },
   "candidates": [
     {
@@ -14,58 +18,52 @@
       "change_pct": 10.02,
       "rps120": 87.5,
       "rps20": 96.4,
+      "rps60": 96.9,
       "highlights": 7,
       "risks": 2,
+      "highlightDetails": [
+        "成长：近3年营收每年增长30%，最新季度净利润同比增长202%",
+        "盈利：近5年ROE 16%，ROIC 14%，盈利能力很强",
+        "收现：近5年收现比111%，现金含量较强",
+        "分红：近5年股息收益率均值4.1%，现金分红极高",
+        "评级：近90天8家机构评级，63%买入，目标价上涨空间12%",
+        "北向：北向资金持股2.4%，较受外资青睐",
+        "强势：近3月涨幅超过A股97%的股票，走势很强"
+      ],
+      "riskDetails": [
+        "超买：周级别超买，技术面或有调整需求",
+        "估值：综合估值高于上市以来85%的时间，处于历史高位"
+      ],
+      "score": {
+        "quality": 9.4,
+        "valuation": 4.4,
+        "trend": 9.2
+      },
       "marketCap": "186亿",
-      "catalyst": "黄金价格创新高，春节后黄金销售旺季预期",
-      "recommendation": "BUY",
+      "catalyst": "2025年净利润预增47%-71%；黄金价格创新高4800美元；投资金业务持续高增",
+      "newsRefs": [
+        { "title": "菜百股份2025年业绩预告：净利润10.6亿-12.3亿，同比+47%-71%", "source": "公司公告", "date": "2026-01-30" },
+        { "title": "国联民生：利润大幅增长，投资金业务持续受益，买入评级", "source": "研报", "date": "2026-02-01" }
+      ],
+      "recommendation": "WATCH",
       "confidence": "high",
-      "reasoning": "RPS120在理想区间(87.5%)，7条亮点仅2条风险，今日涨停受益黄金价格上涨"
+      "reasoning": "RPS120在理想区间(87.5%)，公司质地9.4分优秀，7条亮点仅2条风险。但今日涨停+10%，短期超买风险，等待回调机会。"
     },
     {
-      "code": "300684",
-      "name": "中石科技",
-      "price": 56.24,
-      "change_pct": 2.16,
-      "rps120": 94.4,
-      "rps20": 85.3,
-      "highlights": 9,
-      "risks": 0,
-      "marketCap": "168亿",
-      "catalyst": "AI算力散热需求持续增长，导热材料龙头",
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": "亮点9条风险0条优秀，但RPS120偏高(94.4%)短期追高风险"
-    },
-    {
-      "code": "688059",
-      "name": "华锐精密",
-      "price": 97.34,
-      "change_pct": 3.01,
-      "rps120": 87.0,
-      "rps20": 89.9,
+      "code": "688002",
+      "name": "睿创微纳",
+      "price": 114.65,
+      "change_pct": 5.96,
+      "rps120": 91.1,
+      "rps20": 86.4,
+      "rps60": 93.7,
       "highlights": 7,
-      "risks": 4,
-      "marketCap": "97.3亿",
-      "catalyst": "国产刀具替代加速，机床行业复苏",
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": "RPS120理想(87%)，但风险4条偏多需关注"
-    },
-    {
-      "code": "688403",
-      "name": "汇成股份",
-      "price": 19.58,
-      "change_pct": 4.87,
-      "rps120": 89.3,
-      "rps20": 89.4,
-      "highlights": 4,
-      "risks": 3,
-      "marketCap": "170亿",
-      "catalyst": "先进封装设备需求增长",
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": "RPS120在理想区间(89.3%)，半导体设备赛道景气"
+      "risks": 0,
+      "marketCap": "528亿",
+      "catalyst": "红外热成像龙头，国产替代+军民融合双轮驱动",
+      "recommendation": "HOLD",
+      "confidence": "high",
+      "reasoning": "已持仓。RPS120在理想区间上沿(91.1%)，7条亮点0风险，继续持有。"
     },
     {
       "code": "600988",
@@ -74,28 +72,78 @@
       "change_pct": 2.31,
       "rps120": 88.4,
       "rps20": 92.6,
+      "rps60": 90.3,
       "highlights": 6,
       "risks": 1,
       "marketCap": "756亿",
-      "catalyst": "黄金价格创新高，业绩有望超预期",
+      "catalyst": "黄金价格创新高4800美元，业绩有望超预期，矿产金龙头",
       "recommendation": "WATCH",
       "confidence": "medium",
-      "reasoning": "RPS120理想(88.4%)，6亮点仅1风险，但今日未涨停说明主力已提前布局"
+      "reasoning": "RPS120理想(88.4%)，6亮点仅1风险。今日黄金股整体强势但未涨停，说明主力可能已提前布局，追高需谨慎。"
     },
     {
-      "code": "002487",
-      "name": "大金重工",
-      "price": 63.40,
-      "change_pct": 6.77,
-      "rps120": 95.9,
-      "rps20": 88.6,
-      "highlights": 11,
-      "risks": 1,
-      "marketCap": "404亿",
-      "catalyst": "海上风电塔筒龙头，欧洲海风订单饱满",
+      "code": "688059",
+      "name": "华锐精密",
+      "price": 97.34,
+      "change_pct": 3.01,
+      "rps120": 87.0,
+      "rps20": 89.9,
+      "rps60": 85.1,
+      "highlights": 7,
+      "risks": 4,
+      "marketCap": "97.3亿",
+      "catalyst": "国产刀具龙头，机床行业复苏，进口替代空间大",
       "recommendation": "WATCH",
       "confidence": "medium",
-      "reasoning": "亮点最多(11条)，但RPS120偏高(95.9%)，短期追高风险"
+      "reasoning": "RPS120理想(87%)，但风险4条偏多（可能涉及竞争加剧、原材料等）。关注后续财报验证。"
+    },
+    {
+      "code": "688403",
+      "name": "汇成股份",
+      "price": 19.58,
+      "change_pct": 4.87,
+      "rps120": 89.3,
+      "rps20": 89.4,
+      "rps60": 87.9,
+      "highlights": 4,
+      "risks": 3,
+      "marketCap": "170亿",
+      "catalyst": "先进封装龙头，COB/COF封装技术领先，受益AI算力需求",
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120在理想区间(89.3%)，半导体设备赛道景气。亮点4条风险3条，需进一步研究风险点。"
+    },
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "price": 56.24,
+      "change_pct": 2.16,
+      "rps120": 94.4,
+      "rps20": 85.3,
+      "rps60": 86.8,
+      "highlights": 9,
+      "risks": 0,
+      "marketCap": "168亿",
+      "catalyst": "AI算力散热需求持续增长，导热材料龙头",
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "亮点9条风险0条极佳，但RPS120偏高(94.4%)，略超理想区间上沿。等待回调后介入。"
+    },
+    {
+      "code": "605167",
+      "name": "利柏特",
+      "price": 18.66,
+      "change_pct": 4.66,
+      "rps120": 91.8,
+      "rps20": 85.3,
+      "rps60": 96.9,
+      "highlights": 6,
+      "risks": 2,
+      "marketCap": "83.8亿",
+      "catalyst": "海工装备龙头，受益海上风电及油气开发",
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120在理想区间(91.8%)，6亮点2风险。小市值弹性好，关注海风订单进展。"
     },
     {
       "code": "688313",
@@ -104,37 +152,60 @@
       "change_pct": 2.81,
       "rps120": 90.3,
       "rps250": 99.2,
+      "rps20": 62.6,
       "highlights": 4,
       "risks": 0,
       "marketCap": "410亿",
-      "catalyst": "光芯片龙头，CPO概念受益",
+      "catalyst": "光芯片龙头，CPO概念受益，AWG芯片国产替代",
       "recommendation": "WATCH",
       "confidence": "medium",
-      "reasoning": "RPS120在理想上沿(90.3%)，0风险优秀，CPO热点"
+      "reasoning": "RPS120在理想上沿(90.3%)，0风险优秀。CPO热点持续，但RPS20较低说明短期可能调整。"
     }
   ],
   "avoided": [
     {
       "code": "688498",
       "name": "源杰科技",
-      "reason": "RPS120过高(99.6%)，追高风险大"
+      "price": 803.00,
+      "rps120": 99.6,
+      "reason": "RPS120过高(99.6%)，追高风险极大，短期涨幅已透支"
     },
     {
       "code": "688200",
       "name": "华峰测控",
-      "reason": "RPS120过高(96.5%)，短期涨幅已大"
+      "price": 296.95,
+      "rps120": 96.5,
+      "reason": "RPS120过高(96.5%)，超出理想区间，等待回调"
     },
     {
       "code": "601615",
       "name": "明阳智能",
-      "reason": "风险3条，RPS120偏高(97.8%)"
+      "price": 25.68,
+      "rps120": 97.8,
+      "reason": "风险3条，RPS120过高(97.8%)，不在理想区间"
+    },
+    {
+      "code": "601126",
+      "name": "四方股份",
+      "price": 40.52,
+      "rps120": 97.7,
+      "reason": "RPS120过高(97.7%)，8亮点但2风险，追高不划算"
+    },
+    {
+      "code": "688102",
+      "name": "斯瑞新材",
+      "price": 42.08,
+      "rps120": 98.7,
+      "reason": "RPS120极高(98.7%)，短期顶部风险"
     }
   ],
   "summary": {
     "totalScanned": 70,
-    "buyRecommendations": 1,
-    "watchRecommendations": 6,
-    "avoidRecommendations": 3,
-    "marketCall": "积极"
+    "buyRecommendations": 0,
+    "watchRecommendations": 7,
+    "holdRecommendations": 1,
+    "avoidRecommendations": 5,
+    "marketCall": "积极观望",
+    "comment": "春节后首日普涨，情绪高涨但追涨风险大。理想区间(RPS 80-92%)的优质标的较少，建议等待回调。已持仓睿创微纳继续持有。黄金板块关注回调机会。"
   }
 }
