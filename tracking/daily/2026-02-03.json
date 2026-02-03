@@ -8,7 +8,7 @@
       "price": 114.65,
       "entryPrice": 114.65,
       "pnl_pct": 0,
-      "note": "当日开仓，价格稳定，thesis有效，止损103/目标135均未触及"
+      "note": "今日开仓，收益0%，止损103/目标135均未触及，thesis有效"
     },
     {
       "code": "600988",
@@ -17,19 +17,21 @@
       "price": 39.78,
       "entryPrice": 39.78,
       "pnl_pct": 0,
-      "note": "当日开仓，价格稳定，thesis有效，止损36/目标47均未触及"
+      "note": "今日开仓，收益0%，止损36/目标47均未触及，thesis有效"
     }
   ],
   "newPositions": [],
-  "closedPositions": [],
-  "missedDueToLimitUp": [],
+  "missedPositions": [],
   "portfolioStats": {
     "totalPositions": 2,
     "avgPnl": 0,
     "winners": 0,
     "losers": 0,
-    "neutral": 2
+    "breakeven": 2
   },
-  "notes": "两只持仓均为当日开仓，首日评估，价格稳定。Watchlist中无新的高信心BUY推荐（688002已持有），不开新仓。网络获取实时价格失败，使用watchlist数据。",
-  "generatedAt": "2026-02-03T18:29:00+08:00"
+  "watchlistSummary": {
+    "buyRecommendations": 1,
+    "note": "唯一BUY推荐600988赤峰黄金已持仓，无新开仓机会"
+  },
+  "networkNote": "实时价格API因代理问题获取失败，使用watchlist收盘价数据"
 }
