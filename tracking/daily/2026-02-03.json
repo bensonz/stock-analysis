@@ -1,19 +1,6 @@
 {
   "date": "2026-02-03",
-  "generatedAt": "2026-02-03T18:43:55+08:00",
   "actions": [
-    {
-      "code": "600988",
-      "name": "赤峰黄金",
-      "action": "HOLD",
-      "price": 39.78,
-      "entryPrice": 39.78,
-      "pnl_pct": 0,
-      "stopLoss": 36.00,
-      "targetPrice": 47.00,
-      "holdingDays": 1,
-      "note": "今日开仓，收益0%，止损36/目标47均未触及，thesis有效"
-    },
     {
       "code": "688002",
       "name": "睿创微纳",
@@ -23,32 +10,36 @@
       "pnl_pct": 0,
       "stopLoss": 103.00,
       "targetPrice": 135.00,
-      "holdingDays": 1,
-      "note": "今日开仓，收益0%，止损103/目标135均未触及，thesis有效"
+      "note": "开仓首日，thesis有效，继续持有"
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "action": "HOLD",
+      "price": 39.78,
+      "entryPrice": 39.78,
+      "pnl_pct": 0,
+      "stopLoss": 36.00,
+      "targetPrice": 47.00,
+      "note": "开仓首日，thesis有效，继续持有"
     }
   ],
-  "sells": [],
   "newPositions": [],
-  "missedPositions": [],
+  "closedPositions": [],
+  "missedDueToLimitUp": [],
   "portfolioStats": {
     "totalPositions": 2,
     "avgPnl": 0,
     "winners": 0,
     "losers": 0,
-    "breakeven": 2,
-    "maxCapacity": 10,
-    "availableSlots": 8
+    "neutral": 2
   },
-  "watchlistSummary": {
-    "totalCandidates": 9,
+  "watchlistReview": {
+    "source": "2026-02-03",
     "buyRecommendations": 1,
-    "watchRecommendations": 8,
-    "note": "唯一BUY推荐600988赤峰黄金已持仓；其余8只为WATCH观望，无新开仓机会"
+    "alreadyTracking": ["600988"],
+    "newOpened": 0,
+    "skippedReason": "600988赤峰黄金已在持仓中，无其他高置信度BUY推荐"
   },
-  "decisions": {
-    "600988_evaluation": "价格39.78 > 止损36.00 ✓ | 价格39.78 < 目标47.00 ✓ | 收益0% < 10%无需调整止损 → HOLD",
-    "688002_evaluation": "价格114.65 > 止损103.00 ✓ | 价格114.65 < 目标135.00 ✓ | 收益0% < 10%无需调整止损 → HOLD",
-    "newPositionCheck": "watchlist仅1只BUY推荐(600988)已持仓，8只WATCH不符合开仓标准(需BUY+high confidence)"
-  },
-  "networkNote": "实时价格API因代理问题获取失败，使用watchlist收盘价数据"
+  "notes": "今日两只持仓均为开仓首日，价格在入场价附近，止损/目标均未触及。watchlist中唯一BUY推荐(600988)已在持仓。网络获取价格失败，使用watchlist数据。"
 }
