@@ -1,50 +1,24 @@
 {
   "date": "2026-02-03",
-  "timestamp": "2026-02-03T17:53:00+08:00",
   "actions": [
-    {
-      "code": "688002",
-      "name": "睿创微纳",
-      "action": "HOLD",
-      "price": 114.65,
-      "entryPrice": 114.65,
-      "pnl_pct": 0,
-      "stopLoss": 103.00,
-      "targetPrice": 135.00,
-      "note": "当日开仓，收盘平进，thesis有效，继续持有"
-    }
+    { "code": "688002", "name": "睿创微纳", "action": "HOLD", "price": 114.65, "pnl_pct": 0 }
   ],
-  "soldPositions": [],
-  "newPositions": [],
-  "missedOpportunities": [
-    {
-      "code": "605599",
-      "name": "菜百股份",
-      "reason": "涨停(+10.02%)无法买入",
-      "followUp": "明日观察是否有低吸机会"
-    }
+  "newPositions": [
+    { "code": "600988", "name": "赤峰黄金", "entry": 39.78, "target": 47.00, "stop": 36.00, "reasoning": "BUY推荐，confidence=high，RPS88.4%理想区间，黄金板块走强" }
+  ],
+  "missedDueToLimitUp": [
+    { "code": "605599", "name": "菜百股份", "change_pct": 10.02, "note": "涨停无法买入，黄金珠宝龙头，业绩高增长，明日观察" }
   ],
   "portfolioStats": {
-    "totalPositions": 1,
+    "totalPositions": 2,
     "avgPnl": 0,
     "winners": 0,
-    "losers": 0,
-    "breakeven": 1,
-    "cashUsed": "10%"
-  },
-  "watchlistSummary": {
-    "source": "2026-02-03",
-    "buyRecommendations": 0,
-    "watchRecommendations": 5,
-    "avoidRecommendations": 2,
-    "openedToday": 0,
-    "reason": "无高置信度BUY推荐，多数候选RPS偏高或风险提示多"
+    "losers": 0
   },
   "marketContext": {
-    "shanghai": "+1.29%",
-    "shenzhen": "+2.35%",
-    "chinext": "+2.66%",
     "sentiment": "bullish",
-    "hotSectors": ["黄金珠宝", "光通信/CPO", "有色金属", "半导体设备", "风电设备"]
-  }
+    "hotSectors": ["黄金", "CPO光通信", "AI数据中心", "半导体设备", "风电"],
+    "marketCall": "积极"
+  },
+  "notes": "今日新开1只仓位(赤峰黄金)，原有1只(睿创微纳)继续持有。菜百股份涨停无法买入，加入观察。"
 }
