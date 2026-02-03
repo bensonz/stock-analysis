@@ -1,84 +1,74 @@
 {
   "date": "2026-02-03",
-  "marketCall": {
-    "recommendation": "谨慎偏积极",
-    "reasoning": "昨日暴跌后技术性反弹，超跌修复中，但市场信心仍需修复"
+  "market": {
+    "shangzheng": "+0.38%",
+    "chuangye": "+1.86%",
+    "sentiment": "积极",
+    "hotSectors": ["商业航天", "黄金珠宝", "并购重组", "储能/电网"]
   },
-  "recommendations": [
+  "newPositions": [
     {
       "code": "605599",
       "name": "菜百股份",
-      "rating": 2,
-      "priceAtRec": 23.93,
-      "rps120": 85.2,
-      "reasoning": "RPS处于理想区间(85%)，7条亮点0条风险，但今日涨停后需等回踩确认",
-      "catalyst": "黄金珠宝零售龙头，今日涨停但无明确新闻催化",
-      "day3": null,
-      "day7": null,
-      "outcome": null
+      "entryPrice": 23.93,
+      "targetPrice": 28.00,
+      "stopLoss": 21.50,
+      "rating": 3,
+      "thesis": "黄金珠宝龙头，受益金价上涨和投资金热度",
+      "trackingFile": "tracking/605599.json"
     },
     {
       "code": "688002",
       "name": "睿创微纳",
-      "rating": 2,
-      "priceAtRec": 113.70,
-      "rps120": 89.2,
-      "reasoning": "红外热成像龙头，RPS理想区间(89%)，7条亮点0条风险，军工+AI双驱动",
-      "catalyst": "军工+AI概念，无近期特定催化剂",
-      "day3": null,
-      "day7": null,
-      "outcome": null
-    },
-    {
-      "code": "600176",
-      "name": "中国巨石",
-      "rating": 2,
-      "priceAtRec": 20.23,
-      "rps120": 92.1,
-      "reasoning": "玻纤龙头，RPS在边界值(92%)，8条亮点1条风险，今日横盘可关注回调买点",
-      "catalyst": "玻纤涨价周期预期，无近期催化剂",
-      "day3": null,
-      "day7": null,
-      "outcome": null
-    },
-    {
-      "code": "600499",
-      "name": "科达制造",
-      "rating": 2,
-      "priceAtRec": 17.79,
-      "rps120": 87.5,
-      "reasoning": "今日+7.49%，RPS理想区间(87.5%)，6条亮点2条风险",
-      "catalyst": "并购重组进展公告，推进并购与资产整合",
-      "day3": null,
-      "day7": null,
-      "outcome": null
-    }
-  ],
-  "avoids": [
-    {
-      "code": "688498",
-      "name": "源杰科技",
-      "priceAtRec": 781.16,
-      "reasoning": "RPS极端过热(99.7%)，今日下跌3.29%，回撤风险极大",
-      "day3": null,
-      "outcome": null
+      "entryPrice": 113.70,
+      "targetPrice": 135.00,
+      "stopLoss": 102.00,
+      "rating": 3,
+      "thesis": "红外芯片龙头，亮点7/风险0，质地优良",
+      "trackingFile": "tracking/688002.json"
     },
     {
       "code": "600988",
       "name": "赤峰黄金",
-      "priceAtRec": 36.61,
-      "reasoning": "黄金板块受特朗普关税影响暴跌，今日继续大跌5.84%",
-      "day3": null,
-      "outcome": null
+      "entryPrice": 36.61,
+      "targetPrice": 43.00,
+      "stopLoss": 33.00,
+      "rating": 2,
+      "thesis": "黄金采掘龙头，今日回调提供买点",
+      "trackingFile": "tracking/600988.json"
     },
     {
-      "code": "601168",
-      "name": "西部矿业",
-      "priceAtRec": 31.42,
-      "reasoning": "风险数较多(3条)，有色金属板块连续下跌",
-      "day3": null,
-      "outcome": null
+      "code": "600499",
+      "name": "科达制造",
+      "entryPrice": 17.79,
+      "targetPrice": 21.00,
+      "stopLoss": 16.00,
+      "rating": 2,
+      "thesis": "建材机械龙头，并购重组催化",
+      "trackingFile": "tracking/600499.json"
     }
   ],
-  "verified": false
+  "watchlist": [
+    {
+      "code": "688333",
+      "name": "铂力特",
+      "price": 111.26,
+      "rps120": 91.1,
+      "reason": "3D打印龙头，风险3条稍多，观望"
+    },
+    {
+      "code": "002080",
+      "name": "中材科技",
+      "price": 39.65,
+      "rps120": 88.0,
+      "reason": "亮点4/风险3，观望"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "newToday": 4,
+    "closedToday": 0,
+    "avgRating": 2.5
+  },
+  "createdAt": "2026-02-03T12:38:00+08:00"
 }
