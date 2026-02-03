@@ -68,6 +68,17 @@ Review watchlist candidates (today's + recent days if nothing compelling today):
 - Clear catalyst
 - Risk/reward >= 1:2
 - Portfolio has room (max 10 positions)
+- **NOT at 涨停 (limit up)** — cannot buy if stock hit +10% limit
+
+**涨停检查 (CRITICAL):**
+Before opening ANY position, check if stock is at 涨停:
+```bash
+python scripts/fetch_price.py CODE
+```
+If `change_pct >= 9.9%` (主板/创业板) or `change_pct >= 19.9%` (科创板/北交所):
+- **DO NOT OPEN** — cannot buy at limit up
+- Add to "missed" list for next day follow-up
+- Note: "涨停无法买入，明日观察"
 
 **If opening new position:**
 Create `tracking/{code}.json`:
@@ -151,6 +162,7 @@ For new positions:
 ├── Portfolio full (10)? → SKIP
 ├── No high-confidence BUY? → SKIP
 ├── Already tracking this stock? → SKIP
+├── Stock at 涨停 (change >= 9.9%)? → SKIP (add to missed list)
 └── Otherwise → OPEN
 ```
 
