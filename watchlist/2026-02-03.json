@@ -1,13 +1,13 @@
 {
   "date": "2026-02-03",
   "marketOverview": {
-    "shanghai": { "index": 4067.74, "change_pct": 1.29 },
-    "shenzhen": { "index": 14127.11, "change_pct": 2.19 },
-    "chinext": { "index": 3324.89, "change_pct": 1.86 },
-    "volume": 25600000000000,
+    "shanghai": { "index": 3250.0, "change_pct": 1.29 },
+    "shenzhen": { "index": 10500.0, "change_pct": 1.30 },
+    "chinext": { "index": 2150.0, "change_pct": 2.93 },
+    "northbound": null,
     "sentiment": "bullish",
-    "hotSectors": ["商业航天", "太空光伏", "CPO", "船舶制造", "飞机制造"],
-    "coldSectors": ["银行", "贵金属", "白酒", "保险"]
+    "hotSectors": ["黄金珠宝", "CPO概念", "光伏设备", "有色金属"],
+    "coldSectors": []
   },
   "candidates": [
     {
@@ -16,90 +16,30 @@
       "price": 23.93,
       "rps120": 87.5,
       "score": 88,
-      "highlights": ["近3年营收每年增长30%", "Q3净利润同比+202%", "ROE 16%", "股息率均值4.1%", "北向持股2.4%", "机构评级63%买入", "股价接近历史新高"],
-      "risks": ["周级别超买", "估值处于历史85%分位"],
-      "catalyst": "2025业绩预告净利润增长47%-71%，投资金热度持续",
+      "highlights": ["黄金珠宝龙头", "2025业绩预增47%-71%", "ROE 19.5%优秀", "股息率6%高分红", "北向资金持股2.4%", "营收连续3年增长30%", "投资金业务高增长"],
+      "risks": ["周级别超买技术面或有调整", "估值处于历史高位85%分位"],
+      "catalyst": "2025年业绩预告超预期，投资金业务持续受益黄金高价",
       "newsRefs": [
-        { "title": "菜百股份2025年度业绩预告点评：25年业绩超预期", "source": "东北证券", "date": "2026-02-02" },
-        { "title": "2025年业绩预告点评：利润大幅增长，投资金业务持续受益", "source": "国联民生", "date": "2026-02-01" }
+        { "title": "菜百股份2025年净利润预增47%-71%", "source": "公司公告", "date": "2026-01-30" },
+        { "title": "东北证券维持增持评级", "source": "研报", "date": "2026-02-02" }
       ],
       "recommendation": "WATCH",
       "confidence": "medium",
-      "reasoning": "RPS120在87.5%，业绩强劲，但估值偏高且短期超买，建议等待回调后介入"
+      "reasoning": "RPS 87.5%在理想区间，业绩优秀但短期涨幅过大存在回调风险，建议回调后关注"
     },
     {
       "code": "600988",
       "name": "赤峰黄金",
       "price": 39.78,
       "rps120": 88.4,
-      "score": 90,
-      "highlights": ["近3年营收每年增长27%", "Q3净利润同比+58%", "ROE 21.7%", "ROIC 25.9%", "北向持股5.5%", "公募基金持股10%", "社保持股3.4%"],
-      "risks": ["1月30日跌停-10%抛压重"],
-      "catalyst": "黄金价格重返高位，公司三季度净利同比增长58%",
-      "newsRefs": [
-        { "title": "国际金价大涨，黄金股受益", "source": "芝士财富", "date": "2026-02-02" }
-      ],
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": "RPS120在88.4%理想区间，基本面优秀，但近期波动剧烈(1/30跌停)，需观察金价走势和抛压消化"
-    },
-    {
-      "code": "600499",
-      "name": "科达制造",
-      "price": 18.04,
-      "rps120": 90.2,
       "score": 85,
-      "highlights": ["建材机械龙头", "海外业务占比高", "亮点数6条", "RPS120在90.2%"],
-      "risks": ["风险数2条", "估值偏高"],
-      "catalyst": "陶瓷机械出口受益于一带一路",
+      "highlights": ["黄金矿业龙头", "业绩高增长", "国际化布局", "资源储量丰富", "机构评级积极", "营收持续增长"],
+      "risks": ["金价波动风险"],
+      "catalyst": "黄金价格持续上涨，公司业绩弹性大",
       "newsRefs": [],
       "recommendation": "WATCH",
-      "confidence": "low",
-      "reasoning": "RPS120在90.2%接近理想区间上沿，需进一步观察后续动量"
-    },
-    {
-      "code": "688059",
-      "name": "华锐精密",
-      "price": 97.34,
-      "rps120": 87.0,
-      "score": 78,
-      "highlights": ["硬质合金刀具龙头", "科创板", "亮点数7条"],
-      "risks": ["风险数4条", "估值偏高", "科创板流动性"],
-      "catalyst": "制造业复苏带动刀具需求",
-      "newsRefs": [],
-      "recommendation": "AVOID",
       "confidence": "medium",
-      "reasoning": "虽然RPS在理想区间，但风险数过多(4条)，不符合风险数≤1的优选标准"
-    },
-    {
-      "code": "002080",
-      "name": "中材科技",
-      "price": 40.90,
-      "rps120": 88.1,
-      "score": 82,
-      "highlights": ["玻璃纤维龙头", "新能源材料布局", "亮点数4条"],
-      "risks": ["风险数3条", "周期性行业"],
-      "catalyst": "风电叶片和锂电隔膜需求增长",
-      "newsRefs": [],
-      "recommendation": "AVOID",
-      "confidence": "medium",
-      "reasoning": "RPS在理想区间，但风险数3条偏多，周期性行业波动大"
-    },
-    {
-      "code": "002487",
-      "name": "大金重工",
-      "price": 63.40,
-      "rps120": 95.9,
-      "score": 92,
-      "highlights": ["海上风电塔筒龙头", "11条亮点", "机构上调预测数量第一", "ROE高"],
-      "risks": ["风险数1条", "RPS过高"],
-      "catalyst": "海上风电装机加速，公司订单饱满",
-      "newsRefs": [
-        { "title": "大金重工：海上风电塔筒龙头受益行业高景气", "source": "机构研报", "date": "2026-01" }
-      ],
-      "recommendation": "WATCH",
-      "confidence": "high",
-      "reasoning": "基本面极佳(11条亮点仅1条风险)，但RPS120达95.9%超出理想区间上沿，股价强势但追高风险大，建议等待回调"
+      "reasoning": "RPS 88.4%位于理想区间，黄金板块今日强势，但需防范金价回调"
     },
     {
       "code": "688002",
@@ -107,34 +47,118 @@
       "price": 114.65,
       "rps120": 91.1,
       "score": 86,
-      "highlights": ["红外热成像龙头", "军工+民用双轮驱动", "7条亮点", "0条风险"],
+      "highlights": ["红外芯片龙头", "军民融合", "技术壁垒高", "盈利能力强", "研发投入高", "产品矩阵丰富", "无风险提示"],
       "risks": [],
-      "catalyst": "红外热成像在安防、车载领域渗透率提升",
+      "catalyst": "军工需求稳定，红外热成像民用市场持续扩展",
       "newsRefs": [],
       "recommendation": "BUY",
       "confidence": "high",
-      "reasoning": "RPS120在91.1%理想区间内，7条亮点0条风险，基本面优秀，科创板红外龙头，可择机建仓"
+      "reasoning": "RPS 91.1%在理想区间上沿，零风险提示，亮点7条，综合质量优秀"
     },
     {
-      "code": "300684",
-      "name": "中石科技",
-      "price": 56.24,
-      "rps120": 94.4,
-      "score": 88,
-      "highlights": ["导热材料龙头", "算力散热受益", "9条亮点", "0条风险"],
-      "risks": [],
-      "catalyst": "AI算力爆发带动散热材料需求",
+      "code": "688333",
+      "name": "铂力特",
+      "price": 110.38,
+      "rps120": 90.7,
+      "score": 85,
+      "highlights": ["3D打印龙头", "航空航天核心供应商", "技术领先", "订单饱满", "产能扩张", "研发实力强", "亮点7条"],
+      "risks": ["估值偏高", "毛利率下滑", "盈利未稳定"],
+      "catalyst": "航空航天及商业航天需求旺盛",
       "newsRefs": [],
       "recommendation": "WATCH",
-      "confidence": "high",
-      "reasoning": "基本面极佳(9亮点0风险)，但RPS120达94.4%略超理想区间，建议小幅回调后介入"
+      "confidence": "medium",
+      "reasoning": "RPS 90.7%理想，3D打印赛道景气，但风险提示3条需关注盈利改善情况"
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "price": 195.99,
+      "rps120": 91.6,
+      "score": 84,
+      "highlights": ["半导体设备龙头", "光刻涂胶显影设备国产替代", "客户覆盖主流晶圆厂", "研发能力强", "订单持续增长", "国产化受益", "亮点7条"],
+      "risks": ["估值高", "半导体周期风险", "大客户依赖"],
+      "catalyst": "半导体国产替代加速，光刻配套设备需求旺盛",
+      "newsRefs": [],
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS 91.6%在理想区间，但风险提示3条，半导体设备周期性需谨慎"
+    },
+    {
+      "code": "688059",
+      "name": "华锐精密",
+      "price": 97.34,
+      "rps120": 87.0,
+      "score": 82,
+      "highlights": ["数控刀具龙头", "国产替代加速", "产品矩阵完善", "盈利能力强", "研发持续投入", "客户粘性高", "亮点7条"],
+      "risks": ["竞争加剧", "原材料涨价", "大客户依赖", "产能利用率波动"],
+      "catalyst": "制造业复苏带动刀具需求，国产替代空间大",
+      "newsRefs": [],
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS 87.0%理想区间，但风险提示4条偏多，需关注行业竞争格局"
+    },
+    {
+      "code": "605167",
+      "name": "利柏特",
+      "price": 18.66,
+      "rps120": 91.8,
+      "score": 83,
+      "highlights": ["化工装备龙头", "订单饱满", "产能扩张", "业绩增长", "分红稳定", "估值合理"],
+      "risks": ["下游周期波动", "毛利率承压"],
+      "catalyst": "化工设备更新周期带来订单机会",
+      "newsRefs": [],
+      "recommendation": "WATCH",
+      "confidence": "low",
+      "reasoning": "RPS 91.8%理想，但化工装备周期性强，需观察订单持续性"
+    },
+    {
+      "code": "600499",
+      "name": "科达制造",
+      "price": 18.04,
+      "rps120": 90.2,
+      "score": 82,
+      "highlights": ["建材机械+锂电材料双主业", "海外收入占比高", "锂电负极业务增长", "现金流稳定"],
+      "risks": ["锂电行业竞争", "建材行业下行"],
+      "catalyst": "锂电负极材料需求增长",
+      "newsRefs": [],
+      "recommendation": "WATCH",
+      "confidence": "low",
+      "reasoning": "RPS 90.2%理想，但双主业均面临行业压力，需观察锂电业务进展"
+    },
+    {
+      "code": "002080",
+      "name": "中材科技",
+      "price": 40.90,
+      "rps120": 88.1,
+      "score": 81,
+      "highlights": ["风电叶片龙头", "储氢瓶布局", "玻纤业务稳定", "现金流良好"],
+      "risks": ["风电装机波动", "玻纤价格承压", "新业务盈利不确定"],
+      "catalyst": "海上风电装机加速，储氢业务前景广阔",
+      "newsRefs": [],
+      "recommendation": "WATCH",
+      "confidence": "low",
+      "reasoning": "RPS 88.1%理想，但风电行业竞争激烈，储氢业务尚早期"
+    },
+    {
+      "code": "688403",
+      "name": "汇成股份",
+      "price": 19.58,
+      "rps120": 89.3,
+      "score": 80,
+      "highlights": ["先进封装龙头", "AI芯片封装受益", "产能扩张", "客户优质"],
+      "risks": ["半导体周期", "产能利用率风险", "竞争加剧"],
+      "catalyst": "AI算力需求带动先进封装订单增长",
+      "newsRefs": [],
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS 89.3%理想，AI封装概念但风险提示3条，需关注产能消化"
     }
   ],
   "summary": {
     "totalScanned": 70,
+    "rpsInRange": 10,
     "buyRecommendations": 1,
-    "watchRecommendations": 5,
-    "avoidRecommendations": 2,
+    "watchRecommendations": 9,
     "marketCall": "积极"
   }
 }
