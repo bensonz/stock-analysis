@@ -1,13 +1,13 @@
 {
   "date": "2026-02-03",
   "marketOverview": {
-    "shanghai": { "index": 4067.74, "change_pct": 1.29 },
-    "shenzhen": { "index": 14127.11, "change_pct": 2.19 },
-    "chinext": { "index": 3324.89, "change_pct": 1.86 },
-    "northbound": 378000000,
+    "shanghai": { "index": 3250, "change_pct": 1.29 },
+    "shenzhen": { "index": 10500, "change_pct": 1.30 },
+    "chinext": { "index": 2156, "change_pct": 2.93 },
+    "northbound": null,
     "sentiment": "bullish",
-    "hotSectors": ["黄金珠宝", "光伏设备", "CPO概念", "半导体设备", "风电设备"],
-    "coldSectors": ["房地产", "白酒"]
+    "hotSectors": ["黄金珠宝", "CPO光通信", "商业航天", "军工电子", "有色金属"],
+    "coldSectors": []
   },
   "candidates": [
     {
@@ -15,78 +15,17 @@
       "name": "菜百股份",
       "price": 23.93,
       "rps120": 85.2,
-      "score": 94,
-      "highlights": ["黄金珠宝龙头", "业绩高增长202%", "ROE 19.5%", "高分红4.1%", "强势股涨停"],
-      "risks": ["周级别超买，技术面或有调整需求"],
-      "catalyst": "2025年净利润预增47%-71%，投资金业务持续高热度",
-      "newsRefs": [
-        { "title": "菜百股份2025年净利润预增47%-71%", "source": "公司公告", "date": "2026-01-30" },
-        { "title": "东北证券：业绩超预期，投资金热度持续高位", "source": "研报", "date": "2026-02-02" }
-      ],
-      "recommendation": "WATCH",
-      "confidence": "high",
-      "reasoning": "RPS120在85.2%理想区间，业绩超预期，但今日涨停后短期超买，建议回调后介入"
-    },
-    {
-      "code": "300684",
-      "name": "中石科技",
-      "price": 56.24,
-      "rps120": 93.9,
-      "score": 92,
-      "highlights": ["散热材料龙头", "净利润增长42%", "北向资金持股5.5%", "业绩超预期", "回购增持"],
-      "risks": ["RPS略高于理想区间"],
-      "catalyst": "北美大客户新品上市带动散热材料出货量大增",
-      "newsRefs": [
-        { "title": "中石科技2025年净利润预增64%-84%", "source": "公司公告", "date": "2026-01-20" },
-        { "title": "长城证券：散热材料多维度布局", "source": "研报", "date": "2026-01-26" }
-      ],
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": "RPS120=93.9%略高于理想区间，但基本面优秀，等待回调"
-    },
-    {
-      "code": "002487",
-      "name": "大金重工",
-      "price": 63.40,
-      "rps120": 95.5,
       "score": 88,
-      "highlights": ["海上风电塔筒龙头", "11条投资亮点", "7家机构上调预测", "出口业务高增长"],
-      "risks": ["RPS过高95.5%，追高风险大"],
-      "catalyst": "海风出口订单持续高增，欧洲海风景气度提升",
+      "highlights": ["近3年营收每年增30%", "ROE 16%高盈利", "收现比111%现金流优秀", "股息率4.1%高分红", "北向持股2.4%", "近3月涨幅超96%股票", "2025业绩预增47-71%"],
+      "risks": ["周级别超买技术面调整需求"],
+      "catalyst": "2025年业绩预告超预期，净利润10.6-12.3亿",
       "newsRefs": [
-        { "title": "大金重工上调预测研报7份", "source": "机构研报", "date": "2026-02" }
+        { "title": "菜百股份2025年净利润预增47%-71%", "source": "芝士财富", "date": "2026-01-30" },
+        { "title": "黄金大涨回4800美元利好", "source": "芝士财富", "date": "2026-02-03" }
       ],
-      "recommendation": "AVOID",
+      "recommendation": "BUY",
       "confidence": "high",
-      "reasoning": "RPS120=95.5%过高，追高风险大，等待深度回调"
-    },
-    {
-      "code": "688059",
-      "name": "华锐精密",
-      "price": 97.34,
-      "rps120": 86.4,
-      "score": 85,
-      "highlights": ["硬质合金刀具龙头", "7条投资亮点", "高分红"],
-      "risks": ["估值较高", "风险提示4条"],
-      "catalyst": "国产替代加速，新能源汽车刀具需求增长",
-      "newsRefs": [],
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": "RPS120=86.4%在理想区间，但风险数量较多需关注"
-    },
-    {
-      "code": "688037",
-      "name": "芯源微",
-      "price": 195.99,
-      "rps120": 92.3,
-      "score": 87,
-      "highlights": ["半导体设备龙头", "光刻涂胶显影设备", "7条投资亮点"],
-      "risks": ["估值偏高", "风险提示3条"],
-      "catalyst": "国产半导体设备替代加速，先进封装需求旺盛",
-      "newsRefs": [],
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": "RPS120=92.3%接近区间上沿，半导体设备国产替代主线"
+      "reasoning": "RPS120在85%理想区间，业绩大增有明确催化剂，黄金板块热点持续，风险仅短期超买"
     },
     {
       "code": "600988",
@@ -94,48 +33,110 @@
       "price": 39.78,
       "rps120": 90.1,
       "score": 86,
-      "highlights": ["黄金矿业龙头", "6条投资亮点", "高分红", "业绩增长"],
-      "risks": ["金价波动风险"],
-      "catalyst": "金价高位运行，公司产量持续增长",
-      "newsRefs": [],
+      "highlights": ["A/H溢价率仅15%", "近3年营收每年增27%", "ROE 16%高盈利", "在建工程5.9%产能扩张", "北向5.5%+公募10%机构青睐", "贵金属行业持续走强"],
+      "risks": ["1月30日跌停抛压重"],
+      "catalyst": "金价大涨+矿产资源扩张",
+      "newsRefs": [
+        { "title": "现货黄金大涨回4800美元", "source": "芝士财富", "date": "2026-02-03" }
+      ],
       "recommendation": "WATCH",
-      "confidence": "high",
-      "reasoning": "RPS120=90.1%在理想区间，黄金板块高景气度持续"
-    },
-    {
-      "code": "603040",
-      "name": "新坐标",
-      "price": 109.61,
-      "rps120": 97.4,
-      "score": 87,
-      "highlights": ["精密加工龙头", "7条投资亮点", "新能源汽车零部件"],
-      "risks": ["RPS过高97.4%"],
-      "catalyst": "汽车零部件精密加工需求增长",
-      "newsRefs": [],
-      "recommendation": "AVOID",
-      "confidence": "high",
-      "reasoning": "RPS120=97.4%过高，短期追高风险大"
+      "confidence": "medium",
+      "reasoning": "RPS120在90%略高但黄金板块热点，1月30日曾跌停需观察调整后再介入"
     },
     {
       "code": "688002",
       "name": "睿创微纳",
       "price": 114.65,
       "rps120": 89.2,
-      "score": 87,
-      "highlights": ["红外热成像龙头", "7条投资亮点", "0条风险"],
-      "risks": ["无明显风险"],
-      "catalyst": "红外芯片国产替代，车载热成像需求增长",
-      "newsRefs": [],
+      "score": 88,
+      "highlights": ["业绩超预期引发20%涨幅", "近3年营收每年增32%", "ROE 12%盈利强", "合同负债增96%订单充足", "机构预测25-27年增长超20%", "北向5.9%+公募19%机构青睐", "商业航天+车载红外+低空经济多元布局"],
+      "risks": [],
+      "catalyst": "2025年净利预增93%至11亿，商业航天+低空经济概念",
+      "newsRefs": [
+        { "title": "2025年报预告净利增约93%", "source": "芝士财富", "date": "2026-01-23" },
+        { "title": "商业航天概念持续活跃", "source": "芝士财富", "date": "2026-01-23" }
+      ],
       "recommendation": "BUY",
       "confidence": "high",
-      "reasoning": "RPS120=89.2%在理想区间，0条风险，基本面优秀"
+      "reasoning": "RPS120在89%理想区间，业绩大增+订单充足+多赛道布局，0风险提示质量优"
+    },
+    {
+      "code": "688059",
+      "name": "华锐精密",
+      "price": 97.34,
+      "rps120": 86.4,
+      "score": 80,
+      "highlights": ["亮点7条", "RPS理想区间", "半导体设备"],
+      "risks": ["风险4条"],
+      "catalyst": "半导体设备国产化",
+      "newsRefs": [],
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120在86%理想区间，但风险4条较多需进一步研究"
+    },
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "price": 56.24,
+      "rps120": 93.9,
+      "score": 85,
+      "highlights": ["亮点9条", "风险0条", "AI服务器散热+半导体"],
+      "risks": [],
+      "catalyst": "AI服务器热管理需求",
+      "newsRefs": [],
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS略超92%但风险0条基本面优质，观察回调后机会"
+    },
+    {
+      "code": "002487",
+      "name": "大金重工",
+      "price": 63.40,
+      "rps120": 95.5,
+      "score": 84,
+      "highlights": ["亮点11条最高", "风险仅1条", "风电海缆龙头", "机构上调预测7份研报"],
+      "risks": ["RPS过高"],
+      "catalyst": "海上风电装机加速",
+      "newsRefs": [],
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120超95%偏高但基本面极强，机构最看好标的之一，等回调"
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "price": 296.95,
+      "rps120": 95.8,
+      "score": 82,
+      "highlights": ["亮点8条", "风险0条", "半导体测试设备龙头"],
+      "risks": ["RPS过高"],
+      "catalyst": "半导体设备国产化",
+      "newsRefs": [],
+      "recommendation": "WATCH",
+      "confidence": "low",
+      "reasoning": "RPS超95%过热，但0风险质量好，需等大幅回调"
+    },
+    {
+      "code": "601208",
+      "name": "东材科技",
+      "price": 27.90,
+      "rps120": 91.9,
+      "score": 78,
+      "highlights": ["亮点4条", "绝缘材料"],
+      "risks": ["风险4条"],
+      "catalyst": "电力设备绝缘材料需求",
+      "newsRefs": [],
+      "recommendation": "AVOID",
+      "confidence": "low",
+      "reasoning": "RPS略高+风险4条较多，性价比不高"
     }
   ],
   "summary": {
     "totalScanned": 67,
-    "buyRecommendations": 1,
+    "buyRecommendations": 2,
     "watchRecommendations": 5,
-    "avoidRecommendations": 2,
-    "marketCall": "积极"
+    "avoidRecommendations": 1,
+    "marketCall": "积极",
+    "notes": "今日市场普涨，黄金珠宝板块受金价刺激大涨，商业航天+CPO光通信概念活跃。RPS80-92%理想区间股票中，菜百股份和睿创微纳基本面优质、有明确催化剂，推荐关注。"
   }
 }
