@@ -6,40 +6,104 @@
     "chinext": { "index": 2100.00, "change_pct": 2.50 },
     "northbound": null,
     "sentiment": "bullish",
-    "hotSectors": ["黄金珠宝", "CPO光通信", "风电设备", "矿业有色"],
-    "coldSectors": []
+    "hotSectors": ["黄金珠宝", "CPO光通信", "风电设备", "矿业有色", "半导体设备"],
+    "coldSectors": ["房地产"],
+    "marketHighlights": [
+      "紫金矿业+6.01%，2025业绩预增59%-62%",
+      "天孚通信+13.21%，CPO概念持续活跃",
+      "湖南黄金+10%涨停，黄金资源注入预期",
+      "现货黄金重回4800美元"
+    ]
   },
   "candidates": [
     {
-      "code": "605599",
-      "name": "菜百股份",
-      "price": 23.93,
-      "rps120": 85.2,
-      "score": 88,
-      "highlights": ["近3年营收年增30%", "Q3净利润同比+202%", "ROE 19.5%", "股息率6%+", "北向资金持股2.4%", "机构评级63%买入", "近3月涨幅超96%股票"],
-      "risks": ["周级别超买，技术面或有调整需求"],
-      "catalyst": "2025年业绩预告净利润预增47%-71%，Q4净利润+150%-254%",
+      "code": "605338",
+      "name": "巴比食品",
+      "price": 31.10,
+      "rps120": 90.8,
+      "score": 85,
+      "highlights": [
+        "ROIC近5年14%，创造价值能力较强",
+        "收现比113%，销售收入现金含量较强",
+        "88%机构评级为买入，距目标价11%空间",
+        "公募基金持股3.7%",
+        "近6月股价涨幅超91%股票"
+      ],
+      "risks": [],
+      "catalyst": "新店型培育新曲线，连锁包点龙头再启航",
       "newsRefs": [
-        { "title": "菜百股份2025年净利润预增47%-71%", "source": "公司公告", "date": "2026-01-30" },
-        { "title": "东北证券：25年业绩超预期，投资金热度持续高位", "source": "研报", "date": "2026-02-02" }
+        { "title": "华源证券：连锁包点龙头再启航，新店型培育新曲线", "source": "研报", "date": "2026-01-15" },
+        { "title": "海通国际：新店型、新周期", "source": "研报", "date": "2026-01-05" }
       ],
       "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": "RPS120 85.2%在理想区间，业绩高增长，但今日涨停后短期有超买风险，建议回调后关注"
+      "confidence": "high",
+      "reasoning": "RPS120 90.8%在理想区间，零风险提示，公司质地8.2/10高分，机构一致看好，唯一顾虑是今日小幅下跌-0.32%需观察"
+    },
+    {
+      "code": "688313",
+      "name": "仕佳光子",
+      "price": 90.67,
+      "rps120": 89.5,
+      "score": 84,
+      "highlights": [
+        "光通信芯片龙头",
+        "CPO概念核心标的",
+        "4条投资亮点",
+        "RPS120 89.5%理想区间"
+      ],
+      "risks": [],
+      "catalyst": "CPO概念持续活跃，今日天孚通信涨13%带动板块",
+      "newsRefs": [
+        { "title": "CPO概念持续活跃，光通信芯片需求旺盛", "source": "市场", "date": "2026-02-03" }
+      ],
+      "recommendation": "WATCH",
+      "confidence": "high",
+      "reasoning": "RPS120 89.5%理想区间，零风险，CPO概念热点，今日+2.81%走势良好"
     },
     {
       "code": "688002",
       "name": "睿创微纳",
       "price": 114.65,
       "rps120": 89.2,
-      "score": 85,
-      "highlights": ["红外热成像龙头", "7条投资亮点", "0条风险", "RPS120 89.2%理想区间"],
+      "score": 86,
+      "highlights": [
+        "红外热成像龙头",
+        "7条投资亮点",
+        "国防军工核心供应商",
+        "RPS120 89.2%理想区间"
+      ],
       "risks": [],
-      "catalyst": "军民融合红外热成像需求增长",
+      "catalyst": "军民融合红外热成像需求增长，国产替代受益",
       "newsRefs": [],
       "recommendation": "WATCH",
+      "confidence": "high",
+      "reasoning": "RPS120 89.2%处于理想区间，零风险提示，7条亮点是策略池中较高水平，今日+5.96%强势"
+    },
+    {
+      "code": "605599",
+      "name": "菜百股份",
+      "price": 23.93,
+      "rps120": 85.2,
+      "score": 88,
+      "highlights": [
+        "近3年营收年增30%",
+        "Q3净利润同比+202%",
+        "ROE 19.5%",
+        "股息率6%+",
+        "北向资金持股2.4%",
+        "机构评级63%买入",
+        "近3月涨幅超96%股票"
+      ],
+      "risks": ["周级别超买，技术面或有调整需求"],
+      "catalyst": "2025年业绩预告净利润预增47%-71%，Q4净利润+150%-254%，黄金价格重回4800美元",
+      "newsRefs": [
+        { "title": "菜百股份2025年净利润预增47%-71%", "source": "公司公告", "date": "2026-01-30" },
+        { "title": "东北证券：25年业绩超预期，投资金热度持续高位", "source": "研报", "date": "2026-02-02" },
+        { "title": "现货黄金大涨重回4800美元", "source": "市场", "date": "2026-02-03" }
+      ],
+      "recommendation": "WATCH",
       "confidence": "medium",
-      "reasoning": "RPS120 89.2%处于理想区间，无风险提示，但需更多催化剂验证"
+      "reasoning": "RPS120 85.2%在理想区间，业绩高增长，黄金行情强劲，但今日涨停后短期有超买风险"
     },
     {
       "code": "600988",
@@ -47,7 +111,12 @@
       "price": 39.78,
       "rps120": 90.1,
       "score": 84,
-      "highlights": ["黄金矿业龙头", "6条投资亮点", "黄金价格创新高利好", "近3月涨幅超90%股票"],
+      "highlights": [
+        "黄金矿业龙头",
+        "6条投资亮点",
+        "黄金价格创新高利好",
+        "近3月涨幅超90%股票"
+      ],
       "risks": ["估值处于高位"],
       "catalyst": "黄金价格回到4800美元/盎司，矿业公司盈利提升",
       "newsRefs": [
@@ -55,49 +124,7 @@
       ],
       "recommendation": "WATCH",
       "confidence": "medium",
-      "reasoning": "RPS120 90.1%略高于理想区间上沿，黄金行情持续但追高风险较大"
-    },
-    {
-      "code": "002487",
-      "name": "大金重工",
-      "price": 63.40,
-      "rps120": 95.5,
-      "score": 90,
-      "highlights": ["11条投资亮点(最多)", "海上风电塔筒龙头", "机构上调预测7份研报", "风险仅1条"],
-      "risks": ["RPS过高95.5%，追高风险"],
-      "catalyst": "海上风电装机加速，出口欧洲订单增长",
-      "newsRefs": [],
-      "recommendation": "AVOID",
-      "confidence": "high",
-      "reasoning": "RPS120 95.5%过高，虽然基本面优秀但追高风险大，等回调到90%以下再考虑"
-    },
-    {
-      "code": "300684",
-      "name": "中石科技",
-      "price": 56.24,
-      "rps120": 93.9,
-      "score": 86,
-      "highlights": ["9条投资亮点", "导热材料龙头", "新能源汽车热管理概念", "0条风险"],
-      "risks": ["RPS93.9%偏高"],
-      "catalyst": "AI服务器散热需求，新能源汽车热管理",
-      "newsRefs": [],
-      "recommendation": "WATCH",
-      "confidence": "low",
-      "reasoning": "RPS93.9%偏高超出理想区间，但零风险值得关注回调机会"
-    },
-    {
-      "code": "688200",
-      "name": "华峰测控",
-      "price": 296.95,
-      "rps120": 95.8,
-      "score": 88,
-      "highlights": ["8条投资亮点", "半导体测试设备龙头", "0条风险", "国产替代受益"],
-      "risks": ["RPS95.8%过高"],
-      "catalyst": "半导体国产替代，AI芯片测试需求",
-      "newsRefs": [],
-      "recommendation": "AVOID",
-      "confidence": "high",
-      "reasoning": "RPS120 95.8%过高，当前不宜追高，等回调"
+      "reasoning": "RPS120 90.1%在理想区间上沿，黄金行情持续但估值偏高，追高需谨慎"
     },
     {
       "code": "600499",
@@ -105,13 +132,72 @@
       "price": 18.04,
       "rps120": 87.5,
       "score": 82,
-      "highlights": ["6条投资亮点", "锂电设备+建材机械双主业", "非洲锂矿资源"],
+      "highlights": [
+        "6条投资亮点",
+        "锂电设备+建材机械双主业",
+        "非洲锂矿资源"
+      ],
       "risks": ["风险2条", "锂价波动风险"],
       "catalyst": "非洲锂矿投产，锂价企稳",
       "newsRefs": [],
       "recommendation": "WATCH",
       "confidence": "medium",
-      "reasoning": "RPS120 87.5%在理想区间，锂矿+建材双轮驱动，但锂价走势不确定"
+      "reasoning": "RPS120 87.5%在理想区间，今日+9%强势，但锂矿板块波动较大"
+    },
+    {
+      "code": "603992",
+      "name": "松霖科技",
+      "price": 40.93,
+      "rps120": 85.3,
+      "score": 80,
+      "highlights": [
+        "4条投资亮点",
+        "卫浴龙头",
+        "出口恢复受益"
+      ],
+      "risks": ["风险1条"],
+      "catalyst": "出口复苏，卫浴需求恢复",
+      "newsRefs": [],
+      "recommendation": "WATCH",
+      "confidence": "low",
+      "reasoning": "RPS120 85.3%在理想区间，但缺乏明确催化剂，需更多验证"
+    },
+    {
+      "code": "002487",
+      "name": "大金重工",
+      "price": 63.40,
+      "rps120": 95.5,
+      "score": 90,
+      "highlights": [
+        "11条投资亮点(策略池最多)",
+        "海上风电塔筒龙头",
+        "机构上调预测7份研报(榜首)"
+      ],
+      "risks": ["RPS过高95.5%，追高风险"],
+      "catalyst": "海上风电装机加速，出口欧洲订单增长",
+      "newsRefs": [],
+      "recommendation": "AVOID",
+      "confidence": "high",
+      "reasoning": "基本面优秀但RPS120 95.5%过高，当前追高风险大，建议等回调到90%以下再考虑"
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "price": 296.95,
+      "rps120": 95.8,
+      "score": 88,
+      "highlights": [
+        "8条投资亮点",
+        "半导体测试设备龙头",
+        "0条风险",
+        "国产替代受益"
+      ],
+      "risks": ["RPS95.8%过高"],
+      "catalyst": "半导体国产替代，AI芯片测试需求",
+      "newsRefs": [],
+      "recommendation": "AVOID",
+      "confidence": "high",
+      "reasoning": "RPS120 95.8%过高，虽然零风险但当前不宜追高，等回调"
     },
     {
       "code": "601168",
@@ -119,20 +205,48 @@
       "price": 33.10,
       "rps120": 94.9,
       "score": 83,
-      "highlights": ["7条投资亮点", "铜锌铅多金属矿业龙头", "有色金属涨价受益"],
+      "highlights": [
+        "7条投资亮点",
+        "铜锌铅多金属矿业龙头",
+        "有色金属涨价受益"
+      ],
       "risks": ["风险3条", "RPS偏高"],
       "catalyst": "有色金属价格上涨",
       "newsRefs": [],
       "recommendation": "AVOID",
       "confidence": "medium",
-      "reasoning": "RPS120 94.9%偏高，风险3条，不建议追高"
+      "reasoning": "RPS120 94.9%偏高，风险3条较多，不建议追高"
     }
   ],
   "summary": {
     "totalScanned": 67,
     "buyRecommendations": 0,
-    "watchRecommendations": 5,
+    "watchRecommendations": 7,
     "avoidRecommendations": 3,
-    "marketCall": "积极但谨慎追高"
+    "marketCall": "积极关注低位优质股，谨慎追高",
+    "topPicks": [
+      {
+        "code": "605338",
+        "name": "巴比食品",
+        "reason": "RPS理想+零风险+机构一致看好"
+      },
+      {
+        "code": "688313",
+        "name": "仕佳光子",
+        "reason": "RPS理想+零风险+CPO热点概念"
+      },
+      {
+        "code": "688002",
+        "name": "睿创微纳",
+        "reason": "RPS理想+零风险+7条亮点"
+      }
+    ],
+    "keyObservations": [
+      "今日市场整体强势，上证+1.29%，创业板+2.5%",
+      "黄金板块涨幅居前，现货黄金重回4800美元",
+      "CPO光通信概念活跃，天孚通信涨13%",
+      "策略池67只股票中，RPS120在80-92%理想区间的有19只",
+      "零风险+理想RPS区间的优质标的：605338、688313、688002"
+    ]
   }
 }
