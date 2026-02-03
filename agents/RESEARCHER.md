@@ -21,9 +21,17 @@ Search or browse for:
 - 主要热点板块
 
 ### Step 3: Scan 芝士财富 Strategy Pool
+**IMPORTANT:** Use `profile: "openclaw"` for all browser actions!
+
 1. Open: https://stock.cheesefortune.com/strategy/stock/detail/352390?screener-sort-type=3&screener-sort-order=desc
 2. Scroll to load ALL stocks (typically 60-80)
-3. For EACH stock, open detail page and record:
+3. For EACH stock, open individual stock page to get details:
+   - **URL format:** `https://stock.cheesefortune.com/security/stock/{CODE}.{EXCHANGE}`
+   - Shanghai stocks (60xxxx): `https://stock.cheesefortune.com/security/stock/600988.SH`
+   - Shenzhen stocks (00xxxx): `https://stock.cheesefortune.com/security/stock/000001.SZ`
+   - ChiNext stocks (30xxxx): `https://stock.cheesefortune.com/security/stock/300750.SZ`
+   - STAR Market (68xxxx): `https://stock.cheesefortune.com/security/stock/688002.SH`
+4. From each stock page, record:
    - 综合评分
    - 投资亮点 (complete text)
    - 风险提示 (complete text)
