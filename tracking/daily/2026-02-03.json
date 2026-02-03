@@ -1,12 +1,11 @@
 {
   "date": "2026-02-03",
   "actions": [
-    { "code": "688002", "name": "睿创微纳", "action": "HOLD", "price": 114.65, "entry": 114.65, "pnl_pct": 0, "note": "当日开仓，未触及止损103或目标135" },
-    { "code": "600988", "name": "赤峰黄金", "action": "HOLD", "price": 39.78, "entry": 39.78, "pnl_pct": 0, "note": "当日开仓，未触及止损36或目标47" }
+    { "code": "600988", "name": "赤峰黄金", "action": "HOLD", "price": 39.78, "entryPrice": 39.78, "pnl_pct": 0, "note": "今日开仓，止损36/目标47均未触及" },
+    { "code": "688002", "name": "睿创微纳", "action": "HOLD", "price": 114.65, "entryPrice": 114.65, "pnl_pct": 0, "note": "今日开仓，止损103/目标135均未触及" }
   ],
   "newPositions": [],
-  "closedPositions": [],
-  "missedDueToLimitUp": [],
+  "missedPositions": [],
   "portfolioStats": {
     "totalPositions": 2,
     "avgPnl": 0,
@@ -14,11 +13,5 @@
     "losers": 0,
     "breakeven": 2
   },
-  "marketContext": {
-    "sentiment": "bullish",
-    "shanghai_change": 1.29,
-    "chinext_change": 3.11,
-    "hotSectors": ["黄金珠宝", "CPO光通信", "商业航天", "军工电子", "半导体"]
-  },
-  "notes": "两只持仓均为今日开仓，收益持平。市场情绪看多，创业板涨超3%。watchlist中2个BUY推荐已全部建仓，无新开仓需求。"
+  "notes": "今日两只持仓均为当日开仓，watchlist中BUY推荐均已持仓，无新开仓"
 }
