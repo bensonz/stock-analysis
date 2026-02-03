@@ -1,13 +1,13 @@
 {
   "date": "2026-02-03",
   "marketOverview": {
-    "shanghai": { "index": 3250, "change_pct": 1.29 },
-    "shenzhen": { "index": 10500, "change_pct": 1.30 },
-    "chinext": { "index": 2150, "change_pct": 2.93 },
+    "shanghai": { "index": 3250.00, "change_pct": 1.29 },
+    "shenzhen": { "index": 10200.00, "change_pct": 2.10 },
+    "chinext": { "index": 2100.00, "change_pct": 2.50 },
     "northbound": null,
     "sentiment": "bullish",
-    "hotSectors": ["黄金珠宝", "CPO光模块", "风电设备", "半导体设备"],
-    "coldSectors": ["房地产"]
+    "hotSectors": ["黄金珠宝", "CPO光通信", "风电设备", "矿业有色"],
+    "coldSectors": []
   },
   "candidates": [
     {
@@ -16,32 +16,30 @@
       "price": 23.93,
       "rps120": 85.2,
       "score": 88,
-      "highlights": ["黄金珠宝龙头", "2025业绩预告净利润增长47%-71%", "近3年营收年增30%", "高股息率6%+", "ROE 19.5%", "北向资金持股2.4%", "机构63%买入评级"],
+      "highlights": ["近3年营收年增30%", "Q3净利润同比+202%", "ROE 19.5%", "股息率6%+", "北向资金持股2.4%", "机构评级63%买入", "近3月涨幅超96%股票"],
       "risks": ["周级别超买，技术面或有调整需求"],
-      "catalyst": "2025年业绩预告净利润10.6-12.3亿，同比增长47%-71%，Q4净利润同比增150%-254%",
+      "catalyst": "2025年业绩预告净利润预增47%-71%，Q4净利润+150%-254%",
       "newsRefs": [
         { "title": "菜百股份2025年净利润预增47%-71%", "source": "公司公告", "date": "2026-01-30" },
-        { "title": "东北证券/国联民生维持增持/买入评级", "source": "研报", "date": "2026-02-01" }
-      ],
-      "recommendation": "WATCH",
-      "confidence": "high",
-      "reasoning": "RPS120=85.2%处于理想区间，业绩超预期，但今日涨停+10%，短期有调整风险，等回调买入更佳"
-    },
-    {
-      "code": "002487",
-      "name": "大金重工",
-      "price": 63.40,
-      "rps120": 95.5,
-      "score": 85,
-      "highlights": ["海风塔筒龙头", "11条亮点数量最高", "机构上调预测数量7份研报领先", "RPS20=83.6%走势较强"],
-      "risks": ["风险1条"],
-      "catalyst": "海上风电塔筒龙头，受益于风电装机加速",
-      "newsRefs": [
-        { "title": "机构上调预测数量排名前列", "source": "芝士财富", "date": "2026-02-03" }
+        { "title": "东北证券：25年业绩超预期，投资金热度持续高位", "source": "研报", "date": "2026-02-02" }
       ],
       "recommendation": "WATCH",
       "confidence": "medium",
-      "reasoning": "RPS120=95.5%略高于理想区间上限，今日涨幅+6.77%，观望回调机会"
+      "reasoning": "RPS120 85.2%在理想区间，业绩高增长，但今日涨停后短期有超买风险，建议回调后关注"
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "price": 114.65,
+      "rps120": 89.2,
+      "score": 85,
+      "highlights": ["红外热成像龙头", "7条投资亮点", "0条风险", "RPS120 89.2%理想区间"],
+      "risks": [],
+      "catalyst": "军民融合红外热成像需求增长",
+      "newsRefs": [],
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120 89.2%处于理想区间，无风险提示，但需更多催化剂验证"
     },
     {
       "code": "600988",
@@ -49,106 +47,92 @@
       "price": 39.78,
       "rps120": 90.1,
       "score": 84,
-      "highlights": ["黄金矿企龙头", "受益金价上涨", "亮点6条", "RPS120在理想区间内"],
-      "risks": ["风险1条"],
-      "catalyst": "国际金价突破4800美元，黄金矿企盈利弹性大",
+      "highlights": ["黄金矿业龙头", "6条投资亮点", "黄金价格创新高利好", "近3月涨幅超90%股票"],
+      "risks": ["估值处于高位"],
+      "catalyst": "黄金价格回到4800美元/盎司，矿业公司盈利提升",
       "newsRefs": [
-        { "title": "紫金矿业2025年净利润预增59%-62%", "source": "市场新闻", "date": "2026-02-03" }
+        { "title": "现货黄金大涨重回4800美元", "source": "市场", "date": "2026-02-03" }
       ],
-      "recommendation": "BUY",
+      "recommendation": "WATCH",
       "confidence": "medium",
-      "reasoning": "RPS120=90.1%处于理想区间上沿，黄金板块强势，今日涨幅+2.31%温和，可以考虑布局"
+      "reasoning": "RPS120 90.1%略高于理想区间上沿，黄金行情持续但追高风险较大"
+    },
+    {
+      "code": "002487",
+      "name": "大金重工",
+      "price": 63.40,
+      "rps120": 95.5,
+      "score": 90,
+      "highlights": ["11条投资亮点(最多)", "海上风电塔筒龙头", "机构上调预测7份研报", "风险仅1条"],
+      "risks": ["RPS过高95.5%，追高风险"],
+      "catalyst": "海上风电装机加速，出口欧洲订单增长",
+      "newsRefs": [],
+      "recommendation": "AVOID",
+      "confidence": "high",
+      "reasoning": "RPS120 95.5%过高，虽然基本面优秀但追高风险大，等回调到90%以下再考虑"
     },
     {
       "code": "300684",
       "name": "中石科技",
       "price": 56.24,
       "rps120": 93.9,
-      "score": 82,
-      "highlights": ["热管理龙头", "9条亮点", "风险0条", "液冷概念受益AI算力需求"],
-      "risks": [],
-      "catalyst": "AI服务器液冷散热需求爆发",
+      "score": 86,
+      "highlights": ["9条投资亮点", "导热材料龙头", "新能源汽车热管理概念", "0条风险"],
+      "risks": ["RPS93.9%偏高"],
+      "catalyst": "AI服务器散热需求，新能源汽车热管理",
       "newsRefs": [],
       "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": "RPS120=93.9%接近理想区间上限，0风险，但今日+2.16%已有涨幅"
+      "confidence": "low",
+      "reasoning": "RPS93.9%偏高超出理想区间，但零风险值得关注回调机会"
     },
     {
       "code": "688200",
       "name": "华峰测控",
       "price": 296.95,
       "rps120": 95.8,
-      "score": 81,
-      "highlights": ["半导体测试设备龙头", "8条亮点", "风险0条", "国产替代受益"],
-      "risks": [],
-      "catalyst": "半导体测试设备国产化率提升",
+      "score": 88,
+      "highlights": ["8条投资亮点", "半导体测试设备龙头", "0条风险", "国产替代受益"],
+      "risks": ["RPS95.8%过高"],
+      "catalyst": "半导体国产替代，AI芯片测试需求",
+      "newsRefs": [],
+      "recommendation": "AVOID",
+      "confidence": "high",
+      "reasoning": "RPS120 95.8%过高，当前不宜追高，等回调"
+    },
+    {
+      "code": "600499",
+      "name": "科达制造",
+      "price": 18.04,
+      "rps120": 87.5,
+      "score": 82,
+      "highlights": ["6条投资亮点", "锂电设备+建材机械双主业", "非洲锂矿资源"],
+      "risks": ["风险2条", "锂价波动风险"],
+      "catalyst": "非洲锂矿投产，锂价企稳",
       "newsRefs": [],
       "recommendation": "WATCH",
       "confidence": "medium",
-      "reasoning": "RPS120=95.8%偏高，股价已处于高位，风险较低但追高性价比不高"
-    },
-    {
-      "code": "300236",
-      "name": "上海新阳",
-      "price": 76.98,
-      "rps120": 93.1,
-      "score": 80,
-      "highlights": ["半导体材料龙头", "4条亮点", "风险0条最低", "光刻胶国产替代"],
-      "risks": [],
-      "catalyst": "半导体材料国产化进程加速",
-      "newsRefs": [],
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": "RPS120=93.1%略高，0风险是优点，等回调"
-    },
-    {
-      "code": "688002",
-      "name": "睿创微纳",
-      "price": 114.65,
-      "rps120": 89.2,
-      "score": 79,
-      "highlights": ["红外热成像龙头", "7条亮点", "风险0条", "军民两用市场广阔"],
-      "risks": [],
-      "catalyst": "红外热成像技术应用拓展，汽车夜视需求增长",
-      "newsRefs": [],
-      "recommendation": "BUY",
-      "confidence": "medium",
-      "reasoning": "RPS120=89.2%在理想区间内，0风险，今日+5.96%有涨幅但未过热"
+      "reasoning": "RPS120 87.5%在理想区间，锂矿+建材双轮驱动，但锂价走势不确定"
     },
     {
       "code": "601168",
       "name": "西部矿业",
       "price": 33.10,
       "rps120": 94.9,
-      "score": 78,
-      "highlights": ["有色金属龙头", "7条亮点", "铜金锌多元布局"],
-      "risks": ["风险3条"],
-      "catalyst": "铜价上涨预期，公司产能扩张",
+      "score": 83,
+      "highlights": ["7条投资亮点", "铜锌铅多金属矿业龙头", "有色金属涨价受益"],
+      "risks": ["风险3条", "RPS偏高"],
+      "catalyst": "有色金属价格上涨",
       "newsRefs": [],
       "recommendation": "AVOID",
-      "confidence": "low",
-      "reasoning": "RPS120=94.9%偏高，风险3条较多，今日+3.31%，观望"
-    },
-    {
-      "code": "601615",
-      "name": "明阳智能",
-      "price": 25.68,
-      "rps120": 97.3,
-      "score": 75,
-      "highlights": ["风电整机龙头", "7条亮点"],
-      "risks": ["风险4条较多"],
-      "catalyst": "海上风电装机加速",
-      "newsRefs": [],
-      "recommendation": "AVOID",
-      "confidence": "low",
-      "reasoning": "RPS120=97.3%过高，风险4条最多，今日涨停+7.63%不宜追高"
+      "confidence": "medium",
+      "reasoning": "RPS120 94.9%偏高，风险3条，不建议追高"
     }
   ],
   "summary": {
     "totalScanned": 67,
-    "buyRecommendations": 2,
+    "buyRecommendations": 0,
     "watchRecommendations": 5,
-    "avoidRecommendations": 2,
-    "marketCall": "积极"
+    "avoidRecommendations": 3,
+    "marketCall": "积极但谨慎追高"
   }
 }
