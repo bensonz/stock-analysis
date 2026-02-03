@@ -1,5 +1,6 @@
 {
   "date": "2026-02-03",
+  "timestamp": "2026-02-03T17:53:00+08:00",
   "actions": [
     {
       "code": "688002",
@@ -8,26 +9,42 @@
       "price": 114.65,
       "entryPrice": 114.65,
       "pnl_pct": 0,
-      "note": "当日开仓，收盘持平，止损103/目标135均未触及"
+      "stopLoss": 103.00,
+      "targetPrice": 135.00,
+      "note": "当日开仓，收盘平进，thesis有效，继续持有"
     }
   ],
+  "soldPositions": [],
   "newPositions": [],
-  "closedPositions": [],
-  "missedOpportunities": [],
+  "missedOpportunities": [
+    {
+      "code": "605599",
+      "name": "菜百股份",
+      "reason": "涨停(+10.02%)无法买入",
+      "followUp": "明日观察是否有低吸机会"
+    }
+  ],
   "portfolioStats": {
     "totalPositions": 1,
     "avgPnl": 0,
     "winners": 0,
     "losers": 0,
-    "breakeven": 1
+    "breakeven": 1,
+    "cashUsed": "10%"
+  },
+  "watchlistSummary": {
+    "source": "2026-02-03",
+    "buyRecommendations": 0,
+    "watchRecommendations": 5,
+    "avoidRecommendations": 2,
+    "openedToday": 0,
+    "reason": "无高置信度BUY推荐，多数候选RPS偏高或风险提示多"
   },
   "marketContext": {
+    "shanghai": "+1.29%",
+    "shenzhen": "+2.35%",
+    "chinext": "+2.66%",
     "sentiment": "bullish",
-    "shanghai_change": 1.29,
-    "shenzhen_change": 1.30,
-    "chinext_change": 2.93,
-    "hotSectors": ["黄金珠宝", "CPO概念", "光纤光缆", "风电设备", "半导体设备"]
-  },
-  "notes": "市场情绪积极，创业板涨近3%。watchlist无high confidence BUY候选（所有候选均为WATCH或AVOID），不开新仓。688002继续持有，等待后续走势。",
-  "lastUpdated": "2026-02-03T17:52:00+08:00"
+    "hotSectors": ["黄金珠宝", "光通信/CPO", "有色金属", "半导体设备", "风电设备"]
+  }
 }
