@@ -6,35 +6,37 @@
       "name": "睿创微纳",
       "action": "HOLD",
       "price": 114.65,
+      "entryPrice": 114.65,
       "pnl_pct": 0,
-      "note": "开仓首日，价格持平，维持原策略"
+      "stopLoss": 103.00,
+      "targetPrice": 135.00,
+      "note": "开仓首日，价格持平，未触及止损或目标"
     }
   ],
-  "newPositions": [
-    {
-      "code": "688002",
-      "name": "睿创微纳",
-      "entry": 114.65,
-      "target": 135.00,
-      "stop": 103.00,
-      "reason": "BUY推荐，RPS120=89.2%理想区间，0条风险，业绩预增93%"
-    }
-  ],
-  "watchForTomorrow": [
+  "newPositions": [],
+  "missedOpportunities": [
     {
       "code": "605599",
       "name": "菜百股份",
       "price": 23.93,
-      "reason": "BUY推荐confidence=high，RPS120=85.2%理想区间，业绩预增47-71%，今日涨幅未知待明日确认是否可买入"
+      "change_pct": 10.02,
+      "reason": "涨停无法买入，明日观察是否回落可介入",
+      "watchlistDate": "2026-02-03",
+      "recommendation": "BUY",
+      "confidence": "high"
     }
   ],
-  "missedDueToLimitUp": [],
   "portfolioStats": {
     "totalPositions": 1,
     "avgPnl": 0,
     "winners": 0,
-    "losers": 0
+    "losers": 0,
+    "neutral": 1
   },
-  "marketNote": "市场整体偏多，沪指+1.29%，创业板+2.93%。热门板块：黄金珠宝、CPO光通信、商业航天、军工电子。市场情绪bullish。",
-  "notes": "网络获取价格失败，使用watchlist价格评估。605599菜百股份为高信心BUY但无法确认涨停状态，列入明日观察。"
+  "marketContext": {
+    "sentiment": "bullish",
+    "shanghaiChange": 1.29,
+    "hotSectors": ["船舶制造", "飞机制造", "发电设备", "太空光伏", "CPO"]
+  },
+  "generatedAt": "2026-02-03T15:52:00+08:00"
 }
