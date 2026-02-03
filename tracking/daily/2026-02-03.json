@@ -1,15 +1,7 @@
 {
   "date": "2026-02-03",
+  "generatedAt": "2026-02-03T18:43:55+08:00",
   "actions": [
-    {
-      "code": "688002",
-      "name": "睿创微纳",
-      "action": "HOLD",
-      "price": 114.65,
-      "entryPrice": 114.65,
-      "pnl_pct": 0,
-      "note": "今日开仓，收益0%，止损103/目标135均未触及，thesis有效"
-    },
     {
       "code": "600988",
       "name": "赤峰黄金",
@@ -17,9 +9,25 @@
       "price": 39.78,
       "entryPrice": 39.78,
       "pnl_pct": 0,
+      "stopLoss": 36.00,
+      "targetPrice": 47.00,
+      "holdingDays": 1,
       "note": "今日开仓，收益0%，止损36/目标47均未触及，thesis有效"
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "action": "HOLD",
+      "price": 114.65,
+      "entryPrice": 114.65,
+      "pnl_pct": 0,
+      "stopLoss": 103.00,
+      "targetPrice": 135.00,
+      "holdingDays": 1,
+      "note": "今日开仓，收益0%，止损103/目标135均未触及，thesis有效"
     }
   ],
+  "sells": [],
   "newPositions": [],
   "missedPositions": [],
   "portfolioStats": {
@@ -27,11 +35,20 @@
     "avgPnl": 0,
     "winners": 0,
     "losers": 0,
-    "breakeven": 2
+    "breakeven": 2,
+    "maxCapacity": 10,
+    "availableSlots": 8
   },
   "watchlistSummary": {
+    "totalCandidates": 9,
     "buyRecommendations": 1,
-    "note": "唯一BUY推荐600988赤峰黄金已持仓，无新开仓机会"
+    "watchRecommendations": 8,
+    "note": "唯一BUY推荐600988赤峰黄金已持仓；其余8只为WATCH观望，无新开仓机会"
+  },
+  "decisions": {
+    "600988_evaluation": "价格39.78 > 止损36.00 ✓ | 价格39.78 < 目标47.00 ✓ | 收益0% < 10%无需调整止损 → HOLD",
+    "688002_evaluation": "价格114.65 > 止损103.00 ✓ | 价格114.65 < 目标135.00 ✓ | 收益0% < 10%无需调整止损 → HOLD",
+    "newPositionCheck": "watchlist仅1只BUY推荐(600988)已持仓，8只WATCH不符合开仓标准(需BUY+high confidence)"
   },
   "networkNote": "实时价格API因代理问题获取失败，使用watchlist收盘价数据"
 }
