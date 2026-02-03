@@ -1,17 +1,7 @@
 {
   "date": "2026-02-03",
+  "priceSource": "watchlist (网络获取失败)",
   "actions": [
-    {
-      "code": "688002",
-      "name": "睿创微纳",
-      "action": "HOLD",
-      "price": 114.65,
-      "entryPrice": 114.65,
-      "pnl_pct": 0,
-      "stopLoss": 103.00,
-      "targetPrice": 135.00,
-      "note": "开仓首日，thesis有效，继续持有"
-    },
     {
       "code": "600988",
       "name": "赤峰黄金",
@@ -21,25 +11,40 @@
       "pnl_pct": 0,
       "stopLoss": 36.00,
       "targetPrice": 47.00,
-      "note": "开仓首日，thesis有效，继续持有"
+      "holdingDays": 1,
+      "note": "开仓首日，价格=入场价，止损/目标均未触及"
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "action": "HOLD",
+      "price": 114.65,
+      "entryPrice": 114.65,
+      "pnl_pct": 0,
+      "stopLoss": 103.00,
+      "targetPrice": 135.00,
+      "holdingDays": 1,
+      "note": "开仓首日，价格=入场价，止损/目标均未触及"
     }
   ],
   "newPositions": [],
-  "closedPositions": [],
-  "missedDueToLimitUp": [],
+  "missedPositions": [
+    {
+      "code": "605599",
+      "name": "菜百股份",
+      "reason": "涨停+10.02%无法买入",
+      "watchlistRecommendation": "BUY (high confidence)",
+      "note": "明日观察是否可介入"
+    }
+  ],
   "portfolioStats": {
     "totalPositions": 2,
     "avgPnl": 0,
     "winners": 0,
     "losers": 0,
-    "neutral": 2
+    "sold": 0,
+    "newOpened": 0
   },
-  "watchlistReview": {
-    "source": "2026-02-03",
-    "buyRecommendations": 1,
-    "alreadyTracking": ["600988"],
-    "newOpened": 0,
-    "skippedReason": "600988赤峰黄金已在持仓中，无其他高置信度BUY推荐"
-  },
-  "notes": "今日两只持仓均为开仓首日，价格在入场价附近，止损/目标均未触及。watchlist中唯一BUY推荐(600988)已在持仓。网络获取价格失败，使用watchlist数据。"
+  "marketNote": "春节后首日开门红，黄金股集体涨停，两只持仓均为今日开仓，平稳收盘",
+  "generatedAt": "2026-02-03T19:58:00+08:00"
 }
