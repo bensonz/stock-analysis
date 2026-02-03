@@ -7,7 +7,7 @@ Output: JSON with current prices
 
 import sys
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
 try:
     import akshare as ak
@@ -17,88 +17,76 @@ except ImportError:
 
 
 def get_stock_price(code: str) -> dict:
-    """Fetch real-time price for a single stock."""
+    """Fetch latest price for a single stock using historical data."""
     try:
         # Normalize code (remove market suffix if present)
         code = code.split('.')[0]
         
-        # Determine market prefix
-        if code.startswith('6'):
-            symbol = f"sh{code}"
-        elif code.startswith(('0', '3')):
-            symbol = f"sz{code}"
-        elif code.startswith('4') or code.startswith('8'):
-            symbol = f"bj{code}"  # Beijing Stock Exchange
-        else:
-            symbol = f"sz{code}"  # Default to Shenzhen
+        # Get recent data (last 5 days to ensure we have trading data)
+        end_date = datetime.now().strftime('%Y%m%d')
+        start_date = (datetime.now() - timedelta(days=10)).strftime('%Y%m%d')
         
-        # Fetch real-time quote
-        df = ak.stock_zh_a_spot_em()
+        df = ak.stock_zh_a_hist(
+            symbol=code, 
+            period='daily', 
+            start_date=start_date, 
+            end_date=end_date
+        )
         
-        # Find the stock
-        row = df[df['代码'] == code]
+        if df.empty:
+            return {"code": code, "error": "No data found"}
         
-        if row.empty:
-            return {"code": code, "error": "Stock not found"}
-        
-        row = row.iloc[0]
+        # Get the latest row
+        latest = df.iloc[-1]
+        prev = df.iloc[-2] if len(df) > 1 else latest
         
         return {
             "code": code,
-            "name": row.get('名称', ''),
-            "price": float(row.get('最新价', 0)),
-            "change_pct": float(row.get('涨跌幅', 0)),
-            "change_amt": float(row.get('涨跌额', 0)),
-            "open": float(row.get('今开', 0)),
-            "high": float(row.get('最高', 0)),
-            "low": float(row.get('最低', 0)),
-            "prev_close": float(row.get('昨收', 0)),
-            "volume": float(row.get('成交量', 0)),
-            "amount": float(row.get('成交额', 0)),
-            "turnover_rate": float(row.get('换手率', 0)),
-            "pe_ratio": float(row.get('市盈率-动态', 0)) if row.get('市盈率-动态') else None,
-            "pb_ratio": float(row.get('市净率', 0)) if row.get('市净率') else None,
-            "market_cap": float(row.get('总市值', 0)),
-            "float_cap": float(row.get('流通市值', 0)),
+            "date": str(latest['日期']),
+            "price": float(latest['收盘']),
+            "open": float(latest['开盘']),
+            "high": float(latest['最高']),
+            "low": float(latest['最低']),
+            "prev_close": float(prev['收盘']),
+            "change_pct": float(latest['涨跌幅']),
+            "change_amt": float(latest['涨跌额']),
+            "volume": int(latest['成交量']),
+            "amount": float(latest['成交额']),
+            "turnover_rate": float(latest['换手率']),
+            "amplitude": float(latest['振幅']),
             "timestamp": datetime.now().isoformat(),
         }
     except Exception as e:
         return {"code": code, "error": str(e)}
 
 
-def get_multiple_prices(codes: list) -> dict:
-    """Fetch prices for multiple stocks efficiently."""
+def get_stock_name(code: str) -> str:
+    """Get stock name from code."""
     try:
-        # Fetch all A-share real-time data once
-        df = ak.stock_zh_a_spot_em()
-        
-        results = {}
-        for code in codes:
-            code = code.split('.')[0]
-            row = df[df['代码'] == code]
-            
-            if row.empty:
-                results[code] = {"code": code, "error": "Stock not found"}
-                continue
-            
-            row = row.iloc[0]
-            results[code] = {
-                "code": code,
-                "name": row.get('名称', ''),
-                "price": float(row.get('最新价', 0)),
-                "change_pct": float(row.get('涨跌幅', 0)),
-                "prev_close": float(row.get('昨收', 0)),
-                "volume": float(row.get('成交量', 0)),
-                "turnover_rate": float(row.get('换手率', 0)),
-                "market_cap": float(row.get('总市值', 0)),
-            }
-        
-        return {
-            "timestamp": datetime.now().isoformat(),
-            "stocks": results
-        }
-    except Exception as e:
-        return {"error": str(e)}
+        df = ak.stock_info_a_code_name()
+        row = df[df['code'] == code]
+        if not row.empty:
+            return row.iloc[0]['name']
+    except:
+        pass
+    return ""
+
+
+def get_multiple_prices(codes: list) -> dict:
+    """Fetch prices for multiple stocks."""
+    results = {}
+    for code in codes:
+        result = get_stock_price(code)
+        # Try to add name
+        if 'error' not in result:
+            result['name'] = get_stock_name(code)
+        results[code] = result
+    
+    return {
+        "timestamp": datetime.now().isoformat(),
+        "count": len(codes),
+        "stocks": results
+    }
 
 
 if __name__ == "__main__":
@@ -110,6 +98,9 @@ if __name__ == "__main__":
     
     if len(codes) == 1:
         result = get_stock_price(codes[0])
+        # Add name for single stock
+        if 'error' not in result:
+            result['name'] = get_stock_name(codes[0])
     else:
         result = get_multiple_prices(codes)
     
