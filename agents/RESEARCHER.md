@@ -23,7 +23,7 @@ Search or browse for:
 ### Step 3: Scan 芝士财富 Strategy Pool
 **IMPORTANT:** Use `profile: "openclaw"` for all browser actions!
 
-1. Open: https://stock.cheesefortune.com/strategy/stock/detail/-999
+1. Open: https://stock.cheesefortune.com/strategy/stock/detail/352390?screener-sort-type=3&screener-sort-order=desc
 2. Scroll to load ALL stocks (typically 60-80)
 3. For EACH stock, open individual stock page to get details:
    - **URL format:** `https://stock.cheesefortune.com/security/stock/{CODE}.{EXCHANGE}`
