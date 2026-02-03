@@ -8,33 +8,29 @@
       "price": 114.65,
       "entryPrice": 114.65,
       "pnl_pct": 0,
-      "stopLoss": 103.00,
-      "targetPrice": 135.00,
-      "note": "当日开仓，thesis有效，继续持有"
+      "note": "当日开仓，未触及止损103或目标135，继续持有"
     }
   ],
   "newPositions": [],
-  "closedPositions": [],
-  "missedDueToLimitUp": [],
-  "watchlistCandidates": {
-    "high_confidence_watch": ["605338", "688313", "688002"],
-    "medium_confidence_watch": ["605599", "600988", "600499"],
-    "no_buy_recommendations": true
-  },
+  "missedDueToLimitUp": [
+    {
+      "code": "605599",
+      "name": "菜百股份",
+      "change_pct": 10.02,
+      "note": "涨停无法买入，但recommendation仅为WATCH非BUY，明日观察"
+    }
+  ],
   "portfolioStats": {
     "totalPositions": 1,
     "avgPnl": 0,
     "winners": 0,
     "losers": 0,
-    "breakeven": 1
+    "flat": 1
   },
-  "marketContext": {
-    "shanghai_change": 1.29,
-    "shenzhen_change": 2.10,
-    "chinext_change": 2.50,
-    "sentiment": "bullish",
-    "hotSectors": ["黄金珠宝", "CPO光通信", "风电设备", "矿业有色", "半导体设备"]
+  "watchlistSummary": {
+    "buyRecommendations": 0,
+    "watchRecommendations": 7,
+    "reason": "今日watchlist无BUY+high confidence推荐，均为WATCH建议等回调"
   },
-  "notes": "市场情绪积极，三大指数全线上涨。今日watchlist有7只WATCH推荐(605338/688313/688002为高置信度)，0只BUY推荐。已持有688002(睿创微纳)，当日开仓价114.65，thesis有效继续持有。",
-  "generatedAt": "2026-02-03T16:45:00+08:00"
+  "generatedAt": "2026-02-03T16:54:00+08:00"
 }
