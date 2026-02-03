@@ -1,5 +1,38 @@
 {
   "date": "2026-02-03",
-  "runs": [],
-  "summary": { "totalRuns": 0, "successful": 0, "failed": 0, "totalDurationMinutes": 0 }
+  "runs": [
+    {
+      "agent": "researcher",
+      "label": "researcher-2026-02-03",
+      "startedAt": "2026-02-03T20:18:00+08:00",
+      "completedAt": "2026-02-03T20:21:35+08:00",
+      "durationMinutes": 3.6,
+      "status": "success",
+      "output": "扫描70只，推荐0只，观望6只",
+      "filesCreated": [
+        "watchlist/2026-02-03.json",
+        "reports/2026-02-03.md"
+      ],
+      "error": null
+    },
+    {
+      "agent": "tracker",
+      "label": "tracker-2026-02-03",
+      "startedAt": "2026-02-03T20:21:40+08:00",
+      "completedAt": "2026-02-03T20:22:20+08:00",
+      "durationMinutes": 0.7,
+      "status": "success",
+      "output": "2只持仓，0卖出，0新开",
+      "filesCreated": [
+        "tracking/daily/2026-02-03.json"
+      ],
+      "error": null
+    }
+  ],
+  "summary": {
+    "totalRuns": 2,
+    "successful": 2,
+    "failed": 0,
+    "totalDurationMinutes": 4.3
+  }
 }
