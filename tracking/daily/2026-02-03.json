@@ -8,7 +8,7 @@
       "price": 114.65,
       "entryPrice": 114.65,
       "pnl_pct": 0,
-      "note": "首日持仓，未触及止损103或目标135，thesis完整"
+      "note": "当日开仓，thesis未变，继续持有"
     }
   ],
   "newPositions": [],
@@ -16,25 +16,19 @@
     {
       "code": "605599",
       "name": "菜百股份",
-      "reason": "涨停无法买入",
-      "recommendation": "BUY",
-      "confidence": "high",
-      "price": 23.93,
-      "note": "业绩预告超预期涨停，明日观察是否可买入"
+      "reason": "涨停+10%无法买入，明日观察"
     }
   ],
   "portfolioStats": {
     "totalPositions": 1,
     "avgPnl": 0,
     "winners": 0,
-    "losers": 0,
-    "breakeven": 1
+    "losers": 0
   },
   "marketContext": {
-    "shanghai": 3348.44,
-    "change_pct": 1.29,
-    "sentiment": "bullish"
+    "sentiment": "bullish",
+    "shanghai_change": 1.29,
+    "hotSectors": ["黄金珠宝", "商业航天", "CPO光通信"]
   },
-  "notes": "网络代理问题导致无法获取实时价格，使用watchlist数据。菜百股份(605599)涨停无法买入，列入明日观察。",
-  "createdAt": "2026-02-03T16:02:00+08:00"
+  "notes": "牛市氛围，但watchlist无高置信BUY推荐，维持现有688002持仓观察"
 }
