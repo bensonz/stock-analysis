@@ -2,41 +2,32 @@
   "date": "2026-02-03",
   "actions": [],
   "newPositions": [],
-  "missedDueToLimitUp": [
+  "missedPositions": [
     {
       "code": "605599",
       "name": "菜百股份",
-      "price": 23.93,
-      "change_pct": 10.02,
       "reason": "涨停无法买入，明日观察回调机会",
-      "recommendation": "BUY",
-      "confidence": "high",
-      "rps120": 85.2
-    },
+      "price": 23.93,
+      "change_pct": 10.0,
+      "rps120": 85.2,
+      "confidence": "high"
+    }
+  ],
+  "watchlist": [
     {
-      "code": "002155",
-      "name": "湖南黄金",
-      "price": 36.63,
-      "change_pct": 10.00,
-      "reason": "涨停无法买入，但RPS94.3%过高+5风险，不追",
-      "recommendation": "AVOID",
-      "confidence": "high",
-      "rps120": 94.3
+      "code": "688002",
+      "name": "睿创微纳",
+      "note": "RPS89.2%理想，7亮点0风险，待回调",
+      "price": 114.65,
+      "rps120": 89.2
     }
   ],
   "portfolioStats": {
     "totalPositions": 0,
-    "avgPnl": 0,
+    "avgPnl": null,
     "winners": 0,
     "losers": 0
   },
-  "marketNotes": [
-    "市场强势：上证+1.29%，创业板+2.93%",
-    "黄金板块热度极高，多只涨停",
-    "唯一BUY推荐菜百股份涨停，无法买入",
-    "大部分强势股RPS已超92%，等回调",
-    "明日重点关注：605599菜百股份是否回调"
-  ],
-  "createdAt": "2026-02-03T15:28:00+08:00",
-  "trackerVersion": "2.0"
+  "marketNote": "市场整体强势(上证+1.29%,创业板+2.93%)。黄金板块因金价新高全线大涨。今日watchlist无BUY推荐，RPS普遍偏高。菜百股份涨停无法买入，列入明日观察。策略：观望为主，等待回调。",
+  "generatedAt": "2026-02-03T15:30:00+08:00"
 }
