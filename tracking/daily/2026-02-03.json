@@ -8,22 +8,17 @@
       "price": 114.65,
       "entryPrice": 114.65,
       "pnl_pct": 0,
-      "stopLoss": 103.00,
-      "targetPrice": 135.00,
-      "note": "开仓首日，价格持平，未触及止损或目标"
+      "note": "开仓首日，未触及止损103或目标135"
     }
   ],
   "newPositions": [],
-  "missedOpportunities": [
+  "missedPositions": [
     {
       "code": "605599",
       "name": "菜百股份",
+      "reason": "涨停无法买入",
       "price": 23.93,
-      "change_pct": 10.02,
-      "reason": "涨停无法买入，明日观察是否回落可介入",
-      "watchlistDate": "2026-02-03",
-      "recommendation": "BUY",
-      "confidence": "high"
+      "note": "BUY推荐高置信度，RPS120=85.2%理想区间，业绩预告超预期，明日观察是否有机会"
     }
   ],
   "portfolioStats": {
@@ -31,12 +26,13 @@
     "avgPnl": 0,
     "winners": 0,
     "losers": 0,
-    "neutral": 1
+    "breakeven": 1
   },
   "marketContext": {
     "sentiment": "bullish",
-    "shanghaiChange": 1.29,
-    "hotSectors": ["船舶制造", "飞机制造", "发电设备", "太空光伏", "CPO"]
+    "hotSectors": ["黄金珠宝", "光伏设备", "CPO光模块", "有色金属"],
+    "shanghai_change": 1.29,
+    "chinext_change": 2.93
   },
-  "generatedAt": "2026-02-03T15:52:00+08:00"
+  "notes": "688002睿创微纳开仓首日持平。605599菜百股份涨停无法买入，加入明日观察名单。市场整体走强。"
 }
