@@ -1,13 +1,15 @@
 {
   "date": "2026-02-03",
   "marketOverview": {
-    "shanghai": { "index": 3250, "change_pct": 1.29 },
-    "shenzhen": { "index": 10521, "change_pct": 1.5 },
-    "chinext": { "index": 2156, "change_pct": 2.7 },
+    "shanghai": { "index": 4067.74, "change_pct": 1.30 },
+    "shenzhen": { "index": 14127.11, "change_pct": 2.19 },
+    "chinext": { "index": 3324.89, "change_pct": 1.86 },
     "northbound": null,
     "sentiment": "bullish",
-    "hotSectors": ["黄金珠宝", "CPO光通信", "有色金属", "半导体设备", "商业航天"],
-    "coldSectors": ["房地产", "银行"]
+    "hotSectors": ["黄金珠宝", "CPO光通信", "有色金属", "玻纤建材"],
+    "coldSectors": [],
+    "ztCount": 69,
+    "dtCount": 9
   },
   "candidates": [
     {
@@ -16,142 +18,17 @@
       "price": 23.93,
       "change_pct": 10.02,
       "rps120": 87.5,
-      "rps20": 96.4,
-      "rps60": 96.9,
-      "highlights": 7,
-      "risks": 2,
-      "marketCap": "186亿",
-      "catalyst": "黄金价格创新高，2025业绩预增47%-71%",
+      "score": 88,
+      "highlights": ["黄金珠宝龙头", "ROE 19.5%强盈利", "2025业绩预增47%-71%", "近3年营收每年增长30%", "收现比111%", "北向持股2.4%"],
+      "risks": ["周级别超买", "估值85%分位历史高位"],
+      "catalyst": "2025业绩预告超预期+黄金价格高位运行",
       "newsRefs": [
-        { "title": "现货黄金重回4800美元", "source": "芝士财富", "date": "2026-02-03" },
-        { "title": "菜百股份2025年净利润预增47%-71%", "source": "公司公告", "date": "2026-01-28" }
+        { "title": "菜百股份2025年净利润预增47%-71%", "source": "同花顺", "date": "2026-01-30" },
+        { "title": "国联民生上调评级至买入，预测25-27净利11.5亿/13.5亿/15.2亿", "source": "研报", "date": "2026-02-01" }
       ],
       "recommendation": "WATCH",
       "confidence": "medium",
-      "reasoning": "RPS120 87.5%处于理想区间，黄金板块持续走强，但今日涨停无法入场，需等待回调"
-    },
-    {
-      "code": "002487",
-      "name": "大金重工",
-      "price": 63.40,
-      "change_pct": 6.77,
-      "rps120": 95.9,
-      "rps20": 88.6,
-      "rps60": 90.1,
-      "highlights": 11,
-      "risks": 1,
-      "marketCap": "404亿",
-      "catalyst": "海上风电龙头，7份研报上调预测",
-      "newsRefs": [
-        { "title": "大金重工获7份研报上调预测", "source": "芝士财富榜单", "date": "2026-02-03" }
-      ],
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": "亮点数最多(11条)，风险最少(1条)，但RPS120 95.9%偏高，追高风险大"
-    },
-    {
-      "code": "300684",
-      "name": "中石科技",
-      "price": 56.24,
-      "change_pct": 2.16,
-      "rps120": 94.4,
-      "rps20": 85.3,
-      "rps60": 86.8,
-      "highlights": 9,
-      "risks": 0,
-      "marketCap": "168亿",
-      "catalyst": "导热材料龙头，AI算力散热需求",
-      "newsRefs": [],
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": "0风险，9条亮点，但RPS120 94.4%偏高"
-    },
-    {
-      "code": "688002",
-      "name": "睿创微纳",
-      "price": 114.65,
-      "change_pct": 5.96,
-      "rps120": 91.1,
-      "rps20": 86.4,
-      "rps60": 93.7,
-      "highlights": 7,
-      "risks": 0,
-      "marketCap": "528亿",
-      "catalyst": "红外热成像龙头，商业航天+国防",
-      "newsRefs": [],
-      "recommendation": "HOLD",
-      "confidence": "high",
-      "reasoning": "已持仓，RPS120 91.1%在理想区间上沿，0风险，继续持有"
-    },
-    {
-      "code": "600988",
-      "name": "赤峰黄金",
-      "price": 39.78,
-      "change_pct": 2.31,
-      "rps120": 88.4,
-      "rps20": 92.6,
-      "rps60": 90.3,
-      "highlights": 6,
-      "risks": 1,
-      "marketCap": "756亿",
-      "catalyst": "黄金板块龙头，金价创新高受益",
-      "newsRefs": [
-        { "title": "现货黄金重回4800美元", "source": "芝士财富", "date": "2026-02-03" }
-      ],
-      "recommendation": "BUY",
-      "confidence": "high",
-      "reasoning": "RPS120 88.4%在理想区间，黄金板块领涨，风险仅1条，今日未涨停可入场"
-    },
-    {
-      "code": "605167",
-      "name": "利柏特",
-      "price": 18.66,
-      "change_pct": 4.66,
-      "rps120": 91.8,
-      "rps20": 85.3,
-      "rps60": 96.9,
-      "highlights": 6,
-      "risks": 2,
-      "marketCap": "83.8亿",
-      "catalyst": "模块化建筑+新能源设备",
-      "newsRefs": [],
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": "RPS120 91.8%接近理想区间上沿，小市值波动大"
-    },
-    {
-      "code": "688037",
-      "name": "芯源微",
-      "price": 195.99,
-      "change_pct": 3.05,
-      "rps120": 91.6,
-      "rps20": 92.2,
-      "rps60": 94.7,
-      "highlights": 7,
-      "risks": 3,
-      "marketCap": "395亿",
-      "catalyst": "半导体设备龙头，涂胶显影设备国产替代",
-      "newsRefs": [],
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": "RPS120 91.6%在理想区间上沿，半导体设备景气度回升，但风险3条"
-    },
-    {
-      "code": "688333",
-      "name": "铂力特",
-      "price": 110.38,
-      "change_pct": 2.06,
-      "rps120": 90.7,
-      "rps20": 56.9,
-      "rps60": 94.3,
-      "highlights": 7,
-      "risks": 3,
-      "marketCap": "303亿",
-      "catalyst": "3D打印龙头，商业航天催化",
-      "newsRefs": [],
-      "recommendation": "WATCH",
-      "confidence": "low",
-      "reasoning": "RPS120 90.7%在理想区间，但RPS20仅56.9%显示短期走弱，观望"
+      "reasoning": "RPS120=87.5%在理想区间，业绩确定性强，但今日涨停后追高风险大，估值偏高，建议回调观望"
     },
     {
       "code": "688059",
@@ -159,41 +36,76 @@
       "price": 97.34,
       "change_pct": 3.01,
       "rps120": 87.0,
-      "rps20": 89.9,
-      "rps60": 85.1,
-      "highlights": 7,
-      "risks": 4,
-      "marketCap": "97.3亿",
-      "catalyst": "硬质合金刀具龙头，制造业升级",
-      "newsRefs": [],
-      "recommendation": "AVOID",
-      "confidence": "medium",
-      "reasoning": "RPS120 87%理想，但风险4条较多，观望"
-    },
-    {
-      "code": "600499",
-      "name": "科达制造",
-      "price": 18.04,
-      "change_pct": 9.00,
-      "rps120": 90.2,
-      "rps20": 93.3,
-      "rps60": 92.5,
-      "highlights": 6,
-      "risks": 2,
-      "marketCap": "346亿",
-      "catalyst": "锂电+陶瓷机械双主业",
-      "newsRefs": [],
+      "score": 77,
+      "highlights": ["工业母机概念", "Q3利润同比+76%", "ROE 11.7%", "6家机构看多83%买入", "机构预测25-27年净利增长78%/48%/35%"],
+      "risks": ["收现比64%偏低", "应收账款周转天数增加113天", "存货周转天数增加146天", "固定资产占比44%重资产"],
+      "catalyst": "工业母机复苏+高端刀具国产替代",
+      "newsRefs": [
+        { "title": "华锐精密2025年净利润预增68%-87%", "source": "业绩预告", "date": "2026-01-29" },
+        { "title": "华泰证券上调目标价至124元", "source": "研报", "date": "2026-01-30" }
+      ],
       "recommendation": "WATCH",
       "confidence": "medium",
-      "reasoning": "RPS120 90.2%理想区间，今日大涨9%，需等回调"
+      "reasoning": "RPS120=87%在理想区间，业绩反转中，但收现比差、应收存货风险大，需等待回调确认"
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "price": 39.78,
+      "change_pct": 2.31,
+      "rps120": 88.4,
+      "score": 90,
+      "highlights": ["A/H溢价仅15%", "ROE 21.7%高盈利", "近3年营收年增27%", "北向5.5%+公募10%机构重仓", "收现比99.8%"],
+      "risks": ["1月30日跌停抛压重"],
+      "catalyst": "黄金价格高位+2025年利润预增90%+",
+      "newsRefs": [
+        { "title": "紫金矿业净利预增59%-62%带动黄金股", "source": "芝士财富", "date": "2026-02-03" }
+      ],
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=88.4%理想区间，基本面强，但近期刚跌停抛压重，估值69%分位偏高，等金价调整后观察"
+    },
+    {
+      "code": "002080",
+      "name": "中材科技",
+      "price": 40.90,
+      "change_pct": 2.63,
+      "rps120": 88.1,
+      "score": 84,
+      "highlights": ["玻纤龙头", "风电叶片+锂电隔膜双业务", "北向2.9%+公募2.8%", "股价创历史新高"],
+      "risks": ["估值91%历史高位", "现金短债比0.27偏债风险", "固定资产占比42%重资产"],
+      "catalyst": "2025年利润预增74%-119%",
+      "newsRefs": [
+        { "title": "中材科技2025年报预告净利润15.5-19.5亿", "source": "公告", "date": "2026-01-06" }
+      ],
+      "recommendation": "AVOID",
+      "confidence": "medium",
+      "reasoning": "虽RPS120=88.1%理想，但估值极高(91%分位)，且现金短债比差，风险收益比不佳"
+    },
+    {
+      "code": "002155",
+      "name": "湖南黄金",
+      "price": 36.63,
+      "change_pct": 10.00,
+      "rps120": 95.1,
+      "score": 78,
+      "highlights": ["黄金注资预期", "涨停强势"],
+      "risks": ["RPS120=95.1%过高", "风险数5条较多"],
+      "catalyst": "拟注入黄金资源+现货黄金重回4800美元",
+      "newsRefs": [
+        { "title": "湖南黄金拟注入黄金资源提升储量", "source": "芝士财富", "date": "2026-02-03" }
+      ],
+      "recommendation": "AVOID",
+      "confidence": "high",
+      "reasoning": "RPS120=95.1%超出理想区间(80-92%)，今日涨停追高风险极大"
     }
   ],
   "summary": {
     "totalScanned": 70,
-    "buyRecommendations": 1,
-    "watchRecommendations": 8,
-    "avoidRecommendations": 1,
-    "marketCall": "积极",
-    "notes": "市场情绪偏多，黄金和CPO板块领涨。赤峰黄金是今日唯一BUY推荐，RPS理想+催化剂明确+风险可控。菜百股份虽好但涨停无法入场。"
-  }
+    "buyRecommendations": 0,
+    "watchRecommendations": 3,
+    "avoidRecommendations": 2,
+    "marketCall": "谨慎偏多"
+  },
+  "notes": "今日市场大涨，涨停69家情绪高涨。但多数优质股RPS已超92%或估值过高，建议等回调后择机布局。重点关注菜百股份、华锐精密、赤峰黄金三只理想区间股票的回调机会。"
 }
