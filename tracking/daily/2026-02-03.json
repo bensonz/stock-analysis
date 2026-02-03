@@ -1,21 +1,42 @@
 {
   "date": "2026-02-03",
   "actions": [],
-  "newPositions": [
+  "newPositions": [],
+  "missedDueToLimitUp": [
     {
       "code": "605599",
       "name": "菜百股份",
-      "entry": 23.93,
-      "target": 28.00,
-      "stop": 21.50,
-      "reasoning": "黄金珠宝龙头业绩超预期,RPS120=85.2%理想区间,高置信度BUY推荐"
+      "price": 23.93,
+      "change_pct": 10.02,
+      "reason": "涨停无法买入，明日观察回调机会",
+      "recommendation": "BUY",
+      "confidence": "high",
+      "rps120": 85.2
+    },
+    {
+      "code": "002155",
+      "name": "湖南黄金",
+      "price": 36.63,
+      "change_pct": 10.00,
+      "reason": "涨停无法买入，但RPS94.3%过高+5风险，不追",
+      "recommendation": "AVOID",
+      "confidence": "high",
+      "rps120": 94.3
     }
   ],
   "portfolioStats": {
-    "totalPositions": 1,
+    "totalPositions": 0,
     "avgPnl": 0,
     "winners": 0,
     "losers": 0
   },
-  "notes": "首次建仓，此前无活跃持仓。菜百股份符合全部开仓条件：高置信度BUY、RPS在80-92%区间、明确催化剂、风险/收益>1:2"
+  "marketNotes": [
+    "市场强势：上证+1.29%，创业板+2.93%",
+    "黄金板块热度极高，多只涨停",
+    "唯一BUY推荐菜百股份涨停，无法买入",
+    "大部分强势股RPS已超92%，等回调",
+    "明日重点关注：605599菜百股份是否回调"
+  ],
+  "createdAt": "2026-02-03T15:28:00+08:00",
+  "trackerVersion": "2.0"
 }
