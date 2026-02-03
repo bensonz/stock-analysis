@@ -1,5 +1,17 @@
 # Stock Tracker State Schema
 
+## Portfolio Config
+
+- **Total Capital**: 1,000,000 RMB
+- **Max Position Size**: 20% (200k per stock)
+- **Default Position**: 10% (100k per stock)
+- **Max Open Positions**: 5-8
+
+Position sizing rules:
+- **High confidence (BUY)**: 15-20% of capital
+- **Medium confidence (WATCH→BUY)**: 10-15% of capital
+- **Speculative**: 5-10% of capital
+
 ## tracking/{code}.json
 
 ```json
@@ -12,6 +24,9 @@
   "thesis": "Gold jewelry retail leader, RPS in ideal range, breakout pattern",
   "entryDate": "2026-02-03",
   "entryPrice": 23.93,
+  "shares": 4000,               // Number of shares (must be 100s for A-stock)
+  "capital": 95720,             // Capital allocated (shares × entryPrice)
+  "capitalPct": 9.57,           // % of total portfolio capital
   "targetPrice": 28.00,         // +17% target
   "stopLoss": 22.00,            // -8% stop
   "currentStop": 22.00,         // May be raised as position profits (trailing stop)
