@@ -1,33 +1,22 @@
 {
   "date": "2026-02-03",
   "actions": [],
-  "newPositions": [],
-  "missedPositions": [
-    {
-      "code": "605599",
-      "name": "菜百股份",
-      "reason": "涨停无法买入，明日观察回调机会",
-      "price": 23.93,
-      "change_pct": 10.0,
-      "rps120": 85.2,
-      "confidence": "high"
-    }
-  ],
-  "watchlist": [
+  "newPositions": [
     {
       "code": "688002",
       "name": "睿创微纳",
-      "note": "RPS89.2%理想，7亮点0风险，待回调",
-      "price": 114.65,
-      "rps120": 89.2
+      "entry": 114.65,
+      "target": 135.00,
+      "stop": 103.00,
+      "reason": "BUY推荐，RPS120=89.2%理想区间，0条风险"
     }
   ],
+  "missedDueToLimitUp": [],
   "portfolioStats": {
-    "totalPositions": 0,
-    "avgPnl": null,
+    "totalPositions": 1,
+    "avgPnl": 0,
     "winners": 0,
     "losers": 0
   },
-  "marketNote": "市场整体强势(上证+1.29%,创业板+2.93%)。黄金板块因金价新高全线大涨。今日watchlist无BUY推荐，RPS普遍偏高。菜百股份涨停无法买入，列入明日观察。策略：观望为主，等待回调。",
-  "generatedAt": "2026-02-03T15:30:00+08:00"
+  "marketNote": "市场整体偏多，沪指+1.29%，深指+2.19%，黄金珠宝/光伏/半导体设备热门"
 }
