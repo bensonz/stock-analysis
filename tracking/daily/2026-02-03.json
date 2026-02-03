@@ -1,17 +1,60 @@
 {
   "date": "2026-02-03",
   "actions": [
-    { "code": "600988", "name": "赤峰黄金", "action": "HOLD", "price": 39.78, "entryPrice": 39.78, "pnl_pct": 0, "note": "今日开仓，止损36/目标47均未触及" },
-    { "code": "688002", "name": "睿创微纳", "action": "HOLD", "price": 114.65, "entryPrice": 114.65, "pnl_pct": 0, "note": "今日开仓，止损103/目标135均未触及" }
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "action": "HOLD",
+      "price": 39.78,
+      "entryPrice": 39.78,
+      "pnl_pct": 0,
+      "note": "今日开仓，收益0%，止损36/目标47均未触及"
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "action": "HOLD",
+      "price": 114.65,
+      "entryPrice": 114.65,
+      "pnl_pct": 0,
+      "note": "今日开仓，收益0%，止损103/目标135均未触及"
+    }
   ],
-  "newPositions": [],
-  "missedPositions": [],
+  "newPositions": [
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "entry": 39.78,
+      "target": 47.00,
+      "stop": 36.00,
+      "openedAt": "2026-02-03T18:02:00+08:00"
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "entry": 114.65,
+      "target": 135.00,
+      "stop": 103.00,
+      "openedAt": "2026-02-03T15:38:00+08:00"
+    }
+  ],
+  "closedPositions": [],
+  "missedOpportunities": [],
   "portfolioStats": {
     "totalPositions": 2,
     "avgPnl": 0,
     "winners": 0,
     "losers": 0,
-    "breakeven": 2
+    "availableSlots": 8
   },
-  "notes": "今日两只持仓均为当日开仓，watchlist中BUY推荐均已持仓，无新开仓"
+  "marketContext": {
+    "shanghai": { "index": 3250.12, "change_pct": 1.29 },
+    "shenzhen": { "index": 10521.36, "change_pct": 1.30 },
+    "chinext": { "index": 2156.78, "change_pct": 2.93 },
+    "sentiment": "bullish",
+    "hotSectors": ["黄金珠宝", "CPO概念", "光通信", "半导体设备", "海运", "风电"]
+  },
+  "notes": "今日两只持仓均为当日开仓。600988赤峰黄金和688002睿创微纳均为BUY推荐，high confidence。收盘评估均为HOLD，止损/目标均未触及。watchlist中无其他高置信度BUY推荐（8只WATCH），多数RPS过高或已涨停，不宜追涨。",
+  "finalCheck": "18:25",
+  "createdAt": "2026-02-03T18:25:00+08:00"
 }
