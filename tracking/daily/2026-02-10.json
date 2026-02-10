@@ -1,0 +1,58 @@
+{
+  "date": "2026-02-10",
+  "actions": [
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "action": "HOLD",
+      "price": 36.78,
+      "pnl_pct": -7.54,
+      "note": "距止损36.00仅2.2%，密切关注。持仓第6天(含春节假期)"
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "action": "HOLD",
+      "price": 115.48,
+      "pnl_pct": 0.72,
+      "note": "节后反弹回正+0.72%，thesis有效"
+    }
+  ],
+  "newPositions": [
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "entry": 55.39,
+      "target": 66.00,
+      "stop": 50.00,
+      "note": "BUY/high confidence, RPS91.2%, AI散热龙头, 业绩预告+64%~84%"
+    }
+  ],
+  "skippedCandidates": [
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "already_tracking",
+      "note": "已持有"
+    },
+    {
+      "code": "002487",
+      "name": "大金重工",
+      "reason": "rps_too_high",
+      "note": "RPS120=95.4%超出理想区间(80-92%), 虽10亮点1风险极突出但严格执行规则"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "avgPnl": -2.27,
+    "winners": 1,
+    "losers": 1,
+    "breakeven": 1
+  },
+  "marketContext": {
+    "shanghai": 4128.39,
+    "shanghai_pct": 0.13,
+    "sentiment": "neutral",
+    "note": "节后首个交易日，大盘窄幅震荡"
+  }
+}

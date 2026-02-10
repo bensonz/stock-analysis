@@ -1,0 +1,59 @@
+{
+  "date": "2026-02-05",
+  "marketSnapshot": {
+    "shanghai": -0.56,
+    "chinext": -1.56,
+    "sentiment": "bearish"
+  },
+  "actions": [
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "action": "HOLD",
+      "price": 36.68,
+      "entryPrice": 39.78,
+      "pnl_pct": -7.79,
+      "dayChange_pct": -4.8,
+      "stopLoss": 36.00,
+      "targetPrice": 47.00,
+      "note": "接近止损但未触及，密切关注"
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "action": "HOLD",
+      "price": 113.10,
+      "entryPrice": 114.65,
+      "pnl_pct": -1.35,
+      "dayChange_pct": -3.51,
+      "stopLoss": 103.00,
+      "targetPrice": 135.00,
+      "note": "市场普跌拖累，thesis有效"
+    }
+  ],
+  "newPositions": [],
+  "closedPositions": [],
+  "missedOpportunities": [],
+  "portfolioStats": {
+    "totalPositions": 2,
+    "avgPnl": -4.57,
+    "winners": 0,
+    "losers": 2,
+    "maxCapacity": 10,
+    "availableSlots": 8
+  },
+  "watchlistSummary": {
+    "buyRecommendations": 0,
+    "watchRecommendations": 8,
+    "avoidRecommendations": 2,
+    "marketCall": "观望",
+    "notes": "市场普跌，无高置信度BUY推荐，维持观望。已持仓600988赤峰黄金接近止损位需密切关注"
+  },
+  "decisionLog": [
+    "600988: 当前36.68距止损36.00仅0.68元(1.9%)，若明日继续下跌可能触发止损",
+    "688002: 跌幅-1.35%在可接受范围，止损103距当前113.10还有9%缓冲",
+    "新开仓: 今日watchlist无BUY推荐，市场bearish，不新开仓",
+    "关注: 赤峰黄金明日走势，若金价继续下跌需果断止损"
+  ],
+  "createdAt": "2026-02-05T14:03:00+08:00"
+}
