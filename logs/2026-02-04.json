@@ -1,0 +1,38 @@
+{
+  "date": "2026-02-04",
+  "runs": [
+    {
+      "agent": "researcher",
+      "label": "researcher-2026-02-04",
+      "startedAt": "2026-02-04T14:00:17+08:00",
+      "completedAt": "2026-02-04T14:03:52+08:00",
+      "durationMinutes": 3.5,
+      "status": "success",
+      "output": "扫描了66只股票，推荐0只，观望5只，回避3只",
+      "filesCreated": [
+        "watchlist/2026-02-04.json",
+        "reports/2026-02-04.md"
+      ],
+      "error": null
+    },
+    {
+      "agent": "tracker",
+      "label": "tracker-2026-02-04",
+      "startedAt": "2026-02-04T14:03:30+08:00",
+      "completedAt": "2026-02-04T14:06:31+08:00",
+      "durationMinutes": 2.0,
+      "status": "success",
+      "output": "2只持仓，0只卖出，0只新开",
+      "filesCreated": [
+        "tracking/daily/2026-02-04.json"
+      ],
+      "error": null
+    }
+  ],
+  "summary": {
+    "totalRuns": 2,
+    "successful": 2,
+    "failed": 0,
+    "totalDurationMinutes": 5.5
+  }
+}
