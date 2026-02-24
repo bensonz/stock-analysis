@@ -83,11 +83,11 @@ Spawn subagent with label "tracker-YYYY-MM-DD":
 
 **Handoff:** `tracking/*.json` updated, `tracking/daily/YYYY-MM-DD.json` created
 
-### Phase 3: Performance Analysis (Conditional)
-Run Analyst if ANY of these conditions:
-- Any position was closed today
-- It's Friday (weekly review)
-- >5 new closed positions since last analysis
+### Phase 3: Performance Analysis (Daily)
+The Analyst now runs EVERY day with different depth:
+- **Daily (always):** Missed opportunity analysis — check past watchlist recommendations we didn't buy and see how they performed
+- **When positions closed:** Post-mortem on closed trades
+- **Friday:** Full weekly review (stats, patterns, criteria updates)
 
 ```
 Spawn subagent with label "analyst-YYYY-MM-DD":
@@ -192,18 +192,7 @@ sessions_spawn:
 
 **After completion, update log** (same pattern as above)
 
-### Step 4: Check if Analyst Needed
-```bash
-# Count closed positions today
-CLOSED_TODAY=$(ls tracking/closed/*.json 2>/dev/null | wc -l)
-DAY_OF_WEEK=$(date +%u)  # 5 = Friday
-
-if [ $CLOSED_TODAY -gt 0 ] || [ $DAY_OF_WEEK -eq 5 ]; then
-  # Run Analyst
-fi
-```
-
-### Step 5: Spawn Analyst (if needed)
+### Step 4: Spawn Analyst (daily)
 ```
 sessions_spawn:
   task: |

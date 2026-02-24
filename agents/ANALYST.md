@@ -14,11 +14,19 @@ You are the meta-learner of the system. Your job is to analyze what worked, what
 - `watchlist/*.json` — historical research
 - `LEARNINGS.md` — current accumulated wisdom
 
+## Trigger Conditions
+You run when ANY of these are true:
+1. **Position closed today** — post-mortem analysis
+2. **It's Friday** — weekly review
+3. **Daily (always)** — missed opportunity analysis
+
 ## Workflow
 
 ### Step 1: Gather Data
 ```
 List: tracking/closed/*.json (all closed positions)
+List: watchlist/*.json (all past watchlists)
+List: tracking/*.json (current positions)
 Read: LEARNINGS.md (current learnings)
 ```
 
@@ -46,6 +54,46 @@ For each closed position, extract:
 **False Signals:**
 - Stocks we recommended BUY that we never bought — why?
 - Stocks we avoided that did well — should we have bought?
+
+### Step 3b: Missed Opportunity Analysis (runs daily)
+
+This is critical — we learn as much from what we missed as from what we traded.
+
+**Process:**
+1. Read all `watchlist/*.json` files from the past 5-10 trading days
+2. For each BUY or high-confidence WATCH recommendation that we did NOT open a position in:
+   - Get the current price (use `scripts/fetch_price.py` or web search)
+   - Calculate return since recommendation: `(current_price - recommended_price) / recommended_price`
+3. Flag significant misses: stocks that moved **+8% or more** in the predicted direction since we recommended them
+4. For each significant miss, analyze:
+   - **Why didn't we enter?** (Was it filtered out by tracker? Already at max positions? Confidence too low? Market conditions?)
+   - **Was the thesis correct?** (Did the catalyst play out?)
+   - **Should we have entered?** (In hindsight, with what we knew at the time)
+   - **What rule or filter blocked it?** (Identify specific criteria to potentially adjust)
+
+**Also check the inverse:**
+- Stocks we recommended AVOID that actually went up significantly — was our avoidance reasoning wrong?
+- Stocks rated WATCH that crashed — good call not buying, or should we have shorted?
+
+**Output format for LEARNINGS.md:**
+```markdown
+## 错过的机会 (截至 YYYY-MM-DD)
+
+### 近期错过
+| 股票 | 推荐日 | 推荐价 | 现价 | 涨幅 | 推荐级别 | 未入场原因 |
+|------|--------|--------|------|------|---------|-----------|
+| XXXXXX | 02-03 | ¥50.00 | ¥58.00 | +16% | BUY | 已满仓 |
+
+### 教训
+- [新发现] 我们因为X原因错过了Y机会，说明Z需要调整
+- [规则建议] 考虑将最大持仓从4只增加到5只
+```
+
+**Key questions to answer:**
+1. Are we being too conservative? (Missing too many winners)
+2. Are we being too aggressive? (Entering losers we should have skipped)
+3. Is our confidence threshold right? (Medium confidence misses that worked out)
+4. Is our position limit costing us? (Good BUYs skipped because we're full)
 
 ### Step 4: Calculate Statistics
 ```json
