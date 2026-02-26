@@ -1,31 +1,39 @@
 {
   "date": "2026-02-26",
   "actions": [
-    { "code": "300373", "name": "扬杰科技", "action": "HOLD", "price": 91.54, "pnl_pct": 6.36, "note": "第9天，半导体涨价催化持续，走势健康" },
-    { "code": "300684", "name": "中石科技", "action": "HOLD", "price": 59.91, "pnl_pct": 8.16, "note": "第12天，今日+5.75%大涨，英伟达+AI散热催化强劲" },
-    { "code": "600499", "name": "科达制造", "action": "HOLD", "price": 18.06, "pnl_pct": 3.32, "note": "第2天，海外建材+重组催化持续" },
-    { "code": "600988", "name": "赤峰黄金", "action": "HOLD", "price": 38.76, "pnl_pct": -2.56, "note": "第17天，黄金弱势，接近20天时间衰减阈值" },
-    { "code": "688002", "name": "睿创微纳", "action": "HOLD", "price": 117.99, "pnl_pct": 2.91, "note": "第17天，今日+2.60%终于突破横盘区间，关键信号" }
+    { "code": "300373", "name": "扬杰科技", "action": "HOLD", "price": 91.70, "pnl_pct": 6.54, "note": "第9天，半导体涨价+英伟达算力催化持续，今日+1.89%继续上行" },
+    { "code": "300684", "name": "中石科技", "action": "HOLD", "price": 59.89, "pnl_pct": 8.13, "note": "第12天，今日+5.72%大涨创新高60.7！英伟达+AI散热催化强劲，接近10%提止损阈值" },
+    { "code": "600096", "name": "云天化", "action": "OPEN", "price": 44.15, "pnl_pct": 0.23, "note": "今日开仓，磷化工龙头ROE25%，昨日涨9%跳过今日+1.96%入场" },
+    { "code": "600499", "name": "科达制造", "action": "HOLD", "price": 18.02, "pnl_pct": 3.09, "note": "第2天，今日+2.68%海外建材+重组催化持续" },
+    { "code": "600988", "name": "赤峰黄金", "action": "HOLD", "price": 38.81, "pnl_pct": -2.44, "note": "第17天，今日-0.99%继续弱势。⚠️接近20天时间衰减阈值(PnL<5%)" },
+    { "code": "688002", "name": "睿创微纳", "action": "HOLD", "price": 117.92, "pnl_pct": 2.85, "note": "第17天，今日+2.54%突破横盘区间！半导体设备板块带动，明日观察能否守116" }
   ],
   "newPositions": [
-    { "code": "600096", "name": "云天化", "entry": 44.05, "target": 52.00, "stop": 39.60, "note": "磷化工龙头ROE25%，昨日涨9%跳过今日+1.7%入场" }
+    { "code": "600096", "name": "云天化", "entry": 44.05, "target": 52.00, "stop": 39.60, "note": "磷化工龙头ROE25%，昨日涨9%跳过今日+1.96%入场" }
   ],
   "skippedPositions": [
-    { "code": "688630", "name": "芯碁微装", "reason": "BUY/high但今日+8.36%，执行>8%跳过规则，明日观察回调" }
+    { "code": "688630", "name": "芯碁微装", "reason": "BUY/medium但今日+7.99%，执行>8%跳过规则(接近阈值)，Q4净利+1522%超强催化，等回调至195以下" },
+    { "code": "001389", "name": "广合科技", "reason": "WATCH/low，今日涨停+10%，PCB概念，绝不追高" }
   ],
   "portfolioStats": {
     "totalPositions": 6,
-    "avgPnl": 3.10,
+    "avgPnl": 3.07,
     "winners": 5,
     "losers": 1,
-    "bestPerformer": { "code": "300684", "name": "中石科技", "pnl_pct": 8.16 },
-    "worstPerformer": { "code": "600988", "name": "赤峰黄金", "pnl_pct": -2.56 }
+    "bestPerformer": { "code": "300684", "name": "中石科技", "pnl_pct": 8.13 },
+    "worstPerformer": { "code": "600988", "name": "赤峰黄金", "pnl_pct": -2.44 }
   },
   "marketContext": {
-    "shanghai": -0.11,
-    "chinext": 0.98,
-    "sentiment": "结构性分化：AIDC/PCB/光纤大涨，传统板块偏弱",
-    "hotSectors": ["PCB +10%", "光纤光缆 +10%", "AIDC/算力 +16%", "磷化工 +7.8%"]
+    "shanghai": -0.07,
+    "shenzhen": 0.12,
+    "chinext": -0.38,
+    "sentiment": "neutral — 结构性分化，AI/PCB/光纤独强，涨跌比偏空",
+    "hotSectors": ["陶瓷 +3.54%", "飞机制造 +2.35%", "PCB/CPO(沪电+9.9%/润泽+17%)", "光纤(亨通+10%/中天+10%)"]
   },
-  "notes": "组合今日整体强势：中石科技+5.75%领涨，睿创微纳终于突破横盘。赤峰黄金持续弱势需密切关注时间衰减。新开云天化(磷化工龙头)，跳过芯碁微装(涨8%+)。价格来源：腾讯股票实时行情API(AkShare被proxy阻断)。"
+  "trackingPool": [
+    { "code": "688630", "name": "芯碁微装", "targetEntry": 195.0, "reason": "Q4净利+1522%，等回调" },
+    { "code": "603057", "name": "紫燕食品", "targetEntry": null, "reason": "新入选，需T+1研究" },
+    { "code": "001389", "name": "广合科技", "targetEntry": 106.0, "reason": "PCB概念龙头，等回调5-10%" }
+  ],
+  "notes": "组合今日强势：5胜1负，平均PnL +3.07%。中石科技+5.72%领涨(英伟达催化AI散热)。睿创微纳终于突破17天横盘区间。赤峰黄金持续弱势需密切监控20天时间衰减。新开云天化(磷化工龙头)。跳过芯碁微装(涨近8%)和广合科技(涨停)。价格来源：新浪财经实时行情(14:52)。"
 }
