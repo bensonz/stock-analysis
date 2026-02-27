@@ -1,0 +1,34 @@
+{
+  "date": "2026-02-27",
+  "marketContext": "周五市场分化：上证+0.32%,创业板-0.38%。稀土/钨/有色资源品暴涨,昨日AI/PCB催化退潮回调。周五缩量风格切换。",
+  "actions": [
+    { "code": "300373", "name": "扬杰科技", "action": "HOLD", "price": 87.23, "pnl_pct": 1.35, "today_pct": -4.78, "note": "半导体涨价thesis不变,回调属获利回吐" },
+    { "code": "300684", "name": "中石科技", "action": "HOLD", "price": 57.82, "pnl_pct": 4.39, "today_pct": -3.47, "note": "AI散热退潮正常回调,9亮点0风险thesis不变" },
+    { "code": "600096", "name": "云天化", "action": "HOLD", "price": 44.29, "pnl_pct": 0.54, "today_pct": -0.58, "note": "持仓第2天,磷化工平稳" },
+    { "code": "600499", "name": "科达制造", "action": "HOLD", "price": 18.00, "pnl_pct": 2.97, "today_pct": -0.06, "note": "走势稳健,横盘整固" },
+    { "code": "600988", "name": "赤峰黄金", "action": "HOLD", "price": 39.98, "pnl_pct": 0.50, "today_pct": 3.12, "note": "黄金反弹PnL回正,接近20天时间衰减阈值" },
+    { "code": "688002", "name": "睿创微纳", "action": "HOLD", "price": 117.04, "pnl_pct": 2.09, "today_pct": -0.63, "note": "昨日突破后今日小幅回落,守住116,下周关键" }
+  ],
+  "newPositions": [],
+  "closedPositions": [],
+  "trackingPool": [
+    { "code": "688630", "name": "芯碁微装", "price": 198.20, "targetEntry": 195.00, "status": "继续等回调,今日-1.64%但仍>195" },
+    { "code": "001389", "name": "广合科技", "targetEntry": 106.00, "status": "远超目标价,继续等" }
+  ],
+  "portfolioStats": {
+    "totalPositions": 6,
+    "avgPnl": 1.97,
+    "winners": 6,
+    "losers": 0,
+    "bestPerformer": { "code": "300684", "name": "中石科技", "pnl_pct": 4.39 },
+    "worstPerformer": { "code": "600988", "name": "赤峰黄金", "pnl_pct": 0.50 },
+    "totalPnlIfEqualWeight": 1.97
+  },
+  "riskAlerts": [
+    "600988 赤峰黄金: 持仓18天,PnL仅+0.50%,接近20天时间衰减阈值(T+2个交易日)",
+    "688002 睿创微纳: 持仓18天,PnL仅+2.09%,横盘突破待确认",
+    "300373 扬杰科技: 今日-4.78%大幅回调,PnL从+6.36%缩至+1.35%"
+  ],
+  "weekendNotes": "下周关注: (1) 赤峰黄金是否在20天内PnL达5%,否则考虑退出 (2) 睿创微纳横盘突破能否确认 (3) 扬杰科技回调后能否企稳 (4) 芯碁微装是否回调至195以下开仓机会",
+  "generatedAt": "2026-02-27T14:48:00+08:00"
+}
