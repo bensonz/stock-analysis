@@ -1,7 +1,7 @@
 {
   "code": "600988",
   "name": "赤峰黄金",
-  "status": "active",
+  "status": "closed",
   "thesis": "黄金矿企龙头，RPS120=88.4%在理想区间，金价创历史新高带来业绩弹性，6亮点/1风险，黄金板块持续走强",
   "entryDate": "2026-02-03",
   "entryPrice": 39.78,
@@ -107,15 +107,22 @@
       "change_pct": 0.5,
       "action": "HOLD",
       "note": "持仓第18个交易日：今日+3.12%黄金板块强势反弹！现价39.98，总PnL从-2.56%翻正至+0.50%。止损36.00(距9.9%)/目标47.00均未触及。接近20天时间衰减阈值(T+2)，但今日金价走强PnL回正。如下周PnL仍<5%需考虑退出。继续持有"
+    },
+    {
+      "date": "2026-02-27",
+      "price": 39.98,
+      "change_pct": 0.5,
+      "action": "SELL",
+      "note": "时间止损退出: 持仓24天(>20天阈值),PnL仅+0.50%(<5%阈值),触发time_decay规则。黄金板块波动率过高,24天内PnL在-7.79%~+3.92%间剧烈波动,无法形成稳定盈利趋势。今日黄金反弹PnL刚回正是最佳退出窗口。"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-02-27",
+  "exitPrice": 39.98,
+  "exitReason": "time_decay",
+  "returnPct": 0.5,
+  "holdingDays": 24,
+  "lessonLearned": "黄金股波动率极高(PnL从-7.79%到+3.92%再到+0.50%),持仓24天无明显趋势方向。LEARNINGS已确认黄金股不适合趋势交易。此外当watchlist评级从BUY降至WATCH后应更早考虑退出,不应等到时间止损才行动。",
   "createdAt": "2026-02-03T18:02:00+08:00",
-  "updatedAt": "2026-02-27T14:54:42.150063",
+  "updatedAt": "2026-02-27T15:10:39.384534",
   "trackerVersion": "2.0"
 }
