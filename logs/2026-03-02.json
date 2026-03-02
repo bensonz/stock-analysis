@@ -16,28 +16,13 @@
       "error": null
     },
     {
-      "agent": "researcher",
-      "label": "researcher-2026-03-02",
-      "startedAt": "2026-03-02T15:09:00+08:00",
-      "completedAt": "2026-03-02T15:24:17+08:00",
-      "durationMinutes": 15.0,
-      "status": "success",
-      "output": "扫描了16只策略股(小市值-无20RP)，推荐0只BUY，观望4只WATCH，回避1只AVOID",
-      "filesCreated": [
-        "watchlist/2026-03-02.json",
-        "reports/2026-03-02.md",
-        "data/crawl/2026-03-02.json"
-      ],
-      "error": null
-    },
-    {
       "agent": "tracker",
       "label": "tracker-2026-03-02",
-      "startedAt": "2026-03-02T15:24:00+08:00",
-      "completedAt": "2026-03-02T15:28:00+08:00",
-      "durationMinutes": 4.0,
+      "startedAt": "2026-03-02T15:21:04+0800",
+      "completedAt": "2026-03-02T15:26:46+0800",
+      "durationMinutes": 5.7,
       "status": "success",
-      "output": "5只持仓全HOLD，无新开仓，无平仓。赤峰黄金已于02-27平仓。",
+      "output": "6只持仓，卖出0只，新开1只(芯碁微装)。组合均PnL+1.67%",
       "filesCreated": [
         "tracking/daily/2026-03-02.json"
       ],
@@ -46,11 +31,11 @@
     {
       "agent": "analyst",
       "label": "analyst-2026-03-02",
-      "startedAt": "2026-03-02T15:28:00+08:00",
-      "completedAt": "2026-03-02T15:28:45+08:00",
-      "durationMinutes": 5.0,
+      "startedAt": "2026-03-02T15:31:49+0800",
+      "completedAt": "2026-03-02T15:35:44+0800",
+      "durationMinutes": 3.9,
       "status": "success",
-      "output": "错过8只>8%机会（大族激光+51.7%最大），新增2条教训（地缘政治传导+风格切换影响）",
+      "output": "赤峰黄金专项复盘(错失9.89pp)，分析25只未入场推荐，新增4条经验",
       "filesCreated": [],
       "error": null
     }
@@ -59,6 +44,6 @@
     "totalRuns": 3,
     "successful": 3,
     "failed": 0,
-    "totalDurationMinutes": 24
+    "totalDurationMinutes": 28.1
   }
 }

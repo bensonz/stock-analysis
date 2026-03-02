@@ -69,6 +69,17 @@ Review watchlist candidates (today's + recent days if nothing compelling today):
 - Risk/reward >= 1:2
 - Portfolio has room (max 10 positions)
 - **NOT at 涨停 (limit up)** — cannot buy if stock hit +10% limit
+- **NOT extended** — check 5-day cumulative gain and MA10 deviation (see below)
+
+**多日超买检查 (CRITICAL):**
+Before opening ANY position, fetch 10-day history:
+```bash
+python scripts/fetch_price.py CODE
+```
+Then check:
+1. **5日累计涨幅 >12%** → SKIP, wait for pullback. "今天只涨1%"不代表安全，要看近5天完整走势。
+2. **股价偏离MA10 >10%** → SKIP, wait for pullback to MA10 area.
+满足任一条件即跳过，加入跟踪池等回调。记录: "多日涨幅超买，等回调至MA10附近"
 
 **涨停检查 (CRITICAL):**
 Before opening ANY position, check if stock is at 涨停:
@@ -141,6 +152,38 @@ Create `tracking/daily/YYYY-MM-DD.json`:
 ```
 
 ### Step 6: Commit
+### Step 7: Update positions.json Summary
+After ALL position changes (sells, opens, updates), regenerate `tracking/positions.json` from the active tracking files. This is the single source of truth for the portfolio summary.
+
+```python
+import json, os, glob
+from datetime import datetime
+
+positions = []
+for f in sorted(glob.glob('/Users/bz/Work/Personal/stock-analysis/tracking/*.json')):
+    if os.path.basename(f) == 'positions.json':
+        continue
+    with open(f) as fh:
+        d = json.load(fh)
+    if d.get('status') == 'closed':
+        continue
+    positions.append({
+        'code': d['code'], 'name': d['name'],
+        'entryDate': d['entryDate'], 'entryPrice': d['entryPrice'],
+        'currentPrice': d.get('currentPrice', d['entryPrice']),
+        'pnl_pct': round(((d.get('currentPrice', d['entryPrice']) - d['entryPrice']) / d['entryPrice']) * 100, 2),
+        'stopLoss': d.get('stopLoss'), 'currentStop': d.get('currentStop'),
+        'targetPrice': d.get('targetPrice'), 'status': 'active', 'sector': d.get('sector', '')
+    })
+
+with open('/Users/bz/Work/Personal/stock-analysis/tracking/positions.json', 'w') as f:
+    json.dump({'lastUpdated': datetime.now().astimezone().isoformat(), 'activePositions': positions}, f, indent=2, ensure_ascii=False)
+print(f'positions.json updated: {len(positions)} active')
+```
+
+**CRITICAL:** Always run this AFTER moving any files to `closed/` and AFTER opening new positions. The reporter reads this file.
+
+### Step 8: Git Commit
 ```bash
 cd /Users/bz/Work/Personal/stock-analysis
 git add tracking/

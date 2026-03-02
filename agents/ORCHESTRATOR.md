@@ -237,7 +237,7 @@ print(f"✅ Logged {len(log['runs'])} agent runs, total {total_duration:.1f} min
 EOF
 ```
 
-Send Telegram summary:
+Print the summary to stdout (no external delivery needed):
 ```
 📊 A股分析系统 YYYY-MM-DD
 
@@ -245,9 +245,6 @@ Send Telegram summary:
 📈 持仓: X只，+X只，-X只，平均盈亏X%
 🧠 分析: [已运行/跳过]
 ⏱️ 总耗时: XX分钟
-
-详情: reports/YYYY-MM-DD.md
-日志: logs/YYYY-MM-DD.json
 ```
 
 ## File Structure
