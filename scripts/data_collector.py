@@ -280,7 +280,10 @@ def fetch_market_overview() -> dict:
 
 
 def fetch_position_prices(positions: list[dict]) -> dict:
-    """Fetch current prices for active positions using AkShare.
+    """Fetch current prices for active positions.
+
+    Tries AkShare (Eastmoney) first; falls back to CheeseForTune kline API
+    for any stocks that fail (Eastmoney push2 servers are unreliable).
 
     Args:
         positions: List of position dicts with "code" key.
@@ -291,42 +294,79 @@ def fetch_position_prices(positions: list[dict]) -> dict:
     if not positions:
         return {}
 
+    prices = {}
+    failed_codes = []
+
+    # Try AkShare first
     try:
         import akshare as ak
+        for pos in positions:
+            code = pos["code"].split(".")[0]
+            try:
+                end_date = datetime.now().strftime("%Y%m%d")
+                start_date = (datetime.now() - timedelta(days=10)).strftime("%Y%m%d")
+                df = ak.stock_zh_a_hist(
+                    symbol=code, period="daily",
+                    start_date=start_date, end_date=end_date,
+                )
+                if df is not None and not df.empty:
+                    latest = df.iloc[-1]
+                    prev = df.iloc[-2] if len(df) > 1 else latest
+                    prices[code] = {
+                        "code": code,
+                        "name": pos.get("name", ""),
+                        "date": str(latest["日期"]),
+                        "price": float(latest["收盘"]),
+                        "open": float(latest["开盘"]),
+                        "high": float(latest["最高"]),
+                        "low": float(latest["最低"]),
+                        "prev_close": float(prev["收盘"]),
+                        "change_pct": float(latest["涨跌幅"]),
+                        "volume": int(latest["成交量"]),
+                        "amount": float(latest["成交额"]),
+                        "turnover_rate": float(latest["换手率"]),
+                        "source": "akshare",
+                    }
+                else:
+                    failed_codes.append(pos)
+            except Exception:
+                failed_codes.append(pos)
     except ImportError:
-        return {p["code"]: {"error": "akshare not installed"} for p in positions}
+        failed_codes = list(positions)
 
-    prices = {}
-    for pos in positions:
-        code = pos["code"].split(".")[0]
+    # Fallback: CheeseForTune kline API for failures
+    if failed_codes:
+        print(f"  AkShare failed for {len(failed_codes)} stocks, trying CheeseForTune kline...", file=sys.stderr)
         try:
-            end_date = datetime.now().strftime("%Y%m%d")
-            start_date = (datetime.now() - timedelta(days=10)).strftime("%Y%m%d")
-            df = ak.stock_zh_a_hist(
-                symbol=code, period="daily",
-                start_date=start_date, end_date=end_date,
-            )
-            if df is not None and not df.empty:
-                latest = df.iloc[-1]
-                prev = df.iloc[-2] if len(df) > 1 else latest
-                prices[code] = {
-                    "code": code,
-                    "name": pos.get("name", ""),
-                    "date": str(latest["日期"]),
-                    "price": float(latest["收盘"]),
-                    "open": float(latest["开盘"]),
-                    "high": float(latest["最高"]),
-                    "low": float(latest["最低"]),
-                    "prev_close": float(prev["收盘"]),
-                    "change_pct": float(latest["涨跌幅"]),
-                    "volume": int(latest["成交量"]),
-                    "amount": float(latest["成交额"]),
-                    "turnover_rate": float(latest["换手率"]),
-                }
-            else:
-                prices[code] = {"code": code, "error": "No data"}
+            client = CheeseFortuneClient()
+            for pos in failed_codes:
+                code = pos["code"].split(".")[0]
+                cf_code = normalize_code(code)
+                try:
+                    kline = client.get_kline(cf_code, days=5)
+                    if kline and len(kline) > 0:
+                        # kline data: list of [date, close, volume, amount, time, null]
+                        latest = kline[-1]
+                        prev = kline[-2] if len(kline) > 1 else latest
+                        price = float(latest[1]) if len(latest) > 1 else 0
+                        prev_price = float(prev[1]) if len(prev) > 1 else price
+                        change_pct = round((price - prev_price) / prev_price * 100, 2) if prev_price else 0
+                        prices[code] = {
+                            "code": code,
+                            "name": pos.get("name", ""),
+                            "date": str(latest[0]) if latest[0] else "",
+                            "price": price,
+                            "change_pct": change_pct,
+                            "source": "cheesefortune_kline",
+                        }
+                    else:
+                        prices[code] = {"code": code, "error": "No kline data"}
+                except Exception as e:
+                    prices[code] = {"code": code, "error": f"kline fallback: {e}"}
         except Exception as e:
-            prices[code] = {"code": code, "error": str(e)}
+            for pos in failed_codes:
+                code = pos["code"].split(".")[0]
+                prices[code] = {"code": code, "error": f"all sources failed: {e}"}
 
     return prices
 
@@ -334,17 +374,14 @@ def fetch_position_prices(positions: list[dict]) -> dict:
 def fetch_missed_opportunity_prices(recent_watchlists: list[dict]) -> list[dict]:
     """Get current prices for past recommendations to check missed opportunities.
 
+    Tries AkShare first, falls back to CheeseForTune kline for failures.
+
     Args:
         recent_watchlists: List of watchlist dicts (loaded from watchlist/*.json)
 
     Returns:
         List of dicts with code, recommended_date, recommended_price, current_price, return_pct.
     """
-    try:
-        import akshare as ak
-    except ImportError:
-        return []
-
     # Collect unique codes from recommendations (excluding AVOID)
     seen = set()
     candidates = []
@@ -366,29 +403,28 @@ def fetch_missed_opportunity_prices(recent_watchlists: list[dict]) -> list[dict]
                 "recommendation": recommendation,
             })
 
-    # Fetch current prices
+    if not candidates:
+        return []
+
+    # Fetch current prices — use fetch_position_prices which has fallback
+    price_data = fetch_position_prices(
+        [{"code": c["code"], "name": c.get("name", "")} for c in candidates]
+    )
+
     results = []
     for c in candidates:
-        try:
-            end_date = datetime.now().strftime("%Y%m%d")
-            start_date = (datetime.now() - timedelta(days=10)).strftime("%Y%m%d")
-            df = ak.stock_zh_a_hist(
-                symbol=c["code"], period="daily",
-                start_date=start_date, end_date=end_date,
-            )
-            if df is not None and not df.empty:
-                current_price = float(df.iloc[-1]["收盘"])
-                rec_price = c["recommended_price"]
-                return_pct = round((current_price - rec_price) / rec_price * 100, 2) if rec_price else 0
-                results.append({
-                    **c,
-                    "current_price": current_price,
-                    "return_pct": return_pct,
-                })
-            else:
-                results.append({**c, "current_price": None, "return_pct": None})
-        except Exception as e:
-            results.append({**c, "current_price": None, "return_pct": None, "error": str(e)})
+        code = c["code"]
+        pd = price_data.get(code, {})
+        current_price = pd.get("price")
+        rec_price = c["recommended_price"]
+        return_pct = None
+        if current_price and rec_price:
+            return_pct = round((current_price - rec_price) / rec_price * 100, 2)
+        results.append({
+            **c,
+            "current_price": current_price,
+            "return_pct": return_pct,
+        })
 
     return results
 
