@@ -93,40 +93,62 @@ def fetch_strategy_pool(strategy_id: str = "352390") -> dict:
 def _fetch_strategy_api(strategy_id: str) -> Optional[list[dict]]:
     """Try to fetch strategy stock list from CheeseForTune API.
 
-    Uses the strategy detail API endpoint (reverse-engineered).
-    Returns list of stock dicts or None if endpoint doesn't work.
+    Uses /api/v2/userSelectStrategy/info/{strategyId}.
+    Returns array of arrays: [code.exchange, name, date, highlights, mcap, pe, risks, rps120, rps250, rps20, rps60]
     """
     client = CheeseFortuneClient()
-    # Try the strategy stock list endpoint
-    url = f"{client.BASE_URL}/api/v3/stockP/strategyStockList?strategyId={strategy_id}"
+    url = f"{client.BASE_URL}/api/v2/userSelectStrategy/info/{strategy_id}"
     try:
         result = client._request(url)
         if result.get("code") == "000" and result.get("datas"):
-            raw_stocks = result["datas"]
-            if isinstance(raw_stocks, list):
-                return _parse_strategy_stocks(raw_stocks)
-            # Sometimes datas is a dict with a stocks key
-            if isinstance(raw_stocks, dict) and "stocks" in raw_stocks:
-                return _parse_strategy_stocks(raw_stocks["stocks"])
-    except Exception:
-        pass
-
-    # Try alternative endpoint
-    url = f"{client.BASE_URL}/api/v2/strategy/stockList?strategyId={strategy_id}"
-    try:
-        result = client._request(url)
-        if result.get("code") == "000" and result.get("datas"):
-            raw_stocks = result["datas"]
-            if isinstance(raw_stocks, list):
-                return _parse_strategy_stocks(raw_stocks)
+            datas = result["datas"]
+            raw_list = datas.get("list", []) if isinstance(datas, dict) else datas
+            if isinstance(raw_list, list) and len(raw_list) > 0:
+                # Each item is an array: [code.exchange, name, date, highlights, mcap, pe, risks, rps120, rps250, rps20, rps60]
+                return _parse_strategy_array(raw_list)
     except Exception:
         pass
 
     return None
 
 
+def _parse_strategy_array(raw: list) -> list[dict]:
+    """Parse strategy API response (array of arrays) into normalized stock dicts.
+    
+    Each item: [code.exchange, name, date, highlights, mcap, pe, risks, rps120, rps250, rps20, rps60]
+    Example: ["002270.SZ", "华明装备", "2026/03/02", 7, 320.22, 10.1, 1, 93.96, 91.02, 72.81, 86.31]
+    """
+    stocks = []
+    for item in raw:
+        if not isinstance(item, list) or len(item) < 2:
+            continue
+        code_full = str(item[0])  # e.g. "002270.SZ"
+        code = code_full.split(".")[0]
+        stock: dict = {
+            "code": code,
+            "code_full": code_full,
+            "name": item[1] if len(item) > 1 else "",
+            "date": item[2] if len(item) > 2 else "",
+            "highlights_count": item[3] if len(item) > 3 else 0,
+            "market_cap": item[4] if len(item) > 4 else None,
+            "pe": item[5] if len(item) > 5 else None,
+            "risks_count": item[6] if len(item) > 6 else 0,
+        }
+        # RPS values (indices 7-10)
+        if len(item) > 7 and item[7] is not None:
+            stock["rps120"] = float(item[7])
+        if len(item) > 8 and item[8] is not None:
+            stock["rps250"] = float(item[8])
+        if len(item) > 9 and item[9] is not None:
+            stock["rps20"] = float(item[9])
+        if len(item) > 10 and item[10] is not None:
+            stock["rps60"] = float(item[10])
+        stocks.append(stock)
+    return stocks
+
+
 def _parse_strategy_stocks(raw: list) -> list[dict]:
-    """Parse raw API response into normalized stock dicts."""
+    """Parse raw API response (dict items) into normalized stock dicts."""
     stocks = []
     for item in raw:
         stock = {
