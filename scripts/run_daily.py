@@ -19,6 +19,7 @@ import os
 import subprocess
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
 
@@ -57,12 +58,18 @@ LLM_PROMPT_END = "=== LLM_PROMPT_END ==="
 
 
 def phase1_collect(date: str) -> dict:
-    """Phase 1: Collect all data. Pure Python, no LLM."""
+    """Phase 1: Collect all data. Pure Python, no LLM.
+
+    Runs independent tasks in parallel:
+      - Strategy pool fetch (fast, ~5s) runs first since enrichment depends on it
+      - Then enrichment, market, positions, and watchlists run concurrently
+    """
     log = {"phase": "collect", "start": time.time(), "errors": []}
     data = {"date": date}
 
-    # 1. Strategy pool from CheeseForTune
     print("Phase 1: Collecting data...", file=sys.stderr)
+
+    # Step 1: Strategy pool (must complete before enrichment can start)
     print("  [1/5] Fetching strategy pool...", file=sys.stderr)
     try:
         data["strategy_pool"] = fetch_strategy_pool()
@@ -72,57 +79,71 @@ def phase1_collect(date: str) -> dict:
         data["strategy_pool"] = {"error": str(e), "stocks": []}
         log["errors"].append(f"strategy_pool: {e}")
 
-    # 2. Enrich stocks in RPS 75-95% zone
-    print("  [2/5] Enriching candidates...", file=sys.stderr)
-    try:
-        pool_stocks = data["strategy_pool"].get("stocks", [])
-        candidates = [
-            s for s in pool_stocks
-            if s.get("rps120") and 75 <= float(s["rps120"]) <= 95
-        ]
-        print(f"    → {len(candidates)} in RPS 75-95% zone", file=sys.stderr)
-        data["enriched"] = batch_enrich(candidates)
-        print(f"    → {len(data['enriched'])} enriched", file=sys.stderr)
-    except Exception as e:
-        data["enriched"] = []
-        log["errors"].append(f"enrich: {e}")
+    # Load positions and watchlists synchronously (instant, local files)
+    positions = load_active_positions()
+    data["positions"] = positions
+    data["positions_count"] = len(positions)
+    data["recent_watchlists"] = load_recent_watchlists(days=5)
 
-    # 3. Market overview
-    print("  [3/5] Fetching market overview...", file=sys.stderr)
-    try:
-        data["market"] = fetch_market_overview()
-        save_market_data(date, data["market"])
-    except Exception as e:
-        data["market"] = {"error": str(e)}
-        log["errors"].append(f"market: {e}")
+    # Prepare enrichment candidates
+    pool_stocks = data["strategy_pool"].get("stocks", [])
+    candidates = [
+        s for s in pool_stocks
+        if s.get("rps120") and 75 <= float(s["rps120"]) <= 95
+    ]
+    print(f"    → {len(candidates)} in RPS 75-95% zone", file=sys.stderr)
 
-    # 4. Position prices
-    print("  [4/5] Fetching position prices...", file=sys.stderr)
-    try:
-        positions = load_active_positions()
-        data["positions"] = positions
-        data["positions_count"] = len(positions)
-        data["position_prices"] = fetch_position_prices(positions)
-        save_price_data(date, data["position_prices"])
+    # Steps 2-5: Run in parallel (different APIs, no shared rate limits)
+    def _enrich():
+        print("  [2/5] Enriching candidates...", file=sys.stderr)
+        result = batch_enrich(candidates)
+        print(f"    → {len(result)} enriched", file=sys.stderr)
+        return "enriched", result
+
+    def _market():
+        print("  [3/5] Fetching market overview...", file=sys.stderr)
+        result = fetch_market_overview()
+        save_market_data(date, result)
+        return "market", result
+
+    def _prices():
+        print("  [4/5] Fetching position prices...", file=sys.stderr)
+        result = fetch_position_prices(positions)
+        save_price_data(date, result)
         print(f"    → {len(positions)} active positions", file=sys.stderr)
-    except Exception as e:
-        data["positions"] = []
-        data["position_prices"] = {}
-        log["errors"].append(f"position_prices: {e}")
+        return "position_prices", result
 
-    # 5. Recent watchlists (for missed opportunity analysis)
-    print("  [5/5] Loading recent watchlists...", file=sys.stderr)
-    try:
-        data["recent_watchlists"] = load_recent_watchlists(days=5)
-        data["missed_opportunity_prices"] = fetch_missed_opportunity_prices(
-            data["recent_watchlists"]
-        )
-    except Exception as e:
-        data["recent_watchlists"] = []
-        data["missed_opportunity_prices"] = []
-        log["errors"].append(f"watchlists: {e}")
+    def _missed():
+        print("  [5/5] Fetching missed opportunity prices...", file=sys.stderr)
+        result = fetch_missed_opportunity_prices(data["recent_watchlists"])
+        return "missed_opportunity_prices", result
 
-    # 6. Learnings
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        futures = {
+            executor.submit(_enrich): "enrich",
+            executor.submit(_market): "market",
+            executor.submit(_prices): "position_prices",
+            executor.submit(_missed): "watchlists",
+        }
+        for future in as_completed(futures):
+            task_name = futures[future]
+            try:
+                key, result = future.result()
+                data[key] = result
+            except Exception as e:
+                log["errors"].append(f"{task_name}: {e}")
+                print(f"    ✗ {task_name} failed: {e}", file=sys.stderr)
+                # Set defaults for failed tasks
+                if task_name == "enrich":
+                    data["enriched"] = []
+                elif task_name == "market":
+                    data["market"] = {"error": str(e)}
+                elif task_name == "position_prices":
+                    data["position_prices"] = {}
+                elif task_name == "watchlists":
+                    data["missed_opportunity_prices"] = []
+
+    # Learnings (local file, instant)
     learnings_file = PROJECT_ROOT / "LEARNINGS.md"
     if learnings_file.exists():
         data["learnings"] = learnings_file.read_text(encoding="utf-8")
