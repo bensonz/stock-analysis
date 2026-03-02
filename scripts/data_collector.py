@@ -13,6 +13,7 @@ All functions return dicts, handle errors gracefully, never crash.
 """
 
 import json
+import os
 import sys
 import time
 import urllib.request
