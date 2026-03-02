@@ -1,0 +1,50 @@
+{
+  "date": "2026-02-13",
+  "runs": [
+    {
+      "agent": "researcher",
+      "label": "researcher-2026-02-13",
+      "startedAt": "2026-02-13T14:00:00+08:00",
+      "completedAt": "2026-02-13T14:17:16+08:00",
+      "durationMinutes": 17.3,
+      "status": "success",
+      "output": "扫描78只股票，推荐2只(中石科技、扬杰科技)，观望5只",
+      "filesCreated": [
+        "watchlist/2026-02-13.json",
+        "reports/2026-02-13.md"
+      ],
+      "error": null
+    },
+    {
+      "agent": "tracker",
+      "label": "tracker-2026-02-13",
+      "startedAt": "2026-02-13T14:17:00+08:00",
+      "completedAt": "2026-02-13T14:21:10+08:00",
+      "durationMinutes": 4.2,
+      "status": "success",
+      "output": "4只持仓，0卖出，1新开(扬杰科技300373)",
+      "filesCreated": [
+        "tracking/daily/2026-02-13.json",
+        "tracking/300373.json"
+      ],
+      "error": null
+    },
+    {
+      "agent": "analyst",
+      "label": "analyst-2026-02-13",
+      "startedAt": "2026-02-13T14:22:00+08:00",
+      "completedAt": "2026-02-13T14:23:22+08:00",
+      "durationMinutes": 1.4,
+      "status": "success",
+      "output": "分析4只活跃持仓，本周组合-0.47%，新增8条经验",
+      "filesCreated": [],
+      "error": null
+    }
+  ],
+  "summary": {
+    "totalRuns": 3,
+    "successful": 3,
+    "failed": 0,
+    "totalDurationMinutes": 22.9
+  }
+}

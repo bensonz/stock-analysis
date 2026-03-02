@@ -1,0 +1,50 @@
+{
+  "date": "2026-02-26",
+  "runs": [
+    {
+      "agent": "researcher",
+      "label": "researcher-2026-02-26",
+      "startedAt": "2026-02-26T14:35:53+08:00",
+      "completedAt": "2026-02-26T14:46:00+08:00",
+      "durationMinutes": 10.3,
+      "status": "success",
+      "output": "扫描了86只股票，推荐4只BUY，观望5只WATCH，回避3只AVOID",
+      "filesCreated": [
+        "watchlist/2026-02-26.json",
+        "reports/2026-02-26.md",
+        "data/crawl/2026-02-26.json"
+      ],
+      "error": null
+    },
+    {
+      "agent": "tracker",
+      "label": "tracker-2026-02-26",
+      "startedAt": "2026-02-26T14:46:10+08:00",
+      "completedAt": "2026-02-26T14:51:00+08:00",
+      "durationMinutes": 5.2,
+      "status": "success",
+      "output": "6只持仓，卖出0只，新开1只(云天化600096)",
+      "filesCreated": [
+        "tracking/daily/2026-02-26.json"
+      ],
+      "error": null
+    },
+    {
+      "agent": "analyst",
+      "label": "analyst-2026-02-26",
+      "startedAt": "2026-02-26T14:51:10+08:00",
+      "completedAt": "2026-02-26T14:56:00+08:00",
+      "durationMinutes": 4.2,
+      "status": "success",
+      "output": "错过2个机会(大族激光+41.8%最大)，新增3条经验+2条假设",
+      "filesCreated": [],
+      "error": null
+    }
+  ],
+  "summary": {
+    "totalRuns": 3,
+    "successful": 3,
+    "failed": 0,
+    "totalDurationMinutes": 19.7
+  }
+}

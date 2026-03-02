@@ -1,0 +1,40 @@
+{
+  "date": "2026-03-02",
+  "runs": [
+    {
+      "agent": "researcher",
+      "label": "researcher-2026-03-02",
+      "startedAt": "2026-03-02T14:59:20+0800",
+      "completedAt": "2026-03-02T15:17:50+0800",
+      "durationMinutes": 18.5,
+      "status": "success",
+      "output": "扫描85只股票，推荐3只BUY/10只WATCH。赤峰黄金涨停+9.99%，组合均PnL+4.19%",
+      "filesCreated": [
+        "watchlist/2026-03-02.json",
+        "reports/2026-03-02.md"
+      ],
+      "error": null
+    },
+    {
+      "agent": "researcher",
+      "label": "researcher-2026-03-02",
+      "startedAt": "2026-03-02T15:09:00+08:00",
+      "completedAt": "2026-03-02T15:24:17+08:00",
+      "durationMinutes": 15.0,
+      "status": "success",
+      "output": "扫描了16只策略股(小市值-无20RP)，推荐0只BUY，观望4只WATCH，回避1只AVOID",
+      "filesCreated": [
+        "watchlist/2026-03-02.json",
+        "reports/2026-03-02.md",
+        "data/crawl/2026-03-02.json"
+      ],
+      "error": null
+    }
+  ],
+  "summary": {
+    "totalRuns": 1,
+    "successful": 1,
+    "failed": 0,
+    "totalDurationMinutes": 0
+  }
+}

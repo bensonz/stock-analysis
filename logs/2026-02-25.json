@@ -1,0 +1,52 @@
+{
+  "date": "2026-02-25",
+  "runs": [
+    {
+      "agent": "researcher",
+      "label": "researcher-2026-02-25",
+      "startedAt": "2026-02-25T14:15:00+08:00",
+      "completedAt": "2026-02-25T14:14:00+08:00",
+      "durationMinutes": 6.0,
+      "status": "success",
+      "output": "扫描了81只股票，推荐3只BUY，观望7只WATCH",
+      "filesCreated": [
+        "watchlist/2026-02-25.json",
+        "reports/2026-02-25.md"
+      ],
+      "error": null
+    },
+    {
+      "agent": "tracker",
+      "label": "tracker-2026-02-25",
+      "startedAt": "2026-02-25T14:21:00+08:00",
+      "completedAt": "2026-02-25T14:24:00+08:00",
+      "durationMinutes": 2.3,
+      "status": "success",
+      "output": "5只持仓，卖出0只，新开1只(科达制造)",
+      "filesCreated": [
+        "tracking/daily/2026-02-25.json",
+        "tracking/600499.json"
+      ],
+      "error": null
+    },
+    {
+      "agent": "analyst",
+      "label": "analyst-2026-02-25",
+      "startedAt": "2026-02-25T14:24:00+08:00",
+      "completedAt": "2026-02-25T14:29:00+08:00",
+      "durationMinutes": 4.7,
+      "status": "success",
+      "output": "错过1个机会(华懋科技+9.2%)，新增3条经验+2条假设",
+      "filesCreated": [
+        "LEARNINGS.md"
+      ],
+      "error": null
+    }
+  ],
+  "summary": {
+    "totalRuns": 3,
+    "successful": 3,
+    "failed": 0,
+    "totalDurationMinutes": 13.0
+  }
+}
