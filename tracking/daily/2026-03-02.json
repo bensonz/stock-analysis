@@ -1,21 +1,75 @@
 {
   "date": "2026-03-02",
   "actions": [
-    { "code": "300373", "action": "HOLD", "price": 85.61, "pnl_pct": -0.53 },
-    { "code": "300684", "action": "HOLD", "price": 58.06, "pnl_pct": 4.82 },
-    { "code": "600096", "action": "HOLD", "price": 43.99, "pnl_pct": -0.14 },
-    { "code": "600499", "action": "HOLD", "price": 17.68, "pnl_pct": 1.14 },
-    { "code": "688002", "action": "HOLD", "price": 120.09, "pnl_pct": 4.75 }
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "action": "HOLD",
+      "price": 58.06,
+      "pnl_pct": 4.82,
+      "note": "+0.47%窄幅整理，BUY/high确认，走势稳定"
+    },
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "action": "HOLD",
+      "price": 85.61,
+      "pnl_pct": -0.53,
+      "note": "-2.05%继续回调，半导体板块今日偏冷，PnL转负但thesis不变"
+    },
+    {
+      "code": "600096",
+      "name": "云天化",
+      "action": "HOLD",
+      "price": 43.99,
+      "pnl_pct": -0.14,
+      "note": "-0.86%微跌，化工板块分化，中东冲突利好油化工但磷化工影响有限"
+    },
+    {
+      "code": "600499",
+      "name": "科达制造",
+      "action": "HOLD",
+      "price": 17.68,
+      "pnl_pct": 1.14,
+      "note": "-1.72%小幅回调，watchlist升级至BUY/high，重组+海外建材+碳酸锂三驱动"
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "action": "HOLD",
+      "price": 120.09,
+      "pnl_pct": 4.75,
+      "note": "+2.81%突破¥120关口！延期观察第1天，PnL接近5%阈值，中东冲突利好军工/红外"
+    }
   ],
-  "newPositions": [],
-  "closedPositions": [],
-  "portfolioStats": {
-    "totalPositions": 5,
-    "avgPnl": 2.01,
-    "winners": 3,
-    "losers": 2,
-    "bestPerformer": "300684 中石科技 +4.82%",
-    "worstPerformer": "300373 扬杰科技 -0.53%"
+  "closedPositionNote": {
+    "code": "600988",
+    "name": "赤峰黄金",
+    "note": "02-27已按time_decay规则平仓@¥39.98(+0.50%)。今日涨停+9.99%至¥43.91！如仍持有PnL将达+10.39%。时间止损规则导致错过涨停——LEARNINGS待更新：黄金受地缘催化爆发力极强，time_decay规则对事件驱动型标的可能过早退出"
   },
-  "notes": "全持仓HOLD。赤峰黄金已于02-27平仓(时间止损)。今日无新开仓(无高信心BUY)，无触及止损/目标。睿创微纳突破120关口是亮点，扬杰科技转负需关注。"
+  "newPositions": [
+    {
+      "code": "688630",
+      "name": "芯碁微装",
+      "entry": 201.72,
+      "target": 240.0,
+      "stop": 182.0,
+      "note": "Q4净利+1522%超级催化，BUY/medium，RPS120=87.9%理想区间，5日累计涨幅8.2%(<12%✅)，非涨停可买入(科创板20%limit✅)"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 6,
+    "avgPnl": 1.67,
+    "winners": 3,
+    "losers": 3,
+    "totalPnl": 10.04,
+    "bestPosition": "688002 睿创微纳 +4.75%",
+    "worstPosition": "300373 扬杰科技 -0.53%"
+  },
+  "marketContext": {
+    "sentiment": "分化偏强",
+    "hotSectors": ["黄金(集体涨停)", "石油(多只涨停)", "有色金属", "煤炭"],
+    "coldSectors": ["半导体设备", "PCB", "新能源(分化)"],
+    "keyEvent": "中东地缘局势升级→油价金价暴涨→A股资源品全线涨停，科技股承压"
+  }
 }

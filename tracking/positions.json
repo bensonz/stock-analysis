@@ -1,19 +1,6 @@
 {
-  "lastUpdated": "2026-03-02T15:30:00+08:00",
+  "lastUpdated": "2026-03-02T15:21:00+08:00",
   "activePositions": [
-    {
-      "code": "300373",
-      "name": "扬杰科技",
-      "entryDate": "2026-02-13",
-      "entryPrice": 86.07,
-      "currentPrice": 85.61,
-      "pnl_pct": -0.53,
-      "stopLoss": 77.5,
-      "currentStop": 77.5,
-      "targetPrice": 102.0,
-      "status": "active",
-      "sector": "功率半导体"
-    },
     {
       "code": "300684",
       "name": "中石科技",
@@ -26,6 +13,19 @@
       "targetPrice": 66.0,
       "status": "active",
       "sector": "散热材料"
+    },
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "entryDate": "2026-02-13",
+      "entryPrice": 86.07,
+      "currentPrice": 85.61,
+      "pnl_pct": -0.53,
+      "stopLoss": 77.5,
+      "currentStop": 77.5,
+      "targetPrice": 102.0,
+      "status": "active",
+      "sector": "功率半导体"
     },
     {
       "code": "600096",
@@ -65,16 +65,41 @@
       "targetPrice": 135.0,
       "status": "active",
       "sector": "半导体设备",
-      "alert": "持仓19天，今日突破120关口(+2.81%)！宽限期至03-06，PnL=4.75%接近5%阈值"
+      "alert": "延期观察中(截止03-06)，今日突破¥120，PnL接近5%阈值"
+    },
+    {
+      "code": "688630",
+      "name": "芯碁微装",
+      "entryDate": "2026-03-02",
+      "entryPrice": 201.72,
+      "currentPrice": 201.72,
+      "pnl_pct": 0.0,
+      "stopLoss": 182.0,
+      "currentStop": 182.0,
+      "targetPrice": 240.0,
+      "status": "active",
+      "sector": "半导体设备"
+    }
+  ],
+  "closedToday": [],
+  "recentlyClosed": [
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "exitDate": "2026-02-27",
+      "exitPrice": 39.98,
+      "returnPct": 0.5,
+      "exitReason": "time_decay",
+      "postExitNote": "03-02涨停+9.99%至¥43.91，错过+10%涨幅"
     }
   ],
   "summary": {
-    "totalPositions": 5,
+    "totalPositions": 6,
     "totalPnl": 10.04,
-    "avgPnl": 2.01,
+    "avgPnl": 1.67,
     "maxCapacity": 10,
-    "availableSlots": 5,
+    "availableSlots": 4,
     "winners": 3,
-    "losers": 2
+    "losers": 3
   }
 }
