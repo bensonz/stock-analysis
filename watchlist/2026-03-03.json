@@ -2,44 +2,341 @@
   "date": "2026-03-03",
   "market_overview": {
     "shanghai_composite": {
-      "value": null,
-      "change_pct": null
+      "value": 4182.591,
+      "change_pct": 0.47
     },
     "shenzhen_component": {
-      "value": null,
-      "change_pct": null
+      "value": 14465.788,
+      "change_pct": -0.2
     },
     "chinext": {
-      "value": null,
-      "change_pct": null
+      "value": 3294.161,
+      "change_pct": -0.49
     },
-    "sentiment": "neutral",
+    "sentiment": "bearish",
     "hot_sectors": [],
     "cold_sectors": [],
-    "notes": "Test run — simulated market data"
+    "notes": "2026-03-03 A股遭遇系统性大跌，几乎所有板块齐跌。科创50跌-1.56%领跌，创业板指-0.49%，沪指-0.20%(注：市场数据为03-02，03-03实际跌幅远大于此——从持仓普跌6-8%来看，今日是近期最大跌幅日)。宽度和板块数据因网络问题未获取。IV情绪信号为'极度乐观'(均IV Rank 12.2%)——低波动率环境下的突然暴跌，完美验证了'自满→爆发'模式。化工、半导体、建材、科技全线重挫，没有明显的避风港板块。"
   },
   "strategy_scan": {
-    "total_stocks_scanned": 0,
+    "total_stocks_scanned": 87,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-03-03T23:19:38.586048+08:00"
+    "scan_time": "2026-03-03T16:39:58.614723+08:00"
   },
   "recommendations": [
     {
-      "code": "601231.SH",
-      "name": "环旭电子",
-      "price": 28.5,
-      "rps120": null,
+      "code": "002895.SZ",
+      "name": "川恒股份",
+      "price": 41.14,
+      "rps120": 91.1,
       "recommendation": "WATCH",
       "confidence": "medium",
-      "reasoning": "Test watch recommendation"
+      "reasoning": "磷化工板块同行云天化今日暴跌-6.39%，川恒股份也在回调中。RPS120=91.1%在理想区间上沿，0风险+5亮点(成长33%/ROE13%/分红2.8%)，score_company=8.8全场最高。PE=20估值合理(56.8%分位)。但今日磷化工板块集体大跌，等板块企稳后再评估入场时机。",
+      "score_company": 8.8,
+      "score_trend": 9.5,
+      "score_value": 5.3,
+      "pe": 20.0,
+      "valuation_percentile": 56.83,
+      "revenue_yoy": 0.46,
+      "net_profit_yoy": 0.52,
+      "gross_margin": 31.81,
+      "highlights": [
+        "成长33%/年",
+        "ROE 13%",
+        "分红2.8%",
+        "磷化工行业持续走强",
+        "产能扩张中"
+      ],
+      "risks": [],
+      "events": [
+        "创历史新高¥44.75"
+      ],
+      "catalyst": "磷化工行业持续走强+产能扩张"
+    },
+    {
+      "code": "688333.SH",
+      "name": "铂力特",
+      "price": 103.5,
+      "rps120": 86.0,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "3D打印龙头，2025年报快报营收+40.5%/净利+101%，业绩翻倍。RPS120=86.0%在理想区间。但有3风险(应收237天/存货317天/被立案调查)，立案调查是重大风险。估值分位40%相对合理。今日已从¥113跌回¥103.5附近，等立案调查结果明朗后再评估。",
+      "score_company": 7.5,
+      "score_trend": 7.6,
+      "score_value": 6.7,
+      "pe": 135.3,
+      "valuation_percentile": 40.13,
+      "revenue_yoy": 0.46,
+      "net_profit_yoy": 2.35,
+      "gross_margin": 43.48,
+      "highlights": [
+        "3D打印龙头",
+        "营收+40%",
+        "净利+101%",
+        "军工航天复苏"
+      ],
+      "risks": [
+        "应收237天",
+        "存货317天",
+        "被证监会立案调查"
+      ],
+      "events": [
+        "2025年报快报:净利+101%",
+        "三期四期产能投产中"
+      ],
+      "catalyst": "业绩翻倍+军工航天3D打印需求复苏"
+    },
+    {
+      "code": "000893.SZ",
+      "name": "亚钾国际",
+      "price": 57.77,
+      "rps120": 94.4,
+      "recommendation": "AVOID",
+      "confidence": "medium",
+      "reasoning": "RPS120=94.4%超出理想区间(80-92%)，不符合选股标准。虽然钾肥是资源股概念，但追高风险大。",
+      "score_company": null,
+      "score_trend": null,
+      "score_value": null,
+      "pe": 27.2,
+      "valuation_percentile": null,
+      "revenue_yoy": null,
+      "net_profit_yoy": null,
+      "gross_margin": null,
+      "highlights": [
+        "钾肥资源股",
+        "6亮点1风险"
+      ],
+      "risks": [
+        "RPS120=94.4%超出理想区间"
+      ],
+      "events": [],
+      "catalyst": "钾肥资源概念"
+    },
+    {
+      "code": "603588.SH",
+      "name": "高能环境",
+      "price": 12.44,
+      "rps120": 94.8,
+      "recommendation": "AVOID",
+      "confidence": "medium",
+      "reasoning": "RPS120=94.8%超出理想区间。虽然score_company=8.2且有回购(1.5亿)，但估值分位39.8%偏低可能因偿债压力大(现金短债比0.23)。周级别超买+RPS过高，跳过。",
+      "score_company": 8.2,
+      "score_trend": 9.6,
+      "score_value": 6.3,
+      "pe": 33.4,
+      "valuation_percentile": 39.77,
+      "revenue_yoy": -0.11,
+      "net_profit_yoy": 0.2,
+      "gross_margin": 17.85,
+      "highlights": [
+        "回购1.5亿",
+        "环境治理行业走强",
+        "近3月涨幅>97%"
+      ],
+      "risks": [
+        "RPS120=94.8%超区间",
+        "偿债压力大(现金短债比0.23)",
+        "周级别超买"
+      ],
+      "events": [
+        "业绩预增",
+        "信达证券买入评级"
+      ],
+      "catalyst": "矿业开采+赴港上市"
+    },
+    {
+      "code": "002448.SZ",
+      "name": "中原内配",
+      "price": 15.8,
+      "rps120": 90.8,
+      "recommendation": "WATCH",
+      "confidence": "low",
+      "reasoning": "RPS120=90.8%在理想区间，5亮点2风险。但缺少enrichment详细数据，今日大盘普跌环境下观望。",
+      "score_company": null,
+      "score_trend": null,
+      "score_value": null,
+      "pe": 15.6,
+      "valuation_percentile": null,
+      "revenue_yoy": null,
+      "net_profit_yoy": null,
+      "gross_margin": null,
+      "highlights": [
+        "5亮点",
+        "RPS120=90.8%理想区间"
+      ],
+      "risks": [
+        "2风险",
+        "缺少详细数据"
+      ],
+      "events": [],
+      "catalyst": "待研究"
+    },
+    {
+      "code": "605167.SH",
+      "name": "利柏特",
+      "price": 17.6,
+      "rps120": 91.7,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "核电模块化+FPSO工业模块龙头，RPS120=91.7%在理想区间但偏高。6亮点(ROIC12%/净现138%/产能扩张/订单+20%)但估值分位95.1%处于历史极高位是重大风险。营收-23.4%/净利-11.1%业绩下滑。等回调至更合理估值区间再考虑。",
+      "score_company": 6.9,
+      "score_trend": 8.5,
+      "score_value": 3.2,
+      "pe": 36.2,
+      "valuation_percentile": 95.1,
+      "revenue_yoy": -0.23,
+      "net_profit_yoy": -0.11,
+      "gross_margin": 20.44,
+      "highlights": [
+        "ROIC 12%",
+        "净现比138%",
+        "核电模块化",
+        "可转债赎回在即"
+      ],
+      "risks": [
+        "估值历史极高位(95.1%)",
+        "营收-23.4%",
+        "不在沪深港通"
+      ],
+      "events": [
+        "广发/长江证券买入评级",
+        "可转债预计满足赎回条件"
+      ],
+      "catalyst": "FPSO投资加速+核电模块化"
+    },
+    {
+      "code": "603031.SH",
+      "name": "安孚科技",
+      "price": 55.73,
+      "rps120": 89.8,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=89.8%理想区间，4亮点(成长232%/ROIC11%/订单+38%)仅1风险(商誉95%极高!)。国信证券目标价¥63(+13%空间)。但商誉占净资产95%是地雷级风险——一旦减值将大幅侵蚀利润。在确认年报不减值前暂不入场。估值分位71.4%偏高。",
+      "score_company": 7.9,
+      "score_trend": 9.5,
+      "score_value": 4.8,
+      "pe": 74.6,
+      "valuation_percentile": 71.38,
+      "revenue_yoy": 0.004,
+      "net_profit_yoy": 0.06,
+      "gross_margin": 49.39,
+      "highlights": [
+        "Q3净利+232%",
+        "ROIC 11%",
+        "订单+38%",
+        "储能第二曲线"
+      ],
+      "risks": [
+        "商誉占净资产95%极高!"
+      ],
+      "events": [
+        "国信证券增持评级目标¥63",
+        "3月解禁2.21%"
+      ],
+      "catalyst": "南孚电池+储能第二曲线"
+    },
+    {
+      "code": "688377.SH",
+      "name": "迪威尔",
+      "price": 49.17,
+      "rps120": 91.8,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=91.8%在理想区间偏高，6亮点(业绩超预期/净现112%/产能扩张/公募持股8.6%)1风险(估值87%高位)。业绩超预期03-02涨5.43%后今日回调至¥49.17(-3.78%)。深海科技+天然气概念。等回调企稳后再评估。",
+      "score_company": 7.5,
+      "score_trend": 9.0,
+      "score_value": 3.9,
+      "pe": 77.8,
+      "valuation_percentile": 87.07,
+      "revenue_yoy": 0.1,
+      "net_profit_yoy": 0.41,
+      "gross_margin": 21.79,
+      "highlights": [
+        "业绩超预期",
+        "净现比112%",
+        "产能扩张8.7%",
+        "公募持股8.6%"
+      ],
+      "risks": [
+        "估值历史高位87%"
+      ],
+      "events": [
+        "03-02业绩超预期+5.43%",
+        "创历史新高¥46.88"
+      ],
+      "catalyst": "深海科技+天然气设备需求"
+    },
+    {
+      "code": "002250.SZ",
+      "name": "联化科技",
+      "price": 16.61,
+      "rps120": 93.1,
+      "recommendation": "AVOID",
+      "confidence": "medium",
+      "reasoning": "RPS120=93.1%超出理想区间(80-92%)。今日暴跌-8.54%抛压极重(成交额1.63倍均值)。虽有长江证券买入评级(预测25年净利+296%)，但追高风险大+今日放量暴跌是危险信号。",
+      "score_company": 8.1,
+      "score_trend": 9.6,
+      "score_value": 5.4,
+      "pe": 38.7,
+      "valuation_percentile": 53.32,
+      "revenue_yoy": 0.08,
+      "net_profit_yoy": 3.84,
+      "gross_margin": 25.96,
+      "highlights": [
+        "农化行业走强",
+        "北向6.3%",
+        "净利+384%"
+      ],
+      "risks": [
+        "RPS120=93.1%超区间",
+        "今日-8.54%放量暴跌",
+        "存货221天"
+      ],
+      "events": [
+        "机构调研12人",
+        "长江证券买入"
+      ],
+      "catalyst": "农药+CDMO"
+    },
+    {
+      "code": "002683.SZ",
+      "name": "广东宏大",
+      "price": 46.69,
+      "rps120": 85.1,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "民爆龙头+激光陀螺防务布局，RPS120=85.1%在理想区间。6亮点(龙头/净现161%/订单+20%/股东户数-31%)但2风险(抛压+商誉52%)。PE=39.4估值分位61%尚可。今日rps20=22.7%短期动能极弱，近10日仅强于6.6%，处于大幅回调中。等短期企稳后再考虑。",
+      "score_company": 7.8,
+      "score_trend": 8.1,
+      "score_value": 5.0,
+      "pe": 39.4,
+      "valuation_percentile": 61.17,
+      "revenue_yoy": 0.56,
+      "net_profit_yoy": 0.36,
+      "gross_margin": 19.94,
+      "highlights": [
+        "民爆龙头",
+        "净现比161%",
+        "股东户数-31%",
+        "激光陀螺防务"
+      ],
+      "risks": [
+        "商誉52%",
+        "近期抛压重"
+      ],
+      "events": [
+        "创24月新高¥52",
+        "国科宏惯投产(激光陀螺)"
+      ],
+      "catalyst": "民爆龙头+激光陀螺国防科技"
     }
   ],
   "summary": {
-    "total_scanned": 0,
+    "total_scanned": 87,
     "buy_recommendations": 0,
-    "watch_recommendations": 1,
-    "avoid_recommendations": 0,
-    "market_call": "谨慎",
-    "reasoning": "Test run — simulated market data"
+    "watch_recommendations": 7,
+    "avoid_recommendations": 3,
+    "market_call": "观望",
+    "reasoning": "2026-03-03 A股遭遇系统性大跌，几乎所有板块齐跌。科创50跌-1.56%领跌，创业板指-0.49%，沪指-0.20%(注：市场数据为03-02，03-03实际跌幅远大于此——从持仓普跌6-8%来看，今日是近期最大跌幅日)。宽度和板块数据因网络问题未获取。IV情绪信号为'极度乐观'(均IV Rank 12.2%)——低波动率环境下的突然暴跌，完美验证了'自满→爆发'模式。化工、半导体、建材、科技全线重挫，没有明显的避风港板块。"
   }
 }
