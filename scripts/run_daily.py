@@ -48,6 +48,7 @@ from position_manager import (
     save_daily_summary,
 )
 from report_generator import generate_watchlist_json, generate_report_md
+from run_rules import run_all_rules
 from validator import validate_data, validate_output
 
 # Directories
@@ -164,6 +165,15 @@ def phase1_collect(date: str) -> dict:
     else:
         data["learnings"] = ""
 
+    # Run rules on current portfolio state
+    try:
+        rule_results = run_all_rules()
+        data["rule_violations"] = rule_results
+        if rule_results.get("total_violations", 0) > 0:
+            print(f"    Rules: {rule_results['total_violations']} violations found", file=sys.stderr)
+    except Exception as e:
+        data["rule_violations"] = {"error": str(e)}
+
     # Validate
     data["collection_errors"] = validate_data(data)
 
@@ -189,9 +199,14 @@ def phase2_build_prompt(data: dict) -> str:
     # Load the analyst prompt template
     analyst_prompt = (PROJECT_ROOT / "agents" / "ANALYST.md").read_text(encoding="utf-8")
 
+    # Build portfolio snapshot (with live prices if available)
+    positions_json = regenerate_positions_json(price_data=data.get("position_prices", {}))
+    portfolio = positions_json.get("portfolio", {})
+
     # Build the data payload (strip heavy fields)
     payload = {
         "date": data["date"],
+        "portfolio": portfolio,
         "market": data.get("market", {}),
         "strategy_pool": {
             "source": data.get("strategy_pool", {}).get("source"),
@@ -212,6 +227,8 @@ def phase2_build_prompt(data: dict) -> str:
                 "sector": p.get("sector", ""),
                 "rps120": p.get("rps120"),
                 "catalysts": p.get("catalysts", []),
+                "shares": p.get("shares"),
+                "allocation_pct": p.get("allocation_pct"),
                 "history": p.get("history", [])[-3:],  # Last 3 history entries
             }
             for p in data.get("positions", [])
@@ -219,6 +236,7 @@ def phase2_build_prompt(data: dict) -> str:
         "position_prices": data.get("position_prices", {}),
         "missed_opportunity_prices": data.get("missed_opportunity_prices", []),
         "iv_sentiment": data.get("iv_sentiment", {}),
+        "rule_violations": data.get("rule_violations", {}),
         "collection_errors": data.get("collection_errors", []),
     }
 
@@ -317,6 +335,7 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
                 "entryPrice": p["entry_price"],
                 "targetPrice": p.get("target", p.get("targetPrice", 0)),
                 "stopLoss": p.get("stop", p.get("stopLoss", 0)),
+                "allocation_pct": p.get("allocation_pct"),
                 "thesis": p.get("thesis", ""),
                 "rating": p.get("rating", 2),
                 "rps120": p.get("rps120"),
@@ -354,24 +373,21 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
 
     # 5. Save daily summary
     try:
-        # Build portfolio stats
+        # Use portfolio data from positions.json (regenerated with live prices)
+        pj = regenerate_positions_json(price_data=data.get("position_prices", {}))
+        portfolio = pj.get("portfolio", {})
+
         active = load_active_positions()
-        stats = {}
-        if active:
-            pnls = []
-            for p in active:
-                prices = data.get("position_prices", {})
-                price_info = prices.get(p["code"], {})
-                price = price_info.get("price", p["entryPrice"])
-                pnl = round((price - p["entryPrice"]) / p["entryPrice"] * 100, 2)
-                pnls.append(pnl)
-            stats = {
-                "totalPositions": len(active),
-                "avgPnl": round(sum(pnls) / len(pnls), 2) if pnls else 0,
-                "winners": sum(1 for x in pnls if x > 0),
-                "losers": sum(1 for x in pnls if x < 0),
-                "totalPnl": round(sum(pnls), 2),
-            }
+        stats = {
+            "totalPositions": portfolio.get("positionsUsed", len(active)),
+            "totalEquity": portfolio.get("totalEquity", 0),
+            "dayPnl": portfolio.get("dayPnl", 0),
+            "dayReturnPct": round(portfolio.get("dayPnl", 0) / portfolio["totalEquity"] * 100, 2) if portfolio.get("totalEquity") else 0,
+            "totalReturnPct": portfolio.get("totalReturnPct", 0),
+            "unrealizedPnl": portfolio.get("unrealizedPnl", 0),
+            "realizedPnl": portfolio.get("realizedPnl", 0),
+            "cashPct": portfolio.get("cashPct", 0),
+        }
 
         save_daily_summary(
             date,
@@ -397,6 +413,25 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
         except Exception as e:
             log["actions"].append(f"ERROR learnings: {e}")
 
+    # 7. Create/update agent-written rule scripts
+    for script in decisions.get("new_scripts", []):
+        try:
+            path = PROJECT_ROOT / script["path"]
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(script["content"], encoding="utf-8")
+            path.chmod(0o755)
+            log["actions"].append(f"Created rule: {script['path']}")
+        except Exception as e:
+            log["actions"].append(f"ERROR creating rule {script.get('path')}: {e}")
+
+    # 8. Run rules on updated state (post-apply check)
+    try:
+        post_rules = run_all_rules()
+        if post_rules.get("total_violations", 0) > 0:
+            log["post_apply_rule_violations"] = post_rules
+    except Exception as e:
+        log["actions"].append(f"ERROR post-apply rules: {e}")
+
     log["end"] = time.time()
     log["duration_sec"] = round(log["end"] - log["start"], 1)
     return log
@@ -405,6 +440,16 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
 def phase4_validate_and_log(date: str, logs: list[dict]) -> list[str]:
     """Phase 4: Validate output and save run log."""
     errors = validate_output(date)
+
+    # Run final rule check
+    try:
+        rule_results = run_all_rules()
+        if rule_results.get("total_violations", 0) > 0:
+            for r in rule_results.get("rules", []):
+                for v in r.get("violations", []):
+                    errors.append(f"RULE {r['rule']}: {v.get('code', '?')} — {v.get('suggestion', '')}")
+    except Exception:
+        pass
 
     # Save run log
     run_log = {
