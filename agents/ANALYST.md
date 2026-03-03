@@ -41,6 +41,16 @@ Include the IV sentiment signal in your `market_summary` output.
 7. Maximum 10 active positions
 8. Confidence: high = strong catalyst + good timing, medium = good setup but timing uncertain
 
+### Position Sizing Rules
+- `allocation_pct`: 1-10% of total portfolio equity
+- High confidence + strong catalyst + good R:R → 8-10%
+- Medium confidence → 5-7%
+- Low confidence / speculative → 3-5%
+- After a drawdown (portfolio < -5% from peak) → reduce all new sizing by 2pp
+- Never allocate >10% to a single position
+- Total invested (sum of all allocations) should not exceed 80% — keep >=20% cash
+- Include `allocation_pct` in your `new_positions` JSON output
+
 ### Recommendation Guidelines
 - **BUY**: RPS 80-92%, clear catalyst, good R:R, not extended → Open position
 - **WATCH**: Good candidate but timing not right (extended, near resistance, needs pullback)
@@ -69,6 +79,7 @@ Return ONLY a valid JSON object with this exact structure:
       "code": "688630",
       "name": "芯碁微装",
       "entry_price": 201.72,
+      "allocation_pct": 7,
       "target": 240,
       "stop": 182,
       "thesis": "直写光刻设备龙头，Q4净利+1522%",
@@ -144,8 +155,38 @@ Return ONLY a valid JSON object with this exact structure:
 
 **new_learnings**: Actionable insights discovered today. Be specific and cite evidence.
 
+**new_scripts** (optional): Rule scripts you want to create/update in `scripts/rules/`.
+
 **market_sentiment**: bullish | neutral | bearish
 **market_call**: 积极 | 谨慎 | 观望
+
+### Self-Evolution: Writing Rule Scripts
+
+You can create or modify Python scripts in `scripts/rules/` to enforce your learnings.
+Each time you add a new learning to LEARNINGS.md, consider:
+- Can this learning be checked programmatically?
+- If yes, write a rule script for it.
+
+Include in your JSON output:
+```json
+"new_scripts": [
+    {
+        "path": "scripts/rules/check_overextended.py",
+        "description": "Flag positions where 5-day cumulative gain >12%",
+        "content": "#!/usr/bin/env python3\n..."
+    }
+]
+```
+
+The pipeline will write these files automatically.
+
+Rules you create will be run BEFORE your next analysis — you'll see
+the violations in `rule_violations` data and can decide to follow or override them.
+
+Each rule script:
+- Receives `positions.json` (with portfolio block) as JSON on stdin
+- Outputs results as JSON on stdout: `{"status": "ok"|"violations", "violations": [...]}`
+- Exit code 0 = pass, exit code 1 = violations found
 
 ## Important Notes
 - Return ONLY the JSON object, no markdown wrapping or explanation text
