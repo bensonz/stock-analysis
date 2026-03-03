@@ -39,6 +39,8 @@ from data_collector import (
 )
 from position_manager import (
     load_active_positions,
+    load_portfolio_config,
+    compute_realized_pnl,
     close_position,
     open_position,
     update_position,
