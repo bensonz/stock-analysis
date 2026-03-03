@@ -10,31 +10,69 @@
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 11390,
-      "response_file": "/tmp/stock-llm-response.json",
-      "tokens": {
-        "input_tokens": 20000,
-        "output_tokens": 3000
-      }
+      "response_size_bytes": 15422,
+      "response_file": "/tmp/llm_response.json"
     },
     {
       "phase": "apply",
-      "start": 1772527198.609196,
+      "start": 1772549761.932247,
       "actions": [
-        "SELL 300373",
-        "SELL 688630",
+        "ERROR HOLD 300373: Position file not found: /Users/bz/Work/Personal/stock-analysis/tracking/300373.json",
+        "ERROR HOLD 688630: Position file not found: /Users/bz/Work/Personal/stock-analysis/tracking/688630.json",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
         "Updated LEARNINGS.md"
       ],
-      "end": 1772527198.61551,
-      "duration_sec": 0.0
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 3,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "600096",
+                "name": "云天化",
+                "rule": "overextended_entry",
+                "days_held": 5,
+                "pnl_pct": -6.52,
+                "suggestion": "Position down -6.5% after only 5 days — possible overextended entry. Review entry timing."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1772549761.982786,
+      "duration_sec": 0.1
     }
   ],
-  "validation_errors": [],
+  "validation_errors": [
+    "RULE check_overextended_entry: 600096 — Position down -6.5% after only 5 days — possible overextended entry. Review entry timing."
+  ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 81.1
+    "totalDurationSec": 81.19999999999999
   }
 }

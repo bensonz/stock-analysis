@@ -62,7 +62,12 @@ def compute_realized_pnl() -> float:
             exit_p = p.get("exitPrice", 0)
             if not entry or not exit_p:
                 continue
-            shares = p.get("shares") or int((starting * max_pct / 100) // entry)
+            shares = p.get("shares")
+            if not shares:
+                raw = int((starting * max_pct / 100) // entry)
+                code = str(p.get("code", "")).split(".")[0]
+                lot = 200 if code.startswith("688") else 100
+                shares = (raw // lot) * lot or lot
             realized += (exit_p - entry) * shares
         except Exception:
             pass
@@ -172,6 +177,18 @@ def open_position(data: dict) -> dict:
     alloc_pct = data.get("allocation_pct", config["max_position_pct"])
     capital = config["starting_capital"] * alloc_pct / 100
     shares = int(capital // entry_price)
+
+    # A-share lot size rules:
+    # - 科创板 (688xxx): min 200 shares, must be multiples of 200
+    # - All others: min 100 shares, must be multiples of 100
+    if code.startswith("688"):
+        lot_size = 200
+    else:
+        lot_size = 100
+    shares = (shares // lot_size) * lot_size
+    if shares < lot_size:
+        shares = lot_size
+
     allocated_capital = round(shares * entry_price, 2)
 
     pos = {
@@ -299,7 +316,11 @@ def regenerate_positions_json(price_data: dict | None = None) -> dict:
             prev_close = live.get("prev_close")
 
         # Compute shares (backfill for old positions without shares)
-        shares = p.get("shares") or int((starting * max_pct / 100) // entry_price)
+        shares = p.get("shares")
+        if not shares:
+            raw = int((starting * max_pct / 100) // entry_price)
+            lot = 200 if code.startswith("688") else 100
+            shares = (raw // lot) * lot or lot
         alloc_pct = p.get("allocation_pct", max_pct)
         allocated = round(shares * entry_price, 2)
         current_val = round(shares * current_price, 2)
