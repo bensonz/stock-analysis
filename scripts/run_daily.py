@@ -455,15 +455,29 @@ def main():
         # Phase 3+4: Apply LLM response from file
         idx = args.index("--apply")
         if idx + 1 >= len(args):
-            print("Usage: --apply FILE", file=sys.stderr)
+            print("Usage: --apply FILE [--tokens INPUT OUTPUT]", file=sys.stderr)
             sys.exit(1)
         response_file = Path(args[idx + 1])
         if not response_file.exists():
             print(f"File not found: {response_file}", file=sys.stderr)
             sys.exit(1)
 
+        # Parse optional --tokens INPUT OUTPUT
+        llm_tokens = None
+        if "--tokens" in args:
+            tidx = args.index("--tokens")
+            if tidx + 2 < len(args):
+                try:
+                    llm_tokens = {
+                        "input_tokens": int(args[tidx + 1]),
+                        "output_tokens": int(args[tidx + 2]),
+                    }
+                except ValueError:
+                    pass
+
         # Load LLM response
         response_text = response_file.read_text(encoding="utf-8")
+        response_size = len(response_text)
         # Try to extract JSON from response
         decisions = _parse_llm_response(response_text)
         if not decisions:
@@ -478,12 +492,39 @@ def main():
             print("Warning: No Phase 1 data found, running Phase 1 first...", file=sys.stderr)
             data = phase1_collect(date)
 
+        # Build complete run log from all phases
+        all_logs = []
+
+        # Phase 1 log (from saved data)
+        phase1_log = data.get("_log_phase1")
+        if phase1_log:
+            all_logs.append(phase1_log)
+        else:
+            # Reconstruct minimal Phase 1 log from data file timestamp
+            all_logs.append({
+                "phase": "collect",
+                "duration_sec": 0,
+                "note": "Phase 1 log not found in saved data",
+            })
+
+        # Phase 2 log (LLM analysis — happens outside this script)
+        phase2_log = {
+            "phase": "llm_analysis",
+            "response_size_bytes": response_size,
+            "response_file": str(response_file),
+        }
+        if llm_tokens:
+            phase2_log["tokens"] = llm_tokens
+        all_logs.append(phase2_log)
+
+        # Phase 3: Apply
         print(f"\nPhase 3: Applying decisions...", file=sys.stderr)
         log3 = phase3_apply(date, decisions, data)
         print(f"  Actions: {log3['actions']}", file=sys.stderr)
+        all_logs.append(log3)
 
         print(f"\nPhase 4: Validating...", file=sys.stderr)
-        errors = phase4_validate_and_log(date, [log3])
+        errors = phase4_validate_and_log(date, all_logs)
         if errors:
             print(f"  Validation issues: {errors}", file=sys.stderr)
         else:

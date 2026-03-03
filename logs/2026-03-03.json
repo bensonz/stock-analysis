@@ -2,6 +2,17 @@
   "date": "2026-03-03",
   "runs": [
     {
+      "phase": "collect",
+      "start": 1772520655.927435,
+      "errors": [],
+      "end": 1772521265.948992,
+      "duration_sec": 610.0
+    },
+    {
+      "phase": "llm_analysis",
+      "note": "Token usage not tracked for this run (pre-integration)"
+    },
+    {
       "phase": "apply",
       "start": 1772521395.363073,
       "actions": [
@@ -16,7 +27,7 @@
   ],
   "validation_errors": [],
   "summary": {
-    "totalPhases": 1,
-    "totalDurationSec": 0.0
+    "totalPhases": 3,
+    "totalDurationSec": 610.0
   }
 }
