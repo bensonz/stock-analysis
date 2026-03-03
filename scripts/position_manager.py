@@ -17,6 +17,7 @@ TRACKING_DIR = PROJECT_ROOT / "tracking"
 CLOSED_DIR = TRACKING_DIR / "closed"
 DAILY_DIR = TRACKING_DIR / "daily"
 POSITIONS_FILE = TRACKING_DIR / "positions.json"
+PORTFOLIO_CONFIG_FILE = TRACKING_DIR / "portfolio_config.json"
 
 CLOSED_DIR.mkdir(parents=True, exist_ok=True)
 DAILY_DIR.mkdir(parents=True, exist_ok=True)
@@ -35,6 +36,37 @@ def _write_json(path: Path, data: dict) -> None:
         json.dumps(data, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
+
+
+def load_portfolio_config() -> dict:
+    """Read tracking/portfolio_config.json."""
+    if PORTFOLIO_CONFIG_FILE.exists():
+        return _read_json(PORTFOLIO_CONFIG_FILE)
+    return {
+        "starting_capital": 1000000,
+        "max_position_pct": 10,
+        "max_positions": 10,
+    }
+
+
+def compute_realized_pnl() -> float:
+    """Scan tracking/closed/*.json, compute total realized P&L in dollars."""
+    config = load_portfolio_config()
+    starting = config["starting_capital"]
+    max_pct = config["max_position_pct"]
+    realized = 0.0
+    for f in CLOSED_DIR.glob("*.json"):
+        try:
+            p = _read_json(f)
+            entry = p.get("entryPrice", 0)
+            exit_p = p.get("exitPrice", 0)
+            if not entry or not exit_p:
+                continue
+            shares = p.get("shares") or int((starting * max_pct / 100) // entry)
+            realized += (exit_p - entry) * shares
+        except Exception:
+            pass
+    return round(realized, 2)
 
 
 def load_active_positions() -> list[dict]:
@@ -126,13 +158,21 @@ def open_position(data: dict) -> dict:
 
     Args:
         data: Must contain at minimum: code, name, entryPrice, targetPrice, stopLoss, thesis.
-              Optional: rating, rps120, sector, catalysts, confidence.
+              Optional: rating, rps120, sector, catalysts, confidence, allocation_pct.
 
     Returns:
         The created position dict.
     """
     code = data["code"].split(".")[0]  # Strip exchange suffix
     today = datetime.now().strftime("%Y-%m-%d")
+    entry_price = data["entryPrice"]
+
+    # Compute position sizing
+    config = load_portfolio_config()
+    alloc_pct = data.get("allocation_pct", config["max_position_pct"])
+    capital = config["starting_capital"] * alloc_pct / 100
+    shares = int(capital // entry_price)
+    allocated_capital = round(shares * entry_price, 2)
 
     pos = {
         "code": code,
@@ -140,10 +180,13 @@ def open_position(data: dict) -> dict:
         "status": "active",
         "thesis": data.get("thesis", ""),
         "entryDate": data.get("entryDate", today),
-        "entryPrice": data["entryPrice"],
+        "entryPrice": entry_price,
         "targetPrice": data["targetPrice"],
         "stopLoss": data["stopLoss"],
         "currentStop": data.get("currentStop", data["stopLoss"]),
+        "allocation_pct": alloc_pct,
+        "shares": shares,
+        "allocatedCapital": allocated_capital,
         "rating": data.get("rating", 2),
         "rps120": data.get("rps120"),
         "sector": data.get("sector", ""),
@@ -152,7 +195,7 @@ def open_position(data: dict) -> dict:
         "history": [
             {
                 "date": data.get("entryDate", today),
-                "price": data["entryPrice"],
+                "price": entry_price,
                 "change_pct": 0,
                 "action": "OPEN",
                 "note": data.get("note", f"开仓 {data['name']}"),
@@ -166,7 +209,7 @@ def open_position(data: dict) -> dict:
         "lessonLearned": None,
         "createdAt": _now_iso(),
         "updatedAt": _now_iso(),
-        "trackerVersion": "2.0",
+        "trackerVersion": "2.1",
     }
 
     _write_json(TRACKING_DIR / f"{code}.json", pos)
@@ -227,16 +270,25 @@ def regenerate_positions_json(price_data: dict | None = None) -> dict:
                     If None, falls back to stored values.
 
     Returns:
-        The positions.json content.
+        The positions.json content (includes portfolio summary block).
     """
     active = load_active_positions()
+    config = load_portfolio_config()
+    starting = config["starting_capital"]
+    max_pct = config["max_position_pct"]
 
     entries = []
+    total_allocated = 0.0
+    total_current_value = 0.0
+    total_unrealized = 0.0
+    total_day_pnl = 0.0
+
     for p in active:
         code = p["code"].split(".")[0]
         entry_price = p["entryPrice"]
         current_price = p.get("currentPrice", entry_price)
         pnl_pct = p.get("pnl_pct", 0.0)
+        prev_close = None
 
         # Use live price data if available
         if price_data and code in price_data:
@@ -244,6 +296,24 @@ def regenerate_positions_json(price_data: dict | None = None) -> dict:
             if live.get("price") and live["price"] > 0:
                 current_price = live["price"]
                 pnl_pct = round((current_price - entry_price) / entry_price * 100, 2)
+            prev_close = live.get("prev_close")
+
+        # Compute shares (backfill for old positions without shares)
+        shares = p.get("shares") or int((starting * max_pct / 100) // entry_price)
+        alloc_pct = p.get("allocation_pct", max_pct)
+        allocated = round(shares * entry_price, 2)
+        current_val = round(shares * current_price, 2)
+        unrealized = round(current_val - allocated, 2)
+
+        # Day P&L (if we have previous close)
+        day_pnl = 0.0
+        if prev_close and prev_close > 0:
+            day_pnl = round((current_price - prev_close) * shares, 2)
+
+        total_allocated += allocated
+        total_current_value += current_val
+        total_unrealized += unrealized
+        total_day_pnl += day_pnl
 
         entries.append({
             "code": code,
@@ -257,10 +327,40 @@ def regenerate_positions_json(price_data: dict | None = None) -> dict:
             "targetPrice": p["targetPrice"],
             "status": "active",
             "sector": p.get("sector", ""),
+            "shares": shares,
+            "allocation_pct": alloc_pct,
+            "allocatedCapital": allocated,
+            "currentValue": current_val,
+            "unrealizedPnl": unrealized,
         })
+
+    realized = compute_realized_pnl()
+    cash = round(starting - total_allocated + realized, 2)
+    total_equity = round(cash + total_current_value, 2)
+    total_pnl = round(total_unrealized + realized, 2)
+
+    # Compute weight_pct after we know total_equity
+    for entry in entries:
+        entry["weight_pct"] = round(entry["currentValue"] / total_equity * 100, 2) if total_equity else 0
+
+    portfolio = {
+        "startingCapital": starting,
+        "totalEquity": total_equity,
+        "cash": cash,
+        "investedValue": round(total_current_value, 2),
+        "unrealizedPnl": round(total_unrealized, 2),
+        "realizedPnl": realized,
+        "totalPnl": total_pnl,
+        "totalReturnPct": round(total_pnl / starting * 100, 2) if starting else 0,
+        "positionsUsed": len(entries),
+        "positionsMax": config["max_positions"],
+        "cashPct": round(cash / total_equity * 100, 2) if total_equity else 100,
+        "dayPnl": round(total_day_pnl, 2),
+    }
 
     positions_data = {
         "lastUpdated": _now_iso(),
+        "portfolio": portfolio,
         "activePositions": entries,
     }
 
