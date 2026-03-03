@@ -18,6 +18,7 @@ import sys
 import time
 import urllib.request
 import ssl
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional
@@ -192,11 +193,16 @@ def _parse_strategy_stocks(raw: list) -> list[dict]:
     return stocks
 
 
-def batch_enrich(stocks: list[dict]) -> list[dict]:
-    """Enrich stocks in RPS 75-95% zone using CheeseForTune batch API.
+def batch_enrich(stocks: list[dict], max_workers: int = 8) -> list[dict]:
+    """Enrich stocks in RPS 75-95% zone using CheeseForTune API.
+
+    Runs concurrent workers (each with its own client instance) to
+    parallelize fetching. The server handles concurrent connections fine;
+    rate limiting only triggers on rapid sequential calls from one client.
 
     Args:
         stocks: List of stock dicts with at least "code" key.
+        max_workers: Number of concurrent fetchers (default 8).
 
     Returns:
         List of enriched stock summary dicts.
@@ -205,9 +211,20 @@ def batch_enrich(stocks: list[dict]) -> list[dict]:
         return []
 
     codes = [normalize_code(s["code"]) for s in stocks]
+
+    def _fetch_one(i_code):
+        i, code = i_code
+        print(f"  [{i+1}/{len(codes)}] Fetching {code}...", file=sys.stderr)
+        try:
+            client = CheeseFortuneClient()
+            client.MIN_REQUEST_INTERVAL = 0.3
+            return client.get_stock_summary(code)
+        except Exception as e:
+            return {"code": code, "error": str(e)}
+
     try:
-        client = CheeseFortuneClient()
-        results = client.get_batch_summaries(codes)
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            results = list(executor.map(_fetch_one, enumerate(codes)))
         return results
     except Exception as e:
         print(f"  Batch enrich error: {e}", file=sys.stderr)
