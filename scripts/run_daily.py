@@ -118,12 +118,22 @@ def phase1_collect(date: str) -> dict:
         result = fetch_missed_opportunity_prices(data["recent_watchlists"])
         return "missed_opportunity_prices", result
 
-    with ThreadPoolExecutor(max_workers=4) as executor:
+    def _iv_sentiment():
+        print("  [6/6] Fetching IV sentiment...", file=sys.stderr)
+        from fetch_iv_sentiment import fetch_all
+        result = fetch_all()
+        sig = result.get("overall_sentiment", {}).get("signal", "?")
+        rank = result.get("overall_sentiment", {}).get("avg_iv_rank", 0)
+        print(f"    → {sig} (avg IV rank {rank*100:.1f}%)", file=sys.stderr)
+        return "iv_sentiment", result
+
+    with ThreadPoolExecutor(max_workers=5) as executor:
         futures = {
             executor.submit(_enrich): "enrich",
             executor.submit(_market): "market",
             executor.submit(_prices): "position_prices",
             executor.submit(_missed): "watchlists",
+            executor.submit(_iv_sentiment): "iv_sentiment",
         }
         for future in as_completed(futures):
             task_name = futures[future]
@@ -142,6 +152,8 @@ def phase1_collect(date: str) -> dict:
                     data["position_prices"] = {}
                 elif task_name == "watchlists":
                     data["missed_opportunity_prices"] = []
+                elif task_name == "iv_sentiment":
+                    data["iv_sentiment"] = {"error": str(e)}
 
     # Learnings (local file, instant)
     learnings_file = PROJECT_ROOT / "LEARNINGS.md"
@@ -204,6 +216,7 @@ def phase2_build_prompt(data: dict) -> str:
         ],
         "position_prices": data.get("position_prices", {}),
         "missed_opportunity_prices": data.get("missed_opportunity_prices", []),
+        "iv_sentiment": data.get("iv_sentiment", {}),
         "collection_errors": data.get("collection_errors", []),
     }
 
@@ -321,8 +334,8 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
         except Exception as e:
             log["actions"].append(f"ERROR OPEN {p.get('code')}: {e}")
 
-    # 3. Ensure positions.json is in sync
-    regenerate_positions_json()
+    # 3. Ensure positions.json is in sync (with live prices)
+    regenerate_positions_json(price_data=data.get("position_prices", {}))
 
     # 4. Generate report and watchlist
     try:

@@ -216,33 +216,52 @@ def update_position(code: str, updates: dict) -> dict:
     return pos
 
 
-def regenerate_positions_json() -> dict:
+def regenerate_positions_json(price_data: dict | None = None) -> dict:
     """Scan tracking/*.json, build positions.json from active positions.
     ALWAYS called after any mutation.
+
+    Args:
+        price_data: Optional dict keyed by code with live price info
+                    (e.g. from data_collector.fetch_position_prices).
+                    If provided, updates currentPrice and pnl_pct with real data.
+                    If None, falls back to stored values.
 
     Returns:
         The positions.json content.
     """
     active = load_active_positions()
 
+    entries = []
+    for p in active:
+        code = p["code"].split(".")[0]
+        entry_price = p["entryPrice"]
+        current_price = p.get("currentPrice", entry_price)
+        pnl_pct = p.get("pnl_pct", 0.0)
+
+        # Use live price data if available
+        if price_data and code in price_data:
+            live = price_data[code]
+            if live.get("price") and live["price"] > 0:
+                current_price = live["price"]
+                pnl_pct = round((current_price - entry_price) / entry_price * 100, 2)
+
+        entries.append({
+            "code": code,
+            "name": p["name"],
+            "entryDate": p["entryDate"],
+            "entryPrice": entry_price,
+            "currentPrice": current_price,
+            "pnl_pct": pnl_pct,
+            "stopLoss": p["stopLoss"],
+            "currentStop": p.get("currentStop", p["stopLoss"]),
+            "targetPrice": p["targetPrice"],
+            "status": "active",
+            "sector": p.get("sector", ""),
+        })
+
     positions_data = {
         "lastUpdated": _now_iso(),
-        "activePositions": [
-            {
-                "code": p["code"],
-                "name": p["name"],
-                "entryDate": p["entryDate"],
-                "entryPrice": p["entryPrice"],
-                "currentPrice": p.get("currentPrice", p["entryPrice"]),
-                "pnl_pct": p.get("pnl_pct", 0.0),
-                "stopLoss": p["stopLoss"],
-                "currentStop": p.get("currentStop", p["stopLoss"]),
-                "targetPrice": p["targetPrice"],
-                "status": "active",
-                "sector": p.get("sector", ""),
-            }
-            for p in active
-        ],
+        "activePositions": entries,
     }
 
     _write_json(POSITIONS_FILE, positions_data)
