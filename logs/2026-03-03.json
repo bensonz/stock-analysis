@@ -3,31 +3,38 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1772520655.927435,
+      "start": 1772526807.351537,
       "errors": [],
-      "end": 1772521265.948992,
-      "duration_sec": 610.0
+      "end": 1772526888.43579,
+      "duration_sec": 81.1
     },
     {
       "phase": "llm_analysis",
-      "note": "Token usage not tracked for this run (pre-integration)"
+      "response_size_bytes": 11390,
+      "response_file": "/tmp/stock-llm-response.json",
+      "tokens": {
+        "input_tokens": 20000,
+        "output_tokens": 3000
+      }
     },
     {
       "phase": "apply",
-      "start": 1772521395.363073,
+      "start": 1772527198.609196,
       "actions": [
+        "SELL 300373",
+        "SELL 688630",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
         "Updated LEARNINGS.md"
       ],
-      "end": 1772521395.367285,
+      "end": 1772527198.61551,
       "duration_sec": 0.0
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 610.0
+    "totalDurationSec": 81.1
   }
 }
