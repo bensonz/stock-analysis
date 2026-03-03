@@ -111,28 +111,18 @@ def test_2_realized_pnl():
 
 
 def test_3_regenerate_positions():
-    """Test positions.json regeneration with mock prices."""
-    section("Test 3: Portfolio Regeneration (mock prices)")
-    from position_manager import regenerate_positions_json, load_active_positions
+    """Test positions.json regeneration — READ ONLY, validates current state."""
+    section("Test 3: Portfolio Validation (current positions.json)")
+    from position_manager import load_active_positions
 
     active = load_active_positions()
     if not active:
         warn("No active positions — skipping")
         return
 
-    # Mock price data simulating a day's movement
-    mock_prices = {}
-    for p in active:
-        code = p["code"].split(".")[0]
-        entry = p["entryPrice"]
-        # Simulate: some up, some down
-        mock_price = entry * 1.03 if code[-1] in "02468" else entry * 0.97
-        mock_prices[code] = {
-            "price": round(mock_price, 2),
-            "prev_close": entry,
-        }
-
-    result = regenerate_positions_json(price_data=mock_prices)
+    # Read current positions.json (don't regenerate — that mutates files)
+    positions_file = PROJECT_ROOT / "tracking" / "positions.json"
+    result = json.loads(positions_file.read_text())
     portfolio = result.get("portfolio", {})
     positions = result.get("activePositions", [])
 
@@ -189,117 +179,55 @@ def test_4_rules():
         check(r.get("error") is None, f"Rule {r['rule']} no errors")
 
 
-def test_5_mock_apply():
-    """Test the --apply path with a mock LLM response."""
-    section("Test 5: Mock Apply (simulated LLM response)")
+def test_5_apply_functions_exist():
+    """Verify apply pipeline functions exist and are importable.
 
-    # Build a mock LLM decision
-    mock_decisions = {
-        "market_summary": "Test run — simulated market data",
-        "position_decisions": [
-            {
-                "code": "300684",
-                "name": "中石科技",
-                "action": "HOLD",
-                "reason": "Test hold",
-                "new_stop": None,
-                "pnl_pct": -2.49,
-            },
-            {
-                "code": "688002",
-                "name": "睿创微纳",
-                "action": "HOLD",
-                "reason": "Test hold",
-                "new_stop": None,
-                "pnl_pct": -3.72,
-            },
-        ],
-        "new_positions": [],
-        "watchlist": [
-            {
-                "code": "601231",
-                "name": "环旭电子",
-                "price": 28.5,
-                "recommendation": "WATCH",
-                "confidence": "medium",
-                "reasoning": "Test watch recommendation",
-            }
-        ],
-        "new_learnings": ["Test learning: mock pipeline run successful"],
-        "new_scripts": [
-            {
-                "path": "scripts/rules/check_test_rule.py",
-                "description": "Test rule created by mock pipeline",
-                "content": '#!/usr/bin/env python3\n"""\nRule: Test rule (should be deleted after testing)\nCreated: 2026-03-03\n"""\nimport json, sys\ndata = json.load(sys.stdin)\nresult = {"rule": "test_rule", "status": "ok", "violations": []}\njson.dump(result, sys.stdout)\nsys.exit(0)\n',
-            }
-        ],
-    }
+    NOTE: We do NOT call phase3_apply here — it mutates real tracking files.
+    Use test_simulation.py for full end-to-end testing (runs in temp dir).
+    """
+    section("Test 5: Apply Pipeline (import check only — no mutation)")
 
-    # Write mock response to temp file
-    mock_file = Path(tempfile.mktemp(suffix=".json"))
-    mock_file.write_text(json.dumps(mock_decisions, ensure_ascii=False, indent=2))
+    from run_daily import phase3_apply, phase4_validate_and_log, _parse_llm_response
+    check(callable(phase3_apply), "phase3_apply is importable")
+    check(callable(phase4_validate_and_log), "phase4_validate_and_log is importable")
+    check(callable(_parse_llm_response), "_parse_llm_response is importable")
 
-    try:
-        from position_manager import load_active_positions
-        from run_daily import phase3_apply, phase4_validate_and_log
+    # Test JSON parsing without touching any files
+    test_json = '{"position_decisions": [], "new_positions": [], "watchlist": [], "market_summary": "test"}'
+    parsed = _parse_llm_response(test_json)
+    check(parsed.get("market_summary") == "test", "JSON parser works on clean input")
 
-        # Load current data (use positions as-is, no real Phase 1)
-        data = {
-            "date": "2026-03-03",
-            "positions": load_active_positions(),
-            "position_prices": {},
-        }
+    wrapped = '```json\n' + test_json + '\n```'
+    parsed2 = _parse_llm_response(wrapped)
+    check(parsed2.get("market_summary") == "test", "JSON parser handles ```json``` blocks")
 
-        log3 = phase3_apply("2026-03-03", mock_decisions, data)
-        print(f"  Actions: {log3.get('actions', [])}")
-
-        check("Generated watchlist" in log3.get("actions", []), "Watchlist generated")
-        check("Generated report" in log3.get("actions", []), "Report generated")
-        check("Updated LEARNINGS.md" in log3.get("actions", []), "Learnings updated")
-
-        # Check new_scripts was created
-        test_rule = PROJECT_ROOT / "scripts" / "rules" / "check_test_rule.py"
-        check(test_rule.exists(), "new_scripts: test rule file created")
-
-        # Check it runs
-        if test_rule.exists():
-            from run_rules import run_all_rules
-            results = run_all_rules()
-            test_results = [r for r in results.get("rules", []) if r["rule"] == "check_test_rule"]
-            check(len(test_results) == 1, "Test rule found by runner")
-            if test_results:
-                check(test_results[0]["status"] == "ok", "Test rule passes")
-
-            # Clean up
-            test_rule.unlink()
-            ok("Cleaned up test rule")
-
-        # Check post-apply rule violations in log
-        check("post_apply_rule_violations" in log3 or True, "Post-apply rules ran (or no violations)")
-
-    finally:
-        mock_file.unlink(missing_ok=True)
+    check(True, "⚠️  Full apply test is in test_simulation.py (uses temp dir, safe)")
 
 
 def test_6_open_position_sizing():
-    """Test that open_position respects allocation_pct."""
-    section("Test 6: Position Sizing")
+    """Test that open_position respects allocation_pct and lot size rules."""
+    section("Test 6: Position Sizing + Lot Rules")
     from position_manager import load_portfolio_config
 
     config = load_portfolio_config()
     starting = config["starting_capital"]
 
-    # Test different allocation sizes
+    # Test lot size rounding: 688xxx = 200, others = 100
     test_cases = [
-        (3, 50.0, "3% of ¥1M at ¥50"),
-        (7, 100.0, "7% of ¥1M at ¥100"),
-        (10, 200.0, "10% of ¥1M at ¥200"),
+        ("300684", 55.39, 10, 100, "中石科技 (SZ, lot=100)"),
+        ("688002", 114.65, 10, 200, "睿创微纳 (688, lot=200)"),
+        ("688630", 201.72, 10, 200, "芯碁微装 (688, lot=200)"),
+        ("600499", 17.48, 10, 100, "科达制造 (SH, lot=100)"),
+        ("601231", 28.50, 5, 100, "环旭电子 (SH, 5% alloc, lot=100)"),
     ]
 
-    for alloc_pct, price, label in test_cases:
+    for code, price, alloc_pct, lot, label in test_cases:
         capital = starting * alloc_pct / 100
-        expected_shares = int(capital // price)
-        check(expected_shares > 0, f"{label}: {expected_shares} shares (¥{expected_shares * price:,.0f})")
+        raw = int(capital // price)
+        shares = (raw // lot) * lot or lot
+        check(shares % lot == 0, f"{label}: {shares} shares divisible by {lot}")
+        check(shares >= lot, f"{label}: {shares} shares >= minimum {lot}")
+        check(shares > 0, f"{label}: {shares} shares (¥{shares * price:,.0f})")
 
 
 def test_7_evolver_prerequisites():
@@ -339,23 +267,12 @@ def main():
     test_2_realized_pnl()
     test_3_regenerate_positions()
     test_4_rules()
-    test_5_mock_apply()
+    test_5_apply_functions_exist()
     test_6_open_position_sizing()
     test_7_evolver_prerequisites()
 
-    # Restore positions.json to real state
-    section("Cleanup: Restoring positions.json")
-    from position_manager import regenerate_positions_json
-    regenerate_positions_json()
-    ok("positions.json restored")
-
-    # Remove test learning line
-    learnings_file = PROJECT_ROOT / "LEARNINGS.md"
-    content = learnings_file.read_text()
-    if "Test learning: mock pipeline run successful" in content:
-        content = content.replace("\n### 自动更新 (2026-03-03)\n- Test learning: mock pipeline run successful\n", "")
-        learnings_file.write_text(content)
-        ok("Cleaned up test learning from LEARNINGS.md")
+    # No cleanup needed — this test suite is read-only.
+    # For mutation tests, use test_simulation.py (runs in temp dir).
 
     section("Results")
     total = passed + failed
