@@ -1,147 +1,567 @@
 {
   "date": "2026-03-02",
   "market_overview": {
-    "shanghai_composite": {"value": 4182.59, "change_pct": 0.47},
-    "shenzhen_component": {"value": 14465.79, "change_pct": -0.20},
-    "chinext": {"value": 3294.16, "change_pct": -0.49},
+    "shanghai_composite": {
+      "value": 4182.591,
+      "change_pct": 0.47
+    },
+    "shenzhen_component": {
+      "value": 14495.093,
+      "change_pct": -0.06
+    },
+    "chinext": {
+      "value": 3310.305,
+      "change_pct": -1.04
+    },
     "sentiment": "neutral",
-    "hot_sectors": ["煤炭", "石油石化", "黄金", "汽车(比亚迪)", "培育钻石"],
-    "cold_sectors": ["半导体", "光伏储能(回调)", "AI硬件"],
-    "notes": "中东冲突推高油价至高位,金价创$5388新高。资源股暴涨,科技股普遍回调。沪强深弱格局。"
+    "hot_sectors": [],
+    "cold_sectors": [],
+    "notes": "上证指数+0.47%收报4182.59，沪强深弱分化明显(深证/创业板数据来自02-27)。中东冲突升级推高油价至关键水平，资源品板块全线暴涨(中国石化涨停、山东黄金+9.98%、赤峰黄金涨停)，科技股普遍回调(科创50 -1.56%)。磷化工受美国将磷列为战略资源催化继续走强，大飞机/培育钻石等题材活跃。注意：市场广度和板块数据因代理错误缺失，分析质量受影响。"
   },
   "strategy_scan": {
-    "total_stocks_scanned": 16,
+    "total_stocks_scanned": 86,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-03-02T15:20:00+08:00"
+    "scan_time": "2026-03-02T17:52:51.432499+08:00"
   },
   "recommendations": [
     {
       "code": "688377.SH",
       "name": "迪威尔",
-      "price": 51.10,
-      "rps120": 89.1,
+      "price": 51.1,
+      "rps120": 91.77,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=91.77%在理想区间，今日业绩超预期+5.43%大涨创历史新高。净利润YoY+40.6%，净现比112%现金流良好。但今日涨幅较大不宜追高，且估值处历史89%高位(PE 80.9x)。等回调至¥48附近再评估入场",
       "score_company": 7.4,
       "score_trend": 8.8,
       "score_value": 3.9,
       "pe": 80.9,
-      "valuation_percentile": 87.8,
-      "revenue_yoy": 0.10,
+      "valuation_percentile": 88.7,
+      "revenue_yoy": 0.1,
       "net_profit_yoy": 0.41,
-      "gross_margin": 21.8,
-      "highlights": ["业绩超预期(当日+5.43%)", "净现比112%", "产能扩张(在建工程8.7%)", "公募持股8.6%", "专用设备行业上涨趋势", "RPS94%强势"],
-      "risks": ["估值历史高位88%"],
-      "events": ["2025年报待披露"],
-      "catalyst": "业绩超预期引发今日大涨+5.43%,深海/深地经济+天然气概念,净利+41%高增长",
-      "news_refs": [{"title": "迪威尔业绩超预期引发股价大涨", "source": "芝士财富", "date": "2026-03-02"}],
+      "gross_margin": 21.79,
+      "highlights": [
+        "业绩超预期+5.43%",
+        "净现比112%",
+        "产能扩张(在建8.7%)",
+        "公募基金持股8.6%",
+        "专用设备行业趋势走强"
+      ],
+      "risks": [
+        "估值历史高位89%",
+        "今日涨幅大不宜追高"
+      ],
+      "events": [
+        "2025年报待披露",
+        "创历史新高¥46.88"
+      ],
+      "catalyst": "2026-03-02业绩超预期引发大涨+5.43%"
+    },
+    {
+      "code": "603588.SH",
+      "name": "高能环境",
+      "price": 13.19,
+      "rps120": 94.8,
       "recommendation": "WATCH",
       "confidence": "medium",
-      "reasoning": "RPS120=89.1%在理想区间，净利+41%高增长，净现比112%优秀，6亮点1风险。但今日已涨+5.43%不宜追高,小市值(99亿)弹性大。等回调至48-49考虑入场。估值87.8%尚可。"
+      "reasoning": "RPS120=94.80%超出理想区间上限(>92%)，但公司评分优异(company 8.1, trend 9.7, value 6.3)。环保固废治理龙头，估值仅41.57%历史中位偏低，回购1.5亿元。但日和周级别超买，偿债压力大。RPS偏高，暂观望",
+      "score_company": 8.1,
+      "score_trend": 9.7,
+      "score_value": 6.3,
+      "pe": 11.1,
+      "valuation_percentile": 41.57,
+      "revenue_yoy": null,
+      "net_profit_yoy": null,
+      "gross_margin": null,
+      "highlights": [
+        "环境治理行业走强",
+        "收现比110%",
+        "回购1923万股1.5亿元",
+        "估值历史低位"
+      ],
+      "risks": [
+        "RPS120=94.8%超出理想区间",
+        "日周级别超买",
+        "偿债压力大(现金短债比0.23)"
+      ],
+      "events": [],
+      "catalyst": "环保板块持续走强+低估值"
+    },
+    {
+      "code": "002250.SZ",
+      "name": "联化科技",
+      "price": 18.17,
+      "rps120": 93.12,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=93.12%略超理想区间上限。农药行业龙头，机构预测25-27年净利润增长296%/54%/26%，两家券商\"买入\"评级。北向资金6.3%，行业趋势走强。但RPS偏高，等回调至92%以下或拉回至MA10附近再评估",
+      "score_company": 8.0,
+      "score_trend": 9.7,
+      "score_value": 5.3,
+      "pe": 17.7,
+      "valuation_percentile": 60.36,
+      "revenue_yoy": 0.08,
+      "net_profit_yoy": 3.84,
+      "gross_margin": 25.96,
+      "highlights": [
+        "净利润YoY+384%恢复性增长",
+        "北向资金6.3%",
+        "农化制品行业趋势走强",
+        "机构买入评级(目标价隐含空间)"
+      ],
+      "risks": [
+        "RPS120=93.1%超出理想区间",
+        "存货变现慢(221天)",
+        "重资产模式"
+      ],
+      "events": [
+        "化肥市场普涨行情",
+        "创近24个月新高¥19.1"
+      ],
+      "catalyst": "国内化肥市场普涨+机构密集覆盖"
+    },
+    {
+      "code": "002683.SZ",
+      "name": "广东宏大",
+      "price": 48.53,
+      "rps120": 85.09,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=85.09%在理想区间，民爆制品行业龙头。营收YoY+55.9%、净利润+36.3%增长强劲，股东户数减少31%大资金买入。但RPS20仅22.67%(近期走弱)，商誉占净资产52%风险高，1月26日大跌-8.37%抛压重。短期动能不足，等RPS20恢复至50%以上再考虑",
+      "score_company": 7.8,
+      "score_trend": 7.4,
+      "score_value": 5.1,
+      "pe": 13.7,
+      "valuation_percentile": 64.31,
+      "revenue_yoy": 0.56,
+      "net_profit_yoy": 0.36,
+      "gross_margin": 19.94,
+      "highlights": [
+        "民爆制品行业龙头",
+        "营收YoY+55.9%",
+        "股东户数减少31%",
+        "激光陀螺子公司投产"
+      ],
+      "risks": [
+        "商誉占净资产52%高风险",
+        "RPS20仅22.67%短期走弱",
+        "1月大跌-8.37%抛压重"
+      ],
+      "events": [
+        "国科宏惯投产(激光陀螺)",
+        "股东户数减少33%"
+      ],
+      "catalyst": "激光陀螺子公司投产+国防布局"
+    },
+    {
+      "code": "603031.SH",
+      "name": "安孚科技",
+      "price": 57.89,
+      "rps120": 89.77,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=89.77%在理想区间，储能电池概念。Q3净利润YoY+232%成长性强，ROIC 11%，合同负债增长38%订单充足。但商誉占净资产95%极高风险，估值73.67%偏高(PE 77x)，且3月解禁570万股(2.21%)。等解禁压力消化后再评估",
+      "score_company": 7.8,
+      "score_trend": 8.9,
+      "score_value": 4.8,
+      "pe": 9.5,
+      "valuation_percentile": 73.67,
+      "revenue_yoy": 0.004,
+      "net_profit_yoy": 0.06,
+      "gross_margin": 49.39,
+      "highlights": [
+        "Q3净利润同比+232%",
+        "ROIC 11%",
+        "合同负债增长38%订单充足",
+        "近1年股价涨幅超91%"
+      ],
+      "risks": [
+        "商誉占净资产95%极高",
+        "3月26日解禁570万股",
+        "估值偏高PE77x"
+      ],
+      "events": [
+        "2026/03/26解禁570万股",
+        "国信证券买入评级目标价63元"
+      ],
+      "catalyst": "储能业务+南孚电池基础+硬科技第二曲线"
+    },
+    {
+      "code": "600096.SH",
+      "name": "云天化",
+      "price": 43.99,
+      "rps120": 90.44,
+      "recommendation": "WATCH",
+      "confidence": "high",
+      "reasoning": "已持仓。磷化工龙头，ROE 25%，RPS120=90.44%理想区间。美国将磷列为战略资源是新增重大催化，磷肥价格全线上涨。今日磷化工板块延续强势(澄星股份3连板)。估值84.21%偏高但行业龙头溢价合理。持仓继续跟踪",
+      "score_company": 8.7,
+      "score_trend": 9.8,
+      "score_value": 4.1,
+      "pe": 28.6,
+      "valuation_percentile": 84.21,
+      "revenue_yoy": -0.2,
+      "net_profit_yoy": 0.003,
+      "gross_margin": 20.85,
+      "highlights": [
+        "磷化工行业龙头",
+        "ROE 25%极高",
+        "合同负债21亿+36%",
+        "美国将磷列为战略资源催化",
+        "股息3.2%"
+      ],
+      "risks": [
+        "重资产模式(固定资产39%)",
+        "估值84%历史高位"
+      ],
+      "events": [
+        "美国将磷列为战略资源",
+        "磷化工板块延续强势"
+      ],
+      "catalyst": "美国将磷列为战略资源+全球磷供应链重构"
     },
     {
       "code": "601020.SH",
       "name": "华钰矿业",
-      "price": 40.70,
-      "rps120": 89.2,
+      "price": 40.7,
+      "rps120": 90.73,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=90.73%在理想区间，铅锌矿+锗镓锑墨概念。业绩预告归母净利润同比+215-255%超预期，净现比130%很高。但非经常性损益占比大(扣非净利润仅53%)收益质量低，1月29日大跌-5.03%抛压重，估值72%中位。近期有色金属受中东冲突催化，可关注但不急于入场",
       "score_company": 8.3,
       "score_trend": 7.4,
       "score_value": 4.8,
-      "pe": 37.0,
-      "valuation_percentile": 70.8,
+      "pe": 9.9,
+      "valuation_percentile": 72.07,
       "revenue_yoy": 0.58,
       "net_profit_yoy": 3.05,
-      "gross_margin": 51.0,
-      "highlights": ["龙头企业", "净利+305%爆发增长", "营收+58%", "毛利率51%极高"],
-      "risks": ["估值波动大", "矿业周期", "管理层风险"],
-      "events": [],
-      "catalyst": "中东冲突推高金价至$5388创新高,黄金矿业直接受益。净利暴增305%验证业绩弹性。今日+5.11%受金价催化。",
-      "news_refs": [{"title": "中东冲突推高金价至$5388", "source": "市场行情", "date": "2026-03-02"}],
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": "RPS120=89.2%理想区间，估值百分位仅70.8%(历史低位!),净利+305%爆发性增长,毛利51%极高。但今日已+5.11%追高风险大,且3条风险(矿业周期性)。关键判断:如果中东冲突持续推高金价,矿业股有持续催化;否则回调风险大。等回调至38-39区间考虑。"
-    },
-    {
-      "code": "002046.SZ",
-      "name": "国机精工",
-      "price": 54.00,
-      "rps120": 88.7,
-      "score_company": 6.9,
-      "score_trend": 9.8,
-      "score_value": 3.4,
-      "pe": 102.9,
-      "valuation_percentile": 91.8,
-      "revenue_yoy": 0.27,
-      "net_profit_yoy": 0.15,
-      "gross_margin": 34.7,
-      "highlights": ["磨具磨料行业龙头", "产能扩张", "股东户数减少26%(大资金买入)", "通用设备行业趋势上行"],
-      "risks": ["估值历史高位92%"],
-      "events": ["2026/09/21解禁1.10%"],
-      "catalyst": "培育钻石板块今日走强带动。股东户数减少26%说明筹码集中。通用设备行业趋势评分9.8/10极高。",
-      "news_refs": [{"title": "培育钻石板块走高,国机精工跟涨", "source": "芝士财富", "date": "2026-03-02"}],
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": "RPS120=88.7%理想区间,趋势评分9.8/10极强,股东户数大减26%是筹码集中信号。但估值92%历史高位,PE>100倍偏贵,净利仅增15%不匹配高估值。风险收益比不够理想,观望为主。"
+      "gross_margin": 51.02,
+      "highlights": [
+        "业绩预告净利+215-255%",
+        "净现比130%",
+        "有色金属行业趋势走强",
+        "中东冲突催化有色板块"
+      ],
+      "risks": [
+        "扣非净利润仅53%收益质量低",
+        "1月大跌-5.03%抛压",
+        "存货周转天数增加147天"
+      ],
+      "events": [
+        "业绩预告归母净利+215-255%",
+        "中东冲突推升金属价格"
+      ],
+      "catalyst": "贵金属及小金属价格上涨+中东地缘催化"
     },
     {
       "code": "688386.SH",
       "name": "泛亚微透",
       "price": 95.65,
-      "rps120": 85.0,
+      "rps120": 85.4,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=85.40%在理想区间，ePTFE膜材料细分龙头。营收YoY+42%、净利润+37.6%成长性强，净现比125%极高，毛利率45.85%。2025年报快报营收7.22亿+40.3%/净利1.13亿+14%基本面扎实。但RPS20仅44%(短期走弱)，估值83%偏高，商誉15%有风险。等短期动能恢复后再考虑",
       "score_company": 7.5,
       "score_trend": 7.8,
       "score_value": 3.8,
-      "pe": 77.0,
-      "valuation_percentile": 88.6,
+      "pe": 5.3,
+      "valuation_percentile": 83.07,
       "revenue_yoy": 0.42,
       "net_profit_yoy": 0.38,
-      "gross_margin": 45.9,
-      "highlights": ["8条亮点", "营收+42%高增长", "净利+38%", "毛利45.9%极高", "小市值87亿弹性大"],
-      "risks": ["估值88.6%偏高", "科创板波动大"],
-      "events": [],
-      "catalyst": "持续跟踪标的(02-11推荐),RPS120=85%仍在理想区间偏低位,今日-2%回调提供窗口",
-      "news_refs": [],
+      "gross_margin": 45.85,
+      "highlights": [
+        "营收YoY+42%高成长",
+        "净现比125%极高",
+        "毛利率45.85%",
+        "产能扩张(在建14%)",
+        "2025年报快报营收+40.3%"
+      ],
+      "risks": [
+        "RPS20仅44%短期走弱",
+        "估值83%偏高",
+        "商誉占净资产15%"
+      ],
+      "events": [
+        "2025年报快报营收7.22亿+40.3%",
+        "获得发明专利"
+      ],
+      "catalyst": "ePTFE膜进口替代+新能源线缆拓展"
+    },
+    {
+      "code": "002046.SZ",
+      "name": "国机精工",
+      "price": 54.0,
+      "rps120": 90.07,
       "recommendation": "WATCH",
       "confidence": "medium",
-      "reasoning": "RPS120=85%在理想区间低端(更安全),8亮点2风险比优秀,营收+42%/净利+38%增速不错,毛利45.9%极高。今日-2%回调提供观察窗口。但已跟踪多期(02-11起)股价从¥97→¥95.65基本没动,缺乏明确催化剂。继续观望。"
+      "reasoning": "RPS120=90.07%在理想区间，磨具磨料行业龙头+培育钻石概念。营收YoY+27.2%，股东户数减少26%大资金买入。但估值极高(PE 103x，历史92%)，RPS20仅7.8%(近期严重走弱)。创历史新高后大幅回调信号，等短期趋势修复再考虑",
+      "score_company": 6.9,
+      "score_trend": 9.8,
+      "score_value": 3.4,
+      "pe": 20.7,
+      "valuation_percentile": 92.46,
+      "revenue_yoy": 0.27,
+      "net_profit_yoy": 0.15,
+      "gross_margin": 34.71,
+      "highlights": [
+        "磨具磨料行业龙头",
+        "股东户数减少26%",
+        "通用设备行业趋势走强",
+        "培育钻石概念"
+      ],
+      "risks": [
+        "估值极高PE 103x(历史92%)",
+        "RPS20仅7.8%近期严重走弱"
+      ],
+      "events": [
+        "培育钻石板块走高",
+        "创历史新高¥55.5"
+      ],
+      "catalyst": "培育钻石板块催化+军工/航空航天概念"
+    },
+    {
+      "code": "605167.SH",
+      "name": "利柏特",
+      "price": 18.25,
+      "rps120": 91.73,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=91.73%在理想区间，化学工程+核电模块化概念。ROIC 12%，净现比138%，在手订单充足(合同负债+20%)。但估值97.35%历史极高位(PE 37.6x)，RPS10近期走弱(8.8%)。虽有广发/长江\"买入\"评级目标价20元(+10%空间)，但估值泡沫风险大，AVOID倾向但鉴于核电催化暂列WATCH",
+      "score_company": 6.8,
+      "score_trend": 8.2,
+      "score_value": 3.2,
+      "pe": 4.6,
+      "valuation_percentile": 97.35,
+      "revenue_yoy": -0.23,
+      "net_profit_yoy": -0.11,
+      "gross_margin": 20.44,
+      "highlights": [
+        "ROIC 12%",
+        "净现比138%",
+        "核电模块化受益",
+        "FPSO海工业务成长"
+      ],
+      "risks": [
+        "估值97.35%历史极高位",
+        "营收YoY-23.4%下滑",
+        "净利润-11.1%下降",
+        "近10日走弱RPS仅8.8%"
+      ],
+      "events": [
+        "利柏转债预计满足赎回条件",
+        "广发证券买入评级目标价20元"
+      ],
+      "catalyst": "全球FPSO投资加速+核电模块化"
     },
     {
       "code": "688717.SH",
       "name": "艾罗能源",
-      "price": 111.00,
-      "rps120": 88.6,
+      "price": 111.0,
+      "rps120": 92.38,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=92.38%勉强在理想区间上沿。今日业绩快报超预期大涨+8.79%创24月新高，营收+32.84%。但净利润同比-43.16%大幅下降，估值99.18%历史极高位(PE 153x)。光伏逆变器行业虽回暖但盈利能力下降。今日涨幅过大+估值极高，不宜追入",
       "score_company": 6.7,
       "score_trend": 8.1,
       "score_value": 3.2,
-      "pe": 153.5,
-      "valuation_percentile": 98.4,
+      "pe": 2.1,
+      "valuation_percentile": 99.18,
       "revenue_yoy": 0.26,
       "net_profit_yoy": -0.06,
-      "gross_margin": 32.3,
-      "highlights": ["逆变器行业恢复", "储能+光伏概念", "RPS120理想区间"],
-      "risks": ["估值98.4%极高位"],
-      "events": [],
-      "catalyst": "今日暴涨+8.79%,可能受储能/光伏政策催化",
-      "news_refs": [],
-      "recommendation": "AVOID",
-      "confidence": "high",
-      "reasoning": "虽然RPS120=88.6%在理想区间,但估值98.4%极高位,PE=153倍,净利还在负增长-6%。今日已暴涨+8.79%更不宜追高。典型的概念炒作,基本面不支撑高估值。回避。"
-    }
-  ],
-  "watchlist_continued": [
+      "gross_margin": 32.32,
+      "highlights": [
+        "今日业绩快报超预期+8.79%",
+        "营收YoY+25.8%回暖",
+        "全球化布局"
+      ],
+      "risks": [
+        "估值99.18%历史极高位",
+        "净利润同比-43.16%大降",
+        "今日涨幅过大+8.79%"
+      ],
+      "events": [
+        "2025年报快报营收40.82亿+32.84%",
+        "净利润1.16亿-43.16%"
+      ],
+      "catalyst": "光伏逆变器行业回暖+全球化拓展"
+    },
     {
-      "code": "688630.SH",
-      "name": "芯碁微装",
-      "status": "跟踪中",
-      "last_price": 199.00,
-      "target_entry": 195.00,
-      "note": "Q4净利+1522%,等回调至195,今日需获取最新价"
+      "code": "002283.SZ",
+      "name": "天润工业",
+      "price": 9.33,
+      "rps120": 88.37,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=88.37%在理想区间，曲轴连杆龙头。方正证券/国泰海通均给\"增持/买入\"评级，北美电力(AIDC大机)增量可期。但估值89%历史高位，日级别超买，大股东质押41%被动减持风险。等超买消化后可考虑",
+      "score_company": 7.4,
+      "score_trend": 9.3,
+      "score_value": 3.3,
+      "pe": 16.5,
+      "valuation_percentile": 89.13,
+      "revenue_yoy": 0.05,
+      "net_profit_yoy": 0.04,
+      "gross_margin": 23.25,
+      "highlights": [
+        "曲轴连杆核心供应商",
+        "AIDC大机增量可期",
+        "创24月新高",
+        "合同负债+52%订单充足"
+      ],
+      "risks": [
+        "日级别超买",
+        "估值89%历史高位",
+        "大股东质押41%",
+        "存货变现慢191天"
+      ],
+      "events": [
+        "方正证券买入评级目标价",
+        "国泰海通增持评级目标价9.7元"
+      ],
+      "catalyst": "北美电力(AIDC)大机需求+工业母机概念"
+    },
+    {
+      "code": "300855.SZ",
+      "name": "图南股份",
+      "price": 41.45,
+      "rps120": 86.82,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=86.82%在理想区间，金属新材料+航发产业链。公募基金9%高持仓，行业趋势走强。但营收YoY-20.5%、净利润-52.2%业绩大幅下滑，PE 136x极高。国投证券预测26年净利润+153%大幅恢复，但25年利润-40%先承压。等业绩拐点确认后再考虑",
+      "score_company": 7.6,
+      "score_trend": 8.0,
+      "score_value": 4.0,
+      "pe": 5.6,
+      "valuation_percentile": 81.92,
+      "revenue_yoy": -0.2,
+      "net_profit_yoy": -0.52,
+      "gross_margin": 28.05,
+      "highlights": [
+        "公募基金9%高持仓",
+        "金属新材料行业趋势走强",
+        "大飞机板块催化",
+        "国投证券目标价46元"
+      ],
+      "risks": [
+        "营收-20.5%净利润-52.2%大幅下滑",
+        "PE 136x极高",
+        "估值82%历史高位",
+        "存货变现慢217天"
+      ],
+      "events": [
+        "大飞机板块拉升(航发板块涨停)",
+        "创历史新高¥41.45"
+      ],
+      "catalyst": "航发产业链+大飞机板块催化"
+    },
+    {
+      "code": "601233.SH",
+      "name": "桐昆股份",
+      "price": 24.38,
+      "rps120": 93.36,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=93.36%超出理想区间。石化龙头，聚酯产业链景气回暖，申万宏源预测25年净利润增长70%。但毛利率仅5.1%行业衰退特征，经营收益质量低(-8.7%)，周级别超买，偿债压力大。RPS偏高+基本面存忧，暂观望",
+      "score_company": 8.1,
+      "score_trend": 8.0,
+      "score_value": 5.0,
+      "pe": 14.8,
+      "valuation_percentile": 69.86,
+      "revenue_yoy": -0.11,
+      "net_profit_yoy": 0.53,
+      "gross_margin": 5.81,
+      "highlights": [
+        "石化行业龙头",
+        "收现比110%",
+        "聚酯景气回暖",
+        "机构预测25年净利+70%"
+      ],
+      "risks": [
+        "RPS120=93.4%超出理想区间",
+        "毛利率仅5.1%",
+        "经营收益质量低-8.7%",
+        "周级别超买",
+        "偿债压力大"
+      ],
+      "events": [
+        "化学纤维板块走高",
+        "创24月新高¥24.38"
+      ],
+      "catalyst": "聚酯产业链景气回暖+炼化景气"
+    },
+    {
+      "code": "300435.SZ",
+      "name": "中泰股份",
+      "price": 30.59,
+      "rps120": 94.98,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=94.98%超出理想区间。燃气行业，Q3净利润+143%强劲增长，北向4.8%，行业趋势走强。但RPS20仅14.5%(近期严重走弱)，多位管理层减持，PE 173x极高。等回调至RPS120<92%且短期趋势恢复后再考虑",
+      "score_company": 8.2,
+      "score_trend": 8.5,
+      "score_value": 4.3,
+      "pe": 10.9,
+      "valuation_percentile": 69.38,
+      "revenue_yoy": 0.05,
+      "net_profit_yoy": 0.81,
+      "gross_margin": 29.38,
+      "highlights": [
+        "Q3净利润+143%",
+        "北向资金4.8%",
+        "燃气行业趋势走强",
+        "业绩超预期催化"
+      ],
+      "risks": [
+        "RPS120=95%超出理想区间",
+        "RPS20仅14.5%近期严重走弱",
+        "多位管理层减持",
+        "PE 173x极高"
+      ],
+      "events": [
+        "管理层减持完成",
+        "业绩超预期+8.48%"
+      ],
+      "catalyst": "天然气行业景气+燃料电池概念"
+    },
+    {
+      "code": "600295.SH",
+      "name": "鄂尔多斯",
+      "price": 17.58,
+      "rps120": 93.06,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=93.06%超出理想区间。冶钢辅料龙头，ROIC 15%，股息6.1%极高。创历史新高。但估值94%历史极高位，营收-9.8%下滑，收现比77%低，近3月无机构研报。RPS偏高+估值极高，暂不考虑",
+      "score_company": 7.1,
+      "score_trend": 9.4,
+      "score_value": 3.4,
+      "pe": 24.8,
+      "valuation_percentile": 94.14,
+      "revenue_yoy": -0.1,
+      "net_profit_yoy": 0.01,
+      "gross_margin": 23.69,
+      "highlights": [
+        "冶钢辅料龙头",
+        "ROIC 15%",
+        "股息6.1%极高",
+        "创历史新高"
+      ],
+      "risks": [
+        "RPS120=93%超出理想区间",
+        "估值94%历史极高位",
+        "营收-9.8%下滑",
+        "收现比77%低"
+      ],
+      "events": [
+        "创历史新高¥17.58",
+        "钢铁板块走高"
+      ],
+      "catalyst": "钢铁行业回暖+高股息策略"
     }
   ],
   "summary": {
-    "total_scanned": 16,
+    "total_scanned": 86,
     "buy_recommendations": 0,
-    "watch_recommendations": 4,
-    "avoid_recommendations": 1,
+    "watch_recommendations": 16,
+    "avoid_recommendations": 0,
     "market_call": "谨慎",
-    "reasoning": "沪强深弱分化明显,资源股受中东冲突催化暴涨但持续性存疑。科技股普遍回调。策略池16只中有多只今日大涨(追高风险),RPS理想区间内缺乏明确高信心BUY信号。建议观望为主,等回调提供更好入场点。"
+    "reasoning": "上证指数+0.47%收报4182.59，沪强深弱分化明显(深证/创业板数据来自02-27)。中东冲突升级推高油价至关键水平，资源品板块全线暴涨(中国石化涨停、山东黄金+9.98%、赤峰黄金涨停)，科技股普遍回调(科创50 -1.56%)。磷化工受美国将磷列为战略资源催化继续走强，大飞机/培育钻石等题材活跃。注意：市场广度和板块数据因代理错误缺失，分析质量受影响。"
   }
 }
