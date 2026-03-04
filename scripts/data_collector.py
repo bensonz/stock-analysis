@@ -414,28 +414,33 @@ def _fetch_market_cheesefortune() -> dict | None:
         except Exception as e:
             print(f"  CheeseForTune breadth failed: {e}", file=sys.stderr)
 
-        # --- Sectors from plateStatPc (single call, sort in Python) ---
+        # --- Sectors from plateStatPc ---
         try:
-            r_sec = c._request(
+            r_top = c._request(
                 f"{c.BASE_URL}/api/v3/market/plateStatPc"
                 "?ascOrDesc=1&step=1&type=13&isCN=true"
             )
+            r_bot = c._request(
+                f"{c.BASE_URL}/api/v3/market/plateStatPc"
+                "?ascOrDesc=-1&step=1&type=13&isCN=true"
+            )
 
-            if r_sec.get("code") == "000":
-                all_sectors = [
-                    {
+            top5, bot5 = [], []
+            if r_top.get("code") == "000":
+                for s in r_top["datas"].get("data", [])[:5]:
+                    top5.append({
                         "板块名称": s.get("name", s.get("code", "")),
                         "涨跌幅": round(float(s.get("chg", 0)), 2),
-                    }
-                    for s in r_sec["datas"].get("data", [])
-                    if s.get("chg") is not None
-                ]
-                all_sectors.sort(key=lambda x: x["涨跌幅"], reverse=True)
-                if all_sectors:
-                    result["sectors"] = {
-                        "top5": all_sectors[:5],
-                        "bottom5": all_sectors[-5:][::-1],
-                    }
+                    })
+            if r_bot.get("code") == "000":
+                for s in r_bot["datas"].get("data", [])[:5]:
+                    bot5.append({
+                        "板块名称": s.get("name", s.get("code", "")),
+                        "涨跌幅": round(float(s.get("chg", 0)), 2),
+                    })
+
+            if top5 or bot5:
+                result["sectors"] = {"top5": top5, "bottom5": bot5}
         except Exception as e:
             print(f"  CheeseForTune sectors failed: {e}", file=sys.stderr)
 
