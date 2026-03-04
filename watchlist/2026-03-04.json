@@ -1,0 +1,404 @@
+{
+  "date": "2026-03-04",
+  "market_overview": {
+    "shanghai_composite": {
+      "value": 4122.676,
+      "change_pct": -1.43
+    },
+    "shenzhen_component": {
+      "value": 14022.392,
+      "change_pct": -3.07
+    },
+    "chinext": {
+      "value": 3209.482,
+      "change_pct": -2.57
+    },
+    "sentiment": "bearish",
+    "hot_sectors": [],
+    "cold_sectors": [],
+    "notes": "03-03遭遇系统性暴跌(科创50-5.21%领跌，深证-3.07%，创业板-2.57%，上证-1.43%)。今日03-04弱势反弹，持仓微涨0.1-0.2%，未见强势修复信号。IV情绪'极度乐观'(均IV Rank 12.2%)验证了市场自满后波动率飙升的规律。宽度/板块数据因代理服务器问题缺失，影响全面判断。组合4只持仓全线浮亏，总PnL=-3.31%。本日决定平仓睿创微纳(time_decay+突破失败)，释放资金等待更好入场时机。"
+  },
+  "strategy_scan": {
+    "total_stocks_scanned": 83,
+    "strategy_name": "小市值-无 20RP",
+    "scan_time": "2026-03-04T14:35:13.271001+08:00"
+  },
+  "recommendations": [
+    {
+      "code": "605099.SH",
+      "name": "共创草坪",
+      "price": null,
+      "rps120": 87.08,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=87.08%在理想区间，0风险！ROE20%极高，利润+54%，合同负债+20%，股东户数-32%筹码集中。PE=28.5但score_value=4.5尚可，估值百分位75%合理。世界杯申办+苏超赞助催化。但近10日RPS仅6.1%短期极弱，需等企稳反弹信号再入。IV极度乐观环境下不宜追新仓。",
+      "score_company": 8.8,
+      "score_trend": 9.5,
+      "score_value": 4.5,
+      "pe": 28.51,
+      "valuation_percentile": 75.19,
+      "revenue_yoy": 0.095,
+      "net_profit_yoy": 0.309,
+      "gross_margin": 34.04,
+      "highlights": [
+        "利润+54%",
+        "ROE20%",
+        "合同负债+20%",
+        "股东户数-32%",
+        "0风险"
+      ],
+      "risks": [],
+      "events": [
+        "大湾区申办世界杯催化",
+        "苏超赞助商"
+      ],
+      "catalyst": "体育赛事催化+业绩增长+筹码集中"
+    },
+    {
+      "code": "688543.SH",
+      "name": "国科军工",
+      "price": null,
+      "rps120": 85.36,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=85.36%在理想区间，业绩超预期(年报+111%净利增长)催化03-02涨7.17%。军工装备板块走强。但估值百分位94.82%极高，6月解禁44%股本是重大风险。PE=70高企。今日RPS20=90%说明短期已偏强，不宜追。等回调至合理位置再评估。",
+      "score_company": 7.1,
+      "score_trend": 9.3,
+      "score_value": 3.3,
+      "pe": 70.02,
+      "valuation_percentile": 94.82,
+      "revenue_yoy": 0.015,
+      "net_profit_yoy": -0.076,
+      "gross_margin": 37.41,
+      "highlights": [
+        "业绩超预期+111%",
+        "净现比125%",
+        "军工装备板块走强"
+      ],
+      "risks": [
+        "估值历史极高位94.82%",
+        "6月解禁44%股本"
+      ],
+      "events": [
+        "2025年报快报",
+        "军工板块拉升"
+      ],
+      "catalyst": "业绩超预期+军工装备景气"
+    },
+    {
+      "code": "002895.SZ",
+      "name": "川恒股份",
+      "price": 41.29,
+      "rps120": 91.1,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=91.1%在理想区间，磷化工龙头之一，0风险！营收+46%/净利+52%高成长。score_company=8.7极高。估值百分位56.83%合理。磷化工板块趋势向上(自2025-04)。但已持有云天化(同板块)，不宜同板块过度集中。且中东冲突推高化肥价格后短期已反映。等云天化结果明确后再考虑。",
+      "score_company": 8.7,
+      "score_trend": 8.9,
+      "score_value": 5.6,
+      "pe": 20.09,
+      "valuation_percentile": 56.83,
+      "revenue_yoy": 0.461,
+      "net_profit_yoy": 0.517,
+      "gross_margin": 31.81,
+      "highlights": [
+        "营收+46%",
+        "净利+52%",
+        "ROE13%",
+        "0风险",
+        "磷化工趋势向上"
+      ],
+      "risks": [],
+      "events": [
+        "磷化工板块拉升",
+        "中东冲突催化化肥价格"
+      ],
+      "catalyst": "磷化工景气+业绩高增长"
+    },
+    {
+      "code": "688630.SH",
+      "name": "芯碁微装",
+      "price": 181.61,
+      "rps120": 88.93,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=88.93%理想区间，Q4净利+1522%超级业绩，7亮点1风险，9家机构89%买入评级。02-26年报快报后+8.12%，后回调至¥181(距推荐价¥201.45 -9.8%)。今日¥181处于回调中段。估值百分位83%偏高但有业绩支撑。PCB光刻设备国产替代赛道。从missed_opportunity看，03-03推荐价¥103.5的铂力特现已-1.55%，说明科技股短期承压。IV极低环境下谨慎，等¥175-180企稳确认再考虑入场。",
+      "score_company": 7.9,
+      "score_trend": 9.4,
+      "score_value": 4.3,
+      "pe": 82.78,
+      "valuation_percentile": 82.98,
+      "revenue_yoy": 0.3,
+      "net_profit_yoy": 0.282,
+      "gross_margin": 42.09,
+      "highlights": [
+        "Q4净利+1522%",
+        "合同负债+66%",
+        "9家机构89%买入",
+        "光刻设备国产替代"
+      ],
+      "risks": [
+        "应收账款295天"
+      ],
+      "events": [
+        "2025年报快报+8.12%",
+        "PCB概念拉升"
+      ],
+      "catalyst": "超级业绩+PCB光刻国产替代"
+    },
+    {
+      "code": "002250.SZ",
+      "name": "联化科技",
+      "price": 16.8,
+      "rps120": 86.32,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=86.32%在理想区间，农药龙头，净利+384%超预期。长江证券买入评级。但03-03大跌-8.54%放量抛压重，需要消化卖压。估值百分位53%合理。农化制品板块自2025-04持续走强。等企稳后再评估。",
+      "score_company": 7.9,
+      "score_trend": 8.5,
+      "score_value": 5.8,
+      "pe": 39.09,
+      "valuation_percentile": 53.32,
+      "revenue_yoy": 0.082,
+      "net_profit_yoy": 3.838,
+      "gross_margin": 25.96,
+      "highlights": [
+        "净利+384%",
+        "北向6.3%",
+        "农化趋势向上"
+      ],
+      "risks": [
+        "03-03大跌-8.54%抛压重",
+        "存货221天",
+        "重资产"
+      ],
+      "events": [
+        "化肥普涨",
+        "机构调研12家"
+      ],
+      "catalyst": "农药业绩爆发+化肥涨价"
+    },
+    {
+      "code": "603031.SH",
+      "name": "安孚科技",
+      "price": 50.9,
+      "rps120": 88.58,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=88.58%理想区间，储能电池+南孚电池双轮驱动，净利+232%。国信证券增持评级目标价¥63。4亮点1风险。但商誉占净资产95%极高是重大风险。从missed_opportunity看已从¥55.73回调至¥50.90(-8.67%)。估值百分位71%尚可。等商誉风险评估后再决定。",
+      "score_company": 7.8,
+      "score_trend": 8.9,
+      "score_value": 5.0,
+      "pe": 68.11,
+      "valuation_percentile": 71.38,
+      "revenue_yoy": 0.004,
+      "net_profit_yoy": 0.056,
+      "gross_margin": 49.39,
+      "highlights": [
+        "净利+232%",
+        "合同负债+38%",
+        "ROIC11%"
+      ],
+      "risks": [
+        "商誉占净资产95%"
+      ],
+      "events": [
+        "国信证券增持@¥63",
+        "储能概念"
+      ],
+      "catalyst": "储能+南孚电池双轮驱动"
+    },
+    {
+      "code": "688377.SH",
+      "name": "迪威尔",
+      "price": 45.48,
+      "rps120": 90.92,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=90.92%理想区间，深海/深地/天然气专用设备。5亮点1风险。公募8.6%持股高。净利+40.6%。但从missed_opportunity看已从¥49.17大跌至¥45.48(-7.5%)，短期动能受损。估值百分位87%偏高。近10日RPS从92%骤降至4.6%，说明短期遭遇重创。需等企稳。",
+      "score_company": 7.4,
+      "score_trend": 8.8,
+      "score_value": 4.0,
+      "pe": 71.99,
+      "valuation_percentile": 87.07,
+      "revenue_yoy": 0.099,
+      "net_profit_yoy": 0.406,
+      "gross_margin": 21.79,
+      "highlights": [
+        "净利+40.6%",
+        "公募8.6%",
+        "深海/深地设备"
+      ],
+      "risks": [
+        "估值87%历史高位"
+      ],
+      "events": [
+        "创历史新高后回调",
+        "可转债预案"
+      ],
+      "catalyst": "深海经济+天然气设备需求"
+    },
+    {
+      "code": "002046.SZ",
+      "name": "国机精工",
+      "price": 48.0,
+      "rps120": 88.72,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=88.72%理想区间，磨具磨料龙头。股东户数-29%筹码集中。通用设备板块走强。但03-03大跌-8.17%放量抛压重。估值百分位90%偏高。从missed_opportunity看已从¥54跌至¥48(-11.1%)。培育钻石板块跟涨。等大跌后企稳再评估。",
+      "score_company": 6.8,
+      "score_trend": 9.6,
+      "score_value": 3.5,
+      "pe": 91.47,
+      "valuation_percentile": 90.23,
+      "revenue_yoy": 0.272,
+      "net_profit_yoy": 0.154,
+      "gross_margin": 34.71,
+      "highlights": [
+        "磨具磨料龙头",
+        "股东户数-29%",
+        "通用设备趋势向上"
+      ],
+      "risks": [
+        "03-03大跌-8.17%抛压重",
+        "估值90%高位"
+      ],
+      "events": [
+        "培育钻石板块跟涨",
+        "创历史新高"
+      ],
+      "catalyst": "通用设备景气+培育钻石+国产替代"
+    },
+    {
+      "code": "688155.SH",
+      "name": "先惠技术",
+      "price": 85.63,
+      "rps120": 90.0,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=90.0%理想区间，锂电专用设备，业绩快报净利+57.75%超预期(03-02涨5.33%)。合同负债9.1亿占营收37%订单极充足。5亮点2风险。估值百分位56%合理。海外项目毛利率高。但从missed_opportunity看已从¥90.85跌至¥85.63(-5.75%)，短期回调中。等回调企稳在¥83-85区间可考虑入场。",
+      "score_company": 7.2,
+      "score_trend": 8.0,
+      "score_value": 5.9,
+      "pe": 30.84,
+      "valuation_percentile": 55.98,
+      "revenue_yoy": 0.051,
+      "net_profit_yoy": 0.08,
+      "gross_margin": 28.08,
+      "highlights": [
+        "净利+57.75%超预期",
+        "合同负债9.1亿(37%营收)",
+        "海外高毛利"
+      ],
+      "risks": [
+        "存货248天",
+        "商誉30%净资产"
+      ],
+      "events": [
+        "2025年报快报+5.33%",
+        "锂电设备板块"
+      ],
+      "catalyst": "业绩超预期+海外订单放量"
+    },
+    {
+      "code": "002448.SZ",
+      "name": "中原内配",
+      "price": 15.8,
+      "rps120": 91.75,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=91.75%理想区间上沿，汽车零部件。净利+348%爆发。股东户数-29%筹码集中。方正证券买入评级。AIDC散热受益。5亮点2风险。但收现比71%偏低，商誉13%净资产。估值百分位79%偏高。从missed_opportunity看02-04推荐后价格持平(+0%)，无明确启动信号。继续观察。",
+      "score_company": 7.7,
+      "score_trend": 9.0,
+      "score_value": 3.7,
+      "pe": 31.32,
+      "valuation_percentile": 79.21,
+      "revenue_yoy": 0.163,
+      "net_profit_yoy": 0.436,
+      "gross_margin": 27.88,
+      "highlights": [
+        "净利+348%",
+        "股东户数-29%",
+        "AIDC散热"
+      ],
+      "risks": [
+        "收现比71%低",
+        "商誉13%"
+      ],
+      "events": [
+        "方正证券买入评级",
+        "AIDC概念"
+      ],
+      "catalyst": "业绩爆发+AIDC散热需求"
+    },
+    {
+      "code": "600141.SH",
+      "name": "兴发集团",
+      "price": null,
+      "rps120": 86.07,
+      "recommendation": "WATCH",
+      "confidence": "low",
+      "reasoning": "RPS120=86.07%在理想区间，磷化工同板块(与云天化)。4亮点4风险，风险偏多。偿债压力大(现金短债比0.22)。收现比65%极低。不建议同板块再加仓。低优先级观察。",
+      "score_company": 8.1,
+      "score_trend": 8.4,
+      "score_value": 4.3,
+      "pe": 27.28,
+      "valuation_percentile": 83.16,
+      "revenue_yoy": 0.078,
+      "net_profit_yoy": 0.105,
+      "gross_margin": 16.78,
+      "highlights": [
+        "磷化工",
+        "回购2.2亿",
+        "分红2.8%"
+      ],
+      "risks": [
+        "4风险",
+        "收现比65%极低",
+        "偿债压力大"
+      ],
+      "events": [
+        "化工板块回调",
+        "兴发转债赎回"
+      ],
+      "catalyst": "磷化工景气"
+    },
+    {
+      "code": "300236.SZ",
+      "name": "上海新阳",
+      "price": null,
+      "rps120": 85.2,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=85.20%在理想区间，半导体材料/光刻胶。净利+62.7%高增长。估值百分位56.73%合理。4亮点1风险。但近10日RPS仅4.7%极弱(科技股系统性回调)。近3月无机构报告关注度低。等科技板块企稳后再评估。",
+      "score_company": 7.0,
+      "score_trend": 7.0,
+      "score_value": 5.0,
+      "pe": 91.38,
+      "valuation_percentile": 56.73,
+      "revenue_yoy": 0.306,
+      "net_profit_yoy": 0.627,
+      "gross_margin": 40.46,
+      "highlights": [
+        "净利+62.7%",
+        "半导体材料",
+        "光刻胶"
+      ],
+      "risks": [
+        "近3月无机构报告"
+      ],
+      "events": [
+        "电子化学品行业走强"
+      ],
+      "catalyst": "半导体国产替代+业绩增长"
+    }
+  ],
+  "summary": {
+    "total_scanned": 83,
+    "buy_recommendations": 0,
+    "watch_recommendations": 12,
+    "avoid_recommendations": 0,
+    "market_call": "观望",
+    "reasoning": "03-03遭遇系统性暴跌(科创50-5.21%领跌，深证-3.07%，创业板-2.57%，上证-1.43%)。今日03-04弱势反弹，持仓微涨0.1-0.2%，未见强势修复信号。IV情绪'极度乐观'(均IV Rank 12.2%)验证了市场自满后波动率飙升的规律。宽度/板块数据因代理服务器问题缺失，影响全面判断。组合4只持仓全线浮亏，总PnL=-3.31%。本日决定平仓睿创微纳(time_decay+突破失败)，释放资金等待更好入场时机。"
+  }
+}
