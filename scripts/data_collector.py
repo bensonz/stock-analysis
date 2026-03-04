@@ -284,39 +284,93 @@ def _fetch_indices_sina() -> dict:
 def _fetch_breadth_sina() -> dict | None:
     """Fetch market breadth (up/down/flat counts) from Sina Finance.
 
-    Uses the Sina A-share real-time list to count advancing/declining stocks.
+    Paginates through Sina's A-share real-time list (80 per page, ~65 pages).
     Returns dict with up/down/flat/total or None on failure.
     """
     import requests as _req
 
+    PAGE_SIZE = 80  # Sina max per page
+    MAX_PAGES = 80  # Safety cap (~6400 stocks)
+    url = "https://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/Market_Center.getHQNodeData"
+
     try:
-        # Sina real-time A-share list — page 1 with 5000 stocks covers everything
-        url = "https://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/Market_Center.getHQNodeData"
-        params = {
-            "page": 1,
-            "num": 5000,
-            "sort": "symbol",
-            "asc": 1,
-            "node": "hs_a",
-            "symbol": "",
-            "_s_r_a": "page",
-        }
         s = _req.Session()
         s.trust_env = False
-        r = s.get(url, params=params, timeout=30)
-        r.raise_for_status()
 
-        import json
-        data = json.loads(r.text)
-        if not data:
+        all_stocks = []
+        for page in range(1, MAX_PAGES + 1):
+            params = {
+                "page": page,
+                "num": PAGE_SIZE,
+                "sort": "symbol",
+                "asc": 1,
+                "node": "hs_a",
+                "symbol": "",
+                "_s_r_a": "page",
+            }
+            r = s.get(url, params=params, timeout=15)
+            r.raise_for_status()
+
+            data = json.loads(r.text)
+            if not data:
+                break
+            all_stocks.extend(data)
+            if len(data) < PAGE_SIZE:
+                break  # Last page
+
+        if not all_stocks:
             return None
 
-        up = sum(1 for s in data if float(s.get("changepercent", 0)) > 0)
-        down = sum(1 for s in data if float(s.get("changepercent", 0)) < 0)
-        flat = sum(1 for s in data if float(s.get("changepercent", 0)) == 0)
-        return {"up": up, "down": down, "flat": flat, "total": len(data)}
+        up = sum(1 for st in all_stocks if float(st.get("changepercent", 0)) > 0)
+        down = sum(1 for st in all_stocks if float(st.get("changepercent", 0)) < 0)
+        flat = sum(1 for st in all_stocks if float(st.get("changepercent", 0)) == 0)
+        return {"up": up, "down": down, "flat": flat, "total": len(all_stocks)}
     except Exception as e:
         print(f"  Sina breadth fetch failed: {e}", file=sys.stderr)
+        return None
+
+
+def _fetch_sectors_sina() -> dict | None:
+    """Fetch top/bottom sector rankings from Sina Finance.
+
+    Parses Sina's sinaindustry endpoint for sector change percentages.
+    Returns dict with top5/bottom5 lists or None on failure.
+    """
+    import requests as _req
+    import re
+
+    try:
+        s = _req.Session()
+        s.trust_env = False
+        r = s.get(
+            "http://vip.stock.finance.sina.com.cn/q/view/newSinaHy.php",
+            timeout=10,
+        )
+        r.raise_for_status()
+
+        m = re.search(r'var\s+\w+\s*=\s*({.+})', r.text)
+        if not m:
+            return None
+
+        sectors = []
+        for _key, val in re.findall(r'"(\w+)":"([^"]+)"', m.group(1)):
+            parts = val.split(",")
+            if len(parts) >= 6 and parts[5]:
+                sectors.append({
+                    "板块名称": parts[1],
+                    "涨跌幅": round(float(parts[5]), 2),
+                })
+
+        if not sectors:
+            return None
+
+        sectors.sort(key=lambda x: x["涨跌幅"], reverse=True)
+        return {
+            "top5": sectors[:5],
+            "bottom5": sectors[-5:][::-1],  # worst first
+        }
+    except Exception as e:
+        print(f"  Sina sectors fetch failed: {e}", file=sys.stderr)
         return None
 
 
@@ -384,8 +438,11 @@ def fetch_market_overview() -> dict:
         except Exception as e:
             result["breadth_error"] = str(e)
 
-    # --- Top/bottom sectors (AkShare/Eastmoney — may fail under proxy) ---
-    if ak:
+    # --- Top/bottom sectors (Sina first, AkShare fallback) ---
+    sectors = _fetch_sectors_sina()
+    if sectors:
+        result["sectors"] = sectors
+    elif ak:
         try:
             df = ak.stock_board_industry_name_em()
             if df is not None and not df.empty and "涨跌幅" in df.columns:
