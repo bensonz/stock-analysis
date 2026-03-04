@@ -231,27 +231,125 @@ def batch_enrich(stocks: list[dict], max_workers: int = 8) -> list[dict]:
         return [{"code": c, "error": str(e)} for c in codes]
 
 
+def _fetch_indices_sina() -> dict:
+    """Fetch real-time index data from Sina Finance API.
+
+    Sina's hq.sinajs.cn is reliable and not blocked by Surge/Clash proxies
+    (unlike Eastmoney push2 servers whose DNS gets hijacked to 198.18.x.x).
+
+    Returns dict of {name: {code, close, change_pct, date}} or empty on failure.
+    """
+    import requests as _req
+    import re
+
+    sina_codes = {
+        "s_sh000001": ("上证指数", "sh000001"),
+        "s_sz399001": ("深证成指", "sz399001"),
+        "s_sz399006": ("创业板指", "sz399006"),
+        "s_sh000688": ("科创50", "sh000688"),
+    }
+
+    try:
+        codes_str = ",".join(sina_codes.keys())
+        url = f"https://hq.sinajs.cn/list={codes_str}"
+        s = _req.Session()
+        s.trust_env = False  # Skip system proxy
+        r = s.get(url, headers={"Referer": "https://finance.sina.com.cn"}, timeout=10)
+        r.raise_for_status()
+
+        indices = {}
+        today_str = datetime.now().strftime("%Y-%m-%d")
+        # Parse: var hq_str_s_sh000001="上证指数,4082.4740,-40.2020,-0.98,7651695,111308199";
+        for line in r.text.strip().split("\n"):
+            m = re.match(r'var hq_str_(\w+)="(.+?)";', line)
+            if not m:
+                continue
+            sina_code = m.group(1)
+            parts = m.group(2).split(",")
+            if len(parts) < 4 or sina_code not in sina_codes:
+                continue
+            name, our_code = sina_codes[sina_code]
+            indices[name] = {
+                "code": our_code,
+                "close": round(float(parts[1]), 3),
+                "change_pct": round(float(parts[3]), 2),
+                "date": today_str,
+            }
+        return indices
+    except Exception as e:
+        print(f"  Sina index fetch failed: {e}", file=sys.stderr)
+        return {}
+
+
+def _fetch_breadth_sina() -> dict | None:
+    """Fetch market breadth (up/down/flat counts) from Sina Finance.
+
+    Uses the Sina A-share real-time list to count advancing/declining stocks.
+    Returns dict with up/down/flat/total or None on failure.
+    """
+    import requests as _req
+
+    try:
+        # Sina real-time A-share list — page 1 with 5000 stocks covers everything
+        url = "https://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/Market_Center.getHQNodeData"
+        params = {
+            "page": 1,
+            "num": 5000,
+            "sort": "symbol",
+            "asc": 1,
+            "node": "hs_a",
+            "symbol": "",
+            "_s_r_a": "page",
+        }
+        s = _req.Session()
+        s.trust_env = False
+        r = s.get(url, params=params, timeout=30)
+        r.raise_for_status()
+
+        import json
+        data = json.loads(r.text)
+        if not data:
+            return None
+
+        up = sum(1 for s in data if float(s.get("changepercent", 0)) > 0)
+        down = sum(1 for s in data if float(s.get("changepercent", 0)) < 0)
+        flat = sum(1 for s in data if float(s.get("changepercent", 0)) == 0)
+        return {"up": up, "down": down, "flat": flat, "total": len(data)}
+    except Exception as e:
+        print(f"  Sina breadth fetch failed: {e}", file=sys.stderr)
+        return None
+
+
 def fetch_market_overview() -> dict:
-    """Fetch market indices, breadth, and sector data via AkShare.
+    """Fetch market indices, breadth, and sector data.
+
+    Primary: Sina Finance API (reliable, not blocked by Surge/Clash).
+    Fallback: AkShare historical daily for indices.
+    Breadth/sectors still use AkShare with Eastmoney (may fail under proxy).
 
     Returns partial data on failure — never crashes.
     """
     try:
         import akshare as ak
     except ImportError:
-        return {"error": "akshare not installed"}
+        ak = None
 
     result = {"timestamp": datetime.now().isoformat()}
 
-    # Major indices
-    try:
-        indices = {}
-        for name, code in [
-            ("上证指数", "sh000001"),
-            ("深证成指", "sz399001"),
-            ("创业板指", "sz399006"),
-            ("科创50", "sh000688"),
-        ]:
+    # --- Major indices (Sina real-time, then AkShare historical fallback) ---
+    indices = _fetch_indices_sina()
+
+    # Fall back to AkShare historical daily for any missing indices
+    missing = {"上证指数", "深证成指", "创业板指", "科创50"} - set(indices.keys())
+    if missing and ak:
+        fallback_map = {
+            "上证指数": "sh000001",
+            "深证成指": "sz399001",
+            "创业板指": "sz399006",
+            "科创50": "sh000688",
+        }
+        for name in missing:
+            code = fallback_map[name]
             try:
                 df = ak.stock_zh_index_daily(symbol=code)
                 if df is not None and not df.empty:
@@ -268,30 +366,34 @@ def fetch_market_overview() -> dict:
                     }
             except Exception as e:
                 indices[name] = {"error": str(e)}
-        result["indices"] = indices
-    except Exception as e:
-        result["indices_error"] = str(e)
 
-    # Market breadth
-    try:
-        df = ak.stock_zh_a_spot_em()
-        if df is not None and not df.empty:
-            up = int(len(df[df["涨跌幅"] > 0]))
-            down = int(len(df[df["涨跌幅"] < 0]))
-            flat = int(len(df[df["涨跌幅"] == 0]))
-            result["breadth"] = {"up": up, "down": down, "flat": flat, "total": len(df)}
-    except Exception as e:
-        result["breadth_error"] = str(e)
+    result["indices"] = indices
 
-    # Top/bottom sectors
-    try:
-        df = ak.stock_board_industry_name_em()
-        if df is not None and not df.empty and "涨跌幅" in df.columns:
-            top5 = df.nlargest(5, "涨跌幅")[["板块名称", "涨跌幅"]].to_dict("records")
-            bot5 = df.nsmallest(5, "涨跌幅")[["板块名称", "涨跌幅"]].to_dict("records")
-            result["sectors"] = {"top5": top5, "bottom5": bot5}
-    except Exception as e:
-        result["sectors_error"] = str(e)
+    # --- Market breadth (Sina first, AkShare fallback) ---
+    breadth = _fetch_breadth_sina()
+    if breadth:
+        result["breadth"] = breadth
+    elif ak:
+        try:
+            df = ak.stock_zh_a_spot_em()
+            if df is not None and not df.empty:
+                up = int(len(df[df["涨跌幅"] > 0]))
+                down = int(len(df[df["涨跌幅"] < 0]))
+                flat = int(len(df[df["涨跌幅"] == 0]))
+                result["breadth"] = {"up": up, "down": down, "flat": flat, "total": len(df)}
+        except Exception as e:
+            result["breadth_error"] = str(e)
+
+    # --- Top/bottom sectors (AkShare/Eastmoney — may fail under proxy) ---
+    if ak:
+        try:
+            df = ak.stock_board_industry_name_em()
+            if df is not None and not df.empty and "涨跌幅" in df.columns:
+                top5 = df.nlargest(5, "涨跌幅")[["板块名称", "涨跌幅"]].to_dict("records")
+                bot5 = df.nsmallest(5, "涨跌幅")[["板块名称", "涨跌幅"]].to_dict("records")
+                result["sectors"] = {"top5": top5, "bottom5": bot5}
+        except Exception as e:
+            result["sectors_error"] = str(e)
 
     return result
 
