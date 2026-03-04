@@ -374,12 +374,84 @@ def _fetch_sectors_sina() -> dict | None:
         return None
 
 
+def _fetch_market_cheesefortune() -> dict | None:
+    """Fetch market overview from CheeseForTune API.
+
+    Returns dict with breadth and sectors, or None on failure.
+    Uses v4/marketSummary for breadth and v3/plateStatPc for sectors.
+    """
+    try:
+        from scripts.cheesefortune_client import CheeseFortuneClient
+    except ImportError:
+        try:
+            from cheesefortune_client import CheeseFortuneClient
+        except ImportError:
+            return None
+
+    try:
+        c = CheeseFortuneClient()
+        result = {}
+
+        # --- Breadth from marketSummary ---
+        try:
+            r = c._request(
+                f"{c.BASE_URL}/api/v4/market/marketSummary?isCN=true"
+            )
+            if r.get("code") == "000" and r.get("datas"):
+                d = r["datas"]
+                rfs = d.get("rise_fall_stat", {})
+                if rfs:
+                    result["breadth"] = {
+                        "up": rfs.get("r", 0),
+                        "down": rfs.get("f", 0),
+                        "flat": rfs.get("p", 0),
+                        "total": rfs.get("r", 0) + rfs.get("f", 0) + rfs.get("p", 0),
+                        "distribution": dict(zip(
+                            rfs.get("temp", []),
+                            rfs.get("list", []),
+                        )),
+                    }
+        except Exception as e:
+            print(f"  CheeseForTune breadth failed: {e}", file=sys.stderr)
+
+        # --- Sectors from plateStatPc (single call, sort in Python) ---
+        try:
+            r_sec = c._request(
+                f"{c.BASE_URL}/api/v3/market/plateStatPc"
+                "?ascOrDesc=1&step=1&type=13&isCN=true"
+            )
+
+            if r_sec.get("code") == "000":
+                all_sectors = [
+                    {
+                        "板块名称": s.get("name", s.get("code", "")),
+                        "涨跌幅": round(float(s.get("chg", 0)), 2),
+                    }
+                    for s in r_sec["datas"].get("data", [])
+                    if s.get("chg") is not None
+                ]
+                all_sectors.sort(key=lambda x: x["涨跌幅"], reverse=True)
+                if all_sectors:
+                    result["sectors"] = {
+                        "top5": all_sectors[:5],
+                        "bottom5": all_sectors[-5:][::-1],
+                    }
+        except Exception as e:
+            print(f"  CheeseForTune sectors failed: {e}", file=sys.stderr)
+
+        return result if result else None
+    except Exception as e:
+        print(f"  CheeseForTune market overview failed: {e}", file=sys.stderr)
+        return None
+
+
 def fetch_market_overview() -> dict:
     """Fetch market indices, breadth, and sector data.
 
-    Primary: Sina Finance API (reliable, not blocked by Surge/Clash).
-    Fallback: AkShare historical daily for indices.
-    Breadth/sectors still use AkShare with Eastmoney (may fail under proxy).
+    Data sources (in priority order):
+    - Indices: Sina Finance real-time → AkShare historical daily
+    - Breadth: CheeseForTune marketSummary → Sina paginated → AkShare
+    - Sectors: CheeseForTune plateStatPc → Sina sinaindustry → AkShare
 
     Returns partial data on failure — never crashes.
     """
@@ -393,7 +465,6 @@ def fetch_market_overview() -> dict:
     # --- Major indices (Sina real-time, then AkShare historical fallback) ---
     indices = _fetch_indices_sina()
 
-    # Fall back to AkShare historical daily for any missing indices
     missing = {"上证指数", "深证成指", "创业板指", "科创50"} - set(indices.keys())
     if missing and ak:
         fallback_map = {
@@ -423,34 +494,43 @@ def fetch_market_overview() -> dict:
 
     result["indices"] = indices
 
-    # --- Market breadth (Sina first, AkShare fallback) ---
-    breadth = _fetch_breadth_sina()
-    if breadth:
-        result["breadth"] = breadth
-    elif ak:
-        try:
-            df = ak.stock_zh_a_spot_em()
-            if df is not None and not df.empty:
-                up = int(len(df[df["涨跌幅"] > 0]))
-                down = int(len(df[df["涨跌幅"] < 0]))
-                flat = int(len(df[df["涨跌幅"] == 0]))
-                result["breadth"] = {"up": up, "down": down, "flat": flat, "total": len(df)}
-        except Exception as e:
-            result["breadth_error"] = str(e)
+    # --- Breadth + Sectors (CheeseForTune primary) ---
+    cf = _fetch_market_cheesefortune()
 
-    # --- Top/bottom sectors (Sina first, AkShare fallback) ---
-    sectors = _fetch_sectors_sina()
-    if sectors:
-        result["sectors"] = sectors
-    elif ak:
-        try:
-            df = ak.stock_board_industry_name_em()
-            if df is not None and not df.empty and "涨跌幅" in df.columns:
-                top5 = df.nlargest(5, "涨跌幅")[["板块名称", "涨跌幅"]].to_dict("records")
-                bot5 = df.nsmallest(5, "涨跌幅")[["板块名称", "涨跌幅"]].to_dict("records")
-                result["sectors"] = {"top5": top5, "bottom5": bot5}
-        except Exception as e:
-            result["sectors_error"] = str(e)
+    if cf and "breadth" in cf:
+        result["breadth"] = cf["breadth"]
+    else:
+        # Sina fallback for breadth
+        breadth = _fetch_breadth_sina()
+        if breadth:
+            result["breadth"] = breadth
+        elif ak:
+            try:
+                df = ak.stock_zh_a_spot_em()
+                if df is not None and not df.empty:
+                    up = int(len(df[df["涨跌幅"] > 0]))
+                    down = int(len(df[df["涨跌幅"] < 0]))
+                    flat = int(len(df[df["涨跌幅"] == 0]))
+                    result["breadth"] = {"up": up, "down": down, "flat": flat, "total": len(df)}
+            except Exception as e:
+                result["breadth_error"] = str(e)
+
+    if cf and "sectors" in cf:
+        result["sectors"] = cf["sectors"]
+    else:
+        # Sina fallback for sectors
+        sectors = _fetch_sectors_sina()
+        if sectors:
+            result["sectors"] = sectors
+        elif ak:
+            try:
+                df = ak.stock_board_industry_name_em()
+                if df is not None and not df.empty and "涨跌幅" in df.columns:
+                    top5 = df.nlargest(5, "涨跌幅")[["板块名称", "涨跌幅"]].to_dict("records")
+                    bot5 = df.nsmallest(5, "涨跌幅")[["板块名称", "涨跌幅"]].to_dict("records")
+                    result["sectors"] = {"top5": top5, "bottom5": bot5}
+            except Exception as e:
+                result["sectors_error"] = str(e)
 
     return result
 

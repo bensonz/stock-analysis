@@ -127,10 +127,41 @@ class CheeseFortuneClient:
             time.sleep(self.MIN_REQUEST_INTERVAL - elapsed)
         self._last_request_time = time.time()
 
+    @staticmethod
+    def _make_v4_t(ts_ms: int) -> str:
+        """Generate the obfuscated 't' URL parameter for /api/v4/ endpoints.
+
+        The CheeseForTune v4 API requires a 't' query param that is the
+        timestamp string with one extra digit inserted:
+        - Take the 4th-from-last digit of the timestamp string
+        - If the last digit is '0', insert it at position 2 (1-indexed)
+        - Otherwise insert it at position = last digit (1-indexed)
+        The server reverses this to recover the real timestamp.
+        """
+        e = str(ts_ms)
+        char_to_insert = e[-4]  # 4th char from end
+        if e[-1] == "0":
+            pos = 2
+        else:
+            pos = int(e[-1])
+        # Qc(e, t, r) => e.slice(0, r-1) + t + e.slice(r-1)
+        return e[:pos - 1] + char_to_insert + e[pos - 1:]
+
     def _request(self, url: str, data: Optional[dict] = None) -> dict:
-        """Make an authenticated API request with rate limiting."""
+        """Make an authenticated API request with rate limiting.
+
+        For /api/v4/ URLs, automatically appends the obfuscated 't' parameter.
+        """
         self._throttle()
         headers = self._make_headers()
+
+        # v4 endpoints need the obfuscated t param
+        if "/api/v4/" in url:
+            ts_ms = int(headers["timeStamp"])
+            t_val = self._make_v4_t(ts_ms)
+            sep = "&" if "?" in url else "?"
+            url = f"{url}{sep}t={t_val}"
+
         body = json.dumps(data).encode() if data else None
         method = "POST" if data else "GET"
         req = urllib.request.Request(url, data=body, headers=headers, method=method)
