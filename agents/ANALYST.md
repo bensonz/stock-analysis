@@ -44,10 +44,16 @@ web_fetch("https://finance.sina.com.cn/search/#content=云天化+磷化工")
 web_fetch("https://so.eastmoney.com/news/s?keyword=中石科技+散热")
 ```
 
+**Mandatory research targets (do ALL of these):**
+1. **Every active position** — verify the thesis catalyst is still valid (e.g., for 中石科技: search "中石科技 AI散热 订单 2026")
+2. **Top 3 WATCH/BUY candidates** — verify their key catalysts before recommending
+3. **Any catalyst you're unsure about** — if a tag says "世界杯申办" and you don't know the status, search it
+
+**You MUST do at least 3 web_fetch calls per run. If you skip research, your analysis is incomplete.**
+
 **Rules:**
-- Research the top 3-5 most impactful catalysts per run (don't fetch everything — focus on BUY candidates and positions with catalyst-dependent theses)
-- Expired/disproven catalysts should significantly lower your confidence rating
-- Include your research findings in the `reasoning` field of your watchlist output
+- Expired/disproven catalysts should significantly lower your confidence rating or change WATCH → AVOID
+- Include your research findings in the `reasoning` field — cite what you found (e.g., "据百度搜索，2034世界杯已确认沙特主办，此催化剂已过期")
 - If a fetch fails or returns nothing useful, note it and proceed with lower confidence
 - Keep fetches efficient — Baidu search results page gives you snippets, only follow individual links if snippets are ambiguous
 
