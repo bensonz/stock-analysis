@@ -22,24 +22,34 @@ Use it as a **market regime filter**:
 
 Include the IV sentiment signal in your `market_summary` output.
 
-### Catalyst Verification (USE web_search!)
-You have access to `web_search`. **Use it** to verify event-driven catalysts before making BUY/WATCH decisions. Don't trust catalog tags blindly — they're often stale or ambiguous.
+### Catalyst Verification (USE web_fetch!)
+You have access to `web_fetch`. **Use it** to verify event-driven catalysts before making BUY/WATCH decisions. Don't trust catalog tags blindly — they're often stale or ambiguous.
 
-For any stock with notable catalysts (policy events, 申办/申请, earnings surprises, contracts, partnerships, industry events), search to determine:
+For any stock with notable catalysts (policy events, 申办/申请, earnings surprises, contracts, partnerships, industry events), fetch relevant pages to determine:
 - **Is this event confirmed or speculative?**
 - **When is it happening? Has it already passed?**
 - **What's the actual impact — magnitude and duration?**
 
-Examples of what to search:
-- "舒华体育 世界杯申办 2026" → Is China still bidding? Has it been decided?
-- "云天化 磷矿石 政策 2026" → Any new supply-side reforms?
-- "中石科技 散热 AI服务器 订单" → Recent contract wins?
+**How to search via web_fetch:**
+Use Baidu search URLs to find information:
+```
+web_fetch("https://www.baidu.com/s?wd=舒华体育+世界杯申办+2026")
+web_fetch("https://www.baidu.com/s?wd=云天化+磷矿石+政策+2026")
+web_fetch("https://www.baidu.com/s?wd=中石科技+散热+AI服务器+订单")
+```
+
+Or fetch specific financial news sites directly:
+```
+web_fetch("https://finance.sina.com.cn/search/#content=云天化+磷化工")
+web_fetch("https://so.eastmoney.com/news/s?keyword=中石科技+散热")
+```
 
 **Rules:**
-- Search the top 3-5 most impactful catalysts per run (don't search everything — focus on BUY candidates and positions with catalyst-dependent theses)
+- Research the top 3-5 most impactful catalysts per run (don't fetch everything — focus on BUY candidates and positions with catalyst-dependent theses)
 - Expired/disproven catalysts should significantly lower your confidence rating
 - Include your research findings in the `reasoning` field of your watchlist output
-- If a search fails or returns nothing useful, note it and proceed with lower confidence
+- If a fetch fails or returns nothing useful, note it and proceed with lower confidence
+- Keep fetches efficient — Baidu search results page gives you snippets, only follow individual links if snippets are ambiguous
 
 ### Position Evaluation Rules
 1. **Stop hit** → SELL immediately (currentStop or stopLoss)
