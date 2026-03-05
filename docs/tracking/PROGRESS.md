@@ -1,5 +1,23 @@
 # Progress
 
+## 2026-03-05: Refactor Date-Grouped Runs
+
+### Completed
+1. **data_collector.py** — Added `output_dir` param to save functions + updated `load_recent_watchlists`
+2. **report_generator.py** — Added `output_dir` param to generate functions
+3. **position_manager.py** — Added `output_dir` param to `save_daily_summary`
+4. **run_daily.py** — Full restructure for date-grouped runs
+   - `runs/YYYY-MM-DD/input/` — pre-run snapshot + collected data
+   - `runs/YYYY-MM-DD/output/` — post-run snapshot + watchlist/report/summary
+   - `runs/YYYY-MM-DD/phase1.json`, `prompt.md`, `response.json`, `log.json`
+   - `snapshot_positions()` / `restore_snapshot()` — full state snapshots
+   - `check_snapshot_consistency()` — drift detection between runs
+   - `--reset-to DATE` — restore state to end of any prior date
+   - `--list-runs` — show all runs with completion status
+   - `--validate DATE` — validate specific date's output
+5. **validator.py** — Updated to check `runs/<date>/output/` with legacy fallbacks
+6. **.gitignore** — Ignore large regenerable files (phase1.json, prompt.md, response.json)
+
 ## 2026-03-02: Pipeline Redesign Build
 
 ### Completed
