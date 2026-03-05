@@ -44,18 +44,36 @@ web_fetch("https://finance.sina.com.cn/search/#content=云天化+磷化工")
 web_fetch("https://so.eastmoney.com/news/s?keyword=中石科技+散热")
 ```
 
-**Mandatory research targets (do ALL of these):**
-1. **Every active position** — verify the thesis catalyst is still valid (e.g., for 中石科技: search "中石科技 AI散热 订单 2026")
-2. **Top 3 WATCH/BUY candidates** — verify their key catalysts before recommending
-3. **Any catalyst you're unsure about** — if a tag says "世界杯申办" and you don't know the status, search it
+**You MUST do at least 5 web_fetch calls per run. If you skip research, your analysis is incomplete.**
 
-**You MUST do at least 3 web_fetch calls per run. If you skip research, your analysis is incomplete.**
+**Mandatory research checklist (do ALL of these):**
+
+**A. Market context (1-2 fetches)**
+- Today's macro/policy news: `web_fetch("https://www.baidu.com/s?wd=A股+今日+要闻+政策")` or `web_fetch("https://finance.eastmoney.com/")`
+- Helps you write an informed market_summary instead of just repeating index numbers
+
+**B. Active positions (1 fetch per position)**
+- For each position, search for recent news + catalyst status:
+  - `web_fetch("https://www.baidu.com/s?wd=中石科技+AI散热+订单+2026")`
+  - `web_fetch("https://www.baidu.com/s?wd=云天化+磷矿石+政策+供给侧")`
+  - `web_fetch("https://www.baidu.com/s?wd=科达制造+特福国际+重组+进展")`
+- Check for: breaking news, earnings pre-announcements, insider trading, analyst upgrades/downgrades, regulatory actions
+
+**C. Top WATCH/BUY candidates (1-2 fetches)**
+- Verify key catalysts for your top recommendations:
+  - Is the event confirmed or speculative?
+  - When is it happening? Has it already passed?
+  - `web_fetch("https://www.baidu.com/s?wd=股票名+催化剂关键词+2026")`
+
+**D. Any catalyst you're unsure about**
+- If a tag says "世界杯申办" and you don't know the status, search it
+- Expired/disproven catalysts → lower confidence or change WATCH → AVOID
 
 **Rules:**
-- Expired/disproven catalysts should significantly lower your confidence rating or change WATCH → AVOID
-- Include your research findings in the `reasoning` field — cite what you found (e.g., "据百度搜索，2034世界杯已确认沙特主办，此催化剂已过期")
+- Cite your findings in the `reasoning` field (e.g., "据百度搜索，2034世界杯已确认沙特主办，此催化剂已过期")
 - If a fetch fails or returns nothing useful, note it and proceed with lower confidence
-- Keep fetches efficient — Baidu search results page gives you snippets, only follow individual links if snippets are ambiguous
+- Keep fetches efficient — Baidu search results page gives you snippets, only follow links if snippets are ambiguous
+- Use `maxChars` parameter to limit response size: `web_fetch(url, maxChars=5000)`
 
 ### Position Evaluation Rules
 1. **Stop hit** → SELL immediately (currentStop or stopLoss)
