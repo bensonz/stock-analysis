@@ -1,0 +1,64 @@
+{
+  "date": "2026-03-05",
+  "source": "options-learn backend (OpenVlab IV history)",
+  "etf_iv_data": [
+    {
+      "underlying": "510050",
+      "lookback_days": 252,
+      "data_points": 241,
+      "current_iv": 0.1758,
+      "iv_high": 0.2977,
+      "iv_low": 0.1176,
+      "iv_rank": 0.3232,
+      "iv_percentile": 0.5145,
+      "name": "50ETF",
+      "desc": "大盘蓝筹",
+      "interpretation": "中性"
+    },
+    {
+      "underlying": "510300",
+      "lookback_days": 252,
+      "data_points": 241,
+      "current_iv": 0.1691,
+      "iv_high": 0.4405,
+      "iv_low": 0.1271,
+      "iv_rank": 0.134,
+      "iv_percentile": 0.0954,
+      "name": "300ETF",
+      "desc": "沪深300",
+      "interpretation": "低 (市场偏乐观，波动率便宜)"
+    },
+    {
+      "underlying": "510500",
+      "lookback_days": 252,
+      "data_points": 241,
+      "current_iv": 0.2708,
+      "iv_high": 0.6449,
+      "iv_low": 0.2082,
+      "iv_rank": 0.1433,
+      "iv_percentile": 0.2946,
+      "name": "500ETF",
+      "desc": "中证500",
+      "interpretation": "低 (市场偏乐观，波动率便宜)"
+    },
+    {
+      "underlying": "588000",
+      "lookback_days": 252,
+      "data_points": 241,
+      "current_iv": 0.3042,
+      "iv_high": 0.6237,
+      "iv_low": 0.2399,
+      "iv_rank": 0.1675,
+      "iv_percentile": 0.1037,
+      "name": "科创50",
+      "desc": "科创板",
+      "interpretation": "低 (市场偏乐观，波动率便宜)"
+    }
+  ],
+  "overall_sentiment": {
+    "signal": "偏乐观",
+    "avg_iv_rank": 0.192,
+    "avg_iv_percentile": 0.252,
+    "implication": "波动率偏低，市场情绪稳定。中期趋势可能延续，但关注IV拐点。"
+  }
+}

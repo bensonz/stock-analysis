@@ -1,0 +1,81 @@
+{
+  "date": "2026-03-05",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1772696973.5079849,
+      "errors": [],
+      "end": 1772697060.555723,
+      "duration_sec": 87.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 12208,
+      "response_file": "/tmp/stock-llm-response.json",
+      "tokens": {
+        "input_tokens": 33000,
+        "output_tokens": 3000
+      }
+    },
+    {
+      "phase": "apply",
+      "start": 1772697286.9377038,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Updated LEARNINGS.md"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 3,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "600096",
+                "name": "云天化",
+                "rule": "stop_proximity",
+                "currentPrice": 40.7,
+                "stopLoss": 39.6,
+                "distance_pct": 2.7,
+                "suggestion": "WARNING — only 2.7% above stop. Prepare to sell or widen stop with justification."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1772697286.995281,
+      "duration_sec": 0.1
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 600096 — WARNING — only 2.7% above stop. Prepare to sell or widen stop with justification."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 87.1
+  }
+}

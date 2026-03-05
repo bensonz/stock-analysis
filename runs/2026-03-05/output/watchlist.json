@@ -1,0 +1,426 @@
+{
+  "date": "2026-03-05",
+  "market_overview": {
+    "shanghai_composite": {
+      "value": 4108.567,
+      "change_pct": 0.64
+    },
+    "shenzhen_component": {
+      "value": 14088.84,
+      "change_pct": 1.23
+    },
+    "chinext": {
+      "value": 3216.94,
+      "change_pct": 1.66
+    },
+    "sentiment": "bullish",
+    "hot_sectors": [
+      "光学光电子",
+      "其他电源设备Ⅱ",
+      "电网设备",
+      "非金属材料Ⅱ",
+      "照明设备Ⅱ"
+    ],
+    "cold_sectors": [
+      "油服工程",
+      "种植业",
+      "林业Ⅱ",
+      "燃气Ⅱ",
+      "贵金属"
+    ],
+    "notes": "今日A股全面反弹——上证+0.64%/深证+1.23%/创业板+1.66%/科创50+1.72%，市场宽度4079涨vs1306跌(74.5%上涨)。领涨板块为光学光电子(+6.08%)、电源设备(+4.47%)、电网设备(+4.32%)，大飞机/航发板块涨停潮。跌幅前列为油服工程(-6.62%)、种植业(-5.46%)、贵金属(-2.42%)——中东冲突受益的资源品板块(03-02暴涨后)出现获利回吐。IV情绪偏乐观(均IV Rank 19.2%，300ETF/500ETF/科创50 IV Rank均<17%处于低位)，市场情绪稳定偏乐观。当前处于IV 15-30%正常低波动环境，标准规则适用。"
+  },
+  "strategy_scan": {
+    "total_stocks_scanned": 80,
+    "strategy_name": "小市值-无 20RP",
+    "scan_time": "2026-03-05T15:54:46.940706+08:00"
+  },
+  "recommendations": [
+    {
+      "code": "605099.SH",
+      "name": "共创草坪",
+      "price": 43.93,
+      "rps120": 86.62,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=86.6%在理想区间，0风险5亮点，ROE20%极高，股东户数减少32%大资金买入。PE=5.4估值合理(percentile 75%)。但近10日涨幅仅超6.1%股票(走弱)，且今日价格¥43.93接近估值历史高位。等回调至¥40附近再考虑入场。世界杯申办+苏超赞助商催化有持续性。",
+      "score_company": 8.9,
+      "score_trend": 9.5,
+      "score_value": 4.5,
+      "pe": 27.94,
+      "valuation_percentile": 74.99,
+      "revenue_yoy": 0.095,
+      "net_profit_yoy": 0.309,
+      "gross_margin": 34.04,
+      "highlights": [
+        "ROE20%极高",
+        "利润+54%",
+        "股东户数减少32%",
+        "0风险"
+      ],
+      "risks": [],
+      "events": [
+        "世界杯申办催化",
+        "苏超赞助商"
+      ],
+      "catalyst": "大湾区申办世界杯+苏超赞助商带动人造草坪需求"
+    },
+    {
+      "code": "600352.SH",
+      "name": "浙江龙盛",
+      "price": 17.07,
+      "rps120": 91.18,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=91.2%在理想区间上沿，染料龙头涨价潮催化(三大龙头接连调价)。合同负债125亿+7.8%极为充足。但rps20=95.4%短期已严重超买，近10日涨幅超97%股票——今日创24月新高。根据LEARNINGS#13(近5日累计涨幅>12%则等回调)，目前不宜追高。等回调至MA10附近再评估。",
+      "score_company": 8.3,
+      "score_trend": 8.9,
+      "score_value": 4.2,
+      "pe": 24.8,
+      "valuation_percentile": 68.34,
+      "revenue_yoy": -0.089,
+      "net_profit_yoy": 0.022,
+      "gross_margin": 29.32,
+      "highlights": [
+        "染料龙头",
+        "合同负债125亿",
+        "北向6.0%+公募3.3%",
+        "行业持续走强"
+      ],
+      "risks": [
+        "存货变现914天极慢"
+      ],
+      "events": [
+        "染料涨价潮",
+        "创24月新高"
+      ],
+      "catalyst": "还原物价格暴涨→染料涨价传导"
+    },
+    {
+      "code": "002895.SZ",
+      "name": "川恒股份",
+      "price": 40.79,
+      "rps120": 91.81,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=91.8%理想区间，磷化工同行(与云天化同赛道)。score_company=8.8很高，0风险5亮点，ROE13%+营收每年+33%成长强。估值percentile仅57%合理。今日创历史新高¥44.75后回落至¥40.79。但已持有云天化(同磷化工)，同板块仓位集中风险，且近日磷化工板块分化加剧。等云天化持仓有结果后再考虑。",
+      "score_company": 8.8,
+      "score_trend": 9.0,
+      "score_value": 5.6,
+      "pe": 19.85,
+      "valuation_percentile": 57.25,
+      "revenue_yoy": 0.461,
+      "net_profit_yoy": 0.517,
+      "gross_margin": 31.81,
+      "highlights": [
+        "营收+33%/年",
+        "净利+52%",
+        "ROE13%",
+        "0风险",
+        "创历史新高"
+      ],
+      "risks": [],
+      "events": [
+        "化肥化工板块拉升",
+        "创历史新高"
+      ],
+      "catalyst": "中东冲突扰动化肥粮食供给+磷化工板块趋势"
+    },
+    {
+      "code": "688543.SH",
+      "name": "国科军工",
+      "price": 81.57,
+      "rps120": 89.19,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=89.2%理想区间，军工装备+2025年报快报超预期(净利+111%)。PE=2.7极低。但估值percentile=97.9%历史极高(PE低但PS/PB极高说明市场对营收规模偏小有溢价)。重大风险：2026-06-22解禁44%总股本(3个月后)——巨量解禁压力。近3天换手率17%波动极大。军工板块今日拉升(航天彩虹涨停)但不追短期热点。密切关注但解禁风险太大不宜入场。",
+      "score_company": 7.2,
+      "score_trend": 9.6,
+      "score_value": 3.2,
+      "pe": 68.82,
+      "valuation_percentile": 97.89,
+      "revenue_yoy": 0.015,
+      "net_profit_yoy": -0.076,
+      "gross_margin": 37.41,
+      "highlights": [
+        "业绩快报超预期",
+        "净利+111%",
+        "公募5.5%"
+      ],
+      "risks": [
+        "06-22解禁44%总股本",
+        "换手率17%波动大"
+      ],
+      "events": [
+        "军工装备板块拉升",
+        "2025年报快报"
+      ],
+      "catalyst": "业绩快报超预期+军工板块催化"
+    },
+    {
+      "code": "603115.SH",
+      "name": "海星股份",
+      "price": 27.67,
+      "rps120": 90.16,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=90.2%理想区间，铝箔电极龙头。净利+52%+股息4.5%高分红。但rps20=96.7%严重超买，估值percentile=83.6%偏高，近期创历史新高。score_company=5.9偏低(公司质量一般)。3风险(收现低+估值高+无北向)。等回调再关注。",
+      "score_company": 5.9,
+      "score_trend": 9.0,
+      "score_value": 3.9,
+      "pe": 35.34,
+      "valuation_percentile": 83.57,
+      "revenue_yoy": 0.215,
+      "net_profit_yoy": 0.414,
+      "gross_margin": 21.26,
+      "highlights": [
+        "净利+52%",
+        "股息4.5%",
+        "创历史新高"
+      ],
+      "risks": [
+        "收现比75%低",
+        "估值历史高位84%",
+        "无北向"
+      ],
+      "events": [
+        "中国银河首次覆盖买入",
+        "创历史新高"
+      ],
+      "catalyst": "铝箔电极产能扩张+工业金属行业趋势"
+    },
+    {
+      "code": "002683.SZ",
+      "name": "广东宏大",
+      "price": 47.03,
+      "rps120": 85.59,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=85.6%理想区间，民爆制品龙头+惯导(激光陀螺)新业务布局。营收+25%/年成长强，股东户数减少31%。但近10日涨幅仅超6.6%走弱(从高位52元回调至47)，商誉占净资产52%极高(减值风险)，01-26大跌-8.37%抛压记录。等企稳后再评估。",
+      "score_company": 7.8,
+      "score_trend": 7.7,
+      "score_value": 5.3,
+      "pe": 39.66,
+      "valuation_percentile": 60.62,
+      "revenue_yoy": 0.559,
+      "net_profit_yoy": 0.363,
+      "gross_margin": 19.94,
+      "highlights": [
+        "民爆龙头",
+        "营收+25%/年",
+        "股东户数减少31%",
+        "惯导新业务"
+      ],
+      "risks": [
+        "商誉52%极高",
+        "01-26大跌-8.37%"
+      ],
+      "events": [
+        "国科宏惯投产签约",
+        "创24月新高52元"
+      ],
+      "catalyst": "激光陀螺+惯导系统投产"
+    },
+    {
+      "code": "002046.SZ",
+      "name": "国机精工",
+      "price": 52.17,
+      "rps120": 87.67,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=87.7%理想区间，磨具磨料龙头，股东户数减少29%大资金买入。创历史新高¥55.5后回落至¥52.17。但03-03大跌-8.17%抛压重，估值percentile=89%偏高。今日培育钻石板块走高带动但属概念炒作。营收+27%成长不错。需等充分回调+抛压消化后再考虑。",
+      "score_company": 6.9,
+      "score_trend": 9.5,
+      "score_value": 3.5,
+      "pe": 99.42,
+      "valuation_percentile": 89.24,
+      "revenue_yoy": 0.272,
+      "net_profit_yoy": 0.154,
+      "gross_margin": 34.71,
+      "highlights": [
+        "磨具磨料龙头",
+        "股东户数减少29%",
+        "创历史新高"
+      ],
+      "risks": [
+        "03-03大跌-8.17%",
+        "估值历史高位89%"
+      ],
+      "events": [
+        "培育钻石板块走高",
+        "创历史新高"
+      ],
+      "catalyst": "产能扩张+通用设备行业趋势"
+    },
+    {
+      "code": "688377.SH",
+      "name": "迪威尔",
+      "price": 47.98,
+      "rps120": 86.33,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=86.3%理想区间，深海深地能源设备龙头。净利+41%，公募持股8.6%高。创历史新高¥46.88后03-04大跌-7.08%(成交量3.16倍放量抛压)——典型的冲高回落走势。估值percentile=82.5%偏高。需等抛压充分消化(5-10天)、价格回稳至¥43-44再考虑。",
+      "score_company": 7.3,
+      "score_trend": 8.6,
+      "score_value": 4.2,
+      "pe": 75.94,
+      "valuation_percentile": 82.54,
+      "revenue_yoy": 0.099,
+      "net_profit_yoy": 0.406,
+      "gross_margin": 21.79,
+      "highlights": [
+        "深海深地设备",
+        "公募8.6%",
+        "净利+41%"
+      ],
+      "risks": [
+        "03-04大跌-7.08%放量抛压",
+        "估值82.5%"
+      ],
+      "events": [
+        "创历史新高",
+        "2025年报待披露"
+      ],
+      "catalyst": "深海经济+天然气设备需求"
+    },
+    {
+      "code": "300285.SZ",
+      "name": "国瓷材料",
+      "price": 36.78,
+      "rps120": 92.01,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=92.0%在理想区间上沿(接近92%上限)。电子化学品+MLCC概念。村田对AI服务器MLCC提价是直接催化。score_company=8.1+score_value=6.5(value评分全场最高)。估值percentile仅40%——被低估。拟收购澳洲SDI(牙科材料)全球化布局。但商誉26%偏高，应收账款153天回收慢。今日创24月新高后走势偏强但短期可能冲高回落。关注价格回调至¥33-34。",
+      "score_company": 8.1,
+      "score_trend": 9.6,
+      "score_value": 6.5,
+      "pe": 57.85,
+      "valuation_percentile": 40.35,
+      "revenue_yoy": 0.107,
+      "net_profit_yoy": 0.021,
+      "gross_margin": 37.83,
+      "highlights": [
+        "score_value 6.5全场最高",
+        "估值仅40%历史",
+        "MLCC提价催化",
+        "北向+公募双高"
+      ],
+      "risks": [
+        "商誉26%",
+        "应收账款153天"
+      ],
+      "events": [
+        "村田MLCC提价",
+        "收购澳洲SDI",
+        "创24月新高"
+      ],
+      "catalyst": "村田AI服务器MLCC提价→高端陶瓷材料受益"
+    },
+    {
+      "code": "600988.SH",
+      "name": "赤峰黄金",
+      "price": null,
+      "rps120": 92.91,
+      "recommendation": "AVOID",
+      "confidence": "medium",
+      "reasoning": "RPS120=92.9%超出理想区间上限(>92%)。虽然score_company=9.1极高(全场最高)，ROE16%+成长27%/年，金价创新高(COMEX>$5400)催化明确。但01-30曾跌停-10%抛压重，RPS超标不符合规则。且贵金属板块今日-2.42%是跌幅前5。根据LEARNINGS#19(黄金是事件驱动型)，金价受地缘脉冲影响波动极大。之前已有持仓经验(24天磨损→time_decay平仓+0.5%→错失涨停)，不再重蹈覆辙但也不在RPS超标时追入。",
+      "score_company": 9.1,
+      "score_trend": 8.7,
+      "score_value": 4.9,
+      "pe": 28.21,
+      "valuation_percentile": 73.85,
+      "revenue_yoy": 0.389,
+      "net_profit_yoy": 0.843,
+      "gross_margin": 49.89,
+      "highlights": [
+        "ROE16%",
+        "成长27%/年",
+        "金价$5400创新高"
+      ],
+      "risks": [
+        "RPS120=92.9%>92%超标",
+        "01-30跌停",
+        "贵金属今日-2.42%"
+      ],
+      "events": [
+        "中东冲突催化",
+        "COMEX>$5400",
+        "港股+12.15%"
+      ],
+      "catalyst": "金价创新高+中东冲突持续"
+    },
+    {
+      "code": "002250.SZ",
+      "name": "联化科技",
+      "price": 16.52,
+      "rps120": 85.48,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=85.5%理想区间。农药龙头+CDMO双轮驱动。机构预测净利296%+54%+26%三年高增长。97家机构调研(年初以来)说明关注度极高。但03-03大跌-8.54%放量(1.63倍)抛压重，rps20=40.5%短期走弱。3风险(抛压+存货+重资产)。化肥涨价潮是中期催化但需等03-03暴跌充分消化。关注¥15.5-16区间企稳后。",
+      "score_company": 7.9,
+      "score_trend": 8.7,
+      "score_value": 5.7,
+      "pe": 38.47,
+      "valuation_percentile": 53.96,
+      "revenue_yoy": 0.082,
+      "net_profit_yoy": 3.838,
+      "gross_margin": 25.96,
+      "highlights": [
+        "净利+384%",
+        "97家机构调研",
+        "农药+CDMO",
+        "北向6.3%"
+      ],
+      "risks": [
+        "03-03大跌-8.54%",
+        "存货221天",
+        "重资产"
+      ],
+      "events": [
+        "化肥涨价潮",
+        "长江证券买入评级"
+      ],
+      "catalyst": "化肥涨价+CDMO前景"
+    },
+    {
+      "code": "300855.SZ",
+      "name": "图南股份",
+      "price": 44.14,
+      "rps120": 88.41,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": "RPS120=88.4%理想区间。高温合金+航发零部件。大飞机/航发板块今日涨停潮(航发控制、航发科技涨停，图南+10%)。公募持股9.0%高。但近3月rps120=95%走势很强→短期可能超买。营收-20%+净利-52%业绩大幅下滑(2025年是投入期)。估值percentile=78%。今日+10%大涨后不追高，等充分回调后再评估。",
+      "score_company": 7.6,
+      "score_trend": 7.9,
+      "score_value": 4.4,
+      "pe": 132.0,
+      "valuation_percentile": 78.07,
+      "revenue_yoy": -0.205,
+      "net_profit_yoy": -0.522,
+      "gross_margin": 28.05,
+      "highlights": [
+        "航发产业链",
+        "公募9.0%",
+        "产能扩张"
+      ],
+      "risks": [
+        "营收-20%净利-52%下滑",
+        "存货217天"
+      ],
+      "events": [
+        "大飞机板块涨停潮",
+        "今日+10%大涨",
+        "国投证券买入目标¥46"
+      ],
+      "catalyst": "大飞机+航发国产替代"
+    }
+  ],
+  "summary": {
+    "total_scanned": 80,
+    "buy_recommendations": 0,
+    "watch_recommendations": 11,
+    "avoid_recommendations": 1,
+    "market_call": "谨慎",
+    "reasoning": "今日A股全面反弹——上证+0.64%/深证+1.23%/创业板+1.66%/科创50+1.72%，市场宽度4079涨vs1306跌(74.5%上涨)。领涨板块为光学光电子(+6.08%)、电源设备(+4.47%)、电网设备(+4.32%)，大飞机/航发板块涨停潮。跌幅前列为油服工程(-6.62%)、种植业(-5.46%)、贵金属(-2.42%)——中东冲突受益的资源品板块(03-02暴涨后)出现获利回吐。IV情绪偏乐观(均IV Rank 19.2%，300ETF/500ETF/科创50 IV Rank均<17%处于低位)，市场情绪稳定偏乐观。当前处于IV 15-30%正常低波动环境，标准规则适用。"
+  }
+}
