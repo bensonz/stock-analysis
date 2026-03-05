@@ -3,23 +3,23 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1772698552.7569568,
+      "start": 1772699230.7595541,
       "errors": [],
-      "end": 1772698642.160989,
-      "duration_sec": 89.4
+      "end": 1772699315.384653,
+      "duration_sec": 84.6
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 11557,
+      "response_size_bytes": 11119,
       "response_file": "/tmp/stock-llm-response.json",
       "tokens": {
-        "input_tokens": 50000,
-        "output_tokens": 12000
+        "input_tokens": 10000,
+        "output_tokens": 2800
       }
     },
     {
       "phase": "apply",
-      "start": 1772698815.487228,
+      "start": 1772699543.739972,
       "actions": [
         "Generated watchlist",
         "Generated report",
@@ -67,7 +67,7 @@
           }
         ]
       },
-      "end": 1772698815.541812,
+      "end": 1772699543.791789,
       "duration_sec": 0.1
     }
   ],
@@ -76,6 +76,6 @@
   ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 89.5
+    "totalDurationSec": 84.69999999999999
   }
 }
