@@ -389,12 +389,13 @@ def regenerate_positions_json(price_data: dict | None = None) -> dict:
     return positions_data
 
 
-def save_daily_summary(date: str, actions: list[dict], **extra) -> Path:
-    """Write tracking/daily/YYYY-MM-DD.json.
+def save_daily_summary(date: str, actions: list[dict], output_dir: Path | None = None, **extra) -> Path:
+    """Write daily summary JSON.
 
     Args:
         date: Date string "YYYY-MM-DD"
         actions: List of action dicts (code, name, action, price, pnl_pct, note)
+        output_dir: If provided, write to output_dir/daily_summary.json instead of tracking/daily/YYYY-MM-DD.json
         **extra: Additional top-level keys (closedPositionNote, newPositions,
                  portfolioStats, marketContext)
 
@@ -402,7 +403,11 @@ def save_daily_summary(date: str, actions: list[dict], **extra) -> Path:
         Path to written file.
     """
     summary = {"date": date, "actions": actions, **extra}
-    out = DAILY_DIR / f"{date}.json"
+    if output_dir:
+        out = output_dir / "daily_summary.json"
+    else:
+        out = DAILY_DIR / f"{date}.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
     _write_json(out, summary)
     return out
 
