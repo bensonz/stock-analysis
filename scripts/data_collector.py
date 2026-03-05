@@ -691,7 +691,7 @@ def fetch_missed_opportunity_prices(recent_watchlists: list[dict]) -> list[dict]
 
 
 def load_recent_watchlists(days: int = 5) -> list[dict]:
-    """Load recent watchlist JSON files.
+    """Load recent watchlist JSON files from runs/ and legacy watchlist/ dir.
 
     Args:
         days: Number of days back to look.
@@ -700,32 +700,67 @@ def load_recent_watchlists(days: int = 5) -> list[dict]:
         List of watchlist dicts, newest first.
     """
     watchlists = []
-    files = sorted(WATCHLIST_DIR.glob("*.json"), reverse=True)
-    for f in files[:days]:
-        try:
-            watchlists.append(json.loads(f.read_text(encoding="utf-8")))
-        except (json.JSONDecodeError, IOError) as e:
-            print(f"  Warning: skipping watchlist {f.name}: {e}", file=sys.stderr)
+
+    # New location: runs/*/output/watchlist.json
+    runs_dir = PROJECT_ROOT / "runs"
+    if runs_dir.exists():
+        for d in sorted(runs_dir.iterdir(), reverse=True):
+            if len(watchlists) >= days:
+                break
+            wl_file = d / "output" / "watchlist.json"
+            if wl_file.exists():
+                try:
+                    watchlists.append(json.loads(wl_file.read_text(encoding="utf-8")))
+                except (json.JSONDecodeError, IOError):
+                    pass
+
+    # Legacy fallback: watchlist/*.json
+    if len(watchlists) < days:
+        files = sorted(WATCHLIST_DIR.glob("*.json"), reverse=True)
+        for f in files:
+            if len(watchlists) >= days:
+                break
+            try:
+                wl = json.loads(f.read_text(encoding="utf-8"))
+                # Avoid duplicates by date
+                existing_dates = {w.get("date") for w in watchlists}
+                if wl.get("date") not in existing_dates:
+                    watchlists.append(wl)
+            except (json.JSONDecodeError, IOError) as e:
+                print(f"  Warning: skipping watchlist {f.name}: {e}", file=sys.stderr)
+
     return watchlists
 
 
-def save_crawl_data(date: str, data: dict) -> Path:
-    """Save strategy pool crawl data to data/crawl/YYYY-MM-DD.json."""
-    out = CRAWL_DIR / f"{date}.json"
+def save_crawl_data(date: str, data: dict, output_dir: Path | None = None) -> Path:
+    """Save strategy pool crawl data."""
+    if output_dir:
+        out = output_dir / "crawl.json"
+    else:
+        out = CRAWL_DIR / f"{date}.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return out
 
 
-def save_market_data(date: str, data: dict) -> Path:
-    """Save market overview to data/market/YYYY-MM-DD.json."""
-    out = MARKET_DIR / f"{date}.json"
+def save_market_data(date: str, data: dict, output_dir: Path | None = None) -> Path:
+    """Save market overview data."""
+    if output_dir:
+        out = output_dir / "market.json"
+    else:
+        out = MARKET_DIR / f"{date}.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return out
 
 
-def save_price_data(date: str, data: dict) -> Path:
-    """Save price snapshots to data/prices/YYYY-MM-DD.json."""
-    out = PRICES_DIR / f"{date}.json"
+def save_price_data(date: str, data: dict, output_dir: Path | None = None) -> Path:
+    """Save price snapshots."""
+    if output_dir:
+        out = output_dir / "prices.json"
+    else:
+        out = PRICES_DIR / f"{date}.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return out
 
