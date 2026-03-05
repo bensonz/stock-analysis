@@ -72,9 +72,9 @@ def validate_output(date: str) -> list[str]:
     Checks:
     - positions.json matches tracking/*.json active set
     - No closed positions in tracking/ root
-    - watchlist/YYYY-MM-DD.json exists and is valid JSON
-    - reports/YYYY-MM-DD.md exists
-    - daily summary exists
+    - watchlist exists and is valid JSON (runs/ then legacy)
+    - report exists (runs/ then legacy)
+    - daily summary exists (runs/ then legacy)
 
     Args:
         date: Date string "YYYY-MM-DD"
@@ -83,6 +83,8 @@ def validate_output(date: str) -> list[str]:
         List of error strings. Empty means all OK.
     """
     errors = []
+    run_dir = PROJECT_ROOT / "runs" / date
+    output_dir = run_dir / "output"
 
     # 1. positions.json matches tracking/*.json
     if POSITIONS_FILE.exists():
@@ -128,31 +130,38 @@ def validate_output(date: str) -> list[str]:
             pass
 
     # 3. Watchlist exists and is valid JSON
-    wl_file = WATCHLIST_DIR / f"{date}.json"
+    wl_file = output_dir / "watchlist.json"
+    if not wl_file.exists():
+        # Legacy fallback
+        wl_file = WATCHLIST_DIR / f"{date}.json"
     if wl_file.exists():
         try:
             wl = json.loads(wl_file.read_text(encoding="utf-8"))
             if "recommendations" not in wl:
-                errors.append(f"WARNING: watchlist/{date}.json missing 'recommendations' key")
+                errors.append(f"WARNING: watchlist missing 'recommendations' key")
         except json.JSONDecodeError as e:
-            errors.append(f"CRITICAL: watchlist/{date}.json is invalid JSON: {e}")
+            errors.append(f"CRITICAL: watchlist is invalid JSON: {e}")
     else:
-        errors.append(f"WARNING: watchlist/{date}.json does not exist")
+        errors.append(f"WARNING: no watchlist found for {date}")
 
     # 4. Report exists
-    report_file = REPORTS_DIR / f"{date}.md"
+    report_file = output_dir / "report.md"
     if not report_file.exists():
-        errors.append(f"WARNING: reports/{date}.md does not exist")
+        report_file = REPORTS_DIR / f"{date}.md"
+    if not report_file.exists():
+        errors.append(f"WARNING: no report found for {date}")
 
     # 5. Daily summary exists
-    daily_file = DAILY_DIR / f"{date}.json"
+    daily_file = output_dir / "daily_summary.json"
+    if not daily_file.exists():
+        daily_file = DAILY_DIR / f"{date}.json"
     if daily_file.exists():
         try:
             json.loads(daily_file.read_text(encoding="utf-8"))
         except json.JSONDecodeError as e:
-            errors.append(f"WARNING: daily/{date}.json is invalid JSON: {e}")
+            errors.append(f"WARNING: daily summary is invalid JSON: {e}")
     else:
-        errors.append(f"INFO: tracking/daily/{date}.json does not exist yet")
+        errors.append(f"INFO: no daily summary found for {date}")
 
     return errors
 
