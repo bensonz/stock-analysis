@@ -12,10 +12,14 @@ Usage:
     python scripts/run_daily.py --phase1           # Data collection only
     python scripts/run_daily.py --apply FILE       # Apply LLM response from file (Phase 3+4)
     python scripts/run_daily.py --validate         # Run validation only
+    python scripts/run_daily.py --validate DATE    # Validate specific date
+    python scripts/run_daily.py --reset-to DATE    # Reset state to end of DATE
+    python scripts/run_daily.py --list-runs        # Show all runs with status
 """
 
 import json
 import os
+import shutil
 import subprocess
 import sys
 import time
@@ -46,18 +50,250 @@ from position_manager import (
     update_position,
     regenerate_positions_json,
     save_daily_summary,
+    TRACKING_DIR,
+    CLOSED_DIR,
+    POSITIONS_FILE,
+    PORTFOLIO_CONFIG_FILE,
 )
 from report_generator import generate_watchlist_json, generate_report_md
 from run_rules import run_all_rules
 from validator import validate_data, validate_output
 
 # Directories
-DATA_DIR = PROJECT_ROOT / "data"
-LOGS_DIR = PROJECT_ROOT / "logs"
-LOGS_DIR.mkdir(parents=True, exist_ok=True)
+RUNS_DIR = PROJECT_ROOT / "runs"
 
 LLM_PROMPT_START = "=== LLM_PROMPT_START ==="
 LLM_PROMPT_END = "=== LLM_PROMPT_END ==="
+
+
+def get_run_dir(date: str) -> Path:
+    """Get the run directory for a date, creating subdirs as needed."""
+    run_dir = RUNS_DIR / date
+    (run_dir / "input").mkdir(parents=True, exist_ok=True)
+    (run_dir / "output").mkdir(parents=True, exist_ok=True)
+    return run_dir
+
+
+def snapshot_positions(snapshot_type: str, date: str) -> dict:
+    """Create a full snapshot of all position state.
+
+    Args:
+        snapshot_type: "pre_run" or "post_run"
+        date: Date string
+
+    Returns:
+        The snapshot dict.
+    """
+    # Read all active position files
+    active = {}
+    for f in sorted(TRACKING_DIR.glob("*.json")):
+        if f.name in ("positions.json", "portfolio_config.json"):
+            continue
+        try:
+            data = json.loads(f.read_text(encoding="utf-8"))
+            if data.get("status") == "active":
+                active[data["code"]] = data
+        except (json.JSONDecodeError, KeyError):
+            pass
+
+    # Read all closed position files
+    closed = {}
+    for f in sorted(CLOSED_DIR.glob("*.json")):
+        try:
+            data = json.loads(f.read_text(encoding="utf-8"))
+            closed[data["code"]] = data
+        except (json.JSONDecodeError, KeyError):
+            pass
+
+    # Read positions.json
+    positions_json = {}
+    if POSITIONS_FILE.exists():
+        positions_json = json.loads(POSITIONS_FILE.read_text(encoding="utf-8"))
+
+    # Read LEARNINGS.md
+    learnings_file = PROJECT_ROOT / "LEARNINGS.md"
+    learnings = learnings_file.read_text(encoding="utf-8") if learnings_file.exists() else ""
+
+    return {
+        "snapshot_time": datetime.now().astimezone().isoformat(),
+        "snapshot_type": snapshot_type,
+        "date": date,
+        "portfolio_config": load_portfolio_config(),
+        "positions_json": positions_json,
+        "active_positions": active,
+        "closed_positions": closed,
+        "learnings_md": learnings,
+    }
+
+
+def restore_snapshot(snapshot: dict) -> None:
+    """Restore tracking state from a snapshot.
+
+    WARNING: This overwrites all tracking/*.json, tracking/closed/*.json,
+    tracking/positions.json, tracking/portfolio_config.json, and LEARNINGS.md.
+    """
+    # Clear active positions (but not the directory itself)
+    for f in TRACKING_DIR.glob("*.json"):
+        if f.name in ("positions.json", "portfolio_config.json"):
+            continue
+        f.unlink()
+
+    # Clear closed positions
+    for f in CLOSED_DIR.glob("*.json"):
+        f.unlink()
+
+    # Write active positions
+    for code, data in snapshot.get("active_positions", {}).items():
+        path = TRACKING_DIR / f"{code}.json"
+        path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    # Write closed positions
+    for code, data in snapshot.get("closed_positions", {}).items():
+        path = CLOSED_DIR / f"{code}.json"
+        path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    # Write positions.json
+    if snapshot.get("positions_json"):
+        POSITIONS_FILE.write_text(
+            json.dumps(snapshot["positions_json"], ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8"
+        )
+
+    # Write portfolio_config.json
+    if snapshot.get("portfolio_config"):
+        PORTFOLIO_CONFIG_FILE.write_text(
+            json.dumps(snapshot["portfolio_config"], ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8"
+        )
+
+    # Write LEARNINGS.md
+    if "learnings_md" in snapshot:
+        learnings_file = PROJECT_ROOT / "LEARNINGS.md"
+        learnings_file.write_text(snapshot["learnings_md"], encoding="utf-8")
+
+
+def check_snapshot_consistency(date: str, current_snapshot: dict) -> list[str]:
+    """Check if current state matches the previous day's post-run snapshot."""
+    warnings = []
+
+    if not RUNS_DIR.exists():
+        return []
+
+    # Find the most recent prior run with a post-run snapshot
+    prior_dates = sorted(
+        [d.name for d in RUNS_DIR.iterdir()
+         if d.is_dir() and d.name < date
+         and (d / "output" / "positions_snapshot.json").exists()],
+        reverse=True
+    )
+
+    if not prior_dates:
+        return []  # No prior run to compare against
+
+    prior_file = RUNS_DIR / prior_dates[0] / "output" / "positions_snapshot.json"
+    prior = json.loads(prior_file.read_text(encoding="utf-8"))
+
+    # Compare active position codes
+    prior_codes = set(prior.get("active_positions", {}).keys())
+    current_codes = set(current_snapshot.get("active_positions", {}).keys())
+
+    if prior_codes != current_codes:
+        added = current_codes - prior_codes
+        removed = prior_codes - current_codes
+        if added:
+            warnings.append(f"Positions added outside pipeline since {prior_dates[0]}: {added}")
+        if removed:
+            warnings.append(f"Positions removed outside pipeline since {prior_dates[0]}: {removed}")
+
+    # Compare closed positions count
+    prior_closed = len(prior.get("closed_positions", {}))
+    current_closed = len(current_snapshot.get("closed_positions", {}))
+    if current_closed != prior_closed:
+        warnings.append(
+            f"Closed positions changed outside pipeline: {prior_closed} → {current_closed}"
+        )
+
+    return warnings
+
+
+def reset_to_date(target_date: str) -> None:
+    """Reset all position state to the end-of-day state of target_date.
+
+    Reads runs/<target_date>/output/positions_snapshot.json and restores
+    tracking/ state from it. Also deletes any run dirs after target_date.
+    """
+    run_dir = RUNS_DIR / target_date
+    snapshot_file = run_dir / "output" / "positions_snapshot.json"
+
+    if not snapshot_file.exists():
+        # Try input snapshot if output doesn't exist (run never completed)
+        snapshot_file = run_dir / "input" / "positions_snapshot.json"
+        if not snapshot_file.exists():
+            print(f"No snapshot found for {target_date}", file=sys.stderr)
+            if RUNS_DIR.exists():
+                print(f"Available dates:", file=sys.stderr)
+                for d in sorted(RUNS_DIR.iterdir()):
+                    if d.is_dir():
+                        has_out = (d / "output" / "positions_snapshot.json").exists()
+                        has_in = (d / "input" / "positions_snapshot.json").exists()
+                        status = "✓ complete" if has_out else ("⚠ input only" if has_in else "✗ no snapshot")
+                        print(f"  {d.name}  {status}", file=sys.stderr)
+            sys.exit(1)
+
+    snapshot = json.loads(snapshot_file.read_text(encoding="utf-8"))
+
+    # Confirm
+    active_count = len(snapshot.get("active_positions", {}))
+    closed_count = len(snapshot.get("closed_positions", {}))
+    print(f"Resetting to {target_date} ({snapshot_file.parent.name} snapshot)", file=sys.stderr)
+    print(f"  Active positions: {active_count}", file=sys.stderr)
+    print(f"  Closed positions: {closed_count}", file=sys.stderr)
+
+    # Delete run dirs after target_date
+    deleted = []
+    if RUNS_DIR.exists():
+        for d in sorted(RUNS_DIR.iterdir()):
+            if d.is_dir() and d.name > target_date:
+                shutil.rmtree(d)
+                deleted.append(d.name)
+    if deleted:
+        print(f"  Deleted runs: {', '.join(deleted)}", file=sys.stderr)
+
+    # Restore
+    restore_snapshot(snapshot)
+
+    # Regenerate positions.json with current data (no live prices)
+    regenerate_positions_json()
+
+    print(f"\n✓ State restored to end of {target_date}", file=sys.stderr)
+
+
+def list_runs() -> None:
+    """List all run directories with status."""
+    if not RUNS_DIR.exists():
+        print("No runs yet.", file=sys.stderr)
+        return
+
+    for d in sorted(RUNS_DIR.iterdir()):
+        if not d.is_dir():
+            continue
+        has_phase1 = (d / "phase1.json").exists()
+        has_prompt = (d / "prompt.md").exists()
+        has_response = (d / "response.json").exists()
+        has_output = (d / "output" / "positions_snapshot.json").exists()
+
+        if has_output:
+            status = "✓ complete"
+        elif has_response:
+            status = "⚠ applied but no post-snapshot"
+        elif has_prompt:
+            status = "◐ awaiting LLM response"
+        elif has_phase1:
+            status = "◑ phase1 done"
+        else:
+            status = "○ started"
+
+        print(f"  {d.name}  {status}")
 
 
 def phase1_collect(date: str) -> dict:
@@ -72,11 +308,27 @@ def phase1_collect(date: str) -> dict:
 
     print("Phase 1: Collecting data...", file=sys.stderr)
 
+    # Create run directory and take pre-run snapshot
+    run_dir = get_run_dir(date)
+    input_dir = run_dir / "input"
+
+    pre_snap = snapshot_positions("pre_run", date)
+    (input_dir / "positions_snapshot.json").write_text(
+        json.dumps(pre_snap, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+
+    # Check consistency with previous run
+    drift_warnings = check_snapshot_consistency(date, pre_snap)
+    if drift_warnings:
+        print("  ⚠ Snapshot consistency warnings:", file=sys.stderr)
+        for w in drift_warnings:
+            print(f"    {w}", file=sys.stderr)
+
     # Step 1: Strategy pool (must complete before enrichment can start)
     print("  [1/5] Fetching strategy pool...", file=sys.stderr)
     try:
         data["strategy_pool"] = fetch_strategy_pool()
-        save_crawl_data(date, data["strategy_pool"])
+        save_crawl_data(date, data["strategy_pool"], output_dir=input_dir)
         print(f"    → {data['strategy_pool'].get('total_stocks', 0)} stocks", file=sys.stderr)
     except Exception as e:
         data["strategy_pool"] = {"error": str(e), "stocks": []}
@@ -106,13 +358,13 @@ def phase1_collect(date: str) -> dict:
     def _market():
         print("  [3/5] Fetching market overview...", file=sys.stderr)
         result = fetch_market_overview()
-        save_market_data(date, result)
+        save_market_data(date, result, output_dir=input_dir)
         return "market", result
 
     def _prices():
         print("  [4/5] Fetching position prices...", file=sys.stderr)
         result = fetch_position_prices(positions)
-        save_price_data(date, result)
+        save_price_data(date, result, output_dir=input_dir)
         print(f"    → {len(positions)} active positions", file=sys.stderr)
         return "position_prices", result
 
@@ -157,6 +409,13 @@ def phase1_collect(date: str) -> dict:
                     data["missed_opportunity_prices"] = []
                 elif task_name == "iv_sentiment":
                     data["iv_sentiment"] = {"error": str(e)}
+
+    # Save IV sentiment to input dir
+    if data.get("iv_sentiment") and "error" not in data["iv_sentiment"]:
+        (input_dir / "iv_sentiment.json").write_text(
+            json.dumps(data["iv_sentiment"], ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
 
     # Learnings (local file, instant)
     learnings_file = PROJECT_ROOT / "LEARNINGS.md"
@@ -257,6 +516,11 @@ def phase2_build_prompt(data: dict) -> str:
 
 请根据以上数据进行分析，按照 Required Output JSON 格式返回你的决策。
 """
+
+    # Save prompt to run dir
+    run_dir = get_run_dir(data["date"])
+    (run_dir / "prompt.md").write_text(prompt, encoding="utf-8")
+
     return prompt
 
 
@@ -272,6 +536,8 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
         Summary of actions taken.
     """
     log = {"phase": "apply", "start": time.time(), "actions": []}
+    run_dir = get_run_dir(date)
+    output_dir = run_dir / "output"
 
     # 1. Apply position decisions
     daily_actions = []
@@ -358,20 +624,20 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
     # 3. Ensure positions.json is in sync (with live prices)
     regenerate_positions_json(price_data=data.get("position_prices", {}))
 
-    # 4. Generate report and watchlist
+    # 4. Generate report and watchlist (into run dir output)
     try:
-        generate_watchlist_json(date, data, decisions)
+        generate_watchlist_json(date, data, decisions, output_dir=output_dir)
         log["actions"].append("Generated watchlist")
     except Exception as e:
         log["actions"].append(f"ERROR watchlist: {e}")
 
     try:
-        generate_report_md(date, data, decisions)
+        generate_report_md(date, data, decisions, output_dir=output_dir)
         log["actions"].append("Generated report")
     except Exception as e:
         log["actions"].append(f"ERROR report: {e}")
 
-    # 5. Save daily summary
+    # 5. Save daily summary (into run dir output)
     try:
         # Use portfolio data from positions.json (regenerated with live prices)
         pj = regenerate_positions_json(price_data=data.get("position_prices", {}))
@@ -392,6 +658,7 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
         save_daily_summary(
             date,
             daily_actions,
+            output_dir=output_dir,
             portfolioStats=stats,
             newPositions=[
                 {"code": str(p["code"]).split(".")[0], "name": p.get("name")}
@@ -432,6 +699,12 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
     except Exception as e:
         log["actions"].append(f"ERROR post-apply rules: {e}")
 
+    # 9. Take post-run snapshot
+    post_snap = snapshot_positions("post_run", date)
+    (output_dir / "positions_snapshot.json").write_text(
+        json.dumps(post_snap, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+
     log["end"] = time.time()
     log["duration_sec"] = round(log["end"] - log["start"], 1)
     return log
@@ -451,7 +724,8 @@ def phase4_validate_and_log(date: str, logs: list[dict]) -> list[str]:
     except Exception:
         pass
 
-    # Save run log
+    # Save run log to runs/<date>/log.json
+    run_dir = get_run_dir(date)
     run_log = {
         "date": date,
         "runs": logs,
@@ -461,7 +735,7 @@ def phase4_validate_and_log(date: str, logs: list[dict]) -> list[str]:
             "totalDurationSec": sum(l.get("duration_sec", 0) for l in logs),
         },
     }
-    log_file = LOGS_DIR / f"{date}.json"
+    log_file = run_dir / "log.json"
     log_file.write_text(
         json.dumps(run_log, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -489,8 +763,26 @@ def main():
     date = datetime.now().strftime("%Y-%m-%d")
     args = sys.argv[1:]
 
+    if "--list-runs" in args:
+        list_runs()
+        return
+
+    if "--reset-to" in args:
+        idx = args.index("--reset-to")
+        if idx + 1 >= len(args):
+            print("Usage: --reset-to YYYY-MM-DD", file=sys.stderr)
+            sys.exit(1)
+        target_date = args[idx + 1]
+        reset_to_date(target_date)
+        return
+
     if "--validate" in args:
-        errors = validate_output(date)
+        idx = args.index("--validate")
+        if idx + 1 < len(args) and not args[idx + 1].startswith("--"):
+            validate_date = args[idx + 1]
+        else:
+            validate_date = date
+        errors = validate_output(validate_date)
         if errors:
             for e in errors:
                 print(f"  {e}")
@@ -531,10 +823,23 @@ def main():
             print("Could not parse LLM response as JSON", file=sys.stderr)
             sys.exit(1)
 
-        # Load Phase 1 data
-        data_file = DATA_DIR / f"phase1_{date}.json"
-        if data_file.exists():
-            data = json.loads(data_file.read_text(encoding="utf-8"))
+        # Save response.json into run dir
+        run_dir = get_run_dir(date)
+        (run_dir / "response.json").write_text(
+            json.dumps(decisions, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+
+        # Load Phase 1 data (new location first, then legacy)
+        phase1_file = run_dir / "phase1.json"
+        if not phase1_file.exists():
+            # Legacy fallback
+            legacy_file = PROJECT_ROOT / "data" / f"phase1_{date}.json"
+            if legacy_file.exists():
+                phase1_file = legacy_file
+
+        if phase1_file.exists():
+            data = json.loads(phase1_file.read_text(encoding="utf-8"))
         else:
             print("Warning: No Phase 1 data found, running Phase 1 first...", file=sys.stderr)
             data = phase1_collect(date)
@@ -586,8 +891,9 @@ def main():
     # Phase 1
     data = phase1_collect(date)
 
-    # Save Phase 1 data for later use with --apply
-    phase1_file = DATA_DIR / f"phase1_{date}.json"
+    # Save Phase 1 data to run dir for later use with --apply
+    run_dir = get_run_dir(date)
+    phase1_file = run_dir / "phase1.json"
     # Strip learnings text (too large) before saving
     save_data = {k: v for k, v in data.items() if k != "learnings"}
     phase1_file.write_text(
