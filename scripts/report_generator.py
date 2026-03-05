@@ -18,13 +18,14 @@ WATCHLIST_DIR.mkdir(parents=True, exist_ok=True)
 REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 
 
-def generate_watchlist_json(date: str, data: dict, decisions: dict) -> Path:
-    """Write watchlist/YYYY-MM-DD.json from collected data and LLM decisions.
+def generate_watchlist_json(date: str, data: dict, decisions: dict, output_dir: Path | None = None) -> Path:
+    """Write watchlist JSON from collected data and LLM decisions.
 
     Args:
         date: Date string "YYYY-MM-DD"
         data: Collected data from Phase 1 (strategy_pool, market, enriched, etc.)
         decisions: LLM analysis decisions
+        output_dir: If provided, write to output_dir/watchlist.json instead of watchlist/YYYY-MM-DD.json
 
     Returns:
         Path to written file.
@@ -96,7 +97,11 @@ def generate_watchlist_json(date: str, data: dict, decisions: dict) -> Path:
         "summary": summary,
     }
 
-    out = WATCHLIST_DIR / f"{date}.json"
+    if output_dir:
+        out = output_dir / "watchlist.json"
+    else:
+        out = WATCHLIST_DIR / f"{date}.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(
         json.dumps(watchlist, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -104,8 +109,8 @@ def generate_watchlist_json(date: str, data: dict, decisions: dict) -> Path:
     return out
 
 
-def generate_report_md(date: str, data: dict, decisions: dict) -> Path:
-    """Write reports/YYYY-MM-DD.md from structured data.
+def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path | None = None) -> Path:
+    """Write report markdown from structured data.
 
     Report includes market overview + stock recommendations ONLY.
     No position status (that's the tracker's domain).
@@ -114,6 +119,7 @@ def generate_report_md(date: str, data: dict, decisions: dict) -> Path:
         date: Date string "YYYY-MM-DD"
         data: Collected data from Phase 1
         decisions: LLM analysis decisions
+        output_dir: If provided, write to output_dir/report.md instead of reports/YYYY-MM-DD.md
 
     Returns:
         Path to written file.
@@ -205,7 +211,11 @@ def generate_report_md(date: str, data: dict, decisions: dict) -> Path:
 
     lines.append("")
 
-    out = REPORTS_DIR / f"{date}.md"
+    if output_dir:
+        out = output_dir / "report.md"
+    else:
+        out = REPORTS_DIR / f"{date}.md"
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("\n".join(lines), encoding="utf-8")
     return out
 
