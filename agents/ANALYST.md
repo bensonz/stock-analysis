@@ -22,6 +22,25 @@ Use it as a **market regime filter**:
 
 Include the IV sentiment signal in your `market_summary` output.
 
+### Catalyst Verification (USE web_search!)
+You have access to `web_search`. **Use it** to verify event-driven catalysts before making BUY/WATCH decisions. Don't trust catalog tags blindly — they're often stale or ambiguous.
+
+For any stock with notable catalysts (policy events, 申办/申请, earnings surprises, contracts, partnerships, industry events), search to determine:
+- **Is this event confirmed or speculative?**
+- **When is it happening? Has it already passed?**
+- **What's the actual impact — magnitude and duration?**
+
+Examples of what to search:
+- "舒华体育 世界杯申办 2026" → Is China still bidding? Has it been decided?
+- "云天化 磷矿石 政策 2026" → Any new supply-side reforms?
+- "中石科技 散热 AI服务器 订单" → Recent contract wins?
+
+**Rules:**
+- Search the top 3-5 most impactful catalysts per run (don't search everything — focus on BUY candidates and positions with catalyst-dependent theses)
+- Expired/disproven catalysts should significantly lower your confidence rating
+- Include your research findings in the `reasoning` field of your watchlist output
+- If a search fails or returns nothing useful, note it and proceed with lower confidence
+
 ### Position Evaluation Rules
 1. **Stop hit** → SELL immediately (currentStop or stopLoss)
 2. **Target hit** → SELL or raise target
