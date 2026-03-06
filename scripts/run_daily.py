@@ -96,12 +96,24 @@ def snapshot_positions(snapshot_type: str, date: str) -> dict:
         except (json.JSONDecodeError, KeyError):
             pass
 
-    # Read all closed position files
-    closed = {}
+    # Read closed positions — summary only (no history bloat)
+    closed_summary = {}
     for f in sorted(CLOSED_DIR.glob("*.json")):
         try:
             data = json.loads(f.read_text(encoding="utf-8"))
-            closed[data["code"]] = data
+            closed_summary[data["code"]] = {
+                "code": data["code"],
+                "name": data.get("name"),
+                "status": "closed",
+                "entryDate": data.get("entryDate"),
+                "exitDate": data.get("exitDate"),
+                "entryPrice": data.get("entryPrice"),
+                "exitPrice": data.get("exitPrice"),
+                "returnPct": data.get("returnPct"),
+                "holdingDays": data.get("holdingDays"),
+                "sector": data.get("sector"),
+                "lessonLearned": data.get("lessonLearned"),
+            }
         except (json.JSONDecodeError, KeyError):
             pass
 
@@ -110,10 +122,6 @@ def snapshot_positions(snapshot_type: str, date: str) -> dict:
     if POSITIONS_FILE.exists():
         positions_json = json.loads(POSITIONS_FILE.read_text(encoding="utf-8"))
 
-    # Read LEARNINGS.md
-    learnings_file = PROJECT_ROOT / "LEARNINGS.md"
-    learnings = learnings_file.read_text(encoding="utf-8") if learnings_file.exists() else ""
-
     return {
         "snapshot_time": datetime.now().astimezone().isoformat(),
         "snapshot_type": snapshot_type,
@@ -121,8 +129,7 @@ def snapshot_positions(snapshot_type: str, date: str) -> dict:
         "portfolio_config": load_portfolio_config(),
         "positions_json": positions_json,
         "active_positions": active,
-        "closed_positions": closed,
-        "learnings_md": learnings,
+        "closed_positions": closed_summary,
     }
 
 
@@ -130,7 +137,8 @@ def restore_snapshot(snapshot: dict) -> None:
     """Restore tracking state from a snapshot.
 
     WARNING: This overwrites all tracking/*.json, tracking/closed/*.json,
-    tracking/positions.json, tracking/portfolio_config.json, and LEARNINGS.md.
+    tracking/positions.json, and tracking/portfolio_config.json.
+    Note: LEARNINGS.md is no longer included in snapshots (too large, lives in repo).
     """
     # Clear active positions (but not the directory itself)
     for f in TRACKING_DIR.glob("*.json"):
@@ -166,10 +174,7 @@ def restore_snapshot(snapshot: dict) -> None:
             encoding="utf-8"
         )
 
-    # Write LEARNINGS.md
-    if "learnings_md" in snapshot:
-        learnings_file = PROJECT_ROOT / "LEARNINGS.md"
-        learnings_file.write_text(snapshot["learnings_md"], encoding="utf-8")
+    # LEARNINGS.md no longer stored in snapshots — lives in repo directly
 
 
 def check_snapshot_consistency(date: str, current_snapshot: dict) -> list[str]:
