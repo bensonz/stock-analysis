@@ -69,6 +69,22 @@ Cold sectors (bottom 5): [list with 5d performance]
 Position sector alignment: X/Y positions in hot sectors
 ```
 
+## Data Dictionary
+
+### Market Breadth (`breadth` in market data)
+- `up` / `down` / `flat` / `total`: count of stocks by direction
+- `distribution`: histogram of all stocks by daily % change:
+  - `f10` = down ≥10% (跌停), `f7_10` = down 7-10%, `f4_7` = down 4-7%, `f2_4` = down 2-4%, `f0_2` = down 0-2%
+  - `f0` = flat (0%)
+  - `r0_2` = up 0-2%, `r2_4` = up 2-4%, `r4_7` = up 4-7%, `r7_10` = up 7-10%, `r10` = up ≥10% (涨停)
+
+**How to use breadth:**
+- **Up/Down ratio >3:1** + **r10 (涨停) > 50**: Strong broad rally. Good environment for new entries.
+- **Up/Down ratio <1:1** + **f10 (跌停) > 30**: Panic selling. Do NOT open new positions. Tighten stops.
+- **r4_7 + r7_10 + r10 combined > 500**: Euphoria — many stocks running hard. Be cautious of opening at extended prices.
+- **Distribution skewed heavily to r0_2**: Weak rally, most stocks barely up. Not ideal for chasing.
+- Include a one-line breadth read in your `market_summary` (e.g., "Breadth 3.7:1 bullish, 83涨停/6跌停, broad-based rally").
+
 ## Research (web_fetch)
 
 **Mandatory: at least 5 web_fetch calls per run.**
