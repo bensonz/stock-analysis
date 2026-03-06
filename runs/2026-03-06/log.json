@@ -1,0 +1,37 @@
+{
+  "date": "2026-03-06",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1772778604.914399,
+      "errors": [],
+      "end": 1772778672.865053,
+      "duration_sec": 68.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 11198,
+      "response_file": "/tmp/stock-llm-response.json",
+      "tokens": {
+        "input_tokens": 50000,
+        "output_tokens": 8000
+      }
+    },
+    {
+      "phase": "apply",
+      "start": 1772778879.012816,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary"
+      ],
+      "end": 1772778879.065335,
+      "duration_sec": 0.1
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 68.1
+  }
+}
