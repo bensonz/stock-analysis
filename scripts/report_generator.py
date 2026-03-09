@@ -52,9 +52,9 @@ def generate_watchlist_json(date: str, data: dict, decisions: dict, output_dir: 
         "scan_time": datetime.now().astimezone().isoformat(),
     }
 
-    # Recommendations from LLM decisions
+    # Recommendations from LLM decisions (V1: "watchlist", V2: "skip_list")
     recommendations = []
-    for item in decisions.get("watchlist", []):
+    for item in (decisions.get("watchlist", []) or decisions.get("skip_list", [])):
         rec = {
             "code": _format_code(item.get("code", "")),
             "name": item.get("name", ""),
@@ -171,28 +171,73 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
     lines.append(f"扫描 **{pool.get('total_stocks', 0)}** 只策略池股票")
     lines.append(f"(来源: {pool.get('source', 'unknown')})\n")
 
-    # 3. Recommendations
+    # 3. Recommendations (V1: "watchlist", V2: "skip_list" + "new_positions")
     watchlist = decisions.get("watchlist", [])
-    if watchlist:
-        lines.append("## 个股推荐\n")
-        for i, item in enumerate(watchlist, 1):
-            action = item.get("recommendation", "WATCH")
-            confidence = item.get("confidence", "medium")
-            name = item.get("name", "")
-            code = item.get("code", "")
 
-            lines.append(f"### {i}. {name} ({code}) — {action}/{confidence}\n")
+    # V2: new_positions are the BUY recommendations
+    new_positions = decisions.get("new_positions", [])
 
-            if item.get("price"):
-                lines.append(f"- **价格**: ¥{item['price']}")
-            if item.get("rps120"):
-                lines.append(f"- **RPS120**: {item['rps120']}%")
-            if item.get("pe"):
-                lines.append(f"- **PE**: {item['pe']}")
+    # V2: skip_list replaces WATCH — stocks considered but not bought
+    skip_list = decisions.get("skip_list", [])
 
-            reasoning = item.get("reasoning", "")
-            if reasoning:
-                lines.append(f"\n{reasoning}\n")
+    has_recs = watchlist or new_positions or skip_list
+
+    if has_recs:
+        # V1-style watchlist (has recommendation field)
+        if watchlist:
+            lines.append("## 个股推荐\n")
+            for i, item in enumerate(watchlist, 1):
+                action = item.get("recommendation", "WATCH")
+                confidence = item.get("confidence", "medium")
+                name = item.get("name", "")
+                code = item.get("code", "")
+
+                lines.append(f"### {i}. {name} ({code}) — {action}/{confidence}\n")
+
+                if item.get("price"):
+                    lines.append(f"- **价格**: ¥{item['price']}")
+                if item.get("rps120"):
+                    lines.append(f"- **RPS120**: {item['rps120']}%")
+                if item.get("pe"):
+                    lines.append(f"- **PE**: {item['pe']}")
+
+                reasoning = item.get("reasoning", "")
+                if reasoning:
+                    lines.append(f"\n{reasoning}\n")
+
+        # V2: new positions opened today
+        if new_positions:
+            lines.append("## 今日开仓\n")
+            for i, item in enumerate(new_positions, 1):
+                name = item.get("name", "")
+                code = item.get("code", "")
+                conviction = item.get("conviction", "")
+                lines.append(f"### {i}. {name} ({code}) — BUY/{conviction}\n")
+                if item.get("entry_price"):
+                    lines.append(f"- **入场价**: ¥{item['entry_price']}")
+                if item.get("stop"):
+                    lines.append(f"- **止损**: ¥{item['stop']}")
+                if item.get("target"):
+                    lines.append(f"- **目标**: ¥{item['target']}")
+                if item.get("rps120"):
+                    lines.append(f"- **RPS120**: {item['rps120']}%")
+                if item.get("sector"):
+                    lines.append(f"- **板块**: {item['sector']} ({item.get('sector_rank', '')})")
+                thesis = item.get("thesis", "")
+                if thesis:
+                    lines.append(f"\n{thesis}\n")
+
+        # V2: skip list (considered but not bought)
+        if skip_list:
+            lines.append("## 跳过标的\n")
+            for i, item in enumerate(skip_list, 1):
+                name = item.get("name", "")
+                code = item.get("code", "")
+                reason = item.get("reason", "")
+                rps = item.get("rps120")
+                rps_str = f" (RPS {rps}%)" if rps else ""
+                lines.append(f"{i}. **{name}** ({code}){rps_str} — {reason}")
+            lines.append("")
 
     # 4. Summary
     lines.append("## 今日研究结论\n")
@@ -200,9 +245,15 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
     watch_recs = [w for w in watchlist if w.get("recommendation") == "WATCH"]
     avoid_recs = [w for w in watchlist if w.get("recommendation") == "AVOID"]
 
-    lines.append(f"- BUY推荐: {len(buy_recs)}只")
-    lines.append(f"- WATCH推荐: {len(watch_recs)}只")
-    lines.append(f"- AVOID推荐: {len(avoid_recs)}只")
+    if watchlist:
+        # V1 summary
+        lines.append(f"- BUY推荐: {len(buy_recs)}只")
+        lines.append(f"- WATCH推荐: {len(watch_recs)}只")
+        lines.append(f"- AVOID推荐: {len(avoid_recs)}只")
+    else:
+        # V2 summary
+        lines.append(f"- 新开仓: {len(new_positions)}只")
+        lines.append(f"- 跳过: {len(skip_list)}只")
 
     if decisions.get("new_learnings"):
         lines.append("\n### 新教训")
