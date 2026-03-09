@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """
-llm_client.py — Anthropic API client with tool-use loop.
+llm_client.py — Anthropic API client with two-pass tool-use loop.
 
-Calls Claude with web_fetch/web_search tools. Executes tool calls
-locally and feeds results back until the LLM returns a final text response.
+Pass 1: Full prompt → LLM researches (web_search/web_fetch) and drafts analysis
+Pass 2: Same conversation, repeat instruction → LLM refines
+
+Tools: web_search (Tavily), web_fetch (direct HTTP)
 """
 
 import json
@@ -17,10 +19,19 @@ from urllib.parse import quote_plus
 import anthropic
 import requests
 
+# Load .env from project root (for TAVILY_API_KEY etc.)
+_env_file = Path(__file__).parent.parent / ".env"
+if _env_file.exists():
+    for line in _env_file.read_text().strip().splitlines():
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            key, _, val = line.partition("=")
+            os.environ.setdefault(key.strip(), val.strip())
+
 # --- Config ---
 
 DEFAULT_MODEL = "claude-opus-4-6"
-MAX_TOOL_ROUNDS = 15  # Safety cap on tool-use loops
+MAX_TOOL_ROUNDS = 15  # Safety cap on tool-use loops per pass
 FETCH_TIMEOUT = 15  # seconds per web fetch
 FETCH_MAX_CHARS = 8000  # max chars per fetch result
 
@@ -31,7 +42,7 @@ TOOLS = [
         "name": "web_fetch",
         "description": (
             "Fetch and extract readable content from a URL (HTML → text). "
-            "Use for news articles, Baidu search results, stock pages. "
+            "Use for specific news articles, stock pages, financial portals. "
             "Returns extracted text content."
         ),
         "input_schema": {
@@ -53,8 +64,9 @@ TOOLS = [
     {
         "name": "web_search",
         "description": (
-            "Search the web using Baidu. Returns search result snippets. "
-            "Use for finding recent news, sector analysis, stock catalysts."
+            "Search the web via Tavily. Returns structured results with titles, URLs, and content snippets. "
+            "Use for finding recent news, sector analysis, stock catalysts, macro events. "
+            "Supports Chinese and English queries."
         ),
         "input_schema": {
             "type": "object",
@@ -63,10 +75,10 @@ TOOLS = [
                     "type": "string",
                     "description": "Search query in Chinese or English.",
                 },
-                "maxChars": {
+                "max_results": {
                     "type": "integer",
-                    "description": f"Maximum characters to return (default {FETCH_MAX_CHARS}).",
-                    "default": FETCH_MAX_CHARS,
+                    "description": "Number of results (default 5, max 10).",
+                    "default": 5,
                 },
             },
             "required": ["query"],
@@ -106,10 +118,10 @@ def execute_web_fetch(url: str, max_chars: int = FETCH_MAX_CHARS) -> str:
         }
         resp = requests.get(url, headers=headers, timeout=FETCH_TIMEOUT, allow_redirects=True)
         resp.encoding = resp.apparent_encoding or "utf-8"
-        
+
         if resp.status_code != 200:
             return f"HTTP {resp.status_code}: {resp.reason}"
-        
+
         return _extract_text(resp.text, max_chars)
     except requests.Timeout:
         return f"Timeout fetching {url} (>{FETCH_TIMEOUT}s)"
@@ -117,11 +129,46 @@ def execute_web_fetch(url: str, max_chars: int = FETCH_MAX_CHARS) -> str:
         return f"Error fetching {url}: {e}"
 
 
-def execute_web_search(query: str, max_chars: int = FETCH_MAX_CHARS) -> str:
-    """Search via Baidu and return extracted results."""
-    encoded = quote_plus(query)
-    url = f"https://www.baidu.com/s?wd={encoded}"
-    return execute_web_fetch(url, max_chars)
+def execute_web_search(query: str, max_results: int = 5) -> str:
+    """Search via Tavily API. Returns structured results."""
+    api_key = os.environ.get("TAVILY_API_KEYS") or os.environ.get("TAVILY_API_KEY", "")
+    if not api_key:
+        return "Error: No Tavily API key. Set TAVILY_API_KEYS or TAVILY_API_KEY."
+
+    try:
+        resp = requests.post(
+            "https://api.tavily.com/search",
+            json={
+                "api_key": api_key,
+                "query": query,
+                "max_results": min(max_results, 10),
+                "search_depth": "basic",
+                "include_answer": True,
+            },
+            timeout=15,
+        )
+        if resp.status_code != 200:
+            return f"Tavily HTTP {resp.status_code}: {resp.text[:200]}"
+
+        data = resp.json()
+        parts = []
+
+        # Include Tavily's AI answer if available
+        if data.get("answer"):
+            parts.append(f"AI Summary: {data['answer']}\n")
+
+        # Format results
+        for i, r in enumerate(data.get("results", []), 1):
+            title = r.get("title", "")
+            url = r.get("url", "")
+            content = r.get("content", "")[:500]
+            parts.append(f"{i}. [{title}]({url})\n{content}\n")
+
+        return "\n".join(parts) if parts else "No results found."
+    except requests.Timeout:
+        return "Tavily search timed out (>15s)"
+    except Exception as e:
+        return f"Tavily search error: {e}"
 
 
 def execute_tool(name: str, input_data: dict) -> str:
@@ -134,7 +181,7 @@ def execute_tool(name: str, input_data: dict) -> str:
     elif name == "web_search":
         return execute_web_search(
             query=input_data["query"],
-            max_chars=input_data.get("maxChars", FETCH_MAX_CHARS),
+            max_results=input_data.get("max_results", 5),
         )
     else:
         return f"Unknown tool: {name}"
@@ -234,11 +281,19 @@ def call_llm(
     model: str = DEFAULT_MODEL,
     max_tokens: int = 8192,
     temperature: float = 0.3,
+    output_dir: Path | None = None,
 ) -> dict:
     """Call Anthropic API with two-pass approach.
 
     Pass 1: Full prompt (ANALYST.md + data) → LLM researches and drafts analysis
     Pass 2: Same conversation, just the instruction → LLM refines with full context
+
+    Args:
+        prompt: The full analysis prompt.
+        model: Model name.
+        max_tokens: Max tokens per response.
+        temperature: Sampling temperature.
+        output_dir: If set, save pass1_response.txt and pass2_response.txt here.
 
     Returns:
         {
@@ -272,12 +327,21 @@ def call_llm(
         client, messages, model, max_tokens, temperature, tool_log, label="P1 "
     )
 
+    # Save pass 1 response
+    if output_dir:
+        output_dir.mkdir(parents=True, exist_ok=True)
+        (output_dir / "pass1_response.txt").write_text(pass1_text, encoding="utf-8")
+
     # Pass 2: Same conversation, repeat instruction — LLM refines
     print("  [Pass 2] Refine...", file=sys.stderr)
     messages.append({"role": "user", "content": REFINE_PROMPT})
     pass2_text, in2, out2, rounds2 = _run_tool_loop(
         client, messages, model, max_tokens, temperature, tool_log, label="P2 "
     )
+
+    # Save pass 2 response
+    if output_dir:
+        (output_dir / "pass2_response.txt").write_text(pass2_text, encoding="utf-8")
 
     total_input = in1 + in2
     total_output = out1 + out2

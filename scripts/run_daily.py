@@ -825,7 +825,7 @@ def main():
         print(f"\nPhase 2: Calling LLM...", file=sys.stderr)
         prompt = phase2_build_prompt(data)
 
-        llm_result = call_llm(prompt)
+        llm_result = call_llm(prompt, output_dir=run_dir)
 
         # Parse JSON from LLM response
         decisions = _parse_llm_response(llm_result["text"])
