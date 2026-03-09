@@ -253,10 +253,21 @@ def update_position(code: str, updates: dict) -> dict:
 
     pos = _read_json(pos_file)
 
-    # Handle history entry
+    # Handle history entry — deduplicate by (date, action)
     history_entry = updates.pop("history_entry", None)
     if history_entry:
-        pos.setdefault("history", []).append(history_entry)
+        history = pos.setdefault("history", [])
+        entry_date = history_entry.get("date")
+        entry_action = history_entry.get("action")
+        # Replace existing entry for same date+action, or append if new
+        replaced = False
+        for i, h in enumerate(history):
+            if h.get("date") == entry_date and h.get("action") == entry_action:
+                history[i] = history_entry
+                replaced = True
+                break
+        if not replaced:
+            history.append(history_entry)
 
     # Handle stop raise (never lower)
     new_stop = updates.pop("new_stop", None)
