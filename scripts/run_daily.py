@@ -3,12 +3,14 @@
 run_daily.py — Main orchestrator for the daily stock analysis pipeline.
 
 Phase 1: DATA COLLECTION (pure Python)
-Phase 2: ANALYSIS (LLM — single call, outputs prompt to stdout)
+Phase 2: ANALYSIS (LLM API call with tool-use loop)
 Phase 3: EXECUTION (pure Python — apply LLM decisions)
 Phase 4: VALIDATION + COMMIT
 
 Usage:
-    python scripts/run_daily.py                    # Full pipeline (stops at Phase 2 output)
+    python scripts/run_daily.py --run              # Full pipeline: collect → LLM → apply → validate → commit
+    python scripts/run_daily.py --run --no-commit  # Full pipeline without git commit
+    python scripts/run_daily.py                    # Phase 1+2 only (outputs prompt to stdout, legacy mode)
     python scripts/run_daily.py --phase1           # Data collection only
     python scripts/run_daily.py --apply FILE       # Apply LLM response from file (Phase 3+4)
     python scripts/run_daily.py --validate         # Run validation only
@@ -793,6 +795,134 @@ def main():
                 print(f"  {e}")
         else:
             print("All checks passed!")
+        return
+
+    if "--run" in args:
+        # Full automated pipeline: Phase 1 → LLM → Phase 3 → Phase 4 → git commit
+        from llm_client import call_llm
+
+        no_commit = "--no-commit" in args
+
+        print(f"{'='*60}", file=sys.stderr)
+        print(f"Stock Analysis Pipeline — {date} (full auto)", file=sys.stderr)
+        print(f"{'='*60}", file=sys.stderr)
+
+        # Phase 1: Collect
+        data = phase1_collect(date)
+
+        # Save Phase 1 data
+        run_dir = get_run_dir(date)
+        phase1_file = run_dir / "phase1.json"
+        save_data = {k: v for k, v in data.items() if k != "learnings"}
+        phase1_file.write_text(
+            json.dumps(save_data, ensure_ascii=False, indent=2, default=str) + "\n",
+            encoding="utf-8",
+        )
+
+        # Phase 2: Build prompt and call LLM
+        print(f"\nPhase 2: Calling LLM...", file=sys.stderr)
+        prompt = phase2_build_prompt(data)
+
+        llm_result = call_llm(prompt)
+
+        # Parse JSON from LLM response
+        decisions = _parse_llm_response(llm_result["text"])
+        if not decisions:
+            print("ERROR: Could not parse LLM response as JSON", file=sys.stderr)
+            print(f"Response text ({len(llm_result['text'])} chars):", file=sys.stderr)
+            print(llm_result["text"][:2000], file=sys.stderr)
+            sys.exit(1)
+
+        # Save response
+        (run_dir / "response.json").write_text(
+            json.dumps(decisions, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+
+        # Save LLM metadata
+        llm_meta = {
+            "input_tokens": llm_result["input_tokens"],
+            "output_tokens": llm_result["output_tokens"],
+            "rounds": llm_result["rounds"],
+            "duration_sec": llm_result["duration_sec"],
+            "tool_calls": llm_result["tool_calls"],
+        }
+        (run_dir / "llm_meta.json").write_text(
+            json.dumps(llm_meta, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+
+        print(f"  LLM: {llm_result['rounds']} rounds, "
+              f"{llm_result['input_tokens']}+{llm_result['output_tokens']} tokens, "
+              f"{len(llm_result['tool_calls'])} tool calls, "
+              f"{llm_result['duration_sec']}s", file=sys.stderr)
+
+        # Phase 3: Apply
+        print(f"\nPhase 3: Applying decisions...", file=sys.stderr)
+        all_logs = []
+        if data.get("_log_phase1"):
+            all_logs.append(data["_log_phase1"])
+        all_logs.append({
+            "phase": "llm_analysis",
+            "response_size_bytes": len(llm_result["text"]),
+            "tokens": {
+                "input_tokens": llm_result["input_tokens"],
+                "output_tokens": llm_result["output_tokens"],
+            },
+            "rounds": llm_result["rounds"],
+            "tool_calls_count": len(llm_result["tool_calls"]),
+            "duration_sec": llm_result["duration_sec"],
+        })
+
+        log3 = phase3_apply(date, decisions, data)
+        print(f"  Actions: {log3['actions']}", file=sys.stderr)
+        all_logs.append(log3)
+
+        # Phase 4: Validate
+        print(f"\nPhase 4: Validating...", file=sys.stderr)
+        errors = phase4_validate_and_log(date, all_logs)
+        if errors:
+            print(f"  Validation issues: {errors}", file=sys.stderr)
+        else:
+            print("  All checks passed!", file=sys.stderr)
+
+        # Git commit
+        if not no_commit:
+            print(f"\nPhase 5: Git commit...", file=sys.stderr)
+            try:
+                subprocess.run(["git", "add", "-A"], cwd=str(PROJECT_ROOT), check=True,
+                               capture_output=True)
+                subprocess.run(
+                    ["git", "commit", "-m", f"分析: {date} 每日流水线"],
+                    cwd=str(PROJECT_ROOT), check=True, capture_output=True,
+                )
+                subprocess.run(["git", "push"], cwd=str(PROJECT_ROOT), check=True,
+                               capture_output=True)
+                print("  Committed and pushed.", file=sys.stderr)
+            except subprocess.CalledProcessError as e:
+                print(f"  Git error: {e.stderr.decode() if e.stderr else e}", file=sys.stderr)
+
+        # Summary
+        total_sec = sum(l.get("duration_sec", 0) for l in all_logs)
+        print(f"\n{'='*60}", file=sys.stderr)
+        print(f"Pipeline complete in {total_sec:.0f}s", file=sys.stderr)
+        print(f"{'='*60}", file=sys.stderr)
+
+        # Print summary to stdout (for cron capture)
+        actions = decisions.get("position_decisions", [])
+        new_pos = decisions.get("new_positions", [])
+        sells = [a for a in actions if a.get("action") == "SELL"]
+        holds = [a for a in actions if a.get("action") in ("HOLD", "RAISE_STOP")]
+        print(json.dumps({
+            "date": date,
+            "sells": len(sells),
+            "opens": len(new_pos),
+            "holds": len(holds),
+            "tool_calls": len(llm_result["tool_calls"]),
+            "tokens": llm_result["input_tokens"] + llm_result["output_tokens"],
+            "duration_sec": total_sec,
+            "validation_errors": len(errors),
+        }, ensure_ascii=False))
         return
 
     if "--apply" in args:
