@@ -2,54 +2,58 @@
   "date": "2026-03-09",
   "actions": [
     {
-      "code": "300684",
-      "name": "中石科技",
-      "action": "SELL",
-      "price": 50.5,
-      "pnl_pct": -8.83,
-      "note": "V2规则: PnL=-8.83%远超-5%止损线。虽然AI散热thesis依然强劲(2026订单充足+液冷推进+北美大客户), 但价格是真理。持仓19个交易日, 从+4.82%跌至-8.83%, 回撤超13pp。V2规则明确: -5%自动出, 不能用'thesis still valid'来合理化持有亏损。今日收¥50.50距V1硬止损¥50.00仅1%, 不等触发直接执行。可待企稳后重新入场。"
+      "code": "002895",
+      "name": "川恒股份",
+      "action": "HOLD",
+      "price": 41.71,
+      "pnl_pct": 1.21,
+      "note": "Day 1 position. Sector (磷化工/农化制品) is HOT — international phosphate fertilizer >$700/ton 3yr high, Middle East conflict boosting ag commodity demand. Price ¥41.71 vs entry ¥41.21, PnL +1.2%. V2 stop at ¥39.15 (original) = -5.0% from entry. Thesis fully intact: 0 risk factors, revenue +46%, net profit +52%, score_company 8.8."
     },
     {
       "code": "600096",
       "name": "云天化",
       "action": "HOLD",
-      "price": 42.31,
-      "pnl_pct": -3.95,
-      "note": "PnL=-3.95%, V2止损线¥41.85(=-5%), 当前¥42.31距止损1.1%。磷化工板块hot sector: 国际磷肥突破$700/吨3年新高, 中东冲突推高粮价→化肥需求预期上行。ROE25%行业龙头, 合同负债+36%。web_fetch确认板块资金面略降温但基本面未变, 川恒股份同板块创新高¥44.75。03-03后止跌企稳, 今日仅-0.12%。但距V2止损极近, 如果明日跌破¥41.85立即执行。开仓仅8个交易日, 磷化工景气周期远未结束。"
+      "price": 42.19,
+      "pnl_pct": -4.22,
+      "note": "Day 8. Sector HOT. Price ¥42.19 vs entry ¥44.05, PnL -4.22%. V2 stop = ¥41.85 (-5% from entry). Today's low ¥41.84 TOUCHED the V2 stop intraday but closed at ¥42.19 above it. CRITICAL: if tomorrow opens below ¥41.85 or breaks ¥41.84 intraday again, SELL immediately. Phosphate sector fundamentals remain strong (ROE 25%, contract liabilities +36%, international phosphate >$700/ton). Giving one more day given sector is hot and intraday recovery from low."
     },
     {
       "code": "600499",
       "name": "科达制造",
       "action": "HOLD",
-      "price": 16.99,
-      "pnl_pct": -2.8,
-      "note": "PnL=-2.80%, V2止损¥16.61(=-5%), 当前¥16.99距止损2.3%安全。web_fetch确认重组进展有序: 审计评估推进中, 尚需董事会+股东会+监管审批。特福国际51.55%股权收购将使海外建材100%并表, 2025年海外营收+73.6%+净利+156%基本面强劲。RPS120=87.1%理想区间, 8亮点1风险。板块不算hot但独立催化(重组), 不受宏观风格切换影响。10个交易日窗口还剩3天, 重组催化需要时间发酵。"
+      "price": 17.31,
+      "pnl_pct": -0.97,
+      "note": "Day 9. Price ¥17.31 vs entry ¥17.48, PnL -0.97%. V2 stop = ¥16.61 (-5% from entry), distance 4.2% safe. Today +1.05% showing recovery. Restructuring catalyst (特福国际 51.55% acquisition) progressing — audit/evaluation work ongoing per latest filings. Net profit +119%, 8 highlights 1 risk. Sector (专用设备) trending up since Nov 2025. TIME STOP CHECK: 9 of 10 days used, need >3% gain by tomorrow or time stop triggers. Current PnL -0.97% is below +3% threshold. Will evaluate tomorrow — if still <3% at day 10, must SELL per V2 rules."
     },
     {
-      "code": "002895",
-      "name": "川恒股份",
+      "code": "002046",
+      "name": "国机精工",
       "action": "OPEN",
-      "price": 41.21,
-      "note": "磷化工高成长龙头, 磷矿330万吨权益产能+氟化工新增长极, 净利+37%高增, score_company=8.8极高, 0风险, PE仅20倍(磷化工中最合理), 中东冲突推高化肥需求预期"
+      "price": 50.73,
+      "note": "通用设备龙头(磨具磨料), 航天轴承市占率~90%, 商业航天催化. 03-05涨停+10%, 03-06接待34家机构调研(天风/中金/广发基金). 股东户数减少29%大资金买入. 行业自2025年11月以来持续走强."
     }
   ],
   "portfolioStats": {
-    "totalPositions": 3,
-    "totalEquity": 966884.0,
-    "dayPnl": 0.0,
-    "dayReturnPct": 0.0,
-    "totalReturnPct": -3.31,
-    "unrealizedPnl": -6621.0,
+    "totalPositions": 4,
+    "totalEquity": 969244.0,
+    "dayPnl": -430.0,
+    "dayReturnPct": -0.04,
+    "totalReturnPct": -3.08,
+    "unrealizedPnl": -4261.0,
     "realizedPnl": -26495.0,
-    "cashPct": 73.54
+    "cashPct": 68.65
   },
   "newPositions": [
     {
-      "code": "002895",
-      "name": "川恒股份"
+      "code": "002046",
+      "name": "国机精工"
+    },
+    {
+      "code": "002128",
+      "name": "电投能源"
     }
   ],
   "marketContext": {
-    "summary": "中东地缘冲突主导市场风格: 油气/黄金/化工品全线走强, 科技股承压但未崩。IV情绪偏乐观(均IV Rank 19.2%), 波动率低位意味着市场尚未充分定价地缘风险——关注IV拐点。300ETF IV Rank仅13.4%极低, 大盘波动率可能即将扩张。Breadth估计2:1偏强(资源品带动), 但宽度不够(科技/成长板块拖后腿)。当前regime: 资源品>防御>科技, 但磷化工兼具资源+成长属性, 是最佳攻守兼备选择。组合调整: 卖出AI散热(中石科技, 止损), 新开磷化工(川恒股份, 强催化), 维持磷化工龙头(云天化)+海外建材重组(科达制造)。"
+    "summary": "Breadth 0.41:1 bearish (1567 up / 3786 down), 47涨停/7跌停. Narrow resource-led rally in a broadly weak market. Shanghai -0.48%, Shenzhen -0.52%, ChiNext -0.33%, STAR50 -1.26%. Middle East conflict escalation (Iran 'True Promise 4' ongoing) driving oil +13%, gold $5400+, pushing oil/gas/coal/agriculture sectors to top while crushing airlines/shipping. IV Rank avg 19.2% (low-neutral) — market complacent, vol expansion risk. 300ETF IV Rank 13.4% triggers reduced sizing for new positions. Position alignment: 2/3 in hot resource sectors (磷化工). 科达制造 in neutral sector approaching time stop."
   }
 }

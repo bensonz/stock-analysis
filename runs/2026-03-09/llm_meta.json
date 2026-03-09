@@ -1,0 +1,71 @@
+{
+  "input_tokens": 413564,
+  "output_tokens": 4996,
+  "rounds": 4,
+  "duration_sec": 127.3,
+  "tool_calls": [
+    {
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 热门板块 2026年3月9日 今日",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "油气开采 煤炭 涨价 2026年3月",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "磷化工 磷肥 涨价 2026年3月 云天化 川恒股份",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=中东冲突+油价+黄金+A股+2026年3月9日",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=科达制造+重组+特福国际+2026年3月",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "query": "电网设备 变压器 出口 望变电气 2026年3月",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "query": "国机精工 轴承 商业航天 2026年3月",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    }
+  ]
+}

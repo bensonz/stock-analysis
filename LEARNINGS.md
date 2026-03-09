@@ -724,3 +724,11 @@
 - [W11] V2止损规则首次执行: 中石科技持仓19天PnL=-8.83%, 远超V2的-5%硬止损。V1框架下因'thesis valid'一直持有(止损¥50未触发), 但V2的价格纪律要求更早退出。如果在-5%(¥52.62)时退出, 可少亏3.83pp。教训: 价格纪律>thesis conviction。
 - [W11] 磷化工板块在中东冲突+粮价预期下展现韧性——云天化虽然从高点回调, 但国际磷肥$700/吨是硬支撑。川恒股份创历史新高¥44.75验证板块强势。磷化工=资源品中的结构性成长(供给受限+需求刚性), 不同于油气的纯脉冲驱动。
 - [W11] 地缘冲突(中东)对A股传导路径持续验证: 油气>黄金>化工品>资源股。03-02三桶油首次同日连板是极端信号。但资源品暴涨后追高不是好策略(LEARNINGS#10), 应在之前布局或等回调。今日不追赤峰黄金/西部矿业, 而是选择有结构性成长的川恒股份。
+
+### 自动更新 (2026-03-09)
+
+- V2 Day 1: Today's market is a classic resource/energy rotation driven by Middle East conflict. Oil +13%, gold $5400+, breadth 1567:3786 bearish. Hot money concentrated in oil/gas/coal/agriculture — narrow rally. In this environment, only resource-linked positions should be opened. Tech/growth is being sold.
+- 云天化 intraday low ¥41.84 essentially touched V2 stop ¥41.85. This is a critical test — the stock recovered to close ¥42.19 showing buying support at the stop level. But this is a 'last chance' hold. One more breach = immediate exit.
+- 国机精工 03-05 涨停 followed by 34-institution调研 on 03-06 is a strong institutional validation signal. When a stock hits涨停 AND gets massive institutional attention within 24 hours, it suggests the move has fundamental backing, not just speculation.
+- 科达制造 approaching 10-day time stop with PnL -0.97%. V2 rules say SELL if <3% gain at day 10. Must be disciplined — no exceptions. The restructuring catalyst may take longer but V2 says cut and re-enter if it proves itself.
+- IV Rank averaging 19.2% (low) with 300ETF at 13.4% — market is complacent. Per V2 rules, reduce new position sizing by 50% when IV Rank <15% for broad indices. Applied 5% allocation instead of 7% for new positions.

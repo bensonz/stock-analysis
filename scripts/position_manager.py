@@ -174,7 +174,7 @@ def open_position(data: dict) -> dict:
 
     # Compute position sizing
     config = load_portfolio_config()
-    alloc_pct = data.get("allocation_pct", config["max_position_pct"])
+    alloc_pct = data.get("allocation_pct") or config["max_position_pct"]
     capital = config["starting_capital"] * alloc_pct / 100
     shares = int(capital // entry_price)
 
