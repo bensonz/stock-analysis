@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-03-09T14:46:02.755603+08:00",
+  "snapshot_time": "2026-03-09T15:04:34.604372+08:00",
   "snapshot_type": "post_run",
   "date": "2026-03-09",
   "portfolio_config": {
@@ -10,48 +10,29 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-03-09T14:46:02.646573+08:00",
+    "lastUpdated": "2026-03-09T15:04:34.477938+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 969937.0,
-      "cash": 660009.0,
-      "investedValue": 309928.0,
-      "unrealizedPnl": -5728.0,
-      "realizedPnl": -24335.0,
-      "totalPnl": -30063.0,
-      "totalReturnPct": -3.01,
-      "positionsUsed": 4,
+      "totalEquity": 969631.0,
+      "cash": 779011.0,
+      "investedValue": 190620.0,
+      "unrealizedPnl": -5926.0,
+      "realizedPnl": -24443.0,
+      "totalPnl": -30369.0,
+      "totalReturnPct": -3.04,
+      "positionsUsed": 2,
       "positionsMax": 10,
-      "cashPct": 68.05,
+      "cashPct": 80.34,
       "dayPnl": 0.0
     },
     "activePositions": [
-      {
-        "code": "002128",
-        "name": "电投能源",
-        "entryDate": "2026-03-09",
-        "entryPrice": 33.3,
-        "currentPrice": 33.3,
-        "pnl_pct": 0.0,
-        "stopLoss": 31.64,
-        "currentStop": 31.64,
-        "targetPrice": 40.0,
-        "status": "active",
-        "sector": "煤炭开采",
-        "shares": 1500,
-        "allocation_pct": 5,
-        "allocatedCapital": 49950.0,
-        "currentValue": 49950.0,
-        "unrealizedPnl": 0.0,
-        "weight_pct": 5.15
-      },
       {
         "code": "600096",
         "name": "云天化",
         "entryDate": "2026-02-26",
         "entryPrice": 44.05,
-        "currentPrice": 42.12,
-        "pnl_pct": -4.38,
+        "currentPrice": 42.03,
+        "pnl_pct": -4.59,
         "stopLoss": 39.6,
         "currentStop": 39.6,
         "targetPrice": 52.0,
@@ -60,9 +41,9 @@
         "shares": 2200,
         "allocation_pct": 10,
         "allocatedCapital": 96910.0,
-        "currentValue": 92664.0,
-        "unrealizedPnl": -4246.0,
-        "weight_pct": 9.55
+        "currentValue": 92466.0,
+        "unrealizedPnl": -4444.0,
+        "weight_pct": 9.54
       },
       {
         "code": "600499",
@@ -82,66 +63,10 @@
         "currentValue": 98154.0,
         "unrealizedPnl": -1482.0,
         "weight_pct": 10.12
-      },
-      {
-        "code": "603191",
-        "name": "望变电气",
-        "entryDate": "2026-03-09",
-        "entryPrice": 26.6,
-        "currentPrice": 26.6,
-        "pnl_pct": 0.0,
-        "stopLoss": 25.27,
-        "currentStop": 25.27,
-        "targetPrice": 34.0,
-        "status": "active",
-        "sector": "电网设备",
-        "shares": 2600,
-        "allocation_pct": 7,
-        "allocatedCapital": 69160.0,
-        "currentValue": 69160.0,
-        "unrealizedPnl": 0.0,
-        "weight_pct": 7.13
       }
     ]
   },
   "active_positions": {
-    "002128": {
-      "code": "002128",
-      "name": "电投能源",
-      "status": "active",
-      "thesis": "煤炭开采板块今日+3.10%领涨第二。中东战争→霍尔木兹海峡封锁→全球能源供应中断→煤炭作为替代能源直接受益。油价从$60→$111/桶(今日盘中)，高盛预测可能到$150。ROE 15%盈利能力强，产能扩张中(在建工程9.3%)。RPS120=91.16%在sweet spot。今日为股权登记日(每10股派3元)。",
-      "entryDate": "2026-03-09",
-      "entryPrice": 33.3,
-      "targetPrice": 40.0,
-      "stopLoss": 31.64,
-      "currentStop": 31.64,
-      "allocation_pct": 5,
-      "shares": 1500,
-      "allocatedCapital": 49950.0,
-      "rating": 2,
-      "rps120": 91.16,
-      "sector": "煤炭开采",
-      "catalysts": [],
-      "sourceWatchlist": "2026-03-09",
-      "history": [
-        {
-          "date": "2026-03-09",
-          "price": 33.3,
-          "change_pct": 0,
-          "action": "OPEN",
-          "note": "LLM开仓 电投能源"
-        }
-      ],
-      "exitDate": null,
-      "exitPrice": null,
-      "exitReason": null,
-      "returnPct": null,
-      "holdingDays": null,
-      "lessonLearned": null,
-      "createdAt": "2026-03-09T14:46:02.644958+08:00",
-      "updatedAt": "2026-03-09T14:46:02.644961+08:00",
-      "trackerVersion": "2.1"
-    },
     "600096": {
       "code": "600096",
       "name": "云天化",
@@ -249,10 +174,10 @@
         },
         {
           "date": "2026-03-09",
-          "price": 42.12,
-          "change_pct": -4.38,
+          "price": 42.03,
+          "change_pct": -4.59,
           "action": "HOLD",
-          "note": "Entry ¥44.05, current ¥42.12, PnL = -4.38%. Stop ¥39.60 is 6.0% away. Day 8 of holding. Today -0.02% (flat) while market -0.54%, showing relative strength. Sector (农化制品/磷化工) not in today's top 5 but international phosphate >$700/ton at 3yr high. Oil price surge raises fertilizer production costs globally → supports phosphate prices. Thesis intact: ROE 25%, 合同负债21亿+36%. Tightening stop to ¥41.85 (-5% from entry) as hard floor. V2 time stop at day 10 = March 11 — if PnL still <+3% by then, SELL."
+          "note": "PnL = -4.58%, above V2 -5% stop (41.85). Price 42.03 RECOVERED from last week's 40.70 low (+3.3%). Sector (农化制品/磷化工) in strong uptrend since Apr 2025, international phosphate price at 3-year high ($700/ton), US phosphorus export ban under Defense Production Act is structural tailwind. 8 trading days held — not yet at 10-day time stop. Thesis intact: ROE 25% industry leader, contract liabilities 21亿 (+36%). TIGHTEN STOP to V2 level 41.85. If breached = immediate sell."
         }
       ],
       "exitDate": null,
@@ -262,7 +187,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-02-26T14:48:00+08:00",
-      "updatedAt": "2026-03-09T14:46:02.643031+08:00",
+      "updatedAt": "2026-03-09T15:04:34.472394+08:00",
       "trackerVersion": "2.0"
     },
     "600499": {
@@ -382,7 +307,7 @@
           "price": 17.22,
           "change_pct": -1.49,
           "action": "HOLD",
-          "note": "Entry ¥17.48, current ¥17.22, PnL = -1.49%. Today +0.06% outperforming market (-0.54%). Day 9 of holding. Stop ¥15.70 is 8.8% away. Sector (专用设备) trending up since Nov 2025. Restructuring catalyst (特福国际 acquisition) still active — event-driven. V2 time stop triggers at day 10 (tomorrow March 10). PnL at -1.49% is well below +3% threshold. However, restructuring is an active fresh catalyst. Per LEARNINGS #15/#18, event-driven catalysts deserve patience. Will evaluate tomorrow: if no improvement, prepare to exit."
+          "note": "PnL = -1.49%, 9 trading days. Tomorrow is day 10 — time stop triggers if PnL < 3%. Today price 17.22 flat (0% change), showing stabilization post 03-03 crash. Restructuring catalyst (acquiring 特福国际 remaining 51.55% equity, constitutes major asset restructuring) still pending — audit/evaluation in progress. Lithium carbonate price recovery also a secondary catalyst via 蓝科锂业 stake. V2 stop at 16.61. DECISION POINT TOMORROW: if price doesn't reach ~18.00 (+3% from entry), time stop forces exit."
         }
       ],
       "exitDate": null,
@@ -392,45 +317,8 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-02-25T14:22:00+08:00",
-      "updatedAt": "2026-03-09T14:46:02.643858+08:00",
+      "updatedAt": "2026-03-09T15:04:34.474152+08:00",
       "trackerVersion": "2.0"
-    },
-    "603191": {
-      "code": "603191",
-      "name": "望变电气",
-      "status": "active",
-      "thesis": "电网设备板块今日逆势涨停潮(国电南自/三变科技涨停创新高)。望变电气是国内唯一打通'取向硅钢→铁心→变压器'全产业链企业。美国750亿美元电网扩容项目获批，变压器交付周期延至120周+，2025年中国变压器出口90.36亿美元创历史新高(+34.8%)。公司已获欧洲KEMA认证，订单覆盖南美/美国/阿曼。",
-      "entryDate": "2026-03-09",
-      "entryPrice": 26.6,
-      "targetPrice": 34.0,
-      "stopLoss": 25.27,
-      "currentStop": 25.27,
-      "allocation_pct": 7,
-      "shares": 2600,
-      "allocatedCapital": 69160.0,
-      "rating": 2,
-      "rps120": 94.48,
-      "sector": "电网设备",
-      "catalysts": [],
-      "sourceWatchlist": "2026-03-09",
-      "history": [
-        {
-          "date": "2026-03-09",
-          "price": 26.6,
-          "change_pct": 0,
-          "action": "OPEN",
-          "note": "LLM开仓 望变电气"
-        }
-      ],
-      "exitDate": null,
-      "exitPrice": null,
-      "exitReason": null,
-      "returnPct": null,
-      "holdingDays": null,
-      "lessonLearned": null,
-      "createdAt": "2026-03-09T14:46:02.644390+08:00",
-      "updatedAt": "2026-03-09T14:46:02.644393+08:00",
-      "trackerVersion": "2.1"
     }
   },
   "closed_positions": {
@@ -454,8 +342,8 @@
       "entryDate": "2026-02-10",
       "exitDate": "2026-03-09",
       "entryPrice": 55.39,
-      "exitPrice": 51.7,
-      "returnPct": -6.66,
+      "exitPrice": 51.64,
+      "returnPct": -6.77,
       "holdingDays": 27,
       "sector": "散热材料",
       "lessonLearned": ""

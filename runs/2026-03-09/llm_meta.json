@@ -1,38 +1,38 @@
 {
-  "input_tokens": 526818,
-  "output_tokens": 11079,
+  "input_tokens": 538247,
+  "output_tokens": 8744,
   "rounds": 5,
-  "duration_sec": 287.2,
+  "duration_sec": 208.3,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年3月9日 热门板块 油气开采 煤炭",
+        "query": "A股 2026年3月9日 热门板块 油气 煤炭",
         "max_results": 5
       },
-      "result_length": 2498
+      "result_length": 1537
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "中石科技 散热材料 2026年3月 最新消息",
+        "query": "中石科技 300684 散热材料 最新消息 2026年3月",
         "max_results": 5
       },
-      "result_length": 2044
+      "result_length": 3310
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "云天化 磷化工 2026年3月 行情",
+        "query": "云天化 磷化工 涨价 2026年3月",
         "max_results": 5
       },
-      "result_length": 1579
+      "result_length": 1356
     },
     {
       "pass": "P1",
@@ -49,70 +49,60 @@
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "电网设备 望变电气 变压器出口 2026",
+        "query": "A股 油气开采 煤炭 板块 资源股 2026年3月",
         "max_results": 5
       },
-      "result_length": 2906
+      "result_length": 3086
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "电网设备 板块 2026年3月 变压器 出口",
+        "max_results": 5
+      },
+      "result_length": 3285
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "中东局势 油价 黄金 2026年3月9日",
+        "max_results": 5
+      },
+      "result_length": 3268
     },
     {
       "pass": "P1",
       "round": 2,
       "tool": "web_fetch",
       "input": {
-        "url": "https://www.baidu.com/s?wd=国际油价+暴涨+中东+2026年3月",
+        "url": "https://www.baidu.com/s?wd=电投能源+煤炭+2026年3月",
         "maxChars": 5000
       },
-      "result_length": 28
+      "result_length": 5000
     },
     {
       "pass": "P1",
-      "round": 2,
+      "round": 3,
       "tool": "web_search",
       "input": {
-        "query": "国际油价暴涨 中东冲突 2026年3月9日",
+        "query": "望变电气 603191 变压器出口 2026年3月",
         "max_results": 5
       },
-      "result_length": 3309
+      "result_length": 1988
     },
     {
       "pass": "P1",
-      "round": 2,
+      "round": 3,
       "tool": "web_search",
       "input": {
-        "query": "望变电气 取向硅钢 变压器出口 2026年3月",
+        "query": "电投能源 002128 煤炭 分红 2026",
         "max_results": 5
       },
-      "result_length": 2874
-    },
-    {
-      "pass": "P2",
-      "round": 1,
-      "tool": "web_search",
-      "input": {
-        "query": "电投能源 002128 股价 2026年3月9日",
-        "max_results": 3
-      },
-      "result_length": 1373
-    },
-    {
-      "pass": "P2",
-      "round": 1,
-      "tool": "web_search",
-      "input": {
-        "query": "望变电气 603191 股价 2026年3月",
-        "max_results": 3
-      },
-      "result_length": 657
-    },
-    {
-      "pass": "P2",
-      "round": 1,
-      "tool": "web_search",
-      "input": {
-        "query": "A股 电网设备板块 2026年3月9日 涨幅",
-        "max_results": 5
-      },
-      "result_length": 3003
+      "result_length": 2538
     }
   ]
 }

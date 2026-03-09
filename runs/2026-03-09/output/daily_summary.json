@@ -5,17 +5,17 @@
       "code": "300684",
       "name": "中石科技",
       "action": "SELL",
-      "price": 51.7,
-      "pnl_pct": -6.66,
-      "note": "HARD STOP TRIGGERED. Entry ¥55.39, current ¥51.70, PnL = -6.66%. Breached -5% stop loss — automatic SELL per V2 Rule 5, no exceptions. Also 19 trading days held (V2 time stop = 10 days with <3% gain, massively exceeded). Sector (电子化学品) not in hot sectors; tech getting crushed today. Today -0.17% while market -0.54% but damage already done. Price is truth."
+      "price": 51.64,
+      "pnl_pct": -6.77,
+      "note": "MANDATORY SELL. PnL = -6.77%, breached V2 -5% hard stop. No exceptions. Also 19 trading days with negative return = time stop triggered (threshold 10 days, <3% gain). Sector (电子化学品) not in hot sectors today, tech broadly crushed. Price is truth — cut and move on."
     },
     {
       "code": "600096",
       "name": "云天化",
       "action": "HOLD",
-      "price": 42.12,
-      "pnl_pct": -4.38,
-      "note": "Entry ¥44.05, current ¥42.12, PnL = -4.38%. Stop ¥39.60 is 6.0% away. Day 8 of holding. Today -0.02% (flat) while market -0.54%, showing relative strength. Sector (农化制品/磷化工) not in today's top 5 but international phosphate >$700/ton at 3yr high. Oil price surge raises fertilizer production costs globally → supports phosphate prices. Thesis intact: ROE 25%, 合同负债21亿+36%. Tightening stop to ¥41.85 (-5% from entry) as hard floor. V2 time stop at day 10 = March 11 — if PnL still <+3% by then, SELL."
+      "price": 42.03,
+      "pnl_pct": -4.58,
+      "note": "PnL = -4.58%, above V2 -5% stop (41.85). Price 42.03 RECOVERED from last week's 40.70 low (+3.3%). Sector (农化制品/磷化工) in strong uptrend since Apr 2025, international phosphate price at 3-year high ($700/ton), US phosphorus export ban under Defense Production Act is structural tailwind. 8 trading days held — not yet at 10-day time stop. Thesis intact: ROE 25% industry leader, contract liabilities 21亿 (+36%). TIGHTEN STOP to V2 level 41.85. If breached = immediate sell."
     },
     {
       "code": "600499",
@@ -23,44 +23,21 @@
       "action": "HOLD",
       "price": 17.22,
       "pnl_pct": -1.49,
-      "note": "Entry ¥17.48, current ¥17.22, PnL = -1.49%. Today +0.06% outperforming market (-0.54%). Day 9 of holding. Stop ¥15.70 is 8.8% away. Sector (专用设备) trending up since Nov 2025. Restructuring catalyst (特福国际 acquisition) still active — event-driven. V2 time stop triggers at day 10 (tomorrow March 10). PnL at -1.49% is well below +3% threshold. However, restructuring is an active fresh catalyst. Per LEARNINGS #15/#18, event-driven catalysts deserve patience. Will evaluate tomorrow: if no improvement, prepare to exit."
-    },
-    {
-      "code": "603191",
-      "name": "望变电气",
-      "action": "OPEN",
-      "price": 26.6,
-      "note": "电网设备板块今日逆势涨停潮(国电南自/三变科技涨停创新高)。望变电气是国内唯一打通'取向硅钢→铁心→变压器'全产业链企业。美国750亿美元电网扩容项目获批，变压器交付周期延至120周+，2025年中国变压器出口90.36亿美元创历史新高(+34.8%)。公司已获欧洲KEMA认证，订单覆盖南美/美国/阿曼。"
-    },
-    {
-      "code": "002128",
-      "name": "电投能源",
-      "action": "OPEN",
-      "price": 33.3,
-      "note": "煤炭开采板块今日+3.10%领涨第二。中东战争→霍尔木兹海峡封锁→全球能源供应中断→煤炭作为替代能源直接受益。油价从$60→$111/桶(今日盘中)，高盛预测可能到$150。ROE 15%盈利能力强，产能扩张中(在建工程9.3%)。RPS120=91.16%在sweet spot。今日为股权登记日(每10股派3元)。"
+      "note": "PnL = -1.49%, 9 trading days. Tomorrow is day 10 — time stop triggers if PnL < 3%. Today price 17.22 flat (0% change), showing stabilization post 03-03 crash. Restructuring catalyst (acquiring 特福国际 remaining 51.55% equity, constitutes major asset restructuring) still pending — audit/evaluation in progress. Lithium carbonate price recovery also a secondary catalyst via 蓝科锂业 stake. V2 stop at 16.61. DECISION POINT TOMORROW: if price doesn't reach ~18.00 (+3% from entry), time stop forces exit."
     }
   ],
   "portfolioStats": {
-    "totalPositions": 4,
-    "totalEquity": 969937.0,
+    "totalPositions": 2,
+    "totalEquity": 969631.0,
     "dayPnl": 0.0,
     "dayReturnPct": 0.0,
-    "totalReturnPct": -3.01,
-    "unrealizedPnl": -5728.0,
-    "realizedPnl": -24335.0,
-    "cashPct": 68.05
+    "totalReturnPct": -3.04,
+    "unrealizedPnl": -5926.0,
+    "realizedPnl": -24443.0,
+    "cashPct": 80.34
   },
-  "newPositions": [
-    {
-      "code": "603191",
-      "name": "望变电气"
-    },
-    {
-      "code": "002128",
-      "name": "电投能源"
-    }
-  ],
+  "newPositions": [],
   "marketContext": {
-    "summary": "Breadth 0.37:1 极度偏空 (1442↑/3949↓/90平), 49涨停/8跌停, 超4500股下跌。市场被中东战争主导：美以对伊朗军事打击→霍尔木兹海峡封锁→油价盘中突破$111/桶(年初$60)。高盛预测可能到$150。油气/煤炭/电网设备逆势大涨，其余板块全线崩溃(创业板-2.42%，科创50-1.34%)。IV Rank 19.2%偏低，市场尚未充分定价地缘尾部风险，波动率扩张在即。当前策略：砍掉非能源持仓(中石科技触发-5%止损)，向能源/电网设备方向调仓。现金70%+提供充足防御空间。"
+    "summary": "Breadth 0.35:1 bearish (1399↑/3987↓), 50涨停/8跌停, distribution heavily negative-skewed (f2_4=1114 stocks down 2-4%, f0_2=2526 barely down). Middle East crisis (Israel+US strike Iran, Hormuz Strait closed) driving massive sector rotation: oil/gas/coal surging while tech/growth crushed. SH -0.68%, SZ -0.75%, ChiNext -0.67%, STAR50 -1.67%. IV Rank avg 19.2% (300ETF 13.4%, 500ETF 14.3%, 科创50 16.75% — all low, vol expansion imminent). ACTION: SELL 中石科技 (breached -5% stop), tighten 云天化 stop to 41.85, monitor 科达制造 for 10-day time stop tomorrow. NO new entries — breadth prohibits. Cash rises to ~76% after 中石科技 exit. Prepare shopping list: 电投能源 #1, 川恒股份 #2, 望变电气 #3 for when breadth recovers."
   }
 }

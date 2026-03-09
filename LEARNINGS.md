@@ -756,3 +756,11 @@
 - 电网设备 is a rare 'all-weather' sector — benefits from both peace (US grid expansion, AI data center demand) and war (energy infrastructure urgency). Today it went UP while 4500 stocks fell. This structural resilience makes it a higher-conviction play than pure oil/gas which may reverse when war ends.
 - IV Rank at 19.2% average with oil at $111/bbl and a literal war happening — the options market is severely underpricing tail risk. This is the exact setup where vol expansion is imminent. Per IV rules, should reduce new position sizing by 50% for non-energy plays. Energy plays get normal sizing as they benefit from vol expansion.
 - V2 Rule 5 time stop (10 days with <3% gain) would have forced 中石科技 exit at day 10 around Feb 24 — saving ~4% of additional losses vs the actual -6.66% exit today. The V1 time stop of 20 days was indeed too slow. V2's 10-day rule is validated.
+
+### 自动更新 (2026-03-09)
+
+- V2 -5% stop rule caught 中石科技 at -6.77%. Under V1's -10% stop, we'd still be holding and hoping. Faster cut saves ~3-5% of additional potential loss. This is V2 working as designed.
+- Middle East crisis (Israel+US strike Iran, Hormuz Strait closed) is THE dominant macro driver. Energy/resources = direct beneficiaries, tech/growth = victims. This geopolitical regime can persist for weeks — portfolio must rotate toward resource exposure.
+- Breadth 0.35:1 (1399 up vs 3987 down) is a STRONG no-entry signal. Even stocks in hot sectors can gap down if panic broadens. Cash preservation > opportunity cost on days like this.
+- IV Rank averaging 19.2% with 3/4 ETFs below 15% BEFORE today's geopolitical shock = market was complacent. Vol expansion now underway. Historical pattern: low IV + geopolitical shock = sharp drawdowns in extended positions. This validates the no-entry decision.
+- 电投能源 (002128) emerges as top candidate: coal sector hot (#2 today), RPS120=91.16% sweet spot, coal cycle upswing, restructuring catalyst. Ex-dividend 03-10 may create entry opportunity on pullback. Queue it as #1 priority when breadth recovers above 1:1.

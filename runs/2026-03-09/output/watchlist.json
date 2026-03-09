@@ -2,16 +2,16 @@
   "date": "2026-03-09",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4102.039,
-      "change_pct": -0.54
+      "value": 4096.017,
+      "change_pct": -0.68
     },
     "shenzhen_component": {
-      "value": 14092.46,
-      "change_pct": -0.57
+      "value": 14066.55,
+      "change_pct": -0.75
     },
     "chinext": {
-      "value": 3216.07,
-      "change_pct": -0.41
+      "value": 3207.73,
+      "change_pct": -0.67
     },
     "sentiment": "bearish",
     "hot_sectors": [
@@ -23,78 +23,42 @@
     ],
     "cold_sectors": [
       "航空机场",
-      "航运港口",
+      "林业Ⅱ",
       "航海装备Ⅱ",
-      "化学纤维",
-      "林业Ⅱ"
+      "航运港口",
+      "化学纤维"
     ],
-    "notes": "Breadth 0.37:1 极度偏空 (1442↑/3949↓/90平), 49涨停/8跌停, 超4500股下跌。市场被中东战争主导：美以对伊朗军事打击→霍尔木兹海峡封锁→油价盘中突破$111/桶(年初$60)。高盛预测可能到$150。油气/煤炭/电网设备逆势大涨，其余板块全线崩溃(创业板-2.42%，科创50-1.34%)。IV Rank 19.2%偏低，市场尚未充分定价地缘尾部风险，波动率扩张在即。当前策略：砍掉非能源持仓(中石科技触发-5%止损)，向能源/电网设备方向调仓。现金70%+提供充足防御空间。"
+    "notes": "Breadth 0.35:1 bearish (1399↑/3987↓), 50涨停/8跌停, distribution heavily negative-skewed (f2_4=1114 stocks down 2-4%, f0_2=2526 barely down). Middle East crisis (Israel+US strike Iran, Hormuz Strait closed) driving massive sector rotation: oil/gas/coal surging while tech/growth crushed. SH -0.68%, SZ -0.75%, ChiNext -0.67%, STAR50 -1.67%. IV Rank avg 19.2% (300ETF 13.4%, 500ETF 14.3%, 科创50 16.75% — all low, vol expansion imminent). ACTION: SELL 中石科技 (breached -5% stop), tighten 云天化 stop to 41.85, monitor 科达制造 for 10-day time stop tomorrow. NO new entries — breadth prohibits. Cash rises to ~76% after 中石科技 exit. Prepare shopping list: 电投能源 #1, 川恒股份 #2, 望变电气 #3 for when breadth recovers."
   },
   "strategy_scan": {
     "total_stocks_scanned": 76,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-03-09T14:46:02.645920+08:00"
+    "scan_time": "2026-03-09T15:04:34.476500+08:00"
   },
   "recommendations": [
     {
-      "code": "601233.SH",
-      "name": "桐昆股份",
+      "code": "002128.SZ",
+      "name": "电投能源",
       "price": null,
-      "rps120": 90.46,
+      "rps120": 91.16,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "300475.SZ",
-      "name": "香农芯创",
+      "code": "002895.SZ",
+      "name": "川恒股份",
       "price": null,
-      "rps120": 99.59,
+      "rps120": 90.87,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "688200.SH",
-      "name": "华峰测控",
+      "code": "603191.SH",
+      "name": "望变电气",
       "price": null,
-      "rps120": 85.4,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "000559.SZ",
-      "name": "万向钱潮",
-      "price": null,
-      "rps120": 97.9,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688717.SH",
-      "name": "艾罗能源",
-      "price": null,
-      "rps120": 93.6,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "601168.SH",
-      "name": "西部矿业",
-      "price": null,
-      "rps120": 92.47,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "600988.SH",
-      "name": "赤峰黄金",
-      "price": null,
-      "rps120": 86.22,
+      "rps120": 94.48,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -118,6 +82,33 @@
       "reasoning": ""
     },
     {
+      "code": "002155.SZ",
+      "name": "湖南黄金",
+      "price": null,
+      "rps120": 92.14,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "300018.SZ",
+      "name": "中元股份",
+      "price": null,
+      "rps120": 92.73,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688200.SH",
+      "name": "华峰测控",
+      "price": null,
+      "rps120": 85.4,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
       "code": "300666.SZ",
       "name": "江丰电子",
       "price": null,
@@ -127,46 +118,10 @@
       "reasoning": ""
     },
     {
-      "code": "688037.SH",
-      "name": "芯源微",
+      "code": "603619.SH",
+      "name": "中曼石油",
       "price": null,
-      "rps120": 88.47,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "601615.SH",
-      "name": "明阳智能",
-      "price": null,
-      "rps120": 93.5,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688388.SH",
-      "name": "嘉元科技",
-      "price": null,
-      "rps120": 92.49,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688147.SH",
-      "name": "微导纳米",
-      "price": null,
-      "rps120": 93.87,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "605167.SH",
-      "name": "利柏特",
-      "price": null,
-      "rps120": 93.21,
+      "rps120": 97.18,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -175,9 +130,9 @@
   "summary": {
     "total_scanned": 76,
     "buy_recommendations": 0,
-    "watch_recommendations": 15,
+    "watch_recommendations": 10,
     "avoid_recommendations": 0,
-    "market_call": "防御+能源配置",
-    "reasoning": "Breadth 0.37:1 极度偏空 (1442↑/3949↓/90平), 49涨停/8跌停, 超4500股下跌。市场被中东战争主导：美以对伊朗军事打击→霍尔木兹海峡封锁→油价盘中突破$111/桶(年初$60)。高盛预测可能到$150。油气/煤炭/电网设备逆势大涨，其余板块全线崩溃(创业板-2.42%，科创50-1.34%)。IV Rank 19.2%偏低，市场尚未充分定价地缘尾部风险，波动率扩张在即。当前策略：砍掉非能源持仓(中石科技触发-5%止损)，向能源/电网设备方向调仓。现金70%+提供充足防御空间。"
+    "market_call": "防守",
+    "reasoning": "Breadth 0.35:1 bearish (1399↑/3987↓), 50涨停/8跌停, distribution heavily negative-skewed (f2_4=1114 stocks down 2-4%, f0_2=2526 barely down). Middle East crisis (Israel+US strike Iran, Hormuz Strait closed) driving massive sector rotation: oil/gas/coal surging while tech/growth crushed. SH -0.68%, SZ -0.75%, ChiNext -0.67%, STAR50 -1.67%. IV Rank avg 19.2% (300ETF 13.4%, 500ETF 14.3%, 科创50 16.75% — all low, vol expansion imminent). ACTION: SELL 中石科技 (breached -5% stop), tighten 云天化 stop to 41.85, monitor 科达制造 for 10-day time stop tomorrow. NO new entries — breadth prohibits. Cash rises to ~76% after 中石科技 exit. Prepare shopping list: 电投能源 #1, 川恒股份 #2, 望变电气 #3 for when breadth recovers."
   }
 }

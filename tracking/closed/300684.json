@@ -139,19 +139,19 @@
     },
     {
       "date": "2026-03-09",
-      "price": 51.7,
-      "change_pct": -6.66,
+      "price": 51.64,
+      "change_pct": -6.77,
       "action": "SELL",
-      "note": "HARD STOP TRIGGERED. Entry ¥55.39, current ¥51.70, PnL = -6.66%. Breached -5% stop loss — automatic SELL per V2 Rule 5, no exceptions. Also 19 trading days held (V2 time stop = 10 days with <3% gain, massively exceeded). Sector (电子化学品) not in hot sectors; tech getting crushed today. Today -0.17% while market -0.54% but damage already done. Price is truth."
+      "note": "MANDATORY SELL. PnL = -6.77%, breached V2 -5% hard stop. No exceptions. Also 19 trading days with negative return = time stop triggered (threshold 10 days, <3% gain). Sector (电子化学品) not in hot sectors today, tech broadly crushed. Price is truth — cut and move on."
     }
   ],
   "exitDate": "2026-03-09",
-  "exitPrice": 51.7,
-  "exitReason": "HARD STOP TRIGGERED. Entry ¥55.39, current ¥51.70, PnL = -6.66%. Breached -5% stop loss — automatic SELL per V2 Rule 5, no exceptions. Also 19 trading days held (V2 time stop = 10 days with <3% gain, massively exceeded). Sector (电子化学品) not in hot sectors; tech getting crushed today. Today -0.17% while market -0.54% but damage already done. Price is truth.",
-  "returnPct": -6.66,
+  "exitPrice": 51.64,
+  "exitReason": "MANDATORY SELL. PnL = -6.77%, breached V2 -5% hard stop. No exceptions. Also 19 trading days with negative return = time stop triggered (threshold 10 days, <3% gain). Sector (电子化学品) not in hot sectors today, tech broadly crushed. Price is truth — cut and move on.",
+  "returnPct": -6.77,
   "holdingDays": 27,
   "lessonLearned": "",
   "createdAt": "2026-02-10T14:16:00+08:00",
-  "updatedAt": "2026-03-09T14:46:02.639311+08:00",
+  "updatedAt": "2026-03-09T15:04:34.468309+08:00",
   "trackerVersion": "2.0"
 }

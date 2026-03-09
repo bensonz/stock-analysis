@@ -1,94 +1,76 @@
-Now I have a clear picture. Let me analyze the situation:
+Now I have a comprehensive picture. Let me analyze the data and produce the output.
 
-**Key findings:**
-1. **Middle East war (US/Israel vs Iran)** - Hormuz Strait blocked, oil prices surging 30%+, driving oil/gas/coal sectors up massively
-2. **Market is broadly weak** - breadth 1442 up vs 3949 down (ratio 0.37:1), very bearish day with only oil/coal/grid sectors positive
-3. **中石科技** at ¥51.70, PnL = -6.66% from entry ¥55.39 → **BREACHED -5% STOP LOSS** → MUST SELL
-4. **云天化** at ¥42.12, PnL = -4.38% from entry ¥44.05 → recovering from -7.6%, still above stop ¥39.60
-5. **科达制造** at ¥17.22, PnL = -1.49% from entry ¥17.48 → recovering nicely
-6. **Hot sectors today**: Oil/gas, coal, grid equipment. Cold: aviation, shipping, chemicals
-7. **IV Rank avg 19.2%** - normal range, but 300ETF/500ETF/科创50 all low (<17%) suggesting complacency
+Key observations:
+1. **Market**: Down day (-0.68% to -1.67%), breadth terrible (1399 up vs 3987 down = 0.35:1 ratio), 8 跌停/50 涨停. This is NOT a day for aggressive new entries.
+2. **Hot sectors today**: Oil & gas (+5.39%), Coal (+3.0%), Agricultural products (+2.75%), IT services (+2.72%) - driven by Middle East geopolitical crisis
+3. **Cold sectors**: Aviation (-3.7%), Forestry (-3.62%), Marine equipment (-3.59%), Shipping (-3.57%), Chemical fiber (-3.43%)
+4. **IV**: Average IV Rank 19.2% - LOW. 300ETF IVRank 13.4%, 500ETF 14.3%, 科创50 16.75%. This means reduce new position sizing by 50% per rules (300ETF/500ETF/科创50 all <15%).
+5. **Positions**: 
+   - 300684 中石科技: Price 51.64, entry 55.39, PnL = -6.77% → **BELOW -5% STOP. MUST SELL.**
+   - 600096 云天化: Price 42.03, entry 44.05, PnL = -4.58% → Close to -5% stop (stop at 39.6, still above)
+   - 600499 科达制造: Price 17.22, entry 17.48, PnL = -1.49% → OK but 10 trading days approaching
 
-Let me verify the time decay and stop loss calculations:
+Let me verify the 中石科技 PnL calculation: (51.64 - 55.39) / 55.39 = -6.77%. This is below -5%. **AUTOMATIC SELL per Rule 5.**
 
-- **中石科技 (300684)**: Entry ¥55.39, current ¥51.70, PnL = (51.70-55.39)/55.39 = **-6.66%**. This is BELOW -5% stop. **MUST SELL immediately per Rule 5.** Also 19+ trading days held with negative PnL, time stop also triggered.
-- **云天化 (600096)**: Entry ¥44.05, current ¥42.12, PnL = (42.12-44.05)/44.05 = **-4.38%**. Stop at ¥39.60, still 6.0% away. Day 8 of holding. But note: today's sector (农化制品/磷化工) is NOT in today's top 5 sectors. Need to check if it's in bottom 30%.
-- **科达制造 (600499)**: Entry ¥17.48, current ¥17.22, PnL = **-1.49%**. Stop at ¥15.70, 8.8% away. Day 9 of holding.
+Also, 中石科技 has been held since 2026-02-10, that's about 19 trading days. Time stop would trigger at 10 days with <3% gain. It's at -6.77%. Both time stop AND price stop triggered.
 
-Now for new positions - the hot sectors are oil/gas, coal, and grid equipment. Let me look at candidates in those sectors:
+For 云天化: (42.03 - 44.05) / 44.05 = -4.58%. Not yet at -5% stop (stop is at 39.6 = -10.1% from entry, which is the OLD V1 stop). Under V2 rules, the stop should be entry × 0.95 = 41.85. Current price 42.03 is ABOVE 41.85, so technically still holding but very close.
 
-- **望变电气 (603191)**: 电网设备, RPS120=94.48% (extended zone), sector is hot today. Score_trend 9.9. US grid expansion catalyst is FRESH and ONGOING. 0 risk factors → extended zone ALLOWED per Rule 2.
-- **电投能源 (002128)**: 煤炭开采, RPS120=91.16%, sector is hot today (#2). Trend score 8.1.
-- **中曼石油 (603619)**: Oil services, RPS120=97.18% - above 95%, skip per Rule 2.
+Wait - the recorded stop for 云天化 is 39.6, which was set under V1 rules (-10%). Under V2, the stop should be 44.05 × 0.95 = 41.85. Current price 42.03 is above 41.85 but barely. Also, cloud天化 was entered on 02-26, so about 8 trading days. Not yet at 10-day time stop.
 
-Let me check which strategy pool stocks are in today's hot sectors:
+For 科达制造: (17.22 - 17.48) / 17.48 = -1.49%. Entry 02-25, about 9 trading days. Approaching 10-day time stop with <3% gain. Stop should be 17.48 × 0.95 = 16.61. Current price 17.22 is above that.
+
+Now for new positions - today's market is terrible (breadth 0.35:1), so I should be very cautious. The hot sectors are oil/gas and coal - let me look at candidates in those sectors.
+
+From the strategy pool in hot sectors:
+- **电投能源 002128** (煤炭开采): RPS120=91.16%, sector is TODAY's #2 (+3.0%). Coal sector trending up since Jan 2026. Tomorrow is ex-dividend date (10派3). 
+- **中曼石油 603619** (油气): RPS120=97.18% - above 95%, skip unless exceptions apply
+- **赤峰黄金 600988** (黄金): RPS120=86.22%, rps20 only 3.6% - very weak short-term
+
+Given the terrible breadth, I should NOT be opening aggressive new positions today. The IV is also low (<15% on 3 of 4 ETFs), which means reduce sizing by 50%.
+
+Let me finalize my analysis:
 
 ```json
 {
   "sector_analysis": {
     "hot_sectors": [
-      {"name": "油气开采Ⅱ", "5d_pct": 5.48, "trend": "accelerating - Middle East war catalyst"},
-      {"name": "煤炭开采", "5d_pct": 3.10, "trend": "accelerating - energy crisis spillover"},
-      {"name": "农产品加工", "5d_pct": 3.02, "trend": "steady"},
-      {"name": "IT服务Ⅱ", "5d_pct": 2.89, "trend": "steady"},
-      {"name": "综合Ⅱ", "5d_pct": 2.82, "trend": "steady"}
+      {"name": "油气开采Ⅱ", "5d_pct": 5.39, "trend": "accelerating - Middle East crisis driving oil prices"},
+      {"name": "煤炭开采", "5d_pct": 3.0, "trend": "accelerating - geopolitical energy security + coal cycle upswing"},
+      {"name": "农产品加工", "5d_pct": 2.75, "trend": "steady - food security concerns"},
+      {"name": "IT服务Ⅱ", "5d_pct": 2.72, "trend": "steady"},
+      {"name": "电网设备", "5d_pct": null, "trend": "strong multi-month trend, US $750B grid expansion catalyst, not in today's top5 but sector index up 80% in 8 months"}
     ],
     "cold_sectors": [
-      {"name": "航空机场", "5d_pct": -3.62, "trend": "deteriorating - oil price shock"},
-      {"name": "航运港口", "5d_pct": -3.39, "trend": "deteriorating"},
-      {"name": "航海装备Ⅱ", "5d_pct": -3.32, "trend": "deteriorating"},
-      {"name": "化学纤维", "5d_pct": -3.26, "trend": "deteriorating"},
-      {"name": "林业Ⅱ", "5d_pct": -3.20, "trend": "deteriorating"}
+      {"name": "航空机场", "5d_pct": -3.7, "trend": "deteriorating - oil price spike hurts airlines"},
+      {"name": "林业Ⅱ", "5d_pct": -3.62, "trend": "deteriorating"},
+      {"name": "航海装备Ⅱ", "5d_pct": -3.59, "trend": "deteriorating"},
+      {"name": "航运港口", "5d_pct": -3.57, "trend": "deteriorating - shipping disruption"},
+      {"name": "化学纤维", "5d_pct": -3.43, "trend": "deteriorating"}
     ],
-    "position_alignment": "0/3 positions in hot sectors",
-    "regime": "Energy/resources leadership driven by Middle East war. Tech/growth rotating out hard. Classic risk-off + commodity spike."
-  }
-}
-```
-
-This is critical: **0/3 positions are in hot sectors**. The market regime has shifted dramatically to energy/resources due to the Iran war.
-
-```json
-{
-  "date": "2026-03-09",
-  "sector_analysis": {
-    "hot_sectors": [
-      {"name": "油气开采Ⅱ", "5d_pct": 5.48, "trend": "accelerating"},
-      {"name": "煤炭开采", "5d_pct": 3.10, "trend": "accelerating"},
-      {"name": "农产品加工", "5d_pct": 3.02, "trend": "steady"},
-      {"name": "IT服务Ⅱ", "5d_pct": 2.89, "trend": "steady"},
-      {"name": "综合Ⅱ", "5d_pct": 2.82, "trend": "steady"}
-    ],
-    "cold_sectors": [
-      {"name": "航空机场", "5d_pct": -3.62, "trend": "deteriorating"},
-      {"name": "航运港口", "5d_pct": -3.39, "trend": "deteriorating"},
-      {"name": "航海装备Ⅱ", "5d_pct": -3.32, "trend": "deteriorating"},
-      {"name": "化学纤维", "5d_pct": -3.26, "trend": "deteriorating"},
-      {"name": "林业Ⅱ", "5d_pct": -3.20, "trend": "deteriorating"}
-    ],
-    "position_alignment": "0/3 positions in today's hot sectors",
-    "regime": "Energy/resources leadership driven by US-Iran war and Hormuz Strait closure. Oil +30% in a week. Tech/growth rotating out hard (创业板指 -0.41%, 科创50 -1.34%). Classic geopolitical risk-off + commodity spike. Grid equipment also strong on US export demand."
+    "position_alignment": "1/3 positions in hot sectors (云天化 in 农化制品/磷化工 adjacent to hot; 中石科技 in 电子化学品 neutral; 科达制造 in 专用设备 neutral)",
+    "regime": "Geopolitical crisis regime: Energy/resources surging, tech/growth crushed. Oil+coal+gold leading, CPO/PCB/semiconductor hammered. Classic risk-off rotation."
   },
   "position_decisions": [
     {
       "code": "300684",
       "name": "中石科技",
       "action": "SELL",
-      "reason": "HARD STOP TRIGGERED: PnL = -6.66% (entry ¥55.39, current ¥51.70), breached -5% stop loss. Also 19+ trading days with negative PnL triggers time stop. V2 Rule 5: -5% = automatic SELL, no exceptions. Sector (电子化学品) not in hot sectors. Price is truth.",
-      "sector_rank": "not in top 30% today",
+      "reason": "PnL = -6.77% BELOW -5% hard stop. V2 Rule 5: automatic sell, no exceptions. Also 19 trading days held with negative return = time stop triggered. Price truth: stock is going down, thesis failed in timing.",
+      "sector_rank": "middle - 电子化学品 not in today's hot sectors, tech broadly crushed today",
       "new_stop": null,
-      "pnl_pct": -6.66,
+      "pnl_pct": -6.77,
       "days_held": 19,
-      "exit_price": 51.70
+      "exit_price": 51.64
     },
     {
       "code": "600096",
       "name": "云天化",
       "action": "HOLD",
-      "reason": "PnL = -4.38% (entry ¥44.05, current ¥42.12), recovering from -7.6% low. Stop ¥39.60 still 6.0% away. Day 8 of holding. Sector (农化制品/磷化工) not in today's top 5 but phosphate fundamentals remain strong (international phosphate >$700/ton, 3yr high). Oil price surge may push fertilizer costs up but also raises food security concerns → positive for phosphate demand. Today flat (-0.02%) while market down -0.54%, showing relative strength. Give 2 more days to see if sector re-accelerates. If PnL hits -5% (¥41.85), SELL immediately.",
-      "sector_rank": "middle 30-50% (not hot, not cold)",
+      "reason": "PnL = -4.58%, above V2 -5% stop (41.85). Sector 农化制品/磷化工 still in uptrend since Apr 2025, international phosphate prices at 3-year high ($700/ton). Today's price 42.03 recovered from 40.70 low last week. 8 trading days held. Thesis intact: ROE 25%, phosphate price catalyst ongoing. TIGHT LEASH: V2 stop at 41.85, if breached tomorrow = immediate sell.",
+      "sector_rank": "top 20% - 农化制品 in strong uptrend, chemical fertilizer sector among today's gainers",
       "new_stop": 41.85,
-      "pnl_pct": -4.38,
+      "pnl_pct": -4.58,
       "days_held": 8,
       "exit_price": null
     },
@@ -96,146 +78,86 @@ This is critical: **0/3 positions are in hot sectors**. The market regime has sh
       "code": "600499",
       "name": "科达制造",
       "action": "HOLD",
-      "reason": "PnL = -1.49% (entry ¥17.48, current ¥17.22), today +0.06% outperforming market (-0.54%). Day 9 of holding. Stop ¥15.70 is 8.8% away. Sector (专用设备) trending up since Nov 2025. Major asset restructuring (特福国际 acquisition) still in progress — event-driven catalyst ongoing. Time stop at day 10 tomorrow — but per V2 Rule 5, need +3% gain by then. Currently -1.49%, unlikely to reach +3% by tomorrow. However, restructuring is an active catalyst. Will evaluate tomorrow: if still <+3% at day 10, SELL per rule.",
-      "sector_rank": "top 30% (专用设备 trending up)",
-      "new_stop": null,
+      "reason": "PnL = -1.49%, 9 trading days. V2 10-day time stop triggers tomorrow if PnL < 3%. Current trajectory suggests time stop will trigger. However, today price 17.22 is flat (0% change), showing stabilization after 03-03 crash. Restructuring catalyst (特福国际 acquisition) still pending. One more day to prove itself. V2 stop at 16.61.",
+      "sector_rank": "middle - 专用设备 sector trending up since Nov 2025 but not in today's hot list",
+      "new_stop": 16.61,
       "pnl_pct": -1.49,
       "days_held": 9,
       "exit_price": null
     }
   ],
-  "new_positions": [
-    {
-      "code": "603191",
-      "name": "望变电气",
-      "entry_price": 16.40,
-      "allocation_pct": 7,
-      "stop": 15.58,
-      "target": 21.0,
-      "thesis": "电网设备龙头，国内唯一打通'取向硅钢-铁心-变压器'全链条企业。美国750亿美元电网扩容+变压器出口创历史新高(2025年出口90.36亿美元+34.8%)。已获KEMA欧洲认证，订单覆盖南美/美国/阿曼。RPS120=94.48%在extended zone但0风险因子允许。",
-      "sector": "电网设备",
-      "sector_rank": "top 10% (电网设备今日涨幅居前)",
-      "catalyst": "美国史诗级电网扩建750亿美元+变压器交付周期延至120周+中国出口受益。公司回购5030万元已完成。",
-      "catalyst_freshness": "ongoing",
-      "rps120": 94.48,
-      "conviction": "strong"
-    },
+  "new_positions": [],
+  "skip_list": [
     {
       "code": "002128",
       "name": "电投能源",
-      "entry_price": 33.30,
-      "allocation_pct": 5,
-      "stop": 31.64,
-      "target": 40.0,
-      "thesis": "煤炭开采龙头，ROE 15%，中东战争推高全球能源价格，煤炭作为替代能源直接受益。煤炭开采板块今日+3.10%领涨。RPS120=91.16%在sweet spot。明日除权(每10股派3元)。",
-      "sector": "煤炭开采",
-      "sector_rank": "top 5% (#2 sector today)",
-      "catalyst": "中东战争→霍尔木兹海峡封锁→全球能源供应中断→煤炭替代需求激增。油价从60→90美元/桶，高盛预测可能到150美元。",
-      "catalyst_freshness": "ongoing",
-      "rps120": 91.16,
-      "conviction": "moderate"
-    }
-  ],
-  "skip_list": [
-    {
-      "code": "601233",
-      "name": "桐昆股份",
-      "reason": "Sector (化学纤维) is in bottom 5 today at -3.26%. No entry regardless of stock quality. RPS120=90.46% is in sweet spot but sector gravity kills it.",
-      "rps120": 90.46
+      "reason": "Sector (煤炭开采) is TODAY's #2 hot sector (+3.0%), RPS120=91.16% in sweet spot, coal cycle upswing catalyst. HOWEVER: (1) Breadth 0.35:1 = panic selling environment, Rule says do NOT open new positions when up/down <1:1 and f10>30 equivalent; (2) IV Rank avg 19.2% with 3/4 ETFs <15% = reduce sizing 50%; (3) Tomorrow 03-10 is ex-dividend date which may cause gap down. WAIT for breadth improvement before entry. Top candidate for next session if market stabilizes.",
+      "rps120": 91.16
     },
     {
-      "code": "300475",
-      "name": "香农芯创",
-      "reason": "RPS120=99.59% far above 95% ceiling. RPS20=18.06% showing severe short-term weakness. 5 risk factors. Skip.",
-      "rps120": 99.59
-    },
-    {
-      "code": "688200",
-      "name": "华峰测控",
-      "reason": "Sector (半导体设备) getting crushed today (科创50 -1.34%). RPS20=51.90% showing momentum loss. Despite 0 risk factors and strong fundamentals, sector is cold in current energy-driven regime. Wait for tech rotation back.",
-      "rps120": 85.40
-    },
-    {
-      "code": "000559",
-      "name": "万向钱潮",
-      "reason": "RPS120=97.90% above 95% ceiling. Sector (汽车零部件) not in hot sectors today.",
-      "rps120": 97.90
-    },
-    {
-      "code": "688717",
-      "name": "艾罗能源",
-      "reason": "Valuation at 99th percentile historically. RPS120=93.60% in extended zone but 2 risk factors (heavy selling on 03-05, extreme valuation). Net profit YoY -6.3% — no growth to justify PE 178. Red flag per Rule 3 sanity check.",
-      "rps120": 93.60
-    },
-    {
-      "code": "601168",
-      "name": "西部矿业",
-      "reason": "RPS20=1.94% — extreme short-term weakness despite RPS120=92.47%. Recent 跌停 on 01-30. Wait for short-term momentum to recover before entry.",
-      "rps120": 92.47
-    },
-    {
-      "code": "600988",
-      "name": "赤峰黄金",
-      "reason": "RPS20=3.60% extreme short-term weakness. Despite gold price surge from Middle East conflict, stock has been weak recently. RPS120=86.22% at lower end. Recent 跌停 on 01-30. Would need to see RPS20 recover above 50% before re-entry.",
-      "rps120": 86.22
+      "code": "603191",
+      "name": "望变电气",
+      "reason": "Sector (电网设备) is strong multi-month trend with US $750B grid expansion catalyst. RPS120=94.48% in extended zone, sector is top 10% so exception applies. BUT: (1) Today's breadth 0.35:1 prohibits new entries; (2) Valuation at 79th percentile with PE 96x and only 12.5% gross margin; (3) rps20=96.8% suggests already extended short-term. Wait for pullback.",
+      "rps120": 94.48
     },
     {
       "code": "002448",
       "name": "中原内配",
-      "reason": "Sector (汽车零部件) not in top 30% today. Strong RPS and momentum but wrong sector in current energy-driven regime. Per Rule 1: sector first.",
+      "reason": "Sector (汽车零部件) trending up since Dec 2025 but NOT in today's top sectors. RPS120=92.82% in extended zone. Strong catalyst (net profit +348%, AIDC beneficiary). Weekly overbought signal. Today's breadth prohibits new entries. Revisit when market improves.",
       "rps120": 92.82
     },
     {
       "code": "002595",
       "name": "豪迈科技",
-      "reason": "Valuation at 99th percentile historically. RPS120=92.77% in sweet spot and 0 risk factors — excellent stock. But sector (专用设备) is mixed today and valuation extreme. Would be a BUY on a pullback day.",
+      "reason": "Sector (专用设备) trending up. RPS120=92.77% extended zone but 0 risk factors = exception allowed. Score_company 9.3 highest in pool. BUT: Valuation at 99th percentile (PE 31.6x at all-time high), today's breadth prohibits entries. Best-in-class company but wrong day to buy.",
       "rps120": 92.77
     },
     {
-      "code": "688037",
-      "name": "芯源微",
-      "reason": "Net profit negative (-26M), PE 511x. Sector (半导体设备) cold today. RPS20=13.55% severe short-term weakness. Skip.",
-      "rps120": 88.47
+      "code": "002155",
+      "name": "湖南黄金",
+      "reason": "Sector (贵金属/黄金) should benefit from Middle East crisis but gold actually pulled back today (现货黄金向下逼近5000美元). RPS120=92.14% extended zone, rps20=84.5% decent. High volatility (12% daily turnover). Gold price whipsawing makes timing treacherous. Skip today.",
+      "rps120": 92.14
     },
     {
       "code": "300666",
       "name": "江丰电子",
-      "reason": "Sector (半导体材料) getting hit in tech selloff today. Despite strong fundamentals (revenue +25%, profit +63%), market regime is energy/resources, not tech. Wait for rotation.",
+      "reason": "Sector (半导体材料) crushed today as tech broadly sold off. RPS120=94.98% above 95% threshold. Despite strong fundamentals (revenue +25%, profit +63%), semiconductor sector is in today's cold zone. Sector gravity rule = no entry.",
       "rps120": 94.98
     },
     {
-      "code": "002683",
-      "name": "广东宏大",
-      "reason": "RPS20=48.87% — short-term momentum weak. Recent heavy selling on 01-26 (-8.37%). Sector (化学制品) not in top sectors today. Wait for RPS20 recovery.",
-      "rps120": 86.88
+      "code": "603619",
+      "name": "中曼石油",
+      "reason": "Sector (油气) is #1 hot sector today (+5.39%). RPS120=97.18% ABOVE 95% = skip per Rule 2 (chasing). Wait for pullback to 90% zone.",
+      "rps120": 97.18
     },
     {
-      "code": "603588",
-      "name": "高能环境",
-      "reason": "RPS120=96.44% above 95% ceiling. Would need sector exception but 环保 not in top 10% today.",
-      "rps120": 96.44
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "Sector (半导体设备) hammered today in tech selloff. RPS120=85.40% in range but rps20=51.9% shows weak short-term momentum. 0 risk factors is excellent. Recent 10-day price weak (only 6.8th percentile). Wait for sector to recover.",
+      "rps120": 85.40
     },
     {
-      "code": "688147",
-      "name": "微导纳米",
-      "reason": "Sector (光伏设备) getting crushed in today's selloff. 2025 revenue -2.52%, profit -6.12% per业绩快报. 3 risk factors. Skip.",
-      "rps120": 93.87
+      "code": "002895",
+      "name": "川恒股份",
+      "reason": "Sector (磷化工) strong uptrend. RPS120=90.87% in sweet spot, 0 risk factors, strong growth (revenue +46%, profit +52%). Good candidate but today's breadth 0.35:1 prohibits new entries. Top candidate alongside 电投能源 for next session.",
+      "rps120": 90.87
     },
     {
-      "code": "601615",
-      "name": "明阳智能",
-      "reason": "RPS20=5.19% extreme short-term weakness. Recent 跌停 on 03-03. Gross margin only 6.4%. 4 risk factors. Skip.",
-      "rps120": 93.50
+      "code": "300018",
+      "name": "中元股份",
+      "reason": "Sector (电网设备) strong trend. RPS120=92.73% extended zone but sector is top 10% = exception applies. Small cap (69亿), no institutional coverage. Today's breadth prohibits entries.",
+      "rps120": 92.73
     }
   ],
   "new_learnings": [
-    "Middle East war (US/Israel vs Iran, Hormuz Strait closure) is the dominant market driver. Oil +30% in one week creates a binary regime: energy/resources UP, everything else DOWN. In such regimes, sector alignment is more important than ever — 0/3 positions were in hot sectors today.",
-    "中石科技 held 19 days, breached -5% stop at -6.66%. V1 would have held with 'thesis still valid' cope. V2 cuts immediately. The -5% stop is non-negotiable — it saved us from potentially worse losses as tech continues to sell off.",
-    "Breadth 0.37:1 (1442 up vs 3949 down) with only 49 涨停 vs 8 跌停 — this is a weak market. But the 49 涨停 are concentrated in oil/gas/coal, showing extreme sector divergence. In such environments, being in the RIGHT sector is everything.",
-    "Grid equipment (电网设备) is a structural winner regardless of geopolitical regime — US $750B grid expansion + transformer export boom is a multi-year catalyst. 望变电气 as the only vertically integrated player (silicon steel → transformer) is a high-conviction play.",
-    "IV Rank averaging 19.2% with 300ETF at 13.4% — market is complacent about downside despite a literal war. Per IV rules, reduce new position sizing by 50% for 300ETF-correlated plays. But energy plays may have their own vol dynamics."
+    "Middle East crisis (Israel+US strike on Iran, Hormuz Strait closure) is THE dominant macro driver. Oil+coal+gold = direct beneficiaries. Tech/growth = victims of risk-off rotation. This regime can persist for weeks - position accordingly.",
+    "Breadth 0.35:1 with 3987 stocks down is a STRONG no-entry signal. Even hot sector stocks may gap down tomorrow if panic continues. Cash is a position.",
+    "V2 -5% stop rule caught 中石科技 at -6.77% today. Under V1's -10% stop, we'd still be holding and hoping. The faster cut saves capital for better opportunities. This is V2 working as designed.",
+    "IV Rank averaging 19.2% across all ETFs confirms market complacency BEFORE today's geopolitical shock. Vol expansion is now happening. New entries in this environment carry outsized risk of immediate drawdown.",
+    "电投能源 (002128) is the top candidate for next session: coal sector hot, RPS120=91.16% sweet spot, ex-dividend tomorrow (10派3), restructuring catalyst (白音华煤电 acquisition). But discipline says wait for breadth >1:1 before entering."
   ],
-  "market_summary": "Breadth 0.37:1 bearish (1442↑/3949↓), 49涨停/8跌停, heavily skewed to downside with 3949 stocks falling. Market dominated by US-Iran war: oil prices surged 30%+ as Hormuz Strait blocked, driving oil/gas/coal sectors to massive gains while tech/growth sold off hard (科创50 -1.34%). Shanghai Composite -0.54%, but this masks extreme sector divergence — energy stocks limit-up while 4500+ stocks fell. IV Rank 19.2% (low-normal) suggests market hasn't fully priced in geopolitical tail risk. Grid equipment also strong on US export catalyst. This is a sector-rotation regime, not a broad market play. Cash is king for non-energy positions.",
+  "market_summary": "Breadth 0.35:1 bearish (1399 up / 3987 down), 50涨停/8跌停, distribution heavily skewed negative (f2_4=1114, f0_2=2526). Middle East crisis (Israel+US strike Iran, Hormuz Strait effectively closed) driving massive sector rotation: oil/gas/coal surging while tech/growth crushed. Shanghai -0.68%, Shenzhen -0.75%, ChiNext -0.67%, STAR50 -1.67%. IV Rank avg 19.2% (3/4 ETFs below 15%) = market was complacent, vol expansion now underway. This is a DEFENSIVE day: cut losers, hold cash, prepare shopping list for when panic subsides. 中石科技 breached -5% stop = mandatory sell. 云天化 and 科达制造 on tight leash.",
   "market_sentiment": "bearish",
-  "market_call": "防御+能源配置"
+  "market_call": "防守"
 }
+```
