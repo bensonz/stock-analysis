@@ -1,0 +1,39 @@
+{
+  "date": "2026-03-09",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1773029454.666892,
+      "errors": [],
+      "end": 1773029488.964233,
+      "duration_sec": 34.3
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 7876,
+      "response_file": "/tmp/stock-llm-response.json",
+      "tokens": {
+        "input_tokens": 37000,
+        "output_tokens": 2000
+      }
+    },
+    {
+      "phase": "apply",
+      "start": 1773029612.482046,
+      "actions": [
+        "SELL 300684",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Updated LEARNINGS.md"
+      ],
+      "end": 1773029612.577555,
+      "duration_sec": 0.1
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 34.4
+  }
+}

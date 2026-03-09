@@ -727,3 +727,9 @@
 - [W10] 染料行业涨价潮是典型的供给侧催化——龙头协同提价(龙盛+闰土)带动行业整体调价，机构预计持续1-3个月。这类供给侧集中度高(CR3=59%)的行业，龙头提价能力强，涨价逻辑持续性优于需求侧催化。浙江龙盛(600352)RPS120=91.2%在理想区间但短期过热(RPS20=95.4%)，应等回调入场
 - [W10] 世界杯申办概念属于远期催化——广州推动粤港澳申办尚在规划阶段(未向FIFA正式申报)，A股已开始炒作。对于这类'画饼'型催化，应区分概念阶段(不追)和实质落地阶段(可参与)。共创草坪基本面好(ROE20%+0风险)但当前催化不实
 - [W10] 3只持仓均处于浮亏但thesis均有效——中石科技(-2.6%/AI散热批量供货确认)、云天化(-7.6%/磷化工基本面未变但入场追高)、科达制造(-3.38%/重组进行中)。组合PnL=-4.46%体现了LEARNINGS#13的教训(入场时价格偏高)。当前IV情绪偏乐观(均IVRank19.2%)支持持有不恐慌
+
+### 自动更新 (2026-03-09)
+
+- Middle East conflict oil spike creates extreme sector rotation — oil/gas/coal/gold rally while EVERYTHING else (especially tech/growth) gets dumped. Breadth 870:4556 with only resource stocks up. This type of event should trigger a 'resource-only' regime flag that prevents ALL non-resource new entries.
+- Today confirmed V2's sector-first approach is correct. Having 0/3 positions in hot sectors during a resource spike means portfolio suffers (-6216 day PnL). Future portfolio construction should maintain at least 1 position in resource/commodity sector as a hedge against geopolitical events.
+- 中石科技 held 19 days ending at -8.83% is a V2 violation — should have been cut at -5% per Rule 5 hard stop. The V1 habits of 'thesis still valid, hold losers' directly caused this loss to widen from -5% to -8.83%. V2's -5% stop is right. Execute it.
