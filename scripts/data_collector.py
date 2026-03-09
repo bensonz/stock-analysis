@@ -231,6 +231,81 @@ def batch_enrich(stocks: list[dict], max_workers: int = 8) -> list[dict]:
         return [{"code": c, "error": str(e)} for c in codes]
 
 
+def fetch_ma_data(stocks: list[dict]) -> dict:
+    """Fetch MA5/MA10/MA20 data for stocks via Eastmoney kline API.
+
+    Bypasses proxy (Eastmoney push2 gets DNS-hijacked by Surge/Clash).
+
+    Args:
+        stocks: List of stock dicts with "code" or "code_full" keys.
+
+    Returns:
+        Dict of {code: {price, ma5, ma10, ma20, dist_ma5_pct, dist_ma10_pct, dist_ma20_pct}}
+    """
+    import requests as _req
+    from concurrent.futures import ThreadPoolExecutor
+
+    results = {}
+
+    def _fetch_one(stock):
+        code = str(stock.get("code", "")).split(".")[0]
+        code_full = stock.get("code_full", "")
+        if not code:
+            return None
+
+        # Determine secid (1=SH, 0=SZ)
+        if code_full.endswith(".SH") or code.startswith("6"):
+            secid = f"1.{code}"
+        else:
+            secid = f"0.{code}"
+
+        try:
+            url = "https://push2his.eastmoney.com/api/qt/stock/kline/get"
+            params = {
+                "fields1": "f1,f2,f3,f4,f5,f6",
+                "fields2": "f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61",
+                "ut": "7eea3edcaed734bea9cbfc24409ed989",
+                "klt": "101", "fqt": "0",
+                "secid": secid, "beg": "20260101", "end": "20261231",
+            }
+            r = _req.get(url, params=params, timeout=10, proxies={"http": None, "https": None})
+            klines = r.json().get("data", {}).get("klines", [])
+            closes = [float(k.split(",")[2]) for k in klines]
+
+            if len(closes) < 5:
+                return None
+
+            latest = closes[-1]
+            ma5 = sum(closes[-5:]) / 5
+            ma10 = sum(closes[-10:]) / 10 if len(closes) >= 10 else None
+            ma20 = sum(closes[-20:]) / 20 if len(closes) >= 20 else None
+
+            return {
+                "code": code,
+                "price": latest,
+                "ma5": round(ma5, 2),
+                "ma10": round(ma10, 2) if ma10 else None,
+                "ma20": round(ma20, 2) if ma20 else None,
+                "dist_ma5_pct": round((latest - ma5) / ma5 * 100, 1),
+                "dist_ma10_pct": round((latest - ma10) / ma10 * 100, 1) if ma10 else None,
+                "dist_ma20_pct": round((latest - ma20) / ma20 * 100, 1) if ma20 else None,
+            }
+        except Exception:
+            return None
+
+    try:
+        with ThreadPoolExecutor(max_workers=10) as executor:
+            fetched = list(executor.map(_fetch_one, stocks))
+
+        for item in fetched:
+            if item:
+                results[item["code"]] = item
+    except Exception as e:
+        print(f"  MA data fetch error: {e}", file=sys.stderr)
+
+    return results
+
+
 def _fetch_indices_sina() -> dict:
     """Fetch real-time index data from Sina Finance API.
 

@@ -35,6 +35,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from data_collector import (
     fetch_strategy_pool,
     batch_enrich,
+    fetch_ma_data,
     fetch_market_overview,
     fetch_position_prices,
     fetch_missed_opportunity_prices,
@@ -389,13 +390,20 @@ def phase1_collect(date: str) -> dict:
         print(f"    → {sig} (avg IV rank {rank*100:.1f}%)", file=sys.stderr)
         return "iv_sentiment", result
 
-    with ThreadPoolExecutor(max_workers=5) as executor:
+    def _ma_data():
+        print("  [7/7] Fetching MA data...", file=sys.stderr)
+        result = fetch_ma_data(candidates)
+        print(f"    → {len(result)} stocks with MA data", file=sys.stderr)
+        return "ma_data", result
+
+    with ThreadPoolExecutor(max_workers=6) as executor:
         futures = {
             executor.submit(_enrich): "enrich",
             executor.submit(_market): "market",
             executor.submit(_prices): "position_prices",
             executor.submit(_missed): "watchlists",
             executor.submit(_iv_sentiment): "iv_sentiment",
+            executor.submit(_ma_data): "ma_data",
         }
         for future in as_completed(futures):
             task_name = futures[future]
@@ -416,6 +424,23 @@ def phase1_collect(date: str) -> dict:
                     data["missed_opportunity_prices"] = []
                 elif task_name == "iv_sentiment":
                     data["iv_sentiment"] = {"error": str(e)}
+                elif task_name == "ma_data":
+                    data["ma_data"] = {}
+
+    # Merge MA data into enrichment results
+    ma_data = data.get("ma_data", {})
+    if ma_data and data.get("enriched"):
+        for stock in data["enriched"]:
+            code = str(stock.get("code", "")).split(".")[0]
+            if code in ma_data:
+                ma = ma_data[code]
+                stock["current_price"] = ma.get("price")
+                stock["ma5"] = ma.get("ma5")
+                stock["ma10"] = ma.get("ma10")
+                stock["ma20"] = ma.get("ma20")
+                stock["dist_ma5_pct"] = ma.get("dist_ma5_pct")
+                stock["dist_ma10_pct"] = ma.get("dist_ma10_pct")
+                stock["dist_ma20_pct"] = ma.get("dist_ma20_pct")
 
     # Save IV sentiment to input dir
     if data.get("iv_sentiment") and "error" not in data["iv_sentiment"]:
