@@ -26,12 +26,12 @@ Use the sector data provided to rank sectors. If a stock's sector isn't in the t
 
 ### Rule 2b: No Chasing — MA Distance Check
 Before opening ANY new position, check the MA data in `enriched_candidates`:
-- **dist_ma5_pct > 8%** → SKIP. Stock is overextended short-term.
-- **dist_ma10_pct > 10%** → SKIP. Too far from support.
-- **dist_ma20_pct > 15%** → SKIP. Extreme extension, high reversion risk.
+- **dist_ma5_pct > 6%** → SKIP. Stock is overextended short-term.
+- **dist_ma10_pct > 8%** → SKIP. Too far from support.
+- **dist_ma20_pct > 12%** → SKIP. Extreme extension, high mean-reversion risk.
 - If MA data is missing for a candidate, note it as a risk factor.
 
-This rule is NON-NEGOTIABLE. Even if the sector is #1 and the catalyst is perfect, buying a stock that just spiked 10% above its moving average is chasing. Wait for a pullback to MA5/MA10 support.
+This rule is NON-NEGOTIABLE. Even if the sector is #1 and the catalyst is perfect, buying a stock that just spiked far above its moving averages is chasing. Wait for a pullback to MA5/MA10 support.
 
 ### Rule 3: Catalysts Over Valuation
 **DO NOT use valuation as a filter for momentum plays.** A stock at PE 80 with 100% earnings growth is cheaper than PE 15 with -20% earnings decline.
