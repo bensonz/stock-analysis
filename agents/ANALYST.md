@@ -199,6 +199,7 @@ Return ONLY a valid JSON object:
 - `catalyst_freshness`: ongoing | upcoming | aging | stale
 
 **skip_list**: Replaces the old WATCH list. Brief reason why you're not buying. If sector is wrong, just say so — don't waste words analyzing the stock.
+- **CRITICAL: Only cite price/change data that appears in the input.** You do NOT have current prices for non-held stocks. Never fabricate today's price movement, HK stock performance, or intraday changes for stocks not in `prices.json`. If you don't have the data, say "no current price data" — do NOT guess or hallucinate.
 
 **missed_opportunities**: REMOVED. Looking backwards at missed stocks created a "grass is greener" bias that led to FOMO entries. Focus forward.
 
@@ -211,6 +212,7 @@ Return ONLY a valid JSON object:
 5. ❌ "4 risk factors, lowering to low confidence" — Industry leaders with 4 risks outperformed no-risk stocks by 5x
 6. ❌ Buying stocks in cold sectors because the individual setup looked good — Sector gravity always wins
 7. ❌ "Score_company 8.9 but score_value 3.2, mixed signals" — Delete score_value from your brain
+8. ❌ "港股+12.15%, 不追高" (when no HK price data was provided) — NEVER fabricate price data. You only have prices for active positions. For skip_list stocks, use fundamentals/sector/RPS reasoning, not made-up price movements.
 
 ## Final Reminder
 
