@@ -4,47 +4,72 @@
 
 | 指数 | 收盘 | 涨跌幅 |
 |------|------|--------|
-| 上证指数 | 4099.62 | -0.60% |
-| 深证成指 | 14081.51 | -0.64% |
-| 创业板指 | 3212.48 | -0.52% |
-| 科创50 | 1392.84 | -1.52% |
+| 上证指数 | 4102.04 | -0.54% |
+| 深证成指 | 14092.46 | -0.57% |
+| 创业板指 | 3216.07 | -0.41% |
+| 科创50 | 1395.43 | -1.34% |
 
-涨跌比: 1412涨 / 3968跌 / 5481总
+涨跌比: 1442涨 / 3949跌 / 5481总
 
-**热门板块**: 油气开采Ⅱ(+6.06%), 综合Ⅱ(+3.21%), 煤炭开采(+3.04%), 农产品加工(+2.91%), IT服务Ⅱ(+2.91%)
+**热门板块**: 油气开采Ⅱ(+5.48%), 煤炭开采(+3.10%), 农产品加工(+3.02%), IT服务Ⅱ(+2.89%), 综合Ⅱ(+2.82%)
 
-**冷门板块**: 航空机场(-3.86%), 航海装备Ⅱ(-3.41%), 通信设备(-3.36%), 化学纤维(-3.34%), 航运港口(-3.24%)
+**冷门板块**: 航空机场(-3.62%), 航运港口(-3.39%), 航海装备Ⅱ(-3.32%), 化学纤维(-3.26%), 林业Ⅱ(-3.20%)
 
-Breadth 0.36:1 bearish (1412 up / 3968 down), 49涨停/8跌停. Distribution heavily skewed negative: 2551 stocks in f0_2 (slightly red), 1095 in f2_4. Only 461 stocks up >2%. Middle East crisis driving oil >$110 → oil/gas/coal/gold only green pockets. Global risk-off: Korea circuit breaker, global stocks/bonds selling. Shanghai -0.6%, Shenzhen -0.64%, ChiNext -0.52%, STAR50 -1.52%. IV context: avg IVRank 19.2%, 300ETF IVRank 13.4% (dangerously low pre-shock). Vol expansion now underway. Action: SELL 中石科技 (stop breached), tighten all stops to V2 -5% levels, ZERO new entries until breadth recovers above 1:1.
+Breadth 0.37:1 极度偏空 (1442↑/3949↓/90平), 49涨停/8跌停, 超4500股下跌。市场被中东战争主导：美以对伊朗军事打击→霍尔木兹海峡封锁→油价盘中突破$111/桶(年初$60)。高盛预测可能到$150。油气/煤炭/电网设备逆势大涨，其余板块全线崩溃(创业板-2.42%，科创50-1.34%)。IV Rank 19.2%偏低，市场尚未充分定价地缘尾部风险，波动率扩张在即。当前策略：砍掉非能源持仓(中石科技触发-5%止损)，向能源/电网设备方向调仓。现金70%+提供充足防御空间。
 
 ## 策略池扫描
 
 扫描 **76** 只策略池股票
 (来源: api)
 
+## 今日开仓
+
+### 1. 望变电气 (603191) — BUY/strong
+
+- **入场价**: ¥26.6
+- **止损**: ¥25.27
+- **目标**: ¥34.0
+- **RPS120**: 94.48%
+- **板块**: 电网设备 (top 5% — 电网设备今日逆势走强，涨停股频出)
+
+电网设备板块今日逆势涨停潮(国电南自/三变科技涨停创新高)。望变电气是国内唯一打通'取向硅钢→铁心→变压器'全产业链企业。美国750亿美元电网扩容项目获批，变压器交付周期延至120周+，2025年中国变压器出口90.36亿美元创历史新高(+34.8%)。公司已获欧洲KEMA认证，订单覆盖南美/美国/阿曼。
+
+### 2. 电投能源 (002128) — BUY/moderate
+
+- **入场价**: ¥33.3
+- **止损**: ¥31.64
+- **目标**: ¥40.0
+- **RPS120**: 91.16%
+- **板块**: 煤炭开采 (top 5% — 煤炭开采今日+3.10%排名第二)
+
+煤炭开采板块今日+3.10%领涨第二。中东战争→霍尔木兹海峡封锁→全球能源供应中断→煤炭作为替代能源直接受益。油价从$60→$111/桶(今日盘中)，高盛预测可能到$150。ROE 15%盈利能力强，产能扩张中(在建工程9.3%)。RPS120=91.16%在sweet spot。今日为股权登记日(每10股派3元)。
+
 ## 跳过标的
 
-1. **电投能源** (002128) (RPS 91.16%) — Sector (煤炭开采) is today's #3 hot sector +3.04%. RPS120=91.2% sweet spot. Sector trending up since Jan 2026. Strong candidate BUT breadth 0.36:1 (3968 down vs 1412 up) = panic environment, no new entries per Rule. Also IV Rank avg 19.2% with 300ETF at 13.4% = complacent, vol expansion risk. Revisit when breadth >1:1.
-2. **望变电气** (603191) (RPS 94.48%) — Sector (电网设备) hot — transformer exports surging, grid investment at record highs. RPS120=94.5% extended zone, sector exception applies. Score_trend 9.9 highest in pool. Fresh catalyst: North America transformer supply gap + China export price surge. Top candidate when breadth improves. Blocked today by 0.36:1 breadth = no new entries.
-3. **湖南黄金** (002155) (RPS 92.14%) — Gold benefiting from Middle East crisis (COMEX $5400). RPS120=92.1% sweet spot. Net profit +128% YoY explosive growth. Events show whipsaw today (大幅低开 then 大涨). Breadth 0.36:1 = no new entries. High conviction candidate for next session if breadth recovers.
-4. **中原内配** (002448) (RPS 92.82%) — Sector (汽车零部件) trending up since Dec 2025. RPS120=92.8% extended zone. Net profit +348% explosive catalyst. Shareholder count -29% = institutional accumulation. BUT breadth 0.36:1 = no new entries. Also weekly overbought flagged in risks.
-5. **豪迈科技** (002595) (RPS 92.77%) — Excellent fundamentals (score_company 9.3, 0 risks, 7 highlights, ROE 18%, ROIC 20%). RPS120=92.8% sweet spot. Sector (专用设备) trending up. Breadth 0.36:1 = no new entries today. Valuation at 99th percentile — per V2 rules this is irrelevant for momentum plays.
-6. **国瓷材料** (300285) (RPS 90.44%) — Sector (电子化学品) trending up since Nov 2025. RPS120=90.4% sweet spot. Fresh catalyst: acquisition of Australian SDI Limited (dental materials). Institutional interest (北向 4.3%, 公募 6.9%). Breadth 0.36:1 = no new entries.
-7. **国机精工** (002046) (RPS 91.03%) — Sector (通用设备) trending up since Nov 2025. RPS120=91.0% sweet spot. 34 institutional visitors on 03-06 = strong interest. Shareholder count -29%. BUT breadth 0.36:1 = no new entries. Recent -8.17% on 03-03 shows vulnerability in sell-offs.
-8. **桐昆股份** (601233) (RPS 90.46%) — Sector (化学纤维) is today's #4 WORST at -3.34%. Dead sector = no entry per Rule 1. Also 5 risk factors including heavy selling (-6.9% on 03-03), 5.1% gross margin, negative operating income quality.
-9. **艾罗能源** (688717) (RPS 93.6%) — RPS120=93.6% extended zone. Sector (光伏设备) not in hot sectors. Valuation at 99th percentile with negative operating profit YoY. Breadth 0.36:1 = no new entries. Previously WATCH'd and gained +16.21% — confirms V2 principle but today is wrong environment.
-10. **江丰电子** (300666) (RPS 94.98%) — Semiconductor materials with strong growth (revenue +25%, net profit +63% YoY). RPS120=95.0% at upper boundary — above 95% = skip per Rule 2. Also breadth 0.36:1 = no new entries.
-11. **赤峰黄金** (600988) (RPS 86.22%) — Gold play, strong fundamentals (net profit +84% YoY, ROE 16%). RPS120=86.2% acceptable. BUT RPS20=3.6% = extremely weak short-term momentum (recent sharp pullback). Breadth 0.36:1 = no new entries.
-12. **中曼石油** (603619) (RPS 97.18%) — Oil services — sector (油气开采) is today's #1 at +6.06%. RPS120=97.2% ABOVE 95% = skip per Rule 2, wait for pullback to 90% zone. Also 4 risk factors.
+1. **桐昆股份** (601233) (RPS 90.46%) — Sector (化学纤维) in bottom 5 today at -3.26%. Per Rule 1: dead sector = no entry. 5 risk factors including 毛利率仅5.1% and 03-03大跌-6.9%.
+2. **香农芯创** (300475) (RPS 99.59%) — RPS120=99.59% far above 95% ceiling. RPS20=18.06% severe short-term collapse. 5 risk factors. Skip.
+3. **华峰测控** (688200) (RPS 85.4%) — Sector (半导体设备) crushed today — 科创50 -1.34%, CPO/算力硬件全线回调. RPS20=51.90% momentum fading. Despite 0 risk factors and strong fundamentals (profit +82%), wrong regime. Wait for tech rotation.
+4. **万向钱潮** (000559) (RPS 97.9%) — RPS120=97.90% above 95% ceiling. No sector exception (汽车零部件 not in top 10%).
+5. **艾罗能源** (688717) (RPS 93.6%) — Valuation percentile 98.83% (historical extreme). Net profit YoY -6.3% with PE 178 — red flag per Rule 3 sanity check (PE>200 zone with no growth). 03-05大跌-5.35%. Skip.
+6. **西部矿业** (601168) (RPS 92.47%) — RPS20=1.94% extreme short-term weakness. Recent 跌停 on 01-30 (-9.99%). Despite strong sector (工业金属 uptrend) and fundamentals, short-term momentum destroyed. Wait for RPS20 recovery above 30%.
+7. **赤峰黄金** (600988) (RPS 86.22%) — RPS20=3.60% extreme short-term weakness despite gold price surge. Recent 跌停 on 01-30. Per LEARNINGS, gold is event-driven but RPS20 collapse suggests institutional selling. Need RPS20 recovery before re-entry.
+8. **中原内配** (002448) (RPS 92.82%) — Sector (汽车零部件) not in top 30% today. Per Rule 1: sector first. Strong individual setup (RPS120=92.82%, profit +348%) but wrong sector in energy-driven regime.
+9. **豪迈科技** (002595) (RPS 92.77%) — Valuation percentile 99.03% (historical extreme). Despite 0 risk factors, RPS120=92.77% sweet spot, and excellent fundamentals — valuation at 99th percentile is a sanity-check red flag even for momentum plays. Would buy on a meaningful pullback.
+10. **江丰电子** (300666) (RPS 94.98%) — Sector (半导体材料) in tech selloff today. RPS120=94.98% in extended zone but sector not in top 10% — extended zone not allowed per Rule 2.
+11. **芯源微** (688037) (RPS 88.47%) — Net profit negative (-26.2M YoY). PE 511x. RPS20=13.55% severe short-term weakness. Sector (半导体设备) cold today. Multiple disqualifiers.
+12. **明阳智能** (601615) (RPS 93.5%) — RPS20=5.19% extreme short-term weakness. 跌停 on 03-03. Gross margin only 6.4%. 4 risk factors. Net profit -8.7% YoY. Skip.
+13. **嘉元科技** (688388) (RPS 92.49%) — Sector (锂电池) getting crushed — search confirms 嘉元科技 today dropped >10%. PE 308x with gross margin only 4.94%. Wrong sector in energy crisis regime.
+14. **微导纳米** (688147) (RPS 93.87%) — Sector (光伏设备) in selloff. 2025 revenue -2.52%, profit -6.12% per 业绩快报. 3 risk factors. PE 163x. Skip.
+15. **利柏特** (605167) (RPS 93.21%) — Valuation percentile 98.25% (historical extreme). Revenue YoY -23.4%, profit YoY -11.1% — declining business at extreme valuation. Sector (化学工程) not in hot sectors.
 
 ## 今日研究结论
 
-- 新开仓: 0只
-- 跳过: 12只
+- 新开仓: 2只
+- 跳过: 15只
 
 ### 新教训
-- V2's -5% hard stop would have exited 中石科技 days ago (it crossed -5% before today's -6.52%). V1's -10% stop let losers bleed. Lesson reinforced: cut fast. The -1.52% saved by exiting at -5% vs -6.52% is real money (¥1,500+ on this position).
-- Breadth 0.36:1 with 3968 stocks down is a clear NO-ENTRY signal. Despite multiple attractive candidates in hot sectors (电投能源 in coal, 望变电气 in grid, 湖南黄金 in gold), opening positions when 72% of stocks are falling is fighting the tape. Patience > FOMO.
-- 0/3 position alignment with hot sectors explains portfolio underperformance. When geopolitical crisis rotates market into oil/gas/coal/gold, our tech/chemical/equipment positions get dragged down. Sector-first analysis (Rule 1) should also apply to monitoring existing positions — if your sector goes cold for 3+ days, the sector overlay says SELL.
-- 科达制造 will hit V2's 10-day time stop tomorrow (day 10, PnL -1.2% < +3% threshold). Per V2: no exceptions to time stops. However, today's +0.82% bounce and restructuring catalyst are encouraging. V2 says sell anyway — 'if the event hasn't moved the stock in 10 days, your timing is wrong. You can always re-enter.' Prepare exit plan.
-- IV Rank averaging 19.2% with 300ETF at 13.4% signals complacency. Today's geopolitical shock (oil >$110, Korea circuit breaker) is exactly the kind of vol expansion event that low IV warns about. The market was priced for calm and got chaos. This validates the IV throttle rule.
+- US-Iran war + Hormuz Strait closure is the dominant regime driver. Oil surged from $60 to $111/bbl in days. In geopolitical energy crises, ONLY energy/resource sectors work — everything else sells off. 4500+ stocks down today while oil/coal/grid stocks hit 涨停. Sector alignment is literally life or death for returns.
+- 中石科技 breached -5% stop at -6.66% after 19 days. V1 would have held with 'thesis still valid' — V2 cuts immediately. The stock was held through a regime change (tech→energy) that made its sector irrelevant. Lesson: when the macro regime shifts, individual stock quality is irrelevant. Sector gravity always wins.
+- 电网设备 is a rare 'all-weather' sector — benefits from both peace (US grid expansion, AI data center demand) and war (energy infrastructure urgency). Today it went UP while 4500 stocks fell. This structural resilience makes it a higher-conviction play than pure oil/gas which may reverse when war ends.
+- IV Rank at 19.2% average with oil at $111/bbl and a literal war happening — the options market is severely underpricing tail risk. This is the exact setup where vol expansion is imminent. Per IV rules, should reduce new position sizing by 50% for non-energy plays. Energy plays get normal sizing as they benefit from vol expansion.
+- V2 Rule 5 time stop (10 days with <3% gain) would have forced 中石科技 exit at day 10 around Feb 24 — saving ~4% of additional losses vs the actual -6.66% exit today. The V1 time stop of 20 days was indeed too slow. V2's 10-day rule is validated.

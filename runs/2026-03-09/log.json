@@ -3,39 +3,101 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1773037804.72188,
+      "start": 1773038385.6717389,
       "errors": [],
-      "end": 1773037849.913645,
-      "duration_sec": 45.2
+      "end": 1773038475.419704,
+      "duration_sec": 89.7
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 10660,
+      "response_size_bytes": 11803,
       "tokens": {
-        "input_tokens": 585109,
-        "output_tokens": 9152
+        "input_tokens": 526818,
+        "output_tokens": 11079
       },
-      "rounds": 6,
-      "tool_calls_count": 17,
-      "duration_sec": 190.8
+      "rounds": 5,
+      "tool_calls_count": 11,
+      "duration_sec": 287.2
     },
     {
       "phase": "apply",
-      "start": 1773038040.733647,
+      "start": 1773038762.638274,
       "actions": [
-        "ERROR SELL 300684: Position file not found: /Users/bz/Work/Personal/stock-analysis/tracking/300684.json",
+        "SELL 300684",
+        "OPEN 603191",
+        "OPEN 002128",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
         "Updated LEARNINGS.md"
       ],
-      "end": 1773038040.869868,
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 5,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002128",
+                "name": "电投能源",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 33.3,
+                "stopLoss": 31.64,
+                "distance_pct": 4.98,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1773038762.7559412,
       "duration_sec": 0.1
     }
   ],
-  "validation_errors": [],
+  "validation_errors": [
+    "RULE check_stop_proximity: 002128 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 236.10000000000002
+    "totalDurationSec": 377.0
   }
 }

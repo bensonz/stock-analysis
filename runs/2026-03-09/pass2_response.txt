@@ -1,58 +1,31 @@
+Now I have critical new data: **Oil prices hit $111/barrel today** (WTI and Brent both broke $111 intraday), far higher than the $90 mentioned earlier. This is a massive energy shock. Also confirmed: 电网设备 is one of the few sectors going UP today (国电南自、三变科技涨停).
+
+Let me also note: **电投能源 has ex-dividend date March 10 (tomorrow)**, stock registration date is March 9 (today). Current price around ¥33.30 area based on the ¥32.58 on 03-02 + 6.12% gain that day, then further gains from coal rally.
+
+Key additional finding: **CPO/算力硬件 getting crushed** - 嘉元科技 dropped >10% today. This confirms tech is being sold hard.
+
+Now let me also check: the enriched data shows 望变电气's current market cap is ¥88.45M (small cap), with score_trend 9.9 (highest possible). The stock has RPS120=94.48%, RPS20=96.79%, RPS60=97.27% - all extremely strong across timeframes. 1 risk factor only. The sector (电网设备) is confirmed hot today with stocks hitting 涨停.
+
+For 电投能源: market cap ¥745.77B, RPS120=91.16% in sweet spot, sector (煤炭开采) is #2 today at +3.10%. But note the ex-dividend tomorrow - buying today means we get the dividend but price adjusts down. This is neutral.
+
+Let me finalize the JSON:
+
+```json
 {
   "sector_analysis": {
     "hot_sectors": [
-      {
-        "name": "油气开采Ⅱ",
-        "5d_pct": 5.48,
-        "trend": "accelerating — US-Iran war, Hormuz blocked, oil $111/bbl"
-      },
-      {
-        "name": "煤炭开采",
-        "5d_pct": 3.1,
-        "trend": "accelerating — energy substitution from oil shock"
-      },
-      {
-        "name": "电网设备",
-        "5d_pct": "positive",
-        "trend": "accelerating — 国电南自/三变科技涨停, US $750B grid expansion"
-      },
-      {
-        "name": "农产品加工",
-        "5d_pct": 3.02,
-        "trend": "steady — food security concerns"
-      },
-      {
-        "name": "IT服务Ⅱ",
-        "5d_pct": 2.89,
-        "trend": "steady"
-      }
+      {"name": "油气开采Ⅱ", "5d_pct": 5.48, "trend": "accelerating — US-Iran war, Hormuz blocked, oil $111/bbl"},
+      {"name": "煤炭开采", "5d_pct": 3.10, "trend": "accelerating — energy substitution from oil shock"},
+      {"name": "电网设备", "5d_pct": "positive", "trend": "accelerating — 国电南自/三变科技涨停, US $750B grid expansion"},
+      {"name": "农产品加工", "5d_pct": 3.02, "trend": "steady — food security concerns"},
+      {"name": "IT服务Ⅱ", "5d_pct": 2.89, "trend": "steady"}
     ],
     "cold_sectors": [
-      {
-        "name": "航空机场",
-        "5d_pct": -3.62,
-        "trend": "deteriorating — oil cost shock"
-      },
-      {
-        "name": "航运港口",
-        "5d_pct": -3.39,
-        "trend": "deteriorating — Hormuz disruption"
-      },
-      {
-        "name": "航海装备Ⅱ",
-        "5d_pct": -3.32,
-        "trend": "deteriorating"
-      },
-      {
-        "name": "化学纤维",
-        "5d_pct": -3.26,
-        "trend": "deteriorating — 桐昆股份 sector"
-      },
-      {
-        "name": "林业Ⅱ",
-        "5d_pct": -3.2,
-        "trend": "deteriorating"
-      }
+      {"name": "航空机场", "5d_pct": -3.62, "trend": "deteriorating — oil cost shock"},
+      {"name": "航运港口", "5d_pct": -3.39, "trend": "deteriorating — Hormuz disruption"},
+      {"name": "航海装备Ⅱ", "5d_pct": -3.32, "trend": "deteriorating"},
+      {"name": "化学纤维", "5d_pct": -3.26, "trend": "deteriorating — 桐昆股份 sector"},
+      {"name": "林业Ⅱ", "5d_pct": -3.20, "trend": "deteriorating"}
     ],
     "position_alignment": "0/3 positions in hot sectors — critical misalignment",
     "regime": "Geopolitical crisis regime: US-Iran war + Hormuz closure driving oil to $111/bbl. Energy/resources surging, tech/growth crushed (创业板 -2.42% intraday). 电网设备 also strong on structural US export demand. 4500+ stocks down, only oil/coal/grid positive. Extreme sector divergence."
@@ -67,7 +40,7 @@
       "new_stop": null,
       "pnl_pct": -6.66,
       "days_held": 19,
-      "exit_price": 51.7
+      "exit_price": 51.70
     },
     {
       "code": "600096",
@@ -96,10 +69,10 @@
     {
       "code": "603191",
       "name": "望变电气",
-      "entry_price": 26.6,
+      "entry_price": 26.60,
       "allocation_pct": 7,
       "stop": 25.27,
-      "target": 34.0,
+      "target": 34.00,
       "thesis": "电网设备板块今日逆势涨停潮(国电南自/三变科技涨停创新高)。望变电气是国内唯一打通'取向硅钢→铁心→变压器'全产业链企业。美国750亿美元电网扩容项目获批，变压器交付周期延至120周+，2025年中国变压器出口90.36亿美元创历史新高(+34.8%)。公司已获欧洲KEMA认证，订单覆盖南美/美国/阿曼。",
       "sector": "电网设备",
       "sector_rank": "top 5% — 电网设备今日逆势走强，涨停股频出",
@@ -111,10 +84,10 @@
     {
       "code": "002128",
       "name": "电投能源",
-      "entry_price": 33.3,
+      "entry_price": 33.30,
       "allocation_pct": 5,
       "stop": 31.64,
-      "target": 40.0,
+      "target": 40.00,
       "thesis": "煤炭开采板块今日+3.10%领涨第二。中东战争→霍尔木兹海峡封锁→全球能源供应中断→煤炭作为替代能源直接受益。油价从$60→$111/桶(今日盘中)，高盛预测可能到$150。ROE 15%盈利能力强，产能扩张中(在建工程9.3%)。RPS120=91.16%在sweet spot。今日为股权登记日(每10股派3元)。",
       "sector": "煤炭开采",
       "sector_rank": "top 5% — 煤炭开采今日+3.10%排名第二",
@@ -141,19 +114,19 @@
       "code": "688200",
       "name": "华峰测控",
       "reason": "Sector (半导体设备) crushed today — 科创50 -1.34%, CPO/算力硬件全线回调. RPS20=51.90% momentum fading. Despite 0 risk factors and strong fundamentals (profit +82%), wrong regime. Wait for tech rotation.",
-      "rps120": 85.4
+      "rps120": 85.40
     },
     {
       "code": "000559",
       "name": "万向钱潮",
       "reason": "RPS120=97.90% above 95% ceiling. No sector exception (汽车零部件 not in top 10%).",
-      "rps120": 97.9
+      "rps120": 97.90
     },
     {
       "code": "688717",
       "name": "艾罗能源",
       "reason": "Valuation percentile 98.83% (historical extreme). Net profit YoY -6.3% with PE 178 — red flag per Rule 3 sanity check (PE>200 zone with no growth). 03-05大跌-5.35%. Skip.",
-      "rps120": 93.6
+      "rps120": 93.60
     },
     {
       "code": "601168",
@@ -195,7 +168,7 @@
       "code": "601615",
       "name": "明阳智能",
       "reason": "RPS20=5.19% extreme short-term weakness. 跌停 on 03-03. Gross margin only 6.4%. 4 risk factors. Net profit -8.7% YoY. Skip.",
-      "rps120": 93.5
+      "rps120": 93.50
     },
     {
       "code": "688388",
@@ -227,3 +200,4 @@
   "market_sentiment": "bearish",
   "market_call": "防御+能源配置"
 }
+```
