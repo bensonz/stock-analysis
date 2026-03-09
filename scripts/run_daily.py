@@ -522,6 +522,8 @@ def phase2_build_prompt(data: dict) -> str:
 ```
 
 请根据以上数据进行分析，按照 Required Output JSON 格式返回你的决策。
+
+重要提醒：请再次仔细阅读以上所有数据（特别是 enriched_candidates 中的详细指标、position_prices 中的实时价格、以及 iv_sentiment），严格按照 ANALYST.md 的5条规则和 Output Format 要求，返回完整的 JSON 决策。skip_list 中只能引用输入数据中实际存在的价格和指标，不要编造任何数据。
 """
 
     # Save prompt to run dir
