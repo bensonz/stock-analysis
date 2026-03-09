@@ -732,3 +732,11 @@
 - 国机精工 03-05 涨停 followed by 34-institution调研 on 03-06 is a strong institutional validation signal. When a stock hits涨停 AND gets massive institutional attention within 24 hours, it suggests the move has fundamental backing, not just speculation.
 - 科达制造 approaching 10-day time stop with PnL -0.97%. V2 rules say SELL if <3% gain at day 10. Must be disciplined — no exceptions. The restructuring catalyst may take longer but V2 says cut and re-enter if it proves itself.
 - IV Rank averaging 19.2% (low) with 300ETF at 13.4% — market is complacent. Per V2 rules, reduce new position sizing by 50% when IV Rank <15% for broad indices. Applied 5% allocation instead of 7% for new positions.
+
+### 自动更新 (2026-03-09)
+
+- Geopolitical crisis (Middle East/Iran conflict, oil >$110, Hormuz Strait disrupted) creates extreme sector bifurcation: energy/resources/grid surge while everything else sells off. Breadth 0.37:1 is a hard NO-ENTRY signal. Even excellent setups in non-energy sectors will get dragged down by sector gravity in this regime.
+- V2's 10-day time stop would have saved us ~4% on 中石科技. Under V1's 20-day rule, we held for 20 days at -6.5%. Under V2, we'd have exited around day 10 at roughly -2% to -3%. The stock never recovered after initial stall - validating that time stops work for trend-type positions.
+- Position alignment 0/3 in hot sectors is the portfolio's biggest problem. All 3 positions are in neutral-to-cold sectors during a geopolitical crisis rotation. This is the exact failure mode Rule 1 (Sector First) was designed to prevent. We should have rotated into energy/gold when the Middle East conflict escalated.
+- In crisis-driven markets with breadth <0.5:1, the correct action is DEFENSIVE: sell losers, tighten stops, hold cash. Even crisis-beneficiary sectors (oil/gold) carry binary reversal risk (G7 emergency oil release, ceasefire). Cash is a position.
+- 云天化 showing relative strength (flat 0.00% in -0.6% market) while in a sector adjacent to hot themes (农产品加工 +2.91%, food security). Middle East → food inflation → fertilizer demand is a valid secondary beneficiary thesis. But -4.15% PnL with stop at -5% means very thin margin of safety.

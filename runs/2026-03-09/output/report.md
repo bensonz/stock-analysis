@@ -4,74 +4,48 @@
 
 | 指数 | 收盘 | 涨跌幅 |
 |------|------|--------|
-| 上证指数 | 4104.48 | -0.48% |
-| 深证成指 | 14099.31 | -0.52% |
-| 创业板指 | 3218.50 | -0.33% |
-| 科创50 | 1396.62 | -1.26% |
+| 上证指数 | 4099.48 | -0.60% |
+| 深证成指 | 14073.91 | -0.70% |
+| 创业板指 | 3209.61 | -0.61% |
+| 科创50 | 1392.14 | -1.57% |
 
-涨跌比: 1567涨 / 3786跌 / 5481总
+涨跌比: 1440涨 / 3937跌 / 5481总
 
-**热门板块**: 油气开采Ⅱ(+5.55%), 综合Ⅱ(+3.68%), IT服务Ⅱ(+3.34%), 农产品加工(+3.04%), 煤炭开采(+2.78%)
+**热门板块**: 油气开采Ⅱ(+6.06%), 综合Ⅱ(+3.21%), 煤炭开采(+3.04%), 农产品加工(+2.91%), IT服务Ⅱ(+2.91%)
 
-**冷门板块**: 航空机场(-3.46%), 林业Ⅱ(-3.39%), 航运港口(-3.30%), 化学纤维(-3.18%), 航海装备Ⅱ(-3.02%)
+**冷门板块**: 航空机场(-3.86%), 航海装备Ⅱ(-3.41%), 通信设备(-3.36%), 化学纤维(-3.34%), 航运港口(-3.24%)
 
-Breadth 0.41:1 bearish (1567 up / 3786 down), 47涨停/7跌停. Narrow resource-led rally in a broadly weak market. Shanghai -0.48%, Shenzhen -0.52%, ChiNext -0.33%, STAR50 -1.26%. Middle East conflict escalation (Iran 'True Promise 4' ongoing) driving oil +13%, gold $5400+, pushing oil/gas/coal/agriculture sectors to top while crushing airlines/shipping. IV Rank avg 19.2% (low-neutral) — market complacent, vol expansion risk. 300ETF IV Rank 13.4% triggers reduced sizing for new positions. Position alignment: 2/3 in hot resource sectors (磷化工). 科达制造 in neutral sector approaching time stop.
+CRISIS MODE. Breadth 0.37:1 deeply bearish (1440 up / 3937 down), 49涨停/8跌停. Middle East conflict escalating: Israel struck Iran oil facilities, Hormuz Strait effectively blocked, oil >$110 (analysts target $150). Global risk-off: Korea circuit breaker, Japan -3000pts, global stocks/bonds selling off. A-share indices all red (上证 -0.6%, 深证 -0.7%, 创业板 -0.61%, 科创50 -1.57%). Only energy/resources sectors positive (油气开采 +6.06%, 煤炭 +3.04%). 电网设备 逆势走强. Distribution skewed heavily negative: 2553 stocks down 0-2%, 1069 down 2-4% = broad grinding decline, not panic. IV Rank avg 19.2% LOW - market still complacent, vol expansion likely ahead. 300ETF IV Rank 13.4% = reduce new position sizing by 50% per IV rule. ACTION: SELL 中石科技 (time stop), tighten 云天化 stop to -5%, prepare 科达制造 exit for day-10 time stop tomorrow. NO NEW ENTRIES - cash is king in crisis regime. 70.7% cash is actually the right positioning today.
 
 ## 策略池扫描
 
 扫描 **76** 只策略池股票
 (来源: api)
 
-## 今日开仓
-
-### 1. 国机精工 (002046) — BUY/moderate
-
-- **入场价**: ¥50.73
-- **止损**: ¥48.19
-- **目标**: ¥63.0
-- **RPS120**: 91.03%
-- **板块**: 通用设备 (top 20% (通用设备 trending up since Nov 2025))
-
-通用设备龙头(磨具磨料), 航天轴承市占率~90%, 商业航天催化. 03-05涨停+10%, 03-06接待34家机构调研(天风/中金/广发基金). 股东户数减少29%大资金买入. 行业自2025年11月以来持续走强.
-
-### 2. 电投能源 (002128) — BUY/moderate
-
-- **RPS120**: 91.16%
-- **板块**: 煤炭开采 (top 10% (煤炭开采 today +2.78%, top 5 sector))
-
-煤炭开采龙头, 行业自2026年1月以来持续走强(今日板块+2.78%为top5). 中东冲突推高能源价格, 油价飙涨13%传导至煤炭. ROE 15%, 产能扩张(在建9.3%), 股价接近历史新高. RPS120=91.2%理想区间.
-
 ## 跳过标的
 
-1. **桐昆股份** (601233) (RPS 90.46%) — Sector (化学纤维) is BOTTOM 5 today at -3.18%. Rule 1 violation — dead sector, no entry regardless of stock quality. Recent heavy selling pressure (-6.9% on 03-03).
-2. **香农芯创** (300475) (RPS 99.59%) — RPS120 = 99.6% — above 95% ceiling, chasing territory. RPS20 only 18.1% showing severe short-term weakness. 5 risk factors. Skip.
-3. **新锐股份** (688257) (RPS 99.82%) — RPS120 = 99.8% — extreme chasing zone, above 95% ceiling. Wait for pullback to 90% zone.
-4. **凯格精机** (301338) (RPS 99.22%) — RPS120 = 99.2% — above 95% ceiling. All RPS metrics at 99%+ = extremely extended.
-5. **赛恩斯** (688480) (RPS 99.13%) — RPS120 = 99.1% — above 95% ceiling. 4 risk factors.
-6. **四方股份** (601126) (RPS 99.5%) — RPS120 = 99.5% — above 95% ceiling.
-7. **普冉股份** (688766) (RPS 99.54%) — RPS120 = 99.5% — above 95% ceiling. RPS20 only 15.3% = severe short-term weakness despite long-term strength.
-8. **明阳智能** (601615) (RPS 93.5%) — RPS20 = 5.2% extreme short-term weakness. 03-03 跌停 -10%. 4 risk factors. Gross margin only 6.4%. Negative operating profit trend.
-9. **赤峰黄金** (600988) (RPS 86.22%) — RPS20 = 3.6% extreme short-term weakness despite gold price surge. Recent -10% 跌停 on 01-30. Short-term momentum broken. Would need RPS20 recovery above 50% to reconsider.
-10. **西部矿业** (601168) (RPS 92.47%) — RPS20 = 1.9% extreme short-term weakness. Recent -10% 跌停 on 01-30. Valuation at 94th percentile historical high. Short-term momentum completely broken.
-11. **标榜股份** (301181) (RPS 86.62%) — Sector (汽车零部件) not in top 30% today. RPS60 = 72.6% weak. RPS20 recent weakness (5.2% in last 10d). Valuation at 96th percentile. 4 risk factors.
-12. **艾罗能源** (688717) (RPS 93.6%) — RPS120 = 93.6% in extended zone. Sector (光伏设备) not in today's hot sectors. Valuation at 99th percentile. Recent -5.35% heavy selling. Operating profit declining -26.6% YoY despite revenue growth — profitability deteriorating.
-13. **利柏特** (605167) (RPS 93.21%) — Sector (专业工程/化学工程) not clearly in top 30%. Valuation at 98th percentile extreme. Revenue -23.4% YoY declining. RPS10 weak at 8.8%.
-14. **中原内配** (002448) (RPS 92.82%) — Sector (汽车零部件) not in top 30% today. Weekly overbought signal. Despite strong RPS and 348% profit growth, sector gravity concern.
-15. **科捷智能** (688455) (RPS 88.65%) — Major red flag: 03-16 解禁 5100万股 = 30% of total shares in 7 days. Operating at a loss (net profit negative). 4 risk factors.
-16. **生物股份** (600201) (RPS 94.17%) — RPS20 = 2.6% extreme short-term weakness. Sector (动物保健) not hot. Revenue quality very low (扣非净利润占净利润 18%).
-17. **芯源微** (688037) (RPS 88.47%) — Operating at a loss (net profit negative). PE 511x. Revenue declining -10.4% YoY. Despite strong RPS, fundamentals deteriorating.
-18. **禾盛新材** (002290) (RPS 95.63%) — No current price data. No clear hot sector alignment. 3 risk factors.
-19. **万向钱潮** (000559) (RPS 97.9%) — RPS120 = 97.9% above 95% ceiling. Sector (汽车零部件) not in top 30%.
-20. **可立克** (002782) (RPS 88.71%) — Sector (其他电子) not in today's hot sectors. Decent setup (RPS120=88.7%, 66% profit growth) but sector not aligned. No entry in weak breadth day.
+1. **电投能源** (002128) (RPS 91.16%) — Sector (煤炭开采) is today's #3 hot sector +3.04%. RPS120=91.2% in sweet spot, 4 highlights, 2 risks. Normally a BUY candidate. BUT breadth 0.37:1 = Up/Down <1:1 per system rules means NO new positions. Also IV Rank avg 19.2% (low) suggests complacency before potential vol expansion. Middle East crisis creates binary risk - G7 discussing emergency oil reserve release could reverse energy rally overnight. SKIP today, top candidate if breadth recovers >1:1.
+2. **湖南黄金** (002155) (RPS 92.14%) — Sector (贵金属/黄金) direct beneficiary of Middle East crisis (COMEX gold $5400). RPS120=92.1% in extended zone. 128% profit growth, strong catalyst. BUT breadth 0.37:1 = no new entries. Also 近5天日均换手率12% = extremely hot short-term, chasing risk very high. 3 risks flagged including high volatility. SKIP - wait for breadth stabilization.
+3. **中曼石油** (603619) (RPS 97.18%) — Oil services sector ideal today (油气开采 +6.06%). BUT RPS120=97.2% ABOVE 95% = chasing zone per Rule 2. 4 risks. Skip - too extended even with sector tailwind.
+4. **望变电气** (603191) (RPS 94.48%) — 电网设备 sector 逆势走强 today (confirmed by Sina Finance headlines). RPS120=94.5% in extended zone but qualifies for exception (sector likely top 10% today + only 1 risk). Score_trend 9.9 excellent. 变压器出口 catalyst fresh and ongoing. However breadth 0.37:1 = no new entries today. STRONG candidate for next session if breadth improves. Watching closely.
+5. **中原内配** (002448) (RPS 92.82%) — Sector (汽车零部件) not in today's hot sectors. RPS120=92.8% extended zone. Despite 348% profit growth and score_trend 9.8, breadth 0.37:1 = no new entries. Also 周级别超买 flagged in risks.
+6. **豪迈科技** (002595) (RPS 92.77%) — Sector (专用设备) trending up. RPS120=92.8% extended zone, 0 risks qualifies for exception. Score_company 9.3 best in pool. BUT breadth 0.37:1 = no new entries. Valuation_percentile 99.03% historically extreme. Top candidate when market stabilizes.
+7. **川恒股份** (002895) (RPS 90.87%) — Sector (磷化工/农化制品) strong. RPS120=90.9% sweet spot. 0 risks, score_company 8.8, 35% profit growth. Excellent setup but breadth 0.37:1 = no new entries. Also already holding 云天化 in same sector = concentration risk.
+8. **中元股份** (300018) (RPS 92.73%) — Sector (电网设备) strong today. RPS120=92.7% extended zone. 64% profit growth. But breadth 0.37:1 = no new entries. Market cap only ¥69M = high volatility risk in crisis environment. No institutional research coverage.
+9. **桐昆股份** (601233) (RPS 90.46%) — DEAD SECTOR. 化学纤维 is today's #4 WORST sector at -3.34%. Rule 1: dead sector = no entry regardless. Also had -6.9% selloff on 03-03 with heavy volume. 5 risks including 5.1% gross margin and heavy debt. Sector gravity will crush this.
+10. **艾罗能源** (688717) (RPS 93.6%) — Sector (光伏设备/逆变器) not in hot sectors. RPS120=93.6% extended zone. Valuation_percentile 98.83% = historical extreme. Operating profit declining -26.6% YoY despite revenue growth. SKIP.
+11. **江丰电子** (300666) (RPS 94.98%) — Sector (半导体材料) under pressure (科创50 -1.57%). RPS120=95.0% at upper boundary of allowed range. Strong fundamentals but breadth 0.37:1 = no new entries. Semi sector facing global risk-off headwinds.
+12. **华峰测控** (688200) (RPS 85.4%) — Sector (半导体设备) under pressure today. RPS120=85.4% in range, 0 risks, score_company 8.9 excellent. But RPS20=51.9% shows recent weakness, and 10-day price performance in bottom 7% of market. Breadth 0.37:1 = no new entries.
+13. **国瓷材料** (300285) (RPS 90.44%) — Sector (电子化学品) neutral today. RPS120=90.4% sweet spot. Good fundamentals but breadth 0.37:1 = no new entries. 商誉占净资产26% risk.
 
 ## 今日研究结论
 
-- 新开仓: 2只
-- 跳过: 20只
+- 新开仓: 0只
+- 跳过: 13只
 
 ### 新教训
-- V2 Day 1: Today's market is a classic resource/energy rotation driven by Middle East conflict. Oil +13%, gold $5400+, breadth 1567:3786 bearish. Hot money concentrated in oil/gas/coal/agriculture — narrow rally. In this environment, only resource-linked positions should be opened. Tech/growth is being sold.
-- 云天化 intraday low ¥41.84 essentially touched V2 stop ¥41.85. This is a critical test — the stock recovered to close ¥42.19 showing buying support at the stop level. But this is a 'last chance' hold. One more breach = immediate exit.
-- 国机精工 03-05 涨停 followed by 34-institution调研 on 03-06 is a strong institutional validation signal. When a stock hits涨停 AND gets massive institutional attention within 24 hours, it suggests the move has fundamental backing, not just speculation.
-- 科达制造 approaching 10-day time stop with PnL -0.97%. V2 rules say SELL if <3% gain at day 10. Must be disciplined — no exceptions. The restructuring catalyst may take longer but V2 says cut and re-enter if it proves itself.
-- IV Rank averaging 19.2% (low) with 300ETF at 13.4% — market is complacent. Per V2 rules, reduce new position sizing by 50% when IV Rank <15% for broad indices. Applied 5% allocation instead of 7% for new positions.
+- Geopolitical crisis (Middle East/Iran conflict, oil >$110, Hormuz Strait disrupted) creates extreme sector bifurcation: energy/resources/grid surge while everything else sells off. Breadth 0.37:1 is a hard NO-ENTRY signal. Even excellent setups in non-energy sectors will get dragged down by sector gravity in this regime.
+- V2's 10-day time stop would have saved us ~4% on 中石科技. Under V1's 20-day rule, we held for 20 days at -6.5%. Under V2, we'd have exited around day 10 at roughly -2% to -3%. The stock never recovered after initial stall - validating that time stops work for trend-type positions.
+- Position alignment 0/3 in hot sectors is the portfolio's biggest problem. All 3 positions are in neutral-to-cold sectors during a geopolitical crisis rotation. This is the exact failure mode Rule 1 (Sector First) was designed to prevent. We should have rotated into energy/gold when the Middle East conflict escalated.
+- In crisis-driven markets with breadth <0.5:1, the correct action is DEFENSIVE: sell losers, tighten stops, hold cash. Even crisis-beneficiary sectors (oil/gold) carry binary reversal risk (G7 emergency oil release, ceasefire). Cash is a position.
+- 云天化 showing relative strength (flat 0.00% in -0.6% market) while in a sector adjacent to hot themes (农产品加工 +2.91%, food security). Middle East → food inflation → fertilizer demand is a valid secondary beneficiary thesis. But -4.15% PnL with stop at -5% means very thin margin of safety.

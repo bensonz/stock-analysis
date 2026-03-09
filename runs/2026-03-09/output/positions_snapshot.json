@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-03-09T14:17:47.541621+08:00",
+  "snapshot_time": "2026-03-09T14:33:28.271148+08:00",
   "snapshot_type": "post_run",
   "date": "2026-03-09",
   "portfolio_config": {
@@ -10,67 +10,29 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-03-09T14:17:47.418930+08:00",
+    "lastUpdated": "2026-03-09T14:33:28.152276+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 969244.0,
-      "cash": 665366.0,
-      "investedValue": 303878.0,
-      "unrealizedPnl": -4261.0,
-      "realizedPnl": -26495.0,
-      "totalPnl": -30756.0,
-      "totalReturnPct": -3.08,
-      "positionsUsed": 4,
+      "totalEquity": 970376.0,
+      "cash": 779281.0,
+      "investedValue": 191095.0,
+      "unrealizedPnl": -5451.0,
+      "realizedPnl": -24173.0,
+      "totalPnl": -29624.0,
+      "totalReturnPct": -2.96,
+      "positionsUsed": 2,
       "positionsMax": 10,
-      "cashPct": 68.65,
-      "dayPnl": -430.0
+      "cashPct": 80.31,
+      "dayPnl": 0.0
     },
     "activePositions": [
-      {
-        "code": "002046",
-        "name": "国机精工",
-        "entryDate": "2026-03-09",
-        "entryPrice": 50.73,
-        "currentPrice": 50.73,
-        "pnl_pct": 0.0,
-        "stopLoss": 48.19,
-        "currentStop": 48.19,
-        "targetPrice": 63.0,
-        "status": "active",
-        "sector": "通用设备",
-        "shares": 900,
-        "allocation_pct": 5,
-        "allocatedCapital": 45657.0,
-        "currentValue": 45657.0,
-        "unrealizedPnl": 0.0,
-        "weight_pct": 4.71
-      },
-      {
-        "code": "002895",
-        "name": "川恒股份",
-        "entryDate": "2026-03-09",
-        "entryPrice": 41.21,
-        "currentPrice": 41.71,
-        "pnl_pct": 1.21,
-        "stopLoss": 39.15,
-        "currentStop": 39.15,
-        "targetPrice": 50.73,
-        "status": "active",
-        "sector": "磷肥及磷化工",
-        "shares": 1600,
-        "allocation_pct": 7,
-        "allocatedCapital": 65936.0,
-        "currentValue": 66736.0,
-        "unrealizedPnl": 800.0,
-        "weight_pct": 6.89
-      },
       {
         "code": "600096",
         "name": "云天化",
         "entryDate": "2026-02-26",
         "entryPrice": 44.05,
-        "currentPrice": 42.19,
-        "pnl_pct": -4.22,
+        "currentPrice": 42.22,
+        "pnl_pct": -4.15,
         "stopLoss": 39.6,
         "currentStop": 39.6,
         "targetPrice": 52.0,
@@ -79,17 +41,17 @@
         "shares": 2200,
         "allocation_pct": 10,
         "allocatedCapital": 96910.0,
-        "currentValue": 92818.0,
-        "unrealizedPnl": -4092.0,
-        "weight_pct": 9.58
+        "currentValue": 92884.0,
+        "unrealizedPnl": -4026.0,
+        "weight_pct": 9.57
       },
       {
         "code": "600499",
         "name": "科达制造",
         "entryDate": "2026-02-25",
         "entryPrice": 17.48,
-        "currentPrice": 17.31,
-        "pnl_pct": -0.97,
+        "currentPrice": 17.23,
+        "pnl_pct": -1.43,
         "stopLoss": 15.7,
         "currentStop": 15.7,
         "targetPrice": 21.0,
@@ -98,94 +60,13 @@
         "shares": 5700,
         "allocation_pct": 10,
         "allocatedCapital": 99636.0,
-        "currentValue": 98667.0,
-        "unrealizedPnl": -969.0,
-        "weight_pct": 10.18
+        "currentValue": 98211.0,
+        "unrealizedPnl": -1425.0,
+        "weight_pct": 10.12
       }
     ]
   },
   "active_positions": {
-    "002046": {
-      "code": "002046",
-      "name": "国机精工",
-      "status": "active",
-      "thesis": "通用设备龙头(磨具磨料), 航天轴承市占率~90%, 商业航天催化. 03-05涨停+10%, 03-06接待34家机构调研(天风/中金/广发基金). 股东户数减少29%大资金买入. 行业自2025年11月以来持续走强.",
-      "entryDate": "2026-03-09",
-      "entryPrice": 50.73,
-      "targetPrice": 63.0,
-      "stopLoss": 48.19,
-      "currentStop": 48.19,
-      "allocation_pct": 5,
-      "shares": 900,
-      "allocatedCapital": 45657.0,
-      "rating": 2,
-      "rps120": 91.03,
-      "sector": "通用设备",
-      "catalysts": [],
-      "sourceWatchlist": "2026-03-09",
-      "history": [
-        {
-          "date": "2026-03-09",
-          "price": 50.73,
-          "change_pct": 0,
-          "action": "OPEN",
-          "note": "LLM开仓 国机精工"
-        }
-      ],
-      "exitDate": null,
-      "exitPrice": null,
-      "exitReason": null,
-      "returnPct": null,
-      "holdingDays": null,
-      "lessonLearned": null,
-      "createdAt": "2026-03-09T14:17:47.416346+08:00",
-      "updatedAt": "2026-03-09T14:17:47.416350+08:00",
-      "trackerVersion": "2.1"
-    },
-    "002895": {
-      "code": "002895",
-      "name": "川恒股份",
-      "status": "active",
-      "thesis": "磷化工高成长龙头, 磷矿330万吨权益产能+氟化工新增长极, 净利+37%高增, score_company=8.8极高, 0风险, PE仅20倍(磷化工中最合理), 中东冲突推高化肥需求预期",
-      "entryDate": "2026-03-09",
-      "entryPrice": 41.21,
-      "targetPrice": 50.73,
-      "stopLoss": 39.15,
-      "currentStop": 39.15,
-      "allocation_pct": 7,
-      "shares": 1600,
-      "allocatedCapital": 65936.0,
-      "rating": 2,
-      "rps120": 90.0,
-      "sector": "磷肥及磷化工",
-      "catalysts": [],
-      "sourceWatchlist": "2026-03-09",
-      "history": [
-        {
-          "date": "2026-03-09",
-          "price": 41.21,
-          "change_pct": 0,
-          "action": "OPEN",
-          "note": "LLM开仓 川恒股份"
-        },
-        {
-          "date": "2026-03-09",
-          "price": 41.71,
-          "change_pct": 1.21,
-          "action": "HOLD",
-          "note": "Day 1 position. Sector (磷化工/农化制品) is HOT — international phosphate fertilizer >$700/ton 3yr high, Middle East conflict boosting ag commodity demand. Price ¥41.71 vs entry ¥41.21, PnL +1.2%. V2 stop at ¥39.15 (original) = -5.0% from entry. Thesis fully intact: 0 risk factors, revenue +46%, net profit +52%, score_company 8.8."
-        }
-      ],
-      "exitDate": null,
-      "exitPrice": null,
-      "exitReason": null,
-      "returnPct": null,
-      "holdingDays": null,
-      "lessonLearned": null,
-      "createdAt": "2026-03-09T12:28:22.309993+08:00",
-      "updatedAt": "2026-03-09T14:17:47.411960+08:00",
-      "trackerVersion": "2.1"
-    },
     "600096": {
       "code": "600096",
       "name": "云天化",
@@ -226,7 +107,35 @@
           "price": 43.99,
           "change_pct": -0.14,
           "action": "HOLD",
+          "note": "持仓第3个交易日：今日-0.86%微跌，现价43.99，总PnL从+0.54%回落至-0.14%。止损39.60(距10.0%)/目标52.00均未触及。化工板块今日分化(中东冲突推升油价但磷化工受影响有限)。继续持有观察"
+        },
+        {
+          "date": "2026-03-02",
+          "price": 43.99,
+          "change_pct": -0.14,
+          "action": "HOLD",
+          "note": "持仓第3个交易日：今日-0.86%小幅回调(磷化工板块今日调整)，现价43.99，总PnL=-0.14%。止损39.60(距10.0%)/目标52.00均未触及。中东冲突推高大宗商品但磷化工今日未跟涨。thesis有效，仍在初期，继续持有"
+        },
+        {
+          "date": "2026-03-02",
+          "price": 43.99,
+          "change_pct": -0.14,
+          "action": "HOLD",
           "note": "持仓第3个交易日，现价43.99，PnL=-0.14%。止损39.60(距10.0%)/目标52.00均未触及。磷化工龙头thesis有效，美国将磷列为战略资源是新增催化。今日-0.86%小幅回调属正常。仍处开仓初期，耐心等待催化发酵"
+        },
+        {
+          "date": "2026-03-03",
+          "price": 41.05,
+          "change_pct": -6.81,
+          "action": "HOLD",
+          "note": ""
+        },
+        {
+          "date": "2026-03-03",
+          "price": 41.18,
+          "change_pct": -6.52,
+          "action": "HOLD",
+          "note": "持仓第4个交易日，今日大跌-6.81%至¥41.05(收盘¥41.18)。PnL从-0.14%恶化至-6.81%。止损¥39.60距3.5%已偏近但未触及。磷化工板块今日遭到集体抛售(六国化工触及跌停、云天化-6.39%)，但行业thesis(磷肥走强+ROE25%+合同负债+36%)仍有效。这是开仓初期的系统性回调，且LEARNINGS#13提示我们入场时近5日累计涨幅已偏高——今日回调部分是超买修正。止损未触及则继续持有，但需密切关注¥39.60。"
         },
         {
           "date": "2026-03-03",
@@ -247,14 +156,28 @@
           "price": 40.7,
           "change_pct": -7.6,
           "action": "HOLD",
+          "note": "持仓第6个交易日，现价¥40.70(-0.02%)，PnL=-7.60%。止损¥39.60距2.8%——逼近止损线但尚未触及。磷化工龙头thesis有效(ROE25%+合同负债21亿+36%+磷肥板块趋势向上，8亮点2风险)。今日磷化工板块分化(云天化创24月新高后回落，川恒创历史新高+8.9%)。PnL恶化主要因03-03系统性暴跌后尚未修复。今日大盘+0.64%~+1.72%普涨但磷化工未跟上。根据LEARNINGS#13(入场时近5日涨幅偏高)，当前回调属超买修正。止损¥39.60是硬线——跌破即执行。"
+        },
+        {
+          "date": "2026-03-05",
+          "price": 40.7,
+          "change_pct": -7.6,
+          "action": "HOLD",
+          "note": "持仓第6个交易日，现价¥40.70(-0.02%)，PnL=-7.60%。⚠️ 止损¥39.60距仅2.7%(触发stop_proximity规则)。磷化工龙头thesis仍然有效(ROE25%+合同负债21亿+36%+行业趋势向上，8亮点2风险)。今日川恒股份创历史新高+8.9%说明磷化工板块仍有强势标的。PnL恶化主要源于03-03系统性暴跌后尚未修复(LEARNINGS#13:入场时近5日涨幅偏高导致超买修正)。止损¥39.60是硬线——跌破即执行，绝不犹豫。但在未触发止损前，仍处开仓初期，给予板块修复时间。"
+        },
+        {
+          "date": "2026-03-05",
+          "price": 40.7,
+          "change_pct": -7.6,
+          "action": "HOLD",
           "note": "持仓第6个交易日，PnL=-7.60%。⚠️ 止损¥39.60距仅2.7%(触发stop_proximity规则)。磷化工龙头thesis仍有效(ROE25%+合同负债21亿+36%+行业趋势向上，8亮点2风险)。web_fetch确认磷化工板块近日资金面略有降温+季节性波动，但基本面未变(川恒股份同板块创历史新高+8.9%)。根据LEARNINGS#13入场时近5日累计涨幅偏高导致超买修正。止损¥39.60是硬线——跌破即执行，绝不犹豫。但在未触发前，仍处开仓初期给予板块修复时间。"
         },
         {
           "date": "2026-03-09",
-          "price": 42.19,
-          "change_pct": -4.22,
+          "price": 42.22,
+          "change_pct": -4.15,
           "action": "HOLD",
-          "note": "Day 8. Sector HOT. Price ¥42.19 vs entry ¥44.05, PnL -4.22%. V2 stop = ¥41.85 (-5% from entry). Today's low ¥41.84 TOUCHED the V2 stop intraday but closed at ¥42.19 above it. CRITICAL: if tomorrow opens below ¥41.85 or breaks ¥41.84 intraday again, SELL immediately. Phosphate sector fundamentals remain strong (ROE 25%, contract liabilities +36%, international phosphate >$700/ton). Giving one more day given sector is hot and intraday recovery from low."
+          "note": "Day 8, PnL = -4.15% (entry ¥44.05, current ¥42.22). V2 hard stop at -5% = ¥41.85, current price 0.9% above stop. Sector (农化制品/磷化工) trending up since Apr 2025, adjacent to today's hot 农产品加工 (+2.91%). Middle East conflict → food security → fertilizer demand logic intact. Today flat 0.00% in a -0.6% market = relative strength. ROE 25% industry leader, 合同负债21亿+36%. Tightening stop to ¥41.85 (V2 -5% hard stop). If breached tomorrow, SELL immediately with zero hesitation."
         }
       ],
       "exitDate": null,
@@ -264,7 +187,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-02-26T14:48:00+08:00",
-      "updatedAt": "2026-03-09T14:17:47.414408+08:00",
+      "updatedAt": "2026-03-09T14:33:28.147456+08:00",
       "trackerVersion": "2.0"
     },
     "600499": {
@@ -314,7 +237,35 @@
           "price": 17.68,
           "change_pct": 1.14,
           "action": "HOLD",
+          "note": "持仓第4个交易日：今日-1.72%小幅回调，现价17.68，总PnL从+2.97%回落至+1.14%。止损15.70(距11.2%)/目标21.00均未触及。watchlist升级为BUY/high(confidence从medium升级)。重组催化+海外建材+碳酸锂三重驱动仍有效。继续持有"
+        },
+        {
+          "date": "2026-03-02",
+          "price": 17.68,
+          "change_pct": 1.14,
+          "action": "HOLD",
+          "note": "持仓第5个交易日：今日-1.72%回调，现价17.68，总PnL=+1.14%。止损15.70(距11.2%)/目标21.00均未触及。海外建材thesis有效，走势稳健。继续持有"
+        },
+        {
+          "date": "2026-03-02",
+          "price": 17.68,
+          "change_pct": 1.14,
+          "action": "HOLD",
           "note": "持仓第5个交易日，现价17.68，PnL=+1.14%。止损15.70(距11.2%)/目标21.00均未触及。海外建材thesis有效(重组+海外营收+73.6%+净利润+156%)。今日-1.72%属正常回调。继续持有"
+        },
+        {
+          "date": "2026-03-03",
+          "price": 16.38,
+          "change_pct": -6.29,
+          "action": "HOLD",
+          "note": ""
+        },
+        {
+          "date": "2026-03-03",
+          "price": 16.4,
+          "change_pct": -6.18,
+          "action": "HOLD",
+          "note": "持仓第6个交易日，今日大跌-6.29%至¥16.38(收盘¥16.40)。PnL从+1.14%恶化至-6.29%。止损¥15.70距4.3%偏近但未触及。海外建材thesis有效(重组+海外营收+73.6%+净利润+156%)，8亮点1风险。今日是市场系统性下跌。继续持有但密切关注止损线。"
         },
         {
           "date": "2026-03-03",
@@ -335,14 +286,28 @@
           "price": 16.89,
           "change_pct": -3.38,
           "action": "HOLD",
+          "note": "持仓第7个交易日(从02-25计)，现价¥16.89(0.00%平盘)，PnL=-3.37%。止损¥15.70距7.0%，目标¥21.00距24.3%。海外建材thesis有效(重组收购特福国际+海外营收+73.6%+净利润+156%)。8亮点1风险，RPS120=87.1%仍在理想区间。今日平盘说明抛压已减轻(前几日-5%~-6%大跌后企稳)。仍处开仓初期，耐心等待重组催化发酵。LEARNINGS#15提示催化发酵可能>10天。"
+        },
+        {
+          "date": "2026-03-05",
+          "price": 16.89,
+          "change_pct": -3.38,
+          "action": "HOLD",
+          "note": "持仓第7个交易日(从02-25计)，现价¥16.89(平盘)，PnL=-3.37%。止损¥15.70距7.0%，目标¥21.00距24.3%。海外建材thesis有效(重组收购特福国际+海外营收+73.6%+净利润+156%)。8亮点1风险，RPS120=87.1%仍在理想区间。今日平盘说明03-03暴跌后抛压已明显减轻，正在筑底。重组催化+碳酸锂涨价双重催化(芝士数据提到锂价提升利好蓝科锂业)。LEARNINGS#15提示催化发酵可能>10天，耐心等待。"
+        },
+        {
+          "date": "2026-03-05",
+          "price": 16.89,
+          "change_pct": -3.38,
+          "action": "HOLD",
           "note": "持仓第7个交易日，PnL=-3.38%。海外建材thesis有效——web_fetch确认重大资产重组收购特福国际少数股权1月14日已公告(发行股份+支付现金)，构成重大资产重组。海外营收+73.6%+净利润+156%基本面强劲。RPS120=87.1%在理想区间。今日平盘说明03-03暴跌后抛压已减轻正在筑底。止损¥15.70距7.0%安全。LEARNINGS#15提示催化发酵可能>10天，耐心等待重组落地。"
         },
         {
           "date": "2026-03-09",
-          "price": 17.31,
-          "change_pct": -0.97,
+          "price": 17.23,
+          "change_pct": -1.43,
           "action": "HOLD",
-          "note": "Day 9. Price ¥17.31 vs entry ¥17.48, PnL -0.97%. V2 stop = ¥16.61 (-5% from entry), distance 4.2% safe. Today +1.05% showing recovery. Restructuring catalyst (特福国际 51.55% acquisition) progressing — audit/evaluation work ongoing per latest filings. Net profit +119%, 8 highlights 1 risk. Sector (专用设备) trending up since Nov 2025. TIME STOP CHECK: 9 of 10 days used, need >3% gain by tomorrow or time stop triggers. Current PnL -0.97% is below +3% threshold. Will evaluate tomorrow — if still <3% at day 10, must SELL per V2 rules."
+          "note": "Day 9, PnL = -1.43% (entry ¥17.48, current ¥17.23). Stop ¥16.61 (-5% hard stop). Sector (专用设备) trending up since Nov 2025. Today only -0.17% in -0.6% market = decent relative strength. Thesis intact: 重组收购特福国际 + 海外建材+73.6% + 碳酸锂涨价利好蓝科锂业 (8 highlights, 1 risk). CRITICAL: Day 10 tomorrow - V2 Rule 5 time stop check. Need >3% gain (¥18.00) by tomorrow to avoid time stop. Currently -1.43% so very likely triggers. Prepare exit plan for tomorrow if no recovery."
         }
       ],
       "exitDate": null,
@@ -352,7 +317,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-02-25T14:22:00+08:00",
-      "updatedAt": "2026-03-09T14:17:47.415528+08:00",
+      "updatedAt": "2026-03-09T14:33:28.148921+08:00",
       "trackerVersion": "2.0"
     }
   },
@@ -377,8 +342,8 @@
       "entryDate": "2026-02-10",
       "exitDate": "2026-03-09",
       "entryPrice": 55.39,
-      "exitPrice": 50.5,
-      "returnPct": -8.83,
+      "exitPrice": 51.79,
+      "returnPct": -6.5,
       "holdingDays": 27,
       "sector": "散热材料",
       "lessonLearned": ""

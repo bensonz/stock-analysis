@@ -3,40 +3,39 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1773036870.1437,
+      "start": 1773037672.6975622,
       "errors": [],
-      "end": 1773036940.0859149,
-      "duration_sec": 69.9
+      "end": 1773037756.495786,
+      "duration_sec": 83.8
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 11051,
+      "response_size_bytes": 11622,
       "tokens": {
-        "input_tokens": 413564,
-        "output_tokens": 4996
+        "input_tokens": 817655,
+        "output_tokens": 10470
       },
-      "rounds": 4,
-      "tool_calls_count": 7,
-      "duration_sec": 127.3
+      "rounds": 8,
+      "tool_calls_count": 27,
+      "duration_sec": 251.6
     },
     {
       "phase": "apply",
-      "start": 1773037067.4115572,
+      "start": 1773038008.143292,
       "actions": [
-        "OPEN 002046",
-        "ERROR OPEN 002128: unsupported operand type(s) for //: 'float' and 'NoneType'",
+        "SELL 300684",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
         "Updated LEARNINGS.md"
       ],
-      "end": 1773037067.54187,
+      "end": 1773038008.271432,
       "duration_sec": 0.1
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 197.3
+    "totalDurationSec": 335.5
   }
 }
