@@ -718,3 +718,9 @@
 - Middle East conflict oil spike creates extreme sector rotation — oil/gas/coal/gold rally while EVERYTHING else (especially tech/growth) gets dumped. Breadth 870:4556 with only resource stocks up. This type of event should trigger a 'resource-only' regime flag that prevents ALL non-resource new entries.
 - Today confirmed V2's sector-first approach is correct. Having 0/3 positions in hot sectors during a resource spike means portfolio suffers (-6216 day PnL). Future portfolio construction should maintain at least 1 position in resource/commodity sector as a hedge against geopolitical events.
 - 中石科技 held 19 days ending at -8.83% is a V2 violation — should have been cut at -5% per Rule 5 hard stop. The V1 habits of 'thesis still valid, hold losers' directly caused this loss to widen from -5% to -8.83%. V2's -5% stop is right. Execute it.
+
+### 自动更新 (2026-03-09)
+
+- [W11] V2止损规则首次执行: 中石科技持仓19天PnL=-8.83%, 远超V2的-5%硬止损。V1框架下因'thesis valid'一直持有(止损¥50未触发), 但V2的价格纪律要求更早退出。如果在-5%(¥52.62)时退出, 可少亏3.83pp。教训: 价格纪律>thesis conviction。
+- [W11] 磷化工板块在中东冲突+粮价预期下展现韧性——云天化虽然从高点回调, 但国际磷肥$700/吨是硬支撑。川恒股份创历史新高¥44.75验证板块强势。磷化工=资源品中的结构性成长(供给受限+需求刚性), 不同于油气的纯脉冲驱动。
+- [W11] 地缘冲突(中东)对A股传导路径持续验证: 油气>黄金>化工品>资源股。03-02三桶油首次同日连板是极端信号。但资源品暴涨后追高不是好策略(LEARNINGS#10), 应在之前布局或等回调。今日不追赤峰黄金/西部矿业, 而是选择有结构性成长的川恒股份。

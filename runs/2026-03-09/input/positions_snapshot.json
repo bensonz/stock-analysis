@@ -1,0 +1,407 @@
+{
+  "snapshot_time": "2026-03-09T12:24:29.000157+08:00",
+  "snapshot_type": "pre_run",
+  "date": "2026-03-09",
+  "portfolio_config": {
+    "starting_capital": 1000000,
+    "max_position_pct": 10,
+    "max_positions": 10,
+    "created": "2026-02-03",
+    "currency": "CNY"
+  },
+  "positions_json": {
+    "lastUpdated": "2026-03-09T12:23:40.473398+08:00",
+    "portfolio": {
+      "startingCapital": 1000000,
+      "totalEquity": 982307.0,
+      "cash": 686059.0,
+      "investedValue": 296248.0,
+      "unrealizedPnl": 0.0,
+      "realizedPnl": -17693.0,
+      "totalPnl": -17693.0,
+      "totalReturnPct": -1.77,
+      "positionsUsed": 3,
+      "positionsMax": 10,
+      "cashPct": 69.84,
+      "dayPnl": 0.0
+    },
+    "activePositions": [
+      {
+        "code": "300684",
+        "name": "中石科技",
+        "entryDate": "2026-02-10",
+        "entryPrice": 55.39,
+        "currentPrice": 55.39,
+        "pnl_pct": 0.0,
+        "stopLoss": 50.0,
+        "currentStop": 50.0,
+        "targetPrice": 66.0,
+        "status": "active",
+        "sector": "散热材料",
+        "shares": 1800,
+        "allocation_pct": 10,
+        "allocatedCapital": 99702.0,
+        "currentValue": 99702.0,
+        "unrealizedPnl": 0.0,
+        "weight_pct": 10.15
+      },
+      {
+        "code": "600096",
+        "name": "云天化",
+        "entryDate": "2026-02-26",
+        "entryPrice": 44.05,
+        "currentPrice": 44.05,
+        "pnl_pct": 0.0,
+        "stopLoss": 39.6,
+        "currentStop": 39.6,
+        "targetPrice": 52.0,
+        "status": "active",
+        "sector": "磷化工",
+        "shares": 2200,
+        "allocation_pct": 10,
+        "allocatedCapital": 96910.0,
+        "currentValue": 96910.0,
+        "unrealizedPnl": 0.0,
+        "weight_pct": 9.87
+      },
+      {
+        "code": "600499",
+        "name": "科达制造",
+        "entryDate": "2026-02-25",
+        "entryPrice": 17.48,
+        "currentPrice": 17.48,
+        "pnl_pct": 0.0,
+        "stopLoss": 15.7,
+        "currentStop": 15.7,
+        "targetPrice": 21.0,
+        "status": "active",
+        "sector": "建材",
+        "shares": 5700,
+        "allocation_pct": 10,
+        "allocatedCapital": 99636.0,
+        "currentValue": 99636.0,
+        "unrealizedPnl": 0.0,
+        "weight_pct": 10.14
+      }
+    ]
+  },
+  "active_positions": {
+    "300684": {
+      "code": "300684",
+      "name": "中石科技",
+      "status": "active",
+      "thesis": "AI散热材料龙头，业绩超预期(净利润+64%~84%)，RPS120=91.2%在理想区间，受益北美大客户新品及AI散热需求，8亮点0风险",
+      "entryDate": "2026-02-10",
+      "entryPrice": 55.39,
+      "targetPrice": 66.0,
+      "stopLoss": 50.0,
+      "currentStop": 50.0,
+      "rating": 3,
+      "rps120": 91.2,
+      "sector": "散热材料",
+      "catalysts": [
+        "2025业绩预告超预期(净利润+64%~84%)",
+        "北美大客户新品放量",
+        "AI散热需求持续增长"
+      ],
+      "sourceWatchlist": "2026-02-10",
+      "history": [
+        {
+          "date": "2026-02-10",
+          "price": 55.39,
+          "change_pct": 0,
+          "action": "OPEN",
+          "note": "从2026-02-10 watchlist开仓，BUY推荐，confidence=high，RPS91.2%理想区间，8亮点0风险，AI散热赛道龙头"
+        },
+        {
+          "date": "2026-02-11",
+          "price": 55.03,
+          "change_pct": -0.65,
+          "action": "HOLD",
+          "note": "持仓第2天：今日+0.47%小幅震荡，现价55.03，总PnL=-0.65%。止损50/目标66均未触及。今日watchlist再次给出BUY推荐(confidence=high)，确认thesis有效，继续持有"
+        },
+        {
+          "date": "2026-02-13",
+          "price": 57.39,
+          "change_pct": 3.61,
+          "action": "HOLD",
+          "note": "持仓第4天：盘中57.39，今日-1.73%小幅回调，总PnL=+3.61%。止损50/目标66均未触及，gain<10%不提止损。watchlist再次BUY/high确认thesis，继续持有"
+        },
+        {
+          "date": "2026-02-24",
+          "price": 52.55,
+          "change_pct": -5.13,
+          "action": "HOLD",
+          "note": "持仓第10个交易日：今日-3.88%较大回调，现价52.55，总PnL=-5.13%。止损50.00未触及(距5.1%)，目标66.00未触及。watchlist仍给BUY/high，thesis有效(AI散热+北美大客户)。回调幅度较大需密切关注止损位，但未触发任何退出条件，继续持有"
+        },
+        {
+          "date": "2026-02-25",
+          "price": 56.42,
+          "change_pct": 1.86,
+          "action": "HOLD",
+          "note": "持仓第11个交易日：今日+2.94%强势反弹，现价56.42，总PnL从-5.13%大幅改善至+1.86%。止损50.00/目标66.00均未触及。watchlist继续BUY确认(9亮点0风险)，AI散热thesis得到验证，反弹趋势良好，继续持有"
+        },
+        {
+          "date": "2026-02-26",
+          "price": 59.91,
+          "change_pct": 8.16,
+          "action": "HOLD",
+          "note": "持仓第12个交易日：今日+5.75%大涨！现价59.91，总PnL从+1.86%跃升至+8.16%。止损50.00/目标66.00均未触及。Gain接近10%但尚未到，暂不提止损。watchlist BUY/high确认，英伟达算力+AI散热催化强劲，连续2日大涨趋势确立，继续持有"
+        },
+        {
+          "date": "2026-02-27",
+          "price": 57.82,
+          "change_pct": 4.39,
+          "action": "HOLD",
+          "note": "持仓第13个交易日：今日-3.47%连续2日回调(AI散热板块今日退潮)，现价57.82，总PnL从+8.16%回落至+4.39%。止损50.00(距13.5%)/目标66.00均未触及。watchlist今日BUY/high确认(9亮点0风险)，回调属正常获利回吐非趋势逆转。继续持有"
+        },
+        {
+          "date": "2026-03-02",
+          "price": 58.06,
+          "change_pct": 4.82,
+          "action": "HOLD",
+          "note": "持仓第15个交易日，现价58.06，PnL=+4.82%。止损50.00(距13.9%)/目标66.00(距13.7%)均未触及。AI散热thesis持续有效(9亮点0风险)，今日+0.47%窄幅整理健康。距time_decay(20天)还有5天，但PnL接近5%阈值，若本周突破5%可长期持有"
+        },
+        {
+          "date": "2026-03-03",
+          "price": 54.01,
+          "change_pct": -2.49,
+          "action": "HOLD",
+          "note": "持仓第15个交易日，现价58.06，PnL=+4.82%。止损50.00(距13.9%)/目标66.00(距13.7%)均未触及。AI散热thesis持续有效(9亮点0风险)，今日+0.47%窄幅整理健康。距time_decay(20天)还有5天，但PnL接近5%阈值，若本周突破5%可长期持有"
+        },
+        {
+          "date": "2026-03-04",
+          "price": 53.68,
+          "change_pct": -3.09,
+          "action": "HOLD",
+          "note": "持仓第17个交易日，现价¥53.68(+0.11%)，PnL=-3.09%。止损¥50.00距6.9%，目标¥66.00距23.0%。AI散热thesis有效(9亮点0风险)，北美大客户+AI散热需求未变。03-03系统性大跌后今日微涨企稳。虽已接近time_decay(20天)阈值，但根据LEARNINGS#15(催化发酵期>10天)和#18(催化剂例外)，AI散热赛道催化持续，不急于退出。密切关注¥52关键支撑。"
+        },
+        {
+          "date": "2026-03-05",
+          "price": 53.95,
+          "change_pct": -2.6,
+          "action": "HOLD",
+          "note": "持仓第18个交易日，PnL=-2.60%。AI散热thesis强劲——热模组零部件已批量供货服务器厂商，液冷散热推进中，2026年在手订单充足+产能利用率高位。RPS120=89.0%仍在理想区间，9亮点0风险。止损¥50.00距7.3%安全。接近time_decay阈值(20天)但根据LEARNINGS#15(催化发酵期>10天)和#18(催化剂例外)，AI散热赛道催化持续有效——web_fetch确认公司最新表示2026年新项目大规模交付具备较强可持续性。再给2个交易日观察，若03-09仍无改善则重新评估。"
+        }
+      ],
+      "exitDate": null,
+      "exitPrice": null,
+      "exitReason": null,
+      "returnPct": null,
+      "holdingDays": null,
+      "lessonLearned": null,
+      "createdAt": "2026-02-10T14:16:00+08:00",
+      "updatedAt": "2026-03-05T16:32:23.740057+08:00",
+      "trackerVersion": "2.0"
+    },
+    "600096": {
+      "code": "600096",
+      "name": "云天化",
+      "status": "active",
+      "thesis": "磷化工龙头，ROE 25%极高，RPS120=91.4%理想区间，磷肥磷化工板块持续走强，产能扩张+订单充足(合同负债21亿+36%)，股息3.2%",
+      "entryDate": "2026-02-26",
+      "entryPrice": 44.05,
+      "targetPrice": 52.0,
+      "stopLoss": 39.6,
+      "currentStop": 39.6,
+      "rating": 3,
+      "rps120": 91.4,
+      "sector": "磷化工",
+      "catalysts": [
+        "磷肥磷化工板块持续走强",
+        "ROE 25%行业龙头",
+        "产能扩张(在建6.6%)",
+        "合同负债21亿+36%订单充足"
+      ],
+      "sourceWatchlist": "2026-02-26",
+      "history": [
+        {
+          "date": "2026-02-26",
+          "price": 44.05,
+          "change_pct": 0,
+          "action": "OPEN",
+          "note": "从2026-02-26 watchlist开仓，BUY推荐confidence=medium，RPS120=91.4%理想区间(接近上限)，8亮点1风险(重资产)。昨日因涨+9.1%跳过，今日+1.73%回归正常可入场。ROE 25%极高+行业龙头溢价(参考LEARNINGS龙头教训)。止损设在前低¥39.60(-10%)，目标¥52.00(+18%)"
+        },
+        {
+          "date": "2026-02-27",
+          "price": 44.29,
+          "change_pct": 0.54,
+          "action": "HOLD",
+          "note": "持仓第2个交易日：今日-0.58%小幅回调，现价44.29，总PnL=+0.54%。止损39.60(距10.6%)/目标52.00均未触及。磷化工板块今日平稳，继续观察"
+        },
+        {
+          "date": "2026-03-02",
+          "price": 43.99,
+          "change_pct": -0.14,
+          "action": "HOLD",
+          "note": "持仓第3个交易日，现价43.99，PnL=-0.14%。止损39.60(距10.0%)/目标52.00均未触及。磷化工龙头thesis有效，美国将磷列为战略资源是新增催化。今日-0.86%小幅回调属正常。仍处开仓初期，耐心等待催化发酵"
+        },
+        {
+          "date": "2026-03-03",
+          "price": 41.18,
+          "change_pct": -6.52,
+          "action": "HOLD",
+          "note": "持仓第3个交易日，现价43.99，PnL=-0.14%。止损39.60(距10.0%)/目标52.00均未触及。磷化工龙头thesis有效，美国将磷列为战略资源是新增催化。今日-0.86%小幅回调属正常。仍处开仓初期，耐心等待催化发酵"
+        },
+        {
+          "date": "2026-03-04",
+          "price": 40.92,
+          "change_pct": -7.11,
+          "action": "HOLD",
+          "note": "持仓第5个交易日，现价¥40.92(-0.02%)，PnL=-7.11%。止损¥39.60距3.3%偏近但未触及。磷化工龙头thesis有效(ROE25%+合同负债+36%+磷肥板块趋势向上)。03-03磷化工板块集体暴跌(六国化工跌停)后今日小幅企稳。8亮点2风险基本面稳健。PnL恶化但属开仓初期+系统性回调叠加。止损未触发继续持有，但¥39.60是硬止损线。"
+        },
+        {
+          "date": "2026-03-05",
+          "price": 40.7,
+          "change_pct": -7.6,
+          "action": "HOLD",
+          "note": "持仓第6个交易日，PnL=-7.60%。⚠️ 止损¥39.60距仅2.7%(触发stop_proximity规则)。磷化工龙头thesis仍有效(ROE25%+合同负债21亿+36%+行业趋势向上，8亮点2风险)。web_fetch确认磷化工板块近日资金面略有降温+季节性波动，但基本面未变(川恒股份同板块创历史新高+8.9%)。根据LEARNINGS#13入场时近5日累计涨幅偏高导致超买修正。止损¥39.60是硬线——跌破即执行，绝不犹豫。但在未触发前，仍处开仓初期给予板块修复时间。"
+        }
+      ],
+      "exitDate": null,
+      "exitPrice": null,
+      "exitReason": null,
+      "returnPct": null,
+      "holdingDays": null,
+      "lessonLearned": null,
+      "createdAt": "2026-02-26T14:48:00+08:00",
+      "updatedAt": "2026-03-05T16:32:23.740890+08:00",
+      "trackerVersion": "2.0"
+    },
+    "600499": {
+      "code": "600499",
+      "name": "科达制造",
+      "status": "active",
+      "thesis": "海外建材龙头，重大资产重组收购特福国际，海外建材2025营收82亿+73.6%增长，净利润+156%，RPS120=87.5%在理想加速区，8亮点仅1风险",
+      "entryDate": "2026-02-25",
+      "entryPrice": 17.48,
+      "targetPrice": 21.0,
+      "stopLoss": 15.7,
+      "currentStop": 15.7,
+      "rating": 3,
+      "rps120": 87.5,
+      "sector": "建材",
+      "catalysts": [
+        "重大资产重组收购特福国际",
+        "海外建材营收+73.6%",
+        "净利润+156%",
+        "机构买入评级"
+      ],
+      "sourceWatchlist": "2026-02-25",
+      "history": [
+        {
+          "date": "2026-02-25",
+          "price": 17.48,
+          "change_pct": 0,
+          "action": "OPEN",
+          "note": "从2026-02-25 watchlist开仓，BUY推荐，RPS120=87.5%理想区间，8亮点1风险(大股东质押54%)，海外建材高增长+重组催化明确，今日+0.81%温和上涨非追高"
+        },
+        {
+          "date": "2026-02-26",
+          "price": 18.06,
+          "change_pct": 3.32,
+          "action": "HOLD",
+          "note": "持仓第2个交易日：今日+2.91%表现不错，现价18.06，总PnL=+3.32%。止损15.70/目标21.00均未触及。watchlist继续BUY/high确认(8亮点1风险)，海外建材+重组催化持续，继续持有"
+        },
+        {
+          "date": "2026-02-27",
+          "price": 18.0,
+          "change_pct": 2.97,
+          "action": "HOLD",
+          "note": "持仓第3个交易日：今日-0.06%几乎持平，现价18.00，总PnL=+2.97%。止损15.70(距12.8%)/目标21.00均未触及。watchlist继续BUY/medium确认，走势稳健"
+        },
+        {
+          "date": "2026-03-02",
+          "price": 17.68,
+          "change_pct": 1.14,
+          "action": "HOLD",
+          "note": "持仓第5个交易日，现价17.68，PnL=+1.14%。止损15.70(距11.2%)/目标21.00均未触及。海外建材thesis有效(重组+海外营收+73.6%+净利润+156%)。今日-1.72%属正常回调。继续持有"
+        },
+        {
+          "date": "2026-03-03",
+          "price": 16.4,
+          "change_pct": -6.18,
+          "action": "HOLD",
+          "note": "持仓第5个交易日，现价17.68，PnL=+1.14%。止损15.70(距11.2%)/目标21.00均未触及。海外建材thesis有效(重组+海外营收+73.6%+净利润+156%)。今日-1.72%属正常回调。继续持有"
+        },
+        {
+          "date": "2026-03-04",
+          "price": 16.52,
+          "change_pct": -5.49,
+          "action": "HOLD",
+          "note": "持仓第7个交易日，现价¥16.52(+0.24%)，PnL=-5.49%。止损¥15.70距5.0%。海外建材thesis有效(重组+海外营收+73.6%+净利润+156%)。03-03大跌后今日小幅反弹。8亮点1风险。仍处开仓初期，耐心等待重组催化发酵。"
+        },
+        {
+          "date": "2026-03-05",
+          "price": 16.89,
+          "change_pct": -3.38,
+          "action": "HOLD",
+          "note": "持仓第7个交易日，PnL=-3.38%。海外建材thesis有效——web_fetch确认重大资产重组收购特福国际少数股权1月14日已公告(发行股份+支付现金)，构成重大资产重组。海外营收+73.6%+净利润+156%基本面强劲。RPS120=87.1%在理想区间。今日平盘说明03-03暴跌后抛压已减轻正在筑底。止损¥15.70距7.0%安全。LEARNINGS#15提示催化发酵可能>10天，耐心等待重组落地。"
+        }
+      ],
+      "exitDate": null,
+      "exitPrice": null,
+      "exitReason": null,
+      "returnPct": null,
+      "holdingDays": null,
+      "lessonLearned": null,
+      "createdAt": "2026-02-25T14:22:00+08:00",
+      "updatedAt": "2026-03-05T16:32:23.741458+08:00",
+      "trackerVersion": "2.0"
+    }
+  },
+  "closed_positions": {
+    "300373": {
+      "code": "300373",
+      "name": "扬杰科技",
+      "status": "closed",
+      "entryDate": "2026-02-13",
+      "exitDate": "2026-03-03",
+      "entryPrice": 86.07,
+      "exitPrice": 79.0,
+      "returnPct": -8.21,
+      "holdingDays": 18,
+      "sector": "功率半导体",
+      "lessonLearned": "半导体涨价催化thesis需要验证业绩兑现周期。入场时RPS=88.4%合理但催化剂(MCU涨价)偏概念化，无明确业绩数据支撑。开仓后14天趋势持续恶化，说明入场时机不佳(02-13买入后连续回调)。教训：催化剂需更具体(如有明确涨价幅度/订单数据)，不能仅依赖行业趋势性判断。"
+    },
+    "600988": {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "status": "closed",
+      "entryDate": "2026-02-03",
+      "exitDate": "2026-02-27",
+      "entryPrice": 39.78,
+      "exitPrice": 39.98,
+      "returnPct": 0.5,
+      "holdingDays": 24,
+      "sector": "黄金",
+      "lessonLearned": "黄金股波动率极高(PnL从-7.79%到+3.92%再到+0.50%),持仓24天无明显趋势方向。LEARNINGS已确认黄金股不适合趋势交易。此外当watchlist评级从BUY降至WATCH后应更早考虑退出,不应等到时间止损才行动。"
+    },
+    "688002": {
+      "code": "688002",
+      "name": "睿创微纳",
+      "status": "closed",
+      "entryDate": "2026-02-03",
+      "exitDate": "2026-03-04",
+      "entryPrice": 114.65,
+      "exitPrice": 109.19,
+      "returnPct": -4.76,
+      "holdingDays": 29,
+      "sector": "半导体设备",
+      "lessonLearned": "突破关键阻力位后未能守住(¥120→¥109)是趋势恶化信号。time_decay规则对趋势型标的(非事件驱动型)仍然适用。延期观察的前提是动能在恢复，而非在恶化。"
+    },
+    "688630": {
+      "code": "688630",
+      "name": "芯碁微装",
+      "status": "closed",
+      "entryDate": "2026-03-02",
+      "exitDate": "2026-03-03",
+      "entryPrice": 201.72,
+      "exitPrice": 186.6,
+      "returnPct": -7.5,
+      "holdingDays": 1,
+      "sector": "半导体设备",
+      "lessonLearned": "IV Rank极低(12.2%)时不应开新仓，尤其是已经涨了8%的标的。LEARNINGS#10(等回调)和#13(检查多日累计涨幅)的组合应用：即使催化再强(+1522%)，在市场波动率极低+短期涨幅已大的情况下入场，遭遇系统性回调的损失会很大。新规则：当IV Rank<15%且候选标的5日涨幅>6%时，一律WATCH等回调，不开仓。"
+    }
+  }
+}

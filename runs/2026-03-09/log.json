@@ -1,0 +1,100 @@
+{
+  "date": "2026-03-09",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1773030268.999576,
+      "errors": [],
+      "end": 1773030357.079913,
+      "duration_sec": 88.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 6112,
+      "response_file": "/tmp/stock-llm-response.json",
+      "tokens": {
+        "input_tokens": 12500,
+        "output_tokens": 1500
+      }
+    },
+    {
+      "phase": "apply",
+      "start": 1773030502.304367,
+      "actions": [
+        "SELL 300684",
+        "OPEN 002895",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Updated LEARNINGS.md"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 5,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002895",
+                "name": "川恒股份",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 41.21,
+                "stopLoss": 39.15,
+                "distance_pct": 5.0,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1773030502.3934898,
+      "duration_sec": 0.1
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 002895 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 88.19999999999999
+  }
+}
