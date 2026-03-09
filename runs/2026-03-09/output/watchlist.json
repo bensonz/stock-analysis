@@ -2,16 +2,16 @@
   "date": "2026-03-09",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4099.485,
+      "value": 4099.619,
       "change_pct": -0.6
     },
     "shenzhen_component": {
-      "value": 14073.91,
-      "change_pct": -0.7
+      "value": 14081.51,
+      "change_pct": -0.64
     },
     "chinext": {
-      "value": 3209.61,
-      "change_pct": -0.61
+      "value": 3212.48,
+      "change_pct": -0.52
     },
     "sentiment": "bearish",
     "hot_sectors": [
@@ -28,12 +28,12 @@
       "化学纤维",
       "航运港口"
     ],
-    "notes": "CRISIS MODE. Breadth 0.37:1 deeply bearish (1440 up / 3937 down), 49涨停/8跌停. Middle East conflict escalating: Israel struck Iran oil facilities, Hormuz Strait effectively blocked, oil >$110 (analysts target $150). Global risk-off: Korea circuit breaker, Japan -3000pts, global stocks/bonds selling off. A-share indices all red (上证 -0.6%, 深证 -0.7%, 创业板 -0.61%, 科创50 -1.57%). Only energy/resources sectors positive (油气开采 +6.06%, 煤炭 +3.04%). 电网设备 逆势走强. Distribution skewed heavily negative: 2553 stocks down 0-2%, 1069 down 2-4% = broad grinding decline, not panic. IV Rank avg 19.2% LOW - market still complacent, vol expansion likely ahead. 300ETF IV Rank 13.4% = reduce new position sizing by 50% per IV rule. ACTION: SELL 中石科技 (time stop), tighten 云天化 stop to -5%, prepare 科达制造 exit for day-10 time stop tomorrow. NO NEW ENTRIES - cash is king in crisis regime. 70.7% cash is actually the right positioning today."
+    "notes": "Breadth 0.36:1 bearish (1412 up / 3968 down), 49涨停/8跌停. Distribution heavily skewed negative: 2551 stocks in f0_2 (slightly red), 1095 in f2_4. Only 461 stocks up >2%. Middle East crisis driving oil >$110 → oil/gas/coal/gold only green pockets. Global risk-off: Korea circuit breaker, global stocks/bonds selling. Shanghai -0.6%, Shenzhen -0.64%, ChiNext -0.52%, STAR50 -1.52%. IV context: avg IVRank 19.2%, 300ETF IVRank 13.4% (dangerously low pre-shock). Vol expansion now underway. Action: SELL 中石科技 (stop breached), tighten all stops to V2 -5% levels, ZERO new entries until breadth recovers above 1:1."
   },
   "strategy_scan": {
     "total_stocks_scanned": 76,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-03-09T14:33:28.151088+08:00"
+    "scan_time": "2026-03-09T14:34:00.740052+08:00"
   },
   "recommendations": [
     {
@@ -46,28 +46,19 @@
       "reasoning": ""
     },
     {
-      "code": "002155.SZ",
-      "name": "湖南黄金",
-      "price": null,
-      "rps120": 92.14,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "603619.SH",
-      "name": "中曼石油",
-      "price": null,
-      "rps120": 97.18,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
       "code": "603191.SH",
       "name": "望变电气",
       "price": null,
       "rps120": 94.48,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "002155.SZ",
+      "name": "湖南黄金",
+      "price": null,
+      "rps120": 92.14,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -91,19 +82,19 @@
       "reasoning": ""
     },
     {
-      "code": "002895.SZ",
-      "name": "川恒股份",
+      "code": "300285.SZ",
+      "name": "国瓷材料",
       "price": null,
-      "rps120": 90.87,
+      "rps120": 90.44,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "300018.SZ",
-      "name": "中元股份",
+      "code": "002046.SZ",
+      "name": "国机精工",
       "price": null,
-      "rps120": 92.73,
+      "rps120": 91.03,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -136,19 +127,19 @@
       "reasoning": ""
     },
     {
-      "code": "688200.SH",
-      "name": "华峰测控",
+      "code": "600988.SH",
+      "name": "赤峰黄金",
       "price": null,
-      "rps120": 85.4,
+      "rps120": 86.22,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "300285.SZ",
-      "name": "国瓷材料",
+      "code": "603619.SH",
+      "name": "中曼石油",
       "price": null,
-      "rps120": 90.44,
+      "rps120": 97.18,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -157,9 +148,9 @@
   "summary": {
     "total_scanned": 76,
     "buy_recommendations": 0,
-    "watch_recommendations": 13,
+    "watch_recommendations": 12,
     "avoid_recommendations": 0,
     "market_call": "防守",
-    "reasoning": "CRISIS MODE. Breadth 0.37:1 deeply bearish (1440 up / 3937 down), 49涨停/8跌停. Middle East conflict escalating: Israel struck Iran oil facilities, Hormuz Strait effectively blocked, oil >$110 (analysts target $150). Global risk-off: Korea circuit breaker, Japan -3000pts, global stocks/bonds selling off. A-share indices all red (上证 -0.6%, 深证 -0.7%, 创业板 -0.61%, 科创50 -1.57%). Only energy/resources sectors positive (油气开采 +6.06%, 煤炭 +3.04%). 电网设备 逆势走强. Distribution skewed heavily negative: 2553 stocks down 0-2%, 1069 down 2-4% = broad grinding decline, not panic. IV Rank avg 19.2% LOW - market still complacent, vol expansion likely ahead. 300ETF IV Rank 13.4% = reduce new position sizing by 50% per IV rule. ACTION: SELL 中石科技 (time stop), tighten 云天化 stop to -5%, prepare 科达制造 exit for day-10 time stop tomorrow. NO NEW ENTRIES - cash is king in crisis regime. 70.7% cash is actually the right positioning today."
+    "reasoning": "Breadth 0.36:1 bearish (1412 up / 3968 down), 49涨停/8跌停. Distribution heavily skewed negative: 2551 stocks in f0_2 (slightly red), 1095 in f2_4. Only 461 stocks up >2%. Middle East crisis driving oil >$110 → oil/gas/coal/gold only green pockets. Global risk-off: Korea circuit breaker, global stocks/bonds selling. Shanghai -0.6%, Shenzhen -0.64%, ChiNext -0.52%, STAR50 -1.52%. IV context: avg IVRank 19.2%, 300ETF IVRank 13.4% (dangerously low pre-shock). Vol expansion now underway. Action: SELL 中石科技 (stop breached), tighten all stops to V2 -5% levels, ZERO new entries until breadth recovers above 1:1."
   }
 }

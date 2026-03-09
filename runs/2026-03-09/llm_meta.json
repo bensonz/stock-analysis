@@ -1,15 +1,15 @@
 {
-  "input_tokens": 817655,
-  "output_tokens": 10470,
-  "rounds": 8,
-  "duration_sec": 251.6,
+  "input_tokens": 585109,
+  "output_tokens": 9152,
+  "rounds": 6,
+  "duration_sec": 190.8,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 热门板块 2026年3月9日 油气开采 煤炭",
+        "query": "A股 2026年3月9日 热门板块 油气开采 煤炭",
         "maxChars": 5000
       },
       "result_length": 28
@@ -19,7 +19,7 @@
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "中石科技 散热材料 AI 2026年3月",
+        "query": "中石科技 散热材料 2026年3月 最新消息",
         "maxChars": 5000
       },
       "result_length": 28
@@ -29,7 +29,7 @@
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "磷化工 云天化 涨价 2026年3月",
+        "query": "云天化 磷化工 2026年3月 行情",
         "maxChars": 5000
       },
       "result_length": 28
@@ -39,7 +39,7 @@
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "电网设备 望变电气 变压器出口 2026",
+        "query": "科达制造 重组 特福国际 2026年3月",
         "maxChars": 5000
       },
       "result_length": 28
@@ -49,7 +49,7 @@
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "科达制造 重组 特福国际 海外建材 2026",
+        "query": "电网设备 板块 望变电气 变压器出口 2026",
         "maxChars": 5000
       },
       "result_length": 28
@@ -59,7 +59,7 @@
       "round": 2,
       "tool": "web_fetch",
       "input": {
-        "url": "https://www.baidu.com/s?wd=A股+热门板块+油气开采+煤炭+2026年3月",
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+油气+煤炭+2026年3月",
         "maxChars": 5000
       },
       "result_length": 28
@@ -79,17 +79,7 @@
       "round": 2,
       "tool": "web_fetch",
       "input": {
-        "url": "https://www.baidu.com/s?wd=磷化工+云天化+川恒股份+涨价+2026年3月",
-        "maxChars": 5000
-      },
-      "result_length": 28
-    },
-    {
-      "pass": "P1",
-      "round": 2,
-      "tool": "web_fetch",
-      "input": {
-        "url": "https://www.baidu.com/s?wd=电网设备+望变电气+变压器出口+2026",
+        "url": "https://www.baidu.com/s?wd=云天化+磷化工+2026年3月",
         "maxChars": 5000
       },
       "result_length": 28
@@ -100,6 +90,16 @@
       "tool": "web_fetch",
       "input": {
         "url": "https://www.baidu.com/s?wd=科达制造+重组+特福国际+2026",
+        "maxChars": 5000
+      },
+      "result_length": 28
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=望变电气+变压器出口+电网设备+2026",
         "maxChars": 5000
       },
       "result_length": 28
@@ -119,10 +119,10 @@
       "round": 3,
       "tool": "web_fetch",
       "input": {
-        "url": "https://stock.eastmoney.com/a/cscsj.html",
+        "url": "https://stock.eastmoney.com/a/csscl.html",
         "maxChars": 5000
       },
-      "result_length": 1811
+      "result_length": 19
     },
     {
       "pass": "P1",
@@ -159,7 +159,7 @@
       "round": 4,
       "tool": "web_fetch",
       "input": {
-        "url": "https://finance.sina.com.cn/roll/2026-03-09/doc-all.shtml",
+        "url": "https://finance.sina.com.cn/roll/2026-03-09/doc-imcqhkqz0000000.shtml",
         "maxChars": 5000
       },
       "result_length": 19
@@ -169,110 +169,10 @@
       "round": 4,
       "tool": "web_fetch",
       "input": {
-        "url": "https://finance.eastmoney.com/a/202603093376543210.html",
+        "url": "https://finance.sina.com.cn/stock/marketresearch/2026-03-09/doc-imcqhkqz0000000.shtml",
         "maxChars": 3000
       },
       "result_length": 19
-    },
-    {
-      "pass": "P2",
-      "round": 1,
-      "tool": "web_fetch",
-      "input": {
-        "url": "https://www.cls.cn/searchPage?keyword=%E6%B2%B9%E6%B0%94&type=all",
-        "maxChars": 5000
-      },
-      "result_length": 36
-    },
-    {
-      "pass": "P2",
-      "round": 1,
-      "tool": "web_fetch",
-      "input": {
-        "url": "https://www.cls.cn/searchPage?keyword=%E4%B8%AD%E7%9F%B3%E7%A7%91%E6%8A%80&type=all",
-        "maxChars": 5000
-      },
-      "result_length": 36
-    },
-    {
-      "pass": "P2",
-      "round": 1,
-      "tool": "web_fetch",
-      "input": {
-        "url": "https://www.cls.cn/searchPage?keyword=%E7%A3%B7%E5%8C%96%E5%B7%A5+%E4%BA%91%E5%A4%A9%E5%8C%96&type=all",
-        "maxChars": 5000
-      },
-      "result_length": 36
-    },
-    {
-      "pass": "P2",
-      "round": 1,
-      "tool": "web_fetch",
-      "input": {
-        "url": "https://www.cls.cn/searchPage?keyword=%E7%94%B5%E7%BD%91%E8%AE%BE%E5%A4%87+%E5%8F%98%E5%8E%8B%E5%99%A8&type=all",
-        "maxChars": 5000
-      },
-      "result_length": 36
-    },
-    {
-      "pass": "P2",
-      "round": 1,
-      "tool": "web_fetch",
-      "input": {
-        "url": "https://www.cls.cn/searchPage?keyword=%E7%A7%91%E8%BE%BE%E5%88%B6%E9%80%A0+%E7%89%B9%E7%A6%8F%E5%9B%BD%E9%99%85&type=all",
-        "maxChars": 5000
-      },
-      "result_length": 36
-    },
-    {
-      "pass": "P2",
-      "round": 2,
-      "tool": "web_fetch",
-      "input": {
-        "url": "https://finance.sina.com.cn/stock/",
-        "maxChars": 8000
-      },
-      "result_length": 8000
-    },
-    {
-      "pass": "P2",
-      "round": 2,
-      "tool": "web_fetch",
-      "input": {
-        "url": "https://finance.sina.com.cn/realstock/company/sh000001/nc.shtml",
-        "maxChars": 5000
-      },
-      "result_length": 5000
-    },
-    {
-      "pass": "P2",
-      "round": 2,
-      "tool": "web_fetch",
-      "input": {
-        "url": "https://stock.eastmoney.com/a/202603093376000000.html",
-        "maxChars": 5000
-      },
-      "result_length": 19
-    },
-    {
-      "pass": "P2",
-      "round": 2,
-      "tool": "web_fetch",
-      "input": {
-        "url": "https://www.yicai.com/news",
-        "maxChars": 5000
-      },
-      "result_length": 1617
-    },
-    {
-      "pass": "P2",
-      "round": 2,
-      "tool": "web_fetch",
-      "input": {
-        "url": "https://wallstreetcn.com/news/global",
-        "maxChars": 5000
-      },
-      "result_length": 5
     }
   ]
 }

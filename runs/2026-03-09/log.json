@@ -3,39 +3,39 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1773037672.6975622,
+      "start": 1773037804.72188,
       "errors": [],
-      "end": 1773037756.495786,
-      "duration_sec": 83.8
+      "end": 1773037849.913645,
+      "duration_sec": 45.2
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 11622,
+      "response_size_bytes": 10660,
       "tokens": {
-        "input_tokens": 817655,
-        "output_tokens": 10470
+        "input_tokens": 585109,
+        "output_tokens": 9152
       },
-      "rounds": 8,
-      "tool_calls_count": 27,
-      "duration_sec": 251.6
+      "rounds": 6,
+      "tool_calls_count": 17,
+      "duration_sec": 190.8
     },
     {
       "phase": "apply",
-      "start": 1773038008.143292,
+      "start": 1773038040.733647,
       "actions": [
-        "SELL 300684",
+        "ERROR SELL 300684: Position file not found: /Users/bz/Work/Personal/stock-analysis/tracking/300684.json",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
         "Updated LEARNINGS.md"
       ],
-      "end": 1773038008.271432,
+      "end": 1773038040.869868,
       "duration_sec": 0.1
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 335.5
+    "totalDurationSec": 236.10000000000002
   }
 }

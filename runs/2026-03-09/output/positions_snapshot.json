@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-03-09T14:33:28.271148+08:00",
+  "snapshot_time": "2026-03-09T14:34:00.869534+08:00",
   "snapshot_type": "post_run",
   "date": "2026-03-09",
   "portfolio_config": {
@@ -10,20 +10,20 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-03-09T14:33:28.152276+08:00",
+    "lastUpdated": "2026-03-09T14:34:00.741727+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 970376.0,
+      "totalEquity": 970626.0,
       "cash": 779281.0,
-      "investedValue": 191095.0,
-      "unrealizedPnl": -5451.0,
+      "investedValue": 191345.0,
+      "unrealizedPnl": -5201.0,
       "realizedPnl": -24173.0,
-      "totalPnl": -29624.0,
-      "totalReturnPct": -2.96,
+      "totalPnl": -29374.0,
+      "totalReturnPct": -2.94,
       "positionsUsed": 2,
       "positionsMax": 10,
-      "cashPct": 80.31,
-      "dayPnl": 0.0
+      "cashPct": 80.29,
+      "dayPnl": 798.0
     },
     "activePositions": [
       {
@@ -31,8 +31,8 @@
         "name": "云天化",
         "entryDate": "2026-02-26",
         "entryPrice": 44.05,
-        "currentPrice": 42.22,
-        "pnl_pct": -4.15,
+        "currentPrice": 42.23,
+        "pnl_pct": -4.13,
         "stopLoss": 39.6,
         "currentStop": 39.6,
         "targetPrice": 52.0,
@@ -41,8 +41,8 @@
         "shares": 2200,
         "allocation_pct": 10,
         "allocatedCapital": 96910.0,
-        "currentValue": 92884.0,
-        "unrealizedPnl": -4026.0,
+        "currentValue": 92906.0,
+        "unrealizedPnl": -4004.0,
         "weight_pct": 9.57
       },
       {
@@ -50,8 +50,8 @@
         "name": "科达制造",
         "entryDate": "2026-02-25",
         "entryPrice": 17.48,
-        "currentPrice": 17.23,
-        "pnl_pct": -1.43,
+        "currentPrice": 17.27,
+        "pnl_pct": -1.2,
         "stopLoss": 15.7,
         "currentStop": 15.7,
         "targetPrice": 21.0,
@@ -60,9 +60,9 @@
         "shares": 5700,
         "allocation_pct": 10,
         "allocatedCapital": 99636.0,
-        "currentValue": 98211.0,
-        "unrealizedPnl": -1425.0,
-        "weight_pct": 10.12
+        "currentValue": 98439.0,
+        "unrealizedPnl": -1197.0,
+        "weight_pct": 10.14
       }
     ]
   },
@@ -174,10 +174,10 @@
         },
         {
           "date": "2026-03-09",
-          "price": 42.22,
-          "change_pct": -4.15,
+          "price": 42.23,
+          "change_pct": -4.13,
           "action": "HOLD",
-          "note": "Day 8, PnL = -4.15% (entry ¥44.05, current ¥42.22). V2 hard stop at -5% = ¥41.85, current price 0.9% above stop. Sector (农化制品/磷化工) trending up since Apr 2025, adjacent to today's hot 农产品加工 (+2.91%). Middle East conflict → food security → fertilizer demand logic intact. Today flat 0.00% in a -0.6% market = relative strength. ROE 25% industry leader, 合同负债21亿+36%. Tightening stop to ¥41.85 (V2 -5% hard stop). If breached tomorrow, SELL immediately with zero hesitation."
+          "note": "Entry 44.05, current 42.23, PnL = -4.13%. Today flat (0.00% change). Stop was 39.60 but V2 mandates -5% hard stop = 41.85. Current price 42.23 is 0.9% above new V2 stop of 41.85 — extremely tight. Sector (农化制品) trending up since Apr 2025, phosphate fertilizer fundamentals intact (ROE 25%, contract liabilities 21B +36%). Middle East crisis could boost fertilizer via food security. Day 8 of hold. Tightening stop to 41.85 per V2 rules. If tomorrow drops below 41.85, instant exit."
         }
       ],
       "exitDate": null,
@@ -187,7 +187,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-02-26T14:48:00+08:00",
-      "updatedAt": "2026-03-09T14:33:28.147456+08:00",
+      "updatedAt": "2026-03-09T14:34:00.734257+08:00",
       "trackerVersion": "2.0"
     },
     "600499": {
@@ -304,10 +304,10 @@
         },
         {
           "date": "2026-03-09",
-          "price": 17.23,
-          "change_pct": -1.43,
+          "price": 17.27,
+          "change_pct": -1.2,
           "action": "HOLD",
-          "note": "Day 9, PnL = -1.43% (entry ¥17.48, current ¥17.23). Stop ¥16.61 (-5% hard stop). Sector (专用设备) trending up since Nov 2025. Today only -0.17% in -0.6% market = decent relative strength. Thesis intact: 重组收购特福国际 + 海外建材+73.6% + 碳酸锂涨价利好蓝科锂业 (8 highlights, 1 risk). CRITICAL: Day 10 tomorrow - V2 Rule 5 time stop check. Need >3% gain (¥18.00) by tomorrow to avoid time stop. Currently -1.43% so very likely triggers. Prepare exit plan for tomorrow if no recovery."
+          "note": "Entry 17.48, current 17.27, PnL = -1.20%. Today +0.82% showing resilience in a -0.6% market (intraday low 16.36 recovered to 17.27). Stop at 15.70 is 9.1% below — but V2 mandates -5% stop = 16.61. Tightening stop to 16.61. Day 9 of hold. V2 time stop: 10 days with <3% gain = SELL. Tomorrow is day 10. Need price at 18.00 (+4.2% from here) to clear +3% from entry — very unlikely in one day. Prepare to exit tomorrow unless significant catalyst. Restructuring still in progress, today's bounce is positive, but rules are rules."
         }
       ],
       "exitDate": null,
@@ -317,7 +317,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-02-25T14:22:00+08:00",
-      "updatedAt": "2026-03-09T14:33:28.148921+08:00",
+      "updatedAt": "2026-03-09T14:34:00.737508+08:00",
       "trackerVersion": "2.0"
     }
   },

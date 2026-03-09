@@ -740,3 +740,11 @@
 - Position alignment 0/3 in hot sectors is the portfolio's biggest problem. All 3 positions are in neutral-to-cold sectors during a geopolitical crisis rotation. This is the exact failure mode Rule 1 (Sector First) was designed to prevent. We should have rotated into energy/gold when the Middle East conflict escalated.
 - In crisis-driven markets with breadth <0.5:1, the correct action is DEFENSIVE: sell losers, tighten stops, hold cash. Even crisis-beneficiary sectors (oil/gold) carry binary reversal risk (G7 emergency oil release, ceasefire). Cash is a position.
 - 云天化 showing relative strength (flat 0.00% in -0.6% market) while in a sector adjacent to hot themes (农产品加工 +2.91%, food security). Middle East → food inflation → fertilizer demand is a valid secondary beneficiary thesis. But -4.15% PnL with stop at -5% means very thin margin of safety.
+
+### 自动更新 (2026-03-09)
+
+- V2's -5% hard stop would have exited 中石科技 days ago (it crossed -5% before today's -6.52%). V1's -10% stop let losers bleed. Lesson reinforced: cut fast. The -1.52% saved by exiting at -5% vs -6.52% is real money (¥1,500+ on this position).
+- Breadth 0.36:1 with 3968 stocks down is a clear NO-ENTRY signal. Despite multiple attractive candidates in hot sectors (电投能源 in coal, 望变电气 in grid, 湖南黄金 in gold), opening positions when 72% of stocks are falling is fighting the tape. Patience > FOMO.
+- 0/3 position alignment with hot sectors explains portfolio underperformance. When geopolitical crisis rotates market into oil/gas/coal/gold, our tech/chemical/equipment positions get dragged down. Sector-first analysis (Rule 1) should also apply to monitoring existing positions — if your sector goes cold for 3+ days, the sector overlay says SELL.
+- 科达制造 will hit V2's 10-day time stop tomorrow (day 10, PnL -1.2% < +3% threshold). Per V2: no exceptions to time stops. However, today's +0.82% bounce and restructuring catalyst are encouraging. V2 says sell anyway — 'if the event hasn't moved the stock in 10 days, your timing is wrong. You can always re-enter.' Prepare exit plan.
+- IV Rank averaging 19.2% with 300ETF at 13.4% signals complacency. Today's geopolitical shock (oil >$110, Korea circuit breaker) is exactly the kind of vol expansion event that low IV warns about. The market was priced for calm and got chaos. This validates the IV throttle rule.
