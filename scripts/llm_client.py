@@ -17,6 +17,7 @@ from pathlib import Path
 from urllib.parse import quote_plus
 
 import anthropic
+import openai
 import requests
 
 # Load .env from project root (for TAVILY_API_KEY etc.)
@@ -274,6 +275,142 @@ def _run_tool_loop(
     return final_text, total_input, total_output, MAX_TOOL_ROUNDS
 
 
+# --- OpenAI tool definitions (parallel to Anthropic TOOLS) ---
+
+OPENAI_TOOLS = [
+    {
+        "type": "function",
+        "function": {
+            "name": "web_fetch",
+            "description": (
+                "Fetch and extract readable content from a URL (HTML → text). "
+                "Use for specific news articles, stock pages, financial portals."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "url": {"type": "string", "description": "HTTP or HTTPS URL to fetch."},
+                    "maxChars": {"type": "integer", "description": f"Max chars to return (default {FETCH_MAX_CHARS})."},
+                },
+                "required": ["url"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "web_search",
+            "description": (
+                "Search the web via Tavily. Returns structured results with titles, URLs, and content snippets. "
+                "Use for finding recent news, sector analysis, stock catalysts, macro events."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string", "description": "Search query in Chinese or English."},
+                    "max_results": {"type": "integer", "description": "Number of results (default 5, max 10)."},
+                },
+                "required": ["query"],
+            },
+        },
+    },
+]
+
+
+def _run_openai_tool_loop(
+    client: openai.OpenAI,
+    messages: list,
+    model: str,
+    max_tokens: int,
+    temperature: float,
+    tool_log: list,
+    label: str = "",
+) -> tuple[str, int, int, int]:
+    """Run OpenAI LLM with tool-use loop until final text response.
+
+    Returns: (final_text, input_tokens, output_tokens, rounds)
+    """
+    total_input = 0
+    total_output = 0
+
+    for round_num in range(1, MAX_TOOL_ROUNDS + 1):
+        print(f"  {label}round {round_num}...", file=sys.stderr, end="", flush=True)
+
+        response = client.chat.completions.create(
+            model=model,
+            max_tokens=max_tokens,
+            temperature=temperature,
+            tools=OPENAI_TOOLS,
+            messages=messages,
+        )
+
+        choice = response.choices[0]
+        usage = response.usage or type("U", (), {"prompt_tokens": 0, "completion_tokens": 0})()
+        total_input += usage.prompt_tokens
+        total_output += usage.completion_tokens
+
+        msg = choice.message
+        tool_calls = msg.tool_calls or []
+
+        if not tool_calls:
+            # Final text response
+            final_text = msg.content or ""
+            print(f" done ({total_input}+{total_output} tokens)", file=sys.stderr)
+            messages.append({"role": "assistant", "content": final_text})
+            return final_text, total_input, total_output, round_num
+
+        # Append assistant message with tool calls
+        messages.append({
+            "role": "assistant",
+            "content": msg.content or "",
+            "tool_calls": [
+                {
+                    "id": tc.id,
+                    "type": "function",
+                    "function": {"name": tc.function.name, "arguments": tc.function.arguments},
+                }
+                for tc in tool_calls
+            ],
+        })
+
+        # Execute tool calls
+        for tc in tool_calls:
+            tool_name = tc.function.name
+            try:
+                tool_input = json.loads(tc.function.arguments)
+            except json.JSONDecodeError:
+                tool_input = {}
+
+            print(f" → {tool_name}({_summarize_input(tool_input)})", file=sys.stderr, end="", flush=True)
+
+            result_text = execute_tool(tool_name, tool_input)
+            tool_log.append({
+                "pass": label.strip(),
+                "round": round_num,
+                "tool": tool_name,
+                "input": tool_input,
+                "result_length": len(result_text),
+            })
+
+            messages.append({
+                "role": "tool",
+                "tool_call_id": tc.id,
+                "content": result_text,
+            })
+
+        print("", file=sys.stderr)
+
+    # Hit max rounds
+    print(f"  WARNING: Hit max tool rounds ({MAX_TOOL_ROUNDS})", file=sys.stderr)
+    # Return last assistant text
+    for msg_item in reversed(messages):
+        if msg_item.get("role") == "assistant" and msg_item.get("content"):
+            return msg_item["content"], total_input, total_output, MAX_TOOL_ROUNDS
+    return "", total_input, total_output, MAX_TOOL_ROUNDS
+
+
+OPENAI_MODEL = "gpt-5.4"
+
 REFINE_PROMPT = (
     "请根据以上数据进行分析，按照 Required Output JSON 格式返回你的决策。"
     "注意：skip_list 中只能引用输入数据中实际存在的价格和指标，不要编造。"
@@ -351,9 +488,53 @@ def call_llm(
     total_output = out1 + out2
     total_rounds = rounds1 + rounds2
 
+    # --- Pass 3+4: GPT-5.4 (independent analysis) ---
+    openai_key = os.environ.get("OPENAI_API_KEY", "")
+    openai_base = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
+    pass3_text = ""
+    pass4_text = ""
+
+    if openai_key:
+        try:
+            oai_client = openai.OpenAI(api_key=openai_key, base_url=openai_base)
+            oai_messages = [{"role": "user", "content": prompt}]
+
+            # Pass 3: GPT-5.4 full analysis with tools
+            print("  [Pass 3] GPT-5.4 analysis...", file=sys.stderr)
+            pass3_text, in3, out3, rounds3 = _run_openai_tool_loop(
+                oai_client, oai_messages, OPENAI_MODEL, max_tokens, temperature, tool_log, label="P3 "
+            )
+            total_input += in3
+            total_output += out3
+            total_rounds += rounds3
+
+            if output_dir:
+                (output_dir / "pass3_response.txt").write_text(pass3_text, encoding="utf-8")
+
+            # Pass 4: GPT-5.4 refine
+            print("  [Pass 4] GPT-5.4 refine...", file=sys.stderr)
+            oai_messages.append({"role": "user", "content": REFINE_PROMPT})
+            pass4_text, in4, out4, rounds4 = _run_openai_tool_loop(
+                oai_client, oai_messages, OPENAI_MODEL, max_tokens, temperature, tool_log, label="P4 "
+            )
+            total_input += in4
+            total_output += out4
+            total_rounds += rounds4
+
+            if output_dir:
+                (output_dir / "pass4_response.txt").write_text(pass4_text, encoding="utf-8")
+
+        except Exception as e:
+            print(f"  WARNING: GPT-5.4 pass failed: {e}", file=sys.stderr)
+            # Non-fatal — Claude's output is primary
+    else:
+        print("  [Skip] No OPENAI_API_KEY — skipping GPT-5.4 passes", file=sys.stderr)
+
     return {
-        "text": pass2_text,
-        "pass1_text": pass1_text,
+        "text": pass2_text,         # Claude's refined output (primary)
+        "pass1_text": pass1_text,   # Claude's research draft
+        "pass3_text": pass3_text,   # GPT-5.4's research draft
+        "pass4_text": pass4_text,   # GPT-5.4's refined output
         "tool_calls": tool_log,
         "input_tokens": total_input,
         "output_tokens": total_output,

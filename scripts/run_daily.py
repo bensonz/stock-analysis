@@ -915,6 +915,19 @@ def main():
             encoding="utf-8",
         )
 
+        # Also try to parse GPT-5.4 response if available
+        gpt_decisions = None
+        if llm_result.get("pass4_text"):
+            gpt_decisions = _parse_llm_response(llm_result["pass4_text"])
+            if gpt_decisions:
+                (run_dir / "response_gpt.json").write_text(
+                    json.dumps(gpt_decisions, ensure_ascii=False, indent=2) + "\n",
+                    encoding="utf-8",
+                )
+                print(f"  GPT-5.4 response saved (response_gpt.json)", file=sys.stderr)
+            else:
+                print(f"  WARNING: Could not parse GPT-5.4 response as JSON", file=sys.stderr)
+
         # Save LLM metadata
         llm_meta = {
             "input_tokens": llm_result["input_tokens"],
@@ -922,6 +935,7 @@ def main():
             "rounds": llm_result["rounds"],
             "duration_sec": llm_result["duration_sec"],
             "tool_calls": llm_result["tool_calls"],
+            "has_gpt_response": bool(gpt_decisions),
         }
         (run_dir / "llm_meta.json").write_text(
             json.dumps(llm_meta, ensure_ascii=False, indent=2) + "\n",
