@@ -226,11 +226,15 @@ def _run_tool_loop(
             final_text = "\n".join(b.text for b in text_blocks)
             print(f" done ({total_input}+{total_output} tokens)", file=sys.stderr)
             # Append assistant response to messages for conversation continuity
-            messages.append({"role": "assistant", "content": response.content})
+            # Convert to dicts to avoid Pydantic serialization issues on re-send
+            content_dicts = [b.model_dump() if hasattr(b, "model_dump") else b for b in response.content]
+            messages.append({"role": "assistant", "content": content_dicts})
             return final_text, total_input, total_output, round_num
 
         # Execute tool calls
-        messages.append({"role": "assistant", "content": response.content})
+        # Convert to dicts to avoid Pydantic serialization issues on re-send
+        content_dicts = [b.model_dump() if hasattr(b, "model_dump") else b for b in response.content]
+        messages.append({"role": "assistant", "content": content_dicts})
 
         tool_results = []
         for tool_block in tool_use_blocks:
