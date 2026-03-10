@@ -61,6 +61,12 @@ from position_manager import (
 from report_generator import generate_watchlist_json, generate_report_md
 from run_rules import run_all_rules
 from validator import validate_data, validate_output
+from hypothesis_manager import (
+    load_hypotheses,
+    save_hypotheses,
+    process_learnings as hypothesis_process_learnings,
+    get_active_for_prompt as hypothesis_prompt,
+)
 
 # Directories
 RUNS_DIR = PROJECT_ROOT / "runs"
@@ -449,7 +455,12 @@ def phase1_collect(date: str) -> dict:
             encoding="utf-8",
         )
 
-    # Learnings (local file, instant)
+    # Hypothesis-based learnings (structured system)
+    hyp_data = load_hypotheses()
+    data["hypothesis_prompt"] = hypothesis_prompt(hyp_data)
+    data["_hypothesis_data"] = hyp_data  # Carry forward for Phase 3
+
+    # Legacy LEARNINGS.md (read-only, for backward compat during transition)
     learnings_file = PROJECT_ROOT / "LEARNINGS.md"
     if learnings_file.exists():
         data["learnings"] = learnings_file.read_text(encoding="utf-8")
@@ -531,11 +542,16 @@ def phase2_build_prompt(data: dict) -> str:
         "collection_errors": data.get("collection_errors", []),
     }
 
-    # Truncate learnings to last 200 lines (avoid context overflow)
+    # Hypothesis-based learnings (compact, structured)
+    hyp_prompt = data.get("hypothesis_prompt", "")
+    if hyp_prompt:
+        payload["active_learnings"] = hyp_prompt
+    
+    # Legacy learnings excerpt (transitional — will be removed once hypothesis system is proven)
     learnings = data.get("learnings", "")
     learnings_lines = learnings.strip().split("\n")
-    if len(learnings_lines) > 200:
-        learnings = "\n".join(learnings_lines[:200]) + "\n\n[... truncated ...]"
+    if len(learnings_lines) > 100:
+        learnings = "\n".join(learnings_lines[:100]) + "\n\n[... truncated, see hypothesis system for active rules ...]"
     payload["learnings_excerpt"] = learnings
 
     prompt = f"""{analyst_prompt}
@@ -549,6 +565,21 @@ def phase2_build_prompt(data: dict) -> str:
 请根据以上数据进行分析，按照 Required Output JSON 格式返回你的决策。
 
 重要提醒：请再次仔细阅读以上所有数据（特别是 enriched_candidates 中的详细指标、position_prices 中的实时价格、以及 iv_sentiment），严格按照 ANALYST.md 的5条规则和 Output Format 要求，返回完整的 JSON 决策。skip_list 中只能引用输入数据中实际存在的价格和指标，不要编造任何数据。
+
+**new_learnings 格式更新**: 尽量使用结构化格式返回 new_learnings：
+```json
+"new_learnings": [
+  {{
+    "text": "具体、可操作的洞察",
+    "type": "heuristic|signal|rule|observation",
+    "tags": ["sector", "entry-filter", "exit-rule", "timing", "position-sizing"],
+    "evidence_type": "supporting|contradicting",
+    "related_hypothesis": "h001 (如果是对已有假设的新证据)",
+    "mechanism": "为什么这个规律成立的解释"
+  }}
+]
+```
+也接受纯字符串格式(向后兼容)。如果 active_learnings 中有相关假设，请引用其 ID。
 """
 
     # Save prompt to run dir
@@ -706,11 +737,21 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
     except Exception as e:
         log["actions"].append(f"ERROR daily summary: {e}")
 
-    # 6. Update learnings
+    # 6. Update learnings (hypothesis system + legacy LEARNINGS.md)
     if decisions.get("new_learnings"):
         try:
+            # Primary: hypothesis-based system
+            hyp_data = data.get("_hypothesis_data") or load_hypotheses()
+            actions = hypothesis_process_learnings(
+                hyp_data, decisions["new_learnings"], run_date=date
+            )
+            save_hypotheses(hyp_data)
+            for a in actions:
+                log["actions"].append(f"Hypothesis: {a}")
+
+            # Legacy: also append to LEARNINGS.md (transitional)
             _append_learnings(decisions["new_learnings"])
-            log["actions"].append("Updated LEARNINGS.md")
+            log["actions"].append("Updated LEARNINGS.md (legacy)")
         except Exception as e:
             log["actions"].append(f"ERROR learnings: {e}")
 
@@ -778,15 +819,23 @@ def phase4_validate_and_log(date: str, logs: list[dict]) -> list[str]:
     return errors
 
 
-def _append_learnings(lessons: list[str]) -> None:
-    """Append new learnings to LEARNINGS.md."""
+def _append_learnings(lessons: list) -> None:
+    """Append new learnings to LEARNINGS.md (legacy, transitional).
+    
+    Accepts both string and dict format learnings.
+    """
     learnings_file = PROJECT_ROOT / "LEARNINGS.md"
     content = learnings_file.read_text(encoding="utf-8") if learnings_file.exists() else ""
     today = datetime.now().strftime("%Y-%m-%d")
 
     additions = [f"\n### 自动更新 ({today})\n"]
     for lesson in lessons:
-        additions.append(f"- {lesson}")
+        if isinstance(lesson, dict):
+            text = lesson.get("text", "")
+            if text:
+                additions.append(f"- {text}")
+        else:
+            additions.append(f"- {lesson}")
     additions.append("")
 
     content += "\n".join(additions)
@@ -840,7 +889,7 @@ def main():
         # Save Phase 1 data
         run_dir = get_run_dir(date)
         phase1_file = run_dir / "phase1.json"
-        save_data = {k: v for k, v in data.items() if k != "learnings"}
+        save_data = {k: v for k, v in data.items() if k not in ("learnings", "_hypothesis_data", "hypothesis_prompt")}
         phase1_file.write_text(
             json.dumps(save_data, ensure_ascii=False, indent=2, default=str) + "\n",
             encoding="utf-8",
@@ -1057,7 +1106,7 @@ def main():
     run_dir = get_run_dir(date)
     phase1_file = run_dir / "phase1.json"
     # Strip learnings text (too large) before saving
-    save_data = {k: v for k, v in data.items() if k != "learnings"}
+    save_data = {k: v for k, v in data.items() if k not in ("learnings", "_hypothesis_data", "hypothesis_prompt")}
     phase1_file.write_text(
         json.dumps(save_data, ensure_ascii=False, indent=2, default=str) + "\n",
         encoding="utf-8",

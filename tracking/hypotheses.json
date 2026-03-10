@@ -1,0 +1,434 @@
+{
+  "version": 2,
+  "lastUpdated": "2026-03-10",
+  "hypotheses": [
+    {
+      "id": "h001",
+      "text": "Only buy stocks in sectors trending up (top 30%). Dead sectors = no entries.",
+      "type": "rule",
+      "status": "validated",
+      "created": "2026-03-10",
+      "lastTested": "2026-03-10",
+      "mechanism": "Sector gravity dominates individual stock quality. A mediocre stock in a hot sector beats a great stock in a dead sector.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-06",
+            "detail": "Seeded from ANALYST.md V2 core rules"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h002",
+      "text": "RPS120 sweet spot 80-92%, extended 92-95% only if sector top 10% or 0 risk factors.",
+      "type": "rule",
+      "status": "validated",
+      "created": "2026-03-10",
+      "lastTested": "2026-03-10",
+      "mechanism": "Momentum stocks in the 80-92% RPS range have the best risk/reward. Above 95% is chasing.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-06",
+            "detail": "Seeded from ANALYST.md V2 core rules"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "entry-filter",
+        "rps",
+        "momentum"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h003",
+      "text": "Catalysts over valuation. PE 80 with 100% growth > PE 15 with -20% decline.",
+      "type": "heuristic",
+      "status": "validated",
+      "created": "2026-03-10",
+      "lastTested": "2026-03-10",
+      "mechanism": "For momentum plays, valuation is noise. Catalyst freshness and strength determine short-term returns.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-06",
+            "detail": "Seeded from ANALYST.md V2 core rules"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "entry-filter",
+        "catalyst",
+        "valuation"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h004",
+      "text": "-5% from entry = automatic SELL. No exceptions, no 'thesis still valid' cope.",
+      "type": "rule",
+      "status": "validated",
+      "created": "2026-03-10",
+      "lastTested": "2026-03-10",
+      "mechanism": "Cutting fast preserves capital. V1's -10% stop let losers bleed. The extra 5% saved is real money.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-06",
+            "detail": "Seeded from ANALYST.md V2 core rules"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "exit-rule",
+        "stop-loss"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h005",
+      "text": "10 trading days with <3% gain = SELL. Time stop, no exceptions.",
+      "type": "rule",
+      "status": "validated",
+      "created": "2026-03-10",
+      "lastTested": "2026-03-10",
+      "mechanism": "If the catalyst hasn't moved the stock in 10 days, timing is wrong. Can always re-enter.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-06",
+            "detail": "Seeded from ANALYST.md V2 core rules"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "exit-rule",
+        "time-stop"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h006",
+      "text": "IV Rank <15% = reduce new position sizing by 50%. Market is complacent.",
+      "type": "signal",
+      "status": "hypothesis",
+      "created": "2026-03-10",
+      "lastTested": "2026-03-10",
+      "mechanism": "Low IV = market complacency → vol expansion imminent → sharp drawdowns in extended positions.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-06",
+            "detail": "Seeded from ANALYST.md V2 core rules"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "entry-filter",
+        "iv-sentiment",
+        "position-sizing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h007",
+      "text": "Breadth <0.5:1 (70%+ stocks falling) = no new entries regardless of setup quality.",
+      "type": "signal",
+      "status": "hypothesis",
+      "created": "2026-03-10",
+      "lastTested": "2026-03-10",
+      "mechanism": "When most stocks fall, even strong setups get dragged down by selling pressure.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-06",
+            "detail": "Seeded from ANALYST.md V2 core rules"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "entry-filter",
+        "market-regime",
+        "breadth"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h008",
+      "text": "Position sector goes cold (bottom 30% for 3+ days) = SELL regardless of individual stock performance.",
+      "type": "rule",
+      "status": "hypothesis",
+      "created": "2026-03-10",
+      "lastTested": "2026-03-10",
+      "mechanism": "Sector gravity always wins. Individual stock quality cannot overcome persistent sector headwinds.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-06",
+            "detail": "Seeded from ANALYST.md V2 core rules"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "exit-rule",
+        "sector"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h009",
+      "text": "[W10] 染料行业涨价潮是典型的供给侧催化——龙头协同提价(龙盛+闰土)带动行业整体调价，机构预计持续1-3个月。这类供给侧集中度高(CR3=59%)的行业，龙头提价能力强，涨价逻辑持续性优于需求侧催化。浙江龙盛(600352)RPS120=91.2%在理想区间但短期过热(RPS20=95.4%)，应等回调入场",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-10",
+      "lastTested": "2026-03-10",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-05",
+            "detail": "[W10] 染料行业涨价潮是典型的供给侧催化——龙头协同提价(龙盛+闰土)带动行业整体调价，机构预计持续1-3个月。这类供给侧集中度高(CR3=59%)的行业，龙头提价能力强，涨价逻辑持续性优于需求侧催化。浙江龙盛(600352)RPS120=91.2%在理想区间但短期过热(RPS20=95.4%)，应等回调入场"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h010",
+      "text": "[W10] 世界杯申办概念属于远期催化——广州推动粤港澳申办尚在规划阶段(未向FIFA正式申报)，A股已开始炒作。对于这类'画饼'型催化，应区分概念阶段(不追)和实质落地阶段(可参与)。共创草坪基本面好(ROE20%+0风险)但当前催化不实",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-10",
+      "lastTested": "2026-03-10",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-05",
+            "detail": "[W10] 世界杯申办概念属于远期催化——广州推动粤港澳申办尚在规划阶段(未向FIFA正式申报)，A股已开始炒作。对于这类'画饼'型催化，应区分概念阶段(不追)和实质落地阶段(可参与)。共创草坪基本面好(ROE20%+0风险)但当前催化不实"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h011",
+      "text": "[W10] 3只持仓均处于浮亏但thesis均有效——中石科技(-2.6%/AI散热批量供货确认)、云天化(-7.6%/磷化工基本面未变但入场追高)、科达制造(-3.38%/重组进行中)。组合PnL=-4.46%体现了LEARNINGS#13的教训(入场时价格偏高)。当前IV情绪偏乐观(均IVRank19.2%)支持持有不恐慌",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-10",
+      "lastTested": "2026-03-10",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-05",
+            "detail": "[W10] 3只持仓均处于浮亏但thesis均有效——中石科技(-2.6%/AI散热批量供货确认)、云天化(-7.6%/磷化工基本面未变但入场追高)、科达制造(-3.38%/重组进行中)。组合PnL=-4.46%体现了LEARNINGS#13的教训(入场时价格偏高)。当前IV情绪偏乐观(均IVRank19.2%)支持持有不恐慌"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h012",
+      "text": "V2 -5% stop rule caught 中石科技 at -6.77%. Under V1's -10% stop, we'd still be holding and hoping. Faster cut saves ~3-5% of additional potential loss. This is V2 working as designed.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-10",
+      "lastTested": "2026-03-10",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-09",
+            "detail": "V2 -5% stop rule caught 中石科技 at -6.77%. Under V1's -10% stop, we'd still be holding and hoping. Faster cut saves ~3-5% of additional potential loss. This is V2 working as designed."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h013",
+      "text": "Middle East crisis (Israel+US strike Iran, Hormuz Strait closed) is THE dominant macro driver. Energy/resources = direct beneficiaries, tech/growth = victims. This geopolitical regime can persist for weeks — portfolio must rotate toward resource exposure.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-10",
+      "lastTested": "2026-03-10",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-09",
+            "detail": "Middle East crisis (Israel+US strike Iran, Hormuz Strait closed) is THE dominant macro driver. Energy/resources = direct beneficiaries, tech/growth = victims. This geopolitical regime can persist for weeks — portfolio must rotate toward resource exposure."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h014",
+      "text": "Breadth 0.35:1 (1399 up vs 3987 down) is a STRONG no-entry signal. Even stocks in hot sectors can gap down if panic broadens. Cash preservation > opportunity cost on days like this.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-10",
+      "lastTested": "2026-03-10",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-09",
+            "detail": "Breadth 0.35:1 (1399 up vs 3987 down) is a STRONG no-entry signal. Even stocks in hot sectors can gap down if panic broadens. Cash preservation > opportunity cost on days like this."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h015",
+      "text": "IV Rank averaging 19.2% with 3/4 ETFs below 15% BEFORE today's geopolitical shock = market was complacent. Vol expansion now underway. Historical pattern: low IV + geopolitical shock = sharp drawdowns in extended positions. This validates the no-entry decision.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-10",
+      "lastTested": "2026-03-10",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-09",
+            "detail": "IV Rank averaging 19.2% with 3/4 ETFs below 15% BEFORE today's geopolitical shock = market was complacent. Vol expansion now underway. Historical pattern: low IV + geopolitical shock = sharp drawdowns in extended positions. This validates the no-entry decision."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h016",
+      "text": "电投能源 (002128) emerges as top candidate: coal sector hot (#2 today), RPS120=91.16% sweet spot, coal cycle upswing, restructuring catalyst. Ex-dividend 03-10 may create entry opportunity on pullback. Queue it as #1 priority when breadth recovers above 1:1.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-10",
+      "lastTested": "2026-03-10",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-09",
+            "detail": "电投能源 (002128) emerges as top candidate: coal sector hot (#2 today), RPS120=91.16% sweet spot, coal cycle upswing, restructuring catalyst. Ex-dividend 03-10 may create entry opportunity on pullback. Queue it as #1 priority when breadth recovers above 1:1."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    }
+  ]
+}
