@@ -1,0 +1,177 @@
+Now I have comprehensive data. Let me compile the final JSON output.
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "非金属材料Ⅱ", "5d_pct": 6.43, "trend": "accelerating"},
+      {"name": "元件", "5d_pct": 5.51, "trend": "accelerating"},
+      {"name": "通信设备", "5d_pct": 5.03, "trend": "accelerating"},
+      {"name": "电子化学品Ⅱ", "5d_pct": 4.14, "trend": "steady"},
+      {"name": "工程机械", "5d_pct": 3.67, "trend": "steady"},
+      {"name": "电网设备", "5d_pct": null, "trend": "persistent leader — ETF连续12日净流入创新高，8个月涨80%，算电协同首次写入政府工作报告"},
+      {"name": "专用设备", "5d_pct": null, "trend": "steady — 燃气轮机+AI数据中心用电+工业母机需求持续"},
+      {"name": "通用设备", "5d_pct": null, "trend": "steady — 培育钻石涨价+商业航天+轴承需求"}
+    ],
+    "cold_sectors": [
+      {"name": "油服工程", "5d_pct": -7.33, "trend": "deteriorating — 中东局势虽升级但板块反跌"},
+      {"name": "油气开采Ⅱ", "5d_pct": -6.48, "trend": "deteriorating"},
+      {"name": "炼化及贸易", "5d_pct": -4.62, "trend": "deteriorating"},
+      {"name": "化学原料", "5d_pct": -3.49, "trend": "deteriorating"},
+      {"name": "煤炭开采", "5d_pct": -3.22, "trend": "mixed — 前几日强势今日急跌"}
+    ],
+    "position_alignment": "3/3 positions in hot/trending sectors (通用设备、电网设备、专用设备)",
+    "regime": "科技+电网设备双主线持续领涨，资源品(油气/煤炭)从前期强势急剧回调。03-09暴跌后03-10强力反弹(创业板+2.93%)。AI应用(OpenClaw)+电网设备(算电协同)+培育钻石涨价为今日三大催化主题。板块轮动加速，电风扇模式。"
+  },
+  "position_decisions": [
+    {
+      "code": "002046",
+      "name": "国机精工",
+      "action": "HOLD",
+      "reason": "Day 1, entry 52.30, current 52.43, PnL +0.25%. 今日涨停(+3.92%)受培育钻石涨价催化——工业金刚石+培育钻石毛坯厂家纷纷发涨价函，黄河旋风涨停带动板块。通用设备行业自2025年11月持续走强。股东户数-29%大资金集中。3/6机构调研34人。商业航天+培育钻石+风电轴承三重催化全部有效。",
+      "sector_rank": "top 20% (通用设备持续走强)",
+      "new_stop": null,
+      "pnl_pct": 0.25,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "002121",
+      "name": "科陆电子",
+      "action": "HOLD",
+      "reason": "Day 1, entry 9.75, current 9.80, PnL +0.51%. 今日-1.01%小幅回调但仍在entry上方。电网设备是当前A股最强主线——ETF连续12日净流入创新高，8个月涨80%。算电协同首次写入政府工作报告。十五五国网4万亿+美国750亿美元电网扩建+AI缺电三重驱动。储能北美10GW大单首期3GW已进入交付。美的控股赋能管理体系。Thesis强化。",
+      "sector_rank": "top 5% (电网设备为市场最强主线)",
+      "new_stop": null,
+      "pnl_pct": 0.51,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "002595",
+      "name": "豪迈科技",
+      "action": "HOLD",
+      "reason": "Day 1, entry 95.53, current 95.64, PnL +0.12%. 今日+1.74%稳步上涨。GE Vernova燃气轮机合同量2025年+80%，西门子交付周期从3.5年延长至5年，供需缺口巨大。美国在建天然气发电装机超29GW一年翻倍。6.5万吨高端铸造产能已投产+新增7万吨备案。0风险因素，score_company 9.2全池最高，ROE 18%+ROIC 20%。",
+      "sector_rank": "top 15% (专用设备持续走强)",
+      "new_stop": null,
+      "pnl_pct": 0.12,
+      "days_held": 1,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "600499",
+      "name": "科达制造",
+      "entry_price": 17.86,
+      "allocation_pct": 3,
+      "stop": 16.97,
+      "target": 22.0,
+      "thesis": "专用设备行业(自2025年11月持续走强)。利润+63%YoY(+119%营业利润)爆发式增长。ROE 16%+ROIC 15%顶级盈利能力。蓝科锂业43.58%股权受益碳酸锂涨价(津巴布韦锂矿出口禁令推高锂价)。并购重组推进海外建材业务升级(特福国际少数股权收购)。8亮点仅1风险(质押)。北向7.4%重仓。合同负债23亿(+8.5%)订单充足。MA距离全部安全(ma5=4.3%, ma10=3.1%, ma20=3.2%)。IV极低(avg 8.84%)减半仓位至3%。",
+      "sector": "专用设备",
+      "sector_rank": "top 15%",
+      "catalyst": "碳酸锂涨价+并购重组特福国际+海外建材扩张，光大证券增持评级目标价上调",
+      "catalyst_freshness": "ongoing",
+      "rps120": 89.02,
+      "conviction": "moderate"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "603115",
+      "name": "海星股份",
+      "reason": "FAIL Rule 2b: dist_ma5=6.8%(>6%), dist_ma10=8.6%(>8%), dist_ma20=18.2%(>12%) — 今日创历史新高，严重超买。RPS20=94.6%说明短期涨幅已极大。等回调至MA10(29.47)附近再评估。",
+      "rps120": 87.45
+    },
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "reason": "FAIL Rule 2b: dist_ma5=9.1%(>6%), dist_ma10=7.2%, dist_ma20=12.6%(>12%) — 元件板块今日+5.51%大涨，sector top 5%，但股价已严重脱离均线。RPS120=90.35在sweet spot但追入风险过大。",
+      "rps120": 90.35
+    },
+    {
+      "code": "002782",
+      "name": "可立克",
+      "reason": "FAIL Rule 2b: dist_ma10=8.3%(>8%), dist_ma20=13.3%(>12%) — 今日创24月新高。国信目标价32元有空间但均线偏离过大，需等回调至MA5(24.89)附近。",
+      "rps120": 89.48
+    },
+    {
+      "code": "300018",
+      "name": "中元股份",
+      "reason": "FAIL Rule 2b: dist_ma10=7.8%(borderline), dist_ma20=12.7%(>12%) — 电网设备热门sector但股价已超买。近6月无机构研报覆盖是额外风险。",
+      "rps120": 92.73
+    },
+    {
+      "code": "300285",
+      "name": "国瓷材料",
+      "reason": "FAIL Rule 2b: dist_ma5=6.2%(>6%), dist_ma20=12.3%(>12%) — 电子化学品今日+4.14%，sector hot，但股价脱离均线。拟收购澳洲SDI是催化但需等回调。",
+      "rps120": 89.98
+    },
+    {
+      "code": "603269",
+      "name": "海鸥股份",
+      "reason": "FAIL Rule 2b: dist_ma5=10.9%(>6%), dist_ma10=19.7%(>8%), dist_ma20=30.5%(>12%) — 极端超买，所有MA距离均远超阈值。日均换手率15%纯短线资金追逐。5个风险因素。绝对不追。",
+      "rps120": 87.58
+    },
+    {
+      "code": "002448",
+      "name": "中原内配",
+      "reason": "FAIL Rule 2b: dist_ma20=10.9%(borderline接近12%) — 汽车零部件sector trending up，RPS120=91.70在sweet spot，利润+348%爆发，股东户数-29%。但周级别超买+dist_ma20接近极限。如回调至MA10(16.73)附近可考虑入场。",
+      "rps120": 91.70
+    },
+    {
+      "code": "603191",
+      "name": "望变电气",
+      "reason": "RPS120=94.11在extended zone，sector电网设备top 5%满足例外条件。dist_ma20=11.7%接近但未超12%阈值。北美变压器出口催化强劲。但PE=95倍+仅1风险因素不足以覆盖高估值。今日不追，等回调至MA10(25.45)附近。",
+      "rps120": 94.11
+    },
+    {
+      "code": "002497",
+      "name": "雅化集团",
+      "reason": "Sector化学制品trending up，RPS120=94.39(extended zone)。但RPS20=48.93极弱(短期动量崩塌)，02-26大跌-8.76%抛压重，dist_ma10=-4.6%/dist_ma20=-4.9%说明股价已跌破均线。津巴布韦锂矿出口禁令是催化但短期走势破位。等企稳再评估。",
+      "rps120": 94.39
+    },
+    {
+      "code": "002128",
+      "name": "电投能源",
+      "reason": "Sector煤炭开采今日-3.22%在bottom 5。Rule 1: 死sector不入场。RPS20=90.54但sector gravity always wins。",
+      "rps120": 90.26
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "Sector工业金属(铜)。RPS20=7.96极弱，短期动量崩塌。01-30跌停-9.99%后持续走弱。dist_ma10=-4.5%/dist_ma20=-3.5%均线下方。等企稳。",
+      "rps120": 91.90
+    },
+    {
+      "code": "002859",
+      "name": "洁美科技",
+      "reason": "股票停牌中(筹划发行股份购买埃福思100%股权)。无法交易。",
+      "rps120": 85.16
+    },
+    {
+      "code": "603306",
+      "name": "华懋科技",
+      "reason": "汽车零部件sector trending up，RPS120=92.30。MA距离安全(ma5=1.9%, ma10=0.2%, ma20=5.0%)。但估值percentile 98.79%历史极高位，PE=112倍，营业利润-18.3%YoY下滑。光刻胶概念拉升但非主业。高估值+利润下滑=风险不对称。",
+      "rps120": 92.30
+    },
+    {
+      "code": "002290",
+      "name": "禾盛新材",
+      "reason": "Sector家电零部件不在hot sectors中(Rule 1)。虽RPS120=93.73+AI算力第二曲线催化，但03-09大跌-4.86%抛压重，收现比仅62%收益质量低。Sector不热不入。",
+      "rps120": 93.73
+    },
+    {
+      "code": "301200",
+      "name": "大族数控",
+      "reason": "专用设备sector hot，RPS120=93.10(extended zone，sector top满足例外)。MA安全(ma5=2.1%, ma10=-1.2%, ma20=-1.6%)。利润+250%爆发。但RPS20=11.72极弱(短期动量崩塌)，strategy_pool日期2025/12/23已过期3个月。短期走势破位，等RPS20回升至50+再考虑。",
+      "rps120": 93.10
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "reason": "贵金属sector今日未在top/bottom 5。RPS20=28.41极弱。COMEX金价5100-5200美元区间震荡。中东局势催化有效但短期动量不足。MA安全(ma5=0.2%, ma20=3.4%)但RPS20太弱说明近期跑输大盘。等金价突破5200确认方向。",
+      "rps120": 87.10
+    },
+    {
+      "code": "605167",
+      "name": "

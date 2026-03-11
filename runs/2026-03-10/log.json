@@ -1,0 +1,111 @@
+{
+  "date": "2026-03-10",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1773116008.2355552,
+      "errors": [],
+      "end": 1773116018.2688088,
+      "duration_sec": 10.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 17041,
+      "tokens": {
+        "input_tokens": 495185,
+        "output_tokens": 14921
+      },
+      "rounds": 5,
+      "tool_calls_count": 11,
+      "duration_sec": 303.4
+    },
+    {
+      "phase": "apply",
+      "start": 1773116321.719368,
+      "actions": [
+        "SELL 600096",
+        "SELL 600499",
+        "OPEN 002595",
+        "OPEN 002046",
+        "OPEN 002121",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h002 (validated): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Updated h005 (validated): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Updated h001 (validated): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Created h017 (observation): IV Rank at 8.8% (avg across 4 ETFs) with 300ETF IV percentile at 2.1% — market i...",
+        "Hypothesis: Created h018 (observation): V1 WATCH list stocks continue to outperform: 国机精工 WATCH on 3/4 @48.00 → now 52.3...",
+        "Hypothesis: Updated h004 (validated): +1 supporting evidence → hitRate=100%, n=2",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 5,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002046",
+                "name": "国机精工",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 52.3,
+                "stopLoss": 49.69,
+                "distance_pct": 4.99,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1773116321.866092,
+      "duration_sec": 0.1
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 002046 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 313.5
+  }
+}

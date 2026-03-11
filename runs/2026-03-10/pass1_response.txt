@@ -1,0 +1,172 @@
+Now I have enough data to make my analysis. Let me compile the full picture:
+
+**Market Context (2026-03-10):**
+- Shanghai +0.58%, Shenzhen +1.96%, ChiNext +3.0%, STAR50 +2.1% — strong day, tech/growth leading
+- Breadth 4.55:1 bullish (4412 up / 969 down), 68涨停/7跌停 — broad-based rally
+- Hot sectors: 非金属材料(+6.43%), 元件(+5.54%), 通信设备(+5.06%), 电子化学品(+4.21%), 工程机械(+3.77%)
+- Cold sectors: 油服工程(-7.28%), 油气开采(-6.38%), 炼化(-4.51%), 化学原料(-3.46%), 煤炭开采(-3.22%)
+- IV Rank avg 8.8% — EXTREMELY LOW, market complacent. Per rules: reduce new position sizing by 50%
+- Previous day (3/9) was a sharp selloff with recovery — today is the bounce
+
+**Position Analysis:**
+- 002046 国机精工: Entry 52.30, current 52.49, PnL +0.36%, day 1. Sector 通用设备. Today +4.04%. Cultivated diamond + aerospace catalysts firing. HOLD.
+- 002121 科陆电子: Entry 9.75, current 9.78, PnL +0.31%, day 1. Sector 电网设备. Today -1.21%. Grid equipment is a hot sector. HOLD.
+- 002595 豪迈科技: Entry 95.53, current 95.72, PnL +0.20%, day 1. Sector 专用设备. Today +1.83%. Gas turbine demand strong. HOLD.
+
+All 3 positions opened today, all slightly positive. All in hot/trending sectors. No action needed.
+
+**New Position Candidates — Sector Filter:**
+Top sectors today: 非金属材料, 元件, 通信设备, 电子化学品, 工程机械
+Trending sectors from enriched data: 电网设备 (since May 2025), 通用设备 (since Nov 2025), 专用设备 (since Nov 2025), 农化制品 (since Apr 2025), 汽车零部件 (since Dec 2025), 元件 (since Dec 2025)
+
+**IV Rank = 8.8% → EXTREME LOW → Reduce new sizing by 50%**
+
+This is critical. With IV this low, I should be very cautious about adding new positions. The system says reduce by 50%. Combined with already opening 3 positions today, I should be selective.
+
+Let me evaluate the best candidates:
+
+**Strong candidates (sector hot + RPS sweet spot + MA safe):**
+
+1. **川恒股份 002895** — 农化制品 sector trending since Apr 2025,磷化工 hot. RPS120=90.3, 0 risk factors. MA: dist_ma5=-0.8%, dist_ma10=-2.8%, dist_ma20=+1.2% — ALL SAFE. Score_company 8.8. Net profit +52%. International phosphate prices breaking $800/ton. Catalyst: ongoing. This is a textbook setup.
+
+2. **鄂尔多斯 600295** — 冶钢原料 sector trending since Jun 2025. RPS120=93.4 (extended zone, but 3 risk factors so doesn't qualify for exception). MA: dist_ma5=-0.5%, dist_ma10=-1.2%, dist_ma20=+3.7% — ALL SAFE. Industry leader. But sector not in today's top 5, and RPS in extended zone without qualifying exception. SKIP.
+
+3. **云天化 600096** — 农化制品 trending since Apr 2025. RPS120=90.6. MA: dist_ma5=-1.0%, dist_ma10=-3.3%, dist_ma20=+4.4% — ALL SAFE. Industry leader, 8 highlights. But recent -6.39% selloff on 03-03. Pulling back to MAs. Score_company 8.6. Phosphate fertilizer prices surging. Good setup but just had heavy selling pressure.
+
+4. **科达制造 600499** — 专用设备 trending since Nov 2025. RPS120=89.0. MA: dist_ma5=+4.4%, dist_ma10=+3.2%, dist_ma20=+3.3% — ALL SAFE. Score_company 9.0, 8 highlights, 1 risk. Net profit +119%. Merger catalyst. But RPS20=47 (weak short-term).
+
+5. **联化科技 002250** — 农化制品 trending since Apr 2025. RPS120=87.7. MA: dist_ma5=-0.3%, dist_ma10=-3.3%, dist_ma20=-4.1% — ALL SAFE (below MAs = pullback, not overextended). Recent -8.54% selloff. Pulling back. Net profit +384%. Institutional interest (12 fund managers visited). But below all MAs = weak near-term.
+
+Given IV is extremely low (8.8%) and I already opened 3 positions today, I should be very conservative. Maximum 1 new position, at reduced sizing.
+
+**Best new entry: 川恒股份 002895** — 0 risk factors, sector hot (磷化工 surging), RPS sweet spot (90.3), MA distances all safe, strong fundamentals. At 50% sizing due to IV: 3-4% allocation → ~3%.
+
+Let me also check which candidates to SKIP and why:
+
+- 海星股份 603115: dist_ma5=6.8%, dist_ma10=8.6%, dist_ma20=18.2% → SKIP (Rule 2b violated on ALL three)
+- 广合科技 001389: dist_ma5=9.1%, dist_ma10=7.2%, dist_ma20=12.6% → SKIP (Rule 2b violated)
+- 可立克 002782: dist_ma10=8.1%, dist_ma20=13.1% → SKIP (Rule 2b violated)
+- 海鸥股份 603269: dist_ma5=10.9%, dist_ma10=19.7%, dist_ma20=30.5% → SKIP (extreme overextension)
+- 中元股份 300018: dist_ma10=7.9%, dist_ma20=12.7% → SKIP (Rule 2b violated)
+- 望变电气 603191: dist_ma20=11.6% → BORDERLINE SKIP (close to 12% limit)
+- 国瓷材料 300285: dist_ma5=6.9%, dist_ma20=13.1% → SKIP (Rule 2b violated)
+- 中原内配 002448: dist_ma20=11.5% → BORDERLINE, sector 汽车零部件 not in today's top 5
+- 禾盛新材 002290: dist_ma20=9.0% → OK but sector 家电零部件 not hot
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "非金属材料Ⅱ", "5d_pct": 6.43, "trend": "accelerating"},
+      {"name": "元件", "5d_pct": 5.54, "trend": "accelerating"},
+      {"name": "通信设备", "5d_pct": 5.06, "trend": "accelerating"},
+      {"name": "电子化学品Ⅱ", "5d_pct": 4.21, "trend": "steady"},
+      {"name": "工程机械", "5d_pct": 3.77, "trend": "steady"},
+      {"name": "电网设备", "5d_pct": null, "trend": "strong since May 2025, 8-month +80%"},
+      {"name": "农化制品", "5d_pct": null, "trend": "strong since Apr 2025, phosphate prices $800+/ton"},
+      {"name": "通用设备", "5d_pct": null, "trend": "strong since Nov 2025, diamond+aerospace catalysts"},
+      {"name": "专用设备", "5d_pct": null, "trend": "strong since Nov 2025, gas turbine demand"}
+    ],
+    "cold_sectors": [
+      {"name": "油服工程", "5d_pct": -7.28, "trend": "deteriorating"},
+      {"name": "油气开采Ⅱ", "5d_pct": -6.38, "trend": "deteriorating"},
+      {"name": "炼化及贸易", "5d_pct": -4.51, "trend": "deteriorating"},
+      {"name": "化学原料", "5d_pct": -3.46, "trend": "deteriorating"},
+      {"name": "煤炭开采", "5d_pct": -3.22, "trend": "weakening"}
+    ],
+    "position_alignment": "3/3 positions in hot/trending sectors (通用设备, 电网设备, 专用设备)",
+    "regime": "Tech/electronics leadership today (元件+5.5%, 通信+5.1%, 电子化学品+4.2%). Grid equipment multi-month supercycle continues. Resources bifurcated: gold/phosphate strong, oil/coal weak. Middle East conflict driving gold+agriculture up, oil paradoxically down on demand fears. AI-driven electricity demand is the mega-theme connecting grid, gas turbines, and electronics."
+  },
+  "position_decisions": [
+    {
+      "code": "002046",
+      "name": "国机精工",
+      "action": "HOLD",
+      "reason": "Day 1. +4.04% today on cultivated diamond price hike catalyst (producers issuing price increase notices). Sector 通用设备 trending since Nov 2025. 34 institutional investors visited on 3/6. Stock hit new 24-month high today. All MAs supportive. Thesis fully intact.",
+      "sector_rank": "top 20% (通用设备 trending)",
+      "new_stop": null,
+      "pnl_pct": 0.36,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "002121",
+      "name": "科陆电子",
+      "action": "HOLD",
+      "reason": "Day 1. -1.21% today but within normal range. Sector 电网设备 is THE supercycle theme (8-month +80%, US $750B grid expansion, 十五五 4万亿 investment). New subsidiary formed for smart energy with Kunlun. Indonesia storage base on track for 2026 production. MA distances safe. Thesis intact.",
+      "sector_rank": "top 10% (电网设备 supercycle)",
+      "new_stop": null,
+      "pnl_pct": 0.31,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "002595",
+      "name": "豪迈科技",
+      "action": "HOLD",
+      "reason": "Day 1. +1.83% today. Hit historical high at 99.80 intraday. Core supplier to GE/Siemens/Mitsubishi gas turbines. US AIDC power demand driving gas turbine orders to 2030 backlog. 0 risk factors, score_company 9.2 (highest in pool). ROE 18%, ROIC 20%. Sector 专用设备 trending since Nov 2025. Perfect hold.",
+      "sector_rank": "top 15% (专用设备 trending)",
+      "new_stop": null,
+      "pnl_pct": 0.20,
+      "days_held": 1,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "002895",
+      "name": "川恒股份",
+      "entry_price": 40.98,
+      "allocation_pct": 3,
+      "stop": 38.93,
+      "target": 52.0,
+      "thesis": "磷化工龙头，国际磷肥价格突破$800/吨创3年新高。0风险因素(全池唯一之一)。收入+46%，净利+52%强劲增长。农化制品行业自2025年4月持续走强。中东冲突推高粮价→磷肥需求上行。股价今日创历史新高后回落至MA5附近，距离安全。IV极低减半仓位至3%。",
+      "sector": "农化制品",
+      "sector_rank": "top 15% (trending since Apr 2025)",
+      "catalyst": "国际磷肥价格突破$800/吨+中东冲突推高农产品价格+公司收入增速46%",
+      "catalyst_freshness": "ongoing",
+      "rps120": 90.3,
+      "conviction": "moderate"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "603115",
+      "name": "海星股份",
+      "reason": "Rule 2b VIOLATED: dist_ma5=6.8%(>6%), dist_ma10=8.6%(>8%), dist_ma20=18.2%(>12%). Extreme overextension on all three MA checks. Wait for pullback to MA10 (~29.5).",
+      "rps120": 87.5
+    },
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "reason": "Rule 2b VIOLATED: dist_ma5=9.1%(>6%), dist_ma20=12.6%(>12%). Sector 元件 is hot today (+5.54%) but stock is chasing. Wait for pullback.",
+      "rps120": 90.3
+    },
+    {
+      "code": "002782",
+      "name": "可立克",
+      "reason": "Rule 2b VIOLATED: dist_ma10=8.1%(>8%), dist_ma20=13.1%(>12%). Sector 其他电子Ⅱ not in today's top sectors. Overextended.",
+      "rps120": 89.5
+    },
+    {
+      "code": "603269",
+      "name": "海鸥股份",
+      "reason": "Rule 2b EXTREME VIOLATION: dist_ma5=10.9%, dist_ma10=19.7%, dist_ma20=30.5%. Parabolic move, 5 risk factors. Do not touch.",
+      "rps120": 87.6
+    },
+    {
+      "code": "300018",
+      "name": "中元股份",
+      "reason": "Rule 2b VIOLATED: dist_ma10=7.9%(borderline), dist_ma20=12.7%(>12%). Sector 电网设备 is hot but stock overextended. No institutional coverage.",
+      "rps120": 92.7
+    },
+    {
+      "code": "300285",
+      "name": "国瓷材料",
+      "reason": "Rule 2b VIOLATED: dist_ma5=6.9%(>6%), dist_ma20=13.1%(>12%). Sector 电子化学品 hot today (+4.21%) but stock chasing after acquisition news.",
+      "rps120": 90.0
+    },
+    {
+      "code": "603191",
+      "name": "望变电气",
+      "reason": "Rule 2b borderline: dist_ma20=11.6% (just under 12% limit). RPS120=94.1 in extended zone — needs sector top 10% OR 0 risk factors. Has 1 risk factor. Sector 电网设备 is top 10% so technically qualifies, but combined with border

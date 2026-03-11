@@ -1,0 +1,218 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": 6.43,
+        "trend": "accelerating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": 5.51,
+        "trend": "accelerating"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": 5.03,
+        "trend": "accelerating"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": 4.14,
+        "trend": "steady"
+      },
+      {
+        "name": "工程机械",
+        "5d_pct": 3.67,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "油服工程",
+        "5d_pct": -7.33,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": -6.48,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "炼化及贸易",
+        "5d_pct": -4.62,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "化学原料",
+        "5d_pct": -3.49,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "煤炭开采",
+        "5d_pct": -3.22,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "2/3 positions in hot sectors",
+    "regime": "科技硬件与电子材料主导反弹，电网设备延续强势，油气煤炭等资源链退潮"
+  },
+  "position_decisions": [
+    {
+      "code": "002046",
+      "name": "国机精工",
+      "action": "HOLD",
+      "reason": "持仓第1天，现价52.43较入场52.3上涨，未触发-3%/3日或-5%止损；通用设备非今日最热但个股仍强，继续持有。",
+      "sector_rank": "非top 30%明确热区",
+      "new_stop": null,
+      "pnl_pct": 0.25,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "002121",
+      "name": "科陆电子",
+      "action": "HOLD",
+      "reason": "电网设备为强势方向，现价9.8较入场9.75小幅盈利，MA距离安全，未触发止损，继续持有。",
+      "sector_rank": "top 30%",
+      "new_stop": null,
+      "pnl_pct": 0.51,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "002595",
+      "name": "豪迈科技",
+      "action": "HOLD",
+      "reason": "持仓第1天，现价95.64高于入场95.53，未触发任何卖出条件；专用设备虽非今日前五热点，但个股趋势完好。",
+      "sector_rank": "非top 30%明确热区",
+      "new_stop": null,
+      "pnl_pct": 0.12,
+      "days_held": 1,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "603191",
+      "name": "望变电气",
+      "entry_price": 26.51,
+      "allocation_pct": 3,
+      "stop": 25.18,
+      "target": 31.0,
+      "thesis": "电网设备处于强势区间，出口与北美变压器供需缺口催化明确，RPS处于可买扩展区，位置未过热。",
+      "sector": "电网设备",
+      "sector_rank": "top 30%",
+      "catalyst": "北美变压器供应缺口、我国变压器出口额与均价提升、公司持续回购",
+      "catalyst_freshness": "ongoing",
+      "rps120": 94.11,
+      "conviction": "small"
+    },
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "entry_price": 54.81,
+      "allocation_pct": 3,
+      "stop": 52.07,
+      "target": 63.0,
+      "thesis": "电子化学品Ⅱ位列热点，AI散热与北美大客户新品交付带来业绩催化，0风险且RPS处于甜蜜区。",
+      "sector": "电子化学品Ⅱ",
+      "sector_rank": "top 10%",
+      "catalyst": "预计2025年度净利润同比增长63.86%至83.73%，散热材料与组件出货提升",
+      "catalyst_freshness": "ongoing",
+      "rps120": 91.6,
+      "conviction": "small"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "reason": "元件是热 sector，但dist_ma5_pct 9.1%、dist_ma20_pct 12.6%，超过追高阈值，等待回踩",
+      "rps120": 90.35
+    },
+    {
+      "code": "603115",
+      "name": "海星股份",
+      "reason": "dist_ma5_pct 6.8%、dist_ma10_pct 8.6%、dist_ma20_pct 18.2%，三项均超限，禁止追高",
+      "rps120": 87.45
+    },
+    {
+      "code": "002782",
+      "name": "可立克",
+      "reason": "dist_ma10_pct 8.3%、dist_ma20_pct 13.3%，超过MA距离上限，不开新仓",
+      "rps120": 89.48
+    },
+    {
+      "code": "300018",
+      "name": "中元股份",
+      "reason": "电网设备强，但dist_ma20_pct 12.7%超限，位置偏热，等回踩",
+      "rps120": 92.73
+    },
+    {
+      "code": "002448",
+      "name": "中原内配",
+      "reason": "Sector为汽车零部件，不在今日top 30%热区；即使rps120 91.7合格，也不逆 sector 开仓",
+      "rps120": 91.7
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "reason": "Sector为黄金，不在今日top 30%热区，资源方向分化，暂不新开仓",
+      "rps120": 87.1
+    },
+    {
+      "code": "002128",
+      "name": "电投能源",
+      "reason": "煤炭开采位列bottom 5，冷 sector 直接跳过",
+      "rps120": 90.26
+    },
+    {
+      "code": "002497",
+      "name": "雅化集团",
+      "reason": "Sector为化学制品，不在今日top 30%热区，且事件中存在近10日股价走弱信号",
+      "rps120": 94.39
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "在强市场里，最容易亏钱的不是买强，而是买离均线太远的强股；今日多只热点股因MA距离超限被过滤，支持h002与MA追高过滤必须联动执行。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h002",
+      "mechanism": "RPS说明相对强度，但均线乖离决定短线盈亏比；高乖离意味着获利盘拥挤，回撤概率上升。"
+    },
+    {
+      "text": "同样属于强势方向，电网设备比部分电子分支更容易找到MA安全的入场点，适合作为低IV环境下的小仓试错板块。",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h001",
+      "mechanism": "热点板块中，若个股仍贴近ma5/ma10，说明趋势健康且尚未进入情绪性加速，风险收益比更好。"
+    },
+    {
+      "text": "IV Rank极低时，不是停止开仓，而是只买最强sector里位置最好的票，并把仓位压到small buy级别。",
+      "type": "signal",
+      "tags": [
+        "timing",
+        "position-sizing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h001",
+      "mechanism": "低IV代表市场自满，后续波动扩张可能突然出现；保留参与权，但必须降低仓位并强化位置要求。"
+    }
+  ],
+  "market_summary": "指数普涨，创业板指+2.93%领涨，科技硬件与电子材料明显占优。Hot sectors (top 5): 非金属材料Ⅱ(+6.43%)、元件(+5.51%)、通信设备(+5.03%)、电子化学品Ⅱ(+4.14%)、工程机械(+3.67%)。Cold sectors (bottom 5): 油服工程(-7.33%)、油气开采Ⅱ(-6.48%)、炼化及贸易(-4.62%)、化学原料(-3.49%)、煤炭开采(-3.22%)。Position sector alignment: 2/3 positions in hot sectors。Breadth 4.39:1 bullish，66涨停/6跌停，属于广泛性强反弹，但r4_7+r7_10+r10合计644，赚钱效应强也意味着追高风险升高。IV整体极低，平均IV Rank约8.8%，新仓应降到small buy节奏。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

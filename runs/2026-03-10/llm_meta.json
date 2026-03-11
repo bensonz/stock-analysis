@@ -1,0 +1,118 @@
+{
+  "input_tokens": 495185,
+  "output_tokens": 14921,
+  "rounds": 5,
+  "duration_sec": 303.4,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 热门板块 2026年3月10日 非金属材料 元件 工程机械",
+        "max_results": 5
+      },
+      "result_length": 2626
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "电网设备 电池板块 通信设备 A股 2026年3月",
+        "max_results": 5
+      },
+      "result_length": 2292
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "磷化工 云天化 涨价 2026年3月",
+        "max_results": 5
+      },
+      "result_length": 2387
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "科达制造 重大资产重组 特福国际 2026年3月",
+        "max_results": 5
+      },
+      "result_length": 926
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "油服工程 油气 煤炭 板块下跌 2026年3月",
+        "max_results": 5
+      },
+      "result_length": 2433
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+2026年3月10日+收盘+板块+涨停",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "望变电气 变压器出口 北美 2026年3月",
+        "max_results": 5
+      },
+      "result_length": 2754
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "国机精工 培育钻石 涨价 轴承 商业航天 2026年3月",
+        "max_results": 5
+      },
+      "result_length": 999
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "豪迈科技 轮胎模具 燃机 2026年 业绩",
+        "max_results": 5
+      },
+      "result_length": 2974
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "query": "中元股份 电网设备 2026年 业绩 催化",
+        "max_results": 5
+      },
+      "result_length": 2261
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "query": "科陆电子 储能 电网 2026年3月 催化",
+        "max_results": 5
+      },
+      "result_length": 2400
+    }
+  ]
+}
