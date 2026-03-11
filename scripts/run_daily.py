@@ -10,6 +10,7 @@ Phase 4: VALIDATION + COMMIT
 Usage:
     python scripts/run_daily.py --run              # Full pipeline: collect → LLM → apply → validate → commit
     python scripts/run_daily.py --run --no-commit  # Full pipeline without git commit
+    python scripts/run_daily.py --run --legacy-llm # Full pipeline with old 4-pass LLM approach
     python scripts/run_daily.py                    # Phase 1+2 only (outputs prompt to stdout, legacy mode)
     python scripts/run_daily.py --phase1           # Data collection only
     python scripts/run_daily.py --apply FILE       # Apply LLM response from file (Phase 3+4)
@@ -875,7 +876,11 @@ def main():
 
     if "--run" in args:
         # Full automated pipeline: Phase 1 → LLM → Phase 3 → Phase 4 → git commit
-        from llm_client import call_llm
+        legacy_llm = "--legacy-llm" in args
+        if legacy_llm:
+            from llm_client import call_llm_v1 as call_llm
+        else:
+            from llm_client import call_llm
 
         no_commit = "--no-commit" in args
 
@@ -895,14 +900,15 @@ def main():
             encoding="utf-8",
         )
 
-        # Phase 2: Build prompt and call LLM (sequential Claude→GPT)
-        print(f"\nPhase 2: Calling LLM...", file=sys.stderr)
+        # Phase 2: Build prompt and call LLM
+        print(f"\nPhase 2: Calling LLM{' (legacy 4-pass)' if legacy_llm else ''}...", file=sys.stderr)
         prompt = phase2_build_prompt(data)
 
-        # Build phase1_data dict for GPT's condensed summary
-        phase1_data = {k: v for k, v in data.items() if k not in ("learnings", "_hypothesis_data", "hypothesis_prompt")}
-
-        llm_result = call_llm(prompt, output_dir=run_dir, phase1_data=phase1_data)
+        if legacy_llm:
+            llm_result = call_llm(prompt, output_dir=run_dir)
+        else:
+            phase1_data = {k: v for k, v in data.items() if k not in ("learnings", "_hypothesis_data", "hypothesis_prompt")}
+            llm_result = call_llm(prompt, output_dir=run_dir, phase1_data=phase1_data)
 
         # Use GPT JSON (primary) or Claude JSON (fallback)
         decisions = llm_result.get("gpt_json") or llm_result.get("claude_json")
