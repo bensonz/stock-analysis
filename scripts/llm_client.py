@@ -634,6 +634,29 @@ def call_llm(
     # Extract Claude's fallback JSON from the memo
     claude_json = _parse_json_from_text(pass1_text)
 
+    # If Claude's memo has no parseable JSON, do a small follow-up call
+    if not claude_json:
+        print("  [Pass 1b] Claude fallback JSON...", file=sys.stderr)
+        fallback_prompt = (
+            "现在请直接输出最终 JSON 决策。不要输出任何解释文字、markdown标记或代码块，"
+            "直接从 { 开始输出纯 JSON。确保 JSON 完整（所有括号闭合）。"
+            "注意：skip_list 中只能引用输入数据中实际存在的价格和指标，不要编造。"
+        )
+        messages.append({"role": "user", "content": fallback_prompt})
+        fb_text, fb_in, fb_out, fb_rounds = _run_tool_loop(
+            client, messages, model, max_tokens, temperature, tool_log, label="P1b "
+        )
+        claude_json = _parse_json_from_text(fb_text)
+        in1 += fb_in
+        out1 += fb_out
+        rounds1 += fb_rounds
+        if output_dir:
+            (output_dir / "claude_fallback.txt").write_text(fb_text, encoding="utf-8")
+        if claude_json:
+            print("  Claude fallback JSON extracted", file=sys.stderr)
+        else:
+            print("  WARNING: Claude fallback also produced no valid JSON", file=sys.stderr)
+
     total_input = in1
     total_output = out1
     total_rounds = rounds1
