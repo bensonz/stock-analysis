@@ -1,5 +1,20 @@
 # Progress
 
+## 2026-03-11: Architecture Option B — Sequential Claude→GPT Pipeline
+
+### Completed
+1. **`scripts/llm_client.py`** — Replaced 4-pass with 2-pass sequential handoff
+   - Pass 1: Claude (full prompt + tools) → research memo + fallback JSON
+   - Pass 2: GPT-5.4 (condensed ~30KB + memo, no tools, 120s timeout) → final JSON
+   - Added `build_summary()`, `build_gpt_prompt()`, `_parse_json_from_text()`
+   - Preserved `call_llm_v1()` for rollback
+2. **`scripts/run_daily.py`** — Updated for new return format, `--legacy-llm` flag
+3. **`agents/ANALYST.md`** — Research memo output mode with fallback JSON
+
+### Impact
+- ~71% input token reduction, eliminates GPT hanging on 213KB prompts
+- GPT sees ~30-40KB instead of 213KB, single call with 120s timeout
+
 ## 2026-03-05: Refactor Date-Grouped Runs
 
 ### Completed
