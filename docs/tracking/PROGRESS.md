@@ -1,5 +1,13 @@
 # Progress
 
+## 2026-03-11: Fix Option B Schema Mismatch + Fallback
+
+### Completed
+1. **`build_summary()` schema fix** — handles actual Phase 1 data: dict indices, {top5,bottom5} sectors, `positions` key, `price` in position_prices, structured iv_sentiment, None/missing fields
+2. **Claude fallback JSON** — added Pass 1b: if memo has no JSON, small follow-up call extracts it
+3. **Architecture preserved** — Claude full+tools → GPT condensed+no-tools unchanged
+4. **10 new tests** — `test_build_summary.py` covers all schema variants + real phase1.json
+
 ## 2026-03-11: Architecture Option B — Sequential Claude→GPT Pipeline
 
 ### Completed
