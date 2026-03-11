@@ -451,11 +451,16 @@ above and the market data summary:
 
 
 def build_summary(phase1_data: dict) -> str:
-    """Condense phase1 data (~250KB) into ~5-10KB for GPT."""
+    """Condense phase1 data (~250KB) into ~5-10KB for GPT.
+
+    Handles both the actual Phase 1 schema (dict indices, {top5,bottom5} sectors,
+    'positions' key, 'price' in position_prices, structured iv_sentiment) and
+    any future normalized schema.
+    """
     sections = []
 
-    # Portfolio snapshot
-    pf = phase1_data.get("portfolio", {})
+    # Portfolio snapshot (may be None in raw Phase 1 — built later by run_daily)
+    pf = phase1_data.get("portfolio") or {}
     if pf:
         sections.append(
             "## Portfolio Snapshot\n"
@@ -465,67 +470,81 @@ def build_summary(phase1_data: dict) -> str:
             f"- Total return: {pf.get('totalReturnPct', 0)}%"
         )
 
-    # Market indices
-    market = phase1_data.get("market", {})
-    indices = market.get("indices", [])
+    # Market indices — dict (actual) or list
+    market = phase1_data.get("market") or {}
+    indices = market.get("indices") or {}
     if indices:
         idx_lines = ["## Market Indices"]
-        for idx in indices:
-            name = idx.get("name", idx.get("code", "?"))
-            idx_lines.append(f"- {name}: {idx.get('close', '?')} ({idx.get('change_pct', '?')}%)")
+        if isinstance(indices, dict):
+            for name, info in indices.items():
+                if isinstance(info, dict):
+                    idx_lines.append(f"- {name}: {info.get('close', '?')} ({info.get('change_pct', '?')}%)")
+        elif isinstance(indices, list):
+            for idx in indices:
+                name = idx.get("name", idx.get("code", "?"))
+                idx_lines.append(f"- {name}: {idx.get('close', '?')} ({idx.get('change_pct', '?')}%)")
         sections.append("\n".join(idx_lines))
 
     # Breadth
-    breadth = market.get("breadth", {})
+    breadth = market.get("breadth") or {}
     if breadth:
         up = breadth.get("up", 0)
         down = breadth.get("down", 0)
         ratio = f"{up/down:.1f}:1" if down > 0 else "N/A"
         sections.append(f"## Breadth\n- Up: {up} / Down: {down} / Ratio: {ratio}")
 
-    # Top/bottom sectors
-    sector_data = market.get("sectors", [])
+    # Sectors — {top5, bottom5} (actual) or flat list
+    sector_data = market.get("sectors") or {}
     if sector_data:
-        top = sector_data[:10]
-        bottom = sector_data[-5:] if len(sector_data) > 10 else []
-        lines = ["## Sectors (top 10)"]
-        for s in top:
-            lines.append(f"- {s.get('name', '?')}: {s.get('change_pct', '?')}%")
-        if bottom:
-            lines.append("\n**Bottom 5:**")
-            for s in bottom:
+        lines = ["## Sectors"]
+        if isinstance(sector_data, dict):
+            for label in ("top5", "bottom5"):
+                items = sector_data.get(label, [])
+                if items:
+                    lines.append(f"\n**{label}:**")
+                    for s in items:
+                        name = s.get("板块名称", s.get("name", "?"))
+                        chg = s.get("涨跌幅", s.get("change_pct", "?"))
+                        lines.append(f"- {name}: {chg}%")
+        elif isinstance(sector_data, list):
+            for s in sector_data[:10]:
                 lines.append(f"- {s.get('name', '?')}: {s.get('change_pct', '?')}%")
         sections.append("\n".join(lines))
 
     # Strategy pool — compact table
-    pool = phase1_data.get("strategy_pool", {}).get("stocks", [])
+    pool = (phase1_data.get("strategy_pool") or {}).get("stocks", [])
     if pool:
-        lines = ["## Strategy Pool", "| Code | Name | Price | Chg% | RPS120 | Sector | PE |", "|---|---|---|---|---|---|---|"]
+        lines = ["## Strategy Pool", "| Code | Name | RPS120 | RPS20 | PE | MCap |", "|---|---|---|---|---|---|"]
         for s in pool:
             lines.append(
-                f"| {s.get('code', '?')} | {s.get('name', '?')} | {s.get('price', '?')} "
-                f"| {s.get('change_pct', '?')} | {s.get('rps120', '?')} "
-                f"| {s.get('sector', '?')} | {s.get('pe', '?')} |"
+                f"| {s.get('code', '?')} | {s.get('name', '?')} "
+                f"| {s.get('rps120', '?')} | {s.get('rps20', '?')} "
+                f"| {s.get('pe', '?')} | {s.get('market_cap', '?')} |"
             )
         sections.append("\n".join(lines))
 
-    # Enriched candidates summary
-    enriched = phase1_data.get("enriched_candidates", [])
+    # Enriched candidates — try both keys
+    enriched = phase1_data.get("enriched") or phase1_data.get("enriched_candidates") or []
     if enriched:
         lines = ["## Enriched Candidates"]
         for c in enriched:
+            # Get sector from industries list if present
+            sector = c.get("sector", "?")
+            if sector == "?" and c.get("industries"):
+                industries = c["industries"]
+                sector = industries[0].get("name", "?") if industries else "?"
             lines.append(
                 f"- **{c.get('code', '?')} {c.get('name', '?')}**: "
-                f"RPS120={c.get('rps120', '?')}, sector={c.get('sector', '?')}, "
                 f"PE={c.get('pe', '?')}, "
                 f"dist_ma5={c.get('dist_ma5_pct', '?')}%, "
                 f"dist_ma10={c.get('dist_ma10_pct', '?')}%, "
-                f"dist_ma20={c.get('dist_ma20_pct', '?')}%"
+                f"dist_ma20={c.get('dist_ma20_pct', '?')}%, "
+                f"sector={sector}"
             )
         sections.append("\n".join(lines))
 
-    # Active positions
-    positions = phase1_data.get("active_positions", [])
+    # Positions — try both keys
+    positions = phase1_data.get("positions") or phase1_data.get("active_positions") or []
     if positions:
         lines = ["## Active Positions"]
         for p in positions:
@@ -537,26 +556,42 @@ def build_summary(phase1_data: dict) -> str:
             )
         sections.append("\n".join(lines))
 
-    # Position prices
-    pos_prices = phase1_data.get("position_prices", {})
+    # Position prices — handle both 'price' and 'current_price'
+    pos_prices = phase1_data.get("position_prices") or {}
     if pos_prices:
         lines = ["## Position Prices (live)"]
         for code, info in pos_prices.items():
             if isinstance(info, dict):
-                lines.append(f"- {code}: {info.get('current_price', '?')} ({info.get('change_pct', '?')}%)")
+                price = info.get("price", info.get("current_price", "?"))
+                chg = info.get("change_pct", "?")
+                lines.append(f"- {code} ({info.get('name', '')}): {price} ({chg}%)")
             else:
                 lines.append(f"- {code}: {info}")
         sections.append("\n".join(lines))
 
-    # IV Sentiment
-    iv = phase1_data.get("iv_sentiment", {})
+    # IV Sentiment — structured format
+    iv = phase1_data.get("iv_sentiment") or {}
     if iv:
         lines = ["## IV Sentiment"]
-        for k, v in iv.items():
-            if isinstance(v, dict):
-                lines.append(f"- {k}: IV={v.get('iv', '?')}, IVRank={v.get('iv_rank', '?')}%")
-            else:
-                lines.append(f"- {k}: {v}")
+        overall = iv.get("overall_sentiment")
+        if isinstance(overall, dict):
+            lines.append(
+                f"- Signal: {overall.get('signal', '?')}, "
+                f"Avg IV Rank: {overall.get('avg_iv_rank', '?')}, "
+                f"Avg IV Percentile: {overall.get('avg_iv_percentile', '?')}"
+            )
+            if overall.get("implication"):
+                lines.append(f"- Implication: {overall['implication']}")
+        etf_data = iv.get("etf_iv_data", [])
+        if etf_data:
+            for etf in etf_data:
+                if isinstance(etf, dict):
+                    lines.append(
+                        f"- {etf.get('name', etf.get('underlying', '?'))}: "
+                        f"IV={etf.get('current_iv', '?')}, "
+                        f"IVRank={etf.get('iv_rank', '?')}, "
+                        f"{etf.get('interpretation', '')}"
+                    )
         sections.append("\n".join(lines))
 
     return "\n\n".join(sections)
