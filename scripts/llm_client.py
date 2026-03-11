@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-llm_client.py — Anthropic API client with two-pass tool-use loop.
+llm_client.py — Sequential Claude→GPT collaboration pipeline.
 
-Pass 1: Full prompt → LLM researches (web_search/web_fetch) and drafts analysis
-Pass 2: Same conversation, repeat instruction → LLM refines
+Pass 1: Claude (full prompt + tools) → research memo + fallback JSON
+Pass 2: GPT-5.4 (condensed prompt + Claude memo, no tools) → final JSON decisions
 
-Tools: web_search (Tavily), web_fetch (direct HTTP)
+Tools: web_search (Tavily), web_fetch (direct HTTP) — Claude only
 """
 
 import json
@@ -410,12 +410,156 @@ def _run_openai_tool_loop(
 
 
 OPENAI_MODEL = "gpt-5.4"
+GPT_TIMEOUT = 120  # seconds — no more hanging
 
-REFINE_PROMPT = (
-    "现在请直接输出最终 JSON 决策。不要输出任何解释文字、markdown标记或代码块，"
-    "直接从 { 开始输出纯 JSON。确保 JSON 完整（所有括号闭合）。"
-    "注意：skip_list 中只能引用输入数据中实际存在的价格和指标，不要编造。"
-)
+
+def build_gpt_prompt(analyst_md: str, summary: str, claude_memo: str) -> str:
+    """Build the condensed prompt for GPT's decision-making pass."""
+    return f"""# Decision Instructions
+
+{analyst_md}
+
+---
+
+# Market Data Summary
+
+{summary}
+
+---
+
+# Research Analysis (by Claude)
+
+The following research memo was produced by a senior analyst who reviewed
+the full market data, ran web searches for catalysts/news, and formed
+preliminary views. Review it critically.
+
+{claude_memo}
+
+---
+
+# Your Task
+
+You are the portfolio manager making final decisions. Based on the research
+above and the market data summary:
+
+1. Critically evaluate the analyst's recommendations
+2. Check for confirmation bias, recency bias, or missing risk factors
+3. Make your final decisions
+4. Output ONLY valid JSON starting with {{ — no markdown, no explanation
+5. Follow the exact JSON schema specified in the Decision Instructions above
+"""
+
+
+def build_summary(phase1_data: dict) -> str:
+    """Condense phase1 data (~250KB) into ~5-10KB for GPT."""
+    sections = []
+
+    # Portfolio snapshot
+    pf = phase1_data.get("portfolio", {})
+    if pf:
+        sections.append(
+            "## Portfolio Snapshot\n"
+            f"- Equity: {pf.get('totalEquity', '?'):,} / Cash: {pf.get('cash', '?'):,} ({pf.get('cashPct', '?')}%)\n"
+            f"- Positions: {pf.get('positionsUsed', 0)}/{pf.get('positionsMax', 10)}\n"
+            f"- Unrealized P&L: {pf.get('unrealizedPnl', 0):,} | Realized: {pf.get('realizedPnl', 0):,}\n"
+            f"- Total return: {pf.get('totalReturnPct', 0)}%"
+        )
+
+    # Market indices
+    market = phase1_data.get("market", {})
+    indices = market.get("indices", [])
+    if indices:
+        idx_lines = ["## Market Indices"]
+        for idx in indices:
+            name = idx.get("name", idx.get("code", "?"))
+            idx_lines.append(f"- {name}: {idx.get('close', '?')} ({idx.get('change_pct', '?')}%)")
+        sections.append("\n".join(idx_lines))
+
+    # Breadth
+    breadth = market.get("breadth", {})
+    if breadth:
+        up = breadth.get("up", 0)
+        down = breadth.get("down", 0)
+        ratio = f"{up/down:.1f}:1" if down > 0 else "N/A"
+        sections.append(f"## Breadth\n- Up: {up} / Down: {down} / Ratio: {ratio}")
+
+    # Top/bottom sectors
+    sector_data = market.get("sectors", [])
+    if sector_data:
+        top = sector_data[:10]
+        bottom = sector_data[-5:] if len(sector_data) > 10 else []
+        lines = ["## Sectors (top 10)"]
+        for s in top:
+            lines.append(f"- {s.get('name', '?')}: {s.get('change_pct', '?')}%")
+        if bottom:
+            lines.append("\n**Bottom 5:**")
+            for s in bottom:
+                lines.append(f"- {s.get('name', '?')}: {s.get('change_pct', '?')}%")
+        sections.append("\n".join(lines))
+
+    # Strategy pool — compact table
+    pool = phase1_data.get("strategy_pool", {}).get("stocks", [])
+    if pool:
+        lines = ["## Strategy Pool", "| Code | Name | Price | Chg% | RPS120 | Sector | PE |", "|---|---|---|---|---|---|---|"]
+        for s in pool:
+            lines.append(
+                f"| {s.get('code', '?')} | {s.get('name', '?')} | {s.get('price', '?')} "
+                f"| {s.get('change_pct', '?')} | {s.get('rps120', '?')} "
+                f"| {s.get('sector', '?')} | {s.get('pe', '?')} |"
+            )
+        sections.append("\n".join(lines))
+
+    # Enriched candidates summary
+    enriched = phase1_data.get("enriched_candidates", [])
+    if enriched:
+        lines = ["## Enriched Candidates"]
+        for c in enriched:
+            lines.append(
+                f"- **{c.get('code', '?')} {c.get('name', '?')}**: "
+                f"RPS120={c.get('rps120', '?')}, sector={c.get('sector', '?')}, "
+                f"PE={c.get('pe', '?')}, "
+                f"dist_ma5={c.get('dist_ma5_pct', '?')}%, "
+                f"dist_ma10={c.get('dist_ma10_pct', '?')}%, "
+                f"dist_ma20={c.get('dist_ma20_pct', '?')}%"
+            )
+        sections.append("\n".join(lines))
+
+    # Active positions
+    positions = phase1_data.get("active_positions", [])
+    if positions:
+        lines = ["## Active Positions"]
+        for p in positions:
+            lines.append(
+                f"- **{p.get('code', '?')} {p.get('name', '?')}**: "
+                f"entry={p.get('entryPrice', '?')} on {p.get('entryDate', '?')}, "
+                f"stop={p.get('stopLoss', '?')}, target={p.get('targetPrice', '?')}, "
+                f"sector={p.get('sector', '?')}"
+            )
+        sections.append("\n".join(lines))
+
+    # Position prices
+    pos_prices = phase1_data.get("position_prices", {})
+    if pos_prices:
+        lines = ["## Position Prices (live)"]
+        for code, info in pos_prices.items():
+            if isinstance(info, dict):
+                lines.append(f"- {code}: {info.get('current_price', '?')} ({info.get('change_pct', '?')}%)")
+            else:
+                lines.append(f"- {code}: {info}")
+        sections.append("\n".join(lines))
+
+    # IV Sentiment
+    iv = phase1_data.get("iv_sentiment", {})
+    if iv:
+        lines = ["## IV Sentiment"]
+        for k, v in iv.items():
+            if isinstance(v, dict):
+                lines.append(f"- {k}: IV={v.get('iv', '?')}, IVRank={v.get('iv_rank', '?')}%")
+            else:
+                lines.append(f"- {k}: {v}")
+        sections.append("\n".join(lines))
+
+    return "\n\n".join(sections)
 
 
 def call_llm(
@@ -424,124 +568,148 @@ def call_llm(
     max_tokens: int = 16384,
     temperature: float = 0.3,
     output_dir: Path | None = None,
+    phase1_data: dict | None = None,
 ) -> dict:
-    """Call Anthropic API with two-pass approach.
+    """Sequential Claude→GPT pipeline.
 
-    Pass 1: Full prompt (ANALYST.md + data) → LLM researches and drafts analysis
-    Pass 2: Same conversation, just the instruction → LLM refines with full context
+    Pass 1: Claude (full prompt + tools) → research memo + fallback JSON
+    Pass 2: GPT-5.4 (condensed summary + Claude memo, no tools) → final JSON
 
-    Args:
-        prompt: The full analysis prompt.
-        model: Model name.
-        max_tokens: Max tokens per response.
-        temperature: Sampling temperature.
-        output_dir: If set, save pass1_response.txt and pass2_response.txt here.
-
-    Returns:
-        {
-            "text": str,           # Final text response from pass 2 (should contain JSON)
-            "pass1_text": str,     # First pass response (for debugging)
-            "tool_calls": list,    # Log of all tool calls made
-            "input_tokens": int,   # Total input tokens
-            "output_tokens": int,  # Total output tokens
-            "rounds": int,         # Total number of API calls
-            "duration_sec": float, # Total wall time
-        }
+    Returns dict with claude_memo, claude_json, gpt_json, fallback_used, etc.
     """
     base_url = os.environ.get("ANTHROPIC_BASE_URL", "https://api.anthropic.com")
     api_key = os.environ.get("ANTHROPIC_AUTH_TOKEN") or os.environ.get("ANTHROPIC_API_KEY", "")
-
     if not api_key:
         raise ValueError("No API key found. Set ANTHROPIC_AUTH_TOKEN or ANTHROPIC_API_KEY.")
 
-    client = anthropic.Anthropic(
-        base_url=base_url,
-        api_key=api_key,
-    )
-
+    client = anthropic.Anthropic(base_url=base_url, api_key=api_key)
     messages = [{"role": "user", "content": prompt}]
     tool_log = []
     start_time = time.time()
 
-    # Pass 1: Full prompt — LLM researches and produces initial analysis
-    print("  [Pass 1] Full analysis...", file=sys.stderr)
+    # --- Pass 1: Claude — full prompt with tools (research memo) ---
+    print("  [Pass 1] Claude research...", file=sys.stderr)
     pass1_text, in1, out1, rounds1 = _run_tool_loop(
         client, messages, model, max_tokens, temperature, tool_log, label="P1 "
     )
-
-    # Save pass 1 response
     if output_dir:
         output_dir.mkdir(parents=True, exist_ok=True)
-        (output_dir / "pass1_response.txt").write_text(pass1_text, encoding="utf-8")
+        (output_dir / "claude_memo.txt").write_text(pass1_text, encoding="utf-8")
 
-    # Pass 2: Same conversation, repeat instruction — LLM refines
-    print("  [Pass 2] Refine...", file=sys.stderr)
-    messages.append({"role": "user", "content": REFINE_PROMPT})
-    pass2_text, in2, out2, rounds2 = _run_tool_loop(
-        client, messages, model, max_tokens, temperature, tool_log, label="P2 "
-    )
+    # Extract Claude's fallback JSON from the memo
+    claude_json = _parse_json_from_text(pass1_text)
 
-    # Save pass 2 response
-    if output_dir:
-        (output_dir / "pass2_response.txt").write_text(pass2_text, encoding="utf-8")
+    total_input = in1
+    total_output = out1
+    total_rounds = rounds1
 
-    total_input = in1 + in2
-    total_output = out1 + out2
-    total_rounds = rounds1 + rounds2
-
-    # --- Pass 3+4: GPT-5.4 (independent analysis) ---
+    # --- Pass 2: GPT-5.4 — condensed prompt + Claude's memo ---
     openai_key = os.environ.get("OPENAI_API_KEY", "")
     openai_base = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
-    pass3_text = ""
-    pass4_text = ""
+    gpt_text = ""
+    gpt_json = {}
+    fallback_used = False
 
-    if openai_key:
+    if openai_key and phase1_data:
         try:
             oai_client = openai.OpenAI(api_key=openai_key, base_url=openai_base)
-            oai_messages = [{"role": "user", "content": prompt}]
 
-            # Pass 3: GPT-5.4 full analysis with tools
-            print("  [Pass 3] GPT-5.4 analysis...", file=sys.stderr)
-            pass3_text, in3, out3, rounds3 = _run_openai_tool_loop(
-                oai_client, oai_messages, OPENAI_MODEL, max_tokens, temperature, tool_log, label="P3 "
+            # Build condensed prompt: ANALYST.md + summary + Claude memo
+            analyst_md = (Path(__file__).parent.parent / "agents" / "ANALYST.md").read_text(encoding="utf-8")
+            summary = build_summary(phase1_data)
+            gpt_prompt = build_gpt_prompt(analyst_md, summary, pass1_text)
+
+            print("  [Pass 2] GPT-5.4 decision...", file=sys.stderr)
+            print(f"    GPT prompt: ~{len(gpt_prompt)//1000}KB", file=sys.stderr)
+
+            # Single call, no tools, with timeout
+            response = oai_client.chat.completions.create(
+                model=OPENAI_MODEL,
+                messages=[{"role": "user", "content": gpt_prompt}],
+                max_tokens=16384,
+                temperature=0.3,
+                timeout=GPT_TIMEOUT,
             )
-            total_input += in3
-            total_output += out3
-            total_rounds += rounds3
+            gpt_text = response.choices[0].message.content or ""
+            usage = response.usage or type("U", (), {"prompt_tokens": 0, "completion_tokens": 0})()
+            total_input += usage.prompt_tokens
+            total_output += usage.completion_tokens
+            total_rounds += 1
+
+            print(f"    done ({usage.prompt_tokens}+{usage.completion_tokens} tokens)", file=sys.stderr)
 
             if output_dir:
-                (output_dir / "pass3_response.txt").write_text(pass3_text, encoding="utf-8")
+                (output_dir / "gpt_response.txt").write_text(gpt_text, encoding="utf-8")
 
-            # Pass 4: GPT-5.4 refine
-            print("  [Pass 4] GPT-5.4 refine...", file=sys.stderr)
-            oai_messages.append({"role": "user", "content": REFINE_PROMPT})
-            pass4_text, in4, out4, rounds4 = _run_openai_tool_loop(
-                oai_client, oai_messages, OPENAI_MODEL, max_tokens, temperature, tool_log, label="P4 "
-            )
-            total_input += in4
-            total_output += out4
-            total_rounds += rounds4
-
-            if output_dir:
-                (output_dir / "pass4_response.txt").write_text(pass4_text, encoding="utf-8")
+            gpt_json = _parse_json_from_text(gpt_text)
+            if not gpt_json:
+                print("  WARNING: Could not parse GPT response as JSON", file=sys.stderr)
 
         except Exception as e:
             print(f"  WARNING: GPT-5.4 pass failed: {e}", file=sys.stderr)
-            # Non-fatal — Claude's output is primary
+    elif not openai_key:
+        print("  [Skip] No OPENAI_API_KEY — Claude-only mode", file=sys.stderr)
+    elif not phase1_data:
+        print("  [Skip] No phase1_data — Claude-only mode", file=sys.stderr)
+
+    # Determine primary result
+    if gpt_json:
+        primary_text = gpt_text
+        fallback_used = False
     else:
-        print("  [Skip] No OPENAI_API_KEY — skipping GPT-5.4 passes", file=sys.stderr)
+        primary_text = pass1_text
+        fallback_used = True
+        if claude_json:
+            print("  Using Claude fallback JSON", file=sys.stderr)
+        else:
+            print("  WARNING: Neither GPT nor Claude produced valid JSON", file=sys.stderr)
 
     return {
-        "text": pass2_text,         # Claude's refined output (primary)
-        "pass1_text": pass1_text,   # Claude's research draft
-        "pass3_text": pass3_text,   # GPT-5.4's research draft
-        "pass4_text": pass4_text,   # GPT-5.4's refined output
+        "text": primary_text,
+        "claude_memo": pass1_text,
+        "claude_json": claude_json,
+        "gpt_json": gpt_json,
+        "fallback_used": fallback_used,
         "tool_calls": tool_log,
         "input_tokens": total_input,
         "output_tokens": total_output,
         "rounds": total_rounds,
         "duration_sec": round(time.time() - start_time, 1),
     }
+
+
+def _parse_json_from_text(text: str) -> dict:
+    """Extract JSON object from LLM response text."""
+    # Direct parse
+    try:
+        return json.loads(text)
+    except (json.JSONDecodeError, TypeError):
+        pass
+    if not text:
+        return {}
+    # Extract from ```json blocks
+    json_blocks = re.findall(r"```json\s*(.*?)```", text, re.DOTALL)
+    for block in json_blocks:
+        try:
+            return json.loads(block.strip())
+        except json.JSONDecodeError:
+            continue
+    # Find JSON object by brace matching
+    brace_count = 0
+    start = None
+    for i, ch in enumerate(text):
+        if ch == "{":
+            if brace_count == 0:
+                start = i
+            brace_count += 1
+        elif ch == "}":
+            brace_count -= 1
+            if brace_count == 0 and start is not None:
+                try:
+                    return json.loads(text[start:i + 1])
+                except json.JSONDecodeError:
+                    start = None
+    return {}
 
 
 def _summarize_input(input_data: dict) -> str:
