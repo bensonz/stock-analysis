@@ -678,6 +678,72 @@ def call_llm(
     }
 
 
+REFINE_PROMPT = (
+    "现在请直接输出最终 JSON 决策。不要输出任何解释文字、markdown标记或代码块，"
+    "直接从 { 开始输出纯 JSON。确保 JSON 完整（所有括号闭合）。"
+    "注意：skip_list 中只能引用输入数据中实际存在的价格和指标，不要编造。"
+)
+
+
+def call_llm_v1(
+    prompt: str,
+    model: str = DEFAULT_MODEL,
+    max_tokens: int = 16384,
+    temperature: float = 0.3,
+    output_dir: Path | None = None,
+) -> dict:
+    """Legacy 4-pass approach. Use --legacy-llm flag to activate."""
+    base_url = os.environ.get("ANTHROPIC_BASE_URL", "https://api.anthropic.com")
+    api_key = os.environ.get("ANTHROPIC_AUTH_TOKEN") or os.environ.get("ANTHROPIC_API_KEY", "")
+    if not api_key:
+        raise ValueError("No API key found.")
+
+    client = anthropic.Anthropic(base_url=base_url, api_key=api_key)
+    messages = [{"role": "user", "content": prompt}]
+    tool_log = []
+    start_time = time.time()
+
+    print("  [P1] Claude analysis...", file=sys.stderr)
+    p1, in1, out1, r1 = _run_tool_loop(client, messages, model, max_tokens, temperature, tool_log, label="P1 ")
+    if output_dir:
+        output_dir.mkdir(parents=True, exist_ok=True)
+        (output_dir / "pass1_response.txt").write_text(p1, encoding="utf-8")
+
+    print("  [P2] Claude refine...", file=sys.stderr)
+    messages.append({"role": "user", "content": REFINE_PROMPT})
+    p2, in2, out2, r2 = _run_tool_loop(client, messages, model, max_tokens, temperature, tool_log, label="P2 ")
+    if output_dir:
+        (output_dir / "pass2_response.txt").write_text(p2, encoding="utf-8")
+
+    ti, to, tr = in1 + in2, out1 + out2, r1 + r2
+    p3 = p4 = ""
+    oai_key = os.environ.get("OPENAI_API_KEY", "")
+    oai_base = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
+    if oai_key:
+        try:
+            oc = openai.OpenAI(api_key=oai_key, base_url=oai_base)
+            om = [{"role": "user", "content": prompt}]
+            print("  [P3] GPT analysis...", file=sys.stderr)
+            p3, i3, o3, r3 = _run_openai_tool_loop(oc, om, OPENAI_MODEL, max_tokens, temperature, tool_log, label="P3 ")
+            ti += i3; to += o3; tr += r3
+            if output_dir:
+                (output_dir / "pass3_response.txt").write_text(p3, encoding="utf-8")
+            print("  [P4] GPT refine...", file=sys.stderr)
+            om.append({"role": "user", "content": REFINE_PROMPT})
+            p4, i4, o4, r4 = _run_openai_tool_loop(oc, om, OPENAI_MODEL, max_tokens, temperature, tool_log, label="P4 ")
+            ti += i4; to += o4; tr += r4
+            if output_dir:
+                (output_dir / "pass4_response.txt").write_text(p4, encoding="utf-8")
+        except Exception as e:
+            print(f"  WARNING: GPT failed: {e}", file=sys.stderr)
+
+    return {
+        "text": p2, "pass1_text": p1, "pass3_text": p3, "pass4_text": p4,
+        "tool_calls": tool_log, "input_tokens": ti, "output_tokens": to,
+        "rounds": tr, "duration_sec": round(time.time() - start_time, 1),
+    }
+
+
 def _parse_json_from_text(text: str) -> dict:
     """Extract JSON object from LLM response text."""
     # Direct parse
