@@ -412,7 +412,8 @@ def _run_openai_tool_loop(
 OPENAI_MODEL = "gpt-5.4"
 
 REFINE_PROMPT = (
-    "请根据以上数据进行分析，按照 Required Output JSON 格式返回你的决策。"
+    "现在请直接输出最终 JSON 决策。不要输出任何解释文字、markdown标记或代码块，"
+    "直接从 { 开始输出纯 JSON。确保 JSON 完整（所有括号闭合）。"
     "注意：skip_list 中只能引用输入数据中实际存在的价格和指标，不要编造。"
 )
 
@@ -420,7 +421,7 @@ REFINE_PROMPT = (
 def call_llm(
     prompt: str,
     model: str = DEFAULT_MODEL,
-    max_tokens: int = 8192,
+    max_tokens: int = 16384,
     temperature: float = 0.3,
     output_dir: Path | None = None,
 ) -> dict:
