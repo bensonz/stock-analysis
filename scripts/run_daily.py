@@ -895,38 +895,40 @@ def main():
             encoding="utf-8",
         )
 
-        # Phase 2: Build prompt and call LLM
+        # Phase 2: Build prompt and call LLM (sequential Claude→GPT)
         print(f"\nPhase 2: Calling LLM...", file=sys.stderr)
         prompt = phase2_build_prompt(data)
 
-        llm_result = call_llm(prompt, output_dir=run_dir)
+        # Build phase1_data dict for GPT's condensed summary
+        phase1_data = {k: v for k, v in data.items() if k not in ("learnings", "_hypothesis_data", "hypothesis_prompt")}
 
-        # Parse JSON from LLM response
-        decisions = _parse_llm_response(llm_result["text"])
+        llm_result = call_llm(prompt, output_dir=run_dir, phase1_data=phase1_data)
+
+        # Use GPT JSON (primary) or Claude JSON (fallback)
+        decisions = llm_result.get("gpt_json") or llm_result.get("claude_json")
+        if not decisions:
+            decisions = _parse_llm_response(llm_result["text"])
         if not decisions:
             print("ERROR: Could not parse LLM response as JSON", file=sys.stderr)
             print(f"Response text ({len(llm_result['text'])} chars):", file=sys.stderr)
             print(llm_result["text"][:2000], file=sys.stderr)
             sys.exit(1)
 
-        # Save response
+        # Save responses
         (run_dir / "response.json").write_text(
             json.dumps(decisions, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
         )
-
-        # Also try to parse GPT-5.4 response if available
-        gpt_decisions = None
-        if llm_result.get("pass4_text"):
-            gpt_decisions = _parse_llm_response(llm_result["pass4_text"])
-            if gpt_decisions:
-                (run_dir / "response_gpt.json").write_text(
-                    json.dumps(gpt_decisions, ensure_ascii=False, indent=2) + "\n",
-                    encoding="utf-8",
-                )
-                print(f"  GPT-5.4 response saved (response_gpt.json)", file=sys.stderr)
-            else:
-                print(f"  WARNING: Could not parse GPT-5.4 response as JSON", file=sys.stderr)
+        if llm_result.get("claude_json"):
+            (run_dir / "response_claude.json").write_text(
+                json.dumps(llm_result["claude_json"], ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+        if llm_result.get("gpt_json"):
+            (run_dir / "response_gpt.json").write_text(
+                json.dumps(llm_result["gpt_json"], ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
 
         # Save LLM metadata
         llm_meta = {
@@ -935,17 +937,18 @@ def main():
             "rounds": llm_result["rounds"],
             "duration_sec": llm_result["duration_sec"],
             "tool_calls": llm_result["tool_calls"],
-            "has_gpt_response": bool(gpt_decisions),
+            "fallback_used": llm_result.get("fallback_used", False),
         }
         (run_dir / "llm_meta.json").write_text(
             json.dumps(llm_meta, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
         )
 
+        source = "Claude fallback" if llm_result.get("fallback_used") else "GPT primary"
         print(f"  LLM: {llm_result['rounds']} rounds, "
               f"{llm_result['input_tokens']}+{llm_result['output_tokens']} tokens, "
               f"{len(llm_result['tool_calls'])} tool calls, "
-              f"{llm_result['duration_sec']}s", file=sys.stderr)
+              f"{llm_result['duration_sec']}s ({source})", file=sys.stderr)
 
         # Phase 3: Apply
         print(f"\nPhase 3: Applying decisions...", file=sys.stderr)
@@ -962,6 +965,7 @@ def main():
             "rounds": llm_result["rounds"],
             "tool_calls_count": len(llm_result["tool_calls"]),
             "duration_sec": llm_result["duration_sec"],
+            "fallback_used": llm_result.get("fallback_used", False),
         })
 
         log3 = phase3_apply(date, decisions, data)
