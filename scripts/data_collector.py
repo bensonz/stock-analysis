@@ -14,6 +14,7 @@ All functions return dicts, handle errors gracefully, never crash.
 
 import json
 import os
+import sqlite3
 import sys
 import time
 import urllib.request
@@ -28,7 +29,18 @@ DATA_DIR = PROJECT_ROOT / "data"
 CRAWL_DIR = DATA_DIR / "crawl"
 MARKET_DIR = DATA_DIR / "market"
 PRICES_DIR = DATA_DIR / "prices"
+PRICEDB_DIR = DATA_DIR / "pricedb"
+DEFAULT_PRICEDB_PATH = PRICEDB_DIR / "ashare_prices.db"
 WATCHLIST_DIR = PROJECT_ROOT / "watchlist"
+
+DEFAULT_STRATEGY_ID = os.getenv("CHEESE_STRATEGY_ID", "407228")
+LOCAL_STRATEGY_ID = f"{DEFAULT_STRATEGY_ID}-local-ma-rps"
+LOCAL_RISK_EXCLUDE_KEYWORDS = tuple(filter(None, [
+    keyword.strip() for keyword in os.getenv(
+        "LOCAL_RISK_EXCLUDE_KEYWORDS",
+        "ST,*ST,退市,立案,处罚,诉讼,造假,违约,减持,解禁,质押",
+    ).split(",")
+]))
 
 for d in [CRAWL_DIR, MARKET_DIR, PRICES_DIR]:
     d.mkdir(parents=True, exist_ok=True)
@@ -38,7 +50,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from cheesefortune_client import CheeseFortuneClient, normalize_code
 
 
-def fetch_strategy_pool(strategy_id: str = "352390") -> dict:
+def fetch_strategy_pool(strategy_id: str = DEFAULT_STRATEGY_ID) -> dict:
     """Fetch strategy stock list from CheeseForTune API.
 
     Tries the API endpoint first. If that fails, falls back to loading
@@ -90,6 +102,233 @@ def fetch_strategy_pool(strategy_id: str = "352390") -> dict:
         "stocks": [],
         "error": "Could not fetch strategy pool from API or crawl files",
     }
+
+
+def fetch_strategy_pool_local(db_path: str = None) -> dict:
+    """Fetch strategy candidates using the local price DB + CheeseForTune filters.
+
+    Falls back to the remote CheeseForTune strategy pool if the local DB is
+    missing, stale, or local computation fails.
+    """
+    db_file = Path(db_path) if db_path else DEFAULT_PRICEDB_PATH
+    if not db_file.exists():
+        print("  Local pricedb missing — falling back to CheeseForTune strategy", file=sys.stderr)
+        return fetch_strategy_pool()
+
+    try:
+        from rps_calculator import compute_ma_alignment, compute_ma_rps
+
+        with sqlite3.connect(str(db_file)) as conn:
+            latest_row = conn.execute("SELECT MAX(date) FROM daily_prices").fetchone()
+            latest_date = latest_row[0] if latest_row and latest_row[0] else None
+            if not latest_date:
+                raise RuntimeError("local pricedb has no daily_prices rows")
+
+            latest_dt = datetime.strptime(latest_date, "%Y-%m-%d").date()
+            if (datetime.now().date() - latest_dt).days > 10:
+                raise RuntimeError(f"local pricedb is stale (latest date: {latest_date})")
+
+            stock_meta = {
+                row[0]: {"name": row[1], "exchange": row[2]}
+                for row in conn.execute("SELECT code, name, exchange FROM stocks")
+            }
+
+        rps_by_code = compute_ma_rps(str(db_file), latest_date)
+        alignment_by_code = compute_ma_alignment(str(db_file), latest_date)
+
+        screened = []
+        for code, rps in rps_by_code.items():
+            rps60 = rps.get("rps60")
+            rps120 = rps.get("rps120")
+            rps250 = rps.get("rps250")
+            alignment = alignment_by_code.get(code)
+            if rps60 is None or rps120 is None or rps250 is None or not alignment:
+                continue
+            if rps120 < 85 or rps250 < 85 or rps60 < 70 or not alignment.get("aligned"):
+                continue
+
+            meta = stock_meta.get(code, {})
+            screened.append({
+                "code": code,
+                "code_full": normalize_code(code),
+                "name": meta.get("name", code),
+                "exchange": meta.get("exchange"),
+                "rps20": rps.get("rps20"),
+                "rps60": rps60,
+                "rps120": rps120,
+                "rps250": rps250,
+                "ma10": rps.get("ma10_today"),
+                "ma20": round(alignment["ma20"], 4),
+                "ma120": round(alignment["ma120"], 4),
+                "ma250": round(alignment["ma250"], 4),
+                "price_date": latest_date,
+            })
+
+        screened.sort(key=lambda item: (item["rps120"], item["rps250"], item["rps60"]), reverse=True)
+        if not screened:
+            return {
+                "source": "local_pricedb",
+                "strategy_id": LOCAL_STRATEGY_ID,
+                "date": latest_date,
+                "total_stocks": 0,
+                "stocks": [],
+                "error": None,
+            }
+
+        enriched_rows = batch_enrich(screened)
+        if not enriched_rows:
+            raise RuntimeError("CheeseForTune enrichment returned no results")
+
+        snapshots = _load_price_snapshots(str(db_file), [stock["code"] for stock in screened], latest_date)
+        screened_map = {stock["code"]: stock for stock in screened}
+        final_stocks = []
+
+        for summary in enriched_rows:
+            if not isinstance(summary, dict) or summary.get("error"):
+                continue
+
+            code = str(summary.get("code", "")).split(".")[0]
+            base = screened_map.get(code)
+            if not base:
+                continue
+
+            name = summary.get("name") or base.get("name") or code
+            if _is_st_stock(name):
+                continue
+
+            highlights = summary.get("highlights") or []
+            risks = summary.get("risks") or []
+            highlights_count = len(highlights)
+            risks_count = len(risks)
+            if highlights_count < 4 or risks_count > 5:
+                continue
+            if _has_excluded_risk(risks):
+                continue
+
+            price_snapshot = snapshots.get(code, {})
+            price = price_snapshot.get("price")
+            market_cap = _compute_market_cap(price, summary.get("total_shares"))
+            if market_cap is None or not (20 <= market_cap <= 810):
+                continue
+
+            stock = {
+                "code": code,
+                "code_full": normalize_code(code),
+                "name": name,
+                "date": latest_date,
+                "price": price,
+                "change_pct": price_snapshot.get("change_pct"),
+                "market_cap": round(market_cap, 2),
+                "pe": summary.get("pe"),
+                "pb": summary.get("pb"),
+                "ps_ttm": summary.get("ps_ttm"),
+                "pcf_ttm": summary.get("pcf_ttm"),
+                "valuation_percentile": summary.get("valuation_percentile"),
+                "score_company": summary.get("score_company"),
+                "score_trend": summary.get("score_trend"),
+                "score_value": summary.get("score_value"),
+                "highlights_count": highlights_count,
+                "risks_count": risks_count,
+                "highlights": highlights,
+                "risks": risks,
+                "events": summary.get("events") or [],
+                "industries": summary.get("industries") or [],
+                "concepts": summary.get("concepts") or [],
+                "revenue_yoy": summary.get("revenue_yoy"),
+                "net_profit_yoy": summary.get("net_profit_yoy"),
+                "gross_margin": summary.get("gross_margin"),
+                "rps20": base.get("rps20"),
+                "rps60": base.get("rps60"),
+                "rps120": base.get("rps120"),
+                "rps250": base.get("rps250"),
+                "ma10": base.get("ma10"),
+                "ma20": base.get("ma20"),
+                "ma120": base.get("ma120"),
+                "ma250": base.get("ma250"),
+            }
+            final_stocks.append(stock)
+
+        final_stocks.sort(key=lambda item: (item.get("rps120", 0), item.get("rps250", 0)), reverse=True)
+        return {
+            "source": "local_pricedb",
+            "strategy_id": LOCAL_STRATEGY_ID,
+            "date": latest_date,
+            "total_stocks": len(final_stocks),
+            "stocks": final_stocks,
+            "error": None,
+        }
+    except Exception as e:
+        print(f"  Local pricedb strategy failed: {e}", file=sys.stderr)
+        return fetch_strategy_pool()
+
+
+def _load_price_snapshots(db_path: str, codes: list[str], date: str) -> dict:
+    """Load latest and previous close for a set of codes on or before date."""
+    if not codes:
+        return {}
+
+    placeholders = ",".join(["?"] * len(codes))
+    query = f"""
+        WITH ranked AS (
+            SELECT
+                code,
+                date,
+                close,
+                ROW_NUMBER() OVER (PARTITION BY code ORDER BY date DESC) AS rn
+            FROM daily_prices
+            WHERE date <= ? AND code IN ({placeholders})
+        )
+        SELECT code, date, close, rn
+        FROM ranked
+        WHERE rn <= 2
+        ORDER BY code, rn
+    """
+    snapshots: dict[str, dict] = {}
+    with sqlite3.connect(db_path) as conn:
+        rows = conn.execute(query, [date] + list(codes)).fetchall()
+
+    for code, price_date, close, rn in rows:
+        snap = snapshots.setdefault(code, {"price_date": price_date})
+        if rn == 1:
+            snap["price"] = float(close)
+            snap["price_date"] = price_date
+        elif rn == 2:
+            prev_close = float(close)
+            snap["prev_close"] = prev_close
+            latest = snap.get("price")
+            if latest not in (None, 0):
+                snap["change_pct"] = round((latest - prev_close) / prev_close * 100, 2) if prev_close else None
+    return snapshots
+
+
+def _compute_market_cap(price: float | None, total_shares: float | None) -> float | None:
+    """Compute market cap in 亿元 from latest price and total shares."""
+    if price in (None, 0) or total_shares in (None, 0):
+        return None
+    try:
+        return float(price) * float(total_shares) / 100_000_000
+    except (TypeError, ValueError):
+        return None
+
+
+def _has_excluded_risk(risks: list[dict]) -> bool:
+    """Return True when a risk tag/text contains a configured exclude keyword."""
+    for risk in risks:
+        tag = str(risk.get("tag", "")).strip().lower()
+        text = str(risk.get("text", "")).strip().lower()
+        for keyword in LOCAL_RISK_EXCLUDE_KEYWORDS:
+            needle = keyword.lower()
+            if needle and (needle in tag or needle in text):
+                return True
+    return False
+
+
+def _is_st_stock(name: str) -> bool:
+    """Detect ST / *ST names conservatively."""
+    if not name:
+        return False
+    normalized = str(name).strip().upper()
+    return normalized.startswith("ST") or normalized.startswith("*ST") or " ST" in normalized
 
 
 def _fetch_strategy_api(strategy_id: str) -> Optional[list[dict]]:
@@ -640,7 +879,7 @@ def fetch_position_prices(positions: list[dict]) -> dict:
             code = pos["code"].split(".")[0]
             try:
                 end_date = datetime.now().strftime("%Y%m%d")
-                start_date = (datetime.now() - timedelta(days=10)).strftime("%Y%m%d")
+                start_date = (datetime.now() - timedelta(days=60)).strftime("%Y%m%d")
                 df = ak.stock_zh_a_hist(
                     symbol=code, period="daily",
                     start_date=start_date, end_date=end_date,
@@ -648,6 +887,9 @@ def fetch_position_prices(positions: list[dict]) -> dict:
                 if df is not None and not df.empty:
                     latest = df.iloc[-1]
                     prev = df.iloc[-2] if len(df) > 1 else latest
+                    volumes = [int(v) for v in df["成交量"].tail(30).tolist() if v is not None]
+                    mavol30 = round(sum(volumes) / len(volumes), 2) if volumes else None
+                    latest_volume = int(latest["成交量"])
                     prices[code] = {
                         "code": code,
                         "name": pos.get("name", ""),
@@ -658,7 +900,9 @@ def fetch_position_prices(positions: list[dict]) -> dict:
                         "low": float(latest["最低"]),
                         "prev_close": float(prev["收盘"]),
                         "change_pct": float(latest["涨跌幅"]),
-                        "volume": int(latest["成交量"]),
+                        "volume": latest_volume,
+                        "mavol30": mavol30,
+                        "volume_below_mavol30": bool(mavol30 and latest_volume < mavol30),
                         "amount": float(latest["成交额"]),
                         "turnover_rate": float(latest["换手率"]),
                         "source": "akshare",
@@ -679,19 +923,25 @@ def fetch_position_prices(positions: list[dict]) -> dict:
                 code = pos["code"].split(".")[0]
                 cf_code = normalize_code(code)
                 try:
-                    kline = client.get_kline(cf_code, days=5)
+                    kline = client.get_kline(cf_code, days=35)
                     if kline and len(kline) > 0:
                         # kline data: list of [date, close, volume, amount, time, null]
                         latest = kline[-1]
                         prev = kline[-2] if len(kline) > 1 else latest
                         price = float(latest[1]) if len(latest) > 1 else 0
                         prev_price = float(prev[1]) if len(prev) > 1 else price
+                        latest_volume = int(latest[2]) if len(latest) > 2 and latest[2] is not None else 0
+                        volumes = [int(row[2]) for row in kline[-30:] if len(row) > 2 and row[2] is not None]
+                        mavol30 = round(sum(volumes) / len(volumes), 2) if volumes else None
                         change_pct = round((price - prev_price) / prev_price * 100, 2) if prev_price else 0
                         prices[code] = {
                             "code": code,
                             "name": pos.get("name", ""),
                             "date": str(latest[0]) if latest[0] else "",
                             "price": price,
+                            "volume": latest_volume,
+                            "mavol30": mavol30,
+                            "volume_below_mavol30": bool(mavol30 and latest_volume < mavol30),
                             "change_pct": change_pct,
                             "source": "cheesefortune_kline",
                         }

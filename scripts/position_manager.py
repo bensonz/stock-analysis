@@ -170,7 +170,17 @@ def open_position(data: dict) -> dict:
     """
     code = data["code"].split(".")[0]  # Strip exchange suffix
     today = datetime.now().strftime("%Y-%m-%d")
-    entry_price = data["entryPrice"]
+    entry_price = data.get("entryPrice")
+    stop_loss = data.get("stopLoss")
+    target_price = data.get("targetPrice")
+
+    # Validate required numeric fields
+    if not isinstance(entry_price, (int, float)) or entry_price <= 0:
+        raise ValueError(f"Missing or invalid entryPrice for {code}: {entry_price!r}")
+    if not isinstance(stop_loss, (int, float)) or stop_loss <= 0:
+        raise ValueError(f"Missing or invalid stopLoss for {code}: {stop_loss!r}")
+    if not isinstance(target_price, (int, float)) or target_price <= 0:
+        raise ValueError(f"Missing or invalid targetPrice for {code}: {target_price!r}")
 
     # Compute position sizing
     config = load_portfolio_config()
@@ -347,7 +357,19 @@ def regenerate_positions_json(price_data: dict | None = None) -> dict:
         total_unrealized += unrealized
         total_day_pnl += day_pnl
 
-        entries.append({
+        live_volume = None
+        live_mavol30 = None
+        live_volume_below_mavol30 = None
+        if price_data and code in price_data:
+            live = price_data[code]
+            live_volume = live.get("volume")
+            live_mavol30 = live.get("mavol30")
+            if live.get("volume_below_mavol30") is not None:
+                live_volume_below_mavol30 = live.get("volume_below_mavol30")
+            elif live_volume is not None and live_mavol30 not in (None, 0):
+                live_volume_below_mavol30 = live_volume < live_mavol30
+
+        entry = {
             "code": code,
             "name": p["name"],
             "entryDate": p["entryDate"],
@@ -364,7 +386,15 @@ def regenerate_positions_json(price_data: dict | None = None) -> dict:
             "allocatedCapital": allocated,
             "currentValue": current_val,
             "unrealizedPnl": unrealized,
-        })
+        }
+        if live_volume is not None:
+            entry["volume"] = live_volume
+        if live_mavol30 is not None:
+            entry["mavol30"] = live_mavol30
+        if live_volume_below_mavol30 is not None:
+            entry["volumeBelowMavol30"] = bool(live_volume_below_mavol30)
+
+        entries.append(entry)
 
     realized = compute_realized_pnl()
     cash = round(starting - total_allocated + realized, 2)

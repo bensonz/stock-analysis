@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """
-llm_client.py — Sequential Claude→GPT collaboration pipeline.
+llm_client.py — LLM orchestration for the daily analysis pipeline.
 
-Pass 1: Claude (full prompt + tools) → research memo + fallback JSON
-Pass 2: GPT-5.4 (condensed prompt + Claude memo, no tools) → final JSON decisions
+Supported provider modes:
+- openai: GPT-5.4 only, full prompt + tool loop + JSON refine
+- hybrid: Claude research/tool pass, then GPT-5.4 final decision
+- anthropic: Claude only, full prompt + tool loop + JSON refine
 
-Tools: web_search (Tavily), web_fetch (direct HTTP) — Claude only
+Tools: web_search (Tavily), web_fetch (direct HTTP)
 """
 
 import json
@@ -20,18 +22,86 @@ import anthropic
 import openai
 import requests
 
-# Load .env from project root (for TAVILY_API_KEY etc.)
-_env_file = Path(__file__).parent.parent / ".env"
-if _env_file.exists():
-    for line in _env_file.read_text().strip().splitlines():
-        line = line.strip()
-        if line and not line.startswith("#") and "=" in line:
-            key, _, val = line.partition("=")
-            os.environ.setdefault(key.strip(), val.strip())
+ENV_FILE = Path(__file__).parent.parent / ".env"
+CLAUDE_SETTINGS_FILE = Path.home() / ".claude" / "settings.json"
+
+
+def _read_env_file(env_file: Path | None = None) -> dict[str, str]:
+    """Read simple KEY=VALUE pairs from `.env`."""
+    env_path = env_file or ENV_FILE
+    if not env_path.exists():
+        return {}
+
+    values: dict[str, str] = {}
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key:
+            values[key] = value
+    return values
+
+
+def _read_claude_settings_env(settings_file: Path | None = None) -> dict[str, str]:
+    """Read env values from `~/.claude/settings.json` if present."""
+    config_path = settings_file or CLAUDE_SETTINGS_FILE
+    if not config_path.exists():
+        return {}
+
+    try:
+        payload = json.loads(config_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError, ValueError):
+        return {}
+
+    env_values = payload.get("env")
+    if not isinstance(env_values, dict):
+        return {}
+
+    result: dict[str, str] = {}
+    for key, value in env_values.items():
+        if isinstance(key, str) and isinstance(value, (str, int, float, bool)):
+            result[key] = str(value).strip()
+    return result
+
+
+def _load_env_defaults() -> None:
+    """Populate missing env vars from Claude settings, then project `.env`."""
+    for source in (_read_claude_settings_env(), _read_env_file()):
+        for key, value in source.items():
+            os.environ.setdefault(key, value)
+
+
+def _get_env_value(*names: str, default: str | None = None) -> str | None:
+    """Read from process env first, then `.env`, then Claude settings."""
+    for name in names:
+        value = os.getenv(name)
+        if value:
+            return value.strip()
+
+    file_values = _read_env_file()
+    for name in names:
+        value = file_values.get(name)
+        if value:
+            return value.strip()
+
+    settings_values = _read_claude_settings_env()
+    for name in names:
+        value = settings_values.get(name)
+        if value:
+            return value.strip()
+
+    return default
+
+
+_load_env_defaults()
 
 # --- Config ---
 
-DEFAULT_MODEL = "claude-opus-4-6"
+DEFAULT_PROVIDER = "openai"
+DEFAULT_MODEL = _get_env_value("ANTHROPIC_MODEL", "CLAUDE_MODEL", default="claude-opus-4-6") or "claude-opus-4-6"
 MAX_TOOL_ROUNDS = 15  # Safety cap on tool-use loops per pass
 FETCH_TIMEOUT = 15  # seconds per web fetch
 FETCH_MAX_CHARS = 8000  # max chars per fetch result
@@ -190,6 +260,21 @@ def execute_tool(name: str, input_data: dict) -> str:
 
 # --- LLM call with tool loop ---
 
+def _anthropic_messages_create(client: anthropic.Anthropic, **kwargs):
+    """Wrap Anthropic calls with a clearer model-availability error."""
+    try:
+        return client.messages.create(**kwargs)
+    except anthropic.InternalServerError as exc:
+        message = str(exc)
+        if "No available Claude accounts support the requested model" in message:
+            model = kwargs.get("model")
+            raise ValueError(
+                f"Anthropic model {model!r} is unavailable on the current relay. "
+                "Set ANTHROPIC_MODEL in .env to a supported model."
+            ) from exc
+        raise
+
+
 def _run_tool_loop(
     client: anthropic.Anthropic,
     messages: list,
@@ -209,7 +294,7 @@ def _run_tool_loop(
     for round_num in range(1, MAX_TOOL_ROUNDS + 1):
         print(f"  {label}round {round_num}...", file=sys.stderr, end="", flush=True)
 
-        response = client.messages.create(
+        response = _anthropic_messages_create(client,
             model=model,
             max_tokens=max_tokens,
             temperature=temperature,
@@ -273,6 +358,27 @@ def _run_tool_loop(
                         break
             break
     return final_text, total_input, total_output, MAX_TOOL_ROUNDS
+
+
+def _run_anthropic_text_once(
+    client: anthropic.Anthropic,
+    messages: list,
+    model: str,
+    max_tokens: int,
+    temperature: float,
+    label: str = "",
+) -> tuple[str, int, int, int]:
+    """Run a single Anthropic response without tools."""
+    print(f"  {label}round 1...", file=sys.stderr, end="", flush=True)
+    response = _anthropic_messages_create(client,
+        model=model,
+        max_tokens=max_tokens,
+        temperature=temperature,
+        messages=messages,
+    )
+    final_text = "\n".join(getattr(block, "text", "") for block in response.content if getattr(block, "type", "") == "text")
+    print(f" done ({response.usage.input_tokens}+{response.usage.output_tokens} tokens)", file=sys.stderr)
+    return final_text, response.usage.input_tokens, response.usage.output_tokens, 1
 
 
 # --- OpenAI tool definitions (parallel to Anthropic TOOLS) ---
@@ -411,6 +517,48 @@ def _run_openai_tool_loop(
 
 OPENAI_MODEL = "gpt-5.4"
 GPT_TIMEOUT = 120  # seconds — no more hanging
+
+
+def normalize_llm_provider(provider: str | None = None) -> str:
+    """Normalize provider aliases to one of: openai, hybrid, anthropic."""
+    raw = (provider or _get_env_value("LLM_PROVIDER", default=DEFAULT_PROVIDER) or DEFAULT_PROVIDER).strip().lower()
+    aliases = {
+        "gpt": "openai",
+        "gpt-5.4": "openai",
+        "openai": "openai",
+        "hybrid": "hybrid",
+        "claude+gpt": "hybrid",
+        "anthropic": "anthropic",
+        "claude": "anthropic",
+    }
+    normalized = aliases.get(raw)
+    if not normalized:
+        valid = ", ".join(sorted(set(aliases.values())))
+        raise ValueError(f"Unknown LLM provider: {provider!r}. Use one of: {valid}")
+    return normalized
+
+
+def _build_anthropic_client() -> anthropic.Anthropic:
+    api_key = _get_env_value("ANTHROPIC_AUTH_TOKEN", "ANTHROPIC_API_KEY")
+    if not api_key:
+        raise ValueError(
+            "No Anthropic API key found. Set ANTHROPIC_AUTH_TOKEN or ANTHROPIC_API_KEY, "
+            "or provide them in ~/.claude/settings.json."
+        )
+    base_url = _get_env_value(
+        "ANTHROPIC_API_URL",
+        "ANTHROPIC_BASE_URL",
+        default="https://api.anthropic.com",
+    )
+    return anthropic.Anthropic(base_url=base_url, api_key=api_key)
+
+
+def _build_openai_client() -> openai.OpenAI:
+    api_key = _get_env_value("OPENAI_API_KEY")
+    if not api_key:
+        raise ValueError("No OpenAI API key found. Set OPENAI_API_KEY.")
+    base_url = _get_env_value("OPENAI_BASE_URL", default="https://api.openai.com/v1")
+    return openai.OpenAI(api_key=api_key, base_url=base_url)
 
 
 def build_gpt_prompt(analyst_md: str, summary: str, claude_memo: str) -> str:
@@ -597,7 +745,130 @@ def build_summary(phase1_data: dict) -> str:
     return "\n\n".join(sections)
 
 
-def call_llm(
+def _call_anthropic_only(
+    prompt: str,
+    model: str = DEFAULT_MODEL,
+    max_tokens: int = 16384,
+    temperature: float = 0.3,
+    output_dir: Path | None = None,
+) -> dict:
+    """Claude-only path: full prompt + tools + JSON refine."""
+    client = _build_anthropic_client()
+    messages = [{"role": "user", "content": prompt}]
+    tool_log = []
+    start_time = time.time()
+
+    print("  [Pass 1] Claude analysis...", file=sys.stderr)
+    pass1_text, in1, out1, rounds1 = _run_tool_loop(
+        client, messages, model, max_tokens, temperature, tool_log, label="P1 "
+    )
+    if output_dir:
+        output_dir.mkdir(parents=True, exist_ok=True)
+        (output_dir / "claude_response.txt").write_text(pass1_text, encoding="utf-8")
+
+    claude_json = _parse_json_from_text(pass1_text)
+    primary_text = pass1_text
+    total_input = in1
+    total_output = out1
+    total_rounds = rounds1
+
+    if not claude_json:
+        print("  [Pass 1b] Claude JSON refine...", file=sys.stderr)
+        messages.append({"role": "user", "content": REFINE_PROMPT})
+        fb_text, fb_in, fb_out, fb_rounds = _run_anthropic_text_once(
+            client, messages, model, max_tokens, temperature, label="P1b "
+        )
+        if output_dir:
+            (output_dir / "claude_refine.txt").write_text(fb_text, encoding="utf-8")
+        claude_json = _parse_json_from_text(fb_text)
+        total_input += fb_in
+        total_output += fb_out
+        total_rounds += fb_rounds
+        if claude_json:
+            primary_text = fb_text
+            print("  Claude JSON extracted", file=sys.stderr)
+        else:
+            print("  WARNING: Claude produced no valid JSON", file=sys.stderr)
+
+    return {
+        "text": primary_text,
+        "claude_memo": pass1_text,
+        "claude_json": claude_json,
+        "gpt_json": {},
+        "fallback_used": not bool(claude_json),
+        "tool_calls": tool_log,
+        "input_tokens": total_input,
+        "output_tokens": total_output,
+        "rounds": total_rounds,
+        "duration_sec": round(time.time() - start_time, 1),
+        "provider": "anthropic",
+        "decision_source": "Claude primary",
+        "primary_model": model,
+    }
+
+
+def _call_openai_only(
+    prompt: str,
+    max_tokens: int = 16384,
+    temperature: float = 0.3,
+    output_dir: Path | None = None,
+) -> dict:
+    """GPT-only path: full prompt + tools + JSON refine."""
+    client = _build_openai_client()
+    messages = [{"role": "user", "content": prompt}]
+    tool_log = []
+    start_time = time.time()
+
+    print("  [Pass 1] GPT-5.4 analysis...", file=sys.stderr)
+    pass1_text, in1, out1, rounds1 = _run_openai_tool_loop(
+        client, messages, OPENAI_MODEL, max_tokens, temperature, tool_log, label="P1 "
+    )
+    if output_dir:
+        output_dir.mkdir(parents=True, exist_ok=True)
+        (output_dir / "gpt_response.txt").write_text(pass1_text, encoding="utf-8")
+
+    gpt_json = _parse_json_from_text(pass1_text)
+    primary_text = pass1_text
+    total_input = in1
+    total_output = out1
+    total_rounds = rounds1
+
+    if not gpt_json:
+        print("  [Pass 1b] GPT-5.4 JSON refine...", file=sys.stderr)
+        messages.append({"role": "user", "content": REFINE_PROMPT})
+        refine_text, refine_in, refine_out, refine_rounds = _run_openai_tool_loop(
+            client, messages, OPENAI_MODEL, max_tokens, temperature, tool_log, label="P1b "
+        )
+        if output_dir:
+            (output_dir / "gpt_refine.txt").write_text(refine_text, encoding="utf-8")
+        gpt_json = _parse_json_from_text(refine_text)
+        total_input += refine_in
+        total_output += refine_out
+        total_rounds += refine_rounds
+        if gpt_json:
+            primary_text = refine_text
+            print("  GPT JSON extracted", file=sys.stderr)
+        else:
+            print("  WARNING: GPT produced no valid JSON", file=sys.stderr)
+
+    return {
+        "text": primary_text,
+        "claude_memo": "",
+        "claude_json": {},
+        "gpt_json": gpt_json,
+        "fallback_used": not bool(gpt_json),
+        "tool_calls": tool_log,
+        "input_tokens": total_input,
+        "output_tokens": total_output,
+        "rounds": total_rounds,
+        "duration_sec": round(time.time() - start_time, 1),
+        "provider": "openai",
+        "decision_source": "GPT primary",
+        "primary_model": OPENAI_MODEL,
+    }
+
+
+def _call_hybrid(
     prompt: str,
     model: str = DEFAULT_MODEL,
     max_tokens: int = 16384,
@@ -605,24 +876,12 @@ def call_llm(
     output_dir: Path | None = None,
     phase1_data: dict | None = None,
 ) -> dict:
-    """Sequential Claude→GPT pipeline.
-
-    Pass 1: Claude (full prompt + tools) → research memo + fallback JSON
-    Pass 2: GPT-5.4 (condensed summary + Claude memo, no tools) → final JSON
-
-    Returns dict with claude_memo, claude_json, gpt_json, fallback_used, etc.
-    """
-    base_url = os.environ.get("ANTHROPIC_BASE_URL", "https://api.anthropic.com")
-    api_key = os.environ.get("ANTHROPIC_AUTH_TOKEN") or os.environ.get("ANTHROPIC_API_KEY", "")
-    if not api_key:
-        raise ValueError("No API key found. Set ANTHROPIC_AUTH_TOKEN or ANTHROPIC_API_KEY.")
-
-    client = anthropic.Anthropic(base_url=base_url, api_key=api_key)
+    """Claude research + GPT final decision."""
+    client = _build_anthropic_client()
     messages = [{"role": "user", "content": prompt}]
     tool_log = []
     start_time = time.time()
 
-    # --- Pass 1: Claude — full prompt with tools (research memo) ---
     print("  [Pass 1] Claude research...", file=sys.stderr)
     pass1_text, in1, out1, rounds1 = _run_tool_loop(
         client, messages, model, max_tokens, temperature, tool_log, label="P1 "
@@ -631,20 +890,12 @@ def call_llm(
         output_dir.mkdir(parents=True, exist_ok=True)
         (output_dir / "claude_memo.txt").write_text(pass1_text, encoding="utf-8")
 
-    # Extract Claude's fallback JSON from the memo
     claude_json = _parse_json_from_text(pass1_text)
-
-    # If Claude's memo has no parseable JSON, do a small follow-up call
     if not claude_json:
         print("  [Pass 1b] Claude fallback JSON...", file=sys.stderr)
-        fallback_prompt = (
-            "现在请直接输出最终 JSON 决策。不要输出任何解释文字、markdown标记或代码块，"
-            "直接从 { 开始输出纯 JSON。确保 JSON 完整（所有括号闭合）。"
-            "注意：skip_list 中只能引用输入数据中实际存在的价格和指标，不要编造。"
-        )
-        messages.append({"role": "user", "content": fallback_prompt})
-        fb_text, fb_in, fb_out, fb_rounds = _run_tool_loop(
-            client, messages, model, max_tokens, temperature, tool_log, label="P1b "
+        messages.append({"role": "user", "content": REFINE_PROMPT})
+        fb_text, fb_in, fb_out, fb_rounds = _run_anthropic_text_once(
+            client, messages, model, max_tokens, temperature, label="P1b "
         )
         claude_json = _parse_json_from_text(fb_text)
         in1 += fb_in
@@ -660,19 +911,14 @@ def call_llm(
     total_input = in1
     total_output = out1
     total_rounds = rounds1
-
-    # --- Pass 2: GPT-5.4 — condensed prompt + Claude's memo ---
-    openai_key = os.environ.get("OPENAI_API_KEY", "")
-    openai_base = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
     gpt_text = ""
     gpt_json = {}
     fallback_used = False
 
+    openai_key = _get_env_value("OPENAI_API_KEY")
     if openai_key and phase1_data:
         try:
-            oai_client = openai.OpenAI(api_key=openai_key, base_url=openai_base)
-
-            # Build condensed prompt: ANALYST.md + summary + Claude memo
+            oai_client = _build_openai_client()
             analyst_md = (Path(__file__).parent.parent / "agents" / "ANALYST.md").read_text(encoding="utf-8")
             summary = build_summary(phase1_data)
             gpt_prompt = build_gpt_prompt(analyst_md, summary, pass1_text)
@@ -680,12 +926,11 @@ def call_llm(
             print("  [Pass 2] GPT-5.4 decision...", file=sys.stderr)
             print(f"    GPT prompt: ~{len(gpt_prompt)//1000}KB", file=sys.stderr)
 
-            # Single call, no tools, with timeout
             response = oai_client.chat.completions.create(
                 model=OPENAI_MODEL,
                 messages=[{"role": "user", "content": gpt_prompt}],
-                max_tokens=16384,
-                temperature=0.3,
+                max_tokens=max_tokens,
+                temperature=temperature,
                 timeout=GPT_TIMEOUT,
             )
             gpt_text = response.choices[0].message.content or ""
@@ -702,20 +947,20 @@ def call_llm(
             gpt_json = _parse_json_from_text(gpt_text)
             if not gpt_json:
                 print("  WARNING: Could not parse GPT response as JSON", file=sys.stderr)
-
         except Exception as e:
             print(f"  WARNING: GPT-5.4 pass failed: {e}", file=sys.stderr)
     elif not openai_key:
-        print("  [Skip] No OPENAI_API_KEY — Claude-only mode", file=sys.stderr)
+        print("  [Skip] No OPENAI_API_KEY — Claude-only fallback within hybrid mode", file=sys.stderr)
     elif not phase1_data:
-        print("  [Skip] No phase1_data — Claude-only mode", file=sys.stderr)
+        print("  [Skip] No phase1_data — Claude-only fallback within hybrid mode", file=sys.stderr)
 
-    # Determine primary result
     if gpt_json:
         primary_text = gpt_text
+        decision_source = "GPT primary"
         fallback_used = False
     else:
         primary_text = pass1_text
+        decision_source = "Claude fallback"
         fallback_used = True
         if claude_json:
             print("  Using Claude fallback JSON", file=sys.stderr)
@@ -733,7 +978,46 @@ def call_llm(
         "output_tokens": total_output,
         "rounds": total_rounds,
         "duration_sec": round(time.time() - start_time, 1),
+        "provider": "hybrid",
+        "decision_source": decision_source,
+        "primary_model": OPENAI_MODEL if gpt_json else model,
     }
+
+
+def call_llm(
+    prompt: str,
+    model: str = DEFAULT_MODEL,
+    max_tokens: int = 16384,
+    temperature: float = 0.3,
+    output_dir: Path | None = None,
+    phase1_data: dict | None = None,
+    provider: str | None = None,
+) -> dict:
+    """Run the configured LLM provider path and return normalized metadata."""
+    selected = normalize_llm_provider(provider)
+    if selected == "openai":
+        return _call_openai_only(
+            prompt,
+            max_tokens=max_tokens,
+            temperature=temperature,
+            output_dir=output_dir,
+        )
+    if selected == "anthropic":
+        return _call_anthropic_only(
+            prompt,
+            model=model,
+            max_tokens=max_tokens,
+            temperature=temperature,
+            output_dir=output_dir,
+        )
+    return _call_hybrid(
+        prompt,
+        model=model,
+        max_tokens=max_tokens,
+        temperature=temperature,
+        output_dir=output_dir,
+        phase1_data=phase1_data,
+    )
 
 
 REFINE_PROMPT = (
@@ -751,12 +1035,7 @@ def call_llm_v1(
     output_dir: Path | None = None,
 ) -> dict:
     """Legacy 4-pass approach. Use --legacy-llm flag to activate."""
-    base_url = os.environ.get("ANTHROPIC_BASE_URL", "https://api.anthropic.com")
-    api_key = os.environ.get("ANTHROPIC_AUTH_TOKEN") or os.environ.get("ANTHROPIC_API_KEY", "")
-    if not api_key:
-        raise ValueError("No API key found.")
-
-    client = anthropic.Anthropic(base_url=base_url, api_key=api_key)
+    client = _build_anthropic_client()
     messages = [{"role": "user", "content": prompt}]
     tool_log = []
     start_time = time.time()
@@ -769,17 +1048,16 @@ def call_llm_v1(
 
     print("  [P2] Claude refine...", file=sys.stderr)
     messages.append({"role": "user", "content": REFINE_PROMPT})
-    p2, in2, out2, r2 = _run_tool_loop(client, messages, model, max_tokens, temperature, tool_log, label="P2 ")
+    p2, in2, out2, r2 = _run_anthropic_text_once(client, messages, model, max_tokens, temperature, label="P2 ")
     if output_dir:
         (output_dir / "pass2_response.txt").write_text(p2, encoding="utf-8")
 
     ti, to, tr = in1 + in2, out1 + out2, r1 + r2
     p3 = p4 = ""
-    oai_key = os.environ.get("OPENAI_API_KEY", "")
-    oai_base = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
+    oai_key = _get_env_value("OPENAI_API_KEY")
     if oai_key:
         try:
-            oc = openai.OpenAI(api_key=oai_key, base_url=oai_base)
+            oc = _build_openai_client()
             om = [{"role": "user", "content": prompt}]
             print("  [P3] GPT analysis...", file=sys.stderr)
             p3, i3, o3, r3 = _run_openai_tool_loop(oc, om, OPENAI_MODEL, max_tokens, temperature, tool_log, label="P3 ")
@@ -800,7 +1078,6 @@ def call_llm_v1(
         "tool_calls": tool_log, "input_tokens": ti, "output_tokens": to,
         "rounds": tr, "duration_sec": round(time.time() - start_time, 1),
     }
-
 
 def _parse_json_from_text(text: str) -> dict:
     """Extract JSON object from LLM response text."""

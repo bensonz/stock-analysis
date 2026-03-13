@@ -8,9 +8,12 @@ Phase 3: EXECUTION (pure Python — apply LLM decisions)
 Phase 4: VALIDATION + COMMIT
 
 Usage:
-    python scripts/run_daily.py --run              # Full pipeline: collect → LLM → apply → validate → commit
-    python scripts/run_daily.py --run --no-commit  # Full pipeline without git commit
-    python scripts/run_daily.py --run --legacy-llm # Full pipeline with old 4-pass LLM approach
+    python scripts/run_daily.py --run                                  # Full pipeline: collect → LLM → apply → validate → commit
+    python scripts/run_daily.py --run --llm-provider openai            # Full pipeline with GPT-5.4 only
+    python scripts/run_daily.py --run --llm-provider hybrid            # Full pipeline with Claude→GPT handoff
+    python scripts/run_daily.py --run --llm-provider anthropic         # Full pipeline with Claude only
+    python scripts/run_daily.py --run --no-commit                      # Full pipeline without git commit
+    python scripts/run_daily.py --run --legacy-llm                     # Full pipeline with old 4-pass LLM approach
     python scripts/run_daily.py                    # Phase 1+2 only (outputs prompt to stdout, legacy mode)
     python scripts/run_daily.py --phase1           # Data collection only
     python scripts/run_daily.py --apply FILE       # Apply LLM response from file (Phase 3+4)
@@ -35,6 +38,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from data_collector import (
     fetch_strategy_pool,
+    fetch_strategy_pool_local,
     batch_enrich,
     fetch_ma_data,
     fetch_market_overview,
@@ -339,12 +343,44 @@ def phase1_collect(date: str) -> dict:
         for w in drift_warnings:
             print(f"    {w}", file=sys.stderr)
 
+    pricedb_path = PROJECT_ROOT / "data" / "pricedb" / "ashare_prices.db"
+    skip_pricedb_update = os.getenv("PRICEDB_SKIP_UPDATE", "").strip().lower() in {"1", "true", "yes", "on"}
+    if pricedb_path.exists():
+        if skip_pricedb_update:
+            print("  [prep] Skipping local price DB update via PRICEDB_SKIP_UPDATE", file=sys.stderr)
+        else:
+            print("  [prep] Updating local price DB...", file=sys.stderr)
+            try:
+                pricedb_cmd = [sys.executable, str(PROJECT_ROOT / "scripts" / "pricedb.py"), "update"]
+                result = subprocess.run(
+                    pricedb_cmd,
+                    cwd=PROJECT_ROOT,
+                    capture_output=True,
+                    text=True,
+                )
+                if result.returncode != 0:
+                    err = result.stderr.strip() or result.stdout.strip() or f"exit {result.returncode}"
+                    raise RuntimeError(err)
+                print("    → local pricedb updated", file=sys.stderr)
+            except Exception as e:
+                log["errors"].append(f"pricedb_update: {e}")
+                print(f"    ⚠ pricedb update failed: {e}", file=sys.stderr)
+    else:
+        print("  [prep] Local price DB not found; using remote strategy pool", file=sys.stderr)
+
     # Step 1: Strategy pool (must complete before enrichment can start)
     print("  [1/5] Fetching strategy pool...", file=sys.stderr)
     try:
-        data["strategy_pool"] = fetch_strategy_pool()
+        if pricedb_path.exists():
+            data["strategy_pool"] = fetch_strategy_pool_local(str(pricedb_path))
+        else:
+            data["strategy_pool"] = fetch_strategy_pool()
         save_crawl_data(date, data["strategy_pool"], output_dir=input_dir)
-        print(f"    → {data['strategy_pool'].get('total_stocks', 0)} stocks", file=sys.stderr)
+        strategy_source = data["strategy_pool"].get("source", "unknown")
+        print(
+            f"    → {data['strategy_pool'].get('total_stocks', 0)} stocks ({strategy_source})",
+            file=sys.stderr,
+        )
     except Exception as e:
         data["strategy_pool"] = {"error": str(e), "stocks": []}
         log["errors"].append(f"strategy_pool: {e}")
@@ -467,6 +503,12 @@ def phase1_collect(date: str) -> dict:
         data["learnings"] = learnings_file.read_text(encoding="utf-8")
     else:
         data["learnings"] = ""
+
+    # Refresh positions.json with live prices/signals before running rules
+    try:
+        regenerate_positions_json(price_data=data.get("position_prices", {}))
+    except Exception as e:
+        log["errors"].append(f"positions_json refresh: {e}")
 
     # Run rules on current portfolio state
     try:
@@ -661,12 +703,43 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
     # 2. Open new positions
     for p in decisions.get("new_positions", []):
         try:
+            code = str(p["code"]).split(".")[0]
+
+            # Fill execution-critical fields from deterministic Phase 1 data when LLM omits them
+            entry_price = p.get("entry_price")
+            if entry_price in (None, "", 0):
+                price_info = data.get("position_prices", {}).get(code, {})
+                if isinstance(price_info, dict):
+                    entry_price = price_info.get("price") or price_info.get("current_price")
+
+            if entry_price in (None, "", 0):
+                for s in data.get("strategy_pool", {}).get("stocks", []):
+                    if str(s.get("code", "")).split(".")[0] == code:
+                        entry_price = s.get("price") or s.get("close")
+                        if entry_price not in (None, "", 0):
+                            break
+
+            stop_loss = p.get("stop", p.get("stopLoss"))
+            target_price = p.get("target", p.get("targetPrice"))
+
+            # Conservative defaults if model omitted execution numbers
+            if entry_price not in (None, "", 0):
+                entry_price = float(entry_price)
+                if stop_loss in (None, "", 0):
+                    stop_loss = round(entry_price * 0.95, 2)
+                if target_price in (None, "", 0):
+                    target_price = round(entry_price * 1.15, 2)
+
+            if entry_price in (None, "", 0):
+                log["actions"].append(f"SKIP OPEN {code}: missing entry price")
+                continue
+
             open_position({
-                "code": p["code"],
+                "code": code,
                 "name": p.get("name", ""),
-                "entryPrice": p["entry_price"],
-                "targetPrice": p.get("target", p.get("targetPrice", 0)),
-                "stopLoss": p.get("stop", p.get("stopLoss", 0)),
+                "entryPrice": entry_price,
+                "targetPrice": target_price,
+                "stopLoss": stop_loss,
                 "allocation_pct": p.get("allocation_pct"),
                 "thesis": p.get("thesis", ""),
                 "rating": p.get("rating", 2),
@@ -676,12 +749,12 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
                 "sourceWatchlist": date,
                 "note": p.get("note", f"LLM开仓 {p.get('name', '')}"),
             })
-            log["actions"].append(f"OPEN {p['code']}")
+            log["actions"].append(f"OPEN {code}")
             daily_actions.append({
-                "code": str(p["code"]).split(".")[0],
+                "code": code,
                 "name": p.get("name", ""),
                 "action": "OPEN",
-                "price": p["entry_price"],
+                "price": entry_price,
                 "note": p.get("thesis", ""),
             })
         except Exception as e:
@@ -877,15 +950,27 @@ def main():
     if "--run" in args:
         # Full automated pipeline: Phase 1 → LLM → Phase 3 → Phase 4 → git commit
         legacy_llm = "--legacy-llm" in args
+        llm_provider = None
+        if "--llm-provider" in args:
+            pidx = args.index("--llm-provider")
+            if pidx + 1 >= len(args):
+                print("Usage: --run [--llm-provider openai|hybrid|anthropic] [--no-commit]", file=sys.stderr)
+                sys.exit(1)
+            llm_provider = args[pidx + 1]
+
         if legacy_llm:
             from llm_client import call_llm_v1 as call_llm
+            provider_label = "legacy"
+            if llm_provider:
+                print("Warning: --llm-provider is ignored with --legacy-llm", file=sys.stderr)
         else:
-            from llm_client import call_llm
+            from llm_client import call_llm, normalize_llm_provider
+            provider_label = normalize_llm_provider(llm_provider)
 
         no_commit = "--no-commit" in args
 
         print(f"{'='*60}", file=sys.stderr)
-        print(f"Stock Analysis Pipeline — {date} (full auto)", file=sys.stderr)
+        print(f"Stock Analysis Pipeline — {date} (full auto, {provider_label})", file=sys.stderr)
         print(f"{'='*60}", file=sys.stderr)
 
         # Phase 1: Collect
@@ -901,14 +986,20 @@ def main():
         )
 
         # Phase 2: Build prompt and call LLM
-        print(f"\nPhase 2: Calling LLM{' (legacy 4-pass)' if legacy_llm else ''}...", file=sys.stderr)
+        phase2_label = "legacy 4-pass" if legacy_llm else provider_label
+        print(f"\nPhase 2: Calling LLM ({phase2_label})...", file=sys.stderr)
         prompt = phase2_build_prompt(data)
 
         if legacy_llm:
             llm_result = call_llm(prompt, output_dir=run_dir)
         else:
             phase1_data = {k: v for k, v in data.items() if k not in ("learnings", "_hypothesis_data", "hypothesis_prompt")}
-            llm_result = call_llm(prompt, output_dir=run_dir, phase1_data=phase1_data)
+            llm_result = call_llm(
+                prompt,
+                output_dir=run_dir,
+                phase1_data=phase1_data,
+                provider=provider_label,
+            )
 
         # Use GPT JSON (primary) or Claude JSON (fallback)
         decisions = llm_result.get("gpt_json") or llm_result.get("claude_json")
@@ -938,6 +1029,9 @@ def main():
 
         # Save LLM metadata
         llm_meta = {
+            "provider": llm_result.get("provider", provider_label),
+            "primary_model": llm_result.get("primary_model"),
+            "decision_source": llm_result.get("decision_source"),
             "input_tokens": llm_result["input_tokens"],
             "output_tokens": llm_result["output_tokens"],
             "rounds": llm_result["rounds"],
@@ -950,7 +1044,7 @@ def main():
             encoding="utf-8",
         )
 
-        source = "Claude fallback" if llm_result.get("fallback_used") else "GPT primary"
+        source = llm_result.get("decision_source") or ("fallback" if llm_result.get("fallback_used") else "primary")
         print(f"  LLM: {llm_result['rounds']} rounds, "
               f"{llm_result['input_tokens']}+{llm_result['output_tokens']} tokens, "
               f"{len(llm_result['tool_calls'])} tool calls, "
@@ -972,6 +1066,9 @@ def main():
             "tool_calls_count": len(llm_result["tool_calls"]),
             "duration_sec": llm_result["duration_sec"],
             "fallback_used": llm_result.get("fallback_used", False),
+            "provider": llm_result.get("provider", provider_label),
+            "decision_source": llm_result.get("decision_source"),
+            "primary_model": llm_result.get("primary_model"),
         })
 
         log3 = phase3_apply(date, decisions, data)
