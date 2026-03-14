@@ -607,6 +607,16 @@ def build_summary(phase1_data: dict) -> str:
     """
     sections = []
 
+    def _format_iv_proxy(proxy: dict | None) -> str:
+        if not isinstance(proxy, dict):
+            return ""
+        name = proxy.get("primary_name") or proxy.get("primary_underlying")
+        rank = proxy.get("iv_rank")
+        sizing = proxy.get("sizing")
+        if not name or rank in (None, ""):
+            return ""
+        return f", iv_proxy={name} IVR={float(rank)*100:.1f}% ({sizing})"
+
     # Portfolio snapshot (may be None in raw Phase 1 — built later by run_daily)
     pf = phase1_data.get("portfolio") or {}
     if pf:
@@ -681,13 +691,14 @@ def build_summary(phase1_data: dict) -> str:
             if sector == "?" and c.get("industries"):
                 industries = c["industries"]
                 sector = industries[0].get("name", "?") if industries else "?"
+            iv_proxy = _format_iv_proxy(c.get("iv_proxy"))
             lines.append(
                 f"- **{c.get('code', '?')} {c.get('name', '?')}**: "
                 f"PE={c.get('pe', '?')}, "
                 f"dist_ma5={c.get('dist_ma5_pct', '?')}%, "
                 f"dist_ma10={c.get('dist_ma10_pct', '?')}%, "
                 f"dist_ma20={c.get('dist_ma20_pct', '?')}%, "
-                f"sector={sector}"
+                f"sector={sector}{iv_proxy}"
             )
         sections.append("\n".join(lines))
 
@@ -696,11 +707,12 @@ def build_summary(phase1_data: dict) -> str:
     if positions:
         lines = ["## Active Positions"]
         for p in positions:
+            iv_proxy = _format_iv_proxy(p.get("iv_proxy"))
             lines.append(
                 f"- **{p.get('code', '?')} {p.get('name', '?')}**: "
                 f"entry={p.get('entryPrice', '?')} on {p.get('entryDate', '?')}, "
                 f"stop={p.get('stopLoss', '?')}, target={p.get('targetPrice', '?')}, "
-                f"sector={p.get('sector', '?')}"
+                f"sector={p.get('sector', '?')}{iv_proxy}"
             )
         sections.append("\n".join(lines))
 
@@ -723,10 +735,12 @@ def build_summary(phase1_data: dict) -> str:
         lines = ["## IV Sentiment"]
         overall = iv.get("overall_sentiment")
         if isinstance(overall, dict):
+            based_on = overall.get("based_on") or []
+            basket = f", Core Basket: {','.join(based_on)}" if based_on else ""
             lines.append(
                 f"- Signal: {overall.get('signal', '?')}, "
                 f"Avg IV Rank: {overall.get('avg_iv_rank', '?')}, "
-                f"Avg IV Percentile: {overall.get('avg_iv_percentile', '?')}"
+                f"Avg IV Percentile: {overall.get('avg_iv_percentile', '?')}{basket}"
             )
             if overall.get("implication"):
                 lines.append(f"- Implication: {overall['implication']}")

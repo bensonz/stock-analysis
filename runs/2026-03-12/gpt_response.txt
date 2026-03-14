@@ -1,0 +1,196 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "煤炭开采",
+        "5d_pct": 4.35,
+        "trend": "accelerating"
+      },
+      {
+        "name": "风电设备",
+        "5d_pct": 4.3,
+        "trend": "accelerating"
+      },
+      {
+        "name": "焦炭Ⅱ",
+        "5d_pct": 2.95,
+        "trend": "steady"
+      },
+      {
+        "name": "燃气Ⅱ",
+        "5d_pct": 2.67,
+        "trend": "steady"
+      },
+      {
+        "name": "养殖业",
+        "5d_pct": 2.05,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "工程机械",
+        "5d_pct": -3.54,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": -3.35,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -2.95,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "地面兵装Ⅱ",
+        "5d_pct": -2.46,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "军工电子Ⅱ",
+        "5d_pct": -2.33,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "1/3 positions in hot sectors",
+    "regime": "Defensive/resource rotation leading while growth and military themes weaken; grid remains structurally strong but is not in today's top-5 board list"
+  },
+  "position_decisions": [
+    {
+      "code": "002046",
+      "name": "国机精工",
+      "action": "SELL",
+      "reason": "Day-3 loss is about -4.3% versus entry, breaching the first-3-days -3% rule; price is only 0.7% above hard stop and volume is below MAVOL30. Sector is not in today's hot list, so timing failed and capital should be recycled.",
+      "sector_rank": "outside top 30%",
+      "new_stop": null,
+      "pnl_pct": -4.32,
+      "days_held": 3,
+      "exit_price": 50.04
+    },
+    {
+      "code": "002121",
+      "name": "科陆电子",
+      "action": "HOLD",
+      "reason": "Still above hard stop and day-3 drawdown is only about -1.1% from entry. Electric-grid thesis remains supported by policy and industry capex, though sector is not in today's top-5 and volume is slightly below MAVOL30, so no add.",
+      "sector_rank": "borderline top 30%",
+      "new_stop": null,
+      "pnl_pct": 1.13,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "002595",
+      "name": "豪迈科技",
+      "action": "SELL",
+      "reason": "Only day 3 and already down about -3.7% from entry, which triggers the first-3-days sell rule. Also only 1.4% above hard stop with weak volume; sector support is not visible in today's hot boards.",
+      "sector_rank": "outside top 30%",
+      "new_stop": null,
+      "pnl_pct": -3.7,
+      "days_held": 3,
+      "exit_price": 92.0
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "601615",
+      "name": "明阳智能",
+      "entry_price": 22.03,
+      "allocation_pct": 3,
+      "stop": 20.93,
+      "target": 26.5,
+      "thesis": "风电设备是今日最强方向之一，板块催化来自风电拉升与新能源建设预期，明阳智能具备龙头属性、利润高增和机构覆盖，且MA距离合规，不属于追高买点。",
+      "sector": "风电设备",
+      "sector_rank": "top 10%",
+      "catalyst": "风电设备板块午后拉升，叠加公司最新季度归母净利润同比增长129%，并有新设能源公司事件催化",
+      "catalyst_freshness": "ongoing",
+      "rps120": 94.8,
+      "conviction": "small"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "603191",
+      "name": "望变电气",
+      "reason": "RPS120 94.26 and sector quality is good, but dist_ma20_pct 8.2% is acceptable while sector is not in today's top-5 leadership; with IV Rank extremely low, prefer the stronger sector leader setup first",
+      "rps120": 94.26
+    },
+    {
+      "code": "600352",
+      "name": "浙江龙盛",
+      "reason": "Catalyst is real and fresh from dye price hikes, but sector is not in today's top leadership and current_price 15.41 is below ma5/ma10/ma20, showing momentum pause rather than active strength despite RPS120 91.15",
+      "rps120": 91.15
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "reason": "RPS120 91.82 and current_price 42.35 is within MA limits, but贵金属/黄金 is not in provided top sector list today; avoid opening outside top-30% sector rule even with strong macro catalyst",
+      "rps120": 91.82
+    },
+    {
+      "code": "603115",
+      "name": "海星股份",
+      "reason": "Fails no-chasing rule: dist_ma10_pct 6.4% is acceptable but dist_ma20_pct 15.2% exceeds the 12% limit, so entry would be chasing",
+      "rps120": 91.42
+    },
+    {
+      "code": "600063",
+      "name": "皖维高新",
+      "reason": "Fails no-chasing rule with dist_ma5_pct 8.9% and dist_ma10_pct 10.4%; even with chemical-fiber strength, extension is too large for a fresh entry",
+      "rps120": 86.08
+    },
+    {
+      "code": "603306",
+      "name": "华懋科技",
+      "reason": "Auto parts sector is not in the provided top sector list, so despite RPS120 93.31 and acceptable MA distances, sector-first rule blocks entry",
+      "rps120": 93.31
+    },
+    {
+      "code": "002448",
+      "name": "中原内配",
+      "reason": "No current price data in the main input set for analysis context here, and auto parts is not in the provided top sector list; sector-first rule blocks entry",
+      "rps120": null
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "前3日-3%快速止损比等待硬止损更重要；国机精工和豪迈科技都在开仓3日内明显走弱，说明入场时机错误时应立即撤退。",
+      "type": "rule",
+      "tags": [
+        "exit-rule",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h004",
+      "mechanism": "强势股若真处于资金主升，开仓后通常很快给正反馈；前3日即明显亏损，往往代表买在错误节奏或错误板块。"
+    },
+    {
+      "text": "低IV环境下，新仓应进一步偏向当日最强板块而非仅仅中期趋势板块；今天市场整体下跌时，只有最强的风电/煤炭等方向更有承接。",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h001",
+      "mechanism": "IV极低意味着市场对波动定价过低，弱势板块中的个股更容易在回撤日失去承接，资金会集中抱团最强主线。"
+    },
+    {
+      "text": "染料涨价这类基本面催化如果股价已经回到MA下方，不应仅凭题材新鲜度开仓，必须等价格重新证明强势。",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h003",
+      "mechanism": "催化决定方向，但短线买点仍由价格结构决定；跌回均线下方说明资金抢筹阶段已暂停。"
+    }
+  ],
+  "market_summary": "指数偏弱，上证-0.10%、深成指-0.63%、创业板-0.96%、科创50-1.24%。Breadth 0.38:1 bearish，64涨停/7跌停，虽然涨停数量不低，但下跌家数3893远超上涨1494，属于分化偏弱市，且分布主要集中在小幅下跌区间。Hot sectors (top 5): 煤炭开采(+4.35%), 风电设备(+4.30%), 焦炭Ⅱ(+2.95%), 燃气Ⅱ(+2.67%), 养殖业(+2.05%). Cold sectors (bottom 5): 工程机械(-3.54%), 航天装备Ⅱ(-3.35%), 林业Ⅱ(-2.95%), 地面兵装Ⅱ(-2.46%), 军工电子Ⅱ(-2.33%). Position sector alignment: 1/3 positions in hot sectors. IV context: overall avg IV Rank only 4.15%, a complacent market regime, so new position sizing should be cut by 50% and only the strongest sector setups should be bought.",
+  "market_sentiment": "neutral-bearish",
+  "market_call": "谨慎"
+}

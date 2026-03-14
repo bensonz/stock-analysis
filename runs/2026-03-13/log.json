@@ -1,0 +1,129 @@
+{
+  "date": "2026-03-13",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1773388809.928256,
+      "errors": [],
+      "end": 1773388871.006304,
+      "duration_sec": 61.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 5992,
+      "tokens": {
+        "input_tokens": 144209,
+        "output_tokens": 2815
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 91.0,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "GPT primary",
+      "primary_model": "gpt-5.4"
+    },
+    {
+      "phase": "apply",
+      "start": 1773388961.9875479,
+      "actions": [
+        "OPEN 600096",
+        "OPEN 600988",
+        "OPEN 603191",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h001 (observation): 冷板块内的高RPS个股不能替代板块强度，今日小金属位列倒数时，金钼股份这类高RPS标的也应直接降级为跳过。...",
+        "Hypothesis: Created h002 (observation): MA距离过滤非常有效，像海星股份这类RPS合格但dist_ma20_pct超12%的票，最容易在情绪转弱日出现均值回归。...",
+        "Hypothesis: Created h003 (observation): IV Rank极低环境下应买最强板块里的回踩票，而不是买所有强票；今日望变电气优于海星股份，核心差异就在于前者靠近均线、后者远离均线。...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002121",
+                "name": "科陆电子",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 9.58,
+                "stopLoss": 9.26,
+                "distance_pct": 3.34,
+                "suggestion": "🟠 WATCH — 3.3% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002121",
+                "name": "科陆电子",
+                "rule": "volume_below_mavol30",
+                "volume": 662627,
+                "mavol30": 712598.07,
+                "ratio_pct": 93.0,
+                "suggestion": "Latest volume 662,627 is below MAVOL30 712,598 (93.0% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+              }
+            ],
+            "error": null
+          }
+        ]
+      },
+      "end": 1773388962.142082,
+      "duration_sec": 0.2
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 002121 — 🟠 WATCH — 3.3% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_volume_below_mavol30: 002121 — Latest volume 662,627 is below MAVOL30 712,598 (93.0% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 152.3
+  }
+}

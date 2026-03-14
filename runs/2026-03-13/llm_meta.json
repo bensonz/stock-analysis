@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "gpt-5.4",
+  "decision_source": "GPT primary",
+  "input_tokens": 144209,
+  "output_tokens": 2815,
+  "rounds": 2,
+  "duration_sec": 91.0,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+2026年3月13日"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=风电设备+A股+2026年3月13日+消息"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=农化制品+磷化工+A股+2026年3月13日+消息"
+      },
+      "result_length": 28
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=黄金+A股+2026年3月13日+消息+赤峰黄金"
+      },
+      "result_length": 28
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=电网设备+A股+2026年3月13日+消息+国家电网"
+      },
+      "result_length": 28
+    }
+  ],
+  "fallback_used": false
+}

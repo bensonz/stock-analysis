@@ -110,10 +110,12 @@ web_fetch("https://www.baidu.com/s?wd=染料+涨价+龙盛+2026", maxChars=5000)
 web_fetch("https://www.baidu.com/s?wd=A股+热门板块+今日", maxChars=5000)
 ```
 
-## IV Sentiment (Unchanged)
+## IV Sentiment
 
 Use IV Rank as a **new-position throttle only**:
-- **IV Rank < 15%**: Reduce new position sizing by 50%. Market is complacent — vol expansion imminent.
+- Prefer each stock's `iv_proxy` when provided in `enriched_candidates` / `active_positions`.
+- Fall back to `iv_sentiment.overall_sentiment` only when a stock-specific proxy is unavailable.
+- **IV Rank < 15%**: Reduce new position sizing by 50%. Proxy / market is complacent — vol expansion risk is high.
 - **IV Rank 15-50%**: Normal sizing.
 - **IV Rank > 50%**: Be selective but don't freeze. High IV = high opportunity if you pick right.
 - **IV Rank > 75%**: Only buy the strongest setups. Wide stops.

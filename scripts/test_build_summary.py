@@ -38,12 +38,22 @@ def _make_phase1_fixture():
                 "code": "002121.SZ", "name": "科陆电子", "pe": 19.0,
                 "dist_ma5_pct": 2.1, "dist_ma10_pct": 4.3, "dist_ma20_pct": 7.8,
                 "industries": [{"name": "电力设备", "level": 1}],
+                "iv_proxy": {
+                    "primary_name": "500ETF深",
+                    "iv_rank": 0.3089,
+                    "sizing": "normal",
+                },
             },
         ],
         "positions": [
             {
                 "code": "002046", "name": "国机精工", "entryDate": "2026-03-10",
                 "entryPrice": 52.3, "stopLoss": 49.69, "targetPrice": 65.0, "sector": "通用设备",
+                "iv_proxy": {
+                    "primary_name": "500ETF深",
+                    "iv_rank": 0.3089,
+                    "sizing": "normal",
+                },
             },
         ],
         "position_prices": {
@@ -102,6 +112,13 @@ class TestBuildSummary:
         result = build_summary(data)
         assert "极度乐观" in result
         assert "50ETF" in result
+
+    def test_stock_iv_proxy_rendered(self):
+        from llm_client import build_summary
+        data = _make_phase1_fixture()
+        result = build_summary(data)
+        assert "500ETF深" in result
+        assert "30.9%" in result
 
     def test_enriched_key(self):
         from llm_client import build_summary

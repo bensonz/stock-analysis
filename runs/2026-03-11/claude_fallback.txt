@@ -1,0 +1,231 @@
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "化学原料", "5d_pct": 5.23, "trend": "accelerating"},
+      {"name": "电池", "5d_pct": 4.54, "trend": "accelerating"},
+      {"name": "光伏设备", "5d_pct": 3.21, "trend": "steady"},
+      {"name": "化学纤维", "5d_pct": 3.18, "trend": "steady"},
+      {"name": "基础建设", "5d_pct": 3.10, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "小金属", "5d_pct": -2.92, "trend": "deteriorating"},
+      {"name": "林业Ⅱ", "5d_pct": -2.48, "trend": "deteriorating"},
+      {"name": "航空装备Ⅱ", "5d_pct": -2.23, "trend": "deteriorating"},
+      {"name": "综合Ⅱ", "5d_pct": -2.0, "trend": "deteriorating"},
+      {"name": "金属新材料", "5d_pct": -1.82, "trend": "deteriorating"}
+    ],
+    "position_alignment": "1/3 positions in hot-adjacent sectors (科陆电子 in 电网设备 strong trend), 2/3 in neutral-to-cooling sectors (通用设备, 专用设备 not in today's top 5)",
+    "regime": "Narrow sector rotation: 化学原料/电池/光伏 leading, breadth weak at 0.63:1. New energy + chemicals hot, tech/semiconductor cold. IV extremely low (avg rank 8.8%) = complacency. Not a broad bull — selective plays only."
+  },
+  "position_decisions": [
+    {
+      "code": "002046",
+      "name": "国机精工",
+      "action": "HOLD",
+      "reason": "Day 1 held. Intraday reversal concerning (hit 54.60 high then closed 52.05 at -1.05%), but within stop. 培育钻石涨价 catalyst confirmed by multiple companies issuing price increase notices. 商业航天 policy support. 34 institutions visited 03-06. Sector 通用设备 trending since Nov 2025 but not in today's top 5 — monitor for sector cooling.",
+      "sector_rank": "mid-range today, long-term top 30%",
+      "new_stop": null,
+      "pnl_pct": -0.48,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "002121",
+      "name": "科陆电子",
+      "action": "HOLD",
+      "reason": "Day 1 held, +3.18% from entry — best performer. 电网设备 sector strong trend since May 2025. US grid $750B expansion + 十五五国网4万亿 confirmed by research. 美的集团 backing + 储能全球化 thesis intact. Hit 10.24 intraday (+5.0% from entry). Consider raising stop to breakeven if +10% reached.",
+      "sector_rank": "top 20% (电网设备 long-term trend)",
+      "new_stop": null,
+      "pnl_pct": 3.18,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "002595",
+      "name": "豪迈科技",
+      "action": "HOLD",
+      "reason": "Day 1 held, -2.28% from entry. WARNING: only 2.8% above stop (90.75). Intraday low 92.58 = -3.1% from entry, technically breached -3% first-3-days rule intraday but closed at -2.28%. GE/Siemens gas turbine thesis confirmed by research (GE Vernova contracts +80%, delivery cycle 3.5→5 years). 0 risk factors, score_company 9.3. Thesis rock solid but price action ugly. If opens below 92.67 tomorrow (-3% from 95.53), SELL immediately per Rule 5.",
+      "sector_rank": "mid-range today (专用设备 not in top 5 today)",
+      "new_stop": null,
+      "pnl_pct": -2.28,
+      "days_held": 1,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "600499",
+      "name": "科达制造",
+      "entry_price": 17.85,
+      "allocation_pct": 3,
+      "stop": 16.96,
+      "target": 21.5,
+      "thesis": "专用设备龙头，碳酸锂涨价催化(持股蓝科锂业43.58%)，并购重组推进海外建材业务。净利润+118.9% YoY爆发式增长。MA距离全部安全(ma5=2.6%, ma10=2.9%, ma20=3.2%)，处于均线附近理想入场位。北向7.4%，score_company 9.0，8亮点仅1风险。IV极低减半仓位。",
+      "sector": "专用设备",
+      "sector_rank": "top 30% (trending since Nov 2025)",
+      "catalyst": "碳酸锂价格上涨提升蓝科锂业利润贡献+并购重组扩大海外建材业务",
+      "catalyst_freshness": "ongoing",
+      "rps120": 89.7,
+      "conviction": "moderate"
+    },
+    {
+      "code": "600096",
+      "name": "云天化",
+      "entry_price": 41.78,
+      "allocation_pct": 3,
+      "stop": 39.69,
+      "target": 50.0,
+      "thesis": "磷肥及磷化工龙头，化肥涨价周期(磷酸一铵+16.67% YoY，尿素+5.24% YoY)。MA距离极佳(ma5=0.3%, ma10=-1.4%, ma20=5.3%)，03-03暴跌后回到MA5/MA10支撑位。ROE 25%顶级盈利能力，合同负债21亿(+36%)订单充足。农化制品行业自2025年4月持续走强。IV极低减半仓位。",
+      "sector": "农化制品",
+      "sector_rank": "top 20% (adjacent to today's #1 化学原料, trending since Apr 2025)",
+      "catalyst": "化肥全面涨价+磷化工供需紧张+合同负债大增",
+      "catalyst_freshness": "ongoing",
+      "rps120": 89.1,
+      "conviction": "moderate"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "688300",
+      "name": "联瑞新材",
+      "reason": "MA distances极度超买: ma5=16.8%, ma10=28.8%, ma20=42.3%，全部严重超标。Rule 2b NON-NEGOTIABLE skip。",
+      "rps120": 94.8
+    },
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "reason": "MA distances全部超标: ma5=8.6%, ma10=8.9%, ma20=15.2%。Rule 2b skip。",
+      "rps120": 92.1
+    },
+    {
+      "code": "002782",
+      "name": "可立克",
+      "reason": "MA distances严重超买: ma5=11.1%, ma10=16.2%, ma20=23.1%。Rule 2b skip。",
+      "rps120": 91.1
+    },
+    {
+      "code": "603269",
+      "name": "海鸥股份",
+      "reason": "MA distances极度超买: ma5=6.7%, ma10=16.2%, ma20=28.9%。5个风险因素，15%日均换手率。Rule 2b skip。",
+      "rps120": 89.8
+    },
+    {
+      "code": "300285",
+      "name": "国瓷材料",
+      "reason": "MA distances超标: ma5=8.4%, ma10=8.0%, ma20=16.1%。Rule 2b skip。",
+      "rps120": 91.9
+    },
+    {
+      "code": "688717",
+      "name": "艾罗能源",
+      "reason": "MA distances极度超买: ma5=9.3%, ma10=13.6%, ma20=24.8%。昨日-6.75%大跌，追高风险极大。Rule 2b skip。",
+      "rps120": 88.2
+    },
+    {
+      "code": "603115",
+      "name": "海星股份",
+      "reason": "MA distances超标: ma10=7.9%, ma20=17.0%。Sector 工业金属(铝) 不在今日热门板块。3个风险因素。",
+      "rps120": 90.5
+    },
+    {
+      "code": "603031",
+      "name": "安孚科技",
+      "reason": "ma5=6.2%触及Rule 2b边界。商誉占净资产95%为重大风险。即将解禁(03-25)。",
+      "rps120": 88.3
+    },
+    {
+      "code": "688388",
+      "name": "嘉元科技",
+      "reason": "毛利率仅4.94%极薄，PE 348，RPS20仅64.7短期动量弱。电池sector今日热但个股质量差。",
+      "rps120": 86.0
+    },
+    {
+      "code": "002497",
+      "name": "雅化集团",
+      "reason": "RPS20仅43.6短期动量极弱。02-26大跌-8.76%抛压重，大股东质押64%。津巴布韦锂矿出口禁令不确定性。",
+      "rps120": 94.5
+    },
+    {
+      "code": "002250",
+      "name": "联化科技",
+      "reason": "RPS20仅42.6短期动量极弱，股价低于MA10和MA20(下跌趋势)。03-03大跌-8.54%后未企稳。",
+      "rps120": 88.1
+    },
+    {
+      "code": "605167",
+      "name": "利柏特",
+      "reason": "Sector 专业工程/化学工程 不在今日热门板块。营收-23.4% YoY下滑，净利润-11.1%。RPS20仅43.9短期弱。",
+      "rps120": 92.0
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "RPS20仅34.0短期动量极弱，股价低于MA5/MA10/MA20全部均线。Sector 工业金属 不在今日热门板块。",
+      "rps120": 91.1
+    },
+    {
+      "code": "002859",
+      "name": "洁美科技",
+      "reason": "停牌中(筹划发行股份购买资产)，无法交易。",
+      "rps120": 86.1
+    },
+    {
+      "code": "601615",
+      "name": "明阳智能",
+      "reason": "RPS20仅4.4极度弱势。03-03跌停-10%。毛利率6.4%，扣非净利润占比仅25%收益质量极低。4个风险因素。",
+      "rps120": 93.6
+    },
+    {
+      "code": "300435",
+      "name": "中泰股份",
+      "reason": "RPS20仅14.7极度弱势，股价低于全部均线(ma5=-2.9%, ma10=-6.8%, ma20=-6.1%)。03-04大跌-10.4%。管理层多人减持。",
+      "rps120": 91.6
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "股价远低于全部均线(ma5=-5.3%, ma10=-11.2%, ma20=-12.6%)，处于下跌趋势。净利润亏损，PE 500+。Sector 半导体 今日科创50 -1.35%。",
+      "rps120": 85.5
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "RPS20仅42.1短期弱势，股价低于MA10和MA20。Sector 军工电子 不在今日热门板块。RPS120仅85.1接近下限。",
+      "rps120": 85.1
+    },
+    {
+      "code": "002448",
+      "name": "中原内配",
+      "reason": "Sector 汽车零部件 不在今日top 5热门板块。周级别超买。RPS120=92.1在extended zone但sector未确认top 10%。",
+      "rps120": 92.1
+    },
+    {
+      "code": "603191",
+      "name": "望变电气",
+      "reason": "RPS120=93.6在extended zone，电网设备sector未确认今日top 10%。ma20=8.0%接近上限。",
+      "rps120": 93.6
+    },
+    {
+      "code": "300018",
+      "name": "中元股份",
+      "reason": "RPS120=93.0在extended zone。3个风险因素(无机构覆盖、无北向)。ma20=8.7%偏高。",
+      "rps120": 93.0
+    },
+    {
+      "code": "002595",
+      "name": "豪迈科技",
+      "reason": "已持仓，不重复开仓。",
+      "rps120": 90.6
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "reason": "RPS120=85.3接近下限。贵金属sector不在今日top 5。事件驱动型(中东冲突)波动大，IV极低环境下不适合开新仓。曾因time_decay卖早错失涨停的教训，但当前不符合sector-first规则。",
+      "rps120": 85.3
+    },
+    {
+      "code": "002155",
+      "name": "湖南黄金",
+      "reason": "同赤峰黄金，贵金属sector不在今日top 5。股价低于MA5和MA10(ma5=-2.8%, ma10=-5.4%)，短期走弱。",
+      

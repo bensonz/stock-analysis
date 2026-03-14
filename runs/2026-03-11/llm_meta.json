@@ -1,0 +1,79 @@
+{
+  "input_tokens": 365478,
+  "output_tokens": 10454,
+  "rounds": 5,
+  "duration_sec": 267.5,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 化学原料 电池 光伏 板块 涨停 2026年3月11日",
+        "max_results": 5
+      },
+      "result_length": 1948
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "培育钻石 涨价 国机精工 2026年3月",
+        "max_results": 5
+      },
+      "result_length": 2586
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "电网设备 变压器 出口 北美 2026年3月",
+        "max_results": 5
+      },
+      "result_length": 1611
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "COMEX黄金 5400美元 中东局势 2026年3月",
+        "max_results": 5
+      },
+      "result_length": 1816
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "豪迈科技 燃气轮机 GE 数据中心 2026",
+        "max_results": 5
+      },
+      "result_length": 3274
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "科陆电子 储能 电网 美的 2026年3月",
+        "max_results": 5
+      },
+      "result_length": 1327
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 IV波动率 期权 2026年3月 市场情绪",
+        "max_results": 5
+      },
+      "result_length": 2008
+    }
+  ],
+  "fallback_used": false
+}

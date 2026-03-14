@@ -75,6 +75,8 @@ from hypothesis_manager import (
 
 # Directories
 RUNS_DIR = PROJECT_ROOT / "runs"
+LEARNINGS_FILE = PROJECT_ROOT / "LEARNINGS.md"
+HYPOTHESES_FILE = TRACKING_DIR / "hypotheses.json"
 
 LLM_PROMPT_START = "=== LLM_PROMPT_START ==="
 LLM_PROMPT_END = "=== LLM_PROMPT_END ==="
@@ -191,6 +193,34 @@ def restore_snapshot(snapshot: dict) -> None:
     # LEARNINGS.md no longer stored in snapshots — lives in repo directly
 
 
+def snapshot_aux_state(output_dir: Path) -> None:
+    """Persist non-position mutable state needed for consistent reruns."""
+    if HYPOTHESES_FILE.exists():
+        shutil.copy2(HYPOTHESES_FILE, output_dir / "hypotheses_snapshot.json")
+    if LEARNINGS_FILE.exists():
+        shutil.copy2(LEARNINGS_FILE, output_dir / "LEARNINGS.md")
+
+
+def restore_aux_state(run_dir: Path) -> list[str]:
+    """Restore hypothesis / legacy learnings snapshots when available."""
+    warnings = []
+    output_dir = run_dir / "output"
+
+    hyp_snapshot = output_dir / "hypotheses_snapshot.json"
+    if hyp_snapshot.exists():
+        shutil.copy2(hyp_snapshot, HYPOTHESES_FILE)
+    else:
+        warnings.append("No hypotheses snapshot found to restore")
+
+    learnings_snapshot = output_dir / "LEARNINGS.md"
+    if learnings_snapshot.exists():
+        shutil.copy2(learnings_snapshot, LEARNINGS_FILE)
+    else:
+        warnings.append("No LEARNINGS snapshot found to restore")
+
+    return warnings
+
+
 def check_snapshot_consistency(date: str, current_snapshot: dict) -> list[str]:
     """Check if current state matches the previous day's post-run snapshot."""
     warnings = []
@@ -236,10 +266,11 @@ def check_snapshot_consistency(date: str, current_snapshot: dict) -> list[str]:
 
 
 def reset_to_date(target_date: str) -> None:
-    """Reset all position state to the end-of-day state of target_date.
+    """Reset mutable state to the end-of-day state of target_date.
 
-    Reads runs/<target_date>/output/positions_snapshot.json and restores
-    tracking/ state from it. Also deletes any run dirs after target_date.
+    Restores tracking position files from runs/<target_date>/output/positions_snapshot.json,
+    deletes any run dirs after target_date, and restores auxiliary state snapshots
+    like tracking/hypotheses.json and LEARNINGS.md when available.
     """
     run_dir = RUNS_DIR / target_date
     snapshot_file = run_dir / "output" / "positions_snapshot.json"
@@ -281,8 +312,9 @@ def reset_to_date(target_date: str) -> None:
     # Restore
     restore_snapshot(snapshot)
 
-    # Regenerate positions.json with current data (no live prices)
-    regenerate_positions_json()
+    aux_warnings = restore_aux_state(run_dir)
+    for warning in aux_warnings:
+        print(f"  ⚠ {warning}", file=sys.stderr)
 
     print(f"\n✓ State restored to end of {target_date}", file=sys.stderr)
 
@@ -428,9 +460,14 @@ def phase1_collect(date: str) -> dict:
         print("  [6/6] Fetching IV sentiment...", file=sys.stderr)
         from fetch_iv_sentiment import fetch_all
         result = fetch_all()
-        sig = result.get("overall_sentiment", {}).get("signal", "?")
-        rank = result.get("overall_sentiment", {}).get("avg_iv_rank", 0)
-        print(f"    → {sig} (avg IV rank {rank*100:.1f}%)", file=sys.stderr)
+        overall = result.get("overall_sentiment", {})
+        sig = overall.get("signal", "?")
+        rank = overall.get("avg_iv_rank", 0)
+        based_on = overall.get("based_on", [])
+        print(
+            f"    → {sig} (core avg IV rank {rank*100:.1f}% across {len(based_on)} proxies)",
+            file=sys.stderr,
+        )
         return "iv_sentiment", result
 
     def _ma_data():
@@ -484,6 +521,24 @@ def phase1_collect(date: str) -> dict:
                 stock["dist_ma5_pct"] = ma.get("dist_ma5_pct")
                 stock["dist_ma10_pct"] = ma.get("dist_ma10_pct")
                 stock["dist_ma20_pct"] = ma.get("dist_ma20_pct")
+
+    # Attach stock-specific IV proxies to candidates/positions
+    iv_data = data.get("iv_sentiment") or {}
+    if iv_data and "error" not in iv_data:
+        from fetch_iv_sentiment import stock_iv_proxy
+
+        market_cap_by_code = {
+            str(s.get("code", "")).split(".")[0]: s.get("market_cap")
+            for s in data.get("strategy_pool", {}).get("stocks", [])
+        }
+
+        for stock in data.get("enriched", []):
+            code = str(stock.get("code", "")).split(".")[0]
+            stock["iv_proxy"] = stock_iv_proxy(code, iv_data, market_cap=market_cap_by_code.get(code))
+
+        for position in data.get("positions", []):
+            code = str(position.get("code", "")).split(".")[0]
+            position["iv_proxy"] = stock_iv_proxy(code, iv_data, market_cap=market_cap_by_code.get(code))
 
     # Save IV sentiment to input dir
     if data.get("iv_sentiment") and "error" not in data["iv_sentiment"]:
@@ -574,6 +629,7 @@ def phase2_build_prompt(data: dict) -> str:
                 "catalysts": p.get("catalysts", []),
                 "shares": p.get("shares"),
                 "allocation_pct": p.get("allocation_pct"),
+                "iv_proxy": p.get("iv_proxy"),
                 "history": p.get("history", [])[-3:],  # Last 3 history entries
             }
             for p in data.get("positions", [])
@@ -853,6 +909,7 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
     (output_dir / "positions_snapshot.json").write_text(
         json.dumps(post_snap, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
+    snapshot_aux_state(output_dir)
 
     log["end"] = time.time()
     log["duration_sec"] = round(log["end"] - log["start"], 1)

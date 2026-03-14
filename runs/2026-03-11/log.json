@@ -1,0 +1,118 @@
+{
+  "date": "2026-03-11",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1773211360.973974,
+      "errors": [],
+      "end": 1773211375.076643,
+      "duration_sec": 14.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 5770,
+      "tokens": {
+        "input_tokens": 365478,
+        "output_tokens": 10454
+      },
+      "rounds": 5,
+      "tool_calls_count": 7,
+      "duration_sec": 267.5,
+      "fallback_used": false
+    },
+    {
+      "phase": "apply",
+      "start": 1773211642.648265,
+      "actions": [
+        "ERROR OPEN 002497: unsupported operand type(s) for //: 'float' and 'NoneType'",
+        "ERROR OPEN 603191: unsupported operand type(s) for //: 'float' and 'NoneType'",
+        "ERROR OPEN 600096: unsupported operand type(s) for //: 'float' and 'NoneType'",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h019 (observation): The best opportunities today are in chemical and power-related groups, but many ...",
+        "Hypothesis: Created h020 (observation): Weak breadth with strong sector winners means stock selection should stay concen...",
+        "Hypothesis: Created h021 (observation): Several acceptable RPS names become automatic skips once MA-distance limits are ...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 5,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002046",
+                "name": "国机精工",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 52.05,
+                "stopLoss": 49.69,
+                "distance_pct": 4.53,
+                "suggestion": "🟠 WATCH — 4.5% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "002595",
+                "name": "豪迈科技",
+                "rule": "stop_proximity",
+                "severity": "WARNING",
+                "currentPrice": 93.35,
+                "stopLoss": 90.75,
+                "distance_pct": 2.79,
+                "suggestion": "🟡 WARNING — only 2.8% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1773211642.809932,
+      "duration_sec": 0.2
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 002046 — 🟠 WATCH — 4.5% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 002595 — 🟡 WARNING — only 2.8% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 281.8
+  }
+}

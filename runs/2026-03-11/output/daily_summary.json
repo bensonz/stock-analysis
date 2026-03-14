@@ -1,0 +1,56 @@
+{
+  "date": "2026-03-11",
+  "actions": [
+    {
+      "code": "002046",
+      "name": "国机精工",
+      "action": "HOLD",
+      "price": 52.05,
+      "pnl_pct": -0.48,
+      "note": "Only day 2 of hold, pnl still above hard stop and above first-3-days sell threshold; sector not hot but not confirmed cold from provided data, so no forced exit yet."
+    },
+    {
+      "code": "002121",
+      "name": "科陆电子",
+      "action": "HOLD",
+      "price": 10.06,
+      "pnl_pct": 3.18,
+      "note": "Best acting position, profit cushion building, and power/grid theme remains aligned with broader new-energy strength; no stop trigger."
+    },
+    {
+      "code": "002595",
+      "name": "豪迈科技",
+      "action": "HOLD",
+      "price": 93.35,
+      "pnl_pct": -2.28,
+      "note": "Weakest position but still above both hard stop and first-3-days -3% closing loss rule; no exception granted beyond price. If it closes below -3% from entry in the next 2 sessions, exit."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 970688.0,
+    "dayPnl": -875.0,
+    "dayReturnPct": -0.09,
+    "totalReturnPct": -2.93,
+    "unrealizedPnl": -335.0,
+    "realizedPnl": -28977.0,
+    "cashPct": 88.33
+  },
+  "newPositions": [
+    {
+      "code": "002497",
+      "name": "雅化集团"
+    },
+    {
+      "code": "603191",
+      "name": "望变电气"
+    },
+    {
+      "code": "600096",
+      "name": "云天化"
+    }
+  ],
+  "marketContext": {
+    "summary": "Market is a narrow rotation tape: 上证+0.25%, 深成指+0.79%, 创业板+1.33%, but breadth is only 0.6:1 with 2058 up vs 3279 down, indicating weak internals despite green indices. Hot sectors are 化学原料(+5.23%), 电池(+4.54%), 光伏设备(+3.21%), 化学纤维(+3.18%), 基础建设(+3.10%); cold sectors are 小金属(-2.92%), 林业Ⅱ(-2.48%), 航空装备Ⅱ(-2.23%), 综合Ⅱ(-2.00%), 金属新材料(-1.82%). Breadth read: bearish internals, likely sector-driven rally rather than broad risk-on. IV Rank is extremely low (avg 8.84%), so new-position sizing is throttled down by 50%; favor only strongest non-extended setups."
+  }
+}

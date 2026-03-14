@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "gpt-5.4",
+  "decision_source": "GPT primary",
+  "input_tokens": 129016,
+  "output_tokens": 2918,
+  "rounds": 2,
+  "duration_sec": 79.5,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=A%E8%82%A1+%E7%83%AD%E9%97%A8%E6%9D%BF%E5%9D%97+%E4%BB%8A%E6%97%A5+2026-03-12"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=%E6%9F%93%E6%96%99+%E6%B6%A8%E4%BB%B7+%E6%B5%99%E6%B1%9F%E9%BE%99%E7%9B%9B+2026"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=%E7%94%B5%E7%BD%91%E8%AE%BE%E5%A4%87+%E5%8D%81%E4%BA%94%E4%BA%94+%E5%9B%BD%E5%AE%B6%E7%94%B5%E7%BD%91+2026"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=%E9%A3%8E%E7%94%B5%E8%AE%BE%E5%A4%87+%E4%BB%8A%E6%97%A5+%E6%B6%A8%E5%81%9C+2026-03-12"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=%E9%BB%84%E9%87%91+%E4%B8%AD%E4%B8%9C+%E9%81%BF%E9%99%A9+%E8%B5%A4%E5%B3%B0%E9%BB%84%E9%87%91+2026-03-12"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=%E7%85%A4%E7%82%AD%E5%BC%80%E9%87%87+%E4%BB%8A%E6%97%A5+%E4%B8%8A%E6%B6%A8+2026-03-12"
+      },
+      "result_length": 3000
+    }
+  ],
+  "fallback_used": false
+}

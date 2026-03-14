@@ -1,0 +1,216 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "风电设备",
+        "5d_pct": 2.48,
+        "trend": "accelerating"
+      },
+      {
+        "name": "厨卫电器",
+        "5d_pct": 2.04,
+        "trend": "steady"
+      },
+      {
+        "name": "基础建设",
+        "5d_pct": 1.66,
+        "trend": "steady"
+      },
+      {
+        "name": "农化制品",
+        "5d_pct": 1.64,
+        "trend": "steady"
+      },
+      {
+        "name": "黑色家电",
+        "5d_pct": 1.35,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": -4.31,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "小金属",
+        "5d_pct": -4.21,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "综合Ⅱ",
+        "5d_pct": -4.19,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "IT服务Ⅱ",
+        "5d_pct": -3.52,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "其他电源设备Ⅱ",
+        "5d_pct": -3.33,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "1/2 positions in hot sectors",
+    "regime": "Defensive rotation with narrow leadership in 风电/农化/基建, while small metals and tech service are being sold; sector persistence is mixed rather than broad risk-on."
+  },
+  "position_decisions": [
+    {
+      "code": "002121",
+      "name": "科陆电子",
+      "action": "HOLD",
+      "reason": "电网设备不在今日top5但仍属近期强势主线之一，现价9.58距离硬止损9.26仍有3.3%缓冲；持仓第3天，较入场价9.75仅-1.74%，未触发首3日-3%卖出规则。需注意成交量低于MAVOL30且接近止损，不加仓。",
+      "sector_rank": "top 30%附近",
+      "new_stop": null,
+      "pnl_pct": -1.74,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "601615",
+      "name": "明阳智能",
+      "action": "HOLD",
+      "reason": "风电设备为今日最强板块，持仓与热 sector 对齐；现价22.15高于入场价22.03，未触发任何止损/时间止损。MA结构仍健康，继续持有观察能否延续板块强度。",
+      "sector_rank": "top 5%",
+      "new_stop": null,
+      "pnl_pct": 0.54,
+      "days_held": 2,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "600096",
+      "name": "云天化",
+      "entry_price": 43.13,
+      "allocation_pct": 3,
+      "stop": 40.97,
+      "target": 49.5,
+      "thesis": "农化制品位列今日前四强，磷化工主线仍有强度；龙头属性+订单支撑+北向持股，RPS120位于可买甜区，且MA距离合规。",
+      "sector": "农化制品",
+      "sector_rank": "top 10%",
+      "catalyst": "磷化工板块延续强势，澄星股份3连板、六国化工等联动，龙头基本面与订单数据支撑趋势。",
+      "catalyst_freshness": "ongoing",
+      "rps120": 90.85,
+      "conviction": "moderate"
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "entry_price": 40.91,
+      "allocation_pct": 2,
+      "stop": 38.86,
+      "target": 46.5,
+      "thesis": "贵金属具备事件驱动属性，中东局势升级与金价走强提供新鲜催化；RPS120 90.97处于甜区，MA距离健康，机构与北向参与度高。",
+      "sector": "贵金属",
+      "sector_rank": "top 30%以内",
+      "catalyst": "中东局势升级推动避险情绪与金价上行，赤峰黄金受益于黄金价格预期抬升。",
+      "catalyst_freshness": "ongoing",
+      "rps120": 90.97,
+      "conviction": "small"
+    },
+    {
+      "code": "603191",
+      "name": "望变电气",
+      "entry_price": 25.15,
+      "allocation_pct": 2,
+      "stop": 23.89,
+      "target": 29.0,
+      "thesis": "电网设备仍属强势主线，望变电气RPS120 93.79处于扩展可买区，回购与近24个月新高强化趋势，且当前价格回到MA附近，不属追高。",
+      "sector": "电网设备",
+      "sector_rank": "top 30%",
+      "catalyst": "电网设备长期强势，个股新高+回购形成趋势确认。",
+      "catalyst_freshness": "ongoing",
+      "rps120": 93.79,
+      "conviction": "small"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "工业金属/有色不在今日最热方向，且近10日走弱；虽然RPS120达94.47，但sector leadership不足，优先级低于风电/农化/电网。",
+      "rps120": 94.47
+    },
+    {
+      "code": "601958",
+      "name": "金钼股份",
+      "reason": "所属小金属为今日 bottom 5 板块，按规则冷板块不做新开仓。",
+      "rps120": 91.36
+    },
+    {
+      "code": "603115",
+      "name": "海星股份",
+      "reason": "dist_ma20_pct=13.3%，超过12%上限，属于明显追高区，MA距离规则直接否决。",
+      "rps120": 90.74
+    },
+    {
+      "code": "600063",
+      "name": "皖维高新",
+      "reason": "RPS120仅85.54虽达标，但dist_ma10_pct=7.3%、短线8.49%涨幅后位置偏热，且增发预案带来供给压力，追价性价比一般。",
+      "rps120": 85.54
+    },
+    {
+      "code": "603306",
+      "name": "华懋科技",
+      "reason": "汽车零部件未进入今日top 30%热 sector，板块优先级不够；个股虽强，但不逆 sector 开仓。",
+      "rps120": 93.22
+    },
+    {
+      "code": "002448",
+      "name": "中原内配",
+      "reason": "Sector (汽车零部件) not in today's top 30%; no entry regardless of individual setup. No current price data used.",
+      "rps120": null
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "半导体不在今日热 sector，且2025年业绩快报净利润同比下降64.65%，基本面催化转弱，不做逆风博弈。",
+      "rps120": 90.57
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "冷板块内的高RPS个股不能替代板块强度，今日小金属位列倒数时，金钼股份这类高RPS标的也应直接降级为跳过。",
+      "type": "rule",
+      "tags": [
+        "sector",
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h001",
+      "mechanism": "个股相对强弱在板块退潮时容易失真，资金先撤行业、后撤个股，板块引力通常先于公司叙事生效。"
+    },
+    {
+      "text": "MA距离过滤非常有效，像海星股份这类RPS合格但dist_ma20_pct超12%的票，最容易在情绪转弱日出现均值回归。",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter",
+        "timing",
+        "risk-control"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "趋势交易不是无条件追涨，价格偏离中期均线过大时，短线盈亏比明显恶化。"
+    },
+    {
+      "text": "IV Rank极低环境下应买最强板块里的回踩票，而不是买所有强票；今日望变电气优于海星股份，核心差异就在于前者靠近均线、后者远离均线。",
+      "type": "signal",
+      "tags": [
+        "position-sizing",
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "低IV代表市场自满，新增仓位需要更好的入场位置来对冲突发波动，回踩支撑位的强趋势票更有容错率。"
+    }
+  ],
+  "market_summary": "指数回调，上证-0.82%、深成指-0.65%、创业板-0.22%。Breadth 0.39:1偏空，69涨停/24跌停，但下跌家数3828显著多于上涨1502，属于弱市中的局部热点行情。Hot sectors (top 5): 风电设备(+2.48%), 厨卫电器(+2.04%), 基础建设(+1.66%), 农化制品(+1.64%), 黑色家电(+1.35%). Cold sectors (bottom 5): 航天装备Ⅱ(-4.31%), 小金属(-4.21%), 综合Ⅱ(-4.19%), IT服务Ⅱ(-3.52%), 其他电源设备Ⅱ(-3.33%). Position sector alignment: 1/2 positions in hot sectors. IV整体极低，新增仓位按规则降至半仓思维，只做最强板块中MA距离合规的标的。",
+  "market_sentiment": "neutral-bearish",
+  "market_call": "谨慎积极"
+}

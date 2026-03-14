@@ -1,0 +1,64 @@
+{
+  "date": "2026-03-12",
+  "source": "options-learn backend (OpenVlab IV history)",
+  "etf_iv_data": [
+    {
+      "underlying": "510050",
+      "lookback_days": 252,
+      "data_points": 238,
+      "current_iv": 0.1384,
+      "iv_high": 0.2977,
+      "iv_low": 0.1176,
+      "iv_rank": 0.1156,
+      "iv_percentile": 0.1092,
+      "name": "50ETF",
+      "desc": "大盘蓝筹",
+      "interpretation": "低 (市场偏乐观，波动率便宜)"
+    },
+    {
+      "underlying": "510300",
+      "lookback_days": 252,
+      "data_points": 238,
+      "current_iv": 0.1315,
+      "iv_high": 0.4405,
+      "iv_low": 0.1271,
+      "iv_rank": 0.014,
+      "iv_percentile": 0.0084,
+      "name": "300ETF",
+      "desc": "沪深300",
+      "interpretation": "极低 (市场极度乐观/自满，适合买入保护)"
+    },
+    {
+      "underlying": "510500",
+      "lookback_days": 252,
+      "data_points": 238,
+      "current_iv": 0.2031,
+      "iv_high": 0.6449,
+      "iv_low": 0.2031,
+      "iv_rank": 0.0,
+      "iv_percentile": 0.0,
+      "name": "500ETF",
+      "desc": "中证500",
+      "interpretation": "极低 (市场极度乐观/自满，适合买入保护)"
+    },
+    {
+      "underlying": "588000",
+      "lookback_days": 252,
+      "data_points": 238,
+      "current_iv": 0.2538,
+      "iv_high": 0.6237,
+      "iv_low": 0.2399,
+      "iv_rank": 0.0362,
+      "iv_percentile": 0.0126,
+      "name": "科创50",
+      "desc": "科创板",
+      "interpretation": "极低 (市场极度乐观/自满，适合买入保护)"
+    }
+  ],
+  "overall_sentiment": {
+    "signal": "极度乐观",
+    "avg_iv_rank": 0.0415,
+    "avg_iv_percentile": 0.0326,
+    "implication": "市场自满，波动率处于低位。短期可能继续上涨但缺乏安全边际。适合：(1)买入便宜的看跌保护 (2)谨慎追高 (3)注意可能的波动率突然飙升"
+  }
+}
