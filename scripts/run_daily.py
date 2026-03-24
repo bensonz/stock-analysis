@@ -80,6 +80,7 @@ HYPOTHESES_FILE = TRACKING_DIR / "hypotheses.json"
 
 LLM_PROMPT_START = "=== LLM_PROMPT_START ==="
 LLM_PROMPT_END = "=== LLM_PROMPT_END ==="
+ENTRY_GATE_INDICES = ("上证指数", "深证成指", "创业板指")
 
 
 def get_run_dir(date: str) -> Path:
@@ -219,6 +220,61 @@ def restore_aux_state(run_dir: Path) -> list[str]:
         warnings.append("No LEARNINGS snapshot found to restore")
 
     return warnings
+
+
+def evaluate_new_entry_regime(market: dict) -> dict:
+    """Classify whether the tape is strong enough to permit new long entries."""
+    breadth = (market or {}).get("breadth") or {}
+    indices = (market or {}).get("indices") or {}
+    distribution = breadth.get("distribution") or {}
+
+    up = int(breadth.get("up") or 0)
+    down = int(breadth.get("down") or 0)
+    ratio = (up / down) if down else (float("inf") if up else 0.0)
+    limit_downs = int(distribution.get("f10") or 0)
+    limit_ups = int(distribution.get("r10") or 0)
+
+    positive_indices = []
+    negative_indices = []
+    for name in ENTRY_GATE_INDICES:
+        change = (indices.get(name) or {}).get("change_pct")
+        if isinstance(change, (int, float)):
+            if change > 0:
+                positive_indices.append(name)
+            elif change < 0:
+                negative_indices.append(name)
+
+    has_breadth = up > 0 or down > 0
+    strong_breadth = has_breadth and ratio >= 1.5
+    broad_index_support = len(positive_indices) >= 2
+    panic_tape = has_breadth and (ratio < 1.0 or limit_downs >= 30)
+    allow_new_positions = strong_breadth and broad_index_support and not panic_tape
+
+    if not has_breadth:
+        reason = "Missing breadth data; defaulting to no new positions."
+    elif allow_new_positions:
+        reason = (
+            f"Entry regime strong: breadth {ratio:.2f}:1, "
+            f"{len(positive_indices)}/3 major indices green, {limit_ups} limit-ups / {limit_downs} limit-downs."
+        )
+    else:
+        reason = (
+            f"Entry regime weak: breadth {ratio:.2f}:1, "
+            f"{len(positive_indices)}/3 major indices green, {limit_ups} limit-ups / {limit_downs} limit-downs."
+        )
+
+    return {
+        "allow_new_positions": allow_new_positions,
+        "regime": "strong" if allow_new_positions else "weak",
+        "breadth_ratio": round(ratio, 4) if has_breadth and ratio != float("inf") else None,
+        "up": up,
+        "down": down,
+        "positive_indices": positive_indices,
+        "negative_indices": negative_indices,
+        "limit_ups": limit_ups,
+        "limit_downs": limit_downs,
+        "reason": reason,
+    }
 
 
 def check_snapshot_consistency(date: str, current_snapshot: dict) -> list[str]:
@@ -576,6 +632,7 @@ def phase1_collect(date: str) -> dict:
 
     # Validate
     data["collection_errors"] = validate_data(data)
+    data["entry_regime"] = evaluate_new_entry_regime(data.get("market", {}))
 
     log["end"] = time.time()
     log["duration_sec"] = round(log["end"] - log["start"], 1)
@@ -637,6 +694,7 @@ def phase2_build_prompt(data: dict) -> str:
         "position_prices": data.get("position_prices", {}),
         "missed_opportunity_prices": data.get("missed_opportunity_prices", []),
         "iv_sentiment": data.get("iv_sentiment", {}),
+        "entry_regime": data.get("entry_regime", evaluate_new_entry_regime(data.get("market", {}))),
         "rule_violations": data.get("rule_violations", {}),
         "collection_errors": data.get("collection_errors", []),
     }
@@ -757,7 +815,14 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
             log["actions"].append(f"ERROR {action} {code}: {e}")
 
     # 2. Open new positions
-    for p in decisions.get("new_positions", []):
+    entry_regime = data.get("entry_regime", evaluate_new_entry_regime(data.get("market", {})))
+    requested_new_positions = decisions.get("new_positions", []) or []
+    allowed_new_positions = requested_new_positions if entry_regime.get("allow_new_positions") else []
+    decisions["new_positions"] = allowed_new_positions
+    if requested_new_positions and not allowed_new_positions:
+        log["actions"].append(f"SKIP OPEN ALL: {entry_regime.get('reason')}")
+
+    for p in allowed_new_positions:
         try:
             code = str(p["code"]).split(".")[0]
 
@@ -813,6 +878,8 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
                 "price": entry_price,
                 "note": p.get("thesis", ""),
             })
+        except (ValueError, FileExistsError) as e:
+            log["actions"].append(f"SKIP OPEN {p.get('code')}: {e}")
         except Exception as e:
             log["actions"].append(f"ERROR OPEN {p.get('code')}: {e}")
 
@@ -855,9 +922,10 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
             daily_actions,
             output_dir=output_dir,
             portfolioStats=stats,
+            entryRegime=entry_regime,
             newPositions=[
                 {"code": str(p["code"]).split(".")[0], "name": p.get("name")}
-                for p in decisions.get("new_positions", [])
+                for p in allowed_new_positions
             ],
             marketContext={
                 "summary": decisions.get("market_summary", ""),

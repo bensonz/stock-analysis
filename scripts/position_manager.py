@@ -22,6 +22,13 @@ PORTFOLIO_CONFIG_FILE = TRACKING_DIR / "portfolio_config.json"
 CLOSED_DIR.mkdir(parents=True, exist_ok=True)
 DAILY_DIR.mkdir(parents=True, exist_ok=True)
 
+DEFAULT_PORTFOLIO_CONFIG = {
+    "starting_capital": 1000000,
+    "max_position_pct": 10,
+    "max_positions": 10,
+    "min_cash_pct": 20,
+}
+
 
 def _now_iso() -> str:
     return datetime.now().astimezone().isoformat()
@@ -41,11 +48,136 @@ def _write_json(path: Path, data: dict) -> None:
 def load_portfolio_config() -> dict:
     """Read tracking/portfolio_config.json."""
     if PORTFOLIO_CONFIG_FILE.exists():
-        return _read_json(PORTFOLIO_CONFIG_FILE)
+        return {**DEFAULT_PORTFOLIO_CONFIG, **_read_json(PORTFOLIO_CONFIG_FILE)}
+    return dict(DEFAULT_PORTFOLIO_CONFIG)
+
+
+def _lot_size_for_code(code: str) -> int:
+    return 200 if str(code).split(".")[0].startswith("688") else 100
+
+
+def _round_down_to_lot(raw_shares: int, code: str) -> int:
+    lot_size = _lot_size_for_code(code)
+    return (max(int(raw_shares), 0) // lot_size) * lot_size
+
+
+def build_positions_snapshot(price_data: dict | None = None) -> dict:
+    """Build the in-memory positions snapshot without writing positions.json."""
+    active = load_active_positions()
+    config = load_portfolio_config()
+    starting = config["starting_capital"]
+    max_pct = config["max_position_pct"]
+
+    entries = []
+    total_allocated = 0.0
+    total_current_value = 0.0
+    total_unrealized = 0.0
+    total_day_pnl = 0.0
+
+    for p in active:
+        code = p["code"].split(".")[0]
+        entry_price = p["entryPrice"]
+        current_price = p.get("currentPrice", entry_price)
+        pnl_pct = p.get("pnl_pct", 0.0)
+        prev_close = None
+
+        if price_data and code in price_data:
+            live = price_data[code]
+            if live.get("price") and live["price"] > 0:
+                current_price = live["price"]
+                pnl_pct = round((current_price - entry_price) / entry_price * 100, 2)
+            prev_close = live.get("prev_close")
+
+        shares = p.get("shares")
+        if not shares:
+            raw = int((starting * max_pct / 100) // entry_price)
+            shares = _round_down_to_lot(raw, code) or _lot_size_for_code(code)
+        alloc_pct = p.get("allocation_pct", max_pct)
+        allocated = round(shares * entry_price, 2)
+        current_val = round(shares * current_price, 2)
+        unrealized = round(current_val - allocated, 2)
+
+        day_pnl = 0.0
+        if prev_close and prev_close > 0:
+            day_pnl = round((current_price - prev_close) * shares, 2)
+
+        total_allocated += allocated
+        total_current_value += current_val
+        total_unrealized += unrealized
+        total_day_pnl += day_pnl
+
+        live_volume = None
+        live_mavol30 = None
+        live_volume_below_mavol30 = None
+        if price_data and code in price_data:
+            live = price_data[code]
+            live_volume = live.get("volume")
+            live_mavol30 = live.get("mavol30")
+            if live.get("volume_below_mavol30") is not None:
+                live_volume_below_mavol30 = live.get("volume_below_mavol30")
+            elif live_volume is not None and live_mavol30 not in (None, 0):
+                live_volume_below_mavol30 = live_volume < live_mavol30
+
+        entry = {
+            "code": code,
+            "name": p["name"],
+            "entryDate": p["entryDate"],
+            "entryPrice": entry_price,
+            "currentPrice": current_price,
+            "pnl_pct": pnl_pct,
+            "stopLoss": p["stopLoss"],
+            "currentStop": p.get("currentStop", p["stopLoss"]),
+            "targetPrice": p["targetPrice"],
+            "status": "active",
+            "sector": p.get("sector", ""),
+            "shares": shares,
+            "allocation_pct": alloc_pct,
+            "allocatedCapital": allocated,
+            "currentValue": current_val,
+            "unrealizedPnl": unrealized,
+        }
+        if live_volume is not None:
+            entry["volume"] = live_volume
+        if live_mavol30 is not None:
+            entry["mavol30"] = live_mavol30
+        if live_volume_below_mavol30 is not None:
+            entry["volumeBelowMavol30"] = bool(live_volume_below_mavol30)
+
+        entries.append(entry)
+
+    realized = compute_realized_pnl()
+    cash = round(starting - total_allocated + realized, 2)
+    total_equity = round(cash + total_current_value, 2)
+    total_pnl = round(total_unrealized + realized, 2)
+    min_cash_pct = config.get("min_cash_pct", DEFAULT_PORTFOLIO_CONFIG["min_cash_pct"])
+    min_cash_value = round(total_equity * min_cash_pct / 100, 2) if total_equity else 0.0
+    deployable_cash = round(max(0.0, cash - min_cash_value), 2)
+
+    for entry in entries:
+        entry["weight_pct"] = round(entry["currentValue"] / total_equity * 100, 2) if total_equity else 0
+
+    portfolio = {
+        "startingCapital": starting,
+        "totalEquity": total_equity,
+        "cash": cash,
+        "investedValue": round(total_current_value, 2),
+        "unrealizedPnl": round(total_unrealized, 2),
+        "realizedPnl": realized,
+        "totalPnl": total_pnl,
+        "totalReturnPct": round(total_pnl / starting * 100, 2) if starting else 0,
+        "positionsUsed": len(entries),
+        "positionsMax": config["max_positions"],
+        "cashPct": round(cash / total_equity * 100, 2) if total_equity else 100,
+        "dayPnl": round(total_day_pnl, 2),
+        "minCashPct": min_cash_pct,
+        "minCashValue": min_cash_value,
+        "deployableCash": deployable_cash,
+    }
+
     return {
-        "starting_capital": 1000000,
-        "max_position_pct": 10,
-        "max_positions": 10,
+        "lastUpdated": _now_iso(),
+        "portfolio": portfolio,
+        "activePositions": entries,
     }
 
 
@@ -65,9 +197,7 @@ def compute_realized_pnl() -> float:
             shares = p.get("shares")
             if not shares:
                 raw = int((starting * max_pct / 100) // entry)
-                code = str(p.get("code", "")).split(".")[0]
-                lot = 200 if code.startswith("688") else 100
-                shares = (raw // lot) * lot or lot
+                shares = _round_down_to_lot(raw, p.get("code", "")) or _lot_size_for_code(p.get("code", ""))
             realized += (exit_p - entry) * shares
         except Exception:
             pass
@@ -182,24 +312,47 @@ def open_position(data: dict) -> dict:
     if not isinstance(target_price, (int, float)) or target_price <= 0:
         raise ValueError(f"Missing or invalid targetPrice for {code}: {target_price!r}")
 
-    # Compute position sizing
-    config = load_portfolio_config()
-    alloc_pct = data.get("allocation_pct") or config["max_position_pct"]
-    capital = config["starting_capital"] * alloc_pct / 100
-    shares = int(capital // entry_price)
+    pos_file = TRACKING_DIR / f"{code}.json"
+    if pos_file.exists():
+        raise FileExistsError(f"Position already exists for {code}")
 
-    # A-share lot size rules:
-    # - 科创板 (688xxx): min 200 shares, must be multiples of 200
-    # - All others: min 100 shares, must be multiples of 100
-    if code.startswith("688"):
-        lot_size = 200
-    else:
-        lot_size = 100
-    shares = (shares // lot_size) * lot_size
+    config = load_portfolio_config()
+    active = load_active_positions()
+    if len(active) >= config["max_positions"]:
+        raise ValueError(f"Max positions reached ({config['max_positions']})")
+
+    alloc_pct = data.get("allocation_pct") or config["max_position_pct"]
+    if not isinstance(alloc_pct, (int, float)) or alloc_pct <= 0:
+        raise ValueError(f"Missing or invalid allocation_pct for {code}: {alloc_pct!r}")
+
+    snapshot = build_positions_snapshot()
+    portfolio = snapshot.get("portfolio", {})
+    current_cash = float(portfolio.get("cash", config["starting_capital"]))
+    deployable_cash = float(portfolio.get("deployableCash", current_cash))
+    min_cash_pct = float(config.get("min_cash_pct", DEFAULT_PORTFOLIO_CONFIG["min_cash_pct"]))
+    min_cash_value = float(portfolio.get("minCashValue", 0.0))
+
+    if deployable_cash <= 0:
+        raise ValueError(
+            f"Insufficient deployable cash for {code}: cash={current_cash:.2f}, reserve={min_cash_value:.2f} ({min_cash_pct:.1f}%)"
+        )
+
+    lot_size = _lot_size_for_code(code)
+    target_capital = deployable_cash * float(alloc_pct) / 100
+    shares = _round_down_to_lot(int(target_capital // entry_price), code)
+    max_affordable_shares = _round_down_to_lot(int(deployable_cash // entry_price), code)
+    shares = min(shares, max_affordable_shares)
+
     if shares < lot_size:
-        shares = lot_size
+        raise ValueError(
+            f"Insufficient deployable cash for minimum lot in {code}: deployable={deployable_cash:.2f}, entryPrice={entry_price:.2f}"
+        )
 
     allocated_capital = round(shares * entry_price, 2)
+    if current_cash - allocated_capital < min_cash_value:
+        raise ValueError(
+            f"Opening {code} would breach min cash reserve: cash={current_cash:.2f}, reserve={min_cash_value:.2f}, allocation={allocated_capital:.2f}"
+        )
 
     pos = {
         "code": code,
@@ -239,7 +392,7 @@ def open_position(data: dict) -> dict:
         "trackerVersion": "2.1",
     }
 
-    _write_json(TRACKING_DIR / f"{code}.json", pos)
+    _write_json(pos_file, pos)
     regenerate_positions_json()
     return pos
 
@@ -310,122 +463,7 @@ def regenerate_positions_json(price_data: dict | None = None) -> dict:
     Returns:
         The positions.json content (includes portfolio summary block).
     """
-    active = load_active_positions()
-    config = load_portfolio_config()
-    starting = config["starting_capital"]
-    max_pct = config["max_position_pct"]
-
-    entries = []
-    total_allocated = 0.0
-    total_current_value = 0.0
-    total_unrealized = 0.0
-    total_day_pnl = 0.0
-
-    for p in active:
-        code = p["code"].split(".")[0]
-        entry_price = p["entryPrice"]
-        current_price = p.get("currentPrice", entry_price)
-        pnl_pct = p.get("pnl_pct", 0.0)
-        prev_close = None
-
-        # Use live price data if available
-        if price_data and code in price_data:
-            live = price_data[code]
-            if live.get("price") and live["price"] > 0:
-                current_price = live["price"]
-                pnl_pct = round((current_price - entry_price) / entry_price * 100, 2)
-            prev_close = live.get("prev_close")
-
-        # Compute shares (backfill for old positions without shares)
-        shares = p.get("shares")
-        if not shares:
-            raw = int((starting * max_pct / 100) // entry_price)
-            lot = 200 if code.startswith("688") else 100
-            shares = (raw // lot) * lot or lot
-        alloc_pct = p.get("allocation_pct", max_pct)
-        allocated = round(shares * entry_price, 2)
-        current_val = round(shares * current_price, 2)
-        unrealized = round(current_val - allocated, 2)
-
-        # Day P&L (if we have previous close)
-        day_pnl = 0.0
-        if prev_close and prev_close > 0:
-            day_pnl = round((current_price - prev_close) * shares, 2)
-
-        total_allocated += allocated
-        total_current_value += current_val
-        total_unrealized += unrealized
-        total_day_pnl += day_pnl
-
-        live_volume = None
-        live_mavol30 = None
-        live_volume_below_mavol30 = None
-        if price_data and code in price_data:
-            live = price_data[code]
-            live_volume = live.get("volume")
-            live_mavol30 = live.get("mavol30")
-            if live.get("volume_below_mavol30") is not None:
-                live_volume_below_mavol30 = live.get("volume_below_mavol30")
-            elif live_volume is not None and live_mavol30 not in (None, 0):
-                live_volume_below_mavol30 = live_volume < live_mavol30
-
-        entry = {
-            "code": code,
-            "name": p["name"],
-            "entryDate": p["entryDate"],
-            "entryPrice": entry_price,
-            "currentPrice": current_price,
-            "pnl_pct": pnl_pct,
-            "stopLoss": p["stopLoss"],
-            "currentStop": p.get("currentStop", p["stopLoss"]),
-            "targetPrice": p["targetPrice"],
-            "status": "active",
-            "sector": p.get("sector", ""),
-            "shares": shares,
-            "allocation_pct": alloc_pct,
-            "allocatedCapital": allocated,
-            "currentValue": current_val,
-            "unrealizedPnl": unrealized,
-        }
-        if live_volume is not None:
-            entry["volume"] = live_volume
-        if live_mavol30 is not None:
-            entry["mavol30"] = live_mavol30
-        if live_volume_below_mavol30 is not None:
-            entry["volumeBelowMavol30"] = bool(live_volume_below_mavol30)
-
-        entries.append(entry)
-
-    realized = compute_realized_pnl()
-    cash = round(starting - total_allocated + realized, 2)
-    total_equity = round(cash + total_current_value, 2)
-    total_pnl = round(total_unrealized + realized, 2)
-
-    # Compute weight_pct after we know total_equity
-    for entry in entries:
-        entry["weight_pct"] = round(entry["currentValue"] / total_equity * 100, 2) if total_equity else 0
-
-    portfolio = {
-        "startingCapital": starting,
-        "totalEquity": total_equity,
-        "cash": cash,
-        "investedValue": round(total_current_value, 2),
-        "unrealizedPnl": round(total_unrealized, 2),
-        "realizedPnl": realized,
-        "totalPnl": total_pnl,
-        "totalReturnPct": round(total_pnl / starting * 100, 2) if starting else 0,
-        "positionsUsed": len(entries),
-        "positionsMax": config["max_positions"],
-        "cashPct": round(cash / total_equity * 100, 2) if total_equity else 100,
-        "dayPnl": round(total_day_pnl, 2),
-    }
-
-    positions_data = {
-        "lastUpdated": _now_iso(),
-        "portfolio": portfolio,
-        "activePositions": entries,
-    }
-
+    positions_data = build_positions_snapshot(price_data=price_data)
     _write_json(POSITIONS_FILE, positions_data)
     return positions_data
 

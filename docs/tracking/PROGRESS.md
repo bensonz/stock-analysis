@@ -1,5 +1,21 @@
 # Progress
 
+## 2026-03-15: Stop Forced Daily Entries
+
+### Completed
+1. Added deterministic weak-market entry gating in Phase 3 plus prompt guidance so weak sessions default to `new_positions: []`
+2. Enforced `min_cash_pct` and available-cash sizing in `position_manager.py`
+3. Exposed reserve/deployable cash in portfolio summaries for the PM pass
+4. Added focused tests for sizing and entry gating
+
+## 2026-03-15: Replay 2026-03-13
+
+### Completed
+1. Restored the March 13 pre-run snapshot without deleting the saved run directory
+2. Replayed the saved March 13 decisions against saved `phase1.json`
+3. Suppressed `new_learnings` during replay to avoid duplicating them under 2026-03-15
+4. Revalidated `2026-03-13` after replay
+
 ## 2026-03-11: Fix Option B Schema Mismatch + Fallback
 
 ### Completed

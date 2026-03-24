@@ -607,6 +607,9 @@ def build_summary(phase1_data: dict) -> str:
     """
     sections = []
 
+    def _fmt_num(value):
+        return f"{value:,}" if isinstance(value, (int, float)) else value
+
     def _format_iv_proxy(proxy: dict | None) -> str:
         if not isinstance(proxy, dict):
             return ""
@@ -620,12 +623,29 @@ def build_summary(phase1_data: dict) -> str:
     # Portfolio snapshot (may be None in raw Phase 1 — built later by run_daily)
     pf = phase1_data.get("portfolio") or {}
     if pf:
+        reserve_line = ""
+        if pf.get("minCashPct") is not None or pf.get("deployableCash") is not None:
+            reserve_line = (
+                f"\n- Reserve cash: {pf.get('minCashPct', '?')}% / "
+                f"Min cash: {_fmt_num(pf.get('minCashValue', '?'))} / "
+                f"Deployable: {_fmt_num(pf.get('deployableCash', '?'))}"
+            )
         sections.append(
             "## Portfolio Snapshot\n"
             f"- Equity: {pf.get('totalEquity', '?'):,} / Cash: {pf.get('cash', '?'):,} ({pf.get('cashPct', '?')}%)\n"
             f"- Positions: {pf.get('positionsUsed', 0)}/{pf.get('positionsMax', 10)}\n"
             f"- Unrealized P&L: {pf.get('unrealizedPnl', 0):,} | Realized: {pf.get('realizedPnl', 0):,}\n"
             f"- Total return: {pf.get('totalReturnPct', 0)}%"
+            f"{reserve_line}"
+        )
+
+    entry_regime = phase1_data.get("entry_regime") or {}
+    if entry_regime:
+        sections.append(
+            "## Entry Regime\n"
+            f"- Regime: {entry_regime.get('regime', '?')}\n"
+            f"- Allow new positions: {entry_regime.get('allow_new_positions', False)}\n"
+            f"- Reason: {entry_regime.get('reason', '')}"
         )
 
     # Market indices — dict (actual) or list

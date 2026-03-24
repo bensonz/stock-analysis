@@ -1,18 +1,21 @@
 {
-  "lastUpdated": "2026-03-13T16:02:41.995067+08:00",
+  "lastUpdated": "2026-03-15T14:33:04.071000+08:00",
   "portfolio": {
     "startingCapital": 1000000,
     "totalEquity": 962845.0,
-    "cash": 845463.0,
-    "investedValue": 117382.0,
+    "cash": 905310.0,
+    "investedValue": 57535.0,
     "unrealizedPnl": -354.0,
     "realizedPnl": -36801.0,
     "totalPnl": -37155.0,
     "totalReturnPct": -3.72,
-    "positionsUsed": 5,
+    "positionsUsed": 2,
     "positionsMax": 10,
-    "cashPct": 87.81,
-    "dayPnl": -684.0
+    "cashPct": 94.02,
+    "dayPnl": -684.0,
+    "minCashPct": 20,
+    "minCashValue": 192569.0,
+    "deployableCash": 712741.0
   },
   "activePositions": [
     {
@@ -38,44 +41,6 @@
       "weight_pct": 2.98
     },
     {
-      "code": "600096",
-      "name": "云天化",
-      "entryDate": "2026-03-13",
-      "entryPrice": 43.13,
-      "currentPrice": 43.13,
-      "pnl_pct": 0.0,
-      "stopLoss": 40.97,
-      "currentStop": 40.97,
-      "targetPrice": 49.5,
-      "status": "active",
-      "sector": "农化制品",
-      "shares": 600,
-      "allocation_pct": 3,
-      "allocatedCapital": 25878.0,
-      "currentValue": 25878.0,
-      "unrealizedPnl": 0.0,
-      "weight_pct": 2.69
-    },
-    {
-      "code": "600988",
-      "name": "赤峰黄金",
-      "entryDate": "2026-03-13",
-      "entryPrice": 40.91,
-      "currentPrice": 40.91,
-      "pnl_pct": 0.0,
-      "stopLoss": 38.86,
-      "currentStop": 38.86,
-      "targetPrice": 46.5,
-      "status": "active",
-      "sector": "贵金属",
-      "shares": 400,
-      "allocation_pct": 2,
-      "allocatedCapital": 16364.0,
-      "currentValue": 16364.0,
-      "unrealizedPnl": 0.0,
-      "weight_pct": 1.7
-    },
-    {
       "code": "601615",
       "name": "明阳智能",
       "entryDate": "2026-03-12",
@@ -96,25 +61,6 @@
       "mavol30": 1090893.93,
       "volumeBelowMavol30": false,
       "weight_pct": 2.99
-    },
-    {
-      "code": "603191",
-      "name": "望变电气",
-      "entryDate": "2026-03-13",
-      "entryPrice": 25.15,
-      "currentPrice": 25.15,
-      "pnl_pct": 0.0,
-      "stopLoss": 23.89,
-      "currentStop": 23.89,
-      "targetPrice": 29.0,
-      "status": "active",
-      "sector": "电网设备",
-      "shares": 700,
-      "allocation_pct": 2,
-      "allocatedCapital": 17605.0,
-      "currentValue": 17605.0,
-      "unrealizedPnl": 0.0,
-      "weight_pct": 1.83
     }
   ]
 }

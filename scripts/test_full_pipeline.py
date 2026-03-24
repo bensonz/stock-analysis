@@ -81,6 +81,7 @@ def test_1_portfolio_config():
     check(config["starting_capital"] == 1_000_000, "Starting capital = ¥1,000,000")
     check(config["max_position_pct"] == 10, "Max position size = 10%")
     check(config["max_positions"] == 10, "Max positions = 10")
+    check(config["min_cash_pct"] == 20, "Min cash reserve = 20%")
 
 
 def test_2_realized_pnl():

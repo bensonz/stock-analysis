@@ -10,33 +10,18 @@
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 5992,
-      "tokens": {
-        "input_tokens": 144209,
-        "output_tokens": 2815
-      },
-      "rounds": 2,
-      "tool_calls_count": 5,
-      "duration_sec": 91.0,
-      "fallback_used": false,
-      "provider": "openai",
-      "decision_source": "GPT primary",
-      "primary_model": "gpt-5.4"
+      "response_size_bytes": 5993,
+      "response_file": "/Users/bz/Work/Personal/stock-analysis/runs/2026-03-13/response.json",
+      "note": "Replayed from saved response.json without refetch"
     },
     {
       "phase": "apply",
-      "start": 1773388961.9875479,
+      "start": 1773556383.8699598,
       "actions": [
-        "OPEN 600096",
-        "OPEN 600988",
-        "OPEN 603191",
+        "SKIP OPEN ALL: Entry regime weak: breadth 0.39:1, 0/3 major indices green, 69 limit-ups / 24 limit-downs.",
         "Generated watchlist",
         "Generated report",
-        "Saved daily summary",
-        "Hypothesis: Created h001 (observation): 冷板块内的高RPS个股不能替代板块强度，今日小金属位列倒数时，金钼股份这类高RPS标的也应直接降级为跳过。...",
-        "Hypothesis: Created h002 (observation): MA距离过滤非常有效，像海星股份这类RPS合格但dist_ma20_pct超12%的票，最容易在情绪转弱日出现均值回归。...",
-        "Hypothesis: Created h003 (observation): IV Rank极低环境下应买最强板块里的回踩票，而不是买所有强票；今日望变电气优于海星股份，核心差异就在于前者靠近均线、后者远离均线。...",
-        "Updated LEARNINGS.md (legacy)"
+        "Saved daily summary"
       ],
       "post_apply_rule_violations": {
         "status": "violations",
@@ -114,8 +99,8 @@
           }
         ]
       },
-      "end": 1773388962.142082,
-      "duration_sec": 0.2
+      "end": 1773556383.974278,
+      "duration_sec": 0.1
     }
   ],
   "validation_errors": [
@@ -124,6 +109,6 @@
   ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 152.3
+    "totalDurationSec": 61.2
   }
 }

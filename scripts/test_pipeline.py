@@ -43,10 +43,18 @@ class TestPositionManager(unittest.TestCase):
         self._orig_closed = pm.CLOSED_DIR
         self._orig_daily = pm.DAILY_DIR
         self._orig_positions = pm.POSITIONS_FILE
+        self._orig_config = pm.PORTFOLIO_CONFIG_FILE
         pm.TRACKING_DIR = self.tracking
         pm.CLOSED_DIR = self.tracking / "closed"
         pm.DAILY_DIR = self.tracking / "daily"
         pm.POSITIONS_FILE = self.tracking / "positions.json"
+        pm.PORTFOLIO_CONFIG_FILE = self.tracking / "portfolio_config.json"
+        pm.PORTFOLIO_CONFIG_FILE.write_text(json.dumps({
+            "starting_capital": 1000000,
+            "max_position_pct": 10,
+            "max_positions": 10,
+            "min_cash_pct": 20,
+        }, ensure_ascii=False, indent=2))
         self.pm = pm
 
     def tearDown(self):
@@ -55,6 +63,7 @@ class TestPositionManager(unittest.TestCase):
         self.pm.CLOSED_DIR = self._orig_closed
         self.pm.DAILY_DIR = self._orig_daily
         self.pm.POSITIONS_FILE = self._orig_positions
+        self.pm.PORTFOLIO_CONFIG_FILE = self._orig_config
         shutil.rmtree(self.tmpdir)
 
     def _write_position(self, code: str, **overrides) -> Path:
@@ -106,6 +115,50 @@ class TestPositionManager(unittest.TestCase):
         pj = json.loads((self.tracking / "positions.json").read_text())
         self.assertEqual(len(pj["activePositions"]), 1)
         self.assertEqual(pj["activePositions"][0]["code"], "688001")
+
+    def test_open_position_sizes_from_available_cash(self):
+        (self.tracking / "portfolio_config.json").write_text(json.dumps({
+            "starting_capital": 100000,
+            "max_position_pct": 10,
+            "max_positions": 10,
+            "min_cash_pct": 20,
+        }, ensure_ascii=False, indent=2))
+        self._write_position("600001", entryPrice=10.0, shares=6000, allocation_pct=60)
+        self.pm.regenerate_positions_json()
+
+        pos = self.pm.open_position({
+            "code": "600002",
+            "name": "现金约束测试",
+            "entryPrice": 10.0,
+            "targetPrice": 12.0,
+            "stopLoss": 9.0,
+            "allocation_pct": 50,
+            "thesis": "Size from deployable cash",
+        })
+
+        self.assertEqual(pos["shares"], 1000)
+        self.assertEqual(pos["allocatedCapital"], 10000.0)
+
+    def test_open_position_respects_min_cash_reserve(self):
+        (self.tracking / "portfolio_config.json").write_text(json.dumps({
+            "starting_capital": 100000,
+            "max_position_pct": 10,
+            "max_positions": 10,
+            "min_cash_pct": 20,
+        }, ensure_ascii=False, indent=2))
+        self._write_position("600001", entryPrice=10.0, shares=7900, allocation_pct=79)
+        self.pm.regenerate_positions_json()
+
+        with self.assertRaises(ValueError):
+            self.pm.open_position({
+                "code": "600002",
+                "name": "保留现金测试",
+                "entryPrice": 20.0,
+                "targetPrice": 24.0,
+                "stopLoss": 19.0,
+                "allocation_pct": 50,
+                "thesis": "Should fail on reserve",
+            })
 
     def test_close_position(self):
         self._write_position("600001")
@@ -392,6 +445,36 @@ class TestRunDailyParser(unittest.TestCase):
         from run_daily import _parse_llm_response
         result = _parse_llm_response("no json here at all")
         self.assertEqual(result, {})
+
+    def test_entry_regime_blocks_weak_market(self):
+        from run_daily import evaluate_new_entry_regime
+
+        regime = evaluate_new_entry_regime({
+            "breadth": {"up": 1500, "down": 3800, "distribution": {"f10": 24, "r10": 69}},
+            "indices": {
+                "上证指数": {"change_pct": -0.82},
+                "深证成指": {"change_pct": -0.65},
+                "创业板指": {"change_pct": -0.22},
+            },
+        })
+
+        self.assertFalse(regime["allow_new_positions"])
+        self.assertEqual(regime["regime"], "weak")
+
+    def test_entry_regime_allows_strong_market(self):
+        from run_daily import evaluate_new_entry_regime
+
+        regime = evaluate_new_entry_regime({
+            "breadth": {"up": 3600, "down": 1800, "distribution": {"f10": 8, "r10": 96}},
+            "indices": {
+                "上证指数": {"change_pct": 1.1},
+                "深证成指": {"change_pct": 1.8},
+                "创业板指": {"change_pct": -0.1},
+            },
+        })
+
+        self.assertTrue(regime["allow_new_positions"])
+        self.assertEqual(regime["regime"], "strong")
 
 
 if __name__ == "__main__":
