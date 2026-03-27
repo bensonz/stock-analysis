@@ -1,7 +1,7 @@
 {
   "code": "601615",
   "name": "明阳智能",
-  "status": "active",
+  "status": "closed",
   "thesis": "风电设备是今日最强方向之一，板块催化来自风电拉升与新能源建设预期，明阳智能具备龙头属性、利润高增和机构覆盖，且MA距离合规，不属于追高买点。",
   "entryDate": "2026-03-12",
   "entryPrice": 22.03,
@@ -30,15 +30,22 @@
       "change_pct": 0.54,
       "action": "HOLD",
       "note": "风电设备为今日最强板块，持仓与热 sector 对齐；现价22.15高于入场价22.03，未触发任何止损/时间止损。MA结构仍健康，继续持有观察能否延续板块强度。"
+    },
+    {
+      "date": "2026-03-26",
+      "price": 17.41,
+      "change_pct": -20.97,
+      "action": "SELL",
+      "note": "Hard stop already violated. Current price 17.41 vs entry 22.03 is -20.97%, well beyond the -5% rule, and days held have reached the 10-day time-stop window with severe underperformance. Sector is not in leadership and no averaging or waiting is justified."
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-03-26",
+  "exitPrice": 17.41,
+  "exitReason": "Hard stop already violated. Current price 17.41 vs entry 22.03 is -20.97%, well beyond the -5% rule, and days held have reached the 10-day time-stop window with severe underperformance. Sector is not in leadership and no averaging or waiting is justified.",
+  "returnPct": -20.97,
+  "holdingDays": 14,
+  "lessonLearned": "",
   "createdAt": "2026-03-12T17:11:30.221545+08:00",
-  "updatedAt": "2026-03-15T14:33:03.870557+08:00",
+  "updatedAt": "2026-03-26T14:20:11.075858+08:00",
   "trackerVersion": "2.1"
 }

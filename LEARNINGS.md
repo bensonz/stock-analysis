@@ -791,3 +791,33 @@
 - 冷板块内的高RPS个股不能替代板块强度，今日小金属位列倒数时，金钼股份这类高RPS标的也应直接降级为跳过。
 - MA距离过滤非常有效，像海星股份这类RPS合格但dist_ma20_pct超12%的票，最容易在情绪转弱日出现均值回归。
 - IV Rank极低环境下应买最强板块里的回踩票，而不是买所有强票；今日望变电气优于海星股份，核心差异就在于前者靠近均线、后者远离均线。
+
+### 自动更新 (2026-03-26)
+
+- The main failure was not stock selection but stop enforcement: small positions only protect capital if the -5% exit is executed immediately.
+- When breadth is 0.20:1 with 0/3 major indices green, preserving cash beats forcing even high-RPS names.
+- Sector-first discipline matters: both held positions sat outside the day’s leadership while capital concentrated in energy-linked groups.
+
+### 自动更新 (2026-03-27)
+
+- Strong breadth does not mean broad buying permission across all candidates; sector-first filtering still leaves only a small number of valid longs.
+- The analyst showed mild confirmation bias toward 电网设备 by elevating a structurally liked theme despite today's provided sector rankings not placing it among the hottest groups.
+- Best entries today are in sectors with both strong tape and clean MA distance; many high-RPS names are actually poor buys because they are either too extended or have broken short-term momentum.
+
+### 自动更新 (2026-03-27)
+
+- Strong tape alone is not enough for new entries when Rule 2b data is missing; preserving discipline beats forcing buys.
+- The analyst showed some recency bias by leaning too hard on unverified same-day catalyst narratives and inferred price moves; final decisions should rely only on provided data.
+- In a strong market with weak candidate validation, the correct momentum action can still be cash plus tight management of existing winners.
+
+### 自动更新 (2026-03-27)
+
+- Strong breadth alone is not enough to force entries; without candidate RPS and MA-distance data, the correct momentum decision is to keep cash.
+- Current portfolio is misaligned with today's sector leadership: hot money is in 能源金属/化学制药/电子化学品, not the held gold name.
+- Low IV supports trend persistence but also argues for smaller sizing on fresh entries; data quality still overrides setup quality.
+
+### 自动更新 (2026-03-27)
+
+- 在强市环境下，fresh earnings catalyst + RPS sweet spot + MA未过热的组合，优先级应明显高于单纯历史强势股。
+- 涨停当天并不一定一律回避；若RPS处于80-92、催化来自正式年报且均线距离未超阈值，可以保留小仓位参与资格。
+- 资源与材料板块今日强于泛科技，若组合已有资源敞口，新开仓应更偏向不同催化源的强分支，而不是重复堆叠同一逻辑。

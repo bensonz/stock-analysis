@@ -1,27 +1,31 @@
 {
   "version": 2,
-  "lastUpdated": "2026-03-13",
+  "lastUpdated": "2026-03-27",
   "hypotheses": [
     {
       "id": "h001",
       "text": "冷板块内的高RPS个股不能替代板块强度，今日小金属位列倒数时，金钼股份这类高RPS标的也应直接降级为跳过。",
       "type": "rule",
-      "status": "observation",
+      "status": "hypothesis",
       "created": "2026-03-13",
-      "lastTested": "2026-03-13",
+      "lastTested": "2026-03-27",
       "mechanism": "个股相对强弱在板块退潮时容易失真，资金先撤行业、后撤个股，板块引力通常先于公司叙事生效。",
       "evidence": {
         "supporting": [
           {
             "date": "2026-03-13",
             "detail": "冷板块内的高RPS个股不能替代板块强度，今日小金属位列倒数时，金钼股份这类高RPS标的也应直接降级为跳过。"
+          },
+          {
+            "date": "2026-03-27",
+            "detail": "涨停当天并不一定一律回避；若RPS处于80-92、催化来自正式年报且均线距离未超阈值，可以保留小仓位参与资格。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 1,
+      "sampleSize": 2,
       "hitRate": 1.0,
-      "confidence": 0.6,
+      "confidence": 0.75,
       "tags": [
         "sector",
         "entry-filter",
@@ -84,6 +88,338 @@
         "position-sizing",
         "entry-filter",
         "timing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h004",
+      "text": "The main failure was not stock selection but stop enforcement: small positions only protect capital if the -5% exit is executed immediately.",
+      "type": "observation",
+      "status": "hypothesis",
+      "created": "2026-03-26",
+      "lastTested": "2026-03-27",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-26",
+            "detail": "The main failure was not stock selection but stop enforcement: small positions only protect capital if the -5% exit is executed immediately."
+          },
+          {
+            "date": "2026-03-27",
+            "detail": "在强市环境下，fresh earnings catalyst + RPS sweet spot + MA未过热的组合，优先级应明显高于单纯历史强势股。"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 2,
+      "hitRate": 1.0,
+      "confidence": 0.75,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h005",
+      "text": "When breadth is 0.20:1 with 0/3 major indices green, preserving cash beats forcing even high-RPS names.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-26",
+      "lastTested": "2026-03-26",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-26",
+            "detail": "When breadth is 0.20:1 with 0/3 major indices green, preserving cash beats forcing even high-RPS names."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h006",
+      "text": "Sector-first discipline matters: both held positions sat outside the day’s leadership while capital concentrated in energy-linked groups.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-26",
+      "lastTested": "2026-03-26",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-26",
+            "detail": "Sector-first discipline matters: both held positions sat outside the day’s leadership while capital concentrated in energy-linked groups."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h007",
+      "text": "Strong breadth does not mean broad buying permission across all candidates; sector-first filtering still leaves only a small number of valid longs.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-27",
+      "lastTested": "2026-03-27",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-27",
+            "detail": "Strong breadth does not mean broad buying permission across all candidates; sector-first filtering still leaves only a small number of valid longs."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h008",
+      "text": "The analyst showed mild confirmation bias toward 电网设备 by elevating a structurally liked theme despite today's provided sector rankings not placing it among the hottest groups.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-27",
+      "lastTested": "2026-03-27",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-27",
+            "detail": "The analyst showed mild confirmation bias toward 电网设备 by elevating a structurally liked theme despite today's provided sector rankings not placing it among the hottest groups."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h009",
+      "text": "Best entries today are in sectors with both strong tape and clean MA distance; many high-RPS names are actually poor buys because they are either too extended or have broken short-term momentum.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-27",
+      "lastTested": "2026-03-27",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-27",
+            "detail": "Best entries today are in sectors with both strong tape and clean MA distance; many high-RPS names are actually poor buys because they are either too extended or have broken short-term momentum."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h010",
+      "text": "Strong tape alone is not enough for new entries when Rule 2b data is missing; preserving discipline beats forcing buys.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-27",
+      "lastTested": "2026-03-27",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-27",
+            "detail": "Strong tape alone is not enough for new entries when Rule 2b data is missing; preserving discipline beats forcing buys."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h011",
+      "text": "The analyst showed some recency bias by leaning too hard on unverified same-day catalyst narratives and inferred price moves; final decisions should rely only on provided data.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-27",
+      "lastTested": "2026-03-27",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-27",
+            "detail": "The analyst showed some recency bias by leaning too hard on unverified same-day catalyst narratives and inferred price moves; final decisions should rely only on provided data."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h012",
+      "text": "In a strong market with weak candidate validation, the correct momentum action can still be cash plus tight management of existing winners.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-27",
+      "lastTested": "2026-03-27",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-27",
+            "detail": "In a strong market with weak candidate validation, the correct momentum action can still be cash plus tight management of existing winners."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h013",
+      "text": "Strong breadth alone is not enough to force entries; without candidate RPS and MA-distance data, the correct momentum decision is to keep cash.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-27",
+      "lastTested": "2026-03-27",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-27",
+            "detail": "Strong breadth alone is not enough to force entries; without candidate RPS and MA-distance data, the correct momentum decision is to keep cash."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h014",
+      "text": "Current portfolio is misaligned with today's sector leadership: hot money is in 能源金属/化学制药/电子化学品, not the held gold name.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-27",
+      "lastTested": "2026-03-27",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-27",
+            "detail": "Current portfolio is misaligned with today's sector leadership: hot money is in 能源金属/化学制药/电子化学品, not the held gold name."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h015",
+      "text": "Low IV supports trend persistence but also argues for smaller sizing on fresh entries; data quality still overrides setup quality.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-27",
+      "lastTested": "2026-03-27",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-27",
+            "detail": "Low IV supports trend persistence but also argues for smaller sizing on fresh entries; data quality still overrides setup quality."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h016",
+      "text": "资源与材料板块今日强于泛科技，若组合已有资源敞口，新开仓应更偏向不同催化源的强分支，而不是重复堆叠同一逻辑。",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-27",
+      "lastTested": "2026-03-27",
+      "mechanism": "分散到不同热点分支有助于降低单一主线回撤对组合的拖累，同时保留强势市场的参与度。",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-27",
+            "detail": "资源与材料板块今日强于泛科技，若组合已有资源敞口，新开仓应更偏向不同催化源的强分支，而不是重复堆叠同一逻辑。"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
+        "position-sizing"
       ],
       "parentRule": null,
       "retiredDate": null,

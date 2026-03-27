@@ -1,7 +1,7 @@
 {
   "code": "002121",
   "name": "科陆电子",
-  "status": "active",
+  "status": "closed",
   "thesis": "美的集团控股赋能，电网+储能双轮驱动。收入+23.4%，利润+245%爆发式增长。合同负债10亿(+24%)订单充足。电网设备行业自2025年5月持续走强。十五五国网4万亿投资+美国750亿美元电网扩建+储能印尼基地2026投产。北向6.3%。MA距离安全(ma5=0.5%, ma10=2.5%, ma20=7.1%)。",
   "entryDate": "2026-03-10",
   "entryPrice": 9.75,
@@ -44,15 +44,22 @@
       "change_pct": -1.74,
       "action": "HOLD",
       "note": "电网设备不在今日top5但仍属近期强势主线之一，现价9.58距离硬止损9.26仍有3.3%缓冲；持仓第3天，较入场价9.75仅-1.74%，未触发首3日-3%卖出规则。需注意成交量低于MAVOL30且接近止损，不加仓。"
+    },
+    {
+      "date": "2026-03-26",
+      "price": 8.23,
+      "change_pct": -15.59,
+      "action": "SELL",
+      "note": "Hard stop already violated. Current price 8.23 vs entry 9.75 is -15.59%, far beyond the non-negotiable -5% exit. Sector is not in the hot leadership group and position has also exceeded the 10-day time window without positive progress."
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-03-26",
+  "exitPrice": 8.23,
+  "exitReason": "Hard stop already violated. Current price 8.23 vs entry 9.75 is -15.59%, far beyond the non-negotiable -5% exit. Sector is not in the hot leadership group and position has also exceeded the 10-day time window without positive progress.",
+  "returnPct": -15.59,
+  "holdingDays": 16,
+  "lessonLearned": "",
   "createdAt": "2026-03-10T12:18:41.727833+08:00",
-  "updatedAt": "2026-03-15T14:33:03.870010+08:00",
+  "updatedAt": "2026-03-26T14:20:11.073593+08:00",
   "trackerVersion": "2.1"
 }
