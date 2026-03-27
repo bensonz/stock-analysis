@@ -249,8 +249,22 @@ def fetch_strategy_pool_local(db_path: str = None) -> dict:
             final_stocks.append(stock)
 
         final_stocks.sort(key=lambda item: (item.get("rps120", 0), item.get("rps250", 0)), reverse=True)
+
+        # Cross-compare: keep only stocks that also appear in CheeseForTune strategy
+        try:
+            remote = fetch_strategy_pool()
+            remote_codes = {str(s.get("code", "")).split(".")[0] for s in remote.get("stocks", [])}
+            if remote_codes:
+                before = len(final_stocks)
+                final_stocks = [s for s in final_stocks if s["code"] in remote_codes]
+                dropped = before - len(final_stocks)
+                if dropped:
+                    print(f"    → {dropped} stocks filtered out (not in CheeseForTune strategy)", file=sys.stderr)
+        except Exception as e:
+            print(f"    ⚠ CheeseForTune cross-check failed, skipping filter: {e}", file=sys.stderr)
+
         return {
-            "source": "local_pricedb",
+            "source": "local_pricedb+cf_cross",
             "strategy_id": LOCAL_STRATEGY_ID,
             "date": latest_date,
             "total_stocks": len(final_stocks),
@@ -288,6 +302,8 @@ def _load_price_snapshots(db_path: str, codes: list[str], date: str) -> dict:
         rows = conn.execute(query, [date] + list(codes)).fetchall()
 
     for code, price_date, close, rn in rows:
+        if close is None:
+            continue
         snap = snapshots.setdefault(code, {"price_date": price_date})
         if rn == 1:
             snap["price"] = float(close)
@@ -471,9 +487,7 @@ def batch_enrich(stocks: list[dict], max_workers: int = 8) -> list[dict]:
 
 
 def fetch_ma_data(stocks: list[dict]) -> dict:
-    """Fetch MA5/MA10/MA20 data for stocks via Eastmoney kline API.
-
-    Bypasses proxy (Eastmoney push2 gets DNS-hijacked by Surge/Clash).
+    """Compute MA5/MA10/MA20 data for stocks from the local price DB.
 
     Args:
         stocks: List of stock dicts with "code" or "code_full" keys.
@@ -481,45 +495,32 @@ def fetch_ma_data(stocks: list[dict]) -> dict:
     Returns:
         Dict of {code: {price, ma5, ma10, ma20, dist_ma5_pct, dist_ma10_pct, dist_ma20_pct}}
     """
-    import requests as _req
-    from concurrent.futures import ThreadPoolExecutor
-
     results = {}
+    db_path = DEFAULT_PRICEDB_PATH
+    if not db_path.exists():
+        print("  MA data: local pricedb not found, skipping", file=sys.stderr)
+        return results
 
-    def _fetch_one(stock):
-        code = str(stock.get("code", "")).split(".")[0]
-        code_full = stock.get("code_full", "")
-        if not code:
-            return None
-
-        # Determine secid (1=SH, 0=SZ)
-        if code_full.endswith(".SH") or code.startswith("6"):
-            secid = f"1.{code}"
-        else:
-            secid = f"0.{code}"
-
-        try:
-            url = "https://push2his.eastmoney.com/api/qt/stock/kline/get"
-            params = {
-                "fields1": "f1,f2,f3,f4,f5,f6",
-                "fields2": "f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61",
-                "ut": "7eea3edcaed734bea9cbfc24409ed989",
-                "klt": "101", "fqt": "0",
-                "secid": secid, "beg": "20260101", "end": "20261231",
-            }
-            r = _req.get(url, params=params, timeout=10, proxies={"http": None, "https": None})
-            klines = r.json().get("data", {}).get("klines", [])
-            closes = [float(k.split(",")[2]) for k in klines]
-
+    try:
+        conn = sqlite3.connect(str(db_path))
+        for stock in stocks:
+            code = str(stock.get("code", "")).split(".")[0]
+            if not code:
+                continue
+            rows = conn.execute(
+                "SELECT close FROM daily_prices WHERE code = ? ORDER BY date DESC LIMIT 20",
+                (code,),
+            ).fetchall()
+            closes = [r[0] for r in rows]
             if len(closes) < 5:
-                return None
+                continue
 
-            latest = closes[-1]
-            ma5 = sum(closes[-5:]) / 5
-            ma10 = sum(closes[-10:]) / 10 if len(closes) >= 10 else None
-            ma20 = sum(closes[-20:]) / 20 if len(closes) >= 20 else None
+            latest = closes[0]
+            ma5 = sum(closes[:5]) / 5
+            ma10 = sum(closes[:10]) / 10 if len(closes) >= 10 else None
+            ma20 = sum(closes[:20]) / 20 if len(closes) >= 20 else None
 
-            return {
+            results[code] = {
                 "code": code,
                 "price": latest,
                 "ma5": round(ma5, 2),
@@ -529,16 +530,7 @@ def fetch_ma_data(stocks: list[dict]) -> dict:
                 "dist_ma10_pct": round((latest - ma10) / ma10 * 100, 1) if ma10 else None,
                 "dist_ma20_pct": round((latest - ma20) / ma20 * 100, 1) if ma20 else None,
             }
-        except Exception:
-            return None
-
-    try:
-        with ThreadPoolExecutor(max_workers=10) as executor:
-            fetched = list(executor.map(_fetch_one, stocks))
-
-        for item in fetched:
-            if item:
-                results[item["code"]] = item
+        conn.close()
     except Exception as e:
         print(f"  MA data fetch error: {e}", file=sys.stderr)
 
