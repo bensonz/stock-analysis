@@ -855,6 +855,17 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
                 log["actions"].append(f"SKIP OPEN {code}: missing entry price")
                 continue
 
+            # Block 涨停 (limit-up) stocks — cannot buy at +10% daily limit
+            stock_pool = data.get("strategy_pool", {}).get("stocks", [])
+            stock_change = None
+            for s in stock_pool:
+                if str(s.get("code", "")).split(".")[0] == code:
+                    stock_change = s.get("change_pct")
+                    break
+            if stock_change is not None and stock_change >= 9.8:
+                log["actions"].append(f"SKIP OPEN {code}: 涨停 (change {stock_change}%), cannot buy at daily limit")
+                continue
+
             open_position({
                 "code": code,
                 "name": p.get("name", ""),
