@@ -313,13 +313,24 @@ def _run_tool_loop(
             print(f" done ({total_input}+{total_output} tokens)", file=sys.stderr)
             # Append assistant response to messages for conversation continuity
             # Convert to dicts to avoid Pydantic serialization issues on re-send
-            content_dicts = [b.model_dump() if hasattr(b, "model_dump") else b for b in response.content]
+            content_dicts = []
+            for b in response.content:
+                d = b.model_dump() if hasattr(b, "model_dump") else b
+                if isinstance(d, dict) and d.get("type") == "tool_use":
+                    d.pop("caller", None)
+                content_dicts.append(d)
             messages.append({"role": "assistant", "content": content_dicts})
             return final_text, total_input, total_output, round_num
 
         # Execute tool calls
         # Convert to dicts to avoid Pydantic serialization issues on re-send
-        content_dicts = [b.model_dump() if hasattr(b, "model_dump") else b for b in response.content]
+        # Strip 'caller' field — SDK >=0.84 adds it but Bedrock rejects it
+        content_dicts = []
+        for b in response.content:
+            d = b.model_dump() if hasattr(b, "model_dump") else b
+            if isinstance(d, dict) and d.get("type") == "tool_use":
+                d.pop("caller", None)
+            content_dicts.append(d)
         messages.append({"role": "assistant", "content": content_dicts})
 
         tool_results = []
