@@ -1,0 +1,66 @@
+{
+  "date": "2026-03-27",
+  "actions": [
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "action": "HOLD",
+      "price": null,
+      "pnl_pct": 0,
+      "note": "Sector alignment is favorable because 有色金属/资源方向 is among today's strongest groups, and there is fresh M&A/news support around Zijin taking control. No live price was provided in position_prices, so stop breach and intraday thesis damage cannot be confirmed; keep hard stop unchanged and monitor closely."
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "action": "OPEN",
+      "price": 171.6,
+      "note": "半导体设备景气逻辑仍在，板块午后走强，公司在手订单充足，科创板IV处于正常区间，股价未过度偏离均线，适合顺势参与反弹延续。"
+    },
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "action": "OPEN",
+      "price": 14.99,
+      "note": "电网设备虽非今日前五最强，但仍属强趋势分支，且公司2025年报利润同比高增，今日业绩催化触发涨停，RPS位于甜蜜区。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 952633.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -4.74,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -47367.0,
+    "cashPct": 89.75
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 4.0419,
+    "up": 4337,
+    "down": 1073,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 94,
+    "limit_downs": 5,
+    "reason": "Entry regime strong: breadth 4.04:1, 3/3 major indices green, 94 limit-ups / 5 limit-downs."
+  },
+  "newPositions": [
+    {
+      "code": "688037",
+      "name": "芯源微"
+    },
+    {
+      "code": "600268",
+      "name": "国电南自"
+    }
+  ],
+  "marketContext": {
+    "summary": "Breadth 4.04:1 bullish, 94涨停/5跌停, 3/3 major indices green; strong broad rally with resources, chemicals and selected tech equipment leading. Hot sectors (top 5): 能源金属 +6.06%, 化学制药 +5.74%, 电子化学品Ⅱ +4.73%, 调味发酵品Ⅱ +4.43%, 农化制品 +4.27%. Cold sectors (bottom 5): 农商行Ⅱ -1.49%, 航天装备Ⅱ -0.98%, 电力 -0.91%, 风电设备 -0.90%, 林业Ⅱ -0.78%. Position sector alignment: 1/1 positions in hot sectors. IV context is mildly complacent: most broad ETF IV ranks are low, so new position sizing should stay disciplined and stock-specific 300/500 proxy names should be cut roughly in half when applicable."
+  }
+}

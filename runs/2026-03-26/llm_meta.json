@@ -1,0 +1,82 @@
+{
+  "provider": "hybrid",
+  "primary_model": "gpt-5.4",
+  "decision_source": "GPT primary",
+  "input_tokens": 258801,
+  "output_tokens": 9544,
+  "rounds": 4,
+  "duration_sec": 240.9,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年3月26日 大跌原因 市场分析",
+        "max_results": 5
+      },
+      "result_length": 3035
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "电网设备 板块 2026年3月 行情走势",
+        "max_results": 5
+      },
+      "result_length": 2505
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "科陆电子 002121 最新消息 2026年3月",
+        "max_results": 5
+      },
+      "result_length": 2433
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "明阳智能 601615 暴跌 2026年3月",
+        "max_results": 5
+      },
+      "result_length": 1818
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "油气开采 电池 能源金属 板块 2026年3月26日",
+        "max_results": 5
+      },
+      "result_length": 3284
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+2026年3月26日+收盘+行情",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "科陆电子 002121 2025年报 业绩 营收",
+        "max_results": 5
+      },
+      "result_length": 2066
+    }
+  ],
+  "fallback_used": false
+}

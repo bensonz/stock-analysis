@@ -1,0 +1,120 @@
+{
+  "date": "2026-03-26",
+  "market_overview": {
+    "shanghai_composite": {
+      "value": 3886.168,
+      "change_pct": -1.16
+    },
+    "shenzhen_component": {
+      "value": 13602.2,
+      "change_pct": -1.44
+    },
+    "chinext": {
+      "value": 3273.94,
+      "change_pct": -1.3
+    },
+    "sentiment": "bearish",
+    "hot_sectors": [
+      "油气开采Ⅱ",
+      "电池",
+      "油服工程",
+      "能源金属",
+      "燃气Ⅱ"
+    ],
+    "cold_sectors": [
+      "保险Ⅱ",
+      "林业Ⅱ",
+      "航海装备Ⅱ",
+      "地面兵装Ⅱ",
+      "贵金属"
+    ],
+    "notes": "Market regime weak. Breadth 0.20:1 bearish, 47涨停/7跌停, and all 3 major indices are red, so the buy gate is closed and new_positions stay empty. Hot sectors are oil/gas, battery, oil services, and energy metals; cold sectors include insurance, forestry, naval equipment, ground military equipment, and precious metals. Position sector alignment: 0/2 positions in hot sectors. IV sentiment is generally low-to-normal, but that only affects sizing when entries are allowed; today the tape is too weak for fresh longs."
+  },
+  "strategy_scan": {
+    "total_stocks_scanned": 23,
+    "strategy_name": "小市值-无 20RP",
+    "scan_time": "2026-03-26T14:20:11.076708+08:00"
+  },
+  "recommendations": [
+    {
+      "code": "603191.SH",
+      "name": "望变电气",
+      "price": null,
+      "rps120": 92.16,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600096.SH",
+      "name": "云天化",
+      "price": null,
+      "rps120": 90.41,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "603663.SH",
+      "name": "三祥新材",
+      "price": null,
+      "rps120": 93.23,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688025.SH",
+      "name": "杰普特",
+      "price": null,
+      "rps120": 88.88,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600988.SH",
+      "name": "赤峰黄金",
+      "price": null,
+      "rps120": 87.42,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "603698.SH",
+      "name": "航天工程",
+      "price": null,
+      "rps120": 94.92,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688002.SH",
+      "name": "睿创微纳",
+      "price": null,
+      "rps120": 88.71,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688037.SH",
+      "name": "芯源微",
+      "price": null,
+      "rps120": 87.47,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    }
+  ],
+  "summary": {
+    "total_scanned": 23,
+    "buy_recommendations": 0,
+    "watch_recommendations": 8,
+    "avoid_recommendations": 0,
+    "market_call": "防御",
+    "reasoning": "Market regime weak. Breadth 0.20:1 bearish, 47涨停/7跌停, and all 3 major indices are red, so the buy gate is closed and new_positions stay empty. Hot sectors are oil/gas, battery, oil services, and energy metals; cold sectors include insurance, forestry, naval equipment, ground military equipment, and precious metals. Position sector alignment: 0/2 positions in hot sectors. IV sentiment is generally low-to-normal, but that only affects sizing when entries are allowed; today the tape is too weak for fresh longs."
+  }
+}

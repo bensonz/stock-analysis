@@ -1,0 +1,168 @@
+{
+  "version": 2,
+  "lastUpdated": "2026-03-26",
+  "hypotheses": [
+    {
+      "id": "h001",
+      "text": "冷板块内的高RPS个股不能替代板块强度，今日小金属位列倒数时，金钼股份这类高RPS标的也应直接降级为跳过。",
+      "type": "rule",
+      "status": "observation",
+      "created": "2026-03-13",
+      "lastTested": "2026-03-13",
+      "mechanism": "个股相对强弱在板块退潮时容易失真，资金先撤行业、后撤个股，板块引力通常先于公司叙事生效。",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-13",
+            "detail": "冷板块内的高RPS个股不能替代板块强度，今日小金属位列倒数时，金钼股份这类高RPS标的也应直接降级为跳过。"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
+        "entry-filter",
+        "timing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h002",
+      "text": "MA距离过滤非常有效，像海星股份这类RPS合格但dist_ma20_pct超12%的票，最容易在情绪转弱日出现均值回归。",
+      "type": "heuristic",
+      "status": "observation",
+      "created": "2026-03-13",
+      "lastTested": "2026-03-13",
+      "mechanism": "趋势交易不是无条件追涨，价格偏离中期均线过大时，短线盈亏比明显恶化。",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-13",
+            "detail": "MA距离过滤非常有效，像海星股份这类RPS合格但dist_ma20_pct超12%的票，最容易在情绪转弱日出现均值回归。"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "entry-filter",
+        "timing",
+        "risk-control"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h003",
+      "text": "IV Rank极低环境下应买最强板块里的回踩票，而不是买所有强票；今日望变电气优于海星股份，核心差异就在于前者靠近均线、后者远离均线。",
+      "type": "signal",
+      "status": "observation",
+      "created": "2026-03-13",
+      "lastTested": "2026-03-13",
+      "mechanism": "低IV代表市场自满，新增仓位需要更好的入场位置来对冲突发波动，回踩支撑位的强趋势票更有容错率。",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-13",
+            "detail": "IV Rank极低环境下应买最强板块里的回踩票，而不是买所有强票；今日望变电气优于海星股份，核心差异就在于前者靠近均线、后者远离均线。"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "position-sizing",
+        "entry-filter",
+        "timing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h004",
+      "text": "The main failure was not stock selection but stop enforcement: small positions only protect capital if the -5% exit is executed immediately.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-26",
+      "lastTested": "2026-03-26",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-26",
+            "detail": "The main failure was not stock selection but stop enforcement: small positions only protect capital if the -5% exit is executed immediately."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h005",
+      "text": "When breadth is 0.20:1 with 0/3 major indices green, preserving cash beats forcing even high-RPS names.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-26",
+      "lastTested": "2026-03-26",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-26",
+            "detail": "When breadth is 0.20:1 with 0/3 major indices green, preserving cash beats forcing even high-RPS names."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h006",
+      "text": "Sector-first discipline matters: both held positions sat outside the day’s leadership while capital concentrated in energy-linked groups.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-03-26",
+      "lastTested": "2026-03-26",
+      "mechanism": null,
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-03-26",
+            "detail": "Sector-first discipline matters: both held positions sat outside the day’s leadership while capital concentrated in energy-linked groups."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    }
+  ]
+}

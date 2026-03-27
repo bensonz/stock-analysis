@@ -1,0 +1,49 @@
+{
+  "date": "2026-03-26",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1774503879.329639,
+      "errors": [],
+      "end": 1774505770.169099,
+      "duration_sec": 1890.8
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 5151,
+      "tokens": {
+        "input_tokens": 258801,
+        "output_tokens": 9544
+      },
+      "rounds": 4,
+      "tool_calls_count": 7,
+      "duration_sec": 240.9,
+      "fallback_used": false,
+      "provider": "hybrid",
+      "decision_source": "GPT primary",
+      "primary_model": "gpt-5.4"
+    },
+    {
+      "phase": "apply",
+      "start": 1774506011.0732548,
+      "actions": [
+        "SELL 002121",
+        "SELL 601615",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h004 (observation): The main failure was not stock selection but stop enforcement: small positions o...",
+        "Hypothesis: Created h005 (observation): When breadth is 0.20:1 with 0/3 major indices green, preserving cash beats forci...",
+        "Hypothesis: Created h006 (observation): Sector-first discipline matters: both held positions sat outside the day’s leade...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1774506011.215071,
+      "duration_sec": 0.1
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 2131.8
+  }
+}

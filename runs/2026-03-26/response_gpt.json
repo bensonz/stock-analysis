@@ -1,0 +1,143 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": 1.38,
+        "trend": "steady"
+      },
+      {
+        "name": "电池",
+        "5d_pct": 1.18,
+        "trend": "steady"
+      },
+      {
+        "name": "油服工程",
+        "5d_pct": 1.12,
+        "trend": "steady"
+      },
+      {
+        "name": "能源金属",
+        "5d_pct": 1.08,
+        "trend": "steady"
+      },
+      {
+        "name": "燃气Ⅱ",
+        "5d_pct": 0.84,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "保险Ⅱ",
+        "5d_pct": -3.7,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -3.64,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航海装备Ⅱ",
+        "5d_pct": -3.37,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "地面兵装Ⅱ",
+        "5d_pct": -3.36,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "贵金属",
+        "5d_pct": -3.2,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/2 positions in hot sectors",
+    "regime": "Weak tape, narrow leadership in energy-related groups, broad market risk-off"
+  },
+  "position_decisions": [
+    {
+      "code": "002121",
+      "name": "科陆电子",
+      "action": "SELL",
+      "reason": "Hard stop already violated. Current price 8.23 vs entry 9.75 is -15.59%, far beyond the non-negotiable -5% exit. Sector is not in the hot leadership group and position has also exceeded the 10-day time window without positive progress.",
+      "sector_rank": "outside top 30%",
+      "new_stop": null,
+      "pnl_pct": -15.59,
+      "days_held": 11,
+      "exit_price": 8.23
+    },
+    {
+      "code": "601615",
+      "name": "明阳智能",
+      "action": "SELL",
+      "reason": "Hard stop already violated. Current price 17.41 vs entry 22.03 is -20.97%, well beyond the -5% rule, and days held have reached the 10-day time-stop window with severe underperformance. Sector is not in leadership and no averaging or waiting is justified.",
+      "sector_rank": "outside top 30%",
+      "new_stop": null,
+      "pnl_pct": -20.97,
+      "days_held": 10,
+      "exit_price": 17.41
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "603191",
+      "name": "望变电气",
+      "reason": "No new entries allowed: breadth 0.20:1 and 0/3 major indices green fail the buy gate. Even though RPS120 is 92.16, market regime blocks new risk.",
+      "rps120": 92.16
+    },
+    {
+      "code": "600096",
+      "name": "云天化",
+      "reason": "No new entries allowed due to weak regime. Also MA stretch check fails with dist_ma10 -9.7% and dist_ma20 -14.9%, showing broken short-term structure.",
+      "rps120": 90.41
+    },
+    {
+      "code": "603663",
+      "name": "三祥新材",
+      "reason": "No new entries allowed due to weak regime. Also MA stretch check fails with dist_ma20 -14.6%, indicating excessive distance from support.",
+      "rps120": 93.23
+    },
+    {
+      "code": "688025",
+      "name": "杰普特",
+      "reason": "No new entries allowed: breadth and index confirmation both fail. Candidate is acceptable on RPS but sector is not among today's leadership groups.",
+      "rps120": 88.88
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "reason": "Sector is in the bottom 5 today, so no entry regardless of stock-level setup. Market regime is also too weak for fresh longs.",
+      "rps120": 87.42
+    },
+    {
+      "code": "603698",
+      "name": "航天工程",
+      "reason": "No new entries allowed due to weak regime. Also sector is not in the top leadership group, and short-term momentum is weak versus its RPS20 of 2.58.",
+      "rps120": 94.92
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "No new entries allowed due to weak regime. Sector is not in the top leadership group and RPS20 at 20.54 shows poor short-term momentum.",
+      "rps120": 88.71
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "No new entries allowed due to weak regime. Sector is not a top leader and RPS20 at 2.47 is too weak short-term.",
+      "rps120": 87.47
+    }
+  ],
+  "new_learnings": [
+    "The main failure was not stock selection but stop enforcement: small positions only protect capital if the -5% exit is executed immediately.",
+    "When breadth is 0.20:1 with 0/3 major indices green, preserving cash beats forcing even high-RPS names.",
+    "Sector-first discipline matters: both held positions sat outside the day’s leadership while capital concentrated in energy-linked groups."
+  ],
+  "market_summary": "Market regime weak. Breadth 0.20:1 bearish, 47涨停/7跌停, and all 3 major indices are red, so the buy gate is closed and new_positions stay empty. Hot sectors are oil/gas, battery, oil services, and energy metals; cold sectors include insurance, forestry, naval equipment, ground military equipment, and precious metals. Position sector alignment: 0/2 positions in hot sectors. IV sentiment is generally low-to-normal, but that only affects sizing when entries are allowed; today the tape is too weak for fresh longs.",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}

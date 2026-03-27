@@ -1,0 +1,51 @@
+{
+  "date": "2026-03-26",
+  "actions": [
+    {
+      "code": "002121",
+      "name": "科陆电子",
+      "action": "SELL",
+      "price": 8.23,
+      "pnl_pct": -15.59,
+      "note": "Hard stop already violated. Current price 8.23 vs entry 9.75 is -15.59%, far beyond the non-negotiable -5% exit. Sector is not in the hot leadership group and position has also exceeded the 10-day time window without positive progress."
+    },
+    {
+      "code": "601615",
+      "name": "明阳智能",
+      "action": "SELL",
+      "price": 17.41,
+      "pnl_pct": -20.97,
+      "note": "Hard stop already violated. Current price 17.41 vs entry 22.03 is -20.97%, well beyond the -5% rule, and days held have reached the 10-day time-stop window with severe underperformance. Sector is not in leadership and no averaging or waiting is justified."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 952633.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -4.74,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -47367.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "weak",
+    "breadth_ratio": 0.1973,
+    "up": 891,
+    "down": 4516,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 47,
+    "limit_downs": 7,
+    "reason": "Entry regime weak: breadth 0.20:1, 0/3 major indices green, 47 limit-ups / 7 limit-downs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Market regime weak. Breadth 0.20:1 bearish, 47涨停/7跌停, and all 3 major indices are red, so the buy gate is closed and new_positions stay empty. Hot sectors are oil/gas, battery, oil services, and energy metals; cold sectors include insurance, forestry, naval equipment, ground military equipment, and precious metals. Position sector alignment: 0/2 positions in hot sectors. IV sentiment is generally low-to-normal, but that only affects sizing when entries are allowed; today the tape is too weak for fresh longs."
+  }
+}

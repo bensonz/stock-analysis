@@ -1,0 +1,226 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "能源金属",
+        "5d_pct": 6.06,
+        "trend": "accelerating — 碳酸锂18周连涨, 融捷股份4天4板, 供给中断+油价驱动EV需求"
+      },
+      {
+        "name": "化学制药",
+        "5d_pct": 5.74,
+        "trend": "accelerating — 创新药政策升级, AACR会议催化, 恒瑞医药业绩指引超预期"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": 4.73,
+        "trend": "steady"
+      },
+      {
+        "name": "调味发酵品Ⅱ",
+        "5d_pct": 4.43,
+        "trend": "steady"
+      },
+      {
+        "name": "农化制品",
+        "5d_pct": 4.27,
+        "trend": "steady — 草甘膦涨价, 农药出口景气"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "农商行Ⅱ",
+        "5d_pct": -1.49,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": -0.98,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电力",
+        "5d_pct": -0.91,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "风电设备",
+        "5d_pct": -0.9,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -0.78,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "1/1 position (赤峰黄金) in 贵金属 — NOT in today's top 5 hot sectors. 贵金属 is bouncing today but in macro downtrend (gold -17% from Jan highs). Sector alignment is WEAK.",
+    "regime": "Risk-on rotation: 能源金属(锂电) + 创新药 leading, defensive sectors (电力/银行/煤炭) lagging. Bounce day after 3/26 selloff. Volume shrinking — sustainability uncertain. 贵金属 bouncing but not leading."
+  },
+  "position_decisions": [
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "action": "HOLD",
+      "reason": "Day 1 of position. News indicates stock up 5-7% today (from ~38.33 yesterday close), likely above entry price of 39.83. 紫金矿业 acquisition provides floor (~41.34 equivalent). However: (1) gold in macro downtrend (-17% from Jan highs), (2) stock just came off 跌停 on 3/23, (3) 贵金属 sector NOT in top 5 today, (4) IV Rank 14.1% < 15% means position should have been half-sized. HOLD with strict -5% stop at 37.84. Monitor first-3-days rule: if stock drops -3% from 39.83 (below 38.64) in next 2 trading days, SELL immediately.",
+      "sector_rank": "贵金属 — NOT in top 30% today (能源金属 is top, but that's lithium not gold). Sector bouncing but in macro downtrend. FLAG for potential exit if sector stays cold 3+ days.",
+      "new_stop": 37.84,
+      "pnl_pct": 0.0,
+      "days_held": 1,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "002192",
+      "name": "融捷股份",
+      "reason": "能源金属 sector leader but 4天4板 — extremely overextended, chasing risk too high. No enriched data but clearly above RPS 95% and MA distances.",
+      "rps120": null
+    },
+    {
+      "code": "688353",
+      "name": "华盛锂电",
+      "reason": "能源金属 hot sector, 0 risks, PE 3.7 — interesting candidate but NO enriched data (no RPS, no MA distances). Cannot evaluate per Rule 2/2b. Need enriched data next run.",
+      "rps120": null
+    },
+    {
+      "code": "300037",
+      "name": "新宙邦",
+      "reason": "锂电材料, 0 risks, 7 highlights — strong profile but NO enriched data. Cannot verify RPS or MA extension. Queue for enrichment.",
+      "rps120": null
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物",
+      "reason": "创新药 hot sector, 6 highlights, PE 3.9 — but NO enriched data. 创新药 is today's #2 sector with AACR catalyst upcoming. Queue for enrichment.",
+      "rps120": null
+    },
+    {
+      "code": "301035",
+      "name": "润丰股份",
+      "reason": "农化制品 hot sector, 7 highlights, 1 risk, PE 4.6 — strong profile but NO enriched data.",
+      "rps120": null
+    },
+    {
+      "code": "002497",
+      "name": "雅化集团",
+      "reason": "锂电/能源金属, 5 highlights, 3 risks — sector hot but no enriched data and 3 risk factors.",
+      "rps120": null
+    },
+    {
+      "code": "300919",
+      "name": "中伟新材",
+      "reason": "锂电前驱体, 能源金属 sector, PE 5.2 — but NO enriched data.",
+      "rps120": null
+    },
+    {
+      "code": "301358",
+      "name": "湖南裕能",
+      "reason": "磷酸铁锂, 能源金属 sector, PE 3.1 — but 3 risks and NO enriched data.",
+      "rps120": null
+    },
+    {
+      "code": "605507",
+      "name": "国邦医药",
+      "reason": "化学制药 hot sector, PE 4.6, 1 risk — but NO enriched data.",
+      "rps120": null
+    },
+    {
+      "code": "600486",
+      "name": "扬农化工",
+      "reason": "农化龙头, 5 highlights, 1 risk — sector hot but NO enriched data.",
+      "rps120": null
+    },
+    {
+      "code": "300443",
+      "name": "金雷股份",
+      "reason": "风电设备 sector — in today's COLD sectors (bottom 5, -0.90%). Skip regardless of stock quality.",
+      "rps120": null
+    },
+    {
+      "code": "300772",
+      "name": "运达股份",
+      "reason": "风电设备 sector — COLD sector. Skip.",
+      "rps120": null
+    },
+    {
+      "code": "600236",
+      "name": "桂冠电力",
+      "reason": "电力 sector — COLD sector (-0.91%). 5 risks. Skip.",
+      "rps120": null
+    },
+    {
+      "code": "000600",
+      "name": "建投能源",
+      "reason": "电力 sector — COLD sector. 3 risks. Skip.",
+      "rps120": null
+    },
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "reason": "电网设备 — adjacent to cold 电力 sector. 3 risks. No enriched data.",
+      "rps120": null
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "赤峰黄金 entered on Day 1 post-resumption bounce (+5-7%) after 跌停 on 3/23. This is a high-volatility entry in a stock undergoing control change + gold macro downtrend. The acquisition by 紫金矿业 at ~41.34 equivalent provides a theoretical floor, but gold's -17% crash from Jan highs creates strong headwinds. Monitor whether acquisition floor holds or gold macro dominates.",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h016 (event-driven vs trend stocks need different rules)",
+      "mechanism": "Acquisition provides price floor via implied takeout value, but commodity macro trend can overwhelm deal-driven support if gold continues to crash."
+    },
+    {
+      "text": "IV Rank 14.1% < 15% rule was violated on 赤峰黄金 entry — position should have been 3% not 6%. Low IV = complacent market = higher risk of vol expansion. This is especially dangerous for a stock that just came off a 跌停.",
+      "type": "rule",
+      "tags": [
+        "position-sizing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019 (IV极低+短期涨幅已大=最差入场时机)",
+      "mechanism": "Low IV means options market is pricing in calm. When vol expands from low levels, the move is often violent and directional. Oversized positions in low-IV environments amplify drawdowns."
+    },
+    {
+      "text": "能源金属(锂电) is the true momentum leader — 碳酸锂 prices up 18 consecutive weeks, supply disruptions from overseas mines, oil price driving EV demand narrative. This is a PERSISTENT sector trend, not a one-day spike. Should prioritize enriching 锂电 candidates (华盛锂电, 新宙邦, 中伟新材, 嘉元科技) for next session.",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h007 (行业供需拐点催化>个股亮点数量)",
+      "mechanism": "Supply disruption + demand acceleration = pricing power. Lithium carbonate 18-week rally is a structural supply-demand shift, not speculation. Stocks in this chain should have persistent momentum."
+    },
+    {
+      "text": "创新药 sector has a clear, fresh, multi-catalyst setup: (1) AACR 2026 conference upcoming, (2) 恒瑞医药 2025 revenue guidance +30%, (3) policy upgrade for biomedical industry strategic positioning, (4) BD transaction validation of domestic innovation assets. This is an 'ongoing' catalyst with institutional flow (80亿+ main force net inflow on 3/27). Should enrich 荣昌生物, 国邦医药 for next session.",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "Conference catalysts create a defined window of attention and flow. Policy upgrade provides structural support. BD transactions validate asset value globally."
+    },
+    {
+      "text": "enriched_candidates was EMPTY this run, preventing any new position evaluation. The system needs enriched data (RPS, MA distances, sector rank) to make proper decisions. Without it, the correct action is to skip all new entries rather than guess. This is a data pipeline issue, not an analysis issue.",
+      "type": "observation",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "Garbage in, garbage out. Without RPS and MA distance data, any entry recommendation is speculation, not systematic momentum trading."
+    }
+  ],
+  "market_summary": "Breadth 4.04:1 bullish, 94涨停/5跌停, broad-based bounce after 3/26 selloff. All 3 major indices green (上证+0.63%, 深证+1.13%, 创业板+0.71%). Volume shrinking — sustainability uncertain. Hot sectors: 能源金属(锂电供需紧张+油价驱动EV), 创新药(AACR+政策+恒瑞指引), 农化(草甘膦涨价). Cold: 电力/银行/煤炭/风电. IV Rank avg 17.97% — market complacent, vol cheap. 赤峰黄金 position opened today in 贵金属 sector which is bouncing but NOT leading — gold in macro downtrend (-17% from Jan highs). No enriched candidates available this run, preventing new entries. Portfolio 95.4% cash, 1 position at 6% allocation.",
+  "market_sentiment": "cautiously_bullish",
+  "market_call": "观望偏积极 — 市场反弹但缩量，贵金属持仓需密切监控，锂电/创新药是真正的动量方向但缺乏enriched数据无法入场"
+}
