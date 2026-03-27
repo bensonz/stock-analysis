@@ -498,6 +498,8 @@ def _bulk_fetch_baostock(
 ):
     """Bulk fetch daily bars from BaoStock, one stock at a time."""
     total_inserted = 0
+    consecutive_empty = 0
+    EARLY_ABORT_THRESHOLD = 100  # bail if first N stocks all return 0 rows
 
     for index, stock in enumerate(stocks, start=1):
         rows = _fetch_klines_baostock(bs, stock, beg, end)
@@ -510,6 +512,16 @@ def _bulk_fetch_baostock(
             )
             conn.commit()
             total_inserted += len(rows)
+            consecutive_empty = 0
+        else:
+            consecutive_empty += 1
+
+        if consecutive_empty >= EARLY_ABORT_THRESHOLD and total_inserted == 0:
+            print(
+                f"  [BaoStock] {EARLY_ABORT_THRESHOLD} consecutive stocks returned 0 rows — data not available yet, aborting early",
+                file=sys.stderr,
+            )
+            break
 
         if index % 100 == 0 or index == len(stocks):
             print(
@@ -666,6 +678,21 @@ def cmd_update():
                 bulk_fetch(conn, missing_stocks, init_beg, end, provider_name, provider)
 
             close_provider(provider_name, provider)
+
+            # Check if today's data actually landed
+            today_iso = datetime.now().strftime("%Y-%m-%d")
+            today_count = conn.execute(
+                "SELECT COUNT(*) FROM daily_prices WHERE date = ?", (today_iso,)
+            ).fetchone()[0]
+            if today_count == 0 and beg <= end:
+                print(f"  {provider_name} returned no data for {today_iso}, trying AkShare spot...", file=sys.stderr)
+                inserted = _backfill_from_akshare_spot(conn, today_iso)
+                if inserted:
+                    invalidate_rps_cache(conn, today_iso)
+                    print(f"  AkShare spot: {inserted} rows inserted for {today_iso}", file=sys.stderr)
+                else:
+                    print(f"  AkShare spot: no data either", file=sys.stderr)
+
             conn.close()
             print(f"Update complete via {provider_name}.", file=sys.stderr)
             return
@@ -679,6 +706,59 @@ def cmd_update():
     for err in provider_errors:
         print(f"  - {err}", file=sys.stderr)
     sys.exit(1)
+
+
+def _backfill_from_akshare_spot(conn: sqlite3.Connection, date_iso: str) -> int:
+    """Backfill a single day's prices from AkShare real-time spot data."""
+    try:
+        import akshare as ak
+
+        df = ak.stock_zh_a_spot_em()
+        if df is None or df.empty:
+            return 0
+
+        known_codes = {
+            row[0] for row in conn.execute("SELECT code FROM stocks")
+        }
+
+        rows = []
+        for _, r in df.iterrows():
+            code = str(r.get("代码", ""))
+            if code not in known_codes:
+                continue
+            import math
+            open_p = r.get("今开")
+            high_p = r.get("最高")
+            low_p = r.get("最低")
+            close_p = r.get("最新价")
+            try:
+                open_p, high_p, low_p, close_p = float(open_p), float(high_p), float(low_p), float(close_p)
+            except (ValueError, TypeError):
+                continue
+            if any(math.isnan(v) for v in (open_p, high_p, low_p, close_p)):
+                continue
+            if close_p <= 0:
+                continue
+            import math
+            raw_vol = r.get("成交量", 0)
+            raw_amt = r.get("成交额", 0)
+            volume = int(raw_vol) if raw_vol and not (isinstance(raw_vol, float) and math.isnan(raw_vol)) else 0
+            amount = float(raw_amt) if raw_amt and not (isinstance(raw_amt, float) and math.isnan(raw_amt)) else 0.0
+            rows.append((code, date_iso, open_p, high_p, low_p, close_p, volume, amount))
+
+        if rows:
+            conn.executemany(
+                "INSERT OR REPLACE INTO daily_prices "
+                "(code,date,open,high,low,close,volume,amount) "
+                "VALUES (?,?,?,?,?,?,?,?)",
+                rows,
+            )
+            conn.commit()
+
+        return len(rows)
+    except Exception as e:
+        print(f"  AkShare spot fallback failed: {e}", file=sys.stderr)
+        return 0
 
 
 def cmd_status():
