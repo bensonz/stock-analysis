@@ -1,0 +1,205 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "游戏Ⅱ",
+        "5d_pct": 4.63,
+        "trend": "accelerating"
+      },
+      {
+        "name": "酒店餐饮",
+        "5d_pct": 4.15,
+        "trend": "accelerating"
+      },
+      {
+        "name": "化学制药",
+        "5d_pct": 4.09,
+        "trend": "accelerating"
+      },
+      {
+        "name": "医疗服务",
+        "5d_pct": 3.92,
+        "trend": "steady"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": 3.77,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -4.69,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": -2.04,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "轨交设备Ⅱ",
+        "5d_pct": -1.11,
+        "trend": "weak"
+      },
+      {
+        "name": "乘用车",
+        "5d_pct": -0.7,
+        "trend": "weak"
+      },
+      {
+        "name": "广告营销",
+        "5d_pct": -0.48,
+        "trend": "weak"
+      }
+    ],
+    "position_alignment": "1/1 positions in hot sectors",
+    "regime": "Broad risk-on tape with tech/growth leadership; games, pharma and medical services leading while autos/aerospace lag."
+  },
+  "position_decisions": [
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "action": "HOLD",
+      "reason": "Position is +0.0% vs entry and +2.41% today, still above current stop 163.02. Sector is aligned with hot growth tape and 半导体设备 has intraday strength signal, but volume is only 50.3% of MAVOL30 and the position sits just 4.99% above stop, so hold without adding.",
+      "sector_rank": "top 30%",
+      "new_stop": null,
+      "pnl_pct": -0.01,
+      "days_held": 5,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "688025",
+      "name": "杰普特",
+      "entry_price": 216.56,
+      "allocation_pct": 6,
+      "stop": 205.73,
+      "target": 259.87,
+      "thesis": "Strong broad tape favors fresh momentum; stock sits in RPS sweet spot, has 155% net profit growth, no listed risk factors, and price is not overextended from MA support.",
+      "sector": "激光设备",
+      "sector_rank": "top 30%",
+      "catalyst": "Latest quarter net profit同比增长155%，订单增长56%，股权激励与业绩催化仍在发酵",
+      "catalyst_freshness": "ongoing",
+      "rps120": 86.69,
+      "conviction": "moderate"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "reason": "Sector logic is good and catalyst is fresh, but MA distance fails hard rule: dist_ma5_pct 7.0% and dist_ma10_pct 8.3%, so entry would be chasing.",
+      "rps120": 91.15
+    },
+    {
+      "code": "605299",
+      "name": "舒华体育",
+      "reason": "RPS is in range but stock is massively extended: dist_ma5_pct 16.0%, dist_ma10_pct 30.7%, dist_ma20_pct 47.9%. Non-negotiable no-chasing rule.",
+      "rps120": 94.93
+    },
+    {
+      "code": "600498",
+      "name": "烽火通信",
+      "reason": "RPS120 95.3 is above the allowed buy zone and the available data does not include MA-distance fields in enriched_candidates, so timing/risk control is insufficient for a fresh entry.",
+      "rps120": 95.3
+    },
+    {
+      "code": "605196",
+      "name": "华通线缆",
+      "reason": "RPS120 95.36 is above the buy threshold; also recent 10-day relative strength is weak in the stock notes, so skip rather than chase late.",
+      "rps120": 95.36
+    },
+    {
+      "code": "603115",
+      "name": "海星股份",
+      "reason": "RPS120 97.08 is too extended and above 95% chase zone. No fresh entry.",
+      "rps120": 97.08
+    },
+    {
+      "code": "603306",
+      "name": "华懋科技",
+      "reason": "Sector is in cold group proxy: 汽车/汽车零部件 conflicts with today's bottom sectors where 乘用车 is weak, so despite acceptable MA distances this is not a momentum-first sector entry.",
+      "rps120": 92.83
+    },
+    {
+      "code": "601615",
+      "name": "明阳智能",
+      "reason": "RPS is acceptable but trend quality is poor: current price is below MA5/MA10/MA20 and dist_ma20_pct is -13.5%, showing a broken setup rather than a strength entry.",
+      "rps120": 90.8
+    },
+    {
+      "code": "600426",
+      "name": "华鲁恒升",
+      "reason": "Good company quality, but sector is not in today's top leadership group and catalyst is slower-cycle than current fast money themes; better to focus on hotter sectors.",
+      "rps120": 88.62
+    },
+    {
+      "code": "601208",
+      "name": "东材科技",
+      "reason": "Setup is technically fine, but sector mapping is less clear versus today's top sectors and catalyst is older than the best alternatives. Lower priority than stronger/fresher momentum names.",
+      "rps120": 90.86
+    },
+    {
+      "code": "605167",
+      "name": "利柏特",
+      "reason": "RPS120 93.49 is allowed, but sector is outside today's top leadership list and financial growth is negative year over year, so not strong enough for new capital despite acceptable MA distances.",
+      "rps120": 93.49
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "RPS120 93.29 is acceptable, but 10-day relative strength note is very weak and the stock sits below MA20, suggesting momentum has cooled versus hotter sectors.",
+      "rps120": 93.29
+    },
+    {
+      "code": "603663",
+      "name": "三祥新材",
+      "reason": "RPS is in range, but current price is below MA5/MA10/MA20 and recent 10-day strength note is weak, so setup is not a buy-strength entry.",
+      "rps120": 91.77
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "In a strong breadth regime, the main reason to skip otherwise attractive names is usually extension, not fundamentals; today's best-looking power-equipment candidate still failed solely on MA-distance.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Strong tapes lift many leaders at once, so late entries often come from buying above near-term support; MA-distance keeps momentum entries aligned with pullback risk control."
+    },
+    {
+      "text": "Low-IV conditions around 16-22% IV rank do not justify freezing risk when breadth is 5.6:1; they argue for normal sizing but tighter discipline on chasing.",
+      "type": "heuristic",
+      "tags": [
+        "timing",
+        "position-sizing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "Cheap volatility means trend continuation can persist, but upside surprise from fresh entries comes from proper setup quality, not from paying up far above moving averages."
+    },
+    {
+      "text": "A live position can remain HOLD even with weak volume if price is above stop and the market regime is strong; weak volume should block adds before it forces an exit.",
+      "type": "signal",
+      "tags": [
+        "exit-rule",
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h017",
+      "mechanism": "Volume deterioration reduces confirmation but is not itself a sell signal until accompanied by price failure, stop pressure, or time-stop deterioration."
+    }
+  ],
+  "market_summary": "Breadth 5.63:1 bullish, 53涨停/7跌停, all 3 major indices green and 科创50 +3.21%, so the long-entry gate is fully open. Hot sectors (top 5): 游戏Ⅱ +4.63%, 酒店餐饮 +4.15%, 化学制药 +4.09%, 医疗服务 +3.92%, 玻璃玻纤 +3.77%. Cold sectors (bottom 5): 林业Ⅱ -4.69%, 航天装备Ⅱ -2.04%, 轨交设备Ⅱ -1.11%, 乘用车 -0.70%, 广告营销 -0.48%. Position sector alignment: 1/1 positions in hot sectors. IV context is mildly complacent but not extreme: 300ETF IV Rank 16.6%, 500ETF 16.8%, 科创50 22.1%, so sizing can remain normal while strictly avoiding extended entries.",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

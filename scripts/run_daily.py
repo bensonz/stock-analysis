@@ -479,8 +479,65 @@ def phase1_collect(date: str) -> dict:
     data["positions_count"] = len(positions)
     data["recent_watchlists"] = load_recent_watchlists(days=5)
 
-    # Prepare enrichment candidates
+    # VCP scan: add VCP data to strategy pool stocks + flag quality setups
+    # Backtest-proven filters (n=280, Jan-Feb 2026):
+    #   - Contraction ratio < 0.4: 55% WR, +7.7% avg 10d (best signal)
+    #   - MA distance < 3%: necessary gate (0% WR when > 3%)
+    #   - MA20 proximity better than MA10 for winners
+    #   - Optimal hold: ~10 days, 20d returns negative
     pool_stocks = data["strategy_pool"].get("stocks", [])
+    if pricedb_path.exists() and pool_stocks:
+        try:
+            from vcp_scanner import scan_vcp
+            from rps_calculator import compute_ma_rps
+            rps_data = compute_ma_rps(str(pricedb_path))
+            vcp_results = scan_vcp(
+                str(pricedb_path), rps_data=rps_data,
+                min_rps120=0, base_days=120, top_n=500
+            )
+            vcp_by_code = {r["code"]: r for r in vcp_results}
+            enriched_count = 0
+            quality_count = 0
+            for stock in pool_stocks:
+                code = stock.get("code", "")
+                vcp = vcp_by_code.get(code)
+                if vcp:
+                    stock["vcp_score"] = vcp["score"]
+                    stock["vcp_contraction_ratio"] = vcp["contraction_ratio"]
+                    stock["vcp_last_depth"] = vcp["last_depth"]
+                    stock["vcp_dist_peak_pct"] = vcp["dist_from_peak_pct"]
+                    stock["vcp_nearest_ma"] = vcp.get("nearest_ma", "")
+                    stock["vcp_nearest_ma_dist"] = vcp.get("nearest_ma_dist", None)
+                    stock["vcp_vol_declining"] = vcp.get("vol_declining", False)
+                    stock["vcp_num_contractions"] = vcp["num_contractions"]
+                    stock["vcp_depths"] = "→".join(vcp["depth_strs"])
+
+                    # Quality flag: passes backtest-proven filters
+                    ma_dist = vcp.get("nearest_ma_dist", 99)
+                    cr = vcp.get("contraction_ratio", 1)
+                    ma_type = vcp.get("nearest_ma", "")
+                    is_quality = (
+                        cr < 0.4              # tight contraction (the alpha)
+                        and ma_dist < 3       # near MA support (the gate)
+                    )
+                    # Bonus: MA20 proximity is stronger than MA10
+                    is_premium = is_quality and ma_type == "MA20"
+
+                    stock["vcp_quality"] = "PREMIUM" if is_premium else "QUALITY" if is_quality else "SETUP"
+                    if is_quality:
+                        quality_count += 1
+                    enriched_count += 1
+                else:
+                    stock["vcp_quality"] = None  # no VCP pattern detected
+            print(
+                f"    → VCP: {enriched_count} setups found, {quality_count} quality "
+                f"(ratio<0.4 + MA<3%)",
+                file=sys.stderr,
+            )
+        except Exception as e:
+            print(f"    ⚠ VCP scan failed: {e}", file=sys.stderr)
+
+    # Prepare enrichment candidates
     candidates = [
         s for s in pool_stocks
         if s.get("rps120") and 75 <= float(s["rps120"]) <= 95

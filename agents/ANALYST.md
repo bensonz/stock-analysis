@@ -42,6 +42,21 @@ Before opening ANY new position, check the MA data in `enriched_candidates`:
 
 This rule is NON-NEGOTIABLE. Even if the sector is #1 and the catalyst is perfect, buying a stock that just spiked far above its moving averages is chasing. Wait for a pullback to MA5/MA10 support.
 
+### Rule 2c: VCP Quality (Volatility Contraction Pattern)
+Each stock may have a `vcp_quality` field from the Minervini-style VCP scanner:
+- **`PREMIUM`**: Contraction ratio < 0.4 + within 3% of MA20. **Best setup.** Backtest: +7.7% avg 10d return. Prioritize these for new positions.
+- **`QUALITY`**: Contraction ratio < 0.4 + within 3% of any MA. Strong setup, slightly less reliable than PREMIUM.
+- **`SETUP`**: Has a VCP pattern but doesn't pass the tight filters. Acceptable if other factors are strong.
+- **`null`/missing**: No VCP detected. Not disqualifying, but lacks the base structure edge.
+
+**How to use VCP data in decisions:**
+- When choosing between two similar candidates, prefer the one with better `vcp_quality`.
+- `vcp_contraction_ratio < 0.4` is the single strongest technical signal from backtesting. Weight it heavily.
+- `vcp_depths` shows the actual pullback sequence (e.g., "25%→15%→8%"). Cleaner tightening = better.
+- `vcp_dist_peak_pct < 5%` means the stock is near its breakout point — higher urgency if quality is PREMIUM.
+- **VCP is a timing tool, not a filter.** A stock with great fundamentals/sector but no VCP can still be bought. VCP tells you WHEN, not WHETHER.
+- **Optimal hold for VCP entries: ~10 trading days.** Backtest shows 20d returns turn negative. Consider tighter time stops for VCP-driven entries.
+
 ### Rule 3: Catalysts Over Valuation
 **DO NOT use valuation as a filter for momentum plays.** A stock at PE 80 with 100% earnings growth is cheaper than PE 15 with -20% earnings decline.
 
