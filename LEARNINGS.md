@@ -827,3 +827,9 @@
 - In a strong breadth regime, the main reason to skip otherwise attractive names is usually extension, not fundamentals; today's best-looking power-equipment candidate still failed solely on MA-distance.
 - Low-IV conditions around 16-22% IV rank do not justify freezing risk when breadth is 5.6:1; they argue for normal sizing but tighter discipline on chasing.
 - A live position can remain HOLD even with weak volume if price is above stop and the market regime is strong; weak volume should block adds before it forces an exit.
+
+### 自动更新 (2026-04-01)
+
+- 强市场并不等于随便追；今天最强的电网设备候选国电南自，仍然因为 dist_ma5_pct 和 dist_ma10_pct 双双超标而应放弃新开仓。
+- RPS 90附近配合可接受均线距离，仍然是当前最稳健的新仓形态；RPS>95 的候选今天多数都处在不可追状态。
+- 冷板块约束依然有效：风电设备和汽车链即使个股RPS尚可，也应先服从 sector-first 规则。

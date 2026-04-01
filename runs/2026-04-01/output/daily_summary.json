@@ -2,54 +2,50 @@
   "date": "2026-04-01",
   "actions": [
     {
+      "code": "688025",
+      "name": "杰普特",
+      "action": "HOLD",
+      "price": null,
+      "pnl_pct": 0,
+      "note": "New position opened today. RPS120 86.69 sits in sweet spot, no listed risk factors, MA distances acceptable in enriched data, and broad tape is strong. No real-time position price was provided in position_prices, so no stop adjustment."
+    },
+    {
       "code": "688037",
       "name": "芯源微",
       "action": "HOLD",
-      "price": 171.59,
-      "pnl_pct": -0.01,
-      "note": "Position is +0.0% vs entry and +2.41% today, still above current stop 163.02. Sector is aligned with hot growth tape and 半导体设备 has intraday strength signal, but volume is only 50.3% of MAVOL30 and the position sits just 4.99% above stop, so hold without adding."
-    },
-    {
-      "code": "688025",
-      "name": "杰普特",
-      "action": "OPEN",
-      "price": 216.56,
-      "note": "Strong broad tape favors fresh momentum; stock sits in RPS sweet spot, has 155% net profit growth, no listed risk factors, and price is not overextended from MA support."
+      "price": null,
+      "pnl_pct": -1.25,
+      "note": "Current price 169.46 vs entry 171.6 is about -1.25%, still above hard stop 163.02. Sector has intraday strength signal from 半导体设备快讯 and market regime is strong, but stock is only ~4.0% above stop and short-term trend weakened, so hold without adding."
     }
   ],
   "portfolioStats": {
     "totalPositions": 2,
-    "totalEquity": 952631.0,
-    "dayPnl": 806.0,
-    "dayReturnPct": 0.08,
+    "totalEquity": 952633.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
     "totalReturnPct": -4.74,
-    "unrealizedPnl": -2.0,
+    "unrealizedPnl": 0.0,
     "realizedPnl": -47367.0,
     "cashPct": 91.85
   },
   "entryRegime": {
     "allow_new_positions": true,
     "regime": "strong",
-    "breadth_ratio": 5.6326,
-    "up": 4568,
-    "down": 811,
+    "breadth_ratio": 4.5278,
+    "up": 4392,
+    "down": 970,
     "positive_indices": [
       "上证指数",
       "深证成指",
       "创业板指"
     ],
     "negative_indices": [],
-    "limit_ups": 53,
-    "limit_downs": 7,
-    "reason": "Entry regime strong: breadth 5.63:1, 3/3 major indices green, 53 limit-ups / 7 limit-downs."
+    "limit_ups": 52,
+    "limit_downs": 8,
+    "reason": "Entry regime strong: breadth 4.53:1, 3/3 major indices green, 52 limit-ups / 8 limit-downs."
   },
-  "newPositions": [
-    {
-      "code": "688025",
-      "name": "杰普特"
-    }
-  ],
+  "newPositions": [],
   "marketContext": {
-    "summary": "Breadth 5.63:1 bullish, 53涨停/7跌停, all 3 major indices green and 科创50 +3.21%, so the long-entry gate is fully open. Hot sectors (top 5): 游戏Ⅱ +4.63%, 酒店餐饮 +4.15%, 化学制药 +4.09%, 医疗服务 +3.92%, 玻璃玻纤 +3.77%. Cold sectors (bottom 5): 林业Ⅱ -4.69%, 航天装备Ⅱ -2.04%, 轨交设备Ⅱ -1.11%, 乘用车 -0.70%, 广告营销 -0.48%. Position sector alignment: 1/1 positions in hot sectors. IV context is mildly complacent but not extreme: 300ETF IV Rank 16.6%, 500ETF 16.8%, 科创50 22.1%, so sizing can remain normal while strictly avoiding extended entries."
+    "summary": "Breadth 4.53:1 bullish, 52涨停/8跌停, 3/3 major indices green, not a panic tape. 科创50 +2.96% confirms growth appetite. Hot sectors in provided data are 游戏Ⅱ、化学制药、酒店餐饮、医疗服务、生物制品, while 风电设备/乘用车 remain cold. IV context is mildly complacent but not extreme for most stock proxies (roughly 16%-22% IV Rank), so sizing can stay normal; however, many candidates are extended, so despite strong regime the correct action is no new positions until pullbacks appear."
   }
 }

@@ -8,7 +8,7 @@
       "type": "rule",
       "status": "hypothesis",
       "created": "2026-03-13",
-      "lastTested": "2026-03-27",
+      "lastTested": "2026-04-01",
       "mechanism": "个股相对强弱在板块退潮时容易失真，资金先撤行业、后撤个股，板块引力通常先于公司叙事生效。",
       "evidence": {
         "supporting": [
@@ -19,13 +19,17 @@
           {
             "date": "2026-03-27",
             "detail": "涨停当天并不一定一律回避；若RPS处于80-92、催化来自正式年报且均线距离未超阈值，可以保留小仓位参与资格。"
+          },
+          {
+            "date": "2026-04-01",
+            "detail": "RPS 90附近配合可接受均线距离，仍然是当前最稳健的新仓形态；RPS>95 的候选今天多数都处在不可追状态。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 2,
+      "sampleSize": 3,
       "hitRate": 1.0,
-      "confidence": 0.75,
+      "confidence": 0.8,
       "tags": [
         "sector",
         "entry-filter",
@@ -339,13 +343,17 @@
           {
             "date": "2026-04-01",
             "detail": "In a strong breadth regime, the main reason to skip otherwise attractive names is usually extension, not fundamentals; today's best-looking power-equipment candidate still failed solely on MA-distance."
+          },
+          {
+            "date": "2026-04-01",
+            "detail": "强市场并不等于随便追；今天最强的电网设备候选国电南自，仍然因为 dist_ma5_pct 和 dist_ma10_pct 双双超标而应放弃新开仓。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 2,
+      "sampleSize": 3,
       "hitRate": 1.0,
-      "confidence": 0.75,
+      "confidence": 0.8,
       "tags": [],
       "parentRule": null,
       "retiredDate": null,
@@ -456,6 +464,34 @@
       "tags": [
         "timing",
         "position-sizing",
+        "entry-filter"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h018",
+      "text": "冷板块约束依然有效：风电设备和汽车链即使个股RPS尚可，也应先服从 sector-first 规则。",
+      "type": "signal",
+      "status": "observation",
+      "created": "2026-04-01",
+      "lastTested": "2026-04-01",
+      "mechanism": "个股强度可以滞后于板块资金撤退，板块一旦掉入底部区域，后续承接通常变差，继续开仓性价比下降。",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-04-01",
+            "detail": "冷板块约束依然有效：风电设备和汽车链即使个股RPS尚可，也应先服从 sector-first 规则。"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
         "entry-filter"
       ],
       "parentRule": null,

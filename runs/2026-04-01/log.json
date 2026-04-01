@@ -3,23 +3,23 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1775013623.524299,
+      "start": 1775014199.367884,
       "errors": [
         "pricedb_update: Could not initialize Tushare: No module named 'tushare'\n  Could not initialize BaoStock: No module named 'baostock'\nUpdate failed. Providers tried:"
       ],
-      "end": 1775013696.36656,
-      "duration_sec": 72.8
+      "end": 1775014313.410293,
+      "duration_sec": 114.0
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 7778,
+      "response_size_bytes": 7014,
       "tokens": {
-        "input_tokens": 115779,
-        "output_tokens": 2746
+        "input_tokens": 113930,
+        "output_tokens": 2698
       },
       "rounds": 2,
-      "tool_calls_count": 5,
-      "duration_sec": 64.7,
+      "tool_calls_count": 6,
+      "duration_sec": 64.3,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "GPT primary",
@@ -27,21 +27,20 @@
     },
     {
       "phase": "apply",
-      "start": 1775013761.1228108,
+      "start": 1775014377.725261,
       "actions": [
-        "OPEN 688025",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
-        "Hypothesis: Created h017 (observation): Low-IV conditions around 16-22% IV rank do not justify freezing risk when breadt...",
-        "Hypothesis: Updated h017 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Updated h013 (hypothesis): +1 supporting evidence → hitRate=100%, n=3",
+        "Hypothesis: Updated h001 (hypothesis): +1 supporting evidence → hitRate=100%, n=3",
+        "Hypothesis: Created h018 (observation): 冷板块约束依然有效：风电设备和汽车链即使个股RPS尚可，也应先服从 sector-first 规则。...",
         "Updated LEARNINGS.md (legacy)"
       ],
       "post_apply_rule_violations": {
         "status": "violations",
         "total_rules": 6,
-        "total_violations": 2,
+        "total_violations": 1,
         "rules": [
           {
             "rule": "check_breakout_failure",
@@ -78,9 +77,9 @@
                 "name": "芯源微",
                 "rule": "stop_proximity",
                 "severity": "WATCH",
-                "currentPrice": 171.59,
+                "currentPrice": 171.6,
                 "stopLoss": 163.02,
-                "distance_pct": 4.99,
+                "distance_pct": 5.0,
                 "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
               }
             ],
@@ -97,33 +96,22 @@
           {
             "rule": "check_volume_below_mavol30",
             "file": "scripts/rules/check_volume_below_mavol30.py",
-            "status": "violations",
-            "exit_code": 1,
-            "violations": [
-              {
-                "code": "688037",
-                "name": "芯源微",
-                "rule": "volume_below_mavol30",
-                "volume": 24556,
-                "mavol30": 48796.53,
-                "ratio_pct": 50.3,
-                "suggestion": "Latest volume 24,556 is below MAVOL30 48,797 (50.3% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-              }
-            ],
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
             "error": null
           }
         ]
       },
-      "end": 1775013761.2678,
+      "end": 1775014377.871221,
       "duration_sec": 0.1
     }
   ],
   "validation_errors": [
-    "RULE check_stop_proximity: 688037 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
-    "RULE check_volume_below_mavol30: 688037 — Latest volume 24,556 is below MAVOL30 48,797 (50.3% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+    "RULE check_stop_proximity: 688037 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
   ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 137.6
+    "totalDurationSec": 178.4
   }
 }

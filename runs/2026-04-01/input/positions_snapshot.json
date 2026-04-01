@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-04-01T11:20:23.527395+08:00",
+  "snapshot_time": "2026-04-01T11:29:59.370588+08:00",
   "snapshot_type": "pre_run",
   "date": "2026-04-01",
   "portfolio_config": {
@@ -11,32 +11,51 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-03-31T15:10:44.252271+08:00",
+    "lastUpdated": "2026-04-01T11:22:41.131589+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 951825.0,
-      "cash": 918313.0,
-      "investedValue": 33512.0,
-      "unrealizedPnl": -808.0,
+      "totalEquity": 952631.0,
+      "cash": 875001.0,
+      "investedValue": 77630.0,
+      "unrealizedPnl": -2.0,
       "realizedPnl": -47367.0,
-      "totalPnl": -48175.0,
-      "totalReturnPct": -4.82,
-      "positionsUsed": 1,
+      "totalPnl": -47369.0,
+      "totalReturnPct": -4.74,
+      "positionsUsed": 2,
       "positionsMax": 10,
-      "cashPct": 96.48,
-      "dayPnl": -1732.0,
+      "cashPct": 91.85,
+      "dayPnl": 806.0,
       "minCashPct": 20,
-      "minCashValue": 190365.0,
-      "deployableCash": 727948.0
+      "minCashValue": 190526.2,
+      "deployableCash": 684474.8
     },
     "activePositions": [
+      {
+        "code": "688025",
+        "name": "杰普特",
+        "entryDate": "2026-04-01",
+        "entryPrice": 216.56,
+        "currentPrice": 216.56,
+        "pnl_pct": 0.0,
+        "stopLoss": 205.73,
+        "currentStop": 205.73,
+        "targetPrice": 259.87,
+        "status": "active",
+        "sector": "激光设备",
+        "shares": 200,
+        "allocation_pct": 6,
+        "allocatedCapital": 43312.0,
+        "currentValue": 43312.0,
+        "unrealizedPnl": 0.0,
+        "weight_pct": 4.55
+      },
       {
         "code": "688037",
         "name": "芯源微",
         "entryDate": "2026-03-27",
         "entryPrice": 171.6,
-        "currentPrice": 167.56,
-        "pnl_pct": -2.35,
+        "currentPrice": 171.59,
+        "pnl_pct": -0.01,
         "stopLoss": 163.02,
         "currentStop": 163.02,
         "targetPrice": 205.92,
@@ -45,16 +64,53 @@
         "shares": 200,
         "allocation_pct": 5,
         "allocatedCapital": 34320.0,
-        "currentValue": 33512.0,
-        "unrealizedPnl": -808.0,
-        "volume": 41800,
-        "mavol30": 49782.57,
+        "currentValue": 34318.0,
+        "unrealizedPnl": -2.0,
+        "volume": 24556,
+        "mavol30": 48796.53,
         "volumeBelowMavol30": true,
-        "weight_pct": 3.52
+        "weight_pct": 3.6
       }
     ]
   },
   "active_positions": {
+    "688025": {
+      "code": "688025",
+      "name": "杰普特",
+      "status": "active",
+      "thesis": "Strong broad tape favors fresh momentum; stock sits in RPS sweet spot, has 155% net profit growth, no listed risk factors, and price is not overextended from MA support.",
+      "entryDate": "2026-04-01",
+      "entryPrice": 216.56,
+      "targetPrice": 259.87,
+      "stopLoss": 205.73,
+      "currentStop": 205.73,
+      "allocation_pct": 6,
+      "shares": 200,
+      "allocatedCapital": 43312.0,
+      "rating": 2,
+      "rps120": 86.69,
+      "sector": "激光设备",
+      "catalysts": [],
+      "sourceWatchlist": "2026-04-01",
+      "history": [
+        {
+          "date": "2026-04-01",
+          "price": 216.56,
+          "change_pct": 0,
+          "action": "OPEN",
+          "note": "LLM开仓 杰普特"
+        }
+      ],
+      "exitDate": null,
+      "exitPrice": null,
+      "exitReason": null,
+      "returnPct": null,
+      "holdingDays": null,
+      "lessonLearned": null,
+      "createdAt": "2026-04-01T11:22:41.128091+08:00",
+      "updatedAt": "2026-04-01T11:22:41.128097+08:00",
+      "trackerVersion": "2.1"
+    },
     "688037": {
       "code": "688037",
       "name": "芯源微",
@@ -80,6 +136,13 @@
           "change_pct": 0,
           "action": "OPEN",
           "note": "LLM开仓 芯源微"
+        },
+        {
+          "date": "2026-04-01",
+          "price": 171.59,
+          "change_pct": -0.01,
+          "action": "HOLD",
+          "note": "Position is +0.0% vs entry and +2.41% today, still above current stop 163.02. Sector is aligned with hot growth tape and 半导体设备 has intraday strength signal, but volume is only 50.3% of MAVOL30 and the position sits just 4.99% above stop, so hold without adding."
         }
       ],
       "exitDate": null,
@@ -89,7 +152,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-03-27T16:04:14.831004+08:00",
-      "updatedAt": "2026-03-27T16:04:14.831007+08:00",
+      "updatedAt": "2026-04-01T11:22:41.123015+08:00",
       "trackerVersion": "2.1"
     }
   },
