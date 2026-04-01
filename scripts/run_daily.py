@@ -534,6 +534,49 @@ def phase1_collect(date: str) -> dict:
                 f"(ratio<0.4 + MA<3%)",
                 file=sys.stderr,
             )
+
+            # Save standalone RPS + VCP data to input dir for inspection
+            rps_output = {}
+            for code, vals in rps_data.items():
+                rps_output[code] = {
+                    "rps20": vals.get("rps20"),
+                    "rps60": vals.get("rps60"),
+                    "rps120": vals.get("rps120"),
+                    "rps250": vals.get("rps250"),
+                    "ma10": vals.get("ma10_today"),
+                }
+            (input_dir / "rps.json").write_text(
+                json.dumps(rps_output, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            print(f"    → RPS: {len(rps_output)} stocks saved to input/rps.json", file=sys.stderr)
+
+            vcp_output = []
+            for r in vcp_results:
+                vcp_entry = {
+                    "code": r["code"],
+                    "score": r["score"],
+                    "contraction_ratio": r["contraction_ratio"],
+                    "last_depth": r["last_depth"],
+                    "dist_from_peak_pct": r["dist_from_peak_pct"],
+                    "nearest_ma": r.get("nearest_ma", ""),
+                    "nearest_ma_dist": r.get("nearest_ma_dist"),
+                    "vol_declining": r.get("vol_declining", False),
+                    "num_contractions": r["num_contractions"],
+                    "depth_strs": r.get("depth_strs", []),
+                }
+                cr = vcp_entry["contraction_ratio"]
+                md = vcp_entry["nearest_ma_dist"] or 99
+                mt = vcp_entry["nearest_ma"]
+                is_q = cr < 0.4 and md < 3
+                vcp_entry["quality"] = "PREMIUM" if (is_q and mt == "MA20") else "QUALITY" if is_q else "SETUP"
+                vcp_output.append(vcp_entry)
+            (input_dir / "vcp.json").write_text(
+                json.dumps(vcp_output, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            print(f"    → VCP: {len(vcp_output)} setups saved to input/vcp.json", file=sys.stderr)
+
         except Exception as e:
             print(f"    ⚠ VCP scan failed: {e}", file=sys.stderr)
 
