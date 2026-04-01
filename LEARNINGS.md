@@ -839,3 +839,9 @@
 - In strong breadth tapes, the bigger failure mode is still chasing extension, not lack of candidates; today's best-looking breakouts were filtered mainly by MA-distance, not by market regime.
 - Bottom-list sectors should be treated as hard no-buy zones even when individual names still carry acceptable RPS readings.
 - Low-IV conditions today did not require throttling size, but they do reinforce the need to avoid late entries because complacent volatility leaves less buffer for sloppy timing.
+
+### 自动更新 (2026-04-01)
+
+- Strong market breadth does not override the MA-distance anti-chase rule; today's best-looking short-term winners like 舒华体育 and 国电南自 still fail because they are too far above MA5/MA10.
+- Sector-first filtering materially shrinks the buy list even on a bullish tape; many individual candidates had acceptable RPS but their industries were not in the provided hot-sector leadership bucket.
+- Low-IV backdrop is a sizing input, not a buy trigger. With avg IV rank around 23%, entries should still demand sector leadership and non-extended price structure.

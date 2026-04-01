@@ -2,10 +2,10 @@
   "provider": "openai",
   "primary_model": "gpt-5.4",
   "decision_source": "GPT primary",
-  "input_tokens": 108257,
-  "output_tokens": 2526,
+  "input_tokens": 121671,
+  "output_tokens": 2796,
   "rounds": 2,
-  "duration_sec": 66.5,
+  "duration_sec": 71.5,
   "tool_calls": [
     {
       "pass": "P1",
@@ -15,7 +15,7 @@
         "maxChars": 3000,
         "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+2026-04-01"
       },
-      "result_length": 28
+      "result_length": 3000
     },
     {
       "pass": "P1",
@@ -23,9 +23,9 @@
       "tool": "web_fetch",
       "input": {
         "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=游戏板块+上涨+原因+2026-04-01+A股"
+        "url": "https://www.baidu.com/s?wd=酒店餐饮+板块+上涨+原因+2026-04-01"
       },
-      "result_length": 28
+      "result_length": 3000
     },
     {
       "pass": "P1",
@@ -33,9 +33,9 @@
       "tool": "web_fetch",
       "input": {
         "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=化学制药+板块+上涨+原因+2026-04-01+A股"
+        "url": "https://www.baidu.com/s?wd=游戏板块+上涨+原因+2026-04-01"
       },
-      "result_length": 28
+      "result_length": 3000
     },
     {
       "pass": "P1",
@@ -43,9 +43,9 @@
       "tool": "web_fetch",
       "input": {
         "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=半导体设备+板块+上涨+原因+2026-04-01+A股"
+        "url": "https://www.baidu.com/s?wd=医疗服务+板块+上涨+原因+2026-04-01"
       },
-      "result_length": 28
+      "result_length": 3000
     },
     {
       "pass": "P1",
@@ -53,9 +53,29 @@
       "tool": "web_fetch",
       "input": {
         "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=电网设备+板块+上涨+原因+2026-04-01+A股"
+        "url": "https://www.baidu.com/s?wd=化学制药+板块+上涨+原因+2026-04-01"
       },
-      "result_length": 28
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=生物制品+板块+上涨+原因+2026-04-01"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=半导体设备+板块+上涨+原因+2026-04-01"
+      },
+      "result_length": 3000
     },
     {
       "pass": "P1",
@@ -65,7 +85,7 @@
         "maxChars": 3000,
         "url": "https://www.baidu.com/s?wd=杰普特+2026-04-01+新闻"
       },
-      "result_length": 28
+      "result_length": 3000
     },
     {
       "pass": "P1",
@@ -74,6 +94,36 @@
       "input": {
         "maxChars": 3000,
         "url": "https://www.baidu.com/s?wd=芯源微+2026-04-01+新闻"
+      },
+      "result_length": 28
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=A股+政策+宏观+2026-04-01"
+      },
+      "result_length": 28
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=国电南自+2026-04-01+新闻"
+      },
+      "result_length": 28
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=烽火通信+2026-04-01+新闻"
       },
       "result_length": 28
     }

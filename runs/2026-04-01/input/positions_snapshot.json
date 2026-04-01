@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-04-01T11:35:05.150112+08:00",
+  "snapshot_time": "2026-04-01T14:35:34.042501+08:00",
   "snapshot_type": "pre_run",
   "date": "2026-04-01",
   "portfolio_config": {
@@ -11,7 +11,7 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-04-01T11:32:57.736444+08:00",
+    "lastUpdated": "2026-04-01T11:46:19.770395+08:00",
     "portfolio": {
       "startingCapital": 1000000,
       "totalEquity": 952633.0,
@@ -102,7 +102,7 @@
           "price": 0,
           "change_pct": -100.0,
           "action": "HOLD",
-          "note": "New position opened today. RPS120 86.69 sits in sweet spot, no listed risk factors, MA distances acceptable in enriched data, and broad tape is strong. No real-time position price was provided in position_prices, so no stop adjustment."
+          "note": "New position opened today. RPS120 86.69 remains in sweet spot, MA distances are acceptable in enriched data, and no input price is available from position_prices to trigger stop or profit-stop changes. Sector not in provided hot-sector top list, so hold but do not add."
         }
       ],
       "exitDate": null,
@@ -112,7 +112,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-04-01T11:22:41.128091+08:00",
-      "updatedAt": "2026-04-01T11:32:57.725544+08:00",
+      "updatedAt": "2026-04-01T11:38:10.287620+08:00",
       "trackerVersion": "2.1"
     },
     "688037": {
@@ -146,7 +146,7 @@
           "price": 0,
           "change_pct": -100.0,
           "action": "HOLD",
-          "note": "Current price 169.46 vs entry 171.6 is about -1.25%, still above hard stop 163.02. Sector has intraday strength signal from 半导体设备快讯 and market regime is strong, but stock is only ~4.0% above stop and short-term trend weakened, so hold without adding."
+          "note": "Current price 169.46 vs entry 171.6 is about -1.25%, still above hard stop 163.02 and not past the -3% first-3-days rule. Semi equipment has stock-level strength signal, but sector is not in provided top-sector list and rule_violations flags the name only ~5% above stop, so this is a close-monitor hold with no adding."
         }
       ],
       "exitDate": null,
@@ -156,7 +156,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-03-27T16:04:14.831004+08:00",
-      "updatedAt": "2026-04-01T11:32:57.727943+08:00",
+      "updatedAt": "2026-04-01T11:38:10.293084+08:00",
       "trackerVersion": "2.1"
     }
   },

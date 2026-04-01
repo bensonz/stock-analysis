@@ -330,7 +330,7 @@
       "id": "h013",
       "text": "Strong breadth alone is not enough to force entries; without candidate RPS and MA-distance data, the correct momentum decision is to keep cash.",
       "type": "observation",
-      "status": "hypothesis",
+      "status": "validated",
       "created": "2026-03-27",
       "lastTested": "2026-04-01",
       "mechanism": null,
@@ -351,13 +351,17 @@
           {
             "date": "2026-04-01",
             "detail": "In strong breadth tapes, the bigger failure mode is still chasing extension, not lack of candidates; today's best-looking breakouts were filtered mainly by MA-distance, not by market regime."
+          },
+          {
+            "date": "2026-04-01",
+            "detail": "Strong market breadth does not override the MA-distance anti-chase rule; today's best-looking short-term winners like 舒华体育 and 国电南自 still fail because they are too far above MA5/MA10."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 4,
+      "sampleSize": 5,
       "hitRate": 1.0,
-      "confidence": 0.833,
+      "confidence": 0.857,
       "tags": [],
       "parentRule": null,
       "retiredDate": null,
@@ -519,16 +523,49 @@
           {
             "date": "2026-04-01",
             "detail": "Low-IV conditions today did not require throttling size, but they do reinforce the need to avoid late entries because complacent volatility leaves less buffer for sloppy timing."
+          },
+          {
+            "date": "2026-04-01",
+            "detail": "Low-IV backdrop is a sizing input, not a buy trigger. With avg IV rank around 23%, entries should still demand sector leadership and non-extended price structure."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 2,
+      "sampleSize": 3,
       "hitRate": 1.0,
-      "confidence": 0.75,
+      "confidence": 0.8,
       "tags": [
         "sector",
         "entry-filter"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h020",
+      "text": "Sector-first filtering materially shrinks the buy list even on a bullish tape; many individual candidates had acceptable RPS but their industries were not in the provided hot-sector leadership bucket.",
+      "type": "heuristic",
+      "status": "observation",
+      "created": "2026-04-01",
+      "lastTested": "2026-04-01",
+      "mechanism": "Momentum persistence is stronger when both stock and sector align; isolated stock strength without sector tailwind is less reliable for fresh entries.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-04-01",
+            "detail": "Sector-first filtering materially shrinks the buy list even on a bullish tape; many individual candidates had acceptable RPS but their industries were not in the provided hot-sector leadership bucket."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
+        "timing",
+        "position-sizing"
       ],
       "parentRule": null,
       "retiredDate": null,

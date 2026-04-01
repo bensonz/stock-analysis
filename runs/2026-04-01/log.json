@@ -3,23 +3,23 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1775014505.1495302,
+      "start": 1775025334.038851,
       "errors": [
         "pricedb_update: Could not initialize Tushare: No module named 'tushare'\n  Could not initialize BaoStock: No module named 'baostock'\nUpdate failed. Providers tried:"
       ],
-      "end": 1775014623.695873,
-      "duration_sec": 118.5
+      "end": 1775025440.200767,
+      "duration_sec": 106.2
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 7649,
+      "response_size_bytes": 7756,
       "tokens": {
-        "input_tokens": 108257,
-        "output_tokens": 2526
+        "input_tokens": 121671,
+        "output_tokens": 2796
       },
       "rounds": 2,
-      "tool_calls_count": 7,
-      "duration_sec": 66.5,
+      "tool_calls_count": 12,
+      "duration_sec": 71.5,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "GPT primary",
@@ -27,14 +27,14 @@
     },
     {
       "phase": "apply",
-      "start": 1775014690.2869818,
+      "start": 1775025511.779246,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (hypothesis): +1 supporting evidence → hitRate=100%, n=4",
-        "Hypothesis: Created h019 (observation): Bottom-list sectors should be treated as hard no-buy zones even when individual ...",
-        "Hypothesis: Updated h019 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Updated h013 (validated): +1 supporting evidence → hitRate=100%, n=5",
+        "Hypothesis: Created h020 (observation): Sector-first filtering materially shrinks the buy list even on a bullish tape; m...",
+        "Hypothesis: Updated h019 (hypothesis): +1 supporting evidence → hitRate=100%, n=3",
         "Updated LEARNINGS.md (legacy)"
       ],
       "post_apply_rule_violations": {
@@ -103,7 +103,7 @@
           }
         ]
       },
-      "end": 1775014690.450878,
+      "end": 1775025511.939596,
       "duration_sec": 0.2
     }
   ],
@@ -112,6 +112,6 @@
   ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 185.2
+    "totalDurationSec": 177.89999999999998
   }
 }
