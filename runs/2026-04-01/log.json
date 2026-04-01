@@ -3,23 +3,23 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1775025334.038851,
+      "start": 1775028217.0883389,
       "errors": [
         "pricedb_update: Could not initialize Tushare: No module named 'tushare'\n  Could not initialize BaoStock: No module named 'baostock'\nUpdate failed. Providers tried:"
       ],
-      "end": 1775025440.200767,
-      "duration_sec": 106.2
+      "end": 1775028329.888716,
+      "duration_sec": 112.8
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 7756,
+      "response_size_bytes": 7792,
       "tokens": {
-        "input_tokens": 121671,
-        "output_tokens": 2796
+        "input_tokens": 116370,
+        "output_tokens": 2438
       },
       "rounds": 2,
-      "tool_calls_count": 12,
-      "duration_sec": 71.5,
+      "tool_calls_count": 5,
+      "duration_sec": 72.9,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "GPT primary",
@@ -27,14 +27,14 @@
     },
     {
       "phase": "apply",
-      "start": 1775025511.779246,
+      "start": 1775028402.847121,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (validated): +1 supporting evidence → hitRate=100%, n=5",
-        "Hypothesis: Created h020 (observation): Sector-first filtering materially shrinks the buy list even on a bullish tape; m...",
-        "Hypothesis: Updated h019 (hypothesis): +1 supporting evidence → hitRate=100%, n=3",
+        "Hypothesis: Updated h013 (validated): +1 supporting evidence → hitRate=100%, n=6",
+        "Hypothesis: Created h021 (observation): The MA-distance anti-chase rule is doing real work: several visually strong name...",
+        "Hypothesis: Created h022 (observation): Stop-proximity warnings deserve special attention even on bullish tape; a stock ...",
         "Updated LEARNINGS.md (legacy)"
       ],
       "post_apply_rule_violations": {
@@ -103,8 +103,8 @@
           }
         ]
       },
-      "end": 1775025511.939596,
-      "duration_sec": 0.2
+      "end": 1775028403.108623,
+      "duration_sec": 0.3
     }
   ],
   "validation_errors": [
@@ -112,6 +112,6 @@
   ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 177.89999999999998
+    "totalDurationSec": 186.0
   }
 }

@@ -355,13 +355,17 @@
           {
             "date": "2026-04-01",
             "detail": "Strong market breadth does not override the MA-distance anti-chase rule; today's best-looking short-term winners like 舒华体育 and 国电南自 still fail because they are too far above MA5/MA10."
+          },
+          {
+            "date": "2026-04-01",
+            "detail": "Strong market breadth alone is not enough to justify fresh longs when candidate sectors are not the actual leadership groups in the provided sector table."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 5,
+      "sampleSize": 6,
       "hitRate": 1.0,
-      "confidence": 0.857,
+      "confidence": 0.875,
       "tags": [],
       "parentRule": null,
       "retiredDate": null,
@@ -566,6 +570,62 @@
         "sector",
         "timing",
         "position-sizing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h021",
+      "text": "The MA-distance anti-chase rule is doing real work: several visually strong names fail because they are too far above short-term support.",
+      "type": "rule",
+      "status": "observation",
+      "created": "2026-04-01",
+      "lastTested": "2026-04-01",
+      "mechanism": "When price gets too stretched above MA5/MA10/MA20, upside becomes dependent on continued euphoria instead of support-based demand, raising mean-reversion risk.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-04-01",
+            "detail": "The MA-distance anti-chase rule is doing real work: several visually strong names fail because they are too far above short-term support."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h022",
+      "text": "Stop-proximity warnings deserve special attention even on bullish tape; a stock can be in a rising market and still be the wrong stock.",
+      "type": "signal",
+      "status": "observation",
+      "created": "2026-04-01",
+      "lastTested": "2026-04-01",
+      "mechanism": "Relative weakness inside a strong tape often identifies laggards where capital is rotating away, so tight risk control matters more than market-level optimism.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-04-01",
+            "detail": "Stop-proximity warnings deserve special attention even on bullish tape; a stock can be in a rising market and still be the wrong stock."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "exit-rule",
+        "position-management"
       ],
       "parentRule": null,
       "retiredDate": null,

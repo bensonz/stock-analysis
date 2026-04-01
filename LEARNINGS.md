@@ -845,3 +845,9 @@
 - Strong market breadth does not override the MA-distance anti-chase rule; today's best-looking short-term winners like 舒华体育 and 国电南自 still fail because they are too far above MA5/MA10.
 - Sector-first filtering materially shrinks the buy list even on a bullish tape; many individual candidates had acceptable RPS but their industries were not in the provided hot-sector leadership bucket.
 - Low-IV backdrop is a sizing input, not a buy trigger. With avg IV rank around 23%, entries should still demand sector leadership and non-extended price structure.
+
+### 自动更新 (2026-04-01)
+
+- Strong market breadth alone is not enough to justify fresh longs when candidate sectors are not the actual leadership groups in the provided sector table.
+- The MA-distance anti-chase rule is doing real work: several visually strong names fail because they are too far above short-term support.
+- Stop-proximity warnings deserve special attention even on bullish tape; a stock can be in a rising market and still be the wrong stock.
