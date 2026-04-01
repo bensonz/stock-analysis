@@ -347,13 +347,17 @@
           {
             "date": "2026-04-01",
             "detail": "强市场并不等于随便追；今天最强的电网设备候选国电南自，仍然因为 dist_ma5_pct 和 dist_ma10_pct 双双超标而应放弃新开仓。"
+          },
+          {
+            "date": "2026-04-01",
+            "detail": "In strong breadth tapes, the bigger failure mode is still chasing extension, not lack of candidates; today's best-looking breakouts were filtered mainly by MA-distance, not by market regime."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 3,
+      "sampleSize": 4,
       "hitRate": 1.0,
-      "confidence": 0.8,
+      "confidence": 0.833,
       "tags": [],
       "parentRule": null,
       "retiredDate": null,
@@ -490,6 +494,38 @@
       "sampleSize": 1,
       "hitRate": 1.0,
       "confidence": 0.6,
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h019",
+      "text": "Bottom-list sectors should be treated as hard no-buy zones even when individual names still carry acceptable RPS readings.",
+      "type": "heuristic",
+      "status": "hypothesis",
+      "created": "2026-04-01",
+      "lastTested": "2026-04-01",
+      "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-04-01",
+            "detail": "Bottom-list sectors should be treated as hard no-buy zones even when individual names still carry acceptable RPS readings."
+          },
+          {
+            "date": "2026-04-01",
+            "detail": "Low-IV conditions today did not require throttling size, but they do reinforce the need to avoid late entries because complacent volatility leaves less buffer for sloppy timing."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 2,
+      "hitRate": 1.0,
+      "confidence": 0.75,
       "tags": [
         "sector",
         "entry-filter"

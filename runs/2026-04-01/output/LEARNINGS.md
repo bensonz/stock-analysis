@@ -833,3 +833,9 @@
 - 强市场并不等于随便追；今天最强的电网设备候选国电南自，仍然因为 dist_ma5_pct 和 dist_ma10_pct 双双超标而应放弃新开仓。
 - RPS 90附近配合可接受均线距离，仍然是当前最稳健的新仓形态；RPS>95 的候选今天多数都处在不可追状态。
 - 冷板块约束依然有效：风电设备和汽车链即使个股RPS尚可，也应先服从 sector-first 规则。
+
+### 自动更新 (2026-04-01)
+
+- In strong breadth tapes, the bigger failure mode is still chasing extension, not lack of candidates; today's best-looking breakouts were filtered mainly by MA-distance, not by market regime.
+- Bottom-list sectors should be treated as hard no-buy zones even when individual names still carry acceptable RPS readings.
+- Low-IV conditions today did not require throttling size, but they do reinforce the need to avoid late entries because complacent volatility leaves less buffer for sloppy timing.

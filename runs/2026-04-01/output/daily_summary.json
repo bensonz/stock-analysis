@@ -7,7 +7,7 @@
       "action": "HOLD",
       "price": null,
       "pnl_pct": 0,
-      "note": "New position opened today. RPS120 86.69 sits in sweet spot, no listed risk factors, MA distances acceptable in enriched data, and broad tape is strong. No real-time position price was provided in position_prices, so no stop adjustment."
+      "note": "New position opened today. RPS120 86.69 remains in sweet spot, MA distances are acceptable in enriched data, and no input price is available from position_prices to trigger stop or profit-stop changes. Sector not in provided hot-sector top list, so hold but do not add."
     },
     {
       "code": "688037",
@@ -15,7 +15,7 @@
       "action": "HOLD",
       "price": null,
       "pnl_pct": -1.25,
-      "note": "Current price 169.46 vs entry 171.6 is about -1.25%, still above hard stop 163.02. Sector has intraday strength signal from 半导体设备快讯 and market regime is strong, but stock is only ~4.0% above stop and short-term trend weakened, so hold without adding."
+      "note": "Current price 169.46 vs entry 171.6 is about -1.25%, still above hard stop 163.02 and not past the -3% first-3-days rule. Semi equipment has stock-level strength signal, but sector is not in provided top-sector list and rule_violations flags the name only ~5% above stop, so this is a close-monitor hold with no adding."
     }
   ],
   "portfolioStats": {
@@ -46,6 +46,6 @@
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "Breadth 4.53:1 bullish, 52涨停/8跌停, 3/3 major indices green, not a panic tape. 科创50 +2.96% confirms growth appetite. Hot sectors in provided data are 游戏Ⅱ、化学制药、酒店餐饮、医疗服务、生物制品, while 风电设备/乘用车 remain cold. IV context is mildly complacent but not extreme for most stock proxies (roughly 16%-22% IV Rank), so sizing can stay normal; however, many candidates are extended, so despite strong regime the correct action is no new positions until pullbacks appear."
+    "summary": "Breadth 4.53:1 bullish, 52涨停/8跌停, all 3 major indices green and 科创50 +2.96%, so regime is strong enough for fresh risk. Hot sectors by provided data are 游戏Ⅱ(+4.89%), 化学制药(+4.57%), 医疗服务(+4.13%), 酒店餐饮(+4.09%), 生物制品(+3.90%); cold sectors are 林业Ⅱ(-4.99%), 航天装备Ⅱ(-2.29%), 轨交设备Ⅱ(-1.12%), 乘用车(-0.85%), 风电设备(-0.79%). Position sector alignment: 0/2 positions in hot sectors. IV context is mildly complacent but not extreme: stock proxies and broad market IV ranks mostly 16%-22%, which allows normal sizing but argues against chasing extended names."
   }
 }

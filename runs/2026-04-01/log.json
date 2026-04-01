@@ -3,23 +3,23 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1775014199.367884,
+      "start": 1775014505.1495302,
       "errors": [
         "pricedb_update: Could not initialize Tushare: No module named 'tushare'\n  Could not initialize BaoStock: No module named 'baostock'\nUpdate failed. Providers tried:"
       ],
-      "end": 1775014313.410293,
-      "duration_sec": 114.0
+      "end": 1775014623.695873,
+      "duration_sec": 118.5
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 7014,
+      "response_size_bytes": 7649,
       "tokens": {
-        "input_tokens": 113930,
-        "output_tokens": 2698
+        "input_tokens": 108257,
+        "output_tokens": 2526
       },
       "rounds": 2,
-      "tool_calls_count": 6,
-      "duration_sec": 64.3,
+      "tool_calls_count": 7,
+      "duration_sec": 66.5,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "GPT primary",
@@ -27,14 +27,14 @@
     },
     {
       "phase": "apply",
-      "start": 1775014377.725261,
+      "start": 1775014690.2869818,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (hypothesis): +1 supporting evidence → hitRate=100%, n=3",
-        "Hypothesis: Updated h001 (hypothesis): +1 supporting evidence → hitRate=100%, n=3",
-        "Hypothesis: Created h018 (observation): 冷板块约束依然有效：风电设备和汽车链即使个股RPS尚可，也应先服从 sector-first 规则。...",
+        "Hypothesis: Updated h013 (hypothesis): +1 supporting evidence → hitRate=100%, n=4",
+        "Hypothesis: Created h019 (observation): Bottom-list sectors should be treated as hard no-buy zones even when individual ...",
+        "Hypothesis: Updated h019 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
         "Updated LEARNINGS.md (legacy)"
       ],
       "post_apply_rule_violations": {
@@ -103,8 +103,8 @@
           }
         ]
       },
-      "end": 1775014377.871221,
-      "duration_sec": 0.1
+      "end": 1775014690.450878,
+      "duration_sec": 0.2
     }
   ],
   "validation_errors": [
@@ -112,6 +112,6 @@
   ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 178.4
+    "totalDurationSec": 185.2
   }
 }

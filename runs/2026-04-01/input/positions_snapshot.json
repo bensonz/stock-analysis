@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-04-01T11:29:59.370588+08:00",
+  "snapshot_time": "2026-04-01T11:35:05.150112+08:00",
   "snapshot_type": "pre_run",
   "date": "2026-04-01",
   "portfolio_config": {
@@ -11,23 +11,23 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-04-01T11:22:41.131589+08:00",
+    "lastUpdated": "2026-04-01T11:32:57.736444+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 952631.0,
+      "totalEquity": 952633.0,
       "cash": 875001.0,
-      "investedValue": 77630.0,
-      "unrealizedPnl": -2.0,
+      "investedValue": 77632.0,
+      "unrealizedPnl": 0.0,
       "realizedPnl": -47367.0,
-      "totalPnl": -47369.0,
+      "totalPnl": -47367.0,
       "totalReturnPct": -4.74,
       "positionsUsed": 2,
       "positionsMax": 10,
       "cashPct": 91.85,
-      "dayPnl": 806.0,
+      "dayPnl": 0.0,
       "minCashPct": 20,
-      "minCashValue": 190526.2,
-      "deployableCash": 684474.8
+      "minCashValue": 190526.6,
+      "deployableCash": 684474.4
     },
     "activePositions": [
       {
@@ -54,8 +54,8 @@
         "name": "芯源微",
         "entryDate": "2026-03-27",
         "entryPrice": 171.6,
-        "currentPrice": 171.59,
-        "pnl_pct": -0.01,
+        "currentPrice": 171.6,
+        "pnl_pct": 0.0,
         "stopLoss": 163.02,
         "currentStop": 163.02,
         "targetPrice": 205.92,
@@ -64,11 +64,8 @@
         "shares": 200,
         "allocation_pct": 5,
         "allocatedCapital": 34320.0,
-        "currentValue": 34318.0,
-        "unrealizedPnl": -2.0,
-        "volume": 24556,
-        "mavol30": 48796.53,
-        "volumeBelowMavol30": true,
+        "currentValue": 34320.0,
+        "unrealizedPnl": 0.0,
         "weight_pct": 3.6
       }
     ]
@@ -99,6 +96,13 @@
           "change_pct": 0,
           "action": "OPEN",
           "note": "LLM开仓 杰普特"
+        },
+        {
+          "date": "2026-04-01",
+          "price": 0,
+          "change_pct": -100.0,
+          "action": "HOLD",
+          "note": "New position opened today. RPS120 86.69 sits in sweet spot, no listed risk factors, MA distances acceptable in enriched data, and broad tape is strong. No real-time position price was provided in position_prices, so no stop adjustment."
         }
       ],
       "exitDate": null,
@@ -108,7 +112,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-04-01T11:22:41.128091+08:00",
-      "updatedAt": "2026-04-01T11:22:41.128097+08:00",
+      "updatedAt": "2026-04-01T11:32:57.725544+08:00",
       "trackerVersion": "2.1"
     },
     "688037": {
@@ -139,10 +143,10 @@
         },
         {
           "date": "2026-04-01",
-          "price": 171.59,
-          "change_pct": -0.01,
+          "price": 0,
+          "change_pct": -100.0,
           "action": "HOLD",
-          "note": "Position is +0.0% vs entry and +2.41% today, still above current stop 163.02. Sector is aligned with hot growth tape and 半导体设备 has intraday strength signal, but volume is only 50.3% of MAVOL30 and the position sits just 4.99% above stop, so hold without adding."
+          "note": "Current price 169.46 vs entry 171.6 is about -1.25%, still above hard stop 163.02. Sector has intraday strength signal from 半导体设备快讯 and market regime is strong, but stock is only ~4.0% above stop and short-term trend weakened, so hold without adding."
         }
       ],
       "exitDate": null,
@@ -152,7 +156,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-03-27T16:04:14.831004+08:00",
-      "updatedAt": "2026-04-01T11:22:41.123015+08:00",
+      "updatedAt": "2026-04-01T11:32:57.727943+08:00",
       "trackerVersion": "2.1"
     }
   },
