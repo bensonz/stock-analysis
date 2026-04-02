@@ -1,0 +1,118 @@
+{
+  "date": "2026-04-02",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1775100906.18497,
+      "errors": [
+        "pricedb_update: Could not initialize Tushare: No module named 'tushare'\n  Could not initialize BaoStock: No module named 'baostock'\nUpdate failed. Providers tried:"
+      ],
+      "end": 1775100974.2900321,
+      "duration_sec": 68.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 7366,
+      "tokens": {
+        "input_tokens": 119457,
+        "output_tokens": 2473
+      },
+      "rounds": 2,
+      "tool_calls_count": 6,
+      "duration_sec": 64.1,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "GPT primary",
+      "primary_model": "gpt-5.4"
+    },
+    {
+      "phase": "apply",
+      "start": 1775101038.503083,
+      "actions": [
+        "RAISE_STOP 688025 → 216.56",
+        "SELL 688037",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (validated): +1 supporting evidence → hitRate=100%, n=7",
+        "Hypothesis: Created h023 (observation): Raising stops mechanically after +10% works well in weak tapes because it conver...",
+        "Hypothesis: Created h024 (observation): Stop-proximity violations deserve proactive action before the hard stop is hit, ...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "688025",
+                "name": "杰普特",
+                "rule": "volume_below_mavol30",
+                "volume": 46639,
+                "mavol30": 60520.67,
+                "ratio_pct": 77.1,
+                "suggestion": "Latest volume 46,639 is below MAVOL30 60,521 (77.1% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+              }
+            ],
+            "error": null
+          }
+        ]
+      },
+      "end": 1775101038.663082,
+      "duration_sec": 0.2
+    }
+  ],
+  "validation_errors": [
+    "RULE check_volume_below_mavol30: 688025 — Latest volume 46,639 is below MAVOL30 60,521 (77.1% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 132.39999999999998
+  }
+}

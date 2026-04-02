@@ -1,7 +1,7 @@
 {
   "code": "688037",
   "name": "芯源微",
-  "status": "active",
+  "status": "closed",
   "thesis": "半导体设备景气逻辑仍在，板块午后走强，公司在手订单充足，科创板IV处于正常区间，股价未过度偏离均线，适合顺势参与反弹延续。",
   "entryDate": "2026-03-27",
   "entryPrice": 171.6,
@@ -30,15 +30,22 @@
       "change_pct": -100.0,
       "action": "HOLD",
       "note": "Current price 169.46 vs entry 171.60 is about -1.25%, still above hard stop 163.02 and not beyond the -3% first-3-days rule. MA distances remain acceptable for a hold, but stop-proximity rule flagged it at only about 5.0% above stop and sector is not in the provided hot-sector top list, so this stays on very tight leash."
+    },
+    {
+      "date": "2026-04-02",
+      "price": 165.43,
+      "change_pct": -3.6,
+      "action": "SELL",
+      "note": "Current price 165.43 is about -3.6% vs entry 171.6 within the first 3 trading days, triggering the Rule 5 fast-loss exit. It is also only 1.46% above stop per rule violation, with weak volume and sector not in today’s hot-sector list."
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-04-02",
+  "exitPrice": 165.43,
+  "exitReason": "Current price 165.43 is about -3.6% vs entry 171.6 within the first 3 trading days, triggering the Rule 5 fast-loss exit. It is also only 1.46% above stop per rule violation, with weak volume and sector not in today’s hot-sector list.",
+  "returnPct": -3.6,
+  "holdingDays": 6,
+  "lessonLearned": "",
   "createdAt": "2026-03-27T16:04:14.831004+08:00",
-  "updatedAt": "2026-04-01T15:26:42.894693+08:00",
+  "updatedAt": "2026-04-02T11:37:18.513039+08:00",
   "trackerVersion": "2.1"
 }

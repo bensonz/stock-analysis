@@ -7,7 +7,7 @@
   "entryPrice": 216.56,
   "targetPrice": 259.87,
   "stopLoss": 205.73,
-  "currentStop": 205.73,
+  "currentStop": 216.56,
   "allocation_pct": 6,
   "shares": 200,
   "allocatedCapital": 43312.0,
@@ -30,6 +30,13 @@
       "change_pct": -100.0,
       "action": "HOLD",
       "note": "New position opened today. RPS120 86.69 remains in sweet spot, MA distances are acceptable (dist_ma5 1.2%, dist_ma10 2.3%, dist_ma20 -6.8%), and stock-specific IV proxy is in normal range. No current position price was available in position_prices to trigger stop/profit rules. Sector is not in provided top hot-sector list, so hold but do not add."
+    },
+    {
+      "date": "2026-04-02",
+      "price": 238.23,
+      "change_pct": 10.01,
+      "action": "RAISE_STOP",
+      "note": "Current price 238.23 is about +10.0% vs entry 216.56, so Rule 5 requires stop to move to breakeven. Position is profitable, but sector is not in today’s hot-sector list and volume is below MAVOL30, so hold with tighter risk."
     }
   ],
   "exitDate": null,
@@ -39,6 +46,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-04-01T11:22:41.128091+08:00",
-  "updatedAt": "2026-04-01T15:26:42.852728+08:00",
+  "updatedAt": "2026-04-02T11:37:18.508013+08:00",
   "trackerVersion": "2.1"
 }

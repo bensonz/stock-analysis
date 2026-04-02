@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "gpt-5.4",
+  "decision_source": "GPT primary",
+  "input_tokens": 119457,
+  "output_tokens": 2473,
+  "rounds": 2,
+  "duration_sec": 64.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+2026-04-02"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=电网设备+A股+今日+2026-04-02"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=林业+养殖业+A股+今日+2026-04-02"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=半导体设备+A股+今日+2026-04-02"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=杰普特+2026-04-02+新闻"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=芯源微+2026-04-02+新闻"
+      },
+      "result_length": 3000
+    }
+  ],
+  "fallback_used": false
+}
