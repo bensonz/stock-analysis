@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-04-02T11:37:18.662362+08:00",
+  "snapshot_time": "2026-04-02T14:39:30.453347+08:00",
   "snapshot_type": "post_run",
   "date": "2026-04-02",
   "portfolio_config": {
@@ -11,102 +11,27 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-04-02T11:37:18.521895+08:00",
+    "lastUpdated": "2026-04-02T14:39:30.294578+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 955733.0,
-      "cash": 908087.0,
-      "investedValue": 47646.0,
-      "unrealizedPnl": 4334.0,
+      "totalEquity": 951399.0,
+      "cash": 951399.0,
+      "investedValue": 0.0,
+      "unrealizedPnl": 0.0,
       "realizedPnl": -48601.0,
-      "totalPnl": -44267.0,
-      "totalReturnPct": -4.43,
-      "positionsUsed": 1,
+      "totalPnl": -48601.0,
+      "totalReturnPct": -4.86,
+      "positionsUsed": 0,
       "positionsMax": 10,
-      "cashPct": 95.01,
-      "dayPnl": -554.0,
+      "cashPct": 100.0,
+      "dayPnl": 0.0,
       "minCashPct": 20,
-      "minCashValue": 191146.6,
-      "deployableCash": 716940.4
+      "minCashValue": 190279.8,
+      "deployableCash": 761119.2
     },
-    "activePositions": [
-      {
-        "code": "688025",
-        "name": "杰普特",
-        "entryDate": "2026-04-01",
-        "entryPrice": 216.56,
-        "currentPrice": 238.23,
-        "pnl_pct": 10.01,
-        "stopLoss": 205.73,
-        "currentStop": 216.56,
-        "targetPrice": 259.87,
-        "status": "active",
-        "sector": "激光设备",
-        "shares": 200,
-        "allocation_pct": 6,
-        "allocatedCapital": 43312.0,
-        "currentValue": 47646.0,
-        "unrealizedPnl": 4334.0,
-        "volume": 46639,
-        "mavol30": 60520.67,
-        "volumeBelowMavol30": true,
-        "weight_pct": 4.99
-      }
-    ]
+    "activePositions": []
   },
-  "active_positions": {
-    "688025": {
-      "code": "688025",
-      "name": "杰普特",
-      "status": "active",
-      "thesis": "Strong broad tape favors fresh momentum; stock sits in RPS sweet spot, has 155% net profit growth, no listed risk factors, and price is not overextended from MA support.",
-      "entryDate": "2026-04-01",
-      "entryPrice": 216.56,
-      "targetPrice": 259.87,
-      "stopLoss": 205.73,
-      "currentStop": 216.56,
-      "allocation_pct": 6,
-      "shares": 200,
-      "allocatedCapital": 43312.0,
-      "rating": 2,
-      "rps120": 86.69,
-      "sector": "激光设备",
-      "catalysts": [],
-      "sourceWatchlist": "2026-04-01",
-      "history": [
-        {
-          "date": "2026-04-01",
-          "price": 216.56,
-          "change_pct": 0,
-          "action": "OPEN",
-          "note": "LLM开仓 杰普特"
-        },
-        {
-          "date": "2026-04-01",
-          "price": 0,
-          "change_pct": -100.0,
-          "action": "HOLD",
-          "note": "New position opened today. RPS120 86.69 remains in sweet spot, MA distances are acceptable (dist_ma5 1.2%, dist_ma10 2.3%, dist_ma20 -6.8%), and stock-specific IV proxy is in normal range. No current position price was available in position_prices to trigger stop/profit rules. Sector is not in provided top hot-sector list, so hold but do not add."
-        },
-        {
-          "date": "2026-04-02",
-          "price": 238.23,
-          "change_pct": 10.01,
-          "action": "RAISE_STOP",
-          "note": "Current price 238.23 is about +10.0% vs entry 216.56, so Rule 5 requires stop to move to breakeven. Position is profitable, but sector is not in today’s hot-sector list and volume is below MAVOL30, so hold with tighter risk."
-        }
-      ],
-      "exitDate": null,
-      "exitPrice": null,
-      "exitReason": null,
-      "returnPct": null,
-      "holdingDays": null,
-      "lessonLearned": null,
-      "createdAt": "2026-04-01T11:22:41.128091+08:00",
-      "updatedAt": "2026-04-02T11:37:18.508013+08:00",
-      "trackerVersion": "2.1"
-    }
-  },
+  "active_positions": {},
   "closed_positions": {
     "002046": {
       "code": "002046",
@@ -250,6 +175,19 @@
       "holdingDays": 29,
       "sector": "半导体设备",
       "lessonLearned": "突破关键阻力位后未能守住(¥120→¥109)是趋势恶化信号。time_decay规则对趋势型标的(非事件驱动型)仍然适用。延期观察的前提是动能在恢复，而非在恶化。"
+    },
+    "688025": {
+      "code": "688025",
+      "name": "杰普特",
+      "status": "closed",
+      "entryDate": "2026-04-01",
+      "exitDate": "2026-04-02",
+      "entryPrice": 216.56,
+      "exitPrice": 216.56,
+      "returnPct": 0.0,
+      "holdingDays": 1,
+      "sector": "激光设备",
+      "lessonLearned": ""
     },
     "688037": {
       "code": "688037",

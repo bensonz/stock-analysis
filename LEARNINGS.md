@@ -857,3 +857,9 @@
 - When the entry regime is this weak (breadth 0.28:1, 0/3 major indices green), the correct momentum action is often zero new positions even if several candidates still have acceptable RPS readings.
 - Raising stops mechanically after +10% works well in weak tapes because it converts a fast winner into a low-risk hold without needing a fresh market call.
 - Stop-proximity violations deserve proactive action before the hard stop is hit, especially in 科创板 names where gap risk can erase the remaining cushion quickly.
+
+### 自动更新 (2026-04-02)
+
+- When breadth collapses to 1:4.4 and all three major indices are red, the correct momentum action is usually no new longs regardless of how many individual candidates still show acceptable RPS readings.
+- MA-distance filters are highly valuable on breakout days: several apparent leaders today fail solely because they are too stretched from MA5/MA10/MA20, which is exactly the type of chase risk Rule 2b is designed to block.
+- Breakeven-stop positions in weak regimes should often be exited proactively if sector alignment worsens and stop proximity becomes effectively zero.

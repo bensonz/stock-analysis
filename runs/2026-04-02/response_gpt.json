@@ -2,83 +2,72 @@
   "sector_analysis": {
     "hot_sectors": [
       {
-        "name": "林业Ⅱ",
-        "5d_pct": 3.72,
+        "name": "油服工程",
+        "5d_pct": 4.94,
         "trend": "accelerating"
       },
       {
+        "name": "林业Ⅱ",
+        "5d_pct": 4.69,
+        "trend": "steady"
+      },
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": 2.72,
+        "trend": "steady"
+      },
+      {
         "name": "养殖业",
-        "5d_pct": 2.56,
+        "5d_pct": 2.14,
         "trend": "steady"
       },
       {
         "name": "饲料",
-        "5d_pct": 2.24,
-        "trend": "steady"
-      },
-      {
-        "name": "油服工程",
-        "5d_pct": 2.18,
-        "trend": "rotating"
-      },
-      {
-        "name": "航运港口",
-        "5d_pct": 2.1,
+        "5d_pct": 1.93,
         "trend": "steady"
       }
     ],
     "cold_sectors": [
       {
-        "name": "电视广播Ⅱ",
-        "5d_pct": -3.0,
-        "trend": "deteriorating"
-      },
-      {
         "name": "IT服务Ⅱ",
-        "5d_pct": -2.95,
+        "5d_pct": -3.57,
         "trend": "deteriorating"
       },
       {
-        "name": "广告营销",
-        "5d_pct": -2.82,
+        "name": "电视广播Ⅱ",
+        "5d_pct": -3.51,
         "trend": "deteriorating"
       },
       {
-        "name": "房地产服务",
-        "5d_pct": -2.74,
+        "name": "贵金属",
+        "5d_pct": -3.47,
         "trend": "deteriorating"
       },
       {
-        "name": "橡胶",
-        "5d_pct": -2.66,
+        "name": "元件",
+        "5d_pct": -3.41,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "光伏设备",
+        "5d_pct": -3.4,
         "trend": "deteriorating"
       }
     ],
-    "position_alignment": "0/2 positions in hot sectors",
-    "regime": "Defensive/agri rotation while growth and tech are under pressure; risk-off tape and weak breadth dominate"
+    "position_alignment": "0/1 positions in hot sectors",
+    "regime": "Defensive/resource rotation with oil & agriculture leading while tech/growth and broad beta are under pressure"
   },
   "position_decisions": [
     {
       "code": "688025",
       "name": "杰普特",
-      "action": "RAISE_STOP",
-      "reason": "Current price 238.23 is about +10.0% vs entry 216.56, so Rule 5 requires stop to move to breakeven. Position is profitable, but sector is not in today’s hot-sector list and volume is below MAVOL30, so hold with tighter risk.",
-      "sector_rank": "not in top 30%",
-      "new_stop": 216.56,
-      "pnl_pct": 10.01,
-      "days_held": 1,
-      "exit_price": null
-    },
-    {
-      "code": "688037",
-      "name": "芯源微",
       "action": "SELL",
-      "reason": "Current price 165.43 is about -3.6% vs entry 171.6 within the first 3 trading days, triggering the Rule 5 fast-loss exit. It is also only 1.46% above stop per rule violation, with weak volume and sector not in today’s hot-sector list.",
+      "reason": "Market entry regime is weak (breadth 0.22:1, 0/3 major indices green), 科创50 -2.89%, and the position has already been tightened to breakeven stop after +10%. Rule check also flags CRITICAL stop proximity at 0.0% above stop, so proactive exit is preferred rather than waiting for an exact trigger in a weak tape.",
       "sector_rank": "not in top 30%",
       "new_stop": null,
-      "pnl_pct": -3.59,
-      "days_held": 6,
-      "exit_price": 165.43
+      "pnl_pct": 0,
+      "days_held": 1,
+      "exit_price": 216.56
     }
   ],
   "new_positions": [],
@@ -86,79 +75,85 @@
     {
       "code": "600268",
       "name": "国电南自",
-      "reason": "Entry regime is weak: breadth only 0.28:1, 0/3 major indices green. Also fails no-chasing rule with dist_ma5_pct 7.0% and dist_ma10_pct 8.3%.",
+      "reason": "Sector is not in today’s top 30%, and MA chase filter fails: dist_ma5_pct 7.0% and dist_ma10_pct 8.3% exceed the hard limits. Also new-position gate is closed.",
       "rps120": 91.15
-    },
-    {
-      "code": "605299",
-      "name": "舒华体育",
-      "reason": "Fails MA distance gate badly: dist_ma5_pct 16.0%, dist_ma10_pct 30.7%, dist_ma20_pct 47.9%. Even aside from weak tape, this is pure chase.",
-      "rps120": 94.93
     },
     {
       "code": "600498",
       "name": "烽火通信",
-      "reason": "RPS120 95.3 is above the allowed chase zone, and no enriched MA-distance data is provided, which is a risk factor. Weak market regime means no new long anyway.",
+      "reason": "RPS120 95.3 is above the standard sweet spot and enters extended territory, but sector is not in today’s top 30% and there is no enriched MA-distance confirmation; with weak regime, skip rather than force.",
       "rps120": 95.3
+    },
+    {
+      "code": "605299",
+      "name": "舒华体育",
+      "reason": "Hard no-chase violation: dist_ma5_pct 16.0%, dist_ma10_pct 30.7%, dist_ma20_pct 47.9%. Even though momentum is strong, this is excessively extended and the market gate is closed.",
+      "rps120": 94.93
     },
     {
       "code": "605196",
       "name": "华通线缆",
-      "reason": "RPS120 95.36 is above the preferred entry zone and market regime blocks fresh positions. No need to force entries in weak tape.",
+      "reason": "RPS120 95.36 is above 95%, which is a skip under Rule 2. Sector also is not in today’s top 30%, so no entry.",
       "rps120": 95.36
     },
     {
       "code": "603115",
       "name": "海星股份",
-      "reason": "RPS120 97.08 is above 95%, so skip chasing. No current price data in enriched MA-distance set to support a disciplined entry.",
+      "reason": "RPS120 97.08 is above 95%, so this is chasing by rule. No current price data in enriched_candidates to validate MA-distance, and regime is weak.",
       "rps120": 97.08
     },
     {
       "code": "603306",
       "name": "华懋科技",
-      "reason": "Sector is 汽车零部件, not in today’s top sector leadership, and market regime is weak. Stock quality is secondary when sector and tape are wrong.",
+      "reason": "Sector (汽车零部件) is not in today’s top 30%. Stock-level setup is acceptable, but sector-first rule blocks new entry.",
       "rps120": 92.83
     },
     {
       "code": "601615",
       "name": "明阳智能",
-      "reason": "Sector is not in today’s top leadership and trend quality is poor: dist_ma10_pct -9.6%, dist_ma20_pct -13.5%, indicating breakdown rather than constructive strength.",
+      "reason": "Sector (风电设备) is not in today’s top 30%, and short-term trend is weak with current_price below MA5/MA10/MA20 in enriched data. No entry in this tape.",
       "rps120": 90.8
     },
     {
       "code": "600426",
       "name": "华鲁恒升",
-      "reason": "RPS120 88.62 is acceptable, but sector is not in today’s top leadership and the market buy gate is decisively closed. Skip rather than force a starter position.",
+      "reason": "RPS120 88.62 is within range and MA distances are fine, but sector is not in today’s top 30% and new-position gate is closed. Sector-first overrides stock quality.",
       "rps120": 88.62
     },
     {
       "code": "601208",
       "name": "东材科技",
-      "reason": "RPS120 90.86 is fine, but sector leadership is absent and market breadth is too weak for new longs. No fresh risk in a 0/3 green-index tape.",
+      "reason": "Sector is not in today’s top 30%. Stock is near moving averages, but sector-first rule and weak market regime block entry.",
       "rps120": 90.86
     },
     {
       "code": "605167",
       "name": "利柏特",
-      "reason": "RPS120 93.49 is allowed, MA distances are acceptable, and contract catalyst is real, but sector is not among today’s leaders and the market regime blocks new entries.",
+      "reason": "Sector is not in today’s top 30%, and although MA distances are acceptable, revenue and net profit are both negative year-on-year while the market gate is closed.",
       "rps120": 93.49
     },
     {
       "code": "600301",
       "name": "华锡有色",
-      "reason": "RPS120 93.29 is allowed, but sector is not in today’s top leadership and dist_ma20_pct is -13.1%, showing it has already lost short-term structure. Weak tape means skip.",
+      "reason": "Sector is not in today’s top 30%, and dist_ma20_pct is -13.1%, showing price is materially below intermediate support rather than in a clean momentum launch zone. Skip.",
       "rps120": 93.29
     },
     {
       "code": "603663",
       "name": "三祥新材",
-      "reason": "Sector is not in today’s top leadership and dist_ma20_pct -12.6% shows technical damage after prior run. Not a fresh momentum entry here.",
+      "reason": "Sector is not in today’s top 30%, and dist_ma20_pct is -12.6%, indicating a broken intermediate trend rather than a proper momentum entry.",
       "rps120": 91.77
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "Semiconductor/tech tape is weak today, sector is not in top 30%, and fundamentals are deteriorating with revenue_yoy -10.35% and net_profit_yoy -124.96%. No entry.",
+      "rps120": 85.85
     }
   ],
   "new_learnings": [
     {
-      "text": "When the entry regime is this weak (breadth 0.28:1, 0/3 major indices green), the correct momentum action is often zero new positions even if several candidates still have acceptable RPS readings.",
+      "text": "When breadth collapses to 1:4.4 and all three major indices are red, the correct momentum action is usually no new longs regardless of how many individual candidates still show acceptable RPS readings.",
       "type": "rule",
       "tags": [
         "timing",
@@ -167,33 +162,33 @@
       ],
       "evidence_type": "supporting",
       "related_hypothesis": "h013",
-      "mechanism": "Momentum entries need broad participation to follow through; isolated stock strength fails more often when the tape is distribution-heavy."
+      "mechanism": "Momentum entries rely on upside participation and follow-through; in weak tapes, even strong charts are more likely to fail or mean-revert."
     },
     {
-      "text": "Raising stops mechanically after +10% works well in weak tapes because it converts a fast winner into a low-risk hold without needing a fresh market call.",
+      "text": "MA-distance filters are highly valuable on breakout days: several apparent leaders today fail solely because they are too stretched from MA5/MA10/MA20, which is exactly the type of chase risk Rule 2b is designed to block.",
       "type": "heuristic",
       "tags": [
-        "exit-rule",
-        "timing",
-        "position-sizing"
-      ],
-      "evidence_type": "supporting",
-      "related_hypothesis": "",
-      "mechanism": "In a deteriorating market, protecting open profits is more valuable than maximizing upside variance."
-    },
-    {
-      "text": "Stop-proximity violations deserve proactive action before the hard stop is hit, especially in 科创板 names where gap risk can erase the remaining cushion quickly.",
-      "type": "signal",
-      "tags": [
-        "exit-rule",
+        "entry-filter",
         "timing"
       ],
       "evidence_type": "supporting",
-      "related_hypothesis": "",
-      "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits."
+      "related_hypothesis": "h013",
+      "mechanism": "When price is too far above short-term support, the reward-to-risk deteriorates and even valid catalysts cannot offset near-term mean reversion risk."
+    },
+    {
+      "text": "Breakeven-stop positions in weak regimes should often be exited proactively if sector alignment worsens and stop proximity becomes effectively zero.",
+      "type": "signal",
+      "tags": [
+        "exit-rule",
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "A stop sitting at the market with no cushion creates gap risk; in a hostile tape, preserving optionality is superior to hoping for a bounce."
     }
   ],
-  "market_summary": "Market regime weak. Breadth 0.28:1 bearish, 23涨停/16跌停, with 1190 up vs 4220 down and all 3 major indices red. Hot sectors (top 5): 林业Ⅱ +3.72%, 养殖业 +2.56%, 饲料 +2.24%, 油服工程 +2.18%, 航运港口 +2.10%. Cold sectors (bottom 5): 电视广播Ⅱ -3.00%, IT服务Ⅱ -2.95%, 广告营销 -2.82%, 房地产服务 -2.74%, 橡胶 -2.66%. Position sector alignment: 0/2 positions in hot sectors. IV context is complacent-to-extremely-low (overall avg IV rank 11.0%), which would halve new sizing if entries were allowed, but the buy gate is closed anyway.",
+  "market_summary": "Breadth 0.22:1 bearish, 31涨停/16跌停, all 3 major indices red and panic-like participation collapse; hot sectors are oil services, forestry and agriculture while tech/growth and 科创50 lag sharply. IV context is complacent-to-low (overall IV Rank about 11%), which would halve sizing for any new entry, but the regime gate is shut so no new positions.",
   "market_sentiment": "bearish",
-  "market_call": "防守"
+  "market_call": "观望"
 }

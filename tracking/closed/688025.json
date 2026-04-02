@@ -1,7 +1,7 @@
 {
   "code": "688025",
   "name": "杰普特",
-  "status": "active",
+  "status": "closed",
   "thesis": "Strong broad tape favors fresh momentum; stock sits in RPS sweet spot, has 155% net profit growth, no listed risk factors, and price is not overextended from MA support.",
   "entryDate": "2026-04-01",
   "entryPrice": 216.56,
@@ -37,15 +37,22 @@
       "change_pct": 10.01,
       "action": "RAISE_STOP",
       "note": "Current price 238.23 is about +10.0% vs entry 216.56, so Rule 5 requires stop to move to breakeven. Position is profitable, but sector is not in today’s hot-sector list and volume is below MAVOL30, so hold with tighter risk."
+    },
+    {
+      "date": "2026-04-02",
+      "price": 216.56,
+      "change_pct": 0.0,
+      "action": "SELL",
+      "note": "Market entry regime is weak (breadth 0.22:1, 0/3 major indices green), 科创50 -2.89%, and the position has already been tightened to breakeven stop after +10%. Rule check also flags CRITICAL stop proximity at 0.0% above stop, so proactive exit is preferred rather than waiting for an exact trigger in a weak tape."
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-04-02",
+  "exitPrice": 216.56,
+  "exitReason": "Market entry regime is weak (breadth 0.22:1, 0/3 major indices green), 科创50 -2.89%, and the position has already been tightened to breakeven stop after +10%. Rule check also flags CRITICAL stop proximity at 0.0% above stop, so proactive exit is preferred rather than waiting for an exact trigger in a weak tape.",
+  "returnPct": 0.0,
+  "holdingDays": 1,
+  "lessonLearned": "",
   "createdAt": "2026-04-01T11:22:41.128091+08:00",
-  "updatedAt": "2026-04-02T11:37:18.508013+08:00",
+  "updatedAt": "2026-04-02T14:39:30.287525+08:00",
   "trackerVersion": "2.1"
 }

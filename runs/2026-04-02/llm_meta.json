@@ -2,70 +2,80 @@
   "provider": "openai",
   "primary_model": "gpt-5.4",
   "decision_source": "GPT primary",
-  "input_tokens": 119457,
-  "output_tokens": 2473,
+  "input_tokens": 121841,
+  "output_tokens": 2416,
   "rounds": 2,
-  "duration_sec": 64.1,
+  "duration_sec": 98.6,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
+        "maxChars": 4000,
         "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+2026-04-02"
       },
-      "result_length": 3000
+      "result_length": 4000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=电网设备+A股+今日+2026-04-02"
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=油服工程+板块+上涨+原因+2026-04-02"
       },
-      "result_length": 3000
+      "result_length": 4000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=林业+养殖业+A股+今日+2026-04-02"
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=贵金属+板块+下跌+原因+2026-04-02"
       },
-      "result_length": 3000
+      "result_length": 4000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=半导体设备+A股+今日+2026-04-02"
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=杰普特+688025+2026-04-02+新闻"
       },
-      "result_length": 3000
+      "result_length": 4000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=杰普特+2026-04-02+新闻"
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=电网设备+板块+2026-04-02+国电南自+中国西电"
       },
-      "result_length": 3000
+      "result_length": 4000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=芯源微+2026-04-02+新闻"
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=国际油价+2026-04-02+A股+油气"
       },
-      "result_length": 3000
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=科创50+大跌+2026-04-02+原因"
+      },
+      "result_length": 4000
     }
   ],
   "fallback_used": false

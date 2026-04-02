@@ -363,13 +363,21 @@
           {
             "date": "2026-04-02",
             "detail": "When the entry regime is this weak (breadth 0.28:1, 0/3 major indices green), the correct momentum action is often zero new positions even if several candidates still have acceptable RPS readings."
+          },
+          {
+            "date": "2026-04-02",
+            "detail": "When breadth collapses to 1:4.4 and all three major indices are red, the correct momentum action is usually no new longs regardless of how many individual candidates still show acceptable RPS readings."
+          },
+          {
+            "date": "2026-04-02",
+            "detail": "MA-distance filters are highly valuable on breakout days: several apparent leaders today fail solely because they are too stretched from MA5/MA10/MA20, which is exactly the type of chase risk Rule 2b is designed to block."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 7,
+      "sampleSize": 9,
       "hitRate": 1.0,
-      "confidence": 0.889,
+      "confidence": 0.909,
       "tags": [],
       "parentRule": null,
       "retiredDate": null,
@@ -687,6 +695,35 @@
       "tags": [
         "exit-rule",
         "timing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h025",
+      "text": "Breakeven-stop positions in weak regimes should often be exited proactively if sector alignment worsens and stop proximity becomes effectively zero.",
+      "type": "signal",
+      "status": "observation",
+      "created": "2026-04-02",
+      "lastTested": "2026-04-02",
+      "mechanism": "A stop sitting at the market with no cushion creates gap risk; in a hostile tape, preserving optionality is superior to hoping for a bounce.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-04-02",
+            "detail": "Breakeven-stop positions in weak regimes should often be exited proactively if sector alignment worsens and stop proximity becomes effectively zero."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "exit-rule",
+        "timing",
+        "sector"
       ],
       "parentRule": null,
       "retiredDate": null,

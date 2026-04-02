@@ -3,23 +3,23 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1775100906.18497,
+      "start": 1775111762.135257,
       "errors": [
         "pricedb_update: Could not initialize Tushare: No module named 'tushare'\n  Could not initialize BaoStock: No module named 'baostock'\nUpdate failed. Providers tried:"
       ],
-      "end": 1775100974.2900321,
-      "duration_sec": 68.1
+      "end": 1775111871.6082518,
+      "duration_sec": 109.5
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 7366,
+      "response_size_bytes": 7251,
       "tokens": {
-        "input_tokens": 119457,
-        "output_tokens": 2473
+        "input_tokens": 121841,
+        "output_tokens": 2416
       },
       "rounds": 2,
-      "tool_calls_count": 6,
-      "duration_sec": 64.1,
+      "tool_calls_count": 7,
+      "duration_sec": 98.6,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "GPT primary",
@@ -27,92 +27,24 @@
     },
     {
       "phase": "apply",
-      "start": 1775101038.503083,
+      "start": 1775111970.286774,
       "actions": [
-        "RAISE_STOP 688025 → 216.56",
-        "SELL 688037",
+        "SELL 688025",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (validated): +1 supporting evidence → hitRate=100%, n=7",
-        "Hypothesis: Created h023 (observation): Raising stops mechanically after +10% works well in weak tapes because it conver...",
-        "Hypothesis: Created h024 (observation): Stop-proximity violations deserve proactive action before the hard stop is hit, ...",
+        "Hypothesis: Updated h013 (validated): +1 supporting evidence → hitRate=100%, n=8",
+        "Hypothesis: Updated h013 (validated): +1 supporting evidence → hitRate=100%, n=9",
+        "Hypothesis: Created h025 (observation): Breakeven-stop positions in weak regimes should often be exited proactively if s...",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "post_apply_rule_violations": {
-        "status": "violations",
-        "total_rules": 6,
-        "total_violations": 1,
-        "rules": [
-          {
-            "rule": "check_breakout_failure",
-            "file": "scripts/rules/check_breakout_failure.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_iv_filter",
-            "file": "scripts/rules/check_iv_filter.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_overextended_entry",
-            "file": "scripts/rules/check_overextended_entry.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_stop_proximity",
-            "file": "scripts/rules/check_stop_proximity.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_time_decay",
-            "file": "scripts/rules/check_time_decay.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_volume_below_mavol30",
-            "file": "scripts/rules/check_volume_below_mavol30.py",
-            "status": "violations",
-            "exit_code": 1,
-            "violations": [
-              {
-                "code": "688025",
-                "name": "杰普特",
-                "rule": "volume_below_mavol30",
-                "volume": 46639,
-                "mavol30": 60520.67,
-                "ratio_pct": 77.1,
-                "suggestion": "Latest volume 46,639 is below MAVOL30 60,521 (77.1% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-              }
-            ],
-            "error": null
-          }
-        ]
-      },
-      "end": 1775101038.663082,
+      "end": 1775111970.45446,
       "duration_sec": 0.2
     }
   ],
-  "validation_errors": [
-    "RULE check_volume_below_mavol30: 688025 — Latest volume 46,639 is below MAVOL30 60,521 (77.1% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-  ],
+  "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 132.39999999999998
+    "totalDurationSec": 208.29999999999998
   }
 }

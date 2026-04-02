@@ -4,48 +4,40 @@
     {
       "code": "688025",
       "name": "杰普特",
-      "action": "RAISE_STOP",
-      "price": 238.23,
-      "pnl_pct": 10.01,
-      "note": "Current price 238.23 is about +10.0% vs entry 216.56, so Rule 5 requires stop to move to breakeven. Position is profitable, but sector is not in today’s hot-sector list and volume is below MAVOL30, so hold with tighter risk."
-    },
-    {
-      "code": "688037",
-      "name": "芯源微",
       "action": "SELL",
-      "price": 165.43,
-      "pnl_pct": -3.59,
-      "note": "Current price 165.43 is about -3.6% vs entry 171.6 within the first 3 trading days, triggering the Rule 5 fast-loss exit. It is also only 1.46% above stop per rule violation, with weak volume and sector not in today’s hot-sector list."
+      "price": null,
+      "pnl_pct": 0,
+      "note": "Market entry regime is weak (breadth 0.22:1, 0/3 major indices green), 科创50 -2.89%, and the position has already been tightened to breakeven stop after +10%. Rule check also flags CRITICAL stop proximity at 0.0% above stop, so proactive exit is preferred rather than waiting for an exact trigger in a weak tape."
     }
   ],
   "portfolioStats": {
-    "totalPositions": 1,
-    "totalEquity": 955733.0,
-    "dayPnl": -554.0,
-    "dayReturnPct": -0.06,
-    "totalReturnPct": -4.43,
-    "unrealizedPnl": 4334.0,
+    "totalPositions": 0,
+    "totalEquity": 951399.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -4.86,
+    "unrealizedPnl": 0.0,
     "realizedPnl": -48601.0,
-    "cashPct": 95.01
+    "cashPct": 100.0
   },
   "entryRegime": {
     "allow_new_positions": false,
     "regime": "weak",
-    "breadth_ratio": 0.282,
-    "up": 1190,
-    "down": 4220,
+    "breadth_ratio": 0.2249,
+    "up": 996,
+    "down": 4429,
     "positive_indices": [],
     "negative_indices": [
       "上证指数",
       "深证成指",
       "创业板指"
     ],
-    "limit_ups": 23,
+    "limit_ups": 31,
     "limit_downs": 16,
-    "reason": "Entry regime weak: breadth 0.28:1, 0/3 major indices green, 23 limit-ups / 16 limit-downs."
+    "reason": "Entry regime weak: breadth 0.22:1, 0/3 major indices green, 31 limit-ups / 16 limit-downs."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "Market regime weak. Breadth 0.28:1 bearish, 23涨停/16跌停, with 1190 up vs 4220 down and all 3 major indices red. Hot sectors (top 5): 林业Ⅱ +3.72%, 养殖业 +2.56%, 饲料 +2.24%, 油服工程 +2.18%, 航运港口 +2.10%. Cold sectors (bottom 5): 电视广播Ⅱ -3.00%, IT服务Ⅱ -2.95%, 广告营销 -2.82%, 房地产服务 -2.74%, 橡胶 -2.66%. Position sector alignment: 0/2 positions in hot sectors. IV context is complacent-to-extremely-low (overall avg IV rank 11.0%), which would halve new sizing if entries were allowed, but the buy gate is closed anyway."
+    "summary": "Breadth 0.22:1 bearish, 31涨停/16跌停, all 3 major indices red and panic-like participation collapse; hot sectors are oil services, forestry and agriculture while tech/growth and 科创50 lag sharply. IV context is complacent-to-low (overall IV Rank about 11%), which would halve sizing for any new entry, but the regime gate is shut so no new positions."
   }
 }

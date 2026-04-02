@@ -2,38 +2,38 @@
   "date": "2026-04-02",
   "market_overview": {
     "shanghai_composite": {
-      "value": 3927.605,
-      "change_pct": -0.53
+      "value": 3914.593,
+      "change_pct": -0.86
     },
     "shenzhen_component": {
-      "value": 13548.46,
-      "change_pct": -1.15
+      "value": 13469.25,
+      "change_pct": -1.73
     },
     "chinext": {
-      "value": 3189.72,
-      "change_pct": -1.78
+      "value": 3168.56,
+      "change_pct": -2.43
     },
     "sentiment": "bearish",
     "hot_sectors": [
-      "林业Ⅱ",
-      "养殖业",
-      "饲料",
       "油服工程",
-      "航运港口"
+      "林业Ⅱ",
+      "油气开采Ⅱ",
+      "养殖业",
+      "饲料"
     ],
     "cold_sectors": [
-      "电视广播Ⅱ",
       "IT服务Ⅱ",
-      "广告营销",
-      "房地产服务",
-      "橡胶"
+      "电视广播Ⅱ",
+      "贵金属",
+      "元件",
+      "光伏设备"
     ],
-    "notes": "Market regime weak. Breadth 0.28:1 bearish, 23涨停/16跌停, with 1190 up vs 4220 down and all 3 major indices red. Hot sectors (top 5): 林业Ⅱ +3.72%, 养殖业 +2.56%, 饲料 +2.24%, 油服工程 +2.18%, 航运港口 +2.10%. Cold sectors (bottom 5): 电视广播Ⅱ -3.00%, IT服务Ⅱ -2.95%, 广告营销 -2.82%, 房地产服务 -2.74%, 橡胶 -2.66%. Position sector alignment: 0/2 positions in hot sectors. IV context is complacent-to-extremely-low (overall avg IV rank 11.0%), which would halve new sizing if entries were allowed, but the buy gate is closed anyway."
+    "notes": "Breadth 0.22:1 bearish, 31涨停/16跌停, all 3 major indices red and panic-like participation collapse; hot sectors are oil services, forestry and agriculture while tech/growth and 科创50 lag sharply. IV context is complacent-to-low (overall IV Rank about 11%), which would halve sizing for any new entry, but the regime gate is shut so no new positions."
   },
   "strategy_scan": {
     "total_stocks_scanned": 21,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-04-02T11:37:18.518860+08:00"
+    "scan_time": "2026-04-02T14:39:30.293565+08:00"
   },
   "recommendations": [
     {
@@ -46,19 +46,19 @@
       "reasoning": ""
     },
     {
-      "code": "605299.SH",
-      "name": "舒华体育",
+      "code": "600498.SH",
+      "name": "烽火通信",
       "price": null,
-      "rps120": 94.93,
+      "rps120": 95.3,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "600498.SH",
-      "name": "烽火通信",
+      "code": "605299.SH",
+      "name": "舒华体育",
       "price": null,
-      "rps120": 95.3,
+      "rps120": 94.93,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -143,14 +143,23 @@
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
+    },
+    {
+      "code": "688037.SH",
+      "name": "芯源微",
+      "price": null,
+      "rps120": 85.85,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
     }
   ],
   "summary": {
     "total_scanned": 21,
     "buy_recommendations": 0,
-    "watch_recommendations": 12,
+    "watch_recommendations": 13,
     "avoid_recommendations": 0,
-    "market_call": "防守",
-    "reasoning": "Market regime weak. Breadth 0.28:1 bearish, 23涨停/16跌停, with 1190 up vs 4220 down and all 3 major indices red. Hot sectors (top 5): 林业Ⅱ +3.72%, 养殖业 +2.56%, 饲料 +2.24%, 油服工程 +2.18%, 航运港口 +2.10%. Cold sectors (bottom 5): 电视广播Ⅱ -3.00%, IT服务Ⅱ -2.95%, 广告营销 -2.82%, 房地产服务 -2.74%, 橡胶 -2.66%. Position sector alignment: 0/2 positions in hot sectors. IV context is complacent-to-extremely-low (overall avg IV rank 11.0%), which would halve new sizing if entries were allowed, but the buy gate is closed anyway."
+    "market_call": "观望",
+    "reasoning": "Breadth 0.22:1 bearish, 31涨停/16跌停, all 3 major indices red and panic-like participation collapse; hot sectors are oil services, forestry and agriculture while tech/growth and 科创50 lag sharply. IV context is complacent-to-low (overall IV Rank about 11%), which would halve sizing for any new entry, but the regime gate is shut so no new positions."
   }
 }
