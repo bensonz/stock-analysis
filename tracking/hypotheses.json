@@ -383,13 +383,21 @@
           {
             "date": "2026-04-03",
             "detail": "Sector leadership is narrow today: 通信设备 is clearly leading, but the rest of the market is weak enough that sector strength does not override regime weakness."
+          },
+          {
+            "date": "2026-04-03",
+            "detail": "When breadth collapses below 1:1 and all three major indices are red, even the #1 sector should usually be treated as relative-strength observation rather than an entry signal."
+          },
+          {
+            "date": "2026-04-03",
+            "detail": "MA-distance checks remain critical on strong event names: 国电南自 had valid earnings/news momentum, but dist_ma5_pct>6% and dist_ma10_pct>8% still mark it as a chase."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 12,
+      "sampleSize": 14,
       "hitRate": 1.0,
-      "confidence": 0.929,
+      "confidence": 0.938,
       "tags": [],
       "parentRule": null,
       "retiredDate": null,
@@ -736,6 +744,35 @@
         "exit-rule",
         "timing",
         "sector"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h026",
+      "text": "Today’s market shows a useful distinction between sector leadership and market permission: 通信设备/自动化设备 are leadership groups, but the tape does not grant buying permission.",
+      "type": "heuristic",
+      "status": "observation",
+      "created": "2026-04-03",
+      "lastTested": "2026-04-03",
+      "mechanism": "Sector ranking helps build the next watch universe, while breadth and index confirmation decide whether capital should actually be deployed.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-04-03",
+            "detail": "Today’s market shows a useful distinction between sector leadership and market permission: 通信设备/自动化设备 are leadership groups, but the tape does not grant buying permission."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
+        "timing",
+        "position-sizing"
       ],
       "parentRule": null,
       "retiredDate": null,

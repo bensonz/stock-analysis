@@ -3,23 +3,23 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1775187311.122648,
+      "start": 1775198121.220844,
       "errors": [
         "pricedb_update: Could not initialize Tushare: No module named 'tushare'\n  Could not initialize BaoStock: No module named 'baostock'\nUpdate failed. Providers tried:"
       ],
-      "end": 1775187367.773226,
-      "duration_sec": 56.7
+      "end": 1775198214.57318,
+      "duration_sec": 93.4
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 5975,
+      "response_size_bytes": 7081,
       "tokens": {
-        "input_tokens": 117950,
-        "output_tokens": 2092
+        "input_tokens": 114440,
+        "output_tokens": 2360
       },
       "rounds": 2,
-      "tool_calls_count": 7,
-      "duration_sec": 51.9,
+      "tool_calls_count": 6,
+      "duration_sec": 67.2,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "GPT primary",
@@ -27,23 +27,23 @@
     },
     {
       "phase": "apply",
-      "start": 1775187419.715264,
+      "start": 1775198281.8734348,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=10",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=11",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=12",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=13",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=14",
+        "Hypothesis: Created h026 (observation): Today’s market shows a useful distinction between sector leadership and market p...",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1775187419.8526158,
+      "end": 1775198282.001002,
       "duration_sec": 0.1
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 108.69999999999999
+    "totalDurationSec": 160.70000000000002
   }
 }

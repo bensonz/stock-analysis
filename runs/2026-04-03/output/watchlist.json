@@ -2,38 +2,38 @@
   "date": "2026-04-03",
   "market_overview": {
     "shanghai_composite": {
-      "value": 3882.688,
-      "change_pct": -0.93
+      "value": 3878.724,
+      "change_pct": -1.03
     },
     "shenzhen_component": {
-      "value": 13387.92,
-      "change_pct": -0.73
+      "value": 13360.11,
+      "change_pct": -0.94
     },
     "chinext": {
-      "value": 3166.06,
-      "change_pct": -0.21
+      "value": 3153.25,
+      "change_pct": -0.61
     },
     "sentiment": "bearish",
     "hot_sectors": [
       "通信设备",
       "电子化学品Ⅱ",
+      "自动化设备",
       "元件",
-      "光学光电子",
-      "自动化设备"
+      "光学光电子"
     ],
     "cold_sectors": [
       "林业Ⅱ",
       "焦炭Ⅱ",
       "农业综合Ⅱ",
-      "风电设备",
-      "动物保健Ⅱ"
+      "燃气Ⅱ",
+      "种植业"
     ],
-    "notes": "Breadth 0.15:1 bearish, 21涨停/28跌停, all 3 major indices red and no buy gate clearance. Hot sectors (top 5): 通信设备 +4.29%, 电子化学品Ⅱ +1.67%, 元件 +1.43%, 光学光电子 +0.71%, 自动化设备 +0.70%. Cold sectors (bottom 5): 林业Ⅱ -5.24%, 焦炭Ⅱ -5.05%, 农业综合Ⅱ -4.27%, 风电设备 -3.55%, 动物保健Ⅱ -3.54%. Position sector alignment: 0/0 positions in hot sectors. IV context is mildly complacent/low (overall avg IV rank 18.1%; many 300/500 proxies near 14-16%), which would reduce sizing for some names, but the main decision today is simpler: no new positions in a weak regime."
+    "notes": "Market regime weak. Breadth 0.15:1 bearish, 37涨停/38跌停, heavy downside skew with 3142 stocks down more than 2%. All 3 major indices are red (上证-1.03%, 深成指-0.94%, 创业板指-0.61%), so the minimum long-entry gate clearly fails and f10=38 signals panic tape. Hot sectors (top 5): 通信设备(+3.32%), 电子化学品Ⅱ(+1.62%), 自动化设备(+1.09%), 元件(+1.07%), 光学光电子(+0.60%). Cold sectors (bottom 5): 林业Ⅱ(-6.47%), 焦炭Ⅱ(-5.46%), 农业综合Ⅱ(-4.51%), 燃气Ⅱ(-3.66%), 种植业(-3.42%). Position sector alignment: 0/0 positions in hot sectors. Research check confirms pockets of strength are catalyst-backed: 国电南自年报显示2025年营收96.44亿元、归母净利润同比+40.95%、电网自动化订货53.85亿元；通信设备方向有1.6T光模块/光通信升级叙事支撑；烽火通信有耐辐照光纤技术突破消息。但 these are observational only today, not actionable buys. IV context is low-to-neutral overall (avg IV rank 18.1%); this would cap sizing in calmer tapes, but today regime weakness overrides IV and keeps new_positions empty."
   },
   "strategy_scan": {
     "total_stocks_scanned": 21,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-04-03T11:36:59.719457+08:00"
+    "scan_time": "2026-04-03T14:38:01.874399+08:00"
   },
   "recommendations": [
     {
@@ -59,15 +59,6 @@
       "name": "舒华体育",
       "price": null,
       "rps120": 94.93,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "605196.SH",
-      "name": "华通线缆",
-      "price": null,
-      "rps120": 95.36,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -125,14 +116,41 @@
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
+    },
+    {
+      "code": "600426.SH",
+      "name": "华鲁恒升",
+      "price": null,
+      "rps120": 88.62,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "605167.SH",
+      "name": "利柏特",
+      "price": null,
+      "rps120": 93.49,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "603663.SH",
+      "name": "三祥新材",
+      "price": null,
+      "rps120": 91.77,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
     }
   ],
   "summary": {
     "total_scanned": 21,
     "buy_recommendations": 0,
-    "watch_recommendations": 10,
+    "watch_recommendations": 12,
     "avoid_recommendations": 0,
     "market_call": "观望",
-    "reasoning": "Breadth 0.15:1 bearish, 21涨停/28跌停, all 3 major indices red and no buy gate clearance. Hot sectors (top 5): 通信设备 +4.29%, 电子化学品Ⅱ +1.67%, 元件 +1.43%, 光学光电子 +0.71%, 自动化设备 +0.70%. Cold sectors (bottom 5): 林业Ⅱ -5.24%, 焦炭Ⅱ -5.05%, 农业综合Ⅱ -4.27%, 风电设备 -3.55%, 动物保健Ⅱ -3.54%. Position sector alignment: 0/0 positions in hot sectors. IV context is mildly complacent/low (overall avg IV rank 18.1%; many 300/500 proxies near 14-16%), which would reduce sizing for some names, but the main decision today is simpler: no new positions in a weak regime."
+    "reasoning": "Market regime weak. Breadth 0.15:1 bearish, 37涨停/38跌停, heavy downside skew with 3142 stocks down more than 2%. All 3 major indices are red (上证-1.03%, 深成指-0.94%, 创业板指-0.61%), so the minimum long-entry gate clearly fails and f10=38 signals panic tape. Hot sectors (top 5): 通信设备(+3.32%), 电子化学品Ⅱ(+1.62%), 自动化设备(+1.09%), 元件(+1.07%), 光学光电子(+0.60%). Cold sectors (bottom 5): 林业Ⅱ(-6.47%), 焦炭Ⅱ(-5.46%), 农业综合Ⅱ(-4.51%), 燃气Ⅱ(-3.66%), 种植业(-3.42%). Position sector alignment: 0/0 positions in hot sectors. Research check confirms pockets of strength are catalyst-backed: 国电南自年报显示2025年营收96.44亿元、归母净利润同比+40.95%、电网自动化订货53.85亿元；通信设备方向有1.6T光模块/光通信升级叙事支撑；烽火通信有耐辐照光纤技术突破消息。但 these are observational only today, not actionable buys. IV context is low-to-neutral overall (avg IV rank 18.1%); this would cap sizing in calmer tapes, but today regime weakness overrides IV and keeps new_positions empty."
   }
 }

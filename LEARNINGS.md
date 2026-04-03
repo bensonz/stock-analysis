@@ -869,3 +869,9 @@
 - When breadth collapses to 0.15:1 with 0/3 major indices green, even strong sectors become trading-only pockets rather than investable swing entries; defaulting to cash is correct.
 - Today's strongest-looking candidates mostly failed on extension rather than thesis quality, reinforcing that MA-distance limits are the practical anti-FOMO filter.
 - Sector leadership is narrow today: 通信设备 is clearly leading, but the rest of the market is weak enough that sector strength does not override regime weakness.
+
+### 自动更新 (2026-04-03)
+
+- When breadth collapses below 1:1 and all three major indices are red, even the #1 sector should usually be treated as relative-strength observation rather than an entry signal.
+- MA-distance checks remain critical on strong event names: 国电南自 had valid earnings/news momentum, but dist_ma5_pct>6% and dist_ma10_pct>8% still mark it as a chase.
+- Today’s market shows a useful distinction between sector leadership and market permission: 通信设备/自动化设备 are leadership groups, but the tape does not grant buying permission.

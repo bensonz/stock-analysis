@@ -2,10 +2,10 @@
   "provider": "openai",
   "primary_model": "gpt-5.4",
   "decision_source": "GPT primary",
-  "input_tokens": 117950,
-  "output_tokens": 2092,
+  "input_tokens": 114440,
+  "output_tokens": 2360,
   "rounds": 2,
-  "duration_sec": 51.9,
+  "duration_sec": 67.2,
   "tool_calls": [
     {
       "pass": "P1",
@@ -13,7 +13,7 @@
       "tool": "web_fetch",
       "input": {
         "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+2026年4月3日"
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+2026-04-03"
       },
       "result_length": 3000
     },
@@ -23,7 +23,7 @@
       "tool": "web_fetch",
       "input": {
         "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=通信设备+板块+A股+4月3日+烽火通信"
+        "url": "https://www.baidu.com/s?wd=通信设备+板块+上涨+原因+2026-04-03"
       },
       "result_length": 3000
     },
@@ -33,7 +33,17 @@
       "tool": "web_fetch",
       "input": {
         "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=电网设备+板块+A股+4月3日+国电南自"
+        "url": "https://www.baidu.com/s?wd=电子化学品+板块+上涨+原因+2026-04-03"
+      },
+      "result_length": 28
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=国电南自+2026-04-03+年报+电网自动化"
       },
       "result_length": 3000
     },
@@ -43,7 +53,7 @@
       "tool": "web_fetch",
       "input": {
         "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=半导体设备+板块+A股+4月3日+芯源微"
+        "url": "https://www.baidu.com/s?wd=烽火通信+2026-04-03+耐辐照光纤"
       },
       "result_length": 3000
     },
@@ -53,27 +63,7 @@
       "tool": "web_fetch",
       "input": {
         "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=风电设备+板块+A股+4月3日+明阳智能"
-      },
-      "result_length": 3000
-    },
-    {
-      "pass": "P1",
-      "round": 1,
-      "tool": "web_fetch",
-      "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=体育用品+舒华体育+4月3日+A股"
-      },
-      "result_length": 3000
-    },
-    {
-      "pass": "P1",
-      "round": 1,
-      "tool": "web_fetch",
-      "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=小金属+华锡有色+4月3日+A股"
+        "url": "https://www.baidu.com/s?wd=A股+大跌+原因+2026-04-03+政策"
       },
       "result_length": 3000
     }
