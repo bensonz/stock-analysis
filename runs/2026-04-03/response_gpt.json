@@ -1,0 +1,163 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "通信设备",
+        "5d_pct": 4.29,
+        "trend": "accelerating"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": 1.67,
+        "trend": "steady"
+      },
+      {
+        "name": "元件",
+        "5d_pct": 1.43,
+        "trend": "steady"
+      },
+      {
+        "name": "光学光电子",
+        "5d_pct": 0.71,
+        "trend": "steady"
+      },
+      {
+        "name": "自动化设备",
+        "5d_pct": 0.7,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -5.24,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "焦炭Ⅱ",
+        "5d_pct": -5.05,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "农业综合Ⅱ",
+        "5d_pct": -4.27,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "风电设备",
+        "5d_pct": -3.55,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "动物保健Ⅱ",
+        "5d_pct": -3.54,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/0 positions in hot sectors",
+    "regime": "Defensive tape; isolated strength in通信设备/电子链, while cyclicals and风电 are under pressure"
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "reason": "Sector is relatively strong and catalyst is fresh, but no-chasing rule fails: dist_ma5_pct 7.0% and dist_ma10_pct 8.3% are both above limits; market entry gate also fails.",
+      "rps120": 91.15
+    },
+    {
+      "code": "600498",
+      "name": "烽火通信",
+      "reason": "通信设备 is the hottest sector and catalyst is real, but RPS120 95.3% is above the allowed chase zone; also no enriched MA-distance confirmation and market regime blocks new entries.",
+      "rps120": 95.3
+    },
+    {
+      "code": "605299",
+      "name": "舒华体育",
+      "reason": "RPS120 94.93% is in extended zone, but short-term extension is extreme: dist_ma5_pct 16.0%, dist_ma10_pct 30.7%, dist_ma20_pct 47.9%; hard no-chasing rule says skip.",
+      "rps120": 94.93
+    },
+    {
+      "code": "605196",
+      "name": "华通线缆",
+      "reason": "电网设备 theme is still active, but RPS120 95.36% is above the 95% ceiling for new entries and the market entry gate fails today.",
+      "rps120": 95.36
+    },
+    {
+      "code": "688025",
+      "name": "杰普特",
+      "reason": "Automatic equipment is in top sectors and MA distances are acceptable, but market breadth is too weak for fresh risk; this becomes skip, not buy.",
+      "rps120": 86.69
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "RPS120 85.85% is acceptable and MA distances are fine, but sector is not in today's top leadership list and market entry gate fails; no current breakout urgency.",
+      "rps120": 85.85
+    },
+    {
+      "code": "603306",
+      "name": "华懋科技",
+      "reason": "汽车零部件 is not in today's top sector group; sector-first rule overrides individual setup even though MA distances are acceptable.",
+      "rps120": 92.83
+    },
+    {
+      "code": "601208",
+      "name": "东材科技",
+      "reason": "RPS120 90.86% and MA distances are fine, but基础化工/膜材料 is not in the top sector leadership today, so it is watch-through-skip only.",
+      "rps120": 90.86
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "小金属 had intraday activity, but sector is not in today's top 30% leadership and dist_ma20_pct is -13.1%, showing the stock is below medium-term support rather than in a clean momentum launch.",
+      "rps120": 93.29
+    },
+    {
+      "code": "601615",
+      "name": "明阳智能",
+      "reason": "Sector is explicitly in today's bottom 5 (风电设备 -3.55%); sector-first rule says no entry regardless of stock-level RPS.",
+      "rps120": 90.8
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "When breadth collapses to 0.15:1 with 0/3 major indices green, even strong sectors become trading-only pockets rather than investable swing entries; defaulting to cash is correct.",
+      "type": "rule",
+      "tags": [
+        "sector",
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Weak index participation and broad downside pressure reduce follow-through probability for fresh longs, so single-stock strength is less reliable."
+    },
+    {
+      "text": "Today's strongest-looking candidates mostly failed on extension rather than thesis quality, reinforcing that MA-distance limits are the practical anti-FOMO filter.",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "In weak tape, extended names lose support fastest because buyers are already crowded and there is little incremental demand left."
+    },
+    {
+      "text": "Sector leadership is narrow today: 通信设备 is clearly leading, but the rest of the market is weak enough that sector strength does not override regime weakness.",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Narrow leadership without index confirmation often produces false breakouts and failed continuation setups."
+    }
+  ],
+  "market_summary": "Breadth 0.15:1 bearish, 21涨停/28跌停, all 3 major indices red and no buy gate clearance. Hot sectors (top 5): 通信设备 +4.29%, 电子化学品Ⅱ +1.67%, 元件 +1.43%, 光学光电子 +0.71%, 自动化设备 +0.70%. Cold sectors (bottom 5): 林业Ⅱ -5.24%, 焦炭Ⅱ -5.05%, 农业综合Ⅱ -4.27%, 风电设备 -3.55%, 动物保健Ⅱ -3.54%. Position sector alignment: 0/0 positions in hot sectors. IV context is mildly complacent/low (overall avg IV rank 18.1%; many 300/500 proxies near 14-16%), which would reduce sizing for some names, but the main decision today is simpler: no new positions in a weak regime.",
+  "market_sentiment": "bearish",
+  "market_call": "观望"
+}

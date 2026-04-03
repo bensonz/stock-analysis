@@ -1,0 +1,49 @@
+{
+  "date": "2026-04-03",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1775187311.122648,
+      "errors": [
+        "pricedb_update: Could not initialize Tushare: No module named 'tushare'\n  Could not initialize BaoStock: No module named 'baostock'\nUpdate failed. Providers tried:"
+      ],
+      "end": 1775187367.773226,
+      "duration_sec": 56.7
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 5975,
+      "tokens": {
+        "input_tokens": 117950,
+        "output_tokens": 2092
+      },
+      "rounds": 2,
+      "tool_calls_count": 7,
+      "duration_sec": 51.9,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "GPT primary",
+      "primary_model": "gpt-5.4"
+    },
+    {
+      "phase": "apply",
+      "start": 1775187419.715264,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=10",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=11",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=12",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1775187419.8526158,
+      "duration_sec": 0.1
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 108.69999999999999
+  }
+}

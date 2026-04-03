@@ -671,6 +671,8 @@ def phase1_collect(date: str) -> dict:
             if code in ma_data:
                 ma = ma_data[code]
                 stock["current_price"] = ma.get("price")
+                if stock.get("price") is None and ma.get("price") is not None:
+                    stock["price"] = ma.get("price")
                 stock["ma5"] = ma.get("ma5")
                 stock["ma10"] = ma.get("ma10")
                 stock["ma20"] = ma.get("ma20")

@@ -1,0 +1,34 @@
+{
+  "date": "2026-04-03",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 951399.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -4.86,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -48601.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "weak",
+    "breadth_ratio": 0.153,
+    "up": 723,
+    "down": 4727,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 21,
+    "limit_downs": 28,
+    "reason": "Entry regime weak: breadth 0.15:1, 0/3 major indices green, 21 limit-ups / 28 limit-downs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 0.15:1 bearish, 21涨停/28跌停, all 3 major indices red and no buy gate clearance. Hot sectors (top 5): 通信设备 +4.29%, 电子化学品Ⅱ +1.67%, 元件 +1.43%, 光学光电子 +0.71%, 自动化设备 +0.70%. Cold sectors (bottom 5): 林业Ⅱ -5.24%, 焦炭Ⅱ -5.05%, 农业综合Ⅱ -4.27%, 风电设备 -3.55%, 动物保健Ⅱ -3.54%. Position sector alignment: 0/0 positions in hot sectors. IV context is mildly complacent/low (overall avg IV rank 18.1%; many 300/500 proxies near 14-16%), which would reduce sizing for some names, but the main decision today is simpler: no new positions in a weak regime."
+  }
+}
