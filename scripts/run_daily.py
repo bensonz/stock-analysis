@@ -63,7 +63,7 @@ from position_manager import (
     POSITIONS_FILE,
     PORTFOLIO_CONFIG_FILE,
 )
-from report_generator import generate_watchlist_json, generate_report_md
+from report_generator import generate_candidates_md, generate_watchlist_json, generate_report_md
 from run_rules import run_all_rules
 from validator import validate_data, validate_output
 from hypothesis_manager import (
@@ -628,8 +628,11 @@ def phase1_collect(date: str) -> dict:
 
     def _ma_data():
         print("  [7/7] Fetching MA data...", file=sys.stderr)
-        result = fetch_ma_data(candidates)
-        print(f"    → {len(result)} stocks with MA data", file=sys.stderr)
+        # Fetch MA for ALL pool stocks, not just 75-95% candidates.
+        # Stocks with RPS>95 are skipped by Rule 2 but the LLM still needs
+        # MA distances to explain *why* in skip_list.
+        result = fetch_ma_data(pool_stocks)
+        print(f"    → {len(result)} stocks with MA data (pool={len(pool_stocks)})", file=sys.stderr)
         return "ma_data", result
 
     with ThreadPoolExecutor(max_workers=6) as executor:
@@ -663,16 +666,29 @@ def phase1_collect(date: str) -> dict:
                 elif task_name == "ma_data":
                     data["ma_data"] = {}
 
-    # Merge MA data into enrichment results
+    # Merge MA data into enrichment results AND strategy pool stocks
     ma_data = data.get("ma_data", {})
-    if ma_data and data.get("enriched"):
-        for stock in data["enriched"]:
+    if ma_data:
+        # Merge into enriched candidates (75-95% RPS)
+        for stock in data.get("enriched", []):
             code = str(stock.get("code", "")).split(".")[0]
             if code in ma_data:
                 ma = ma_data[code]
                 stock["current_price"] = ma.get("price")
                 if stock.get("price") is None and ma.get("price") is not None:
                     stock["price"] = ma.get("price")
+                stock["ma5"] = ma.get("ma5")
+                stock["ma10"] = ma.get("ma10")
+                stock["ma20"] = ma.get("ma20")
+                stock["dist_ma5_pct"] = ma.get("dist_ma5_pct")
+                stock["dist_ma10_pct"] = ma.get("dist_ma10_pct")
+                stock["dist_ma20_pct"] = ma.get("dist_ma20_pct")
+        # Also merge into strategy pool stocks (covers >95% RPS stocks
+        # that aren't enriched — LLM needs MA distances for skip_list)
+        for stock in data.get("strategy_pool", {}).get("stocks", []):
+            code = str(stock.get("code", "")).split(".")[0]
+            if code in ma_data:
+                ma = ma_data[code]
                 stock["ma5"] = ma.get("ma5")
                 stock["ma10"] = ma.get("ma10")
                 stock["ma20"] = ma.get("ma20")
@@ -745,6 +761,15 @@ def phase1_collect(date: str) -> dict:
         print(f"  Errors: {log['errors']}", file=sys.stderr)
     if data["collection_errors"]:
         print(f"  Warnings: {data['collection_errors']}", file=sys.stderr)
+
+    # Generate candidates.md — always available, even when regime blocks buys
+    try:
+        output_dir = RUNS_DIR / date / "output"
+        output_dir.mkdir(parents=True, exist_ok=True)
+        cand_path = generate_candidates_md(date, data, output_dir=output_dir)
+        print(f"  → Candidates list: {cand_path}", file=sys.stderr)
+    except Exception as e:
+        print(f"  ⚠ candidates.md generation failed: {e}", file=sys.stderr)
 
     return data
 

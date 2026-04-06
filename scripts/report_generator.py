@@ -281,6 +281,155 @@ def _index_summary(idx: dict) -> dict:
     }
 
 
+def generate_candidates_md(date: str, data: dict, output_dir: Path | None = None) -> Path:
+    """Write a candidates summary table from Phase 1 data.
+
+    Shows all strategy pool stocks with RPS, MA distances, and pass/fail status.
+    This runs after Phase 1 (before LLM), so it's always available even if the
+    LLM step fails or the entry regime blocks all buys.
+
+    Args:
+        date: Date string "YYYY-MM-DD"
+        data: Collected data from Phase 1 (strategy_pool, ma_data, enriched, entry_regime)
+        output_dir: If provided, write there; otherwise writes to reports/
+
+    Returns:
+        Path to written file.
+    """
+    pool = data.get("strategy_pool", {}).get("stocks", [])
+    ma_data = data.get("ma_data", {})
+    enriched_map = {
+        str(c.get("code", "")).split(".")[0]: c
+        for c in data.get("enriched", [])
+    }
+    regime = data.get("entry_regime", {})
+
+    lines = [f"# 候选股票 {date}\n"]
+
+    # Entry regime status
+    if regime:
+        allow = regime.get("allow_new_positions", False)
+        breadth = regime.get("breadth_ratio", 0)
+        pos_idx = regime.get("positive_indices", [])
+        neg_idx = regime.get("negative_indices", [])
+        status = "✅ OPEN" if allow else "🚫 BLOCKED"
+        lines.append(f"## 入场条件: {status}")
+        lines.append(f"- 涨跌比: {breadth:.2f}:1")
+        if pos_idx:
+            lines.append(f"- 上涨指数: {', '.join(pos_idx)}")
+        if neg_idx:
+            lines.append(f"- 下跌指数: {', '.join(neg_idx)}")
+        lines.append(f"- 原因: {regime.get('reason', '')}")
+        lines.append("")
+
+    # Table header
+    lines.append(f"## 策略池 ({len(pool)} stocks)\n")
+    lines.append("| Code | Name | RPS120 | RPS60 | Trend | Co | MA5% | MA10% | MA20% | Status |")
+    lines.append("|------|------|--------|-------|-------|-----|------|-------|-------|--------|")
+
+    sweet_spot = []
+    wait_list = []
+
+    for s in pool:
+        code = str(s.get("code", "")).split(".")[0]
+        name = s.get("name", code)
+        rps120 = s.get("rps120", 0)
+        rps60 = s.get("rps60", 0)
+        trend = s.get("score_trend", "-")
+        co = s.get("score_company", "-")
+
+        # Get MA data: first from the stock itself (merged), then from ma_data dict
+        ma5 = s.get("dist_ma5_pct")
+        ma10 = s.get("dist_ma10_pct")
+        ma20 = s.get("dist_ma20_pct")
+        if ma5 is None:
+            e = enriched_map.get(code) or {}
+            ma5 = e.get("dist_ma5_pct")
+            ma10 = e.get("dist_ma10_pct")
+            ma20 = e.get("dist_ma20_pct")
+        if ma5 is None:
+            m = ma_data.get(code, {})
+            ma5 = m.get("dist_ma5_pct")
+            ma10 = m.get("dist_ma10_pct")
+            ma20 = m.get("dist_ma20_pct")
+
+        # MA check
+        fails = []
+        if ma5 is not None and abs(ma5) > 6:
+            fails.append("MA5")
+        if ma10 is not None and abs(ma10) > 8:
+            fails.append("MA10")
+        if ma20 is not None and abs(ma20) > 12:
+            fails.append("MA20")
+
+        if fails:
+            status = f"❌ {','.join(fails)}"
+        elif ma5 is not None:
+            if rps120 and rps120 > 95:
+                status = "⏳ >95"
+            else:
+                status = "✅ PASS"
+        else:
+            status = "⚠️ no MA"
+
+        ma5_s = f"{ma5:+.1f}" if ma5 is not None else "-"
+        ma10_s = f"{ma10:+.1f}" if ma10 is not None else "-"
+        ma20_s = f"{ma20:+.1f}" if ma20 is not None else "-"
+        rps120_s = f"{rps120:.0f}" if isinstance(rps120, (int, float)) else str(rps120)
+        rps60_s = f"{rps60:.0f}" if isinstance(rps60, (int, float)) else str(rps60)
+
+        lines.append(
+            f"| {code} | {name} | {rps120_s} | {rps60_s} | {trend} | {co} "
+            f"| {ma5_s} | {ma10_s} | {ma20_s} | {status} |"
+        )
+
+        if not fails and ma5 is not None:
+            entry = {"code": code, "name": name, "rps120": rps120, "rps60": rps60,
+                     "trend": trend, "co": co, "ma5": ma5, "ma10": ma10, "ma20": ma20}
+            if rps120 and rps120 > 95:
+                wait_list.append(entry)
+            else:
+                sweet_spot.append(entry)
+
+    lines.append("")
+
+    # Sweet spot summary
+    if sweet_spot:
+        lines.append(f"## Sweet Spot ({len(sweet_spot)})\n")
+        lines.append("RPS 75-95%, MA check pass — actionable when regime opens.\n")
+        for s in sweet_spot:
+            lines.append(
+                f"- **{s['name']}** ({s['code']}) RPS120={s['rps120']:.0f} "
+                f"Trend={s['trend']} Co={s['co']} "
+                f"MA5={s['ma5']:+.1f}% MA10={s['ma10']:+.1f}% MA20={s['ma20']:+.1f}%"
+            )
+        lines.append("")
+
+    # Wait list
+    if wait_list:
+        lines.append(f"## Wait List ({len(wait_list)})\n")
+        lines.append("RPS >95% (chasing risk), MA pass — watch for pullback into 85-95 zone.\n")
+        for s in wait_list:
+            lines.append(
+                f"- **{s['name']}** ({s['code']}) RPS120={s['rps120']:.0f} "
+                f"Trend={s['trend']} Co={s['co']} "
+                f"MA5={s['ma5']:+.1f}% MA10={s['ma10']:+.1f}% MA20={s['ma20']:+.1f}%"
+            )
+        lines.append("")
+
+    if not sweet_spot and not wait_list:
+        lines.append("## No candidates pass all filters today.\n")
+
+    content = "\n".join(lines)
+    if output_dir:
+        out = output_dir / "candidates.md"
+    else:
+        out = REPORTS_DIR / f"{date}-candidates.md"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(content, encoding="utf-8")
+    return out
+
+
 def _extract_sector_names(sectors: list) -> list[str]:
     """Extract sector names from AkShare board data."""
     return [s.get("板块名称", "") for s in sectors if s.get("板块名称")]

@@ -1,0 +1,34 @@
+{
+  "date": "2026-04-06",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 951399.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -4.86,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -48601.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "weak",
+    "breadth_ratio": 0.1509,
+    "up": 716,
+    "down": 4746,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 39,
+    "limit_downs": 46,
+    "reason": "Entry regime weak: breadth 0.15:1, 0/3 major indices green, 39 limit-ups / 46 limit-downs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Bearish/panic regime. Breadth 0.15:1 bearish, 39涨停/46跌停, all 3 major indices red; this fails the minimum long-entry gate by a wide margin. Hot sectors (top 5): 通信设备(+3.19%), 电子化学品Ⅱ(+1.40%), 自动化设备(+1.10%), 元件(+1.04%), 光学光电子(+0.73%). Cold sectors (bottom 5): 林业Ⅱ(-6.61%), 焦炭Ⅱ(-5.46%), 农业综合Ⅱ(-4.64%), 燃气Ⅱ(-3.65%), 渔业(-3.63%). Position sector alignment: 0/0 positions in hot sectors. Web checks suggest AI/通信 remains the only visible strength pocket while broad selling is driven by profit-taking/risk-off; IV context unavailable, so no stock-level throttle benefit applies. With breadth below 1:1 and f10=46, this is a no-new-position day."
+  }
+}

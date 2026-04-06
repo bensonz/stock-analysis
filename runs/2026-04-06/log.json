@@ -1,0 +1,49 @@
+{
+  "date": "2026-04-06",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1775457317.317757,
+      "errors": [
+        "pricedb_update: Could not initialize Tushare: No module named 'tushare'\n  Could not initialize BaoStock: No module named 'baostock'\nUpdate failed. Providers tried:"
+      ],
+      "end": 1775457362.795957,
+      "duration_sec": 45.5
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 6595,
+      "tokens": {
+        "input_tokens": 112928,
+        "output_tokens": 2512
+      },
+      "rounds": 2,
+      "tool_calls_count": 8,
+      "duration_sec": 60.8,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "GPT primary",
+      "primary_model": "gpt-5.4"
+    },
+    {
+      "phase": "apply",
+      "start": 1775457423.701675,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=15",
+        "Hypothesis: Created h027 (observation): MA-distance discipline remains critical inside hot sectors: a hot sector does no...",
+        "Hypothesis: Created h028 (observation): Today’s relative leaders are concentrated in communication equipment and adjacen...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1775457423.874914,
+      "duration_sec": 0.2
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 106.5
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "通信设备",
+        "5d_pct": 3.19,
+        "trend": "accelerating"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": 1.4,
+        "trend": "steady"
+      },
+      {
+        "name": "自动化设备",
+        "5d_pct": 1.1,
+        "trend": "steady"
+      },
+      {
+        "name": "元件",
+        "5d_pct": 1.04,
+        "trend": "steady"
+      },
+      {
+        "name": "光学光电子",
+        "5d_pct": 0.73,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -6.61,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "焦炭Ⅱ",
+        "5d_pct": -5.46,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "农业综合Ⅱ",
+        "5d_pct": -4.64,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "燃气Ⅱ",
+        "5d_pct": -3.65,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "渔业",
+        "5d_pct": -3.63,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/0 positions in hot sectors",
+    "regime": "Weak tape: communication/AI-related pockets are resisting, but market-wide selling dominates and no broad risk-on persistence is present"
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "reason": "Entry regime blocks all new longs: breadth only 0.15:1, 0/3 major indices green, 46跌停 > 39涨停. Stock also fails MA chase rule with dist_ma5_pct 7.0% and dist_ma10_pct 8.3%.",
+      "rps120": 91.15
+    },
+    {
+      "code": "600498",
+      "name": "烽火通信",
+      "reason": "Sector is hot, but this is still a skip today: entry regime is weak and the stock is overextended with dist_ma5_pct 11.2% and dist_ma10_pct 13.1%, violating the no-chasing rule.",
+      "rps120": 95.3
+    },
+    {
+      "code": "688025",
+      "name": "杰普特",
+      "reason": "Automatic equipment is a relative-strength pocket and RPS120 86.69 is in range, but market regime forbids new entries. Recent news flow is mixed and stock-specific catalyst is less urgent than sector tape risk.",
+      "rps120": 86.69
+    },
+    {
+      "code": "601208",
+      "name": "东材科技",
+      "reason": "RPS120 90.86 and MA distances are acceptable, but sector is not in the provided top 30% list and the market buy gate is decisively closed. No new long in weak tape.",
+      "rps120": 90.86
+    },
+    {
+      "code": "605167",
+      "name": "利柏特",
+      "reason": "Individual setup is acceptable on MA distance, but sector is not in the top-performing group and breadth is far below the 1.5:1 minimum. Sector-first rule and regime gate both say skip.",
+      "rps120": 93.49
+    },
+    {
+      "code": "603306",
+      "name": "华懋科技",
+      "reason": "Sector (汽车零部件) is not in the provided hot-sector list, and the market regime is weak. Corporate action catalyst exists, but sector gravity and poor tape keep it out.",
+      "rps120": 92.83
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "Commodity/minor metals are not in the provided top sector list, and dist_ma20_pct is -13.1%, showing loss of near-term structure. Weak market means no countertrend commodity entries.",
+      "rps120": 93.29
+    },
+    {
+      "code": "603663",
+      "name": "三祥新材",
+      "reason": "RPS120 is in range, but sector is not in the hot-sector top group and dist_ma20_pct is -12.6%, beyond the MA20 threshold. Fails both sector-first and MA-distance discipline.",
+      "rps120": 91.77
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "Semiconductor equipment had intraday activity, but sector is not in the provided top 30% list and the company has negative net_profit_yoy. In this market, that is a skip, not a small buy.",
+      "rps120": 85.85
+    },
+    {
+      "code": "605196",
+      "name": "华通线缆",
+      "reason": "电网设备 is a relative-strength sector, but RPS120 95.36 is above the allowed zone without a clear top-10% sector exception from the provided sector table, and the market regime blocks all new entries anyway.",
+      "rps120": 95.36
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "When breadth collapses to 0.15:1 with all three major indices red, even strong-sector candidates should be skipped outright; preserving cash is the momentum action, not a missed trade.",
+      "type": "rule",
+      "tags": [
+        "sector",
+        "entry-filter",
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Momentum entries need market participation to follow through. In a broad liquidation tape, isolated strength tends to fail or become untradable due to poor entry timing."
+    },
+    {
+      "text": "MA-distance discipline remains critical inside hot sectors: a hot sector does not override chase risk when dist_ma5_pct exceeds 6% or dist_ma10_pct exceeds 8%.",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter",
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "",
+      "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes."
+    },
+    {
+      "text": "Today’s relative leaders are concentrated in communication equipment and adjacent tech hardware, while cyclicals/agri/resource laggards are being de-risked aggressively.",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "",
+      "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally."
+    }
+  ],
+  "market_summary": "Bearish/panic regime. Breadth 0.15:1 bearish, 39涨停/46跌停, all 3 major indices red; this fails the minimum long-entry gate by a wide margin. Hot sectors (top 5): 通信设备(+3.19%), 电子化学品Ⅱ(+1.40%), 自动化设备(+1.10%), 元件(+1.04%), 光学光电子(+0.73%). Cold sectors (bottom 5): 林业Ⅱ(-6.61%), 焦炭Ⅱ(-5.46%), 农业综合Ⅱ(-4.64%), 燃气Ⅱ(-3.65%), 渔业(-3.63%). Position sector alignment: 0/0 positions in hot sectors. Web checks suggest AI/通信 remains the only visible strength pocket while broad selling is driven by profit-taking/risk-off; IV context unavailable, so no stock-level throttle benefit applies. With breadth below 1:1 and f10=46, this is a no-new-position day.",
+  "market_sentiment": "bearish",
+  "market_call": "观望"
+}
