@@ -1,0 +1,131 @@
+{
+  "date": "2026-04-07",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1775543740.46507,
+      "errors": [
+        "pricedb_update: Could not initialize Tushare: No module named 'tushare'\n  Could not initialize BaoStock: No module named 'baostock'\nUpdate failed. Providers tried:"
+      ],
+      "end": 1775543820.435731,
+      "duration_sec": 80.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 5757,
+      "tokens": {
+        "input_tokens": 123694,
+        "output_tokens": 2937
+      },
+      "rounds": 2,
+      "tool_calls_count": 8,
+      "duration_sec": 89.9,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "GPT primary",
+      "primary_model": "gpt-5.4"
+    },
+    {
+      "phase": "apply",
+      "start": 1775543910.4153678,
+      "actions": [
+        "OPEN 600426",
+        "OPEN 601208",
+        "OPEN 605167",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=17",
+        "Hypothesis: Created h029 (observation): 当前化工方向比电网、通信更适合执行新仓，因为它既在当日板块榜首，又有涨价/景气研报支撑，同时候选股MA结构更健康。...",
+        "Hypothesis: Created h030 (observation): RPS扩展区（92-95）可以做，但前提必须有新鲜催化和不差的均线位置，利柏特比华通线缆更符合这个组合条件。...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "600426",
+                "name": "华鲁恒升",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 36.6,
+                "stopLoss": 34.77,
+                "distance_pct": 5.0,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "605167",
+                "name": "利柏特",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 16.66,
+                "stopLoss": 15.83,
+                "distance_pct": 4.98,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1775543910.569064,
+      "duration_sec": 0.2
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 600426 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 605167 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 170.1
+  }
+}
