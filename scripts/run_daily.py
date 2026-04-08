@@ -949,23 +949,85 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
     if requested_new_positions and not allowed_new_positions:
         log["actions"].append(f"SKIP OPEN ALL: {entry_regime.get('reason')}")
 
+    # Fetch real-time market prices for new position candidates.
+    # This prevents stale pricedb data from being used as entry prices.
+    new_candidate_prices = {}
+    if allowed_new_positions:
+        candidate_codes = [
+            {"code": str(p["code"]).split(".")[0], "name": p.get("name", "")}
+            for p in allowed_new_positions
+        ]
+        try:
+            new_candidate_prices = fetch_position_prices(candidate_codes)
+            fetched_count = sum(
+                1 for v in new_candidate_prices.values()
+                if isinstance(v, dict) and v.get("price") and not v.get("error")
+            )
+            print(
+                f"  Fetched real-time prices for {fetched_count}/{len(candidate_codes)} new candidates",
+                file=sys.stderr,
+            )
+        except Exception as e:
+            print(f"  ⚠ Failed to fetch new candidate prices: {e}", file=sys.stderr)
+
     for p in allowed_new_positions:
         try:
             code = str(p["code"]).split(".")[0]
 
-            # Fill execution-critical fields from deterministic Phase 1 data when LLM omits them
-            entry_price = p.get("entry_price")
-            if entry_price in (None, "", 0):
-                price_info = data.get("position_prices", {}).get(code, {})
-                if isinstance(price_info, dict):
-                    entry_price = price_info.get("price") or price_info.get("current_price")
+            # --- Determine entry price from real market data first ---
+            real_price_data = new_candidate_prices.get(code, {})
+            real_price = None
+            day_ohlc = None
+            if isinstance(real_price_data, dict) and not real_price_data.get("error"):
+                real_price = real_price_data.get("price")
+                if real_price_data.get("open") and real_price_data.get("high") and real_price_data.get("low"):
+                    day_ohlc = {
+                        "open": real_price_data["open"],
+                        "high": real_price_data["high"],
+                        "low": real_price_data["low"],
+                        "close": real_price_data.get("price"),
+                    }
 
-            if entry_price in (None, "", 0):
-                for s in data.get("strategy_pool", {}).get("stocks", []):
-                    if str(s.get("code", "")).split(".")[0] == code:
-                        entry_price = s.get("price") or s.get("close")
-                        if entry_price not in (None, "", 0):
-                            break
+            # LLM-provided entry price (may be stale/wrong)
+            llm_entry_price = p.get("entry_price")
+
+            # Priority: real market price > LLM price > strategy pool price
+            if real_price and real_price > 0:
+                entry_price = float(real_price)
+                # If LLM provided a price, check if it's tradable
+                if llm_entry_price not in (None, "", 0) and day_ohlc:
+                    llm_ep = float(llm_entry_price)
+                    if llm_ep < day_ohlc["low"] or llm_ep > day_ohlc["high"]:
+                        log["actions"].append(
+                            f"PRICE_CORRECTED {code}: LLM={llm_ep} outside "
+                            f"[{day_ohlc['low']},{day_ohlc['high']}], "
+                            f"using market={entry_price}"
+                        )
+                    else:
+                        # LLM price is within range, use it (it may be more
+                        # specific, e.g., a breakout level)
+                        entry_price = llm_ep
+            else:
+                # No real-time price available — fall back to LLM/pool prices
+                entry_price = llm_entry_price
+                if entry_price in (None, "", 0):
+                    price_info = data.get("position_prices", {}).get(code, {})
+                    if isinstance(price_info, dict):
+                        entry_price = price_info.get("price") or price_info.get("current_price")
+
+                if entry_price in (None, "", 0):
+                    for s in data.get("strategy_pool", {}).get("stocks", []):
+                        if str(s.get("code", "")).split(".")[0] == code:
+                            entry_price = s.get("price") or s.get("close")
+                            if entry_price not in (None, "", 0):
+                                break
+
+                if entry_price not in (None, "", 0):
+                    entry_price = float(entry_price)
+                    # Warn: using fallback price without OHLC validation
+                    log["actions"].append(
+                        f"WARN {code}: no real-time price, using fallback={entry_price}"
+                    )
 
             stop_loss = p.get("stop", p.get("stopLoss"))
             target_price = p.get("target", p.get("targetPrice"))
@@ -989,6 +1051,9 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
                 if str(s.get("code", "")).split(".")[0] == code:
                     stock_change = s.get("change_pct")
                     break
+            # Also check real-time change_pct from live data
+            if stock_change is None and isinstance(real_price_data, dict):
+                stock_change = real_price_data.get("change_pct")
             if stock_change is not None and stock_change >= 9.8:
                 log["actions"].append(f"SKIP OPEN {code}: 涨停 (change {stock_change}%), cannot buy at daily limit")
                 continue
@@ -1007,8 +1072,9 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
                 "catalysts": p.get("catalysts", []),
                 "sourceWatchlist": date,
                 "note": p.get("note", f"LLM开仓 {p.get('name', '')}"),
+                "day_ohlc": day_ohlc,
             })
-            log["actions"].append(f"OPEN {code}")
+            log["actions"].append(f"OPEN {code} @ {entry_price}")
             daily_actions.append({
                 "code": code,
                 "name": p.get("name", ""),

@@ -4,13 +4,13 @@
   "status": "active",
   "thesis": "Semicap equipment is participating in today's electronics-led rally, and the stock fits the sweet-spot RPS with clean MA distances. Not extended, so this is a valid momentum re-entry candidate if looking to rotate from cold chemical exposure into hot tech beta.",
   "entryDate": "2026-04-08",
-  "entryPrice": 169.46,
-  "targetPrice": 195.0,
-  "stopLoss": 160.99,
-  "currentStop": 160.99,
+  "entryPrice": 177.36,
+  "targetPrice": 204.09,
+  "stopLoss": 168.5,
+  "currentStop": 168.5,
   "allocation_pct": 5,
   "shares": 200,
-  "allocatedCapital": 33892.0,
+  "allocatedCapital": 35472.0,
   "rating": 2,
   "rps120": 85.85,
   "sector": "电子/半导体设备",
@@ -19,10 +19,10 @@
   "history": [
     {
       "date": "2026-04-08",
-      "price": 169.46,
+      "price": 177.36,
       "change_pct": 0,
       "action": "OPEN",
-      "note": "LLM开仓 芯源微"
+      "note": "LLM开仓 芯源微 (corrected: original 169.46 was stale Mar 31 close, outside Apr 8 range [173.36,180.28], corrected to open 177.36)"
     }
   ],
   "exitDate": null,
@@ -33,5 +33,16 @@
   "lessonLearned": null,
   "createdAt": "2026-04-08T11:51:08.642286+08:00",
   "updatedAt": "2026-04-08T11:51:08.642288+08:00",
-  "trackerVersion": "2.1"
+  "trackerVersion": "2.1",
+  "_correction": {
+    "date": "2026-04-08",
+    "reason": "Entry price 169.46 was impossible on Apr 8 (day low was 173.36). Pricedb was stale. Corrected to Apr 8 open.",
+    "original_entryPrice": 169.46,
+    "corrected_entryPrice": 177.36,
+    "apr8_ohlc": {
+      "open": 177.36,
+      "high": 180.28,
+      "low": 173.36
+    }
+  }
 }

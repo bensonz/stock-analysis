@@ -4,13 +4,13 @@
   "status": "closed",
   "thesis": "Strong broad tape favors fresh momentum; stock sits in RPS sweet spot, has 155% net profit growth, no listed risk factors, and price is not overextended from MA support.",
   "entryDate": "2026-04-01",
-  "entryPrice": 216.56,
+  "entryPrice": 224.0,
   "targetPrice": 259.87,
   "stopLoss": 205.73,
   "currentStop": 216.56,
   "allocation_pct": 6,
   "shares": 200,
-  "allocatedCapital": 43312.0,
+  "allocatedCapital": 44800.0,
   "rating": 2,
   "rps120": 86.69,
   "sector": "激光设备",
@@ -19,10 +19,10 @@
   "history": [
     {
       "date": "2026-04-01",
-      "price": 216.56,
+      "price": 224.0,
       "change_pct": 0,
       "action": "OPEN",
-      "note": "LLM开仓 杰普特"
+      "note": "LLM开仓 杰普特 (corrected: original 216.56 was stale Mar 31 close, Apr 1 range [222,243.2], corrected to open 224.0)"
     },
     {
       "date": "2026-04-01",
@@ -40,19 +40,41 @@
     },
     {
       "date": "2026-04-02",
-      "price": 216.56,
-      "change_pct": 0.0,
+      "price": 232.9,
+      "change_pct": 3.97,
       "action": "SELL",
-      "note": "Market entry regime is weak (breadth 0.22:1, 0/3 major indices green), 科创50 -2.89%, and the position has already been tightened to breakeven stop after +10%. Rule check also flags CRITICAL stop proximity at 0.0% above stop, so proactive exit is preferred rather than waiting for an exact trigger in a weak tape."
+      "note": "Market entry regime is weak (breadth 0.22:1, 0/3 major indices green), 科创50 -2.89%, and the position has already been tightened to breakeven stop after +10%. Rule check also flags CRITICAL stop proximity at 0.0% above stop, so proactive exit is preferred rather than waiting for an exact trigger in a weak tape. (corrected: original exit 216.56 was stale, actual Apr 2 close = 232.9)"
     }
   ],
   "exitDate": "2026-04-02",
-  "exitPrice": 216.56,
+  "exitPrice": 232.9,
   "exitReason": "Market entry regime is weak (breadth 0.22:1, 0/3 major indices green), 科创50 -2.89%, and the position has already been tightened to breakeven stop after +10%. Rule check also flags CRITICAL stop proximity at 0.0% above stop, so proactive exit is preferred rather than waiting for an exact trigger in a weak tape.",
-  "returnPct": 0.0,
+  "returnPct": 3.97,
   "holdingDays": 1,
   "lessonLearned": "",
   "createdAt": "2026-04-01T11:22:41.128091+08:00",
   "updatedAt": "2026-04-02T14:39:30.287525+08:00",
-  "trackerVersion": "2.1"
+  "trackerVersion": "2.1",
+  "_correction": {
+    "date": "2026-04-08",
+    "reason": "Both entry and exit prices were stale pricedb values from 2026-03-31. Corrected to actual market prices.",
+    "original_entryPrice": 216.56,
+    "corrected_entryPrice": 224.0,
+    "original_exitPrice": 216.56,
+    "corrected_exitPrice": 232.9,
+    "original_returnPct": 0.0,
+    "corrected_returnPct": 3.97,
+    "apr1_ohlc": {
+      "open": 224.0,
+      "high": 243.2,
+      "low": 222.0,
+      "close": 241.0
+    },
+    "apr2_ohlc": {
+      "open": 240.26,
+      "high": 251.79,
+      "low": 232.01,
+      "close": 232.9
+    }
+  }
 }

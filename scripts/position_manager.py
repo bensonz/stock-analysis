@@ -294,6 +294,7 @@ def open_position(data: dict) -> dict:
     Args:
         data: Must contain at minimum: code, name, entryPrice, targetPrice, stopLoss, thesis.
               Optional: rating, rps120, sector, catalysts, confidence, allocation_pct.
+              Optional: day_ohlc — dict with {open, high, low, close} for OHLC validation.
 
     Returns:
         The created position dict.
@@ -311,6 +312,23 @@ def open_position(data: dict) -> dict:
         raise ValueError(f"Missing or invalid stopLoss for {code}: {stop_loss!r}")
     if not isinstance(target_price, (int, float)) or target_price <= 0:
         raise ValueError(f"Missing or invalid targetPrice for {code}: {target_price!r}")
+
+    # OHLC validation: entry price must be within the day's tradable range
+    day_ohlc = data.get("day_ohlc")
+    if day_ohlc:
+        day_low = day_ohlc.get("low")
+        day_high = day_ohlc.get("high")
+        if (
+            isinstance(day_low, (int, float))
+            and isinstance(day_high, (int, float))
+            and day_low > 0
+            and day_high > 0
+        ):
+            if entry_price < day_low or entry_price > day_high:
+                raise ValueError(
+                    f"Entry price {entry_price} for {code} is outside the day's "
+                    f"tradable range [{day_low}, {day_high}]"
+                )
 
     pos_file = TRACKING_DIR / f"{code}.json"
     if pos_file.exists():

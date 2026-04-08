@@ -4,13 +4,13 @@
   "status": "active",
   "thesis": "订单催化新鲜，位置贴近MA，RPS在扩展区内且没有过热；更适合作为小仓位跟踪型进攻单。",
   "entryDate": "2026-04-07",
-  "entryPrice": 16.66,
-  "targetPrice": 19.2,
-  "stopLoss": 15.83,
-  "currentStop": 15.83,
+  "entryPrice": 16.38,
+  "targetPrice": 18.88,
+  "stopLoss": 15.56,
+  "currentStop": 15.56,
   "allocation_pct": 4,
   "shares": 1600,
-  "allocatedCapital": 26656.0,
+  "allocatedCapital": 26208.0,
   "rating": 2,
   "rps120": 93.49,
   "sector": "建筑装饰",
@@ -19,10 +19,10 @@
   "history": [
     {
       "date": "2026-04-07",
-      "price": 16.66,
+      "price": 16.38,
       "change_pct": 0,
       "action": "OPEN",
-      "note": "LLM开仓 利柏特"
+      "note": "LLM开仓 利柏特 (corrected: original 16.66 was stale Mar 31 close, outside Apr 7 range [15.75,16.49], corrected to open 16.38)"
     },
     {
       "date": "2026-04-08",
@@ -40,5 +40,17 @@
   "lessonLearned": null,
   "createdAt": "2026-04-07T14:38:30.422544+08:00",
   "updatedAt": "2026-04-08T11:51:08.640065+08:00",
-  "trackerVersion": "2.1"
+  "trackerVersion": "2.1",
+  "_correction": {
+    "date": "2026-04-08",
+    "reason": "Entry price 16.66 was impossible on Apr 7 (day high was 16.49). Pricedb was stale. Corrected to Apr 7 open.",
+    "original_entryPrice": 16.66,
+    "corrected_entryPrice": 16.38,
+    "apr7_ohlc": {
+      "open": 16.38,
+      "high": 16.49,
+      "low": 15.75,
+      "close": 15.87
+    }
+  }
 }
