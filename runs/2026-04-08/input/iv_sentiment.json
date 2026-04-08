@@ -1,0 +1,544 @@
+{
+  "date": "2026-04-08",
+  "source": "options-learn backend (/api/history/iv-rank)",
+  "core_underlyings": [
+    "510050",
+    "510300",
+    "510500",
+    "588000",
+    "159915"
+  ],
+  "etf_iv_data": [
+    {
+      "underlying": "510050",
+      "lookback_days": 252,
+      "data_points": 242,
+      "data_points_filtered": 238,
+      "current_iv": 0.1565,
+      "is_live": false,
+      "iv_high": 0.2471,
+      "iv_low": 0.1154,
+      "iv_high_raw": 0.3082,
+      "iv_low_raw": 0.1154,
+      "iv_rank": 0.3122,
+      "iv_rank_raw": 0.2132,
+      "iv_percentile": 0.3109,
+      "iv_percentile_raw": 0.3058,
+      "outliers_removed": 4,
+      "outlier_details": [
+        {
+          "date": "2025-04-08",
+          "iv": 0.3082
+        },
+        {
+          "date": "2025-04-09",
+          "iv": 0.2889
+        },
+        {
+          "date": "2025-04-10",
+          "iv": 0.2782
+        },
+        {
+          "date": "2025-04-11",
+          "iv": 0.2656
+        }
+      ],
+      "sigma_range": [
+        0.1087,
+        0.249
+      ],
+      "name": "50ETF",
+      "desc": "大盘蓝筹",
+      "interpretation": "中性"
+    },
+    {
+      "underlying": "510300",
+      "lookback_days": 252,
+      "data_points": 242,
+      "data_points_filtered": 233,
+      "current_iv": 0.1806,
+      "is_live": false,
+      "iv_high": 0.2694,
+      "iv_low": 0.1267,
+      "iv_high_raw": 0.378,
+      "iv_low_raw": 0.1267,
+      "iv_rank": 0.3779,
+      "iv_rank_raw": 0.2146,
+      "iv_percentile": 0.412,
+      "iv_percentile_raw": 0.3967,
+      "outliers_removed": 9,
+      "outlier_details": [
+        {
+          "date": "2025-04-08",
+          "iv": 0.378
+        },
+        {
+          "date": "2025-04-09",
+          "iv": 0.357
+        },
+        {
+          "date": "2025-04-10",
+          "iv": 0.3377
+        },
+        {
+          "date": "2025-04-11",
+          "iv": 0.3301
+        },
+        {
+          "date": "2025-04-14",
+          "iv": 0.2932
+        },
+        {
+          "date": "2025-04-15",
+          "iv": 0.2872
+        },
+        {
+          "date": "2025-04-16",
+          "iv": 0.2942
+        },
+        {
+          "date": "2025-04-17",
+          "iv": 0.301
+        },
+        {
+          "date": "2025-04-18",
+          "iv": 0.3041
+        }
+      ],
+      "sigma_range": [
+        0.1097,
+        0.2839
+      ],
+      "name": "300ETF",
+      "desc": "沪深300",
+      "interpretation": "中性"
+    },
+    {
+      "underlying": "510500",
+      "lookback_days": 252,
+      "data_points": 242,
+      "data_points_filtered": 233,
+      "current_iv": 0.2447,
+      "is_live": false,
+      "iv_high": 0.392,
+      "iv_low": 0.2081,
+      "iv_high_raw": 0.5213,
+      "iv_low_raw": 0.2081,
+      "iv_rank": 0.1992,
+      "iv_rank_raw": 0.117,
+      "iv_percentile": 0.2318,
+      "iv_percentile_raw": 0.2231,
+      "outliers_removed": 9,
+      "outlier_details": [
+        {
+          "date": "2025-04-08",
+          "iv": 0.5213
+        },
+        {
+          "date": "2025-04-09",
+          "iv": 0.4979
+        },
+        {
+          "date": "2025-04-10",
+          "iv": 0.4601
+        },
+        {
+          "date": "2025-04-11",
+          "iv": 0.4582
+        },
+        {
+          "date": "2025-04-14",
+          "iv": 0.4252
+        },
+        {
+          "date": "2025-04-15",
+          "iv": 0.4397
+        },
+        {
+          "date": "2025-04-16",
+          "iv": 0.4587
+        },
+        {
+          "date": "2025-04-17",
+          "iv": 0.4634
+        },
+        {
+          "date": "2025-04-18",
+          "iv": 0.4138
+        }
+      ],
+      "sigma_range": [
+        0.1791,
+        0.4078
+      ],
+      "name": "500ETF",
+      "desc": "中证500",
+      "interpretation": "低 (市场偏乐观，波动率便宜)"
+    },
+    {
+      "underlying": "588000",
+      "lookback_days": 252,
+      "data_points": 242,
+      "data_points_filtered": 236,
+      "current_iv": 0.303,
+      "is_live": false,
+      "iv_high": 0.5662,
+      "iv_low": 0.2467,
+      "iv_high_raw": 0.6722,
+      "iv_low_raw": 0.2467,
+      "iv_rank": 0.1763,
+      "iv_rank_raw": 0.1324,
+      "iv_percentile": 0.2034,
+      "iv_percentile_raw": 0.1983,
+      "outliers_removed": 6,
+      "outlier_details": [
+        {
+          "date": "2025-04-08",
+          "iv": 0.6722
+        },
+        {
+          "date": "2025-04-09",
+          "iv": 0.6225
+        },
+        {
+          "date": "2025-04-10",
+          "iv": 0.5782
+        },
+        {
+          "date": "2025-08-25",
+          "iv": 0.6237
+        },
+        {
+          "date": "2025-08-28",
+          "iv": 0.6222
+        },
+        {
+          "date": "2025-08-29",
+          "iv": 0.6345
+        }
+      ],
+      "sigma_range": [
+        0.2108,
+        0.5684
+      ],
+      "name": "科创50",
+      "desc": "科创板",
+      "interpretation": "低 (市场偏乐观，波动率便宜)"
+    },
+    {
+      "underlying": "159915",
+      "lookback_days": 252,
+      "data_points": 242,
+      "data_points_filtered": 233,
+      "current_iv": 0.2703,
+      "is_live": false,
+      "iv_high": 0.4678,
+      "iv_low": 0.2082,
+      "iv_high_raw": 0.5688,
+      "iv_low_raw": 0.2082,
+      "iv_rank": 0.2393,
+      "iv_rank_raw": 0.1723,
+      "iv_percentile": 0.2446,
+      "iv_percentile_raw": 0.2355,
+      "outliers_removed": 9,
+      "outlier_details": [
+        {
+          "date": "2025-04-08",
+          "iv": 0.5688
+        },
+        {
+          "date": "2025-04-09",
+          "iv": 0.5608
+        },
+        {
+          "date": "2025-04-10",
+          "iv": 0.4967
+        },
+        {
+          "date": "2025-04-11",
+          "iv": 0.4865
+        },
+        {
+          "date": "2025-08-29",
+          "iv": 0.4704
+        },
+        {
+          "date": "2025-09-05",
+          "iv": 0.5002
+        },
+        {
+          "date": "2025-09-17",
+          "iv": 0.4913
+        },
+        {
+          "date": "2025-09-18",
+          "iv": 0.473
+        },
+        {
+          "date": "2025-09-26",
+          "iv": 0.472
+        }
+      ],
+      "sigma_range": [
+        0.1798,
+        0.4702
+      ],
+      "name": "创业板ETF",
+      "desc": "创业板",
+      "interpretation": "低 (市场偏乐观，波动率便宜)"
+    },
+    {
+      "underlying": "159922",
+      "lookback_days": 252,
+      "data_points": 242,
+      "data_points_filtered": 232,
+      "current_iv": 0.2717,
+      "is_live": false,
+      "iv_high": 0.3669,
+      "iv_low": 0.1804,
+      "iv_high_raw": 0.4353,
+      "iv_low_raw": 0.1804,
+      "iv_rank": 0.4897,
+      "iv_rank_raw": 0.3582,
+      "iv_percentile": 0.5905,
+      "iv_percentile_raw": 0.5661,
+      "outliers_removed": 10,
+      "outlier_details": [
+        {
+          "date": "2025-04-08",
+          "iv": 0.4353
+        },
+        {
+          "date": "2025-04-09",
+          "iv": 0.4154
+        },
+        {
+          "date": "2025-04-10",
+          "iv": 0.3809
+        },
+        {
+          "date": "2025-04-18",
+          "iv": 0.3697
+        },
+        {
+          "date": "2025-05-22",
+          "iv": 0.3689
+        },
+        {
+          "date": "2025-05-23",
+          "iv": 0.3804
+        },
+        {
+          "date": "2025-05-26",
+          "iv": 0.3845
+        },
+        {
+          "date": "2025-05-27",
+          "iv": 0.3817
+        },
+        {
+          "date": "2025-05-28",
+          "iv": 0.3866
+        },
+        {
+          "date": "2025-05-30",
+          "iv": 0.3694
+        }
+      ],
+      "sigma_range": [
+        0.1728,
+        0.3676
+      ],
+      "name": "500ETF深",
+      "desc": "深市中盘",
+      "interpretation": "中性"
+    },
+    {
+      "underlying": "159919",
+      "lookback_days": 252,
+      "data_points": 242,
+      "data_points_filtered": 233,
+      "current_iv": 0.178,
+      "is_live": false,
+      "iv_high": 0.284,
+      "iv_low": 0.1298,
+      "iv_high_raw": 0.3569,
+      "iv_low_raw": 0.1298,
+      "iv_rank": 0.3127,
+      "iv_rank_raw": 0.2123,
+      "iv_percentile": 0.3906,
+      "iv_percentile_raw": 0.376,
+      "outliers_removed": 9,
+      "outlier_details": [
+        {
+          "date": "2025-04-08",
+          "iv": 0.3569
+        },
+        {
+          "date": "2025-04-09",
+          "iv": 0.3443
+        },
+        {
+          "date": "2025-04-10",
+          "iv": 0.3303
+        },
+        {
+          "date": "2025-04-11",
+          "iv": 0.3265
+        },
+        {
+          "date": "2025-04-14",
+          "iv": 0.2982
+        },
+        {
+          "date": "2025-04-15",
+          "iv": 0.2905
+        },
+        {
+          "date": "2025-04-16",
+          "iv": 0.2955
+        },
+        {
+          "date": "2025-04-17",
+          "iv": 0.3054
+        },
+        {
+          "date": "2025-04-18",
+          "iv": 0.3136
+        }
+      ],
+      "sigma_range": [
+        0.1116,
+        0.2893
+      ],
+      "name": "300ETF深",
+      "desc": "深市宽基",
+      "interpretation": "中性"
+    },
+    {
+      "underlying": "159901",
+      "lookback_days": 252,
+      "data_points": 242,
+      "data_points_filtered": 233,
+      "current_iv": 0.2084,
+      "is_live": false,
+      "iv_high": 0.3452,
+      "iv_low": 0.1682,
+      "iv_high_raw": 0.4139,
+      "iv_low_raw": 0.1682,
+      "iv_rank": 0.2269,
+      "iv_rank_raw": 0.1635,
+      "iv_percentile": 0.2833,
+      "iv_percentile_raw": 0.2727,
+      "outliers_removed": 9,
+      "outlier_details": [
+        {
+          "date": "2025-04-08",
+          "iv": 0.4077
+        },
+        {
+          "date": "2025-04-09",
+          "iv": 0.4139
+        },
+        {
+          "date": "2025-04-10",
+          "iv": 0.3898
+        },
+        {
+          "date": "2025-04-11",
+          "iv": 0.3674
+        },
+        {
+          "date": "2025-05-26",
+          "iv": 0.3622
+        },
+        {
+          "date": "2025-05-27",
+          "iv": 0.3555
+        },
+        {
+          "date": "2025-05-28",
+          "iv": 0.3614
+        },
+        {
+          "date": "2025-05-30",
+          "iv": 0.3492
+        },
+        {
+          "date": "2025-08-20",
+          "iv": 0.3484
+        }
+      ],
+      "sigma_range": [
+        0.1452,
+        0.3465
+      ],
+      "name": "深100ETF",
+      "desc": "深市蓝筹",
+      "interpretation": "低 (市场偏乐观，波动率便宜)"
+    },
+    {
+      "underlying": "588080",
+      "lookback_days": 252,
+      "data_points": 242,
+      "data_points_filtered": 236,
+      "current_iv": 0.3072,
+      "is_live": false,
+      "iv_high": 0.5588,
+      "iv_low": 0.2519,
+      "iv_high_raw": 0.6473,
+      "iv_low_raw": 0.2519,
+      "iv_rank": 0.1802,
+      "iv_rank_raw": 0.1399,
+      "iv_percentile": 0.2331,
+      "iv_percentile_raw": 0.2273,
+      "outliers_removed": 6,
+      "outlier_details": [
+        {
+          "date": "2025-04-08",
+          "iv": 0.6473
+        },
+        {
+          "date": "2025-04-09",
+          "iv": 0.6084
+        },
+        {
+          "date": "2025-04-10",
+          "iv": 0.5762
+        },
+        {
+          "date": "2025-08-25",
+          "iv": 0.604
+        },
+        {
+          "date": "2025-08-28",
+          "iv": 0.5935
+        },
+        {
+          "date": "2025-08-29",
+          "iv": 0.6042
+        }
+      ],
+      "sigma_range": [
+        0.2142,
+        0.5633
+      ],
+      "name": "科创板50",
+      "desc": "科创板（备用代理）",
+      "interpretation": "低 (市场偏乐观，波动率便宜)"
+    }
+  ],
+  "overall_sentiment": {
+    "signal": "偏乐观",
+    "avg_iv_rank": 0.261,
+    "avg_iv_percentile": 0.2805,
+    "implication": "波动率偏低，市场情绪稳定。中期趋势可能延续，但关注IV拐点。",
+    "based_on": [
+      "510050",
+      "510300",
+      "510500",
+      "588000",
+      "159915"
+    ]
+  }
+}

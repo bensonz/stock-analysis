@@ -1,0 +1,224 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "广告营销",
+        "5d_pct": 8.88,
+        "trend": "accelerating"
+      },
+      {
+        "name": "贵金属",
+        "5d_pct": 8.06,
+        "trend": "accelerating"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": 7.92,
+        "trend": "accelerating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": 7.04,
+        "trend": "accelerating"
+      },
+      {
+        "name": "工业金属",
+        "5d_pct": 6.08,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": -7.11,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "油服工程",
+        "5d_pct": -5.86,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "煤炭开采",
+        "5d_pct": -2.42,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "炼化及贸易",
+        "5d_pct": -1.34,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "化学原料",
+        "5d_pct": -1.22,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/3 positions in hot sectors",
+    "regime": "Broad risk-on rally led by media/electronics/metals, while oil and basic chemicals lag; leadership has rotated away from prior chemical winners."
+  },
+  "position_decisions": [
+    {
+      "code": "600426",
+      "name": "华鲁恒升",
+      "action": "SELL",
+      "reason": "Sector gravity turned negative: position sector 基础化工 aligns with 化学原料 in bottom group today, so despite price staying above stop the setup has lost sector support. Rule 1/sector overlay says cold sector positions should be exited rather than rationalized. Volume is also below MAVOL30, so no momentum confirmation.",
+      "sector_rank": "bottom 30%",
+      "new_stop": null,
+      "pnl_pct": 3.83,
+      "days_held": 1,
+      "exit_price": 38.0
+    },
+    {
+      "code": "601208",
+      "name": "东材科技",
+      "action": "SELL",
+      "reason": "Position is profitable, but sector is no longer in leadership: 基础化工/化学链 is in the market bottom group today. This violates the sector-first overlay. Holding a winner in a cold sector is exactly the V1 mistake. Volume is also only 69.1% of MAVOL30, so follow-through is weaker than the tape suggests.",
+      "sector_rank": "bottom 30%",
+      "new_stop": null,
+      "pnl_pct": 11.18,
+      "days_held": 1,
+      "exit_price": 33.12
+    },
+    {
+      "code": "605167",
+      "name": "利柏特",
+      "action": "HOLD",
+      "reason": "Still above stop with fresh EPC/order catalyst, acceptable MA position, and not in a confirmed cold sector from today's sector table. Keep position but monitor closely because current price is only 3.48% above stop and volume is weak at 25.7% of MAVOL30.",
+      "sector_rank": "middle",
+      "new_stop": null,
+      "pnl_pct": -1.56,
+      "days_held": 1,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "688025",
+      "name": "杰普特",
+      "entry_price": 216.56,
+      "allocation_pct": 5,
+      "stop": 205.73,
+      "target": 255.0,
+      "thesis": "High-growth laser equipment name with strong earnings catalyst and institutional sponsorship; broad tech tape is very strong today, and the stock sits in the RPS sweet spot without violating MA chase rules.",
+      "sector": "机械设备/激光设备",
+      "sector_rank": "top 30%",
+      "catalyst": "Latest quarter net profit同比增长155%，机构研报继续上修26-28年利润预期；“光+AI”成长逻辑仍在发酵",
+      "catalyst_freshness": "ongoing",
+      "rps120": 86.69,
+      "conviction": "moderate"
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "entry_price": 169.46,
+      "allocation_pct": 5,
+      "stop": 160.99,
+      "target": 195.0,
+      "thesis": "Semicap equipment is participating in today's electronics-led rally, and the stock fits the sweet-spot RPS with clean MA distances. Not extended, so this is a valid momentum re-entry candidate if looking to rotate from cold chemical exposure into hot tech beta.",
+      "sector": "电子/半导体设备",
+      "sector_rank": "top 10%",
+      "catalyst": "半导体设备板块盘中拉升，订单/合同负债较高，资金重新回流设备链",
+      "catalyst_freshness": "ongoing",
+      "rps120": 85.85,
+      "conviction": "moderate"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "reason": "Sector/theme is acceptable, but fails non-negotiable MA chase rule: dist_ma5_pct 7.0% and dist_ma10_pct 8.3%, both above limits. Wait for pullback.",
+      "rps120": 91.15
+    },
+    {
+      "code": "600498",
+      "name": "烽火通信",
+      "reason": "Overextended after surge: dist_ma5_pct 11.2% and dist_ma10_pct 13.1% violate no-chasing rule despite strong catalyst.",
+      "rps120": 95.3
+    },
+    {
+      "code": "603115",
+      "name": "海星股份",
+      "reason": "Industrial metals sector is hot, but stock is far too extended: dist_ma5_pct 12.5%, dist_ma10_pct 25.0%, dist_ma20_pct 34.5. This is pure chase territory.",
+      "rps120": 97.08
+    },
+    {
+      "code": "605196",
+      "name": "华通线缆",
+      "reason": "RPS120 95.36 is above standard range and recent 10-day price strength in input is weak; better setups exist in today's tech leadership.",
+      "rps120": 95.36
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "Industrial metals are strong, but stock sits 13.1% below MA20 and appears to be in a post-run digestion rather than clean entry position; not a top-priority breakout setup.",
+      "rps120": 93.29
+    },
+    {
+      "code": "603306",
+      "name": "华懋科技",
+      "reason": "Sector is 汽车零部件, which is not in today's top leadership group. Sector-first rule keeps this as skip even with decent stock-specific setup.",
+      "rps120": 92.83
+    },
+    {
+      "code": "603663",
+      "name": "三祥新材",
+      "reason": "Sector (化学原料) is in bottom group today. No entry regardless of individual RPS.",
+      "rps120": 91.77
+    },
+    {
+      "code": "601615",
+      "name": "明阳智能",
+      "reason": "Trend damage is too deep: dist_ma10_pct -9.6% and dist_ma20_pct -13.5 with weak short-term price strength in input. Not momentum leadership.",
+      "rps120": 90.8
+    },
+    {
+      "code": "603191",
+      "name": "望变电气",
+      "reason": "Electric grid names are interesting, but this one has weak 10-day relative strength in input and sits below key MAs; not the cleanest leader.",
+      "rps120": 89.45
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Strong breadth does not override sector rotation inside the book: when yesterday's holdings are in today's cold sectors, the right move is to rotate out even if individual PnL is positive.",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "exit-rule",
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "A broad rally can hide sharp internal rotation; capital leaving a previously hot industry often suppresses follow-through in yesterday's winners."
+    },
+    {
+      "text": "No-chasing MA filters remain critical on strong tape: several attractive names today failed only because they were too far above MA5/MA10, which is exactly where momentum traders donate open profits back.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "",
+      "mechanism": "In euphoric breadth, extension risk rises because many stocks gap away from support; buying support beats buying emotional expansion."
+    },
+    {
+      "text": "Low-IV backdrop is not a reason to stop buying, but it does favor cleaner base-and-breakout entries over vertical spikes.",
+      "type": "signal",
+      "tags": [
+        "timing",
+        "entry-filter",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "",
+      "mechanism": "When implied volatility is low, upside can still trend, but mean-reversion risk after overextended entries becomes more painful because option markets are not pricing large rescue moves."
+    }
+  ],
+  "market_summary": "Breadth 11.1:1 bullish, 91涨停/11跌停, 3/3 major indices green with 创业板指+4.81% and 科创50+5.05%, a genuine risk-on tape. Hot sectors are 广告营销(+8.88%), 贵金属(+8.06%), 其他电子Ⅱ(+7.92%), 元件(+7.04%), 工业金属(+6.08%); cold sectors are 油气开采Ⅱ(-7.11%), 油服工程(-5.86%), 煤炭开采(-2.42%), 炼化及贸易(-1.34%), 化学原料(-1.22%). Position sector alignment is 0/3 in hot sectors, so book rotation is needed. IV context is benign-to-low (overall avg IV rank 26.1%; 300ETF 37.8%, 500ETF 19.9%, 科创50 17.6%), allowing new longs but favoring non-extended setups over spike chasing.",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

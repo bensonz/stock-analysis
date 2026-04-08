@@ -1,0 +1,75 @@
+{
+  "date": "2026-04-08",
+  "actions": [
+    {
+      "code": "600426",
+      "name": "华鲁恒升",
+      "action": "SELL",
+      "price": 38.0,
+      "pnl_pct": 3.83,
+      "note": "Sector gravity turned negative: position sector 基础化工 aligns with 化学原料 in bottom group today, so despite price staying above stop the setup has lost sector support. Rule 1/sector overlay says cold sector positions should be exited rather than rationalized. Volume is also below MAVOL30, so no momentum confirmation."
+    },
+    {
+      "code": "601208",
+      "name": "东材科技",
+      "action": "SELL",
+      "price": 33.12,
+      "pnl_pct": 11.18,
+      "note": "Position is profitable, but sector is no longer in leadership: 基础化工/化学链 is in the market bottom group today. This violates the sector-first overlay. Holding a winner in a cold sector is exactly the V1 mistake. Volume is also only 69.1% of MAVOL30, so follow-through is weaker than the tape suggests."
+    },
+    {
+      "code": "605167",
+      "name": "利柏特",
+      "action": "HOLD",
+      "price": 16.4,
+      "pnl_pct": -1.56,
+      "note": "Still above stop with fresh EPC/order catalyst, acceptable MA position, and not in a confirmed cold sector from today's sector table. Keep position but monitor closely because current price is only 3.48% above stop and volume is weak at 25.7% of MAVOL30."
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "action": "OPEN",
+      "price": 169.46,
+      "note": "Semicap equipment is participating in today's electronics-led rally, and the stock fits the sweet-spot RPS with clean MA distances. Not extended, so this is a valid momentum re-entry candidate if looking to rotate from cold chemical exposure into hot tech beta."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 2,
+    "totalEquity": 957605.0,
+    "dayPnl": 848.0,
+    "dayReturnPct": 0.09,
+    "totalReturnPct": -4.24,
+    "unrealizedPnl": -416.0,
+    "realizedPnl": -41979.0,
+    "cashPct": 93.72
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 11.0574,
+    "up": 5009,
+    "down": 453,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 91,
+    "limit_downs": 11,
+    "reason": "Entry regime strong: breadth 11.06:1, 3/3 major indices green, 91 limit-ups / 11 limit-downs."
+  },
+  "newPositions": [
+    {
+      "code": "688025",
+      "name": "杰普特"
+    },
+    {
+      "code": "688037",
+      "name": "芯源微"
+    }
+  ],
+  "marketContext": {
+    "summary": "Breadth 11.1:1 bullish, 91涨停/11跌停, 3/3 major indices green with 创业板指+4.81% and 科创50+5.05%, a genuine risk-on tape. Hot sectors are 广告营销(+8.88%), 贵金属(+8.06%), 其他电子Ⅱ(+7.92%), 元件(+7.04%), 工业金属(+6.08%); cold sectors are 油气开采Ⅱ(-7.11%), 油服工程(-5.86%), 煤炭开采(-2.42%), 炼化及贸易(-1.34%), 化学原料(-1.22%). Position sector alignment is 0/3 in hot sectors, so book rotation is needed. IV context is benign-to-low (overall avg IV rank 26.1%; 300ETF 37.8%, 500ETF 19.9%, 科创50 17.6%), allowing new longs but favoring non-extended setups over spike chasing."
+  }
+}

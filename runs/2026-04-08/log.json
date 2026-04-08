@@ -1,0 +1,143 @@
+{
+  "date": "2026-04-08",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1775620142.2577548,
+      "errors": [
+        "pricedb_update: Could not initialize Tushare: No module named 'tushare'\n  Could not initialize BaoStock: No module named 'baostock'\nUpdate failed. Providers tried:"
+      ],
+      "end": 1775620185.258344,
+      "duration_sec": 43.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8643,
+      "tokens": {
+        "input_tokens": 125998,
+        "output_tokens": 3634
+      },
+      "rounds": 2,
+      "tool_calls_count": 10,
+      "duration_sec": 83.3,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "GPT primary",
+      "primary_model": "gpt-5.4"
+    },
+    {
+      "phase": "apply",
+      "start": 1775620268.632164,
+      "actions": [
+        "SELL 600426",
+        "SELL 601208",
+        "SKIP OPEN 688025: Insufficient deployable cash for minimum lot in 688025: deployable=739760.80, entryPrice=216.56",
+        "OPEN 688037",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=18",
+        "Hypothesis: Updated h021 (hypothesis): +1 supporting evidence → hitRate=100%, n=3",
+        "Hypothesis: Updated h017 (hypothesis): +1 supporting evidence → hitRate=100%, n=3",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 3,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "605167",
+                "name": "利柏特",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 16.4,
+                "stopLoss": 15.83,
+                "distance_pct": 3.48,
+                "suggestion": "🟠 WATCH — 3.5% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "688037",
+                "name": "芯源微",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 169.46,
+                "stopLoss": 160.99,
+                "distance_pct": 5.0,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "605167",
+                "name": "利柏特",
+                "rule": "volume_below_mavol30",
+                "volume": 17059,
+                "mavol30": 66463.07,
+                "ratio_pct": 25.7,
+                "suggestion": "Latest volume 17,059 is below MAVOL30 66,463 (25.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+              }
+            ],
+            "error": null
+          }
+        ]
+      },
+      "end": 1775620268.8182101,
+      "duration_sec": 0.2
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 605167 — 🟠 WATCH — 3.5% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 688037 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_volume_below_mavol30: 605167 — Latest volume 17,059 is below MAVOL30 66,463 (25.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 126.5
+  }
+}
