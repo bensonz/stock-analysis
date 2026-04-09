@@ -66,6 +66,15 @@ from position_manager import (
 from report_generator import generate_candidates_md, generate_watchlist_json, generate_report_md
 from run_rules import run_all_rules
 from validator import validate_data, validate_output
+from contracts import (
+    PipelineStatus,
+    PipelineHardFail,
+    RunManifest,
+    validate_phase1_gate,
+    validate_llm_output_gate,
+    validate_phase3_gate,
+    check_source_health,
+)
 from hypothesis_manager import (
     load_hypotheses,
     save_hypotheses,
@@ -1302,17 +1311,75 @@ def main():
         print(f"Stock Analysis Pipeline — {date} (full auto, {provider_label})", file=sys.stderr)
         print(f"{'='*60}", file=sys.stderr)
 
+        # Pre-flight: Source health check
+        print("Pre-flight: Checking data sources...", file=sys.stderr)
+        health = check_source_health()
+        for src, status in health.items():
+            icon = "✓" if status.get("status") == "ok" else "✗" if status.get("status") in ("down", "proxy_blocked") else "⚠"
+            latency = f" ({status['latency_ms']:.0f}ms)" if "latency_ms" in status else ""
+            extra = f" — {status.get('error', '')}" if status.get("error") else ""
+            if src == "pricedb" and status.get("latest_date"):
+                extra = f" (latest: {status['latest_date']}, stale: {status.get('stale')})"
+            print(f"  {icon} {src}: {status['status']}{latency}{extra}", file=sys.stderr)
+
+        run_dir = get_run_dir(date)
+        manifest = RunManifest(date=date, status=PipelineStatus.SUCCESS)
+        manifest.add_phase("health_check", "ok", details={"sources": health})
+
+        # Warn if critical sources are all down
+        sina_down = health.get("sina", {}).get("status") != "ok"
+        cf_down = health.get("cheesefortune", {}).get("status") != "ok"
+        em_down = health.get("eastmoney", {}).get("status") not in ("ok",)
+        if sina_down and cf_down and em_down:
+            print("  ✗ ALL external data sources are down — pipeline will likely fail", file=sys.stderr)
+
         # Phase 1: Collect
         data = phase1_collect(date)
 
         # Save Phase 1 data
-        run_dir = get_run_dir(date)
         phase1_file = run_dir / "phase1.json"
         save_data = {k: v for k, v in data.items() if k not in ("learnings", "_hypothesis_data", "hypothesis_prompt")}
         phase1_file.write_text(
             json.dumps(save_data, ensure_ascii=False, indent=2, default=str) + "\n",
             encoding="utf-8",
         )
+
+        # Gate 1: Validate Phase 1 output
+        print(f"\nGate 1: Validating Phase 1 data...", file=sys.stderr)
+        gate1 = validate_phase1_gate(data)
+        manifest.add_gate(gate1)
+        manifest.add_phase("collect", "ok" if gate1.passed else "failed",
+                           duration_sec=data.get("_log_phase1", {}).get("duration_sec", 0),
+                           details={"errors": data.get("_log_phase1", {}).get("errors", [])})
+
+        if gate1.soft_warns:
+            for w in gate1.soft_warns:
+                print(f"  ⚠ {w}", file=sys.stderr)
+
+        if not gate1.passed:
+            for f in gate1.hard_fails:
+                print(f"  ✗ {f}", file=sys.stderr)
+            manifest.finalize()
+            # Save manifest
+            (run_dir / "manifest.json").write_text(
+                json.dumps(manifest.to_dict(), ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            print(f"\n{'='*60}", file=sys.stderr)
+            print(f"Pipeline FAILED at Gate 1 with {len(gate1.hard_fails)} hard failure(s)", file=sys.stderr)
+            print(f"No LLM call made. No positions modified.", file=sys.stderr)
+            print(f"{'='*60}", file=sys.stderr)
+            # Print machine-readable failure to stdout for cron
+            print(json.dumps({
+                "date": date,
+                "status": "failed",
+                "failed_at": "gate1_phase1_validation",
+                "hard_fails": gate1.hard_fails,
+                "soft_warns": gate1.soft_warns,
+            }, ensure_ascii=False))
+            sys.exit(1)
+
+        print(f"  ✓ Gate 1 passed", file=sys.stderr)
 
         # Phase 2: Build prompt and call LLM
         phase2_label = "legacy 4-pass" if legacy_llm else provider_label
@@ -1379,6 +1446,40 @@ def main():
               f"{len(llm_result['tool_calls'])} tool calls, "
               f"{llm_result['duration_sec']}s ({source})", file=sys.stderr)
 
+        # Gate 2: Validate LLM output
+        print(f"\nGate 2: Validating LLM response...", file=sys.stderr)
+        gate2 = validate_llm_output_gate(decisions, data)
+        manifest.add_gate(gate2)
+        manifest.add_phase("llm_analysis", "ok" if gate2.passed else "failed",
+                           duration_sec=llm_result["duration_sec"])
+
+        if gate2.soft_warns:
+            for w in gate2.soft_warns:
+                print(f"  ⚠ {w}", file=sys.stderr)
+
+        if not gate2.passed:
+            for f in gate2.hard_fails:
+                print(f"  ✗ {f}", file=sys.stderr)
+            manifest.finalize()
+            (run_dir / "manifest.json").write_text(
+                json.dumps(manifest.to_dict(), ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            print(f"\n{'='*60}", file=sys.stderr)
+            print(f"Pipeline FAILED at Gate 2 with {len(gate2.hard_fails)} hard failure(s)", file=sys.stderr)
+            print(f"LLM ran but response is invalid. No positions modified.", file=sys.stderr)
+            print(f"{'='*60}", file=sys.stderr)
+            print(json.dumps({
+                "date": date,
+                "status": "failed",
+                "failed_at": "gate2_llm_validation",
+                "hard_fails": gate2.hard_fails,
+                "soft_warns": gate2.soft_warns,
+            }, ensure_ascii=False))
+            sys.exit(1)
+
+        print(f"  ✓ Gate 2 passed", file=sys.stderr)
+
         # Phase 3: Apply
         print(f"\nPhase 3: Applying decisions...", file=sys.stderr)
         all_logs = []
@@ -1403,6 +1504,38 @@ def main():
         log3 = phase3_apply(date, decisions, data)
         print(f"  Actions: {log3['actions']}", file=sys.stderr)
         all_logs.append(log3)
+
+        # Gate 3: Validate Phase 3 output
+        print(f"\nGate 3: Validating apply results...", file=sys.stderr)
+        gate3 = validate_phase3_gate(date, log3, data)
+        manifest.add_gate(gate3)
+        manifest.add_phase("apply", "ok" if gate3.passed else "failed",
+                           duration_sec=log3.get("duration_sec", 0))
+
+        if gate3.soft_warns:
+            for w in gate3.soft_warns:
+                print(f"  ⚠ {w}", file=sys.stderr)
+
+        if not gate3.passed:
+            for f in gate3.hard_fails:
+                print(f"  ✗ {f}", file=sys.stderr)
+            manifest.finalize()
+            (run_dir / "manifest.json").write_text(
+                json.dumps(manifest.to_dict(), ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            print(f"\n{'='*60}", file=sys.stderr)
+            print(f"Pipeline FAILED at Gate 3. Apply had errors. Review tracking state.", file=sys.stderr)
+            print(f"{'='*60}", file=sys.stderr)
+            print(json.dumps({
+                "date": date,
+                "status": "failed",
+                "failed_at": "gate3_apply_validation",
+                "hard_fails": gate3.hard_fails,
+            }, ensure_ascii=False))
+            sys.exit(1)
+
+        print(f"  ✓ Gate 3 passed", file=sys.stderr)
 
         # Phase 4: Validate
         print(f"\nPhase 4: Validating...", file=sys.stderr)
@@ -1430,8 +1563,19 @@ def main():
 
         # Summary
         total_sec = sum(l.get("duration_sec", 0) for l in all_logs)
+
+        # Finalize manifest
+        manifest.add_phase("validate", "ok" if not errors else "warnings",
+                           details={"errors": errors})
+        manifest.total_duration_sec = total_sec
+        manifest.finalize()
+        (run_dir / "manifest.json").write_text(
+            json.dumps(manifest.to_dict(), ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+
         print(f"\n{'='*60}", file=sys.stderr)
-        print(f"Pipeline complete in {total_sec:.0f}s", file=sys.stderr)
+        print(f"Pipeline complete in {total_sec:.0f}s ({manifest.status.value})", file=sys.stderr)
         print(f"{'='*60}", file=sys.stderr)
 
         # Print summary to stdout (for cron capture)
@@ -1441,6 +1585,7 @@ def main():
         holds = [a for a in actions if a.get("action") in ("HOLD", "RAISE_STOP")]
         print(json.dumps({
             "date": date,
+            "status": manifest.status.value,
             "sells": len(sells),
             "opens": len(new_pos),
             "holds": len(holds),
@@ -1448,6 +1593,7 @@ def main():
             "tokens": llm_result["input_tokens"] + llm_result["output_tokens"],
             "duration_sec": total_sec,
             "validation_errors": len(errors),
+            "gate_warnings": sum(len(g["soft_warns"]) for g in manifest.gates.values()),
         }, ensure_ascii=False))
         return
 

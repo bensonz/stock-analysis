@@ -846,11 +846,145 @@ def fetch_market_overview() -> dict:
     return result
 
 
+def _fetch_position_prices_sina(positions: list[dict]) -> dict:
+    """Fetch real-time stock prices from Sina Finance.
+
+    Sina hq.sinajs.cn returns full quote data including OHLC, volume, etc.
+    Format for individual stocks: sh600000 (Shanghai) or sz000001 (Shenzhen).
+
+    Response format per stock (comma-separated):
+    0: name, 1: open, 2: prev_close, 3: price, 4: high, 5: low,
+    6: bid, 7: ask, 8: volume (shares), 9: amount (元),
+    ... (bid/ask depth)
+    30: date, 31: time
+
+    Returns dict keyed by code with price data, only for stocks that succeeded.
+    """
+    import re
+    import requests as _req
+
+    if not positions:
+        return {}
+
+    # Build Sina code list: sh + 6-digit code for Shanghai, sz for Shenzhen
+    code_map = {}  # sina_code -> original_code
+    for pos in positions:
+        code = str(pos.get("code", "")).split(".")[0]
+        if not code or len(code) != 6:
+            continue
+        # Shanghai: starts with 6, 9, or 5 (for ETFs); Shenzhen: starts with 0, 3, or 1
+        # 科创板 (688xxx) is Shanghai
+        if code.startswith(("6", "9", "5")):
+            sina_code = f"sh{code}"
+        elif code.startswith(("0", "3", "1", "2")):
+            sina_code = f"sz{code}"
+        else:
+            continue
+        code_map[sina_code] = code
+
+    if not code_map:
+        return {}
+
+    prices = {}
+    try:
+        codes_str = ",".join(code_map.keys())
+        url = f"https://hq.sinajs.cn/list={codes_str}"
+        s = _req.Session()
+        s.trust_env = False  # Skip system proxy
+        r = s.get(url, headers={"Referer": "https://finance.sina.com.cn"}, timeout=10)
+        r.raise_for_status()
+
+        today_str = datetime.now().strftime("%Y-%m-%d")
+        name_map = {pos.get("code", "").split(".")[0]: pos.get("name", "") for pos in positions}
+
+        for line in r.text.strip().split("\n"):
+            m = re.match(r'var hq_str_(\w+)="(.+?)";', line)
+            if not m:
+                continue
+
+            sina_code = m.group(1)
+            parts = m.group(2).split(",")
+
+            if sina_code not in code_map or len(parts) < 32:
+                continue
+
+            code = code_map[sina_code]
+
+            try:
+                price = float(parts[3])
+                open_price = float(parts[1])
+                high = float(parts[4])
+                low = float(parts[5])
+                prev_close = float(parts[2])
+                volume_shares = int(float(parts[8]))
+                amount = float(parts[9])
+                date_str = parts[30]  # YYYY-MM-DD
+
+                # Skip if price is 0 (suspended/not trading)
+                if price <= 0:
+                    continue
+
+                # Volume in lots (手) for compatibility — Sina returns shares
+                volume = volume_shares // 100
+
+                change_pct = round((price - prev_close) / prev_close * 100, 2) if prev_close else 0
+
+                prices[code] = {
+                    "code": code,
+                    "name": name_map.get(code, parts[0]),
+                    "date": date_str or today_str,
+                    "price": price,
+                    "open": open_price,
+                    "high": high,
+                    "low": low,
+                    "prev_close": prev_close,
+                    "change_pct": change_pct,
+                    "volume": volume,
+                    "amount": amount,
+                    "source": "sina",
+                }
+            except (ValueError, IndexError):
+                continue
+    except Exception as e:
+        print(f"  Sina position price fetch failed: {e}", file=sys.stderr)
+
+    return prices
+
+
+def _enrich_with_mavol30(prices: dict):
+    """Add MAVOL30 from local pricedb for prices that don't have it (e.g., Sina source)."""
+    need_mavol = [code for code, p in prices.items()
+                  if isinstance(p, dict) and not p.get("error") and p.get("mavol30") is None]
+    if not need_mavol or not DEFAULT_PRICEDB_PATH.exists():
+        return
+
+    try:
+        import sqlite3
+        conn = sqlite3.connect(str(DEFAULT_PRICEDB_PATH))
+        for code in need_mavol:
+            rows = conn.execute(
+                "SELECT volume FROM daily_prices WHERE code = ? ORDER BY date DESC LIMIT 30",
+                (code,),
+            ).fetchall()
+            if rows:
+                volumes = [int(r[0]) for r in rows if r[0] is not None]
+                if volumes:
+                    mavol30 = round(sum(volumes) / len(volumes), 2)
+                    prices[code]["mavol30"] = mavol30
+                    current_vol = prices[code].get("volume", 0)
+                    prices[code]["volume_below_mavol30"] = bool(current_vol < mavol30)
+        conn.close()
+    except Exception as e:
+        print(f"  MAVOL30 enrichment failed: {e}", file=sys.stderr)
+
+
 def fetch_position_prices(positions: list[dict]) -> dict:
     """Fetch current prices for active positions.
 
-    Tries AkShare (Eastmoney) first; falls back to CheeseForTune kline API
-    for any stocks that fail (Eastmoney push2 servers are unreliable).
+    Fallback chain (in order):
+    1. Sina real-time (hq.sinajs.cn) — works through proxy, returns OHLC
+    2. AkShare (Eastmoney push2) — may be proxy-blocked
+    3. CheeseForTune kline — close only, no OHLC (last resort)
 
     Args:
         positions: List of position dicts with "code" key.
@@ -862,12 +996,31 @@ def fetch_position_prices(positions: list[dict]) -> dict:
         return {}
 
     prices = {}
-    failed_codes = []
+    failed_positions = []
 
-    # Try AkShare first
+    # === Source 1: Sina real-time (primary) ===
+    try:
+        sina_prices = _fetch_position_prices_sina(positions)
+        for pos in positions:
+            code = pos["code"].split(".")[0]
+            if code in sina_prices:
+                prices[code] = sina_prices[code]
+            else:
+                failed_positions.append(pos)
+    except Exception as e:
+        print(f"  Sina price fetch failed entirely: {e}", file=sys.stderr)
+        failed_positions = list(positions)
+
+    if not failed_positions:
+        # Add MAVOL30 from pricedb if available (Sina doesn't have it)
+        _enrich_with_mavol30(prices)
+        return prices
+
+    # === Source 2: AkShare (fallback) ===
+    still_failed = []
     try:
         import akshare as ak
-        for pos in positions:
+        for pos in failed_positions:
             code = pos["code"].split(".")[0]
             try:
                 end_date = datetime.now().strftime("%Y%m%d")
@@ -900,52 +1053,55 @@ def fetch_position_prices(positions: list[dict]) -> dict:
                         "source": "akshare",
                     }
                 else:
-                    failed_codes.append(pos)
+                    still_failed.append(pos)
             except Exception:
-                failed_codes.append(pos)
+                still_failed.append(pos)
     except ImportError:
-        failed_codes = list(positions)
+        still_failed = list(failed_positions)
 
-    # Fallback: CheeseForTune kline API for failures
-    if failed_codes:
-        print(f"  AkShare failed for {len(failed_codes)} stocks, trying CheeseForTune kline...", file=sys.stderr)
-        try:
-            client = CheeseFortuneClient()
-            for pos in failed_codes:
-                code = pos["code"].split(".")[0]
-                cf_code = normalize_code(code)
-                try:
-                    kline = client.get_kline(cf_code, days=35)
-                    if kline and len(kline) > 0:
-                        # kline data: list of [date, close, volume, amount, time, null]
-                        latest = kline[-1]
-                        prev = kline[-2] if len(kline) > 1 else latest
-                        price = float(latest[1]) if len(latest) > 1 else 0
-                        prev_price = float(prev[1]) if len(prev) > 1 else price
-                        latest_volume = int(latest[2]) if len(latest) > 2 and latest[2] is not None else 0
-                        volumes = [int(row[2]) for row in kline[-30:] if len(row) > 2 and row[2] is not None]
-                        mavol30 = round(sum(volumes) / len(volumes), 2) if volumes else None
-                        change_pct = round((price - prev_price) / prev_price * 100, 2) if prev_price else 0
-                        prices[code] = {
-                            "code": code,
-                            "name": pos.get("name", ""),
-                            "date": str(latest[0]) if latest[0] else "",
-                            "price": price,
-                            "volume": latest_volume,
-                            "mavol30": mavol30,
-                            "volume_below_mavol30": bool(mavol30 and latest_volume < mavol30),
-                            "change_pct": change_pct,
-                            "source": "cheesefortune_kline",
-                        }
-                    else:
-                        prices[code] = {"code": code, "error": "No kline data"}
-                except Exception as e:
-                    prices[code] = {"code": code, "error": f"kline fallback: {e}"}
-        except Exception as e:
-            for pos in failed_codes:
-                code = pos["code"].split(".")[0]
-                prices[code] = {"code": code, "error": f"all sources failed: {e}"}
+    if not still_failed:
+        _enrich_with_mavol30(prices)
+        return prices
 
+    # === Source 3: CheeseForTune kline (last resort) ===
+    print(f"  Sources 1+2 failed for {len(still_failed)} stocks, trying CheeseForTune kline...", file=sys.stderr)
+    try:
+        client = CheeseFortuneClient()
+        for pos in still_failed:
+            code = pos["code"].split(".")[0]
+            cf_code = normalize_code(code)
+            try:
+                kline = client.get_kline(cf_code, days=35)
+                if kline and len(kline) > 0:
+                    latest = kline[-1]
+                    prev = kline[-2] if len(kline) > 1 else latest
+                    price = float(latest[1]) if len(latest) > 1 else 0
+                    prev_price = float(prev[1]) if len(prev) > 1 else price
+                    latest_volume = int(latest[2]) if len(latest) > 2 and latest[2] is not None else 0
+                    volumes = [int(row[2]) for row in kline[-30:] if len(row) > 2 and row[2] is not None]
+                    mavol30 = round(sum(volumes) / len(volumes), 2) if volumes else None
+                    change_pct = round((price - prev_price) / prev_price * 100, 2) if prev_price else 0
+                    prices[code] = {
+                        "code": code,
+                        "name": pos.get("name", ""),
+                        "date": str(latest[0]) if latest[0] else "",
+                        "price": price,
+                        "volume": latest_volume,
+                        "mavol30": mavol30,
+                        "volume_below_mavol30": bool(mavol30 and latest_volume < mavol30),
+                        "change_pct": change_pct,
+                        "source": "cheesefortune_kline",
+                    }
+                else:
+                    prices[code] = {"code": code, "error": "No kline data from any source"}
+            except Exception as e:
+                prices[code] = {"code": code, "error": f"all 3 sources failed: {e}"}
+    except Exception as e:
+        for pos in still_failed:
+            code = pos["code"].split(".")[0]
+            prices[code] = {"code": code, "error": f"all sources failed: {e}"}
+
+    _enrich_with_mavol30(prices)
     return prices
 
 
