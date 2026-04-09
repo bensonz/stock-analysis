@@ -5,47 +5,47 @@
       "code": "605167",
       "name": "利柏特",
       "action": "HOLD",
-      "price": 16.77,
-      "pnl_pct": 2.38,
-      "note": "Current price 16.77 is above entry 16.38 and above hard stop 15.56; held only 2 trading days so neither 3-day timing stop nor 10-day time stop applies. Sector is not in today's hot list, but also not flagged cold from provided sector table. Main caution is weak volume confirmation at 31.9% of MAVOL30."
+      "price": 17.3,
+      "pnl_pct": 5.62,
+      "note": "Price 17.3 is above entry 16.38 and hard stop 15.56; held 2 trading days so neither first-3-day timing stop nor 10-day time stop applies. Sector 建筑装饰 is not in today's hot or cold lists. Fresh order/EPC catalyst still appears valid, but volume is only 1.2% of MAVOL30, so do not add."
     },
     {
       "code": "688037",
       "name": "芯源微",
       "action": "HOLD",
-      "price": 181.95,
-      "pnl_pct": 2.59,
-      "note": "Current price 181.95 is above entry 177.36 and comfortably above stop 168.50; held 1 trading day so exit rules are not triggered. Sector exposure aligns better with today's electronics-related leadership, though volume is only 61.5% of MAVOL30 and needs follow-through."
+      "price": 178.63,
+      "pnl_pct": 0.72,
+      "note": "Price 178.63 is slightly above entry 177.36 and above hard stop 168.5; held 1 trading day so no timing or time-stop trigger. Sector 电子/半导体设备 has partial alignment with today's stronger electronics chain via 元件/通信设备, but follow-through was soft and volume was only 0.9% of MAVOL30."
     }
   ],
   "portfolioStats": {
     "totalPositions": 2,
-    "totalEquity": 960041.0,
-    "dayPnl": 646.0,
-    "dayReturnPct": 0.07,
-    "totalReturnPct": -4.0,
-    "unrealizedPnl": 1542.0,
+    "totalEquity": 960225.0,
+    "dayPnl": 830.0,
+    "dayReturnPct": 0.09,
+    "totalReturnPct": -3.98,
+    "unrealizedPnl": 1726.0,
     "realizedPnl": -41501.0,
-    "cashPct": 93.41
+    "cashPct": 93.4
   },
   "entryRegime": {
     "allow_new_positions": false,
     "regime": "weak",
-    "breadth_ratio": 0.2359,
-    "up": 1039,
-    "down": 4404,
+    "breadth_ratio": 0.2652,
+    "up": 1140,
+    "down": 4299,
     "positive_indices": [],
     "negative_indices": [
       "上证指数",
       "深证成指",
       "创业板指"
     ],
-    "limit_ups": 48,
-    "limit_downs": 10,
-    "reason": "Entry regime weak: breadth 0.24:1, 0/3 major indices green, 48 limit-ups / 10 limit-downs."
+    "limit_ups": 64,
+    "limit_downs": 14,
+    "reason": "Entry regime weak: breadth 0.27:1, 0/3 major indices green, 64 limit-ups / 14 limit-downs."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "Breadth 0.24:1 bearish, 48涨停/10跌停, but declines are broad-based with 4404 stocks down and all 3 major indices red (上证-0.73%, 深成-0.31%, 创业板-0.67%). Hot sectors (top 5): 元件 +1.62%, 油气开采Ⅱ +1.55%, 环保设备Ⅱ +1.15%, 电子化学品Ⅱ +0.79%, 其他电源设备Ⅱ +0.73%. Cold sectors (bottom 5): 厨卫电器 -3.52%, 林业Ⅱ -3.19%, 旅游及景区 -3.05%, 游戏Ⅱ -3.05%, 数字媒体 -2.88%. Position sector alignment: 1/2 positions in hot sectors. Research checks suggest electronics strength and oil-price support in oil/gas, but the market-wide tape is too weak for fresh longs. IV context is neutral-to-low (overall avg IV rank 26.4%), so no volatility-based brake for current holds, but also no reason to force entries in a weak regime."
+    "summary": "Breadth 0.27:1 bearish, 64涨停/14跌停, all 3 major indices red, so the minimum long-entry gate fails decisively and new_positions stay empty. Today's relative strength was concentrated in 油气开采Ⅱ(+2.41%), 元件(+1.6%), 环保设备Ⅱ(+1.41%), 通信设备(+1.39%), and 油服工程(+1.23%), while 个护用品(-3.44%), 厨卫电器(-3.34%), 游戏Ⅱ(-3.32%), 林业Ⅱ(-3.25%), and 数字媒体(-3.1%) lagged. Position sector alignment: 1/2 positions in today's hot sectors. IV context is complacent to extremely low (overall avg IV rank 9.11%; stock proxies 8.3% and 7.7%), which argues for smaller sizing in general and no fresh risk in today's weak tape."
   }
 }

@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1775706053.1238122,
+      "start": 1775723170.779145,
       "errors": [],
-      "end": 1775706066.906566,
-      "duration_sec": 13.8
+      "end": 1775723182.349359,
+      "duration_sec": 11.6
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 5965,
+      "response_size_bytes": 5993,
       "tokens": {
-        "input_tokens": 44610,
-        "output_tokens": 2333
+        "input_tokens": 43594,
+        "output_tokens": 2225
       },
       "rounds": 2,
       "tool_calls_count": 6,
-      "duration_sec": 55.7,
+      "duration_sec": 121.3,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "GPT primary",
@@ -25,14 +25,14 @@
     },
     {
       "phase": "apply",
-      "start": 1775706122.71344,
+      "start": 1775723303.719578,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=19",
-        "Hypothesis: Updated h025 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=20",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=23",
+        "Hypothesis: Updated h017 (hypothesis): +1 supporting evidence → hitRate=100%, n=4",
+        "Hypothesis: Updated h023 (hypothesis): +1 supporting evidence → hitRate=100%, n=3",
         "Updated LEARNINGS.md (legacy)"
       ],
       "post_apply_rule_violations": {
@@ -90,35 +90,35 @@
                 "code": "605167",
                 "name": "利柏特",
                 "rule": "volume_below_mavol30",
-                "volume": 21385,
-                "mavol30": 67053.17,
-                "ratio_pct": 31.9,
-                "suggestion": "Latest volume 21,385 is below MAVOL30 67,053 (31.9% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+                "volume": 74932,
+                "mavol30": 6479916.47,
+                "ratio_pct": 1.2,
+                "suggestion": "Latest volume 74,932 is below MAVOL30 6,479,916 (1.2% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
               },
               {
                 "code": "688037",
                 "name": "芯源微",
                 "rule": "volume_below_mavol30",
-                "volume": 29313,
-                "mavol30": 47666.2,
-                "ratio_pct": 61.5,
-                "suggestion": "Latest volume 29,313 is below MAVOL30 47,666 (61.5% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+                "volume": 40437,
+                "mavol30": 4708963.33,
+                "ratio_pct": 0.9,
+                "suggestion": "Latest volume 40,437 is below MAVOL30 4,708,963 (0.9% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
               }
             ],
             "error": null
           }
         ]
       },
-      "end": 1775706122.875964,
+      "end": 1775723303.928153,
       "duration_sec": 0.2
     }
   ],
   "validation_errors": [
-    "RULE check_volume_below_mavol30: 605167 — Latest volume 21,385 is below MAVOL30 67,053 (31.9% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
-    "RULE check_volume_below_mavol30: 688037 — Latest volume 29,313 is below MAVOL30 47,666 (61.5% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+    "RULE check_volume_below_mavol30: 605167 — Latest volume 74,932 is below MAVOL30 6,479,916 (1.2% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
+    "RULE check_volume_below_mavol30: 688037 — Latest volume 40,437 is below MAVOL30 4,708,963 (0.9% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
   ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 69.7
+    "totalDurationSec": 133.1
   }
 }

@@ -905,3 +905,15 @@
 - When breadth collapses to 0.24:1 and 0/3 major indices are green, the correct V2 action is to open no new positions even if a few sectors are still green.
 - Sub-MAVOL30 participation on both active positions means price gains are acceptable for now but should not be interpreted as strong momentum confirmation.
 - With strategy_pool at 0 stocks and enriched_candidates empty, the process edge shifts from stock picking to disciplined non-action.
+
+### 自动更新 (2026-04-09)
+
+- When breadth collapses to 0.27:1 and all three major indices are red, even a few green leadership sectors should be treated as relative-strength islands rather than automatic long entries.
+- Ultra-low IV Rank and weak breadth is a bad combination for adding exposure: complacent volatility pricing does not offset poor participation.
+- Sub-MAVOL30 volume on both active positions argues for 'hold but do not add' even when prices remain above entry and stop.
+
+### 自动更新 (2026-04-09)
+
+- When breadth collapses to 0.27:1 with 0/3 major indices green, the correct momentum action is to freeze new buying even if a few sectors still print green.
+- Ultra-low IV did not create a bullish entry edge today; instead it coincided with a complacent tape that rolled over broadly, reinforcing the need to throttle or avoid new risk.
+- Positions can be held through a weak day if they remain above stop and within early holding windows, but sub-1.5% MAVOL30 participation is a clear warning against adding.

@@ -415,13 +415,25 @@
           {
             "date": "2026-04-09",
             "detail": "With strategy_pool at 0 stocks and enriched_candidates empty, the process edge shifts from stock picking to disciplined non-action."
+          },
+          {
+            "date": "2026-04-09",
+            "detail": "When breadth collapses to 0.27:1 and all three major indices are red, even a few green leadership sectors should be treated as relative-strength islands rather than automatic long entries."
+          },
+          {
+            "date": "2026-04-09",
+            "detail": "Ultra-low IV Rank and weak breadth is a bad combination for adding exposure: complacent volatility pricing does not offset poor participation."
+          },
+          {
+            "date": "2026-04-09",
+            "detail": "When breadth collapses to 0.27:1 with 0/3 major indices green, the correct momentum action is to freeze new buying even if a few sectors still print green."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 20,
+      "sampleSize": 23,
       "hitRate": 1.0,
-      "confidence": 0.955,
+      "confidence": 0.96,
       "tags": [],
       "parentRule": null,
       "retiredDate": null,
@@ -511,7 +523,7 @@
       "type": "heuristic",
       "status": "hypothesis",
       "created": "2026-04-01",
-      "lastTested": "2026-04-08",
+      "lastTested": "2026-04-09",
       "mechanism": "Cheap volatility means trend continuation can persist, but upside surprise from fresh entries comes from proper setup quality, not from paying up far above moving averages.",
       "evidence": {
         "supporting": [
@@ -526,13 +538,17 @@
           {
             "date": "2026-04-08",
             "detail": "Low-IV backdrop is not a reason to stop buying, but it does favor cleaner base-and-breakout entries over vertical spikes."
+          },
+          {
+            "date": "2026-04-09",
+            "detail": "Ultra-low IV did not create a bullish entry edge today; instead it coincided with a complacent tape that rolled over broadly, reinforcing the need to throttle or avoid new risk."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 3,
+      "sampleSize": 4,
       "hitRate": 1.0,
-      "confidence": 0.8,
+      "confidence": 0.833,
       "tags": [
         "timing",
         "position-sizing",
@@ -703,22 +719,30 @@
       "id": "h023",
       "text": "Raising stops mechanically after +10% works well in weak tapes because it converts a fast winner into a low-risk hold without needing a fresh market call.",
       "type": "heuristic",
-      "status": "observation",
+      "status": "hypothesis",
       "created": "2026-04-02",
-      "lastTested": "2026-04-02",
+      "lastTested": "2026-04-09",
       "mechanism": "In a deteriorating market, protecting open profits is more valuable than maximizing upside variance.",
       "evidence": {
         "supporting": [
           {
             "date": "2026-04-02",
             "detail": "Raising stops mechanically after +10% works well in weak tapes because it converts a fast winner into a low-risk hold without needing a fresh market call."
+          },
+          {
+            "date": "2026-04-09",
+            "detail": "Sub-MAVOL30 volume on both active positions argues for 'hold but do not add' even when prices remain above entry and stop."
+          },
+          {
+            "date": "2026-04-09",
+            "detail": "Positions can be held through a weak day if they remain above stop and within early holding windows, but sub-1.5% MAVOL30 participation is a clear warning against adding."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 1,
+      "sampleSize": 3,
       "hitRate": 1.0,
-      "confidence": 0.6,
+      "confidence": 0.8,
       "tags": [
         "exit-rule",
         "timing",

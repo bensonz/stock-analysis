@@ -952,7 +952,12 @@ def _fetch_position_prices_sina(positions: list[dict]) -> dict:
 
 
 def _enrich_with_mavol30(prices: dict):
-    """Add MAVOL30 from local pricedb for prices that don't have it (e.g., Sina source)."""
+    """Add MAVOL30 from local pricedb for prices that don't have it (e.g., Sina source).
+    
+    Note: pricedb stores volume in shares (股), but the pipeline convention
+    (from AkShare) is lots (手, 1 lot = 100 shares). We convert pricedb
+    volumes to lots for consistency.
+    """
     need_mavol = [code for code, p in prices.items()
                   if isinstance(p, dict) and not p.get("error") and p.get("mavol30") is None]
     if not need_mavol or not DEFAULT_PRICEDB_PATH.exists():
@@ -967,7 +972,8 @@ def _enrich_with_mavol30(prices: dict):
                 (code,),
             ).fetchall()
             if rows:
-                volumes = [int(r[0]) for r in rows if r[0] is not None]
+                # Convert shares → lots (手) to match AkShare/Sina convention
+                volumes = [int(r[0]) // 100 for r in rows if r[0] is not None]
                 if volumes:
                     mavol30 = round(sum(volumes) / len(volumes), 2)
                     prices[code]["mavol30"] = mavol30
