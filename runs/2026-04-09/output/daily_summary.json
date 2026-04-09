@@ -1,0 +1,51 @@
+{
+  "date": "2026-04-09",
+  "actions": [
+    {
+      "code": "605167",
+      "name": "利柏特",
+      "action": "HOLD",
+      "price": 16.77,
+      "pnl_pct": 2.38,
+      "note": "Current price 16.77 is above entry 16.38 and above hard stop 15.56; held only 2 trading days so neither 3-day timing stop nor 10-day time stop applies. Sector is not in today's hot list, but also not flagged cold from provided sector table. Main caution is weak volume confirmation at 31.9% of MAVOL30."
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "action": "HOLD",
+      "price": 181.95,
+      "pnl_pct": 2.59,
+      "note": "Current price 181.95 is above entry 177.36 and comfortably above stop 168.50; held 1 trading day so exit rules are not triggered. Sector exposure aligns better with today's electronics-related leadership, though volume is only 61.5% of MAVOL30 and needs follow-through."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 2,
+    "totalEquity": 960041.0,
+    "dayPnl": 646.0,
+    "dayReturnPct": 0.07,
+    "totalReturnPct": -4.0,
+    "unrealizedPnl": 1542.0,
+    "realizedPnl": -41501.0,
+    "cashPct": 93.41
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "weak",
+    "breadth_ratio": 0.2359,
+    "up": 1039,
+    "down": 4404,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 48,
+    "limit_downs": 10,
+    "reason": "Entry regime weak: breadth 0.24:1, 0/3 major indices green, 48 limit-ups / 10 limit-downs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 0.24:1 bearish, 48涨停/10跌停, but declines are broad-based with 4404 stocks down and all 3 major indices red (上证-0.73%, 深成-0.31%, 创业板-0.67%). Hot sectors (top 5): 元件 +1.62%, 油气开采Ⅱ +1.55%, 环保设备Ⅱ +1.15%, 电子化学品Ⅱ +0.79%, 其他电源设备Ⅱ +0.73%. Cold sectors (bottom 5): 厨卫电器 -3.52%, 林业Ⅱ -3.19%, 旅游及景区 -3.05%, 游戏Ⅱ -3.05%, 数字媒体 -2.88%. Position sector alignment: 1/2 positions in hot sectors. Research checks suggest electronics strength and oil-price support in oil/gas, but the market-wide tape is too weak for fresh longs. IV context is neutral-to-low (overall avg IV rank 26.4%), so no volatility-based brake for current holds, but also no reason to force entries in a weak regime."
+  }
+}

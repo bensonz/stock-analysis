@@ -1,0 +1,157 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "元件",
+        "5d_pct": 1.62,
+        "trend": "steady"
+      },
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": 1.55,
+        "trend": "accelerating"
+      },
+      {
+        "name": "环保设备Ⅱ",
+        "5d_pct": 1.15,
+        "trend": "steady"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": 0.79,
+        "trend": "steady"
+      },
+      {
+        "name": "其他电源设备Ⅱ",
+        "5d_pct": 0.73,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "厨卫电器",
+        "5d_pct": -3.52,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -3.19,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "旅游及景区",
+        "5d_pct": -3.05,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "游戏Ⅱ",
+        "5d_pct": -3.05,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": -2.88,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "1/2 positions clearly in today's hot sectors; 利柏特所在建筑装饰不在top5也不在bottom5",
+    "regime": "Tape is weak and defensive; isolated strength in electronic components/oil while broad market is under pressure"
+  },
+  "position_decisions": [
+    {
+      "code": "605167",
+      "name": "利柏特",
+      "action": "HOLD",
+      "reason": "Current price 16.77 is above entry 16.38 and above hard stop 15.56; held only 2 trading days so neither 3-day timing stop nor 10-day time stop applies. Sector is not in today's hot list, but also not flagged cold from provided sector table. Main caution is weak volume confirmation at 31.9% of MAVOL30.",
+      "sector_rank": "not in top 5, not in bottom 5 from provided sector table",
+      "new_stop": null,
+      "pnl_pct": 2.38,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "action": "HOLD",
+      "reason": "Current price 181.95 is above entry 177.36 and comfortably above stop 168.50; held 1 trading day so exit rules are not triggered. Sector exposure aligns better with today's electronics-related leadership, though volume is only 61.5% of MAVOL30 and needs follow-through.",
+      "sector_rank": "top 20% by today's sector tone",
+      "new_stop": null,
+      "pnl_pct": 2.59,
+      "days_held": 1,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "reason": "No new entries allowed: entry regime is weak with breadth 0.24:1 and 0/3 major indices green. Also no enriched candidate MA-distance/VCP data provided for validation.",
+      "rps120": null
+    },
+    {
+      "code": "600498",
+      "name": "烽火通信",
+      "reason": "No new entries allowed under Rule 1 buy gate. No current candidate-level RPS/MA distance data in enriched_candidates, so cannot validate a momentum entry.",
+      "rps120": null
+    },
+    {
+      "code": "603115",
+      "name": "海星股份",
+      "reason": "Skip by regime, not by story: breadth is far below the 1.5:1 minimum and all 3 major indices are red. No enriched candidate data available.",
+      "rps120": null
+    },
+    {
+      "code": "605196",
+      "name": "华通线缆",
+      "reason": "Weak tape means no fresh risk. Also cannot verify Rule 2b MA-distance check because enriched_candidates is empty.",
+      "rps120": null
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "No new positions in a weak regime. Without enriched candidate inputs, sector rank/RPS/MA extension cannot be confirmed.",
+      "rps120": null
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "When breadth collapses to 0.24:1 and 0/3 major indices are green, the correct V2 action is to open no new positions even if a few sectors are still green.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Weak index confirmation and poor breadth mean sector winners are less likely to produce clean follow-through; cash preserves optionality for the next strong tape."
+    },
+    {
+      "text": "Sub-MAVOL30 participation on both active positions means price gains are acceptable for now but should not be interpreted as strong momentum confirmation.",
+      "type": "signal",
+      "tags": [
+        "timing",
+        "exit-rule",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "Low volume advances often lack sponsorship; if price stalls, these names can lose momentum quickly despite being above entry."
+    },
+    {
+      "text": "With strategy_pool at 0 stocks and enriched_candidates empty, the process edge shifts from stock picking to disciplined non-action.",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Momentum systems lose money when they manufacture setups from incomplete data; absence of validated candidates is itself a decision input."
+    }
+  ],
+  "market_summary": "Breadth 0.24:1 bearish, 48涨停/10跌停, but declines are broad-based with 4404 stocks down and all 3 major indices red (上证-0.73%, 深成-0.31%, 创业板-0.67%). Hot sectors (top 5): 元件 +1.62%, 油气开采Ⅱ +1.55%, 环保设备Ⅱ +1.15%, 电子化学品Ⅱ +0.79%, 其他电源设备Ⅱ +0.73%. Cold sectors (bottom 5): 厨卫电器 -3.52%, 林业Ⅱ -3.19%, 旅游及景区 -3.05%, 游戏Ⅱ -3.05%, 数字媒体 -2.88%. Position sector alignment: 1/2 positions in hot sectors. Research checks suggest electronics strength and oil-price support in oil/gas, but the market-wide tape is too weak for fresh longs. IV context is neutral-to-low (overall avg IV rank 26.4%), so no volatility-based brake for current holds, but also no reason to force entries in a weak regime.",
+  "market_sentiment": "bearish",
+  "market_call": "观望"
+}

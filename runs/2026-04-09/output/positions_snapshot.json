@@ -1,7 +1,7 @@
 {
-  "snapshot_time": "2026-04-08T14:41:04.798110+08:00",
-  "snapshot_type": "pre_run",
-  "date": "2026-04-08",
+  "snapshot_time": "2026-04-09T11:42:02.875161+08:00",
+  "snapshot_type": "post_run",
+  "date": "2026-04-09",
   "portfolio_config": {
     "starting_capital": 1000000,
     "max_position_pct": 10,
@@ -11,23 +11,23 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-04-08T12:25:42.971844+08:00",
+    "lastUpdated": "2026-04-09T11:42:02.720763+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 958499.0,
+      "totalEquity": 960041.0,
       "cash": 896819.0,
-      "investedValue": 61680.0,
-      "unrealizedPnl": 0.0,
+      "investedValue": 63222.0,
+      "unrealizedPnl": 1542.0,
       "realizedPnl": -41501.0,
-      "totalPnl": -41501.0,
-      "totalReturnPct": -4.15,
+      "totalPnl": -39959.0,
+      "totalReturnPct": -4.0,
       "positionsUsed": 2,
       "positionsMax": 10,
-      "cashPct": 93.56,
-      "dayPnl": 0.0,
+      "cashPct": 93.41,
+      "dayPnl": 646.0,
       "minCashPct": 20,
-      "minCashValue": 191699.8,
-      "deployableCash": 705119.2
+      "minCashValue": 192008.2,
+      "deployableCash": 704810.8
     },
     "activePositions": [
       {
@@ -35,8 +35,8 @@
         "name": "利柏特",
         "entryDate": "2026-04-07",
         "entryPrice": 16.38,
-        "currentPrice": 16.38,
-        "pnl_pct": 0.0,
+        "currentPrice": 16.77,
+        "pnl_pct": 2.38,
         "stopLoss": 15.56,
         "currentStop": 15.56,
         "targetPrice": 18.88,
@@ -45,17 +45,20 @@
         "shares": 1600,
         "allocation_pct": 4,
         "allocatedCapital": 26208.0,
-        "currentValue": 26208.0,
-        "unrealizedPnl": 0.0,
-        "weight_pct": 2.73
+        "currentValue": 26832.0,
+        "unrealizedPnl": 624.0,
+        "volume": 21385,
+        "mavol30": 67053.17,
+        "volumeBelowMavol30": true,
+        "weight_pct": 2.79
       },
       {
         "code": "688037",
         "name": "芯源微",
         "entryDate": "2026-04-08",
         "entryPrice": 177.36,
-        "currentPrice": 177.36,
-        "pnl_pct": 0.0,
+        "currentPrice": 181.95,
+        "pnl_pct": 2.59,
         "stopLoss": 168.5,
         "currentStop": 168.5,
         "targetPrice": 204.09,
@@ -64,9 +67,12 @@
         "shares": 200,
         "allocation_pct": 5,
         "allocatedCapital": 35472.0,
-        "currentValue": 35472.0,
-        "unrealizedPnl": 0.0,
-        "weight_pct": 3.7
+        "currentValue": 36390.0,
+        "unrealizedPnl": 918.0,
+        "volume": 29313,
+        "mavol30": 47666.2,
+        "volumeBelowMavol30": true,
+        "weight_pct": 3.79
       }
     ]
   },
@@ -103,6 +109,13 @@
           "change_pct": -1.56,
           "action": "HOLD",
           "note": "Still above stop with fresh EPC/order catalyst, acceptable MA position, and not in a confirmed cold sector from today's sector table. Keep position but monitor closely because current price is only 3.48% above stop and volume is weak at 25.7% of MAVOL30."
+        },
+        {
+          "date": "2026-04-09",
+          "price": 16.77,
+          "change_pct": 2.38,
+          "action": "HOLD",
+          "note": "Current price 16.77 is above entry 16.38 and above hard stop 15.56; held only 2 trading days so neither 3-day timing stop nor 10-day time stop applies. Sector is not in today's hot list, but also not flagged cold from provided sector table. Main caution is weak volume confirmation at 31.9% of MAVOL30."
         }
       ],
       "exitDate": null,
@@ -112,7 +125,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-04-07T14:38:30.422544+08:00",
-      "updatedAt": "2026-04-08T11:51:08.640065+08:00",
+      "updatedAt": "2026-04-09T11:42:02.713822+08:00",
       "trackerVersion": "2.1",
       "_correction": {
         "date": "2026-04-08",
@@ -152,6 +165,13 @@
           "change_pct": 0,
           "action": "OPEN",
           "note": "LLM开仓 芯源微 (corrected: original 169.46 was stale Mar 31 close, outside Apr 8 range [173.36,180.28], corrected to open 177.36)"
+        },
+        {
+          "date": "2026-04-09",
+          "price": 181.95,
+          "change_pct": 2.59,
+          "action": "HOLD",
+          "note": "Current price 181.95 is above entry 177.36 and comfortably above stop 168.50; held 1 trading day so exit rules are not triggered. Sector exposure aligns better with today's electronics-related leadership, though volume is only 61.5% of MAVOL30 and needs follow-through."
         }
       ],
       "exitDate": null,
@@ -161,7 +181,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-04-08T11:51:08.642286+08:00",
-      "updatedAt": "2026-04-08T11:51:08.642288+08:00",
+      "updatedAt": "2026-04-09T11:42:02.718461+08:00",
       "trackerVersion": "2.1",
       "_correction": {
         "date": "2026-04-08",
