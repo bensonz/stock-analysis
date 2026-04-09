@@ -1,5 +1,21 @@
 # Progress
 
+## 2026-04-09: Contract-Based Pipeline Gates (Harness Engineering)
+
+### Completed
+1. **`scripts/contracts.py`** — New module: PipelineGate, GateResult, RunManifest, validate_phase1_gate, validate_llm_output_gate, validate_phase3_gate, check_source_health
+2. **`scripts/data_collector.py`** — Added `_fetch_position_prices_sina()` (Sina real-time primary), `_enrich_with_mavol30()`, rewrote `fetch_position_prices()` with 3-source fallback (Sina -> AkShare -> CheeseForTune)
+3. **`scripts/run_daily.py`** — Wired in pre-flight health check, Gate 1/2/3, manifest.json, proper exit codes and status (SUCCESS/DEGRADED/FAILED)
+4. **`tests/test_contracts.py`** — 54 unit tests, all passing
+5. **`tests/conftest.py`** — Pytest config with `--run-integration` flag
+
+### Key Behaviors
+- Missing prices → Gate 1 hard fail, no LLM call, exit 1
+- Stale pool → soft warning, DEGRADED status
+- LLM forgets position → Gate 2 hard fail
+- Apply errors → Gate 3 hard fail
+- Clean run → manifest.json with SUCCESS
+
 ## 2026-03-15: Stop Forced Daily Entries
 
 ### Completed
