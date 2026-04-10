@@ -241,9 +241,20 @@ def validate_llm_output_gate(decisions: dict, data: dict) -> GateResult:
     active_codes = {p["code"] for p in data.get("positions", [])}
     position_decisions = decisions.get("position_decisions", [])
     decision_codes = set()
+    seen_codes: dict[str, str] = {}  # code -> first action seen
 
     for d in position_decisions:
         code = str(d.get("code", "")).split(".")[0]
+
+        # Detect duplicate decisions for same position
+        if code in seen_codes:
+            gate.hard(
+                False,
+                f"position {code}: duplicate decision ('{seen_codes[code]}' and '{d.get('action', '')}') — exactly one required"
+            )
+        else:
+            seen_codes[code] = d.get("action", "")
+
         decision_codes.add(code)
         action = d.get("action", "")
 
@@ -291,6 +302,16 @@ def validate_llm_output_gate(decisions: dict, data: dict) -> GateResult:
                 fval not in (None, "", 0),
                 f"new position {code}: missing required field '{fname}'"
             )
+
+        # Numeric fields must be actual numbers, not strings
+        numeric_fields = {"entry_price", "stop", "target"}
+        for fname in numeric_fields:
+            fval = p.get(fname)
+            if fval is not None and not isinstance(fval, (int, float)):
+                gate.hard(
+                    False,
+                    f"new position {code}: '{fname}' must be numeric, got {type(fval).__name__} '{fval}'"
+                )
 
         # Entry price sanity: must be positive and reasonable
         ep = p.get("entry_price")
@@ -346,7 +367,46 @@ def validate_phase3_gate(date: str, apply_log: dict, data: dict) -> GateResult:
                 for v in rule.get("violations", []):
                     gate.soft(False, f"rule {rule['rule']}: {v.get('suggestion', v.get('code', '?'))}")
 
+    # ── Check persisted state consistency ──
+    _check_position_file_consistency(gate)
+
     return gate.check()
+
+
+def _check_position_file_consistency(gate: PipelineGate):
+    """Verify positions.json matches tracking/*.json on disk."""
+    import json
+    from pathlib import Path
+
+    project_root = Path(__file__).parent.parent
+    positions_file = project_root / "tracking" / "positions.json"
+    tracking_dir = project_root / "tracking"
+
+    if not positions_file.exists():
+        gate.hard(False, "positions.json does not exist after apply")
+        return
+
+    try:
+        pos_data = json.loads(positions_file.read_text(encoding="utf-8"))
+        pos_codes = {p["code"] for p in pos_data.get("activePositions", [])}
+    except (json.JSONDecodeError, KeyError) as e:
+        gate.hard(False, f"positions.json is invalid: {e}")
+        return
+
+    tracking_codes = set()
+    for f in tracking_dir.glob("*.json"):
+        if f.name == "positions.json":
+            continue
+        try:
+            fdata = json.loads(f.read_text(encoding="utf-8"))
+            if fdata.get("status") == "active":
+                tracking_codes.add(fdata["code"])
+        except (json.JSONDecodeError, KeyError):
+            continue
+
+    if pos_codes != tracking_codes:
+        diff = pos_codes.symmetric_difference(tracking_codes)
+        gate.hard(False, f"positions.json mismatch with tracking files: {diff}")
 
 
 # ─── Run Manifest ───
@@ -376,11 +436,19 @@ class RunManifest:
         }
 
     def finalize(self):
-        """Set overall status from gate results."""
+        """Set overall status from gate results and phase-level errors."""
         any_hard_fail = any(not g["passed"] for g in self.gates.values())
         any_soft_warn = any(len(g["soft_warns"]) > 0 for g in self.gates.values())
 
-        if any_hard_fail:
+        # Check for CRITICAL errors in phase details (e.g., from validate_output)
+        any_critical = False
+        for phase in self.phases.values():
+            for err in phase.get("errors", []):
+                if isinstance(err, str) and err.startswith("CRITICAL"):
+                    any_critical = True
+                    break
+
+        if any_hard_fail or any_critical:
             self.status = PipelineStatus.FAILED
             self.exit_code = 1
         elif any_soft_warn:

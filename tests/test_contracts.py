@@ -469,6 +469,65 @@ class TestLLMOutputGate:
         result = validate_llm_output_gate(decisions, data)
         assert result.passed is True
 
+    def test_duplicate_decisions_hard_fails(self):
+        """Two decisions for the same position -> hard fail."""
+        data = make_phase1_data(position_codes=["605167"])
+        decisions = self._make_decisions()
+        decisions["position_decisions"] = [
+            {"code": "605167", "action": "SELL", "reason": "Stop hit", "exit_price": 15.5},
+            {"code": "605167", "action": "HOLD", "reason": "Changed mind"},
+        ]
+        result = validate_llm_output_gate(decisions, data)
+        assert result.passed is False
+        assert any("duplicate" in f.lower() for f in result.hard_fails)
+
+    def test_duplicate_decisions_sell_hold_conflict(self):
+        """SELL then HOLD for same code — must not pass Gate 2."""
+        data = make_phase1_data(position_codes=["605167", "688037"])
+        decisions = self._make_decisions(position_codes=["688037"])
+        decisions["position_decisions"].extend([
+            {"code": "605167", "action": "SELL", "reason": "Stop", "exit_price": 15.0},
+            {"code": "605167", "action": "RAISE_STOP", "reason": "Oops", "new_stop": 16.0},
+        ])
+        result = validate_llm_output_gate(decisions, data)
+        assert result.passed is False
+        assert any("605167" in f and "duplicate" in f.lower() for f in result.hard_fails)
+
+    def test_string_typed_entry_price_hard_fails(self):
+        """entry_price as string "50.0" -> hard fail (must be numeric)."""
+        data = make_phase1_data()
+        decisions = self._make_decisions(new_positions=[
+            {"code": "600000", "name": "Test", "entry_price": "50.0",
+             "stop": "45.0", "target": "60.0", "thesis": "Breakout"}
+        ])
+        result = validate_llm_output_gate(decisions, data)
+        assert result.passed is False
+        assert any("numeric" in f.lower() and "entry_price" in f for f in result.hard_fails)
+
+    def test_string_typed_stop_hard_fails(self):
+        """stop as string -> hard fail."""
+        data = make_phase1_data()
+        decisions = self._make_decisions(new_positions=[
+            {"code": "600000", "name": "Test", "entry_price": 50.0,
+             "stop": "45.0", "target": 60.0, "thesis": "Breakout"}
+        ])
+        result = validate_llm_output_gate(decisions, data)
+        assert result.passed is False
+        assert any("numeric" in f.lower() and "stop" in f for f in result.hard_fails)
+
+    def test_mixed_numeric_and_string_fields(self):
+        """entry_price numeric but target as string -> hard fail on target only."""
+        data = make_phase1_data()
+        decisions = self._make_decisions(new_positions=[
+            {"code": "600000", "name": "Test", "entry_price": 50.0,
+             "stop": 45.0, "target": "60.0", "thesis": "Breakout"}
+        ])
+        result = validate_llm_output_gate(decisions, data)
+        assert result.passed is False
+        assert any("target" in f for f in result.hard_fails)
+        # entry_price and stop should NOT appear in hard_fails
+        assert not any("entry_price" in f for f in result.hard_fails)
+
 
 # ━━━ Gate 3: Phase 3 → Phase 4 ━━━
 
@@ -535,6 +594,30 @@ class TestRunManifest:
         m.finalize()
         assert m.status == PipelineStatus.FAILED
         assert m.exit_code == 1
+
+    def test_critical_validation_error_fails_manifest(self):
+        """CRITICAL errors in phase details must cause FAILED status even with passing gates."""
+        m = RunManifest(date="2026-04-09", status=PipelineStatus.SUCCESS)
+        g = PipelineGate("test")
+        m.add_gate(g.check())  # Gate passes
+        m.add_phase("validate", "warnings", details={
+            "errors": ["CRITICAL: positions.json mismatch with tracking files. Diff: {'605167'}"]
+        })
+        m.finalize()
+        assert m.status == PipelineStatus.FAILED
+        assert m.exit_code == 1
+
+    def test_non_critical_validation_does_not_fail_manifest(self):
+        """Non-CRITICAL validation warnings should not cause FAILED status."""
+        m = RunManifest(date="2026-04-09", status=PipelineStatus.SUCCESS)
+        g = PipelineGate("test")
+        m.add_gate(g.check())
+        m.add_phase("validate", "warnings", details={
+            "errors": ["WARNING: no watchlist found for 2026-04-09"]
+        })
+        m.finalize()
+        assert m.status == PipelineStatus.SUCCESS
+        assert m.exit_code == 0
 
     def test_to_dict_serializable(self):
         m = RunManifest(date="2026-04-09", status=PipelineStatus.SUCCESS)

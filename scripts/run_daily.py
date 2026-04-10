@@ -1540,13 +1540,18 @@ def main():
         # Phase 4: Validate
         print(f"\nPhase 4: Validating...", file=sys.stderr)
         errors = phase4_validate_and_log(date, all_logs)
-        if errors:
+        critical_errors = [e for e in errors if isinstance(e, str) and e.startswith("CRITICAL")]
+        if critical_errors:
+            for e in critical_errors:
+                print(f"  ✗ {e}", file=sys.stderr)
+            print(f"  CRITICAL validation errors — skipping commit", file=sys.stderr)
+        elif errors:
             print(f"  Validation issues: {errors}", file=sys.stderr)
         else:
             print("  All checks passed!", file=sys.stderr)
 
-        # Git commit
-        if not no_commit:
+        # Git commit (blocked by CRITICAL validation errors)
+        if not no_commit and not critical_errors:
             print(f"\nPhase 5: Git commit...", file=sys.stderr)
             try:
                 subprocess.run(["git", "add", "-A"], cwd=str(PROJECT_ROOT), check=True,
