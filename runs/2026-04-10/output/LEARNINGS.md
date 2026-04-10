@@ -923,3 +923,9 @@
 - When strategy_pool and enriched_candidates are empty, even a 4.56:1 breadth day should still produce no new positions; strong tape is a permission slip, not a substitute for stock-level setup data.
 - Low IV Rank remains a sizing throttle, not a directional sell signal. Existing winners can be held, but fresh exposure should stay constrained when IV proxies are near 8%.
 - Sub-MAVOL30 volume on both open positions is not yet an exit signal by itself when price is rising and stops are intact, but it is a clear 'do not add' condition.
+
+### 自动更新 (2026-04-10)
+
+- Strong breadth does not override missing setup data; with enriched_candidates empty, the correct momentum action is still to keep cash despite a favorable tape.
+- Low IV regime is a sizing throttle, not a direction veto: today's market is strong enough for longs, but sub-15% IV Rank argues for patience and half-sized deployment only when a fully qualified candidate appears.
+- Volume below MAVOL30 on open positions is not an automatic sell when price is still advancing and stops are intact, but it is a clear 'no add' signal.

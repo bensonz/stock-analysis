@@ -431,13 +431,17 @@
           {
             "date": "2026-04-10",
             "detail": "When strategy_pool and enriched_candidates are empty, even a 4.56:1 breadth day should still produce no new positions; strong tape is a permission slip, not a substitute for stock-level setup data."
+          },
+          {
+            "date": "2026-04-10",
+            "detail": "Strong breadth does not override missing setup data; with enriched_candidates empty, the correct momentum action is still to keep cash despite a favorable tape."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 24,
+      "sampleSize": 25,
       "hitRate": 1.0,
-      "confidence": 0.962,
+      "confidence": 0.963,
       "tags": [],
       "parentRule": null,
       "retiredDate": null,
@@ -525,9 +529,9 @@
       "id": "h017",
       "text": "Low-IV conditions around 16-22% IV rank do not justify freezing risk when breadth is 5.6:1; they argue for normal sizing but tighter discipline on chasing.",
       "type": "heuristic",
-      "status": "hypothesis",
+      "status": "validated",
       "created": "2026-04-01",
-      "lastTested": "2026-04-09",
+      "lastTested": "2026-04-10",
       "mechanism": "Cheap volatility means trend continuation can persist, but upside surprise from fresh entries comes from proper setup quality, not from paying up far above moving averages.",
       "evidence": {
         "supporting": [
@@ -546,13 +550,17 @@
           {
             "date": "2026-04-09",
             "detail": "Ultra-low IV did not create a bullish entry edge today; instead it coincided with a complacent tape that rolled over broadly, reinforcing the need to throttle or avoid new risk."
+          },
+          {
+            "date": "2026-04-10",
+            "detail": "Low IV regime is a sizing throttle, not a direction veto: today's market is strong enough for longs, but sub-15% IV Rank argues for patience and half-sized deployment only when a fully qualified candidate appears."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 4,
+      "sampleSize": 5,
       "hitRate": 1.0,
-      "confidence": 0.833,
+      "confidence": 0.857,
       "tags": [
         "timing",
         "position-sizing",
@@ -723,7 +731,7 @@
       "id": "h023",
       "text": "Raising stops mechanically after +10% works well in weak tapes because it converts a fast winner into a low-risk hold without needing a fresh market call.",
       "type": "heuristic",
-      "status": "hypothesis",
+      "status": "validated",
       "created": "2026-04-02",
       "lastTested": "2026-04-10",
       "mechanism": "In a deteriorating market, protecting open profits is more valuable than maximizing upside variance.",
@@ -744,13 +752,17 @@
           {
             "date": "2026-04-10",
             "detail": "Sub-MAVOL30 volume on both open positions is not yet an exit signal by itself when price is rising and stops are intact, but it is a clear 'do not add' condition."
+          },
+          {
+            "date": "2026-04-10",
+            "detail": "Volume below MAVOL30 on open positions is not an automatic sell when price is still advancing and stops are intact, but it is a clear 'no add' signal."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 4,
+      "sampleSize": 5,
       "hitRate": 1.0,
-      "confidence": 0.833,
+      "confidence": 0.857,
       "tags": [
         "exit-rule",
         "timing",

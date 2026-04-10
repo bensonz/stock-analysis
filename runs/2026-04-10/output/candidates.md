@@ -1,9 +1,9 @@
 # 候选股票 2026-04-10
 
 ## 入场条件: ✅ OPEN
-- 涨跌比: 4.56:1
+- 涨跌比: 3.59:1
 - 上涨指数: 上证指数, 深证成指, 创业板指
-- 原因: Entry regime strong: breadth 4.56:1, 3/3 major indices green, 63 limit-ups / 5 limit-downs.
+- 原因: Entry regime strong: breadth 3.59:1, 3/3 major indices green, 80 limit-ups / 11 limit-downs.
 
 ## 策略池 (0 stocks)
 
