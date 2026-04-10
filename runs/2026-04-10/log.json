@@ -1,0 +1,124 @@
+{
+  "date": "2026-04-10",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1775792420.9338748,
+      "errors": [],
+      "end": 1775792474.8952892,
+      "duration_sec": 54.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 6239,
+      "tokens": {
+        "input_tokens": 45410,
+        "output_tokens": 2203
+      },
+      "rounds": 2,
+      "tool_calls_count": 6,
+      "duration_sec": 105.4,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "GPT primary",
+      "primary_model": "gpt-5.4"
+    },
+    {
+      "phase": "apply",
+      "start": 1775792580.38707,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=24",
+        "Hypothesis: Created h031 (observation): Low IV Rank remains a sizing throttle, not a directional sell signal. Existing w...",
+        "Hypothesis: Updated h023 (hypothesis): +1 supporting evidence → hitRate=100%, n=4",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "605167",
+                "name": "利柏特",
+                "rule": "volume_below_mavol30",
+                "volume": 32543,
+                "mavol30": 64798.83,
+                "ratio_pct": 50.2,
+                "suggestion": "Latest volume 32,543 is below MAVOL30 64,799 (50.2% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+              },
+              {
+                "code": "688037",
+                "name": "芯源微",
+                "rule": "volume_below_mavol30",
+                "volume": 29051,
+                "mavol30": 47089.1,
+                "ratio_pct": 61.7,
+                "suggestion": "Latest volume 29,051 is below MAVOL30 47,089 (61.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+              }
+            ],
+            "error": null
+          }
+        ]
+      },
+      "end": 1775792580.6195772,
+      "duration_sec": 0.2
+    }
+  ],
+  "validation_errors": [
+    "RULE check_volume_below_mavol30: 605167 — Latest volume 32,543 is below MAVOL30 64,799 (50.2% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
+    "RULE check_volume_below_mavol30: 688037 — Latest volume 29,051 is below MAVOL30 47,089 (61.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 159.6
+  }
+}

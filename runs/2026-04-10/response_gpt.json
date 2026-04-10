@@ -1,0 +1,157 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": 3.89,
+        "trend": "accelerating"
+      },
+      {
+        "name": "证券Ⅱ",
+        "5d_pct": 3.57,
+        "trend": "accelerating"
+      },
+      {
+        "name": "电池",
+        "5d_pct": 3.44,
+        "trend": "steady"
+      },
+      {
+        "name": "其他电源设备Ⅱ",
+        "5d_pct": 3.29,
+        "trend": "steady"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": 2.97,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "贵金属",
+        "5d_pct": -1.7,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航运港口",
+        "5d_pct": -1.05,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "白酒Ⅱ",
+        "5d_pct": -0.72,
+        "trend": "weak"
+      },
+      {
+        "name": "工业金属",
+        "5d_pct": -0.69,
+        "trend": "weak"
+      },
+      {
+        "name": "文娱用品",
+        "5d_pct": -0.68,
+        "trend": "weak"
+      }
+    ],
+    "position_alignment": "1/2 positions in hot sectors",
+    "regime": "Broad risk-on tape with electronics/battery/brokerage leadership; defensives and metals lagging"
+  },
+  "position_decisions": [
+    {
+      "code": "605167",
+      "name": "利柏特",
+      "action": "HOLD",
+      "reason": "Current price 17.61 is above entry 16.38 and hard stop 15.56, with 3-day gain of about 7.51%. Sector 建筑装饰 is neither in today's hot top list nor cold bottom list, so sector drag is not yet a forced-sell trigger. Fresh order/EPC thesis is not disproven, but volume remains weak at 50.2% of MAVOL30, so do not add and monitor closely for stall.",
+      "sector_rank": "middle / not in top or bottom lists",
+      "new_stop": 15.56,
+      "pnl_pct": 7.51,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "action": "HOLD",
+      "reason": "Current price 184.03 is above entry 177.36 and hard stop 168.50, with gain of about 3.76% after 2 trading days. Sector 电子/半导体设备 aligns with today's stronger electronics chain via 其他电子Ⅱ and a broad tech-led tape. Momentum is constructive, but volume is only 61.7% of MAVOL30, so keep the position without adding.",
+      "sector_rank": "top 30% proxy via electronics leadership",
+      "new_stop": 168.5,
+      "pnl_pct": 3.76,
+      "days_held": 2,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "reason": "No current candidate packet in enriched_candidates, so RPS/MA-distance/VCP checks required by the framework cannot be verified. Strong breadth alone is not enough to force entries.",
+      "rps120": null
+    },
+    {
+      "code": "600498",
+      "name": "烽火通信",
+      "reason": "No current candidate packet in enriched_candidates, so catalyst freshness may be interesting but the mandatory entry checks on sector rank, MA distance and setup quality cannot be confirmed.",
+      "rps120": null
+    },
+    {
+      "code": "603115",
+      "name": "海星股份",
+      "reason": "No current candidate packet in enriched_candidates and no verified MA-distance data. Under Rule 2b, missing MA data is a risk factor; without a full candidate record, skip rather than force a buy.",
+      "rps120": null
+    },
+    {
+      "code": "605196",
+      "name": "华通线缆",
+      "reason": "No current candidate packet in enriched_candidates. Market regime is strong, but the framework still requires stock-level confirmation before opening new risk.",
+      "rps120": null
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "Industrial metals are in today's cold list proxy and the stock is not in today's validated candidate set. Cold-sector exposure is against the sector-first rule.",
+      "rps120": null
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "When strategy_pool and enriched_candidates are empty, even a 4.56:1 breadth day should still produce no new positions; strong tape is a permission slip, not a substitute for stock-level setup data.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Momentum entries need both market tailwind and a valid individual setup. Without RPS/MA/VCP data, the system cannot distinguish strength from chase risk."
+    },
+    {
+      "text": "Low IV Rank remains a sizing throttle, not a directional sell signal. Existing winners can be held, but fresh exposure should stay constrained when IV proxies are near 8%.",
+      "type": "heuristic",
+      "tags": [
+        "position-sizing",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "Very low IV reflects complacency: trends can continue, but the reward-to-new-entry profile worsens because volatility expansion risk rises from a low base."
+    },
+    {
+      "text": "Sub-MAVOL30 volume on both open positions is not yet an exit signal by itself when price is rising and stops are intact, but it is a clear 'do not add' condition.",
+      "type": "signal",
+      "tags": [
+        "timing",
+        "exit-rule",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "Weak volume reduces confidence in follow-through. It does not negate price strength immediately, but it lowers the probability that a breakout leg can accelerate."
+    }
+  ],
+  "market_summary": "Breadth 4.56:1 bullish, 63涨停/5跌停, 3/3 major indices green, broad-based rally led by 玻璃玻纤、证券、电池 and electronics. Research confirms 玻纤 strength is tied to 宏和科技年报净利同比+785.55% and electronic glass-fiber cloth price improvement; batteries and electronics also have supportive industry narratives, while brokers are participating in the risk-on move. IV context is complacent: overall avg IV Rank about 9.16%, with position proxies 300ETF 8.3% and 科创50 7.8%, so new-entry sizing should be cut in half even when the regime is strong. However, there are no validated enriched_candidates today, so no fresh positions should be opened.",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

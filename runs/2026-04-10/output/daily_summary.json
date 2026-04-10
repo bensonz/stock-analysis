@@ -1,0 +1,51 @@
+{
+  "date": "2026-04-10",
+  "actions": [
+    {
+      "code": "605167",
+      "name": "利柏特",
+      "action": "HOLD",
+      "price": 17.61,
+      "pnl_pct": 7.51,
+      "note": "Current price 17.61 is above entry 16.38 and hard stop 15.56, with 3-day gain of about 7.51%. Sector 建筑装饰 is neither in today's hot top list nor cold bottom list, so sector drag is not yet a forced-sell trigger. Fresh order/EPC thesis is not disproven, but volume remains weak at 50.2% of MAVOL30, so do not add and monitor closely for stall."
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "action": "HOLD",
+      "price": 184.03,
+      "pnl_pct": 3.76,
+      "note": "Current price 184.03 is above entry 177.36 and hard stop 168.50, with gain of about 3.76% after 2 trading days. Sector 电子/半导体设备 aligns with today's stronger electronics chain via 其他电子Ⅱ and a broad tech-led tape. Momentum is constructive, but volume is only 61.7% of MAVOL30, so keep the position without adding."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 2,
+    "totalEquity": 961801.0,
+    "dayPnl": 1576.0,
+    "dayReturnPct": 0.16,
+    "totalReturnPct": -3.82,
+    "unrealizedPnl": 3302.0,
+    "realizedPnl": -41501.0,
+    "cashPct": 93.24
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 4.5619,
+    "up": 4425,
+    "down": 970,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 63,
+    "limit_downs": 5,
+    "reason": "Entry regime strong: breadth 4.56:1, 3/3 major indices green, 63 limit-ups / 5 limit-downs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 4.56:1 bullish, 63涨停/5跌停, 3/3 major indices green, broad-based rally led by 玻璃玻纤、证券、电池 and electronics. Research confirms 玻纤 strength is tied to 宏和科技年报净利同比+785.55% and electronic glass-fiber cloth price improvement; batteries and electronics also have supportive industry narratives, while brokers are participating in the risk-on move. IV context is complacent: overall avg IV Rank about 9.16%, with position proxies 300ETF 8.3% and 科创50 7.8%, so new-entry sizing should be cut in half even when the regime is strong. However, there are no validated enriched_candidates today, so no fresh positions should be opened."
+  }
+}
