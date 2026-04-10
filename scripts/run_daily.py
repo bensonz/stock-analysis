@@ -1600,7 +1600,7 @@ def main():
             "validation_errors": len(errors),
             "gate_warnings": sum(len(g["soft_warns"]) for g in manifest.gates.values()),
         }, ensure_ascii=False))
-        return
+        sys.exit(manifest.exit_code)
 
     if "--apply" in args:
         # Phase 3+4: Apply LLM response from file
