@@ -1,0 +1,181 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": 8.05,
+        "trend": "accelerating"
+      },
+      {
+        "name": "能源金属",
+        "5d_pct": 2.65,
+        "trend": "steady"
+      },
+      {
+        "name": "养殖业",
+        "5d_pct": 2.47,
+        "trend": "steady"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": 2.36,
+        "trend": "steady"
+      },
+      {
+        "name": "电池",
+        "5d_pct": 2.2,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "游戏Ⅱ",
+        "5d_pct": -3.94,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航运港口",
+        "5d_pct": -2.4,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "动物保健Ⅱ",
+        "5d_pct": -2.18,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "医药商业",
+        "5d_pct": -2.13,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电网设备",
+        "5d_pct": -1.89,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/2 positions in hot sectors",
+    "regime": "Defensive commodity/material pockets and battery-related strength, while broad market breadth is weak and prior leadership is thinning"
+  },
+  "position_decisions": [
+    {
+      "code": "605167",
+      "name": "利柏特",
+      "action": "HOLD",
+      "reason": "Price 17.8 is above entry 16.38 and above hard stop 15.56, with about +8.67% unrealized gain after 4 trading days. Sector 建筑装饰 is not in today’s cold bottom-5 list, so no sector-forced exit. Fresh EPC/order catalyst still stands, but latest volume is only 53.3% of MAVOL30 and IV proxy is extremely low, so keep existing position but do not add and do not raise stop before +10%.",
+      "sector_rank": "not in hot top 5, not in cold bottom 5",
+      "new_stop": null,
+      "pnl_pct": 8.67,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "action": "HOLD",
+      "reason": "Price 183.53 remains above entry 177.36 and above hard stop 168.5, with about +3.48% unrealized gain after 3 trading days. Semicap/电子链 is not shown in today’s sector leaderboard, but there is still sector-news support from domestic semicap strength. However, today volume is only 51.5% of MAVOL30 and the market entry regime is weak, so hold existing position but avoid adding; no stop raise until +10%.",
+      "sector_rank": "outside visible hot top 5, not in cold bottom 5",
+      "new_stop": null,
+      "pnl_pct": 3.48,
+      "days_held": 3,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688372",
+      "name": "伟测科技",
+      "reason": "Market regime blocks new entries; breadth is only 0.48:1 despite stock-specific catalyst and clean MA distances. Also 科创板 IV Rank 12.2% implies half sizing even if tape improved.",
+      "rps120": 94.7
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "Strong semicap setup with 0 risk factors and MA alignment, but market buy gate fails and 科创板 IV Rank is only 12.2%, so no new position today.",
+      "rps120": 90.7
+    },
+    {
+      "code": "300037",
+      "name": "新宙邦",
+      "reason": "Battery sector is in today’s top 5 and catalyst is fresh, but market regime is weak so acceptable stock still becomes skip rather than buy.",
+      "rps120": 78.28
+    },
+    {
+      "code": "600236",
+      "name": "桂冠电力",
+      "reason": "Setup is orderly and catalyst is fresh, but sector is not in today’s hot top bucket and new long entries are disallowed by breadth.",
+      "rps120": 92.16
+    },
+    {
+      "code": "002448",
+      "name": "中原内配",
+      "reason": "Sector 汽车零部件 is not in today’s hot sectors, stock momentum is below the 75 floor for V2 entries, and no buy is allowed in weak tape.",
+      "rps120": 74.07
+    },
+    {
+      "code": "603507",
+      "name": "振江股份",
+      "reason": "Fails no-chasing rule with dist_ma5_pct 6.4%, dist_ma10_pct 9.7%, dist_ma20_pct 16.4%; overextended even before considering weak market.",
+      "rps120": 90.92
+    },
+    {
+      "code": "688455",
+      "name": "科捷智能",
+      "reason": "Fails no-chasing rule badly with dist_ma5_pct 19.4%, dist_ma10_pct 23.0%, dist_ma20_pct 18.9%; do not chase vertical extension.",
+      "rps120": 91.58
+    },
+    {
+      "code": "002810",
+      "name": "山东赫达",
+      "reason": "Fails no-chasing rule with dist_ma5_pct 11.3%, dist_ma10_pct 16.3%, dist_ma20_pct 21.3%, so setup is invalid for fresh entry.",
+      "rps120": 92.34
+    },
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "reason": "Strong trend and catalyst, but current extension is close to chase territory and market regime already says no new positions.",
+      "rps120": 90.0
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Weak breadth can completely override otherwise valid momentum candidates; today had 2 of 3 major indices green and 71涨停, but up/down was only 0.48:1, so the correct action is zero new longs.",
+      "type": "rule",
+      "tags": [
+        "sector",
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Index resilience without stock-level participation usually means narrow strength; new entries have lower follow-through when breadth is this weak."
+    },
+    {
+      "text": "Volume confirmation remains the main near-term weakness in current holdings; both active positions are above entry, but each is trading at only about half of MAVOL30, which argues for hold-not-add rather than aggressive pyramiding.",
+      "type": "signal",
+      "tags": [
+        "exit-rule",
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "Low-volume advances are more vulnerable to stalling, so letting winners run should not be confused with adding into weak participation."
+    },
+    {
+      "text": "Today’s strongest candidate list still contains many technical traps: several names with acceptable RPS were disqualified by MA-distance extension rather than weak fundamentals.",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "In late-stage momentum bursts, extension risk rises faster than catalyst quality, so MA-distance is the cleanest anti-chase filter."
+    }
+  ],
+  "market_summary": "Breadth 0.48:1 bearish, 71涨停/9跌停, weak participation despite 2 of 3 major indices green; this fails the minimum long-entry gate, so no new positions. Hot sectors (top 5): 玻璃玻纤 +8.05%, 能源金属 +2.65%, 养殖业 +2.47%, 林业Ⅱ +2.36%, 电池 +2.20%. Cold sectors (bottom 5): 游戏Ⅱ -3.94%, 航运港口 -2.40%, 动物保健Ⅱ -2.18%, 医药商业 -2.13%, 电网设备 -1.89%. Position sector alignment: 0/2 positions in hot sectors. Web checks show ongoing order/EPC support for 利柏特 and semicap policy/domestic-substitution support for 芯源微, but tape is too weak for fresh risk. IV context is generally low; small-cap/科创 proxies are especially low, which would reduce sizing even if entries were allowed.",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}

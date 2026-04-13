@@ -1,0 +1,52 @@
+{
+  "date": "2026-04-13",
+  "actions": [
+    {
+      "code": "605167",
+      "name": "利柏特",
+      "action": "HOLD",
+      "price": 17.8,
+      "pnl_pct": 8.67,
+      "note": "Price 17.8 is above entry 16.38 and above hard stop 15.56, with about +8.67% unrealized gain after 4 trading days. Sector 建筑装饰 is not in today’s cold bottom-5 list, so no sector-forced exit. Fresh EPC/order catalyst still stands, but latest volume is only 53.3% of MAVOL30 and IV proxy is extremely low, so keep existing position but do not add and do not raise stop before +10%."
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "action": "HOLD",
+      "price": 183.53,
+      "pnl_pct": 3.48,
+      "note": "Price 183.53 remains above entry 177.36 and above hard stop 168.5, with about +3.48% unrealized gain after 3 trading days. Semicap/电子链 is not shown in today’s sector leaderboard, but there is still sector-news support from domestic semicap strength. However, today volume is only 51.5% of MAVOL30 and the market entry regime is weak, so hold existing position but avoid adding; no stop raise until +10%."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 2,
+    "totalEquity": 962005.0,
+    "dayPnl": 472.0,
+    "dayReturnPct": 0.05,
+    "totalReturnPct": -3.8,
+    "unrealizedPnl": 3506.0,
+    "realizedPnl": -41501.0,
+    "cashPct": 93.22
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "weak",
+    "breadth_ratio": 0.4808,
+    "up": 1741,
+    "down": 3621,
+    "positive_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [
+      "上证指数"
+    ],
+    "limit_ups": 71,
+    "limit_downs": 9,
+    "reason": "Entry regime weak: breadth 0.48:1, 2/3 major indices green, 71 limit-ups / 9 limit-downs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 0.48:1 bearish, 71涨停/9跌停, weak participation despite 2 of 3 major indices green; this fails the minimum long-entry gate, so no new positions. Hot sectors (top 5): 玻璃玻纤 +8.05%, 能源金属 +2.65%, 养殖业 +2.47%, 林业Ⅱ +2.36%, 电池 +2.20%. Cold sectors (bottom 5): 游戏Ⅱ -3.94%, 航运港口 -2.40%, 动物保健Ⅱ -2.18%, 医药商业 -2.13%, 电网设备 -1.89%. Position sector alignment: 0/2 positions in hot sectors. Web checks show ongoing order/EPC support for 利柏特 and semicap policy/domestic-substitution support for 芯源微, but tape is too weak for fresh risk. IV context is generally low; small-cap/科创 proxies are especially low, which would reduce sizing even if entries were allowed."
+  }
+}

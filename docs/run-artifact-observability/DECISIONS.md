@@ -4,6 +4,8 @@
 - Decision: `input/intersect.json` is the working pool: `crawl.json ∩ rps.json`, with local RPS values merged onto the remote strategy members that exist in the local universe.
 - Decision: downstream candidate generation uses the explicit intersection pool instead of a relaxed local fallback.
 - Decision: Phase 1 now always writes `input/crawl.json`, `input/intersect.json`, `input/strategy_pool_debug.json`, `input/rps.json`, and `input/vcp.json` when the run reaches collection.
+- Decision: local RPS and MA-alignment calculations must resolve to the latest sufficiently covered trading date, not blindly `MAX(date)`.
+- Reason: the local pricedb can contain sparse partial-refresh dates near the head of the table; using those dates collapses the RPS universe and makes the crawl∩RPS intersection look empty even when the DB has full coverage a few trading days earlier.
 - Artifact contract: `input/rps.json` is a code-keyed map for the local pricedb universe and may be non-empty even when the strategy pool is small.
 - Artifact contract: `input/vcp.json` is a list of detected VCP setups and an empty list is a valid result, not a missing-step failure.
 - Artifact contract: `input/crawl.json` records the raw CheeseFortune list for the day; `input/intersect.json` records the effective working pool for the day; `input/strategy_pool_debug.json` explains the intersection counts and drops.

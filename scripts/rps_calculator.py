@@ -260,7 +260,34 @@ def _get_ma(conn: sqlite3.Connection, dates: list, required_count: int) -> dict:
 
 
 def _resolve_reference_date(conn: sqlite3.Connection, date: str | None) -> Optional[str]:
-    """Resolve to the latest trading date on or before the requested date."""
+    """Resolve to the latest sufficiently covered trading date on or before the requested date."""
+    coverage_threshold = _reference_date_coverage_threshold()
+    total_codes_row = conn.execute("SELECT COUNT(DISTINCT code) FROM daily_prices").fetchone()
+    total_codes = int(total_codes_row[0] or 0) if total_codes_row else 0
+    min_codes = int(total_codes * coverage_threshold)
+
+    params: list = []
+    where_clause = ""
+    if date is not None:
+        where_clause = "WHERE date <= ?"
+        params.append(date)
+
+    if min_codes > 0:
+        row = conn.execute(
+            f"""
+            SELECT date
+            FROM daily_prices
+            {where_clause}
+            GROUP BY date
+            HAVING COUNT(DISTINCT code) >= ?
+            ORDER BY date DESC
+            LIMIT 1
+            """,
+            params + [min_codes],
+        ).fetchone()
+        if row and row[0]:
+            return row[0]
+
     if date is None:
         row = conn.execute("SELECT MAX(date) FROM daily_prices").fetchone()
     else:
@@ -297,6 +324,15 @@ def _debug_enabled() -> bool:
 
 def _debug_force_recompute() -> bool:
     return os.getenv("RPS_FORCE_RECOMPUTE", "").strip().lower() in {"1", "true", "yes", "on"}
+
+
+def _reference_date_coverage_threshold() -> float:
+    raw = os.getenv("RPS_REFERENCE_DATE_MIN_COVERAGE", "0.9").strip()
+    try:
+        value = float(raw)
+    except ValueError:
+        return 0.9
+    return min(1.0, max(0.0, value))
 
 
 def _debug_codes() -> list[str]:

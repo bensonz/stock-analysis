@@ -4,4 +4,8 @@
 - Replaced the relaxed-local fallback approach in the daily pipeline with a stricter artifact split: raw remote crawl, full local RPS universe, and explicit intersection pool.
 - Added `input/intersect.json` and kept `input/strategy_pool_debug.json`, `input/rps.json`, and `input/vcp.json` as unconditional Phase 1 artifacts.
 - Manual rerun on 2026-04-12: `PRICEDB_SKIP_UPDATE=1 python3 scripts/run_daily.py --phase1` produced `crawl.json` with `source=api`, `total_stocks=200`, `rps.json` with 86 entries, `intersect.json` with 1 stock (`600008`), and `vcp.json` as `[]`.
+- Follow-up root cause: the April 12 result above was still wrong because `rps_calculator._resolve_reference_date()` chose sparse head dates like `2026-04-09` instead of the latest broadly covered date. The DB had 5,196 stocks overall, but only 229 on `2026-04-09` and 5,178 on `2026-03-31`.
+- Fixed `scripts/rps_calculator.py` so RPS/alignment now resolve to the latest sufficiently covered trading date by default.
+- Added regression coverage in [`tests/test_rps_reference_date.py`](/Users/bz/Work/Personal/stock-analysis/tests/test_rps_reference_date.py).
+- Manual rerun on 2026-04-13: `PRICEDB_SKIP_UPDATE=1 python3 scripts/run_daily.py --phase1` produced `crawl.json` with 200 remote names, `rps.json` with 5,174 names, `intersect.json` with 198 names, and `strategy_pool_debug.json` with `remote_missing_rps=2`.
 - Validation: `tests/test_strategy_pool_observability.py` passed, `tests/test_contracts.py` passed (`61 passed, 5 skipped`), and `scripts/test_pipeline.py` passed (`24 passed`).
