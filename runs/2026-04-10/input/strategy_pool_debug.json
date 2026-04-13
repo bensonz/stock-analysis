@@ -1,0 +1,38 @@
+{
+  "mode": "local_pricedb",
+  "db_path": "/Users/bz/Work/Personal/stock-analysis/data/pricedb/ashare_prices.db",
+  "latest_date": "2026-04-09",
+  "stage_counts": {
+    "rps_universe": 86,
+    "alignment_universe": 86,
+    "after_rps_alignment": 8,
+    "after_enrichment": 8,
+    "after_local_filters": 0,
+    "after_cross_check": 0,
+    "after_relaxed_fallback": 8
+  },
+  "drop_counts": {
+    "missing_metrics": 0,
+    "threshold_or_alignment": 78,
+    "summary_error": 0,
+    "missing_base": 0,
+    "st_name": 0,
+    "weak_highlights_or_risks": 7,
+    "excluded_risk": 0,
+    "market_cap": 1
+  },
+  "remote_strategy": {
+    "source": "api",
+    "date": "2026-04-10",
+    "total_stocks": 193,
+    "error": null
+  },
+  "fallback": {
+    "used": true,
+    "reason": "strict_local_filters_yielded_zero_candidates",
+    "remote_source": "api",
+    "remote_total_stocks": 193
+  },
+  "final_source": "local_pricedb_relaxed",
+  "final_total_stocks": 8
+}

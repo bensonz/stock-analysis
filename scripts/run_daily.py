@@ -38,7 +38,6 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from data_collector import (
     fetch_strategy_pool,
-    fetch_strategy_pool_local,
     batch_enrich,
     fetch_ma_data,
     fetch_market_overview,
@@ -46,8 +45,10 @@ from data_collector import (
     fetch_missed_opportunity_prices,
     load_recent_watchlists,
     save_crawl_data,
+    save_intersect_data,
     save_market_data,
     save_price_data,
+    save_strategy_pool_debug,
 )
 from position_manager import (
     load_active_positions,
@@ -90,6 +91,76 @@ HYPOTHESES_FILE = TRACKING_DIR / "hypotheses.json"
 LLM_PROMPT_START = "=== LLM_PROMPT_START ==="
 LLM_PROMPT_END = "=== LLM_PROMPT_END ==="
 ENTRY_GATE_INDICES = ("上证指数", "深证成指", "创业板指")
+
+
+def _build_strategy_intersection(remote_strategy: dict, rps_data: dict) -> tuple[dict, dict]:
+    """Build the working pool as remote CheeseFortune crawl intersected with local RPS."""
+    remote_stocks = remote_strategy.get("stocks", []) or []
+    intersect_stocks = []
+    seen_codes = set()
+    remote_missing_rps = 0
+    duplicate_remote_codes = 0
+
+    for stock in remote_stocks:
+        code = str(stock.get("code", "")).split(".")[0]
+        if not code:
+            continue
+        if code in seen_codes:
+            duplicate_remote_codes += 1
+            continue
+        seen_codes.add(code)
+
+        metrics = rps_data.get(code)
+        if not metrics:
+            remote_missing_rps += 1
+            continue
+
+        merged = dict(stock)
+        merged["code"] = code
+        merged["rps20"] = metrics.get("rps20")
+        merged["rps60"] = metrics.get("rps60")
+        merged["rps120"] = metrics.get("rps120")
+        merged["rps250"] = metrics.get("rps250")
+        merged["ma10"] = metrics.get("ma10_today")
+        intersect_stocks.append(merged)
+
+    intersect_stocks.sort(
+        key=lambda item: (item.get("rps120", 0), item.get("rps250", 0), item.get("rps60", 0)),
+        reverse=True,
+    )
+
+    debug = {
+        "mode": "cheesefortune_intersection",
+        "remote_strategy": {
+            "source": remote_strategy.get("source"),
+            "strategy_id": remote_strategy.get("strategy_id"),
+            "date": remote_strategy.get("date"),
+            "total_stocks": len(remote_stocks),
+            "error": remote_strategy.get("error"),
+        },
+        "stage_counts": {
+            "remote_strategy_total": len(remote_stocks),
+            "rps_universe": len(rps_data),
+            "intersection_total": len(intersect_stocks),
+        },
+        "drop_counts": {
+            "remote_missing_rps": remote_missing_rps,
+            "duplicate_remote_codes": duplicate_remote_codes,
+        },
+        "fallback": {"used": False},
+        "final_source": "cheesefortune_intersection",
+        "final_total_stocks": len(intersect_stocks),
+    }
+
+    return {
+        "source": "cheesefortune_intersection",
+        "strategy_id": remote_strategy.get("strategy_id"),
+        "date": remote_strategy.get("date"),
+        "total_stocks": len(intersect_stocks),
+        "stocks": intersect_stocks,
+        "error": remote_strategy.get("error"),
+        "debug": debug,
+    }, debug
 
 
 def get_run_dir(date: str) -> Path:
@@ -467,19 +538,25 @@ def phase1_collect(date: str) -> dict:
 
     # Step 1: Strategy pool (must complete before enrichment can start)
     print("  [1/5] Fetching strategy pool...", file=sys.stderr)
+    strategy_debug = {
+        "mode": "cheesefortune_intersection",
+        "remote_strategy": {},
+        "stage_counts": {},
+        "drop_counts": {},
+        "fallback": {"used": False},
+        "final_source": "cheesefortune_intersection",
+        "final_total_stocks": 0,
+    }
     try:
-        if pricedb_path.exists():
-            data["strategy_pool"] = fetch_strategy_pool_local(str(pricedb_path))
-        else:
-            data["strategy_pool"] = fetch_strategy_pool()
-        save_crawl_data(date, data["strategy_pool"], output_dir=input_dir)
-        strategy_source = data["strategy_pool"].get("source", "unknown")
+        data["strategy_crawl"] = fetch_strategy_pool()
+        save_crawl_data(date, data["strategy_crawl"], output_dir=input_dir)
+        strategy_source = data["strategy_crawl"].get("source", "unknown")
         print(
-            f"    → {data['strategy_pool'].get('total_stocks', 0)} stocks ({strategy_source})",
+            f"    → {data['strategy_crawl'].get('total_stocks', 0)} stocks ({strategy_source})",
             file=sys.stderr,
         )
     except Exception as e:
-        data["strategy_pool"] = {"error": str(e), "stocks": []}
+        data["strategy_crawl"] = {"error": str(e), "stocks": []}
         log["errors"].append(f"strategy_pool: {e}")
 
     # Load positions and watchlists synchronously (instant, local files)
@@ -494,12 +571,36 @@ def phase1_collect(date: str) -> dict:
     #   - MA distance < 3%: necessary gate (0% WR when > 3%)
     #   - MA20 proximity better than MA10 for winners
     #   - Optimal hold: ~10 days, 20d returns negative
-    pool_stocks = data["strategy_pool"].get("stocks", [])
-    if pricedb_path.exists() and pool_stocks:
+    data["strategy_pool"] = {
+        "source": "cheesefortune_intersection",
+        "strategy_id": data.get("strategy_crawl", {}).get("strategy_id"),
+        "date": data.get("strategy_crawl", {}).get("date"),
+        "total_stocks": 0,
+        "stocks": [],
+        "error": data.get("strategy_crawl", {}).get("error"),
+        "debug": strategy_debug,
+    }
+    rps_output = {}
+    vcp_output = []
+    if pricedb_path.exists():
         try:
             from vcp_scanner import scan_vcp
             from rps_calculator import compute_ma_rps
             rps_data = compute_ma_rps(str(pricedb_path))
+
+            data["strategy_pool"], strategy_debug = _build_strategy_intersection(
+                data.get("strategy_crawl", {}),
+                rps_data,
+            )
+            save_intersect_data(date, data["strategy_pool"], output_dir=input_dir)
+            print(
+                f"    → Intersect: {data['strategy_pool'].get('total_stocks', 0)} stocks "
+                f"(crawl ∩ local RPS)",
+                file=sys.stderr,
+            )
+
+            pool_stocks = data["strategy_pool"].get("stocks", [])
+
             vcp_results = scan_vcp(
                 str(pricedb_path), rps_data=rps_data,
                 min_rps120=0, base_days=120, top_n=500
@@ -545,7 +646,6 @@ def phase1_collect(date: str) -> dict:
             )
 
             # Save standalone RPS + VCP data to input dir for inspection
-            rps_output = {}
             for code, vals in rps_data.items():
                 rps_output[code] = {
                     "rps20": vals.get("rps20"),
@@ -554,13 +654,8 @@ def phase1_collect(date: str) -> dict:
                     "rps250": vals.get("rps250"),
                     "ma10": vals.get("ma10_today"),
                 }
-            (input_dir / "rps.json").write_text(
-                json.dumps(rps_output, ensure_ascii=False, indent=2) + "\n",
-                encoding="utf-8",
-            )
             print(f"    → RPS: {len(rps_output)} stocks saved to input/rps.json", file=sys.stderr)
 
-            vcp_output = []
             for r in vcp_results:
                 vcp_entry = {
                     "code": r["code"],
@@ -580,14 +675,28 @@ def phase1_collect(date: str) -> dict:
                 is_q = cr < 0.4 and md < 3
                 vcp_entry["quality"] = "PREMIUM" if (is_q and mt == "MA20") else "QUALITY" if is_q else "SETUP"
                 vcp_output.append(vcp_entry)
-            (input_dir / "vcp.json").write_text(
-                json.dumps(vcp_output, ensure_ascii=False, indent=2) + "\n",
-                encoding="utf-8",
-            )
             print(f"    → VCP: {len(vcp_output)} setups saved to input/vcp.json", file=sys.stderr)
 
         except Exception as e:
             print(f"    ⚠ VCP scan failed: {e}", file=sys.stderr)
+            data["strategy_pool"]["debug"] = strategy_debug
+    else:
+        save_intersect_data(date, data["strategy_pool"], output_dir=input_dir)
+
+    if pricedb_path.exists() and not (input_dir / "intersect.json").exists():
+        save_intersect_data(date, data["strategy_pool"], output_dir=input_dir)
+
+    (input_dir / "rps.json").write_text(
+        json.dumps(rps_output, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    (input_dir / "vcp.json").write_text(
+        json.dumps(vcp_output, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    save_strategy_pool_debug(date, strategy_debug, output_dir=input_dir)
+
+    pool_stocks = data["strategy_pool"].get("stocks", [])
 
     # Prepare enrichment candidates
     candidates = [

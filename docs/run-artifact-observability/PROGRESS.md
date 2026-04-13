@@ -1,0 +1,7 @@
+- 2026-04-10: Investigated the empty Phase 1 strategy pool and missing artifacts for the April 10 run.
+- Root cause: local RPS/alignment screening produced 8 names, but strict post-enrichment filters removed all 8. The main drops were 7 names for `highlights/risks` thresholds and 1 name for market cap.
+- Verified that the earlier `api+fallback` behavior was the wrong recovery path for this case. It restored 193 remote names in `crawl.json` but had zero useful overlap with the local RPS universe, so candidate generation still collapsed.
+- Replaced the relaxed-local fallback approach in the daily pipeline with a stricter artifact split: raw remote crawl, full local RPS universe, and explicit intersection pool.
+- Added `input/intersect.json` and kept `input/strategy_pool_debug.json`, `input/rps.json`, and `input/vcp.json` as unconditional Phase 1 artifacts.
+- Manual rerun on 2026-04-12: `PRICEDB_SKIP_UPDATE=1 python3 scripts/run_daily.py --phase1` produced `crawl.json` with `source=api`, `total_stocks=200`, `rps.json` with 86 entries, `intersect.json` with 1 stock (`600008`), and `vcp.json` as `[]`.
+- Validation: `tests/test_strategy_pool_observability.py` passed, `tests/test_contracts.py` passed (`61 passed, 5 skipped`), and `scripts/test_pipeline.py` passed (`24 passed`).

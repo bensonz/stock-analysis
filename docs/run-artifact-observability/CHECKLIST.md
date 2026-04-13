@@ -1,0 +1,7 @@
+- [x] Root cause for 2026-04-10 empty strategy pool identified
+- [x] `strategy_pool_debug.json` written for every run
+- [x] `rps.json` written for every run
+- [x] `vcp.json` written for every run
+- [x] Strategy-pool fallback behavior updated
+- [x] Relevant tests pass
+- [x] Expected daily artifacts documented

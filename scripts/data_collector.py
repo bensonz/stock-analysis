@@ -72,6 +72,7 @@ def fetch_strategy_pool(strategy_id: str = DEFAULT_STRATEGY_ID) -> dict:
             return {
                 "source": "api",
                 "strategy_id": strategy_id,
+                "date": datetime.now().strftime("%Y-%m-%d"),
                 "total_stocks": len(stocks),
                 "stocks": stocks,
                 "error": None,
@@ -88,6 +89,7 @@ def fetch_strategy_pool(strategy_id: str = DEFAULT_STRATEGY_ID) -> dict:
             return {
                 "source": f"crawl_file:{crawl_files[0].name}",
                 "strategy_id": strategy_id,
+                "date": data.get("date"),
                 "total_stocks": len(stocks),
                 "stocks": stocks,
                 "error": None,
@@ -98,10 +100,112 @@ def fetch_strategy_pool(strategy_id: str = DEFAULT_STRATEGY_ID) -> dict:
     return {
         "source": "none",
         "strategy_id": strategy_id,
+        "date": None,
         "total_stocks": 0,
         "stocks": [],
         "error": "Could not fetch strategy pool from API or crawl files",
     }
+
+
+def _fallback_to_remote_strategy(
+    remote: dict,
+    latest_date: str | None,
+    debug: dict,
+    reason: str,
+) -> dict | None:
+    """Return a remote strategy fallback result when available."""
+    remote_stocks = remote.get("stocks", []) or []
+    if not remote_stocks:
+        debug["fallback"] = {
+            "used": False,
+            "reason": reason,
+            "remote_source": remote.get("source"),
+            "remote_total_stocks": 0,
+        }
+        return None
+
+    remote_source = remote.get("source", "remote")
+    debug["fallback"] = {
+        "used": True,
+        "reason": reason,
+        "remote_source": remote_source,
+        "remote_total_stocks": len(remote_stocks),
+    }
+    debug["final_source"] = f"{remote_source}+fallback"
+    debug["final_total_stocks"] = len(remote_stocks)
+
+    return {
+        "source": f"{remote_source}+fallback",
+        "strategy_id": remote.get("strategy_id", DEFAULT_STRATEGY_ID),
+        "date": remote.get("date") or latest_date,
+        "total_stocks": len(remote_stocks),
+        "stocks": remote_stocks,
+        "error": remote.get("error"),
+        "debug": debug,
+    }
+
+
+def _build_relaxed_local_strategy_pool(
+    screened: list[dict],
+    summary_by_code: dict[str, dict],
+    snapshots: dict[str, dict],
+    latest_date: str,
+    drop_reasons: dict[str, list[str]],
+) -> list[dict]:
+    """Build a fallback pool from locally screened candidates when strict filters remove everything."""
+    relaxed = []
+    for base in screened:
+        code = base["code"]
+        summary = summary_by_code.get(code, {})
+        snapshot = snapshots.get(code, {})
+        highlights = summary.get("highlights") or []
+        risks = summary.get("risks") or []
+
+        stock = {
+            "code": code,
+            "code_full": normalize_code(code),
+            "name": summary.get("name") or base.get("name") or code,
+            "date": latest_date,
+            "price": snapshot.get("price"),
+            "change_pct": snapshot.get("change_pct"),
+            "market_cap": None,
+            "pe": summary.get("pe"),
+            "pb": summary.get("pb"),
+            "ps_ttm": summary.get("ps_ttm"),
+            "pcf_ttm": summary.get("pcf_ttm"),
+            "valuation_percentile": summary.get("valuation_percentile"),
+            "score_company": summary.get("score_company"),
+            "score_trend": summary.get("score_trend"),
+            "score_value": summary.get("score_value"),
+            "highlights_count": len(highlights),
+            "risks_count": len(risks),
+            "highlights": highlights,
+            "risks": risks,
+            "events": summary.get("events") or [],
+            "industries": summary.get("industries") or [],
+            "concepts": summary.get("concepts") or [],
+            "revenue_yoy": summary.get("revenue_yoy"),
+            "net_profit_yoy": summary.get("net_profit_yoy"),
+            "gross_margin": summary.get("gross_margin"),
+            "rps20": base.get("rps20"),
+            "rps60": base.get("rps60"),
+            "rps120": base.get("rps120"),
+            "rps250": base.get("rps250"),
+            "ma10": base.get("ma10"),
+            "ma20": base.get("ma20"),
+            "ma120": base.get("ma120"),
+            "ma250": base.get("ma250"),
+            "strict_filter_reasons": drop_reasons.get(code, []),
+        }
+
+        market_cap = _compute_market_cap(snapshot.get("price"), summary.get("total_shares"))
+        if market_cap is not None:
+            stock["market_cap"] = round(market_cap, 2)
+
+        relaxed.append(stock)
+
+    relaxed.sort(key=lambda item: (item.get("rps120", 0), item.get("rps250", 0), item.get("rps60", 0)), reverse=True)
+    return relaxed
 
 
 def fetch_strategy_pool_local(db_path: str = None) -> dict:
@@ -133,18 +237,34 @@ def fetch_strategy_pool_local(db_path: str = None) -> dict:
                 for row in conn.execute("SELECT code, name, exchange FROM stocks")
             }
 
+        debug = {
+            "mode": "local_pricedb",
+            "db_path": str(db_file),
+            "latest_date": latest_date,
+            "stage_counts": {},
+            "drop_counts": {},
+            "remote_strategy": {},
+            "fallback": {"used": False},
+        }
+
         rps_by_code = compute_ma_rps(str(db_file), latest_date)
         alignment_by_code = compute_ma_alignment(str(db_file), latest_date)
+        debug["stage_counts"]["rps_universe"] = len(rps_by_code)
+        debug["stage_counts"]["alignment_universe"] = len(alignment_by_code)
 
         screened = []
+        missing_metrics = 0
+        threshold_or_alignment = 0
         for code, rps in rps_by_code.items():
             rps60 = rps.get("rps60")
             rps120 = rps.get("rps120")
             rps250 = rps.get("rps250")
             alignment = alignment_by_code.get(code)
             if rps60 is None or rps120 is None or rps250 is None or not alignment:
+                missing_metrics += 1
                 continue
             if rps120 < 85 or rps250 < 85 or rps60 < 70 or not alignment.get("aligned"):
+                threshold_or_alignment += 1
                 continue
 
             meta = stock_meta.get(code, {})
@@ -164,8 +284,29 @@ def fetch_strategy_pool_local(db_path: str = None) -> dict:
                 "price_date": latest_date,
             })
 
+        debug["drop_counts"]["missing_metrics"] = missing_metrics
+        debug["drop_counts"]["threshold_or_alignment"] = threshold_or_alignment
+        debug["stage_counts"]["after_rps_alignment"] = len(screened)
         screened.sort(key=lambda item: (item["rps120"], item["rps250"], item["rps60"]), reverse=True)
+        remote = fetch_strategy_pool()
+        debug["remote_strategy"] = {
+            "source": remote.get("source"),
+            "date": remote.get("date"),
+            "total_stocks": remote.get("total_stocks", 0),
+            "error": remote.get("error"),
+        }
+
         if not screened:
+            fallback = _fallback_to_remote_strategy(
+                remote,
+                latest_date,
+                debug,
+                reason="local_rps_alignment_yielded_zero_candidates",
+            )
+            if fallback:
+                return fallback
+            debug["final_source"] = "local_pricedb"
+            debug["final_total_stocks"] = 0
             return {
                 "source": "local_pricedb",
                 "strategy_id": LOCAL_STRATEGY_ID,
@@ -173,27 +314,45 @@ def fetch_strategy_pool_local(db_path: str = None) -> dict:
                 "total_stocks": 0,
                 "stocks": [],
                 "error": None,
+                "debug": debug,
             }
 
         enriched_rows = batch_enrich(screened)
         if not enriched_rows:
             raise RuntimeError("CheeseForTune enrichment returned no results")
 
+        debug["stage_counts"]["after_enrichment"] = len(enriched_rows)
         snapshots = _load_price_snapshots(str(db_file), [stock["code"] for stock in screened], latest_date)
         screened_map = {stock["code"]: stock for stock in screened}
+        summary_by_code = {}
+        drop_reasons: dict[str, list[str]] = {}
         final_stocks = []
+        drop_counts = {
+            "summary_error": 0,
+            "missing_base": 0,
+            "st_name": 0,
+            "weak_highlights_or_risks": 0,
+            "excluded_risk": 0,
+            "market_cap": 0,
+        }
 
         for summary in enriched_rows:
             if not isinstance(summary, dict) or summary.get("error"):
+                drop_counts["summary_error"] += 1
                 continue
 
             code = str(summary.get("code", "")).split(".")[0]
+            summary_by_code[code] = summary
             base = screened_map.get(code)
             if not base:
+                drop_counts["missing_base"] += 1
                 continue
 
             name = summary.get("name") or base.get("name") or code
+            reasons = drop_reasons.setdefault(code, [])
             if _is_st_stock(name):
+                drop_counts["st_name"] += 1
+                reasons.append("st_name")
                 continue
 
             highlights = summary.get("highlights") or []
@@ -201,14 +360,20 @@ def fetch_strategy_pool_local(db_path: str = None) -> dict:
             highlights_count = len(highlights)
             risks_count = len(risks)
             if highlights_count < 4 or risks_count > 5:
+                drop_counts["weak_highlights_or_risks"] += 1
+                reasons.append(f"weak_highlights_or_risks(highlights={highlights_count},risks={risks_count})")
                 continue
             if _has_excluded_risk(risks):
+                drop_counts["excluded_risk"] += 1
+                reasons.append("excluded_risk")
                 continue
 
             price_snapshot = snapshots.get(code, {})
             price = price_snapshot.get("price")
             market_cap = _compute_market_cap(price, summary.get("total_shares"))
             if market_cap is None or not (20 <= market_cap <= 810):
+                drop_counts["market_cap"] += 1
+                reasons.append(f"market_cap={market_cap}")
                 continue
 
             stock = {
@@ -248,21 +413,60 @@ def fetch_strategy_pool_local(db_path: str = None) -> dict:
             }
             final_stocks.append(stock)
 
+        debug["drop_counts"].update(drop_counts)
+        debug["stage_counts"]["after_local_filters"] = len(final_stocks)
         final_stocks.sort(key=lambda item: (item.get("rps120", 0), item.get("rps250", 0)), reverse=True)
 
-        # Cross-compare: keep only stocks that also appear in CheeseForTune strategy
-        try:
-            remote = fetch_strategy_pool()
-            remote_codes = {str(s.get("code", "")).split(".")[0] for s in remote.get("stocks", [])}
-            if remote_codes:
-                before = len(final_stocks)
-                final_stocks = [s for s in final_stocks if s["code"] in remote_codes]
-                dropped = before - len(final_stocks)
-                if dropped:
-                    print(f"    → {dropped} stocks filtered out (not in CheeseForTune strategy)", file=sys.stderr)
-        except Exception as e:
-            print(f"    ⚠ CheeseForTune cross-check failed, skipping filter: {e}", file=sys.stderr)
+        remote_codes = {str(s.get("code", "")).split(".")[0] for s in remote.get("stocks", [])}
+        debug["stage_counts"]["after_cross_check"] = len(final_stocks)
+        if remote_codes and final_stocks:
+            before = len(final_stocks)
+            final_stocks = [s for s in final_stocks if s["code"] in remote_codes]
+            dropped = before - len(final_stocks)
+            debug["drop_counts"]["cross_check_removed"] = dropped
+            debug["stage_counts"]["after_cross_check"] = len(final_stocks)
+            if dropped:
+                print(f"    → {dropped} stocks filtered out (not in CheeseForTune strategy)", file=sys.stderr)
 
+        if not final_stocks:
+            relaxed = _build_relaxed_local_strategy_pool(
+                screened,
+                summary_by_code,
+                snapshots,
+                latest_date,
+                drop_reasons,
+            )
+            if relaxed:
+                debug["fallback"] = {
+                    "used": True,
+                    "reason": "strict_local_filters_yielded_zero_candidates",
+                    "remote_source": remote.get("source"),
+                    "remote_total_stocks": remote.get("total_stocks", 0),
+                }
+                debug["stage_counts"]["after_relaxed_fallback"] = len(relaxed)
+                debug["final_source"] = "local_pricedb_relaxed"
+                debug["final_total_stocks"] = len(relaxed)
+                return {
+                    "source": "local_pricedb_relaxed",
+                    "strategy_id": LOCAL_STRATEGY_ID,
+                    "date": latest_date,
+                    "total_stocks": len(relaxed),
+                    "stocks": relaxed,
+                    "error": None,
+                    "debug": debug,
+                }
+
+            fallback = _fallback_to_remote_strategy(
+                remote,
+                latest_date,
+                debug,
+                reason="local_post_enrichment_filters_yielded_zero_candidates",
+            )
+            if fallback:
+                return fallback
+
+        debug["final_source"] = "local_pricedb+cf_cross"
+        debug["final_total_stocks"] = len(final_stocks)
         return {
             "source": "local_pricedb+cf_cross",
             "strategy_id": LOCAL_STRATEGY_ID,
@@ -270,6 +474,7 @@ def fetch_strategy_pool_local(db_path: str = None) -> dict:
             "total_stocks": len(final_stocks),
             "stocks": final_stocks,
             "error": None,
+            "debug": debug,
         }
     except Exception as e:
         print(f"  Local pricedb strategy failed: {e}", file=sys.stderr)
@@ -1222,6 +1427,17 @@ def save_crawl_data(date: str, data: dict, output_dir: Path | None = None) -> Pa
     return out
 
 
+def save_intersect_data(date: str, data: dict, output_dir: Path | None = None) -> Path:
+    """Save intersection of remote strategy crawl and local RPS universe."""
+    if output_dir:
+        out = output_dir / "intersect.json"
+    else:
+        out = CRAWL_DIR / f"{date}.intersect.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return out
+
+
 def save_market_data(date: str, data: dict, output_dir: Path | None = None) -> Path:
     """Save market overview data."""
     if output_dir:
@@ -1239,6 +1455,17 @@ def save_price_data(date: str, data: dict, output_dir: Path | None = None) -> Pa
         out = output_dir / "prices.json"
     else:
         out = PRICES_DIR / f"{date}.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return out
+
+
+def save_strategy_pool_debug(date: str, data: dict, output_dir: Path | None = None) -> Path:
+    """Save strategy pool debug metadata."""
+    if output_dir:
+        out = output_dir / "strategy_pool_debug.json"
+    else:
+        out = CRAWL_DIR / f"{date}.debug.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return out
