@@ -1,10 +1,10 @@
 # 候选股票 2026-04-13
 
-## 入场条件: 🚫 BLOCKED
-- 涨跌比: 0.69:1
-- 上涨指数: 深证成指, 创业板指
-- 下跌指数: 上证指数
-- 原因: Entry regime weak: breadth 0.69:1, 2/3 major indices green, 84 limit-ups / 11 limit-downs.
+## 入场条件: ⚠ THROTTLED
+- 涨跌比: 0.80:1
+- 上涨指数: 上证指数, 深证成指, 创业板指
+- 新仓位尺寸系数: 0.50x
+- 原因: Entry regime weak: breadth 0.80:1, 3/3 major indices green, 86 limit-ups / 10 limit-downs. Allow entries only with 50% sizing.
 
 ## 策略池 (42 stocks)
 
