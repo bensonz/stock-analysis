@@ -312,13 +312,20 @@ def generate_candidates_md(date: str, data: dict, output_dir: Path | None = None
         breadth = regime.get("breadth_ratio", 0)
         pos_idx = regime.get("positive_indices", [])
         neg_idx = regime.get("negative_indices", [])
-        status = "✅ OPEN" if allow else "🚫 BLOCKED"
+        sizing_multiplier = float(regime.get("sizing_multiplier", 1.0) or 1.0)
+        if not allow:
+            status = "🚫 BLOCKED"
+        elif sizing_multiplier < 1.0:
+            status = "⚠ THROTTLED"
+        else:
+            status = "✅ OPEN"
         lines.append(f"## 入场条件: {status}")
         lines.append(f"- 涨跌比: {breadth:.2f}:1")
         if pos_idx:
             lines.append(f"- 上涨指数: {', '.join(pos_idx)}")
         if neg_idx:
             lines.append(f"- 下跌指数: {', '.join(neg_idx)}")
+        lines.append(f"- 新仓位尺寸系数: {sizing_multiplier:.2f}x")
         lines.append(f"- 原因: {regime.get('reason', '')}")
         lines.append("")
 

@@ -92,6 +92,8 @@ LLM_PROMPT_START = "=== LLM_PROMPT_START ==="
 LLM_PROMPT_END = "=== LLM_PROMPT_END ==="
 ENTRY_GATE_INDICES = ("上证指数", "深证成指", "创业板指")
 INTERSECT_MIN_RPS = 85.0
+WEAK_TAPE_SIZE_MULTIPLIER = 0.5
+STRONG_TAPE_SIZE_MULTIPLIER = 0.75
 
 
 def _build_strategy_intersection(remote_strategy: dict, rps_data: dict) -> tuple[dict, dict]:
@@ -318,7 +320,7 @@ def restore_aux_state(run_dir: Path) -> list[str]:
 
 
 def evaluate_new_entry_regime(market: dict) -> dict:
-    """Classify whether the tape is strong enough to permit new long entries."""
+    """Classify tape quality for new entries and derive a sizing throttle."""
     breadth = (market or {}).get("breadth") or {}
     indices = (market or {}).get("indices") or {}
     distribution = breadth.get("distribution") or {}
@@ -340,27 +342,55 @@ def evaluate_new_entry_regime(market: dict) -> dict:
                 negative_indices.append(name)
 
     has_breadth = up > 0 or down > 0
-    strong_breadth = has_breadth and ratio >= 1.5
     broad_index_support = len(positive_indices) >= 2
-    panic_tape = has_breadth and (ratio < 1.0 or limit_downs >= 30)
-    allow_new_positions = strong_breadth and broad_index_support and not panic_tape
+    panic_tape = has_breadth and (ratio < 0.35 or limit_downs >= 30)
+    weak_tape = has_breadth and ratio < 1.0
+    strong_tape = has_breadth and ratio >= 1.5 and broad_index_support
+
+    allow_new_positions = has_breadth and not panic_tape
+    regime = "balanced"
+    sizing_multiplier = 1.0
 
     if not has_breadth:
+        regime = "unknown"
+        sizing_multiplier = 0.0
         reason = "Missing breadth data; defaulting to no new positions."
-    elif allow_new_positions:
+    elif panic_tape:
+        regime = "panic"
+        sizing_multiplier = 0.0
         reason = (
-            f"Entry regime strong: breadth {ratio:.2f}:1, "
-            f"{len(positive_indices)}/3 major indices green, {limit_ups} limit-ups / {limit_downs} limit-downs."
+            f"Entry regime panic: breadth {ratio:.2f}:1, "
+            f"{len(positive_indices)}/3 major indices green, {limit_ups} limit-ups / {limit_downs} limit-downs. "
+            "Block new longs."
         )
-    else:
+    elif weak_tape:
+        regime = "weak"
+        sizing_multiplier = WEAK_TAPE_SIZE_MULTIPLIER
         reason = (
             f"Entry regime weak: breadth {ratio:.2f}:1, "
-            f"{len(positive_indices)}/3 major indices green, {limit_ups} limit-ups / {limit_downs} limit-downs."
+            f"{len(positive_indices)}/3 major indices green, {limit_ups} limit-ups / {limit_downs} limit-downs. "
+            f"Allow entries only with {int(WEAK_TAPE_SIZE_MULTIPLIER * 100)}% sizing."
+        )
+    elif strong_tape:
+        regime = "strong"
+        sizing_multiplier = STRONG_TAPE_SIZE_MULTIPLIER
+        reason = (
+            f"Entry regime strong: breadth {ratio:.2f}:1, "
+            f"{len(positive_indices)}/3 major indices green, {limit_ups} limit-ups / {limit_downs} limit-downs. "
+            f"Allow entries, but cap fresh size at {int(STRONG_TAPE_SIZE_MULTIPLIER * 100)}% to avoid chasing."
+        )
+    else:
+        regime = "balanced"
+        sizing_multiplier = 1.0
+        reason = (
+            f"Entry regime balanced: breadth {ratio:.2f}:1, "
+            f"{len(positive_indices)}/3 major indices green, {limit_ups} limit-ups / {limit_downs} limit-downs. "
+            "Allow normal sizing."
         )
 
     return {
         "allow_new_positions": allow_new_positions,
-        "regime": "strong" if allow_new_positions else "weak",
+        "regime": regime,
         "breadth_ratio": round(ratio, 4) if has_breadth and ratio != float("inf") else None,
         "up": up,
         "down": down,
@@ -368,6 +398,8 @@ def evaluate_new_entry_regime(market: dict) -> dict:
         "negative_indices": negative_indices,
         "limit_ups": limit_ups,
         "limit_downs": limit_downs,
+        "sizing_multiplier": sizing_multiplier,
+        "hard_block": not allow_new_positions,
         "reason": reason,
     }
 
@@ -1077,7 +1109,25 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
     # 2. Open new positions
     entry_regime = data.get("entry_regime", evaluate_new_entry_regime(data.get("market", {})))
     requested_new_positions = decisions.get("new_positions", []) or []
-    allowed_new_positions = requested_new_positions if entry_regime.get("allow_new_positions") else []
+    sizing_multiplier = float(entry_regime.get("sizing_multiplier", 1.0) or 1.0)
+    if entry_regime.get("allow_new_positions"):
+        portfolio_config = load_portfolio_config()
+        default_alloc = float(portfolio_config.get("max_position_pct", 10))
+        allowed_new_positions = []
+        for p in requested_new_positions:
+            adjusted = dict(p)
+            raw_alloc = adjusted.get("allocation_pct")
+            base_alloc = float(raw_alloc) if raw_alloc not in (None, "", 0) else default_alloc
+            scaled_alloc = round(base_alloc * sizing_multiplier, 2)
+            adjusted["allocation_pct"] = scaled_alloc
+            if scaled_alloc != base_alloc:
+                log["actions"].append(
+                    f"SIZE THROTTLE {str(p.get('code', ''))}: {base_alloc:g}% -> {scaled_alloc:g}% "
+                    f"(regime={entry_regime.get('regime')})"
+                )
+            allowed_new_positions.append(adjusted)
+    else:
+        allowed_new_positions = []
     decisions["new_positions"] = allowed_new_positions
     if requested_new_positions and not allowed_new_positions:
         log["actions"].append(f"SKIP OPEN ALL: {entry_regime.get('reason')}")

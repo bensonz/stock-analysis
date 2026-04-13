@@ -19,7 +19,7 @@
 ## 2026-03-15: Stop Forced Daily Entries
 
 ### Completed
-1. Added deterministic weak-market entry gating in Phase 3 plus prompt guidance so weak sessions default to `new_positions: []`
+1. Replaced the deterministic weak-market hard block with a regime-based sizing throttle in Phase 3; panic sessions still veto new longs, while weak and strong sessions scale allocation down
 2. Enforced `min_cash_pct` and available-cash sizing in `position_manager.py`
 3. Exposed reserve/deployable cash in portfolio summaries for the PM pass
 4. Added focused tests for sizing and entry gating

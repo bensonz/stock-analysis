@@ -446,7 +446,7 @@ class TestRunDailyParser(unittest.TestCase):
         result = _parse_llm_response("no json here at all")
         self.assertEqual(result, {})
 
-    def test_entry_regime_blocks_weak_market(self):
+    def test_entry_regime_throttles_weak_market(self):
         from run_daily import evaluate_new_entry_regime
 
         regime = evaluate_new_entry_regime({
@@ -458,10 +458,11 @@ class TestRunDailyParser(unittest.TestCase):
             },
         })
 
-        self.assertFalse(regime["allow_new_positions"])
+        self.assertTrue(regime["allow_new_positions"])
         self.assertEqual(regime["regime"], "weak")
+        self.assertEqual(regime["sizing_multiplier"], 0.5)
 
-    def test_entry_regime_allows_strong_market(self):
+    def test_entry_regime_throttles_strong_market(self):
         from run_daily import evaluate_new_entry_regime
 
         regime = evaluate_new_entry_regime({
@@ -475,6 +476,23 @@ class TestRunDailyParser(unittest.TestCase):
 
         self.assertTrue(regime["allow_new_positions"])
         self.assertEqual(regime["regime"], "strong")
+        self.assertEqual(regime["sizing_multiplier"], 0.75)
+
+    def test_entry_regime_blocks_panic_market(self):
+        from run_daily import evaluate_new_entry_regime
+
+        regime = evaluate_new_entry_regime({
+            "breadth": {"up": 900, "down": 4200, "distribution": {"f10": 31, "r10": 42}},
+            "indices": {
+                "上证指数": {"change_pct": -2.1},
+                "深证成指": {"change_pct": -2.8},
+                "创业板指": {"change_pct": -3.4},
+            },
+        })
+
+        self.assertFalse(regime["allow_new_positions"])
+        self.assertEqual(regime["regime"], "panic")
+        self.assertEqual(regime["sizing_multiplier"], 0.0)
 
 
 if __name__ == "__main__":

@@ -12,10 +12,10 @@
 **Tests**: Position sizing and reserve checks in unit tests.
 **Status**: Complete
 
-## Stage 3: Block New Buys In Weak Markets
+## Stage 3: Throttle New Buys By Market Regime
 
-**Goal**: Make weak-market runs default to zero new positions and enforce a deterministic breadth/regime gate at apply time.
-**Success Criteria**: Weak breadth/regime causes Phase 3 to skip `new_positions`; prompt instructs the model to return `new_positions: []` unless regime is strong.
+**Goal**: Make market regime affect fresh position sizing instead of requiring a strong day for every buy.
+**Success Criteria**: Panic or missing-data sessions still veto new longs, while weak and strong sessions apply deterministic sizing throttles at apply time.
 **Tests**: Apply-layer tests for weak and strong market gating.
 **Status**: Complete
 

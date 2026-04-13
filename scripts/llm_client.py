@@ -656,6 +656,7 @@ def build_summary(phase1_data: dict) -> str:
             "## Entry Regime\n"
             f"- Regime: {entry_regime.get('regime', '?')}\n"
             f"- Allow new positions: {entry_regime.get('allow_new_positions', False)}\n"
+            f"- Sizing multiplier: {entry_regime.get('sizing_multiplier', 1.0)}x\n"
             f"- Reason: {entry_regime.get('reason', '')}"
         )
 
