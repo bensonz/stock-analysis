@@ -107,7 +107,8 @@ def test_phase1_collect_writes_crawl_intersect_rps_and_vcp_artifacts(tmp_path, m
 
     fake_rps = types.ModuleType("rps_calculator")
     fake_rps.compute_ma_rps = lambda db, date=None: {
-        "600001": {"rps20": 81.0, "rps60": 88.0, "rps120": 92.0, "rps250": 95.0, "ma10_today": 10.2}
+        "600001": {"rps20": 81.0, "rps60": 88.0, "rps120": 92.0, "rps250": 95.0, "ma10_today": 10.2},
+        "600999": {"rps20": 70.0, "rps60": 80.0, "rps120": 91.0, "rps250": 95.0, "ma10_today": 9.8},
     }
     monkeypatch.setitem(sys.modules, "rps_calculator", fake_rps)
 
@@ -198,8 +199,10 @@ def test_phase1_collect_writes_crawl_intersect_rps_and_vcp_artifacts(tmp_path, m
     assert [s["code"] for s in intersect_data["stocks"]] == ["600001"]
     assert debug_data["final_total_stocks"] == 1
     assert debug_data["stage_counts"]["remote_strategy_total"] == 2
-    assert debug_data["stage_counts"]["rps_universe"] == 1
+    assert debug_data["stage_counts"]["rps_universe"] == 2
     assert debug_data["stage_counts"]["intersection_total"] == 1
-    assert debug_data["drop_counts"]["remote_missing_rps"] == 1
-    assert list(rps_data.keys()) == ["600001"]
+    assert debug_data["drop_counts"]["remote_missing_rps"] == 0
+    assert debug_data["drop_counts"]["remote_below_rps_threshold"] == 1
+    assert debug_data["criteria"] == {"rps60_gt": 85.0, "rps120_gt": 85.0, "rps250_gt": 85.0}
+    assert list(rps_data.keys()) == ["600001", "600999"]
     assert len(vcp_data) == 1

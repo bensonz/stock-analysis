@@ -8,4 +8,7 @@
 - Fixed `scripts/rps_calculator.py` so RPS/alignment now resolve to the latest sufficiently covered trading date by default.
 - Added regression coverage in [`tests/test_rps_reference_date.py`](/Users/bz/Work/Personal/stock-analysis/tests/test_rps_reference_date.py).
 - Manual rerun on 2026-04-13: `PRICEDB_SKIP_UPDATE=1 python3 scripts/run_daily.py --phase1` produced `crawl.json` with 200 remote names, `rps.json` with 5,174 names, `intersect.json` with 198 names, and `strategy_pool_debug.json` with `remote_missing_rps=2`.
+- Tightened the `intersect.json` definition so it now uses the CheeseFortune list intersected with the local RPS-filtered universe instead of any local RPS match.
+- Current filter: `rps60 > 85`, `rps120 > 85`, and `rps250 > 85`.
+- Manual rerun on 2026-04-13 after the filter change: `crawl.json` had 201 remote names, `rps.json` had 5,174 names, and `intersect.json` dropped to 42 names. `strategy_pool_debug.json` now reports `remote_missing_rps=2` and `remote_below_rps_threshold=157`.
 - Validation: `tests/test_strategy_pool_observability.py` passed, `tests/test_contracts.py` passed (`61 passed, 5 skipped`), and `scripts/test_pipeline.py` passed (`24 passed`).

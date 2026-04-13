@@ -10,15 +10,21 @@
   "stage_counts": {
     "remote_strategy_total": 200,
     "rps_universe": 5174,
-    "intersection_total": 198
+    "intersection_total": 42
   },
   "drop_counts": {
-    "remote_missing_rps": 2,
+    "remote_missing_rps": 1,
+    "remote_below_rps_threshold": 157,
     "duplicate_remote_codes": 0
+  },
+  "criteria": {
+    "rps60_gt": 85.0,
+    "rps120_gt": 85.0,
+    "rps250_gt": 85.0
   },
   "fallback": {
     "used": false
   },
   "final_source": "cheesefortune_intersection",
-  "final_total_stocks": 198
+  "final_total_stocks": 42
 }

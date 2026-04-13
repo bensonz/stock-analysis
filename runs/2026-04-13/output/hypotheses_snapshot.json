@@ -439,13 +439,17 @@
           {
             "date": "2026-04-13",
             "detail": "Weak breadth can completely override otherwise valid momentum candidates; today had 2 of 3 major indices green and 71涨停, but up/down was only 0.48:1, so the correct action is zero new longs."
+          },
+          {
+            "date": "2026-04-13",
+            "detail": "当市场出现84家涨停但上涨家数仍明显少于下跌家数时，说明赚钱效应集中在少数热点，不能把局部强势误判成全面可开仓环境。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 26,
+      "sampleSize": 27,
       "hitRate": 1.0,
-      "confidence": 0.964,
+      "confidence": 0.966,
       "tags": [],
       "parentRule": null,
       "retiredDate": null,
@@ -535,7 +539,7 @@
       "type": "heuristic",
       "status": "validated",
       "created": "2026-04-01",
-      "lastTested": "2026-04-10",
+      "lastTested": "2026-04-13",
       "mechanism": "Cheap volatility means trend continuation can persist, but upside surprise from fresh entries comes from proper setup quality, not from paying up far above moving averages.",
       "evidence": {
         "supporting": [
@@ -558,13 +562,17 @@
           {
             "date": "2026-04-10",
             "detail": "Low IV regime is a sizing throttle, not a direction veto: today's market is strong enough for longs, but sub-15% IV Rank argues for patience and half-sized deployment only when a fully qualified candidate appears."
+          },
+          {
+            "date": "2026-04-13",
+            "detail": "低IV本身不是禁止交易的理由，但在弱breadth背景下会放大追高失误成本，因此低IV更适合作为“少开仓甚至不开仓”的放大器，而不是单独信号。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 5,
+      "sampleSize": 6,
       "hitRate": 1.0,
-      "confidence": 0.857,
+      "confidence": 0.875,
       "tags": [
         "timing",
         "position-sizing",
@@ -768,13 +776,17 @@
           {
             "date": "2026-04-13",
             "detail": "Volume confirmation remains the main near-term weakness in current holdings; both active positions are above entry, but each is trading at only about half of MAVOL30, which argues for hold-not-add rather than aggressive pyramiding."
+          },
+          {
+            "date": "2026-04-13",
+            "detail": "对已有持仓，量能低于MAVOL30更适合解读为“禁止加仓”而不是立即卖出，只要价格仍在盈利区且未触发硬止损，先让趋势自己给答案。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 6,
+      "sampleSize": 7,
       "hitRate": 1.0,
-      "confidence": 0.875,
+      "confidence": 0.889,
       "tags": [
         "exit-rule",
         "timing",

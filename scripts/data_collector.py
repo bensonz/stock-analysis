@@ -556,7 +556,7 @@ def _fetch_strategy_api(strategy_id: str) -> Optional[list[dict]]:
     """Try to fetch strategy stock list from CheeseForTune API.
 
     Uses /api/v2/userSelectStrategy/info/{strategyId}.
-    Returns array of arrays: [code.exchange, name, date, highlights, mcap, pe, risks, rps120, rps250, rps20, rps60]
+    Returns array of arrays: [code.exchange, name, source_date, highlights, mcap, pe, risks, rps120, rps250, rps20, rps60]
     """
     client = CheeseFortuneClient()
     url = f"{client.BASE_URL}/api/v2/userSelectStrategy/info/{strategy_id}"
@@ -566,7 +566,7 @@ def _fetch_strategy_api(strategy_id: str) -> Optional[list[dict]]:
             datas = result["datas"]
             raw_list = datas.get("list", []) if isinstance(datas, dict) else datas
             if isinstance(raw_list, list) and len(raw_list) > 0:
-                # Each item is an array: [code.exchange, name, date, highlights, mcap, pe, risks, rps120, rps250, rps20, rps60]
+                # Each item is an array: [code.exchange, name, source_date, highlights, mcap, pe, risks, rps120, rps250, rps20, rps60]
                 return _parse_strategy_array(raw_list)
     except Exception:
         pass
@@ -577,7 +577,7 @@ def _fetch_strategy_api(strategy_id: str) -> Optional[list[dict]]:
 def _parse_strategy_array(raw: list) -> list[dict]:
     """Parse strategy API response (array of arrays) into normalized stock dicts.
     
-    Each item: [code.exchange, name, date, highlights, mcap, pe, risks, rps120, rps250, rps20, rps60]
+    Each item: [code.exchange, name, source_date, highlights, mcap, pe, risks, rps120, rps250, rps20, rps60]
     Example: ["002270.SZ", "华明装备", "2026/03/02", 7, 320.22, 10.1, 1, 93.96, 91.02, 72.81, 86.31]
     """
     stocks = []
@@ -590,7 +590,7 @@ def _parse_strategy_array(raw: list) -> list[dict]:
             "code": code,
             "code_full": code_full,
             "name": item[1] if len(item) > 1 else "",
-            "date": item[2] if len(item) > 2 else "",
+            "source_date": item[2] if len(item) > 2 else "",
             "highlights_count": item[3] if len(item) > 3 else 0,
             "market_cap": item[4] if len(item) > 4 else None,
             "pe": item[5] if len(item) > 5 else None,
@@ -644,6 +644,8 @@ def _parse_strategy_stocks(raw: list) -> list[dict]:
             stock["market_cap"] = item.get("mcap", item.get("market_cap"))
         if "added" in item:
             stock["added"] = item["added"]
+        if "date" in item:
+            stock["source_date"] = item["date"]
         if "highlights" in item:
             stock["highlights"] = item["highlights"]
         if "risks" in item:

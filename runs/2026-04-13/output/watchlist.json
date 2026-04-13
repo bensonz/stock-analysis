@@ -2,45 +2,54 @@
   "date": "2026-04-13",
   "market_overview": {
     "shanghai_composite": {
-      "value": 3978.197,
-      "change_pct": -0.2
+      "value": 3984.533,
+      "change_pct": -0.04
     },
     "shenzhen_component": {
-      "value": 14356.09,
-      "change_pct": 0.33
+      "value": 14397.59,
+      "change_pct": 0.62
     },
     "chinext": {
-      "value": 3466.72,
-      "change_pct": 0.52
+      "value": 3473.86,
+      "change_pct": 0.73
     },
-    "sentiment": "bearish",
+    "sentiment": "neutral",
     "hot_sectors": [
       "玻璃玻纤",
-      "能源金属",
+      "非金属材料Ⅱ",
       "养殖业",
-      "林业Ⅱ",
-      "电池"
+      "元件",
+      "能源金属"
     ],
     "cold_sectors": [
       "游戏Ⅱ",
       "航运港口",
-      "动物保健Ⅱ",
       "医药商业",
-      "电网设备"
+      "保险Ⅱ",
+      "动物保健Ⅱ"
     ],
-    "notes": "Breadth 0.48:1 bearish, 71涨停/9跌停, weak participation despite 2 of 3 major indices green; this fails the minimum long-entry gate, so no new positions. Hot sectors (top 5): 玻璃玻纤 +8.05%, 能源金属 +2.65%, 养殖业 +2.47%, 林业Ⅱ +2.36%, 电池 +2.20%. Cold sectors (bottom 5): 游戏Ⅱ -3.94%, 航运港口 -2.40%, 动物保健Ⅱ -2.18%, 医药商业 -2.13%, 电网设备 -1.89%. Position sector alignment: 0/2 positions in hot sectors. Web checks show ongoing order/EPC support for 利柏特 and semicap policy/domestic-substitution support for 芯源微, but tape is too weak for fresh risk. IV context is generally low; small-cap/科创 proxies are especially low, which would reduce sizing even if entries were allowed."
+    "notes": "Breadth 0.69:1偏弱，2182上涨/3179下跌，84涨停/11跌停；上证-0.04%，深成指+0.62%，创业板指+0.73%，2/3主要指数翻红但未满足1.5:1入场门槛。Hot sectors(top 5): 玻璃玻纤(+8.27%), 非金属材料Ⅱ(+3.04%), 养殖业(+2.69%), 元件(+2.68%), 能源金属(+2.54%). Cold sectors(bottom 5): 游戏Ⅱ(-3.73%), 航运港口(-1.94%), 医药商业(-1.84%), 保险Ⅱ(-1.82%), 动物保健Ⅱ(-1.72%). Position sector alignment: 0/2 positions in hot sectors. 期权IV整体偏乐观，平均IV Rank约15.8%；科创/中证500代理偏低，说明新仓即便想开也应克制。综合判断：局部题材活跃、整体广度偏弱，今天以持仓管理为主，不开新仓。"
   },
   "strategy_scan": {
-    "total_stocks_scanned": 198,
+    "total_stocks_scanned": 42,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-04-13T13:16:11.577220+08:00"
+    "scan_time": "2026-04-13T14:37:55.892410+08:00"
   },
   "recommendations": [
     {
-      "code": "688372.SH",
-      "name": "伟测科技",
+      "code": "001389.SZ",
+      "name": "广合科技",
       "price": null,
-      "rps120": 94.7,
+      "rps120": 90.0,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600268.SH",
+      "name": "国电南自",
+      "price": null,
+      "rps120": 91.15,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -55,75 +64,84 @@
       "reasoning": ""
     },
     {
-      "code": "300037.SZ",
-      "name": "新宙邦",
+      "code": "688097.SH",
+      "name": "博众精工",
       "price": null,
-      "rps120": 78.28,
+      "rps120": 92.4,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "600236.SH",
-      "name": "桂冠电力",
+      "code": "300677.SZ",
+      "name": "英科医疗",
       "price": null,
-      "rps120": 92.16,
+      "rps120": 93.59,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "002448.SZ",
-      "name": "中原内配",
+      "code": "603306.SH",
+      "name": "华懋科技",
       "price": null,
-      "rps120": 74.07,
+      "rps120": 92.83,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "603507.SH",
-      "name": "振江股份",
+      "code": "002440.SZ",
+      "name": "闰土股份",
       "price": null,
-      "rps120": 90.92,
+      "rps120": 94.6,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "688455.SH",
-      "name": "科捷智能",
+      "code": "000893.SZ",
+      "name": "亚钾国际",
       "price": null,
-      "rps120": 91.58,
+      "rps120": 94.13,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "002810.SZ",
-      "name": "山东赫达",
+      "code": "603115.SH",
+      "name": "海星股份",
       "price": null,
-      "rps120": 92.34,
+      "rps120": 97.08,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "001389.SZ",
-      "name": "广合科技",
+      "code": "600498.SH",
+      "name": "烽火通信",
       "price": null,
-      "rps120": 90.0,
+      "rps120": 95.3,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "000973.SZ",
+      "name": "佛塑科技",
+      "price": null,
+      "rps120": 98.34,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     }
   ],
   "summary": {
-    "total_scanned": 198,
+    "total_scanned": 42,
     "buy_recommendations": 0,
-    "watch_recommendations": 9,
+    "watch_recommendations": 11,
     "avoid_recommendations": 0,
-    "market_call": "谨慎",
-    "reasoning": "Breadth 0.48:1 bearish, 71涨停/9跌停, weak participation despite 2 of 3 major indices green; this fails the minimum long-entry gate, so no new positions. Hot sectors (top 5): 玻璃玻纤 +8.05%, 能源金属 +2.65%, 养殖业 +2.47%, 林业Ⅱ +2.36%, 电池 +2.20%. Cold sectors (bottom 5): 游戏Ⅱ -3.94%, 航运港口 -2.40%, 动物保健Ⅱ -2.18%, 医药商业 -2.13%, 电网设备 -1.89%. Position sector alignment: 0/2 positions in hot sectors. Web checks show ongoing order/EPC support for 利柏特 and semicap policy/domestic-substitution support for 芯源微, but tape is too weak for fresh risk. IV context is generally low; small-cap/科创 proxies are especially low, which would reduce sizing even if entries were allowed."
+    "market_call": "观望",
+    "reasoning": "Breadth 0.69:1偏弱，2182上涨/3179下跌，84涨停/11跌停；上证-0.04%，深成指+0.62%，创业板指+0.73%，2/3主要指数翻红但未满足1.5:1入场门槛。Hot sectors(top 5): 玻璃玻纤(+8.27%), 非金属材料Ⅱ(+3.04%), 养殖业(+2.69%), 元件(+2.68%), 能源金属(+2.54%). Cold sectors(bottom 5): 游戏Ⅱ(-3.73%), 航运港口(-1.94%), 医药商业(-1.84%), 保险Ⅱ(-1.82%), 动物保健Ⅱ(-1.72%). Position sector alignment: 0/2 positions in hot sectors. 期权IV整体偏乐观，平均IV Rank约15.8%；科创/中证500代理偏低，说明新仓即便想开也应克制。综合判断：局部题材活跃、整体广度偏弱，今天以持仓管理为主，不开新仓。"
   }
 }

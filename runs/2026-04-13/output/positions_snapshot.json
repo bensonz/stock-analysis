@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-04-13T13:16:11.799337+08:00",
+  "snapshot_time": "2026-04-13T14:37:56.042727+08:00",
   "snapshot_type": "post_run",
   "date": "2026-04-13",
   "portfolio_config": {
@@ -11,23 +11,23 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-04-13T13:16:11.580068+08:00",
+    "lastUpdated": "2026-04-13T14:37:55.893755+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 962005.0,
+      "totalEquity": 961817.0,
       "cash": 896819.0,
-      "investedValue": 65186.0,
-      "unrealizedPnl": 3506.0,
+      "investedValue": 64998.0,
+      "unrealizedPnl": 3318.0,
       "realizedPnl": -41501.0,
-      "totalPnl": -37995.0,
-      "totalReturnPct": -3.8,
+      "totalPnl": -38183.0,
+      "totalReturnPct": -3.82,
       "positionsUsed": 2,
       "positionsMax": 10,
-      "cashPct": 93.22,
-      "dayPnl": 472.0,
+      "cashPct": 93.24,
+      "dayPnl": 284.0,
       "minCashPct": 20,
-      "minCashValue": 192401.0,
-      "deployableCash": 704418.0
+      "minCashValue": 192363.4,
+      "deployableCash": 704455.6
     },
     "activePositions": [
       {
@@ -35,8 +35,8 @@
         "name": "利柏特",
         "entryDate": "2026-04-07",
         "entryPrice": 16.38,
-        "currentPrice": 17.8,
-        "pnl_pct": 8.67,
+        "currentPrice": 17.68,
+        "pnl_pct": 7.94,
         "stopLoss": 15.56,
         "currentStop": 15.56,
         "targetPrice": 18.88,
@@ -45,20 +45,20 @@
         "shares": 1600,
         "allocation_pct": 4,
         "allocatedCapital": 26208.0,
-        "currentValue": 28480.0,
-        "unrealizedPnl": 2272.0,
-        "volume": 34516,
+        "currentValue": 28288.0,
+        "unrealizedPnl": 2080.0,
+        "volume": 42200,
         "mavol30": 64798.83,
         "volumeBelowMavol30": true,
-        "weight_pct": 2.96
+        "weight_pct": 2.94
       },
       {
         "code": "688037",
         "name": "芯源微",
         "entryDate": "2026-04-08",
         "entryPrice": 177.36,
-        "currentPrice": 183.53,
-        "pnl_pct": 3.48,
+        "currentPrice": 183.55,
+        "pnl_pct": 3.49,
         "stopLoss": 168.5,
         "currentStop": 168.5,
         "targetPrice": 204.09,
@@ -67,9 +67,9 @@
         "shares": 200,
         "allocation_pct": 5,
         "allocatedCapital": 35472.0,
-        "currentValue": 36706.0,
-        "unrealizedPnl": 1234.0,
-        "volume": 24230,
+        "currentValue": 36710.0,
+        "unrealizedPnl": 1238.0,
+        "volume": 31362,
         "mavol30": 47089.1,
         "volumeBelowMavol30": true,
         "weight_pct": 3.82
@@ -126,10 +126,10 @@
         },
         {
           "date": "2026-04-13",
-          "price": 17.8,
-          "change_pct": 8.67,
+          "price": 17.68,
+          "change_pct": 7.94,
           "action": "HOLD",
-          "note": "Price 17.8 is above entry 16.38 and above hard stop 15.56, with about +8.67% unrealized gain after 4 trading days. Sector 建筑装饰 is not in today’s cold bottom-5 list, so no sector-forced exit. Fresh EPC/order catalyst still stands, but latest volume is only 53.3% of MAVOL30 and IV proxy is extremely low, so keep existing position but do not add and do not raise stop before +10%."
+          "note": "现价17.68，较入场16.38盈利约7.94%，未达+10%提止盈门槛；未触发-5%止损或前3日-3%失败止损。虽板块建筑装饰不在热榜，且成交量仅为MAVOL30的65.1%，动能确认偏弱，但未进入冷板块底部名单，先持有不加仓。"
         }
       ],
       "exitDate": null,
@@ -139,7 +139,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-04-07T14:38:30.422544+08:00",
-      "updatedAt": "2026-04-13T13:16:11.566799+08:00",
+      "updatedAt": "2026-04-13T14:37:55.882414+08:00",
       "trackerVersion": "2.1",
       "_correction": {
         "date": "2026-04-08",
@@ -196,10 +196,10 @@
         },
         {
           "date": "2026-04-13",
-          "price": 183.53,
-          "change_pct": 3.48,
+          "price": 183.55,
+          "change_pct": 3.49,
           "action": "HOLD",
-          "note": "Price 183.53 remains above entry 177.36 and above hard stop 168.5, with about +3.48% unrealized gain after 3 trading days. Semicap/电子链 is not shown in today’s sector leaderboard, but there is still sector-news support from domestic semicap strength. However, today volume is only 51.5% of MAVOL30 and the market entry regime is weak, so hold existing position but avoid adding; no stop raise until +10%."
+          "note": "现价183.55，较入场177.36盈利约3.49%，仍高于止损168.5；持仓3天未出现首3日-3%失败信号。半导体设备有新闻催化，但今日未进入给定板块前五，且成交量仅为MAVOL30的66.6%，说明跟风但不够强，继续持有观察，不加仓。"
         }
       ],
       "exitDate": null,
@@ -209,7 +209,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-04-08T11:51:08.642286+08:00",
-      "updatedAt": "2026-04-13T13:16:11.571484+08:00",
+      "updatedAt": "2026-04-13T14:37:55.888646+08:00",
       "trackerVersion": "2.1",
       "_correction": {
         "date": "2026-04-08",

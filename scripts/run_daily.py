@@ -91,14 +91,16 @@ HYPOTHESES_FILE = TRACKING_DIR / "hypotheses.json"
 LLM_PROMPT_START = "=== LLM_PROMPT_START ==="
 LLM_PROMPT_END = "=== LLM_PROMPT_END ==="
 ENTRY_GATE_INDICES = ("上证指数", "深证成指", "创业板指")
+INTERSECT_MIN_RPS = 85.0
 
 
 def _build_strategy_intersection(remote_strategy: dict, rps_data: dict) -> tuple[dict, dict]:
-    """Build the working pool as remote CheeseFortune crawl intersected with local RPS."""
+    """Build the working pool as remote CheeseFortune crawl intersected with RPS-filtered local names."""
     remote_stocks = remote_strategy.get("stocks", []) or []
     intersect_stocks = []
     seen_codes = set()
     remote_missing_rps = 0
+    remote_below_rps_threshold = 0
     duplicate_remote_codes = 0
 
     for stock in remote_stocks:
@@ -113,6 +115,13 @@ def _build_strategy_intersection(remote_strategy: dict, rps_data: dict) -> tuple
         metrics = rps_data.get(code)
         if not metrics:
             remote_missing_rps += 1
+            continue
+
+        if not all(
+            metrics.get(key) is not None and float(metrics[key]) > INTERSECT_MIN_RPS
+            for key in ("rps60", "rps120", "rps250")
+        ):
+            remote_below_rps_threshold += 1
             continue
 
         merged = dict(stock)
@@ -145,7 +154,13 @@ def _build_strategy_intersection(remote_strategy: dict, rps_data: dict) -> tuple
         },
         "drop_counts": {
             "remote_missing_rps": remote_missing_rps,
+            "remote_below_rps_threshold": remote_below_rps_threshold,
             "duplicate_remote_codes": duplicate_remote_codes,
+        },
+        "criteria": {
+            "rps60_gt": INTERSECT_MIN_RPS,
+            "rps120_gt": INTERSECT_MIN_RPS,
+            "rps250_gt": INTERSECT_MIN_RPS,
         },
         "fallback": {"used": False},
         "final_source": "cheesefortune_intersection",

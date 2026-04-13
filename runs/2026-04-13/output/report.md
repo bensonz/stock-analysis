@@ -4,42 +4,44 @@
 
 | 指数 | 收盘 | 涨跌幅 |
 |------|------|--------|
-| 上证指数 | 3978.20 | -0.20% |
-| 深证成指 | 14356.09 | +0.33% |
-| 创业板指 | 3466.72 | +0.52% |
-| 科创50 | 1374.83 | +0.76% |
+| 上证指数 | 3984.53 | -0.04% |
+| 深证成指 | 14397.59 | +0.62% |
+| 创业板指 | 3473.86 | +0.73% |
+| 科创50 | 1374.26 | +0.72% |
 
-涨跌比: 1741涨 / 3621跌 / 5494总
+涨跌比: 2182涨 / 3179跌 / 5497总
 
-**热门板块**: 玻璃玻纤(+8.05%), 能源金属(+2.65%), 养殖业(+2.47%), 林业Ⅱ(+2.36%), 电池(+2.20%)
+**热门板块**: 玻璃玻纤(+8.27%), 非金属材料Ⅱ(+3.04%), 养殖业(+2.69%), 元件(+2.68%), 能源金属(+2.54%)
 
-**冷门板块**: 游戏Ⅱ(-3.94%), 航运港口(-2.40%), 动物保健Ⅱ(-2.18%), 医药商业(-2.13%), 电网设备(-1.89%)
+**冷门板块**: 游戏Ⅱ(-3.73%), 航运港口(-1.94%), 医药商业(-1.84%), 保险Ⅱ(-1.82%), 动物保健Ⅱ(-1.72%)
 
-Breadth 0.48:1 bearish, 71涨停/9跌停, weak participation despite 2 of 3 major indices green; this fails the minimum long-entry gate, so no new positions. Hot sectors (top 5): 玻璃玻纤 +8.05%, 能源金属 +2.65%, 养殖业 +2.47%, 林业Ⅱ +2.36%, 电池 +2.20%. Cold sectors (bottom 5): 游戏Ⅱ -3.94%, 航运港口 -2.40%, 动物保健Ⅱ -2.18%, 医药商业 -2.13%, 电网设备 -1.89%. Position sector alignment: 0/2 positions in hot sectors. Web checks show ongoing order/EPC support for 利柏特 and semicap policy/domestic-substitution support for 芯源微, but tape is too weak for fresh risk. IV context is generally low; small-cap/科创 proxies are especially low, which would reduce sizing even if entries were allowed.
+Breadth 0.69:1偏弱，2182上涨/3179下跌，84涨停/11跌停；上证-0.04%，深成指+0.62%，创业板指+0.73%，2/3主要指数翻红但未满足1.5:1入场门槛。Hot sectors(top 5): 玻璃玻纤(+8.27%), 非金属材料Ⅱ(+3.04%), 养殖业(+2.69%), 元件(+2.68%), 能源金属(+2.54%). Cold sectors(bottom 5): 游戏Ⅱ(-3.73%), 航运港口(-1.94%), 医药商业(-1.84%), 保险Ⅱ(-1.82%), 动物保健Ⅱ(-1.72%). Position sector alignment: 0/2 positions in hot sectors. 期权IV整体偏乐观，平均IV Rank约15.8%；科创/中证500代理偏低，说明新仓即便想开也应克制。综合判断：局部题材活跃、整体广度偏弱，今天以持仓管理为主，不开新仓。
 
 ## 策略池扫描
 
-扫描 **198** 只策略池股票
+扫描 **42** 只策略池股票
 (来源: cheesefortune_intersection)
 
 ## 跳过标的
 
-1. **伟测科技** (688372) (RPS 94.7%) — Market regime blocks new entries; breadth is only 0.48:1 despite stock-specific catalyst and clean MA distances. Also 科创板 IV Rank 12.2% implies half sizing even if tape improved.
-2. **华峰测控** (688200) (RPS 90.7%) — Strong semicap setup with 0 risk factors and MA alignment, but market buy gate fails and 科创板 IV Rank is only 12.2%, so no new position today.
-3. **新宙邦** (300037) (RPS 78.28%) — Battery sector is in today’s top 5 and catalyst is fresh, but market regime is weak so acceptable stock still becomes skip rather than buy.
-4. **桂冠电力** (600236) (RPS 92.16%) — Setup is orderly and catalyst is fresh, but sector is not in today’s hot top bucket and new long entries are disallowed by breadth.
-5. **中原内配** (002448) (RPS 74.07%) — Sector 汽车零部件 is not in today’s hot sectors, stock momentum is below the 75 floor for V2 entries, and no buy is allowed in weak tape.
-6. **振江股份** (603507) (RPS 90.92%) — Fails no-chasing rule with dist_ma5_pct 6.4%, dist_ma10_pct 9.7%, dist_ma20_pct 16.4%; overextended even before considering weak market.
-7. **科捷智能** (688455) (RPS 91.58%) — Fails no-chasing rule badly with dist_ma5_pct 19.4%, dist_ma10_pct 23.0%, dist_ma20_pct 18.9%; do not chase vertical extension.
-8. **山东赫达** (002810) (RPS 92.34%) — Fails no-chasing rule with dist_ma5_pct 11.3%, dist_ma10_pct 16.3%, dist_ma20_pct 21.3%, so setup is invalid for fresh entry.
-9. **广合科技** (001389) (RPS 90.0%) — Strong trend and catalyst, but current extension is close to chase territory and market regime already says no new positions.
+1. **广合科技** (001389) (RPS 90.0%) — 元件属热板块，但dist_ma5_pct 5.8%、dist_ma10_pct 6.2%、RPS120 90.0都可接受；真正拦截原因是市场入场门槛未过，breadth仅0.69:1，今日不新开仓。
+2. **国电南自** (600268) (RPS 91.15%) — 电网设备个股形态合格，RPS120 91.15，MA距离健康，但行业未出现在今日前五热板块，且市场 regime weak，不开新仓。
+3. **华峰测控** (688200) (RPS 90.7%) — RPS120 90.7、0风险、MA距离极佳，半导体设备亦有消息催化；但科创板IV Rank 12.2%偏低本应减半仓，同时更关键的是市场 breadth 不达1.5:1，新仓全部跳过。
+4. **博众精工** (688097) (RPS 92.4%) — 自动化设备不在今日前五热板块，且其iv_proxy对应科创50 IV Rank仅12.2%，若开仓需减半；在弱市环境下直接跳过。
+5. **英科医疗** (300677) (RPS 93.59%) — RPS120 93.59处扩展区，催化来自手套价格上行，但医药生物并未进入今日热板块前列；弱市下不做跨板块追击。
+6. **华懋科技** (603306) (RPS 92.83%) — 汽车零部件不在今日热板块前列，且并购复牌类催化更偏事件驱动，不是当前明确热板块顺风标的；即使MA距离健康，也仅能跳过。
+7. **闰土股份** (002440) (RPS 94.6%) — 化学制品未在今日前五热板块，且事件提到生产成本受油价扰动压缩盈利空间，板块驱动力不够纯粹；无论个股RPS 94.6如何，今日不做。
+8. **亚钾国际** (000893) (RPS 94.13%) — 个股MA距离健康、RPS120 94.13，但所属农化/钾肥未在给定热板块前五中直接出现；在breadth 0.69:1环境下，不逆市场扩大仓位。
+9. **海星股份** (603115) (RPS 97.08%) — 严重追高，dist_ma5_pct 12.5%、dist_ma10_pct 25.0%、dist_ma20_pct 34.5%，违反MA距离硬规则，直接跳过。
+10. **烽火通信** (600498) (RPS 95.3%) — dist_ma5_pct 11.2%、dist_ma10_pct 13.1%，明显过度远离短中期均线，属于追高禁买。
+11. **佛塑科技** (000973) (RPS 98.34%) — dist_ma10_pct 9.8%、dist_ma20_pct 18.3%，超过追高阈值，不做。
 
 ## 今日研究结论
 
 - 新开仓: 0只
-- 跳过: 9只
+- 跳过: 11只
 
 ### 新教训
-- {'text': 'Weak breadth can completely override otherwise valid momentum candidates; today had 2 of 3 major indices green and 71涨停, but up/down was only 0.48:1, so the correct action is zero new longs.', 'type': 'rule', 'tags': ['sector', 'entry-filter', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h013', 'mechanism': 'Index resilience without stock-level participation usually means narrow strength; new entries have lower follow-through when breadth is this weak.'}
-- {'text': 'Volume confirmation remains the main near-term weakness in current holdings; both active positions are above entry, but each is trading at only about half of MAVOL30, which argues for hold-not-add rather than aggressive pyramiding.', 'type': 'signal', 'tags': ['exit-rule', 'timing', 'position-sizing'], 'evidence_type': 'supporting', 'related_hypothesis': None, 'mechanism': 'Low-volume advances are more vulnerable to stalling, so letting winners run should not be confused with adding into weak participation.'}
-- {'text': 'Today’s strongest candidate list still contains many technical traps: several names with acceptable RPS were disqualified by MA-distance extension rather than weak fundamentals.', 'type': 'observation', 'tags': ['entry-filter', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': None, 'mechanism': 'In late-stage momentum bursts, extension risk rises faster than catalyst quality, so MA-distance is the cleanest anti-chase filter.'}
+- {'text': '当市场出现84家涨停但上涨家数仍明显少于下跌家数时，说明赚钱效应集中在少数热点，不能把局部强势误判成全面可开仓环境。', 'type': 'signal', 'tags': ['sector', 'timing', 'entry-filter'], 'evidence_type': 'supporting', 'related_hypothesis': 'h013', 'mechanism': '涨停家数高只代表局部热点强，up/down比若不足1.5则大部分股票并未跟随，追新仓容易买到非主线或补涨尾端。'}
+- {'text': '低IV本身不是禁止交易的理由，但在弱breadth背景下会放大追高失误成本，因此低IV更适合作为“少开仓甚至不开仓”的放大器，而不是单独信号。', 'type': 'rule', 'tags': ['timing', 'position-sizing', 'entry-filter'], 'evidence_type': 'supporting', 'related_hypothesis': 'h017', 'mechanism': 'IV低意味着市场对波动定价便宜，若同时广度弱，个股一旦失去增量资金承接，回撤会更快暴露。'}
+- {'text': '对已有持仓，量能低于MAVOL30更适合解读为“禁止加仓”而不是立即卖出，只要价格仍在盈利区且未触发硬止损，先让趋势自己给答案。', 'type': 'heuristic', 'tags': ['exit-rule', 'position-sizing', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h023', 'mechanism': '缩量会削弱动能确认，但并不自动破坏已有浮盈；在+10%前不机械抬止损、也不因缩量过早离场，可避免把正常整固误判为失败。'}

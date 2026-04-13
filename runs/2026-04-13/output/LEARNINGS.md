@@ -935,3 +935,9 @@
 - Weak breadth can completely override otherwise valid momentum candidates; today had 2 of 3 major indices green and 71涨停, but up/down was only 0.48:1, so the correct action is zero new longs.
 - Volume confirmation remains the main near-term weakness in current holdings; both active positions are above entry, but each is trading at only about half of MAVOL30, which argues for hold-not-add rather than aggressive pyramiding.
 - Today’s strongest candidate list still contains many technical traps: several names with acceptable RPS were disqualified by MA-distance extension rather than weak fundamentals.
+
+### 自动更新 (2026-04-13)
+
+- 当市场出现84家涨停但上涨家数仍明显少于下跌家数时，说明赚钱效应集中在少数热点，不能把局部强势误判成全面可开仓环境。
+- 低IV本身不是禁止交易的理由，但在弱breadth背景下会放大追高失误成本，因此低IV更适合作为“少开仓甚至不开仓”的放大器，而不是单独信号。
+- 对已有持仓，量能低于MAVOL30更适合解读为“禁止加仓”而不是立即卖出，只要价格仍在盈利区且未触发硬止损，先让趋势自己给答案。
