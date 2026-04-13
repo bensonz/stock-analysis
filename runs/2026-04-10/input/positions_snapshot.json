@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-04-10T14:35:59.985137+08:00",
+  "snapshot_time": "2026-04-10T15:36:19.859215+08:00",
   "snapshot_type": "pre_run",
   "date": "2026-04-10",
   "portfolio_config": {
@@ -11,23 +11,23 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-04-10T11:43:00.397409+08:00",
+    "lastUpdated": "2026-04-10T15:26:30.106061+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 961801.0,
+      "totalEquity": 961533.0,
       "cash": 896819.0,
-      "investedValue": 64982.0,
-      "unrealizedPnl": 3302.0,
+      "investedValue": 64714.0,
+      "unrealizedPnl": 3034.0,
       "realizedPnl": -41501.0,
-      "totalPnl": -38199.0,
-      "totalReturnPct": -3.82,
+      "totalPnl": -38467.0,
+      "totalReturnPct": -3.85,
       "positionsUsed": 2,
       "positionsMax": 10,
-      "cashPct": 93.24,
-      "dayPnl": 1576.0,
+      "cashPct": 93.27,
+      "dayPnl": 1308.0,
       "minCashPct": 20,
-      "minCashValue": 192360.2,
-      "deployableCash": 704458.8
+      "minCashValue": 192306.6,
+      "deployableCash": 704512.4
     },
     "activePositions": [
       {
@@ -35,8 +35,8 @@
         "name": "利柏特",
         "entryDate": "2026-04-07",
         "entryPrice": 16.38,
-        "currentPrice": 17.61,
-        "pnl_pct": 7.51,
+        "currentPrice": 17.39,
+        "pnl_pct": 6.17,
         "stopLoss": 15.56,
         "currentStop": 15.56,
         "targetPrice": 18.88,
@@ -45,20 +45,20 @@
         "shares": 1600,
         "allocation_pct": 4,
         "allocatedCapital": 26208.0,
-        "currentValue": 28176.0,
-        "unrealizedPnl": 1968.0,
-        "volume": 32543,
+        "currentValue": 27824.0,
+        "unrealizedPnl": 1616.0,
+        "volume": 58008,
         "mavol30": 64798.83,
         "volumeBelowMavol30": true,
-        "weight_pct": 2.93
+        "weight_pct": 2.89
       },
       {
         "code": "688037",
         "name": "芯源微",
         "entryDate": "2026-04-08",
         "entryPrice": 177.36,
-        "currentPrice": 184.03,
-        "pnl_pct": 3.76,
+        "currentPrice": 184.45,
+        "pnl_pct": 4.0,
         "stopLoss": 168.5,
         "currentStop": 168.5,
         "targetPrice": 204.09,
@@ -67,12 +67,12 @@
         "shares": 200,
         "allocation_pct": 5,
         "allocatedCapital": 35472.0,
-        "currentValue": 36806.0,
-        "unrealizedPnl": 1334.0,
-        "volume": 29051,
+        "currentValue": 36890.0,
+        "unrealizedPnl": 1418.0,
+        "volume": 46677,
         "mavol30": 47089.1,
         "volumeBelowMavol30": true,
-        "weight_pct": 3.83
+        "weight_pct": 3.84
       }
     ]
   },
@@ -119,10 +119,10 @@
         },
         {
           "date": "2026-04-10",
-          "price": 17.61,
-          "change_pct": 7.51,
+          "price": 17.52,
+          "change_pct": 6.96,
           "action": "HOLD",
-          "note": "Current price 17.61 is above entry 16.38 and hard stop 15.56, with 3-day gain of about 7.51%. Sector 建筑装饰 is neither in today's hot top list nor cold bottom list, so sector drag is not yet a forced-sell trigger. Fresh order/EPC thesis is not disproven, but volume remains weak at 50.2% of MAVOL30, so do not add and monitor closely for stall."
+          "note": "Price 17.52 remains above entry 16.38 and hard stop 15.56, with about +6.96% unrealized gain after 3 trading days. Sector 建筑装饰 is neither in today's hot top list nor cold bottom list, so no sector-forced exit yet. Fresh order/EPC thesis is not disproven, but latest volume is only 75.2% of MAVOL30, so keep but do not add."
         }
       ],
       "exitDate": null,
@@ -132,7 +132,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-04-07T14:38:30.422544+08:00",
-      "updatedAt": "2026-04-10T11:43:00.387475+08:00",
+      "updatedAt": "2026-04-10T14:38:30.787973+08:00",
       "trackerVersion": "2.1",
       "_correction": {
         "date": "2026-04-08",
@@ -182,10 +182,10 @@
         },
         {
           "date": "2026-04-10",
-          "price": 184.03,
-          "change_pct": 3.76,
+          "price": 185.75,
+          "change_pct": 4.73,
           "action": "HOLD",
-          "note": "Current price 184.03 is above entry 177.36 and hard stop 168.50, with gain of about 3.76% after 2 trading days. Sector 电子/半导体设备 aligns with today's stronger electronics chain via 其他电子Ⅱ and a broad tech-led tape. Momentum is constructive, but volume is only 61.7% of MAVOL30, so keep the position without adding."
+          "note": "Price 185.75 is above entry 177.36 and hard stop 168.50, for about +4.73% after 2 trading days. Sector 电子/半导体设备 has partial alignment with today's electronics-led tape via 元件 and broad tech strength. Momentum is constructive, but volume is only 89.4% of MAVOL30 and the position has not yet reached +10%, so hold without raising stop."
         }
       ],
       "exitDate": null,
@@ -195,7 +195,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-04-08T11:51:08.642286+08:00",
-      "updatedAt": "2026-04-10T11:43:00.392490+08:00",
+      "updatedAt": "2026-04-10T14:38:30.793438+08:00",
       "trackerVersion": "2.1",
       "_correction": {
         "date": "2026-04-08",
