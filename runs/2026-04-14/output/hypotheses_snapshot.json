@@ -447,13 +447,17 @@
           {
             "date": "2026-04-14",
             "detail": "指数普涨不等于可开新仓；当up/down只有1.01:1时，即便元件、半导体、算力里有多只形态合格股，也应执行空仓等待，而不是勉强下单。"
+          },
+          {
+            "date": "2026-04-14",
+            "detail": "指数普涨并不等于可开新仓；今天3大指数全红、57涨停/7跌停，但上涨家数2672仅略高于下跌家数2638，真实广度只有1.01:1，按V2买入门槛应继续以持仓管理为主。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 28,
+      "sampleSize": 29,
       "hitRate": 1.0,
-      "confidence": 0.967,
+      "confidence": 0.968,
       "tags": [],
       "parentRule": null,
       "retiredDate": null,
@@ -792,13 +796,17 @@
           {
             "date": "2026-04-14",
             "detail": "低IV环境下，已有盈利仓更适合机械提止损而不是加仓扩张，尤其当量能低于MAVOL30时。"
+          },
+          {
+            "date": "2026-04-14",
+            "detail": "低IV环境下，已有盈利仓更适合机械提止损而不是扩仓追击；利柏特今日盈利17.83%后维持保本止损，符合强势股先锁风险再等延续的处理方式。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 8,
+      "sampleSize": 9,
       "hitRate": 1.0,
-      "confidence": 0.9,
+      "confidence": 0.909,
       "tags": [
         "exit-rule",
         "timing",
@@ -1040,6 +1048,35 @@
       "tags": [
         "position-sizing",
         "timing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h032",
+      "text": "板块热度与个股量能需要同时看；芯源微虽处半导体强板块，但量能仅为MAVOL30的71.9%，因此只能继续持有，不宜据板块强势直接加仓。",
+      "type": "signal",
+      "status": "observation",
+      "created": "2026-04-14",
+      "lastTested": "2026-04-14",
+      "mechanism": "强板块可托住方向，但个股若量能跟不上，短线延续性会弱于板块平均。",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-04-14",
+            "detail": "板块热度与个股量能需要同时看；芯源微虽处半导体强板块，但量能仅为MAVOL30的71.9%，因此只能继续持有，不宜据板块强势直接加仓。"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
+        "timing",
+        "exit-rule"
       ],
       "parentRule": null,
       "retiredDate": null,

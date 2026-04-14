@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1776138592.719462,
+      "start": 1776137706.305654,
       "errors": [],
-      "end": 1776138605.605906,
-      "duration_sec": 12.9
+      "end": 1776138929.28976,
+      "duration_sec": 1223.0
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 5642,
+      "response_size_bytes": 4186,
       "tokens": {
-        "input_tokens": 123442,
-        "output_tokens": 3213
+        "input_tokens": 37594,
+        "output_tokens": 2121
       },
       "rounds": 2,
-      "tool_calls_count": 6,
-      "duration_sec": 73.9,
+      "tool_calls_count": 5,
+      "duration_sec": 48.2,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "GPT primary",
@@ -25,15 +25,15 @@
     },
     {
       "phase": "apply",
-      "start": 1776138679.577645,
+      "start": 1776138977.5516129,
       "actions": [
         "RAISE_STOP 605167 → 16.38",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=28",
-        "Hypothesis: Updated h017 (validated): +1 supporting evidence → hitRate=100%, n=7",
-        "Hypothesis: Updated h023 (validated): +1 supporting evidence → hitRate=100%, n=8",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=29",
+        "Hypothesis: Updated h023 (validated): +1 supporting evidence → hitRate=100%, n=9",
+        "Hypothesis: Created h032 (observation): 板块热度与个股量能需要同时看；芯源微虽处半导体强板块，但量能仅为MAVOL30的71.9%，因此只能继续持有，不宜据板块强势直接加仓。...",
         "Updated LEARNINGS.md (legacy)"
       ],
       "post_apply_rule_violations": {
@@ -110,8 +110,8 @@
           }
         ]
       },
-      "end": 1776138679.73331,
-      "duration_sec": 0.2
+      "end": 1776138977.685722,
+      "duration_sec": 0.1
     }
   ],
   "validation_errors": [
@@ -120,6 +120,6 @@
   ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 87.00000000000001
+    "totalDurationSec": 1271.3
   }
 }
