@@ -7,7 +7,7 @@
   "entryPrice": 16.38,
   "targetPrice": 18.88,
   "stopLoss": 15.56,
-  "currentStop": 15.56,
+  "currentStop": 16.38,
   "allocation_pct": 4,
   "shares": 1600,
   "allocatedCapital": 26208.0,
@@ -51,6 +51,13 @@
       "change_pct": 7.94,
       "action": "HOLD",
       "note": "现价17.68，较入场16.38盈利约7.94%，未达+10%提止盈门槛；未触发-5%止损或前3日-3%失败止损。虽板块建筑装饰不在热榜，且成交量仅为MAVOL30的65.1%，动能确认偏弱，但未进入冷板块底部名单，先持有不加仓。"
+    },
+    {
+      "date": "2026-04-14",
+      "price": 19.3,
+      "change_pct": 17.83,
+      "action": "RAISE_STOP",
+      "note": "现价19.3较入场16.38上涨约17.83%，已超过+10%规则门槛但未到+20%；按规则将止损上调至保本。个股受近期EPC合同催化推动，价格强于原目标价18.88，但所属建筑装饰不在今日热板块，且最新量能仅为MAVOL30的82.7%，只持有不加仓。"
     }
   ],
   "exitDate": null,
@@ -60,7 +67,7 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-04-07T14:38:30.422544+08:00",
-  "updatedAt": "2026-04-13T14:37:55.882414+08:00",
+  "updatedAt": "2026-04-14T11:51:19.581603+08:00",
   "trackerVersion": "2.1",
   "_correction": {
     "date": "2026-04-08",
