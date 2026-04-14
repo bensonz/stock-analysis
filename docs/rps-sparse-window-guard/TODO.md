@@ -1,0 +1,5 @@
+- [x] Inspect today's run artifacts and local pricedb coverage.
+- [x] Patch `scripts/rps_calculator.py` to use covered trading dates for MA windows.
+- [x] Ignore or overwrite undersized `rps_cache` entries.
+- [x] Add sparse-window and cache regression tests.
+- [x] Recompute today's intersection and capture the result.

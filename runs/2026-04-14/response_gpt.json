@@ -2,82 +2,82 @@
   "sector_analysis": {
     "hot_sectors": [
       {
-        "name": "元件",
-        "5d_pct": 3.94,
+        "name": "航天装备Ⅱ",
+        "5d_pct": 4.11,
         "trend": "accelerating"
       },
       {
-        "name": "半导体",
-        "5d_pct": 3.33,
+        "name": "元件",
+        "5d_pct": 3.59,
+        "trend": "accelerating"
+      },
+      {
+        "name": "养殖业",
+        "5d_pct": 3.34,
         "trend": "accelerating"
       },
       {
         "name": "综合Ⅱ",
-        "5d_pct": 3.21,
+        "5d_pct": 2.47,
         "trend": "steady"
       },
       {
-        "name": "养殖业",
-        "5d_pct": 3.11,
-        "trend": "steady"
-      },
-      {
-        "name": "航天装备Ⅱ",
-        "5d_pct": 3.06,
+        "name": "消费电子",
+        "5d_pct": 2.41,
         "trend": "steady"
       }
     ],
     "cold_sectors": [
       {
         "name": "林业Ⅱ",
-        "5d_pct": -3.67,
-        "trend": "deteriorating"
-      },
-      {
-        "name": "酒店餐饮",
-        "5d_pct": -1.97,
+        "5d_pct": -3.82,
         "trend": "deteriorating"
       },
       {
         "name": "油服工程",
-        "5d_pct": -1.85,
+        "5d_pct": -2.72,
         "trend": "deteriorating"
       },
       {
-        "name": "商用车",
-        "5d_pct": -1.73,
+        "name": "油气开采Ⅱ",
+        "5d_pct": -2.02,
         "trend": "deteriorating"
       },
       {
-        "name": "调味发酵品Ⅱ",
-        "5d_pct": -1.57,
+        "name": "酒店餐饮",
+        "5d_pct": -1.67,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "普钢",
+        "5d_pct": -1.63,
         "trend": "deteriorating"
       }
     ],
-    "position_alignment": "1/2 positions in hot sectors",
-    "regime": "电子/半导体领涨，建筑装饰偏中性，消费与资源局部走弱"
+    "position_alignment": "1/2 positions in clearly hot sectors",
+    "regime": "Growth/tech leadership with aerospace, components and consumer electronics leading; oil/resources are rotating out while power-grid names show stock-specific strength."
   },
   "position_decisions": [
     {
       "code": "605167",
       "name": "利柏特",
       "action": "RAISE_STOP",
-      "reason": "持仓第6个交易日，现价19.3较入场16.38盈利17.83%，已触发+10%后保本止损上调规则；所属建筑装饰未进今日热榜但也不在冷榜，暂不因板块出局。风险在于成交量仅为MAVOL30的82.7%，动能确认偏弱，不加仓。",
-      "sector_rank": "中性/非前30%",
+      "reason": "持仓盈利约19.90%，已超过+10%但未到+20%；按规则继续至少保本。今日涨10.03%，成交量高于MAVOL30，订单催化仍新鲜，但所属建筑装饰不在热榜，继续持有不加仓。",
+      "sector_rank": "not in top 30%",
       "new_stop": 16.38,
-      "pnl_pct": 17.83,
-      "days_held": 6,
+      "pnl_pct": 19.9,
+      "days_held": 7,
       "exit_price": null
     },
     {
       "code": "688037",
       "name": "芯源微",
       "action": "HOLD",
-      "reason": "半导体为今日最强主线之一，个股现价193.45较入场177.36盈利9.07%，接近但未到+10%提保本阈值，未触发止损或10日时间止损。风险是成交量仅为MAVOL30的71.9%，继续持有但不加仓。",
-      "sector_rank": "top 10%",
+      "reason": "持仓盈利约6.63%，未触发+10%提保本，也未触发-5%或10日时间止损。半导体设备获板块消息催化，今日放量上涨，趋势仍在，但未进入给定前五热板块且个股当前距MA5/MA10偏离已不适合新追。",
+      "sector_rank": "top 30%",
       "new_stop": null,
-      "pnl_pct": 9.07,
-      "days_held": 5,
+      "pnl_pct": 6.63,
+      "days_held": 6,
       "exit_price": null
     }
   ],
@@ -86,49 +86,91 @@
     {
       "code": "600268",
       "name": "国电南自",
-      "reason": "无enriched_candidates数据，缺少RPS与MA距离，无法通过Rule 2/2b；且今日真实买入门槛未过，up/down仅1.01:1，低于1.5:1，不开新仓。",
-      "rps120": null
+      "reason": "电网设备题材强、年报净利同比+40.95%属有效催化，但市场买入门槛未过：上涨/下跌比仅1.28:1，低于1.5:1最低开仓要求；因此只可跳过，不开新仓。",
+      "rps120": 91.19
     },
     {
       "code": "300857",
       "name": "协创数据",
-      "reason": "题材可能强，但无enriched_candidates数据，缺少RPS、MA距离、VCP与催化验证；同时市场广度未达到开新仓最低门槛，跳过。",
-      "rps120": null
+      "reason": "消费电子属热板块且一季报预增284%-402%催化很强，但当前价格在MA5/10/20下方，属于回撤修复而非强势突破；同时市场买入门槛未过，不开新仓。",
+      "rps120": 90.39
     },
     {
       "code": "688200",
       "name": "华峰测控",
-      "reason": "所属半导体板块强，但无enriched_candidates数据，无法确认是否处于RPS 75-95甜蜜区及是否过度偏离均线；在数据缺失下不追高。",
-      "rps120": null
+      "reason": "半导体设备方向可做，RPS120=90.95且MA距离合格、0风险，但科创板IV Rank仅12.3%，且整体市场上涨/下跌比1.28:1未达1.5:1开仓门槛，今日不新开。",
+      "rps120": 90.95
     },
     {
       "code": "688663",
       "name": "新风光",
-      "reason": "无enriched_candidates数据，无法执行MA距离与RPS过滤；当前环境指数强于个股，breadth仅1.01:1，适合持有已有强仓而非开新仓。",
-      "rps120": null
+      "reason": "电网设备个股形态合格，RPS120=92.65处于扩展区且MA距离合格，但行业不在给定前五热板块，且科创板IV Rank仅12.3%、市场广度未过开仓门槛，跳过。",
+      "rps120": 92.65
     },
     {
       "code": "603306",
       "name": "华懋科技",
-      "reason": "无enriched_candidates数据，不能确认是否满足不追高规则；在IV整体偏低、波动率便宜的环境下，新增仓位应更重视入场质量，故跳过。",
-      "rps120": null
+      "reason": "汽车零部件不在热板块且个股严重过热，dist_ma5_pct 24.5%、dist_ma10_pct 27.9%、dist_ma20_pct 23.1%，明确违反不追高规则。",
+      "rps120": 93.43
+    },
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "reason": "元件是今日最热板块之一，基本面与催化都强，但个股距MA5/10/20分别12.6%/16.5%/16.7%，明显过度拉伸，属于禁止追高。",
+      "rps120": 90.99
+    },
+    {
+      "code": "688097",
+      "name": "博众精工",
+      "reason": "自动化设备非给定前五热板块，且个股距MA5/10/20分别13.1%/13.8%/18.4%，过热严重，不追。",
+      "rps120": 92.63
+    },
+    {
+      "code": "300677",
+      "name": "英科医疗",
+      "reason": "医疗器械不在当前最强板块序列，虽然MA距离合格、催化存在，但属于非主线方向；在广度仅1.28:1环境下，不做非主线新开仓。",
+      "rps120": 93.27
+    },
+    {
+      "code": "002440",
+      "name": "闰土股份",
+      "reason": "化学制品不在今日前五热板块，且事件中明确出现“今天大跌原因可能是原油上涨压缩盈利空间”，题材方向不够顺；不做逆主线。",
+      "rps120": 94.42
+    },
+    {
+      "code": "000893",
+      "name": "亚钾国际",
+      "reason": "钾肥不在当前热板块，且事件显示过去10个交易日股价涨幅仅高于市场7.1%的股票，短线动能转弱，跳过。",
+      "rps120": 94.01
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "有色资源不在当前热板块，且资源方向与今日油气、普钢等冷板块一起呈现资金流出特征，只做跳过。",
+      "rps120": 92.84
+    },
+    {
+      "code": "603191",
+      "name": "望变电气",
+      "reason": "电网设备具备一定相对强度，但当前价格低于MA20 12.5%，更像回踩修复；同时市场买入门槛未过，不开新仓。",
+      "rps120": 88.91
     }
   ],
   "new_learnings": [
     {
-      "text": "指数普涨并不等于可开新仓；今天3大指数全红、57涨停/7跌停，但上涨家数2672仅略高于下跌家数2638，真实广度只有1.01:1，按V2买入门槛应继续以持仓管理为主。",
+      "text": "当3大指数全红但上涨/下跌比仍低于1.5:1时，指数强不等于可进攻，最优动作仍是只管持仓不新开仓。",
       "type": "rule",
       "tags": [
-        "entry-filter",
         "timing",
-        "sector"
+        "entry-filter",
+        "breadth"
       ],
       "evidence_type": "supporting",
       "related_hypothesis": "h013",
-      "mechanism": "当指数被强势权重或少数主线抬升而个股跟涨不足时，新开仓胜率下降，现金比强行试错更有价值。"
+      "mechanism": "指数受权重股带动可以走强，但若个股扩散不足，追新仓的胜率和容错率都会下降。"
     },
     {
-      "text": "低IV环境下，已有盈利仓更适合机械提止损而不是扩仓追击；利柏特今日盈利17.83%后维持保本止损，符合强势股先锁风险再等延续的处理方式。",
+      "text": "利柏特这类小仓位订单驱动票在+10%后机械上调至保本位是有效的，把事件票转换成低风险趋势跟踪单。",
       "type": "heuristic",
       "tags": [
         "exit-rule",
@@ -137,22 +179,22 @@
       ],
       "evidence_type": "supporting",
       "related_hypothesis": "h023",
-      "mechanism": "低波动定价往往压低保护成本，但也意味着追高容错低；把浮盈仓转成低风险持有，比新增仓位更优。"
+      "mechanism": "事件催化兑现后的最大风险是回撤，先锁死不亏可保留继续扩张收益的权利。"
     },
     {
-      "text": "板块热度与个股量能需要同时看；芯源微虽处半导体强板块，但量能仅为MAVOL30的71.9%，因此只能继续持有，不宜据板块强势直接加仓。",
+      "text": "今天最容易诱多的是热板块中的过热个股，如广合科技、华懋科技这类远离MA5/10/20的强票；主线正确也不能覆盖追高错误。",
       "type": "signal",
       "tags": [
+        "entry-filter",
         "sector",
-        "timing",
-        "exit-rule"
+        "timing"
       ],
       "evidence_type": "supporting",
-      "related_hypothesis": null,
-      "mechanism": "强板块可托住方向，但个股若量能跟不上，短线延续性会弱于板块平均。"
+      "related_hypothesis": "h017",
+      "mechanism": "低IV和偏乐观环境下，追高买点的回撤风险会被放大，必须用均线距离约束入场时机。"
     }
   ],
-  "market_summary": "市场偏强但不够广：上证+0.55%、深成指+1.36%、创业板指+2.13%，3大指数全红；但breadth仅1.01:1（2672上涨/2638下跌），57涨停/7跌停，属于指数强于个股的分化反弹，不满足V2新开仓最低1.5:1门槛。热板块集中在元件、半导体、综合Ⅱ、养殖业、航天装备Ⅱ；冷板块为林业Ⅱ、酒店餐饮、油服工程、商用车、调味发酵品Ⅱ。持仓中1/2位于热区。IV方面整体情绪极度乐观，平均IV Rank约14.9%，若后续开新仓应缩小仓位并严控追高，但今天最优解仍是不开新仓、管理已有盈利头寸。",
-  "market_sentiment": "neutral-bullish",
-  "market_call": "观望偏积极"
+  "market_summary": "市场偏多但未到可积极开新仓的强度：上证+0.55%、深成指+1.07%、创业板+1.77%，3大指数全红；但 breadth 仅1.28:1（2989涨/2339跌），未达到1.5:1最低新开仓门槛，66涨停/14跌停，不是恐慌但也非强共振。热板块集中在航天装备Ⅱ、元件、养殖业、综合Ⅱ、消费电子，冷板块为林业Ⅱ、油服工程、油气开采Ⅱ、酒店餐饮、普钢，显示成长/科技占优、资源回落。IV整体偏低，300ETF IV Rank 14.2%、500ETF 3.6%、科创50 12.3%，新仓应更克制、避免追高；因此今日策略以持有已有强势仓位、不开新仓为主。",
+  "market_sentiment": "bullish",
+  "market_call": "谨慎积极"
 }

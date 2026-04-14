@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1776137706.305654,
+      "start": 1776148570.6513321,
       "errors": [],
-      "end": 1776138929.28976,
-      "duration_sec": 1223.0
+      "end": 1776148584.618052,
+      "duration_sec": 14.0
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 4186,
+      "response_size_bytes": 3934,
       "tokens": {
-        "input_tokens": 37594,
-        "output_tokens": 2121
+        "input_tokens": 140684,
+        "output_tokens": 2723
       },
       "rounds": 2,
-      "tool_calls_count": 5,
-      "duration_sec": 48.2,
+      "tool_calls_count": 7,
+      "duration_sec": 82.7,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "GPT primary",
@@ -25,101 +25,24 @@
     },
     {
       "phase": "apply",
-      "start": 1776138977.5516129,
+      "start": 1776148667.383662,
       "actions": [
         "RAISE_STOP 605167 → 16.38",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=29",
-        "Hypothesis: Updated h023 (validated): +1 supporting evidence → hitRate=100%, n=9",
-        "Hypothesis: Created h032 (observation): 板块热度与个股量能需要同时看；芯源微虽处半导体强板块，但量能仅为MAVOL30的71.9%，因此只能继续持有，不宜据板块强势直接加仓。...",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=30",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=10",
+        "Hypothesis: Updated h017 (validated): +1 supporting evidence → hitRate=100%, n=8",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "post_apply_rule_violations": {
-        "status": "violations",
-        "total_rules": 6,
-        "total_violations": 2,
-        "rules": [
-          {
-            "rule": "check_breakout_failure",
-            "file": "scripts/rules/check_breakout_failure.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_iv_filter",
-            "file": "scripts/rules/check_iv_filter.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_overextended_entry",
-            "file": "scripts/rules/check_overextended_entry.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_stop_proximity",
-            "file": "scripts/rules/check_stop_proximity.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_time_decay",
-            "file": "scripts/rules/check_time_decay.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_volume_below_mavol30",
-            "file": "scripts/rules/check_volume_below_mavol30.py",
-            "status": "violations",
-            "exit_code": 1,
-            "violations": [
-              {
-                "code": "605167",
-                "name": "利柏特",
-                "rule": "volume_below_mavol30",
-                "volume": 53395,
-                "mavol30": 64601.4,
-                "ratio_pct": 82.7,
-                "suggestion": "Latest volume 53,395 is below MAVOL30 64,601 (82.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-              },
-              {
-                "code": "688037",
-                "name": "芯源微",
-                "rule": "volume_below_mavol30",
-                "volume": 33398,
-                "mavol30": 46443.4,
-                "ratio_pct": 71.9,
-                "suggestion": "Latest volume 33,398 is below MAVOL30 46,443 (71.9% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-              }
-            ],
-            "error": null
-          }
-        ]
-      },
-      "end": 1776138977.685722,
-      "duration_sec": 0.1
+      "end": 1776148667.539498,
+      "duration_sec": 0.2
     }
   ],
-  "validation_errors": [
-    "RULE check_volume_below_mavol30: 605167 — Latest volume 53,395 is below MAVOL30 64,601 (82.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
-    "RULE check_volume_below_mavol30: 688037 — Latest volume 33,398 is below MAVOL30 46,443 (71.9% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-  ],
+  "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 1271.3
+    "totalDurationSec": 96.9
   }
 }

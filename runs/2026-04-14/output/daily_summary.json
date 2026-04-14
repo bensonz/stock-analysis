@@ -5,49 +5,49 @@
       "code": "605167",
       "name": "利柏特",
       "action": "RAISE_STOP",
-      "price": 19.3,
-      "pnl_pct": 17.83,
-      "note": "持仓第6个交易日，现价19.3较入场16.38盈利17.83%，已触发+10%后保本止损上调规则；所属建筑装饰未进今日热榜但也不在冷榜，暂不因板块出局。风险在于成交量仅为MAVOL30的82.7%，动能确认偏弱，不加仓。"
+      "price": 19.64,
+      "pnl_pct": 19.9,
+      "note": "持仓盈利约19.90%，已超过+10%但未到+20%；按规则继续至少保本。今日涨10.03%，成交量高于MAVOL30，订单催化仍新鲜，但所属建筑装饰不在热榜，继续持有不加仓。"
     },
     {
       "code": "688037",
       "name": "芯源微",
       "action": "HOLD",
-      "price": 193.45,
-      "pnl_pct": 9.07,
-      "note": "半导体为今日最强主线之一，个股现价193.45较入场177.36盈利9.07%，接近但未到+10%提保本阈值，未触发止损或10日时间止损。风险是成交量仅为MAVOL30的71.9%，继续持有但不加仓。"
+      "price": 189.12,
+      "pnl_pct": 6.63,
+      "note": "持仓盈利约6.63%，未触发+10%提保本，也未触发-5%或10日时间止损。半导体设备获板块消息催化，今日放量上涨，趋势仍在，但未进入给定前五热板块且个股当前距MA5/MA10偏离已不适合新追。"
     }
   ],
   "portfolioStats": {
     "totalPositions": 2,
-    "totalEquity": 966389.0,
-    "dayPnl": 4370.0,
-    "dayReturnPct": 0.45,
-    "totalReturnPct": -3.36,
-    "unrealizedPnl": 7890.0,
+    "totalEquity": 966067.0,
+    "dayPnl": 4048.0,
+    "dayReturnPct": 0.42,
+    "totalReturnPct": -3.39,
+    "unrealizedPnl": 7568.0,
     "realizedPnl": -41501.0,
-    "cashPct": 92.8
+    "cashPct": 92.83
   },
   "entryRegime": {
     "allow_new_positions": true,
     "regime": "balanced",
-    "breadth_ratio": 1.0129,
-    "up": 2672,
-    "down": 2638,
+    "breadth_ratio": 1.2779,
+    "up": 2989,
+    "down": 2339,
     "positive_indices": [
       "上证指数",
       "深证成指",
       "创业板指"
     ],
     "negative_indices": [],
-    "limit_ups": 57,
-    "limit_downs": 7,
+    "limit_ups": 66,
+    "limit_downs": 14,
     "sizing_multiplier": 1.0,
     "hard_block": false,
-    "reason": "Entry regime balanced: breadth 1.01:1, 3/3 major indices green, 57 limit-ups / 7 limit-downs. Allow normal sizing."
+    "reason": "Entry regime balanced: breadth 1.28:1, 3/3 major indices green, 66 limit-ups / 14 limit-downs. Allow normal sizing."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "市场偏强但不够广：上证+0.55%、深成指+1.36%、创业板指+2.13%，3大指数全红；但breadth仅1.01:1（2672上涨/2638下跌），57涨停/7跌停，属于指数强于个股的分化反弹，不满足V2新开仓最低1.5:1门槛。热板块集中在元件、半导体、综合Ⅱ、养殖业、航天装备Ⅱ；冷板块为林业Ⅱ、酒店餐饮、油服工程、商用车、调味发酵品Ⅱ。持仓中1/2位于热区。IV方面整体情绪极度乐观，平均IV Rank约14.9%，若后续开新仓应缩小仓位并严控追高，但今天最优解仍是不开新仓、管理已有盈利头寸。"
+    "summary": "市场偏多但未到可积极开新仓的强度：上证+0.55%、深成指+1.07%、创业板+1.77%，3大指数全红；但 breadth 仅1.28:1（2989涨/2339跌），未达到1.5:1最低新开仓门槛，66涨停/14跌停，不是恐慌但也非强共振。热板块集中在航天装备Ⅱ、元件、养殖业、综合Ⅱ、消费电子，冷板块为林业Ⅱ、油服工程、油气开采Ⅱ、酒店餐饮、普钢，显示成长/科技占优、资源回落。IV整体偏低，300ETF IV Rank 14.2%、500ETF 3.6%、科创50 12.3%，新仓应更克制、避免追高；因此今日策略以持有已有强势仓位、不开新仓为主。"
   }
 }

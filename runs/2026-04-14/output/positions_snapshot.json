@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-04-14T11:56:17.684868+08:00",
+  "snapshot_time": "2026-04-14T14:37:47.538143+08:00",
   "snapshot_type": "post_run",
   "date": "2026-04-14",
   "portfolio_config": {
@@ -11,23 +11,23 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-04-14T11:56:17.557360+08:00",
+    "lastUpdated": "2026-04-14T14:37:47.396494+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 966389.0,
+      "totalEquity": 966067.0,
       "cash": 896819.0,
-      "investedValue": 69570.0,
-      "unrealizedPnl": 7890.0,
+      "investedValue": 69248.0,
+      "unrealizedPnl": 7568.0,
       "realizedPnl": -41501.0,
-      "totalPnl": -33611.0,
-      "totalReturnPct": -3.36,
+      "totalPnl": -33933.0,
+      "totalReturnPct": -3.39,
       "positionsUsed": 2,
       "positionsMax": 10,
-      "cashPct": 92.8,
-      "dayPnl": 4370.0,
+      "cashPct": 92.83,
+      "dayPnl": 4048.0,
       "minCashPct": 20,
-      "minCashValue": 193277.8,
-      "deployableCash": 703541.2
+      "minCashValue": 193213.4,
+      "deployableCash": 703605.6
     },
     "activePositions": [
       {
@@ -35,8 +35,8 @@
         "name": "利柏特",
         "entryDate": "2026-04-07",
         "entryPrice": 16.38,
-        "currentPrice": 19.3,
-        "pnl_pct": 17.83,
+        "currentPrice": 19.64,
+        "pnl_pct": 19.9,
         "stopLoss": 15.56,
         "currentStop": 16.38,
         "targetPrice": 18.88,
@@ -45,20 +45,20 @@
         "shares": 1600,
         "allocation_pct": 4,
         "allocatedCapital": 26208.0,
-        "currentValue": 30880.0,
-        "unrealizedPnl": 4672.0,
-        "volume": 53395,
+        "currentValue": 31424.0,
+        "unrealizedPnl": 5216.0,
+        "volume": 85488,
         "mavol30": 64601.4,
-        "volumeBelowMavol30": true,
-        "weight_pct": 3.2
+        "volumeBelowMavol30": false,
+        "weight_pct": 3.25
       },
       {
         "code": "688037",
         "name": "芯源微",
         "entryDate": "2026-04-08",
         "entryPrice": 177.36,
-        "currentPrice": 193.45,
-        "pnl_pct": 9.07,
+        "currentPrice": 189.12,
+        "pnl_pct": 6.63,
         "stopLoss": 168.5,
         "currentStop": 168.5,
         "targetPrice": 204.09,
@@ -67,12 +67,12 @@
         "shares": 200,
         "allocation_pct": 5,
         "allocatedCapital": 35472.0,
-        "currentValue": 38690.0,
-        "unrealizedPnl": 3218.0,
-        "volume": 33398,
+        "currentValue": 37824.0,
+        "unrealizedPnl": 2352.0,
+        "volume": 48722,
         "mavol30": 46443.4,
-        "volumeBelowMavol30": true,
-        "weight_pct": 4.0
+        "volumeBelowMavol30": false,
+        "weight_pct": 3.92
       }
     ]
   },
@@ -133,10 +133,10 @@
         },
         {
           "date": "2026-04-14",
-          "price": 19.3,
-          "change_pct": 17.83,
+          "price": 19.64,
+          "change_pct": 19.9,
           "action": "RAISE_STOP",
-          "note": "持仓第6个交易日，现价19.3较入场16.38盈利17.83%，已触发+10%后保本止损上调规则；所属建筑装饰未进今日热榜但也不在冷榜，暂不因板块出局。风险在于成交量仅为MAVOL30的82.7%，动能确认偏弱，不加仓。"
+          "note": "持仓盈利约19.90%，已超过+10%但未到+20%；按规则继续至少保本。今日涨10.03%，成交量高于MAVOL30，订单催化仍新鲜，但所属建筑装饰不在热榜，继续持有不加仓。"
         }
       ],
       "exitDate": null,
@@ -146,7 +146,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-04-07T14:38:30.422544+08:00",
-      "updatedAt": "2026-04-14T11:56:17.554749+08:00",
+      "updatedAt": "2026-04-14T14:37:47.388553+08:00",
       "trackerVersion": "2.1",
       "_correction": {
         "date": "2026-04-08",
@@ -210,10 +210,10 @@
         },
         {
           "date": "2026-04-14",
-          "price": 193.45,
-          "change_pct": 9.07,
+          "price": 189.12,
+          "change_pct": 6.63,
           "action": "HOLD",
-          "note": "半导体为今日最强主线之一，个股现价193.45较入场177.36盈利9.07%，接近但未到+10%提保本阈值，未触发止损或10日时间止损。风险是成交量仅为MAVOL30的71.9%，继续持有但不加仓。"
+          "note": "持仓盈利约6.63%，未触发+10%提保本，也未触发-5%或10日时间止损。半导体设备获板块消息催化，今日放量上涨，趋势仍在，但未进入给定前五热板块且个股当前距MA5/MA10偏离已不适合新追。"
         }
       ],
       "exitDate": null,
@@ -223,7 +223,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-04-08T11:51:08.642286+08:00",
-      "updatedAt": "2026-04-14T11:56:17.555455+08:00",
+      "updatedAt": "2026-04-14T14:37:47.390397+08:00",
       "trackerVersion": "2.1",
       "_correction": {
         "date": "2026-04-08",

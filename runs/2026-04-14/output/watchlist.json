@@ -2,45 +2,45 @@
   "date": "2026-04-14",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4010.447,
+      "value": 4010.502,
       "change_pct": 0.55
     },
     "shenzhen_component": {
-      "value": 14603.34,
-      "change_pct": 1.36
+      "value": 14561.86,
+      "change_pct": 1.07
     },
     "chinext": {
-      "value": 3550.32,
-      "change_pct": 2.13
+      "value": 3538.0,
+      "change_pct": 1.77
     },
-    "sentiment": "neutral-bullish",
+    "sentiment": "bullish",
     "hot_sectors": [
+      "航天装备Ⅱ",
       "元件",
-      "半导体",
-      "综合Ⅱ",
       "养殖业",
-      "航天装备Ⅱ"
+      "综合Ⅱ",
+      "消费电子"
     ],
     "cold_sectors": [
       "林业Ⅱ",
-      "酒店餐饮",
       "油服工程",
-      "商用车",
-      "调味发酵品Ⅱ"
+      "油气开采Ⅱ",
+      "酒店餐饮",
+      "普钢"
     ],
-    "notes": "市场偏强但不够广：上证+0.55%、深成指+1.36%、创业板指+2.13%，3大指数全红；但breadth仅1.01:1（2672上涨/2638下跌），57涨停/7跌停，属于指数强于个股的分化反弹，不满足V2新开仓最低1.5:1门槛。热板块集中在元件、半导体、综合Ⅱ、养殖业、航天装备Ⅱ；冷板块为林业Ⅱ、酒店餐饮、油服工程、商用车、调味发酵品Ⅱ。持仓中1/2位于热区。IV方面整体情绪极度乐观，平均IV Rank约14.9%，若后续开新仓应缩小仓位并严控追高，但今天最优解仍是不开新仓、管理已有盈利头寸。"
+    "notes": "市场偏多但未到可积极开新仓的强度：上证+0.55%、深成指+1.07%、创业板+1.77%，3大指数全红；但 breadth 仅1.28:1（2989涨/2339跌），未达到1.5:1最低新开仓门槛，66涨停/14跌停，不是恐慌但也非强共振。热板块集中在航天装备Ⅱ、元件、养殖业、综合Ⅱ、消费电子，冷板块为林业Ⅱ、油服工程、油气开采Ⅱ、酒店餐饮、普钢，显示成长/科技占优、资源回落。IV整体偏低，300ETF IV Rank 14.2%、500ETF 3.6%、科创50 12.3%，新仓应更克制、避免追高；因此今日策略以持有已有强势仓位、不开新仓为主。"
   },
   "strategy_scan": {
-    "total_stocks_scanned": 0,
+    "total_stocks_scanned": 43,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-04-14T11:56:17.556673+08:00"
+    "scan_time": "2026-04-14T14:37:47.393221+08:00"
   },
   "recommendations": [
     {
       "code": "600268.SH",
       "name": "国电南自",
       "price": null,
-      "rps120": null,
+      "rps120": 91.19,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -49,7 +49,7 @@
       "code": "300857.SZ",
       "name": "协创数据",
       "price": null,
-      "rps120": null,
+      "rps120": 90.39,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -58,7 +58,7 @@
       "code": "688200.SH",
       "name": "华峰测控",
       "price": null,
-      "rps120": null,
+      "rps120": 90.95,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -67,7 +67,7 @@
       "code": "688663.SH",
       "name": "新风光",
       "price": null,
-      "rps120": null,
+      "rps120": 92.65,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -76,18 +76,81 @@
       "code": "603306.SH",
       "name": "华懋科技",
       "price": null,
-      "rps120": null,
+      "rps120": 93.43,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "001389.SZ",
+      "name": "广合科技",
+      "price": null,
+      "rps120": 90.99,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688097.SH",
+      "name": "博众精工",
+      "price": null,
+      "rps120": 92.63,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "300677.SZ",
+      "name": "英科医疗",
+      "price": null,
+      "rps120": 93.27,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "002440.SZ",
+      "name": "闰土股份",
+      "price": null,
+      "rps120": 94.42,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "000893.SZ",
+      "name": "亚钾国际",
+      "price": null,
+      "rps120": 94.01,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600301.SH",
+      "name": "华锡有色",
+      "price": null,
+      "rps120": 92.84,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "603191.SH",
+      "name": "望变电气",
+      "price": null,
+      "rps120": 88.91,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     }
   ],
   "summary": {
-    "total_scanned": 0,
+    "total_scanned": 43,
     "buy_recommendations": 0,
-    "watch_recommendations": 5,
+    "watch_recommendations": 12,
     "avoid_recommendations": 0,
-    "market_call": "观望偏积极",
-    "reasoning": "市场偏强但不够广：上证+0.55%、深成指+1.36%、创业板指+2.13%，3大指数全红；但breadth仅1.01:1（2672上涨/2638下跌），57涨停/7跌停，属于指数强于个股的分化反弹，不满足V2新开仓最低1.5:1门槛。热板块集中在元件、半导体、综合Ⅱ、养殖业、航天装备Ⅱ；冷板块为林业Ⅱ、酒店餐饮、油服工程、商用车、调味发酵品Ⅱ。持仓中1/2位于热区。IV方面整体情绪极度乐观，平均IV Rank约14.9%，若后续开新仓应缩小仓位并严控追高，但今天最优解仍是不开新仓、管理已有盈利头寸。"
+    "market_call": "谨慎积极",
+    "reasoning": "市场偏多但未到可积极开新仓的强度：上证+0.55%、深成指+1.07%、创业板+1.77%，3大指数全红；但 breadth 仅1.28:1（2989涨/2339跌），未达到1.5:1最低新开仓门槛，66涨停/14跌停，不是恐慌但也非强共振。热板块集中在航天装备Ⅱ、元件、养殖业、综合Ⅱ、消费电子，冷板块为林业Ⅱ、油服工程、油气开采Ⅱ、酒店餐饮、普钢，显示成长/科技占优、资源回落。IV整体偏低，300ETF IV Rank 14.2%、500ETF 3.6%、科创50 12.3%，新仓应更克制、避免追高；因此今日策略以持有已有强势仓位、不开新仓为主。"
   }
 }

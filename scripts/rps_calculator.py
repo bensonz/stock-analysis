@@ -48,6 +48,7 @@ def compute_ma_rps(
         reference_date = _resolve_reference_date(conn, date)
         if not reference_date:
             return {}
+        min_codes = _reference_date_min_codes(conn)
 
         _debug_print(debug_enabled, f"requested date={date or 'latest'} resolved date={reference_date} ma_period={ma_period}")
 
@@ -57,7 +58,7 @@ def compute_ma_rps(
                 "FROM rps_cache WHERE date=?",
                 (reference_date,),
             ).fetchall()
-            if cached:
+            if cached and (min_codes <= 0 or len(cached) >= min_codes):
                 _debug_print(debug_enabled, f"cache hit for {reference_date}: {len(cached)} stocks")
                 return {
                     row[0]: {
@@ -67,17 +68,18 @@ def compute_ma_rps(
                     }
                     for row in cached
                 }
+            if cached:
+                _debug_print(
+                    debug_enabled,
+                    f"discarding undersized cache for {reference_date}: {len(cached)} < {min_codes}",
+                )
+                conn.execute("DELETE FROM rps_cache WHERE date=?", (reference_date,))
+                conn.commit()
 
         if ma_period == 10 and force_recompute:
             _debug_print(debug_enabled, "cache bypassed via force_recompute")
 
-        trading_dates = [
-            row[0] for row in conn.execute(
-                "SELECT DISTINCT date FROM daily_prices "
-                "WHERE date <= ? ORDER BY date DESC LIMIT 300",
-                (reference_date,),
-            )
-        ]
+        trading_dates = _load_trading_dates(conn, reference_date, 300, min_codes=min_codes)
         if not trading_dates:
             return {}
 
@@ -199,14 +201,9 @@ def compute_ma_alignment(db_path: str, date: str = None) -> dict:
         reference_date = _resolve_reference_date(conn, date)
         if not reference_date:
             return {}
+        min_codes = _reference_date_min_codes(conn)
 
-        trading_dates = [
-            r[0] for r in conn.execute(
-                "SELECT DISTINCT date FROM daily_prices "
-                "WHERE date <= ? ORDER BY date DESC LIMIT 260",
-                (reference_date,),
-            )
-        ]
+        trading_dates = _load_trading_dates(conn, reference_date, 260, min_codes=min_codes)
         if len(trading_dates) < 250:
             return {}
 
@@ -261,10 +258,7 @@ def _get_ma(conn: sqlite3.Connection, dates: list, required_count: int) -> dict:
 
 def _resolve_reference_date(conn: sqlite3.Connection, date: str | None) -> Optional[str]:
     """Resolve to the latest sufficiently covered trading date on or before the requested date."""
-    coverage_threshold = _reference_date_coverage_threshold()
-    total_codes_row = conn.execute("SELECT COUNT(DISTINCT code) FROM daily_prices").fetchone()
-    total_codes = int(total_codes_row[0] or 0) if total_codes_row else 0
-    min_codes = int(total_codes * coverage_threshold)
+    min_codes = _reference_date_min_codes(conn)
 
     params: list = []
     where_clause = ""
@@ -296,6 +290,41 @@ def _resolve_reference_date(conn: sqlite3.Connection, date: str | None) -> Optio
             (date,),
         ).fetchone()
     return row[0] if row and row[0] else None
+
+
+def _load_trading_dates(
+    conn: sqlite3.Connection,
+    reference_date: str,
+    limit: int,
+    *,
+    min_codes: int | None = None,
+) -> list[str]:
+    """Load trading dates for MA windows, preferring sufficiently covered dates."""
+    min_codes = _reference_date_min_codes(conn) if min_codes is None else min_codes
+
+    if min_codes > 0:
+        covered_rows = conn.execute(
+            """
+            SELECT date
+            FROM daily_prices
+            WHERE date <= ?
+            GROUP BY date
+            HAVING COUNT(DISTINCT code) >= ?
+            ORDER BY date DESC
+            LIMIT ?
+            """,
+            (reference_date, min_codes, limit),
+        ).fetchall()
+        covered_dates = [row[0] for row in covered_rows if row and row[0]]
+        if covered_dates:
+            return covered_dates
+
+    rows = conn.execute(
+        "SELECT DISTINCT date FROM daily_prices "
+        "WHERE date <= ? ORDER BY date DESC LIMIT ?",
+        (reference_date, limit),
+    ).fetchall()
+    return [row[0] for row in rows if row and row[0]]
 
 
 def _save_cache(conn: sqlite3.Connection, date: str, results: dict):
@@ -333,6 +362,13 @@ def _reference_date_coverage_threshold() -> float:
     except ValueError:
         return 0.9
     return min(1.0, max(0.0, value))
+
+
+def _reference_date_min_codes(conn: sqlite3.Connection) -> int:
+    coverage_threshold = _reference_date_coverage_threshold()
+    total_codes_row = conn.execute("SELECT COUNT(DISTINCT code) FROM daily_prices").fetchone()
+    total_codes = int(total_codes_row[0] or 0) if total_codes_row else 0
+    return int(total_codes * coverage_threshold)
 
 
 def _debug_codes() -> list[str]:

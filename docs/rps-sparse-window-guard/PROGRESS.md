@@ -1,0 +1,7 @@
+- 2026-04-14: Investigated the empty noon-run intersection. `runs/2026-04-14/input/strategy_pool_debug.json` showed `rps_universe=86` and `intersection_total=0` against a 194-name remote crawl.
+- 2026-04-14: Confirmed the local DB has sparse partial-refresh dates near the head (`2026-04-10`: 100 rows, `2026-04-09`: 229, `2026-04-08`: 199, `2026-04-07/03/02/01`: 89 each).
+- 2026-04-14: Confirmed `scripts/rps_calculator.py` resolves the reference date to `2026-04-13` but still uses the sparse dates inside the 10-day MA window, collapsing the eligible universe to 86 stocks.
+- 2026-04-14: Confirmed `rps_cache` already contains a poisoned `2026-04-13` entry with only 86 rows.
+- 2026-04-14: Patched `scripts/rps_calculator.py` to load only sufficiently covered dates for MA/RPS windows and to discard undersized `rps_cache` rows before reuse.
+- 2026-04-14: Added regression coverage in `tests/test_rps_reference_date.py` for sparse head dates and poisoned cache reuse.
+- 2026-04-14: Verification after the patch: `compute_ma_rps('data/pricedb/ashare_prices.db', force_recompute=True)` returned 5,173 symbols and rebuilding the 2026-04-14 crawl intersection produced 43 stocks instead of 0.

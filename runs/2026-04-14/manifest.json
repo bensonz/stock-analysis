@@ -2,7 +2,7 @@
   "date": "2026-04-14",
   "status": "degraded",
   "exit_code": 0,
-  "total_duration_sec": 87.0,
+  "total_duration_sec": 1271.3,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -10,11 +10,11 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 141.6
+          "latency_ms": 101.2
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 429.6
+          "latency_ms": 427.8
         },
         "eastmoney": {
           "status": "down",
@@ -22,23 +22,23 @@
         },
         "pricedb": {
           "status": "ok",
-          "latest_date": "2026-04-13",
+          "latest_date": "2026-04-10",
           "stale": false
         }
       }
     },
     "collect": {
       "status": "ok",
-      "duration_sec": 12.9,
+      "duration_sec": 1223.0,
       "errors": []
     },
     "llm_analysis": {
       "status": "ok",
-      "duration_sec": 73.9
+      "duration_sec": 48.2
     },
     "apply": {
       "status": "ok",
-      "duration_sec": 0.2
+      "duration_sec": 0.1
     },
     "validate": {
       "status": "warnings",
@@ -53,7 +53,9 @@
     "phase1_to_phase2": {
       "passed": true,
       "hard_fails": [],
-      "soft_warns": []
+      "soft_warns": [
+        "strategy pool is empty (may be legitimate on weak days)"
+      ]
     },
     "phase2_to_phase3": {
       "passed": true,
