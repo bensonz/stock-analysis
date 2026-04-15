@@ -5,50 +5,49 @@
       "code": "605167",
       "name": "利柏特",
       "action": "HOLD",
-      "price": 18.12,
-      "pnl_pct": 10.62,
-      "note": "Still above breakeven stop despite -7.74% today. PnL remains positive versus 16.38 entry, but the reversal is sharp and sector is not in hot leadership. Keep only because currentStop 16.38 has not been broken on the provided price; do not add."
+      "price": 17.7,
+      "pnl_pct": 8.06,
+      "note": "Price 17.70 remains above raised breakeven stop 16.38 and position is still up 8.06%, but today's -9.88% reversal is severe, sector is not in supplied hot top-5 list, and stock-specific IV proxy is extremely low so no adding. Keep only with tight discipline."
     },
     {
       "code": "688037",
       "name": "芯源微",
       "action": "HOLD",
-      "price": 190.1,
-      "pnl_pct": 7.18,
-      "note": "Still above entry and hard stop, but volume is only 62.1% of MAVOL30 and sector is not in supplied top-5 sector list. Momentum confirmation weakened; hold without adding and enforce time stop soon if gains do not expand."
+      "price": 181.95,
+      "pnl_pct": 2.59,
+      "note": "Price 181.95 is still above entry 177.36 and above hard stop 168.50, but today's -6.75% break came on above-MAVOL30 volume and the sector is not in supplied hot top-5 list. Momentum weakened sharply; hold only because stop has not broken and 10-day time stop is close."
     }
   ],
   "portfolioStats": {
     "totalPositions": 2,
-    "totalEquity": 963831.0,
-    "dayPnl": -3438.0,
-    "dayReturnPct": -0.36,
-    "totalReturnPct": -3.62,
-    "unrealizedPnl": 5332.0,
+    "totalEquity": 961529.0,
+    "dayPnl": -5740.0,
+    "dayReturnPct": -0.6,
+    "totalReturnPct": -3.85,
+    "unrealizedPnl": 3030.0,
     "realizedPnl": -41501.0,
-    "cashPct": 93.05
+    "cashPct": 93.27
   },
   "entryRegime": {
     "allow_new_positions": true,
     "regime": "weak",
-    "breadth_ratio": 0.889,
-    "up": 2506,
-    "down": 2819,
-    "positive_indices": [
-      "上证指数"
-    ],
+    "breadth_ratio": 0.4525,
+    "up": 1688,
+    "down": 3730,
+    "positive_indices": [],
     "negative_indices": [
+      "上证指数",
       "深证成指",
       "创业板指"
     ],
-    "limit_ups": 52,
-    "limit_downs": 9,
+    "limit_ups": 67,
+    "limit_downs": 15,
     "sizing_multiplier": 0.5,
     "hard_block": false,
-    "reason": "Entry regime weak: breadth 0.89:1, 1/3 major indices green, 52 limit-ups / 9 limit-downs. Allow entries only with 50% sizing."
+    "reason": "Entry regime weak: breadth 0.45:1, 0/3 major indices green, 67 limit-ups / 15 limit-downs. Allow entries only with 50% sizing."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "Breadth 0.89:1 weak, 52涨停/9跌停, not panic but below the minimum long-entry gate; only 上证指数 is green while 深证成指 and 创业板指 are red. Hot sectors (top 5): 黑色家电 +3.11%, 航天装备Ⅱ +3.00%, 医药商业 +2.80%, 专业连锁Ⅱ +2.27%, 游戏Ⅱ +2.27%. Cold sectors (bottom 5): 能源金属 -3.03%, 化学原料 -2.57%, 油服工程 -2.46%, 油气开采Ⅱ -2.30%, 玻璃玻纤 -2.12%. Position sector alignment: 0/2 positions in hot sectors. IV context is generally low/optimistic; several small-cap proxies are below 15% IV Rank, so fresh risk should be throttled, but today the breadth gate already says no new positions."
+    "summary": "Breadth 0.45:1 bearish, 67涨停/15跌停, distribution skewed to losers and all 3 major indices are red, so the minimum long-entry gate fails decisively. Hot sectors (top 5): 医药商业 +3.42%, 化学制药 +2.56%, 饲料 +1.95%, 物流 +1.89%, 电网设备 +1.74%. Cold sectors (bottom 5): 能源金属 -3.64%, 玻璃玻纤 -3.52%, 化学原料 -3.02%, 油服工程 -2.89%, 影视院线 -2.82%. Position sector alignment: 0/2 positions in hot sectors. IV context is mostly low/偏乐观; broad-market IV is not a fear spike, but low IV does not override a weak breadth regime, so fresh risk stays at zero."
   }
 }

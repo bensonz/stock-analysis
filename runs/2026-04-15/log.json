@@ -3,23 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1776224105.883235,
-      "errors": [
-        "pricedb_update: Refreshing stock list via tushare...\n  tushare update failed: Tushare stock_basic failed: 抱歉，您没有接口访问权限，权限的具体详情访问：https://tushare.pro/document/1?doc_id=108。\nRefreshing stock list via baostock...\n  5195 stocks in universe\nUpdating 5198 stocks via baostock (20260414 → 20260415)...\n  [BaoStock 100/5198] last: 600130 → 1 rows\n  [BaoStock 200/5198] last: 600262 → 1 rows\n  [BaoStock 300/5198] last: 600395 → 1 rows\n  [BaoStock 400/5198] last: 600539 → 1 rows\n  [BaoStock 500/5198] last: 600661 → 1 rows\n  [BaoStock 600/5198] last: 600779 → 1 rows\n  [BaoStock 700/5198] last: 600905 → 1 rows\n  [BaoStock 800/5198] last: 601111 → 1 rows\n  [BaoStock 900/5198] last: 601666 → 1 rows\n  [BaoStock 1000/5198] last: 603018 → 1 rows\n  [BaoStock 1100/5198] last: 603131 → 1 rows\n  [BaoStock 1200/5198] last: 603269 → 1 rows\n  [BaoStock 1300/5198] last: 603393 → 1 rows\n  [BaoStock 1400/5198] last: 603655 → 1 rows\n  [BaoStock 1500/5198] last: 603836 → 1 rows\n  [BaoStock 1600/5198] last: 605009 → 1 rows\n  [BaoStock 1700/5198] last: 605567 → 1 rows\n  [BaoStock 1800/5198] last: 688107 → 1 rows\n  [BaoStock 1900/5198] last: 688220 → 1 rows\n  [BaoStock 2000/5198] last: 688335 → 1 rows\n  [BaoStock 2100/5198] last: 688503 → 1 rows\n  [BaoStock 2200/5198] last: 688626 → 1 rows\n  [BaoStock 2300/5198] last: 688798 → 1 rows\n  [BaoStock 2400/5198] last: 000430 → 1 rows\n  [BaoStock 2500/5198] last: 000637 → 1 rows\n  [BaoStock 2600/5198] last: 000800 → 1 rows\n  [BaoStock 2700/5198] last: 000959 → 1 rows\n  [BaoStock 2800/5198] last: 001324 → 1 rows\n  [BaoStock 2900/5198] last: 002062 → 1 rows\n  [BaoStock 3000/5198] last: 002170 → 1 rows\n  [BaoStock 3100/5198] last: 002274 → 1 rows\n  [BaoStock 3200/5198] last: 002381 → 1 rows\n  [BaoStock 3300/5198] last: 002490 → 1 rows\n  [BaoStock 3400/5198] last: 002597 → 1 rows\n  [BaoStock 3500/5198] last: 002707 → 1 rows\n  [BaoStock 3600/5198] last: 002823 → 1 rows\n  [BaoStock 3700/5198] last: 002931 → 1 rows\n  [BaoStock 3800/5198] last: 003040 → 1 rows\n  [BaoStock 3900/5198] last: 300103 → 1 rows\n  [BaoStock 4000/5198] last: 300213 → 1 rows\n  [BaoStock 4100/5198] last: 300321 → 1 rows\n  [BaoStock 4200/5198] last: 300433 → 1 rows\n  [BaoStock 4300/5198] last: 300536 → 1 rows\n  baostock update failed: 用户未登录\nUpdate failed. Providers tried:\n  - tushare: Tushare stock_basic failed: 抱歉，您没有接口访问权限，权限的具体详情访问：https://tushare.pro/document/1?doc_id=108。\n  - baostock: 用户未登录"
-      ],
-      "end": 1776225026.042795,
-      "duration_sec": 920.2
+      "start": 1776235598.204201,
+      "errors": [],
+      "end": 1776235636.661193,
+      "duration_sec": 38.5
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 7842,
+      "response_size_bytes": 7449,
       "tokens": {
-        "input_tokens": 121778,
-        "output_tokens": 3165
+        "input_tokens": 127697,
+        "output_tokens": 2469
       },
       "rounds": 2,
-      "tool_calls_count": 9,
-      "duration_sec": 73.1,
+      "tool_calls_count": 6,
+      "duration_sec": 68.0,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "GPT primary",
@@ -27,91 +25,23 @@
     },
     {
       "phase": "apply",
-      "start": 1776225099.212974,
+      "start": 1776235704.7063549,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=31",
-        "Hypothesis: Updated h021 (validated): +1 supporting evidence → hitRate=100%, n=5",
-        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=11",
-        "Hypothesis: Updated h017 (validated): +1 supporting evidence → hitRate=100%, n=9",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=32",
+        "Hypothesis: Updated h021 (validated): +1 supporting evidence → hitRate=100%, n=6",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=12",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "post_apply_rule_violations": {
-        "status": "violations",
-        "total_rules": 6,
-        "total_violations": 1,
-        "rules": [
-          {
-            "rule": "check_breakout_failure",
-            "file": "scripts/rules/check_breakout_failure.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_iv_filter",
-            "file": "scripts/rules/check_iv_filter.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_overextended_entry",
-            "file": "scripts/rules/check_overextended_entry.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_stop_proximity",
-            "file": "scripts/rules/check_stop_proximity.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_time_decay",
-            "file": "scripts/rules/check_time_decay.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_volume_below_mavol30",
-            "file": "scripts/rules/check_volume_below_mavol30.py",
-            "status": "violations",
-            "exit_code": 1,
-            "violations": [
-              {
-                "code": "688037",
-                "name": "芯源微",
-                "rule": "volume_below_mavol30",
-                "volume": 29049,
-                "mavol30": 46810.0,
-                "ratio_pct": 62.1,
-                "suggestion": "Latest volume 29,049 is below MAVOL30 46,810 (62.1% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-              }
-            ],
-            "error": null
-          }
-        ]
-      },
-      "end": 1776225099.410199,
+      "end": 1776235704.885803,
       "duration_sec": 0.2
     }
   ],
-  "validation_errors": [
-    "RULE check_volume_below_mavol30: 688037 — Latest volume 29,049 is below MAVOL30 46,810 (62.1% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-  ],
+  "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 993.5000000000001
+    "totalDurationSec": 106.7
   }
 }

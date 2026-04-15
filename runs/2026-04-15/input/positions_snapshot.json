@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-04-15T11:51:08.711990+08:00",
+  "snapshot_time": "2026-04-15T14:46:38.211674+08:00",
   "snapshot_type": "pre_run",
   "date": "2026-04-15",
   "portfolio_config": {
@@ -11,7 +11,7 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-04-15T11:50:26.545462+08:00",
+    "lastUpdated": "2026-04-15T11:51:47.410468+08:00",
     "portfolio": {
       "startingCapital": 1000000,
       "totalEquity": 963831.0,
@@ -137,6 +137,13 @@
           "change_pct": 19.9,
           "action": "RAISE_STOP",
           "note": "持仓盈利约19.90%，已超过+10%但未到+20%；按规则继续至少保本。今日涨10.03%，成交量高于MAVOL30，订单催化仍新鲜，但所属建筑装饰不在热榜，继续持有不加仓。"
+        },
+        {
+          "date": "2026-04-15",
+          "price": 18.12,
+          "change_pct": 10.62,
+          "action": "HOLD",
+          "note": "Still above breakeven stop despite -7.74% today. PnL remains positive versus 16.38 entry, but the reversal is sharp and sector is not in hot leadership. Keep only because currentStop 16.38 has not been broken on the provided price; do not add."
         }
       ],
       "exitDate": null,
@@ -146,7 +153,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-04-07T14:38:30.422544+08:00",
-      "updatedAt": "2026-04-14T14:37:47.388553+08:00",
+      "updatedAt": "2026-04-15T11:51:39.213115+08:00",
       "trackerVersion": "2.1",
       "_correction": {
         "date": "2026-04-08",
@@ -214,6 +221,13 @@
           "change_pct": 6.63,
           "action": "HOLD",
           "note": "持仓盈利约6.63%，未触发+10%提保本，也未触发-5%或10日时间止损。半导体设备获板块消息催化，今日放量上涨，趋势仍在，但未进入给定前五热板块且个股当前距MA5/MA10偏离已不适合新追。"
+        },
+        {
+          "date": "2026-04-15",
+          "price": 190.1,
+          "change_pct": 7.18,
+          "action": "HOLD",
+          "note": "Still above entry and hard stop, but volume is only 62.1% of MAVOL30 and sector is not in supplied top-5 sector list. Momentum confirmation weakened; hold without adding and enforce time stop soon if gains do not expand."
         }
       ],
       "exitDate": null,
@@ -223,7 +237,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-04-08T11:51:08.642286+08:00",
-      "updatedAt": "2026-04-14T14:37:47.390397+08:00",
+      "updatedAt": "2026-04-15T11:51:39.217576+08:00",
       "trackerVersion": "2.1",
       "_correction": {
         "date": "2026-04-08",

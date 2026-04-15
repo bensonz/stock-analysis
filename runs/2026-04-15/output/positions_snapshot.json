@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-04-15T11:51:39.409199+08:00",
+  "snapshot_time": "2026-04-15T14:48:24.884530+08:00",
   "snapshot_type": "post_run",
   "date": "2026-04-15",
   "portfolio_config": {
@@ -11,23 +11,23 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-04-15T11:51:39.220591+08:00",
+    "lastUpdated": "2026-04-15T14:48:24.716638+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 963831.0,
+      "totalEquity": 961529.0,
       "cash": 896819.0,
-      "investedValue": 67012.0,
-      "unrealizedPnl": 5332.0,
+      "investedValue": 64710.0,
+      "unrealizedPnl": 3030.0,
       "realizedPnl": -41501.0,
-      "totalPnl": -36169.0,
-      "totalReturnPct": -3.62,
+      "totalPnl": -38471.0,
+      "totalReturnPct": -3.85,
       "positionsUsed": 2,
       "positionsMax": 10,
-      "cashPct": 93.05,
-      "dayPnl": -3438.0,
+      "cashPct": 93.27,
+      "dayPnl": -5740.0,
       "minCashPct": 20,
-      "minCashValue": 192766.2,
-      "deployableCash": 704052.8
+      "minCashValue": 192305.8,
+      "deployableCash": 704513.2
     },
     "activePositions": [
       {
@@ -35,8 +35,8 @@
         "name": "利柏特",
         "entryDate": "2026-04-07",
         "entryPrice": 16.38,
-        "currentPrice": 18.12,
-        "pnl_pct": 10.62,
+        "currentPrice": 17.7,
+        "pnl_pct": 8.06,
         "stopLoss": 15.56,
         "currentStop": 16.38,
         "targetPrice": 18.88,
@@ -45,20 +45,20 @@
         "shares": 1600,
         "allocation_pct": 4,
         "allocatedCapital": 26208.0,
-        "currentValue": 28992.0,
-        "unrealizedPnl": 2784.0,
-        "volume": 135451,
+        "currentValue": 28320.0,
+        "unrealizedPnl": 2112.0,
+        "volume": 200410,
         "mavol30": 65751.67,
         "volumeBelowMavol30": false,
-        "weight_pct": 3.01
+        "weight_pct": 2.95
       },
       {
         "code": "688037",
         "name": "芯源微",
         "entryDate": "2026-04-08",
         "entryPrice": 177.36,
-        "currentPrice": 190.1,
-        "pnl_pct": 7.18,
+        "currentPrice": 181.95,
+        "pnl_pct": 2.59,
         "stopLoss": 168.5,
         "currentStop": 168.5,
         "targetPrice": 204.09,
@@ -67,12 +67,12 @@
         "shares": 200,
         "allocation_pct": 5,
         "allocatedCapital": 35472.0,
-        "currentValue": 38020.0,
-        "unrealizedPnl": 2548.0,
-        "volume": 29049,
+        "currentValue": 36390.0,
+        "unrealizedPnl": 918.0,
+        "volume": 61613,
         "mavol30": 46810.0,
-        "volumeBelowMavol30": true,
-        "weight_pct": 3.94
+        "volumeBelowMavol30": false,
+        "weight_pct": 3.78
       }
     ]
   },
@@ -140,10 +140,10 @@
         },
         {
           "date": "2026-04-15",
-          "price": 18.12,
-          "change_pct": 10.62,
+          "price": 17.7,
+          "change_pct": 8.06,
           "action": "HOLD",
-          "note": "Still above breakeven stop despite -7.74% today. PnL remains positive versus 16.38 entry, but the reversal is sharp and sector is not in hot leadership. Keep only because currentStop 16.38 has not been broken on the provided price; do not add."
+          "note": "Price 17.70 remains above raised breakeven stop 16.38 and position is still up 8.06%, but today's -9.88% reversal is severe, sector is not in supplied hot top-5 list, and stock-specific IV proxy is extremely low so no adding. Keep only with tight discipline."
         }
       ],
       "exitDate": null,
@@ -153,7 +153,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-04-07T14:38:30.422544+08:00",
-      "updatedAt": "2026-04-15T11:51:39.213115+08:00",
+      "updatedAt": "2026-04-15T14:48:24.706962+08:00",
       "trackerVersion": "2.1",
       "_correction": {
         "date": "2026-04-08",
@@ -224,10 +224,10 @@
         },
         {
           "date": "2026-04-15",
-          "price": 190.1,
-          "change_pct": 7.18,
+          "price": 181.95,
+          "change_pct": 2.59,
           "action": "HOLD",
-          "note": "Still above entry and hard stop, but volume is only 62.1% of MAVOL30 and sector is not in supplied top-5 sector list. Momentum confirmation weakened; hold without adding and enforce time stop soon if gains do not expand."
+          "note": "Price 181.95 is still above entry 177.36 and above hard stop 168.50, but today's -6.75% break came on above-MAVOL30 volume and the sector is not in supplied hot top-5 list. Momentum weakened sharply; hold only because stop has not broken and 10-day time stop is close."
         }
       ],
       "exitDate": null,
@@ -237,7 +237,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-04-08T11:51:08.642286+08:00",
-      "updatedAt": "2026-04-15T11:51:39.217576+08:00",
+      "updatedAt": "2026-04-15T14:48:24.713946+08:00",
       "trackerVersion": "2.1",
       "_correction": {
         "date": "2026-04-08",

@@ -1,11 +1,10 @@
 # 候选股票 2026-04-15
 
 ## 入场条件: ⚠ THROTTLED
-- 涨跌比: 0.89:1
-- 上涨指数: 上证指数
-- 下跌指数: 深证成指, 创业板指
+- 涨跌比: 0.45:1
+- 下跌指数: 上证指数, 深证成指, 创业板指
 - 新仓位尺寸系数: 0.50x
-- 原因: Entry regime weak: breadth 0.89:1, 1/3 major indices green, 52 limit-ups / 9 limit-downs. Allow entries only with 50% sizing.
+- 原因: Entry regime weak: breadth 0.45:1, 0/3 major indices green, 67 limit-ups / 15 limit-downs. Allow entries only with 50% sizing.
 
 ## 策略池 (39 stocks)
 

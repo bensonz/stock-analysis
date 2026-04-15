@@ -459,13 +459,17 @@
           {
             "date": "2026-04-15",
             "detail": "Weak breadth should override attractive single-stock setups; today several candidates had legal RPS and acceptable MA structure, but the correct action is still no new positions because breadth was below 1:1 and only one major index was green."
+          },
+          {
+            "date": "2026-04-15",
+            "detail": "When breadth is below 1:1 and all three major indices are red, the correct momentum action is zero new positions even if a few candidates have clean RPS and MA structures."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 31,
+      "sampleSize": 32,
       "hitRate": 1.0,
-      "confidence": 0.97,
+      "confidence": 0.971,
       "tags": [],
       "parentRule": null,
       "retiredDate": null,
@@ -732,13 +736,17 @@
           {
             "date": "2026-04-15",
             "detail": "The no-chasing MA filter remains essential in strong themes: many of the visually strongest names today were disqualified by excessive distance from MA5/MA10/MA20."
+          },
+          {
+            "date": "2026-04-15",
+            "detail": "The MA-distance anti-chase filter is doing real work today: several of the strongest names on paper were invalid because they were too far above MA5/MA10/MA20."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 5,
+      "sampleSize": 6,
       "hitRate": 1.0,
-      "confidence": 0.857,
+      "confidence": 0.875,
       "tags": [
         "entry-filter",
         "timing"
@@ -828,13 +836,17 @@
           {
             "date": "2026-04-15",
             "detail": "Mechanical stop promotion after a fast winner continues to reduce damage: 利柏特 gave back sharply today, but the prior raise to breakeven kept the trade from turning into a loser."
+          },
+          {
+            "date": "2026-04-15",
+            "detail": "Raised breakeven stops remain valuable in weak tapes: 利柏特 suffered a -9.88% day but the position is still manageable because the stop had already been lifted to entry."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 11,
+      "sampleSize": 12,
       "hitRate": 1.0,
-      "confidence": 0.923,
+      "confidence": 0.929,
       "tags": [
         "exit-rule",
         "timing",

@@ -966,3 +966,9 @@
 - The no-chasing MA filter remains essential in strong themes: many of the visually strongest names today were disqualified by excessive distance from MA5/MA10/MA20.
 - Mechanical stop promotion after a fast winner continues to reduce damage: 利柏特 gave back sharply today, but the prior raise to breakeven kept the trade from turning into a loser.
 - Low-IV conditions are not a buy signal by themselves; several small/mid-cap candidates had IV Rank below 15%, which argues for reduced sizing rather than aggressive initiation.
+
+### 自动更新 (2026-04-15)
+
+- When breadth is below 1:1 and all three major indices are red, the correct momentum action is zero new positions even if a few candidates have clean RPS and MA structures.
+- The MA-distance anti-chase filter is doing real work today: several of the strongest names on paper were invalid because they were too far above MA5/MA10/MA20.
+- Raised breakeven stops remain valuable in weak tapes: 利柏特 suffered a -9.88% day but the position is still manageable because the stop had already been lifted to entry.

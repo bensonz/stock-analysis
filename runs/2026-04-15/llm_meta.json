@@ -2,100 +2,70 @@
   "provider": "openai",
   "primary_model": "gpt-5.4",
   "decision_source": "GPT primary",
-  "input_tokens": 121778,
-  "output_tokens": 3165,
+  "input_tokens": 127697,
+  "output_tokens": 2469,
   "rounds": 2,
-  "duration_sec": 73.1,
+  "duration_sec": 68.0,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=A%E8%82%A1+%E7%83%AD%E9%97%A8%E6%9D%BF%E5%9D%97+%E4%BB%8A%E6%97%A5+2026%E5%B9%B44%E6%9C%8815%E6%97%A5"
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+2026-04-15"
       },
-      "result_length": 3000
+      "result_length": 4000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=%E9%BB%91%E8%89%B2%E5%AE%B6%E7%94%B5+%E6%9D%BF%E5%9D%97+2026%E5%B9%B44%E6%9C%8815%E6%97%A5"
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=医药商业+化学制药+电网设备+2026-04-15"
       },
-      "result_length": 3000
+      "result_length": 4000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=%E8%88%AA%E5%A4%A9%E8%A3%85%E5%A4%87+%E6%9D%BF%E5%9D%97+2026%E5%B9%B44%E6%9C%8815%E6%9D%BF%E5%9D%97"
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=利柏特+2026-04-15"
       },
-      "result_length": 3000
+      "result_length": 4000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=%E5%8D%8A%E5%AF%BC%E4%BD%93%E8%AE%BE%E5%A4%87+%E6%9D%BF%E5%9D%97+2026%E5%B9%B44%E6%9C%8815%E6%97%A5+A%E8%82%A1"
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=芯源微+2026-04-15"
       },
-      "result_length": 3000
+      "result_length": 4000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=%E5%88%A9%E6%9F%8F%E7%89%B9+2026%E5%B9%B44%E6%9C%8815%E6%97%A5+%E5%85%AC%E5%91%8A"
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=国电南自+2026-04-15"
       },
-      "result_length": 3000
+      "result_length": 4000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=%E8%8A%AF%E6%BA%90%E5%BE%AE+2026%E5%B9%B44%E6%9C%8815%E6%97%A5+%E5%8D%8A%E5%AF%BC%E4%BD%93%E8%AE%BE%E5%A4%87"
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=中东+油价+A股+化工+2026-04-15"
       },
-      "result_length": 3000
-    },
-    {
-      "pass": "P1",
-      "round": 1,
-      "tool": "web_fetch",
-      "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=%E5%9B%BD%E7%94%B5%E5%8D%97%E8%87%AA+2026%E5%B9%B44%E6%9C%8815%E6%97%A5+%E7%94%B5%E7%BD%91"
-      },
-      "result_length": 3000
-    },
-    {
-      "pass": "P1",
-      "round": 1,
-      "tool": "web_fetch",
-      "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=%E6%96%B0%E9%A3%8E%E5%85%89+2026%E5%B9%B44%E6%9C%8815%E6%97%A5+%E7%94%B5%E7%BD%91%E8%AE%BE%E5%A4%87"
-      },
-      "result_length": 3000
-    },
-    {
-      "pass": "P1",
-      "round": 1,
-      "tool": "web_fetch",
-      "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=%E4%B8%AD%E4%B8%9C+%E6%B2%B9%E4%BB%B7+A%E8%82%A1+2026%E5%B9%B44%E6%9C%8815%E6%97%A5"
-      },
-      "result_length": 28
+      "result_length": 4000
     }
   ],
   "fallback_used": false
