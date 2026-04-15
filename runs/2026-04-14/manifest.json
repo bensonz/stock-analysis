@@ -2,7 +2,7 @@
   "date": "2026-04-14",
   "status": "degraded",
   "exit_code": 0,
-  "total_duration_sec": 1271.3,
+  "total_duration_sec": 96.9,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -10,11 +10,11 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 101.2
+          "latency_ms": 99.4
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 427.8
+          "latency_ms": 448.2
         },
         "eastmoney": {
           "status": "down",
@@ -22,40 +22,35 @@
         },
         "pricedb": {
           "status": "ok",
-          "latest_date": "2026-04-10",
+          "latest_date": "2026-04-13",
           "stale": false
         }
       }
     },
     "collect": {
       "status": "ok",
-      "duration_sec": 1223.0,
+      "duration_sec": 14.0,
       "errors": []
     },
     "llm_analysis": {
       "status": "ok",
-      "duration_sec": 48.2
+      "duration_sec": 82.7
     },
     "apply": {
       "status": "ok",
-      "duration_sec": 0.1
+      "duration_sec": 0.2
     },
     "validate": {
-      "status": "warnings",
+      "status": "ok",
       "duration_sec": 0.0,
-      "errors": [
-        "RULE check_volume_below_mavol30: 605167 — Latest volume 53,395 is below MAVOL30 64,601 (82.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
-        "RULE check_volume_below_mavol30: 688037 — Latest volume 33,398 is below MAVOL30 46,443 (71.9% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-      ]
+      "errors": []
     }
   },
   "gates": {
     "phase1_to_phase2": {
       "passed": true,
       "hard_fails": [],
-      "soft_warns": [
-        "strategy pool is empty (may be legitimate on weak days)"
-      ]
+      "soft_warns": []
     },
     "phase2_to_phase3": {
       "passed": true,
@@ -67,10 +62,7 @@
     "phase3_to_phase4": {
       "passed": true,
       "hard_fails": [],
-      "soft_warns": [
-        "rule check_volume_below_mavol30: Latest volume 53,395 is below MAVOL30 64,601 (82.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
-        "rule check_volume_below_mavol30: Latest volume 33,398 is below MAVOL30 46,443 (71.9% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-      ]
+      "soft_warns": []
     }
   }
 }

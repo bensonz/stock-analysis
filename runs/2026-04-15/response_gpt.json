@@ -1,0 +1,204 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "黑色家电",
+        "5d_pct": 3.11,
+        "trend": "accelerating"
+      },
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": 3.0,
+        "trend": "accelerating"
+      },
+      {
+        "name": "医药商业",
+        "5d_pct": 2.8,
+        "trend": "steady"
+      },
+      {
+        "name": "专业连锁Ⅱ",
+        "5d_pct": 2.27,
+        "trend": "steady"
+      },
+      {
+        "name": "游戏Ⅱ",
+        "5d_pct": 2.27,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "能源金属",
+        "5d_pct": -3.03,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "化学原料",
+        "5d_pct": -2.57,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "油服工程",
+        "5d_pct": -2.46,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": -2.3,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": -2.12,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/2 positions in hot sectors",
+    "regime": "Index tape mixed, defensives and niche themes lead while resources/chemicals weaken; tech pockets still active but breadth too soft for fresh risk"
+  },
+  "position_decisions": [
+    {
+      "code": "605167",
+      "name": "利柏特",
+      "action": "HOLD",
+      "reason": "Still above breakeven stop despite -7.74% today. PnL remains positive versus 16.38 entry, but the reversal is sharp and sector is not in hot leadership. Keep only because currentStop 16.38 has not been broken on the provided price; do not add.",
+      "sector_rank": "middle/below top 30%",
+      "new_stop": 16.38,
+      "pnl_pct": 10.62,
+      "days_held": 8,
+      "exit_price": null
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "action": "HOLD",
+      "reason": "Still above entry and hard stop, but volume is only 62.1% of MAVOL30 and sector is not in supplied top-5 sector list. Momentum confirmation weakened; hold without adding and enforce time stop soon if gains do not expand.",
+      "sector_rank": "unclear/not in supplied top 30%",
+      "new_stop": 168.5,
+      "pnl_pct": 7.18,
+      "days_held": 7,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "reason": "Setup is acceptable on MA distances and RPS120 91.19, and catalyst is fresh, but market buy gate fails: breadth only 0.89:1 and only 1 of 3 major indices is green. Skip new entries in weak tape.",
+      "rps120": 91.19
+    },
+    {
+      "code": "688663",
+      "name": "新风光",
+      "reason": "Electric grid theme has policy support and MA distances are still within limits, but entry regime fails. Also stock-specific IV proxy rank is 12.1%, which would require half sizing even if tape were stronger.",
+      "rps120": 92.65
+    },
+    {
+      "code": "300677",
+      "name": "英科医疗",
+      "reason": "Medical side is relatively strong, but no current sector top-30% confirmation from supplied sector table and catalyst quality is partly commodity-driven. In weak market regime, avoid fresh longs despite valid MA distances.",
+      "rps120": 93.27
+    },
+    {
+      "code": "600426",
+      "name": "华鲁恒升",
+      "reason": "Sector headwind: chemical-related groups are weak today with 化学原料 in bottom 5. Stock RPS120 88.69 is fine, but sector gravity is against the trade.",
+      "rps120": 88.69
+    },
+    {
+      "code": "002440",
+      "name": "闰土股份",
+      "reason": "Chemical/dye exposure sits against today's weak chemical tape, and company-specific news mentions oil-price-driven cost pressure. Even though RPS120 94.42 is in range and MA distances are fine, sector is wrong.",
+      "rps120": 94.42
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "Resources are in cold tape with 能源金属 bottom-ranked. Fresh report catalyst exists, but sector is not buyable under sector-first rule.",
+      "rps120": 92.84
+    },
+    {
+      "code": "601208",
+      "name": "东材科技",
+      "reason": "Fails no-chasing rule: dist_ma5_pct 7.5% and dist_ma10_pct 10.4% exceed limits.",
+      "rps120": 91.42
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "Fails no-chasing rule: dist_ma5_pct 8.0% and dist_ma10_pct 9.8% exceed limits, despite strong semiconductor catalyst and 0 risk factors.",
+      "rps120": 90.95
+    },
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "reason": "Fails no-chasing rule badly: dist_ma5_pct 8.6%, dist_ma10_pct 16.0%, dist_ma20_pct 16.4%. Strong stock, wrong entry.",
+      "rps120": 90.99
+    },
+    {
+      "code": "603306",
+      "name": "华懋科技",
+      "reason": "Fails no-chasing rule severely with dist_ma5_pct 15.7%, dist_ma10_pct 22.3%, dist_ma20_pct 19.6%. No current price chase allowed.",
+      "rps120": 93.43
+    },
+    {
+      "code": "688097",
+      "name": "博众精工",
+      "reason": "Fails no-chasing rule: dist_ma5_pct 11.1%, dist_ma10_pct 13.8%, dist_ma20_pct 17.5%.",
+      "rps120": 92.63
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Weak breadth should override attractive single-stock setups; today several candidates had legal RPS and acceptable MA structure, but the correct action is still no new positions because breadth was below 1:1 and only one major index was green.",
+      "type": "rule",
+      "tags": [
+        "sector",
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Momentum entries depend on follow-through. When the average stock is down, even strong charts have lower odds of clean continuation."
+    },
+    {
+      "text": "The no-chasing MA filter remains essential in strong themes: many of the visually strongest names today were disqualified by excessive distance from MA5/MA10/MA20.",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "",
+      "mechanism": "Extended entries compress reward-to-risk and leave little nearby support, increasing mean-reversion risk."
+    },
+    {
+      "text": "Mechanical stop promotion after a fast winner continues to reduce damage: 利柏特 gave back sharply today, but the prior raise to breakeven kept the trade from turning into a loser.",
+      "type": "signal",
+      "tags": [
+        "exit-rule",
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "In weak or mixed tape, locking a winner at breakeven converts a momentum trade into a low-risk optionality hold."
+    },
+    {
+      "text": "Low-IV conditions are not a buy signal by themselves; several small/mid-cap candidates had IV Rank below 15%, which argues for reduced sizing rather than aggressive initiation.",
+      "type": "observation",
+      "tags": [
+        "position-sizing",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h017",
+      "mechanism": "Cheap volatility often coincides with complacency, so breakouts need stronger market confirmation to stick."
+    }
+  ],
+  "market_summary": "Breadth 0.89:1 weak, 52涨停/9跌停, not panic but below the minimum long-entry gate; only 上证指数 is green while 深证成指 and 创业板指 are red. Hot sectors (top 5): 黑色家电 +3.11%, 航天装备Ⅱ +3.00%, 医药商业 +2.80%, 专业连锁Ⅱ +2.27%, 游戏Ⅱ +2.27%. Cold sectors (bottom 5): 能源金属 -3.03%, 化学原料 -2.57%, 油服工程 -2.46%, 油气开采Ⅱ -2.30%, 玻璃玻纤 -2.12%. Position sector alignment: 0/2 positions in hot sectors. IV context is generally low/optimistic; several small-cap proxies are below 15% IV Rank, so fresh risk should be throttled, but today the breadth gate already says no new positions.",
+  "market_sentiment": "neutral",
+  "market_call": "观望"
+}
