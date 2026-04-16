@@ -2,7 +2,7 @@
   "date": "2026-04-15",
   "status": "degraded",
   "exit_code": 0,
-  "total_duration_sec": 993.5,
+  "total_duration_sec": 106.7,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -10,11 +10,11 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 110.6
+          "latency_ms": 126.7
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 424.0
+          "latency_ms": 427.5
         },
         "eastmoney": {
           "status": "down",
@@ -22,32 +22,28 @@
         },
         "pricedb": {
           "status": "ok",
-          "latest_date": "2026-04-13",
+          "latest_date": "2026-04-14",
           "stale": false
         }
       }
     },
     "collect": {
       "status": "ok",
-      "duration_sec": 920.2,
-      "errors": [
-        "pricedb_update: Refreshing stock list via tushare...\n  tushare update failed: Tushare stock_basic failed: 抱歉，您没有接口访问权限，权限的具体详情访问：https://tushare.pro/document/1?doc_id=108。\nRefreshing stock list via baostock...\n  5195 stocks in universe\nUpdating 5198 stocks via baostock (20260414 → 20260415)...\n  [BaoStock 100/5198] last: 600130 → 1 rows\n  [BaoStock 200/5198] last: 600262 → 1 rows\n  [BaoStock 300/5198] last: 600395 → 1 rows\n  [BaoStock 400/5198] last: 600539 → 1 rows\n  [BaoStock 500/5198] last: 600661 → 1 rows\n  [BaoStock 600/5198] last: 600779 → 1 rows\n  [BaoStock 700/5198] last: 600905 → 1 rows\n  [BaoStock 800/5198] last: 601111 → 1 rows\n  [BaoStock 900/5198] last: 601666 → 1 rows\n  [BaoStock 1000/5198] last: 603018 → 1 rows\n  [BaoStock 1100/5198] last: 603131 → 1 rows\n  [BaoStock 1200/5198] last: 603269 → 1 rows\n  [BaoStock 1300/5198] last: 603393 → 1 rows\n  [BaoStock 1400/5198] last: 603655 → 1 rows\n  [BaoStock 1500/5198] last: 603836 → 1 rows\n  [BaoStock 1600/5198] last: 605009 → 1 rows\n  [BaoStock 1700/5198] last: 605567 → 1 rows\n  [BaoStock 1800/5198] last: 688107 → 1 rows\n  [BaoStock 1900/5198] last: 688220 → 1 rows\n  [BaoStock 2000/5198] last: 688335 → 1 rows\n  [BaoStock 2100/5198] last: 688503 → 1 rows\n  [BaoStock 2200/5198] last: 688626 → 1 rows\n  [BaoStock 2300/5198] last: 688798 → 1 rows\n  [BaoStock 2400/5198] last: 000430 → 1 rows\n  [BaoStock 2500/5198] last: 000637 → 1 rows\n  [BaoStock 2600/5198] last: 000800 → 1 rows\n  [BaoStock 2700/5198] last: 000959 → 1 rows\n  [BaoStock 2800/5198] last: 001324 → 1 rows\n  [BaoStock 2900/5198] last: 002062 → 1 rows\n  [BaoStock 3000/5198] last: 002170 → 1 rows\n  [BaoStock 3100/5198] last: 002274 → 1 rows\n  [BaoStock 3200/5198] last: 002381 → 1 rows\n  [BaoStock 3300/5198] last: 002490 → 1 rows\n  [BaoStock 3400/5198] last: 002597 → 1 rows\n  [BaoStock 3500/5198] last: 002707 → 1 rows\n  [BaoStock 3600/5198] last: 002823 → 1 rows\n  [BaoStock 3700/5198] last: 002931 → 1 rows\n  [BaoStock 3800/5198] last: 003040 → 1 rows\n  [BaoStock 3900/5198] last: 300103 → 1 rows\n  [BaoStock 4000/5198] last: 300213 → 1 rows\n  [BaoStock 4100/5198] last: 300321 → 1 rows\n  [BaoStock 4200/5198] last: 300433 → 1 rows\n  [BaoStock 4300/5198] last: 300536 → 1 rows\n  baostock update failed: 用户未登录\nUpdate failed. Providers tried:\n  - tushare: Tushare stock_basic failed: 抱歉，您没有接口访问权限，权限的具体详情访问：https://tushare.pro/document/1?doc_id=108。\n  - baostock: 用户未登录"
-      ]
+      "duration_sec": 38.5,
+      "errors": []
     },
     "llm_analysis": {
       "status": "ok",
-      "duration_sec": 73.1
+      "duration_sec": 68.0
     },
     "apply": {
       "status": "ok",
       "duration_sec": 0.2
     },
     "validate": {
-      "status": "warnings",
+      "status": "ok",
       "duration_sec": 0.0,
-      "errors": [
-        "RULE check_volume_below_mavol30: 688037 — Latest volume 29,049 is below MAVOL30 46,810 (62.1% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-      ]
+      "errors": []
     }
   },
   "gates": {
@@ -66,9 +62,7 @@
     "phase3_to_phase4": {
       "passed": true,
       "hard_fails": [],
-      "soft_warns": [
-        "rule check_volume_below_mavol30: Latest volume 29,049 is below MAVOL30 46,810 (62.1% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-      ]
+      "soft_warns": []
     }
   }
 }

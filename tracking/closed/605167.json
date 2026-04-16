@@ -1,7 +1,7 @@
 {
   "code": "605167",
   "name": "利柏特",
-  "status": "active",
+  "status": "closed",
   "thesis": "订单催化新鲜，位置贴近MA，RPS在扩展区内且没有过热；更适合作为小仓位跟踪型进攻单。",
   "entryDate": "2026-04-07",
   "entryPrice": 16.38,
@@ -65,16 +65,23 @@
       "change_pct": 8.06,
       "action": "HOLD",
       "note": "Price 17.70 remains above raised breakeven stop 16.38 and position is still up 8.06%, but today's -9.88% reversal is severe, sector is not in supplied hot top-5 list, and stock-specific IV proxy is extremely low so no adding. Keep only with tight discipline."
+    },
+    {
+      "date": "2026-04-16",
+      "price": 17.89,
+      "change_pct": 9.22,
+      "action": "SELL",
+      "note": "Held 9 trading days with only about +9.22% open gain from entry, still below +10% threshold for a fresh stop upgrade, sector 建筑装饰 is not in today's hot top list, and latest volume is below MAVOL30 per rule violation. With V2's 10-day time stop approaching and momentum confirmation weak after yesterday's跌停 reversal, this is a capital-recycling exit rather than waiting for thesis rescue."
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-04-16",
+  "exitPrice": 17.89,
+  "exitReason": "Held 9 trading days with only about +9.22% open gain from entry, still below +10% threshold for a fresh stop upgrade, sector 建筑装饰 is not in today's hot top list, and latest volume is below MAVOL30 per rule violation. With V2's 10-day time stop approaching and momentum confirmation weak after yesterday's跌停 reversal, this is a capital-recycling exit rather than waiting for thesis rescue.",
+  "returnPct": 9.22,
+  "holdingDays": 9,
+  "lessonLearned": "",
   "createdAt": "2026-04-07T14:38:30.422544+08:00",
-  "updatedAt": "2026-04-15T14:48:24.706962+08:00",
+  "updatedAt": "2026-04-16T11:49:22.254211+08:00",
   "trackerVersion": "2.1",
   "_correction": {
     "date": "2026-04-08",

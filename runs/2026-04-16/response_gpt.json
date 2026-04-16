@@ -1,0 +1,251 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "综合Ⅱ",
+        "5d_pct": 4.25,
+        "trend": "accelerating"
+      },
+      {
+        "name": "冶钢原料",
+        "5d_pct": 3.96,
+        "trend": "accelerating"
+      },
+      {
+        "name": "小金属",
+        "5d_pct": 3.47,
+        "trend": "steady"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": 3.43,
+        "trend": "steady"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": 3.39,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -1.74,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "医药商业",
+        "5d_pct": -1.45,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "工程机械",
+        "5d_pct": -1.24,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": -0.74,
+        "trend": "weak"
+      },
+      {
+        "name": "动物保健Ⅱ",
+        "5d_pct": -0.55,
+        "trend": "weak"
+      }
+    ],
+    "position_alignment": "0/2 positions in hot sectors",
+    "regime": "Broad risk-on tape with resources, materials and communication equipment leading; existing positions are outside today's top leadership groups."
+  },
+  "position_decisions": [
+    {
+      "code": "605167",
+      "name": "利柏特",
+      "action": "SELL",
+      "reason": "Held 9 trading days with only about +9.22% open gain from entry, still below +10% threshold for a fresh stop upgrade, sector 建筑装饰 is not in today's hot top list, and latest volume is below MAVOL30 per rule violation. With V2's 10-day time stop approaching and momentum confirmation weak after yesterday's跌停 reversal, this is a capital-recycling exit rather than waiting for thesis rescue.",
+      "sector_rank": "outside top 30%",
+      "new_stop": null,
+      "pnl_pct": 9.22,
+      "days_held": 9,
+      "exit_price": 17.89
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "action": "SELL",
+      "reason": "Held 8 trading days and only about +5.68% versus entry, far from the +10% stop-raise trigger. Sector semicap has intraday support from board news, but it is not in supplied top sector leadership, volume is only 73.7% of MAVOL30, and the stock had a heavy down day on 2026-04-15. V2 says weak follow-through within a 10-day window should be cut and re-entered later if strength returns.",
+      "sector_rank": "outside top 30%",
+      "new_stop": null,
+      "pnl_pct": 5.68,
+      "days_held": 8,
+      "exit_price": 187.44
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "entry_price": 15.67,
+      "allocation_pct": 3,
+      "stop": 14.89,
+      "target": 18.8,
+      "thesis": "电网设备方向有业绩与订单催化，股价仍贴近均线，RPS处于甜蜜区间上沿，属于强势市场下可执行的小仓位顺势单。",
+      "sector": "电网设备",
+      "sector_rank": "top 30%",
+      "catalyst": "2025年营收96.44亿元、归母净利润大增40.95%，电网自动化订货53.85亿元，并有现金分红预期与研报目标价17元",
+      "catalyst_freshness": "ongoing",
+      "rps120": 91.19,
+      "conviction": "small"
+    },
+    {
+      "code": "600295",
+      "name": "鄂尔多斯",
+      "entry_price": 15.0,
+      "allocation_pct": 3,
+      "stop": 14.25,
+      "target": 17.8,
+      "thesis": "冶钢原料位列今日强势板块前列，公司刚披露业绩超预期并未脱离均线，属于资源线中相对不追高的顺势切入点。",
+      "sector": "冶钢原料",
+      "sector_rank": "top 10%",
+      "catalyst": "2025年报触发股价收涨7.53%，业绩超预期，资源品景气与高分红属性提供资金承接",
+      "catalyst_freshness": "ongoing",
+      "rps120": 92.38,
+      "conviction": "small"
+    },
+    {
+      "code": "600498",
+      "name": "烽火通信",
+      "entry_price": 47.96,
+      "allocation_pct": 4,
+      "stop": 45.56,
+      "target": 55.0,
+      "thesis": "通信设备进入今日前五热点，个股RPS位于扩展区边缘但均线距离健康，属于板块优先框架下的顺趋势候选。",
+      "sector": "通信设备",
+      "sector_rank": "top 10%",
+      "catalyst": "通信设备板块整体走强，个股处于强势区间且未明显脱离MA5/10/20",
+      "catalyst_freshness": "ongoing",
+      "rps120": 95.38,
+      "conviction": "small"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "688766",
+      "name": "普冉股份",
+      "reason": "rps120 99.4 > 95，超出允许追价区间，按规则等待回落到90附近再看。",
+      "rps120": 99.4
+    },
+    {
+      "code": "601126",
+      "name": "四方股份",
+      "reason": "rps120 99.18 > 95，虽均线距离健康，但已进入过热区，不做追高单。",
+      "rps120": 99.18
+    },
+    {
+      "code": "000688",
+      "name": "国城矿业",
+      "reason": "均线距离不合格，dist_ma10_pct 10.8%、dist_ma20_pct 17.9%，明显追高。",
+      "rps120": 98.89
+    },
+    {
+      "code": "301362",
+      "name": "民爆光电",
+      "reason": "均线距离严重超限，dist_ma5_pct 31.7%、dist_ma10_pct 39.1%、dist_ma20_pct 34.0%，禁止追。",
+      "rps120": 98.58
+    },
+    {
+      "code": "688195",
+      "name": "腾景科技",
+      "reason": "均线距离不合格，dist_ma5_pct 8.8%、dist_ma10_pct 19.5%、dist_ma20_pct 35.0%，属于典型过度拉升。",
+      "rps120": 98.36
+    },
+    {
+      "code": "002756",
+      "name": "永兴材料",
+      "reason": "Sector not in supplied top leadership; even with strong RPS, sector-first rule keeps it out of buys today.",
+      "rps120": 97.37
+    },
+    {
+      "code": "688127",
+      "name": "蓝特光学",
+      "reason": "Sector not in supplied top leadership, and rps120 96.53 is already in扩展区，缺少更强板块优势时不做。",
+      "rps120": 96.53
+    },
+    {
+      "code": "300677",
+      "name": "英科医疗",
+      "reason": "医疗相关板块在底部区域，且 supplied bottom5 includes 医药商业；即使个股均线健康也不逆板块买。",
+      "rps120": 93.27
+    },
+    {
+      "code": "688097",
+      "name": "博众精工",
+      "reason": "均线距离超限，dist_ma10_pct 9.6%、dist_ma20_pct 12.5%，不满足MA anti-chase rule。",
+      "rps120": 92.63
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "半导体设备有题材催化，但未进入 supplied top sector list；候选质量高，不过板块排序不足，先跳过。",
+      "rps120": 90.95
+    },
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "reason": "均线距离不合格，dist_ma10_pct 10.3%、dist_ma20_pct 10.7%，属于强但偏离过大。",
+      "rps120": 90.99
+    },
+    {
+      "code": "603306",
+      "name": "华懋科技",
+      "reason": "汽车零部件不在今日热榜且均线距离严重超限，dist_ma5_pct 12.3%、dist_ma10_pct 22.5%。",
+      "rps120": 93.43
+    },
+    {
+      "code": "688433",
+      "name": "华曙高科",
+      "reason": "虽均线位置可接受，但明日 2026-04-17 有 2.12亿股、占总股本51.20% 解禁，大事件压制新开仓。",
+      "rps120": 89.84
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "强市场不等于可以无脑追高；今天大量高RPS名字被MA距离规则挡下，说明h021仍在起作用，入场质量比题材热度更重要。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "强势板块里也会出现过度远离MA5/10/20的加速段，短线盈亏比往往恶化，等待回踩支撑能避免把最差赔率的那一段买进去。"
+    },
+    {
+      "text": "对非热点板块持仓要更主动处理，尤其在接近10日时间窗且量能低于MAVOL30时，资金效率比继续死守更重要。",
+      "type": "heuristic",
+      "tags": [
+        "exit-rule",
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "当市场已经给出更强的板块领导方向时，弱板块持仓即便未破硬止损，也会面临相对收益塌陷，提前切换更符合动量框架。"
+    },
+    {
+      "text": "低IV环境没有阻止开仓，但确实要求压缩单票仓位；今日多数可买标的来自IV Rank低于15%的沪市代理，应按规则把新仓控制在small级别。",
+      "type": "signal",
+      "tags": [
+        "position-sizing",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h017",
+      "mechanism": "低IV意味着市场更平稳也更容易在追高后出现波动扩张，缩仓但不冻结，是更适合当前环境的执行方式。"
+    }
+  ],
+  "market_summary": "Breadth 2.63:1 bullish, 59涨停/5跌停, 3/3 major indices green, not a panic tape. Hot sectors (top 5): 综合Ⅱ +4.25%, 冶钢原料 +3.96%, 小金属 +3.47%, 玻璃玻纤 +3.43%, 通信设备 +3.39%. Cold sectors (bottom 5): 林业Ⅱ -1.74%, 医药商业 -1.45%, 工程机械 -1.24%, 航天装备Ⅱ -0.74%, 动物保健Ⅱ -0.55%. Position sector alignment: 0/2 positions in hot sectors. IV context is mostly low-to-neutral; 300ETF/500ETF IV rank near 11%-13% argues for smaller fresh sizing, not zero exposure. Web checks broadly support resource-price strength and semicap activity, but many tech names fail MA anti-chase filters.",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

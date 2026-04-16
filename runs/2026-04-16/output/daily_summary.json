@@ -1,0 +1,87 @@
+{
+  "date": "2026-04-16",
+  "actions": [
+    {
+      "code": "605167",
+      "name": "利柏特",
+      "action": "SELL",
+      "price": 17.89,
+      "pnl_pct": 9.22,
+      "note": "Held 9 trading days with only about +9.22% open gain from entry, still below +10% threshold for a fresh stop upgrade, sector 建筑装饰 is not in today's hot top list, and latest volume is below MAVOL30 per rule violation. With V2's 10-day time stop approaching and momentum confirmation weak after yesterday's跌停 reversal, this is a capital-recycling exit rather than waiting for thesis rescue."
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "action": "SELL",
+      "price": 187.44,
+      "pnl_pct": 5.68,
+      "note": "Held 8 trading days and only about +5.68% versus entry, far from the +10% stop-raise trigger. Sector semicap has intraday support from board news, but it is not in supplied top sector leadership, volume is only 73.7% of MAVOL30, and the stock had a heavy down day on 2026-04-15. V2 says weak follow-through within a 10-day window should be cut and re-entered later if strength returns."
+    },
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "action": "OPEN",
+      "price": 15.41,
+      "note": "电网设备方向有业绩与订单催化，股价仍贴近均线，RPS处于甜蜜区间上沿，属于强势市场下可执行的小仓位顺势单。"
+    },
+    {
+      "code": "600295",
+      "name": "鄂尔多斯",
+      "action": "OPEN",
+      "price": 15.0,
+      "note": "冶钢原料位列今日强势板块前列，公司刚披露业绩超预期并未脱离均线，属于资源线中相对不追高的顺势切入点。"
+    },
+    {
+      "code": "600498",
+      "name": "烽火通信",
+      "action": "OPEN",
+      "price": 47.96,
+      "note": "通信设备进入今日前五热点，个股RPS位于扩展区边缘但均线距离健康，属于板块优先框架下的顺趋势候选。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 964165.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.58,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -35835.0,
+    "cashPct": 94.54
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 2.6314,
+    "up": 3855,
+    "down": 1465,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 59,
+    "limit_downs": 5,
+    "sizing_multiplier": 0.75,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 2.63:1, 3/3 major indices green, 59 limit-ups / 5 limit-downs. Allow entries, but cap fresh size at 75% to avoid chasing."
+  },
+  "newPositions": [
+    {
+      "code": "600268",
+      "name": "国电南自"
+    },
+    {
+      "code": "600295",
+      "name": "鄂尔多斯"
+    },
+    {
+      "code": "600498",
+      "name": "烽火通信"
+    }
+  ],
+  "marketContext": {
+    "summary": "Breadth 2.63:1 bullish, 59涨停/5跌停, 3/3 major indices green, not a panic tape. Hot sectors (top 5): 综合Ⅱ +4.25%, 冶钢原料 +3.96%, 小金属 +3.47%, 玻璃玻纤 +3.43%, 通信设备 +3.39%. Cold sectors (bottom 5): 林业Ⅱ -1.74%, 医药商业 -1.45%, 工程机械 -1.24%, 航天装备Ⅱ -0.74%, 动物保健Ⅱ -0.55%. Position sector alignment: 0/2 positions in hot sectors. IV context is mostly low-to-neutral; 300ETF/500ETF IV rank near 11%-13% argues for smaller fresh sizing, not zero exposure. Web checks broadly support resource-price strength and semicap activity, but many tech names fail MA anti-chase filters."
+  }
+}
