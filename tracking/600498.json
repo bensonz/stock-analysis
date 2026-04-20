@@ -7,7 +7,7 @@
   "entryPrice": 47.96,
   "targetPrice": 55.0,
   "stopLoss": 45.56,
-  "currentStop": 45.56,
+  "currentStop": 47.96,
   "allocation_pct": 3.0,
   "shares": 400,
   "allocatedCapital": 19184.0,
@@ -23,6 +23,13 @@
       "change_pct": 0,
       "action": "OPEN",
       "note": "LLM开仓 烽火通信"
+    },
+    {
+      "date": "2026-04-20",
+      "price": 52.51,
+      "change_pct": 9.49,
+      "action": "RAISE_STOP",
+      "note": "Winner is working: current price 52.51 vs entry 47.96 equals +9.49%, close enough to +10% milestone and stock surged 6.58% today. Lock risk tighter under strong tape; keep riding but protect gains. Do not add because volume is still below MAVOL30 and RPS is already in extended zone."
     }
   ],
   "exitDate": null,
@@ -32,6 +39,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-04-16T11:49:22.399687+08:00",
-  "updatedAt": "2026-04-16T11:49:22.399690+08:00",
+  "updatedAt": "2026-04-20T11:43:59.910929+08:00",
   "trackerVersion": "2.1"
 }
