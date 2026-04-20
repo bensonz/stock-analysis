@@ -4,18 +4,18 @@
 
 | 指数 | 收盘 | 涨跌幅 |
 |------|------|--------|
-| 上证指数 | 4078.39 | +0.67% |
-| 深证成指 | 14974.78 | +0.60% |
-| 创业板指 | 3679.88 | +0.04% |
-| 科创50 | 1446.65 | +1.64% |
+| 上证指数 | 4075.70 | +0.60% |
+| 深证成指 | 14944.66 | +0.40% |
+| 创业板指 | 3671.51 | -0.18% |
+| 科创50 | 1446.52 | +1.63% |
 
-涨跌比: 3303涨 / 1995跌 / 5493总
+涨跌比: 3269涨 / 2059跌 / 5495总
 
-**热门板块**: 航天装备Ⅱ(+8.42%), 广告营销(+3.89%), 林业Ⅱ(+3.82%), 小金属(+3.65%), 互联网电商(+3.42%)
+**热门板块**: 航天装备Ⅱ(+8.89%), 航海装备Ⅱ(+6.19%), 林业Ⅱ(+3.86%), 互联网电商(+3.57%), 小家电(+3.53%)
 
-**冷门板块**: 电池(-2.02%), 综合Ⅱ(-1.17%), 冶钢原料(-1.16%), 玻璃玻纤(-1.10%), 房屋建设Ⅱ(-0.99%)
+**冷门板块**: 综合Ⅱ(-1.77%), 电池(-1.69%), 玻璃玻纤(-1.57%), 房屋建设Ⅱ(-1.36%), 冶钢原料(-1.32%)
 
-Breadth 1.66:1 bullish, 75涨停/12跌停, 3大指数全红，允许开新仓；但IV整体极度乐观，需控制追高。Hot sectors: 航天装备Ⅱ(+8.42%), 广告营销(+3.89%), 林业Ⅱ(+3.82%), 小金属(+3.65%), 互联网电商(+3.42%). Cold sectors: 电池(-2.02%), 综合Ⅱ(-1.17%), 冶钢原料(-1.16%), 玻璃玻纤(-1.10%), 房屋建设Ⅱ(-0.99%). Position sector alignment: 1/3 positions in hot sectors.
+Breadth 1.59:1 mildly bullish, 89涨停/15跌停，2/3 major indices green，科创50 +1.63%领涨；入场闸门通过但不属于3:1以上的全面强攻。Hot sectors: 航天装备Ⅱ +8.89%、航海装备Ⅱ +6.19%、林业Ⅱ +3.86%、互联网电商 +3.57%、小家电 +3.53%。Cold sectors: 综合Ⅱ -1.77%、电池 -1.69%、玻璃玻纤 -1.57%、房屋建设Ⅱ -1.36%、冶钢原料 -1.32%。Position sector alignment: 0/5 positions in top-5 hot sectors. IV overall avg rank 8.57%显示极度乐观/低波动，沪深300/中证500/科创50代理多为0%，新仓必须降档并严禁追高；创业板IV Rank 34%相对正常。
 
 ## 策略池扫描
 
@@ -24,63 +24,43 @@ Breadth 1.66:1 bullish, 75涨停/12跌停, 3大指数全红，允许开新仓；
 
 ## 今日开仓
 
-### 1. 国电南自 (600268) — BUY/moderate
+### 1. 国电南自 (600268) — BUY/small
 
 - **入场价**: ¥15.62
 - **止损**: ¥14.84
-- **目标**: ¥18.0
+- **目标**: ¥18.8
 - **RPS120**: 91.19%
 - **板块**: 电网设备 (top 30%)
 
-电网自动化业绩与订单催化仍在发酵，股价贴近均线，RPS处于甜蜜区间，适合顺势参与。
-
-### 2. 科达制造 (600499) — BUY/small
-
-- **入场价**: ¥18.13
-- **止损**: ¥17.22
-- **目标**: ¥21.0
-- **RPS120**: 89.74%
-- **板块**: 专用设备 (top 30%)
-
-并购扩张+储能题材催化，价格贴近MA5/MA10/MA20，走势健康，不属于追高。
-
-### 3. 英科医疗 (300677) — BUY/moderate
-
-- **入场价**: ¥55.81
-- **止损**: ¥53.02
-- **目标**: ¥64.0
-- **RPS120**: 93.27%
-- **板块**: 医疗器械 (top 30%)
-
-医疗耗材龙头，手套价格上行带来盈利预期改善，RPS处于可买区且均线距离健康。
-
-### 4. 江苏博云 (301003) — BUY/small
-
-- **入场价**: ¥50.95
-- **止损**: ¥48.4
-- **目标**: ¥58.0
-- **RPS120**: 87.81%
-- **板块**: 塑料 (top 30%)
-
-塑料方向趋势延续，价格紧贴均线且有VCP SETUP，属于可执行的小仓位趋势单。
+电网设备板块盘中震荡走强，个股RPS120=91.19处于甜蜜区，年报归母净利润大增40.95%、电网自动化订单与国家电投投资预期提供业绩/订单催化；MA距离健康，不追高。
 
 ## 跳过标的
 
-1. **广合科技** (001389) (RPS 90.99%) — Catalyst is real and fresh (一季报预增58%-66%), but dist_ma10_pct 10.3% exceeds no-chase rule.
-2. **新风光** (688663) (RPS 92.65%) — Setup is technically fine, but 科创板 iv_proxy rank is 0 and sector is not clearly in today's top leadership; keep as skip rather than force entry.
-3. **博众精工** (688097) (RPS 92.63%) — Good automation/earnings story, but dist_ma10_pct 9.1% breaches MA-distance rule.
-4. **莱特光电** (688150) (RPS 93.31%) — 电子化学品 trend is strong, but dist_ma10_pct 13.9% and dist_ma20_pct 22.8% are clear chase violations.
-5. **华懋科技** (603306) (RPS 93.43%) — Automotive parts sector is not a top leadership group today, and dist_ma10_pct 20.6% / dist_ma20_pct 25.3% are extreme extension.
-6. **鄂尔多斯** (600295) (RPS 92.38%) — Sector 冶钢原料 is in bottom 5 today; under sector-first rule this is no new buy and existing position should be exited.
-7. **东材科技** (601208) (RPS 91.42%) — PCB-related catalyst is strong, but dist_ma5_pct 6.4%, dist_ma10_pct 14.2%, dist_ma20_pct 15.5% all signal chasing.
-8. **华峰测控** (688200) (RPS 90.95%) — Strong semiconductor equipment name with 0 risk factors, but dist_ma10_pct 9.3% and dist_ma20_pct 12.7% exceed entry limits.
+1. **新风光** (688663) (RPS 92.65%) — 电网设备方向有效、RPS120=92.65且MA距离健康，但科创板iv_proxy IV Rank=0%，新仓需按50%降档；已有国电南自同赛道持仓，避免重复暴露。若回踩MA5/MA10且板块继续进入top5再评估。
+2. **广合科技** (001389) (RPS 90.99%) — PCB/元件趋势强且一季报预告净利润同比增长58%-66%，但dist_ma10_pct=10.3%超过8%买入门槛，违反非追高规则；等待回踩MA10附近。
+3. **博众精工** (688097) (RPS 92.63%) — 自动化设备趋势强、机构预测高增长，但dist_ma10_pct=9.1%超过8%买入门槛，且科创板IV Rank=0%要求谨慎；不追。
+4. **国电南自** (600268) (RPS 91.19%) — 已在new_positions给出可加/可新开小仓候选；若PM不希望同股加仓，则保持原持仓即可，不应重复过度集中。
+5. **望变电气** (603191) (RPS 88.91%) — 电网设备相关且MA距离健康，但RPS20仅54.04、短线强度不足；IV Rank=0%需降档，不如国电南自/新风光。
+6. **江苏博云** (301003) (RPS 87.81%) — 已有持仓；虽然MA距离健康且有VCP SETUP，但成交量低于MAVOL30，且当前持仓未盈利，不加仓。
+7. **英科医疗** (300677) (RPS 93.27%) — 已有持仓建议卖出；医疗器械不在今日top5热点，价格距止损仅0.99%，成交量低于MAVOL30，不做新开或加仓。
+8. **科达制造** (600499) (RPS 89.74%) — 已有持仓建议卖出；入场当日回撤接近-3%，距止损仅2.6%，成交量低于MAVOL30，且电池为今日冷板块之一，储能催化受板块拖累。
+9. **烽火通信** (600498) (RPS 95.38%) — 持仓赢家继续持有并抬止损；当前RPS120=95.38高于95追高线，作为新仓不再追买，等待回踩。
+10. **东材科技** (601208) (RPS 91.42%) — PCB概念催化强，但dist_ma5_pct=6.4%、dist_ma10_pct=14.2%、dist_ma20_pct=15.5，三项均触及/超过追高红线，严格跳过。
+11. **杰普特** (688025) (RPS 88.13%) — 成长和机构催化很强，但dist_ma10_pct=16.4%、dist_ma20_pct=21.1，严重远离均线；科创板IV Rank=0%，不追高。
+12. **上海新阳** (300236) (RPS 88.95%) — 电子化学品趋势与成长性好，但dist_ma5_pct=9.3%、dist_ma10_pct=11.7%，违反MA距离硬规则。
+13. **华峰测控** (688200) (RPS 90.95%) — 半导体设备业绩强且0风险，但dist_ma10_pct=9.3%、dist_ma20_pct=12.7，违反非追高规则；科创板IV Rank=0%进一步要求降风险。
+14. **华懋科技** (603306) (RPS 93.43%) — 趋势很强但dist_ma10_pct=20.6%、dist_ma20_pct=25.3，极度远离支撑；汽车零部件也未进入今日热点，跳过。
+15. **莱特光电** (688150) (RPS 93.31%) — 电子化学品趋势强，但dist_ma10_pct=13.9%、dist_ma20_pct=22.8，违反MA距离硬规则。
+16. **鄂尔多斯** (600295) (RPS 92.38%) — 所在冶钢原料为今日bottom5冷板块，sector gravity优先，绝不新开。
+17. **科捷智能** (688455) (RPS 92.28%) — RPS强但dist_ma10_pct=16.5%、dist_ma20_pct=18.5，追高风险过大。
 
 ## 今日研究结论
 
-- 新开仓: 4只
-- 跳过: 8只
+- 新开仓: 1只
+- 跳过: 17只
 
 ### 新教训
-- {'text': '当市场准入门槛满足时，真正限制出手的不是情绪而是MA距离；今天多只强势股因超过MA10/MA20追高阈值被排除，支持反追高规则继续执行。', 'type': 'rule', 'tags': ['entry-filter', 'timing', 'sector'], 'evidence_type': 'supporting', 'related_hypothesis': 'h021', 'mechanism': '强趋势环境会放大FOMO，但离均线过远意味着盈亏比恶化，回踩均线的均值回归风险上升。'}
-- {'text': 'Sector-first比个股故事更重要：鄂尔多斯个股业绩不差，但所在冶钢原料直接落入今日bottom 5，持仓应让位给更热板块。', 'type': 'heuristic', 'tags': ['sector', 'exit-rule', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': '', 'mechanism': '冷板块里的个股即使有基本面催化，也更容易被资金抽离，板块贝塔会压制个股阿尔法。'}
-- {'text': '极低IV并不要求完全空仓，但要求把新仓集中在最干净的结构上，并把普通强势股降级为small/moderate sizing。', 'type': 'signal', 'tags': ['position-sizing', 'timing', 'entry-filter'], 'evidence_type': 'supporting', 'related_hypothesis': 'h017', 'mechanism': '低IV意味着市场自满，趋势可能延续但容错率下降，因此应保留参与度同时压低仓位和避免追高。'}
+- {'text': '强势日也要区分指数强和持仓强：breadth 1.59:1刚过开仓线，但已有新仓当日靠近止损且量能不足时，应优先卖弱而非继续加风险。', 'type': 'rule', 'tags': ['exit-rule', 'entry-filter', 'position-sizing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h013', 'mechanism': '市场允许开仓只说明风险预算可用，不代表所有持仓都值得容忍；低量回撤说明资金没有确认，隔夜跳空风险高于等待反转的收益。'}
+- {'text': 'MA-distance硬规则继续有效：广合科技、东材科技、杰普特等叙事和催化很强，但均线偏离超过阈值，最优动作是等回踩而不是用基本面说服自己追高。', 'type': 'signal', 'tags': ['timing', 'entry-filter', 'sector'], 'evidence_type': 'supporting', 'related_hypothesis': 'h021', 'mechanism': '强催化会吸引短线资金一次性定价，若价格远离MA10/MA20，后续即使趋势未坏，也容易先均值回归，入场点决定短线胜率。'}
+- {'text': '今日最强sector top5与持仓sector错位，说明组合仍主要依赖个股动量而非板块最强风口；新仓应只给小仓或加到已有验证赢家，不能全面铺开。', 'type': 'observation', 'tags': ['sector', 'position-sizing'], 'evidence_type': 'supporting', 'related_hypothesis': None, 'mechanism': '板块轮动环境中，非top5方向即使个股有催化，也缺少板块β持续推力，仓位应低于sector leader配置。'}
+- {'text': 'IV Rank为0%的沪市/科创代理并不要求冻结持仓赢家，但要求新仓降档、优先选择贴均线且有真实订单/业绩催化的票。', 'type': 'heuristic', 'tags': ['iv', 'position-sizing', 'entry-filter'], 'evidence_type': 'supporting', 'related_hypothesis': 'h017', 'mechanism': '低IV代表市场自满和保护便宜，趋势可延续但尾部波动风险上升；小仓+硬止损比完全空仓更符合动量策略。'}

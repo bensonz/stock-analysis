@@ -332,7 +332,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-03-27",
-      "lastTested": "2026-04-16",
+      "lastTested": "2026-04-20",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -467,13 +467,17 @@
           {
             "date": "2026-04-16",
             "detail": "对非热点板块持仓要更主动处理，尤其在接近10日时间窗且量能低于MAVOL30时，资金效率比继续死守更重要。"
+          },
+          {
+            "date": "2026-04-20",
+            "detail": "强势日也要区分指数强和持仓强：breadth 1.59:1刚过开仓线，但已有新仓当日靠近止损且量能不足时，应优先卖弱而非继续加风险。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 33,
+      "sampleSize": 34,
       "hitRate": 1.0,
-      "confidence": 0.971,
+      "confidence": 0.972,
       "tags": [],
       "parentRule": null,
       "retiredDate": null,
@@ -610,13 +614,17 @@
           {
             "date": "2026-04-20",
             "detail": "极低IV并不要求完全空仓，但要求把新仓集中在最干净的结构上，并把普通强势股降级为small/moderate sizing。"
+          },
+          {
+            "date": "2026-04-20",
+            "detail": "IV Rank为0%的沪市/科创代理并不要求冻结持仓赢家，但要求新仓降档、优先选择贴均线且有真实订单/业绩催化的票。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 11,
+      "sampleSize": 12,
       "hitRate": 1.0,
-      "confidence": 0.923,
+      "confidence": 0.929,
       "tags": [
         "timing",
         "position-sizing",
@@ -760,13 +768,17 @@
           {
             "date": "2026-04-20",
             "detail": "当市场准入门槛满足时，真正限制出手的不是情绪而是MA距离；今天多只强势股因超过MA10/MA20追高阈值被排除，支持反追高规则继续执行。"
+          },
+          {
+            "date": "2026-04-20",
+            "detail": "MA-distance硬规则继续有效：广合科技、东材科技、杰普特等叙事和催化很强，但均线偏离超过阈值，最优动作是等回踩而不是用基本面说服自己追高。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 8,
+      "sampleSize": 9,
       "hitRate": 1.0,
-      "confidence": 0.9,
+      "confidence": 0.909,
       "tags": [
         "entry-filter",
         "timing"
@@ -1166,6 +1178,34 @@
         "sector",
         "exit-rule",
         "timing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h034",
+      "text": "今日最强sector top5与持仓sector错位，说明组合仍主要依赖个股动量而非板块最强风口；新仓应只给小仓或加到已有验证赢家，不能全面铺开。",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-04-20",
+      "lastTested": "2026-04-20",
+      "mechanism": "板块轮动环境中，非top5方向即使个股有催化，也缺少板块β持续推力，仓位应低于sector leader配置。",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-04-20",
+            "detail": "今日最强sector top5与持仓sector错位，说明组合仍主要依赖个股动量而非板块最强风口；新仓应只给小仓或加到已有验证赢家，不能全面铺开。"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
+        "position-sizing"
       ],
       "parentRule": null,
       "retiredDate": null,

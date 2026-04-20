@@ -2,98 +2,82 @@
   "date": "2026-04-20",
   "actions": [
     {
+      "code": "300677",
+      "name": "英科医疗",
+      "action": "SELL",
+      "price": 53.55,
+      "pnl_pct": -1.2,
+      "note": "入场当日即从54.20跌至53.55，距当前止损53.02仅0.99%，触发stop_proximity CRITICAL；成交量仅为MAVOL30的67.1%，且医疗器械不在今日top5热点。价格未跌破-3%/3日规则，但V2强调切快，近止损且量能弱，先主动退出避免隔夜跳空。"
+    },
+    {
+      "code": "301003",
+      "name": "江苏博云",
+      "action": "HOLD",
+      "price": 51.96,
+      "pnl_pct": -0.17,
+      "note": "当前51.96较入场52.05小幅亏损-0.17%，尚未触发-3%首三日或-5%硬止损；塑料方向在个股资料中显示4月以来持续走强，MA距离健康且有VCP SETUP，但成交量低于MAVOL30，不能加仓。若明后日跌破50.49附近即达到-3%首三日纪律，应立即卖出。"
+    },
+    {
       "code": "600268",
       "name": "国电南自",
       "action": "HOLD",
-      "price": 16.09,
-      "pnl_pct": 4.41,
-      "note": "Pnl positive and sector remains healthy enough; fresh 2025年报/电网订单 catalyst still supports thesis. Price 16.09 is above entry 15.41 but not yet +10%; keep current stop. Volume below MAVOL30 means do not add."
-    },
-    {
-      "code": "600295",
-      "name": "鄂尔多斯",
-      "action": "SELL",
-      "price": 14.92,
-      "pnl_pct": -0.53,
-      "note": "Sector rule overrides: position sector 冶钢原料 is in bottom 5 today and cold. Price also sits only 4.49% above stop and stock is below entry after 4 days, while sector gravity turned negative. Exit rather than hope."
+      "price": 16.12,
+      "pnl_pct": 4.61,
+      "note": "当前16.12较15.41浮盈4.61%，电网设备盘中震荡走强且公司有年报/订单催化，RPS120=91.19处于甜蜜区；未到+10%抬止损规则。成交量略低于MAVOL30，维持持仓但不加仓。"
     },
     {
       "code": "600498",
       "name": "烽火通信",
       "action": "RAISE_STOP",
-      "price": 52.51,
-      "pnl_pct": 9.49,
-      "note": "Winner is working: current price 52.51 vs entry 47.96 equals +9.49%, close enough to +10% milestone and stock surged 6.58% today. Lock risk tighter under strong tape; keep riding but protect gains. Do not add because volume is still below MAVOL30 and RPS is already in extended zone."
+      "price": 53.1,
+      "pnl_pct": 10.72,
+      "note": "当前53.10较47.96浮盈10.72%，正式达到+10%规则，必须将止损抬至成本价47.96。今日涨幅7.77%且成交量高于MAVOL30，动量确认强，继续让赢家奔跑；RPS120=95.38略高但已持仓，不作为卖出理由。"
     },
     {
       "code": "600499",
       "name": "科达制造",
-      "action": "OPEN",
-      "price": 18.13,
-      "note": "并购扩张+储能题材催化，价格贴近MA5/MA10/MA20，走势健康，不属于追高。"
-    },
-    {
-      "code": "300677",
-      "name": "英科医疗",
-      "action": "OPEN",
-      "price": 54.2,
-      "note": "医疗耗材龙头，手套价格上行带来盈利预期改善，RPS处于可买区且均线距离健康。"
-    },
-    {
-      "code": "301003",
-      "name": "江苏博云",
-      "action": "OPEN",
-      "price": 52.05,
-      "note": "塑料方向趋势延续，价格紧贴均线且有VCP SETUP，属于可执行的小仓位趋势单。"
+      "action": "SELL",
+      "price": 17.68,
+      "pnl_pct": -2.48,
+      "note": "入场当日从18.13跌至17.68，亏损-2.48%，距止损17.22仅2.6%且成交量仅MAVOL30的78.9%；所在专用设备未进入今日top5热点，且电池为冷板块、储能催化容易受冷板块拖累。未到-3%首三日但已接近，按V2价格优先和近止损规则主动退出。"
     }
   ],
   "portfolioStats": {
-    "totalPositions": 5,
-    "totalEquity": 966645.0,
-    "dayPnl": 1813.0,
-    "dayReturnPct": 0.19,
-    "totalReturnPct": -3.34,
-    "unrealizedPnl": 2568.0,
-    "realizedPnl": -35923.0,
-    "cashPct": 91.01
+    "totalPositions": 3,
+    "totalEquity": 964463.0,
+    "dayPnl": 1950.0,
+    "dayReturnPct": 0.2,
+    "totalReturnPct": -3.55,
+    "unrealizedPnl": 2810.0,
+    "realizedPnl": -38347.0,
+    "cashPct": 94.34
   },
   "entryRegime": {
     "allow_new_positions": true,
     "regime": "strong",
-    "breadth_ratio": 1.6556,
-    "up": 3303,
-    "down": 1995,
+    "breadth_ratio": 1.5877,
+    "up": 3269,
+    "down": 2059,
     "positive_indices": [
       "上证指数",
-      "深证成指",
+      "深证成指"
+    ],
+    "negative_indices": [
       "创业板指"
     ],
-    "negative_indices": [],
-    "limit_ups": 75,
-    "limit_downs": 12,
+    "limit_ups": 89,
+    "limit_downs": 15,
     "sizing_multiplier": 0.75,
     "hard_block": false,
-    "reason": "Entry regime strong: breadth 1.66:1, 3/3 major indices green, 75 limit-ups / 12 limit-downs. Allow entries, but cap fresh size at 75% to avoid chasing."
+    "reason": "Entry regime strong: breadth 1.59:1, 2/3 major indices green, 89 limit-ups / 15 limit-downs. Allow entries, but cap fresh size at 75% to avoid chasing."
   },
   "newPositions": [
     {
       "code": "600268",
       "name": "国电南自"
-    },
-    {
-      "code": "600499",
-      "name": "科达制造"
-    },
-    {
-      "code": "300677",
-      "name": "英科医疗"
-    },
-    {
-      "code": "301003",
-      "name": "江苏博云"
     }
   ],
   "marketContext": {
-    "summary": "Breadth 1.66:1 bullish, 75涨停/12跌停, 3大指数全红，允许开新仓；但IV整体极度乐观，需控制追高。Hot sectors: 航天装备Ⅱ(+8.42%), 广告营销(+3.89%), 林业Ⅱ(+3.82%), 小金属(+3.65%), 互联网电商(+3.42%). Cold sectors: 电池(-2.02%), 综合Ⅱ(-1.17%), 冶钢原料(-1.16%), 玻璃玻纤(-1.10%), 房屋建设Ⅱ(-0.99%). Position sector alignment: 1/3 positions in hot sectors."
+    "summary": "Breadth 1.59:1 mildly bullish, 89涨停/15跌停，2/3 major indices green，科创50 +1.63%领涨；入场闸门通过但不属于3:1以上的全面强攻。Hot sectors: 航天装备Ⅱ +8.89%、航海装备Ⅱ +6.19%、林业Ⅱ +3.86%、互联网电商 +3.57%、小家电 +3.53%。Cold sectors: 综合Ⅱ -1.77%、电池 -1.69%、玻璃玻纤 -1.57%、房屋建设Ⅱ -1.36%、冶钢原料 -1.32%。Position sector alignment: 0/5 positions in top-5 hot sectors. IV overall avg rank 8.57%显示极度乐观/低波动，沪深300/中证500/科创50代理多为0%，新仓必须降档并严禁追高；创业板IV Rank 34%相对正常。"
   }
 }

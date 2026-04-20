@@ -3,23 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1776656109.818783,
-      "errors": [
-        "pricedb_update: Refreshing stock list via tushare...\n  tushare update failed: Tushare stock_basic failed: 抱歉，您没有接口访问权限，权限的具体详情访问：https://tushare.pro/document/1?doc_id=108。\nRefreshing stock list via baostock...\n  5198 stocks in universe\nUpdating 5201 stocks via baostock (20260416 → 20260420)...\n  [BaoStock 100/5201] last: 600130 → 2 rows\n  [BaoStock 200/5201] last: 600262 → 2 rows\n  [BaoStock 300/5201] last: 600395 → 2 rows\n  [BaoStock 400/5201] last: 600539 → 2 rows\n  [BaoStock 500/5201] last: 600661 → 2 rows\n  [BaoStock 600/5201] last: 600779 → 2 rows\n  [BaoStock 700/5201] last: 600905 → 2 rows\n  [BaoStock 800/5201] last: 601111 → 2 rows\n  [BaoStock 900/5201] last: 601666 → 2 rows\n  [BaoStock 1000/5201] last: 603018 → 2 rows\n  [BaoStock 1100/5201] last: 603131 → 2 rows\n  [BaoStock 1200/5201] last: 603269 → 2 rows\n  [BaoStock 1300/5201] last: 603392 → 2 rows\n  [BaoStock 1400/5201] last: 603650 → 2 rows\n  [BaoStock 1500/5201] last: 603833 → 2 rows\n  [BaoStock 1600/5201] last: 605008 → 2 rows\n  [BaoStock 1700/5201] last: 605566 → 2 rows\n  [BaoStock 1800/5201] last: 688106 → 2 rows\n  [BaoStock 1900/5201] last: 688219 → 2 rows"
-      ],
-      "end": 1776656563.121315,
-      "duration_sec": 453.3
+      "start": 1776666957.455461,
+      "errors": [],
+      "end": 1776667002.701306,
+      "duration_sec": 45.2
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 7575,
+      "response_size_bytes": 8501,
       "tokens": {
-        "input_tokens": 130758,
-        "output_tokens": 3367
+        "input_tokens": 130943,
+        "output_tokens": 4145
       },
       "rounds": 2,
-      "tool_calls_count": 8,
-      "duration_sec": 76.7,
+      "tool_calls_count": 6,
+      "duration_sec": 91.6,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "GPT primary",
@@ -27,32 +25,26 @@
     },
     {
       "phase": "apply",
-      "start": 1776656639.9042308,
+      "start": 1776667096.048641,
       "actions": [
-        "SELL 600295",
+        "SELL 300677",
         "RAISE_STOP 600498 → 47.96",
-        "SIZE THROTTLE 600268: 4% -> 3% (regime=strong)",
-        "SIZE THROTTLE 600499: 3% -> 2.25% (regime=strong)",
-        "SIZE THROTTLE 300677: 4% -> 3% (regime=strong)",
-        "SIZE THROTTLE 301003: 3% -> 2.25% (regime=strong)",
+        "SELL 600499",
+        "SIZE THROTTLE 600268: 3% -> 2.25% (regime=strong)",
         "SKIP OPEN 600268: Position already exists for 600268",
-        "OPEN 600499 @ 18.13",
-        "PRICE_CORRECTED 300677: LLM=55.81 outside [52.76,55.35], using market=54.2",
-        "OPEN 300677 @ 54.2",
-        "PRICE_CORRECTED 301003: LLM=50.95 outside [51.22,53.15], using market=52.05",
-        "OPEN 301003 @ 52.05",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h021 (validated): +1 supporting evidence → hitRate=100%, n=8",
-        "Hypothesis: Created h033 (observation): Sector-first比个股故事更重要：鄂尔多斯个股业绩不差，但所在冶钢原料直接落入今日bottom 5，持仓应让位给更热板块。...",
-        "Hypothesis: Updated h017 (rule): +1 supporting evidence → hitRate=100%, n=11",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=34",
+        "Hypothesis: Updated h021 (validated): +1 supporting evidence → hitRate=100%, n=9",
+        "Hypothesis: Created h034 (observation): 今日最强sector top5与持仓sector错位，说明组合仍主要依赖个股动量而非板块最强风口；新仓应只给小仓或加到已有验证赢家，不能全面铺开。...",
+        "Hypothesis: Updated h017 (rule): +1 supporting evidence → hitRate=100%, n=12",
         "Updated LEARNINGS.md (legacy)"
       ],
       "post_apply_rule_violations": {
         "status": "violations",
         "total_rules": 6,
-        "total_violations": 3,
+        "total_violations": 2,
         "rules": [
           {
             "rule": "check_breakout_failure",
@@ -81,20 +73,9 @@
           {
             "rule": "check_stop_proximity",
             "file": "scripts/rules/check_stop_proximity.py",
-            "status": "violations",
-            "exit_code": 1,
-            "violations": [
-              {
-                "code": "300677",
-                "name": "英科医疗",
-                "rule": "stop_proximity",
-                "severity": "WARNING",
-                "currentPrice": 54.2,
-                "stopLoss": 53.02,
-                "distance_pct": 2.18,
-                "suggestion": "🟡 WARNING — only 2.2% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
-              }
-            ],
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
             "error": null
           },
           {
@@ -112,39 +93,38 @@
             "exit_code": 1,
             "violations": [
               {
+                "code": "301003",
+                "name": "江苏博云",
+                "rule": "volume_below_mavol30",
+                "volume": 20766,
+                "mavol30": 27086.13,
+                "ratio_pct": 76.7,
+                "suggestion": "Latest volume 20,766 is below MAVOL30 27,086 (76.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+              },
+              {
                 "code": "600268",
                 "name": "国电南自",
                 "rule": "volume_below_mavol30",
-                "volume": 329641,
+                "volume": 483034,
                 "mavol30": 534800.03,
-                "ratio_pct": 61.6,
-                "suggestion": "Latest volume 329,641 is below MAVOL30 534,800 (61.6% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-              },
-              {
-                "code": "600498",
-                "name": "烽火通信",
-                "rule": "volume_below_mavol30",
-                "volume": 902326,
-                "mavol30": 1064566.77,
-                "ratio_pct": 84.8,
-                "suggestion": "Latest volume 902,326 is below MAVOL30 1,064,567 (84.8% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+                "ratio_pct": 90.3,
+                "suggestion": "Latest volume 483,034 is below MAVOL30 534,800 (90.3% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
               }
             ],
             "error": null
           }
         ]
       },
-      "end": 1776656640.167417,
+      "end": 1776667096.3485959,
       "duration_sec": 0.3
     }
   ],
   "validation_errors": [
-    "RULE check_stop_proximity: 300677 — 🟡 WARNING — only 2.2% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
-    "RULE check_volume_below_mavol30: 600268 — Latest volume 329,641 is below MAVOL30 534,800 (61.6% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
-    "RULE check_volume_below_mavol30: 600498 — Latest volume 902,326 is below MAVOL30 1,064,567 (84.8% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+    "RULE check_volume_below_mavol30: 301003 — Latest volume 20,766 is below MAVOL30 27,086 (76.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
+    "RULE check_volume_below_mavol30: 600268 — Latest volume 483,034 is below MAVOL30 534,800 (90.3% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
   ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 530.3
+    "totalDurationSec": 137.10000000000002
   }
 }
