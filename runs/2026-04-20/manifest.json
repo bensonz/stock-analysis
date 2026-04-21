@@ -2,7 +2,7 @@
   "date": "2026-04-20",
   "status": "degraded",
   "exit_code": 0,
-  "total_duration_sec": 530.3,
+  "total_duration_sec": 137.1,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -10,11 +10,11 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 98.2
+          "latency_ms": 122.2
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 439.7
+          "latency_ms": 444.7
         },
         "eastmoney": {
           "status": "down",
@@ -22,21 +22,19 @@
         },
         "pricedb": {
           "status": "ok",
-          "latest_date": "2026-04-15",
-          "stale": true
+          "latest_date": "2026-04-17",
+          "stale": false
         }
       }
     },
     "collect": {
       "status": "ok",
-      "duration_sec": 453.3,
-      "errors": [
-        "pricedb_update: Refreshing stock list via tushare...\n  tushare update failed: Tushare stock_basic failed: 抱歉，您没有接口访问权限，权限的具体详情访问：https://tushare.pro/document/1?doc_id=108。\nRefreshing stock list via baostock...\n  5198 stocks in universe\nUpdating 5201 stocks via baostock (20260416 → 20260420)...\n  [BaoStock 100/5201] last: 600130 → 2 rows\n  [BaoStock 200/5201] last: 600262 → 2 rows\n  [BaoStock 300/5201] last: 600395 → 2 rows\n  [BaoStock 400/5201] last: 600539 → 2 rows\n  [BaoStock 500/5201] last: 600661 → 2 rows\n  [BaoStock 600/5201] last: 600779 → 2 rows\n  [BaoStock 700/5201] last: 600905 → 2 rows\n  [BaoStock 800/5201] last: 601111 → 2 rows\n  [BaoStock 900/5201] last: 601666 → 2 rows\n  [BaoStock 1000/5201] last: 603018 → 2 rows\n  [BaoStock 1100/5201] last: 603131 → 2 rows\n  [BaoStock 1200/5201] last: 603269 → 2 rows\n  [BaoStock 1300/5201] last: 603392 → 2 rows\n  [BaoStock 1400/5201] last: 603650 → 2 rows\n  [BaoStock 1500/5201] last: 603833 → 2 rows\n  [BaoStock 1600/5201] last: 605008 → 2 rows\n  [BaoStock 1700/5201] last: 605566 → 2 rows\n  [BaoStock 1800/5201] last: 688106 → 2 rows\n  [BaoStock 1900/5201] last: 688219 → 2 rows"
-      ]
+      "duration_sec": 45.2,
+      "errors": []
     },
     "llm_analysis": {
       "status": "ok",
-      "duration_sec": 76.7
+      "duration_sec": 91.6
     },
     "apply": {
       "status": "ok",
@@ -46,9 +44,8 @@
       "status": "warnings",
       "duration_sec": 0.0,
       "errors": [
-        "RULE check_stop_proximity: 300677 — 🟡 WARNING — only 2.2% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
-        "RULE check_volume_below_mavol30: 600268 — Latest volume 329,641 is below MAVOL30 534,800 (61.6% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
-        "RULE check_volume_below_mavol30: 600498 — Latest volume 902,326 is below MAVOL30 1,064,567 (84.8% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+        "RULE check_volume_below_mavol30: 301003 — Latest volume 20,766 is below MAVOL30 27,086 (76.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
+        "RULE check_volume_below_mavol30: 600268 — Latest volume 483,034 is below MAVOL30 534,800 (90.3% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
       ]
     }
   },
@@ -69,11 +66,8 @@
       "passed": true,
       "hard_fails": [],
       "soft_warns": [
-        "PRICE_CORRECTED 300677: LLM=55.81 outside [52.76,55.35], using market=54.2",
-        "PRICE_CORRECTED 301003: LLM=50.95 outside [51.22,53.15], using market=52.05",
-        "rule check_stop_proximity: 🟡 WARNING — only 2.2% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
-        "rule check_volume_below_mavol30: Latest volume 329,641 is below MAVOL30 534,800 (61.6% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
-        "rule check_volume_below_mavol30: Latest volume 902,326 is below MAVOL30 1,064,567 (84.8% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+        "rule check_volume_below_mavol30: Latest volume 20,766 is below MAVOL30 27,086 (76.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
+        "rule check_volume_below_mavol30: Latest volume 483,034 is below MAVOL30 534,800 (90.3% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
       ]
     }
   }

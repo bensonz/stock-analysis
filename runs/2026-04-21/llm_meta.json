@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "gpt-5.4",
+  "decision_source": "GPT primary",
+  "input_tokens": 132060,
+  "output_tokens": 2657,
+  "rounds": 2,
+  "duration_sec": 64.5,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+2026-04-21"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=煤炭开采+电力+电池+A股+2026-04-21"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=国电南自+2026-04-21+电网设备+年报+订单"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=烽火通信+2026-04-21+通信设备+消息"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=江苏博云+2026-04-21+塑料+一季报"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=A股+中东+油价+化工+2026-04-21"
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}
