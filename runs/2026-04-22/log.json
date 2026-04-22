@@ -1,0 +1,127 @@
+{
+  "date": "2026-04-22",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1776828911.62465,
+      "errors": [],
+      "end": 1776828924.738514,
+      "duration_sec": 13.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 6718,
+      "tokens": {
+        "input_tokens": 125958,
+        "output_tokens": 3659
+      },
+      "rounds": 2,
+      "tool_calls_count": 6,
+      "duration_sec": 81.8,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "GPT primary",
+      "primary_model": "gpt-5.4"
+    },
+    {
+      "phase": "apply",
+      "start": 1776829006.605878,
+      "actions": [
+        "RAISE_STOP 301003 → 57.26",
+        "RAISE_STOP 600498 → 47.96",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=36",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=14",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=15",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=11",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "600268",
+                "name": "国电南自",
+                "rule": "volume_below_mavol30",
+                "volume": 209528,
+                "mavol30": 541729.6,
+                "ratio_pct": 38.7,
+                "suggestion": "Latest volume 209,528 is below MAVOL30 541,730 (38.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+              },
+              {
+                "code": "600498",
+                "name": "烽火通信",
+                "rule": "volume_below_mavol30",
+                "volume": 883511,
+                "mavol30": 1074065.87,
+                "ratio_pct": 82.3,
+                "suggestion": "Latest volume 883,511 is below MAVOL30 1,074,066 (82.3% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+              }
+            ],
+            "error": null
+          }
+        ]
+      },
+      "end": 1776829006.7696471,
+      "duration_sec": 0.2
+    }
+  ],
+  "validation_errors": [
+    "RULE check_volume_below_mavol30: 600268 — Latest volume 209,528 is below MAVOL30 541,730 (38.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
+    "RULE check_volume_below_mavol30: 600498 — Latest volume 883,511 is below MAVOL30 1,074,066 (82.3% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 95.1
+  }
+}

@@ -7,7 +7,7 @@
   "entryPrice": 52.05,
   "targetPrice": 58.0,
   "stopLoss": 48.4,
-  "currentStop": 48.4,
+  "currentStop": 57.26,
   "allocation_pct": 2.25,
   "shares": 300,
   "allocatedCapital": 15615.0,
@@ -37,6 +37,13 @@
       "change_pct": 0.1,
       "action": "HOLD",
       "note": "首日持仓基本持平，未触发-3%前三日止损或-5%硬止损；塑料方向有相对趋势但不在今日前五热点，量能仅为MAVOL30的44.5%，只可观察不可加仓。"
+    },
+    {
+      "date": "2026-04-22",
+      "price": 63.48,
+      "change_pct": 21.96,
+      "action": "RAISE_STOP",
+      "note": "当前价63.48较入场52.05浮盈约21.96%，已超过+20%规则，必须将止损抬至入场价上方+10%即57.26附近。今日20.00%大涨且成交量71643高于MAVOL30的27086，动量确认强；但所属塑料不在今日前五热点，且VCP驱动仓位已快速兑现，后续按抬升止损让赢家奔跑。"
     }
   ],
   "exitDate": null,
@@ -46,6 +53,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-04-20T11:44:00.029416+08:00",
-  "updatedAt": "2026-04-21T11:43:56.811579+08:00",
+  "updatedAt": "2026-04-22T11:36:46.614619+08:00",
   "trackerVersion": "2.1"
 }

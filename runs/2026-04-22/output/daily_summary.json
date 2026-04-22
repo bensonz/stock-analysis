@@ -1,0 +1,61 @@
+{
+  "date": "2026-04-22",
+  "actions": [
+    {
+      "code": "301003",
+      "name": "江苏博云",
+      "action": "RAISE_STOP",
+      "price": 63.48,
+      "pnl_pct": 21.96,
+      "note": "当前价63.48较入场52.05浮盈约21.96%，已超过+20%规则，必须将止损抬至入场价上方+10%即57.26附近。今日20.00%大涨且成交量71643高于MAVOL30的27086，动量确认强；但所属塑料不在今日前五热点，且VCP驱动仓位已快速兑现，后续按抬升止损让赢家奔跑。"
+    },
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "action": "HOLD",
+      "price": 15.78,
+      "pnl_pct": 2.4,
+      "note": "当前价15.78较入场15.41浮盈约2.40%，未触发止盈抬止损，也未触发止损；电网设备不是今日前五热点，且今日成交量仅为MAVOL30的38.7%，动量确认弱，禁止加仓。持有是因为价格仍在成本上方且未到10日时间止损。"
+    },
+    {
+      "code": "600498",
+      "name": "烽火通信",
+      "action": "RAISE_STOP",
+      "price": 56.15,
+      "pnl_pct": 17.08,
+      "note": "当前价56.15较入场47.96浮盈约17.08%，通信设备为今日第二强热点，仍符合 sector first；此前已把止损抬至成本价，当前收益超过+10%但未到+20%，建议维持/确认成本止损47.96，若后续到57.55以上再按+20%规则抬至52.76。今日量能为MAVOL30的82.3%，略低于均量，不加仓。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 968765.0,
+    "dayPnl": 4084.0,
+    "dayReturnPct": 0.42,
+    "totalReturnPct": -3.12,
+    "unrealizedPnl": 7112.0,
+    "realizedPnl": -38347.0,
+    "cashPct": 93.92
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.923,
+    "up": 2555,
+    "down": 2768,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 48,
+    "limit_downs": 13,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.92:1, 3/3 major indices green, 48 limit-ups / 13 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Hot sectors (top 5): 元件+3.28%、通信设备+2.81%、消费电子+2.65%、黑色家电+2.21%、摩托车及其他+1.95%。Cold sectors: 影视院线-3.91%、航天装备Ⅱ-3.24%、航运港口-1.64%、渔业-1.55%、个护用品-1.45%。Breadth 0.92:1偏弱，48涨停/13跌停，三大指数全红但个股多数下跌，属于指数强于个股的窄宽度行情；IV整体中性，主要ETF IV Rank约33%-50%，深市中盘IV Rank 17.2%偏低但仍在正常 sizing 区间。根据V2最低买入门槛，Up/Down未达1.5:1且breadth低于1:1，今日不新增仓位，只管理已有赢家。"
+  }
+}

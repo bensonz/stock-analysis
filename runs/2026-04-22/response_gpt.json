@@ -1,0 +1,241 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "元件",
+        "5d_pct": 3.28,
+        "trend": "accelerating"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": 2.81,
+        "trend": "accelerating"
+      },
+      {
+        "name": "消费电子",
+        "5d_pct": 2.65,
+        "trend": "steady"
+      },
+      {
+        "name": "黑色家电",
+        "5d_pct": 2.21,
+        "trend": "steady"
+      },
+      {
+        "name": "摩托车及其他",
+        "5d_pct": 1.95,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "影视院线",
+        "5d_pct": -3.91,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": -3.24,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航运港口",
+        "5d_pct": -1.64,
+        "trend": "weak"
+      },
+      {
+        "name": "渔业",
+        "5d_pct": -1.55,
+        "trend": "weak"
+      },
+      {
+        "name": "个护用品",
+        "5d_pct": -1.45,
+        "trend": "weak"
+      }
+    ],
+    "position_alignment": "1/3 positions in hot sectors",
+    "regime": "指数全红但个股宽度偏弱，资金集中在元件、通信设备、消费电子等TMT硬件链；塑料和电网设备不在今日前五热点，但持仓个股尚未触发卖出纪律。"
+  },
+  "position_decisions": [
+    {
+      "code": "301003",
+      "name": "江苏博云",
+      "action": "RAISE_STOP",
+      "reason": "当前价63.48较入场52.05浮盈约21.96%，已超过+20%规则，必须将止损抬至入场价上方+10%即57.26附近。今日20.00%大涨且成交量71643高于MAVOL30的27086，动量确认强；但所属塑料不在今日前五热点，且VCP驱动仓位已快速兑现，后续按抬升止损让赢家奔跑。",
+      "sector_rank": "outside top 5 but not cold",
+      "new_stop": 57.26,
+      "pnl_pct": 21.96,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "action": "HOLD",
+      "reason": "当前价15.78较入场15.41浮盈约2.40%，未触发止盈抬止损，也未触发止损；电网设备不是今日前五热点，且今日成交量仅为MAVOL30的38.7%，动量确认弱，禁止加仓。持有是因为价格仍在成本上方且未到10日时间止损。",
+      "sector_rank": "outside top 5 but not cold",
+      "new_stop": null,
+      "pnl_pct": 2.4,
+      "days_held": 6,
+      "exit_price": null
+    },
+    {
+      "code": "600498",
+      "name": "烽火通信",
+      "action": "RAISE_STOP",
+      "reason": "当前价56.15较入场47.96浮盈约17.08%，通信设备为今日第二强热点，仍符合 sector first；此前已把止损抬至成本价，当前收益超过+10%但未到+20%，建议维持/确认成本止损47.96，若后续到57.55以上再按+20%规则抬至52.76。今日量能为MAVOL30的82.3%，略低于均量，不加仓。",
+      "sector_rank": "top 5",
+      "new_stop": 47.96,
+      "pnl_pct": 17.08,
+      "days_held": 6,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "reason": "元件为今日最强板块且公司处于PCB/高频PCB强趋势，RPS120=90.99在甜蜜区，但dist_ma10_pct=10.3%超过8%买入上限，Rule 2b禁止追高；无新仓。",
+      "rps120": 90.99
+    },
+    {
+      "code": "600498",
+      "name": "烽火通信",
+      "reason": "已持仓不新增。通信设备为今日第二强热点，RPS120=95.38略高于95追高阈值；持仓可让赢家奔跑，但新买不合适。",
+      "rps120": 95.38
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "半导体趋势向上且0风险、业绩增长强，MA距离健康；但半导体不在今日top5板块，且市场宽度未过新开仓最低门槛，弱宽度下只观察不买。",
+      "rps120": 90.95
+    },
+    {
+      "code": "688663",
+      "name": "新风光",
+      "reason": "电网设备有板块快讯催化且MA距离健康，RPS120=92.65可接受；但电网设备不在今日top5，个股4月21日有放量大跌风险提示，市场宽度弱，暂不新增。",
+      "rps120": 92.65
+    },
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "reason": "已持仓不新增。电网设备不在今日top5，当前持仓成交量低于MAVOL30，仅持有观察，不加仓。",
+      "rps120": 91.19
+    },
+    {
+      "code": "301003",
+      "name": "江苏博云",
+      "reason": "已持仓不新增。当前持仓已触发+20%抬止损规则；塑料不在今日top5，且短线大涨后不追新仓。",
+      "rps120": 87.81
+    },
+    {
+      "code": "002290",
+      "name": "禾盛新材",
+      "reason": "家电零部件/黑色家电相关方向较强，但dist_ma5_pct=7.7%、dist_ma10_pct=14.5%、dist_ma20_pct=13.8%，全部触发或超过MA距离追高限制，禁止买入。",
+      "rps120": 94.33
+    },
+    {
+      "code": "603306",
+      "name": "华懋科技",
+      "reason": "汽车零部件不在今日top5，且dist_ma10_pct=14.5%、dist_ma20_pct=21.8%严重超买；无新仓。",
+      "rps120": 93.43
+    },
+    {
+      "code": "688150",
+      "name": "莱特光电",
+      "reason": "电子化学品趋势强，但dist_ma10_pct=11.5%、dist_ma20_pct=21.7%违反MA距离买入规则，禁止追高。",
+      "rps120": 93.31
+    },
+    {
+      "code": "688025",
+      "name": "杰普特",
+      "reason": "自动化设备/CPO催化强，0风险且成长高，但dist_ma10_pct=11.1%、dist_ma20_pct=18.7%过远，Rule 2b禁止追高。",
+      "rps120": 88.13
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "reason": "电子化学品趋势强且0风险，但dist_ma5_pct=9.3%、dist_ma10_pct=11.7%违反买入距离规则，禁止追高。",
+      "rps120": 88.95
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "小金属/有色不在今日热点，且年报/一季报后输入事件显示股价开盘下跌；RPS120=92.84虽合格，但板块不对，弱宽度下跳过。",
+      "rps120": 92.84
+    },
+    {
+      "code": "300677",
+      "name": "英科医疗",
+      "reason": "医疗耗材不在今日top30%热点，且近10日相对强度输入显示偏弱；即使MA距离健康，也不符合Sector First。",
+      "rps120": 93.27
+    },
+    {
+      "code": "600499",
+      "name": "科达制造",
+      "reason": "专用设备/储能有事件催化且MA距离健康，但所属板块不在今日top5，RPS120=89.74合格但市场宽度弱，不开新仓。",
+      "rps120": 89.74
+    },
+    {
+      "code": "688097",
+      "name": "博众精工",
+      "reason": "自动化设备趋势强，订单和机构预测不错，但机械设备不在今日top5；且当前宽度0.92:1未达新开仓门槛，跳过。",
+      "rps120": 92.63
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "指数全红不等于可以买新仓；当上行家数/下行家数只有0.92:1时，即使TMT硬件局部很强，也应把动作集中在持仓止损上移而不是扩张风险。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "breadth",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "窄宽度行情说明资金集中抱团，追新仓容易买在局部高潮；已有赢家可继续跑，但新增风险的胜率下降。"
+    },
+    {
+      "text": "江苏博云从VCP SETUP小仓位在2个交易日内触发+20%抬止损，说明结构化低位贴均线入场比追板块最热股更容易获得非对称收益。",
+      "type": "observation",
+      "tags": [
+        "VCP",
+        "exit-rule",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "贴近MA且VCP收敛的标的止损距离明确，一旦放量突破，收益快速覆盖风险；机械抬止损可锁住利润并避免主观卖飞。"
+    },
+    {
+      "text": "通信设备成为今日top2后，烽火通信继续创新高式走强；Sector First对已有持仓同样有效，热点板块中的盈利仓应优先让利润奔跑。",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "trend-following",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "热点板块提供持续买盘和估值扩张容忍度，盈利仓用成本止损保护后，继续持有比过早止盈更符合动量策略。"
+    },
+    {
+      "text": "国电南自仍盈利但成交量只有MAVOL30的38.7%，弱量反弹/横盘不应加仓；量能不足时只允许持有观察，不能提高风险。",
+      "type": "heuristic",
+      "tags": [
+        "volume",
+        "position-sizing",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "趋势股需要成交量确认资金继续进场，低量说明承接和追价不足，若板块也不在最强行列，加仓的边际胜率较低。"
+    }
+  ],
+  "market_summary": "Hot sectors (top 5): 元件+3.28%、通信设备+2.81%、消费电子+2.65%、黑色家电+2.21%、摩托车及其他+1.95%。Cold sectors: 影视院线-3.91%、航天装备Ⅱ-3.24%、航运港口-1.64%、渔业-1.55%、个护用品-1.45%。Breadth 0.92:1偏弱，48涨停/13跌停，三大指数全红但个股多数下跌，属于指数强于个股的窄宽度行情；IV整体中性，主要ETF IV Rank约33%-50%，深市中盘IV Rank 17.2%偏低但仍在正常 sizing 区间。根据V2最低买入门槛，Up/Down未达1.5:1且breadth低于1:1，今日不新增仓位，只管理已有赢家。",
+  "market_sentiment": "neutral",
+  "market_call": "谨慎"
+}
