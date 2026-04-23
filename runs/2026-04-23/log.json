@@ -1,0 +1,136 @@
+{
+  "date": "2026-04-23",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1776916159.105438,
+      "errors": [],
+      "end": 1776916171.985781,
+      "duration_sec": 12.9
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8019,
+      "tokens": {
+        "input_tokens": 123895,
+        "output_tokens": 2633
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 62.0,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "GPT primary",
+      "primary_model": "gpt-5.4"
+    },
+    {
+      "phase": "apply",
+      "start": 1776916234.03085,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=37",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=16",
+        "Hypothesis: Updated h017 (rule): +1 supporting evidence → hitRate=100%, n=13",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 3,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "600268",
+                "name": "国电南自",
+                "rule": "stop_proximity",
+                "severity": "WARNING",
+                "currentPrice": 15.3,
+                "stopLoss": 14.89,
+                "distance_pct": 2.68,
+                "suggestion": "🟡 WARNING — only 2.7% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "600268",
+                "name": "国电南自",
+                "rule": "volume_below_mavol30",
+                "volume": 262235,
+                "mavol30": 541729.6,
+                "ratio_pct": 48.4,
+                "suggestion": "Latest volume 262,235 is below MAVOL30 541,730 (48.4% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+              },
+              {
+                "code": "600498",
+                "name": "烽火通信",
+                "rule": "volume_below_mavol30",
+                "volume": 850168,
+                "mavol30": 1074065.87,
+                "ratio_pct": 79.2,
+                "suggestion": "Latest volume 850,168 is below MAVOL30 1,074,066 (79.2% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+              }
+            ],
+            "error": null
+          }
+        ]
+      },
+      "end": 1776916234.197657,
+      "duration_sec": 0.2
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 600268 — 🟡 WARNING — only 2.7% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
+    "RULE check_volume_below_mavol30: 600268 — Latest volume 262,235 is below MAVOL30 541,730 (48.4% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
+    "RULE check_volume_below_mavol30: 600498 — Latest volume 850,168 is below MAVOL30 1,074,066 (79.2% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 75.10000000000001
+  }
+}

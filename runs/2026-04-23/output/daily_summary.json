@@ -1,0 +1,61 @@
+{
+  "date": "2026-04-23",
+  "actions": [
+    {
+      "code": "301003",
+      "name": "江苏博云",
+      "action": "HOLD",
+      "price": 62.53,
+      "pnl_pct": 20.13,
+      "note": "Price 62.53 remains far above entry 52.05 with +20.13% unrealized gain and above raised stop 57.26. However sector 塑料 is not in today's top-5 hot sectors and broad tape is panic, so hold only with existing +10% profit stop; do not add. Volume is above MAVOL30, so no immediate momentum-volume failure."
+    },
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "action": "HOLD",
+      "price": 15.3,
+      "pnl_pct": -0.71,
+      "note": "Current price 15.30 is below entry 15.41, PnL -0.71%, not triggering -5% hard stop from entry or the stored stop 14.89. But it fell -3.23% today, volume is only 48.4% of MAVOL30, and it is only 2.68% above stop; prepare sell order if stop is touched. Sector 电网设备 is not in today's top-5 hot sectors despite prior catalyst."
+    },
+    {
+      "code": "600498",
+      "name": "烽火通信",
+      "action": "HOLD",
+      "price": 54.37,
+      "pnl_pct": 13.37,
+      "note": "Current price 54.37 remains +13.37% above entry 47.96 and above breakeven stop. It has not reached the +20% threshold for raising stop to +10%, and today's -3.36% pullback with volume below MAVOL30 argues against adding. Keep breakeven stop; let winner run but protect capital in panic tape."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 967240.0,
+    "dayPnl": -1602.0,
+    "dayReturnPct": -0.17,
+    "totalReturnPct": -3.28,
+    "unrealizedPnl": 5587.0,
+    "realizedPnl": -38347.0,
+    "cashPct": 94.07
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.2465,
+    "up": 1068,
+    "down": 4333,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 38,
+    "limit_downs": 27,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.25:1, 0/3 major indices green, 38 limit-ups / 27 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 0.25:1 bearish/panic, 38涨停/27跌停, and 0/3 major indices green. Top sectors are 油气开采Ⅱ +3.58%, 油服工程 +3.43%, 医疗美容 +2.30%, 煤炭开采 +1.82%, 黑色家电 +1.52%; cold sectors include 贵金属 -5.46%, 小金属 -5.43%, 非金属材料Ⅱ -4.55%, 工业金属 -3.59%, 其他电子Ⅱ -3.36%. Position sector alignment: 0/3 positions in hot sectors. IV is broadly neutral with core avg IV rank about 39.9%; stock proxies are mostly normal, but IV does not override the hard entry block."
+  }
+}

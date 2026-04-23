@@ -1,0 +1,211 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": 3.58,
+        "trend": "accelerating"
+      },
+      {
+        "name": "油服工程",
+        "5d_pct": 3.43,
+        "trend": "accelerating"
+      },
+      {
+        "name": "医疗美容",
+        "5d_pct": 2.3,
+        "trend": "steady"
+      },
+      {
+        "name": "煤炭开采",
+        "5d_pct": 1.82,
+        "trend": "steady"
+      },
+      {
+        "name": "黑色家电",
+        "5d_pct": 1.52,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "贵金属",
+        "5d_pct": -5.46,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "小金属",
+        "5d_pct": -5.43,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": -4.55,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "工业金属",
+        "5d_pct": -3.59,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": -3.36,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/3 positions in today's top-5 hot sectors",
+    "regime": "Panic tape: defensive/resource rotation into oil, oil service, coal and medical beauty while electronics/metals are under pressure; no fresh long risk."
+  },
+  "position_decisions": [
+    {
+      "code": "301003",
+      "name": "江苏博云",
+      "action": "HOLD",
+      "reason": "Price 62.53 remains far above entry 52.05 with +20.13% unrealized gain and above raised stop 57.26. However sector 塑料 is not in today's top-5 hot sectors and broad tape is panic, so hold only with existing +10% profit stop; do not add. Volume is above MAVOL30, so no immediate momentum-volume failure.",
+      "sector_rank": "not top 5 today; candidate data says 塑料 has been trending since 2026-04",
+      "new_stop": 57.26,
+      "pnl_pct": 20.13,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "action": "HOLD",
+      "reason": "Current price 15.30 is below entry 15.41, PnL -0.71%, not triggering -5% hard stop from entry or the stored stop 14.89. But it fell -3.23% today, volume is only 48.4% of MAVOL30, and it is only 2.68% above stop; prepare sell order if stop is touched. Sector 电网设备 is not in today's top-5 hot sectors despite prior catalyst.",
+      "sector_rank": "not top 5 today; previously strong but not current leadership",
+      "new_stop": 14.89,
+      "pnl_pct": -0.71,
+      "days_held": 7,
+      "exit_price": null
+    },
+    {
+      "code": "600498",
+      "name": "烽火通信",
+      "action": "HOLD",
+      "reason": "Current price 54.37 remains +13.37% above entry 47.96 and above breakeven stop. It has not reached the +20% threshold for raising stop to +10%, and today's -3.36% pullback with volume below MAVOL30 argues against adding. Keep breakeven stop; let winner run but protect capital in panic tape.",
+      "sector_rank": "not top 5 today; communication equipment no longer today's leading sector",
+      "new_stop": 47.96,
+      "pnl_pct": 13.37,
+      "days_held": 7,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688663",
+      "name": "新风光",
+      "reason": "No new positions because entry regime is hard-blocked: breadth 0.25:1 and 0/3 major indices green. Individually acceptable MA distances and 电网设备 catalyst are not enough in panic tape.",
+      "rps120": 92.65
+    },
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "reason": "Already held; no add. Entry regime blocked, volume below MAVOL30, price only 2.68% above stop.",
+      "rps120": 91.19
+    },
+    {
+      "code": "301003",
+      "name": "江苏博云",
+      "reason": "Already held; no add. Entry regime blocked. Although MA distances are healthy and VCP SETUP exists, the broad tape is panic and sector is not today's top-5.",
+      "rps120": 87.81
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "No new positions in panic tape. Semiconductor is not in today's top-5 sectors, though company has strong earnings and 0 listed risks. Keep on research radar only.",
+      "rps120": 90.95
+    },
+    {
+      "code": "300677",
+      "name": "英科医疗",
+      "reason": "Medical beauty is hot but this stock is 医疗耗材, not confirmed same top sector. Entry regime blocked by breadth and indices; no fresh long.",
+      "rps120": 93.27
+    },
+    {
+      "code": "601208",
+      "name": "东材科技",
+      "reason": "Fails non-negotiable MA distance check: dist_ma10_pct 8.6% exceeds 8% threshold. Also no new positions in panic tape.",
+      "rps120": 91.42
+    },
+    {
+      "code": "688545",
+      "name": "兴福电子",
+      "reason": "Fails MA distance check: dist_ma10_pct 9.5% exceeds 8% threshold. No new positions in panic tape.",
+      "rps120": 91.38
+    },
+    {
+      "code": "603306",
+      "name": "华懋科技",
+      "reason": "Fails MA distance check: dist_ma10_pct 14.5% and dist_ma20_pct 21.8% are overextended. No chasing.",
+      "rps120": 93.43
+    },
+    {
+      "code": "688150",
+      "name": "莱特光电",
+      "reason": "Fails MA distance check: dist_ma10_pct 11.5% and dist_ma20_pct 21.7% exceed limits. No chasing.",
+      "rps120": 93.31
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "Sector 小金属 is in bottom-5 cold sectors at -5.43%; sector-first rule makes it skip regardless of individual quality.",
+      "rps120": 92.84
+    },
+    {
+      "code": "002756",
+      "name": "永兴材料",
+      "reason": "Likely lithium/small metals exposure while 小金属 is bottom-5 cold; additionally RPS120 97.37 is above 95 chasing zone.",
+      "rps120": 97.37
+    },
+    {
+      "code": "600498",
+      "name": "烽火通信",
+      "reason": "Already held; no add. RPS120 95.38 is above preferred new-entry ceiling and market entry gate is hard-blocked.",
+      "rps120": 95.38
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "When breadth collapses below 0.3:1 and all three major indices are red, even sector leaders should be treated as hold-only, not add/buy candidates.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "breadth",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Panic breadth raises correlation and gap risk; individual catalysts are less predictive than market-wide de-risking pressure."
+    },
+    {
+      "text": "Raised stops are doing their job: 江苏博云 and 烽火通信 remain profitable holds despite a weak tape because prior profit protection converts them into asymmetric existing-risk positions.",
+      "type": "signal",
+      "tags": [
+        "exit-rule",
+        "risk-management",
+        "let-winners-run"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "Existing winners can be held through volatility if stops have already removed or reduced downside; this is different from initiating new risk."
+    },
+    {
+      "text": "Stop proximity plus below-average volume is a warning combination for marginal winners or slight losers; 国电南自 should not be averaged down or given thesis exceptions.",
+      "type": "heuristic",
+      "tags": [
+        "exit-rule",
+        "volume",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h017",
+      "mechanism": "Weak volume on a down move near stop indicates demand is not confirming the catalyst; the correct response is readiness to sell, not conviction-based adding."
+    }
+  ],
+  "market_summary": "Breadth 0.25:1 bearish/panic, 38涨停/27跌停, and 0/3 major indices green. Top sectors are 油气开采Ⅱ +3.58%, 油服工程 +3.43%, 医疗美容 +2.30%, 煤炭开采 +1.82%, 黑色家电 +1.52%; cold sectors include 贵金属 -5.46%, 小金属 -5.43%, 非金属材料Ⅱ -4.55%, 工业金属 -3.59%, 其他电子Ⅱ -3.36%. Position sector alignment: 0/3 positions in hot sectors. IV is broadly neutral with core avg IV rank about 39.9%; stock proxies are mostly normal, but IV does not override the hard entry block.",
+  "market_sentiment": "bearish",
+  "market_call": "防守"
+}
