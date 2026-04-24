@@ -1,0 +1,187 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "能源金属",
+        "5d_pct": 2.86,
+        "trend": "accelerating"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": 1.55,
+        "trend": "steady"
+      },
+      {
+        "name": "化妆品",
+        "5d_pct": 1.5,
+        "trend": "steady"
+      },
+      {
+        "name": "农化制品",
+        "5d_pct": 1.18,
+        "trend": "steady"
+      },
+      {
+        "name": "服装家纺",
+        "5d_pct": 1.16,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "通信设备",
+        "5d_pct": -5.6,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": -5.57,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "油服工程",
+        "5d_pct": -2.9,
+        "trend": "weak"
+      },
+      {
+        "name": "广告营销",
+        "5d_pct": -2.89,
+        "trend": "weak"
+      },
+      {
+        "name": "贵金属",
+        "5d_pct": -2.85,
+        "trend": "weak"
+      }
+    ],
+    "position_alignment": "1/3 positions in hot sectors",
+    "regime": "Panic/defensive tape: resources and semis showing relative strength, while communication equipment is leading downside"
+  },
+  "position_decisions": [
+    {
+      "code": "301003",
+      "name": "江苏博云",
+      "action": "HOLD",
+      "reason": "Current price 64.8 remains well above entry 52.05 (+24.50%) and above raised stop 57.26; winner is intact and no sell rule is triggered. Sector 塑料 is not in today's top 5 hot sectors, so hold only with existing trailing discipline and do not add.",
+      "sector_rank": "not top 30%",
+      "new_stop": 57.26,
+      "pnl_pct": 24.5,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "action": "SELL",
+      "reason": "Price 15.06 is only 1.13% above current stop 14.89, down -2.27% vs entry, with weak volume at 40.1% of MAVOL30 and a CRITICAL stop proximity violation. In a panic tape, proactively exit near-stop names rather than wait for a gap through support.",
+      "sector_rank": "not top 30%",
+      "new_stop": null,
+      "pnl_pct": -2.27,
+      "days_held": 8,
+      "exit_price": 15.06
+    },
+    {
+      "code": "600498",
+      "name": "烽火通信",
+      "action": "SELL",
+      "reason": "Sector 通信设备 is the worst group today at -5.6% and falls in the cold bottom bucket; rule says sector gravity wins. Stock is still above entry (+8.30%) but broke hard today (-5.58%) on a cold-sector unwind, so protect gains and exit.",
+      "sector_rank": "bottom 5",
+      "new_stop": null,
+      "pnl_pct": 8.3,
+      "days_held": 8,
+      "exit_price": 51.94
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "半导体 is a hot sector and RPS120 90.95 is ideal, but entry regime is hard-blocked (breadth 0.37:1, 0/3 major indices green). Even without the regime issue, 科创50 IV Rank 11.3% implies reduced sizing.",
+      "rps120": 90.95
+    },
+    {
+      "code": "688663",
+      "name": "新风光",
+      "reason": "电网设备 has stock-specific strength and MA distances are healthy, but the sector is not in today's top 30% by provided sector table, and the market regime blocks all new longs.",
+      "rps120": 92.65
+    },
+    {
+      "code": "002812",
+      "name": "恩捷股份",
+      "reason": "RPS120 93.33 is allowed only in stronger conditions, but sector 电池 is not in the hot-sector list and today's quick note says 电池板块开盘走弱. Panic regime means no new entry.",
+      "rps120": 93.33
+    },
+    {
+      "code": "600499",
+      "name": "科达制造",
+      "reason": "Fresh earnings catalyst is attractive and MA distances are fine, but RPS120 89.74 alone is not enough when the market is in panic mode and 专用设备 is not in the provided top-sector list.",
+      "rps120": 89.74
+    },
+    {
+      "code": "300677",
+      "name": "英科医疗",
+      "reason": "Setup is technically clean with RPS120 93.27 and healthy MA distances, but 医疗器械 is not a top-30% sector in today's sector data and the tape does not permit fresh risk.",
+      "rps120": 93.27
+    },
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "reason": "Strong fundamentals and momentum, but dist_ma10_pct 10.3% breaches the no-chase rule (>8%), and market regime blocks entries anyway.",
+      "rps120": 90.99
+    },
+    {
+      "code": "688545",
+      "name": "兴福电子",
+      "reason": "半导体-related backdrop is supportive, but dist_ma10_pct 9.5% breaches the MA-distance anti-chase rule. Also no new longs in current regime.",
+      "rps120": 91.38
+    },
+    {
+      "code": "301003",
+      "name": "江苏博云",
+      "reason": "Already held; no add. Sector 塑料 is not in today's top sector list, so despite open profit the name is hold-only, not an add-on entry.",
+      "rps120": 87.81
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "When breadth is below 1:1 and all three major indices are red, the correct momentum action is to stop initiating longs even if several candidates still pass RPS and MA filters.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Weak tape suppresses breakout follow-through and raises gap-down risk, so stock-level strength is less likely to convert into profitable new entries."
+    },
+    {
+      "text": "Cold-sector exits should be enforced aggressively: a profitable stock in the worst sector bucket can lose leadership faster than its individual chart signals the breakdown.",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "exit-rule",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "Sector outflows hit liquidity and sentiment across the group first, so exiting a weakening sector protects gains before individual stops are tested."
+    },
+    {
+      "text": "Stop-proximity warnings become much more important in panic tapes; a stock sitting only ~1% above stop should often be sold proactively rather than managed mechanically.",
+      "type": "signal",
+      "tags": [
+        "exit-rule",
+        "timing",
+        "risk-management"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "In weak markets, gap risk and cascading selling can skip exact stop levels, so pre-emptive exits reduce slippage."
+    }
+  ],
+  "market_summary": "Breadth 0.37:1 bearish, 52涨停/34跌停, all 3 major indices red while only 科创50 is positive; this is a panic tape and fails the minimum long-entry gate. Hot sectors (top 5): 能源金属 +2.86%, 半导体 +1.55%, 化妆品 +1.50%, 农化制品 +1.18%, 服装家纺 +1.16%. Cold sectors (bottom 5): 通信设备 -5.60%, 航天装备Ⅱ -5.57%, 油服工程 -2.90%, 广告营销 -2.89%, 贵金属 -2.85%. Position sector alignment: 1/3 positions in hot sectors. IV context is complacent-to-low overall (overall avg IV rank 12.41%; many 60x/科创 proxies <15%), which is a sizing headwind for new longs but secondary today because the regime hard-block already says no new positions.",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}

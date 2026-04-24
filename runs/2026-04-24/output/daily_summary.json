@@ -1,0 +1,61 @@
+{
+  "date": "2026-04-24",
+  "actions": [
+    {
+      "code": "301003",
+      "name": "江苏博云",
+      "action": "HOLD",
+      "price": 64.8,
+      "pnl_pct": 24.5,
+      "note": "Current price 64.8 remains well above entry 52.05 (+24.50%) and above raised stop 57.26; winner is intact and no sell rule is triggered. Sector 塑料 is not in today's top 5 hot sectors, so hold only with existing trailing discipline and do not add."
+    },
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "action": "SELL",
+      "price": 15.06,
+      "pnl_pct": -2.27,
+      "note": "Price 15.06 is only 1.13% above current stop 14.89, down -2.27% vs entry, with weak volume at 40.1% of MAVOL30 and a CRITICAL stop proximity violation. In a panic tape, proactively exit near-stop names rather than wait for a gap through support."
+    },
+    {
+      "code": "600498",
+      "name": "烽火通信",
+      "action": "SELL",
+      "price": 51.94,
+      "pnl_pct": 8.3,
+      "note": "Sector 通信设备 is the worst group today at -5.6% and falls in the cold bottom bucket; rule says sector gravity wins. Stock is still above entry (+8.30%) but broke hard today (-5.58%) on a cold-sector unwind, so protect gains and exit."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 1,
+    "totalEquity": 966685.0,
+    "dayPnl": 27.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.33,
+    "unrealizedPnl": 3825.0,
+    "realizedPnl": -37140.0,
+    "cashPct": 97.99
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.3698,
+    "up": 1454,
+    "down": 3932,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 52,
+    "limit_downs": 34,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.37:1, 0/3 major indices green, 52 limit-ups / 34 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 0.37:1 bearish, 52涨停/34跌停, all 3 major indices red while only 科创50 is positive; this is a panic tape and fails the minimum long-entry gate. Hot sectors (top 5): 能源金属 +2.86%, 半导体 +1.55%, 化妆品 +1.50%, 农化制品 +1.18%, 服装家纺 +1.16%. Cold sectors (bottom 5): 通信设备 -5.60%, 航天装备Ⅱ -5.57%, 油服工程 -2.90%, 广告营销 -2.89%, 贵金属 -2.85%. Position sector alignment: 1/3 positions in hot sectors. IV context is complacent-to-low overall (overall avg IV rank 12.41%; many 60x/科创 proxies <15%), which is a sizing headwind for new longs but secondary today because the regime hard-block already says no new positions."
+  }
+}

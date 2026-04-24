@@ -1,7 +1,7 @@
 {
   "code": "600498",
   "name": "烽火通信",
-  "status": "active",
+  "status": "closed",
   "thesis": "通信设备进入今日前五热点，个股RPS位于扩展区边缘但均线距离健康，属于板块优先框架下的顺趋势候选。",
   "entryDate": "2026-04-16",
   "entryPrice": 47.96,
@@ -51,15 +51,22 @@
       "change_pct": 13.37,
       "action": "HOLD",
       "note": "Current price 54.37 remains +13.37% above entry 47.96 and above breakeven stop. It has not reached the +20% threshold for raising stop to +10%, and today's -3.36% pullback with volume below MAVOL30 argues against adding. Keep breakeven stop; let winner run but protect capital in panic tape."
+    },
+    {
+      "date": "2026-04-24",
+      "price": 51.94,
+      "change_pct": 8.3,
+      "action": "SELL",
+      "note": "Sector 通信设备 is the worst group today at -5.6% and falls in the cold bottom bucket; rule says sector gravity wins. Stock is still above entry (+8.30%) but broke hard today (-5.58%) on a cold-sector unwind, so protect gains and exit."
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-04-24",
+  "exitPrice": 51.94,
+  "exitReason": "Sector 通信设备 is the worst group today at -5.6% and falls in the cold bottom bucket; rule says sector gravity wins. Stock is still above entry (+8.30%) but broke hard today (-5.58%) on a cold-sector unwind, so protect gains and exit.",
+  "returnPct": 8.3,
+  "holdingDays": 8,
+  "lessonLearned": "",
   "createdAt": "2026-04-16T11:49:22.399687+08:00",
-  "updatedAt": "2026-04-23T11:50:34.042431+08:00",
+  "updatedAt": "2026-04-24T11:37:09.814836+08:00",
   "trackerVersion": "2.1"
 }

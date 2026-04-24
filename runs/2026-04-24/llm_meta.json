@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "gpt-5.4",
+  "decision_source": "GPT primary",
+  "input_tokens": 133132,
+  "output_tokens": 2745,
+  "rounds": 2,
+  "duration_sec": 105.2,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=A%E8%82%A1+%E7%83%AD%E9%97%A8%E6%9D%BF%E5%9D%97+%E4%BB%8A%E6%97%A5+2026-04-24"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E5%8D%8A%E5%AF%BC%E4%BD%93+%E6%9D%BF%E5%9D%97+2026-04-24+A%E8%82%A1"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E7%94%B5%E7%BD%91%E8%AE%BE%E5%A4%87+%E6%9D%BF%E5%9D%97+2026-04-24+A%E8%82%A1"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E9%80%9A%E4%BF%A1%E8%AE%BE%E5%A4%87+%E6%9D%BF%E5%9D%97+2026-04-24+A%E8%82%A1"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E5%A1%91%E6%96%99+%E6%9D%BF%E5%9D%97+2026-04-24+A%E8%82%A1"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E7%83%BD%E7%81%AB%E9%80%9A%E4%BF%A1+2026-04-24+%E5%BF%AB%E8%AE%AF"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E5%9B%BD%E7%94%B5%E5%8D%97%E8%87%AA+2026-04-24+%E5%BF%AB%E8%AE%AF"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E6%B1%9F%E8%8B%8F%E5%8D%9A%E4%BA%91+2026-04-24+%E5%BF%AB%E8%AE%AF"
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}

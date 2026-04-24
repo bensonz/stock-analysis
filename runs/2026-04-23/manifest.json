@@ -1,0 +1,76 @@
+{
+  "date": "2026-04-23",
+  "status": "degraded",
+  "exit_code": 0,
+  "total_duration_sec": 75.1,
+  "phases": {
+    "health_check": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "sources": {
+        "sina": {
+          "status": "ok",
+          "latency_ms": 132.6
+        },
+        "cheesefortune": {
+          "status": "ok",
+          "latency_ms": 454.9
+        },
+        "eastmoney": {
+          "status": "down",
+          "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>"
+        },
+        "pricedb": {
+          "status": "ok",
+          "latest_date": "2026-04-20",
+          "stale": false
+        }
+      }
+    },
+    "collect": {
+      "status": "ok",
+      "duration_sec": 12.9,
+      "errors": []
+    },
+    "llm_analysis": {
+      "status": "ok",
+      "duration_sec": 62.0
+    },
+    "apply": {
+      "status": "ok",
+      "duration_sec": 0.2
+    },
+    "validate": {
+      "status": "warnings",
+      "duration_sec": 0.0,
+      "errors": [
+        "RULE check_stop_proximity: 600268 — 🟡 WARNING — only 2.7% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
+        "RULE check_volume_below_mavol30: 600268 — Latest volume 262,235 is below MAVOL30 541,730 (48.4% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
+        "RULE check_volume_below_mavol30: 600498 — Latest volume 850,168 is below MAVOL30 1,074,066 (79.2% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+      ]
+    }
+  },
+  "gates": {
+    "phase1_to_phase2": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": []
+    },
+    "phase2_to_phase3": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [
+        "missing watchlist"
+      ]
+    },
+    "phase3_to_phase4": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [
+        "rule check_stop_proximity: 🟡 WARNING — only 2.7% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
+        "rule check_volume_below_mavol30: Latest volume 262,235 is below MAVOL30 541,730 (48.4% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
+        "rule check_volume_below_mavol30: Latest volume 850,168 is below MAVOL30 1,074,066 (79.2% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+      ]
+    }
+  }
+}
