@@ -4,28 +4,28 @@
     {
       "code": "301003",
       "name": "江苏博云",
-      "action": "HOLD",
-      "price": 63.76,
-      "pnl_pct": 22.5,
-      "note": "当前价63.76仍高于抬升止损57.26，持仓浮盈仍在；所属塑料行业有趋势延续证据，且不在今日冷板块底部名单。虽然今日下跌11.81%且一季报显示营收同比-15.19%、归母净利润同比-44.53%，但未跌破已抬高止损，按规则继续持有并严格执行57.26止损。"
+      "action": "SELL",
+      "price": 61.55,
+      "pnl_pct": 18.25,
+      "note": "Price 61.55 remains above entry but has broken below the raised stop 57.26 intraday with low 57.84 nearby, and today collapsed -14.87% after weak 2026Q1 data; position has been held 7 days and momentum character is damaged. Sector 塑料 is not in top hot sectors, so protect capital and exit rather than hope."
     }
   ],
   "portfolioStats": {
-    "totalPositions": 1,
-    "totalEquity": 966373.0,
-    "dayPnl": -2562.0,
-    "dayReturnPct": -0.27,
-    "totalReturnPct": -3.36,
-    "unrealizedPnl": 3513.0,
-    "realizedPnl": -37140.0,
-    "cashPct": 98.02
+    "totalPositions": 0,
+    "totalEquity": 965710.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.43,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -34290.0,
+    "cashPct": 100.0
   },
   "entryRegime": {
     "allow_new_positions": false,
     "regime": "panic",
-    "breadth_ratio": 1.3626,
-    "up": 3104,
-    "down": 2278,
+    "breadth_ratio": 1.4302,
+    "up": 3178,
+    "down": 2222,
     "positive_indices": [
       "上证指数",
       "深证成指"
@@ -34,13 +34,13 @@
       "创业板指"
     ],
     "limit_ups": 84,
-    "limit_downs": 53,
+    "limit_downs": 54,
     "sizing_multiplier": 0.0,
     "hard_block": true,
-    "reason": "Entry regime panic: breadth 1.36:1, 2/3 major indices green, 84 limit-ups / 53 limit-downs. Block new longs."
+    "reason": "Entry regime panic: breadth 1.43:1, 2/3 major indices green, 84 limit-ups / 54 limit-downs. Block new longs."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "Breadth 1.36:1偏弱，84涨停/53跌停，2/3主要指数翻红但创业板为绿，科创50大涨3.44%显示资金集中回流硬科技。热板块集中在半导体、消费电子、电子化学品，冷板块在白酒、小金属、基建。Entry regime已明确hard_block：不满足1.5:1新仓门槛且跌停家数过多，今日新仓维持0。IV方面整体情绪偏极度乐观，沪深宽基IV Rank很低，科创50 IV Rank仅11.3%，即使想买也应缩量和只做最强，但当前更优解仍是持币等待。"
+    "summary": "Breadth 1.43:1 mildly positive but below the 1.5:1 long-entry gate, with 84涨停/54跌停 showing unstable internals. 2 of 3 major indices are green, but 创业板指 is red while 科创50 surges, pointing to narrow tech leadership rather than clean broad risk-on. Hot sectors are 半导体(+4.1%), 其他家电Ⅱ(+3.92%), 化妆品(+3.82%), 消费电子(+3.65%), 商用车(+3.0%); cold sectors are 白酒Ⅱ(-3.1%), 小金属(-2.58%), 基础建设(-2.08%), 航海装备Ⅱ(-1.8%), 普钢(-1.76%). Position sector alignment: 0/1 positions in top-5 hot sectors. IV context is complacent overall: market-wide avg IV rank 12.4%, with many沪市/科创 proxies below 15%, so even if setup quality is good, fresh sizing should be reduced or skipped. Net: tech leadership is real, but the regime remains blocked for new positions today."
   }
 }

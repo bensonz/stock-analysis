@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-04-27T13:56:35.831224+08:00",
+  "snapshot_time": "2026-04-27T14:36:42.706256+08:00",
   "snapshot_type": "pre_run",
   "date": "2026-04-27",
   "portfolio_config": {
@@ -11,23 +11,23 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-04-24T11:37:09.820097+08:00",
+    "lastUpdated": "2026-04-27T13:58:04.080149+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 966685.0,
+      "totalEquity": 966373.0,
       "cash": 947245.0,
-      "investedValue": 19440.0,
-      "unrealizedPnl": 3825.0,
+      "investedValue": 19128.0,
+      "unrealizedPnl": 3513.0,
       "realizedPnl": -37140.0,
-      "totalPnl": -33315.0,
-      "totalReturnPct": -3.33,
+      "totalPnl": -33627.0,
+      "totalReturnPct": -3.36,
       "positionsUsed": 1,
       "positionsMax": 10,
-      "cashPct": 97.99,
-      "dayPnl": 27.0,
+      "cashPct": 98.02,
+      "dayPnl": -2562.0,
       "minCashPct": 20,
-      "minCashValue": 193337.0,
-      "deployableCash": 753908.0
+      "minCashValue": 193274.6,
+      "deployableCash": 753970.4
     },
     "activePositions": [
       {
@@ -35,8 +35,8 @@
         "name": "江苏博云",
         "entryDate": "2026-04-20",
         "entryPrice": 52.05,
-        "currentPrice": 64.8,
-        "pnl_pct": 24.5,
+        "currentPrice": 63.76,
+        "pnl_pct": 22.5,
         "stopLoss": 48.4,
         "currentStop": 57.26,
         "targetPrice": 58.0,
@@ -45,12 +45,12 @@
         "shares": 300,
         "allocation_pct": 2.25,
         "allocatedCapital": 15615.0,
-        "currentValue": 19440.0,
-        "unrealizedPnl": 3825.0,
-        "volume": 60567,
+        "currentValue": 19128.0,
+        "unrealizedPnl": 3513.0,
+        "volume": 130156,
         "mavol30": 27086.13,
         "volumeBelowMavol30": false,
-        "weight_pct": 2.01
+        "weight_pct": 1.98
       }
     ]
   },
@@ -115,6 +115,13 @@
           "change_pct": 24.5,
           "action": "HOLD",
           "note": "Current price 64.8 remains well above entry 52.05 (+24.50%) and above raised stop 57.26; winner is intact and no sell rule is triggered. Sector 塑料 is not in today's top 5 hot sectors, so hold only with existing trailing discipline and do not add."
+        },
+        {
+          "date": "2026-04-27",
+          "price": 63.76,
+          "change_pct": 22.5,
+          "action": "HOLD",
+          "note": "当前价63.76仍高于抬升止损57.26，持仓浮盈仍在；所属塑料行业有趋势延续证据，且不在今日冷板块底部名单。虽然今日下跌11.81%且一季报显示营收同比-15.19%、归母净利润同比-44.53%，但未跌破已抬高止损，按规则继续持有并严格执行57.26止损。"
         }
       ],
       "exitDate": null,
@@ -124,7 +131,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-04-20T11:44:00.029416+08:00",
-      "updatedAt": "2026-04-24T11:37:09.805103+08:00",
+      "updatedAt": "2026-04-27T13:58:04.065341+08:00",
       "trackerVersion": "2.1"
     }
   },

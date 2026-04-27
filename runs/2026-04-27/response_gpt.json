@@ -3,152 +3,170 @@
     "hot_sectors": [
       {
         "name": "半导体",
-        "5d_pct": 4.23,
-        "trend": "accelerating"
-      },
-      {
-        "name": "化妆品",
-        "5d_pct": 3.81,
-        "trend": "strong"
-      },
-      {
-        "name": "消费电子",
-        "5d_pct": 3.77,
+        "5d_pct": 4.1,
         "trend": "accelerating"
       },
       {
         "name": "其他家电Ⅱ",
-        "5d_pct": 3.48,
-        "trend": "strong"
+        "5d_pct": 3.92,
+        "trend": "steady"
       },
       {
-        "name": "电子化学品Ⅱ",
-        "5d_pct": 3.26,
+        "name": "化妆品",
+        "5d_pct": 3.82,
+        "trend": "steady"
+      },
+      {
+        "name": "消费电子",
+        "5d_pct": 3.65,
         "trend": "accelerating"
+      },
+      {
+        "name": "商用车",
+        "5d_pct": 3.0,
+        "trend": "steady"
       }
     ],
     "cold_sectors": [
       {
         "name": "白酒Ⅱ",
-        "5d_pct": -3.05,
+        "5d_pct": -3.1,
         "trend": "deteriorating"
       },
       {
         "name": "小金属",
-        "5d_pct": -2.16,
+        "5d_pct": -2.58,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "基础建设",
+        "5d_pct": -2.08,
         "trend": "deteriorating"
       },
       {
         "name": "航海装备Ⅱ",
-        "5d_pct": -2.14,
+        "5d_pct": -1.8,
         "trend": "weak"
       },
       {
-        "name": "基础建设",
-        "5d_pct": -1.9,
-        "trend": "weak"
-      },
-      {
-        "name": "航天装备Ⅱ",
-        "5d_pct": -1.69,
+        "name": "普钢",
+        "5d_pct": -1.76,
         "trend": "weak"
       }
     ],
-    "position_alignment": "1/1 positions in hot sectors",
-    "regime": "科技成长主导，半导体/消费电子/电子化学品领涨，资源与白酒走弱；但涨跌停对冲严重，赚钱效应并不干净"
+    "position_alignment": "1/1 positions in non-cold sectors, 0/1 positions explicitly in top-5 hot sectors",
+    "regime": "Tech leadership led by 半导体/消费电子, but tape is still blocked for fresh longs by weak breadth ratio and elevated跌停数"
   },
   "position_decisions": [
     {
       "code": "301003",
       "name": "江苏博云",
-      "action": "HOLD",
-      "reason": "当前价63.76仍高于抬升止损57.26，持仓浮盈仍在；所属塑料行业有趋势延续证据，且不在今日冷板块底部名单。虽然今日下跌11.81%且一季报显示营收同比-15.19%、归母净利润同比-44.53%，但未跌破已抬高止损，按规则继续持有并严格执行57.26止损。",
-      "sector_rank": "top 30%",
-      "new_stop": 57.26,
-      "pnl_pct": 22.5,
+      "action": "SELL",
+      "reason": "Price 61.55 remains above entry but has broken below the raised stop 57.26 intraday with low 57.84 nearby, and today collapsed -14.87% after weak 2026Q1 data; position has been held 7 days and momentum character is damaged. Sector 塑料 is not in top hot sectors, so protect capital and exit rather than hope.",
+      "sector_rank": "not top 30%",
+      "new_stop": null,
+      "pnl_pct": 18.25,
       "days_held": 7,
-      "exit_price": null
+      "exit_price": 61.55
     }
   ],
   "new_positions": [],
   "skip_list": [
     {
-      "code": "002246",
-      "name": "北化股份",
-      "reason": "化学制品方向基本面与涨价逻辑尚可，RPS120 90.23、MA距离合规、VCP为SETUP，但市场开仓门槛未过：breadth仅1.36:1且跌停53家，entry_regime明确hard_block，今天不新开仓。",
-      "rps120": 90.23
-    },
-    {
       "code": "002812",
       "name": "恩捷股份",
-      "reason": "电池方向有业绩与研报催化，RPS120 93.33处于可放宽区间，MA距离合规，VCP为SETUP；但今日新开仓被市场环境否决，breadth 1.36:1且53家跌停，不满足1.5:1最低门槛。",
+      "reason": "Battery catalyst is real and fresh with profit growth and board strength, but entry regime hard-blocks new longs; additionally sector is not in provided top-5 sector leaders today, so skip despite valid setup.",
       "rps120": 93.33
     },
     {
       "code": "688200",
       "name": "华峰测控",
-      "reason": "半导体是今日最强板块，基本面和机构资金认可度高，RPS120 90.95、MA距离合规、0风险；但科创板IV Rank 11.3%意味着新仓应半仓，而更关键的是entry_regime hard_block，今天只保留为候选不执行。",
+      "reason": "Semiconductor sector is hot and stock quality is good, but board-specific IV proxy is only 11.3% so sizing would be halved, and the market entry gate is hard-blocked. Candidate is acceptable on MA distance but no new position under current regime.",
       "rps120": 90.95
+    },
+    {
+      "code": "002246",
+      "name": "北化股份",
+      "reason": "RPS and MA distances are acceptable and catalyst is fresh, but sector is not in the provided top leaders and entry regime blocks fresh longs. VCP is only SETUP, not enough to override regime.",
+      "rps120": 90.23
+    },
+    {
+      "code": "600499",
+      "name": "科达制造",
+      "reason": "Earnings catalyst is strong, but RPS120 89.74 sits in range while sector is not among today's top leaders and new long gate is blocked. Also沪市IV proxy is near 0%, which would force half sizing even if regime improved.",
+      "rps120": 89.74
+    },
+    {
+      "code": "601208",
+      "name": "东材科技",
+      "reason": "Trend and earnings are strong, but dist_ma10_pct 8.6% breaches the anti-chase rule and new longs are blocked by regime.",
+      "rps120": 91.42
     },
     {
       "code": "688545",
       "name": "兴福电子",
-      "reason": "所属电子化学品Ⅱ为今日热板块，但dist_ma10_pct 9.5%超过8%上限，触发硬性反追高规则；即使市场允许开仓也应跳过。",
+      "reason": "Semiconductor materials theme is hot, but dist_ma10_pct 9.5% fails the non-negotiable MA-distance chase filter; entry regime also blocks new longs.",
       "rps120": 91.38
     },
     {
       "code": "001389",
       "name": "广合科技",
-      "reason": "PCB/元件方向强，成长性突出，但dist_ma10_pct 10.3%超过8%上限，且有日级别超买提示；属于强势但过度延伸，不能追。",
+      "reason": "Strong PCB/AI hardware trend and fresh high, but dist_ma10_pct 10.3% fails anti-chase rule. No new position.",
       "rps120": 90.99
-    },
-    {
-      "code": "688150",
-      "name": "莱特光电",
-      "reason": "电子化学品Ⅱ为热板块且催化新，但dist_ma10_pct 11.5%、dist_ma20_pct 21.7%，严重超出反追高阈值，纯追涨风险过高。",
-      "rps120": 93.31
     },
     {
       "code": "300236",
       "name": "上海新阳",
-      "reason": "电子化学品Ⅱ板块强，但dist_ma5_pct 9.3%和dist_ma10_pct 11.7%均超阈值，形态过热；等待回踩均线再看。",
+      "reason": "Semiconductor material trend is constructive, but dist_ma5_pct 9.3% and dist_ma10_pct 11.7% both violate anti-chase limits.",
       "rps120": 88.95
+    },
+    {
+      "code": "688150",
+      "name": "莱特光电",
+      "reason": "Electronic chemicals trend is up and catalyst exists, but dist_ma10_pct 11.5% and dist_ma20_pct 21.7% are far too extended for a fresh entry.",
+      "rps120": 93.31
     },
     {
       "code": "600301",
       "name": "华锡有色",
-      "reason": "所属小金属位列今日底部板块，Sector First直接否决；即使个股RPS120 92.84且MA位置不差，冷板块内不做新多。",
+      "reason": "Sector 小金属 is in the bottom-5 cold sectors today. Rule 1 says no entry regardless of individual setup.",
       "rps120": 92.84
     },
     {
       "code": "600295",
       "name": "鄂尔多斯",
-      "reason": "资源链非今日主线，且钢铁/小金属相关风格明显弱于科技成长；在板块轮动不利时，不因个股RPS120 92.38而逆势开仓。",
+      "reason": "Steel-related sector exposure is out of favor and not in top 30% of today's sector leaders; no entry despite acceptable MA position.",
       "rps120": 92.38
     },
     {
       "code": "603191",
       "name": "望变电气",
-      "reason": "电网设备不是今日前五主升板块，且RPS120 88.91虽合格但缺乏当下最强主线加持；弱于科技热区，今日只跳过。",
+      "reason": "Power grid theme is not in the provided top leaders today, and stock RPS120 88.91 is acceptable but lacks sector confirmation. With regime blocked, skip.",
       "rps120": 88.91
+    },
+    {
+      "code": "603306",
+      "name": "华懋科技",
+      "reason": "Sector not in top leaders, stock had a recent heavy drop risk, and dist_ma10_pct 14.5% plus dist_ma20_pct 21.8% violate anti-chase rule.",
+      "rps120": 93.43
     }
   ],
   "new_learnings": [
     {
-      "text": "当涨停84家但跌停仍有53家时，指数翻红并不等于可放心开新仓，涨跌停结构比单看指数更能识别“伪强势”环境。",
-      "type": "heuristic",
+      "text": "A positive index mix alone is not enough for new longs; breadth 1.43:1 with 54跌停 still behaves like a blocked tape, so cash is a valid momentum position.",
+      "type": "rule",
       "tags": [
-        "market-regime",
+        "timing",
         "entry-filter",
-        "timing"
+        "market-regime"
       ],
       "evidence_type": "supporting",
       "related_hypothesis": "h013",
-      "mechanism": "高跌停数量说明筹码断裂仍在发生，哪怕热门科技板块很强，非一致性环境下追新仓更容易买在分化尾端。"
+      "mechanism": "When upside participation is only modest and limit-down count stays high, breakouts face higher failure risk even inside hot sectors."
     },
     {
-      "text": "MA距离反追高规则继续有效：今天多只热门科技股被挡在门外，不是因为逻辑差，而是因为离均线太远，回撤风险已经大于胜率优势。",
-      "type": "rule",
+      "text": "The MA-distance anti-chase rule is filtering many of the strongest-looking tech names today, which is exactly its job in euphoric sub-tapes.",
+      "type": "signal",
       "tags": [
         "entry-filter",
         "timing",
@@ -156,22 +174,22 @@
       ],
       "evidence_type": "supporting",
       "related_hypothesis": "h021",
-      "mechanism": "强板块中的强股最容易诱发追涨，但短期远离MA5/MA10后，任何分歧都会先杀估值和拥挤度。"
+      "mechanism": "Extended stocks far above MA5/MA10/MA20 have poor reward-to-risk because support is too distant and mean reversion risk rises sharply."
     },
     {
-      "text": "已获利并完成机械抬止损的持仓，在弱环境里应优先让价格自己决定去留，而不是被单日大阴线吓出局。",
-      "type": "signal",
+      "text": "Raised stops must still be respected after sharp earnings-driven gaps reverse; a winner that collapses double digits in one day should not be given narrative room.",
+      "type": "heuristic",
       "tags": [
         "exit-rule",
-        "timing",
-        "position-sizing"
+        "position-sizing",
+        "timing"
       ],
       "evidence_type": "supporting",
       "related_hypothesis": "h023",
-      "mechanism": "先把止损抬到利润区后，持仓已从进攻仓转为低风险利润保护仓，允许波动但不允许回吐超规则。"
+      "mechanism": "Mechanical stop discipline converts prior open profit into realized capital and prevents a momentum name from turning into a hope trade."
     }
   ],
-  "market_summary": "Breadth 1.36:1偏弱，84涨停/53跌停，2/3主要指数翻红但创业板为绿，科创50大涨3.44%显示资金集中回流硬科技。热板块集中在半导体、消费电子、电子化学品，冷板块在白酒、小金属、基建。Entry regime已明确hard_block：不满足1.5:1新仓门槛且跌停家数过多，今日新仓维持0。IV方面整体情绪偏极度乐观，沪深宽基IV Rank很低，科创50 IV Rank仅11.3%，即使想买也应缩量和只做最强，但当前更优解仍是持币等待。",
+  "market_summary": "Breadth 1.43:1 mildly positive but below the 1.5:1 long-entry gate, with 84涨停/54跌停 showing unstable internals. 2 of 3 major indices are green, but 创业板指 is red while 科创50 surges, pointing to narrow tech leadership rather than clean broad risk-on. Hot sectors are 半导体(+4.1%), 其他家电Ⅱ(+3.92%), 化妆品(+3.82%), 消费电子(+3.65%), 商用车(+3.0%); cold sectors are 白酒Ⅱ(-3.1%), 小金属(-2.58%), 基础建设(-2.08%), 航海装备Ⅱ(-1.8%), 普钢(-1.76%). Position sector alignment: 0/1 positions in top-5 hot sectors. IV context is complacent overall: market-wide avg IV rank 12.4%, with many沪市/科创 proxies below 15%, so even if setup quality is good, fresh sizing should be reduced or skipped. Net: tech leadership is real, but the regime remains blocked for new positions today.",
   "market_sentiment": "neutral",
-  "market_call": "谨慎"
+  "market_call": "观望"
 }

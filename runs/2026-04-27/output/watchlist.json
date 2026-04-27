@@ -2,49 +2,40 @@
   "date": "2026-04-27",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4082.755,
-      "change_pct": 0.07
+      "value": 4083.171,
+      "change_pct": 0.08
     },
     "shenzhen_component": {
-      "value": 14992.92,
-      "change_pct": 0.35
+      "value": 14981.8,
+      "change_pct": 0.28
     },
     "chinext": {
-      "value": 3651.84,
-      "change_pct": -0.43
+      "value": 3645.38,
+      "change_pct": -0.61
     },
     "sentiment": "neutral",
     "hot_sectors": [
       "半导体",
+      "其他家电Ⅱ",
       "化妆品",
       "消费电子",
-      "其他家电Ⅱ",
-      "电子化学品Ⅱ"
+      "商用车"
     ],
     "cold_sectors": [
       "白酒Ⅱ",
       "小金属",
-      "航海装备Ⅱ",
       "基础建设",
-      "航天装备Ⅱ"
+      "航海装备Ⅱ",
+      "普钢"
     ],
-    "notes": "Breadth 1.36:1偏弱，84涨停/53跌停，2/3主要指数翻红但创业板为绿，科创50大涨3.44%显示资金集中回流硬科技。热板块集中在半导体、消费电子、电子化学品，冷板块在白酒、小金属、基建。Entry regime已明确hard_block：不满足1.5:1新仓门槛且跌停家数过多，今日新仓维持0。IV方面整体情绪偏极度乐观，沪深宽基IV Rank很低，科创50 IV Rank仅11.3%，即使想买也应缩量和只做最强，但当前更优解仍是持币等待。"
+    "notes": "Breadth 1.43:1 mildly positive but below the 1.5:1 long-entry gate, with 84涨停/54跌停 showing unstable internals. 2 of 3 major indices are green, but 创业板指 is red while 科创50 surges, pointing to narrow tech leadership rather than clean broad risk-on. Hot sectors are 半导体(+4.1%), 其他家电Ⅱ(+3.92%), 化妆品(+3.82%), 消费电子(+3.65%), 商用车(+3.0%); cold sectors are 白酒Ⅱ(-3.1%), 小金属(-2.58%), 基础建设(-2.08%), 航海装备Ⅱ(-1.8%), 普钢(-1.76%). Position sector alignment: 0/1 positions in top-5 hot sectors. IV context is complacent overall: market-wide avg IV rank 12.4%, with many沪市/科创 proxies below 15%, so even if setup quality is good, fresh sizing should be reduced or skipped. Net: tech leadership is real, but the regime remains blocked for new positions today."
   },
   "strategy_scan": {
     "total_stocks_scanned": 39,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-04-27T13:58:04.072357+08:00"
+    "scan_time": "2026-04-27T14:38:04.001137+08:00"
   },
   "recommendations": [
-    {
-      "code": "002246.SZ",
-      "name": "北化股份",
-      "price": null,
-      "rps120": 90.23,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
     {
       "code": "002812.SZ",
       "name": "恩捷股份",
@@ -59,6 +50,33 @@
       "name": "华峰测控",
       "price": null,
       "rps120": 90.95,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "002246.SZ",
+      "name": "北化股份",
+      "price": null,
+      "rps120": 90.23,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600499.SH",
+      "name": "科达制造",
+      "price": null,
+      "rps120": 89.74,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "601208.SH",
+      "name": "东材科技",
+      "price": null,
+      "rps120": 91.42,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -82,19 +100,19 @@
       "reasoning": ""
     },
     {
-      "code": "688150.SH",
-      "name": "莱特光电",
+      "code": "300236.SZ",
+      "name": "上海新阳",
       "price": null,
-      "rps120": 93.31,
+      "rps120": 88.95,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "300236.SZ",
-      "name": "上海新阳",
+      "code": "688150.SH",
+      "name": "莱特光电",
       "price": null,
-      "rps120": 88.95,
+      "rps120": 93.31,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -125,14 +143,23 @@
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
+    },
+    {
+      "code": "603306.SH",
+      "name": "华懋科技",
+      "price": null,
+      "rps120": 93.43,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
     }
   ],
   "summary": {
     "total_scanned": 39,
     "buy_recommendations": 0,
-    "watch_recommendations": 10,
+    "watch_recommendations": 13,
     "avoid_recommendations": 0,
-    "market_call": "谨慎",
-    "reasoning": "Breadth 1.36:1偏弱，84涨停/53跌停，2/3主要指数翻红但创业板为绿，科创50大涨3.44%显示资金集中回流硬科技。热板块集中在半导体、消费电子、电子化学品，冷板块在白酒、小金属、基建。Entry regime已明确hard_block：不满足1.5:1新仓门槛且跌停家数过多，今日新仓维持0。IV方面整体情绪偏极度乐观，沪深宽基IV Rank很低，科创50 IV Rank仅11.3%，即使想买也应缩量和只做最强，但当前更优解仍是持币等待。"
+    "market_call": "观望",
+    "reasoning": "Breadth 1.43:1 mildly positive but below the 1.5:1 long-entry gate, with 84涨停/54跌停 showing unstable internals. 2 of 3 major indices are green, but 创业板指 is red while 科创50 surges, pointing to narrow tech leadership rather than clean broad risk-on. Hot sectors are 半导体(+4.1%), 其他家电Ⅱ(+3.92%), 化妆品(+3.82%), 消费电子(+3.65%), 商用车(+3.0%); cold sectors are 白酒Ⅱ(-3.1%), 小金属(-2.58%), 基础建设(-2.08%), 航海装备Ⅱ(-1.8%), 普钢(-1.76%). Position sector alignment: 0/1 positions in top-5 hot sectors. IV context is complacent overall: market-wide avg IV rank 12.4%, with many沪市/科创 proxies below 15%, so even if setup quality is good, fresh sizing should be reduced or skipped. Net: tech leadership is real, but the regime remains blocked for new positions today."
   }
 }

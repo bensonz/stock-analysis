@@ -4,18 +4,18 @@
 
 | 指数 | 收盘 | 涨跌幅 |
 |------|------|--------|
-| 上证指数 | 4082.76 | +0.07% |
-| 深证成指 | 14992.92 | +0.35% |
-| 创业板指 | 3651.84 | -0.43% |
-| 科创50 | 1503.76 | +3.44% |
+| 上证指数 | 4083.17 | +0.08% |
+| 深证成指 | 14981.80 | +0.28% |
+| 创业板指 | 3645.38 | -0.61% |
+| 科创50 | 1506.39 | +3.63% |
 
-涨跌比: 3104涨 / 2278跌 / 5498总
+涨跌比: 3178涨 / 2222跌 / 5495总
 
-**热门板块**: 半导体(+4.23%), 化妆品(+3.81%), 消费电子(+3.77%), 其他家电Ⅱ(+3.48%), 电子化学品Ⅱ(+3.26%)
+**热门板块**: 半导体(+4.10%), 其他家电Ⅱ(+3.92%), 化妆品(+3.82%), 消费电子(+3.65%), 商用车(+3.00%)
 
-**冷门板块**: 白酒Ⅱ(-3.05%), 小金属(-2.16%), 航海装备Ⅱ(-2.14%), 基础建设(-1.90%), 航天装备Ⅱ(-1.69%)
+**冷门板块**: 白酒Ⅱ(-3.10%), 小金属(-2.58%), 基础建设(-2.08%), 航海装备Ⅱ(-1.80%), 普钢(-1.76%)
 
-Breadth 1.36:1偏弱，84涨停/53跌停，2/3主要指数翻红但创业板为绿，科创50大涨3.44%显示资金集中回流硬科技。热板块集中在半导体、消费电子、电子化学品，冷板块在白酒、小金属、基建。Entry regime已明确hard_block：不满足1.5:1新仓门槛且跌停家数过多，今日新仓维持0。IV方面整体情绪偏极度乐观，沪深宽基IV Rank很低，科创50 IV Rank仅11.3%，即使想买也应缩量和只做最强，但当前更优解仍是持币等待。
+Breadth 1.43:1 mildly positive but below the 1.5:1 long-entry gate, with 84涨停/54跌停 showing unstable internals. 2 of 3 major indices are green, but 创业板指 is red while 科创50 surges, pointing to narrow tech leadership rather than clean broad risk-on. Hot sectors are 半导体(+4.1%), 其他家电Ⅱ(+3.92%), 化妆品(+3.82%), 消费电子(+3.65%), 商用车(+3.0%); cold sectors are 白酒Ⅱ(-3.1%), 小金属(-2.58%), 基础建设(-2.08%), 航海装备Ⅱ(-1.8%), 普钢(-1.76%). Position sector alignment: 0/1 positions in top-5 hot sectors. IV context is complacent overall: market-wide avg IV rank 12.4%, with many沪市/科创 proxies below 15%, so even if setup quality is good, fresh sizing should be reduced or skipped. Net: tech leadership is real, but the regime remains blocked for new positions today.
 
 ## 策略池扫描
 
@@ -24,23 +24,26 @@ Breadth 1.36:1偏弱，84涨停/53跌停，2/3主要指数翻红但创业板为�
 
 ## 跳过标的
 
-1. **北化股份** (002246) (RPS 90.23%) — 化学制品方向基本面与涨价逻辑尚可，RPS120 90.23、MA距离合规、VCP为SETUP，但市场开仓门槛未过：breadth仅1.36:1且跌停53家，entry_regime明确hard_block，今天不新开仓。
-2. **恩捷股份** (002812) (RPS 93.33%) — 电池方向有业绩与研报催化，RPS120 93.33处于可放宽区间，MA距离合规，VCP为SETUP；但今日新开仓被市场环境否决，breadth 1.36:1且53家跌停，不满足1.5:1最低门槛。
-3. **华峰测控** (688200) (RPS 90.95%) — 半导体是今日最强板块，基本面和机构资金认可度高，RPS120 90.95、MA距离合规、0风险；但科创板IV Rank 11.3%意味着新仓应半仓，而更关键的是entry_regime hard_block，今天只保留为候选不执行。
-4. **兴福电子** (688545) (RPS 91.38%) — 所属电子化学品Ⅱ为今日热板块，但dist_ma10_pct 9.5%超过8%上限，触发硬性反追高规则；即使市场允许开仓也应跳过。
-5. **广合科技** (001389) (RPS 90.99%) — PCB/元件方向强，成长性突出，但dist_ma10_pct 10.3%超过8%上限，且有日级别超买提示；属于强势但过度延伸，不能追。
-6. **莱特光电** (688150) (RPS 93.31%) — 电子化学品Ⅱ为热板块且催化新，但dist_ma10_pct 11.5%、dist_ma20_pct 21.7%，严重超出反追高阈值，纯追涨风险过高。
-7. **上海新阳** (300236) (RPS 88.95%) — 电子化学品Ⅱ板块强，但dist_ma5_pct 9.3%和dist_ma10_pct 11.7%均超阈值，形态过热；等待回踩均线再看。
-8. **华锡有色** (600301) (RPS 92.84%) — 所属小金属位列今日底部板块，Sector First直接否决；即使个股RPS120 92.84且MA位置不差，冷板块内不做新多。
-9. **鄂尔多斯** (600295) (RPS 92.38%) — 资源链非今日主线，且钢铁/小金属相关风格明显弱于科技成长；在板块轮动不利时，不因个股RPS120 92.38而逆势开仓。
-10. **望变电气** (603191) (RPS 88.91%) — 电网设备不是今日前五主升板块，且RPS120 88.91虽合格但缺乏当下最强主线加持；弱于科技热区，今日只跳过。
+1. **恩捷股份** (002812) (RPS 93.33%) — Battery catalyst is real and fresh with profit growth and board strength, but entry regime hard-blocks new longs; additionally sector is not in provided top-5 sector leaders today, so skip despite valid setup.
+2. **华峰测控** (688200) (RPS 90.95%) — Semiconductor sector is hot and stock quality is good, but board-specific IV proxy is only 11.3% so sizing would be halved, and the market entry gate is hard-blocked. Candidate is acceptable on MA distance but no new position under current regime.
+3. **北化股份** (002246) (RPS 90.23%) — RPS and MA distances are acceptable and catalyst is fresh, but sector is not in the provided top leaders and entry regime blocks fresh longs. VCP is only SETUP, not enough to override regime.
+4. **科达制造** (600499) (RPS 89.74%) — Earnings catalyst is strong, but RPS120 89.74 sits in range while sector is not among today's top leaders and new long gate is blocked. Also沪市IV proxy is near 0%, which would force half sizing even if regime improved.
+5. **东材科技** (601208) (RPS 91.42%) — Trend and earnings are strong, but dist_ma10_pct 8.6% breaches the anti-chase rule and new longs are blocked by regime.
+6. **兴福电子** (688545) (RPS 91.38%) — Semiconductor materials theme is hot, but dist_ma10_pct 9.5% fails the non-negotiable MA-distance chase filter; entry regime also blocks new longs.
+7. **广合科技** (001389) (RPS 90.99%) — Strong PCB/AI hardware trend and fresh high, but dist_ma10_pct 10.3% fails anti-chase rule. No new position.
+8. **上海新阳** (300236) (RPS 88.95%) — Semiconductor material trend is constructive, but dist_ma5_pct 9.3% and dist_ma10_pct 11.7% both violate anti-chase limits.
+9. **莱特光电** (688150) (RPS 93.31%) — Electronic chemicals trend is up and catalyst exists, but dist_ma10_pct 11.5% and dist_ma20_pct 21.7% are far too extended for a fresh entry.
+10. **华锡有色** (600301) (RPS 92.84%) — Sector 小金属 is in the bottom-5 cold sectors today. Rule 1 says no entry regardless of individual setup.
+11. **鄂尔多斯** (600295) (RPS 92.38%) — Steel-related sector exposure is out of favor and not in top 30% of today's sector leaders; no entry despite acceptable MA position.
+12. **望变电气** (603191) (RPS 88.91%) — Power grid theme is not in the provided top leaders today, and stock RPS120 88.91 is acceptable but lacks sector confirmation. With regime blocked, skip.
+13. **华懋科技** (603306) (RPS 93.43%) — Sector not in top leaders, stock had a recent heavy drop risk, and dist_ma10_pct 14.5% plus dist_ma20_pct 21.8% violate anti-chase rule.
 
 ## 今日研究结论
 
 - 新开仓: 0只
-- 跳过: 10只
+- 跳过: 13只
 
 ### 新教训
-- {'text': '当涨停84家但跌停仍有53家时，指数翻红并不等于可放心开新仓，涨跌停结构比单看指数更能识别“伪强势”环境。', 'type': 'heuristic', 'tags': ['market-regime', 'entry-filter', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h013', 'mechanism': '高跌停数量说明筹码断裂仍在发生，哪怕热门科技板块很强，非一致性环境下追新仓更容易买在分化尾端。'}
-- {'text': 'MA距离反追高规则继续有效：今天多只热门科技股被挡在门外，不是因为逻辑差，而是因为离均线太远，回撤风险已经大于胜率优势。', 'type': 'rule', 'tags': ['entry-filter', 'timing', 'sector'], 'evidence_type': 'supporting', 'related_hypothesis': 'h021', 'mechanism': '强板块中的强股最容易诱发追涨，但短期远离MA5/MA10后，任何分歧都会先杀估值和拥挤度。'}
-- {'text': '已获利并完成机械抬止损的持仓，在弱环境里应优先让价格自己决定去留，而不是被单日大阴线吓出局。', 'type': 'signal', 'tags': ['exit-rule', 'timing', 'position-sizing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h023', 'mechanism': '先把止损抬到利润区后，持仓已从进攻仓转为低风险利润保护仓，允许波动但不允许回吐超规则。'}
+- {'text': 'A positive index mix alone is not enough for new longs; breadth 1.43:1 with 54跌停 still behaves like a blocked tape, so cash is a valid momentum position.', 'type': 'rule', 'tags': ['timing', 'entry-filter', 'market-regime'], 'evidence_type': 'supporting', 'related_hypothesis': 'h013', 'mechanism': 'When upside participation is only modest and limit-down count stays high, breakouts face higher failure risk even inside hot sectors.'}
+- {'text': 'The MA-distance anti-chase rule is filtering many of the strongest-looking tech names today, which is exactly its job in euphoric sub-tapes.', 'type': 'signal', 'tags': ['entry-filter', 'timing', 'sector'], 'evidence_type': 'supporting', 'related_hypothesis': 'h021', 'mechanism': 'Extended stocks far above MA5/MA10/MA20 have poor reward-to-risk because support is too distant and mean reversion risk rises sharply.'}
+- {'text': 'Raised stops must still be respected after sharp earnings-driven gaps reverse; a winner that collapses double digits in one day should not be given narrative room.', 'type': 'heuristic', 'tags': ['exit-rule', 'position-sizing', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h023', 'mechanism': 'Mechanical stop discipline converts prior open profit into realized capital and prevents a momentum name from turning into a hope trade.'}

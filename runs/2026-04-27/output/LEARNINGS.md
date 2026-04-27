@@ -1022,3 +1022,9 @@
 - 当涨停84家但跌停仍有53家时，指数翻红并不等于可放心开新仓，涨跌停结构比单看指数更能识别“伪强势”环境。
 - MA距离反追高规则继续有效：今天多只热门科技股被挡在门外，不是因为逻辑差，而是因为离均线太远，回撤风险已经大于胜率优势。
 - 已获利并完成机械抬止损的持仓，在弱环境里应优先让价格自己决定去留，而不是被单日大阴线吓出局。
+
+### 自动更新 (2026-04-27)
+
+- A positive index mix alone is not enough for new longs; breadth 1.43:1 with 54跌停 still behaves like a blocked tape, so cash is a valid momentum position.
+- The MA-distance anti-chase rule is filtering many of the strongest-looking tech names today, which is exactly its job in euphoric sub-tapes.
+- Raised stops must still be respected after sharp earnings-driven gaps reverse; a winner that collapses double digits in one day should not be given narrative room.

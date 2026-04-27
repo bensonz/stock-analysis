@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-04-27T13:58:04.212379+08:00",
+  "snapshot_time": "2026-04-27T14:38:04.141522+08:00",
   "snapshot_type": "post_run",
   "date": "2026-04-27",
   "portfolio_config": {
@@ -11,130 +11,27 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-04-27T13:58:04.080149+08:00",
+    "lastUpdated": "2026-04-27T14:38:04.005945+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 966373.0,
-      "cash": 947245.0,
-      "investedValue": 19128.0,
-      "unrealizedPnl": 3513.0,
-      "realizedPnl": -37140.0,
-      "totalPnl": -33627.0,
-      "totalReturnPct": -3.36,
-      "positionsUsed": 1,
+      "totalEquity": 965710.0,
+      "cash": 965710.0,
+      "investedValue": 0.0,
+      "unrealizedPnl": 0.0,
+      "realizedPnl": -34290.0,
+      "totalPnl": -34290.0,
+      "totalReturnPct": -3.43,
+      "positionsUsed": 0,
       "positionsMax": 10,
-      "cashPct": 98.02,
-      "dayPnl": -2562.0,
+      "cashPct": 100.0,
+      "dayPnl": 0.0,
       "minCashPct": 20,
-      "minCashValue": 193274.6,
-      "deployableCash": 753970.4
+      "minCashValue": 193142.0,
+      "deployableCash": 772568.0
     },
-    "activePositions": [
-      {
-        "code": "301003",
-        "name": "江苏博云",
-        "entryDate": "2026-04-20",
-        "entryPrice": 52.05,
-        "currentPrice": 63.76,
-        "pnl_pct": 22.5,
-        "stopLoss": 48.4,
-        "currentStop": 57.26,
-        "targetPrice": 58.0,
-        "status": "active",
-        "sector": "塑料",
-        "shares": 300,
-        "allocation_pct": 2.25,
-        "allocatedCapital": 15615.0,
-        "currentValue": 19128.0,
-        "unrealizedPnl": 3513.0,
-        "volume": 130156,
-        "mavol30": 27086.13,
-        "volumeBelowMavol30": false,
-        "weight_pct": 1.98
-      }
-    ]
+    "activePositions": []
   },
-  "active_positions": {
-    "301003": {
-      "code": "301003",
-      "name": "江苏博云",
-      "status": "active",
-      "thesis": "塑料方向趋势延续，价格紧贴均线且有VCP SETUP，属于可执行的小仓位趋势单。",
-      "entryDate": "2026-04-20",
-      "entryPrice": 52.05,
-      "targetPrice": 58.0,
-      "stopLoss": 48.4,
-      "currentStop": 57.26,
-      "allocation_pct": 2.25,
-      "shares": 300,
-      "allocatedCapital": 15615.0,
-      "rating": 2,
-      "rps120": 87.81,
-      "sector": "塑料",
-      "catalysts": [],
-      "sourceWatchlist": "2026-04-20",
-      "history": [
-        {
-          "date": "2026-04-20",
-          "price": 52.05,
-          "change_pct": 0,
-          "action": "OPEN",
-          "note": "LLM开仓 江苏博云"
-        },
-        {
-          "date": "2026-04-20",
-          "price": 51.96,
-          "change_pct": -0.17,
-          "action": "HOLD",
-          "note": "当前51.96较入场52.05小幅亏损-0.17%，尚未触发-3%首三日或-5%硬止损；塑料方向在个股资料中显示4月以来持续走强，MA距离健康且有VCP SETUP，但成交量低于MAVOL30，不能加仓。若明后日跌破50.49附近即达到-3%首三日纪律，应立即卖出。"
-        },
-        {
-          "date": "2026-04-21",
-          "price": 52.1,
-          "change_pct": 0.1,
-          "action": "HOLD",
-          "note": "首日持仓基本持平，未触发-3%前三日止损或-5%硬止损；塑料方向有相对趋势但不在今日前五热点，量能仅为MAVOL30的44.5%，只可观察不可加仓。"
-        },
-        {
-          "date": "2026-04-22",
-          "price": 63.48,
-          "change_pct": 21.96,
-          "action": "RAISE_STOP",
-          "note": "当前价63.48较入场52.05浮盈约21.96%，已超过+20%规则，必须将止损抬至入场价上方+10%即57.26附近。今日20.00%大涨且成交量71643高于MAVOL30的27086，动量确认强；但所属塑料不在今日前五热点，且VCP驱动仓位已快速兑现，后续按抬升止损让赢家奔跑。"
-        },
-        {
-          "date": "2026-04-23",
-          "price": 62.53,
-          "change_pct": 20.13,
-          "action": "HOLD",
-          "note": "Price 62.53 remains far above entry 52.05 with +20.13% unrealized gain and above raised stop 57.26. However sector 塑料 is not in today's top-5 hot sectors and broad tape is panic, so hold only with existing +10% profit stop; do not add. Volume is above MAVOL30, so no immediate momentum-volume failure."
-        },
-        {
-          "date": "2026-04-24",
-          "price": 64.8,
-          "change_pct": 24.5,
-          "action": "HOLD",
-          "note": "Current price 64.8 remains well above entry 52.05 (+24.50%) and above raised stop 57.26; winner is intact and no sell rule is triggered. Sector 塑料 is not in today's top 5 hot sectors, so hold only with existing trailing discipline and do not add."
-        },
-        {
-          "date": "2026-04-27",
-          "price": 63.76,
-          "change_pct": 22.5,
-          "action": "HOLD",
-          "note": "当前价63.76仍高于抬升止损57.26，持仓浮盈仍在；所属塑料行业有趋势延续证据，且不在今日冷板块底部名单。虽然今日下跌11.81%且一季报显示营收同比-15.19%、归母净利润同比-44.53%，但未跌破已抬高止损，按规则继续持有并严格执行57.26止损。"
-        }
-      ],
-      "exitDate": null,
-      "exitPrice": null,
-      "exitReason": null,
-      "returnPct": null,
-      "holdingDays": null,
-      "lessonLearned": null,
-      "createdAt": "2026-04-20T11:44:00.029416+08:00",
-      "updatedAt": "2026-04-27T13:58:04.065341+08:00",
-      "trackerVersion": "2.1"
-    }
-  },
+  "active_positions": {},
   "closed_positions": {
     "002046": {
       "code": "002046",
@@ -212,6 +109,19 @@
       "returnPct": -6.77,
       "holdingDays": 27,
       "sector": "散热材料",
+      "lessonLearned": ""
+    },
+    "301003": {
+      "code": "301003",
+      "name": "江苏博云",
+      "status": "closed",
+      "entryDate": "2026-04-20",
+      "exitDate": "2026-04-27",
+      "entryPrice": 52.05,
+      "exitPrice": 61.55,
+      "returnPct": 18.25,
+      "holdingDays": 7,
+      "sector": "塑料",
       "lessonLearned": ""
     },
     "600096": {
