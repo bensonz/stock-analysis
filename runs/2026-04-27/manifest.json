@@ -2,7 +2,7 @@
   "date": "2026-04-27",
   "status": "degraded",
   "exit_code": 0,
-  "total_duration_sec": 88.3,
+  "total_duration_sec": 81.5,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -10,11 +10,11 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 259.0
+          "latency_ms": 197.5
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 570.6
+          "latency_ms": 510.6
         },
         "eastmoney": {
           "status": "down",
@@ -29,16 +29,16 @@
     },
     "collect": {
       "status": "ok",
-      "duration_sec": 13.8,
+      "duration_sec": 11.9,
       "errors": []
     },
     "llm_analysis": {
       "status": "ok",
-      "duration_sec": 74.4
+      "duration_sec": 69.4
     },
     "apply": {
       "status": "ok",
-      "duration_sec": 0.1
+      "duration_sec": 0.2
     },
     "validate": {
       "status": "ok",

@@ -1,0 +1,36 @@
+{
+  "date": "2026-04-28",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 965710.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.43,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -34290.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.4366,
+    "up": 1638,
+    "down": 3752,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 55,
+    "limit_downs": 43,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.44:1, 0/3 major indices green, 55 limit-ups / 43 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 0.44:1 bearish, 55涨停/43跌停, broad-based selloff with all 3 major indices red. Hot sectors today are 航海装备Ⅱ(+6.55%), 医疗服务(+4.7%), 综合Ⅱ(+3.05%), 玻璃玻纤(+2.8%), 工程机械(+2.47%); cold sectors are 农业综合Ⅱ(-3.22%), 电视广播Ⅱ(-3.16%), 旅游及景区(-2.64%), 家电零部件Ⅱ(-2.6%), 数字媒体(-2.43%). Research check suggests hot pockets are being driven by shipbuilding/出海制造景气、医疗服务活跃、以及工程机械更新与基建逻辑, but the broader tape is still panic. IV context is mostly low to neutral, with several沪市 proxies below 15% IV Rank, which would cut sizing on future entries but is irrelevant today because entry regime hard-blocks new longs."
+  }
+}
