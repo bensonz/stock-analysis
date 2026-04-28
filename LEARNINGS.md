@@ -1034,3 +1034,10 @@
 - When breadth collapses below 1:1 and all three major indices are red, the correct momentum action is to keep cash even if several candidates pass RPS and MA filters.
 - The MA-distance anti-chase rule is still doing useful work today: several visually strong names like 莱特光电、上海新阳、华懋科技、杰普特 fail on extension rather than on thesis quality.
 - Low-IV conditions on many沪深主板 proxies should not force buying; instead they argue for smaller future sizing once breadth improves, while today’s hard regime block remains dominant.
+
+### 自动更新 (2026-04-28)
+
+- When breadth collapses below 1:1 and all three major indices are red, the correct V2 action is zero new positions even if several candidates have valid RPS and clean MA structure.
+- The anti-chase MA-distance rule is actively filtering many visually attractive names today, especially in electronics and equipment.
+- Today’s strength is concentrated in defensive or isolated pockets like medical services and coal rather than broad risk-on leadership, so sector heat is not broad enough to override regime weakness.
+- Low IV is not a buy signal by itself; several沪市 candidates would have required half-size due to IV Rank below 15%, but the real blocker today is market regime, not volatility pricing.

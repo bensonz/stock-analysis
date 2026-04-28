@@ -499,11 +499,15 @@
           {
             "date": "2026-04-28",
             "detail": "When breadth collapses below 1:1 and all three major indices are red, the correct momentum action is to keep cash even if several candidates pass RPS and MA filters."
+          },
+          {
+            "date": "2026-04-28",
+            "detail": "When breadth collapses below 1:1 and all three major indices are red, the correct V2 action is zero new positions even if several candidates have valid RPS and clean MA structure."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 41,
+      "sampleSize": 42,
       "hitRate": 1.0,
       "confidence": 0.977,
       "tags": [],
@@ -654,13 +658,17 @@
           {
             "date": "2026-04-28",
             "detail": "Low-IV conditions on many沪深主板 proxies should not force buying; instead they argue for smaller future sizing once breadth improves, while today’s hard regime block remains dominant."
+          },
+          {
+            "date": "2026-04-28",
+            "detail": "Low IV is not a buy signal by itself; several沪市 candidates would have required half-size due to IV Rank below 15%, but the real blocker today is market regime, not volatility pricing."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 14,
+      "sampleSize": 15,
       "hitRate": 1.0,
-      "confidence": 0.938,
+      "confidence": 0.941,
       "tags": [
         "timing",
         "position-sizing",
@@ -828,13 +836,17 @@
           {
             "date": "2026-04-28",
             "detail": "The MA-distance anti-chase rule is still doing useful work today: several visually strong names like 莱特光电、上海新阳、华懋科技、杰普特 fail on extension rather than on thesis quality."
+          },
+          {
+            "date": "2026-04-28",
+            "detail": "The anti-chase MA-distance rule is actively filtering many visually attractive names today, especially in electronics and equipment."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 14,
+      "sampleSize": 15,
       "hitRate": 1.0,
-      "confidence": 0.938,
+      "confidence": 0.941,
       "tags": [
         "entry-filter",
         "timing"
@@ -1103,22 +1115,26 @@
       "id": "h028",
       "text": "Today’s relative leaders are concentrated in communication equipment and adjacent tech hardware, while cyclicals/agri/resource laggards are being de-risked aggressively.",
       "type": "observation",
-      "status": "observation",
+      "status": "hypothesis",
       "created": "2026-04-06",
-      "lastTested": "2026-04-06",
+      "lastTested": "2026-04-28",
       "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally.",
       "evidence": {
         "supporting": [
           {
             "date": "2026-04-06",
             "detail": "Today’s relative leaders are concentrated in communication equipment and adjacent tech hardware, while cyclicals/agri/resource laggards are being de-risked aggressively."
+          },
+          {
+            "date": "2026-04-28",
+            "detail": "Today’s strength is concentrated in defensive or isolated pockets like medical services and coal rather than broad risk-on leadership, so sector heat is not broad enough to override regime weakness."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 1,
+      "sampleSize": 2,
       "hitRate": 1.0,
-      "confidence": 0.6,
+      "confidence": 0.75,
       "tags": [
         "sector",
         "timing"

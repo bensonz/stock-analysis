@@ -2,54 +2,54 @@
   "date": "2026-04-28",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4083.472,
-      "change_pct": -0.07
+      "value": 4067.517,
+      "change_pct": -0.46
     },
     "shenzhen_component": {
-      "value": 14934.83,
-      "change_pct": -0.41
+      "value": 14779.88,
+      "change_pct": -1.44
     },
     "chinext": {
-      "value": 3629.17,
-      "change_pct": -0.54
+      "value": 3582.6,
+      "change_pct": -1.81
     },
     "sentiment": "bearish",
     "hot_sectors": [
       "航海装备Ⅱ",
       "医疗服务",
-      "综合Ⅱ",
-      "玻璃玻纤",
+      "林业Ⅱ",
+      "煤炭开采",
       "工程机械"
     ],
     "cold_sectors": [
-      "农业综合Ⅱ",
       "电视广播Ⅱ",
-      "旅游及景区",
       "家电零部件Ⅱ",
-      "数字媒体"
+      "航天装备Ⅱ",
+      "数字媒体",
+      "农业综合Ⅱ"
     ],
-    "notes": "Breadth 0.44:1 bearish, 55涨停/43跌停, broad-based selloff with all 3 major indices red. Hot sectors today are 航海装备Ⅱ(+6.55%), 医疗服务(+4.7%), 综合Ⅱ(+3.05%), 玻璃玻纤(+2.8%), 工程机械(+2.47%); cold sectors are 农业综合Ⅱ(-3.22%), 电视广播Ⅱ(-3.16%), 旅游及景区(-2.64%), 家电零部件Ⅱ(-2.6%), 数字媒体(-2.43%). Research check suggests hot pockets are being driven by shipbuilding/出海制造景气、医疗服务活跃、以及工程机械更新与基建逻辑, but the broader tape is still panic. IV context is mostly low to neutral, with several沪市 proxies below 15% IV Rank, which would cut sizing on future entries but is irrelevant today because entry regime hard-blocks new longs."
+    "notes": "Breadth 0.36:1 bearish, 74涨停/57跌停, all major indices red (上证-0.46%, 深成指-1.44%, 创业板-1.81%) and entry_regime is explicit panic/hard block. Hot sectors (top 5): 航海装备Ⅱ +5.56%, 医疗服务 +4.61%, 林业Ⅱ +3.95%, 煤炭开采 +2.87%, 工程机械 +2.82%. Cold sectors (bottom 5): 电视广播Ⅱ -4.02%, 家电零部件Ⅱ -3.68%, 航天装备Ⅱ -3.54%, 数字媒体 -3.39%, 农业综合Ⅱ -3.33%. Position sector alignment: 0/0 positions in hot sectors. IV context is mostly low-to-neutral; broad-market proxies like 300ETF/500ETF remain very low IV, but that only affects sizing after the buy gate clears. Today it does not clear."
   },
   "strategy_scan": {
     "total_stocks_scanned": 38,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-04-28T11:46:42.470218+08:00"
+    "scan_time": "2026-04-28T14:37:29.521785+08:00"
   },
   "recommendations": [
-    {
-      "code": "002246.SZ",
-      "name": "北化股份",
-      "price": null,
-      "rps120": 90.23,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
     {
       "code": "002812.SZ",
       "name": "恩捷股份",
       "price": null,
       "rps120": 93.33,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "002246.SZ",
+      "name": "北化股份",
+      "price": null,
+      "rps120": 90.23,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -73,28 +73,10 @@
       "reasoning": ""
     },
     {
-      "code": "601208.SH",
-      "name": "东材科技",
-      "price": null,
-      "rps120": 91.42,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
       "code": "600295.SH",
       "name": "鄂尔多斯",
       "price": null,
       "rps120": 92.38,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "600301.SH",
-      "name": "华锡有色",
-      "price": null,
-      "rps120": 92.84,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -118,6 +100,15 @@
       "reasoning": ""
     },
     {
+      "code": "601208.SH",
+      "name": "东材科技",
+      "price": null,
+      "rps120": 91.42,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
       "code": "688150.SH",
       "name": "莱特光电",
       "price": null,
@@ -136,19 +127,19 @@
       "reasoning": ""
     },
     {
-      "code": "603306.SH",
-      "name": "华懋科技",
+      "code": "688025.SH",
+      "name": "杰普特",
       "price": null,
-      "rps120": 93.43,
+      "rps120": 88.13,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "688025.SH",
-      "name": "杰普特",
+      "code": "603306.SH",
+      "name": "华懋科技",
       "price": null,
-      "rps120": 88.13,
+      "rps120": 93.43,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -166,9 +157,9 @@
   "summary": {
     "total_scanned": 38,
     "buy_recommendations": 0,
-    "watch_recommendations": 14,
+    "watch_recommendations": 13,
     "avoid_recommendations": 0,
     "market_call": "观望",
-    "reasoning": "Breadth 0.44:1 bearish, 55涨停/43跌停, broad-based selloff with all 3 major indices red. Hot sectors today are 航海装备Ⅱ(+6.55%), 医疗服务(+4.7%), 综合Ⅱ(+3.05%), 玻璃玻纤(+2.8%), 工程机械(+2.47%); cold sectors are 农业综合Ⅱ(-3.22%), 电视广播Ⅱ(-3.16%), 旅游及景区(-2.64%), 家电零部件Ⅱ(-2.6%), 数字媒体(-2.43%). Research check suggests hot pockets are being driven by shipbuilding/出海制造景气、医疗服务活跃、以及工程机械更新与基建逻辑, but the broader tape is still panic. IV context is mostly low to neutral, with several沪市 proxies below 15% IV Rank, which would cut sizing on future entries but is irrelevant today because entry regime hard-blocks new longs."
+    "reasoning": "Breadth 0.36:1 bearish, 74涨停/57跌停, all major indices red (上证-0.46%, 深成指-1.44%, 创业板-1.81%) and entry_regime is explicit panic/hard block. Hot sectors (top 5): 航海装备Ⅱ +5.56%, 医疗服务 +4.61%, 林业Ⅱ +3.95%, 煤炭开采 +2.87%, 工程机械 +2.82%. Cold sectors (bottom 5): 电视广播Ⅱ -4.02%, 家电零部件Ⅱ -3.68%, 航天装备Ⅱ -3.54%, 数字媒体 -3.39%, 农业综合Ⅱ -3.33%. Position sector alignment: 0/0 positions in hot sectors. IV context is mostly low-to-neutral; broad-market proxies like 300ETF/500ETF remain very low IV, but that only affects sizing after the buy gate clears. Today it does not clear."
   }
 }

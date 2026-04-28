@@ -2,90 +2,80 @@
   "provider": "openai",
   "primary_model": "gpt-5.4",
   "decision_source": "GPT primary",
-  "input_tokens": 115585,
-  "output_tokens": 2751,
+  "input_tokens": 111964,
+  "output_tokens": 2869,
   "rounds": 2,
-  "duration_sec": 70.5,
+  "duration_sec": 69.3,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 4000,
-        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+2026-04-28"
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=A%E8%82%A1+%E7%83%AD%E9%97%A8%E6%9D%BF%E5%9D%97+%E4%BB%8A%E6%97%A5+2026-04-28"
       },
-      "result_length": 4000
+      "result_length": 3000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 4000,
-        "url": "https://www.baidu.com/s?wd=航海装备+板块+上涨+原因+2026-04-28"
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=%E8%88%AA%E6%B5%B7%E8%A3%85%E5%A4%87+%E4%BB%8A%E6%97%A5+%E6%B6%A8%E5%81%9C+2026-04-28"
       },
-      "result_length": 4000
+      "result_length": 3000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 4000,
-        "url": "https://www.baidu.com/s?wd=医疗服务+板块+上涨+原因+2026-04-28"
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=%E5%8C%BB%E7%96%97%E6%9C%8D%E5%8A%A1+%E4%BB%8A%E6%97%A5+%E8%A1%8C%E6%83%85+2026-04-28"
       },
-      "result_length": 4000
+      "result_length": 3000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 4000,
-        "url": "https://www.baidu.com/s?wd=工程机械+板块+上涨+原因+2026-04-28"
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=%E5%B7%A5%E7%A8%8B%E6%9C%BA%E6%A2%B0+%E4%BB%8A%E6%97%A5+%E8%A1%8C%E6%83%85+2026-04-28"
       },
-      "result_length": 4000
+      "result_length": 3000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 4000,
-        "url": "https://www.baidu.com/s?wd=A股+市场+大跌+原因+2026-04-28"
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=A%E8%82%A1+%E5%A4%A7%E8%B7%8C+%E5%8E%9F%E5%9B%A0+2026-04-28"
       },
-      "result_length": 2388
+      "result_length": 3000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 4000,
-        "url": "https://www.baidu.com/s?wd=北化股份+硝化棉+涨价+2026-04-28"
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=%E6%81%A9%E6%8D%B7%E8%82%A1%E4%BB%BD+2026%E5%B9%B4%E4%B8%80%E5%AD%A3%E6%8A%A5+2026-04-28"
       },
-      "result_length": 4000
+      "result_length": 3000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 4000,
-        "url": "https://www.baidu.com/s?wd=恩捷股份+2026年一季报+2026-04-28"
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=%E5%8C%97%E5%8C%96%E8%82%A1%E4%BB%BD+%E7%A1%9D%E5%8C%96%E6%A3%89+%E6%B6%A8%E4%BB%B7+2026-04-28"
       },
-      "result_length": 4000
-    },
-    {
-      "pass": "P1",
-      "round": 1,
-      "tool": "web_fetch",
-      "input": {
-        "maxChars": 4000,
-        "url": "https://www.baidu.com/s?wd=华峰测控+2026年一季报+2026-04-28"
-      },
-      "result_length": 4000
+      "result_length": 3000
     }
   ],
   "fallback_used": false

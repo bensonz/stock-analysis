@@ -14,23 +14,23 @@
   "entryRegime": {
     "allow_new_positions": false,
     "regime": "panic",
-    "breadth_ratio": 0.4366,
-    "up": 1638,
-    "down": 3752,
+    "breadth_ratio": 0.3602,
+    "up": 1426,
+    "down": 3959,
     "positive_indices": [],
     "negative_indices": [
       "上证指数",
       "深证成指",
       "创业板指"
     ],
-    "limit_ups": 55,
-    "limit_downs": 43,
+    "limit_ups": 74,
+    "limit_downs": 57,
     "sizing_multiplier": 0.0,
     "hard_block": true,
-    "reason": "Entry regime panic: breadth 0.44:1, 0/3 major indices green, 55 limit-ups / 43 limit-downs. Block new longs."
+    "reason": "Entry regime panic: breadth 0.36:1, 0/3 major indices green, 74 limit-ups / 57 limit-downs. Block new longs."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "Breadth 0.44:1 bearish, 55涨停/43跌停, broad-based selloff with all 3 major indices red. Hot sectors today are 航海装备Ⅱ(+6.55%), 医疗服务(+4.7%), 综合Ⅱ(+3.05%), 玻璃玻纤(+2.8%), 工程机械(+2.47%); cold sectors are 农业综合Ⅱ(-3.22%), 电视广播Ⅱ(-3.16%), 旅游及景区(-2.64%), 家电零部件Ⅱ(-2.6%), 数字媒体(-2.43%). Research check suggests hot pockets are being driven by shipbuilding/出海制造景气、医疗服务活跃、以及工程机械更新与基建逻辑, but the broader tape is still panic. IV context is mostly low to neutral, with several沪市 proxies below 15% IV Rank, which would cut sizing on future entries but is irrelevant today because entry regime hard-blocks new longs."
+    "summary": "Breadth 0.36:1 bearish, 74涨停/57跌停, all major indices red (上证-0.46%, 深成指-1.44%, 创业板-1.81%) and entry_regime is explicit panic/hard block. Hot sectors (top 5): 航海装备Ⅱ +5.56%, 医疗服务 +4.61%, 林业Ⅱ +3.95%, 煤炭开采 +2.87%, 工程机械 +2.82%. Cold sectors (bottom 5): 电视广播Ⅱ -4.02%, 家电零部件Ⅱ -3.68%, 航天装备Ⅱ -3.54%, 数字媒体 -3.39%, 农业综合Ⅱ -3.33%. Position sector alignment: 0/0 positions in hot sectors. IV context is mostly low-to-neutral; broad-market proxies like 300ETF/500ETF remain very low IV, but that only affects sizing after the buy gate clears. Today it does not clear."
   }
 }
