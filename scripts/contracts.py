@@ -512,23 +512,7 @@ def check_source_health(timeout: float = 5.0) -> dict:
     except Exception as e:
         results["cheesefortune"] = {"status": "down", "error": str(e)}
 
-    # 3. AkShare / Eastmoney
-    try:
-        start = time.time()
-        url = "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.000001&fields1=f1&fields2=f51&klt=101&fqt=1&beg=20260101&end=20260101&lmt=1"
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        resp = urllib.request.urlopen(req, timeout=timeout)
-        latency = (time.time() - start) * 1000
-        results["eastmoney"] = {"status": "ok", "latency_ms": round(latency, 1)}
-    except Exception as e:
-        err_str = str(e)
-        # Detect proxy block (Surge/Clash DNS hijack)
-        if "198.18" in err_str or "timed out" in err_str.lower():
-            results["eastmoney"] = {"status": "proxy_blocked", "error": err_str}
-        else:
-            results["eastmoney"] = {"status": "down", "error": err_str}
-
-    # 4. Local pricedb
+    # 3. Local pricedb
     from pathlib import Path
     db_path = Path(__file__).parent.parent / "data" / "pricedb" / "ashare_prices.db"
     if db_path.exists():

@@ -1503,8 +1503,7 @@ def main():
         # Warn if critical sources are all down
         sina_down = health.get("sina", {}).get("status") != "ok"
         cf_down = health.get("cheesefortune", {}).get("status") != "ok"
-        em_down = health.get("eastmoney", {}).get("status") not in ("ok",)
-        if sina_down and cf_down and em_down:
+        if sina_down and cf_down:
             print("  ✗ ALL external data sources are down — pipeline will likely fail", file=sys.stderr)
 
         # Phase 1: Collect
