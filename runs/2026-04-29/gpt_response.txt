@@ -1,0 +1,195 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "小金属",
+        "5d_pct": 7.02,
+        "trend": "accelerating"
+      },
+      {
+        "name": "电池",
+        "5d_pct": 5.13,
+        "trend": "accelerating"
+      },
+      {
+        "name": "酒店餐饮",
+        "5d_pct": 4.88,
+        "trend": "steady"
+      },
+      {
+        "name": "能源金属",
+        "5d_pct": 4.84,
+        "trend": "accelerating"
+      },
+      {
+        "name": "冶钢原料",
+        "5d_pct": 4.27,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "其他家电Ⅱ",
+        "5d_pct": -1.83,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -1.24,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": -0.88,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "股份制银行Ⅱ",
+        "5d_pct": -0.69,
+        "trend": "weak"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": -0.56,
+        "trend": "weak"
+      }
+    ],
+    "position_alignment": "0/0 positions in hot sectors",
+    "regime": "Risk-on broad rally led by resources and battery, but tape is disqualified for fresh longs by hard block: 39跌停 indicates unstable/panic undertone despite strong index breadth"
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "002812",
+      "name": "恩捷股份",
+      "reason": "Sector 电池 is top-tier and catalyst is strong, but entry regime hard-blocks new longs today. Setup itself is valid: rps120 93.33, MA distances acceptable, yet Rule 1 says no new positions when panic filter is triggered.",
+      "rps120": 93.33
+    },
+    {
+      "code": "002246",
+      "name": "北化股份",
+      "reason": "Stock setup is technically valid with rps120 90.23 and tight MA distances, but sector is not confirmed in provided top-sector list and today's hard-block regime means skip rather than force a starter position.",
+      "rps120": 90.23
+    },
+    {
+      "code": "600499",
+      "name": "科达制造",
+      "reason": "Good earnings catalyst and MA structure, but rps120 89.74 sits below stronger leaders and sector 专用设备 is not in the provided top 30% sector winners list. Also new entries are blocked by regime.",
+      "rps120": 89.74
+    },
+    {
+      "code": "600295",
+      "name": "鄂尔多斯",
+      "reason": "Sector 冶钢原料 is hot, but stock lacks fresh breakout-quality momentum versus stronger leaders and new entries are blocked by regime. Better as observation only.",
+      "rps120": 92.38
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "Sector 小金属 is the #1 hot group, but stock-specific news includes intraday weakness in 有色 and recent adjustment risk; with hard-block regime there is no need to force a resource entry.",
+      "rps120": 92.84
+    },
+    {
+      "code": "300677",
+      "name": "英科医疗",
+      "reason": "MA structure is fine and fundamentals improved, but 医疗耗材 is not in the provided hot-sector list, so under sector-first rule it is skip at best today.",
+      "rps120": 93.27
+    },
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "reason": "Strong company and trend, but dist_ma10_pct 10.3% exceeds the no-chasing limit of 8%. Rule 2b disqualifies any new long here.",
+      "rps120": 90.99
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "Fresh earnings catalyst and acceptable MA distances, but board-level IV proxy is low (half sizing), sector leadership is not confirmed by the provided sector table, and today's regime hard-block means no entry.",
+      "rps120": 90.95
+    },
+    {
+      "code": "603191",
+      "name": "望变电气",
+      "reason": "Technically orderly, but rps120 88.91 is only mid-pack and sector 电网设备 is not listed among today's top sector winners. With hard-block regime, skip.",
+      "rps120": 88.91
+    },
+    {
+      "code": "601208",
+      "name": "东材科技",
+      "reason": "Catalyst is strong, but dist_ma10_pct 8.6% exceeds the 8% anti-chase threshold. Rule 2b says wait for pullback.",
+      "rps120": 91.42
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "reason": "电子化学品Ⅱ is in the provided bottom-5 sectors, so under sector-first rule this is no entry regardless of stock quality. It also fails anti-chase with dist_ma5_pct 9.3% and dist_ma10_pct 11.7%.",
+      "rps120": 88.95
+    },
+    {
+      "code": "688150",
+      "name": "莱特光电",
+      "reason": "Sector 电子化学品Ⅱ is in the bottom-5 sectors and the stock is overextended versus MA10/MA20. Cold sector plus anti-chase failure = clear skip.",
+      "rps120": 93.31
+    },
+    {
+      "code": "688025",
+      "name": "杰普特",
+      "reason": "Strong fundamentals, but dist_ma10_pct 11.1% and dist_ma20_pct 18.7% violate the anti-chase rule. No entry.",
+      "rps120": 88.13
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "Semiconductor equipment theme is interesting, but rps120 86.43 is acceptable rather than elite, earnings base is mixed, and regime hard-block removes urgency for a new position.",
+      "rps120": 86.43
+    },
+    {
+      "code": "002539",
+      "name": "云图控股",
+      "reason": "Agrichem/fertilizer catalyst exists, but sector is not in the provided top 30% winners and 亚钾国际 is the cleaner fertilizer expression if the tape were open. Today new entries are blocked anyway.",
+      "rps120": 85.18
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Breadth can be strongly positive and still fail the long-entry gate when跌停数量过多; 39家跌停 is enough to keep cash despite 3.03:1 breadth and 3 major indices green.",
+      "type": "rule",
+      "tags": [
+        "timing",
+        "entry-filter",
+        "market-regime"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "High up/down ratios measure participation, but elevated limit-down counts reveal hidden stress and poor tape quality for fresh momentum entries."
+    },
+    {
+      "text": "The MA-distance anti-chase rule is again doing useful work: several visually strong names such as 广合科技、东材科技、上海新阳、杰普特 are disqualified by overextension, not by weak narratives.",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "Momentum names with excessive distance from MA5/MA10/MA20 have poor reward-to-risk because support is too far away and pullback probability rises."
+    },
+    {
+      "text": "Today the best-looking candidates are in 电池 and resource-related groups, confirming that sector leadership matters more than low valuation or headline quality alone.",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "",
+      "mechanism": "When capital crowds into a small set of sectors, even good stocks outside those leadership groups struggle to attract follow-through."
+    }
+  ],
+  "market_summary": "Breadth 3.03:1 bullish on the surface, 119涨停/39跌停, with 上证+0.71%、深成指+1.98%、创业板指+2.50% all green. Hot sectors are 小金属(+7.02%), 电池(+5.13%), 酒店餐饮(+4.88%), 能源金属(+4.84%), 冶钢原料(+4.27%); cold sectors include 其他家电Ⅱ(-1.83%) and 电子化学品Ⅱ(-0.88%). Sector leadership is concentrated in resources and battery, while some tech subgroups lag. IV context is complacent to low across major proxies; several Shanghai/STAR candidates would require half sizing, but entry_regime hard-blocks all new longs today because limit-down count is too high.",
+  "market_sentiment": "mixed",
+  "market_call": "观望"
+}

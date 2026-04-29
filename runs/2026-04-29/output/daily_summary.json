@@ -1,0 +1,36 @@
+{
+  "date": "2026-04-29",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 965710.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.43,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -34290.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 3.0307,
+    "up": 4046,
+    "down": 1335,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 119,
+    "limit_downs": 39,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 3.03:1, 3/3 major indices green, 119 limit-ups / 39 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 3.03:1 bullish on the surface, 119涨停/39跌停, with 上证+0.71%、深成指+1.98%、创业板指+2.50% all green. Hot sectors are 小金属(+7.02%), 电池(+5.13%), 酒店餐饮(+4.88%), 能源金属(+4.84%), 冶钢原料(+4.27%); cold sectors include 其他家电Ⅱ(-1.83%) and 电子化学品Ⅱ(-0.88%). Sector leadership is concentrated in resources and battery, while some tech subgroups lag. IV context is complacent to low across major proxies; several Shanghai/STAR candidates would require half sizing, but entry_regime hard-blocks all new longs today because limit-down count is too high."
+  }
+}
