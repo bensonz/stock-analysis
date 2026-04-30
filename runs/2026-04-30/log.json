@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1777520116.284223,
+      "start": 1777531303.577457,
       "errors": [],
-      "end": 1777520129.447695,
-      "duration_sec": 13.2
+      "end": 1777531314.680782,
+      "duration_sec": 11.1
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 4832,
+      "response_size_bytes": 5049,
       "tokens": {
-        "input_tokens": 92963,
-        "output_tokens": 2767
+        "input_tokens": 93978,
+        "output_tokens": 2755
       },
       "rounds": 2,
-      "tool_calls_count": 6,
-      "duration_sec": 68.9,
+      "tool_calls_count": 8,
+      "duration_sec": 68.2,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "GPT primary",
@@ -25,23 +25,23 @@
     },
     {
       "phase": "apply",
-      "start": 1777520198.399814,
+      "start": 1777531382.9844632,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=44",
-        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=17",
-        "Hypothesis: Updated h017 (rule): +1 supporting evidence → hitRate=100%, n=16",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=45",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=18",
+        "Hypothesis: Created h035 (observation): 半导体今天是最明确主线，但主线内也要区分‘业绩兑现+位置健康’与‘故事好但数据冲突’；同属半导体，华峰测控优于芯源微。...",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1777520198.5691159,
+      "end": 1777531383.1580071,
       "duration_sec": 0.2
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 82.30000000000001
+    "totalDurationSec": 79.5
   }
 }

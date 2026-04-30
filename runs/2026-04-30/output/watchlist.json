@@ -2,38 +2,38 @@
   "date": "2026-04-30",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4111.019,
-      "change_pct": 0.09
+      "value": 4115.105,
+      "change_pct": 0.18
     },
     "shenzhen_component": {
-      "value": 15111.33,
-      "change_pct": -0.06
+      "value": 15128.11,
+      "change_pct": 0.05
     },
     "chinext": {
-      "value": 3682.49,
-      "change_pct": -0.13
+      "value": 3685.63,
+      "change_pct": -0.04
     },
     "sentiment": "neutral",
     "hot_sectors": [
       "半导体",
+      "综合Ⅱ",
       "航天装备Ⅱ",
       "家电零部件Ⅱ",
-      "航海装备Ⅱ",
-      "能源金属"
+      "风电设备"
     ],
     "cold_sectors": [
-      "玻璃玻纤",
       "游戏Ⅱ",
-      "贸易Ⅱ",
+      "玻璃玻纤",
       "酒店餐饮",
+      "贸易Ⅱ",
       "普钢"
     ],
-    "notes": "市场偏分化防守：breadth 1.23:1中性偏弱，74涨停/52跌停，非恐慌但绝非健康普涨；仅上证指数翻红，深成指与创业板指小绿，不满足“至少2大指数翻红”开仓门槛。板块上半导体(+4.01%)、航天装备、家电零部件领涨，玻璃玻纤、游戏、贸易、酒店餐饮、普钢走弱。科创50大涨4.71%显示硬科技资金回流，但主线过窄。IV方面整体仍偏极度乐观，300ETF IV Rank仅6.3%、科创50 IV Rank 10.7%，新仓应更克制。按规则今日维持空仓，等待更强共振日再出手。"
+    "notes": "Breadth 1.19:1 偏弱，98涨停/58跌停，未达到1.5:1最低开仓门槛；上证+0.18%、深成+0.05%为红，创业板-0.04%微绿下，科创50却大涨5.51%，说明资金高度集中进攻科技硬件。Hot sectors(top5): 半导体+4.99%、综合Ⅱ+4.01%、航天装备Ⅱ+3.88%、家电零部件Ⅱ+3.09%、风电设备+2.85%；Cold sectors(bottom5): 游戏Ⅱ-3.26%、玻璃玻纤-2.91%、酒店餐饮-2.88%、贸易Ⅱ-2.76%、普钢-2.37%。当前组合空仓，Position sector alignment 0/0。IV方面，沪市/科创多数代理IV Rank处于6%-11%的低位，市场偏乐观，若后续放开新仓也应优先选择最强主线且避免追高。"
   },
   "strategy_scan": {
     "total_stocks_scanned": 35,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-04-30T11:36:38.411326+08:00"
+    "scan_time": "2026-04-30T14:43:02.993982+08:00"
   },
   "recommendations": [
     {
@@ -64,15 +64,6 @@
       "reasoning": ""
     },
     {
-      "code": "688037.SH",
-      "name": "芯源微",
-      "price": null,
-      "rps120": 86.43,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
       "code": "601208.SH",
       "name": "东材科技",
       "price": null,
@@ -91,28 +82,19 @@
       "reasoning": ""
     },
     {
-      "code": "300236.SZ",
-      "name": "上海新阳",
+      "code": "688037.SH",
+      "name": "芯源微",
       "price": null,
-      "rps120": 88.95,
+      "rps120": 86.43,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "688150.SH",
-      "name": "莱特光电",
+      "code": "002539.SZ",
+      "name": "云图控股",
       "price": null,
-      "rps120": 93.31,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "300739.SZ",
-      "name": "明阳电路",
-      "price": null,
-      "rps120": 90.54,
+      "rps120": 85.18,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -136,10 +118,28 @@
       "reasoning": ""
     },
     {
-      "code": "002539.SZ",
-      "name": "云图控股",
+      "code": "688150.SH",
+      "name": "莱特光电",
       "price": null,
-      "rps120": 85.18,
+      "rps120": 93.31,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "300236.SZ",
+      "name": "上海新阳",
+      "price": null,
+      "rps120": 88.95,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "300739.SZ",
+      "name": "明阳电路",
+      "price": null,
+      "rps120": 90.54,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -151,6 +151,6 @@
     "watch_recommendations": 12,
     "avoid_recommendations": 0,
     "market_call": "观望",
-    "reasoning": "市场偏分化防守：breadth 1.23:1中性偏弱，74涨停/52跌停，非恐慌但绝非健康普涨；仅上证指数翻红，深成指与创业板指小绿，不满足“至少2大指数翻红”开仓门槛。板块上半导体(+4.01%)、航天装备、家电零部件领涨，玻璃玻纤、游戏、贸易、酒店餐饮、普钢走弱。科创50大涨4.71%显示硬科技资金回流，但主线过窄。IV方面整体仍偏极度乐观，300ETF IV Rank仅6.3%、科创50 IV Rank 10.7%，新仓应更克制。按规则今日维持空仓，等待更强共振日再出手。"
+    "reasoning": "Breadth 1.19:1 偏弱，98涨停/58跌停，未达到1.5:1最低开仓门槛；上证+0.18%、深成+0.05%为红，创业板-0.04%微绿下，科创50却大涨5.51%，说明资金高度集中进攻科技硬件。Hot sectors(top5): 半导体+4.99%、综合Ⅱ+4.01%、航天装备Ⅱ+3.88%、家电零部件Ⅱ+3.09%、风电设备+2.85%；Cold sectors(bottom5): 游戏Ⅱ-3.26%、玻璃玻纤-2.91%、酒店餐饮-2.88%、贸易Ⅱ-2.76%、普钢-2.37%。当前组合空仓，Position sector alignment 0/0。IV方面，沪市/科创多数代理IV Rank处于6%-11%的低位，市场偏乐观，若后续放开新仓也应优先选择最强主线且避免追高。"
   }
 }
