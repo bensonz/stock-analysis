@@ -1,0 +1,176 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "半导体",
+        "5d_pct": 4.01,
+        "trend": "accelerating"
+      },
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": 3.14,
+        "trend": "steady"
+      },
+      {
+        "name": "家电零部件Ⅱ",
+        "5d_pct": 3.11,
+        "trend": "steady"
+      },
+      {
+        "name": "航海装备Ⅱ",
+        "5d_pct": 2.37,
+        "trend": "steady"
+      },
+      {
+        "name": "能源金属",
+        "5d_pct": 2.35,
+        "trend": "improving"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": -3.85,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "游戏Ⅱ",
+        "5d_pct": -2.93,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "贸易Ⅱ",
+        "5d_pct": -2.58,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "酒店餐饮",
+        "5d_pct": -2.58,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "普钢",
+        "5d_pct": -2.26,
+        "trend": "weak"
+      }
+    ],
+    "position_alignment": "0/0 positions in hot sectors",
+    "regime": "科创/半导体领涨，但主板与创业板分化，资源与部分顺周期轮动不稳"
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "半导体属最热板块之一，Q1净利润同比+52.12%催化真实，RPS120 90.95合格，且MA距离健康；但入场闸门未过，entry_regime明确hard_block，且科创50 IV Rank 10.7%<15%，今天只能跳过不追。",
+      "rps120": 90.95
+    },
+    {
+      "code": "002246",
+      "name": "北化股份",
+      "reason": "基本面与催化不错，Q1归母净利润同比+145.09%，RPS120 90.23，MA距离合格，VCP为SETUP；但所属化学制品未出现在今日前列板块，且市场仅1/3主要指数翻红、breadth 1.23:1，不满足新开仓门槛。",
+      "rps120": 90.23
+    },
+    {
+      "code": "600499",
+      "name": "科达制造",
+      "reason": "一季报净利同比+69%，盐湖提锂/专用设备逻辑有催化，MA距离健康；但RPS120仅89.74虽达标，所属专用设备不在今日top5，且300ETF IV Rank 6.3%极低需缩仓，叠加市场hard_block，暂不新开。",
+      "rps120": 89.74
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "半导体是强板块，MA距离也合格；但RPS120 86.43合格下，最新快讯显示一季度净利润同比下降24.70%，盈利质量弱于同板块备选，且科创板新仓受IV压制与市场闸门双重限制。",
+      "rps120": 86.43
+    },
+    {
+      "code": "601208",
+      "name": "东材科技",
+      "reason": "覆铜板涨价催化真实、利润增速强，RPS120 91.42在甜蜜区；但dist_ma10_pct 8.6%和dist_ma20_pct 11.3%，接近/超过非追高约束，且今天市场新仓闸门未通过，不开仓。",
+      "rps120": 91.42
+    },
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "reason": "PCB景气与盈利成长强，RPS120 90.99合格且0风险；但dist_ma10_pct 10.3%超过8%上限，属于明确追高区，按规则必须跳过。",
+      "rps120": 90.99
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "reason": "电子化学品趋势强、业绩增长快，但dist_ma5_pct 9.3%和dist_ma10_pct 11.7%明显超限，属于典型过度延伸，禁止追高。",
+      "rps120": 88.95
+    },
+    {
+      "code": "688150",
+      "name": "莱特光电",
+      "reason": "OLED材料与业绩催化存在，但dist_ma10_pct 11.5%与dist_ma20_pct 21.7%严重超限；同时科创50 IV Rank 10.7%<15%，即使看多也只能等回踩。",
+      "rps120": 93.31
+    },
+    {
+      "code": "300739",
+      "name": "明阳电路",
+      "reason": "所属元件趋势不差，但dist_ma5_pct 13.5%和dist_ma10_pct 14.6%远超上限，属于最典型的短线追高禁入样本。",
+      "rps120": 90.54
+    },
+    {
+      "code": "600295",
+      "name": "鄂尔多斯",
+      "reason": "所属钢铁/普钢方向位于今日冷板块区，普钢在bottom5；即使RPS120 92.38合格、MA位置尚可，冷板块按规则最多观察，不做买入。",
+      "rps120": 92.38
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "小金属盘中活跃但分化大，快讯同时出现跟涨与短线走低，板块持续性一般；且300ETF IV Rank 6.3%极低、市场hard_block，新仓性价比不足。",
+      "rps120": 92.84
+    },
+    {
+      "code": "002539",
+      "name": "云图控股",
+      "reason": "农化方向有基本面支撑，但今日热门主线不在该板块，且RPS120 85.18虽达标但缺少板块共振；当前市场不满足开新仓条件，放弃。",
+      "rps120": 85.18
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "当市场呈现“科创单边强、主板与创业板偏弱”的裂口结构时，即使涨停家数达到74家，也不能视为可全面开新仓环境；指数共振不足比局部热点更重要。",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "局部赚钱效应会把注意力集中到少数主线，但缺乏指数与广度确认时，非核心标的接力成功率会显著下降。"
+    },
+    {
+      "text": "MA距离规则今天继续发挥核心作用：多只强趋势股并不是逻辑差，而是位置太远，真正应做的是等回踩而不是降低标准追进去。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "过度偏离MA5/MA10意味着短线获利盘拥挤，哪怕基本面与板块都强，也更容易先经历均值回归。"
+    },
+    {
+      "text": "低IV环境下不是完全不能做多，而是要把‘最强板块+最干净位置’作为必要条件；今天很多候选只满足前者，不满足后者。",
+      "type": "signal",
+      "tags": [
+        "position-sizing",
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h017",
+      "mechanism": "低IV代表市场对波动定价便宜，追高时一旦回撤，波动扩张与价格回落会同时伤害新仓。"
+    }
+  ],
+  "market_summary": "市场偏分化防守：breadth 1.23:1中性偏弱，74涨停/52跌停，非恐慌但绝非健康普涨；仅上证指数翻红，深成指与创业板指小绿，不满足“至少2大指数翻红”开仓门槛。板块上半导体(+4.01%)、航天装备、家电零部件领涨，玻璃玻纤、游戏、贸易、酒店餐饮、普钢走弱。科创50大涨4.71%显示硬科技资金回流，但主线过窄。IV方面整体仍偏极度乐观，300ETF IV Rank仅6.3%、科创50 IV Rank 10.7%，新仓应更克制。按规则今日维持空仓，等待更强共振日再出手。",
+  "market_sentiment": "neutral",
+  "market_call": "观望"
+}
