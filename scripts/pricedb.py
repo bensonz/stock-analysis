@@ -5,7 +5,7 @@ pricedb.py — Local A-share price database management.
 SQLite-backed price history for all A-share stocks.
 Data sources:
 - Stock list: Tushare Pro when available, BaoStock fallback
-- Price bars: Tushare Pro, AkShare historical daily fallback, BaoStock fallback
+- Price bars: Tushare Pro, Eastmoney direct fallback, AkShare historical daily fallback, BaoStock fallback
 
 Usage:
     python scripts/pricedb.py init          # Create DB, fetch stock list, download ALL historical data
@@ -21,6 +21,10 @@ import sqlite3
 import sys
 import threading
 import time
+import json
+import subprocess
+import urllib.parse
+import urllib.request
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -32,6 +36,7 @@ DB_PATH = DB_DIR / "ashare_prices.db"
 ENV_FILE = PROJECT_ROOT / ".env"
 
 PROVIDER_TUSHARE = "tushare"
+PROVIDER_EASTMONEY = "eastmoney_direct"
 PROVIDER_AKSHARE = "akshare"
 PROVIDER_BAOSTOCK = "baostock"
 TUSHARE_TOKEN_ENV_NAMES = ("TUSHARE_TOKEN", "TUSHARE_PRO_TOKEN", "TS_TOKEN")
@@ -43,6 +48,10 @@ TUSHARE_RETRIES = 3
 AKSHARE_RETRY_DELAY = 0.5
 AKSHARE_RETRIES = 3
 AKSHARE_DEFAULT_WORKERS = 12
+EASTMONEY_RETRY_DELAY = 0.5
+EASTMONEY_RETRIES = 3
+EASTMONEY_DEFAULT_WORKERS = 12
+EASTMONEY_KLINE_URL = "https://push2his.eastmoney.com/api/qt/stock/kline/get"
 
 # Per-API-call hard timeout (socket read + connect). If a single call exceeds
 # this, we fail fast and let the retry/provider-fallback logic handle it.
@@ -248,6 +257,8 @@ def iter_providers() -> Iterable[tuple[str, object]]:
     else:
         print("  Tushare token not found; will try AkShare/BaoStock fallback.", file=sys.stderr)
 
+    yield PROVIDER_EASTMONEY, None
+
     try:
         import akshare as ak
 
@@ -350,6 +361,248 @@ def _is_a_share_equity(code: str, exchange: str) -> bool:
 
 def _frame_empty(frame) -> bool:
     return frame is None or bool(getattr(frame, "empty", False))
+
+
+# ---------------------------------------------------------------------------
+# Eastmoney direct provider
+# ---------------------------------------------------------------------------
+
+
+def _eastmoney_secid(stock: dict) -> str | None:
+    code = str(stock.get("code") or "").strip()
+    exchange = str(stock.get("exchange") or "").strip().upper()
+    if not code:
+        return None
+    if exchange == "SH":
+        return f"1.{code}"
+    if exchange == "SZ":
+        return f"0.{code}"
+    if exchange == "BJ":
+        return None
+    if code.startswith(("600", "601", "603", "605", "688", "689")):
+        return f"1.{code}"
+    if code.startswith(("000", "001", "002", "003", "300", "301")):
+        return f"0.{code}"
+    return None
+
+
+def _eastmoney_kline_url(secid: str, beg: str, end: str) -> str:
+    query = urllib.parse.urlencode(
+        {
+            "secid": secid,
+            "fields1": "f1",
+            "fields2": "f51,f52,f53,f54,f55,f56,f57",
+            "klt": "101",
+            "fqt": "0",
+            "beg": beg,
+            "end": end,
+        },
+        safe=",",
+    )
+    return f"{EASTMONEY_KLINE_URL}?{query}"
+
+
+def _fetch_eastmoney_json_urllib(url: str) -> str:
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+    request = urllib.request.Request(
+        url,
+        headers={
+            "Accept": "application/json,text/plain,*/*",
+            "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+            "Connection": "close",
+            "User-Agent": "Mozilla/5.0 pricedb-eastmoney-direct",
+        },
+    )
+    with opener.open(request, timeout=PRICEDB_CALL_TIMEOUT_SEC) as response:
+        return response.read().decode("utf-8")
+
+
+def _fetch_eastmoney_json_curl(url: str) -> str:
+    completed = subprocess.run(
+        [
+            "curl",
+            "-sS",
+            "--max-time",
+            str(max(1, int(PRICEDB_CALL_TIMEOUT_SEC))),
+            "-x",
+            "",
+            url,
+        ],
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        timeout=PRICEDB_CALL_TIMEOUT_SEC + 2,
+    )
+    return completed.stdout
+
+
+def _fetch_eastmoney_json(url: str) -> dict:
+    try:
+        raw = _run_with_timeout("Eastmoney urllib", lambda: _fetch_eastmoney_json_urllib(url))
+    except Exception as urllib_error:
+        try:
+            raw = _run_with_timeout("Eastmoney curl", lambda: _fetch_eastmoney_json_curl(url))
+        except Exception as curl_error:
+            raise RuntimeError(f"urllib failed: {urllib_error}; curl failed: {curl_error}") from curl_error
+
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError as e:
+        raise RuntimeError(f"invalid Eastmoney JSON: {e}") from e
+
+
+def _eastmoney_kline_to_tuple(stock: dict, kline: str) -> tuple | None:
+    parts = str(kline).split(",")
+    if len(parts) < 7:
+        return None
+
+    date_iso = _yyyymmdd_to_iso(parts[0])
+    open_price = _safe_float(parts[1])
+    close_price = _safe_float(parts[2])
+    high_price = _safe_float(parts[3])
+    low_price = _safe_float(parts[4])
+    if not date_iso or None in (open_price, high_price, low_price, close_price):
+        return None
+
+    return (
+        stock["code"],
+        date_iso,
+        open_price,
+        high_price,
+        low_price,
+        close_price,
+        _safe_int(parts[5]) or 0,
+        _safe_float(parts[6]) or 0.0,
+    )
+
+
+def _eastmoney_payload_to_rows(stock: dict, payload: dict) -> list[tuple]:
+    data = payload.get("data")
+    if not isinstance(data, dict):
+        return []
+    klines = data.get("klines")
+    if not isinstance(klines, list):
+        return []
+
+    rows = []
+    for kline in klines:
+        normalized = _eastmoney_kline_to_tuple(stock, kline)
+        if normalized is not None:
+            rows.append(normalized)
+    return rows
+
+
+def _fetch_klines_eastmoney(stock: dict, beg: str, end: str) -> list[tuple]:
+    secid = _eastmoney_secid(stock)
+    if not secid:
+        return []
+    payload = _fetch_eastmoney_json(_eastmoney_kline_url(secid, beg, end))
+    return _eastmoney_payload_to_rows(stock, payload)
+
+
+def _fetch_klines_eastmoney_with_retries(stock: dict, beg: str, end: str) -> list[tuple]:
+    last_error: BaseException | None = None
+    for attempt in range(EASTMONEY_RETRIES):
+        if _budget_exceeded():
+            raise RuntimeError("update budget exceeded")
+        try:
+            return _fetch_klines_eastmoney(stock, beg, end)
+        except Exception as e:
+            last_error = e
+            if attempt == EASTMONEY_RETRIES - 1:
+                raise RuntimeError(f"Eastmoney hist {stock['code']} failed: {e}") from e
+            time.sleep(EASTMONEY_RETRY_DELAY * (attempt + 1))
+    raise RuntimeError(f"Eastmoney hist {stock['code']} failed: {last_error}")
+
+
+def _bulk_fetch_eastmoney(
+    conn: sqlite3.Connection,
+    stocks: list[dict],
+    beg: str,
+    end: str,
+    _provider,
+):
+    """Bulk fetch daily bars from Eastmoney with bounded worker concurrency."""
+    if not stocks:
+        print("  Total: 0 rows inserted", file=sys.stderr)
+        return
+
+    supported_count = sum(1 for stock in stocks if _eastmoney_secid(stock))
+    if supported_count == 0:
+        print("  Eastmoney: no supported SH/SZ symbols in universe", file=sys.stderr)
+        print("  Total: 0 rows inserted", file=sys.stderr)
+        return
+
+    workers = min(_positive_int_from_env("PRICEDB_EASTMONEY_WORKERS", EASTMONEY_DEFAULT_WORKERS), len(stocks))
+    total_inserted = 0
+    completed = 0
+    next_index = 0
+    failures: list[str] = []
+    futures = {}
+
+    def submit_next(executor: ThreadPoolExecutor):
+        nonlocal next_index
+        if next_index >= len(stocks):
+            return
+        if _budget_exceeded():
+            raise RuntimeError("update budget exceeded")
+        stock = stocks[next_index]
+        next_index += 1
+        future = executor.submit(_fetch_klines_eastmoney_with_retries, stock, beg, end)
+        futures[future] = stock
+
+    with ThreadPoolExecutor(max_workers=workers, thread_name_prefix="pricedb-eastmoney") as executor:
+        for _ in range(workers):
+            submit_next(executor)
+
+        while futures:
+            if _budget_exceeded():
+                for future in futures:
+                    future.cancel()
+                raise RuntimeError("update budget exceeded")
+
+            done, _pending = wait(futures, timeout=1.0, return_when=FIRST_COMPLETED)
+            if not done:
+                continue
+
+            for future in done:
+                stock = futures.pop(future)
+                completed += 1
+                try:
+                    rows = future.result()
+                except Exception as e:
+                    failures.append(f"{stock['code']}: {e}")
+                    rows = []
+
+                if rows:
+                    conn.executemany(
+                        "INSERT OR REPLACE INTO daily_prices "
+                        "(code,date,open,high,low,close,volume,amount) "
+                        "VALUES (?,?,?,?,?,?,?,?)",
+                        rows,
+                    )
+                    conn.commit()
+                    total_inserted += len(rows)
+
+                if completed % 100 == 0 or completed == len(stocks):
+                    print(
+                        f"  [Eastmoney {completed}/{len(stocks)}] last: {stock['code']} -> {len(rows)} rows",
+                        file=sys.stderr,
+                    )
+
+                if next_index < len(stocks):
+                    submit_next(executor)
+
+    if failures:
+        sample = "; ".join(failures[:5])
+        print(f"  Eastmoney skipped {len(failures)} symbols after retries: {sample}", file=sys.stderr)
+    if total_inserted == 0:
+        if failures:
+            raise RuntimeError(f"Eastmoney returned no rows; first failures: {'; '.join(failures[:3])}")
+        raise RuntimeError(f"Eastmoney returned no rows for {supported_count} supported symbols")
+
+    print(f"  Total: {total_inserted:,} rows inserted", file=sys.stderr)
 
 
 # ---------------------------------------------------------------------------
@@ -809,6 +1062,8 @@ def bulk_fetch(
 ):
     if provider_name == PROVIDER_TUSHARE:
         return _bulk_fetch_tushare(conn, stocks, beg, end, provider)
+    if provider_name == PROVIDER_EASTMONEY:
+        return _bulk_fetch_eastmoney(conn, stocks, beg, end, provider)
     if provider_name == PROVIDER_AKSHARE:
         return _bulk_fetch_akshare(conn, stocks, beg, end, provider)
     if provider_name == PROVIDER_BAOSTOCK:
@@ -838,7 +1093,7 @@ def cmd_init():
     provider_errors = []
 
     for provider_name, provider in iter_providers():
-        if provider_name == PROVIDER_AKSHARE:
+        if provider_name in {PROVIDER_EASTMONEY, PROVIDER_AKSHARE}:
             close_provider(provider_name, provider)
             continue
         conn = get_db()
