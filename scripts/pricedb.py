@@ -16,8 +16,10 @@ Usage:
 """
 
 import os
+import socket
 import sqlite3
 import sys
+import threading
 import time
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -36,6 +38,62 @@ TUSHARE_TOKEN_ENV_NAMES = ("TUSHARE_TOKEN", "TUSHARE_PRO_TOKEN", "TS_TOKEN")
 INIT_HISTORY_DAYS = 450
 TUSHARE_RETRY_DELAY = 0.5
 TUSHARE_RETRIES = 3
+
+# Per-API-call hard timeout (socket read + connect). If a single call exceeds
+# this, we fail fast and let the retry/provider-fallback logic handle it.
+PRICEDB_CALL_TIMEOUT_SEC = float(os.getenv("PRICEDB_CALL_TIMEOUT", "30"))
+
+# Per-update overall wall-clock budget. Enforced at the top of cmd_update.
+PRICEDB_UPDATE_BUDGET_SEC = float(os.getenv("PRICEDB_UPDATE_BUDGET", "600"))
+
+# Belt-and-suspenders: protect against any library that creates raw sockets
+# without explicit timeouts (some baostock/urllib paths). Per-call thread
+# wrappers below remain the primary defense.
+socket.setdefaulttimeout(PRICEDB_CALL_TIMEOUT_SEC)
+
+# Module-level deadline for cmd_update. Set at the start of cmd_update;
+# checked from within bulk_fetch helpers via _budget_exceeded().
+_UPDATE_DEADLINE: float | None = None
+
+
+class _TimeoutError(RuntimeError):
+    """Raised when a pricedb network call exceeds PRICEDB_CALL_TIMEOUT_SEC."""
+
+
+def _run_with_timeout(label: str, func, timeout: float | None = None):
+    """Run func() in a daemon thread; raise _TimeoutError if it exceeds `timeout`.
+
+    The hung thread is abandoned (daemon), so the process can still exit;
+    sockets will be reaped by the OS on process teardown.
+    """
+    if timeout is None:
+        timeout = PRICEDB_CALL_TIMEOUT_SEC
+
+    result: list = [None]
+    error: list[BaseException | None] = [None]
+
+    def _target():
+        try:
+            result[0] = func()
+        except BaseException as e:
+            error[0] = e
+
+    t = threading.Thread(target=_target, name=f"pricedb:{label}", daemon=True)
+    t.start()
+    t.join(timeout)
+
+    if t.is_alive():
+        raise _TimeoutError(f"{label} exceeded {timeout:.0f}s timeout")
+
+    if error[0] is not None:
+        raise error[0]
+
+    return result[0]
+
+
+def _budget_exceeded() -> bool:
+    """Return True if the current cmd_update has run past its wall-clock budget."""
+    return _UPDATE_DEADLINE is not None and time.monotonic() > _UPDATE_DEADLINE
 
 
 def get_db() -> sqlite3.Connection:
@@ -188,7 +246,7 @@ def iter_providers() -> Iterable[tuple[str, object]]:
     try:
         import baostock as bs
 
-        login_result = bs.login()
+        login_result = _run_with_timeout("BaoStock login", lambda: bs.login())
         if getattr(login_result, "error_code", "0") != "0":
             raise RuntimeError(getattr(login_result, "error_msg", "BaoStock login failed"))
         yield PROVIDER_BAOSTOCK, bs
@@ -200,7 +258,7 @@ def close_provider(provider_name: str, provider: object):
     """Close provider resources if needed."""
     if provider_name == PROVIDER_BAOSTOCK:
         try:
-            provider.logout()
+            _run_with_timeout("BaoStock logout", lambda: provider.logout(), timeout=5)
         except Exception:
             pass
 
@@ -273,11 +331,17 @@ def _frame_empty(frame) -> bool:
 
 
 def _call_tushare(label: str, func):
-    """Call a Tushare API with retries."""
-    last_error = None
+    """Call a Tushare API with retries and per-call timeout."""
+    last_error: BaseException | None = None
     for attempt in range(TUSHARE_RETRIES):
         try:
-            return func()
+            return _run_with_timeout(label, func)
+        except _TimeoutError as e:
+            last_error = e
+            # Don't sleep on timeout — the socket is dead, retry immediately
+            # with a fresh call.
+            if attempt == TUSHARE_RETRIES - 1:
+                raise RuntimeError(f"{label} failed: {e}") from e
         except Exception as e:
             last_error = e
             if attempt == TUSHARE_RETRIES - 1:
@@ -352,6 +416,8 @@ def _bulk_fetch_tushare(
     total_inserted = 0
 
     for index, trade_date in enumerate(trade_dates, start=1):
+        if _budget_exceeded():
+            raise RuntimeError("update budget exceeded")
         frame = _call_tushare(
             f"Tushare daily {trade_date}",
             lambda trade_date=trade_date: pro.daily(
@@ -430,7 +496,12 @@ def fetch_stock_list_baostock(bs) -> list[dict]:
     rows: list[dict] = []
     for offset in range(10):
         day = (datetime.now() - timedelta(days=offset)).strftime("%Y-%m-%d")
-        rows = _baostock_rows(bs.query_all_stock(day=day))
+        rows = _baostock_rows(
+            _run_with_timeout(
+                f"BaoStock query_all_stock {day}",
+                lambda day=day: bs.query_all_stock(day=day),
+            )
+        )
         if rows:
             break
 
@@ -458,13 +529,16 @@ def fetch_stock_list_baostock(bs) -> list[dict]:
 def _fetch_klines_baostock(bs, stock: dict, beg: str, end: str) -> list[tuple]:
     code_prefix = stock["exchange"].lower()
     code_full = f"{code_prefix}.{stock['code']}"
-    result = bs.query_history_k_data_plus(
-        code_full,
-        "date,code,open,high,low,close,volume,amount",
-        start_date=_yyyymmdd_to_iso(beg),
-        end_date=_yyyymmdd_to_iso(end),
-        frequency="d",
-        adjustflag="3",
+    result = _run_with_timeout(
+        f"BaoStock k_data {stock['code']}",
+        lambda: bs.query_history_k_data_plus(
+            code_full,
+            "date,code,open,high,low,close,volume,amount",
+            start_date=_yyyymmdd_to_iso(beg),
+            end_date=_yyyymmdd_to_iso(end),
+            frequency="d",
+            adjustflag="3",
+        ),
     )
     rows = []
     for row in _baostock_rows(result):
@@ -502,6 +576,8 @@ def _bulk_fetch_baostock(
     EARLY_ABORT_THRESHOLD = 100  # bail if first N stocks all return 0 rows
 
     for index, stock in enumerate(stocks, start=1):
+        if _budget_exceeded():
+            raise RuntimeError("update budget exceeded")
         rows = _fetch_klines_baostock(bs, stock, beg, end)
         if rows:
             conn.executemany(
@@ -620,6 +696,9 @@ def cmd_update():
         print("DB not found. Run 'init' first.", file=sys.stderr)
         sys.exit(1)
 
+    global _UPDATE_DEADLINE
+    _UPDATE_DEADLINE = time.monotonic() + PRICEDB_UPDATE_BUDGET_SEC
+
     conn = get_db()
     ensure_schema(conn)
 
@@ -635,6 +714,14 @@ def cmd_update():
     provider_errors = []
 
     for provider_name, provider in iter_providers():
+        if _budget_exceeded():
+            print(
+                f"  Skipping {provider_name}: update budget exceeded "
+                f"({PRICEDB_UPDATE_BUDGET_SEC:.0f}s)",
+                file=sys.stderr,
+            )
+            close_provider(provider_name, provider)
+            continue
         try:
             print(f"Refreshing stock list via {provider_name}...", file=sys.stderr)
             latest_stocks = fetch_stock_list(provider_name, provider)
@@ -713,7 +800,7 @@ def _backfill_from_akshare_spot(conn: sqlite3.Connection, date_iso: str) -> int:
     try:
         import akshare as ak
 
-        df = ak.stock_zh_a_spot_em()
+        df = _run_with_timeout("AkShare spot", lambda: ak.stock_zh_a_spot_em())
         if df is None or df.empty:
             return 0
 

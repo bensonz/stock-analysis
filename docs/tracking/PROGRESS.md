@@ -1,5 +1,25 @@
 # Progress
 
+## 2026-04-30: Fix `pricedb update` hanging on dead TCP sockets
+
+### Completed
+1. **`scripts/pricedb.py`** — Per-call thread-based timeout helper `_run_with_timeout` + `_TimeoutError`; module-level `PRICEDB_CALL_TIMEOUT_SEC` (30s default) and `PRICEDB_UPDATE_BUDGET_SEC` (600s default), env-overridable via `PRICEDB_CALL_TIMEOUT` / `PRICEDB_UPDATE_BUDGET`
+2. **`_call_tushare`** — Now wraps each Tushare call in `_run_with_timeout`; on timeout, retries immediately without sleep (socket is dead)
+3. **BaoStock wrappers** — `bs.login()`, `bs.query_all_stock(day=...)`, `bs.query_history_k_data_plus(...)`, `provider.logout()` (5s timeout) all wrapped
+4. **AkShare** — `ak.stock_zh_a_spot_em()` in `_backfill_from_akshare_spot` wrapped
+5. **Wall-clock budget** — `cmd_update` sets module-level `_UPDATE_DEADLINE`; `_budget_exceeded()` checked at top of provider loop and inside `_bulk_fetch_tushare` per-trade-date and `_bulk_fetch_baostock` per-stock loops
+6. **Belt-and-suspenders** — `socket.setdefaulttimeout(PRICEDB_CALL_TIMEOUT_SEC)` at module import
+7. **`tests/test_pricedb_timeouts.py`** — 8 new tests covering happy path, propagation, hang, retry-on-timeout, eventual raise with elapsed-time bound, and budget logic
+8. **No change** to `scripts/run_daily.py` — existing exception handler at the subprocess invocation already logs warnings and continues
+
+### Acceptance Status
+- [x] `python scripts/pricedb.py update` now bounded by `PRICEDB_UPDATE_BUDGET_SEC` (600s default)
+- [x] Single hung call raises clear `RuntimeError` with label and timeout
+- [x] Retry/fallback logic triggered on timeout
+- [x] All 8 new tests pass (`pytest tests/test_pricedb_timeouts.py`)
+- [x] Full test suite still passes (75 passed, 5 skipped)
+- [x] Env-var override `PRICEDB_CALL_TIMEOUT=5` verified to take effect
+
 ## 2026-04-09: Contract-Based Pipeline Gates (Harness Engineering)
 
 ### Completed
