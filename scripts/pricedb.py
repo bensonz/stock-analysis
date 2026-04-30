@@ -4,8 +4,8 @@ pricedb.py — Local A-share price database management.
 
 SQLite-backed price history for all A-share stocks.
 Data sources:
-- Primary: Tushare Pro (requires `TUSHARE_TOKEN` / `TUSHARE_PRO_TOKEN`)
-- Fallback: BaoStock
+- Stock list: Tushare Pro when available, BaoStock fallback
+- Price bars: Tushare Pro, AkShare historical daily fallback, BaoStock fallback
 
 Usage:
     python scripts/pricedb.py init          # Create DB, fetch stock list, download ALL historical data
@@ -21,6 +21,7 @@ import sqlite3
 import sys
 import threading
 import time
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Iterable, Optional
@@ -31,6 +32,7 @@ DB_PATH = DB_DIR / "ashare_prices.db"
 ENV_FILE = PROJECT_ROOT / ".env"
 
 PROVIDER_TUSHARE = "tushare"
+PROVIDER_AKSHARE = "akshare"
 PROVIDER_BAOSTOCK = "baostock"
 TUSHARE_TOKEN_ENV_NAMES = ("TUSHARE_TOKEN", "TUSHARE_PRO_TOKEN", "TS_TOKEN")
 
@@ -38,6 +40,9 @@ TUSHARE_TOKEN_ENV_NAMES = ("TUSHARE_TOKEN", "TUSHARE_PRO_TOKEN", "TS_TOKEN")
 INIT_HISTORY_DAYS = 450
 TUSHARE_RETRY_DELAY = 0.5
 TUSHARE_RETRIES = 3
+AKSHARE_RETRY_DELAY = 0.5
+AKSHARE_RETRIES = 3
+AKSHARE_DEFAULT_WORKERS = 12
 
 # Per-API-call hard timeout (socket read + connect). If a single call exceeds
 # this, we fail fast and let the retry/provider-fallback logic handle it.
@@ -231,7 +236,7 @@ def get_tushare_token() -> str | None:
 
 
 def iter_providers() -> Iterable[tuple[str, object]]:
-    """Yield available providers in preferred order: Tushare, then BaoStock."""
+    """Yield available providers in preferred price-bar order."""
     token = get_tushare_token()
     if token:
         try:
@@ -241,7 +246,14 @@ def iter_providers() -> Iterable[tuple[str, object]]:
         except Exception as e:
             print(f"  Could not initialize Tushare: {e}", file=sys.stderr)
     else:
-        print("  Tushare token not found; will try BaoStock fallback.", file=sys.stderr)
+        print("  Tushare token not found; will try AkShare/BaoStock fallback.", file=sys.stderr)
+
+    try:
+        import akshare as ak
+
+        yield PROVIDER_AKSHARE, ak
+    except Exception as e:
+        print(f"  Could not initialize AkShare: {e}", file=sys.stderr)
 
     try:
         import baostock as bs
@@ -309,6 +321,21 @@ def _safe_int(value) -> int | None:
     if numeric is None:
         return None
     return int(round(numeric))
+
+
+def _positive_int_from_env(name: str, default: int) -> int:
+    value = os.getenv(name)
+    if not value:
+        return default
+    try:
+        parsed = int(value)
+    except ValueError:
+        print(f"  Ignoring invalid {name}={value!r}; using {default}", file=sys.stderr)
+        return default
+    if parsed < 1:
+        print(f"  Ignoring invalid {name}={value!r}; using {default}", file=sys.stderr)
+        return default
+    return parsed
 
 
 def _is_a_share_equity(code: str, exchange: str) -> bool:
@@ -473,6 +500,157 @@ def _bulk_fetch_tushare(
 
 
 # ---------------------------------------------------------------------------
+# AkShare provider
+# ---------------------------------------------------------------------------
+
+
+def _akshare_hist_row_to_tuple(stock: dict, row) -> tuple | None:
+    getter = row.get
+    open_price = _safe_float(getter("开盘"))
+    high_price = _safe_float(getter("最高"))
+    low_price = _safe_float(getter("最低"))
+    close_price = _safe_float(getter("收盘"))
+    if None in (open_price, high_price, low_price, close_price):
+        return None
+
+    raw_date = getter("日期")
+    if raw_date is None:
+        return None
+    date_iso = _yyyymmdd_to_iso(str(raw_date))
+    if not date_iso:
+        return None
+
+    return (
+        stock["code"],
+        date_iso,
+        open_price,
+        high_price,
+        low_price,
+        close_price,
+        _safe_int(getter("成交量")) or 0,
+        _safe_float(getter("成交额")) or 0.0,
+    )
+
+
+def _fetch_klines_akshare(ak, stock: dict, beg: str, end: str) -> list[tuple]:
+    frame = _run_with_timeout(
+        f"AkShare hist {stock['code']}",
+        lambda: ak.stock_zh_a_hist(
+            symbol=stock["code"],
+            period="daily",
+            start_date=beg,
+            end_date=end,
+            adjust="",
+        ),
+    )
+    if _frame_empty(frame):
+        return []
+
+    rows = []
+    for _, row in frame.iterrows():
+        normalized = _akshare_hist_row_to_tuple(stock, row)
+        if normalized is not None:
+            rows.append(normalized)
+    return rows
+
+
+def _fetch_klines_akshare_with_retries(ak, stock: dict, beg: str, end: str) -> list[tuple]:
+    last_error: BaseException | None = None
+    for attempt in range(AKSHARE_RETRIES):
+        if _budget_exceeded():
+            raise RuntimeError("update budget exceeded")
+        try:
+            return _fetch_klines_akshare(ak, stock, beg, end)
+        except Exception as e:
+            last_error = e
+            if attempt == AKSHARE_RETRIES - 1:
+                raise RuntimeError(f"AkShare hist {stock['code']} failed: {e}") from e
+            time.sleep(AKSHARE_RETRY_DELAY * (attempt + 1))
+    raise RuntimeError(f"AkShare hist {stock['code']} failed: {last_error}")
+
+
+def _bulk_fetch_akshare(
+    conn: sqlite3.Connection,
+    stocks: list[dict],
+    beg: str,
+    end: str,
+    ak,
+):
+    """Bulk fetch daily bars from AkShare with bounded worker concurrency."""
+    if not stocks:
+        print("  Total: 0 rows inserted", file=sys.stderr)
+        return
+
+    workers = min(_positive_int_from_env("PRICEDB_AKSHARE_WORKERS", AKSHARE_DEFAULT_WORKERS), len(stocks))
+    total_inserted = 0
+    completed = 0
+    next_index = 0
+    failures: list[str] = []
+    futures = {}
+
+    def submit_next(executor: ThreadPoolExecutor):
+        nonlocal next_index
+        if next_index >= len(stocks):
+            return
+        if _budget_exceeded():
+            raise RuntimeError("update budget exceeded")
+        stock = stocks[next_index]
+        next_index += 1
+        future = executor.submit(_fetch_klines_akshare_with_retries, ak, stock, beg, end)
+        futures[future] = stock
+
+    with ThreadPoolExecutor(max_workers=workers, thread_name_prefix="pricedb-akshare") as executor:
+        for _ in range(workers):
+            submit_next(executor)
+
+        while futures:
+            if _budget_exceeded():
+                for future in futures:
+                    future.cancel()
+                raise RuntimeError("update budget exceeded")
+
+            done, _pending = wait(futures, timeout=1.0, return_when=FIRST_COMPLETED)
+            if not done:
+                continue
+
+            for future in done:
+                stock = futures.pop(future)
+                completed += 1
+                try:
+                    rows = future.result()
+                except Exception as e:
+                    failures.append(f"{stock['code']}: {e}")
+                    rows = []
+
+                if rows:
+                    conn.executemany(
+                        "INSERT OR REPLACE INTO daily_prices "
+                        "(code,date,open,high,low,close,volume,amount) "
+                        "VALUES (?,?,?,?,?,?,?,?)",
+                        rows,
+                    )
+                    conn.commit()
+                    total_inserted += len(rows)
+
+                if completed % 100 == 0 or completed == len(stocks):
+                    print(
+                        f"  [AkShare {completed}/{len(stocks)}] last: {stock['code']} → {len(rows)} rows",
+                        file=sys.stderr,
+                    )
+
+                if next_index < len(stocks):
+                    submit_next(executor)
+
+    if failures:
+        sample = "; ".join(failures[:5])
+        print(f"  AkShare skipped {len(failures)} symbols after retries: {sample}", file=sys.stderr)
+    if total_inserted == 0 and failures:
+        raise RuntimeError(f"AkShare returned no rows; first failures: {'; '.join(failures[:3])}")
+
+    print(f"  Total: {total_inserted:,} rows inserted", file=sys.stderr)
+
+
+# ---------------------------------------------------------------------------
 # BaoStock provider
 # ---------------------------------------------------------------------------
 
@@ -631,6 +809,8 @@ def bulk_fetch(
 ):
     if provider_name == PROVIDER_TUSHARE:
         return _bulk_fetch_tushare(conn, stocks, beg, end, provider)
+    if provider_name == PROVIDER_AKSHARE:
+        return _bulk_fetch_akshare(conn, stocks, beg, end, provider)
     if provider_name == PROVIDER_BAOSTOCK:
         return _bulk_fetch_baostock(conn, stocks, beg, end, provider)
     raise ValueError(f"Unknown provider: {provider_name}")
@@ -658,6 +838,9 @@ def cmd_init():
     provider_errors = []
 
     for provider_name, provider in iter_providers():
+        if provider_name == PROVIDER_AKSHARE:
+            close_provider(provider_name, provider)
+            continue
         conn = get_db()
         ensure_schema(conn)
         clear_all_data(conn)
@@ -713,6 +896,15 @@ def cmd_update():
     end = datetime.now().strftime("%Y%m%d")
     provider_errors = []
 
+    stocks = [
+        {"code": row[0], "name": row[1], "exchange": row[2]}
+        for row in conn.execute("SELECT code, name, exchange FROM stocks")
+    ]
+    if not stocks:
+        print("No stocks in DB. Run 'init' first.", file=sys.stderr)
+        conn.close()
+        sys.exit(1)
+
     for provider_name, provider in iter_providers():
         if _budget_exceeded():
             print(
@@ -723,17 +915,20 @@ def cmd_update():
             close_provider(provider_name, provider)
             continue
         try:
-            print(f"Refreshing stock list via {provider_name}...", file=sys.stderr)
-            latest_stocks = fetch_stock_list(provider_name, provider)
-            if not latest_stocks:
-                raise RuntimeError(f"{provider_name} returned no stock list")
-            upsert_stocks(conn, latest_stocks)
-            print(f"  {len(latest_stocks)} stocks in universe", file=sys.stderr)
+            if provider_name in {PROVIDER_TUSHARE, PROVIDER_BAOSTOCK}:
+                print(f"Refreshing stock list via {provider_name}...", file=sys.stderr)
+                latest_stocks = fetch_stock_list(provider_name, provider)
+                if not latest_stocks:
+                    raise RuntimeError(f"{provider_name} returned no stock list")
+                upsert_stocks(conn, latest_stocks)
+                stocks = [
+                    {"code": row[0], "name": row[1], "exchange": row[2]}
+                    for row in conn.execute("SELECT code, name, exchange FROM stocks")
+                ]
+                print(f"  {len(latest_stocks)} stocks in universe", file=sys.stderr)
+            else:
+                print(f"Using existing stock universe for {provider_name}: {len(stocks)} stocks", file=sys.stderr)
 
-            stocks = [
-                {"code": row[0], "name": row[1], "exchange": row[2]}
-                for row in conn.execute("SELECT code, name, exchange FROM stocks")
-            ]
             missing_codes = {
                 row[0]
                 for row in conn.execute(
