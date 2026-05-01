@@ -1,0 +1,188 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "半导体",
+        "5d_pct": 4.71,
+        "trend": "accelerating"
+      },
+      {
+        "name": "综合Ⅱ",
+        "5d_pct": 4.03,
+        "trend": "steady"
+      },
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": 3.88,
+        "trend": "accelerating"
+      },
+      {
+        "name": "家电零部件Ⅱ",
+        "5d_pct": 2.9,
+        "trend": "steady"
+      },
+      {
+        "name": "风电设备",
+        "5d_pct": 2.63,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "游戏Ⅱ",
+        "5d_pct": -3.59,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "贸易Ⅱ",
+        "5d_pct": -2.76,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "酒店餐饮",
+        "5d_pct": -2.65,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "燃气Ⅱ",
+        "5d_pct": -2.6,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": -2.46,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/0 positions in hot sectors",
+    "regime": "Semiconductor/科创 leadership is strong, but broad tape is internally damaged and rotation is uneven; no fresh risk"
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "Semiconductor is hot and catalyst quality is solid, but entry regime hard-blocks new longs: breadth 1.17:1, only 1/3 major indices green, 55跌停. Stock itself passes RPS 90.95 and MA-distance checks, so this is a regime skip, not a stock-quality skip.",
+      "rps120": 90.95
+    },
+    {
+      "code": "688328",
+      "name": "深科达",
+      "reason": "Strong tape in hot technology flow and MA distances are acceptable, but new longs are blocked by panic entry regime. Also carries 4 risk factors and very recent high-volatility breakout behavior.",
+      "rps120": 90.76
+    },
+    {
+      "code": "002246",
+      "name": "北化股份",
+      "reason": "Technically one of the cleaner setups: RPS 90.23, MA distances all within limits, fresh profit growth catalyst. Still skipped because market buy gate fails; additionally sector is not confirmed among today's top leadership groups.",
+      "rps120": 90.23
+    },
+    {
+      "code": "600499",
+      "name": "科达制造",
+      "reason": "Fundamental and catalyst backdrop is constructive, but RPS120 is only 89.74 and sector leadership is not in today's top 5. With hard-blocked regime, no reason to force a cyclical entry.",
+      "rps120": 89.74
+    },
+    {
+      "code": "601208",
+      "name": "东材科技",
+      "reason": "Fresh catalyst from覆铜板涨价 and earnings growth is good, but fails non-negotiable MA chase rule: dist_ma10_pct 8.6% > 8%. Also new-long regime is blocked.",
+      "rps120": 91.42
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "Semiconductor sector is hot and MA distances are fine, but short-term RPS20 is only 3.29 showing unstable near-term momentum despite RPS120 86.43. Regime also blocks entries.",
+      "rps120": 86.43
+    },
+    {
+      "code": "000893",
+      "name": "亚钾国际",
+      "reason": "RPS120 94.01 is allowed, but sector is not in today's top leadership list and price is below MA5/MA10/MA20 after prior adjustment. In a blocked regime, no need to bottom-fish a lagging fertilizer name.",
+      "rps120": 94.01
+    },
+    {
+      "code": "002539",
+      "name": "云图控股",
+      "reason": "Acceptable MA structure and RPS120 85.18, but agriculture/fertilizer is not among top momentum sectors today. Regime hard-block means skip lower-priority names first.",
+      "rps120": 85.18
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "Sector momentum is mixed and intraday news flow shows both rebound and sharp pullback in小金属. Not a top-sector leadership entry, despite acceptable MA distances.",
+      "rps120": 92.84
+    },
+    {
+      "code": "600295",
+      "name": "鄂尔多斯",
+      "reason": "Resource/cyclical setup lacks top-sector confirmation and catalyst urgency versus today's tech leadership. RPS120 92.38 is acceptable, but no entry under hard-blocked tape.",
+      "rps120": 92.38
+    },
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "reason": "Strong PCB story and earnings growth, but fails MA chase rule: dist_ma10_pct 10.3% > 8%. New-long regime also blocked.",
+      "rps120": 90.99
+    },
+    {
+      "code": "688150",
+      "name": "莱特光电",
+      "reason": "Good sector and earnings backdrop, but fails MA chase rule badly: dist_ma10_pct 11.5% and dist_ma20_pct 21.7%. Overextended; wait for pullback.",
+      "rps120": 93.31
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "reason": "Electronic chemicals trend is strong, but fails MA chase rule: dist_ma5_pct 9.3% > 6% and dist_ma10_pct 11.7% > 8%. No chasing.",
+      "rps120": 88.95
+    },
+    {
+      "code": "300739",
+      "name": "明阳电路",
+      "reason": "PCB theme is active, but fails MA chase rule severely: dist_ma5_pct 13.5% and dist_ma10_pct 14.6%. No current price chase allowed.",
+      "rps120": 90.54
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "A hot lead sector is not enough when breadth fails the minimum gate; today's semiconductor strength coexists with only 1.17:1 breadth and 55跌停, so the correct momentum action is still zero new positions.",
+      "type": "rule",
+      "tags": [
+        "sector",
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Narrow leadership without broad confirmation creates poor follow-through and high gap-risk for fresh entries."
+    },
+    {
+      "text": "The MA-distance anti-chase rule removes many of the most tempting names today, especially PCB and electronic-material stocks that already sit too far above MA5/MA10.",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "When leaders get extended away from short-term support, reward/risk deteriorates even if the narrative remains strong."
+    },
+    {
+      "text": "Among today's candidate set, the best 'next-up when regime improves' profiles are the stocks that pass both RPS and MA-distance gates, such as 华峰测控、深科达、北化股份.",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "",
+      "mechanism": "When regime is weak, preserving a ready list of technically compliant leaders is more valuable than forcing low-quality entries."
+    }
+  ],
+  "market_summary": "Breadth 1.17:1 weak-to-fragile, only 上证指数 green while 深成指/创业板指 are red, and 98涨停/55跌停 keeps the tape in panic-block territory by system rules. Sector leadership is clear in 半导体 and 科创 related names, with research also pointing to chip strength and 覆铜板涨价 as catalysts, but participation is not broad enough to authorize fresh longs. IV context is unavailable, so no stock-specific throttle can offset the hard regime block. Keep cash, stalk compliant leaders, and wait for breadth >=1.5:1 plus at least 2 major indices green.",
+  "market_sentiment": "neutral",
+  "market_call": "观望"
+}
