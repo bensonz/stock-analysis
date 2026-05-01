@@ -1065,3 +1065,10 @@
 - A hot lead sector is not enough when breadth fails the minimum gate; today's semiconductor strength coexists with only 1.17:1 breadth and 55跌停, so the correct momentum action is still zero new positions.
 - The MA-distance anti-chase rule removes many of the most tempting names today, especially PCB and electronic-material stocks that already sit too far above MA5/MA10.
 - Among today's candidate set, the best 'next-up when regime improves' profiles are the stocks that pass both RPS and MA-distance gates, such as 华峰测控、深科达、北化股份.
+
+### 自动更新 (2026-05-01)
+
+- When a leadership pocket exists (科创50 +5.19%, 半导体 +4.71%) but the broad-entry gate fails, the correct move is still cash; isolated strength does not override tape risk.
+- The MA-distance anti-chase filter removed several attractive names today, especially 东材科技、广合科技、莱特光电、上海新阳、明阳电路; this rule is preventing emotional buying into stretched winners.
+- Among non-extended candidates, 华峰测控、北化股份、科达制造 had the cleanest technical structures, so they should remain top-of-list for recheck once breadth improves.
+- Fresh price/supply catalysts remain powerful in materials and PCB chain: FR-4/PP price hikes support 东材科技, while lithium pricing and Q1 acceleration support 科达制造, but catalyst quality cannot override regime and extension rules.

@@ -519,13 +519,17 @@
           {
             "date": "2026-05-01",
             "detail": "A hot lead sector is not enough when breadth fails the minimum gate; today's semiconductor strength coexists with only 1.17:1 breadth and 55跌停, so the correct momentum action is still zero new positions."
+          },
+          {
+            "date": "2026-05-01",
+            "detail": "When a leadership pocket exists (科创50 +5.19%, 半导体 +4.71%) but the broad-entry gate fails, the correct move is still cash; isolated strength does not override tape risk."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 46,
+      "sampleSize": 47,
       "hitRate": 1.0,
-      "confidence": 0.979,
+      "confidence": 0.98,
       "tags": [],
       "parentRule": null,
       "retiredDate": null,
@@ -884,13 +888,17 @@
           {
             "date": "2026-05-01",
             "detail": "The MA-distance anti-chase rule removes many of the most tempting names today, especially PCB and electronic-material stocks that already sit too far above MA5/MA10."
+          },
+          {
+            "date": "2026-05-01",
+            "detail": "The MA-distance anti-chase filter removed several attractive names today, especially 东材科技、广合科技、莱特光电、上海新阳、明阳电路; this rule is preventing emotional buying into stretched winners."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 19,
+      "sampleSize": 20,
       "hitRate": 1.0,
-      "confidence": 0.952,
+      "confidence": 0.955,
       "tags": [
         "entry-filter",
         "timing"
@@ -1099,7 +1107,7 @@
       "type": "heuristic",
       "status": "hypothesis",
       "created": "2026-04-03",
-      "lastTested": "2026-04-07",
+      "lastTested": "2026-05-01",
       "mechanism": "Sector ranking helps build the next watch universe, while breadth and index confirmation decide whether capital should actually be deployed.",
       "evidence": {
         "supporting": [
@@ -1110,13 +1118,17 @@
           {
             "date": "2026-04-07",
             "detail": "Fresh catalysts in non-leading sectors should remain skips under a weak regime; sector-first discipline prevents stock-specific stories from pulling us into low-odds trades."
+          },
+          {
+            "date": "2026-05-01",
+            "detail": "Among non-extended candidates, 华峰测控、北化股份、科达制造 had the cleanest technical structures, so they should remain top-of-list for recheck once breadth improves."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 2,
+      "sampleSize": 3,
       "hitRate": 1.0,
-      "confidence": 0.75,
+      "confidence": 0.8,
       "tags": [
         "sector",
         "timing",
@@ -1130,22 +1142,26 @@
       "id": "h027",
       "text": "MA-distance discipline remains critical inside hot sectors: a hot sector does not override chase risk when dist_ma5_pct exceeds 6% or dist_ma10_pct exceeds 8%.",
       "type": "heuristic",
-      "status": "observation",
+      "status": "hypothesis",
       "created": "2026-04-06",
-      "lastTested": "2026-04-06",
+      "lastTested": "2026-05-01",
       "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes.",
       "evidence": {
         "supporting": [
           {
             "date": "2026-04-06",
             "detail": "MA-distance discipline remains critical inside hot sectors: a hot sector does not override chase risk when dist_ma5_pct exceeds 6% or dist_ma10_pct exceeds 8%."
+          },
+          {
+            "date": "2026-05-01",
+            "detail": "Fresh price/supply catalysts remain powerful in materials and PCB chain: FR-4/PP price hikes support 东材科技, while lithium pricing and Q1 acceleration support 科达制造, but catalyst quality cannot override regime and extension rules."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 1,
+      "sampleSize": 2,
       "hitRate": 1.0,
-      "confidence": 0.6,
+      "confidence": 0.75,
       "tags": [
         "entry-filter",
         "timing",

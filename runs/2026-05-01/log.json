@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1777607077.178686,
+      "start": 1777617330.054722,
       "errors": [],
-      "end": 1777607090.5468018,
-      "duration_sec": 13.4
+      "end": 1777617340.438146,
+      "duration_sec": 10.4
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 7309,
+      "response_size_bytes": 7886,
       "tokens": {
-        "input_tokens": 85593,
-        "output_tokens": 2708
+        "input_tokens": 86267,
+        "output_tokens": 2865
       },
       "rounds": 2,
-      "tool_calls_count": 7,
-      "duration_sec": 65.2,
+      "tool_calls_count": 6,
+      "duration_sec": 61.8,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "GPT primary",
@@ -25,23 +25,24 @@
     },
     {
       "phase": "apply",
-      "start": 1777607155.7734988,
+      "start": 1777617402.3016078,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=46",
-        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=19",
-        "Hypothesis: Updated h020 (hypothesis): +1 supporting evidence → hitRate=100%, n=3",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=47",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=20",
+        "Hypothesis: Updated h026 (hypothesis): +1 supporting evidence → hitRate=100%, n=3",
+        "Hypothesis: Updated h027 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1777607155.961827,
-      "duration_sec": 0.2
+      "end": 1777617402.563015,
+      "duration_sec": 0.3
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 78.8
+    "totalDurationSec": 72.5
   }
 }

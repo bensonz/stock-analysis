@@ -13,7 +13,7 @@
       "value": 3677.15,
       "change_pct": -0.27
     },
-    "sentiment": "neutral",
+    "sentiment": "neutral-to-bearish",
     "hot_sectors": [
       "半导体",
       "综合Ⅱ",
@@ -28,12 +28,12 @@
       "燃气Ⅱ",
       "玻璃玻纤"
     ],
-    "notes": "Breadth 1.17:1 weak-to-fragile, only 上证指数 green while 深成指/创业板指 are red, and 98涨停/55跌停 keeps the tape in panic-block territory by system rules. Sector leadership is clear in 半导体 and 科创 related names, with research also pointing to chip strength and 覆铜板涨价 as catalysts, but participation is not broad enough to authorize fresh longs. IV context is unavailable, so no stock-specific throttle can offset the hard regime block. Keep cash, stalk compliant leaders, and wait for breadth >=1.5:1 plus at least 2 major indices green."
+    "notes": "Breadth 1.17:1 weak-to-fragile, only 1/3 major indices green, 98涨停/55跌停; 科创50 and semis are leading but the minimum buy gate fails and entry_regime is explicitly hard-blocked as panic. Hot sectors (top 5): 半导体 +4.71%, 综合Ⅱ +4.03%, 航天装备Ⅱ +3.88%, 家电零部件Ⅱ +2.90%, 风电设备 +2.63%. Cold sectors (bottom 5): 游戏Ⅱ -3.59%, 贸易Ⅱ -2.76%, 酒店餐饮 -2.65%, 燃气Ⅱ -2.60%, 玻璃玻纤 -2.46%. Position sector alignment: 0/0 positions in hot sectors. IV context: no usable IV data, so no IV-based sizing adjustment, but regime alone is enough to keep new_positions empty."
   },
   "strategy_scan": {
     "total_stocks_scanned": 37,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-05-01T11:45:55.781397+08:00"
+    "scan_time": "2026-05-01T14:36:42.310420+08:00"
   },
   "recommendations": [
     {
@@ -169,6 +169,6 @@
     "watch_recommendations": 14,
     "avoid_recommendations": 0,
     "market_call": "观望",
-    "reasoning": "Breadth 1.17:1 weak-to-fragile, only 上证指数 green while 深成指/创业板指 are red, and 98涨停/55跌停 keeps the tape in panic-block territory by system rules. Sector leadership is clear in 半导体 and 科创 related names, with research also pointing to chip strength and 覆铜板涨价 as catalysts, but participation is not broad enough to authorize fresh longs. IV context is unavailable, so no stock-specific throttle can offset the hard regime block. Keep cash, stalk compliant leaders, and wait for breadth >=1.5:1 plus at least 2 major indices green."
+    "reasoning": "Breadth 1.17:1 weak-to-fragile, only 1/3 major indices green, 98涨停/55跌停; 科创50 and semis are leading but the minimum buy gate fails and entry_regime is explicitly hard-blocked as panic. Hot sectors (top 5): 半导体 +4.71%, 综合Ⅱ +4.03%, 航天装备Ⅱ +3.88%, 家电零部件Ⅱ +2.90%, 风电设备 +2.63%. Cold sectors (bottom 5): 游戏Ⅱ -3.59%, 贸易Ⅱ -2.76%, 酒店餐饮 -2.65%, 燃气Ⅱ -2.60%, 玻璃玻纤 -2.46%. Position sector alignment: 0/0 positions in hot sectors. IV context: no usable IV data, so no IV-based sizing adjustment, but regime alone is enough to keep new_positions empty."
   }
 }
