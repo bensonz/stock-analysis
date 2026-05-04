@@ -28,12 +28,12 @@
       "燃气Ⅱ",
       "玻璃玻纤"
     ],
-    "notes": "Breadth 1.17:1 weak/fragile, 98涨停/55跌停, only 上证指数 green while 深证成指 and 创业板指 are red; entry_regime explicitly hard-blocks new longs as panic. Hot sectors are led by 半导体 (+4.71%) and 航天装备Ⅱ (+3.88%), with 科创50 +5.19% confirming narrow tech leadership, while 游戏Ⅱ/酒店餐饮/燃气Ⅱ remain cold. Web checks support that semis and AI hardware are driving the tape, and 覆铜板提价/业绩 growth are real catalysts for names like 东材科技, but most leaders are overextended. IV context is unavailable, so no IV-based sizing edge; default is extra selectivity and hold cash."
+    "notes": "Breadth 1.17:1偏弱，98涨停/55跌停，未达1.5:1开仓门槛且仅上证指数翻红，属于结构性分化行情。Hot sectors (top 5): 半导体(+4.71%), 综合Ⅱ(+4.03%), 航天装备Ⅱ(+3.88%), 家电零部件Ⅱ(+2.90%), 风电设备(+2.63%). Cold sectors (bottom 5): 游戏Ⅱ(-3.59%), 贸易Ⅱ(-2.76%), 酒店餐饮(-2.65%), 燃气Ⅱ(-2.60%), 玻璃玻纤(-2.46%). Position sector alignment: 0/0 positions in hot sectors. 科创50大涨5.19%说明资金集中进攻科技高弹性方向，但主板与广度没有确认；IV整体无数据，按未知处理，不影响结论，核心仍是 entry_regime hard block -> new_positions 维持空数组。"
   },
   "strategy_scan": {
     "total_stocks_scanned": 42,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-05-04T11:46:17.062954+08:00"
+    "scan_time": "2026-05-04T14:36:43.619911+08:00"
   },
   "recommendations": [
     {
@@ -178,6 +178,6 @@
     "watch_recommendations": 15,
     "avoid_recommendations": 0,
     "market_call": "观望",
-    "reasoning": "Breadth 1.17:1 weak/fragile, 98涨停/55跌停, only 上证指数 green while 深证成指 and 创业板指 are red; entry_regime explicitly hard-blocks new longs as panic. Hot sectors are led by 半导体 (+4.71%) and 航天装备Ⅱ (+3.88%), with 科创50 +5.19% confirming narrow tech leadership, while 游戏Ⅱ/酒店餐饮/燃气Ⅱ remain cold. Web checks support that semis and AI hardware are driving the tape, and 覆铜板提价/业绩 growth are real catalysts for names like 东材科技, but most leaders are overextended. IV context is unavailable, so no IV-based sizing edge; default is extra selectivity and hold cash."
+    "reasoning": "Breadth 1.17:1偏弱，98涨停/55跌停，未达1.5:1开仓门槛且仅上证指数翻红，属于结构性分化行情。Hot sectors (top 5): 半导体(+4.71%), 综合Ⅱ(+4.03%), 航天装备Ⅱ(+3.88%), 家电零部件Ⅱ(+2.90%), 风电设备(+2.63%). Cold sectors (bottom 5): 游戏Ⅱ(-3.59%), 贸易Ⅱ(-2.76%), 酒店餐饮(-2.65%), 燃气Ⅱ(-2.60%), 玻璃玻纤(-2.46%). Position sector alignment: 0/0 positions in hot sectors. 科创50大涨5.19%说明资金集中进攻科技高弹性方向，但主板与广度没有确认；IV整体无数据，按未知处理，不影响结论，核心仍是 entry_regime hard block -> new_positions 维持空数组。"
   }
 }

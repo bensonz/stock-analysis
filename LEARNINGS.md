@@ -1078,3 +1078,9 @@
 - Today reinforces that sector strength alone is not enough; when breadth is only 1.17:1, only one of the three major indices is green, and跌停 remain elevated, the correct momentum action is cash even with semiconductor leadership.
 - The MA-distance anti-chase rule is doing the heavy lifting again: many of the strongest tech names have valid catalysts but are simply too far above MA5/MA10/MA20 to offer good entry asymmetry.
 - In split tapes, the best near-buy candidates are often not the hottest charts but the names still within 0-5% of MA5/MA10 and inside the RPS 85-93 zone; they become actionable only after the regime gate reopens.
+
+### 自动更新 (2026-05-04)
+
+- 今天再次验证了 h021：很多最强主题股并不是不能买，而是不能在离均线过远时买；真正拦住开仓的主要矛盾是追高风险，不是基本面。
+- 结构性强市不等于可开新仓市：即便半导体和科创50很强，只要 breadth 只有1.17:1、且仅1个主要指数上涨，就应默认空仓等待。
+- 当前最值得放入明日优先观察池的不是最强涨幅股，而是像北化股份、云图控股、鄂尔多斯这类贴近均线、RPS合格、催化明确但等待市场闸门打开的名字。
