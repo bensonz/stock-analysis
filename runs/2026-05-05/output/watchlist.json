@@ -13,7 +13,7 @@
       "value": 3677.15,
       "change_pct": -0.27
     },
-    "sentiment": "neutral",
+    "sentiment": "neutral_to_bearish",
     "hot_sectors": [
       "半导体",
       "综合Ⅱ",
@@ -28,28 +28,19 @@
       "燃气Ⅱ",
       "玻璃玻纤"
     ],
-    "notes": "Breadth 1.17:1 fragile, 98涨停/55跌停, only 上证指数 green while 深成指/创业板指 are red; this fails the minimum long-entry gate and matches the system hard block on new longs. Hot sectors (top 5): 半导体 +4.71%, 综合Ⅱ +4.03%, 航天装备Ⅱ +3.88%, 家电零部件Ⅱ +2.90%, 风电设备 +2.63%. Cold sectors (bottom 5): 游戏Ⅱ -3.59%, 贸易Ⅱ -2.76%, 酒店餐饮 -2.65%, 燃气Ⅱ -2.60%, 玻璃玻纤 -2.46%. Position sector alignment: 0/0 positions in hot sectors. Research check suggests semiconductor/科创50 strength is driving the tape, with wind equipment also supported by installation expectations, but the market is too internally messy for fresh momentum risk. IV context is unavailable, so no stock-level IV throttle can be applied."
+    "notes": "Breadth 1.17:1 weak/panic, 98涨停/55跌停, only 上证指数 green while 深证成指 and 创业板指 are red; 科创50 +5.19% and 半导体 +4.71% show narrow high-beta leadership, but the buy gate fails on breadth and index confirmation. Hot sectors (top 5): 半导体 +4.71%, 综合Ⅱ +4.03%, 航天装备Ⅱ +3.88%, 家电零部件Ⅱ +2.90%, 风电设备 +2.63%. Cold sectors (bottom 5): 游戏Ⅱ -3.59%, 贸易Ⅱ -2.76%, 酒店餐饮 -2.65%, 燃气Ⅱ -2.60%, 玻璃玻纤 -2.46%. Position sector alignment: 0/0 positions in hot sectors. IV context: no usable IV data, so no sizing edge from volatility sentiment; regime block remains decisive."
   },
   "strategy_scan": {
     "total_stocks_scanned": 47,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-05-05T11:44:30.343037+08:00"
+    "scan_time": "2026-05-05T14:36:42.590928+08:00"
   },
   "recommendations": [
     {
-      "code": "688150.SH",
-      "name": "莱特光电",
+      "code": "688766.SH",
+      "name": "普冉股份",
       "price": null,
-      "rps120": 94.69,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "300739.SZ",
-      "name": "明阳电路",
-      "price": null,
-      "rps120": 90.65,
+      "rps120": 98.92,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -127,46 +118,10 @@
       "reasoning": ""
     },
     {
-      "code": "001389.SZ",
-      "name": "广合科技",
+      "code": "300739.SZ",
+      "name": "明阳电路",
       "price": null,
-      "rps120": 92.58,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "300236.SZ",
-      "name": "上海新阳",
-      "price": null,
-      "rps120": 88.86,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688037.SH",
-      "name": "芯源微",
-      "price": null,
-      "rps120": 88.89,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688668.SH",
-      "name": "鼎通科技",
-      "price": null,
-      "rps120": 90.11,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "002859.SZ",
-      "name": "洁美科技",
-      "price": null,
-      "rps120": 86.35,
+      "rps120": 90.65,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -179,14 +134,50 @@
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
+    },
+    {
+      "code": "002297.SZ",
+      "name": "博云新材",
+      "price": null,
+      "rps120": 93.79,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688150.SH",
+      "name": "莱特光电",
+      "price": null,
+      "rps120": 94.69,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "001389.SZ",
+      "name": "广合科技",
+      "price": null,
+      "rps120": 92.58,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688037.SH",
+      "name": "芯源微",
+      "price": null,
+      "rps120": 88.89,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
     }
   ],
   "summary": {
     "total_scanned": 47,
     "buy_recommendations": 0,
-    "watch_recommendations": 16,
+    "watch_recommendations": 15,
     "avoid_recommendations": 0,
     "market_call": "观望",
-    "reasoning": "Breadth 1.17:1 fragile, 98涨停/55跌停, only 上证指数 green while 深成指/创业板指 are red; this fails the minimum long-entry gate and matches the system hard block on new longs. Hot sectors (top 5): 半导体 +4.71%, 综合Ⅱ +4.03%, 航天装备Ⅱ +3.88%, 家电零部件Ⅱ +2.90%, 风电设备 +2.63%. Cold sectors (bottom 5): 游戏Ⅱ -3.59%, 贸易Ⅱ -2.76%, 酒店餐饮 -2.65%, 燃气Ⅱ -2.60%, 玻璃玻纤 -2.46%. Position sector alignment: 0/0 positions in hot sectors. Research check suggests semiconductor/科创50 strength is driving the tape, with wind equipment also supported by installation expectations, but the market is too internally messy for fresh momentum risk. IV context is unavailable, so no stock-level IV throttle can be applied."
+    "reasoning": "Breadth 1.17:1 weak/panic, 98涨停/55跌停, only 上证指数 green while 深证成指 and 创业板指 are red; 科创50 +5.19% and 半导体 +4.71% show narrow high-beta leadership, but the buy gate fails on breadth and index confirmation. Hot sectors (top 5): 半导体 +4.71%, 综合Ⅱ +4.03%, 航天装备Ⅱ +3.88%, 家电零部件Ⅱ +2.90%, 风电设备 +2.63%. Cold sectors (bottom 5): 游戏Ⅱ -3.59%, 贸易Ⅱ -2.76%, 酒店餐饮 -2.65%, 燃气Ⅱ -2.60%, 玻璃玻纤 -2.46%. Position sector alignment: 0/0 positions in hot sectors. IV context: no usable IV data, so no sizing edge from volatility sentiment; regime block remains decisive."
   }
 }

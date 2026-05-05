@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1777952111.551863,
+      "start": 1777962921.387285,
       "errors": [],
-      "end": 1777952610.428621,
-      "duration_sec": 498.9
+      "end": 1777962933.352134,
+      "duration_sec": 12.0
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 7423,
+      "response_size_bytes": 7306,
       "tokens": {
-        "input_tokens": 112243,
-        "output_tokens": 2528
+        "input_tokens": 116854,
+        "output_tokens": 2857
       },
       "rounds": 2,
-      "tool_calls_count": 6,
-      "duration_sec": 59.8,
+      "tool_calls_count": 7,
+      "duration_sec": 69.2,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "GPT primary",
@@ -25,23 +25,23 @@
     },
     {
       "phase": "apply",
-      "start": 1777952670.336407,
+      "start": 1777963002.587484,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=51",
-        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=23",
-        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=24",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=52",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=25",
+        "Hypothesis: Created h036 (observation): In a mixed tape, the best future buy list often comes from stocks that pass RPS ...",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1777952670.478293,
-      "duration_sec": 0.1
+      "end": 1777963002.770303,
+      "duration_sec": 0.2
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 558.8
+    "totalDurationSec": 81.4
   }
 }

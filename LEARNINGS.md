@@ -1090,3 +1090,9 @@
 - A split tape with a very strong 科创50 and semiconductor surge can still be a no-entry day when the broad buy gate fails.
 - The MA-distance anti-chase rule is excluding many of the strongest-looking names in semis, PCB and communication hardware today, which is exactly its job.
 - Best blocked candidates today are the ones with acceptable MA distance first, not the ones with the strongest headline momentum.
+
+### 自动更新 (2026-05-05)
+
+- A hot leading sector is not enough when market breadth fails the minimum gate; today's semiconductor surge coexists with only 1.17:1 breadth, 1/3 major indices green, and 55跌停, so the correct action is still no new positions.
+- The anti-chase MA rule is doing real work again: many of the strongest candidates today are exactly the ones far above MA5/MA10/MA20, especially in semiconductors and AI hardware.
+- In a mixed tape, the best future buy list often comes from stocks that pass RPS and support-distance checks but are blocked by regime, such as 北化股份、云图控股、明阳电路; these should be first reviewed when breadth improves.

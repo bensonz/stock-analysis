@@ -539,11 +539,15 @@
           {
             "date": "2026-05-05",
             "detail": "A split tape with a very strong 科创50 and semiconductor surge can still be a no-entry day when the broad buy gate fails."
+          },
+          {
+            "date": "2026-05-05",
+            "detail": "A hot leading sector is not enough when market breadth fails the minimum gate; today's semiconductor surge coexists with only 1.17:1 breadth, 1/3 major indices green, and 55跌停, so the correct action is still no new positions."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 51,
+      "sampleSize": 52,
       "hitRate": 1.0,
       "confidence": 0.981,
       "tags": [],
@@ -928,13 +932,17 @@
           {
             "date": "2026-05-05",
             "detail": "Best blocked candidates today are the ones with acceptable MA distance first, not the ones with the strongest headline momentum."
+          },
+          {
+            "date": "2026-05-05",
+            "detail": "The anti-chase MA rule is doing real work again: many of the strongest candidates today are exactly the ones far above MA5/MA10/MA20, especially in semiconductors and AI hardware."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 24,
+      "sampleSize": 25,
       "hitRate": 1.0,
-      "confidence": 0.962,
+      "confidence": 0.963,
       "tags": [
         "entry-filter",
         "timing"
@@ -1435,6 +1443,35 @@
         "sector",
         "timing",
         "signal"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h036",
+      "text": "In a mixed tape, the best future buy list often comes from stocks that pass RPS and support-distance checks but are blocked by regime, such as 北化股份、云图控股、明阳电路; these should be first reviewed when breadth improves.",
+      "type": "heuristic",
+      "status": "observation",
+      "created": "2026-05-05",
+      "lastTested": "2026-05-05",
+      "mechanism": "Separating stock quality from regime timing prevents forced entries today while preserving prepared names for the next valid risk-on window.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-05-05",
+            "detail": "In a mixed tape, the best future buy list often comes from stocks that pass RPS and support-distance checks but are blocked by regime, such as 北化股份、云图控股、明阳电路; these should be first reviewed when breadth improves."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "timing",
+        "sector",
+        "entry-filter"
       ],
       "parentRule": null,
       "retiredDate": null,
