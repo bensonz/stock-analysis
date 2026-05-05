@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "gpt-5.4",
+  "decision_source": "GPT primary",
+  "input_tokens": 112243,
+  "output_tokens": 2528,
+  "rounds": 2,
+  "duration_sec": 59.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+2026-05-05"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=半导体+板块+大涨+2026-05-05+A股"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=航天装备+板块+上涨+2026-05-05+A股"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=风电设备+板块+上涨+2026-05-05+A股"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=科创50+大涨+2026-05-05"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=A股+政策+半导体+2026-05-05"
+      },
+      "result_length": 3000
+    }
+  ],
+  "fallback_used": false
+}

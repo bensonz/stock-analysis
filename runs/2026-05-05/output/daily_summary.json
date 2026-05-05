@@ -1,0 +1,37 @@
+{
+  "date": "2026-05-05",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 965710.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.43,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -34290.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 1.1694,
+    "up": 2878,
+    "down": 2461,
+    "positive_indices": [
+      "上证指数"
+    ],
+    "negative_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 98,
+    "limit_downs": 55,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 1.17:1, 1/3 major indices green, 98 limit-ups / 55 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 1.17:1 fragile, 98涨停/55跌停, only 上证指数 green while 深成指/创业板指 are red; this fails the minimum long-entry gate and matches the system hard block on new longs. Hot sectors (top 5): 半导体 +4.71%, 综合Ⅱ +4.03%, 航天装备Ⅱ +3.88%, 家电零部件Ⅱ +2.90%, 风电设备 +2.63%. Cold sectors (bottom 5): 游戏Ⅱ -3.59%, 贸易Ⅱ -2.76%, 酒店餐饮 -2.65%, 燃气Ⅱ -2.60%, 玻璃玻纤 -2.46%. Position sector alignment: 0/0 positions in hot sectors. Research check suggests semiconductor/科创50 strength is driving the tape, with wind equipment also supported by installation expectations, but the market is too internally messy for fresh momentum risk. IV context is unavailable, so no stock-level IV throttle can be applied."
+  }
+}
