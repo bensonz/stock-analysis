@@ -547,11 +547,15 @@
           {
             "date": "2026-05-06",
             "detail": "A strong index day can still be a no-trade day when the tape has too many跌停 and the system hard-blocks entries; breadth alone is not enough to override regime risk."
+          },
+          {
+            "date": "2026-05-06",
+            "detail": "A bullish tape with 115涨停 can still be unbuyable when 63跌停 coexist; the market is strong but internally violent, so breadth alone should not override the hard regime block."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 53,
+      "sampleSize": 54,
       "hitRate": 1.0,
       "confidence": 0.982,
       "tags": [],
@@ -718,13 +722,17 @@
           {
             "date": "2026-05-06",
             "detail": "In ultra-low IV main-board conditions, even valid setups should be sized down rather than forced; complacent volatility plus extended price action is a poor combo for fresh chase entries."
+          },
+          {
+            "date": "2026-05-06",
+            "detail": "Low-IV conditions in several main-board proxies argue for smaller or zero deployment even when trend is positive; no need to force exposure when both regime and extension filters say no."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 18,
+      "sampleSize": 19,
       "hitRate": 1.0,
-      "confidence": 0.95,
+      "confidence": 0.952,
       "tags": [
         "timing",
         "position-sizing",
@@ -948,13 +956,21 @@
           {
             "date": "2026-05-06",
             "detail": "The anti-chase MA-distance rule is excluding most of today's attractive semiconductor and electronics names for good reason: leadership is real, but the immediate entry is often too far from support."
+          },
+          {
+            "date": "2026-05-06",
+            "detail": "Today confirms h021 again: even on a strong index day, the MA-distance anti-chase rule eliminates most apparent leaders and prevents buying late-stage extensions."
+          },
+          {
+            "date": "2026-05-06",
+            "detail": "The best-looking candidates today are concentrated in hot tech sectors, but almost all fail because extension is more dangerous than missing the first leg."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 26,
+      "sampleSize": 28,
       "hitRate": 1.0,
-      "confidence": 0.964,
+      "confidence": 0.967,
       "tags": [
         "entry-filter",
         "timing"

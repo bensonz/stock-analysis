@@ -2,10 +2,10 @@
   "provider": "openai",
   "primary_model": "gpt-5.4",
   "decision_source": "GPT primary",
-  "input_tokens": 136241,
-  "output_tokens": 2617,
+  "input_tokens": 140299,
+  "output_tokens": 2872,
   "rounds": 2,
-  "duration_sec": 57.6,
+  "duration_sec": 74.6,
   "tool_calls": [
     {
       "pass": "P1",
@@ -23,7 +23,7 @@
       "tool": "web_fetch",
       "input": {
         "maxChars": 4000,
-        "url": "https://www.baidu.com/s?wd=半导体+板块+大涨+2026-05-06+A股"
+        "url": "https://www.baidu.com/s?wd=%E5%8D%8A%E5%AF%BC%E4%BD%93+%E6%9D%BF%E5%9D%97+2026-05-06+A%E8%82%A1"
       },
       "result_length": 4000
     },
@@ -33,7 +33,7 @@
       "tool": "web_fetch",
       "input": {
         "maxChars": 4000,
-        "url": "https://www.baidu.com/s?wd=玻璃玻纤+板块+上涨+2026-05-06+A股"
+        "url": "https://www.baidu.com/s?wd=%E7%8E%BB%E7%92%83%E7%8E%BB%E7%BA%A4+%E6%B6%A8%E4%BB%B7+2026-05-06+A%E8%82%A1"
       },
       "result_length": 4000
     },
@@ -43,7 +43,7 @@
       "tool": "web_fetch",
       "input": {
         "maxChars": 4000,
-        "url": "https://www.baidu.com/s?wd=科创50+大涨+2026-05-06+原因"
+        "url": "https://www.baidu.com/s?wd=%E4%B8%9C%E6%9D%90%E7%A7%91%E6%8A%80+2026%E4%B8%80%E5%AD%A3%E6%8A%A5+%E6%B6%A8%E4%BB%B7"
       },
       "result_length": 4000
     },
@@ -53,7 +53,27 @@
       "tool": "web_fetch",
       "input": {
         "maxChars": 4000,
-        "url": "https://www.baidu.com/s?wd=A股+政策+半导体+PCB+涨价+2026-05-06"
+        "url": "https://www.baidu.com/s?wd=%E7%A7%91%E8%BE%BE%E5%88%B6%E9%80%A0+2026%E4%B8%80%E5%AD%A3%E6%8A%A5+%E7%A2%B3%E9%85%B8%E9%94%82+2026-05-06"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E7%A6%8F%E6%99%B6%E7%A7%91%E6%8A%80+2026%E4%B8%80%E5%AD%A3%E6%8A%A5+2026-05-06"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=A%E8%82%A1+%E6%94%BF%E7%AD%96+%E7%A7%91%E5%88%9B50+2026-05-06"
       },
       "result_length": 4000
     }

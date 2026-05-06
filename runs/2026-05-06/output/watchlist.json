@@ -2,49 +2,40 @@
   "date": "2026-05-06",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4164.421,
-      "change_pct": 1.27
+      "value": 4158.094,
+      "change_pct": 1.12
     },
     "shenzhen_component": {
-      "value": 15496.48,
-      "change_pct": 2.57
+      "value": 15458.77,
+      "change_pct": 2.32
     },
     "chinext": {
-      "value": 3798.06,
-      "change_pct": 3.29
+      "value": 3780.34,
+      "change_pct": 2.81
     },
-    "sentiment": "bullish_but_unstable",
+    "sentiment": "bullish",
     "hot_sectors": [
-      "半导体",
       "玻璃玻纤",
+      "半导体",
       "其他电子Ⅱ",
-      "综合Ⅱ",
-      "航天装备Ⅱ"
+      "贵金属",
+      "综合Ⅱ"
     ],
     "cold_sectors": [
       "油气开采Ⅱ",
       "油服工程",
       "酒店餐饮",
       "旅游及景区",
-      "农商行Ⅱ"
+      "教育"
     ],
-    "notes": "Breadth 3.08:1 bullish on the surface, 3/3 major indices green, 102涨停/62跌停, with 科创50 +8.25% and semiconductors/other electronics leading while oil, travel and banks lag. Hot sectors (top 5): 半导体 +7.66%, 玻璃玻纤 +7.56%, 其他电子Ⅱ +5.94%, 综合Ⅱ +5.09%, 航天装备Ⅱ +5.02%. Cold sectors (bottom 5): 油气开采Ⅱ -3.46%, 油服工程 -3.40%, 酒店餐饮 -3.34%, 旅游及景区 -2.03%, 农商行Ⅱ -1.87%. Position sector alignment: 0/0 positions in hot sectors. Despite strong headline breadth, the tape is internally unstable with 62跌停 and the provided entry_regime is hard-blocked ('panic'), so no fresh risk. IV context is complacent overall: market avg IV Rank 10.5% (extremely optimistic), with main-board proxies near 0-3% and ChiNext/STAR closer to normal-low."
+    "notes": "Breadth 2.32:1 bullish on the surface, 3/3 major indices green and 115涨停, but 63跌停 keeps the tape unstable enough for the system's hard block on new longs. Hot sectors (top 5): 玻璃玻纤 +7.33%, 半导体 +5.42%, 其他电子Ⅱ +5.12%, 贵金属 +5.11%, 综合Ⅱ +4.92%. Cold sectors (bottom 5): 油气开采Ⅱ -4.27%, 油服工程 -3.95%, 酒店餐饮 -3.65%, 旅游及景区 -2.24%, 教育 -2.14%. Position sector alignment: 0/0 positions in hot sectors. IV context remains complacent-to-low overall, with several main-board proxies below 15% IV Rank and 科创/创业板 only neutral-low, so fresh risk should be selective even without the regime block."
   },
   "strategy_scan": {
     "total_stocks_scanned": 53,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-05-06T11:38:48.539050+08:00"
+    "scan_time": "2026-05-06T14:37:18.480271+08:00"
   },
   "recommendations": [
-    {
-      "code": "300201.SZ",
-      "name": "海伦哲",
-      "price": null,
-      "rps120": 97.63,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
     {
       "code": "002222.SZ",
       "name": "福晶科技",
@@ -145,15 +136,6 @@
       "reasoning": ""
     },
     {
-      "code": "002859.SZ",
-      "name": "洁美科技",
-      "price": null,
-      "rps120": 86.79,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
       "code": "001389.SZ",
       "name": "广合科技",
       "price": null,
@@ -170,14 +152,23 @@
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
+    },
+    {
+      "code": "300201.SZ",
+      "name": "海伦哲",
+      "price": null,
+      "rps120": 97.63,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
     }
   ],
   "summary": {
     "total_scanned": 53,
     "buy_recommendations": 0,
-    "watch_recommendations": 15,
+    "watch_recommendations": 14,
     "avoid_recommendations": 0,
     "market_call": "观望",
-    "reasoning": "Breadth 3.08:1 bullish on the surface, 3/3 major indices green, 102涨停/62跌停, with 科创50 +8.25% and semiconductors/other electronics leading while oil, travel and banks lag. Hot sectors (top 5): 半导体 +7.66%, 玻璃玻纤 +7.56%, 其他电子Ⅱ +5.94%, 综合Ⅱ +5.09%, 航天装备Ⅱ +5.02%. Cold sectors (bottom 5): 油气开采Ⅱ -3.46%, 油服工程 -3.40%, 酒店餐饮 -3.34%, 旅游及景区 -2.03%, 农商行Ⅱ -1.87%. Position sector alignment: 0/0 positions in hot sectors. Despite strong headline breadth, the tape is internally unstable with 62跌停 and the provided entry_regime is hard-blocked ('panic'), so no fresh risk. IV context is complacent overall: market avg IV Rank 10.5% (extremely optimistic), with main-board proxies near 0-3% and ChiNext/STAR closer to normal-low."
+    "reasoning": "Breadth 2.32:1 bullish on the surface, 3/3 major indices green and 115涨停, but 63跌停 keeps the tape unstable enough for the system's hard block on new longs. Hot sectors (top 5): 玻璃玻纤 +7.33%, 半导体 +5.42%, 其他电子Ⅱ +5.12%, 贵金属 +5.11%, 综合Ⅱ +4.92%. Cold sectors (bottom 5): 油气开采Ⅱ -4.27%, 油服工程 -3.95%, 酒店餐饮 -3.65%, 旅游及景区 -2.24%, 教育 -2.14%. Position sector alignment: 0/0 positions in hot sectors. IV context remains complacent-to-low overall, with several main-board proxies below 15% IV Rank and 科创/创业板 only neutral-low, so fresh risk should be selective even without the regime block."
   }
 }

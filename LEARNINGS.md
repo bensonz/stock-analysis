@@ -1102,3 +1102,10 @@
 - A strong index day can still be a no-trade day when the tape has too many跌停 and the system hard-blocks entries; breadth alone is not enough to override regime risk.
 - The anti-chase MA-distance rule is excluding most of today's attractive semiconductor and electronics names for good reason: leadership is real, but the immediate entry is often too far from support.
 - In ultra-low IV main-board conditions, even valid setups should be sized down rather than forced; complacent volatility plus extended price action is a poor combo for fresh chase entries.
+
+### 自动更新 (2026-05-06)
+
+- Today confirms h021 again: even on a strong index day, the MA-distance anti-chase rule eliminates most apparent leaders and prevents buying late-stage extensions.
+- A bullish tape with 115涨停 can still be unbuyable when 63跌停 coexist; the market is strong but internally violent, so breadth alone should not override the hard regime block.
+- The best-looking candidates today are concentrated in hot tech sectors, but almost all fail because extension is more dangerous than missing the first leg.
+- Low-IV conditions in several main-board proxies argue for smaller or zero deployment even when trend is positive; no need to force exposure when both regime and extension filters say no.
