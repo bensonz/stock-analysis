@@ -1,0 +1,195 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "半导体",
+        "5d_pct": 7.66,
+        "trend": "accelerating"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": 7.56,
+        "trend": "accelerating"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": 5.94,
+        "trend": "steady"
+      },
+      {
+        "name": "综合Ⅱ",
+        "5d_pct": 5.09,
+        "trend": "steady"
+      },
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": 5.02,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": -3.46,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "油服工程",
+        "5d_pct": -3.4,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "酒店餐饮",
+        "5d_pct": -3.34,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "旅游及景区",
+        "5d_pct": -2.03,
+        "trend": "weak"
+      },
+      {
+        "name": "农商行Ⅱ",
+        "5d_pct": -1.87,
+        "trend": "weak"
+      }
+    ],
+    "position_alignment": "0/0 positions in hot sectors",
+    "regime": "Tech/semis leadership with broad risk-on, while oil/travel/defensives lag; however tape is flagged as hard-block for fresh longs by entry_regime."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "300201",
+      "name": "海伦哲",
+      "reason": "MA distances pass and RPS120 97.63 is strong, but RPS is above 95 chase cutoff and entry_regime hard-blocks new longs.",
+      "rps120": 97.63
+    },
+    {
+      "code": "002222",
+      "name": "福晶科技",
+      "reason": "Hot sector and decent catalyst, but dist_ma5_pct 7.5% and dist_ma20_pct 16.3% violate anti-chase rule; also entry_regime blocks new longs.",
+      "rps120": 91.88
+    },
+    {
+      "code": "600499",
+      "name": "科达制造",
+      "reason": "RPS120 90.95 is in range and price is not badly extended on MA5/MA10, but dist_ma20_pct 14.5% exceeds 12% limit; 300ETF IV Rank 3.2% would also force half sizing, and entry_regime hard-blocks entries.",
+      "rps120": 90.95
+    },
+    {
+      "code": "000893",
+      "name": "亚钾国际",
+      "reason": "RPS120 92.55 is acceptable under extended-zone logic and MA distances are fine, but sector is not in today's top leadership list and entry_regime hard-blocks new longs.",
+      "rps120": 92.55
+    },
+    {
+      "code": "002539",
+      "name": "云图控股",
+      "reason": "Best technical shape among chemical names with SETUP VCP and clean MA distances, but RPS120 87.64 lacks evidence that its sector is in the top 30% today; entry_regime also blocks all new positions.",
+      "rps120": 87.64
+    },
+    {
+      "code": "605056",
+      "name": "咸亨国际",
+      "reason": "MA distances are constructive, but sector is not in top leadership and stock-specific IV proxy is 0.0% IV Rank, requiring half sizing even if entries were allowed; entry_regime hard-blocks new longs.",
+      "rps120": 93.83
+    },
+    {
+      "code": "300739",
+      "name": "明阳电路",
+      "reason": "RPS120 90.53 and MA distances pass, but recent event says price strength over the past 10 trading days was only above 4.8% of stocks, so short-term momentum confirmation is weak; entry_regime also blocks new longs.",
+      "rps120": 90.53
+    },
+    {
+      "code": "688150",
+      "name": "莱特光电",
+      "reason": "Sector tailwind and fresh results are supportive, but dist_ma20_pct 20.3% violates anti-chase rule; entry_regime blocks new longs.",
+      "rps120": 94.64
+    },
+    {
+      "code": "601208",
+      "name": "东材科技",
+      "reason": "Fresh catalyst from CCL/PP price hike and 103% profit growth are strong, but dist_ma5_pct 7.8%, dist_ma10_pct 15.8%, and dist_ma20_pct 25.0% all violate anti-chase limits; 300ETF IV Rank 3.2% also implies half sizing.",
+      "rps120": 92.31
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "In hot semiconductor group and strong institutional sponsorship, but dist_ma5_pct 6.5%, dist_ma10_pct 14.1%, and dist_ma20_pct 22.4% fail anti-chase rule.",
+      "rps120": 90.87
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "reason": "Semiconductor materials trend is good, but dist_ma5_pct 7.0%, dist_ma10_pct 18.4%, and dist_ma20_pct 21.0% are too extended for a new entry.",
+      "rps120": 88.03
+    },
+    {
+      "code": "688668",
+      "name": "鼎通科技",
+      "reason": "Excellent earnings catalyst and institutional flow, but dist_ma5_pct 9.6%, dist_ma10_pct 30.0%, and dist_ma20_pct 41.7% clearly indicate chasing.",
+      "rps120": 91.28
+    },
+    {
+      "code": "002859",
+      "name": "洁美科技",
+      "reason": "Belongs to a hot sector, but dist_ma5_pct 6.2%, dist_ma10_pct 13.4%, and dist_ma20_pct 16.9% violate anti-chase thresholds.",
+      "rps120": 86.79
+    },
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "reason": "Fresh PCB catalyst and strong growth, but dist_ma5_pct 17.1%, dist_ma10_pct 32.7%, and dist_ma20_pct 44.2% are extreme extension; no chase.",
+      "rps120": 93.18
+    },
+    {
+      "code": "688409",
+      "name": "富创精密",
+      "reason": "Strong semiconductor earnings, but RPS120 91.01 is outweighed by dist_ma5_pct 9.6%, dist_ma10_pct 25.0%, and dist_ma20_pct 34.3%; overextended.",
+      "rps120": 91.01
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "A strong index day can still be a no-trade day when the tape has too many跌停 and the system hard-blocks entries; breadth alone is not enough to override regime risk.",
+      "type": "rule",
+      "tags": [
+        "timing",
+        "entry-filter",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Momentum entries work best when both participation and tape quality agree; 102涨停 is bullish, but 62跌停 signals unstable internals and elevated reversal risk."
+    },
+    {
+      "text": "The anti-chase MA-distance rule is excluding most of today's attractive semiconductor and electronics names for good reason: leadership is real, but the immediate entry is often too far from support.",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "When many leaders sit 15%-40% above MA10/MA20 after earnings and sector surges, the reward/risk worsens sharply because stops must sit far below near-term support."
+    },
+    {
+      "text": "In ultra-low IV main-board conditions, even valid setups should be sized down rather than forced; complacent volatility plus extended price action is a poor combo for fresh chase entries.",
+      "type": "heuristic",
+      "tags": [
+        "position-sizing",
+        "timing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h017",
+      "mechanism": "Low IV means options-implied risk is cheap and the market is complacent; if price is already stretched, upside is less mispriced than downside shock risk."
+    }
+  ],
+  "market_summary": "Breadth 3.08:1 bullish on the surface, 3/3 major indices green, 102涨停/62跌停, with 科创50 +8.25% and semiconductors/other electronics leading while oil, travel and banks lag. Hot sectors (top 5): 半导体 +7.66%, 玻璃玻纤 +7.56%, 其他电子Ⅱ +5.94%, 综合Ⅱ +5.09%, 航天装备Ⅱ +5.02%. Cold sectors (bottom 5): 油气开采Ⅱ -3.46%, 油服工程 -3.40%, 酒店餐饮 -3.34%, 旅游及景区 -2.03%, 农商行Ⅱ -1.87%. Position sector alignment: 0/0 positions in hot sectors. Despite strong headline breadth, the tape is internally unstable with 62跌停 and the provided entry_regime is hard-blocked ('panic'), so no fresh risk. IV context is complacent overall: market avg IV Rank 10.5% (extremely optimistic), with main-board proxies near 0-3% and ChiNext/STAR closer to normal-low.",
+  "market_sentiment": "bullish_but_unstable",
+  "market_call": "观望"
+}
