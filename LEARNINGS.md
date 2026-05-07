@@ -1115,3 +1115,9 @@
 - 今天最该执行的不是选股，而是空仓纪律：虽然上/下比1.77:1且三大指数全红，但51家跌停已触发系统给出的 hard_block，说明这是高波动分化市，不是适合普遍开新仓的顺风环境。
 - MA距离规则今天继续有效：大量最强票被拦在门外，真正可执行的候选反而只有国电南自、明阳电路这类贴近均线的名字。
 - Sector First today beats stock stories: 农化、钾肥、小金属里有基本面不错的票，但市场主线明确偏向自动化设备、元件、通信设备，弱板块个股即使不差也不该硬做。
+
+### 自动更新 (2026-05-07)
+
+- A 1.85:1 breadth ratio with all three major indices green can still be a no-buy day if跌停数量 remains elevated; the hard-block should dominate stock-level attractiveness.
+- Today strongly reinforces that the MA-distance anti-chase rule is doing the heavy lifting: many of the best catalyst names in hot sectors are simply too extended to touch.
+- Hot-sector membership alone is not enough; the highest-quality entries need both sector tailwind and non-extended price structure. 国电南自 stood out because it had both, but even that was vetoed by regime.

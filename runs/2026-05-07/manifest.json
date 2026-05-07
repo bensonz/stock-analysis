@@ -1,0 +1,66 @@
+{
+  "date": "2026-05-07",
+  "status": "degraded",
+  "exit_code": 0,
+  "total_duration_sec": 720.8,
+  "phases": {
+    "health_check": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "sources": {
+        "sina": {
+          "status": "ok",
+          "latency_ms": 192.9
+        },
+        "cheesefortune": {
+          "status": "ok",
+          "latency_ms": 487.8
+        },
+        "pricedb": {
+          "status": "ok",
+          "latest_date": "2026-05-06",
+          "stale": false
+        }
+      }
+    },
+    "collect": {
+      "status": "ok",
+      "duration_sec": 644.8,
+      "errors": [
+        "pricedb_update: Refreshing stock list via tushare...\n  5512 stocks in universe\nUpdating 5517 stocks via tushare (20260507 → 20260507)...\n  tushare update failed: Tushare trade_cal failed: 抱歉，您没有接口(trade_cal)访问权限，权限的具体详情访问：https://tushare.pro/document/1?doc_id=108。\nUsing existing stock universe for eastmoney_direct: 5517 stocks\nUpdating 5517 stocks via eastmoney_direct (20260507 → 20260507)...\n  [Eastmoney 100/5517] last: 000509 -> 1 rows\n  [Eastmoney 200/5517] last: 000663 -> 1 rows\n  [Eastmoney 300/5517] last: 000812 -> 0 rows\n  [Eastmoney 400/5517] last: 000969 -> 0 rows\n  [Eastmoney 500/5517] last: 600118 -> 0 rows\n  [Eastmoney 600/5517] last: 600262 -> 1 rows\n  [Eastmoney 700/5517] last: 600381 -> 0 rows\n  [Eastmoney 800/5517] last: 600528 -> 0 rows\n  [Eastmoney 900/5517] last: 600650 -> 0 rows\n  [Eastmoney 1000/5517] last: 600771 -> 0 rows\n  [Eastmoney 1100/5517] last: 600887 -> 0 rows\n  [Eastmoney 1200/5517] last: 002061 -> 0 rows\n  [Eastmoney 1300/5517] last: 002170 -> 0 rows\n  [Eastmoney 1400/5517] last: 601186 -> 0 rows\n  [Eastmoney 1500/5517] last: 002302 -> 0 rows\n  [Eastmoney 1600/5517] last: 300037 -> 0 rows\n  [Eastmoney 1700/5517] last: 601369 -> 0 rows\n  [Eastmoney 1800/5517] last: 300107 -> 0 rows\n  [Eastmoney 1900/5517] last: 002547 -> 0 rows\n  [Eastmoney 2000/5517] last: 601199 -> 0 rows\n  [Eastmoney 2100/5517] last: 300251 -> 0 rows\n  [Eastmoney 2200/5517] last: 002650 -> 0 rows\n  [Eastmoney 2300/5517] last: 603126 -> 0 rows\n  [Eastmoney 2400/5517] last: 603158 -> 0 rows\n  [Eastmoney 2500/5517] last: 603528 -> 0 rows\n  [Eastmoney 2600/5517] last: 002806 -> 0 rows\n  [Eastmoney 2700/5517] last: 300537 -> 0 rows\n  [Eastmoney 2800/5517] last: 300564 -> 0 rows\n  [Eastmoney 2900/5517] last: 002858 -> 0 rows\n  [Eastmoney 3000/5517] last: 603113 -> 0 rows\n  [Eastmoney 3100/5517] last: 603767 -> 0 rows\n  eastmoney_direct update failed: update budget exceeded\n  Skipping akshare: update budget exceeded (600s)\n  Could not initialize BaoStock: 网络接收错误。\nUpdate failed. Providers tried:\n  - tushare: Tushare trade_cal failed: 抱歉，您没有接口(trade_cal)访问权限，权限的具体详情访问：https://tushare.pro/document/1?doc_id=108。\n  - eastmoney_direct: update budget exceeded"
+      ]
+    },
+    "llm_analysis": {
+      "status": "ok",
+      "duration_sec": 75.8
+    },
+    "apply": {
+      "status": "ok",
+      "duration_sec": 0.2
+    },
+    "validate": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "errors": []
+    }
+  },
+  "gates": {
+    "phase1_to_phase2": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": []
+    },
+    "phase2_to_phase3": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [
+        "missing watchlist"
+      ]
+    },
+    "phase3_to_phase4": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": []
+    }
+  }
+}

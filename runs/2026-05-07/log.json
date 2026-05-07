@@ -3,23 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1778124908.727211,
-      "errors": [
-        "pricedb_update: Refreshing stock list via tushare...\n  5512 stocks in universe\nUpdating 5517 stocks via tushare (20260507 → 20260507)...\n  tushare update failed: Tushare trade_cal failed: 抱歉，您没有接口(trade_cal)访问权限，权限的具体详情访问：https://tushare.pro/document/1?doc_id=108。\nUsing existing stock universe for eastmoney_direct: 5517 stocks\nUpdating 5517 stocks via eastmoney_direct (20260507 → 20260507)...\n  [Eastmoney 100/5517] last: 000509 -> 1 rows\n  [Eastmoney 200/5517] last: 000663 -> 1 rows\n  [Eastmoney 300/5517] last: 000812 -> 0 rows\n  [Eastmoney 400/5517] last: 000969 -> 0 rows\n  [Eastmoney 500/5517] last: 600118 -> 0 rows\n  [Eastmoney 600/5517] last: 600262 -> 1 rows\n  [Eastmoney 700/5517] last: 600381 -> 0 rows\n  [Eastmoney 800/5517] last: 600528 -> 0 rows\n  [Eastmoney 900/5517] last: 600650 -> 0 rows\n  [Eastmoney 1000/5517] last: 600771 -> 0 rows\n  [Eastmoney 1100/5517] last: 600887 -> 0 rows\n  [Eastmoney 1200/5517] last: 002061 -> 0 rows\n  [Eastmoney 1300/5517] last: 002170 -> 0 rows\n  [Eastmoney 1400/5517] last: 601186 -> 0 rows\n  [Eastmoney 1500/5517] last: 002302 -> 0 rows\n  [Eastmoney 1600/5517] last: 300037 -> 0 rows\n  [Eastmoney 1700/5517] last: 601369 -> 0 rows\n  [Eastmoney 1800/5517] last: 300107 -> 0 rows\n  [Eastmoney 1900/5517] last: 002547 -> 0 rows\n  [Eastmoney 2000/5517] last: 601199 -> 0 rows\n  [Eastmoney 2100/5517] last: 300251 -> 0 rows\n  [Eastmoney 2200/5517] last: 002650 -> 0 rows\n  [Eastmoney 2300/5517] last: 603126 -> 0 rows\n  [Eastmoney 2400/5517] last: 603158 -> 0 rows\n  [Eastmoney 2500/5517] last: 603528 -> 0 rows\n  [Eastmoney 2600/5517] last: 002806 -> 0 rows\n  [Eastmoney 2700/5517] last: 300537 -> 0 rows\n  [Eastmoney 2800/5517] last: 300564 -> 0 rows\n  [Eastmoney 2900/5517] last: 002858 -> 0 rows\n  [Eastmoney 3000/5517] last: 603113 -> 0 rows\n  [Eastmoney 3100/5517] last: 603767 -> 0 rows\n  eastmoney_direct update failed: update budget exceeded\n  Skipping akshare: update budget exceeded (600s)\n  Could not initialize BaoStock: 网络接收错误。\nUpdate failed. Providers tried:\n  - tushare: Tushare trade_cal failed: 抱歉，您没有接口(trade_cal)访问权限，权限的具体详情访问：https://tushare.pro/document/1?doc_id=108。\n  - eastmoney_direct: update budget exceeded"
-      ],
-      "end": 1778125553.4788039,
-      "duration_sec": 644.8
+      "start": 1778135743.09821,
+      "errors": [],
+      "end": 1778135768.3107572,
+      "duration_sec": 25.2
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 5757,
+      "response_size_bytes": 7683,
       "tokens": {
-        "input_tokens": 141798,
-        "output_tokens": 3336
+        "input_tokens": 139953,
+        "output_tokens": 2851
       },
       "rounds": 2,
-      "tool_calls_count": 8,
-      "duration_sec": 75.8,
+      "tool_calls_count": 5,
+      "duration_sec": 70.0,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "GPT primary",
@@ -27,23 +25,23 @@
     },
     {
       "phase": "apply",
-      "start": 1778125629.389706,
+      "start": 1778135838.389887,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=55",
-        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=29",
-        "Hypothesis: Created h037 (observation): Sector First today beats stock stories: 农化、钾肥、小金属里有基本面不错的票，但市场主线明确偏向自动化设备、元件、通信设...",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=56",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=30",
+        "Hypothesis: Updated h027 (hypothesis): +1 supporting evidence → hitRate=100%, n=3",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1778125629.565548,
+      "end": 1778135838.579909,
       "duration_sec": 0.2
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 720.8
+    "totalDurationSec": 95.4
   }
 }

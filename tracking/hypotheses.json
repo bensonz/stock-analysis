@@ -555,13 +555,17 @@
           {
             "date": "2026-05-07",
             "detail": "今天最该执行的不是选股，而是空仓纪律：虽然上/下比1.77:1且三大指数全红，但51家跌停已触发系统给出的 hard_block，说明这是高波动分化市，不是适合普遍开新仓的顺风环境。"
+          },
+          {
+            "date": "2026-05-07",
+            "detail": "A 1.85:1 breadth ratio with all three major indices green can still be a no-buy day if跌停数量 remains elevated; the hard-block should dominate stock-level attractiveness."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 55,
+      "sampleSize": 56,
       "hitRate": 1.0,
-      "confidence": 0.982,
+      "confidence": 0.983,
       "tags": [],
       "parentRule": null,
       "retiredDate": null,
@@ -972,13 +976,17 @@
           {
             "date": "2026-05-07",
             "detail": "MA距离规则今天继续有效：大量最强票被拦在门外，真正可执行的候选反而只有国电南自、明阳电路这类贴近均线的名字。"
+          },
+          {
+            "date": "2026-05-07",
+            "detail": "Today strongly reinforces that the MA-distance anti-chase rule is doing the heavy lifting: many of the best catalyst names in hot sectors are simply too extended to touch."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 29,
+      "sampleSize": 30,
       "hitRate": 1.0,
-      "confidence": 0.968,
+      "confidence": 0.969,
       "tags": [
         "entry-filter",
         "timing"
@@ -1224,7 +1232,7 @@
       "type": "heuristic",
       "status": "hypothesis",
       "created": "2026-04-06",
-      "lastTested": "2026-05-01",
+      "lastTested": "2026-05-07",
       "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes.",
       "evidence": {
         "supporting": [
@@ -1235,13 +1243,17 @@
           {
             "date": "2026-05-01",
             "detail": "Fresh price/supply catalysts remain powerful in materials and PCB chain: FR-4/PP price hikes support 东材科技, while lithium pricing and Q1 acceleration support 科达制造, but catalyst quality cannot override regime and extension rules."
+          },
+          {
+            "date": "2026-05-07",
+            "detail": "Hot-sector membership alone is not enough; the highest-quality entries need both sector tailwind and non-extended price structure. 国电南自 stood out because it had both, but even that was vetoed by regime."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 2,
+      "sampleSize": 3,
       "hitRate": 1.0,
-      "confidence": 0.75,
+      "confidence": 0.8,
       "tags": [
         "entry-filter",
         "timing",
