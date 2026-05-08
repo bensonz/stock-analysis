@@ -1,0 +1,164 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "航运港口",
+        "5d_pct": 2.65,
+        "trend": "accelerating"
+      },
+      {
+        "name": "电机Ⅱ",
+        "5d_pct": 2.64,
+        "trend": "steady"
+      },
+      {
+        "name": "贸易Ⅱ",
+        "5d_pct": 2.55,
+        "trend": "steady"
+      },
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": 2.51,
+        "trend": "accelerating"
+      },
+      {
+        "name": "其他家电Ⅱ",
+        "5d_pct": 2.42,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "半导体",
+        "5d_pct": -2.93,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "能源金属",
+        "5d_pct": -2.76,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "冶钢原料",
+        "5d_pct": -2.72,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "综合Ⅱ",
+        "5d_pct": -2.71,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "医疗服务",
+        "5d_pct": -2.07,
+        "trend": "weak"
+      }
+    ],
+    "position_alignment": "0/0 positions in hot sectors",
+    "regime": "Defensive rotation: shipping/defense/equipment leaders up while semis and growth are under pressure; hot sectors are rotating rather than broad risk-on persisting."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "reason": "Entry regime hard-blocked: breadth 1.31:1 is below the 1.5:1 gate and 0/3 major indices are green. Setup itself is orderly (rps120 89.92, dist_ma5_pct 0.5, dist_ma10_pct -0.4, dist_ma20_pct 3.4) and sector is supportive, but no new longs in this tape.",
+      "rps120": 89.92
+    },
+    {
+      "code": "600499",
+      "name": "科达制造",
+      "reason": "Would be one of the cleaner candidates on metrics (rps120 90.79; dist_ma5_pct -1.9, dist_ma10_pct -0.2, dist_ma20_pct 7.0) with earnings catalyst, but the market buy gate failed and no current sector ranking beyond daily top/bottom confirms top-30% status.",
+      "rps120": 90.79
+    },
+    {
+      "code": "002222",
+      "name": "福晶科技",
+      "reason": "Technically too extended for a fresh entry: dist_ma20_pct 12.7 exceeds the 12% hard chase limit. Also market regime blocks new longs.",
+      "rps120": 92.23
+    },
+    {
+      "code": "688372",
+      "name": "伟测科技",
+      "reason": "Semiconductor is in today's bottom 5 sectors at -2.93%, so sector gravity is wrong for a new entry despite acceptable MA distances and strong earnings growth.",
+      "rps120": 93.8
+    },
+    {
+      "code": "300666",
+      "name": "江丰电子",
+      "reason": "Sector is wrong: 半导体 is bottom 5 at -2.93%. Also dist_ma10_pct 11.9 and dist_ma20_pct 17.8 both violate the anti-chase limits.",
+      "rps120": 94.49
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "Overextended after the move: dist_ma5_pct 7.5, dist_ma10_pct 11.3 and dist_ma20_pct 15.5 all violate the MA-distance rule. Market regime also blocks entries.",
+      "rps120": 92.84
+    },
+    {
+      "code": "002655",
+      "name": "共达电声",
+      "reason": "Hard fail on anti-chase rule: dist_ma5_pct 25.3, dist_ma10_pct 55.3, dist_ma20_pct 84.3. No matter how strong the narrative, this is not a valid fresh entry.",
+      "rps120": 94.55
+    },
+    {
+      "code": "300548",
+      "name": "长芯博创",
+      "reason": "Hard fail on anti-chase rule: dist_ma5_pct 6.6, dist_ma10_pct 33.9, dist_ma20_pct 53.5. Too extended for momentum entry here.",
+      "rps120": 93.71
+    },
+    {
+      "code": "301511",
+      "name": "德福科技",
+      "reason": "Hard fail on anti-chase rule: dist_ma5_pct 27.9, dist_ma10_pct 69.5, dist_ma20_pct 104.3. Also current market regime does not permit new risk.",
+      "rps120": 91.71
+    },
+    {
+      "code": "000559",
+      "name": "万向钱潮",
+      "reason": "RPS120 89.15 is acceptable, but dist_ma5_pct 7.1 and dist_ma10_pct 8.1 both exceed chase limits, and there is no regime clearance for new positions.",
+      "rps120": 89.15
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "The entry gate prevented forcing otherwise decent setups like 国电南自 and 科达制造 in a tape where breadth was only 1.31:1 and all 3 major indices were red.",
+      "type": "rule",
+      "tags": [
+        "timing",
+        "entry-filter",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "When index confirmation is absent, individual momentum names lose follow-through probability even if their stock-level structure is fine."
+    },
+    {
+      "text": "The MA-distance anti-chase rule is doing heavy lifting again: many of the strongest-looking names today are invalid purely because they are too far above MA10/MA20.",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "Late entries after vertical expansion shift the reward/risk against the trader by increasing mean-reversion risk and widening the distance to support."
+    },
+    {
+      "text": "Sector-first filtering matters more on distribution days: today's bottom-ranked 半导体 group still contains high-RPS stocks, but the sector tape is hostile enough to override stock strength.",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "timing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "",
+      "mechanism": "When a whole leadership pocket is under pressure, even quality components are more likely to see failed breakouts or poor continuation."
+    }
+  ],
+  "market_summary": "Breadth 1.31:1 mixed-to-weak, 90涨停/34跌停, but 0/3 major indices green and entry_regime is hard-blocked as panic. Hot pockets are 航运港口、电机、贸易、航天装备, while 半导体 leads the downside at -2.93%, showing rotation rather than broad momentum. IV context is mostly low-to-neutral (overall IV sentiment 偏乐观; stock proxies mostly 18%-42% IV rank), so volatility is not the problem—the problem is failed regime confirmation. Per Rule 1, no new positions today.",
+  "market_sentiment": "neutral_to_bearish",
+  "market_call": "观望"
+}
