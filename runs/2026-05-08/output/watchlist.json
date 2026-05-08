@@ -2,58 +2,40 @@
   "date": "2026-05-08",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4162.27,
-      "change_pct": -0.43
+      "value": 4178.685,
+      "change_pct": -0.03
     },
     "shenzhen_component": {
-      "value": 15495.22,
-      "change_pct": -0.94
+      "value": 15566.42,
+      "change_pct": -0.48
     },
     "chinext": {
-      "value": 3795.44,
-      "change_pct": -0.98
+      "value": 3798.04,
+      "change_pct": -0.91
     },
-    "sentiment": "neutral_to_bearish",
+    "sentiment": "neutral",
     "hot_sectors": [
-      "航运港口",
-      "电机Ⅱ",
-      "贸易Ⅱ",
       "航天装备Ⅱ",
-      "其他家电Ⅱ"
+      "其他家电Ⅱ",
+      "贸易Ⅱ",
+      "家电零部件Ⅱ",
+      "航空装备Ⅱ"
     ],
     "cold_sectors": [
-      "半导体",
+      "综合Ⅱ",
+      "电池",
       "能源金属",
       "冶钢原料",
-      "综合Ⅱ",
-      "医疗服务"
+      "半导体"
     ],
-    "notes": "Breadth 1.31:1 mixed-to-weak, 90涨停/34跌停, but 0/3 major indices green and entry_regime is hard-blocked as panic. Hot pockets are 航运港口、电机、贸易、航天装备, while 半导体 leads the downside at -2.93%, showing rotation rather than broad momentum. IV context is mostly low-to-neutral (overall IV sentiment 偏乐观; stock proxies mostly 18%-42% IV rank), so volatility is not the problem—the problem is failed regime confirmation. Per Rule 1, no new positions today."
+    "notes": "Breadth 2.09:1 constructive on the surface, with 118涨停/33跌停, but the long-entry gate fails because 0 of 上证指数/深证成指/创业板指 are green and f10 is above the 30 panic threshold. Hot spots are 航天装备Ⅱ(+7.82%), 其他家电Ⅱ(+6.09%), 贸易Ⅱ(+3.35%), while 电池(-2.61%) and 半导体(-2.03%) are cold. IV context is mostly low-to-neutral (overall avg IV rank about 25%; most main-board proxies sub-20%, 科创50 around 42%), so volatility is not the blocker; regime confirmation is. Result: stay in cash, keep a ready list of clean-MA names in strong sectors, do not chase extended leaders."
   },
   "strategy_scan": {
     "total_stocks_scanned": 57,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-05-08T11:38:43.533529+08:00"
+    "scan_time": "2026-05-08T14:36:57.449255+08:00"
   },
   "recommendations": [
-    {
-      "code": "600268.SH",
-      "name": "国电南自",
-      "price": null,
-      "rps120": 89.92,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "600499.SH",
-      "name": "科达制造",
-      "price": null,
-      "rps120": 90.79,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
     {
       "code": "002222.SZ",
       "name": "福晶科技",
@@ -73,6 +55,33 @@
       "reasoning": ""
     },
     {
+      "code": "600499.SH",
+      "name": "科达制造",
+      "price": null,
+      "rps120": 90.79,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600268.SH",
+      "name": "国电南自",
+      "price": null,
+      "rps120": 89.92,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "605056.SH",
+      "name": "咸亨国际",
+      "price": null,
+      "rps120": 93.35,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
       "code": "300666.SZ",
       "name": "江丰电子",
       "price": null,
@@ -82,10 +91,10 @@
       "reasoning": ""
     },
     {
-      "code": "600301.SH",
-      "name": "华锡有色",
+      "code": "688200.SH",
+      "name": "华峰测控",
       "price": null,
-      "rps120": 92.84,
+      "rps120": 90.47,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -125,14 +134,23 @@
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
+    },
+    {
+      "code": "600301.SH",
+      "name": "华锡有色",
+      "price": null,
+      "rps120": 92.84,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
     }
   ],
   "summary": {
     "total_scanned": 57,
     "buy_recommendations": 0,
-    "watch_recommendations": 10,
+    "watch_recommendations": 12,
     "avoid_recommendations": 0,
     "market_call": "观望",
-    "reasoning": "Breadth 1.31:1 mixed-to-weak, 90涨停/34跌停, but 0/3 major indices green and entry_regime is hard-blocked as panic. Hot pockets are 航运港口、电机、贸易、航天装备, while 半导体 leads the downside at -2.93%, showing rotation rather than broad momentum. IV context is mostly low-to-neutral (overall IV sentiment 偏乐观; stock proxies mostly 18%-42% IV rank), so volatility is not the problem—the problem is failed regime confirmation. Per Rule 1, no new positions today."
+    "reasoning": "Breadth 2.09:1 constructive on the surface, with 118涨停/33跌停, but the long-entry gate fails because 0 of 上证指数/深证成指/创业板指 are green and f10 is above the 30 panic threshold. Hot spots are 航天装备Ⅱ(+7.82%), 其他家电Ⅱ(+6.09%), 贸易Ⅱ(+3.35%), while 电池(-2.61%) and 半导体(-2.03%) are cold. IV context is mostly low-to-neutral (overall avg IV rank about 25%; most main-board proxies sub-20%, 科创50 around 42%), so volatility is not the blocker; regime confirmation is. Result: stay in cash, keep a ready list of clean-MA names in strong sectors, do not chase extended leaders."
   }
 }

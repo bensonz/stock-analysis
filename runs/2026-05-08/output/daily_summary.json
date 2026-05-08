@@ -14,23 +14,23 @@
   "entryRegime": {
     "allow_new_positions": false,
     "regime": "panic",
-    "breadth_ratio": 1.3111,
-    "up": 3026,
-    "down": 2308,
+    "breadth_ratio": 2.085,
+    "up": 3630,
+    "down": 1741,
     "positive_indices": [],
     "negative_indices": [
       "上证指数",
       "深证成指",
       "创业板指"
     ],
-    "limit_ups": 90,
-    "limit_downs": 34,
+    "limit_ups": 118,
+    "limit_downs": 33,
     "sizing_multiplier": 0.0,
     "hard_block": true,
-    "reason": "Entry regime panic: breadth 1.31:1, 0/3 major indices green, 90 limit-ups / 34 limit-downs. Block new longs."
+    "reason": "Entry regime panic: breadth 2.09:1, 0/3 major indices green, 118 limit-ups / 33 limit-downs. Block new longs."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "Breadth 1.31:1 mixed-to-weak, 90涨停/34跌停, but 0/3 major indices green and entry_regime is hard-blocked as panic. Hot pockets are 航运港口、电机、贸易、航天装备, while 半导体 leads the downside at -2.93%, showing rotation rather than broad momentum. IV context is mostly low-to-neutral (overall IV sentiment 偏乐观; stock proxies mostly 18%-42% IV rank), so volatility is not the problem—the problem is failed regime confirmation. Per Rule 1, no new positions today."
+    "summary": "Breadth 2.09:1 constructive on the surface, with 118涨停/33跌停, but the long-entry gate fails because 0 of 上证指数/深证成指/创业板指 are green and f10 is above the 30 panic threshold. Hot spots are 航天装备Ⅱ(+7.82%), 其他家电Ⅱ(+6.09%), 贸易Ⅱ(+3.35%), while 电池(-2.61%) and 半导体(-2.03%) are cold. IV context is mostly low-to-neutral (overall avg IV rank about 25%; most main-board proxies sub-20%, 科创50 around 42%), so volatility is not the blocker; regime confirmation is. Result: stay in cash, keep a ready list of clean-MA names in strong sectors, do not chase extended leaders."
   }
 }

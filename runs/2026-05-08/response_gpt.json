@@ -2,163 +2,188 @@
   "sector_analysis": {
     "hot_sectors": [
       {
-        "name": "航运港口",
-        "5d_pct": 2.65,
-        "trend": "accelerating"
-      },
-      {
-        "name": "电机Ⅱ",
-        "5d_pct": 2.64,
-        "trend": "steady"
-      },
-      {
-        "name": "贸易Ⅱ",
-        "5d_pct": 2.55,
-        "trend": "steady"
-      },
-      {
         "name": "航天装备Ⅱ",
-        "5d_pct": 2.51,
+        "5d_pct": 7.82,
         "trend": "accelerating"
       },
       {
         "name": "其他家电Ⅱ",
-        "5d_pct": 2.42,
+        "5d_pct": 6.09,
+        "trend": "accelerating"
+      },
+      {
+        "name": "贸易Ⅱ",
+        "5d_pct": 3.35,
         "trend": "steady"
+      },
+      {
+        "name": "家电零部件Ⅱ",
+        "5d_pct": 2.56,
+        "trend": "steady"
+      },
+      {
+        "name": "航空装备Ⅱ",
+        "5d_pct": 2.52,
+        "trend": "accelerating"
       }
     ],
     "cold_sectors": [
       {
-        "name": "半导体",
-        "5d_pct": -2.93,
+        "name": "综合Ⅱ",
+        "5d_pct": -3.52,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电池",
+        "5d_pct": -2.61,
         "trend": "deteriorating"
       },
       {
         "name": "能源金属",
-        "5d_pct": -2.76,
+        "5d_pct": -2.39,
         "trend": "deteriorating"
       },
       {
         "name": "冶钢原料",
-        "5d_pct": -2.72,
+        "5d_pct": -2.13,
         "trend": "deteriorating"
       },
       {
-        "name": "综合Ⅱ",
-        "5d_pct": -2.71,
+        "name": "半导体",
+        "5d_pct": -2.03,
         "trend": "deteriorating"
-      },
-      {
-        "name": "医疗服务",
-        "5d_pct": -2.07,
-        "trend": "weak"
       }
     ],
     "position_alignment": "0/0 positions in hot sectors",
-    "regime": "Defensive rotation: shipping/defense/equipment leaders up while semis and growth are under pressure; hot sectors are rotating rather than broad risk-on persisting."
+    "regime": "Broad participation but index tape is weak; defense/industrial pockets and aerospace lead while semis and batteries lag"
   },
   "position_decisions": [],
   "new_positions": [],
   "skip_list": [
     {
-      "code": "600268",
-      "name": "国电南自",
-      "reason": "Entry regime hard-blocked: breadth 1.31:1 is below the 1.5:1 gate and 0/3 major indices are green. Setup itself is orderly (rps120 89.92, dist_ma5_pct 0.5, dist_ma10_pct -0.4, dist_ma20_pct 3.4) and sector is supportive, but no new longs in this tape.",
-      "rps120": 89.92
-    },
-    {
-      "code": "600499",
-      "name": "科达制造",
-      "reason": "Would be one of the cleaner candidates on metrics (rps120 90.79; dist_ma5_pct -1.9, dist_ma10_pct -0.2, dist_ma20_pct 7.0) with earnings catalyst, but the market buy gate failed and no current sector ranking beyond daily top/bottom confirms top-30% status.",
-      "rps120": 90.79
-    },
-    {
       "code": "002222",
       "name": "福晶科技",
-      "reason": "Technically too extended for a fresh entry: dist_ma20_pct 12.7 exceeds the 12% hard chase limit. Also market regime blocks new longs.",
+      "reason": "No new long despite strong stock: entry regime hard-blocked (0/3 major indices green, f10=33). Also dist_ma20_pct 12.7% exceeds anti-chase limit.",
       "rps120": 92.23
     },
     {
       "code": "688372",
       "name": "伟测科技",
-      "reason": "Semiconductor is in today's bottom 5 sectors at -2.93%, so sector gravity is wrong for a new entry despite acceptable MA distances and strong earnings growth.",
+      "reason": "Best-looking setup among semis on MA distance, but sector is bottom 5 today and entry regime is blocked. Sector-first rule overrides.",
       "rps120": 93.8
+    },
+    {
+      "code": "600499",
+      "name": "科达制造",
+      "reason": "Technically acceptable with dist_ma5_pct -1.9%, dist_ma10_pct -0.2%, dist_ma20_pct 7.0 and strong earnings catalyst, but not buying because market buy gate failed.",
+      "rps120": 90.79
+    },
+    {
+      "code": "600268",
+      "name": "国电南自",
+      "reason": "Electric grid is one of the stronger underlying groups and MA structure is clean, but market regime hard-blocks new entries; no forced starter positions.",
+      "rps120": 89.92
+    },
+    {
+      "code": "605056",
+      "name": "咸亨国际",
+      "reason": "MA structure is fine and trend is intact, but catalyst is weaker/older and market regime does not permit small buys.",
+      "rps120": 93.35
     },
     {
       "code": "300666",
       "name": "江丰电子",
-      "reason": "Sector is wrong: 半导体 is bottom 5 at -2.93%. Also dist_ma10_pct 11.9 and dist_ma20_pct 17.8 both violate the anti-chase limits.",
+      "reason": "Semiconductor sector is in bottom 5 and dist_ma10_pct 11.9% plus dist_ma20_pct 17.8% fail anti-chase limits.",
       "rps120": 94.49
     },
     {
-      "code": "600301",
-      "name": "华锡有色",
-      "reason": "Overextended after the move: dist_ma5_pct 7.5, dist_ma10_pct 11.3 and dist_ma20_pct 15.5 all violate the MA-distance rule. Market regime also blocks entries.",
-      "rps120": 92.84
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "Strong earnings and clean short-term structure, but semiconductor sector is cold and dist_ma20_pct 16.0% exceeds limit.",
+      "rps120": 90.47
     },
     {
       "code": "002655",
       "name": "共达电声",
-      "reason": "Hard fail on anti-chase rule: dist_ma5_pct 25.3, dist_ma10_pct 55.3, dist_ma20_pct 84.3. No matter how strong the narrative, this is not a valid fresh entry.",
+      "reason": "Overextended: dist_ma5_pct 25.3%, dist_ma10_pct 55.3%, dist_ma20_pct 84.3%. Anti-chase rule rejects regardless of momentum.",
       "rps120": 94.55
     },
     {
       "code": "300548",
       "name": "长芯博创",
-      "reason": "Hard fail on anti-chase rule: dist_ma5_pct 6.6, dist_ma10_pct 33.9, dist_ma20_pct 53.5. Too extended for momentum entry here.",
+      "reason": "Overextended after strong run: dist_ma5_pct 6.6%, dist_ma10_pct 33.9%, dist_ma20_pct 53.5%. Fails MA-distance rule.",
       "rps120": 93.71
     },
     {
       "code": "301511",
       "name": "德福科技",
-      "reason": "Hard fail on anti-chase rule: dist_ma5_pct 27.9, dist_ma10_pct 69.5, dist_ma20_pct 104.3. Also current market regime does not permit new risk.",
+      "reason": "Sector is bottom 5 (电池) and the stock is extremely extended with dist_ma5_pct 27.9%, dist_ma10_pct 69.5%, dist_ma20_pct 104.3%.",
       "rps120": 91.71
     },
     {
       "code": "000559",
       "name": "万向钱潮",
-      "reason": "RPS120 89.15 is acceptable, but dist_ma5_pct 7.1 and dist_ma10_pct 8.1 both exceed chase limits, and there is no regime clearance for new positions.",
+      "reason": "RPS is acceptable, but dist_ma5_pct 7.1% and dist_ma10_pct 8.1% breach anti-chase thresholds; auto parts is not in top sector leadership set.",
       "rps120": 89.15
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "No current sector leadership support from provided sector table and dist_ma5_pct 7.5%, dist_ma10_pct 11.3%, dist_ma20_pct 15.5% all fail anti-chase limits.",
+      "rps120": 92.84
     }
   ],
   "new_learnings": [
     {
-      "text": "The entry gate prevented forcing otherwise decent setups like 国电南自 and 科达制造 in a tape where breadth was only 1.31:1 and all 3 major indices were red.",
+      "text": "When 0/3 major indices are green, even a 2.09:1 up/down ratio with 118 limit-ups is not enough to open new longs; breadth alone can mislead if index confirmation is absent.",
       "type": "rule",
       "tags": [
         "timing",
         "entry-filter",
-        "sector"
+        "market-regime"
       ],
       "evidence_type": "supporting",
       "related_hypothesis": "h013",
-      "mechanism": "When index confirmation is absent, individual momentum names lose follow-through probability even if their stock-level structure is fine."
+      "mechanism": "A positive breadth tape without index confirmation often reflects fragmented speculative activity rather than durable institutional trend participation."
     },
     {
-      "text": "The MA-distance anti-chase rule is doing heavy lifting again: many of the strongest-looking names today are invalid purely because they are too far above MA10/MA20.",
+      "text": "The anti-chase MA filter is eliminating many of the visually strongest names today, especially in batteries, optical/AI, and metals.",
       "type": "signal",
       "tags": [
+        "entry-filter",
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "Large distance from MA10/MA20 raises mean-reversion risk and worsens reward-to-risk even when the narrative and RPS look attractive."
+    },
+    {
+      "text": "Among today's candidates, the highest-quality deferred names are those with clean MA structure but blocked only by regime, such as 科达制造、国电南自、咸亨国际.",
+      "type": "heuristic",
+      "tags": [
+        "timing",
+        "sector",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "If the market gate reopens, the best entries usually come from names already near support rather than from the day's most extended leaders."
+    },
+    {
+      "text": "Sector gravity still dominates stock quality: several semiconductor names have strong earnings and high RPS, but with 半导体 in the bottom 5 today they downgrade from buy candidates to skips.",
+      "type": "rule",
+      "tags": [
+        "sector",
         "entry-filter",
         "timing"
       ],
       "evidence_type": "supporting",
       "related_hypothesis": "h021",
-      "mechanism": "Late entries after vertical expansion shift the reward/risk against the trader by increasing mean-reversion risk and widening the distance to support."
-    },
-    {
-      "text": "Sector-first filtering matters more on distribution days: today's bottom-ranked 半导体 group still contains high-RPS stocks, but the sector tape is hostile enough to override stock strength.",
-      "type": "heuristic",
-      "tags": [
-        "sector",
-        "timing",
-        "entry-filter"
-      ],
-      "evidence_type": "supporting",
-      "related_hypothesis": "",
-      "mechanism": "When a whole leadership pocket is under pressure, even quality components are more likely to see failed breakouts or poor continuation."
+      "mechanism": "Cold sector flows cap follow-through and increase breakout failure risk even for fundamentally strong leaders."
     }
   ],
-  "market_summary": "Breadth 1.31:1 mixed-to-weak, 90涨停/34跌停, but 0/3 major indices green and entry_regime is hard-blocked as panic. Hot pockets are 航运港口、电机、贸易、航天装备, while 半导体 leads the downside at -2.93%, showing rotation rather than broad momentum. IV context is mostly low-to-neutral (overall IV sentiment 偏乐观; stock proxies mostly 18%-42% IV rank), so volatility is not the problem—the problem is failed regime confirmation. Per Rule 1, no new positions today.",
-  "market_sentiment": "neutral_to_bearish",
+  "market_summary": "Breadth 2.09:1 constructive on the surface, with 118涨停/33跌停, but the long-entry gate fails because 0 of 上证指数/深证成指/创业板指 are green and f10 is above the 30 panic threshold. Hot spots are 航天装备Ⅱ(+7.82%), 其他家电Ⅱ(+6.09%), 贸易Ⅱ(+3.35%), while 电池(-2.61%) and 半导体(-2.03%) are cold. IV context is mostly low-to-neutral (overall avg IV rank about 25%; most main-board proxies sub-20%, 科创50 around 42%), so volatility is not the blocker; regime confirmation is. Result: stay in cash, keep a ready list of clean-MA names in strong sectors, do not chase extended leaders.",
+  "market_sentiment": "neutral",
   "market_call": "观望"
 }

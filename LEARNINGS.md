@@ -1127,3 +1127,10 @@
 - The entry gate prevented forcing otherwise decent setups like 国电南自 and 科达制造 in a tape where breadth was only 1.31:1 and all 3 major indices were red.
 - The MA-distance anti-chase rule is doing heavy lifting again: many of the strongest-looking names today are invalid purely because they are too far above MA10/MA20.
 - Sector-first filtering matters more on distribution days: today's bottom-ranked 半导体 group still contains high-RPS stocks, but the sector tape is hostile enough to override stock strength.
+
+### 自动更新 (2026-05-08)
+
+- When 0/3 major indices are green, even a 2.09:1 up/down ratio with 118 limit-ups is not enough to open new longs; breadth alone can mislead if index confirmation is absent.
+- The anti-chase MA filter is eliminating many of the visually strongest names today, especially in batteries, optical/AI, and metals.
+- Among today's candidates, the highest-quality deferred names are those with clean MA structure but blocked only by regime, such as 科达制造、国电南自、咸亨国际.
+- Sector gravity still dominates stock quality: several semiconductor names have strong earnings and high RPS, but with 半导体 in the bottom 5 today they downgrade from buy candidates to skips.
