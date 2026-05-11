@@ -1,0 +1,36 @@
+{
+  "date": "2026-05-11",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 965710.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.43,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -34290.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 1.2799,
+    "up": 2995,
+    "down": 2340,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 103,
+    "limit_downs": 26,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 1.28:1, 3/3 major indices green, 103 limit-ups / 26 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 1.28:1偏中性偏强，103涨停/26跌停，3大指数全绿转红且科创50大涨5.27%，说明资金集中进攻成长科技；但上涨家数优势不够，新仓硬门槛未过。Hot sectors (top 5): 半导体(+6.86%), 电子化学品Ⅱ(+5.71%), 工程机械(+4.98%), 其他电子Ⅱ(+4.81%), 光伏设备(+3.78%). Cold sectors (bottom 5): 贵金属(-2.79%), 航运港口(-2.58%), 酒店餐饮(-1.97%), 游戏Ⅱ(-1.69%), 化妆品(-1.66%). Position sector alignment: 0/0 positions in hot sectors. IV context: overall sentiment 偏乐观, avg IV rank 24.2%; most tech proxies are in normal sizing range, so the throttle is breadth/extension, not IV."
+  }
+}
