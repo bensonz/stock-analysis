@@ -1,0 +1,36 @@
+{
+  "date": "2026-05-12",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 965710.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.43,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -34290.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.2727,
+    "up": 1162,
+    "down": 4261,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 75,
+    "limit_downs": 25,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.27:1, 0/3 major indices green, 75 limit-ups / 25 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 0.27:1 bearish, 75涨停/25跌停, all 3 major indices red, so this is a panic/risk-off tape and the buy gate is not met. Hot sectors by provided data are 非金属材料Ⅱ(+2.91%), 通信设备(+2.33%), 铁路公路(+1.91%), 电网设备(+1.74%), 电力(+1.29%); cold sectors are 玻璃玻纤(-3.33%), 综合Ⅱ(-3.27%), 航天装备Ⅱ(-3.17%), 个护用品(-2.96%), 养殖业(-2.87%). Research checks suggest sector drivers include 1.6T光模块/AI链条 for 通信设备, 电力设备出口同比+40.46% for 电网设备, and 2026电力交易/公用事业预期 for 电力. IV context is mostly neutral overall (avg IV rank 36.2%), with 科创50 IV rank 51.9% meaning selective, not frozen; however regime—not IV—is the real blocker today."
+  }
+}
