@@ -229,8 +229,16 @@ def fetch_strategy_pool_local(db_path: str = None) -> dict:
                 raise RuntimeError("local pricedb has no daily_prices rows")
 
             latest_dt = datetime.strptime(latest_date, "%Y-%m-%d").date()
-            if (datetime.now().date() - latest_dt).days > 10:
-                raise RuntimeError(f"local pricedb is stale (latest date: {latest_date})")
+            # Stale = older than the most recent trading day. Weekends and
+            # holidays are fine; staleness only matters on trading days.
+            from pricedb import most_recent_trading_day  # local import to avoid cycle at module load
+            today = datetime.now().date()
+            latest_trading_day = most_recent_trading_day(today)
+            if latest_dt < latest_trading_day:
+                raise RuntimeError(
+                    f"local pricedb is stale: latest={latest_date}, "
+                    f"expected ≥ {latest_trading_day.isoformat()}"
+                )
 
             stock_meta = {
                 row[0]: {"name": row[1], "exchange": row[2]}

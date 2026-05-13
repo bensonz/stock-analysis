@@ -1,7 +1,7 @@
 """Tests for local pricedb RPS integration."""
 import sqlite3
 import sys
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -104,11 +104,17 @@ def test_compute_ma_resolves_latest_trading_date(tmp_path):
 
 def test_fetch_strategy_pool_local_uses_local_rps_and_filters(tmp_path, monkeypatch):
     import data_collector as dc
+    import pricedb
 
     db_path = tmp_path / "prices.db"
     conn = _create_test_db(db_path)
     latest_date = _seed_prices(conn)
     conn.close()
+
+    # Staleness gate: pin "most recent trading day" to the seeded end date so
+    # this fixture-based test stays valid regardless of wall-clock date.
+    latest_dt = datetime.strptime(latest_date, "%Y-%m-%d").date()
+    monkeypatch.setattr(pricedb, "most_recent_trading_day", lambda _today, calendar=None: latest_dt)
 
     def fake_batch_enrich(stocks, max_workers=8):
         assert [stock["code"] for stock in stocks] == ["600001"]
@@ -134,10 +140,19 @@ def test_fetch_strategy_pool_local_uses_local_rps_and_filters(tmp_path, monkeypa
         }]
 
     monkeypatch.setattr(dc, "batch_enrich", fake_batch_enrich)
+    # Remote CheeseForTune cross-check would otherwise filter out the synthetic code.
+    monkeypatch.setattr(dc, "fetch_strategy_pool", lambda strategy_id="407228": {
+        "source": "api",
+        "strategy_id": strategy_id,
+        "date": latest_date,
+        "total_stocks": 1,
+        "stocks": [{"code": "600001", "name": "测试龙头"}],
+        "error": None,
+    })
 
     result = dc.fetch_strategy_pool_local(str(db_path))
 
-    assert result["source"] == "local_pricedb"
+    assert result["source"] in {"local_pricedb", "local_pricedb+cf_cross"}
     assert result["strategy_id"] == dc.LOCAL_STRATEGY_ID
     assert result["date"] == latest_date
     assert result["total_stocks"] == 1

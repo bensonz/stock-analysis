@@ -530,6 +530,109 @@ def list_runs() -> None:
         print(f"  {d.name}  {status}")
 
 
+def preflight_pricedb_or_exit(manifest) -> None:
+    """Refresh the local price DB and refuse to proceed on stale data.
+
+    Runs ``pricedb.py update`` with a tighter budget than the in-phase fallback.
+    After the update, queries the DB's latest date and compares against the most
+    recent trading day. If still stale during trading hours on a trading day,
+    print a clear error, record a failed health phase, and exit non-zero.
+    """
+    pricedb_path = PROJECT_ROOT / "data" / "pricedb" / "ashare_prices.db"
+    if not pricedb_path.exists():
+        print("  [preflight] pricedb missing — skipping freshness check", file=sys.stderr)
+        return
+
+    skip = os.getenv("PRICEDB_SKIP_UPDATE", "").strip().lower() in {"1", "true", "yes", "on"}
+    update_err: str | None = None
+    if skip:
+        print("  [preflight] PRICEDB_SKIP_UPDATE set — using existing pricedb", file=sys.stderr)
+    else:
+        print("  [preflight] Refreshing local pricedb (clist → per-stock fallback)...", file=sys.stderr)
+        env = os.environ.copy()
+        env.setdefault("PRICEDB_UPDATE_BUDGET", "300")
+        try:
+            result = subprocess.run(
+                [sys.executable, str(PROJECT_ROOT / "scripts" / "pricedb.py"), "update"],
+                cwd=PROJECT_ROOT,
+                capture_output=True,
+                text=True,
+                env=env,
+            )
+            if result.returncode != 0:
+                update_err = (result.stderr.strip() or result.stdout.strip()
+                              or f"exit {result.returncode}")
+                print(f"    ⚠ pricedb update failed: {update_err}", file=sys.stderr)
+            else:
+                print("    → pricedb update OK", file=sys.stderr)
+        except Exception as e:
+            update_err = str(e)
+            print(f"    ⚠ pricedb update raised: {e}", file=sys.stderr)
+
+    # Signal to phase1_collect that preflight already ran the update.
+    os.environ["PRICEDB_SKIP_UPDATE"] = "1"
+
+    try:
+        import sqlite3 as _sql
+        from datetime import datetime as _dt
+        from pricedb import most_recent_trading_day
+
+        with _sql.connect(str(pricedb_path)) as conn:
+            row = conn.execute("SELECT MAX(date) FROM daily_prices").fetchone()
+        latest = row[0] if row and row[0] else None
+        if not latest:
+            print("  ✗ pricedb has no daily_prices rows — refusing to proceed", file=sys.stderr)
+            manifest.add_phase("preflight_pricedb", "failed",
+                               details={"error": "empty", "update_err": update_err})
+            manifest.finalize()
+            sys.exit(2)
+
+        now = _dt.now()
+        today = now.date()
+        latest_dt = _dt.strptime(latest, "%Y-%m-%d").date()
+        latest_trading_day = most_recent_trading_day(today)
+
+        if latest_dt >= latest_trading_day:
+            print(f"  ✓ pricedb fresh (latest={latest}, target≥{latest_trading_day.isoformat()})",
+                  file=sys.stderr)
+            manifest.add_phase("preflight_pricedb", "ok",
+                               details={"latest_date": latest, "target": latest_trading_day.isoformat()})
+            return
+
+        # Stale. Only hard-refuse during trading hours (09:30+) on trading days.
+        is_trading_today = (latest_trading_day == today)
+        after_market_open = (now.hour, now.minute) >= (9, 30)
+        if is_trading_today and after_market_open:
+            print(
+                f"\n  ✗ Pricedb is stale — refusing to run analysis on stale data.\n"
+                f"    latest={latest}, expected ≥ {latest_trading_day.isoformat()} (today is a trading day).\n"
+                f"    Check eastmoney connectivity / proxy settings.\n"
+                f"    Last update error: {update_err or 'n/a'}\n",
+                file=sys.stderr,
+            )
+            manifest.add_phase("preflight_pricedb", "failed",
+                               details={"latest_date": latest,
+                                        "expected": latest_trading_day.isoformat(),
+                                        "update_err": update_err})
+            manifest.finalize()
+            sys.exit(2)
+
+        # Off-hours or non-trading day: warn and continue.
+        print(
+            f"  ⚠ pricedb stale (latest={latest}, expected ≥ {latest_trading_day.isoformat()}) "
+            f"but outside trading hours — continuing with degraded data",
+            file=sys.stderr,
+        )
+        manifest.add_phase("preflight_pricedb", "degraded",
+                           details={"latest_date": latest,
+                                    "expected": latest_trading_day.isoformat(),
+                                    "update_err": update_err})
+    except SystemExit:
+        raise
+    except Exception as e:
+        print(f"  ⚠ preflight_pricedb check raised: {e}", file=sys.stderr)
+
+
 def phase1_collect(date: str) -> dict:
     """Phase 1: Collect all data. Pure Python, no LLM.
 
@@ -1505,6 +1608,10 @@ def main():
         cf_down = health.get("cheesefortune", {}).get("status") != "ok"
         if sina_down and cf_down:
             print("  ✗ ALL external data sources are down — pipeline will likely fail", file=sys.stderr)
+
+        # Pre-flight: refresh local pricedb and hard-gate on staleness.
+        # Done here (not inside phase1) so we refuse to start analysis on stale closes.
+        preflight_pricedb_or_exit(manifest)
 
         # Phase 1: Collect
         data = phase1_collect(date)

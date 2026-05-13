@@ -15,6 +15,8 @@ Usage:
     python scripts/pricedb.py query CODE    # Show a stock's recent prices + computed RPS values
 """
 
+import bisect
+import contextlib
 import os
 import socket
 import sqlite3
@@ -26,7 +28,7 @@ import subprocess
 import urllib.parse
 import urllib.request
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
-from datetime import datetime, timedelta
+from datetime import date as _date, datetime, timedelta
 from pathlib import Path
 from typing import Iterable, Optional
 
@@ -36,6 +38,8 @@ DB_PATH = DB_DIR / "ashare_prices.db"
 ENV_FILE = PROJECT_ROOT / ".env"
 
 PROVIDER_TUSHARE = "tushare"
+PROVIDER_EASTMONEY_CLIST = "eastmoney_clist"
+# Kept as "eastmoney_direct" for backwards compatibility (manifest references).
 PROVIDER_EASTMONEY = "eastmoney_direct"
 PROVIDER_AKSHARE = "akshare"
 PROVIDER_BAOSTOCK = "baostock"
@@ -52,13 +56,19 @@ EASTMONEY_RETRY_DELAY = 0.5
 EASTMONEY_RETRIES = 3
 EASTMONEY_DEFAULT_WORKERS = 12
 EASTMONEY_KLINE_URL = "https://push2his.eastmoney.com/api/qt/stock/kline/get"
+EASTMONEY_CLIST_URL = "https://push2.eastmoney.com/api/qt/clist/get"
+EASTMONEY_CLIST_PAGE_SIZE = 50
+# A-share boards: SH main + SH STAR + SZ main + SZ ChiNext + BJ.
+EASTMONEY_CLIST_FS = "m:0+t:6,m:0+t:80,m:1+t:2,m:1+t:23,m:0+t:81+s:2048"
+EASTMONEY_CLIST_FIELDS = "f12,f14,f2,f3,f6,f15,f16,f17,f18,f5"
 
 # Per-API-call hard timeout (socket read + connect). If a single call exceeds
 # this, we fail fast and let the retry/provider-fallback logic handle it.
 PRICEDB_CALL_TIMEOUT_SEC = float(os.getenv("PRICEDB_CALL_TIMEOUT", "30"))
 
 # Per-update overall wall-clock budget. Enforced at the top of cmd_update.
-PRICEDB_UPDATE_BUDGET_SEC = float(os.getenv("PRICEDB_UPDATE_BUDGET", "600"))
+# Default tightened to 300s — the clist bulk path should finish in ~60s.
+PRICEDB_UPDATE_BUDGET_SEC = float(os.getenv("PRICEDB_UPDATE_BUDGET", "300"))
 
 # Belt-and-suspenders: protect against any library that creates raw sockets
 # without explicit timeouts (some baostock/urllib paths). Per-call thread
@@ -108,6 +118,124 @@ def _run_with_timeout(label: str, func, timeout: float | None = None):
 def _budget_exceeded() -> bool:
     """Return True if the current cmd_update has run past its wall-clock budget."""
     return _UPDATE_DEADLINE is not None and time.monotonic() > _UPDATE_DEADLINE
+
+
+_PROXY_ENV_KEYS = (
+    "HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY",
+    "http_proxy", "https_proxy", "all_proxy",
+    "NO_PROXY", "no_proxy",
+)
+
+
+@contextlib.contextmanager
+def _no_proxy_env():
+    """Temporarily strip proxy env vars so libraries that ignore trust_env still work.
+
+    Why: Surge and similar local proxies intercept *.eastmoney.com and break price
+    fetches. Pricedb deliberately bypasses these.
+    """
+    saved = {k: os.environ.pop(k, None) for k in _PROXY_ENV_KEYS}
+    try:
+        yield
+    finally:
+        for k, v in saved.items():
+            if v is not None:
+                os.environ[k] = v
+
+
+# ---------------------------------------------------------------------------
+# Trade calendar (no-auth, akshare-based with weekday fallback)
+# ---------------------------------------------------------------------------
+
+
+_TRADE_CALENDAR_CACHE: list[str] | None = None
+
+
+def _weekday_list(beg: str, end: str) -> list[str]:
+    """Generate Mon-Fri YYYYMMDD strings in [beg, end] (lossy fallback)."""
+    try:
+        start = datetime.strptime(beg, "%Y%m%d").date()
+        stop = datetime.strptime(end, "%Y%m%d").date()
+    except ValueError:
+        return []
+    out: list[str] = []
+    d = start
+    while d <= stop:
+        if d.weekday() < 5:
+            out.append(d.strftime("%Y%m%d"))
+        d += timedelta(days=1)
+    return out
+
+
+def fetch_trade_dates_free(beg: str, end: str) -> list[str]:
+    """Fetch open trading dates [beg, end] inclusive using akshare (no auth).
+
+    beg/end: 'YYYYMMDD'. Returns sorted list of 'YYYYMMDD' strings.
+    Falls back to weekday-only list if akshare fails.
+    """
+    try:
+        import akshare as ak
+    except Exception as e:
+        print(f"  akshare not available for trade calendar: {e}", file=sys.stderr)
+        return _weekday_list(beg, end)
+
+    try:
+        with _no_proxy_env():
+            df = _run_with_timeout(
+                "akshare trade_cal",
+                lambda: ak.tool_trade_date_hist_sina(),
+            )
+    except Exception as e:
+        print(f"  akshare trade_cal failed: {e}", file=sys.stderr)
+        return _weekday_list(beg, end)
+
+    if df is None or getattr(df, "empty", True):
+        return _weekday_list(beg, end)
+
+    col = "trade_date" if "trade_date" in getattr(df, "columns", []) else df.columns[0]
+    dates: list[str] = []
+    for raw in df[col]:
+        if hasattr(raw, "strftime"):
+            s = raw.strftime("%Y%m%d")
+        else:
+            s = str(raw).replace("-", "").strip()[:8]
+        if len(s) == 8 and s.isdigit() and beg <= s <= end:
+            dates.append(s)
+    return sorted(dates)
+
+
+def _get_trade_calendar_cached() -> list[str]:
+    """Return cached trading-day list (YYYYMMDD strings) covering the last ~5 years to today."""
+    global _TRADE_CALENDAR_CACHE
+    if _TRADE_CALENDAR_CACHE is None:
+        beg = (datetime.now() - timedelta(days=365 * 5)).strftime("%Y%m%d")
+        end = datetime.now().strftime("%Y%m%d")
+        _TRADE_CALENDAR_CACHE = fetch_trade_dates_free(beg, end)
+    return _TRADE_CALENDAR_CACHE
+
+
+def _reset_trade_calendar_cache():
+    """Test helper: clear the cached calendar."""
+    global _TRADE_CALENDAR_CACHE
+    _TRADE_CALENDAR_CACHE = None
+
+
+def most_recent_trading_day(target: _date, calendar: list[str] | None = None) -> _date:
+    """Return the most recent trading day on or before ``target``.
+
+    Uses akshare calendar when available; falls back to walking back over weekends.
+    """
+    if calendar is None:
+        calendar = _get_trade_calendar_cached()
+    if calendar:
+        key = target.strftime("%Y%m%d")
+        idx = bisect.bisect_right(calendar, key) - 1
+        if idx >= 0:
+            return datetime.strptime(calendar[idx], "%Y%m%d").date()
+    d = target
+    while d.weekday() >= 5:
+        d -= timedelta(days=1)
+    return d
 
 
 def get_db() -> sqlite3.Connection:
@@ -245,7 +373,36 @@ def get_tushare_token() -> str | None:
 
 
 def iter_providers() -> Iterable[tuple[str, object]]:
-    """Yield available providers in preferred price-bar order."""
+    """Yield available providers in preferred price-bar order.
+
+    Order (post-2026-05 fix):
+      1. eastmoney_clist  — bulk daily snapshot, fast, no auth (single-day updates)
+      2. eastmoney_direct — per-stock kline (historical backfills)
+      3. akshare          — fallback
+      4. baostock         — last resort
+      5. tushare          — opt-in (token + paid endpoint access)
+    """
+    yield PROVIDER_EASTMONEY_CLIST, None
+    yield PROVIDER_EASTMONEY, None
+
+    try:
+        with _no_proxy_env():
+            import akshare as ak
+        yield PROVIDER_AKSHARE, ak
+    except Exception as e:
+        print(f"  Could not initialize AkShare: {e}", file=sys.stderr)
+
+    try:
+        import baostock as bs
+
+        with _no_proxy_env():
+            login_result = _run_with_timeout("BaoStock login", lambda: bs.login())
+        if getattr(login_result, "error_code", "0") != "0":
+            raise RuntimeError(getattr(login_result, "error_msg", "BaoStock login failed"))
+        yield PROVIDER_BAOSTOCK, bs
+    except Exception as e:
+        print(f"  Could not initialize BaoStock: {e}", file=sys.stderr)
+
     token = get_tushare_token()
     if token:
         try:
@@ -254,27 +411,6 @@ def iter_providers() -> Iterable[tuple[str, object]]:
             yield PROVIDER_TUSHARE, ts.pro_api(token=token, timeout=30)
         except Exception as e:
             print(f"  Could not initialize Tushare: {e}", file=sys.stderr)
-    else:
-        print("  Tushare token not found; will try AkShare/BaoStock fallback.", file=sys.stderr)
-
-    yield PROVIDER_EASTMONEY, None
-
-    try:
-        import akshare as ak
-
-        yield PROVIDER_AKSHARE, ak
-    except Exception as e:
-        print(f"  Could not initialize AkShare: {e}", file=sys.stderr)
-
-    try:
-        import baostock as bs
-
-        login_result = _run_with_timeout("BaoStock login", lambda: bs.login())
-        if getattr(login_result, "error_code", "0") != "0":
-            raise RuntimeError(getattr(login_result, "error_msg", "BaoStock login failed"))
-        yield PROVIDER_BAOSTOCK, bs
-    except Exception as e:
-        print(f"  Could not initialize BaoStock: {e}", file=sys.stderr)
 
 
 def close_provider(provider_name: str, provider: object):
@@ -606,6 +742,175 @@ def _bulk_fetch_eastmoney(
 
 
 # ---------------------------------------------------------------------------
+# Eastmoney clist (bulk daily snapshot) provider
+# ---------------------------------------------------------------------------
+
+
+def _eastmoney_clist_url(page: int) -> str:
+    query = urllib.parse.urlencode(
+        {
+            "pn": page,
+            "pz": EASTMONEY_CLIST_PAGE_SIZE,
+            "po": 1,
+            "np": 1,
+            "fltt": 2,
+            "fs": EASTMONEY_CLIST_FS,
+            "fields": EASTMONEY_CLIST_FIELDS,
+        },
+        safe=",:+",
+    )
+    return f"{EASTMONEY_CLIST_URL}?{query}"
+
+
+def _fetch_clist_page(page: int) -> dict:
+    """Fetch a single Eastmoney clist page, bypassing any local proxy."""
+    import requests
+
+    with _no_proxy_env():
+        session = requests.Session()
+        session.trust_env = False
+        try:
+            response = session.get(
+                _eastmoney_clist_url(page),
+                headers={
+                    "Accept": "application/json,text/plain,*/*",
+                    "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+                    "User-Agent": "Mozilla/5.0 pricedb-eastmoney-clist",
+                },
+                proxies={"http": "", "https": ""},
+                timeout=PRICEDB_CALL_TIMEOUT_SEC,
+            )
+            response.raise_for_status()
+            return response.json()
+        finally:
+            session.close()
+
+
+def _iter_clist_diff(payload: dict):
+    data = payload.get("data") or {}
+    diff = data.get("diff")
+    if isinstance(diff, list):
+        return diff
+    if isinstance(diff, dict):
+        return list(diff.values())
+    return []
+
+
+def _parse_clist_page(payload: dict, target_date: str) -> list[tuple]:
+    """Convert a clist JSON payload into (code, date, ohlcv) tuples for ``target_date``."""
+    rows: list[tuple] = []
+    for item in _iter_clist_diff(payload):
+        if not isinstance(item, dict):
+            continue
+        code = str(item.get("f12") or "").strip()
+        if not code or not code.isdigit():
+            continue
+        close_p = _safe_float(item.get("f2"))
+        open_p = _safe_float(item.get("f17"))
+        high_p = _safe_float(item.get("f15"))
+        low_p = _safe_float(item.get("f16"))
+        if close_p is None or close_p <= 0:
+            continue
+        if open_p is None or high_p is None or low_p is None:
+            continue
+        if open_p <= 0 or high_p <= 0 or low_p <= 0:
+            continue
+        volume = _safe_int(item.get("f5")) or 0
+        amount = _safe_float(item.get("f6")) or 0.0
+        rows.append((code, target_date, open_p, high_p, low_p, close_p, volume, amount))
+    return rows
+
+
+def _bulk_fetch_eastmoney_clist(
+    conn: sqlite3.Connection,
+    stocks: list[dict],
+    beg: str,
+    end: str,
+    _provider,
+):
+    """Bulk daily snapshot via Eastmoney clist.
+
+    Single-day path only — if the caller requests a multi-day backfill, raise so
+    the next provider (per-stock kline) takes over.
+    """
+    if not stocks:
+        print("  Total: 0 rows inserted", file=sys.stderr)
+        return
+
+    today_yyyymmdd = datetime.now().strftime("%Y%m%d")
+    if beg != end:
+        raise RuntimeError(
+            f"eastmoney_clist supports single-day fetch only ({beg}→{end}); falling through to per-stock"
+        )
+    if end != today_yyyymmdd:
+        raise RuntimeError(
+            f"eastmoney_clist only fetches today's bar (asked {end}, today={today_yyyymmdd})"
+        )
+
+    target_iso = _yyyymmdd_to_iso(end)
+    valid_codes = {stock["code"] for stock in stocks}
+
+    if _budget_exceeded():
+        raise RuntimeError("update budget exceeded")
+    first_payload = _run_with_timeout(
+        "Eastmoney clist page 1",
+        lambda: _fetch_clist_page(1),
+    )
+    data = first_payload.get("data") or {}
+    total = int(data.get("total") or 0)
+    if total == 0:
+        raise RuntimeError("eastmoney_clist returned 0 records on page 1")
+    total_pages = (total + EASTMONEY_CLIST_PAGE_SIZE - 1) // EASTMONEY_CLIST_PAGE_SIZE
+    all_rows: list[tuple] = list(_parse_clist_page(first_payload, target_iso))
+
+    workers = _positive_int_from_env("PRICEDB_CLIST_WORKERS", EASTMONEY_DEFAULT_WORKERS)
+    failures: list[str] = []
+    if total_pages > 1:
+        with ThreadPoolExecutor(max_workers=workers, thread_name_prefix="pricedb-clist") as executor:
+            futures = {
+                executor.submit(_fetch_clist_page, page): page
+                for page in range(2, total_pages + 1)
+            }
+            while futures:
+                if _budget_exceeded():
+                    for f in futures:
+                        f.cancel()
+                    raise RuntimeError("update budget exceeded")
+                done, _pending = wait(futures, timeout=1.0, return_when=FIRST_COMPLETED)
+                if not done:
+                    continue
+                for future in done:
+                    page = futures.pop(future)
+                    try:
+                        payload = future.result()
+                    except Exception as e:
+                        failures.append(f"page {page}: {e}")
+                        continue
+                    all_rows.extend(_parse_clist_page(payload, target_iso))
+
+    filtered = [row for row in all_rows if row[0] in valid_codes]
+    if not filtered:
+        raise RuntimeError(
+            f"eastmoney_clist parsed {len(all_rows)} rows but none matched known universe ({len(valid_codes)} codes)"
+        )
+
+    conn.executemany(
+        "INSERT OR REPLACE INTO daily_prices "
+        "(code,date,open,high,low,close,volume,amount) "
+        "VALUES (?,?,?,?,?,?,?,?)",
+        filtered,
+    )
+    conn.commit()
+    if failures:
+        print(f"  clist: {len(failures)} page(s) failed: {failures[0]}", file=sys.stderr)
+    print(
+        f"  [Clist] {len(filtered):,} rows inserted for {target_iso} "
+        f"({total_pages} pages, {total} total records)",
+        file=sys.stderr,
+    )
+
+
+# ---------------------------------------------------------------------------
 # Tushare provider
 # ---------------------------------------------------------------------------
 
@@ -688,7 +993,9 @@ def _bulk_fetch_tushare(
     pro,
 ):
     """Bulk fetch all daily bars using Tushare `daily(trade_date=...)`."""
-    trade_dates = fetch_trade_dates_tushare(pro, beg, end)
+    # Use akshare's free trade calendar instead of Tushare trade_cal,
+    # which most free-tier accounts can no longer access.
+    trade_dates = fetch_trade_dates_free(beg, end)
     if not trade_dates:
         raise RuntimeError(f"No trading dates returned for {beg} → {end}")
 
@@ -786,16 +1093,17 @@ def _akshare_hist_row_to_tuple(stock: dict, row) -> tuple | None:
 
 
 def _fetch_klines_akshare(ak, stock: dict, beg: str, end: str) -> list[tuple]:
-    frame = _run_with_timeout(
-        f"AkShare hist {stock['code']}",
-        lambda: ak.stock_zh_a_hist(
-            symbol=stock["code"],
-            period="daily",
-            start_date=beg,
-            end_date=end,
-            adjust="",
-        ),
-    )
+    with _no_proxy_env():
+        frame = _run_with_timeout(
+            f"AkShare hist {stock['code']}",
+            lambda: ak.stock_zh_a_hist(
+                symbol=stock["code"],
+                period="daily",
+                start_date=beg,
+                end_date=end,
+                adjust="",
+            ),
+        )
     if _frame_empty(frame):
         return []
 
@@ -927,12 +1235,13 @@ def fetch_stock_list_baostock(bs) -> list[dict]:
     rows: list[dict] = []
     for offset in range(10):
         day = (datetime.now() - timedelta(days=offset)).strftime("%Y-%m-%d")
-        rows = _baostock_rows(
-            _run_with_timeout(
-                f"BaoStock query_all_stock {day}",
-                lambda day=day: bs.query_all_stock(day=day),
+        with _no_proxy_env():
+            rows = _baostock_rows(
+                _run_with_timeout(
+                    f"BaoStock query_all_stock {day}",
+                    lambda day=day: bs.query_all_stock(day=day),
+                )
             )
-        )
         if rows:
             break
 
@@ -960,17 +1269,18 @@ def fetch_stock_list_baostock(bs) -> list[dict]:
 def _fetch_klines_baostock(bs, stock: dict, beg: str, end: str) -> list[tuple]:
     code_prefix = stock["exchange"].lower()
     code_full = f"{code_prefix}.{stock['code']}"
-    result = _run_with_timeout(
-        f"BaoStock k_data {stock['code']}",
-        lambda: bs.query_history_k_data_plus(
-            code_full,
-            "date,code,open,high,low,close,volume,amount",
-            start_date=_yyyymmdd_to_iso(beg),
-            end_date=_yyyymmdd_to_iso(end),
-            frequency="d",
-            adjustflag="3",
-        ),
-    )
+    with _no_proxy_env():
+        result = _run_with_timeout(
+            f"BaoStock k_data {stock['code']}",
+            lambda: bs.query_history_k_data_plus(
+                code_full,
+                "date,code,open,high,low,close,volume,amount",
+                start_date=_yyyymmdd_to_iso(beg),
+                end_date=_yyyymmdd_to_iso(end),
+                frequency="d",
+                adjustflag="3",
+            ),
+        )
     rows = []
     for row in _baostock_rows(result):
         open_price = _safe_float(row.get("open"))
@@ -1062,6 +1372,8 @@ def bulk_fetch(
 ):
     if provider_name == PROVIDER_TUSHARE:
         return _bulk_fetch_tushare(conn, stocks, beg, end, provider)
+    if provider_name == PROVIDER_EASTMONEY_CLIST:
+        return _bulk_fetch_eastmoney_clist(conn, stocks, beg, end, provider)
     if provider_name == PROVIDER_EASTMONEY:
         return _bulk_fetch_eastmoney(conn, stocks, beg, end, provider)
     if provider_name == PROVIDER_AKSHARE:
@@ -1093,7 +1405,7 @@ def cmd_init():
     provider_errors = []
 
     for provider_name, provider in iter_providers():
-        if provider_name in {PROVIDER_EASTMONEY, PROVIDER_AKSHARE}:
+        if provider_name in {PROVIDER_EASTMONEY_CLIST, PROVIDER_EASTMONEY, PROVIDER_AKSHARE}:
             close_provider(provider_name, provider)
             continue
         conn = get_db()
@@ -1250,7 +1562,8 @@ def _backfill_from_akshare_spot(conn: sqlite3.Connection, date_iso: str) -> int:
     try:
         import akshare as ak
 
-        df = _run_with_timeout("AkShare spot", lambda: ak.stock_zh_a_spot_em())
+        with _no_proxy_env():
+            df = _run_with_timeout("AkShare spot", lambda: ak.stock_zh_a_spot_em())
         if df is None or df.empty:
             return 0
 
