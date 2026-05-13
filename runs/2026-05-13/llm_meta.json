@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "gpt-5.4",
+  "decision_source": "GPT primary",
+  "input_tokens": 136239,
+  "output_tokens": 2372,
+  "rounds": 2,
+  "duration_sec": 59.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=A%E8%82%A1+%E7%83%AD%E9%97%A8%E6%9D%BF%E5%9D%97+%E4%BB%8A%E6%97%A5+2026-05-13"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E6%B6%88%E8%B4%B9%E7%94%B5%E5%AD%90+%E6%9D%BF%E5%9D%97+2026-05-13+A%E8%82%A1"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E5%85%B6%E4%BB%96%E7%94%B5%E6%BA%90%E8%AE%BE%E5%A4%87+%E6%9D%BF%E5%9D%97+2026-05-13+A%E8%82%A1"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E7%94%B5%E7%BD%91%E8%AE%BE%E5%A4%87+%E6%9D%BF%E5%9D%97+2026-05-13+A%E8%82%A1"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E5%8D%8A%E5%AF%BC%E4%BD%93+%E6%9D%BF%E5%9D%97+2026-05-13+A%E8%82%A1"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD%E8%82%A1%E5%B8%82+%E6%94%BF%E7%AD%96+2026-05-13"
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}

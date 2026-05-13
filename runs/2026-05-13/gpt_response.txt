@@ -1,0 +1,165 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "其他电源设备Ⅱ",
+        "5d_pct": 6.37,
+        "trend": "accelerating"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": 4.25,
+        "trend": "strong"
+      },
+      {
+        "name": "消费电子",
+        "5d_pct": 4.16,
+        "trend": "accelerating"
+      },
+      {
+        "name": "电网设备",
+        "5d_pct": 2.91,
+        "trend": "steady"
+      },
+      {
+        "name": "航海装备Ⅱ",
+        "5d_pct": 2.77,
+        "trend": "strong"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "保险Ⅱ",
+        "5d_pct": -2.75,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "装修建材",
+        "5d_pct": -1.9,
+        "trend": "weak"
+      },
+      {
+        "name": "动物保健Ⅱ",
+        "5d_pct": -1.53,
+        "trend": "weak"
+      },
+      {
+        "name": "医疗服务",
+        "5d_pct": -1.45,
+        "trend": "weak"
+      },
+      {
+        "name": "证券Ⅱ",
+        "5d_pct": -1.4,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/0 positions in hot sectors",
+    "regime": "Risk-on but selective; electronics/power equipment leadership is intact while financials/medical lag"
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688372",
+      "name": "伟测科技",
+      "reason": "Semiconductor thesis is strong and RPS120 93.8 is acceptable, but dist_ma20_pct 10.2 passes while sector strength is not confirmed in the provided top-5 sector table and 科创板 IV proxy is elevated; better than most but still not a clean top-sector/no-chase setup.",
+      "rps120": 93.8
+    },
+    {
+      "code": "600499",
+      "name": "科达制造",
+      "reason": "Technically clean with RPS120 90.79 and MA distances acceptable, but sector is 专用设备 rather than a clearly top-ranked hot sector in today's provided sector table, so it fails Sector First for a fresh entry.",
+      "rps120": 90.79
+    },
+    {
+      "code": "605056",
+      "name": "咸亨国际",
+      "reason": "MA structure is fine, but RPS120 93.35 is only acceptable if sector leadership is clear; 通用设备 is not in today's provided top sector list, so no new entry.",
+      "rps120": 93.35
+    },
+    {
+      "code": "300870",
+      "name": "欧陆通",
+      "reason": "Sector is the #1 hot group today, but dist_ma10_pct 24.2 and dist_ma20_pct 35.2 violate the no-chasing rule. Strong stock, wrong entry.",
+      "rps120": 89.09
+    },
+    {
+      "code": "002655",
+      "name": "共达电声",
+      "reason": "消费电子 is hot and RPS120 94.55 is allowed, but dist_ma10_pct 29.2 and dist_ma20_pct 57.3 are far too extended. Also has heavy short-term volatility risk in input data.",
+      "rps120": 94.55
+    },
+    {
+      "code": "300666",
+      "name": "江丰电子",
+      "reason": "Fundamentals and catalyst are good, but dist_ma10_pct 11.9 and dist_ma20_pct 17.8 violate the MA-distance buy gate. Cannot chase.",
+      "rps120": 94.49
+    },
+    {
+      "code": "688150",
+      "name": "莱特光电",
+      "reason": "Electronic chemicals trend is strong and RPS120 94.97 is near the upper buy zone, but dist_ma20_pct 22.6 exceeds the hard limit. Setup is extended.",
+      "rps120": 94.97
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "RPS120 92.84 is acceptable and catalyst exists, but dist_ma10_pct 8.9 and dist_ma20_pct 15.2 fail the no-chase rule. Also not in today's top-5 sectors.",
+      "rps120": 92.84
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "reason": "Growth and sector trend are good, but dist_ma10_pct 8.8 and dist_ma20_pct 12.5 both exceed the hard entry thresholds.",
+      "rps120": 87.47
+    },
+    {
+      "code": "000559",
+      "name": "万向钱潮",
+      "reason": "MA structure is acceptable, but sector is 汽车零部件 rather than a top-ranked hot sector in today's provided data, and quarterly fast-news in input shows weaker recent growth. Sector First says skip.",
+      "rps120": 89.15
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Today confirms h021 again: the MA-distance anti-chase rule is the main blocker, not lack of momentum. Many of the strongest names are valid stories but invalid entries.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "In a broad but not explosive tape, overextended leaders have poor reward-to-risk because support is too far below and a normal pullback can hit stops quickly."
+    },
+    {
+      "text": "A green tape is not enough by itself. Breadth is positive, but the strict 1.5:1 minimum gate is not met, so cash preservation remains the correct default despite many attractive charts.",
+      "type": "heuristic",
+      "tags": [
+        "timing",
+        "position-sizing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "When breadth is only mildly positive, breakouts have less follow-through and the opportunity cost of waiting is lower than the downside from forcing entries."
+    },
+    {
+      "text": "Sector heat is concentrated in electronics and power-equipment branches, but most candidate names in those groups are already too far above MA10/MA20. The right response is to wait for support tests, not downgrade the themes.",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "timing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "Theme strength and entry quality are separate variables; hot sectors create opportunity, while MA compression determines when the risk/reward becomes buyable."
+    }
+  ],
+  "market_summary": "Breadth 1.38:1 mildly bullish, 109涨停/17跌停, all 3 major indices green, but the V2 minimum buy gate is not met because up/down ratio is below 1.5:1. Hot sectors: 其他电源设备Ⅱ(+6.37%), 非金属材料Ⅱ(+4.25%), 消费电子(+4.16%), 电网设备(+2.91%), 航海装备Ⅱ(+2.77%). Cold sectors: 保险Ⅱ(-2.75%), 装修建材(-1.90%), 动物保健Ⅱ(-1.53%), 医疗服务(-1.45%), 证券Ⅱ(-1.40%). Research points to continued strength in semis/consumer electronics/power equipment, but most actionable names are overextended versus MA10/MA20. IV context is mostly neutral, with 科创 proxies elevated above 50%, arguing for selectivity rather than aggression.",
+  "market_sentiment": "neutral-bullish",
+  "market_call": "观望"
+}

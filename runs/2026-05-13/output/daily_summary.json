@@ -1,0 +1,36 @@
+{
+  "date": "2026-05-13",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 965710.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.43,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -34290.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 1.3831,
+    "up": 3101,
+    "down": 2242,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 109,
+    "limit_downs": 17,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 1.38:1, 3/3 major indices green, 109 limit-ups / 17 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 1.38:1 mildly bullish, 109涨停/17跌停, all 3 major indices green, but the V2 minimum buy gate is not met because up/down ratio is below 1.5:1. Hot sectors: 其他电源设备Ⅱ(+6.37%), 非金属材料Ⅱ(+4.25%), 消费电子(+4.16%), 电网设备(+2.91%), 航海装备Ⅱ(+2.77%). Cold sectors: 保险Ⅱ(-2.75%), 装修建材(-1.90%), 动物保健Ⅱ(-1.53%), 医疗服务(-1.45%), 证券Ⅱ(-1.40%). Research points to continued strength in semis/consumer electronics/power equipment, but most actionable names are overextended versus MA10/MA20. IV context is mostly neutral, with 科创 proxies elevated above 50%, arguing for selectivity rather than aggression."
+  }
+}
