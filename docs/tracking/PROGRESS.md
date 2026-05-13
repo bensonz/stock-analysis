@@ -1,5 +1,26 @@
 # Progress
 
+## 2026-05-13: Fix pricedb degradation — proxy bypass, clist snapshot, drop tushare, fix staleness gate
+
+### Completed
+1. **`scripts/pricedb.py`** — Added `_no_proxy_env` context manager (strips HTTP_PROXY/HTTPS_PROXY/ALL_PROXY/NO_PROXY so Surge can't intercept eastmoney/akshare/baostock), `_bulk_fetch_eastmoney_clist` (bulk daily snapshot via push2.eastmoney.com/api/qt/clist/get, ~120 pages × 50 stocks ≈ 50s for the whole A-share market), `fetch_trade_dates_free` (akshare-based replacement for tushare trade_cal, with weekday fallback), `most_recent_trading_day` (calendar-aware staleness helper). Provider order is now clist → per-stock kline → akshare → baostock → tushare(opt-in). `PRICEDB_UPDATE_BUDGET_SEC` default 600s → 300s. `_no_proxy_env` also wraps akshare hist + spot calls and baostock login/query/k_data calls.
+2. **`scripts/data_collector.py`** — Replaced bogus `>10 calendar days` staleness check with `latest_dt < most_recent_trading_day(today)`. Imports moved to local to avoid module-load cycles.
+3. **`scripts/run_daily.py`** — Added `preflight_pricedb_or_exit(manifest)` that runs `pricedb update` with a 300s budget before phase1 and refuses to proceed (exit 2) if the DB is stale on a trading day after 09:30; off-hours / weekends warn + continue. Sets `PRICEDB_SKIP_UPDATE=1` for phase1 so the existing update path becomes a no-op.
+4. **`scripts/test_local_pricedb.py`** — 15 new unit tests covering proxy bypass, calendar helper edge cases (weekend/holiday/fallback), staleness gate (stale/weekend-ok/fresh), clist URL construction, response parsing (full/suspended/null/partial), pagination termination, multi-day & non-today rejection, and akshare-trade-cal fallback. Repaired 2 pre-existing test assertions that had bit-rotted with the calendar.
+5. **`scripts/test_fixtures/eastmoney_clist_*.json`** — 3 hand-crafted fixtures (full page, partial last page, suspended/null rows).
+6. **`scripts/test_pricedb_smoke.py`** — End-to-end live smoke test: <120s, ≥5000 bars, today's date present. Skips on weekends.
+7. **`scripts/dev_capture_fixtures.py`** — Re-capture script for when Eastmoney changes response shape.
+8. **`scripts/conftest.py`** — Register `integration` marker so `pytest scripts/` filters network tests correctly.
+
+### Acceptance Status
+- [x] All 20 unit tests pass (3 integration tests skipped without `-m integration`)
+- [x] Provider order updated; clist is default for single-day daily updates
+- [x] Tushare no longer required (path retained as opt-in if `TUSHARE_TOKEN` set)
+- [x] Staleness gate hard-refuses during trading hours
+- [x] Default update budget tightened to 300s
+- [ ] Live smoke test (`python3 scripts/test_pricedb_smoke.py`) — runs only on trading days; user to verify
+- [ ] Full pipeline (`python3 scripts/run_daily.py --run`) — user to verify next trading session
+
 ## 2026-04-30: Fix `pricedb update` hanging on dead TCP sockets
 
 ### Completed
