@@ -1,0 +1,138 @@
+{
+  "date": "2026-05-14",
+  "market_overview": {
+    "shanghai_composite": {
+      "value": 4199.188,
+      "change_pct": -1.02
+    },
+    "shenzhen_component": {
+      "value": 15831.83,
+      "change_pct": -1.6
+    },
+    "chinext": {
+      "value": 3960.51,
+      "change_pct": -1.93
+    },
+    "sentiment": "bearish",
+    "hot_sectors": [
+      "航运港口",
+      "国有大型银行Ⅱ",
+      "养殖业",
+      "饲料",
+      "白色家电"
+    ],
+    "cold_sectors": [
+      "航天装备Ⅱ",
+      "林业Ⅱ",
+      "小金属",
+      "能源金属",
+      "综合Ⅱ"
+    ],
+    "notes": "Breadth 0.26:1 bearish, 63涨停/27跌停, all 3 major indices red and entry_regime explicitly flags panic with hard_block=true. Hot sectors are mostly defensive/relative-strength pockets (航运港口、国有大型银行Ⅱ、白色家电) while high-beta groups like 航天装备Ⅱ、小金属、能源金属 lead downside. IV context is mixed: broad-market IV mostly neutral, but 科创50/创业板 proxies are elevated, reinforcing selectivity; regardless, regime gate fails, so no new positions today."
+  },
+  "strategy_scan": {
+    "total_stocks_scanned": 53,
+    "strategy_name": "小市值-无 20RP",
+    "scan_time": "2026-05-14T11:42:03.779033+08:00"
+  },
+  "recommendations": [
+    {
+      "code": "688150.SH",
+      "name": "莱特光电",
+      "price": null,
+      "rps120": 94.97,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "002812.SZ",
+      "name": "恩捷股份",
+      "price": null,
+      "rps120": 93.96,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600499.SH",
+      "name": "科达制造",
+      "price": null,
+      "rps120": 90.79,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "605056.SH",
+      "name": "咸亨国际",
+      "price": null,
+      "rps120": 93.35,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "000559.SZ",
+      "name": "万向钱潮",
+      "price": null,
+      "rps120": 89.15,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600301.SH",
+      "name": "华锡有色",
+      "price": null,
+      "rps120": 92.84,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "300666.SZ",
+      "name": "江丰电子",
+      "price": null,
+      "rps120": 94.49,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688200.SH",
+      "name": "华峰测控",
+      "price": null,
+      "rps120": 90.47,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688146.SH",
+      "name": "中船特气",
+      "price": null,
+      "rps120": 85.42,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "300236.SZ",
+      "name": "上海新阳",
+      "price": null,
+      "rps120": 87.47,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    }
+  ],
+  "summary": {
+    "total_scanned": 53,
+    "buy_recommendations": 0,
+    "watch_recommendations": 10,
+    "avoid_recommendations": 0,
+    "market_call": "观望",
+    "reasoning": "Breadth 0.26:1 bearish, 63涨停/27跌停, all 3 major indices red and entry_regime explicitly flags panic with hard_block=true. Hot sectors are mostly defensive/relative-strength pockets (航运港口、国有大型银行Ⅱ、白色家电) while high-beta groups like 航天装备Ⅱ、小金属、能源金属 lead downside. IV context is mixed: broad-market IV mostly neutral, but 科创50/创业板 proxies are elevated, reinforcing selectivity; regardless, regime gate fails, so no new positions today."
+  }
+}

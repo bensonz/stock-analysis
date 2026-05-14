@@ -1,0 +1,164 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "航运港口",
+        "5d_pct": 1.5,
+        "trend": "defensive_relative_strength"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": 1.39,
+        "trend": "defensive_relative_strength"
+      },
+      {
+        "name": "养殖业",
+        "5d_pct": 1.31,
+        "trend": "rebound"
+      },
+      {
+        "name": "饲料",
+        "5d_pct": 1.11,
+        "trend": "rebound"
+      },
+      {
+        "name": "白色家电",
+        "5d_pct": 0.69,
+        "trend": "defensive_steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": -5.43,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -4.07,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "小金属",
+        "5d_pct": -3.88,
+        "trend": "sharp_reversal"
+      },
+      {
+        "name": "能源金属",
+        "5d_pct": -3.38,
+        "trend": "sharp_reversal"
+      },
+      {
+        "name": "综合Ⅱ",
+        "5d_pct": -3.31,
+        "trend": "weak"
+      }
+    ],
+    "position_alignment": "0/0 positions in hot sectors",
+    "regime": "Panic/risk-off tape; defensive sectors leading while prior high-beta tech/resources are under pressure"
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688150",
+      "name": "莱特光电",
+      "reason": "No entry. Market hard-blocked for new longs; additionally dist_ma20_pct 22.6% exceeds anti-chase rule even though RPS120 94.97 and earnings growth are solid.",
+      "rps120": 94.97
+    },
+    {
+      "code": "002812",
+      "name": "恩捷股份",
+      "reason": "No entry. Market hard-blocked for new longs; setup is one of the cleaner ones on MA distance, but sector is not in today's top leadership list and breadth regime forbids fresh risk.",
+      "rps120": 93.96
+    },
+    {
+      "code": "600499",
+      "name": "科达制造",
+      "reason": "No entry. Market hard-blocked for new longs; technicals are acceptable, but sector is not in today's top 30% leadership and stock has weaker short-term event signal in events.",
+      "rps120": 90.79
+    },
+    {
+      "code": "605056",
+      "name": "咸亨国际",
+      "reason": "No entry. Market hard-blocked for new longs; RPS120 93.35 is fine and MA structure is calm, but score_trend is weaker and there is no strong fresh catalyst in today's tape.",
+      "rps120": 93.35
+    },
+    {
+      "code": "000559",
+      "name": "万向钱潮",
+      "reason": "Skip. RPS120 89.15 is acceptable, but sector is 汽车零部件, not in today's top leadership, and latest event shows 2026年第一季度营收同比下降19.84%、净利润同比下降15.84%。",
+      "rps120": 89.15
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "Skip. Sector 小金属 is in today's bottom 5 at -3.88%; no entry regardless of stock quality. Also dist_ma20_pct 13.2% exceeds anti-chase threshold.",
+      "rps120": 92.84
+    },
+    {
+      "code": "300666",
+      "name": "江丰电子",
+      "reason": "Skip. Sector trend was strong before, but today market is risk-off and stock fails anti-chase with dist_ma10_pct 13.6% and dist_ma20_pct 22.4%.",
+      "rps120": 94.49
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "Skip. Strong fundamentals/catalyst, but anti-chase violation is severe: dist_ma5_pct 10.7%, dist_ma10_pct 20.8%, dist_ma20_pct 32.8%. Above 95% chasing risk profile in practice.",
+      "rps120": 90.47
+    },
+    {
+      "code": "688146",
+      "name": "中船特气",
+      "reason": "Skip. Fresh news exists, but stock fails anti-chase with dist_ma10_pct 14.9% and dist_ma20_pct 43.5%; additionally current market regime blocks all new longs.",
+      "rps120": 85.42
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "reason": "Skip. Closest to buyable on price structure, but dist_ma10_pct 8.8% and dist_ma20_pct 12.5% both exceed allowed limits, and market breadth is too weak for any fresh entry.",
+      "rps120": 87.47
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "When the top-performing sectors are defensive groups like 航运港口、国有大型银行、白色家电 while all major indices are red, treat sector strength as relative defense rather than a green light for aggressive momentum buying.",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "timing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Defensive leadership during index-wide liquidation usually means capital is hiding, not broadly embracing risk, so stock-level breakouts have lower follow-through."
+    },
+    {
+      "text": "The MA-distance anti-chase rule remains crucial: many fundamentally attractive names today failed only because they are too far above MA10/MA20, which matters even more on a panic tape.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "In weak breadth, stretched names lose nearest support quickly, so overextension turns good stories into bad entries."
+    },
+    {
+      "text": "A panic breadth ratio below 0.3:1 with 0/3 major indices green should default the system to full cash, even if the candidate list still contains high-RPS names.",
+      "type": "heuristic",
+      "tags": [
+        "timing",
+        "entry-filter",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Momentum edge comes from both stock strength and market sponsorship; when sponsorship disappears, stock selection quality cannot compensate for tape risk."
+    }
+  ],
+  "market_summary": "Breadth 0.26:1 bearish, 63涨停/27跌停, all 3 major indices red and entry_regime explicitly flags panic with hard_block=true. Hot sectors are mostly defensive/relative-strength pockets (航运港口、国有大型银行Ⅱ、白色家电) while high-beta groups like 航天装备Ⅱ、小金属、能源金属 lead downside. IV context is mixed: broad-market IV mostly neutral, but 科创50/创业板 proxies are elevated, reinforcing selectivity; regardless, regime gate fails, so no new positions today.",
+  "market_sentiment": "bearish",
+  "market_call": "观望"
+}

@@ -1,0 +1,36 @@
+{
+  "date": "2026-05-14",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 965710.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.43,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -34290.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.265,
+    "up": 1141,
+    "down": 4306,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 63,
+    "limit_downs": 27,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.26:1, 0/3 major indices green, 63 limit-ups / 27 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 0.26:1 bearish, 63涨停/27跌停, all 3 major indices red and entry_regime explicitly flags panic with hard_block=true. Hot sectors are mostly defensive/relative-strength pockets (航运港口、国有大型银行Ⅱ、白色家电) while high-beta groups like 航天装备Ⅱ、小金属、能源金属 lead downside. IV context is mixed: broad-market IV mostly neutral, but 科创50/创业板 proxies are elevated, reinforcing selectivity; regardless, regime gate fails, so no new positions today."
+  }
+}
