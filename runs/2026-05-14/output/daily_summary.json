@@ -14,23 +14,23 @@
   "entryRegime": {
     "allow_new_positions": false,
     "regime": "panic",
-    "breadth_ratio": 0.265,
-    "up": 1141,
-    "down": 4306,
+    "breadth_ratio": 0.2387,
+    "up": 1047,
+    "down": 4387,
     "positive_indices": [],
     "negative_indices": [
       "上证指数",
       "深证成指",
       "创业板指"
     ],
-    "limit_ups": 63,
-    "limit_downs": 27,
+    "limit_ups": 82,
+    "limit_downs": 48,
     "sizing_multiplier": 0.0,
     "hard_block": true,
-    "reason": "Entry regime panic: breadth 0.26:1, 0/3 major indices green, 63 limit-ups / 27 limit-downs. Block new longs."
+    "reason": "Entry regime panic: breadth 0.24:1, 0/3 major indices green, 82 limit-ups / 48 limit-downs. Block new longs."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "Breadth 0.26:1 bearish, 63涨停/27跌停, all 3 major indices red and entry_regime explicitly flags panic with hard_block=true. Hot sectors are mostly defensive/relative-strength pockets (航运港口、国有大型银行Ⅱ、白色家电) while high-beta groups like 航天装备Ⅱ、小金属、能源金属 lead downside. IV context is mixed: broad-market IV mostly neutral, but 科创50/创业板 proxies are elevated, reinforcing selectivity; regardless, regime gate fails, so no new positions today."
+    "summary": "Breadth 0.24:1 bearish, 82涨停/48跌停, all 3 major indices red: 上证-1.52%, 深成指-2.14%, 创业板指-2.16%. Entry regime is explicitly panic and hard-blocked, so new_positions stays empty. Leadership is defensive: 饲料(+1.55%), 养殖业(+1.51%), 白电(+1.04%), 银行(+1.03%), while 林业Ⅱ(-8.63%), 航天装备Ⅱ(-8.18%), 小金属(-4.95%) are among the worst. Stock-specific IV proxies are mostly normal-to-elevated rather than extreme, but IV is irrelevant today because breadth/indices already veto fresh longs."
   }
 }

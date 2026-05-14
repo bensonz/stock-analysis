@@ -1159,3 +1159,10 @@
 - When the top-performing sectors are defensive groups like 航运港口、国有大型银行、白色家电 while all major indices are red, treat sector strength as relative defense rather than a green light for aggressive momentum buying.
 - The MA-distance anti-chase rule remains crucial: many fundamentally attractive names today failed only because they are too far above MA10/MA20, which matters even more on a panic tape.
 - A panic breadth ratio below 0.3:1 with 0/3 major indices green should default the system to full cash, even if the candidate list still contains high-RPS names.
+
+### 自动更新 (2026-05-14)
+
+- When breadth collapses to 0.24:1 with all three major indices red, the correct momentum action is full pass even if several stocks still show high RPS.
+- Today's candidate pool again shows the anti-chase MA filter doing real work: many popular names have acceptable RPS but are 10-40% above MA10/MA20 and therefore unbuyable.
+- Defensive leadership from 饲料、养殖业、白电、银行 while major indices fall suggests capital is hiding rather than expanding risk appetite.
+- Cold-sector override remains essential: 华锡有色 had acceptable RPS and support proximity, but 小金属 being bottom-5 sector is enough to reject the trade.

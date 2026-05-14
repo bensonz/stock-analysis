@@ -599,13 +599,17 @@
           {
             "date": "2026-05-14",
             "detail": "A panic breadth ratio below 0.3:1 with 0/3 major indices green should default the system to full cash, even if the candidate list still contains high-RPS names."
+          },
+          {
+            "date": "2026-05-14",
+            "detail": "When breadth collapses to 0.24:1 with all three major indices red, the correct momentum action is full pass even if several stocks still show high RPS."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 66,
+      "sampleSize": 67,
       "hitRate": 1.0,
-      "confidence": 0.985,
+      "confidence": 0.986,
       "tags": [],
       "parentRule": null,
       "retiredDate": null,
@@ -828,7 +832,7 @@
       "type": "heuristic",
       "status": "hypothesis",
       "created": "2026-04-01",
-      "lastTested": "2026-04-01",
+      "lastTested": "2026-05-14",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -843,13 +847,17 @@
           {
             "date": "2026-04-01",
             "detail": "Low-IV backdrop is a sizing input, not a buy trigger. With avg IV rank around 23%, entries should still demand sector leadership and non-extended price structure."
+          },
+          {
+            "date": "2026-05-14",
+            "detail": "Cold-sector override remains essential: 华锡有色 had acceptable RPS and support proximity, but 小金属 being bottom-5 sector is enough to reject the trade."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 3,
+      "sampleSize": 4,
       "hitRate": 1.0,
-      "confidence": 0.8,
+      "confidence": 0.833,
       "tags": [
         "sector",
         "entry-filter"
@@ -1056,13 +1064,17 @@
           {
             "date": "2026-05-14",
             "detail": "The MA-distance anti-chase rule remains crucial: many fundamentally attractive names today failed only because they are too far above MA10/MA20, which matters even more on a panic tape."
+          },
+          {
+            "date": "2026-05-14",
+            "detail": "Today's candidate pool again shows the anti-chase MA filter doing real work: many popular names have acceptable RPS but are 10-40% above MA10/MA20 and therefore unbuyable."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 38,
+      "sampleSize": 39,
       "hitRate": 1.0,
-      "confidence": 0.975,
+      "confidence": 0.976,
       "tags": [
         "entry-filter",
         "timing"
@@ -1349,7 +1361,7 @@
       "type": "observation",
       "status": "hypothesis",
       "created": "2026-04-06",
-      "lastTested": "2026-04-28",
+      "lastTested": "2026-05-14",
       "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally.",
       "evidence": {
         "supporting": [
@@ -1360,13 +1372,17 @@
           {
             "date": "2026-04-28",
             "detail": "Today’s strength is concentrated in defensive or isolated pockets like medical services and coal rather than broad risk-on leadership, so sector heat is not broad enough to override regime weakness."
+          },
+          {
+            "date": "2026-05-14",
+            "detail": "Defensive leadership from 饲料、养殖业、白电、银行 while major indices fall suggests capital is hiding rather than expanding risk appetite."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 2,
+      "sampleSize": 3,
       "hitRate": 1.0,
-      "confidence": 0.75,
+      "confidence": 0.8,
       "tags": [
         "sector",
         "timing"

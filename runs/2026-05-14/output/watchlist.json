@@ -2,49 +2,40 @@
   "date": "2026-05-14",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4199.188,
-      "change_pct": -1.02
+      "value": 4177.917,
+      "change_pct": -1.52
     },
     "shenzhen_component": {
-      "value": 15831.83,
-      "change_pct": -1.6
+      "value": 15745.74,
+      "change_pct": -2.14
     },
     "chinext": {
-      "value": 3960.51,
-      "change_pct": -1.93
+      "value": 3951.14,
+      "change_pct": -2.16
     },
     "sentiment": "bearish",
     "hot_sectors": [
-      "航运港口",
-      "国有大型银行Ⅱ",
-      "养殖业",
       "饲料",
-      "白色家电"
+      "养殖业",
+      "白色家电",
+      "国有大型银行Ⅱ",
+      "航运港口"
     ],
     "cold_sectors": [
-      "航天装备Ⅱ",
       "林业Ⅱ",
+      "航天装备Ⅱ",
       "小金属",
-      "能源金属",
-      "综合Ⅱ"
+      "广告营销",
+      "数字媒体"
     ],
-    "notes": "Breadth 0.26:1 bearish, 63涨停/27跌停, all 3 major indices red and entry_regime explicitly flags panic with hard_block=true. Hot sectors are mostly defensive/relative-strength pockets (航运港口、国有大型银行Ⅱ、白色家电) while high-beta groups like 航天装备Ⅱ、小金属、能源金属 lead downside. IV context is mixed: broad-market IV mostly neutral, but 科创50/创业板 proxies are elevated, reinforcing selectivity; regardless, regime gate fails, so no new positions today."
+    "notes": "Breadth 0.24:1 bearish, 82涨停/48跌停, all 3 major indices red: 上证-1.52%, 深成指-2.14%, 创业板指-2.16%. Entry regime is explicitly panic and hard-blocked, so new_positions stays empty. Leadership is defensive: 饲料(+1.55%), 养殖业(+1.51%), 白电(+1.04%), 银行(+1.03%), while 林业Ⅱ(-8.63%), 航天装备Ⅱ(-8.18%), 小金属(-4.95%) are among the worst. Stock-specific IV proxies are mostly normal-to-elevated rather than extreme, but IV is irrelevant today because breadth/indices already veto fresh longs."
   },
   "strategy_scan": {
-    "total_stocks_scanned": 53,
+    "total_stocks_scanned": 55,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-05-14T11:42:03.779033+08:00"
+    "scan_time": "2026-05-14T15:37:11.052808+08:00"
   },
   "recommendations": [
-    {
-      "code": "688150.SH",
-      "name": "莱特光电",
-      "price": null,
-      "rps120": 94.97,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
     {
       "code": "002812.SZ",
       "name": "恩捷股份",
@@ -125,14 +116,59 @@
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
+    },
+    {
+      "code": "688372.SH",
+      "name": "伟测科技",
+      "price": null,
+      "rps120": 93.8,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "300870.SZ",
+      "name": "欧陆通",
+      "price": null,
+      "rps120": 89.09,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "002655.SZ",
+      "name": "共达电声",
+      "price": null,
+      "rps120": 94.55,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688668.SH",
+      "name": "鼎通科技",
+      "price": null,
+      "rps120": 92.52,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "300548.SZ",
+      "name": "长芯博创",
+      "price": null,
+      "rps120": 93.71,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
     }
   ],
   "summary": {
-    "total_scanned": 53,
+    "total_scanned": 55,
     "buy_recommendations": 0,
-    "watch_recommendations": 10,
+    "watch_recommendations": 14,
     "avoid_recommendations": 0,
     "market_call": "观望",
-    "reasoning": "Breadth 0.26:1 bearish, 63涨停/27跌停, all 3 major indices red and entry_regime explicitly flags panic with hard_block=true. Hot sectors are mostly defensive/relative-strength pockets (航运港口、国有大型银行Ⅱ、白色家电) while high-beta groups like 航天装备Ⅱ、小金属、能源金属 lead downside. IV context is mixed: broad-market IV mostly neutral, but 科创50/创业板 proxies are elevated, reinforcing selectivity; regardless, regime gate fails, so no new positions today."
+    "reasoning": "Breadth 0.24:1 bearish, 82涨停/48跌停, all 3 major indices red: 上证-1.52%, 深成指-2.14%, 创业板指-2.16%. Entry regime is explicitly panic and hard-blocked, so new_positions stays empty. Leadership is defensive: 饲料(+1.55%), 养殖业(+1.51%), 白电(+1.04%), 银行(+1.03%), while 林业Ⅱ(-8.63%), 航天装备Ⅱ(-8.18%), 小金属(-4.95%) are among the worst. Stock-specific IV proxies are mostly normal-to-elevated rather than extreme, but IV is irrelevant today because breadth/indices already veto fresh longs."
   }
 }
