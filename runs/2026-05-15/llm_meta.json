@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "gpt-5.4",
+  "decision_source": "GPT primary",
+  "input_tokens": 126153,
+  "output_tokens": 3112,
+  "rounds": 2,
+  "duration_sec": 88.6,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=A%E8%82%A1+%E7%83%AD%E9%97%A8%E6%9D%BF%E5%9D%97+%E4%BB%8A%E6%97%A5+2026%E5%B9%B405%E6%9C%8815%E6%97%A5"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E5%85%B6%E4%BB%96%E5%AE%B6%E7%94%B5+%E7%94%B5%E6%9C%BA+%E4%BB%8A%E6%97%A5+A%E8%82%A1+2026%E5%B9%B405%E6%9C%8815%E6%97%A5"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E7%8E%BB%E7%92%83%E7%8E%BB%E7%BA%A4+%E8%B4%B5%E9%87%91%E5%B1%9E+%E5%B7%A5%E4%B8%9A%E9%87%91%E5%B1%9E+%E4%B8%8B%E8%B7%8C+A%E8%82%A1+2026%E5%B9%B405%E6%9C%8815%E6%97%A5"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E5%8D%8A%E5%AF%BC%E4%BD%93+%E5%85%88%E8%BF%9B%E5%B0%81%E6%B5%8B+%E9%9C%80%E6%B1%82+%E4%BB%8A%E6%97%A5+2026%E5%B9%B405%E6%9C%8815%E6%97%A5"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E9%94%82%E7%94%B5%E6%B1%A0+%E9%9A%94%E8%86%9C+%E6%81%A9%E6%8D%B7%E8%82%A1%E4%BB%BD+%E8%87%AA%E8%B4%A1+50%E4%BA%BF%E5%B9%B3%E7%B1%B3+2026%E5%B9%B405%E6%9C%8815%E6%97%A5"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E6%9C%89%E8%89%B2%E9%87%91%E5%B1%9E+%E5%B0%8F%E9%87%91%E5%B1%9E+%E5%A4%A7%E8%B7%8C+%E5%8E%9F%E5%9B%A0+2026%E5%B9%B405%E6%9C%8815%E6%97%A5"
+      },
+      "result_length": 28
+    }
+  ],
+  "fallback_used": false
+}

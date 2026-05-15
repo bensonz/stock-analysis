@@ -1,0 +1,36 @@
+{
+  "date": "2026-05-15",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 965710.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.43,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -34290.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.5067,
+    "up": 1816,
+    "down": 3584,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 73,
+    "limit_downs": 45,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.51:1, 0/3 major indices green, 73 limit-ups / 45 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 0.51:1 bearish, 73涨停/45跌停, all 3 major indices red; entry regime explicitly marked panic, so no new positions. Hot sectors were narrow household-appliance/electromechanical pockets, while 玻璃玻纤/贵金属/工业金属 led downside. Semi/advanced packaging news flow remains constructive, and恩捷股份 has a fresh 自贡50亿平方米隔膜扩产 catalyst, but the market gate is closed. IV context unavailable, so no IV-based sizing adjustment can override the hard regime block."
+  }
+}
