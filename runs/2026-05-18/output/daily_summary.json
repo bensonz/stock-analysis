@@ -1,0 +1,36 @@
+{
+  "date": "2026-05-18",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 965710.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.43,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -34290.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.5167,
+    "up": 1843,
+    "down": 3567,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 84,
+    "limit_downs": 55,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.52:1, 0/3 major indices green, 84 limit-ups / 55 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 0.52:1 bearish, 84涨停/55跌停, panic-like tape. 上证-0.22%、深成指-0.31%、创业板指-0.50%，0/3 major indices green, so the minimum long-entry gate decisively fails. Hot groups are narrowly concentrated in 油服工程(+3.85%), 元件(+2.83%), 电子化学品Ⅱ(+2.43%) and 航天装备Ⅱ(+1.94%), while 养殖业(-3.77%)、工程机械(-3.46%)、医疗美容(-3.25%) lead downside. IV context is mixed: broad-market IV is neutral, but 科创50/创业板 proxies are elevated, reinforcing selectivity rather than aggression. With no active positions and entry_regime hard_block=true, the correct action is full cash and no new longs."
+  }
+}
