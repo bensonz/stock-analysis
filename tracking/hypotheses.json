@@ -615,11 +615,15 @@
           {
             "date": "2026-05-18",
             "detail": "Today’s better-looking candidates are pullback names like 科达制造 and 万向钱潮, but regime risk dominates stock quality."
+          },
+          {
+            "date": "2026-05-18",
+            "detail": "When breadth is below 1:1 and all three major indices are red, even a 102涨停 tape is still a no-entry environment; isolated leaders do not override regime failure."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 70,
+      "sampleSize": 71,
       "hitRate": 1.0,
       "confidence": 0.986,
       "tags": [],
@@ -1092,13 +1096,17 @@
           {
             "date": "2026-05-18",
             "detail": "The anti-chase MA filter is eliminating many of the strongest-looking names for good reason today; most hot names are 10-40% above MA10/MA20."
+          },
+          {
+            "date": "2026-05-18",
+            "detail": "Today's candidate pool again shows the MA-distance anti-chase rule doing the heavy lifting: many strongest stories in semis, CPO, and electronic chemicals are simply too far above MA10/MA20 to buy."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 42,
+      "sampleSize": 43,
       "hitRate": 1.0,
-      "confidence": 0.977,
+      "confidence": 0.978,
       "tags": [
         "entry-filter",
         "timing"
@@ -1342,9 +1350,9 @@
       "id": "h027",
       "text": "MA-distance discipline remains critical inside hot sectors: a hot sector does not override chase risk when dist_ma5_pct exceeds 6% or dist_ma10_pct exceeds 8%.",
       "type": "heuristic",
-      "status": "hypothesis",
+      "status": "validated",
       "created": "2026-04-06",
-      "lastTested": "2026-05-08",
+      "lastTested": "2026-05-18",
       "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes.",
       "evidence": {
         "supporting": [
@@ -1363,13 +1371,17 @@
           {
             "date": "2026-05-08",
             "detail": "Sector-first filtering matters more on distribution days: today's bottom-ranked 半导体 group still contains high-RPS stocks, but the sector tape is hostile enough to override stock strength."
+          },
+          {
+            "date": "2026-05-18",
+            "detail": "The best-looking non-chase setups today are pullback names such as 科达制造 and 万向钱潮, but sector-first discipline still requires passing on them when their sectors are not among the market leaders."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 4,
+      "sampleSize": 5,
       "hitRate": 1.0,
-      "confidence": 0.833,
+      "confidence": 0.857,
       "tags": [
         "entry-filter",
         "timing",

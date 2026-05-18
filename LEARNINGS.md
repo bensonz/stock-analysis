@@ -1179,3 +1179,9 @@
 - When breadth is below 1:1 and all three major indices are red, even strong sector leaders should remain on skip_list rather than forcing pilot positions.
 - The anti-chase MA filter is eliminating many of the strongest-looking names for good reason today; most hot names are 10-40% above MA10/MA20.
 - Today’s better-looking candidates are pullback names like 科达制造 and 万向钱潮, but regime risk dominates stock quality.
+
+### 自动更新 (2026-05-18)
+
+- When breadth is below 1:1 and all three major indices are red, even a 102涨停 tape is still a no-entry environment; isolated leaders do not override regime failure.
+- Today's candidate pool again shows the MA-distance anti-chase rule doing the heavy lifting: many strongest stories in semis, CPO, and electronic chemicals are simply too far above MA10/MA20 to buy.
+- The best-looking non-chase setups today are pullback names such as 科达制造 and 万向钱潮, but sector-first discipline still requires passing on them when their sectors are not among the market leaders.
