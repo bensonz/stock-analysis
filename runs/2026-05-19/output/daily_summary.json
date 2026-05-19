@@ -1,0 +1,37 @@
+{
+  "date": "2026-05-19",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 965710.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.43,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -34290.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.8326,
+    "up": 2428,
+    "down": 2916,
+    "positive_indices": [
+      "上证指数"
+    ],
+    "negative_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 78,
+    "limit_downs": 27,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.83:1, 1/3 major indices green, 78 limit-ups / 27 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 0.83:1偏弱，1/3 major indices green（沪指微红，深成指/创业板指收跌），78涨停/27跌停，偏防御但局部题材仍活跃。Hot sectors: 电力、数字媒体、影视院线、专业连锁Ⅱ；Cold sectors: 航天装备Ⅱ、小金属、通信设备、个护用品、能源金属。IV整体中性，科创板IV偏高，意味科创方向新开仓要更挑剔。"
+  }
+}
