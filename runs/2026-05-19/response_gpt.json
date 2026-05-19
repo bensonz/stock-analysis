@@ -2,191 +2,186 @@
   "sector_analysis": {
     "hot_sectors": [
       {
-        "name": "电力",
-        "5d_pct": 2.48,
-        "trend": "steady"
-      },
-      {
-        "name": "数字媒体",
-        "5d_pct": 2.23,
+        "name": "电视广播Ⅱ",
+        "5d_pct": 3.59,
         "trend": "accelerating"
       },
       {
-        "name": "影视院线",
-        "5d_pct": 1.78,
-        "trend": "steady"
-      },
-      {
         "name": "专业连锁Ⅱ",
-        "5d_pct": 1.68,
+        "5d_pct": 3.28,
+        "trend": "accelerating"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": 3.27,
+        "trend": "accelerating"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": 3.08,
         "trend": "steady"
       },
       {
-        "name": "科创50/科创板相关",
-        "5d_pct": null,
-        "trend": "mixed"
+        "name": "电力",
+        "5d_pct": 3.07,
+        "trend": "steady"
       }
     ],
     "cold_sectors": [
       {
         "name": "航天装备Ⅱ",
-        "5d_pct": -4.33,
+        "5d_pct": -4.11,
         "trend": "deteriorating"
       },
       {
         "name": "小金属",
-        "5d_pct": -3.9,
-        "trend": "deteriorating"
-      },
-      {
-        "name": "通信设备",
-        "5d_pct": -3.37,
+        "5d_pct": -3.31,
         "trend": "deteriorating"
       },
       {
         "name": "个护用品",
-        "5d_pct": -3.18,
+        "5d_pct": -2.56,
         "trend": "deteriorating"
       },
       {
         "name": "能源金属",
-        "5d_pct": -2.79,
+        "5d_pct": -1.93,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航海装备Ⅱ",
+        "5d_pct": -1.79,
         "trend": "deteriorating"
       }
     ],
     "position_alignment": "0/0 positions in hot sectors",
-    "regime": "weak, sector rotation defensive with selective theme spikes"
+    "regime": "Broad risk-on tape with semis/media/power leadership; aerospace and small metals are rotating out"
   },
   "position_decisions": [],
-  "new_positions": [],
+  "new_positions": [
+    {
+      "code": "301216",
+      "name": "万凯新材",
+      "entry_price": 28.76,
+      "allocation_pct": 4,
+      "stop": 27.32,
+      "target": 34.0,
+      "thesis": "Plastics sector is in an uptrend and the stock sits in the RPS sweet zone with acceptable MA distances plus a live VCP setup near support.",
+      "sector": "塑料",
+      "sector_rank": "top 30%",
+      "catalyst": "最新季度归母净利润同比增长694%，机构继续强化瓶片景气与成长逻辑，5月13日业绩说明会延续上游配套与景气叙事",
+      "catalyst_freshness": "ongoing",
+      "rps120": 87.21,
+      "conviction": "small"
+    }
+  ],
   "skip_list": [
     {
-      "code": "688150.SH",
-      "name": "莱特光电",
-      "reason": "科创板偏高IV，且dist_ma10_pct 7.7%/dist_ma20_pct 22.6%偏扩张；可看但不追",
-      "rps120": 94.97
-    },
-    {
-      "code": "002655.SZ",
-      "name": "共达电声",
-      "reason": "通信设备/消费电子链偏弱，且dist_ma10_pct 23.1%过远，追高风险高",
-      "rps120": 94.55
-    },
-    {
-      "code": "300666.SZ",
+      "code": "300666",
       "name": "江丰电子",
-      "reason": "半导体强但已偏离MA10 13.6%和MA20 22.4%，不符合不追高",
+      "reason": "半导体属热区且基本面强，但dist_ma10_pct 13.6%与dist_ma20_pct 22.4%严重超出反追高门槛，必须等回踩。",
       "rps120": 94.49
     },
     {
-      "code": "688231.SH",
-      "name": "隆达股份",
-      "reason": "军工/有色概念偏题材，且dist_ma10_pct 15.4%超扩张",
-      "rps120": 94.14
+      "code": "688150",
+      "name": "莱特光电",
+      "reason": "电子化学品景气尚可，但dist_ma20_pct 22.6%超过门槛；RPS虽合格，位置仍偏离支撑过远。",
+      "rps120": 94.97
     },
     {
-      "code": "002812.SZ",
-      "name": "恩捷股份",
-      "reason": "电池链不在强势 sector 前列，且10日涨幅仅高于市场6.0%，动能不足",
-      "rps120": 93.96
-    },
-    {
-      "code": "688372.SH",
+      "code": "688372",
       "name": "伟测科技",
-      "reason": "MA5距离6.4%触及追高线，且科创板IV偏高",
+      "reason": "半导体强，但dist_ma5_pct 6.4%、dist_ma10_pct 11.1%、dist_ma20_pct 18.2%全部或多数超限，属于明显追高位。",
       "rps120": 93.8
     },
     {
-      "code": "300548.SZ",
-      "name": "长芯博创",
-      "reason": "通信设备板块当日转弱，且dist_ma10_pct 26.0%严重扩张",
-      "rps120": 93.71
+      "code": "688231",
+      "name": "隆达股份",
+      "reason": "所属有色金属/金属新材料不在今日热区，且小金属是市场底部板块之一；同时dist_ma5_pct 7.0%已超追高线。",
+      "rps120": 94.14
     },
     {
-      "code": "600301.SH",
-      "name": "华锡有色",
-      "reason": "小金属板块在冷区，板块 gravity 不支持新开",
-      "rps120": 92.84
-    },
-    {
-      "code": "688668.SH",
-      "name": "鼎通科技",
-      "reason": "高位延伸明显，且科创板IV偏高；只适合等回撤",
-      "rps120": 92.52
-    },
-    {
-      "code": "300739.SZ",
-      "name": "明阳电路",
-      "reason": "RPS120 仅90.98但10日涨幅弱，且MA10/MA20偏离不够舒服",
-      "rps120": 90.98
-    },
-    {
-      "code": "301216.SZ",
-      "name": "万凯新材",
-      "reason": "VCP仅SETUP，contraction_ratio 0.56不达优，且瓶片虽有催化但不够紧",
-      "rps120": 87.21
-    },
-    {
-      "code": "605056.SH",
+      "code": "605056",
       "name": "咸亨国际",
-      "reason": "具身智能叙事有料，但行业/板块未进入强势热区，且MA10 -10.0%已触发追高/偏离风险边界",
+      "reason": "机器人+电网巡检题材有催化，但其通用设备不在输入给出的前排热区；且该股iv_proxy提示IV Rank 10.4%，即便要做也需减半，优先级不足。",
       "rps120": 93.35
     },
     {
-      "code": "300870.SZ",
-      "name": "欧陆通",
-      "reason": "其他电源设备偏强但已远离MA10 28.3%，不适合此时追",
-      "rps120": 89.09
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "小金属位列市场bottom 5，冷板块直接否决新开仓，即使个股RPS尚可也只可跳过。",
+      "rps120": 92.84
     },
     {
-      "code": "688610.SH",
-      "name": "埃科光电",
-      "reason": "趋势强但dist_ma20_pct 36.8%过度延伸，等回调",
-      "rps120": 87.92
+      "code": "000559",
+      "name": "万向钱潮",
+      "reason": "MA位置合格，但缺少明确热区背书，且一季报快讯显示营收同比下降19.84%、净利润同比下降15.84%，催化不如更强的成长股。",
+      "rps120": 89.15
     },
     {
-      "code": "301018.SZ",
+      "code": "600499",
+      "name": "科达制造",
+      "reason": "专用设备趋势尚可、MA位置健康，但不是今日前5热区，且近10日价格涨幅仅高于市场6.8%的事件提示短线动能不足。",
+      "rps120": 90.79
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "军工电子不在今日热区，且航天装备Ⅱ处于市场最冷板块之一附近；同时dist_ma20_pct 18.9%也偏高。",
+      "rps120": 89.66
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "半导体强，但dist_ma5_pct 10.7%、dist_ma10_pct 20.8%、dist_ma20_pct 32.8%极度过热，完全不符合MA距离纪律。",
+      "rps120": 90.47
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "reason": "电子化学品基本面强，但dist_ma10_pct 16.4%与dist_ma20_pct 22.5%过大，不能追。",
+      "rps120": 87.47
+    },
+    {
+      "code": "301018",
       "name": "申菱环境",
-      "reason": "通用设备方向尚可，但dist_ma5_pct 8.0%已超短线追高线",
+      "reason": "RPS合格但dist_ma5_pct 8.0%、dist_ma10_pct 22.4%、dist_ma20_pct 29.8%全部过热，且次日有小规模解禁事件。",
       "rps120": 87.02
+    },
+    {
+      "code": "688146",
+      "name": "中船特气",
+      "reason": "半导体材料方向有景气，但dist_ma10_pct 14.9%与dist_ma20_pct 43.5%严重超限，且昨日有大跌抛压风险提示。",
+      "rps120": 85.42
     }
   ],
   "new_learnings": [
     {
-      "text": "当日最强的是电力/数字媒体/影视院线，但候选池里真正能打的高RPS股大多集中在半导体、电子化学品、通信设备，存在“强股在弱板块、弱板块里更弱”的错配。",
-      "type": "observation",
-      "tags": [
-        "sector",
-        "timing"
-      ],
-      "evidence_type": "supporting",
-      "mechanism": "板块热度和个股动量不一致时，板块重力会放大回撤风险。",
-      "related_hypothesis": "h013"
-    },
-    {
-      "text": "MA距离规则仍然是本日最有效的过滤器：多数高RPS标的都因dist_ma10_pct>8%或dist_ma20_pct>12%被排除。",
+      "text": "今天的强市场并不意味着可以放宽MA距离纪律；多数热门半导体/算力股都因为离MA10与MA20过远而被排除，说明热区里最常见的错误仍然是追高。",
       "type": "rule",
       "tags": [
+        "sector",
         "entry-filter",
         "timing"
       ],
       "evidence_type": "supporting",
-      "mechanism": "过度偏离短均线的强势股更容易发生均值回归，尤其在弱市。",
-      "related_hypothesis": "h021"
+      "related_hypothesis": "h027",
+      "mechanism": "热板块内资金拥挤会把最强个股快速拉离短期均线，后手买盘一旦承接不足就容易出现均值回归，胜率被位置而不是题材决定。"
     },
     {
-      "text": "弱市下应优先等待回撤到MA5/MA10附近，而不是用RPS去追历史新高附近的延伸段。",
+      "text": "小市值景气化工/材料股只要RPS处于75-92区间、均线距离合格、并带有VCP结构，即使不是最热题材，也比过热半导体龙头更适合作为试错仓位。",
       "type": "heuristic",
       "tags": [
         "entry-filter",
+        "timing",
         "position-sizing"
       ],
       "evidence_type": "supporting",
-      "mechanism": "在breadth 0.83:1的环境里，延伸买点的胜率低于回踩支撑后的二次启动。",
-      "related_hypothesis": "h027"
+      "related_hypothesis": "h013",
+      "mechanism": "强市场里最优入场点常来自二线顺周期或景气细分的‘未加速但已转强’标的，既享受风险偏好回升，又避免高位挤兑。"
     }
   ],
-  "market_summary": "Breadth 0.83:1偏弱，1/3 major indices green（沪指微红，深成指/创业板指收跌），78涨停/27跌停，偏防御但局部题材仍活跃。Hot sectors: 电力、数字媒体、影视院线、专业连锁Ⅱ；Cold sectors: 航天装备Ⅱ、小金属、通信设备、个护用品、能源金属。IV整体中性，科创板IV偏高，意味科创方向新开仓要更挑剔。",
-  "market_sentiment": "neutral",
-  "market_call": "观望"
+  "market_summary": "Breadth 2.03:1 bullish, 123涨停/27跌停，2/3 major indices green and entry gate is open. 科创50大涨3.81%说明高弹性科技风险偏好回升，热点集中在媒体/半导体/电力。研究侧面验证，市场主线仍围绕芯片国产替代、CPO/算力链和电力基础设施展开，但多数龙头已明显远离MA支撑。IV整体偏乐观，主板与中盘IV Rank多在10%-22%，科创/创业板IV在35%-40%附近，适合正常到偏谨慎开仓，不适合无脑追高。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
 }
