@@ -631,11 +631,15 @@
           {
             "date": "2026-05-20",
             "detail": "When breadth is 0.31:1 and only 1 of 3 major indices is green, the correct momentum action is to hold cash even if a few semiconductor names are working."
+          },
+          {
+            "date": "2026-05-20",
+            "detail": "A hot leading sector does not override the market-level buy gate; today semiconductors were strong, but breadth 0.43:1 with 43跌停 still correctly forces new_positions to empty."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 74,
+      "sampleSize": 75,
       "hitRate": 1.0,
       "confidence": 0.987,
       "tags": [],
@@ -1120,11 +1124,15 @@
           {
             "date": "2026-05-20",
             "detail": "The MA-distance anti-chase filter is doing heavy lifting again today: many of the strongest candidates are in hot sectors but still unbuyable because they are too far above MA5/MA10/MA20."
+          },
+          {
+            "date": "2026-05-20",
+            "detail": "The anti-chase MA-distance rule continues to do real work: many of the strongest-looking semiconductor names failed because they were far above MA5/MA10/MA20 despite fresh catalysts."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 45,
+      "sampleSize": 46,
       "hitRate": 1.0,
       "confidence": 0.979,
       "tags": [
@@ -1256,13 +1264,17 @@
           {
             "date": "2026-05-20",
             "detail": "A fresh position can stay HOLD even after a -4.38% day if it remains above the hard stop, but weak volume should immediately downgrade any idea of adding capital."
+          },
+          {
+            "date": "2026-05-20",
+            "detail": "The -3% in first 3 days exit rule should be applied on closing damage, not just mark-to-market vs entry, when a fresh position immediately loses momentum and volume confirmation weakens."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 21,
+      "sampleSize": 22,
       "hitRate": 1.0,
-      "confidence": 0.957,
+      "confidence": 0.958,
       "tags": [
         "exit-rule",
         "timing",

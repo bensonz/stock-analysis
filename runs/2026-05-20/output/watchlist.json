@@ -2,38 +2,38 @@
   "date": "2026-05-20",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4150.977,
-      "change_pct": -0.45
+      "value": 4162.185,
+      "change_pct": -0.18
     },
     "shenzhen_component": {
-      "value": 15512.08,
-      "change_pct": -0.37
+      "value": 15569.98,
+      "change_pct": 0.0
     },
     "chinext": {
-      "value": 3910.52,
-      "change_pct": 0.05
+      "value": 3921.79,
+      "change_pct": 0.34
     },
     "sentiment": "bearish",
     "hot_sectors": [
       "半导体",
-      "油气开采Ⅱ",
-      "非金属材料Ⅱ",
       "光伏设备",
+      "非金属材料Ⅱ",
+      "油气开采Ⅱ",
       "非白酒"
     ],
     "cold_sectors": [
-      "文娱用品",
-      "通信服务",
       "电力",
+      "通信服务",
+      "文娱用品",
       "广告营销",
       "数字媒体"
     ],
-    "notes": "Breadth 0.31:1 bearish, 50涨停/29跌停, only 创业板指 green while 上证指数 and 深证成指 are red; this fails the minimum long-entry gate and matches the hard-blocked panic regime. Hot sectors are 半导体(+2.76%), 油气开采Ⅱ(+2.58%), 非金属材料Ⅱ(+2.27%), 光伏设备(+2.23%), 非白酒(+1.55%); cold sectors are 文娱用品(-3.79%), 通信服务(-3.47%), 电力(-3.43%), 广告营销(-3.38%), 数字媒体(-2.89%). Position sector alignment is 0/1 in hot sectors. IV context is mostly low-to-neutral overall, but regime—not IV—is the binding constraint today."
+    "notes": "Breadth 0.43:1 bearish, 71涨停/43跌停, clearly a panic-style tape despite 科创50 +3.2% and 半导体 +4.18% leading. Only 1 of 3 major indices was green, so the long-entry gate fails and new positions stay at zero. Hot sectors: 半导体、光伏设备、非金属材料Ⅱ、油气开采Ⅱ、非白酒; cold sectors: 电力、通信服务、文娱用品、广告营销、数字媒体. Position sector alignment: 0/1 in hot sectors. IV context is mixed-to-benign: broad market IV is low-to-neutral, while 创业板/科创 proxies are normal, so IV is not the blocker here—breadth and panic distribution are."
   },
   "strategy_scan": {
-    "total_stocks_scanned": 55,
+    "total_stocks_scanned": 54,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-05-20T11:41:52.614892+08:00"
+    "scan_time": "2026-05-20T15:36:11.651923+08:00"
   },
   "recommendations": [
     {
@@ -41,15 +41,6 @@
       "name": "江丰电子",
       "price": null,
       "rps120": 94.65,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688372.SH",
-      "name": "伟测科技",
-      "price": null,
-      "rps120": 93.64,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -100,39 +91,21 @@
       "reasoning": ""
     },
     {
-      "code": "688146.SH",
-      "name": "中船特气",
+      "code": "301216.SZ",
+      "name": "万凯新材",
       "price": null,
-      "rps120": 91.53,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688630.SH",
-      "name": "芯碁微装",
-      "price": null,
-      "rps120": 90.44,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "301018.SZ",
-      "name": "申菱环境",
-      "price": null,
-      "rps120": 89.26,
+      "rps120": 86.97,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     }
   ],
   "summary": {
-    "total_scanned": 55,
+    "total_scanned": 54,
     "buy_recommendations": 0,
-    "watch_recommendations": 10,
+    "watch_recommendations": 7,
     "avoid_recommendations": 0,
-    "market_call": "谨慎",
-    "reasoning": "Breadth 0.31:1 bearish, 50涨停/29跌停, only 创业板指 green while 上证指数 and 深证成指 are red; this fails the minimum long-entry gate and matches the hard-blocked panic regime. Hot sectors are 半导体(+2.76%), 油气开采Ⅱ(+2.58%), 非金属材料Ⅱ(+2.27%), 光伏设备(+2.23%), 非白酒(+1.55%); cold sectors are 文娱用品(-3.79%), 通信服务(-3.47%), 电力(-3.43%), 广告营销(-3.38%), 数字媒体(-2.89%). Position sector alignment is 0/1 in hot sectors. IV context is mostly low-to-neutral overall, but regime—not IV—is the binding constraint today."
+    "market_call": "观望",
+    "reasoning": "Breadth 0.43:1 bearish, 71涨停/43跌停, clearly a panic-style tape despite 科创50 +3.2% and 半导体 +4.18% leading. Only 1 of 3 major indices was green, so the long-entry gate fails and new positions stay at zero. Hot sectors: 半导体、光伏设备、非金属材料Ⅱ、油气开采Ⅱ、非白酒; cold sectors: 电力、通信服务、文娱用品、广告营销、数字媒体. Position sector alignment: 0/1 in hot sectors. IV context is mixed-to-benign: broad market IV is low-to-neutral, while 创业板/科创 proxies are normal, so IV is not the blocker here—breadth and panic distribution are."
   }
 }

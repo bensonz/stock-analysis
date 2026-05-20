@@ -1,7 +1,7 @@
 {
   "code": "301216",
   "name": "万凯新材",
-  "status": "active",
+  "status": "closed",
   "thesis": "Plastics sector is in an uptrend and the stock sits in the RPS sweet zone with acceptable MA distances plus a live VCP setup near support.",
   "entryDate": "2026-05-19",
   "entryPrice": 28.76,
@@ -30,15 +30,22 @@
       "change_pct": -0.66,
       "action": "HOLD",
       "note": "Price is -0.66% vs entry and still above hard stop 27.32, but tape is weak, volume is only 54.2% of MAVOL30, and position sector is not in the listed hot sectors. No adding; monitor closely for stop discipline."
+    },
+    {
+      "date": "2026-05-20",
+      "price": 28.8,
+      "change_pct": 0.14,
+      "action": "SELL",
+      "note": "Price closed 28.80 vs entry 28.76, but intraday drawdown was severe and daily change was -3.61%, triggering the first-3-days sell rule (-3% in first 3 days). Sector 塑料 is not in listed hot sectors, volume was below MAVOL30 (80.4% of average), and market regime is panic with breadth 0.43:1, so timing is wrong and capital should be freed."
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-05-20",
+  "exitPrice": 28.8,
+  "exitReason": "Price closed 28.80 vs entry 28.76, but intraday drawdown was severe and daily change was -3.61%, triggering the first-3-days sell rule (-3% in first 3 days). Sector 塑料 is not in listed hot sectors, volume was below MAVOL30 (80.4% of average), and market regime is panic with breadth 0.43:1, so timing is wrong and capital should be freed.",
+  "returnPct": 0.14,
+  "holdingDays": 1,
+  "lessonLearned": "",
   "createdAt": "2026-05-19T15:36:31.576811+08:00",
-  "updatedAt": "2026-05-20T11:41:52.605054+08:00",
+  "updatedAt": "2026-05-20T15:36:11.639905+08:00",
   "trackerVersion": "2.1"
 }

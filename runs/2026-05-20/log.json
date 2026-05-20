@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1779248440.882816,
+      "start": 1779262510.501316,
       "errors": [],
-      "end": 1779248457.725444,
-      "duration_sec": 16.8
+      "end": 1779262520.8996701,
+      "duration_sec": 10.4
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 4965,
+      "response_size_bytes": 5979,
       "tokens": {
-        "input_tokens": 143010,
-        "output_tokens": 2189
+        "input_tokens": 134421,
+        "output_tokens": 2214
       },
       "rounds": 2,
-      "tool_calls_count": 9,
-      "duration_sec": 54.8,
+      "tool_calls_count": 5,
+      "duration_sec": 50.7,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "GPT primary",
@@ -25,102 +25,24 @@
     },
     {
       "phase": "apply",
-      "start": 1779248512.60464,
+      "start": 1779262571.6393979,
       "actions": [
+        "SELL 301216",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=74",
-        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=45",
-        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=21",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=75",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=46",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=22",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "post_apply_rule_violations": {
-        "status": "violations",
-        "total_rules": 6,
-        "total_violations": 2,
-        "rules": [
-          {
-            "rule": "check_breakout_failure",
-            "file": "scripts/rules/check_breakout_failure.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_iv_filter",
-            "file": "scripts/rules/check_iv_filter.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_overextended_entry",
-            "file": "scripts/rules/check_overextended_entry.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_stop_proximity",
-            "file": "scripts/rules/check_stop_proximity.py",
-            "status": "violations",
-            "exit_code": 1,
-            "violations": [
-              {
-                "code": "301216",
-                "name": "万凯新材",
-                "rule": "stop_proximity",
-                "severity": "WATCH",
-                "currentPrice": 28.57,
-                "stopLoss": 27.32,
-                "distance_pct": 4.38,
-                "suggestion": "🟠 WATCH — 4.4% above stop. Monitor closely. No immediate action but be ready."
-              }
-            ],
-            "error": null
-          },
-          {
-            "rule": "check_time_decay",
-            "file": "scripts/rules/check_time_decay.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_volume_below_mavol30",
-            "file": "scripts/rules/check_volume_below_mavol30.py",
-            "status": "violations",
-            "exit_code": 1,
-            "violations": [
-              {
-                "code": "301216",
-                "name": "万凯新材",
-                "rule": "volume_below_mavol30",
-                "volume": 81818,
-                "mavol30": 150879.83,
-                "ratio_pct": 54.2,
-                "suggestion": "Latest volume 81,818 is below MAVOL30 150,880 (54.2% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-              }
-            ],
-            "error": null
-          }
-        ]
-      },
-      "end": 1779248512.777633,
+      "end": 1779262571.82685,
       "duration_sec": 0.2
     }
   ],
-  "validation_errors": [
-    "RULE check_stop_proximity: 301216 — 🟠 WATCH — 4.4% above stop. Monitor closely. No immediate action but be ready.",
-    "RULE check_volume_below_mavol30: 301216 — Latest volume 81,818 is below MAVOL30 150,880 (54.2% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-  ],
+  "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 71.8
+    "totalDurationSec": 61.300000000000004
   }
 }

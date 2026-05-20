@@ -1202,3 +1202,9 @@
 - When breadth is 0.31:1 and only 1 of 3 major indices is green, the correct momentum action is to hold cash even if a few semiconductor names are working.
 - The MA-distance anti-chase filter is doing heavy lifting again today: many of the strongest candidates are in hot sectors but still unbuyable because they are too far above MA5/MA10/MA20.
 - A fresh position can stay HOLD even after a -4.38% day if it remains above the hard stop, but weak volume should immediately downgrade any idea of adding capital.
+
+### 自动更新 (2026-05-20)
+
+- A hot leading sector does not override the market-level buy gate; today semiconductors were strong, but breadth 0.43:1 with 43跌停 still correctly forces new_positions to empty.
+- The anti-chase MA-distance rule continues to do real work: many of the strongest-looking semiconductor names failed because they were far above MA5/MA10/MA20 despite fresh catalysts.
+- The -3% in first 3 days exit rule should be applied on closing damage, not just mark-to-market vs entry, when a fresh position immediately loses momentum and volume confirmation weakens.

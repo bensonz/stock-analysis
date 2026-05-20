@@ -1,1 +1,159 @@
-{"sector_analysis":{"hot_sectors":[{"name":"半导体","5d_pct":2.76,"trend":"accelerating"},{"name":"油气开采Ⅱ","5d_pct":2.58,"trend":"steady"},{"name":"非金属材料Ⅱ","5d_pct":2.27,"trend":"steady"},{"name":"光伏设备","5d_pct":2.23,"trend":"steady"},{"name":"非白酒","5d_pct":1.55,"trend":"steady"}],"cold_sectors":[{"name":"文娱用品","5d_pct":-3.79,"trend":"deteriorating"},{"name":"通信服务","5d_pct":-3.47,"trend":"deteriorating"},{"name":"电力","5d_pct":-3.43,"trend":"deteriorating"},{"name":"广告营销","5d_pct":-3.38,"trend":"deteriorating"},{"name":"数字媒体","5d_pct":-2.89,"trend":"deteriorating"}],"position_alignment":"0/1 positions in hot sectors","regime":"Index tape weak, breadth panic-like; semis/科创 are leading while broad market is risk-off"},"position_decisions":[{"code":"301216","name":"万凯新材","action":"HOLD","reason":"Price is -0.66% vs entry and still above hard stop 27.32, but tape is weak, volume is only 54.2% of MAVOL30, and position sector is not in the listed hot sectors. No adding; monitor closely for stop discipline.","sector_rank":"outside top 30%","new_stop":null,"pnl_pct":-0.66,"days_held":1,"exit_price":null}],"new_positions":[],"skip_list":[{"code":"300666","name":"江丰电子","reason":"Sector is hot and catalyst is real, but dist_ma5_pct 12.4%, dist_ma10_pct 24.7%, dist_ma20_pct 37.9% all violate anti-chase rule; also entry regime blocks new longs.","rps120":94.65},{"code":"688372","name":"伟测科技","reason":"半导体 sector is strong, but dist_ma5_pct 7.1%, dist_ma10_pct 11.7%, dist_ma20_pct 20.7% all exceed buy limits; entry regime also blocks new positions.","rps120":93.64},{"code":"688205","name":"德科立","reason":"Communication equipment is not in today’s top sector list and dist_ma20_pct 16.0% exceeds the 12% anti-chase limit; no buy in blocked regime.","rps120":93.56},{"code":"600301","name":"华锡有色","reason":"MA distances are acceptable, but 有色金属 is not in today’s top sector list and broad market regime is panic, so no new entry.","rps120":92.34},{"code":"605056","name":"咸亨国际","reason":"Setup is near support, but sector is not in today’s top sector list; stock-specific IV proxy also signals half sizing if bought, and regime blocks all fresh longs.","rps120":92.48},{"code":"688002","name":"睿创微纳","reason":"Sector not in today’s top 5 and dist_ma20_pct 11.3% is close to the upper extension limit while regime is hard-blocked for new longs.","rps120":89.36},{"code":"300739","name":"明阳电路","reason":"MA distances are within range and RPS is valid, but 元件 sector is not in today’s top sector list; weak breadth means skip rather than force a small buy.","rps120":91.43},{"code":"688146","name":"中船特气","reason":"半导体 sector is hot, but dist_ma5_pct 54.8%, dist_ma10_pct 83.7%, dist_ma20_pct 135.2% are extreme chase violations.","rps120":91.53},{"code":"688630","name":"芯碁微装","reason":"Strong fundamentals, but dist_ma5_pct 9.1%, dist_ma10_pct 20.0%, dist_ma20_pct 39.1% fail anti-chase rule; no buy.","rps120":90.44},{"code":"301018","name":"申菱环境","reason":"通用设备 is not in today’s top sector list and dist_ma5_pct 16.3%, dist_ma10_pct 32.0%, dist_ma20_pct 44.5% are too extended.","rps120":89.26}],"new_learnings":[{"text":"When breadth is 0.31:1 and only 1 of 3 major indices is green, the correct momentum action is to hold cash even if a few semiconductor names are working.","type":"rule","tags":["sector","timing","entry-filter"],"evidence_type":"supporting","related_hypothesis":"h013","mechanism":"Weak market internals overwhelm isolated stock strength; forcing entries in a panic tape reduces follow-through odds."},{"text":"The MA-distance anti-chase filter is doing heavy lifting again today: many of the strongest candidates are in hot sectors but still unbuyable because they are too far above MA5/MA10/MA20.","type":"signal","tags":["entry-filter","timing","sector"],"evidence_type":"supporting","related_hypothesis":"h021","mechanism":"Momentum works best when buying strength near support, not after vertical extensions that raise mean-reversion risk."},{"text":"A fresh position can stay HOLD even after a -4.38% day if it remains above the hard stop, but weak volume should immediately downgrade any idea of adding capital.","type":"heuristic","tags":["exit-rule","position-sizing","timing"],"evidence_type":"supporting","related_hypothesis":"h023","mechanism":"Price has not invalidated the trade yet, but sub-MAVOL participation signals weak demand and lowers odds of an immediate rebound."}],"market_summary":"Breadth 0.31:1 bearish, 50涨停/29跌停, only 创业板指 green while 上证指数 and 深证成指 are red; this fails the minimum long-entry gate and matches the hard-blocked panic regime. Hot sectors are 半导体(+2.76%), 油气开采Ⅱ(+2.58%), 非金属材料Ⅱ(+2.27%), 光伏设备(+2.23%), 非白酒(+1.55%); cold sectors are 文娱用品(-3.79%), 通信服务(-3.47%), 电力(-3.43%), 广告营销(-3.38%), 数字媒体(-2.89%). Position sector alignment is 0/1 in hot sectors. IV context is mostly low-to-neutral overall, but regime—not IV—is the binding constraint today.","market_sentiment":"bearish","market_call":"谨慎"}
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "半导体",
+        "5d_pct": 4.18,
+        "trend": "accelerating"
+      },
+      {
+        "name": "光伏设备",
+        "5d_pct": 2.68,
+        "trend": "steady"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": 2.31,
+        "trend": "steady"
+      },
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": 1.83,
+        "trend": "rotating"
+      },
+      {
+        "name": "非白酒",
+        "5d_pct": 1.54,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "电力",
+        "5d_pct": -3.89,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "通信服务",
+        "5d_pct": -3.76,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "文娱用品",
+        "5d_pct": -3.51,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "广告营销",
+        "5d_pct": -3.44,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": -2.94,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/1 positions in hot sectors",
+    "regime": "Index divergence with narrow tech leadership; semis strong but broad tape is risk-off and new-long gate is closed"
+  },
+  "position_decisions": [
+    {
+      "code": "301216",
+      "name": "万凯新材",
+      "action": "SELL",
+      "reason": "Price closed 28.80 vs entry 28.76, but intraday drawdown was severe and daily change was -3.61%, triggering the first-3-days sell rule (-3% in first 3 days). Sector 塑料 is not in listed hot sectors, volume was below MAVOL30 (80.4% of average), and market regime is panic with breadth 0.43:1, so timing is wrong and capital should be freed.",
+      "sector_rank": "outside top 30%",
+      "new_stop": null,
+      "pnl_pct": 0.14,
+      "days_held": 1,
+      "exit_price": 28.8
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "300666",
+      "name": "江丰电子",
+      "reason": "Sector is hot (半导体) and catalyst is fresh, but dist_ma5_pct 12.4%, dist_ma10_pct 24.7%, dist_ma20_pct 37.9% all violate anti-chase rule; also entry regime hard-blocks new longs.",
+      "rps120": 94.65
+    },
+    {
+      "code": "688205",
+      "name": "德科立",
+      "reason": "Communication-equipment trend is decent and price is near MA5/MA10, but dist_ma20_pct 16.0% exceeds max 12%; market entry gate is also closed.",
+      "rps120": 93.56
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "MA distances are acceptable, but sector is not in the listed top sectors and breadth regime is panic, so no new entry despite acceptable pullback setup.",
+      "rps120": 92.34
+    },
+    {
+      "code": "605056",
+      "name": "咸亨国际",
+      "reason": "MA distances are acceptable and catalyst exists, but sector is not in the listed top 30% and stock-specific IV proxy says half sizing; with hard-blocked regime this becomes a skip, not a buy.",
+      "rps120": 92.48
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "Good military-electronics trend and acceptable MA distances, but sector is not in today's listed hot sectors and regime blocks fresh longs.",
+      "rps120": 89.36
+    },
+    {
+      "code": "300739",
+      "name": "明阳电路",
+      "reason": "Technically closest to valid entry among candidates, but sector is not in listed top sectors and panic breadth blocks all new positions.",
+      "rps120": 91.43
+    },
+    {
+      "code": "301216",
+      "name": "万凯新材",
+      "reason": "No re-entry after exit: sector not in listed hot sectors, first-3-days downside rule was violated, and current tape does not permit recycling capital into the same weak setup.",
+      "rps120": 86.97
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "A hot leading sector does not override the market-level buy gate; today semiconductors were strong, but breadth 0.43:1 with 43跌停 still correctly forces new_positions to empty.",
+      "type": "rule",
+      "tags": [
+        "sector",
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "When leadership narrows while most stocks fall, breakouts have lower follow-through and higher reversal risk, so sector strength alone is insufficient."
+    },
+    {
+      "text": "The anti-chase MA-distance rule continues to do real work: many of the strongest-looking semiconductor names failed because they were far above MA5/MA10/MA20 despite fresh catalysts.",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "Momentum names extended far from support have poor reward-to-risk because even small pullbacks can be sharp mean reversions."
+    },
+    {
+      "text": "The -3% in first 3 days exit rule should be applied on closing damage, not just mark-to-market vs entry, when a fresh position immediately loses momentum and volume confirmation weakens.",
+      "type": "heuristic",
+      "tags": [
+        "exit-rule",
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "A new entry that cannot hold within the first 72 hours in a weak tape is usually mistimed; fast exits preserve mental and financial capital for better setups."
+    }
+  ],
+  "market_summary": "Breadth 0.43:1 bearish, 71涨停/43跌停, clearly a panic-style tape despite 科创50 +3.2% and 半导体 +4.18% leading. Only 1 of 3 major indices was green, so the long-entry gate fails and new positions stay at zero. Hot sectors: 半导体、光伏设备、非金属材料Ⅱ、油气开采Ⅱ、非白酒; cold sectors: 电力、通信服务、文娱用品、广告营销、数字媒体. Position sector alignment: 0/1 in hot sectors. IV context is mixed-to-benign: broad market IV is low-to-neutral, while 创业板/科创 proxies are normal, so IV is not the blocker here—breadth and panic distribution are.",
+  "market_sentiment": "bearish",
+  "market_call": "观望"
+}

@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-05-20T11:40:40.890806+08:00",
+  "snapshot_time": "2026-05-20T15:35:10.510218+08:00",
   "snapshot_type": "pre_run",
   "date": "2026-05-20",
   "portfolio_config": {
@@ -11,23 +11,23 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-05-19T15:36:31.587563+08:00",
+    "lastUpdated": "2026-05-20T11:41:52.618309+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 965710.0,
+      "totalEquity": 965558.0,
       "cash": 942702.0,
-      "investedValue": 23008.0,
-      "unrealizedPnl": 0.0,
+      "investedValue": 22856.0,
+      "unrealizedPnl": -152.0,
       "realizedPnl": -34290.0,
-      "totalPnl": -34290.0,
-      "totalReturnPct": -3.43,
+      "totalPnl": -34442.0,
+      "totalReturnPct": -3.44,
       "positionsUsed": 1,
       "positionsMax": 10,
-      "cashPct": 97.62,
-      "dayPnl": 0.0,
+      "cashPct": 97.63,
+      "dayPnl": -1048.0,
       "minCashPct": 20,
-      "minCashValue": 193142.0,
-      "deployableCash": 749560.0
+      "minCashValue": 193111.6,
+      "deployableCash": 749590.4
     },
     "activePositions": [
       {
@@ -35,8 +35,8 @@
         "name": "万凯新材",
         "entryDate": "2026-05-19",
         "entryPrice": 28.76,
-        "currentPrice": 28.76,
-        "pnl_pct": 0.0,
+        "currentPrice": 28.57,
+        "pnl_pct": -0.66,
         "stopLoss": 27.32,
         "currentStop": 27.32,
         "targetPrice": 34.0,
@@ -45,9 +45,12 @@
         "shares": 800,
         "allocation_pct": 3.0,
         "allocatedCapital": 23008.0,
-        "currentValue": 23008.0,
-        "unrealizedPnl": 0.0,
-        "weight_pct": 2.38
+        "currentValue": 22856.0,
+        "unrealizedPnl": -152.0,
+        "volume": 81818,
+        "mavol30": 150879.83,
+        "volumeBelowMavol30": true,
+        "weight_pct": 2.37
       }
     ]
   },
@@ -77,6 +80,13 @@
           "change_pct": 0,
           "action": "OPEN",
           "note": "LLM开仓 万凯新材"
+        },
+        {
+          "date": "2026-05-20",
+          "price": 28.57,
+          "change_pct": -0.66,
+          "action": "HOLD",
+          "note": "Price is -0.66% vs entry and still above hard stop 27.32, but tape is weak, volume is only 54.2% of MAVOL30, and position sector is not in the listed hot sectors. No adding; monitor closely for stop discipline."
         }
       ],
       "exitDate": null,
@@ -86,7 +96,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-05-19T15:36:31.576811+08:00",
-      "updatedAt": "2026-05-19T15:36:31.576820+08:00",
+      "updatedAt": "2026-05-20T11:41:52.605054+08:00",
       "trackerVersion": "2.1"
     }
   },
