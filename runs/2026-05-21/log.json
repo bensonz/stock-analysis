@@ -1,0 +1,48 @@
+{
+  "date": "2026-05-21",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1779334519.881783,
+      "errors": [],
+      "end": 1779334534.3534431,
+      "duration_sec": 14.5
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 7298,
+      "tokens": {
+        "input_tokens": 131429,
+        "output_tokens": 2287
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 52.6,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "GPT primary",
+      "primary_model": "gpt-5.4"
+    },
+    {
+      "phase": "apply",
+      "start": 1779334587.02399,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=76",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=47",
+        "Hypothesis: Updated h027 (validated): +1 supporting evidence → hitRate=100%, n=8",
+        "Hypothesis: Updated h017 (rule): +1 supporting evidence → hitRate=100%, n=21",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1779334587.196532,
+      "duration_sec": 0.2
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 67.3
+  }
+}

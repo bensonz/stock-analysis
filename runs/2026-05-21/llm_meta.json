@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "gpt-5.4",
+  "decision_source": "GPT primary",
+  "input_tokens": 131429,
+  "output_tokens": 2287,
+  "rounds": 2,
+  "duration_sec": 52.6,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3500,
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+2026年5月21日"
+      },
+      "result_length": 3500
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3500,
+        "url": "https://www.baidu.com/s?wd=光学光电子+涨价+需求+2026年5月"
+      },
+      "result_length": 3500
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3500,
+        "url": "https://www.baidu.com/s?wd=半导体设备+业绩超预期+2026年5月21日"
+      },
+      "result_length": 3500
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3500,
+        "url": "https://www.baidu.com/s?wd=电网设备+订单+2026年5月"
+      },
+      "result_length": 3500
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3500,
+        "url": "https://www.baidu.com/s?wd=小金属+涨价+2026年5月21日"
+      },
+      "result_length": 3500
+    }
+  ],
+  "fallback_used": false
+}

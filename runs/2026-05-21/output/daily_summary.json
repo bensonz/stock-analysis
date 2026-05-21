@@ -1,0 +1,35 @@
+{
+  "date": "2026-05-21",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 965742.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.43,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -34258.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.7527,
+    "up": 2301,
+    "down": 3057,
+    "positive_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 57,
+    "limit_downs": 28,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.75:1, 2/3 major indices green, 57 limit-ups / 28 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 0.75:1 weak, 57涨停/28跌停, not panic but below the minimum long-entry gate; 2 of 3 major indices are green while sector leadership is narrow in 玻璃玻纤、航空机场、光学光电子. Cold groups include 油服工程、油气开采Ⅱ、通信服务. IV context is mostly low-to-neutral (overall sentiment 偏乐观, avg IV rank 24.3%), so sizing is not the issue—tape quality is. With 100% cash and no active positions, the right move is to stay selective and open no new trades today."
+  }
+}
