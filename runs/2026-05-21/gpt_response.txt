@@ -2,60 +2,60 @@
   "sector_analysis": {
     "hot_sectors": [
       {
-        "name": "玻璃玻纤",
-        "5d_pct": 3.51,
-        "trend": "accelerating"
+        "name": "家电零部件Ⅱ",
+        "5d_pct": 1.46,
+        "trend": "steady"
       },
       {
         "name": "航空机场",
-        "5d_pct": 3.32,
-        "trend": "accelerating"
-      },
-      {
-        "name": "光学光电子",
-        "5d_pct": 2.9,
+        "5d_pct": 1.28,
         "trend": "steady"
       },
       {
-        "name": "摩托车及其他",
-        "5d_pct": 2.45,
+        "name": "乘用车",
+        "5d_pct": 0.86,
         "trend": "steady"
       },
       {
-        "name": "家电零部件Ⅱ",
-        "5d_pct": 2.38,
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": 0.83,
+        "trend": "defensive"
+      },
+      {
+        "name": "电机Ⅱ",
+        "5d_pct": 0.69,
         "trend": "steady"
       }
     ],
     "cold_sectors": [
       {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": -5.79,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": -5.7,
+        "trend": "deteriorating"
+      },
+      {
         "name": "油服工程",
-        "5d_pct": -3.55,
+        "5d_pct": -5.64,
         "trend": "deteriorating"
       },
       {
-        "name": "油气开采Ⅱ",
-        "5d_pct": -2.77,
-        "trend": "deteriorating"
-      },
-      {
-        "name": "通信服务",
-        "5d_pct": -2.14,
+        "name": "通信设备",
+        "5d_pct": -5.43,
         "trend": "deteriorating"
       },
       {
         "name": "橡胶",
-        "5d_pct": -2.11,
-        "trend": "deteriorating"
-      },
-      {
-        "name": "电子化学品Ⅱ",
-        "5d_pct": -1.87,
+        "5d_pct": -5.32,
         "trend": "deteriorating"
       }
     ],
     "position_alignment": "0/0 positions in hot sectors",
-    "regime": "Index tone mildly positive but breadth weak; selective rotation into glass/airports/optics while oil-related and some TMT sub-sectors lag"
+    "regime": "Panic/risk-off tape; defensive sectors and transport holding up while tech,通信、电子化学品领跌"
   },
   "position_decisions": [],
   "new_positions": [],
@@ -63,91 +63,91 @@
     {
       "code": "603530",
       "name": "神马电力",
-      "reason": "Sector is constructive and setup is not extended, but market buy gate fails: breadth ratio 0.75:1 is below required 1.5:1, so no fresh long despite acceptable RPS 94.79 and VCP SETUP.",
+      "reason": "Entry regime hard-blocked. Although 电网设备 is relatively resilient and stock MA distances are acceptable (dist_ma5_pct -3.6%, dist_ma10_pct -2.9%, dist_ma20_pct -0.4%) with RPS120 94.79, market breadth is panic and no new longs are allowed.",
       "rps120": 94.79
     },
     {
       "code": "002432",
       "name": "九安医疗",
-      "reason": "RPS 94.98 is acceptable and MA distances are fine, but sector rank is unclear from market top sectors and market buy gate fails. No current edge strong enough to override weak breadth.",
+      "reason": "医疗器械 not in provided hot-sector top list, and the market buy gate failed. Setup itself is technically acceptable (dist_ma5_pct -1.6%, dist_ma10_pct -0.7%, dist_ma20_pct 5.4%) but sector-first plus panic tape means skip.",
       "rps120": 94.98
     },
     {
       "code": "002812",
       "name": "恩捷股份",
-      "reason": "Good catalyst with latest-quarter profit growth highlighted, but sector is not in today’s top-sector list and market buy gate fails. This is skip, not force-buy.",
+      "reason": "Market hard-block aside, stock is only borderline on RPS and not in provided hot-sector top list. No current entry edge strong enough to override tape; skip.",
       "rps120": 93.56
     },
     {
       "code": "600301",
       "name": "华锡有色",
-      "reason": "Price sits near moving averages and RPS 92.0 is acceptable, but sector leadership is not confirmed in today’s top 30% sector list and resources are not the dominant tape. Weak breadth also blocks entry.",
+      "reason": "Technically one of the cleaner pullback setups (dist_ma5_pct -2.6%, dist_ma10_pct -3.1%, dist_ma20_pct 2.4%), but 有色金属 is not in the provided top sectors and the entry regime is panic. Sector-first says no new entry.",
       "rps120": 92.0
     },
     {
       "code": "688002",
       "name": "睿创微纳",
-      "reason": "Technically cleaner than many peers with dist_ma20_pct 9.7 and RPS 89.26, but its sector is not in today’s top-sector list and market breadth is below the minimum long-entry gate.",
+      "reason": "军工电子 not in provided hot-sector top list. Even though MA distances pass (dist_ma5_pct -5.0%, dist_ma10_pct -3.1%, dist_ma20_pct 9.7%), the market is panic and 科创 risk appetite is weak.",
       "rps120": 89.26
     },
     {
       "code": "300548",
       "name": "长芯博创",
-      "reason": "Fresh earnings catalyst is positive, but dist_ma20_pct 27.1 exceeds the non-negotiable anti-chase limit. Communications-related sector tone is also mixed with 通信服务 in today’s bottom sectors.",
+      "reason": "通信设备 is explicitly in bottom 5 sectors at -5.43%. Sector gravity overrides stock quality; no entry regardless of catalyst or RPS.",
       "rps120": 94.83
     },
     {
       "code": "688205",
       "name": "德科立",
-      "reason": "CPO/news flow is active, but dist_ma20_pct 15.0 exceeds the 12% anti-chase threshold. Market breadth is weak, so no reason to stretch on extension.",
+      "reason": "通信设备 is in the bottom 5 sectors at -5.43%, and dist_ma20_pct 15.0% also exceeds the anti-chase limit. Double disqualifier.",
       "rps120": 93.74
     },
     {
       "code": "688372",
       "name": "伟测科技",
-      "reason": "Strong fundamentals and acceptable short-term extension, but dist_ma20_pct 14.3 breaks the anti-chase rule and sector confirmation is not strong enough to compensate.",
+      "reason": "半导体/科创 today sits in a weak risk-off pocket, and dist_ma20_pct 14.3% exceeds the 12% anti-chase threshold. Skip even before considering the panic regime.",
       "rps120": 93.6
     },
     {
       "code": "300666",
       "name": "江丰电子",
-      "reason": "Catalyst is fresh and semiconductor trend is strong, but dist_ma5_pct 6.7, dist_ma10_pct 16.8 and dist_ma20_pct 32.2 all violate anti-chase limits. Above-support distance is too stretched.",
+      "reason": "半导体材料 stock is overextended: dist_ma5_pct 6.7%, dist_ma10_pct 16.8%, dist_ma20_pct 32.2%. Fails non-negotiable MA-distance rule.",
       "rps120": 94.37
     },
     {
       "code": "688630",
       "name": "芯碁微装",
-      "reason": "Fundamentals and trend are strong, but dist_ma10_pct 11.5 and dist_ma20_pct 31.3 fail the MA-distance rule. Wait for pullback rather than chase strength.",
+      "reason": "Excellent growth and strong RPS, but dist_ma10_pct 11.5% and dist_ma20_pct 31.3% both fail anti-chase limits. Also market regime blocks new longs.",
       "rps120": 91.33
     },
     {
       "code": "300739",
       "name": "明阳电路",
-      "reason": "PCB/元件 trend exists, but dist_ma10_pct 9.8 and dist_ma20_pct 14.2 breach the anti-chase rule. No current price data issue here, but setup is still too extended for a new entry.",
+      "reason": "PCB/元件 not in provided hot-sector top list, and dist_ma10_pct 9.8% plus dist_ma20_pct 14.2% fail MA-distance rule. Skip.",
       "rps120": 91.82
     },
     {
       "code": "301216",
       "name": "万凯新材",
-      "reason": "Has a VCP SETUP and acceptable MA distances, but sector is not among today’s hot leaders and the broad market entry regime is weak. Without sector tailwind, skip.",
+      "reason": "Technicals are acceptable and VCP is present, but 基础化工/塑料 is not in the provided hot-sector leaders and the tape is panic. Without regime support, do not force a starter position.",
       "rps120": 86.91
     }
   ],
   "new_learnings": [
     {
-      "text": "Weak breadth should override acceptable single-stock setups; several names passed RPS but still did not qualify because the market failed the 1.5:1 up/down gate.",
+      "text": "When breadth collapses to 0.15:1 with 69跌停 and all 3 major indices red, the correct momentum action is zero new longs even if a few individual charts still pass RPS and MA filters.",
       "type": "rule",
       "tags": [
-        "sector",
+        "timing",
         "entry-filter",
-        "timing"
+        "sector"
       ],
       "evidence_type": "supporting",
       "related_hypothesis": "h013",
-      "mechanism": "In a weak tape, even strong charts have lower breakout follow-through because sector rotation is narrow and buyers are less able to support fresh entries."
+      "mechanism": "In panic tapes, correlation spikes toward 1 and sector/stock selection edge is overwhelmed by forced de-risking."
     },
     {
-      "text": "The anti-chase MA-distance rule is again doing the heavy lifting today: many of the strongest semiconductor and AI-adjacent names are simply too far above support to buy safely.",
+      "text": "The MA-distance anti-chase rule continues to eliminate many superficially attractive leaders such as 江丰电子、芯碁微装、伟测科技 before they become bad entries.",
       "type": "signal",
       "tags": [
         "entry-filter",
@@ -155,33 +155,32 @@
       ],
       "evidence_type": "supporting",
       "related_hypothesis": "h021",
-      "mechanism": "Large distance above MA5/MA10/MA20 raises mean-reversion risk and worsens reward-to-risk even when the underlying trend and catalyst are real."
+      "mechanism": "Large distance above MA10/MA20 means weak nearby support and higher mean-reversion risk, especially after broad-market stress."
     },
     {
-      "text": "Hot sector alone is insufficient when a stock is extended; sector strength improves selection, but entry timing still has to come from pullback-to-support behavior.",
-      "type": "heuristic",
+      "text": "Today’s sector tape shows classic defensive hiding: banks, airports, auto pockets and home-appliance parts up, while 通信设备、电子化学品 and other high-beta tech groups lead downside.",
+      "type": "observation",
       "tags": [
         "sector",
-        "entry-filter",
         "timing"
       ],
       "evidence_type": "supporting",
-      "related_hypothesis": "h027",
-      "mechanism": "Sector momentum increases the odds of continuation, but buying too far from moving-average support compresses upside and magnifies shakeout risk."
+      "related_hypothesis": "",
+      "mechanism": "When capital rotates into lower-beta or policy/earnings-stable groups, momentum longs in speculative tech usually lose follow-through quality."
     },
     {
-      "text": "Low-to-normal IV is not a reason to freeze, but in a weak breadth session it argues for patience rather than aggressive anticipation.",
-      "type": "observation",
+      "text": "A clean stock-specific setup is not enough if its sector is on the wrong side of the tape; 长芯博创 and 德科立 both fail first on sector weakness because 通信设备 is bottom-5.",
+      "type": "heuristic",
       "tags": [
-        "timing",
-        "position-sizing"
+        "sector",
+        "entry-filter"
       ],
       "evidence_type": "supporting",
-      "related_hypothesis": "h017",
-      "mechanism": "When IV is not elevated, there is no panic premium forcing urgent action; traders can wait for either stronger breadth or cleaner pullbacks."
+      "related_hypothesis": "h027",
+      "mechanism": "Sector ETFs and basket selling drag even strong single names lower, reducing breakout persistence and increasing false-entry risk."
     }
   ],
-  "market_summary": "Breadth 0.75:1 weak, 57涨停/28跌停, not panic but below the minimum long-entry gate; 2 of 3 major indices are green while sector leadership is narrow in 玻璃玻纤、航空机场、光学光电子. Cold groups include 油服工程、油气开采Ⅱ、通信服务. IV context is mostly low-to-neutral (overall sentiment 偏乐观, avg IV rank 24.3%), so sizing is not the issue—tape quality is. With 100% cash and no active positions, the right move is to stay selective and open no new trades today.",
-  "market_sentiment": "neutral",
+  "market_summary": "Bearish/panic regime. Breadth 0.15:1 bearish, 37涨停/69跌停, broad-based selloff with 4773 decliners and all 3 major indices red (上证-2.04%, 深成指-2.07%, 创业板指-2.35%). Hot sectors are narrow and defensive: 家电零部件Ⅱ +1.46%, 航空机场 +1.28%, 乘用车 +0.86%, 国有大型银行Ⅱ +0.83%, 电机Ⅱ +0.69%; cold sectors led by 电子化学品Ⅱ -5.79%, 其他电子Ⅱ -5.70%, 油服工程 -5.64%, 通信设备 -5.43%, 橡胶 -5.32%. Research checks show liquid-cooling/AI data center themes were active very recently, and 神马电力 still has fresh institutional attention, but today the market is in a hard risk-off unwind. IV context is not the problem: broad-market IV rank is mostly low-to-neutral (overall sentiment 偏乐观, avg IV rank 24.3%), so sizing would normally be fine, but breadth panic fully overrides IV and blocks new positions.",
+  "market_sentiment": "bearish",
   "market_call": "观望"
 }

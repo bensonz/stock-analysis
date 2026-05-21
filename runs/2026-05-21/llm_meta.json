@@ -2,60 +2,60 @@
   "provider": "openai",
   "primary_model": "gpt-5.4",
   "decision_source": "GPT primary",
-  "input_tokens": 131429,
-  "output_tokens": 2287,
+  "input_tokens": 133572,
+  "output_tokens": 2516,
   "rounds": 2,
-  "duration_sec": 52.6,
+  "duration_sec": 56.1,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3500,
-        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+2026年5月21日"
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=A股+今日+热点+板块+2026%2F05%2F21"
       },
-      "result_length": 3500
+      "result_length": 3000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3500,
-        "url": "https://www.baidu.com/s?wd=光学光电子+涨价+需求+2026年5月"
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=光通信+板块+今天+下挫+仕佳光子+2026%2F05%2F21"
       },
-      "result_length": 3500
+      "result_length": 3000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3500,
-        "url": "https://www.baidu.com/s?wd=半导体设备+业绩超预期+2026年5月21日"
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=半导体设备+板块+今天+走弱+华峰测控+芯源微+2026%2F05%2F21"
       },
-      "result_length": 3500
+      "result_length": 3000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3500,
-        "url": "https://www.baidu.com/s?wd=电网设备+订单+2026年5月"
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=电网设备+神马电力+研报+2026%2F05%2F21"
       },
-      "result_length": 3500
+      "result_length": 3000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3500,
-        "url": "https://www.baidu.com/s?wd=小金属+涨价+2026年5月21日"
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=AI数据中心+液冷+申菱环境+2026%2F05%2F21"
       },
-      "result_length": 3500
+      "result_length": 3000
     }
   ],
   "fallback_used": false

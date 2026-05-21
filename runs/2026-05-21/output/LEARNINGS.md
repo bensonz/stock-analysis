@@ -1215,3 +1215,10 @@
 - The anti-chase MA-distance rule is again doing the heavy lifting today: many of the strongest semiconductor and AI-adjacent names are simply too far above support to buy safely.
 - Hot sector alone is insufficient when a stock is extended; sector strength improves selection, but entry timing still has to come from pullback-to-support behavior.
 - Low-to-normal IV is not a reason to freeze, but in a weak breadth session it argues for patience rather than aggressive anticipation.
+
+### 自动更新 (2026-05-21)
+
+- When breadth collapses to 0.15:1 with 69跌停 and all 3 major indices red, the correct momentum action is zero new longs even if a few individual charts still pass RPS and MA filters.
+- The MA-distance anti-chase rule continues to eliminate many superficially attractive leaders such as 江丰电子、芯碁微装、伟测科技 before they become bad entries.
+- Today’s sector tape shows classic defensive hiding: banks, airports, auto pockets and home-appliance parts up, while 通信设备、电子化学品 and other high-beta tech groups lead downside.
+- A clean stock-specific setup is not enough if its sector is on the wrong side of the tape; 长芯博创 and 德科立 both fail first on sector weakness because 通信设备 is bottom-5.

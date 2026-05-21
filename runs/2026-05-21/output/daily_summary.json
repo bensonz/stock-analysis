@@ -12,24 +12,25 @@
     "cashPct": 100.0
   },
   "entryRegime": {
-    "allow_new_positions": true,
-    "regime": "weak",
-    "breadth_ratio": 0.7527,
-    "up": 2301,
-    "down": 3057,
-    "positive_indices": [
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.1456,
+    "up": 695,
+    "down": 4773,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
       "深证成指",
       "创业板指"
     ],
-    "negative_indices": [],
-    "limit_ups": 57,
-    "limit_downs": 28,
-    "sizing_multiplier": 0.5,
-    "hard_block": false,
-    "reason": "Entry regime weak: breadth 0.75:1, 2/3 major indices green, 57 limit-ups / 28 limit-downs. Allow entries only with 50% sizing."
+    "limit_ups": 37,
+    "limit_downs": 69,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.15:1, 0/3 major indices green, 37 limit-ups / 69 limit-downs. Block new longs."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "Breadth 0.75:1 weak, 57涨停/28跌停, not panic but below the minimum long-entry gate; 2 of 3 major indices are green while sector leadership is narrow in 玻璃玻纤、航空机场、光学光电子. Cold groups include 油服工程、油气开采Ⅱ、通信服务. IV context is mostly low-to-neutral (overall sentiment 偏乐观, avg IV rank 24.3%), so sizing is not the issue—tape quality is. With 100% cash and no active positions, the right move is to stay selective and open no new trades today."
+    "summary": "Bearish/panic regime. Breadth 0.15:1 bearish, 37涨停/69跌停, broad-based selloff with 4773 decliners and all 3 major indices red (上证-2.04%, 深成指-2.07%, 创业板指-2.35%). Hot sectors are narrow and defensive: 家电零部件Ⅱ +1.46%, 航空机场 +1.28%, 乘用车 +0.86%, 国有大型银行Ⅱ +0.83%, 电机Ⅱ +0.69%; cold sectors led by 电子化学品Ⅱ -5.79%, 其他电子Ⅱ -5.70%, 油服工程 -5.64%, 通信设备 -5.43%, 橡胶 -5.32%. Research checks show liquid-cooling/AI data center themes were active very recently, and 神马电力 still has fresh institutional attention, but today the market is in a hard risk-off unwind. IV context is not the problem: broad-market IV rank is mostly low-to-neutral (overall sentiment 偏乐观, avg IV rank 24.3%), so sizing would normally be fine, but breadth panic fully overrides IV and blocks new positions."
   }
 }

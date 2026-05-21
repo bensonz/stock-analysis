@@ -2,38 +2,38 @@
   "date": "2026-05-21",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4162.371,
-      "change_pct": 0.0
+      "value": 4077.276,
+      "change_pct": -2.04
     },
     "shenzhen_component": {
-      "value": 15662.21,
-      "change_pct": 0.59
+      "value": 15247.27,
+      "change_pct": -2.07
     },
     "chinext": {
-      "value": 3942.36,
-      "change_pct": 0.52
+      "value": 3829.78,
+      "change_pct": -2.35
     },
-    "sentiment": "neutral",
+    "sentiment": "bearish",
     "hot_sectors": [
-      "玻璃玻纤",
+      "家电零部件Ⅱ",
       "航空机场",
-      "光学光电子",
-      "摩托车及其他",
-      "家电零部件Ⅱ"
+      "乘用车",
+      "国有大型银行Ⅱ",
+      "电机Ⅱ"
     ],
     "cold_sectors": [
+      "电子化学品Ⅱ",
+      "其他电子Ⅱ",
       "油服工程",
-      "油气开采Ⅱ",
-      "通信服务",
-      "橡胶",
-      "电子化学品Ⅱ"
+      "通信设备",
+      "橡胶"
     ],
-    "notes": "Breadth 0.75:1 weak, 57涨停/28跌停, not panic but below the minimum long-entry gate; 2 of 3 major indices are green while sector leadership is narrow in 玻璃玻纤、航空机场、光学光电子. Cold groups include 油服工程、油气开采Ⅱ、通信服务. IV context is mostly low-to-neutral (overall sentiment 偏乐观, avg IV rank 24.3%), so sizing is not the issue—tape quality is. With 100% cash and no active positions, the right move is to stay selective and open no new trades today."
+    "notes": "Bearish/panic regime. Breadth 0.15:1 bearish, 37涨停/69跌停, broad-based selloff with 4773 decliners and all 3 major indices red (上证-2.04%, 深成指-2.07%, 创业板指-2.35%). Hot sectors are narrow and defensive: 家电零部件Ⅱ +1.46%, 航空机场 +1.28%, 乘用车 +0.86%, 国有大型银行Ⅱ +0.83%, 电机Ⅱ +0.69%; cold sectors led by 电子化学品Ⅱ -5.79%, 其他电子Ⅱ -5.70%, 油服工程 -5.64%, 通信设备 -5.43%, 橡胶 -5.32%. Research checks show liquid-cooling/AI data center themes were active very recently, and 神马电力 still has fresh institutional attention, but today the market is in a hard risk-off unwind. IV context is not the problem: broad-market IV rank is mostly low-to-neutral (overall sentiment 偏乐观, avg IV rank 24.3%), so sizing would normally be fine, but breadth panic fully overrides IV and blocks new positions."
   },
   "strategy_scan": {
-    "total_stocks_scanned": 54,
+    "total_stocks_scanned": 55,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-05-21T11:36:27.029479+08:00"
+    "scan_time": "2026-05-21T15:36:21.257009+08:00"
   },
   "recommendations": [
     {
@@ -146,11 +146,11 @@
     }
   ],
   "summary": {
-    "total_scanned": 54,
+    "total_scanned": 55,
     "buy_recommendations": 0,
     "watch_recommendations": 12,
     "avoid_recommendations": 0,
     "market_call": "观望",
-    "reasoning": "Breadth 0.75:1 weak, 57涨停/28跌停, not panic but below the minimum long-entry gate; 2 of 3 major indices are green while sector leadership is narrow in 玻璃玻纤、航空机场、光学光电子. Cold groups include 油服工程、油气开采Ⅱ、通信服务. IV context is mostly low-to-neutral (overall sentiment 偏乐观, avg IV rank 24.3%), so sizing is not the issue—tape quality is. With 100% cash and no active positions, the right move is to stay selective and open no new trades today."
+    "reasoning": "Bearish/panic regime. Breadth 0.15:1 bearish, 37涨停/69跌停, broad-based selloff with 4773 decliners and all 3 major indices red (上证-2.04%, 深成指-2.07%, 创业板指-2.35%). Hot sectors are narrow and defensive: 家电零部件Ⅱ +1.46%, 航空机场 +1.28%, 乘用车 +0.86%, 国有大型银行Ⅱ +0.83%, 电机Ⅱ +0.69%; cold sectors led by 电子化学品Ⅱ -5.79%, 其他电子Ⅱ -5.70%, 油服工程 -5.64%, 通信设备 -5.43%, 橡胶 -5.32%. Research checks show liquid-cooling/AI data center themes were active very recently, and 神马电力 still has fresh institutional attention, but today the market is in a hard risk-off unwind. IV context is not the problem: broad-market IV rank is mostly low-to-neutral (overall sentiment 偏乐观, avg IV rank 24.3%), so sizing would normally be fine, but breadth panic fully overrides IV and blocks new positions."
   }
 }

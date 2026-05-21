@@ -639,11 +639,15 @@
           {
             "date": "2026-05-21",
             "detail": "Weak breadth should override acceptable single-stock setups; several names passed RPS but still did not qualify because the market failed the 1.5:1 up/down gate."
+          },
+          {
+            "date": "2026-05-21",
+            "detail": "When breadth collapses to 0.15:1 with 69跌停 and all 3 major indices red, the correct momentum action is zero new longs even if a few individual charts still pass RPS and MA filters."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 76,
+      "sampleSize": 77,
       "hitRate": 1.0,
       "confidence": 0.987,
       "tags": [],
@@ -1140,11 +1144,15 @@
           {
             "date": "2026-05-21",
             "detail": "The anti-chase MA-distance rule is again doing the heavy lifting today: many of the strongest semiconductor and AI-adjacent names are simply too far above support to buy safely."
+          },
+          {
+            "date": "2026-05-21",
+            "detail": "The MA-distance anti-chase rule continues to eliminate many superficially attractive leaders such as 江丰电子、芯碁微装、伟测科技 before they become bad entries."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 47,
+      "sampleSize": 48,
       "hitRate": 1.0,
       "confidence": 0.98,
       "tags": [
@@ -1435,13 +1443,17 @@
           {
             "date": "2026-05-21",
             "detail": "Hot sector alone is insufficient when a stock is extended; sector strength improves selection, but entry timing still has to come from pullback-to-support behavior."
+          },
+          {
+            "date": "2026-05-21",
+            "detail": "A clean stock-specific setup is not enough if its sector is on the wrong side of the tape; 长芯博创 and 德科立 both fail first on sector weakness because 通信设备 is bottom-5."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 8,
+      "sampleSize": 9,
       "hitRate": 1.0,
-      "confidence": 0.9,
+      "confidence": 0.909,
       "tags": [
         "entry-filter",
         "timing",
@@ -1455,9 +1467,9 @@
       "id": "h028",
       "text": "Today’s relative leaders are concentrated in communication equipment and adjacent tech hardware, while cyclicals/agri/resource laggards are being de-risked aggressively.",
       "type": "observation",
-      "status": "hypothesis",
+      "status": "validated",
       "created": "2026-04-06",
-      "lastTested": "2026-05-15",
+      "lastTested": "2026-05-21",
       "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally.",
       "evidence": {
         "supporting": [
@@ -1476,13 +1488,17 @@
           {
             "date": "2026-05-15",
             "detail": "Sector leadership today was narrow and defensive-leaning, while major indices and breadth were weak; treat this as unstable rotation, not a healthy momentum expansion."
+          },
+          {
+            "date": "2026-05-21",
+            "detail": "Today’s sector tape shows classic defensive hiding: banks, airports, auto pockets and home-appliance parts up, while 通信设备、电子化学品 and other high-beta tech groups lead downside."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 4,
+      "sampleSize": 5,
       "hitRate": 1.0,
-      "confidence": 0.833,
+      "confidence": 0.857,
       "tags": [
         "sector",
         "timing"
