@@ -2,16 +2,16 @@
   "date": "2026-05-22",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4096.238,
-      "change_pct": 0.47
+      "value": 4112.9,
+      "change_pct": 0.87
     },
     "shenzhen_component": {
-      "value": 15458.88,
-      "change_pct": 1.39
+      "value": 15597.3,
+      "change_pct": 2.3
     },
     "chinext": {
-      "value": 3902.74,
-      "change_pct": 1.91
+      "value": 3938.5,
+      "change_pct": 2.84
     },
     "sentiment": "bullish",
     "hot_sectors": [
@@ -22,43 +22,25 @@
       "金属新材料"
     ],
     "cold_sectors": [
-      "广告营销",
       "白酒Ⅱ",
+      "酒店餐饮",
+      "养殖业",
       "证券Ⅱ",
-      "油气开采Ⅱ",
-      "生物制品"
+      "航空机场"
     ],
-    "notes": "Breadth 2.12:1 bullish, 79涨停/21跌停，3大指数全红，满足新开仓门槛；热点集中在元件、玻璃玻纤、非金属材料、半导体材料设备等硬科技与材料链，白酒、券商、油气偏弱。IV整体偏乐观，主流代理IV Rank多在21%-40%区间，适合正常到略保守 sizing。Hot sectors (top 5): 元件(+7.82%), 玻璃玻纤(+5.53%), 非金属材料Ⅱ(+5.24%), 照明设备Ⅱ(+4.29%), 金属新材料(+3.52%). Cold sectors (bottom 5): 广告营销(-1.70%), 白酒Ⅱ(-1.52%), 证券Ⅱ(-1.50%), 油气开采Ⅱ(-1.43%), 生物制品(-1.35%). Position sector alignment: 0/0 positions in hot sectors."
+    "notes": "Breadth 2.56:1 bullish，3869涨/1509跌，138涨停/21跌停，三大指数全红（上证+0.87%、深成指+2.30%、创业板+2.84%），属于可开新仓的强势环境；但盘面主升集中在元件、玻璃玻纤、非金属材料与硬科技链，多数候选股已明显远离MA5/MA10/MA20。IV方面整体偏乐观，主流代理IV Rank约21%-40%，不需冻结风险，但也不支持在过热位置重仓追高。Hot sectors (top 5): 元件+9.74%、玻璃玻纤+8.11%、非金属材料Ⅱ+5.73%、照明设备Ⅱ+5.61%、金属新材料+5.17%；Cold sectors (bottom 5): 白酒Ⅱ-1.80%、酒店餐饮-1.79%、养殖业-1.66%、证券Ⅱ-1.52%、航空机场-1.52%。Position sector alignment: 0/1 positions in hot sectors。"
   },
   "strategy_scan": {
     "total_stocks_scanned": 53,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-05-22T11:36:51.034163+08:00"
+    "scan_time": "2026-05-22T17:24:52.285491+08:00"
   },
   "recommendations": [
     {
-      "code": "688205.SH",
-      "name": "德科立",
+      "code": "300739.SZ",
+      "name": "明阳电路",
       "price": null,
-      "rps120": 94.25,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688372.SH",
-      "name": "伟测科技",
-      "price": null,
-      "rps120": 93.5,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688002.SH",
-      "name": "睿创微纳",
-      "price": null,
-      "rps120": 89.18,
+      "rps120": 92.08,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -91,6 +73,33 @@
       "reasoning": ""
     },
     {
+      "code": "688205.SH",
+      "name": "德科立",
+      "price": null,
+      "rps120": 94.25,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688372.SH",
+      "name": "伟测科技",
+      "price": null,
+      "rps120": 93.5,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688002.SH",
+      "name": "睿创微纳",
+      "price": null,
+      "rps120": 89.18,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
       "code": "300666.SZ",
       "name": "江丰电子",
       "price": null,
@@ -104,15 +113,6 @@
       "name": "芯碁微装",
       "price": null,
       "rps120": 92.18,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "300739.SZ",
-      "name": "明阳电路",
-      "price": null,
-      "rps120": 92.08,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -214,6 +214,6 @@
     "watch_recommendations": 19,
     "avoid_recommendations": 0,
     "market_call": "积极",
-    "reasoning": "Breadth 2.12:1 bullish, 79涨停/21跌停，3大指数全红，满足新开仓门槛；热点集中在元件、玻璃玻纤、非金属材料、半导体材料设备等硬科技与材料链，白酒、券商、油气偏弱。IV整体偏乐观，主流代理IV Rank多在21%-40%区间，适合正常到略保守 sizing。Hot sectors (top 5): 元件(+7.82%), 玻璃玻纤(+5.53%), 非金属材料Ⅱ(+5.24%), 照明设备Ⅱ(+4.29%), 金属新材料(+3.52%). Cold sectors (bottom 5): 广告营销(-1.70%), 白酒Ⅱ(-1.52%), 证券Ⅱ(-1.50%), 油气开采Ⅱ(-1.43%), 生物制品(-1.35%). Position sector alignment: 0/0 positions in hot sectors."
+    "reasoning": "Breadth 2.56:1 bullish，3869涨/1509跌，138涨停/21跌停，三大指数全红（上证+0.87%、深成指+2.30%、创业板+2.84%），属于可开新仓的强势环境；但盘面主升集中在元件、玻璃玻纤、非金属材料与硬科技链，多数候选股已明显远离MA5/MA10/MA20。IV方面整体偏乐观，主流代理IV Rank约21%-40%，不需冻结风险，但也不支持在过热位置重仓追高。Hot sectors (top 5): 元件+9.74%、玻璃玻纤+8.11%、非金属材料Ⅱ+5.73%、照明设备Ⅱ+5.61%、金属新材料+5.17%；Cold sectors (bottom 5): 白酒Ⅱ-1.80%、酒店餐饮-1.79%、养殖业-1.66%、证券Ⅱ-1.52%、航空机场-1.52%。Position sector alignment: 0/1 positions in hot sectors。"
   }
 }

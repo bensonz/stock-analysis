@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1779420922.1958,
+      "start": 1779441806.455211,
       "errors": [],
-      "end": 1779420935.966785,
-      "duration_sec": 13.8
+      "end": 1779441821.871453,
+      "duration_sec": 15.4
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 6404,
+      "response_size_bytes": 6159,
       "tokens": {
-        "input_tokens": 140044,
-        "output_tokens": 3452
+        "input_tokens": 139628,
+        "output_tokens": 3008
       },
       "rounds": 2,
-      "tool_calls_count": 6,
-      "duration_sec": 74.9,
+      "tool_calls_count": 5,
+      "duration_sec": 70.3,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "GPT primary",
@@ -25,16 +25,14 @@
     },
     {
       "phase": "apply",
-      "start": 1779421010.949982,
+      "start": 1779441892.2761989,
       "actions": [
-        "SIZE THROTTLE 600301: 4% -> 3% (regime=strong)",
-        "OPEN 600301 @ 54.25",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=10",
-        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=49",
-        "Hypothesis: Updated h017 (rule): +1 supporting evidence → hitRate=100%, n=22",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=78",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=50",
+        "Hypothesis: Updated h028 (validated): +1 supporting evidence → hitRate=100%, n=6",
         "Updated LEARNINGS.md (legacy)"
       ],
       "post_apply_rule_violations": {
@@ -77,10 +75,10 @@
                 "name": "华锡有色",
                 "rule": "stop_proximity",
                 "severity": "WATCH",
-                "currentPrice": 54.25,
+                "currentPrice": 53.76,
                 "stopLoss": 51.54,
-                "distance_pct": 5.0,
-                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+                "distance_pct": 4.13,
+                "suggestion": "🟠 WATCH — 4.1% above stop. Monitor closely. No immediate action but be ready."
               }
             ],
             "error": null
@@ -103,15 +101,15 @@
           }
         ]
       },
-      "end": 1779421011.190676,
+      "end": 1779441892.455201,
       "duration_sec": 0.2
     }
   ],
   "validation_errors": [
-    "RULE check_stop_proximity: 600301 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+    "RULE check_stop_proximity: 600301 — 🟠 WATCH — 4.1% above stop. Monitor closely. No immediate action but be ready."
   ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 88.9
+    "totalDurationSec": 85.9
   }
 }

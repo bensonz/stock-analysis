@@ -4,46 +4,42 @@
     {
       "code": "600301",
       "name": "华锡有色",
-      "action": "OPEN",
-      "price": 54.25,
-      "note": "小金属方向有资金回流，RPS处于可做区间且价格紧贴MA结构，不属于追高形态，适合在强市场下小仓试错。"
+      "action": "HOLD",
+      "price": 53.76,
+      "pnl_pct": -0.9,
+      "note": "持仓首日，现价53.76较入场54.25回撤仅-0.90%，未触发-5%止损或首3日-3%规则；盘中高点54.95说明仍有资金参与。缺点是所属有色金属不在今日前五热点，且当前仅高于止损4.13%，需紧盯，若资源线继续被硬科技抽血应快速退出。"
     }
   ],
   "portfolioStats": {
     "totalPositions": 1,
-    "totalEquity": 965742.0,
-    "dayPnl": 0.0,
-    "dayReturnPct": 0.0,
-    "totalReturnPct": -3.43,
-    "unrealizedPnl": 0.0,
+    "totalEquity": 965546.0,
+    "dayPnl": 484.0,
+    "dayReturnPct": 0.05,
+    "totalReturnPct": -3.45,
+    "unrealizedPnl": -196.0,
     "realizedPnl": -34258.0,
-    "cashPct": 97.75
+    "cashPct": 97.77
   },
   "entryRegime": {
     "allow_new_positions": true,
     "regime": "strong",
-    "breadth_ratio": 2.1244,
-    "up": 3654,
-    "down": 1720,
+    "breadth_ratio": 2.5639,
+    "up": 3869,
+    "down": 1509,
     "positive_indices": [
       "上证指数",
       "深证成指",
       "创业板指"
     ],
     "negative_indices": [],
-    "limit_ups": 79,
+    "limit_ups": 138,
     "limit_downs": 21,
     "sizing_multiplier": 0.75,
     "hard_block": false,
-    "reason": "Entry regime strong: breadth 2.12:1, 3/3 major indices green, 79 limit-ups / 21 limit-downs. Allow entries, but cap fresh size at 75% to avoid chasing."
+    "reason": "Entry regime strong: breadth 2.56:1, 3/3 major indices green, 138 limit-ups / 21 limit-downs. Allow entries, but cap fresh size at 75% to avoid chasing."
   },
-  "newPositions": [
-    {
-      "code": "600301",
-      "name": "华锡有色"
-    }
-  ],
+  "newPositions": [],
   "marketContext": {
-    "summary": "Breadth 2.12:1 bullish, 79涨停/21跌停，3大指数全红，满足新开仓门槛；热点集中在元件、玻璃玻纤、非金属材料、半导体材料设备等硬科技与材料链，白酒、券商、油气偏弱。IV整体偏乐观，主流代理IV Rank多在21%-40%区间，适合正常到略保守 sizing。Hot sectors (top 5): 元件(+7.82%), 玻璃玻纤(+5.53%), 非金属材料Ⅱ(+5.24%), 照明设备Ⅱ(+4.29%), 金属新材料(+3.52%). Cold sectors (bottom 5): 广告营销(-1.70%), 白酒Ⅱ(-1.52%), 证券Ⅱ(-1.50%), 油气开采Ⅱ(-1.43%), 生物制品(-1.35%). Position sector alignment: 0/0 positions in hot sectors."
+    "summary": "Breadth 2.56:1 bullish，3869涨/1509跌，138涨停/21跌停，三大指数全红（上证+0.87%、深成指+2.30%、创业板+2.84%），属于可开新仓的强势环境；但盘面主升集中在元件、玻璃玻纤、非金属材料与硬科技链，多数候选股已明显远离MA5/MA10/MA20。IV方面整体偏乐观，主流代理IV Rank约21%-40%，不需冻结风险，但也不支持在过热位置重仓追高。Hot sectors (top 5): 元件+9.74%、玻璃玻纤+8.11%、非金属材料Ⅱ+5.73%、照明设备Ⅱ+5.61%、金属新材料+5.17%；Cold sectors (bottom 5): 白酒Ⅱ-1.80%、酒店餐饮-1.79%、养殖业-1.66%、证券Ⅱ-1.52%、航空机场-1.52%。Position sector alignment: 0/1 positions in hot sectors。"
   }
 }

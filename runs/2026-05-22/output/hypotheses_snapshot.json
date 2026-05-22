@@ -332,7 +332,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-03-27",
-      "lastTested": "2026-05-21",
+      "lastTested": "2026-05-22",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -643,13 +643,17 @@
           {
             "date": "2026-05-21",
             "detail": "When breadth collapses to 0.15:1 with 69跌停 and all 3 major indices red, the correct momentum action is zero new longs even if a few individual charts still pass RPS and MA filters."
+          },
+          {
+            "date": "2026-05-22",
+            "detail": "今天市场允许开仓，但真正通过Sector First与MA反追高双重约束的候选几乎没有，强市场不等于要强行下单。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 77,
+      "sampleSize": 78,
       "hitRate": 1.0,
-      "confidence": 0.987,
+      "confidence": 0.988,
       "tags": [],
       "parentRule": null,
       "retiredDate": null,
@@ -1156,13 +1160,17 @@
           {
             "date": "2026-05-22",
             "detail": "今天能通过RPS+MA双筛选的标的极少，说明V2的核心优势不是多买，而是在强行情里只买少数仍靠近支撑的强股。"
+          },
+          {
+            "date": "2026-05-22",
+            "detail": "MA距离规则今天再次拦下大批热门硬科技个股，说明热点最强阶段往往也是最容易买贵的阶段。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 49,
+      "sampleSize": 50,
       "hitRate": 1.0,
-      "confidence": 0.98,
+      "confidence": 0.981,
       "tags": [
         "entry-filter",
         "timing"
@@ -1481,7 +1489,7 @@
       "type": "observation",
       "status": "validated",
       "created": "2026-04-06",
-      "lastTested": "2026-05-21",
+      "lastTested": "2026-05-22",
       "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally.",
       "evidence": {
         "supporting": [
@@ -1504,13 +1512,17 @@
           {
             "date": "2026-05-21",
             "detail": "Today’s sector tape shows classic defensive hiding: banks, airports, auto pockets and home-appliance parts up, while 通信设备、电子化学品 and other high-beta tech groups lead downside."
+          },
+          {
+            "date": "2026-05-22",
+            "detail": "资源股轮动可以持有，但若未进入当日最强板块序列，持仓管理应比科技主线更短更硬。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 5,
+      "sampleSize": 6,
       "hitRate": 1.0,
-      "confidence": 0.857,
+      "confidence": 0.875,
       "tags": [
         "sector",
         "timing"

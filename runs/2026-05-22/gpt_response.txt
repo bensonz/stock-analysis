@@ -3,232 +3,229 @@
     "hot_sectors": [
       {
         "name": "元件",
-        "5d_pct": 7.82,
+        "5d_pct": 9.74,
         "trend": "accelerating"
       },
       {
         "name": "玻璃玻纤",
-        "5d_pct": 5.53,
-        "trend": "steady"
+        "5d_pct": 8.11,
+        "trend": "accelerating"
       },
       {
         "name": "非金属材料Ⅱ",
-        "5d_pct": 5.24,
+        "5d_pct": 5.73,
         "trend": "steady"
       },
       {
         "name": "照明设备Ⅱ",
-        "5d_pct": 4.29,
+        "5d_pct": 5.61,
         "trend": "steady"
       },
       {
         "name": "金属新材料",
-        "5d_pct": 3.52,
-        "trend": "improving"
+        "5d_pct": 5.17,
+        "trend": "steady"
       }
     ],
     "cold_sectors": [
       {
-        "name": "广告营销",
-        "5d_pct": -1.7,
+        "name": "白酒Ⅱ",
+        "5d_pct": -1.8,
         "trend": "deteriorating"
       },
       {
-        "name": "白酒Ⅱ",
-        "5d_pct": -1.52,
+        "name": "酒店餐饮",
+        "5d_pct": -1.79,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "养殖业",
+        "5d_pct": -1.66,
         "trend": "deteriorating"
       },
       {
         "name": "证券Ⅱ",
-        "5d_pct": -1.5,
+        "5d_pct": -1.52,
         "trend": "deteriorating"
       },
       {
-        "name": "油气开采Ⅱ",
-        "5d_pct": -1.43,
+        "name": "航空机场",
+        "5d_pct": -1.52,
         "trend": "deteriorating"
-      },
-      {
-        "name": "生物制品",
-        "5d_pct": -1.35,
-        "trend": "weak"
       }
     ],
-    "position_alignment": "0/0 positions in hot sectors",
-    "regime": "Broad risk-on tape with tech hardware/PCB/semiconductor leadership, defensive consumption and financials lagging"
+    "position_alignment": "0/1 positions in hot sectors",
+    "regime": "硬科技与材料方向领涨，消费与金融偏弱，有色分支有轮动但未进入今日最强前列"
   },
-  "position_decisions": [],
-  "new_positions": [
+  "position_decisions": [
     {
       "code": "600301",
       "name": "华锡有色",
-      "entry_price": 54.25,
-      "allocation_pct": 4,
-      "stop": 51.54,
-      "target": 62.0,
-      "thesis": "小金属方向有资金回流，RPS处于可做区间且价格紧贴MA结构，不属于追高形态，适合在强市场下小仓试错。",
-      "sector": "有色金属",
-      "sector_rank": "top 30%",
-      "catalyst": "输入事件显示小金属概念午后走强，华锡有色、中金岭南双双涨停；同时公司近10日价格强于市场90%的股票。",
-      "catalyst_freshness": "ongoing",
-      "rps120": 91.57,
-      "conviction": "small"
+      "action": "HOLD",
+      "reason": "持仓首日，现价53.76较入场54.25回撤仅-0.90%，未触发-5%止损或首3日-3%规则；盘中高点54.95说明仍有资金参与。缺点是所属有色金属不在今日前五热点，且当前仅高于止损4.13%，需紧盯，若资源线继续被硬科技抽血应快速退出。",
+      "sector_rank": "非前30%/不在今日top5",
+      "new_stop": null,
+      "pnl_pct": -0.9,
+      "days_held": 1,
+      "exit_price": null
     }
   ],
+  "new_positions": [],
   "skip_list": [
     {
-      "code": "688205",
-      "name": "德科立",
-      "reason": "通信设备趋势强、催化新，但dist_ma20_pct 10.5%尚可，RPS 94.25%也可；真正问题是缺少所在板块进入今日前五/明确上游排名确认，且昨日有重抛压记录，优先级不如更贴近支撑的标的。",
-      "rps120": 94.25
-    },
-    {
-      "code": "688372",
-      "name": "伟测科技",
-      "reason": "半导体方向强，但昨日有-9.06%重抛压记录，属于反包型而非干净连续趋势；在可选标的不少时不优先。",
-      "rps120": 93.5
-    },
-    {
-      "code": "688002",
-      "name": "睿创微纳",
-      "reason": "结构不差，dist_ma20_pct 4.8%健康，但所属军工电子不在今日热板块前列，按Sector First只能放弃新开仓。",
-      "rps120": 89.18
+      "code": "300739",
+      "name": "明阳电路",
+      "reason": "Sector hot（元件为今日第一）但不满足MA距离规则，dist_ma5_pct 7.5%且dist_ma10_pct 13.8%，属于追高禁入",
+      "rps120": 92.08
     },
     {
       "code": "002432",
       "name": "九安医疗",
-      "reason": "医疗器械所属医药生物/生物制品方向位于今日冷区，Sector First直接跳过；即使MA与RPS合格也不逆板块做多。",
+      "reason": "RPS120 94.98接近可做上沿，MA距离虽勉强合规，但所属医药生物/医疗器械不在今日已知强势板块前列，优先级不足",
       "rps120": 94.98
     },
     {
       "code": "002812",
       "name": "恩捷股份",
-      "reason": "有SETUP级VCP且MA位置健康，但电池链未进入今日最强板块，且近10日走弱信号与H股筹划消息并存，板块确认不足。",
+      "reason": "有SETUP级VCP且MA结构健康，但电池链并非今日最强主线，且近10个交易日价格走弱标签与RPS回落并存，先跳过",
       "rps120": 92.89
     },
     {
       "code": "301216",
       "name": "万凯新材",
-      "reason": "VCP为SETUP、位置贴近MA20，形态尚可，但基础化工并非今日明确强主线，且收益质量偏弱，不列入优先开仓。",
+      "reason": "VCP仅SETUP，RPS120 86.73合规，但所属基础化工/塑料未见进入今日强势前列，按Sector First只能放弃",
       "rps120": 86.73
+    },
+    {
+      "code": "688205",
+      "name": "德科立",
+      "reason": "通信设备题材强，但dist_ma20_pct 10.5%虽未超限，RPS120 94.25偏高且科创硬件候选中缺乏更优MA压缩优势；不是最优解",
+      "rps120": 94.25
+    },
+    {
+      "code": "688372",
+      "name": "伟测科技",
+      "reason": "半导体方向强，但dist_ma20_pct 11.4%接近过热上沿，且前一日存在-9.06%重抛压风险记录，先不追",
+      "rps120": 93.5
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "MA结构合规，但所属军工电子不在今日已知最强板块，Sector First下不做非核心主线",
+      "rps120": 89.18
     },
     {
       "code": "300666",
       "name": "江丰电子",
-      "reason": "半导体材料逻辑强，但dist_ma20_pct 22.4%超过12%追高红线，严格执行不追。",
+      "reason": "半导体逻辑强，但dist_ma10_pct 6.9%尚可、dist_ma20_pct 22.4%严重超限，属于中期过度扩张，禁止追高",
       "rps120": 94.13
     },
     {
       "code": "688630",
       "name": "芯碁微装",
-      "reason": "基本面与机构催化都强，但dist_ma10_pct 9.1%和dist_ma20_pct 29.6%双双超限，属于明显追高，不能开仓。",
+      "reason": "基本面和催化强，但dist_ma10_pct 9.1%与dist_ma20_pct 29.6%双超限，明显追高区",
       "rps120": 92.18
-    },
-    {
-      "code": "300739",
-      "name": "明阳电路",
-      "reason": "所在元件板块是今日最强，但dist_ma5_pct 7.5%、dist_ma10_pct 13.8%、dist_ma20_pct 20.5%全部超限，热板块也不能追。",
-      "rps120": 92.08
     },
     {
       "code": "301018",
       "name": "申菱环境",
-      "reason": "液冷/温控催化明确，但dist_ma5_pct 8.6%、dist_ma10_pct 23.7%、dist_ma20_pct 44.8%严重过热，直接跳过。",
+      "reason": "通用设备有AI温控催化，但dist_ma5_pct 8.6%、dist_ma10_pct 23.7%、dist_ma20_pct 44.8%，严重过热",
       "rps120": 92.73
     },
     {
       "code": "688037",
       "name": "芯源微",
-      "reason": "半导体设备强势，但dist_ma10_pct 14.2%和dist_ma20_pct 33.5%超限，且昨日有-7.36%重抛压记录，不做追涨修复。",
+      "reason": "半导体设备强势，但dist_ma10_pct 14.2%与dist_ma20_pct 33.5%超限，且前一日有-7.36%重抛压记录，跳过",
       "rps120": 91.74
     },
     {
       "code": "300236",
       "name": "上海新阳",
-      "reason": "半导体材料基本面强，但dist_ma20_pct 14.4%超过12%红线，仍属偏扩张状态，等更近支撑再说。",
+      "reason": "电子化学品趋势仍强，但dist_ma20_pct 14.4%超限，不符合反追高规则",
       "rps120": 88.64
     },
     {
       "code": "300870",
       "name": "欧陆通",
-      "reason": "电源设备趋势强，但dist_ma20_pct 26.8%过度扩张，不符合MA距离纪律。",
+      "reason": "AI电源逻辑仍在，但dist_ma20_pct 26.8%远超上限，不能追",
       "rps120": 92.12
     },
     {
       "code": "301182",
       "name": "凯旺科技",
-      "reason": "RPS和题材都强，但dist_ma5_pct 12.7%、dist_ma10_pct 26.3%、dist_ma20_pct 41.1%严重超买，绝不追。",
+      "reason": "RPS120 94.17合规，但dist_ma5_pct 12.7%、dist_ma10_pct 26.3%、dist_ma20_pct 41.1%全部超限，纯追涨形态",
       "rps120": 94.17
     },
     {
       "code": "688610",
       "name": "埃科光电",
-      "reason": "强趋势但dist_ma5_pct 24.4%、dist_ma10_pct 42.4%、dist_ma20_pct 76.4%，是最典型的追高禁区。",
+      "reason": "机器视觉/设备方向强，但dist_ma5_pct 24.4%、dist_ma10_pct 42.4%、dist_ma20_pct 76.4%，极度过热",
       "rps120": 93.17
     },
     {
       "code": "688531",
       "name": "日联科技",
-      "reason": "专用设备趋势强，但dist_ma5_pct 11.0%、dist_ma10_pct 28.3%、dist_ma20_pct 65.3%远超规则，不可追。",
+      "reason": "趋势极强但dist_ma5_pct 11.0%、dist_ma10_pct 28.3%、dist_ma20_pct 65.3%，追高风险过大",
       "rps120": 93.68
     },
     {
       "code": "002975",
       "name": "博杰股份",
-      "reason": "自动化设备逻辑可以，但dist_ma10_pct 9.9%、dist_ma20_pct 32.8%超限，位置太远。",
+      "reason": "自动化设备趋势强，但dist_ma10_pct 9.9%与dist_ma20_pct 32.8%超限，不开新仓",
       "rps120": 92.67
     },
     {
       "code": "002947",
       "name": "恒铭达",
-      "reason": "消费电子趋势强，但dist_ma10_pct 10.7%、dist_ma20_pct 36.6%超限，属于高位延伸。",
+      "reason": "消费电子趋势强，但dist_ma10_pct 10.7%和dist_ma20_pct 36.6%超限，不能追",
       "rps120": 91.27
     },
     {
       "code": "002645",
       "name": "华宏科技",
-      "reason": "RPS合格、贴MA5/MA10，但环保设备并非今日最强主线，且dist_ma20_pct 31.4%过远，优先级不够。",
+      "reason": "环保设备并非今日已知最强主线，且dist_ma20_pct 31.4%超限，即便RPS合规也不买",
       "rps120": 91.09
     }
   ],
   "new_learnings": [
     {
-      "text": "今天最重要的不是是否允许开仓，而是强市场里大多数候选股依然因为均线乖离过大而不能买；热板块并不能覆盖追高风险。",
+      "text": "今天市场允许开仓，但真正通过Sector First与MA反追高双重约束的候选几乎没有，强市场不等于要强行下单。",
       "type": "rule",
+      "tags": [
+        "sector",
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "广度强只能说明适合承担风险，不能替代个股位置管理；若强势股普遍远离MA，最优动作是等回踩而不是抬价追入。"
+    },
+    {
+      "text": "MA距离规则今天再次拦下大批热门硬科技个股，说明热点最强阶段往往也是最容易买贵的阶段。",
+      "type": "signal",
       "tags": [
         "entry-filter",
         "timing",
         "sector"
       ],
       "evidence_type": "supporting",
-      "related_hypothesis": "h027",
-      "mechanism": "强板块会吸引情绪资金把股价迅速拉离MA5/MA10/MA20，后手接力的盈亏比反而变差，因此要等回踩支撑而不是追当天最热。"
+      "related_hypothesis": "h021",
+      "mechanism": "当板块一致性高潮出现时，个股往往同步脱离MA5/MA10，胜率可能还在，但盈亏比和回撤容忍度迅速恶化。"
     },
     {
-      "text": "今天能通过RPS+MA双筛选的标的极少，说明V2的核心优势不是多买，而是在强行情里只买少数仍靠近支撑的强股。",
+      "text": "资源股轮动可以持有，但若未进入当日最强板块序列，持仓管理应比科技主线更短更硬。",
       "type": "heuristic",
       "tags": [
-        "entry-filter",
-        "position-sizing",
-        "timing"
+        "sector",
+        "exit-rule",
+        "position-sizing"
       ],
       "evidence_type": "supporting",
-      "related_hypothesis": "h021",
-      "mechanism": "当市场进入普涨和高涨停环境时，很多图形会显得“很强”，但真正有低风险入场点的标的会显著减少，筛选能避免情绪化扩仓。"
-    },
-    {
-      "text": "低IV并未阻止市场走强，但会压缩容错率，因此即便允许开仓，也更适合小仓试错而非满节奏追击。",
-      "type": "signal",
-      "tags": [
-        "position-sizing",
-        "timing"
-      ],
-      "evidence_type": "supporting",
-      "related_hypothesis": "h017",
-      "mechanism": "当前多数代理IV Rank在21%-35%之间，波动率不高意味着顺风环境存在，但突发回撤时缓冲较小，所以应减少追高型仓位。"
+      "related_hypothesis": "h028",
+      "mechanism": "非主线板块缺少持续增量资金，哪怕个股仍在趋势中，也更容易在板块轮动中先掉队。"
     }
   ],
-  "market_summary": "Breadth 2.12:1 bullish, 79涨停/21跌停，3大指数全红，满足新开仓门槛；热点集中在元件、玻璃玻纤、非金属材料、半导体材料设备等硬科技与材料链，白酒、券商、油气偏弱。IV整体偏乐观，主流代理IV Rank多在21%-40%区间，适合正常到略保守 sizing。Hot sectors (top 5): 元件(+7.82%), 玻璃玻纤(+5.53%), 非金属材料Ⅱ(+5.24%), 照明设备Ⅱ(+4.29%), 金属新材料(+3.52%). Cold sectors (bottom 5): 广告营销(-1.70%), 白酒Ⅱ(-1.52%), 证券Ⅱ(-1.50%), 油气开采Ⅱ(-1.43%), 生物制品(-1.35%). Position sector alignment: 0/0 positions in hot sectors.",
+  "market_summary": "Breadth 2.56:1 bullish，3869涨/1509跌，138涨停/21跌停，三大指数全红（上证+0.87%、深成指+2.30%、创业板+2.84%），属于可开新仓的强势环境；但盘面主升集中在元件、玻璃玻纤、非金属材料与硬科技链，多数候选股已明显远离MA5/MA10/MA20。IV方面整体偏乐观，主流代理IV Rank约21%-40%，不需冻结风险，但也不支持在过热位置重仓追高。Hot sectors (top 5): 元件+9.74%、玻璃玻纤+8.11%、非金属材料Ⅱ+5.73%、照明设备Ⅱ+5.61%、金属新材料+5.17%；Cold sectors (bottom 5): 白酒Ⅱ-1.80%、酒店餐饮-1.79%、养殖业-1.66%、证券Ⅱ-1.52%、航空机场-1.52%。Position sector alignment: 0/1 positions in hot sectors。",
   "market_sentiment": "bullish",
   "market_call": "积极"
 }
