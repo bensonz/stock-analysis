@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "gpt-5.4",
+  "decision_source": "GPT primary",
+  "input_tokens": 140044,
+  "output_tokens": 3452,
+  "rounds": 2,
+  "duration_sec": 74.9,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=A%E8%82%A1+%E7%83%AD%E9%97%A8%E6%9D%BF%E5%9D%97+%E4%BB%8A%E6%97%A5+2026%E5%B9%B45%E6%9C%8822%E6%97%A5"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E5%85%83%E4%BB%B6+PCB+%E6%B6%A8%E5%81%9C+2026%E5%B9%B45%E6%9C%8822%E6%97%A5+A%E8%82%A1"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E7%8E%BB%E7%92%83%E7%8E%BB%E7%BA%A4+%E6%B6%A8%E4%BB%B7+2026%E5%B9%B45%E6%9C%8822%E6%97%A5+A%E8%82%A1"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E5%8D%8A%E5%AF%BC%E4%BD%93+%E8%AE%BE%E5%A4%87+%E6%9D%90%E6%96%99+2026%E5%B9%B45%E6%9C%8822%E6%97%A5+A%E8%82%A1"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E9%94%82%E7%94%B5%E6%B1%A0+%E9%9A%94%E8%86%9C+%E7%A3%B7%E9%85%B8%E9%93%81%E9%94%82+2026%E5%B9%B45%E6%9C%8822%E6%97%A5+A%E8%82%A1"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=%E5%AE%8F%E8%A7%82+%E6%94%BF%E7%AD%96+A%E8%82%A1+2026%E5%B9%B45%E6%9C%8822%E6%97%A5"
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}

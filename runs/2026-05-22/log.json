@@ -1,0 +1,117 @@
+{
+  "date": "2026-05-22",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1779420922.1958,
+      "errors": [],
+      "end": 1779420935.966785,
+      "duration_sec": 13.8
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 6404,
+      "tokens": {
+        "input_tokens": 140044,
+        "output_tokens": 3452
+      },
+      "rounds": 2,
+      "tool_calls_count": 6,
+      "duration_sec": 74.9,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "GPT primary",
+      "primary_model": "gpt-5.4"
+    },
+    {
+      "phase": "apply",
+      "start": 1779421010.949982,
+      "actions": [
+        "SIZE THROTTLE 600301: 4% -> 3% (regime=strong)",
+        "OPEN 600301 @ 54.25",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=10",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=49",
+        "Hypothesis: Updated h017 (rule): +1 supporting evidence → hitRate=100%, n=22",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "600301",
+                "name": "华锡有色",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 54.25,
+                "stopLoss": 51.54,
+                "distance_pct": 5.0,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1779421011.190676,
+      "duration_sec": 0.2
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 600301 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 88.9
+  }
+}
