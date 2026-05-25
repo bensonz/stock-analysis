@@ -2,10 +2,81 @@
   "provider": "openai",
   "primary_model": "gpt-5.4",
   "decision_source": "GPT primary",
-  "input_tokens": 73155,
-  "output_tokens": 1913,
-  "rounds": 1,
-  "duration_sec": 38.0,
-  "tool_calls": [],
+  "input_tokens": 158652,
+  "output_tokens": 2406,
+  "rounds": 2,
+  "duration_sec": 56.6,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+2026-05-25"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=半导体+板块+大涨+2026-05-25+A股"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=通信设备+CPO+德科立+2026-05-25"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=华锡有色+2026-05-25+小金属+涨停"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=科创50+大涨+2026-05-25+原因"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=电子化学品+上海新阳+2026-05-25"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.baidu.com/s?wd=军工电子+睿创微纳+2026-05-25"
+      },
+      "result_length": 3000
+    }
+  ],
   "fallback_used": false
 }

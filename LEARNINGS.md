@@ -1240,3 +1240,9 @@
 - Today is a classic 'green indices, weak breadth' trap: 3/3 major indices are up, but up/down is only 0.58:1, so index strength did not translate into stock-selection breadth.
 - The anti-chase MA filter is doing heavy lifting again: many of the strongest hard-tech names are in the right sectors but still unbuyable because distance from MA10/MA20 is too large.
 - Resource rebound is weaker than hard-tech leadership; existing positions in non-hot sectors can be held only while price is behaving, but they should not be averaged up or replicated.
+
+### 自动更新 (2026-05-25)
+
+- 指数普涨并不等于可开新仓；当上证、深成指、创业板全红但全市场涨跌比仍只有0.68:1时，说明资金只抱团主线，追涨容错率依然低。
+- 今天再次验证MA距离纪律的价值：大量热门半导体/电子股RPS达标，但被dist_ma10_pct和dist_ma20_pct否决，避免在情绪高潮日接最后一棒。
+- 弱广度背景下，最优动作常常不是找次优新标的，而是只保留已经赚钱且未破位的旧仓，等待市场把主线扩散到更广的个股层面。

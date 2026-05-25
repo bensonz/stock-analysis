@@ -4,18 +4,18 @@
 
 | 指数 | 收盘 | 涨跌幅 |
 |------|------|--------|
-| 上证指数 | 4136.25 | +0.57% |
-| 深证成指 | 15732.86 | +0.87% |
-| 创业板指 | 3983.30 | +1.14% |
-| 科创50 | 1854.56 | +3.56% |
+| 上证指数 | 4152.57 | +0.96% |
+| 深证成指 | 15856.61 | +1.66% |
+| 创业板指 | 4021.16 | +2.10% |
+| 科创50 | 1896.04 | +5.88% |
 
-涨跌比: 1993涨 / 3417跌 / 5508总
+涨跌比: 2180涨 / 3225跌 / 5505总
 
-**热门板块**: 电子化学品Ⅱ(+4.57%), 半导体(+4.49%), 航空机场(+4.40%), 电视广播Ⅱ(+3.94%), 其他电子Ⅱ(+3.48%)
+**热门板块**: 半导体(+6.36%), 电子化学品Ⅱ(+4.61%), 玻璃玻纤(+4.43%), 其他电子Ⅱ(+4.39%), 通信设备(+4.38%)
 
-**冷门板块**: 油服工程(-4.75%), 油气开采Ⅱ(-3.33%), 其他家电Ⅱ(-2.94%), 综合Ⅱ(-2.70%), 商用车(-2.54%)
+**冷门板块**: 油服工程(-4.90%), 油气开采Ⅱ(-3.42%), 其他家电Ⅱ(-2.94%), 林业Ⅱ(-2.71%), 电池(-2.52%)
 
-Breadth 0.58:1 weak despite all 3 major indices green and 110涨停/18跌停; this is not panic, but it fails the minimum long-entry gate. Hot sectors are 电子化学品Ⅱ、半导体、航空机场、电视广播Ⅱ、其他电子Ⅱ, while oil-service and energy-linked groups are being de-risked. Existing portfolio alignment is weak at 0/1 positions in hot sectors. IV context is mostly normal-to-low (overall sentiment 偏乐观, avg IV rank 24.7%), so sizing is not the blocker; breadth and extension are.
+市场表面强、内部偏弱：上证+0.96%、深成指+1.66%、创业板指+2.10%、科创50大涨5.88%，热点集中在半导体、电子化学品、通信设备等硬科技方向。Breadth仅0.68:1偏空，129涨停/27跌停，属于指数强于个股的抱团行情，未满足1.5:1新开仓门槛。IV方面主板代理IV Rank约13.8%偏低需缩量思维，科创50 IV Rank约39.9%中性，创业板ETF IV Rank约51.8%偏高，说明科技波动机会在但只适合最强 setup；今日结论是持仓可留、不开新仓。
 
 ## 策略池扫描
 
@@ -24,22 +24,23 @@ Breadth 0.58:1 weak despite all 3 major indices green and 110涨停/18跌停; th
 
 ## 跳过标的
 
-1. **德科立** (688205) (RPS 94.86%) — Strong communication/CPO theme and valid RPS120 94.86, but market buy gate fails on breadth (0.58:1). Even aside from regime, upcoming 2026-05-27 unlock is a near-term overhang.
-2. **伟测科技** (688372) (RPS 93.5%) — Semiconductor sector is hot and setup is relatively tight, but RPS120 93.5 is extended-zone and dist_ma20_pct 13.9% exceeds the 12% anti-chase limit. No entry.
-3. **睿创微纳** (688002) (RPS 89.59%) — MA structure is acceptable and RPS120 89.59 is in range, but sector is 军工电子 rather than today’s top-30% leadership groups. Weak-tape default says skip non-leading sectors.
-4. **江丰电子** (300666) (RPS 93.84%) — Semiconductor is hot and catalyst is real, but dist_ma10_pct 8.0 is at the chase threshold and dist_ma20_pct 25.5 is far beyond the 12% limit. Too extended for a fresh long.
-5. **上海新阳** (300236) (RPS 89.11%) — Sector is #1 today, but dist_ma5_pct 6.6%, dist_ma10_pct 12.8%, dist_ma20_pct 27.4% all violate anti-chase rules. Wait for pullback.
-6. **明阳电路** (300739) (RPS 92.51%) — PCB/元件 direction is active, but dist_ma10_pct 9.6% and dist_ma20_pct 18.2% exceed anti-chase limits. No current price issue needed; the setup itself is too extended.
-7. **山东赫达** (002810) (RPS 94.9%) — Only candidate with usable MA structure and VCP tag, but 化学制品 is not in today’s top leadership list and market buy gate fails. In weak breadth, this is skip rather than force a small buy.
-8. **湖南裕能** (301358) (RPS 93.78%) — Battery chain lacks clear sector leadership today, and stock is below MA5/MA10 with 10-day event marked as price weakness in input. Not the kind of strength to buy in a weak breadth tape.
-9. **华锡有色** (600301) (RPS 91.21%) — No add. Existing position only. Sector is outside today’s hot groups, so despite acceptable RPS and MA structure this is not a fresh-entry setup under sector-first rules.
+1. **德科立** (688205) (RPS 94.86%) — 通信设备属热点，但入场环境不达标：全市场涨跌比仅0.68:1，未满足至少1.5:1买入门槛；此外虽MA距离合格，仍应先尊重弱广度。
+2. **伟测科技** (688372) (RPS 93.5%) — 半导体是最强主线，但dist_ma20_pct为13.9%，超过12%反追高阈值；同时市场广度偏弱，不开新仓。
+3. **睿创微纳** (688002) (RPS 89.59%) — MA距离与RPS都可接受，但所属军工电子不在今日已知前五热点，且市场涨跌比0.68:1未过买入门槛，优先空仓等待更强带宽。
+4. **江丰电子** (300666) (RPS 93.84%) — 半导体主线正确，但dist_ma10_pct为8.0%、dist_ma20_pct为25.5%，已处高位拉伸区边缘/超标，不符合低追高要求。
+5. **上海新阳** (300236) (RPS 89.11%) — 电子化学品属热点，但dist_ma5_pct为6.6%、dist_ma10_pct为12.8%、dist_ma20_pct为27.4%，明显过度拉离均线，严格跳过。
+6. **山东赫达** (002810) (RPS 94.9%) — 形态是少数合格者之一，RPS94.9且VCP为SETUP、MA距离也合规，但化学制品不在今日已知前五热点；在广度0.68:1弱市里不做次主线试错。
+7. **湖南裕能** (301358) (RPS 93.78%) — 所属电池位列今日底部板块之一（-2.52%），冷板块一票否决；个股再强也不逆板块做多。
+8. **九安医疗** (002432) (RPS 94.92%) — 医疗器械不在今日热点，且dist_ma5_pct为13.0%、dist_ma10_pct为14.7%、dist_ma20_pct为20.4%，严重追高区，放弃。
+9. **芯碁微装** (688630) (RPS 92.93%) — 基本面强、0风险，但dist_ma10_pct为11.4%、dist_ma20_pct为31.5%，已远离支撑；弱广度下不接加速段。
+10. **申菱环境** (301018) (RPS 93.72%) — 通用设备近期走强，但dist_ma10_pct为18.4%、dist_ma20_pct为42.3%，完全不符合MA距离纪律。
 
 ## 今日研究结论
 
 - 新开仓: 0只
-- 跳过: 9只
+- 跳过: 10只
 
 ### 新教训
-- {'text': "Today is a classic 'green indices, weak breadth' trap: 3/3 major indices are up, but up/down is only 0.58:1, so index strength did not translate into stock-selection breadth.", 'type': 'signal', 'tags': ['timing', 'entry-filter', 'market-breadth'], 'evidence_type': 'supporting', 'related_hypothesis': 'h013', 'mechanism': 'When gains are concentrated in a narrow hard-tech leadership basket, chasing new names outside the strongest pockets usually leads to poor entry quality despite positive index prints.'}
-- {'text': 'The anti-chase MA filter is doing heavy lifting again: many of the strongest hard-tech names are in the right sectors but still unbuyable because distance from MA10/MA20 is too large.', 'type': 'rule', 'tags': ['entry-filter', 'timing', 'sector'], 'evidence_type': 'supporting', 'related_hypothesis': 'h021', 'mechanism': 'In momentum markets, the best stories often appear after vertical price expansion; MA distance prevents paying peak emotion and improves reward-to-risk by forcing entries near support.'}
-- {'text': 'Resource rebound is weaker than hard-tech leadership; existing positions in non-hot sectors can be held only while price is behaving, but they should not be averaged up or replicated.', 'type': 'heuristic', 'tags': ['sector', 'exit-rule', 'position-sizing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h028', 'mechanism': 'When capital is rotating aggressively toward semis/electronics, lagging cyclicals may rise on idiosyncratic flow but lack the sector tailwind needed for multiple expansion and follow-through.'}
+- {'text': '指数普涨并不等于可开新仓；当上证、深成指、创业板全红但全市场涨跌比仍只有0.68:1时，说明资金只抱团主线，追涨容错率依然低。', 'type': 'heuristic', 'tags': ['timing', 'entry-filter', 'sector'], 'evidence_type': 'supporting', 'related_hypothesis': 'h013', 'mechanism': '宽基指数由少数强势科技权重拉升时，个股层面赚钱效应并不扩散，新增仓位更容易买在分化尾端。'}
+- {'text': '今天再次验证MA距离纪律的价值：大量热门半导体/电子股RPS达标，但被dist_ma10_pct和dist_ma20_pct否决，避免在情绪高潮日接最后一棒。', 'type': 'rule', 'tags': ['entry-filter', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h021', 'mechanism': '高RPS代表强趋势，不代表低风险买点；均线过远意味着回撤到支撑的空间过大，胜率会被买点恶化吞噬。'}
+- {'text': '弱广度背景下，最优动作常常不是找次优新标的，而是只保留已经赚钱且未破位的旧仓，等待市场把主线扩散到更广的个股层面。', 'type': 'observation', 'tags': ['timing', 'position-sizing', 'exit-rule'], 'evidence_type': 'supporting', 'related_hypothesis': 'h028', 'mechanism': '存量赢家已有成本垫和明确止损，新增仓位却要承受更差的广度和更高的追高成本。'}

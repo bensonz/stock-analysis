@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-05-25T11:37:39.735496+08:00",
+  "snapshot_time": "2026-05-25T15:35:08.870626+08:00",
   "snapshot_type": "pre_run",
   "date": "2026-05-25",
   "portfolio_config": {
@@ -11,23 +11,23 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-05-22T17:24:52.289008+08:00",
+    "lastUpdated": "2026-05-25T11:38:37.098145+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 965546.0,
+      "totalEquity": 966434.0,
       "cash": 944042.0,
-      "investedValue": 21504.0,
-      "unrealizedPnl": -196.0,
+      "investedValue": 22392.0,
+      "unrealizedPnl": 692.0,
       "realizedPnl": -34258.0,
-      "totalPnl": -34454.0,
-      "totalReturnPct": -3.45,
+      "totalPnl": -33566.0,
+      "totalReturnPct": -3.36,
       "positionsUsed": 1,
       "positionsMax": 10,
-      "cashPct": 97.77,
-      "dayPnl": 484.0,
+      "cashPct": 97.68,
+      "dayPnl": 888.0,
       "minCashPct": 20,
-      "minCashValue": 193109.2,
-      "deployableCash": 750932.8
+      "minCashValue": 193286.8,
+      "deployableCash": 750755.2
     },
     "activePositions": [
       {
@@ -35,8 +35,8 @@
         "name": "华锡有色",
         "entryDate": "2026-05-22",
         "entryPrice": 54.25,
-        "currentPrice": 53.76,
-        "pnl_pct": -0.9,
+        "currentPrice": 55.98,
+        "pnl_pct": 3.19,
         "stopLoss": 51.54,
         "currentStop": 51.54,
         "targetPrice": 62.0,
@@ -45,12 +45,12 @@
         "shares": 400,
         "allocation_pct": 3.0,
         "allocatedCapital": 21700.0,
-        "currentValue": 21504.0,
-        "unrealizedPnl": -196.0,
-        "volume": 122000,
-        "mavol30": 60736.93,
+        "currentValue": 22392.0,
+        "unrealizedPnl": 692.0,
+        "volume": 117013,
+        "mavol30": 56084.47,
         "volumeBelowMavol30": false,
-        "weight_pct": 2.23
+        "weight_pct": 2.32
       }
     ]
   },
@@ -87,6 +87,13 @@
           "change_pct": -0.9,
           "action": "HOLD",
           "note": "持仓首日，现价53.76较入场54.25回撤仅-0.90%，未触发-5%止损或首3日-3%规则；盘中高点54.95说明仍有资金参与。缺点是所属有色金属不在今日前五热点，且当前仅高于止损4.13%，需紧盯，若资源线继续被硬科技抽血应快速退出。"
+        },
+        {
+          "date": "2026-05-25",
+          "price": 55.98,
+          "change_pct": 3.19,
+          "action": "HOLD",
+          "note": "Position is +3.19% vs entry after 4.13% daily gain, above current stop and still within first 3 trading days so no time-stop issue. However sector alignment is weak: 有色金属 is not in today’s hot sector list while small metals strength looks more like isolated rebound than broad leadership. Keep only because price is working and stop discipline is clear; do not add."
         }
       ],
       "exitDate": null,
@@ -96,7 +103,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-05-22T11:36:51.029089+08:00",
-      "updatedAt": "2026-05-22T17:24:52.276421+08:00",
+      "updatedAt": "2026-05-25T11:38:37.088805+08:00",
       "trackerVersion": "2.1"
     }
   },

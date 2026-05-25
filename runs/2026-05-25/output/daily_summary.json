@@ -5,41 +5,41 @@
       "code": "600301",
       "name": "华锡有色",
       "action": "HOLD",
-      "price": 55.98,
-      "pnl_pct": 3.19,
-      "note": "Position is +3.19% vs entry after 4.13% daily gain, above current stop and still within first 3 trading days so no time-stop issue. However sector alignment is weak: 有色金属 is not in today’s hot sector list while small metals strength looks more like isolated rebound than broad leadership. Keep only because price is working and stop discipline is clear; do not add."
+      "price": 55.65,
+      "pnl_pct": 2.58,
+      "note": "持仓盈利且未触发止损/时间止损，现价55.65较入场54.25盈利约2.58%，第2个交易日内未触发首3日-3%规则。板块不在今日前五热点，属于非主线，只能继续持有观察、不能加仓。"
     }
   ],
   "portfolioStats": {
     "totalPositions": 1,
-    "totalEquity": 966434.0,
-    "dayPnl": 888.0,
-    "dayReturnPct": 0.09,
-    "totalReturnPct": -3.36,
-    "unrealizedPnl": 692.0,
+    "totalEquity": 966302.0,
+    "dayPnl": 756.0,
+    "dayReturnPct": 0.08,
+    "totalReturnPct": -3.37,
+    "unrealizedPnl": 560.0,
     "realizedPnl": -34258.0,
-    "cashPct": 97.68
+    "cashPct": 97.7
   },
   "entryRegime": {
     "allow_new_positions": true,
     "regime": "weak",
-    "breadth_ratio": 0.5833,
-    "up": 1993,
-    "down": 3417,
+    "breadth_ratio": 0.676,
+    "up": 2180,
+    "down": 3225,
     "positive_indices": [
       "上证指数",
       "深证成指",
       "创业板指"
     ],
     "negative_indices": [],
-    "limit_ups": 110,
-    "limit_downs": 18,
+    "limit_ups": 129,
+    "limit_downs": 27,
     "sizing_multiplier": 0.5,
     "hard_block": false,
-    "reason": "Entry regime weak: breadth 0.58:1, 3/3 major indices green, 110 limit-ups / 18 limit-downs. Allow entries only with 50% sizing."
+    "reason": "Entry regime weak: breadth 0.68:1, 3/3 major indices green, 129 limit-ups / 27 limit-downs. Allow entries only with 50% sizing."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "Breadth 0.58:1 weak despite all 3 major indices green and 110涨停/18跌停; this is not panic, but it fails the minimum long-entry gate. Hot sectors are 电子化学品Ⅱ、半导体、航空机场、电视广播Ⅱ、其他电子Ⅱ, while oil-service and energy-linked groups are being de-risked. Existing portfolio alignment is weak at 0/1 positions in hot sectors. IV context is mostly normal-to-low (overall sentiment 偏乐观, avg IV rank 24.7%), so sizing is not the blocker; breadth and extension are."
+    "summary": "市场表面强、内部偏弱：上证+0.96%、深成指+1.66%、创业板指+2.10%、科创50大涨5.88%，热点集中在半导体、电子化学品、通信设备等硬科技方向。Breadth仅0.68:1偏空，129涨停/27跌停，属于指数强于个股的抱团行情，未满足1.5:1新开仓门槛。IV方面主板代理IV Rank约13.8%偏低需缩量思维，科创50 IV Rank约39.9%中性，创业板ETF IV Rank约51.8%偏高，说明科技波动机会在但只适合最强 setup；今日结论是持仓可留、不开新仓。"
   }
 }
