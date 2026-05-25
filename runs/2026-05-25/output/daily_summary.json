@@ -1,0 +1,45 @@
+{
+  "date": "2026-05-25",
+  "actions": [
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "action": "HOLD",
+      "price": 55.98,
+      "pnl_pct": 3.19,
+      "note": "Position is +3.19% vs entry after 4.13% daily gain, above current stop and still within first 3 trading days so no time-stop issue. However sector alignment is weak: 有色金属 is not in today’s hot sector list while small metals strength looks more like isolated rebound than broad leadership. Keep only because price is working and stop discipline is clear; do not add."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 1,
+    "totalEquity": 966434.0,
+    "dayPnl": 888.0,
+    "dayReturnPct": 0.09,
+    "totalReturnPct": -3.36,
+    "unrealizedPnl": 692.0,
+    "realizedPnl": -34258.0,
+    "cashPct": 97.68
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.5833,
+    "up": 1993,
+    "down": 3417,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 110,
+    "limit_downs": 18,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.58:1, 3/3 major indices green, 110 limit-ups / 18 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 0.58:1 weak despite all 3 major indices green and 110涨停/18跌停; this is not panic, but it fails the minimum long-entry gate. Hot sectors are 电子化学品Ⅱ、半导体、航空机场、电视广播Ⅱ、其他电子Ⅱ, while oil-service and energy-linked groups are being de-risked. Existing portfolio alignment is weak at 0/1 positions in hot sectors. IV context is mostly normal-to-low (overall sentiment 偏乐观, avg IV rank 24.7%), so sizing is not the blocker; breadth and extension are."
+  }
+}

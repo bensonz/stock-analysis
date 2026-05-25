@@ -1,0 +1,171 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": 4.57,
+        "trend": "accelerating"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": 4.49,
+        "trend": "accelerating"
+      },
+      {
+        "name": "航空机场",
+        "5d_pct": 4.4,
+        "trend": "steady"
+      },
+      {
+        "name": "电视广播Ⅱ",
+        "5d_pct": 3.94,
+        "trend": "steady"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": 3.48,
+        "trend": "accelerating"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "油服工程",
+        "5d_pct": -4.75,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": -3.33,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "其他家电Ⅱ",
+        "5d_pct": -2.94,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "综合Ⅱ",
+        "5d_pct": -2.7,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "商用车",
+        "5d_pct": -2.54,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/1 positions in hot sectors",
+    "regime": "Index-level risk appetite is positive and hard-tech leadership is clear, but breadth is weak and rotation is hostile to resources/cyclicals."
+  },
+  "position_decisions": [
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "action": "HOLD",
+      "reason": "Position is +3.19% vs entry after 4.13% daily gain, above current stop and still within first 3 trading days so no time-stop issue. However sector alignment is weak: 有色金属 is not in today’s hot sector list while small metals strength looks more like isolated rebound than broad leadership. Keep only because price is working and stop discipline is clear; do not add.",
+      "sector_rank": "below top 30%",
+      "new_stop": 51.54,
+      "pnl_pct": 3.19,
+      "days_held": 3,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688205",
+      "name": "德科立",
+      "reason": "Strong communication/CPO theme and valid RPS120 94.86, but market buy gate fails on breadth (0.58:1). Even aside from regime, upcoming 2026-05-27 unlock is a near-term overhang.",
+      "rps120": 94.86
+    },
+    {
+      "code": "688372",
+      "name": "伟测科技",
+      "reason": "Semiconductor sector is hot and setup is relatively tight, but RPS120 93.5 is extended-zone and dist_ma20_pct 13.9% exceeds the 12% anti-chase limit. No entry.",
+      "rps120": 93.5
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "MA structure is acceptable and RPS120 89.59 is in range, but sector is 军工电子 rather than today’s top-30% leadership groups. Weak-tape default says skip non-leading sectors.",
+      "rps120": 89.59
+    },
+    {
+      "code": "300666",
+      "name": "江丰电子",
+      "reason": "Semiconductor is hot and catalyst is real, but dist_ma10_pct 8.0 is at the chase threshold and dist_ma20_pct 25.5 is far beyond the 12% limit. Too extended for a fresh long.",
+      "rps120": 93.84
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "reason": "Sector is #1 today, but dist_ma5_pct 6.6%, dist_ma10_pct 12.8%, dist_ma20_pct 27.4% all violate anti-chase rules. Wait for pullback.",
+      "rps120": 89.11
+    },
+    {
+      "code": "300739",
+      "name": "明阳电路",
+      "reason": "PCB/元件 direction is active, but dist_ma10_pct 9.6% and dist_ma20_pct 18.2% exceed anti-chase limits. No current price issue needed; the setup itself is too extended.",
+      "rps120": 92.51
+    },
+    {
+      "code": "002810",
+      "name": "山东赫达",
+      "reason": "Only candidate with usable MA structure and VCP tag, but 化学制品 is not in today’s top leadership list and market buy gate fails. In weak breadth, this is skip rather than force a small buy.",
+      "rps120": 94.9
+    },
+    {
+      "code": "301358",
+      "name": "湖南裕能",
+      "reason": "Battery chain lacks clear sector leadership today, and stock is below MA5/MA10 with 10-day event marked as price weakness in input. Not the kind of strength to buy in a weak breadth tape.",
+      "rps120": 93.78
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "No add. Existing position only. Sector is outside today’s hot groups, so despite acceptable RPS and MA structure this is not a fresh-entry setup under sector-first rules.",
+      "rps120": 91.21
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Today is a classic 'green indices, weak breadth' trap: 3/3 major indices are up, but up/down is only 0.58:1, so index strength did not translate into stock-selection breadth.",
+      "type": "signal",
+      "tags": [
+        "timing",
+        "entry-filter",
+        "market-breadth"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "When gains are concentrated in a narrow hard-tech leadership basket, chasing new names outside the strongest pockets usually leads to poor entry quality despite positive index prints."
+    },
+    {
+      "text": "The anti-chase MA filter is doing heavy lifting again: many of the strongest hard-tech names are in the right sectors but still unbuyable because distance from MA10/MA20 is too large.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "In momentum markets, the best stories often appear after vertical price expansion; MA distance prevents paying peak emotion and improves reward-to-risk by forcing entries near support."
+    },
+    {
+      "text": "Resource rebound is weaker than hard-tech leadership; existing positions in non-hot sectors can be held only while price is behaving, but they should not be averaged up or replicated.",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "exit-rule",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h028",
+      "mechanism": "When capital is rotating aggressively toward semis/electronics, lagging cyclicals may rise on idiosyncratic flow but lack the sector tailwind needed for multiple expansion and follow-through."
+    }
+  ],
+  "market_summary": "Breadth 0.58:1 weak despite all 3 major indices green and 110涨停/18跌停; this is not panic, but it fails the minimum long-entry gate. Hot sectors are 电子化学品Ⅱ、半导体、航空机场、电视广播Ⅱ、其他电子Ⅱ, while oil-service and energy-linked groups are being de-risked. Existing portfolio alignment is weak at 0/1 positions in hot sectors. IV context is mostly normal-to-low (overall sentiment 偏乐观, avg IV rank 24.7%), so sizing is not the blocker; breadth and extension are.",
+  "market_sentiment": "neutral",
+  "market_call": "观望"
+}
