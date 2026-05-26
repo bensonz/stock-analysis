@@ -1,0 +1,45 @@
+{
+  "date": "2026-05-26",
+  "actions": [
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "action": "HOLD",
+      "price": 58.12,
+      "pnl_pct": 7.13,
+      "note": "Only active position is aligned with one of today's strongest groups. Current price 58.12 is +7.13% vs entry 54.25, above prior stop 51.54, and today's sector leadership in 贵金属/工业金属 supports holding. Not yet at +10%, so no mechanical stop raise under Rule 5."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 1,
+    "totalEquity": 967290.0,
+    "dayPnl": 988.0,
+    "dayReturnPct": 0.1,
+    "totalReturnPct": -3.27,
+    "unrealizedPnl": 1548.0,
+    "realizedPnl": -34258.0,
+    "cashPct": 97.6
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.2091,
+    "up": 942,
+    "down": 4506,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 44,
+    "limit_downs": 29,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.21:1, 0/3 major indices green, 44 limit-ups / 29 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 0.21:1 bearish/panic, 44涨停/29跌停, and 0/3 of 上证指数/深证成指/创业板指 are green, so the buy gate is decisively closed. Hot sectors (top 5): 贵金属(+2.26%), 工业金属(+1.79%), 电机Ⅱ(+1.38%), 玻璃玻纤(+1.11%), 饲料(+1.11%). Cold sectors (bottom 5): 航天装备Ⅱ(-4.90%), 其他电子Ⅱ(-4.47%), 电视广播Ⅱ(-4.45%), 综合Ⅱ(-4.19%), 军工电子Ⅱ(-3.75%). Position sector alignment: 1/1 positions in hot sectors. IV context is mixed: main-board proxies are complacent/low IV while 创业板IV偏高, but IV is secondary today because panic breadth already blocks all new longs."
+  }
+}

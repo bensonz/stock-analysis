@@ -2,7 +2,7 @@
   "date": "2026-05-25",
   "status": "degraded",
   "exit_code": 0,
-  "total_duration_sec": 57.4,
+  "total_duration_sec": 69.0,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -10,15 +10,15 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 176.7
+          "latency_ms": 122.7
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 515.9
+          "latency_ms": 425.2
         },
         "pricedb": {
           "status": "ok",
-          "latest_date": "2026-05-22",
+          "latest_date": "2026-05-25",
           "stale": false
         }
       }
@@ -31,16 +31,16 @@
     },
     "collect": {
       "status": "ok",
-      "duration_sec": 19.3,
+      "duration_sec": 12.2,
       "errors": []
     },
     "llm_analysis": {
       "status": "ok",
-      "duration_sec": 38.0
+      "duration_sec": 56.6
     },
     "apply": {
       "status": "ok",
-      "duration_sec": 0.1
+      "duration_sec": 0.2
     },
     "validate": {
       "status": "ok",
