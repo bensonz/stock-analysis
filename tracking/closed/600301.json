@@ -1,7 +1,7 @@
 {
   "code": "600301",
   "name": "华锡有色",
-  "status": "active",
+  "status": "closed",
   "thesis": "小金属方向有资金回流，RPS处于可做区间且价格紧贴MA结构，不属于追高形态，适合在强市场下小仓试错。",
   "entryDate": "2026-05-22",
   "entryPrice": 54.25,
@@ -44,15 +44,22 @@
       "change_pct": 7.13,
       "action": "HOLD",
       "note": "Only active position is aligned with one of today's strongest groups. Current price 58.12 is +7.13% vs entry 54.25, above prior stop 51.54, and today's sector leadership in 贵金属/工业金属 supports holding. Not yet at +10%, so no mechanical stop raise under Rule 5."
+    },
+    {
+      "date": "2026-05-27",
+      "price": 57.35,
+      "change_pct": 5.71,
+      "action": "SELL",
+      "note": "Sector alignment broke badly: holding is in 有色金属 while cold list shows 贵金属 -5.05% and 工业金属 -3.51%. Stock is down -6.32% today to 57.35 from prev_close 61.22, which also breaches the hard -5% stop versus 54.25 entry threshold (51.54 stop remains the mechanical line, but today's tape confirms sector failure risk). In V2, cold-sector gravity and panic regime both argue to exit rather than hope."
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-05-27",
+  "exitPrice": 57.35,
+  "exitReason": "Sector alignment broke badly: holding is in 有色金属 while cold list shows 贵金属 -5.05% and 工业金属 -3.51%. Stock is down -6.32% today to 57.35 from prev_close 61.22, which also breaches the hard -5% stop versus 54.25 entry threshold (51.54 stop remains the mechanical line, but today's tape confirms sector failure risk). In V2, cold-sector gravity and panic regime both argue to exit rather than hope.",
+  "returnPct": 5.71,
+  "holdingDays": 5,
+  "lessonLearned": "",
   "createdAt": "2026-05-22T11:36:51.029089+08:00",
-  "updatedAt": "2026-05-26T11:42:45.719278+08:00",
+  "updatedAt": "2026-05-27T11:41:54.310736+08:00",
   "trackerVersion": "2.1"
 }
