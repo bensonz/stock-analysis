@@ -3,46 +3,47 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1779853241.932989,
+      "start": 1779867312.6257422,
       "errors": [],
-      "end": 1779853256.043217,
-      "duration_sec": 14.1
+      "end": 1779867324.678275,
+      "duration_sec": 12.1
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 6559,
+      "response_size_bytes": 13673,
       "tokens": {
-        "input_tokens": 154118,
-        "output_tokens": 2319
+        "input_tokens": 225839,
+        "output_tokens": 6944
       },
-      "rounds": 2,
-      "tool_calls_count": 8,
-      "duration_sec": 58.2,
+      "rounds": 3,
+      "tool_calls_count": 6,
+      "duration_sec": 148.4,
       "fallback_used": false,
       "provider": "openai",
-      "decision_source": "GPT primary",
-      "primary_model": "gpt-5.4"
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
     },
     {
       "phase": "apply",
-      "start": 1779853314.310102,
+      "start": 1779867473.120793,
       "actions": [
-        "SELL 600301",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=82",
-        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=10",
-        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=54",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=84",
+        "Hypothesis: Created h038 (observation): Today's sector rotation is textbook risk-off: 白酒 +2.18%, 煤炭 +1.70% (defense) vs ...",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=12",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=57",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=11",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1779853314.478497,
-      "duration_sec": 0.2
+      "end": 1779867473.602962,
+      "duration_sec": 0.5
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 72.5
+    "totalDurationSec": 161.0
   }
 }

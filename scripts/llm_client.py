@@ -3,8 +3,8 @@
 llm_client.py — LLM orchestration for the daily analysis pipeline.
 
 Supported provider modes:
-- openai: GPT-5.4 only, full prompt + tool loop + JSON refine
-- hybrid: Claude research/tool pass, then GPT-5.4 final decision
+- openai: OpenAI-compatible model only, full prompt + tool loop + JSON refine
+- hybrid: Claude research/tool pass, then OpenAI-compatible final decision
 - anthropic: Claude only, full prompt + tool loop + JSON refine
 
 Tools: web_search (Tavily), web_fetch (direct HTTP)
@@ -434,6 +434,40 @@ OPENAI_TOOLS = [
 ]
 
 
+def _as_dict(obj) -> dict:
+    """Best-effort object-to-dict helper for SDK models with provider-specific fields."""
+    if obj is None:
+        return {}
+    if isinstance(obj, dict):
+        return obj
+    if hasattr(obj, "model_dump"):
+        return obj.model_dump(exclude_none=True)
+    if hasattr(obj, "dict"):
+        return obj.dict(exclude_none=True)
+    return {k: v for k, v in vars(obj).items() if v is not None}
+
+
+def _openai_assistant_message_to_param(msg) -> dict:
+    """Serialize assistant messages while preserving provider-specific fields.
+
+    DeepSeek V4 Pro in thinking mode requires `reasoning_content` to be
+    passed back on the next request when the assistant message also contains
+    tool calls. The OpenAI Python SDK model does not expose that field in its
+    typed schema, but it is retained in `model_extra` / dumped dicts. Preserve
+    it here instead of rebuilding only standard OpenAI fields.
+    """
+    dumped = _as_dict(msg)
+    out = {"role": "assistant", "content": dumped.get("content") or ""}
+    if dumped.get("tool_calls"):
+        out["tool_calls"] = dumped["tool_calls"]
+    reasoning = dumped.get("reasoning_content")
+    if not reasoning and hasattr(msg, "model_extra") and isinstance(msg.model_extra, dict):
+        reasoning = msg.model_extra.get("reasoning_content")
+    if reasoning:
+        out["reasoning_content"] = reasoning
+    return out
+
+
 def _run_openai_tool_loop(
     client: openai.OpenAI,
     messages: list,
@@ -476,19 +510,10 @@ def _run_openai_tool_loop(
             messages.append({"role": "assistant", "content": final_text})
             return final_text, total_input, total_output, round_num
 
-        # Append assistant message with tool calls
-        messages.append({
-            "role": "assistant",
-            "content": msg.content or "",
-            "tool_calls": [
-                {
-                    "id": tc.id,
-                    "type": "function",
-                    "function": {"name": tc.function.name, "arguments": tc.function.arguments},
-                }
-                for tc in tool_calls
-            ],
-        })
+        # Append assistant message with tool calls.
+        # Preserve provider-specific fields (notably DeepSeek's reasoning_content)
+        # so the next tool-result request is valid in thinking mode.
+        messages.append(_openai_assistant_message_to_param(msg))
 
         # Execute tool calls
         for tc in tool_calls:
@@ -526,7 +551,8 @@ def _run_openai_tool_loop(
     return "", total_input, total_output, MAX_TOOL_ROUNDS
 
 
-OPENAI_MODEL = "gpt-5.4"
+OPENAI_MODEL = _get_env_value("OPENAI_MODEL", "LLM_OPENAI_MODEL", default="gpt-5.4") or "gpt-5.4"
+OPENAI_MODEL_LABEL = _get_env_value("OPENAI_MODEL_LABEL", default=OPENAI_MODEL) or OPENAI_MODEL
 GPT_TIMEOUT = 120  # seconds — no more hanging
 
 
@@ -536,6 +562,10 @@ def normalize_llm_provider(provider: str | None = None) -> str:
     aliases = {
         "gpt": "openai",
         "gpt-5.4": "openai",
+        "deepseek": "openai",
+        "deepseek-v4": "openai",
+        "deepseek-v4-pro": "openai",
+        "deepseek-v4-flash": "openai",
         "openai": "openai",
         "hybrid": "hybrid",
         "claude+gpt": "hybrid",
@@ -865,7 +895,7 @@ def _call_openai_only(
     tool_log = []
     start_time = time.time()
 
-    print("  [Pass 1] GPT-5.4 analysis...", file=sys.stderr)
+    print(f"  [Pass 1] {OPENAI_MODEL_LABEL} analysis...", file=sys.stderr)
     pass1_text, in1, out1, rounds1 = _run_openai_tool_loop(
         client, messages, OPENAI_MODEL, max_tokens, temperature, tool_log, label="P1 "
     )
@@ -880,7 +910,7 @@ def _call_openai_only(
     total_rounds = rounds1
 
     if not gpt_json:
-        print("  [Pass 1b] GPT-5.4 JSON refine...", file=sys.stderr)
+        print(f"  [Pass 1b] {OPENAI_MODEL_LABEL} JSON refine...", file=sys.stderr)
         messages.append({"role": "user", "content": REFINE_PROMPT})
         refine_text, refine_in, refine_out, refine_rounds = _run_openai_tool_loop(
             client, messages, OPENAI_MODEL, max_tokens, temperature, tool_log, label="P1b "
@@ -893,9 +923,9 @@ def _call_openai_only(
         total_rounds += refine_rounds
         if gpt_json:
             primary_text = refine_text
-            print("  GPT JSON extracted", file=sys.stderr)
+            print("  OpenAI-compatible JSON extracted", file=sys.stderr)
         else:
-            print("  WARNING: GPT produced no valid JSON", file=sys.stderr)
+            print("  WARNING: OpenAI-compatible model produced no valid JSON", file=sys.stderr)
 
     return {
         "text": primary_text,
@@ -909,7 +939,7 @@ def _call_openai_only(
         "rounds": total_rounds,
         "duration_sec": round(time.time() - start_time, 1),
         "provider": "openai",
-        "decision_source": "GPT primary",
+        "decision_source": f"{OPENAI_MODEL_LABEL} primary",
         "primary_model": OPENAI_MODEL,
     }
 
@@ -969,7 +999,7 @@ def _call_hybrid(
             summary = build_summary(phase1_data)
             gpt_prompt = build_gpt_prompt(analyst_md, summary, pass1_text)
 
-            print("  [Pass 2] GPT-5.4 decision...", file=sys.stderr)
+            print(f"  [Pass 2] {OPENAI_MODEL_LABEL} decision...", file=sys.stderr)
             print(f"    GPT prompt: ~{len(gpt_prompt)//1000}KB", file=sys.stderr)
 
             response = oai_client.chat.completions.create(
@@ -992,9 +1022,9 @@ def _call_hybrid(
 
             gpt_json = _parse_json_from_text(gpt_text)
             if not gpt_json:
-                print("  WARNING: Could not parse GPT response as JSON", file=sys.stderr)
+                print("  WARNING: Could not parse OpenAI-compatible model response as JSON", file=sys.stderr)
         except Exception as e:
-            print(f"  WARNING: GPT-5.4 pass failed: {e}", file=sys.stderr)
+            print(f"  WARNING: {OPENAI_MODEL_LABEL} pass failed: {e}", file=sys.stderr)
     elif not openai_key:
         print("  [Skip] No OPENAI_API_KEY — Claude-only fallback within hybrid mode", file=sys.stderr)
     elif not phase1_data:
@@ -1002,7 +1032,7 @@ def _call_hybrid(
 
     if gpt_json:
         primary_text = gpt_text
-        decision_source = "GPT primary"
+        decision_source = f"{OPENAI_MODEL_LABEL} primary"
         fallback_used = False
     else:
         primary_text = pass1_text
@@ -1105,19 +1135,19 @@ def call_llm_v1(
         try:
             oc = _build_openai_client()
             om = [{"role": "user", "content": prompt}]
-            print("  [P3] GPT analysis...", file=sys.stderr)
+            print(f"  [P3] {OPENAI_MODEL_LABEL} analysis...", file=sys.stderr)
             p3, i3, o3, r3 = _run_openai_tool_loop(oc, om, OPENAI_MODEL, max_tokens, temperature, tool_log, label="P3 ")
             ti += i3; to += o3; tr += r3
             if output_dir:
                 (output_dir / "pass3_response.txt").write_text(p3, encoding="utf-8")
-            print("  [P4] GPT refine...", file=sys.stderr)
+            print(f"  [P4] {OPENAI_MODEL_LABEL} refine...", file=sys.stderr)
             om.append({"role": "user", "content": REFINE_PROMPT})
             p4, i4, o4, r4 = _run_openai_tool_loop(oc, om, OPENAI_MODEL, max_tokens, temperature, tool_log, label="P4 ")
             ti += i4; to += o4; tr += r4
             if output_dir:
                 (output_dir / "pass4_response.txt").write_text(p4, encoding="utf-8")
         except Exception as e:
-            print(f"  WARNING: GPT failed: {e}", file=sys.stderr)
+            print(f"  WARNING: {OPENAI_MODEL_LABEL} failed: {e}", file=sys.stderr)
 
     return {
         "text": p2, "pass1_text": p1, "pass3_text": p3, "pass4_text": p4,

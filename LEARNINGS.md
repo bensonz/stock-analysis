@@ -1258,3 +1258,18 @@
 - When breadth collapses to 0.18:1 with 38跌停 and only 1 of 3 major indices green, even strong-looking setups in hot sectors should default to no new positions.
 - Cold-sector gravity remains stronger than single-stock PnL: a profitable resource position can still become a sell once its sector falls into the bottom cluster during a broad de-risking day.
 - The MA-distance anti-chase filter is still doing useful work inside today's stronger groups; several hot-sector names fail because they are 20%+ above MA20.
+
+### 自动更新 (2026-05-27)
+
+- Entry regime hard block validated: breadth 0.20:1, all 3 indices red, 34跌停. System correctly blocks new longs. Cash is the right position.
+- IV divergence between large-cap ETFs (300ETF 14.2%, 500ETF 7.3% — extremely low) and tech ETFs (创业板 51.8% elevated, 科创50 39.9% normal) preceded today's sell-off. This split may be a leading indicator of rotation-driven corrections.
+- 688002 睿创微纳 is the priority candidate to monitor when regime clears: RPS120 89.6% (sweet spot), 0 risks, MA tight (dist_ma5 0.4%, dist_ma10 -2.7%), score_company 9.3, net profit +228%, 21% fund ownership. Best risk/reward in the pool.
+- Conference-driven sector moves (电池 +0.96% driven by 国际储能电池大会 5/25-27) tend to fade after the event ends. The conference closes today. Battery names like 湖南裕能, 恩捷股份, 德方纳米 may face headwinds tomorrow.
+
+### 自动更新 (2026-05-27)
+
+- Hard_block regime filter validated: breadth 0.22:1 + 1/3 indices green correctly prevents entry into a quant-driven sell-off. Cash is the right position today.
+- Today's sector rotation is textbook risk-off: 白酒 +2.18%, 煤炭 +1.70% (defense) vs non-ferrous materials -5.65%, precious metals -5.40% (cyclicals crushed). Momentum strategies should sit out risk-off rotations entirely — these defensive sectors produce flat/slow returns, not the 10-20% runs we target.
+- 电池 sector resilience (+1.40%) against a -2.80% 科创50 rout suggests genuine fundamental support from lithium price surge (+12.8% MoM) and record battery production (249GWh). When regime clears, battery/lithium chain stocks should be priority #1 for new entries.
+- 伟测科技 (688372) and 睿创微纳 (688002) both show ideal pullback-to-MA setups: dist_ma5 < 1%, 0 risk factors, strong fundamentals. These are the highest-conviction re-entry candidates when breadth improves. Low-risk pullback entries in strong sectors typically rebound fastest after a sell-off.
+- Multiple candidates in today's pool would fail Rule 2b even in a healthy regime: 联瑞新材 (dist_ma5=+8.5%), 帝尔激光 (+9.4%), 凯旺科技 (+9.4%), 民爆光电 (+19.0%). The MA-distance filter is doing real work keeping us from chasing extended names that would get crushed first in a sell-off. h027 confirmed.

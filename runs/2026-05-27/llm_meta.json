@@ -1,91 +1,71 @@
 {
   "provider": "openai",
-  "primary_model": "gpt-5.4",
-  "decision_source": "GPT primary",
-  "input_tokens": 154118,
-  "output_tokens": 2319,
-  "rounds": 2,
-  "duration_sec": 58.2,
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 225839,
+  "output_tokens": 6944,
+  "rounds": 3,
+  "duration_sec": 148.4,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+2026-05-27"
+        "url": "https://www.baidu.com/s?wd=A股+大跌+2026年5月27日+原因",
+        "maxChars": 5000
       },
-      "result_length": 3000
+      "result_length": 5000
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=A股+跌停+有色金属+贵金属+2026-05-27"
+        "url": "https://www.baidu.com/s?wd=半导体+板块+下跌+2026年5月",
+        "maxChars": 5000
       },
-      "result_length": 3000
+      "result_length": 28
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=电池+板块+下跌+2026-05-27+A股"
+        "url": "https://www.baidu.com/s?wd=白酒+上涨+2026年5月27日",
+        "maxChars": 5000
       },
-      "result_length": 3000
+      "result_length": 5000
     },
     {
       "pass": "P1",
-      "round": 1,
+      "round": 2,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=光伏设备+板块+上涨+2026-05-27+A股"
+        "maxChars": 5000,
+        "url": "https://www.baidu.com/s?wd=电池+板块+2026年5月27日+上涨"
       },
-      "result_length": 3000
+      "result_length": 5000
     },
     {
       "pass": "P1",
-      "round": 1,
+      "round": 2,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=华锡有色+2026-05-27+公告+快讯"
+        "maxChars": 5000,
+        "url": "https://www.baidu.com/s?wd=A股+防御性板块+逆势走强+2026年5月27日"
       },
-      "result_length": 3000
+      "result_length": 5000
     },
     {
       "pass": "P1",
-      "round": 1,
+      "round": 2,
       "tool": "web_fetch",
       "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=小金属+板块+2026-05-27+A股"
+        "maxChars": 5000,
+        "url": "https://www.baidu.com/s?wd=科创50+大跌+2026年5月27日+半导体"
       },
-      "result_length": 3000
-    },
-    {
-      "pass": "P1",
-      "round": 1,
-      "tool": "web_fetch",
-      "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=创业板指+逆势上涨+2026-05-27"
-      },
-      "result_length": 3000
-    },
-    {
-      "pass": "P1",
-      "round": 1,
-      "tool": "web_fetch",
-      "input": {
-        "maxChars": 3000,
-        "url": "https://www.baidu.com/s?wd=A股+午评+2026-05-27+暴跌"
-      },
-      "result_length": 3000
+      "result_length": 5000
     }
   ],
   "fallback_used": false

@@ -663,11 +663,19 @@
           {
             "date": "2026-05-27",
             "detail": "When breadth collapses to 0.18:1 with 38跌停 and only 1 of 3 major indices green, even strong-looking setups in hot sectors should default to no new positions."
+          },
+          {
+            "date": "2026-05-27",
+            "detail": "Entry regime hard block validated: breadth 0.20:1, all 3 indices red, 34跌停. System correctly blocks new longs. Cash is the right position."
+          },
+          {
+            "date": "2026-05-27",
+            "detail": "Hard_block regime filter validated: breadth 0.22:1 + 1/3 indices green correctly prevents entry into a quant-driven sell-off. Cash is the right position today."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 82,
+      "sampleSize": 84,
       "hitRate": 1.0,
       "confidence": 0.988,
       "tags": [],
@@ -1196,13 +1204,25 @@
           {
             "date": "2026-05-27",
             "detail": "The MA-distance anti-chase filter is still doing useful work inside today's stronger groups; several hot-sector names fail because they are 20%+ above MA20."
+          },
+          {
+            "date": "2026-05-27",
+            "detail": "IV divergence between large-cap ETFs (300ETF 14.2%, 500ETF 7.3% — extremely low) and tech ETFs (创业板 51.8% elevated, 科创50 39.9% normal) preceded today's sell-off. This split may be a leading indicator of rotation-driven corrections."
+          },
+          {
+            "date": "2026-05-27",
+            "detail": "688002 睿创微纳 is the priority candidate to monitor when regime clears: RPS120 89.6% (sweet spot), 0 risks, MA tight (dist_ma5 0.4%, dist_ma10 -2.7%), score_company 9.3, net profit +228%, 21% fund ownership. Best risk/reward in the pool."
+          },
+          {
+            "date": "2026-05-27",
+            "detail": "伟测科技 (688372) and 睿创微纳 (688002) both show ideal pullback-to-MA setups: dist_ma5 < 1%, 0 risk factors, strong fundamentals. These are the highest-conviction re-entry candidates when breadth improves. Low-risk pullback entries in strong sectors typically rebound fastest after a sell-off."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 54,
+      "sampleSize": 57,
       "hitRate": 1.0,
-      "confidence": 0.982,
+      "confidence": 0.983,
       "tags": [
         "entry-filter",
         "timing"
@@ -1456,7 +1476,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-05-22",
+      "lastTested": "2026-05-27",
       "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes.",
       "evidence": {
         "supporting": [
@@ -1499,13 +1519,17 @@
           {
             "date": "2026-05-22",
             "detail": "今天最重要的不是是否允许开仓，而是强市场里大多数候选股依然因为均线乖离过大而不能买；热板块并不能覆盖追高风险。"
+          },
+          {
+            "date": "2026-05-27",
+            "detail": "Multiple candidates in today's pool would fail Rule 2b even in a healthy regime: 联瑞新材 (dist_ma5=+8.5%), 帝尔激光 (+9.4%), 凯旺科技 (+9.4%), 民爆光电 (+19.0%). The MA-distance filter is doing real work keeping us from chasing extended names that would get crushed first in a sell-off. h027 confirmed."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 10,
+      "sampleSize": 11,
       "hitRate": 1.0,
-      "confidence": 0.917,
+      "confidence": 0.923,
       "tags": [
         "entry-filter",
         "timing",
@@ -1564,13 +1588,21 @@
           {
             "date": "2026-05-27",
             "detail": "Cold-sector gravity remains stronger than single-stock PnL: a profitable resource position can still become a sell once its sector falls into the bottom cluster during a broad de-risking day."
+          },
+          {
+            "date": "2026-05-27",
+            "detail": "Conference-driven sector moves (电池 +0.96% driven by 国际储能电池大会 5/25-27) tend to fade after the event ends. The conference closes today. Battery names like 湖南裕能, 恩捷股份, 德方纳米 may face headwinds tomorrow."
+          },
+          {
+            "date": "2026-05-27",
+            "detail": "电池 sector resilience (+1.40%) against a -2.80% 科创50 rout suggests genuine fundamental support from lithium price surge (+12.8% MoM) and record battery production (249GWh). When regime clears, battery/lithium chain stocks should be priority #1 for new entries."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 10,
+      "sampleSize": 12,
       "hitRate": 1.0,
-      "confidence": 0.917,
+      "confidence": 0.929,
       "tags": [
         "sector",
         "timing"
@@ -1833,6 +1865,34 @@
         "sector",
         "timing",
         "entry-filter"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h038",
+      "text": "Today's sector rotation is textbook risk-off: 白酒 +2.18%, 煤炭 +1.70% (defense) vs non-ferrous materials -5.65%, precious metals -5.40% (cyclicals crushed). Momentum strategies should sit out risk-off rotations entirely — these defensive sectors produce flat/slow returns, not the 10-20% runs we target.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-05-27",
+      "lastTested": "2026-05-27",
+      "mechanism": "Risk-off sectors (liquor, coal, conglomerates) are low-volatility havens. They don't generate momentum profits. When the market rotates into them, it means risk appetite has collapsed and momentum strategies have no edge.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-05-27",
+            "detail": "Today's sector rotation is textbook risk-off: 白酒 +2.18%, 煤炭 +1.70% (defense) vs non-ferrous materials -5.65%, precious metals -5.40% (cyclicals crushed). Momentum strategies should sit out risk-off rotations entirely — these defensive sectors produce flat/slow returns, not the 10-20% runs we target."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
+        "regime"
       ],
       "parentRule": null,
       "retiredDate": null,

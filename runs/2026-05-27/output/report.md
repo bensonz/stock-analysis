@@ -4,18 +4,18 @@
 
 | 指数 | 收盘 | 涨跌幅 |
 |------|------|--------|
-| 上证指数 | 4099.23 | -1.11% |
-| 深证成指 | 15809.79 | -0.42% |
-| 创业板指 | 4071.41 | +0.70% |
-| 科创50 | 1851.68 | -0.86% |
+| 上证指数 | 4093.73 | -1.25% |
+| 深证成指 | 15736.47 | -0.88% |
+| 创业板指 | 4045.77 | +0.07% |
+| 科创50 | 1815.45 | -2.80% |
 
-涨跌比: 831涨 / 4645跌 / 5510总
+涨跌比: 974涨 / 4489跌 / 5507总
 
-**热门板块**: 综合Ⅱ(+2.56%), 电池(+1.64%), 影视院线(+1.59%), 光伏设备(+1.32%), 电网设备(+0.76%)
+**热门板块**: 综合Ⅱ(+2.74%), 白酒Ⅱ(+2.18%), 煤炭开采(+1.70%), 影视院线(+1.50%), 电池(+1.40%)
 
-**冷门板块**: 贵金属(-5.05%), 非金属材料Ⅱ(-4.17%), 林业Ⅱ(-3.95%), 油服工程(-3.57%), 工业金属(-3.51%)
+**冷门板块**: 非金属材料Ⅱ(-5.65%), 贵金属(-5.40%), 林业Ⅱ(-5.19%), 家电零部件Ⅱ(-4.36%), 工业金属(-3.97%)
 
-Breadth 0.18:1 panic, 45涨停/38跌停, 4645 stocks down and only 创业板指 green while 上证指数/深证成指 both red. Hot sectors (top 5): 综合Ⅱ +2.56%, 电池 +1.64%, 影视院线 +1.59%, 光伏设备 +1.32%, 电网设备 +0.76%. Cold sectors (bottom 5): 贵金属 -5.05%, 非金属材料Ⅱ -4.17%, 林业Ⅱ -3.95%, 油服工程 -3.57%, 工业金属 -3.51%. Position sector alignment: 0/1 positions in hot sectors. IV context is mixed: broad-market proxies like 300ETF IV Rank 14.2% are complacent, while 创业板ETF IV Rank 51.8% is elevated; regardless, entry regime is hard-blocked by panic breadth, so no fresh longs.
+PANIC TAPE: Breadth 0.22:1 (974 up / 4489 down), 39 stocks at 跌停, only 创业板指 barely green (+0.07%). Quant cascade + wave of insider selling at tech highs driving broad rout. Defense sectors (白酒+2.18%, 煤炭+1.70%) the only hiding spots. 科创50 -2.80% leads losses. Battery (+1.40%) lone resilient growth sector. IV mixed: 300ETF complacent at 14.2% rank, 创业板 elevated at 51.8%. NO new positions — hard_block active. 100% cash.
 
 ## 策略池扫描
 
@@ -24,22 +24,25 @@ Breadth 0.18:1 panic, 45涨停/38跌停, 4645 stocks down and only 创业板指 
 
 ## 跳过标的
 
-1. **山东赫达** (002810) (RPS 94.9%) — No new longs in panic regime. Candidate itself is one of the cleaner setups with RPS120 94.9 and VCP quality SETUP, but entry gate is hard-blocked by breadth 0.18:1 and only 1 of 3 major indices green.
-2. **湖南裕能** (301358) (RPS 93.78%) — Sector is in today's top group (电池), and catalyst is strong, but no entry in panic regime. Also recent event flow notes the stock's 10-day strength is weak and current price is below MA5/MA10, so this is not a must-act long today.
-3. **睿创微纳** (688002) (RPS 89.59%) — Technical shape is acceptable with dist_ma5_pct 0.4, dist_ma10_pct -2.7, dist_ma20_pct 8.0, but sector is not in the provided top sector list and market regime blocks fresh risk. Skip despite decent RPS.
-4. **德科立** (688205) (RPS 94.86%) — No new longs in panic tape. Even aside from regime, same-day event flow shows communication/network equipment weakened intraday, so this is not the session to buy the dip.
-5. **江丰电子** (300666) (RPS 93.84%) — Fails anti-chase rule: dist_ma10_pct 8.0 is at the upper limit and dist_ma20_pct 25.5 is well above the 12% maximum. Market regime also blocks entries.
-6. **伟测科技** (688372) (RPS 93.5%) — Almost qualifies on momentum and near-term MA support, but dist_ma20_pct 13.9 exceeds the 12% anti-chase cap. Panic regime means no exception.
-7. **欧陆通** (300870) (RPS 92.91%) — Sector backdrop is constructive, but dist_ma20_pct 31.2 fails anti-chase rule badly. In a panic tape, extended names are automatic skips.
-8. **帝尔激光** (300776) (RPS 90.89%) — 光伏设备 is hot, but this is textbook chasing: dist_ma5_pct 9.4, dist_ma10_pct 30.4, dist_ma20_pct 62.3 all violate entry limits.
-9. **华锡有色** (600301) (RPS 91.57%) — Held name, not a new buy candidate. Sector is cold and current position should be exited rather than added.
+1. **伟测科技** (688372) (RPS 93.5%) — Best candidate in pool: RPS120=93.5%, dist_ma5=+0.3% (ideal pullback to MA5), 0 risk factors, semiconductor testing leader. Sector trending. BUT regime is panic (breath 0.22:1, hard_block=true). Priority watch for when regime clears.
+2. **睿创微纳** (688002) (RPS 89.59%) — RPS120=89.6%, dist_ma5=+0.4% (at MA5 support), 0 risks, defense electronics leader, 7.5% northbound. SKIP: panic regime.
+3. **山东赫达** (002810) (RPS 94.9%) — Only VCP stock (SETUP quality), RPS120=94.9%, earnings beat catalyst, dist_ma5=-2.6% (pulled back to near MA5). SKIP: panic regime + 化学制品 sector not in top 30% today.
+4. **德科立** (688205) (RPS 94.86%) — RPS120=94.9%, dist_ma10=-0.2% (tight to MA10 support), CPO theme. SKIP: panic regime + PE=497 red flag.
+5. **湖南裕能** (301358) (RPS 93.78%) — Battery sector #5 hot (+1.40%), RPS120=93.8%, profit +1338%, lithium tailwind. dist_ma5=-6.8% (pulled back below MA5). SKIP: panic regime.
+6. **芯碁微装** (688630) (RPS 92.93%) — RPS120=92.9%, 0 risks, semicon equipment. BUT dist_ma10=+11.4% (Rule 2b violation: >8% chasing risk). SKIP: regime + overextended.
+7. **联瑞新材** (688300) (RPS 92.41%) — dist_ma5=+8.5% (Rule 2b violation), dist_ma20=+40.6%. Extreme overextension. SKIP: regime + massive chasing risk.
+8. **民爆光电** (301362) (RPS 99.82%) — dist_ma5=+19.0%, dist_ma20=+83.3%. Comically overextended. SKIP: regime + chasing.
+9. **帝尔激光** (300776) (RPS 90.89%) — dist_ma5=+9.4%, dist_ma20=+62.3%. Extreme extension. SKIP: regime + chasing risk.
+10. **凯旺科技** (301182) (RPS 94.49%) — dist_ma5=+9.4%, negative PE (loss-making), RPS120=94.5%. SKIP: regime + chasing + weak fundamentals.
 
 ## 今日研究结论
 
 - 新开仓: 0只
-- 跳过: 9只
+- 跳过: 10只
 
 ### 新教训
-- {'text': 'When breadth collapses to 0.18:1 with 38跌停 and only 1 of 3 major indices green, even strong-looking setups in hot sectors should default to no new positions.', 'type': 'rule', 'tags': ['timing', 'entry-filter', 'sector'], 'evidence_type': 'supporting', 'related_hypothesis': 'h013', 'mechanism': 'In panic tapes, individual momentum signals have lower follow-through because forced selling and index pressure dominate stock-specific setups.'}
-- {'text': 'Cold-sector gravity remains stronger than single-stock PnL: a profitable resource position can still become a sell once its sector falls into the bottom cluster during a broad de-risking day.', 'type': 'heuristic', 'tags': ['sector', 'exit-rule', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h028', 'mechanism': 'When capital rotates out of cyclicals/materials, winners in those groups lose sponsorship quickly and downside can accelerate before the stock-level stop is reached.'}
-- {'text': "The MA-distance anti-chase filter is still doing useful work inside today's stronger groups; several hot-sector names fail because they are 20%+ above MA20.", 'type': 'signal', 'tags': ['entry-filter', 'timing', 'sector'], 'evidence_type': 'supporting', 'related_hypothesis': 'h021', 'mechanism': 'Extended names have poor reward-to-risk because nearest support is too far below, so even correct themes can produce bad entries.'}
+- {'text': 'Hard_block regime filter validated: breadth 0.22:1 + 1/3 indices green correctly prevents entry into a quant-driven sell-off. Cash is the right position today.', 'type': 'signal', 'tags': ['entry-filter', 'regime'], 'evidence_type': 'supporting', 'related_hypothesis': 'h013', 'mechanism': 'When breadth collapses below 0.5:1 with only one index barely hanging on, even the best individual stock setups will be overwhelmed by systematic selling. The regime filter prevents buying into a falling knife.'}
+- {'text': "Today's sector rotation is textbook risk-off: 白酒 +2.18%, 煤炭 +1.70% (defense) vs non-ferrous materials -5.65%, precious metals -5.40% (cyclicals crushed). Momentum strategies should sit out risk-off rotations entirely — these defensive sectors produce flat/slow returns, not the 10-20% runs we target.", 'type': 'observation', 'tags': ['sector', 'regime'], 'evidence_type': 'supporting', 'mechanism': "Risk-off sectors (liquor, coal, conglomerates) are low-volatility havens. They don't generate momentum profits. When the market rotates into them, it means risk appetite has collapsed and momentum strategies have no edge."}
+- {'text': '电池 sector resilience (+1.40%) against a -2.80% 科创50 rout suggests genuine fundamental support from lithium price surge (+12.8% MoM) and record battery production (249GWh). When regime clears, battery/lithium chain stocks should be priority #1 for new entries.', 'type': 'signal', 'tags': ['sector', 'timing'], 'evidence_type': 'supporting', 'mechanism': "Sectors that hold green during a broad panic are showing relative strength backed by real demand. Battery production hitting records + lithium price rising creates fundamental support that shorts can't easily break."}
+- {'text': '伟测科技 (688372) and 睿创微纳 (688002) both show ideal pullback-to-MA setups: dist_ma5 < 1%, 0 risk factors, strong fundamentals. These are the highest-conviction re-entry candidates when breadth improves. Low-risk pullback entries in strong sectors typically rebound fastest after a sell-off.', 'type': 'heuristic', 'tags': ['entry-filter', 'timing'], 'evidence_type': 'supporting', 'mechanism': "Stocks that have already pulled back to MA5/MA10 support during a panic have already done their mean-reversion work. When the market stabilizes, they don't need to 'catch down' to their MAs before rallying — they're already at the launchpad."}
+- {'text': "Multiple candidates in today's pool would fail Rule 2b even in a healthy regime: 联瑞新材 (dist_ma5=+8.5%), 帝尔激光 (+9.4%), 凯旺科技 (+9.4%), 民爆光电 (+19.0%). The MA-distance filter is doing real work keeping us from chasing extended names that would get crushed first in a sell-off. h027 confirmed.", 'type': 'rule', 'tags': ['entry-filter'], 'evidence_type': 'supporting', 'related_hypothesis': 'h027', 'mechanism': "Extended stocks (dist_ma5 > 6%) have the most gravity to overcome. In a panic, they're the first profit-taking targets and suffer the largest drawdowns. The MA-distance filter protects against this systematically."}

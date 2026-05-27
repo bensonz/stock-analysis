@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-05-27T11:40:41.946503+08:00",
+  "snapshot_time": "2026-05-27T15:35:12.633097+08:00",
   "snapshot_type": "pre_run",
   "date": "2026-05-27",
   "portfolio_config": {
@@ -11,109 +11,27 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-05-26T11:42:45.736469+08:00",
+    "lastUpdated": "2026-05-27T14:13:13.351927+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 967290.0,
-      "cash": 944042.0,
-      "investedValue": 23248.0,
-      "unrealizedPnl": 1548.0,
-      "realizedPnl": -34258.0,
-      "totalPnl": -32710.0,
-      "totalReturnPct": -3.27,
-      "positionsUsed": 1,
+      "totalEquity": 966982.0,
+      "cash": 966982.0,
+      "investedValue": 0.0,
+      "unrealizedPnl": 0.0,
+      "realizedPnl": -33018.0,
+      "totalPnl": -33018.0,
+      "totalReturnPct": -3.3,
+      "positionsUsed": 0,
       "positionsMax": 10,
-      "cashPct": 97.6,
-      "dayPnl": 988.0,
+      "cashPct": 100.0,
+      "dayPnl": 0.0,
       "minCashPct": 20,
-      "minCashValue": 193458.0,
-      "deployableCash": 750584.0
+      "minCashValue": 193396.4,
+      "deployableCash": 773585.6
     },
-    "activePositions": [
-      {
-        "code": "600301",
-        "name": "华锡有色",
-        "entryDate": "2026-05-22",
-        "entryPrice": 54.25,
-        "currentPrice": 58.12,
-        "pnl_pct": 7.13,
-        "stopLoss": 51.54,
-        "currentStop": 51.54,
-        "targetPrice": 62.0,
-        "status": "active",
-        "sector": "有色金属",
-        "shares": 400,
-        "allocation_pct": 3.0,
-        "allocatedCapital": 21700.0,
-        "currentValue": 23248.0,
-        "unrealizedPnl": 1548.0,
-        "volume": 131309,
-        "mavol30": 56084.47,
-        "volumeBelowMavol30": false,
-        "weight_pct": 2.4
-      }
-    ]
+    "activePositions": []
   },
-  "active_positions": {
-    "600301": {
-      "code": "600301",
-      "name": "华锡有色",
-      "status": "active",
-      "thesis": "小金属方向有资金回流，RPS处于可做区间且价格紧贴MA结构，不属于追高形态，适合在强市场下小仓试错。",
-      "entryDate": "2026-05-22",
-      "entryPrice": 54.25,
-      "targetPrice": 62.0,
-      "stopLoss": 51.54,
-      "currentStop": 51.54,
-      "allocation_pct": 3.0,
-      "shares": 400,
-      "allocatedCapital": 21700.0,
-      "rating": 2,
-      "rps120": 91.57,
-      "sector": "有色金属",
-      "catalysts": [],
-      "sourceWatchlist": "2026-05-22",
-      "history": [
-        {
-          "date": "2026-05-22",
-          "price": 54.25,
-          "change_pct": 0,
-          "action": "OPEN",
-          "note": "LLM开仓 华锡有色"
-        },
-        {
-          "date": "2026-05-22",
-          "price": 53.76,
-          "change_pct": -0.9,
-          "action": "HOLD",
-          "note": "持仓首日，现价53.76较入场54.25回撤仅-0.90%，未触发-5%止损或首3日-3%规则；盘中高点54.95说明仍有资金参与。缺点是所属有色金属不在今日前五热点，且当前仅高于止损4.13%，需紧盯，若资源线继续被硬科技抽血应快速退出。"
-        },
-        {
-          "date": "2026-05-25",
-          "price": 55.65,
-          "change_pct": 2.58,
-          "action": "HOLD",
-          "note": "持仓盈利且未触发止损/时间止损，现价55.65较入场54.25盈利约2.58%，第2个交易日内未触发首3日-3%规则。板块不在今日前五热点，属于非主线，只能继续持有观察、不能加仓。"
-        },
-        {
-          "date": "2026-05-26",
-          "price": 58.12,
-          "change_pct": 7.13,
-          "action": "HOLD",
-          "note": "Only active position is aligned with one of today's strongest groups. Current price 58.12 is +7.13% vs entry 54.25, above prior stop 51.54, and today's sector leadership in 贵金属/工业金属 supports holding. Not yet at +10%, so no mechanical stop raise under Rule 5."
-        }
-      ],
-      "exitDate": null,
-      "exitPrice": null,
-      "exitReason": null,
-      "returnPct": null,
-      "holdingDays": null,
-      "lessonLearned": null,
-      "createdAt": "2026-05-22T11:36:51.029089+08:00",
-      "updatedAt": "2026-05-26T11:42:45.719278+08:00",
-      "trackerVersion": "2.1"
-    }
-  },
+  "active_positions": {},
   "closed_positions": {
     "002046": {
       "code": "002046",
@@ -256,6 +174,19 @@
       "returnPct": -0.53,
       "holdingDays": 4,
       "sector": "冶钢原料",
+      "lessonLearned": ""
+    },
+    "600301": {
+      "code": "600301",
+      "name": "华锡有色",
+      "status": "closed",
+      "entryDate": "2026-05-22",
+      "exitDate": "2026-05-27",
+      "entryPrice": 54.25,
+      "exitPrice": 57.35,
+      "returnPct": 5.71,
+      "holdingDays": 5,
+      "sector": "有色金属",
       "lessonLearned": ""
     },
     "600426": {
