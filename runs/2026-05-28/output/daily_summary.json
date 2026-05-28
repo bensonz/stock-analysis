@@ -1,0 +1,37 @@
+{
+  "date": "2026-05-28",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 966982.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.3,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -33018.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.6333,
+    "up": 2081,
+    "down": 3286,
+    "positive_indices": [
+      "创业板指"
+    ],
+    "negative_indices": [
+      "上证指数",
+      "深证成指"
+    ],
+    "limit_ups": 89,
+    "limit_downs": 13,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.63:1, 1/3 major indices green, 89 limit-ups / 13 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "市场弱势：广度0.63:1偏空（2081涨/3286跌），仅创业板指+0.21%微涨，上证-0.14%、深证-0.26%收跌。科创50逆势+1.29%。涨停89家/跌停13家，非恐慌但买盘严重不足。材料板块轮动领涨（玻璃玻纤+5.63%、非金属材料+3.09%、小金属+2.68%），贵金属-3.68%领跌，消费/家电/零售全面走弱。IV分化：500ETF极低7.3%（自满），创业板ETF偏高52%。买入门槛不满足，维持100%现金。"
+  }
+}

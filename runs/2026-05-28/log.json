@@ -1,0 +1,49 @@
+{
+  "date": "2026-05-28",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1779939326.748132,
+      "errors": [],
+      "end": 1779939344.4243891,
+      "duration_sec": 17.7
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 12613,
+      "tokens": {
+        "input_tokens": 230177,
+        "output_tokens": 9672
+      },
+      "rounds": 3,
+      "tool_calls_count": 8,
+      "duration_sec": 185.2,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1779939529.689478,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=85",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=12",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=13",
+        "Hypothesis: Created h039 (observation): Zero PREMIUM/QUALITY VCP stocks today out of 28 enriched candidates. Only 2 SETU...",
+        "Hypothesis: Updated h017 (rule): +1 supporting evidence → hitRate=100%, n=23",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1779939530.13561,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 203.29999999999998
+  }
+}

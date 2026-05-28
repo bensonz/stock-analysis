@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 230177,
+  "output_tokens": 9672,
+  "rounds": 3,
+  "duration_sec": 185.2,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年5月28日 玻璃玻纤 非金属材料 小金属 板块上涨原因",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年5月28日 市场行情 大盘走势 分析",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "芯碁微装 688630 2026年5月 最新消息 股价",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "伟测科技 688372 2026年5月 半导体 封测 最新动态",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "华峰测控 688200 询价转让 2026年5月 半导体设备",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+2026年5月28日+板块+涨跌+材料",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=半导体+设备+2026年5月+芯碁微装+华峰测控",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+今日+上证指数+深证成指+2026年5月28日",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    }
+  ],
+  "fallback_used": false
+}
