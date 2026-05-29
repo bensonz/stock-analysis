@@ -1,0 +1,36 @@
+{
+  "date": "2026-05-29",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 966982.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.3,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -33018.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.5549,
+    "up": 1934,
+    "down": 3485,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 74,
+    "limit_downs": 11,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.55:1, 0/3 major indices green, 74 limit-ups / 11 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Bearish distribution day. Breadth 0.55:1 (1934↑/3485↓), all 3 major indices red (上证-0.37%, 深证-1.00%, 创业板-1.14%), 科创50 -3.63% leading tech rout. Trigger: 7 semiconductor leaders announced 127B yuan collective share sales on May 22, cascading selloff now in day 5. Consumer defensive rotation: 白酒+4.24%, 医美+4.11%. IV overall 偏乐观 (avg rank 29.2%) but 创业板ETF IV rank 53.5% elevated — selective entries only. Portfolio: 100% cash (¥966,982), realized -3.3%. No new positions — buy gate triple-fail."
+  }
+}

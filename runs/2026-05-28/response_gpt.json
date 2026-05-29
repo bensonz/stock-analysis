@@ -3,144 +3,238 @@
     "hot_sectors": [
       {
         "name": "玻璃玻纤",
-        "5d_pct": 5.63,
+        "5d_pct": 8.71,
         "trend": "accelerating"
       },
       {
         "name": "非金属材料Ⅱ",
-        "5d_pct": 3.09,
+        "5d_pct": 6.21,
+        "trend": "steady"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": 5.19,
         "trend": "steady"
       },
       {
         "name": "小金属",
-        "5d_pct": 2.68,
+        "5d_pct": 3.97,
         "trend": "steady"
       },
       {
         "name": "电子化学品Ⅱ",
-        "5d_pct": 2.53,
-        "trend": "steady"
-      },
-      {
-        "name": "金属新材料",
-        "5d_pct": 2.14,
+        "5d_pct": 2.96,
         "trend": "steady"
       }
     ],
     "cold_sectors": [
       {
         "name": "贵金属",
-        "5d_pct": -3.68,
-        "trend": "deteriorating"
-      },
-      {
-        "name": "家电零部件Ⅱ",
-        "5d_pct": -3.38,
+        "5d_pct": -3.46,
         "trend": "deteriorating"
       },
       {
         "name": "电机Ⅱ",
-        "5d_pct": -3.0,
+        "5d_pct": -2.45,
         "trend": "deteriorating"
       },
       {
-        "name": "小家电",
-        "5d_pct": -2.49,
+        "name": "家电零部件Ⅱ",
+        "5d_pct": -2.38,
         "trend": "deteriorating"
       },
       {
-        "name": "一般零售",
-        "5d_pct": -2.29,
+        "name": "白酒Ⅱ",
+        "5d_pct": -2.35,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "酒店餐饮",
+        "5d_pct": -2.23,
         "trend": "deteriorating"
       }
     ],
-    "position_alignment": "0/0 positions (no active positions, 100% cash)",
-    "regime": "Materials rotation leading but narrow. Broad market weak: breadth 0.63:1, only 创业板指 green among majors. Cash is correct position."
+    "position_alignment": "0/0 positions (no active holdings)",
+    "regime": "Materials/industrial hardware leadership (玻璃玻纤, 小金属, 电子化学品), consumer/precious metals rotating out. \"十五五\" infra theme driving materials."
   },
   "position_decisions": [],
-  "new_positions": [],
-  "skip_list": [
+  "new_positions": [
     {
-      "code": "688630",
-      "name": "芯碁微装",
-      "reason": "BUY GATE FAILED: breadth 0.63:1 < 1.5:1, only 1/3 major indices green. Plus Rule 2b: dist_ma20=25.2% > 12%. Strongest fundamental candidate (score 9.3, 0 risks, AI PCB+先进封装 dual catalyst). Re-evaluate when breadth recovers AND price pulls back to MA10 (~273) or MA20 (~233).",
-      "rps120": 93.75
-    },
-    {
-      "code": "688372",
-      "name": "伟测科技",
-      "reason": "BUY GATE FAILED. Rule 2b: dist_ma20=14.9% > 12%. IC封测 leader, strong institutional flow (北向3.9%+公募11%), Q3 net +226%. Revisit on pullback to MA20 ~149.",
-      "rps120": 93.79
+      "code": "688002",
+      "name": "睿创微纳",
+      "entry_price": 133.42,
+      "allocation_pct": 5,
+      "stop": 126.75,
+      "target": null,
+      "thesis": "0-risk candidate, RPS120 89.58% sweet spot, sitting on MA5 support after consolidation. Score 9.3, 北向7.5%+公募21%, net profit +228% YoY. 军工电子/半导体双主题。Cleanest setup among all passing candidates.",
+      "sector": "军工电子Ⅱ",
+      "sector_rank": "mid-tier (not top 5, not bottom 5; defense/tech in structural uptrend since Apr 2026)",
+      "catalyst": "持续业绩高增长(Q净利+228%), 多光谱传感+AI芯片需求, 6家机构覆盖",
+      "catalyst_freshness": "ongoing",
+      "rps120": 89.58,
+      "conviction": "moderate"
     },
     {
       "code": "600301",
       "name": "华锡有色",
-      "reason": "BUY GATE FAILED. Best sector alignment (小金属 #3 today) but RPS20=11.18% shows very weak short-term momentum — sector tailwind isn't reaching this stock. dist_ma OK. Monitor for RPS20 recovery + breadth normalization.",
-      "rps120": 91.07
+      "entry_price": 56.6,
+      "allocation_pct": 3,
+      "stop": 53.77,
+      "target": null,
+      "thesis": "Only candidate in confirmed hot sector (小金属 #4, +3.97%). 锡锑双料龙头, 战略小金属话语权掌控者. RPS120 91.07% sweet spot. RPS20 divergence (11.18%) is concern but sector strength argues for catch-up. Half-sized due to IV (300ETF 14.2%).",
+      "sector": "小金属",
+      "sector_rank": "top 5% (ranked #4 today)",
+      "catalyst": "小金属板块持续走强, 锑列入出口管制清单, 锡锑量价齐升, 资产注入推进",
+      "catalyst_freshness": "ongoing",
+      "rps120": 91.07,
+      "conviction": "small"
     },
     {
-      "code": "002810",
-      "name": "山东赫达",
-      "reason": "BUY GATE FAILED. VCP SETUP (ratio 0.72, above 0.4 sweet spot). Near MA20 support (dist_ma20=-0.8%). 化学制品 sector not in top 5 today. Monitor for VCP tightening and breadth recovery.",
-      "rps120": 94.68
+      "code": "002812",
+      "name": "恩捷股份",
+      "entry_price": 73.01,
+      "allocation_pct": 4,
+      "stop": 69.36,
+      "target": null,
+      "thesis": "Fresh M&A catalyst (5/27: acquiring SKIET Jiangsu subsidiary, 8 base film lines, 940M m² capacity, ¥400M). RPS120 91.53% sweet spot. Stock pulling back to MA20 support (-0.8%) — ideal entry zone with catalyst breaking. 11 analysts covering, 北向5.8%+公募8.9%.",
+      "sector": "电池",
+      "sector_rank": "mid-tier (trending up since Feb 2026, not top 5 today)",
+      "catalyst": "收购SKIET江苏子公司(5/27公告), 锂电池隔膜产能扩张, 电池行业2026年2月以来持续走强",
+      "catalyst_freshness": "ongoing",
+      "rps120": 91.53,
+      "conviction": "moderate"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "688300",
+      "name": "联瑞新材",
+      "reason": "Sector #2 (非金属材料Ⅱ) but MA-distance triple violation: dist_ma5 +11.0%, dist_ma10 +28.6%, dist_ma20 +43.8%. Way overextended. Wait for pullback to MA10 (~115).",
+      "rps120": 93.18
+    },
+    {
+      "code": "688630",
+      "name": "芯碁微装",
+      "reason": "dist_ma20 +25.2% exceeds 12% limit. Score 9.3, excellent company, but overextended. Wait for pullback to MA10 (~273).",
+      "rps120": 93.75
     },
     {
       "code": "688200",
       "name": "华峰测控",
-      "reason": "BUY GATE FAILED. 询价转让@388.98元 creating overhang (1% stake). dist_ma20=22.4% > 12% overextended. Recent -9.62% selloff on 5/21. Gross margin 74.3% impressive but the technical picture is damaged. Skip until transfer completes and price stabilizes.",
+      "reason": "dist_ma20 +22.4% violation + 询价转让 overhang (388.98元/股, 1% of shares). Double reason to skip.",
       "rps120": 93.5
+    },
+    {
+      "code": "002810",
+      "name": "山东赫达",
+      "reason": "RPS120 94.68% sweet spot, VCP SETUP, all MA OK — but 5/13 跌停 is too fresh (within 2 weeks). Elevated stop-out risk. Monitor for VCP tightening.",
+      "rps120": 94.68
+    },
+    {
+      "code": "300776",
+      "name": "帝尔激光",
+      "reason": "Triple MA violation: dist_ma5 +6.7%, dist_ma10 +23.9%, dist_ma20 +58.2%. Extreme extension.",
+      "rps120": 92.35
+    },
+    {
+      "code": "688195",
+      "name": "腾景科技",
+      "reason": "RPS120 98.38% >95%, skip per Rule 2. MA distances are clean (dist_ma5 +1.9%, all within limits). Watch for RPS pullback into 92-95% zone. No enriched data available for sector/catalyst exception analysis.",
+      "rps120": 98.38
+    },
+    {
+      "code": "300390",
+      "name": "天华新能",
+      "reason": "RPS120 99.68% >95%, skip per Rule 2. Wait for pullback.",
+      "rps120": 99.68
+    },
+    {
+      "code": "300870",
+      "name": "欧陆通",
+      "reason": "Stock has crashed: dist_ma5 -22.9%, dist_ma10 -24.8%. Falling knife. No current price data suggests stabilization.",
+      "rps120": 92.93
+    },
+    {
+      "code": "605060",
+      "name": "联德股份",
+      "reason": "RPS20 48.10% shows severe short-term weakness. 5/14 跌停. IV extremely low (500ETF 7.3%). Passes MA but lacks momentum.",
+      "rps120": 94.76
+    },
+    {
+      "code": "300739",
+      "name": "明阳电路",
+      "reason": "Triple MA violation: dist_ma5 +18.0%, dist_ma10 +27.1%, dist_ma20 +38.3%. No entry possible.",
+      "rps120": 93.38
+    },
+    {
+      "code": "002947",
+      "name": "恒铭达",
+      "reason": "dist_ma10 +9.6% (>8%), dist_ma20 +35.2% (>12%). Double MA violation.",
+      "rps120": 92.91
+    },
+    {
+      "code": "688536",
+      "name": "思瑞浦",
+      "reason": "dist_ma10 +12.1% (>8%), dist_ma20 +37.5% (>12%). Double MA violation.",
+      "rps120": 90.68
     }
   ],
   "new_learnings": [
     {
-      "text": "Weak breadth regime (0.63:1, 1/3 indices green) correctly triggers new_positions:[] — V2 minimum buy gate is doing its job. [h013] validated: strong breadth alone is not enough; weak breadth is a clear no-go.",
+      "text": "MA-distance filter eliminated 27/33 enriched candidates today (82%). This is the single most important gate in the system — without it, we would have bought 联瑞新材 (+43.8% above MA20), 帝尔激光 (+58.2%), and multiple other extreme-chase setups. The stocks it blocked are all visually 'strong' but mathematically overextended.",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021, h027",
+      "mechanism": "Mean-reversion risk dominates when price is >12% above MA20 regardless of sector strength. The pullback probability is asymmetrically high."
+    },
+    {
+      "text": "RPS20/RPS120 divergence is a timing signal, not a hard skip. 华锡有色 RPS120 91% (strong medium-term) vs RPS20 11% (terrible short-term) in a hot sector (#4 小金属). This pattern often resolves with the stock catching up to its sector. Size small (3% vs normal 6%) to account for the uncertainty.",
       "type": "heuristic",
       "tags": [
-        "entry-filter",
+        "timing",
         "position-sizing"
       ],
       "evidence_type": "supporting",
-      "related_hypothesis": "h013"
+      "related_hypothesis": null,
+      "mechanism": "Sector gravity eventually pulls lagging members up, but the timing is unpredictable. Small sizing lets you participate without over-committing to a potential continued lag."
     },
     {
-      "text": "Rule 2b MA-distance check blocked 6+ strong candidates today (芯碁微装 dist_ma20=25.2%, 伟测科技 14.9%, 联瑞新材 dist_ma5=11.0%, 明阳电路 dist_ma5=18.0%, 思瑞浦 dist_ma10=12.1%, 帝尔激光 dist_ma5=6.7%). [h027] strongly validated: hot sector does not override chase risk.",
+      "text": "0-risk candidates are exceptionally rare (1/33 enriched today) and deserve priority when they also pass RPS + MA filters. 睿创微纳 is the only 0-risk stock among all candidates. The V1 data showed 0-risk stocks outperform — this is a strong signal when combined with technical compliance.",
       "type": "signal",
       "tags": [
-        "entry-filter",
-        "timing"
+        "entry-filter"
       ],
       "evidence_type": "supporting",
-      "related_hypothesis": "h027"
+      "related_hypothesis": "h014 (0-risk stocks had lower drawdowns)",
+      "mechanism": "Zero risk flags = no known negative catalysts, no技术面 warning signs, no 估值 alerts. These stocks have cleaner price action and fewer reasons for sudden selloffs."
     },
     {
-      "text": "Materials rotation (玻璃玻纤 +5.63%) is today's dominant theme but the best sector-aligned candidate (华锡有色, RPS20=11.18%) shows no short-term follow-through. Narrow sector leadership: top names carry the sector, laggards left behind. In weak breadth, sector tailwind alone is insufficient.",
-      "type": "observation",
+      "text": "Fresh M&A catalysts that haven't yet moved price create ideal entry windows. 恩捷股份 announced SKIET acquisition on 5/27, yet the stock is pulling back to MA20 (dist_ma20 -0.8%) and '过去10天价格涨幅仅高于6%'. The market has not priced in this catalyst yet — this is the sweet spot between news breaking and price responding.",
+      "type": "heuristic",
       "tags": [
-        "sector",
-        "timing"
+        "timing",
+        "entry-filter"
       ],
       "evidence_type": "supporting",
-      "mechanism": "Sector breadth within hot sectors matters — check whether individual stocks are participating or just the sector ETF is rising."
+      "related_hypothesis": null,
+      "mechanism": "Market inefficiency: significant corporate events take 2-5 days to be fully priced when they occur outside of earnings season. The pullback to MA20 support during this window provides a low-risk entry."
     },
     {
-      "text": "Zero PREMIUM/QUALITY VCP stocks today out of 28 enriched candidates. Only 2 SETUP-level (山东赫达 0.72, 恩捷股份 0.80), both above the 0.4 backtest sweet spot. VCP edge is scarce — when it appears it's valuable, but most days won't have one. Don't force VCP-based decisions.",
+      "text": "Breadth at 1.28:1 with distribution skewed to r0_2 (small gains) is a 'mild rally' — not ideal for aggressive entries. Appropriate response is 3 small positions at 12% total, keeping 88% cash. This is consistent with the learning that strong breadth alone doesn't force entries (h013).",
       "type": "observation",
-      "tags": [
-        "timing"
-      ],
-      "evidence_type": "supporting"
-    },
-    {
-      "text": "IV divergence persists: 500ETF IV Rank 7.3% (complacency) vs 创业板ETF 52.0% (elevated). When breadth recovers, 创业板 entries need tighter selectivity. [h017] context: low IV doesn't justify freezing but argues for normal sizing with discipline on chasing.",
-      "type": "signal",
       "tags": [
         "position-sizing"
       ],
       "evidence_type": "supporting",
-      "related_hypothesis": "h017"
+      "related_hypothesis": "h013",
+      "mechanism": "When most up stocks are barely positive (r0_2 dominates), the marginal buyer is weak. Aggressive entries in this environment have higher failure rates."
     }
   ],
-  "market_summary": "市场弱势：广度0.63:1偏空（2081涨/3286跌），仅创业板指+0.21%微涨，上证-0.14%、深证-0.26%收跌。科创50逆势+1.29%。涨停89家/跌停13家，非恐慌但买盘严重不足。材料板块轮动领涨（玻璃玻纤+5.63%、非金属材料+3.09%、小金属+2.68%），贵金属-3.68%领跌，消费/家电/零售全面走弱。IV分化：500ETF极低7.3%（自满），创业板ETF偏高52%。买入门槛不满足，维持100%现金。",
-  "market_sentiment": "bearish",
-  "market_call": "谨慎"
+  "market_summary": "Breadth 1.28:1 mildly bullish (3018↑/2365↓), 3/3 major indices green, 127涨停/13跌停. 创业板+1.96% leads. Materials (玻璃玻纤+8.71%, 小金属+3.97%) and tech hardware (通信设备+5.19%, 电子化学品+2.96%) leading; consumer/贵金属 lagging. IV mixed: 500ETF at 7.3% extreme low vs 创业板ETF at 52% elevated. MA-distance filter eliminated 82% of candidates — most strong stocks are overextended. Deploying 12% across 3 small positions: 睿创微纳(5%), 恩捷股份(4%), 华锡有色(3%).",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
 }
