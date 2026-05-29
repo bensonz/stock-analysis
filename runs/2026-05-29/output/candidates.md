@@ -1,10 +1,10 @@
 # 候选股票 2026-05-29
 
-## 入场条件: ⚠ THROTTLED
-- 涨跌比: 0.55:1
+## 入场条件: 🚫 BLOCKED
+- 涨跌比: 0.40:1
 - 下跌指数: 上证指数, 深证成指, 创业板指
-- 新仓位尺寸系数: 0.50x
-- 原因: Entry regime weak: breadth 0.55:1, 0/3 major indices green, 74 limit-ups / 11 limit-downs. Allow entries only with 50% sizing.
+- 新仓位尺寸系数: 1.00x
+- 原因: Entry regime panic: breadth 0.40:1, 0/3 major indices green, 71 limit-ups / 66 limit-downs. Block new longs.
 
 ## 策略池 (57 stocks)
 

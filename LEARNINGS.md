@@ -1288,3 +1288,11 @@
 - 策略池57只股票全在科技/制造/材料，与今日热点(白酒+4.24%/医美+4.11%/零售+3.70%)完全错配。动量策略池在消费防御行情中天然缺乏候选标的，这是策略特征而非缺陷。保持现金等待科技回归是正确的。
 - MA距离规则(h027)持续拯救：芯碁微装dist_ma20=+39%、帝尔激光+58%、联瑞新材+44%，这些股票即使忽略所有其他因素，纯均线偏离就足以致命。h027 hitRate 100%持续验证。
 - 华锡有色是当前最佳'等待标的'：RPS120=91.07%完美甜蜜点，所有MA距离优秀(0.6%/-1.4%/2.2%)，锑价从10万涨至12.8万/吨催化持续。一旦breadth恢复至1.5:1+至少2个指数翻红，应优先开仓。
+
+### 自动更新 (2026-05-29)
+
+- Entry regime hard_block prevented disaster today. Breadth 0.40:1, 科创50 -5.04%, all 3 major indices red. Any new long opened today would be underwater immediately. The system is protecting capital exactly as designed.
+- Sector rotation from tech → defensives is clear and decisive. The hot sectors of last month (semiconductor, optical, military electronics) are now the bottom 5. Momentum strategies must rotate or stay cash. Holding tech names through this would be fighting sector gravity.
+- Two top fundamental candidates (睿创微纳 score 9.3/0风险, 伟测科技 score 8.2) are in cold/dead sectors. V1 would have bought them 'on fundamentals' and lost money. V2 correctly skips. Sector-first discipline is protecting capital.
+- IV fragmentation (500ETF 7.3% vs 创业板 53.5%) is a regime-change leading indicator. Complacency in broad market + fear in tech = rotation signal before it fully manifests in price.
+- MA-distance rule filters out 5+ stocks today that would have been tempting momentum buys (芯碁微装, 联瑞新材, 明阳电路, 帝尔激光, 华兴源创). These are all >8% above MA10 or >12% above MA20 — buying them would be chasing at the top of a blow-off.

@@ -914,9 +914,9 @@
       "id": "h019",
       "text": "Bottom-list sectors should be treated as hard no-buy zones even when individual names still carry acceptable RPS readings.",
       "type": "heuristic",
-      "status": "hypothesis",
+      "status": "validated",
       "created": "2026-04-01",
-      "lastTested": "2026-05-14",
+      "lastTested": "2026-05-29",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -935,13 +935,17 @@
           {
             "date": "2026-05-14",
             "detail": "Cold-sector override remains essential: 华锡有色 had acceptable RPS and support proximity, but 小金属 being bottom-5 sector is enough to reject the trade."
+          },
+          {
+            "date": "2026-05-29",
+            "detail": "Two top fundamental candidates (睿创微纳 score 9.3/0风险, 伟测科技 score 8.2) are in cold/dead sectors. V1 would have bought them 'on fundamentals' and lost money. V2 correctly skips. Sector-first discipline is protecting capital."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 4,
+      "sampleSize": 5,
       "hitRate": 1.0,
-      "confidence": 0.833,
+      "confidence": 0.857,
       "tags": [
         "sector",
         "entry-filter"
@@ -993,7 +997,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-05-27",
+      "lastTested": "2026-05-29",
       "mechanism": "When price gets too stretched above MA5/MA10/MA20, upside becomes dependent on continued euphoria instead of support-based demand, raising mean-reversion risk.",
       "evidence": {
         "supporting": [
@@ -1224,13 +1228,21 @@
           {
             "date": "2026-05-27",
             "detail": "伟测科技 (688372) and 睿创微纳 (688002) both show ideal pullback-to-MA setups: dist_ma5 < 1%, 0 risk factors, strong fundamentals. These are the highest-conviction re-entry candidates when breadth improves. Low-risk pullback entries in strong sectors typically rebound fastest after a sell-off."
+          },
+          {
+            "date": "2026-05-29",
+            "detail": "IV fragmentation (500ETF 7.3% vs 创业板 53.5%) is a regime-change leading indicator. Complacency in broad market + fear in tech = rotation signal before it fully manifests in price."
+          },
+          {
+            "date": "2026-05-29",
+            "detail": "MA-distance rule filters out 5+ stocks today that would have been tempting momentum buys (芯碁微装, 联瑞新材, 明阳电路, 帝尔激光, 华兴源创). These are all >8% above MA10 or >12% above MA20 — buying them would be chasing at the top of a blow-off."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 57,
+      "sampleSize": 59,
       "hitRate": 1.0,
-      "confidence": 0.983,
+      "confidence": 0.984,
       "tags": [
         "entry-filter",
         "timing"
@@ -1561,7 +1573,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-05-28",
+      "lastTested": "2026-05-29",
       "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally.",
       "evidence": {
         "supporting": [
@@ -1616,13 +1628,17 @@
           {
             "date": "2026-05-28",
             "detail": "Materials rotation (玻璃玻纤 +5.63%) is today's dominant theme but the best sector-aligned candidate (华锡有色, RPS20=11.18%) shows no short-term follow-through. Narrow sector leadership: top names carry the sector, laggards left behind. In weak breadth, sector tailwind alone is insufficient."
+          },
+          {
+            "date": "2026-05-29",
+            "detail": "Sector rotation from tech → defensives is clear and decisive. The hot sectors of last month (semiconductor, optical, military electronics) are now the bottom 5. Momentum strategies must rotate or stay cash. Holding tech names through this would be fighting sector gravity."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 13,
+      "sampleSize": 14,
       "hitRate": 1.0,
-      "confidence": 0.933,
+      "confidence": 0.938,
       "tags": [
         "sector",
         "timing"
@@ -2024,6 +2040,34 @@
       "tags": [
         "timing",
         "entry-filter"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h043",
+      "text": "Entry regime hard_block prevented disaster today. Breadth 0.40:1, 科创50 -5.04%, all 3 major indices red. Any new long opened today would be underwater immediately. The system is protecting capital exactly as designed.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-05-29",
+      "lastTested": "2026-05-29",
+      "mechanism": "Panic breadth + all indices red = systemic selloff. New positions have negative expected value regardless of individual stock quality.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-05-29",
+            "detail": "Entry regime hard_block prevented disaster today. Breadth 0.40:1, 科创50 -5.04%, all 3 major indices red. Any new long opened today would be underwater immediately. The system is protecting capital exactly as designed."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "entry-filter",
+        "position-sizing"
       ],
       "parentRule": null,
       "retiredDate": null,

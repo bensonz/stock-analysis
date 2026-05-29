@@ -2,17 +2,17 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 317613,
-  "output_tokens": 10078,
-  "rounds": 4,
-  "duration_sec": 182.4,
+  "input_tokens": 226512,
+  "output_tokens": 8558,
+  "rounds": 3,
+  "duration_sec": 187.4,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年5月29日 市场下跌 板块轮动 白酒 医美",
+        "query": "A股 2026年5月29日 市场暴跌 科创50 大跌原因",
         "max_results": 5
       },
       "result_length": 144
@@ -22,7 +22,7 @@
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年5月29日 电子化学品 光学光电子 大跌 原因",
+        "query": "A股 今日热门板块 医疗美容 白酒 电力 2026年5月29日",
         "max_results": 5
       },
       "result_length": 144
@@ -32,7 +32,7 @@
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "华锡有色 600301 2026年5月 小金属 锑 锡 涨价",
+        "query": "半导体板块 大跌 2026年5月29日 电子化学品 光学光电子",
         "max_results": 5
       },
       "result_length": 144
@@ -42,7 +42,7 @@
       "round": 2,
       "tool": "web_fetch",
       "input": {
-        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+2026年5月29日",
+        "url": "https://www.baidu.com/s?wd=A股+2026年5月29日+科创50+大跌",
         "maxChars": 5000
       },
       "result_length": 5000
@@ -52,7 +52,7 @@
       "round": 2,
       "tool": "web_fetch",
       "input": {
-        "url": "https://www.baidu.com/s?wd=科技股+大跌+半导体+2026年5月29日",
+        "url": "https://www.baidu.com/s?wd=医疗美容+白酒+电力+板块+2026年5月",
         "maxChars": 5000
       },
       "result_length": 5000
@@ -62,28 +62,8 @@
       "round": 2,
       "tool": "web_fetch",
       "input": {
-        "url": "https://www.baidu.com/s?wd=华锡有色+小金属+涨价+2026",
+        "url": "https://www.baidu.com/s?wd=A股+半导体+暴跌+2026年5月29日",
         "maxChars": 5000
-      },
-      "result_length": 5000
-    },
-    {
-      "pass": "P1",
-      "round": 3,
-      "tool": "web_fetch",
-      "input": {
-        "maxChars": 5000,
-        "url": "https://www.baidu.com/s?wd=A股+白酒板块+大涨+2026年5月"
-      },
-      "result_length": 5000
-    },
-    {
-      "pass": "P1",
-      "round": 3,
-      "tool": "web_fetch",
-      "input": {
-        "maxChars": 5000,
-        "url": "https://www.baidu.com/s?wd=半导体+减持+中微公司+澜起科技+2026年5月"
       },
       "result_length": 5000
     }

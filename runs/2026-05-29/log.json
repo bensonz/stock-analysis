@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1780025716.0650291,
+      "start": 1780040111.012409,
       "errors": [],
-      "end": 1780025733.101891,
-      "duration_sec": 17.0
+      "end": 1780040123.908353,
+      "duration_sec": 12.9
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 13622,
+      "response_size_bytes": 16738,
       "tokens": {
-        "input_tokens": 317613,
-        "output_tokens": 10078
+        "input_tokens": 226512,
+        "output_tokens": 8558
       },
-      "rounds": 4,
-      "tool_calls_count": 8,
-      "duration_sec": 182.4,
+      "rounds": 3,
+      "tool_calls_count": 6,
+      "duration_sec": 187.4,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -25,24 +25,25 @@
     },
     {
       "phase": "apply",
-      "start": 1780025915.539884,
+      "start": 1780040311.412072,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Created h040 (observation): 半导体集体减持127亿(5/22中微公司等7家)是板块级做空事件，此后电子化学品/光学光电子/军工电子连续大跌。这不是个股选择问题，而是系统性去风险。板块级利空...",
-        "Hypothesis: Created h041 (observation): 策略池57只股票全在科技/制造/材料，与今日热点(白酒+4.24%/医美+4.11%/零售+3.70%)完全错配。动量策略池在消费防御行情中天然缺乏候选标的，这...",
-        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=13",
-        "Hypothesis: Created h042 (observation): 华锡有色是当前最佳'等待标的'：RPS120=91.07%完美甜蜜点，所有MA距离优秀(0.6%/-1.4%/2.2%)，锑价从10万涨至12.8万/吨催化持续...",
+        "Hypothesis: Created h043 (observation): Entry regime hard_block prevented disaster today. Breadth 0.40:1, 科创50 -5.04%, a...",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=14",
+        "Hypothesis: Updated h019 (validated): +1 supporting evidence → hitRate=100%, n=5",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=58",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=59",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1780025915.8857348,
-      "duration_sec": 0.3
+      "end": 1780040311.96482,
+      "duration_sec": 0.6
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 199.70000000000002
+    "totalDurationSec": 200.9
   }
 }
