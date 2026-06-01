@@ -1,0 +1,312 @@
+## 2. Sector Analysis
+
+### Today's Sector Rankings
+
+| Rank | Sector | 5d Δ | Signal |
+|------|--------|------|--------|
+| #1 | 数字媒体 | +5.01% | 🔥 New leader |
+| #2 | 广告营销 | +4.68% | 🔥 AI/media theme |
+| #3 | 煤炭开采 | +4.38% | 🔥 Commodity rotation |
+| #4 | 游戏Ⅱ | +3.18% | 🔥 Media-adjacent |
+| #5 | 燃气Ⅱ | +3.13% | 🔥 Energy/utility |
+
+| Bottom | Sector | 5d Δ | Signal |
+|--------|--------|------|--------|
+| #1 worst | 玻璃玻纤 | -6.36% | 💀 |
+| #2 worst | 元件 | -3.52% | 💀 |
+| #3 worst | 半导体 | -3.24% | 💀 |
+| #4 worst | 通信设备 | -2.18% | 💀 |
+| #5 worst | 照明设备Ⅱ | -2.00% | 💀 |
+
+### Critical Observation: MASSIVE Sector Rotation
+
+This is not a random pullback. **半导体 (-3.24%), 元件 (-3.52%), 通信设备 (-2.18%)** — the three sectors that have led the entire rally for months — are simultaneously crashing. Meanwhile, **数字媒体 (+5.01%), 广告营销 (+4.68%), 煤炭 (+4.38%)** are surging. This is a clear rotation from tech hardware → media/commodities/defensive.
+
+**Implication for our strategy pool:** The Cheesefortune intersection pool is overwhelmingly weighted toward 半导体 and 电子-related names. At least 10 of the 30 enriched candidates fall into bottom-5 sectors. Sector gravity is working against us today.
+
+**Position alignment:** 0/0 positions — we're fully in cash. This is actually fortuitous given the rotation.
+
+---
+
+## 3. Position Review
+
+**No active positions.** Portfolio is 100% cash (¥966,982). Realized PnL: -¥33,018 (-3.3%).
+
+No actions needed on existing holdings. The clean slate is an advantage in a rotation day like this — we aren't stuck in yesterday's leaders that are getting hammered today.
+
+---
+
+## 4. New Entry Candidates — Preliminary Screen
+
+Despite the buy gate failing, let me run the candidates through the full filter stack for learning purposes. I'll flag which ones would be viable IF the indices were green.
+
+### Candidates Killed by Sector (Hard Block — Bottom 5 sectors)
+
+These would be auto-skipped regardless of any other metric:
+
+| Code | Name | Sector | Sector Rank | RPS120 |
+|------|------|--------|-------------|--------|
+| 688200 | 华峰测控 | 半导体 | Bottom 3 | 94.01 |
+| 688372 | 伟测科技 | 半导体 | Bottom 3 | 93.41 |
+| 300666 | 江丰电子 | 半导体 | Bottom 3 | 93.10 |
+| 688037 | 芯源微 | 半导体 | Bottom 3 | 92.45 |
+| 688536 | 思瑞浦 | 半导体 | Bottom 3 | 91.34 |
+| 002436 | 兴森科技 | 元件 | Bottom 2 | 88.07 |
+| ...and more | | | | |
+
+### Candidates Killed by MA-Distance (Rule 2b)
+
+These are overextended even if their sectors were acceptable:
+
+| Code | Name | dist_ma5 | dist_ma10 | dist_ma20 | Verdict |
+|------|------|----------|-----------|-----------|---------|
+| 688630 | 芯碁微装 | +11.1% | +18.4% | +38.6% | 🚫 All 3 breached |
+| 688300 | 联瑞新材 | +21.2% | +41.1% | +62.7% | 🚫 Extreme |
+| 300285 | 国瓷材料 | +6.8% | +18.1% | +36.4% | 🚫 dist_ma5>6% |
+| 688258 | 卓易信息 | +7.1% | +6.4% | +17.1% | 🚫 dist_ma5>6% |
+| 301018 | 申菱环境 | -11.1% | -8.0% | +10.2% | 🚫 dist_ma5 negative >10% |
+| 300870 | 欧陆通 | -21.4% | -29.6% | -20.1% | 🚫 Massive crash |
+| 600301 | 华锡有色 | +6.8% | +7.3% | +9.9% | 🚫 dist_ma5>6% |
+| 002436 | 兴森科技 | +3.6% | +9.5% | +25.9% | 🚫 dist_ma10>8% |
+| 605060 | 联德股份 | -5.8% | -11.3% | -11.2% | 🚫 dist_ma10 negative >10% |
+
+### Candidates That Pass Both Sector+MA Filters (but buy gate still blocks)
+
+Let me look for stocks NOT in bottom 5 sectors AND with acceptable MA distances:
+
+**山东赫达 (002810)** — 化学制品 sector
+- RPS120: 94.40% → sweet spot ✓
+- dist_ma5: -2.5%, dist_ma10: -7.4%, dist_ma20: -2.7% → all within limits ✓
+- VCP: SETUP (contraction 0.72 — mediocre, not premium)
+- Score_company: 7.9, highlights: 业绩超预期+9.99%, 归母净利+127%
+- Risk: 抛压 (跌停 on 05/13)
+- Sector not in top 5 or bottom 5 → ambiguous. Rule says top 30% only.
+- Verdict: PASSES technical filters but sector rank unclear. Would be a SMALL BUY candidate if regime allowed.
+
+**大金重工 (002487)** — 风电设备 sector
+- RPS120: 89.53% → sweet spot ✓
+- dist_ma5: -1.2%, dist_ma10: -4.7%, dist_ma20: -9.2% → all within limits ✓
+- Score_company: 9.2 (highest in pool), 0 risks
+- Highlights: 龙头, 归母净利+88%, 18家机构预测增长>30%, 北向5.9%
+- Recent events: 造船合同约20.5亿, 海外订单
+- Sector not in top 5 or bottom 5 → ambiguous
+- Verdict: Strong fundamental setup. Would be a BUY candidate if regime allowed.
+
+**华宏科技 (002645)** — 环保设备 sector
+- RPS120: 92.43% → sweet spot ✓
+- dist_ma5: -4.5%, dist_ma10: -1.5%, dist_ma20: +15.3% → dist_ma20>12%! 🚫
+- Actually dist_ma20=15.3% exceeds the 12% threshold. Killed by Rule 2b.
+
+**湖南裕能 (301358)** — 电池化学品 sector
+- RPS120: 92.05% → sweet spot ✓
+- dist_ma5: -1.7%, dist_ma10: -7.6%, dist_ma20: -0.2% → all within limits ✓
+- Score_company: 8.0, 龙头, 归母净利+1338%
+- Risks: 抛压, 收现比41%
+- Verdict: Would be a candidate but sector not in confirmed top 30%.
+
+**Summary:** Only ~2-3 candidates survive sector+MA filters, and even those have ambiguous sector rankings (not in top 5, not in bottom 5 — their exact rank unknown). On a day where the buy gate fails, this is an easy decision: **no new positions.**
+
+---
+
+## 5. Skip List
+
+| Code | Name | Skip Reason |
+|------|------|-------------|
+| 688200 | 华峰测控 | 半导体 sector bottom 3% — hard sector block |
+| 688372 | 伟测科技 | 半导体 sector bottom 3% — hard sector block |
+| 300666 | 江丰电子 | 半导体 sector bottom 3% — hard sector block |
+| 688037 | 芯源微 | 半导体 sector bottom 3% — hard sector block |
+| 688536 | 思瑞浦 | 半导体 sector bottom 3% — hard sector block |
+| 002436 | 兴森科技 | 元件 sector bottom 2% + dist_ma10 9.5% >8% |
+| 688630 | 芯碁微装 | dist_ma5 11.1% >6%, extreme overextension |
+| 688300 | 联瑞新材 | dist_ma20 62.7%, all MA limits breached |
+| 300285 | 国瓷材料 | dist_ma5 6.8% >6% |
+| 688258 | 卓易信息 | dist_ma5 7.1% >6% |
+| 301018 | 申菱环境 | dist_ma5 -11.1% (sharp pullback, unclear support) |
+| 300870 | 欧陆通 | dist_ma5 -21.4% (in freefall) |
+| 600301 | 华锡有色 | dist_ma5 6.8% >6% |
+| 605060 | 联德股份 | RPS20=46.48 (short-term momentum dead) + dist_ma10 -11.3% |
+| 002645 | 华宏科技 | dist_ma20 15.3% >12% |
+| 603026 | 石大胜华 | Sector ranking unclear (电池 not in confirmed top 30%), PE 65 with negative net profit |
+| 002810 | 山东赫达 | Sector unclear. VCP SETUP only (0.72 ratio). Would revisit if sector confirms top 30% |
+| 002487 | 大金重工 | Sector unclear. Best fundamental score in pool but sector rank unknown |
+| 301358 | 湖南裕能 | Sector unclear. Strong fundamentals but 收现比41% is a red flag |
+
+---
+
+## 6. Learnings
+
+1. **Buy gate is non-negotiable — and it's working.** Today 0/3 indices green, breadth 2.47:1 looks fine superficially, but index-level weakness + 科创50 -3.24% signals real distribution. Cash is the right call.
+
+2. **Sector rotation is detectable in real-time.** The simultaneous collapse of 半导体/元件/通信设备 (all -2% to -3.5%) while 数字媒体/煤炭 surge +3-5% is a textbook rotation signal. In V1 we'd have bought into the weakness. V2 correctly says: dead sectors = no entries.
+
+3. **MA-distance filters are catching real overextensions.** 芯碁微装 at dist_ma20=38.6%, 联瑞新材 at 62.7% — these are the "strongest" looking stocks on RPS but are actually the most dangerous to enter. The MA-distance rule (Rule 2b) is preventing disasters.
+
+4. **The strategy pool skews heavily toward semiconductors.** ~40% of our enriched candidates are in 半导体 or adjacent sectors. When these sectors rotate out, the pool quality collapses. We need broader sector coverage in the strategy pool for V3.
+
+5. **VCP data is sparse but informative.** Only 山东赫达 has VCP data (SETUP, 0.72 ratio). The null VCP on most candidates means we lack the timing edge. When the regime improves, prioritize stocks with VCP PREMIUM/QUALITY.
+
+---
+
+## 7. Uncertainty Flags
+
+- **Sector granularity:** We only get top 5 and bottom 5 sectors. Stocks in the middle ~60 sectors have unknown ranks. I flagged several as "sector unclear" — they COULD be in the top 30% but we can't verify. This creates false negatives.
+- **Rotation durability:** Is the 数字媒体/煤炭 surge a one-day anomaly or the start of a sustained rotation? Need 2-3 more days of data to confirm.
+- **科创50 severity:** -3.24% with 120涨停 / 19跌停 is unusual — suggests concentrated selling in large-cap tech while small-caps still find bids. What's driving this divergence?
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "数字媒体", "5d_pct": 5.01, "trend": "accelerating"},
+      {"name": "广告营销", "5d_pct": 4.68, "trend": "accelerating"},
+      {"name": "煤炭开采", "5d_pct": 4.38, "trend": "steady"},
+      {"name": "游戏Ⅱ", "5d_pct": 3.18, "trend": "steady"},
+      {"name": "燃气Ⅱ", "5d_pct": 3.13, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "玻璃玻纤", "5d_pct": -6.36, "trend": "deteriorating"},
+      {"name": "元件", "5d_pct": -3.52, "trend": "deteriorating"},
+      {"name": "半导体", "5d_pct": -3.24, "trend": "deteriorating"},
+      {"name": "通信设备", "5d_pct": -2.18, "trend": "deteriorating"},
+      {"name": "照明设备Ⅱ", "5d_pct": -2.0, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/0 positions (no active holdings, 100% cash)",
+    "regime": "Major tech rotation: semiconductor/component/comms equipment being sold heavily, media/coal/commodities surging. 科创50 -3.24% signals concentrated institutional distribution in growth."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "半导体 sector in bottom 3 of all sectors (-3.24%). Sector gravity block — no entry regardless of stock quality.",
+      "rps120": 94.01
+    },
+    {
+      "code": "688372",
+      "name": "伟测科技",
+      "reason": "半导体 sector in bottom 3. Also has 今日解禁32.37万股 event.",
+      "rps120": 93.41
+    },
+    {
+      "code": "300666",
+      "name": "江丰电子",
+      "reason": "半导体 sector in bottom 3. Hard sector block.",
+      "rps120": 93.1
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "半导体 sector in bottom 3. Also revenue -10.35% YoY, net profit deeply negative.",
+      "rps120": 92.45
+    },
+    {
+      "code": "688536",
+      "name": "思瑞浦",
+      "reason": "半导体 sector in bottom 3. Despite strong fundamentals (净利+577%), sector gravity wins.",
+      "rps120": 91.34
+    },
+    {
+      "code": "002436",
+      "name": "兴森科技",
+      "reason": "元件 sector in bottom 2 (-3.52%) + dist_ma10 9.5% exceeds 8% chase limit. Double kill.",
+      "rps120": 88.07
+    },
+    {
+      "code": "688630",
+      "name": "芯碁微装",
+      "reason": "dist_ma5 +11.1% >6%, dist_ma10 +18.4% >8%, dist_ma20 +38.6% >12%. All three MA-distance limits breached. Extremely overextended.",
+      "rps120": 94.52
+    },
+    {
+      "code": "688300",
+      "name": "联瑞新材",
+      "reason": "dist_ma20 +62.7% — most extreme overextension in entire pool. All MA limits breached by huge margins.",
+      "rps120": 94.5
+    },
+    {
+      "code": "300285",
+      "name": "国瓷材料",
+      "reason": "dist_ma5 +6.8% >6% chase limit. Also dist_ma20 +36.4% extreme.",
+      "rps120": 93.33
+    },
+    {
+      "code": "688258",
+      "name": "卓易信息",
+      "reason": "dist_ma5 +7.1% >6% chase limit. Also management selling (核心技术人员减持 in May).",
+      "rps120": 93.28
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "dist_ma5 +6.8% >6%, dist_ma10 +7.3% approaching 8% limit.",
+      "rps120": 91.19
+    },
+    {
+      "code": "002645",
+      "name": "华宏科技",
+      "reason": "dist_ma20 +15.3% >12% limit. Also 大股东质押100% — extreme risk.",
+      "rps120": 92.43
+    },
+    {
+      "code": "603026",
+      "name": "石大胜华",
+      "reason": "电池 sector not in confirmed top 30%. PE 65 with negative net profit. Revenue growth only +11%, gross margin 4.5% — weak fundamentals for a momentum play.",
+      "rps120": 94.87
+    },
+    {
+      "code": "002810",
+      "name": "山东赫达",
+      "reason": "化学制品 sector not in confirmed top 30%. VCP SETUP only (contraction ratio 0.72 — too loose). Would reconsider if sector rank improves.",
+      "rps120": 94.4
+    },
+    {
+      "code": "002487",
+      "name": "大金重工",
+      "reason": "风电设备 sector not in confirmed top 30%. Best fundamentals in pool (score 9.2, 0 risks) but sector rank unclear. On watch for when sector data confirms top 30%.",
+      "rps120": 89.53
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Buy gate discipline prevented forced entries on a day when 0/3 major indices are green despite decent 2.47:1 breadth. The index-level signal correctly flagged the rotation risk. Supporting evidence: 科创50 -3.24%, semiconductor/component/comms equipment sectors all in bottom 5.",
+      "type": "rule",
+      "tags": ["entry-filter", "regime-detection"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Breadth can be misleadingly positive when small-cap retail stocks rise while institutional money rotates out of large-cap growth leaders. Index-level confirmation catches this divergence."
+    },
+    {
+      "text": "MA-distance Rule 2b is the single most effective filter today — it eliminated 芯碁微装 (dist_ma20 +38.6%), 联瑞新材 (+62.7%), and 6+ other candidates that would otherwise look attractive on RPS alone. These are the stocks most likely to mean-revert violently.",
+      "type": "heuristic",
+      "tags": ["entry-filter", "risk-management"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021, h027",
+      "mechanism": "Stocks that have run +20-60% above their 20-day moving average have exhausted short-term buyers. The next marginal trade is overwhelmingly likely to be profit-taking, not new entries."
+    },
+    {
+      "text": "The strategy pool (Cheesefortune intersection) has ~40% concentration in 半导体/电子 sectors. When these sectors rotate out (like today), the pool produces almost zero viable candidates. V3 should expand sector coverage to include media, commodities, and defensive sectors.",
+      "type": "observation",
+      "tags": ["sector", "strategy-design"],
+      "evidence_type": "supporting",
+      "mechanism": "Sector concentration risk in the sourcing pool creates a structural bias — when the dominant sector falls out of favor, the entire candidate pipeline goes dry simultaneously."
+    },
+    {
+      "text": "Semiconductor sector appearing in bottom 5 with 科创50 -3.24% suggests institutional distribution, not retail panic (f10 only 19). This is a 'quiet rotation' — the kind that doesn't trigger panic signals but causes sustained underperformance. Sell-side rotation, not buy-side panic.",
+      "type": "signal",
+      "tags": ["sector", "regime-detection"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h028",
+      "mechanism": "Low f10 + high sector drawdown = institutions quietly reallocating, not retail dumping. These rotations tend to persist for weeks, not days."
+    }
+  ],
+  "market_summary": "Buy gate FAILED: 0/3 major indices green (上证 -0.12%, 深证 -0.60%, 创业板 -0.90%). Breadth 2.47:1 superficially healthy but 科创50 -3.24% reveals heavy tech distribution. Major sector rotation underway: semiconductor/component/comms equipment in bottom 5, media/coal/gas surging. IV mixed — 500ETF IV Rank 7.5% (extreme complacency), 创业板 53.5% (elevated). No new positions. 100% cash.",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}
+```
