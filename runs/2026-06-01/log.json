@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1780285025.407053,
+      "start": 1780299308.8715,
       "errors": [],
-      "end": 1780285046.9384792,
-      "duration_sec": 21.5
+      "end": 1780299322.997066,
+      "duration_sec": 14.1
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 14966,
+      "response_size_bytes": 17224,
       "tokens": {
-        "input_tokens": 220393,
-        "output_tokens": 8483
+        "input_tokens": 316220,
+        "output_tokens": 11546
       },
-      "rounds": 3,
-      "tool_calls_count": 6,
-      "duration_sec": 161.5,
+      "rounds": 4,
+      "tool_calls_count": 7,
+      "duration_sec": 248.7,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -25,24 +25,24 @@
     },
     {
       "phase": "apply",
-      "start": 1780285208.48193,
+      "start": 1780299571.773468,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=86",
-        "Hypothesis: Created h044 (observation): MA-distance Rule 2b is the single most effective filter today — it eliminated 芯碁...",
-        "Hypothesis: Created h045 (observation): The strategy pool (Cheesefortune intersection) has ~40% concentration in 半导体/电子 ...",
-        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=15",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=87",
+        "Hypothesis: Created h046 (observation): Coal sector (+5.6%) driven by Indonesia's single-window export policy (structura...",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=60",
+        "Hypothesis: Created h047 (observation): VCP data coverage is extremely sparse: only 1 of 31 enriched candidates (山东赫达) h...",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1780285208.8852842,
+      "end": 1780299572.1605902,
       "duration_sec": 0.4
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 183.4
+    "totalDurationSec": 263.2
   }
 }

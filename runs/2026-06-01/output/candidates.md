@@ -1,10 +1,10 @@
 # 候选股票 2026-06-01
 
 ## 入场条件: ✅ OPEN
-- 涨跌比: 2.47:1
+- 涨跌比: 2.24:1
 - 下跌指数: 上证指数, 深证成指, 创业板指
 - 新仓位尺寸系数: 1.00x
-- 原因: Entry regime balanced: breadth 2.47:1, 0/3 major indices green, 120 limit-ups / 19 limit-downs. Allow normal sizing.
+- 原因: Entry regime balanced: breadth 2.24:1, 0/3 major indices green, 170 limit-ups / 29 limit-downs. Allow normal sizing.
 
 ## 策略池 (57 stocks)
 

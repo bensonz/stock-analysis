@@ -2,40 +2,76 @@
   "date": "2026-06-01",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4063.722,
-      "change_pct": -0.12
+      "value": 4057.74,
+      "change_pct": -0.27
     },
     "shenzhen_component": {
-      "value": 15481.1,
-      "change_pct": -0.6
+      "value": 15340.36,
+      "change_pct": -1.51
     },
     "chinext": {
-      "value": 4001.52,
-      "change_pct": -0.9
+      "value": 3950.94,
+      "change_pct": -2.15
     },
-    "sentiment": "bearish",
+    "sentiment": "defensive",
     "hot_sectors": [
+      "煤炭开采",
       "数字媒体",
       "广告营销",
-      "煤炭开采",
-      "游戏Ⅱ",
-      "燃气Ⅱ"
+      "农产品加工",
+      "焦炭Ⅱ"
     ],
     "cold_sectors": [
       "玻璃玻纤",
-      "元件",
       "半导体",
+      "元件",
       "通信设备",
       "照明设备Ⅱ"
     ],
-    "notes": "Buy gate FAILED: 0/3 major indices green (上证 -0.12%, 深证 -0.60%, 创业板 -0.90%). Breadth 2.47:1 superficially healthy but 科创50 -3.24% reveals heavy tech distribution. Major sector rotation underway: semiconductor/component/comms equipment in bottom 5, media/coal/gas surging. IV mixed — 500ETF IV Rank 7.5% (extreme complacency), 创业板 53.5% (elevated). No new positions. 100% cash."
+    "notes": "Defensive rotation day: 科创50暴跌-5%领跌，半导体/元件/通信设备全线重挫，AI泡沫退潮。煤炭板块+5.6%逆势暴涨（印尼出口政策催化），焦煤期货+7.2%。三大指数全绿但个股涨多跌少（3776↑/1682↓），典型的'指数跌、个股涨'的板块轮动格局。买入关卡未通过（0/3指数收红），暂停新开仓。IV分化：300ETF极低(14.6%)，创业板偏高(53.5%)，科创50中性(40.2%)。5月制造业PMI 50.0%触及荣枯线。"
   },
   "strategy_scan": {
     "total_stocks_scanned": 57,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-06-01T11:40:08.497849+08:00"
+    "scan_time": "2026-06-01T15:39:31.787755+08:00"
   },
   "recommendations": [
+    {
+      "code": "002810.SZ",
+      "name": "山东赫达",
+      "price": null,
+      "rps120": 94.4,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "603026.SH",
+      "name": "石大胜华",
+      "price": null,
+      "rps120": 94.87,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "002487.SZ",
+      "name": "大金重工",
+      "price": null,
+      "rps120": 89.53,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "301358.SZ",
+      "name": "湖南裕能",
+      "price": null,
+      "rps120": 92.05,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
     {
       "code": "688200.SH",
       "name": "华峰测控",
@@ -50,42 +86,6 @@
       "name": "伟测科技",
       "price": null,
       "rps120": 93.41,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "300666.SZ",
-      "name": "江丰电子",
-      "price": null,
-      "rps120": 93.1,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688037.SH",
-      "name": "芯源微",
-      "price": null,
-      "rps120": 92.45,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688536.SH",
-      "name": "思瑞浦",
-      "price": null,
-      "rps120": 91.34,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "002436.SZ",
-      "name": "兴森科技",
-      "price": null,
-      "rps120": 88.07,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -118,10 +118,10 @@
       "reasoning": ""
     },
     {
-      "code": "688258.SH",
-      "name": "卓易信息",
+      "code": "002436.SZ",
+      "name": "兴森科技",
       "price": null,
-      "rps120": 93.28,
+      "rps120": 88.07,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -134,50 +134,14 @@
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
-    },
-    {
-      "code": "002645.SZ",
-      "name": "华宏科技",
-      "price": null,
-      "rps120": 92.43,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "603026.SH",
-      "name": "石大胜华",
-      "price": null,
-      "rps120": 94.87,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "002810.SZ",
-      "name": "山东赫达",
-      "price": null,
-      "rps120": 94.4,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "002487.SZ",
-      "name": "大金重工",
-      "price": null,
-      "rps120": 89.53,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
     }
   ],
   "summary": {
     "total_scanned": 57,
     "buy_recommendations": 0,
-    "watch_recommendations": 15,
+    "watch_recommendations": 11,
     "avoid_recommendations": 0,
     "market_call": "谨慎",
-    "reasoning": "Buy gate FAILED: 0/3 major indices green (上证 -0.12%, 深证 -0.60%, 创业板 -0.90%). Breadth 2.47:1 superficially healthy but 科创50 -3.24% reveals heavy tech distribution. Major sector rotation underway: semiconductor/component/comms equipment in bottom 5, media/coal/gas surging. IV mixed — 500ETF IV Rank 7.5% (extreme complacency), 创业板 53.5% (elevated). No new positions. 100% cash."
+    "reasoning": "Defensive rotation day: 科创50暴跌-5%领跌，半导体/元件/通信设备全线重挫，AI泡沫退潮。煤炭板块+5.6%逆势暴涨（印尼出口政策催化），焦煤期货+7.2%。三大指数全绿但个股涨多跌少（3776↑/1682↓），典型的'指数跌、个股涨'的板块轮动格局。买入关卡未通过（0/3指数收红），暂停新开仓。IV分化：300ETF极低(14.6%)，创业板偏高(53.5%)，科创50中性(40.2%)。5月制造业PMI 50.0%触及荣枯线。"
   }
 }

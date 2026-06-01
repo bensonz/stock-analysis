@@ -1303,3 +1303,10 @@
 - MA-distance Rule 2b is the single most effective filter today — it eliminated 芯碁微装 (dist_ma20 +38.6%), 联瑞新材 (+62.7%), and 6+ other candidates that would otherwise look attractive on RPS alone. These are the stocks most likely to mean-revert violently.
 - The strategy pool (Cheesefortune intersection) has ~40% concentration in 半导体/电子 sectors. When these sectors rotate out (like today), the pool produces almost zero viable candidates. V3 should expand sector coverage to include media, commodities, and defensive sectors.
 - Semiconductor sector appearing in bottom 5 with 科创50 -3.24% suggests institutional distribution, not retail panic (f10 only 19). This is a 'quiet rotation' — the kind that doesn't trigger panic signals but causes sustained underperformance. Sell-side rotation, not buy-side panic.
+
+### 自动更新 (2026-06-01)
+
+- Buy gate index criterion (≥2 of 3 major indices green) correctly identified a 'rotation not rally' tape today: breadth 2.24:1 bullish but all three indices red, signaling institutional de-risking from large-cap tech into small/mid cyclicals. The index criterion prevents fighting capital flow direction.
+- Coal sector (+5.6%) driven by Indonesia's single-window export policy (structural, 6-month transition to full implementation). This is the strongest non-tech sector catalyst in weeks. But our strategy pool has zero coal-sector candidates — a pipeline gap.
+- MA-distance discipline (Rule 2b) eliminated 6 otherwise-strong candidates today: 芯碁微装, 联瑞新材, 国瓷材料, 卓易信息, 华锡有色, 兴森科技. These stocks have excellent fundamentals/RPS but are too far above short-term support. This rule is preventing chasing entries that V1 would have made.
+- VCP data coverage is extremely sparse: only 1 of 31 enriched candidates (山东赫达) has VCP quality data. This means we're missing the strongest backtested timing signal (+7.7% avg 10d for PREMIUM) on 97% of the candidate pool.

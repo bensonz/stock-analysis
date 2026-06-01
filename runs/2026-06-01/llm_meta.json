@@ -2,68 +2,78 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 220393,
-  "output_tokens": 8483,
-  "rounds": 3,
-  "duration_sec": 161.5,
+  "input_tokens": 316220,
+  "output_tokens": 11546,
+  "rounds": 4,
+  "duration_sec": 248.7,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年6月 热门板块 数字媒体 广告营销 煤炭 上涨原因",
+        "query": "A股 2026年6月1日 市场分析 涨跌原因",
         "max_results": 5
       },
-      "result_length": 144
+      "result_length": 2411
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "科创板 科创50 2026年6月1日 大跌 原因",
+        "query": "煤炭板块 大涨 2026年6月 原因",
         "max_results": 5
       },
-      "result_length": 144
+      "result_length": 3007
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "煤炭板块 2026年5月 走势 动力煤价格",
+        "query": "半导体板块 下跌 2026年6月 原因 科创50",
         "max_results": 5
       },
-      "result_length": 144
+      "result_length": 2811
     },
     {
       "pass": "P1",
       "round": 2,
-      "tool": "web_fetch",
+      "tool": "web_search",
       "input": {
-        "url": "https://www.baidu.com/s?wd=A股+2026年6月+板块+数字媒体+广告营销+煤炭",
-        "maxChars": 5000
+        "max_results": 5,
+        "query": "石大胜华 603026 2026年 电池 电解液 最新消息"
       },
-      "result_length": 5000
+      "result_length": 930
     },
     {
       "pass": "P1",
       "round": 2,
-      "tool": "web_fetch",
+      "tool": "web_search",
       "input": {
-        "url": "https://www.baidu.com/s?wd=科创50+2026年6月+大跌+原因",
-        "maxChars": 5000
+        "max_results": 5,
+        "query": "大金重工 002487 造船合同 2026年 最新消息"
       },
-      "result_length": 5000
+      "result_length": 2327
     },
     {
       "pass": "P1",
-      "round": 2,
+      "round": 3,
       "tool": "web_fetch",
       "input": {
-        "url": "https://www.baidu.com/s?wd=半导体+元件+2026年6月+下跌",
-        "maxChars": 5000
+        "maxChars": 4000,
+        "url": "https://www.21jingji.com/article/20260601/herald/91b3e862440052c5b3cb7948bc4615ed.html"
+      },
+      "result_length": 2270
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 5000,
+        "url": "https://xnews.jin10.com/details/220794"
       },
       "result_length": 5000
     }

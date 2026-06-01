@@ -679,11 +679,15 @@
           {
             "date": "2026-06-01",
             "detail": "Buy gate discipline prevented forced entries on a day when 0/3 major indices are green despite decent 2.47:1 breadth. The index-level signal correctly flagged the rotation risk. Supporting evidence: 科创50 -3.24%, semiconductor/component/comms equipment sectors all in bottom 5."
+          },
+          {
+            "date": "2026-06-01",
+            "detail": "Buy gate index criterion (≥2 of 3 major indices green) correctly identified a 'rotation not rally' tape today: breadth 2.24:1 bullish but all three indices red, signaling institutional de-risking from large-cap tech into small/mid cyclicals. The index criterion prevents fighting capital flow direction."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 86,
+      "sampleSize": 87,
       "hitRate": 1.0,
       "confidence": 0.989,
       "tags": [],
@@ -1001,7 +1005,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-05-29",
+      "lastTested": "2026-06-01",
       "mechanism": "When price gets too stretched above MA5/MA10/MA20, upside becomes dependent on continued euphoria instead of support-based demand, raising mean-reversion risk.",
       "evidence": {
         "supporting": [
@@ -1240,11 +1244,15 @@
           {
             "date": "2026-05-29",
             "detail": "MA-distance rule filters out 5+ stocks today that would have been tempting momentum buys (芯碁微装, 联瑞新材, 明阳电路, 帝尔激光, 华兴源创). These are all >8% above MA10 or >12% above MA20 — buying them would be chasing at the top of a blow-off."
+          },
+          {
+            "date": "2026-06-01",
+            "detail": "MA-distance discipline (Rule 2b) eliminated 6 otherwise-strong candidates today: 芯碁微装, 联瑞新材, 国瓷材料, 卓易信息, 华锡有色, 兴森科技. These stocks have excellent fundamentals/RPS but are too far above short-term support. This rule is preventing chasing entries that V1 would have made."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 59,
+      "sampleSize": 60,
       "hitRate": 1.0,
       "confidence": 0.984,
       "tags": [
@@ -2132,6 +2140,61 @@
       "tags": [
         "sector",
         "strategy-design"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h046",
+      "text": "Coal sector (+5.6%) driven by Indonesia's single-window export policy (structural, 6-month transition to full implementation). This is the strongest non-tech sector catalyst in weeks. But our strategy pool has zero coal-sector candidates — a pipeline gap.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-06-01",
+      "lastTested": "2026-06-01",
+      "mechanism": "Indonesia's policy forces all coal/palm oil/ferroalloy exports through a single state-owned exporter, creating supply-chain friction that could push global coal prices up 5-25%. This is a multi-month catalyst, not a one-day spike.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-06-01",
+            "detail": "Coal sector (+5.6%) driven by Indonesia's single-window export policy (structural, 6-month transition to full implementation). This is the strongest non-tech sector catalyst in weeks. But our strategy pool has zero coal-sector candidates — a pipeline gap."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
+        "catalyst"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h047",
+      "text": "VCP data coverage is extremely sparse: only 1 of 31 enriched candidates (山东赫达) has VCP quality data. This means we're missing the strongest backtested timing signal (+7.7% avg 10d for PREMIUM) on 97% of the candidate pool.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-06-01",
+      "lastTested": "2026-06-01",
+      "mechanism": "The VCP scanner appears to only flag stocks that pass specific Minervini-style contraction criteria. Many high-RPS stocks with strong fundamentals don't meet these narrow criteria, limiting the signal's coverage. This is a pipeline limitation, not a flaw in the VCP concept.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-06-01",
+            "detail": "VCP data coverage is extremely sparse: only 1 of 31 enriched candidates (山东赫达) has VCP quality data. This means we're missing the strongest backtested timing signal (+7.7% avg 10d for PREMIUM) on 97% of the candidate pool."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "data-quality"
       ],
       "parentRule": null,
       "retiredDate": null,

@@ -14,23 +14,23 @@
   "entryRegime": {
     "allow_new_positions": true,
     "regime": "balanced",
-    "breadth_ratio": 2.4666,
-    "up": 3875,
-    "down": 1571,
+    "breadth_ratio": 2.2449,
+    "up": 3776,
+    "down": 1682,
     "positive_indices": [],
     "negative_indices": [
       "上证指数",
       "深证成指",
       "创业板指"
     ],
-    "limit_ups": 120,
-    "limit_downs": 19,
+    "limit_ups": 170,
+    "limit_downs": 29,
     "sizing_multiplier": 1.0,
     "hard_block": false,
-    "reason": "Entry regime balanced: breadth 2.47:1, 0/3 major indices green, 120 limit-ups / 19 limit-downs. Allow normal sizing."
+    "reason": "Entry regime balanced: breadth 2.24:1, 0/3 major indices green, 170 limit-ups / 29 limit-downs. Allow normal sizing."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "Buy gate FAILED: 0/3 major indices green (上证 -0.12%, 深证 -0.60%, 创业板 -0.90%). Breadth 2.47:1 superficially healthy but 科创50 -3.24% reveals heavy tech distribution. Major sector rotation underway: semiconductor/component/comms equipment in bottom 5, media/coal/gas surging. IV mixed — 500ETF IV Rank 7.5% (extreme complacency), 创业板 53.5% (elevated). No new positions. 100% cash."
+    "summary": "Defensive rotation day: 科创50暴跌-5%领跌，半导体/元件/通信设备全线重挫，AI泡沫退潮。煤炭板块+5.6%逆势暴涨（印尼出口政策催化），焦煤期货+7.2%。三大指数全绿但个股涨多跌少（3776↑/1682↓），典型的'指数跌、个股涨'的板块轮动格局。买入关卡未通过（0/3指数收红），暂停新开仓。IV分化：300ETF极低(14.6%)，创业板偏高(53.5%)，科创50中性(40.2%)。5月制造业PMI 50.0%触及荣枯线。"
   }
 }
