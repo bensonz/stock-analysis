@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 222231,
+  "output_tokens": 10370,
+  "rounds": 3,
+  "duration_sec": 184.4,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月2日 市场分析 热门板块",
+        "max_results": 10
+      },
+      "result_length": 5663
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "通信设备板块 大涨 2026年6月 原因",
+        "max_results": 10
+      },
+      "result_length": 5912
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 小金属 锡 涨价 2026年6月",
+        "max_results": 10
+      },
+      "result_length": 5465
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 10,
+        "query": "A股 2026年6月2日 涨跌家数 指数涨个股跌 二八分化"
+      },
+      "result_length": 6005
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 10,
+        "query": "英伟达 AI PC 芯片 2026年6月 通信设备 光模块"
+      },
+      "result_length": 5580
+    }
+  ],
+  "fallback_used": false
+}

@@ -1,0 +1,48 @@
+{
+  "date": "2026-06-02",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1780385732.525252,
+      "errors": [],
+      "end": 1780385744.182345,
+      "duration_sec": 11.7
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 17752,
+      "tokens": {
+        "input_tokens": 222231,
+        "output_tokens": 10370
+      },
+      "rounds": 3,
+      "tool_calls_count": 5,
+      "duration_sec": 184.4,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1780385928.663119,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=88",
+        "Hypothesis: Created h048 (observation): NVIDIA GTC Taipei (June 1) is the dominant sector catalyst today, driving 通信设备 (...",
+        "Hypothesis: Created h049 (observation): 华丰科技's June 29解禁 (61% of shares, 2.79亿股) is a hard block on entry for the next 4...",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=16",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1780385929.226805,
+      "duration_sec": 0.6
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 196.7
+  }
+}

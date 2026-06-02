@@ -1,0 +1,36 @@
+{
+  "date": "2026-06-02",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 966982.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.3,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -33018.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.3981,
+    "up": 1543,
+    "down": 3876,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 98,
+    "limit_downs": 18,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.40:1, 3/3 major indices green, 98 limit-ups / 18 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Severe breadth divergence: all 3 major indices green (上证+0.43%, 深证+1.63%, 创业板+2.66%) but breadth only 0.40:1 (1543↑/3876↓). Classic large-cap lift masking broad selloff. 98涨停/18跌停. Hot sectors: 通信设备+6.41% (NVIDIA GTC catalyst), 元件+5.64%, 工业金属+4.16% (copper/tin surge), 小金属+3.5% (算力金属锡+40%半年). IV overall neutral (avg 36.6%), 科创50 elevated at 56.3%. Buy gate FAILS on breadth — cash preserved. No new positions until breadth normalizes above 1.5:1."
+  }
+}
