@@ -1324,3 +1324,10 @@
 - MA-distance anti-chase filter eliminates ~70% of today's 29 enriched candidates. The stocks being eliminated (芯碁微装 +11.1%, 联瑞新材 +21.2%, 国瓷材料 +11.6%) are the exact type V1 bought and lost money on. This filter is the single most effective gate for preventing FOMO entries.
 - 华锡有色 锡/算力金属 catalyst is genuine (连续异常波动公告, 小金属板块拉升) but the stock is severely overextended (dist_ma5=12.6%, dist_ma10=16.6%). A good catalyst does not justify chasing an overextended price. The same lesson applies to 联瑞新材 and 国瓷材料 — all have real catalysts but prices have run too far.
 - 华丰科技 has a massive 解禁 event on June 29 (61% of total shares, 2.79亿股). Regardless of the 铜缆高速连接 narrative strength, this event risk is too large for a momentum position. The stock could gap down significantly on or before the unlock date.
+
+### 自动更新 (2026-06-03)
+
+- Panic regime with green indices is the most dangerous tape for momentum: 50 large-cap tech names lift the index while 3,727 stocks decline. Breadth (0.46:1) tells the real story — buying into narrowing leadership invites whipsaw on rotation reversal.
+- MA-distance Rule 2b correctly blocks the most tempting FOMO candidates: 芯碁微装(dist_ma5=11.1%), 联瑞新材(21.2%), 华锡有色(12.6%), 兴森科技(8.8%) — all in hot sectors with strong narratives, all overextended. These are precisely the stocks V1 would have bought at the top.
+- 华峰测控(688200) pullback to near MA10 in #4 半导体 sector is the cleanest setup in the pool: RPS120=94.01% sweet spot, dist_ma10=-5.4%, fundamentals strong (rev +51%, profit +82%), 大股东减持 event is known and priced. Top candidate when regime clears.
+- Tech/consumer divergence is structural, not rotational: 通信设备 +207% 12-month vs 白酒 -26%. Money is reallocating from consumption to AI/productivity, not rotating between them. This means consumer-sector bargains are value traps, not rotation plays.

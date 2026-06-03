@@ -1,183 +1,154 @@
-## Research Memo - June 3, 2026
+# Research Memo — 2026-06-03
 
----
+## 1. Market Regime
 
-### 1. Market Regime
+**PANIC — HARD BLOCK ON NEW POSITIONS**
 
-**Regime: BULLISH INDICES, BEARISH BREADTH — "Narrow Rally"**
+The surface numbers look fine: all three major indices green (上证 +0.22%, 深证 +0.73%, 创业板 +1.65%), 科创50 surging +2.11%. But beneath the index paint, the tape is ugly:
 
 | Metric | Value | Signal |
 |--------|-------|--------|
-| 上证指数 | +0.56% | 🟢 |
-| 深证成指 | +2.31% | 🟢 |
-| 创业板指 | +3.97% | 🟢 |
-| 科创50 | +4.78% | 🟢 |
-| Up/Down Ratio | 1,998 / 3,440 = 0.58:1 | 🔴 BELOW 1:1 |
-| 涨停 (r10) | 83 | normal |
-| 跌停 (f10) | 18 | safe |
-| IV (avg rank) | 36.6% | neutral |
+| Up/Down ratio | 1713/3727 = **0.46:1** | ❌ Far below 1.5:1 gate |
+| 跌停 (f10) | **31** | ❌ ≥30 panic threshold triggered |
+| 涨停 (r10) | 82 | OK but insufficient |
+| Distribution skew | 2297 stocks down 0-2%, 1151 down 2-4% | Broad-based selling |
 
-**Key observation:** All 4 major indices are green, with 科创50 surging +4.78%. But 3,440 stocks are DOWN vs only 1,998 UP. The distribution is heavily skewed: 2,262 stocks down 0-2% (f0_2 bucket is the largest). This is a classic **narrow rally** — mega-cap tech/semis are lifting indices while the broad market bleeds.
+This is a textbook **narrow leadership** day. A handful of large-cap tech/communication names are dragging the indices higher while ~3,727 stocks decline. The market is effectively voting "risk-off" despite green screens.
 
-**Minimum Buy Gate Analysis:**
-- ❌ Up/Down ratio 0.58:1 < 1.5:1 required
-- ✅ 3/3 major indices green
-- ❌ Breadth below 1:1
+**IV context**: Overall neutral (avg IV rank 36.6%), but 科创50 IV Rank at 56.3% (elevated) reflects the recent tech volatility. 300ETF/500ETF IV ranks are low (21-24%), suggesting complacency in broad market — but that's misleading given the underlying breadth.
 
-**Verdict: BUY GATE FAILED. No new positions.** The breadth below 1:1 is a hard block per Rule 1.
+**Macro backdrop**: Tech rotation theme persists; 通信设备 (5月 +15%, 1年 +207%) and 半导体 (+64% since April) are the dominant narratives. Consumer/cyclical sectors continue to bleed. The market is betting the AI cycle has years to run. But 5月底 tech had a sharp correction (科创50 -5% in 2 days, then bouncing), and today's breadth suggests the bounce is narrow and fragile.
 
-**IV Context:**
-- 科创50 IV Rank: 56.3% (elevated — selective entries)
-- 300ETF IV Rank: 23.8% (low)
-- Overall: neutral to slightly cautious
+**Verdict**: `new_positions: []`. No exceptions. The `entry_regime` system's `hard_block: true` is correct. Even the best-looking candidates must wait.
 
 ---
 
-### 2. Sector Analysis
+## 2. Sector Analysis
 
-**Hot Sectors (Top 5 by 5d performance):**
-1. 通信设备: +8.85% — ACCELERATING (yesterday's communication equipment momentum continuing)
-2. 半导体: +5.89% — STEADY uptrend
-3. 光学光电子: +5.00% — STEADY
-4. 小金属: +4.55% — RECENT SURGE (锡/small metals catalyst)
-5. 自动化设备: +4.05% — STEADY
+### Hot Sectors (Top 5 Today)
+| Rank | Sector | Today Pct | Trend | Thesis |
+|------|--------|-----------|-------|--------|
+| 1 | 通信设备 | +5.46% | Persistent | AI光通信/CPO主线，英伟达算力链 |
+| 2 | 航天装备Ⅱ | +3.91% | Warming | 商业航天+军工电子共振 |
+| 3 | 小金属 | +3.58% | Accelerating | 锡/锑"算力金属"涨价，华锡有色连续涨停 |
+| 4 | 半导体 | +3.35% | Persistent (correcting from highs) | AI芯片+设备+材料，但5月底减持潮+高拥挤度 |
+| 5 | 油服工程 | +3.00% | New | 可能是油价反弹驱动，关注持续性 |
 
-**Cold Sectors (Bottom 5):**
-1. 非白酒: -2.85%
-2. 休闲食品: -2.62%
-3. 教育: -2.24%
-4. 饲料: -2.20%
-5. 酒店餐饮: -2.14%
+### Cold Sectors (Bottom 5)
+玻璃玻纤 -2.63%, 航空机场 -2.63%, 教育 -2.43%, 非白酒 -2.39%, 休闲食品 -2.37% — consumer/cyclical carnage continues. These are hard no-buy zones.
 
-**Rotation Signal:** Tech/AI hardware (通信设备, 半导体, 光学光电子) are the clear leaders. Consumer/defensive sectors are being rotated out of aggressively. This is a "risk-on within tech, risk-off everywhere else" tape.
+### Rotation Signal
+The tech→consumer divergence is not rotating; it's **widening**. 通信设备 up 207% over 12 months vs 白酒 -26%. This is structural reallocation, not sector rotation. Money is flowing from consumption/value to AI/productivity plays and not coming back.
 
-**Sector Persistence:** 通信设备 and 半导体 have been in the top ranks consistently. This is not a one-day spike — it's persistent sector leadership.
-
-**Position Alignment:** 0/0 — no active positions.
+### Position Sector Alignment
+0/0 positions in hot sectors (no active positions).
 
 ---
 
-### 3. Position Review
+## 3. Position Review
 
-**No active positions.** Portfolio is 100% cash with ¥966,982 equity. Realized PnL: -¥33,018 (-3.3%).
-
-This is a fresh start. The portfolio has been cleaned out and is ready to deploy when the market regime improves.
+**No active positions.** Portfolio: ¥966,982 cash (100%), realized PnL: -¥33,018 (-3.3% total). Clean slate, waiting for favorable regime.
 
 ---
 
-### 4. New Entry Candidates
+## 4. New Entry Candidates
 
-Despite the buy gate failing, I want to flag the strongest candidates that WOULD be actionable if breadth improves:
+**ALL CANDIDATES BLOCKED** by panic regime (`hard_block: true`, breadth 0.46:1, f10≥30).
 
-#### Top Candidates (passing MA distance + RPS + Sector filters):
+Below is my watchlist for when regime improves — these are the candidates I'd prioritize:
 
-**A. 688200 华峰测控** (半导体设备)
-- RPS120: 94.01% (92-95% extended zone)
-- Sector: 半导体 — #2 hot sector ✅
-- MA: dist_ma5=-7.1%, dist_ma10=-5.4%, dist_ma20=8.8% — all within limits ✅ (in pullback from MA5/MA10)
-- PE: 95.4, 0 risks? Actually 2 risks (抛压 2026-05-21, 估值)
-- Recent: 大股东询价转让1%股份 at ¥388.98 — caused selling pressure
-- Current price: ¥383.78
-- Catalyst: 半导体设备 industry uptrend since April 2026, 9 institutions forecast >20% annual growth
-- **Issue:** In pullback territory (down -7.1% from MA5), which could mean it's finding support or continuing to weaken. The 询价转让 overhang is a near-term headwind.
-- **If breadth improves:** Could be a BUY at ¥383-390 with stop at ¥364.59
+### Tier 1 — Would Buy on Regime Improvement
 
-**B. 688372 伟测科技** (集成电路封测)
-- RPS120: 93.41% (92-95% extended zone)
-- Sector: 半导体 — #2 hot sector ✅
-- MA: dist_ma5=-7.5%, dist_ma10=-8.0%, dist_ma20=-1.1% — pullback, within limits ✅
-- PE: 74.4, revenue growth +46%, net profit +226%
-- Current price: ¥149.38
-- Catalyst: Strong earnings growth, capacity expansion (在建工程 18% of assets)
-- **Issue:** Pullback from highs, needs to find support at MA20 (~¥150.99)
-- **If breadth improves:** Interesting entry near MA20 support
+**688200 华峰测控** (半导体设备)
+- RPS120: 94.01% ✅ (sweet spot)
+- Sector: 半导体 (#4, +3.35%) ✅
+- MA: dist_ma5=-7.1%, dist_ma10=-5.4%, dist_ma20=8.8% — pulling back to MA10 area, not overextended ✅
+- Catalyst: 半导体测试设备龙头, Q3 revenue +51%, net profit +82%
+- Risk: 大股东询价转让1% @388.98 (stock now 383.78 — below transfer price, may create overhang)
+- IV: 科创50 IV Rank 56.3% (elevated, be selective)
+- Verdict: **Best pullback candidate in hot sector.** The 大股东减持 signal is a yellow flag but the transfer is already executed at a fixed price. When regime clears, this is a STRONG BUY candidate.
 
-**C. 688037 芯源微** (半导体设备)
-- RPS120: 92.45% (92-95% extended zone)
-- Sector: 半导体 — #2 hot sector ✅
-- MA: dist_ma5=-9.0%, dist_ma10=-9.1%, dist_ma20=5.7% — deep pullback but within limits ✅
-- PE: 741 (distorted by low earnings), 3 risks
-- Revenue declining -10.4% YoY — RED FLAG
-- Current price: ¥241.52
-- **Issue:** Revenue decline contradicts sector strength. The stock is riding sector coat-tails, not fundamental improvement.
-- **Verdict:** Skip even if breadth improves — fundamentals deteriorating
+**688536 思瑞浦** (模拟芯片)
+- RPS120: 91.34% ✅ (sweet spot)
+- Sector: 半导体 (#4) ✅
+- MA: dist_ma5=-5.2%, dist_ma10=-1.3% — hugging MA10, clean setup ✅
+- Catalyst: Q3 net profit +577% YoY, revenue +80%, 12 analysts bullish
+- Risk: 商誉占净资产11% (minor)
+- Verdict: **Clean pullback to MA10 in hot sector.** No overextension. When regime clears, BUY.
 
-**D. 002812 恩捷股份** (电池化学品)
-- RPS120: 91.15% (sweet spot 80-92%)
-- Sector: 电池 — NOT in top 5 sectors ❌
-- MA: All below MAs (dist_ma5=-3.2%, dist_ma10=-8.7%, dist_ma20=-8.7%)
-- Current price: ¥67.66
-- **Verdict:** Skip — sector not hot. Battery sector is not in today's top ranks.
+**002947 恒铭达** (消费电子)
+- RPS120: 93.24% ✅
+- Sector: 消费电子 (not top 5 today, but 元件/消费电子 are adjacent to hot tech theme)
+- MA: dist_ma5=-2.4%, dist_ma10=0.0% — exactly at MA10, textbook support ✅
+- Catalyst: Q3 net profit +31%, revenue +16%, 0 risks
+- Verdict: Perched at MA10 with zero risk factors. Good setup but sector is second-tier relative to 通信/半导体. When regime clears, BUY at moderate size.
 
-**E. 688629 华丰科技** (军工电子/铜缆高速连接)
-- RPS120: 86.29% (sweet spot)
-- Sector: 军工电子 — NOT in top 5 ❌
-- MA: dist_ma5=-6.1%, dist_ma10=-5.2%, dist_ma20=4.1% ✅
-- However: 铜缆高速连接 concept is hot (关联通信设备板块)
-- Current price: ¥134.85
-- **Issue:** Major 解禁 coming June 29 (61% of shares) — MAJOR RED FLAG
-- **Verdict:** Skip — 解禁 risk too large regardless of sector
+**300666 江丰电子** (半导体材料/靶材)
+- RPS120: 93.10% ✅
+- Sector: 半导体 (#4) ✅
+- MA: dist_ma5=4.5%, dist_ma10=6.2% — borderline but within limits (dist_ma10 < 8%) ⚠️
+- Catalyst: 靶材国产替代龙头, Q3 revenue +25%, 合同负债+903%, 光刻机板块联动
+- Risk: 05-21大跌-10.6% (recent selloff)
+- Verdict: Slightly extended from MA10 but in the strongest sector. Recent selloff may have cleared weak hands. When regime clears, BUY at moderate size.
 
-**F. 688002 睿创微纳** (军工电子)
-- RPS120: 89.45% (sweet spot)
-- Sector: 军工电子 — NOT in top 5 ❌
-- MA: All below MAs (dist_ma5=-4.9%, dist_ma10=-8.8%, dist_ma20=-4.8%)
-- Excellent fundamentals: revenue +30%, net profit +60%, 7.5% 北向持股
-- Current price: ¥123.71
-- **Verdict:** Good stock, wrong sector. Skip per sector-first rule.
+### Tier 2 — Interesting But Needs Confirmation
+
+**002645 华宏科技** (环保设备/稀土回收)
+- RPS120: 92.43% ✅, MA distances OK
+- Sector: 环保设备Ⅱ — NOT in top 5 (but has 稀土概念 which could ride 小金属 wave)
+- Catalyst: Q3 net profit +595%, revenue +35%
+- Risk: 大股东质押100% (very high risk), 商誉17%
+- Verdict: Incredible earnings but sector is wrong and 质押 risk is disqualifying for anything above SMALL BUY.
+
+**301603 乔锋智能** (工业母机/机床)
+- RPS120: 90.85% ✅, dist_ma5=1.3% ✅, dist_ma10=-2.5% ✅
+- Sector: 通用设备 (not top 5)
+- Catalyst: 人形机器人概念, 工业母机, 机构目标135元 (当前131.5)
+- Verdict: Good setup, wrong sector. Would need 通用设备 to crack top 30%.
 
 ---
 
-### 5. Skip List
+## 5. Skip List
 
 | Code | Name | Reason |
 |------|------|--------|
-| 688630 | 芯碁微装 | dist_ma5=11.1% > 6%. Chasing. |
-| 688300 | 联瑞新材 | dist_ma5=21.2%. Extreme extension. |
-| 300285 | 国瓷材料 | dist_ma5=11.6% > 6%. |
-| 688258 | 卓易信息 | dist_ma5=7.1% > 6%. |
-| 300666 | 江丰电子 | dist_ma20=21.9% > 12%. |
-| 002645 | 华宏科技 | dist_ma20=16.9% > 12%. |
-| 603663 | 三祥新材 | dist_ma10=16.4% > 8%. |
-| 600301 | 华锡有色 | dist_ma5=12.6% > 6%. Overextended despite 锡 catalyst. |
-| 002436 | 兴森科技 | dist_ma5=8.8% > 6%. Chasing. |
-| 301182 | 凯旺科技 | dist_ma20=20.8% > 12%. |
-| 002947 | 恒铭达 | dist_ma20=18.2% > 12%. |
-| 301603 | 乔锋智能 | dist_ma20=21.7% > 12%. |
-| 301018 | 申菱环境 | Deep pullback (-28.6% from MA5). Sector (通用设备) not in top 5. |
-| 605060 | 联德股份 | RPS20=46.48 — losing momentum. Sector not top 5. |
-| 002810 | 山东赫达 | Sector (化学制品) not in top 5. RPS120=94.4% extended without sector support. |
-| 000833 | 粤桂股份 | Sector (综合) not top. RPS20=68 — weak short-term. |
-| 001337 | 四川黄金 | Sector (贵金属) in bottom — 贵金属板块疲软. RPS20=57.92. |
-| 300870 | 欧陆通 | Sector not top 5. Deep pullback from highs. |
-| 688037 | 芯源微 | Revenue declining -10.4%. Fundamentals contradict sector strength. |
-| 301358 | 湖南裕能 | Sector (电池) not in top 5. |
-| 002487 | 大金重工 | Sector (风电设备) not in top 5. RPS20=80.65 weak. |
-| 688002 | 睿创微纳 | Sector (军工电子) not in top 5. |
-| 300236 | 上海新阳 | Sector (电子化学品) not in top 5. |
-| 688629 | 华丰科技 | 解禁 61% of shares on June 29 — extreme risk. |
-| 300323 | 华灿光电 | dist_ma20=12.1% borderline. Sector (光学光电子) is #3 though. |
-| 688536 | 思瑞浦 | dist_ma20=17.8% > 12%. |
+| 688308 | 欧科亿 | RPS120=99.9% >95% chasing zone; dist_ma10=15%, dist_ma20=28.2% extreme extension |
+| 002980 | 华盛昌 | RPS120=99.72% >95%; dist_ma10=8.2% >8% Rule 2b violation |
+| 688630 | 芯碁微装 | dist_ma5=11.1% >6% Rule 2b; dist_ma10=18.4% >8%; extreme chase risk despite hot sector |
+| 688300 | 联瑞新材 | dist_ma5=21.2%, dist_ma10=41.1% — absurd extension; HBM概念但已严重超买 |
+| 600301 | 华锡有色 | dist_ma5=12.6% >6%; 连续涨停后严重超买; "算力金属"叙事强劲但买点已过 |
+| 002436 | 兴森科技 | dist_ma5=8.8% >6%; dist_ma10=15.0% >8%; RPS120=88.07% borderline |
+| 688258 | 卓易信息 | dist_ma5=7.1% >6% Rule 2b; 核心技术人员减持; 近10日走势弱于94%股票 |
+| 300285 | 国瓷材料 | dist_ma5=11.6% >6%; extreme extension; MLCC概念已充分定价 |
+| 001337 | 四川黄金 | 贵金属板块疲软 (sector risk: 近3月弱于97.7%板块); 今日贵金属板块持续下挫 |
+| 301018 | 申菱环境 | dist_ma5=-28.6%, dist_ma10=-31.3% — 股价已跌破所有均线，崩盘走势 |
+| 300870 | 欧陆通 | dist_ma5=-11.8%, dist_ma10=-24.2% — 深度回调中，趋势已经破坏 |
+| 688037 | 芯源微 | PE=734, 净利-125% YoY (亏损), 收益质量极低; 半导体概念但基本面太差 |
+| 002812 | 恩捷股份 | 电池板块下挫中; dist_ma10=-8.7%, 净利-125%; 锂电池隔膜龙头但行业逆风 |
+| 603663 | 三祥新材 | dist_ma10=16.4% >8% Rule 2b; PE=204; 固态电池概念但估值离谱 |
+| 688629 | 华丰科技 | RPS120=86.29% <90% sweet spot; 6月底解禁61%总股本 (巨大风险); dist_ma5=-6.1% |
 
 ---
 
-### 6. Learnings
+## 6. Learnings
 
-1. **[New] Narrow rally trap:** All 4 major indices green but 63% of stocks are declining. This is not a healthy bull market — it's a concentrated tech rally while the broad market weakens. The breadth below 1:1 is a legitimate reason to stay in cash despite the index-level strength.
+1. **[NEW] Panic regime with green indices is the most dangerous tape for momentum traders.** When the index is lifted by 50 large-cap tech names while 3,700+ stocks decline, the breadth is telling you the real story. Buying into this is buying into a narrowing market — when the rotation reverses, you get whipsawed on both sides. This directly supports **hypothesis h013**: breadth is the true regime indicator, not index color.
 
-2. **[New] MA-distance filter eliminates 70%+ of candidates:** Of 29 enriched candidates, only ~10 pass the anti-chase filter. The ones eliminated are the exact type that caused V1 losses (芯碁微装 was previously bought at extended levels and got stopped out).
+2. **[NEW] The MA-distance filter is blocking exactly the right stocks.** 芯碁微装, 联瑞新材, 华锡有色, 兴森科技 — these are the most exciting names in the hottest sectors, and every single one is blocked by Rule 2b. These are the stocks V1 would have FOMO-chased and lost money on. V2's discipline keeps us out.
 
-3. **[Confirming h019/h027]** Bottom-list sectors (食品饮料, 教育, 酒店餐饮) continue to be de-risked while tech hardware compounds. The sector-first rule is working.
+3. **[REINFORCEMENT] Sector persistence matters more than one-day sector rankings.** 通信设备 and 半导体 have been leading for months (通信设备 12-month +207%). When regime improves, these remain the priority hunting grounds. Don't get distracted by one-day spikes in secondary sectors like 油服工程.
 
-4. **[New] 华锡有色锡 catalyst real but price has run too far:** The 锡/"算力金属" narrative is genuine (continuous limit-ups, 异常波动公告), but dist_ma5=12.6% means the entry window closed. Need to wait for a pullback toward MA10 (~¥57).
+4. **[OBSERVATION] The 华峰测控 pullback is the cleanest setup in the pool.** Pulling back to near MA10 in the #4 sector, RPS in sweet spot, fundamentals strong, and the 大股东减持 event is a known quantity (already priced). If regime were "normal" today, this would be my top pick. Queue it for tomorrow if breadth improves.
+
+5. **[OBSERVATION] Several enriched candidates show >20% dist_ma20 — these stocks have run too far too fast.** 联瑞新材 (+62.7%), 国瓷材料 (+46.2%), 芯碁微装 (+38.6%), 兴森科技 (+30.9%). These are not "dips to buy" — they are extended names that need weeks of consolidation before re-entry is safe.
 
 ---
 
-### 7. Uncertainty Flags
+## 7. Uncertainty Flags
 
-- **Index vs breadth divergence:** I'm uncertain how long this narrow rally can persist. Historically, when breadth is this weak while indices are strong, it often resolves with the indices correcting toward the breadth, not the other way around.
-- **通信设备 +8.85% 5d:** This sector is on fire but almost every stock in it is extended. I'm uncertain whether there's any entry point at current levels.
-- **华峰测控 询价转让:** The ¥388.98 reference price from the 询价转让 could act as a resistance/support level. The stock at ¥383.78 is slightly below this level — uncertain whether this is an opportunity or a warning.
+- **Regime duration**: How long will this panic/divergence tape last? The tech correction from late May was sharp but brief (2 days). Today's breadth suggests the market hasn't fully digested that correction. I'm uncertain whether this is a 1-2 day pause or the start of a broader de-risking.
+- **科创50 IV elevation**: 56.3% IV rank suggests options market is pricing elevated risk in tech. This could mean more volatility ahead — or it could mean the correction is already priced. Unclear.
+- **小金属 sustainability**: 华锡有色 went limit-up 2 consecutive days (6/1, 6/2) on "算力金属" narrative. These parabolic moves tend to reverse violently. Even if the thesis is real, entry timing is everything.
 
 ---
 
@@ -187,121 +158,151 @@ Despite the buy gate failing, I want to flag the strongest candidates that WOULD
 {
   "sector_analysis": {
     "hot_sectors": [
-      {"name": "通信设备", "5d_pct": 8.85, "trend": "accelerating"},
-      {"name": "半导体", "5d_pct": 5.89, "trend": "steady"},
-      {"name": "光学光电子", "5d_pct": 5.0, "trend": "steady"},
-      {"name": "小金属", "5d_pct": 4.55, "trend": "surging"},
-      {"name": "自动化设备", "5d_pct": 4.05, "trend": "steady"}
+      {"name": "通信设备", "5d_pct": 5.46, "trend": "persistent"},
+      {"name": "航天装备Ⅱ", "5d_pct": 3.91, "trend": "warming"},
+      {"name": "小金属", "5d_pct": 3.58, "trend": "accelerating"},
+      {"name": "半导体", "5d_pct": 3.35, "trend": "persistent (correcting from highs)"},
+      {"name": "油服工程", "5d_pct": 3.00, "trend": "new, monitor for persistence"}
     ],
     "cold_sectors": [
-      {"name": "非白酒", "5d_pct": -2.85, "trend": "deteriorating"},
-      {"name": "休闲食品", "5d_pct": -2.62, "trend": "deteriorating"},
-      {"name": "教育", "5d_pct": -2.24, "trend": "deteriorating"},
-      {"name": "饲料", "5d_pct": -2.2, "trend": "deteriorating"},
-      {"name": "酒店餐饮", "5d_pct": -2.14, "trend": "deteriorating"}
+      {"name": "玻璃玻纤", "5d_pct": -2.63, "trend": "deteriorating"},
+      {"name": "航空机场", "5d_pct": -2.63, "trend": "deteriorating"},
+      {"name": "教育", "5d_pct": -2.43, "trend": "deteriorating"},
+      {"name": "非白酒", "5d_pct": -2.39, "trend": "deteriorating"},
+      {"name": "休闲食品", "5d_pct": -2.37, "trend": "deteriorating"}
     ],
     "position_alignment": "0/0 positions (no active positions)",
-    "regime": "Narrow tech rally — indices green but breadth 0.58:1, 63% of stocks declining. Consumer/defensive sectors being rotated out aggressively. Communication equipment and semiconductors are the only places with real momentum."
+    "regime": "PANIC — narrow tech leadership masking broad selling; 通信/半导体 persistent leaders, consumer/cyclicals in structural decline"
   },
   "position_decisions": [],
   "new_positions": [],
   "skip_list": [
     {
-      "code": "688200",
-      "name": "华峰测控",
-      "reason": "BUY GATE FAILED (breadth 0.58:1 < 1.5:1). Top candidate otherwise: 半导体 sector #2, RPS120=94.01%, MA distances within limits (pullback from MA5). Monitor for entry if breadth improves above 1.5:1. Key watch: 询价转让 ¥388.98 reference level.",
-      "rps120": 94.01
+      "code": "688308",
+      "name": "欧科亿",
+      "reason": "RPS120=99.9% >95% chasing zone; dist_ma10=15.0%, dist_ma20=28.2% extreme Rule 2b violation",
+      "rps120": 99.9
     },
     {
-      "code": "688372",
-      "name": "伟测科技",
-      "reason": "BUY GATE FAILED. 半导体 sector #2, RPS120=93.41%, pulling back to MA20 support at ~¥150.99. Monitor for entry at MA20 if breadth recovers.",
-      "rps120": 93.41
+      "code": "002980",
+      "name": "华盛昌",
+      "reason": "RPS120=99.72% >95%; dist_ma10=8.2% exceeds 8% Rule 2b threshold",
+      "rps120": 99.72
     },
     {
       "code": "688630",
       "name": "芯碁微装",
-      "reason": "dist_ma5_pct=11.1% > 6% — overextended. Chasing risk too high. Also BUY GATE FAILED.",
+      "reason": "dist_ma5=11.1% >6% Rule 2b violation; extreme chase risk despite hot sector and strong fundamentals",
       "rps120": 94.52
     },
     {
       "code": "688300",
       "name": "联瑞新材",
-      "reason": "dist_ma5_pct=21.2% — extreme extension. dist_ma10_pct=41.1%. Way too far from support.",
-      "rps120": 94.5
-    },
-    {
-      "code": "300285",
-      "name": "国瓷材料",
-      "reason": "dist_ma5_pct=11.6% > 6% — overextended. dist_ma10_pct=25.2%.",
-      "rps120": 93.33
+      "reason": "dist_ma5=21.2%, dist_ma10=41.1% — absurd overextension; HBM概念已严重超买",
+      "rps120": 94.50
     },
     {
       "code": "600301",
       "name": "华锡有色",
-      "reason": "dist_ma5_pct=12.6% > 6% — overextended. 锡 catalyst is real but entry window closed. Wait for pullback to MA10 (~¥57).",
+      "reason": "dist_ma5=12.6% >6% Rule 2b; 连续涨停后严重超买; 小金属 sector #3 but entry timing wrong",
       "rps120": 91.19
-    },
-    {
-      "code": "688629",
-      "name": "华丰科技",
-      "reason": "June 29 解禁 of 61% total shares — extreme event risk. Also sector (军工电子) not in top 5. Skip regardless of breadth.",
-      "rps120": 86.29
-    },
-    {
-      "code": "688037",
-      "name": "芯源微",
-      "reason": "Revenue declining -10.4% YoY contradicts 半导体 sector strength. Riding sector coat-tails with deteriorating fundamentals. Skip.",
-      "rps120": 92.45
-    },
-    {
-      "code": "001337",
-      "name": "四川黄金",
-      "reason": "Sector (贵金属) in bottom — 贵金属板块疲软,走势弱于其他 97.7% 的板块. RPS20=57.92. 今日跌超6%. Hard avoid.",
-      "rps120": 93.59
     },
     {
       "code": "002436",
       "name": "兴森科技",
-      "reason": "dist_ma5_pct=8.8% > 6% — overextended. dist_ma10_pct=15.0%. Despite 元件 sector momentum, chasing risk too high.",
+      "reason": "dist_ma5=8.8% >6%, dist_ma10=15.0% >8% Rule 2b; RPS120=88.07% borderline",
       "rps120": 88.07
+    },
+    {
+      "code": "688258",
+      "name": "卓易信息",
+      "reason": "dist_ma5=7.1% >6% Rule 2b; 核心技术人员减持中; 近10日走势弱于94%同市场股票",
+      "rps120": 93.28
+    },
+    {
+      "code": "300285",
+      "name": "国瓷材料",
+      "reason": "dist_ma5=11.6% >6% Rule 2b; dist_ma10=25.2% extreme; MLCC概念已充分定价",
+      "rps120": 93.33
+    },
+    {
+      "code": "001337",
+      "name": "四川黄金",
+      "reason": "贵金属板块疲软 — 近3月弱于97.7%板块; 今日贵金属持续下挫; sector bottom zone, hard skip",
+      "rps120": 93.59
+    },
+    {
+      "code": "301018",
+      "name": "申菱环境",
+      "reason": "dist_ma5=-28.6%, dist_ma10=-31.3% — 股价已崩盘跌破所有均线，趋势完全破坏",
+      "rps120": 94.72
+    },
+    {
+      "code": "300870",
+      "name": "欧陆通",
+      "reason": "dist_ma5=-11.8%, dist_ma10=-24.2% — 深度回调中，下降趋势确立",
+      "rps120": 92.78
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "PE=734, 净利-125% YoY严重亏损, 收益质量极低; 半导体板块但基本面不支撑",
+      "rps120": 92.45
+    },
+    {
+      "code": "002812",
+      "name": "恩捷股份",
+      "reason": "电池板块下挫; 净利-125%, 收现比仅75%; 锂电池隔膜龙头但行业逆风+基本面恶化",
+      "rps120": 91.15
+    },
+    {
+      "code": "603663",
+      "name": "三祥新材",
+      "reason": "dist_ma10=16.4% >8% Rule 2b; PE=204; 固态电池概念但估值泡沫化",
+      "rps120": 92.23
+    },
+    {
+      "code": "688629",
+      "name": "华丰科技",
+      "reason": "RPS120=86.29% below 90% sweet spot; 2026-06-29解禁61%总股本 (existential risk); dist_ma5=-6.1% weak tape",
+      "rps120": 86.29
     }
   ],
   "new_learnings": [
     {
-      "text": "Narrow rally detected: all 4 major indices green (+0.56% to +4.78%) but Up/Down ratio is 0.58:1 with 63% of stocks declining. The index-level strength masks broad market weakness — this is concentrated in mega-cap tech/semis. The breadth below 1:1 triggers the hard no-new-positions rule per the minimum buy gate.",
+      "text": "Panic regime with green indices is the most dangerous tape for momentum: 50 large-cap tech names lift the index while 3,727 stocks decline. Breadth (0.46:1) tells the real story — buying into narrowing leadership invites whipsaw on rotation reversal.",
       "type": "signal",
-      "tags": ["entry-filter", "timing"],
+      "tags": ["entry-filter", "regime-detection"],
       "evidence_type": "supporting",
       "related_hypothesis": "h013",
-      "mechanism": "When indices are lifted by a narrow set of large-cap stocks while the broad market deteriorates, new entries face elevated whipsaw risk — the rally lacks participation and can reverse quickly. Cash preservation is the correct stance."
+      "mechanism": "Index-level gains driven by <5% of stocks create a false signal of market health. When breadth diverges this sharply from indices, the market is effectively distributing — weak hands chase the index, strong hands sell the majority."
     },
     {
-      "text": "MA-distance anti-chase filter eliminates ~70% of today's 29 enriched candidates. The stocks being eliminated (芯碁微装 +11.1%, 联瑞新材 +21.2%, 国瓷材料 +11.6%) are the exact type V1 bought and lost money on. This filter is the single most effective gate for preventing FOMO entries.",
+      "text": "MA-distance Rule 2b correctly blocks the most tempting FOMO candidates: 芯碁微装(dist_ma5=11.1%), 联瑞新材(21.2%), 华锡有色(12.6%), 兴森科技(8.8%) — all in hot sectors with strong narratives, all overextended. These are precisely the stocks V1 would have bought at the top.",
       "type": "rule",
       "tags": ["entry-filter", "timing"],
       "evidence_type": "supporting",
-      "related_hypothesis": "h021",
-      "mechanism": "Stocks that have spiked 10%+ above MA5 are in a mean-reversion danger zone — the probability of a pullback in the next 3-5 days is high. Waiting for the pullback to MA5/MA10 support dramatically improves risk/reward."
+      "related_hypothesis": "h027",
+      "mechanism": "Hot sectors create narrative gravity that overrides price discipline. The MA-distance rule acts as a mechanical circuit breaker that cannot be overridden by sector enthusiasm."
     },
     {
-      "text": "华锡有色 锡/算力金属 catalyst is genuine (连续异常波动公告, 小金属板块拉升) but the stock is severely overextended (dist_ma5=12.6%, dist_ma10=16.6%). A good catalyst does not justify chasing an overextended price. The same lesson applies to 联瑞新材 and 国瓷材料 — all have real catalysts but prices have run too far.",
-      "type": "observation",
+      "text": "华峰测控(688200) pullback to near MA10 in #4 半导体 sector is the cleanest setup in the pool: RPS120=94.01% sweet spot, dist_ma10=-5.4%, fundamentals strong (rev +51%, profit +82%), 大股东减持 event is known and priced. Top candidate when regime clears.",
+      "type": "heuristic",
       "tags": ["timing", "sector"],
       "evidence_type": "supporting",
-      "related_hypothesis": "h027",
-      "mechanism": "Catalyst strength determines direction; MA distance determines timing. Confusing the two leads to buying right before a pullback."
+      "mechanism": "A known negative catalyst (大股东询价转让) that has already executed at a fixed price removes uncertainty — the overhang is quantified and absorbed. Combined with pullback to technical support in a hot sector, this creates an asymmetric entry."
     },
     {
-      "text": "华丰科技 has a massive 解禁 event on June 29 (61% of total shares, 2.79亿股). Regardless of the 铜缆高速连接 narrative strength, this event risk is too large for a momentum position. The stock could gap down significantly on or before the unlock date.",
-      "type": "heuristic",
-      "tags": ["entry-filter"],
+      "text": "Tech/consumer divergence is structural, not rotational: 通信设备 +207% 12-month vs 白酒 -26%. Money is reallocating from consumption to AI/productivity, not rotating between them. This means consumer-sector bargains are value traps, not rotation plays.",
+      "type": "observation",
+      "tags": ["sector"],
       "evidence_type": "supporting",
-      "mechanism": "解禁 events >30% of float create structural selling pressure that overwhelms short-term momentum signals. The market prices in the unlock weeks ahead."
+      "related_hypothesis": "h019",
+      "mechanism": "When the divergence is driven by fundamental re-rating (AI productivity vs consumption stagnation) rather than sentiment rotation, mean-reversion strategies fail. The trend is the trend until the fundamental driver changes."
     }
   ],
-  "market_summary": "Narrow tech rally: 科创50 +4.78%, 创业板 +3.97%, but breadth only 0.58:1 with 63% stocks declining. Communication equipment (+8.85% 5d) and semiconductors (+5.89%) lead while consumer sectors (-2% to -3%) are aggressively rotated out. IV neutral overall (avg rank 36.6%) but 科创50 IV elevated at 56.3%. BUY GATE FAILED due to breadth below 1:1 — no new positions. 100% cash.",
-  "market_sentiment": "cautious",
-  "market_call": "观望"
+  "market_summary": "PANIC REGIME — Hard block on new longs. Indices green (上证+0.22%, 深证+0.73%, 创业板+1.65%, 科创50+2.11%) but breadth catastrophic at 0.46:1 (1713↑/3727↓). 31跌停 vs 82涨停. Narrow tech leadership masking broad-based selling — a handful of large-cap 通信/半导体 names are lifting indices while ~68% of stocks decline. IV mixed: 科创50 elevated at 56.3% rank (volatility premium in tech), broad market IV low-moderate. 通信设备(+5.46%) and 半导体(+3.35%) persist as leaders; consumer/cyclical sectors in structural decline. No active positions; cash 100%. Waiting for breadth to clear 1.5:1 gate before deploying.",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
 }
 ```

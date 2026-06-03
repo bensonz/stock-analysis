@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1780457720.391642,
+      "start": 1780472111.677205,
       "errors": [],
-      "end": 1780457735.449758,
-      "duration_sec": 15.1
+      "end": 1780472123.265005,
+      "duration_sec": 11.6
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 14451,
+      "response_size_bytes": 15732,
       "tokens": {
-        "input_tokens": 66573,
-        "output_tokens": 9629
+        "input_tokens": 219805,
+        "output_tokens": 10534
       },
-      "rounds": 1,
-      "tool_calls_count": 0,
-      "duration_sec": 171.2,
+      "rounds": 3,
+      "tool_calls_count": 5,
+      "duration_sec": 225.5,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -25,24 +25,24 @@
     },
     {
       "phase": "apply",
-      "start": 1780457906.69286,
+      "start": 1780472348.864495,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=89",
-        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=61",
-        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=14",
-        "Hypothesis: Created h050 (observation): 华丰科技 has a massive 解禁 event on June 29 (61% of total shares, 2.79亿股). Regardless...",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=90",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=15",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=17",
+        "Hypothesis: Updated h019 (validated): +1 supporting evidence → hitRate=100%, n=6",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1780457906.961403,
+      "end": 1780472349.125463,
       "duration_sec": 0.3
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 186.6
+    "totalDurationSec": 237.4
   }
 }

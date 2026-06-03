@@ -691,11 +691,15 @@
           {
             "date": "2026-06-03",
             "detail": "Narrow rally detected: all 4 major indices green (+0.56% to +4.78%) but Up/Down ratio is 0.58:1 with 63% of stocks declining. The index-level strength masks broad market weakness — this is concentrated in mega-cap tech/semis. The breadth below 1:1 triggers the hard no-new-positions rule per the minimum buy gate."
+          },
+          {
+            "date": "2026-06-03",
+            "detail": "Panic regime with green indices is the most dangerous tape for momentum: 50 large-cap tech names lift the index while 3,727 stocks decline. Breadth (0.46:1) tells the real story — buying into narrowing leadership invites whipsaw on rotation reversal."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 89,
+      "sampleSize": 90,
       "hitRate": 1.0,
       "confidence": 0.989,
       "tags": [],
@@ -932,7 +936,7 @@
       "type": "heuristic",
       "status": "validated",
       "created": "2026-04-01",
-      "lastTested": "2026-05-29",
+      "lastTested": "2026-06-03",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -955,13 +959,17 @@
           {
             "date": "2026-05-29",
             "detail": "Two top fundamental candidates (睿创微纳 score 9.3/0风险, 伟测科技 score 8.2) are in cold/dead sectors. V1 would have bought them 'on fundamentals' and lost money. V2 correctly skips. Sector-first discipline is protecting capital."
+          },
+          {
+            "date": "2026-06-03",
+            "detail": "Tech/consumer divergence is structural, not rotational: 通信设备 +207% 12-month vs 白酒 -26%. Money is reallocating from consumption to AI/productivity, not rotating between them. This means consumer-sector bargains are value traps, not rotation plays."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 5,
+      "sampleSize": 6,
       "hitRate": 1.0,
-      "confidence": 0.857,
+      "confidence": 0.875,
       "tags": [
         "sector",
         "entry-filter"
@@ -1579,13 +1587,17 @@
           {
             "date": "2026-06-03",
             "detail": "华锡有色 锡/算力金属 catalyst is genuine (连续异常波动公告, 小金属板块拉升) but the stock is severely overextended (dist_ma5=12.6%, dist_ma10=16.6%). A good catalyst does not justify chasing an overextended price. The same lesson applies to 联瑞新材 and 国瓷材料 — all have real catalysts but prices have run too far."
+          },
+          {
+            "date": "2026-06-03",
+            "detail": "MA-distance Rule 2b correctly blocks the most tempting FOMO candidates: 芯碁微装(dist_ma5=11.1%), 联瑞新材(21.2%), 华锡有色(12.6%), 兴森科技(8.8%) — all in hot sectors with strong narratives, all overextended. These are precisely the stocks V1 would have bought at the top."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 14,
+      "sampleSize": 15,
       "hitRate": 1.0,
-      "confidence": 0.938,
+      "confidence": 0.941,
       "tags": [
         "entry-filter",
         "timing",
@@ -1601,7 +1613,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-06-02",
+      "lastTested": "2026-06-03",
       "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally.",
       "evidence": {
         "supporting": [
@@ -1668,13 +1680,17 @@
           {
             "date": "2026-06-02",
             "detail": "The '算力金属' narrative (tin for AI soldering) is the strongest commodity thesis in the market right now — tin +40% in 6 months on supply constraints (Myanmar, Indonesia, Congo) + AI demand. However, 华锡有色 and other tin plays are all overextended on MAs. The thesis is correct but the entry timing is wrong. Wait for MA pullback."
+          },
+          {
+            "date": "2026-06-03",
+            "detail": "华峰测控(688200) pullback to near MA10 in #4 半导体 sector is the cleanest setup in the pool: RPS120=94.01% sweet spot, dist_ma10=-5.4%, fundamentals strong (rev +51%, profit +82%), 大股东减持 event is known and priced. Top candidate when regime clears."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 16,
+      "sampleSize": 17,
       "hitRate": 1.0,
-      "confidence": 0.944,
+      "confidence": 0.947,
       "tags": [
         "sector",
         "timing"

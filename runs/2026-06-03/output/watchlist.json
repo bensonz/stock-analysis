@@ -2,54 +2,54 @@
   "date": "2026-06-03",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4097.941,
-      "change_pct": 0.56
+      "value": 4083.974,
+      "change_pct": 0.22
     },
     "shenzhen_component": {
-      "value": 15951.08,
-      "change_pct": 2.31
+      "value": 15704.71,
+      "change_pct": 0.73
     },
     "chinext": {
-      "value": 4216.74,
-      "change_pct": 3.97
+      "value": 4122.99,
+      "change_pct": 1.65
     },
-    "sentiment": "cautious",
+    "sentiment": "bearish",
     "hot_sectors": [
       "通信设备",
-      "半导体",
-      "光学光电子",
+      "航天装备Ⅱ",
       "小金属",
-      "自动化设备"
+      "半导体",
+      "油服工程"
     ],
     "cold_sectors": [
-      "非白酒",
-      "休闲食品",
+      "玻璃玻纤",
+      "航空机场",
       "教育",
-      "饲料",
-      "酒店餐饮"
+      "非白酒",
+      "休闲食品"
     ],
-    "notes": "Narrow tech rally: 科创50 +4.78%, 创业板 +3.97%, but breadth only 0.58:1 with 63% stocks declining. Communication equipment (+8.85% 5d) and semiconductors (+5.89%) lead while consumer sectors (-2% to -3%) are aggressively rotated out. IV neutral overall (avg rank 36.6%) but 科创50 IV elevated at 56.3%. BUY GATE FAILED due to breadth below 1:1 — no new positions. 100% cash."
+    "notes": "PANIC REGIME — Hard block on new longs. Indices green (上证+0.22%, 深证+0.73%, 创业板+1.65%, 科创50+2.11%) but breadth catastrophic at 0.46:1 (1713↑/3727↓). 31跌停 vs 82涨停. Narrow tech leadership masking broad-based selling — a handful of large-cap 通信/半导体 names are lifting indices while ~68% of stocks decline. IV mixed: 科创50 elevated at 56.3% rank (volatility premium in tech), broad market IV low-moderate. 通信设备(+5.46%) and 半导体(+3.35%) persist as leaders; consumer/cyclical sectors in structural decline. No active positions; cash 100%. Waiting for breadth to clear 1.5:1 gate before deploying."
   },
   "strategy_scan": {
-    "total_stocks_scanned": 53,
+    "total_stocks_scanned": 52,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-06-03T11:38:26.702694+08:00"
+    "scan_time": "2026-06-03T15:39:08.876081+08:00"
   },
   "recommendations": [
     {
-      "code": "688200.SH",
-      "name": "华峰测控",
+      "code": "688308.SH",
+      "name": "欧科亿",
       "price": null,
-      "rps120": 94.01,
+      "rps120": 99.9,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "688372.SH",
-      "name": "伟测科技",
+      "code": "002980.SZ",
+      "name": "华盛昌",
       "price": null,
-      "rps120": 93.41,
+      "rps120": 99.72,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -73,15 +73,6 @@
       "reasoning": ""
     },
     {
-      "code": "300285.SZ",
-      "name": "国瓷材料",
-      "price": null,
-      "rps120": 93.33,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
       "code": "600301.SH",
       "name": "华锡有色",
       "price": null,
@@ -91,19 +82,28 @@
       "reasoning": ""
     },
     {
-      "code": "688629.SH",
-      "name": "华丰科技",
+      "code": "002436.SZ",
+      "name": "兴森科技",
       "price": null,
-      "rps120": 86.29,
+      "rps120": 88.07,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "688037.SH",
-      "name": "芯源微",
+      "code": "688258.SH",
+      "name": "卓易信息",
       "price": null,
-      "rps120": 92.45,
+      "rps120": 93.28,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "300285.SZ",
+      "name": "国瓷材料",
+      "price": null,
+      "rps120": 93.33,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -118,21 +118,66 @@
       "reasoning": ""
     },
     {
-      "code": "002436.SZ",
-      "name": "兴森科技",
+      "code": "301018.SZ",
+      "name": "申菱环境",
       "price": null,
-      "rps120": 88.07,
+      "rps120": 94.72,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "300870.SZ",
+      "name": "欧陆通",
+      "price": null,
+      "rps120": 92.78,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688037.SH",
+      "name": "芯源微",
+      "price": null,
+      "rps120": 92.45,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "002812.SZ",
+      "name": "恩捷股份",
+      "price": null,
+      "rps120": 91.15,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "603663.SH",
+      "name": "三祥新材",
+      "price": null,
+      "rps120": 92.23,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688629.SH",
+      "name": "华丰科技",
+      "price": null,
+      "rps120": 86.29,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     }
   ],
   "summary": {
-    "total_scanned": 53,
+    "total_scanned": 52,
     "buy_recommendations": 0,
-    "watch_recommendations": 10,
+    "watch_recommendations": 15,
     "avoid_recommendations": 0,
-    "market_call": "观望",
-    "reasoning": "Narrow tech rally: 科创50 +4.78%, 创业板 +3.97%, but breadth only 0.58:1 with 63% stocks declining. Communication equipment (+8.85% 5d) and semiconductors (+5.89%) lead while consumer sectors (-2% to -3%) are aggressively rotated out. IV neutral overall (avg rank 36.6%) but 科创50 IV elevated at 56.3%. BUY GATE FAILED due to breadth below 1:1 — no new positions. 100% cash."
+    "market_call": "谨慎",
+    "reasoning": "PANIC REGIME — Hard block on new longs. Indices green (上证+0.22%, 深证+0.73%, 创业板+1.65%, 科创50+2.11%) but breadth catastrophic at 0.46:1 (1713↑/3727↓). 31跌停 vs 82涨停. Narrow tech leadership masking broad-based selling — a handful of large-cap 通信/半导体 names are lifting indices while ~68% of stocks decline. IV mixed: 科创50 elevated at 56.3% rank (volatility premium in tech), broad market IV low-moderate. 通信设备(+5.46%) and 半导体(+3.35%) persist as leaders; consumer/cyclical sectors in structural decline. No active positions; cash 100%. Waiting for breadth to clear 1.5:1 gate before deploying."
   }
 }
