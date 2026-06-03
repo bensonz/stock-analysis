@@ -1,0 +1,48 @@
+{
+  "date": "2026-06-03",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1780457720.391642,
+      "errors": [],
+      "end": 1780457735.449758,
+      "duration_sec": 15.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 14451,
+      "tokens": {
+        "input_tokens": 66573,
+        "output_tokens": 9629
+      },
+      "rounds": 1,
+      "tool_calls_count": 0,
+      "duration_sec": 171.2,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1780457906.69286,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=89",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=61",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=14",
+        "Hypothesis: Created h050 (observation): 华丰科技 has a massive 解禁 event on June 29 (61% of total shares, 2.79亿股). Regardless...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1780457906.961403,
+      "duration_sec": 0.3
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 186.6
+  }
+}
