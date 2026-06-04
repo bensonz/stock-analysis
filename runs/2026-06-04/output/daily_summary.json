@@ -1,0 +1,36 @@
+{
+  "date": "2026-06-04",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 966982.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.3,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -33018.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.3261,
+    "up": 1344,
+    "down": 4121,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 92,
+    "limit_downs": 34,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.33:1, 0/3 major indices green, 92 limit-ups / 34 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "PANIC regime: breadth 0.33:1 (1,344 up / 4,121 down), all 3 major indices red, 92涨停/34跌停. K-shaped divergence — electronics/AI hardware complex (元件+4.4%, 电子化学品+4.0%, 光学光电子+3.6%) holds gains while cyclicals and industrials are dumped (-4.5% industrial metals). IV mixed: 科创50 elevated at 56.3%, 300ETF complacent at 23.8%. This suggests institutional rotation INTO tech quality, not broad liquidation. Hard block on new positions — 100% cash is correct."
+  }
+}

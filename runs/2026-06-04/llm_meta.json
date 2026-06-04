@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 207598,
+  "output_tokens": 9521,
+  "rounds": 3,
+  "duration_sec": 192.3,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月4日 市场分析 板块轮动",
+        "max_results": 5
+      },
+      "result_length": 2880
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "电子化学品 光学光电子 元件 板块 上涨 2026年6月",
+        "max_results": 5
+      },
+      "result_length": 2503
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 工业金属 下跌 2026年6月 市场风格",
+        "max_results": 5
+      },
+      "result_length": 1996
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "上海新阳 300236 电子化学品 半导体材料 2026"
+      },
+      "result_length": 1548
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 2026年6月4日 市场下跌 原因 跌停"
+      },
+      "result_length": 2829
+    }
+  ],
+  "fallback_used": false
+}

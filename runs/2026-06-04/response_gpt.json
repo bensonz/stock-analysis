@@ -1,0 +1,181 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "元件",
+        "5d_pct": null,
+        "1d_pct": 4.42,
+        "trend": "accelerating, AI-PCB demand driving"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": null,
+        "1d_pct": 3.99,
+        "trend": "steady, semiconductor materials wave"
+      },
+      {
+        "name": "光学光电子",
+        "5d_pct": null,
+        "1d_pct": 3.6,
+        "trend": "steady, LED/display cycle"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": null,
+        "1d_pct": 3.1,
+        "trend": "steady"
+      },
+      {
+        "name": "焦炭Ⅱ",
+        "5d_pct": null,
+        "1d_pct": 2.46,
+        "trend": "one-day spike, verify persistence"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "工业金属",
+        "5d_pct": null,
+        "1d_pct": -4.49,
+        "trend": "deteriorating rapidly"
+      },
+      {
+        "name": "商用车",
+        "5d_pct": null,
+        "1d_pct": -3.65,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "油服工程",
+        "5d_pct": null,
+        "1d_pct": -3.47,
+        "trend": "weak"
+      },
+      {
+        "name": "电池",
+        "5d_pct": null,
+        "1d_pct": -3.32,
+        "trend": "weak"
+      },
+      {
+        "name": "综合Ⅱ",
+        "5d_pct": null,
+        "1d_pct": -3.19,
+        "trend": "weak"
+      }
+    ],
+    "position_alignment": "0/0 positions (empty portfolio, 100% cash)",
+    "regime": "PANIC/K-shaped: Electronics/AI hardware complex holding gains while 4,121 stocks decline. Industrial metals and cyclicals being de-risked aggressively. Institutional rotation INTO tech, not fleeing equities."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "reason": "BEST SETUP TODAY but PANIC hard block. 电子化学品Ⅱ (top 2 sector, +3.99%), RPS120=89.06% sweet spot, all MA distances within limits (dist_ma5=-7.5% pullback to support), 0 risk factors, net profit +103% YoY catalyst. Strong BUY candidate when market gate reopens.",
+      "rps120": 89.06
+    },
+    {
+      "code": "300323",
+      "name": "华灿光电",
+      "reason": "光学光电子 (top 3 sector, +3.6%), RPS120=91.76% sweet spot, BUT dist_ma5_pct=8.4% exceeds 6% hard cap (Rule 2b). Also still loss-making and sector overextended. Wait for pullback to MA5.",
+      "rps120": 91.76
+    },
+    {
+      "code": "002436",
+      "name": "兴森科技",
+      "reason": "元件 (TOP 1 sector, +4.42%), RPS120=88.07% in range, BUT dist_ma5=8.8% (>6%), dist_ma10=15.0% (>8%), 5 risk factors. Extreme extension. Must consolidate before entry.",
+      "rps120": 88.07
+    },
+    {
+      "code": "300285",
+      "name": "国瓷材料",
+      "reason": "电子化学品Ⅱ (top 2), RPS120=93.33% slightly above sweet spot, BUT dist_ma5=11.6%, dist_ma10=25.2%, dist_ma20=46.2% — triple MA violation. Hit new high intraday then sold off. Classic chasing trap.",
+      "rps120": 93.33
+    },
+    {
+      "code": "688629",
+      "name": "华丰科技",
+      "reason": "RPS120=86.29% (low end), MA distances OK, BUT 61% lockup expiry June 29 (25 days away). Massive dilution risk. Avoid until post-expiry clarity. Sector 军工电子 not confirmed in top 30%.",
+      "rps120": 86.29
+    },
+    {
+      "code": "001337",
+      "name": "四川黄金",
+      "reason": "Sector (贵金属/工业金属 -4.49%) in BOTTOM zone. Sector gravity wins regardless of stock quality. RPS120=93.59% irrelevant when sector is getting destroyed.",
+      "rps120": 93.59
+    },
+    {
+      "code": "002645",
+      "name": "华宏科技",
+      "reason": "dist_ma5=15.1% — extreme extension (Rule 2b). dist_ma20=34.9%. 大股东100%质押 = forced liquidation risk. RPS120=92.43% doesn't matter when the chart is vertical and insiders can't afford a dip.",
+      "rps120": 92.43
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "dist_ma20=19.2% (>12% hard cap). 10-day price momentum in bottom 6.2% — weak recent tape despite high RPS120=94.01%. 大股东询价转让 at ¥388.98 creates overhang.",
+      "rps120": 94.01
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Entry_regime hard block correctly prevented new positions on a panic day (breadth 0.33:1, 0/3 green indices, f10=34). This discipline alone preserves capital when 75% of stocks are declining. V2's simplest rule may be its most valuable.",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "When breadth is below 1:1 and all major indices are red, even the strongest individual setups face systematic selling pressure that overwhelms stock-specific catalysts. Cash is the correct position."
+    },
+    {
+      "text": "K-shaped market days create deceptive signals: 元件 +4.42% while 4,121 stocks decline. The hot sectors can tempt cherry-picking, but individual stock selection cannot overcome the systematic selling pressure. 300236 上海新阳 looked perfect on paper — the correct decision was still to skip.",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "Institutional rotation creates pockets of strength even on broad selloff days. These pockets often reverse the next day if the selling accelerates. Wait for breadth to confirm before entering."
+    },
+    {
+      "text": "MA-distance Rule 2b filters out ~50% of enriched candidates today. Of 25 reviewed, 12+ failed dist_ma5>6% or dist_ma10>8% or dist_ma20>12%. Confirmed by active learnings h021 and h027 — this rule is essential and should never be overridden.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "Stocks extended far above short-term MAs have high mean-reversion risk. The best entries come from pullbacks to MA5/MA10/MA20 support within an uptrend, not from chasing vertical moves."
+    },
+    {
+      "text": "华丰科技 688629 has 61% lockup expiry on June 29. Even if technicals improve, this massive dilution overhang makes it untouchable until post-expiry. Add 'major lockup expiry within 30 days' as a hard skip criterion for new positions.",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "Lockup expiries >20% of float create asymmetric downside risk. Insiders and pre-IPO investors are incentivized to sell immediately, creating selling pressure that no catalyst can overcome in the short term."
+    },
+    {
+      "text": "The strongest candidate (300236 上海新阳) is a pullback-to-support setup (dist_ma5=-7.5%), not a breakout. When the market gate reopens, prioritize stocks that have corrected to MA support within hot sectors over stocks hitting new highs. This aligns with the VCP concept — contraction before expansion.",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "Pullbacks within uptrends offer better risk/reward than breakouts because the stop (entry -5%) is closer to natural support levels, while upside remains intact. Breakouts in a weak tape often fail immediately."
+    }
+  ],
+  "market_summary": "PANIC regime: breadth 0.33:1 (1,344 up / 4,121 down), all 3 major indices red, 92涨停/34跌停. K-shaped divergence — electronics/AI hardware complex (元件+4.4%, 电子化学品+4.0%, 光学光电子+3.6%) holds gains while cyclicals and industrials are dumped (-4.5% industrial metals). IV mixed: 科创50 elevated at 56.3%, 300ETF complacent at 23.8%. This suggests institutional rotation INTO tech quality, not broad liquidation. Hard block on new positions — 100% cash is correct.",
+  "market_sentiment": "bearish",
+  "market_call": "观望"
+}
