@@ -2,45 +2,54 @@
   "date": "2026-06-05",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4075.315,
-      "change_pct": 0.43
+      "value": 4027.736,
+      "change_pct": -0.74
     },
     "shenzhen_component": {
-      "value": 15623.57,
-      "change_pct": -0.24
+      "value": 15314.7,
+      "change_pct": -2.21
     },
     "chinext": {
-      "value": 4055.23,
-      "change_pct": -0.82
+      "value": 3957.94,
+      "change_pct": -3.2
     },
-    "sentiment": "neutral",
+    "sentiment": "bearish",
     "hot_sectors": [
       "航天装备Ⅱ",
+      "数字媒体",
+      "金属新材料",
       "化学纤维",
-      "光学光电子",
-      "冶钢原料",
-      "金属新材料"
+      "电机Ⅱ"
     ],
     "cold_sectors": [
       "半导体",
+      "元件",
       "电力",
-      "光伏设备",
-      "文娱用品",
-      "其他电子Ⅱ"
+      "通信设备",
+      "其他电源设备Ⅱ"
     ],
-    "notes": "Bifurcated market: breadth strong (2.83:1, 4014 up/1420 down, 69涨停/7跌停) but only 上证指数 green (+0.43%). 深证(-0.24%), 创业板(-0.82%), 科创50(-1.70%) all red on tech rotation. IV neutral (avg rank 36.6%), 科创50 IV elevated 56.3%. Sector rotation: money flowing OUT of semiconductor (-1.95%) and INTO aerospace (+5.78%), chemical fiber (+4.10%), optoelectronics (+3.88%). Buy gate FAILS on 1/3 indices rule — no new positions. Portfolio 100% cash (¥967K, -3.3% total)."
+    "notes": "Broadcom AI guidance miss triggered global semiconductor rout; A-share 科创50 -4.01%, 创业板 -3.20%, 深证 -2.21%. Rotation from AI/semiconductor into defense/aerospace (+6.92%) and resource metals (+3.14%). Breadth 1.55:1 masks concentration risk — the 'up' stocks are mostly small-caps barely positive (r0_2=2015 stocks). 88涨停/18跌停, no panic but clear sector rotation. IV mixed: 科创50 elevated (56.3%), 300ETF low (23.8%). Buy gate CLOSED (0/3 major indices green). 100% cash, waiting for regime to stabilize."
   },
   "strategy_scan": {
     "total_stocks_scanned": 49,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-06-05T11:46:03.011533+08:00"
+    "scan_time": "2026-06-05T15:39:01.592893+08:00"
   },
   "recommendations": [
     {
-      "code": "300323.SZ",
-      "name": "华灿光电",
+      "code": "600301.SH",
+      "name": "华锡有色",
       "price": null,
-      "rps120": 91.76,
+      "rps120": 91.19,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688002.SH",
+      "name": "睿创微纳",
+      "price": null,
+      "rps120": 89.45,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -55,37 +64,10 @@
       "reasoning": ""
     },
     {
-      "code": "600301.SH",
-      "name": "华锡有色",
+      "code": "688629.SH",
+      "name": "华丰科技",
       "price": null,
-      "rps120": 91.19,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "002810.SZ",
-      "name": "山东赫达",
-      "price": null,
-      "rps120": 94.4,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688630.SH",
-      "name": "芯碁微装",
-      "price": null,
-      "rps120": 94.52,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688037.SH",
-      "name": "芯源微",
-      "price": null,
-      "rps120": 92.45,
+      "rps120": 86.29,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -100,28 +82,46 @@
       "reasoning": ""
     },
     {
-      "code": "688200.SH",
-      "name": "华峰测控",
+      "code": "688037.SH",
+      "name": "芯源微",
       "price": null,
-      "rps120": 94.01,
+      "rps120": 92.45,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "688536.SH",
-      "name": "思瑞浦",
+      "code": "688630.SH",
+      "name": "芯碁微装",
       "price": null,
-      "rps120": 91.34,
+      "rps120": 94.52,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "300666.SZ",
-      "name": "江丰电子",
+      "code": "688300.SH",
+      "name": "联瑞新材",
       "price": null,
-      "rps120": 93.1,
+      "rps120": 94.5,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "002645.SZ",
+      "name": "华宏科技",
+      "price": null,
+      "rps120": 92.43,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "002436.SZ",
+      "name": "兴森科技",
+      "price": null,
+      "rps120": 88.07,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -132,7 +132,7 @@
     "buy_recommendations": 0,
     "watch_recommendations": 10,
     "avoid_recommendations": 0,
-    "market_call": "观望",
-    "reasoning": "Bifurcated market: breadth strong (2.83:1, 4014 up/1420 down, 69涨停/7跌停) but only 上证指数 green (+0.43%). 深证(-0.24%), 创业板(-0.82%), 科创50(-1.70%) all red on tech rotation. IV neutral (avg rank 36.6%), 科创50 IV elevated 56.3%. Sector rotation: money flowing OUT of semiconductor (-1.95%) and INTO aerospace (+5.78%), chemical fiber (+4.10%), optoelectronics (+3.88%). Buy gate FAILS on 1/3 indices rule — no new positions. Portfolio 100% cash (¥967K, -3.3% total)."
+    "market_call": "谨慎",
+    "reasoning": "Broadcom AI guidance miss triggered global semiconductor rout; A-share 科创50 -4.01%, 创业板 -3.20%, 深证 -2.21%. Rotation from AI/semiconductor into defense/aerospace (+6.92%) and resource metals (+3.14%). Breadth 1.55:1 masks concentration risk — the 'up' stocks are mostly small-caps barely positive (r0_2=2015 stocks). 88涨停/18跌停, no panic but clear sector rotation. IV mixed: 科创50 elevated (56.3%), 300ETF low (23.8%). Buy gate CLOSED (0/3 major indices green). 100% cash, waiting for regime to stabilize."
   }
 }

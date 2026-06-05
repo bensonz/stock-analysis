@@ -2,40 +2,40 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 290528,
-  "output_tokens": 14621,
+  "input_tokens": 281487,
+  "output_tokens": 10762,
   "rounds": 4,
-  "duration_sec": 304.5,
+  "duration_sec": 220.5,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年6月5日 航天装备 化学纤维 光学光电子 热门板块",
+        "query": "A股 2026年6月5日 市场下跌 半导体暴跌 原因",
         "max_results": 5
       },
-      "result_length": 2764
+      "result_length": 3027
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 半导体板块 下跌 2026年6月5日 原因",
+        "query": "航天装备板块 大涨 2026年6月 军工",
         "max_results": 5
       },
-      "result_length": 3190
+      "result_length": 2058
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "华灿光电 300323 LED 光学光电子 2026年6月 催化剂",
+        "query": "华锡有色 锡价 算力金属 2026年6月",
         "max_results": 5
       },
-      "result_length": 1552
+      "result_length": 2833
     },
     {
       "pass": "P1",
@@ -43,9 +43,9 @@
       "tool": "web_search",
       "input": {
         "max_results": 5,
-        "query": "华锡有色 600301 锡价 小金属 2026年6月 催化剂"
+        "query": "A股 2026年6月5日 创业板大跌 科创50 跌4% 市场分析"
       },
-      "result_length": 2317
+      "result_length": 3195
     },
     {
       "pass": "P1",
@@ -53,19 +53,9 @@
       "tool": "web_search",
       "input": {
         "max_results": 5,
-        "query": "石大胜华 603026 电解液 固态电池 2026年6月"
+        "query": "石大胜华 锂电池 电解液 2026年6月 最新动态"
       },
-      "result_length": 2511
-    },
-    {
-      "pass": "P1",
-      "round": 2,
-      "tool": "web_search",
-      "input": {
-        "max_results": 5,
-        "query": "A股 2026年6月5日 宏观 政策 央行 逆回购"
-      },
-      "result_length": 2876
+      "result_length": 2513
     },
     {
       "pass": "P1",
@@ -73,9 +63,9 @@
       "tool": "web_search",
       "input": {
         "max_results": 5,
-        "query": "山东赫达 002810 纤维素醚 2026年 业绩 催化剂"
+        "query": "睿创微纳 688002 2026年 军工电子 最新消息"
       },
-      "result_length": 2358
+      "result_length": 1632
     },
     {
       "pass": "P1",
@@ -83,9 +73,9 @@
       "tool": "web_search",
       "input": {
         "max_results": 5,
-        "query": "航天装备 化学纤维 板块 2026年6月 上涨原因 A股"
+        "query": "华丰科技 688629 解禁 2026年6月 军工"
       },
-      "result_length": 2856
+      "result_length": 2641
     }
   ],
   "fallback_used": false

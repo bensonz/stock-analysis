@@ -703,11 +703,15 @@
           {
             "date": "2026-06-05",
             "detail": "The 2/3 major indices buy gate correctly flagged index-level weakness even when breadth was 2.83:1 bullish. Today market was bifurcated — broad stocks up but tech-heavy indices (深证/创业板) down. The gate prevented buying into a rotation without clarity."
+          },
+          {
+            "date": "2026-06-05",
+            "detail": "The buy gate rule (≥2/3 major indices green) correctly prevented false entries today. Breadth 1.55:1 gave a false positive, but index-level data captured the real story: heavy concentrated selling in the largest tech names. Validates h013 (breadth alone insufficient)."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 92,
+      "sampleSize": 93,
       "hitRate": 1.0,
       "confidence": 0.989,
       "tags": [],
@@ -979,13 +983,17 @@
           {
             "date": "2026-06-05",
             "detail": "Semiconductor went from #1 hottest sector to #1 coldest in ~5 trading days. Multiple high-quality candidates (芯源微, 伟测科技, 华峰测控, 思瑞浦, 江丰电子) are instantly disqualified by cold-sector rule. h019 confirmed: bottom-list sectors are hard no-buy zones."
+          },
+          {
+            "date": "2026-06-05",
+            "detail": "Broadcom FY2027 AI guidance miss (-12.6% overnight) triggered a global semiconductor sell-off that cascaded into A-share 科创50 -4.01%. External US tech earnings are now the dominant swing factor for A-share semiconductor/tech sectors. When the US AI hardware narrative cracks, A-share semis deflate fast."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 8,
+      "sampleSize": 9,
       "hitRate": 1.0,
-      "confidence": 0.9,
+      "confidence": 0.909,
       "tags": [
         "sector",
         "entry-filter"
@@ -1300,11 +1308,15 @@
           {
             "date": "2026-06-05",
             "detail": "The highest-quality stocks (芯碁微装 score 9.4/0 risks, 联瑞新材 score 8.4) are often the most extended in a bull run — 50%+ above MA20. Patience on premium names is a key V2 edge. Wait for pullbacks; don't chase perfection."
+          },
+          {
+            "date": "2026-06-05",
+            "detail": "华丰科技 6/29解禁2.79亿股(61%总股本, ~¥425亿) is a catastrophic overhang. Even in the hottest sector (军工电子), pre-unlocking selling pressure makes this untouchable until July. No individual catalyst can override a 61% float expansion."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 65,
+      "sampleSize": 66,
       "hitRate": 1.0,
       "confidence": 0.985,
       "tags": [
@@ -1560,7 +1572,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-06-03",
+      "lastTested": "2026-06-05",
       "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes.",
       "evidence": {
         "supporting": [
@@ -1623,13 +1635,17 @@
           {
             "date": "2026-06-03",
             "detail": "MA-distance Rule 2b correctly blocks the most tempting FOMO candidates: 芯碁微装(dist_ma5=11.1%), 联瑞新材(21.2%), 华锡有色(12.6%), 兴森科技(8.8%) — all in hot sectors with strong narratives, all overextended. These are precisely the stocks V1 would have bought at the top."
+          },
+          {
+            "date": "2026-06-05",
+            "detail": "华锡有色 (600301) is the textbook V2 setup: sector top 3 (金属新材料), RPS120=91.19% sweet spot, MA distances all pass (dist_ma5=2.3%, dist_ma10=7.5%, dist_ma20=9.1%), fresh catalyst (tin +40% on AI demand). When buy gate reopens, prioritize this pattern."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 15,
+      "sampleSize": 16,
       "hitRate": 1.0,
-      "confidence": 0.941,
+      "confidence": 0.944,
       "tags": [
         "entry-filter",
         "timing",
@@ -1645,7 +1661,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-06-03",
+      "lastTested": "2026-06-05",
       "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally.",
       "evidence": {
         "supporting": [
@@ -1716,13 +1732,17 @@
           {
             "date": "2026-06-03",
             "detail": "华峰测控(688200) pullback to near MA10 in #4 半导体 sector is the cleanest setup in the pool: RPS120=94.01% sweet spot, dist_ma10=-5.4%, fundamentals strong (rev +51%, profit +82%), 大股东减持 event is known and priced. Top candidate when regime clears."
+          },
+          {
+            "date": "2026-06-05",
+            "detail": "When a dominant sector (半导体) that has led for months suddenly becomes the worst performer (-4.64%), it marks a regime change, not a dip-buying opportunity. Sector leadership reversals of this magnitude signal rotation, not a blip."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 17,
+      "sampleSize": 18,
       "hitRate": 1.0,
-      "confidence": 0.947,
+      "confidence": 0.95,
       "tags": [
         "sector",
         "timing"

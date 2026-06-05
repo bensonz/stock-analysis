@@ -1346,3 +1346,11 @@
 - Semiconductor went from #1 hottest sector to #1 coldest in ~5 trading days. Multiple high-quality candidates (芯源微, 伟测科技, 华峰测控, 思瑞浦, 江丰电子) are instantly disqualified by cold-sector rule. h019 confirmed: bottom-list sectors are hard no-buy zones.
 - RPS20 vs RPS120 divergence >40 points is a powerful warning. 华锡有色 RPS120=91.2 but RPS20=22.0 — the 3-day spike is a statistical artifact masking 20 days of dead trading. Treat extreme RPS divergence as a timing red flag.
 - The highest-quality stocks (芯碁微装 score 9.4/0 risks, 联瑞新材 score 8.4) are often the most extended in a bull run — 50%+ above MA20. Patience on premium names is a key V2 edge. Wait for pullbacks; don't chase perfection.
+
+### 自动更新 (2026-06-05)
+
+- Broadcom FY2027 AI guidance miss (-12.6% overnight) triggered a global semiconductor sell-off that cascaded into A-share 科创50 -4.01%. External US tech earnings are now the dominant swing factor for A-share semiconductor/tech sectors. When the US AI hardware narrative cracks, A-share semis deflate fast.
+- When a dominant sector (半导体) that has led for months suddenly becomes the worst performer (-4.64%), it marks a regime change, not a dip-buying opportunity. Sector leadership reversals of this magnitude signal rotation, not a blip.
+- The buy gate rule (≥2/3 major indices green) correctly prevented false entries today. Breadth 1.55:1 gave a false positive, but index-level data captured the real story: heavy concentrated selling in the largest tech names. Validates h013 (breadth alone insufficient).
+- 华丰科技 6/29解禁2.79亿股(61%总股本, ~¥425亿) is a catastrophic overhang. Even in the hottest sector (军工电子), pre-unlocking selling pressure makes this untouchable until July. No individual catalyst can override a 61% float expansion.
+- 华锡有色 (600301) is the textbook V2 setup: sector top 3 (金属新材料), RPS120=91.19% sweet spot, MA distances all pass (dist_ma5=2.3%, dist_ma10=7.5%, dist_ma20=9.1%), fresh catalyst (tin +40% on AI demand). When buy gate reopens, prioritize this pattern.
