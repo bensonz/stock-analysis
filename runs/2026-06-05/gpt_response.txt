@@ -1,0 +1,342 @@
+# Research Memo — 2026-06-05
+
+---
+
+## 1. Market Regime
+
+**Verdict: Mixed / Balanced — Buy Gate FAILS**
+
+| Signal | Reading | Status |
+|---|---|---|
+| 上证指数 | +0.43% | ✓ Green |
+| 深证成指 | -0.24% | ✗ Red |
+| 创业板指 | -0.82% | ✗ Red |
+| 科创50 | -1.70% | ✗ Red |
+| Up/Down | 4014/1420 = 2.83:1 | ✓ Strong |
+| 涨停/跌停 | 69 / 7 | ✓ Healthy |
+| f10 (跌停≥10%) | 7 | ✓ Normal |
+
+**Buy Gate Assessment:**
+- Up/Down ≥ 1.5:1 → ✓ PASS (2.83)
+- ≥2 major indices green → ✗ FAIL (only 1/3)
+- Not panic tape (f10 < 30) → ✓ PASS
+
+**Only 上证指数 is green. The buy gate strictly requires 2/3 — FAILS. No new positions today.**
+
+However, breadth paints a bullish picture: 4014 stocks up vs 1420 down, 69 limit-ups vs only 7 limit-downs. Distribution skews positive (r0_2: 2294, r2_4: 1082, r4_7: 446). The index weakness is concentrated in heavyweight tech names dragged by 科创50 (-1.70%), while the broad market is actually healthy. This is a **bifurcated market**: rotation OUT of semiconductors/AI hardware and INTO defense, chemicals, optoelectronics.
+
+**IV Context:** Overall IV sentiment neutral (avg rank 36.6%). 科创50 IV rank elevated at 56.3% (be selective). 300ETF/500ETF IV ranks low (23.8%/21.6%) — options market complacent on large caps. No IV-based sizing freeze.
+
+**Macro:** 央行5000亿买断式逆回购操作，流动性充裕但略偏"收水"纠偏。美股博通AI业绩指引不及预期拖累全球芯片情绪。
+
+**Breadth read:** "Breadth 2.83:1 bullish, 69涨停/7跌停, broad-based rally but indices divided by tech heavyweights."
+
+### Uncertainty Flag
+The system's `entry_regime` says `allow_new_positions: true` because breadth is strong, but our V2 rule requires 2/3 indices green. I'm resolving this tension in favor of the stricter V2 rule — the index-level signal is materially worse than the breadth signal. If the PM wants to override, the candidates below are ready.
+
+---
+
+## 2. Sector Analysis
+
+### Hot Sectors (Top 5, today)
+| Rank | Sector | 1d Chg | Trend |
+|------|--------|--------|-------|
+| 1 | 航天装备Ⅱ | +5.78% | accelerating (defense rotation) |
+| 2 | 化学纤维 | +4.10% | steady |
+| 3 | 光学光电子 | +3.88% | accelerating (MLCC/LED demand) |
+| 4 | 冶钢原料 | +3.44% | steady (infrastructure) |
+| 5 | 金属新材料 | +2.92% | accelerating (算力金属 theme) |
+
+### Cold Sectors (Bottom 5)
+| Rank | Sector | 1d Chg | Trend |
+|------|--------|--------|-------|
+| 1 | 半导体 | -1.95% | deteriorating ← WAS the leader! |
+| 2 | 电力 | -1.59% | deteriorating |
+| 3 | 光伏设备 | -1.49% | weak |
+| 4 | 文娱用品 | -1.18% | weak |
+| 5 | 其他电子Ⅱ | -1.16% | weak |
+
+### Rotation Signals
+- **Semiconductor went from #1 hottest to #1 coldest in ~5 trading days.** This is a textbook sector rotation — AI hardware exhaustion. 国家大基金减持、博通业绩miss、交易拥挤度释放。
+- **Money flowing into:** defense/aerospace (航天装备 +5.78%), specialty chemicals (化学纤维 +4.10%), optoelectronics (光学光电子 +3.88%), and metals (冶钢原料 +3.44%, 金属新材料 +2.92%).
+- **"算力金属" theme active:** 锡 (华锡有色) driven by AI solder demand narrative, though 华锡有色 already issued 异常波动公告 after 3 consecutive days of 20%+ cumulative gains.
+
+### Position Alignment
+- **0/0 positions in hot sectors** — no active positions. All cash.
+
+### Cold Sector Watch
+Any candidate in **半导体** (bottom 1, -1.95%) is a hard no-buy today, regardless of individual quality. This eliminates: 华峰测控, 伟测科技, 江丰电子, 芯源微, 思瑞浦.
+
+---
+
+## 3. Position Review
+
+**No active positions.** Portfolio is 100% cash (¥966,982). Realized PnL: -¥33,018 (-3.3%).
+
+---
+
+## 4. New Entry Candidates
+
+**Headline: Buy gate FAILS (1/3 indices green). No new positions opened.** Below are the best candidates ranked, for PM review if overriding the gate.
+
+---
+
+### Candidate A: 华灿光电 (300323) — ⭐ Best sector alignment but chasing
+
+| Metric | Value | Assessment |
+|--------|-------|------------|
+| Sector | 光学光电子 | TOP 3 (+3.88%) ✓ |
+| RPS120 | 91.76 | Sweet spot (80-92%) ✓ |
+| RPS20 | 93.66 | Strong ✓ |
+| dist_ma5 | **8.4%** | **>6% → FAIL** ✗ |
+| dist_ma10 | 5.4% | OK |
+| dist_ma20 | 28.3% | >12% FAIL ✗ |
+| PE | -100.9 (loss-making) | Irrelevant for momentum |
+| Risks | 3 (抛压, 不分红, 波动) | Moderate |
+| Catalyst | MLCC/LED demand, optical sector rotation | Fresh |
+| VCP | null | No VCP detected |
+
+**Analysis:** The ONLY candidate in a top-3 sector today. LED行业龙头, revenue +40% YoY, optical sector accelerating. BUT: dist_ma5_pct = 8.4% violates the non-negotiable MA distance rule. Stock is ~28% above MA20. Per [h027]: "MA-distance discipline remains critical inside hot sectors: a hot sector does not override chase risk." **Wait for pullback to MA5 (~16.56) or MA10 (~17.04).**
+
+---
+
+### Candidate B: 石大胜华 (603026) — Strong catalyst, sector not hot
+
+| Metric | Value | Assessment |
+|--------|-------|------------|
+| Sector | 电池化学品 | Not in top 30% |
+| RPS120 | 94.87 | Extended zone (92-95%), catalyst exception ✓ |
+| dist_ma5 | -2.8% | OK (pullback) ✓ |
+| dist_ma10 | -7.8% | OK (below MA) ✓ |
+| dist_ma20 | -10.9% | OK ✓ |
+| PE | 60.6 | Irrelevant |
+| Risks | 2 (抛压, 偿债) | Low |
+| Catalyst | Q4净利+1087%, global #1 electrolyte solvent | Strong but aging |
+| 10d performance | 仅高于4.8% of market | Weak short-term |
+
+**Analysis:** World's #1 electrolyte solvent maker (22% global share, 6 consecutive years). Submitting HK IPO for A+H dual listing. Q4 net profit +1087% is massive but from a very low base (actually still operating at a loss). Stock is in pullback mode (below all MAs) — good entry timing IF the sector were hot. But 电池板块 is NOT in the top 5 and actually saw selling today ("电池板块震荡下挫"). Recent 10-day relative strength is terrible (bottom 4.8%). **SKIP until sector improves.**
+
+---
+
+### Candidate C: 华锡有色 (600301) — Tin catalyst fresh but spike exhaustion
+
+| Metric | Value | Assessment |
+|--------|-------|------------|
+| Sector | 小金属 (有色金属) | Adjacent to 金属新材料 (#5) |
+| RPS120 | 91.19 | Sweet spot ✓ |
+| RPS20 | **21.97** | **CRASHED — terrible** ✗ |
+| dist_ma5 | 2.3% | OK ✓ |
+| dist_ma10 | 7.5% | Under 8%, OK ✓ |
+| dist_ma20 | 9.1% | OK ✓ |
+| PE | 47.0 | Irrelevant |
+| Risks | 1 (商誉) | Low |
+| Catalyst | "算力金属" tin price +40% in 5 months | Very fresh |
+| 异常波动 | 3-day 20%+ spike, company issued clarification | Red flag |
+
+**Analysis:** The tin/small metal narrative is real — LME tin +40% YTD on AI solder demand. 华锡有色 is the purest A-share play. BUT: RPS20 crashed to 21.97 after the spike (indicating the stock had been dead for 20 days before the spike). The 3-day abnormal volatility (20%+) with a company-issued clarification suggests this move may be over. 2026-06-09 分红除权 approaching. **Wait for consolidation/pullback to MA10 (~57.29) after the spike settles.** The tin thesis is valid for a re-entry.
+
+---
+
+### Candidate D: 山东赫达 (002810) — Decent but no sector tailwind
+
+| Metric | Value | Assessment |
+|--------|-------|------------|
+| Sector | 化学制品 | Not in top 30% |
+| RPS120 | 94.40 | Extended zone |
+| dist_ma5 | -2.9% | OK |
+| dist_ma10 | -8.7% | OK (below) |
+| dist_ma20 | -5.8% | OK |
+| PE | 39.2 | Irrelevant |
+| Risks | 1 (抛压/跌停) | 05-13跌停-10% |
+| Catalyst | Q1净利+127%, US plant H2 2026 | Fresh |
+
+**Analysis:** Cellulose ether leader, Q1 earnings doubled, cash flow +1223%. US expansion catalyst. But sector (化学制品) lacks clear tailwind. Stock had a -10% limit-down on 05-13. Currently pulling back below MAs — possibly a good entry zone. **Decent setup, but no hot sector wind at its back. Watch.**
+
+---
+
+### Candidate E: 芯碁微装 (688630) — Perfect fundamentals, extreme extension
+
+| Metric | Value | Assessment |
+|--------|-------|------------|
+| Score | 9.4 company, 0 risks, 7 highlights | Best-in-class |
+| RPS120 | 94.52 | Extended zone |
+| dist_ma5 | **21.2%** | HARD FAIL |
+| dist_ma10 | **32.5%** | HARD FAIL |
+| dist_ma20 | **55.6%** | HARD FAIL |
+| Sector | 专用设备 | Not top |
+
+**Analysis:** This is the highest-quality stock in the pool (score 9.4, 0 risks, 7 highlights). Revenue +30%, profit +28%, 12 analysts all bullish. BC电池+光刻机概念. But it's 55% above MA20 — this is absurdly extended. Even with perfect fundamentals, buying here is chasing. **Must wait for a pullback to at least MA10 (~307) before considering.** This is a prime example of [h021]: the MA-distance anti-chase rule filtering strong names that are too extended.
+
+---
+
+## 5. Skip List
+
+| Code | Name | Reason | RPS120 |
+|------|------|--------|--------|
+| 300323 | 华灿光电 | Sector光学光电子 TOP3 but dist_ma5 8.4% > 6% — chasing. [h027] | 91.8 |
+| 603026 | 石大胜华 | Strong catalyst (+1087%) but sector 电池 not hot, 10d weak | 94.9 |
+| 600301 | 华锡有色 | Tin thesis valid but RPS20 crashed to 22, 3d abnormal vol spike | 91.2 |
+| 002810 | 山东赫达 | Q1 +127% good but sector not differentiated, 05-13 跌停 risk | 94.4 |
+| 688630 | 芯碁微装 | Score 9.4/0 risks but dist_ma5 21%, dist_ma20 56% — extreme chase | 94.5 |
+| 688037 | 芯源微 | Sector 半导体 is BOTTOM 1 (-1.95%) — cold sector hard skip | 92.5 |
+| 688372 | 伟测科技 | Sector 半导体 BOTTOM 1 — cold sector | 93.4 |
+| 688200 | 华峰测控 | Sector 半导体 BOTTOM 1 + dist_ma20 19% chase | 94.0 |
+| 688536 | 思瑞浦 | Sector 半导体 BOTTOM 1 + dist_ma20 19.5% chase | 91.3 |
+| 300666 | 江丰电子 | Sector 半导体 BOTTOM 1 + dist_ma20 20% chase | 93.1 |
+| 300285 | 国瓷材料 | dist_ma5 11.6%, dist_ma20 46.2% — extreme chase | 93.3 |
+| 688300 | 联瑞新材 | dist_ma5 8.3%, dist_ma20 48.7% — extreme chase | 94.5 |
+| 002645 | 华宏科技 | dist_ma5 15.1%, 大股东质押100% + 周线超买 | 92.4 |
+| 603663 | 三祥新材 | dist_ma5 10.3%, dist_ma20 36.7% — chasing | 92.2 |
+| 002436 | 兴森科技 | dist_ma20 20.4% chase + 5 risks including 商誉/偿债 | 88.1 |
+| 301182 | 凯旺科技 | dist_ma20 20.8% chase + PE negative, 亏损 | 94.8 |
+
+---
+
+## 6. Learnings
+
+1. **[NEW SIGNAL] Buy gate saved us from a false-positive breadth day.** Breadth 2.83:1 looked bullish but only 上证指数 was green — 深证/创业板/科创50 all red. The 2/3 indices rule correctly flagged index-level weakness that breadth masked. The market is bifurcated: rotation OUT of tech and INTO defense/materials. Buying into a rotation without clarity on direction is dangerous. [type: signal, tags: entry-filter]
+
+2. **[h027 CONFIRMED] Hottest sector doesn't override MA discipline.** 华灿光电 is in the #3 hottest sector (光学光电子 +3.88%) but dist_ma5 8.4% makes it a chase. Even with sector wind, wait for pullback. [type: signal, tags: entry-filter, timing]
+
+3. **[h019 CONFIRMED] Cold sector = hard no-buy.** 半导体 went from #1 sector to bottom #1 in a week. Multiple high-quality candidates (芯源微, 伟测科技, 华峰测控, 思瑞浦) are instantly disqualified by sector gravity. This rule saved us from buying into a sector in free-fall. [type: rule, tags: sector, entry-filter]
+
+4. **[NEW OBSERVATION] RPS20 divergence is a powerful short-term filter.** 华锡有色 RPS120=91.2 (sweet spot) but RPS20=22.0 (terrible). The spike created a statistical distortion — the stock had been dead for 20 days and the 3-day spike is a temporary anomaly, not sustainable momentum. When RPS120 and RPS20 diverge by >40 points, treat it as a warning. [type: heuristic, tags: entry-filter, timing]
+
+5. **[NEW OBSERVATION] The best stocks are often the most extended.** 芯碁微装 (score 9.4, 0 risks) is 55% above MA20. 联瑞新材 (score 8.4) is 49% above MA20. The highest-quality names in a bull run become unbuyable due to extension. This validates [h021] — wait for pullbacks on these names; they will likely provide great entries when they cool off. "Patience on premium names" is a skill V2 must build. [type: observation, tags: timing, position-sizing]
+
+---
+
+## 7. Uncertainty Flags
+
+1. **Buy gate vs system regime tension.** The system's `entry_regime` says `allow_new_positions: true` citing breadth 2.83:1 and 69 limit-ups. But our V2 rule says 2/3 indices must be green and only 1/3 is. I'm following the stricter V2 rule. PM: if you think the breadth signal dominates the index signal, the candidates in Section 4 are ready.
+
+2. **No active positions = no stops to manage.** The portfolio is 100% cash with -3.3% realized loss. V2's first trade is pending. The discipline to wait for a clean buy gate signal is the right call, but there's also cost to being fully in cash during a 2.83:1 breadth day. I'm uncertain whether the 2/3 indices rule is too strict for days like today where breadth is clearly bullish but indices are dragged by sector rotation.
+
+3. **华锡有色 timing.** The tin thesis is real and strong. RPS20=22 is misleading because it reflects 20 days of flat trading before the spike. I'm uncertain whether waiting for consolidation is too cautious — the stock could continue running on the "算力金属" narrative.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "航天装备Ⅱ", "5d_pct": 5.78, "trend": "accelerating"},
+      {"name": "化学纤维", "5d_pct": 4.10, "trend": "steady"},
+      {"name": "光学光电子", "5d_pct": 3.88, "trend": "accelerating"},
+      {"name": "冶钢原料", "5d_pct": 3.44, "trend": "steady"},
+      {"name": "金属新材料", "5d_pct": 2.92, "trend": "accelerating"}
+    ],
+    "cold_sectors": [
+      {"name": "半导体", "5d_pct": -1.95, "trend": "deteriorating"},
+      {"name": "电力", "5d_pct": -1.59, "trend": "deteriorating"},
+      {"name": "光伏设备", "5d_pct": -1.49, "trend": "weak"},
+      {"name": "文娱用品", "5d_pct": -1.18, "trend": "weak"},
+      {"name": "其他电子Ⅱ", "5d_pct": -1.16, "trend": "weak"}
+    ],
+    "position_alignment": "0/0 positions in hot sectors (no active positions)",
+    "regime": "Rotation out of AI/semiconductor into defense, chemicals, optoelectronics. Broad market breadth healthy (2.83:1) but index-level weakness from tech heavyweights."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "300323",
+      "name": "华灿光电",
+      "reason": "Sector光学光电子 TOP 3 (+3.88%), RPS120 91.76 sweet spot — best sector alignment in pool. But dist_ma5_pct 8.4% > 6%, dist_ma20_pct 28.3% — MA-distance anti-chase rule non-negotiable per h027. Wait for pullback to MA5 (~16.56).",
+      "rps120": 91.76
+    },
+    {
+      "code": "603026",
+      "name": "石大胜华",
+      "reason": "Global #1 electrolyte solvent, Q4 net profit +1087% catalyst qualifies RPS exception. MA distances all OK (pullback below MAs). But sector 电池化学品 not in top 30%, recent 10d performance bottom 4.8%. Weak sector gravity.",
+      "rps120": 94.87
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "Tin '算力金属' thesis strong, RPS120 91.19 sweet spot, MA distances OK. But RPS20 crashed to 21.97 after 3-day abnormal volatility spike (20%+), company issued 异常波动公告. Wait for consolidation after spike exhaustion.",
+      "rps120": 91.19
+    },
+    {
+      "code": "002810",
+      "name": "山东赫达",
+      "reason": "Q1 net profit +127%, cellulose ether leader with US expansion catalyst. RPS120 94.40 extended, MA distances OK. But sector 化学制品 not in top sectors, 05-13 跌停 -10% risk. Decent setup lacking sector tailwind.",
+      "rps120": 94.40
+    },
+    {
+      "code": "688630",
+      "name": "芯碁微装",
+      "reason": "Highest quality stock (score 9.4, 0 risks, 7 highlights). But dist_ma5_pct 21.2%, dist_ma10_pct 32.5%, dist_ma20_pct 55.6% — extreme extension. Must wait for pullback to MA10 zone (~307). Per h021.",
+      "rps120": 94.52
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "Sector 半导体 is BOTTOM 1 (-1.95%) — cold sector hard no-buy per Rule 1 / h019. No entry regardless of stock quality.",
+      "rps120": 92.45
+    },
+    {
+      "code": "688372",
+      "name": "伟测科技",
+      "reason": "Sector 半导体 BOTTOM 1 — cold sector. Hard skip.",
+      "rps120": 93.41
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "Sector 半导体 BOTTOM 1 + dist_ma20_pct 19.2% chase. Dual disqualification.",
+      "rps120": 94.01
+    },
+    {
+      "code": "688536",
+      "name": "思瑞浦",
+      "reason": "Sector 半导体 BOTTOM 1 + dist_ma20_pct 19.5%. Cold sector hard skip.",
+      "rps120": 91.34
+    },
+    {
+      "code": "300666",
+      "name": "江丰电子",
+      "reason": "Sector 半导体 BOTTOM 1. Cold sector rules out regardless of strong fundamentals.",
+      "rps120": 93.10
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "The 2/3 major indices buy gate correctly flagged index-level weakness even when breadth was 2.83:1 bullish. Today market was bifurcated — broad stocks up but tech-heavy indices (深证/创业板) down. The gate prevented buying into a rotation without clarity.",
+      "type": "signal",
+      "tags": ["entry-filter", "market-regime"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "When index-level weakness contradicts strong breadth, the index signal reveals sector rotation risk that breadth masks. Buying into a rotating market without knowing the new leaders is dangerous."
+    },
+    {
+      "text": "Semiconductor went from #1 hottest sector to #1 coldest in ~5 trading days. Multiple high-quality candidates (芯源微, 伟测科技, 华峰测控, 思瑞浦, 江丰电子) are instantly disqualified by cold-sector rule. h019 confirmed: bottom-list sectors are hard no-buy zones.",
+      "type": "rule",
+      "tags": ["sector", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "Sector gravity is the dominant force in momentum investing. When a sector rotates from leadership to laggard, individual stock quality cannot overcome the sector-level outflow."
+    },
+    {
+      "text": "RPS20 vs RPS120 divergence >40 points is a powerful warning. 华锡有色 RPS120=91.2 but RPS20=22.0 — the 3-day spike is a statistical artifact masking 20 days of dead trading. Treat extreme RPS divergence as a timing red flag.",
+      "type": "heuristic",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "RPS20 captures the very short-term momentum. A spike on a dead stock creates a temporary RPS120 boost while RPS20 remains low, signaling the move is fresh and unconfirmed. Wait for RPS20 to catch up."
+    },
+    {
+      "text": "The highest-quality stocks (芯碁微装 score 9.4/0 risks, 联瑞新材 score 8.4) are often the most extended in a bull run — 50%+ above MA20. Patience on premium names is a key V2 edge. Wait for pullbacks; don't chase perfection.",
+      "type": "observation",
+      "tags": ["timing", "position-sizing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "In momentum markets, the best companies attract the most buying pressure and become the most extended. The MA-distance rule forces discipline — even premium names must be bought at reasonable prices relative to their own trend."
+    }
+  ],
+  "market_summary": "Bifurcated market: breadth strong (2.83:1, 4014 up/1420 down, 69涨停/7跌停) but only 上证指数 green (+0.43%). 深证(-0.24%), 创业板(-0.82%), 科创50(-1.70%) all red on tech rotation. IV neutral (avg rank 36.6%), 科创50 IV elevated 56.3%. Sector rotation: money flowing OUT of semiconductor (-1.95%) and INTO aerospace (+5.78%), chemical fiber (+4.10%), optoelectronics (+3.88%). Buy gate FAILS on 1/3 indices rule — no new positions. Portfolio 100% cash (¥967K, -3.3% total).",
+  "market_sentiment": "neutral",
+  "market_call": "观望"
+}
+```

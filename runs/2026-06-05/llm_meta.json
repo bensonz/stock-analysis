@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 290528,
+  "output_tokens": 14621,
+  "rounds": 4,
+  "duration_sec": 304.5,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月5日 航天装备 化学纤维 光学光电子 热门板块",
+        "max_results": 5
+      },
+      "result_length": 2764
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 半导体板块 下跌 2026年6月5日 原因",
+        "max_results": 5
+      },
+      "result_length": 3190
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "华灿光电 300323 LED 光学光电子 2026年6月 催化剂",
+        "max_results": 5
+      },
+      "result_length": 1552
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "华锡有色 600301 锡价 小金属 2026年6月 催化剂"
+      },
+      "result_length": 2317
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "石大胜华 603026 电解液 固态电池 2026年6月"
+      },
+      "result_length": 2511
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 2026年6月5日 宏观 政策 央行 逆回购"
+      },
+      "result_length": 2876
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "山东赫达 002810 纤维素醚 2026年 业绩 催化剂"
+      },
+      "result_length": 2358
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "航天装备 化学纤维 板块 2026年6月 上涨原因 A股"
+      },
+      "result_length": 2856
+    }
+  ],
+  "fallback_used": false
+}
