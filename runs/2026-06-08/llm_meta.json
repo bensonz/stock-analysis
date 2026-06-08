@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 202405,
+  "output_tokens": 6163,
+  "rounds": 3,
+  "duration_sec": 141.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月8日 大跌 原因 市场暴跌",
+        "max_results": 5
+      },
+      "result_length": 2980
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年6月8日 工程机械 板块 上涨 原因",
+        "max_results": 5
+      },
+      "result_length": 2051
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年6月 A股 半导体 科技股 下跌 资金流出",
+        "max_results": 5
+      },
+      "result_length": 2884
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "费城半导体指数 暴跌10% 2026年6月5日 博通 A股影响"
+      },
+      "result_length": 3631
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "2026年6月 工程机械 雅鲁藏布江 水电 基建 政策"
+      },
+      "result_length": 3296
+    }
+  ],
+  "fallback_used": false
+}

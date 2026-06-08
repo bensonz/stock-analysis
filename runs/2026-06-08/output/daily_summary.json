@@ -1,0 +1,36 @@
+{
+  "date": "2026-06-08",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 966982.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.3,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -33018.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.2088,
+    "up": 947,
+    "down": 4536,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 56,
+    "limit_downs": 16,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.21:1, 0/3 major indices green, 56 limit-ups / 16 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "PANIC TAPE — US费城半导体指数周五暴跌10.26% (6年最大跌幅), 触发全球科技股连锁抛售。A股三大指数全绿 (上证-1.26%, 深证-2.49%, 创业板-2.83%), 科创50 -3.63%。广度0.21:1 (947涨/4536跌), 全线溃败。资金避险涌入工程机械(+2.41%, 雅鲁藏布江超级基建催化)、油气(+1.67%)、银行(+1.65%)。半导体/电子/贵金属/工业金属领跌。IV分化: 科创50 IV Rank 56.3%偏高, 300ETF仅23.8%偏乐观。硬封锁新开仓, 100%现金等待广度恢复。"
+  }
+}

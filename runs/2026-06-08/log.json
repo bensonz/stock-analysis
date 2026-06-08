@@ -1,0 +1,47 @@
+{
+  "date": "2026-06-08",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1780889824.739274,
+      "errors": [],
+      "end": 1780889861.931116,
+      "duration_sec": 37.2
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 10458,
+      "tokens": {
+        "input_tokens": 202405,
+        "output_tokens": 6163
+      },
+      "rounds": 3,
+      "tool_calls_count": 5,
+      "duration_sec": 141.8,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1780890003.760076,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=17",
+        "Hypothesis: Created h052 (observation): Cash is a position — and today it's the best one. Portfolio holds 100% cash (¥96...",
+        "Hypothesis: Created h053 (observation): Engineering machinery (+2.41%) emerging as the defensive rotation winner during ...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1780890004.293068,
+      "duration_sec": 0.5
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 179.5
+  }
+}
