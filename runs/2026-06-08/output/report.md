@@ -4,18 +4,18 @@
 
 | 指数 | 收盘 | 涨跌幅 |
 |------|------|--------|
-| 上证指数 | 3976.83 | -1.26% |
-| 深证成指 | 14933.82 | -2.49% |
-| 创业板指 | 3845.78 | -2.83% |
-| 科创50 | 1607.78 | -3.63% |
+| 上证指数 | 3959.34 | -1.70% |
+| 深证成指 | 14821.19 | -3.22% |
+| 创业板指 | 3811.79 | -3.69% |
+| 科创50 | 1596.57 | -4.30% |
 
-涨跌比: 947涨 / 4536跌 / 5519总
+涨跌比: 899涨 / 4591跌 / 5517总
 
-**热门板块**: 工程机械(+2.41%), 油气开采Ⅱ(+1.67%), 国有大型银行Ⅱ(+1.65%), 油服工程(+1.38%), 小家电(+1.33%)
+**热门板块**: 油气开采Ⅱ(+2.77%), 工程机械(+2.38%), 国有大型银行Ⅱ(+1.76%), 小家电(+0.95%), 油服工程(+0.93%)
 
-**冷门板块**: 其他电子Ⅱ(-5.19%), 贵金属(-4.88%), 工业金属(-4.43%), 贸易Ⅱ(-4.30%), 军工电子Ⅱ(-4.16%)
+**冷门板块**: 其他电子Ⅱ(-7.00%), 贵金属(-6.40%), 工业金属(-5.79%), 贸易Ⅱ(-5.76%), 军工电子Ⅱ(-5.36%)
 
-PANIC TAPE — US费城半导体指数周五暴跌10.26% (6年最大跌幅), 触发全球科技股连锁抛售。A股三大指数全绿 (上证-1.26%, 深证-2.49%, 创业板-2.83%), 科创50 -3.63%。广度0.21:1 (947涨/4536跌), 全线溃败。资金避险涌入工程机械(+2.41%, 雅鲁藏布江超级基建催化)、油气(+1.67%)、银行(+1.65%)。半导体/电子/贵金属/工业金属领跌。IV分化: 科创50 IV Rank 56.3%偏高, 300ETF仅23.8%偏乐观。硬封锁新开仓, 100%现金等待广度恢复。
+PANIC SELL-OFF: US non-farm payroll crushed rate-cut hopes → Nasdaq -4.18% Friday → Asia contagion. Iran attacked Israel → oil spike. A-shares: 上证 -1.7%, 深证 -3.22%, 创业板 -3.69%, 科创50 -4.3%. Breadth 0.20:1 (899/4591), 64涨停/59跌停. Defensive rotation into oil (+2.77%), banks (+1.76%), machinery (+2.38%). Tech/semiconductor/rare metals crushed (-5% to -7%). IV divergent: 科创50 IV Rank 56.3% (elevated, fear in tech) vs 300ETF 23.8% (low, complacent). Entry regime HARD BLOCKED — sizing_multiplier 0.0. Cash is the only position.
 
 ## 策略池扫描
 
@@ -24,19 +24,25 @@ PANIC TAPE — US费城半导体指数周五暴跌10.26% (6年最大跌幅), 触
 
 ## 跳过标的
 
-1. **华宏科技** (002645) (RPS 92.78%) — Market panic hard_block (breadth 0.21:1, 0/3 indices green). Even if market open: 4 risk factors including 100%大股东质押, sector(环保设备) not in today's top sectors, RPS120=92.78% acceptable but falling knife risk in this tape.
-2. **江丰电子** (300666) (RPS 93.28%) — Market panic hard_block. Sector(半导体) in freefall — part of today's global semiconductor liquidation (费城半导体指数 -10.26% Friday). Sector gravity will crush individual names regardless of fundamentals. RPS120=93.28%, 11机构看好, but timing is disastrous.
-3. **恒铭达** (002947) (RPS 93.35%) — Market panic hard_block. 0 risk factors and RPS120=93.35% are attractive, but dist_ma5=-8.1% (below all MAs, falling knife), sector(消费电子) weak. Wait for stabilization.
-4. **华锡有色** (600301) (RPS 91.6%) — Market panic hard_block. Sector(小金属/有色金属) -4.4% today, RPS20 only 36.77% (momentum already dead before today's rout). dist_ma5=-5.7% approaching stop territory if held. No entry.
-5. **国瓷材料** (300285) (RPS 94.38%) — Market panic hard_block. dist_ma5=+7.4% exceeds 6% chase limit, dist_ma10=+20.9% extreme extension. PE=95x, 3 risk factors. Sector(电子化学品) getting hit in tech rout. Overextended + wrong sector + panic tape = triple no.
-6. **绿的谐波** (688017) (RPS 92.72%) — Market panic hard_block. dist_ma5=+30.2% — the most extreme MA deviation in the entire candidate pool. PE=590x. Even in a bull market this is chasing; in a panic tape it's suicidal. 机器人 sector leader but wait for -20%+ correction.
+1. **华宏科技** (002645) (RPS 92.78%) — PANIC REGIME HARD BLOCK. Otherwise top candidate: AI-MLCC dysprosium catalyst fresh, RPS120 92.78% sweet spot, dist_ma5 2.0%/dist_ma10 4.0% within limits, Q profit +595% YoY. Monitor for re-entry when breadth >1.5:1.
+2. **江丰电子** (300666) (RPS 93.28%) — PANIC REGIME + semiconductor sector in bottom 5. MA setup excellent (dist_ma5 -2.3%, dist_ma10 -1.8%) — pulled back to MA10 support. But sector gravity wins today: 其他电子Ⅱ -7.0%.
+3. **华峰测控** (688200) (RPS 94.56%) — PANIC REGIME + semiconductor equipment sector crushed. dist_ma5 5.2% near 6% chase threshold. Score 8.9 fundamentals but wrong tape.
+4. **绿的谐波** (688017) (RPS 92.72%) — MA DISTANCE EXTREME: dist_ma5 30.2% (>6% hard limit), dist_ma10 33.7% (>8%). Robot leader but chasing at these levels after +20% Friday is suicide. Even without panic regime this is automatic skip per Rule 2b.
+5. **国瓷材料** (300285) (RPS 94.38%) — MA DISTANCE VIOLATION: dist_ma5 7.4% (>6%), dist_ma10 20.9% (>8%). MLCC theme strong but dangerously overextended. Wait for pullback to MA5 support.
+6. **欧科亿** (688308) (RPS 99.9%) — MA DISTANCE EXTREME: dist_ma10 18.1%, dist_ma20 35.2%. RPS120 99.9% also above 95% chase zone.
+7. **埃科光电** (688610) (RPS 95.9%) — MA DISTANCE: dist_ma10 8.1% (>8% threshold). dist_ma20 33.5% extreme.
+8. **乔锋智能** (301603) (RPS 91.66%) — MA DISTANCE: dist_ma5 6.6% (>6% threshold). Robot/industrial theme but overextended.
+9. **三祥新材** (603663) (RPS 93.06%) — MA DISTANCE: dist_ma10 15.7% (>8%). PE 190, valuation extreme.
+10. **睿创微纳** (688002) (RPS 88.98%) — Sector (军工电子Ⅱ) in bottom 5 at -5.36%. Stock below all MAs in downtrend.
 
 ## 今日研究结论
 
 - 新开仓: 0只
-- 跳过: 6只
+- 跳过: 10只
 
 ### 新教训
-- {'text': "When US SOX crashes 10%+ (Friday -10.26%), A-share tech/半导体 complex is uninvestable for 1-3 trading days. The transmission is instantaneous via global fund flows and sentiment. Today's 科创50 -3.63%, 其他电子 -5.19% confirms. Do not bottom-fish in the wreckage — wait for breadth to normalize.", 'type': 'signal', 'tags': ['sector', 'entry-filter', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h019 (bottom-list sectors = hard no-buy zones)', 'mechanism': 'Global semiconductor index crash triggers correlated sell-off in A-share tech via: (1) foreign capital withdrawal from 北向资金, (2) domestic机构 reducing tech exposure, (3) retail panic selling. The sector gravity effect overwhelms individual stock fundamentals for 1-3 days minimum.'}
-- {'text': "Cash is a position — and today it's the best one. Portfolio holds 100% cash (¥966,982), correctly avoiding a tape where 4536 stocks are down vs 947 up (0.21:1). The -3.3% total loss came from prior mistakes; today's discipline prevents compounding them. The system's hard_block is working as designed.", 'type': 'observation', 'tags': ['position-sizing'], 'evidence_type': 'supporting', 'mechanism': 'Capital preservation during panic tapes allows aggressive deployment when breadth recovers. The opportunity cost of sitting out 1-3 bad days is far lower than the realized losses from fighting the tape.'}
-- {'text': 'Engineering machinery (+2.41%) emerging as the defensive rotation winner during tech rout. The 雅鲁藏布江 1.2万亿 hydropower super-project provides a fundamental bid that tech sectors lack. Monitor 工程机械 sector for entry candidates when breadth normalizes — this is where money is hiding today, and hiding places often become the next leaders when the tape improves.', 'type': 'observation', 'tags': ['sector'], 'evidence_type': 'supporting', 'mechanism': "In a risk-off tape, capital rotates to: (1) policy-backed infrastructure (雅鲁藏布江), (2) high-dividend defensives (banks), (3) energy (oil). These sector bids are 'real money' allocations, not speculative — they tend to persist longer than the panic itself."}
+- {'text': 'Panic regime hard_block correctly prevented any new positions on a day with breadth 0.20:1, 0/3 indices green, and 59 limit-downs. The entry_regime system is working as designed — forcing cash preservation in unambiguous sell-offs.', 'type': 'signal', 'tags': ['entry-filter', 'position-sizing', 'regime'], 'evidence_type': 'supporting', 'related_hypothesis': 'h013', 'mechanism': "When all three buy-gate conditions fail simultaneously (breadth, index color, f10 count), the regime is unambiguously hostile to new longs. The system's hard_block=true with sizing_multiplier=0.0 enforces discipline that a human might override with 'buy the dip' bias."}
+- {'text': "MA-distance extremes detected on multiple high-RPS names: 绿的谐波 dist_ma5=30.2%, 国瓷材料 dist_ma5=7.4%, 乔锋智能 dist_ma5=6.6%. These anti-chase rules prevented entries that would have suffered massive drawdowns in today's sell-off.", 'type': 'rule', 'tags': ['entry-filter', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h027', 'mechanism': 'Stocks trading 30%+ above MA5 have extremely high mean-reversion risk. In a panic tape, these names get crushed first as profit-takers rush to lock in gains. The 6%/8%/12% MA-distance thresholds create a buffer zone that prevents buying into face-ripping reversals.'}
+- {'text': "Sector rotation speed is accelerating: last week's leaders (semiconductor, robots) are today's biggest losers (-7% to -5%). Defensive sectors (oil, banks) that were nowhere last week are the only greens. This validates sector-first analysis and suggests shorter holding periods in the current environment.", 'type': 'observation', 'tags': ['sector', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h028', 'mechanism': 'External shocks (US rate fears + geopolitical) trigger violent sector rotation that overrides individual stock fundamentals. When rotation speed is this high, sector alignment must be re-verified daily, not weekly.'}
+- {'text': "Cash at 100% during a panic day is not a failure — it's capital preservation. The portfolio's -3.3% realized losses from V1 are already booked. Forcing entries today hoping to 'make it back' would compound the damage. Wait for the regime to reset.", 'type': 'heuristic', 'tags': ['position-sizing', 'regime'], 'evidence_type': 'supporting', 'mechanism': 'The most damaging trades in momentum strategies come from forcing entries in hostile regimes out of frustration or FOMO. The deployable cash (¥773,586) will be deployed when the regime clears — not before.'}
+- {'text': "Cross-cutting catalysts (e.g., 华宏科技's AI-MLCC dysprosium theme) may not be captured by standard sector classifications. The stock is in 环保设备 but its real driver is rare earth/materials. When the market recovers, sector-agnostic catalysts deserve separate evaluation.", 'type': 'observation', 'tags': ['sector'], 'evidence_type': 'supporting', 'mechanism': 'Sector classification systems lag behind thematic catalysts. A stock classified in 环保设备 that derives >50% of its marginal revenue growth from a rare earth super-cycle should be evaluated against the materials sector, not just its formal classification.'}

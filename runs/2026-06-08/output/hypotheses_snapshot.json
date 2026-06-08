@@ -332,7 +332,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-03-27",
-      "lastTested": "2026-06-05",
+      "lastTested": "2026-06-08",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -707,13 +707,17 @@
           {
             "date": "2026-06-05",
             "detail": "The buy gate rule (≥2/3 major indices green) correctly prevented false entries today. Breadth 1.55:1 gave a false positive, but index-level data captured the real story: heavy concentrated selling in the largest tech names. Validates h013 (breadth alone insufficient)."
+          },
+          {
+            "date": "2026-06-08",
+            "detail": "Panic regime hard_block correctly prevented any new positions on a day with breadth 0.20:1, 0/3 indices green, and 59 limit-downs. The entry_regime system is working as designed — forcing cash preservation in unambiguous sell-offs."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 93,
+      "sampleSize": 94,
       "hitRate": 1.0,
-      "confidence": 0.989,
+      "confidence": 0.99,
       "tags": [],
       "parentRule": null,
       "retiredDate": null,
@@ -1643,13 +1647,17 @@
           {
             "date": "2026-06-08",
             "detail": "When US SOX crashes 10%+ (Friday -10.26%), A-share tech/半导体 complex is uninvestable for 1-3 trading days. The transmission is instantaneous via global fund flows and sentiment. Today's 科创50 -3.63%, 其他电子 -5.19% confirms. Do not bottom-fish in the wreckage — wait for breadth to normalize."
+          },
+          {
+            "date": "2026-06-08",
+            "detail": "MA-distance extremes detected on multiple high-RPS names: 绿的谐波 dist_ma5=30.2%, 国瓷材料 dist_ma5=7.4%, 乔锋智能 dist_ma5=6.6%. These anti-chase rules prevented entries that would have suffered massive drawdowns in today's sell-off."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 17,
+      "sampleSize": 18,
       "hitRate": 1.0,
-      "confidence": 0.947,
+      "confidence": 0.95,
       "tags": [
         "entry-filter",
         "timing",
@@ -1665,7 +1673,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-06-05",
+      "lastTested": "2026-06-08",
       "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally.",
       "evidence": {
         "supporting": [
@@ -1740,13 +1748,17 @@
           {
             "date": "2026-06-05",
             "detail": "When a dominant sector (半导体) that has led for months suddenly becomes the worst performer (-4.64%), it marks a regime change, not a dip-buying opportunity. Sector leadership reversals of this magnitude signal rotation, not a blip."
+          },
+          {
+            "date": "2026-06-08",
+            "detail": "Sector rotation speed is accelerating: last week's leaders (semiconductor, robots) are today's biggest losers (-7% to -5%). Defensive sectors (oil, banks) that were nowhere last week are the only greens. This validates sector-first analysis and suggests shorter holding periods in the current environment."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 18,
+      "sampleSize": 19,
       "hitRate": 1.0,
-      "confidence": 0.95,
+      "confidence": 0.952,
       "tags": [
         "sector",
         "timing"
@@ -2444,6 +2456,61 @@
           {
             "date": "2026-06-08",
             "detail": "Engineering machinery (+2.41%) emerging as the defensive rotation winner during tech rout. The 雅鲁藏布江 1.2万亿 hydropower super-project provides a fundamental bid that tech sectors lack. Monitor 工程机械 sector for entry candidates when breadth normalizes — this is where money is hiding today, and hiding places often become the next leaders when the tape improves."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h054",
+      "text": "Cash at 100% during a panic day is not a failure — it's capital preservation. The portfolio's -3.3% realized losses from V1 are already booked. Forcing entries today hoping to 'make it back' would compound the damage. Wait for the regime to reset.",
+      "type": "heuristic",
+      "status": "observation",
+      "created": "2026-06-08",
+      "lastTested": "2026-06-08",
+      "mechanism": "The most damaging trades in momentum strategies come from forcing entries in hostile regimes out of frustration or FOMO. The deployable cash (¥773,586) will be deployed when the regime clears — not before.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-06-08",
+            "detail": "Cash at 100% during a panic day is not a failure — it's capital preservation. The portfolio's -3.3% realized losses from V1 are already booked. Forcing entries today hoping to 'make it back' would compound the damage. Wait for the regime to reset."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "position-sizing",
+        "regime"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h055",
+      "text": "Cross-cutting catalysts (e.g., 华宏科技's AI-MLCC dysprosium theme) may not be captured by standard sector classifications. The stock is in 环保设备 but its real driver is rare earth/materials. When the market recovers, sector-agnostic catalysts deserve separate evaluation.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-06-08",
+      "lastTested": "2026-06-08",
+      "mechanism": "Sector classification systems lag behind thematic catalysts. A stock classified in 环保设备 that derives >50% of its marginal revenue growth from a rare earth super-cycle should be evaluated against the materials sector, not just its formal classification.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-06-08",
+            "detail": "Cross-cutting catalysts (e.g., 华宏科技's AI-MLCC dysprosium theme) may not be captured by standard sector classifications. The stock is in 环保设备 but its real driver is rare earth/materials. When the market recovers, sector-agnostic catalysts deserve separate evaluation."
           }
         ],
         "contradicting": []

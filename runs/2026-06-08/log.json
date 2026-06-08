@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1780889824.739274,
+      "start": 1780904111.54085,
       "errors": [],
-      "end": 1780889861.931116,
-      "duration_sec": 37.2
+      "end": 1780904121.746912,
+      "duration_sec": 10.2
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 10458,
+      "response_size_bytes": 16268,
       "tokens": {
-        "input_tokens": 202405,
-        "output_tokens": 6163
+        "input_tokens": 201404,
+        "output_tokens": 8011
       },
       "rounds": 3,
       "tool_calls_count": 5,
-      "duration_sec": 141.8,
+      "duration_sec": 195.9,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -25,23 +25,25 @@
     },
     {
       "phase": "apply",
-      "start": 1780890003.760076,
+      "start": 1780904317.7045581,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=17",
-        "Hypothesis: Created h052 (observation): Cash is a position — and today it's the best one. Portfolio holds 100% cash (¥96...",
-        "Hypothesis: Created h053 (observation): Engineering machinery (+2.41%) emerging as the defensive rotation winner during ...",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=94",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=18",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=19",
+        "Hypothesis: Created h054 (observation): Cash at 100% during a panic day is not a failure — it's capital preservation. Th...",
+        "Hypothesis: Created h055 (observation): Cross-cutting catalysts (e.g., 华宏科技's AI-MLCC dysprosium theme) may not be captu...",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1780890004.293068,
-      "duration_sec": 0.5
+      "end": 1780904318.084364,
+      "duration_sec": 0.4
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 179.5
+    "totalDurationSec": 206.5
   }
 }

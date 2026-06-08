@@ -2,24 +2,24 @@
   "date": "2026-06-08",
   "market_overview": {
     "shanghai_composite": {
-      "value": 3976.827,
-      "change_pct": -1.26
+      "value": 3959.338,
+      "change_pct": -1.7
     },
     "shenzhen_component": {
-      "value": 14933.82,
-      "change_pct": -2.49
+      "value": 14821.19,
+      "change_pct": -3.22
     },
     "chinext": {
-      "value": 3845.78,
-      "change_pct": -2.83
+      "value": 3811.79,
+      "change_pct": -3.69
     },
     "sentiment": "bearish",
     "hot_sectors": [
-      "工程机械",
       "油气开采Ⅱ",
+      "工程机械",
       "国有大型银行Ⅱ",
-      "油服工程",
-      "小家电"
+      "小家电",
+      "油服工程"
     ],
     "cold_sectors": [
       "其他电子Ⅱ",
@@ -28,12 +28,12 @@
       "贸易Ⅱ",
       "军工电子Ⅱ"
     ],
-    "notes": "PANIC TAPE — US费城半导体指数周五暴跌10.26% (6年最大跌幅), 触发全球科技股连锁抛售。A股三大指数全绿 (上证-1.26%, 深证-2.49%, 创业板-2.83%), 科创50 -3.63%。广度0.21:1 (947涨/4536跌), 全线溃败。资金避险涌入工程机械(+2.41%, 雅鲁藏布江超级基建催化)、油气(+1.67%)、银行(+1.65%)。半导体/电子/贵金属/工业金属领跌。IV分化: 科创50 IV Rank 56.3%偏高, 300ETF仅23.8%偏乐观。硬封锁新开仓, 100%现金等待广度恢复。"
+    "notes": "PANIC SELL-OFF: US non-farm payroll crushed rate-cut hopes → Nasdaq -4.18% Friday → Asia contagion. Iran attacked Israel → oil spike. A-shares: 上证 -1.7%, 深证 -3.22%, 创业板 -3.69%, 科创50 -4.3%. Breadth 0.20:1 (899/4591), 64涨停/59跌停. Defensive rotation into oil (+2.77%), banks (+1.76%), machinery (+2.38%). Tech/semiconductor/rare metals crushed (-5% to -7%). IV divergent: 科创50 IV Rank 56.3% (elevated, fear in tech) vs 300ETF 23.8% (low, complacent). Entry regime HARD BLOCKED — sizing_multiplier 0.0. Cash is the only position."
   },
   "strategy_scan": {
     "total_stocks_scanned": 51,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-06-08T11:40:03.763220+08:00"
+    "scan_time": "2026-06-08T15:38:37.707700+08:00"
   },
   "recommendations": [
     {
@@ -55,19 +55,19 @@
       "reasoning": ""
     },
     {
-      "code": "002947.SZ",
-      "name": "恒铭达",
+      "code": "688200.SH",
+      "name": "华峰测控",
       "price": null,
-      "rps120": 93.35,
+      "rps120": 94.56,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "600301.SH",
-      "name": "华锡有色",
+      "code": "688017.SH",
+      "name": "绿的谐波",
       "price": null,
-      "rps120": 91.6,
+      "rps120": 92.72,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -82,10 +82,46 @@
       "reasoning": ""
     },
     {
-      "code": "688017.SH",
-      "name": "绿的谐波",
+      "code": "688308.SH",
+      "name": "欧科亿",
       "price": null,
-      "rps120": 92.72,
+      "rps120": 99.9,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688610.SH",
+      "name": "埃科光电",
+      "price": null,
+      "rps120": 95.9,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "301603.SZ",
+      "name": "乔锋智能",
+      "price": null,
+      "rps120": 91.66,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "603663.SH",
+      "name": "三祥新材",
+      "price": null,
+      "rps120": 93.06,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688002.SH",
+      "name": "睿创微纳",
+      "price": null,
+      "rps120": 88.98,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -94,9 +130,9 @@
   "summary": {
     "total_scanned": 51,
     "buy_recommendations": 0,
-    "watch_recommendations": 6,
+    "watch_recommendations": 10,
     "avoid_recommendations": 0,
-    "market_call": "消极",
-    "reasoning": "PANIC TAPE — US费城半导体指数周五暴跌10.26% (6年最大跌幅), 触发全球科技股连锁抛售。A股三大指数全绿 (上证-1.26%, 深证-2.49%, 创业板-2.83%), 科创50 -3.63%。广度0.21:1 (947涨/4536跌), 全线溃败。资金避险涌入工程机械(+2.41%, 雅鲁藏布江超级基建催化)、油气(+1.67%)、银行(+1.65%)。半导体/电子/贵金属/工业金属领跌。IV分化: 科创50 IV Rank 56.3%偏高, 300ETF仅23.8%偏乐观。硬封锁新开仓, 100%现金等待广度恢复。"
+    "market_call": "防御",
+    "reasoning": "PANIC SELL-OFF: US non-farm payroll crushed rate-cut hopes → Nasdaq -4.18% Friday → Asia contagion. Iran attacked Israel → oil spike. A-shares: 上证 -1.7%, 深证 -3.22%, 创业板 -3.69%, 科创50 -4.3%. Breadth 0.20:1 (899/4591), 64涨停/59跌停. Defensive rotation into oil (+2.77%), banks (+1.76%), machinery (+2.38%). Tech/semiconductor/rare metals crushed (-5% to -7%). IV divergent: 科创50 IV Rank 56.3% (elevated, fear in tech) vs 300ETF 23.8% (low, complacent). Entry regime HARD BLOCKED — sizing_multiplier 0.0. Cash is the only position."
   }
 }

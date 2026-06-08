@@ -1360,3 +1360,11 @@
 - When US SOX crashes 10%+ (Friday -10.26%), A-share tech/半导体 complex is uninvestable for 1-3 trading days. The transmission is instantaneous via global fund flows and sentiment. Today's 科创50 -3.63%, 其他电子 -5.19% confirms. Do not bottom-fish in the wreckage — wait for breadth to normalize.
 - Cash is a position — and today it's the best one. Portfolio holds 100% cash (¥966,982), correctly avoiding a tape where 4536 stocks are down vs 947 up (0.21:1). The -3.3% total loss came from prior mistakes; today's discipline prevents compounding them. The system's hard_block is working as designed.
 - Engineering machinery (+2.41%) emerging as the defensive rotation winner during tech rout. The 雅鲁藏布江 1.2万亿 hydropower super-project provides a fundamental bid that tech sectors lack. Monitor 工程机械 sector for entry candidates when breadth normalizes — this is where money is hiding today, and hiding places often become the next leaders when the tape improves.
+
+### 自动更新 (2026-06-08)
+
+- Panic regime hard_block correctly prevented any new positions on a day with breadth 0.20:1, 0/3 indices green, and 59 limit-downs. The entry_regime system is working as designed — forcing cash preservation in unambiguous sell-offs.
+- MA-distance extremes detected on multiple high-RPS names: 绿的谐波 dist_ma5=30.2%, 国瓷材料 dist_ma5=7.4%, 乔锋智能 dist_ma5=6.6%. These anti-chase rules prevented entries that would have suffered massive drawdowns in today's sell-off.
+- Sector rotation speed is accelerating: last week's leaders (semiconductor, robots) are today's biggest losers (-7% to -5%). Defensive sectors (oil, banks) that were nowhere last week are the only greens. This validates sector-first analysis and suggests shorter holding periods in the current environment.
+- Cash at 100% during a panic day is not a failure — it's capital preservation. The portfolio's -3.3% realized losses from V1 are already booked. Forcing entries today hoping to 'make it back' would compound the damage. Wait for the regime to reset.
+- Cross-cutting catalysts (e.g., 华宏科技's AI-MLCC dysprosium theme) may not be captured by standard sector classifications. The stock is in 环保设备 but its real driver is rare earth/materials. When the market recovers, sector-agnostic catalysts deserve separate evaluation.
