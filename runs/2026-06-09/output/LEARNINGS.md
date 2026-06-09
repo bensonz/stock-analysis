@@ -1376,3 +1376,11 @@
 - MA-distance Rule 2b filtered 15+ candidates today that would otherwise have 'passed' on RPS and sector alone. This rule is the single most important entry-timing filter and is working as designed. The market is extended broadly — many strong names are too far above support.
 - VCP scanner coverage is thin (1/27 enriched candidates has VCP data, only SETUP quality). Either the scanner calibration is too strict or the current pool is dominated by trending/extended names that don't form contraction patterns. Worth investigating whether scanner parameters need adjustment for this market regime.
 - The breadth buy gate (Up/Down ≥ 1.5:1) correctly blocked entries today despite system flag allowing new positions. V1's biggest error was over-relying on individual stock quality while ignoring market internals. Today 0.85:1 breadth = unambiguous 'no.' This is the system working as intended.
+
+### 自动更新 (2026-06-09)
+
+- Nvidia-SK Hynix HBM deal is a multi-quarter sector catalyst lifting entire semiconductor supply chain simultaneously — equipment, materials, PCB, packaging, and chips all benefit. Today's top 3 sectors (电子化学品, 元件, 玻璃玻纤) are downstream beneficiaries of HBM capacity expansion.
+- Rule 2b (MA distance anti-chase) eliminated 8 of 28 enriched candidates today — all were strong stocks that 'looked' great (华峰测控, 江丰电子, 绿的谐波, 奥来德, etc). This rule prevents buying euphoric spikes after a rebound day and is doing exactly what it was designed for.
+- 0-risk stocks (上海新阳, 路维光电, 恒铭达) are clustering in today's hot sectors. This contradicts the V1 assumption that 'risky' stocks outperform — the cleanest setups are also in the best position today. Risk count should be neutral, not contrarian.
+- 新宙邦's 宁德时代电解液协议 (June 7, 30万吨/3年) is a genuine event-driven catalyst with rare revenue visibility. However, the battery sector is not in the hot zone today — sector gravity may drag it down. Sizing small (4%) is the right compromise: capture the catalyst upside without betting against sector headwinds.
+- Yesterday's -1.7% sell-off created ideal entry conditions: 思瑞浦, 上海新阳, 兴森科技 all pulled back to MA5/MA10 support and are now bouncing with the sector. This pattern (strength that temporarily dipped) is the optimal momentum entry, far better than buying strength that never pulled back.

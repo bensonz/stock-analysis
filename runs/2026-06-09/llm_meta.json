@@ -2,60 +2,80 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 211485,
-  "output_tokens": 8784,
+  "input_tokens": 226155,
+  "output_tokens": 17328,
   "rounds": 3,
-  "duration_sec": 208.8,
+  "duration_sec": 242.9,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年6月9日 今日热门板块 玻璃玻纤 电子化学品 半导体",
+        "query": "A股 2026年6月9日 热门板块 电子化学品 元件 大涨原因",
         "max_results": 5
       },
-      "result_length": 3175
+      "result_length": 3289
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年6月 油服工程 航天装备 下跌原因",
+        "query": "思瑞浦 688536 2026年 催化剂 业绩 研报",
         "max_results": 5
       },
-      "result_length": 2137
+      "result_length": 1520
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "玻璃玻纤板块 2026年6月 涨价 龙头",
+        "query": "上海新阳 300236 2026年 电子化学品 半导体材料 催化剂",
         "max_results": 5
       },
-      "result_length": 4289
+      "result_length": 2449
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "兴森科技 002436 2026年 PCB 元件 大涨 催化剂",
+        "max_results": 5
+      },
+      "result_length": 2516
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "路维光电 688401 半导体材料 2026年 光掩膜 催化剂",
+        "max_results": 5
+      },
+      "result_length": 2833
     },
     {
       "pass": "P1",
       "round": 2,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年6月9日 半导体 元件 板块上涨 催化 光刻机",
-        "max_results": 5
+        "max_results": 5,
+        "query": "新宙邦 300037 宁德时代 电解液 合作协议 2026年6月"
       },
-      "result_length": 3117
+      "result_length": 2642
     },
     {
       "pass": "P1",
       "round": 2,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年6月9日 市场 分化 指数涨 个股跌多涨少 权重股",
-        "max_results": 5
+        "max_results": 5,
+        "query": "A股 2026年6月9日 半导体 板块 大涨 SK海力士 英伟达 HBM"
       },
-      "result_length": 2809
+      "result_length": 2365
     }
   ],
   "fallback_used": false

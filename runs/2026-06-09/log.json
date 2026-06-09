@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1780976124.7063198,
+      "start": 1780990511.562735,
       "errors": [],
-      "end": 1780976137.2465038,
-      "duration_sec": 12.5
+      "end": 1780990523.631519,
+      "duration_sec": 12.1
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 18826,
+      "response_size_bytes": 19988,
       "tokens": {
-        "input_tokens": 211485,
-        "output_tokens": 8784
+        "input_tokens": 226155,
+        "output_tokens": 17328
       },
       "rounds": 3,
-      "tool_calls_count": 5,
-      "duration_sec": 208.8,
+      "tool_calls_count": 7,
+      "duration_sec": 242.9,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -25,25 +25,107 @@
     },
     {
       "phase": "apply",
-      "start": 1780976346.16348,
+      "start": 1780990766.634676,
       "actions": [
+        "SIZE THROTTLE 688536: 7% -> 5.25% (regime=strong)",
+        "SIZE THROTTLE 300236: 7% -> 5.25% (regime=strong)",
+        "SIZE THROTTLE 002436: 6.5% -> 4.88% (regime=strong)",
+        "SIZE THROTTLE 688401: 5% -> 3.75% (regime=strong)",
+        "SIZE THROTTLE 002947: 5% -> 3.75% (regime=strong)",
+        "SIZE THROTTLE 300037: 4% -> 3% (regime=strong)",
+        "SIZE THROTTLE 688652: 3% -> 2.25% (regime=strong)",
+        "SKIP OPEN 688536: Insufficient deployable cash for minimum lot in 688536: deployable=773585.60, entryPrice=288.28",
+        "OPEN 300236 @ 93.96",
+        "OPEN 002436 @ 37.49",
+        "OPEN 688401 @ 72.58",
+        "OPEN 002947 @ 83.55",
+        "OPEN 300037 @ 75.11",
+        "SKIP OPEN 688652: Insufficient deployable cash for minimum lot in 688652: deployable=647657.60, entryPrice=129.90",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=95",
-        "Hypothesis: Created h056 (observation): Glass fiber (玻璃玻纤) sector is in a confirmed structural super-cycle driven by AI ...",
-        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=67",
-        "Hypothesis: Updated h021 (rule): +1 contradicting evidence → hitRate=98%, n=68",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=96",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=20",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=99%, n=69",
+        "Hypothesis: Created h057 (observation): 0-risk stocks (上海新阳, 路维光电, 恒铭达) are clustering in today's hot sectors. This cont...",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=10",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=99%, n=70",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1780976346.7322361,
-      "duration_sec": 0.6
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002436",
+                "name": "兴森科技",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 37.49,
+                "stopLoss": 35.62,
+                "distance_pct": 4.99,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1780990767.178496,
+      "duration_sec": 0.5
     }
   ],
-  "validation_errors": [],
+  "validation_errors": [
+    "RULE check_stop_proximity: 002436 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 221.9
+    "totalDurationSec": 255.5
   }
 }

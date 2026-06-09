@@ -958,9 +958,9 @@
       "id": "h019",
       "text": "Bottom-list sectors should be treated as hard no-buy zones even when individual names still carry acceptable RPS readings.",
       "type": "heuristic",
-      "status": "validated",
+      "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-06-05",
+      "lastTested": "2026-06-09",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -999,13 +999,17 @@
           {
             "date": "2026-06-05",
             "detail": "Broadcom FY2027 AI guidance miss (-12.6% overnight) triggered a global semiconductor sell-off that cascaded into A-share 科创50 -4.01%. External US tech earnings are now the dominant swing factor for A-share semiconductor/tech sectors. When the US AI hardware narrative cracks, A-share semis deflate fast."
+          },
+          {
+            "date": "2026-06-09",
+            "detail": "新宙邦's 宁德时代电解液协议 (June 7, 30万吨/3年) is a genuine event-driven catalyst with rare revenue visibility. However, the battery sector is not in the hot zone today — sector gravity may drag it down. Sizing small (4%) is the right compromise: capture the catalyst upside without betting against sector headwinds."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 9,
+      "sampleSize": 10,
       "hitRate": 1.0,
-      "confidence": 0.909,
+      "confidence": 0.917,
       "tags": [
         "sector",
         "entry-filter"
@@ -1328,6 +1332,14 @@
           {
             "date": "2026-06-09",
             "detail": "MA-distance Rule 2b filtered 15+ candidates today that would otherwise have 'passed' on RPS and sector alone. This rule is the single most important entry-timing filter and is working as designed. The market is extended broadly — many strong names are too far above support."
+          },
+          {
+            "date": "2026-06-09",
+            "detail": "Rule 2b (MA distance anti-chase) eliminated 8 of 28 enriched candidates today — all were strong stocks that 'looked' great (华峰测控, 江丰电子, 绿的谐波, 奥来德, etc). This rule prevents buying euphoric spikes after a rebound day and is doing exactly what it was designed for."
+          },
+          {
+            "date": "2026-06-09",
+            "detail": "Yesterday's -1.7% sell-off created ideal entry conditions: 思瑞浦, 上海新阳, 兴森科技 all pulled back to MA5/MA10 support and are now bouncing with the sector. This pattern (strength that temporarily dipped) is the optimal momentum entry, far better than buying strength that never pulled back."
           }
         ],
         "contradicting": [
@@ -1337,9 +1349,9 @@
           }
         ]
       },
-      "sampleSize": 68,
-      "hitRate": 0.985,
-      "confidence": 0.971,
+      "sampleSize": 70,
+      "hitRate": 0.986,
+      "confidence": 0.972,
       "tags": [
         "entry-filter",
         "timing"
@@ -1690,7 +1702,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-06-08",
+      "lastTested": "2026-06-09",
       "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally.",
       "evidence": {
         "supporting": [
@@ -1769,13 +1781,17 @@
           {
             "date": "2026-06-08",
             "detail": "Sector rotation speed is accelerating: last week's leaders (semiconductor, robots) are today's biggest losers (-7% to -5%). Defensive sectors (oil, banks) that were nowhere last week are the only greens. This validates sector-first analysis and suggests shorter holding periods in the current environment."
+          },
+          {
+            "date": "2026-06-09",
+            "detail": "Nvidia-SK Hynix HBM deal is a multi-quarter sector catalyst lifting entire semiconductor supply chain simultaneously — equipment, materials, PCB, packaging, and chips all benefit. Today's top 3 sectors (电子化学品, 元件, 玻璃玻纤) are downstream beneficiaries of HBM capacity expansion."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 19,
+      "sampleSize": 20,
       "hitRate": 1.0,
-      "confidence": 0.952,
+      "confidence": 0.955,
       "tags": [
         "sector",
         "timing"
@@ -2564,6 +2580,33 @@
       "confidence": 0.6,
       "tags": [
         "sector"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h057",
+      "text": "0-risk stocks (上海新阳, 路维光电, 恒铭达) are clustering in today's hot sectors. This contradicts the V1 assumption that 'risky' stocks outperform — the cleanest setups are also in the best position today. Risk count should be neutral, not contrarian.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-06-09",
+      "lastTested": "2026-06-09",
+      "mechanism": "When sector catalyst is strong, quality companies in the supply chain benefit first. Risk factors reflect past problems, not future momentum.",
+      "evidence": {
+        "supporting": [],
+        "contradicting": [
+          {
+            "date": "2026-06-09",
+            "detail": "0-risk stocks (上海新阳, 路维光电, 恒铭达) are clustering in today's hot sectors. This contradicts the V1 assumption that 'risky' stocks outperform — the cleanest setups are also in the best position today. Risk count should be neutral, not contrarian."
+          }
+        ]
+      },
+      "sampleSize": 1,
+      "hitRate": 0.0,
+      "confidence": 0.4,
+      "tags": [
+        "entry-filter"
       ],
       "parentRule": null,
       "retiredDate": null,
