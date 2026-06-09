@@ -1,0 +1,49 @@
+{
+  "date": "2026-06-09",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1780976124.7063198,
+      "errors": [],
+      "end": 1780976137.2465038,
+      "duration_sec": 12.5
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 18826,
+      "tokens": {
+        "input_tokens": 211485,
+        "output_tokens": 8784
+      },
+      "rounds": 3,
+      "tool_calls_count": 5,
+      "duration_sec": 208.8,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1780976346.16348,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=95",
+        "Hypothesis: Created h056 (observation): Glass fiber (玻璃玻纤) sector is in a confirmed structural super-cycle driven by AI ...",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=100%, n=67",
+        "Hypothesis: Updated h021 (rule): +1 contradicting evidence → hitRate=98%, n=68",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=96",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1780976346.7322361,
+      "duration_sec": 0.6
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 221.9
+  }
+}

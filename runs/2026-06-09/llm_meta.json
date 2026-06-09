@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 211485,
+  "output_tokens": 8784,
+  "rounds": 3,
+  "duration_sec": 208.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月9日 今日热门板块 玻璃玻纤 电子化学品 半导体",
+        "max_results": 5
+      },
+      "result_length": 3175
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月 油服工程 航天装备 下跌原因",
+        "max_results": 5
+      },
+      "result_length": 2137
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "玻璃玻纤板块 2026年6月 涨价 龙头",
+        "max_results": 5
+      },
+      "result_length": 4289
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月9日 半导体 元件 板块上涨 催化 光刻机",
+        "max_results": 5
+      },
+      "result_length": 3117
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月9日 市场 分化 指数涨 个股跌多涨少 权重股",
+        "max_results": 5
+      },
+      "result_length": 2809
+    }
+  ],
+  "fallback_used": false
+}

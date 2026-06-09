@@ -1,0 +1,317 @@
+# Research Memo — 2026-06-09
+
+## 1. Market Regime
+
+**Headline: Indices green, market red — classic large-cap mask.**
+
+| Index | Close | Change |
+|-------|-------|--------|
+| 上证指数 | 3,979.68 | +0.51% |
+| 深证成指 | 15,007.11 | +1.25% |
+| 创业板指 | 3,884.54 | +1.91% |
+| 科创50 | 1,644.16 | +2.98% |
+
+Looks bullish at a glance. But the breadth tells a completely different story:
+
+**Breadth: 2,471 up / 2,908 down / 138 flat → ratio 0.85:1 (NEGATIVE)**
+
+More stocks fell than rose. The distribution confirms this: `f0_2` (down 0-2%) = **2,101 stocks** — the single largest bucket. Meanwhile `r0_2` (up 0-2%) = 1,513. The rally is concentrated in a narrow band of tech large-caps while the broad market bleeds.
+
+**Buy Gate Check:**
+- Up/Down ≥ 1.5:1? **FAIL (0.85:1)**
+- ≥ 2 major indices green? **PASS (3/3)**
+- Not panic tape (f10 < 30)? **PASS (14 limit-downs)**
+
+→ **HARD BLOCK on new positions.** The gate is failed. V2 Rule 1 is clear: "Weak-market default: if breadth/regime is weak, return `new_positions: []`."
+
+**IV Environment:**
+- 科创50 IV Rank 56.3% → elevated, selective
+- 300ETF IV Rank 23.8% → low, market complacent on large caps
+- 500ETF IV Rank 21.6% → low
+- 创业板 ETF IV Rank 45.8% → neutral
+- **Overall: neutral with tech premium.** The elevated IV in 科创50 suggests options market pricing more risk in the names that are running.
+
+**Entry Regime:** System says `allow_new_positions: true` with `sizing_multiplier: 0.5` because 3/3 indices are green. But I disagree — the 0.85:1 breadth ratio is a legitimate gate failure. The system's `allow_new_positions` flag uses only indices and limit-up/down counts, but V2's buy gate explicitly requires 1.5:1 breadth. I'm overruling the system flag with the stricter V2 rule.
+
+**Macro Context (from web research):**
+- Glass fiber: AI-driven CCL super-cycle, monthly price hikes, supply bottleneck (日东纺 capacity won't hit until 2027), electronic cloth prices up 50%+ since Q4 2025
+- Semiconductors: 万亿 super-cycle narrative, storage chip price increases, AI capex
+- Oil/gas sectors: capital spending cuts, rotation out of old energy
+- Market structure: extreme sector divergence — tech/AI hardware vs everything else
+
+---
+
+## 2. Sector Analysis
+
+**Hot Sectors (Top 5, today's 5d performance proxy):**
+
+| Rank | Sector | 涨跌幅 | Trend | Key Driver |
+|------|--------|--------|-------|------------|
+| 1 | 玻璃玻纤 | +7.82% | Accelerating | AI CCL demand, monthly e-cloth price hikes |
+| 2 | 综合Ⅱ | +5.69% | Spike (catch-all) | Mixed, less actionable |
+| 3 | 电子化学品Ⅱ | +5.01% | Steady | Semiconductor materials, photoresist |
+| 4 | 元件 | +4.56% | Steady | PCB/CCL supply chain, MLCC |
+| 5 | 半导体 | +4.18% | Steady | AI capex, equipment demand |
+
+**Cold Sectors (Bottom 5):**
+
+| Rank | Sector | 涨跌幅 | Meaning |
+|------|--------|--------|---------|
+| 54 | 炼化及贸易 | -2.77% | Old energy rotation out |
+| 55 | 油气开采Ⅱ | -3.29% | Oil price pressure |
+| 56 | 航天装备Ⅱ | -3.34% | Defense rotation |
+| 57 | 焦炭Ⅱ | -4.01% | Coal demand concerns |
+| 58 | 油服工程 | -4.85% | Capex cuts |
+
+**Rotation Signal:** Clear and persistent: money flowing INTO AI hardware supply chain (glass fiber → CCL → PCB → chips), flowing OUT of old energy/commodities. This rotation has been in place since at least April 2026 and is accelerating. The glass fiber sector's +7.82% single-day move is remarkable and consistent with the structural supply-demand thesis.
+
+**Position Alignment:** 0/0 positions (all cash). No alignment to measure.
+
+**Sector Persistence Check:** The hot sectors today (fiberglass, electronic chemicals, components, semiconductors) have been the consistent leaders for weeks. This is NOT a one-day spike — it's a sustained rotation with fundamental backing (AI demand, price hikes, supply constraints).
+
+---
+
+## 3. Position Review
+
+**No active positions.** Portfolio is 100% cash (¥966,982), realized PnL -¥33,018 (-3.3%).
+
+This is actually a reasonable state given the weak breadth. Cash is a position.
+
+---
+
+## 4. New Entry Candidates
+
+**Verdict: NO NEW POSITIONS TODAY.** Breadth gate failed (0.85:1 < 1.5:1).
+
+However, I did the full analysis so the PM knows what's on deck when breadth improves:
+
+### Tier 1: Would-Buy-If-Gate-Open
+
+**1. 上海新阳 (300236)** — Top Pick
+- Sector: 电子化学品Ⅱ (top 3, +5.01%) ✓
+- RPS120: 89.68% (sweet spot 80-92%) ✓
+- MA distances: dist_ma5=+1.1%, dist_ma10=-4.7%, dist_ma20=+2.6% — ALL within limits ✓
+- VCP: None (no VCP data)
+- Fundamentals: score_company=8.4, 0 risks, 5 highlights (strong growth, strong cash flow, capacity expansion, institutional ownership)
+- Catalyst: Semiconductor materials (靶材, 光刻胶配套), industry in sustained uptrend since April 2026
+- PE=83 — ignore per V2
+- Valuation percentile: 63.94% (not extreme)
+- IV: 创业板 ETF IV Rank 45.8% → normal sizing
+- Concerns: 10-day relative weakness (走弱 flag), but MA structure is healthy
+
+**2. 思瑞浦 (688536)**
+- Sector: 半导体 (top 5, +4.18%) ✓
+- RPS120: 91.71% (sweet spot) ✓
+- MA distances: dist_ma5=-3.0%, dist_ma10=-5.1%, dist_ma20=+8.4% — all within limits ✓
+- Fundamentals: score_company=8.1, 1 risk (商誉), 7 highlights — net profit +577% QoQ, strong revenue growth +80%, 12 analysts covering
+- Catalyst: Analog chips, AI demand, 股价 创近24个月新高
+- IV: 科创50 IV Rank 56.3% → selective sizing
+- Concerns: Currently pulling back from MA5/MA10 (stock below both short-term MAs). This could be a buying opportunity at support, but also could mean momentum is cooling.
+
+**3. 芯源微 (688037)**
+- Sector: 半导体 (top 5) ✓
+- RPS120: 92.83% (upper sweet spot) ✓
+- MA distances: dist_ma5=0.0%, dist_ma10=-7.8%, dist_ma20=+2.8% — within limits ✓ (dist_ma10 is negative, meaning it's below MA10 = pullback, not chasing)
+- Fundamentals: score_company=7.8, 3 risks, 6 highlights — but net profit NEGATIVE (-1249% YoY decline), revenue declining. This is a "growth story, not earnings" play.
+- Catalyst: Received ¥35.22M government subsidy, semiconductor equipment uptrend
+- PE=702 — extreme, but V2 says ignore
+- Concerns: Negative earnings, below MA10 in pullback. This is a pure momentum/sector play. Need the sector tide to carry it.
+
+### Tier 2: Good Stocks, Wrong Sector or Overextended
+
+These would be strong candidates but have issues:
+
+**新宙邦 (300037)**: VCP SETUP (only stock with VCP data!), RPS120=85.76%, strong fundamentals (score=9.2), massive 宁德时代电解液 contract (5万吨/10万吨/15万吨 over 3 years). BUT sector is 电池, which is NOT in today's top 5 hot sectors. Should track — if 电池 sector heats up, this is a prime candidate.
+
+**格林达 (603931)**: 电子化学品Ⅱ sector ✓, RPS120=92.44% ✓, but dist_ma20=+24.6% → WAY overextended. dist_ma20 > 12% is an automatic skip per Rule 2b.
+
+**恒铭达 (002947)**: 消费电子 sector, RPS120=93.71% (extended zone), 0 risks, strong fundamentals. MA distances within limits. But 消费电子 is not explicitly in top 5 sectors today — need sector data to confirm it's top 30%.
+
+---
+
+## 5. Skip List
+
+Given breadth gate failure, technically ALL stocks are skipped today. But here are the stocks I actively analyzed and would flag:
+
+| Code | Name | Reason |
+|------|------|--------|
+| 688200 | 华峰测控 | dist_ma5=+7.9% > 6% → chasing, Rule 2b automatic skip |
+| 300666 | 江丰电子 | dist_ma5=+6.4% > 6% → chasing, Rule 2b skip |
+| 688017 | 绿的谐波 | dist_ma5=+16.3%, dist_ma10=+21.2%, dist_ma20=+46.5% → extreme extension. RPS120=93.89% in extended zone |
+| 688308 | 欧科亿 | dist_ma10=+10.2% > 8%, dist_ma20=+27.2% > 12% → chasing |
+| 603929 | 亚翔集成 | dist_ma5=+21.0%, dist_ma10=+18.5%, dist_ma20=+12.2% → all over limits |
+| 002980 | 华盛昌 | dist_ma5=+8.6%, dist_ma10=+11.3%, dist_ma20=+42.0% → extreme |
+| 688378 | 奥来德 | dist_ma5=+12.4% > 6% → chasing. Also 光学光电子 sector not confirmed top 30% from today's data |
+| 603663 | 三祥新材 | dist_ma5=+8.5%, dist_ma10=+21.0%, dist_ma20=+35.6% → extreme extension |
+| 688630 | 芯碁微装 | dist_ma5=+6.6% > 6% → chasing |
+| 300398 | 飞凯材料 | dist_ma5=+12.2% > 6% → chasing |
+| 688610 | 埃科光电 | dist_ma5=+19.0%, dist_ma10=+21.3%, dist_ma20=+50.5% → extreme |
+| 300285 | 国瓷材料 | dist_ma10=+17.4% > 8% → chasing |
+| 002812 | 恩捷股份 | 电池 sector, RPS120=89.79%, but dist_ma5=-7.0%, stock is in sustained downtrend below all MAs — broken chart |
+| 002645 | 华宏科技 | 环保 sector (not hot), 4 risks including 大股东质押100%, high vol |
+| 600301 | 华锡有色 | 小金属 sector (not hot), RPS20=50.75% (near-term momentum dead), dist_ma5=-9.9% |
+| 688629 | 华丰科技 | 军工电子 sector (bottom list), huge 解禁 June 29 (61% of shares) |
+| 605060 | 联德股份 | RPS20=43.13% → short-term momentum dead, in pullback |
+| 301018 | 申菱环境 | dist_ma10=-21.6% → broken chart, way below MA10 |
+
+---
+
+## 6. Learnings
+
+**New learnings for today:**
+
+1. **"Index green, breadth red" is the most dangerous tape for momentum entries.** Three major indices all positive, 科创50 +2.98%, but 2,908 stocks fell vs 2,471 rose. Large-cap tech is masking broad distribution. Buying into this would mean entering at the top of a narrowing rally. This pattern has appeared in recent weeks (ref: 6月1日 analysis noting "极致分化") and should be treated as a yellow-to-red flag.
+
+2. **Glass fiber sector is in a confirmed structural super-cycle, not a short-term spike.** Web research confirms monthly price hikes since Oct 2025, AI server PCB demand 5x traditional servers, 日東纺 capacity bottleneck until 2027. This sector deserves a dedicated watchlist of 玻璃玻纤 stocks (国际复材, 中国巨石, 山东玻纤, 宏和科技, 中材科技). None of these are in our strategy pool — a gap to address.
+
+3. **MA-distance rule is filtering exactly what it should.** On a day like today, 15+ candidates in the strategy pool fail dist_ma5 > 6% or dist_ma10 > 8%. These are the stocks that "look great" on momentum screens but would be chased entries. Rule 2b is protecting us from these.
+
+4. **VCP data is scarce in our pool.** Only 1 of 27 enriched candidates (新宙邦) has VCP data, and it's only SETUP quality (contraction_ratio=0.48 > 0.4 threshold). The VCP scanner may need calibration or our pool is tilted toward extended names.
+
+5. **The breadth gate is doing its job.** V1's biggest error was buying individual setups in weak tape. Today the system correctly says "no." 0.85:1 breadth is unambiguous.
+
+---
+
+## 7. Uncertainty Flags
+
+- **I am uncertain whether the system's `allow_new_positions: true` flag is correct** given the 0.85:1 breadth. The system uses index direction + limit-up/down count, but V2's buy gate explicitly requires 1.5:1 breadth. I'm choosing to follow the stricter V2 rule. If the PM disagrees, the backup candidates are clearly flagged above.
+
+- **I am uncertain about the sector classification for some stocks.** For example, 恒铭达 is classified as 消费电子, which isn't in today's top 5 — but 元件 is #4 and there's overlap. Without the full sector ranking, I'm being conservative in sector filtering.
+
+- **Sector data only provides top5/bottom5.** For stocks in sectors outside these extremes, I can't confirm whether they're in the top 30%. I'm defaulting to "not confirmed → skip" which is conservative but may miss valid names.
+
+- **The VCP scanner output is thin.** Only 新宙邦 has VCP data. It's unclear whether the scanner isn't running on all stocks or whether most stocks genuinely lack VCP patterns. Either way, we're flying without this edge today.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "玻璃玻纤", "5d_pct": 7.82, "trend": "accelerating"},
+      {"name": "综合Ⅱ", "5d_pct": 5.69, "trend": "spike"},
+      {"name": "电子化学品Ⅱ", "5d_pct": 5.01, "trend": "steady"},
+      {"name": "元件", "5d_pct": 4.56, "trend": "steady"},
+      {"name": "半导体", "5d_pct": 4.18, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "油服工程", "5d_pct": -4.85, "trend": "deteriorating"},
+      {"name": "焦炭Ⅱ", "5d_pct": -4.01, "trend": "deteriorating"},
+      {"name": "航天装备Ⅱ", "5d_pct": -3.34, "trend": "deteriorating"},
+      {"name": "油气开采Ⅱ", "5d_pct": -3.29, "trend": "deteriorating"},
+      {"name": "炼化及贸易", "5d_pct": -2.77, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/0 positions (100% cash)",
+    "regime": "AI hardware super-cycle leadership (glass fiber, electronic chemicals, semiconductors), old energy/commodities rotating out. Extreme sector divergence."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "reason": "Best candidate on paper (电子化学品Ⅱ top 3 sector, RPS120 89.68%, all MA distances within limits, 0 risks). Skipped because breadth gate failed: Up/Down ratio 0.85:1 < 1.5:1 minimum. Will prioritize if breadth recovers.",
+      "rps120": 89.68
+    },
+    {
+      "code": "688536",
+      "name": "思瑞浦",
+      "reason": "Strong candidate (半导体 top 5 sector, RPS120 91.71%, MA distances all within limits, net profit +577%). Skipped: breadth gate failure. Currently pulling back to MA support — good entry zone if breadth improves.",
+      "rps120": 91.71
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "Acceptable candidate (半导体 sector, RPS120 92.83%, MA distances within limits). Skipped: breadth gate failure + negative earnings trend + PE 702 raises sanity concerns despite V2 ignoring valuation.",
+      "rps120": 92.83
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "Rule 2b automatic skip: dist_ma5_pct=+7.9% > 6% threshold. Overextended short-term regardless of sector strength.",
+      "rps120": 94.97
+    },
+    {
+      "code": "300666",
+      "name": "江丰电子",
+      "reason": "Rule 2b skip: dist_ma5_pct=+6.4% > 6%. Also RPS120=93.67% in extended zone without sector exception to override.",
+      "rps120": 93.67
+    },
+    {
+      "code": "688017",
+      "name": "绿的谐波",
+      "reason": "Extreme extension: dist_ma5=+16.3%, dist_ma10=+21.2%, dist_ma20=+46.5%. All three MA distance rules violated. RPS120=93.89% extended zone.",
+      "rps120": 93.89
+    },
+    {
+      "code": "603663",
+      "name": "三祥新材",
+      "reason": "dist_ma5=+8.5% > 6%, dist_ma10=+21.0% > 8%, dist_ma20=+35.6% > 12%. Triple MA violation. Also sector (化学原料) not confirmed top 30%.",
+      "rps120": 93.97
+    },
+    {
+      "code": "002645",
+      "name": "华宏科技",
+      "reason": "环保设备 sector not in top 30% hot sectors. Also 4 risk factors including 大股东100%质押 and 商誉占净资产17%. RPS is strong but sector gravity wins.",
+      "rps120": 93.1
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "小金属 sector not hot. RPS20=50.75% — near-term momentum dead. dist_ma5=-9.9% — broken chart. 沪锡期货暴跌6% headwind.",
+      "rps120": 91.83
+    },
+    {
+      "code": "002812",
+      "name": "恩捷股份",
+      "reason": "电池 sector not in top hot sectors. Stock below all MAs (dist_ma5=-7.0%, dist_ma10=-12.6%, dist_ma20=-16.0%) — sustained downtrend, broken chart.",
+      "rps120": 89.79
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Index-green/breadth-red tape (today: indices +0.5%~+3.0% but 2,908 down vs 2,471 up) is the most dangerous entry environment for momentum strategies. Large-cap tech masking broad distribution = buying into a narrowing rally top. Treat as hard block regardless of system flags.",
+      "type": "signal",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "When breadth is negative but indices are green, large-cap concentration is lifting the index while the median stock declines. Momentum entries in this regime face immediate headwinds from poor market internals. h013 already established strong breadth alone isn't enough — this is the inverse case."
+    },
+    {
+      "text": "Glass fiber (玻璃玻纤) sector is in a confirmed structural super-cycle driven by AI CCL demand, not a short-term spike. Electronic cloth prices have risen monthly since Oct 2025, cumulative +50%+, supply bottleneck (日東纺) until 2027. No glass fiber stocks in current strategy pool — this is a coverage gap.",
+      "type": "observation",
+      "tags": ["sector"],
+      "evidence_type": "supporting",
+      "mechanism": "AI servers require 5x more electronic cloth per unit vs traditional servers. Single-source supplier (日東纺, 90%+ share) cannot expand capacity until 2027. Chinese producers (中国巨石, 国际复材, 山东玻纤) are the marginal suppliers capturing price. Monthly price hikes = recurring catalyst."
+    },
+    {
+      "text": "MA-distance Rule 2b filtered 15+ candidates today that would otherwise have 'passed' on RPS and sector alone. This rule is the single most important entry-timing filter and is working as designed. The market is extended broadly — many strong names are too far above support.",
+      "type": "rule",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021, h027",
+      "mechanism": "Stocks that spike far above short-term MAs have high mean-reversion probability within 3-5 days. Even in hot sectors, the arithmetic of distance-from-support dominates short-term returns. h021 and h027 already validated this."
+    },
+    {
+      "text": "VCP scanner coverage is thin (1/27 enriched candidates has VCP data, only SETUP quality). Either the scanner calibration is too strict or the current pool is dominated by trending/extended names that don't form contraction patterns. Worth investigating whether scanner parameters need adjustment for this market regime.",
+      "type": "observation",
+      "tags": ["timing", "entry-filter"],
+      "evidence_type": "contradicting",
+      "mechanism": "VCP patterns require price contraction + declining volatility. In a momentum-driven tape where stocks are expanding ranges, VCP setups become rare. The scanner's utility may be regime-dependent — most valuable in consolidating/range-bound markets, less so in trending ones."
+    },
+    {
+      "text": "The breadth buy gate (Up/Down ≥ 1.5:1) correctly blocked entries today despite system flag allowing new positions. V1's biggest error was over-relying on individual stock quality while ignoring market internals. Today 0.85:1 breadth = unambiguous 'no.' This is the system working as intended.",
+      "type": "heuristic",
+      "tags": ["entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Breadth ratio captures the 'participation' dimension that indices miss. When only large caps are carrying the tape, the probability of a momentum stock continuing its trend is lower because there's no broad buying pressure to absorb supply. h013 established this principle."
+    }
+  ],
+  "market_summary": "Indices green (科创50 +2.98%, 创业板 +1.91%) but breadth deeply negative (0.85:1, 2,908 down vs 2,471 up). Classic large-cap tech masking broad distribution. Hot sectors: glass fiber +7.82% (AI CCL super-cycle), electronic chemicals +5.01%, semiconductors +4.18%. Cold: old energy (oil services -4.85%, coal -4.01%). IV: 科创50 elevated (56.3%), large caps low (23.8%). No new positions — breadth gate failed. 100% cash.",
+  "market_sentiment": "neutral",
+  "market_call": "谨慎"
+}
+```
