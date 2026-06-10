@@ -1,0 +1,117 @@
+{
+  "date": "2026-06-10",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1781062521.979821,
+      "errors": [],
+      "end": 1781062535.188428,
+      "duration_sec": 13.2
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 17038,
+      "tokens": {
+        "input_tokens": 279708,
+        "output_tokens": 9598
+      },
+      "rounds": 4,
+      "tool_calls_count": 7,
+      "duration_sec": 220.3,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1781062755.549547,
+      "actions": [
+        "SELL 300037",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=97",
+        "Hypothesis: Updated h024 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=11",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=21",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002436",
+                "name": "兴森科技",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 37.34,
+                "stopLoss": 35.62,
+                "distance_pct": 4.61,
+                "suggestion": "🟠 WATCH — 4.6% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1781062755.9779809,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 002436 — 🟠 WATCH — 4.6% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 233.9
+  }
+}

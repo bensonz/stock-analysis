@@ -1,0 +1,77 @@
+{
+  "date": "2026-06-10",
+  "actions": [
+    {
+      "code": "300037",
+      "name": "新宙邦",
+      "action": "SELL",
+      "price": 71.14,
+      "pnl_pct": -5.29,
+      "note": "Hard -5% stop breached at 71.14 vs 71.35. -5.29% from entry in 1 day. Also triggers -3% in first 3 days rule. CRITICAL stop_proximity. Catalyst (宁德30万吨电解液协议) is real but market overrides. Cut now, re-enter later if regime improves."
+    },
+    {
+      "code": "002947",
+      "name": "恒铭达",
+      "action": "HOLD",
+      "price": 86.34,
+      "pnl_pct": 3.34,
+      "note": "+3.34% from entry, fighting sector gravity (消费电子 -4.24% today). Strong relative strength. 0 risk factors. Monitor for 3-day cold-sector rule if 消费电子 stays bottom 5."
+    },
+    {
+      "code": "002436",
+      "name": "兴森科技",
+      "action": "HOLD",
+      "price": 37.34,
+      "pnl_pct": -0.4,
+      "note": "-0.40% from entry, minor dip. Sector (元件) not in bottom 5. Intraday high ¥39.96 shows buying interest. PCB+IC载板 thesis intact. Stop 35.62 (-4.61% away)."
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "action": "HOLD",
+      "price": 98.2,
+      "pnl_pct": 4.51,
+      "note": "+4.51% from entry, best performer. +2.51% today in brutal tape. 电子化学品 pure play, 0 risk. MA distances healthy (dist_ma5=1.1%). Raise stop to breakeven if reaches +10%."
+    },
+    {
+      "code": "688401",
+      "name": "路维光电",
+      "action": "HOLD",
+      "price": 73.35,
+      "pnl_pct": 1.06,
+      "note": "+1.06% from entry, +2.09% today. 掩膜版龙头 thesis intact. MA distances healthy. 0 risk. Consolidating near MA5/MA10."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 968740.0,
+    "dayPnl": 783.0,
+    "dayReturnPct": 0.08,
+    "totalReturnPct": -3.13,
+    "unrealizedPnl": 2552.0,
+    "realizedPnl": -33812.0,
+    "cashPct": 88.29
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.2559,
+    "up": 1112,
+    "down": 4346,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 55,
+    "limit_downs": 43,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.26:1, 0/3 major indices green, 55 limit-ups / 43 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Bearish panic: breadth 0.26:1 (1112↑/4346↓), all 3 major indices red. Triggered by US费半-10.26% (Broadcom miss). Defensive rotation into banks (+1.74%), liquor (+2.68%), tourism (+3.04%). Tech/industrial getting crushed: 消费电子 -4.24%, 光学光电子 -4.78%, 电源设备 -5.40%. IV data unavailable. Entry regime hard_block — no new positions. Cash is the best position today."
+  }
+}

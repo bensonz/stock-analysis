@@ -1,0 +1,82 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 279708,
+  "output_tokens": 9598,
+  "rounds": 4,
+  "duration_sec": 220.3,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月10日 市场大跌 原因 分析",
+        "max_results": 5
+      },
+      "result_length": 3498
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "消费电子板块 下跌 2026年6月 恒铭达",
+        "max_results": 5
+      },
+      "result_length": 2813
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "新宙邦 宁德时代 电解液 协议 2026年6月",
+        "max_results": 5
+      },
+      "result_length": 2774
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "兴森科技 PCB IC载板 2026年6月 韩国投资者",
+        "max_results": 5
+      },
+      "result_length": 3332
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "上海新阳 光刻胶 电子化学品 2026年6月 半导体材料",
+        "max_results": 5
+      },
+      "result_length": 2906
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月10日 板块轮动 防御 科技股下跌 旅游 保险 上涨",
+        "max_results": 5
+      },
+      "result_length": 3183
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "query": "消费电子 板块 下跌原因 2026年6月 苹果 需求",
+        "max_results": 5
+      },
+      "result_length": 3226
+    }
+  ],
+  "fallback_used": false
+}
