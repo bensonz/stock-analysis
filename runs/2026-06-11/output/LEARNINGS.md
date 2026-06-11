@@ -1405,3 +1405,11 @@
 - Sector gravity confirmed again: 上海新阳 (电子化学品 #1) +6.37%, 路维光电 (半导体 adjacent) +4.44% both green today, while 恒铭达 (消费电子 neutral) -1.17% and -4.43% today. Hot sector stocks hold up in selloffs; neutral-sector stocks don't.
 - Volume below MAVOL30 (恒铭达 at 61%) combined with negative price action (-4.43%) is a reliable early warning before stop-loss triggers. The volume rule correctly flagged weakening momentum before the stop was threatened.
 - 金钼股份 and 新宙邦 are the top candidates to buy when the market regime clears. Both have: (a) sector in top 5, (b) fresh catalysts (钼价 +35.65% YTD; 宁德时代电解液大单), (c) healthy MA distances, (d) institutional backing. Pre-identifying these reduces decision latency when the buy gate reopens.
+
+### 自动更新 (2026-06-11)
+
+- Panic tapes with sector bifurcation produce extreme alpha dispersion: 上海新阳 +5.80% and 路维光电 +8.29% today in a 0.34:1 breadth market proves that #1 sector leaders can defy gravity. The sector-first framework isolates the winners.
+- Volume confirmation at extremes (路维光电 8.65x MAVOL30) in a weak tape is the strongest continuation signal available. Retail doesn't buy 8x normal volume during panic — this is institutional positioning ahead of a catalyst (likely Xiamen trial production milestone).
+- The MA-distance anti-chase rule (h021, h027) prevented catastrophic entries today: 江丰电子 (dist_ma5=+23.6%), 三祥新材 (dist_ma5=+8.6%), 格林达 (dist_ma20=+22%) all would have been tempting in hot sectors but would face immediate mean-reversion. The rule is doing real protective work.
+- Neutral-sector positions (恒铭达 in 消费电子) underperform hot-sector positions by 8pp in just 2 days. Sector gravity is a stronger short-term return driver than individual fundamentals. Consider a rule: if a held stock's sector stays out of top 30% for 5+ consecutive days, exit regardless of PnL.
+- The 'panic ≠ sell everything' rule is validated: holding 上海新阳 and 路维光电 through a 0.34:1 tape generated +5-8% gains while cash preserved 91.57% of portfolio. The correct panic response is: block new entries, hold winners in hot sectors, watch stops on neutral-sector positions.

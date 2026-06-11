@@ -727,11 +727,15 @@
           {
             "date": "2026-06-11",
             "detail": "Geopolitical shock days (US-Iran strikes + oil spike) validate the hard buy gate: breadth 0.21:1, 0/3 indices green, f10=49 — staying in cash prevents opening positions that would be underwater within hours. The objective gate removes emotional 'buy the dip' impulses."
+          },
+          {
+            "date": "2026-06-11",
+            "detail": "The 'panic ≠ sell everything' rule is validated: holding 上海新阳 and 路维光电 through a 0.34:1 tape generated +5-8% gains while cash preserved 91.57% of portfolio. The correct panic response is: block new entries, hold winners in hot sectors, watch stops on neutral-sector positions."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 98,
+      "sampleSize": 99,
       "hitRate": 1.0,
       "confidence": 0.99,
       "tags": [],
@@ -968,7 +972,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-06-10",
+      "lastTested": "2026-06-11",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1015,13 +1019,17 @@
           {
             "date": "2026-06-10",
             "detail": "恒铭达's +0.98% gain while 消费电子 sector is -4.24% suggests genuine relative strength. Stocks fighting sector gravity on day 1 of a sector selloff deserve closer monitoring rather than immediate exit. The 3-day sector-cold rule is the right balance: don't panic-sell on day 1, but don't hold indefinitely."
+          },
+          {
+            "date": "2026-06-11",
+            "detail": "Neutral-sector positions (恒铭达 in 消费电子) underperform hot-sector positions by 8pp in just 2 days. Sector gravity is a stronger short-term return driver than individual fundamentals. Consider a rule: if a held stock's sector stays out of top 30% for 5+ consecutive days, exit regardless of PnL."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 11,
+      "sampleSize": 12,
       "hitRate": 1.0,
-      "confidence": 0.923,
+      "confidence": 0.929,
       "tags": [
         "sector",
         "entry-filter"
@@ -1356,6 +1364,14 @@
           {
             "date": "2026-06-11",
             "detail": "金钼股份 and 新宙邦 are the top candidates to buy when the market regime clears. Both have: (a) sector in top 5, (b) fresh catalysts (钼价 +35.65% YTD; 宁德时代电解液大单), (c) healthy MA distances, (d) institutional backing. Pre-identifying these reduces decision latency when the buy gate reopens."
+          },
+          {
+            "date": "2026-06-11",
+            "detail": "Volume confirmation at extremes (路维光电 8.65x MAVOL30) in a weak tape is the strongest continuation signal available. Retail doesn't buy 8x normal volume during panic — this is institutional positioning ahead of a catalyst (likely Xiamen trial production milestone)."
+          },
+          {
+            "date": "2026-06-11",
+            "detail": "The MA-distance anti-chase rule (h021, h027) prevented catastrophic entries today: 江丰电子 (dist_ma5=+23.6%), 三祥新材 (dist_ma5=+8.6%), 格林达 (dist_ma20=+22%) all would have been tempting in hot sectors but would face immediate mean-reversion. The rule is doing real protective work."
           }
         ],
         "contradicting": [
@@ -1365,7 +1381,7 @@
           }
         ]
       },
-      "sampleSize": 71,
+      "sampleSize": 73,
       "hitRate": 0.986,
       "confidence": 0.973,
       "tags": [
@@ -1821,13 +1837,17 @@
           {
             "date": "2026-06-11",
             "detail": "Relative strength in weak tape is the best signal: 上海新阳 (+0.75%) and 路维光电 (+2.60%) both green while 75% of market red. This confirms their sector leadership and institutional support. Same pattern as [h028] — today's relative leaders are more likely to be tomorrow's absolute leaders when tape recovers."
+          },
+          {
+            "date": "2026-06-11",
+            "detail": "Panic tapes with sector bifurcation produce extreme alpha dispersion: 上海新阳 +5.80% and 路维光电 +8.29% today in a 0.34:1 breadth market proves that #1 sector leaders can defy gravity. The sector-first framework isolates the winners."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 22,
+      "sampleSize": 23,
       "hitRate": 1.0,
-      "confidence": 0.958,
+      "confidence": 0.96,
       "tags": [
         "sector",
         "timing"

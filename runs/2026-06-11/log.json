@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1781148908.6825018,
+      "start": 1781163309.281547,
       "errors": [],
-      "end": 1781148919.531179,
-      "duration_sec": 10.8
+      "end": 1781163321.668255,
+      "duration_sec": 12.4
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 18639,
+      "response_size_bytes": 21419,
       "tokens": {
-        "input_tokens": 121121,
-        "output_tokens": 8445
+        "input_tokens": 260048,
+        "output_tokens": 11820
       },
-      "rounds": 2,
-      "tool_calls_count": 5,
-      "duration_sec": 185.6,
+      "rounds": 4,
+      "tool_calls_count": 7,
+      "duration_sec": 260.2,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -25,103 +25,25 @@
     },
     {
       "phase": "apply",
-      "start": 1781149105.196077,
+      "start": 1781163581.938653,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=98",
-        "Hypothesis: Created h060 (observation): Sector gravity confirmed again: 上海新阳 (电子化学品 #1) +6.37%, 路维光电 (半导体 adjacent) +4.4...",
-        "Hypothesis: Updated h024 (hypothesis): +1 supporting evidence → hitRate=100%, n=3",
-        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=99%, n=71",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=23",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=99%, n=72",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=99%, n=73",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=12",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=99",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "post_apply_rule_violations": {
-        "status": "violations",
-        "total_rules": 6,
-        "total_violations": 2,
-        "rules": [
-          {
-            "rule": "check_breakout_failure",
-            "file": "scripts/rules/check_breakout_failure.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_iv_filter",
-            "file": "scripts/rules/check_iv_filter.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_overextended_entry",
-            "file": "scripts/rules/check_overextended_entry.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_stop_proximity",
-            "file": "scripts/rules/check_stop_proximity.py",
-            "status": "violations",
-            "exit_code": 1,
-            "violations": [
-              {
-                "code": "002947",
-                "name": "恒铭达",
-                "rule": "stop_proximity",
-                "severity": "WATCH",
-                "currentPrice": 82.57,
-                "stopLoss": 79.37,
-                "distance_pct": 3.88,
-                "suggestion": "🟠 WATCH — 3.9% above stop. Monitor closely. No immediate action but be ready."
-              }
-            ],
-            "error": null
-          },
-          {
-            "rule": "check_time_decay",
-            "file": "scripts/rules/check_time_decay.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_volume_below_mavol30",
-            "file": "scripts/rules/check_volume_below_mavol30.py",
-            "status": "violations",
-            "exit_code": 1,
-            "violations": [
-              {
-                "code": "002947",
-                "name": "恒铭达",
-                "rule": "volume_below_mavol30",
-                "volume": 33312,
-                "mavol30": 54606.93,
-                "ratio_pct": 61.0,
-                "suggestion": "Latest volume 33,312 is below MAVOL30 54,607 (61.0% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-              }
-            ],
-            "error": null
-          }
-        ]
-      },
-      "end": 1781149105.707638,
-      "duration_sec": 0.5
+      "end": 1781163582.364245,
+      "duration_sec": 0.4
     }
   ],
-  "validation_errors": [
-    "RULE check_stop_proximity: 002947 — 🟠 WATCH — 3.9% above stop. Monitor closely. No immediate action but be ready.",
-    "RULE check_volume_below_mavol30: 002947 — Latest volume 33,312 is below MAVOL30 54,607 (61.0% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-  ],
+  "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 196.9
+    "totalDurationSec": 272.99999999999994
   }
 }

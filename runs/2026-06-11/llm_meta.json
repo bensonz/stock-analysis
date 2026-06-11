@@ -2,60 +2,80 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 121121,
-  "output_tokens": 8445,
-  "rounds": 2,
-  "duration_sec": 185.6,
+  "input_tokens": 260048,
+  "output_tokens": 11820,
+  "rounds": 4,
+  "duration_sec": 260.2,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 今日 热点板块 电子化学品 小金属 2026年6月11日",
+        "query": "A股 今日 热门板块 电子化学品 小金属 2026年6月",
         "max_results": 5
       },
-      "result_length": 3123
+      "result_length": 3160
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股市场 暴跌 全线下跌 2026年6月11日 原因",
+        "query": "半导体材料 光刻胶 电子化学品 涨价 2026年6月",
         "max_results": 5
       },
-      "result_length": 3235
+      "result_length": 2797
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "小金属 钼 锡 涨价 2026年6月 供需",
+        "query": "小金属 钼 锆 稀土 涨价 2026年6月",
         "max_results": 5
       },
-      "result_length": 2549
+      "result_length": 2875
     },
     {
       "pass": "P1",
-      "round": 1,
+      "round": 2,
       "tool": "web_search",
       "input": {
-        "query": "电子化学品 光刻胶 半导体材料 板块 2026年6月 景气度",
-        "max_results": 5
+        "max_results": 5,
+        "query": "A股 今日 市场 恐慌 下跌 原因 2026年6月11日"
       },
-      "result_length": 2747
+      "result_length": 2927
     },
     {
       "pass": "P1",
-      "round": 1,
+      "round": 2,
       "tool": "web_search",
       "input": {
-        "query": "恒铭达 002947 最新消息 2026年6月 消费电子",
-        "max_results": 5
+        "max_results": 5,
+        "query": "上海新阳 300236 光刻胶 电子化学品 2026年6月"
       },
-      "result_length": 1891
+      "result_length": 2799
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "路维光电 688401 掩膜版 2026年6月"
+      },
+      "result_length": 2781
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "恒铭达 002947 消费电子 2026年6月"
+      },
+      "result_length": 2477
     }
   ],
   "fallback_used": false

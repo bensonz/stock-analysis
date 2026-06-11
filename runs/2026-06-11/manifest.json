@@ -2,7 +2,7 @@
   "date": "2026-06-11",
   "status": "degraded",
   "exit_code": 0,
-  "total_duration_sec": 214.1,
+  "total_duration_sec": 196.9,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -10,15 +10,15 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 169.0
+          "latency_ms": 231.6
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 418.3
+          "latency_ms": 435.1
         },
         "pricedb": {
           "status": "ok",
-          "latest_date": "2026-06-10",
+          "latest_date": "2026-06-11",
           "stale": false
         }
       }
@@ -31,24 +31,23 @@
     },
     "collect": {
       "status": "ok",
-      "duration_sec": 17.9,
+      "duration_sec": 10.8,
       "errors": []
     },
     "llm_analysis": {
       "status": "ok",
-      "duration_sec": 195.8
+      "duration_sec": 185.6
     },
     "apply": {
       "status": "ok",
-      "duration_sec": 0.4
+      "duration_sec": 0.5
     },
     "validate": {
       "status": "warnings",
       "duration_sec": 0.0,
       "errors": [
-        "RULE check_volume_below_mavol30: 002947 — Latest volume 5,650 is below MAVOL30 54,607 (10.3% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
-        "RULE check_volume_below_mavol30: 300236 — Latest volume 16,695 is below MAVOL30 52,287 (31.9% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
-        "RULE check_volume_below_mavol30: 688401 — Latest volume 9,327 is below MAVOL30 13,384 (69.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+        "RULE check_stop_proximity: 002947 — 🟠 WATCH — 3.9% above stop. Monitor closely. No immediate action but be ready.",
+        "RULE check_volume_below_mavol30: 002947 — Latest volume 33,312 is below MAVOL30 54,607 (61.0% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
       ]
     }
   },
@@ -69,9 +68,8 @@
       "passed": true,
       "hard_fails": [],
       "soft_warns": [
-        "rule check_volume_below_mavol30: Latest volume 5,650 is below MAVOL30 54,607 (10.3% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
-        "rule check_volume_below_mavol30: Latest volume 16,695 is below MAVOL30 52,287 (31.9% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
-        "rule check_volume_below_mavol30: Latest volume 9,327 is below MAVOL30 13,384 (69.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+        "rule check_stop_proximity: 🟠 WATCH — 3.9% above stop. Monitor closely. No immediate action but be ready.",
+        "rule check_volume_below_mavol30: Latest volume 33,312 is below MAVOL30 54,607 (61.0% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
       ]
     }
   }

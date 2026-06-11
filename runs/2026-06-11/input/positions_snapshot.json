@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-06-11T11:35:08.691661+08:00",
+  "snapshot_time": "2026-06-11T15:35:09.291974+08:00",
   "snapshot_type": "pre_run",
   "date": "2026-06-11",
   "portfolio_config": {
@@ -11,23 +11,23 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-06-11T09:38:53.039193+08:00",
+    "lastUpdated": "2026-06-11T11:38:25.209170+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 966911.0,
+      "totalEquity": 967805.0,
       "cash": 887898.0,
-      "investedValue": 79013.0,
-      "unrealizedPnl": 1848.0,
+      "investedValue": 79907.0,
+      "unrealizedPnl": 2742.0,
       "realizedPnl": -34937.0,
-      "totalPnl": -33089.0,
-      "totalReturnPct": -3.31,
+      "totalPnl": -32195.0,
+      "totalReturnPct": -3.22,
       "positionsUsed": 3,
       "positionsMax": 10,
-      "cashPct": 91.83,
-      "dayPnl": -27.0,
+      "cashPct": 91.74,
+      "dayPnl": 867.0,
       "minCashPct": 20,
-      "minCashValue": 193382.2,
-      "deployableCash": 694515.8
+      "minCashValue": 193561.0,
+      "deployableCash": 694337.0
     },
     "activePositions": [
       {
@@ -35,8 +35,8 @@
         "name": "恒铭达",
         "entryDate": "2026-06-09",
         "entryPrice": 83.55,
-        "currentPrice": 84.09,
-        "pnl_pct": 0.65,
+        "currentPrice": 82.57,
+        "pnl_pct": -1.17,
         "stopLoss": 79.37,
         "currentStop": 79.37,
         "targetPrice": 105.0,
@@ -45,20 +45,20 @@
         "shares": 300,
         "allocation_pct": 3.75,
         "allocatedCapital": 25065.0,
-        "currentValue": 25227.0,
-        "unrealizedPnl": 162.0,
-        "volume": 5650,
+        "currentValue": 24771.0,
+        "unrealizedPnl": -294.0,
+        "volume": 33312,
         "mavol30": 54606.93,
         "volumeBelowMavol30": true,
-        "weight_pct": 2.61
+        "weight_pct": 2.56
       },
       {
         "code": "300236",
         "name": "上海新阳",
         "entryDate": "2026-06-09",
         "entryPrice": 93.96,
-        "currentPrice": 97.15,
-        "pnl_pct": 3.4,
+        "currentPrice": 99.94,
+        "pnl_pct": 6.36,
         "stopLoss": 89.26,
         "currentStop": 89.26,
         "targetPrice": 120.0,
@@ -67,20 +67,20 @@
         "shares": 400,
         "allocation_pct": 5.25,
         "allocatedCapital": 37584.0,
-        "currentValue": 38860.0,
-        "unrealizedPnl": 1276.0,
-        "volume": 16695,
+        "currentValue": 39976.0,
+        "unrealizedPnl": 2392.0,
+        "volume": 136384,
         "mavol30": 52286.57,
-        "volumeBelowMavol30": true,
-        "weight_pct": 4.02
+        "volumeBelowMavol30": false,
+        "weight_pct": 4.13
       },
       {
         "code": "688401",
         "name": "路维光电",
         "entryDate": "2026-06-09",
         "entryPrice": 72.58,
-        "currentPrice": 74.63,
-        "pnl_pct": 2.82,
+        "currentPrice": 75.8,
+        "pnl_pct": 4.44,
         "stopLoss": 68.95,
         "currentStop": 68.95,
         "targetPrice": 92.0,
@@ -89,12 +89,12 @@
         "shares": 200,
         "allocation_pct": 3.75,
         "allocatedCapital": 14516.0,
-        "currentValue": 14926.0,
-        "unrealizedPnl": 410.0,
-        "volume": 9327,
+        "currentValue": 15160.0,
+        "unrealizedPnl": 644.0,
+        "volume": 73391,
         "mavol30": 13384.3,
-        "volumeBelowMavol30": true,
-        "weight_pct": 1.54
+        "volumeBelowMavol30": false,
+        "weight_pct": 1.57
       }
     ]
   },
@@ -134,10 +134,10 @@
         },
         {
           "date": "2026-06-11",
-          "price": 84.09,
-          "change_pct": 0.65,
+          "price": 82.57,
+          "change_pct": -1.17,
           "action": "HOLD",
-          "note": "+0.65% from entry, above stop (¥79.37) and MA20 (¥81.18). 0 risk factors, fundamentals solid (Q1 net +39.91%). Volume extremely thin (10.3% of MAVOL30) but sellers absent. 消费电子 sector not in bottom 5 yet. Monitor: if sector enters bottom 5 for 3 days, trigger Rule 1 sell."
+          "note": "PnL -1.17%, not at -5% stop (¥79.37). Day 3 only. But deteriorating: -4.43% today, volume 61% of MAVOL30, below MA5/MA10. Sector (消费电子) neutral — not hot. Stop proximity WATCH at 3.88%. If another 2% drop, consider proactive exit. If -5% stop hits, automatic SELL."
         }
       ],
       "exitDate": null,
@@ -147,7 +147,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-06-09T15:39:26.787737+08:00",
-      "updatedAt": "2026-06-11T09:38:53.033485+08:00",
+      "updatedAt": "2026-06-11T11:38:25.196412+08:00",
       "trackerVersion": "2.1"
     },
     "300236": {
@@ -185,10 +185,10 @@
         },
         {
           "date": "2026-06-11",
-          "price": 97.15,
-          "change_pct": 3.4,
+          "price": 99.94,
+          "change_pct": 6.36,
           "action": "HOLD",
-          "note": "+3.40% from entry, best performer. +0.75% today in panic tape = genuine relative strength. 电子化学品Ⅱ sector was #2 performer last week (+4.98%). 0 risk factors. MA distances healthy (dist_ma5 +5.2%, below 6% threshold). If reaches +10% (¥103.36), raise stop to breakeven per [h023]."
+          "note": "PnL +6.37%, best performer. +3.64% today in panic tape = genuine alpha. Sector #1 (电子化学品Ⅱ +3.91%). 0 risk factors. MA distances healthy (dist_ma5=+5.2%, below 6% chase threshold). Volume above MAVOL30. If reaches +10% (¥103.36), raise stop to breakeven per rule [h023]."
         }
       ],
       "exitDate": null,
@@ -198,7 +198,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-06-09T15:39:26.780692+08:00",
-      "updatedAt": "2026-06-11T09:38:53.034757+08:00",
+      "updatedAt": "2026-06-11T11:38:25.204094+08:00",
       "trackerVersion": "2.1"
     },
     "688401": {
@@ -236,10 +236,10 @@
         },
         {
           "date": "2026-06-11",
-          "price": 74.63,
-          "change_pct": 2.82,
+          "price": 75.8,
+          "change_pct": 4.44,
           "action": "HOLD",
-          "note": "+2.82% from entry, +2.60% today — exceptional relative strength. Best volume among positions (69.7% of MAVOL30). MA distances healthy. 掩膜版 thesis intact: 40nm breakthrough, Xiamen project progressing. 0 risk factors. Consolidating near MA5/MA10 support."
+          "note": "PnL +4.44%. +4.21% today with strongest volume (5.5x MAVOL30). Consolidating near MA5/MA10 support. 掩膜版 thesis intact: 40nm breakthrough, Xiamen 20亿 project. 0 risk factors. Sector (半导体材料) adjacent to hot sectors."
         }
       ],
       "exitDate": null,
@@ -249,7 +249,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-06-09T15:39:26.785471+08:00",
-      "updatedAt": "2026-06-11T09:38:53.035877+08:00",
+      "updatedAt": "2026-06-11T11:38:25.205422+08:00",
       "trackerVersion": "2.1"
     }
   },

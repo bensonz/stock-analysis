@@ -2,60 +2,60 @@
   "date": "2026-06-11",
   "actions": [
     {
-      "code": "002947",
-      "name": "恒铭达",
-      "action": "HOLD",
-      "price": 82.57,
-      "pnl_pct": -1.17,
-      "note": "PnL -1.17%, not at -5% stop (¥79.37). Day 3 only. But deteriorating: -4.43% today, volume 61% of MAVOL30, below MA5/MA10. Sector (消费电子) neutral — not hot. Stop proximity WATCH at 3.88%. If another 2% drop, consider proactive exit. If -5% stop hits, automatic SELL."
-    },
-    {
       "code": "300236",
       "name": "上海新阳",
       "action": "HOLD",
-      "price": 99.94,
-      "pnl_pct": 6.37,
-      "note": "PnL +6.37%, best performer. +3.64% today in panic tape = genuine alpha. Sector #1 (电子化学品Ⅱ +3.91%). 0 risk factors. MA distances healthy (dist_ma5=+5.2%, below 6% chase threshold). Volume above MAVOL30. If reaches +10% (¥103.36), raise stop to breakeven per rule [h023]."
+      "price": 102.02,
+      "pnl_pct": 8.58,
+      "note": "Best performer +8.58% in 2 days. Sector #1 (电子化学品Ⅱ +5.12%). 0 risk factors. +5.80% today in panic tape = genuine alpha. MA distances healthy (dist_ma5 +5.2% from enriched, below 6% chase limit). Volume 3.97x MAVOL30 confirming institutional interest. Photoresist+etching+cleaning platform thesis intact. Approaching +10% threshold — if reached (¥103.36), raise stop to breakeven per Rule 5."
     },
     {
       "code": "688401",
       "name": "路维光电",
       "action": "HOLD",
-      "price": 75.8,
-      "pnl_pct": 4.44,
-      "note": "PnL +4.44%. +4.21% today with strongest volume (5.5x MAVOL30). Consolidating near MA5/MA10 support. 掩膜版 thesis intact: 40nm breakthrough, Xiamen 20亿 project. 0 risk factors. Sector (半导体材料) adjacent to hot sectors."
+      "price": 78.77,
+      "pnl_pct": 8.53,
+      "note": "Strong runner +8.53% in 2 days. +8.29% today with 8.65x MAVOL30 volume — massive institutional accumulation. 掩膜版 thesis strengthening: 40nm→28nm→14nm roadmap, Xiamen ¥20B project equipment move-in completed, mid-2026 trial production. 0 risk factors. Sector (半导体) adjacent to hot sectors. Approaching +10% threshold (¥79.84) — same contingent stop-raise as 上海新阳."
+    },
+    {
+      "code": "002947",
+      "name": "恒铭达",
+      "action": "HOLD",
+      "price": 84.1,
+      "pnl_pct": 0.66,
+      "note": "PnL barely positive +0.66%. Today -2.66% underperforming both market and our other positions. Sector (消费电子) is neutral — not hot, not cold, but drifting. Stock below MA5 (dist_ma5 -2.2%) and MA10 (dist_ma10 -6.1%) showing technical weakness. Fundamentals OK (0 risk, Q1 +40% net profit). Not at -5% stop (¥79.37) or -3% first-3-days trigger (¥81.04). Days held: 2, not at time stop. HOLD but with elevated scrutiny — if sector drifts to bottom 30% or stock hits -3%, consider proactive exit."
     }
   ],
   "portfolioStats": {
     "totalPositions": 3,
-    "totalEquity": 967805.0,
-    "dayPnl": 867.0,
-    "dayReturnPct": 0.09,
-    "totalReturnPct": -3.22,
-    "unrealizedPnl": 2742.0,
+    "totalEquity": 969690.0,
+    "dayPnl": 2752.0,
+    "dayReturnPct": 0.28,
+    "totalReturnPct": -3.03,
+    "unrealizedPnl": 4627.0,
     "realizedPnl": -34937.0,
-    "cashPct": 91.74
+    "cashPct": 91.57
   },
   "entryRegime": {
     "allow_new_positions": false,
     "regime": "panic",
-    "breadth_ratio": 0.2136,
-    "up": 962,
-    "down": 4504,
+    "breadth_ratio": 0.3367,
+    "up": 1370,
+    "down": 4069,
     "positive_indices": [],
     "negative_indices": [
       "上证指数",
       "深证成指",
       "创业板指"
     ],
-    "limit_ups": 56,
-    "limit_downs": 49,
+    "limit_ups": 79,
+    "limit_downs": 55,
     "sizing_multiplier": 0.0,
     "hard_block": true,
-    "reason": "Entry regime panic: breadth 0.21:1, 0/3 major indices green, 56 limit-ups / 49 limit-downs. Block new longs."
+    "reason": "Entry regime panic: breadth 0.34:1, 0/3 major indices green, 79 limit-ups / 55 limit-downs. Block new longs."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "Panic selloff: breadth 0.21:1 (962 up / 4504 down), 56涨停/49跌停. All 3 major indices red (上证 -0.73%, 深证 -1.32%, 创业板 -1.79%). Trigger: overnight US-Iran military conflict escalation, oil spike, US tech selloff (Nasdaq -1.57%, chip index -3.6%). 电子化学品Ⅱ (+3.91%) and 小金属 (+3.89%) buck the trend as persistent leadership sectors. Portfolio +¥867 today despite panic — 2/3 positions in hot sectors holding up. IV data unavailable. World Cup starts tomorrow — expect continued liquidity drain. Cash: 91.74%. Deployable: ¥694K. No new positions until buy gate clears."
+    "summary": "Breadth 0.34:1 PANIC — 1370 up / 4069 down. 0/3 major indices green (上证 -0.16%, 深证 -0.68%, 创业板 -1.13%). Only 科创50 +0.62%. 79涨停 / 55跌停 (f10=55 triggers panic gate). Market bifurcating sharply: 电子化学品Ⅱ +5.12% and 小金属 +4.85% defy gravity on structural catalysts (semiconductor materials localization, commodity supply constraints), while software/media sectors crash (数字媒体 -6.18%, 影视院线 -5.71%). Global drivers: Fed rate-hike fears post-strong NFP, US-Iran tensions, AI capex anxiety (SMCI -28%, ORCL -7% AH). Portfolio: 3 positions, 91.57% cash, +0.28% today. IV data unavailable. New positions HARD BLOCKED per entry gate. Focus: let 上海新阳 and 路维光电 run toward +10% stop-raise triggers; monitor 恒铭达 for sector drift."
   }
 }
