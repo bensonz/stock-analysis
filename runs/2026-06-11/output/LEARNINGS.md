@@ -1398,3 +1398,10 @@
 - Stop proximity rule validated again: 兴森科技 at 1.71% from stop in 0.28:1 breadth tape = proactive sell is correct. The 扬杰科技 W10 precedent (1.8% → gapped to -8.37%) shows gap risk is real when breadth is this bad.
 - Relative strength in weak tape is the best signal: 上海新阳 (+0.75%) and 路维光电 (+2.60%) both green while 75% of market red. This confirms their sector leadership and institutional support. Same pattern as [h028] — today's relative leaders are more likely to be tomorrow's absolute leaders when tape recovers.
 - Sector-first framework catches rotation immediately: 0/4 positions in today's hot sectors. If resource/cyclical rotation persists 3+ days, Rule 1 triggers across all positions regardless of individual stock PnL. The framework is working as designed.
+
+### 自动更新 (2026-06-11)
+
+- Geopolitical shock days (US-Iran strikes + oil spike) validate the hard buy gate: breadth 0.21:1, 0/3 indices green, f10=49 — staying in cash prevents opening positions that would be underwater within hours. The objective gate removes emotional 'buy the dip' impulses.
+- Sector gravity confirmed again: 上海新阳 (电子化学品 #1) +6.37%, 路维光电 (半导体 adjacent) +4.44% both green today, while 恒铭达 (消费电子 neutral) -1.17% and -4.43% today. Hot sector stocks hold up in selloffs; neutral-sector stocks don't.
+- Volume below MAVOL30 (恒铭达 at 61%) combined with negative price action (-4.43%) is a reliable early warning before stop-loss triggers. The volume rule correctly flagged weakening momentum before the stop was threatened.
+- 金钼股份 and 新宙邦 are the top candidates to buy when the market regime clears. Both have: (a) sector in top 5, (b) fresh catalysts (钼价 +35.65% YTD; 宁德时代电解液大单), (c) healthy MA distances, (d) institutional backing. Pre-identifying these reduces decision latency when the buy gate reopens.

@@ -2,174 +2,191 @@
 
 ## 1. Market Regime
 
-**Regime: PANIC — HARD BLOCK on new positions.**
+**Verdict: PANIC — Hard Block on New Positions**
 
-The tape is brutal. Breadth is 0.28:1 (1,178 up / 4,153 down). Only 创业板 (+0.21%) is green; 上证 (-0.18%) and 深证 (-0.19%) are red. The system's `entry_regime` confirms: `hard_block: true`, `allow_new_positions: false`, `sizing_multiplier: 0.0`.
+Today's tape is driven by a geopolitical shock: **US-Iran military conflict escalated overnight**, with US strikes on Iranian targets and Iran closing the Strait of Hormuz. Oil surged, US equities fell sharply (Nasdaq -1.57%, chip index -3.6%), and the A-share market opened deep in the red and stayed there.
 
-**Root cause**: US tech crash spillover. On June 5, the Philadelphia Semiconductor Index (SOX) crashed **-10.3%** — worst single-day wipeout since COVID March 2020 — triggered by Broadcom's disappointing AI chip guidance + May nonfarm payrolls coming in at 172K (vs 88K expected), dashing rate-cut hopes. $1.3 trillion in chip market cap evaporated overnight. This is a 3-sigma event that A-shares are still processing 4 trading days later.
+- **上证指数** -0.73% | **深证成指** -1.32% | **创业板指** -1.79% | **科创50** -1.05%
+- **All 3 major indices red** → buy gate FAIL
+- **Breadth**: 962 up / 4504 down / 47 flat = **0.21:1** → buy gate FAIL (need ≥1.5:1)
+- **跌停 (f10)**: 49 → panic condition (≥30) → buy gate FAIL
+- **涨停 (r10)**: 56 — not zero but overwhelmed by selling
+- **Distribution**: Heavily skewed negative — f4_7=835, f2_4=2089, f0_2=1390. The selling is broad and deep.
+- **IV**: No stock-specific IV data available (all fallback to "无数据"). Overall IV sentiment unavailable.
+- **Macro driver**: Geopolitical risk (US-Iran), oil price spike, global risk-off, World Cup opening tomorrow adding liquidity drain.
 
-**Breadth read**: 10 limit-downs (跌停), 19 limit-ups (涨停). The distribution is heavily skewed to `f0_2` (3,132 stocks down 0-2%), indicating a slow bleed rather than a panic crash. This is grinding distribution, not capitulation. The r10 (19) is tiny — no leadership, no animal spirits.
+**Breadth read**: "Breadth 0.21:1 panic, 56涨停/49跌停, broad-based selloff on US-Iran conflict + oil spike."
 
-**IV**: No data — all IV proxies show `fallback:overall_market` with no IV rank available. Cannot use IV as a sizing throttle.
+**Entry regime from system**: `hard_block: true` — unequivocal. New positions = [].
 
-**Buy gate (Rule 1)**: ❌ FAIL on all three counts. No new positions today — period.
+This is exactly the scenario where V2's discipline saves money: the buy gate is objective, non-negotiable, and correctly signaling to stay in cash.
 
 ---
 
 ## 2. Sector Analysis
 
-### Hot Sectors (Top 5)
-| Sector | 5d Change | Trend |
-|--------|-----------|-------|
-| 焦炭Ⅱ | +2.38% | Defensive rotation |
-| 油服工程 | +2.18% | Geopolitical bid |
-| 油气开采Ⅱ | +1.90% | Oil price driver |
-| 农业综合Ⅱ | +1.73% | Defensive |
-| 农化制品 | +1.55% | Defensive/cyclical |
+### Hot Sectors (Top 5 Today)
+| # | Sector | 5d Performance |
+|---|--------|---------------|
+| 1 | 电子化学品Ⅱ | +3.91% |
+| 2 | 小金属 | +3.89% |
+| 3 | 玻璃玻纤 | +2.50% |
+| 4 | 能源金属 | +1.66% |
+| 5 | 白色家电 | +1.48% |
 
-### Cold Sectors (Bottom 5)
-| Sector | 5d Change | Trend |
-|--------|-----------|-------|
-| 数字媒体 | -3.51% | Tech rout |
-| 航天装备Ⅱ | -3.16% | Defense rotation out |
-| 广告营销 | -2.41% | Consumer weakness |
-| 电机Ⅱ | -2.27% | Industrial pullback |
-| 家电零部件Ⅱ | -2.22% | Consumer pullback |
+**Persistence check**: 电子化学品Ⅱ and 小金属 have been in the top rankings for multiple sessions now. This is not a one-day spike — these are genuine leadership sectors. The drivers: (a) AI/semiconductor demand for electronic chemicals, (b) supply-constrained小金属 (钼铁 +35.65% YTD, 钽锭 +157.69% YTD) benefiting from AI-MLCC and defense applications.
 
-### Rotation Signal
-This is a **classic "risk-off" rotation**: money fleeing AI/semiconductor/consumer-tech into commodity cyclicals (coal, oil, agriculture). The SOX crash has triggered a sector regime change. The five top sectors are ALL resource/cyclical — no tech, no semiconductor, no optics. This is not a one-day spike; it's a multi-day rotation driven by the US macro shock.
+### Cold Sectors (Bottom 5 Today)
+| # | Sector | 5d Performance |
+|---|--------|---------------|
+| 1 | 数字媒体 | -6.48% |
+| 2 | 影视院线 | -5.82% |
+| 3 | IT服务Ⅱ | -4.46% |
+| 4 | 专业连锁Ⅱ | -4.30% |
+| 5 | 广告营销 | -4.02% |
+
+**Rotation signal**: Tech services and media are being de-risked aggressively — consistent with global risk-off. The divergence between hardware (电子化学品, 小金属) and software/services (IT服务, 数字媒体) is stark. Hardware/semiconductor materials are where the money is hiding.
 
 ### Position Sector Alignment
-**0/4 positions in hot sectors.** All four positions (兴森科技, 恒铭达, 上海新阳, 路维光电) are in electronics/tech/semiconductor-adjacent sectors. This is the single biggest risk to the portfolio right now. If this rotation persists beyond 3 days, Rule 1 (sector gravity) would trigger across the board.
+- **上海新阳 (300236)** → 电子化学品Ⅱ → **#1 HOT SECTOR** ✅
+- **路维光电 (688401)** → 半导体 (半导体材料) → adjacent to hot sectors ✅
+- **恒铭达 (002947)** → 消费电子 → **NOT in top/bottom 5**, mid-pack ⚠️
+
+**Alignment**: 2/3 positions in or adjacent to hot sectors. One (恒铭达) in neutral territory.
 
 ---
 
 ## 3. Position Review
 
-### ① 兴森科技 (002436) — **🔴 SELL**
-| Metric | Value |
-|--------|-------|
-| Entry | ¥37.49 (06-09) |
-| Current | ¥36.24 |
-| PnL | **-3.33%** |
-| Today | -2.79% |
-| Stop | ¥35.62 |
-| Distance to stop | **1.71%** ⚠️ |
-| Days held | 3 |
-| Sector | 元件 (not hot) |
-| Volume vs MAVOL30 | 46.9% |
+### ① 恒铭达 (002947) — 消费电子 — HOLD ⚠️
 
-**Analysis**: This is an emergency. The stop proximity rule has triggered with CRITICAL severity. Only 1.71% separates the current price from the stop. In a tape where 4,153 stocks are declining and the US semiconductor sector just had a 10.3% crash, gap risk is real. The stock is below MA5 (-6.3%) and MA10 (-5.3%), and has declined for two consecutive days. The 06-10 intraday high of ¥39.96 showed buying interest that has now vanished. Sector (元件) is not in the top 30%.
-
-**The W10 扬杰科技 lesson applies**: 扬杰科技 was 1.8% from stop, the system flagged it, and the next day it gapped to -8.37%. Proactive exit saved capital. I am applying that lesson here.
-
-**Decision: SELL at ¥36.24.** Take the -3.33% loss now rather than risk a gap-through-stop that could be -6% or worse. A -3.33% realized loss is manageable. A -8% stop violation on 4.88% allocation is not.
-
----
-
-### ② 恒铭达 (002947) — **🟡 HOLD**
 | Metric | Value |
 |--------|-------|
 | Entry | ¥83.55 (06-09) |
-| Current | ¥84.09 |
-| PnL | **+0.65%** |
-| Today | -2.67% |
-| Stop | ¥79.37 |
-| Distance to stop | 5.61% |
-| Days held | 3 |
-| Sector | 消费电子 |
+| Current | ¥82.57 (position_prices) |
+| PnL | **-1.17%** |
+| Stop | ¥79.37 (-5% from entry) |
+| Distance to Stop | 3.88% (⚠️ WATCH zone) |
+| Days Held | 3 |
+| Sector Rank | Mid-pack (消费电子 not in top/bottom 5) |
+| dist_ma5 | -2.2% (below MA5) |
+| dist_ma10 | -6.1% (below MA10) |
+| dist_ma20 | +3.6% (above MA20) |
+| Volume | 33,312 (61% of MAVOL30 — BELOW average) |
+| Today's Change | -4.43% |
 
-**Analysis**: Modest positive return, above entry. Today's -2.67% is concerning but the stock is still above MA20 (¥81.18) and the stop (¥79.37). Volume is extremely thin at 10.3% of MAVOL30 — this is holiday-thin, suggesting sellers aren't aggressive, but buyers are absent too. The 消费电子 sector is not in today's top or bottom 5. Fundamentals remain solid: 0 risk factors, Q1 net profit +39.91%, AI+新能源 expansion thesis intact.
+**Assessment**: This is the weakest position. Down -4.43% today in a panic tape, now below both MA5 and MA10, with thin volume suggesting no buyers stepping in. The stock is -1.17% from entry but has 3.88% buffer to the hard -5% stop at ¥79.37. 
 
-**Risk**: If the tech selloff intensifies and 消费电子 drops into the bottom 5 for 3+ consecutive days, this position should be sold per Rule 1. But we're not there yet.
+The sector (消费电子) is neither hot nor cold — it's drifting. The original thesis (0 risk factors, 3-year CAGR 23%,股权激励) is still valid fundamentally, but the price action is deteriorating. 
 
-**Decision: HOLD.** Watch for sector deterioration. If 消费电子 enters bottom 5 tomorrow, flag for potential exit.
+**Decision: HOLD** — Not at stop yet, only day 3. But this is on a hair trigger. If it drops another 2% (to ~¥81), the distance to stop shrinks to under 2% and a proactive exit becomes warranted. Rule violation flags: stop_proximity WATCH + volume_below_mavol30.
+
+**No new_stop change.** Keep at ¥79.37. If -5% hits, automatic SELL — no exceptions.
 
 ---
 
-### ③ 上海新阳 (300236) — **🟢 HOLD (best performer)**
+### ② 上海新阳 (300236) — 电子化学品Ⅱ — HOLD ✅ (Best Performer)
+
 | Metric | Value |
 |--------|-------|
 | Entry | ¥93.96 (06-09) |
-| Current | ¥97.15 |
-| PnL | **+3.40%** |
-| Today | **+0.75%** ✅ |
-| Stop | ¥89.26 |
-| Distance to stop | 8.12% |
-| Days held | 3 |
-| Sector | 电子化学品Ⅱ |
+| Current | ¥99.94 (position_prices) |
+| PnL | **+6.37%** |
+| Stop | ¥89.26 (-5% from entry) |
+| Days Held | 3 |
+| Sector Rank | **#1 HOT SECTOR** |
+| dist_ma5 | +5.2% (approaching but below 6% threshold) |
+| dist_ma10 | -1.1% (near MA10 support) |
+| dist_ma20 | +4.8% |
+| Volume | 136,384 (above MAVOL30 — healthy) |
+| Today's Change | **+3.64%** |
 
-**Analysis**: The portfolio's strongest position. +0.75% today in a tape where 75% of stocks are declining — this is genuine relative strength. The 电子化学品Ⅱ sector has been one of the hottest in recent weeks (the sector index rose 4.98% last week, outperforming the Shanghai Composite by 5.98%). dist_ma5 at +5.2% is approaching the 6% threshold but below it. 0 risk factors. Core thesis (semiconductor materials demand) is intact even as the market rotates.
+**Assessment**: Exceptional relative strength. +3.64% in a tape where 82% of stocks are falling is genuine alpha. The sector (电子化学品Ⅱ) is #1 today and has been a persistent leader. 0 risk factors. MA distances are healthy — dist_ma5 at +5.2% is approaching the 6% chase threshold but not there yet. 
 
-**Decision: HOLD.** If PnL reaches +10% (¥103.36), raise stop to breakeven. The active learning [h023] validates this approach.
+The stock is within striking distance of the +10% threshold (¥103.36). If it reaches that level, I would raise the stop to breakeven (¥93.96) per rule [h023].
+
+**Decision: HOLD**. No action needed. Monitor for +10% trigger to raise stop.
 
 ---
 
-### ④ 路维光电 (688401) — **🟢 HOLD (strong today)**
+### ③ 路维光电 (688401) — 半导体材料 — HOLD ✅
+
 | Metric | Value |
 |--------|-------|
 | Entry | ¥72.58 (06-09) |
-| Current | ¥74.63 |
-| PnL | **+2.82%** |
-| Today | **+2.60%** ✅ |
-| Stop | ¥68.95 |
-| Distance to stop | 7.61% |
-| Days held | 3 |
-| Sector | 半导体材料 |
+| Current | ¥75.80 (position_prices) |
+| PnL | **+4.44%** |
+| Stop | ¥68.95 (-5% from entry) |
+| Days Held | 3 |
+| Sector Rank | Adjacent to hot (半导体) |
+| dist_ma5 | +1.8% (consolidating near MA5) |
+| dist_ma10 | -1.8% (near MA10) |
+| dist_ma20 | +8.2% |
+| Volume | 73,391 (5.5x MAVOL30 — strong) |
+| Today's Change | **+4.21%** |
 
-**Analysis**: Excellent performance today — +2.60% in a brutal tape. Best volume among positions (69.7% of MAVOL30). MA distances are healthy: dist_ma5 +1.8%, dist_ma10 -1.8%, dist_ma20 +8.2%. The stock is consolidating near MA5/MA10 support. 掩膜版 thesis remains intact: 40nm breakthrough, Xiamen 20-billion project equipment moving in. 0 risk factors.
+**Assessment**: Second-best performer. +4.21% today with strong volume — buyers are clearly active. The 掩膜版 (photomask) thesis is intact: 40nm breakthrough, Xiamen 20亿 project, 0 risk factors. MA distances are textbook: consolidating right at MA5/MA10 support, not extended. 
 
-**Decision: HOLD.** This is the position I'm least worried about. Strong relative strength suggests institutional support.
+Volume at 5.5x MAVOL30 is the strongest among the 3 positions — genuine institutional interest. Semiconductor materials remain a hot theme.
+
+**Decision: HOLD**. No action needed.
 
 ---
 
 ## 4. New Entry Candidates
 
-**None. Buy gate is firmly closed.**
+**Verdict: NONE — Market buy gate is HARD BLOCKED.**
 
-The entry regime says `hard_block: true` with reason: "Entry regime panic: breadth 0.28:1, 1/3 major indices green, 19 limit-ups / 10 limit-downs. Block new longs."
+- Breadth 0.21:1 (need ≥1.5:1) ❌
+- 0/3 major indices green (need ≥2) ❌
+- f10=49 (panic, need <30) ❌
+- Entry regime: `hard_block: true`
 
-Even if I wanted to force a position (I shouldn't), the candidates face multiple problems:
-- No enriched candidates are in today's top 5 sectors (焦炭, 油服, 油气, 农业, 农化)
-- All enriched candidates are tech/semiconductor/electronics — the sectors being sold
-- Most candidates have MA distance issues or RPS issues
-
-The right call is to preserve capital, manage existing positions, and wait for the tape to improve.
+Even the best setups cannot overcome a panic tape. Cash is a position. Several candidates I would have bought in normal conditions are listed in the skip list below.
 
 ---
 
 ## 5. Skip List
 
+These are stocks I evaluated and would consider in a better tape, but are rejected today:
+
 | Code | Name | Reason |
 |------|------|--------|
-| 300037 | 新宙邦 | Market panic block. Has VCP SETUP (ratio 0.48), but sector (电池化学品) not in top 30%. Would watch in normal tape. |
-| 688378 | 奥来德 | Market panic block. 光学光电子 sector recently hot but market is rotating out of tech. RPS120=94.36% in sweet spot. |
-| 688372 | 伟测科技 | Market panic block. Semiconductor testing, RPS120=93.73%, good MA distances. Would be a BUY in normal tape. |
-| 688536 | 思瑞浦 | Market panic block. Analog chip design, RPS120=92.12%, strong fundamentals. |
-| 603931 | 格林达 | Market panic block + dist_ma20=22% (overextended). |
-| 600301 | 华锡有色 | Market panic block + RPS20=59.88% (recent momentum dead). Not actionable. |
+| **688017** | 绿的谐波 | **MA-distance violation**: dist_ma10=8.2% exceeds 8% threshold. RPS120=94.79 in sweet spot, robot sector leader, but too extended. Also PE=494, but per V2 that's irrelevant. |
+| **603663** | 三祥新材 | **Massively overextended**: dist_ma5=8.6% (>6%), dist_ma10=19.4% (>8%), dist_ma20=36.5% (>12%). Triple MA-distance violation. Also PE=217 in 99.68th percentile. |
+| **300666** | 江丰电子 | **Extreme extension**: dist_ma5=23.6%, dist_ma10=30.1%, dist_ma20=44.2%. All three thresholds blown. Semiconductor materials sector is hot but this is pure chasing. |
+| **601958** | 金钼股份 | **Market regime blocks entry**. 小金属 sector #2 (+3.89%), MA distances healthy (dist_ma5=2.2%), 钼价 +35.65% YTD catalyst, PE=22 reasonable. Would be STRONG BUY if tape allowed. |
+| **300037** | 新宙邦 | **Market regime blocks entry**. VCP SETUP detected (contraction ratio 0.48, 8 contractions, vol declining), MA distances healthy (dist_ma5=-1.3%, dist_ma10=0.2%). 宁德时代电解液大单 catalyst. Best technical setup in the pool but can't buy today. |
+| **603931** | 格林达 | **Market regime blocks + dist_ma20=22%**. 电子化学品Ⅲ sector (#1 hot sector), but dist_ma20 far exceeds 12% threshold. RPS120=93.14 within range. |
+| **688378** | 奥来德 | **Market regime blocks**. MA distances OK (dist_ma5=2.6%, dist_ma10=2.7%, dist_ma20=9.0%). 光学光电子 sector (not in top 5 but adjacent). |
+| **688536** | 思瑞浦 | **Market regime blocks**. dist_ma5=-1.7%, dist_ma10=-5.3% — stock is below MA10, consolidating. 模拟芯片, 半导体 sector. 0 risk except 商誉. |
+| **002645** | 华宏科技 | **Market regime blocks**. RPS120=93.47, 环保设备 sector (not hot), MA healthy but 4 risk factors including 大股东质押100%. |
+| **002436** | 兴森科技 | **Market regime blocks**. dist_ma5=-6.3%, stock below MAs. 5 risk factors. PCB sector not in hot list. |
+
+**Key takeaway**: 金钼股份 and 新宙邦 are the two names I'd buy immediately if the market open tomorrow. Both have real catalysts, strong sector alignment, healthy MA distances, and institutional backing.
 
 ---
 
 ## 6. Learnings
 
-1. **[New hypothesis]** When US semiconductor has a 3-sigma crash (SOX -10.3%), A-share tech sectors follow with a 1-4 day lag. The rotation into resources/cyclicals is the market's defensive response. This pattern should be tracked for future regime detection.
+**New structured learnings:**
 
-2. **[Validation of h013]** Strong breadth alone is not enough — but the inverse is also true: weak breadth should absolutely block new entries. Today's 0.28:1 breadth with hard block is exactly what the system was designed for.
+1. **Geopolitical shock days validate the buy gate**: The hard block (3 indices red + breadth <1:1 + f10≥30) correctly prevented entries that would have been underwater within hours. V1 would have tried to buy "dips" — V2 correctly stays in cash.
 
-3. **[Validation of stop_proximity rule]** 兴森科技 at 1.71% from stop in a panic tape is exactly the scenario the W10 post-mortem identified. Proactive exit prevents the gap-through-stop disaster.
+2. **Sector persistence > one-day spikes**: 电子化学品Ⅱ and 小金属 have been in the top ranks across multiple sessions. This is genuine leadership, not noise. The positions in these sectors (上海新阳, 路维光电) are the survivors today. The one in a neutral sector (恒铭达, 消费电子) is the laggard. Sector gravity confirmed.
 
-4. **[Observation]** 上海新阳 and 路维光电 are showing genuine relative strength — both green today while the market bleeds. This is what "strong stocks in strong sectors" looks like even in a rotation. The 电子化学品 sector's momentum (4.98% last week) hasn't fully dissipated.
+3. **Volume below MAVOL30 is a real warning**: 恒铭达's volume at 61% of MAVOL30 flagged by the volume rule. Combined with -4.43% today, this suggests the stock is drifting lower without buyers. The volume rule (check_volume_below_mavol30) is doing useful work.
 
-5. **[Mechanism insight]** Today's sector rotation (tech→resources) validates the sector-first framework: none of our 4 positions are in today's hot sectors. If this persists 3+ days, Rule 1 triggers. The framework is working as designed — it caught the misalignment immediately.
+4. **Position concentration in hot sectors saves the portfolio**: 2/3 positions in semiconductor/电子化学品 are up +6.37% and +4.44% respectively. The overall portfolio day PnL is +¥867 despite the panic tape. This is exactly how sector-first investing is supposed to work — hot sector stocks hold up even in selloffs.
 
 ---
 
 ## 7. Uncertainty Flags
 
-- **Uncertain about sector persistence**: Is today's resource rally a one-day defensive pivot or the start of a sustained rotation? The US macro driver (rate expectations, SOX crash) is structural, not a one-day event, suggesting this rotation could have legs.
-- **Uncertain about 兴森科技 timing**: Selling at -3.33% vs waiting for -5% stop hit. The proactive approach is validated by the system, but there's always a chance it bounces. In a 0.28:1 breadth tape, the probability of bounce vs further decline leans heavily toward further decline.
-- **IV data missing**: No IV rank data for any stock. This is a blind spot. If IV is elevated, some of the panic may be priced in already — but I have no way to verify.
+- **恒铭达 trajectory**: I'm uncertain whether this is a temporary dip in a healthy pullback or the start of a trend break. Q1 earnings +39.91% is strong, but the price action in a panic tape is negative. The 3.88% stop buffer is thin. If it gaps down tomorrow, it could trigger the stop on open.
+- **Geopolitical duration**: US-Iran conflict could escalate further or de-escalate quickly. If oil stays elevated and the Strait of Hormuz remains closed, expect continued risk-off for days. If there's a ceasefire, expect a violent reversal rally — exactly when we'd want cash to deploy.
+- **World Cup effect**: Historically, major sporting events drain liquidity from markets. With World Cup opening tomorrow (June 12), expect thin volumes and potential drift for 1-2 weeks.
+- **IV data gap**: No stock-specific or market IV data available. Can't apply IV-based sizing. This is a known limitation — not actionable.
 
 ---
 
@@ -179,42 +196,31 @@ The right call is to preserve capital, manage existing positions, and wait for t
 {
   "sector_analysis": {
     "hot_sectors": [
-      {"name": "焦炭Ⅱ", "5d_pct": 2.38, "trend": "defensive rotation, resource bid"},
-      {"name": "油服工程", "5d_pct": 2.18, "trend": "geopolitical/oil price driver"},
-      {"name": "油气开采Ⅱ", "5d_pct": 1.90, "trend": "energy rally"},
-      {"name": "农业综合Ⅱ", "5d_pct": 1.73, "trend": "defensive"},
-      {"name": "农化制品", "5d_pct": 1.55, "trend": "defensive/cyclical"}
+      {"name": "电子化学品Ⅱ", "5d_pct": 3.91, "trend": "persistent"},
+      {"name": "小金属", "5d_pct": 3.89, "trend": "persistent"},
+      {"name": "玻璃玻纤", "5d_pct": 2.50, "trend": "steady"},
+      {"name": "能源金属", "5d_pct": 1.66, "trend": "steady"},
+      {"name": "白色家电", "5d_pct": 1.48, "trend": "steady"}
     ],
     "cold_sectors": [
-      {"name": "数字媒体", "5d_pct": -3.51, "trend": "tech rout"},
-      {"name": "航天装备Ⅱ", "5d_pct": -3.16, "trend": "defense rotation out"},
-      {"name": "广告营销", "5d_pct": -2.41, "trend": "consumer weakness"},
-      {"name": "电机Ⅱ", "5d_pct": -2.27, "trend": "industrial pullback"},
-      {"name": "家电零部件Ⅱ", "5d_pct": -2.22, "trend": "consumer pullback"}
+      {"name": "数字媒体", "5d_pct": -6.48, "trend": "deteriorating"},
+      {"name": "影视院线", "5d_pct": -5.82, "trend": "deteriorating"},
+      {"name": "IT服务Ⅱ", "5d_pct": -4.46, "trend": "deteriorating"},
+      {"name": "专业连锁Ⅱ", "5d_pct": -4.30, "trend": "deteriorating"},
+      {"name": "广告营销", "5d_pct": -4.02, "trend": "deteriorating"}
     ],
-    "position_alignment": "0/4 positions in hot sectors — all in tech/electronics, being rotated out of. CRITICAL: if rotation persists 3+ days, Rule 1 sector gravity triggers for all positions.",
-    "regime": "Risk-off rotation: US SOX -10.3% crash driving A-share tech selloff. Money flowing from AI/semiconductor to resources/cyclicals. Breadth 0.28:1 panic."
+    "position_alignment": "2/3 positions in hot sectors (电子化学品Ⅱ #1, 半导体 adjacent), 1 in neutral (消费电子)",
+    "regime": "Panic selloff driven by US-Iran military conflict + oil spike. Hardware/semiconductor materials holding relative strength, software/services being de-risked aggressively."
   },
   "position_decisions": [
-    {
-      "code": "002436",
-      "name": "兴森科技",
-      "action": "SELL",
-      "reason": "CRITICAL stop proximity: only 1.71% above ¥35.62 stop. Stock below MA5/MA10, down -2.79% today, sector (元件) not hot. Breadth 0.28:1 panic tape makes gap risk extremely high. W10 扬杰科技 lesson: proactive exit at ¥36.24 saves capital vs gap-through-stop. -3.33% realized loss vs potential -6%+.",
-      "sector_rank": "bottom 60% (元件 not in top/bottom 5, but tech-adjacent and declining)",
-      "new_stop": null,
-      "pnl_pct": -3.33,
-      "days_held": 3,
-      "exit_price": 36.24
-    },
     {
       "code": "002947",
       "name": "恒铭达",
       "action": "HOLD",
-      "reason": "+0.65% from entry, above stop (¥79.37) and MA20 (¥81.18). 0 risk factors, fundamentals solid (Q1 net +39.91%). Volume extremely thin (10.3% of MAVOL30) but sellers absent. 消费电子 sector not in bottom 5 yet. Monitor: if sector enters bottom 5 for 3 days, trigger Rule 1 sell.",
-      "sector_rank": "middle (消费电子 not in top/bottom 5)",
+      "reason": "PnL -1.17%, not at -5% stop (¥79.37). Day 3 only. But deteriorating: -4.43% today, volume 61% of MAVOL30, below MA5/MA10. Sector (消费电子) neutral — not hot. Stop proximity WATCH at 3.88%. If another 2% drop, consider proactive exit. If -5% stop hits, automatic SELL.",
+      "sector_rank": "mid-pack (消费电子 not in top/bottom 5)",
       "new_stop": null,
-      "pnl_pct": 0.65,
+      "pnl_pct": -1.17,
       "days_held": 3,
       "exit_price": null
     },
@@ -222,10 +228,10 @@ The right call is to preserve capital, manage existing positions, and wait for t
       "code": "300236",
       "name": "上海新阳",
       "action": "HOLD",
-      "reason": "+3.40% from entry, best performer. +0.75% today in panic tape = genuine relative strength. 电子化学品Ⅱ sector was #2 performer last week (+4.98%). 0 risk factors. MA distances healthy (dist_ma5 +5.2%, below 6% threshold). If reaches +10% (¥103.36), raise stop to breakeven per [h023].",
-      "sector_rank": "historically top 10% (电子化学品Ⅱ strong last week, neutral today)",
+      "reason": "PnL +6.37%, best performer. +3.64% today in panic tape = genuine alpha. Sector #1 (电子化学品Ⅱ +3.91%). 0 risk factors. MA distances healthy (dist_ma5=+5.2%, below 6% chase threshold). Volume above MAVOL30. If reaches +10% (¥103.36), raise stop to breakeven per rule [h023].",
+      "sector_rank": "top 5% (#1 hot sector)",
       "new_stop": null,
-      "pnl_pct": 3.40,
+      "pnl_pct": 6.37,
       "days_held": 3,
       "exit_price": null
     },
@@ -233,10 +239,10 @@ The right call is to preserve capital, manage existing positions, and wait for t
       "code": "688401",
       "name": "路维光电",
       "action": "HOLD",
-      "reason": "+2.82% from entry, +2.60% today — exceptional relative strength. Best volume among positions (69.7% of MAVOL30). MA distances healthy. 掩膜版 thesis intact: 40nm breakthrough, Xiamen project progressing. 0 risk factors. Consolidating near MA5/MA10 support.",
-      "sector_rank": "middle (半导体材料 not in top/bottom 5, but tech-adjacent)",
+      "reason": "PnL +4.44%. +4.21% today with strongest volume (5.5x MAVOL30). Consolidating near MA5/MA10 support. 掩膜版 thesis intact: 40nm breakthrough, Xiamen 20亿 project. 0 risk factors. Sector (半导体材料) adjacent to hot sectors.",
+      "sector_rank": "adjacent to hot (半导体材料)",
       "new_stop": null,
-      "pnl_pct": 2.82,
+      "pnl_pct": 4.44,
       "days_held": 3,
       "exit_price": null
     }
@@ -244,63 +250,86 @@ The right call is to preserve capital, manage existing positions, and wait for t
   "new_positions": [],
   "skip_list": [
     {
+      "code": "601958",
+      "name": "金钼股份",
+      "reason": "MARKET REGIME BLOCK: breadth 0.21:1, 0/3 indices green. Would be STRONG BUY otherwise: 小金属 sector #2 (+3.89%), 钼价 +35.65% YTD catalyst, dist_ma5=2.2% healthy, PE=22 reasonable.",
+      "rps120": 85.62
+    },
+    {
       "code": "300037",
       "name": "新宙邦",
-      "reason": "Market panic hard block. VCP SETUP (ratio 0.48), RPS120=86.34% in sweet spot, good MA distances, 宁德时代电解液大单催化。但 battery chemicals sector not in top 30%，且 breadth 0.28:1 不允许任何新开仓。正常市场下会考虑 SMALL BUY。",
+      "reason": "MARKET REGIME BLOCK. Best technical setup in pool: VCP SETUP (contraction ratio 0.48, 8 contractions tightening), dist_ma5=-1.3%, MA healthy. 宁德时代电解液大单 catalyst. Would BUY if tape allowed.",
       "rps120": 86.34
+    },
+    {
+      "code": "688017",
+      "name": "绿的谐波",
+      "reason": "MA-distance violation: dist_ma10=8.2% exceeds 8% anti-chase threshold. Robot sector leader with strong fundamentals (13 institutions predict >30% CAGR), but too extended from MA10. Wait for pullback.",
+      "rps120": 94.79
+    },
+    {
+      "code": "603663",
+      "name": "三祥新材",
+      "reason": "Triple MA-distance violation: dist_ma5=8.6% (>6%), dist_ma10=19.4% (>8%), dist_ma20=36.5% (>12%). Massively overextended. PE=217 in 99.68th percentile. No price data for today's change.",
+      "rps120": 94.87
+    },
+    {
+      "code": "300666",
+      "name": "江丰电子",
+      "reason": "Extreme MA-distance violation: dist_ma5=23.6%, dist_ma10=30.1%, dist_ma20=44.2%. All three thresholds blown. Semiconductor materials sector is hot but this is pure chasing regardless of tape.",
+      "rps120": 94.43
+    },
+    {
+      "code": "603931",
+      "name": "格林达",
+      "reason": "MARKET REGIME BLOCK + dist_ma20=22.0% exceeds 12% threshold. 电子化学品Ⅲ sector (#1 hot) but too extended. RPS120=93.14 within sweet spot.",
+      "rps120": 93.14
     },
     {
       "code": "688378",
       "name": "奥来德",
-      "reason": "Market panic hard block. RPS120=94.36% sweet spot, 光学光电子 sector recently hot, OLED材料龙头。但今日资金从科技全面撤退，即使标的优质也不入场。",
+      "reason": "MARKET REGIME BLOCK. MA distances OK. 光学光电子 sector. Revenue -16% YoY despite net profit +215% (low-quality earnings — 扣非仅37%).",
       "rps120": 94.36
-    },
-    {
-      "code": "688372",
-      "name": "伟测科技",
-      "reason": "Market panic hard block. RPS120=93.73%, 半导体封测, 净利+173%增长, MA distances all within safe range. 正常市场下是BUY候选。今日不买。",
-      "rps120": 93.73
     },
     {
       "code": "688536",
       "name": "思瑞浦",
-      "reason": "Market panic hard block. 模拟芯片龙头, RPS120=92.12%, 净利+577%爆发增长, MA distances safe。今日不买。",
+      "reason": "MARKET REGIME BLOCK. dist_ma5=-1.7%, dist_ma10=-5.3% — below MA10, consolidating/declining. 模拟芯片, 半导体 sector. 商誉占净资产11% risk.",
       "rps120": 92.12
     }
   ],
   "new_learnings": [
     {
-      "text": "US semiconductor 3-sigma crash (SOX -10.3%) → A-share tech sectors follow with 1-4 day lag → defensive rotation to resources. Pattern: money exits AI/semiconductor/optics and enters coal/oil/agriculture. This should be formalized into a macro-regime detection rule.",
+      "text": "Geopolitical shock days (US-Iran strikes + oil spike) validate the hard buy gate: breadth 0.21:1, 0/3 indices green, f10=49 — staying in cash prevents opening positions that would be underwater within hours. The objective gate removes emotional 'buy the dip' impulses.",
       "type": "signal",
-      "tags": ["sector", "macro", "entry-filter"],
+      "tags": ["entry-filter", "market-regime"],
       "evidence_type": "supporting",
-      "mechanism": "US rate expectations shock via nonfarm payrolls → global re-rating of growth/tech → A-share institutional money rotates defensively. The SOX crash magnitude (-10.3%) is a 3-sigma event that overwhelms any individual stock catalyst."
+      "related_hypothesis": "h013",
+      "mechanism": "When all three major indices are red and breadth is below 0.5:1, sector-level analysis becomes irrelevant — systemic risk dominates. The buy gate is a circuit breaker that prevents deploying capital into a falling knife."
     },
     {
-      "text": "Stop proximity rule validated again: 兴森科技 at 1.71% from stop in 0.28:1 breadth tape = proactive sell is correct. The 扬杰科技 W10 precedent (1.8% → gapped to -8.37%) shows gap risk is real when breadth is this bad.",
-      "type": "rule",
-      "tags": ["exit-rule", "position-sizing"],
-      "evidence_type": "supporting",
-      "related_hypothesis": "h023",
-      "mechanism": "In weak breadth, buyers disappear and sellers dominate the close. A stock within 2% of stop at open can gap through it before any liquidity emerges. Proactive exit preserves capital for re-entry when conditions improve."
-    },
-    {
-      "text": "Relative strength in weak tape is the best signal: 上海新阳 (+0.75%) and 路维光电 (+2.60%) both green while 75% of market red. This confirms their sector leadership and institutional support. Same pattern as [h028] — today's relative leaders are more likely to be tomorrow's absolute leaders when tape recovers.",
+      "text": "Sector gravity confirmed again: 上海新阳 (电子化学品 #1) +6.37%, 路维光电 (半导体 adjacent) +4.44% both green today, while 恒铭达 (消费电子 neutral) -1.17% and -4.43% today. Hot sector stocks hold up in selloffs; neutral-sector stocks don't.",
       "type": "heuristic",
-      "tags": ["sector", "timing"],
+      "tags": ["sector", "position-management"],
       "evidence_type": "supporting",
-      "related_hypothesis": "h028",
-      "mechanism": "Stocks that hold green in a 0.28:1 breadth day have genuine buying demand, not just passive drift. When market recovers, these are the first stocks institutions add to."
+      "mechanism": "In risk-off tapes, money concentrates in the strongest themes (semiconductor materials,小金属) and abandons everything else. Stocks in persistent hot sectors benefit from institutional rotation INTO them as safe havens within equities."
     },
     {
-      "text": "Sector-first framework catches rotation immediately: 0/4 positions in today's hot sectors. If resource/cyclical rotation persists 3+ days, Rule 1 triggers across all positions regardless of individual stock PnL. The framework is working as designed.",
-      "type": "observation",
-      "tags": ["sector", "exit-rule"],
+      "text": "Volume below MAVOL30 (恒铭达 at 61%) combined with negative price action (-4.43%) is a reliable early warning before stop-loss triggers. The volume rule correctly flagged weakening momentum before the stop was threatened.",
+      "type": "signal",
+      "tags": ["exit-rule", "timing"],
       "evidence_type": "supporting",
-      "mechanism": "Sector gravity: in a rotation, even strong individual stocks get dragged by sector flows. The 3-day rule gives time to distinguish temporary rotation from regime change."
+      "mechanism": "Low volume on down days means no buyers are stepping in to absorb selling. Combined with price below MA5/MA10, it signals distribution rather than healthy consolidation. This pattern often precedes stop-loss triggers by 1-3 days."
+    },
+    {
+      "text": "金钼股份 and 新宙邦 are the top candidates to buy when the market regime clears. Both have: (a) sector in top 5, (b) fresh catalysts (钼价 +35.65% YTD; 宁德时代电解液大单), (c) healthy MA distances, (d) institutional backing. Pre-identifying these reduces decision latency when the buy gate reopens.",
+      "type": "observation",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "Having a pre-vetted 'on-deck' list eliminates FOMO-driven decisions when the market turns. The discipline is: wait for breadth ≥1.5:1 + ≥2 indices green, then immediately assess the on-deck list rather than scanning the full pool."
     }
   ],
-  "market_summary": "PANIC TAPE — breadth 0.28:1 (1,178 up / 4,153 down), 10跌停/19涨停. 仅创业板微涨+0.21%. 触发因素: 美股SOX暴跌-10.3%(费城半导体)溢出, 非农超预期打击降息预期. A股资金从科技/AI全面撤出, 涌入焦炭/油服/油气/农业等资源防御板块. 4持仓均在科技相关板块, 与今日热点0重合. IV数据缺失. 新开仓硬性禁止.",
+  "market_summary": "Panic selloff: breadth 0.21:1 (962 up / 4504 down), 56涨停/49跌停. All 3 major indices red (上证 -0.73%, 深证 -1.32%, 创业板 -1.79%). Trigger: overnight US-Iran military conflict escalation, oil spike, US tech selloff (Nasdaq -1.57%, chip index -3.6%). 电子化学品Ⅱ (+3.91%) and 小金属 (+3.89%) buck the trend as persistent leadership sectors. Portfolio +¥867 today despite panic — 2/3 positions in hot sectors holding up. IV data unavailable. World Cup starts tomorrow — expect continued liquidity drain. Cash: 91.74%. Deployable: ¥694K. No new positions until buy gate clears.",
   "market_sentiment": "bearish",
   "market_call": "防御"
 }

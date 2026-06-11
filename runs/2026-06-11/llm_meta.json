@@ -2,70 +2,60 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 185025,
-  "output_tokens": 9722,
-  "rounds": 3,
-  "duration_sec": 195.8,
+  "input_tokens": 121121,
+  "output_tokens": 8445,
+  "rounds": 2,
+  "duration_sec": 185.6,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年6月11日 市场 大跌 原因",
+        "query": "A股 今日 热点板块 电子化学品 小金属 2026年6月11日",
         "max_results": 5
       },
-      "result_length": 1887
+      "result_length": 3123
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "半导体 电子化学品 板块 2026年6月",
+        "query": "A股市场 暴跌 全线下跌 2026年6月11日 原因",
         "max_results": 5
       },
-      "result_length": 3316
+      "result_length": 3235
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "PCB 元件板块 兴森科技 2026年6月",
+        "query": "小金属 钼 锡 涨价 2026年6月 供需",
         "max_results": 5
       },
-      "result_length": 2246
+      "result_length": 2549
     },
     {
       "pass": "P1",
-      "round": 2,
+      "round": 1,
       "tool": "web_search",
       "input": {
-        "max_results": 5,
-        "query": "费城半导体指数 暴跌 A股 影响 2026年6月"
+        "query": "电子化学品 光刻胶 半导体材料 板块 2026年6月 景气度",
+        "max_results": 5
       },
-      "result_length": 3301
+      "result_length": 2747
     },
     {
       "pass": "P1",
-      "round": 2,
+      "round": 1,
       "tool": "web_search",
       "input": {
-        "max_results": 5,
-        "query": "消费电子 恒铭达 2026年 最新消息"
+        "query": "恒铭达 002947 最新消息 2026年6月 消费电子",
+        "max_results": 5
       },
-      "result_length": 2158
-    },
-    {
-      "pass": "P1",
-      "round": 2,
-      "tool": "web_search",
-      "input": {
-        "max_results": 5,
-        "query": "焦炭 油服 油气 小金属 板块 大涨 2026年6月11日"
-      },
-      "result_length": 1858
+      "result_length": 1891
     }
   ],
   "fallback_used": false

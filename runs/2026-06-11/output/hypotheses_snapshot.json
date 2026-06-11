@@ -332,7 +332,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-03-27",
-      "lastTested": "2026-06-10",
+      "lastTested": "2026-06-11",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -723,11 +723,15 @@
           {
             "date": "2026-06-10",
             "detail": "Buy-gate saved capital today: breadth flipped from ~3:1 to 0.26:1 overnight. Opening 5 positions yesterday was aggressive but the hard_block prevented adding more exposure into what became a panic. The gating mechanism is the single most important rule in the system."
+          },
+          {
+            "date": "2026-06-11",
+            "detail": "Geopolitical shock days (US-Iran strikes + oil spike) validate the hard buy gate: breadth 0.21:1, 0/3 indices green, f10=49 — staying in cash prevents opening positions that would be underwater within hours. The objective gate removes emotional 'buy the dip' impulses."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 97,
+      "sampleSize": 98,
       "hitRate": 1.0,
       "confidence": 0.99,
       "tags": [],
@@ -1069,7 +1073,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-06-09",
+      "lastTested": "2026-06-11",
       "mechanism": "When price gets too stretched above MA5/MA10/MA20, upside becomes dependent on continued euphoria instead of support-based demand, raising mean-reversion risk.",
       "evidence": {
         "supporting": [
@@ -1348,6 +1352,10 @@
           {
             "date": "2026-06-09",
             "detail": "Yesterday's -1.7% sell-off created ideal entry conditions: 思瑞浦, 上海新阳, 兴森科技 all pulled back to MA5/MA10 support and are now bouncing with the sector. This pattern (strength that temporarily dipped) is the optimal momentum entry, far better than buying strength that never pulled back."
+          },
+          {
+            "date": "2026-06-11",
+            "detail": "金钼股份 and 新宙邦 are the top candidates to buy when the market regime clears. Both have: (a) sector in top 5, (b) fresh catalysts (钼价 +35.65% YTD; 宁德时代电解液大单), (c) healthy MA distances, (d) institutional backing. Pre-identifying these reduces decision latency when the buy gate reopens."
           }
         ],
         "contradicting": [
@@ -1357,9 +1365,9 @@
           }
         ]
       },
-      "sampleSize": 70,
+      "sampleSize": 71,
       "hitRate": 0.986,
-      "confidence": 0.972,
+      "confidence": 0.973,
       "tags": [
         "entry-filter",
         "timing"
@@ -1519,7 +1527,7 @@
       "type": "signal",
       "status": "hypothesis",
       "created": "2026-04-02",
-      "lastTested": "2026-06-10",
+      "lastTested": "2026-06-11",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -1530,13 +1538,17 @@
           {
             "date": "2026-06-10",
             "detail": "Blockbuster catalysts (新宙邦/宁德30万吨电解液协议) cannot save a stock from a -5% stop hit when the market regime is panic. Price dominates narrative — Rule 5 validated again. The stock dropped -4.2% today on the session after the catalyst announcement."
+          },
+          {
+            "date": "2026-06-11",
+            "detail": "Volume below MAVOL30 (恒铭达 at 61%) combined with negative price action (-4.43%) is a reliable early warning before stop-loss triggers. The volume rule correctly flagged weakening momentum before the stop was threatened."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 2,
+      "sampleSize": 3,
       "hitRate": 1.0,
-      "confidence": 0.75,
+      "confidence": 0.8,
       "tags": [
         "exit-rule",
         "timing"
@@ -2688,6 +2700,34 @@
       "tags": [
         "sector",
         "exit-rule"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h060",
+      "text": "Sector gravity confirmed again: 上海新阳 (电子化学品 #1) +6.37%, 路维光电 (半导体 adjacent) +4.44% both green today, while 恒铭达 (消费电子 neutral) -1.17% and -4.43% today. Hot sector stocks hold up in selloffs; neutral-sector stocks don't.",
+      "type": "heuristic",
+      "status": "observation",
+      "created": "2026-06-11",
+      "lastTested": "2026-06-11",
+      "mechanism": "In risk-off tapes, money concentrates in the strongest themes (semiconductor materials,小金属) and abandons everything else. Stocks in persistent hot sectors benefit from institutional rotation INTO them as safe havens within equities.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-06-11",
+            "detail": "Sector gravity confirmed again: 上海新阳 (电子化学品 #1) +6.37%, 路维光电 (半导体 adjacent) +4.44% both green today, while 恒铭达 (消费电子 neutral) -1.17% and -4.43% today. Hot sector stocks hold up in selloffs; neutral-sector stocks don't."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
+        "position-management"
       ],
       "parentRule": null,
       "retiredDate": null,

@@ -1,11 +1,10 @@
 # 候选股票 2026-06-11
 
 ## 入场条件: 🚫 BLOCKED
-- 涨跌比: 0.28:1
-- 上涨指数: 创业板指
-- 下跌指数: 上证指数, 深证成指
+- 涨跌比: 0.21:1
+- 下跌指数: 上证指数, 深证成指, 创业板指
 - 新仓位尺寸系数: 1.00x
-- 原因: Entry regime panic: breadth 0.28:1, 1/3 major indices green, 19 limit-ups / 10 limit-downs. Block new longs.
+- 原因: Entry regime panic: breadth 0.21:1, 0/3 major indices green, 56 limit-ups / 49 limit-downs. Block new longs.
 
 ## 策略池 (52 stocks)
 
