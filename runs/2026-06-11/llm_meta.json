@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 185025,
+  "output_tokens": 9722,
+  "rounds": 3,
+  "duration_sec": 195.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月11日 市场 大跌 原因",
+        "max_results": 5
+      },
+      "result_length": 1887
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体 电子化学品 板块 2026年6月",
+        "max_results": 5
+      },
+      "result_length": 3316
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "PCB 元件板块 兴森科技 2026年6月",
+        "max_results": 5
+      },
+      "result_length": 2246
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "费城半导体指数 暴跌 A股 影响 2026年6月"
+      },
+      "result_length": 3301
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "消费电子 恒铭达 2026年 最新消息"
+      },
+      "result_length": 2158
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "焦炭 油服 油气 小金属 板块 大涨 2026年6月11日"
+      },
+      "result_length": 1858
+    }
+  ],
+  "fallback_used": false
+}

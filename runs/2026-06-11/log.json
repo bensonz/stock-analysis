@@ -1,0 +1,136 @@
+{
+  "date": "2026-06-11",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1781141719.1242392,
+      "errors": [],
+      "end": 1781141737.064673,
+      "duration_sec": 17.9
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 16895,
+      "tokens": {
+        "input_tokens": 185025,
+        "output_tokens": 9722
+      },
+      "rounds": 3,
+      "tool_calls_count": 6,
+      "duration_sec": 195.8,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1781141933.030293,
+      "actions": [
+        "SELL 002436",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h058 (observation): US semiconductor 3-sigma crash (SOX -10.3%) → A-share tech sectors follow with 1...",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=23",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=22",
+        "Hypothesis: Created h059 (observation): Sector-first framework catches rotation immediately: 0/4 positions in today's ho...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 3,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002947",
+                "name": "恒铭达",
+                "rule": "volume_below_mavol30",
+                "volume": 5650,
+                "mavol30": 54606.93,
+                "ratio_pct": 10.3,
+                "suggestion": "Latest volume 5,650 is below MAVOL30 54,607 (10.3% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+              },
+              {
+                "code": "300236",
+                "name": "上海新阳",
+                "rule": "volume_below_mavol30",
+                "volume": 16695,
+                "mavol30": 52286.57,
+                "ratio_pct": 31.9,
+                "suggestion": "Latest volume 16,695 is below MAVOL30 52,287 (31.9% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+              },
+              {
+                "code": "688401",
+                "name": "路维光电",
+                "rule": "volume_below_mavol30",
+                "volume": 9327,
+                "mavol30": 13384.3,
+                "ratio_pct": 69.7,
+                "suggestion": "Latest volume 9,327 is below MAVOL30 13,384 (69.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+              }
+            ],
+            "error": null
+          }
+        ]
+      },
+      "end": 1781141933.419651,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [
+    "RULE check_volume_below_mavol30: 002947 — Latest volume 5,650 is below MAVOL30 54,607 (10.3% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
+    "RULE check_volume_below_mavol30: 300236 — Latest volume 16,695 is below MAVOL30 52,287 (31.9% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses.",
+    "RULE check_volume_below_mavol30: 688401 — Latest volume 9,327 is below MAVOL30 13,384 (69.7% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 214.10000000000002
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "date": "2026-06-11",
+  "actions": [
+    {
+      "code": "002436",
+      "name": "兴森科技",
+      "action": "SELL",
+      "price": 36.24,
+      "pnl_pct": -3.33,
+      "note": "CRITICAL stop proximity: only 1.71% above ¥35.62 stop. Stock below MA5/MA10, down -2.79% today, sector (元件) not hot. Breadth 0.28:1 panic tape makes gap risk extremely high. W10 扬杰科技 lesson: proactive exit at ¥36.24 saves capital vs gap-through-stop. -3.33% realized loss vs potential -6%+."
+    },
+    {
+      "code": "002947",
+      "name": "恒铭达",
+      "action": "HOLD",
+      "price": 84.09,
+      "pnl_pct": 0.65,
+      "note": "+0.65% from entry, above stop (¥79.37) and MA20 (¥81.18). 0 risk factors, fundamentals solid (Q1 net +39.91%). Volume extremely thin (10.3% of MAVOL30) but sellers absent. 消费电子 sector not in bottom 5 yet. Monitor: if sector enters bottom 5 for 3 days, trigger Rule 1 sell."
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "action": "HOLD",
+      "price": 97.15,
+      "pnl_pct": 3.4,
+      "note": "+3.40% from entry, best performer. +0.75% today in panic tape = genuine relative strength. 电子化学品Ⅱ sector was #2 performer last week (+4.98%). 0 risk factors. MA distances healthy (dist_ma5 +5.2%, below 6% threshold). If reaches +10% (¥103.36), raise stop to breakeven per [h023]."
+    },
+    {
+      "code": "688401",
+      "name": "路维光电",
+      "action": "HOLD",
+      "price": 74.63,
+      "pnl_pct": 2.82,
+      "note": "+2.82% from entry, +2.60% today — exceptional relative strength. Best volume among positions (69.7% of MAVOL30). MA distances healthy. 掩膜版 thesis intact: 40nm breakthrough, Xiamen project progressing. 0 risk factors. Consolidating near MA5/MA10 support."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 966911.0,
+    "dayPnl": -27.0,
+    "dayReturnPct": -0.0,
+    "totalReturnPct": -3.31,
+    "unrealizedPnl": 1848.0,
+    "realizedPnl": -34937.0,
+    "cashPct": 91.83
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.2837,
+    "up": 1178,
+    "down": 4153,
+    "positive_indices": [
+      "创业板指"
+    ],
+    "negative_indices": [
+      "上证指数",
+      "深证成指"
+    ],
+    "limit_ups": 19,
+    "limit_downs": 10,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.28:1, 1/3 major indices green, 19 limit-ups / 10 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "PANIC TAPE — breadth 0.28:1 (1,178 up / 4,153 down), 10跌停/19涨停. 仅创业板微涨+0.21%. 触发因素: 美股SOX暴跌-10.3%(费城半导体)溢出, 非农超预期打击降息预期. A股资金从科技/AI全面撤出, 涌入焦炭/油服/油气/农业等资源防御板块. 4持仓均在科技相关板块, 与今日热点0重合. IV数据缺失. 新开仓硬性禁止."
+  }
+}
