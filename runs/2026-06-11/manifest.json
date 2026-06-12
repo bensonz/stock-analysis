@@ -2,7 +2,7 @@
   "date": "2026-06-11",
   "status": "degraded",
   "exit_code": 0,
-  "total_duration_sec": 196.9,
+  "total_duration_sec": 273.0,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -10,11 +10,11 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 231.6
+          "latency_ms": 168.7
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 435.1
+          "latency_ms": 465.3
         },
         "pricedb": {
           "status": "ok",
@@ -31,24 +31,21 @@
     },
     "collect": {
       "status": "ok",
-      "duration_sec": 10.8,
+      "duration_sec": 12.4,
       "errors": []
     },
     "llm_analysis": {
       "status": "ok",
-      "duration_sec": 185.6
+      "duration_sec": 260.2
     },
     "apply": {
       "status": "ok",
-      "duration_sec": 0.5
+      "duration_sec": 0.4
     },
     "validate": {
-      "status": "warnings",
+      "status": "ok",
       "duration_sec": 0.0,
-      "errors": [
-        "RULE check_stop_proximity: 002947 — 🟠 WATCH — 3.9% above stop. Monitor closely. No immediate action but be ready.",
-        "RULE check_volume_below_mavol30: 002947 — Latest volume 33,312 is below MAVOL30 54,607 (61.0% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-      ]
+      "errors": []
     }
   },
   "gates": {
@@ -67,10 +64,7 @@
     "phase3_to_phase4": {
       "passed": true,
       "hard_fails": [],
-      "soft_warns": [
-        "rule check_stop_proximity: 🟠 WATCH — 3.9% above stop. Monitor closely. No immediate action but be ready.",
-        "rule check_volume_below_mavol30: Latest volume 33,312 is below MAVOL30 54,607 (61.0% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-      ]
+      "soft_warns": []
     }
   }
 }

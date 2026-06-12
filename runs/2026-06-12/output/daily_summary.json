@@ -1,0 +1,77 @@
+{
+  "date": "2026-06-12",
+  "actions": [
+    {
+      "code": "002947",
+      "name": "恒铭达",
+      "action": "HOLD",
+      "price": 85.4,
+      "pnl_pct": 2.21,
+      "note": "PnL +2.21%, 3 days held, above all stops. Sector (消费电子) neutral, not cold. 0 risk factors, Q1 net profit +40%. Volume below MAVOL30 (87.1%) is a caution flag but not a sell trigger. Monitor for volume weakness persisting >3 days."
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "action": "HOLD",
+      "price": 98.2,
+      "pnl_pct": 4.51,
+      "note": "PnL +4.51%, 3 days held. CRITICAL: sector (电子化学品Ⅱ) reversed from #1 yesterday to #1 WORST today (-3.22%). Stock -3.74% today vs market +1.5%+. This is day 1 of sector coldness — 3-day rule not triggered yet. Above all stops. If sector stays bottom 30% through 6/16, SELL. If stock hits -3% from entry (¥91.14), SELL per first-3-days rule. Raise stop to breakeven at +10% (¥103.36)."
+    },
+    {
+      "code": "688401",
+      "name": "路维光电",
+      "action": "HOLD",
+      "price": 78.32,
+      "pnl_pct": 7.91,
+      "note": "PnL +7.91%, 3 days held. Approaching +10% stop-raise threshold (¥79.84). Massive volume 6.47× MAVOL30 confirms institutional accumulation. 掩膜版 thesis fully intact: 40nm→28nm roadmap, Xiamen ¥20B project. 0 risk factors. Sector (半导体材料) structurally strong. dist_ma5 at +6.3% is at limit but acceptable with volume confirmation for existing position."
+    },
+    {
+      "code": "300037",
+      "name": "新宙邦",
+      "action": "OPEN",
+      "price": 74.65,
+      "note": "6/7与宁德时代签订30万吨电解液3年协议（5→10→15万吨/年），收入确定性暴增。VCP SETUP（contraction_ratio=0.48），MAs全部健康。score 9.3/9.2为池内最强。净利+109%，ROE 14%，公募11%。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 968462.0,
+    "dayPnl": -1228.0,
+    "dayReturnPct": -0.13,
+    "totalReturnPct": -3.15,
+    "unrealizedPnl": 3399.0,
+    "realizedPnl": -34937.0,
+    "cashPct": 90.14
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 4.8805,
+    "up": 4534,
+    "down": 929,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 109,
+    "limit_downs": 9,
+    "sizing_multiplier": 0.75,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 4.88:1, 3/3 major indices green, 109 limit-ups / 9 limit-downs. Allow entries, but cap fresh size at 75% to avoid chasing."
+  },
+  "newPositions": [
+    {
+      "code": "300037",
+      "name": "新宙邦"
+    },
+    {
+      "code": "688536",
+      "name": "思瑞浦"
+    }
+  ],
+  "marketContext": {
+    "summary": "Strong bull tape: 上证+1.56%, 深证+1.69%, 创业板+1.27%. Breadth 4.88:1 (4534 up / 929 down), 109涨停 / 9跌停. Metals complex exploding on geopolitical tensions (美伊冲突, 黄金$4240, 白银+6.28%) and real commodity supply shortages (钨+25%, 钼+36%, 锗+25%). Electronic chemicals violently reversing from #1 to #1 worst sector in one day — rotation in progress. Semiconductor complex structurally strong but overshadowed. IV data unavailable; sizing at 0.75× entry regime multiplier. 2 new positions (新宙邦 BUY, 思瑞浦 SMALL BUY), 3 holds. Deploying ~6.75% of equity from 91.7% cash."
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 304470,
+  "output_tokens": 16708,
+  "rounds": 5,
+  "duration_sec": 314.9,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月12日 工业金属 贵金属 大涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3306
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "电子化学品板块 2026年6月12日 下跌 原因",
+        "max_results": 5
+      },
+      "result_length": 2279
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "消费电子板块 2026年6月 A股 走势",
+        "max_results": 5
+      },
+      "result_length": 2190
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "上海新阳 300236 2026年6月 股价 新闻",
+        "max_results": 5
+      },
+      "result_length": 2456
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "恒铭达 002947 消费电子 2026年6月",
+        "max_results": 5
+      },
+      "result_length": 2592
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "路维光电 688401 掩膜版 半导体 2026年6月",
+        "max_results": 5
+      },
+      "result_length": 2521
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "query": "新宙邦 300037 宁德时代 电解液 协议 2026",
+        "max_results": 5
+      },
+      "result_length": 2769
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体设备 板块 2026年6月12日 走势 芯源微 思瑞浦",
+        "max_results": 5
+      },
+      "result_length": 2766
+    },
+    {
+      "pass": "P1",
+      "round": 4,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 小金属 工业金属 锑 钨 锡 2026年6月 涨停 原因",
+        "max_results": 5
+      },
+      "result_length": 2868
+    }
+  ],
+  "fallback_used": false
+}
