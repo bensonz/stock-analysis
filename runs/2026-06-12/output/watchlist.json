@@ -2,72 +2,63 @@
   "date": "2026-06-12",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4049.294,
-      "change_pct": 1.56
+      "value": 4031.513,
+      "change_pct": 1.12
     },
     "shenzhen_component": {
-      "value": 15103.14,
-      "change_pct": 1.69
+      "value": 14963.41,
+      "change_pct": 0.75
     },
     "chinext": {
-      "value": 3859.75,
-      "change_pct": 1.27
+      "value": 3830.35,
+      "change_pct": 0.5
     },
     "sentiment": "bullish",
     "hot_sectors": [
       "工业金属",
       "贵金属",
-      "小金属",
-      "能源金属",
-      "航空装备Ⅱ"
+      "航空机场",
+      "航空装备Ⅱ",
+      "能源金属"
     ],
     "cold_sectors": [
       "电子化学品Ⅱ",
-      "白色家电",
       "综合Ⅱ",
-      "通信设备",
-      "铁路公路"
+      "光学光电子",
+      "橡胶",
+      "油气开采Ⅱ"
     ],
-    "notes": "Strong bull tape: 上证+1.56%, 深证+1.69%, 创业板+1.27%. Breadth 4.88:1 (4534 up / 929 down), 109涨停 / 9跌停. Metals complex exploding on geopolitical tensions (美伊冲突, 黄金$4240, 白银+6.28%) and real commodity supply shortages (钨+25%, 钼+36%, 锗+25%). Electronic chemicals violently reversing from #1 to #1 worst sector in one day — rotation in progress. Semiconductor complex structurally strong but overshadowed. IV data unavailable; sizing at 0.75× entry regime multiplier. 2 new positions (新宙邦 BUY, 思瑞浦 SMALL BUY), 3 holds. Deploying ~6.75% of equity from 91.7% cash."
+    "notes": "Strong bull tape: breadth 2.59:1, all 3 major indices green (+1.12%/+0.75%/+0.50%), 105 limit-ups vs 23 limit-downs. But the real story is a decisive sector rotation: metals/resources surging (工业金属 +5.68%, 贵金属 +4.60%, 21 stocks limit-up in non-ferrous), while yesterday's tech leaders collapse (电子化学品Ⅱ -5.04% from #1 to #1 worst, 半导体材料 high-open→fade). Our 4 positions are all in the rotating-OUT camp. 90.3% cash is the right posture — no new entries until either our sectors regain leadership or new candidates appear in hot sectors. IV data unavailable; no sizing throttle applied. Key risk: if rotation persists 3+ days, 上海新阳 faces mandatory sector-driven SELL per 3-day cold sector rule."
   },
   "strategy_scan": {
     "total_stocks_scanned": 49,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-06-12T11:40:46.898142+08:00"
+    "scan_time": "2026-06-12T15:40:07.039551+08:00"
   },
   "recommendations": [
+    {
+      "code": "688536.SH",
+      "name": "思瑞浦",
+      "price": null,
+      "rps120": 92.7,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "002436.SZ",
+      "name": "兴森科技",
+      "price": null,
+      "rps120": 91.88,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
     {
       "code": "600301.SH",
       "name": "华锡有色",
       "price": null,
       "rps120": 92.46,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "601958.SH",
-      "name": "金钼股份",
-      "price": null,
-      "rps120": 87.0,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "603931.SH",
-      "name": "格林达",
-      "price": null,
-      "rps120": 93.52,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688037.SH",
-      "name": "芯源微",
-      "price": null,
-      "rps120": 93.64,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -82,10 +73,28 @@
       "reasoning": ""
     },
     {
-      "code": "002645.SZ",
-      "name": "华宏科技",
+      "code": "603931.SH",
+      "name": "格林达",
       "price": null,
-      "rps120": 93.74,
+      "rps120": 93.52,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "300323.SZ",
+      "name": "华灿光电",
+      "price": null,
+      "rps120": 94.03,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688037.SH",
+      "name": "芯源微",
+      "price": null,
+      "rps120": 93.64,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -94,9 +103,9 @@
   "summary": {
     "total_scanned": 49,
     "buy_recommendations": 0,
-    "watch_recommendations": 6,
+    "watch_recommendations": 7,
     "avoid_recommendations": 0,
     "market_call": "积极",
-    "reasoning": "Strong bull tape: 上证+1.56%, 深证+1.69%, 创业板+1.27%. Breadth 4.88:1 (4534 up / 929 down), 109涨停 / 9跌停. Metals complex exploding on geopolitical tensions (美伊冲突, 黄金$4240, 白银+6.28%) and real commodity supply shortages (钨+25%, 钼+36%, 锗+25%). Electronic chemicals violently reversing from #1 to #1 worst sector in one day — rotation in progress. Semiconductor complex structurally strong but overshadowed. IV data unavailable; sizing at 0.75× entry regime multiplier. 2 new positions (新宙邦 BUY, 思瑞浦 SMALL BUY), 3 holds. Deploying ~6.75% of equity from 91.7% cash."
+    "reasoning": "Strong bull tape: breadth 2.59:1, all 3 major indices green (+1.12%/+0.75%/+0.50%), 105 limit-ups vs 23 limit-downs. But the real story is a decisive sector rotation: metals/resources surging (工业金属 +5.68%, 贵金属 +4.60%, 21 stocks limit-up in non-ferrous), while yesterday's tech leaders collapse (电子化学品Ⅱ -5.04% from #1 to #1 worst, 半导体材料 high-open→fade). Our 4 positions are all in the rotating-OUT camp. 90.3% cash is the right posture — no new entries until either our sectors regain leadership or new candidates appear in hot sectors. IV data unavailable; no sizing throttle applied. Key risk: if rotation persists 3+ days, 上海新阳 faces mandatory sector-driven SELL per 3-day cold sector rule."
   }
 }

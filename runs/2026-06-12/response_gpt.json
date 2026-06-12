@@ -3,85 +3,106 @@
     "hot_sectors": [
       {
         "name": "工业金属",
-        "5d_pct": 7.52,
+        "5d_pct": null,
+        "1d_pct": 5.68,
         "trend": "accelerating",
-        "driver": "全球金属价格飙升，美伊地缘紧张"
+        "driver": "AI/半导体铜需求+全球利率见顶预期"
       },
       {
         "name": "贵金属",
-        "5d_pct": 7.2,
+        "5d_pct": null,
+        "1d_pct": 4.6,
         "trend": "accelerating",
-        "driver": "黄金$4240/oz创新高，白银+6.28%，避险需求"
+        "driver": "地缘避险+白银期货+4.36%"
       },
       {
-        "name": "小金属",
-        "5d_pct": 5.43,
+        "name": "航空机场",
+        "5d_pct": null,
+        "1d_pct": 4.56,
         "trend": "steady",
-        "driver": "钨精矿两周+25%，钼+36%，锗+25%，真实供给缺口"
-      },
-      {
-        "name": "能源金属",
-        "5d_pct": 5.28,
-        "trend": "steady",
-        "driver": "锂钴需求溢出"
+        "driver": "出行复苏"
       },
       {
         "name": "航空装备Ⅱ",
-        "5d_pct": 4.91,
-        "trend": "emerging",
-        "driver": "地缘政治驱动军工"
+        "5d_pct": null,
+        "1d_pct": 4.12,
+        "trend": "accelerating",
+        "driver": "军工+商业航天涨停潮"
+      },
+      {
+        "name": "能源金属",
+        "5d_pct": null,
+        "1d_pct": 3.67,
+        "trend": "steady",
+        "driver": "锂电池概念涨幅居前"
       }
     ],
     "cold_sectors": [
       {
         "name": "电子化学品Ⅱ",
-        "5d_pct": -3.22,
-        "trend": "reversing sharply — was #1 yesterday, now #1 worst"
-      },
-      {
-        "name": "白色家电",
-        "5d_pct": -1.62,
-        "trend": "deteriorating"
+        "5d_pct": null,
+        "1d_pct": -5.04,
+        "trend": "sharp reversal — was #1 yesterday"
       },
       {
         "name": "综合Ⅱ",
-        "5d_pct": -0.91,
+        "5d_pct": null,
+        "1d_pct": -3.15,
         "trend": "deteriorating"
       },
       {
-        "name": "通信设备",
-        "5d_pct": -0.55,
+        "name": "光学光电子",
+        "5d_pct": null,
+        "1d_pct": -2.18,
         "trend": "deteriorating"
       },
       {
-        "name": "铁路公路",
-        "5d_pct": -0.41,
+        "name": "橡胶",
+        "5d_pct": null,
+        "1d_pct": -1.64,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": null,
+        "1d_pct": -1.48,
         "trend": "deteriorating"
       }
     ],
-    "position_alignment": "1/3 positions in confirmed uptrend (路维光电-半导体), 1 in neutral (恒铭达-消费电子), 1 ALERT: sector reversed to #1 worst (上海新阳-电子化学品Ⅱ)",
-    "regime": "Metals/geopolitical leadership, electronic chemicals violently rotating out after 2-day surge, semiconductors persist but overshadowed. Rotation-driven broad rally."
+    "position_alignment": "0/4 positions in today's hot sectors. 1/4 (上海新阳) in BOTTOM 1 sector — CRITICAL. 3/4 in neutral/fading sectors (消费电子, 电池, 半导体材料).",
+    "regime": "Strong bull tape (breadth 2.59:1, all indices green) BUT with decisive rotation from tech/electronics into metals/resources. Our entire candidate pool is in the rotating-OUT camp. Structural mismatch between available candidates and market leadership."
   },
   "position_decisions": [
     {
       "code": "002947",
       "name": "恒铭达",
       "action": "HOLD",
-      "reason": "PnL +2.21%, 3 days held, above all stops. Sector (消费电子) neutral, not cold. 0 risk factors, Q1 net profit +40%. Volume below MAVOL30 (87.1%) is a caution flag but not a sell trigger. Monitor for volume weakness persisting >3 days.",
-      "sector_rank": "mid-ranked (not in top5 or bottom5)",
+      "reason": "PnL +0.4%, sector (消费电子) neutral, 0 risk factors, all MA distances healthy (dist_ma5 +0.3%). Q1 net profit +40%, new 第三代半导体 concept. Stock consolidating in tight range — no threat to stop, no urgency. 3 days held, far from 10-day time stop.",
+      "sector_rank": "middle ~40-50%",
       "new_stop": null,
-      "pnl_pct": 2.21,
+      "pnl_pct": 0.4,
       "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "300037",
+      "name": "新宙邦",
+      "action": "HOLD",
+      "reason": "Just opened today. PnL -0.5%. Massive fresh catalyst: 宁德时代30万吨电解液3年协议 (6/7公告), revenue visibility through 2028. VCP SETUP (contraction_ratio=0.48). RPS120 87.35 in sweet spot. MA distances all healthy. Stop proximity WATCH at 4.55% — monitor for -3% first-3-days trigger at ¥72.41.",
+      "sector_rank": "middle ~35-45% (锂电池概念涨幅居前)",
+      "new_stop": null,
+      "pnl_pct": -0.5,
+      "days_held": 0,
       "exit_price": null
     },
     {
       "code": "300236",
       "name": "上海新阳",
       "action": "HOLD",
-      "reason": "PnL +4.51%, 3 days held. CRITICAL: sector (电子化学品Ⅱ) reversed from #1 yesterday to #1 WORST today (-3.22%). Stock -3.74% today vs market +1.5%+. This is day 1 of sector coldness — 3-day rule not triggered yet. Above all stops. If sector stays bottom 30% through 6/16, SELL. If stock hits -3% from entry (¥91.14), SELL per first-3-days rule. Raise stop to breakeven at +10% (¥103.36).",
-      "sector_rank": "bottom 2% (worst sector today)",
+      "reason": "⚠️ ELEVATED ALERT. PnL still +1.9% but sector (电子化学品Ⅱ) crashed from #1 yesterday to #1 WORST today (-5.04%). Stock -6.17% today with 5.22× MAVOL30 — institutional distribution on intraday reversal from new high. Day 1 of cold sector — 3-day rule triggers SELL if sector stays bottom 30% through 6/16. -5% hard stop at ¥89.26, -3% first-3-days at ¥91.14. Thesis intact (2025 NP +71%, photoresist platform) but sector gravity is overwhelming.",
+      "sector_rank": "bottom 1% — #1 WORST sector today",
       "new_stop": null,
-      "pnl_pct": 4.51,
+      "pnl_pct": 1.9,
       "days_held": 3,
       "exit_price": null
     },
@@ -89,140 +110,105 @@
       "code": "688401",
       "name": "路维光电",
       "action": "HOLD",
-      "reason": "PnL +7.91%, 3 days held. Approaching +10% stop-raise threshold (¥79.84). Massive volume 6.47× MAVOL30 confirms institutional accumulation. 掩膜版 thesis fully intact: 40nm→28nm roadmap, Xiamen ¥20B project. 0 risk factors. Sector (半导体材料) structurally strong. dist_ma5 at +6.3% is at limit but acceptable with volume confirmation for existing position.",
-      "sector_rank": "mid-ranked (semiconductor complex strong)",
+      "reason": "PnL +4.7%, approaching +10% stop-raise threshold (¥79.84). Today -3.54% with 8.74× MAVOL30 on intraday reversal — distribution pattern but less severe than 上海新阳. Sector (半导体材料) fading from hot to neutral, not yet cold. dist_ma5 at +6.3% is at chase limit — acceptable for existing position but no add. 0 risk factors. 掩膜版 thesis intact. If reaches ¥79.84, raise stop to breakeven ¥72.58 per Rule 5.",
+      "sector_rank": "middle ~35-45% — fading from yesterday's strength",
       "new_stop": null,
-      "pnl_pct": 7.91,
+      "pnl_pct": 4.7,
       "days_held": 3,
       "exit_price": null
     }
   ],
-  "new_positions": [
-    {
-      "code": "300037",
-      "name": "新宙邦",
-      "entry_price": 74.65,
-      "allocation_pct": 3.75,
-      "stop": 70.92,
-      "target": 95.0,
-      "thesis": "6/7与宁德时代签订30万吨电解液3年协议（5→10→15万吨/年），收入确定性暴增。VCP SETUP（contraction_ratio=0.48），MAs全部健康。score 9.3/9.2为池内最强。净利+109%，ROE 14%，公募11%。",
-      "sector": "电池",
-      "sector_rank": "mid-ranked (not bottom5, energy metals #4 provides upstream tailwind)",
-      "catalyst": "宁德时代30万吨电解液长协（2026-2028），6/7公告，超新鲜",
-      "catalyst_freshness": "ongoing",
-      "rps120": 87.35,
-      "conviction": "moderate"
-    },
+  "new_positions": [],
+  "skip_list": [
     {
       "code": "688536",
       "name": "思瑞浦",
-      "entry_price": 303.98,
-      "allocation_pct": 3.0,
-      "stop": 288.78,
-      "target": 380.0,
-      "thesis": "RPS sweet spot 92.70，归母净利+577%爆发增长。半导体板块4月以来持续走强。12家机构预测25%+年增长。MAs健康（dist_ma5=3.8%，dist_ma10=0.8%）。净现比153%，公募11%。",
-      "sector": "半导体",
-      "sector_rank": "strong uptrend (科创100 +2.84%, 半导体设备持续走高, confirmed in news)",
-      "catalyst": "归母净利润同比增长577%，12家机构看好，半导体景气周期",
-      "catalyst_freshness": "ongoing",
-      "rps120": 92.7,
-      "conviction": "moderate"
-    }
-  ],
-  "skip_list": [
+      "reason": "Sector (半导体) not in top 30% — opened +4.5% intraday then faded to +0.4%. Revenue +80%/NP +228% is compelling, but sector gravity + rotation away from semis = wait. MA distances all pass (dist_ma5 +3.8%, dist_ma10 +0.8%).",
+      "rps120": 92.7
+    },
+    {
+      "code": "002436",
+      "name": "兴森科技",
+      "reason": "Sector (元件/PCB) not in top 30%. PCB概念反复走强 (逸豪新材20CM涨停) is notable but sector rank uncertain. Hit historic high today per event data. MA distances pass (dist_ma5 +1.1%). Revisit if PCB sector breaks into top rankings.",
+      "rps120": 91.88
+    },
     {
       "code": "600301",
       "name": "华锡有色",
-      "reason": "Sector #3 hot (小金属 +5.43%) BUT dist_ma5=+8.6% > 6% Rule 2b chase violation. '算力金属锡' narrative strong but cannot buy at this extension. Wait for pullback to MA5 (≈58.29).",
+      "reason": "dist_ma5_pct = 8.6% — exceeds 6% chase limit (Rule 2b). Sector (小金属) is hot-adjacent but MA rule is non-negotiable. Wait for pullback to MA5 (~58.29) or MA10 (~58.69). Also: 沪锡期货日内暴跌6% is a headwind.",
       "rps120": 92.46
-    },
-    {
-      "code": "601958",
-      "name": "金钼股份",
-      "reason": "Sector #3 hot BUT dist_ma5=+12.8%, dist_ma10=+11.1%, dist_ma20=+17.1% — extreme overextension on ALL MAs. Already涨停 today. Chasing = mean-reversion risk.",
-      "rps120": 87.0
-    },
-    {
-      "code": "603931",
-      "name": "格林达",
-      "reason": "Sector (电子化学品Ⅱ) is today's #1 WORST (-3.22%). Rule 1: zero entries in bottom-30% sectors. Individual RPS120=93.52 irrelevant when sector gravity is this negative.",
-      "rps120": 93.52
-    },
-    {
-      "code": "688037",
-      "name": "芯源微",
-      "reason": "PE 741, loss-making, revenue -10% YoY. Rule 3 sanity check: PE>200 with no growth = red flag. Strong sector doesn't rescue weak fundamentals at this valuation.",
-      "rps120": 93.64
     },
     {
       "code": "688629",
       "name": "华丰科技",
-      "reason": "2026/06/29解禁2.79亿股（占总股本60.57%）— 17天后巨量解禁。Hard-pass event risk. Sector (军工电子) also not in confirmed hot list.",
+      "reason": "dist_ma5_pct = 6.3% — exceeds 6% chase limit. Sector (军工电子) hot-adjacent. Also: massive 61% share unlock on 6/29 — catastrophic overhang risk.",
       "rps120": 89.15
     },
     {
-      "code": "002645",
-      "name": "华宏科技",
-      "reason": "RPS120=93.74 and net profit +595% are attractive, but sector (环保设备) is niche/not trending. dist_ma5=-6.3% indicates ongoing correction from highs. Wait for base formation.",
-      "rps120": 93.74
+      "code": "603931",
+      "name": "格林达",
+      "reason": "Sector (电子化学品Ⅱ) is BOTTOM 1 (-5.04%). Hard no-buy zone per Rule 1. dist_ma20_pct = 15.3% also fails Rule 2b.",
+      "rps120": 93.52
+    },
+    {
+      "code": "300323",
+      "name": "华灿光电",
+      "reason": "Sector (光学光电子) is BOTTOM 3 (-2.18%). Hard no-buy zone. PE negative, NP negative — fundamental red flags.",
+      "rps120": 94.03
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "Sector (半导体) not top 30%. PE=730, revenue -10.4% YoY, NP negative. MA distances pass but fundamentals + sector both weak.",
+      "rps120": 93.64
     }
   ],
   "new_learnings": [
     {
-      "text": "Sector leadership can reverse violently in one day: 电子化学品Ⅱ went from #1 sector (+3%+, multiple 涨停) to #1 WORST (-3.22%) in a single session. This validates the 3-day cold-sector rule — one bad day isn't a sell, but it demands immediate attention. The mechanism: profit-taking cascades when money rotates to the next catalyst (today: metals on geopolitical surge).",
+      "text": "Sector rotation from electronics→metals is decisive and institutional-grade. Our enriched candidate pool (cheesefortune_intersection) is 100% tech/electronics — zero metals/aviation candidates. When market leadership rotates to sectors we don't cover, the correct response is to hold cash, not force entries. 90.3% cash is the right allocation today.",
       "type": "observation",
       "tags": [
         "sector",
-        "exit-rule"
+        "entry-filter",
+        "position-sizing"
       ],
       "evidence_type": "supporting",
-      "related_hypothesis": "h019",
-      "mechanism": "When a sector runs hard for 2-3 days, accumulated profits create selling pressure. A new macro catalyst (geopolitics, commodity prices) can trigger a rapid rotation as capital reallocates to the new theme."
+      "related_hypothesis": "h019 (bottom-list sectors = hard no-buy)",
+      "mechanism": "Institutional rotation creates sector-level momentum that overwhelms individual stock fundamentals. When capital flows OUT of your candidate sectors, no amount of stock-level analysis can overcome the sector gravity."
     },
     {
-      "text": "Rule 2b (MA-distance anti-chase) prevented catastrophic entries today: 金钼股份 (dist_ma5=+12.8%) and 华锡有色 (dist_ma5=+8.6%) are in the #3 hottest sector but dangerously overextended. Without this rule, a naive momentum system would have bought them at the top. The rule is working exactly as designed — the hottest sectors often have no buyable stocks.",
-      "type": "rule",
+      "text": "Intraday reversal from new high on 5-9× MAVOL30 volume is a reliable institutional distribution signal. Both 上海新阳 (5.22×, -6.17%) and 路维光电 (8.74×, -3.54%) showed the exact same pattern: open at record highs, close near lows on extreme volume. This is not retail noise — it's coordinated institutional rotation.",
+      "type": "signal",
       "tags": [
-        "entry-filter",
+        "exit-rule",
         "timing"
       ],
       "evidence_type": "supporting",
       "related_hypothesis": "h027",
-      "mechanism": "Stocks in hot sectors attract momentum chasers who push prices far above moving averages. The MA-distance rule forces discipline: buy the sector trend but only at reasonable entry points near support."
+      "mechanism": "When a stock opens at an all-time high and reverses to close near the low on volume 5×+ normal, institutions are using the liquidity of the opening spike to distribute positions. This pattern often precedes multi-day weakness."
     },
     {
-      "text": "VCP SETUP quality provides a differentiated entry signal: only 1 of 18 enriched candidates (新宙邦) has VCP data. Its contraction_ratio=0.48 (near the 0.4 threshold) combined with the massive 宁德时代 catalyst creates a compelling case that quant RPS/MA screens alone might flag as merely 'acceptable' (RPS120=87.35, below sweet spot). VCP adds a timing edge.",
-      "type": "signal",
-      "tags": [
-        "entry-filter",
-        "timing"
-      ],
-      "evidence_type": "supporting",
-      "mechanism": "VCP contraction patterns identify stocks that have already absorbed selling pressure and are coiling for a breakout. When combined with a fresh catalyst, this reduces the probability of buying into a false breakout."
-    },
-    {
-      "text": "Volume below MAVOL30 (恒铭达 at 87.1%) is an early warning of waning institutional conviction. While not a sell trigger, if volume stays below MAVOL30 for 3+ consecutive days alongside flat price action, proactive exit before the 10-day time stop may be warranted. Institutional volume is the fuel for momentum — without it, even good stocks stall.",
-      "type": "heuristic",
+      "text": "The 3-day cold sector rule (from V2 framework) is being tested in real-time with 上海新阳. Its sector (电子化学品Ⅱ) went from #1 to #1 worst in a single session. The rule correctly keeps us in HOLD (day 1 only) rather than panic-selling, while setting a clear 6/16 deadline. This is the V2 discipline that V1 lacked.",
+      "type": "rule",
       "tags": [
         "exit-rule",
-        "position-sizing"
+        "sector"
       ],
       "evidence_type": "supporting",
-      "mechanism": "MAVOL30 below 100% means today's volume is below the 30-day average, suggesting institutional participants are stepping back. In momentum strategies, declining volume during a rally is a divergence that often precedes reversal."
+      "mechanism": "Single-day sector reversals can be noise. The 3-day rule prevents whipsaw exits while still enforcing sector discipline. This balances the need to cut losers with the risk of overreacting to one-day rotations."
     },
     {
-      "text": "The paradox of momentum investing: the strongest sectors (metals +5-7% today) have zero buyable stocks due to MA extension. Cash (91.7% of portfolio) is a valid and often optimal position. Patience to wait for pullbacks to MA5/MA10 support is what separates disciplined momentum from FOMO chasing.",
+      "text": "新宙邦 entry timing is questionable. The CATL 30万吨 deal was announced 6/7 — stock already ran before we entered today at ¥74.65 (dist_ma20=+7.1%). The catalyst is real but we may have paid up. The -3% first-3-days trigger at ¥72.41 is essential protection here.",
       "type": "observation",
       "tags": [
-        "entry-filter",
-        "position-sizing"
+        "timing",
+        "entry-filter"
       ],
-      "evidence_type": "supporting",
-      "related_hypothesis": "h013",
-      "mechanism": "Strong breadth alone is not enough to force entries. Even in a 4.88:1 breadth day, if all candidates in hot sectors are extended, the correct decision is to hold cash or size small in second-tier sectors with strong individual catalysts."
+      "evidence_type": "contradicting",
+      "mechanism": "Even the strongest catalysts can be 'priced in' within 3-5 trading days of announcement. Entering after the initial spike means accepting higher stop-out risk. The -3% first-3-days rule exists precisely for this scenario."
     }
   ],
-  "market_summary": "Strong bull tape: 上证+1.56%, 深证+1.69%, 创业板+1.27%. Breadth 4.88:1 (4534 up / 929 down), 109涨停 / 9跌停. Metals complex exploding on geopolitical tensions (美伊冲突, 黄金$4240, 白银+6.28%) and real commodity supply shortages (钨+25%, 钼+36%, 锗+25%). Electronic chemicals violently reversing from #1 to #1 worst sector in one day — rotation in progress. Semiconductor complex structurally strong but overshadowed. IV data unavailable; sizing at 0.75× entry regime multiplier. 2 new positions (新宙邦 BUY, 思瑞浦 SMALL BUY), 3 holds. Deploying ~6.75% of equity from 91.7% cash.",
+  "market_summary": "Strong bull tape: breadth 2.59:1, all 3 major indices green (+1.12%/+0.75%/+0.50%), 105 limit-ups vs 23 limit-downs. But the real story is a decisive sector rotation: metals/resources surging (工业金属 +5.68%, 贵金属 +4.60%, 21 stocks limit-up in non-ferrous), while yesterday's tech leaders collapse (电子化学品Ⅱ -5.04% from #1 to #1 worst, 半导体材料 high-open→fade). Our 4 positions are all in the rotating-OUT camp. 90.3% cash is the right posture — no new entries until either our sectors regain leadership or new candidates appear in hot sectors. IV data unavailable; no sizing throttle applied. Key risk: if rotation persists 3+ days, 上海新阳 faces mandatory sector-driven SELL per 3-day cold sector rule.",
   "market_sentiment": "bullish",
   "market_call": "积极"
 }

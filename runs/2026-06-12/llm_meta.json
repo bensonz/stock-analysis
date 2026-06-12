@@ -2,10 +2,10 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 304470,
-  "output_tokens": 16708,
-  "rounds": 5,
-  "duration_sec": 314.9,
+  "input_tokens": 241892,
+  "output_tokens": 14698,
+  "rounds": 4,
+  "duration_sec": 285.1,
   "tool_calls": [
     {
       "pass": "P1",
@@ -15,87 +15,77 @@
         "query": "A股 2026年6月12日 工业金属 贵金属 大涨 原因",
         "max_results": 5
       },
-      "result_length": 3306
+      "result_length": 3381
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "电子化学品板块 2026年6月12日 下跌 原因",
+        "query": "电子化学品板块 大跌 2026年6月12日 原因",
         "max_results": 5
       },
-      "result_length": 2279
+      "result_length": 2639
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "消费电子板块 2026年6月 A股 走势",
+        "query": "思瑞浦 688536 业绩 催化剂 2026",
         "max_results": 5
       },
-      "result_length": 2190
+      "result_length": 2260
     },
     {
       "pass": "P1",
       "round": 2,
       "tool": "web_search",
       "input": {
-        "query": "上海新阳 300236 2026年6月 股价 新闻",
-        "max_results": 5
+        "max_results": 5,
+        "query": "兴森科技 002436 PCB IC载板 催化剂 2026年6月"
       },
-      "result_length": 2456
+      "result_length": 2927
     },
     {
       "pass": "P1",
       "round": 2,
       "tool": "web_search",
       "input": {
-        "query": "恒铭达 002947 消费电子 2026年6月",
-        "max_results": 5
+        "max_results": 5,
+        "query": "京仪装备 688652 半导体设备 业绩 2026"
       },
-      "result_length": 2592
+      "result_length": 2723
     },
     {
       "pass": "P1",
       "round": 2,
       "tool": "web_search",
       "input": {
-        "query": "路维光电 688401 掩膜版 半导体 2026年6月",
-        "max_results": 5
+        "max_results": 5,
+        "query": "上海新阳 300236 电子化学品 光刻胶 最新消息 2026年6月"
       },
-      "result_length": 2521
+      "result_length": 3173
     },
     {
       "pass": "P1",
       "round": 3,
       "tool": "web_search",
       "input": {
-        "query": "新宙邦 300037 宁德时代 电解液 协议 2026",
-        "max_results": 5
+        "max_results": 5,
+        "query": "新宙邦 300037 宁德时代 电解液协议 2026年6月"
       },
-      "result_length": 2769
+      "result_length": 2894
     },
     {
       "pass": "P1",
       "round": 3,
       "tool": "web_search",
       "input": {
-        "query": "半导体设备 板块 2026年6月12日 走势 芯源微 思瑞浦",
-        "max_results": 5
+        "max_results": 5,
+        "query": "恒铭达 002947 消费电子 2026年6月 最新"
       },
-      "result_length": 2766
-    },
-    {
-      "pass": "P1",
-      "round": 4,
-      "tool": "web_search",
-      "input": {
-        "query": "A股 小金属 工业金属 锑 钨 锡 2026年6月 涨停 原因",
-        "max_results": 5
-      },
-      "result_length": 2868
+      "result_length": 2502
     }
   ],
   "fallback_used": false

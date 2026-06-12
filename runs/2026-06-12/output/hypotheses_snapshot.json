@@ -1390,12 +1390,16 @@
           {
             "date": "2026-06-09",
             "detail": "VCP scanner coverage is thin (1/27 enriched candidates has VCP data, only SETUP quality). Either the scanner calibration is too strict or the current pool is dominated by trending/extended names that don't form contraction patterns. Worth investigating whether scanner parameters need adjustment for this market regime."
+          },
+          {
+            "date": "2026-06-12",
+            "detail": "新宙邦 entry timing is questionable. The CATL 30万吨 deal was announced 6/7 — stock already ran before we entered today at ¥74.65 (dist_ma20=+7.1%). The catalyst is real but we may have paid up. The -3% first-3-days trigger at ¥72.41 is essential protection here."
           }
         ]
       },
-      "sampleSize": 74,
-      "hitRate": 0.986,
-      "confidence": 0.974,
+      "sampleSize": 75,
+      "hitRate": 0.973,
+      "confidence": 0.961,
       "tags": [
         "entry-filter",
         "timing"
@@ -1740,13 +1744,17 @@
           {
             "date": "2026-06-12",
             "detail": "Rule 2b (MA-distance anti-chase) prevented catastrophic entries today: 金钼股份 (dist_ma5=+12.8%) and 华锡有色 (dist_ma5=+8.6%) are in the #3 hottest sector but dangerously overextended. Without this rule, a naive momentum system would have bought them at the top. The rule is working exactly as designed — the hottest sectors often have no buyable stocks."
+          },
+          {
+            "date": "2026-06-12",
+            "detail": "Intraday reversal from new high on 5-9× MAVOL30 volume is a reliable institutional distribution signal. Both 上海新阳 (5.22×, -6.17%) and 路维光电 (8.74×, -3.54%) showed the exact same pattern: open at record highs, close near lows on extreme volume. This is not retail noise — it's coordinated institutional rotation."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 19,
+      "sampleSize": 20,
       "hitRate": 1.0,
-      "confidence": 0.952,
+      "confidence": 0.955,
       "tags": [
         "entry-filter",
         "timing",
@@ -2792,6 +2800,63 @@
       "tags": [
         "exit-rule",
         "position-sizing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h062",
+      "text": "Sector rotation from electronics→metals is decisive and institutional-grade. Our enriched candidate pool (cheesefortune_intersection) is 100% tech/electronics — zero metals/aviation candidates. When market leadership rotates to sectors we don't cover, the correct response is to hold cash, not force entries. 90.3% cash is the right allocation today.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-06-12",
+      "lastTested": "2026-06-12",
+      "mechanism": "Institutional rotation creates sector-level momentum that overwhelms individual stock fundamentals. When capital flows OUT of your candidate sectors, no amount of stock-level analysis can overcome the sector gravity.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-06-12",
+            "detail": "Sector rotation from electronics→metals is decisive and institutional-grade. Our enriched candidate pool (cheesefortune_intersection) is 100% tech/electronics — zero metals/aviation candidates. When market leadership rotates to sectors we don't cover, the correct response is to hold cash, not force entries. 90.3% cash is the right allocation today."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
+        "entry-filter",
+        "position-sizing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h063",
+      "text": "The 3-day cold sector rule (from V2 framework) is being tested in real-time with 上海新阳. Its sector (电子化学品Ⅱ) went from #1 to #1 worst in a single session. The rule correctly keeps us in HOLD (day 1 only) rather than panic-selling, while setting a clear 6/16 deadline. This is the V2 discipline that V1 lacked.",
+      "type": "rule",
+      "status": "observation",
+      "created": "2026-06-12",
+      "lastTested": "2026-06-12",
+      "mechanism": "Single-day sector reversals can be noise. The 3-day rule prevents whipsaw exits while still enforcing sector discipline. This balances the need to cut losers with the risk of overreacting to one-day rotations.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-06-12",
+            "detail": "The 3-day cold sector rule (from V2 framework) is being tested in real-time with 上海新阳. Its sector (电子化学品Ⅱ) went from #1 to #1 worst in a single session. The rule correctly keeps us in HOLD (day 1 only) rather than panic-selling, while setting a clear 6/16 deadline. This is the V2 discipline that V1 lacked."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "exit-rule",
+        "sector"
       ],
       "parentRule": null,
       "retiredDate": null,

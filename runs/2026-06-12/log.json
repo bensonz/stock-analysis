@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1781235319.617683,
+      "start": 1781249711.48449,
       "errors": [],
-      "end": 1781235331.81819,
-      "duration_sec": 12.2
+      "end": 1781249721.8396978,
+      "duration_sec": 10.4
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 22537,
+      "response_size_bytes": 21870,
       "tokens": {
-        "input_tokens": 304470,
-        "output_tokens": 16708
+        "input_tokens": 241892,
+        "output_tokens": 14698
       },
-      "rounds": 5,
-      "tool_calls_count": 9,
-      "duration_sec": 314.9,
+      "rounds": 4,
+      "tool_calls_count": 8,
+      "duration_sec": 285.1,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -25,26 +25,21 @@
     },
     {
       "phase": "apply",
-      "start": 1781235646.775798,
+      "start": 1781250007.025103,
       "actions": [
-        "SIZE THROTTLE 300037: 3.75% -> 2.81% (regime=strong)",
-        "SIZE THROTTLE 688536: 3% -> 2.25% (regime=strong)",
-        "OPEN 300037 @ 74.65",
-        "SKIP OPEN 688536: Insufficient deployable cash for minimum lot in 688536: deployable=679955.40, entryPrice=303.98",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=13",
-        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=19",
-        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=99%, n=74",
-        "Hypothesis: Created h061 (observation): Volume below MAVOL30 (恒铭达 at 87.1%) is an early warning of waning institutional ...",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=100",
+        "Hypothesis: Created h062 (observation): Sector rotation from electronics→metals is decisive and institutional-grade. Our...",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=20",
+        "Hypothesis: Created h063 (observation): The 3-day cold sector rule (from V2 framework) is being tested in real-time with...",
+        "Hypothesis: Updated h021 (rule): +1 contradicting evidence → hitRate=97%, n=75",
         "Updated LEARNINGS.md (legacy)"
       ],
       "post_apply_rule_violations": {
         "status": "violations",
         "total_rules": 6,
-        "total_violations": 2,
+        "total_violations": 1,
         "rules": [
           {
             "rule": "check_breakout_failure",
@@ -81,10 +76,10 @@
                 "name": "新宙邦",
                 "rule": "stop_proximity",
                 "severity": "WATCH",
-                "currentPrice": 74.65,
+                "currentPrice": 74.3,
                 "stopLoss": 70.92,
-                "distance_pct": 5.0,
-                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+                "distance_pct": 4.55,
+                "suggestion": "🟠 WATCH — 4.5% above stop. Monitor closely. No immediate action but be ready."
               }
             ],
             "error": null
@@ -100,33 +95,22 @@
           {
             "rule": "check_volume_below_mavol30",
             "file": "scripts/rules/check_volume_below_mavol30.py",
-            "status": "violations",
-            "exit_code": 1,
-            "violations": [
-              {
-                "code": "002947",
-                "name": "恒铭达",
-                "rule": "volume_below_mavol30",
-                "volume": 45250,
-                "mavol30": 51931.9,
-                "ratio_pct": 87.1,
-                "suggestion": "Latest volume 45,250 is below MAVOL30 51,932 (87.1% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
-              }
-            ],
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
             "error": null
           }
         ]
       },
-      "end": 1781235647.396033,
+      "end": 1781250007.645243,
       "duration_sec": 0.6
     }
   ],
   "validation_errors": [
-    "RULE check_stop_proximity: 300037 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
-    "RULE check_volume_below_mavol30: 002947 — Latest volume 45,250 is below MAVOL30 51,932 (87.1% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+    "RULE check_stop_proximity: 300037 — 🟠 WATCH — 4.5% above stop. Monitor closely. No immediate action but be ready."
   ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 327.7
+    "totalDurationSec": 296.1
   }
 }
