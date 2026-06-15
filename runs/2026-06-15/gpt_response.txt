@@ -1,0 +1,376 @@
+# Research Memo — 2026-06-15
+
+## 1. Market Regime: BULLISH — Strong Breadth, Tech Leadership
+
+**Index snapshot (all green):**
+- 上证指数: 4068.58 (+0.92%)
+- 深证成指: 15342.47 (+2.53%)
+- 创业板指: 3970.67 (+3.66%) ← leading
+- 科创50: 1723.47 (+3.62%)
+
+**Breadth: 1.71:1 bullish**
+- Up 3384 / Down 1982 / Flat 144
+- 涨停(r10): 121, 跌停(f10): 10 — no panic
+- Distribution: strongly right-skewed. r0_2 (1685) is the biggest bar, but r2_4 (811) + r4_7 (525) + r7_10 (242) + r10 (121) = substantial strength. Not a weak rally.
+- r4_7+r7_10+r10 = 888 — elevated but below 500 panic threshold. Euphoria watch but not overheating.
+
+**Entry regime: STRONG** — 3/3 major indices green, breadth 1.71:1 > 1.5:1 minimum. Sizing_multiplier 0.75 (cap fresh size to avoid chasing in this extended tape). `allow_new_positions: true`.
+
+**IV Sentiment:** No data. IV proxy unavailable across all positions and candidates. No throttle applies.
+
+**Market call:** 积极 — this is a day to deploy capital, but with MA-distance discipline.
+
+---
+
+## 2. Sector Analysis
+
+### Top 5 Sectors Today
+| Rank | Sector | 5d Performance |
+|------|--------|---------------|
+| #1 | 玻璃玻纤 | +9.76% |
+| #2 | 元件 | +8.02% |
+| #3 | 非金属材料Ⅱ | +6.33% |
+| #4 | 电子化学品Ⅱ | +5.53% |
+| #5 | 塑料 | +5.46% |
+
+### Bottom 5 Sectors
+| Rank | Sector | Performance |
+|------|--------|------------|
+| Bottom 1 | 煤炭开采 | -4.71% |
+| Bottom 2 | 油气开采Ⅱ | -3.85% |
+| Bottom 3 | 航天装备Ⅱ | -2.87% |
+| Bottom 4 | 非白酒 | -2.55% |
+| Bottom 5 | 白色家电 | -2.31% |
+
+### Rotation Signals
+- **Clear Tech/Hardware leadership**: 元件 (+8.02%), 电子化学品Ⅱ (+5.53%), 玻璃玻纤 (+9.76%) — all materials/tech adjacent
+- **Resources getting crushed**: 煤炭 -4.71%, 油气 -3.85% — classic rotation out of commodities
+- **Sector persistence**: 电子化学品Ⅱ was #1 on 6/11, crashed to worst on 6/12 (-5.04%), now back to #4 today (+5.53%). This is a healthy rotation within a strong sector, not a breakdown. The one-day cold reading on 6/12 was a shakeout, not a regime change.
+- **Semiconductor/设备** broadly strong — seen in multiple 快讯 today (半导体设备板块持续走高, 半导体材料板块短线拉升, 元件板块持续拉升)
+
+### Position Sector Alignment: 2/4 in hot sectors
+- 上海新阳: 电子化学品Ⅱ #4 (+5.53%) ✅ HOT
+- 路维光电: 半导体材料 (adjacent to hot, benefiting from semicon rally) ✅ WARM
+- 恒铭达: 消费电子 (not in top/bottom 5, neutral) ⚠️ NEUTRAL
+- 新宙邦: 电池 (not in top/bottom 5, neutral) ⚠️ NEUTRAL
+
+---
+
+## 3. Position Review
+
+### ① 恒铭达 (002947) — HOLD
+- **PnL: +5.90%** (entry 83.55, current 88.48)
+- **Days held: 4** (entered 6/9)
+- **Today: +5.48%** — strong acceleration after 3 days of consolidation
+- **Sector: 消费电子** — neutral, not in top/bottom 5. Not cold, but not giving sector tailwind.
+- **Stop: 79.37** (entry×0.95). Current distance: +11.5% above stop — no threat.
+- **MA distances**: dist_ma5 +4.4%, dist_ma10 -0.2%, dist_ma20 +4.4% — all healthy
+- **Volume**: 61,200 vs MAVOL30 49,388 — above average, confirming interest
+- **Risk**: 0 risk factors. RPS120=94.2 (extended zone, but 0 risk qualifies).
+- **Verdict**: HOLD. No issues. If +10% reached (91.91), raise stop to breakeven 83.55.
+
+### ② 新宙邦 (300037) — HOLD (elevated scrutiny)
+- **PnL: -0.33%** (entry 74.65, current 74.40)
+- **Days held: 1** (entered 6/12)
+- **Today: +0.13%** — flat, barely positive
+- **Sector: 电池** — neutral, not in top/bottom 5
+- **Stop: 70.92**. Current distance: 4.68% — **WATCH flagged** by stop_proximity rule. Not at -5% or -3% first-3-days trigger yet.
+- **MA distances**: dist_ma5 +0.3%, dist_ma10 +1.8%, dist_ma20 +6.0% — all healthy
+- **VCP**: SETUP (contraction_ratio=0.48), near MA10 (1.8%)
+- **Catalyst**: 宁德时代30万吨电解液3年协议 — fresh, massive, real. This is one of the strongest catalysts in the pool. Revenue visibility through 2028.
+- **Verdict**: HOLD. The stop proximity is a yellow flag, but the catalyst is extraordinary. -3% first-3-days trigger at ¥72.41. -5% hard stop at ¥70.92. No action needed today, but if it dips toward ¥72.50, be ready to cut. The 0.75 sizing multiplier on entry was correct — this is a volatile setup.
+
+### ③ 上海新阳 (300236) — HOLD ✅ Best in portfolio
+- **PnL: +6.27%** (entry 93.96, current 99.85)
+- **Days held: 4** (entered 6/9)
+- **Today: +4.30%** — strong bounce from 6/12 dip (-6.17%)
+- **Sector: 电子化学品Ⅱ #4 (+5.53%)** — **HOT!** Sector came roaring back after 6/12 shakeout
+- **Stop: 89.26**. Distance: +11.9% above stop — very safe
+- **MA distances**: dist_ma5 +4.5%, dist_ma10 +3.0%, dist_ma20 +4.9% — all healthy
+- **Volume**: 108,998 vs MAVOL30 41,611 — 2.62x, strong institutional flow
+- **Risk**: 1 risk factor (recent heavy selling on 6/12), but today's reversal suggests that was distribution being absorbed
+- **Verdict**: HOLD. Sector gravity is now a tailwind. Thesis intact (photoresist platform, 2025 NP +71%). If +10% reached (103.36), raise stop to breakeven. Currently the portfolio's best performer and aligned with the strongest sector.
+
+### ④ 路维光电 (688401) — HOLD (verge of +10% stop-raise)
+- **PnL: +9.71%** (entry 72.58, current 79.63)
+- **Days held: 4** (entered 6/9)
+- **Today: +4.80%** — continued strength
+- **Sector: 半导体材料** — benefiting from semiconductor rally (not in top5 but warm)
+- **Stop: 68.95**. Distance: +15.5% above stop — very safe
+- **MA distances**: dist_ma5 +6.2% — **at the 6% chase limit** (existing position, so no action needed, but do NOT add). dist_ma10 +3.6%, dist_ma20 +11.3%.
+- **Volume**: 54,793 vs MAVOL30 11,726 — 4.67x, massive institutional interest
+- **Risk**: 0 risk factors
+- **+10% threshold: ¥79.84** — current price ¥79.63 is just ¥0.21 away. If it ticks above 79.84 intraday tomorrow, **mechanically raise stop to breakeven ¥72.58** per Rule 5.
+- **Verdict**: HOLD. This is working exactly as designed. The stock is entering the "let winners run" phase. dist_ma5 at 6.2% is a caution flag for adding — do not add to this position.
+
+---
+
+## 4. New Entry Candidates
+
+### ✅ TOP PICK: 兴森科技 (002436) — BUY, 5% allocation
+
+**Why this is the #1 candidate:**
+
+1. **Sector: 元件 #2 today (+8.02%)** — the second-hottest sector in the market. Sector gravity is a massive tailwind. Multiple 快讯 confirm the sector is accelerating: "元件板块持续拉升，风华高科触及涨停...兴森科技盘中创新高"
+
+2. **RPS120: 92.61** — in the extended zone (92-95%), BUT qualifies under the sector exception: 元件 is top 10% (#2 rank). Rule 2 allows this.
+
+3. **MA distances — ALL pass Rule 2b:**
+   - dist_ma5: 4.9% ✅ (≤6%)
+   - dist_ma10: 3.1% ✅ (≤8%)
+   - dist_ma20: 9.9% ✅ (≤12%)
+
+4. **Fresh catalyst**: "韩国投资者净买入兴森科技275.76万美元" — foreign institutional flow. Stock hit 历史新高 at 36.41 on the same day. This is ongoing momentum, not stale news.
+
+5. **Risk context**: 5 risk factors (抛压, 估值98th percentile, 重资产, 高负债, 高换手率12%). V2 philosophy: "Industry leaders with 4 risks outperformed no-risk stocks by 5x." Do not over-filter. The sector alignment and price action override risk count.
+
+6. **Concerns**: PE 468, net profit still negative (but improving — loss narrowed 80% YoY). These are valuation concerns, which V2 explicitly deprioritizes for momentum plays. The trend is UP, the sector is #2, the catalyst is fresh.
+
+**Entry plan:**
+- Entry: 39.76 (current market price)
+- Stop: 37.77 (entry × 0.95)
+- Target: 52.0 (~30% upside, reasonable for sector leader)
+- Allocation: 5% (sizing_multiplier 0.75 applied to 7% base BUY)
+- Conviction: **moderate** — strong sector, good technicals, but 5 risk factors and extended RPS temper enthusiasm
+
+---
+
+### No second candidate today
+
+I considered these but rejected:
+
+- **华灿光电 (300323)**: Sector 光学光电子 not confirmed top 5 today, PE negative (loss-making), 3 risk factors. Even though 快讯 shows sector activity, can't confirm top 30% ranking.
+- **思瑞浦 (688536)**: dist_ma5 9.1% > 6% — Rule 2b hard block. Beautiful semiconductor stock otherwise.
+- **芯源微 (688037)**: dist_ma5 6.4% > 6% — Rule 2b hard block. Semiconductor设备 sector hot but can't override chase rule.
+- **申菱环境 (301018)**: Below MA10 (-6.6%) and MA20 (-16.2%), sector rank unclear. Stock recovering from a downtrend — not a momentum buy.
+
+Only deploying 1 new position keeps us disciplined. Cash at 89.97% → ~85% after this 5% allocation, well above 20% minimum.
+
+---
+
+## 5. Skip List
+
+| Code | Name | Reason |
+|------|------|--------|
+| 688536 | 思瑞浦 | dist_ma5 9.1% > 6% — Rule 2b non-negotiable. Semiconductor sector hot but stock overextended. |
+| 688037 | 芯源微 | dist_ma5 6.4% > 6% — Rule 2b violation. Semicon设备 sector strong, wait for pullback to MA5. |
+| 600301 | 华锡有色 | dist_ma5 10.0% > 6%, dist_ma10 8.8% > 8% — double Rule 2b violation. |
+| 688629 | 华丰科技 | dist_ma5 6.1% > 6% — marginal but Rule 2b says 6% is the line. Also 6/29 解禁 61% of shares. |
+| 002810 | 山东赫达 | dist_ma5 10.0% > 6% — Rule 2b. VCP SETUP is interesting but can't override MA discipline. |
+| 688480 | 赛恩斯 | dist_ma5 8.5% > 6% — Rule 2b. Sector 环保 not in hot list. |
+| 688200 | 华峰测控 | Below all MAs (dist_ma5 -16.9%). Stock in pullback/correction. Wait for stabilization. |
+| 688378 | 奥来德 | Below MA5/MA10. Stock correcting from highs. No sector tailwind confirmed. |
+| 300323 | 华灿光电 | PE negative (loss-making), sector光学光电子 not confirmed top 30%. 3 risk factors. |
+| 601126 | 四方股份 | RPS120 98.49 > 95% — needs sector top 10% or 0 risk or >50% earnings growth. Without enriched data, can't verify exceptions. |
+
+---
+
+## 6. Learnings
+
+1. **[h021 CONFIRMED] MA-distance rule is doing heavy lifting.** Today, 思瑞浦 (dist_ma5 9.1%), 芯源微 (6.4%), 华锡有色 (10.0%), 山东赫达 (10.0%), 赛恩斯 (8.5%) all failed Rule 2b. These are all strong RPS stocks in hot-adjacent sectors that would have been bought in V1. The rule is preventing chasing. One candidate (兴森科技) passed all three distance checks — that's the signal of quality.
+
+2. **[new] Sector 元件 is emerging as a leadership sector.** 兴森科技 hit 历史新高, 风华高科触及涨停, multiple stocks in the sector running. The +8.02% daily move with broad participation suggests institutional rotation into components/PCB names. This is worth tracking beyond today.
+
+3. **[new] 上海新阳's 6/12 → 6/15 reversal validates the 3-day cold-sector rule.** On 6/12, 电子化学品Ⅱ was #1 worst (-5.04%). If we had sold on day 1 of cold sector, we'd have missed today's +4.30% recovery. The 3-consecutive-day rule gives sectors room to breathe. Good design.
+
+4. **[h023 CONFIRMED] 路维光电 approaching +10% — mechanical stop-raise works.** At +9.71% in 4 days, the stock is proving the thesis. Raising stop to breakeven at +10% locks in a risk-free trade. This is exactly how V2 converts winners into low-risk holds.
+
+5. **[observation] Today's market favors PCB/元件 over pure semiconductor.** 兴森科技 (PCB) in #2 sector 元件 vs 芯源微/思瑞浦 (semicon设备/芯片) failing MA checks. The money is flowing to the component layer, not the equipment layer. Sector granularity matters.
+
+---
+
+## 7. Uncertainty Flags
+
+- **兴森科技 PE 468 and negative net profit**: V2 says ignore valuation. I'm following the rules. But a stock with negative earnings and 5 risk factors is inherently fragile. The sector tailwind needs to stay strong. If 元件 cools, this is the first position to cut.
+- **新宙邦 stop proximity at 4.68%**: One bad day puts it at -5%. The 宁德时代 catalyst is massive but the market hasn't priced it in yet. The stock's sector (电池) isn't getting the tech tailwind — it's neutral. I'm holding because the catalyst is too big to ignore, but I'm nervous.
+- **IV data missing**: No IV proxy for any stock. Can't apply IV throttle. This is a data gap, not a decision-blocker, but worth noting.
+- **路维光电 dist_ma5 at 6.2%**: Just above the 6% add limit. The stock is strong but I'm uncomfortable adding. Existing position is fine. The PM should resist any urge to "pyramid" here.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "玻璃玻纤", "5d_pct": 9.76, "trend": "accelerating"},
+      {"name": "元件", "5d_pct": 8.02, "trend": "accelerating"},
+      {"name": "非金属材料Ⅱ", "5d_pct": 6.33, "trend": "steady"},
+      {"name": "电子化学品Ⅱ", "5d_pct": 5.53, "trend": "recovering"},
+      {"name": "塑料", "5d_pct": 5.46, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "煤炭开采", "5d_pct": -4.71, "trend": "deteriorating"},
+      {"name": "油气开采Ⅱ", "5d_pct": -3.85, "trend": "deteriorating"},
+      {"name": "航天装备Ⅱ", "5d_pct": -2.87, "trend": "deteriorating"},
+      {"name": "非白酒", "5d_pct": -2.55, "trend": "weak"},
+      {"name": "白色家电", "5d_pct": -2.31, "trend": "weak"}
+    ],
+    "position_alignment": "2/4 positions in hot sectors (上海新阳 #4, 路维光电 semicon-adjacent), 2 neutral (恒铭达 消费电子, 新宙邦 电池)",
+    "regime": "Tech/hardware leadership, resources/commodities rotating out. 电子化学品Ⅱ recovered from 6/12 shakeout. Semicon broadly strong."
+  },
+  "position_decisions": [
+    {
+      "code": "002947",
+      "name": "恒铭达",
+      "action": "HOLD",
+      "reason": "PnL +5.90%, today +5.48% breakout from 3-day consolidation. 0 risk factors, all MA distances healthy. Sector (消费电子) neutral but not cold. Days held 4, far from 10-day time stop. If +10% (91.91), raise stop to breakeven 83.55.",
+      "sector_rank": "neutral (not in top/bottom 5)",
+      "new_stop": null,
+      "pnl_pct": 5.9,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "300037",
+      "name": "新宙邦",
+      "action": "HOLD",
+      "reason": "PnL -0.33%, day 1. Stop proximity 4.68% WATCH — not at -3% first-3-days trigger (72.41) or -5% hard stop (70.92). 宁德时代30万吨电解液3年协议 is extraordinary catalyst. MA distances all healthy. VCP SETUP near MA10. Hold but elevated scrutiny — one bad day triggers exit.",
+      "sector_rank": "neutral (电池 not in top/bottom 5)",
+      "new_stop": null,
+      "pnl_pct": -0.33,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "action": "HOLD",
+      "reason": "PnL +6.27%, sector #4 (电子化学品Ⅱ +5.53%) HOT. Today +4.30% strong recovery from 6/12 shakeout. Sector gravity now tailwind. All MA distances healthy. Volume 2.62x MAVOL30 confirms institutional flow. Photoresist platform thesis intact. If +10% (103.36), raise stop to breakeven 93.96.",
+      "sector_rank": "top 10% (#4 电子化学品Ⅱ +5.53%)",
+      "new_stop": null,
+      "pnl_pct": 6.27,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "688401",
+      "name": "路维光电",
+      "action": "HOLD",
+      "reason": "PnL +9.71%, verge of +10% stop-raise threshold (79.84). Today +4.80%. Sector (半导体材料) warm, benefiting from semicon rally. 0 risk factors. dist_ma5 at 6.2% is at chase limit for existing position — do NOT add. If price touches 79.84, mechanical stop-raise to breakeven 72.58 per Rule 5.",
+      "sector_rank": "warm (半导体材料, adjacent to hot semicon)",
+      "new_stop": null,
+      "pnl_pct": 9.71,
+      "days_held": 4,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "002436",
+      "name": "兴森科技",
+      "entry_price": 39.76,
+      "allocation_pct": 5,
+      "stop": 37.77,
+      "target": 52.0,
+      "thesis": "PCB/元件龙头，sector #2 (+8.02%) hot sector tailwind. 韩国投资者净买入275万美元外资流入。今日创新高，元件板块集体拉升（风华高科涨停）。RPS120=92.61 extended但sector top 10%例外覆盖。MA距离全部健康。",
+      "sector": "元件",
+      "sector_rank": "top 5% (#2 元件 +8.02%)",
+      "catalyst": "元件板块集体爆发+外资净买入+股价创新高",
+      "catalyst_freshness": "ongoing",
+      "rps120": 92.61,
+      "conviction": "moderate"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "688536",
+      "name": "思瑞浦",
+      "reason": "dist_ma5 9.1% > 6% — Rule 2b hard violation. Semiconductor sector hot but stock overextended. Wait for pullback to MA5/MA10.",
+      "rps120": 93.04
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "dist_ma5 6.4% > 6% — Rule 2b hard violation. 半导体设备板块持续走高 but stock too far from MA5. No chase.",
+      "rps120": 93.57
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "dist_ma5 10.0% > 6%, dist_ma10 8.8% > 8% — double Rule 2b violation. 小金属 sector, extended.",
+      "rps120": 93.53
+    },
+    {
+      "code": "688629",
+      "name": "华丰科技",
+      "reason": "dist_ma5 6.1% > 6% — Rule 2b violation. Also 6/29 解禁 61% of shares — massive overhang risk.",
+      "rps120": 89.71
+    },
+    {
+      "code": "002810",
+      "name": "山东赫达",
+      "reason": "dist_ma5 10.0% > 6% — Rule 2b violation. VCP SETUP interesting but can't override MA discipline.",
+      "rps120": 92.5
+    },
+    {
+      "code": "688480",
+      "name": "赛恩斯",
+      "reason": "dist_ma5 8.5% > 6% — Rule 2b. Sector 环保 not hot.",
+      "rps120": 91.58
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "Below all MAs (dist_ma5 -16.9%, dist_ma10 -22.7%, dist_ma20 -20.5%). Stock in significant correction. Wait for base formation.",
+      "rps120": 94.57
+    },
+    {
+      "code": "688378",
+      "name": "奥来德",
+      "reason": "Below MA5/MA10/MA20 — stock correcting. No sector tailwind confirmed for 光学光电子.",
+      "rps120": 94.26
+    },
+    {
+      "code": "300323",
+      "name": "华灿光电",
+      "reason": "PE negative (loss-making). Sector 光学光电子 not confirmed in top 30%. 3 risk factors including high turnover. Wait for sector confirmation.",
+      "rps120": 94.04
+    },
+    {
+      "code": "601126",
+      "name": "四方股份",
+      "reason": "RPS120 98.49 > 95% — extreme zone. No enriched data to verify sector top 10% or earnings exception. Skip without sector data.",
+      "rps120": 98.49
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Rule 2b (MA-distance anti-chase) filtered 5+ visually strong candidates today: 思瑞浦(dist_ma5 9.1%), 芯源微(6.4%), 华锡有色(10.0%), 山东赫达(10.0%), 赛恩斯(8.5%). Only 兴森科技 passed all three MA checks. The rule is preventing chasing at extended prices.",
+      "type": "rule",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "Stocks that spike far above short-term MAs have high mean-reversion risk. The 6%/8%/12% thresholds create a safety buffer that improves risk/reward on entry."
+    },
+    {
+      "text": "Sector 元件 is emerging as a leadership sector with institutional participation. 风华高科涨停, 兴森科技创新高, multiple names running. PCB/components theme is broadening from pure semiconductor plays. Monitor for persistence.",
+      "type": "signal",
+      "tags": ["sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h028",
+      "mechanism": "Sector rotations often cascade from equipment → components → materials. Today's 元件 strength may be the second wave of a semicon-led rally."
+    },
+    {
+      "text": "上海新阳's recovery from 6/12 (-6.17%) to 6/15 (+4.30%) validates the 3-consecutive-day cold-sector rule. Selling on day 1 of sector cold would have locked in losses. The rule gives sectors room to shake out weak hands before triggering exits.",
+      "type": "observation",
+      "tags": ["exit-rule", "sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "One-day sector dips in strong uptrends are often profit-taking, not regime changes. Requiring 3 consecutive cold days filters noise from signal."
+    },
+    {
+      "text": "路维光电 +9.71% in 4 days approaching +10% mechanical stop-raise. The Rule 5 trailing-stop system is working: winners get room to run while risk is systematically reduced.",
+      "type": "heuristic",
+      "tags": ["exit-rule", "position-sizing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "Raising stops after +10% converts winning trades into risk-free holds, allowing the portfolio to benefit from continued momentum without risking original capital."
+    }
+  ],
+  "market_summary": "Breadth 1.71:1 bullish, 121涨停/10跌停, broad-based tech rally. All 3 major indices green — 创业板指 +3.66% leading. Tech/hardware sectors dominate top 5 (元件+8.02%, 电子化学品+5.53%, 玻璃玻纤+9.76%). Resources crushed (煤炭-4.71%, 油气-3.85%). IV data unavailable — no throttle applied. Entry regime STRONG with 0.75 sizing cap to avoid chasing in extended tape. Deploying 1 new position (兴森科技, 5%) aligned with #2 sector 元件.",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}
+```

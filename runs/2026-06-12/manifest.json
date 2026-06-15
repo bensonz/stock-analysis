@@ -2,7 +2,7 @@
   "date": "2026-06-12",
   "status": "degraded",
   "exit_code": 0,
-  "total_duration_sec": 327.7,
+  "total_duration_sec": 296.1,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -10,15 +10,15 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 197.7
+          "latency_ms": 170.2
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 473.6
+          "latency_ms": 523.9
         },
         "pricedb": {
           "status": "ok",
-          "latest_date": "2026-06-11",
+          "latest_date": "2026-06-12",
           "stale": false
         }
       }
@@ -31,12 +31,12 @@
     },
     "collect": {
       "status": "ok",
-      "duration_sec": 12.2,
+      "duration_sec": 10.4,
       "errors": []
     },
     "llm_analysis": {
       "status": "ok",
-      "duration_sec": 314.9
+      "duration_sec": 285.1
     },
     "apply": {
       "status": "ok",
@@ -46,8 +46,7 @@
       "status": "warnings",
       "duration_sec": 0.0,
       "errors": [
-        "RULE check_stop_proximity: 300037 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
-        "RULE check_volume_below_mavol30: 002947 — Latest volume 45,250 is below MAVOL30 51,932 (87.1% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+        "RULE check_stop_proximity: 300037 — 🟠 WATCH — 4.5% above stop. Monitor closely. No immediate action but be ready."
       ]
     }
   },
@@ -68,8 +67,7 @@
       "passed": true,
       "hard_fails": [],
       "soft_warns": [
-        "rule check_stop_proximity: 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
-        "rule check_volume_below_mavol30: Latest volume 45,250 is below MAVOL30 51,932 (87.1% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+        "rule check_stop_proximity: 🟠 WATCH — 4.5% above stop. Monitor closely. No immediate action but be ready."
       ]
     }
   }

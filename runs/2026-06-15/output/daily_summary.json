@@ -1,0 +1,81 @@
+{
+  "date": "2026-06-15",
+  "actions": [
+    {
+      "code": "002947",
+      "name": "恒铭达",
+      "action": "HOLD",
+      "price": 88.48,
+      "pnl_pct": 5.9,
+      "note": "PnL +5.90%, today +5.48% breakout from 3-day consolidation. 0 risk factors, all MA distances healthy. Sector (消费电子) neutral but not cold. Days held 4, far from 10-day time stop. If +10% (91.91), raise stop to breakeven 83.55."
+    },
+    {
+      "code": "300037",
+      "name": "新宙邦",
+      "action": "HOLD",
+      "price": 74.4,
+      "pnl_pct": -0.33,
+      "note": "PnL -0.33%, day 1. Stop proximity 4.68% WATCH — not at -3% first-3-days trigger (72.41) or -5% hard stop (70.92). 宁德时代30万吨电解液3年协议 is extraordinary catalyst. MA distances all healthy. VCP SETUP near MA10. Hold but elevated scrutiny — one bad day triggers exit."
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "action": "HOLD",
+      "price": 99.85,
+      "pnl_pct": 6.27,
+      "note": "PnL +6.27%, sector #4 (电子化学品Ⅱ +5.53%) HOT. Today +4.30% strong recovery from 6/12 shakeout. Sector gravity now tailwind. All MA distances healthy. Volume 2.62x MAVOL30 confirms institutional flow. Photoresist platform thesis intact. If +10% (103.36), raise stop to breakeven 93.96."
+    },
+    {
+      "code": "688401",
+      "name": "路维光电",
+      "action": "HOLD",
+      "price": 79.63,
+      "pnl_pct": 9.71,
+      "note": "PnL +9.71%, verge of +10% stop-raise threshold (79.84). Today +4.80%. Sector (半导体材料) warm, benefiting from semicon rally. 0 risk factors. dist_ma5 at 6.2% is at chase limit for existing position — do NOT add. If price touches 79.84, mechanical stop-raise to breakeven 72.58 per Rule 5."
+    },
+    {
+      "code": "002436",
+      "name": "兴森科技",
+      "action": "OPEN",
+      "price": 39.76,
+      "note": "PCB/元件龙头，sector #2 (+8.02%) hot sector tailwind. 韩国投资者净买入275万美元外资流入。今日创新高，元件板块集体拉升（风华高科涨停）。RPS120=92.61 extended但sector top 10%例外覆盖。MA距离全部健康。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 970258.0,
+    "dayPnl": 3778.0,
+    "dayReturnPct": 0.39,
+    "totalReturnPct": -2.97,
+    "unrealizedPnl": 5195.0,
+    "realizedPnl": -34937.0,
+    "cashPct": 87.51
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 1.7074,
+    "up": 3384,
+    "down": 1982,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 121,
+    "limit_downs": 10,
+    "sizing_multiplier": 0.75,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 1.71:1, 3/3 major indices green, 121 limit-ups / 10 limit-downs. Allow entries, but cap fresh size at 75% to avoid chasing."
+  },
+  "newPositions": [
+    {
+      "code": "002436",
+      "name": "兴森科技"
+    }
+  ],
+  "marketContext": {
+    "summary": "Breadth 1.71:1 bullish, 121涨停/10跌停, broad-based tech rally. All 3 major indices green — 创业板指 +3.66% leading. Tech/hardware sectors dominate top 5 (元件+8.02%, 电子化学品+5.53%, 玻璃玻纤+9.76%). Resources crushed (煤炭-4.71%, 油气-3.85%). IV data unavailable — no throttle applied. Entry regime STRONG with 0.75 sizing cap to avoid chasing in extended tape. Deploying 1 new position (兴森科技, 5%) aligned with #2 sector 元件."
+  }
+}
