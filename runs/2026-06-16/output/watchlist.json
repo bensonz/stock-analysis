@@ -2,45 +2,54 @@
   "date": "2026-06-16",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4098.855,
-      "change_pct": 0.06
+      "value": 4091.892,
+      "change_pct": -0.11
     },
     "shenzhen_component": {
-      "value": 15712.64,
-      "change_pct": 1.17
+      "value": 15675.25,
+      "change_pct": 0.93
     },
     "chinext": {
-      "value": 4116.36,
-      "change_pct": 2.05
+      "value": 4102.94,
+      "change_pct": 1.72
     },
-    "sentiment": "cautiously_bullish",
+    "sentiment": "neutral",
     "hot_sectors": [
       "玻璃玻纤",
-      "小金属",
-      "光学光电子",
+      "元件",
+      "其他电源设备Ⅱ",
       "金属新材料",
-      "其他电源设备Ⅱ"
+      "小金属"
     ],
     "cold_sectors": [
-      "非白酒",
-      "焦炭Ⅱ",
       "航运港口",
-      "休闲食品",
-      "保险Ⅱ"
+      "工业金属",
+      "冶钢原料",
+      "保险Ⅱ",
+      "煤炭开采"
     ],
-    "notes": "昨日暴涨后今日消化整理。沪指+0.06%近乎平盘，深证+1.17%，创业板+2.05%延续强势但涨幅大幅收窄。广度2704:2701≈1:1显示个股层面多空均衡，多数股票在±2%内窄幅波动。涨停104家远超跌停5家说明右侧 tail 强劲但中层动能不足。玻璃玻纤(+9.28%)连续两日领涨——电子布涨价周期是当前最持续主线。小金属(+5.03%)和光学光电子(+4.17%)跟随。消费/金融/周期板块垫底。市场呈典型结构性分化：AI硬件供应链 vs 其他。IV数据缺失。新仓广度门槛未达标(1:1<1.5:1)，持仓观望。"
+    "notes": "Breadth 1.02:1 indecisive — 2729 up vs 2677 down, 141涨停/11跌停. 深证+0.93%, 创业板+1.72% green but 上证-0.11%. Tech/electronics materials leading (玻璃玻纤+8.93%, 元件+4.01%), resources rolling over (工业金属-2.67%). IV data unavailable. No new positions today — breadth gate failed (1.02 < 1.5). Focus on managing 5 existing positions: raise stop on 兴森科技 (+10.92%), monitor 路维光电/新宙邦 for +10% stop-raise triggers. 87% cash is appropriate for this tape."
   },
   "strategy_scan": {
     "total_stocks_scanned": 50,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-06-16T11:40:35.407127+08:00"
+    "scan_time": "2026-06-16T15:37:45.395051+08:00"
   },
   "recommendations": [
     {
-      "code": "688378.SH",
-      "name": "奥来德",
+      "code": "001359.SZ",
+      "name": "平安电工",
       "price": null,
-      "rps120": 93.9,
+      "rps120": 94.88,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688200.SH",
+      "name": "华峰测控",
+      "price": null,
+      "rps120": 94.32,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -64,6 +73,24 @@
       "reasoning": ""
     },
     {
+      "code": "688378.SH",
+      "name": "奥来德",
+      "price": null,
+      "rps120": 93.9,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "300870.SZ",
+      "name": "欧陆通",
+      "price": null,
+      "rps120": 89.81,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
       "code": "688629.SH",
       "name": "华丰科技",
       "price": null,
@@ -73,10 +100,19 @@
       "reasoning": ""
     },
     {
-      "code": "001359.SZ",
-      "name": "平安电工",
+      "code": "002645.SZ",
+      "name": "华宏科技",
       "price": null,
-      "rps120": 94.88,
+      "rps120": 94.18,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "002937.SZ",
+      "name": "兴瑞科技",
+      "price": null,
+      "rps120": 93.73,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -94,9 +130,9 @@
   "summary": {
     "total_scanned": 50,
     "buy_recommendations": 0,
-    "watch_recommendations": 6,
+    "watch_recommendations": 10,
     "avoid_recommendations": 0,
-    "market_call": "中性偏积极（广度不足，持币观望新仓，现有仓位全部盈利继续持有）",
-    "reasoning": "昨日暴涨后今日消化整理。沪指+0.06%近乎平盘，深证+1.17%，创业板+2.05%延续强势但涨幅大幅收窄。广度2704:2701≈1:1显示个股层面多空均衡，多数股票在±2%内窄幅波动。涨停104家远超跌停5家说明右侧 tail 强劲但中层动能不足。玻璃玻纤(+9.28%)连续两日领涨——电子布涨价周期是当前最持续主线。小金属(+5.03%)和光学光电子(+4.17%)跟随。消费/金融/周期板块垫底。市场呈典型结构性分化：AI硬件供应链 vs 其他。IV数据缺失。新仓广度门槛未达标(1:1<1.5:1)，持仓观望。"
+    "market_call": "中性",
+    "reasoning": "Breadth 1.02:1 indecisive — 2729 up vs 2677 down, 141涨停/11跌停. 深证+0.93%, 创业板+1.72% green but 上证-0.11%. Tech/electronics materials leading (玻璃玻纤+8.93%, 元件+4.01%), resources rolling over (工业金属-2.67%). IV data unavailable. No new positions today — breadth gate failed (1.02 < 1.5). Focus on managing 5 existing positions: raise stop on 兴森科技 (+10.92%), monitor 路维光电/新宙邦 for +10% stop-raise triggers. 87% cash is appropriate for this tape."
   }
 }

@@ -1443,3 +1443,11 @@
 - MA距离规则(Rule 2b)今日过滤掉至少6只表面有吸引力的候选(华锡有色、思瑞浦、平安电工、山东赫达、联瑞新材、恩捷股份)。这些股票都有不错的RPS和板块支撑，但全部因短期超买被挡。没有这条规则，FOMO会驱使我们追高至少2-3只。
 - 兴森科技1天内从MA健康变为全面超买（dist_ma5从入场时<6%到今天10.7%），说明动量股的入场窗口极其短暂。一旦错过最佳入场点，追高成本极高。这强化了'好股票也要好价格(好MA位置)'的纪律。
 - 玻璃玻纤/电子布涨价周期是当前市场最强且最持续的主线（连续2天领涨，+9.28%今日，+7.13%昨日）。AI算力→PCB/CCL需求→电子布涨价→玻纤企业盈利爆发。这条产业链逻辑清晰、数据可验证（电子布从4.3元/米涨至8元/米，涨幅86%），应作为核心配置方向。
+
+### 自动更新 (2026-06-16)
+
+- Breadth 1.02:1 is a hard no-new-positions signal even with 2/3 indices green. The market is split down the middle — indecision, not opportunity. Best action is to manage existing winners and wait for breadth confirmation above 1.5:1.
+- MA-distance violations on EXISTING positions (兴森科技 10.7/10.0/17.2%) are yellow flags for adding, not red flags for selling. Let the trail stop do the work — selling winners because MAs are stretched is the old V1 'value trap' instinct.
+- Multiple positions clustered near +10% stop-raise threshold (路维光电 +9.09%, 新宙邦 +7.70%) is confirmation the V2 mechanical discipline is working. No overthinking needed — just raise stops when triggered.
+- 华丰科技's 60.57% share unlock (2026-06-29, 13 days away) is an automatic disqualification. Binary dilution events dominate all other factors — fundamentals, sector, RPS become irrelevant when 61% of shares become freely tradable.
+- Today's sector rotation confirms persistent tech/electronics materials leadership. 玻璃玻纤 +8.93% and 元件 +4.01% are the new leaders, while 工业金属 -2.67% and 煤炭 -2.07% continue to roll over. This is consistent with the multi-week trend identified in h028.

@@ -4,74 +4,75 @@
     {
       "code": "002436",
       "name": "兴森科技",
-      "action": "HOLD",
-      "price": 43.18,
-      "pnl_pct": 8.61,
-      "note": "PnL +8.61%今日+7.71%强势突破。PCB/元件板块为核心主线，5.16倍量能机构大幅参与。MA距离极端(dist_ma5 10.7%/ma10 10.0%/ma20 17.2%)为黄牌警示但非卖出信号。距+10%触发(43.74)仅0.56元，触发后机械提升止损至39.76。"
+      "action": "RAISE_STOP",
+      "price": 44.1,
+      "pnl_pct": 10.92,
+      "note": "PnL +10.92% triggers Rule 5 mechanical stop-raise to breakeven. 涨停今日 with 8.4x volume. Sector #2 元件 (+4.01%). MA distances extreme (dist_ma5 10.7%) — yellow flag, do NOT add. Raise stop to entry 39.76 to lock in risk-free hold."
     },
     {
       "code": "002947",
       "name": "恒铭达",
       "action": "HOLD",
-      "price": 89.98,
-      "pnl_pct": 7.7,
-      "note": "PnL +7.70%稳步上行。MA距离全部健康(4.3/2.4/4.8%)。0风险，Q1净利+40%。5天持仓，距10天时间止损尚远。+10%触发位91.91，触发后提升止损至83.55。"
+      "price": 89.4,
+      "pnl_pct": 7.0,
+      "note": "PnL +7.00%. All MA distances healthy (4.3/2.4/4.8%). 0 risk factors. Q1 net profit +40%. Consolidating near support after breakout. Sector neutral but not cold. 7 days held, far from 10-day time stop."
     },
     {
       "code": "300037",
       "name": "新宙邦",
       "action": "HOLD",
-      "price": 81.53,
-      "pnl_pct": 9.22,
-      "note": "PnL +9.22%距+10%触发(82.12)仅0.59元。宁德时代30万吨电解液3年协议为投资组合最强催化剂。今日+5.36%量能4.38倍机构持续建仓。MA距离超标(dist_ma5 7.9%)但催化剂量级覆盖。触发82.12后机械提升止损至74.65。"
+      "price": 80.4,
+      "pnl_pct": 7.7,
+      "note": "PnL +7.70%, approaching +10% trigger at 82.12. 宁德时代30万吨电解液3年协议 is portfolio's strongest catalyst. MA distances extended (dist_ma5 7.9%) but catalyst outweighs. Volume 6.25x confirms institutional flow. Monitor for +10% stop-raise."
     },
     {
       "code": "300236",
       "name": "上海新阳",
       "action": "HOLD",
-      "price": 100.09,
-      "pnl_pct": 6.52,
-      "note": "PnL +6.52%今日-0.40%窄幅整理(98.68-101.67)。电子化学品板块受益半导体材料需求。光刻胶+蚀刻液+清洗液平台完整。距+10%触发(103.36)尚需+3.27%。量能2.38倍健康。"
+      "price": 100.02,
+      "pnl_pct": 6.45,
+      "note": "PnL +6.45%. Quiet consolidation day (-0.47%). Semicon materials theme working. 0 risk factors. 2025 NP +71%. 7 days held. No threat to stop."
     },
     {
       "code": "688401",
       "name": "路维光电",
       "action": "HOLD",
-      "price": 79.05,
-      "pnl_pct": 8.91,
-      "note": "PnL +8.91%距+10%触发(79.84)仅0.79元。MA距离全部健康(3.0/2.9/8.5%)。0风险。今日-1.22%但量能5.65倍显示机构高度活跃。掩膜版厦门20亿项目2026中试产。触发79.84后机械提升止损至72.58。"
+      "price": 79.18,
+      "pnl_pct": 9.09,
+      "note": "PnL +9.09%, +10% trigger at 79.84 (within 1%). MA distances healthy (3.0/2.9/8.5%). 0 risk factors. 掩膜版 thesis intact. Volume 8.94x confirms institutional build. Monitor for mechanical stop-raise to 72.58."
     }
   ],
   "portfolioStats": {
     "totalPositions": 5,
-    "totalEquity": 974166.0,
-    "dayPnl": 2469.0,
-    "dayReturnPct": 0.25,
-    "totalReturnPct": -2.58,
-    "unrealizedPnl": 9103.0,
+    "totalEquity": 974316.0,
+    "dayPnl": 2619.0,
+    "dayReturnPct": 0.27,
+    "totalReturnPct": -2.57,
+    "unrealizedPnl": 9253.0,
     "realizedPnl": -34937.0,
-    "cashPct": 87.16
+    "cashPct": 87.15
   },
   "entryRegime": {
     "allow_new_positions": true,
     "regime": "balanced",
-    "breadth_ratio": 1.0011,
-    "up": 2704,
-    "down": 2701,
+    "breadth_ratio": 1.0194,
+    "up": 2729,
+    "down": 2677,
     "positive_indices": [
-      "上证指数",
       "深证成指",
       "创业板指"
     ],
-    "negative_indices": [],
-    "limit_ups": 104,
-    "limit_downs": 5,
+    "negative_indices": [
+      "上证指数"
+    ],
+    "limit_ups": 141,
+    "limit_downs": 11,
     "sizing_multiplier": 1.0,
     "hard_block": false,
-    "reason": "Entry regime balanced: breadth 1.00:1, 3/3 major indices green, 104 limit-ups / 5 limit-downs. Allow normal sizing."
+    "reason": "Entry regime balanced: breadth 1.02:1, 2/3 major indices green, 141 limit-ups / 11 limit-downs. Allow normal sizing."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "昨日暴涨后今日消化整理。沪指+0.06%近乎平盘，深证+1.17%，创业板+2.05%延续强势但涨幅大幅收窄。广度2704:2701≈1:1显示个股层面多空均衡，多数股票在±2%内窄幅波动。涨停104家远超跌停5家说明右侧 tail 强劲但中层动能不足。玻璃玻纤(+9.28%)连续两日领涨——电子布涨价周期是当前最持续主线。小金属(+5.03%)和光学光电子(+4.17%)跟随。消费/金融/周期板块垫底。市场呈典型结构性分化：AI硬件供应链 vs 其他。IV数据缺失。新仓广度门槛未达标(1:1<1.5:1)，持仓观望。"
+    "summary": "Breadth 1.02:1 indecisive — 2729 up vs 2677 down, 141涨停/11跌停. 深证+0.93%, 创业板+1.72% green but 上证-0.11%. Tech/electronics materials leading (玻璃玻纤+8.93%, 元件+4.01%), resources rolling over (工业金属-2.67%). IV data unavailable. No new positions today — breadth gate failed (1.02 < 1.5). Focus on managing 5 existing positions: raise stop on 兴森科技 (+10.92%), monitor 路维光电/新宙邦 for +10% stop-raise triggers. 87% cash is appropriate for this tape."
   }
 }

@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1781580919.8090959,
+      "start": 1781595310.521494,
       "errors": [],
-      "end": 1781580931.1740491,
-      "duration_sec": 11.4
+      "end": 1781595323.4496682,
+      "duration_sec": 12.9
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 20061,
+      "response_size_bytes": 20750,
       "tokens": {
-        "input_tokens": 184746,
-        "output_tokens": 16231
+        "input_tokens": 51765,
+        "output_tokens": 9521
       },
-      "rounds": 3,
-      "tool_calls_count": 7,
-      "duration_sec": 304.2,
+      "rounds": 1,
+      "tool_calls_count": 0,
+      "duration_sec": 141.9,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -25,25 +25,26 @@
     },
     {
       "phase": "apply",
-      "start": 1781581235.383635,
+      "start": 1781595465.3701901,
       "actions": [
+        "RAISE_STOP 002436 → 39.76",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=101",
-        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=25",
-        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=97%, n=77",
-        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=21",
-        "Hypothesis: Created h064 (observation): 玻璃玻纤/电子布涨价周期是当前市场最强且最持续的主线（连续2天领涨，+9.28%今日，+7.13%昨日）。AI算力→PCB/CCL需求→电子布涨价→玻纤企业盈利...",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=102",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=25",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=26",
+        "Hypothesis: Created h065 (observation): 华丰科技's 60.57% share unlock (2026-06-29, 13 days away) is an automatic disqualifi...",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=26",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1781581235.617787,
-      "duration_sec": 0.2
+      "end": 1781595465.644059,
+      "duration_sec": 0.3
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 315.79999999999995
+    "totalDurationSec": 155.10000000000002
   }
 }

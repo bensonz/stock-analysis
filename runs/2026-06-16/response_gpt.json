@@ -3,74 +3,69 @@
     "hot_sectors": [
       {
         "name": "玻璃玻纤",
-        "5d_pct": 9.28,
-        "trend": "accelerating",
-        "driver": "电子布涨价周期，AI/PCB需求拉动，月度调价持续"
+        "5d_pct": 8.93,
+        "trend": "surging_one_day"
       },
       {
-        "name": "小金属",
-        "5d_pct": 5.03,
-        "trend": "steady",
-        "driver": "稀土/钨需求爆发(AI-MLCC)，供给约束"
-      },
-      {
-        "name": "光学光电子",
-        "5d_pct": 4.17,
-        "trend": "accelerating",
-        "driver": "LED/OLED复苏，电子化学品联动"
-      },
-      {
-        "name": "金属新材料",
-        "5d_pct": 4.02,
-        "trend": "steady",
-        "driver": "半导体/新能源上游材料需求"
+        "name": "元件",
+        "5d_pct": 4.01,
+        "trend": "steady"
       },
       {
         "name": "其他电源设备Ⅱ",
-        "5d_pct": 4.02,
-        "trend": "steady",
-        "driver": "AI数据中心电源主题(GPU电源模块)"
+        "5d_pct": 3.99,
+        "trend": "warming"
+      },
+      {
+        "name": "金属新材料",
+        "5d_pct": 3.96,
+        "trend": "warming"
+      },
+      {
+        "name": "小金属",
+        "5d_pct": 3.89,
+        "trend": "warming"
       }
     ],
     "cold_sectors": [
       {
-        "name": "非白酒",
-        "5d_pct": -2.33,
-        "trend": "deteriorating"
-      },
-      {
-        "name": "焦炭Ⅱ",
-        "5d_pct": -2.2,
-        "trend": "deteriorating"
-      },
-      {
         "name": "航运港口",
-        "5d_pct": -2.13,
+        "5d_pct": -2.76,
         "trend": "deteriorating"
       },
       {
-        "name": "休闲食品",
-        "5d_pct": -2.13,
-        "trend": "deteriorating"
+        "name": "工业金属",
+        "5d_pct": -2.67,
+        "trend": "rolling_over"
+      },
+      {
+        "name": "冶钢原料",
+        "5d_pct": -2.57,
+        "trend": "rolling_over"
       },
       {
         "name": "保险Ⅱ",
-        "5d_pct": -2.12,
-        "trend": "deteriorating"
+        "5d_pct": -2.21,
+        "trend": "weak"
+      },
+      {
+        "name": "煤炭开采",
+        "5d_pct": -2.07,
+        "trend": "weak"
       }
     ],
-    "position_alignment": "5/5 positions in warm-to-hot sectors. 兴森科技(元件) adjacent to #1 玻璃玻纤, 上海新阳(电子化学品) and 路维光电(半导体材料) strongly aligned with tech supply chain. No sector cold triggers.",
-    "regime": "结构性科技/AI牛市，传统行业滞涨。昨日普涨今日分化回归科技集中。电子布/PCB/半导体材料为主线，消费/金融/周期为边缘。"
+    "position_alignment": "2/5 in hot sectors (兴森科技/元件 #2, 上海新阳 warm semicon complex). 0/5 in cold sectors.",
+    "regime": "Tech/electronics materials leadership confirmed. Resources/cyclicals rotating out. Breadth split 1.02:1 — indecisive tape."
   },
   "position_decisions": [
     {
       "code": "002436",
       "name": "兴森科技",
-      "action": "HOLD",
-      "reason": "PnL +8.61%今日+7.71%强势突破。PCB/元件板块为核心主线，5.16倍量能机构大幅参与。MA距离极端(dist_ma5 10.7%/ma10 10.0%/ma20 17.2%)为黄牌警示但非卖出信号。距+10%触发(43.74)仅0.56元，触发后机械提升止损至39.76。",
-      "sector_rank": "top 20% (PCB/CCL主线)",
-      "new_stop": 37.77,
-      "pnl_pct": 8.61,
+      "action": "RAISE_STOP",
+      "reason": "PnL +10.92% triggers Rule 5 mechanical stop-raise to breakeven. 涨停今日 with 8.4x volume. Sector #2 元件 (+4.01%). MA distances extreme (dist_ma5 10.7%) — yellow flag, do NOT add. Raise stop to entry 39.76 to lock in risk-free hold.",
+      "sector_rank": "top 3% (元件 #2)",
+      "new_stop": 39.76,
+      "pnl_pct": 10.92,
       "days_held": 1,
       "exit_price": null
     },
@@ -78,144 +73,167 @@
       "code": "002947",
       "name": "恒铭达",
       "action": "HOLD",
-      "reason": "PnL +7.70%稳步上行。MA距离全部健康(4.3/2.4/4.8%)。0风险，Q1净利+40%。5天持仓，距10天时间止损尚远。+10%触发位91.91，触发后提升止损至83.55。",
-      "sector_rank": "top 50% (消费电子中性)",
-      "new_stop": 79.37,
-      "pnl_pct": 7.7,
-      "days_held": 5,
+      "reason": "PnL +7.00%. All MA distances healthy (4.3/2.4/4.8%). 0 risk factors. Q1 net profit +40%. Consolidating near support after breakout. Sector neutral but not cold. 7 days held, far from 10-day time stop.",
+      "sector_rank": "middle 40% (消费电子, neutral)",
+      "new_stop": null,
+      "pnl_pct": 7.0,
+      "days_held": 7,
       "exit_price": null
     },
     {
       "code": "300037",
       "name": "新宙邦",
       "action": "HOLD",
-      "reason": "PnL +9.22%距+10%触发(82.12)仅0.59元。宁德时代30万吨电解液3年协议为投资组合最强催化剂。今日+5.36%量能4.38倍机构持续建仓。MA距离超标(dist_ma5 7.9%)但催化剂量级覆盖。触发82.12后机械提升止损至74.65。",
-      "sector_rank": "top 40% (电池中性偏暖)",
-      "new_stop": 70.92,
-      "pnl_pct": 9.22,
-      "days_held": 3,
+      "reason": "PnL +7.70%, approaching +10% trigger at 82.12. 宁德时代30万吨电解液3年协议 is portfolio's strongest catalyst. MA distances extended (dist_ma5 7.9%) but catalyst outweighs. Volume 6.25x confirms institutional flow. Monitor for +10% stop-raise.",
+      "sector_rank": "middle 40% (电池, neutral)",
+      "new_stop": null,
+      "pnl_pct": 7.7,
+      "days_held": 4,
       "exit_price": null
     },
     {
       "code": "300236",
       "name": "上海新阳",
       "action": "HOLD",
-      "reason": "PnL +6.52%今日-0.40%窄幅整理(98.68-101.67)。电子化学品板块受益半导体材料需求。光刻胶+蚀刻液+清洗液平台完整。距+10%触发(103.36)尚需+3.27%。量能2.38倍健康。",
-      "sector_rank": "top 25% (电子化学品强)",
-      "new_stop": 89.26,
-      "pnl_pct": 6.52,
-      "days_held": 5,
+      "reason": "PnL +6.45%. Quiet consolidation day (-0.47%). Semicon materials theme working. 0 risk factors. 2025 NP +71%. 7 days held. No threat to stop.",
+      "sector_rank": "top 25% (电子化学品, warm semicon complex)",
+      "new_stop": null,
+      "pnl_pct": 6.45,
+      "days_held": 7,
       "exit_price": null
     },
     {
       "code": "688401",
       "name": "路维光电",
       "action": "HOLD",
-      "reason": "PnL +8.91%距+10%触发(79.84)仅0.79元。MA距离全部健康(3.0/2.9/8.5%)。0风险。今日-1.22%但量能5.65倍显示机构高度活跃。掩膜版厦门20亿项目2026中试产。触发79.84后机械提升止损至72.58。",
-      "sector_rank": "top 25% (半导体材料强)",
-      "new_stop": 68.95,
-      "pnl_pct": 8.91,
-      "days_held": 5,
+      "reason": "PnL +9.09%, +10% trigger at 79.84 (within 1%). MA distances healthy (3.0/2.9/8.5%). 0 risk factors. 掩膜版 thesis intact. Volume 8.94x confirms institutional build. Monitor for mechanical stop-raise to 72.58.",
+      "sector_rank": "top 25% (半导体材料, warm semicon complex)",
+      "new_stop": null,
+      "pnl_pct": 9.09,
+      "days_held": 7,
       "exit_price": null
     }
   ],
   "new_positions": [],
   "skip_list": [
     {
-      "code": "688378",
-      "name": "奥来德",
-      "reason": "【最佳候选，广度不足暂跳】sector #3 光学光电子(+4.17%)，RPS120 93.90%，MA全部健康(-0.4/2.4/2.3%)，归母净利+215%，合同负债+860%，今日创历史新高。广度比1.001:1<1.5:1买入门槛，等待广度改善后优先考虑。",
-      "rps120": 93.9
+      "code": "001359",
+      "name": "平安电工",
+      "reason": "Triple MA violation: dist_ma5=13.8%, dist_ma10=21.2%, dist_ma20=23.1%. Sector (塑料/膜材料) not in top 30%. PE 92, valuation 100th percentile.",
+      "rps120": 94.88
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "Stock BELOW all MAs (dist_ma5=-7.5%, dist_ma10=-16.7%, dist_ma20=-17.5%). This is breakdown, not momentum. Sector (半导体设备) warm but stock itself is falling — sector gravity not helping.",
+      "rps120": 94.32
     },
     {
       "code": "600301",
       "name": "华锡有色",
-      "reason": "Rule 2b硬阻：sector #2小金属(+5.03%)但MA全面超买(dist_ma5 11.8%>6%, dist_ma10 12.7%>8%, dist_ma20 16.5%>12%)。等回调至MA10(≈¥60.76)再评估。",
+      "reason": "dist_ma5=11.8% > 6% chase limit. 沪锡期货暴跌6% as fundamental headwind. Despite sector #5 (小金属 +3.89%), the commodity price risk is dominant.",
       "rps120": 94.3
     },
     {
       "code": "688536",
       "name": "思瑞浦",
-      "reason": "Rule 2b硬阻：dist_ma5 8.4%>6%, dist_ma10 8.8%>8%, dist_ma20 14.1%>12%。半导体板块虽热，三线全超不可追。",
+      "reason": "dist_ma5=8.4% > 6% chase limit. Strong fundamentals (rev +80%, NP +228%) but MA extension is non-negotiable per Rule 2b.",
       "rps120": 93.38
+    },
+    {
+      "code": "688378",
+      "name": "奥来德",
+      "reason": "Best candidate on paper: all MAs healthy, RPS in sweet spot, sector warm. BUT breadth gate closed (1.02:1 < 1.5:1). PE 100, revenue declining -16%. Watch for next opportunity when breadth improves.",
+      "rps120": 93.9
+    },
+    {
+      "code": "300870",
+      "name": "欧陆通",
+      "reason": "dist_ma5=22.9%, dist_ma10=28.8% — extreme chase. Sector #3 (其他电源设备 +3.99%) but MA extension disqualifying. Google GPU power supply catalyst is strong — revisit on pullback.",
+      "rps120": 89.81
     },
     {
       "code": "688629",
       "name": "华丰科技",
-      "reason": "2026-06-29解禁2.79亿股(占总股本61%)，巨量供给冲击在即。RPS 90.16%、MA健康但不敌解禁风险。解禁后重新评估。",
+      "reason": "60.57% share unlock on 2026-06-29 — massive dilution event. Structural risk. Automatic disqualification regardless of fundamentals.",
       "rps120": 90.16
     },
     {
-      "code": "001359",
-      "name": "平安电工",
-      "reason": "Rule 2b极端超买：dist_ma5 13.8%, dist_ma10 21.2%, dist_ma20 23.1%。PE 92，估值100分位。膜材料板块不在今日热点top 5。",
-      "rps120": 94.88
+      "code": "002645",
+      "name": "华宏科技",
+      "reason": "dist_ma20=11.5% near 12% hard limit. 3 risk factors including 100% controlling shareholder pledge. Sector (环保设备) not in top 30%.",
+      "rps120": 94.18
+    },
+    {
+      "code": "002937",
+      "name": "兴瑞科技",
+      "reason": "Triple MA violation: dist_ma5=9.6% > 6%, dist_ma10=16.4% > 8%, dist_ma20=18.9% > 12%. Sector (汽车零部件) not in top 30%.",
+      "rps120": 93.73
     },
     {
       "code": "002812",
       "name": "恩捷股份",
-      "reason": "净利亏损(-1.13亿)，VCP contraction_ratio 0.80差，dist_ma5 8.6%>6%。电池板块中性。无买入理由。",
+      "reason": "RPS20=64.55 — momentum fading hard. VCP SETUP but contraction ratio 0.80 too loose. NP -125% YoY. Sector (电池) neutral.",
       "rps120": 89.16
     }
   ],
   "new_learnings": [
     {
-      "text": "广度比(Up/Down ratio)是比指数涨跌更硬的新仓门槛。今日3/3指数全红+104涨停，但2704:2701≈1:1的广度比揭示市场缺乏广泛 tailwind。这种环境下开新仓等同于在硬币翻转市场中选股——胜率没有优势。1.5:1门槛规则过滤掉了这种假强势。",
+      "text": "Breadth 1.02:1 is a hard no-new-positions signal even with 2/3 indices green. The market is split down the middle — indecision, not opportunity. Best action is to manage existing winners and wait for breadth confirmation above 1.5:1.",
       "type": "rule",
       "tags": [
         "entry-filter",
-        "breadth"
+        "market-regime"
       ],
       "evidence_type": "supporting",
       "related_hypothesis": "h013",
-      "mechanism": "指数由权重股拉动时，广度比揭示真实参与度。1:1的广度意味着一半股票在下跌，新仓面临50%的随机逆风概率。1.5:1以上才说明资金广泛流入，选股有系统性优势。"
+      "mechanism": "When up/down is near parity, there's no broad directional consensus. New entries opened in such conditions face 50/50 odds of immediate headwinds. The V2 framework correctly gates on breadth > 1.5:1 — this is the regime filter doing real work."
     },
     {
-      "text": "V2'买强势'策略持续验证：5/5持仓全部盈利(+6.5%~+9.2%)，对比V1同期组合亏损。关键差异：(1)只买热门赛道内的标的，(2)买入时MA距离必须健康，(3)有真实催化剂而非估值便宜。兴森科技昨日入场今日+8.61%是最新案例。",
+      "text": "MA-distance violations on EXISTING positions (兴森科技 10.7/10.0/17.2%) are yellow flags for adding, not red flags for selling. Let the trail stop do the work — selling winners because MAs are stretched is the old V1 'value trap' instinct.",
       "type": "heuristic",
       "tags": [
-        "entry-filter",
-        "sector",
-        "momentum"
+        "position-sizing",
+        "exit-rule"
       ],
       "evidence_type": "supporting",
-      "related_hypothesis": "h028",
-      "mechanism": "动量效应在A股结构性牛市中自我强化：强势板块吸引更多资金→板块更强→个股更强。反向操作(买冷门板块'便宜'股)在结构性市场中是价值陷阱。"
+      "related_hypothesis": "h023",
+      "mechanism": "Stocks in strong uptrends routinely trade above short-term MAs. The correct response is: (a) do not add to extended positions, (b) raise stops mechanically to lock in gains per Rule 5, (c) let the trend continue until the stop is hit. Selling because 'it's gone too far' is the classic mistake of leaving money on the table."
     },
     {
-      "text": "MA距离规则(Rule 2b)今日过滤掉至少6只表面有吸引力的候选(华锡有色、思瑞浦、平安电工、山东赫达、联瑞新材、恩捷股份)。这些股票都有不错的RPS和板块支撑，但全部因短期超买被挡。没有这条规则，FOMO会驱使我们追高至少2-3只。",
+      "text": "Multiple positions clustered near +10% stop-raise threshold (路维光电 +9.09%, 新宙邦 +7.70%) is confirmation the V2 mechanical discipline is working. No overthinking needed — just raise stops when triggered.",
+      "type": "observation",
+      "tags": [
+        "exit-rule",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "The +10% → breakeven rule converts winning trades into risk-free holds without requiring a fresh market call. This is especially valuable in indecisive tapes like today, where the market direction is unclear but individual stocks are working."
+    },
+    {
+      "text": "华丰科技's 60.57% share unlock (2026-06-29, 13 days away) is an automatic disqualification. Binary dilution events dominate all other factors — fundamentals, sector, RPS become irrelevant when 61% of shares become freely tradable.",
       "type": "rule",
       "tags": [
         "entry-filter",
-        "timing"
+        "risk-management"
       ],
       "evidence_type": "supporting",
-      "related_hypothesis": "h021",
-      "mechanism": "短期急涨后均值回归概率急剧上升。dist_ma5>6%意味着5天内涨幅远超正常波动区间，买方力量已过度消耗。等待回归MA5/MA10支撑再入场可提升~3-5%的短期期望收益。"
+      "mechanism": "Massive unlocks create forced selling pressure as locked-up shareholders (often at near-zero cost basis) seek liquidity. Even if the stock doesn't immediately crash, the overhang suppresses price discovery and creates asymmetric downside risk. No exception should be made for 'good companies' — the structural risk is too large."
     },
     {
-      "text": "兴森科技1天内从MA健康变为全面超买（dist_ma5从入场时<6%到今天10.7%），说明动量股的入场窗口极其短暂。一旦错过最佳入场点，追高成本极高。这强化了'好股票也要好价格(好MA位置)'的纪律。",
-      "type": "observation",
-      "tags": [
-        "timing",
-        "entry-filter"
-      ],
-      "evidence_type": "supporting",
-      "related_hypothesis": "h027",
-      "mechanism": "强势股往往在1-2天内完成主要涨幅。入场窗口=板块确认热点+MA距离<6%+催化剂新鲜。窗口期通常只有1-3个交易日。错过窗口应等待下一次回调而非追高。"
-    },
-    {
-      "text": "玻璃玻纤/电子布涨价周期是当前市场最强且最持续的主线（连续2天领涨，+9.28%今日，+7.13%昨日）。AI算力→PCB/CCL需求→电子布涨价→玻纤企业盈利爆发。这条产业链逻辑清晰、数据可验证（电子布从4.3元/米涨至8元/米，涨幅86%），应作为核心配置方向。",
+      "text": "Today's sector rotation confirms persistent tech/electronics materials leadership. 玻璃玻纤 +8.93% and 元件 +4.01% are the new leaders, while 工业金属 -2.67% and 煤炭 -2.07% continue to roll over. This is consistent with the multi-week trend identified in h028.",
       "type": "signal",
       "tags": [
         "sector",
-        "catalyst"
+        "market-regime"
       ],
       "evidence_type": "supporting",
-      "mechanism": "供需缺口驱动的涨价周期通常持续6-12个月。电子布新增产能有限(6月无新窑点火)，需求端AI/5G/NEV三重拉动，价格上行趋势明确。"
+      "related_hypothesis": "h028",
+      "mechanism": "The rotation from cyclicals/resources into tech hardware supply chain is being driven by AI infrastructure buildout demand. Glass/fiber (玻璃玻纤) benefits from data center optical connectivity; components (元件) benefit from PCB/passive component demand. This is not a one-day spike — it's a multi-week regime."
     }
   ],
-  "market_summary": "昨日暴涨后今日消化整理。沪指+0.06%近乎平盘，深证+1.17%，创业板+2.05%延续强势但涨幅大幅收窄。广度2704:2701≈1:1显示个股层面多空均衡，多数股票在±2%内窄幅波动。涨停104家远超跌停5家说明右侧 tail 强劲但中层动能不足。玻璃玻纤(+9.28%)连续两日领涨——电子布涨价周期是当前最持续主线。小金属(+5.03%)和光学光电子(+4.17%)跟随。消费/金融/周期板块垫底。市场呈典型结构性分化：AI硬件供应链 vs 其他。IV数据缺失。新仓广度门槛未达标(1:1<1.5:1)，持仓观望。",
-  "market_sentiment": "cautiously_bullish",
-  "market_call": "中性偏积极（广度不足，持币观望新仓，现有仓位全部盈利继续持有）"
+  "market_summary": "Breadth 1.02:1 indecisive — 2729 up vs 2677 down, 141涨停/11跌停. 深证+0.93%, 创业板+1.72% green but 上证-0.11%. Tech/electronics materials leading (玻璃玻纤+8.93%, 元件+4.01%), resources rolling over (工业金属-2.67%). IV data unavailable. No new positions today — breadth gate failed (1.02 < 1.5). Focus on managing 5 existing positions: raise stop on 兴森科技 (+10.92%), monitor 路维光电/新宙邦 for +10% stop-raise triggers. 87% cash is appropriate for this tape.",
+  "market_sentiment": "neutral",
+  "market_call": "中性"
 }

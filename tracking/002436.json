@@ -7,7 +7,7 @@
   "entryPrice": 39.76,
   "targetPrice": 52.0,
   "stopLoss": 37.77,
-  "currentStop": 37.77,
+  "currentStop": 39.76,
   "allocation_pct": 3.75,
   "shares": 600,
   "allocatedCapital": 23856.0,
@@ -30,6 +30,13 @@
       "change_pct": 8.6,
       "action": "HOLD",
       "note": "PnL +8.61%今日+7.71%强势突破。PCB/元件板块为核心主线，5.16倍量能机构大幅参与。MA距离极端(dist_ma5 10.7%/ma10 10.0%/ma20 17.2%)为黄牌警示但非卖出信号。距+10%触发(43.74)仅0.56元，触发后机械提升止损至39.76。"
+    },
+    {
+      "date": "2026-06-16",
+      "price": 44.1,
+      "change_pct": 10.92,
+      "action": "RAISE_STOP",
+      "note": "PnL +10.92% triggers Rule 5 mechanical stop-raise to breakeven. 涨停今日 with 8.4x volume. Sector #2 元件 (+4.01%). MA distances extreme (dist_ma5 10.7%) — yellow flag, do NOT add. Raise stop to entry 39.76 to lock in risk-free hold."
     }
   ],
   "exitDate": null,
@@ -39,6 +46,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-06-15T11:41:24.228987+08:00",
-  "updatedAt": "2026-06-16T11:40:35.384286+08:00",
+  "updatedAt": "2026-06-16T15:37:45.381202+08:00",
   "trackerVersion": "2.1"
 }

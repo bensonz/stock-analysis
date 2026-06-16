@@ -739,11 +739,15 @@
           {
             "date": "2026-06-16",
             "detail": "广度比(Up/Down ratio)是比指数涨跌更硬的新仓门槛。今日3/3指数全红+104涨停，但2704:2701≈1:1的广度比揭示市场缺乏广泛 tailwind。这种环境下开新仓等同于在硬币翻转市场中选股——胜率没有优势。1.5:1门槛规则过滤掉了这种假强势。"
+          },
+          {
+            "date": "2026-06-16",
+            "detail": "Breadth 1.02:1 is a hard no-new-positions signal even with 2/3 indices green. The market is split down the middle — indecision, not opportunity. Best action is to manage existing winners and wait for breadth confirmation above 1.5:1."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 101,
+      "sampleSize": 102,
       "hitRate": 1.0,
       "confidence": 0.99,
       "tags": [],
@@ -1458,7 +1462,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-06-15",
+      "lastTested": "2026-06-16",
       "mechanism": "In a deteriorating market, protecting open profits is more valuable than maximizing upside variance.",
       "evidence": {
         "supporting": [
@@ -1557,13 +1561,21 @@
           {
             "date": "2026-06-15",
             "detail": "路维光电 +9.71% in 4 days approaching +10% mechanical stop-raise. The Rule 5 trailing-stop system is working: winners get room to run while risk is systematically reduced."
+          },
+          {
+            "date": "2026-06-16",
+            "detail": "MA-distance violations on EXISTING positions (兴森科技 10.7/10.0/17.2%) are yellow flags for adding, not red flags for selling. Let the trail stop do the work — selling winners because MAs are stretched is the old V1 'value trap' instinct."
+          },
+          {
+            "date": "2026-06-16",
+            "detail": "Multiple positions clustered near +10% stop-raise threshold (路维光电 +9.09%, 新宙邦 +7.70%) is confirmation the V2 mechanical discipline is working. No overthinking needed — just raise stops when triggered."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 24,
+      "sampleSize": 26,
       "hitRate": 1.0,
-      "confidence": 0.962,
+      "confidence": 0.964,
       "tags": [
         "exit-rule",
         "timing",
@@ -1897,13 +1909,17 @@
           {
             "date": "2026-06-16",
             "detail": "V2'买强势'策略持续验证：5/5持仓全部盈利(+6.5%~+9.2%)，对比V1同期组合亏损。关键差异：(1)只买热门赛道内的标的，(2)买入时MA距离必须健康，(3)有真实催化剂而非估值便宜。兴森科技昨日入场今日+8.61%是最新案例。"
+          },
+          {
+            "date": "2026-06-16",
+            "detail": "Today's sector rotation confirms persistent tech/electronics materials leadership. 玻璃玻纤 +8.93% and 元件 +4.01% are the new leaders, while 工业金属 -2.67% and 煤炭 -2.07% continue to roll over. This is consistent with the multi-week trend identified in h028."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 25,
+      "sampleSize": 26,
       "hitRate": 1.0,
-      "confidence": 0.963,
+      "confidence": 0.964,
       "tags": [
         "sector",
         "timing"
@@ -2917,6 +2933,34 @@
       "tags": [
         "sector",
         "catalyst"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h065",
+      "text": "华丰科技's 60.57% share unlock (2026-06-29, 13 days away) is an automatic disqualification. Binary dilution events dominate all other factors — fundamentals, sector, RPS become irrelevant when 61% of shares become freely tradable.",
+      "type": "rule",
+      "status": "observation",
+      "created": "2026-06-16",
+      "lastTested": "2026-06-16",
+      "mechanism": "Massive unlocks create forced selling pressure as locked-up shareholders (often at near-zero cost basis) seek liquidity. Even if the stock doesn't immediately crash, the overhang suppresses price discovery and creates asymmetric downside risk. No exception should be made for 'good companies' — the structural risk is too large.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-06-16",
+            "detail": "华丰科技's 60.57% share unlock (2026-06-29, 13 days away) is an automatic disqualification. Binary dilution events dominate all other factors — fundamentals, sector, RPS become irrelevant when 61% of shares become freely tradable."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "entry-filter",
+        "risk-management"
       ],
       "parentRule": null,
       "retiredDate": null,
