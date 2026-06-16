@@ -1,0 +1,82 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 184746,
+  "output_tokens": 16231,
+  "rounds": 3,
+  "duration_sec": 304.2,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月16日 热门板块 玻璃玻纤 小金属 大涨",
+        "max_results": 5
+      },
+      "result_length": 3197
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月16日 市场分析 元器件 半导体 电子化学品",
+        "max_results": 5
+      },
+      "result_length": 2905
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "兴森科技 002436 2026年6月 股价创新高 PCB",
+        "max_results": 5
+      },
+      "result_length": 2749
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "新宙邦 300037 宁德时代 电解液 协议 2026",
+        "max_results": 5
+      },
+      "result_length": 1961
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "玻璃玻纤 2026年6月 涨价 供需 行情",
+        "max_results": 5
+      },
+      "result_length": 2840
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 2026年6月16日 涨跌家数 市场情绪 分化"
+      },
+      "result_length": 3078
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "路维光电 688401 掩膜版 厦门项目 2026"
+      },
+      "result_length": 1749
+    }
+  ],
+  "fallback_used": false
+}
