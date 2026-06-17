@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 191419,
+  "output_tokens": 15083,
+  "rounds": 3,
+  "duration_sec": 259.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月17日 半导体 电子化学品 板块大涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3316
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "兴森科技 002436 2026年6月 最新消息",
+        "max_results": 5
+      },
+      "result_length": 2616
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "新宙邦 300037 宁德时代 电解液 最新进展 2026年6月",
+        "max_results": 5
+      },
+      "result_length": 2596
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "上海新阳 300236 光刻胶 半导体材料 2026年6月 最新",
+        "max_results": 5
+      },
+      "result_length": 3177
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "路维光电 688401 掩膜版 2026年6月 最新消息",
+        "max_results": 5
+      },
+      "result_length": 3018
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "恒铭达 002947 消费电子 最新消息 2026年6月"
+      },
+      "result_length": 3216
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 元件板块 PCB 2026年6月17日 行情"
+      },
+      "result_length": 3241
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "2026年6月17日 A股 下跌个股超4000 市场分化 原因"
+      },
+      "result_length": 2817
+    }
+  ],
+  "fallback_used": false
+}

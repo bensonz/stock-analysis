@@ -7,7 +7,7 @@
   "entryPrice": 93.96,
   "targetPrice": 120.0,
   "stopLoss": 89.26,
-  "currentStop": 89.26,
+  "currentStop": 93.96,
   "allocation_pct": 5.25,
   "shares": 400,
   "allocatedCapital": 37584.0,
@@ -58,6 +58,13 @@
       "change_pct": 6.45,
       "action": "HOLD",
       "note": "PnL +6.45%. Quiet consolidation day (-0.47%). Semicon materials theme working. 0 risk factors. 2025 NP +71%. 7 days held. No threat to stop."
+    },
+    {
+      "date": "2026-06-17",
+      "price": 106.56,
+      "change_pct": 13.41,
+      "action": "RAISE_STOP",
+      "note": "PnL +13.41% triggers Rule 5: raise stop to breakeven 93.96 from 89.26. Sector (电子化学品Ⅱ) is #2 hot (+6.71%), strongest sector alignment in portfolio. 0 risk factors, 2025 NP +71%, KrF批量销售+ArF浸没式订单. 56条12寸+23条8寸产线 baseline. Volume 5.07x MAVOL30."
     }
   ],
   "exitDate": null,
@@ -67,6 +74,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-06-09T15:39:26.780692+08:00",
-  "updatedAt": "2026-06-16T15:37:45.388816+08:00",
+  "updatedAt": "2026-06-17T15:39:49.410087+08:00",
   "trackerVersion": "2.1"
 }

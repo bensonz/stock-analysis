@@ -1,0 +1,77 @@
+{
+  "date": "2026-06-17",
+  "actions": [
+    {
+      "code": "002436",
+      "name": "兴森科技",
+      "action": "RAISE_STOP",
+      "price": 47.8,
+      "pnl_pct": 20.22,
+      "note": "PnL +20.22% triggers Rule 5: +20% threshold → raise stop to +10% (43.74) from current breakeven 39.76. Sector (元件/PCB) is today's leading theme with PCB demand driven by AI server buildout (摩根士丹利 Rubin BOM: PCB +233%). Stock nearly limit-up +8.39%. Trail from 43.74."
+    },
+    {
+      "code": "002947",
+      "name": "恒铭达",
+      "action": "HOLD",
+      "price": 90.95,
+      "pnl_pct": 8.86,
+      "note": "PnL +8.86%, 1% below +10% trigger (91.91). All MA distances healthy (4.3/2.4/4.8%). 0 risk factors. Q1 NP +40%. AI+新能源 dual-driver thesis intact with 东吴证券买入评级. Consolidating constructively near highs. Monitor for mechanical stop-raise to breakeven 83.55."
+    },
+    {
+      "code": "300037",
+      "name": "新宙邦",
+      "action": "RAISE_STOP",
+      "price": 86.02,
+      "pnl_pct": 15.23,
+      "note": "PnL +15.23% triggers Rule 5: +10% crossed today (86.02 > 82.12 trigger). Raise stop to breakeven 74.65 from 70.92. 宁德时代 30万吨电解液3年协议 (5→10→15万吨/年) is portfolio's strongest single catalyst locking revenue through 2028. Volume 5.99x MAVOL30 confirms institutional flow."
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "action": "RAISE_STOP",
+      "price": 106.56,
+      "pnl_pct": 13.41,
+      "note": "PnL +13.41% triggers Rule 5: raise stop to breakeven 93.96 from 89.26. Sector (电子化学品Ⅱ) is #2 hot (+6.71%), strongest sector alignment in portfolio. 0 risk factors, 2025 NP +71%, KrF批量销售+ArF浸没式订单. 56条12寸+23条8寸产线 baseline. Volume 5.07x MAVOL30."
+    },
+    {
+      "code": "688401",
+      "name": "路维光电",
+      "action": "RAISE_STOP",
+      "price": 83.05,
+      "pnl_pct": 14.43,
+      "note": "PnL +14.43% triggers Rule 5: raise stop to breakeven 72.58 from 68.95. Sector (半导体) #3 hot (+5.44%). G11掩膜版 global #2 (25.52% share). 厦门20亿项目设备搬入, 2026年中试产. 14nm半导体掩膜版 2026投建. 0 risk factors. MA distances healthy (3.0/2.9/8.5%). Volume 12.2x MAVOL30."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 981515.0,
+    "dayPnl": 7199.0,
+    "dayReturnPct": 0.73,
+    "totalReturnPct": -1.85,
+    "unrealizedPnl": 16452.0,
+    "realizedPnl": -34937.0,
+    "cashPct": 86.51
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.4614,
+    "up": 1723,
+    "down": 3734,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 98,
+    "limit_downs": 21,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.46:1, 3/3 major indices green, 98 limit-ups / 21 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Narrow tech-led rally: 科创50 surges +4.69%, all 3 major indices green, but breadth collapses to 0.46:1 (3734 down vs 1723 up, 4000+ stocks declining). Mega-cap semiconductor/electronic chemicals carry indices while cyclicals/resources/consumer deteriorate. 98 limit-ups concentrated in tech vs 21 limit-downs elsewhere. PCB/MLCC/CCL theme surging on AI server buildout (摩根士丹利 Rubin BOM: PCB +233% value increase). Entry gate BLOCKED — breadth below both 1.5:1 minimum and 1:1 panic thresholds. IV data unavailable. Portfolio day PnL +7,199 (+0.73%), all 5 positions profitable with 4 crossing +10% stop-raise triggers."
+  }
+}

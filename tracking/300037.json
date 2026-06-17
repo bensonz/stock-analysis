@@ -7,7 +7,7 @@
   "entryPrice": 74.65,
   "targetPrice": 95.0,
   "stopLoss": 70.92,
-  "currentStop": 70.92,
+  "currentStop": 74.65,
   "allocation_pct": 2.81,
   "shares": 200,
   "allocatedCapital": 14930.0,
@@ -44,6 +44,13 @@
       "change_pct": 7.7,
       "action": "HOLD",
       "note": "PnL +7.70%, approaching +10% trigger at 82.12. 宁德时代30万吨电解液3年协议 is portfolio's strongest catalyst. MA distances extended (dist_ma5 7.9%) but catalyst outweighs. Volume 6.25x confirms institutional flow. Monitor for +10% stop-raise."
+    },
+    {
+      "date": "2026-06-17",
+      "price": 86.02,
+      "change_pct": 15.23,
+      "action": "RAISE_STOP",
+      "note": "PnL +15.23% triggers Rule 5: +10% crossed today (86.02 > 82.12 trigger). Raise stop to breakeven 74.65 from 70.92. 宁德时代 30万吨电解液3年协议 (5→10→15万吨/年) is portfolio's strongest single catalyst locking revenue through 2028. Volume 5.99x MAVOL30 confirms institutional flow."
     }
   ],
   "exitDate": null,
@@ -53,6 +60,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-06-12T11:40:46.893408+08:00",
-  "updatedAt": "2026-06-16T15:37:45.386479+08:00",
+  "updatedAt": "2026-06-17T15:39:49.407548+08:00",
   "trackerVersion": "2.1"
 }

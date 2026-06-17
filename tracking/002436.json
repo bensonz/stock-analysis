@@ -7,7 +7,7 @@
   "entryPrice": 39.76,
   "targetPrice": 52.0,
   "stopLoss": 37.77,
-  "currentStop": 39.76,
+  "currentStop": 43.74,
   "allocation_pct": 3.75,
   "shares": 600,
   "allocatedCapital": 23856.0,
@@ -37,6 +37,13 @@
       "change_pct": 10.92,
       "action": "RAISE_STOP",
       "note": "PnL +10.92% triggers Rule 5 mechanical stop-raise to breakeven. 涨停今日 with 8.4x volume. Sector #2 元件 (+4.01%). MA distances extreme (dist_ma5 10.7%) — yellow flag, do NOT add. Raise stop to entry 39.76 to lock in risk-free hold."
+    },
+    {
+      "date": "2026-06-17",
+      "price": 47.8,
+      "change_pct": 20.22,
+      "action": "RAISE_STOP",
+      "note": "PnL +20.22% triggers Rule 5: +20% threshold → raise stop to +10% (43.74) from current breakeven 39.76. Sector (元件/PCB) is today's leading theme with PCB demand driven by AI server buildout (摩根士丹利 Rubin BOM: PCB +233%). Stock nearly limit-up +8.39%. Trail from 43.74."
     }
   ],
   "exitDate": null,
@@ -46,6 +53,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-06-15T11:41:24.228987+08:00",
-  "updatedAt": "2026-06-16T15:37:45.381202+08:00",
+  "updatedAt": "2026-06-17T15:39:49.403633+08:00",
   "trackerVersion": "2.1"
 }
