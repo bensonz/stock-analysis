@@ -1,8 +1,8 @@
 {
-  "date": "2026-06-17",
-  "status": "degraded",
-  "exit_code": 0,
-  "total_duration_sec": 269.7,
+  "date": "2026-06-18",
+  "status": "failed",
+  "exit_code": 1,
+  "total_duration_sec": 0.0,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -10,11 +10,11 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 170.8
+          "latency_ms": 192.4
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 425.9
+          "latency_ms": 455.1
         },
         "pricedb": {
           "status": "ok",
@@ -26,26 +26,17 @@
     "preflight_pricedb": {
       "status": "ok",
       "duration_sec": 0.0,
-      "latest_date": "2026-06-17",
-      "target": "2026-06-17"
+      "latest_date": "2026-06-18",
+      "target": "2026-06-18"
     },
     "collect": {
       "status": "ok",
-      "duration_sec": 9.7,
+      "duration_sec": 12.9,
       "errors": []
     },
     "llm_analysis": {
-      "status": "ok",
-      "duration_sec": 259.8
-    },
-    "apply": {
-      "status": "ok",
-      "duration_sec": 0.2
-    },
-    "validate": {
-      "status": "ok",
-      "duration_sec": 0.0,
-      "errors": []
+      "status": "failed",
+      "duration_sec": 172.8
     }
   },
   "gates": {
@@ -55,15 +46,10 @@
       "soft_warns": []
     },
     "phase2_to_phase3": {
-      "passed": true,
-      "hard_fails": [],
-      "soft_warns": [
-        "missing watchlist"
-      ]
-    },
-    "phase3_to_phase4": {
-      "passed": true,
-      "hard_fails": [],
+      "passed": false,
+      "hard_fails": [
+        "LLM response is empty or not a dict"
+      ],
       "soft_warns": []
     }
   }

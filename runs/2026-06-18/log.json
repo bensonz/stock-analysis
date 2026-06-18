@@ -1,0 +1,48 @@
+{
+  "date": "2026-06-18",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1781768110.044928,
+      "errors": [],
+      "end": 1781768121.8384168,
+      "duration_sec": 11.8
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 19936,
+      "tokens": {
+        "input_tokens": 203192,
+        "output_tokens": 15506
+      },
+      "rounds": 3,
+      "tool_calls_count": 8,
+      "duration_sec": 270.9,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1781768392.769805,
+      "actions": [
+        "RAISE_STOP 002436 → 47.71",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=104",
+        "Hypothesis: Created h066 (observation): Today's PnL dispersion confirms the bifurcation: 兴森科技 +8.91% (purest PCB/IC subs...",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=28",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1781768393.143682,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 283.09999999999997
+  }
+}

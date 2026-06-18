@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 203192,
+  "output_tokens": 15506,
+  "rounds": 3,
+  "duration_sec": 270.9,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 今日 热门板块 2026年6月18日 半导体 通信设备",
+        "max_results": 8
+      },
+      "result_length": 4712
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 市场 涨跌家数 分化 2026年6月18日",
+        "max_results": 5
+      },
+      "result_length": 2862
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "兴森科技 PCB 元件 2026年6月 涨停",
+        "max_results": 5
+      },
+      "result_length": 3234
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "新宙邦 宁德时代 电解液 合作协议 2026",
+        "max_results": 5
+      },
+      "result_length": 2277
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "上海新阳 光刻胶 电子化学品 2026年6月",
+        "max_results": 5
+      },
+      "result_length": 2959
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "路维光电 掩膜版 半导体材料 2026年6月 股价"
+      },
+      "result_length": 2913
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "恒铭达 消费电子 2026年6月 股价 走势"
+      },
+      "result_length": 2845
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 保险板块 大跌 贵金属 下跌 2026年6月18日"
+      },
+      "result_length": 3377
+    }
+  ],
+  "fallback_used": false
+}

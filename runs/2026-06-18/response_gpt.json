@@ -1,0 +1,186 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": 5.31,
+        "trend": "accelerating"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": 4.18,
+        "trend": "steady"
+      },
+      {
+        "name": "金属新材料",
+        "5d_pct": 4.13,
+        "trend": "accelerating"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": 3.8,
+        "trend": "persistent_leader"
+      },
+      {
+        "name": "小金属",
+        "5d_pct": 3.69,
+        "trend": "mixed"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "保险Ⅱ",
+        "5d_pct": -6.42,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "焦炭Ⅱ",
+        "5d_pct": -3.8,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "非白酒",
+        "5d_pct": -3.56,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "贵金属",
+        "5d_pct": -3.42,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "文娱用品",
+        "5d_pct": -3.23,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "1/5 in hot sectors (路维光电 in 半导体 #4). 兴森科技(元件)/恒铭达(消费电子)/新宙邦(电池)/上海新阳(电子化学品) in neutral tech-adjacent sectors. 0/5 in cold sectors.",
+    "regime": "Extreme bifurcation: 科创50 +3.84%, 半导体 persistent leader. Traditional sectors (保险 -6.42%, 贵金属 -3.42%) in liquidation. Breadth 0.60:1 masks stealth bear market outside tech. 3400+ stocks down."
+  },
+  "position_decisions": [
+    {
+      "code": "002436",
+      "name": "兴森科技",
+      "action": "RAISE_STOP",
+      "reason": "PnL +30.93% (+8.91% today). Rule 5: +20% trigger met 6/17 → stop raised to +10% (43.74). Now at +30%+, trail stop to +20% = 47.71 to lock in exceptional gains. PCB/IC substrate thesis riding 建滔第五次涨价 (FR-4/PP +15%) + 摩根士丹利 Rubin BOM PCB +233% theme. Volume 10.75x MAVOL30. Company 异动公告 disclosed FCBGA project still pilot stage — yellow flag but market ignoring.",
+      "sector_rank": "top 40% (元件, PCB concept is market-leading theme this week)",
+      "new_stop": 47.71,
+      "pnl_pct": 30.93,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "002947",
+      "name": "恒铭达",
+      "action": "HOLD",
+      "reason": "PnL +8.32%, -0.49% today. 9 days held, approaching 10-day but PnL far above <3% time-stop trigger. MA distances healthy (5.7/6.4/7.1%). 0 risk factors. Q1 NP +40%. 东吴证券买入 AI+新能源 dual-driver thesis. If +10% trigger at 91.91, mechanical stop-raise to breakeven 83.55.",
+      "sector_rank": "top 50% (消费电子, neutral but tech-adjacent)",
+      "new_stop": null,
+      "pnl_pct": 8.32,
+      "days_held": 9,
+      "exit_price": null
+    },
+    {
+      "code": "300037",
+      "name": "新宙邦",
+      "action": "HOLD",
+      "reason": "PnL +11.57%, -3.17% today (notable pullback). Well above breakeven stop 74.65 (10.37% buffer). 宁德时代30万吨电解液3年协议 (5→10→15万吨/年) is portfolio's strongest catalyst — revenue locked through 2028. MA distances elevated (dist_ma10=9.2%) — yellow flag for existing position, monitor closely. Volume 7.03x MAVOL30 confirms institutional interest despite decline. 6 days held, first-3-days window passed.",
+      "sector_rank": "top 50% (电池, neutral, benefiting from lithium/catalyst tailwind)",
+      "new_stop": null,
+      "pnl_pct": 11.57,
+      "days_held": 6,
+      "exit_price": null
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "action": "HOLD",
+      "reason": "PnL +12.60%, -0.71% today. 9 days held. 0 risk factors. 2025 NP +71%. KrF批量销售+ArF浸没式订单 thesis intact. 5.8亿光刻胶项目 (500吨/年 I-line/KrF/ArF) provides multi-year growth. 56条12寸+23条8寸产线 baseline demand. Sector (电子化学品) neutral but benefits from semiconductor material rotation.",
+      "sector_rank": "top 40% (电子化学品, beneficiary of semiconductor demand)",
+      "new_stop": null,
+      "pnl_pct": 12.6,
+      "days_held": 9,
+      "exit_price": null
+    },
+    {
+      "code": "688401",
+      "name": "路维光电",
+      "action": "HOLD",
+      "reason": "PnL +11.77%, -2.32% today. 9 days held. Only position in today's top-5 sector (半导体 #4, +3.80%) — sector gravity tailwind. MA distances healthy (3.4/6.2/9.3%) — pullback is constructive, bringing price closer to support. 0 risk factors. 掩膜版 thesis: G11全球#2 (25.52% share), 厦门20亿项目设备搬入, 14nm掩膜版2026投建. Volume 9.82x MAVOL30.",
+      "sector_rank": "top 5% (半导体 #4 today, strongest sector alignment in portfolio)",
+      "new_stop": null,
+      "pnl_pct": 11.77,
+      "days_held": 9,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "ENTRY REGIME HARD BLOCK. Even if regime allowed: dist_ma5=14.1% >6% (Rule 2b chase violation). Stock gapped above MA5 — extreme short-term overextension despite strong fundamentals (SEMI设备出货创纪录 catalyst, 半导体 sector #4, 0 risk factors).",
+      "rps120": 94.02
+    },
+    {
+      "code": "688536",
+      "name": "思瑞浦",
+      "reason": "ENTRY REGIME HARD BLOCK. Even if regime allowed: dist_ma10=8.9% >8% (Rule 2b). NP +577%, 12 analysts, 半导体 sector #4 — excellent fundamentals but overextended from MA10 support. Wait for pullback to MA10 (~306).",
+      "rps120": 93.56
+    },
+    {
+      "code": "600301",
+      "name": "华锡有色",
+      "reason": "ENTRY REGIME HARD BLOCK. Even if regime allowed: 沪锡主力合约暴跌6%+ today (per events data '沪锡主力合约日内暴跌逾6%、价格跌破40万元/吨') — direct negative catalyst for tin-related company. Sector (小金属 #5) is hot but company-specific headwind conflicts. MA distances healthy (2.2/5.2/9.8) but catalyst conflict kills entry.",
+      "rps120": 94.6
+    },
+    {
+      "code": "002192",
+      "name": "融捷股份",
+      "reason": "ENTRY REGIME HARD BLOCK. Even if regime allowed: sector (能源金属/锂) not in today's top 5 — fails Rule 1 sector alignment. RPS120=94.41 in extended zone without sector exception coverage. 碳酸锂涨价 catalyst positive but sector gravity missing.",
+      "rps120": 94.41
+    },
+    {
+      "code": "300323",
+      "name": "华灿光电",
+      "reason": "ENTRY REGIME HARD BLOCK. Even if regime allowed: sector (光学光电子) not in top 5 today. MA distances are exceptionally tight (2.7/0.6/1.2%) — textbook VCP-like consolidation near MAs. PE negative (loss-making, -94x). Would be interesting if sector flips hot but not today.",
+      "rps120": 93.55
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Breadth panic (0.60:1, f10=43) with tech indices soaring (科创50 +3.84%) creates a 'bear market in disguise.' 3400+ stocks falling while a few dozen semiconductor names rip. The entry regime hard_block correctly prevents opening positions into a tape where mean-reversion risk in crowded tech trades is elevated. Cash is the correct position when only one sector is working.",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Extreme sector bifurcation creates fragility: if tech profit-taking triggers, there is no bid from traditional sectors to absorb selling. The breadth data reveals the market's true internal condition that headline indices (driven by tech heavyweights) conceal."
+    },
+    {
+      "text": "Today's PnL dispersion confirms the bifurcation: 兴森科技 +8.91% (purest PCB/IC substrate play, riding #1 market theme directly) vs. 新宙邦/上海新阳/路维光电/恒铭达 all negative. Adjacent-sector diversification into tech-adjacent names (电子化学品, 消费电子, 电池) provided no protection — only the purest theme exposure worked. In future strong-regime entries, concentrate harder into leading themes rather than diversifying into adjacencies.",
+      "type": "observation",
+      "tags": [
+        "position-sizing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "In bifurcated markets, capital flows are binary: into the top 1-2 themes or out. Adjacent sectors get neither the full upside of leaders nor the safety of cash. Diversification is dilution."
+    },
+    {
+      "text": "兴森科技 +30.93% in 3 days demonstrates Rule 5 trailing stops: raising from breakeven (39.76) to +10% (43.74) at the +20% trigger, now trailing to +20% (47.71) at +30%. Exceptional winners should not be allowed to turn into breakeven trades. The trailing stop converts a windfall into a guaranteed +20% return while preserving further upside.",
+      "type": "rule",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "Mechanical trailing stops remove emotional decision-making from winner management. The +30% PnL is real; the trailing stop ensures at minimum +20% is banked regardless of what happens tomorrow."
+    }
+  ],
+  "market_summary": "Bifurcated tape: 科创50 +3.84% / 创业板 +2.05% vs 上证 -0.43%. Breadth 0.60:1 bearish (2023 up / 3395 down), 103涨停/43跌停. Tech (半导体/通信设备/非金属材料) leads driven by MLCC/CCL涨价 + SEMI设备创纪录 + NOR Flash合约价翻倍. Traditional sectors (保险 -6.42%/贵金属 -3.42%/焦炭 -3.80%) in liquidation. 3400+ stocks falling. Entry regime HARD BLOCK: no new positions. 5 existing positions all profitable (+8% to +31%), 4/5 in tech-adjacent sectors, 1/5 in top-5 hot sector. All stops at breakeven or better. IV data unavailable — normal sizing on holdings.",
+  "market_sentiment": "bifurcated",
+  "market_call": "谨慎"
+}
