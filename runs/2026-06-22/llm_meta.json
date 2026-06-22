@@ -2,60 +2,40 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 179837,
-  "output_tokens": 10612,
-  "rounds": 3,
-  "duration_sec": 158.8,
+  "input_tokens": 237095,
+  "output_tokens": 10783,
+  "rounds": 4,
+  "duration_sec": 170.9,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年6月22日 市场分析 板块热点",
+        "query": "A股 2026年6月22日 市场 板块 涨跌",
         "max_results": 5
       },
-      "result_length": 3019
+      "result_length": 3311
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "兴森科技 002436 2026年6月 最新消息",
+        "query": "A股 今日 热门板块 领涨 2026年6月",
         "max_results": 5
       },
-      "result_length": 2822
+      "result_length": 2881
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "恒铭达 002947 2026年6月 新闻",
+        "query": "半导体 设备 板块 2026年6月 涨价 需求",
         "max_results": 5
       },
-      "result_length": 1493
-    },
-    {
-      "pass": "P1",
-      "round": 1,
-      "tool": "web_search",
-      "input": {
-        "query": "新宙邦 300037 2026年6月 电解液 消息",
-        "max_results": 5
-      },
-      "result_length": 3039
-    },
-    {
-      "pass": "P1",
-      "round": 1,
-      "tool": "web_search",
-      "input": {
-        "query": "半导体板块 2026年6月22日 A股 走势",
-        "max_results": 5
-      },
-      "result_length": 3172
+      "result_length": 3272
     },
     {
       "pass": "P1",
@@ -63,9 +43,9 @@
       "tool": "web_search",
       "input": {
         "max_results": 5,
-        "query": "上海新阳 300236 2026年6月 光刻胶 最新消息"
+        "query": "兴森科技 002436 PCB 2026年6月 涨价"
       },
-      "result_length": 2385
+      "result_length": 2714
     },
     {
       "pass": "P1",
@@ -73,9 +53,9 @@
       "tool": "web_search",
       "input": {
         "max_results": 5,
-        "query": "路维光电 688401 掩膜版 2026年6月 最新进展"
+        "query": "新宙邦 300037 电解液 宁德时代 2026年6月"
       },
-      "result_length": 3214
+      "result_length": 1414
     },
     {
       "pass": "P1",
@@ -83,9 +63,29 @@
       "tool": "web_search",
       "input": {
         "max_results": 5,
-        "query": "A股 2026年6月22日 上涨家数 下跌家数 市场分析 普跌"
+        "query": "碳酸锂 涨价 2026年6月 锂矿 板块"
       },
-      "result_length": 3075
+      "result_length": 3353
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "上海新阳 300236 光刻胶 2026年6月 新闻"
+      },
+      "result_length": 2791
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "路维光电 688401 掩膜版 2026年6月 新闻"
+      },
+      "result_length": 3184
     }
   ],
   "fallback_used": false

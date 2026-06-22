@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1782099454.5277781,
+      "start": 1782099454.767648,
       "errors": [],
-      "end": 1782099468.829937,
-      "duration_sec": 14.3
+      "end": 1782099468.6486552,
+      "duration_sec": 13.9
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 18624,
+      "response_size_bytes": 17581,
       "tokens": {
-        "input_tokens": 179837,
-        "output_tokens": 10612
+        "input_tokens": 237095,
+        "output_tokens": 10783
       },
-      "rounds": 3,
+      "rounds": 4,
       "tool_calls_count": 8,
-      "duration_sec": 158.8,
+      "duration_sec": 170.9,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -25,15 +25,15 @@
     },
     {
       "phase": "apply",
-      "start": 1782099627.637144,
+      "start": 1782099639.63264,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
         "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=105",
+        "Hypothesis: Created h067 (observation): Entry regime hard block is structurally preventing capital destruction. On a day...",
         "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=29",
-        "Hypothesis: Created h067 (observation): 新宙邦's 宁德时代 30万吨/3年 contract catalyst is the strongest type in this market: reven...",
-        "Hypothesis: Created h068 (observation): f10=72 while indices green is a structural warning of market bifurcation. When 7...",
+        "Hypothesis: Created h068 (observation): 新宙邦 catalyst compounding: 宁德时代30万吨电解液3年协议 (+6.83% today, +19.2% total) vs. 恒铭达 c...",
         "Updated LEARNINGS.md (legacy)"
       ],
       "post_apply_rule_violations": {
@@ -102,7 +102,7 @@
           }
         ]
       },
-      "end": 1782099628.1730812,
+      "end": 1782099640.1015801,
       "duration_sec": 0.5
     }
   ],
@@ -111,6 +111,6 @@
   ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 173.60000000000002
+    "totalDurationSec": 185.3
   }
 }

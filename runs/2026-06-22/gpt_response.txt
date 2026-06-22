@@ -1,214 +1,135 @@
 # Research Memo — 2026-06-22
 
----
-
 ## 1. Market Regime
 
-**Verdict: PANIC — HARD BLOCK on new positions.**
+**Verdict: PANIC — No New Positions**
 
-| Metric | Value | Signal |
-|--------|-------|--------|
-| Breadth (Up/Down) | 1,234 / 4,245 = **0.29:1** | 🚨 Panic |
-| 跌停 (f10) | **72** | 🚨 >30 threshold |
-| 跌7-10% (f7_10) | 137 | 🚨 |
-| 涨停 (r10) | 88 | Neutral |
-| 上证指数 | +0.18% | Green |
-| 深证成指 | +0.29% | Green |
-| 创业板指 | +0.74% | Green |
-| 科创50 | +0.02% | Flat |
+Despite all 3 major indices closing green (上证+0.18%, 深证+0.29%, 创业板+0.74%), the underlying breadth is catastrophic:
 
-**This is a textbook "index illusion."** Three major indices are green, but 4,245 stocks are falling (77% of market). Big-cap index stocks are masking broad-based selling. The f10=72 (72 stocks at limit-down) and f4_7=937 together paint a picture of aggressive de-risking beneath the index surface.
+- **Up/Down ratio: 0.29:1** (1,234 up / 4,245 down). This is deep negative territory.
+- **Limit-downs (f10): 72** — well above the 30 threshold for panic designation.
+- **Limit-ups: 88** — decent but dwarfed by the downside.
+- **Distribution skew**: 4,209 stocks down (f0_2 through f10), only 1,234 up. The "up" side is concentrated in r0_2 (518 stocks barely positive), suggesting the green index reading is driven by a narrow set of large caps while the broad market bleeds.
+- **IV sentiment**: No data available (all IV proxies returned fallback). Cannot use as throttle.
 
-**Buy gate check (all must pass):**
-- ❌ Up/Down ≥ 1.5:1 → 0.29:1 **FAIL**
-- ✅ ≥2 of 3 major indices green → 3/3 green **PASS**  
-- ❌ Not panic (f10 < 30) → f10=72 **FAIL**
+**Breadth one-liner**: "Breadth 0.29:1 bearish, 88涨停/72跌停, extreme K-type divergence — indices green but 77% of stocks declining."
 
-**Entry regime**: `hard_block: true`, `sizing_multiplier: 0.0`. Default to `new_positions: []`.
+**Entry regime**: `hard_block: true`. Sizing multiplier 0.0. The system correctly blocks all new positions.
 
-**Macro context**: US-Iran negotiations in Switzerland — on-again-off-again — creating geopolitical whipsaw. Iran delegation reportedly walked out after Trump threats. This uncertainty plus the pre-existing tech rotation pain is driving today's selloff. The 6/19-6/21 weekend had the Iran霍尔木兹海峡 closure drama. AI hardware (semiconductor equipment) remains the structural theme but is digesting gains.
-
----
+**Key macro context** (from web research): K-type分化 (K-shaped divergence) confirmed — semiconductor/hardware/tech leadership continues, while traditional sectors (能源、公用事业、消费) and small/mid caps are being de-risked aggressively. 中际旭创 surpassed 贵州茅台 in market cap this week — emblematic of the structural shift.
 
 ## 2. Sector Analysis
 
-**Top 5 sectors**: Data missing in today's feed (`top5: []`). From enriched candidates and position context, I can infer relative strength:
+**Data gap**: `market.sectors.top5` is empty. Cannot provide ranked sector momentum. Inferring from bottom5 + web context + position sectors:
 
-- **半导体/半导体设备** — Still the structural leader. Multiple enriched candidates cite "自2026年04月以来持续走强" (芯源微, 华峰测控, 思瑞浦, 扬杰科技, 路维光电). Semiconductor equipment板块今日有集体拉升（盛美上海、微导纳米、中科飞测涨超10%），但随后回落。
-- **电子化学品** — 宏昌电子、光华科技涨停，奥来德创历史新高。板块整体分化。
-- **元件/PCB** — 兴森科技仍在涨，但PCB整体板块今日承压。
-- **光学光电子** — 华映科技、三安光电涨停，但板块内部分化严重。
-- **电池/锂电** — 碳酸锂涨价（+2250元/吨）带动锂矿股冲高，融捷股份等跟涨。新宙邦+6.83%。
+**Inferred hot sectors** (tech-adjacent, driving index green):
+- 半导体设备 (SEMI record equipment出货, AI CapEx cycle)
+- 元件/PCB (Rubin BOM +233%, 建滔5轮涨价)
+- 电子化学品 (光刻胶国产替代, 材料需求爆发)
+- 电池/电解液 (宁德时代30万吨锁单, 碳酸锂涨价)
 
-**Bottom 5 sectors (confirmed):**
+**Confirmed cold sectors (bottom 5)**:
 | Sector | 5d Change |
-|--------|-----------|
+|---|---|
 | 化妆品 | -4.24% |
 | 航天装备Ⅱ | -4.10% |
 | 自动化设备 | -4.00% |
 | 酒店餐饮 | -3.65% |
 | 电机Ⅱ | -3.62% |
 
-**Position sector alignment:**
-- 兴森科技 → 元件 — Not in bottom 5, neutral-to-constructive
-- 恒铭达 → 消费电子 — Not in bottom 5, but under pressure
-- 新宙邦 → 电池 — Today's relative strength winner
-- 上海新阳 → 电子化学品Ⅱ — Mixed sector, individual strength
-- 路维光电 → 半导体材料 — Structural tailwind, short-term pullback
+**Position sector alignment**: 5/5 positions are in tech-adjacent sectors (元件, 消费电子, 电池, 电子化学品Ⅱ, 半导体材料). All are on the "right side" of the K-divergence. This is the single strongest structural edge in the portfolio right now.
 
-**Regime**: Tech/AI leadership persisting but digesting big recent gains. Rotation out of cyclicals/consumer. Breadth divergence warns of narrow leadership — the rally is getting thinner.
-
----
+**Regime call**: The rally is dangerously narrow. Index-level calm masks broad liquidation. This is NOT a tape to add risk — it's a tape to manage existing winners and wait.
 
 ## 3. Position Review
 
-### 002436 兴森科技 — **HOLD** ✅
-| Field | Value |
-|-------|-------|
-| Entry | ¥39.76 (6/15) |
-| Current | ¥52.73 |
-| PnL | **+32.62%** |
-| Stop | ¥47.71 (+20% trailing) |
-| Days held | 7 |
-| Today | +1.29% |
-| Sector | 元件 |
+### 002436 兴森科技 — **HOLD** 🟢
+- Entry: ¥39.76 | Current: ¥52.73 | PnL: **+32.6%**
+- Stop: ¥47.71 (trailing +20%) | Buffer: 9.5%
+- Days held: 7 | Today: +1.29%
+- Sector: 元件 (PCB/IC substrate) — hot, benefiting from AI PCB theme
+- MA distances (from enriched): not in enriched set, but price action healthy
+- Volume: below MAVOL30 (no violation)
+- **Verdict**: Portfolio's strongest position. ABF substrate for NVIDIA GPU narrative intact. FCBGA pilot losses disclosed but market ignoring — the sector theme (Rubin BOM PCB +233%, 建滔涨价) is driving the trade. Stop at 47.71 protects +20% gain. No action needed.
 
-**Analysis**: The portfolio's biggest winner. FCBGA封装基板 still in pilot stage (公司异动公告 disclosed 2025 revenue only ¥26.9M, operating loss ¥644M), but the market is buying the AI/ABF载板国产替代 narrative. Stock surged 37.72% last week. Today +1.29% consolidating near highs. Volume remains strong. Stop at +20% (¥47.71) provides 9.5% buffer from current price. Thesis intact — ride the trend.
+### 002947 恒铭达 — **HOLD (⚠️ MONITOR CLOSELY)**
+- Entry: ¥83.55 | Current: ¥86.45 | PnL: **+3.47%**
+- Stop: ¥83.55 (breakeven) | Buffer: **only 3.35%**
+- Days held: 13 | Today: **-4.48%** 🔴
+- Sector: 消费电子
+- Enriched data: dist_ma5=-2.6%, dist_ma10=-1.0%, dist_ma20=-1.7% (all below MAs — stock is weakening)
+- RPS120: 93.71 (from strategy pool)
+- Rule check: Stop proximity violation triggered — 3.35% above stop. 
+- **Verdict**: The -4.48% single-day drop on elevated volume (2.12x MAVOL30) is a momentum rupture. MA distances show the stock is now below all three key moving averages — a technical breakdown. The stop at 83.55 is the hard line. If breached intraday tomorrow, SELL immediately. Do NOT rationalize this — price is truth. Time stop (10 days, <3% gain) is NOT triggered because PnL = +3.47% > 3%. But 13 days with only +3.47% is marginal. **Raise alert level to maximum.** Any further weakness = automatic exit.
 
-**Decision**: HOLD. Stop at ¥47.71.
+### 300037 新宙邦 — **HOLD** 🟢
+- Entry: ¥74.65 | Current: ¥88.98 | PnL: **+19.20%**
+- Stop: ¥74.65 (breakeven) | Buffer: 16.1%
+- Days held: 10 | Today: **+6.83%** 🟢
+- Sector: 电池 (electrolyte)
+- Enriched data: dist_ma5=10.6%, dist_ma10=15.8%, dist_ma20=22.2% — all elevated (MA distances failing Rule 2b for new entry, but this is an existing position)
+- Catalyst: 宁德时代30万吨电解液3年协议 (5→10→15万吨/年 through 2028) — portfolio's single strongest catalyst
+- **+20% trigger watch**: Price needs ¥89.58 to trigger. Today's high was ¥89.47 — missed by ¥0.11. If +20% triggers tomorrow, raise stop to +10% = ¥82.12.
+- **Verdict**: Catalyst delivering. Today's +6.83% confirms institutional flow into the 电解液 theme. MA distances elevated but catalyst quality justifies continued hold. Monitor for +20% trigger. The 10-day time stop check: PnL = +19.2% ≫ 3% → passed easily.
 
----
+### 300236 上海新阳 — **HOLD** 🟢
+- Entry: ¥93.96 | Current: ¥106.36 | PnL: **+13.20%**
+- Stop: ¥93.96 (breakeven) | Buffer: 11.7%
+- Days held: 13 | Today: +0.53%
+- Sector: 电子化学品Ⅱ (photoresist, etchants, cleaning solutions)
+- Enriched data: Not in enriched set (HTTP 503 error for enriched fetch). Using strategy pool: dist_ma5 N/A.
+- Catalyst: KrF批量销售 + ArF浸没式订单, 5.8亿光刻胶项目, 56条12寸+23条8寸产线 demand baseline
+- **Verdict**: Steady hold. 0 risk factors. Photoresist国产替代 thesis multi-year. Consolidated constructively today. No action needed.
 
-### 002947 恒铭达 — **HOLD (TIGHT MONITOR)** ⚠️
-| Field | Value |
-|-------|-------|
-| Entry | ¥83.55 (6/9) |
-| Current | ¥86.45 |
-| PnL | **+3.47%** |
-| Stop | ¥83.55 (breakeven) |
-| Days held | **13** |
-| Today | **-4.48%** 🚨 |
-| Sector | 消费电子 |
-
-**Analysis**: **Red flag today.** After peaking at ~¥93.33 on 6/19 (+11.7%), the stock has reversed sharply. Today -4.48% on heavy volume. Price now below all three moving averages:
-- dist_ma5_pct: -2.6% (below MA5)
-- dist_ma10_pct: -1.0% (below MA10)  
-- dist_ma20_pct: -1.7% (below MA20)
-
-Stop proximity: only 3.35% above breakeven stop at ¥83.55. The `check_stop_proximity` rule flagged this. On the positive side: 0 risk factors, Q1 NP +40%, 东吴证券买入 rating, GaN investment (远山新材) narrative. But price is truth — a -4.48% single-day drop after reaching highs is distribution behavior.
-
-**Decision**: HOLD. The breakeven stop at ¥83.55 is the line in the sand. If it hits, SELL automatically. No reason to preempt the stop — the stock is still above it. But flag this as the highest-risk position.
-
----
-
-### 300037 新宙邦 — **HOLD** ✅ → **MONITOR FOR +20% TRIGGER**
-| Field | Value |
-|-------|-------|
-| Entry | ¥74.65 (6/12) |
-| Current | ¥88.98 |
-| PnL | **+19.20%** |
-| Stop | ¥74.65 (breakeven) |
-| Days held | 10 |
-| Today | **+6.83%** 🔥 |
-| Sector | 电池 |
-
-**Analysis**: **Today's best performer.** +6.83% on strong volume (4.69x MAVOL30). The 宁德时代 30万吨电解液3年协议 continues to be the portfolio's single strongest catalyst. The stock is now just ¥0.60 away from the +20% trigger (¥89.58). MA distances are elevated (dist_ma5=10.6%, dist_ma10=15.8%, dist_ma20=22.2%) — this is extended but the catalyst quality justifies tolerance for an existing position.
-
-If it crosses ¥89.58: mechanical stop-raise to +10% = ¥82.12.
-
-**Decision**: HOLD. If +20% trigger hit today or tomorrow, RAISE_STOP to ¥82.12.
-
----
-
-### 300236 上海新阳 — **HOLD** ✅
-| Field | Value |
-|-------|-------|
-| Entry | ¥93.96 (6/9) |
-| Current | ¥106.36 |
-| PnL | **+13.20%** |
-| Stop | ¥93.96 (breakeven) |
-| Days held | 13 |
-| Today | +0.53% |
-| Sector | 电子化学品Ⅱ |
-
-**Analysis**: Stable consolidation. KrF光刻胶已通过客户认证并取得首笔订单 — a milestone catalyst. 2025 net profit +71%. 5.8亿光刻胶项目 (500吨/年 I-line/KrF/ArF) provides multi-year growth visibility. 56条12寸+23条8寸产线 baseline demand. Stop at breakeven provides 11.7% buffer. No concerns.
-
-**Decision**: HOLD.
-
----
-
-### 688401 路维光电 — **HOLD** ✅
-| Field | Value |
-|-------|-------|
-| Entry | ¥72.58 (6/9) |
-| Current | ¥79.63 |
-| PnL | **+9.71%** |
-| Stop | ¥72.58 (breakeven) |
-| Days held | 13 |
-| Today | -1.84% |
-| Sector | 半导体材料 |
-
-**Analysis**: Moderate pullback, constructive. Price pulled back from ¥83.05 high to ¥79.63, now with healthy MA distances:
-- dist_ma5_pct: 0.1% (hugging MA5)
-- dist_ma10_pct: 4.4%
-- dist_ma20_pct: 6.2%
-
-厦门20亿项目设备搬入完成（4/23），2026年中试产。14nm掩膜版2026投建。G11掩膜版全球#2（25.52% share）。0 risk factors. 半导体材料板块仍是结构性主线。Stop at ¥72.58 provides 8.9% buffer.
-
-**Decision**: HOLD.
-
----
+### 688401 路维光电 — **HOLD** 🟢
+- Entry: ¥72.58 | Current: ¥79.63 | PnL: **+9.71%**
+- Stop: ¥72.58 (breakeven) | Buffer: 8.9%
+- Days held: 13 | Today: -1.84%
+- Sector: 半导体材料 (photomask)
+- Enriched data: dist_ma5=0.1%, dist_ma10=4.4%, dist_ma20=6.2% — healthy, all within limits
+- RPS120: 89.19 (from strategy pool)
+- Catalyst: G11掩膜版 global #2 (25.52% share), 厦门20亿项目设备搬入→2026年中试产, 14nm掩膜版2026投建
+- **Verdict**: Approaching +10% trigger (¥79.84). Stop already at breakeven so no mechanical change when +10% hits. -1.84% today is healthy consolidation from ¥83.05 peak. Thesis fully intact. Best sector alignment in portfolio (半导体).
 
 ## 4. New Entry Candidates
 
-**SKIPPED — Market regime HARD BLOCK.** Breadth 0.29:1, f10=72. No new positions regardless of individual stock quality.
+**NONE. Entry regime hard-blocked.** Breadth 0.29:1 with 72 limit-downs. Even the most compelling individual setups cannot justify new risk in this tape.
 
-For reference, the candidates that would have been under consideration in a normal regime:
-
-| Code | Name | Why Interesting | Why Blocked Today (besides regime) |
-|------|------|-----------------|-------------------------------------|
-| 002192 | 融捷股份 | 锂矿, RPS120=94.28, MA all healthy (-1.5/3.6/-0.7%), 碳酸锂+2250/吨 | Regime + sector ranking unclear |
-| 688536 | 思瑞浦 | 模拟芯片, RPS120=93.71, Q1 NP +577%, 12家机构覆盖 | dist_ma10=8.3% > 8% chase rule |
-| 002645 | 华宏科技 | 稀土+环保, RPS120=94.5, NP +595% | dist_ma20=12.6% > 12% chase rule |
-| 688037 | 芯源微 | 半导体设备, RPS120=94.05, 板块龙头 | dist_ma10=9.8% > 8% |
-| 002947 | 恒铭达 | Already owned | — |
-
----
+Stocks I would consider if regime were healthy (for PM's awareness):
+- **688629 华丰科技**: RPS120=90.53, MAs healthy (dist_ma5=-1.9%), but 6/29解禁60%股本 — massive overhang. Would need to clear that event first.
+- **688536 思瑞浦**: RPS120=93.71, semiconductor, dist_ma10=8.3% (>8% chase rule flagged), profit +577%, but overbought short-term.
+- **002645 华宏科技**: RPS120=94.5, rare earth catalyst (氧化镝涨价 + AI-MLCC demand), but dist_ma20=12.6% (>12% extreme extension → SKIP even if regime were open).
 
 ## 5. Skip List
 
-All 63 strategy pool stocks are skipped today due to panic tape (breadth 0.29:1). Specific callouts:
-
 | Code | Name | Reason |
-|------|------|--------|
-| 002192 | 融捷股份 | Panic tape block. Would be top candidate otherwise: healthy MAs, 碳酸锂涨价 catalyst |
-| 688536 | 思瑞浦 | Panic tape block. Also dist_ma10=8.3% exceeds chase limit |
-| 688037 | 芯源微 | Panic tape block. Also dist_ma10=9.8% chase violation |
-| 002645 | 华宏科技 | Panic tape block. Also dist_ma20=12.6% chase violation |
-| 002290 | 禾盛新材 | Panic tape block. Sector (家电零部件) uncertain ranking |
-| 688401 | 路维光电 | Already owned |
+|---|---|---|
+| 688536 | 思瑞浦 | dist_ma10=8.3% > 8% chase limit; regime blocked |
+| 688629 | 华丰科技 | 6/29解禁60%股本 (~2.79亿股); regime blocked |
+| 002645 | 华宏科技 | dist_ma20=12.6% extreme extension; regime blocked |
+| 688002 | 睿创微纳 | dist_ma5=6.1% borderline, dist_ma10=13% > 8%; regime blocked |
+| 002192 | 融捷股份 | MAs healthy, lithium catalyst, but sector ranking unclear; regime blocked |
+| 688037 | 芯源微 | dist_ma10=9.8% > 8%; PE 813x; regime blocked |
+| 300870 | 欧陆通 | dist_ma5=8.7% > 6%, dist_ma10=20% extreme; regime blocked |
+| 300373 | 扬杰科技 | dist_ma20=30.1% extreme; regime blocked |
+| All 55 others | — | Entry regime panic: breadth 0.29:1, 72 limit-downs, hard block |
 
----
+## 6. Learnings
 
-## 6. Key Learnings
+1. **K-type divergence signal**: When all 3 major indices are green but breadth is 0.29:1 with 72 limit-downs, the index reading is being carried by a handful of large-cap tech names. The "market" is actually in a stealth bear phase. Indices lie — breadth tells the truth. **(type: observation, tags: [market-regime, breadth])**
 
-1. **Index illusion is real and dangerous**: Today 上证+0.18%/深证+0.29%/创业板+0.74% all green, but breadth is 0.29:1 with 72 stocks at limit-down. This is exactly the type of tape where momentum frameworks must override index-level signals. The `entry_regime` hard block saved us from opening positions into a rout.
+2. **Entry regime block is saving capital**: Today's tape would have tempted V1 into "small buys" of stocks like 思瑞浦 or 华丰科技. The hard block prevents buying into a liquidation cascade. This is exactly the discipline V1 lacked. **(type: rule, tags: [entry-filter], evidence_type: supporting)**
 
-2. **The +10% → breakeven stop rule doing its job**: 恒铭达 was at +11.7% on 6/19, stop raised to breakeven. Today -4.48%, now just 3.35% above that stop. Without the mechanical stop-raise, we'd still be at the original -5% entry stop (¥79.37), a much riskier position. The +10% rule converts winners into low-risk holds. [Evidence supporting h023]
+3. **恒铭达 stop proximity validates mechanical discipline**: -4.48% single-day drop with MA convergence breakdown (price now below MA5/MA10/MA20) shows why the stop-proximity rule matters. 3.35% buffer means one more bad day triggers exit — no "thesis still valid" exceptions. **(type: signal, tags: [exit-rule, stop-proximity], related_hypothesis: h023)**
 
-3. **新宙邦's 宁德时代 catalyst continues to compound**: The 30万吨/3年 deal has driven the stock from ¥74.65 to ¥88.98 (+19.2%) in 10 days. This reinforces that **contract-based revenue visibility** (not earnings surprise, not concept) is the strongest catalyst type in this market. The stock is approaching +20%, which would trigger a second mechanical stop-raise.
-
-4. **Weak-tape days expose overextended holdings**: 新宙邦's MA distances (dist_ma10=15.8%, dist_ma20=22.2%) are well above chase limits. On a broad selloff day like today, these extended stocks are first to get sold. That 新宙邦 rallied +6.83% anyway speaks to the exceptional catalyst quality — but the extension risk is real and should inform exit timing, not entry.
-
-5. **f10=72 in a "green index" day is a structural warning**: When 72 stocks hit limit-down but indices are green, it means the market is bifurcating into "haves" (AI/semiconductor large caps) and "have-nots" (everything else). This narrow leadership is unsustainable long-term. Either the laggards catch up (broadening) or the leaders get dragged down (mean reversion). Position accordingly — tight stops, no new risk.
-
----
+4. **新宙邦 catalyst compounding**: The 宁德时代 30万吨电解液 protocol continues to be the portfolio's single best catalyst. +19.2% in 10 days. This validates the thesis that large, multi-year supply agreements with tier-1 customers create persistent institutional flow. **(type: observation, tags: [catalyst, position-sizing])**
 
 ## 7. Uncertainty Flags
 
-- **Sector ranking data missing**: `top5` is empty in today's feed. I'm relying on contextual clues from enriched candidates and news to infer sector strength. The `sector_rank` fields in position decisions are approximate.
-- **恒铭达 trajectory**: The -4.48% drop could be a one-day shakeout or the start of a deeper correction. The breakeven stop at ¥83.55 will decide. I don't have conviction either way — which is exactly why the mechanical stop is the right tool.
-- **IV data unavailable**: All `iv_proxy` fields show "无数据/fallback:overall_market". Can't assess IV conditions for sizing decisions. This is a recurring data issue.
+- **Sector top5 missing**: Cannot perform proper sector momentum ranking. Relying on inference from bottom5 and web context. This is a significant blind spot — request that `run_daily.py` be fixed to populate `market.sectors.top5`.
+- **恒铭达's -4.48% cause unclear**: No specific negative news found. Could be sector rotation out of consumer electronics, or profit-taking after +11.7% run. The stop at 83.55 handles this regardless of cause.
+- **新宙邦 +20% trigger**: Missed by ¥0.11 today. If triggered tomorrow, mechanical raise to +10% stop. But the MA distances (dist_ma10=15.8%) make me nervous about extension risk even for an existing position.
+- **IV data absent**: Cannot use IV as a sizing throttle. Fallback to breadth-only regime assessment.
 
 ---
 
@@ -218,11 +139,9 @@ All 63 strategy pool stocks are skipped today due to panic tape (breadth 0.29:1)
 {
   "sector_analysis": {
     "hot_sectors": [
-      {"name": "半导体/半导体设备", "5d_pct": null, "trend": "persisting, digesting gains"},
-      {"name": "电池/锂电", "5d_pct": null, "trend": "improving, 碳酸锂涨价催化"},
-      {"name": "电子化学品", "5d_pct": null, "trend": "mixed, selective strength"},
-      {"name": "光学光电子", "5d_pct": null, "trend": "mixed, intra-sector divergence"},
-      {"name": "元件/PCB", "5d_pct": null, "trend": "neutral, AI theme support"}
+      {"name": "半导体设备", "5d_pct": null, "trend": "persistent", "note": "Inferred from web context — SEMI record出货, AI CapEx; top5 data missing"},
+      {"name": "元件/PCB", "5d_pct": null, "trend": "persistent", "note": "Inferred — Rubin BOM +233%, 建滔5轮涨价"},
+      {"name": "电子化学品", "5d_pct": null, "trend": "steady", "note": "Inferred — 光刻胶国产替代, 材料需求"}
     ],
     "cold_sectors": [
       {"name": "化妆品", "5d_pct": -4.24, "trend": "deteriorating"},
@@ -231,18 +150,18 @@ All 63 strategy pool stocks are skipped today due to panic tape (breadth 0.29:1)
       {"name": "酒店餐饮", "5d_pct": -3.65, "trend": "deteriorating"},
       {"name": "电机Ⅱ", "5d_pct": -3.62, "trend": "deteriorating"}
     ],
-    "position_alignment": "5/5 positions in neutral-to-constructive sectors, none in bottom 5",
-    "regime": "Tech/AI leadership persisting but narrowing. Broad market selling (breadth 0.29:1) masked by index-cap strength. Rotation out of consumer/cyclical/defense."
+    "position_alignment": "5/5 positions in tech-adjacent hot sectors (元件/消费电子/电池/电子化学品/半导体材料)",
+    "regime": "K-type divergence — narrow tech leadership masking broad liquidation. 77% of stocks declining. Indices green but breadth deep red."
   },
   "position_decisions": [
     {
       "code": "002436",
       "name": "兴森科技",
       "action": "HOLD",
-      "reason": "PnL +32.62%, well above +20% trailing stop at ¥47.71. AI/ABF载板国产替代 theme intact despite FCBGA still pilot stage. 7 days held, far from time stop. Sector (元件) not in bottom 5. Volume strong.",
-      "sector_rank": "top 40% (estimated)",
+      "reason": "PnL +32.6%, strongest position. ABF substrate/NVIDIA Rubin thesis intact. Stop at trailing +20% (47.71) protects exceptional gains. Sector (元件) aligned with AI PCB theme.",
+      "sector_rank": "top 10% (inferred)",
       "new_stop": 47.71,
-      "pnl_pct": 32.62,
+      "pnl_pct": 32.63,
       "days_held": 7,
       "exit_price": null
     },
@@ -250,8 +169,8 @@ All 63 strategy pool stocks are skipped today due to panic tape (breadth 0.29:1)
       "code": "002947",
       "name": "恒铭达",
       "action": "HOLD",
-      "reason": "PnL +3.47%, stop at breakeven ¥83.55. WARNING: -4.48% today, only 3.35% above stop. Price below all three MAs (dist_ma5=-2.6%, dist_ma10=-1.0%, dist_ma20=-1.7%). 0 risk factors and Q1 NP +40% support thesis, but price action deteriorating. If stop at ¥83.55 is hit → SELL immediately.",
-      "sector_rank": "top 40% (estimated, 消费电子 not in bottom 5)",
+      "reason": "PnL +3.47% but CRITICAL: -4.48% today with price now below MA5/MA10/MA20. Stop proximity violation — only 3.35% above breakeven stop 83.55. If stop breached tomorrow, SELL immediately. 13 days held, marginal performance. Volume elevated (2.12x MAVOL30) on decline = distribution signal.",
+      "sector_rank": "mid-tier",
       "new_stop": 83.55,
       "pnl_pct": 3.47,
       "days_held": 13,
@@ -261,10 +180,10 @@ All 63 strategy pool stocks are skipped today due to panic tape (breadth 0.29:1)
       "code": "300037",
       "name": "新宙邦",
       "action": "HOLD",
-      "reason": "PnL +19.20%, today +6.83% on strong volume. 宁德时代30万吨电解液3年协议 remains portfolio's strongest catalyst. Approaching +20% trigger (¥89.58): if crossed, mechanical stop-raise to +10% = ¥82.12. MA distances elevated (dist_ma10=15.8%) but catalyst quality justifies tolerance for existing position.",
-      "sector_rank": "top 30% (estimated, 电池 benefiting from 碳酸锂涨价)",
+      "reason": "PnL +19.20%, +6.83% today on lithium/electrolyte catalyst strength. 宁德时代30万吨电解液3年协议 (5→10→15万吨) is portfolio's strongest single catalyst. +20% trigger at 89.58 — missed by ¥0.11 today. If triggered, raise stop to +10% (82.12). 10 days held, time stop passed easily.",
+      "sector_rank": "top 20% (inferred)",
       "new_stop": 74.65,
-      "pnl_pct": 19.20,
+      "pnl_pct": 19.2,
       "days_held": 10,
       "exit_price": null
     },
@@ -272,10 +191,10 @@ All 63 strategy pool stocks are skipped today due to panic tape (breadth 0.29:1)
       "code": "300236",
       "name": "上海新阳",
       "action": "HOLD",
-      "reason": "PnL +13.20%, stable +0.53% today. KrF光刻胶通过客户认证+首笔订单 catalyst. 2025 NP +71%. 5.8亿光刻胶项目 multi-year visibility. Stop at breakeven ¥93.96 provides 11.7% buffer. 13 days held, thesis intact.",
-      "sector_rank": "top 40% (estimated, 电子化学品Ⅱ mixed but supported by semiconductor material rotation)",
+      "reason": "PnL +13.20%. 0 risk factors. Photoresist国产替代 thesis (KrF批量+ArF浸没式+5.8亿光刻胶项目) multi-year. Consolidated +0.53% today. Stop at breakeven 93.96 provides 11.7% buffer. 13 days held, time stop passed.",
+      "sector_rank": "top 30% (inferred)",
       "new_stop": 93.96,
-      "pnl_pct": 13.20,
+      "pnl_pct": 13.2,
       "days_held": 13,
       "exit_price": null
     },
@@ -283,8 +202,8 @@ All 63 strategy pool stocks are skipped today due to panic tape (breadth 0.29:1)
       "code": "688401",
       "name": "路维光电",
       "action": "HOLD",
-      "reason": "PnL +9.71%, -1.84% today — constructive pullback. MA distances healthy (0.1/4.4/6.2%), price hugging MA5. 厦门20亿项目设备搬入完成, 14nm掩膜版2026投建. 0 risk factors. Stop at ¥72.58 provides 8.9% buffer.",
-      "sector_rank": "top 30% (estimated, 半导体材料 structural tailwind)",
+      "reason": "PnL +9.71%. Best sector alignment (半导体材料). MA distances healthy (dist_ma5=0.1%, dist_ma10=4.4%, dist_ma20=6.2%). G11掩膜版 global #2, 厦门20亿项目设备搬入, 14nm掩膜版2026投建. Approaching +10% trigger (79.84) — stop already at breakeven. -1.84% today is constructive consolidation.",
+      "sector_rank": "top 10% (inferred)",
       "new_stop": 72.58,
       "pnl_pct": 9.71,
       "days_held": 13,
@@ -294,72 +213,69 @@ All 63 strategy pool stocks are skipped today due to panic tape (breadth 0.29:1)
   "new_positions": [],
   "skip_list": [
     {
-      "code": "002192",
-      "name": "融捷股份",
-      "reason": "PANIC TAPE HARD BLOCK (breadth 0.29:1, f10=72). Would be top candidate otherwise: RPS120=94.28, all MA distances healthy (dist_ma5=-1.5%, dist_ma10=3.6%, dist_ma20=-0.7%), 碳酸锂+2250元/吨 catalyst, Q1 NP +1288%.",
-      "rps120": 94.28
-    },
-    {
       "code": "688536",
       "name": "思瑞浦",
-      "reason": "PANIC TAPE HARD BLOCK. Additionally dist_ma10=8.3% exceeds chase rule (max 8%). RPS120=93.71, Q1 NP +577%, 12家机构覆盖, strong semiconductor sector alignment.",
+      "reason": "Entry regime panic (breadth 0.29:1, 72跌停). Even if regime open: dist_ma10=8.3% > 8% chase limit. Semiconductor, profit +577%, 12 analysts bullish — would be strong candidate on pullback.",
       "rps120": 93.71
     },
     {
-      "code": "688037",
-      "name": "芯源微",
-      "reason": "PANIC TAPE HARD BLOCK. Additionally dist_ma10=9.8% exceeds chase rule. Semiconductor设备龙头, RPS120=94.05. Strong sector but overextended.",
-      "rps120": 94.05
+      "code": "688629",
+      "name": "华丰科技",
+      "reason": "Entry regime panic. Also: 6/29解禁2.79亿股 (60% of float) — massive overhang. MAs healthy (dist_ma5=-1.9%) but event risk dominates. Revisit after 6/29.",
+      "rps120": 90.53
     },
     {
       "code": "002645",
       "name": "华宏科技",
-      "reason": "PANIC TAPE HARD BLOCK. Additionally dist_ma20=12.6% exceeds chase rule (max 12%). 稀土+环保设备, NP +595%, hitting all-time highs — too extended.",
+      "reason": "Entry regime panic. Also: dist_ma20=12.6% extreme extension (>12% Rule 2b). Rare earth/AI-MLCC catalyst strong but must wait for pullback to MA20.",
       "rps120": 94.5
     },
     {
-      "code": "688200",
-      "name": "华峰测控",
-      "reason": "PANIC TAPE HARD BLOCK. Additionally dist_ma5=19.2% massively exceeds chase rule (max 6%). RPS120=93.69, semiconductor设备但严重超买。",
-      "rps120": 93.69
+      "code": "002192",
+      "name": "融捷股份",
+      "reason": "Entry regime panic. MAs all healthy, lithium price catalyst (碳酸锂上涨2250元/吨), but sector (能源金属) ranking unclear without top5 data. Would evaluate if regime opens.",
+      "rps120": 94.28
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "Entry regime panic. Also: dist_ma5=6.1% borderline, dist_ma10=13.0% > 8% chase limit. Score 9.3/9.5 strongest fundamentals but overextended.",
+      "rps120": 90.2
     }
   ],
   "new_learnings": [
     {
-      "text": "Index illusion: 上证+0.18%/深证+0.29%/创业板+0.74% all green, but breadth was 0.29:1 with 72 stocks at limit-down. This is a dangerous divergence where big-cap index stocks mask broad-based selling. The entry_regime hard_block (triggered by breadth <1.5:1 and f10>30) correctly prevented new positions into a rout.",
-      "type": "signal",
-      "tags": ["entry-filter", "market-regime"],
+      "text": "K-type divergence signal: all 3 major indices green but breadth 0.29:1 with 72 limit-downs = indices carried by narrow large-cap tech names while broad market liquidates. Indices lie; breadth tells the truth. This is a 'no new positions' tape regardless of how green the indices look.",
+      "type": "observation",
+      "tags": ["market-regime", "breadth", "entry-filter"],
       "evidence_type": "supporting",
       "related_hypothesis": "h013",
-      "mechanism": "When indices are green but breadth is severely negative, institutional money is consolidating into a few large-cap names while de-risking the rest. Opening new positions in this environment means buying into distribution in 77% of the market."
+      "mechanism": "Large-cap index weights (宁德时代, 中际旭创, etc.) can hold indices positive even when 77% of stocks decline. The K-type structure means traditional breadth indicators must override index signals for entry decisions."
     },
     {
-      "text": "The +10% mechanical stop-raise rule protected 恒铭达: stock peaked at +11.7% on 6/19, stop raised to breakeven ¥83.55. Today -4.48%, price now ¥86.45 — only 3.35% from stop. Without the mechanical raise, original stop at ¥79.37 would leave much more room for loss. The rule converts winners into low-risk holds without requiring a market call.",
+      "text": "Entry regime hard block is structurally preventing capital destruction. On a day where 4,245 stocks decline, the correct momentum decision is to deploy zero new capital regardless of individual candidate quality. V1's tendency to force 'small buys' in weak tapes was a root cause of underperformance.",
       "type": "rule",
-      "tags": ["exit-rule", "position-sizing"],
+      "tags": ["entry-filter", "position-sizing"],
+      "evidence_type": "supporting",
+      "mechanism": "When breadth is below 1:1 with f10>30, even stocks with perfect setups face overwhelming sector/market gravity. The hard block converts 'temptation to buy' into 'mandatory cash preservation.'"
+    },
+    {
+      "text": "恒铭达 -4.48% single-day drop below all three MAs (MA5/MA10/MA20) with elevated volume is a textbook momentum rupture. The stop-proximity rule at 3.35% buffer is the only thing between this position and a forced exit. No thesis exceptions — if 83.55 breaches, exit immediately. Mechanical discipline > narrative.",
+      "type": "signal",
+      "tags": ["exit-rule", "stop-proximity", "momentum-rupture"],
       "evidence_type": "supporting",
       "related_hypothesis": "h023",
-      "mechanism": "Mechanical stop-raise at +10% to breakeven creates an asymmetric payoff: if the stock continues higher, you participate fully; if it reverses, you exit at cost. This is especially valuable in weak-tape environments."
+      "mechanism": "Momentum stocks that break below all short-term MAs on elevated volume signal institutional distribution. The 3.35% stop buffer is the final defense. Price below MA5/MA10/MA20 + volume surge = distribution, not consolidation."
     },
     {
-      "text": "新宙邦's 宁德时代 30万吨/3年 contract catalyst is the strongest type in this market: revenue visibility locked through 2028 via a binding agreement with the industry giant. Stock +19.2% in 10 days. Contract-based catalysts (not earnings beats, not concepts) provide multi-month momentum because the revenue is contractually committed, not forecasted.",
+      "text": "新宙邦 catalyst compounding: 宁德时代30万吨电解液3年协议 (+6.83% today, +19.2% total) vs. 恒铭达 consumer electronics components (-4.48% today). Multi-year supply agreements with tier-1 customers (CATL) generate persistent institutional flow, while generic '0 risk + growth' stocks without fresh catalysts stall after initial move.",
       "type": "heuristic",
-      "tags": ["catalyst", "sector"],
-      "evidence_type": "supporting",
-      "related_hypothesis": null,
-      "mechanism": "Binding revenue contracts eliminate the uncertainty that causes momentum stocks to gap down on earnings. The market can model minimum revenue floors, which attracts institutional accumulation over weeks/months rather than days."
-    },
-    {
-      "text": "f10=72 while indices green is a structural warning of market bifurcation. When 72 stocks hit limit-down but the index is flat-to-up, it signals that money is fleeing broad market names into a narrow set of AI/semiconductor leaders. This narrow leadership is historically unsustainable — either breadth broadens (laggards catch up) or leaders get dragged down (risk-off contagion). Tight stops on all positions are essential.",
-      "type": "signal",
-      "tags": ["market-regime", "exit-rule"],
-      "evidence_type": "supporting",
-      "related_hypothesis": null,
-      "mechanism": "Bifurcated markets concentrate risk: if the few leaders reverse, there are no offsetting gains from the broad market. This creates fat-tail risk for concentrated momentum portfolios. Mechanical stops are the only defense."
+      "tags": ["catalyst", "position-sizing", "sector"],
+      "mechanism": "Large, verifiable supply contracts create recurring news flow (monthly delivery data, capacity expansion, analyst upgrades) that sustains momentum. Stocks without fresh catalysts rely purely on sector beta, which fails in K-type markets."
     }
   ],
-  "market_summary": "PANIC TAPE — breadth 0.29:1 (1234 up / 4245 down), 72跌停/88涨停. Indices superficially green (上证+0.18%, 深证+0.29%, 创业板+0.74%) but this is an index illusion: big-cap AI/semiconductor names holding up indices while 77% of stocks fall. f4_7=937 shows broad mid-cap damage. US-Iran negotiation whipsaw adding geopolitical uncertainty. IV data unavailable. No new positions — hard block.",
+  "market_summary": "K-type divergence day: 上证+0.18%/深证+0.29%/创业板+0.74% all green, but breadth catastrophically weak at 0.29:1 (1,234 up / 4,245 down). 72 stocks limit-down vs 88 limit-up. 77% of stocks declining. Indices carried by narrow large-cap tech (中际旭创 surpassed 茅台 in market cap this week — symbolic of structural shift). 半导体设备/PCB/电子化学品 leadership persists; 化妆品(-4.24%)/航天装备(-4.1%)/自动化设备(-4.0%) lagging. IV data unavailable. Entry regime hard-blocked — no new positions. Focus entirely on managing 5 existing winners. 恒铭达 flagged for immediate stop-proximity risk.",
   "market_sentiment": "bearish",
-  "market_call": "防守"
+  "market_call": "防御"
 }
 ```
