@@ -2,90 +2,60 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 237095,
-  "output_tokens": 10783,
-  "rounds": 4,
-  "duration_sec": 170.9,
+  "input_tokens": 134681,
+  "output_tokens": 14563,
+  "rounds": 2,
+  "duration_sec": 244.3,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年6月22日 市场 板块 涨跌",
+        "query": "A股 今日 小金属 大涨 原因 2026年6月",
         "max_results": 5
       },
-      "result_length": 3311
+      "result_length": 3115
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 今日 热门板块 领涨 2026年6月",
+        "query": "证券板块 大涨 2026年6月22日 A股",
         "max_results": 5
       },
-      "result_length": 2881
+      "result_length": 3182
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "半导体 设备 板块 2026年6月 涨价 需求",
+        "query": "恒铭达 002947 大跌 2026年6月",
         "max_results": 5
       },
-      "result_length": 3272
+      "result_length": 2864
     },
     {
       "pass": "P1",
-      "round": 2,
+      "round": 1,
       "tool": "web_search",
       "input": {
-        "max_results": 5,
-        "query": "兴森科技 002436 PCB 2026年6月 涨价"
+        "query": "新宙邦 300037 电解液 宁德时代 2026年6月",
+        "max_results": 5
       },
-      "result_length": 2714
+      "result_length": 1560
     },
     {
       "pass": "P1",
-      "round": 2,
+      "round": 1,
       "tool": "web_search",
       "input": {
-        "max_results": 5,
-        "query": "新宙邦 300037 电解液 宁德时代 2026年6月"
+        "query": "碳酸锂 涨价 融捷股份 2026年6月",
+        "max_results": 5
       },
-      "result_length": 1414
-    },
-    {
-      "pass": "P1",
-      "round": 2,
-      "tool": "web_search",
-      "input": {
-        "max_results": 5,
-        "query": "碳酸锂 涨价 2026年6月 锂矿 板块"
-      },
-      "result_length": 3353
-    },
-    {
-      "pass": "P1",
-      "round": 3,
-      "tool": "web_search",
-      "input": {
-        "max_results": 5,
-        "query": "上海新阳 300236 光刻胶 2026年6月 新闻"
-      },
-      "result_length": 2791
-    },
-    {
-      "pass": "P1",
-      "round": 3,
-      "tool": "web_search",
-      "input": {
-        "max_results": 5,
-        "query": "路维光电 688401 掩膜版 2026年6月 新闻"
-      },
-      "result_length": 3184
+      "result_length": 3324
     }
   ],
   "fallback_used": false

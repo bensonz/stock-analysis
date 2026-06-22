@@ -93,3 +93,10 @@ Phase 4: Validating...
   Validation issues: ['RULE check_stop_proximity: 002947 — 🟠 WATCH — 3.4% above stop. Monitor closely. No immediate action but be ready.']
 
 Phase 5: Git commit...
+  Git error: fatal: unable to access 'https://github.com/bensonz/stock-analysis.git/': Failed to connect to github.com port 443 after 75001 ms: Couldn't connect to server
+
+
+============================================================
+Pipeline complete in 174s (degraded)
+============================================================
+{"date": "2026-06-22", "status": "degraded", "sells": 0, "opens": 0, "holds": 5, "tool_calls": 8, "tokens": 190449, "duration_sec": 173.60000000000002, "validation_errors": 1, "gate_warnings": 2}

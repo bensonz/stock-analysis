@@ -5,73 +5,73 @@
       "code": "002436",
       "name": "兴森科技",
       "action": "HOLD",
-      "price": 52.73,
-      "pnl_pct": 32.63,
-      "note": "PnL +32.6%, strongest position. ABF substrate/NVIDIA Rubin thesis intact. Stop at trailing +20% (47.71) protects exceptional gains. Sector (元件) aligned with AI PCB theme."
+      "price": 53.3,
+      "pnl_pct": 34.05,
+      "note": "PnL +34.05%, strongest position. Trailing stop at +20% (47.71) provides 10.5% buffer. ABF substrate/NVIDIA Rubin BOM thesis intact. FCBGA pilot-stage losses disclosed but market ignoring. Sector (元件) mid-range, AI PCB theme still hot."
     },
     {
       "code": "002947",
       "name": "恒铭达",
-      "action": "HOLD",
-      "price": 86.45,
-      "pnl_pct": 3.47,
-      "note": "PnL +3.47% but CRITICAL: -4.48% today with price now below MA5/MA10/MA20. Stop proximity violation — only 3.35% above breakeven stop 83.55. If stop breached tomorrow, SELL immediately. 13 days held, marginal performance. Volume elevated (2.12x MAVOL30) on decline = distribution signal."
+      "action": "SELL",
+      "price": 85.88,
+      "pnl_pct": 2.79,
+      "note": "TIME STOP triggered: 10 trading days held, PnL +2.79% < 3% threshold. Stop proximity WARNING: only 2.71% above breakeven stop (83.55). Today -5.10% with volume 3.55x MAVOL30 signals distribution. Stock peaked +11.70% on 6/19, gave back -8.0% in 2 sessions. Mechanical stop-raise protected gains; exit proactively before gap-through of 83.55 stop. Can re-enter if it proves itself again."
     },
     {
       "code": "300037",
       "name": "新宙邦",
-      "action": "HOLD",
-      "price": 88.98,
-      "pnl_pct": 19.2,
-      "note": "PnL +19.20%, +6.83% today on lithium/electrolyte catalyst strength. 宁德时代30万吨电解液3年协议 (5→10→15万吨) is portfolio's strongest single catalyst. +20% trigger at 89.58 — missed by ¥0.11 today. If triggered, raise stop to +10% (82.12). 10 days held, time stop passed easily."
+      "action": "RAISE_STOP",
+      "price": 89.99,
+      "pnl_pct": 20.55,
+      "note": "PnL +20.55% crosses Rule 5 +20% trigger. Mechanical stop-raise to +10% of entry (74.65 × 1.10 = 82.12). Today +8.04% driven by lithium carbonate +2250元/吨 + 宁德时代30万吨电解液协议 catalyst compounding. MA distances elevated (dist_ma20=22.2%) — yellow flag but catalyst quality justifies tolerance for existing position. Stop at 82.12 provides 8.7% buffer."
     },
     {
       "code": "300236",
       "name": "上海新阳",
       "action": "HOLD",
-      "price": 106.36,
-      "pnl_pct": 13.2,
-      "note": "PnL +13.20%. 0 risk factors. Photoresist国产替代 thesis (KrF批量+ArF浸没式+5.8亿光刻胶项目) multi-year. Consolidated +0.53% today. Stop at breakeven 93.96 provides 11.7% buffer. 13 days held, time stop passed."
+      "price": 109.11,
+      "pnl_pct": 16.12,
+      "note": "PnL +16.12%, 0 risk factors. Photoresist国产替代 thesis (KrF批量+ArF浸没式+5.8亿光刻胶项目) intact. Stop at breakeven 93.96 provides 13.9% buffer. 13 days held, time stop passed easily."
     },
     {
       "code": "688401",
       "name": "路维光电",
       "action": "HOLD",
-      "price": 79.63,
-      "pnl_pct": 9.71,
-      "note": "PnL +9.71%. Best sector alignment (半导体材料). MA distances healthy (dist_ma5=0.1%, dist_ma10=4.4%, dist_ma20=6.2%). G11掩膜版 global #2, 厦门20亿项目设备搬入, 14nm掩膜版2026投建. Approaching +10% trigger (79.84) — stop already at breakeven. -1.84% today is constructive consolidation."
+      "price": 80.5,
+      "pnl_pct": 10.91,
+      "note": "PnL +10.91%. Best MA setup in portfolio: dist_ma5=0.1%, dist_ma10=4.4%, dist_ma20=6.2% — price sitting on MA5 support in healthy consolidation. G11掩膜版 global #2, 厦门20亿项目设备搬入, 14nm掩膜版2026投建. Stop at breakeven 72.58. 13 days held."
     }
   ],
   "portfolioStats": {
-    "totalPositions": 5,
-    "totalEquity": 982951.0,
-    "dayPnl": 251.0,
-    "dayReturnPct": 0.03,
-    "totalReturnPct": -1.7,
-    "unrealizedPnl": 17888.0,
-    "realizedPnl": -34937.0,
-    "cashPct": 86.38
+    "totalPositions": 4,
+    "totalEquity": 984598.0,
+    "dayPnl": 3284.0,
+    "dayReturnPct": 0.33,
+    "totalReturnPct": -1.54,
+    "unrealizedPnl": 18836.0,
+    "realizedPnl": -34238.0,
+    "cashPct": 88.86
   },
   "entryRegime": {
     "allow_new_positions": false,
     "regime": "panic",
-    "breadth_ratio": 0.2907,
-    "up": 1234,
-    "down": 4245,
+    "breadth_ratio": 1.1815,
+    "up": 2916,
+    "down": 2468,
     "positive_indices": [
       "上证指数",
       "深证成指",
       "创业板指"
     ],
     "negative_indices": [],
-    "limit_ups": 88,
-    "limit_downs": 72,
+    "limit_ups": 155,
+    "limit_downs": 34,
     "sizing_multiplier": 0.0,
     "hard_block": true,
-    "reason": "Entry regime panic: breadth 0.29:1, 3/3 major indices green, 88 limit-ups / 72 limit-downs. Block new longs."
+    "reason": "Entry regime panic: breadth 1.18:1, 3/3 major indices green, 155 limit-ups / 34 limit-downs. Block new longs."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "K-type divergence day: 上证+0.18%/深证+0.29%/创业板+0.74% all green, but breadth catastrophically weak at 0.29:1 (1,234 up / 4,245 down). 72 stocks limit-down vs 88 limit-up. 77% of stocks declining. Indices carried by narrow large-cap tech (中际旭创 surpassed 茅台 in market cap this week — symbolic of structural shift). 半导体设备/PCB/电子化学品 leadership persists; 化妆品(-4.24%)/航天装备(-4.1%)/自动化设备(-4.0%) lagging. IV data unavailable. Entry regime hard-blocked — no new positions. Focus entirely on managing 5 existing winners. 恒铭达 flagged for immediate stop-proximity risk."
+    "summary": "Bifurcated bull: all 3 major indices green (上证+1.78%, 深证+2.13%, 创业板+2.52%), 155涨停/34跌停. Breadth 1.18:1 below 1.5:1 entry minimum. f10=34 triggers panic-tape hard block on new positions. Rotation into 小金属 (+7.55%, 算力金属涨价: 钽+158%YTD) and 证券 (+7.52%). Battery/lithium chain surging (碳酸锂+2250元/吨). Portfolio all in mid-range tech subsectors, holding up well. 新宙邦 +20.55% triggers stop-raise. 恒铭达 time-stop SELL at +2.79%. IV data unavailable. Cash at 86.24% — dry powder intact for when regime clears."
   }
 }

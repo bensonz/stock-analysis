@@ -1,7 +1,7 @@
 {
   "code": "002947",
   "name": "恒铭达",
-  "status": "active",
+  "status": "closed",
   "thesis": "消费电子零部件，0风险，3年营收CAGR 23%。股权激励+回购。RPS120=93.71略超理想区间，但0风险符合扩展例外条款。",
   "entryDate": "2026-06-09",
   "entryPrice": 83.55,
@@ -86,15 +86,22 @@
       "change_pct": 3.47,
       "action": "HOLD",
       "note": "PnL +3.47% but CRITICAL: -4.48% today with price now below MA5/MA10/MA20. Stop proximity violation — only 3.35% above breakeven stop 83.55. If stop breached tomorrow, SELL immediately. 13 days held, marginal performance. Volume elevated (2.12x MAVOL30) on decline = distribution signal."
+    },
+    {
+      "date": "2026-06-22",
+      "price": 85.88,
+      "change_pct": 2.79,
+      "action": "SELL",
+      "note": "TIME STOP triggered: 10 trading days held, PnL +2.79% < 3% threshold. Stop proximity WARNING: only 2.71% above breakeven stop (83.55). Today -5.10% with volume 3.55x MAVOL30 signals distribution. Stock peaked +11.70% on 6/19, gave back -8.0% in 2 sessions. Mechanical stop-raise protected gains; exit proactively before gap-through of 83.55 stop. Can re-enter if it proves itself again."
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-06-22",
+  "exitPrice": 85.88,
+  "exitReason": "TIME STOP triggered: 10 trading days held, PnL +2.79% < 3% threshold. Stop proximity WARNING: only 2.71% above breakeven stop (83.55). Today -5.10% with volume 3.55x MAVOL30 signals distribution. Stock peaked +11.70% on 6/19, gave back -8.0% in 2 sessions. Mechanical stop-raise protected gains; exit proactively before gap-through of 83.55 stop. Can re-enter if it proves itself again.",
+  "returnPct": 2.79,
+  "holdingDays": 13,
+  "lessonLearned": "",
   "createdAt": "2026-06-09T15:39:26.787737+08:00",
-  "updatedAt": "2026-06-22T11:40:39.637648+08:00",
+  "updatedAt": "2026-06-22T15:39:25.851057+08:00",
   "trackerVersion": "2.1"
 }

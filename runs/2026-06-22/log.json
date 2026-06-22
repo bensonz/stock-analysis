@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1782099454.767648,
+      "start": 1782113709.6107929,
       "errors": [],
-      "end": 1782099468.6486552,
-      "duration_sec": 13.9
+      "end": 1782113721.415532,
+      "duration_sec": 11.8
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 17581,
+      "response_size_bytes": 22541,
       "tokens": {
-        "input_tokens": 237095,
-        "output_tokens": 10783
+        "input_tokens": 134681,
+        "output_tokens": 14563
       },
-      "rounds": 4,
-      "tool_calls_count": 8,
-      "duration_sec": 170.9,
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 244.3,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -25,92 +25,27 @@
     },
     {
       "phase": "apply",
-      "start": 1782099639.63264,
+      "start": 1782113965.7870321,
       "actions": [
+        "SELL 002947",
+        "RAISE_STOP 300037 → 82.12",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=105",
-        "Hypothesis: Created h067 (observation): Entry regime hard block is structurally preventing capital destruction. On a day...",
-        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=29",
-        "Hypothesis: Created h068 (observation): 新宙邦 catalyst compounding: 宁德时代30万吨电解液3年协议 (+6.83% today, +19.2% total) vs. 恒铭达 c...",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=106",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=30",
+        "Hypothesis: Created h069 (observation): 新宙邦 +20.55% in 10 days validates V2 principle: catalyst quality (宁德时代30万吨3年协议) >...",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=23",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=27",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "post_apply_rule_violations": {
-        "status": "violations",
-        "total_rules": 6,
-        "total_violations": 1,
-        "rules": [
-          {
-            "rule": "check_breakout_failure",
-            "file": "scripts/rules/check_breakout_failure.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_iv_filter",
-            "file": "scripts/rules/check_iv_filter.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_overextended_entry",
-            "file": "scripts/rules/check_overextended_entry.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_stop_proximity",
-            "file": "scripts/rules/check_stop_proximity.py",
-            "status": "violations",
-            "exit_code": 1,
-            "violations": [
-              {
-                "code": "002947",
-                "name": "恒铭达",
-                "rule": "stop_proximity",
-                "severity": "WATCH",
-                "currentPrice": 86.45,
-                "stopLoss": 83.55,
-                "distance_pct": 3.35,
-                "suggestion": "🟠 WATCH — 3.4% above stop. Monitor closely. No immediate action but be ready."
-              }
-            ],
-            "error": null
-          },
-          {
-            "rule": "check_time_decay",
-            "file": "scripts/rules/check_time_decay.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          },
-          {
-            "rule": "check_volume_below_mavol30",
-            "file": "scripts/rules/check_volume_below_mavol30.py",
-            "status": "ok",
-            "exit_code": 0,
-            "violations": [],
-            "error": null
-          }
-        ]
-      },
-      "end": 1782099640.1015801,
-      "duration_sec": 0.5
+      "end": 1782113966.221496,
+      "duration_sec": 0.4
     }
   ],
-  "validation_errors": [
-    "RULE check_stop_proximity: 002947 — 🟠 WATCH — 3.4% above stop. Monitor closely. No immediate action but be ready."
-  ],
+  "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 185.3
+    "totalDurationSec": 256.5
   }
 }

@@ -7,7 +7,7 @@
   "entryPrice": 74.65,
   "targetPrice": 95.0,
   "stopLoss": 70.92,
-  "currentStop": 74.65,
+  "currentStop": 82.12,
   "allocation_pct": 2.81,
   "shares": 200,
   "allocatedCapital": 14930.0,
@@ -72,6 +72,13 @@
       "change_pct": 19.2,
       "action": "HOLD",
       "note": "PnL +19.20%, +6.83% today on lithium/electrolyte catalyst strength. 宁德时代30万吨电解液3年协议 (5→10→15万吨) is portfolio's strongest single catalyst. +20% trigger at 89.58 — missed by ¥0.11 today. If triggered, raise stop to +10% (82.12). 10 days held, time stop passed easily."
+    },
+    {
+      "date": "2026-06-22",
+      "price": 89.99,
+      "change_pct": 20.55,
+      "action": "RAISE_STOP",
+      "note": "PnL +20.55% crosses Rule 5 +20% trigger. Mechanical stop-raise to +10% of entry (74.65 × 1.10 = 82.12). Today +8.04% driven by lithium carbonate +2250元/吨 + 宁德时代30万吨电解液协议 catalyst compounding. MA distances elevated (dist_ma20=22.2%) — yellow flag but catalyst quality justifies tolerance for existing position. Stop at 82.12 provides 8.7% buffer."
     }
   ],
   "exitDate": null,
@@ -81,6 +88,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-06-12T11:40:46.893408+08:00",
-  "updatedAt": "2026-06-22T11:40:39.640567+08:00",
+  "updatedAt": "2026-06-22T15:39:25.858498+08:00",
   "trackerVersion": "2.1"
 }

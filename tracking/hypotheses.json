@@ -755,11 +755,15 @@
           {
             "date": "2026-06-22",
             "detail": "K-type divergence signal: all 3 major indices green but breadth 0.29:1 with 72 limit-downs = indices carried by narrow large-cap tech names while broad market liquidates. Indices lie; breadth tells the truth. This is a 'no new positions' tape regardless of how green the indices look."
+          },
+          {
+            "date": "2026-06-22",
+            "detail": "f10=34 panic-tape gate correctly blocks entries despite 3/3 green indices + 155 limit-ups. Bifurcated market where hot money chases metals/financials while 34 stocks crash. V1 would have entered on 'indices green' alone. V2 multi-condition gate (breadth 1.18:1 < 1.5:1 + f10≥30 + indices) is robust."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 105,
+      "sampleSize": 106,
       "hitRate": 1.0,
       "confidence": 0.991,
       "tags": [],
@@ -1593,13 +1597,17 @@
           {
             "date": "2026-06-22",
             "detail": "恒铭达 -4.48% single-day drop below all three MAs (MA5/MA10/MA20) with elevated volume is a textbook momentum rupture. The stop-proximity rule at 3.35% buffer is the only thing between this position and a forced exit. No thesis exceptions — if 83.55 breaches, exit immediately. Mechanical discipline > narrative."
+          },
+          {
+            "date": "2026-06-22",
+            "detail": "恒铭达 validates mechanical stop-raise + time-stop combination. Raised stop to breakeven at +10% (6/19 peak 93.33), stock cratered -8% in 2 sessions, time stop (10d <3% PnL) caught it before mechanical breach at 83.55. Converted potential loss into +2.79% gain."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 29,
+      "sampleSize": 30,
       "hitRate": 1.0,
-      "confidence": 0.968,
+      "confidence": 0.969,
       "tags": [
         "exit-rule",
         "timing",
@@ -1721,7 +1729,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-06-17",
+      "lastTested": "2026-06-22",
       "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes.",
       "evidence": {
         "supporting": [
@@ -1812,13 +1820,17 @@
           {
             "date": "2026-06-17",
             "detail": "Candidate pool shows clear bifurcation: semiconductor/optical names have tight MA clusters (奥来德 -0.4%, 路维光电 +3.0%, 芯源微 +4.4%) while materials/chemical names are parabolic (国瓷材料 +38.6%, 三祥新材 +43.3%, 联瑞新材 +59.6% above MA20). Tight-MA group has absorbed selling pressure and is coiling for next leg — these are the priority cohort when breadth recovers."
+          },
+          {
+            "date": "2026-06-22",
+            "detail": "MA-distance Rule 2b filters ~70% of today's enriched_candidates. After multi-week tech rally, most names are extended. The few passing (融捷, 恩捷, 华灿) are compressing near support. When regime clears, these pullback-ready names are the targets."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 22,
+      "sampleSize": 23,
       "hitRate": 1.0,
-      "confidence": 0.958,
+      "confidence": 0.96,
       "tags": [
         "entry-filter",
         "timing",
@@ -1834,7 +1846,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-06-16",
+      "lastTested": "2026-06-22",
       "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally.",
       "evidence": {
         "supporting": [
@@ -1941,13 +1953,17 @@
           {
             "date": "2026-06-16",
             "detail": "Today's sector rotation confirms persistent tech/electronics materials leadership. 玻璃玻纤 +8.93% and 元件 +4.01% are the new leaders, while 工业金属 -2.67% and 煤炭 -2.07% continue to roll over. This is consistent with the multi-week trend identified in h028."
+          },
+          {
+            "date": "2026-06-22",
+            "detail": "Sector rotation from pure tech to resource+financial is accelerating (小金属 +7.55%, 证券 +7.52%). Next round of entries should include resource-linked names (融捷 in lithium, potentially 华宏 in rare earth) as rotation hedges. Current all-tech portfolio is concentrated."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 26,
+      "sampleSize": 27,
       "hitRate": 1.0,
-      "confidence": 0.964,
+      "confidence": 0.966,
       "tags": [
         "sector",
         "timing"
@@ -3074,6 +3090,34 @@
         "catalyst",
         "position-sizing",
         "sector"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h069",
+      "text": "新宙邦 +20.55% in 10 days validates V2 principle: catalyst quality (宁德时代30万吨3年协议) > valuation (PE=50). V1 would have downgraded for 'expensive'; V2 lets the revenue-lock catalyst compound. 30万吨 through 2028 = multi-year visibility, not a one-off beat.",
+      "type": "heuristic",
+      "status": "observation",
+      "created": "2026-06-22",
+      "lastTested": "2026-06-22",
+      "mechanism": "Long-duration catalysts (3-year supply agreements) provide compounding momentum as each quarter of execution de-risks the forward revenue stream. Valuation is a trailing metric, irrelevant for forward momentum.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-06-22",
+            "detail": "新宙邦 +20.55% in 10 days validates V2 principle: catalyst quality (宁德时代30万吨3年协议) > valuation (PE=50). V1 would have downgraded for 'expensive'; V2 lets the revenue-lock catalyst compound. 30万吨 through 2028 = multi-year visibility, not a one-off beat."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
+        "catalyst-analysis"
       ],
       "parentRule": null,
       "retiredDate": null,

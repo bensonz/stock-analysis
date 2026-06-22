@@ -2,34 +2,76 @@
   "date": "2026-06-22",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4098.009,
-      "change_pct": 0.18
+      "value": 4163.096,
+      "change_pct": 1.78
     },
     "shenzhen_component": {
-      "value": 16077.2,
-      "change_pct": 0.29
+      "value": 16372.5,
+      "change_pct": 2.13
     },
     "chinext": {
-      "value": 4284.03,
-      "change_pct": 0.74
+      "value": 4359.39,
+      "change_pct": 2.52
     },
-    "sentiment": "bearish",
-    "hot_sectors": [],
-    "cold_sectors": [
-      "化妆品",
-      "航天装备Ⅱ",
-      "自动化设备",
-      "酒店餐饮",
-      "电机Ⅱ"
+    "sentiment": "bullish",
+    "hot_sectors": [
+      "小金属",
+      "证券Ⅱ",
+      "保险Ⅱ",
+      "农化制品",
+      "非金属材料Ⅱ"
     ],
-    "notes": "K-type divergence day: 上证+0.18%/深证+0.29%/创业板+0.74% all green, but breadth catastrophically weak at 0.29:1 (1,234 up / 4,245 down). 72 stocks limit-down vs 88 limit-up. 77% of stocks declining. Indices carried by narrow large-cap tech (中际旭创 surpassed 茅台 in market cap this week — symbolic of structural shift). 半导体设备/PCB/电子化学品 leadership persists; 化妆品(-4.24%)/航天装备(-4.1%)/自动化设备(-4.0%) lagging. IV data unavailable. Entry regime hard-blocked — no new positions. Focus entirely on managing 5 existing winners. 恒铭达 flagged for immediate stop-proximity risk."
+    "cold_sectors": [
+      "自动化设备",
+      "化妆品",
+      "照明设备Ⅱ",
+      "航天装备Ⅱ",
+      "汽车服务"
+    ],
+    "notes": "Bifurcated bull: all 3 major indices green (上证+1.78%, 深证+2.13%, 创业板+2.52%), 155涨停/34跌停. Breadth 1.18:1 below 1.5:1 entry minimum. f10=34 triggers panic-tape hard block on new positions. Rotation into 小金属 (+7.55%, 算力金属涨价: 钽+158%YTD) and 证券 (+7.52%). Battery/lithium chain surging (碳酸锂+2250元/吨). Portfolio all in mid-range tech subsectors, holding up well. 新宙邦 +20.55% triggers stop-raise. 恒铭达 time-stop SELL at +2.79%. IV data unavailable. Cash at 86.24% — dry powder intact for when regime clears."
   },
   "strategy_scan": {
-    "total_stocks_scanned": 63,
+    "total_stocks_scanned": 61,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-06-22T11:40:39.650330+08:00"
+    "scan_time": "2026-06-22T15:39:25.864421+08:00"
   },
   "recommendations": [
+    {
+      "code": "002192.SZ",
+      "name": "融捷股份",
+      "price": null,
+      "rps120": 94.28,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "002812.SZ",
+      "name": "恩捷股份",
+      "price": null,
+      "rps120": 89.53,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "300323.SZ",
+      "name": "华灿光电",
+      "price": null,
+      "rps120": 93.26,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "002645.SZ",
+      "name": "华宏科技",
+      "price": null,
+      "rps120": 94.5,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
     {
       "code": "688536.SH",
       "name": "思瑞浦",
@@ -49,39 +91,30 @@
       "reasoning": ""
     },
     {
-      "code": "002645.SZ",
-      "name": "华宏科技",
+      "code": "300870.SZ",
+      "name": "欧陆通",
       "price": null,
-      "rps120": 94.5,
+      "rps120": 89.1,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "002192.SZ",
-      "name": "融捷股份",
+      "code": "688037.SH",
+      "name": "芯源微",
       "price": null,
-      "rps120": 94.28,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688002.SH",
-      "name": "睿创微纳",
-      "price": null,
-      "rps120": 90.2,
+      "rps120": 94.05,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     }
   ],
   "summary": {
-    "total_scanned": 63,
+    "total_scanned": 61,
     "buy_recommendations": 0,
-    "watch_recommendations": 5,
+    "watch_recommendations": 8,
     "avoid_recommendations": 0,
-    "market_call": "防御",
-    "reasoning": "K-type divergence day: 上证+0.18%/深证+0.29%/创业板+0.74% all green, but breadth catastrophically weak at 0.29:1 (1,234 up / 4,245 down). 72 stocks limit-down vs 88 limit-up. 77% of stocks declining. Indices carried by narrow large-cap tech (中际旭创 surpassed 茅台 in market cap this week — symbolic of structural shift). 半导体设备/PCB/电子化学品 leadership persists; 化妆品(-4.24%)/航天装备(-4.1%)/自动化设备(-4.0%) lagging. IV data unavailable. Entry regime hard-blocked — no new positions. Focus entirely on managing 5 existing winners. 恒铭达 flagged for immediate stop-proximity risk."
+    "market_call": "积极",
+    "reasoning": "Bifurcated bull: all 3 major indices green (上证+1.78%, 深证+2.13%, 创业板+2.52%), 155涨停/34跌停. Breadth 1.18:1 below 1.5:1 entry minimum. f10=34 triggers panic-tape hard block on new positions. Rotation into 小金属 (+7.55%, 算力金属涨价: 钽+158%YTD) and 证券 (+7.52%). Battery/lithium chain surging (碳酸锂+2250元/吨). Portfolio all in mid-range tech subsectors, holding up well. 新宙邦 +20.55% triggers stop-raise. 恒铭达 time-stop SELL at +2.79%. IV data unavailable. Cash at 86.24% — dry powder intact for when regime clears."
   }
 }

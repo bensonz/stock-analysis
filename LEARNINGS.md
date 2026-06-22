@@ -1477,3 +1477,11 @@
 - Entry regime hard block is structurally preventing capital destruction. On a day where 4,245 stocks decline, the correct momentum decision is to deploy zero new capital regardless of individual candidate quality. V1's tendency to force 'small buys' in weak tapes was a root cause of underperformance.
 - 恒铭达 -4.48% single-day drop below all three MAs (MA5/MA10/MA20) with elevated volume is a textbook momentum rupture. The stop-proximity rule at 3.35% buffer is the only thing between this position and a forced exit. No thesis exceptions — if 83.55 breaches, exit immediately. Mechanical discipline > narrative.
 - 新宙邦 catalyst compounding: 宁德时代30万吨电解液3年协议 (+6.83% today, +19.2% total) vs. 恒铭达 consumer electronics components (-4.48% today). Multi-year supply agreements with tier-1 customers (CATL) generate persistent institutional flow, while generic '0 risk + growth' stocks without fresh catalysts stall after initial move.
+
+### 自动更新 (2026-06-22)
+
+- f10=34 panic-tape gate correctly blocks entries despite 3/3 green indices + 155 limit-ups. Bifurcated market where hot money chases metals/financials while 34 stocks crash. V1 would have entered on 'indices green' alone. V2 multi-condition gate (breadth 1.18:1 < 1.5:1 + f10≥30 + indices) is robust.
+- 恒铭达 validates mechanical stop-raise + time-stop combination. Raised stop to breakeven at +10% (6/19 peak 93.33), stock cratered -8% in 2 sessions, time stop (10d <3% PnL) caught it before mechanical breach at 83.55. Converted potential loss into +2.79% gain.
+- 新宙邦 +20.55% in 10 days validates V2 principle: catalyst quality (宁德时代30万吨3年协议) > valuation (PE=50). V1 would have downgraded for 'expensive'; V2 lets the revenue-lock catalyst compound. 30万吨 through 2028 = multi-year visibility, not a one-off beat.
+- MA-distance Rule 2b filters ~70% of today's enriched_candidates. After multi-week tech rally, most names are extended. The few passing (融捷, 恩捷, 华灿) are compressing near support. When regime clears, these pullback-ready names are the targets.
+- Sector rotation from pure tech to resource+financial is accelerating (小金属 +7.55%, 证券 +7.52%). Next round of entries should include resource-linked names (融捷 in lithium, potentially 华宏 in rare earth) as rotation hedges. Current all-tech portfolio is concentrated.
