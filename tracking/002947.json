@@ -7,7 +7,7 @@
   "entryPrice": 83.55,
   "targetPrice": 105.0,
   "stopLoss": 79.37,
-  "currentStop": 79.37,
+  "currentStop": 83.55,
   "allocation_pct": 3.75,
   "shares": 300,
   "allocatedCapital": 25065.0,
@@ -72,6 +72,20 @@
       "change_pct": 8.32,
       "action": "HOLD",
       "note": "PnL +8.32%, -0.49% today. 9 days held, approaching 10-day but PnL far above <3% time-stop trigger. MA distances healthy (5.7/6.4/7.1%). 0 risk factors. Q1 NP +40%. 东吴证券买入 AI+新能源 dual-driver thesis. If +10% trigger at 91.91, mechanical stop-raise to breakeven 83.55."
+    },
+    {
+      "date": "2026-06-19",
+      "price": 90.5,
+      "change_pct": 8.32,
+      "action": "RAISE_STOP",
+      "note": "Today's close ¥93.33 triggers Rule 5 mechanical stop-raise: PnL crossed +10% threshold (91.91 trigger). Raise stop to breakeven ¥83.55 from ¥79.37. 10 days held — time stop check passed (PnL +11.70% ≫ 3%). 0 risk factors. 东吴证券买入 rating. AI+新能源 dual-driver thesis intact. MA distances all healthy (5.7/6.4/7.1%)."
+    },
+    {
+      "date": "2026-06-22",
+      "price": 86.45,
+      "change_pct": 3.47,
+      "action": "HOLD",
+      "note": "PnL +3.47%, stop at breakeven ¥83.55. WARNING: -4.48% today, only 3.35% above stop. Price below all three MAs (dist_ma5=-2.6%, dist_ma10=-1.0%, dist_ma20=-1.7%). 0 risk factors and Q1 NP +40% support thesis, but price action deteriorating. If stop at ¥83.55 is hit → SELL immediately."
     }
   ],
   "exitDate": null,
@@ -81,6 +95,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-06-09T15:39:26.787737+08:00",
-  "updatedAt": "2026-06-18T15:39:52.780981+08:00",
+  "updatedAt": "2026-06-22T11:40:27.649230+08:00",
   "trackerVersion": "2.1"
 }

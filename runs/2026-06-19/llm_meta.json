@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 275674,
+  "output_tokens": 16093,
+  "rounds": 4,
+  "duration_sec": 202.0,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月19日 热门板块 半导体 通信设备 上涨原因",
+        "max_results": 8
+      },
+      "result_length": 4865
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年6月19日 A股 市场分化 上证下跌 创业板上涨 成交额",
+        "max_results": 5
+      },
+      "result_length": 2824
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "兴森科技 002436 2026年6月 最新动态 PCB",
+        "max_results": 5
+      },
+      "result_length": 3318
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "新宙邦 300037 2026年6月 宁德时代 电解液 合作协议 最新",
+        "max_results": 5
+      },
+      "result_length": 2163
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "恒铭达 002947 2026年6月 最新动态 股价",
+        "max_results": 5
+      },
+      "result_length": 2439
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "上海新阳 300236 2026年6月 光刻胶 半导体材料 最新",
+        "max_results": 5
+      },
+      "result_length": 2837
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月19日 市场分化 保险板块大跌 原因 3万亿成交",
+        "max_results": 5
+      },
+      "result_length": 2818
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "query": "路维光电 688401 2026年6月 掩膜版 最新",
+        "max_results": 5
+      },
+      "result_length": 2797
+    }
+  ],
+  "fallback_used": false
+}

@@ -1,0 +1,116 @@
+{
+  "date": "2026-06-22",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1782099454.5277781,
+      "errors": [],
+      "end": 1782099468.829937,
+      "duration_sec": 14.3
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 18624,
+      "tokens": {
+        "input_tokens": 179837,
+        "output_tokens": 10612
+      },
+      "rounds": 3,
+      "tool_calls_count": 8,
+      "duration_sec": 158.8,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1782099627.637144,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=105",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=29",
+        "Hypothesis: Created h067 (observation): 新宙邦's 宁德时代 30万吨/3年 contract catalyst is the strongest type in this market: reven...",
+        "Hypothesis: Created h068 (observation): f10=72 while indices green is a structural warning of market bifurcation. When 7...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002947",
+                "name": "恒铭达",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 86.45,
+                "stopLoss": 83.55,
+                "distance_pct": 3.35,
+                "suggestion": "🟠 WATCH — 3.4% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1782099628.1730812,
+      "duration_sec": 0.5
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 002947 — 🟠 WATCH — 3.4% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 173.60000000000002
+  }
+}

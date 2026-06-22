@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 179837,
+  "output_tokens": 10612,
+  "rounds": 3,
+  "duration_sec": 158.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月22日 市场分析 板块热点",
+        "max_results": 5
+      },
+      "result_length": 3019
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "兴森科技 002436 2026年6月 最新消息",
+        "max_results": 5
+      },
+      "result_length": 2822
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "恒铭达 002947 2026年6月 新闻",
+        "max_results": 5
+      },
+      "result_length": 1493
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "新宙邦 300037 2026年6月 电解液 消息",
+        "max_results": 5
+      },
+      "result_length": 3039
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体板块 2026年6月22日 A股 走势",
+        "max_results": 5
+      },
+      "result_length": 3172
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "上海新阳 300236 2026年6月 光刻胶 最新消息"
+      },
+      "result_length": 2385
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "路维光电 688401 掩膜版 2026年6月 最新进展"
+      },
+      "result_length": 3214
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 2026年6月22日 上涨家数 下跌家数 市场分析 普跌"
+      },
+      "result_length": 3075
+    }
+  ],
+  "fallback_used": false
+}

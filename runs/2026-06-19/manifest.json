@@ -1,8 +1,8 @@
 {
-  "date": "2026-06-18",
-  "status": "degraded",
-  "exit_code": 0,
-  "total_duration_sec": 283.1,
+  "date": "2026-06-19",
+  "status": "failed",
+  "exit_code": 1,
+  "total_duration_sec": 0.0,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -10,11 +10,11 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 190.2
+          "latency_ms": 179.9
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 446.0
+          "latency_ms": 427.7
         },
         "pricedb": {
           "status": "ok",
@@ -31,21 +31,16 @@
     },
     "collect": {
       "status": "ok",
-      "duration_sec": 11.8,
+      "duration_sec": 11.6,
       "errors": []
     },
     "llm_analysis": {
       "status": "ok",
-      "duration_sec": 270.9
+      "duration_sec": 202.0
     },
     "apply": {
-      "status": "ok",
-      "duration_sec": 0.4
-    },
-    "validate": {
-      "status": "ok",
-      "duration_sec": 0.0,
-      "errors": []
+      "status": "failed",
+      "duration_sec": 0.5
     }
   },
   "gates": {
@@ -62,8 +57,10 @@
       ]
     },
     "phase3_to_phase4": {
-      "passed": true,
-      "hard_fails": [],
+      "passed": false,
+      "hard_fails": [
+        "apply phase had errors: [\"ERROR learnings: 'observation'\"]"
+      ],
       "soft_warns": []
     }
   }

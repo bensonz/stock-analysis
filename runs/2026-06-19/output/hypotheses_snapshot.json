@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-06-22",
+  "lastUpdated": "2026-06-18",
   "hypotheses": [
     {
       "id": "h001",
@@ -332,7 +332,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-03-27",
-      "lastTested": "2026-06-22",
+      "lastTested": "2026-06-18",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -751,15 +751,11 @@
           {
             "date": "2026-06-18",
             "detail": "Breadth panic (0.60:1, f10=43) with tech indices soaring (科创50 +3.84%) creates a 'bear market in disguise.' 3400+ stocks falling while a few dozen semiconductor names rip. The entry regime hard_block correctly prevents opening positions into a tape where mean-reversion risk in crowded tech trades is elevated. Cash is the correct position when only one sector is working."
-          },
-          {
-            "date": "2026-06-22",
-            "detail": "Index illusion: 上证+0.18%/深证+0.29%/创业板+0.74% all green, but breadth was 0.29:1 with 72 stocks at limit-down. This is a dangerous divergence where big-cap index stocks mask broad-based selling. The entry_regime hard_block (triggered by breadth <1.5:1 and f10>30) correctly prevented new positions into a rout."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 105,
+      "sampleSize": 104,
       "hitRate": 1.0,
       "confidence": 0.991,
       "tags": [],
@@ -1474,7 +1470,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-06-22",
+      "lastTested": "2026-06-18",
       "mechanism": "In a deteriorating market, protecting open profits is more valuable than maximizing upside variance.",
       "evidence": {
         "supporting": [
@@ -1589,17 +1585,13 @@
           {
             "date": "2026-06-18",
             "detail": "兴森科技 +30.93% in 3 days demonstrates Rule 5 trailing stops: raising from breakeven (39.76) to +10% (43.74) at the +20% trigger, now trailing to +20% (47.71) at +30%. Exceptional winners should not be allowed to turn into breakeven trades. The trailing stop converts a windfall into a guaranteed +20% return while preserving further upside."
-          },
-          {
-            "date": "2026-06-22",
-            "detail": "The +10% mechanical stop-raise rule protected 恒铭达: stock peaked at +11.7% on 6/19, stop raised to breakeven ¥83.55. Today -4.48%, price now ¥86.45 — only 3.35% from stop. Without the mechanical raise, original stop at ¥79.37 would leave much more room for loss. The rule converts winners into low-risk holds without requiring a market call."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 29,
+      "sampleSize": 28,
       "hitRate": 1.0,
-      "confidence": 0.968,
+      "confidence": 0.967,
       "tags": [
         "exit-rule",
         "timing",
@@ -3017,62 +3009,6 @@
       "tags": [
         "position-sizing",
         "sector"
-      ],
-      "parentRule": null,
-      "retiredDate": null,
-      "retiredReason": null
-    },
-    {
-      "id": "h067",
-      "text": "新宙邦's 宁德时代 30万吨/3年 contract catalyst is the strongest type in this market: revenue visibility locked through 2028 via a binding agreement with the industry giant. Stock +19.2% in 10 days. Contract-based catalysts (not earnings beats, not concepts) provide multi-month momentum because the revenue is contractually committed, not forecasted.",
-      "type": "heuristic",
-      "status": "observation",
-      "created": "2026-06-22",
-      "lastTested": "2026-06-22",
-      "mechanism": "Binding revenue contracts eliminate the uncertainty that causes momentum stocks to gap down on earnings. The market can model minimum revenue floors, which attracts institutional accumulation over weeks/months rather than days.",
-      "evidence": {
-        "supporting": [
-          {
-            "date": "2026-06-22",
-            "detail": "新宙邦's 宁德时代 30万吨/3年 contract catalyst is the strongest type in this market: revenue visibility locked through 2028 via a binding agreement with the industry giant. Stock +19.2% in 10 days. Contract-based catalysts (not earnings beats, not concepts) provide multi-month momentum because the revenue is contractually committed, not forecasted."
-          }
-        ],
-        "contradicting": []
-      },
-      "sampleSize": 1,
-      "hitRate": 1.0,
-      "confidence": 0.6,
-      "tags": [
-        "catalyst",
-        "sector"
-      ],
-      "parentRule": null,
-      "retiredDate": null,
-      "retiredReason": null
-    },
-    {
-      "id": "h068",
-      "text": "f10=72 while indices green is a structural warning of market bifurcation. When 72 stocks hit limit-down but the index is flat-to-up, it signals that money is fleeing broad market names into a narrow set of AI/semiconductor leaders. This narrow leadership is historically unsustainable — either breadth broadens (laggards catch up) or leaders get dragged down (risk-off contagion). Tight stops on all positions are essential.",
-      "type": "signal",
-      "status": "observation",
-      "created": "2026-06-22",
-      "lastTested": "2026-06-22",
-      "mechanism": "Bifurcated markets concentrate risk: if the few leaders reverse, there are no offsetting gains from the broad market. This creates fat-tail risk for concentrated momentum portfolios. Mechanical stops are the only defense.",
-      "evidence": {
-        "supporting": [
-          {
-            "date": "2026-06-22",
-            "detail": "f10=72 while indices green is a structural warning of market bifurcation. When 72 stocks hit limit-down but the index is flat-to-up, it signals that money is fleeing broad market names into a narrow set of AI/semiconductor leaders. This narrow leadership is historically unsustainable — either breadth broadens (laggards catch up) or leaders get dragged down (risk-off contagion). Tight stops on all positions are essential."
-          }
-        ],
-        "contradicting": []
-      },
-      "sampleSize": 1,
-      "hitRate": 1.0,
-      "confidence": 0.6,
-      "tags": [
-        "market-regime",
-        "exit-rule"
       ],
       "parentRule": null,
       "retiredDate": null,
