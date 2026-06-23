@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-06-23T11:40:39.935188+08:00",
+  "snapshot_time": "2026-06-23T15:35:13.899426+08:00",
   "snapshot_type": "pre_run",
   "date": "2026-06-23",
   "portfolio_config": {
@@ -11,23 +11,23 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-06-22T15:39:25.865684+08:00",
+    "lastUpdated": "2026-06-23T11:43:45.203523+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 984598.0,
+      "totalEquity": 979606.0,
       "cash": 874876.0,
-      "investedValue": 109722.0,
-      "unrealizedPnl": 18836.0,
+      "investedValue": 104730.0,
+      "unrealizedPnl": 13844.0,
       "realizedPnl": -34238.0,
-      "totalPnl": -15402.0,
-      "totalReturnPct": -1.54,
+      "totalPnl": -20394.0,
+      "totalReturnPct": -2.04,
       "positionsUsed": 4,
       "positionsMax": 10,
-      "cashPct": 88.86,
-      "dayPnl": 3284.0,
+      "cashPct": 89.31,
+      "dayPnl": -4992.0,
       "minCashPct": 20,
-      "minCashValue": 196919.6,
-      "deployableCash": 677956.4
+      "minCashValue": 195921.2,
+      "deployableCash": 678954.8
     },
     "activePositions": [
       {
@@ -35,8 +35,8 @@
         "name": "兴森科技",
         "entryDate": "2026-06-15",
         "entryPrice": 39.76,
-        "currentPrice": 53.3,
-        "pnl_pct": 34.05,
+        "currentPrice": 49.0,
+        "pnl_pct": 23.24,
         "stopLoss": 37.77,
         "currentStop": 47.71,
         "targetPrice": 52.0,
@@ -45,20 +45,20 @@
         "shares": 600,
         "allocation_pct": 3.75,
         "allocatedCapital": 23856.0,
-        "currentValue": 31980.0,
-        "unrealizedPnl": 8124.0,
-        "volume": 2135989,
+        "currentValue": 29400.0,
+        "unrealizedPnl": 5544.0,
+        "volume": 1272347,
         "mavol30": 208676.77,
         "volumeBelowMavol30": false,
-        "weight_pct": 3.25
+        "weight_pct": 3.0
       },
       {
         "code": "300037",
         "name": "新宙邦",
         "entryDate": "2026-06-12",
         "entryPrice": 74.65,
-        "currentPrice": 89.99,
-        "pnl_pct": 20.55,
+        "currentPrice": 86.21,
+        "pnl_pct": 15.49,
         "stopLoss": 70.92,
         "currentStop": 82.12,
         "targetPrice": 95.0,
@@ -67,20 +67,20 @@
         "shares": 200,
         "allocation_pct": 2.81,
         "allocatedCapital": 14930.0,
-        "currentValue": 17998.0,
-        "unrealizedPnl": 3068.0,
-        "volume": 400696,
+        "currentValue": 17242.0,
+        "unrealizedPnl": 2312.0,
+        "volume": 268733,
         "mavol30": 60296.27,
         "volumeBelowMavol30": false,
-        "weight_pct": 1.83
+        "weight_pct": 1.76
       },
       {
         "code": "300236",
         "name": "上海新阳",
         "entryDate": "2026-06-09",
         "entryPrice": 93.96,
-        "currentPrice": 109.11,
-        "pnl_pct": 16.12,
+        "currentPrice": 106.78,
+        "pnl_pct": 13.64,
         "stopLoss": 89.26,
         "currentStop": 93.96,
         "targetPrice": 120.0,
@@ -89,20 +89,20 @@
         "shares": 400,
         "allocation_pct": 5.25,
         "allocatedCapital": 37584.0,
-        "currentValue": 43644.0,
-        "unrealizedPnl": 6060.0,
-        "volume": 175951,
+        "currentValue": 42712.0,
+        "unrealizedPnl": 5128.0,
+        "volume": 105622,
         "mavol30": 28272.43,
         "volumeBelowMavol30": false,
-        "weight_pct": 4.43
+        "weight_pct": 4.36
       },
       {
         "code": "688401",
         "name": "路维光电",
         "entryDate": "2026-06-09",
         "entryPrice": 72.58,
-        "currentPrice": 80.5,
-        "pnl_pct": 10.91,
+        "currentPrice": 76.88,
+        "pnl_pct": 5.92,
         "stopLoss": 68.95,
         "currentStop": 72.58,
         "targetPrice": 92.0,
@@ -111,12 +111,12 @@
         "shares": 200,
         "allocation_pct": 3.75,
         "allocatedCapital": 14516.0,
-        "currentValue": 16100.0,
-        "unrealizedPnl": 1584.0,
-        "volume": 111908,
+        "currentValue": 15376.0,
+        "unrealizedPnl": 860.0,
+        "volume": 67858,
         "mavol30": 8874.6,
         "volumeBelowMavol30": false,
-        "weight_pct": 1.64
+        "weight_pct": 1.57
       }
     ]
   },
@@ -188,6 +188,13 @@
           "change_pct": 34.05,
           "action": "HOLD",
           "note": "PnL +34.05%, strongest position. Trailing stop at +20% (47.71) provides 10.5% buffer. ABF substrate/NVIDIA Rubin BOM thesis intact. FCBGA pilot-stage losses disclosed but market ignoring. Sector (元件) mid-range, AI PCB theme still hot."
+        },
+        {
+          "date": "2026-06-23",
+          "price": 49.0,
+          "change_pct": 23.24,
+          "action": "HOLD",
+          "note": "PnL +23.2%, trailing stop at 47.71 (+20% level) provides mechanical protection. But sector 元件 is bottom 5 (-5.23%) — if sector stays bottom 30% for 2 more days, sell regardless. Stop proximity at 2.63% is critical warning. Today -8.07% on 6x MAVOL30 = distribution signal."
         }
       ],
       "exitDate": null,
@@ -197,7 +204,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-06-15T11:41:24.228987+08:00",
-      "updatedAt": "2026-06-22T15:39:25.790459+08:00",
+      "updatedAt": "2026-06-23T11:43:45.174424+08:00",
       "trackerVersion": "2.1"
     },
     "300037": {
@@ -281,6 +288,13 @@
           "change_pct": 20.55,
           "action": "RAISE_STOP",
           "note": "PnL +20.55% crosses Rule 5 +20% trigger. Mechanical stop-raise to +10% of entry (74.65 × 1.10 = 82.12). Today +8.04% driven by lithium carbonate +2250元/吨 + 宁德时代30万吨电解液协议 catalyst compounding. MA distances elevated (dist_ma20=22.2%) — yellow flag but catalyst quality justifies tolerance for existing position. Stop at 82.12 provides 8.7% buffer."
+        },
+        {
+          "date": "2026-06-23",
+          "price": 86.21,
+          "change_pct": 15.49,
+          "action": "HOLD",
+          "note": "PnL +15.5%, stop at 82.12 (+10%). Today -4.20% is healthy pullback from yesterday's +8% lithium/electrolyte catalyst spike. 宁德时代30万吨电解液3年协议 remains portfolio's strongest single catalyst. Stop buffer 4.74% adequate."
         }
       ],
       "exitDate": null,
@@ -290,7 +304,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-06-12T11:40:46.893408+08:00",
-      "updatedAt": "2026-06-22T15:39:25.858498+08:00",
+      "updatedAt": "2026-06-23T11:43:45.190722+08:00",
       "trackerVersion": "2.1"
     },
     "300236": {
@@ -381,6 +395,13 @@
           "change_pct": 16.12,
           "action": "HOLD",
           "note": "PnL +16.12%, 0 risk factors. Photoresist国产替代 thesis (KrF批量+ArF浸没式+5.8亿光刻胶项目) intact. Stop at breakeven 93.96 provides 13.9% buffer. 13 days held, time stop passed easily."
+        },
+        {
+          "date": "2026-06-23",
+          "price": 106.78,
+          "change_pct": 13.64,
+          "action": "HOLD",
+          "note": "PnL +13.64%, stop at breakeven 93.96 provides 12% buffer. 0 risk factors. KrF批量销售+ArF浸没式+5.8亿光刻胶项目 thesis intact. 14 days held, time stop easily passed."
         }
       ],
       "exitDate": null,
@@ -390,7 +411,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-06-09T15:39:26.780692+08:00",
-      "updatedAt": "2026-06-22T15:39:25.860662+08:00",
+      "updatedAt": "2026-06-23T11:43:45.194033+08:00",
       "trackerVersion": "2.1"
     },
     "688401": {
@@ -481,6 +502,13 @@
           "change_pct": 10.91,
           "action": "HOLD",
           "note": "PnL +10.91%. Best MA setup in portfolio: dist_ma5=0.1%, dist_ma10=4.4%, dist_ma20=6.2% — price sitting on MA5 support in healthy consolidation. G11掩膜版 global #2, 厦门20亿项目设备搬入, 14nm掩膜版2026投建. Stop at breakeven 72.58. 13 days held."
+        },
+        {
+          "date": "2026-06-23",
+          "price": 76.88,
+          "change_pct": 5.92,
+          "action": "HOLD",
+          "note": "PnL +5.93%, stop at breakeven 72.58. Today -4.50% erodes gains but MA setup is best in portfolio (dist_ma5=0.1%, sitting on MA5 support). G11掩膜版+厦门20亿项目 thesis valid. PnL buffer thinning — monitor closely."
         }
       ],
       "exitDate": null,
@@ -490,7 +518,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-06-09T15:39:26.785471+08:00",
-      "updatedAt": "2026-06-22T15:39:25.862010+08:00",
+      "updatedAt": "2026-06-23T11:43:45.196689+08:00",
       "trackerVersion": "2.1"
     }
   },

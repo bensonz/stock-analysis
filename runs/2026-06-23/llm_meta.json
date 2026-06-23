@@ -2,60 +2,60 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 206451,
-  "output_tokens": 12211,
+  "input_tokens": 199702,
+  "output_tokens": 9078,
   "rounds": 3,
-  "duration_sec": 172.3,
+  "duration_sec": 191.9,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年6月23日 市场 板块 轮动 医药 金属",
+        "query": "A股 2026年6月23日 大跌 原因",
         "max_results": 5
       },
-      "result_length": 3199
+      "result_length": 2730
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "兴森科技 002436 2026年6月 PCB 元件",
+        "query": "A股 元件板块 2026年6月 大跌",
         "max_results": 5
       },
-      "result_length": 3283
+      "result_length": 2821
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "新宙邦 300037 电解液 宁德时代 2026年6月",
+        "query": "新宙邦 宁德时代 电解液 2026年6月",
         "max_results": 5
       },
-      "result_length": 1871
+      "result_length": 1848
     },
     {
       "pass": "P1",
       "round": 2,
       "tool": "web_search",
       "input": {
-        "max_results": 5,
-        "query": "上海新阳 300236 光刻胶 半导体 2026年6月"
+        "query": "A股 贵金属 工业金属 大跌 2026年6月23日 伊朗 制裁",
+        "max_results": 5
       },
-      "result_length": 2862
+      "result_length": 2921
     },
     {
       "pass": "P1",
       "round": 2,
       "tool": "web_search",
       "input": {
-        "max_results": 5,
-        "query": "路维光电 688401 掩膜版 2026年6月"
+        "query": "兴森科技 ABF载板 PCB 2026年6月",
+        "max_results": 5
       },
-      "result_length": 3239
+      "result_length": 3285
     }
   ],
   "fallback_used": false

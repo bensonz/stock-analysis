@@ -122,3 +122,9 @@ Phase 4: Validating...
   Validation issues: ['RULE check_stop_proximity: 002436 — 🟡 WARNING — only 2.6% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.', 'RULE check_stop_proximity: 300037 — 🟠 WATCH — 4.7% above stop. Monitor closely. No immediate action but be ready.']
 
 Phase 5: Git commit...
+  Committed and pushed.
+
+============================================================
+Pipeline complete in 186s (degraded)
+============================================================
+{"date": "2026-06-23", "status": "degraded", "sells": 0, "opens": 0, "holds": 4, "tool_calls": 5, "tokens": 218662, "duration_sec": 185.50000000000003, "validation_errors": 2, "gate_warnings": 3}

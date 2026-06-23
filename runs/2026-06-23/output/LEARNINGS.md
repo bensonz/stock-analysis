@@ -1492,3 +1492,10 @@
 - Buy gate discipline prevented forced entries into a weak tape. All 3 major indices red + breadth only 1.67:1. The automated entry_regime said allow_new_positions=true, but actual index data contradicted it. Manual override of automated flags is correct when the tape tells a different story.
 - MA-distance Rule 2b filtered 45 of 62 candidates (73%) today. Many visually compelling stocks (思瑞浦, 莱特光电, 芯源微) were eliminated purely on extension. This rule is doing heavy lifting in preventing chase entries during a weak tape.
 - Defensive sector sweep (pharma +4 stocks in top 5, banks #3, all commodities bottom 5) is a classic risk-off signal. When this pattern appears, existing momentum positions in tech/cyclical sectors should have stops tightened, not loosened.
+
+### 自动更新 (2026-06-23)
+
+- Macro regime shifts (Iran deal → oil crash) trigger clean sector rotation: resources/metals in freefall, defensives (banks, pharma) rallying. Portfolio should always hold 1-2 defensive positions when geopolitical tensions are elevated to avoid being 0% exposed to leadership on rotation days.
+- Volume 8.8x MAVOL30 on -9% day is a reliable distribution signal. When combined with stop proximity <2% and sector in bottom 5, the sell decision is mechanical — no 'thesis still valid' exceptions. This pattern was also seen in 扬杰科技 03-03 gap-down.
+- The entry_regime hard block correctly prevented any new positions today when every candidate looked 'almost good enough.' V1's biggest mistake was forcing entries on weak tape. The automatic gate (breadth <1.5:1 + <2 indices green + f10>30) is working as designed.
+- Breadth divergence (2764 up vs indices deep red) is a warning signal, not a green light. Small-cap marginal gains cannot offset large-cap cyclical collapse. This pattern often precedes broader weakness.
