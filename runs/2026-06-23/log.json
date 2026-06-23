@@ -1,0 +1,127 @@
+{
+  "date": "2026-06-23",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1782186039.921163,
+      "errors": [],
+      "end": 1782186052.806615,
+      "duration_sec": 12.9
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 16842,
+      "tokens": {
+        "input_tokens": 206451,
+        "output_tokens": 12211
+      },
+      "rounds": 3,
+      "tool_calls_count": 5,
+      "duration_sec": 172.3,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1782186225.173729,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=15",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=107",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=97%, n=78",
+        "Hypothesis: Created h070 (observation): Defensive sector sweep (pharma +4 stocks in top 5, banks #3, all commodities bot...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002436",
+                "name": "兴森科技",
+                "rule": "stop_proximity",
+                "severity": "WARNING",
+                "currentPrice": 49.0,
+                "stopLoss": 47.71,
+                "distance_pct": 2.63,
+                "suggestion": "🟡 WARNING — only 2.6% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+              },
+              {
+                "code": "300037",
+                "name": "新宙邦",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 86.21,
+                "stopLoss": 82.12,
+                "distance_pct": 4.74,
+                "suggestion": "🟠 WATCH — 4.7% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1782186225.467423,
+      "duration_sec": 0.3
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 002436 — 🟡 WARNING — only 2.6% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
+    "RULE check_stop_proximity: 300037 — 🟠 WATCH — 4.7% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 185.50000000000003
+  }
+}

@@ -2,7 +2,7 @@
   "date": "2026-06-22",
   "status": "degraded",
   "exit_code": 0,
-  "total_duration_sec": 185.3,
+  "total_duration_sec": 256.5,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -10,15 +10,15 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 181.2
+          "latency_ms": 124.2
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 624.5
+          "latency_ms": 451.8
         },
         "pricedb": {
           "status": "ok",
-          "latest_date": "2026-06-18",
+          "latest_date": "2026-06-22",
           "stale": false
         }
       }
@@ -31,23 +31,21 @@
     },
     "collect": {
       "status": "ok",
-      "duration_sec": 13.9,
+      "duration_sec": 11.8,
       "errors": []
     },
     "llm_analysis": {
       "status": "ok",
-      "duration_sec": 170.9
+      "duration_sec": 244.3
     },
     "apply": {
       "status": "ok",
-      "duration_sec": 0.5
+      "duration_sec": 0.4
     },
     "validate": {
-      "status": "warnings",
+      "status": "ok",
       "duration_sec": 0.0,
-      "errors": [
-        "RULE check_stop_proximity: 002947 — 🟠 WATCH — 3.4% above stop. Monitor closely. No immediate action but be ready."
-      ]
+      "errors": []
     }
   },
   "gates": {
@@ -66,9 +64,7 @@
     "phase3_to_phase4": {
       "passed": true,
       "hard_fails": [],
-      "soft_warns": [
-        "rule check_stop_proximity: 🟠 WATCH — 3.4% above stop. Monitor closely. No immediate action but be ready."
-      ]
+      "soft_warns": []
     }
   }
 }
