@@ -1,0 +1,62 @@
+{
+  "date": "2026-06-24",
+  "actions": [
+    {
+      "code": "300037",
+      "name": "新宙邦",
+      "action": "HOLD",
+      "price": 89.08,
+      "pnl_pct": 19.33,
+      "note": "+19.33% PnL with strongest single catalyst in portfolio (宁德时代30万吨电解液3年协议). +1.23% today in panic tape shows relative strength. MA distances elevated (dist_ma20=22.2%) but acceptable for existing position with +10% stop buffer. All rule violations clear."
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "action": "RAISE_STOP",
+      "price": 113.5,
+      "pnl_pct": 20.8,
+      "note": "PnL +20.80% crosses Rule 5 +20% trigger. Mechanical stop-raise to +10% of entry (93.96 × 1.10 = 103.36). Today +7.38% with 5.4× normal volume shows institutional accumulation. KrF光刻胶批量+ArF浸没式+5.8亿光刻胶项目 thesis stronger than ever. 0 risk factors. Lock in +10% floor while giving 8.9% breathing room."
+    },
+    {
+      "code": "688401",
+      "name": "路维光电",
+      "action": "HOLD",
+      "price": 79.05,
+      "pnl_pct": 8.92,
+      "note": "+8.92% PnL with best MA setup in portfolio (dist_ma5=0.1%, price sitting on MA5 support). Today +4.84% bounce off MA5 with 5.8× volume confirms support held. G11掩膜版 global #2, 厦门20亿项目设备搬入, 14nm掩膜版2026投建. Sector alignment best in portfolio (半导体 #5 hot). Yesterday's -6.34% scare resolved."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 984127.0,
+    "dayPnl": 4066.0,
+    "dayReturnPct": 0.41,
+    "totalReturnPct": -1.59,
+    "unrealizedPnl": 11996.0,
+    "realizedPnl": -27869.0,
+    "cashPct": 91.97
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.2411,
+    "up": 1066,
+    "down": 4422,
+    "positive_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [
+      "上证指数"
+    ],
+    "limit_ups": 66,
+    "limit_downs": 36,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.24:1, 2/3 major indices green, 66 limit-ups / 36 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 0.24:1 panic — 1066↑/4422↓, 36跌停/66涨停. Overnight Nasdaq -2% & chip index -8% triggered broad A-share selling, but 科创50 +2.48% diverged sharply as money concentrated into AI/semiconductor names. 玻璃玻纤 +8.33% led all sectors on AI server PCB demand (5th fiber cloth price hike of 2026). 半导体 +2.82% extended persistent leadership. Three existing positions all in or adjacent to hot sectors. IV data unavailable. Entry regime hard_block — all new positions deferred. Cash at 92% is correct posture."
+  }
+}

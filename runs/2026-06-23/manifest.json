@@ -2,7 +2,7 @@
   "date": "2026-06-23",
   "status": "degraded",
   "exit_code": 0,
-  "total_duration_sec": 185.5,
+  "total_duration_sec": 209.9,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -10,15 +10,15 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 118.5
+          "latency_ms": 110.4
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 515.4
+          "latency_ms": 483.4
         },
         "pricedb": {
           "status": "ok",
-          "latest_date": "2026-06-22",
+          "latest_date": "2026-06-23",
           "stale": false
         }
       }
@@ -31,12 +31,12 @@
     },
     "collect": {
       "status": "ok",
-      "duration_sec": 12.9,
+      "duration_sec": 17.7,
       "errors": []
     },
     "llm_analysis": {
       "status": "ok",
-      "duration_sec": 172.3
+      "duration_sec": 191.9
     },
     "apply": {
       "status": "ok",
@@ -46,8 +46,7 @@
       "status": "warnings",
       "duration_sec": 0.0,
       "errors": [
-        "RULE check_stop_proximity: 002436 — 🟡 WARNING — only 2.6% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
-        "RULE check_stop_proximity: 300037 — 🟠 WATCH — 4.7% above stop. Monitor closely. No immediate action but be ready."
+        "RULE check_stop_proximity: 688401 — 🟠 WATCH — 3.7% above stop. Monitor closely. No immediate action but be ready."
       ]
     }
   },
@@ -68,8 +67,7 @@
       "passed": true,
       "hard_fails": [],
       "soft_warns": [
-        "rule check_stop_proximity: 🟡 WARNING — only 2.6% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
-        "rule check_stop_proximity: 🟠 WATCH — 4.7% above stop. Monitor closely. No immediate action but be ready."
+        "rule check_stop_proximity: 🟠 WATCH — 3.7% above stop. Monitor closely. No immediate action but be ready."
       ]
     }
   }

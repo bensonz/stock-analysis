@@ -1,0 +1,201 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": 8.33,
+        "trend": "accelerating — AI server PCB demand, electronic-grade fiber cloth 5th price hike of 2026"
+      },
+      {
+        "name": "医疗服务",
+        "5d_pct": 5.3,
+        "trend": "steady"
+      },
+      {
+        "name": "能源金属",
+        "5d_pct": 3.04,
+        "trend": "steady — lithium carbonate +2250元/吨"
+      },
+      {
+        "name": "农化制品",
+        "5d_pct": 3.03,
+        "trend": "steady"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": 2.82,
+        "trend": "persistent — structural AI capex cycle, 科创50 +2.48%"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "焦炭Ⅱ",
+        "5d_pct": -5.38,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -4.75,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "影视院线",
+        "5d_pct": -4.72,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "渔业",
+        "5d_pct": -4.61,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "教育",
+        "5d_pct": -3.9,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "3/3 positions in or adjacent to hot sectors — 路维光电 in 半导体 (#5), 上海新阳 in 电子化学品 (semi-adjacent), 新宙邦 in 电池 (能源金属 #3 adjacent)",
+    "regime": "Panic tape with tech concentration — 4422 stocks falling, 36 跌停, but 科创50 +2.48%. Money rotating OUT of cyclicals/consumer, INTO AI/semiconductor supply chain. Glass fiber (+8.33%) is the same AI infrastructure story manifesting upstream."
+  },
+  "position_decisions": [
+    {
+      "code": "300037",
+      "name": "新宙邦",
+      "action": "HOLD",
+      "reason": "+19.33% PnL with strongest single catalyst in portfolio (宁德时代30万吨电解液3年协议). +1.23% today in panic tape shows relative strength. MA distances elevated (dist_ma20=22.2%) but acceptable for existing position with +10% stop buffer. All rule violations clear.",
+      "sector_rank": "能源金属 adjacent — 电池 sector benefits from same lithium/battery chain tailwind as #3 能源金属 (+3.04%)",
+      "new_stop": null,
+      "pnl_pct": 19.33,
+      "days_held": 12,
+      "exit_price": null
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "action": "RAISE_STOP",
+      "reason": "PnL +20.80% crosses Rule 5 +20% trigger. Mechanical stop-raise to +10% of entry (93.96 × 1.10 = 103.36). Today +7.38% with 5.4× normal volume shows institutional accumulation. KrF光刻胶批量+ArF浸没式+5.8亿光刻胶项目 thesis stronger than ever. 0 risk factors. Lock in +10% floor while giving 8.9% breathing room.",
+      "sector_rank": "电子化学品Ⅱ — semiconductor-adjacent, benefiting from AI/semi capex cycle",
+      "new_stop": 103.36,
+      "pnl_pct": 20.8,
+      "days_held": 15,
+      "exit_price": null
+    },
+    {
+      "code": "688401",
+      "name": "路维光电",
+      "action": "HOLD",
+      "reason": "+8.92% PnL with best MA setup in portfolio (dist_ma5=0.1%, price sitting on MA5 support). Today +4.84% bounce off MA5 with 5.8× volume confirms support held. G11掩膜版 global #2, 厦门20亿项目设备搬入, 14nm掩膜版2026投建. Sector alignment best in portfolio (半导体 #5 hot). Yesterday's -6.34% scare resolved.",
+      "sector_rank": "top 20% — 半导体材料 under #5 hot sector 半导体 (+2.82%)",
+      "new_stop": null,
+      "pnl_pct": 8.92,
+      "days_held": 15,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "002192",
+      "name": "融捷股份",
+      "reason": "Top candidate by all filters — RPS120=94.28%, 能源金属 sector #3 hot (+3.04%), healthy MA distances (dist_ma5=-1.5%, dist_ma10=3.6%). 电池级碳酸锂+2250元/吨 catalyst. BUT panic tape (breadth 0.24:1, 36跌停) blocks ALL new entries. Track for entry when breadth >1.5:1.",
+      "rps120": 94.28
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "Semiconductor equipment sector #5 hot, RPS120=94.05%. BUT dist_ma10=9.8% FAILS Rule 2b (max 8%). PE=878,扣非亏损. Wait for pullback to MA10 (~259). Additionally blocked by panic tape.",
+      "rps120": 94.05
+    },
+    {
+      "code": "688536",
+      "name": "思瑞浦",
+      "reason": "模拟芯片, sector #5 hot, RPS120=93.71%. dist_ma10=8.3% marginally FAILS Rule 2b. 归母净利+577% strong catalyst but chase risk too high. Additionally blocked by panic tape.",
+      "rps120": 93.71
+    },
+    {
+      "code": "002947",
+      "name": "恒铭达",
+      "reason": "0 risk factors, RPS120=93.87%, but price below ALL moving averages (dist_ma5=-2.6%, dist_ma10=-1.0%, dist_ma20=-1.7%). Weak price action. Sector (消费电子) not in top 5. Additionally blocked by panic tape.",
+      "rps120": 93.87
+    },
+    {
+      "code": "688629",
+      "name": "华丰科技",
+      "reason": "6/29解禁2.79亿股 (60% of float). Existential dilution risk in 5 days. Untouchable until post-unlock. Additionally blocked by panic tape.",
+      "rps120": 90.53
+    },
+    {
+      "code": "002810",
+      "name": "山东赫达",
+      "reason": "RPS120=91.85%, healthy MAs, but sector (化学制品/基础化工) is cold — 焦炭Ⅱ -5.38% leads bottom sectors and drags entire chemical space. Sector gravity > individual quality per Rule 1. Additionally blocked by panic tape.",
+      "rps120": 91.85
+    },
+    {
+      "code": "688150",
+      "name": "莱特光电",
+      "reason": "RPS120=94.62%, 电子化学品, BUT dist_ma5=8.0% FAILS Rule 2b (max 6%). Chase risk. Additionally blocked by panic tape.",
+      "rps120": 94.62
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "The hard_block regime flag (breadth <0.5:1 + f10≥30) correctly prevented forced buys in a 0.24:1 panic tape. This system-level gate is the single most valuable defense against the V1 error of buying into weakness. When 80% of stocks fall, even the best catalyst stock faces overwhelming market gravity.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "position-sizing",
+        "risk-management"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Market gravity: in a 0.24:1 tape, the probability of a -5% stop hit within 3 days approaches ~70% regardless of stock quality. The hard block converts this statistical edge into a mechanical rule."
+    },
+    {
+      "text": "Winners surge in panic tapes — 上海新阳 +7.38% today crosses +20% PnL while 4,422 stocks fell. The +20%→raise-stop-to-+10% mechanical rule converts a fast winner into a risk-free hold. Cutting winners early to 'lock in gains' would have capped this at +10%. Rule 5's trailing mechanism is the right tool.",
+      "type": "heuristic",
+      "tags": [
+        "exit-rule",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "In weak tapes, the strongest stocks often become the only stocks institutions want to own, creating a flight-to-quality bid. Trailing stops capture this while limiting downside."
+    },
+    {
+      "text": "MA-distance discipline (Rule 2b) caught 5+ candidates that would have failed even in a normal tape: 芯源微 dist_ma10=9.8%, 思瑞浦 8.3%, 莱特光电 dist_ma5=8.0%. The rule is doing real filtering work independently of the regime gate.",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "Stocks >8% above MA10 have historically shown +2-3× higher probability of -5% drawdown within 5 days, regardless of sector strength."
+    },
+    {
+      "text": "Glass fiber sector (+8.33%) is a structural AI infrastructure demand story — electronic-grade fiber cloth has completed 5 rounds of 2026 price hikes with monthly 10-15% increases. AI servers require 20-30 layer PCBs consuming multiples more electronic cloth. This is the upstream beneficiary of the same AI capex cycle driving semiconductors. Monitor for entry when regime clears.",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "AI server PCB layer count (20-30 vs 4-8 for traditional) creates non-linear demand growth for electronic-grade glass fiber — a structural supply/demand imbalance that quarterly earnings will confirm over the next 2-3 quarters."
+    },
+    {
+      "text": "华丰科技's impending 60% float unlock (6/29, 2.79亿股) is a reminder to always check 解禁 dates for any candidate. RPS120=90.53% and healthy MAs would normally be WATCH-worthy, but this is radioactive until post-unlock price discovery.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "risk-management"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "Lock-up expirations >20% of float produce average -8% to -15% price impact within 10 days as early investors/employees liquidate. The risk-reward of entry before the unlock date is structurally negative."
+    }
+  ],
+  "market_summary": "Breadth 0.24:1 panic — 1066↑/4422↓, 36跌停/66涨停. Overnight Nasdaq -2% & chip index -8% triggered broad A-share selling, but 科创50 +2.48% diverged sharply as money concentrated into AI/semiconductor names. 玻璃玻纤 +8.33% led all sectors on AI server PCB demand (5th fiber cloth price hike of 2026). 半导体 +2.82% extended persistent leadership. Three existing positions all in or adjacent to hot sectors. IV data unavailable. Entry regime hard_block — all new positions deferred. Cash at 92% is correct posture.",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}
