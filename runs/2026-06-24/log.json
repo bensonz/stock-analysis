@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1782272439.680806,
+      "start": 1782287062.543666,
       "errors": [],
-      "end": 1782272453.294765,
-      "duration_sec": 13.6
+      "end": 1782287074.241874,
+      "duration_sec": 11.7
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 21128,
+      "response_size_bytes": 13190,
       "tokens": {
-        "input_tokens": 268009,
-        "output_tokens": 12225
+        "input_tokens": 126871,
+        "output_tokens": 14322
       },
-      "rounds": 4,
-      "tool_calls_count": 7,
-      "duration_sec": 179.8,
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 3685.8,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -25,26 +25,24 @@
     },
     {
       "phase": "apply",
-      "start": 1782272633.171873,
+      "start": 1782290760.108431,
       "actions": [
-        "RAISE_STOP 300236 → 103.36",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=109",
-        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=31",
-        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=80",
-        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=18",
-        "Hypothesis: Created h071 (observation): 华丰科技's impending 60% float unlock (6/29, 2.79亿股) is a reminder to always check 解...",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=110",
+        "Hypothesis: Created h072 (observation): Volume confirmation is the best real-time validator in a panic tape: all 3 activ...",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=81",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=82",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1782272633.6894982,
+      "end": 1782290760.6498072,
       "duration_sec": 0.5
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 193.9
+    "totalDurationSec": 3698.0
   }
 }

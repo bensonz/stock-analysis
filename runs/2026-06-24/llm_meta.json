@@ -2,80 +2,60 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 268009,
-  "output_tokens": 12225,
-  "rounds": 4,
-  "duration_sec": 179.8,
+  "input_tokens": 126871,
+  "output_tokens": 14322,
+  "rounds": 2,
+  "duration_sec": 3685.8,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年6月24日 大跌 原因 市场",
+        "query": "A股 2026年6月24日 半导体板块 大涨 原因",
         "max_results": 5
       },
-      "result_length": 2283
+      "result_length": 3284
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "半导体 科创板 2026年6月 大涨 原因",
+        "query": "A股 2026年6月24日 玻璃玻纤 大涨 板块",
         "max_results": 5
       },
-      "result_length": 3336
+      "result_length": 3204
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "新宙邦 宁德时代 电解液 2026年6月 最新",
+        "query": "新宙邦 宁德时代 电解液协议 2026年6月",
         "max_results": 5
       },
-      "result_length": 2613
+      "result_length": 2557
     },
     {
       "pass": "P1",
-      "round": 2,
+      "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "上海新阳 光刻胶 300236 2026年6月 最新进展",
+        "query": "上海新阳 光刻胶 2026年6月 股价",
         "max_results": 5
       },
-      "result_length": 3242
+      "result_length": 2827
     },
     {
       "pass": "P1",
-      "round": 2,
+      "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "路维光电 688401 掩膜版 2026年6月",
+        "query": "路维光电 掩膜版 2026年6月 半导体材料",
         "max_results": 5
       },
-      "result_length": 2796
-    },
-    {
-      "pass": "P1",
-      "round": 2,
-      "tool": "web_search",
-      "input": {
-        "query": "A股 玻璃玻纤 大涨 2026年6月24日",
-        "max_results": 5
-      },
-      "result_length": 2821
-    },
-    {
-      "pass": "P1",
-      "round": 3,
-      "tool": "web_search",
-      "input": {
-        "max_results": 3,
-        "query": "上海新阳 300236 2026年6月24日 股价 光刻胶"
-      },
-      "result_length": 1563
+      "result_length": 2810
     }
   ],
   "fallback_used": false

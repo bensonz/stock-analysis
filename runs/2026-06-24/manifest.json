@@ -1,0 +1,70 @@
+{
+  "date": "2026-06-24",
+  "status": "degraded",
+  "exit_code": 0,
+  "total_duration_sec": 193.9,
+  "phases": {
+    "health_check": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "sources": {
+        "sina": {
+          "status": "ok",
+          "latency_ms": 79.9
+        },
+        "cheesefortune": {
+          "status": "ok",
+          "latency_ms": 439.9
+        },
+        "pricedb": {
+          "status": "ok",
+          "latest_date": "2026-06-23",
+          "stale": false
+        }
+      }
+    },
+    "preflight_pricedb": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "latest_date": "2026-06-24",
+      "target": "2026-06-24"
+    },
+    "collect": {
+      "status": "ok",
+      "duration_sec": 13.6,
+      "errors": []
+    },
+    "llm_analysis": {
+      "status": "ok",
+      "duration_sec": 179.8
+    },
+    "apply": {
+      "status": "ok",
+      "duration_sec": 0.5
+    },
+    "validate": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "errors": []
+    }
+  },
+  "gates": {
+    "phase1_to_phase2": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": []
+    },
+    "phase2_to_phase3": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [
+        "missing watchlist"
+      ]
+    },
+    "phase3_to_phase4": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": []
+    }
+  }
+}

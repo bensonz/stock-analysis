@@ -2,40 +2,49 @@
   "date": "2026-06-24",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4096.137,
-      "change_pct": -0.25
+      "value": 4110.813,
+      "change_pct": 0.11
     },
     "shenzhen_component": {
-      "value": 15906.57,
-      "change_pct": 0.33
+      "value": 16051.32,
+      "change_pct": 1.24
     },
     "chinext": {
-      "value": 4209.9,
-      "change_pct": 0.42
+      "value": 4251.42,
+      "change_pct": 1.41
     },
-    "sentiment": "bearish",
+    "sentiment": "neutral",
     "hot_sectors": [
       "玻璃玻纤",
-      "医疗服务",
+      "半导体",
       "能源金属",
-      "农化制品",
-      "半导体"
+      "医疗服务",
+      "消费电子"
     ],
     "cold_sectors": [
       "焦炭Ⅱ",
-      "林业Ⅱ",
-      "影视院线",
       "渔业",
-      "教育"
+      "种植业",
+      "林业Ⅱ",
+      "房地产服务"
     ],
-    "notes": "Breadth 0.24:1 panic — 1066↑/4422↓, 36跌停/66涨停. Overnight Nasdaq -2% & chip index -8% triggered broad A-share selling, but 科创50 +2.48% diverged sharply as money concentrated into AI/semiconductor names. 玻璃玻纤 +8.33% led all sectors on AI server PCB demand (5th fiber cloth price hike of 2026). 半导体 +2.82% extended persistent leadership. Three existing positions all in or adjacent to hot sectors. IV data unavailable. Entry regime hard_block — all new positions deferred. Cash at 92% is correct posture."
+    "notes": "Bifurcated panic: all 4 major indices green (上证+0.11%, 深证+1.24%, 创业板+1.41%, 科创50+3.82%) masking severe breadth at 0.36:1 (1434↑/4034↓). 67跌停 vs 106涨停, f4_7=812 stocks down 4-7%. Large-cap AI/semiconductor mega-caps carrying indices while small-caps liquidated. Hot sectors all AI-infrastructure-linked: 玻璃玻纤+8.75% (电子布第5轮涨价), 半导体+5.00% (AI+国产替代), 能源金属+4.44% (碳酸锂+2250). Cold: resources/agri/property de-risked hard. IV: no data. Portfolio: 3/3 positions in hot AI/semiconductor-adjacent sectors, all +16-22% PnL, all with 5-16× normal volume confirming institutional accumulation. 91.8% cash. Day PnL +5,546. Entry regime hard_block — no new positions warranted. Process: HOLD winners, let cash work as defense."
   },
   "strategy_scan": {
-    "total_stocks_scanned": 61,
+    "total_stocks_scanned": 59,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-06-24T11:43:53.196543+08:00"
+    "scan_time": "2026-06-24T16:46:00.131582+08:00"
   },
   "recommendations": [
+    {
+      "code": "002947.SZ",
+      "name": "恒铭达",
+      "price": null,
+      "rps120": 93.87,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
     {
       "code": "002192.SZ",
       "name": "融捷股份",
@@ -64,28 +73,10 @@
       "reasoning": ""
     },
     {
-      "code": "002947.SZ",
-      "name": "恒铭达",
+      "code": "605111.SH",
+      "name": "新洁能",
       "price": null,
-      "rps120": 93.87,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688629.SH",
-      "name": "华丰科技",
-      "price": null,
-      "rps120": 90.53,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "002810.SZ",
-      "name": "山东赫达",
-      "price": null,
-      "rps120": 91.85,
+      "rps120": 90.45,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -98,14 +89,23 @@
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
+    },
+    {
+      "code": "002937.SZ",
+      "name": "兴瑞科技",
+      "price": null,
+      "rps120": 94.36,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
     }
   ],
   "summary": {
-    "total_scanned": 61,
+    "total_scanned": 59,
     "buy_recommendations": 0,
     "watch_recommendations": 7,
     "avoid_recommendations": 0,
-    "market_call": "谨慎",
-    "reasoning": "Breadth 0.24:1 panic — 1066↑/4422↓, 36跌停/66涨停. Overnight Nasdaq -2% & chip index -8% triggered broad A-share selling, but 科创50 +2.48% diverged sharply as money concentrated into AI/semiconductor names. 玻璃玻纤 +8.33% led all sectors on AI server PCB demand (5th fiber cloth price hike of 2026). 半导体 +2.82% extended persistent leadership. Three existing positions all in or adjacent to hot sectors. IV data unavailable. Entry regime hard_block — all new positions deferred. Cash at 92% is correct posture."
+    "market_call": "观望",
+    "reasoning": "Bifurcated panic: all 4 major indices green (上证+0.11%, 深证+1.24%, 创业板+1.41%, 科创50+3.82%) masking severe breadth at 0.36:1 (1434↑/4034↓). 67跌停 vs 106涨停, f4_7=812 stocks down 4-7%. Large-cap AI/semiconductor mega-caps carrying indices while small-caps liquidated. Hot sectors all AI-infrastructure-linked: 玻璃玻纤+8.75% (电子布第5轮涨价), 半导体+5.00% (AI+国产替代), 能源金属+4.44% (碳酸锂+2250). Cold: resources/agri/property de-risked hard. IV: no data. Portfolio: 3/3 positions in hot AI/semiconductor-adjacent sectors, all +16-22% PnL, all with 5-16× normal volume confirming institutional accumulation. 91.8% cash. Day PnL +5,546. Entry regime hard_block — no new positions warranted. Process: HOLD winners, let cash work as defense."
   }
 }

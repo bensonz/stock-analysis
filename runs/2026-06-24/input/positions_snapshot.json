@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-06-24T11:40:39.692428+08:00",
+  "snapshot_time": "2026-06-24T15:44:22.555072+08:00",
   "snapshot_type": "pre_run",
   "date": "2026-06-24",
   "portfolio_config": {
@@ -11,23 +11,23 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-06-23T15:38:43.623017+08:00",
+    "lastUpdated": "2026-06-24T11:43:53.199024+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 980061.0,
+      "totalEquity": 984127.0,
       "cash": 905101.0,
-      "investedValue": 74960.0,
-      "unrealizedPnl": 7930.0,
+      "investedValue": 79026.0,
+      "unrealizedPnl": 11996.0,
       "realizedPnl": -27869.0,
-      "totalPnl": -19939.0,
-      "totalReturnPct": -1.99,
+      "totalPnl": -15873.0,
+      "totalReturnPct": -1.59,
       "positionsUsed": 3,
       "positionsMax": 10,
-      "cashPct": 92.35,
-      "dayPnl": -2782.0,
+      "cashPct": 91.97,
+      "dayPnl": 4066.0,
       "minCashPct": 20,
-      "minCashValue": 196012.2,
-      "deployableCash": 709088.8
+      "minCashValue": 196825.4,
+      "deployableCash": 708275.6
     },
     "activePositions": [
       {
@@ -35,8 +35,8 @@
         "name": "新宙邦",
         "entryDate": "2026-06-12",
         "entryPrice": 74.65,
-        "currentPrice": 88.0,
-        "pnl_pct": 17.88,
+        "currentPrice": 89.08,
+        "pnl_pct": 19.33,
         "stopLoss": 70.92,
         "currentStop": 82.12,
         "targetPrice": 95.0,
@@ -45,42 +45,42 @@
         "shares": 200,
         "allocation_pct": 2.81,
         "allocatedCapital": 14930.0,
-        "currentValue": 17600.0,
-        "unrealizedPnl": 2670.0,
-        "volume": 366560,
+        "currentValue": 17816.0,
+        "unrealizedPnl": 2886.0,
+        "volume": 203910,
         "mavol30": 60296.27,
         "volumeBelowMavol30": false,
-        "weight_pct": 1.8
+        "weight_pct": 1.81
       },
       {
         "code": "300236",
         "name": "上海新阳",
         "entryDate": "2026-06-09",
         "entryPrice": 93.96,
-        "currentPrice": 105.7,
-        "pnl_pct": 12.49,
+        "currentPrice": 113.5,
+        "pnl_pct": 20.8,
         "stopLoss": 89.26,
-        "currentStop": 93.96,
+        "currentStop": 103.36,
         "targetPrice": 120.0,
         "status": "active",
         "sector": "电子化学品Ⅱ",
         "shares": 400,
         "allocation_pct": 5.25,
         "allocatedCapital": 37584.0,
-        "currentValue": 42280.0,
-        "unrealizedPnl": 4696.0,
-        "volume": 151877,
+        "currentValue": 45400.0,
+        "unrealizedPnl": 7816.0,
+        "volume": 151603,
         "mavol30": 28272.43,
         "volumeBelowMavol30": false,
-        "weight_pct": 4.31
+        "weight_pct": 4.61
       },
       {
         "code": "688401",
         "name": "路维光电",
         "entryDate": "2026-06-09",
         "entryPrice": 72.58,
-        "currentPrice": 75.4,
-        "pnl_pct": 3.89,
+        "currentPrice": 79.05,
+        "pnl_pct": 8.91,
         "stopLoss": 68.95,
         "currentStop": 72.58,
         "targetPrice": 92.0,
@@ -89,12 +89,12 @@
         "shares": 200,
         "allocation_pct": 3.75,
         "allocatedCapital": 14516.0,
-        "currentValue": 15080.0,
-        "unrealizedPnl": 564.0,
-        "volume": 99881,
+        "currentValue": 15810.0,
+        "unrealizedPnl": 1294.0,
+        "volume": 51749,
         "mavol30": 8874.6,
         "volumeBelowMavol30": false,
-        "weight_pct": 1.54
+        "weight_pct": 1.61
       }
     ]
   },
@@ -187,6 +187,13 @@
           "change_pct": 17.88,
           "action": "HOLD",
           "note": "宁德时代30万吨电解液3年协议 remains portfolio's strongest catalyst. +17.88% PnL with stop at +10% (82.12) providing 6.68% buffer. Today -2.21% is healthy pullback after yesterday's lithium surge. Sector (电池) not in danger zone. 11 days held."
+        },
+        {
+          "date": "2026-06-24",
+          "price": 89.08,
+          "change_pct": 19.33,
+          "action": "HOLD",
+          "note": "+19.33% PnL with strongest single catalyst in portfolio (宁德时代30万吨电解液3年协议). +1.23% today in panic tape shows relative strength. MA distances elevated (dist_ma20=22.2%) but acceptable for existing position with +10% stop buffer. All rule violations clear."
         }
       ],
       "exitDate": null,
@@ -196,7 +203,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-06-12T11:40:46.893408+08:00",
-      "updatedAt": "2026-06-23T15:38:43.609741+08:00",
+      "updatedAt": "2026-06-24T11:43:53.172519+08:00",
       "trackerVersion": "2.1"
     },
     "300236": {
@@ -208,7 +215,7 @@
       "entryPrice": 93.96,
       "targetPrice": 120.0,
       "stopLoss": 89.26,
-      "currentStop": 93.96,
+      "currentStop": 103.36,
       "allocation_pct": 5.25,
       "shares": 400,
       "allocatedCapital": 37584.0,
@@ -294,6 +301,13 @@
           "change_pct": 12.49,
           "action": "HOLD",
           "note": "0 risk factors. Photoresist国产替代 thesis (KrF批量+ArF浸没式+5.8亿光刻胶项目) structural, not cyclical. Stop at breakeven 93.96 provides 11.1% buffer. Today -3.13% normal in weak tape. 14 days held, time stop easily passed."
+        },
+        {
+          "date": "2026-06-24",
+          "price": 113.5,
+          "change_pct": 20.8,
+          "action": "RAISE_STOP",
+          "note": "PnL +20.80% crosses Rule 5 +20% trigger. Mechanical stop-raise to +10% of entry (93.96 × 1.10 = 103.36). Today +7.38% with 5.4× normal volume shows institutional accumulation. KrF光刻胶批量+ArF浸没式+5.8亿光刻胶项目 thesis stronger than ever. 0 risk factors. Lock in +10% floor while giving 8.9% breathing room."
         }
       ],
       "exitDate": null,
@@ -303,7 +317,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-06-09T15:39:26.780692+08:00",
-      "updatedAt": "2026-06-23T15:38:43.612789+08:00",
+      "updatedAt": "2026-06-24T11:43:53.189083+08:00",
       "trackerVersion": "2.1"
     },
     "688401": {
@@ -401,6 +415,13 @@
           "change_pct": 3.89,
           "action": "HOLD",
           "note": "G11掩膜版+厦门20亿项目 thesis intact. BUT stop proximity WATCH at 3.74% (75.40 vs 72.58 stop). Today -6.34% is sharp erosion. MA support held (price near MA5). Monitor closely — if opens weak tomorrow and approaches 73, consider proactive sell. Small position size limits absolute risk."
+        },
+        {
+          "date": "2026-06-24",
+          "price": 79.05,
+          "change_pct": 8.91,
+          "action": "HOLD",
+          "note": "+8.92% PnL with best MA setup in portfolio (dist_ma5=0.1%, price sitting on MA5 support). Today +4.84% bounce off MA5 with 5.8× volume confirms support held. G11掩膜版 global #2, 厦门20亿项目设备搬入, 14nm掩膜版2026投建. Sector alignment best in portfolio (半导体 #5 hot). Yesterday's -6.34% scare resolved."
         }
       ],
       "exitDate": null,
@@ -410,7 +431,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-06-09T15:39:26.785471+08:00",
-      "updatedAt": "2026-06-23T15:38:43.615779+08:00",
+      "updatedAt": "2026-06-24T11:43:53.191835+08:00",
       "trackerVersion": "2.1"
     }
   },

@@ -771,11 +771,15 @@
           {
             "date": "2026-06-24",
             "detail": "The hard_block regime flag (breadth <0.5:1 + f10≥30) correctly prevented forced buys in a 0.24:1 panic tape. This system-level gate is the single most valuable defense against the V1 error of buying into weakness. When 80% of stocks fall, even the best catalyst stock faces overwhelming market gravity."
+          },
+          {
+            "date": "2026-06-24",
+            "detail": "Bifurcated tape (all indices green + breadth 0.36:1 + 67跌停) is a distinct regime type: large-cap AI/tech mega-caps carry indices while 73% of stocks decline. In this regime, holding existing tech winners works but adding new positions is suicidal — the 'index green' signal is dangerously misleading for entry decisions. Always cross-check breadth distribution, not just index direction."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 109,
+      "sampleSize": 110,
       "hitRate": 1.0,
       "confidence": 0.991,
       "tags": [],
@@ -1460,6 +1464,14 @@
           {
             "date": "2026-06-24",
             "detail": "MA-distance discipline (Rule 2b) caught 5+ candidates that would have failed even in a normal tape: 芯源微 dist_ma10=9.8%, 思瑞浦 8.3%, 莱特光电 dist_ma5=8.0%. The rule is doing real filtering work independently of the regime gate."
+          },
+          {
+            "date": "2026-06-24",
+            "detail": "路维光电 +11.95% on 15.8× volume bouncing off MA5 support (dist_ma5=0.1%) is the strongest single technical confirmation today. The V1 system would have panic-sold after yesterday's -6.34%; V2's MA-discipline framework correctly held through the minor MA5 test, and today's signal is maximum reward for that discipline. MA5 tests in hot sectors with strong fundamentals are buying opportunities, not exit signals."
+          },
+          {
+            "date": "2026-06-24",
+            "detail": "Rule 2b (MA-distance anti-chase) filtered 18 of 25 enriched candidates today. Combined with sector filter and entry regime hard_block, the triple-gate system produces near-zero false positives. Of the 7 candidates passing MA checks, 5 are in cold/dead sectors, leaving only 恒铭达 and 融捷股份 — both correctly blocked by the entry regime anyway. The system is working as designed."
           }
         ],
         "contradicting": [
@@ -1473,9 +1485,9 @@
           }
         ]
       },
-      "sampleSize": 80,
-      "hitRate": 0.975,
-      "confidence": 0.963,
+      "sampleSize": 82,
+      "hitRate": 0.976,
+      "confidence": 0.964,
       "tags": [
         "entry-filter",
         "timing"
@@ -3218,6 +3230,34 @@
       "tags": [
         "entry-filter",
         "risk-management"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h072",
+      "text": "Volume confirmation is the best real-time validator in a panic tape: all 3 active positions showed 5-16× normal volume on up days today (新宙邦 5.1×, 上海新阳 7.8×, 路维光电 15.8×). This level of volume on positive-return days during a 73%-declining-stocks tape signals institutional accumulation, not retail FOMO. Supports HOLD conviction even when market breadth is frightening.",
+      "type": "signal",
+      "status": "observation",
+      "created": "2026-06-24",
+      "lastTested": "2026-06-24",
+      "mechanism": "Institutional money concentrates in thematic winners during bifurcated tapes. Volume multiples >5× on positive days = smart money rotating INTO these names while rotating OUT of everything else. The distribution skew (r0_2=596, r2_4=322, r4_7=249, r7_10=161, r10=106) shows gains are also concentrated.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-06-24",
+            "detail": "Volume confirmation is the best real-time validator in a panic tape: all 3 active positions showed 5-16× normal volume on up days today (新宙邦 5.1×, 上海新阳 7.8×, 路维光电 15.8×). This level of volume on positive-return days during a 73%-declining-stocks tape signals institutional accumulation, not retail FOMO. Supports HOLD conviction even when market breadth is frightening."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "position-sizing",
+        "exit-rule"
       ],
       "parentRule": null,
       "retiredDate": null,

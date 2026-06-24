@@ -4,33 +4,33 @@
 
 | 指数 | 收盘 | 涨跌幅 |
 |------|------|--------|
-| 上证指数 | 4096.14 | -0.25% |
-| 深证成指 | 15906.57 | +0.33% |
-| 创业板指 | 4209.90 | +0.42% |
-| 科创50 | 1963.82 | +2.48% |
+| 上证指数 | 4110.81 | +0.11% |
+| 深证成指 | 16051.32 | +1.24% |
+| 创业板指 | 4251.42 | +1.41% |
+| 科创50 | 1989.43 | +3.82% |
 
-涨跌比: 1066涨 / 4422跌 / 5513总
+涨跌比: 1434涨 / 4034跌 / 5513总
 
-**热门板块**: 玻璃玻纤(+8.33%), 医疗服务(+5.30%), 能源金属(+3.04%), 农化制品(+3.03%), 半导体(+2.82%)
+**热门板块**: 玻璃玻纤(+8.75%), 半导体(+5.00%), 能源金属(+4.44%), 医疗服务(+4.42%), 消费电子(+4.26%)
 
-**冷门板块**: 焦炭Ⅱ(-5.38%), 林业Ⅱ(-4.75%), 影视院线(-4.72%), 渔业(-4.61%), 教育(-3.90%)
+**冷门板块**: 焦炭Ⅱ(-5.53%), 渔业(-4.55%), 种植业(-4.10%), 林业Ⅱ(-3.98%), 房地产服务(-3.78%)
 
-Breadth 0.24:1 panic — 1066↑/4422↓, 36跌停/66涨停. Overnight Nasdaq -2% & chip index -8% triggered broad A-share selling, but 科创50 +2.48% diverged sharply as money concentrated into AI/semiconductor names. 玻璃玻纤 +8.33% led all sectors on AI server PCB demand (5th fiber cloth price hike of 2026). 半导体 +2.82% extended persistent leadership. Three existing positions all in or adjacent to hot sectors. IV data unavailable. Entry regime hard_block — all new positions deferred. Cash at 92% is correct posture.
+Bifurcated panic: all 4 major indices green (上证+0.11%, 深证+1.24%, 创业板+1.41%, 科创50+3.82%) masking severe breadth at 0.36:1 (1434↑/4034↓). 67跌停 vs 106涨停, f4_7=812 stocks down 4-7%. Large-cap AI/semiconductor mega-caps carrying indices while small-caps liquidated. Hot sectors all AI-infrastructure-linked: 玻璃玻纤+8.75% (电子布第5轮涨价), 半导体+5.00% (AI+国产替代), 能源金属+4.44% (碳酸锂+2250). Cold: resources/agri/property de-risked hard. IV: no data. Portfolio: 3/3 positions in hot AI/semiconductor-adjacent sectors, all +16-22% PnL, all with 5-16× normal volume confirming institutional accumulation. 91.8% cash. Day PnL +5,546. Entry regime hard_block — no new positions warranted. Process: HOLD winners, let cash work as defense.
 
 ## 策略池扫描
 
-扫描 **61** 只策略池股票
+扫描 **59** 只策略池股票
 (来源: cheesefortune_intersection)
 
 ## 跳过标的
 
-1. **融捷股份** (002192) (RPS 94.28%) — Top candidate by all filters — RPS120=94.28%, 能源金属 sector #3 hot (+3.04%), healthy MA distances (dist_ma5=-1.5%, dist_ma10=3.6%). 电池级碳酸锂+2250元/吨 catalyst. BUT panic tape (breadth 0.24:1, 36跌停) blocks ALL new entries. Track for entry when breadth >1.5:1.
-2. **芯源微** (688037) (RPS 94.05%) — Semiconductor equipment sector #5 hot, RPS120=94.05%. BUT dist_ma10=9.8% FAILS Rule 2b (max 8%). PE=878,扣非亏损. Wait for pullback to MA10 (~259). Additionally blocked by panic tape.
-3. **思瑞浦** (688536) (RPS 93.71%) — 模拟芯片, sector #5 hot, RPS120=93.71%. dist_ma10=8.3% marginally FAILS Rule 2b. 归母净利+577% strong catalyst but chase risk too high. Additionally blocked by panic tape.
-4. **恒铭达** (002947) (RPS 93.87%) — 0 risk factors, RPS120=93.87%, but price below ALL moving averages (dist_ma5=-2.6%, dist_ma10=-1.0%, dist_ma20=-1.7%). Weak price action. Sector (消费电子) not in top 5. Additionally blocked by panic tape.
-5. **华丰科技** (688629) (RPS 90.53%) — 6/29解禁2.79亿股 (60% of float). Existential dilution risk in 5 days. Untouchable until post-unlock. Additionally blocked by panic tape.
-6. **山东赫达** (002810) (RPS 91.85%) — RPS120=91.85%, healthy MAs, but sector (化学制品/基础化工) is cold — 焦炭Ⅱ -5.38% leads bottom sectors and drags entire chemical space. Sector gravity > individual quality per Rule 1. Additionally blocked by panic tape.
-7. **莱特光电** (688150) (RPS 94.62%) — RPS120=94.62%, 电子化学品, BUT dist_ma5=8.0% FAILS Rule 2b (max 6%). Chase risk. Additionally blocked by panic tape.
+1. **恒铭达** (002947) (RPS 93.87%) — Entry regime hard_block (breadth 0.36:1, 67跌停, panic). Would be top candidate otherwise: 消费电子 sector #5 hot at +4.26%, 0 risk factors, RPS120=93.87% sweet spot, dist_ma5=-2.6% healthy pullback to MA5/MA10 support, score 8.2/8.1, 净利+31%, 4机构预测>25%增长, AI手机+折叠屏+数据中心元器件多概念.
+2. **融捷股份** (002192) (RPS 94.28%) — Entry regime hard_block. Would be strong candidate: 能源金属 sector #3 hot at +4.44%, dist_ma5=-1.5% healthy pullback with all MA distances within norms, 电池级碳酸锂+2250元/吨 catalyst fresh and ongoing, PE 45 moderate for lithium miner, 净利+1288% recent quarter. RPS120=94.28% slightly above sweet spot but sector top-10% exception applies.
+3. **芯源微** (688037) (RPS 94.05%) — Entry regime hard_block + Rule 2b MA chase (dist_ma10=9.8% > 8%). 半导体设备 sector #2 hot, AI capex+花旗上调封测目标价双重催化, 11机构预测>25%增长. But PE 908 + 扣非仅占净利20% (收益质量低) + MA extended. Wait for pullback to MA10/MA20 zone before considering.
+4. **思瑞浦** (688536) (RPS 93.71%) — Entry regime hard_block + dist_ma10=8.3% borderline > 8% chase threshold. 模拟芯片 sector #2 hot, 归母净利+577% earnings catalyst, 12机构预测>25%增长. But PE 187 + 收盘价比机构目标价高27% + 商誉占净资产11%. MA border + valuation premium = wait for pullback.
+5. **新洁能** (605111) (RPS 90.45%) — Entry regime hard_block + Rule 2b triple hard fail: dist_ma5=9.4% > 6%, dist_ma10=15.6% > 8%, dist_ma20=28.2% extreme. 半导体 sector #2 hot, AI算力IGBT/MOSFET需求催化. Stock is severely overextended across all timeframes — buying here would be chasing at maximum extension risk.
+6. **莱特光电** (688150) (RPS 94.62%) — Rule 2b MA chase: dist_ma5=8.0% > 6%, dist_ma10=13.6% > 8%. OLED材料+电子化学品概念, 7机构预测>30%增长. But MA extended and光学光电子 sector not in today's top 5. Also PE 118, valuation at 97.7 percentile.
+7. **兴瑞科技** (002937) (RPS 94.36%) — Sector (汽车零部件/汽车电子电气系统) not in top 30% of today's sector rankings. dist_ma10=10.6% > 8% chase. RPS120=94.36%. Revenue -10% YoY, net profit -39% — fundamentals deteriorating despite RPS momentum. Valuation at 98.3 percentile.
 
 ## 今日研究结论
 
@@ -38,8 +38,7 @@ Breadth 0.24:1 panic — 1066↑/4422↓, 36跌停/66涨停. Overnight Nasdaq -2
 - 跳过: 7只
 
 ### 新教训
-- {'text': 'The hard_block regime flag (breadth <0.5:1 + f10≥30) correctly prevented forced buys in a 0.24:1 panic tape. This system-level gate is the single most valuable defense against the V1 error of buying into weakness. When 80% of stocks fall, even the best catalyst stock faces overwhelming market gravity.', 'type': 'rule', 'tags': ['entry-filter', 'position-sizing', 'risk-management'], 'evidence_type': 'supporting', 'related_hypothesis': 'h013', 'mechanism': 'Market gravity: in a 0.24:1 tape, the probability of a -5% stop hit within 3 days approaches ~70% regardless of stock quality. The hard block converts this statistical edge into a mechanical rule.'}
-- {'text': "Winners surge in panic tapes — 上海新阳 +7.38% today crosses +20% PnL while 4,422 stocks fell. The +20%→raise-stop-to-+10% mechanical rule converts a fast winner into a risk-free hold. Cutting winners early to 'lock in gains' would have capped this at +10%. Rule 5's trailing mechanism is the right tool.", 'type': 'heuristic', 'tags': ['exit-rule', 'position-sizing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h023', 'mechanism': 'In weak tapes, the strongest stocks often become the only stocks institutions want to own, creating a flight-to-quality bid. Trailing stops capture this while limiting downside.'}
-- {'text': 'MA-distance discipline (Rule 2b) caught 5+ candidates that would have failed even in a normal tape: 芯源微 dist_ma10=9.8%, 思瑞浦 8.3%, 莱特光电 dist_ma5=8.0%. The rule is doing real filtering work independently of the regime gate.', 'type': 'signal', 'tags': ['entry-filter', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h021', 'mechanism': 'Stocks >8% above MA10 have historically shown +2-3× higher probability of -5% drawdown within 5 days, regardless of sector strength.'}
-- {'text': 'Glass fiber sector (+8.33%) is a structural AI infrastructure demand story — electronic-grade fiber cloth has completed 5 rounds of 2026 price hikes with monthly 10-15% increases. AI servers require 20-30 layer PCBs consuming multiples more electronic cloth. This is the upstream beneficiary of the same AI capex cycle driving semiconductors. Monitor for entry when regime clears.', 'type': 'observation', 'tags': ['sector', 'entry-filter'], 'evidence_type': 'supporting', 'related_hypothesis': None, 'mechanism': 'AI server PCB layer count (20-30 vs 4-8 for traditional) creates non-linear demand growth for electronic-grade glass fiber — a structural supply/demand imbalance that quarterly earnings will confirm over the next 2-3 quarters.'}
-- {'text': "华丰科技's impending 60% float unlock (6/29, 2.79亿股) is a reminder to always check 解禁 dates for any candidate. RPS120=90.53% and healthy MAs would normally be WATCH-worthy, but this is radioactive until post-unlock price discovery.", 'type': 'rule', 'tags': ['entry-filter', 'risk-management'], 'evidence_type': 'supporting', 'related_hypothesis': None, 'mechanism': 'Lock-up expirations >20% of float produce average -8% to -15% price impact within 10 days as early investors/employees liquidate. The risk-reward of entry before the unlock date is structurally negative.'}
+- {'text': "Bifurcated tape (all indices green + breadth 0.36:1 + 67跌停) is a distinct regime type: large-cap AI/tech mega-caps carry indices while 73% of stocks decline. In this regime, holding existing tech winners works but adding new positions is suicidal — the 'index green' signal is dangerously misleading for entry decisions. Always cross-check breadth distribution, not just index direction.", 'type': 'heuristic', 'tags': ['entry-filter', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h013', 'mechanism': 'Large-cap index weights concentrate in a few mega-cap tech names (科创50+3.82% vs 上证+0.11%); when rally narrows to these names, indices stay green while f4_7=812 stocks declining 4-7% confirms real liquidation underneath. The f10 count (67) above 30 threshold independently confirms panic conditions.'}
+- {'text': 'Volume confirmation is the best real-time validator in a panic tape: all 3 active positions showed 5-16× normal volume on up days today (新宙邦 5.1×, 上海新阳 7.8×, 路维光电 15.8×). This level of volume on positive-return days during a 73%-declining-stocks tape signals institutional accumulation, not retail FOMO. Supports HOLD conviction even when market breadth is frightening.', 'type': 'signal', 'tags': ['position-sizing', 'exit-rule'], 'evidence_type': 'supporting', 'mechanism': 'Institutional money concentrates in thematic winners during bifurcated tapes. Volume multiples >5× on positive days = smart money rotating INTO these names while rotating OUT of everything else. The distribution skew (r0_2=596, r2_4=322, r4_7=249, r7_10=161, r10=106) shows gains are also concentrated.'}
+- {'text': "路维光电 +11.95% on 15.8× volume bouncing off MA5 support (dist_ma5=0.1%) is the strongest single technical confirmation today. The V1 system would have panic-sold after yesterday's -6.34%; V2's MA-discipline framework correctly held through the minor MA5 test, and today's signal is maximum reward for that discipline. MA5 tests in hot sectors with strong fundamentals are buying opportunities, not exit signals.", 'type': 'observation', 'tags': ['timing', 'exit-rule'], 'evidence_type': 'supporting', 'related_hypothesis': 'h021', 'mechanism': 'When a stock pulls back to within 0.1% of MA5 support with sector still ranked #2 hottest, the probability of an institutional bounce is high. This mirrors VCP logic (contraction at support triggering expansion) even when no formal VCP pattern is algorithmically detected.'}
+- {'text': 'Rule 2b (MA-distance anti-chase) filtered 18 of 25 enriched candidates today. Combined with sector filter and entry regime hard_block, the triple-gate system produces near-zero false positives. Of the 7 candidates passing MA checks, 5 are in cold/dead sectors, leaving only 恒铭达 and 融捷股份 — both correctly blocked by the entry regime anyway. The system is working as designed.', 'type': 'observation', 'tags': ['entry-filter', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h021, h027', 'mechanism': 'MA-distance serves as the first physiological filter (eliminating overextended names regardless of narrative quality), sector serves as the second environmental filter (eliminating dead-zone names), and entry regime serves as the third systemic filter (eliminating all names in hostile market conditions). The intersection is intentionally sparse — high-quality entries should be rare.'}
