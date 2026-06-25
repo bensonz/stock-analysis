@@ -1521,3 +1521,9 @@
 - 路维光电 consecutive 13-16× volume days (6/24: 15.82×, 6/25: 13.84×) on positive price action is the strongest institutional accumulation signal in portfolio history. This validates holding through weakness and letting winners run.
 - 24/26 enriched candidates fail V2 MA-distance thresholds (6%/8%/12%). Only 恒铭达 and 电光科技 pass all three. This validates that the anti-chase filter is working at scale — the market is in a momentum-driven phase where most stocks are overextended.
 - Resources/commodities rotation accelerating: 贵金属 -3.94%, 工业金属 -3.39%, 油气 -3.74%. Gold broke $4,000 for first time in 7 months. Our 0% commodity exposure is an accidental win from V2's sector-first approach.
+
+### 自动更新 (2026-06-25)
+
+- Index-green + breadth-red divergence is the most dangerous tape for new entries. Today: all 4 indices green (科创50 +3.87%) but breadth 0.29:1 with 91跌停. The multi-condition buy gate (breadth ≥1.5:1 AND f10<30) correctly prevented entries into what looked like a rally. This validates the V2 framework's insistence on breadth + limits checks beyond simple index direction.
+- Semiconductor ecosystem concentration is the portfolio's edge AND its risk. All 3 holdings (新宙邦/上海新阳/路维光电) are semiconductor-adjacent, which is why they're all +20%+ while the market bleeds. The sector-first framework correctly concentrated capital into the only pocket of strength. However, 91.76% cash is the necessary hedge — if semis reverse, rotate out fast.
+- VCP data continues to be absent from the enriched_candidates pipeline. All 60 strategy pool stocks show vcp_quality=null. VCP is currently a dead feature in the data feed — decisions must rely on MA distances and RPS alone until the VCP scanner is fixed. This does not break the framework but removes a proven edge (backtest shows +7.7% avg 10d return for PREMIUM VCP setups).

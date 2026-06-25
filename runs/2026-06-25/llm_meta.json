@@ -2,60 +2,80 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 132209,
-  "output_tokens": 10497,
-  "rounds": 2,
-  "duration_sec": 184.7,
+  "input_tokens": 210290,
+  "output_tokens": 10826,
+  "rounds": 3,
+  "duration_sec": 216.3,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年6月25日 市场分析 涨跌 板块",
+        "query": "A股 2026年6月25日 半导体 元件 玻璃玻纤 板块大涨原因",
         "max_results": 5
       },
-      "result_length": 2903
+      "result_length": 2736
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "半导体板块 2026年6月25日 大涨 原因",
+        "query": "A股 2026年6月25日 市场分化 涨跌家数 冰火两重天",
         "max_results": 5
       },
-      "result_length": 3243
+      "result_length": 3300
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "新宙邦 300037 电解液 宁德时代 2026年6月",
+        "query": "新宙邦 宁德时代 电解液协议 2026年6月",
         "max_results": 5
       },
-      "result_length": 2392
+      "result_length": 2397
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "光刻胶 上海新阳 300236 半导体材料 2026",
+        "query": "上海新阳 光刻胶 KrF ArF 2026年6月 最新进展",
         "max_results": 5
       },
-      "result_length": 3255
+      "result_length": 3247
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "路维光电 688401 掩膜版 半导体 2026",
+        "query": "路维光电 掩膜版 G11 厦门项目 2026年6月",
         "max_results": 5
       },
-      "result_length": 3232
+      "result_length": 1915
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 2026年6月25日 涨跌停 家数 半导体 涨停 跌停"
+      },
+      "result_length": 3349
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "华灿光电 300323 光学光电子 LED 2026年6月 最新动态"
+      },
+      "result_length": 2575
     }
   ],
   "fallback_used": false

@@ -2,54 +2,54 @@
   "date": "2026-06-25",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4125.756,
-      "change_pct": 0.36
+      "value": 4120.281,
+      "change_pct": 0.23
     },
     "shenzhen_component": {
-      "value": 16285.83,
-      "change_pct": 1.46
+      "value": 16344.08,
+      "change_pct": 1.82
     },
     "chinext": {
-      "value": 4336.74,
-      "change_pct": 2.01
+      "value": 4371.99,
+      "change_pct": 2.84
     },
-    "sentiment": "cautious",
+    "sentiment": "divergent",
     "hot_sectors": [
       "玻璃玻纤",
       "元件",
-      "航空机场",
       "半导体",
-      "证券Ⅱ"
+      "航空机场",
+      "非金属材料Ⅱ"
     ],
     "cold_sectors": [
-      "贵金属",
-      "其他家电Ⅱ",
       "油气开采Ⅱ",
+      "贵金属",
       "工业金属",
+      "其他家电Ⅱ",
       "广告营销"
     ],
-    "notes": "Façade rally: 上证+0.36%, 深证+1.46%, 创业板+2.01%, 科创50+4.18% — but breadth 0.27:1 (1155 up vs 4300 down), 51跌停. Large-cap semis mask broad distribution. Resources cratering (金-3.94%, 工业金属-3.39%). IV data unavailable across all proxies. Entry regime hard_block. Cash at 91.9%. HOLD all 3 positions, RAISE_STOP on 路维光电 to +10%."
+    "notes": "Extreme bifurcation: 科创50 +3.87% masks breadth 0.29:1 (1231↑/4228↓) with 91跌停. Semiconductor ecosystem (半导体+4.53%, 元件+6.01%, 玻璃玻纤+6.84%) is the only pocket of life — driven by AI capex, 光刻胶断供, and electronic cloth supply crunch. Resources routed (油气-5.38%, 贵金属-4.24%, 工业金属-3.95%). All 3 positions are in the winning cluster and up +20%+. New entries HARD BLOCKED by panic regime. Portfolio 91.76% cash. IV data unavailable."
   },
   "strategy_scan": {
-    "total_stocks_scanned": 59,
+    "total_stocks_scanned": 60,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-06-25T11:38:40.177278+08:00"
+    "scan_time": "2026-06-25T15:39:01.603170+08:00"
   },
   "recommendations": [
     {
-      "code": "002947.SZ",
-      "name": "恒铭达",
+      "code": "300323.SZ",
+      "name": "华灿光电",
       "price": null,
-      "rps120": 93.37,
+      "rps120": 93.43,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "002730.SZ",
-      "name": "电光科技",
+      "code": "002947.SZ",
+      "name": "恒铭达",
       "price": null,
-      "rps120": 92.49,
+      "rps120": 93.37,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -73,6 +73,24 @@
       "reasoning": ""
     },
     {
+      "code": "688002.SH",
+      "name": "睿创微纳",
+      "price": null,
+      "rps120": 90.2,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688037.SH",
+      "name": "芯源微",
+      "price": null,
+      "rps120": 94.53,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
       "code": "600961.SH",
       "name": "株冶集团",
       "price": null,
@@ -82,21 +100,21 @@
       "reasoning": ""
     },
     {
-      "code": "688308.SH",
-      "name": "欧科亿",
+      "code": "002138.SZ",
+      "name": "顺络电子",
       "price": null,
-      "rps120": 99.92,
+      "rps120": 89.67,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     }
   ],
   "summary": {
-    "total_scanned": 59,
+    "total_scanned": 60,
     "buy_recommendations": 0,
-    "watch_recommendations": 6,
+    "watch_recommendations": 8,
     "avoid_recommendations": 0,
     "market_call": "谨慎",
-    "reasoning": "Façade rally: 上证+0.36%, 深证+1.46%, 创业板+2.01%, 科创50+4.18% — but breadth 0.27:1 (1155 up vs 4300 down), 51跌停. Large-cap semis mask broad distribution. Resources cratering (金-3.94%, 工业金属-3.39%). IV data unavailable across all proxies. Entry regime hard_block. Cash at 91.9%. HOLD all 3 positions, RAISE_STOP on 路维光电 to +10%."
+    "reasoning": "Extreme bifurcation: 科创50 +3.87% masks breadth 0.29:1 (1231↑/4228↓) with 91跌停. Semiconductor ecosystem (半导体+4.53%, 元件+6.01%, 玻璃玻纤+6.84%) is the only pocket of life — driven by AI capex, 光刻胶断供, and electronic cloth supply crunch. Resources routed (油气-5.38%, 贵金属-4.24%, 工业金属-3.95%). All 3 positions are in the winning cluster and up +20%+. New entries HARD BLOCKED by panic regime. Portfolio 91.76% cash. IV data unavailable."
   }
 }

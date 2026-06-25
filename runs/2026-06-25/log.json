@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1782358520.8150132,
+      "start": 1782372911.459357,
       "errors": [],
-      "end": 1782358535.3705652,
-      "duration_sec": 14.6
+      "end": 1782372925.205835,
+      "duration_sec": 13.7
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 19940,
+      "response_size_bytes": 18450,
       "tokens": {
-        "input_tokens": 132209,
-        "output_tokens": 10497
+        "input_tokens": 210290,
+        "output_tokens": 10826
       },
-      "rounds": 2,
-      "tool_calls_count": 5,
-      "duration_sec": 184.7,
+      "rounds": 3,
+      "tool_calls_count": 7,
+      "duration_sec": 216.3,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -25,25 +25,23 @@
     },
     {
       "phase": "apply",
-      "start": 1782358720.148313,
+      "start": 1782373141.578573,
       "actions": [
-        "RAISE_STOP 688401 → 79.84",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=111",
-        "Hypothesis: Created h073 (observation): 路维光电 consecutive 13-16× volume days (6/24: 15.82×, 6/25: 13.84×) on positive pri...",
-        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=83",
-        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=28",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=100%, n=112",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=29",
+        "Hypothesis: Created h074 (observation): VCP data continues to be absent from the enriched_candidates pipeline. All 60 st...",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1782358720.5623932,
-      "duration_sec": 0.4
+      "end": 1782373141.924052,
+      "duration_sec": 0.3
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 199.7
+    "totalDurationSec": 230.3
   }
 }
