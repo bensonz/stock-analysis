@@ -1,0 +1,61 @@
+{
+  "date": "2026-06-25",
+  "actions": [
+    {
+      "code": "300037",
+      "name": "新宙邦",
+      "action": "HOLD",
+      "price": 89.05,
+      "pnl_pct": 19.3,
+      "note": "PnL +19.30%. 宁德时代30万吨电解液3年协议 remains portfolio's strongest catalyst. Today -0.28% on 4× volume is healthy digestion. Stop at 82.12 provides 7.78% buffer. Catalyst intact, sector not in danger zone."
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "action": "HOLD",
+      "price": 110.28,
+      "pnl_pct": 17.38,
+      "note": "PnL +17.38%. 0 risk factors. KrF光刻胶批量+ArF浸没式+5.8亿光刻胶项目 structural thesis intact. Today -3.61% on 4.8× volume is normal profit-taking after 6/24 explosion. Stop at 103.36 locks in +10% profit with 6.27% buffer."
+    },
+    {
+      "code": "688401",
+      "name": "路维光电",
+      "action": "RAISE_STOP",
+      "price": 88.23,
+      "pnl_pct": 21.56,
+      "note": "PnL +21.56% crosses Rule 5 +20% threshold. Mechanical stop-raise to +10% of entry (72.58 × 1.10 = 79.84). Today +4.53% on 13.84× normal volume — second consecutive day of >13× volume, strongest accumulation signal in portfolio history. G11掩膜版 global #2, 28nm已供货, 厦门20亿项目设备搬入. Lock in +10% guaranteed profit."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 984669.0,
+    "dayPnl": -938.0,
+    "dayReturnPct": -0.1,
+    "totalReturnPct": -1.53,
+    "unrealizedPnl": 12538.0,
+    "realizedPnl": -27869.0,
+    "cashPct": 91.92
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.2686,
+    "up": 1155,
+    "down": 4300,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 67,
+    "limit_downs": 51,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.27:1, 3/3 major indices green, 67 limit-ups / 51 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Façade rally: 上证+0.36%, 深证+1.46%, 创业板+2.01%, 科创50+4.18% — but breadth 0.27:1 (1155 up vs 4300 down), 51跌停. Large-cap semis mask broad distribution. Resources cratering (金-3.94%, 工业金属-3.39%). IV data unavailable across all proxies. Entry regime hard_block. Cash at 91.9%. HOLD all 3 positions, RAISE_STOP on 路维光电 to +10%."
+  }
+}

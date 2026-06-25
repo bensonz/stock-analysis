@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 132209,
+  "output_tokens": 10497,
+  "rounds": 2,
+  "duration_sec": 184.7,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月25日 市场分析 涨跌 板块",
+        "max_results": 5
+      },
+      "result_length": 2903
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体板块 2026年6月25日 大涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3243
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "新宙邦 300037 电解液 宁德时代 2026年6月",
+        "max_results": 5
+      },
+      "result_length": 2392
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "光刻胶 上海新阳 300236 半导体材料 2026",
+        "max_results": 5
+      },
+      "result_length": 3255
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "路维光电 688401 掩膜版 半导体 2026",
+        "max_results": 5
+      },
+      "result_length": 3232
+    }
+  ],
+  "fallback_used": false
+}
