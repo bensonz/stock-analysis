@@ -2,40 +2,58 @@
   "date": "2026-06-26",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4032.298,
-      "change_pct": -2.14
+      "value": 4027.265,
+      "change_pct": -2.26
     },
     "shenzhen_component": {
-      "value": 15846.98,
-      "change_pct": -3.04
+      "value": 15782.22,
+      "change_pct": -3.44
     },
     "chinext": {
-      "value": 4209.29,
-      "change_pct": -3.72
+      "value": 4194.21,
+      "change_pct": -4.07
     },
     "sentiment": "bearish",
     "hot_sectors": [
-      "养殖业",
       "航天装备Ⅱ",
       "玻璃玻纤",
-      "橡胶",
-      "饲料"
+      "养殖业",
+      "白色家电",
+      "橡胶"
     ],
     "cold_sectors": [
       "通信设备",
-      "其他电源设备Ⅱ",
       "能源金属",
+      "电池",
       "消费电子",
-      "元件"
+      "其他电源设备Ⅱ"
     ],
-    "notes": "PANIC TAPE. 三重冲击: (1)隔夜美股半导体崩盘—费城SOX-8%,美光/闪迪各-13%; (2)中东霍尔木兹海峡航运遇袭,布油突破$76(+2.9%),黄金站上$4040; (3)美国5月PCE首次突破4.0%重燃加息担忧。A股三大指数全绿(上证-2.14%/深证-3.04%/创业板-3.72%), breadth 0.19:1(865涨/4600跌),31跌停/48涨停。科技→防御板块轮动加速。新开仓硬封锁,专注管理3个现有仓位。IV数据缺失。"
+    "notes": "PANIC TAPE — 6/26 severe risk-off: breadth 0.17:1 (790 up / 4676 down), all 3 major indices red (沪-2.26%, 深-3.44%, 创-4.07%), 47跌停/73涨停. Previous tech/AI leaders (通信设备 -6.72%, 电池 -5.81%, 消费电子 -5.24%) are being de-grossed aggressively while defensive+niche sectors (航天装备 +6.72% on SpaceX catalyst, 养殖+2.41%, 家电+1.37%) hold. This is a textbook sector rotation liquidation, not random noise. IV data unavailable. HARD BLOCK on all new positions. Cash at 91.76% is the correct allocation. Active positions: 上海新阳 +2.80% (structural catalyst immunity), 路维光电 +0.48% on 18× volume (accumulation), 新宙邦 -7.61% (cold sector, SELL)."
   },
   "strategy_scan": {
-    "total_stocks_scanned": 59,
+    "total_stocks_scanned": 60,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-06-26T11:39:28.132951+08:00"
+    "scan_time": "2026-06-26T15:38:59.121226+08:00"
   },
   "recommendations": [
+    {
+      "code": "002937.SZ",
+      "name": "兴瑞科技",
+      "price": null,
+      "rps120": 94.57,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688536.SH",
+      "name": "思瑞浦",
+      "price": null,
+      "rps120": 93.8,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
     {
       "code": "002192.SZ",
       "name": "融捷股份",
@@ -55,24 +73,6 @@
       "reasoning": ""
     },
     {
-      "code": "688037.SH",
-      "name": "芯源微",
-      "price": null,
-      "rps120": 94.53,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688536.SH",
-      "name": "思瑞浦",
-      "price": null,
-      "rps120": 93.8,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
       "code": "605111.SH",
       "name": "新洁能",
       "price": null,
@@ -80,41 +80,14 @@
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
-    },
-    {
-      "code": "300323.SZ",
-      "name": "华灿光电",
-      "price": null,
-      "rps120": 93.43,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688002.SH",
-      "name": "睿创微纳",
-      "price": null,
-      "rps120": 90.2,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "300373.SZ",
-      "name": "扬杰科技",
-      "price": null,
-      "rps120": 86.03,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
     }
   ],
   "summary": {
-    "total_scanned": 59,
+    "total_scanned": 60,
     "buy_recommendations": 0,
-    "watch_recommendations": 8,
+    "watch_recommendations": 5,
     "avoid_recommendations": 0,
-    "market_call": "谨慎",
-    "reasoning": "PANIC TAPE. 三重冲击: (1)隔夜美股半导体崩盘—费城SOX-8%,美光/闪迪各-13%; (2)中东霍尔木兹海峡航运遇袭,布油突破$76(+2.9%),黄金站上$4040; (3)美国5月PCE首次突破4.0%重燃加息担忧。A股三大指数全绿(上证-2.14%/深证-3.04%/创业板-3.72%), breadth 0.19:1(865涨/4600跌),31跌停/48涨停。科技→防御板块轮动加速。新开仓硬封锁,专注管理3个现有仓位。IV数据缺失。"
+    "market_call": "防御",
+    "reasoning": "PANIC TAPE — 6/26 severe risk-off: breadth 0.17:1 (790 up / 4676 down), all 3 major indices red (沪-2.26%, 深-3.44%, 创-4.07%), 47跌停/73涨停. Previous tech/AI leaders (通信设备 -6.72%, 电池 -5.81%, 消费电子 -5.24%) are being de-grossed aggressively while defensive+niche sectors (航天装备 +6.72% on SpaceX catalyst, 养殖+2.41%, 家电+1.37%) hold. This is a textbook sector rotation liquidation, not random noise. IV data unavailable. HARD BLOCK on all new positions. Cash at 91.76% is the correct allocation. Active positions: 上海新阳 +2.80% (structural catalyst immunity), 路维光电 +0.48% on 18× volume (accumulation), 新宙邦 -7.61% (cold sector, SELL)."
   }
 }

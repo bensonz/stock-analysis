@@ -2,40 +2,40 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 271000,
-  "output_tokens": 11497,
-  "rounds": 4,
-  "duration_sec": 231.1,
+  "input_tokens": 201375,
+  "output_tokens": 10195,
+  "rounds": 3,
+  "duration_sec": 212.2,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年6月26日 大盘暴跌 原因",
+        "query": "A股 2026年6月26日 暴跌 板块 原因",
         "max_results": 5
       },
-      "result_length": 2828
+      "result_length": 2919
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 养殖业板块 大涨 2026年6月26日 原因",
+        "query": "航天装备板块 2026年6月 大涨 原因",
         "max_results": 5
       },
-      "result_length": 2445
+      "result_length": 2837
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "航天装备板块 大涨 2026年6月 原因",
+        "query": "新宙邦 300037 2026年6月 电解液 宁德时代",
         "max_results": 5
       },
-      "result_length": 2793
+      "result_length": 3047
     },
     {
       "pass": "P1",
@@ -43,9 +43,9 @@
       "tool": "web_search",
       "input": {
         "max_results": 5,
-        "query": "新宙邦 300037 2026年6月 宁德时代 电解液"
+        "query": "上海新阳 光刻胶 日本断供 2026年6月 国产替代"
       },
-      "result_length": 2064
+      "result_length": 3260
     },
     {
       "pass": "P1",
@@ -53,9 +53,9 @@
       "tool": "web_search",
       "input": {
         "max_results": 5,
-        "query": "上海新阳 300236 光刻胶 2026年6月"
+        "query": "路维光电 掩膜版 28nm 2026年6月"
       },
-      "result_length": 2816
+      "result_length": 3215
     },
     {
       "pass": "P1",
@@ -63,29 +63,9 @@
       "tool": "web_search",
       "input": {
         "max_results": 5,
-        "query": "路维光电 688401 掩膜版 2026年6月"
+        "query": "A股 2026年6月26日 跌停 行情分析 原因 半导体 电池 下跌"
       },
-      "result_length": 3216
-    },
-    {
-      "pass": "P1",
-      "round": 3,
-      "tool": "web_search",
-      "input": {
-        "max_results": 5,
-        "query": "A股 2026年6月26日 阿曼湾 中东局势 油价飙升"
-      },
-      "result_length": 3377
-    },
-    {
-      "pass": "P1",
-      "round": 3,
-      "tool": "web_search",
-      "input": {
-        "max_results": 5,
-        "query": "半导体板块 2026年6月26日 大跌 A股"
-      },
-      "result_length": 3233
+      "result_length": 3242
     }
   ],
   "fallback_used": false

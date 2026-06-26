@@ -1024,7 +1024,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-06-24",
+      "lastTested": "2026-06-26",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1099,13 +1099,21 @@
           {
             "date": "2026-06-24",
             "detail": "Glass fiber sector (+8.33%) is a structural AI infrastructure demand story — electronic-grade fiber cloth has completed 5 rounds of 2026 price hikes with monthly 10-15% increases. AI servers require 20-30 layer PCBs consuming multiples more electronic cloth. This is the upstream beneficiary of the same AI capex cycle driving semiconductors. Monitor for entry when regime clears."
+          },
+          {
+            "date": "2026-06-26",
+            "detail": "Sector-first exit validated: 新宙邦 dropped -7.61% in a single day despite an intact 宁德时代 30万吨 contract catalyst, solely because its sector (电池) was bottom 5 at -5.81%. Sector gravity always wins — even the strongest fundamental thesis cannot overcome cold-sector selling pressure."
+          },
+          {
+            "date": "2026-06-26",
+            "detail": "Structural supply-chain catalysts (Japan photoresist cutoff, mask localization) provide genuine panic-tape immunity. 上海新阳 +2.80% and 路维光电 +0.48% on 18× volume while market fell -2-4% proves these are not sentiment trades — they're physical supply constraints that create price-inelastic demand from Chinese fabs."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 18,
+      "sampleSize": 20,
       "hitRate": 1.0,
-      "confidence": 0.95,
+      "confidence": 0.955,
       "tags": [
         "sector",
         "entry-filter"
@@ -1157,7 +1165,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-06-25",
+      "lastTested": "2026-06-26",
       "mechanism": "When price gets too stretched above MA5/MA10/MA20, upside becomes dependent on continued euphoria instead of support-based demand, raising mean-reversion risk.",
       "evidence": {
         "supporting": [
@@ -1484,6 +1492,10 @@
           {
             "date": "2026-06-25",
             "detail": "24/26 enriched candidates fail V2 MA-distance thresholds (6%/8%/12%). Only 恒铭达 and 电光科技 pass all three. This validates that the anti-chase filter is working at scale — the market is in a momentum-driven phase where most stocks are overextended."
+          },
+          {
+            "date": "2026-06-26",
+            "detail": "18× normal volume on a flat day (+0.48%) is the strongest accumulation signal observed in this portfolio's history — stronger than a +10% day on normal volume. The volume-to-price-move ratio should be tracked as a leading indicator of institutional positioning."
           }
         ],
         "contradicting": [
@@ -1497,7 +1509,7 @@
           }
         ]
       },
-      "sampleSize": 83,
+      "sampleSize": 84,
       "hitRate": 0.976,
       "confidence": 0.965,
       "tags": [
@@ -1542,7 +1554,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-06-24",
+      "lastTested": "2026-06-26",
       "mechanism": "In a deteriorating market, protecting open profits is more valuable than maximizing upside variance.",
       "evidence": {
         "supporting": [
@@ -1669,13 +1681,17 @@
           {
             "date": "2026-06-24",
             "detail": "Winners surge in panic tapes — 上海新阳 +7.38% today crosses +20% PnL while 4,422 stocks fell. The +20%→raise-stop-to-+10% mechanical rule converts a fast winner into a risk-free hold. Cutting winners early to 'lock in gains' would have capped this at +10%. Rule 5's trailing mechanism is the right tool."
+          },
+          {
+            "date": "2026-06-26",
+            "detail": "Stop proximity (1.56%) combined with cold sector (-5.81%) creates compound gap-down risk that justifies proactive selling ahead of the hard stop trigger. The 03-03 扬杰科技 lesson (gapped to -8.37%) applies directly."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 31,
+      "sampleSize": 32,
       "hitRate": 1.0,
-      "confidence": 0.97,
+      "confidence": 0.971,
       "tags": [
         "exit-rule",
         "timing",

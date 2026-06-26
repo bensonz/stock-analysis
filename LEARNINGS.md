@@ -1533,3 +1533,10 @@
 - 恐慌盘中展现相对强度的持仓(如上海新阳+2.36% vs 全市场-2%~-3.7%)是最强确认信号——机构在无差别抛售中主动买入,证明催化逻辑不受短期情绪影响。未来恐慌盘中优先持有逆势上涨的仓位。
 - 止损逼近警告(stop_proximity)在恐慌盘中紧急度升级——新宙邦仅2.68%缓冲可能在周一开盘跳空时直接被击穿,需准备条件卖出单而非被动等待。
 - 科技→防御板块轮动今天加速(养殖业+4.65% vs 通信设备-7.09%, 11.7pp极差)。这类轮动通常持续3-5个交易日。如果持仓板块在未来2-3天滑入bottom 30%, Rule 1的'行业冷3天→卖出'可能触发。
+
+### 自动更新 (2026-06-26)
+
+- Sector-first exit validated: 新宙邦 dropped -7.61% in a single day despite an intact 宁德时代 30万吨 contract catalyst, solely because its sector (电池) was bottom 5 at -5.81%. Sector gravity always wins — even the strongest fundamental thesis cannot overcome cold-sector selling pressure.
+- Structural supply-chain catalysts (Japan photoresist cutoff, mask localization) provide genuine panic-tape immunity. 上海新阳 +2.80% and 路维光电 +0.48% on 18× volume while market fell -2-4% proves these are not sentiment trades — they're physical supply constraints that create price-inelastic demand from Chinese fabs.
+- 18× normal volume on a flat day (+0.48%) is the strongest accumulation signal observed in this portfolio's history — stronger than a +10% day on normal volume. The volume-to-price-move ratio should be tracked as a leading indicator of institutional positioning.
+- Stop proximity (1.56%) combined with cold sector (-5.81%) creates compound gap-down risk that justifies proactive selling ahead of the hard stop trigger. The 03-03 扬杰科技 lesson (gapped to -8.37%) applies directly.

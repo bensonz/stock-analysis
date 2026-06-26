@@ -4,41 +4,39 @@
 
 | 指数 | 收盘 | 涨跌幅 |
 |------|------|--------|
-| 上证指数 | 4032.30 | -2.14% |
-| 深证成指 | 15846.98 | -3.04% |
-| 创业板指 | 4209.29 | -3.72% |
-| 科创50 | 2012.53 | -2.60% |
+| 上证指数 | 4027.26 | -2.26% |
+| 深证成指 | 15782.22 | -3.44% |
+| 创业板指 | 4194.21 | -4.07% |
+| 科创50 | 2032.28 | -1.65% |
 
-涨跌比: 865涨 / 4600跌 / 5515总
+涨跌比: 790涨 / 4676跌 / 5514总
 
-**热门板块**: 养殖业(+4.65%), 航天装备Ⅱ(+4.22%), 玻璃玻纤(+3.60%), 橡胶(+1.99%), 饲料(+1.81%)
+**热门板块**: 航天装备Ⅱ(+6.72%), 玻璃玻纤(+5.19%), 养殖业(+2.41%), 白色家电(+1.37%), 橡胶(+1.28%)
 
-**冷门板块**: 通信设备(-7.09%), 其他电源设备Ⅱ(-5.43%), 能源金属(-5.15%), 消费电子(-5.06%), 元件(-4.82%)
+**冷门板块**: 通信设备(-6.72%), 能源金属(-5.89%), 电池(-5.81%), 消费电子(-5.24%), 其他电源设备Ⅱ(-5.09%)
 
-PANIC TAPE. 三重冲击: (1)隔夜美股半导体崩盘—费城SOX-8%,美光/闪迪各-13%; (2)中东霍尔木兹海峡航运遇袭,布油突破$76(+2.9%),黄金站上$4040; (3)美国5月PCE首次突破4.0%重燃加息担忧。A股三大指数全绿(上证-2.14%/深证-3.04%/创业板-3.72%), breadth 0.19:1(865涨/4600跌),31跌停/48涨停。科技→防御板块轮动加速。新开仓硬封锁,专注管理3个现有仓位。IV数据缺失。
+PANIC TAPE — 6/26 severe risk-off: breadth 0.17:1 (790 up / 4676 down), all 3 major indices red (沪-2.26%, 深-3.44%, 创-4.07%), 47跌停/73涨停. Previous tech/AI leaders (通信设备 -6.72%, 电池 -5.81%, 消费电子 -5.24%) are being de-grossed aggressively while defensive+niche sectors (航天装备 +6.72% on SpaceX catalyst, 养殖+2.41%, 家电+1.37%) hold. This is a textbook sector rotation liquidation, not random noise. IV data unavailable. HARD BLOCK on all new positions. Cash at 91.76% is the correct allocation. Active positions: 上海新阳 +2.80% (structural catalyst immunity), 路维光电 +0.48% on 18× volume (accumulation), 新宙邦 -7.61% (cold sector, SELL).
 
 ## 策略池扫描
 
-扫描 **59** 只策略池股票
+扫描 **60** 只策略池股票
 (来源: cheesefortune_intersection)
 
 ## 跳过标的
 
-1. **融捷股份** (002192) (RPS 94.2%) — Sector (能源金属) 在今日BOTTOM 5 (-5.15%)。Rule 1行业硬否决, 无论个股质量如何。RPS120=94.20%优秀但行业重力更强。enriched数据: current_price=92.10, dist_ma5=3.2%可接受。
-2. **欧陆通** (300870) (RPS 89.32%) — Sector (其他电源设备Ⅱ) 在今日BOTTOM 5 (-5.43%)。Rule 1行业硬否决。dist_ma5=0.2%优秀但无法覆盖行业风险。
-3. **芯源微** (688037) (RPS 94.53%) — dist_ma5=15.6% > 6% Rule 2b硬阈值, 极端超买。enriched: current_price=332.35, RPS120=94.53%, PE>1000, 扣非净利润仅占20%。即使没有行业和恐慌限制也不适合入场。
-4. **思瑞浦** (688536) (RPS 93.8%) — dist_ma10=11.7% > 8% Rule 2b超买。enriched: current_price=350.68, RPS120=93.80%, PE=178, 商誉占净资产11%, 收盘价比机构目标价高28%。高质量公司但入场时机错误。
-5. **新洁能** (605111) (RPS 90.64%) — dist_ma5=9.6% > 6% Rule 2b超买。enriched: current_price=78.09, RPS120=90.64%, 收盘价比机构目标价高41%。今日创历史新高后回落,追高风险极大。
-6. **华灿光电** (300323) (RPS 93.43%) — 最优MA距离(dist_ma5=2.8%, dist_ma10=2.3%)且RPS120=93.43%,但恐慌盘entry_regime硬封锁所有新开仓。若市场恢复将是首选候选。enriched: current_price=16.67。
-7. **睿创微纳** (688002) (RPS 90.2%) — dist_ma10=12.6% > 8% MA超买 + 恐慌盘hard block。0风险8亮点,北向7.5%+公募21%,净利+228%为池内最强基本面的之一。enriched: current_price=148.54。市场恢复后优先关注。
-8. **扬杰科技** (300373) (RPS 86.03%) — dist_ma5=9.9% > 6%, dist_ma10=19.4% > 8%, dist_ma20=31.9% > 12% — 三项MA距离全部超阈值,为池内最超买标的。enriched: current_price=131.14。
+1. **兴瑞科技** (002937) (RPS 94.57%) — Cleanest technical setup in pool (dist_ma5=-0.3%, RPS120=94.5, 创历史新高 today) but market regime HARD BLOCK: breadth 0.17:1, 0/3 indices green. Would be a BUY candidate in normal tape. Sector 汽车零部件 not in top/bottom lists.
+2. **思瑞浦** (688536) (RPS 93.8%) — RPS120=93.8 (sweet spot), 创24个月新高 today, but dist_ma10=11.7% >8% chase risk. Market hard block makes this moot.
+3. **融捷股份** (002192) (RPS 94.2%) — Sector 能源金属 is bottom 5 (-5.89%) — hard no per sector-first rule even without market block. RPS120=94.2 but sector gravity fatal.
+4. **欧陆通** (300870) (RPS 89.32%) — Sector 其他电源设备Ⅱ is bottom 5 (-5.09%) — sector-first rule blocks. dist_ma5=0.2% clean but irrelevant when sector is cold.
+5. **新洁能** (605111) (RPS 90.64%) — dist_ma5=9.6% >6% extreme chase, dist_ma20=31.9% — stock has run too far above all MAs. Market hard block.
 
 ## 今日研究结论
 
 - 新开仓: 0只
-- 跳过: 8只
+- 跳过: 5只
 
 ### 新教训
-- {'text': '恐慌盘中展现相对强度的持仓(如上海新阳+2.36% vs 全市场-2%~-3.7%)是最强确认信号——机构在无差别抛售中主动买入,证明催化逻辑不受短期情绪影响。未来恐慌盘中优先持有逆势上涨的仓位。', 'type': 'heuristic', 'tags': ['exit-rule', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h028', 'mechanism': '恐慌抛售是无差别的,只有真正的机构需求才能在卖压中保持红盘。相对强度过滤了噪音,比任何分析师报告都更有说服力。'}
-- {'text': '止损逼近警告(stop_proximity)在恐慌盘中紧急度升级——新宙邦仅2.68%缓冲可能在周一开盘跳空时直接被击穿,需准备条件卖出单而非被动等待。', 'type': 'rule', 'tags': ['exit-rule'], 'evidence_type': 'supporting', 'mechanism': '恐慌盘常伴随隔夜跳空(尤其中东地缘风险周末发酵),日内2-3%的缓冲在正常盘可管理,在恐慌盘可能瞬间消失。应在决策中显式标记风险。'}
-- {'text': "科技→防御板块轮动今天加速(养殖业+4.65% vs 通信设备-7.09%, 11.7pp极差)。这类轮动通常持续3-5个交易日。如果持仓板块在未来2-3天滑入bottom 30%, Rule 1的'行业冷3天→卖出'可能触发。", 'type': 'observation', 'tags': ['sector', 'exit-rule'], 'evidence_type': 'supporting', 'mechanism': '机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。'}
+- {'text': 'Sector-first exit validated: 新宙邦 dropped -7.61% in a single day despite an intact 宁德时代 30万吨 contract catalyst, solely because its sector (电池) was bottom 5 at -5.81%. Sector gravity always wins — even the strongest fundamental thesis cannot overcome cold-sector selling pressure.', 'type': 'signal', 'tags': ['sector', 'exit-rule'], 'evidence_type': 'supporting', 'related_hypothesis': 'h019', 'mechanism': "When institutions de-gross a sector, they sell the basket indiscriminately. Individual stock quality doesn't matter — the order flow from sector rotation dominates all micro factors."}
+- {'text': "Structural supply-chain catalysts (Japan photoresist cutoff, mask localization) provide genuine panic-tape immunity. 上海新阳 +2.80% and 路维光电 +0.48% on 18× volume while market fell -2-4% proves these are not sentiment trades — they're physical supply constraints that create price-inelastic demand from Chinese fabs.", 'type': 'heuristic', 'tags': ['sector', 'entry-filter'], 'evidence_type': 'supporting', 'mechanism': 'When a foreign supplier cuts off a critical input, domestic alternatives become non-negotiable purchases for survival, not discretionary trades. This creates buying pressure that ignores broad market direction.'}
+- {'text': "18× normal volume on a flat day (+0.48%) is the strongest accumulation signal observed in this portfolio's history — stronger than a +10% day on normal volume. The volume-to-price-move ratio should be tracked as a leading indicator of institutional positioning.", 'type': 'signal', 'tags': ['timing', 'entry-filter'], 'evidence_type': 'supporting', 'mechanism': 'When volume is enormous but price barely moves, it means every seller is being absorbed by a buyer willing to pay the same price — classic Wyckoff accumulation. The buyer is suppressing price to build a larger position.'}
+- {'text': 'Stop proximity (1.56%) combined with cold sector (-5.81%) creates compound gap-down risk that justifies proactive selling ahead of the hard stop trigger. The 03-03 扬杰科技 lesson (gapped to -8.37%) applies directly.', 'type': 'rule', 'tags': ['exit-rule', 'position-sizing'], 'evidence_type': 'supporting', 'mechanism': 'Sector-wide selling creates overnight gap risk because institutions place market-on-close or next-day orders that clear at whatever price is available. When a sector is cold, the opening auction can gap well below the previous close, breaching stops before any action is possible.'}

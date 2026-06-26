@@ -4,58 +4,58 @@
     {
       "code": "300037",
       "name": "新宙邦",
-      "action": "HOLD",
-      "price": 84.38,
-      "pnl_pct": 13.03,
-      "note": "PnL +13.03%, 宁德时代30万吨电解液3年协议(5→10→15万吨/年)仍是组合最强催化剂。今日-6.55%为板块联动下跌而非个股利空。止损82.12(+10%)仅2.68%距离,需警惕周一开盘跳空风险但未触及不提前卖出。"
+      "action": "SELL",
+      "price": 83.42,
+      "pnl_pct": 11.75,
+      "note": "TRIPLE SELL SIGNAL: (1) Sector 电池 is bottom 5 (-5.81%) — sector-first rule requires exit regardless of individual thesis quality. (2) Stop proximity CRITICAL at 1.56% — gap-down risk on Monday is real per 03-03 扬杰科技 lesson. (3) -7.61% today on 6.9× normal volume = institutional distribution. 宁德时代 catalyst remains valid but sector gravity + stop risk override. Will re-enter if sector stabilizes and stock reclaims MA5."
     },
     {
       "code": "300236",
       "name": "上海新阳",
       "action": "HOLD",
-      "price": 116.26,
-      "pnl_pct": 23.73,
-      "note": "PnL +23.73%, 今日+2.36%在恐慌盘中展现最强相对强度。日本光刻胶巨头实质断供中国→国产替代结构性多年催化不受美股芯片股单日波动影响。0风险, KrF批量+ArF浸没式+蚀刻液/电镀液/研磨液全产品线。5×正常量确认机构吸筹。止损103.36(+10%)缓冲11.1%充裕。"
+      "price": 116.76,
+      "pnl_pct": 24.27,
+      "note": "Portfolio's strongest relative strength today: +2.80% in -2-4% tape on 7.9× volume = institutional accumulation. Japan photoresist cutoff (TOK/JSR/Shin-Etsu/Fujifilm formally halted ArF/EUV to China 6/22) is multi-year structural catalyst immune to single-day US semi selloff. 0 risk factors. Stop 103.36 (+10% guaranteed) with 11.5% buffer. Core hold."
     },
     {
       "code": "688401",
       "name": "路维光电",
       "action": "HOLD",
-      "price": 88.48,
-      "pnl_pct": 21.94,
-      "note": "PnL +21.94%, 今日-0.81%但12.15×巨量仅微跌=机构吸筹信号。掩膜版极高壁垒(G11全球#2, 28nm已供货, 14nm计划2026投建, 厦门20亿设备搬入→年中试产)。连续4日超12×量,累计涨幅已达+21.9%但基本面驱动非炒作。止损79.84(+10%)缓冲9.76%。"
+      "price": 89.63,
+      "pnl_pct": 23.49,
+      "note": "+0.48% on 18.3× normal volume — 4th consecutive day >12× volume with flat/minor price movement = textbook institutional accumulation. G11掩膜版 global #2, 28nm supplying, 14nm planned for 2026, 厦门20亿 project on track. 0 risk factors. Stop 79.84 (+10% guaranteed) with 10.9% buffer."
     }
   ],
   "portfolioStats": {
-    "totalPositions": 3,
-    "totalEquity": 986177.0,
-    "dayPnl": -254.0,
-    "dayReturnPct": -0.03,
-    "totalReturnPct": -1.38,
-    "unrealizedPnl": 14046.0,
-    "realizedPnl": -27869.0,
-    "cashPct": 91.78
+    "totalPositions": 2,
+    "totalEquity": 987209.0,
+    "dayPnl": 1358.0,
+    "dayReturnPct": 0.14,
+    "totalReturnPct": -1.28,
+    "unrealizedPnl": 12530.0,
+    "realizedPnl": -25321.0,
+    "cashPct": 93.45
   },
   "entryRegime": {
     "allow_new_positions": false,
     "regime": "panic",
-    "breadth_ratio": 0.188,
-    "up": 865,
-    "down": 4600,
+    "breadth_ratio": 0.1689,
+    "up": 790,
+    "down": 4676,
     "positive_indices": [],
     "negative_indices": [
       "上证指数",
       "深证成指",
       "创业板指"
     ],
-    "limit_ups": 48,
-    "limit_downs": 31,
+    "limit_ups": 73,
+    "limit_downs": 47,
     "sizing_multiplier": 0.0,
     "hard_block": true,
-    "reason": "Entry regime panic: breadth 0.19:1, 0/3 major indices green, 48 limit-ups / 31 limit-downs. Block new longs."
+    "reason": "Entry regime panic: breadth 0.17:1, 0/3 major indices green, 73 limit-ups / 47 limit-downs. Block new longs."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "PANIC TAPE. 三重冲击: (1)隔夜美股半导体崩盘—费城SOX-8%,美光/闪迪各-13%; (2)中东霍尔木兹海峡航运遇袭,布油突破$76(+2.9%),黄金站上$4040; (3)美国5月PCE首次突破4.0%重燃加息担忧。A股三大指数全绿(上证-2.14%/深证-3.04%/创业板-3.72%), breadth 0.19:1(865涨/4600跌),31跌停/48涨停。科技→防御板块轮动加速。新开仓硬封锁,专注管理3个现有仓位。IV数据缺失。"
+    "summary": "PANIC TAPE — 6/26 severe risk-off: breadth 0.17:1 (790 up / 4676 down), all 3 major indices red (沪-2.26%, 深-3.44%, 创-4.07%), 47跌停/73涨停. Previous tech/AI leaders (通信设备 -6.72%, 电池 -5.81%, 消费电子 -5.24%) are being de-grossed aggressively while defensive+niche sectors (航天装备 +6.72% on SpaceX catalyst, 养殖+2.41%, 家电+1.37%) hold. This is a textbook sector rotation liquidation, not random noise. IV data unavailable. HARD BLOCK on all new positions. Cash at 91.76% is the correct allocation. Active positions: 上海新阳 +2.80% (structural catalyst immunity), 路维光电 +0.48% on 18× volume (accumulation), 新宙邦 -7.61% (cold sector, SELL)."
   }
 }
