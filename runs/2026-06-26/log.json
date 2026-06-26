@@ -1,0 +1,115 @@
+{
+  "date": "2026-06-26",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1782444923.862379,
+      "errors": [],
+      "end": 1782444936.93358,
+      "duration_sec": 13.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 18075,
+      "tokens": {
+        "input_tokens": 271000,
+        "output_tokens": 11497
+      },
+      "rounds": 4,
+      "tool_calls_count": 8,
+      "duration_sec": 231.1,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1782445168.1098108,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=30",
+        "Hypothesis: Created h075 (observation): 止损逼近警告(stop_proximity)在恐慌盘中紧急度升级——新宙邦仅2.68%缓冲可能在周一开盘跳空时直接被击穿,需准备条件卖出单而非被动等待。...",
+        "Hypothesis: Created h076 (observation): 科技→防御板块轮动今天加速(养殖业+4.65% vs 通信设备-7.09%, 11.7pp极差)。这类轮动通常持续3-5个交易日。如果持仓板块在未来2-3天滑入...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "300037",
+                "name": "新宙邦",
+                "rule": "stop_proximity",
+                "severity": "WARNING",
+                "currentPrice": 84.38,
+                "stopLoss": 82.12,
+                "distance_pct": 2.68,
+                "suggestion": "🟡 WARNING — only 2.7% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1782445168.391572,
+      "duration_sec": 0.3
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 300037 — 🟡 WARNING — only 2.7% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 244.5
+  }
+}

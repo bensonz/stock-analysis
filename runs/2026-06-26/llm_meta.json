@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 271000,
+  "output_tokens": 11497,
+  "rounds": 4,
+  "duration_sec": 231.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年6月26日 大盘暴跌 原因",
+        "max_results": 5
+      },
+      "result_length": 2828
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 养殖业板块 大涨 2026年6月26日 原因",
+        "max_results": 5
+      },
+      "result_length": 2445
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "航天装备板块 大涨 2026年6月 原因",
+        "max_results": 5
+      },
+      "result_length": 2793
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "新宙邦 300037 2026年6月 宁德时代 电解液"
+      },
+      "result_length": 2064
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "上海新阳 300236 光刻胶 2026年6月"
+      },
+      "result_length": 2816
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "路维光电 688401 掩膜版 2026年6月"
+      },
+      "result_length": 3216
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 2026年6月26日 阿曼湾 中东局势 油价飙升"
+      },
+      "result_length": 3377
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "半导体板块 2026年6月26日 大跌 A股"
+      },
+      "result_length": 3233
+    }
+  ],
+  "fallback_used": false
+}
