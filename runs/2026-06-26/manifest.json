@@ -2,7 +2,7 @@
   "date": "2026-06-26",
   "status": "degraded",
   "exit_code": 0,
-  "total_duration_sec": 244.5,
+  "total_duration_sec": 225.9,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -10,15 +10,15 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 94.8
+          "latency_ms": 107.0
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 498.0
+          "latency_ms": 498.8
         },
         "pricedb": {
           "status": "ok",
-          "latest_date": "2026-06-25",
+          "latest_date": "2026-06-26",
           "stale": false
         }
       }
@@ -36,18 +36,16 @@
     },
     "llm_analysis": {
       "status": "ok",
-      "duration_sec": 231.1
+      "duration_sec": 212.2
     },
     "apply": {
       "status": "ok",
-      "duration_sec": 0.3
+      "duration_sec": 0.6
     },
     "validate": {
-      "status": "warnings",
+      "status": "ok",
       "duration_sec": 0.0,
-      "errors": [
-        "RULE check_stop_proximity: 300037 — 🟡 WARNING — only 2.7% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
-      ]
+      "errors": []
     }
   },
   "gates": {
@@ -66,9 +64,7 @@
     "phase3_to_phase4": {
       "passed": true,
       "hard_fails": [],
-      "soft_warns": [
-        "rule check_stop_proximity: 🟡 WARNING — only 2.7% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
-      ]
+      "soft_warns": []
     }
   }
 }

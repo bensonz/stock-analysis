@@ -1,0 +1,54 @@
+{
+  "date": "2026-06-29",
+  "actions": [
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "action": "HOLD",
+      "price": 120.6,
+      "pnl_pct": 28.36,
+      "note": "+28.36% winner, thesis intact. Japan photoresist cutoff structural catalyst. 0 risk factors. Today +3.29% on 8.5× normal volume — institutional accumulation. Stop ¥103.36 locks in +10% guaranteed. 21 days held but Rule 5 time stop not triggered (gain >> 3%). dist_ma5 10.9% extended but acceptable for existing winner."
+    },
+    {
+      "code": "688401",
+      "name": "路维光电",
+      "action": "HOLD",
+      "price": 88.62,
+      "pnl_pct": 22.1,
+      "note": "+22.10% winner, thesis intact. 28nm mask progressing, 厦门¥20亿 project on track. 0 risk factors. Today -1.13% on 15× normal volume — mild profit-taking after 4-day monster run. Stop ¥79.84 locks in +10% guaranteed. 21 days held. dist_ma5 6.3% at Rule 2b threshold but acceptable for existing winner."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 2,
+    "totalEquity": 988543.0,
+    "dayPnl": 1334.0,
+    "dayReturnPct": 0.13,
+    "totalReturnPct": -1.15,
+    "unrealizedPnl": 13864.0,
+    "realizedPnl": -25321.0,
+    "cashPct": 93.33
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.5468,
+    "up": 1911,
+    "down": 3495,
+    "positive_indices": [
+      "上证指数"
+    ],
+    "negative_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 82,
+    "limit_downs": 67,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.55:1, 1/3 major indices green, 82 limit-ups / 67 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "PANIC tape: breadth 0.55:1 (1911 up / 3495 down), 67跌停, 82涨停. Only 上证指数 green (+0.17%), 深证成指 -1.21%, 创业板指 -1.28%. Healthcare defensive rotation dominates: 化学制药 +6.82%, 生物制品 +6.55%, 医疗服务 +6.30%. Previous tech leaders (通信设备 -5.47%, 元件 -4.87%) being liquidated. Portfolio: ¥988,543 equity (-1.15% total), 93.3% cash. 2 active positions both profitable (+28.4%, +22.1%). IV data unavailable. HARD BLOCK on new positions — no entries until breadth improves."
+  }
+}

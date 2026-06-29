@@ -1,0 +1,49 @@
+{
+  "date": "2026-06-29",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1782704223.2695858,
+      "errors": [],
+      "end": 1782704237.4153721,
+      "duration_sec": 14.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 15809,
+      "tokens": {
+        "input_tokens": 285000,
+        "output_tokens": 8582
+      },
+      "rounds": 4,
+      "tool_calls_count": 8,
+      "duration_sec": 151.8,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1782704389.312098,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=21",
+        "Hypothesis: Created h077 (observation): The hard block is preventing FOMO entries. 新宙邦 (宁德时代协议 catalyst, VCP SETUP) and ...",
+        "Hypothesis: Created h078 (observation): Winners can sustain massive volume without breaking — 688401 traded 15× normal v...",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=33",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=22",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1782704389.844998,
+      "duration_sec": 0.5
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 166.4
+  }
+}
