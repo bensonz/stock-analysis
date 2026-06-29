@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-06-29T11:37:03.280796+08:00",
+  "snapshot_time": "2026-06-29T15:40:36.291802+08:00",
   "snapshot_type": "pre_run",
   "date": "2026-06-29",
   "portfolio_config": {
@@ -11,23 +11,23 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-06-26T15:38:59.123483+08:00",
+    "lastUpdated": "2026-06-29T15:35:37.167449+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 987209.0,
+      "totalEquity": 992999.0,
       "cash": 922579.0,
-      "investedValue": 64630.0,
-      "unrealizedPnl": 12530.0,
+      "investedValue": 70420.0,
+      "unrealizedPnl": 18320.0,
       "realizedPnl": -25321.0,
-      "totalPnl": -12791.0,
-      "totalReturnPct": -1.28,
+      "totalPnl": -7001.0,
+      "totalReturnPct": -0.7,
       "positionsUsed": 2,
       "positionsMax": 10,
-      "cashPct": 93.45,
-      "dayPnl": 1358.0,
+      "cashPct": 92.91,
+      "dayPnl": 5790.0,
       "minCashPct": 20,
-      "minCashValue": 197441.8,
-      "deployableCash": 725137.2
+      "minCashValue": 198599.8,
+      "deployableCash": 723979.2
     },
     "activePositions": [
       {
@@ -35,8 +35,8 @@
         "name": "上海新阳",
         "entryDate": "2026-06-09",
         "entryPrice": 93.96,
-        "currentPrice": 116.76,
-        "pnl_pct": 24.27,
+        "currentPrice": 128.77,
+        "pnl_pct": 37.05,
         "stopLoss": 89.26,
         "currentStop": 103.36,
         "targetPrice": 120.0,
@@ -45,20 +45,20 @@
         "shares": 400,
         "allocation_pct": 5.25,
         "allocatedCapital": 37584.0,
-        "currentValue": 46704.0,
-        "unrealizedPnl": 9120.0,
-        "volume": 205581,
-        "mavol30": 25873.87,
+        "currentValue": 51508.0,
+        "unrealizedPnl": 13924.0,
+        "volume": 278121,
+        "mavol30": 22023.27,
         "volumeBelowMavol30": false,
-        "weight_pct": 4.73
+        "weight_pct": 5.19
       },
       {
         "code": "688401",
         "name": "路维光电",
         "entryDate": "2026-06-09",
         "entryPrice": 72.58,
-        "currentPrice": 89.63,
-        "pnl_pct": 23.49,
+        "currentPrice": 94.56,
+        "pnl_pct": 30.28,
         "stopLoss": 68.95,
         "currentStop": 79.84,
         "targetPrice": 92.0,
@@ -67,12 +67,12 @@
         "shares": 200,
         "allocation_pct": 3.75,
         "allocatedCapital": 14516.0,
-        "currentValue": 17926.0,
-        "unrealizedPnl": 3410.0,
-        "volume": 140187,
-        "mavol30": 7657.47,
+        "currentValue": 18912.0,
+        "unrealizedPnl": 4396.0,
+        "volume": 153699,
+        "mavol30": 6482.57,
         "volumeBelowMavol30": false,
-        "weight_pct": 1.82
+        "weight_pct": 1.9
       }
     ]
   },
@@ -200,6 +200,13 @@
           "change_pct": 24.27,
           "action": "HOLD",
           "note": "Portfolio's strongest relative strength today: +2.80% in -2-4% tape on 7.9× volume = institutional accumulation. Japan photoresist cutoff (TOK/JSR/Shin-Etsu/Fujifilm formally halted ArF/EUV to China 6/22) is multi-year structural catalyst immune to single-day US semi selloff. 0 risk factors. Stop 103.36 (+10% guaranteed) with 11.5% buffer. Core hold."
+        },
+        {
+          "date": "2026-06-29",
+          "price": 120.6,
+          "change_pct": 28.35,
+          "action": "HOLD",
+          "note": "+28.36% winner, thesis intact. Japan photoresist cutoff structural catalyst. 0 risk factors. Today +3.29% on 8.5× normal volume — institutional accumulation. Stop ¥103.36 locks in +10% guaranteed. 21 days held but Rule 5 time stop not triggered (gain >> 3%). dist_ma5 10.9% extended but acceptable for existing winner."
         }
       ],
       "exitDate": null,
@@ -209,7 +216,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-06-09T15:39:26.780692+08:00",
-      "updatedAt": "2026-06-26T15:38:59.113247+08:00",
+      "updatedAt": "2026-06-29T11:39:49.312648+08:00",
       "trackerVersion": "2.1"
     },
     "688401": {
@@ -335,6 +342,13 @@
           "change_pct": 23.49,
           "action": "HOLD",
           "note": "+0.48% on 18.3× normal volume — 4th consecutive day >12× volume with flat/minor price movement = textbook institutional accumulation. G11掩膜版 global #2, 28nm supplying, 14nm planned for 2026, 厦门20亿 project on track. 0 risk factors. Stop 79.84 (+10% guaranteed) with 10.9% buffer."
+        },
+        {
+          "date": "2026-06-29",
+          "price": 88.62,
+          "change_pct": 22.1,
+          "action": "HOLD",
+          "note": "+22.10% winner, thesis intact. 28nm mask progressing, 厦门¥20亿 project on track. 0 risk factors. Today -1.13% on 15× normal volume — mild profit-taking after 4-day monster run. Stop ¥79.84 locks in +10% guaranteed. 21 days held. dist_ma5 6.3% at Rule 2b threshold but acceptable for existing winner."
         }
       ],
       "exitDate": null,
@@ -344,7 +358,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-06-09T15:39:26.785471+08:00",
-      "updatedAt": "2026-06-26T15:38:59.116718+08:00",
+      "updatedAt": "2026-06-29T11:39:49.326666+08:00",
       "trackerVersion": "2.1"
     }
   },

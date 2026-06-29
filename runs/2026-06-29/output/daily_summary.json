@@ -4,51 +4,50 @@
     {
       "code": "300236",
       "name": "上海新阳",
-      "action": "HOLD",
-      "price": 120.6,
-      "pnl_pct": 28.36,
-      "note": "+28.36% winner, thesis intact. Japan photoresist cutoff structural catalyst. 0 risk factors. Today +3.29% on 8.5× normal volume — institutional accumulation. Stop ¥103.36 locks in +10% guaranteed. 21 days held but Rule 5 time stop not triggered (gain >> 3%). dist_ma5 10.9% extended but acceptable for existing winner."
+      "action": "RAISE_STOP",
+      "price": 128.77,
+      "pnl_pct": 37.05,
+      "note": "+37.05% winner. Japan photoresist cutoff structural catalyst intact. Today +10.29% on 12.6× volume — institutional accumulation. 0 risk factors. Sector 电子化学品Ⅱ #4 hot. Raising trailing stop to -10% from current per Rule 5 trailing discipline."
     },
     {
       "code": "688401",
       "name": "路维光电",
-      "action": "HOLD",
-      "price": 88.62,
-      "pnl_pct": 22.1,
-      "note": "+22.10% winner, thesis intact. 28nm mask progressing, 厦门¥20亿 project on track. 0 risk factors. Today -1.13% on 15× normal volume — mild profit-taking after 4-day monster run. Stop ¥79.84 locks in +10% guaranteed. 21 days held. dist_ma5 6.3% at Rule 2b threshold but acceptable for existing winner."
+      "action": "RAISE_STOP",
+      "price": 94.56,
+      "pnl_pct": 30.28,
+      "note": "+30.28% winner. 掩膜版龙头 thesis intact. Today +5.50% on 23.7× volume — 5th consecutive day of >12× institutional accumulation. 0 risk factors. Sector 半导体 #5 hot. Raising trailing stop to -10% from current."
     }
   ],
   "portfolioStats": {
     "totalPositions": 2,
-    "totalEquity": 988543.0,
-    "dayPnl": 1334.0,
-    "dayReturnPct": 0.13,
-    "totalReturnPct": -1.15,
-    "unrealizedPnl": 13864.0,
+    "totalEquity": 992999.0,
+    "dayPnl": 5790.0,
+    "dayReturnPct": 0.58,
+    "totalReturnPct": -0.7,
+    "unrealizedPnl": 18320.0,
     "realizedPnl": -25321.0,
-    "cashPct": 93.33
+    "cashPct": 92.91
   },
   "entryRegime": {
     "allow_new_positions": false,
     "regime": "panic",
-    "breadth_ratio": 0.5468,
-    "up": 1911,
-    "down": 3495,
+    "breadth_ratio": 0.8418,
+    "up": 2469,
+    "down": 2933,
     "positive_indices": [
-      "上证指数"
-    ],
-    "negative_indices": [
+      "上证指数",
       "深证成指",
       "创业板指"
     ],
-    "limit_ups": 82,
-    "limit_downs": 67,
+    "negative_indices": [],
+    "limit_ups": 127,
+    "limit_downs": 75,
     "sizing_multiplier": 0.0,
     "hard_block": true,
-    "reason": "Entry regime panic: breadth 0.55:1, 1/3 major indices green, 82 limit-ups / 67 limit-downs. Block new longs."
+    "reason": "Entry regime panic: breadth 0.84:1, 3/3 major indices green, 127 limit-ups / 75 limit-downs. Block new longs."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "PANIC tape: breadth 0.55:1 (1911 up / 3495 down), 67跌停, 82涨停. Only 上证指数 green (+0.17%), 深证成指 -1.21%, 创业板指 -1.28%. Healthcare defensive rotation dominates: 化学制药 +6.82%, 生物制品 +6.55%, 医疗服务 +6.30%. Previous tech leaders (通信设备 -5.47%, 元件 -4.87%) being liquidated. Portfolio: ¥988,543 equity (-1.15% total), 93.3% cash. 2 active positions both profitable (+28.4%, +22.1%). IV data unavailable. HARD BLOCK on new positions — no entries until breadth improves."
+    "summary": "Narrow rally: all 3 major indices green (上证+1.16%, 深证+0.19%, 创业板+0.54%), 科创50 surging +4.61%, but breadth 0.84:1 bearish with 75跌停 vs 127涨停. Healthcare (化学制药+7.42%) new leadership on foreign drug manufacturing policy catalyst. Electronics/semiconductor still strong but slipping. Resources liquidated. Entry regime hard-blocks new longs: Up/Down 0.84 < 1.5 gate + f10=75 ≥ 30 panic threshold. Two existing winners at +37%/+30% — raising trailing stops. 92.9% cash. IV data unavailable across all underlyings."
   }
 }

@@ -2,38 +2,38 @@
   "date": "2026-06-29",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4034.084,
-      "change_pct": 0.17
+      "value": 4073.902,
+      "change_pct": 1.16
     },
     "shenzhen_component": {
-      "value": 15591.37,
-      "change_pct": -1.21
+      "value": 15812.87,
+      "change_pct": 0.19
     },
     "chinext": {
-      "value": 4140.65,
-      "change_pct": -1.28
+      "value": 4216.7,
+      "change_pct": 0.54
     },
-    "sentiment": "bearish",
+    "sentiment": "cautious",
     "hot_sectors": [
       "化学制药",
       "生物制品",
       "医疗服务",
-      "养殖业",
-      "中药Ⅱ"
+      "电子化学品Ⅱ",
+      "半导体"
     ],
     "cold_sectors": [
       "玻璃玻纤",
       "非金属材料Ⅱ",
-      "通信设备",
-      "元件",
-      "塑料"
+      "综合Ⅱ",
+      "塑料",
+      "通信设备"
     ],
-    "notes": "PANIC tape: breadth 0.55:1 (1911 up / 3495 down), 67跌停, 82涨停. Only 上证指数 green (+0.17%), 深证成指 -1.21%, 创业板指 -1.28%. Healthcare defensive rotation dominates: 化学制药 +6.82%, 生物制品 +6.55%, 医疗服务 +6.30%. Previous tech leaders (通信设备 -5.47%, 元件 -4.87%) being liquidated. Portfolio: ¥988,543 equity (-1.15% total), 93.3% cash. 2 active positions both profitable (+28.4%, +22.1%). IV data unavailable. HARD BLOCK on new positions — no entries until breadth improves."
+    "notes": "Narrow rally: all 3 major indices green (上证+1.16%, 深证+0.19%, 创业板+0.54%), 科创50 surging +4.61%, but breadth 0.84:1 bearish with 75跌停 vs 127涨停. Healthcare (化学制药+7.42%) new leadership on foreign drug manufacturing policy catalyst. Electronics/semiconductor still strong but slipping. Resources liquidated. Entry regime hard-blocks new longs: Up/Down 0.84 < 1.5 gate + f10=75 ≥ 30 panic threshold. Two existing winners at +37%/+30% — raising trailing stops. 92.9% cash. IV data unavailable across all underlyings."
   },
   "strategy_scan": {
-    "total_stocks_scanned": 64,
+    "total_stocks_scanned": 63,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-06-29T11:39:49.334701+08:00"
+    "scan_time": "2026-06-29T15:44:05.851635+08:00"
   },
   "recommendations": [
     {
@@ -41,15 +41,6 @@
       "name": "新宙邦",
       "price": null,
       "rps120": 90.79,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688378.SH",
-      "name": "奥来德",
-      "price": null,
-      "rps120": 93.23,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -64,6 +55,15 @@
       "reasoning": ""
     },
     {
+      "code": "300438.SZ",
+      "name": "鹏辉能源",
+      "price": null,
+      "rps120": 95.0,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
       "code": "002407.SZ",
       "name": "多氟多",
       "price": null,
@@ -73,30 +73,30 @@
       "reasoning": ""
     },
     {
-      "code": "688205.SH",
-      "name": "德科立",
+      "code": "605111.SH",
+      "name": "新洁能",
       "price": null,
-      "rps120": 94.73,
+      "rps120": 91.52,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "002192.SZ",
-      "name": "融捷股份",
+      "code": "688150.SH",
+      "name": "莱特光电",
       "price": null,
-      "rps120": 93.9,
+      "rps120": 94.9,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     }
   ],
   "summary": {
-    "total_scanned": 64,
+    "total_scanned": 63,
     "buy_recommendations": 0,
     "watch_recommendations": 6,
     "avoid_recommendations": 0,
-    "market_call": "防御",
-    "reasoning": "PANIC tape: breadth 0.55:1 (1911 up / 3495 down), 67跌停, 82涨停. Only 上证指数 green (+0.17%), 深证成指 -1.21%, 创业板指 -1.28%. Healthcare defensive rotation dominates: 化学制药 +6.82%, 生物制品 +6.55%, 医疗服务 +6.30%. Previous tech leaders (通信设备 -5.47%, 元件 -4.87%) being liquidated. Portfolio: ¥988,543 equity (-1.15% total), 93.3% cash. 2 active positions both profitable (+28.4%, +22.1%). IV data unavailable. HARD BLOCK on new positions — no entries until breadth improves."
+    "market_call": "观望",
+    "reasoning": "Narrow rally: all 3 major indices green (上证+1.16%, 深证+0.19%, 创业板+0.54%), 科创50 surging +4.61%, but breadth 0.84:1 bearish with 75跌停 vs 127涨停. Healthcare (化学制药+7.42%) new leadership on foreign drug manufacturing policy catalyst. Electronics/semiconductor still strong but slipping. Resources liquidated. Entry regime hard-blocks new longs: Up/Down 0.84 < 1.5 gate + f10=75 ≥ 30 panic threshold. Two existing winners at +37%/+30% — raising trailing stops. 92.9% cash. IV data unavailable across all underlyings."
   }
 }

@@ -4,32 +4,32 @@
 
 | 指数 | 收盘 | 涨跌幅 |
 |------|------|--------|
-| 上证指数 | 4034.08 | +0.17% |
-| 深证成指 | 15591.37 | -1.21% |
-| 创业板指 | 4140.65 | -1.28% |
-| 科创50 | 2063.94 | +1.56% |
+| 上证指数 | 4073.90 | +1.16% |
+| 深证成指 | 15812.87 | +0.19% |
+| 创业板指 | 4216.70 | +0.54% |
+| 科创50 | 2126.01 | +4.61% |
 
-涨跌比: 1911涨 / 3495跌 / 5511总
+涨跌比: 2469涨 / 2933跌 / 5512总
 
-**热门板块**: 化学制药(+6.82%), 生物制品(+6.55%), 医疗服务(+6.30%), 养殖业(+4.44%), 中药Ⅱ(+4.20%)
+**热门板块**: 化学制药(+7.42%), 生物制品(+7.34%), 医疗服务(+6.83%), 电子化学品Ⅱ(+4.70%), 半导体(+4.54%)
 
-**冷门板块**: 玻璃玻纤(-8.15%), 非金属材料Ⅱ(-7.12%), 通信设备(-5.47%), 元件(-4.87%), 塑料(-4.86%)
+**冷门板块**: 玻璃玻纤(-5.64%), 非金属材料Ⅱ(-5.32%), 综合Ⅱ(-3.94%), 塑料(-3.38%), 通信设备(-2.83%)
 
-PANIC tape: breadth 0.55:1 (1911 up / 3495 down), 67跌停, 82涨停. Only 上证指数 green (+0.17%), 深证成指 -1.21%, 创业板指 -1.28%. Healthcare defensive rotation dominates: 化学制药 +6.82%, 生物制品 +6.55%, 医疗服务 +6.30%. Previous tech leaders (通信设备 -5.47%, 元件 -4.87%) being liquidated. Portfolio: ¥988,543 equity (-1.15% total), 93.3% cash. 2 active positions both profitable (+28.4%, +22.1%). IV data unavailable. HARD BLOCK on new positions — no entries until breadth improves.
+Narrow rally: all 3 major indices green (上证+1.16%, 深证+0.19%, 创业板+0.54%), 科创50 surging +4.61%, but breadth 0.84:1 bearish with 75跌停 vs 127涨停. Healthcare (化学制药+7.42%) new leadership on foreign drug manufacturing policy catalyst. Electronics/semiconductor still strong but slipping. Resources liquidated. Entry regime hard-blocks new longs: Up/Down 0.84 < 1.5 gate + f10=75 ≥ 30 panic threshold. Two existing winners at +37%/+30% — raising trailing stops. 92.9% cash. IV data unavailable across all underlyings.
 
 ## 策略池扫描
 
-扫描 **64** 只策略池股票
+扫描 **63** 只策略池股票
 (来源: cheesefortune_intersection)
 
 ## 跳过标的
 
-1. **新宙邦** (300037) (RPS 90.79%) — PANIC regime hard block — no new positions allowed. Would otherwise be a strong candidate: VCP SETUP, 宁德时代 5万吨电解液协议 catalyst, dist_ma5 -2.9% (pullback to support), RPS120 90.79%.
-2. **奥来德** (688378) (RPS 93.23%) — PANIC regime hard block. Technically tight (dist_ma5 +0.3%), RPS120 93.23%, 光学光电子 sector (not cold). Monitor for regime clearance.
-3. **思瑞浦** (688536) (RPS 93.92%) — PANIC regime hard block. dist_ma5 -1.3% ideal entry, RPS120 93.92%, 半导体 sector. Strong fundamentals but regime forbids.
-4. **多氟多** (002407) (RPS 91.87%) — dist_ma5 9.3% exceeds Rule 2b 6% threshold — overextended for new entry even if regime were normal. 氟化工涨停 but chasing risk too high.
-5. **德科立** (688205) (RPS 94.73%) — Sector 通信设备 in bottom 5 (-5.47%). Rule 1 hard sector block regardless of stock quality.
-6. **融捷股份** (002192) (RPS 93.9%) — 6/26 跌停 -10%, 碳酸锂期货大跌7% headwind. Heavy distribution, 4 risk factors. Skip regardless of regime.
+1. **新宙邦** (300037) (RPS 90.79%) — Top-tier catalyst (宁德时代电解液5/10/15万吨3年协议), RPS120=90.79 sweet spot, VCP=SETUP, MA distances clean (dist_ma5=-2.9%). Would be STRONG BUY at 7% allocation. BLOCKED by entry regime hard block (breadth 0.84:1, f10=75). Queue for re-evaluation when regime clears.
+2. **思瑞浦** (688536) (RPS 93.92%) — Sector 半导体 #5 hot, net profit +577%, RPS120=93.92, MA distances clean. Would be BUY at 5-7%. BLOCKED by entry regime hard block.
+3. **鹏辉能源** (300438) (RPS 95.0%) — 819% net profit growth, 储能满产, 中信建投买入评级. RPS120=95.0 extended zone but 0 risk factors. MA pristine (dist_ma5=0.9%). Would be BUY at 5-7%. BLOCKED by entry regime.
+4. **多氟多** (002407) (RPS 91.87%) — Rule 2b violation: dist_ma5=9.3% (>6%), dist_ma10=17.7% (>8%), dist_ma20=20.4% (>12%). Non-negotiable MA distance skip despite strong 氟化工涨停 catalyst. Also regime blocked.
+5. **新洁能** (605111) (RPS 91.52%) — Rule 2b violation: dist_ma5=16.8%, dist_ma10=31.4%, dist_ma20=44.0%. Massively extended. Sector 半导体 hot but price is light-years from support.
+6. **莱特光电** (688150) (RPS 94.9%) — Rule 2b: dist_ma10=11.4% (>8%). Sector 电子化学品Ⅱ #4 but one MA violation. Also regime blocked. Current price ¥59.40 (from enriched_candidates data).
 
 ## 今日研究结论
 
@@ -37,8 +37,7 @@ PANIC tape: breadth 0.55:1 (1911 up / 3495 down), 67跌停, 82涨停. Only 上�
 - 跳过: 6只
 
 ### 新教训
-- {'text': 'Panic breadth (0.55:1, 67跌停) with healthcare rotation is a classic risk-off signal. Previous hot sectors (通信设备 -5.47%, 元件 -4.87%) are being liquidated while only defensive pharma/biotech sectors go green. This rotation pattern is highly predictive of continued tech weakness.', 'type': 'observation', 'tags': ['sector', 'entry-filter'], 'evidence_type': 'supporting', 'mechanism': "When breadth collapses and money rotates exclusively into healthcare, it signals institutional de-risking from cyclicals/tech into defensives. This is not a dip-buying opportunity — it's a capital preservation signal."}
-- {'text': 'The hard block is preventing FOMO entries. 新宙邦 (宁德时代协议 catalyst, VCP SETUP) and 奥来德 (dist_ma5 0.3%) would have been tempting buys in V1. V2 correctly forces cash preservation in panic regime.', 'type': 'rule', 'tags': ['entry-filter', 'position-sizing'], 'evidence_type': 'supporting', 'mechanism': 'Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.'}
-- {'text': 'Winners can sustain massive volume without breaking — 688401 traded 15× normal volume and only declined -1.13%. This is institutional accumulation, not distribution. High relative volume on winners in weak tape = relative strength confirmation.', 'type': 'signal', 'tags': ['position-sizing', 'exit-rule'], 'evidence_type': 'supporting', 'mechanism': 'Institutions accumulate into weakness when thesis is strong. High volume with minimal price decline = absorption, not selling pressure.'}
-- {'text': 'h023 confirmed: mechanical stop-raising after +10% converts winners into risk-free holds regardless of tape conditions. Both positions now have 10%+ guaranteed profit buffers, eliminating need for panic decisions.', 'type': 'heuristic', 'tags': ['exit-rule', 'position-sizing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h023', 'mechanism': 'Trailing stops decouple position management from market timing calls. Once a position is locked at +10%, it becomes self-insured against drawdowns.'}
-- {'text': 'h019 confirmed: bottom-5 sectors are hard no-buy zones. 通信设备 (-5.47%) is collapsing and stocks like 德科立 are automatically excluded. Sector gravity overrides individual metrics.', 'type': 'rule', 'tags': ['sector', 'entry-filter'], 'evidence_type': 'supporting', 'related_hypothesis': 'h019', 'mechanism': 'Institutional sector rotation creates headwinds that individual stock fundamentals cannot overcome. When a sector is being de-risked, all stocks in it suffer selling pressure regardless of quality.'}
+- {'text': 'Narrow rally (科创50 +4.61% with breadth 0.84:1) signals money concentration in big-cap tech/healthcare, not broad participation. This pattern is a red flag for adding new momentum positions — our winners happen to be in the right spots, but adding more would be over-concentration when breadth warns. Cash is the correct default.', 'type': 'observation', 'tags': ['market-regime', 'position-sizing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h013', 'mechanism': 'When more stocks decline than advance despite index gains, liquidity is funneling into a narrow set of names. Adding to the same theme during this pattern increases correlation risk without the safety net of broad market support.'}
+- {'text': 'Healthcare rotation (化学制药 +7.42%, 生物制品 +7.34%, 医疗服务 +6.83% occupying top 3 spots) driven by 商务部/发改委/财政部 joint policy on foreign drug manufacturing — a structural catalyst. Our strategy pool contains zero healthcare candidates. This is a diversification gap requiring pool expansion.', 'type': 'signal', 'tags': ['sector', 'pool-construction'], 'evidence_type': 'observation', 'mechanism': "Regime-level sector shifts create winners outside our scanning scope. When top 3 sectors are absent from a 63-stock pool, the pool's sector bias (electronics/semiconductor/chemicals) becomes a structural blind spot."}
+- {'text': 'Trailing stop at current-10% after +30-37% gains is the correct mechanical discipline. Moving 上海新阳 stop from ¥103.36 to ¥115.90 and 路维光电 from ¥79.84 to ¥85.10 locks in +23.3% and +17.2% respectively while giving each trade 10% breathing room. This converts fast winners into low-risk holds without subjective judgment.', 'type': 'heuristic', 'tags': ['exit-rule', 'position-sizing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h023', 'mechanism': 'After +20%, the +10% stop becomes inadequate — a reversion to stop destroys ~14% of current value. Current-10% trail preserves the majority of paper gains while allowing normal volatility. The 10% buffer is wide enough to avoid whipsaw but tight enough to protect.'}
+- {'text': "Rule 2b (MA-distance anti-chase) filtered out 4 of 7 visually strong names today: 多氟多(dist_ma5=9.3%), 新洁能(16.8%), 莱特光电(dist_ma10=11.4%), 共达电声(dist_ma10=16.3%). These would have been V1 buys and are now correctly skipped. The rule's hit rate continues validating its non-negotiable status.", 'type': 'signal', 'tags': ['entry-filter'], 'evidence_type': 'supporting', 'related_hypothesis': 'h021, h027', 'mechanism': "Stocks extended >6% above MA5 or >8% above MA10 have elevated mean-reversion risk regardless of sector strength. The 'hot sector exception' temptation is precisely what Rule 2b is designed to prevent. Even in #4-5 ranked sectors, MA distance discipline applies."}
