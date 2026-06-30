@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1782790523.6428008,
+      "start": 1782804912.096171,
       "errors": [],
-      "end": 1782790541.1176379,
-      "duration_sec": 17.5
+      "end": 1782804926.6606731,
+      "duration_sec": 14.6
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 16421,
+      "response_size_bytes": 17342,
       "tokens": {
-        "input_tokens": 207887,
-        "output_tokens": 9834
+        "input_tokens": 207434,
+        "output_tokens": 12426
       },
       "rounds": 3,
       "tool_calls_count": 6,
-      "duration_sec": 151.6,
+      "duration_sec": 216.4,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -25,24 +25,108 @@
     },
     {
       "phase": "apply",
-      "start": 1782790692.769919,
+      "start": 1782805143.165052,
       "actions": [
+        "RAISE_STOP 300236 → 118.35",
+        "RAISE_STOP 688401 → 86.38",
+        "OPEN 300438 @ 82.3",
+        "OPEN 002947 @ 77.88",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 contradicting evidence → hitRate=99%, n=113",
-        "Hypothesis: Updated h077 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
-        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=24",
-        "Hypothesis: Updated h072 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=25",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=23",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=34",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=85",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=114",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1782790693.176372,
-      "duration_sec": 0.4
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002947",
+                "name": "恒铭达",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 77.88,
+                "stopLoss": 73.99,
+                "distance_pct": 4.99,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "300438",
+                "name": "鹏辉能源",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 82.3,
+                "stopLoss": 78.19,
+                "distance_pct": 4.99,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1782805143.667852,
+      "duration_sec": 0.5
     }
   ],
-  "validation_errors": [],
+  "validation_errors": [
+    "RULE check_stop_proximity: 002947 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 300438 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 169.5
+    "totalDurationSec": 231.5
   }
 }

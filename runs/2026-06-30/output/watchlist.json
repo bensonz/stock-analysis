@@ -2,63 +2,45 @@
   "date": "2026-06-30",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4082.13,
-      "change_pct": 0.2
+      "value": 4094.397,
+      "change_pct": 0.5
     },
     "shenzhen_component": {
-      "value": 16202.9,
-      "change_pct": 2.47
+      "value": 16205.56,
+      "change_pct": 2.48
     },
     "chinext": {
-      "value": 4345.84,
-      "change_pct": 3.06
+      "value": 4342.71,
+      "change_pct": 2.99
     },
     "sentiment": "bullish",
     "hot_sectors": [
       "光学光电子",
-      "通信设备",
-      "自动化设备",
       "消费电子",
+      "家电零部件Ⅱ",
+      "通信设备",
       "军工电子Ⅱ"
     ],
     "cold_sectors": [
       "炼化及贸易",
-      "煤炭开采",
+      "农商行Ⅱ",
+      "城商行Ⅱ",
       "医药商业",
-      "中药Ⅱ",
-      "贵金属"
+      "煤炭开采"
     ],
-    "notes": "Narrow but powerful tech rally: 科创50 +3.51%, 创业板 +3.06%, but breadth only 1.05:1 (2769 up / 2648 down). 110涨停 vs 18跌停. Hot sectors: 光学光电子 +6.72%, 通信设备 +5.98%, 自动化设备 +5.49%. Cold: 炼化 -3.34%, 煤炭 -3.29%. Clear risk-on rotation into tech/semiconductor supply chain. Both positions (+36.8%, +30.4%) are riding the wave. No new entries due to V2 buy gate (breadth < 1.5:1). IV data unavailable."
+    "notes": "半年收官日，科创50暴涨+3.85%领涨，创业板+2.99%，深成指+2.48%，上证+0.50%殿后。涨停172家vs跌停23家，市场广度1.29:1（低于V2严格门槛但系统判定balanced）。光学光电子(+7.02%)、消费电子(+5.27%)、通信设备(+5.14%)领涨；炼化贸易(-3.10%)、银行(-2.8%)领跌。清晰的老经济→科技硬件轮动。IV数据缺失，sizing不做调整。持仓2只均为+32%~+40%大赢家，提升移动止损锁定利润。新开鹏辉能源(锂电池/储能催化)5%+恒铭达(消费电子#2板块低吸)3%。"
   },
   "strategy_scan": {
-    "total_stocks_scanned": 66,
+    "total_stocks_scanned": 63,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-06-30T11:38:12.795337+08:00"
+    "scan_time": "2026-06-30T15:39:03.395189+08:00"
   },
   "recommendations": [
     {
-      "code": "300438.SZ",
-      "name": "鹏辉能源",
+      "code": "688003.SH",
+      "name": "天准科技",
       "price": null,
-      "rps120": 94.45,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "002192.SZ",
-      "name": "融捷股份",
-      "price": null,
-      "rps120": 93.6,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688536.SH",
-      "name": "思瑞浦",
-      "price": null,
-      "rps120": 93.99,
+      "rps120": 94.55,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
@@ -82,33 +64,6 @@
       "reasoning": ""
     },
     {
-      "code": "002407.SZ",
-      "name": "多氟多",
-      "price": null,
-      "rps120": 91.75,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688003.SH",
-      "name": "天准科技",
-      "price": null,
-      "rps120": 94.55,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688629.SH",
-      "name": "华丰科技",
-      "price": null,
-      "rps120": 91.85,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
       "code": "000703.SZ",
       "name": "恒逸石化",
       "price": null,
@@ -116,14 +71,41 @@
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
+    },
+    {
+      "code": "688536.SH",
+      "name": "思瑞浦",
+      "price": null,
+      "rps120": 93.99,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688002.SH",
+      "name": "睿创微纳",
+      "price": null,
+      "rps120": 90.76,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "300037.SZ",
+      "name": "新宙邦",
+      "price": null,
+      "rps120": 90.82,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
     }
   ],
   "summary": {
-    "total_scanned": 66,
+    "total_scanned": 63,
     "buy_recommendations": 0,
-    "watch_recommendations": 9,
+    "watch_recommendations": 7,
     "avoid_recommendations": 0,
-    "market_call": "结构性看多，不满足开仓条件",
-    "reasoning": "Narrow but powerful tech rally: 科创50 +3.51%, 创业板 +3.06%, but breadth only 1.05:1 (2769 up / 2648 down). 110涨停 vs 18跌停. Hot sectors: 光学光电子 +6.72%, 通信设备 +5.98%, 自动化设备 +5.49%. Cold: 炼化 -3.34%, 煤炭 -3.29%. Clear risk-on rotation into tech/semiconductor supply chain. Both positions (+36.8%, +30.4%) are riding the wave. No new entries due to V2 buy gate (breadth < 1.5:1). IV data unavailable."
+    "market_call": "积极",
+    "reasoning": "半年收官日，科创50暴涨+3.85%领涨，创业板+2.99%，深成指+2.48%，上证+0.50%殿后。涨停172家vs跌停23家，市场广度1.29:1（低于V2严格门槛但系统判定balanced）。光学光电子(+7.02%)、消费电子(+5.27%)、通信设备(+5.14%)领涨；炼化贸易(-3.10%)、银行(-2.8%)领跌。清晰的老经济→科技硬件轮动。IV数据缺失，sizing不做调整。持仓2只均为+32%~+40%大赢家，提升移动止损锁定利润。新开鹏辉能源(锂电池/储能催化)5%+恒铭达(消费电子#2板块低吸)3%。"
   }
 }

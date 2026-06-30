@@ -1555,3 +1555,11 @@
 - Both held positions (上海新阳 +36.8%, 路维光电 +30.4%) have 0 risk factors from cheesefortune scanner. Zero-risk + hot sector + strong catalyst is the winning formula. Prioritize 0-risk candidates in future entry decisions.
 - Today 15+ strategy pool stocks fail Rule 2b (MA distance). In a hot tape, the majority of strong names are already extended. The MA anti-chase rule is protecting us from buying at euphoric prices. Confirms h027.
 - Volume confirmation on existing winners: 上海新阳 7.2× mavol30 and 路维光电 15.5× mavol30 with flat/minor price action = institutional accumulation, not distribution. High volume without price decline on winners is a strong HOLD signal.
+
+### 自动更新 (2026-06-30)
+
+- MA-distance Rule 2b eliminated ~20 visually 'strong' names today in a euphoric tape (r4_7+r7_10+r10=1,061). 新洁能/华灿光电/多氟多/京仪装备/美埃科技 all massive runners, all terrible entries. Rule is doing real protective work.
+- Pullback-to-support entries in hot sectors create asymmetric risk/reward. 恒铭达 below MA20 in #2消费电子 with 0 risks exemplifies the ideal setup: sector gravity up, stock temporarily weak, entry near support.
+- Trailing stop discipline on winners (raise after +20%, trail at -10%) is the primary alpha engine. Both positions +32-40% because we let structural theses run while mechanically protecting gains. The trailing stop is more important than entry timing for portfolio returns.
+- VCP data coverage is critically sparse — only 1 of 31 enriched candidates has VCP data. The strongest backtested signal (contraction_ratio < 0.4 → +7.7% avg 10d) cannot be leveraged. Pipeline improvement needed.
+- Breadth 1.29:1 is below strict 1.5:1 gate but the system's entry_regime correctly allows positions because quality matters more than quantity: 科创50 +3.85%, 3/3 indices green, 172涨停 vs 23跌停, all top sectors tech-led.

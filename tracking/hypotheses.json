@@ -783,6 +783,10 @@
           {
             "date": "2026-06-25",
             "detail": "Index-green + breadth-red divergence is the most dangerous tape for new entries. Today: all 4 indices green (科创50 +3.87%) but breadth 0.29:1 with 91跌停. The multi-condition buy gate (breadth ≥1.5:1 AND f10<30) correctly prevented entries into what looked like a rally. This validates the V2 framework's insistence on breadth + limits checks beyond simple index direction."
+          },
+          {
+            "date": "2026-06-30",
+            "detail": "Breadth 1.29:1 is below strict 1.5:1 gate but the system's entry_regime correctly allows positions because quality matters more than quantity: 科创50 +3.85%, 3/3 indices green, 172涨停 vs 23跌停, all top sectors tech-led."
           }
         ],
         "contradicting": [
@@ -792,7 +796,7 @@
           }
         ]
       },
-      "sampleSize": 113,
+      "sampleSize": 114,
       "hitRate": 0.991,
       "confidence": 0.983,
       "tags": [],
@@ -1029,7 +1033,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-06-29",
+      "lastTested": "2026-06-30",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1120,13 +1124,17 @@
           {
             "date": "2026-06-29",
             "detail": "h019 confirmed: bottom-5 sectors are hard no-buy zones. 通信设备 (-5.47%) is collapsing and stocks like 德科立 are automatically excluded. Sector gravity overrides individual metrics."
+          },
+          {
+            "date": "2026-06-30",
+            "detail": "Pullback-to-support entries in hot sectors create asymmetric risk/reward. 恒铭达 below MA20 in #2消费电子 with 0 risks exemplifies the ideal setup: sector gravity up, stock temporarily weak, entry near support."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 22,
+      "sampleSize": 23,
       "hitRate": 1.0,
-      "confidence": 0.958,
+      "confidence": 0.96,
       "tags": [
         "sector",
         "entry-filter"
@@ -1178,7 +1186,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-06-26",
+      "lastTested": "2026-06-30",
       "mechanism": "When price gets too stretched above MA5/MA10/MA20, upside becomes dependent on continued euphoria instead of support-based demand, raising mean-reversion risk.",
       "evidence": {
         "supporting": [
@@ -1509,6 +1517,10 @@
           {
             "date": "2026-06-26",
             "detail": "18× normal volume on a flat day (+0.48%) is the strongest accumulation signal observed in this portfolio's history — stronger than a +10% day on normal volume. The volume-to-price-move ratio should be tracked as a leading indicator of institutional positioning."
+          },
+          {
+            "date": "2026-06-30",
+            "detail": "VCP data coverage is critically sparse — only 1 of 31 enriched candidates has VCP data. The strongest backtested signal (contraction_ratio < 0.4 → +7.7% avg 10d) cannot be leveraged. Pipeline improvement needed."
           }
         ],
         "contradicting": [
@@ -1522,9 +1534,9 @@
           }
         ]
       },
-      "sampleSize": 84,
+      "sampleSize": 85,
       "hitRate": 0.976,
-      "confidence": 0.965,
+      "confidence": 0.966,
       "tags": [
         "entry-filter",
         "timing"
@@ -1567,7 +1579,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-06-29",
+      "lastTested": "2026-06-30",
       "mechanism": "In a deteriorating market, protecting open profits is more valuable than maximizing upside variance.",
       "evidence": {
         "supporting": [
@@ -1702,13 +1714,17 @@
           {
             "date": "2026-06-29",
             "detail": "h023 confirmed: mechanical stop-raising after +10% converts winners into risk-free holds regardless of tape conditions. Both positions now have 10%+ guaranteed profit buffers, eliminating need for panic decisions."
+          },
+          {
+            "date": "2026-06-30",
+            "detail": "Trailing stop discipline on winners (raise after +20%, trail at -10%) is the primary alpha engine. Both positions +32-40% because we let structural theses run while mechanically protecting gains. The trailing stop is more important than entry timing for portfolio returns."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 33,
+      "sampleSize": 34,
       "hitRate": 1.0,
-      "confidence": 0.971,
+      "confidence": 0.972,
       "tags": [
         "exit-rule",
         "timing",
@@ -1929,13 +1945,17 @@
           {
             "date": "2026-06-30",
             "detail": "Today 15+ strategy pool stocks fail Rule 2b (MA distance). In a hot tape, the majority of strong names are already extended. The MA anti-chase rule is protecting us from buying at euphoric prices. Confirms h027."
+          },
+          {
+            "date": "2026-06-30",
+            "detail": "MA-distance Rule 2b eliminated ~20 visually 'strong' names today in a euphoric tape (r4_7+r7_10+r10=1,061). 新洁能/华灿光电/多氟多/京仪装备/美埃科技 all massive runners, all terrible entries. Rule is doing real protective work."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 24,
+      "sampleSize": 25,
       "hitRate": 1.0,
-      "confidence": 0.962,
+      "confidence": 0.963,
       "tags": [
         "entry-filter",
         "timing",

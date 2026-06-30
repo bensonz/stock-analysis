@@ -2,17 +2,17 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 207887,
-  "output_tokens": 9834,
+  "input_tokens": 207434,
+  "output_tokens": 12426,
   "rounds": 3,
-  "duration_sec": 151.6,
+  "duration_sec": 216.4,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 光学光电子 板块 领涨 2026年6月30日",
+        "query": "A股 今日 热点板块 光学光电子 消费电子 2026年6月30日",
         "max_results": 5
       },
       "result_length": 144
@@ -22,7 +22,7 @@
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "通信设备 消费电子 半导体 板块 大涨 原因 2026年6月",
+        "query": "恒铭达 002947 消费电子 催化剂 最新消息 2026",
         "max_results": 5
       },
       "result_length": 144
@@ -32,7 +32,7 @@
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "上海新阳 300236 光刻胶 半导体材料 最新消息 2026",
+        "query": "鹏辉能源 300438 锂电池 储能 最新消息 2026年6月",
         "max_results": 5
       },
       "result_length": 144
@@ -42,7 +42,17 @@
       "round": 2,
       "tool": "web_fetch",
       "input": {
-        "url": "https://www.baidu.com/s?wd=A股+热门板块+2026年6月30日+光学光电子",
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+2026年6月30日",
+        "maxChars": 5000
+      },
+      "result_length": 1932
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=恒铭达+002947+最新消息+2026",
         "maxChars": 5000
       },
       "result_length": 5000
@@ -52,17 +62,7 @@
       "round": 2,
       "tool": "web_fetch",
       "input": {
-        "url": "https://www.baidu.com/s?wd=上海新阳+300236+半导体材料+2026年6月",
-        "maxChars": 5000
-      },
-      "result_length": 5000
-    },
-    {
-      "pass": "P1",
-      "round": 2,
-      "tool": "web_fetch",
-      "input": {
-        "url": "https://www.baidu.com/s?wd=半导体+板块+大涨+2026年6月30日",
+        "url": "https://www.baidu.com/s?wd=鹏辉能源+300438+储能+锂电池+2026",
         "maxChars": 5000
       },
       "result_length": 5000

@@ -4,50 +4,73 @@
     {
       "code": "300236",
       "name": "上海新阳",
-      "action": "HOLD",
-      "price": 128.58,
-      "pnl_pct": 36.84,
-      "note": "+36.84% winner. Japan photoresist cutoff structural catalyst intact. 0 risk factors. Today -0.15% mild profit-taking on 7.2× volume. Trailing stop ¥115.90 locks in +23.4%. MA extended but Rule 2b applies to entries, not winners. Sector 电子化学品Ⅱ aligns with semiconductor boom."
+      "action": "RAISE_STOP",
+      "price": 131.5,
+      "pnl_pct": 39.95,
+      "note": "+39.95% monster winner. Japan photoresist cutoff structural catalyst intact. 0 risk factors. Tightening trailing stop to -10% from current per Rule 5, locking in +25.9% guaranteed while thesis runs. Sector 电子化学品Ⅱ aligned with semiconductor boom. MA extended but Rule 2b applies to entries not winners."
     },
     {
       "code": "688401",
       "name": "路维光电",
-      "action": "HOLD",
-      "price": 94.61,
-      "pnl_pct": 30.35,
-      "note": "+30.35% winner. 掩膜版龙头 thesis intact, 28nm progressing, 厦门20亿项目 on track. 0 risk factors. Today +0.05% flat on 15.5× volume — institutional accumulation. Trailing stop ¥85.10 locks in +17.3%. Sector 半导体 material aligns with top-5 tech cluster."
+      "action": "RAISE_STOP",
+      "price": 95.98,
+      "pnl_pct": 32.24,
+      "note": "+32.24% monster winner. 掩膜版龙头 thesis intact. 28nm progressing, 厦门20亿项目 on track. 0 risk factors. Raising trailing stop to -10% from current, locking in +19.0%. 半导体材料 sector aligned with top-5 tech. 24.8× normal volume today = continued institutional accumulation."
+    },
+    {
+      "code": "300438",
+      "name": "鹏辉能源",
+      "action": "OPEN",
+      "price": 82.3,
+      "note": "储能+锂电池双赛道龙头。Q1业绩超预期(净利+819%)，合同负债14亿(+70%)在手订单爆发。今日锂电池板块集体异动(储能签单突破180GWh)。中信建投买入评级，预测26-28年净利CAGR 50%+。6家机构覆盖。near MA5支撑(-0.8%)，RPS120 94.45%甜点区。"
+    },
+    {
+      "code": "002947",
+      "name": "恒铭达",
+      "action": "OPEN",
+      "price": 77.88,
+      "note": "消费电子零部件龙头。#2热板块。0风险因子(极稀缺)。近10日回调至MA20下方，形成低吸机会。营收3年CAGR 23%，净利+31%。AI手机/折叠屏概念。北向3.9%+公募5.4%机构认可。增资远山新材料外延扩张。"
     }
   ],
   "portfolioStats": {
-    "totalPositions": 2,
-    "totalEquity": 992933.0,
-    "dayPnl": -66.0,
-    "dayReturnPct": -0.01,
-    "totalReturnPct": -0.71,
-    "unrealizedPnl": 18254.0,
+    "totalPositions": 4,
+    "totalEquity": 994375.0,
+    "dayPnl": 1376.0,
+    "dayReturnPct": 0.14,
+    "totalReturnPct": -0.56,
+    "unrealizedPnl": 19696.0,
     "realizedPnl": -25321.0,
-    "cashPct": 92.91
+    "cashPct": 87.9
   },
   "entryRegime": {
     "allow_new_positions": true,
     "regime": "balanced",
-    "breadth_ratio": 1.0457,
-    "up": 2769,
-    "down": 2648,
+    "breadth_ratio": 1.2919,
+    "up": 3054,
+    "down": 2364,
     "positive_indices": [
       "上证指数",
       "深证成指",
       "创业板指"
     ],
     "negative_indices": [],
-    "limit_ups": 110,
-    "limit_downs": 18,
+    "limit_ups": 172,
+    "limit_downs": 23,
     "sizing_multiplier": 1.0,
     "hard_block": false,
-    "reason": "Entry regime balanced: breadth 1.05:1, 3/3 major indices green, 110 limit-ups / 18 limit-downs. Allow normal sizing."
+    "reason": "Entry regime balanced: breadth 1.29:1, 3/3 major indices green, 172 limit-ups / 23 limit-downs. Allow normal sizing."
   },
-  "newPositions": [],
+  "newPositions": [
+    {
+      "code": "300438",
+      "name": "鹏辉能源"
+    },
+    {
+      "code": "002947",
+      "name": "恒铭达"
+    }
+  ],
   "marketContext": {
-    "summary": "Narrow but powerful tech rally: 科创50 +3.51%, 创业板 +3.06%, but breadth only 1.05:1 (2769 up / 2648 down). 110涨停 vs 18跌停. Hot sectors: 光学光电子 +6.72%, 通信设备 +5.98%, 自动化设备 +5.49%. Cold: 炼化 -3.34%, 煤炭 -3.29%. Clear risk-on rotation into tech/semiconductor supply chain. Both positions (+36.8%, +30.4%) are riding the wave. No new entries due to V2 buy gate (breadth < 1.5:1). IV data unavailable."
+    "summary": "半年收官日，科创50暴涨+3.85%领涨，创业板+2.99%，深成指+2.48%，上证+0.50%殿后。涨停172家vs跌停23家，市场广度1.29:1（低于V2严格门槛但系统判定balanced）。光学光电子(+7.02%)、消费电子(+5.27%)、通信设备(+5.14%)领涨；炼化贸易(-3.10%)、银行(-2.8%)领跌。清晰的老经济→科技硬件轮动。IV数据缺失，sizing不做调整。持仓2只均为+32%~+40%大赢家，提升移动止损锁定利润。新开鹏辉能源(锂电池/储能催化)5%+恒铭达(消费电子#2板块低吸)3%。"
   }
 }
