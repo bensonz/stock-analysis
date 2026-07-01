@@ -1744,7 +1744,7 @@
       "type": "signal",
       "status": "hypothesis",
       "created": "2026-04-02",
-      "lastTested": "2026-06-11",
+      "lastTested": "2026-07-01",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -1759,13 +1759,17 @@
           {
             "date": "2026-06-11",
             "detail": "Volume below MAVOL30 (恒铭达 at 61%) combined with negative price action (-4.43%) is a reliable early warning before stop-loss triggers. The volume rule correctly flagged weakening momentum before the stop was threatened."
+          },
+          {
+            "date": "2026-07-01",
+            "detail": "Rule 5 -3% in 3 days trigger worked perfectly: 鹏辉能源 caught a false breakout (¥92→¥75 intraday, 18% swing on 碳酸锂 crash). Cutting at -3.24% prevents this from becoming a -8% disaster."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 3,
+      "sampleSize": 4,
       "hitRate": 1.0,
-      "confidence": 0.8,
+      "confidence": 0.833,
       "tags": [
         "exit-rule",
         "timing"
@@ -1850,7 +1854,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-06-30",
+      "lastTested": "2026-07-01",
       "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes.",
       "evidence": {
         "supporting": [
@@ -1953,13 +1957,17 @@
           {
             "date": "2026-06-30",
             "detail": "MA-distance Rule 2b eliminated ~20 visually 'strong' names today in a euphoric tape (r4_7+r7_10+r10=1,061). 新洁能/华灿光电/多氟多/京仪装备/美埃科技 all massive runners, all terrible entries. Rule is doing real protective work."
+          },
+          {
+            "date": "2026-07-01",
+            "detail": "MA-distance Rule 2b filtered 8+ candidates today that all showed extreme extension despite great fundamentals. Confirms h027: hot sector does NOT override chase risk."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 25,
+      "sampleSize": 26,
       "hitRate": 1.0,
-      "confidence": 0.963,
+      "confidence": 0.964,
       "tags": [
         "entry-filter",
         "timing",
@@ -1975,7 +1983,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-06-26",
+      "lastTested": "2026-07-01",
       "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally.",
       "evidence": {
         "supporting": [
@@ -2098,13 +2106,17 @@
           {
             "date": "2026-06-26",
             "detail": "恐慌盘中展现相对强度的持仓(如上海新阳+2.36% vs 全市场-2%~-3.7%)是最强确认信号——机构在无差别抛售中主动买入,证明催化逻辑不受短期情绪影响。未来恐慌盘中优先持有逆势上涨的仓位。"
+          },
+          {
+            "date": "2026-07-01",
+            "detail": "Index divergence (上证+0.44% vs 科创50 -2.48%) with 3.78:1 breadth is a textbook rotation signal: profit-taking in extended tech leaders, rotation into lagging cyclicals. This is not a broad selloff."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 30,
+      "sampleSize": 31,
       "hitRate": 1.0,
-      "confidence": 0.969,
+      "confidence": 0.97,
       "tags": [
         "sector",
         "timing"
@@ -3601,6 +3613,33 @@
       "confidence": 0.6,
       "tags": [
         "entry-filter"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h082",
+      "text": "Semiconductor materials thesis is COMPOUNDING: mask delivery times 3-5× normal, H2 price hikes 30%, Japan WF6 production halt July 1. 路维光电 and 上海新阳 thesis strengthens daily — this supports extended holds through rotation noise.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-07-01",
+      "lastTested": "2026-07-01",
+      "mechanism": "Supply chain bottlenecks in niche semiconductor materials create pricing power that lasts quarters, not days, due to high barriers to entry and long qualification cycles.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-07-01",
+            "detail": "Semiconductor materials thesis is COMPOUNDING: mask delivery times 3-5× normal, H2 price hikes 30%, Japan WF6 production halt July 1. 路维光电 and 上海新阳 thesis strengthens daily — this supports extended holds through rotation noise."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector"
       ],
       "parentRule": null,
       "retiredDate": null,

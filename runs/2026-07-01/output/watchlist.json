@@ -2,76 +2,40 @@
   "date": "2026-07-01",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4138.649,
-      "change_pct": 1.08
+      "value": 4112.445,
+      "change_pct": 0.44
     },
     "shenzhen_component": {
-      "value": 16271.32,
-      "change_pct": 0.41
+      "value": 16119.17,
+      "change_pct": -0.53
     },
     "chinext": {
-      "value": 4325.67,
-      "change_pct": -0.39
+      "value": 4260.72,
+      "change_pct": -1.89
     },
-    "sentiment": "bullish",
+    "sentiment": "mixed",
     "hot_sectors": [
+      "综合Ⅱ",
       "养殖业",
-      "林业Ⅱ",
       "教育",
-      "渔业",
-      "冶钢原料"
+      "化学制药",
+      "林业Ⅱ"
     ],
     "cold_sectors": [
+      "通信设备",
       "非金属材料Ⅱ",
       "其他电源设备Ⅱ",
-      "通信设备",
-      "光伏设备",
-      "元件"
+      "元件",
+      "光伏设备"
     ],
-    "notes": "Breadth 4.89:1 extremely bullish (203涨停/7跌停), 上证+1.08%/深证+0.41% green, 创业板-0.39% red. But clear sector rotation underway: agriculture/education/cyclicals surging while tech (通信设备-2.80%, 光伏设备-2.41%, 元件-2.16%) cools. No IV data available. Entry regime strong but sizing capped at 75%. No new positions — 0/4 existing positions aligned with hot sectors, no candidates in today's leadership. Managing winners (上海新阳+37.7%, 路维光电+35.8%) and cutting loser 恒铭达 (-3.9% in 2 days)."
+    "notes": "Rotation tape: breadth 3.78:1 (4329↑/1145↓), 225涨停/13跌停 — objectively bullish breadth masked by index divergence (上证+0.44%, 创业板-1.89%, 科创50-2.48%). Capital rotating from extended tech/semiconductor into cyclicals (养殖业+6.42%, 化学制药+5.41%). IV data unavailable. Buy gate fails on 1/3 index threshold → no new positions. 鹏辉能源 SELL per Rule 5 (-3.24% in 2 days). 上海新阳 HOLD (+34%, stop proximity warning). 路维光电 HOLD (+37%, thesis compounding). Cash 89.7%."
   },
   "strategy_scan": {
-    "total_stocks_scanned": 65,
+    "total_stocks_scanned": 66,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-07-01T12:15:39.912963+08:00"
+    "scan_time": "2026-07-01T15:45:15.564811+08:00"
   },
   "recommendations": [
-    {
-      "code": "688536.SH",
-      "name": "思瑞浦",
-      "price": null,
-      "rps120": 94.09,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "301536.SZ",
-      "name": "星宸科技",
-      "price": null,
-      "rps120": 92.35,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "300037.SZ",
-      "name": "新宙邦",
-      "price": null,
-      "rps120": 90.8,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "002407.SZ",
-      "name": "多氟多",
-      "price": null,
-      "rps120": 91.98,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
     {
       "code": "688205.SH",
       "name": "德科立",
@@ -91,30 +55,66 @@
       "reasoning": ""
     },
     {
-      "code": "688400.SH",
-      "name": "凌云光",
+      "code": "688536.SH",
+      "name": "思瑞浦",
       "price": null,
-      "rps120": 87.88,
+      "rps120": 94.09,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "002810.SZ",
-      "name": "山东赫达",
+      "code": "688372.SH",
+      "name": "伟测科技",
       "price": null,
-      "rps120": 91.76,
+      "rps120": 91.13,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "002240.SZ",
+      "name": "盛新锂能",
+      "price": null,
+      "rps120": 94.6,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688652.SH",
+      "name": "京仪装备",
+      "price": null,
+      "rps120": 91.55,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "002407.SZ",
+      "name": "多氟多",
+      "price": null,
+      "rps120": 91.98,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "605111.SH",
+      "name": "新洁能",
+      "price": null,
+      "rps120": 93.2,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     }
   ],
   "summary": {
-    "total_scanned": 65,
+    "total_scanned": 66,
     "buy_recommendations": 0,
     "watch_recommendations": 8,
     "avoid_recommendations": 0,
-    "market_call": "积极",
-    "reasoning": "Breadth 4.89:1 extremely bullish (203涨停/7跌停), 上证+1.08%/深证+0.41% green, 创业板-0.39% red. But clear sector rotation underway: agriculture/education/cyclicals surging while tech (通信设备-2.80%, 光伏设备-2.41%, 元件-2.16%) cools. No IV data available. Entry regime strong but sizing capped at 75%. No new positions — 0/4 existing positions aligned with hot sectors, no candidates in today's leadership. Managing winners (上海新阳+37.7%, 路维光电+35.8%) and cutting loser 恒铭达 (-3.9% in 2 days)."
+    "market_call": "谨慎偏多",
+    "reasoning": "Rotation tape: breadth 3.78:1 (4329↑/1145↓), 225涨停/13跌停 — objectively bullish breadth masked by index divergence (上证+0.44%, 创业板-1.89%, 科创50-2.48%). Capital rotating from extended tech/semiconductor into cyclicals (养殖业+6.42%, 化学制药+5.41%). IV data unavailable. Buy gate fails on 1/3 index threshold → no new positions. 鹏辉能源 SELL per Rule 5 (-3.24% in 2 days). 上海新阳 HOLD (+34%, stop proximity warning). 路维光电 HOLD (+37%, thesis compounding). Cash 89.7%."
   }
 }

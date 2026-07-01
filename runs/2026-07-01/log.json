@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1782879140.118479,
+      "start": 1782891679.717886,
       "errors": [],
-      "end": 1782879153.768169,
-      "duration_sec": 13.6
+      "end": 1782891693.048498,
+      "duration_sec": 13.3
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 19696,
+      "response_size_bytes": 19660,
       "tokens": {
-        "input_tokens": 312004,
-        "output_tokens": 13529
+        "input_tokens": 309020,
+        "output_tokens": 13276
       },
       "rounds": 4,
-      "tool_calls_count": 8,
-      "duration_sec": 186.1,
+      "tool_calls_count": 7,
+      "duration_sec": 222.4,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -25,24 +25,22 @@
     },
     {
       "phase": "apply",
-      "start": 1782879339.880942,
+      "start": 1782891915.547126,
       "actions": [
-        "SELL 002947",
-        "RAISE_STOP 300236 → 123.28",
-        "RAISE_STOP 688401 → 93.51",
+        "SELL 300438",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=24",
-        "Hypothesis: Created h079 (observation): The V2 -3% in 3 days rule caught 恒铭达 at -3.87% in just 2 days — much faster than...",
-        "Hypothesis: Created h080 (observation): Intraday reversal from 24-month high on 6.5× normal volume (鹏辉能源: ¥92.32 → ¥75.4...",
-        "Hypothesis: Created h081 (observation): MA-distance Rule 2b filtered out 20+ overextended candidates today. Without this...",
+        "Hypothesis: Updated h024 (hypothesis): +1 supporting evidence → hitRate=100%, n=4",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=31",
+        "Hypothesis: Created h082 (observation): Semiconductor materials thesis is COMPOUNDING: mask delivery times 3-5× normal, ...",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=26",
         "Updated LEARNINGS.md (legacy)"
       ],
       "post_apply_rule_violations": {
         "status": "violations",
         "total_rules": 6,
-        "total_violations": 2,
+        "total_violations": 1,
         "rules": [
           {
             "rule": "check_breakout_failure",
@@ -78,21 +76,11 @@
                 "code": "300236",
                 "name": "上海新阳",
                 "rule": "stop_proximity",
-                "severity": "WATCH",
-                "currentPrice": 129.35,
+                "severity": "WARNING",
+                "currentPrice": 126.02,
                 "stopLoss": 123.28,
-                "distance_pct": 4.69,
-                "suggestion": "🟠 WATCH — 4.7% above stop. Monitor closely. No immediate action but be ready."
-              },
-              {
-                "code": "300438",
-                "name": "鹏辉能源",
-                "rule": "stop_proximity",
-                "severity": "WATCH",
-                "currentPrice": 81.44,
-                "stopLoss": 78.19,
-                "distance_pct": 3.99,
-                "suggestion": "🟠 WATCH — 4.0% above stop. Monitor closely. No immediate action but be ready."
+                "distance_pct": 2.17,
+                "suggestion": "🟡 WARNING — only 2.2% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
               }
             ],
             "error": null
@@ -115,16 +103,15 @@
           }
         ]
       },
-      "end": 1782879340.640973,
-      "duration_sec": 0.8
+      "end": 1782891915.922139,
+      "duration_sec": 0.4
     }
   ],
   "validation_errors": [
-    "RULE check_stop_proximity: 300236 — 🟠 WATCH — 4.7% above stop. Monitor closely. No immediate action but be ready.",
-    "RULE check_stop_proximity: 300438 — 🟠 WATCH — 4.0% above stop. Monitor closely. No immediate action but be ready."
+    "RULE check_stop_proximity: 300236 — 🟡 WARNING — only 2.2% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
   ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 200.5
+    "totalDurationSec": 236.10000000000002
   }
 }

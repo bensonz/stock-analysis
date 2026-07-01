@@ -1570,3 +1570,10 @@
 - The V2 -3% in 3 days rule caught 恒铭达 at -3.87% in just 2 days — much faster than V1's -10%/20-day rules. The thesis ('MA20下方低吸') was invalidated immediately. This rule is doing exactly what it was designed to do: kill bad timing fast before it becomes a -8% loss.
 - Intraday reversal from 24-month high on 6.5× normal volume (鹏辉能源: ¥92.32 → ¥75.47, ~18% swing) is a strong distribution signal. Even when PnL hasn't hit -3%, this price action pattern warrants immediate stop-tightening or proactive exit. Consider adding an 'intraday reversal > 10% from high' rule for positions held < 5 days.
 - MA-distance Rule 2b filtered out 20+ overextended candidates today. Without this rule, V2 would have bought stocks like 新洁能 (dist_ma5=10.8%), 多氟多 (dist_ma5=16.4%), 华灿光电 (dist_ma5=15.6%) — all of which would have been chasing into mean-reversion risk. This confirms the rule is essential, not optional.
+
+### 自动更新 (2026-07-01)
+
+- Rule 5 -3% in 3 days trigger worked perfectly: 鹏辉能源 caught a false breakout (¥92→¥75 intraday, 18% swing on 碳酸锂 crash). Cutting at -3.24% prevents this from becoming a -8% disaster.
+- Index divergence (上证+0.44% vs 科创50 -2.48%) with 3.78:1 breadth is a textbook rotation signal: profit-taking in extended tech leaders, rotation into lagging cyclicals. This is not a broad selloff.
+- Semiconductor materials thesis is COMPOUNDING: mask delivery times 3-5× normal, H2 price hikes 30%, Japan WF6 production halt July 1. 路维光电 and 上海新阳 thesis strengthens daily — this supports extended holds through rotation noise.
+- MA-distance Rule 2b filtered 8+ candidates today that all showed extreme extension despite great fundamentals. Confirms h027: hot sector does NOT override chase risk.

@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-07-01T12:12:20.130667+08:00",
+  "snapshot_time": "2026-07-01T15:41:19.730048+08:00",
   "snapshot_type": "pre_run",
   "date": "2026-07-01",
   "portfolio_config": {
@@ -11,47 +11,25 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-07-01T11:35:37.011308+08:00",
+    "lastUpdated": "2026-07-01T12:15:39.914938+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 993089.0,
-      "cash": 874083.0,
-      "investedValue": 119006.0,
-      "unrealizedPnl": 18410.0,
-      "realizedPnl": -25321.0,
-      "totalPnl": -6911.0,
-      "totalReturnPct": -0.69,
-      "positionsUsed": 4,
+      "totalEquity": 992390.0,
+      "cash": 888358.0,
+      "investedValue": 104032.0,
+      "unrealizedPnl": 19012.0,
+      "realizedPnl": -26622.0,
+      "totalPnl": -7610.0,
+      "totalReturnPct": -0.76,
+      "positionsUsed": 3,
       "positionsMax": 10,
-      "cashPct": 88.02,
-      "dayPnl": -1140.0,
+      "cashPct": 89.52,
+      "dayPnl": -904.0,
       "minCashPct": 20,
-      "minCashValue": 198617.8,
-      "deployableCash": 675465.2
+      "minCashValue": 198478.0,
+      "deployableCash": 689880.0
     },
     "activePositions": [
-      {
-        "code": "002947",
-        "name": "恒铭达",
-        "entryDate": "2026-06-30",
-        "entryPrice": 77.88,
-        "currentPrice": 74.87,
-        "pnl_pct": -3.86,
-        "stopLoss": 73.99,
-        "currentStop": 73.99,
-        "targetPrice": 95.0,
-        "status": "active",
-        "sector": "消费电子",
-        "shares": 200,
-        "allocation_pct": 3.0,
-        "allocatedCapital": 15576.0,
-        "currentValue": 14974.0,
-        "unrealizedPnl": -602.0,
-        "volume": 51478,
-        "mavol30": 21933.57,
-        "volumeBelowMavol30": false,
-        "weight_pct": 1.51
-      },
       {
         "code": "300236",
         "name": "上海新阳",
@@ -60,7 +38,7 @@
         "currentPrice": 129.35,
         "pnl_pct": 37.66,
         "stopLoss": 89.26,
-        "currentStop": 118.35,
+        "currentStop": 123.28,
         "targetPrice": 120.0,
         "status": "active",
         "sector": "电子化学品Ⅱ",
@@ -104,7 +82,7 @@
         "currentPrice": 98.58,
         "pnl_pct": 35.82,
         "stopLoss": 68.95,
-        "currentStop": 86.38,
+        "currentStop": 93.51,
         "targetPrice": 92.0,
         "status": "active",
         "sector": "半导体材料",
@@ -121,43 +99,6 @@
     ]
   },
   "active_positions": {
-    "002947": {
-      "code": "002947",
-      "name": "恒铭达",
-      "status": "active",
-      "thesis": "消费电子零部件龙头。#2热板块。0风险因子(极稀缺)。近10日回调至MA20下方，形成低吸机会。营收3年CAGR 23%，净利+31%。AI手机/折叠屏概念。北向3.9%+公募5.4%机构认可。增资远山新材料外延扩张。",
-      "entryDate": "2026-06-30",
-      "entryPrice": 77.88,
-      "targetPrice": 95.0,
-      "stopLoss": 73.99,
-      "currentStop": 73.99,
-      "allocation_pct": 3.0,
-      "shares": 200,
-      "allocatedCapital": 15576.0,
-      "rating": 2,
-      "rps120": 92.36,
-      "sector": "消费电子",
-      "catalysts": [],
-      "sourceWatchlist": "2026-06-30",
-      "history": [
-        {
-          "date": "2026-06-30",
-          "price": 77.88,
-          "change_pct": 0,
-          "action": "OPEN",
-          "note": "LLM开仓 恒铭达"
-        }
-      ],
-      "exitDate": null,
-      "exitPrice": null,
-      "exitReason": null,
-      "returnPct": null,
-      "holdingDays": null,
-      "lessonLearned": null,
-      "createdAt": "2026-06-30T15:39:03.391067+08:00",
-      "updatedAt": "2026-06-30T15:39:03.391071+08:00",
-      "trackerVersion": "2.1"
-    },
     "300236": {
       "code": "300236",
       "name": "上海新阳",
@@ -167,7 +108,7 @@
       "entryPrice": 93.96,
       "targetPrice": 120.0,
       "stopLoss": 89.26,
-      "currentStop": 118.35,
+      "currentStop": 123.28,
       "allocation_pct": 5.25,
       "shares": 400,
       "allocatedCapital": 37584.0,
@@ -309,6 +250,13 @@
           "change_pct": 39.95,
           "action": "RAISE_STOP",
           "note": "+39.95% monster winner. Japan photoresist cutoff structural catalyst intact. 0 risk factors. Tightening trailing stop to -10% from current per Rule 5, locking in +25.9% guaranteed while thesis runs. Sector 电子化学品Ⅱ aligned with semiconductor boom. MA extended but Rule 2b applies to entries not winners."
+        },
+        {
+          "date": "2026-07-01",
+          "price": 129.35,
+          "change_pct": 37.66,
+          "action": "RAISE_STOP",
+          "note": "+37.68% monster winner. Japan photoresist cutoff structural catalyst intact. 0 risk factors. Today -1.63% mild profit-taking on 9.8× volume. Today's high ¥136.98 → trail stop to -10% = ¥123.28, locking in +31.2%. 近20家半导体企业7月1日起涨价 adds near-term support."
         }
       ],
       "exitDate": null,
@@ -318,7 +266,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-06-09T15:39:26.780692+08:00",
-      "updatedAt": "2026-06-30T15:39:03.178117+08:00",
+      "updatedAt": "2026-07-01T12:15:39.903114+08:00",
       "trackerVersion": "2.1"
     },
     "300438": {
@@ -346,6 +294,13 @@
           "change_pct": 0,
           "action": "OPEN",
           "note": "LLM开仓 鹏辉能源"
+        },
+        {
+          "date": "2026-07-01",
+          "price": 81.44,
+          "change_pct": -1.04,
+          "action": "HOLD",
+          "note": "-1.04% PnL does NOT trigger Rule 5 (-3% threshold). However, today's intraday action is alarming: hit ¥92.32 (24-month high) then reversed to ¥75.47 low (~18% swing) on 6.5× normal volume — institutional distribution. 碳酸锂期货暴跌7% sector headwind. Stop at ¥78.19 (3.99% away) in WATCH zone. Tight leash — cut immediately if -3% breached."
         }
       ],
       "exitDate": null,
@@ -355,7 +310,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-06-30T15:39:03.385776+08:00",
-      "updatedAt": "2026-06-30T15:39:03.385782+08:00",
+      "updatedAt": "2026-07-01T12:15:39.905360+08:00",
       "trackerVersion": "2.1"
     },
     "688401": {
@@ -367,7 +322,7 @@
       "entryPrice": 72.58,
       "targetPrice": 92.0,
       "stopLoss": 68.95,
-      "currentStop": 86.38,
+      "currentStop": 93.51,
       "allocation_pct": 3.75,
       "shares": 200,
       "allocatedCapital": 14516.0,
@@ -509,6 +464,13 @@
           "change_pct": 32.24,
           "action": "RAISE_STOP",
           "note": "+32.24% monster winner. 掩膜版龙头 thesis intact. 28nm progressing, 厦门20亿项目 on track. 0 risk factors. Raising trailing stop to -10% from current, locking in +19.0%. 半导体材料 sector aligned with top-5 tech. 24.8× normal volume today = continued institutional accumulation."
+        },
+        {
+          "date": "2026-07-01",
+          "price": 98.58,
+          "change_pct": 35.82,
+          "action": "RAISE_STOP",
+          "note": "+35.83% monster winner. 掩膜版龙头 thesis intact, 28nm progressing, 厦门20亿项目 on track. 0 risk factors. Today +2.71% on 19.9× volume — continued institutional accumulation. Hit ¥103.90 high. Trail stop to -10% = ¥93.51, locking in +28.8%. 近20家半导体企业涨价 catalyst supports sector."
         }
       ],
       "exitDate": null,
@@ -518,7 +480,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-06-09T15:39:26.785471+08:00",
-      "updatedAt": "2026-06-30T15:39:03.184169+08:00",
+      "updatedAt": "2026-07-01T12:15:39.909367+08:00",
       "trackerVersion": "2.1"
     }
   },
@@ -579,12 +541,12 @@
       "code": "002947",
       "name": "恒铭达",
       "status": "closed",
-      "entryDate": "2026-06-09",
-      "exitDate": "2026-06-22",
-      "entryPrice": 83.55,
-      "exitPrice": 85.88,
-      "returnPct": 2.79,
-      "holdingDays": 13,
+      "entryDate": "2026-06-30",
+      "exitDate": "2026-07-01",
+      "entryPrice": 77.88,
+      "exitPrice": 74.87,
+      "returnPct": -3.86,
+      "holdingDays": 1,
       "sector": "消费电子",
       "lessonLearned": ""
     },

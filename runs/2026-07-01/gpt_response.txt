@@ -2,206 +2,222 @@
 
 ## 1. Market Regime
 
-**Verdict: BULLISH but sector-rotating**
+**Headline: Broad rally hidden by index divergence — breadth screams buy, but buy gate fails on index count.**
 
-- **Breadth**: 4.89:1 (4553 up / 931 down), 203 涨停 / 7 跌停. Extremely strong breadth — broad-based rally.
-- **Indices**: 上证+1.08%, 深证+0.41% ✓ / 创业板-0.39% ✗ → 2/3 major indices green → buy gate cleared.
-- **Entry Regime**: `strong`, `allow_new_positions: true`, but `sizing_multiplier: 0.75` (capping fresh size at 75% to avoid chasing).
-- **IV**: No IV data available for individual stocks or ETFs. Fallback unavailable. Assume normal sizing.
-- **Key macro**: 证监会财务造假综防推进会; 近20家半导体企业7月1日起涨价; US markets up (Tesla +8%); 工业互联网八部门发文.
-- **Distribution read**: r2_4 (1858) + r4_7 (965) + r7_10 (219) + r10 (203) = 3245 stocks in meaningful up moves. Not euphoric but broad-based. r0_2 (1308) also large — many stocks barely positive. This is a "strong breadth, modest intensity" tape.
+- **上证指数** +0.44% (green), **深证成指** -0.53%, **创业板指** -1.89%, **科创50** -2.48%
+- **Breadth**: 4329↑ / 1145↓ / 38 flat — ratio **3.78:1** (very bullish)
+- **涨停 225 / 跌停 13** — euphoric breadth, not panic
+- **Distribution**: Heavily skewed to r2_4 (1621 stocks) and r0_2 (1464). Most gains are modest 0-4%. The r10=225 and r4_7=755 show strong high-end participation too.
+- **Volume**: ~2.44万亿 midday — very active
+- **IV**: No data available (options-learn backend down). Fall back to overall market IV assessment — unknown.
 
-**One-line breadth read**: "Breadth 4.89:1 bullish, 203涨停/7跌停, broad-based rally but rotation from tech into agriculture/cyclicals signals regime shift."
+**The conflict**: Breadth is absurdly strong (3.78:1, 225涨停), but the buy gate requires at least 2/3 major indices green — we have only 上证指数. The entry_regime system says `allow_new_positions: true` citing breadth, but the framework's buy gate is explicit. **I'm defaulting to no new positions per the strict gate.** The index divergence tells a story: large-cap tech (创业板/科创50) is under distribution while cyclicals/defensives (养殖业, 化学制药, 综合) are being bid. This is rotation, not a broad selloff.
+
+**Regime verdict**: Rotation tape. Strong breadth, weak tech indices. Cash is acceptable.
+
+---
 
 ## 2. Sector Analysis
 
-### Today's Top 5 (1-day snapshot)
-| Sector | 涨跌幅 |
-|---|---|
-| 养殖业 | +6.97% |
-| 林业Ⅱ | +5.80% |
-| 教育 | +5.46% |
-| 渔业 | +5.18% |
-| 冶钢原料 | +5.18% |
+### Hot Sectors (today's top 5)
+| Sector | 5d Pct | Trend |
+|--------|--------|-------|
+| 综合Ⅱ | +6.81% | accelerating |
+| 养殖业 | +6.42% | rebound (天邦食品/益生股份/新五丰 涨停) |
+| 教育 | +5.47% | steady |
+| 化学制药 | +5.41% | accelerating |
+| 林业Ⅱ | +5.02% | one-day spike? |
 
-### Today's Bottom 5
-| Sector | 涨跌幅 |
-|---|---|
-| 非金属材料Ⅱ | -3.20% |
-| 其他电源设备Ⅱ | -2.90% |
-| 通信设备 | -2.80% |
-| 光伏设备 | -2.41% |
-| 元件 | -2.16% |
+**Driver**: 养殖业 rebound on policy support + oversold bounce; 化学制药 on innovation drug policy tailwinds; 综合Ⅱ likely conglomerate restructuring themes.
 
-### Rotation Signal: **Tech → Agriculture/Cyclicals**
+### Cold Sectors (today's bottom 5)
+| Sector | 5d Pct |
+|--------|--------|
+| 通信设备 | -4.27% |
+| 非金属材料Ⅱ | -4.12% |
+| 其他电源设备Ⅱ | -3.45% |
+| 元件 | -3.14% |
+| 光伏设备 | -3.14% |
 
-This is the critical signal of the day. The sectors that led the prior weeks — semiconductor equipment, communication equipment, optical electronics — are NOT in the top 5. In fact, 通信设备(-2.80%), 光伏设备(-2.41%), and 元件(-2.16%) are in the BOTTOM 5. Meanwhile, agriculture/fishery/education/raw materials are surging.
-
-This is consistent with the 06-22 rotation pattern where 大金融+券商 surged and tech corrected. The narrative: tech leadership is "缩圈分化" (narrowing and diverging), while cyclicals and defensive plays are catching bids.
-
-**Web research confirms**: 近20家半导体企业7月1日起涨价 — this could provide near-term support for semiconductor, but the sector rotation headwind is real.
+**Note**: 通信设备 and 光伏设备 are hard no-buy zones per h019. 德科立 (688205) in 通信设备 → automatic skip regardless of fundamentals. 固德威 (688390) in 光伏设备 → skip. 鹏辉能源's 电池 sector is NOT in bottom5 (relief), but also not in top5.
 
 ### Position Sector Alignment
-- 恒铭达 → 消费电子: NOT in top 5 or bottom 5 (mid-pack)
-- 上海新阳 → 电子化学品Ⅱ: NOT in top 5 or bottom 5 (mid-pack)
-- 鹏辉能源 → 电池: NOT in top 5 or bottom 5 (mid-pack)
-- 路维光电 → 半导体材料: NOT in top 5 or bottom 5
+- 上海新阳 → 电子化学品Ⅱ (not in top5/bottom5, estimated middle ~40-50%)
+- 鹏辉能源 → 电池 (not in top5/bottom5, ~middle)
+- 路维光电 → 半导体材料 (not in top5/bottom5, ~middle)
+- **0/3 positions in hot sectors, 0/3 in cold sectors** — neutral alignment
 
-**0/4 positions in hot sectors, 0/4 in cold sectors.** All four sit in the middle — neither benefiting from sector tailwinds nor suffering from sector gravity. This is neutral-to-slightly-negative given the rotation away from tech.
+### Sector Rotation Signal
+The divergence between 上证指数 (+0.44%) and 科创50 (-2.48%) is telling: capital rotating FROM AI/semiconductor/tech names (yesterday's leaders) INTO cyclicals, agriculture, pharma. This is classic rotation — not a crash, but a shift. The 7/1 semiconductor price hike wave (近20家半导体企业涨价) is being overshadowed by rotation dynamics today.
+
+---
 
 ## 3. Position Review
 
-### 恒铭达 (002947) — **SELL**
-| Metric | Value |
-|---|---|
-| Entry | ¥77.88 (06-30) |
-| Current | ¥74.87 |
-| PnL | **-3.87%** |
-| Days Held | 2 |
-| Stop | ¥73.99 (1.18% away) |
-| Sector | 消费电子 |
+### ① 鹏辉能源 (300438) — **SELL** 🔴
 
-**Triggers:**
-1. **Rule 5: -3% in first 3 days → SELL.** -3.87% in 2 days. This is textbook bad timing.
-2. **Stop proximity CRITICAL**: only 1.18% above stop. Gap risk is real — 扬杰科技 lesson (gapped to -8.37%).
-3. **Below ALL MAs**: dist_ma5=-6.6%, dist_ma10=-11.1%, dist_ma20=-14.2%. Stock is in freefall below all support levels.
-4. The stock fell -8.04% on 06-29, then another -1.55% today. Two consecutive down days on elevated volume. The thesis ("回调至MA20下方低吸机会") was wrong — it kept falling.
+| Field | Value |
+|-------|-------|
+| Entry | ¥82.30 (2026-06-30) |
+| Current | ¥79.63 |
+| PnL | **-3.24%** |
+| Days held | 2 |
+| Stop | ¥78.19 (1.81% away → CRITICAL) |
+| Sector | 电池 (middle tier) |
 
-**Decision: SELL at market. No exceptions.** The stock is below all MAs, bleeding, and 1.18% from stop. Cut it now before it gaps through.
+**Why SELL**: Rule 5 is unambiguous:
+> "-3% in first 3 days → SELL. Bad timing, re-evaluate later."
 
-### 上海新阳 (300236) — **RAISE_STOP + HOLD**
-| Metric | Value |
-|---|---|
-| Entry | ¥93.96 (06-09) |
-| Current | ¥129.35 |
-| PnL | **+37.68%** |
-| Days Held | 23 |
-| Current Stop | ¥118.35 |
-| Sector | 电子化学品Ⅱ |
+Today is day 2. The loss exceeds -3%. The stock hit ¥92.32 (24-month high) then reversed to ¥75.47 intraday — an 18% swing on 6.5× normal volume. This is institutional distribution. 
 
-**Analysis:**
-- Monster winner. Japan photoresist cutoff structural catalyst intact. 0 risk factors.
-- Today -1.63% on 9.8× normal volume — mild profit-taking after massive run.
-- Today's high: ¥136.98 → new trailing stop at -10% = **¥123.28**. This locks in +31.2% from entry.
-- Sector 电子化学品Ⅱ is mid-pack, not in cold zone. Thesis remains intact.
+**Compounding factors**:
+- 碳酸锂期货暴跌7% — direct sector headwind (research confirms lithium crashed from ~21万 to ~16万, a 22% decline)
+- Stop proximity CRITICAL at 1.81% — gap risk is real
+- Yesterday's entry thesis (储能+固态电池 dual catalyst) was correct directionally but timing was wrong — we caught a distribution day disguised as a breakout
 
-**Decision: RAISE_STOP to ¥123.28. HOLD.**
+**Action**: SELL at market. Exit price ¥79.63. Realized loss: -3.24%. Can re-enter if lithium stabilizes and the stock reclaims ¥82+ with volume.
 
-### 鹏辉能源 (300438) — **HOLD (tight leash)**
-| Metric | Value |
-|---|---|
-| Entry | ¥82.30 (06-30) |
-| Current | ¥81.44 |
-| PnL | **-1.04%** |
-| Days Held | 2 |
-| Stop | ¥78.19 (3.99% away) |
-| Sector | 电池 |
+---
 
-**Analysis:**
-- -1.04% does NOT trigger Rule 5 (-3% threshold not met).
-- BUT today's intraday action is alarming: hit ¥92.32 (24-month high) at 10:29, then reversed to low of ¥75.47. ~18% intraday swing. Volume 6.5× normal (302k vs 46k avg) — massive distribution.
-- The lithium battery sector had a brief pop (诺德股份涨停, 亿纬锂能+13%) but then sold off hard. 碳酸锂期货暴跌7% is weighing on the entire 锂 chain.
-- Stop at ¥78.19 is 3.99% away — WATCH zone but not critical.
+### ② 上海新阳 (300236) — **HOLD** 🟡
 
-**Decision: HOLD for now.** The thesis (储能龙头+Q1净利+819%+合同负债14亿) hasn't changed. But the intraday reversal and sector headwinds from falling lithium prices are serious concerns. If it opens weak tomorrow and approaches -3%, cut immediately.
+| Field | Value |
+|-------|-------|
+| Entry | ¥93.96 (2026-06-09) |
+| Current | ¥126.02 |
+| PnL | **+34.12%** |
+| Days held | 22 |
+| Stop | ¥123.28 (2.17% away → WARNING) |
+| Sector | 电子化学品Ⅱ (middle tier) |
 
-### 路维光电 (688401) — **RAISE_STOP + HOLD**
-| Metric | Value |
-|---|---|
-| Entry | ¥72.58 (06-09) |
-| Current | ¥98.58 |
-| PnL | **+35.83%** |
-| Days Held | 23 |
-| Current Stop | ¥86.38 |
-| Sector | 半导体材料 |
+**Thesis check**: Japan photoresist cutoff + semiconductor materials boom — both INTACT and strengthening. Research confirms:
+- 六氟化钨 price +232.7% YoY; Japan two WF6 producers halting production July 1
+- "GPU只是面子，材料才是里子" — materials are the bottleneck
+- 近20家半导体企业7月1日起集中调价 — broad price hike wave
+- 上海新阳: ArF/KrF/I-Line photoresist full product line, 合肥基地 ramping
 
-**Analysis:**
-- Another monster winner. 掩膜版龙头 thesis intact. 0 risk factors.
-- Today +2.71% on 19.9× normal volume — continued institutional accumulation. Hit ¥103.90 high.
-- New trailing stop: ¥103.90 × 0.9 = **¥93.51**. Locks in +28.8%.
-- 半导体材料 sector aligned with top-5 tech cluster. 近20家半导体企业7月1日起涨价 could add near-term catalyst.
+**Price action concern**: Today -4.17% on 14.6× normal volume. Hit ¥136.98 all-time high then reversed to close ¥126.02 — a ¥10.96 intraday reversal. This looks like a blow-off top pattern. However:
+- The stock is still +34% profitable — Rule 5 trailing stop protects gains
+- Stop at ¥123.28 locks in +31.2% from entry
+- 0 risk factors
 
-**Decision: RAISE_STOP to ¥93.51. HOLD.**
+**Decision**: HOLD. The stop is tight and appropriate. No need to raise further since today's high-based stop is already ¥123.28. If the stock gaps below ¥123.28 tomorrow, the stop will trigger. The thesis is intact — this looks like rotation-driven profit-taking rather than thesis breakdown.
+
+---
+
+### ③ 路维光电 (688401) — **HOLD** 🟢
+
+| Field | Value |
+|-------|-------|
+| Entry | ¥72.58 (2026-06-09) |
+| Current | ¥99.49 |
+| PnL | **+37.08%** |
+| Days held | 22 |
+| Stop | ¥93.51 |
+| Sector | 半导体材料 (middle tier, benefiting from semiconductor boom) |
+
+**Thesis check**: STRONGER than ever. Research confirms:
+- 掩膜版下半年再涨价最多30% (集微咨询)
+- 14nm掩膜版计划2026年陆续投建 — technology upgrade catalyst
+- 厦门路维项目设备陆续到厂 — capacity expansion on track
+- 全球掩膜版交期拉长3-5倍 (45-75天 vs normal 15天) — supply crunch
+- Today +3.66% on 28.9× volume — institutional accumulation continues
+- Hit ¥103.90 high today — new all-time high
+
+**Stop**: ¥93.51 (-10% from today's high ¥103.90). Same as previous stop. Locks in +28.8%.
+
+**Decision**: HOLD. This is the portfolio's strongest position. Thesis is compounding (price hikes + capacity expansion + supply shortage). 0 risk factors. Let it run.
+
+---
 
 ## 4. New Entry Candidates
 
-**Verdict: NO NEW POSITIONS today.**
+**Buy gate status: FAILED.** Only 1/3 major indices green 上证指数 (+0.44%), while 深证成指 (-0.53%) and 创业板指 (-1.89%) are red. Despite 3.78:1 breadth, the framework's minimum buy gate requires ≥2/3 indices green.
 
-Despite the buy gate clearing (breadth 4.89:1, 2/3 indices green), I cannot find any candidate that passes ALL of:
+**No new positions today.** Cash at 89.69% is acceptable in a rotation tape.
 
-1. **Sector alignment** — top 30% by performance
-2. **RPS120 sweet spot** — 80-92% (or 92-95% with sector exception)
-3. **MA distance** — within Rule 2b limits
-4. **Catalyst freshness** — happening NOW
+### Candidates I would have considered if the gate were open:
 
-Here's why the best-looking candidates fail:
+| Stock | Sector | RPS120 | dist_ma5 | dist_ma10 | dist_ma20 | Verdict |
+|-------|--------|--------|----------|-----------|-----------|---------|
+| 思瑞浦 (688536) | 半导体 | 94.09% | 3.8% | **8.7%** | 13.5% | Rule 2b: dist_ma10 >8% |
+| 伟测科技 (688372) | 半导体 | 91.13% | 5.5% | **10.2%** | 11.9% | Rule 2b: dist_ma10 >8% |
+| 山东赫达 (002810) | 化学制品 | 91.76% | 3.7% | 5.2% | 5.3% | MA OK, RPS sweet spot, sector middle |
+| 电光科技 (002730) | 专用设备 | 92.16% | -0.1% | 0.2% | -1.5% | Perfect MA setup, near support |
+| 石大胜华 (603026) | 电池化学品 | 88.47% | 0.1% | 2.8% | 2.2% | Perfect MA, RPS borderline |
 
-### Candidates that pass MA distance but fail sector/catalyst:
+The strongest setups if gate were open: **山东赫达** (化学制品, RPS 91.76%, all MA within bounds, PE 45, score 7.9) and **电光科技** (专用设备, RPS 92.16%, sitting right on MAs with dist_ma5=-0.1%, recent 定增 catalyst for data center).
 
-| Stock | RPS120 | Sector | MA Pass? | Problem |
-|---|---|---|---|---|
-| 凌云光 (688400) | 87.88% | 专用设备 | YES | Sector not in top 5; not clear if top 30%. 2 risk factors (收益质量低, 商誉). RPS250 at 90.31% — decent but not compelling in current rotation. |
-| 石大胜华 (603026) | 88.47% | 电池 | YES | RPS20=71.98% — short-term momentum DEAD. Negative earnings. 电池 sector not in top ranks. |
-| 山东赫达 (002810) | 91.76% | 化学制品 | YES | RPS20=78.09% — weak short-term. 2 risks including 跌停 on 05-13. Sector not in top rankings. |
-| 电光科技 (002730) | 92.16% | 专用设备 | YES | PE=157. RPS20=81.73%. 定增催化 is a mixed signal (dilution risk). Sector not in top ranks. |
-
-### Candidates that FAIL MA distance (Rule 2b):
-
-Over 20 candidates fail Rule 2b. The most notable:
-- 思瑞浦 (688536): dist_ma10=8.7% (>8% → SKIP)
-- 星宸科技 (301536): dist_ma10=13.7%, dist_ma20=29.0% → SKIP
-- 伟测科技 (688372): dist_ma10=10.2% → SKIP
-- 新宙邦 (300037): dist_ma5=6.9% (>6% → SKIP)
-- 多氟多 (002407): dist_ma5=16.4%, dist_ma10=29.2% → extreme extension
-- 华灿光电 (300323): dist_ma5=15.6% → extreme extension
-- 新洁能 (605111): dist_ma5=10.8% → extreme extension
-- 新莱应材 (300260): dist_ma5=10.6% → extreme extension
-
-### Candidates in BOTTOM-5 sectors (hard SKIP — Rule 1):
-
-- 德科立 (688205): 通信设备 sector is bottom 3 (-2.80%)
-- 固德威 (688390): 光伏设备 sector is bottom 4 (-2.41%)
-
-**Bottom line**: The sector rotation away from tech means my 65-candidate pool (heavy in semiconductor/electronics/chemicals) has no alignment with today's leadership. Forcing an entry into a mid-pack sector just because the breadth is strong is how V1 lost money. Cash is a position. Wait for sectors to realign.
+---
 
 ## 5. Skip List
 
 | Code | Name | Reason |
-|---|---|---|
-| 688536 | 思瑞浦 | MA10 > 8% (8.7%), dist_ma20 > 12% (13.5%). Rule 2b SKIP. Sector 半导体 mid-pack. |
-| 301536 | 星宸科技 | dist_ma10=13.7%, dist_ma20=29.0%. Extreme extension. Rule 2b SKIP. |
-| 688372 | 伟测科技 | dist_ma10=10.2% > 8%. Rule 2b SKIP. |
-| 300037 | 新宙邦 | dist_ma5=6.9% > 6%. Rule 2b SKIP. |
-| 002407 | 多氟多 | dist_ma5=16.4%, MA10=29.2%. Extreme chasing. SKIP. |
-| 300323 | 华灿光电 | dist_ma5=15.6%. Extended. Sector 光学光电子 mid-pack. SKIP. |
-| 605111 | 新洁能 | dist_ma5=10.8%. Extended. SKIP. |
-| 300260 | 新莱应材 | dist_ma5=10.6%. Extended. SKIP. |
-| 688205 | 德科立 | Sector 通信设备 in bottom 3 (-2.80%). Rule 1: hard no-buy zone. |
-| 688390 | 固德威 | Sector 光伏设备 in bottom 4 (-2.41%). Rule 1: hard no-buy zone. |
-| 002240 | 盛新锂能 | PE negative, 碳酸锂期货暴跌7% headwind, 3 risk factors. RPS20=80% weak. |
-| 002192 | 融捷股份 | 碳酸锂期货暴跌7% direct profit impact. RPS120=93.52% extended zone but sector headwind fatal. |
-| 000703 | 恒逸石化 | RPS20=71.83% dead short-term. Below MA5. 4 risk factors including 跌停 on 06-29. |
-| 002812 | 恩捷股份 | RPS20=63.84% — dead. Below MA20. 调整 risk. |
+|------|------|--------|
+| 688205 | 德科立 | Sector 通信设备 in bottom5 (-4.27%), hard no-buy per h019. Stock itself in downtrend (below all MAs). |
+| 688390 | 固德威 | Sector 光伏设备 in bottom5 (-3.14%), hard no-buy per h019. Stock -18.7% below MA20. |
+| 688536 | 思瑞浦 | dist_ma10_pct 8.7% > 8% → Rule 2b chase violation. Good fundamentals but overextended. |
+| 688372 | 伟测科技 | dist_ma10_pct 10.2% > 8% → Rule 2b. dist_ma5_pct 5.5% approaching limit. |
+| 002240 | 盛新锂能 | 锂 sector facing 碳酸锂暴跌7% headwind. PE negative. RPS120 94.6% but sector gravity kills. |
+| 002192 | 融捷股份 | Same lithium headwind. PE 45.5, 6/26 跌停 -10%. No fresh catalyst. |
+| 688652 | 京仪装备 | dist_ma5 24.1%, dist_ma10 40.5% → absurdly overextended. Rule 2b hard block. |
+| 002407 | 多氟多 | dist_ma5 16.4%, dist_ma10 29.2% → extreme chase. 氟化工 catalyst interesting but can't chase this. |
+| 605111 | 新洁能 | dist_ma5 10.8%, dist_ma10 27.0% → extreme chase. 半导体 but wildly overextended. |
+| 688378 | 奥来德 | dist_ma10 10.2% > 8% → Rule 2b. Optical film interesting but overextended. |
+| 300323 | 华灿光电 | dist_ma5 15.6%, dist_ma10 25.0% → absurdly overextended. LED 光学光电子 but chasing here is suicide. |
+| 301536 | 星宸科技 | dist_ma20 29.0% > 12% → Rule 2b extreme. Semiconductor design but too far from support. |
+
+---
 
 ## 6. Learnings
 
-1. **Sector rotation is real and must be respected.** Today's data shows a clear shift from tech (通信设备 -2.80%, 光伏设备 -2.41%, 元件 -2.16%) to agriculture/cyclicals (养殖业 +6.97%, 教育 +5.46%). When the candidate pool is tech-heavy and no candidate aligns with hot sectors, the right call is cash — not forcing an entry. [h028, h019]
+```json
+[
+  {
+    "text": "The -3% in 3 days rule (Rule 5) is doing exactly what it was designed to do: cutting bad-timing entries before they become portfolio disasters. 鹏辉能源 entered yesterday at what looked like a breakout — today it reversed 18% intraday on 碳酸锂 crash. Entry timing was simply wrong.",
+    "type": "rule",
+    "tags": ["exit-rule", "timing"],
+    "evidence_type": "supporting",
+    "related_hypothesis": "h013 (strong breadth alone ≠ force entries)",
+    "mechanism": "Distribution days often start with a false breakout that traps momentum traders. The -3% quick-stop catches the entry-timing error before it becomes a -8% disaster."
+  },
+  {
+    "text": "Today's index divergence (上证指数 +0.44% vs 科创50 -2.48%) with 3.78:1 breadth is a powerful rotation signal — money is flowing OUT of extended tech/semiconductor names and INTO lagging cyclicals (养殖业 +6.42%, 化学制药 +5.41%). This is NOT a broad selloff; it's sector rotation driven by profit-taking in winners.",
+    "type": "signal",
+    "tags": ["sector", "timing"],
+    "evidence_type": "supporting",
+    "related_hypothesis": "h028",
+    "mechanism": "When the broad index is flat/up but tech-heavy indices are down sharply while breadth is strong, it signals that the " generals" (large-cap tech leaders) are being sold while the " troops" (small/mid-cap cyclicals) are being bought. This typically precedes a 1-2 week rotation cycle."
+  },
+  {
+    "text": "MA-distance discipline (Rule 2b) filtered out at least 8 candidates today that all show extreme overextension. Several (新洁能 dist_ma10=27%, 京仪装备 dist_ma5=24%) have great fundamentals but are mathematically un-buyable. This rule continues to save us from chasing tops — confirmed working per h027.",
+    "type": "rule",
+    "tags": ["entry-filter"],
+    "evidence_type": "supporting",
+    "related_hypothesis": "h027",
+    "mechanism": "dist_ma10 > 8% indicates the stock has moved too far too fast. Mean reversion probability rises sharply beyond this threshold. The rule prevents buying at the exact moment distribution begins."
+  },
+  {
+    "text": "The semiconductor material thesis (掩膜版, 光刻胶, 电子化学品) is COMPOUNDING, not fading. New research: mask delivery times extended 3-5× (15→45-75 days), H2 price hikes 30%, Japan WF6 production halt July 1. 路维光电 and 上海新阳 are riding a structural supply crisis, not a thematic pop. This supports extended hold periods for these positions.",
+    "type": "observation",
+    "tags": ["sector"],
+    "evidence_type": "supporting",
+    "mechanism": "Supply chain bottlenecks in semiconductor materials create pricing power that persists for quarters, not days. The mask shortage is structural (barriers to entry, long qualification cycles) rather than cyclical."
+  }
+]
+```
 
-2. **The -3% in 3 days rule works fast.** 恒铭达 was opened 06-30 at ¥77.88, is now ¥74.87 (-3.87%). In just 2 days, the thesis ("MA20下方低吸") was proven wrong. Cut fast, don't rationalize. This validates the V2 tightening from -10% to -5% and adding the 3-day rule. [new observation]
-
-3. **Intraday reversals from 52-week highs on massive volume are danger signals.** 鹏辉能源 hit ¥92.32 (24-month high) then reversed to ¥75.47 low (~18% swing) on 6.5× volume. This is institutional distribution, not healthy pullback. Even though -1.04% PnL doesn't trigger Rule 5, the price action is extremely bearish. Tight leash required. [new signal]
-
-4. **MA-distance discipline remains critical.** Of 34 enriched candidates, over 20 fail Rule 2b. Without this filter, V2 would have bought overextended stocks at the worst possible time — exactly what V1 did wrong. The rule is doing its job. [h021, h027 confirmed]
-
-5. **近20家半导体企业7月1日起涨价** could provide a near-term support floor for semiconductor positions (路维光电, 上海新阳). But it does NOT override the sector rotation headwind for new entries. Use it to hold winners, not to chase new ones.
-
-6. **Cash at 88% is not a problem in a rotating market.** The V1 lesson was that forcing entries to "stay invested" led to buying in cold sectors and losing money. Waiting for sector alignment to return is the disciplined move.
+---
 
 ## 7. Uncertainty Flags
 
-- **I'm uncertain about the full sector ranking.** We only have top 5 and bottom 5. Sectors like 专用设备 (凌云光, 电光科技) or 化学制品 (山东赫达) might rank in the top 30% — we can't confirm. Without full ranking data, I'm defaulting to conservative: "not in top 5 = not confirmed hot."
-- **I'm uncertain about 鹏辉能源's thesis durability.** The lithium carbonate futures plunge (-7%) directly threatens the valuation of all 锂/电池链 stocks. But 鹏辉能源 is an energy storage play (not pure lithium mining), so the impact may be indirect. The intraday reversal is concerning but may be overreaction.
-- **The midday timestamp (12:12)** means price data may not reflect full-day action. Afternoon reversals are possible, especially given today's sector rotation signal.
+1. **Buy gate vs entry_regime conflict**: The framework's buy gate requires 2/3 indices green (only 1/3 today), but the computed `entry_regime.allow_new_positions` is `true`. I'm defaulting to the stricter framework rule (`new_positions: []`), but the PM should decide. The breadth at 3.78:1 with 225 涨停 is objectively bullish. If the PM views the index divergence as noise in a broad rally, 山东赫达 or 电光科技 could be small starter positions.
+
+2. **上海新阳 stop proximity**: At 2.17% above stop, a gap-down open tomorrow could trigger the stop. The -4.17% drop on 14.6× volume today smells like distribution. I'm holding because the thesis is intact and the stop protects us, but I'm uncertain whether I should proactively tighten further (e.g., to ¥124.50 = -1% below today's close) to reduce gap risk.
+
+3. **鹏辉能源 — was the thesis wrong or just the timing?** The stock hit ¥92.32 (+12.2% from our entry) intraday before crashing. The thesis (储能 demand, 固态电池 ramp) was directionally correct — we just caught the exact wrong entry day when 碳酸锂 crashed. I'm selling per Rule 5 but uncertain whether this should be re-entered at ¥75-77 support if lithium stabilizes.
+
+4. **IV data missing**: The options-learn backend returned no data for any underlying. I cannot assess IV rank for position sizing or risk adjustment. This is a blind spot — if IV is spiking on tech names, it would argue for even tighter stops on 上海新阳.
 
 ---
 
@@ -211,155 +227,142 @@ Over 20 candidates fail Rule 2b. The most notable:
 {
   "sector_analysis": {
     "hot_sectors": [
-      {"name": "养殖业", "5d_pct": 6.97, "trend": "accelerating"},
-      {"name": "林业Ⅱ", "5d_pct": 5.80, "trend": "accelerating"},
-      {"name": "教育", "5d_pct": 5.46, "trend": "steady"},
-      {"name": "渔业", "5d_pct": 5.18, "trend": "steady"},
-      {"name": "冶钢原料", "5d_pct": 5.18, "trend": "steady"}
+      {"name": "综合Ⅱ", "5d_pct": 6.81, "trend": "accelerating"},
+      {"name": "养殖业", "5d_pct": 6.42, "trend": "rebound"},
+      {"name": "教育", "5d_pct": 5.47, "trend": "steady"},
+      {"name": "化学制药", "5d_pct": 5.41, "trend": "accelerating"},
+      {"name": "林业Ⅱ", "5d_pct": 5.02, "trend": "one-day spike"}
     ],
     "cold_sectors": [
-      {"name": "非金属材料Ⅱ", "5d_pct": -3.20, "trend": "deteriorating"},
-      {"name": "其他电源设备Ⅱ", "5d_pct": -2.90, "trend": "deteriorating"},
-      {"name": "通信设备", "5d_pct": -2.80, "trend": "deteriorating"},
-      {"name": "光伏设备", "5d_pct": -2.41, "trend": "deteriorating"},
-      {"name": "元件", "5d_pct": -2.16, "trend": "deteriorating"}
+      {"name": "通信设备", "5d_pct": -4.27, "trend": "deteriorating"},
+      {"name": "非金属材料Ⅱ", "5d_pct": -4.12, "trend": "deteriorating"},
+      {"name": "其他电源设备Ⅱ", "5d_pct": -3.45, "trend": "deteriorating"},
+      {"name": "元件", "5d_pct": -3.14, "trend": "deteriorating"},
+      {"name": "光伏设备", "5d_pct": -3.14, "trend": "deteriorating"}
     ],
-    "position_alignment": "0/4 positions in hot sectors, 0/4 in cold sectors — all mid-pack. Tech-to-agriculture rotation leaves positions without sector tailwinds.",
-    "regime": "Bullish breadth but sector rotation underway. Tech leadership cooling, agriculture/cyclicals surging. No candidate aligns with today's hot sectors."
+    "position_alignment": "0/3 positions in hot sectors, 0/3 in cold sectors — neutral middle-tier alignment",
+    "regime": "Rotation: capital flowing from extended tech/semiconductor into cyclicals (agriculture, pharma, conglomerates). Breadth 3.78:1 but index divergence (only 上证指数 green)."
   },
   "position_decisions": [
     {
-      "code": "002947",
-      "name": "恒铭达",
-      "action": "SELL",
-      "reason": "Rule 5 triggered: -3.87% in first 2 days (threshold: -3% in 3 days). Stop proximity CRITICAL at only 1.18% above stop. Below all MAs (MA5 -6.6%, MA10 -11.1%, MA20 -14.2%). Thesis (MA20低吸) invalidated. Cut now before gap-through. 扬杰科技 lesson: don't wait for exact stop trigger.",
-      "sector_rank": "mid-pack (消费电子 not in top/bottom 5)",
-      "new_stop": null,
-      "pnl_pct": -3.87,
-      "days_held": 2,
-      "exit_price": 74.87
-    },
-    {
       "code": "300236",
       "name": "上海新阳",
-      "action": "RAISE_STOP",
-      "reason": "+37.68% monster winner. Japan photoresist cutoff structural catalyst intact. 0 risk factors. Today -1.63% mild profit-taking on 9.8× volume. Today's high ¥136.98 → trail stop to -10% = ¥123.28, locking in +31.2%. 近20家半导体企业7月1日起涨价 adds near-term support.",
-      "sector_rank": "mid-pack (电子化学品Ⅱ not in top/bottom 5)",
-      "new_stop": 123.28,
-      "pnl_pct": 37.68,
-      "days_held": 23,
+      "action": "HOLD",
+      "reason": "+34.1% winner. Thesis intact: Japan WF6/photoresist production halt July 1 creates structural supply gap. 近20家半导体企业涨价 wave supports sector. 0 risk factors. Today -4.17% on 14.6× volume — distribution signal after hitting ¥136.98 ATH — but stop at ¥123.28 is tight and protects +31.2%. If gapped below stop tomorrow, exit.",
+      "sector_rank": "middle tier (~40-50%)",
+      "new_stop": null,
+      "pnl_pct": 34.12,
+      "days_held": 22,
       "exit_price": null
     },
     {
       "code": "300438",
       "name": "鹏辉能源",
-      "action": "HOLD",
-      "reason": "-1.04% PnL does NOT trigger Rule 5 (-3% threshold). However, today's intraday action is alarming: hit ¥92.32 (24-month high) then reversed to ¥75.47 low (~18% swing) on 6.5× normal volume — institutional distribution. 碳酸锂期货暴跌7% sector headwind. Stop at ¥78.19 (3.99% away) in WATCH zone. Tight leash — cut immediately if -3% breached.",
-      "sector_rank": "mid-pack (电池 not in top/bottom 5)",
+      "action": "SELL",
+      "reason": "Rule 5 triggered: -3.24% in first 3 days. Entry timing was wrong — caught a distribution day (¥92.32→¥75.47 intraday swing, 18% range). 碳酸锂期货暴跌7% sector headwind. Stop proximity CRITICAL at 1.81%. Cut now, re-evaluate if lithium stabilizes and stock reclaims ¥82.",
+      "sector_rank": "middle tier (~50-60%)",
       "new_stop": null,
-      "pnl_pct": -1.04,
+      "pnl_pct": -3.24,
       "days_held": 2,
-      "exit_price": null
+      "exit_price": 79.63
     },
     {
       "code": "688401",
       "name": "路维光电",
-      "action": "RAISE_STOP",
-      "reason": "+35.83% monster winner. 掩膜版龙头 thesis intact, 28nm progressing, 厦门20亿项目 on track. 0 risk factors. Today +2.71% on 19.9× volume — continued institutional accumulation. Hit ¥103.90 high. Trail stop to -10% = ¥93.51, locking in +28.8%. 近20家半导体企业涨价 catalyst supports sector.",
-      "sector_rank": "mid-pack (半导体材料 not in top/bottom 5)",
-      "new_stop": 93.51,
-      "pnl_pct": 35.83,
-      "days_held": 23,
+      "action": "HOLD",
+      "reason": "+37.1% monster winner. Thesis COMPOUNDING: 掩膜版 H2涨价30%, delivery times extended 3-5×, 14nm mask production 2026, 厦门 project on track. Today +3.66% on 28.9× volume — continued institutional accumulation. Hit ¥103.90 ATH. Stop at ¥93.51 (-10% from high) locks in +28.8%. 0 risk factors. Let it run.",
+      "sector_rank": "middle tier (~40-50%, benefiting from structural semiconductor boom)",
+      "new_stop": null,
+      "pnl_pct": 37.08,
+      "days_held": 22,
       "exit_price": null
     }
   ],
   "new_positions": [],
   "skip_list": [
     {
-      "code": "688536",
-      "name": "思瑞浦",
-      "reason": "Rule 2b: dist_ma10=8.7% exceeds 8% threshold, dist_ma20=13.5% exceeds 12%. Overextended. Sector 半导体 mid-pack.",
-      "rps120": 94.09
-    },
-    {
-      "code": "301536",
-      "name": "星宸科技",
-      "reason": "Rule 2b: dist_ma10=13.7%, dist_ma20=29.0%. Extreme extension. No entry until MA convergence.",
-      "rps120": 92.35
-    },
-    {
-      "code": "300037",
-      "name": "新宙邦",
-      "reason": "Rule 2b: dist_ma5=6.9% exceeds 6% threshold. Chasing risk.",
-      "rps120": 90.8
-    },
-    {
-      "code": "002407",
-      "name": "多氟多",
-      "reason": "Rule 2b: dist_ma5=16.4%, dist_ma10=29.2%. Extreme extension. No current price data justifies entry.",
-      "rps120": 91.98
-    },
-    {
       "code": "688205",
       "name": "德科立",
-      "reason": "Rule 1: Sector 通信设备 in today's bottom 3 (-2.80%). Hard no-buy zone regardless of stock quality.",
+      "reason": "Sector 通信设备 in bottom5 (-4.27%), hard no-buy per h019. Stock below all MAs in downtrend.",
       "rps120": 94.25
     },
     {
       "code": "688390",
       "name": "固德威",
-      "reason": "Rule 1: Sector 光伏设备 in today's bottom 4 (-2.41%). Hard no-buy zone.",
+      "reason": "Sector 光伏设备 in bottom5 (-3.14%), hard no-buy per h019. dist_ma20 -18.7%, deep downtrend.",
       "rps120": 93.38
     },
     {
-      "code": "688400",
-      "name": "凌云光",
-      "reason": "MA distances pass (dist_ma5=4.0%, dist_ma10=7.5%, dist_ma20=7.0%). RPS120=87.88% sweet spot. But sector 专用设备 not confirmed top 30%, and sector rotation away from tech makes entry timing poor. 2 risk factors (收益质量低, 商誉). Track for re-entry if sector improves.",
-      "rps120": 87.88
+      "code": "688536",
+      "name": "思瑞浦",
+      "reason": "dist_ma10_pct 8.7% > 8% → Rule 2b chase violation. Great fundamentals (8 highlights, semiconductor leader) but overextended. Wait for pullback to MA10 (~¥331).",
+      "rps120": 94.09
     },
     {
-      "code": "002810",
-      "name": "山东赫达",
-      "reason": "MA distances pass, RPS120=91.76% sweet spot. But RPS20=78.09% — short-term momentum dead. 2 risks including 跌停 history. Sector 化学制品 not confirmed hot.",
-      "rps120": 91.76
+      "code": "688372",
+      "name": "伟测科技",
+      "reason": "dist_ma10_pct 10.2% > 8% → Rule 2b. Semiconductor testing leader with good growth but overextended. dist_ma5 5.5% approaching limit.",
+      "rps120": 91.13
+    },
+    {
+      "code": "002240",
+      "name": "盛新锂能",
+      "reason": "锂 sector under 碳酸锂暴跌7% headwind. PE negative (-152). No near-term catalyst to overcome sector gravity.",
+      "rps120": 94.6
+    },
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "dist_ma5 24.1%, dist_ma10 40.5%, dist_ma20 49.0% → all three Rule 2b thresholds blown. Extreme chase, no support nearby.",
+      "rps120": 91.55
+    },
+    {
+      "code": "002407",
+      "name": "多氟多",
+      "reason": "dist_ma5 16.4%, dist_ma10 29.2% → extreme chase. 氟化工涨价 thesis interesting but mathematically un-buyable.",
+      "rps120": 91.98
+    },
+    {
+      "code": "605111",
+      "name": "新洁能",
+      "reason": "dist_ma5 10.8%, dist_ma10 27.0%, dist_ma20 42.4% → absurd extension. AI IGBT/MOSFET theme strong but chasing here is suicide.",
+      "rps120": 93.2
     }
   ],
   "new_learnings": [
     {
-      "text": "Sector rotation from tech to agriculture/cyclicals confirmed: 通信设备(-2.80%), 光伏设备(-2.41%), 元件(-2.16%) all in bottom 5 while 养殖业(+6.97%), 教育(+5.46%) lead. When the candidate pool is tech-heavy and no candidate aligns with hot sectors, default to cash even when breadth clears the buy gate.",
-      "type": "signal",
-      "tags": ["sector", "entry-filter"],
-      "evidence_type": "supporting",
-      "related_hypothesis": "h028, h019",
-      "mechanism": "Sector gravity determines ~40% of individual stock returns in A-shares. Buying a good stock in a rotating-out sector means fighting macro flows. The breadth was 4.89:1 bullish, but the money was flowing into agriculture/cyclicals, not into our tech-heavy candidate pool."
-    },
-    {
-      "text": "The V2 -3% in 3 days rule caught 恒铭达 at -3.87% in just 2 days — much faster than V1's -10%/20-day rules. The thesis ('MA20下方低吸') was invalidated immediately. This rule is doing exactly what it was designed to do: kill bad timing fast before it becomes a -8% loss.",
-      "type": "heuristic",
+      "text": "Rule 5 -3% in 3 days trigger worked perfectly: 鹏辉能源 caught a false breakout (¥92→¥75 intraday, 18% swing on 碳酸锂 crash). Cutting at -3.24% prevents this from becoming a -8% disaster.",
+      "type": "rule",
       "tags": ["exit-rule", "timing"],
       "evidence_type": "supporting",
-      "related_hypothesis": null,
-      "mechanism": "Stocks that drop -3% in the first 1-3 days after entry almost always have deeper problems (sector rotation, institutional selling, catalyst invalidation). The market is telling you your timing was wrong — listen."
+      "mechanism": "Distribution days often start with a trap breakout. The 3-day quick-stop catches entry-timing errors before they compound."
     },
     {
-      "text": "Intraday reversal from 24-month high on 6.5× normal volume (鹏辉能源: ¥92.32 → ¥75.47, ~18% swing) is a strong distribution signal. Even when PnL hasn't hit -3%, this price action pattern warrants immediate stop-tightening or proactive exit. Consider adding an 'intraday reversal > 10% from high' rule for positions held < 5 days.",
+      "text": "Index divergence (上证+0.44% vs 科创50 -2.48%) with 3.78:1 breadth is a textbook rotation signal: profit-taking in extended tech leaders, rotation into lagging cyclicals. This is not a broad selloff.",
       "type": "signal",
-      "tags": ["exit-rule", "position-sizing"],
+      "tags": ["sector", "timing"],
       "evidence_type": "supporting",
-      "related_hypothesis": null,
-      "mechanism": "Institutions use strength to distribute. A pop to new highs followed by a full reversal on massive volume means smart money is selling into retail enthusiasm. This pattern has high predictive value for further downside in the next 1-3 days."
+      "related_hypothesis": "h028",
+      "mechanism": "When breadth is strong but large-cap tech indices sell off, capital is rotating within the market. The 'troops' are being bought while 'generals' are sold."
     },
     {
-      "text": "MA-distance Rule 2b filtered out 20+ overextended candidates today. Without this rule, V2 would have bought stocks like 新洁能 (dist_ma5=10.8%), 多氟多 (dist_ma5=16.4%), 华灿光电 (dist_ma5=15.6%) — all of which would have been chasing into mean-reversion risk. This confirms the rule is essential, not optional.",
+      "text": "Semiconductor materials thesis is COMPOUNDING: mask delivery times 3-5× normal, H2 price hikes 30%, Japan WF6 production halt July 1. 路维光电 and 上海新阳 thesis strengthens daily — this supports extended holds through rotation noise.",
+      "type": "observation",
+      "tags": ["sector"],
+      "evidence_type": "supporting",
+      "mechanism": "Supply chain bottlenecks in niche semiconductor materials create pricing power that lasts quarters, not days, due to high barriers to entry and long qualification cycles."
+    },
+    {
+      "text": "MA-distance Rule 2b filtered 8+ candidates today that all showed extreme extension despite great fundamentals. Confirms h027: hot sector does NOT override chase risk.",
       "type": "rule",
       "tags": ["entry-filter"],
       "evidence_type": "supporting",
-      "related_hypothesis": "h021, h027",
-      "mechanism": "Stocks that spike 10%+ above MA5 have a high probability of mean-reverting within 3-5 days. The best entries happen near MA5/MA10 support, not 10%+ above them. This is a statistical edge, not an opinion."
+      "related_hypothesis": "h027",
+      "mechanism": "dist_ma10 > 8% = mean reversion probability rises sharply. Stocks that gap far above MAs attract profit-takers regardless of thesis quality."
     }
   ],
-  "market_summary": "Breadth 4.89:1 extremely bullish (203涨停/7跌停), 上证+1.08%/深证+0.41% green, 创业板-0.39% red. But clear sector rotation underway: agriculture/education/cyclicals surging while tech (通信设备-2.80%, 光伏设备-2.41%, 元件-2.16%) cools. No IV data available. Entry regime strong but sizing capped at 75%. No new positions — 0/4 existing positions aligned with hot sectors, no candidates in today's leadership. Managing winners (上海新阳+37.7%, 路维光电+35.8%) and cutting loser 恒铭达 (-3.9% in 2 days).",
-  "market_sentiment": "bullish",
-  "market_call": "积极"
+  "market_summary": "Rotation tape: breadth 3.78:1 (4329↑/1145↓), 225涨停/13跌停 — objectively bullish breadth masked by index divergence (上证+0.44%, 创业板-1.89%, 科创50-2.48%). Capital rotating from extended tech/semiconductor into cyclicals (养殖业+6.42%, 化学制药+5.41%). IV data unavailable. Buy gate fails on 1/3 index threshold → no new positions. 鹏辉能源 SELL per Rule 5 (-3.24% in 2 days). 上海新阳 HOLD (+34%, stop proximity warning). 路维光电 HOLD (+37%, thesis compounding). Cash 89.7%.",
+  "market_sentiment": "mixed",
+  "market_call": "谨慎偏多"
 }
 ```

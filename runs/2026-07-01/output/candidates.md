@@ -1,13 +1,13 @@
 # 候选股票 2026-07-01
 
-## 入场条件: ⚠ THROTTLED
-- 涨跌比: 4.89:1
-- 上涨指数: 上证指数, 深证成指
-- 下跌指数: 创业板指
-- 新仓位尺寸系数: 0.75x
-- 原因: Entry regime strong: breadth 4.89:1, 2/3 major indices green, 203 limit-ups / 7 limit-downs. Allow entries, but cap fresh size at 75% to avoid chasing.
+## 入场条件: ✅ OPEN
+- 涨跌比: 3.78:1
+- 上涨指数: 上证指数
+- 下跌指数: 深证成指, 创业板指
+- 新仓位尺寸系数: 1.00x
+- 原因: Entry regime balanced: breadth 3.78:1, 1/3 major indices green, 225 limit-ups / 13 limit-downs. Allow normal sizing.
 
-## 策略池 (65 stocks)
+## 策略池 (66 stocks)
 
 | Code | Name | RPS120 | RPS60 | Trend | Co | MA5% | MA10% | MA20% | Status |
 |------|------|--------|-------|-------|-----|------|-------|-------|--------|
@@ -27,6 +27,7 @@
 | 300201 | 海伦哲 | 99 | 98 | - | - | +3.9 | +5.6 | +6.0 | ⏳ >95 |
 | 688627 | 精智达 | 98 | 97 | - | - | +6.2 | +24.9 | +45.4 | ❌ MA5,MA10,MA20 |
 | 000811 | 冰轮环境 | 98 | 99 | - | - | +2.4 | +21.7 | +41.6 | ❌ MA10,MA20 |
+| 003031 | 中瓷电子 | 98 | 97 | - | - | -4.7 | +3.1 | +9.2 | ⏳ >95 |
 | 002859 | 洁美科技 | 98 | 99 | - | - | +3.6 | +15.0 | +34.2 | ❌ MA10,MA20 |
 | 688127 | 蓝特光学 | 97 | 97 | - | - | +3.3 | +8.0 | +6.9 | ⏳ >95 |
 | 603163 | 圣晖集成 | 97 | 89 | - | - | +7.8 | +16.8 | +23.2 | ❌ MA5,MA10,MA20 |
@@ -94,13 +95,14 @@ RPS 75-95%, MA check pass — actionable when regime opens.
 - **石大胜华** (603026) RPS120=88 Trend=- Co=- MA5=+0.1% MA10=+2.8% MA20=+2.2%
 - **凌云光** (688400) RPS120=88 Trend=- Co=- MA5=+4.0% MA10=+7.5% MA20=+7.0%
 
-## Wait List (9)
+## Wait List (10)
 
 RPS >95% (chasing risk), MA pass — watch for pullback into 85-95 zone.
 
 - **华盛昌** (002980) RPS120=100 Trend=- Co=- MA5=-4.5% MA10=-5.5% MA20=-3.0%
 - **天华新能** (300390) RPS120=99 Trend=- Co=- MA5=+3.7% MA10=+3.0% MA20=+6.8%
 - **海伦哲** (300201) RPS120=99 Trend=- Co=- MA5=+3.9% MA10=+5.6% MA20=+6.0%
+- **中瓷电子** (003031) RPS120=98 Trend=- Co=- MA5=-4.7% MA10=+3.1% MA20=+9.2%
 - **蓝特光学** (688127) RPS120=97 Trend=- Co=- MA5=+3.3% MA10=+8.0% MA20=+6.9%
 - **日联科技** (688531) RPS120=96 Trend=- Co=- MA5=+1.9% MA10=-0.1% MA20=-0.7%
 - **东田微** (301183) RPS120=96 Trend=- Co=- MA5=+0.2% MA10=+3.7% MA20=+4.1%

@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-07-01T12:15:40.640046+08:00",
+  "snapshot_time": "2026-07-01T15:45:15.921011+08:00",
   "snapshot_type": "post_run",
   "date": "2026-07-01",
   "portfolio_config": {
@@ -11,23 +11,23 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-07-01T12:15:39.914938+08:00",
+    "lastUpdated": "2026-07-01T15:45:15.567284+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 992390.0,
-      "cash": 888358.0,
-      "investedValue": 104032.0,
-      "unrealizedPnl": 19012.0,
-      "realizedPnl": -26622.0,
-      "totalPnl": -7610.0,
-      "totalReturnPct": -0.76,
-      "positionsUsed": 3,
+      "totalEquity": 990516.0,
+      "cash": 920210.0,
+      "investedValue": 70306.0,
+      "unrealizedPnl": 18206.0,
+      "realizedPnl": -27690.0,
+      "totalPnl": -9484.0,
+      "totalReturnPct": -0.95,
+      "positionsUsed": 2,
       "positionsMax": 10,
-      "cashPct": 89.52,
-      "dayPnl": -904.0,
+      "cashPct": 92.9,
+      "dayPnl": -1490.0,
       "minCashPct": 20,
-      "minCashValue": 198478.0,
-      "deployableCash": 689880.0
+      "minCashValue": 198103.2,
+      "deployableCash": 722106.8
     },
     "activePositions": [
       {
@@ -35,8 +35,8 @@
         "name": "上海新阳",
         "entryDate": "2026-06-09",
         "entryPrice": 93.96,
-        "currentPrice": 129.35,
-        "pnl_pct": 37.66,
+        "currentPrice": 126.02,
+        "pnl_pct": 34.12,
         "stopLoss": 89.26,
         "currentStop": 123.28,
         "targetPrice": 120.0,
@@ -45,42 +45,20 @@
         "shares": 400,
         "allocation_pct": 5.25,
         "allocatedCapital": 37584.0,
-        "currentValue": 51740.0,
-        "unrealizedPnl": 14156.0,
-        "volume": 149959,
+        "currentValue": 50408.0,
+        "unrealizedPnl": 12824.0,
+        "volume": 222404,
         "mavol30": 15243.1,
         "volumeBelowMavol30": false,
-        "weight_pct": 5.21
-      },
-      {
-        "code": "300438",
-        "name": "鹏辉能源",
-        "entryDate": "2026-06-30",
-        "entryPrice": 82.3,
-        "currentPrice": 81.44,
-        "pnl_pct": -1.04,
-        "stopLoss": 78.19,
-        "currentStop": 78.19,
-        "targetPrice": 107.0,
-        "status": "active",
-        "sector": "电池",
-        "shares": 400,
-        "allocation_pct": 5.0,
-        "allocatedCapital": 32920.0,
-        "currentValue": 32576.0,
-        "unrealizedPnl": -344.0,
-        "volume": 302924,
-        "mavol30": 46633.23,
-        "volumeBelowMavol30": false,
-        "weight_pct": 3.28
+        "weight_pct": 5.09
       },
       {
         "code": "688401",
         "name": "路维光电",
         "entryDate": "2026-06-09",
         "entryPrice": 72.58,
-        "currentPrice": 98.58,
-        "pnl_pct": 35.82,
+        "currentPrice": 99.49,
+        "pnl_pct": 37.08,
         "stopLoss": 68.95,
         "currentStop": 93.51,
         "targetPrice": 92.0,
@@ -89,12 +67,12 @@
         "shares": 200,
         "allocation_pct": 3.75,
         "allocatedCapital": 14516.0,
-        "currentValue": 19716.0,
-        "unrealizedPnl": 5200.0,
-        "volume": 91421,
+        "currentValue": 19898.0,
+        "unrealizedPnl": 5382.0,
+        "volume": 132801,
         "mavol30": 4600.27,
         "volumeBelowMavol30": false,
-        "weight_pct": 1.99
+        "weight_pct": 2.01
       }
     ]
   },
@@ -257,6 +235,13 @@
           "change_pct": 37.66,
           "action": "RAISE_STOP",
           "note": "+37.68% monster winner. Japan photoresist cutoff structural catalyst intact. 0 risk factors. Today -1.63% mild profit-taking on 9.8× volume. Today's high ¥136.98 → trail stop to -10% = ¥123.28, locking in +31.2%. 近20家半导体企业7月1日起涨价 adds near-term support."
+        },
+        {
+          "date": "2026-07-01",
+          "price": 126.02,
+          "change_pct": 34.12,
+          "action": "HOLD",
+          "note": "+34.1% winner. Thesis intact: Japan WF6/photoresist production halt July 1 creates structural supply gap. 近20家半导体企业涨价 wave supports sector. 0 risk factors. Today -4.17% on 14.6× volume — distribution signal after hitting ¥136.98 ATH — but stop at ¥123.28 is tight and protects +31.2%. If gapped below stop tomorrow, exit."
         }
       ],
       "exitDate": null,
@@ -266,51 +251,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-06-09T15:39:26.780692+08:00",
-      "updatedAt": "2026-07-01T12:15:39.903114+08:00",
-      "trackerVersion": "2.1"
-    },
-    "300438": {
-      "code": "300438",
-      "name": "鹏辉能源",
-      "status": "active",
-      "thesis": "储能+锂电池双赛道龙头。Q1业绩超预期(净利+819%)，合同负债14亿(+70%)在手订单爆发。今日锂电池板块集体异动(储能签单突破180GWh)。中信建投买入评级，预测26-28年净利CAGR 50%+。6家机构覆盖。near MA5支撑(-0.8%)，RPS120 94.45%甜点区。",
-      "entryDate": "2026-06-30",
-      "entryPrice": 82.3,
-      "targetPrice": 107.0,
-      "stopLoss": 78.19,
-      "currentStop": 78.19,
-      "allocation_pct": 5.0,
-      "shares": 400,
-      "allocatedCapital": 32920.0,
-      "rating": 2,
-      "rps120": 94.45,
-      "sector": "电池",
-      "catalysts": [],
-      "sourceWatchlist": "2026-06-30",
-      "history": [
-        {
-          "date": "2026-06-30",
-          "price": 82.3,
-          "change_pct": 0,
-          "action": "OPEN",
-          "note": "LLM开仓 鹏辉能源"
-        },
-        {
-          "date": "2026-07-01",
-          "price": 81.44,
-          "change_pct": -1.04,
-          "action": "HOLD",
-          "note": "-1.04% PnL does NOT trigger Rule 5 (-3% threshold). However, today's intraday action is alarming: hit ¥92.32 (24-month high) then reversed to ¥75.47 low (~18% swing) on 6.5× normal volume — institutional distribution. 碳酸锂期货暴跌7% sector headwind. Stop at ¥78.19 (3.99% away) in WATCH zone. Tight leash — cut immediately if -3% breached."
-        }
-      ],
-      "exitDate": null,
-      "exitPrice": null,
-      "exitReason": null,
-      "returnPct": null,
-      "holdingDays": null,
-      "lessonLearned": null,
-      "createdAt": "2026-06-30T15:39:03.385776+08:00",
-      "updatedAt": "2026-07-01T12:15:39.905360+08:00",
+      "updatedAt": "2026-07-01T15:45:15.547612+08:00",
       "trackerVersion": "2.1"
     },
     "688401": {
@@ -471,6 +412,13 @@
           "change_pct": 35.82,
           "action": "RAISE_STOP",
           "note": "+35.83% monster winner. 掩膜版龙头 thesis intact, 28nm progressing, 厦门20亿项目 on track. 0 risk factors. Today +2.71% on 19.9× volume — continued institutional accumulation. Hit ¥103.90 high. Trail stop to -10% = ¥93.51, locking in +28.8%. 近20家半导体企业涨价 catalyst supports sector."
+        },
+        {
+          "date": "2026-07-01",
+          "price": 99.49,
+          "change_pct": 37.08,
+          "action": "HOLD",
+          "note": "+37.1% monster winner. Thesis COMPOUNDING: 掩膜版 H2涨价30%, delivery times extended 3-5×, 14nm mask production 2026, 厦门 project on track. Today +3.66% on 28.9× volume — continued institutional accumulation. Hit ¥103.90 ATH. Stop at ¥93.51 (-10% from high) locks in +28.8%. 0 risk factors. Let it run."
         }
       ],
       "exitDate": null,
@@ -480,7 +428,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-06-09T15:39:26.785471+08:00",
-      "updatedAt": "2026-07-01T12:15:39.909367+08:00",
+      "updatedAt": "2026-07-01T15:45:15.560086+08:00",
       "trackerVersion": "2.1"
     }
   },
@@ -575,6 +523,19 @@
       "holdingDays": 18,
       "sector": "功率半导体",
       "lessonLearned": "半导体涨价催化thesis需要验证业绩兑现周期。入场时RPS=88.4%合理但催化剂(MCU涨价)偏概念化，无明确业绩数据支撑。开仓后14天趋势持续恶化，说明入场时机不佳(02-13买入后连续回调)。教训：催化剂需更具体(如有明确涨价幅度/订单数据)，不能仅依赖行业趋势性判断。"
+    },
+    "300438": {
+      "code": "300438",
+      "name": "鹏辉能源",
+      "status": "closed",
+      "entryDate": "2026-06-30",
+      "exitDate": "2026-07-01",
+      "entryPrice": 82.3,
+      "exitPrice": 79.63,
+      "returnPct": -3.24,
+      "holdingDays": 1,
+      "sector": "电池",
+      "lessonLearned": ""
     },
     "300677": {
       "code": "300677",
