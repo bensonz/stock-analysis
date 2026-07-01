@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 312004,
+  "output_tokens": 13529,
+  "rounds": 4,
+  "duration_sec": 186.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月1日 热门板块 养殖业 教育 林业 大涨原因",
+        "max_results": 5
+      },
+      "result_length": 2927
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "通信设备 光伏 半导体 板块 2026年7月 下跌 原因",
+        "max_results": 5
+      },
+      "result_length": 2721
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 市场风格切换 科技股 到 周期股 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 3226
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "恒铭达 002947 2026年 最新消息 股价"
+      },
+      "result_length": 1924
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "鹏辉能源 300438 锂电池 2026年7月"
+      },
+      "result_length": 3328
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "上海新阳 300236 光刻胶 2026年7月 最新动态"
+      },
+      "result_length": 2363
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "路维光电 688401 掩膜版 2026年7月 最新"
+      },
+      "result_length": 3154
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "消费电子板块 2026年7月1日 涨跌 A股"
+      },
+      "result_length": 2817
+    }
+  ],
+  "fallback_used": false
+}

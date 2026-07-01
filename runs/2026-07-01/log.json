@@ -1,0 +1,130 @@
+{
+  "date": "2026-07-01",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1782879140.118479,
+      "errors": [],
+      "end": 1782879153.768169,
+      "duration_sec": 13.6
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 19696,
+      "tokens": {
+        "input_tokens": 312004,
+        "output_tokens": 13529
+      },
+      "rounds": 4,
+      "tool_calls_count": 8,
+      "duration_sec": 186.1,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1782879339.880942,
+      "actions": [
+        "SELL 002947",
+        "RAISE_STOP 300236 → 123.28",
+        "RAISE_STOP 688401 → 93.51",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=24",
+        "Hypothesis: Created h079 (observation): The V2 -3% in 3 days rule caught 恒铭达 at -3.87% in just 2 days — much faster than...",
+        "Hypothesis: Created h080 (observation): Intraday reversal from 24-month high on 6.5× normal volume (鹏辉能源: ¥92.32 → ¥75.4...",
+        "Hypothesis: Created h081 (observation): MA-distance Rule 2b filtered out 20+ overextended candidates today. Without this...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "300236",
+                "name": "上海新阳",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 129.35,
+                "stopLoss": 123.28,
+                "distance_pct": 4.69,
+                "suggestion": "🟠 WATCH — 4.7% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "300438",
+                "name": "鹏辉能源",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 81.44,
+                "stopLoss": 78.19,
+                "distance_pct": 3.99,
+                "suggestion": "🟠 WATCH — 4.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1782879340.640973,
+      "duration_sec": 0.8
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 300236 — 🟠 WATCH — 4.7% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 300438 — 🟠 WATCH — 4.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 200.5
+  }
+}

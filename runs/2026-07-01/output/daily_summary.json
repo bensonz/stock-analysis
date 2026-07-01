@@ -1,0 +1,70 @@
+{
+  "date": "2026-07-01",
+  "actions": [
+    {
+      "code": "002947",
+      "name": "恒铭达",
+      "action": "SELL",
+      "price": 74.87,
+      "pnl_pct": -3.87,
+      "note": "Rule 5 triggered: -3.87% in first 2 days (threshold: -3% in 3 days). Stop proximity CRITICAL at only 1.18% above stop. Below all MAs (MA5 -6.6%, MA10 -11.1%, MA20 -14.2%). Thesis (MA20低吸) invalidated. Cut now before gap-through. 扬杰科技 lesson: don't wait for exact stop trigger."
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "action": "RAISE_STOP",
+      "price": 129.35,
+      "pnl_pct": 37.68,
+      "note": "+37.68% monster winner. Japan photoresist cutoff structural catalyst intact. 0 risk factors. Today -1.63% mild profit-taking on 9.8× volume. Today's high ¥136.98 → trail stop to -10% = ¥123.28, locking in +31.2%. 近20家半导体企业7月1日起涨价 adds near-term support."
+    },
+    {
+      "code": "300438",
+      "name": "鹏辉能源",
+      "action": "HOLD",
+      "price": 81.44,
+      "pnl_pct": -1.04,
+      "note": "-1.04% PnL does NOT trigger Rule 5 (-3% threshold). However, today's intraday action is alarming: hit ¥92.32 (24-month high) then reversed to ¥75.47 low (~18% swing) on 6.5× normal volume — institutional distribution. 碳酸锂期货暴跌7% sector headwind. Stop at ¥78.19 (3.99% away) in WATCH zone. Tight leash — cut immediately if -3% breached."
+    },
+    {
+      "code": "688401",
+      "name": "路维光电",
+      "action": "RAISE_STOP",
+      "price": 98.58,
+      "pnl_pct": 35.83,
+      "note": "+35.83% monster winner. 掩膜版龙头 thesis intact, 28nm progressing, 厦门20亿项目 on track. 0 risk factors. Today +2.71% on 19.9× volume — continued institutional accumulation. Hit ¥103.90 high. Trail stop to -10% = ¥93.51, locking in +28.8%. 近20家半导体企业涨价 catalyst supports sector."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 992390.0,
+    "dayPnl": -904.0,
+    "dayReturnPct": -0.09,
+    "totalReturnPct": -0.76,
+    "unrealizedPnl": 19012.0,
+    "realizedPnl": -26622.0,
+    "cashPct": 89.52
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 4.8904,
+    "up": 4553,
+    "down": 931,
+    "positive_indices": [
+      "上证指数",
+      "深证成指"
+    ],
+    "negative_indices": [
+      "创业板指"
+    ],
+    "limit_ups": 203,
+    "limit_downs": 7,
+    "sizing_multiplier": 0.75,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 4.89:1, 2/3 major indices green, 203 limit-ups / 7 limit-downs. Allow entries, but cap fresh size at 75% to avoid chasing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 4.89:1 extremely bullish (203涨停/7跌停), 上证+1.08%/深证+0.41% green, 创业板-0.39% red. But clear sector rotation underway: agriculture/education/cyclicals surging while tech (通信设备-2.80%, 光伏设备-2.41%, 元件-2.16%) cools. No IV data available. Entry regime strong but sizing capped at 75%. No new positions — 0/4 existing positions aligned with hot sectors, no candidates in today's leadership. Managing winners (上海新阳+37.7%, 路维光电+35.8%) and cutting loser 恒铭达 (-3.9% in 2 days)."
+  }
+}

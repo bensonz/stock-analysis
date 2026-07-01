@@ -1,0 +1,827 @@
+{
+  "snapshot_time": "2026-07-01T12:15:40.640046+08:00",
+  "snapshot_type": "post_run",
+  "date": "2026-07-01",
+  "portfolio_config": {
+    "starting_capital": 1000000,
+    "max_position_pct": 10,
+    "max_positions": 10,
+    "min_cash_pct": 20,
+    "created": "2026-02-03",
+    "currency": "CNY"
+  },
+  "positions_json": {
+    "lastUpdated": "2026-07-01T12:15:39.914938+08:00",
+    "portfolio": {
+      "startingCapital": 1000000,
+      "totalEquity": 992390.0,
+      "cash": 888358.0,
+      "investedValue": 104032.0,
+      "unrealizedPnl": 19012.0,
+      "realizedPnl": -26622.0,
+      "totalPnl": -7610.0,
+      "totalReturnPct": -0.76,
+      "positionsUsed": 3,
+      "positionsMax": 10,
+      "cashPct": 89.52,
+      "dayPnl": -904.0,
+      "minCashPct": 20,
+      "minCashValue": 198478.0,
+      "deployableCash": 689880.0
+    },
+    "activePositions": [
+      {
+        "code": "300236",
+        "name": "上海新阳",
+        "entryDate": "2026-06-09",
+        "entryPrice": 93.96,
+        "currentPrice": 129.35,
+        "pnl_pct": 37.66,
+        "stopLoss": 89.26,
+        "currentStop": 123.28,
+        "targetPrice": 120.0,
+        "status": "active",
+        "sector": "电子化学品Ⅱ",
+        "shares": 400,
+        "allocation_pct": 5.25,
+        "allocatedCapital": 37584.0,
+        "currentValue": 51740.0,
+        "unrealizedPnl": 14156.0,
+        "volume": 149959,
+        "mavol30": 15243.1,
+        "volumeBelowMavol30": false,
+        "weight_pct": 5.21
+      },
+      {
+        "code": "300438",
+        "name": "鹏辉能源",
+        "entryDate": "2026-06-30",
+        "entryPrice": 82.3,
+        "currentPrice": 81.44,
+        "pnl_pct": -1.04,
+        "stopLoss": 78.19,
+        "currentStop": 78.19,
+        "targetPrice": 107.0,
+        "status": "active",
+        "sector": "电池",
+        "shares": 400,
+        "allocation_pct": 5.0,
+        "allocatedCapital": 32920.0,
+        "currentValue": 32576.0,
+        "unrealizedPnl": -344.0,
+        "volume": 302924,
+        "mavol30": 46633.23,
+        "volumeBelowMavol30": false,
+        "weight_pct": 3.28
+      },
+      {
+        "code": "688401",
+        "name": "路维光电",
+        "entryDate": "2026-06-09",
+        "entryPrice": 72.58,
+        "currentPrice": 98.58,
+        "pnl_pct": 35.82,
+        "stopLoss": 68.95,
+        "currentStop": 93.51,
+        "targetPrice": 92.0,
+        "status": "active",
+        "sector": "半导体材料",
+        "shares": 200,
+        "allocation_pct": 3.75,
+        "allocatedCapital": 14516.0,
+        "currentValue": 19716.0,
+        "unrealizedPnl": 5200.0,
+        "volume": 91421,
+        "mavol30": 4600.27,
+        "volumeBelowMavol30": false,
+        "weight_pct": 1.99
+      }
+    ]
+  },
+  "active_positions": {
+    "300236": {
+      "code": "300236",
+      "name": "上海新阳",
+      "status": "active",
+      "thesis": "电子化学品纯正标的，光刻胶+蚀刻液+清洗液产品线完整。0风险。2025净利+71%。电子化学品板块今日#2涨幅，直接受益于半导体材料需求爆发。",
+      "entryDate": "2026-06-09",
+      "entryPrice": 93.96,
+      "targetPrice": 120.0,
+      "stopLoss": 89.26,
+      "currentStop": 123.28,
+      "allocation_pct": 5.25,
+      "shares": 400,
+      "allocatedCapital": 37584.0,
+      "rating": 2,
+      "rps120": 89.68,
+      "sector": "电子化学品Ⅱ",
+      "catalysts": [],
+      "sourceWatchlist": "2026-06-09",
+      "history": [
+        {
+          "date": "2026-06-09",
+          "price": 93.96,
+          "change_pct": 0,
+          "action": "OPEN",
+          "note": "LLM开仓 上海新阳"
+        },
+        {
+          "date": "2026-06-10",
+          "price": 98.2,
+          "change_pct": 4.51,
+          "action": "HOLD",
+          "note": "+4.51% from entry, best performer. +2.51% today in brutal tape. 电子化学品 pure play, 0 risk. MA distances healthy (dist_ma5=1.1%). Raise stop to breakeven if reaches +10%."
+        },
+        {
+          "date": "2026-06-11",
+          "price": 102.02,
+          "change_pct": 8.58,
+          "action": "HOLD",
+          "note": "Best performer +8.58% in 2 days. Sector #1 (电子化学品Ⅱ +5.12%). 0 risk factors. +5.80% today in panic tape = genuine alpha. MA distances healthy (dist_ma5 +5.2% from enriched, below 6% chase limit). Volume 3.97x MAVOL30 confirming institutional interest. Photoresist+etching+cleaning platform thesis intact. Approaching +10% threshold — if reached (¥103.36), raise stop to breakeven per Rule 5."
+        },
+        {
+          "date": "2026-06-12",
+          "price": 95.73,
+          "change_pct": 1.88,
+          "action": "HOLD",
+          "note": "⚠️ ELEVATED ALERT. PnL still +1.9% but sector (电子化学品Ⅱ) crashed from #1 yesterday to #1 WORST today (-5.04%). Stock -6.17% today with 5.22× MAVOL30 — institutional distribution on intraday reversal from new high. Day 1 of cold sector — 3-day rule triggers SELL if sector stays bottom 30% through 6/16. -5% hard stop at ¥89.26, -3% first-3-days at ¥91.14. Thesis intact (2025 NP +71%, photoresist platform) but sector gravity is overwhelming."
+        },
+        {
+          "date": "2026-06-15",
+          "price": 99.85,
+          "change_pct": 6.27,
+          "action": "HOLD",
+          "note": "PnL +6.27%, sector #4 (电子化学品Ⅱ +5.53%) HOT. Today +4.30% strong recovery from 6/12 shakeout. Sector gravity now tailwind. All MA distances healthy. Volume 2.62x MAVOL30 confirms institutional flow. Photoresist platform thesis intact. If +10% (103.36), raise stop to breakeven 93.96."
+        },
+        {
+          "date": "2026-06-16",
+          "price": 100.02,
+          "change_pct": 6.45,
+          "action": "HOLD",
+          "note": "PnL +6.45%. Quiet consolidation day (-0.47%). Semicon materials theme working. 0 risk factors. 2025 NP +71%. 7 days held. No threat to stop."
+        },
+        {
+          "date": "2026-06-17",
+          "price": 106.56,
+          "change_pct": 13.41,
+          "action": "RAISE_STOP",
+          "note": "PnL +13.41% triggers Rule 5: raise stop to breakeven 93.96 from 89.26. Sector (电子化学品Ⅱ) is #2 hot (+6.71%), strongest sector alignment in portfolio. 0 risk factors, 2025 NP +71%, KrF批量销售+ArF浸没式订单. 56条12寸+23条8寸产线 baseline. Volume 5.07x MAVOL30."
+        },
+        {
+          "date": "2026-06-18",
+          "price": 105.8,
+          "change_pct": 12.6,
+          "action": "HOLD",
+          "note": "PnL +12.60%, -0.71% today. 9 days held. 0 risk factors. 2025 NP +71%. KrF批量销售+ArF浸没式订单 thesis intact. 5.8亿光刻胶项目 (500吨/年 I-line/KrF/ArF) provides multi-year growth. 56条12寸+23条8寸产线 baseline demand. Sector (电子化学品) neutral but benefits from semiconductor material rotation."
+        },
+        {
+          "date": "2026-06-19",
+          "price": 105.8,
+          "change_pct": 12.6,
+          "action": "HOLD",
+          "note": "PnL +12.60% (as of 6/18 close ¥105.80). 10 days held — time stop passed (PnL ≫ 3%). 0 risk factors. KrF批量销售+ArF浸没式订单 thesis intact. 5.8亿光刻胶项目 (500吨/年 I-line/KrF/ArF) provides multi-year growth visibility. 56条12寸+23条8寸产线 baseline demand. Stop at breakeven ¥93.96 provides 11.2% buffer. No enriched_candidates data for today — using last available price."
+        },
+        {
+          "date": "2026-06-22",
+          "price": 109.11,
+          "change_pct": 16.12,
+          "action": "HOLD",
+          "note": "PnL +16.12%, 0 risk factors. Photoresist国产替代 thesis (KrF批量+ArF浸没式+5.8亿光刻胶项目) intact. Stop at breakeven 93.96 provides 13.9% buffer. 13 days held, time stop passed easily."
+        },
+        {
+          "date": "2026-06-23",
+          "price": 105.7,
+          "change_pct": 12.49,
+          "action": "HOLD",
+          "note": "0 risk factors. Photoresist国产替代 thesis (KrF批量+ArF浸没式+5.8亿光刻胶项目) structural, not cyclical. Stop at breakeven 93.96 provides 11.1% buffer. Today -3.13% normal in weak tape. 14 days held, time stop easily passed."
+        },
+        {
+          "date": "2026-06-24",
+          "price": 113.5,
+          "change_pct": 20.8,
+          "action": "RAISE_STOP",
+          "note": "PnL +20.80% crosses Rule 5 +20% trigger. Mechanical stop-raise to +10% of entry (93.96 × 1.10 = 103.36). Today +7.38% with 5.4× normal volume shows institutional accumulation. KrF光刻胶批量+ArF浸没式+5.8亿光刻胶项目 thesis stronger than ever. 0 risk factors. Lock in +10% floor while giving 8.9% breathing room."
+        },
+        {
+          "date": "2026-06-24",
+          "price": 114.41,
+          "change_pct": 21.76,
+          "action": "HOLD",
+          "note": "+21.76% PnL. Today +8.24% with 7.85× normal volume — institutional accumulation confirmed. 0 risk factors. KrF光刻胶批量+ArF浸没式+5.8亿光刻胶项目, 12寸晶圆产线市占率超80%, 中芯国际大客户. Stop already raised to +10% (103.36) provides 9.7% buffer. 15 days held. Structural thesis intact."
+        },
+        {
+          "date": "2026-06-25",
+          "price": 113.58,
+          "change_pct": 20.88,
+          "action": "HOLD",
+          "note": "PnL +20.88%. Thesis strengthening: Japan photoresist giants (TOK/JSR/Shin-Etsu/Fujifilm) have effectively halted ArF/EUV shipments to China — structural multi-year catalyst for domestic substitution. KrF批量供应+ArF浸没式开发+蚀刻液/电镀液/研磨液 full product line, 0 risk factors. Today -0.73% on 7.3× vol is healthy digestion post 6/24 explosion. Stop at ¥103.36 locks in +10% with 9.00% buffer."
+        },
+        {
+          "date": "2026-06-26",
+          "price": 116.76,
+          "change_pct": 24.27,
+          "action": "HOLD",
+          "note": "Portfolio's strongest relative strength today: +2.80% in -2-4% tape on 7.9× volume = institutional accumulation. Japan photoresist cutoff (TOK/JSR/Shin-Etsu/Fujifilm formally halted ArF/EUV to China 6/22) is multi-year structural catalyst immune to single-day US semi selloff. 0 risk factors. Stop 103.36 (+10% guaranteed) with 11.5% buffer. Core hold."
+        },
+        {
+          "date": "2026-06-29",
+          "price": 120.6,
+          "change_pct": 28.35,
+          "action": "HOLD",
+          "note": "+28.36% winner, thesis intact. Japan photoresist cutoff structural catalyst. 0 risk factors. Today +3.29% on 8.5× normal volume — institutional accumulation. Stop ¥103.36 locks in +10% guaranteed. 21 days held but Rule 5 time stop not triggered (gain >> 3%). dist_ma5 10.9% extended but acceptable for existing winner."
+        },
+        {
+          "date": "2026-06-29",
+          "price": 128.77,
+          "change_pct": 37.05,
+          "action": "RAISE_STOP",
+          "note": "+37.05% winner. Japan photoresist cutoff structural catalyst intact. Today +10.29% on 12.6× volume — institutional accumulation. 0 risk factors. Sector 电子化学品Ⅱ #4 hot. Raising trailing stop to -10% from current per Rule 5 trailing discipline."
+        },
+        {
+          "date": "2026-06-30",
+          "price": 128.58,
+          "change_pct": 36.85,
+          "action": "HOLD",
+          "note": "+36.84% winner. Japan photoresist cutoff structural catalyst intact. 0 risk factors. Today -0.15% mild profit-taking on 7.2× volume. Trailing stop ¥115.90 locks in +23.4%. MA extended but Rule 2b applies to entries, not winners. Sector 电子化学品Ⅱ aligns with semiconductor boom."
+        },
+        {
+          "date": "2026-06-30",
+          "price": 131.5,
+          "change_pct": 39.95,
+          "action": "RAISE_STOP",
+          "note": "+39.95% monster winner. Japan photoresist cutoff structural catalyst intact. 0 risk factors. Tightening trailing stop to -10% from current per Rule 5, locking in +25.9% guaranteed while thesis runs. Sector 电子化学品Ⅱ aligned with semiconductor boom. MA extended but Rule 2b applies to entries not winners."
+        },
+        {
+          "date": "2026-07-01",
+          "price": 129.35,
+          "change_pct": 37.66,
+          "action": "RAISE_STOP",
+          "note": "+37.68% monster winner. Japan photoresist cutoff structural catalyst intact. 0 risk factors. Today -1.63% mild profit-taking on 9.8× volume. Today's high ¥136.98 → trail stop to -10% = ¥123.28, locking in +31.2%. 近20家半导体企业7月1日起涨价 adds near-term support."
+        }
+      ],
+      "exitDate": null,
+      "exitPrice": null,
+      "exitReason": null,
+      "returnPct": null,
+      "holdingDays": null,
+      "lessonLearned": null,
+      "createdAt": "2026-06-09T15:39:26.780692+08:00",
+      "updatedAt": "2026-07-01T12:15:39.903114+08:00",
+      "trackerVersion": "2.1"
+    },
+    "300438": {
+      "code": "300438",
+      "name": "鹏辉能源",
+      "status": "active",
+      "thesis": "储能+锂电池双赛道龙头。Q1业绩超预期(净利+819%)，合同负债14亿(+70%)在手订单爆发。今日锂电池板块集体异动(储能签单突破180GWh)。中信建投买入评级，预测26-28年净利CAGR 50%+。6家机构覆盖。near MA5支撑(-0.8%)，RPS120 94.45%甜点区。",
+      "entryDate": "2026-06-30",
+      "entryPrice": 82.3,
+      "targetPrice": 107.0,
+      "stopLoss": 78.19,
+      "currentStop": 78.19,
+      "allocation_pct": 5.0,
+      "shares": 400,
+      "allocatedCapital": 32920.0,
+      "rating": 2,
+      "rps120": 94.45,
+      "sector": "电池",
+      "catalysts": [],
+      "sourceWatchlist": "2026-06-30",
+      "history": [
+        {
+          "date": "2026-06-30",
+          "price": 82.3,
+          "change_pct": 0,
+          "action": "OPEN",
+          "note": "LLM开仓 鹏辉能源"
+        },
+        {
+          "date": "2026-07-01",
+          "price": 81.44,
+          "change_pct": -1.04,
+          "action": "HOLD",
+          "note": "-1.04% PnL does NOT trigger Rule 5 (-3% threshold). However, today's intraday action is alarming: hit ¥92.32 (24-month high) then reversed to ¥75.47 low (~18% swing) on 6.5× normal volume — institutional distribution. 碳酸锂期货暴跌7% sector headwind. Stop at ¥78.19 (3.99% away) in WATCH zone. Tight leash — cut immediately if -3% breached."
+        }
+      ],
+      "exitDate": null,
+      "exitPrice": null,
+      "exitReason": null,
+      "returnPct": null,
+      "holdingDays": null,
+      "lessonLearned": null,
+      "createdAt": "2026-06-30T15:39:03.385776+08:00",
+      "updatedAt": "2026-07-01T12:15:39.905360+08:00",
+      "trackerVersion": "2.1"
+    },
+    "688401": {
+      "code": "688401",
+      "name": "路维光电",
+      "status": "active",
+      "thesis": "掩膜版龙头，40nm突破+28nm展示。厦门20亿项目设备搬入，2026年中试产。0风险，营收+37%，净利+41%。半导体材料板块走强。",
+      "entryDate": "2026-06-09",
+      "entryPrice": 72.58,
+      "targetPrice": 92.0,
+      "stopLoss": 68.95,
+      "currentStop": 93.51,
+      "allocation_pct": 3.75,
+      "shares": 200,
+      "allocatedCapital": 14516.0,
+      "rating": 2,
+      "rps120": 85.54,
+      "sector": "半导体材料",
+      "catalysts": [],
+      "sourceWatchlist": "2026-06-09",
+      "history": [
+        {
+          "date": "2026-06-09",
+          "price": 72.58,
+          "change_pct": 0,
+          "action": "OPEN",
+          "note": "LLM开仓 路维光电"
+        },
+        {
+          "date": "2026-06-10",
+          "price": 73.35,
+          "change_pct": 1.06,
+          "action": "HOLD",
+          "note": "+1.06% from entry, +2.09% today. 掩膜版龙头 thesis intact. MA distances healthy. 0 risk. Consolidating near MA5/MA10."
+        },
+        {
+          "date": "2026-06-11",
+          "price": 78.77,
+          "change_pct": 8.53,
+          "action": "HOLD",
+          "note": "Strong runner +8.53% in 2 days. +8.29% today with 8.65x MAVOL30 volume — massive institutional accumulation. 掩膜版 thesis strengthening: 40nm→28nm→14nm roadmap, Xiamen ¥20B project equipment move-in completed, mid-2026 trial production. 0 risk factors. Sector (半导体) adjacent to hot sectors. Approaching +10% threshold (¥79.84) — same contingent stop-raise as 上海新阳."
+        },
+        {
+          "date": "2026-06-12",
+          "price": 75.98,
+          "change_pct": 4.68,
+          "action": "HOLD",
+          "note": "PnL +4.7%, approaching +10% stop-raise threshold (¥79.84). Today -3.54% with 8.74× MAVOL30 on intraday reversal — distribution pattern but less severe than 上海新阳. Sector (半导体材料) fading from hot to neutral, not yet cold. dist_ma5 at +6.3% is at chase limit — acceptable for existing position but no add. 0 risk factors. 掩膜版 thesis intact. If reaches ¥79.84, raise stop to breakeven ¥72.58 per Rule 5."
+        },
+        {
+          "date": "2026-06-15",
+          "price": 79.63,
+          "change_pct": 9.71,
+          "action": "HOLD",
+          "note": "PnL +9.71%, verge of +10% stop-raise threshold (79.84). Today +4.80%. Sector (半导体材料) warm, benefiting from semicon rally. 0 risk factors. dist_ma5 at 6.2% is at chase limit for existing position — do NOT add. If price touches 79.84, mechanical stop-raise to breakeven 72.58 per Rule 5."
+        },
+        {
+          "date": "2026-06-16",
+          "price": 79.18,
+          "change_pct": 9.09,
+          "action": "HOLD",
+          "note": "PnL +9.09%, +10% trigger at 79.84 (within 1%). MA distances healthy (3.0/2.9/8.5%). 0 risk factors. 掩膜版 thesis intact. Volume 8.94x confirms institutional build. Monitor for mechanical stop-raise to 72.58."
+        },
+        {
+          "date": "2026-06-17",
+          "price": 83.05,
+          "change_pct": 14.43,
+          "action": "RAISE_STOP",
+          "note": "PnL +14.43% triggers Rule 5: raise stop to breakeven 72.58 from 68.95. Sector (半导体) #3 hot (+5.44%). G11掩膜版 global #2 (25.52% share). 厦门20亿项目设备搬入, 2026年中试产. 14nm半导体掩膜版 2026投建. 0 risk factors. MA distances healthy (3.0/2.9/8.5%). Volume 12.2x MAVOL30."
+        },
+        {
+          "date": "2026-06-18",
+          "price": 81.12,
+          "change_pct": 11.77,
+          "action": "HOLD",
+          "note": "PnL +11.77%, -2.32% today. 9 days held. Only position in today's top-5 sector (半导体 #4, +3.80%) — sector gravity tailwind. MA distances healthy (3.4/6.2/9.3%) — pullback is constructive, bringing price closer to support. 0 risk factors. 掩膜版 thesis: G11全球#2 (25.52% share), 厦门20亿项目设备搬入, 14nm掩膜版2026投建. Volume 9.82x MAVOL30."
+        },
+        {
+          "date": "2026-06-19",
+          "price": 81.12,
+          "change_pct": 11.77,
+          "action": "HOLD",
+          "note": "PnL +11.88%. Best sector alignment in portfolio — 半导体 is #4 hot sector (+3.84%). 10 days held — time stop passed (PnL ≫ 3%). MA distances healthy (3.4/6.2/9.3%) — pullback from ¥83.05 to ¥81.20 is constructive, bringing price closer to MA support. G11掩膜版 global #2 (25.52% share). 厦门20亿项目设备搬入. 0 risk factors. Stop at breakeven ¥72.58."
+        },
+        {
+          "date": "2026-06-22",
+          "price": 80.5,
+          "change_pct": 10.91,
+          "action": "HOLD",
+          "note": "PnL +10.91%. Best MA setup in portfolio: dist_ma5=0.1%, dist_ma10=4.4%, dist_ma20=6.2% — price sitting on MA5 support in healthy consolidation. G11掩膜版 global #2, 厦门20亿项目设备搬入, 14nm掩膜版2026投建. Stop at breakeven 72.58. 13 days held."
+        },
+        {
+          "date": "2026-06-23",
+          "price": 75.4,
+          "change_pct": 3.89,
+          "action": "HOLD",
+          "note": "G11掩膜版+厦门20亿项目 thesis intact. BUT stop proximity WATCH at 3.74% (75.40 vs 72.58 stop). Today -6.34% is sharp erosion. MA support held (price near MA5). Monitor closely — if opens weak tomorrow and approaches 73, consider proactive sell. Small position size limits absolute risk."
+        },
+        {
+          "date": "2026-06-24",
+          "price": 84.41,
+          "change_pct": 16.3,
+          "action": "HOLD",
+          "note": "+16.30% PnL. Today +11.95% with massive 15.82× normal volume bouncing off MA5 support (dist_ma5=0.1%) — single strongest volume signal in portfolio. Best MA setup across all holdings. G11掩膜版 global #2, 28nm已供货, 14nm计划2026投建, 厦门20亿项目设备搬入. Stop at breakeven 72.58 provides 14.0% buffer. 15 days held."
+        },
+        {
+          "date": "2026-06-25",
+          "price": 88.23,
+          "change_pct": 21.56,
+          "action": "RAISE_STOP",
+          "note": "PnL +21.56% crosses Rule 5 +20% threshold. Mechanical stop-raise to +10% of entry (72.58 × 1.10 = 79.84). Today +4.53% on 13.84× normal volume — second consecutive day of >13× volume, strongest accumulation signal in portfolio history. G11掩膜版 global #2, 28nm已供货, 厦门20亿项目设备搬入. Lock in +10% guaranteed profit."
+        },
+        {
+          "date": "2026-06-25",
+          "price": 89.2,
+          "change_pct": 22.9,
+          "action": "HOLD",
+          "note": "PnL +22.90%. Portfolio's strongest performer today: +5.67% on massive 20.1× vol — 3rd consecutive day of >13× volume. G11掩膜版 global #2, 28nm已供货, 14nm计划2026投建, 厦门¥20亿项目设备搬入(4/23)→年中试产 on track. Stop ¥79.84 (+10%) raised mechanically per Rule 5, provides 10.50% buffer. MA extended but acceptable for existing winner."
+        },
+        {
+          "date": "2026-06-26",
+          "price": 89.63,
+          "change_pct": 23.49,
+          "action": "HOLD",
+          "note": "+0.48% on 18.3× normal volume — 4th consecutive day >12× volume with flat/minor price movement = textbook institutional accumulation. G11掩膜版 global #2, 28nm supplying, 14nm planned for 2026, 厦门20亿 project on track. 0 risk factors. Stop 79.84 (+10% guaranteed) with 10.9% buffer."
+        },
+        {
+          "date": "2026-06-29",
+          "price": 88.62,
+          "change_pct": 22.1,
+          "action": "HOLD",
+          "note": "+22.10% winner, thesis intact. 28nm mask progressing, 厦门¥20亿 project on track. 0 risk factors. Today -1.13% on 15× normal volume — mild profit-taking after 4-day monster run. Stop ¥79.84 locks in +10% guaranteed. 21 days held. dist_ma5 6.3% at Rule 2b threshold but acceptable for existing winner."
+        },
+        {
+          "date": "2026-06-29",
+          "price": 94.56,
+          "change_pct": 30.28,
+          "action": "RAISE_STOP",
+          "note": "+30.28% winner. 掩膜版龙头 thesis intact. Today +5.50% on 23.7× volume — 5th consecutive day of >12× institutional accumulation. 0 risk factors. Sector 半导体 #5 hot. Raising trailing stop to -10% from current."
+        },
+        {
+          "date": "2026-06-30",
+          "price": 94.61,
+          "change_pct": 30.35,
+          "action": "HOLD",
+          "note": "+30.35% winner. 掩膜版龙头 thesis intact, 28nm progressing, 厦门20亿项目 on track. 0 risk factors. Today +0.05% flat on 15.5× volume — institutional accumulation. Trailing stop ¥85.10 locks in +17.3%. Sector 半导体 material aligns with top-5 tech cluster."
+        },
+        {
+          "date": "2026-06-30",
+          "price": 95.98,
+          "change_pct": 32.24,
+          "action": "RAISE_STOP",
+          "note": "+32.24% monster winner. 掩膜版龙头 thesis intact. 28nm progressing, 厦门20亿项目 on track. 0 risk factors. Raising trailing stop to -10% from current, locking in +19.0%. 半导体材料 sector aligned with top-5 tech. 24.8× normal volume today = continued institutional accumulation."
+        },
+        {
+          "date": "2026-07-01",
+          "price": 98.58,
+          "change_pct": 35.82,
+          "action": "RAISE_STOP",
+          "note": "+35.83% monster winner. 掩膜版龙头 thesis intact, 28nm progressing, 厦门20亿项目 on track. 0 risk factors. Today +2.71% on 19.9× volume — continued institutional accumulation. Hit ¥103.90 high. Trail stop to -10% = ¥93.51, locking in +28.8%. 近20家半导体企业涨价 catalyst supports sector."
+        }
+      ],
+      "exitDate": null,
+      "exitPrice": null,
+      "exitReason": null,
+      "returnPct": null,
+      "holdingDays": null,
+      "lessonLearned": null,
+      "createdAt": "2026-06-09T15:39:26.785471+08:00",
+      "updatedAt": "2026-07-01T12:15:39.909367+08:00",
+      "trackerVersion": "2.1"
+    }
+  },
+  "closed_positions": {
+    "002046": {
+      "code": "002046",
+      "name": "国机精工",
+      "status": "closed",
+      "entryDate": "2026-03-10",
+      "exitDate": "2026-03-12",
+      "entryPrice": 52.3,
+      "exitPrice": 50.04,
+      "returnPct": -4.32,
+      "holdingDays": 2,
+      "sector": "通用设备",
+      "lessonLearned": ""
+    },
+    "002121": {
+      "code": "002121",
+      "name": "科陆电子",
+      "status": "closed",
+      "entryDate": "2026-03-10",
+      "exitDate": "2026-03-26",
+      "entryPrice": 9.75,
+      "exitPrice": 8.23,
+      "returnPct": -15.59,
+      "holdingDays": 16,
+      "sector": "电网设备",
+      "lessonLearned": ""
+    },
+    "002436": {
+      "code": "002436",
+      "name": "兴森科技",
+      "status": "closed",
+      "entryDate": "2026-06-15",
+      "exitDate": "2026-06-23",
+      "entryPrice": 39.76,
+      "exitPrice": 48.5,
+      "returnPct": 21.98,
+      "holdingDays": 8,
+      "sector": "元件",
+      "lessonLearned": ""
+    },
+    "002595": {
+      "code": "002595",
+      "name": "豪迈科技",
+      "status": "closed",
+      "entryDate": "2026-03-10",
+      "exitDate": "2026-03-12",
+      "entryPrice": 95.53,
+      "exitPrice": 92.0,
+      "returnPct": -3.7,
+      "holdingDays": 2,
+      "sector": "专用设备",
+      "lessonLearned": ""
+    },
+    "002947": {
+      "code": "002947",
+      "name": "恒铭达",
+      "status": "closed",
+      "entryDate": "2026-06-30",
+      "exitDate": "2026-07-01",
+      "entryPrice": 77.88,
+      "exitPrice": 74.87,
+      "returnPct": -3.86,
+      "holdingDays": 1,
+      "sector": "消费电子",
+      "lessonLearned": ""
+    },
+    "300037": {
+      "code": "300037",
+      "name": "新宙邦",
+      "status": "closed",
+      "entryDate": "2026-06-12",
+      "exitDate": "2026-06-26",
+      "entryPrice": 74.65,
+      "exitPrice": 83.42,
+      "returnPct": 11.75,
+      "holdingDays": 14,
+      "sector": "电池",
+      "lessonLearned": ""
+    },
+    "300373": {
+      "code": "300373",
+      "name": "扬杰科技",
+      "status": "closed",
+      "entryDate": "2026-02-13",
+      "exitDate": "2026-03-03",
+      "entryPrice": 86.07,
+      "exitPrice": 79.0,
+      "returnPct": -8.21,
+      "holdingDays": 18,
+      "sector": "功率半导体",
+      "lessonLearned": "半导体涨价催化thesis需要验证业绩兑现周期。入场时RPS=88.4%合理但催化剂(MCU涨价)偏概念化，无明确业绩数据支撑。开仓后14天趋势持续恶化，说明入场时机不佳(02-13买入后连续回调)。教训：催化剂需更具体(如有明确涨价幅度/订单数据)，不能仅依赖行业趋势性判断。"
+    },
+    "300677": {
+      "code": "300677",
+      "name": "英科医疗",
+      "status": "closed",
+      "entryDate": "2026-04-20",
+      "exitDate": "2026-04-20",
+      "entryPrice": 54.2,
+      "exitPrice": 53.55,
+      "returnPct": -1.2,
+      "holdingDays": 0,
+      "sector": "医疗器械",
+      "lessonLearned": ""
+    },
+    "300684": {
+      "code": "300684",
+      "name": "中石科技",
+      "status": "closed",
+      "entryDate": "2026-02-10",
+      "exitDate": "2026-03-09",
+      "entryPrice": 55.39,
+      "exitPrice": 51.64,
+      "returnPct": -6.77,
+      "holdingDays": 27,
+      "sector": "散热材料",
+      "lessonLearned": ""
+    },
+    "301003": {
+      "code": "301003",
+      "name": "江苏博云",
+      "status": "closed",
+      "entryDate": "2026-04-20",
+      "exitDate": "2026-04-27",
+      "entryPrice": 52.05,
+      "exitPrice": 61.55,
+      "returnPct": 18.25,
+      "holdingDays": 7,
+      "sector": "塑料",
+      "lessonLearned": ""
+    },
+    "301216": {
+      "code": "301216",
+      "name": "万凯新材",
+      "status": "closed",
+      "entryDate": "2026-05-19",
+      "exitDate": "2026-05-20",
+      "entryPrice": 28.76,
+      "exitPrice": 28.8,
+      "returnPct": 0.14,
+      "holdingDays": 1,
+      "sector": "塑料",
+      "lessonLearned": ""
+    },
+    "600096": {
+      "code": "600096",
+      "name": "云天化",
+      "status": "closed",
+      "entryDate": "2026-02-26",
+      "exitDate": "2026-03-10",
+      "entryPrice": 44.05,
+      "exitPrice": 41.16,
+      "returnPct": -6.56,
+      "holdingDays": 12,
+      "sector": "磷化工",
+      "lessonLearned": ""
+    },
+    "600268": {
+      "code": "600268",
+      "name": "国电南自",
+      "status": "closed",
+      "entryDate": "2026-04-16",
+      "exitDate": "2026-04-24",
+      "entryPrice": 15.41,
+      "exitPrice": 15.06,
+      "returnPct": -2.27,
+      "holdingDays": 8,
+      "sector": "电网设备",
+      "lessonLearned": ""
+    },
+    "600295": {
+      "code": "600295",
+      "name": "鄂尔多斯",
+      "status": "closed",
+      "entryDate": "2026-04-16",
+      "exitDate": "2026-04-20",
+      "entryPrice": 15.0,
+      "exitPrice": 14.92,
+      "returnPct": -0.53,
+      "holdingDays": 4,
+      "sector": "冶钢原料",
+      "lessonLearned": ""
+    },
+    "600301": {
+      "code": "600301",
+      "name": "华锡有色",
+      "status": "closed",
+      "entryDate": "2026-05-22",
+      "exitDate": "2026-05-27",
+      "entryPrice": 54.25,
+      "exitPrice": 57.35,
+      "returnPct": 5.71,
+      "holdingDays": 5,
+      "sector": "有色金属",
+      "lessonLearned": ""
+    },
+    "600426": {
+      "code": "600426",
+      "name": "华鲁恒升",
+      "status": "closed",
+      "entryDate": "2026-04-07",
+      "exitDate": "2026-04-08",
+      "entryPrice": 35.55,
+      "exitPrice": 38.0,
+      "returnPct": 6.89,
+      "holdingDays": 1,
+      "sector": "基础化工",
+      "lessonLearned": ""
+    },
+    "600498": {
+      "code": "600498",
+      "name": "烽火通信",
+      "status": "closed",
+      "entryDate": "2026-04-16",
+      "exitDate": "2026-04-24",
+      "entryPrice": 47.96,
+      "exitPrice": 51.94,
+      "returnPct": 8.3,
+      "holdingDays": 8,
+      "sector": "通信设备",
+      "lessonLearned": ""
+    },
+    "600499": {
+      "code": "600499",
+      "name": "科达制造",
+      "status": "closed",
+      "entryDate": "2026-04-20",
+      "exitDate": "2026-04-20",
+      "entryPrice": 18.13,
+      "exitPrice": 17.68,
+      "returnPct": -2.48,
+      "holdingDays": 0,
+      "sector": "专用设备",
+      "lessonLearned": ""
+    },
+    "600988": {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "status": "closed",
+      "entryDate": "2026-02-03",
+      "exitDate": "2026-02-27",
+      "entryPrice": 39.78,
+      "exitPrice": 39.98,
+      "returnPct": 0.5,
+      "holdingDays": 24,
+      "sector": "黄金",
+      "lessonLearned": "黄金股波动率极高(PnL从-7.79%到+3.92%再到+0.50%),持仓24天无明显趋势方向。LEARNINGS已确认黄金股不适合趋势交易。此外当watchlist评级从BUY降至WATCH后应更早考虑退出,不应等到时间止损才行动。"
+    },
+    "601208": {
+      "code": "601208",
+      "name": "东材科技",
+      "status": "closed",
+      "entryDate": "2026-04-07",
+      "exitDate": "2026-04-08",
+      "entryPrice": 31.77,
+      "exitPrice": 33.12,
+      "returnPct": 4.25,
+      "holdingDays": 1,
+      "sector": "基础化工",
+      "lessonLearned": ""
+    },
+    "601615": {
+      "code": "601615",
+      "name": "明阳智能",
+      "status": "closed",
+      "entryDate": "2026-03-12",
+      "exitDate": "2026-03-26",
+      "entryPrice": 22.03,
+      "exitPrice": 17.41,
+      "returnPct": -20.97,
+      "holdingDays": 14,
+      "sector": "风电设备",
+      "lessonLearned": ""
+    },
+    "605167": {
+      "code": "605167",
+      "name": "利柏特",
+      "status": "closed",
+      "entryDate": "2026-04-07",
+      "exitDate": "2026-04-16",
+      "entryPrice": 16.38,
+      "exitPrice": 17.89,
+      "returnPct": 9.22,
+      "holdingDays": 9,
+      "sector": "建筑装饰",
+      "lessonLearned": ""
+    },
+    "688002": {
+      "code": "688002",
+      "name": "睿创微纳",
+      "status": "closed",
+      "entryDate": "2026-02-03",
+      "exitDate": "2026-03-04",
+      "entryPrice": 114.65,
+      "exitPrice": 109.19,
+      "returnPct": -4.76,
+      "holdingDays": 29,
+      "sector": "半导体设备",
+      "lessonLearned": "突破关键阻力位后未能守住(¥120→¥109)是趋势恶化信号。time_decay规则对趋势型标的(非事件驱动型)仍然适用。延期观察的前提是动能在恢复，而非在恶化。"
+    },
+    "688025": {
+      "code": "688025",
+      "name": "杰普特",
+      "status": "closed",
+      "entryDate": "2026-04-01",
+      "exitDate": "2026-04-02",
+      "entryPrice": 224.0,
+      "exitPrice": 232.9,
+      "returnPct": 3.97,
+      "holdingDays": 1,
+      "sector": "激光设备",
+      "lessonLearned": ""
+    },
+    "688037": {
+      "code": "688037",
+      "name": "芯源微",
+      "status": "closed",
+      "entryDate": "2026-04-08",
+      "exitDate": "2026-04-16",
+      "entryPrice": 177.36,
+      "exitPrice": 187.44,
+      "returnPct": 5.68,
+      "holdingDays": 8,
+      "sector": "电子/半导体设备",
+      "lessonLearned": ""
+    },
+    "688630": {
+      "code": "688630",
+      "name": "芯碁微装",
+      "status": "closed",
+      "entryDate": "2026-03-02",
+      "exitDate": "2026-03-03",
+      "entryPrice": 201.72,
+      "exitPrice": 186.6,
+      "returnPct": -7.5,
+      "holdingDays": 1,
+      "sector": "半导体设备",
+      "lessonLearned": "IV Rank极低(12.2%)时不应开新仓，尤其是已经涨了8%的标的。LEARNINGS#10(等回调)和#13(检查多日累计涨幅)的组合应用：即使催化再强(+1522%)，在市场波动率极低+短期涨幅已大的情况下入场，遭遇系统性回调的损失会很大。新规则：当IV Rank<15%且候选标的5日涨幅>6%时，一律WATCH等回调，不开仓。"
+    }
+  }
+}
