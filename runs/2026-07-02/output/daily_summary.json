@@ -1,0 +1,53 @@
+{
+  "date": "2026-07-02",
+  "actions": [
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "action": "SELL",
+      "price": 121.98,
+      "pnl_pct": 29.8,
+      "note": "Stop hit intraday. Trailing stop ¥123.28 breached (low ¥113.35, current ¥121.98). Sector (电子化学品Ⅱ) adjacent to semiconductor bottom-5. Volume 10.9× normal = heavy distribution. Lock in +29.8% gain."
+    },
+    {
+      "code": "688401",
+      "name": "路维光电",
+      "action": "SELL",
+      "price": 95.0,
+      "pnl_pct": 30.9,
+      "note": "Stop hit intraday. Trailing stop ¥93.51 breached (low ¥86.21, current ¥95.00). Sector 半导体材料 in parent sector 半导体 at bottom-2 (-4.85%). Volume 18.9× normal = extreme distribution. Lock in +30.9% gain."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 988002.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -1.2,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -11998.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 1.5026,
+    "up": 3226,
+    "down": 2147,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 135,
+    "limit_downs": 6,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 1.50:1, 0/3 major indices green, 135 limit-ups / 6 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Distribution day. All 4 major indices red (科创50 -4.61%, 创业板 -3.47%). Breadth 1.50:1 barely positive; 135涨停/6跌停. Clear tech→commodities rotation: semiconductors/communication/electronics collapsing, gold/precious metals surging. Both positions hit trailing stops intraday — selling out. 0/3 indices green blocks new entries. IV data unavailable. Cash is the right position."
+  }
+}

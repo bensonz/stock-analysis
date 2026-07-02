@@ -1,0 +1,82 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 304480,
+  "output_tokens": 7600,
+  "rounds": 4,
+  "duration_sec": 179.6,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月2日 市场大跌 原因 半导体暴跌",
+        "max_results": 5
+      },
+      "result_length": 3208
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "贵金属 黄金 大涨 2026年7月 原因",
+        "max_results": 5
+      },
+      "result_length": 2719
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体板块 大跌 2026年7月2日 利空",
+        "max_results": 5
+      },
+      "result_length": 3407
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月2日 科技股 暴跌 科创50 半导体 光刻机",
+        "max_results": 5
+      },
+      "result_length": 3232
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "上海新阳 300236 2026年7月 股价 新闻",
+        "max_results": 5
+      },
+      "result_length": 2341
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "query": "\"2026年7月2日\" A股 半导体 光刻机 通信 暴跌 板块 轮动",
+        "max_results": 5
+      },
+      "result_length": 2745
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "query": "路维光电 688401 掩膜版 2026年7月 半导体材料",
+        "max_results": 5
+      },
+      "result_length": 3231
+    }
+  ],
+  "fallback_used": false
+}

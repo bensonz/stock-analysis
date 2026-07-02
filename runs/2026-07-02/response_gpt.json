@@ -1,0 +1,183 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": 7.98,
+        "trend": "accelerating"
+      },
+      {
+        "name": "贵金属",
+        "5d_pct": 6.39,
+        "trend": "accelerating"
+      },
+      {
+        "name": "电机Ⅱ",
+        "5d_pct": 3.27,
+        "trend": "steady"
+      },
+      {
+        "name": "橡胶",
+        "5d_pct": 3.2,
+        "trend": "steady"
+      },
+      {
+        "name": "工程机械",
+        "5d_pct": 2.81,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "通信设备",
+        "5d_pct": -5.39,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": -4.85,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": -4.77,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "消费电子",
+        "5d_pct": -3.59,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": -3.05,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/2 positions in hot sectors — both positions in semiconductor-adjacent sectors being crushed",
+    "regime": "Clear tech-to-commodities rotation. Semiconductors/electronics getting de-risked aggressively, gold/resources catching inflows. Distribution day for tech."
+  },
+  "position_decisions": [
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "action": "SELL",
+      "reason": "Stop hit intraday. Trailing stop ¥123.28 breached (low ¥113.35, current ¥121.98). Sector (电子化学品Ⅱ) adjacent to semiconductor bottom-5. Volume 10.9× normal = heavy distribution. Lock in +29.8% gain.",
+      "sector_rank": "bottom 30% (adjacent to 半导体 -4.85%)",
+      "new_stop": null,
+      "pnl_pct": 29.8,
+      "days_held": 23,
+      "exit_price": 121.98
+    },
+    {
+      "code": "688401",
+      "name": "路维光电",
+      "action": "SELL",
+      "reason": "Stop hit intraday. Trailing stop ¥93.51 breached (low ¥86.21, current ¥95.00). Sector 半导体材料 in parent sector 半导体 at bottom-2 (-4.85%). Volume 18.9× normal = extreme distribution. Lock in +30.9% gain.",
+      "sector_rank": "bottom 5% (半导体 -4.85%)",
+      "new_stop": null,
+      "pnl_pct": 30.9,
+      "days_held": 23,
+      "exit_price": 95.0
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "002407",
+      "name": "多氟多",
+      "reason": "Rule 2b triple violation: dist_ma5_pct 12.2% (>6%), dist_ma10_pct 25.4% (>8%), dist_ma20_pct 41.5% (>12%). Extreme overextension.",
+      "rps120": 92.28
+    },
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "Rule 2b violation dist_ma10_pct 20.6% (>8%), dist_ma20_pct 31.7%. Sector 半导体 bottom 5 (Rule 1).",
+      "rps120": 92.3
+    },
+    {
+      "code": "300323",
+      "name": "华灿光电",
+      "reason": "Rule 2b violation: dist_ma5_pct 10.8% (>6%), dist_ma10_pct 22.8% (>8%). 光学光电子 sector not clearly top 30%.",
+      "rps120": 94.84
+    },
+    {
+      "code": "605111",
+      "name": "新洁能",
+      "reason": "Sector 半导体 bottom 5 at -4.85% (Rule 1). Yesterday -7% selloff with abnormal volume. dist_ma20_pct 26.2% extreme.",
+      "rps120": 94.01
+    },
+    {
+      "code": "688536",
+      "name": "思瑞浦",
+      "reason": "Sector 半导体 bottom 5 at -4.85% (Rule 1). dist_ma20_pct 11.4% approaching Rule 2b limit.",
+      "rps120": 94.13
+    },
+    {
+      "code": "688205",
+      "name": "德科立",
+      "reason": "Sector 通信设备 DEAD LAST at -5.39% (Rule 1 hard skip). Stock in downtrend: dist_ma20_pct -16.3%, RPS20 only 77.92.",
+      "rps120": 94.03
+    },
+    {
+      "code": "688390",
+      "name": "固德威",
+      "reason": "光伏设备 sector weak. Stock in freefall: dist_ma20_pct -22.4%, RPS20 only 80.63. Not a momentum play.",
+      "rps120": 92.7
+    },
+    {
+      "code": "688392",
+      "name": "骄成超声",
+      "reason": "Rule 2b triple violation: dist_ma5_pct 11.4% (>6%), dist_ma10_pct 25.9%, dist_ma20_pct 36.4%. No entry at any price.",
+      "rps120": 89.72
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Buy-gate rule (≥2/3 major indices green) correctly prevented entries on a distribution day. Breadth 1.50:1 barely passed but 0/3 indices green = no fresh risk.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "market-regime"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "When all major indices are red despite decent breadth, gains are concentrated in defensive/rotation sectors while momentum positions get crushed. Deploying capital here would be fighting the tape."
+    },
+    {
+      "text": "Trailing stops converted +30%+ gains into realized profits. Both 上海新阳 and 路维光电 had monster runs; the mechanical -10% trail from highs locked in the bulk of those gains before the semiconductor rout hit.",
+      "type": "heuristic",
+      "tags": [
+        "exit-rule",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "Trailing stops work especially well for momentum winners: they let the stock run while automatically tightening as the stock rises, creating an asymmetric payoff where most of the gain is protected."
+    },
+    {
+      "text": "Tech-to-commodities rotation is a regime shift signal. 科创50 -4.61% vs 贵金属 +6.39% on the same day is not noise. Next hot money likely flows to resources/cyclicals. Monitor gold, machinery, and chemical sectors for future entries when buy-gate clears.",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "market-regime"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h028",
+      "mechanism": "Late-cycle rotations from growth/tech to value/commodities often signal risk appetite contraction. Gold strength + tech weakness = classic defensive posture."
+    },
+    {
+      "text": "MA-distance rule (h027) continues filtering out dangerous entries. Multiple candidates with excellent RPS (多氟多 RPS120=92.3, 京仪装备 RPS120=92.3) were un-buyable due to extreme MA extensions. This rule would have prevented buying into the very stocks that got crushed today.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "Stocks trading 20%+ above MA10 have already priced in weeks of good news. Any disappointment or sector rotation triggers violent mean reversion, as seen across the semiconductor complex today."
+    }
+  ],
+  "market_summary": "Distribution day. All 4 major indices red (科创50 -4.61%, 创业板 -3.47%). Breadth 1.50:1 barely positive; 135涨停/6跌停. Clear tech→commodities rotation: semiconductors/communication/electronics collapsing, gold/precious metals surging. Both positions hit trailing stops intraday — selling out. 0/3 indices green blocks new entries. IV data unavailable. Cash is the right position.",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}

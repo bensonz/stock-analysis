@@ -1,0 +1,50 @@
+{
+  "date": "2026-07-02",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1782963424.0917928,
+      "errors": [],
+      "end": 1782963439.650281,
+      "duration_sec": 15.6
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 14969,
+      "tokens": {
+        "input_tokens": 304480,
+        "output_tokens": 7600
+      },
+      "rounds": 4,
+      "tool_calls_count": 7,
+      "duration_sec": 179.6,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1782963619.322981,
+      "actions": [
+        "SELL 300236",
+        "SELL 688401",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h083 (observation): Buy-gate rule (≥2/3 major indices green) correctly prevented entries on a distri...",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=35",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=32",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=27",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1782963619.57649,
+      "duration_sec": 0.3
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 195.5
+  }
+}
