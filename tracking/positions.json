@@ -1,21 +1,60 @@
 {
-  "lastUpdated": "2026-07-02T11:40:19.337425+08:00",
+  "lastUpdated": "2026-07-03T11:41:08.630770+08:00",
   "portfolio": {
     "startingCapital": 1000000,
     "totalEquity": 988002.0,
-    "cash": 988002.0,
-    "investedValue": 0.0,
+    "cash": 963223.0,
+    "investedValue": 24779.0,
     "unrealizedPnl": 0.0,
     "realizedPnl": -11998.0,
     "totalPnl": -11998.0,
     "totalReturnPct": -1.2,
-    "positionsUsed": 0,
+    "positionsUsed": 2,
     "positionsMax": 10,
-    "cashPct": 100.0,
+    "cashPct": 97.49,
     "dayPnl": 0.0,
     "minCashPct": 20,
     "minCashValue": 197600.4,
-    "deployableCash": 790401.6
+    "deployableCash": 765622.6
   },
-  "activePositions": []
+  "activePositions": [
+    {
+      "code": "002192",
+      "name": "融捷股份",
+      "entryDate": "2026-07-03",
+      "entryPrice": 92.09,
+      "currentPrice": 92.09,
+      "pnl_pct": 0.0,
+      "stopLoss": 87.49,
+      "currentStop": 87.49,
+      "targetPrice": 110.51,
+      "status": "active",
+      "sector": "能源金属",
+      "shares": 100,
+      "allocation_pct": 2.25,
+      "allocatedCapital": 9209.0,
+      "currentValue": 9209.0,
+      "unrealizedPnl": 0.0,
+      "weight_pct": 0.93
+    },
+    {
+      "code": "300438",
+      "name": "鹏辉能源",
+      "entryDate": "2026-07-03",
+      "entryPrice": 77.85,
+      "currentPrice": 77.85,
+      "pnl_pct": 0.0,
+      "stopLoss": 73.96,
+      "currentStop": 73.96,
+      "targetPrice": 93.42,
+      "status": "active",
+      "sector": "电池",
+      "shares": 200,
+      "allocation_pct": 2.25,
+      "allocatedCapital": 15570.0,
+      "currentValue": 15570.0,
+      "unrealizedPnl": 0.0,
+      "weight_pct": 1.58
+    }
+  ]
 }

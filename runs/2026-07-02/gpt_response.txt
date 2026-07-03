@@ -1,152 +1,166 @@
-Now let me synthesize everything into the research memo and final JSON.
+## Research Memo — 2026-07-02
 
 ---
 
-# Research Memo — 2026-07-02
+### 1. Market Regime: **PANIC — 硬性阻塞**
 
-## 1. Market Regime
+| 指标 | 数值 | 判断 |
+|------|------|------|
+| 上证指数 | -2.03% | 🔴 |
+| 深证成指 | -3.85% | 🔴 |
+| 创业板指 | -5.71% | 🔴 |
+| 科创50 | -7.70% | 🔴🔴 |
+| 涨跌比 | 2219:3162 (0.70:1) | 🔴 严重偏空 |
+| 涨停/跌停 | 158/44 | 跌停不多但盘面极弱 |
+| 涨跌分布 | 跌>4%: 775只，涨>4%: 391只 | 空头主导 |
 
-**Verdict: CAUTIOUS / DISTRIBUTION DAY — Do NOT open new positions.**
+**买入门禁检查 (全部FAIL):**
+- Up/Down ratio ≥ 1.5:1 → 0.70:1 ❌
+- ≥2/3 major indices green → 0/3 ❌
+- Breadth ≥ 1:1 → 0.70:1 ❌
 
-All four major indices are red: 上证指数 -0.9%, 深证成指 -2.09%, 创业板指 -3.47%, 科创50 -4.61%. This is the sharpest single-day tech drawdown in weeks.
+**系统硬性阻塞: `allow_new_positions: false`, `hard_block: true`, `sizing_multiplier: 0.0`**
 
-**Breadth read:** 3226 up / 2147 down = 1.50:1 (barely passes minimum). 135 涨停 vs 6 跌停. The breadth is not panicked (f10=6 only), but the distribution is telling: most gains clustered in r0_2 (1996 stocks up 0-2%), while r4_7+r7_10+r10 combined = 558 — decent but not euphoric. This is a commodity/value rotation, not a broad rally.
+IV sentiment 无数据，但这不是当前的主要矛盾。市场自身的恐慌程度足以说明问题。
 
-**Buy gate check: FAILED.**
-- Up/Down ≥ 1.5:1 → ✅ 1.50 (bare)
-- ≥2 major indices green → ❌ 0/3 green
-
-**This means `new_positions: []` is the correct answer today.** The entry_regime says `allow_new_positions: true` and `hard_block: false`, but the V2 framework's explicit buy gate (2/3 indices green) is not met. I'm overriding the regime signal with the stricter buy-gate rule.
-
-**IV context:** All IV data is unavailable ("无数据"). Not actionable. No sizing adjustment possible, but buy gate already blocks entries.
-
-**Macro drivers today:**
-- Fed hawkish signals overnight
-- Philadelphia Semiconductor Index down 6%+, cascading to A-share semiconductors
-- Gold surging to new highs — classic risk-off rotation
-- US-China diplomatic call positive but insufficient to counter tech selloff
-
----
-
-## 2. Sector Analysis
-
-**Rotation signal: CLEAR TECH-TO-COMMODITIES ROTATION**
-
-| Hot Sectors (Top 5) | 5d Pct | Cold Sectors (Bottom 5) | 5d Pct |
-|---|---|---|---|
-| 林业Ⅱ | +7.98% | 通信设备 | -5.39% |
-| 贵金属 | +6.39% | 半导体 | -4.85% |
-| 电机Ⅱ | +3.27% | 元件 | -4.77% |
-| 橡胶 | +3.20% | 消费电子 | -3.59% |
-| 工程机械 | +2.81% | 其他电子Ⅱ | -3.05% |
-
-Today's sector map is a mirror image of what we've seen for weeks: tech (semiconductors, communication, components, consumer electronics) is being de-risked aggressively, while gold/precious metals, machinery, and commodity-adjacent sectors are catching the rotation inflows.
-
-**Position sector alignment: 0/2 positions in hot sectors.**
-
-- 上海新阳: 电子化学品Ⅱ — adjacent to semiconductor/electronics, which are being sold off
-- 路维光电: 半导体材料 — semiconductor is literally bottom-2 at -4.85%
-
-This is the worst possible alignment: both positions are in the epicenter of today's selloff.
-
-**Regime:** Tech/AI leadership breaking down, resources/commodities rotating in. This is classic late-cycle rotation behavior. Whether it persists or is a one-day event is unclear, but the speed and breadth of the semiconductor selloff (科创50 -4.61%) suggests more than just profit-taking.
+**暴跌原因（来自web_fetch）：**
+6月30日收盘后，沪深交易所合计超60家半导体上市公司集中发布股票交易异常波动公告/风险提示。H1半导体板块涨幅+97.29%，设备细分+162.52%，板块市值从6.6万亿飙至14.14万亿。多数公司承认AI业务尚未商业化或处于研发阶段。摩根士丹利警告半导体价格动能逼近历史极值。今日北方华创跌停、富创精密-12%、京仪装备-8%。这是典型的"泡沫警示→集体出逃"模式。
 
 ---
 
-## 3. Position Review
+### 2. Sector Analysis
 
-### Position 1: 上海新阳 (300236) — **SELL**
+| 排名 | 热门板块 | 涨幅 | 逻辑 |
+|------|---------|------|------|
+| 1 | 林业Ⅱ | +7.9% | 防御/避险轮动，非趋势 |
+| 2 | 贵金属 | +5.49% | 避险流入，金价虽弱但A股黄金股补涨 |
+| 3 | 广告营销 | +2.67% | 低位反弹，非持续性 |
+| 4 | 纺织制造 | +2.55% | 出口/消费防御 |
+| 5 | 工程机械 | +2.01% | 逆周期基建预期 |
 
-| Metric | Value |
-|---|---|
-| Entry | ¥93.96 (2026-06-09, 23 days held) |
-| Trailing Stop | ¥123.28 |
-| Current Price | ¥121.98 |
-| Today Change | -3.21% |
-| Today Low | ¥113.35 |
-| Volume | 10.9× mavol30 |
-| PnL from entry | +29.8% |
+| 排名 | 冷门板块 | 跌幅 | 逻辑 |
+|------|---------|------|------|
+| 1 | 半导体 | -8.15% | 60+家公司风险提示，泡沫破裂 |
+| 2 | 通信设备 | -8.09% | AI概念联动暴跌 |
+| 3 | 元件 | -8.01% | 科技链全面回调 |
+| 4 | 其他电子Ⅱ | -6.62% | 泛科技出逃 |
+| 5 | 消费电子 | -6.44% | 需求担忧+板块联动 |
 
-**Decision: SELL — Stop triggered intraday.**
+**板块轮动信号：**
+今天是典型的"科技→防御"恐慌轮动。热门板块（林业/贵金属）并非趋势性走强，而是资金从半导体/AI逃出后的暂时停靠。这不是买入信号——这是在躲雨，不是在找新家。
 
-The trailing stop was set at ¥123.28 (-10% from ¥136.98 high). Today's low of ¥113.35 crashed through that stop decisively. Even at current ¥121.98, the stock is below the stop. The stop_proximity rule flags this as CRITICAL: "-1.07% below stop."
-
-Moreover, the sector (电子化学品Ⅱ) sits adjacent to semiconductors (-4.85%), communications (-5.39%), and components (-4.77%) — all bottom sectors. This is a classic "sector gravity" kill. The Japan photoresist/WF6 catalyst that drove this trade is being overwhelmed by the broader semiconductor selloff.
-
-Volume at 10.9× normal signals institutional distribution. The thesis may still be valid long-term, but the stop was hit and sector gravity is crushing. **Sell. Lock in ~+29.8% realized gain.**
-
-### Position 2: 路维光电 (688401) — **SELL**
-
-| Metric | Value |
-|---|---|
-| Entry | ¥72.58 (2026-06-09, 23 days held) |
-| Trailing Stop | ¥93.51 |
-| Current Price | ¥95.00 |
-| Today Change | -4.51% |
-| Today Low | ¥86.21 |
-| Volume | 18.9× mavol30 |
-| PnL from entry | +30.9% |
-
-**Decision: SELL — Stop triggered intraday.**
-
-The trailing stop was at ¥93.51. Today's low of ¥86.21 crashed through it by a wide margin. The stock recovered somewhat to ¥95.00 but sits only 1.57% above the stop. The stop_proximity rule is CRITICAL.
-
-Sector: 半导体材料. The parent sector (半导体) is the #2 worst performer at -4.85%. This is a sector-driven stop hit. Volume at 18.9× normal is extreme distribution.
-
-The 掩膜版 thesis remains excellent long-term (14nm in 2026, 厦门20亿 project, H2 price hikes of 30%), but today's price action says "get out now." We can always re-enter when the semiconductor sector stabilizes. **Sell. Lock in ~+30.9% realized gain.**
+**持仓板块对齐：** 0/0 持仓（全现金），无需对齐。
 
 ---
 
-## 4. New Entry Candidates — NONE
+### 3. Position Review
 
-Buy gate not cleared. 0/3 major indices green. Even if a stock looks perfect (and some do — see skip list), the framework says no new positions. Cash is a position.
-
-With 93.14% cash and only 2 positions being liquidated, we'll exit today at essentially 100% cash — exactly the right posture for a distribution day.
+**无活跃持仓。** 组合100%现金，累计实现亏损 -11,998 (-1.2%)。今日无需做出HOLD/SELL/RAISE_STOP决策。
 
 ---
 
-## 5. Skip List — Notable Candidates Considered but Rejected
+### 4. New Entry Candidates
 
-Several enriched candidates have strong individual setups but fail on regime or sector grounds:
+**今日不开新仓。** 系统硬性阻塞，regime = "panic"。即使有个别股票看起来诱人，也不应违抗市场。
 
-| Code | Name | Why Skip |
-|---|---|---|
-| 688401 | 路维光电 | Being SOLD (stop hit). Excellent thesis but sector collapse. |
-| 300236 | 上海新阳 | Being SOLD (stop hit). Excellent thesis but sector collapse. |
-| 002407 | 多氟多 | dist_ma5_pct 12.2% (Rule 2b violation, >6%), dist_ma10_pct 25.4% (>8%), extreme overextension. No entry regardless of sector. |
-| 688652 | 京仪装备 | dist_ma10_pct 20.6% (>8%), dist_ma20_pct 31.7% (>12%). Sector 半导体 in bottom 5. Double violation. |
-| 300323 | 华灿光电 | dist_ma5_pct 10.8%, dist_ma10_pct 22.8%. Sector 光学光电子 in range but MA distances disqualify. |
-| 605111 | 新洁能 | 半导体 sector in bottom 5 (-4.85%). Rule 1 violation. Plus yesterday -7% selloff with volume. |
-| 688536 | 思瑞浦 | 半导体 sector bottom 5. dist_ma20_pct 11.4% approaching Rule 2b limit. |
-| 688003 | 天准科技 | 自动化设备 not in top sectors. No current sector momentum. |
-| 300042 | 朗科科技 | 计算机设备 sector not in top 30%. RPS120 94.78% in extended zone without sector exception. |
-| 688205 | 德科立 | 通信设备 sector is BOTTOM 1 at -5.39%. Rule 1 hard skip. Stock itself -13.5% from MA10 (in downtrend). |
-| 688390 | 固德威 | 光伏设备 sector weak. dist_ma20_pct -22.4% — stock is in freefall. |
-| 688392 | 骄成超声 | dist_ma5_pct 11.4% (>6%), dist_ma10_pct 25.9% (>8%), dist_ma20_pct 36.4% (>12%). Triple Rule 2b violation. |
+但出于研究目的，我筛选了几个"如果市场好转可以优先考虑"的标的（仅分析，不买入）：
 
----
+**候选A：扬杰科技 (300373.SZ)**
+- 催化剂：7月1日起全系列产品涨价10-15%，年内第二次涨价。机构测算全年净利弹性+30-50%。SiC订单饱满。
+- 致命问题：**半导体板块今日-8.15%，排名垫底。** 板块在崩，个股再好也没用。Rule 1 → SKIP
+- 次要问题：dist_ma10_pct = 10.1% (>8%)，MA距离违规。dist_ma20_pct = 25.1% (>12%)
 
-## 6. Learnings
+**候选B：多氟多 (002407.SZ)**
+- 亮点：氟化工龙头，8天4板，业绩超预期(净利+480%)，RPS120=92.28%
+- 致命问题：dist_ma5_pct=12.2% (>6%), dist_ma10_pct=25.4% (>8%), dist_ma20_pct=41.5% (>12%) —— **三重MA距离违规，极端超买**
+- 板块"化学制品"不在top/bottom 5中，板块中性。
 
-1. **[h027 confirmed]** MA-distance discipline remains critical: multiple strong names (多氟多, 京仪装备, 华灿光电) are un-buyable despite good RPS because they're too far from support. This rule is doing real work.
+**候选C：新莱应材 (300260.SZ)**
+- 亮点：光刻机概念，近10日涨幅超95%股票，20cm涨停后继续强势
+- 致命问题：dist_ma5_pct=2.0% (OK), dist_ma10_pct=13.2% (>8%违规), dist_ma20_pct=29.9% (>12%)
+- 板块"通用设备"不在top/bottom 5中
 
-2. **[h019 confirmed]** Cold-sector stocks get crushed regardless of individual quality. 路维光电 and 上海新阳 are both fundamentally excellent but today's semiconductor rout proved sector gravity always wins.
-
-3. **[New]** The buy-gate rule (2/3 indices green) correctly prevented FOMO entries today. Without it, I might have been tempted by gold/precious metal stocks in hot sectors, but the overall market regime is distribution — wrong time to deploy fresh risk.
-
-4. **[New]** Trailing stops worked: both positions hit +30%+ before the stop was triggered. The mechanical -10% trail locked in substantial gains that would have evaporated if we'd "waited for the thesis to play out."
-
-5. **[Observation]** Tech-to-commodities rotation is accelerating. When 科创50 drops -4.61% while 贵金属 rises +6.39%, that's not noise — it's a regime shift signal. Next hot money may flow to resources/cyclicals, not semiconductors.
+**候选D：山东赫达 (002810.SZ)**
+- 亮点：业绩催化+回购，RPS120=91.81%, dist均OK (3.2%/4.6%/6.5%)
+- 问题：板块"化学制品"不在top 5也不在bottom 5，但整体市场regime硬性阻塞
+- **如果市场好转+板块确认走强，此股值得优先关注**
 
 ---
 
-## 7. Uncertainty Flags
+### 5. Skip List
 
-- **Is this a one-day tech flush or the start of a deeper correction?** The Philadelphia Semi Index 6%+ drop is significant, but A-share semis have been running hot for months. A 5-10% correction from highs would be healthy. I'd monitor the next 2-3 days for follow-through selling vs. stabilization.
+| 代码 | 名称 | 跳过原因 |
+|------|------|---------|
+| 300373 | 扬杰科技 | 半导体板块今日-8.15%垫底，Rule 1硬性排除。虽有涨价催化但板块重力碾压一切 |
+| 688536 | 思瑞浦 | 半导体板块垫底。8亮点+利润+577%，但板块崩盘中无能为力 |
+| 688652 | 京仪装备 | 半导体板块垫底。dist_ma10=20.6% (>8%), dist_ma20=31.7% (>12%)，双重MA违规 |
+| 605111 | 新洁能 | 半导体板块垫底。昨日-7%抛压，下游需求未见起色。dist_ma10=11.4%, dist_ma20=26.2% |
+| 002407 | 多氟多 | 三重MA距离违规(dist_ma5=12.2%/ma10=25.4%/ma20=41.5%)，极端超买不可追 |
+| 688392 | 骄成超声 | 三重MA距离违规(dist_ma5=11.4%/ma10=25.9%/ma20=36.4%) |
+| 002947 | 恒铭达 | 消费电子板块今日-6.44%垫底，Rule 1硬性排除。股价已跌破所有短期均线 |
+| 300323 | 华灿光电 | dist_ma5=10.8% (>6%)，三重MA距离严重违规。光学光电子板块方向不明 |
+| 688205 | 德科立 | 通信设备板块今日-8.09%倒数第二。股价已跌破MA5/MA10/MA20，完全破位 |
+| 688003 | 天准科技 | 市场regime硬性阻塞。dist_ma20=10.9%接近12%阈值。PE=200，无安全边际 |
+| 688372 | 伟测科技 | 半导体板块垫底。dist_ma10=9.3% (>8%)，MA距离违规 |
+| 300260 | 新莱应材 | 市场regime硬性阻塞。dist_ma10=13.2%, dist_ma20=29.9%，MA严重超买 |
+| 002185 | 华天科技 | 半导体板块垫底 |
+| 688378 | 奥来德 | 市场regime硬性阻塞。光学光电子板块不在top 5，方向不明 |
+| 688400 | 凌云光 | 专用设备板块不在top 5。近10日涨幅仅超3.6%股票，走弱信号 |
 
-- **IV data is completely unavailable.** Cannot gauge whether options market is pricing panic or calm. This reduces confidence in the "distribution day" call slightly, but the price action (4 indices red, top sectors rotating hard) speaks for itself.
+**核心结论：今日所有候选均被排除，原因层级如下：**
+1. **第一层（硬性）：市场regime panic，entry gate全部FAIL** → 所有股票
+2. **第二层（板块）：半导体/通信设备/消费电子在bottom 5** → 约40%的候选直接出局
+3. **第三层（MA距离）：大量股票dist_ma5>6%或dist_ma10>8%或dist_ma20>12%** → 约60%候选
+4. 即使通过以上三层的少数股票（如山东赫达、电光科技），在panic regime下也不应开仓
 
-- **Gold sector is hot (+6.39%) but not in our 66-stock strategy pool.** If the rotation persists, we may need to screen gold/precious metal names for future entries — but that requires the buy gate to clear first.
+---
+
+### 6. Learnings
+
+```json
+[
+  {
+    "text": "60+家半导体公司集体发布风险提示公告后次日板块暴跌-8.15%：当一个板块H1涨幅+97%后遭遇监管层协调的集体风险警示，是极强的卖出信号。这种'泡沫警示→集体出逃'模式在未来任何过热板块上都可能重演。",
+    "type": "heuristic",
+    "tags": ["sector", "exit-rule", "timing"],
+    "evidence_type": "supporting",
+    "related_hypothesis": "h019",
+    "mechanism": "监管协调的集体风险提示改变了市场叙事——从'AI需求无限'转为'多数公司尚无商业化产品'，触发机构集中减仓。当板块市值从6.6万亿飙至14.14万亿而基本面未同步时，任何裂痕都会引发踩踏。"
+  },
+  {
+    "text": "Entry regime硬性阻塞机制在今日验证了其价值：breadth 0.70:1 + 0/3指数收红 → hard_block。如果没有这个机制，AI可能会在'强势股回调即买入机会'的偏见下开仓半导体股票，今天就会承受-5%~-10%的单日亏损。",
+    "type": "signal",
+    "tags": ["entry-filter", "position-sizing"],
+    "evidence_type": "supporting",
+    "related_hypothesis": "h013",
+    "mechanism": "系统性恐慌日中，个股alpha完全被beta碾压。即使是最强的股票（如扬杰科技有涨价催化）也无法对抗板块-8%的下跌。买入门禁的breadth+指数双重要求确保只在市场'涨潮'时下水。"
+  },
+  {
+    "text": "今日防御板块（贵金属+5.49%、林业+7.9%）的上涨属于恐慌轮动而非趋势启动。这些板块缺乏持续催化剂，不应在次日追入。在panic regime中，'热门板块'可能是假阳性——资金在找避难所，不是在新方向建仓。",
+    "type": "observation",
+    "tags": ["sector", "timing"],
+    "evidence_type": "supporting",
+    "mechanism": "恐慌日的板块排名反映的是资金逃离方向而非流入方向。林业+7.9%可能只是少数资金轮动+低基数效应，缺乏持续性逻辑支撑。真正判断板块趋势需要看3-5天连续表现，而非单日数据。"
+  },
+  {
+    "text": "今天策略池70只股票中约40%在半导体/通信设备/消费电子等崩盘板块中——这些板块恰恰是过去3个月涨幅最大的。'买强不买弱'在板块过热后反转时变成了'越强越危险'。需要增加'板块过热警告'信号：当某板块60日涨幅>50%且出现集体风险提示时，应提前减仓该板块所有持仓。",
+    "type": "rule",
+    "tags": ["sector", "exit-rule"],
+    "evidence_type": "supporting",
+    "mechanism": "板块在极端涨幅后，风险回报比急剧恶化。即使基本面不变，获利盘了结+监管关注+媒体质疑的组合就足以触发20%+的回调。这应该在板块层面设置预警阈值。"
+  }
+]
+```
+
+---
+
+### 7. Uncertainty Flags
+
+1. **贵金属板块的持续性不确定：** 今日贵金属+5.49%领涨，但国际金价过去半年从5598跌至~4000美元（-28%）。A股黄金股的上涨与金价走势背离，可能是资金短期避险而非基本面驱动。我不确定这个板块能否持续走强。
+
+2. **半导体回调深度不确定：** 60+家公司风险提示引发的暴跌是一次性出清还是持续回调的开始？H1涨幅+97%的板块，回调20-30%也完全正常。目前无法判断底部在哪里。
+
+3. **明天是否会有政策托底？** 科创50单日-7.7%可能触发监管关注。但我不会据此预测——market timing靠政策猜测是最危险的。
 
 ---
 
@@ -156,132 +170,120 @@ Several enriched candidates have strong individual setups but fail on regime or 
 {
   "sector_analysis": {
     "hot_sectors": [
-      {"name": "林业Ⅱ", "5d_pct": 7.98, "trend": "accelerating"},
-      {"name": "贵金属", "5d_pct": 6.39, "trend": "accelerating"},
-      {"name": "电机Ⅱ", "5d_pct": 3.27, "trend": "steady"},
-      {"name": "橡胶", "5d_pct": 3.2, "trend": "steady"},
-      {"name": "工程机械", "5d_pct": 2.81, "trend": "steady"}
+      {"name": "林业Ⅱ", "5d_pct": 7.9, "trend": "defensive_rotation"},
+      {"name": "贵金属", "5d_pct": 5.49, "trend": "safe_haven_flow"},
+      {"name": "广告营销", "5d_pct": 2.67, "trend": "low_base_bounce"},
+      {"name": "纺织制造", "5d_pct": 2.55, "trend": "defensive"},
+      {"name": "工程机械", "5d_pct": 2.01, "trend": "counter_cyclical"}
     ],
     "cold_sectors": [
-      {"name": "通信设备", "5d_pct": -5.39, "trend": "deteriorating"},
-      {"name": "半导体", "5d_pct": -4.85, "trend": "deteriorating"},
-      {"name": "元件", "5d_pct": -4.77, "trend": "deteriorating"},
-      {"name": "消费电子", "5d_pct": -3.59, "trend": "deteriorating"},
-      {"name": "其他电子Ⅱ", "5d_pct": -3.05, "trend": "deteriorating"}
+      {"name": "半导体", "5d_pct": -8.15, "trend": "bubble_bursting"},
+      {"name": "通信设备", "5d_pct": -8.09, "trend": "panic_selloff"},
+      {"name": "元件", "5d_pct": -8.01, "trend": "tech_rout"},
+      {"name": "其他电子Ⅱ", "5d_pct": -6.62, "trend": "sector_rotation_out"},
+      {"name": "消费电子", "5d_pct": -6.44, "trend": "demand_fear"}
     ],
-    "position_alignment": "0/2 positions in hot sectors — both positions in semiconductor-adjacent sectors being crushed",
-    "regime": "Clear tech-to-commodities rotation. Semiconductors/electronics getting de-risked aggressively, gold/resources catching inflows. Distribution day for tech."
+    "position_alignment": "0/0 positions — 100% cash",
+    "regime": "PANIC: 60+半导体公司集体风险提示引发泡沫破裂，科创50-7.7%，北方华创跌停。资金从AI/半导体全面出逃至防御板块（贵金属/林业）。这不是轮动，是踩踏。"
   },
-  "position_decisions": [
-    {
-      "code": "300236",
-      "name": "上海新阳",
-      "action": "SELL",
-      "reason": "Stop hit intraday. Trailing stop ¥123.28 breached (low ¥113.35, current ¥121.98). Sector (电子化学品Ⅱ) adjacent to semiconductor bottom-5. Volume 10.9× normal = heavy distribution. Lock in +29.8% gain.",
-      "sector_rank": "bottom 30% (adjacent to 半导体 -4.85%)",
-      "new_stop": null,
-      "pnl_pct": 29.8,
-      "days_held": 23,
-      "exit_price": 121.98
-    },
-    {
-      "code": "688401",
-      "name": "路维光电",
-      "action": "SELL",
-      "reason": "Stop hit intraday. Trailing stop ¥93.51 breached (low ¥86.21, current ¥95.00). Sector 半导体材料 in parent sector 半导体 at bottom-2 (-4.85%). Volume 18.9× normal = extreme distribution. Lock in +30.9% gain.",
-      "sector_rank": "bottom 5% (半导体 -4.85%)",
-      "new_stop": null,
-      "pnl_pct": 30.9,
-      "days_held": 23,
-      "exit_price": 95.0
-    }
-  ],
+  "position_decisions": [],
   "new_positions": [],
   "skip_list": [
     {
-      "code": "002407",
-      "name": "多氟多",
-      "reason": "Rule 2b triple violation: dist_ma5_pct 12.2% (>6%), dist_ma10_pct 25.4% (>8%), dist_ma20_pct 41.5% (>12%). Extreme overextension.",
-      "rps120": 92.28
-    },
-    {
-      "code": "688652",
-      "name": "京仪装备",
-      "reason": "Rule 2b violation dist_ma10_pct 20.6% (>8%), dist_ma20_pct 31.7%. Sector 半导体 bottom 5 (Rule 1).",
-      "rps120": 92.3
-    },
-    {
-      "code": "300323",
-      "name": "华灿光电",
-      "reason": "Rule 2b violation: dist_ma5_pct 10.8% (>6%), dist_ma10_pct 22.8% (>8%). 光学光电子 sector not clearly top 30%.",
-      "rps120": 94.84
-    },
-    {
-      "code": "605111",
-      "name": "新洁能",
-      "reason": "Sector 半导体 bottom 5 at -4.85% (Rule 1). Yesterday -7% selloff with abnormal volume. dist_ma20_pct 26.2% extreme.",
-      "rps120": 94.01
+      "code": "300373",
+      "name": "扬杰科技",
+      "reason": "半导体板块今日-8.15%垫底，Rule 1硬性排除。虽有7/1涨价10-15%催化+SiC订单饱满，但板块重力碾压一切。dist_ma10=10.1% (>8%违规)",
+      "rps120": 90.69
     },
     {
       "code": "688536",
       "name": "思瑞浦",
-      "reason": "Sector 半导体 bottom 5 at -4.85% (Rule 1). dist_ma20_pct 11.4% approaching Rule 2b limit.",
-      "rps120": 94.13
+      "reason": "半导体板块垫底(-8.15%)。8亮点+利润+577%+公募11%，基本面极佳但板块崩盘中无能为力",
+      "rps120": 96.99
+    },
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "半导体板块垫底。dist_ma10=20.6% (>8%), dist_ma20=31.7% (>12%)，双重MA违规。今日盘中-8%",
+      "rps120": 92.3
+    },
+    {
+      "code": "002407",
+      "name": "多氟多",
+      "reason": "三重MA距离违规：dist_ma5=12.2%, dist_ma10=25.4%, dist_ma20=41.5%。8天4板后极端超买，即使板块中性也不能追",
+      "rps120": 92.28
+    },
+    {
+      "code": "605111",
+      "name": "新洁能",
+      "reason": "半导体板块垫底。昨日-7%抛压(成交额2.2倍均量)，下游需求未见起色。dist_ma10=11.4%, dist_ma20=26.2%",
+      "rps120": 94.01
+    },
+    {
+      "code": "002947",
+      "name": "恒铭达",
+      "reason": "消费电子板块今日-6.44%垫底，Rule 1硬性排除。股价已跌破MA5/MA10/MA20全面走弱",
+      "rps120": 91.0
     },
     {
       "code": "688205",
       "name": "德科立",
-      "reason": "Sector 通信设备 DEAD LAST at -5.39% (Rule 1 hard skip). Stock in downtrend: dist_ma20_pct -16.3%, RPS20 only 77.92.",
+      "reason": "通信设备板块-8.09%倒数第二。股价跌破所有均线，PE=380，无安全边际",
       "rps120": 94.03
     },
     {
-      "code": "688390",
-      "name": "固德威",
-      "reason": "光伏设备 sector weak. Stock in freefall: dist_ma20_pct -22.4%, RPS20 only 80.63. Not a momentum play.",
-      "rps120": 92.7
+      "code": "688372",
+      "name": "伟测科技",
+      "reason": "半导体板块垫底。dist_ma10=9.3% (>8%)，MA距离违规。昨日-4.52%抛压",
+      "rps120": 90.96
+    },
+    {
+      "code": "300323",
+      "name": "华灿光电",
+      "reason": "dist_ma5=10.8% (>6%), dist_ma10=22.8% (>8%), dist_ma20=25.8% (>12%)，三重MA距离严重违规。PE为负",
+      "rps120": 94.84
     },
     {
       "code": "688392",
       "name": "骄成超声",
-      "reason": "Rule 2b triple violation: dist_ma5_pct 11.4% (>6%), dist_ma10_pct 25.9%, dist_ma20_pct 36.4%. No entry at any price.",
+      "reason": "三重MA距离违规：dist_ma5=11.4%, dist_ma10=25.9%, dist_ma20=36.4%。并购催化已被极端超买透支",
       "rps120": 89.72
     }
   ],
   "new_learnings": [
     {
-      "text": "Buy-gate rule (≥2/3 major indices green) correctly prevented entries on a distribution day. Breadth 1.50:1 barely passed but 0/3 indices green = no fresh risk.",
-      "type": "rule",
-      "tags": ["entry-filter", "market-regime"],
-      "evidence_type": "supporting",
-      "mechanism": "When all major indices are red despite decent breadth, gains are concentrated in defensive/rotation sectors while momentum positions get crushed. Deploying capital here would be fighting the tape."
-    },
-    {
-      "text": "Trailing stops converted +30%+ gains into realized profits. Both 上海新阳 and 路维光电 had monster runs; the mechanical -10% trail from highs locked in the bulk of those gains before the semiconductor rout hit.",
+      "text": "60+家半导体公司集体发布风险提示公告后次日板块暴跌-8.15%：当一个板块H1涨幅+97%后遭遇监管层协调的集体风险警示，是极强的卖出信号。这种'泡沫警示→集体出逃'模式值得作为未来过热板块的预警模板。",
       "type": "heuristic",
-      "tags": ["exit-rule", "position-sizing"],
+      "tags": ["sector", "exit-rule", "timing"],
       "evidence_type": "supporting",
-      "related_hypothesis": "h023",
-      "mechanism": "Trailing stops work especially well for momentum winners: they let the stock run while automatically tightening as the stock rises, creating an asymmetric payoff where most of the gain is protected."
+      "related_hypothesis": "h019",
+      "mechanism": "监管协调的集体风险提示改变了市场叙事——从'AI需求无限'转为'多数公司尚无商业化产品'，触发机构集中减仓。当板块市值从6.6万亿飙至14.14万亿而基本面未同步时，任何裂痕都会引发踩踏。"
     },
     {
-      "text": "Tech-to-commodities rotation is a regime shift signal. 科创50 -4.61% vs 贵金属 +6.39% on the same day is not noise. Next hot money likely flows to resources/cyclicals. Monitor gold, machinery, and chemical sectors for future entries when buy-gate clears.",
+      "text": "Entry regime硬性阻塞机制今日验证了价值：breadth 0.70:1 + 0/3指数收红 → hard_block正确阻止了任何新开仓。如果没有这个机制，AI可能会在'强势股回调即买入'的偏见下开仓半导体股票，单日亏损可达-5%~-10%。",
       "type": "signal",
-      "tags": ["sector", "market-regime"],
+      "tags": ["entry-filter", "position-sizing"],
       "evidence_type": "supporting",
-      "related_hypothesis": "h028",
-      "mechanism": "Late-cycle rotations from growth/tech to value/commodities often signal risk appetite contraction. Gold strength + tech weakness = classic defensive posture."
+      "related_hypothesis": "h013",
+      "mechanism": "系统性恐慌日中，个股alpha完全被beta碾压。即使是最强的股票（如扬杰科技有涨价催化）也无法对抗板块-8%的下跌。买入门禁的breadth+指数双重要求确保只在市场'涨潮'时下水。"
     },
     {
-      "text": "MA-distance rule (h027) continues filtering out dangerous entries. Multiple candidates with excellent RPS (多氟多 RPS120=92.3, 京仪装备 RPS120=92.3) were un-buyable due to extreme MA extensions. This rule would have prevented buying into the very stocks that got crushed today.",
-      "type": "rule",
-      "tags": ["entry-filter", "timing"],
+      "text": "今日防御板块（贵金属+5.49%、林业+7.9%）的上涨属于恐慌轮动而非趋势启动。在panic regime中，'热门板块'可能是假阳性——资金在找避难所，不是在新方向建仓。不应在次日追入这些板块。",
+      "type": "observation",
+      "tags": ["sector", "timing"],
       "evidence_type": "supporting",
-      "related_hypothesis": "h027",
-      "mechanism": "Stocks trading 20%+ above MA10 have already priced in weeks of good news. Any disappointment or sector rotation triggers violent mean reversion, as seen across the semiconductor complex today."
+      "mechanism": "恐慌日的板块排名反映的是资金逃离方向而非流入方向。林业+7.9%可能只是少数资金轮动+低基数效应。判断板块趋势需看3-5天连续表现，而非单日数据。"
+    },
+    {
+      "text": "今日策略池70只股票中约40%在半导体/通信设备/消费电子等崩盘板块——这些正是过去3个月涨幅最大的板块。'买强不买弱'在板块过热后反转时变成了'越强越危险'。建议增加板块过热预警：当某板块60日涨幅>50%且出现集体风险提示时，提前减仓该板块所有持仓。",
+      "type": "rule",
+      "tags": ["sector", "exit-rule"],
+      "evidence_type": "supporting",
+      "mechanism": "板块在极端涨幅后，风险回报比急剧恶化。即使基本面不变，获利盘了结+监管关注+媒体质疑的组合足以触发20%+回调。这应在板块层面设置预警阈值。"
     }
   ],
-  "market_summary": "Distribution day. All 4 major indices red (科创50 -4.61%, 创业板 -3.47%). Breadth 1.50:1 barely positive; 135涨停/6跌停. Clear tech→commodities rotation: semiconductors/communication/electronics collapsing, gold/precious metals surging. Both positions hit trailing stops intraday — selling out. 0/3 indices green blocks new entries. IV data unavailable. Cash is the right position.",
+  "market_summary": "2026-07-02 PANIC: 60+家半导体公司集体风险提示引发AI/半导体泡沫破裂。科创50暴跌-7.70%，北方华创跌停。四大指数全绿(上证-2.03%/深证-3.85%/创业板-5.71%/科创50-7.70%)。涨跌比0.70:1，44跌停。资金全面撤出科技股涌入防御板块(贵金属+5.49%/林业+7.9%)。IV数据无。Entry regime硬性阻塞，100%现金是最优选择。等待breadth恢复至1.5:1以上+至少2个指数转正再考虑开仓。",
   "market_sentiment": "bearish",
-  "market_call": "谨慎"
+  "market_call": "恐慌"
 }
 ```

@@ -2,80 +2,60 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 304480,
-  "output_tokens": 7600,
-  "rounds": 4,
-  "duration_sec": 179.6,
+  "input_tokens": 222029,
+  "output_tokens": 7874,
+  "rounds": 3,
+  "duration_sec": 160.7,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年7月2日 市场大跌 原因 半导体暴跌",
+        "query": "A股 2026年7月2日 暴跌 原因 半导体 科创50",
         "max_results": 5
       },
-      "result_length": 3208
+      "result_length": 3244
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "贵金属 黄金 大涨 2026年7月 原因",
+        "query": "A股市场 2026年7月 热门板块 林业 贵金属",
         "max_results": 5
       },
-      "result_length": 2719
+      "result_length": 2676
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "半导体板块 大跌 2026年7月2日 利空",
+        "query": "半导体 涨价 2026年7月 扬杰科技 新洁能",
         "max_results": 5
       },
-      "result_length": 3407
+      "result_length": 3200
     },
     {
       "pass": "P1",
       "round": 2,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年7月2日 科技股 暴跌 科创50 半导体 光刻机",
-        "max_results": 5
+        "max_results": 5,
+        "query": "2026年7月 A股 恐慌 半导体风险提示 超60家 资金流出"
       },
-      "result_length": 3232
+      "result_length": 2831
     },
     {
       "pass": "P1",
       "round": 2,
       "tool": "web_search",
       "input": {
-        "query": "上海新阳 300236 2026年7月 股价 新闻",
-        "max_results": 5
+        "max_results": 5,
+        "query": "贵金属 黄金 2026年7月 避险 美联储 降息"
       },
-      "result_length": 2341
-    },
-    {
-      "pass": "P1",
-      "round": 3,
-      "tool": "web_search",
-      "input": {
-        "query": "\"2026年7月2日\" A股 半导体 光刻机 通信 暴跌 板块 轮动",
-        "max_results": 5
-      },
-      "result_length": 2745
-    },
-    {
-      "pass": "P1",
-      "round": 3,
-      "tool": "web_search",
-      "input": {
-        "query": "路维光电 688401 掩膜版 2026年7月 半导体材料",
-        "max_results": 5
-      },
-      "result_length": 3231
+      "result_length": 3217
     }
   ],
   "fallback_used": false

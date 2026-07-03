@@ -1,0 +1,69 @@
+# 每日研究报告 2026-07-03
+
+## 市场概览
+
+| 指数 | 收盘 | 涨跌幅 |
+|------|------|--------|
+| 上证指数 | 4056.78 | +0.69% |
+| 深证成指 | 15714.22 | +1.39% |
+| 创业板指 | 4080.57 | +1.58% |
+| 科创50 | 2008.07 | +1.05% |
+
+涨跌比: 3527涨 / 1855跌 / 5517总
+
+**热门板块**: 贵金属(+8.11%), 玻璃玻纤(+7.04%), 电机Ⅱ(+6.06%), 汽车零部件(+4.73%), 家电零部件Ⅱ(+4.65%)
+
+**冷门板块**: 林业Ⅱ(-8.06%), 广告营销(-4.62%), 电子化学品Ⅱ(-3.72%), 化学制品(-2.77%), 光学光电子(-2.65%)
+
+Rotation day: indices green (上证+0.69%, 深证+1.39%, 创业板+1.58%), breadth 1.90:1 with 114涨停. But under the surface, violent sector rotation — 贵金属+8.11% leading, semiconductor/optical/chemicals in bottom 5 after brutal 7/2 selloff (科创50 -7.7%). Money rotating from over-owned tech to gold/lithium/manufacturing. 碳酸锂+8.67% 5d driving lithium bids. 7月中报期临近, pricing shifting from 估值扩张 to 业绩验证. IV data unavailable — normal sizing. Recommended 2 small positions (6% total) in battery/lithium; semiconductor tracked but not bought due to sector gravity. 94% cash retained.
+
+## 策略池扫描
+
+扫描 **62** 只策略池股票
+(来源: cheesefortune_intersection)
+
+## 今日开仓
+
+### 1. 鹏辉能源 (300438) — BUY/small
+
+- **入场价**: ¥77.85
+- **止损**: ¥73.96
+- **目标**: ¥93.42
+- **RPS120**: 92.3%
+- **板块**: 电池 (estimated top 40% (锂电池板块今日拉升，不在bottom 5))
+
+固态电池+储能双概念，锂电池板块今日拉升，Q利润+819%，6机构预测>30%增长，MA20支撑附近
+
+### 2. 融捷股份 (002192) — BUY/small
+
+- **入场价**: ¥92.09
+- **止损**: ¥87.49
+- **目标**: ¥110.51
+- **RPS120**: 93.21%
+- **板块**: 能源金属 (estimated top 30% (锂矿走强，碳酸锂大涨))
+
+碳酸锂5天涨8.67%至16.3万/吨，锂矿板块走强，Q1净利+1288%，甲基卡锂矿产能释放
+
+## 跳过标的
+
+1. **华灿光电** (300323) (RPS 94.98%) — Sector 光学光电子 in bottom 5 — hard no-buy zone per Rule 1
+2. **南大光电** (300346) (RPS 92.7%) — Sector 电子化学品Ⅱ in bottom 5
+3. **多氟多** (002407) (RPS 92.05%) — Sector 化学制品 in bottom 5; also 跌停 per today's news
+4. **隆达股份** (688231) (RPS 93.09%) — dist_ma5_pct=12.1% > 6% — extreme short-term overextension (Rule 2b)
+5. **申菱环境** (301018) (RPS 91.54%) — dist_ma5=9.7% > 6%, dist_ma10=9.7% > 8% — chasing (Rule 2b)
+6. **京仪装备** (688652) (RPS 92.95%) — dist_ma10=10.3% > 8%, dist_ma20=23.3% > 12%; also -12.5% yesterday selloff
+7. **扬杰科技** (300373) (RPS 91.32%) — dist_ma20=15.0% > 12% (Rule 2b); great catalyst (涨价10-15%) but overextended + semiconductor sector rotation risk
+8. **思瑞浦** (688536) (RPS 94.02%) — Semiconductor sector under heavy distribution (科创50 -7.7% 7/2); passes all technical filters but sector gravity risk too high. Track for re-entry.
+9. **禾盛新材** (002290) (RPS 94.37%) — Sector (家电零部件Ⅱ) is #5 hot, but stock has 3 risks, PE=140, 10d 股价走弱, 跌停 history. Stock not keeping up with sector. Skip.
+10. **伟测科技** (688372) (RPS 90.59%) — Semiconductor sector rotation risk; technically passes filters otherwise
+
+## 今日研究结论
+
+- 新开仓: 2只
+- 跳过: 10只
+
+### 新教训
+- {'text': 'Sector rotation velocity is high — 光学光电子 and 电子化学品Ⅱ flipped from leaders to bottom 5 in ~2 weeks. When regime is rotation-not-trend, keep positions small (3% max each) and sector diversification matters more than stock selection.', 'type': 'observation', 'tags': ['sector', 'position-sizing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h019 (bottom-list sectors are hard no-buy zones)', 'mechanism': "Rotation speed is a function of how extended the prior trend was. After +86% H1 for 电子, mean-reversion pressure is massive. Bottom 5 sectors today were yesterday's leaders — sector gravity accelerates during rotation."}
+- {'text': 'MA-distance Rule 2b eliminated 8 of 30 candidates today (27%). Without it, 隆达股份(+12.1% from MA5), 申菱环境(+9.7%), 京仪装备(+23.3% from MA20) would have passed RPS/fundamental screens and been bought — right before sector rotation crushed them. Rule 2b is the single most protective filter today.', 'type': 'rule', 'tags': ['entry-filter', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h021, h027', 'mechanism': 'Overextended stocks have no cushion when the sector turns. MA distance > thresholds = all the good news is priced in and the next move is more likely mean-reversion than continuation.'}
+- {'text': 'Semiconductor selloff (科创50 -7.7% 7/2) with strong individual catalysts (扬杰科技涨价10-15%, 思瑞浦利润+577%) validates that sector gravity >> individual catalysts. When a sector enters distribution, even the best stocks get sold. Do not fight sector flows.', 'type': 'heuristic', 'tags': ['sector', 'entry-filter'], 'evidence_type': 'supporting', 'related_hypothesis': 'h019', 'mechanism': 'Institutional rotation is indiscriminate — they sell the sector basket, not individual names. The correlation within sectors spikes during rotation events, making stock-picking futile.'}
+- {'text': 'VCP data missing for all 30 enriched candidates — structural gap in the pipeline. Without VCP contraction patterns, we lose the strongest timing signal from backtesting (+7.7% avg 10d return for PREMIUM). Consider expanding VCP scanner coverage.', 'type': 'observation', 'tags': ['timing', 'entry-filter'], 'evidence_type': 'supporting', 'mechanism': 'VCP scanner likely covers a different stock universe than the cheese-fortune intersection pool. Without overlap, momentum entries lack the base-structure edge.'}

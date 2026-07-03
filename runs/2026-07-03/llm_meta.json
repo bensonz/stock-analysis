@@ -1,0 +1,112 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 304269,
+  "output_tokens": 13451,
+  "rounds": 4,
+  "duration_sec": 228.2,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 今日 热门板块 贵金属 玻璃玻纤 电机 2026年7月3日",
+        "max_results": 5
+      },
+      "result_length": 3131
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "贵金属板块 大涨原因 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 2708
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体 涨价 7月 2026 扬杰科技 芯联集成",
+        "max_results": 5
+      },
+      "result_length": 2686
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "汽车零部件 板块 电机 大涨 2026年7月3日 A股",
+        "max_results": 5
+      },
+      "result_length": 2888
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 市场 宏观 政策 2026年7月 上证指数",
+        "max_results": 5
+      },
+      "result_length": 3123
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "半导体板块 今日走势 2026年7月3日 涨跌 半导体设备"
+      },
+      "result_length": 3275
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "禾盛新材 002290 家电零部件 2026年7月 新闻"
+      },
+      "result_length": 1970
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "思瑞浦 688536 半导体 2026年7月 最新消息"
+      },
+      "result_length": 2315
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "鹏辉能源 300438 固态电池 锂电池 2026年7月 最新消息"
+      },
+      "result_length": 2990
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "融捷股份 002192 锂矿 碳酸锂 2026年7月 最新"
+      },
+      "result_length": 2823
+    }
+  ],
+  "fallback_used": false
+}

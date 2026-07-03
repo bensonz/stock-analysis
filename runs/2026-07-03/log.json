@@ -1,0 +1,131 @@
+{
+  "date": "2026-07-03",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1783049826.281423,
+      "errors": [],
+      "end": 1783049840.237477,
+      "duration_sec": 14.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 15667,
+      "tokens": {
+        "input_tokens": 304269,
+        "output_tokens": 13451
+      },
+      "rounds": 4,
+      "tool_calls_count": 10,
+      "duration_sec": 228.2,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1783050068.499394,
+      "actions": [
+        "SIZE THROTTLE 300438: 3% -> 2.25% (regime=strong)",
+        "SIZE THROTTLE 002192: 3% -> 2.25% (regime=strong)",
+        "OPEN 300438 @ 77.85",
+        "OPEN 002192 @ 92.09",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h084 (observation): Sector rotation velocity is high — 光学光电子 and 电子化学品Ⅱ flipped from leaders to bott...",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=86",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=25",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=87",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002192",
+                "name": "融捷股份",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 92.09,
+                "stopLoss": 87.49,
+                "distance_pct": 5.0,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "300438",
+                "name": "鹏辉能源",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 77.85,
+                "stopLoss": 73.96,
+                "distance_pct": 5.0,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1783050069.175906,
+      "duration_sec": 0.7
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 002192 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 300438 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 242.89999999999998
+  }
+}
