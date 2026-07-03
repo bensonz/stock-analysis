@@ -1,33 +1,33 @@
 {
-  "snapshot_time": "2026-07-03T11:41:09.175069+08:00",
+  "snapshot_time": "2026-07-03T15:44:10.330938+08:00",
   "snapshot_type": "post_run",
   "date": "2026-07-03",
   "portfolio_config": {
     "starting_capital": 1000000,
     "max_position_pct": 10,
     "max_positions": 10,
-    "min_cash_pct": 20,
+    "min_cash_pct": 0,
     "created": "2026-02-03",
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-07-03T11:41:08.630770+08:00",
+    "lastUpdated": "2026-07-03T15:44:09.765363+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 988002.0,
-      "cash": 963223.0,
-      "investedValue": 24779.0,
-      "unrealizedPnl": 0.0,
+      "totalEquity": 987686.0,
+      "cash": 917287.0,
+      "investedValue": 70399.0,
+      "unrealizedPnl": -316.0,
       "realizedPnl": -11998.0,
-      "totalPnl": -11998.0,
-      "totalReturnPct": -1.2,
-      "positionsUsed": 2,
+      "totalPnl": -12314.0,
+      "totalReturnPct": -1.23,
+      "positionsUsed": 3,
       "positionsMax": 10,
-      "cashPct": 97.49,
-      "dayPnl": 0.0,
-      "minCashPct": 20,
-      "minCashValue": 197600.4,
-      "deployableCash": 765622.6
+      "cashPct": 92.87,
+      "dayPnl": -288.0,
+      "minCashPct": 0,
+      "minCashValue": 0.0,
+      "deployableCash": 917287.0
     },
     "activePositions": [
       {
@@ -35,8 +35,8 @@
         "name": "融捷股份",
         "entryDate": "2026-07-03",
         "entryPrice": 92.09,
-        "currentPrice": 92.09,
-        "pnl_pct": 0.0,
+        "currentPrice": 91.59,
+        "pnl_pct": -0.54,
         "stopLoss": 87.49,
         "currentStop": 87.49,
         "targetPrice": 110.51,
@@ -45,8 +45,11 @@
         "shares": 100,
         "allocation_pct": 2.25,
         "allocatedCapital": 9209.0,
-        "currentValue": 9209.0,
-        "unrealizedPnl": 0.0,
+        "currentValue": 9159.0,
+        "unrealizedPnl": -50.0,
+        "volume": 289869,
+        "mavol30": 24999.57,
+        "volumeBelowMavol30": false,
         "weight_pct": 0.93
       },
       {
@@ -54,8 +57,8 @@
         "name": "鹏辉能源",
         "entryDate": "2026-07-03",
         "entryPrice": 77.85,
-        "currentPrice": 77.85,
-        "pnl_pct": 0.0,
+        "currentPrice": 76.52,
+        "pnl_pct": -1.71,
         "stopLoss": 73.96,
         "currentStop": 73.96,
         "targetPrice": 93.42,
@@ -64,9 +67,31 @@
         "shares": 200,
         "allocation_pct": 2.25,
         "allocatedCapital": 15570.0,
-        "currentValue": 15570.0,
+        "currentValue": 15304.0,
+        "unrealizedPnl": -266.0,
+        "volume": 228659,
+        "mavol30": 21438.37,
+        "volumeBelowMavol30": false,
+        "weight_pct": 1.55
+      },
+      {
+        "code": "601958",
+        "name": "金钼股份",
+        "entryDate": "2026-07-03",
+        "entryPrice": 25.52,
+        "currentPrice": 25.52,
+        "pnl_pct": 0.0,
+        "stopLoss": 24.24,
+        "currentStop": 24.24,
+        "targetPrice": 33.0,
+        "status": "active",
+        "sector": "小金属",
+        "shares": 1800,
+        "allocation_pct": 5.0,
+        "allocatedCapital": 45936.0,
+        "currentValue": 45936.0,
         "unrealizedPnl": 0.0,
-        "weight_pct": 1.58
+        "weight_pct": 4.65
       }
     ]
   },
@@ -96,6 +121,13 @@
           "change_pct": 0,
           "action": "OPEN",
           "note": "LLM开仓 融捷股份"
+        },
+        {
+          "date": "2026-07-03",
+          "price": 91.59,
+          "change_pct": -0.54,
+          "action": "HOLD",
+          "note": "Just opened today, thesis intact: 碳酸锂5天+8.67%至16.3万/吨, Q1净利+1288%, 甲基卡产能释放. PnL -0.54%, stop distance 4.48% — monitor but no action needed."
         }
       ],
       "exitDate": null,
@@ -105,7 +137,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-07-03T11:41:08.624555+08:00",
-      "updatedAt": "2026-07-03T11:41:08.624559+08:00",
+      "updatedAt": "2026-07-03T15:44:09.621723+08:00",
       "trackerVersion": "2.1"
     },
     "300438": {
@@ -133,6 +165,13 @@
           "change_pct": 0,
           "action": "OPEN",
           "note": "LLM开仓 鹏辉能源"
+        },
+        {
+          "date": "2026-07-03",
+          "price": 76.52,
+          "change_pct": -1.71,
+          "action": "HOLD",
+          "note": "Just opened today, PnL -1.71%. 电池板块今日有拉升(诺德股份涨停)但鹏辉逆势跌-2.76%, 个股弱于板块. Stop distance only 3.35% — tight leash. SELL if approaches 74.00."
         }
       ],
       "exitDate": null,
@@ -142,7 +181,44 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-07-03T11:41:08.618757+08:00",
-      "updatedAt": "2026-07-03T11:41:08.618762+08:00",
+      "updatedAt": "2026-07-03T15:44:09.636064+08:00",
+      "trackerVersion": "2.1"
+    },
+    "601958": {
+      "code": "601958",
+      "name": "金钼股份",
+      "status": "active",
+      "thesis": "钼价年内上涨(MW氧化钼$30.70/磅)+矿产资源法催化, 贵金属#1领涨带动有色金属全板块. Q1营收+26.67%/净利+32.99%, PE仅24, 5机构买入评级. 股价从30.47回调至MA20(25.54)支撑位, 缩量回调至关键均线.",
+      "entryDate": "2026-07-03",
+      "entryPrice": 25.52,
+      "targetPrice": 33.0,
+      "stopLoss": 24.24,
+      "currentStop": 24.24,
+      "allocation_pct": 5.0,
+      "shares": 1800,
+      "allocatedCapital": 45936.0,
+      "rating": 2,
+      "rps120": 92.21,
+      "sector": "小金属",
+      "catalysts": [],
+      "sourceWatchlist": "2026-07-03",
+      "history": [
+        {
+          "date": "2026-07-03",
+          "price": 25.52,
+          "change_pct": 0,
+          "action": "OPEN",
+          "note": "LLM开仓 金钼股份"
+        }
+      ],
+      "exitDate": null,
+      "exitPrice": null,
+      "exitReason": null,
+      "returnPct": null,
+      "holdingDays": null,
+      "lessonLearned": null,
+      "createdAt": "2026-07-03T15:44:09.758040+08:00",
+      "updatedAt": "2026-07-03T15:44:09.758045+08:00",
       "trackerVersion": "2.1"
     }
   },

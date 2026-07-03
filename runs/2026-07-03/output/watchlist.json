@@ -2,40 +2,49 @@
   "date": "2026-07-03",
   "market_overview": {
     "shanghai_composite": {
-      "value": 4056.783,
-      "change_pct": 0.69
+      "value": 4043.643,
+      "change_pct": 0.37
     },
     "shenzhen_component": {
-      "value": 15714.22,
-      "change_pct": 1.39
+      "value": 15597.51,
+      "change_pct": 0.64
     },
     "chinext": {
-      "value": 4080.57,
-      "change_pct": 1.58
+      "value": 4019.93,
+      "change_pct": 0.07
     },
-    "sentiment": "neutral",
+    "sentiment": "bullish",
     "hot_sectors": [
       "贵金属",
-      "玻璃玻纤",
       "电机Ⅱ",
-      "汽车零部件",
-      "家电零部件Ⅱ"
+      "航天装备Ⅱ",
+      "家电零部件Ⅱ",
+      "航海装备Ⅱ"
     ],
     "cold_sectors": [
       "林业Ⅱ",
-      "广告营销",
       "电子化学品Ⅱ",
-      "化学制品",
-      "光学光电子"
+      "广告营销",
+      "光学光电子",
+      "化学制品"
     ],
-    "notes": "Rotation day: indices green (上证+0.69%, 深证+1.39%, 创业板+1.58%), breadth 1.90:1 with 114涨停. But under the surface, violent sector rotation — 贵金属+8.11% leading, semiconductor/optical/chemicals in bottom 5 after brutal 7/2 selloff (科创50 -7.7%). Money rotating from over-owned tech to gold/lithium/manufacturing. 碳酸锂+8.67% 5d driving lithium bids. 7月中报期临近, pricing shifting from 估值扩张 to 业绩验证. IV data unavailable — normal sizing. Recommended 2 small positions (6% total) in battery/lithium; semiconductor tracked but not bought due to sector gravity. 94% cash retained."
+    "notes": "Breadth 2.34:1 bullish, 162涨停/28跌停, 3/3 major indices green. Broad rally but sector rotation underway: gold/metals/defense surging (贵金属 +7.66%), tech/semiconductor/optoelectronics rotating out (光学光电子 -4.01%, 电子化学品 -5.94%). Gold driven by weak US jobs → Fed rate-cut expectations. IV data unavailable, normal sizing."
   },
   "strategy_scan": {
     "total_stocks_scanned": 62,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-07-03T11:41:08.628531+08:00"
+    "scan_time": "2026-07-03T15:44:09.762586+08:00"
   },
   "recommendations": [
+    {
+      "code": "002290.SZ",
+      "name": "禾盛新材",
+      "price": null,
+      "rps120": 94.37,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
     {
       "code": "300323.SZ",
       "name": "华灿光电",
@@ -107,32 +116,14 @@
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
-    },
-    {
-      "code": "002290.SZ",
-      "name": "禾盛新材",
-      "price": null,
-      "rps120": 94.37,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
-    },
-    {
-      "code": "688372.SH",
-      "name": "伟测科技",
-      "price": null,
-      "rps120": 90.59,
-      "recommendation": "WATCH",
-      "confidence": "medium",
-      "reasoning": ""
     }
   ],
   "summary": {
     "total_scanned": 62,
     "buy_recommendations": 0,
-    "watch_recommendations": 10,
+    "watch_recommendations": 9,
     "avoid_recommendations": 0,
-    "market_call": "中性偏积极（板块轮动中，控制仓位）",
-    "reasoning": "Rotation day: indices green (上证+0.69%, 深证+1.39%, 创业板+1.58%), breadth 1.90:1 with 114涨停. But under the surface, violent sector rotation — 贵金属+8.11% leading, semiconductor/optical/chemicals in bottom 5 after brutal 7/2 selloff (科创50 -7.7%). Money rotating from over-owned tech to gold/lithium/manufacturing. 碳酸锂+8.67% 5d driving lithium bids. 7月中报期临近, pricing shifting from 估值扩张 to 业绩验证. IV data unavailable — normal sizing. Recommended 2 small positions (6% total) in battery/lithium; semiconductor tracked but not bought due to sector gravity. 94% cash retained."
+    "market_call": "积极",
+    "reasoning": "Breadth 2.34:1 bullish, 162涨停/28跌停, 3/3 major indices green. Broad rally but sector rotation underway: gold/metals/defense surging (贵金属 +7.66%), tech/semiconductor/optoelectronics rotating out (光学光电子 -4.01%, 电子化学品 -5.94%). Gold driven by weak US jobs → Fed rate-cut expectations. IV data unavailable, normal sizing."
   }
 }

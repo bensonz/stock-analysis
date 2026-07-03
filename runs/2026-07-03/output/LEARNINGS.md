@@ -1591,3 +1591,10 @@
 - MA-distance Rule 2b eliminated 8 of 30 candidates today (27%). Without it, 隆达股份(+12.1% from MA5), 申菱环境(+9.7%), 京仪装备(+23.3% from MA20) would have passed RPS/fundamental screens and been bought — right before sector rotation crushed them. Rule 2b is the single most protective filter today.
 - Semiconductor selloff (科创50 -7.7% 7/2) with strong individual catalysts (扬杰科技涨价10-15%, 思瑞浦利润+577%) validates that sector gravity >> individual catalysts. When a sector enters distribution, even the best stocks get sold. Do not fight sector flows.
 - VCP data missing for all 30 enriched candidates — structural gap in the pipeline. Without VCP contraction patterns, we lose the strongest timing signal from backtesting (+7.7% avg 10d return for PREMIUM). Consider expanding VCP scanner coverage.
+
+### 自动更新 (2026-07-03)
+
+- Sector rotation from tech/semiconductor to metals/defense is real and accelerating: 光学光电子 and 电子化学品Ⅱ flipped from previously hot to bottom 5 in this cycle. Sector-first rule prevented buying 5+ otherwise strong individual setups in cold sectors.
+- Stock must participate in its own sector: 禾盛新材 in #4 sector (家电零部件Ⅱ +6.03%) but 10d relative strength in bottom 4.1% of market. Being in a hot sector is necessary but insufficient — the stock must show relative momentum within that sector.
+- MA20 support in a #1-ranked sector complex is a high-quality momentum entry: 金钼股份 at dist_ma20 -0.1% with strong钼 fundamentals and the 有色金属 complex surging. This is the ideal V2 setup — buy strength (sector), buy pullback (price), buy catalyst (commodity price + policy).
+- MA-distance anti-chase rule blocked 7 candidates today — all would have been 'strong buys' in a V1 system that ignored extension. This rule is the single highest-value filter for preventing FOMO entries.

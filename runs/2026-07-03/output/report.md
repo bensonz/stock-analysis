@@ -4,18 +4,18 @@
 
 | 指数 | 收盘 | 涨跌幅 |
 |------|------|--------|
-| 上证指数 | 4056.78 | +0.69% |
-| 深证成指 | 15714.22 | +1.39% |
-| 创业板指 | 4080.57 | +1.58% |
-| 科创50 | 2008.07 | +1.05% |
+| 上证指数 | 4043.64 | +0.37% |
+| 深证成指 | 15597.51 | +0.64% |
+| 创业板指 | 4019.93 | +0.07% |
+| 科创50 | 1975.60 | -0.59% |
 
-涨跌比: 3527涨 / 1855跌 / 5517总
+涨跌比: 3804涨 / 1628跌 / 5517总
 
-**热门板块**: 贵金属(+8.11%), 玻璃玻纤(+7.04%), 电机Ⅱ(+6.06%), 汽车零部件(+4.73%), 家电零部件Ⅱ(+4.65%)
+**热门板块**: 贵金属(+7.66%), 电机Ⅱ(+6.46%), 航天装备Ⅱ(+6.26%), 家电零部件Ⅱ(+6.03%), 航海装备Ⅱ(+5.94%)
 
-**冷门板块**: 林业Ⅱ(-8.06%), 广告营销(-4.62%), 电子化学品Ⅱ(-3.72%), 化学制品(-2.77%), 光学光电子(-2.65%)
+**冷门板块**: 林业Ⅱ(-7.58%), 电子化学品Ⅱ(-5.94%), 广告营销(-4.30%), 光学光电子(-4.01%), 化学制品(-3.26%)
 
-Rotation day: indices green (上证+0.69%, 深证+1.39%, 创业板+1.58%), breadth 1.90:1 with 114涨停. But under the surface, violent sector rotation — 贵金属+8.11% leading, semiconductor/optical/chemicals in bottom 5 after brutal 7/2 selloff (科创50 -7.7%). Money rotating from over-owned tech to gold/lithium/manufacturing. 碳酸锂+8.67% 5d driving lithium bids. 7月中报期临近, pricing shifting from 估值扩张 to 业绩验证. IV data unavailable — normal sizing. Recommended 2 small positions (6% total) in battery/lithium; semiconductor tracked but not bought due to sector gravity. 94% cash retained.
+Breadth 2.34:1 bullish, 162涨停/28跌停, 3/3 major indices green. Broad rally but sector rotation underway: gold/metals/defense surging (贵金属 +7.66%), tech/semiconductor/optoelectronics rotating out (光学光电子 -4.01%, 电子化学品 -5.94%). Gold driven by weak US jobs → Fed rate-cut expectations. IV data unavailable, normal sizing.
 
 ## 策略池扫描
 
@@ -24,46 +24,35 @@ Rotation day: indices green (上证+0.69%, 深证+1.39%, 创业板+1.58%), bread
 
 ## 今日开仓
 
-### 1. 鹏辉能源 (300438) — BUY/small
+### 1. 金钼股份 (601958) — BUY/moderate
 
-- **入场价**: ¥77.85
-- **止损**: ¥73.96
-- **目标**: ¥93.42
-- **RPS120**: 92.3%
-- **板块**: 电池 (estimated top 40% (锂电池板块今日拉升，不在bottom 5))
+- **入场价**: ¥25.52
+- **止损**: ¥24.24
+- **目标**: ¥33.0
+- **RPS120**: 92.21%
+- **板块**: 小金属 (有色金属体系内(贵金属5d+7.66%领涨全市场, 小金属板块今日拉升))
 
-固态电池+储能双概念，锂电池板块今日拉升，Q利润+819%，6机构预测>30%增长，MA20支撑附近
-
-### 2. 融捷股份 (002192) — BUY/small
-
-- **入场价**: ¥92.09
-- **止损**: ¥87.49
-- **目标**: ¥110.51
-- **RPS120**: 93.21%
-- **板块**: 能源金属 (estimated top 30% (锂矿走强，碳酸锂大涨))
-
-碳酸锂5天涨8.67%至16.3万/吨，锂矿板块走强，Q1净利+1288%，甲基卡锂矿产能释放
+钼价年内上涨(MW氧化钼$30.70/磅)+矿产资源法催化, 贵金属#1领涨带动有色金属全板块. Q1营收+26.67%/净利+32.99%, PE仅24, 5机构买入评级. 股价从30.47回调至MA20(25.54)支撑位, 缩量回调至关键均线.
 
 ## 跳过标的
 
-1. **华灿光电** (300323) (RPS 94.98%) — Sector 光学光电子 in bottom 5 — hard no-buy zone per Rule 1
-2. **南大光电** (300346) (RPS 92.7%) — Sector 电子化学品Ⅱ in bottom 5
-3. **多氟多** (002407) (RPS 92.05%) — Sector 化学制品 in bottom 5; also 跌停 per today's news
-4. **隆达股份** (688231) (RPS 93.09%) — dist_ma5_pct=12.1% > 6% — extreme short-term overextension (Rule 2b)
-5. **申菱环境** (301018) (RPS 91.54%) — dist_ma5=9.7% > 6%, dist_ma10=9.7% > 8% — chasing (Rule 2b)
-6. **京仪装备** (688652) (RPS 92.95%) — dist_ma10=10.3% > 8%, dist_ma20=23.3% > 12%; also -12.5% yesterday selloff
-7. **扬杰科技** (300373) (RPS 91.32%) — dist_ma20=15.0% > 12% (Rule 2b); great catalyst (涨价10-15%) but overextended + semiconductor sector rotation risk
-8. **思瑞浦** (688536) (RPS 94.02%) — Semiconductor sector under heavy distribution (科创50 -7.7% 7/2); passes all technical filters but sector gravity risk too high. Track for re-entry.
-9. **禾盛新材** (002290) (RPS 94.37%) — Sector (家电零部件Ⅱ) is #5 hot, but stock has 3 risks, PE=140, 10d 股价走弱, 跌停 history. Stock not keeping up with sector. Skip.
-10. **伟测科技** (688372) (RPS 90.59%) — Semiconductor sector rotation risk; technically passes filters otherwise
+1. **禾盛新材** (002290) (RPS 94.37%) — Sector 家电零部件Ⅱ top 5 (+6.03%), BUT stock 10日走势仅超市场4.1% — 个股严重弱于板块, negative divergence. RPS120=94.37, 3 risks including 估值高位.
+2. **华灿光电** (300323) (RPS 94.98%) — Sector 光学光电子 in BOTTOM 5 (-4.01%). Hard no-buy regardless of stock quality.
+3. **南大光电** (300346) (RPS 92.7%) — Sector 电子化学品Ⅱ in BOTTOM 5 (-5.94%). Additionally dist_ma20 +21.9% — extreme extension.
+4. **多氟多** (002407) (RPS 92.05%) — Sector 化学制品 in BOTTOM 5 (-3.26%). Today触及跌停. dist_ma20 +22.6% also overextended.
+5. **隆达股份** (688231) (RPS 93.09%) — dist_ma5 +12.1% — MA anti-chase violation. Today spike on 燃气轮机/军工 news, too extended to enter.
+6. **申菱环境** (301018) (RPS 91.54%) — dist_ma5 +9.7%, dist_ma10 +9.7% — MA anti-chase violation. RPS20 only 79.44, near-term momentum weak despite spike.
+7. **京仪装备** (688652) (RPS 92.95%) — dist_ma10 +10.3%, dist_ma20 +23.3% — MA anti-chase violation. Also yesterday -12.5% heavy selling.
+8. **扬杰科技** (300373) (RPS 91.32%) — dist_ma20 +15.0% — MA anti-chase violation. 涨价催化 but sector (半导体) not in top 30%.
+9. **思瑞浦** (688536) (RPS 94.02%) — Strong fundamentals (8 highlights, 0 real risks) and clean MA distances, but sector 半导体 is middle-of-pack — not in top or bottom 5. Watch if tech rotates back.
 
 ## 今日研究结论
 
-- 新开仓: 2只
-- 跳过: 10只
+- 新开仓: 1只
+- 跳过: 9只
 
 ### 新教训
-- {'text': 'Sector rotation velocity is high — 光学光电子 and 电子化学品Ⅱ flipped from leaders to bottom 5 in ~2 weeks. When regime is rotation-not-trend, keep positions small (3% max each) and sector diversification matters more than stock selection.', 'type': 'observation', 'tags': ['sector', 'position-sizing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h019 (bottom-list sectors are hard no-buy zones)', 'mechanism': "Rotation speed is a function of how extended the prior trend was. After +86% H1 for 电子, mean-reversion pressure is massive. Bottom 5 sectors today were yesterday's leaders — sector gravity accelerates during rotation."}
-- {'text': 'MA-distance Rule 2b eliminated 8 of 30 candidates today (27%). Without it, 隆达股份(+12.1% from MA5), 申菱环境(+9.7%), 京仪装备(+23.3% from MA20) would have passed RPS/fundamental screens and been bought — right before sector rotation crushed them. Rule 2b is the single most protective filter today.', 'type': 'rule', 'tags': ['entry-filter', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h021, h027', 'mechanism': 'Overextended stocks have no cushion when the sector turns. MA distance > thresholds = all the good news is priced in and the next move is more likely mean-reversion than continuation.'}
-- {'text': 'Semiconductor selloff (科创50 -7.7% 7/2) with strong individual catalysts (扬杰科技涨价10-15%, 思瑞浦利润+577%) validates that sector gravity >> individual catalysts. When a sector enters distribution, even the best stocks get sold. Do not fight sector flows.', 'type': 'heuristic', 'tags': ['sector', 'entry-filter'], 'evidence_type': 'supporting', 'related_hypothesis': 'h019', 'mechanism': 'Institutional rotation is indiscriminate — they sell the sector basket, not individual names. The correlation within sectors spikes during rotation events, making stock-picking futile.'}
-- {'text': 'VCP data missing for all 30 enriched candidates — structural gap in the pipeline. Without VCP contraction patterns, we lose the strongest timing signal from backtesting (+7.7% avg 10d return for PREMIUM). Consider expanding VCP scanner coverage.', 'type': 'observation', 'tags': ['timing', 'entry-filter'], 'evidence_type': 'supporting', 'mechanism': 'VCP scanner likely covers a different stock universe than the cheese-fortune intersection pool. Without overlap, momentum entries lack the base-structure edge.'}
+- {'text': 'Sector rotation from tech/semiconductor to metals/defense is real and accelerating: 光学光电子 and 电子化学品Ⅱ flipped from previously hot to bottom 5 in this cycle. Sector-first rule prevented buying 5+ otherwise strong individual setups in cold sectors.', 'type': 'observation', 'tags': ['sector', 'entry-filter'], 'evidence_type': 'supporting', 'related_hypothesis': 'h019', 'mechanism': 'Bottom-list sectors are hard no-buy zones — individual RPS/fundamentals cannot overcome sector gravity when the sector is in the bottom 5.'}
+- {'text': 'Stock must participate in its own sector: 禾盛新材 in #4 sector (家电零部件Ⅱ +6.03%) but 10d relative strength in bottom 4.1% of market. Being in a hot sector is necessary but insufficient — the stock must show relative momentum within that sector.', 'type': 'heuristic', 'tags': ['entry-filter', 'sector'], 'evidence_type': 'supporting', 'mechanism': 'A stock underperforming its own hot sector suggests stock-specific headwinds (e.g., 增发预案, 估值高位) that sector tailwinds cannot overcome.'}
+- {'text': 'MA20 support in a #1-ranked sector complex is a high-quality momentum entry: 金钼股份 at dist_ma20 -0.1% with strong钼 fundamentals and the 有色金属 complex surging. This is the ideal V2 setup — buy strength (sector), buy pullback (price), buy catalyst (commodity price + policy).', 'type': 'signal', 'tags': ['entry-filter', 'timing', 'sector'], 'evidence_type': 'supporting', 'mechanism': 'When the hottest sector lifts an entire industry complex (贵金属 → 有色金属 → 小金属), pullbacks in related sub-sectors to key MA support offer asymmetric risk/reward with strong sector tailwinds.'}
+- {'text': "MA-distance anti-chase rule blocked 7 candidates today — all would have been 'strong buys' in a V1 system that ignored extension. This rule is the single highest-value filter for preventing FOMO entries.", 'type': 'observation', 'tags': ['entry-filter', 'rule'], 'evidence_type': 'supporting', 'related_hypothesis': 'h021, h027', 'mechanism': 'Even perfect catalysts (隆达股份 燃气轮机+军工涨停) and strong sectors (航天装备 #3) cannot justify buying a stock 12%+ above its 5-day moving average. Mean reversion risk dominates.'}

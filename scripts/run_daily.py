@@ -93,7 +93,10 @@ LLM_PROMPT_END = "=== LLM_PROMPT_END ==="
 ENTRY_GATE_INDICES = ("上证指数", "深证成指", "创业板指")
 INTERSECT_MIN_RPS = 85.0
 WEAK_TAPE_SIZE_MULTIPLIER = 0.5
-STRONG_TAPE_SIZE_MULTIPLIER = 0.75
+# Strong tape uses full sizing: "don't chase" is enforced per-stock via the
+# dist_ma5/10/20 SKIP filters in ANALYST.md, not by shrinking every position
+# market-wide. A strong tape should not reduce fresh size.
+STRONG_TAPE_SIZE_MULTIPLIER = 1.0
 
 
 def _build_strategy_intersection(remote_strategy: dict, rps_data: dict) -> tuple[dict, dict]:
@@ -377,7 +380,7 @@ def evaluate_new_entry_regime(market: dict) -> dict:
         reason = (
             f"Entry regime strong: breadth {ratio:.2f}:1, "
             f"{len(positive_indices)}/3 major indices green, {limit_ups} limit-ups / {limit_downs} limit-downs. "
-            f"Allow entries, but cap fresh size at {int(STRONG_TAPE_SIZE_MULTIPLIER * 100)}% to avoid chasing."
+            "Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
         )
     else:
         regime = "balanced"
@@ -1833,6 +1836,9 @@ def main():
         # Git commit (blocked by CRITICAL validation errors)
         if not no_commit and not critical_errors:
             print(f"\nPhase 5: Git commit...", file=sys.stderr)
+            # Commit locally first. A push failure must NOT be reported as a
+            # commit failure, so keep the two steps in separate try blocks.
+            committed = False
             try:
                 subprocess.run(["git", "add", "-A"], cwd=str(PROJECT_ROOT), check=True,
                                capture_output=True)
@@ -1840,11 +1846,37 @@ def main():
                     ["git", "commit", "-m", f"分析: {date} 每日流水线"],
                     cwd=str(PROJECT_ROOT), check=True, capture_output=True,
                 )
-                subprocess.run(["git", "push"], cwd=str(PROJECT_ROOT), check=True,
-                               capture_output=True)
-                print("  Committed and pushed.", file=sys.stderr)
+                committed = True
+                print("  Committed.", file=sys.stderr)
             except subprocess.CalledProcessError as e:
-                print(f"  Git error: {e.stderr.decode() if e.stderr else e}", file=sys.stderr)
+                print(f"  Git commit error: {e.stderr.decode() if e.stderr else e}",
+                      file=sys.stderr)
+
+            if committed:
+                # Push with retry + backoff. Transient HTTP2 framing errors are
+                # common with GitHub over HTTP/2, so fall back to HTTP/1.1 on the
+                # final attempt. A push failure leaves the commit intact locally
+                # to be pushed by the next run.
+                max_attempts = 3
+                for attempt in range(1, max_attempts + 1):
+                    push_cmd = ["git", "push"]
+                    if attempt == max_attempts:
+                        # Final attempt: force HTTP/1.1 to dodge HTTP2 framing bugs.
+                        push_cmd = ["git", "-c", "http.version=HTTP/1.1", "push"]
+                    try:
+                        subprocess.run(push_cmd, cwd=str(PROJECT_ROOT), check=True,
+                                       capture_output=True)
+                        print(f"  Pushed (attempt {attempt}).", file=sys.stderr)
+                        break
+                    except subprocess.CalledProcessError as e:
+                        err = e.stderr.decode() if e.stderr else str(e)
+                        print(f"  Git push error (attempt {attempt}/{max_attempts}): {err}",
+                              file=sys.stderr)
+                        if attempt < max_attempts:
+                            time.sleep(2 ** attempt)  # 2s, 4s backoff
+                        else:
+                            print("  Push failed; commit is saved locally and will "
+                                  "be pushed by the next run.", file=sys.stderr)
 
         # Summary
         total_sec = sum(l.get("duration_sec", 0) for l in all_logs)

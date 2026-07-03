@@ -1136,13 +1136,21 @@
           {
             "date": "2026-07-03",
             "detail": "Semiconductor selloff (科创50 -7.7% 7/2) with strong individual catalysts (扬杰科技涨价10-15%, 思瑞浦利润+577%) validates that sector gravity >> individual catalysts. When a sector enters distribution, even the best stocks get sold. Do not fight sector flows."
+          },
+          {
+            "date": "2026-07-03",
+            "detail": "Sector rotation from tech/semiconductor to metals/defense is real and accelerating: 光学光电子 and 电子化学品Ⅱ flipped from previously hot to bottom 5 in this cycle. Sector-first rule prevented buying 5+ otherwise strong individual setups in cold sectors."
+          },
+          {
+            "date": "2026-07-03",
+            "detail": "Stock must participate in its own sector: 禾盛新材 in #4 sector (家电零部件Ⅱ +6.03%) but 10d relative strength in bottom 4.1% of market. Being in a hot sector is necessary but insufficient — the stock must show relative momentum within that sector."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 25,
+      "sampleSize": 27,
       "hitRate": 1.0,
-      "confidence": 0.963,
+      "confidence": 0.966,
       "tags": [
         "sector",
         "entry-filter"
@@ -1870,7 +1878,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-07-02",
+      "lastTested": "2026-07-03",
       "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes.",
       "evidence": {
         "supporting": [
@@ -1981,13 +1989,17 @@
           {
             "date": "2026-07-02",
             "detail": "MA-distance rule (h027) continues filtering out dangerous entries. Multiple candidates with excellent RPS (多氟多 RPS120=92.3, 京仪装备 RPS120=92.3) were un-buyable due to extreme MA extensions. This rule would have prevented buying into the very stocks that got crushed today."
+          },
+          {
+            "date": "2026-07-03",
+            "detail": "MA20 support in a #1-ranked sector complex is a high-quality momentum entry: 金钼股份 at dist_ma20 -0.1% with strong钼 fundamentals and the 有色金属 complex surging. This is the ideal V2 setup — buy strength (sector), buy pullback (price), buy catalyst (commodity price + policy)."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 27,
+      "sampleSize": 28,
       "hitRate": 1.0,
-      "confidence": 0.966,
+      "confidence": 0.967,
       "tags": [
         "entry-filter",
         "timing",
@@ -3720,6 +3732,34 @@
       "tags": [
         "sector",
         "position-sizing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h085",
+      "text": "MA-distance anti-chase rule blocked 7 candidates today — all would have been 'strong buys' in a V1 system that ignored extension. This rule is the single highest-value filter for preventing FOMO entries.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-07-03",
+      "lastTested": "2026-07-03",
+      "mechanism": "Even perfect catalysts (隆达股份 燃气轮机+军工涨停) and strong sectors (航天装备 #3) cannot justify buying a stock 12%+ above its 5-day moving average. Mean reversion risk dominates.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-07-03",
+            "detail": "MA-distance anti-chase rule blocked 7 candidates today — all would have been 'strong buys' in a V1 system that ignored extension. This rule is the single highest-value filter for preventing FOMO entries."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "entry-filter",
+        "rule"
       ],
       "parentRule": null,
       "retiredDate": null,

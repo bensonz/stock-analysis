@@ -99,3 +99,10 @@ Phase 4: Validating...
   Validation issues: ['RULE check_stop_proximity: 002192 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.', 'RULE check_stop_proximity: 300438 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.']
 
 Phase 5: Git commit...
+  Git error: fatal: unable to access 'https://github.com/bensonz/stock-analysis.git/': Error in the HTTP2 framing layer
+
+
+============================================================
+Pipeline complete in 243s (degraded)
+============================================================
+{"date": "2026-07-03", "status": "degraded", "sells": 0, "opens": 2, "holds": 0, "tool_calls": 10, "tokens": 317720, "duration_sec": 242.89999999999998, "validation_errors": 2, "gate_warnings": 3}

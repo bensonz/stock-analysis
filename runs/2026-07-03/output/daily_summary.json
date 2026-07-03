@@ -2,59 +2,64 @@
   "date": "2026-07-03",
   "actions": [
     {
-      "code": "300438",
-      "name": "鹏辉能源",
-      "action": "OPEN",
-      "price": 77.85,
-      "note": "固态电池+储能双概念，锂电池板块今日拉升，Q利润+819%，6机构预测>30%增长，MA20支撑附近"
-    },
-    {
       "code": "002192",
       "name": "融捷股份",
+      "action": "HOLD",
+      "price": 91.59,
+      "pnl_pct": -0.54,
+      "note": "Just opened today, thesis intact: 碳酸锂5天+8.67%至16.3万/吨, Q1净利+1288%, 甲基卡产能释放. PnL -0.54%, stop distance 4.48% — monitor but no action needed."
+    },
+    {
+      "code": "300438",
+      "name": "鹏辉能源",
+      "action": "HOLD",
+      "price": 76.52,
+      "pnl_pct": -1.71,
+      "note": "Just opened today, PnL -1.71%. 电池板块今日有拉升(诺德股份涨停)但鹏辉逆势跌-2.76%, 个股弱于板块. Stop distance only 3.35% — tight leash. SELL if approaches 74.00."
+    },
+    {
+      "code": "601958",
+      "name": "金钼股份",
       "action": "OPEN",
-      "price": 92.09,
-      "note": "碳酸锂5天涨8.67%至16.3万/吨，锂矿板块走强，Q1净利+1288%，甲基卡锂矿产能释放"
+      "price": 25.52,
+      "note": "钼价年内上涨(MW氧化钼$30.70/磅)+矿产资源法催化, 贵金属#1领涨带动有色金属全板块. Q1营收+26.67%/净利+32.99%, PE仅24, 5机构买入评级. 股价从30.47回调至MA20(25.54)支撑位, 缩量回调至关键均线."
     }
   ],
   "portfolioStats": {
-    "totalPositions": 2,
-    "totalEquity": 988002.0,
-    "dayPnl": 0.0,
-    "dayReturnPct": 0.0,
-    "totalReturnPct": -1.2,
-    "unrealizedPnl": 0.0,
+    "totalPositions": 3,
+    "totalEquity": 987686.0,
+    "dayPnl": -288.0,
+    "dayReturnPct": -0.03,
+    "totalReturnPct": -1.23,
+    "unrealizedPnl": -316.0,
     "realizedPnl": -11998.0,
-    "cashPct": 97.49
+    "cashPct": 92.87
   },
   "entryRegime": {
     "allow_new_positions": true,
     "regime": "strong",
-    "breadth_ratio": 1.9013,
-    "up": 3527,
-    "down": 1855,
+    "breadth_ratio": 2.3366,
+    "up": 3804,
+    "down": 1628,
     "positive_indices": [
       "上证指数",
       "深证成指",
       "创业板指"
     ],
     "negative_indices": [],
-    "limit_ups": 114,
-    "limit_downs": 11,
-    "sizing_multiplier": 0.75,
+    "limit_ups": 162,
+    "limit_downs": 28,
+    "sizing_multiplier": 1.0,
     "hard_block": false,
-    "reason": "Entry regime strong: breadth 1.90:1, 3/3 major indices green, 114 limit-ups / 11 limit-downs. Allow entries, but cap fresh size at 75% to avoid chasing."
+    "reason": "Entry regime strong: breadth 2.34:1, 3/3 major indices green, 162 limit-ups / 28 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
   },
   "newPositions": [
     {
-      "code": "300438",
-      "name": "鹏辉能源"
-    },
-    {
-      "code": "002192",
-      "name": "融捷股份"
+      "code": "601958",
+      "name": "金钼股份"
     }
   ],
   "marketContext": {
-    "summary": "Rotation day: indices green (上证+0.69%, 深证+1.39%, 创业板+1.58%), breadth 1.90:1 with 114涨停. But under the surface, violent sector rotation — 贵金属+8.11% leading, semiconductor/optical/chemicals in bottom 5 after brutal 7/2 selloff (科创50 -7.7%). Money rotating from over-owned tech to gold/lithium/manufacturing. 碳酸锂+8.67% 5d driving lithium bids. 7月中报期临近, pricing shifting from 估值扩张 to 业绩验证. IV data unavailable — normal sizing. Recommended 2 small positions (6% total) in battery/lithium; semiconductor tracked but not bought due to sector gravity. 94% cash retained."
+    "summary": "Breadth 2.34:1 bullish, 162涨停/28跌停, 3/3 major indices green. Broad rally but sector rotation underway: gold/metals/defense surging (贵金属 +7.66%), tech/semiconductor/optoelectronics rotating out (光学光电子 -4.01%, 电子化学品 -5.94%). Gold driven by weak US jobs → Fed rate-cut expectations. IV data unavailable, normal sizing."
   }
 }
