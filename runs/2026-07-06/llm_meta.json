@@ -1,0 +1,82 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 237653,
+  "output_tokens": 9372,
+  "rounds": 3,
+  "duration_sec": 159.4,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月6日 热门板块 涨跌 半导体 养殖业",
+        "max_results": 5
+      },
+      "result_length": 3195
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "融捷股份 002192 锂矿 碳酸锂 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 3267
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "金钼股份 601958 钼价 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 3221
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "鹏辉能源 300438 固态电池 锂电池 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 2840
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 半导体 涨价 华为 韬定律 先进封装 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 3239
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 2026年7月6日 小金属 暴跌 金钼股份 鹏辉能源"
+      },
+      "result_length": 2307
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "碳酸锂价格 2026年7月 锂矿 融捷股份 美国收储"
+      },
+      "result_length": 2806
+    }
+  ],
+  "fallback_used": false
+}

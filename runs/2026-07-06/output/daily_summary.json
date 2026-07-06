@@ -1,0 +1,62 @@
+{
+  "date": "2026-07-06",
+  "actions": [
+    {
+      "code": "002192",
+      "name": "融捷股份",
+      "action": "HOLD",
+      "price": 94.2,
+      "pnl_pct": 2.29,
+      "note": "PnL +2.29%, US碳酸锂战略收储新催化强化thesis, 锂矿板块今日有跟涨(永杉锂业涨停), 距止损7.7%安全边际充足, MA distances健康(dist_ma5 +2.3%/dist_ma10 +4.6%)"
+    },
+    {
+      "code": "300438",
+      "name": "鹏辉能源",
+      "action": "SELL",
+      "price": 74.63,
+      "pnl_pct": -4.14,
+      "note": "Rule 5 triggered: -4.14% in first 3 days → bad timing, cut. Only 0.9% above stop (¥73.96). Entry premise (MA20支撑) invalid — price ¥74.63 well below MA20 ¥78.00. 储能板块多数走低, sector momentum faded. iv_filter + overextended_entry both flagged. Cut before gap-down through stop."
+    },
+    {
+      "code": "601958",
+      "name": "金钼股份",
+      "action": "SELL",
+      "price": 23.92,
+      "pnl_pct": -6.27,
+      "note": "Rule 5 hard stop: -6.27% > -5% → automatic SELL, no exceptions. Stop ¥24.24 breached (price ¥23.92, -1.34% through). Sector 小金属 in bottom 5 (-3.43%) → sector gravity sell. 29x normal volume dump today. 3 separate rule engines triggered (stop_proximity CRITICAL, iv_filter, overextended_entry). Get out now."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 1,
+    "totalEquity": 985757.0,
+    "dayPnl": 261.0,
+    "dayReturnPct": 0.03,
+    "totalReturnPct": -1.42,
+    "unrealizedPnl": 211.0,
+    "realizedPnl": -14454.0,
+    "cashPct": 99.04
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.5138,
+    "up": 1838,
+    "down": 3577,
+    "positive_indices": [
+      "上证指数"
+    ],
+    "negative_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 65,
+    "limit_downs": 28,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.51:1, 1/3 major indices green, 65 limit-ups / 28 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Weak/risk-off tape: breadth 0.51:1 (1838↑/3577↓), only 上证指数 barely green (+0.08%), 深证成指 -0.36%, 创业板指 -0.51%. 科创50 outlier +1.96% on 韬定律V2 catalyst. f10=28 near panic threshold, limit-ups 65/limit-downs 28. IV data unavailable — blind spot. Defensive rotation (养殖业 +3.03%) vs cyclicals selling (小金属 -3.43%, 光学光电子 -3.65%). All new positions blocked; focus on selling losers. Cash 93.15% → will rise to ~98% after鹏辉+金钼 exits."
+  }
+}

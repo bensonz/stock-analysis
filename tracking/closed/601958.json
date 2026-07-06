@@ -1,0 +1,44 @@
+{
+  "code": "601958",
+  "name": "金钼股份",
+  "status": "closed",
+  "thesis": "钼价年内上涨(MW氧化钼$30.70/磅)+矿产资源法催化, 贵金属#1领涨带动有色金属全板块. Q1营收+26.67%/净利+32.99%, PE仅24, 5机构买入评级. 股价从30.47回调至MA20(25.54)支撑位, 缩量回调至关键均线.",
+  "entryDate": "2026-07-03",
+  "entryPrice": 25.52,
+  "targetPrice": 33.0,
+  "stopLoss": 24.24,
+  "currentStop": 24.24,
+  "allocation_pct": 5.0,
+  "shares": 1800,
+  "allocatedCapital": 45936.0,
+  "rating": 2,
+  "rps120": 92.21,
+  "sector": "小金属",
+  "catalysts": [],
+  "sourceWatchlist": "2026-07-03",
+  "history": [
+    {
+      "date": "2026-07-03",
+      "price": 25.52,
+      "change_pct": 0,
+      "action": "OPEN",
+      "note": "LLM开仓 金钼股份"
+    },
+    {
+      "date": "2026-07-06",
+      "price": 23.92,
+      "change_pct": -6.27,
+      "action": "SELL",
+      "note": "Rule 5 hard stop: -6.27% > -5% → automatic SELL, no exceptions. Stop ¥24.24 breached (price ¥23.92, -1.34% through). Sector 小金属 in bottom 5 (-3.43%) → sector gravity sell. 29x normal volume dump today. 3 separate rule engines triggered (stop_proximity CRITICAL, iv_filter, overextended_entry). Get out now."
+    }
+  ],
+  "exitDate": "2026-07-06",
+  "exitPrice": 23.92,
+  "exitReason": "Rule 5 hard stop: -6.27% > -5% → automatic SELL, no exceptions. Stop ¥24.24 breached (price ¥23.92, -1.34% through). Sector 小金属 in bottom 5 (-3.43%) → sector gravity sell. 29x normal volume dump today. 3 separate rule engines triggered (stop_proximity CRITICAL, iv_filter, overextended_entry). Get out now.",
+  "returnPct": -6.27,
+  "holdingDays": 3,
+  "lessonLearned": "",
+  "createdAt": "2026-07-03T15:44:09.758040+08:00",
+  "updatedAt": "2026-07-06T11:39:50.405291+08:00",
+  "trackerVersion": "2.1"
+}

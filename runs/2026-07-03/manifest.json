@@ -2,7 +2,7 @@
   "date": "2026-07-03",
   "status": "degraded",
   "exit_code": 0,
-  "total_duration_sec": 242.9,
+  "total_duration_sec": 314.1,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -10,15 +10,15 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 79.9
+          "latency_ms": 89.8
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 503.9
+          "latency_ms": 464.5
         },
         "pricedb": {
           "status": "ok",
-          "latest_date": "2026-07-02",
+          "latest_date": "2026-07-03",
           "stale": false
         }
       }
@@ -31,12 +31,12 @@
     },
     "collect": {
       "status": "ok",
-      "duration_sec": 14.0,
+      "duration_sec": 29.4,
       "errors": []
     },
     "llm_analysis": {
       "status": "ok",
-      "duration_sec": 228.2
+      "duration_sec": 284.0
     },
     "apply": {
       "status": "ok",
@@ -46,8 +46,8 @@
       "status": "warnings",
       "duration_sec": 0.0,
       "errors": [
-        "RULE check_stop_proximity: 002192 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
-        "RULE check_stop_proximity: 300438 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+        "RULE check_stop_proximity: 002192 — 🟠 WATCH — 4.5% above stop. Monitor closely. No immediate action but be ready.",
+        "RULE check_stop_proximity: 300438 — 🟠 WATCH — 3.3% above stop. Monitor closely. No immediate action but be ready."
       ]
     }
   },
@@ -68,8 +68,8 @@
       "passed": true,
       "hard_fails": [],
       "soft_warns": [
-        "rule check_stop_proximity: 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
-        "rule check_stop_proximity: 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+        "rule check_stop_proximity: 🟠 WATCH — 4.5% above stop. Monitor closely. No immediate action but be ready.",
+        "rule check_stop_proximity: 🟠 WATCH — 3.3% above stop. Monitor closely. No immediate action but be ready."
       ]
     }
   }
