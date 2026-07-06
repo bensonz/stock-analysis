@@ -2,80 +2,60 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 237653,
-  "output_tokens": 9372,
-  "rounds": 3,
-  "duration_sec": 159.4,
+  "input_tokens": 151619,
+  "output_tokens": 8854,
+  "rounds": 2,
+  "duration_sec": 180.8,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年7月6日 热门板块 涨跌 半导体 养殖业",
+        "query": "A股 2026年7月6日 市场下跌 原因 板块轮动",
         "max_results": 5
       },
-      "result_length": 3195
+      "result_length": 3337
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "融捷股份 002192 锂矿 碳酸锂 2026年7月",
+        "query": "碳酸锂 价格 2026年7月 锂矿 板块 走势",
         "max_results": 5
       },
-      "result_length": 3267
+      "result_length": 3104
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "金钼股份 601958 钼价 2026年7月",
+        "query": "半导体 板块 2026年7月6日 跌 先进封装",
         "max_results": 5
       },
-      "result_length": 3221
+      "result_length": 2883
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "鹏辉能源 300438 固态电池 锂电池 2026年7月",
+        "query": "养殖业 煤炭 2026年7月6日 A股 领涨 板块",
         "max_results": 5
       },
-      "result_length": 2840
+      "result_length": 2780
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 半导体 涨价 华为 韬定律 先进封装 2026年7月",
+        "query": "A股 2026年7月 政策 宏观 央行 流动性",
         "max_results": 5
       },
-      "result_length": 3239
-    },
-    {
-      "pass": "P1",
-      "round": 2,
-      "tool": "web_search",
-      "input": {
-        "max_results": 5,
-        "query": "A股 2026年7月6日 小金属 暴跌 金钼股份 鹏辉能源"
-      },
-      "result_length": 2307
-    },
-    {
-      "pass": "P1",
-      "round": 2,
-      "tool": "web_search",
-      "input": {
-        "max_results": 5,
-        "query": "碳酸锂价格 2026年7月 锂矿 融捷股份 美国收储"
-      },
-      "result_length": 2806
+      "result_length": 3430
     }
   ],
   "fallback_used": false

@@ -1,130 +1,113 @@
-## Research Memo — 2026-07-06
+## Research Memo: 2026-07-06
 
 ---
 
-### 1. Market Regime — BEARISH / WEAK
+### 1. Market Regime
 
-**Index snapshot:**
-- 上证指数 4046.71 (+0.08%) — barely green
-- 深证成指 15541.62 (-0.36%) — red
-- 创业板指 3999.28 (-0.51%) — red
-- 科创50 2014.39 (+1.96%) — outlier, driven by 韬定律 V2 半导体催化
+**Verdict: PANIC — NO NEW POSITIONS.**
 
-**Breadth: 0.51:1 (1838↑ / 3577↓ / 102 flat)** — decisively bearish. This is the third consecutive weak day after the July 2 "Black Wednesday" (科创50 -7.7%). Downside breadth dominates: f4_7 (504 stocks down 4-7%) dwarfs r4_7 (152 stocks up 4-7%). The rally, if any, is concentrated in a handful of defensive/special-situation sectors.
+The tape is unambiguously weak:
 
-**Buy gate check — ALL THREE FAIL:**
-| Gate | Requirement | Actual | Pass? |
+| Signal | Reading | Threshold | Status |
 |---|---|---|---|
-| Up/Down ratio | ≥1.5:1 | 0.51:1 | ❌ |
-| Major indices green | ≥2 of 3 | 1/3 (only 上证) | ❌ |
-| Panic tape (f10≥30) | f10<30 | f10=28 (borderline) | ⚠️ |
+| Up/Down Ratio | 0.53:1 (1876↑/3541↓) | ≥1.5:1 | ❌ FAIL |
+| Major Indices Green | 0/3 (上证-0.06%, 深证-1.16%, 创业板-1.77%) | ≥2/3 | ❌ FAIL |
+| 跌停 (f10) | 76 | <30 | ❌ FAIL (panic) |
+| Breadth Distribution | Heavily skewed to f0_2/f2_4/f4_7 downside | — | Bearish |
 
-**Verdict: NO NEW POSITIONS.** Even the system's `entry_regime` confirms: `sizing_multiplier: 0.5`, `regime: weak`. Cash is king today.
+The `entry_regime` hard-block confirms: `allow_new_positions: false`, `sizing_multiplier: 0.0`, regime: `panic`. This is not a "maybe a small position" tape — this is a clear **stand aside** day.
 
-**IV Sentiment:** All IV proxies return "无数据" — no signal to act on either way.
+**Breadth one-liner:** "Breadth 0.53:1 bearish, 89涨停/76跌停, defensive rotation — 养殖业/煤炭 leading, semiconductor/optical selling off hard."
 
-**Key macro drivers from today's news:**
-1. A股交易新规今日正式实施 (ST涨跌幅扩至10%, 盘后固定价格交易扩展至全A股)
-2. 华为 韬定律 V2 发布 (LogicFolding, 混合键合, TSV, Hi-ONE光引擎) — 半导体获结构性催化
-3. 美国启动碳酸锂战略收储 (5年1.62万吨) — 利好锂矿
-4. 三星拟Q3 DRAM涨价20% — 存储芯片涨价传导
-5. 半导体全产业链涨价函 (芯联集成/斯达半导/扬杰科技 +15-25%)
+**Macro context from research:**
+- 央行今日开展10000亿元买断式逆回购操作 (3个月期) — liquidity support
+- 美联储维持利率3.50-3.75%不变, 偏鹰立场
+- Market rotating from AI/semiconductor euphoria into defensive value (养殖, 煤炭, 银行)
+- 存储业绩爆发(江波龙+62204%)已被price-in, 半导体设备高开跳水
+- A股交易新规今日施行 (ST股涨跌幅5%→10%, 盘后固定价格交易扩展至全A股)
+
+**IV Sentiment:** `overall_sentiment: "无数据"` — all individual stock iv_proxy also show `"无数据"`. Cannot use IV as a throttle. This is a known data gap, not a decision factor today.
 
 ---
 
 ### 2. Sector Analysis
 
-**Today's Top 5 (5d % not available, using daily):**
-| Rank | Sector | Chg% | Momentum Signal |
+**Hot Sectors (Top 5, 5d performance):**
+| Rank | Sector | 5d Change | Character |
 |---|---|---|---|
-| 1 | 养殖业 | +3.03% | Defensive rotation |
-| 2 | 航海装备Ⅱ | +2.53% | 军工/装备 |
-| 3 | 摩托车及其他 | +2.40% | Niche |
-| 4 | 炼化及贸易 | +2.40% | 油气/资源 |
-| 5 | 其他电源设备Ⅱ | +2.28% | 电力设备 |
+| 1 | 养殖业 | +4.44% | Defensive rotation, agriculture play |
+| 2 | 煤炭开采 | +4.26% | Value/commodity rotation |
+| 3 | 饲料 | +3.40% | Ag/commodity adjacent |
+| 4 | 炼化及贸易 | +3.11% | Energy value |
+| 5 | 农商行Ⅱ | +2.64% | Financial defensive |
 
-**Today's Bottom 5:**
-| Rank | Sector | Chg% | Note |
+**Cold Sectors (Bottom 5):**
+| Rank | Sector | 5d Change | Character |
 |---|---|---|---|
-| 1 | 玻璃玻纤 | -7.94% | Heavy selling |
-| 2 | 林业Ⅱ | -5.15% | |
-| 3 | 光学光电子 | -3.65% | ⚠️ 水晶光电/奥来德 sector |
-| 4 | 金属新材料 | -3.59% | ⚠️ 隆达股份 sector |
-| 5 | 小金属 | -3.43% | ⚠️ **金钼股份 sector!** |
+| 1 | 玻璃玻纤 | -9.89% | Materials sell-off |
+| 2 | 林业Ⅱ | -6.46% | — |
+| 3 | 光学光电子 | -5.67% | Tech rotation out |
+| 4 | 金属新材料 | -5.00% | Materials sell-off |
+| 5 | 小金属 | -4.67% | Commodity rotation out |
 
-**Rotation signal:** Clear flight from cyclicals/resources to defensive (养殖业, 炼化). Semiconductor/科创50 is a special-situation outlier driven by 韬定律 V2, not broad tech strength. The broader market is risk-off.
+**Rotation Signal:** Clear defensive/value rotation. The leading sectors are all traditional/cyclical defensives. The prior leaders (semiconductor, optical, advanced materials) are all being sold. This is a classic "risk-off within a bull market" rotation — not a crash, but a significant sector shift.
 
-**Position sector alignment: 0/3 in hot sectors, 1/3 in cold sectors → BAD.**
-- 融捷股份 (能源金属): Neutral, not in top/bottom 5
-- 鹏辉能源 (电池): Neutral, not in top/bottom 5
-- 金钼股份 (小金属): **Bottom 5 — sector gravity pulling down hard**
+**Position Sector Alignment:**
+- 融捷股份: 能源金属/锂 — NOT in top 5 hot, NOT in bottom 5 cold. Neutral sector position.
+- 0/1 positions in hot sectors. The sole position is in a neutral/mid-tier sector.
+
+**Sector warning flag:** "小金属" (adjacent to 能源金属) is in bottom 5 at -4.67%. While not the same sector, commodity-adjacent names are under pressure. Monitor for contagion.
 
 ---
 
 ### 3. Position Review
 
-#### 002192 融捷股份 | HOLD
-- Entry: ¥92.09 | Current: ¥94.20 | PnL: **+2.29%** | 3 days
-- Sector: 能源金属 | Rank: Neutral (not in top/bottom 5)
-- Stop: ¥87.49 (5% from entry) | Distance to stop: 7.7% — comfortable
-- Today: +2.85%, volume 241K (well above mavol30 of 13K — heavy volume surge)
+#### 融捷股份 (002192) — **HOLD**
 
-**Thesis check:** Lithium catalyst is FRESH and STRENGTHENING. US启动碳酸锂战略收储 (5年1.62万吨) is a major new catalyst. 碳酸锂价格从Q1的8-12万已经回升至16万+区间. 甲基卡锂矿产能持续释放. Q1净利+1288%.
+| Field | Value |
+|---|---|
+| Entry | 2026-07-03 @ 92.09 |
+| Current | 94.40 (from position_prices, Sina) |
+| PnL | **+2.51%** |
+| Days Held | 3 calendar, ~2 trading days |
+| Stop | 87.49 (7.3% below current) |
+| Target | 110.51 |
+| Sector | 能源金属 (neutral — not hot, not cold) |
+| RPS120 | 93.21 (strategy pool data) |
 
-**MA distances:** dist_ma5 +2.3%, dist_ma10 +4.6%, dist_ma20 +9.3% — not chasing territory.
+**MA Check (existing position — monitoring only):**
+- dist_ma5: +2.3% — mildly above, fine
+- dist_ma10: +4.6% — acceptable
+- dist_ma20: +9.3% — note for awareness, not a sell signal for held position
 
-**Verdict: HOLD.** Thesis is actually stronger than at entry. Raise stop to breakeven at ¥92.09 (since +2.29% but less than +10%, standard stop for now). However, the stock has gained 2.29% — not enough for a formal RAISE_STOP to breakeven per Rule 5 (requires +10%). Keep original stop. I'll recommend HOLD with monitoring.
+**Catalyst Update:**
+- US碳酸锂战略收储计划启动 (5年采购1.62万吨) — NEW catalyst, reinforces thesis
+- 碳酸锂现货16.0-16.5万/吨区间, SMM 7/3均价165,250元/吨 (+2,750)
+- 锂矿板块今日有结构性反弹 (永杉锂业涨停, 金圆股份/中矿资源跟涨)
+- BUT: enriched events also note "碳酸锂期货大跌7%预示锂盐价格快速下行" — mixed signal
 
-Wait — the stock is only at +2.29%, Rule 5 says raise stop to breakeven at +10%. Keep current stop.
+**Assessment:** The position is working. +2.5% in 2 days with positive carry. The US strategic reserve news is a fresh, real catalyst that validates the entry thesis. The stop at 87.49 gives comfortable 7.3% buffer. The broader tape is weak but the lithium sub-sector has its own catalyst. HOLD.
 
-#### 300438 鹏辉能源 | SELL
-- Entry: ¥77.85 | Current: ¥74.63 | PnL: **-4.14%** | 3 days
-- Sector: 电池 | Rank: Neutral
-- Stop: ¥73.96 | Distance to stop: **0.9% — CRITICAL**
-- Today: -2.47%, volume 146K (well above mavol30 of 2.5K)
+**Risk note:** If "能源金属" sector drops into bottom 30% for 3+ consecutive days, per Rule 1 sector gravity, SELL regardless. Currently neutral, not cold. Monitor.
 
-**Rule triggers:**
-1. **Rule 5: -3% in first 3 days → SELL.** Bad timing, re-evaluate later. **TRIGGERED.**
-2. **Stop proximity: 0.9% from stop** — gap risk is real. The system's own rule engine flagged this as CRITICAL.
-3. **iv_filter rule flagged:** Down -4.1% after only 3 days — likely overextended entry.
-4. Entry thesis was "固态电池+储能双概念, MA20支撑附近" — MA20 is at ¥78.00, stock is at ¥74.63, well below MA20 now. Entry premise invalid.
-
-**Verdict: SELL.** The recent news shows 储能板块多数走低, 鹏辉能源跌超9% in some sessions. The battery sector is not rallying as hoped. Cut now before hitting the -5% hard stop. No "thesis still valid" cope.
-
-#### 601958 金钼股份 | SELL (IMMEDIATE)
-- Entry: ¥25.52 | Current: ¥23.92 | PnL: **-6.27%** | 3 days
-- Sector: 小金属 | Rank: **BOTTOM 5 (-3.43%)**
-- Stop: ¥24.24 | **STOP ALREADY BREACHED by -1.34%**
-- Today: -4.36%, heavy volume 654K vs mavol30 of 22K (29x normal volume)
-
-**Rule triggers:**
-1. **Rule 5: -5% from entry → Automatic SELL.** No exceptions. **TRIGGERED AND BREACHED.**
-2. **Sector gravity: 小金属 in bottom 5.** Per Rule 1, "If a position's sector goes cold (bottom 30%), SELL regardless."
-3. **Stop proximity: ALREADY BELOW STOP.** System flagged as CRITICAL.
-4. **iv_filter + overextended_entry both flagged.**
-5. The entry thesis was "钼价年内上涨 + 矿产资源法催化" — but the sector rotation out of 小金属 has overwhelmed any positive catalyst. From the news: 7月3日 小金属板块跌幅居前.
-
-**Verdict: SELL immediately.** This is the clearest sell signal in the portfolio. Sector in bottom 5, stop breached, -6.27% loss, 29x normal volume dump. Get out.
+**Action: HOLD.** No stop adjustment needed (not at +10% yet).
 
 ---
 
-### 4. New Entry Candidates — ALL SKIPPED (Buy Gate Failed)
+### 4. New Entry Candidates
 
-Even the best candidates are un-buyable today. Here's what I'd buy if the tape were healthy:
+**ALL CANDIDATES BLOCKED — PANIC TAPE.**
 
-| Priority | Stock | Sector | RPS120 | MA Check | Catalyst | Why Skipped |
+The entry regime hard-block is active: breadth 0.53:1, 0/3 indices green, f10=76 ≥30. Per Rule 1's minimum buy gate, no new positions can be opened today. Even the most compelling candidates must wait.
+
+Below are the candidates that WOULD be top-priority on a healthy tape day, for the PM's awareness when the regime clears:
+
+| Rank | Code | Name | Sector | RPS120 | Why Would Buy | What's Blocking |
 |---|---|---|---|---|---|---|
-| 🥇 | 思瑞浦 688536 | 半导体 | 93.67 | dist_ma5 -2.8% ✅ | 韬定律V2+涨价, Q净利+577% | Buy gate fail |
-| 🥈 | 新宙邦 300037 | 电池化学品 | 90.90 | dist_ma5 -4.8% ✅ | VCP SETUP, Q净利+109%, 固态电解质政策 | Buy gate fail |
-| 🥉 | 扬杰科技 300373 | 半导体 | 92.00 | dist_ma5 -6.6% ⚠️ | 全系列涨价10-15%, Q净利+41% | Buy gate fail + dist_ma5接近6% |
-
-More details on each:
-
-**思瑞浦 (688536):** The strongest candidate today. 韬定律 V2 directly benefits 模拟芯片设计. Q净利+577%, 0 risk factors (only 商誉 concern), 公募持股11%, 6机构预测>25%增长. dist_ma5 -2.8%, dist_ma10 -0.8% — perfect MA positioning (buying the pullback to MA10). Would be STRONG BUY 8% allocation if gate were open.
-
-**新宙邦 (300037):** VCP SETUP (vcp_contraction_ratio 0.87 — too loose for PREMIUM/QUALITY but pattern exists). 12机构覆盖, 公募11%, score_company 9.3 (highest in pool). 固态电解质政策催化. dist_ma5 -4.8%, dist_ma10 -1.3% — near MA10, decent entry point.
-
-**扬杰科技 (300373):** 全系列产品涨价10-15% from July 1 — fresh catalyst. SiC在手订单良好, AI数据中心批量供应. 但dist_ma5 -6.6%接近6% threshold. 0 risk factors. Would need a pullback to MA5 before entry.
+| 1 | 300373 | 扬杰科技 | 半导体 | 92.0% | 涨价催化(7月起全系列+10-15%), 0风险, 半导体龙头, 机构密集覆盖 | Panic tape + 半导体今日高开跳水 |
+| 2 | 300037 | 新宙邦 | 电池化学品 | 90.9% | VCP=SETUP, 固态电解质政策利好, score_company=9.3, 12机构覆盖 | Panic tape + 电池板块不在热点 |
+| 3 | 688536 | 思瑞浦 | 模拟芯片 | 93.67% | Q净利+577%, 8亮点, 半导体上升趋势, 公募11% | Panic tape + RPS120>92%需sector例外 |
+| 4 | 002810 | 山东赫达 | 化学制品 | 92.08% | PE=43合理, 净利+127%, 0抛压最近, MA距离健康 | Panic tape + 化学制品板块中性 |
 
 ---
 
@@ -132,38 +115,40 @@ More details on each:
 
 | Code | Name | Reason |
 |---|---|---|
-| 688536 | 思瑞浦 | Buy gate fail. Otherwise #1 pick: 韬定律V2 半导体催化 + 577% growth + perfect MA setup (-2.8% from MA5). |
-| 300037 | 新宙邦 | Buy gate fail. VCP SETUP, 9.3 company score (highest), 固态电解质政策催化. |
-| 300373 | 扬杰科技 | Buy gate fail. 涨价10-15% catalyst fresh, but dist_ma5 -6.6% near chase threshold. |
-| 688378 | 奥来德 | Sector 光学光电子 in **bottom 5 (-3.65%)** — hard no per Rule 1 (bottom-list sectors are hard no-buy zones). 中报预告+492-604% impressive but sector gravity wins. |
-| 002273 | 水晶光电 | Sector 光学光电子 in **bottom 5** — hard no. Despite 行业龙头 + 14机构覆盖, sector is killing it. |
-| 688231 | 隆达股份 | Sector 金属新材料 in **bottom 5 (-3.59%)**. Also dist_ma5 +10.2% — chasing violation. |
-| 300346 | 南大光电 | Sector 电子化学品 not in top 30%. dist_ma5 -9.2% below MA5. 股东减持(沈洁套现4.03亿). Multiple red flags. |
-| 002407 | 多氟多 | 7月3日跌停(-10%), 机构净卖出2.85亿, 龙虎榜显示深股通卖出9.15亿. 虽然Q净利+480%, 但抛压恐怖. |
-| 688652 | 京仪装备 | dist_ma10 +11.2% — chasing violation (Rule 2b). dist_ma20 +26.6%. PE 215, 7月2日大跌-12.5%. |
-| 301018 | 申菱环境 | dist_ma5 +9.1%, dist_ma10 +12.3% — hard chasing violation. |
+| 300373 | 扬杰科技 | PANIC TAPE — regime hard-block. Would be #1 buy on healthy tape: 涨价催化+0风险+半导体龙头. Sector (半导体) not in today's hot list; semis opened high and sold off. |
+| 300037 | 新宙邦 | PANIC TAPE. VCP=SETUP (contraction 0.87, near MA10 +1.3%), RPS120=90.9% sweet spot, but battery chemicals not a leading sector today. |
+| 688536 | 思瑞浦 | PANIC TAPE. RPS120=93.67% (extended zone, needs sector top 10% exception — semiconductor not top 10% today). Strong fundamentals but timing blocked. |
+| 688378 | 奥来德 | PANIC TAPE. Sector (光学光电子) in BOTTOM 5 at -5.67% — hard no-buy zone per Rule 1. 业绩预告+492-604% but sector gravity overrides. |
+| 002273 | 水晶光电 | PANIC TAPE. Sector (光学光电子) in BOTTOM 5. 公司已澄清AI光学业务短期无收入贡献, thesis weakened. |
+| 688231 | 隆达股份 | PANIC TAPE + dist_ma5=+10.2% (Rule 2b: >6% overextended). 燃气轮机概念炒作, 今日创历史新高后追高风险极大. |
+| 002407 | 多氟多 | PANIC TAPE + 07-03跌停(-10%), 龙虎榜机构净卖出2.85亿, 高风险回避. |
+| 688652 | 京仪装备 | PANIC TAPE + dist_ma10=+11.2% (>8% chase risk) + dist_ma20=+26.6% extreme. 07-02大跌-12.5%. |
+| 301018 | 申菱环境 | PANIC TAPE + dist_ma5=+9.1% (>6%), dist_ma10=+12.3% (>8%), dist_ma20=+13.3% (>12%). Triple MA violation. |
+| 002821 | 凯莱英 | PANIC TAPE + dist_ma10=+13.1%, dist_ma20=+27.3% — extreme extension. Sector (医药) neutral. |
+| 300346 | 南大光电 | PANIC TAPE + dist_ma5=-9.2% (sharp pullback from highs), 股东减持4.03亿. |
+| 688390 | 固德威 | PANIC TAPE + RPS20=75.63% (momentum fading), 光伏设备走弱. |
 
 ---
 
 ### 6. Learnings
 
-1. **Buy gate rules saved us today.** Breadth 0.51:1 + only 1/3 indices green = correct to hold cash. V1 would have forced a "SMALL BUY" and lost more money. This validates h013 (strong breadth alone not enough to force entries).
+1. **[New observation] Entry regime hard-block protected portfolio today.** Breadth 0.53:1 with f10=76 and 0/3 indices green. In V1, the system might have forced a "small buy" despite these conditions. V2 correctly returns `new_positions: []`. `[type: observation, tags: entry-filter, evidence_type: supporting]`
 
-2. **The -3% in 3 days rule is working.** 鹏辉能源 (-4.14%) and 金钼股份 (-6.27%) both triggered within 3 days. These were bad entries on July 3 (a dead-cat bounce day after July 2's crash). The speed of the loss confirms bad timing. Related to h019: bottom-list sector (小金属 for 金钼股份) should have been a hard no-buy.
+2. **[New signal] Defensive rotation accelerated — 养殖业+4.44%, 煤炭+4.26% vs 光学光电子-5.67%.** This validates Rule 1 (sector-first): the best individual candidates in光学光电子 (奥来德 with +492% earnings growth, 水晶光电 行业龙头) are un-buyable because their sector is in the bottom 5. Sector gravity is real. `[type: signal, tags: sector, evidence_type: supporting, related_hypothesis: h019]`
 
-3. **Sector gravity confirmed again.** 金钼股份 in 小金属 (bottom 5, -3.43%) — the sector is dragging it down regardless of individual fundamentals. Validates h019: "Bottom-list sectors should be treated as hard no-buy zones."
+3. **[New heuristic] US strategic reserve catalyst insulating 融捷股份 from broad sell-off.** While 小金属 sector fell -4.67%, 融捷股份 rose +3.07% on the US碳酸锂收储 news. This is the kind of stock-specific catalyst that can overcome sector headwinds temporarily — but only for a limited time. `[type: heuristic, tags: catalyst, evidence_type: supporting]`
 
-4. **Entry timing on July 3 was poor.** Both 鹏辉能源 and 金钼股份 were opened the day after the July 2 crash (创业板指 -5.71%, 科创50 -7.7%). Buying "dip" on day 1 post-crash without waiting for stabilization was premature. The iv_filter and overextended_entry rules both flagged this.
-
-5. **韬定律 V2 is the dominant catalyst for semiconductors right now.** 科创50 is the only index green (+1.96%) while everything else is red. 思瑞浦's setup would be actionable immediately if the buy gate were open. This is the kind of catalyst-first thinking V2 is built on.
+4. **[Validation] h027 (MA-distance discipline):** Multiple candidates that LOOK strong on fundamentals (隆达股份, 申菱环境, 凯莱英) are eliminated purely by MA-distance violations. This rule is doing real work filtering chase-risk entries. `[type: observation, tags: entry-filter, evidence_type: supporting, related_hypothesis: h027]`
 
 ---
 
 ### 7. Uncertainty Flags
 
-- **IV data is missing for all stocks.** The `iv_proxy` for every candidate says "无数据". I cannot apply the IV Rank sizing throttle. The `iv_sentiment.overall_sentiment` also says "无法获取IV数据". This is a blind spot — I don't know if we're in a low-IV complacent regime or high-IV panic regime. The iv_filter rule flagged 鹏辉能源 and 金钼股份 as possibly being low-IV entries, but I can't verify.
-- **5-day sector performance is missing.** The sector data only has today's performance. I can't rank sectors by 5d momentum as the framework requires. I'm using today's snapshot which may misrepresent trends.
-- **融捷股份's volume spike (29x mavol30)** — this could be institutional accumulation (bullish) or distribution (bearish). Given +2.85% on the day with US lithium reserve news, probably the former, but it's unusually high.
+- **I'm uncertain about 融捷股份's sector classification risk.** The enriched data shows "能源金属" as the sector, but "小金属" (bottom 5 at -4.67%) is the broader grouping. The lithium sub-sector has its own catalyst (US strategic reserve) that may decouple it. I'm choosing to treat them separately for now, but if小金属 weakness persists for 3+ days, Rule 1 sector gravity should trigger.
+
+- **IV data is entirely missing.** All iv_proxy fields show "无数据/fallback:overall_market." I cannot apply IV-based sizing adjustments. This is a system data gap, not a decision factor today, but the PM should be aware.
+
+- **Today's weakness may be a one-day rotation rather than a trend change.** 科创50 was actually +1.04% — the only green index. This suggests tech isn't being abandoned wholesale; the selling is concentrated in specific sub-sectors (光学光电子, 半导体设备). Tomorrow could easily reverse. The hard-block is correct for today, but the PM should re-assess daily.
 
 ---
 
@@ -173,138 +158,114 @@ More details on each:
 {
   "sector_analysis": {
     "hot_sectors": [
-      {"name": "养殖业", "5d_pct": null, "daily_pct": 3.03, "trend": "defensive rotation"},
-      {"name": "航海装备Ⅱ", "5d_pct": null, "daily_pct": 2.53, "trend": "steady"},
-      {"name": "摩托车及其他", "5d_pct": null, "daily_pct": 2.40, "trend": "niche"},
-      {"name": "炼化及贸易", "5d_pct": null, "daily_pct": 2.40, "trend": "resource/defensive"},
-      {"name": "其他电源设备Ⅱ", "5d_pct": null, "daily_pct": 2.28, "trend": "steady"}
+      {"name": "养殖业", "5d_pct": 4.44, "trend": "accelerating"},
+      {"name": "煤炭开采", "5d_pct": 4.26, "trend": "steady"},
+      {"name": "饲料", "5d_pct": 3.4, "trend": "steady"},
+      {"name": "炼化及贸易", "5d_pct": 3.11, "trend": "steady"},
+      {"name": "农商行Ⅱ", "5d_pct": 2.64, "trend": "steady"}
     ],
     "cold_sectors": [
-      {"name": "玻璃玻纤", "5d_pct": null, "daily_pct": -7.94, "trend": "crashing"},
-      {"name": "林业Ⅱ", "5d_pct": null, "daily_pct": -5.15, "trend": "deteriorating"},
-      {"name": "光学光电子", "5d_pct": null, "daily_pct": -3.65, "trend": "deteriorating"},
-      {"name": "金属新材料", "5d_pct": null, "daily_pct": -3.59, "trend": "deteriorating"},
-      {"name": "小金属", "5d_pct": null, "daily_pct": -3.43, "trend": "deteriorating"}
+      {"name": "玻璃玻纤", "5d_pct": -9.89, "trend": "deteriorating"},
+      {"name": "林业Ⅱ", "5d_pct": -6.46, "trend": "deteriorating"},
+      {"name": "光学光电子", "5d_pct": -5.67, "trend": "deteriorating"},
+      {"name": "金属新材料", "5d_pct": -5.0, "trend": "deteriorating"},
+      {"name": "小金属", "5d_pct": -4.67, "trend": "deteriorating"}
     ],
-    "position_alignment": "0/3 positions in hot sectors, 1/3 in cold sectors (金钼股份 in 小金属 bottom5)",
-    "regime": "Broad market weak/risk-off, 科创50 outlier (+1.96%) on 韬定律V2 catalyst, resources/cyclicals rotating out, defensive (养殖业) rotating in. Post-July2 crash stabilization attempt failing."
+    "position_alignment": "0/1 positions in hot sectors. 融捷股份(能源金属) is neutral — not in hot or cold top/bottom. Adjacent sector 小金属 in bottom 5 at -4.67%, monitor for contagion.",
+    "regime": "Defensive/value rotation: 养殖/煤炭/银行 leading, tech/semiconductor/optical selling off. 科创50 lone green index at +1.04% suggests tech not abandoned wholesale."
   },
   "position_decisions": [
     {
       "code": "002192",
       "name": "融捷股份",
       "action": "HOLD",
-      "reason": "PnL +2.29%, US碳酸锂战略收储新催化强化thesis, 锂矿板块今日有跟涨(永杉锂业涨停), 距止损7.7%安全边际充足, MA distances健康(dist_ma5 +2.3%/dist_ma10 +4.6%)",
-      "sector_rank": "neutral (能源金属 not in top/bottom 5)",
+      "reason": "PnL +2.51% in 2 days, US碳酸锂战略收储新催化强化thesis, 锂矿板块今日有结构反弹(永杉锂业涨停), stop distance 7.3% safe. Sector (能源金属) neutral—not in cold bottom 5. MA distances healthy for held position. No stop adjustment needed (<+10%). Monitor: if 能源金属/小金属 weakness persists 3+ consecutive days, consider sector-gravity sell.",
+      "sector_rank": "neutral (能源金属 not in top/bottom 30% sector lists)",
       "new_stop": null,
-      "pnl_pct": 2.29,
-      "days_held": 3,
+      "pnl_pct": 2.51,
+      "days_held": 2,
       "exit_price": null
-    },
-    {
-      "code": "300438",
-      "name": "鹏辉能源",
-      "action": "SELL",
-      "reason": "Rule 5 triggered: -4.14% in first 3 days → bad timing, cut. Only 0.9% above stop (¥73.96). Entry premise (MA20支撑) invalid — price ¥74.63 well below MA20 ¥78.00. 储能板块多数走低, sector momentum faded. iv_filter + overextended_entry both flagged. Cut before gap-down through stop.",
-      "sector_rank": "neutral (电池 not in top/bottom 5)",
-      "new_stop": null,
-      "pnl_pct": -4.14,
-      "days_held": 3,
-      "exit_price": 74.63
-    },
-    {
-      "code": "601958",
-      "name": "金钼股份",
-      "action": "SELL",
-      "reason": "Rule 5 hard stop: -6.27% > -5% → automatic SELL, no exceptions. Stop ¥24.24 breached (price ¥23.92, -1.34% through). Sector 小金属 in bottom 5 (-3.43%) → sector gravity sell. 29x normal volume dump today. 3 separate rule engines triggered (stop_proximity CRITICAL, iv_filter, overextended_entry). Get out now.",
-      "sector_rank": "bottom 5 (小金属 -3.43%)",
-      "new_stop": null,
-      "pnl_pct": -6.27,
-      "days_held": 3,
-      "exit_price": 23.92
     }
   ],
   "new_positions": [],
   "skip_list": [
     {
-      "code": "688536",
-      "name": "思瑞浦",
-      "reason": "Buy gate fail (breadth 0.51:1, only 1/3 indices green). Would be #1 buy otherwise: 韬定律V2半导体催化, Q净利+577%, dist_ma5 -2.8% perfect MA pullback, 0 major risk factors. Top candidate to buy when market regime improves.",
-      "rps120": 93.67
+      "code": "300373",
+      "name": "扬杰科技",
+      "reason": "PANIC TAPE — entry_regime hard_block (breadth 0.53:1, 0/3 indices green, f10=76). Would be top buy candidate on healthy tape: RPS120=92.0%, 7月起全系列涨价10-15%, 0 risk factors, SiC订单饱满, 半导体龙头. dist_ma5=-6.6%, dist_ma10=-1.5% — MA distances acceptable. Sector (半导体) not in today's hot list. Wait for regime to clear.",
+      "rps120": 92.0
     },
     {
       "code": "300037",
       "name": "新宙邦",
-      "reason": "Buy gate fail. VCP SETUP (ratio 0.87), score_company 9.3 (highest in pool), 固态电解质政策催化, dist_ma5 -4.8% near MA10 support. 12机构覆盖, very high quality.",
+      "reason": "PANIC TAPE. VCP=SETUP (contraction 0.87, near MA10 +1.3%), RPS120=90.9% sweet spot, score_company=9.3 highest in pool, 固态电解质政策催化, 与宁德时代供货合作. dist_ma5=-4.8%, dist_ma10=-1.3% — pullback entry zone. Sector (电池化学品) neutral. Priority candidate when regime clears.",
       "rps120": 90.9
     },
     {
-      "code": "300373",
-      "name": "扬杰科技",
-      "reason": "Buy gate fail. 全系列涨价10-15% fresh catalyst (July 1生效), but dist_ma5 -6.6% near chase threshold. 0 risk factors. Watch for pullback to MA5 at ~¥142.",
-      "rps120": 92.0
+      "code": "688536",
+      "name": "思瑞浦",
+      "reason": "PANIC TAPE. RPS120=93.67% extended zone — needs sector top 10% exception (半导体 not top 10% today). Q净利+577%, 8 highlights, 公募11%, 模拟芯片龙头. dist_ma5=-2.8%, dist_ma10=-0.8% — tight MA cluster, good entry zone. Wait for regime + sector confirmation.",
+      "rps120": 93.67
     },
     {
       "code": "688378",
       "name": "奥来德",
-      "reason": "Sector 光学光电子 in bottom 5 (-3.65%) — hard no per Rule 1. 中报预告+492-604% impressive but sector gravity wins.",
+      "reason": "PANIC TAPE + Sector (光学光电子) in BOTTOM 5 at -5.67% — hard no-buy zone per Rule 1. 业绩预告净利+492-604% is strong catalyst, but sector gravity overrides. dist_ma5=-0.7%, dist_ma10=+1.8% — MA acceptable. Revisit when sector rotates back.",
       "rps120": 93.18
-    },
-    {
-      "code": "002273",
-      "name": "水晶光电",
-      "reason": "Sector 光学光电子 in bottom 5 — hard no. 行业龙头 but sector drag is too strong. Also 大股东质押77% risk.",
-      "rps120": 86.44
     },
     {
       "code": "688231",
       "name": "隆达股份",
-      "reason": "Sector 金属新材料 in bottom 5 + dist_ma5 +10.2% chasing violation. Double disqualifier.",
+      "reason": "PANIC TAPE + Rule 2b violation: dist_ma5=+10.2% (>6% chase threshold). 燃气轮机概念涨停驱动, 今日创历史新高, extreme short-term extension. RPS120=92.51%. Wait for pullback to MA5/MA10 before considering.",
       "rps120": 92.51
     },
     {
       "code": "002407",
       "name": "多氟多",
-      "reason": "7月3日跌停(-10%), 龙虎榜机构净卖出2.85亿, 深股通卖出9.15亿. Distribution in progress, stay away.",
+      "reason": "PANIC TAPE + 07-03跌停(-10%), 龙虎榜显示机构净卖出2.85亿, 深股通净卖出4.93亿. 高风险回避. RPS120=91.72%.",
       "rps120": 91.72
+    },
+    {
+      "code": "002273",
+      "name": "水晶光电",
+      "reason": "PANIC TAPE + Sector (光学光电子) BOTTOM 5. 公司已公告澄清AI光学业务短期无收入贡献(光存储量产前验证, 光连接客户送样阶段). Thesis materially weakened. 大股东质押77%风险.",
+      "rps120": 86.44
     }
   ],
   "new_learnings": [
     {
-      "text": "Buy gate saved us from bad entries: breadth 0.51:1 + only 1/3 indices green correctly blocked all new positions. Without this gate, we would have bought 思瑞浦/新宙邦 into a weakening tape and likely repeated the鹏辉能源/金钼股份 pattern.",
-      "type": "rule",
-      "tags": ["entry-filter", "position-sizing"],
-      "evidence_type": "supporting",
-      "related_hypothesis": "h013",
-      "mechanism": "The buy gate prevents opening new risk during deteriorating breadth, which is when mean-reversion risk is highest and new positions are most likely to fail in their first 3-5 days."
-    },
-    {
-      "text": "-3% in first 3 days rule caught two bad entries (鹏辉能源 -4.14%, 金钼股份 -6.27%). Both were opened July 3 — the day after July 2 crash (创业板-5.71%). Buying dips 1 day post-crash without stabilization = bad timing. Wait for breadth to normalize before new entries.",
-      "type": "signal",
-      "tags": ["exit-rule", "timing"],
-      "evidence_type": "supporting",
-      "related_hypothesis": "h019",
-      "mechanism": "Post-crash day-1 bounces are often sucker rallies. The -3% rule acts as a fast-fail mechanism that limits damage from ill-timed entries. The speed of loss (3 days to -4%/-6%) confirms bad entry timing, not bad thesis."
-    },
-    {
-      "text": "Sector gravity confirmed: 金钼股份's sector (小金属) was in bottom 5 (-3.43%), and the stock fell -6.27% in 3 days. Sector weakness crushed individual stock thesis (钼价上涨, 矿产资源法). Hot sector mediocre stock > cold sector great stock.",
-      "type": "heuristic",
-      "tags": ["sector", "entry-filter"],
-      "evidence_type": "supporting",
-      "related_hypothesis": "h019",
-      "mechanism": "In weak markets, sector flows dominate individual fundamentals. When a sector hits bottom 5, institutional rotation out of the entire sector creates selling pressure that individual catalysts cannot overcome."
-    },
-    {
-      "text": "韬定律 V2 is driving the only green index (科创50 +1.96%) amid broad weakness. This is the dominant asymmetric catalyst right now. When the buy gate reopens, semiconductor stocks (especially 模拟芯片设计/先进封装/EDA) should be priority targets. 思瑞浦 is the cleanest setup.",
+      "text": "Entry regime hard-block correctly prevented any new positions today: breadth 0.53:1, 0/3 major indices green, f10=76. In V1 this might have forced a 'small buy' — V2 discipline returns empty new_positions[] as designed.",
       "type": "observation",
-      "tags": ["sector", "timing"],
+      "tags": ["entry-filter"],
       "evidence_type": "supporting",
-      "related_hypothesis": null,
-      "mechanism": "Catalyst-driven sectors can decouple from broad market weakness. 韬定律 represents a structural re-rating of China's semiconductor ecosystem. The V2 release with engineering details converts theoretical promise into investable roadmap, attracting institutional capital even in weak tape."
+      "mechanism": "The hard-block gate (breadth ≥1.5:1, ≥2 indices green, f10<30) acts as a circuit breaker preventing entries during panic conditions where even good stocks get dragged down."
+    },
+    {
+      "text": "Defensive rotation validated Rule 1 (sector-first): 养殖业+4.44% and 煤炭+4.26% led while 光学光电子-5.67% sank. Even the best individual candidates in cold sectors (奥来德 +492% earnings growth, 水晶光电 行业龙头) are un-buyable — sector gravity always wins.",
+      "type": "signal",
+      "tags": ["sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "When institutional money rotates sectors, individual stock fundamentals become secondary to sector flows. A -5.67% sector headwind overwhelms even +492% earnings growth."
+    },
+    {
+      "text": "US碳酸锂战略收储 catalyst is insulating 融捷股份 (+3.07%) from the broad sell-off, validating thesis-driven positions during weak tapes. Fresh policy catalysts can temporarily decouple a stock from sector/ market gravity.",
+      "type": "heuristic",
+      "tags": ["catalyst", "position-sizing"],
+      "evidence_type": "supporting",
+      "mechanism": "Government strategic reserve announcements create a policy floor that changes supply/demand expectations independently of market risk appetite."
+    },
+    {
+      "text": "MA-distance rule (h027) continues filtering chase-risk: 隆达股份(dist_ma5=+10.2%), 申菱环境(dist_ma5=+9.1%/ma10=+12.3%/ma20=+13.3%), 凯莱英(dist_ma10=+13.1%) all fail despite strong fundamentals. Rule is preventing entries at extended prices.",
+      "type": "observation",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "Stocks that spike far above short-term MAs have high mean-reversion probability. The 6%/8%/12% thresholds on MA5/MA10/MA20 catch these before mean reversion inflicts -5%+ damage."
     }
   ],
-  "market_summary": "Weak/risk-off tape: breadth 0.51:1 (1838↑/3577↓), only 上证指数 barely green (+0.08%), 深证成指 -0.36%, 创业板指 -0.51%. 科创50 outlier +1.96% on 韬定律V2 catalyst. f10=28 near panic threshold, limit-ups 65/limit-downs 28. IV data unavailable — blind spot. Defensive rotation (养殖业 +3.03%) vs cyclicals selling (小金属 -3.43%, 光学光电子 -3.65%). All new positions blocked; focus on selling losers. Cash 93.15% → will rise to ~98% after鹏辉+金钼 exits.",
+  "market_summary": "PANIC TAPE — Breadth 0.53:1 (1876↑/3541↓), 89涨停/76跌停, 0/3 major indices green. Defensive rotation in full force: 养殖业(+4.44%), 煤炭(+4.26%), 饲料(+3.4%) leading while 光学光电子(-5.67%), 金属新材料(-5.0%), 小金属(-4.67%) sink. 科创50 lone green at +1.04% suggests selective tech resilience. 央行今日10000亿买断式逆回购提供流动性支撑. Entry regime hard-block active — NO new positions. Sole position 融捷股份 +2.51% on US碳酸锂战略收储 catalyst, HOLD.",
   "market_sentiment": "bearish",
-  "market_call": "防御"
+  "market_call": "谨慎"
 }
 ```

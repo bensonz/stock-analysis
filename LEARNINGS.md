@@ -1605,3 +1605,10 @@
 - -3% in first 3 days rule caught two bad entries (鹏辉能源 -4.14%, 金钼股份 -6.27%). Both were opened July 3 — the day after July 2 crash (创业板-5.71%). Buying dips 1 day post-crash without stabilization = bad timing. Wait for breadth to normalize before new entries.
 - Sector gravity confirmed: 金钼股份's sector (小金属) was in bottom 5 (-3.43%), and the stock fell -6.27% in 3 days. Sector weakness crushed individual stock thesis (钼价上涨, 矿产资源法). Hot sector mediocre stock > cold sector great stock.
 - 韬定律 V2 is driving the only green index (科创50 +1.96%) amid broad weakness. This is the dominant asymmetric catalyst right now. When the buy gate reopens, semiconductor stocks (especially 模拟芯片设计/先进封装/EDA) should be priority targets. 思瑞浦 is the cleanest setup.
+
+### 自动更新 (2026-07-06)
+
+- Entry regime hard-block correctly prevented any new positions today: breadth 0.53:1, 0/3 major indices green, f10=76. In V1 this might have forced a 'small buy' — V2 discipline returns empty new_positions[] as designed.
+- Defensive rotation validated Rule 1 (sector-first): 养殖业+4.44% and 煤炭+4.26% led while 光学光电子-5.67% sank. Even the best individual candidates in cold sectors (奥来德 +492% earnings growth, 水晶光电 行业龙头) are un-buyable — sector gravity always wins.
+- US碳酸锂战略收储 catalyst is insulating 融捷股份 (+3.07%) from the broad sell-off, validating thesis-driven positions during weak tapes. Fresh policy catalysts can temporarily decouple a stock from sector/ market gravity.
+- MA-distance rule (h027) continues filtering chase-risk: 隆达股份(dist_ma5=+10.2%), 申菱环境(dist_ma5=+9.1%/ma10=+12.3%/ma20=+13.3%), 凯莱英(dist_ma10=+13.1%) all fail despite strong fundamentals. Rule is preventing entries at extended prices.

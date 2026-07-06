@@ -5,58 +5,41 @@
       "code": "002192",
       "name": "融捷股份",
       "action": "HOLD",
-      "price": 94.2,
-      "pnl_pct": 2.29,
-      "note": "PnL +2.29%, US碳酸锂战略收储新催化强化thesis, 锂矿板块今日有跟涨(永杉锂业涨停), 距止损7.7%安全边际充足, MA distances健康(dist_ma5 +2.3%/dist_ma10 +4.6%)"
-    },
-    {
-      "code": "300438",
-      "name": "鹏辉能源",
-      "action": "SELL",
-      "price": 74.63,
-      "pnl_pct": -4.14,
-      "note": "Rule 5 triggered: -4.14% in first 3 days → bad timing, cut. Only 0.9% above stop (¥73.96). Entry premise (MA20支撑) invalid — price ¥74.63 well below MA20 ¥78.00. 储能板块多数走低, sector momentum faded. iv_filter + overextended_entry both flagged. Cut before gap-down through stop."
-    },
-    {
-      "code": "601958",
-      "name": "金钼股份",
-      "action": "SELL",
-      "price": 23.92,
-      "pnl_pct": -6.27,
-      "note": "Rule 5 hard stop: -6.27% > -5% → automatic SELL, no exceptions. Stop ¥24.24 breached (price ¥23.92, -1.34% through). Sector 小金属 in bottom 5 (-3.43%) → sector gravity sell. 29x normal volume dump today. 3 separate rule engines triggered (stop_proximity CRITICAL, iv_filter, overextended_entry). Get out now."
+      "price": 94.4,
+      "pnl_pct": 2.51,
+      "note": "PnL +2.51% in 2 days, US碳酸锂战略收储新催化强化thesis, 锂矿板块今日有结构反弹(永杉锂业涨停), stop distance 7.3% safe. Sector (能源金属) neutral—not in cold bottom 5. MA distances healthy for held position. No stop adjustment needed (<+10%). Monitor: if 能源金属/小金属 weakness persists 3+ consecutive days, consider sector-gravity sell."
     }
   ],
   "portfolioStats": {
     "totalPositions": 1,
-    "totalEquity": 985757.0,
-    "dayPnl": 261.0,
+    "totalEquity": 985777.0,
+    "dayPnl": 281.0,
     "dayReturnPct": 0.03,
     "totalReturnPct": -1.42,
-    "unrealizedPnl": 211.0,
+    "unrealizedPnl": 231.0,
     "realizedPnl": -14454.0,
     "cashPct": 99.04
   },
   "entryRegime": {
-    "allow_new_positions": true,
-    "regime": "weak",
-    "breadth_ratio": 0.5138,
-    "up": 1838,
-    "down": 3577,
-    "positive_indices": [
-      "上证指数"
-    ],
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.5298,
+    "up": 1876,
+    "down": 3541,
+    "positive_indices": [],
     "negative_indices": [
+      "上证指数",
       "深证成指",
       "创业板指"
     ],
-    "limit_ups": 65,
-    "limit_downs": 28,
-    "sizing_multiplier": 0.5,
-    "hard_block": false,
-    "reason": "Entry regime weak: breadth 0.51:1, 1/3 major indices green, 65 limit-ups / 28 limit-downs. Allow entries only with 50% sizing."
+    "limit_ups": 89,
+    "limit_downs": 76,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.53:1, 0/3 major indices green, 89 limit-ups / 76 limit-downs. Block new longs."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "Weak/risk-off tape: breadth 0.51:1 (1838↑/3577↓), only 上证指数 barely green (+0.08%), 深证成指 -0.36%, 创业板指 -0.51%. 科创50 outlier +1.96% on 韬定律V2 catalyst. f10=28 near panic threshold, limit-ups 65/limit-downs 28. IV data unavailable — blind spot. Defensive rotation (养殖业 +3.03%) vs cyclicals selling (小金属 -3.43%, 光学光电子 -3.65%). All new positions blocked; focus on selling losers. Cash 93.15% → will rise to ~98% after鹏辉+金钼 exits."
+    "summary": "PANIC TAPE — Breadth 0.53:1 (1876↑/3541↓), 89涨停/76跌停, 0/3 major indices green. Defensive rotation in full force: 养殖业(+4.44%), 煤炭(+4.26%), 饲料(+3.4%) leading while 光学光电子(-5.67%), 金属新材料(-5.0%), 小金属(-4.67%) sink. 科创50 lone green at +1.04% suggests selective tech resilience. 央行今日10000亿买断式逆回购提供流动性支撑. Entry regime hard-block active — NO new positions. Sole position 融捷股份 +2.51% on US碳酸锂战略收储 catalyst, HOLD."
   }
 }

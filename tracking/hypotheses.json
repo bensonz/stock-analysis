@@ -1156,13 +1156,17 @@
           {
             "date": "2026-07-06",
             "detail": "Sector gravity confirmed: 金钼股份's sector (小金属) was in bottom 5 (-3.43%), and the stock fell -6.27% in 3 days. Sector weakness crushed individual stock thesis (钼价上涨, 矿产资源法). Hot sector mediocre stock > cold sector great stock."
+          },
+          {
+            "date": "2026-07-06",
+            "detail": "Defensive rotation validated Rule 1 (sector-first): 养殖业+4.44% and 煤炭+4.26% led while 光学光电子-5.67% sank. Even the best individual candidates in cold sectors (奥来德 +492% earnings growth, 水晶光电 行业龙头) are un-buyable — sector gravity always wins."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 29,
+      "sampleSize": 30,
       "hitRate": 1.0,
-      "confidence": 0.968,
+      "confidence": 0.969,
       "tags": [
         "sector",
         "entry-filter"
@@ -1890,7 +1894,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-07-03",
+      "lastTested": "2026-07-06",
       "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes.",
       "evidence": {
         "supporting": [
@@ -2005,13 +2009,17 @@
           {
             "date": "2026-07-03",
             "detail": "MA20 support in a #1-ranked sector complex is a high-quality momentum entry: 金钼股份 at dist_ma20 -0.1% with strong钼 fundamentals and the 有色金属 complex surging. This is the ideal V2 setup — buy strength (sector), buy pullback (price), buy catalyst (commodity price + policy)."
+          },
+          {
+            "date": "2026-07-06",
+            "detail": "MA-distance rule (h027) continues filtering chase-risk: 隆达股份(dist_ma5=+10.2%), 申菱环境(dist_ma5=+9.1%/ma10=+12.3%/ma20=+13.3%), 凯莱英(dist_ma10=+13.1%) all fail despite strong fundamentals. Rule is preventing entries at extended prices."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 28,
+      "sampleSize": 29,
       "hitRate": 1.0,
-      "confidence": 0.967,
+      "confidence": 0.968,
       "tags": [
         "entry-filter",
         "timing",
@@ -3776,6 +3784,61 @@
       "tags": [
         "entry-filter",
         "rule"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h086",
+      "text": "Entry regime hard-block correctly prevented any new positions today: breadth 0.53:1, 0/3 major indices green, f10=76. In V1 this might have forced a 'small buy' — V2 discipline returns empty new_positions[] as designed.",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-07-06",
+      "lastTested": "2026-07-06",
+      "mechanism": "The hard-block gate (breadth ≥1.5:1, ≥2 indices green, f10<30) acts as a circuit breaker preventing entries during panic conditions where even good stocks get dragged down.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-07-06",
+            "detail": "Entry regime hard-block correctly prevented any new positions today: breadth 0.53:1, 0/3 major indices green, f10=76. In V1 this might have forced a 'small buy' — V2 discipline returns empty new_positions[] as designed."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "entry-filter"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h087",
+      "text": "US碳酸锂战略收储 catalyst is insulating 融捷股份 (+3.07%) from the broad sell-off, validating thesis-driven positions during weak tapes. Fresh policy catalysts can temporarily decouple a stock from sector/ market gravity.",
+      "type": "heuristic",
+      "status": "observation",
+      "created": "2026-07-06",
+      "lastTested": "2026-07-06",
+      "mechanism": "Government strategic reserve announcements create a policy floor that changes supply/demand expectations independently of market risk appetite.",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-07-06",
+            "detail": "US碳酸锂战略收储 catalyst is insulating 融捷股份 (+3.07%) from the broad sell-off, validating thesis-driven positions during weak tapes. Fresh policy catalysts can temporarily decouple a stock from sector/ market gravity."
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "catalyst",
+        "position-sizing"
       ],
       "parentRule": null,
       "retiredDate": null,

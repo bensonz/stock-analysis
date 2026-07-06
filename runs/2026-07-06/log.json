@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1783309015.3109472,
+      "start": 1783323307.6811788,
       "errors": [],
-      "end": 1783309030.932576,
-      "duration_sec": 15.6
+      "end": 1783323321.026117,
+      "duration_sec": 13.3
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 17213,
+      "response_size_bytes": 15320,
       "tokens": {
-        "input_tokens": 237653,
-        "output_tokens": 9372
+        "input_tokens": 151619,
+        "output_tokens": 8854
       },
-      "rounds": 3,
-      "tool_calls_count": 7,
-      "duration_sec": 159.4,
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 180.8,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -25,26 +25,24 @@
     },
     {
       "phase": "apply",
-      "start": 1783309190.3896708,
+      "start": 1783323501.905385,
       "actions": [
-        "SELL 300438",
-        "SELL 601958",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=115",
-        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=28",
-        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=29",
-        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=33",
+        "Hypothesis: Created h086 (observation): Entry regime hard-block correctly prevented any new positions today: breadth 0.5...",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=30",
+        "Hypothesis: Created h087 (observation): US碳酸锂战略收储 catalyst is insulating 融捷股份 (+3.07%) from the broad sell-off, validati...",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=29",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1783309190.701618,
-      "duration_sec": 0.3
+      "end": 1783323502.3040798,
+      "duration_sec": 0.4
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 175.3
+    "totalDurationSec": 194.50000000000003
   }
 }
