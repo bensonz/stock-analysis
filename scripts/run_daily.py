@@ -97,6 +97,9 @@ WEAK_TAPE_SIZE_MULTIPLIER = 0.5
 # dist_ma5/10/20 SKIP filters in ANALYST.md, not by shrinking every position
 # market-wide. A strong tape should not reduce fresh size.
 STRONG_TAPE_SIZE_MULTIPLIER = 1.0
+# Unrealized PnL at or below this triggers a forced SELL, regardless of the LLM's
+# decision (ANALYST.md Rule 5, "-5% → Automatic SELL. No exceptions.").
+HARD_SELL_LOSS_PCT = -5.0
 
 
 def _build_strategy_intersection(remote_strategy: dict, rps_data: dict) -> tuple[dict, dict]:
@@ -1144,6 +1147,69 @@ def phase2_build_prompt(data: dict) -> str:
     return prompt
 
 
+def enforce_hard_sells(decisions: dict, data: dict, log: dict) -> None:
+    """Force-close positions that breach non-negotiable exit rules, in-place.
+
+    Selling is otherwise 100% LLM discretion. These two rules from ANALYST.md
+    Rule 5 are mechanical and enforced in code so a stop actually means something:
+      1. price at or below the position's stop  -> reason "stop_hit"
+      2. unrealized PnL <= HARD_SELL_LOSS_PCT    -> reason "hard_stop_loss"
+
+    A position the LLM already marked SELL is left as-is. HOLD/RAISE_STOP on a
+    breaching position is overridden to SELL; a breaching position the LLM never
+    mentioned gets a SELL injected. Positions without a reliable live price are
+    never force-sold (we don't sell blind) — they are logged and skipped.
+    """
+    prices = data.get("position_prices", {})
+    decisions_by_code = {
+        str(d.get("code", "")).split(".")[0]: d
+        for d in decisions.get("position_decisions", [])
+    }
+
+    for pos in data.get("positions", []):
+        code = str(pos.get("code", "")).split(".")[0]
+        entry = float(pos.get("entryPrice") or 0)
+        stop = float(pos.get("currentStop") or pos.get("stopLoss") or 0)
+        price = float((prices.get(code) or {}).get("price") or 0)
+
+        if price <= 0 or entry <= 0:
+            log["actions"].append(
+                f"HARD-SELL SKIP {code}: no reliable price, cannot evaluate stop"
+            )
+            continue
+
+        pnl_pct = (price - entry) / entry * 100
+        if stop > 0 and price <= stop:
+            reason = "stop_hit"
+        elif pnl_pct <= HARD_SELL_LOSS_PCT:
+            reason = "hard_stop_loss"
+        else:
+            continue
+
+        existing = decisions_by_code.get(code)
+        if existing and existing.get("action") == "SELL":
+            continue  # LLM already selling this name; nothing to force
+
+        prior = existing.get("action") if existing else "LLM-silent"
+        if existing:
+            existing["action"] = "SELL"
+            existing["reason"] = f"forced:{reason}"
+            existing["exit_price"] = price
+        else:
+            decisions.setdefault("position_decisions", []).append({
+                "code": code,
+                "name": pos.get("name", ""),
+                "action": "SELL",
+                "reason": f"forced:{reason}",
+                "exit_price": price,
+                "pnl_pct": round(pnl_pct, 2),
+            })
+        log["actions"].append(
+            f"HARD SELL {code}: {reason} price={price:.2f} stop={stop:.2f} "
+            f"pnl={pnl_pct:.2f}% (was {prior})"
+        )
+
+
 def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
     """Phase 3: Apply LLM decisions. Pure Python.
 
@@ -1158,6 +1224,10 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
     log = {"phase": "apply", "start": time.time(), "actions": []}
     run_dir = get_run_dir(date)
     output_dir = run_dir / "output"
+
+    # 0. Enforce non-negotiable exits before applying LLM decisions. Stops and
+    #    the -5% hard loss are mechanical, not subject to LLM discretion.
+    enforce_hard_sells(decisions, data, log)
 
     # 1. Apply position decisions
     daily_actions = []
