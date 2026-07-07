@@ -1,0 +1,49 @@
+{
+  "date": "2026-07-07",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1783395317.005774,
+      "errors": [],
+      "end": 1783395331.882195,
+      "duration_sec": 14.9
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 16345,
+      "tokens": {
+        "input_tokens": 227008,
+        "output_tokens": 8108
+      },
+      "rounds": 3,
+      "tool_calls_count": 5,
+      "duration_sec": 147.0,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1783395478.962581,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=116",
+        "Hypothesis: Updated h060 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=34",
+        "Hypothesis: Created h088 (observation): Engineering machinery sector (today #3, +1.58%) has genuine fundamental support:...",
+        "Hypothesis: Created h089 (observation): V1 WATCH-list stocks continue to demonstrate that low-conviction picks have sign...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1783395479.679617,
+      "duration_sec": 0.7
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 162.6
+  }
+}

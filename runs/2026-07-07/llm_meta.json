@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 227008,
+  "output_tokens": 8108,
+  "rounds": 3,
+  "duration_sec": 147.0,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月7日 市场大跌 原因 板块",
+        "max_results": 5
+      },
+      "result_length": 3246
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "锂矿 碳酸锂 2026年7月 涨价 融捷股份",
+        "max_results": 5
+      },
+      "result_length": 3241
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体 涨价 2026年7月 扬杰科技 芯联集成",
+        "max_results": 5
+      },
+      "result_length": 3457
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 2026年7月 游戏板块 工程机械 上涨 原因"
+      },
+      "result_length": 2830
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "华为 韬定律 半导体 先进封装 2026年7月"
+      },
+      "result_length": 3442
+    }
+  ],
+  "fallback_used": false
+}

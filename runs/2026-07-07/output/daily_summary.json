@@ -1,0 +1,45 @@
+{
+  "date": "2026-07-07",
+  "actions": [
+    {
+      "code": "002192",
+      "name": "融捷股份",
+      "action": "HOLD",
+      "price": 99.0,
+      "pnl_pct": 7.5,
+      "note": "PnL +7.5% in 3 days, exceptional relative strength (+4.87% today vs market -1%). Lithium thesis strengthening: 雅化集团涨停(H1+710-857%), US碳酸锂战略收储, 锂矿板块整体活跃. dist_ma10 at +8.8% is extended but for existing position this is acceptable given fresh catalysts. Stop at 87.49 still valid (-5% from entry). Monitor for +10% threshold (101.30) to raise stop to breakeven."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 1,
+    "totalEquity": 986237.0,
+    "dayPnl": 460.0,
+    "dayReturnPct": 0.05,
+    "totalReturnPct": -1.38,
+    "unrealizedPnl": 691.0,
+    "realizedPnl": -14454.0,
+    "cashPct": 99.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.1616,
+    "up": 762,
+    "down": 4716,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 34,
+    "limit_downs": 24,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.16:1, 0/3 major indices green, 34 limit-ups / 24 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "PANIC TAPE — Breadth 0.16:1 (762 up / 4716 down), all 3 major indices red (上证-1.04%, 深证-1.02%, 创业板-0.78%). 科创50 sole green +0.66% on Huawei 韬定律 V2 semiconductor catalyst. 34涨停/24跌停. Distribution massively skewed to losers (f2_4=2380, f0_2=1511). Defensive rotation into 银行/农业/游戏. 贵金属-3.72% leading declines. IV data unavailable. No new positions — cash preservation mode. Single holding 融捷股份 +7.5% showing exceptional relative strength on lithium catalysts (雅化集团 H1+710-857%, US碳酸锂战略收储)."
+  }
+}
