@@ -795,6 +795,10 @@
           {
             "date": "2026-07-07",
             "detail": "Panic breadth (0.16:1 with 4,716 down vs 762 up) is an unambiguous 'do nothing' signal. No individual stock catalyst overrides this level of market-wide selling. Cash preservation in this regime is alpha generation."
+          },
+          {
+            "date": "2026-07-07",
+            "detail": "V2买入门(Up/Down≥1.5:1 + ≥2指数绿 + f10<30)在今日完全验证其价值。0.14:1 breadth + 49跌停 + 三大指数全绿 = 教科书级'不交易'场景。强制空仓避免了在恐慌日追高或接飞刀。"
           }
         ],
         "contradicting": [
@@ -804,7 +808,7 @@
           }
         ]
       },
-      "sampleSize": 116,
+      "sampleSize": 117,
       "hitRate": 0.991,
       "confidence": 0.983,
       "tags": [],
@@ -1623,7 +1627,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-07-02",
+      "lastTested": "2026-07-07",
       "mechanism": "In a deteriorating market, protecting open profits is more valuable than maximizing upside variance.",
       "evidence": {
         "supporting": [
@@ -1766,13 +1770,17 @@
           {
             "date": "2026-07-02",
             "detail": "Trailing stops converted +30%+ gains into realized profits. Both 上海新阳 and 路维光电 had monster runs; the mechanical -10% trail from highs locked in the bulk of those gains before the semiconductor rout hit."
+          },
+          {
+            "date": "2026-07-07",
+            "detail": "恐慌日逆势抗跌标的应重点保护而非恐慌减仓。融捷股份在4700只下跌日+3.39%, 伴随雅化集团一字涨停催化, 这类资金认可的标的在反弹时弹性更大。当前PnL +5.98%接近+10%提止损阈值, 应HOLD."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 35,
+      "sampleSize": 36,
       "hitRate": 1.0,
-      "confidence": 0.973,
+      "confidence": 0.974,
       "tags": [
         "exit-rule",
         "timing",
@@ -2178,13 +2186,17 @@
           {
             "date": "2026-07-07",
             "detail": "Huawei 韬定律 V2 (published 7/3) is a multi-week structural catalyst for semiconductor advanced packaging, EDA, and OSAT names. 科创50 as the sole green index confirms semis are the market's structural leader. When regime normalizes, prioritize 先进封装/封测 names (伟测科技, 华天科技, 长电科技, 芯源微)."
+          },
+          {
+            "date": "2026-07-07",
+            "detail": "半导体链'内强外弱'(韩国半导体崩盘6% vs A股封测/硅片逆势涨)验证国产替代逻辑有独立行情。市场恢复后半导体设备/材料/封测链应为首选方向。华天科技涨停+有研硅20cm涨停确认先进封装为当前最强细分。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 34,
+      "sampleSize": 35,
       "hitRate": 1.0,
-      "confidence": 0.972,
+      "confidence": 0.973,
       "tags": [
         "sector",
         "timing"
@@ -3905,6 +3917,33 @@
       "confidence": 0.6,
       "tags": [
         "entry-filter"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h090",
+      "text": "雅化集团H1预增+710-857%是锂矿行业最重要的季度验证信号。结合融捷Q1 +1288%和碳酸锂价格稳定在15.6万/吨, 锂矿板块盈利爆发逻辑得到龙头确认。持仓融捷股份的thesis获得增量支撑。",
+      "type": "signal",
+      "status": "observation",
+      "created": "2026-07-07",
+      "lastTested": "2026-07-07",
+      "mechanism": "行业龙头业绩爆发表明锂盐量价齐升是全行业现象而非个股特例, 提升板块整体胜率",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-07-07",
+            "detail": "雅化集团H1预增+710-857%是锂矿行业最重要的季度验证信号。结合融捷Q1 +1288%和碳酸锂价格稳定在15.6万/吨, 锂矿板块盈利爆发逻辑得到龙头确认。持仓融捷股份的thesis获得增量支撑。"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector"
       ],
       "parentRule": null,
       "retiredDate": null,

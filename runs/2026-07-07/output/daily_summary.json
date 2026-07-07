@@ -5,27 +5,27 @@
       "code": "002192",
       "name": "融捷股份",
       "action": "HOLD",
-      "price": 99.0,
-      "pnl_pct": 7.5,
-      "note": "PnL +7.5% in 3 days, exceptional relative strength (+4.87% today vs market -1%). Lithium thesis strengthening: 雅化集团涨停(H1+710-857%), US碳酸锂战略收储, 锂矿板块整体活跃. dist_ma10 at +8.8% is extended but for existing position this is acceptable given fresh catalysts. Stop at 87.49 still valid (-5% from entry). Monitor for +10% threshold (101.30) to raise stop to breakeven."
+      "price": 97.6,
+      "pnl_pct": 5.98,
+      "note": "PnL +5.98% in 5 days, exceptional relative strength (+3.39% on a 4700-down panic day). Lithium thesis strengthening: 雅化集团一字涨停(H1 +710-857%), US碳酸锂战略收储, 碳酸锂稳定在15.6万/吨. dist_ma10 +8.8% elevated but acceptable for existing position. Approaching +10% threshold (101.30) — monitor to raise stop to breakeven at 92.09 per h023. Sector (能源金属) not in cold zone."
     }
   ],
   "portfolioStats": {
     "totalPositions": 1,
-    "totalEquity": 986237.0,
-    "dayPnl": 460.0,
-    "dayReturnPct": 0.05,
-    "totalReturnPct": -1.38,
-    "unrealizedPnl": 691.0,
+    "totalEquity": 986097.0,
+    "dayPnl": 320.0,
+    "dayReturnPct": 0.03,
+    "totalReturnPct": -1.39,
+    "unrealizedPnl": 551.0,
     "realizedPnl": -14454.0,
-    "cashPct": 99.0
+    "cashPct": 99.01
   },
   "entryRegime": {
     "allow_new_positions": false,
     "regime": "panic",
-    "breadth_ratio": 0.1616,
-    "up": 762,
-    "down": 4716,
+    "breadth_ratio": 0.1445,
+    "up": 693,
+    "down": 4796,
     "positive_indices": [],
     "negative_indices": [
       "上证指数",
@@ -33,13 +33,13 @@
       "创业板指"
     ],
     "limit_ups": 34,
-    "limit_downs": 24,
+    "limit_downs": 49,
     "sizing_multiplier": 0.0,
     "hard_block": true,
-    "reason": "Entry regime panic: breadth 0.16:1, 0/3 major indices green, 34 limit-ups / 24 limit-downs. Block new longs."
+    "reason": "Entry regime panic: breadth 0.14:1, 0/3 major indices green, 34 limit-ups / 49 limit-downs. Block new longs."
   },
   "newPositions": [],
   "marketContext": {
-    "summary": "PANIC TAPE — Breadth 0.16:1 (762 up / 4716 down), all 3 major indices red (上证-1.04%, 深证-1.02%, 创业板-0.78%). 科创50 sole green +0.66% on Huawei 韬定律 V2 semiconductor catalyst. 34涨停/24跌停. Distribution massively skewed to losers (f2_4=2380, f0_2=1511). Defensive rotation into 银行/农业/游戏. 贵金属-3.72% leading declines. IV data unavailable. No new positions — cash preservation mode. Single holding 融捷股份 +7.5% showing exceptional relative strength on lithium catalysts (雅化集团 H1+710-857%, US碳酸锂战略收储)."
+    "summary": "PANIC TAPE: 上证-1.26%, 深证-1.24%, 创业板-0.94%. Breadth 0.14:1 (693↑/4796↓), 34涨停/49跌停, f10=49触发恐慌阈值. 科创50逆势+0.27%为唯一亮点. 成交额3.09万亿缩量913亿. 韩国KOSPI暴跌6%熔断传导外部恐慌, 但A股半导体链逆势走强(华天科技涨停, 有研硅20cm). 锂矿板块雅化集团一字涨停(H1+710-857%). 防御板块(银行/农业)微弱翻红. 4700+个股下跌, 微盘股指数-3%+. 三大指数全绿+涨跌比极弱+跌停超30 → 新仓位硬封锁. IV数据无可用."
   }
 }

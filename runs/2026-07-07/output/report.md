@@ -4,40 +4,40 @@
 
 | 指数 | 收盘 | 涨跌幅 |
 |------|------|--------|
-| 上证指数 | 3999.03 | -1.04% |
-| 深证成指 | 15259.20 | -1.02% |
-| 创业板指 | 3918.22 | -0.78% |
-| 科创50 | 2009.23 | +0.66% |
+| 上证指数 | 3990.24 | -1.26% |
+| 深证成指 | 15225.11 | -1.24% |
+| 创业板指 | 3911.91 | -0.94% |
+| 科创50 | 2001.59 | +0.27% |
 
-涨跌比: 762涨 / 4716跌 / 5517总
+涨跌比: 693涨 / 4796跌 / 5517总
 
-**热门板块**: 游戏Ⅱ(+3.42%), 农业综合Ⅱ(+2.32%), 工程机械(+1.58%), 影视院线(+1.19%), 国有大型银行Ⅱ(+0.60%)
+**热门板块**: 游戏Ⅱ(+1.95%), 国有大型银行Ⅱ(+1.59%), 农业综合Ⅱ(+1.40%), 影视院线(+1.12%), 工程机械(+0.96%)
 
-**冷门板块**: 综合Ⅱ(-3.96%), 贵金属(-3.72%), 炼化及贸易(-3.65%), 林业Ⅱ(-3.64%), 生物制品(-3.53%)
+**冷门板块**: 风电设备(-4.71%), 贵金属(-4.63%), 林业Ⅱ(-4.53%), 医疗美容(-4.47%), 其他电子Ⅱ(-4.43%)
 
-PANIC TAPE — Breadth 0.16:1 (762 up / 4716 down), all 3 major indices red (上证-1.04%, 深证-1.02%, 创业板-0.78%). 科创50 sole green +0.66% on Huawei 韬定律 V2 semiconductor catalyst. 34涨停/24跌停. Distribution massively skewed to losers (f2_4=2380, f0_2=1511). Defensive rotation into 银行/农业/游戏. 贵金属-3.72% leading declines. IV data unavailable. No new positions — cash preservation mode. Single holding 融捷股份 +7.5% showing exceptional relative strength on lithium catalysts (雅化集团 H1+710-857%, US碳酸锂战略收储).
+PANIC TAPE: 上证-1.26%, 深证-1.24%, 创业板-0.94%. Breadth 0.14:1 (693↑/4796↓), 34涨停/49跌停, f10=49触发恐慌阈值. 科创50逆势+0.27%为唯一亮点. 成交额3.09万亿缩量913亿. 韩国KOSPI暴跌6%熔断传导外部恐慌, 但A股半导体链逆势走强(华天科技涨停, 有研硅20cm). 锂矿板块雅化集团一字涨停(H1+710-857%). 防御板块(银行/农业)微弱翻红. 4700+个股下跌, 微盘股指数-3%+. 三大指数全绿+涨跌比极弱+跌停超30 → 新仓位硬封锁. IV数据无可用.
 
 ## 策略池扫描
 
-扫描 **67** 只策略池股票
+扫描 **66** 只策略池股票
 (来源: cheesefortune_intersection)
 
 ## 跳过标的
 
-1. **扬杰科技** (300373) (RPS 92.0%) — PANIC TAPE hard block (breadth 0.16:1, 0/3 indices green). Would be STRONG BUY otherwise: 7/1全系列涨价10-15%, SiC订单饱满, AI数据中心稳定供货, RPS120=92.0% sweet spot. MA pullback presenting opportunity (dist_ma5 -5.0%, dist_ma10 -3.5%)
-2. **奥来德** (688378) (RPS 93.18%) — PANIC TAPE hard block. H1净利预增+492-604%, OLED材料龙头, 合同负债+860%, 光学光电子行业持续走强, RPS120=93.18%. MA distances healthy. High priority when regime normalizes.
-3. **思瑞浦** (688536) (RPS 93.67%) — PANIC TAPE hard block. 模拟芯片设计龙头, Q3净利+577%, 公募持股11%, RPS120=93.67%. MA distances within acceptable range (dist_ma5 -2.8%, dist_ma10 -0.8%). Semiconductor sector structurally strong on Huawei 韬定律 V2.
-4. **隆达股份** (688231) (RPS 92.51%) — PANIC TAPE hard block + MA chase threshold breached: dist_ma5_pct +10.2% > 6%, dist_ma10_pct +8.4% > 8%. 燃气轮机/高温合金 thesis valid but severely overextended. Must wait for pullback even if regime normalizes.
-5. **新宙邦** (300037) (RPS 90.9%) — PANIC TAPE hard block. 电解液龙头, 宁德时代合作催化, score_company 9.3, VCP=SETUP detected (contraction_ratio=0.87). MA distances acceptable (dist_ma5 -5.0%, dist_ma10 -3.2%). Worth revisiting when regime clears.
+1. **华天科技** (002185) (RPS 90.03%) — MARKET PANIC HARD BLOCK (breadth 0.14:1, 0/3 indices green, f10=49≥30). Additionally: dist_ma20 +12.8% > 12% triggers Rule 2b anti-chase. 今日涨停但追高禁令生效。先进封装逻辑坚实(华为韬定律V2+日月光涨价), market recovery后优先关注回调至MA10附近.
+2. **扬杰科技** (300373) (RPS 92.0%) — MARKET PANIC HARD BLOCK. Otherwise strong setup: 碳化硅涨价催化(7月涨价函15-25%), 半导体分立器件龙头, dist_ma5 -5.0%回调中接近支撑, RPS120=92.0% sweet spot. 等待市场企稳后评估.
+3. **奥来德** (688378) (RPS 93.18%) — MARKET PANIC HARD BLOCK. H1业绩+492-604%催化强, dist_ma5仅-0.7% MA支撑极佳, 光学光电子行业趋势向上. VCP quality=null无VCP加持. Market recovery后关注.
+4. **思瑞浦** (688536) (RPS 93.67%) — MARKET PANIC HARD BLOCK. 模拟芯片+577%净利增长, dist_ma10仅-0.8%, 半导体行业(自4月以来持续走强). 0风险, 8亮点. 优质候选但恐慌日不开仓.
+5. **多氟多** (002407) (RPS 91.72%) — 7/3跌停-10%, 龙虎榜机构净卖出2.85亿+深股通净卖出4.93亿, 重仓抛售. 龙虎榜数据显示机构撤退, 即使市场恢复也需回避至筹码稳定. RPS120尚可但风险>机会.
+6. **京仪装备** (688652) (RPS 93.51%) — MARKET PANIC HARD BLOCK. Additionally: dist_ma10 +11.2% > 8% Rule 2b anti-chase. 半导体设备好赛道但过度延伸.
 
 ## 今日研究结论
 
 - 新开仓: 0只
-- 跳过: 5只
+- 跳过: 6只
 
 ### 新教训
-- {'text': "Panic breadth (0.16:1 with 4,716 down vs 762 up) is an unambiguous 'do nothing' signal. No individual stock catalyst overrides this level of market-wide selling. Cash preservation in this regime is alpha generation.", 'type': 'heuristic', 'tags': ['entry-filter', 'regime'], 'evidence_type': 'supporting', 'related_hypothesis': 'h013', 'mechanism': 'When 85%+ of stocks are declining simultaneously, systematic risk dominates idiosyncratic risk. Even the best stock thesis has negative expected value when broad market beta is overwhelmingly negative.'}
-- {'text': '融捷股份 +4.87% on a -1% market day confirms the lithium thesis has genuine institutional backing. This is textbook relative strength and validates holding through weak tape. The US strategic reserve + 雅化集团 H1 +710-857% guidance are real structural catalysts, not sentiment trades.', 'type': 'signal', 'tags': ['position-management', 'sector'], 'evidence_type': 'supporting', 'mechanism': 'Stocks that rise on broad down days are being accumulated by institutional money. This divergence is one of the strongest bullish signals in technical analysis.'}
-- {'text': "Huawei 韬定律 V2 (published 7/3) is a multi-week structural catalyst for semiconductor advanced packaging, EDA, and OSAT names. 科创50 as the sole green index confirms semis are the market's structural leader. When regime normalizes, prioritize 先进封装/封测 names (伟测科技, 华天科技, 长电科技, 芯源微).", 'type': 'signal', 'tags': ['sector', 'timing'], 'evidence_type': 'supporting', 'mechanism': "Huawei's LogicFolding technology roadmap provides a credible path for Chinese semiconductor performance gains without EUV access. This re-rates the entire domestic semiconductor equipment and packaging ecosystem."}
-- {'text': 'Engineering machinery sector (today #3, +1.58%) has genuine fundamental support: 5月挖掘机销量+36.2% YoY, 起重机7月起提价2-5%, 2000亿特别国债设备更新. This is a cyclical upturn with real data, not a concept trade. Worth monitoring for entry when regime normalizes.', 'type': 'observation', 'tags': ['sector'], 'evidence_type': 'supporting', 'mechanism': "The 8-10 year equipment replacement cycle is converging with policy-driven demand (设备更新特别国债). Combined with industry-wide price increases breaking the 'volume over price' pattern, margins should expand in H2 2026."}
-- {'text': "V1 WATCH-list stocks continue to demonstrate that low-conviction picks have significant upside: 扬杰科技, 奥来德, 思瑞浦 all remain fundamentally compelling. The V1 lesson holds — avoiding 'risky' stocks with high RPS and real catalysts was the primary failure mode.", 'type': 'observation', 'tags': ['entry-filter'], 'evidence_type': 'supporting', 'mechanism': "High-RPS stocks with real earnings catalysts carry volatility risk but also asymmetric upside. Over-filtering on 'safety' metrics (valuation, risk count) systematically excludes the highest-return opportunities in momentum strategies."}
+- {'text': '恐慌日逆势抗跌标的应重点保护而非恐慌减仓。融捷股份在4700只下跌日+3.39%, 伴随雅化集团一字涨停催化, 这类资金认可的标的在反弹时弹性更大。当前PnL +5.98%接近+10%提止损阈值, 应HOLD.', 'type': 'heuristic', 'tags': ['exit-rule', 'position-sizing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h023', 'mechanism': '系统性恐慌中仍获资金买入的标的表明市场对其独立逻辑有共识, 恐慌缓解后往往领先反弹'}
+- {'text': "V2买入门(Up/Down≥1.5:1 + ≥2指数绿 + f10<30)在今日完全验证其价值。0.14:1 breadth + 49跌停 + 三大指数全绿 = 教科书级'不交易'场景。强制空仓避免了在恐慌日追高或接飞刀。", 'type': 'rule', 'tags': ['entry-filter', 'timing'], 'evidence_type': 'supporting', 'related_hypothesis': 'h013', 'mechanism': '硬性买入门槛排除了最差入场时机, 保护资金免受系统性下跌冲击'}
+- {'text': "半导体链'内强外弱'(韩国半导体崩盘6% vs A股封测/硅片逆势涨)验证国产替代逻辑有独立行情。市场恢复后半导体设备/材料/封测链应为首选方向。华天科技涨停+有研硅20cm涨停确认先进封装为当前最强细分。", 'type': 'signal', 'tags': ['sector', 'entry-filter'], 'evidence_type': 'supporting', 'related_hypothesis': 'h028', 'mechanism': '外部冲击反而强化国产替代叙事, 资金从韩国半导体撤出转向A股半导体链'}
+- {'text': '雅化集团H1预增+710-857%是锂矿行业最重要的季度验证信号。结合融捷Q1 +1288%和碳酸锂价格稳定在15.6万/吨, 锂矿板块盈利爆发逻辑得到龙头确认。持仓融捷股份的thesis获得增量支撑。', 'type': 'signal', 'tags': ['sector'], 'evidence_type': 'supporting', 'mechanism': '行业龙头业绩爆发表明锂盐量价齐升是全行业现象而非个股特例, 提升板块整体胜率'}

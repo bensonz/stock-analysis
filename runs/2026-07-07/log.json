@@ -3,21 +3,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1783395317.005774,
+      "start": 1783409711.601962,
       "errors": [],
-      "end": 1783395331.882195,
-      "duration_sec": 14.9
+      "end": 1783409726.4307451,
+      "duration_sec": 14.8
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 16345,
+      "response_size_bytes": 9223,
       "tokens": {
-        "input_tokens": 227008,
-        "output_tokens": 8108
+        "input_tokens": 219497,
+        "output_tokens": 7025
       },
       "rounds": 3,
       "tool_calls_count": 5,
-      "duration_sec": 147.0,
+      "duration_sec": 160.2,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -25,25 +25,24 @@
     },
     {
       "phase": "apply",
-      "start": 1783395478.962581,
+      "start": 1783409886.673414,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=116",
-        "Hypothesis: Updated h060 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
-        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=34",
-        "Hypothesis: Created h088 (observation): Engineering machinery sector (today #3, +1.58%) has genuine fundamental support:...",
-        "Hypothesis: Created h089 (observation): V1 WATCH-list stocks continue to demonstrate that low-conviction picks have sign...",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=36",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=117",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=35",
+        "Hypothesis: Created h090 (observation): 雅化集团H1预增+710-857%是锂矿行业最重要的季度验证信号。结合融捷Q1 +1288%和碳酸锂价格稳定在15.6万/吨, 锂矿板块盈利爆发逻辑得到龙头确认...",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1783395479.679617,
-      "duration_sec": 0.7
+      "end": 1783409886.8976839,
+      "duration_sec": 0.2
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 162.6
+    "totalDurationSec": 175.2
   }
 }

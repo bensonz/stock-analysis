@@ -1620,3 +1620,10 @@
 - Huawei 韬定律 V2 (published 7/3) is a multi-week structural catalyst for semiconductor advanced packaging, EDA, and OSAT names. 科创50 as the sole green index confirms semis are the market's structural leader. When regime normalizes, prioritize 先进封装/封测 names (伟测科技, 华天科技, 长电科技, 芯源微).
 - Engineering machinery sector (today #3, +1.58%) has genuine fundamental support: 5月挖掘机销量+36.2% YoY, 起重机7月起提价2-5%, 2000亿特别国债设备更新. This is a cyclical upturn with real data, not a concept trade. Worth monitoring for entry when regime normalizes.
 - V1 WATCH-list stocks continue to demonstrate that low-conviction picks have significant upside: 扬杰科技, 奥来德, 思瑞浦 all remain fundamentally compelling. The V1 lesson holds — avoiding 'risky' stocks with high RPS and real catalysts was the primary failure mode.
+
+### 自动更新 (2026-07-07)
+
+- 恐慌日逆势抗跌标的应重点保护而非恐慌减仓。融捷股份在4700只下跌日+3.39%, 伴随雅化集团一字涨停催化, 这类资金认可的标的在反弹时弹性更大。当前PnL +5.98%接近+10%提止损阈值, 应HOLD.
+- V2买入门(Up/Down≥1.5:1 + ≥2指数绿 + f10<30)在今日完全验证其价值。0.14:1 breadth + 49跌停 + 三大指数全绿 = 教科书级'不交易'场景。强制空仓避免了在恐慌日追高或接飞刀。
+- 半导体链'内强外弱'(韩国半导体崩盘6% vs A股封测/硅片逆势涨)验证国产替代逻辑有独立行情。市场恢复后半导体设备/材料/封测链应为首选方向。华天科技涨停+有研硅20cm涨停确认先进封装为当前最强细分。
+- 雅化集团H1预增+710-857%是锂矿行业最重要的季度验证信号。结合融捷Q1 +1288%和碳酸锂价格稳定在15.6万/吨, 锂矿板块盈利爆发逻辑得到龙头确认。持仓融捷股份的thesis获得增量支撑。

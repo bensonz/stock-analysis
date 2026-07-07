@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-07-07T11:37:59.677829+08:00",
+  "snapshot_time": "2026-07-07T15:38:06.895353+08:00",
   "snapshot_type": "post_run",
   "date": "2026-07-07",
   "portfolio_config": {
@@ -11,20 +11,20 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-07-07T11:37:58.970951+08:00",
+    "lastUpdated": "2026-07-07T15:38:06.683116+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 986237.0,
+      "totalEquity": 986097.0,
       "cash": 976337.0,
-      "investedValue": 9900.0,
-      "unrealizedPnl": 691.0,
+      "investedValue": 9760.0,
+      "unrealizedPnl": 551.0,
       "realizedPnl": -14454.0,
-      "totalPnl": -13763.0,
-      "totalReturnPct": -1.38,
+      "totalPnl": -13903.0,
+      "totalReturnPct": -1.39,
       "positionsUsed": 1,
       "positionsMax": 10,
-      "cashPct": 99.0,
-      "dayPnl": 460.0,
+      "cashPct": 99.01,
+      "dayPnl": 320.0,
       "minCashPct": 0,
       "minCashValue": 0.0,
       "deployableCash": 976337.0
@@ -35,8 +35,8 @@
         "name": "融捷股份",
         "entryDate": "2026-07-03",
         "entryPrice": 92.09,
-        "currentPrice": 99.0,
-        "pnl_pct": 7.5,
+        "currentPrice": 97.6,
+        "pnl_pct": 5.98,
         "stopLoss": 87.49,
         "currentStop": 87.49,
         "targetPrice": 110.51,
@@ -45,12 +45,12 @@
         "shares": 100,
         "allocation_pct": 2.25,
         "allocatedCapital": 9209.0,
-        "currentValue": 9900.0,
-        "unrealizedPnl": 691.0,
-        "volume": 252021,
+        "currentValue": 9760.0,
+        "unrealizedPnl": 551.0,
+        "volume": 341910,
         "mavol30": 2023.8,
         "volumeBelowMavol30": false,
-        "weight_pct": 1.0
+        "weight_pct": 0.99
       }
     ]
   },
@@ -97,10 +97,10 @@
         },
         {
           "date": "2026-07-07",
-          "price": 99.0,
-          "change_pct": 7.5,
+          "price": 97.6,
+          "change_pct": 5.98,
           "action": "HOLD",
-          "note": "PnL +7.5% in 3 days, exceptional relative strength (+4.87% today vs market -1%). Lithium thesis strengthening: 雅化集团涨停(H1+710-857%), US碳酸锂战略收储, 锂矿板块整体活跃. dist_ma10 at +8.8% is extended but for existing position this is acceptable given fresh catalysts. Stop at 87.49 still valid (-5% from entry). Monitor for +10% threshold (101.30) to raise stop to breakeven."
+          "note": "PnL +5.98% in 5 days, exceptional relative strength (+3.39% on a 4700-down panic day). Lithium thesis strengthening: 雅化集团一字涨停(H1 +710-857%), US碳酸锂战略收储, 碳酸锂稳定在15.6万/吨. dist_ma10 +8.8% elevated but acceptable for existing position. Approaching +10% threshold (101.30) — monitor to raise stop to breakeven at 92.09 per h023. Sector (能源金属) not in cold zone."
         }
       ],
       "exitDate": null,
@@ -110,7 +110,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-07-03T11:41:08.624555+08:00",
-      "updatedAt": "2026-07-07T11:37:58.962798+08:00",
+      "updatedAt": "2026-07-07T15:38:06.674055+08:00",
       "trackerVersion": "2.1"
     }
   },

@@ -2,40 +2,49 @@
   "date": "2026-07-07",
   "market_overview": {
     "shanghai_composite": {
-      "value": 3999.03,
-      "change_pct": -1.04
+      "value": 3990.235,
+      "change_pct": -1.26
     },
     "shenzhen_component": {
-      "value": 15259.2,
-      "change_pct": -1.02
+      "value": 15225.11,
+      "change_pct": -1.24
     },
     "chinext": {
-      "value": 3918.22,
-      "change_pct": -0.78
+      "value": 3911.91,
+      "change_pct": -0.94
     },
     "sentiment": "bearish",
     "hot_sectors": [
       "游戏Ⅱ",
+      "国有大型银行Ⅱ",
       "农业综合Ⅱ",
-      "工程机械",
       "影视院线",
-      "国有大型银行Ⅱ"
+      "工程机械"
     ],
     "cold_sectors": [
-      "综合Ⅱ",
+      "风电设备",
       "贵金属",
-      "炼化及贸易",
       "林业Ⅱ",
-      "生物制品"
+      "医疗美容",
+      "其他电子Ⅱ"
     ],
-    "notes": "PANIC TAPE — Breadth 0.16:1 (762 up / 4716 down), all 3 major indices red (上证-1.04%, 深证-1.02%, 创业板-0.78%). 科创50 sole green +0.66% on Huawei 韬定律 V2 semiconductor catalyst. 34涨停/24跌停. Distribution massively skewed to losers (f2_4=2380, f0_2=1511). Defensive rotation into 银行/农业/游戏. 贵金属-3.72% leading declines. IV data unavailable. No new positions — cash preservation mode. Single holding 融捷股份 +7.5% showing exceptional relative strength on lithium catalysts (雅化集团 H1+710-857%, US碳酸锂战略收储)."
+    "notes": "PANIC TAPE: 上证-1.26%, 深证-1.24%, 创业板-0.94%. Breadth 0.14:1 (693↑/4796↓), 34涨停/49跌停, f10=49触发恐慌阈值. 科创50逆势+0.27%为唯一亮点. 成交额3.09万亿缩量913亿. 韩国KOSPI暴跌6%熔断传导外部恐慌, 但A股半导体链逆势走强(华天科技涨停, 有研硅20cm). 锂矿板块雅化集团一字涨停(H1+710-857%). 防御板块(银行/农业)微弱翻红. 4700+个股下跌, 微盘股指数-3%+. 三大指数全绿+涨跌比极弱+跌停超30 → 新仓位硬封锁. IV数据无可用."
   },
   "strategy_scan": {
-    "total_stocks_scanned": 67,
+    "total_stocks_scanned": 66,
     "strategy_name": "小市值-无 20RP",
-    "scan_time": "2026-07-07T11:37:58.969533+08:00"
+    "scan_time": "2026-07-07T15:38:06.681423+08:00"
   },
   "recommendations": [
+    {
+      "code": "002185.SZ",
+      "name": "华天科技",
+      "price": null,
+      "rps120": 90.03,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
     {
       "code": "300373.SZ",
       "name": "扬杰科技",
@@ -64,30 +73,30 @@
       "reasoning": ""
     },
     {
-      "code": "688231.SH",
-      "name": "隆达股份",
+      "code": "002407.SZ",
+      "name": "多氟多",
       "price": null,
-      "rps120": 92.51,
+      "rps120": 91.72,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     },
     {
-      "code": "300037.SZ",
-      "name": "新宙邦",
+      "code": "688652.SH",
+      "name": "京仪装备",
       "price": null,
-      "rps120": 90.9,
+      "rps120": 93.51,
       "recommendation": "WATCH",
       "confidence": "medium",
       "reasoning": ""
     }
   ],
   "summary": {
-    "total_scanned": 67,
+    "total_scanned": 66,
     "buy_recommendations": 0,
-    "watch_recommendations": 5,
+    "watch_recommendations": 6,
     "avoid_recommendations": 0,
     "market_call": "防御",
-    "reasoning": "PANIC TAPE — Breadth 0.16:1 (762 up / 4716 down), all 3 major indices red (上证-1.04%, 深证-1.02%, 创业板-0.78%). 科创50 sole green +0.66% on Huawei 韬定律 V2 semiconductor catalyst. 34涨停/24跌停. Distribution massively skewed to losers (f2_4=2380, f0_2=1511). Defensive rotation into 银行/农业/游戏. 贵金属-3.72% leading declines. IV data unavailable. No new positions — cash preservation mode. Single holding 融捷股份 +7.5% showing exceptional relative strength on lithium catalysts (雅化集团 H1+710-857%, US碳酸锂战略收储)."
+    "reasoning": "PANIC TAPE: 上证-1.26%, 深证-1.24%, 创业板-0.94%. Breadth 0.14:1 (693↑/4796↓), 34涨停/49跌停, f10=49触发恐慌阈值. 科创50逆势+0.27%为唯一亮点. 成交额3.09万亿缩量913亿. 韩国KOSPI暴跌6%熔断传导外部恐慌, 但A股半导体链逆势走强(华天科技涨停, 有研硅20cm). 锂矿板块雅化集团一字涨停(H1+710-857%). 防御板块(银行/农业)微弱翻红. 4700+个股下跌, 微盘股指数-3%+. 三大指数全绿+涨跌比极弱+跌停超30 → 新仓位硬封锁. IV数据无可用."
   }
 }

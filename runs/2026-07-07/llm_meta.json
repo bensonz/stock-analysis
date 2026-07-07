@@ -2,60 +2,60 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 227008,
-  "output_tokens": 8108,
+  "input_tokens": 219497,
+  "output_tokens": 7025,
   "rounds": 3,
-  "duration_sec": 147.0,
+  "duration_sec": 160.2,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年7月7日 市场大跌 原因 板块",
+        "query": "A股 2026年7月7日 市场暴跌 原因 半导体 锂矿",
         "max_results": 5
       },
-      "result_length": 3246
+      "result_length": 2834
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "锂矿 碳酸锂 2026年7月 涨价 融捷股份",
+        "query": "融捷股份 002192 2026年7月 锂矿 碳酸锂",
         "max_results": 5
       },
-      "result_length": 3241
+      "result_length": 3234
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "半导体 涨价 2026年7月 扬杰科技 芯联集成",
+        "query": "2026年7月7日 A股 4700只下跌 恐慌 原因",
         "max_results": 5
       },
-      "result_length": 3457
+      "result_length": 2844
     },
     {
       "pass": "P1",
       "round": 2,
       "tool": "web_search",
       "input": {
-        "max_results": 5,
-        "query": "A股 2026年7月 游戏板块 工程机械 上涨 原因"
+        "query": "半导体逆势走强 2026年7月7日 先进封装 华天科技 涨停",
+        "max_results": 5
       },
-      "result_length": 2830
+      "result_length": 2162
     },
     {
       "pass": "P1",
       "round": 2,
       "tool": "web_search",
       "input": {
-        "max_results": 5,
-        "query": "华为 韬定律 半导体 先进封装 2026年7月"
+        "query": "碳酸锂价格 2026年7月 锂矿 雅化集团 中报业绩",
+        "max_results": 5
       },
-      "result_length": 3442
+      "result_length": 2200
     }
   ],
   "fallback_used": false
