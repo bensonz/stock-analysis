@@ -1,0 +1,298 @@
+Now let me synthesize everything into the research memo.
+
+---
+
+# Research Memo — 2026-07-08
+
+## 1. Market Regime
+
+**Verdict: WEAK/RANGE — No new positions**
+
+The headline indices paint a deceptive picture today. All three major indices are green (上证 +0.52%, 深证 +0.08%, 创业板 +0.95%), and 科创50 is surging +3.13%. But beneath the surface, this is a "false rally":
+
+- **Breadth: 0.545:1** (1,886 up vs 3,458 down). Nearly twice as many stocks are declining as advancing.
+- **Distribution:** The bulk of the market is clustered in f0_2 (2,313 stocks down 0-2%) and r0_2 (1,252 stocks up 0-2%). Neither tail is extreme — f10 only 13, r10 only 43.
+- **Context:** Yesterday (July 7) was brutal — 上证 fell below 4000 for the 4th time this year, ~4,800 stocks declined, volume contracted to 2.58万亿. Today's index bounce is likely a dead-cat within a weak tape.
+- **IV:** No data available (all IV proxies returned "无数据"). Fall back to normal sizing assumptions.
+
+**Buy Gate Result: FAIL**
+- Up/Down ratio 0.545:1 — **BELOW 1.5:1 minimum** ❌
+- 3/3 major indices green ✅
+- f10 = 13 (< 30) ✅
+
+The breadth gate alone is sufficient to block all new entries. Per the system: *"If these are not met, do not force a SMALL BUY. Focus on HOLD / SELL / skip_list only."*
+
+**Entry Regime signal:** `allow_new_positions: true` but `regime: "weak"` with `sizing_multiplier: 0.5`. However, I'm overriding this — the breadth gate (Rule 1 minimum buy gate) takes precedence over the entry regime's permissiveness. The regime says "allow" but the gate says "no." Gate wins.
+
+**Breadth one-liner:** "Breadth 0.55:1 bearish divergence — indices green but ~2x more decliners than advancers, 43涨停/13跌停, weak tape masking behind index heavyweights."
+
+---
+
+## 2. Sector Analysis
+
+### Hot Sectors (Top 5 today)
+| Sector | Today | Trend |
+|--------|-------|-------|
+| 计算机设备 | +3.61% | Tech rotation, AI infrastructure |
+| IT服务Ⅱ | +3.54% | Same AI theme |
+| 通信设备 | +2.95% | AI supply chain |
+| 半导体 | +2.83% | Price hikes + ASML guidance + 先进封装 |
+| 油服工程 | +2.62% | Energy outlier in tech tape |
+
+### Cold Sectors (Bottom 5)
+| Sector | Today | Trend |
+|--------|-------|-------|
+| 能源金属 | -4.89% | Lithium crash — 融捷股份/盛新锂能 跌停 |
+| 电机Ⅱ | -4.45% | Broad industrial weakness |
+| 家电零部件Ⅱ | -3.20% | Consumer/industrial drag |
+| 养殖业 | -3.10% | Agri sell-off |
+| 饲料 | -3.01% | Same |
+
+### Sector Rotation Signals
+- **Persistent:** 半导体, 通信设备, 计算机设备 — AI hardware theme is the only game in town. These sectors have led for multiple weeks.
+- **Whipsaw:** 能源金属 went from +5% on June 24 (锂矿涨停潮) to -4.89% today (跌停潮). Classic trap for momentum chasers. This validates the hypothesis that sector persistence matters and one-day spikes are dangerous.
+- **Divergence:** The market is extremely narrow — only tech/AI hardware sectors are performing. Everything else (materials, consumer, agri, industrials) is being de-risked aggressively.
+
+**Position alignment:** 0/0 positions (no active positions). Cash is 100%.
+
+---
+
+## 3. Position Review
+
+**No active positions.** Portfolio is 100% cash (¥985,121), having realized -¥14,879 (-1.49%) from prior trades.
+
+No action needed on existing positions.
+
+---
+
+## 4. New Entry Candidates — ALL SKIPPED
+
+Despite several attractive setups in hot sectors (半导体, 计算机设备), the breadth gate blocks all entries. Here's what I would buy if breadth normalized:
+
+### Would-Buy Candidates (sector + RPS + MA all check out, but breadth kills them)
+
+**A. 扬杰科技 (300373)** — 半导体, 分立器件
+- RPS120: 92.0% (sweet spot boundary)
+- MA: dist_ma5 -2.4% / dist_ma10 -4.9% / dist_ma20 +8.2% → all within tolerance
+- Catalyst: 7月起涨价函, 15-25% price hike, industry-wide. 最新季度净利+41%.
+- score_company 8.7, 1 risk. 公募持股受青睐.
+- **Verdict:** Would be BUY 5-7% if breadth ≥ 1.5:1. Currently SKIP for breadth.
+
+**B. 思瑞浦 (688536)** — 半导体, 模拟芯片设计
+- RPS120: 93.67% (extended zone, but sector top 10% → Rule 2 allows)
+- MA: dist_ma5 -2.8% / dist_ma10 -0.8% / dist_ma20 +5.2% → tight to MAs, ideal
+- Catalyst: 净利+577%, 设立5亿投资基金, 半导体涨价周期
+- score_company 8.1, 1 risk (商誉). 8 highlights.
+- **Verdict:** Would be BUY 5-7%. SKIP for breadth.
+
+**C. 路维光电 (688401)** — 半导体, 半导体材料
+- RPS120: 91.31% (SWEET SPOT)
+- MA: dist_ma5 -7.6% (pulling back to MA5 — actually favorable), dist_ma10 -2.5%, dist_ma20 +4.1%
+- 0 risks, score_company 8.4, 北向3.9%
+- **Verdict:** Would be BUY 5-7%. SKIP for breadth.
+
+**D. 奥来德 (688378)** — 光学光电子
+- RPS120: 93.18% (extended zone, sector in top domains)
+- MA: dist_ma5 -0.7% / dist_ma10 +1.8% / dist_ma20 +11.3% → dist_ma20 elevated but below 12%
+- Catalyst: H1业绩预告 净利+492%~604%, 合同负债+860%
+- score_company 7.7, 1 risk
+- **Verdict:** Would be SMALL BUY 3-5%. SKIP for breadth.
+
+### Skip-For-MA-Distance Candidates (would fail even with good breadth)
+
+**E. 华天科技 (002185)** — 半导体封测
+- dist_ma20_pct: +12.8% → **Rule 2b VIOLATION** (>12%)
+- Also: dist_ma5 +4.9% approaching 6% threshold
+- **Verdict:** SKIP for MA extension regardless of breadth
+
+**F. 京仪装备 (688652)** — 半导体设备
+- dist_ma10_pct: +11.2% → **Rule 2b VIOLATION** (>8%)
+- dist_ma20_pct: +26.6% → extreme extension
+- **Verdict:** Hard SKIP — chasing into extreme overextension
+
+**G. 伟测科技 (688372)** — 半导体封测
+- dist_ma20_pct: +13.0% → **Rule 2b VIOLATION** (>12%)
+- dist_ma10_pct: +7.3% approaching 8%
+- **Verdict:** SKIP for MA extension
+
+**H. 隆达股份 (688231)** — 金属新材料
+- dist_ma5_pct: +10.2% → **Rule 2b VIOLATION** (>6%)
+- dist_ma10_pct: +8.4% → **Rule 2b VIOLATION** (>8%)
+- **Verdict:** Hard SKIP
+
+### Skip-For-Cold-Sector
+
+**I. 融捷股份 (002192)** — 能源金属 (锂)
+- Sector: 能源金属 BOTTOM 1 at -4.89%
+- Today: 触及跌停, sector-wide sell-off
+- RPS120: 93.14% — but sector gravity is overwhelming
+- **Verdict:** Hard skip. Cold sector = no entry regardless of RPS.
+
+---
+
+## 5. Skip List (Formal)
+
+Focusing on the highest-conviction candidates that are blocked:
+
+| Code | Name | Reason | RPS120 |
+|------|------|--------|--------|
+| 300373 | 扬杰科技 | Breadth 0.55:1 below 1.5:1 buy gate; sector 半导体 top 4, catalyst 涨价函 strong, would buy otherwise | 92.0 |
+| 688536 | 思瑞浦 | Breadth gate fail; 半导体 sector, 净利+577%, tight to MAs, high-conviction skip | 93.67 |
+| 688401 | 路维光电 | Breadth gate fail; RPS120 in sweet spot 91.3%, 0 risks, semiconductor sector | 91.31 |
+| 688378 | 奥来德 | Breadth gate fail; H1业绩+492-604%, 光学光电子 sector | 93.18 |
+| 002185 | 华天科技 | dist_ma20_pct +12.8% > 12% Rule 2b; chasing extreme extension | 90.03 |
+| 688652 | 京仪装备 | dist_ma10 +11.2% > 8%, dist_ma20 +26.6% > 12% Rule 2b | 93.51 |
+| 688372 | 伟测科技 | dist_ma20 +13.0% > 12% Rule 2b | 90.66 |
+| 688231 | 隆达股份 | dist_ma5 +10.2% > 6%, dist_ma10 +8.4% > 8% Rule 2b | 92.51 |
+| 002192 | 融捷股份 | 能源金属 sector bottom 1 (-4.89%), today near limit-down, sector gravity | 93.14 |
+| 002290 | 禾盛新材 | 家电零部件 sector bottom 3 (-3.20%), cold sector | 94.44 |
+
+---
+
+## 6. Learnings
+
+1. **False rally divergence (new signal):** Today's market shows a critical pattern — all 3 major indices green but breadth at 0.545:1 with nearly 2x more decliners. This "index masking" occurs when a handful of large-cap tech stocks (likely 科创50 components, which surged +3.13%) prop up indices while the broader market sells off. The buy gate correctly identified this as a no-entry environment. **Mechanism:** Institutional rotation into defensive large-caps creates index-level strength that hides broad-based distribution. The breadth ratio is a more honest signal than index color.
+
+2. **Sector whipsaw in energy metals (observation):** 能源金属 went from sector leader (+5% on June 24 with lithium stocks surging) to sector bottom (-4.89% today with 融捷股份/盛新锂能 hitting limit down) in just 10 trading days. This is a textbook momentum trap — buying a sector spike without confirming persistence leads to severe losses. This reinforces [h019]: bottom-list sectors are hard no-buy zones, but also suggests that even recently-hot sectors need multi-day persistence checks.
+
+3. **Semiconductor resilience pattern (supporting [h028]):** Despite broad market weakness, 半导体 continues to show relative strength (+2.83% today). The AI-driven semiconductor super-cycle (price hikes, ASML raised guidance, advanced packaging demand) provides persistent upside. When breadth eventually normalizes, semiconductor stocks (扬杰科技, 思瑞浦, 路维光电) should be the first to buy.
+
+4. **MA-distance discipline validated (supporting [h027]):** Multiple otherwise-attractive stocks (华天科技, 京仪装备, 伟测科技, 隆达股份) are blocked by Rule 2b MA distance checks. These are stocks that a less disciplined system would have bought — and likely gotten hurt on as mean-reversion kicks in. The rule is doing real work.
+
+---
+
+## 7. Uncertainty Flags
+
+1. **I'm uncertain whether today's index bounce is durable or a dead-cat.** The 科创50 +3.13% is suspicious given the breadth. If this is short-covering in large-cap tech, a reversal could come quickly. I'd rather miss one day of upside than get caught in a false rally.
+
+2. **IV data is completely absent** — all `iv_proxy` fields return "无数据" with fallback to overall market IV. This means I cannot gauge whether options markets are pricing elevated risk. In normal circumstances, missing IV data is a risk factor I'd note but not paralyze over.
+
+3. **The entry_regime says `allow_new_positions: true` but the buy gate says no.** The system's own regime evaluator is more permissive than my gate. I'm siding with the stricter interpretation because: (a) the breadth ratio of 0.545 is decisively below 1.5, not borderline; (b) V1's biggest mistake was forcing entries in weak environments; (c) cash is a valid position.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "计算机设备", "5d_pct": 3.61, "trend": "AI infrastructure rotation, persistent"},
+      {"name": "IT服务Ⅱ", "5d_pct": 3.54, "trend": "Same AI theme, persistent"},
+      {"name": "通信设备", "5d_pct": 2.95, "trend": "AI supply chain, steady"},
+      {"name": "半导体", "5d_pct": 2.83, "trend": "Price hike cycle + ASML guidance, persistent leader"},
+      {"name": "油服工程", "5d_pct": 2.62, "trend": "Energy outlier, one-day spike?"}
+    ],
+    "cold_sectors": [
+      {"name": "能源金属", "5d_pct": -4.89, "trend": "Lithium crash, whipsaw from June 24 spike"},
+      {"name": "电机Ⅱ", "5d_pct": -4.45, "trend": "Broad industrial weakness"},
+      {"name": "家电零部件Ⅱ", "5d_pct": -3.20, "trend": "Deteriorating"},
+      {"name": "养殖业", "5d_pct": -3.10, "trend": "Agri sell-off"},
+      {"name": "饲料", "5d_pct": -3.01, "trend": "Deteriorating"}
+    ],
+    "position_alignment": "0/0 positions (all cash)",
+    "regime": "Tech/AI hardware leadership, extreme narrow rally, energy metals crashing, broad market selling off beneath green indices — false rally signal"
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "reason": "Breadth gate FAIL (0.545:1 < 1.5:1). 半导体 sector top 4 (+2.83%), RPS120 92.0% sweet spot, catalyst: 涨价函15-25%, dist_ma OK. Would BUY 5-7% if breadth normalizes.",
+      "rps120": 92.0
+    },
+    {
+      "code": "688536",
+      "name": "思瑞浦",
+      "reason": "Breadth gate FAIL. 半导体 sector top 4, RPS120 93.67% (extended but sector top 10%), 净利+577%, dist_ma tight (-2.8%/-0.8%/+5.2%). Would BUY if breadth ≥ 1.5:1.",
+      "rps120": 93.67
+    },
+    {
+      "code": "688401",
+      "name": "路维光电",
+      "reason": "Breadth gate FAIL. 半导体 sector top 4, RPS120 91.31% in sweet spot, 0 risks, 北向3.9%. High-conviction skip — first to buy when breadth recovers.",
+      "rps120": 91.31
+    },
+    {
+      "code": "688378",
+      "name": "奥来德",
+      "reason": "Breadth gate FAIL. 光学光电子 sector related to hot tech, H1业绩预告净利+492-604%, 合同负债+860%. Would SMALL BUY if breadth recovers.",
+      "rps120": 93.18
+    },
+    {
+      "code": "002185",
+      "name": "华天科技",
+      "reason": "Rule 2b: dist_ma20_pct +12.8% > 12%. Extreme MA20 extension. Also dist_ma5 +4.9% approaching 6% threshold. Skip regardless of breadth.",
+      "rps120": 90.03
+    },
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "Rule 2b: dist_ma10_pct +11.2% > 8%, dist_ma20_pct +26.6% > 12%. Extreme overextension. Hard skip.",
+      "rps120": 93.51
+    },
+    {
+      "code": "688372",
+      "name": "伟测科技",
+      "reason": "Rule 2b: dist_ma20_pct +13.0% > 12%. dist_ma10 +7.3% approaching 8%. Overextended from support.",
+      "rps120": 90.66
+    },
+    {
+      "code": "688231",
+      "name": "隆达股份",
+      "reason": "Rule 2b: dist_ma5_pct +10.2% > 6%, dist_ma10_pct +8.4% > 8%. Double MA violation. Hard skip.",
+      "rps120": 92.51
+    },
+    {
+      "code": "002192",
+      "name": "融捷股份",
+      "reason": "能源金属 sector bottom 1 (-4.89%), sector-wide lithium crash, 触及跌停 today. Cold sector = no entry regardless of RPS.",
+      "rps120": 93.14
+    },
+    {
+      "code": "002290",
+      "name": "禾盛新材",
+      "reason": "家电零部件 sector bottom 3 (-3.20%). Cold sector gravity. Also 10-day relative strength at 4.1% percentile — stock already deteriorating.",
+      "rps120": 94.44
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "False rally divergence detected: all 3 major indices green but breadth at 0.545:1 with ~2x more decliners. Large-cap tech (科创50 +3.13%) masks broad distribution. The breadth ratio is a more honest signal than index color — the buy gate correctly blocked entries.",
+      "type": "signal",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013 (strong breadth alone insufficient; need candidate data) — extended: even green indices are insufficient when breadth contradicts",
+      "mechanism": "Institutional rotation into defensive large-caps creates index-level strength that hides broad-based distribution. The up/down ratio captures what the index color conceals."
+    },
+    {
+      "text": "能源金属 sector whipsaw: went from +5% leader (June 24 lithium surge) to -4.89% bottom (July 8 lithium crash with multiple limit-downs) in 10 days. Sector momentum spikes without persistence confirmation are traps.",
+      "type": "observation",
+      "tags": ["sector", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019 (bottom-list sectors = hard no-buy zones) and h028 (today's leaders in tech hardware, cyclicals being de-risked)",
+      "mechanism": "Commodity-linked sectors (lithium, energy metals) are prone to violent reversals driven by futures prices and supply/demand news cycles rather than sustainable earnings trends."
+    },
+    {
+      "text": "Semiconductor sector resilience continues: despite broad market selling, 半导体 +2.83% and remains in top 4. AI-driven price hike cycle (扬杰科技/芯联集成/斯达半导 all issuing涨价函 15-25%), ASML raised guidance, advanced packaging demand provide persistent catalyst. When breadth normalizes, semiconductor should be first sector to buy.",
+      "type": "observation",
+      "tags": ["sector", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h028",
+      "mechanism": "The semiconductor super-cycle (WSTS forecasts $1.51T global market in 2026, ~90% YoY) provides a structural demand tailwind that sector rotation and profit-taking cannot easily derail."
+    },
+    {
+      "text": "MA-distance Rule 2b doing real work: 4 otherwise-attractive stocks (华天科技 +12.8% MA20, 京仪装备 +26.6% MA20, 伟测科技 +13.0% MA20, 隆达股份 +10.2% MA5) blocked by overextension rules. A less disciplined system would have bought these — and faced high mean-reversion risk in a weak tape.",
+      "type": "rule",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027 (MA-distance discipline remains critical inside hot sectors)",
+      "mechanism": "Stocks that have run far above their moving averages have already priced in near-term catalysts. In a weak tape, the probability of profit-taking pulling them back to support is high."
+    }
+  ],
+  "market_summary": "False rally day: indices green (上证 +0.52%, 创业板 +0.95%, 科创50 +3.13%) but breadth decisively bearish at 0.545:1 (1886↑/3458↓). Yesterday 上证 lost 4000 for 4th time in 2026, ~4800 stocks fell. Today's bounce is narrow — only tech/AI hardware sectors (半导体 +2.83%, 计算机设备 +3.61%, 通信设备 +2.95%) are green. Energy metals crash (-4.89%, 融捷股份/盛新锂能跌停). IV data unavailable. Buy gate FAILS: breadth well below 1.5:1 minimum. Holding 100% cash (¥985K). No new positions until breadth recovers.",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}
+```

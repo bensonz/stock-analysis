@@ -1,7 +1,7 @@
 {
   "code": "002192",
   "name": "融捷股份",
-  "status": "active",
+  "status": "closed",
   "thesis": "碳酸锂5天涨8.67%至16.3万/吨，锂矿板块走强，Q1净利+1288%，甲基卡锂矿产能释放",
   "entryDate": "2026-07-03",
   "entryPrice": 92.09,
@@ -44,15 +44,22 @@
       "change_pct": 5.98,
       "action": "HOLD",
       "note": "PnL +5.98% in 5 days, exceptional relative strength (+3.39% on a 4700-down panic day). Lithium thesis strengthening: 雅化集团一字涨停(H1 +710-857%), US碳酸锂战略收储, 碳酸锂稳定在15.6万/吨. dist_ma10 +8.8% elevated but acceptable for existing position. Approaching +10% threshold (101.30) — monitor to raise stop to breakeven at 92.09 per h023. Sector (能源金属) not in cold zone."
+    },
+    {
+      "date": "2026-07-08",
+      "price": 87.84,
+      "change_pct": -4.62,
+      "action": "SELL",
+      "note": "SECTOR GRAVITY + STOP PROXIMITY: 能源金属 is #1 worst sector today (-4.89%), stock hit -10% 跌停. Only 0.4% above stop (87.49). Rule violation CRITICAL — proactive exit before gap-through. Sector thesis destroyed in 1 day. PnL -4.62% in 5 days. Per h019: cold sector = unconditional exit."
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-07-08",
+  "exitPrice": 87.84,
+  "exitReason": "SECTOR GRAVITY + STOP PROXIMITY: 能源金属 is #1 worst sector today (-4.89%), stock hit -10% 跌停. Only 0.4% above stop (87.49). Rule violation CRITICAL — proactive exit before gap-through. Sector thesis destroyed in 1 day. PnL -4.62% in 5 days. Per h019: cold sector = unconditional exit.",
+  "returnPct": -4.62,
+  "holdingDays": 5,
+  "lessonLearned": "",
   "createdAt": "2026-07-03T11:41:08.624555+08:00",
-  "updatedAt": "2026-07-07T15:38:06.674055+08:00",
+  "updatedAt": "2026-07-08T11:39:50.043651+08:00",
   "trackerVersion": "2.1"
 }

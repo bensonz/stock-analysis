@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 231128,
+  "output_tokens": 8864,
+  "rounds": 3,
+  "duration_sec": 151.0,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月8日 市场分析 涨跌家数",
+        "max_results": 5
+      },
+      "result_length": 2598
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体板块 涨价 2026年7月 扬杰科技 芯联集成",
+        "max_results": 5
+      },
+      "result_length": 2788
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "计算机设备板块 IT服务 2026年7月 上涨原因",
+        "max_results": 5
+      },
+      "result_length": 2327
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "上证指数 4000点 2026年7月8日 市场分化 个股普跌"
+      },
+      "result_length": 3293
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "能源金属 锂矿 下跌 2026年7月 融捷股份 盛新锂能 天齐锂业"
+      },
+      "result_length": 2436
+    }
+  ],
+  "fallback_used": false
+}
