@@ -48,6 +48,7 @@ for d in [CRAWL_DIR, MARKET_DIR, PRICES_DIR]:
 # Import CheeseForTune client (same directory)
 sys.path.insert(0, str(Path(__file__).parent))
 from cheesefortune_client import CheeseFortuneClient, normalize_code
+from run_paths import list_runs_sorted
 
 
 def fetch_strategy_pool(strategy_id: str = DEFAULT_STRATEGY_ID) -> dict:
@@ -1395,18 +1396,19 @@ def load_recent_watchlists(days: int = 5) -> list[dict]:
     """
     watchlists = []
 
-    # New location: runs/*/output/watchlist.json
-    runs_dir = PROJECT_ROOT / "runs"
-    if runs_dir.exists():
-        for d in sorted(runs_dir.iterdir(), reverse=True):
-            if len(watchlists) >= days:
-                break
-            wl_file = d / "output" / "watchlist.json"
-            if wl_file.exists():
-                try:
-                    watchlists.append(json.loads(wl_file.read_text(encoding="utf-8")))
-                except (json.JSONDecodeError, IOError):
-                    pass
+    # New location: runs/<date>/<slot>/output/watchlist.json (slot-aware), plus
+    # legacy runs/<date>/output/watchlist.json. Sort by run_started_at (from each
+    # run's manifest.json, mtime fallback) — NOT by directory name, since
+    # "afternoon" < "noon" alphabetically would order slots backwards.
+    for _date, _slot, run_dir in list_runs_sorted():
+        if len(watchlists) >= days:
+            break
+        wl_file = run_dir / "output" / "watchlist.json"
+        if wl_file.exists():
+            try:
+                watchlists.append(json.loads(wl_file.read_text(encoding="utf-8")))
+            except (json.JSONDecodeError, IOError):
+                pass
 
     # Legacy fallback: watchlist/*.json
     if len(watchlists) < days:

@@ -19,8 +19,16 @@ Usage:
     python scripts/run_daily.py --apply FILE       # Apply LLM response from file (Phase 3+4)
     python scripts/run_daily.py --validate         # Run validation only
     python scripts/run_daily.py --validate DATE    # Validate specific date
-    python scripts/run_daily.py --reset-to DATE    # Reset state to end of DATE
+    python scripts/run_daily.py --reset-to DATE    # Reset state to end of DATE (afternoon slot by default)
     python scripts/run_daily.py --list-runs        # Show all runs with status
+
+Run slots (noon vs afternoon):
+    The pipeline runs twice per trading day and each run writes to its own slot
+    subfolder so neither overwrites the other:
+        runs/<date>/noon/       (hour < 13, intraday, UNSETTLED)
+        runs/<date>/afternoon/  (hour >= 13, post-close, settled)
+    The slot is auto-derived from the local clock at start. Override with
+    --slot {noon,afternoon} on any command (e.g. manual reruns/backfills).
 """
 
 import json
@@ -66,6 +74,14 @@ from position_manager import (
 )
 from report_generator import generate_candidates_md, generate_watchlist_json, generate_report_md
 from run_rules import run_all_rules
+from run_paths import (
+    RUNS_DIR,
+    get_run_dir,
+    resolve_slot,
+    find_run_dir,
+    list_runs_sorted,
+    run_started_at,
+)
 from validator import validate_data, validate_output
 from contracts import (
     PipelineStatus,
@@ -83,8 +99,7 @@ from hypothesis_manager import (
     get_active_for_prompt as hypothesis_prompt,
 )
 
-# Directories
-RUNS_DIR = PROJECT_ROOT / "runs"
+# Directories (RUNS_DIR / get_run_dir now live in run_paths for slot-aware layout)
 LEARNINGS_FILE = PROJECT_ROOT / "LEARNINGS.md"
 HYPOTHESES_FILE = TRACKING_DIR / "hypotheses.json"
 
@@ -184,14 +199,6 @@ def _build_strategy_intersection(remote_strategy: dict, rps_data: dict) -> tuple
         "error": remote_strategy.get("error"),
         "debug": debug,
     }, debug
-
-
-def get_run_dir(date: str) -> Path:
-    """Get the run directory for a date, creating subdirs as needed."""
-    run_dir = RUNS_DIR / date
-    (run_dir / "input").mkdir(parents=True, exist_ok=True)
-    (run_dir / "output").mkdir(parents=True, exist_ok=True)
-    return run_dir
 
 
 def snapshot_positions(snapshot_type: str, date: str) -> dict:
@@ -417,18 +424,23 @@ def check_snapshot_consistency(date: str, current_snapshot: dict) -> list[str]:
     if not RUNS_DIR.exists():
         return []
 
-    # Find the most recent prior run with a post-run snapshot
-    prior_dates = sorted(
-        [d.name for d in RUNS_DIR.iterdir()
-         if d.is_dir() and d.name < date
-         and (d / "output" / "positions_snapshot.json").exists()],
-        reverse=True
-    )
+    # Find the most recent prior run (any slot, earlier date) with a post-run
+    # snapshot. list_runs_sorted orders by run_started_at, newest first, so the
+    # first match on an earlier date is the latest settled state to compare to.
+    prior_date = None
+    prior_file = None
+    for run_date, _slot, run_dir in list_runs_sorted():
+        if run_date >= date:
+            continue
+        candidate = run_dir / "output" / "positions_snapshot.json"
+        if candidate.exists():
+            prior_date = run_date
+            prior_file = candidate
+            break
 
-    if not prior_dates:
+    if prior_file is None:
         return []  # No prior run to compare against
 
-    prior_file = RUNS_DIR / prior_dates[0] / "output" / "positions_snapshot.json"
     prior = json.loads(prior_file.read_text(encoding="utf-8"))
 
     # Compare active position codes
@@ -439,9 +451,9 @@ def check_snapshot_consistency(date: str, current_snapshot: dict) -> list[str]:
         added = current_codes - prior_codes
         removed = prior_codes - current_codes
         if added:
-            warnings.append(f"Positions added outside pipeline since {prior_dates[0]}: {added}")
+            warnings.append(f"Positions added outside pipeline since {prior_date}: {added}")
         if removed:
-            warnings.append(f"Positions removed outside pipeline since {prior_dates[0]}: {removed}")
+            warnings.append(f"Positions removed outside pipeline since {prior_date}: {removed}")
 
     # Compare closed positions count
     prior_closed = len(prior.get("closed_positions", {}))
@@ -454,29 +466,33 @@ def check_snapshot_consistency(date: str, current_snapshot: dict) -> list[str]:
     return warnings
 
 
-def reset_to_date(target_date: str) -> None:
+def reset_to_date(target_date: str, slot: str | None = None) -> None:
     """Reset mutable state to the end-of-day state of target_date.
 
-    Restores tracking position files from runs/<target_date>/output/positions_snapshot.json,
-    deletes any run dirs after target_date, and restores auxiliary state snapshots
-    like tracking/hypotheses.json and LEARNINGS.md when available.
-    """
-    run_dir = RUNS_DIR / target_date
-    snapshot_file = run_dir / "output" / "positions_snapshot.json"
+    Restores tracking position files from the target date's post-run snapshot,
+    deletes any run dirs after target_date, and restores auxiliary state
+    snapshots like tracking/hypotheses.json and LEARNINGS.md when available.
 
-    if not snapshot_file.exists():
+    When multiple slots exist for target_date, the afternoon (settled) run is
+    used by default; pass ``slot`` to force a specific one. Legacy layouts
+    (runs/<date>/output with no slot) resolve as an implicit afternoon run.
+    """
+    run_dir = find_run_dir(target_date, slot)
+    snapshot_file = run_dir / "output" / "positions_snapshot.json" if run_dir else None
+
+    if snapshot_file is None or not snapshot_file.exists():
         # Try input snapshot if output doesn't exist (run never completed)
-        snapshot_file = run_dir / "input" / "positions_snapshot.json"
-        if not snapshot_file.exists():
-            print(f"No snapshot found for {target_date}", file=sys.stderr)
-            if RUNS_DIR.exists():
-                print(f"Available dates:", file=sys.stderr)
-                for d in sorted(RUNS_DIR.iterdir()):
-                    if d.is_dir():
-                        has_out = (d / "output" / "positions_snapshot.json").exists()
-                        has_in = (d / "input" / "positions_snapshot.json").exists()
-                        status = "✓ complete" if has_out else ("⚠ input only" if has_in else "✗ no snapshot")
-                        print(f"  {d.name}  {status}", file=sys.stderr)
+        if run_dir is not None:
+            snapshot_file = run_dir / "input" / "positions_snapshot.json"
+        if snapshot_file is None or not snapshot_file.exists():
+            print(f"No snapshot found for {target_date}"
+                  + (f" (slot={slot})" if slot else ""), file=sys.stderr)
+            print(f"Available runs:", file=sys.stderr)
+            for run_date, run_slot, d in list_runs_sorted():
+                has_out = (d / "output" / "positions_snapshot.json").exists()
+                has_in = (d / "input" / "positions_snapshot.json").exists()
+                status = "✓ complete" if has_out else ("⚠ input only" if has_in else "✗ no snapshot")
+                print(f"  {run_date}  {run_slot:9s}  {status}", file=sys.stderr)
             sys.exit(1)
 
     snapshot = json.loads(snapshot_file.read_text(encoding="utf-8"))
@@ -509,14 +525,13 @@ def reset_to_date(target_date: str) -> None:
 
 
 def list_runs() -> None:
-    """List all run directories with status."""
-    if not RUNS_DIR.exists():
+    """List all run directories with slot, start time, and status."""
+    runs = list_runs_sorted(reverse=False)
+    if not runs:
         print("No runs yet.", file=sys.stderr)
         return
 
-    for d in sorted(RUNS_DIR.iterdir()):
-        if not d.is_dir():
-            continue
+    for date, slot, d in runs:
         has_phase1 = (d / "phase1.json").exists()
         has_prompt = (d / "prompt.md").exists()
         has_response = (d / "response.json").exists()
@@ -533,7 +548,9 @@ def list_runs() -> None:
         else:
             status = "○ started"
 
-        print(f"  {d.name}  {status}")
+        started = run_started_at(d)
+        legacy = " (legacy)" if d.name == date else ""
+        print(f"  {date}  {slot:9s}  {started:32s}  {status}{legacy}")
 
 
 def preflight_pricedb_or_exit(manifest) -> None:
@@ -639,7 +656,7 @@ def preflight_pricedb_or_exit(manifest) -> None:
         print(f"  ⚠ preflight_pricedb check raised: {e}", file=sys.stderr)
 
 
-def phase1_collect(date: str) -> dict:
+def phase1_collect(date: str, slot: str) -> dict:
     """Phase 1: Collect all data. Pure Python, no LLM.
 
     Runs independent tasks in parallel:
@@ -647,12 +664,12 @@ def phase1_collect(date: str) -> dict:
       - Then enrichment, market, positions, and watchlists run concurrently
     """
     log = {"phase": "collect", "start": time.time(), "errors": []}
-    data = {"date": date}
+    data = {"date": date, "slot": slot}
 
     print("Phase 1: Collecting data...", file=sys.stderr)
 
     # Create run directory and take pre-run snapshot
-    run_dir = get_run_dir(date)
+    run_dir = get_run_dir(date, slot)
     input_dir = run_dir / "input"
 
     pre_snap = snapshot_positions("pre_run", date)
@@ -1038,7 +1055,7 @@ def phase1_collect(date: str) -> dict:
 
     # Generate candidates.md — always available, even when regime blocks buys
     try:
-        output_dir = RUNS_DIR / date / "output"
+        output_dir = run_dir / "output"
         output_dir.mkdir(parents=True, exist_ok=True)
         cand_path = generate_candidates_md(date, data, output_dir=output_dir)
         print(f"  → Candidates list: {cand_path}", file=sys.stderr)
@@ -1141,7 +1158,7 @@ def phase2_build_prompt(data: dict) -> str:
 """
 
     # Save prompt to run dir
-    run_dir = get_run_dir(data["date"])
+    run_dir = get_run_dir(data["date"], data.get("slot") or resolve_slot())
     (run_dir / "prompt.md").write_text(prompt, encoding="utf-8")
 
     return prompt
@@ -1222,7 +1239,7 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
         Summary of actions taken.
     """
     log = {"phase": "apply", "start": time.time(), "actions": []}
-    run_dir = get_run_dir(date)
+    run_dir = get_run_dir(date, data.get("slot") or resolve_slot())
     output_dir = run_dir / "output"
 
     # 0. Enforce non-negotiable exits before applying LLM decisions. Stops and
@@ -1547,9 +1564,9 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
     return log
 
 
-def phase4_validate_and_log(date: str, logs: list[dict]) -> list[str]:
+def phase4_validate_and_log(date: str, logs: list[dict], slot: str) -> list[str]:
     """Phase 4: Validate output and save run log."""
-    errors = validate_output(date)
+    errors = validate_output(date, slot)
 
     # Run final rule check
     try:
@@ -1561,10 +1578,11 @@ def phase4_validate_and_log(date: str, logs: list[dict]) -> list[str]:
     except Exception:
         pass
 
-    # Save run log to runs/<date>/log.json
-    run_dir = get_run_dir(date)
+    # Save run log to runs/<date>/<slot>/log.json
+    run_dir = get_run_dir(date, slot)
     run_log = {
         "date": date,
+        "slot": slot,
         "runs": logs,
         "validation_errors": errors,
         "summary": {
@@ -1604,9 +1622,30 @@ def _append_learnings(lessons: list) -> None:
     learnings_file.write_text(content, encoding="utf-8")
 
 
+def _parse_slot_arg(args: list[str]) -> str | None:
+    """Extract an optional ``--slot {noon,afternoon}`` override from args."""
+    if "--slot" not in args:
+        return None
+    idx = args.index("--slot")
+    if idx + 1 >= len(args):
+        print("Usage: --slot {noon,afternoon}", file=sys.stderr)
+        sys.exit(1)
+    value = args[idx + 1]
+    if value not in ("noon", "afternoon"):
+        print(f"Invalid --slot {value!r}; expected 'noon' or 'afternoon'", file=sys.stderr)
+        sys.exit(1)
+    return value
+
+
 def main():
-    date = datetime.now().strftime("%Y-%m-%d")
+    run_start = datetime.now().astimezone()
+    date = run_start.strftime("%Y-%m-%d")
     args = sys.argv[1:]
+
+    # Slot: --slot override wins, else derived from the local clock at run start.
+    slot_override = _parse_slot_arg(args)
+    slot = resolve_slot(slot_override, run_start)
+    run_started_at_iso = run_start.isoformat()
 
     if "--list-runs" in args:
         list_runs()
@@ -1615,10 +1654,10 @@ def main():
     if "--reset-to" in args:
         idx = args.index("--reset-to")
         if idx + 1 >= len(args):
-            print("Usage: --reset-to YYYY-MM-DD", file=sys.stderr)
+            print("Usage: --reset-to YYYY-MM-DD [--slot {noon,afternoon}]", file=sys.stderr)
             sys.exit(1)
         target_date = args[idx + 1]
-        reset_to_date(target_date)
+        reset_to_date(target_date, slot_override)
         return
 
     if "--validate" in args:
@@ -1627,7 +1666,7 @@ def main():
             validate_date = args[idx + 1]
         else:
             validate_date = date
-        errors = validate_output(validate_date)
+        errors = validate_output(validate_date, slot_override)
         if errors:
             for e in errors:
                 print(f"  {e}")
@@ -1658,7 +1697,7 @@ def main():
         no_commit = "--no-commit" in args
 
         print(f"{'='*60}", file=sys.stderr)
-        print(f"Stock Analysis Pipeline — {date} (full auto, {provider_label})", file=sys.stderr)
+        print(f"Stock Analysis Pipeline — {date} [{slot}] (full auto, {provider_label})", file=sys.stderr)
         print(f"{'='*60}", file=sys.stderr)
 
         # Pre-flight: Source health check
@@ -1672,8 +1711,13 @@ def main():
                 extra = f" (latest: {status['latest_date']}, stale: {status.get('stale')})"
             print(f"  {icon} {src}: {status['status']}{latency}{extra}", file=sys.stderr)
 
-        run_dir = get_run_dir(date)
-        manifest = RunManifest(date=date, status=PipelineStatus.SUCCESS)
+        run_dir = get_run_dir(date, slot)
+        manifest = RunManifest(
+            date=date,
+            status=PipelineStatus.SUCCESS,
+            slot=slot,
+            run_started_at=run_started_at_iso,
+        )
         manifest.add_phase("health_check", "ok", details={"sources": health})
 
         # Warn if critical sources are all down
@@ -1687,7 +1731,7 @@ def main():
         preflight_pricedb_or_exit(manifest)
 
         # Phase 1: Collect
-        data = phase1_collect(date)
+        data = phase1_collect(date, slot)
 
         # Save Phase 1 data
         phase1_file = run_dir / "phase1.json"
@@ -1892,7 +1936,7 @@ def main():
 
         # Phase 4: Validate
         print(f"\nPhase 4: Validating...", file=sys.stderr)
-        errors = phase4_validate_and_log(date, all_logs)
+        errors = phase4_validate_and_log(date, all_logs, slot)
         critical_errors = [e for e in errors if isinstance(e, str) and e.startswith("CRITICAL")]
         if critical_errors:
             for e in critical_errors:
@@ -2018,7 +2062,7 @@ def main():
             sys.exit(1)
 
         # Save response.json into run dir
-        run_dir = get_run_dir(date)
+        run_dir = get_run_dir(date, slot)
         (run_dir / "response.json").write_text(
             json.dumps(decisions, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
@@ -2036,7 +2080,7 @@ def main():
             data = json.loads(phase1_file.read_text(encoding="utf-8"))
         else:
             print("Warning: No Phase 1 data found, running Phase 1 first...", file=sys.stderr)
-            data = phase1_collect(date)
+            data = phase1_collect(date, slot)
 
         # Build complete run log from all phases
         all_logs = []
@@ -2070,7 +2114,7 @@ def main():
         all_logs.append(log3)
 
         print(f"\nPhase 4: Validating...", file=sys.stderr)
-        errors = phase4_validate_and_log(date, all_logs)
+        errors = phase4_validate_and_log(date, all_logs, slot)
         if errors:
             print(f"  Validation issues: {errors}", file=sys.stderr)
         else:
@@ -2083,10 +2127,10 @@ def main():
     print(f"{'='*60}", file=sys.stderr)
 
     # Phase 1
-    data = phase1_collect(date)
+    data = phase1_collect(date, slot)
 
     # Save Phase 1 data to run dir for later use with --apply
-    run_dir = get_run_dir(date)
+    run_dir = get_run_dir(date, slot)
     phase1_file = run_dir / "phase1.json"
     # Strip learnings text (too large) before saving
     save_data = {k: v for k, v in data.items() if k not in ("learnings", "_hypothesis_data", "hypothesis_prompt")}

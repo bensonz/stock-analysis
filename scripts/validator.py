@@ -7,7 +7,11 @@ Validator — Consistency checks for the pipeline.
 """
 
 import json
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent))
+from run_paths import find_run_dir
 
 PROJECT_ROOT = Path(__file__).parent.parent
 TRACKING_DIR = PROJECT_ROOT / "tracking"
@@ -66,7 +70,7 @@ def validate_data(data: dict) -> list[str]:
     return errors
 
 
-def validate_output(date: str) -> list[str]:
+def validate_output(date: str, slot: str | None = None) -> list[str]:
     """Check all output files exist and are consistent after pipeline run.
 
     Checks:
@@ -78,13 +82,18 @@ def validate_output(date: str) -> list[str]:
 
     Args:
         date: Date string "YYYY-MM-DD"
+        slot: Optional run slot ("noon"/"afternoon"). When omitted, the canonical
+            run for the date is used (afternoon preferred; legacy layout counts as
+            afternoon).
 
     Returns:
         List of error strings. Empty means all OK.
     """
     errors = []
-    run_dir = PROJECT_ROOT / "runs" / date
-    output_dir = run_dir / "output"
+    run_dir = find_run_dir(date, slot)
+    # Fall back to the legacy path when no run dir is found so the downstream
+    # legacy fallbacks (watchlist/, reports/, tracking/daily/) still apply.
+    output_dir = (run_dir / "output") if run_dir else (PROJECT_ROOT / "runs" / date / "output")
 
     # 1. positions.json matches tracking/*.json
     if POSITIONS_FILE.exists():

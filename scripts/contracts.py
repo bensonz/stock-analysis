@@ -416,6 +416,8 @@ class RunManifest:
     """Machine-readable summary of a pipeline run."""
     date: str
     status: PipelineStatus
+    slot: str = "afternoon"
+    run_started_at: str = ""
     phases: dict = field(default_factory=dict)
     gates: dict = field(default_factory=dict)
     total_duration_sec: float = 0.0
@@ -461,6 +463,8 @@ class RunManifest:
     def to_dict(self) -> dict:
         return {
             "date": self.date,
+            "slot": self.slot,
+            "run_started_at": self.run_started_at,
             "status": self.status.value,
             "exit_code": self.exit_code,
             "total_duration_sec": round(self.total_duration_sec, 1),
