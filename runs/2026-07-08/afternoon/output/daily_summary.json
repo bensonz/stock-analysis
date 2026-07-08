@@ -1,0 +1,36 @@
+{
+  "date": "2026-07-08",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 985121.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -1.49,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -14879.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.4203,
+    "up": 1593,
+    "down": 3790,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 58,
+    "limit_downs": 48,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.42:1, 0/3 major indices green, 58 limit-ups / 48 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "PANIC TAPE — Breadth 0.42:1 (1593↑/3790↓), 48跌停, 0/3 major indices green. 上证-0.49%, 深证-1.87%, 创业板-1.70%, only 科创50+0.73%. Energy/oil services and IT infrastructure leading while lithium/battery metals crash (-7.66%). IV data unavailable. New positions HARD BLOCKED — 100% cash deployed, waiting for breadth recovery."
+  }
+}

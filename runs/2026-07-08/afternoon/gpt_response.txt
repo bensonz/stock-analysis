@@ -1,0 +1,316 @@
+# 🔬 Research Memo — 2026-07-08
+
+## 1. Market Regime
+
+**Verdict: PANIC — Hard Block on New Positions**
+
+```
+Breadth: 0.42:1 (1593 up / 3790 down / 136 flat)
+涨停: 58 | 跌停: 48
+Distribution: heavily skewed negative — f7_10(248) + f4_7(806) = 1054 stocks down >4%
+```
+
+| Index | Close | Change |
+|-------|-------|--------|
+| 上证指数 | 3970.88 | **-0.49%** |
+| 深证成指 | 14939.73 | **-1.87%** |
+| 创业板指 | 3845.35 | **-1.70%** |
+| 科创50 | 2016.23 | **+0.73%** ← solo green |
+
+**Entry gate check (all 3 must pass):**
+- ❌ Up/Down ratio ≥ 1.5:1 → **0.42:1 FAIL**
+- ❌ ≥2 major indices green → **0/3 FAIL**
+- ❌ Not panic (breadth ≥1:1, f10 < 30) → **FAIL (0.42:1, f10=48≥30)**
+
+**IV Sentiment: No data available** — IV proxy unavailable across all candidates. Fall back to overall market IV sentiment shows "无数据". This doesn't change the hard block — even normal IV wouldn't override a panic regime.
+
+**Key macro drivers from events data:**
+- 算力租赁/AI服务器概念逆势活跃 (云赛智联、数据港涨停)
+- 人形机器人概念震荡调整 (埃斯顿跌停)
+- 锂矿/能源金属板块走弱 (融捷股份跌停)
+- 半导体设备震荡回升 (联动科技、华峰测控涨超10%)
+- 沪指失守4000点，全市场近4800只个股下跌(昨日)，成交缩至2.58万亿
+
+**Active learnings referenced:**
+- **h013**: Strong breadth alone is not enough; without candidate data, keep cash → ✅ Today breadth is actively NEGATIVE, reinforcing this
+- **h019**: Bottom-list sectors = hard no-buy zones → ✅ Energy metals (-7.66%) confirms
+- **h021**: MA-distance anti-chase rule doing real work → will apply below
+- **h027**: Hot sector doesn't override chase risk → several semiconductor names fail MA20
+
+---
+
+## 2. Sector Analysis
+
+### Hot Sectors (Top 5, today's 5d performance via sector data)
+| Rank | Sector | Today Chg% | Trend Signal |
+|------|--------|-----------|--------------|
+| 1 | 油服工程 | +3.12% | Energy/oil services rotation |
+| 2 | IT服务Ⅱ | +2.80% | AI infrastructure demand |
+| 3 | 计算机设备 | +2.58% | Compute/storage hardware |
+| 4 | 旅游及景区 | +2.32% | Consumer/leisure bounce |
+| 5 | 油气开采Ⅱ | +2.29% | Commodity energy strength |
+
+### Cold Sectors (Bottom 5)
+| Rank | Sector | Today Chg% | Implication |
+|------|--------|-----------|-------------|
+| 🔴 | 能源金属 | **-7.66%** | Lithium/rare earth crash |
+| 🔴 | 电机Ⅱ | -6.48% | Robot components fading |
+| 🔴 | 玻璃玻纤 | -5.62% | Materials weakness |
+| 🔴 | 非金属材料Ⅱ | -5.53% | Broad materials sell-off |
+| 🔴 | 家电零部件Ⅱ | -5.28% | Consumer durables weak |
+
+### Position Sector Alignment
+**N/A — zero active positions.** Portfolio is 100% cash (¥985,121).
+
+### Rotation Signal
+Clear rotation into **energy (oil/gas services)** and **IT/compute infrastructure**, while **battery metals/lithium** and **robot components** are being aggressively de-risked. 科创50 as the only green index suggests semiconductors are the relative strength pocket within tech.
+
+---
+
+## 3. Position Review
+
+**No active positions.** Portfolio stands at ¥985,121 (all cash), -1.49% total return from prior realized losses of ¥14,879.
+
+No HOLD/SELL/RAISE_STOP decisions needed today.
+
+---
+
+## 4. New Entry Candidates
+
+**Verdict: `new_positions: []` — Hard block in effect.**
+
+The entry regime has `hard_block: true` with `sizing_multiplier: 0.0`. Even the best setups cannot be bought today. Below I analyze the strongest candidates for when the regime re-opens.
+
+### Top candidates (would be BUY if market were healthy):
+
+**🥇 思瑞浦 (688536.SH)** — Semiconductor / 模拟芯片设计
+- RPS120: 93.67% | PE: 169 | Score: 8.1/8.8/6.2
+- MA: dist_ma5=-2.8%, dist_ma10=-0.8%, dist_ma20=5.2% → **CLEAN, no chase risk**
+- 8 highlights: profit +577% QoQ, 153% net cash ratio, 7.7% capacity expansion, 4 analysts bullish
+- 1 risk: goodwill at 11% of equity
+- Catalyst: semiconductor industry price hikes (+15-25% across sector), AI-driven demand
+- Verdict: Best all-around setup. Would be STRONG BUY (8%) if regime allowed.
+
+**🥈 奥来德 (688378.SH)** — 光学光电子
+- RPS120: 93.18% | PE: 105 | Score: 7.7/8.5/3.5
+- MA: dist_ma5=-0.7%, dist_ma10=1.8%, dist_ma20=11.3% → **Clean** (MA20 approaching 12% limit)
+- 5 highlights: profit +5950% YoY, net cash 117%, orders +860%
+- H1 earnings guidance: +492-604% — **fresh catalyst**
+- 1 risk: operating profit quality concerns
+- Verdict: BUY (6-7%) — excellent catalyst freshness, MA setup clean
+
+**🥉 快克智能 (603203.SH)** — 自动化设备
+- RPS120: 94.24% | PE: 136 | Score: 8.8/6.9/3.3
+- MA: dist_ma5=-1.0%, dist_ma10=-4.0%, dist_ma20=1.0% → **CLEANEST MA setup**
+- Liquid cooling server catalyst — 液冷产业从主题进入订单兑现期
+- 2 risks: -10% limit down on 07-01 (recovery underway), 35% above analyst target
+- Verdict: BUY (5-7%) — sector-agnostic liquid cooling theme strong, MA setup pristine
+
+**4. 扬杰科技 (300373.SZ)** — 半导体/分立器件
+- RPS120: 92.0% | PE: 50.8 | Score: 8.7/8.7/3.5
+- MA: dist_ma5=-2.4%, dist_ma10=-4.9%, dist_ma20=8.2% → Clean
+- Catalyst: July price hikes +15-25% across semiconductor sector
+- Risk: 27% above analyst consensus target
+- Verdict: BUY (5-7%)
+
+**5. 同有科技 (300302.SZ)** — 计算机设备 (today's #3 hot sector!)
+- RPS120: 94.99% | PE: 314 | Score: 7.2/7.7/4.3
+- MA: dist_ma5=-6.0%, dist_ma10=-13.6% → Pullback, not overextended (negative = below MA)
+- 4 risks: poor earnings quality, no dividends, weak cash coverage, high turnover
+- Sector is #3 today — best sector alignment among candidates
+- Verdict: SMALL BUY (3-5%) if regime opens — sector tailwind strong but stock has quality issues
+
+**6. 路维光电 (688401.SH)** — 半导体材料
+- RPS120: 91.31% | 0 risks | 7 highlights
+- MA: dist_ma5=-7.6%, dist_ma10=-2.5% → Pullback
+- Excellent fundamentals, 0 risk factors
+- Verdict: BUY (5-7%)
+
+---
+
+## 5. Skip List
+
+Besides the hard regime block (which applies to ALL candidates), specific stocks fail individual rules:
+
+| Code | Name | Reason |
+|------|------|--------|
+| 002192 | 融捷股份 | **Sector energy metals bottom 1 (-7.66%)** — hard no per h019 |
+| 002290 | 禾盛新材 | **Sector 家电零部件Ⅱ bottom 5 (-5.28%)** — hard no |
+| 688652 | 京仪装备 | **dist_ma10=11.2%, dist_ma20=26.6%** — violates Rule 2b severely |
+| 688231 | 隆达股份 | **dist_ma5=10.2%, dist_ma10=8.4%** — violates Rule 2b |
+| 002185 | 华天科技 | **dist_ma20=12.8%** — violates Rule 2b |
+| 688372 | 伟测科技 | **dist_ma20=13.0%** — violates Rule 2b |
+| 688392 | 骄成超声 | **dist_ma10=10.4%, dist_ma20=22.9%** — violates Rule 2b severely |
+| 301536 | 星宸科技 | **dist_ma20=13.5%** — violates Rule 2b |
+| 688390 | 固德威 | **dist_ma10=-15.1%, dist_ma20=-23.4%** — deep breakdown, sector光伏weak |
+| 002407 | 多氟多 | **-10% limit down 07-03**, dist_ma5=-9.7% — heavy distribution, no entry |
+| 002805 | 丰元股份 | Negative gross margin (-15.47%), PE negative, 3 risks — quality trap |
+| 688469 | 芯联集成-U | PE negative (-155), gross margin 3.97%, still losing money |
+| 002812 | 恩捷股份 | Net profit -113M, operating profit -87%, sector电池 weak today |
+
+---
+
+## 6. Learnings
+
+1. **Entry regime hard_block validated**: Breadth 0.42:1 with 48跌停 and 0/3 indices green is exactly the scenario where the buy gate should slam shut. No exceptions. Reinforces h013.
+
+2. **Sector divergence is extreme today**: Energy (+3.12%) vs Energy Metals (-7.66%) — a 10.78pp spread. This is unusual and signals aggressive sector rotation. When regime re-opens, position sizing should favor the rotating-IN sectors (oil services, IT, computing).
+
+3. **科创50 divergence from主板 is a signal**: 科创50 +0.73% while all three主板 indices are red. Semiconductor/tech hardware is the relative strength pocket. This is where money will flow first when breadth recovers.
+
+4. **Multiple high-quality candidates in pullback mode**: 思瑞浦, 快克智能, 奥来德, 扬杰科技 all have negative dist_ma5/ma10 (meaning they've pulled back to or below near-term MAs). This is actually a favorable entry setup — they're not extended, they're consolidating. If regime flips green tomorrow or the next day, these are the first names to buy.
+
+5. **MA-distance rule (h021/h027) filtering correctly**: 京仪装备, 隆达股份, 伟测科技, 华天科技 all flagged for overextension. These are exactly the stocks that would hurt in a weak tape — buying extended names in a panic is a recipe for -5% stops.
+
+---
+
+## 7. Uncertainty Flags
+
+- **IV data is completely absent** — no stock-specific IV rank, no ETF IV data. This is a data gap. I'm defaulting to standard sizing assumptions, but if IV were extremely low (<15%), it would argue for even more caution on new entries.
+- **Today's sector data is single-day**, not 5-day rolling. The prompt says "5-day and 20-day sector performance" but the input only provides today's top5/bottom5. I'm using what's available.
+- **Active learnings suggest h028** (communication equipment leadership) — but today communications isn't in top 5. The rotation may be shifting from comm equipment to IT services/computing.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "油服工程", "5d_pct": 3.12, "trend": "rotation_in"},
+      {"name": "IT服务Ⅱ", "5d_pct": 2.80, "trend": "steady"},
+      {"name": "计算机设备", "5d_pct": 2.58, "trend": "steady"},
+      {"name": "旅游及景区", "5d_pct": 2.32, "trend": "one_day_spike"},
+      {"name": "油气开采Ⅱ", "5d_pct": 2.29, "trend": "rotation_in"}
+    ],
+    "cold_sectors": [
+      {"name": "能源金属", "5d_pct": -7.66, "trend": "deteriorating"},
+      {"name": "电机Ⅱ", "5d_pct": -6.48, "trend": "deteriorating"},
+      {"name": "玻璃玻纤", "5d_pct": -5.62, "trend": "deteriorating"},
+      {"name": "非金属材料Ⅱ", "5d_pct": -5.53, "trend": "deteriorating"},
+      {"name": "家电零部件Ⅱ", "5d_pct": -5.28, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/0 positions (100% cash)",
+    "regime": "Panic — energy/oil services and IT infrastructure rotating in, lithium/battery metals crashing, semiconductors relative strength via 科创50"
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688536",
+      "name": "思瑞浦",
+      "reason": "Market regime panic (breadth 0.42:1, hard_block). Best setup in pool: RPS120=93.67%, dist_ma5=-2.8% clean, profit +577%, 8 highlights/1 risk. First to buy when regime opens.",
+      "rps120": 93.67
+    },
+    {
+      "code": "688378",
+      "name": "奥来德",
+      "reason": "Market regime panic. H1 earnings +492-604% fresh catalyst, RPS120=93.18%, MA clean (dist_ma5=-0.7%, dist_ma10=1.8%), dist_ma20=11.3% approaching limit.",
+      "rps120": 93.18
+    },
+    {
+      "code": "603203",
+      "name": "快克智能",
+      "reason": "Market regime panic. Cleanest MA setup in pool (dist_ma5=-1.0%, dist_ma10=-4.0%), liquid cooling catalyst, RPS120=94.24%. Recovering from 07-01 limit down.",
+      "rps120": 94.24
+    },
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "reason": "Market regime panic. Semiconductor price hike catalyst +15-25%, RPS120=92.0%, MA clean, profit +41%. 27% above analyst target is a risk flag.",
+      "rps120": 92.0
+    },
+    {
+      "code": "300302",
+      "name": "同有科技",
+      "reason": "Market regime panic. Sector计算机设备 is #3 today — best sector alignment. RPS120=94.99%. 4 risk factors (earnings quality, no dividends, debt) limit conviction.",
+      "rps120": 94.99
+    },
+    {
+      "code": "688401",
+      "name": "路维光电",
+      "reason": "Market regime panic. 0 risk factors, 7 highlights, RPS120=91.31%, MA pullback (dist_ma5=-7.6%). Clean fundamental setup for when regime opens.",
+      "rps120": 91.31
+    },
+    {
+      "code": "002192",
+      "name": "融捷股份",
+      "reason": "Sector能源金属 is bottom 1 (-7.66%) — hard no-buy zone per h019. Lithium crash with跌停 today. No entry regardless of individual quality.",
+      "rps120": 93.14
+    },
+    {
+      "code": "002290",
+      "name": "禾盛新材",
+      "reason": "Sector家电零部件Ⅱ is bottom 5 (-5.28%) — hard no-buy zone. Individual RPS120=94.44% doesn't override sector gravity.",
+      "rps120": 94.44
+    },
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "dist_ma10=11.2% (>8%), dist_ma20=26.6% (>12%) — violates Rule 2b severely. Extreme overextension, high mean-reversion risk.",
+      "rps120": 93.51
+    },
+    {
+      "code": "688231",
+      "name": "隆达股份",
+      "reason": "dist_ma5=10.2% (>6%), dist_ma10=8.4% (>8%) — violates Rule 2b. Chasing after gas turbine spike.",
+      "rps120": 92.51
+    },
+    {
+      "code": "301536",
+      "name": "星宸科技",
+      "reason": "dist_ma20=13.5% (>12%) — violates Rule 2b. Good setup otherwise (MA5/MA10 clean, profit +330%) but extended on MA20.",
+      "rps120": 93.41
+    },
+    {
+      "code": "002185",
+      "name": "华天科技",
+      "reason": "dist_ma20=12.8% (>12%) — violates Rule 2b. Advanced packaging theme strong but too extended.",
+      "rps120": 90.03
+    },
+    {
+      "code": "688372",
+      "name": "伟测科技",
+      "reason": "dist_ma20=13.0% (>12%) — violates Rule 2b. Advanced packaging +封测 theme valid but overextended.",
+      "rps120": 90.66
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Entry regime hard_block correctly prevented all new positions today: breadth 0.42:1, 0/3 indices green, 48跌停. This is the system working as designed — no exceptions, no 'just a small buy'. Keep cash in panic.",
+      "type": "heuristic",
+      "tags": ["entry-filter", "position-sizing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Panic breadth means selling pressure is broad and indiscriminate. Even strong stocks face mean-reversion risk as margin calls and forced liquidation cascade through. Cash preservation > opportunity capture."
+    },
+    {
+      "text": "Multiple high-RPS candidates are in healthy pullback mode (negative dist_ma5/ma10), creating a watchlist for rapid deployment when breadth recovers. 思瑞浦 (dist_ma5=-2.8%), 快克智能 (dist_ma5=-1.0%), 奥来德 (dist_ma5=-0.7%) are the cleanest.",
+      "type": "signal",
+      "tags": ["timing", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "Pullbacks to MA support in strong-trend stocks create lower-risk entries. When the regime flips green, these names offer the best risk/reward because they've already absorbed selling pressure."
+    },
+    {
+      "text": "Sector divergence extreme: 油服工程 (+3.12%) vs 能源金属 (-7.66%) = 10.78pp spread. This confirms aggressive rotation. Position sizing should overweight rotating-IN sectors and zero-weight rotating-OUT sectors when regime re-opens.",
+      "type": "observation",
+      "tags": ["sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h028",
+      "mechanism": "Large sector spreads indicate institutional capital reallocation. Money leaving lithium/battery plays for energy infrastructure and AI compute. Following the flow > fighting it."
+    },
+    {
+      "text": "科创50 as the only green index (+0.73%) while 上证/深证/创业板 all red signals semiconductor/tech hardware as the relative strength pocket. When breadth recovers, this is where alpha will come from.",
+      "type": "signal",
+      "tags": ["sector", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "In weak broad markets, the index that holds green has the strongest institutional support. 科创50's divergence is a leading indicator for where money will rotate first on recovery."
+    }
+  ],
+  "market_summary": "PANIC TAPE — Breadth 0.42:1 (1593↑/3790↓), 48跌停, 0/3 major indices green. 上证-0.49%, 深证-1.87%, 创业板-1.70%, only 科创50+0.73%. Energy/oil services and IT infrastructure leading while lithium/battery metals crash (-7.66%). IV data unavailable. New positions HARD BLOCKED — 100% cash deployed, waiting for breadth recovery.",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}
+```

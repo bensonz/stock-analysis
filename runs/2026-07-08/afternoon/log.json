@@ -1,0 +1,49 @@
+{
+  "date": "2026-07-08",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1783496114.632342,
+      "errors": [],
+      "end": 1783496130.6652539,
+      "duration_sec": 16.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 15287,
+      "tokens": {
+        "input_tokens": 71951,
+        "output_tokens": 8926
+      },
+      "rounds": 1,
+      "tool_calls_count": 0,
+      "duration_sec": 122.8,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1783496253.497817,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=119",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=31",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=37",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=38",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1783496253.755409,
+      "duration_sec": 0.3
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 139.10000000000002
+  }
+}

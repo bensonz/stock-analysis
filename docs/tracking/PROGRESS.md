@@ -1,5 +1,53 @@
 # Progress
 
+## 2026-07-08: Separate noon vs afternoon runs (stop overwriting run folders)
+
+Prompt: `docs/done/split-noon-afternoon-runs.md`. The daily pipeline runs twice
+per trading day (11:35 noon / 15:35 afternoon) but both wrote to
+`runs/<date>/`, so the afternoon run clobbered the noon run's data. Now each run
+gets its own slot subfolder and both survive.
+
+### Completed
+1. **`scripts/run_paths.py`** (new) — Single source of truth for slot-aware run
+   paths: `resolve_slot(explicit, now)` (hour<13 → noon, else afternoon; `--slot`
+   override wins), `get_run_dir(date, slot)` → `runs/<date>/<slot>/{input,output}`,
+   and legacy-tolerant discovery: `iter_run_dirs`, `list_runs_sorted` (ordered by
+   `run_started_at` from each manifest, mtime fallback — never by dir name, since
+   "afternoon" < "noon" alphabetically), `find_run_dir(date, slot=None)`
+   (afternoon canonical; legacy `runs/<date>/output` counts as implicit afternoon).
+2. **`scripts/run_daily.py`** — Imports paths from `run_paths`; removed local
+   `get_run_dir`/`RUNS_DIR`. Added `--slot {noon,afternoon}` (parsed once in
+   `main`, threaded through `phase1_collect`/`phase2`/`phase3_apply`/`phase4`).
+   `manifest.json` now stamps `slot` + `run_started_at`. `list_runs`,
+   `reset_to_date` (afternoon default, `--slot` override), and
+   `check_snapshot_consistency` are slot-aware via the new helpers.
+3. **`scripts/contracts.py`** — `RunManifest` gained `slot` (default "afternoon")
+   and `run_started_at`, surfaced at the top level of `to_dict()`.
+4. **`scripts/data_collector.py`** — `load_recent_watchlists` walks
+   `runs/<date>/<slot>/output` + legacy, sorted by `run_started_at`.
+5. **`scripts/validator.py`** — `validate_output(date, slot=None)` resolves the
+   output dir via `find_run_dir`; legacy fallbacks preserved.
+6. **Tests** — New `scripts/test_run_paths.py` (9 tests: distinct/coexisting
+   slots, clock derivation, override precedence, afternoon-canonical discovery,
+   `run_started_at` ordering regression guard, legacy-as-afternoon). Updated
+   `tests/test_contracts.py`, `tests/test_strategy_pool_observability.py`,
+   `scripts/test_build_summary.py` to the slot layout.
+
+### Acceptance Status
+- [x] Noon + afternoon runs on the same day both persist; neither overwritten.
+- [x] `manifest.json` carries `slot` + `run_started_at`.
+- [x] `--list-runs` shows slot + start time (verified: noon slot + legacy afternoons).
+- [x] Discovery returns the correct latest/settled state incl. legacy layout.
+- [x] No lexical `afternoon`-after-`noon` assumption (sorted by `run_started_at`).
+- [x] Full suite: 210 pass; the only 7 failures pre-date this change (stale
+      `sizing_multiplier` expectation + hypothesis_manager `observation` KeyError).
+
+### Not done (intentional, per prompt "Do NOT")
+- `scripts/migrate_to_runs.py` left untouched. `scripts/migrate_learnings.py` (a
+  one-shot legacy replay reading `runs/<date>/response.json`) was left as-is; it
+  is not part of daily discovery and rewriting it risks changing learnings replay.
+- No existing run folders moved/migrated; cron schedule/times unchanged.
+
 ## 2026-05-13: Fix pricedb degradation — proxy bypass, clist snapshot, drop tushare, fix staleness gate
 
 ### Completed
