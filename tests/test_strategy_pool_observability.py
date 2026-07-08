@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
 import data_collector
 import run_daily
+import run_paths
 
 
 def _make_temp_pricedb(path: Path, codes: list[str], date_str: str) -> None:
@@ -104,6 +105,8 @@ def test_phase1_collect_writes_crawl_intersect_rps_and_vcp_artifacts(tmp_path, m
     run_daily.RUNS_DIR = runs_dir
     run_daily.LEARNINGS_FILE = project_root / "LEARNINGS.md"
     run_daily.HYPOTHESES_FILE = project_root / "tracking" / "hypotheses.json"
+    # get_run_dir lives in run_paths and builds paths from run_paths.RUNS_DIR.
+    monkeypatch.setattr(run_paths, "RUNS_DIR", runs_dir)
 
     fake_rps = types.ModuleType("rps_calculator")
     fake_rps.compute_ma_rps = lambda db, date=None: {
@@ -169,12 +172,12 @@ def test_phase1_collect_writes_crawl_intersect_rps_and_vcp_artifacts(tmp_path, m
     monkeypatch.setattr(run_daily, "validate_data", lambda data: [])
 
     try:
-        run_daily.phase1_collect(date_str)
+        run_daily.phase1_collect(date_str, "afternoon")
     finally:
         for name, value in original_paths.items():
             setattr(run_daily, name, value)
 
-    input_dir = runs_dir / date_str / "input"
+    input_dir = runs_dir / date_str / "afternoon" / "input"
     crawl_file = input_dir / "crawl.json"
     intersect_file = input_dir / "intersect.json"
     debug_file = input_dir / "strategy_pool_debug.json"

@@ -139,12 +139,14 @@ class TestBuildSummary:
         assert isinstance(result, str)
 
     def test_real_phase1_file(self):
-        """Load actual phase1.json if available."""
+        """Load actual phase1.json if available (legacy or slot-aware layout)."""
         from llm_client import build_summary
-        p = Path(__file__).resolve().parent.parent / "runs" / "2026-03-10" / "phase1.json"
-        if not p.exists():
+        runs = Path(__file__).resolve().parent.parent / "runs"
+        # Legacy: runs/<date>/phase1.json ; slot-aware: runs/<date>/<slot>/phase1.json
+        candidates = sorted(runs.glob("*/phase1.json")) + sorted(runs.glob("*/*/phase1.json"))
+        if not candidates:
             return  # skip if no real data
-        data = json.load(open(p))
+        data = json.load(open(candidates[-1]))
         result = build_summary(data)
         assert isinstance(result, str)
         assert len(result) > 500

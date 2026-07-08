@@ -627,6 +627,23 @@ class TestRunManifest:
         json_str = json.dumps(d)
         assert '"success"' in json_str
 
+    def test_slot_and_run_started_at_stamped(self):
+        m = RunManifest(
+            date="2026-07-08",
+            status=PipelineStatus.SUCCESS,
+            slot="noon",
+            run_started_at="2026-07-08T11:35:00+08:00",
+        )
+        m.finalize()
+        d = m.to_dict()
+        assert d["slot"] == "noon"
+        assert d["run_started_at"] == "2026-07-08T11:35:00+08:00"
+
+    def test_slot_defaults_to_afternoon(self):
+        # Legacy/back-compat: an unspecified slot self-identifies as afternoon.
+        m = RunManifest(date="2026-07-08", status=PipelineStatus.SUCCESS)
+        assert m.to_dict()["slot"] == "afternoon"
+
 
 # ━━━ Sina price fetch tests (integration) ━━━
 
