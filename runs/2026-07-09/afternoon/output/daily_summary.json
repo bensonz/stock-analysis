@@ -1,0 +1,36 @@
+{
+  "date": "2026-07-09",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 985121.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -1.49,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -14879.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.8608,
+    "up": 2486,
+    "down": 2888,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 75,
+    "limit_downs": 16,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.86:1, 3/3 major indices green, 75 limit-ups / 16 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Bifurcated tape: 科创50 +8.41% on长鑫科技 IPO catalyst, all 3 major indices green, but breadth is 0.86:1 (more decliners than advancers). Semiconductor euphoria masking broad-market weakness. 75涨停/16跌停. IV data unavailable. No new positions due to breadth gate failure (0.86:1 < 1.5:1). Cash is the correct position today — wait for breadth to confirm participation before entering the semiconductor trade."
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 282785,
+  "output_tokens": 11114,
+  "rounds": 4,
+  "duration_sec": 187.5,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月9日 半导体 大涨 原因 科创50",
+        "max_results": 5
+      },
+      "result_length": 3051
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体设备 先进封装 2026年7月 涨价 催化",
+        "max_results": 5
+      },
+      "result_length": 3402
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 今日 板块 涨跌 2026年7月9日 市场分化",
+        "max_results": 5
+      },
+      "result_length": 3028
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "长鑫科技 IPO 科创板 2026年7月 打新 半导体产业链"
+      },
+      "result_length": 3296
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "扬杰科技 300373 涨价 碳化硅 2026年7月"
+      },
+      "result_length": 3092
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 成交额 2026年7月9日 涨跌家数 市场情绪"
+      },
+      "result_length": 3144
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "华天科技 002185 先进封装 涨停 2026年7月9日"
+      },
+      "result_length": 2726
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "上海新阳 300236 电子化学品 先进封装 2026年7月"
+      },
+      "result_length": 3258
+    }
+  ],
+  "fallback_used": false
+}

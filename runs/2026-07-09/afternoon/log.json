@@ -1,0 +1,49 @@
+{
+  "date": "2026-07-09",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1783582513.6496692,
+      "errors": [],
+      "end": 1783582527.175254,
+      "duration_sec": 13.5
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 17685,
+      "tokens": {
+        "input_tokens": 282785,
+        "output_tokens": 11114
+      },
+      "rounds": 4,
+      "tool_calls_count": 8,
+      "duration_sec": 187.5,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1783582714.739865,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=121",
+        "Hypothesis: Created h093 (observation): 长鑫科技 IPO (July 16 listing) is a concept/theme catalyst creating a semiconductor ...",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=33",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=33",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1783582715.2731352,
+      "duration_sec": 0.5
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 201.5
+  }
+}
