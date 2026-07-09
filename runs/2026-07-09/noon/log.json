@@ -1,0 +1,49 @@
+{
+  "date": "2026-07-09",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1783568147.483896,
+      "errors": [],
+      "end": 1783568159.544406,
+      "duration_sec": 12.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 11795,
+      "tokens": {
+        "input_tokens": 210577,
+        "output_tokens": 7352
+      },
+      "rounds": 3,
+      "tool_calls_count": 5,
+      "duration_sec": 119.9,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1783568279.539139,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=120",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=32",
+        "Hypothesis: Created h092 (observation): 扬杰科技 emerges as the cleanest setup across all dimensions: sector #1, RPS 92.0% s...",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=90",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1783568279.992735,
+      "duration_sec": 0.5
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 132.5
+  }
+}

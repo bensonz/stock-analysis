@@ -1,0 +1,37 @@
+{
+  "date": "2026-07-09",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 985121.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -1.49,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -14879.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.1824,
+    "up": 842,
+    "down": 4616,
+    "positive_indices": [
+      "创业板指"
+    ],
+    "negative_indices": [
+      "上证指数",
+      "深证成指"
+    ],
+    "limit_ups": 36,
+    "limit_downs": 21,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.18:1, 1/3 major indices green, 36 limit-ups / 21 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "PANIC TAPE — Breadth 0.18:1 (842 up / 4616 down), 36涨停/21跌停. Only 创业板指 (+0.13%) green; 上证指数 -0.46%, 深证成指 -0.35%. 科创50 outlier at +3.19% driven by semiconductor rally on WSTS $1.51T forecast and chipmaker price hikes. Metals/resources in freefall (能源金属 -6.28%, 小金属 -5.11%). Classic risk-off rotation: cyclicals being liquidated, tech/semis the only bid. HARD BLOCK on new positions. IV data unavailable. Capital preservation mode."
+  }
+}
