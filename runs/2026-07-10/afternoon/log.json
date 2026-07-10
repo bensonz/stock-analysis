@@ -1,0 +1,119 @@
+{
+  "date": "2026-07-10",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1783668911.268835,
+      "errors": [],
+      "end": 1783668922.3230028,
+      "duration_sec": 11.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 9076,
+      "tokens": {
+        "input_tokens": 227894,
+        "output_tokens": 10485
+      },
+      "rounds": 3,
+      "tool_calls_count": 5,
+      "duration_sec": 222.8,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1783669145.16885,
+      "actions": [
+        "SELL 688378",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h094 (observation): 业绩预告超级催化(+492~604%)在预告前已被充分定价时，是'卖事实'事件而非买入事件。奥来德7/5公告→7/6冲高¥60.33→7/10跌至¥51.24(...",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=122",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=35",
+        "Hypothesis: Created h095 (observation): 军工电子板块(宏达电子)因航天装备Ⅱ+10.24%的板块联动效应而相对抗跌(-3.75% vs 科创50 -5.53%)。持有逻辑成立：当所在板块与top板块有...",
+        "Hypothesis: Created h096 (observation): -3%首3日规则今天拯救了组合。奥来德如果继续持有到-5%止损线(¥50.71)，会多亏约1%。在坏timing的入场中，更快止损=更少损失。Rule 5的10...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "300726",
+                "name": "宏达电子",
+                "rule": "stop_proximity",
+                "severity": "WARNING",
+                "currentPrice": 67.45,
+                "stopLoss": 65.86,
+                "distance_pct": 2.36,
+                "suggestion": "🟡 WARNING — only 2.4% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1783669145.528752,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 300726 — 🟡 WARNING — only 2.4% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 234.3
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "date": "2026-07-10",
+  "actions": [
+    {
+      "code": "300726",
+      "name": "宏达电子",
+      "action": "HOLD",
+      "price": 67.45,
+      "pnl_pct": -2.71,
+      "note": "Sector (军工电子Ⅱ) adjacent to #1 航天装备Ⅱ benefiting from defense rotation. MLCC demand catalyst intact. -2.71% on day 0 within tolerance. Stop not triggered."
+    },
+    {
+      "code": "688378",
+      "name": "奥来德",
+      "action": "SELL",
+      "price": 51.24,
+      "pnl_pct": -4.01,
+      "note": "Triggers Rule 5: -4.01% in first 3 days → SELL. Bad timing. H1 +492~604% catalyst was 'sell the news' — stock ran to ¥60.33 on 7/6 then crashed. Sector (光学光电子) outside top 30%. Stop proximity CRITICAL at 1.03%. Cut now, re-enter later if thesis re-proves itself."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 1,
+    "totalEquity": 982229.0,
+    "dayPnl": -1052.0,
+    "dayReturnPct": -0.11,
+    "totalReturnPct": -1.78,
+    "unrealizedPnl": -752.0,
+    "realizedPnl": -17019.0,
+    "cashPct": 97.25
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 2.2479,
+    "up": 3772,
+    "down": 1678,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 95,
+    "limit_downs": 8,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 2.25:1, 0/3 major indices green, 95 limit-ups / 8 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Rotation day, not crash. Breadth 2.25:1 (3772↑/1678↓, 95涨停/8跌停) but all 4 major indices red. Tech/semiconductor crushed: 科创50 -5.53%, 半导体板块 -6.23% on Meta 'compute surplus' fears. Defense/aerospace surging: 航天装备Ⅱ +10.24% on 长征十号乙 rocket launch. Money rotating out of crowded AI trades into defense. Buy gate FAILED (0/3 indices green) → no new positions. IV data unavailable. Portfolio: -1.78% total, 92% cash. Exiting 奥来德 (-4.01% day 0, bad timing), holding 宏达电子 (-2.71%, defense tailwind)."
+  }
+}

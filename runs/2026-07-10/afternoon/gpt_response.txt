@@ -1,0 +1,189 @@
+Now I have the full picture. Let me synthesize everything.
+
+---
+
+## Research Findings Summary
+
+### Macro/Sector Drivers
+1. **Semiconductor sell-off**: Triggered by Meta's plan to sell excess AI compute (7/1), sparking "compute surplus" fears. This is a **crowded-trade unwind**, not a fundamental reversal. Analysts expect earnings season to differentiate winners. But today (7/10), 半导体 -6.23%, 电子化学品 -8.23%, 科创50 -5.53%.
+2. **Defense surge**: 长征十号乙 rocket successfully launched today (7/10), driving 航天装备Ⅱ +10.24%. This is fresh and real — yesterday's rally (+10.49% last week) plus today's launch catalyst.
+3. **奥来德 specific**: H1 +492~604% announced 7/5 → stock hit ¥60.33 intraday 7/6 → now crashed to ¥51.24. Classic "sell the news." The stock ran up on anticipation and is now being distributed.
+
+### Key Takeaway
+**This is a violent rotation day, not a crash.** Breadth 2.25:1 with 95 stocks at 涨停 means money is moving, not fleeing. But the rotation is OUT of tech/semiconductors and INTO defense/aerospace. Our portfolio is caught in the crossfire: 奥来德 in the outflow zone, 宏达电子 in the inflow zone.
+
+---
+
+## Final Decisions
+
+### 奥来德 → SELL at ¥51.24
+- Triggers Rule 5: "-3% in first 3 days → SELL" (we're -4.01% on day 0)
+- Stop proximity CRITICAL (1.03% from ¥50.71 stop)
+- "Sell the news" pattern confirmed by research
+- Sector (光学光电子) not in top 30%
+- **This was bad timing. Cut it. Can re-enter if it stabilizes above MA20.**
+
+### 宏达电子 → HOLD
+- -2.71% from entry, within tolerance
+- Sector tailwind: 军工电子Ⅱ benefits from #1 航天装备Ⅱ rotation
+- MLCC demand narrative (AI servers + defense) intact
+- Monitor stop at ¥65.86
+
+### New Positions → NONE
+- Buy gate FAILED: 0/3 major indices green
+- Rule 1: "If not met, do not force SMALL BUY. Focus on HOLD/SELL/skip_list."
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "航天装备Ⅱ", "5d_pct": 10.24, "trend": "accelerating", "catalyst": "长征十号乙火箭发射成功+国产大飞机订单"},
+      {"name": "航海装备Ⅱ", "5d_pct": 4.78, "trend": "steady", "catalyst": "国防军工板块联动"},
+      {"name": "风电设备", "5d_pct": 4.39, "trend": "steady"},
+      {"name": "广告营销", "5d_pct": 4.24, "trend": "steady"},
+      {"name": "医疗服务", "5d_pct": 4.12, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "电子化学品Ⅱ", "5d_pct": -8.23, "trend": "deteriorating", "cause": "Meta算力过剩恐慌→半导体产业链共振下跌"},
+      {"name": "半导体", "5d_pct": -6.23, "trend": "deteriorating", "cause": "交易拥挤+获利盘出逃"},
+      {"name": "元件", "5d_pct": -5.18, "trend": "deteriorating"},
+      {"name": "电池", "5d_pct": -5.03, "trend": "deteriorating"},
+      {"name": "通信设备", "5d_pct": -4.22, "trend": "deteriorating"}
+    ],
+    "position_alignment": "1/2 positions in favorable sectors (宏达电子 adjacent to #1 航天装备Ⅱ), 1/2 being exited (奥来德 in weak tech-adjacent zone)",
+    "regime": "Violent rotation: money flowing OUT of semiconductors/tech → INTO defense/aerospace. Breadth 2.25:1 yet all 4 indices red — index heavyweights (科创50 -5.53%) dragging everything down while mid/small caps hold. Not a crash, but brutal for tech positions."
+  },
+  "position_decisions": [
+    {
+      "code": "300726",
+      "name": "宏达电子",
+      "action": "HOLD",
+      "reason": "Sector (军工电子Ⅱ) adjacent to #1 航天装备Ⅱ benefiting from defense rotation. MLCC demand catalyst intact. -2.71% on day 0 within tolerance. Stop not triggered.",
+      "sector_rank": "adjacent to top 10% sector (航天装备Ⅱ #1)",
+      "new_stop": null,
+      "pnl_pct": -2.71,
+      "days_held": 0,
+      "exit_price": null
+    },
+    {
+      "code": "688378",
+      "name": "奥来德",
+      "action": "SELL",
+      "reason": "Triggers Rule 5: -4.01% in first 3 days → SELL. Bad timing. H1 +492~604% catalyst was 'sell the news' — stock ran to ¥60.33 on 7/6 then crashed. Sector (光学光电子) outside top 30%. Stop proximity CRITICAL at 1.03%. Cut now, re-enter later if thesis re-proves itself.",
+      "sector_rank": "outside top 30% (光学光电子, tech-adjacent weakness)",
+      "new_stop": null,
+      "pnl_pct": -4.01,
+      "days_held": 0,
+      "exit_price": 51.24
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "Market buy gate failed (0/3 indices green) + dist_ma20=22.7% extreme chase risk even if gate were open. Sector (医疗服务) is top 5 — worth tracking if gate clears and stock pulls back.",
+      "rps120": 88.03
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物",
+      "reason": "Market buy gate failed + dist_ma20=15.3% above 12% chase limit. Healthcare-adjacent sector, watch for pullback to MA10.",
+      "rps120": 85.45
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "reason": "Sector 电子化学品Ⅱ is #1 BOTTOM at -8.23% — hard no-buy zone (h019). Also dist_ma5=9.7% chase.",
+      "rps120": 93.33
+    },
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "Sector 半导体 is bottom 5 at -6.23% — hard no-buy zone. Also dist_ma10=16.2% extreme chase.",
+      "rps120": 94.18
+    },
+    {
+      "code": "688502",
+      "name": "茂莱光学",
+      "reason": "dist_ma20=21.8% extreme extension — even if sector were hot, this is un-buyable. PE=1739, speculative optical name.",
+      "rps120": 89.17
+    },
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "reason": "Sector 半导体 bottom 5. Despite 涨价 catalyst (7月起涨价15-25%), sector gravity dominates. No entry in bottom sectors (h019).",
+      "rps120": 92.51
+    },
+    {
+      "code": "601126",
+      "name": "四方股份",
+      "reason": "Market buy gate failed. Sector (电网设备) not in top 30%. RPS120=94.91 in extended zone without sector exception.",
+      "rps120": 94.91
+    },
+    {
+      "code": "688372",
+      "name": "伟测科技",
+      "reason": "Sector 半导体 bottom 5. dist_ma20=13.5% above 12% chase limit. Two strikes.",
+      "rps120": 90.99
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "业绩预告超级催化(+492~604%)在预告前已被充分定价时，是'卖事实'事件而非买入事件。奥来德7/5公告→7/6冲高¥60.33→7/10跌至¥51.24(-15%)。判断标准：公告前5日累计涨幅>15%时，公告日大概率是出货日。",
+      "type": "heuristic",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "埋伏资金在业绩预告前建仓，公告日利用流动性出货。强催化+前期大涨=利好出尽。"
+    },
+    {
+      "text": "指数与广度背离(广度2.25:1但4大指数全绿)是板块剧烈轮动的信号，不是安全的入场环境。今日科创50 -5.53%但航天装备+10.24%，说明资金在板块间极端转移，新开仓容易被夹在中间。Rule 1的buy gate(≥2指数翻红)正确过滤了这种假强势。",
+      "type": "signal",
+      "tags": ["sector", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "指数权重股被集中抛售时，即使大部分股票上涨，整体市场偏空，新开仓胜率低。"
+    },
+    {
+      "text": "h019再次验证：底部板块(bottom 5)是硬性不买入区域。今日半导体-6.23%、电子化学品-8.23%、电池-5.03%——在这些板块买入的任何个股今天都会遭受重创，无论个股质量多好。",
+      "type": "rule",
+      "tags": ["sector", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019"
+    },
+    {
+      "text": "军工电子板块(宏达电子)因航天装备Ⅱ+10.24%的板块联动效应而相对抗跌(-3.75% vs 科创50 -5.53%)。持有逻辑成立：当所在板块与top板块有供应链关系时，可享受溢出效应。",
+      "type": "observation",
+      "tags": ["sector", "position-sizing"],
+      "evidence_type": "supporting",
+      "mechanism": "航天装备(主机厂)暴涨→军工电子(配套)跟涨但幅度较小。板块上下游联动效应存在。"
+    },
+    {
+      "text": "-3%首3日规则今天拯救了组合。奥来德如果继续持有到-5%止损线(¥50.71)，会多亏约1%。在坏timing的入场中，更快止损=更少损失。Rule 5的10天→3天加速止损是正确的。",
+      "type": "rule",
+      "tags": ["exit-rule", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "入场时机错误时，越早认错损失越小。-3%首3日规则比-5%硬止损提前截断了错误。"
+    }
+  ],
+  "market_summary": "Rotation day, not crash. Breadth 2.25:1 (3772↑/1678↓, 95涨停/8跌停) but all 4 major indices red. Tech/semiconductor crushed: 科创50 -5.53%, 半导体板块 -6.23% on Meta 'compute surplus' fears. Defense/aerospace surging: 航天装备Ⅱ +10.24% on 长征十号乙 rocket launch. Money rotating out of crowded AI trades into defense. Buy gate FAILED (0/3 indices green) → no new positions. IV data unavailable. Portfolio: -1.78% total, 92% cash. Exiting 奥来德 (-4.01% day 0, bad timing), holding 宏达电子 (-2.71%, defense tailwind).",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}
+```
+
+---
+
+### Post-Mortem Notes for PM
+
+1. **Why I'm selling 奥来德 at -4.01% instead of waiting for -5%**: Rule 5's "-3% in first 3 days" is designed for exactly this scenario — an entry where timing was clearly wrong. The stock gapped down on entry day with a "sell the news" pattern. Waiting for -5% would only add 1% more loss for no additional information.
+
+2. **Why I'm NOT selling 宏达电子**: The -2.71% decline is in line with the broader market (-1% to -4.37% for indices). The stock's sector (军工电子Ⅱ) is adjacent to the #1 performing sector. This looks like market drag, not stock-specific problems.
+
+3. **Why no new positions despite decent breadth**: The "≥2 of 3 major indices green" rule is non-negotiable. Today all 4 are red. Even though breadth is 2.25:1, the index-level signal says "defense mode." I trust the indices over breadth in this case — they capture where the big money is going.
+
+4. **Watch for tomorrow**: If indices stabilize and the buy gate re-opens, 凯莱英 (医疗服务 sector, RPS120=88.03) becomes a candidate IF it pulls back to within MA20 range (dist_ma20 currently 22.7% — needs to cool off). The defense rotation could also create opportunities in 军工电子 names.

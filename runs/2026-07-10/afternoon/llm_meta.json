@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 227894,
+  "output_tokens": 10485,
+  "rounds": 3,
+  "duration_sec": 222.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月10日 市场分析 板块轮动 半导体大跌",
+        "max_results": 5
+      },
+      "result_length": 2819
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "航天装备板块 2026年7月 大涨原因",
+        "max_results": 5
+      },
+      "result_length": 2414
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "奥来德 688378 2026年7月 股价 业绩预告",
+        "max_results": 5
+      },
+      "result_length": 2795
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "宏达电子 300726 2026年7月 军工电子 MLCC"
+      },
+      "result_length": 2618
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "半导体板块 2026年7月10日 调整 原因 Meta 算力过剩"
+      },
+      "result_length": 3891
+    }
+  ],
+  "fallback_used": false
+}
