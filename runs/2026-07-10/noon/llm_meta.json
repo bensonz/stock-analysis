@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 312376,
+  "output_tokens": 16901,
+  "rounds": 4,
+  "duration_sec": 313.6,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 今日 热门板块 广告营销 医疗服务 大涨 2026年7月10日",
+        "max_results": 5
+      },
+      "result_length": 3206
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "奥来德 688378 半年报 业绩 2026",
+        "max_results": 5
+      },
+      "result_length": 2114
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体板块 下跌 2026年7月 原因",
+        "max_results": 5
+      },
+      "result_length": 3304
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "博杰股份 002975 机器人 2026年7月 最新消息",
+        "max_results": 5
+      },
+      "result_length": 2573
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "恒铭达 002947 消费电子 2026年7月 业绩",
+        "max_results": 5
+      },
+      "result_length": 2483
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "光学光电子 板块 OLED 2026年7月 趋势",
+        "max_results": 5
+      },
+      "result_length": 2340
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "query": "宏达电子 300726 军工电子 2026年7月 业绩 新闻",
+        "max_results": 5
+      },
+      "result_length": 2042
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "query": "电网设备 板块 2026年7月 趋势 四方股份",
+        "max_results": 5
+      },
+      "result_length": 2814
+    }
+  ],
+  "fallback_used": false
+}

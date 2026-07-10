@@ -1,0 +1,61 @@
+{
+  "date": "2026-07-10",
+  "actions": [
+    {
+      "code": "688378",
+      "name": "奥来德",
+      "action": "OPEN",
+      "price": 53.38,
+      "note": "OLED蒸发机龙头，H1净利预增492-604%(7/5公告)，光学光电子板块前期强势现回调至MA20支撑(+2.0%)，催化剂极新鲜，设备业务放量驱动"
+    },
+    {
+      "code": "300726",
+      "name": "宏达电子",
+      "action": "OPEN",
+      "price": 69.33,
+      "note": "军工电子MLCC龙头，Q1净利+71%，RPS加速上行(RPS20 97.21%)，短期回调至均线下方提供低吸机会，但10日走弱(仅超3.8%个股)需警惕"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 2,
+    "totalEquity": 985121.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -1.49,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -14879.0,
+    "cashPct": 91.77
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 3.7842,
+    "up": 4314,
+    "down": 1140,
+    "positive_indices": [
+      "上证指数",
+      "深证成指"
+    ],
+    "negative_indices": [
+      "创业板指"
+    ],
+    "limit_ups": 77,
+    "limit_downs": 2,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 3.78:1, 2/3 major indices green, 77 limit-ups / 2 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [
+    {
+      "code": "688378",
+      "name": "奥来德"
+    },
+    {
+      "code": "300726",
+      "name": "宏达电子"
+    }
+  ],
+  "marketContext": {
+    "summary": "Broad rally with healthcare/media rotation leading. Breadth 3.78:1 bullish (4314 up/1140 down), 77涨停/2跌停, no panic. 上证 +0.76%, 深证 +0.61% green; 创业板 -0.65% lagging on tech weakness. Semiconductors correcting after +326% 1yr run — 费城半导体 -11.38% 2-day spillover. Capital rotating from overbought tech into healthcare (创新药政策利好), media, and defense. IV data unavailable — normal sizing."
+  }
+}

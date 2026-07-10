@@ -1,0 +1,210 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "广告营销",
+        "5d_pct": 6.85,
+        "trend": "accelerating"
+      },
+      {
+        "name": "医疗服务",
+        "5d_pct": 5.94,
+        "trend": "steady"
+      },
+      {
+        "name": "生物制品",
+        "5d_pct": 5.1,
+        "trend": "steady"
+      },
+      {
+        "name": "电视广播Ⅱ",
+        "5d_pct": 4.77,
+        "trend": "rising"
+      },
+      {
+        "name": "航海装备Ⅱ",
+        "5d_pct": 4.56,
+        "trend": "rising"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": -3.11,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电池",
+        "5d_pct": -2.13,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": -0.57,
+        "trend": "correcting from overbought"
+      }
+    ],
+    "position_alignment": "0/0 positions (all cash), deploying into 光学光电子 + 军工电子Ⅱ",
+    "regime": "Healthcare/media rotation leading, semiconductors/batteries in profit-taking correction. Breadth strong but sector dispersion high."
+  },
+  "position_decisions": [],
+  "new_positions": [
+    {
+      "code": "688378",
+      "name": "奥来德",
+      "entry_price": 53.38,
+      "allocation_pct": 6,
+      "stop": 50.71,
+      "target": 62.0,
+      "thesis": "OLED蒸发机龙头，H1净利预增492-604%(7/5公告)，光学光电子板块前期强势现回调至MA20支撑(+2.0%)，催化剂极新鲜，设备业务放量驱动",
+      "sector": "光学光电子",
+      "sector_rank": "middle (was #1 sector 6/30, not in bottom 5 today)",
+      "catalyst": "半年报预增492-604%，Q2单季净利+4930-6818%，OLED设备+材料双驱动",
+      "catalyst_freshness": "ongoing",
+      "rps120": 93.31,
+      "conviction": "moderate"
+    },
+    {
+      "code": "300726",
+      "name": "宏达电子",
+      "entry_price": 69.33,
+      "allocation_pct": 3,
+      "stop": 65.86,
+      "target": 80.0,
+      "thesis": "军工电子MLCC龙头，Q1净利+71%，RPS加速上行(RPS20 97.21%)，短期回调至均线下方提供低吸机会，但10日走弱(仅超3.8%个股)需警惕",
+      "sector": "军工电子Ⅱ",
+      "sector_rank": "middle (was top 10 sector 6/30, not in bottom 5 today)",
+      "catalyst": "Q1净利+70.77%，军工电子需求稳定，MLCC国产替代",
+      "catalyst_freshness": "aging",
+      "rps120": 92.19,
+      "conviction": "small"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "Sector TOP 5 (医疗服务 +5.94%) but dist_ma20 +22.7% >12% → Rule 2b MA distance violation. Overextended, wait for pullback.",
+      "rps120": 88.03
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物",
+      "reason": "Sector TOP 5 (生物制品 +5.10%) but dist_ma20 +15.3% >12% → Rule 2b MA distance violation.",
+      "rps120": 85.45
+    },
+    {
+      "code": "002185",
+      "name": "华天科技",
+      "reason": "Sector 半导体 in BOTTOM 5 (-0.57%) → hard no-buy per h019. Also dist_ma5 +18.1%, dist_ma20 +30.4% massively overextended.",
+      "rps120": 90.98
+    },
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "Sector 半导体 in BOTTOM 5 → hard no-buy per h019. dist_ma20 +35.5% extremely overextended.",
+      "rps120": 94.18
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "reason": "Sector 电子化学品Ⅱ in BOTTOM 5 (-3.11%) → hard no-buy. dist_ma5 +9.7% >6%, dist_ma20 +16.9% >12% → multi-rule MA violation.",
+      "rps120": 93.33
+    },
+    {
+      "code": "002975",
+      "name": "博杰股份",
+      "reason": "Robot concept but <1% revenue exposure. 增发 caused -8.29% selloff. Catalyst is thin. Technicals OK but no edge.",
+      "rps120": 93.65
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "RPS20 at 71.67% <75% → momentum fading below threshold. 跌停 6/29, high debt risk.",
+      "rps120": 94.28
+    },
+    {
+      "code": "002810",
+      "name": "山东赫达",
+      "reason": "跌停 7/8 on Q2 earnings miss, dist_ma5 -10.5%. Severe negative catalyst, no entry.",
+      "rps120": 92.02
+    },
+    {
+      "code": "002407",
+      "name": "多氟多",
+      "reason": "跌停 7/3, project delay announced, 5-day avg turnover 19% → volatile. Skip.",
+      "rps120": 91.31
+    },
+    {
+      "code": "300870",
+      "name": "欧陆通",
+      "reason": "RPS20 at 71.69% <75% → momentum below threshold. 10-day relative strength only 1.8%.",
+      "rps120": 89.01
+    },
+    {
+      "code": "688502",
+      "name": "茂莱光学",
+      "reason": "dist_ma10 +8.3% >8%, dist_ma20 +21.8% >12% → Rule 2b MA violation. PE 1829 extreme but valuation not primary filter.",
+      "rps120": 89.17
+    },
+    {
+      "code": "601126",
+      "name": "四方股份",
+      "reason": "RPS20 84.05% decelerating sharply from RPS120 94.91%. Deep pullback below all MAs. Trend rolling over. H-share listing uncertain catalyst.",
+      "rps120": 94.91
+    },
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "reason": "Sector 半导体 in BOTTOM 5 → hard no-buy per h019. Despite涨价 catalyst, sector gravity wins.",
+      "rps120": 92.51
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Semiconductor sector correction (费城半导体-11.38% in 2 days, A-shares -10%+ from peak) correctly triggers h019 hard-no-buy, eliminating 12/31 candidates. Rule working as designed.",
+      "type": "rule",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "Global semiconductor profit-taking after +326% 1yr run creates sector-wide gravity that overwhelms individual stock strength."
+    },
+    {
+      "text": "Hot sector + MA violation = still no-buy. Both healthcare candidates (凯莱英, 荣昌生物) in TOP 5 sectors fail dist_ma20 >12%. h027 validated: MA discipline must hold even in hot sectors.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "Mean-reversion risk from extreme MA extension (>12% above MA20) dominates sector tailwind in the short term (5-10 day horizon)."
+    },
+    {
+      "text": "RPS trajectory divergence pattern identified: 宏达电子 RPS20(97.21) > RPS60(92.82) > RPS120(92.19) = accelerating, but 10-day relative strength only 3.8% = recent weakness. This pattern needs outcome tracking to determine if it's a normal pullback or reversal signal.",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "RPS measures cumulative relative return, so a stock that was very strong 20-60 days ago can still have high RPS20 even if the last 10 days are weak. This creates a lag effect that can mask emerging weakness."
+    },
+    {
+      "text": "Pullback to MA20 + fresh earnings catalyst (>100% growth) may be a repeatable entry pattern. 奥来德 at dist_ma20 +2.0% with 5-day-old +500% beat mirrors best setups from V1 backtesting. Track 10-day forward return.",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "Fresh catalyst provides fundamental re-rating urgency while MA20 proximity provides technical support, creating an asymmetric risk/reward setup."
+    }
+  ],
+  "market_summary": "Broad rally with healthcare/media rotation leading. Breadth 3.78:1 bullish (4314 up/1140 down), 77涨停/2跌停, no panic. 上证 +0.76%, 深证 +0.61% green; 创业板 -0.65% lagging on tech weakness. Semiconductors correcting after +326% 1yr run — 费城半导体 -11.38% 2-day spillover. Capital rotating from overbought tech into healthcare (创新药政策利好), media, and defense. IV data unavailable — normal sizing.",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}
