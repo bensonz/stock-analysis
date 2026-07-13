@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 144496,
+  "output_tokens": 6744,
+  "rounds": 2,
+  "duration_sec": 127.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月13日 大跌 原因 恐慌",
+        "max_results": 5
+      },
+      "result_length": 2625
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "军工电子板块 2026年7月 大跌 原因",
+        "max_results": 5
+      },
+      "result_length": 2471
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "中药板块 航天装备 银行 2026年7月 领涨 原因",
+        "max_results": 5
+      },
+      "result_length": 2981
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "宏达电子 300726 2026年7月 股价 军工",
+        "max_results": 5
+      },
+      "result_length": 1982
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月13日 市场情绪 宽度 跌停",
+        "max_results": 5
+      },
+      "result_length": 2911
+    }
+  ],
+  "fallback_used": false
+}

@@ -1,0 +1,241 @@
+# Research Memo: 2026-07-13 — Panic Tape, No New Positions
+
+## 1. Market Regime
+
+**Verdict: PANIC — HARD BLOCK on new longs.**
+
+Breadth is catastrophic: **891 up / 4,574 down = 0.19:1 ratio**. All three major indices deep red (上证 -1.54%, 深证 -2.61%, 创业板 -2.38%). Distribution confirms heavy selling: **53跌停 (f10), 488 stocks down 7-10%, 1,583 down 4-7%**. Only 28 stocks hit the limit-up board.
+
+This is the third consecutive day of selling pressure after a brief dead-cat bounce. Web research confirms 7月跌势不止, with high-priced tech stocks leading the collapse and 恐慌氛围萦绕盘面. The rotation into defensive sectors (中药 +2.98%, 银行 +2.17%) screams risk-off.
+
+**Buy gate check (all three required for any long):**
+- ❌ Up/Down ≥ 1.5:1 → 0.19:1
+- ❌ At least 2/3 major indices green → 0/3 green
+- ❌ Not panic tape (f10 < 30) → f10 = 53
+
+**Regime system correctly hard-blocks: `allow_new_positions: false, sizing_multiplier: 0.0`.**
+
+IV data unavailable from options backend — fallback to overall market assessment. Doesn't matter when the tape is this bad.
+
+---
+
+## 2. Sector Analysis
+
+### Hot Sectors (Top 5, 7/13):
+| Sector | 5d Change | Character |
+|---|---|---|
+| 中药Ⅱ | +2.98% | Defensive rotation, 基药目录催化 |
+| 航天装备Ⅱ | +2.24% | 长征十号乙回收成功催化, event-driven |
+| 国有大型银行Ⅱ | +2.17% | Pure defense, 千亿分红 |
+| 城商行Ⅱ | +2.14% | Defense rotation |
+| 油气开采Ⅱ | +1.97% | Commodity play |
+
+### Cold Sectors (Bottom 5):
+| Sector | 5d Change | Our Exposure |
+|---|---|---|
+| 其他电子Ⅱ | -9.63% | — |
+| 玻璃玻纤 | -7.52% | — |
+| 地面兵装Ⅱ | -7.11% | — |
+| **军工电子Ⅱ** | **-6.24%** | **宏达电子 ✅ ← OUR ONLY POSITION** |
+| 影视院线 | -6.21% | — |
+
+**Position alignment: 0/1 in hot sectors. Our only position is in a bottom-5 sector.**
+
+This is a structural problem. 宏达电子 was entered on 07-10 in 军工电子Ⅱ, which is now -6.24% on a 5d basis. The defense rotation narrative (航天装备 leading, 军工电子 diverging) shows that funds are rotating WITHIN defense — into 商业航天 and AWAY from components/electronics. We backed the wrong horse within the sector.
+
+---
+
+## 3. Position Review
+
+### 宏达电子 (300726) — **SELL, NO QUESTION**
+
+| Field | Value |
+|---|---|
+| Entry | 2026-07-10 @ ¥69.33 |
+| Current | ¥61.40 (-8.97% today) |
+| PnL | **-11.44%** |
+| Days held | 3 |
+| Stop | ¥65.86 (entry × 0.95) |
+| Distance to stop | **-7.26% BELOW stop** |
+| Sector | 军工电子Ⅱ (bottom 5, -6.24%) |
+
+**All three exit rules triggered simultaneously:**
+
+1. **-5% stop triggered** → entry 69.33 × 0.95 = 65.86. Current 61.40 is 7.26% below stop. The stop was crossed, likely on a gap.
+2. **-3% in first 3 days triggered** → -11.44% is catastrophic.
+3. **Sector gravity rule** → 军工电子Ⅱ in bottom 5 at -6.24%. Cold sector = automatic sell.
+
+**Rule violations confirm the disaster:**
+- `stop_proximity`: CRITICAL — price gapped through stop
+- `iv_filter`: -11.4% in 3 days → entry quality was poor
+- `overextended_entry`: likely chased entry
+
+**Root cause:** The stock was bought at ¥69.33 while 军工电子Ⅱ was already showing weakness. Looking at the price action: 07-02跌6.16%, 07-03跌5.06%, 07-07跌3.99% — a clear downtrend BEFORE our 07-10 entry. We bought into a falling knife in a deteriorating sector. The "MLCC龙头, Q1 +71%" thesis didn't matter — sector gravity crushed it.
+
+**Action: SELL at ¥61.40.** No deliberation needed. This is what V2's hard stops are for.
+
+---
+
+## 4. New Entry Candidates
+
+**None. Market is in panic, hard-blocked.**
+
+Even if the tape were better, the only sectors worth considering would be 中药, 航天装备, or 银行 — but none of our enriched candidates are in those sectors. The strategy pool is concentrated in 半导体/电子/化工, all of which are getting crushed today.
+
+A few candidates that would be interesting if the tape improves and their sectors recover:
+- **凯莱英 (002821)**: 医疗研发外包龙头, adjacent to hot 中药/医药 sector. RPS120=89.16%, dist_ma5=2.1%. But dist_ma20=18.1% is too extended.
+- **上海新阳 (300236)**: 电子化学品, RPS120=93.85%, dist_ma5=0.0% (right on MA5). Good setup technically but sector is getting hammered.
+
+These go in the skip list for now.
+
+---
+
+## 5. Skip List
+
+The primary reason for all candidates today is the same: **panic tape, hard block on new positions.** But I'll note specific secondary reasons for key stocks:
+
+- **京仪装备 (688652)**: dist_ma20=19.5%, wildly overextended even if tape were good
+- **茂莱光学 (688502)**: dist_ma20=14.4%, PE=1739, extreme valuation + extension
+- **凯莱英 (002821)**: dist_ma20=18.1%, too far from support
+- **伟测科技 (688372)**: dist_ma20=9.4%, moderate extension, semiconductor sector getting crushed
+- **上海新阳 (300236)**: RPS120=93.85% in sweet spot, dist_ma5=0.0% tight, but 电子化学品Ⅱ sector is in cold zone today. Worth revisiting when tape improves.
+- **宏达电子 (300726)**: Being sold. Sector 军工电子Ⅱ in bottom 5.
+
+---
+
+## 6. Learnings
+
+1. **Sector gravity is absolute.** 宏达电子 had a decent thesis (MLCC龙头, Q1 +71%), but 军工电子Ⅱ was already in a verified downtrend (multiple -5%/-6% days before our entry). V2 Rule 1 says "only buy stocks in sectors trending up." We violated this and paid -11.44% in 3 days.
+
+2. **The entry regime system is working.** The hard block correctly prevented us from opening new positions into a 0.19:1 breadth panic. V1 would have probably forced a "SMALL BUY" somewhere — V2 keeps us in cash.
+
+3. **Gap risk on weekends is real.** 宏达电子 closed at 67.45 on Friday (07-10), opened at 67.62 on Monday (07-13), then collapsed to 61.40. The stop at 65.86 was cleanly gapped through — no chance to exit intraday. For positions showing weakness on Friday, consider proactive exit rather than holding through weekend risk.
+
+4. **The defense rotation is bifurcated.** 航天装备 (+2.24%) and 军工电子 (-6.24%) are moving in opposite directions. The market is distinguishing between 商业航天 (rocket recovery catalyst) and 军工电子 components (de-rating). Same sector family, completely different tape.
+
+---
+
+## 7. Uncertainty Flags
+
+- **I'm uncertain whether the 中药/银行 defense rotation will persist beyond 1-2 more days** — these look like flight-to-safety moves, not sustainable sector leadership. If the tape improves, tech may snap back violently. If it doesn't, defense sectors could extend but they're not our strategy pool's domain.
+- **No enriched candidates in today's hot sectors** — even if we could buy, there's nothing in 中药/航天装备/银行. Our strategy pool is 99% tech/semiconductor/chemical. This is a structural mismatch that cash is the right answer for.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "中药Ⅱ", "5d_pct": 2.98, "trend": "defensive rotation, 基药目录催化"},
+      {"name": "航天装备Ⅱ", "5d_pct": 2.24, "trend": "event-driven, 长征十号乙回收成功"},
+      {"name": "国有大型银行Ⅱ", "5d_pct": 2.17, "trend": "defensive, 千亿分红"},
+      {"name": "城商行Ⅱ", "5d_pct": 2.14, "trend": "defensive rotation"},
+      {"name": "油气开采Ⅱ", "5d_pct": 1.97, "trend": "commodity, modest"}
+    ],
+    "cold_sectors": [
+      {"name": "其他电子Ⅱ", "5d_pct": -9.63, "trend": "deteriorating rapidly"},
+      {"name": "玻璃玻纤", "5d_pct": -7.52, "trend": "deteriorating"},
+      {"name": "地面兵装Ⅱ", "5d_pct": -7.11, "trend": "deteriorating"},
+      {"name": "军工电子Ⅱ", "5d_pct": -6.24, "trend": "deteriorating, our only position here"},
+      {"name": "影视院线", "5d_pct": -6.21, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/1 positions in hot sectors — 宏达电子 in bottom-5 军工电子Ⅱ",
+    "regime": "Panic tape: breadth 0.19:1, all 3 major indices red, 53跌停 vs 28涨停. Tech/AI leading the selloff, defensive rotation into 中药/银行. No new positions allowed."
+  },
+  "position_decisions": [
+    {
+      "code": "300726",
+      "name": "宏达电子",
+      "action": "SELL",
+      "reason": "STOP TRIGGERED: entry 69.33 × 0.95 = stop 65.86, current 61.40 (-7.26% below stop). -11.44% in 3 days. -3% in first 3 days rule also triggered. Sector 军工电子Ⅱ in bottom 5 at -6.24%. Triple exit signal. Sector gravity crushed this — stock was in downtrend before entry (07-02 -6.16%, 07-03 -5.06%, 07-07 -3.99%). RPS degraded to 91.85% but irrelevant now.",
+      "sector_rank": "bottom 5% — 军工电子Ⅱ 5d -6.24%",
+      "new_stop": null,
+      "pnl_pct": -11.44,
+      "days_held": 3,
+      "exit_price": 61.40
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "Panic tape hard block. Secondary: dist_ma20_pct=19.5%, wildly overextended above MA20 support even if tape were good.",
+      "rps120": 94.56
+    },
+    {
+      "code": "688502",
+      "name": "茂莱光学",
+      "reason": "Panic tape hard block. Secondary: dist_ma20_pct=14.4% (>12% rule breached), PE=1739 extreme valuation.",
+      "rps120": 89.84
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "Panic tape hard block. Secondary: dist_ma20_pct=18.1% (>12% rule breached). Otherwise interesting — medical CDMO in hot-adjacent 医药生物 sector, RPS120=89.16%, dist_ma5=2.1% tight. Revisit when tape improves and MA20 gap closes.",
+      "rps120": 89.16
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "reason": "Panic tape hard block. Secondary: RPS120=93.85% sweet spot, dist_ma5=0.0% perfectly tight to MA5, but 电子化学品Ⅱ sector getting crushed in broad tech selloff. Top candidate to revisit when tape stabilizes.",
+      "rps120": 93.85
+    },
+    {
+      "code": "688372",
+      "name": "伟测科技",
+      "reason": "Panic tape hard block. Secondary: dist_ma20=9.4% acceptable, dist_ma5=0.0% tight, but 半导体 sector leading today's selloff.",
+      "rps120": 91.43
+    },
+    {
+      "code": "601126",
+      "name": "四方股份",
+      "reason": "Panic tape hard block. Secondary: RPS120=94.46% borderline extended, dist_ma5=-7.8% in pullback but dist_ma20=-20.0% very broken. Stock in clear downtrend.",
+      "rps120": 94.46
+    },
+    {
+      "code": "300726",
+      "name": "宏达电子",
+      "reason": "Being SELL executed today. Sector 军工电子Ⅱ in bottom 5, -11.44% in 3 days, all stops triggered.",
+      "rps120": 91.85
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Sector gravity is absolute: 宏达电子 was entered in 军工电子Ⅱ which was already in a verified multi-day downtrend (07-02 -6.16%, 07-03 -5.06%, 07-07 -3.99% before our 07-10 entry). The MLCC龙头 thesis was irrelevant — sector crushed it for -11.44% in 3 days. Never enter a stock when its sector is in a confirmed downtrend, regardless of individual fundamentals.",
+      "type": "rule",
+      "tags": ["sector", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "Sector fund flows dominate individual stock narratives. When institutional money exits a sector, even the strongest individual names get dragged down by forced selling and deteriorating sentiment."
+    },
+    {
+      "text": "Entry regime hard block prevented disaster: breadth 0.19:1 correctly blocked all new positions. V1 would have forced a 'SMALL BUY' and compounded losses. Cash is a position — and today it's the best one. The regime system is V2's single most valuable feature.",
+      "type": "signal",
+      "tags": ["entry-filter", "position-sizing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "When breadth is below 0.2:1 and all major indices are red, the probability of any individual long working is near zero. The regime gate converts a discretionary dilemma into a mechanical rule."
+    },
+    {
+      "text": "Weekend gap risk is especially dangerous for stocks already showing weakness. 宏达电子 closed Friday at 67.45, opened Monday at 67.62, then collapsed to 61.40 — gapping cleanly through the 65.86 stop with no chance to exit. For positions that are already -2.7% on day 0 with a deteriorating sector, consider proactive Friday exit rather than holding through weekend uncertainty.",
+      "type": "heuristic",
+      "tags": ["exit-rule", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "周五效应: weak stocks held through weekends face 2.5 days of news risk with no ability to trade. If a position is already showing stress on Friday, the asymmetric risk (small chance of bounce vs large chance of gap-down) favors exit."
+    },
+    {
+      "text": "Defense sector rotation is bifurcated: 航天装备 (+2.24%) and 军工电子 (-6.24%) diverged sharply. The market rewarded commercial space (rocket recovery catalyst) while punishing component suppliers. Not all sub-sectors within a theme move together — need to verify the specific sub-sector trend, not just the broad industry.",
+      "type": "observation",
+      "tags": ["sector", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "Catalysts flow unevenly within industry groups. 长征十号乙 success directly benefits 航天装备 while 军工电子 components face different demand drivers and de-rating pressures."
+    }
+  ],
+  "market_summary": "PANIC TAPE — breadth 0.19:1 (891 up, 4574 down), 53跌停 vs 28涨停. All 3 major indices red (上证 -1.54%, 深证 -2.61%, 创业板 -2.38%). Tech/AI leading collapse, defensive rotation into 中药(+2.98%) and 银行(+2.17%). IV data unavailable. New positions hard-blocked. Only position 宏达电子 being sold at -11.44% loss after all stops triggered. Cash 97.5% is the right allocation.",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}
+```

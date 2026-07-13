@@ -1,0 +1,50 @@
+{
+  "date": "2026-07-13",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1783913856.146595,
+      "errors": [],
+      "end": 1783913870.890421,
+      "duration_sec": 14.7
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 13080,
+      "tokens": {
+        "input_tokens": 144496,
+        "output_tokens": 6744
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 127.1,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1783913998.092213,
+      "actions": [
+        "SELL 300726",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=36",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=123",
+        "Hypothesis: Created h097 (observation): Weekend gap risk is especially dangerous for stocks already showing weakness. 宏达...",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=39",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1783913998.660037,
+      "duration_sec": 0.6
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 142.39999999999998
+  }
+}

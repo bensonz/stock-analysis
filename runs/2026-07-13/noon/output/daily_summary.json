@@ -1,0 +1,45 @@
+{
+  "date": "2026-07-13",
+  "actions": [
+    {
+      "code": "300726",
+      "name": "宏达电子",
+      "action": "SELL",
+      "price": 61.4,
+      "pnl_pct": -11.44,
+      "note": "STOP TRIGGERED: entry 69.33 × 0.95 = stop 65.86, current 61.40 (-7.26% below stop). -11.44% in 3 days. -3% in first 3 days rule also triggered. Sector 军工电子Ⅱ in bottom 5 at -6.24%. Triple exit signal. Sector gravity crushed this — stock was in downtrend before entry (07-02 -6.16%, 07-03 -5.06%, 07-07 -3.99%). RPS degraded to 91.85% but irrelevant now."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 979809.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -2.02,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -20191.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.1948,
+    "up": 891,
+    "down": 4574,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 28,
+    "limit_downs": 53,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.19:1, 0/3 major indices green, 28 limit-ups / 53 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "PANIC TAPE — breadth 0.19:1 (891 up, 4574 down), 53跌停 vs 28涨停. All 3 major indices red (上证 -1.54%, 深证 -2.61%, 创业板 -2.38%). Tech/AI leading collapse, defensive rotation into 中药(+2.98%) and 银行(+2.17%). IV data unavailable. New positions hard-blocked. Only position 宏达电子 being sold at -11.44% loss after all stops triggered. Cash 97.5% is the right allocation."
+  }
+}
