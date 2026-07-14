@@ -3,7 +3,8 @@
 fetch_iv_sentiment.py — Fetch IV rank/percentile from the options-learn backend
 to provide market sentiment context for stock analysis.
 
-Requires the options-learn backend running on localhost:8000.
+Requires the options-learn backend. Defaults to http://localhost:8000; set
+IV_BACKEND_URL to point at a remote deployment (e.g. http://47.94.238.128:8080).
 
 Usage:
     python scripts/fetch_iv_sentiment.py           # JSON output
@@ -15,12 +16,43 @@ Primary endpoints:
 """
 
 import json
+import os
 import sys
 from datetime import datetime
+from pathlib import Path
 from urllib.error import URLError
 from urllib.request import Request, urlopen
 
-API_BASE = "http://localhost:8000/api/history"
+ENV_FILE = Path(__file__).resolve().parent.parent / ".env"
+
+
+def _resolve_backend_url() -> str:
+    """Resolve the options-learn backend host.
+
+    Precedence: process env IV_BACKEND_URL -> repo .env -> localhost default.
+    Kept dependency-light (no llm_client import) so this stays a plain
+    urllib/json fetcher. Value is a scheme+host(+port) with no trailing path.
+    """
+    val = os.environ.get("IV_BACKEND_URL")
+    if not val and ENV_FILE.exists():
+        try:
+            for line in ENV_FILE.read_text(encoding="utf-8").splitlines():
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                key, _, raw = line.partition("=")
+                if key.strip() == "IV_BACKEND_URL":
+                    val = raw.strip().strip('"').strip("'")
+                    break
+        except OSError:
+            pass
+    return (val or "http://localhost:8000").rstrip("/")
+
+
+# Override with IV_BACKEND_URL (in the process env or repo .env) when the
+# service runs somewhere other than a local dev instance.
+IV_BACKEND_URL = _resolve_backend_url()
+API_BASE = f"{IV_BACKEND_URL}/api/history"
 
 UNDERLYINGS = [
     {"code": "510050", "name": "50ETF", "desc": "大盘蓝筹"},
