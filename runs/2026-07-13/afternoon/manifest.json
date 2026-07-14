@@ -2,7 +2,7 @@
   "date": "2026-07-13",
   "slot": "afternoon",
   "run_started_at": "2026-07-13T15:35:06.175633+08:00",
-  "status": "failed",
+  "status": "recovered",
   "exit_code": 1,
   "total_duration_sec": 0.0,
   "phases": {
@@ -54,5 +54,6 @@
       ],
       "soft_warns": []
     }
-  }
+  },
+  "recovery_note": "Original run failed at phase2_to_phase3 gate: the parser grabbed a stray new_learnings JSON array from the model output instead of the decision object. Parser fixed (prefer dict). report.md/watchlist.json/response.json regenerated from gpt_response.txt on 2026-07-14. Portfolio impact: none (new_positions=[], position_decisions=[]; hard-block panic day, 100% cash)."
 }

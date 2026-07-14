@@ -1,44 +1,176 @@
-[
-  {
-    "text": "市场恐慌日（涨跌比0.17:1, 187跌停）完美验证了entry_regime硬禁买规则的价值——如果今天开了新仓，几乎必定遭遇-5%止损。V2的'weak-market default'规则正在保护资金。",
-    "type": "heuristic",
-    "tags": [
-      "entry-filter",
-      "risk-management"
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "中药Ⅱ",
+        "5d_pct": null,
+        "1d_pct": 3.31,
+        "trend": "defensive_rotation"
+      },
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": null,
+        "1d_pct": 3.01,
+        "trend": "geopolitical_catalyst"
+      },
+      {
+        "name": "农商行Ⅱ",
+        "5d_pct": null,
+        "1d_pct": 2.6,
+        "trend": "defensive"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": null,
+        "1d_pct": 2.54,
+        "trend": "defensive"
+      },
+      {
+        "name": "城商行Ⅱ",
+        "5d_pct": null,
+        "1d_pct": 2.26,
+        "trend": "defensive"
+      }
     ],
-    "evidence_type": "supporting",
-    "related_hypothesis": "h019",
-    "mechanism": "恐慌日开盘即被套的概率极高，因为卖盘碾压买盘，任何买入都会在日内被淹没。等待恐慌消退再入场是动量策略的核心原则。"
+    "cold_sectors": [
+      {
+        "name": "其他电子Ⅱ",
+        "1d_pct": -11.52,
+        "trend": "panic_selling"
+      },
+      {
+        "name": "玻璃玻纤",
+        "1d_pct": -8.65,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "地面兵装Ⅱ",
+        "1d_pct": -8.5,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "光学光电子",
+        "1d_pct": -7.99,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "军工电子Ⅱ",
+        "1d_pct": -7.9,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/0 positions (no active holdings)",
+    "regime": "PANIC — US-Iran conflict escalation, oil spike, risk-off rotation from tech to defensives. 187 limit-downs, breadth 0.17:1."
   },
-  {
-    "text": "策略池67只股票几乎全在今日暴跌板块（半导体/电子/军工），而今日上涨板块（中药/油气/银行）在池中无覆盖。Sector-first规则被完全验证——池中的'好股票'在板块暴跌时无一幸免。",
-    "type": "observation",
-    "tags": [
-      "sector",
-      "entry-filter"
-    ],
-    "evidence_type": "supporting",
-    "related_hypothesis": "h019",
-    "mechanism": "板块重力>个股Alpha。在-7%到-11%的板块跌幅面前，任何个股的RPS/催化/基本面都是第二位的。"
-  },
-  {
-    "text": "美伊冲突→油价跳涨→Risk-off→科技股暴跌→防御股上涨，这条传导链在今日完美演绎。后续应关注冲突是否缓和（停火谈判、油价回落），这将是科技股反弹的关键催化剂。",
-    "type": "signal",
-    "tags": [
-      "macro",
-      "sector"
-    ],
-    "evidence_type": "supporting",
-    "mechanism": "地缘冲突推高能源成本+不确定性→资金从高beta成长股撤出→涌入防御性资产。冲突缓和则反向流动。"
-  },
-  {
-    "text": "多氟多(002407)今日跌停案例再次证明：Q2业绩环比大幅下滑（-51%~-80%）是致命的。即使H1累计同比增长777%-991%，市场只看边际变化。催化剂的新鲜度和方向>催化剂的总量。",
-    "type": "heuristic",
-    "tags": [
-      "catalyst",
-      "entry-filter"
-    ],
-    "evidence_type": "supporting",
-    "mechanism": "市场定价的是边际变化。H1业绩预告的'总量'已被提前priced in，Q2环比恶化才是新信息。"
-  }
-]
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "ALL_67",
+      "name": "全策略池67只",
+      "reason": "Market panic: breadth 0.17:1 (need 1.5:1), 0/3 major indices green, 187 limit-downs, entry_regime hard_block=true. No new positions allowed today.",
+      "rps120": null
+    },
+    {
+      "code": "002185",
+      "name": "华天科技",
+      "reason": "dist_ma5_pct +9.0%, dist_ma20_pct +23.5% — severely overextended per Rule 2b. Even without panic, this is un-buyable at current levels.",
+      "rps120": 91.77
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "dist_ma20_pct +18.1% — extreme extension per Rule 2b (>12% hard cutoff). Interesting healthcare candidate otherwise, with equity incentive catalyst.",
+      "rps120": 89.16
+    },
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "dist_ma20_pct +19.5% — extreme extension per Rule 2b. Semiconductor equipment sector also in heavy selloff zone.",
+      "rps120": 94.56
+    },
+    {
+      "code": "002407",
+      "name": "多氟多",
+      "reason": "H1 earnings preview revealed Q2 net profit dropped 51-80% QoQ. Stock hit limit-down (-10%). Catalyst is negative, not positive. Fundamental breakdown.",
+      "rps120": 91.06
+    },
+    {
+      "code": "300726",
+      "name": "宏达电子",
+      "reason": "Sector (军工电子Ⅱ) in bottom 5 today at -7.90%. No entry in cold sectors regardless of individual setup.",
+      "rps120": 91.85
+    },
+    {
+      "code": "688378",
+      "name": "奥来德",
+      "reason": "Sector (光学光电子) -7.99% today, in bottom 5. dist_ma5 -7.9% shows ongoing decline. No entry.",
+      "rps120": 93.42
+    },
+    {
+      "code": "688502",
+      "name": "茂莱光学",
+      "reason": "dist_ma20_pct +14.4% — extreme extension. Sector (光学光电子) in bottom 5. PE 1700x with low earnings quality.",
+      "rps120": 89.84
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物",
+      "reason": "Interesting biotech candidate (sector adjacent to hot 中药). But dist_ma20 +9.9% is elevated. Also posting net losses. Wait for pullback + regime improvement.",
+      "rps120": 86.52
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "reason": "Best technical setup in pool: dist_ma5 0.0% (at MA5), RPS120 93.85%. But sector (电子化学品) in broad tech selloff. Wait for sector stabilization.",
+      "rps120": 93.85
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "市场恐慌日（涨跌比0.17:1, 187跌停）完美验证了entry_regime硬禁买规则——如果今天开新仓几乎必定遭遇-5%止损。V2的weak-market default正在保护资金。",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter",
+        "risk-management"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "恐慌日开盘即被套的概率极高，因卖盘碾压买盘。等待恐慌消退再入场是动量策略核心原则。"
+    },
+    {
+      "text": "策略池67只股票几乎全在今日暴跌板块（半导体/电子/军工-7%~-11%），而上涨板块（中药/油气/银行）在池中无覆盖。Sector-first规则被完全验证：板块重力>个股Alpha。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "在-7%到-11%的板块跌幅面前，任何个股的RPS/催化/基本面都是次要的。"
+    },
+    {
+      "text": "美伊冲突→油价跳涨→Risk-off→科技暴跌→防御上涨的传导链今日完美演绎。关注冲突是否缓和（停火谈判），这将是科技股反弹的关键信号。",
+      "type": "signal",
+      "tags": [
+        "macro",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "地缘冲突推高能源成本+不确定性→资金从高beta成长股撤出→涌入防御资产。冲突缓和则反向。"
+    },
+    {
+      "text": "多氟多H1累计+777%~991%但Q2环比-51%~-80%仍跌停——市场只看边际变化。催化剂的方向和新鲜度>总量。H1高增已被priced in，Q2恶化才是新信息。",
+      "type": "heuristic",
+      "tags": [
+        "catalyst",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "市场定价边际变化。业绩预告的'总量'已被提前消化，环比恶化才是新信息。"
+    }
+  ],
+  "market_summary": "PANIC DAY. 美伊冲突升级推高油价（布伦特$78+），全球Risk-off。上证-2.06%，深证-3.48%，创业板-3.10%。涨跌比0.17:1（801涨/4683跌），187跌停，33涨停。科技/半导体板块重灾区（其他电子-11.5%，光学光电子-8%，军工电子-7.9%），防御板块（中药+3.3%，油气+3%，银行+2.3-2.6%）避险。IV数据缺失。Entry regime hard_block=true，0仓位，100%现金（¥979,809）。等恐慌消退。",
+  "market_sentiment": "bearish",
+  "market_call": "恐慌"
+}
