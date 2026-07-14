@@ -1,0 +1,135 @@
+{
+  "date": "2026-07-14",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1784014510.371714,
+      "errors": [],
+      "end": 1784014536.363499,
+      "duration_sec": 26.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 21569,
+      "tokens": {
+        "input_tokens": 260630,
+        "output_tokens": 20203
+      },
+      "rounds": 3,
+      "tool_calls_count": 7,
+      "duration_sec": 292.6,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1784014829.056244,
+      "actions": [
+        "OPEN 601958 @ 22.71",
+        "SKIP OPEN 002975: 涨停 (change 10.0%), cannot buy at daily limit",
+        "OPEN 300236 @ 111.83",
+        "PRICE_CORRECTED 688372: LLM=178.8 outside [154.27,170.66], using market=164.02",
+        "OPEN 688372 @ 164.02",
+        "OPEN 688401 @ 84.95",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h100 (observation): Fresh earnings catalyst (643-816% growth) + same-day 涨停 is the single strongest ...",
+        "Hypothesis: Created h101 (observation): 钼(molybdenum) is a structural AI play, not a cyclical commodity. 3D NAND >300 la...",
+        "Hypothesis: Updated h017 (rule): +1 supporting evidence → hitRate=100%, n=24",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=36",
+        "Hypothesis: Created h102 (observation): Zero VCP signals across all 62 strategy pool stocks suggests the market is in a ...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "300236",
+                "name": "上海新阳",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 111.83,
+                "stopLoss": 106.24,
+                "distance_pct": 5.0,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "688372",
+                "name": "伟测科技",
+                "rule": "stop_proximity",
+                "severity": "CRITICAL",
+                "currentPrice": 164.02,
+                "stopLoss": 169.86,
+                "distance_pct": -3.56,
+                "suggestion": "🔴 CRITICAL — only -3.6% above stop! Gap risk is real (03-03 lesson: 扬杰科技 gapped to -8.37%). Strongly recommend proactive stop-loss NOW. Don't wait for exact trigger."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1784014829.8229601,
+      "duration_sec": 0.8
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 300236 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 688372 — 🔴 CRITICAL — only -3.6% above stop! Gap risk is real (03-03 lesson: 扬杰科技 gapped to -8.37%). Strongly recommend proactive stop-loss NOW. Don't wait for exact trigger."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 319.40000000000003
+  }
+}

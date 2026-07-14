@@ -1,0 +1,82 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 260630,
+  "output_tokens": 20203,
+  "rounds": 3,
+  "duration_sec": 292.6,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月14日 市场 大涨 原因 板块",
+        "max_results": 5
+      },
+      "result_length": 2695
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体 板块 2026年7月 元件 电子 化学品 行情",
+        "max_results": 5
+      },
+      "result_length": 2869
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "博杰股份 002975 2026年半年报 业绩 预告",
+        "max_results": 5
+      },
+      "result_length": 2828
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "工业金属 钼 金钼股份 小金属 2026年7月 涨价",
+        "max_results": 5
+      },
+      "result_length": 2847
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "上海新阳 300236 伟测科技 688372 2026年7月 电子化学品 封测",
+        "max_results": 5
+      },
+      "result_length": 2937
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "上海新阳 300236 2026年7月 电子化学品 光刻胶 先进封装"
+      },
+      "result_length": 2792
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "伟测科技 688372 2026年7月 封测 业绩 景气"
+      },
+      "result_length": 2347
+    }
+  ],
+  "fallback_used": false
+}
