@@ -1,0 +1,49 @@
+{
+  "date": "2026-07-14",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1784000136.023436,
+      "errors": [],
+      "end": 1784000148.8750458,
+      "duration_sec": 12.9
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 14961,
+      "tokens": {
+        "input_tokens": 236934,
+        "output_tokens": 9426
+      },
+      "rounds": 3,
+      "tool_calls_count": 7,
+      "duration_sec": 205.7,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1784000354.605322,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h098 (observation): Hormuz Strait geopolitical shock is the dominant macro driver today: oil service...",
+        "Hypothesis: Created h099 (observation): entry_regime hard_block is functioning correctly: breadth 0.86:1 + 0/3 green ind...",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=93",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=35",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1784000355.205469,
+      "duration_sec": 0.6
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 219.2
+  }
+}

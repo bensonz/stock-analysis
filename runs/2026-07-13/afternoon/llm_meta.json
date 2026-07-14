@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 223761,
+  "output_tokens": 6472,
+  "rounds": 3,
+  "duration_sec": 114.9,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月13日 大跌 原因 市场暴跌",
+        "max_results": 5
+      },
+      "result_length": 1404
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "中药板块 大涨 2026年7月13日",
+        "max_results": 5
+      },
+      "result_length": 2711
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体板块 大跌 2026年7月13日 A股",
+        "max_results": 5
+      },
+      "result_length": 2858
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "美伊冲突 2026年7月13日 油价 A股影响"
+      },
+      "result_length": 3229
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "油气开采板块 上涨 2026年7月 石油 中海油"
+      },
+      "result_length": 2908
+    }
+  ],
+  "fallback_used": false
+}

@@ -1,0 +1,82 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 236934,
+  "output_tokens": 9426,
+  "rounds": 3,
+  "duration_sec": 205.7,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月14日 航天装备 暴跌 原因",
+        "max_results": 5
+      },
+      "result_length": 3354
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月14日 油服工程 大涨 煤炭",
+        "max_results": 5
+      },
+      "result_length": 2857
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "博杰股份 002975 2026半年报 业绩预告",
+        "max_results": 5
+      },
+      "result_length": 3048
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 今日大盘 下跌 科创50 半导体 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 3053
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "伟测科技 688372 半导体封测 先进封装 2026",
+        "max_results": 5
+      },
+      "result_length": 3119
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "霍尔木兹海峡 关闭 2026年7月 伊朗 美军 油价 A股",
+        "max_results": 5
+      },
+      "result_length": 3324
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 7月14日 大盘分析 市场情绪 后市",
+        "max_results": 5
+      },
+      "result_length": 2691
+    }
+  ],
+  "fallback_used": false
+}

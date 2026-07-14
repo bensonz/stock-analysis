@@ -1,0 +1,36 @@
+{
+  "date": "2026-07-14",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 979809.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -2.02,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -20191.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.8572,
+    "up": 2491,
+    "down": 2906,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 33,
+    "limit_downs": 36,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.86:1, 0/3 major indices green, 33 limit-ups / 36 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "PANIC TAPE — US-Iran military escalation with Hormuz Strait effectively closed. Oil surging (Brent >$78), energy stocks leading (油服工程+4.75%, 煤炭+3.49%), while military aerospace (-9.99%) and tech (科创50-3.45%) collapse. Breadth 0.86:1 (2491↑/2906↓), all three major indices red, 36跌停 vs 33涨停. Entry regime HARD BLOCK active. Yesterday (July 13) was worse: 上证-2.06%, 2200+ stocks down >5%. Today shows marginal stabilization but no buy signal. IV data unavailable (all proxies null). Portfolio 100% cash (¥979,809), -2.02% total return. Strategy: preserve capital, monitor pullback-to-MA candidates (博杰股份, 伟测科技, 上海新阳) for when breadth recovers to 1.5:1+ with 2/3 green indices."
+  }
+}

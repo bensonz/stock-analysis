@@ -1,0 +1,301 @@
+## Research Memo: 2026-07-13 — 市场恐慌日，硬性禁买
+
+---
+
+### 1. Market Regime
+
+**定性：PANIC — 全面风险规避**
+
+| 指标 | 数值 | 判断 |
+|------|------|------|
+| 上证指数 | -2.06% | ❌ |
+| 深证成指 | -3.48% | ❌ |
+| 创业板指 | -3.10% | ❌ |
+| Up/Down | 801 / 4683 = 0.17:1 | ❌ 极端弱势 |
+| 涨停 | 33 | |
+| 跌停 | 187 | 🔴 恐慌 |
+| f7_10 (跌7-10%) | 1,075 | 🔴 大量重挫 |
+| f4_7 (跌4-7%) | 1,634 | 🔴 |
+
+**宽度解读**：涨跌比 0.17:1，远低于 1.5:1 的最低买入门槛。187 只跌停 + 1,075 只跌 7-10%，这是典型的恐慌抛售。三大指数全部收绿，买盘完全消失。
+
+**宏观驱动**：
+1. **美伊冲突再升级**：美军周末对伊朗发动新一轮打击，伊朗强烈谴责。霍尔木兹海峡通行权争议推高油价（布伦特+5.4%至$78+），亚洲市场 Risk-off。
+2. **半导体获利了结**：前期半导体板块累计涨幅巨大，SK海力士ADR上市（首日+13%）兑现利好，存储/设备板块集体重挫。科创50 -3.42%。
+3. **美联储鹰派**：联储半年报重申抗通胀，暗示利率可能高于当前区间，压制成长股估值。
+
+**IV情绪**：无数据（iv_sentiment 返回 `signal: "无数据"`，所有ETF IV数据为空）。无法使用IV作为新仓油门。
+
+**结论**：`entry_regime.hard_block = true`，`sizing_multiplier = 0.0`。**今天不能开任何新仓。** 这不是"谨慎"的问题，是系统级禁令。
+
+---
+
+### 2. Sector Analysis
+
+**今日Top 5（防御性轮动）**：
+| 板块 | 涨幅 | 性质 |
+|------|------|------|
+| 中药Ⅱ | +3.31% | 防御 + 政策（新版基药目录794种，中药扩容） |
+| 油气开采Ⅱ | +3.01% | 地缘催化（美伊冲突→油价跳涨） |
+| 农商行Ⅱ | +2.60% | 防御/高股息 |
+| 国有大型银行Ⅱ | +2.54% | 防御 |
+| 城商行Ⅱ | +2.26% | 防御 |
+
+**今日Bottom 5（科技重灾区）**：
+| 板块 | 跌幅 | 性质 |
+|------|------|------|
+| 其他电子Ⅱ | -11.52% | 🔴 崩盘 |
+| 玻璃玻纤 | -8.65% | 🔴 |
+| 地面兵装Ⅱ | -8.50% | 🔴 |
+| 光学光电子 | -7.99% | 🔴 |
+| 军工电子Ⅱ | -7.90% | 🔴 |
+
+**板块对齐**：策略池67只股票绝大多数集中在半导体、电子、化工、电力设备——**全部在今日重灾区**。Top 5板块（中药/油气/银行）在策略池中几乎没有覆盖。这完美验证了 Rule 1（Sector First）：即使个别股票看起来不错，板块重力会把它拉下去。
+
+**轮动信号**：从科技/AI/半导体 → 防御（银行/中药）+ 地缘受益（油气）。这是典型的 Risk-off 轮动，不是可以继续追半导体的环境。
+
+---
+
+### 3. Position Review
+
+**当前持仓：0 个**。组合100%现金（¥979,809），累计已实现亏损 -¥20,191（-2.02%）。
+
+无持仓需要管理。`position_decisions: []`。
+
+---
+
+### 4. New Entry Candidates
+
+**全部跳过。硬性禁买。** 即便如此，列出若市场恢复后值得优先关注的标的：
+
+#### 值得跟踪（但今天不买）：
+
+**凯莱英 (002821)** — 医疗研发外包龙头
+- RPS120: 89.16%（甜点区）
+- 行业: 医疗服务 → 与今日热点中药/医药同属医药生物
+- 催化: 股权激励计划（07-09 发布，当日+7.8%），创新药政策利好
+- ⚠️ dist_ma20_pct: +18.1%（远超12%红线，严重超买）
+- 跳过理由: MA距离超标 + 市场恐慌
+
+**荣昌生物 (688331)** — 生物制品龙头
+- RPS120: 86.52%
+- 行业: 生物制品（医药生物），受益于基药目录扩容
+- 催化: 创新药审评加速，公募持股34%
+- dist_ma20_pct: +9.9%（接近但未超12%红线）
+- MA10持平(0.0%)，短期不算追高
+- 跳过理由: 市场恐慌硬禁买，且PE=T TM亏损，基本面有瑕疵
+
+**上海新阳 (300236)** — 电子化学品
+- RPS120: 93.85%（甜点区上沿）
+- dist_ma5_pct: 0.0%（精准在MA5！）
+- dist_ma10_pct: -2.9%
+- 今日板块（电子化学品Ⅱ）不在top5也不在bottom5，但半导体链整体暴跌
+- 亮点: Q3归母净利+103%，半导体材料国产替代
+- ⚠️ 板块风险: 整个电子/半导体链今日暴跌，短期板块动量极差
+- 跳过理由: 板块重力向下 + 市场恐慌
+
+**伟测科技 (688372)** — 半导体封测
+- RPS120: 91.43%
+- dist_ma5: 0.0%，dist_ma10: +2.4%
+- ⚠️ dist_ma20: +9.4%（偏高但未超12%）
+- ⚠️ 半导体板块今日重灾区
+- 跳过理由: 板块Bottom + 市场恐慌
+
+---
+
+### 5. Skip List
+
+今天的skip list很广——整个策略池都在暴跌板块中：
+
+| 代码 | 名称 | 跳过大类 | 原因 |
+|------|------|----------|------|
+| — | 全策略池 | 市场恐慌 | 涨跌比0.17:1, 0/3指数绿, 187跌停, entry_regime hard_block |
+| 002185 | 华天科技 | MA超买 | dist_ma5 +9%, dist_ma20 +23.5%, 严重追高 |
+| 002821 | 凯莱英 | MA超买 | dist_ma20 +18.1% |
+| 688652 | 京仪装备 | MA超买 | dist_ma20 +19.5% |
+| 688502 | 茂莱光学 | MA超买 | dist_ma20 +14.4% |
+| 688392 | 骄成超声 | MA超买 | dist_ma20 +12.9% |
+| 688037 | 芯源微 | MA超买 | dist_ma20 +22.4% |
+| 603061 | 金海通 | MA超买 | dist_ma20 +9.6% (接近红线) |
+| 300726 | 宏达电子 | 板块+跌幅 | 军工电子Ⅱ 今日-7.90% |
+| 002407 | 多氟多 | 业绩暴雷 | Q2环比-51%~80%，今日跌停 |
+| 688378 | 奥来德 | 板块 | 光学光电子 今日-7.99% |
+| 688295 | 中复神鹰 | RPS边缘 | RPS120=93.91%, 化学纤维不在top板块 |
+| 000703 | 恒逸石化 | 板块弱势 | 炼油化工不在top5，近10日仅强于6.5%股票 |
+| 002810 | 山东赫达 | 业绩暴雷 | Q2净利润环比-1%~-20%, 今日大概率大跌 |
+| 300037 | 新宙邦 | 板块弱势 | 电池化学品，整体下行 |
+
+---
+
+### 6. Learnings
+
+```json
+[
+  {
+    "text": "市场恐慌日（涨跌比0.17:1, 187跌停）完美验证了entry_regime硬禁买规则的价值——如果今天开了新仓，几乎必定遭遇-5%止损。V2的'weak-market default'规则正在保护资金。",
+    "type": "heuristic",
+    "tags": ["entry-filter", "risk-management"],
+    "evidence_type": "supporting",
+    "related_hypothesis": "h019",
+    "mechanism": "恐慌日开盘即被套的概率极高，因为卖盘碾压买盘，任何买入都会在日内被淹没。等待恐慌消退再入场是动量策略的核心原则。"
+  },
+  {
+    "text": "策略池67只股票几乎全在今日暴跌板块（半导体/电子/军工），而今日上涨板块（中药/油气/银行）在池中无覆盖。Sector-first规则被完全验证——池中的'好股票'在板块暴跌时无一幸免。",
+    "type": "observation",
+    "tags": ["sector", "entry-filter"],
+    "evidence_type": "supporting",
+    "related_hypothesis": "h019",
+    "mechanism": "板块重力>个股Alpha。在-7%到-11%的板块跌幅面前，任何个股的RPS/催化/基本面都是第二位的。"
+  },
+  {
+    "text": "美伊冲突→油价跳涨→Risk-off→科技股暴跌→防御股上涨，这条传导链在今日完美演绎。后续应关注冲突是否缓和（停火谈判、油价回落），这将是科技股反弹的关键催化剂。",
+    "type": "signal",
+    "tags": ["macro", "sector"],
+    "evidence_type": "supporting",
+    "mechanism": "地缘冲突推高能源成本+不确定性→资金从高beta成长股撤出→涌入防御性资产。冲突缓和则反向流动。"
+  },
+  {
+    "text": "多氟多(002407)今日跌停案例再次证明：Q2业绩环比大幅下滑（-51%~-80%）是致命的。即使H1累计同比增长777%-991%，市场只看边际变化。催化剂的新鲜度和方向>催化剂的总量。",
+    "type": "heuristic",
+    "tags": ["catalyst", "entry-filter"],
+    "evidence_type": "supporting",
+    "mechanism": "市场定价的是边际变化。H1业绩预告的'总量'已被提前priced in，Q2环比恶化才是新信息。"
+  }
+]
+```
+
+---
+
+### 7. Uncertainty Flags
+
+1. **美伊冲突走向不明**：周末美军新一轮打击后，伊朗反应及后续外交路径不确定。如果冲突突然缓和（如停火），科技股可能暴力反弹。如果继续升级，油气/黄金将继续吸走资金。
+
+2. **半导体回调深度**：今天科创50 -3.42%，半导体链多个板块-7%到-11%。如果这是阶段性见顶（类似7月2日的-7.7%暴跌），可能需要数周修复。但如果只是1-2天恐慌释放，后天可能就是买入窗口。我无法判断。
+
+3. **中药/油气持续性**：今日防御板块的上涨是短期避险还是新趋势的开始？如果美伊冲突持续，油气可能形成中期趋势。中药有基药目录政策支撑，但涨幅3.31%在恐慌日不算强。
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "中药Ⅱ", "5d_pct": null, "1d_pct": 3.31, "trend": "defensive_rotation"},
+      {"name": "油气开采Ⅱ", "5d_pct": null, "1d_pct": 3.01, "trend": "geopolitical_catalyst"},
+      {"name": "农商行Ⅱ", "5d_pct": null, "1d_pct": 2.60, "trend": "defensive"},
+      {"name": "国有大型银行Ⅱ", "5d_pct": null, "1d_pct": 2.54, "trend": "defensive"},
+      {"name": "城商行Ⅱ", "5d_pct": null, "1d_pct": 2.26, "trend": "defensive"}
+    ],
+    "cold_sectors": [
+      {"name": "其他电子Ⅱ", "1d_pct": -11.52, "trend": "panic_selling"},
+      {"name": "玻璃玻纤", "1d_pct": -8.65, "trend": "deteriorating"},
+      {"name": "地面兵装Ⅱ", "1d_pct": -8.50, "trend": "deteriorating"},
+      {"name": "光学光电子", "1d_pct": -7.99, "trend": "deteriorating"},
+      {"name": "军工电子Ⅱ", "1d_pct": -7.90, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/0 positions (no active holdings)",
+    "regime": "PANIC — US-Iran conflict escalation, oil spike, risk-off rotation from tech to defensives. 187 limit-downs, breadth 0.17:1."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "ALL_67",
+      "name": "全策略池67只",
+      "reason": "Market panic: breadth 0.17:1 (need 1.5:1), 0/3 major indices green, 187 limit-downs, entry_regime hard_block=true. No new positions allowed today.",
+      "rps120": null
+    },
+    {
+      "code": "002185",
+      "name": "华天科技",
+      "reason": "dist_ma5_pct +9.0%, dist_ma20_pct +23.5% — severely overextended per Rule 2b. Even without panic, this is un-buyable at current levels.",
+      "rps120": 91.77
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "dist_ma20_pct +18.1% — extreme extension per Rule 2b (>12% hard cutoff). Interesting healthcare candidate otherwise, with equity incentive catalyst.",
+      "rps120": 89.16
+    },
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "dist_ma20_pct +19.5% — extreme extension per Rule 2b. Semiconductor equipment sector also in heavy selloff zone.",
+      "rps120": 94.56
+    },
+    {
+      "code": "002407",
+      "name": "多氟多",
+      "reason": "H1 earnings preview revealed Q2 net profit dropped 51-80% QoQ. Stock hit limit-down (-10%). Catalyst is negative, not positive. Fundamental breakdown.",
+      "rps120": 91.06
+    },
+    {
+      "code": "300726",
+      "name": "宏达电子",
+      "reason": "Sector (军工电子Ⅱ) in bottom 5 today at -7.90%. No entry in cold sectors regardless of individual setup.",
+      "rps120": 91.85
+    },
+    {
+      "code": "688378",
+      "name": "奥来德",
+      "reason": "Sector (光学光电子) -7.99% today, in bottom 5. dist_ma5 -7.9% shows ongoing decline. No entry.",
+      "rps120": 93.42
+    },
+    {
+      "code": "688502",
+      "name": "茂莱光学",
+      "reason": "dist_ma20_pct +14.4% — extreme extension. Sector (光学光电子) in bottom 5. PE 1700x with low earnings quality.",
+      "rps120": 89.84
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物",
+      "reason": "Interesting biotech candidate (sector adjacent to hot 中药). But dist_ma20 +9.9% is elevated. Also posting net losses. Wait for pullback + regime improvement.",
+      "rps120": 86.52
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "reason": "Best technical setup in pool: dist_ma5 0.0% (at MA5), RPS120 93.85%. But sector (电子化学品) in broad tech selloff. Wait for sector stabilization.",
+      "rps120": 93.85
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "市场恐慌日（涨跌比0.17:1, 187跌停）完美验证了entry_regime硬禁买规则——如果今天开新仓几乎必定遭遇-5%止损。V2的weak-market default正在保护资金。",
+      "type": "heuristic",
+      "tags": ["entry-filter", "risk-management"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "恐慌日开盘即被套的概率极高，因卖盘碾压买盘。等待恐慌消退再入场是动量策略核心原则。"
+    },
+    {
+      "text": "策略池67只股票几乎全在今日暴跌板块（半导体/电子/军工-7%~-11%），而上涨板块（中药/油气/银行）在池中无覆盖。Sector-first规则被完全验证：板块重力>个股Alpha。",
+      "type": "observation",
+      "tags": ["sector", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "在-7%到-11%的板块跌幅面前，任何个股的RPS/催化/基本面都是次要的。"
+    },
+    {
+      "text": "美伊冲突→油价跳涨→Risk-off→科技暴跌→防御上涨的传导链今日完美演绎。关注冲突是否缓和（停火谈判），这将是科技股反弹的关键信号。",
+      "type": "signal",
+      "tags": ["macro", "sector"],
+      "evidence_type": "supporting",
+      "mechanism": "地缘冲突推高能源成本+不确定性→资金从高beta成长股撤出→涌入防御资产。冲突缓和则反向。"
+    },
+    {
+      "text": "多氟多H1累计+777%~991%但Q2环比-51%~-80%仍跌停——市场只看边际变化。催化剂的方向和新鲜度>总量。H1高增已被priced in，Q2恶化才是新信息。",
+      "type": "heuristic",
+      "tags": ["catalyst", "entry-filter"],
+      "evidence_type": "supporting",
+      "mechanism": "市场定价边际变化。业绩预告的'总量'已被提前消化，环比恶化才是新信息。"
+    }
+  ],
+  "market_summary": "PANIC DAY. 美伊冲突升级推高油价（布伦特$78+），全球Risk-off。上证-2.06%，深证-3.48%，创业板-3.10%。涨跌比0.17:1（801涨/4683跌），187跌停，33涨停。科技/半导体板块重灾区（其他电子-11.5%，光学光电子-8%，军工电子-7.9%），防御板块（中药+3.3%，油气+3%，银行+2.3-2.6%）避险。IV数据缺失。Entry regime hard_block=true，0仓位，100%现金（¥979,809）。等恐慌消退。",
+  "market_sentiment": "bearish",
+  "market_call": "恐慌"
+}
+```

@@ -1,0 +1,44 @@
+[
+  {
+    "text": "市场恐慌日（涨跌比0.17:1, 187跌停）完美验证了entry_regime硬禁买规则的价值——如果今天开了新仓，几乎必定遭遇-5%止损。V2的'weak-market default'规则正在保护资金。",
+    "type": "heuristic",
+    "tags": [
+      "entry-filter",
+      "risk-management"
+    ],
+    "evidence_type": "supporting",
+    "related_hypothesis": "h019",
+    "mechanism": "恐慌日开盘即被套的概率极高，因为卖盘碾压买盘，任何买入都会在日内被淹没。等待恐慌消退再入场是动量策略的核心原则。"
+  },
+  {
+    "text": "策略池67只股票几乎全在今日暴跌板块（半导体/电子/军工），而今日上涨板块（中药/油气/银行）在池中无覆盖。Sector-first规则被完全验证——池中的'好股票'在板块暴跌时无一幸免。",
+    "type": "observation",
+    "tags": [
+      "sector",
+      "entry-filter"
+    ],
+    "evidence_type": "supporting",
+    "related_hypothesis": "h019",
+    "mechanism": "板块重力>个股Alpha。在-7%到-11%的板块跌幅面前，任何个股的RPS/催化/基本面都是第二位的。"
+  },
+  {
+    "text": "美伊冲突→油价跳涨→Risk-off→科技股暴跌→防御股上涨，这条传导链在今日完美演绎。后续应关注冲突是否缓和（停火谈判、油价回落），这将是科技股反弹的关键催化剂。",
+    "type": "signal",
+    "tags": [
+      "macro",
+      "sector"
+    ],
+    "evidence_type": "supporting",
+    "mechanism": "地缘冲突推高能源成本+不确定性→资金从高beta成长股撤出→涌入防御性资产。冲突缓和则反向流动。"
+  },
+  {
+    "text": "多氟多(002407)今日跌停案例再次证明：Q2业绩环比大幅下滑（-51%~-80%）是致命的。即使H1累计同比增长777%-991%，市场只看边际变化。催化剂的新鲜度和方向>催化剂的总量。",
+    "type": "heuristic",
+    "tags": [
+      "catalyst",
+      "entry-filter"
+    ],
+    "evidence_type": "supporting",
+    "mechanism": "市场定价的是边际变化。H1业绩预告的'总量'已被提前priced in，Q2环比恶化才是新信息。"
+  }
+]
