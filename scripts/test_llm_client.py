@@ -32,6 +32,32 @@ def test_read_env_file_strips_quotes(tmp_path: Path):
     assert values["ANTHROPIC_API_KEY"] == "xyz789"
 
 
+def test_parse_json_prefers_dict_over_earlier_list_block():
+    """Regression: 2026-07-13 afternoon run failed because the model emitted a
+    standalone ``new_learnings`` array in its own ```json block *before* the
+    full decision object. The parser must skip the list and return the dict."""
+    text = (
+        "## Research Memo\n\nSome prose.\n\n"
+        "```json\n"
+        '[{"text": "a learning", "type": "heuristic"}]\n'
+        "```\n\n"
+        "More prose.\n\n"
+        "```json\n"
+        '{"market_call": "恐慌", "new_positions": [], '
+        '"new_learnings": [{"text": "a learning"}]}\n'
+        "```\n"
+    )
+    result = llm_client._parse_json_from_text(text)
+    assert isinstance(result, dict)
+    assert result["market_call"] == "恐慌"
+    assert result["new_positions"] == []
+
+
+def test_parse_json_direct_list_is_not_accepted():
+    """A top-level JSON list is never a valid decision object -> {}."""
+    assert llm_client._parse_json_from_text('[{"text": "x"}]') == {}
+
+
 def test_get_env_value_prefers_process_env_over_file(tmp_path: Path, monkeypatch):
     env_file = tmp_path / ".env"
     env_file.write_text('OPENAI_API_KEY=file_value\n', encoding="utf-8")

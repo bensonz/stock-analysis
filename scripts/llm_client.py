@@ -1156,21 +1156,36 @@ def call_llm_v1(
     }
 
 def _parse_json_from_text(text: str) -> dict:
-    """Extract JSON object from LLM response text."""
-    # Direct parse
+    """Extract the decision JSON *object* from LLM response text.
+
+    Prefers a dict. LLMs sometimes emit multiple fenced ```json blocks — e.g. a
+    standalone ``new_learnings`` array before the full decision object. Returning
+    the first block that parses would grab that array (a list) and fail the
+    phase-2 gate ("LLM response is empty or not a dict"), so non-dict blocks are
+    skipped in favor of the object.
+    """
+    # Direct parse — only accept a dict. If the whole payload is a bare list,
+    # there is no decision object; return {} so the gate fails cleanly rather
+    # than brace-matching an inner element out of the list below.
     try:
-        return json.loads(text)
+        parsed = json.loads(text)
+        if isinstance(parsed, dict):
+            return parsed
+        if isinstance(parsed, list):
+            return {}
     except (json.JSONDecodeError, TypeError):
         pass
     if not text:
         return {}
-    # Extract from ```json blocks
+    # Extract from ```json blocks — first block that parses to a dict wins
     json_blocks = re.findall(r"```json\s*(.*?)```", text, re.DOTALL)
     for block in json_blocks:
         try:
-            return json.loads(block.strip())
+            parsed = json.loads(block.strip())
         except json.JSONDecodeError:
             continue
+        if isinstance(parsed, dict):
+            return parsed
     # Find JSON object by brace matching
     brace_count = 0
     start = None

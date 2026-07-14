@@ -2160,25 +2160,36 @@ def main():
 
 
 def _parse_llm_response(text: str) -> dict:
-    """Try to extract JSON from LLM response text.
+    """Try to extract the decision JSON *object* from LLM response text.
 
-    Handles cases where JSON is wrapped in ```json blocks or
-    mixed with explanatory text.
+    Handles cases where JSON is wrapped in ```json blocks or mixed with
+    explanatory text. Prefers a dict: LLMs sometimes emit a standalone
+    ``new_learnings`` array in its own ```json block before the full decision
+    object, and grabbing the first parseable block would return that list and
+    fail the phase-2 gate. Non-dict blocks are skipped in favor of the object.
     """
-    # Try direct parse
+    # Try direct parse — only accept a dict. A bare top-level list means no
+    # decision object is present; return {} so the gate fails cleanly instead
+    # of brace-matching an inner element out of the list below.
     try:
-        return json.loads(text)
+        parsed = json.loads(text)
+        if isinstance(parsed, dict):
+            return parsed
+        if isinstance(parsed, list):
+            return {}
     except json.JSONDecodeError:
         pass
 
-    # Try to extract from ```json blocks
+    # Try to extract from ```json blocks — first block that parses to a dict wins
     import re
     json_blocks = re.findall(r"```json\s*(.*?)```", text, re.DOTALL)
     for block in json_blocks:
         try:
-            return json.loads(block.strip())
+            parsed = json.loads(block.strip())
         except json.JSONDecodeError:
             continue
+        if isinstance(parsed, dict):
+            return parsed
 
     # Try to find JSON object in text
     brace_count = 0
