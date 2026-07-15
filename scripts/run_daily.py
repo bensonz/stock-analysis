@@ -33,6 +33,7 @@ Run slots (noon vs afternoon):
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -1065,6 +1066,64 @@ def phase1_collect(date: str, slot: str) -> dict:
     return data
 
 
+_HTML_TAG_RE = re.compile(r"<[^>]+>")
+# Event entries that merely restate relative price strength (already sent as
+# rps120/rps60 structured numbers) — drop them as prompt-only noise.
+_RPS_RESTATE_TAGS = {"股价走强", "股价走弱"}
+
+
+def _clean_events(events: list | None) -> list:
+    """Trim per-stock event feed for the prompt.
+
+    Strips HTML markup from content and drops RPS-restatement entries (which
+    duplicate rps120/rps60). Keeps genuine corporate events (中报/公告/解禁/
+    定增/管理层变更 …). Returns a new list; never mutates the input.
+    """
+    cleaned = []
+    for e in events or []:
+        if not isinstance(e, dict):
+            continue
+        tags = e.get("tags") or []
+        if any(t in _RPS_RESTATE_TAGS for t in tags):
+            continue
+        content = _HTML_TAG_RE.sub("", e.get("content") or "").strip()
+        if not content:
+            continue
+        entry = {"content": content, "tags": tags}
+        if e.get("date"):
+            entry["date"] = e["date"]
+        cleaned.append(entry)
+    return cleaned
+
+
+def _slim_iv_proxy(proxy: dict | None) -> dict | None:
+    """Reduce iv_proxy to the fields ANALYST.md actually uses for sizing.
+
+    Keeps primary_name (transparency), iv_rank (the throttle) and sizing
+    (the bucket). Drops guidance prose, alternates, interpretation, basis,
+    current_iv and iv_percentile — ~470 chars/stock down to ~55.
+    """
+    if not isinstance(proxy, dict):
+        return proxy
+    return {
+        "primary_name": proxy.get("primary_name"),
+        "iv_rank": proxy.get("iv_rank"),
+        "sizing": proxy.get("sizing"),
+    }
+
+
+def _slim_candidate(cand: dict) -> dict:
+    """Copy an enriched candidate with events cleaned and iv_proxy slimmed."""
+    if not isinstance(cand, dict):
+        return cand
+    slim = dict(cand)
+    if "events" in slim:
+        slim["events"] = _clean_events(slim.get("events"))
+    if "iv_proxy" in slim:
+        slim["iv_proxy"] = _slim_iv_proxy(slim.get("iv_proxy"))
+    return slim
+
+
 def phase2_build_prompt(data: dict) -> str:
     """Phase 2: Build LLM prompt from collected data.
 
@@ -1088,7 +1147,7 @@ def phase2_build_prompt(data: dict) -> str:
             "total_stocks": data.get("strategy_pool", {}).get("total_stocks"),
             "stocks": data.get("strategy_pool", {}).get("stocks", []),
         },
-        "enriched_candidates": data.get("enriched", []),
+        "enriched_candidates": [_slim_candidate(c) for c in data.get("enriched", [])],
         "active_positions": [
             {
                 "code": p["code"],
@@ -1104,7 +1163,7 @@ def phase2_build_prompt(data: dict) -> str:
                 "catalysts": p.get("catalysts", []),
                 "shares": p.get("shares"),
                 "allocation_pct": p.get("allocation_pct"),
-                "iv_proxy": p.get("iv_proxy"),
+                "iv_proxy": _slim_iv_proxy(p.get("iv_proxy")),
                 "history": p.get("history", [])[-3:],  # Last 3 history entries
             }
             for p in data.get("positions", [])

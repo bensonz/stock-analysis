@@ -495,5 +495,86 @@ class TestRunDailyParser(unittest.TestCase):
         self.assertEqual(regime["sizing_multiplier"], 0.0)
 
 
+class TestPromptPayloadSlimming(unittest.TestCase):
+    """Prompt-size trims in phase2_build_prompt: events cleaning + iv_proxy slim.
+
+    These fields dominate enriched_candidates (~45% of the prompt). We drop
+    prompt-only noise while preserving what ANALYST.md actually reads.
+    """
+
+    def test_clean_events_strips_html_and_rps_restatement(self):
+        from run_daily import _clean_events
+
+        events = [
+            {"content": "预计2026/07/29发布中报", "tags": ["2026年中报"], "date": "2026-07-29"},
+            {"content": "涨幅高于市场上<span style=\"color:#FB475D\"> 90% </span>的股票",
+             "tags": ["股价走强"]},  # RPS restatement -> dropped
+            {"content": "关于向特定对象发行股票预案的<span>公告</span>", "tags": ["重要公告"]},
+            {"content": "   ", "tags": ["资讯"]},  # empty after strip -> dropped
+        ]
+        cleaned = _clean_events(events)
+
+        self.assertEqual(len(cleaned), 2)
+        # HTML stripped from surviving entries
+        self.assertEqual(cleaned[0]["content"], "预计2026/07/29发布中报")
+        self.assertEqual(cleaned[0]["date"], "2026-07-29")
+        self.assertNotIn("<", cleaned[1]["content"])
+        self.assertEqual(cleaned[1]["content"], "关于向特定对象发行股票预案的公告")
+        # RPS-restatement tag never survives
+        self.assertFalse(any("股价走强" in e["tags"] for e in cleaned))
+
+    def test_clean_events_handles_none_and_malformed(self):
+        from run_daily import _clean_events
+
+        self.assertEqual(_clean_events(None), [])
+        self.assertEqual(_clean_events([]), [])
+        self.assertEqual(_clean_events(["not a dict", 42]), [])
+
+    def test_slim_iv_proxy_keeps_only_sizing_fields(self):
+        from run_daily import _slim_iv_proxy
+
+        full = {
+            "basis": "board_prefix:002/003 (深市中小盘)",
+            "primary_underlying": "159922",
+            "primary_name": "500ETF深",
+            "iv_rank": 0.7836,
+            "iv_percentile": 0.8673,
+            "current_iv": 0.296,
+            "interpretation": "极高",
+            "sizing": "tight",
+            "guidance": "500ETF深 IV Rank 78.4% is very high; ...",
+            "alternates": [{"underlying": "159919"}],
+        }
+        slim = _slim_iv_proxy(full)
+
+        self.assertEqual(set(slim.keys()), {"primary_name", "iv_rank", "sizing"})
+        self.assertEqual(slim["iv_rank"], 0.7836)  # the throttle ANALYST.md reads
+        self.assertEqual(slim["sizing"], "tight")
+
+    def test_slim_iv_proxy_passthrough_when_absent(self):
+        from run_daily import _slim_iv_proxy
+
+        self.assertIsNone(_slim_iv_proxy(None))
+
+    def test_slim_candidate_does_not_mutate_input(self):
+        from run_daily import _slim_candidate
+
+        original = {
+            "code": "002001",
+            "events": [{"content": "x<span>y</span>", "tags": ["重要公告"]}],
+            "iv_proxy": {"primary_name": "500ETF深", "iv_rank": 0.5,
+                         "sizing": "normal", "guidance": "prose"},
+        }
+        slim = _slim_candidate(original)
+
+        # input untouched
+        self.assertIn("<span>", original["events"][0]["content"])
+        self.assertIn("guidance", original["iv_proxy"])
+        # output trimmed
+        self.assertEqual(slim["events"][0]["content"], "xy")
+        self.assertNotIn("guidance", slim["iv_proxy"])
+        self.assertEqual(slim["code"], "002001")  # other fields preserved
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
