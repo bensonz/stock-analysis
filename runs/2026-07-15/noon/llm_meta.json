@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 160726,
+  "output_tokens": 10946,
+  "rounds": 2,
+  "duration_sec": 195.4,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月15日 今日市场热点 医药 半导体 板块轮动",
+        "max_results": 8
+      },
+      "result_length": 4630
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "医疗美容板块 大涨 2026年7月 原因",
+        "max_results": 6
+      },
+      "result_length": 2549
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体板块 大跌 2026年7月15日 科创50",
+        "max_results": 6
+      },
+      "result_length": 3840
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "钼价 金钼股份 2026年7月 走势",
+        "max_results": 6
+      },
+      "result_length": 2113
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "凯莱英 荣昌生物 医药板块 2026年7月 催化剂",
+        "max_results": 6
+      },
+      "result_length": 3040
+    }
+  ],
+  "fallback_used": false
+}

@@ -1,0 +1,69 @@
+{
+  "date": "2026-07-15",
+  "actions": [
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "action": "SELL",
+      "price": 105.12,
+      "pnl_pct": -6.0,
+      "note": "-6.0% in 1 day. -5% stop broken (¥105.12 < ¥106.24). -3% in first 3 days triggered. Sector 电子化学品 bottom 5 (-3.81%). Sector gravity overriding individual thesis."
+    },
+    {
+      "code": "601958",
+      "name": "金钼股份",
+      "action": "SELL",
+      "price": 21.98,
+      "pnl_pct": -3.21,
+      "note": "-3.21% in 1 day triggers -3% in first 3 days rule. Stop distance only 1.87% with gap risk. Resource rotation fading. 钼 thesis structurally intact but timing was wrong — re-enter when sector stabilizes."
+    },
+    {
+      "code": "688372",
+      "name": "伟测科技",
+      "action": "SELL",
+      "price": 150.19,
+      "pnl_pct": -8.43,
+      "note": "-8.43% in 1 day. -5% stop massively broken (¥150.19 vs stop ¥169.86). -3% in first 3 days triggered. Sector 半导体 bottom 5 (-4.72%). Entry was overextended — stock had run significantly pre-entry."
+    },
+    {
+      "code": "688401",
+      "name": "路维光电",
+      "action": "SELL",
+      "price": 77.11,
+      "pnl_pct": -9.23,
+      "note": "-9.23% in 1 day. -5% stop broken (¥77.11 < ¥80.70). -3% in first 3 days triggered. Sector 半导体材料 bottom 5. 0 risk factors meant nothing against sector gravity — validates Rule 1 (Sector First)."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 956221.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -4.38,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -43779.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 2.0779,
+    "up": 3682,
+    "down": 1772,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 64,
+    "limit_downs": 17,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 2.08:1, 0/3 major indices green, 64 limit-ups / 17 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Breadth 2.08:1 deceptively bullish but all three major indices red (上证 -0.08%, 深证 -0.38%, 创业板 -0.36%). 科创50 crashed -3.67%. Massive sector rotation: healthcare/medical surging +5-8% while semiconductors/tech collapsing -4-5%. IV extreme across all boards (科创50 IV Rank 100%, 创业板 93%). Buy gate FAILS — all 4 existing positions hit stops. Cash is king today."
+  }
+}
