@@ -180,7 +180,14 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
     # V2: skip_list replaces WATCH — stocks considered but not bought
     skip_list = decisions.get("skip_list", [])
 
-    has_recs = watchlist or new_positions or skip_list
+    # V2: positions closed today (SELL) — executed via position_decisions.
+    # Rendered as its own section so exits aren't invisible in the report.
+    sells = [
+        d for d in decisions.get("position_decisions", [])
+        if str(d.get("action", "")).upper() == "SELL"
+    ]
+
+    has_recs = watchlist or new_positions or skip_list or sells
 
     if has_recs:
         # V1-style watchlist (has recommendation field)
@@ -227,6 +234,25 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
                 if thesis:
                     lines.append(f"\n{thesis}\n")
 
+        # V2: positions closed today (SELL)
+        if sells:
+            lines.append("## 今日平仓\n")
+            for i, item in enumerate(sells, 1):
+                name = item.get("name", "")
+                code = item.get("code", "")
+                pnl = item.get("pnl_pct")
+                pnl_str = f" — {pnl:+.2f}%" if isinstance(pnl, (int, float)) else ""
+                lines.append(f"### {i}. {name} ({code}) — SELL{pnl_str}\n")
+                if item.get("exit_price") is not None:
+                    lines.append(f"- **出场价**: ¥{item['exit_price']}")
+                if item.get("days_held") is not None:
+                    lines.append(f"- **持有天数**: {item['days_held']}天")
+                if item.get("sector_rank"):
+                    lines.append(f"- **板块排名**: {item['sector_rank']}")
+                reason = item.get("reason", "")
+                if reason:
+                    lines.append(f"\n{reason}\n")
+
         # V2: skip list (considered but not bought)
         if skip_list:
             lines.append("## 跳过标的\n")
@@ -253,6 +279,7 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
     else:
         # V2 summary
         lines.append(f"- 新开仓: {len(new_positions)}只")
+        lines.append(f"- 平仓: {len(sells)}只")
         lines.append(f"- 跳过: {len(skip_list)}只")
 
     if decisions.get("new_learnings"):

@@ -22,6 +22,40 @@ Breadth 2.08:1 deceptively bullish but all three major indices red (上证 -0.08
 扫描 **59** 只策略池股票
 (来源: cheesefortune_intersection)
 
+## 今日平仓
+
+### 1. 上海新阳 (300236) — SELL — -6.00%
+
+- **出场价**: ¥105.12
+- **持有天数**: 1天
+- **板块排名**: bottom 5% (电子化学品Ⅱ -3.81%)
+
+-6.0% in 1 day. -5% stop broken (¥105.12 < ¥106.24). -3% in first 3 days triggered. Sector 电子化学品 bottom 5 (-3.81%). Sector gravity overriding individual thesis.
+
+### 2. 金钼股份 (601958) — SELL — -3.21%
+
+- **出场价**: ¥21.98
+- **持有天数**: 1天
+- **板块排名**: mid (钼/小金属 not in top or bottom 5)
+
+-3.21% in 1 day triggers -3% in first 3 days rule. Stop distance only 1.87% with gap risk. Resource rotation fading. 钼 thesis structurally intact but timing was wrong — re-enter when sector stabilizes.
+
+### 3. 伟测科技 (688372) — SELL — -8.43%
+
+- **出场价**: ¥150.19
+- **持有天数**: 1天
+- **板块排名**: bottom 5% (半导体 -4.72%)
+
+-8.43% in 1 day. -5% stop massively broken (¥150.19 vs stop ¥169.86). -3% in first 3 days triggered. Sector 半导体 bottom 5 (-4.72%). Entry was overextended — stock had run significantly pre-entry.
+
+### 4. 路维光电 (688401) — SELL — -9.23%
+
+- **出场价**: ¥77.11
+- **持有天数**: 1天
+- **板块排名**: bottom 5% (半导体材料, under 半导体 -4.72%)
+
+-9.23% in 1 day. -5% stop broken (¥77.11 < ¥80.70). -3% in first 3 days triggered. Sector 半导体材料 bottom 5. 0 risk factors meant nothing against sector gravity — validates Rule 1 (Sector First).
+
 ## 跳过标的
 
 1. **凯莱英** (002821) (RPS 89.16%) — Buy gate failed (0/3 indices green). Even if gate passed: dist_ma20=18.1% violates Rule 2b (>12% non-negotiable). Hot sector (医疗服务 +6.47%) and fresh catalyst (股权激励 7/9), but overextended. Wait for pullback to MA20 zone (~¥155).
@@ -35,6 +69,7 @@ Breadth 2.08:1 deceptively bullish but all three major indices red (上证 -0.08
 ## 今日研究结论
 
 - 新开仓: 0只
+- 平仓: 4只
 - 跳过: 7只
 
 ### 新教训

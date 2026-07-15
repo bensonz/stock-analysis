@@ -414,6 +414,38 @@ class TestReportGenerator(unittest.TestCase):
         self.assertIn("BUY", content)
         self.assertIn("Lesson 1", content)
 
+    def test_report_renders_closed_positions(self):
+        """SELL position_decisions must surface as a 今日平仓 section so exits
+        aren't invisible in the report (regression for silent stop-outs)."""
+        data = {
+            "market": {
+                "indices": {"上证指数": {"close": 4000, "change_pct": -0.5}},
+                "breadth": {"up": 1500, "down": 2500, "total": 4000},
+                "sectors": {"top5": [], "bottom5": []},
+            },
+            "strategy_pool": {"total_stocks": 10, "source": "api"},
+        }
+        decisions = {
+            "new_positions": [],
+            "skip_list": [],
+            "position_decisions": [
+                {"code": "688401", "name": "路维光电", "action": "SELL",
+                 "reason": "-5% stop broken", "pnl_pct": -9.23,
+                 "days_held": 1, "exit_price": 77.11,
+                 "sector_rank": "bottom 5% (半导体材料)"},
+                {"code": "601958", "name": "金钼股份", "action": "HOLD"},  # not a sell
+            ],
+            "market_summary": "Sector rotation",
+        }
+
+        path = self.rg.generate_report_md("2026-01-02", data, decisions)
+        content = path.read_text()
+        self.assertIn("今日平仓", content)
+        self.assertIn("路维光电", content)
+        self.assertIn("-9.23%", content)
+        self.assertIn("- 平仓: 1只", content)  # HOLD excluded from count
+        self.assertNotIn("金钼股份", content)  # HOLD not rendered as a close
+
 
 class TestRunDailyParser(unittest.TestCase):
     """Test LLM response parsing."""
