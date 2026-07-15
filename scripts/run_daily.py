@@ -1006,6 +1006,27 @@ def phase1_collect(date: str, slot: str) -> dict:
             code = str(position.get("code", "")).split(".")[0]
             position["iv_proxy"] = stock_iv_proxy(code, iv_data, market_cap=market_cap_by_code.get(code))
 
+    # Attach per-stock margin financing (融资融券) flow — a corroborating risk flag
+    # (are leveraged holders adding or fleeing). Free Eastmoney direct; degrades to
+    # no `margin` key on failure. Disable with MARGIN_SIGNAL=0.
+    if os.getenv("MARGIN_SIGNAL", "1") == "1":
+        from margin_flow import fetch_margin_flow  # ThreadPoolExecutor imported at module level
+
+        margin_rows = data.get("enriched", []) + data.get("positions", [])
+        margin_codes = sorted({
+            str(s.get("code", "")).split(".")[0]
+            for s in margin_rows if str(s.get("code", "")).split(".")[0]
+        })
+        if margin_codes:
+            with ThreadPoolExecutor(max_workers=8) as executor:
+                margin_by_code = dict(zip(margin_codes, executor.map(fetch_margin_flow, margin_codes)))
+            for stock in margin_rows:
+                code = str(stock.get("code", "")).split(".")[0]
+                if margin_by_code.get(code):
+                    stock["margin"] = margin_by_code[code]
+            n_ok = sum(1 for v in margin_by_code.values() if v)
+            print(f"    [margin] {n_ok}/{len(margin_codes)} fetched", file=sys.stderr)
+
     # Save IV sentiment to input dir
     if data.get("iv_sentiment") and "error" not in data["iv_sentiment"]:
         (input_dir / "iv_sentiment.json").write_text(
@@ -1164,6 +1185,7 @@ def phase2_build_prompt(data: dict) -> str:
                 "shares": p.get("shares"),
                 "allocation_pct": p.get("allocation_pct"),
                 "iv_proxy": _slim_iv_proxy(p.get("iv_proxy")),
+                "margin": p.get("margin"),
                 "history": p.get("history", [])[-3:],  # Last 3 history entries
             }
             for p in data.get("positions", [])

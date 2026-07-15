@@ -145,6 +145,22 @@ Use IV Rank as a **new-position throttle only**:
 - **IV Rank > 50%**: Be selective but don't freeze. High IV = high opportunity if you pick right.
 - **IV Rank > 75%**: Only buy the strongest setups. Wide stops.
 
+## Margin Flow (融资)
+
+Each candidate / position may carry a `margin` block (per-stock 融资余额 trend):
+`{rzye_yi, pct_float, chg5_pct, net5_repay_days, signal}`.
+
+Use it as a **corroborating risk flag only — never a standalone buy/sell trigger.**
+`signal: "deleveraging"` means leveraged holders have been net-exiting (融资余额 falling)
+— speculative support is draining and the name is more vulnerable to a downside cascade.
+It mostly *reflects* weakness rather than predicting it, so weigh it **together with**
+sector rank, IV Rank and MA-extension:
+- New entries: if `deleveraging` stacks with a weak/rotating sector or IV Rank > 75%,
+  that's a cluster of caution — size down or skip. Do not reject a clean setup on margin alone.
+- Held names: persistent `deleveraging` (`net5_repay_days` high, `chg5_pct` sharply negative)
+  is a reason to tighten stops / trim, not an automatic sell.
+- `signal: "adding"` is mild confirmation of speculative demand, not a green light.
+
 ## What Changed from V1
 
 | V1 (Broken) | V2 (Fixed) |
