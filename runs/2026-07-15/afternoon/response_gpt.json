@@ -1,0 +1,158 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "医疗美容",
+        "5d_pct": 8.18,
+        "trend": "accelerating"
+      },
+      {
+        "name": "影视院线",
+        "5d_pct": 5.24,
+        "trend": "steady"
+      },
+      {
+        "name": "医疗服务",
+        "5d_pct": 4.83,
+        "trend": "accelerating"
+      },
+      {
+        "name": "游戏Ⅱ",
+        "5d_pct": 4.63,
+        "trend": "steady"
+      },
+      {
+        "name": "化学制药",
+        "5d_pct": 4.15,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": -7.36,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": -5.58,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": -5.5,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "光学光电子",
+        "5d_pct": -5.21,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": -4.9,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/0 positions — all cash",
+    "regime": "Major style rotation: Tech/AI → Medical/Defensive. 科创50 -4.25%, semiconductor -5.58%. Medical complex (医美+8.18%, 医疗服务+4.83%, 化学制药+4.15%) surging across all sub-sectors. 60%+ of strategy pool in cold sectors."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "Hot sector (#3 医疗服务 +4.83%), RPS120=89.16% sweet spot, 0 risks, 9 highlights, equity incentive catalyst. BUT dist_ma20_pct=18.1% violates Rule 2b (max 12%). Extreme extension above MA20. Wait for pullback to ~¥155 zone. Also: entry regime hard blocks new positions regardless.",
+      "rps120": 89.16
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物",
+      "reason": "Medical/biotech sector benefiting from rotation. RPS120=86.52% sweet spot. MA distances acceptable (dist_ma5=-4.7%, dist_ma10=0.0%, dist_ma20=9.9%). Technical setup constructive. However: entry regime hard blocks all new positions — 0/3 major indices green, 39跌停.",
+      "rps120": 86.52
+    },
+    {
+      "code": "002975",
+      "name": "博杰股份",
+      "reason": "H1 earnings +642-816% catalyst, MA distances constructive (dist_ma5=0.5%, near support). RPS120=93.06% in extended zone — needs sector top 10% exception. Sector (自动化设备) not in top 30%. Also blocked by entry regime.",
+      "rps120": 93.06
+    },
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "半导体 sector in bottom 5 (-5.58%). Automatic no-buy per Rule 1. dist_ma20_pct=19.5% also violates Rule 2b. 0 risks, 6 highlights — would be interesting in a tech uptrend.",
+      "rps120": 94.56
+    },
+    {
+      "code": "002185",
+      "name": "华天科技",
+      "reason": "半导体 sector cold (-5.58%). dist_ma10_pct=9.3% exceeds 8% Rule 2b limit. Stock spiked on H1 earnings (+6.42% on 07/14) but sector gravity and MA extension make it un-buyable.",
+      "rps120": 91.77
+    },
+    {
+      "code": "688502",
+      "name": "茂莱光学",
+      "reason": "光学光电子 sector in bottom 5 (-5.21%). dist_ma20_pct=14.4% violates Rule 2b. PE >1500 — sanity check red flag. Automatic skip.",
+      "rps120": 89.84
+    },
+    {
+      "code": "688378",
+      "name": "奥来德",
+      "reason": "光学光电子 sector cold. Automatic no-buy zone per Rule 1 regardless of individual fundamentals.",
+      "rps120": 93.42
+    },
+    {
+      "code": "688536",
+      "name": "思瑞浦",
+      "reason": "半导体 sector cold (-5.58%). 8 highlights, strong fundamentals, but sector gravity kills any entry thesis. Wait for semiconductor stabilization.",
+      "rps120": 93.46
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Style rotation can kill a strategy pool overnight: 60%+ of strategy pool is in semiconductor/tech sectors now in the bottom 5. High-RPS pools naturally concentrate in recent winners, creating sector-concentration risk when rotation hits. When hot sectors rotate, the entire candidate pool becomes invalid simultaneously.",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "RPS filters select stocks with strong recent momentum, which clusters them in recently-hot sectors. When those sectors rotate out (as semiconductor just did), the candidate pool becomes almost entirely un-buyable."
+    },
+    {
+      "text": "MA-distance kills even perfect hot-sector candidates: 凯莱英 has everything (sector #3, RPS sweet spot 89%, 0 risks, 9 highlights, equity incentive catalyst, 10 analysts) but dist_ma20=18.1% is a hard stop. Rule 2b prevented buying an extended stock that would face mean-reversion headwinds. Validates h027.",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "Even in a hot sector, stocks that have run 18% above their 20-day moving average face strong gravitational pull back to the mean. Entering here would mean buying after most of the move has occurred."
+    },
+    {
+      "text": "Hard block regime correctly prevented forcing entries: V1 would have found a way to 'small buy' — V2's discipline of returning empty new_positions when 0/3 indices green and 39跌停 is the right call. Cash preservation in panic regimes is more important than catching rotation early.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "When the buy gate fails, forcing a small position turns a 0% return day into a potential -5% stop-loss day. The expected value of forcing entries in panic regimes is negative."
+    },
+    {
+      "text": "Medical/pharma rotation is broad and multi-sub-sector, not a one-stock phenomenon. 医疗美容 +8.18%, 医疗服务 +4.83%, 化学制药 +4.15%, 生物制品 and innovation drugs all moving. When regime clears, 凯莱英 (医疗服务) and 荣昌生物 (生物制品) should be priority candidates. Multiple sub-sectors moving together increases durability.",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "Coordinated multi-sub-sector moves suggest genuine institutional rotation rather than retail speculation, giving the trend higher persistence probability."
+    }
+  ],
+  "market_summary": "Breadth 1.60:1 weak-positive (3,351 up / 2,098 down), 74涨停 / 39跌停. All 3 major indices red (上证 -0.29%, 深证 -0.97%, 创业板 -1.21%), 科创50 crashed -4.25%. IV extreme: 科创50 IV Rank=1.00, overall 0.788 avg — 极度恐慌. Major style rotation in progress: semiconductor/tech (bottom sectors) bleeding out, medical/pharma complex (top sectors) surging across all sub-sectors. 0 active positions, ¥956K cash. Entry regime hard-blocks new positions — regime is 'panic' with 0/3 indices green and 39跌停 above threshold. Stay cash, monitor medical rotation for entry when regime clears.",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}

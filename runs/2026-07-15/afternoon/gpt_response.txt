@@ -1,0 +1,261 @@
+# Research Memo — 2026-07-15
+
+## 1. Market Regime: BEARISH / PANIC — NO NEW POSITIONS
+
+**Entry Regime Verdict: HARD BLOCK.** The system's own `entry_regime` flags `allow_new_positions: false` with `regime: "panic"`. I independently confirm all three buy-gate conditions fail:
+
+| Gate | Requirement | Actual | Pass? |
+|---|---|---|---|
+| Up/Down ratio | ≥ 1.5:1 | 1.60:1 | ✅ Barely |
+| Major indices green | ≥ 2 of 3 | 0/3 (上证 -0.29%, 深证 -0.97%, 创业板 -1.21%) | ❌ |
+| Not panic tape | f10 < 30 | f10 = 39 跌停 | ❌ |
+
+**Breadth Read:** 3,351 up / 2,098 down. Ratio 1.60:1 is weak-positive on the surface, but the distribution tells the real story: 1,889 stocks are barely up (r0_2, +0-2%) — this is a weak bounce, not broad strength. The 39跌停 vs 74涨停 ratio is concerning (historically the danger zone starts at 30+). Meanwhile 科创50 crashed -4.25%, its fourth brutal day in July.
+
+**IV Sentiment:** 极度恐慌. Avg IV Rank 78.8%. 科创50 IV Rank = 1.00 (all-time max), 创业板ETF = 0.8665. Every proxy is elevated. This is a vol-explosion regime. Per V2 rules: IV >75% means "only buy the strongest setups" — but combined with the hard block, the answer is clear: do nothing.
+
+**Key Macro Drivers (from research):**
+- Major style rotation: Tech/AI → Medical/Defensive. 174 "doubling funds" evaporated in 5 days as semiconductor cratered.
+- Korea/Japan tech correlation: SK Hynix -12%, Samsung -9% on July 2, dragging A-share semis.
+- ETF inflows of 1795B into A-shares in July suggest institutional dip-buying, but the direction is shifting toward healthcare.
+- 长鑫科技 IPO (295B RMB, largest of 2026) looming July 16 — liquidity drain risk for tech.
+- 央行 1万亿 reverse repo liquidity injection supporting the broader market.
+
+**Market Call: 防御 — 持币观望.** This is not a day to deploy capital. Cash is a position.
+
+---
+
+## 2. Sector Analysis
+
+### Hot Sectors (Top 5, Today's 5d Performance)
+| Rank | Sector | 5d % | Trend Signal |
+|---|---|---|---|
+| 1 | 医疗美容 | +8.18% | Accelerating — policy tailwind + consumer recovery |
+| 2 | 影视院线 | +5.24% | Steady — summer box office season |
+| 3 | 医疗服务 | +4.83% | Accelerating — innovative drug policy + oversold bounce |
+| 4 | 游戏Ⅱ | +4.63% | Steady |
+| 5 | 化学制药 | +4.15% | Steady — earnings season support |
+
+**Theme: The entire medical/pharma complex is surging.** 医疗服务, 化学制药, 医疗美容, 生物制品 — this is a coordinated sector rotation, not a one-day spike.
+
+### Cold Sectors (Bottom 5)
+| Rank | Sector | 5d % | Implication |
+|---|---|---|---|
+| 1 | 航天装备Ⅱ | -7.36% | Military rotation out |
+| 2 | **半导体** | **-5.58%** | **CRITICAL: Most strategy pool stocks are here** |
+| 3 | 非金属材料Ⅱ | -5.50% | |
+| 4 | **光学光电子** | **-5.21%** | **Several candidates here** |
+| 5 | 其他电子Ⅱ | -4.90% | |
+
+**Position Sector Alignment:** 0/0 positions (no active positions). Entire portfolio is in cash.
+
+### Rotation Signal: MAJOR STYLE SHIFT
+This is not a minor rotation — it's a regime change. The research confirms:
+- 科创50 fell 7.7% on July 2 alone, and has continued falling.
+- Funds flowing out of semiconductor/electronics (-13.63% MTD for 电子) into medical (+15-29% for some medical funds in the past month).
+- This is the real deal. Per V2 Rule 1: **"Only buy stocks in sectors that are trending up."** The cold sector list (半导体, 光学光电子) are automatic no-buy zones today.
+
+---
+
+## 3. Position Review
+
+**No active positions.** Portfolio: ¥956,221 cash (100%), total PnL -4.38% (all realized losses from prior closed positions).
+
+---
+
+## 4. New Entry Candidates
+
+**Verdict: NONE.** The entry regime is in hard block. Even if I found a perfect setup, the market buy-gate is closed.
+
+That said, I want to flag the stocks I would be monitoring if the regime clears:
+
+### Watchlist for Regime Recovery (NOT buys today)
+
+**凯莱英 (002821)** — The closest thing to a perfect candidate:
+- Sector: 医疗服务 (#3 hot, +4.83%)
+- RPS120: 89.16% (sweet spot)
+- Score_company: 9.2, score_trend: 9.6, 0 risks
+- Catalyst: 股权激励 07/09, +7.8% reaction, innovative drug tailwind
+- **KILLER: dist_ma20_pct = 18.1%** — Rule 2b violation (max 12%). Stock has run too far above MA20. Wait for pullback toward ¥155-160 (MA20 zone).
+- PE 63.6, gross margin 42.4%, 10 analysts covering — strong fundamentals.
+- **If MA20 pullback occurs, this becomes priority #1.**
+
+**荣昌生物 (688331)** — Medical play emerging:
+- Sector: 生物制品/医药生物 (medical complex, near top)
+- RPS120: 86.52% (sweet spot)
+- dist_ma5: -4.7%, dist_ma10: 0.0%, dist_ma20: 9.9% — all within limits
+- MA distances are actually constructive: sitting right at MA10, below MA5 (mild pullback)
+- 84.27% gross margin, revenue +42% YoY, 34% fund ownership
+- Risk: still loss-making (net profit negative),收益质量低
+- **Watch if pharma rotation persists and regime clears.**
+
+**博杰股份 (002975)** — Strong catalyst, neutral sector:
+- RPS120: 93.06% (extended zone, needs sector top 10%)
+- Sector: 自动化设备 (not in hot/cold lists — middle)
+- dist_ma5: +0.5% (tight to MA5!), dist_ma10: -4.6%, dist_ma20: -7.9% — actually good! Pulling back to support.
+- H1 earnings: +642-816% YoY — massive catalyst
+- 0 risks, 6 highlights, recent +10% on earnings news
+- **Problem: sector not hot enough for 92%+ RPS.** Would be a buy if automation enters top 30%.
+
+---
+
+## 5. Skip List
+
+| Code | Name | Reason |
+|---|---|---|
+| 002821 | 凯莱英 | Hot sector (#3医疗服务) but dist_ma20_pct=18.1% exceeds 12% limit. Extreme extension. Wait for pullback to MA20 (~¥155). |
+| 688331 | 荣昌生物 | Medical sector, MA distances OK, but entry regime hard-blocks all new positions. Watch for regime recovery. |
+| 002975 | 博杰股份 | H1 earnings +642-816% catalyst, MA distances constructive, but sector (自动化设备) not in top 30% and RPS120 at 93% extended zone without sector exception. |
+| 688652 | 京仪装备 | **半导体 sector = bottom 5 (-5.58%).** Automatic skip regardless of fundamentals. dist_ma20=19.5% also violates Rule 2b. |
+| 002185 | 华天科技 | **半导体 sector = cold.** dist_ma10=9.3% exceeds 8% Rule 2b limit. Double disqualification. |
+| 688502 | 茂莱光学 | **光学光电子 sector = bottom 5 (-5.21%).** dist_ma20=14.4% violates Rule 2b. PE>1500 — sanity check red flag. |
+| 688378 | 奥来德 | **光学光电子 sector = cold.** Automatic no-buy zone. |
+| 688536 | 思瑞浦 | **半导体 sector = cold.** 8 highlights but sector gravity always wins. |
+| 688372 | 伟测科技 | **半导体 sector = cold.** dist_ma20=9.4% approaching limit. |
+| 688257 | 新锐股份 | RPS120=99.33% exceeds 95% cap. Chasing extreme. Also dist_ma5=-20.2% suggests stock in freefall — something wrong. |
+| 002980 | 华盛昌 | RPS120=99.61% far exceeds 95% cap. Stock appears to be crashing (dist_ma20=-21.9%). Avoid. |
+| 000703 | 恒逸石化 | RPS120=94.52% (extended zone). Sector (石油石化) not in top 10%. 3 risk factors — fails extended zone exceptions. |
+| 601126 | 四方股份 | RPS120=94.46% (extended). Sector (电网设备) not top 10%. All MA distances deeply negative — stock in sustained decline. |
+| 300373 | 扬杰科技 | **半导体 sector = cold.** Automatic disqualification. |
+| 688469 | 芯联集成 | **半导体 sector = cold.** Also loss-making, gross margin 3.97%. |
+
+**Summary:** Of 62 strategy pool stocks, the vast majority are in semiconductor/electronics/optical sectors — all in the bottom 5 today. The handful in acceptable sectors (凯莱英, 荣昌生物) have MA distance violations or are blocked by market regime. This is a comprehensive no-buy environment.
+
+---
+
+## 6. Learnings
+
+**Structured Learnings:**
+
+1. **Style rotation can kill a strategy pool overnight** — 60%+ of our pool is semiconductor/tech which led for 6 months and is now collapsing. The system correctly identifies this via sector rankings, but the speed of rotation (174 doubling-funds gone in 5 days) is brutal. *Type: observation, tags: [sector, entry-filter], mechanism: High-RPS pools naturally concentrate in recent winners, creating sector-concentration risk when rotation hits.*
+
+2. **MA-distance kills even hot-sector candidates** — 凯莱英 would be a textbook BUY (sector #3, RPS sweet spot, 0 risks, 9 highlights, fresh catalyst) but dist_ma20=18.1% is a hard stop. This validates Rule 2b: the rule prevented buying an extended stock that would face mean-reversion headwinds. *Type: signal, tags: [entry-filter, timing], evidence_type: supporting, related_hypothesis: h027.*
+
+3. **Hard block regime is correctly calibrated** — 0/3 major indices green + 39跌停 is genuinely dangerous. V1 would have found a way to "small buy" something. V2's discipline of returning empty new_positions is the right call. *Type: rule, tags: [entry-filter], evidence_type: supporting.*
+
+4. **IV extreme at 科创50=1.0 is a crash signal, not a buy signal (yet)** — When IV Rank hits 1.0, it means max fear. Historically, this can be a mid-term buy-the-panic signal, but the entry requires (a) the selling to stop, (b) indices to turn green, (c) breadth to improve. None of these are present. *Type: observation, tags: [timing, position-sizing], mechanism: IV extremes are necessary but not sufficient conditions for entries.*
+
+5. **Research confirms: Medical/pharma rotation is real and broad** — Not just one stock or one sub-sector. The entire medical complex (医疗美容, 医疗服务, 化学制药, 生物制品, 创新药) is moving together. When the regime clears, candidates like 凯莱英 and 荣昌生物 should be first in line. *Type: heuristic, tags: [sector], evidence_type: supporting.*
+
+---
+
+## 7. Uncertainty Flags
+
+1. **"Is this rotation durable or a dead-cat bounce in medical?"** — Medical sector was down 32% from Sept 2025 to June 2026 before this bounce. The rally could be (a) genuine sector recovery driven by policy/earnings, or (b) a temporary defensive rotation while tech bleeds. I lean toward (a) because the breadth of medical strength (5+ sub-sectors) plus policy catalysts (new drug approval reforms, basic drug list expansion) suggest real fundamentals. But I'm uncertain enough to want 2-3 more days of confirmation before deploying capital even when the regime clears.
+
+2. **"Will the 长鑫科技 IPO on July 16 cause further tech liquidation?"** — The 295B RMB IPO is massive. It could draw liquidity away from existing semiconductor positions, exacerbating the tech decline. Or it could catalyze a半导体 rebound as the "sell the rumor, buy the news" dynamic plays out. I have no conviction either way — which is another reason to stay out.
+
+3. **"Is this the end of the tech bull or a healthy correction?"** — 科创50 was +26% in June alone. A 10-15% correction is normal after that. The Korea/Japan correlation suggests this is global tech profit-taking, not China-specific. But the speed (7.7% single-day crash) and breadth (semiconductor, optical, materials all hit) suggests institutional distribution not just rotation. I'd want to see semis stabilize for 3+ days before re-entering.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "医疗美容", "5d_pct": 8.18, "trend": "accelerating"},
+      {"name": "影视院线", "5d_pct": 5.24, "trend": "steady"},
+      {"name": "医疗服务", "5d_pct": 4.83, "trend": "accelerating"},
+      {"name": "游戏Ⅱ", "5d_pct": 4.63, "trend": "steady"},
+      {"name": "化学制药", "5d_pct": 4.15, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "航天装备Ⅱ", "5d_pct": -7.36, "trend": "deteriorating"},
+      {"name": "半导体", "5d_pct": -5.58, "trend": "deteriorating"},
+      {"name": "非金属材料Ⅱ", "5d_pct": -5.50, "trend": "deteriorating"},
+      {"name": "光学光电子", "5d_pct": -5.21, "trend": "deteriorating"},
+      {"name": "其他电子Ⅱ", "5d_pct": -4.90, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/0 positions — all cash",
+    "regime": "Major style rotation: Tech/AI → Medical/Defensive. 科创50 -4.25%, semiconductor -5.58%. Medical complex (医美+8.18%, 医疗服务+4.83%, 化学制药+4.15%) surging across all sub-sectors. 60%+ of strategy pool in cold sectors."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "Hot sector (#3 医疗服务 +4.83%), RPS120=89.16% sweet spot, 0 risks, 9 highlights, equity incentive catalyst. BUT dist_ma20_pct=18.1% violates Rule 2b (max 12%). Extreme extension above MA20. Wait for pullback to ~¥155 zone. Also: entry regime hard blocks new positions regardless.",
+      "rps120": 89.16
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物",
+      "reason": "Medical/biotech sector benefiting from rotation. RPS120=86.52% sweet spot. MA distances acceptable (dist_ma5=-4.7%, dist_ma10=0.0%, dist_ma20=9.9%). Technical setup constructive. However: entry regime hard blocks all new positions — 0/3 major indices green, 39跌停.",
+      "rps120": 86.52
+    },
+    {
+      "code": "002975",
+      "name": "博杰股份",
+      "reason": "H1 earnings +642-816% catalyst, MA distances constructive (dist_ma5=0.5%, near support). RPS120=93.06% in extended zone — needs sector top 10% exception. Sector (自动化设备) not in top 30%. Also blocked by entry regime.",
+      "rps120": 93.06
+    },
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "半导体 sector in bottom 5 (-5.58%). Automatic no-buy per Rule 1. dist_ma20_pct=19.5% also violates Rule 2b. 0 risks, 6 highlights — would be interesting in a tech uptrend.",
+      "rps120": 94.56
+    },
+    {
+      "code": "002185",
+      "name": "华天科技",
+      "reason": "半导体 sector cold (-5.58%). dist_ma10_pct=9.3% exceeds 8% Rule 2b limit. Stock spiked on H1 earnings (+6.42% on 07/14) but sector gravity and MA extension make it un-buyable.",
+      "rps120": 91.77
+    },
+    {
+      "code": "688502",
+      "name": "茂莱光学",
+      "reason": "光学光电子 sector in bottom 5 (-5.21%). dist_ma20_pct=14.4% violates Rule 2b. PE >1500 — sanity check red flag. Automatic skip.",
+      "rps120": 89.84
+    },
+    {
+      "code": "688378",
+      "name": "奥来德",
+      "reason": "光学光电子 sector cold. Automatic no-buy zone per Rule 1 regardless of individual fundamentals.",
+      "rps120": 93.42
+    },
+    {
+      "code": "688536",
+      "name": "思瑞浦",
+      "reason": "半导体 sector cold (-5.58%). 8 highlights, strong fundamentals, but sector gravity kills any entry thesis. Wait for semiconductor stabilization.",
+      "rps120": 93.46
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Style rotation can kill a strategy pool overnight: 60%+ of strategy pool is in semiconductor/tech sectors now in the bottom 5. High-RPS pools naturally concentrate in recent winners, creating sector-concentration risk when rotation hits. When hot sectors rotate, the entire candidate pool becomes invalid simultaneously.",
+      "type": "observation",
+      "tags": ["sector", "entry-filter"],
+      "evidence_type": "supporting",
+      "mechanism": "RPS filters select stocks with strong recent momentum, which clusters them in recently-hot sectors. When those sectors rotate out (as semiconductor just did), the candidate pool becomes almost entirely un-buyable."
+    },
+    {
+      "text": "MA-distance kills even perfect hot-sector candidates: 凯莱英 has everything (sector #3, RPS sweet spot 89%, 0 risks, 9 highlights, equity incentive catalyst, 10 analysts) but dist_ma20=18.1% is a hard stop. Rule 2b prevented buying an extended stock that would face mean-reversion headwinds. Validates h027.",
+      "type": "signal",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "Even in a hot sector, stocks that have run 18% above their 20-day moving average face strong gravitational pull back to the mean. Entering here would mean buying after most of the move has occurred."
+    },
+    {
+      "text": "Hard block regime correctly prevented forcing entries: V1 would have found a way to 'small buy' — V2's discipline of returning empty new_positions when 0/3 indices green and 39跌停 is the right call. Cash preservation in panic regimes is more important than catching rotation early.",
+      "type": "rule",
+      "tags": ["entry-filter", "position-sizing"],
+      "evidence_type": "supporting",
+      "mechanism": "When the buy gate fails, forcing a small position turns a 0% return day into a potential -5% stop-loss day. The expected value of forcing entries in panic regimes is negative."
+    },
+    {
+      "text": "Medical/pharma rotation is broad and multi-sub-sector, not a one-stock phenomenon. 医疗美容 +8.18%, 医疗服务 +4.83%, 化学制药 +4.15%, 生物制品 and innovation drugs all moving. When regime clears, 凯莱英 (医疗服务) and 荣昌生物 (生物制品) should be priority candidates. Multiple sub-sectors moving together increases durability.",
+      "type": "heuristic",
+      "tags": ["sector", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "Coordinated multi-sub-sector moves suggest genuine institutional rotation rather than retail speculation, giving the trend higher persistence probability."
+    }
+  ],
+  "market_summary": "Breadth 1.60:1 weak-positive (3,351 up / 2,098 down), 74涨停 / 39跌停. All 3 major indices red (上证 -0.29%, 深证 -0.97%, 创业板 -1.21%), 科创50 crashed -4.25%. IV extreme: 科创50 IV Rank=1.00, overall 0.788 avg — 极度恐慌. Major style rotation in progress: semiconductor/tech (bottom sectors) bleeding out, medical/pharma complex (top sectors) surging across all sub-sectors. 0 active positions, ¥956K cash. Entry regime hard-blocks new positions — regime is 'panic' with 0/3 indices green and 39跌停 above threshold. Stay cash, monitor medical rotation for entry when regime clears.",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}
+```

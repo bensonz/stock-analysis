@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 216400,
+  "output_tokens": 8535,
+  "rounds": 3,
+  "duration_sec": 179.9,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月15日 医疗美容板块大涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3269
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月15日 半导体板块大跌 科创50",
+        "max_results": 5
+      },
+      "result_length": 3674
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月 市场调整 板块轮动 医药",
+        "max_results": 5
+      },
+      "result_length": 3171
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+医疗美容+医药+7月15日+大涨+2026",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月 科创50暴跌 科技股回调 医药板块崛起 风格切换",
+        "max_results": 5
+      },
+      "result_length": 2820
+    }
+  ],
+  "fallback_used": false
+}
