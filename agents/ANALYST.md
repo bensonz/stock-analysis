@@ -31,7 +31,7 @@ If these are not met, do not force a SMALL BUY. Focus on HOLD / SELL / skip_list
 - **Sweet spot: RPS120 in 80-92%** — confirmed working from V1 data
 - **Extended zone: RPS120 in 92-95%** — ALLOWED if: (a) sector is top 10%, OR (b) stock has 0 risk factors, OR (c) recent earnings catalyst >50% growth
 - **Below 75%**: Skip — not enough momentum
-- **Above 95%**: Skip — chasing, wait for pullback to 90% zone
+- **Above 95%**: Skip — relative strength overheated (prone to mean-reversion), wait for pullback to 90% zone. (Note: this is an RPS-cooling concern, NOT chasing — chasing is the price-vs-MA extension in Rule 2b.)
 
 ### Rule 2b: No Chasing — MA Distance Check
 Before opening ANY new position, check the MA data in `enriched_candidates`:

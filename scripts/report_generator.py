@@ -442,7 +442,7 @@ def generate_candidates_md(date: str, data: dict, output_dir: Path | None = None
     # Wait list
     if wait_list:
         lines.append(f"## Wait List ({len(wait_list)})\n")
-        lines.append("RPS >95% (chasing risk), MA pass — watch for pullback into 85-95 zone.\n")
+        lines.append("RPS >95% (relative-strength overheated, mean-reversion risk), MA pass — watch for pullback into 85-95 zone.\n")
         for s in wait_list:
             lines.append(
                 f"- **{s['name']}** ({s['code']}) RPS120={s['rps120']:.0f} "
