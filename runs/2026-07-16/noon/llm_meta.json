@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 222890,
+  "output_tokens": 8347,
+  "rounds": 3,
+  "duration_sec": 154.9,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月16日 市场下跌原因 今日行情",
+        "max_results": 5
+      },
+      "result_length": 3189
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 专业连锁板块 影视院线 大涨 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 2727
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体板块 电子化学品 大跌 2026年7月16日",
+        "max_results": 5
+      },
+      "result_length": 1970
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "恒逸石化 炼化 石油石化 2026年7月 业绩 催化"
+      },
+      "result_length": 2444
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "半导体设备 光刻机 京仪装备 茂莱光学 2026年7月 催化"
+      },
+      "result_length": 2819
+    }
+  ],
+  "fallback_used": false
+}

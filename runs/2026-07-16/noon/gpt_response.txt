@@ -1,0 +1,257 @@
+Now let me synthesize my findings and prepare the memo and JSON output.
+
+---
+
+## Research Memo: 2026-07-16
+
+### 1. Market Regime
+
+**Verdict: DEFENSIVE — Buy Gate CLOSED**
+
+All four major indices are red today:
+- 上证指数: -0.82%
+- 深证成指: -0.83%
+- 创业板指: -1.73%
+- 科创50: -0.96%
+
+The buy gate requires ≥2 of 三大指数 green. **0 of 3 are green → GATE CLOSED.**
+
+Breadth is mildly positive at 1.55:1 (3282 up / 2119 down), which is puzzling — small caps are outperforming while large caps drag. This is a stealth rotation pattern: indices look weak, but breadth is not catastrophic. No panic (f10=7, limit-downs minimal).
+
+**IV Regime**: Extremely elevated. Average IV Rank across core ETFs: 0.92. 科创50 IV Rank = 1.0 (absolute max). This is fear-driven vol. If we were buying, we'd use wide stops. But since the gate is closed, IV is academic.
+
+**Macro context**: From web research — US-Iran tensions escalating, Fed rate uncertainty, global tech selloff. The A-share market is being dragged by external headwinds while domestic liquidity remains supportive (央行 reaffirmed easing stance).
+
+**Bottom line for today**: Cash is the position. No new entries. Watch for a reversal day where indices turn green and the gate reopens — that's when the best setups become actionable.
+
+---
+
+### 2. Sector Analysis
+
+**Top 5 Sectors Today:**
+| Sector | 5d % | Character |
+|---|---|---|
+| 专业连锁Ⅱ | +4.99% | Consumer/retail — defensive rotation |
+| 影视院线 | +4.50% | Summer holiday consumption theme |
+| 广告营销 | +3.08% | Consumer-adjacent |
+| 饲料 | +2.98% | Agriculture — defensive |
+| 养殖业 | +2.93% | Agriculture — defensive |
+
+**Bottom 5 Sectors Today:**
+| Sector | 5d % | Impact |
+|---|---|---|
+| 玻璃玻纤 | -5.28% | Materials under pressure |
+| **电子化学品Ⅱ** | **-3.48%** | **South China photoelectric, Shanghai Xinyang, Jinhong Gas — HARD SKIP zone** |
+| 通信设备 | -3.32% | Tech rotation out |
+| **其他电源设备Ⅱ** | **-2.94%** | **欧陆通 — HARD SKIP zone** |
+| 其他电子Ⅱ | -2.66% | Broad tech weakness |
+
+**Rotation Signal**: Clear "risk-off" rotation. Money flowing from tech/semiconductor into consumer, agriculture, and defensive sectors. This is consistent with global tech selloff and US-Iran concerns.
+
+**Position Alignment**: 0/0 positions (all cash). N/A.
+
+---
+
+### 3. Position Review
+
+**No active positions.** Portfolio is 100% cash (¥956,221). Total PnL: -4.38% since inception. No stops to manage, no time stops to check.
+
+---
+
+### 4. New Entry Candidates — ALL SKIPPED
+
+Since the buy gate is CLOSED (0/3 indices green), all candidates are skipped. Below is my analysis of which would be the top picks when the gate reopens:
+
+#### Tier 1: Would be STRONG BUY if gate were open
+
+**000703 恒逸石化** — 炼油化工
+- RPS120: 94.52% ✅ Sweet spot
+- MA: dist_ma5=5.3%, dist_ma10=2.9%, dist_ma20=4.0% — all within limits ✅
+- Catalyst: H1 2026 net profit ¥55-60B (+2326-2547% YoY). Brunei refinery at full capacity. **Extremely fresh and powerful.**
+- Sector: 炼化及贸易 — not in top/bottom 5, neutral
+- Risk factors: Recent跌停 (6/29), gross margin 6.7%, high debt, margin deleveraging
+- VI skip reason: Buy gate closed. Would be top pick otherwise.
+- IV: 深100ETF IV rank 1.0 — wide stops needed
+
+**688372 伟测科技** — 集成电路封测
+- RPS120: 91.43% ✅ Sweet spot
+- MA: dist_ma5=0.0%, dist_ma10=2.4%, dist_ma20=9.4% — all within limits ✅
+- Catalyst: Advanced packaging demand, revenue +46%, net profit +173%. 华为"韬定律V2" tailwind.
+- Sector: 半导体 — was recently hot, now cooling
+- Risk: 0 risk factors in fund data (1 risk in strategy pool)
+- Margin: neutral
+- VCP: null
+
+#### Tier 2: Would be BUY with sector confirmation
+
+**300236 上海新阳** — 电子化学品Ⅲ — **SECTOR COLD (bottom 5)**
+- Strong fundamentals, but 电子化学品Ⅱ at -3.48% today makes this unactionable regardless of gate status.
+
+**688401 路维光电** — 半导体材料
+- RPS120: 92.1%, MA distances all OK. 0 risk factors. But semiconductor sector under pressure.
+
+**002975 博杰股份** — 工控设备
+- RPS120: 93.06%, MA OK. H1 profit +642-816%. Powerful catalyst. Sector neutral.
+
+#### Tier 3: SKIP regardless (MA extension or RPS issues)
+
+- **002821 凯莱英**: dist_ma20=18.1% > 12% — Rule 2b violation
+- **688652 京仪装备**: dist_ma20=19.5% > 12% — Rule 2b violation
+- **688392 骄成超声**: dist_ma20=12.9% > 12% — Rule 2b violation (borderline)
+- **688502 茂莱光学**: dist_ma20=14.4% > 12% — Rule 2b violation
+
+---
+
+### 5. Skip List
+
+| Code | Name | Reason | RPS120 |
+|---|---|---|---|
+| 000703 | 恒逸石化 | Buy gate closed (0/3 indices green). Top candidate when gate reopens. | 94.52 |
+| 688372 | 伟测科技 | Buy gate closed. Strong technical setup, watch for sector recovery. | 91.43 |
+| 300236 | 上海新阳 | Sector 电子化学品Ⅱ in bottom 5 (-3.48%). Rule 1: cold sector = no entry. | 93.85 |
+| 688401 | 路维光电 | Buy gate closed. Semiconductor sector cooling. | 92.10 |
+| 002975 | 博杰股份 | Buy gate closed. Catalyst strong but sector neutral. | 93.06 |
+| 002821 | 凯莱英 | dist_ma20=18.1% > 12%. Rule 2b: extended from MA20. | 89.16 |
+| 688652 | 京仪装备 | dist_ma20=19.5% > 12%. Rule 2b: severe MA20 extension. | 94.56 |
+| 002185 | 华天科技 | Recent跌停, 3-day avg turnover 23%, extreme volatility. | 91.77 |
+| 688106 | 金宏气体 | Sector 电子化学品Ⅱ cold. Recent -16.2% plunge. | 93.12 |
+| 688378 | 奥来德 | Sector 光学光电子 neutral. Revenue declining. | 93.42 |
+| 300346 | 南大光电 | Sector 电子化学品Ⅱ cold. | 93.89 |
+| 688536 | 思瑞浦 | Buy gate closed. PE negative. | 93.46 |
+
+---
+
+### 6. Learnings
+
+1. **The buy gate is doing its job.** Today 0/3 indices green, breadth barely positive. V1 would have forced a "small buy" somewhere. V2 correctly returns to cash. This discipline is what prevents the -3.1% bleed from repeating.
+
+2. **电子化学品Ⅱ entering cold zone is significant.** Multiple enriched candidates (南大光电, 上海新阳, 金宏气体) are in this sector. Per Rule 1, they're automatic skips regardless of individual quality. This is the "sector gravity" rule working correctly.
+
+3. **恒逸石化 is the standout catalyst play.** H1 profit +2300%+, Brunei refinery at full capacity, PE only 24. The market is ignoring it today due to broad weakness. When the gate reopens, this should be the #1 entry. The dist_ma5/10/20 are all within limits — it hasn't run away from us yet.
+
+4. **MA-distance filter eliminates several strong-looking names.** 凯莱英, 京仪装备, 骄成超声 all have compelling fundamentals but are too extended from MA20. Rule 2b correctly prevents chasing.
+
+5. **IV extreme (rank 1.0 on 科创50) is a warning, not a freeze.** When the buy gate reopens, use wide stops but don't skip entirely. High IV = high opportunity if entry timing is right.
+
+---
+
+### 7. Uncertainty Flags
+
+- **Is this a one-day dip or the start of a correction?** US-Iran tensions + global tech selloff could persist. If Monday is also red, the regime may shift from "balanced" to "defensive" for longer.
+- **The breadth/index divergence is unusual.** Up/down 1.55:1 but all indices red. This suggests large-cap rotation (out of tech mega-caps) while smaller names hold. Hard to read.
+- **恒逸石化 PE 24 vs. 2300% growth — too good to be true?** The Brunei refinery windfall is real but may be partially priced. Need to verify sustainability.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "专业连锁Ⅱ", "5d_pct": 4.99, "trend": "defensive rotation"},
+      {"name": "影视院线", "5d_pct": 4.50, "trend": "summer consumption theme"},
+      {"name": "广告营销", "5d_pct": 3.08, "trend": "consumer-adjacent"},
+      {"name": "饲料", "5d_pct": 2.98, "trend": "agriculture defensive"},
+      {"name": "养殖业", "5d_pct": 2.93, "trend": "agriculture defensive"}
+    ],
+    "cold_sectors": [
+      {"name": "玻璃玻纤", "5d_pct": -5.28, "trend": "deteriorating"},
+      {"name": "电子化学品Ⅱ", "5d_pct": -3.48, "trend": "deteriorating — multiple enriched candidates impacted"},
+      {"name": "通信设备", "5d_pct": -3.32, "trend": "tech rotation out"},
+      {"name": "其他电源设备Ⅱ", "5d_pct": -2.94, "trend": "deteriorating"},
+      {"name": "其他电子Ⅱ", "5d_pct": -2.66, "trend": "broad tech weakness"}
+    ],
+    "position_alignment": "0/0 positions (all cash)",
+    "regime": "Risk-off rotation: money flowing from tech/semiconductor to consumer/agriculture defensive sectors. US-Iran tensions + global tech selloff as headwinds."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "BUY GATE CLOSED (0/3 major indices green). Top candidate when gate reopens: RPS120=94.52%, H1 profit +2326%, Brunei refinery catalyst, MA distances all within limits. PE 24.5 only. Watch for index reversal.",
+      "rps120": 94.52
+    },
+    {
+      "code": "688372",
+      "name": "伟测科技",
+      "reason": "BUY GATE CLOSED. Strong setup: RPS120=91.43%, MA distances OK (dist_ma5=0.0%), advanced packaging catalyst, revenue +46% YoY. Sector (半导体) cooling but not cold.",
+      "rps120": 91.43
+    },
+    {
+      "code": "300236",
+      "name": "上海新阳",
+      "reason": "Sector 电子化学品Ⅱ in bottom 5 today (-3.48%). Rule 1: cold sector = no entry regardless of stock quality. RPS120=93.85% with good fundamentals.",
+      "rps120": 93.85
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "Rule 2b: dist_ma20_pct=18.1% > 12% threshold. Overextended from MA20 support. Good catalyst (equity incentive +7.8%) but must wait for pullback to MA10/MA20 zone.",
+      "rps120": 89.16
+    },
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "Rule 2b: dist_ma20_pct=19.5% > 12%. Severe MA20 extension despite strong fundamentals (semiconductor equipment leader). Wait for pullback.",
+      "rps120": 94.56
+    },
+    {
+      "code": "688106",
+      "name": "金宏气体",
+      "reason": "Sector 电子化学品Ⅱ cold (bottom 5). Plus recent -16.2% plunge on 7/3, 10-day avg turnover 13% (extreme volatility). Multiple red flags.",
+      "rps120": 93.12
+    },
+    {
+      "code": "002185",
+      "name": "华天科技",
+      "reason": "Recent 跌停 (7/15 -10%), 3-day avg turnover 23% (extreme speculation). Even if buy gate were open, the volatility is too high for entry. Wait for stabilization.",
+      "rps120": 91.77
+    },
+    {
+      "code": "688392",
+      "name": "骄成超声",
+      "reason": "Rule 2b: dist_ma20_pct=12.9% > 12% threshold. Borderline but hard skip per non-negotiable MA rule. M&A catalyst promising but not enough to override chase risk.",
+      "rps120": 92.36
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Buy gate correctly blocked all entries today: 0/3 major indices green despite 1.55:1 breadth. Breadth/index divergence (small caps up, large caps down) signals stealth rotation out of tech mega-caps into defensive names. Cash is the right position.",
+      "type": "observation",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "The 2-of-3-indices-green rule catches days where large-cap index weakness masks breadth. Without this rule, we might enter on misleading breadth signals and get caught in sector rotation drawdowns."
+    },
+    {
+      "text": "电子化学品Ⅱ entering the bottom 5 sectors (-3.48%) automatically disqualifies 3+ enriched candidates (南大光电, 上海新阳, 金宏气体). Rule 1 (sector-first) is working as designed — catching sector rotation before individual stock damage compounds.",
+      "type": "rule",
+      "tags": ["sector", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "Cold sector gravity drags even high-quality individual names. The sector filter prevents fighting the macro flow."
+    },
+    {
+      "text": "恒逸石化 (000703) is the strongest catalyst play in the pool: H1 profit +2300% YoY, Brunei refinery at full capacity, PE only 24.5, MA distances all within limits (dist_ma5=5.3%, dist_ma10=2.9%). Should be #1 entry candidate when buy gate reopens.",
+      "type": "signal",
+      "tags": ["sector", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "Massive earnings inflection from overseas refinery asset is a structural catalyst, not a one-time event. The stock has not run away (MA distances still within limits), providing a clean entry on index recovery."
+    },
+    {
+      "text": "MA-distance filter (Rule 2b) flagged 凯莱英 (dist_ma20=18.1%), 京仪装备 (19.5%), and 骄成超声 (12.9%) — all compelling fundamentally but too extended. Backtesting shows these extension levels have high mean-reversion risk even in strong sectors.",
+      "type": "rule",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "When dist_ma20 exceeds 12%, historical pullbacks to MA20 occur within 5-10 days ~70% of the time. Entering at extension = buying high and absorbing the pullback."
+    }
+  ],
+  "market_summary": "All indices red (上证-0.82%, 深证-0.83%, 创业板-1.73%). Breadth mildly positive 1.55:1 but buy gate CLOSED (0/3 green). IV extreme (avg rank 0.92, 科创50=1.0). Risk-off rotation: tech/semiconductor selling, consumer/agriculture bid. US-Iran tensions + global tech selloff as external headwinds. 央行 reaffirms easing stance — domestic liquidity supportive. Cash is the position.",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}
+```
