@@ -1,0 +1,36 @@
+{
+  "date": "2026-07-16",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 956221.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -4.38,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -43779.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.8735,
+    "up": 2499,
+    "down": 2861,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 48,
+    "limit_downs": 41,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.87:1, 0/3 major indices green, 48 limit-ups / 41 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "🔴 PANIC DAY: 三大指数全绿(上证-1.85%, 深证-1.97%, 创业板-2.95%), 科创50暴跌-4.02%。Breadth 0.87:1偏熊, 41跌停vs 48涨停。长鑫科技IPO申购日(¥579B)抽血半导体板块(-5.67%)，中报预告截止日触发'题材→业绩'暴力切换。资金从科技(AI/半导体)涌入消费防御(影视+5.23%/医美+3.89%/养殖+2.54%)。IV极端(avg rank 93.6%, 科创50 IV at all-time high 67.3%)。全现金持仓，不开任何新仓，等待breadth恢复至1.5:1以上。"
+  }
+}

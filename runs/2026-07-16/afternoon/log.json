@@ -1,0 +1,50 @@
+{
+  "date": "2026-07-16",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1784187310.680414,
+      "errors": [],
+      "end": 1784187338.730977,
+      "duration_sec": 28.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 14976,
+      "tokens": {
+        "input_tokens": 297742,
+        "output_tokens": 9276
+      },
+      "rounds": 4,
+      "tool_calls_count": 8,
+      "duration_sec": 182.0,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1784187520.815866,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h103 (observation): 长鑫科技IPO申购日(¥579B)对半导体板块产生系统性抽血效应：申购日当天半导体-5.67%，科创50 -4.02%。未来遇到板块龙头超大IPO申购日，应提前...",
+        "Hypothesis: Created h104 (observation): 中报预告强制截止日(7/15)触发市场从'题材预期'向'业绩验证'暴力切换。前期靠AI概念涨但业绩兜不住估值的半导体小票被集中抛售。这是可预测的年度规律，明年7...",
+        "Hypothesis: Updated h077 (hypothesis): +1 supporting evidence → hitRate=100%, n=4",
+        "Hypothesis: Created h105 (observation): 'Failed bounce' pattern确认：美股半导体7/14反弹(英伟达+4%, SK海力士+27%)，A股半导体7/16不仅未跟涨反而暴跌-5.67...",
+        "Hypothesis: Created h106 (observation): 博杰股份(002975)是中报季最强catalyst：AI服务器测试方案+MLCC高附加值设备双轮驱动，Q2环比+27-80%，642-816%同比增长。MA距...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1784187521.3508532,
+      "duration_sec": 0.5
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 210.6
+  }
+}
