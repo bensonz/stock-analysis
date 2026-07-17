@@ -15,6 +15,7 @@ Lookback periods: 20, 60, 120, 250 trading days.
 import os
 import sqlite3
 import sys
+from datetime import datetime, time as _time
 from typing import Optional
 
 
@@ -256,15 +257,50 @@ def _get_ma(conn: sqlite3.Connection, dates: list, required_count: int) -> dict:
     return {row[0]: row[1] for row in rows}
 
 
+def _now() -> datetime:
+    """Wall clock, wrapped so tests can inject a fixed time."""
+    return datetime.now()
+
+
+def _session_close_time() -> _time:
+    """A-share regular-session close (local time). Env-overridable HHMM."""
+    raw = os.getenv("RPS_SESSION_CLOSE_HHMM", "1500").strip()
+    try:
+        return _time(int(raw[:2]), int(raw[2:4]))
+    except (ValueError, IndexError):
+        return _time(15, 0)
+
+
+def _open_session_date() -> Optional[str]:
+    """ISO date whose bar must not be used as a reference date because the
+    session is still open (the row, if any, is an intraday snapshot rather than a
+    settled close). Returns None once the session has closed for the day."""
+    now = _now()
+    if now.time() < _session_close_time():
+        return now.date().isoformat()
+    return None
+
+
 def _resolve_reference_date(conn: sqlite3.Connection, date: str | None) -> Optional[str]:
-    """Resolve to the latest sufficiently covered trading date on or before the requested date."""
+    """Resolve to the latest sufficiently covered trading date on or before the
+    requested date.
+
+    Never selects the current calendar day while the session is still open: that
+    day's row (if present) is an intraday snapshot written by the mid-session
+    pricedb update, not a settled close, and using it corrupts MA/RPS ranks.
+    """
     min_codes = _reference_date_min_codes(conn)
 
+    conditions: list[str] = []
     params: list = []
-    where_clause = ""
     if date is not None:
-        where_clause = "WHERE date <= ?"
+        conditions.append("date <= ?")
         params.append(date)
+    open_date = _open_session_date()
+    if open_date is not None:
+        conditions.append("date < ?")
+        params.append(open_date)
+    where_clause = ("WHERE " + " AND ".join(conditions)) if conditions else ""
 
     if min_codes > 0:
         row = conn.execute(
@@ -282,13 +318,10 @@ def _resolve_reference_date(conn: sqlite3.Connection, date: str | None) -> Optio
         if row and row[0]:
             return row[0]
 
-    if date is None:
-        row = conn.execute("SELECT MAX(date) FROM daily_prices").fetchone()
-    else:
-        row = conn.execute(
-            "SELECT MAX(date) FROM daily_prices WHERE date <= ?",
-            (date,),
-        ).fetchone()
+    row = conn.execute(
+        f"SELECT MAX(date) FROM daily_prices {where_clause}",
+        params,
+    ).fetchone()
     return row[0] if row and row[0] else None
 
 

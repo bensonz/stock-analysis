@@ -1,0 +1,51 @@
+# Pricedb intraday + partial-coverage bugs — findings & plan
+
+Discovered 2026-07-17 while investigating why 301345 showed a bogus +1.68% in the
+noon screen when it was actually −6.8% intraday.
+
+## Three root causes
+
+### RC1 — Intraday snapshot written as the daily "close" (ingestion)
+`pricedb.py::cmd_update` (~L1531-1543): after the daily providers run, if today's
+bar didn't land (`today_count == 0` — normal mid-session because the completed
+daily bar doesn't exist yet), it calls `_backfill_from_akshare_spot()`.
+That function (`ak.stock_zh_a_spot_em()`, L1560) writes the **real-time latest
+price** (`最新价`) as the day's `close` for ~5000 stocks. So the noon run
+(~11:35) stamps an intraday snapshot as today's close. `INSERT OR REPLACE` means
+the afternoon (post-close) run overwrites it with the true close.
+
+### RC2 — Resolver selects the open-session day (screening)
+`rps_calculator.py::_resolve_reference_date` picks the latest date that clears a
+90% coverage bar (`RPS_REFERENCE_DATE_MIN_COVERAGE=0.9` → 4970 of 5523 codes).
+The intraday today-row covers 5282 codes → clears the bar → **reference date =
+today (intraday)**. So MA10/20/120/250 and every cross-sectional RPS rank used an
+intraday bar as their newest point. Impact is bounded (only the newest MA point;
+historical points are real closes) but distorts RPS *ranks* worst on volatile
+days — exactly like 2026-07-17. Only the **noon** slot is affected; the afternoon
+slot re-runs after close on true closes.
+
+### RC3 — Partial coverage compounds and is never repaired (ingestion)
+- `cmd_update` sets `beg = MAX(date) + 1`. Once a partial future day lands even
+  one stock, the cursor jumps forward; earlier partial days are **never
+  re-fetched**. Only fully-missing *stocks* get backfilled (LEFT JOIN NULL), not
+  missing *days* for existing stocks.
+- A 300s budget (`PRICEDB_UPDATE_BUDGET`) truncates `bulk_fetch` mid-loop; the run
+  still prints "Update complete" and returns.
+- Result observed: 07-15 = 663 codes, 07-16 = 806, 07-17 = 5282 (intraday),
+  metadata "last updated" stuck at 2026-05-18.
+
+## Fix plan (option B)
+
+1. **[test]** `tests/test_rps_reference_date.py`: assert resolver skips today when
+   the session is open (inject `now`). — task #8
+2. **[fix]** `_resolve_reference_date`: exclude `date >= today` while session open
+   (before 15:00 local, env-overridable). Belt-and-suspenders for the screen. — task #9
+3. **[fix]** `cmd_update`: don't spot-backfill today's bar during an open session
+   (RC1 at the source); set `beg` from the last *fully-covered* date so partial
+   recent days get re-fetched (RC3); don't report success when budget truncated. — task #10
+4. **[data]** Backfill 07-15/16, overwrite today's intraday bar with the real
+   close, recompute RPS cache; verify per-date coverage. — task #11
+
+## Status
+- Investigation: COMPLETE (RC1/RC2/RC3 confirmed empirically)
+- Fixes: in progress

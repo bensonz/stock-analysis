@@ -1,10 +1,12 @@
 import sqlite3
 import sys
+from datetime import datetime
 from pathlib import Path
 
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
+import rps_calculator
 from rps_calculator import _resolve_reference_date, compute_ma_rps
 
 
@@ -71,6 +73,46 @@ def test_resolve_reference_date_respects_requested_upper_bound(tmp_path):
         resolved = _resolve_reference_date(conn, "2026-03-30")
 
     assert resolved == "2026-03-30"
+
+
+def _seed_two_full_days(db_path: Path, day1: str, day2: str) -> None:
+    codes = ["000001", "000002", "000003", "000004", "000005"]
+    with sqlite3.connect(str(db_path)) as conn:
+        conn.execute("CREATE TABLE daily_prices (date TEXT, code TEXT, close REAL)")
+        for day, base in ((day1, 10.0), (day2, 11.0)):
+            for code in codes:
+                conn.execute(
+                    "INSERT INTO daily_prices(date, code, close) VALUES (?, ?, ?)",
+                    (day, code, base),
+                )
+        conn.commit()
+
+
+def test_resolve_reference_date_skips_open_session_today(tmp_path, monkeypatch):
+    # day2 is "today" and fully covered, but the session is still open (before
+    # 15:00) so its bar is an intraday snapshot. Resolver must fall back to day1.
+    db_path = tmp_path / "prices.db"
+    _seed_two_full_days(db_path, "2026-07-16", "2026-07-17")
+
+    monkeypatch.setattr(rps_calculator, "_now", lambda: datetime(2026, 7, 17, 11, 35))
+
+    with sqlite3.connect(str(db_path)) as conn:
+        resolved = _resolve_reference_date(conn, None)
+
+    assert resolved == "2026-07-16"
+
+
+def test_resolve_reference_date_uses_today_after_close(tmp_path, monkeypatch):
+    # After 15:00 today's bar is a real close and should be used.
+    db_path = tmp_path / "prices.db"
+    _seed_two_full_days(db_path, "2026-07-16", "2026-07-17")
+
+    monkeypatch.setattr(rps_calculator, "_now", lambda: datetime(2026, 7, 17, 15, 35))
+
+    with sqlite3.connect(str(db_path)) as conn:
+        resolved = _resolve_reference_date(conn, None)
+
+    assert resolved == "2026-07-17"
 
 
 def test_compute_ma_rps_skips_sparse_dates_inside_ma_windows(tmp_path):
