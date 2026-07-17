@@ -1,0 +1,36 @@
+{
+  "date": "2026-07-17",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 956221.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -4.38,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -43779.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.2433,
+    "up": 1063,
+    "down": 4369,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 26,
+    "limit_downs": 55,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.24:1, 0/3 major indices green, 26 limit-ups / 55 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "PANIC TAPE: US semiconductor crash (SK Hynix -13%, SanDisk -12%) triggers 2nd-day A-share tech contagion. All major indices deep red (上证-1.64%, 深证-3.70%, 创业板-4.71%, 科创50-4.53%). Breadth catastrophic at 0.24:1 (1063 up, 4369 down). 55 limit-downs vs 26 limit-ups. Full defensive rotation: 电力+2.34%, 银行+1.2% vs 通信设备-8.32%, 元件-8.04%. IV Rank 100% across all ETFs — extreme fear, historically a bottoming signal but timing uncertain. Portfolio 100% cash at ¥956K — correct position for this tape. No new positions until breadth ≥1.5:1 AND ≥2 indices green."
+  }
+}

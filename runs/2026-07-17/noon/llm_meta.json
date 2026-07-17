@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 182133,
+  "output_tokens": 7573,
+  "rounds": 3,
+  "duration_sec": 150.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月17日 暴跌 原因 半导体 科技股 大跌",
+        "max_results": 5
+      },
+      "result_length": 2704
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 今日 热门板块 电力 银行 防御性 2026年7月17日",
+        "max_results": 5
+      },
+      "result_length": 3084
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体板块 暴跌 2026年7月 存储芯片 华天科技 德明利",
+        "max_results": 5
+      },
+      "result_length": 3103
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "美股 半导体 暴跌 SK海力士 闪迪 2026年7月16日 夜盘"
+      },
+      "result_length": 3279
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 科创50 创业板 暴跌 2026年7月 连续大跌 超跌反弹"
+      },
+      "result_length": 2575
+    }
+  ],
+  "fallback_used": false
+}

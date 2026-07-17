@@ -1,0 +1,162 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "电力",
+        "5d_pct": 2.34,
+        "trend": "defensive bid, summer peak load"
+      },
+      {
+        "name": "农商行Ⅱ",
+        "5d_pct": 1.65,
+        "trend": "risk-off yield play"
+      },
+      {
+        "name": "炼化及贸易",
+        "5d_pct": 1.59,
+        "trend": "energy rotation"
+      },
+      {
+        "name": "铁路公路",
+        "5d_pct": 1.23,
+        "trend": "infrastructure defensive"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": 1.21,
+        "trend": "ultimate risk-off"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "通信设备",
+        "5d_pct": -8.32,
+        "trend": "panic selling"
+      },
+      {
+        "name": "元件",
+        "5d_pct": -8.04,
+        "trend": "panic selling"
+      },
+      {
+        "name": "医疗服务",
+        "5d_pct": -7.06,
+        "trend": "accelerating down"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": -6.58,
+        "trend": "heavy distribution"
+      },
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": -6.38,
+        "trend": "heavy distribution"
+      }
+    ],
+    "position_alignment": "0/0 positions — 100% cash, no sector exposure",
+    "regime": "PANIC: US semiconductor crash contagion (SK Hynix -13%, SanDisk -12%), A-share tech/growth cascading lower. Full defensive rotation into 电力/银行/炼化. 科创50 -4.53%, 创业板指 -4.71%. Breadth 0.24:1, 55跌停."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601126",
+      "name": "四方股份",
+      "reason": "RPS20 collapsed to 68.45% (from 93.84% RPS120), trend broken — stock in deep correction -26.5% from MA20. Market regime hard block anyway.",
+      "rps120": 93.84
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "医疗服务 sector in bottom 5 at -7.06%, CRO板块跌停潮 today. Sector gravity fatal regardless of individual quality. dist_ma20_pct +11.1% is outlier resilience but cannot overcome sector collapse.",
+      "rps120": 90.52
+    },
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "半导体 sector crushed for 2nd consecutive day. PE inflated to 169x. Margin deleveraging -43.54% chg5. dist_ma5 -18.3%, dist_ma10 -18.6%. Market regime hard block.",
+      "rps120": 94.98
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物",
+      "reason": "Market regime hard block. Stock unprofitable (净利 -5.5亿). Pharma/biotech getting hit today. dist_ma5 -11.5%. Wait for sector and regime to stabilize.",
+      "rps120": 87.35
+    },
+    {
+      "code": "002185",
+      "name": "华天科技",
+      "reason": "跌停 today. 半导体封测 sector obliterated. 3 risk factors including 跌停, 换手率20%, and 收益质量低. No current price rationale — stock is locked at limit-down.",
+      "rps120": 92.09
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "炼化及贸易 is top 3 sector today (+1.59%), stock RPS120=95.08%. BUT: not in enriched_candidates — no MA distance data, no catalyst verification, no current pricing. Cannot evaluate. Market regime hard block anyway.",
+      "rps120": 95.08
+    },
+    {
+      "code": "688536",
+      "name": "思瑞浦",
+      "reason": "半导体模拟芯片 sector crushed. dist_ma10 -24.5%, margin deleveraging. Market regime hard block.",
+      "rps120": 93.43
+    },
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "reason": "半导体分立器件 sector crushed. dist_ma10 -27.2%, margin deleveraging -14.3%. Market regime hard block.",
+      "rps120": 93.23
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Entry regime gate (breadth 0.24:1, 0/3 indices green, 55 limit-downs) correctly prevented deploying capital into a -4% to -8% single-session drawdown. This is the single most valuable V2 defense — V1 would have found reasons to buy and lost 5-10% today.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "market-regime",
+        "risk-management"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "When breadth collapses below 0.5:1 with multiple indices deeply red and limit-downs exceeding 30, individual stock fundamentals become irrelevant — sector gravity and forced deleveraging dominate all names. The regime gate forces the critical question 'should I buy anything?' before evaluating any single name."
+    },
+    {
+      "text": "IV Rank hit 100th percentile across all 9 ETF proxies simultaneously (科创50 IV=0.7585, 创业板 IV=0.519, 500ETF IV=0.365). This is the most extreme vol event in 252-day lookback. Historical precedent: previous IV-100 events marked panic bottoms but timing ranged days-to-weeks. Do NOT front-run — wait for breadth to recover above 1.5:1 before deploying.",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "volatility",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "Extreme IV means options market is pricing disaster-level outcomes. The path from 'priced for disaster' to 'actually recovering' can involve further drawdowns. The regime gate captures this: breadth must recover first, then evaluate entries."
+    },
+    {
+      "text": "Sector gravity confirmed during panic: 通信设备 -8.32% vs 电力 +2.34% — 10.66% spread. All strategy pool stocks in tech/growth sectors are getting crushed regardless of individual RPS or fundamentals. Confirms h019: bottom-list sectors are hard no-buy zones.",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "During panic de-risking events, sector-level forced selling (redemptions, margin calls, stop-loss cascades) overwhelms individual stock fundamentals. Stocks move with their sector beta regardless of company quality."
+    },
+    {
+      "text": "Strategy pool is heavily skewed toward tech/growth (semiconductor, pharma, chemicals, electronics). In a defensive rotation like today, zero pool stocks overlap with hot sectors (电力, 银行, 炼化). Consider expanding pool to include defensive/energy names for regime diversification.",
+      "type": "observation",
+      "tags": [
+        "strategy",
+        "sector",
+        "diversification"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "The cheesefortune_intersection pool naturally selects growth/momentum names. When growth rotates out, the pool becomes entirely uninvestable. A complementary defensive pool (or broader sector coverage) would give the system more options during risk-off regimes."
+    }
+  ],
+  "market_summary": "PANIC TAPE: US semiconductor crash (SK Hynix -13%, SanDisk -12%) triggers 2nd-day A-share tech contagion. All major indices deep red (上证-1.64%, 深证-3.70%, 创业板-4.71%, 科创50-4.53%). Breadth catastrophic at 0.24:1 (1063 up, 4369 down). 55 limit-downs vs 26 limit-ups. Full defensive rotation: 电力+2.34%, 银行+1.2% vs 通信设备-8.32%, 元件-8.04%. IV Rank 100% across all ETFs — extreme fear, historically a bottoming signal but timing uncertain. Portfolio 100% cash at ¥956K — correct position for this tape. No new positions until breadth ≥1.5:1 AND ≥2 indices green.",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}

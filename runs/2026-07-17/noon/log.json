@@ -1,0 +1,49 @@
+{
+  "date": "2026-07-17",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1784259320.5569751,
+      "errors": [],
+      "end": 1784259350.7633338,
+      "duration_sec": 30.2
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 16226,
+      "tokens": {
+        "input_tokens": 182133,
+        "output_tokens": 7573
+      },
+      "rounds": 3,
+      "tool_calls_count": 5,
+      "duration_sec": 150.1,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1784259500.918855,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=126",
+        "Hypothesis: Created h107 (observation): IV Rank hit 100th percentile across all 9 ETF proxies simultaneously (科创50 IV=0....",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=40",
+        "Hypothesis: Created h108 (observation): Strategy pool is heavily skewed toward tech/growth (semiconductor, pharma, chemi...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1784259501.491436,
+      "duration_sec": 0.6
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 180.89999999999998
+  }
+}
