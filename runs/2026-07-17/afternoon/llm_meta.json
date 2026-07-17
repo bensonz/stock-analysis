@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 193449,
+  "output_tokens": 7043,
+  "rounds": 3,
+  "duration_sec": 150.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月17日 暴跌 原因 市场恐慌",
+        "max_results": 5
+      },
+      "result_length": 3144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体 通信设备 板块 暴跌 2026年7月17日",
+        "max_results": 5
+      },
+      "result_length": 3215
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "国有大型银行 电力 板块 上涨 2026年7月 避险",
+        "max_results": 5
+      },
+      "result_length": 3299
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月17日 跌停 212家 恐慌 流动性",
+        "max_results": 5
+      },
+      "result_length": 2061
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 科技股 连续暴跌 调整 半导体 2026年7月 机构观点",
+        "max_results": 5
+      },
+      "result_length": 3229
+    }
+  ],
+  "fallback_used": false
+}

@@ -1,0 +1,251 @@
+---
+
+# 📊 Research Memo — 2026-07-17
+
+## 1. Market Regime: PANIC — HARD BLOCK
+
+**This is a full-blown panic sell-off.** The data is unambiguous:
+
+| Metric | Value | Threshold | Status |
+|--------|-------|-----------|--------|
+| Breadth (Up/Down) | 482 / 5001 = **0.096:1** | ≥1.5:1 | ❌ FAIL |
+| 上证指数 | **-3.05%** | Green | ❌ |
+| 深证成指 | **-5.40%** | Green | ❌ |
+| 创业板指 | **-7.15%** | Green | ❌ |
+| 科创50 | **-7.12%** | — | ❌ |
+| 跌停 (f10) | **212** | <30 | ❌ FAIL |
+| 涨停 (r10) | 35 | — | Muted |
+| f7_10 (near limit-down) | **1,136** | — | Massive |
+| f4_7 | 1,494 | — | Broad damage |
+
+**Every single buy-gate condition is violated.** The `entry_regime` system has correctly flagged `hard_block: true` with sizing multiplier `0.0`. There is no debate here — this is not a day to open any new positions.
+
+**IV Sentiment**: All 9 tracked ETFs register IV Rank = **1.0** (100th percentile). 科创50 IV at 73.6%, 创业板ETF at 59.6%, 500ETF at 36.1%. This is across-the-board extreme panic. Historically, IV at these levels has preceded medium-term rebounds, but the short-term can remain violent — as we're seeing today with another 7% drop on 创业板.
+
+**Macro Drivers** (from research):
+1. **US semiconductor rout overnight**: 费城半导体指数 -3.5%, SK海力士 -12%+, 闪迪 -12%+ — direct spillover to A-share tech
+2. **SK海力士 Q2 profit estimate downgraded** by Korean brokerages → shattered confidence in memory/HBM cycle
+3. **US ADP employment beat** → rate-cut delay fears → growth stocks sold globally
+4. **中报业绩兑现 + 获利了结**: After a massive H1 rally in tech (some semis +80-250%), funds are cashing out
+5. **澜起科技 韩国办公室被检方搜查** → specific event weighing on memory/半导体 sentiment
+6. **监管严查题材炒作** → dampening speculative appetite
+
+**Breadth read**: "Breadth 0.10:1 catastrophic, 212跌停/35涨停, broad-based capitulation with tech leading the collapse."
+
+## 2. Sector Analysis
+
+### Hot Sectors (Top 5 — Defensive Rotation)
+| Sector | 5d Change | Character |
+|--------|-----------|-----------|
+| 国有大型银行Ⅱ | +1.86% | Classic safe-haven bid |
+| 电力 | +1.18% | Defensive dividend play |
+| 炼化及贸易 | +1.12% | State-owned energy |
+| 铁路公路 | +0.62% | Infrastructure, low-beta |
+| 白色家电 | +0.49% | Consumer staple proxy |
+
+### Cold Sectors (Bottom 5 — Tech Massacre)
+| Sector | 5d Change | Character |
+|--------|-----------|-----------|
+| 通信设备 | **-10.84%** | Epicenter of selling |
+| 其他电子Ⅱ | **-10.25%** | Broad electronics rout |
+| 元件 | **-9.23%** | PCB/component chain |
+| 半导体 | **-8.36%** | Core tech sell-off |
+| 医疗服务 | **-7.99%** | CRO/biotech contagion |
+
+**Rotation Signal**: This is a classic **"risk-off → defensive rotation"**. The market is dumping everything growth/tech and piling into state-owned banks, utilities, and energy. The bottom-5 sectors are all tech/electronics/healthcare — exactly the sectors that dominate our strategy pool of 54 stocks.
+
+**Position Alignment**: 0/0 positions (no active holdings). All 54 strategy pool stocks are in sectors that are flat to deeply negative today. **Zero candidates qualify by sector rank.**
+
+**Regime Assessment**: This is not a one-day spike — it's the fourth consecutive day of tech selling (7/14, 7/15, 7/16, 7/17) with accelerating velocity. The sector rotation is persisting, not reversing. Defensive sectors have been the top performers for 3+ consecutive sessions.
+
+## 3. Position Review
+
+**No active positions.** Portfolio is 100% cash (¥956,221). Cumulative return: -4.38%. This is the correct posture for today's environment — no existing positions to manage, no stop-losses to trigger, no sector-alignment issues to address.
+
+## 4. New Entry Candidates
+
+**NONE. The buy gate is comprehensively failed.** Under the V2 framework, when:
+- Breadth < 1.5:1 (actual: 0.096:1)
+- 0 of 3 major indices green
+- 212 stocks at limit-down (f10 ≫ 30)
+- `entry_regime.hard_block == true`
+
+...the only correct answer is `new_positions: []`. Even a "SMALL BUY" is explicitly prohibited by the regime check.
+
+For the PM's reference, here are the candidates that would be most interesting **if the tape were normal** — but they all fail the buy gate today:
+
+### Hypothetical Candidates (for reference only):
+
+| Stock | RPS120 | Sector | Sector Status | MA Check | Why Blocked |
+|-------|--------|--------|---------------|----------|------------|
+| 688331 荣昌生物 | 89.25 | 生物制品/医药 | Near bottom (医疗服务 -7.99%) | OK (dist_ma5 +0.3%) | Sector gravity + panic tape |
+| 300684 中石科技 | 88.79 | 电子化学品 | Tech-adjacent, brutal | OK (dist_ma5 -1.7%) | Sector + breadth |
+| 002821 凯莱英 | 92.42 | 医疗服务 | Bottom 5 (-7.99%) | dist_ma20 +18.8% (extended!) | Sector + chase risk |
+| 002185 华天科技 | 93.47 | 半导体 | Bottom 5 (-8.36%) | dist_ma5 -14% (crashing through MAs) | Sector + freefall |
+| 601958 金钼股份 | 91.35 | 小金属/有色 | Not top 30% | dist_ma5 -4.9% (OK) | Sector not hot enough |
+
+None of these are actionable. The framework is clear.
+
+## 5. Skip List
+
+I'm including the most interesting names that would have been under consideration on a normal day:
+
+1. **002821 凯莱英** — Excellent fundamentals (9 highlights, 9机构评级, 激励计划), but 医疗服务 sector is bottom-5 (-7.99%), and dist_ma20_pct at +18.8% is a chase-rule violation. Held at current price ¥179.99. Even without the panic, this stock is too extended from MA20.
+
+2. **002185 华天科技** — 半导体 sector bottom-5 (-8.36%), stock has crashed through all MAs (dist_ma5 -14.0%, dist_ma10 -8.1%), 3 risk factors including 跌停 on 7/15. Former momentum broken.
+
+3. **688331 荣昌生物** — Previous WATCH candidate. 医疗服务 sector being destroyed. dist_ma20 +10.2% still extended. Stock is holding above MA5/MA10 (dist_ma5 +0.3%) which is constructive, but sector gravity is overwhelming.
+
+4. **601958 金钼股份** — 有色金属/小金属 sector not in top 30%. Commodity rotation is not the leading theme. PE 18.9 is reasonable but momentum is fading (RPS20 at 91.48 but being tested). No entry on panic day.
+
+5. **300684 中石科技** — 电子化学品 sector caught in tech rout. Stock was a prior BUY (3/12). Nice MA positioning (dist_ma5 -1.7%, dist_ma10 -1.3%) but RPS120 at 88.79% is modest and sector is wrong. Margin adding signal (+688% chg5) interesting but insufficient to override tape.
+
+6. **688257 新锐股份** — RPS120 = 99.13% (very strong), but dist_ma10 -17.2% means it's in freefall through MAs. The RPS is a lagging indicator here — the stock has already broken down. No current price data needed; the MA distances tell the story.
+
+7. **605376 博迁新材** — RPS120 = 99.56% (extreme), but dist_ma10 -25.1% → stock has been obliterated. 跌停 on 7/16. This is not "buying strength" — it's catching a falling knife.
+
+**Key pattern**: Every stock in the strategy pool is in a tech/electronics/semiconductor/chemical sector that is either bottom-5 or mid-pack. The top-5 sectors (banks, utilities, energy infra) have ZERO representation in our pool. This is a fundamental mismatch between our candidate universe and what the market is rewarding today.
+
+## 6. Learnings
+
+1. **[New Signal] Panic breadth with IV Rank 1.0 is a reliable "do nothing" signal.** Today's configuration — breadth 0.10:1, 212跌停, all ETFs at IV Rank 1.0 — has historically preceded short-term continued pain followed by medium-term mean reversion. The optimal action is: (a) don't open new positions, (b) if holding, tighten stops but don't panic-sell quality names, (c) prepare a shopping list for when breadth normalizes.
+
+2. **[New Observation] Strategy pool is structurally misaligned with defensive rotations.** All 54 stocks in the cheesefortune_intersection pool are growth/tech/electronics — exactly the sectors being liquidated. When the market rotates to banks/utilities/energy, our candidate pool has zero representation. This is a design limitation: we can only buy what's in the pool, and the pool is heavily growth-tilted.
+
+3. **[New Heuristic] When the bottom-5 sectors are all tech and the top-5 are all defensives, it's a regime change, not a dip to buy.** The persistence of this rotation (4+ days) signals that institutional money is reallocating, not just profit-taking.
+
+4. **[Supporting Evidence for h013]** "Strong breadth alone is not enough to force entries" — and weak breadth is an absolute block. Today validates h013: the system correctly refuses to deploy capital despite a pool of 54 "quality" stocks. Cash is a position.
+
+5. **[New Signal] IV Rank 1.0 + 科创50 -7.12% = maximum capitulation in growth.** The科创50 IV at 73.6% is the highest in the 252-day lookback. This level of fear has historically been followed by sharp snap-back rallies, but the timing is unpredictable. Patience is key.
+
+6. **[New Observation on MA distances]** In a panic sell-off, virtually every stock in the pool shows negative dist_ma5/ma10/ma20 — they've all crashed through their moving averages. The "No Chasing" rule (Rule 2b) is designed for upside extension; on the downside, it instead tells us that former trends have been decisively broken. These stocks are not "pulling back to support" — they're in freefall.
+
+## 7. Uncertainty Flags
+
+- **Timing of the bounce**: IV at 1.0 often precedes a V-shaped reversal, but it could take 1-5 more days. I don't know when the selling exhausts.
+- **Whether this is a bear market start or a correction**: The magnitude (-7% on 创业板 in one day, -4.25% on 科创50 yesterday) raises the question of whether the H1 2026 tech rally has definitively ended. The breadth destruction (only 482 stocks up out of 5,523) is more consistent with a bear phase than a healthy correction.
+- **Our pool's recovery potential**: If the rotation to defensives persists for weeks, our tech-heavy pool may underperform even after the initial panic subsides. The PM should consider whether the strategy needs a broader sector mandate.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "国有大型银行Ⅱ", "5d_pct": 1.86, "trend": "accelerating (defensive bid)"},
+      {"name": "电力", "5d_pct": 1.18, "trend": "steady defensive flow"},
+      {"name": "炼化及贸易", "5d_pct": 1.12, "trend": "steady (state-owned energy)"},
+      {"name": "铁路公路", "5d_pct": 0.62, "trend": "infrastructure rotation"},
+      {"name": "白色家电", "5d_pct": 0.49, "trend": "consumer staple proxy"}
+    ],
+    "cold_sectors": [
+      {"name": "通信设备", "5d_pct": -10.84, "trend": "capitulation"},
+      {"name": "其他电子Ⅱ", "5d_pct": -10.25, "trend": "accelerating down"},
+      {"name": "元件", "5d_pct": -9.23, "trend": "deteriorating rapidly"},
+      {"name": "半导体", "5d_pct": -8.36, "trend": "fourth day of selling"},
+      {"name": "医疗服务", "5d_pct": -7.99, "trend": "contagion from tech"}
+    ],
+    "position_alignment": "0/0 positions (no active holdings)",
+    "regime": "PANIC: Global tech rout (费城半导体 -3.5%, SK海力士 -12%) + 中报兑现卖出 + 监管打压题材 → broad-based capitulation. Defensive rotation to banks/utilities/energy. Fourth consecutive day of tech selling with accelerating velocity."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "医疗服务 sector bottom-5 (-7.99%), dist_ma20_pct +18.8% violates chase rule, panic tape blocks all entries. Excellent fundamentals (9 highlights, 股权激励) but sector gravity + market regime override.",
+      "rps120": 92.42
+    },
+    {
+      "code": "002185",
+      "name": "华天科技",
+      "reason": "半导体 sector bottom-5 (-8.36%), stock crashed through all MAs (dist_ma5 -14.0%, dist_ma10 -8.1%), 跌停 on 7/15. Former momentum decisively broken.",
+      "rps120": 93.47
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物",
+      "reason": "医疗服务 sector bottom-5 (-7.99%). Stock holding at MA5/MA10 (dist_ma5 +0.3%) which is constructive, but sector gravity + panic breadth override. No entry in this tape.",
+      "rps120": 89.25
+    },
+    {
+      "code": "601958",
+      "name": "金钼股份",
+      "reason": "小金属/有色金属 sector not in top 30%. Commodity rotation not leading. Panic tape blocks all entries regardless of individual stock quality.",
+      "rps120": 91.35
+    },
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "reason": "电子化学品 sector caught in tech rout. Good MA positioning (dist_ma5 -1.7%) and margin adding signal, but RPS120=88.79% modest and sector is wrong. Entry regime blocked.",
+      "rps120": 88.79
+    },
+    {
+      "code": "688257",
+      "name": "新锐股份",
+      "reason": "RPS120=99.13% very strong, but dist_ma10 -17.2% means stock is in freefall through MAs. RPS is lagging indicator; price action has broken. Panic tape.",
+      "rps120": 99.13
+    },
+    {
+      "code": "605376",
+      "name": "博迁新材",
+      "reason": "RPS120=99.56% extreme, but dist_ma10 -25.1% — stock obliterated, 跌停 7/16. This is catching a falling knife, not buying strength. No current price data needed; MA distances tell the story.",
+      "rps120": 99.56
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Panic breadth (0.10:1, 212跌停) + IV Rank 1.0 across all ETFs = absolute no-entry signal. Every buy-gate condition violated. Cash is the correct position.",
+      "type": "signal",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "When breadth collapses to <0.5:1 and all 3 major indices are deep red with >100跌停, any new long position has near-certain negative drift. The IV spike to 1.0 confirms genuine panic, not a fleeting dip. Cash preserves capital for the inevitable bounce."
+    },
+    {
+      "text": "Strategy pool (54 stocks) is structurally misaligned with defensive rotations. All names are growth/tech/electronics — zero exposure to today's top-5 sectors (banks, utilities, energy, infra, appliances). When the market rotates defensively, our pool has nothing to offer.",
+      "type": "observation",
+      "tags": ["sector", "position-sizing"],
+      "evidence_type": "supporting",
+      "mechanism": "The cheesefortune_intersection pool is generated from momentum/quality screens that inherently favor growth. During risk-off rotations, these stocks are the first to be sold. A broader pool or sector-rotation overlay would be needed to capture defensive flows."
+    },
+    {
+      "text": "In a panic sell-off, negative MA distances across the entire pool indicate broken trends, not buying opportunities. Nearly all 54 stocks show dist_ma5/ma10/ma20 deeply negative — these aren't pullbacks to support; they're trend breakdowns.",
+      "type": "heuristic",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "When stocks crash through all MAs simultaneously (dist_ma5, dist_ma10, dist_ma20 all deeply negative), it signals that sellers are in control at every timeframe. The RPS values remain high because they're calculated over longer lookbacks, but the immediate price action has decisively broken prior uptrends."
+    },
+    {
+      "text": "The entry_regime hard_block with sizing_multiplier=0.0 correctly prevented deployment of capital. A systematic gate is superior to analyst discretion in panic conditions — it removes the temptation to 'buy the dip' when the dip is still accelerating.",
+      "type": "rule",
+      "tags": ["entry-filter", "position-sizing"],
+      "evidence_type": "supporting",
+      "mechanism": "The regime check evaluates 4 independent conditions (breadth ratio, positive indices count, limit-up/down counts, sizing multiplier). When all 4 fail simultaneously, the probability of a false negative (missing a good entry) is far lower than the probability of a false positive (entering into a continuing crash)."
+    }
+  ],
+  "market_summary": "2026-07-17: PANIC SELL-OFF. Breadth 0.10:1 (482↑/5001↓), 212跌停/35涨停. 上证-3.05%, 深证-5.4%, 创业板-7.15%, 科创50-7.12%. All ETFs at IV Rank 1.0 (max panic). Drivers: US semis rout (费城-3.5%, SK海力士-12%), 中报兑现卖出, 监管打压. Defensive rotation: banks +1.86%, power +1.18%. Tech sectors in freefall: 通信设备-10.84%, 半导体-8.36%. Portfolio 100% cash (¥956K), -4.38% cumulative. Zero new positions — entry regime hard_block. Prepare shopping list for when breadth normalizes.",
+  "market_sentiment": "extremely_bearish",
+  "market_call": "消极"
+}
+```
+
+---
+
+### PM Summary
+
+**Verdict: DO NOTHING. HOLD CASH.**
+
+This is the simplest decision day in the V2 framework's history. Every single condition that could block new entries is triggered simultaneously:
+
+1. Breadth 0.10:1 (need ≥1.5:1)
+2. 0/3 major indices green (need ≥2)
+3. 212跌停 (panic threshold is 30)
+4. `entry_regime.hard_block: true`
+
+There are zero active positions to manage. The portfolio sits at 100% cash. The correct action is to preserve capital and wait for the buy gate to clear. Forcing any position today would violate the core V2 principle: **"Weak-market default: return new_positions: []."**
+
+The strategy pool's complete lack of defensive-sector names (banks, utilities) is a structural limitation worth noting, but it's not a problem to solve today. When the tech rout stabilizes and breadth returns to >1.5:1, the same pool will offer high-quality candidates at significantly better entry prices.
