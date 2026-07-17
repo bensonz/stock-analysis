@@ -46,6 +46,30 @@ slot re-runs after close on true closes.
 4. **[data]** Backfill 07-15/16, overwrite today's intraday bar with the real
    close, recompute RPS cache; verify per-date coverage. — task #11
 
+## Refinements found while implementing
+
+- **RC1 is broader than the spot fallback.** The per-stock kline path
+  (`eastmoney_direct`) also returns *today's forming bar* mid-session, so gating
+  only `_backfill_from_akshare_spot` was insufficient. Proper source fix: in
+  `cmd_update`, cap `end` at the last closed trading day
+  (`most_recent_trading_day(today-1)`) whenever `is_session_open()`. No provider
+  ever writes an unsettled bar; the post-close run picks today up normally.
+- **`eastmoney_clist` is a today-only snapshot** (`pricedb.py` L890-896): it
+  cannot fetch a historical single day. So repairing old partial days *must* go
+  through the slow per-stock path. Normal daily operation stays fast because
+  beg==end==today → clist; the slow path only engages when there are partial
+  historical days to heal (exceptional, self-limiting).
+- **RC3 convergence caveat (known follow-up):** the self-healing cursor
+  re-fetches *all* stocks from the last fully-covered day, not just the ones
+  missing the target days. On a tight budget a multi-day backfill may not reach
+  full coverage in one run and re-does work each run. The one-time repair below
+  uses a raised `PRICEDB_UPDATE_BUDGET`. A proper fix would fetch only stocks
+  missing the target day(s) so runs converge under the default budget — TODO.
+
 ## Status
 - Investigation: COMPLETE (RC1/RC2/RC3 confirmed empirically)
-- Fixes: in progress
+- Fix RC2 (resolver guard): DONE + tests, committed e548fee
+- Fix RC1/RC3 (ingestion): DONE + tests, committed fe528d8 (+ end-cap follow-up)
+- Data repair (07-14/15/16 backfill, RPS recompute): in progress
+- Follow-up: make backfill resumable (fetch only missing stocks) so it converges
+  under the default 300s budget

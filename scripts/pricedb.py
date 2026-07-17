@@ -1520,7 +1520,19 @@ def cmd_update():
             file=sys.stderr,
         )
     beg = (datetime.strptime(cursor_date, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y%m%d")
-    end = datetime.now().strftime("%Y%m%d")
+    # Never fetch today's bar while the session is open — every provider path
+    # (clist snapshot and per-stock kline) would return an unsettled intraday
+    # bar, which corrupts MA/RPS (RC1). Cap the window at the last closed
+    # trading day; the post-close run picks today up normally.
+    end_date = _now().date()
+    if is_session_open():
+        end_date = most_recent_trading_day(end_date - timedelta(days=1))
+        print(
+            f"Session open — capping fetch window at last closed session {end_date.isoformat()} "
+            f"(today's bar is not settled yet).",
+            file=sys.stderr,
+        )
+    end = end_date.strftime("%Y%m%d")
     provider_errors = []
 
     stocks = [
