@@ -120,6 +120,55 @@ def _budget_exceeded() -> bool:
     return _UPDATE_DEADLINE is not None and time.monotonic() > _UPDATE_DEADLINE
 
 
+# Fraction of the known universe a date must cover to count as a "complete"
+# trading day. Shared conceptually with rps_calculator's reference-date guard.
+PRICEDB_COVERAGE_THRESHOLD = float(os.getenv("RPS_REFERENCE_DATE_MIN_COVERAGE", "0.9"))
+
+
+def _now() -> datetime:
+    """Wall clock, wrapped so tests can inject a fixed time."""
+    return datetime.now()
+
+
+def is_session_open(now: datetime | None = None) -> bool:
+    """True while the A-share regular session is still open (before 15:00 local).
+
+    During an open session, the only "today" bar available is a real-time spot
+    snapshot, not a settled close — writing it into daily_prices corrupts MA/RPS.
+    Env-overridable close time via RPS_SESSION_CLOSE_HHMM (e.g. "1500").
+    """
+    now = now or _now()
+    raw = os.getenv("RPS_SESSION_CLOSE_HHMM", "1500").strip()
+    try:
+        close_h, close_m = int(raw[:2]), int(raw[2:4])
+    except (ValueError, IndexError):
+        close_h, close_m = 15, 0
+    return (now.hour, now.minute) < (close_h, close_m)
+
+
+def _last_fully_covered_date(conn: sqlite3.Connection) -> str | None:
+    """Latest date whose row count reaches PRICEDB_COVERAGE_THRESHOLD of the
+    known universe. Used as the incremental cursor so partially-fetched recent
+    days (truncated by the budget or a flaky provider) get re-fetched instead of
+    being skipped forever once a later day advances MAX(date)."""
+    total = conn.execute("SELECT COUNT(*) FROM stocks").fetchone()[0]
+    if not total:
+        return None
+    min_codes = int(total * PRICEDB_COVERAGE_THRESHOLD)
+    row = conn.execute(
+        """
+        SELECT date
+        FROM daily_prices
+        GROUP BY date
+        HAVING COUNT(DISTINCT code) >= ?
+        ORDER BY date DESC
+        LIMIT 1
+        """,
+        (min_codes,),
+    ).fetchone()
+    return row[0] if row and row[0] else None
+
+
 _PROXY_ENV_KEYS = (
     "HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY",
     "http_proxy", "https_proxy", "all_proxy",
@@ -1459,7 +1508,18 @@ def cmd_update():
         conn.close()
         sys.exit(1)
 
-    beg = (datetime.strptime(latest, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y%m%d")
+    # Advance the incremental cursor from the last *fully-covered* day, not just
+    # MAX(date). A day left partial by the budget or a flaky provider must be
+    # re-fetched, but MAX(date) would skip it once any later day landed a single
+    # row. Fall back to MAX(date) if no day yet clears the coverage bar.
+    cursor_date = _last_fully_covered_date(conn) or latest
+    if cursor_date != latest:
+        print(
+            f"Last fully-covered day is {cursor_date} (MAX(date)={latest}); "
+            f"re-fetching partial days from {cursor_date} forward.",
+            file=sys.stderr,
+        )
+    beg = (datetime.strptime(cursor_date, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y%m%d")
     end = datetime.now().strftime("%Y%m%d")
     provider_errors = []
 
@@ -1528,12 +1588,16 @@ def cmd_update():
 
             close_provider(provider_name, provider)
 
-            # Check if today's data actually landed
+            # Check if today's data actually landed. Only backfill from the
+            # AkShare real-time spot endpoint AFTER the session has closed —
+            # mid-session that endpoint returns an intraday snapshot, and writing
+            # it as today's "close" corrupts MA/RPS (RC1). Before close we leave
+            # today absent so the last settled close stays the newest bar.
             today_iso = datetime.now().strftime("%Y-%m-%d")
             today_count = conn.execute(
                 "SELECT COUNT(*) FROM daily_prices WHERE date = ?", (today_iso,)
             ).fetchone()[0]
-            if today_count == 0 and beg <= end:
+            if today_count == 0 and beg <= end and not is_session_open():
                 print(f"  {provider_name} returned no data for {today_iso}, trying AkShare spot...", file=sys.stderr)
                 inserted = _backfill_from_akshare_spot(conn, today_iso)
                 if inserted:
@@ -1541,9 +1605,23 @@ def cmd_update():
                     print(f"  AkShare spot: {inserted} rows inserted for {today_iso}", file=sys.stderr)
                 else:
                     print(f"  AkShare spot: no data either", file=sys.stderr)
+            elif today_count == 0 and beg <= end and is_session_open():
+                print(
+                    f"  Session still open — skipping intraday spot backfill for {today_iso} "
+                    f"(would not be a settled close).",
+                    file=sys.stderr,
+                )
 
             conn.close()
-            print(f"Update complete via {provider_name}.", file=sys.stderr)
+            if _budget_exceeded():
+                print(
+                    f"WARNING: update budget ({PRICEDB_UPDATE_BUDGET_SEC:.0f}s) exceeded via "
+                    f"{provider_name}; recent-day coverage may be PARTIAL. "
+                    f"Re-run 'pricedb update' — the cursor self-heals from the last full day.",
+                    file=sys.stderr,
+                )
+            else:
+                print(f"Update complete via {provider_name}.", file=sys.stderr)
             return
         except Exception as e:
             provider_errors.append(f"{provider_name}: {e}")
