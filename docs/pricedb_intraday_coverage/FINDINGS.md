@@ -66,6 +66,25 @@ slot re-runs after close on true closes.
   uses a raised `PRICEDB_UPDATE_BUDGET`. A proper fix would fetch only stocks
   missing the target day(s) so runs converge under the default budget — TODO.
 
+## RC4 — Staleness gates conflicted with the end-cap (regression from RC1 fix)
+
+Shipped-then-caught. The RC1 end-cap keeps the DB at the last *closed* session
+during an open session. But both staleness gates (run_daily preflight ~L617,
+data_collector ~L237) demanded `latest >= most_recent_trading_day(today)`, which
+equals *today* on an open trading day. So after the RC1 fix, **every mid-session
+run hard-refused with "pricedb is stale" and exited before phase 1** — leaving an
+empty run dir. This is what actually killed the 2026-07-20 noon run (not the
+environmental red herring first suspected).
+
+Fix: `pricedb.last_settled_trading_day(now)` — previous trading day while the
+session is open, today once closed. Both gates use it as the freshness
+threshold; "is today a trading day" for the hard-refuse decision is computed
+independently so genuinely stale data is still caught. Committed 4d81033.
+
+**Lesson:** the RC1/RC2/RC3 commits passed unit tests but I did not run the full
+pipeline end-to-end afterward — the gate interaction only shows up there. Run
+`run_daily.py --run` (or the verify skill) after changing ingestion/screening.
+
 ## Status
 - Investigation: COMPLETE (RC1/RC2/RC3 confirmed empirically)
 - Fix RC2 (resolver guard): DONE + tests, committed e548fee
