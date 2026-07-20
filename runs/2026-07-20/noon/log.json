@@ -1,0 +1,50 @@
+{
+  "date": "2026-07-20",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1784524863.008447,
+      "errors": [],
+      "end": 1784524933.616361,
+      "duration_sec": 70.6
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 19168,
+      "tokens": {
+        "input_tokens": 241458,
+        "output_tokens": 9424
+      },
+      "rounds": 4,
+      "tool_calls_count": 6,
+      "duration_sec": 201.1,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1784525134.765493,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h077 (validated): +1 supporting evidence → hitRate=100%, n=6",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=95",
+        "Hypothesis: Created h110 (observation): Margin signal divergence is a useful secondary sort: 凯莱英 (+14% chg5, adding) and...",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=41",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=96",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1784525135.469175,
+      "duration_sec": 0.7
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 272.4
+  }
+}

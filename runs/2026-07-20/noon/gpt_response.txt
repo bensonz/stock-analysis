@@ -1,0 +1,301 @@
+# Research Memo — 2026-07-20
+
+## 1. Market Regime
+
+**Verdict: PANIC — Hard Block Active. No new positions.**
+
+| Indicator | Value | Interpretation |
+|-----------|-------|----------------|
+| 上证指数 | 3,793.37 (+0.78%) | Green — held by energy/commodity rotation |
+| 深证成指 | 13,643.68 (-0.46%) | Red — dragged down by tech exposure |
+| 创业板指 | 3,438.03 (+0.27%) | Green — barely |
+| 科创50 | 1,693.61 (-1.27%) | Red — tech wreck continues |
+| Up/Down | 2,188 / 3,208 | **Ratio 0.68:1** — decisively bearish |
+| 涨停/跌停 | 57 / 81 | More limit-downs than limit-ups |
+| IV Rank (all ETFs) | **1.00 (100th percentile)** | Extreme fear across 500/科创/创业板 |
+| Entry Regime | `panic / hard_block: true` | System blocks all new longs |
+
+**Breadth Read**: 0.68:1 bearish, 81跌停/57涨停. The distribution skews heavily negative — f4_7 (589) + f7_10 (427) + f10 (81) = 1,097 stocks down >4%. Only 323 stocks up >4%. This is not a "buy the dip" tape — it's a "wait for the bodies to stop falling" tape.
+
+**IV Context**: Every single ETF proxy is at IV Rank 1.0. This is statistically rare — the market is pricing extreme uncertainty. Historically, this can precede both sharp reversals AND continued selloffs. The framework is correct to hard-block entries here: even if you pick the right stock, the cost of options/hedging is at maximum, and gap risk is elevated.
+
+**Macro Narrative**: Clear defensive rotation — money fleeing tech/semiconductors/electronics into energy (oil +8.99%), liquor (+5.25%), and coal (+4.52%). This aligns with the search results showing tech sectors have been hemorrhaging since early July. The 制冷剂 (refrigerant) sector is a notable bright spot within chemicals — supply discipline + AI-driven fluorochemical demand creating a structural bull case that's surviving the selloff better than peers.
+
+---
+
+## 2. Sector Analysis
+
+### Hot Sectors (Top 5)
+| Sector | 5d Performance | Trend | Notes |
+|--------|---------------|-------|-------|
+| 油气开采Ⅱ | +8.99% | Accelerating | Iran sanctions + oil supply fear |
+| 油服工程 | +6.78% | Steady | Follows oil capex cycle |
+| 白酒Ⅱ | +5.25% | Defensive bid | Classic risk-off rotation |
+| 煤炭开采 | +4.52% | Steady | Energy security + summer peak |
+| 炼化及贸易 | +4.35% | Steady | Oil derivative play |
+
+### Cold Sectors (Bottom 5)
+| Sector | 5d Performance | Trend | Notes |
+|--------|---------------|-------|-------|
+| 玻璃玻纤 | -8.41% | Deteriorating | Tech supply chain unwind |
+| 电子化学品Ⅱ | -7.55% | Deteriorating | **中石科技's sector — hard no-buy** |
+| 元件 | -7.41% | Deteriorating | Broad tech de-rate |
+| 非金属材料Ⅱ | -6.56% | Deteriorating | Materials selloff |
+| 塑料 | -5.95% | Deteriorating | Cyclical weakness |
+
+### Sector Alignment Check
+- **Positions in hot sectors**: 0/0 (no active positions)
+- **Candidates in hot sectors**: 0/20 enriched candidates map to top-5 sectors
+- **Candidates in cold sectors**: 中石科技 (电子化学品Ⅱ, bottom 5), 奥来德/茂莱光学 (光学光电子 — 元件-adjacent, risky)
+
+**Rotation Signal**: This is a persistent rotation, not a one-day blip. Tech/electronics have been declining since July 3 (matching search results showing 科创50 -7.7% on July 3). The energy/commodity bid has been building for weeks. This regime favors commodity-linked names and punishes growth/tech.
+
+---
+
+## 3. Position Review
+
+**No active positions.** Portfolio is 100% cash (¥956,221), realized PnL -¥43,779 (-4.38%).
+
+This is actually the correct state. The last positions were presumably stopped out during the July selloff, and cash preservation during a panic tape is exactly what V2 calls for.
+
+---
+
+## 4. New Entry Candidates
+
+**HARD BLOCK: No new positions today.** The entry regime is `panic` with breadth 0.68:1 and 81 limit-downs. The `hard_block: true` flag is non-negotiable.
+
+That said, I've analyzed the 20 enriched candidates to identify which ones to prioritize when the regime clears. Here's my ranked watch-list for when breadth recovers to >1.5:1:
+
+### Tier 1: First to Buy When Regime Clears
+
+**永和股份 (605020.SH)** — 氟化工/制冷剂龙头
+- **RPS120**: 89.12% (sweet spot)
+- **MA distances**: dist_ma5 -4.6%, dist_ma10 -14.2%, dist_ma20 -10.3% — below all MAs, which means it's pulled back from recent highs. NOT chasing.
+- **Catalyst**: 制冷剂涨价 (R32 at ¥65,500/ton, decade high), H1净利预增69-103%, 供给天花板+格局固化 narrative. Per search results: "制冷剂行业有望较长时期内打破周期魔咒，延续超长景气周期"
+- **Sector**: 化学制品/氟化工 — not in top 5 but not in bottom 5 either. Neutral.
+- **Risks**: 2026-07-03 heavy selloff (-7.6%), margin neutral
+- **Verdict**: Strongest candidate. Real catalyst (supply-side structural), measurable price signal (refrigerant prices at decade highs), RPS in sweet spot, pulled back to support. Would be a STRONG BUY at 5-7% allocation if regime allowed.
+
+**凯莱英 (002821.SZ)** — CRO/CDMO龙头
+- **RPS120**: 92.87% (upper sweet spot)
+- **MA distances**: dist_ma5 -8.1%, dist_ma10 -4.0%, dist_ma20 +5.3% — near MA10 support, still above MA20. This is constructive: stock held above MA20 during sector selloff.
+- **Catalyst**: 股权激励 (2026-07-09, 当日+7.8%), 多肽/减肥药赛道高增长, 9家机构预测营收/净利年增>20%, 合同负债+58%
+- **Sector**: 医药生物/医疗服务 — CRO板块近期遭重创 (昭衍新药2连跌停), but凯莱英相对抗跌
+- **Margin**: `adding` signal, chg5_pct +14.16% — leveraged buyers accumulating
+- **Risks**: 2026-07-16 -8.05% heavy selloff, sector headwinds from CRO sentiment
+- **Verdict**: High-quality name getting dragged by sector but showing relative strength. margin adding + equity incentive = institutional conviction. Would be BUY at 5-7% if regime allowed. Sector risk notable but stock-level signals are strong.
+
+### Tier 2: Good Setup, Needs Confirmation
+
+**星宸科技 (301536.SZ)** — AI端侧芯片
+- **RPS120**: 94.80% (upper zone, but catalyst justifies extension per Rule 2)
+- **MA distances**: dist_ma5 -13.2%, dist_ma10 -18.4%, dist_ma20 -18.9% — deep pullback
+- **Catalyst**: H1净利预增583-650%, AI端侧需求爆发, Q2环比+172-208%
+- **Issue**: Sector (电子/半导体) is getting hammered. Sector gravity risk is high.
+- **Margin**: `adding` signal — leveraged buyers accumulating on weakness
+- **Verdict**: Explosive catalyst but terrible sector timing. Would need semiconductor sector to stabilize before entry. SMALL BUY only if sector turns.
+
+**荣昌生物 (688331.SH)** — 创新药/Biotech
+- **RPS120**: 89.78% (sweet spot)
+- **MA distances**: dist_ma5 -12.5%, dist_ma10 -14.9%, dist_ma20 -7.5% — closest to MA20 among all candidates
+- **Catalyst**: 回购计划 (2500-5000万), 创新药BD交易额创新高 (H1 1100亿美元, 达2025全年80%), 收入+42% YoY
+- **Sector**: 医药生物 — neutral, not in top/bottom 5
+- **Risk**: 仍在亏损 (净利-5.5亿), 收益质量低
+- **Verdict**: Biotech momentum play with sector tailwind (创新药BD boom). Dist_ma20 only -7.5% — least damaged chart. BUY at 3-5% if regime clears.
+
+**横店东磁 (002056.SZ)** — 光伏+磁材龙头
+- **RPS120**: 85.17% (lower sweet spot)
+- **MA distances**: dist_ma5 -3.6%, dist_ma10 -11.7%, dist_ma20 -15.1% — tightest to MA5 among all
+- **Sector**: 光伏设备 — not in top/bottom 5 but 光伏板块整体承压
+- **Risk**: 2026-07-13 跌停 -9.98%, 稀土永磁板块走弱
+- **Verdict**: Closest to MA5 support of any candidate. But sector (光伏) has structural overcapacity concerns. SMALL BUY only.
+
+---
+
+## 5. Skip List
+
+All 20 enriched candidates are skipped today due to the hard block. But I want to flag specific reasons beyond "regime block" for the ones that would still be problematic even if regime cleared:
+
+| Stock | Code | Primary Skip Reason | Would Buy if Regime OK? |
+|-------|------|-------------------|------------------------|
+| 中石科技 | 300684 | **Sector (电子化学品Ⅱ) in bottom 5 (-7.55%)**. Rule 1 violation regardless of regime. | ❌ No |
+| 昭衍新药 | 603127 | dist_ma20 +19.5% extreme extension + 2连跌停 + sector CRO crashing. Chasing into a falling knife. | ❌ No |
+| 奥来德 | 688378 | Sector光学光电子 weak. PE 79, RPS120 93.93 (upper zone, no catalyst override). Margin adding is a plus but not enough. | ⚠️ Maybe later |
+| 茂莱光学 | 688502 | PE 1069 (red flag sanity check), RPS120 91.7, dist_ma5 -16.7%. Core technician selling. Multiple red flags. | ❌ No |
+| 中控技术 | 688777 | RPS120 94.96 (borderline overheated). IV rank 1.0 on 科创50 proxy. Deleveraging margin. No fresh catalyst. | ⚠️ Wait |
+| 四方股份 | 601126 | RPS20=12.23 (recent momentum dead), dist_ma20 -27.3%. In extended drawdown. H股IPO可能稀释. | ❌ No |
+| 芯源微 | 688037 | RPS120 98.27 — above 95%! Overheated relative strength. dist_ma5 -13.9%, deep pullback from peak. | ❌ No (RPS>95%) |
+| 联瑞新材 | 688300 | RPS120 98.47 — above 95%. dist_ma20 -32% — massive drawdown. | ❌ No |
+| 国瓷材料 | 300285 | RPS120 98.83 — above 95%. dist_ma20 -30.7%. | ❌ No |
+| 株冶集团 | 600961 | RPS120 93.73, sector有色金属 neutral. dist_ma5 -9.5%. Deleveraging. | ⚠️ Maybe (commodity play) |
+| 思瑞浦 | 688536 | RPS120 93.49, PE 125, 股权激励催化 (授予价201 vs 现价242 — only 20% upside to strike). Deleveraging. | ⚠️ Wait |
+| 骄成超声 | 688392 | RPS120 93.69, sector锂电设备 getting crushed. -25% margin chg5. M&A catalyst but sector headwinds dominate. | ❌ No |
+| 路维光电 | 688401 | RPS120 93.03, 半导体材料. dist_ma5 -14.2%. Deleveraging. Good fundamentals but bad tape. | ⚠️ Later |
+| 美埃科技 | 688376 | RPS120 94.7 (upper zone), 股东询价转让减持 (bearish signal). dist_ma10 -25.5%. | ❌ No |
+
+---
+
+## 6. Learnings
+
+### New learnings from today:
+
+1. **The hard block is working as designed.** V1 would have been tempted by 永和股份's refrigerant catalyst or 凯莱英's equity incentive. Both are good names, but buying into a 0.68:1 breadth tape with 81 limit-downs is a recipe for -5% stops triggering within 1-2 days. Cash is a position.
+
+2. **Sector rotation clarity matters more than individual catalysts.** 星宸科技 has a 583-650% earnings growth catalyst — one of the strongest in the market. But its sector (电子/半导体) is getting annihilated. V1 would have bought this and lost money. V2 correctly recognizes sector gravity > stock catalyst.
+
+3. **Extreme IV (100th percentile) across all ETF proxies is a regime-level signal.** When every index — 500, 科创50, 创业板 — is simultaneously at max IV rank, it means systemic stress, not just sector-specific vol. This is different from isolated IV spikes. New entries in this environment face elevated gap risk and wider-than-modeled drawdowns.
+
+4. **Most enriched candidates are deeply below MAs — confirming a broad selloff, not isolated weakness.** Of 20 candidates, 15 have dist_ma20 < -15%. Only 凯莱英 (+5.3%) and 昭衍新药 (+19.5%) are above MA20. This tells us the selloff is broad and deep — it's not "stock-picking" time, it's "waiting" time.
+
+5. **Margin signal divergence is informative.** 凯莱英 and 星宸科技 show `adding` (leveraged buyers accumulating on weakness), while most others show `deleveraging`. This divergence helps identify which names have institutional conviction vs. which are being abandoned. When the regime clears, the `adding` names should recover faster.
+
+### Hypothesis updates:
+
+- **h077 (confirmed)**: "The hard block is preventing FOMO entries." Today provides another strong data point — multiple candidates with excellent catalysts (永和制冷剂, 凯莱英股权激励, 星宸AI芯片) that would have been tempting buys in V1. The hard block correctly keeps us in cash.
+- **h019 (confirmed)**: Bottom-list sectors as hard no-buy zones. 中石科技 (电子化学品Ⅱ, -7.55%) is a textbook example.
+
+---
+
+## 7. Uncertainty Flags
+
+1. **I'm uncertain how long this rotation persists.** Energy/commodity strength could be a 2-week phenomenon or a multi-month regime change. The 制冷剂 structural bull case (supply caps + AI-driven fluorochemical demand) has legs, but oil/coal may be more tactical.
+
+2. **I'm uncertain whether the extreme IV readings signal a near-term reversal.** IV Rank 1.0 can precede sharp V-bounces (panic capitulation) OR continued grinding selloffs. The framework's approach — wait for breadth to recover before re-entering — is prudent but may miss the initial bounce.
+
+3. **I'm uncertain about 凯莱英's relative strength sustainability.** It's the only candidate holding above MA20 despite the CRO sector getting hammered (昭衍新药 2连跌停). This relative strength is bullish, but sector gravity could eventually pull it down.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "油气开采Ⅱ", "5d_pct": 8.99, "trend": "accelerating"},
+      {"name": "油服工程", "5d_pct": 6.78, "trend": "steady"},
+      {"name": "白酒Ⅱ", "5d_pct": 5.25, "trend": "defensive_rotation"},
+      {"name": "煤炭开采", "5d_pct": 4.52, "trend": "steady"},
+      {"name": "炼化及贸易", "5d_pct": 4.35, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "玻璃玻纤", "5d_pct": -8.41, "trend": "deteriorating"},
+      {"name": "电子化学品Ⅱ", "5d_pct": -7.55, "trend": "deteriorating"},
+      {"name": "元件", "5d_pct": -7.41, "trend": "deteriorating"},
+      {"name": "非金属材料Ⅱ", "5d_pct": -6.56, "trend": "deteriorating"},
+      {"name": "塑料", "5d_pct": -5.95, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/0 positions (no active holdings)",
+    "regime": "Defensive rotation: energy/liquor/coal bid, tech/electronics severe selloff. Persistent since early July."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "605020",
+      "name": "永和股份",
+      "reason": "HARD BLOCK: entry regime panic (breadth 0.68:1, 81跌停). Strongest candidate otherwise — 制冷剂涨价催化, RPS120 89.12%, dist_ma5 -4.6%. Will prioritize when regime clears.",
+      "rps120": 89.12
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "HARD BLOCK: entry regime panic. Top-tier setup — 股权激励催化, RPS120 92.87%, dist_ma10 -4.0% near support, margin adding. Only candidate holding above MA20. First to buy when regime clears.",
+      "rps120": 92.87
+    },
+    {
+      "code": "301536",
+      "name": "星宸科技",
+      "reason": "HARD BLOCK: entry regime panic + sector (电子/半导体) weakness. Explosive catalyst (H1净利+583-650%) but sector gravity risk high. Wait for semiconductor stabilization.",
+      "rps120": 94.8
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物",
+      "reason": "HARD BLOCK: entry regime panic. Good setup — dist_ma20 only -7.5% (least damaged chart), 创新药BD boom tailwind, 回购催化. But still loss-making. SMALL BUY candidate when regime clears.",
+      "rps120": 89.78
+    },
+    {
+      "code": "002056",
+      "name": "横店东磁",
+      "reason": "HARD BLOCK: entry regime panic. Closest to MA5 support (dist_ma5 -3.6%). But sector (光伏) has structural headwinds and stock had 跌停 on 7/13. Wait.",
+      "rps120": 85.17
+    },
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "reason": "Sector (电子化学品Ⅱ) in BOTTOM 5 at -7.55%. Rule 1 hard violation — no entry regardless of stock quality. Would skip even without hard block.",
+      "rps120": 89.66
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "reason": "dist_ma20 +19.5% extreme extension + 2连跌停 + CRO sector crash. Chasing into multiple red flags. dist_ma10 +7.7% violates Rule 2b (>8% is close). Skip permanently.",
+      "rps120": 86.13
+    },
+    {
+      "code": "688502",
+      "name": "茂莱光学",
+      "reason": "PE 1069 (sanity check fail), core technician selling, dist_ma5 -16.7%. Multiple structural red flags. Skip.",
+      "rps120": 91.7
+    },
+    {
+      "code": "601126",
+      "name": "四方股份",
+      "reason": "RPS20=12.23 (recent momentum dead), dist_ma20 -27.3% in extended drawdown. H股IPO dilution overhang. Skip.",
+      "rps120": 93.29
+    },
+    {
+      "code": "600961",
+      "name": "株冶集团",
+      "reason": "HARD BLOCK. Commodity-adjacent (有色金属) benefiting from rotation. RPS120 93.73%, but dist_ma5 -9.5% and deleveraging margin. Monitor for regime clearance.",
+      "rps120": 93.73
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Hard block validation: 0.68:1 breadth + 81跌停 + IV Rank 1.0 across all ETFs = correct to hold 100% cash. V1 FOMO would have bought 永和/凯莱英/星宸 into panic. V2 preserves capital.",
+      "type": "heuristic",
+      "tags": ["entry-filter", "position-sizing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "Panic regime breadth <1:1 means selling pressure is broad and indiscriminate — even strong catalysts get overwhelmed by forced liquidation and systematic de-risking."
+    },
+    {
+      "text": "When every ETF proxy (500/科创50/创业板) simultaneously hits IV Rank 1.0, it signals systemic stress, not isolated sector vol. New entries face elevated gap risk. This is different from a single-sector IV spike.",
+      "type": "signal",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "Cross-asset IV correlation at extremes means hedging demand is universal — options market pricing maximum uncertainty. Historical data shows this can precede both sharp reversals AND continued drawdowns, making it a 'wait for confirmation' signal rather than a contrarian buy."
+    },
+    {
+      "text": "Margin signal divergence is a useful secondary sort: 凯莱英 (+14% chg5, adding) and 星宸科技 (+3.4%, adding) show leveraged buyers accumulating on weakness, while most peers show deleveraging. When regime clears, adding-signal names likely recover first.",
+      "type": "signal",
+      "tags": ["entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "Margin buyers are sophisticated leveraged participants. When they accumulate through a selloff (rather than de-lever), it signals conviction that the drawdown is a buying opportunity, not a fundamental deterioration."
+    },
+    {
+      "text": "Sector gravity > individual catalyst: 星宸科技 H1 +583% earnings growth is one of the strongest catalysts in the market, but 电子/半导体 sector is in freefall. V1 would have bought it; V2 correctly recognizes that sector headwinds overwhelm even exceptional stock-level catalysts in the short term.",
+      "type": "observation",
+      "tags": ["sector", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "Institutional portfolios de-risk by sector, not by stock. When 电子/半导体 enters a de-rating cycle, even the strongest names get sold as part of sector allocation reduction. Stock-level catalysts take effect only after sector selling exhausts."
+    },
+    {
+      "text": "Only 2 of 20 enriched candidates are above MA20 (凯莱英 +5.3%, 昭衍新药 +19.5%). 15 of 20 have dist_ma20 < -15%. This extreme ratio confirms the selloff is broad and deep — not a 'stock picker's market.' The correct action is patience, not bargain hunting.",
+      "type": "observation",
+      "tags": ["timing", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "When the majority of high-RPS candidates are deeply below their moving averages, the momentum regime has flipped from trending to mean-reverting. Mean-reversion environments punish trend-following entries and reward patience."
+    }
+  ],
+  "market_summary": "PANIC REGIME — Breadth 0.68:1 bearish (2,188 up / 3,208 down), 81跌停 vs 57涨停. 上证+0.78% held by energy rotation; 科创50 -1.27% continues tech wreck. IV Rank 1.0 across all ETF proxies (500/科创50/创业板) — systemic stress, not isolated vol. Clear defensive rotation into energy/liquor/coal; tech/electronics/materials in severe selloff. Hard block active: no new positions. 100% cash at ¥956,221 (-4.38% total). Priority watch for regime clearance: 永和股份 (氟化工涨价), 凯莱英 (CRO龙头+股权激励), 荣昌生物 (创新药BD boom).",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}
+```

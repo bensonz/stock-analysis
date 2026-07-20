@@ -1,0 +1,37 @@
+{
+  "date": "2026-07-20",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 956221.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -4.38,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -43779.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.682,
+    "up": 2188,
+    "down": 3208,
+    "positive_indices": [
+      "上证指数",
+      "创业板指"
+    ],
+    "negative_indices": [
+      "深证成指"
+    ],
+    "limit_ups": 57,
+    "limit_downs": 81,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.68:1, 2/3 major indices green, 57 limit-ups / 81 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "PANIC REGIME — Breadth 0.68:1 bearish (2,188 up / 3,208 down), 81跌停 vs 57涨停. 上证+0.78% held by energy rotation; 科创50 -1.27% continues tech wreck. IV Rank 1.0 across all ETF proxies (500/科创50/创业板) — systemic stress, not isolated vol. Clear defensive rotation into energy/liquor/coal; tech/electronics/materials in severe selloff. Hard block active: no new positions. 100% cash at ¥956,221 (-4.38% total). Priority watch for regime clearance: 永和股份 (氟化工涨价), 凯莱英 (CRO龙头+股权激励), 荣昌生物 (创新药BD boom)."
+  }
+}

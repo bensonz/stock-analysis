@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 241458,
+  "output_tokens": 9424,
+  "rounds": 4,
+  "duration_sec": 201.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月20日 市场大跌 板块 油气 煤炭 白酒 上涨 原因",
+        "max_results": 5
+      },
+      "result_length": 2875
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "电子化学品 元件 玻璃玻纤 暴跌 2026年7月 A股",
+        "max_results": 5
+      },
+      "result_length": 3075
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "凯莱英 002821 最新消息 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 2566
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "永和股份 605020 氟化工 制冷剂 涨价 2026年7月"
+      },
+      "result_length": 2417
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "星宸科技 301536 业绩 半年报 2026年7月 AI芯片"
+      },
+      "result_length": 2652
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+恐慌+涨跌比+2026年7月20日+市场解读",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    }
+  ],
+  "fallback_used": false
+}

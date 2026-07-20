@@ -599,7 +599,7 @@ def preflight_pricedb_or_exit(manifest) -> None:
     try:
         import sqlite3 as _sql
         from datetime import datetime as _dt
-        from pricedb import most_recent_trading_day
+        from pricedb import last_settled_trading_day, most_recent_trading_day
 
         with _sql.connect(str(pricedb_path)) as conn:
             row = conn.execute("SELECT MAX(date) FROM daily_prices").fetchone()
@@ -614,7 +614,10 @@ def preflight_pricedb_or_exit(manifest) -> None:
         now = _dt.now()
         today = now.date()
         latest_dt = _dt.strptime(latest, "%Y-%m-%d").date()
-        latest_trading_day = most_recent_trading_day(today)
+        # Session-aware expectation: mid-session today's bar is intentionally not
+        # written (it would be an intraday snapshot), so the freshest legitimate
+        # data is the last *closed* session, not today.
+        latest_trading_day = last_settled_trading_day(now)
 
         if latest_dt >= latest_trading_day:
             print(f"  ✓ pricedb fresh (latest={latest}, target≥{latest_trading_day.isoformat()})",
@@ -623,8 +626,11 @@ def preflight_pricedb_or_exit(manifest) -> None:
                                details={"latest_date": latest, "target": latest_trading_day.isoformat()})
             return
 
-        # Stale. Only hard-refuse during trading hours (09:30+) on trading days.
-        is_trading_today = (latest_trading_day == today)
+        # Stale (latest is behind the last settled session). Only hard-refuse
+        # during trading hours on a trading day. "Is today a trading day" is
+        # computed independently of the freshness threshold, which is now the
+        # last *closed* session.
+        is_trading_today = (most_recent_trading_day(today) == today)
         after_market_open = (now.hour, now.minute) >= (9, 30)
         if is_trading_today and after_market_open:
             print(

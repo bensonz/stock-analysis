@@ -65,3 +65,22 @@ def test_last_fully_covered_date_none_when_empty(tmp_path):
     db = sqlite3.connect(":memory:")
     pricedb.ensure_schema(db)
     assert pricedb._last_fully_covered_date(db) is None
+
+
+def test_last_settled_trading_day_open_session_is_previous_day(monkeypatch):
+    # Empty calendar -> most_recent_trading_day uses weekend-walk (deterministic).
+    monkeypatch.setattr(pricedb, "_get_trade_calendar_cached", lambda: [])
+    from datetime import date
+
+    # Monday 11:35, session open -> last settled is Friday (skips the weekend).
+    got = pricedb.last_settled_trading_day(datetime(2026, 7, 20, 11, 35))
+    assert got == date(2026, 7, 17)
+
+
+def test_last_settled_trading_day_after_close_is_today(monkeypatch):
+    monkeypatch.setattr(pricedb, "_get_trade_calendar_cached", lambda: [])
+    from datetime import date
+
+    # Monday 15:35, session closed -> today's bar has settled.
+    got = pricedb.last_settled_trading_day(datetime(2026, 7, 20, 15, 35))
+    assert got == date(2026, 7, 20)

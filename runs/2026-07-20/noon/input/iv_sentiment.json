@@ -1,0 +1,360 @@
+{
+  "date": "2026-07-20",
+  "source": "options-learn backend (/api/history/iv-rank)",
+  "core_underlyings": [
+    "510050",
+    "510300",
+    "510500",
+    "588000",
+    "159915"
+  ],
+  "etf_iv_data": [
+    {
+      "underlying": "510500",
+      "lookback_days": 252,
+      "data_points": 224,
+      "data_points_filtered": 212,
+      "current_iv": 0.3904,
+      "is_live": false,
+      "iv_high": 0.3449,
+      "iv_low": 0.194,
+      "iv_high_raw": 0.3904,
+      "iv_low_raw": 0.107,
+      "iv_rank": 1.0,
+      "iv_rank_raw": 1.0,
+      "iv_percentile": 1.0,
+      "iv_percentile_raw": 0.9955,
+      "outliers_removed": 12,
+      "outlier_details": [
+        {
+          "date": "2025-08-18",
+          "iv": 0.3616
+        },
+        {
+          "date": "2025-08-20",
+          "iv": 0.3523
+        },
+        {
+          "date": "2025-08-25",
+          "iv": 0.3612
+        },
+        {
+          "date": "2025-09-04",
+          "iv": 0.3769
+        },
+        {
+          "date": "2025-09-05",
+          "iv": 0.3575
+        },
+        {
+          "date": "2025-10-17",
+          "iv": 0.3519
+        },
+        {
+          "date": "2026-02-02",
+          "iv": 0.3531
+        },
+        {
+          "date": "2026-03-23",
+          "iv": 0.353
+        },
+        {
+          "date": "2026-04-16",
+          "iv": 0.128
+        },
+        {
+          "date": "2026-04-17",
+          "iv": 0.107
+        },
+        {
+          "date": "2026-07-17",
+          "iv": 0.3612
+        },
+        {
+          "date": "2026-07-20",
+          "iv": 0.3904
+        }
+      ],
+      "sigma_range": [
+        0.1778,
+        0.3511
+      ],
+      "name": "500ETF",
+      "desc": "中证500",
+      "interpretation": "极高 (市场恐慌，可能是超卖反弹机会)"
+    },
+    {
+      "underlying": "588000",
+      "lookback_days": 252,
+      "data_points": 224,
+      "data_points_filtered": 212,
+      "current_iv": 0.7288,
+      "is_live": false,
+      "iv_high": 0.5861,
+      "iv_low": 0.2467,
+      "iv_high_raw": 0.7362,
+      "iv_low_raw": 0.126,
+      "iv_rank": 1.0,
+      "iv_rank_raw": 0.9879,
+      "iv_percentile": 1.0,
+      "iv_percentile_raw": 0.9911,
+      "outliers_removed": 12,
+      "outlier_details": [
+        {
+          "date": "2025-08-25",
+          "iv": 0.6237
+        },
+        {
+          "date": "2025-08-28",
+          "iv": 0.6222
+        },
+        {
+          "date": "2025-08-29",
+          "iv": 0.6345
+        },
+        {
+          "date": "2026-04-16",
+          "iv": 0.145
+        },
+        {
+          "date": "2026-04-17",
+          "iv": 0.126
+        },
+        {
+          "date": "2026-06-30",
+          "iv": 0.6103
+        },
+        {
+          "date": "2026-07-01",
+          "iv": 0.6127
+        },
+        {
+          "date": "2026-07-09",
+          "iv": 0.6098
+        },
+        {
+          "date": "2026-07-15",
+          "iv": 0.6334
+        },
+        {
+          "date": "2026-07-16",
+          "iv": 0.6732
+        },
+        {
+          "date": "2026-07-17",
+          "iv": 0.7362
+        },
+        {
+          "date": "2026-07-20",
+          "iv": 0.7288
+        }
+      ],
+      "sigma_range": [
+        0.1674,
+        0.6078
+      ],
+      "name": "科创50",
+      "desc": "科创板",
+      "interpretation": "极高 (市场恐慌，可能是超卖反弹机会)"
+    },
+    {
+      "underlying": "159915",
+      "lookback_days": 252,
+      "data_points": 221,
+      "data_points_filtered": 217,
+      "current_iv": 0.5883,
+      "is_live": false,
+      "iv_high": 0.473,
+      "iv_low": 0.2082,
+      "iv_high_raw": 0.5958,
+      "iv_low_raw": 0.2082,
+      "iv_rank": 1.0,
+      "iv_rank_raw": 0.9807,
+      "iv_percentile": 1.0,
+      "iv_percentile_raw": 0.991,
+      "outliers_removed": 4,
+      "outlier_details": [
+        {
+          "date": "2025-09-05",
+          "iv": 0.5002
+        },
+        {
+          "date": "2025-09-17",
+          "iv": 0.4913
+        },
+        {
+          "date": "2026-07-17",
+          "iv": 0.5958
+        },
+        {
+          "date": "2026-07-20",
+          "iv": 0.5883
+        }
+      ],
+      "sigma_range": [
+        0.1766,
+        0.4758
+      ],
+      "name": "创业板ETF",
+      "desc": "创业板",
+      "interpretation": "极高 (市场恐慌，可能是超卖反弹机会)"
+    },
+    {
+      "underlying": "159922",
+      "lookback_days": 252,
+      "data_points": 221,
+      "data_points_filtered": 220,
+      "current_iv": 1.0,
+      "is_live": false,
+      "iv_high": 0.3669,
+      "iv_low": 0.1804,
+      "iv_high_raw": 1.0,
+      "iv_low_raw": 0.1804,
+      "iv_rank": 1.0,
+      "iv_rank_raw": 1.0,
+      "iv_percentile": 1.0,
+      "iv_percentile_raw": 0.9955,
+      "outliers_removed": 1,
+      "outlier_details": [
+        {
+          "date": "2026-07-20",
+          "iv": 1.0
+        }
+      ],
+      "sigma_range": [
+        0.1363,
+        0.3881
+      ],
+      "name": "500ETF深",
+      "desc": "深市中盘",
+      "interpretation": "极高 (市场恐慌，可能是超卖反弹机会)"
+    },
+    {
+      "underlying": "159919",
+      "lookback_days": 252,
+      "data_points": 221,
+      "data_points_filtered": 212,
+      "current_iv": 0.2969,
+      "is_live": false,
+      "iv_high": 0.2553,
+      "iv_low": 0.1298,
+      "iv_high_raw": 0.3036,
+      "iv_low_raw": 0.1298,
+      "iv_rank": 1.0,
+      "iv_rank_raw": 0.9615,
+      "iv_percentile": 1.0,
+      "iv_percentile_raw": 0.991,
+      "outliers_removed": 9,
+      "outlier_details": [
+        {
+          "date": "2025-08-18",
+          "iv": 0.2642
+        },
+        {
+          "date": "2025-08-19",
+          "iv": 0.2575
+        },
+        {
+          "date": "2025-08-20",
+          "iv": 0.2681
+        },
+        {
+          "date": "2025-08-25",
+          "iv": 0.258
+        },
+        {
+          "date": "2025-08-28",
+          "iv": 0.2577
+        },
+        {
+          "date": "2025-08-29",
+          "iv": 0.2576
+        },
+        {
+          "date": "2026-06-23",
+          "iv": 0.2815
+        },
+        {
+          "date": "2026-07-17",
+          "iv": 0.3036
+        },
+        {
+          "date": "2026-07-20",
+          "iv": 0.2969
+        }
+      ],
+      "sigma_range": [
+        0.1138,
+        0.2559
+      ],
+      "name": "300ETF深",
+      "desc": "深市宽基",
+      "interpretation": "极高 (市场恐慌，可能是超卖反弹机会)"
+    },
+    {
+      "underlying": "588080",
+      "lookback_days": 252,
+      "data_points": 223,
+      "data_points_filtered": 216,
+      "current_iv": 0.7761,
+      "is_live": false,
+      "iv_high": 0.6042,
+      "iv_low": 0.184,
+      "iv_high_raw": 0.7761,
+      "iv_low_raw": 0.184,
+      "iv_rank": 1.0,
+      "iv_rank_raw": 1.0,
+      "iv_percentile": 1.0,
+      "iv_percentile_raw": 0.9955,
+      "outliers_removed": 7,
+      "outlier_details": [
+        {
+          "date": "2026-06-30",
+          "iv": 0.6147
+        },
+        {
+          "date": "2026-07-01",
+          "iv": 0.6163
+        },
+        {
+          "date": "2026-07-09",
+          "iv": 0.6087
+        },
+        {
+          "date": "2026-07-15",
+          "iv": 0.6485
+        },
+        {
+          "date": "2026-07-16",
+          "iv": 0.676
+        },
+        {
+          "date": "2026-07-17",
+          "iv": 0.7362
+        },
+        {
+          "date": "2026-07-20",
+          "iv": 0.7761
+        }
+      ],
+      "sigma_range": [
+        0.1695,
+        0.6067
+      ],
+      "name": "科创板50",
+      "desc": "科创板（备用代理）",
+      "interpretation": "极高 (市场恐慌，可能是超卖反弹机会)"
+    }
+  ],
+  "overall_sentiment": {
+    "signal": "极度恐慌",
+    "avg_iv_rank": 1.0,
+    "avg_iv_percentile": 1.0,
+    "implication": "波动率处于高位，市场恐慌。历史上往往是中期买入机会，但短期可能继续剧烈波动。",
+    "based_on": [
+      "510500",
+      "588000",
+      "159915"
+    ]
+  }
+}

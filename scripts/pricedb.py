@@ -146,6 +146,22 @@ def is_session_open(now: datetime | None = None) -> bool:
     return (now.hour, now.minute) < (close_h, close_m)
 
 
+def last_settled_trading_day(now: datetime | None = None) -> _date:
+    """Most recent trading day whose session has fully closed.
+
+    During an open session today's bar is not settled yet (and by design is not
+    written to daily_prices), so the freshest *legitimate* data is the previous
+    trading day. This is the correct "expected latest" for staleness checks and
+    mirrors the cmd_update end-cap — without it, a mid-session staleness gate
+    would demand a bar that intentionally does not exist yet.
+    """
+    now = now or _now()
+    ref = now.date()
+    if is_session_open(now):
+        ref = ref - timedelta(days=1)
+    return most_recent_trading_day(ref)
+
+
 def _last_fully_covered_date(conn: sqlite3.Connection) -> str | None:
     """Latest date whose row count reaches PRICEDB_COVERAGE_THRESHOLD of the
     known universe. Used as the incremental cursor so partially-fetched recent
