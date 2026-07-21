@@ -1,0 +1,315 @@
+---
+
+# 📋 RESEARCH MEMO — 2026-07-21
+
+## 1. MARKET REGIME
+
+**Regime: Post-Crash Relief Bounce — "Weak, Unconfirmed"**
+
+| Indicator | Value | Signal |
+|---|---|---|
+| 上证指数 | 3819.66 (+0.62%) | Green |
+| 深证成指 | 14074.22 (+3.41%) | Green |
+| 创业板指 | 3622.27 (+5.20%) | Green |
+| 科创50 | 1837.94 (+6.94%) | Strong bounce |
+| Breadth | 2601↑ / 2807↓ (0.93:1) | **Bearish divergence** |
+| 涨停/跌停 | 46 / 24 | Neither panic nor euphoria |
+| IV Rank (all ETFs) | **100%** | Extreme fear |
+| 融资余额 trend | 11-day decline | Deleveraging cycle |
+
+**Key macro context from web research:**
+
+After a brutal 2-week sell-off (科创50 -22.3%, 创业板 -21.1% from July 1-17), today is a sharp relief rally driven by policy intervention. The sell-off was triggered by: (a) Korea/Japan tech leverage contagion spreading to A-shares, (b) AI capex overcapacity fears (Meta selling idle compute), (c) Middle East tensions spiking oil, (d) 融资 forced-selling cascade with 融资余额 declining for 11+ consecutive days.
+
+Stabilization signals are emerging: 中国国新 deployed 500亿+ via 增持再贷款, 中国诚通 bought 近百亿, multiple 保险机构 pledged continued tech investment, and 证监会 convened a 稳市场座谈会. However, the deleveraging cycle may not be fully complete — 7/17 saw 科创50 -7.12% single-day crash and 237 stocks 跌停.
+
+**Breadth read:** "Breadth 0.93:1 bearish divergence, 46涨停/24跌停. Indices are green but more stocks are falling than rising — the bounce is concentrated in large-cap tech/indices. Not a broad-based recovery."
+
+**IV context:** IV Rank is at 100% across all ETFs (50ETF, 300ETF, 500ETF, 科创50, 创业板ETF). This is extreme fear territory. Historically, IV Rank at 100% marks good medium-term entry zones, but short-term volatility remains extreme — 科创50 IV at 73% absolute level means the market is pricing ±5% daily moves. Wide stops are mandatory if entering.
+
+**Buy Gate Assessment:**
+- ❌ Up/Down ratio: 0.93:1 (minimum 1.5:1 required)
+- ❌ Breadth < 1:1 → triggers "no new positions" rule
+- ✅ 3/3 major indices green
+- ✅ f10 (24) < 30
+
+**Verdict: BUY GATE NOT MET → new_positions = []**
+
+The entry_regime says `allow_new_positions: true` with `sizing_multiplier: 0.5` but the minimum buy gate rules are clear: breadth below 1:1 = no new positions. We follow the stricter rule. Post-crash bounces with weak breadth are classic traps — wait for breadth to confirm before deploying capital.
+
+---
+
+## 2. SECTOR ANALYSIS
+
+**Hot Sectors (Top 5):**
+
+| Rank | Sector | 5d Performance | Trend |
+|---|---|---|---|
+| 1 | 半导体 | +8.43% | Accelerating (post-crash bounce) |
+| 2 | 电子化学品Ⅱ | +8.43% | Accelerating |
+| 3 | 玻璃玻纤 | +7.28% | Bouncing |
+| 4 | 通信设备 | +6.77% | Bouncing |
+| 5 | 元件 | +6.15% | Bouncing |
+
+**Cold Sectors (Bottom 5):**
+
+| Rank | Sector | 5d Performance | Trend |
+|---|---|---|---|
+| 1 | 油气开采Ⅱ | -3.76% | Deteriorating |
+| 2 | 煤炭开采 | -3.32% | Deteriorating |
+| 3 | 油服工程 | -3.31% | Deteriorating |
+| 4 | 国有大型银行Ⅱ | -2.74% | Defensive rotation fading |
+| 5 | 炼化及贸易 | -2.70% | Deteriorating |
+
+**Sector Rotation Signal:** Clear tech/semiconductor leadership, resources/energy capitulation. This is consistent with the broader narrative: the crash was tech-led, so the bounce is tech-led. Defensive sectors (banks, resources) are being sold as risk appetite marginally returns. However, today's sector data is a single-day snapshot post-crash — we need to see if semiconductor leadership persists for 2-3 more days before it's a confirmed rotation.
+
+**Position Sector Alignment:** 0/0 positions — no positions to align.
+
+**Regime Summary:** "Tech/semiconductor leadership bouncing from crash lows, resources/energy in freefall. Breadth divergence suggests this is an index-level bounce driven by 国家队 buying, not a broad recovery. Wait for breadth to confirm before buying."
+
+---
+
+## 3. POSITION REVIEW
+
+**Active Positions: NONE**
+
+Portfolio is 95.6% cash (¥956,221). Previous positions were stopped out during the July crash. Total realized PnL: -¥43,779 (-4.38%). The drawdown is contained — cash preservation during the crash was the right call.
+
+No position decisions to make today.
+
+---
+
+## 4. NEW ENTRY CANDIDATES — ALL SKIPPED
+
+Despite today's strong index bounce, the buy gate is not met (breadth 0.93:1 < 1.0). Below are the strongest candidates that would be actionable if breadth confirms:
+
+### Tier 1: Would Buy on Breadth Confirmation
+
+**① 扬杰科技 (300373.SZ) — Semiconductor | RPS120 93.15% | Sector #1 (+8.43%)**
+
+| Metric | Value | Assessment |
+|---|---|---|
+| Sector | 半导体 | Top 1 sector — ideal alignment |
+| RPS120 | 93.15% | Sweet spot (80-92% zone, slight extension acceptable given sector) |
+| dist_ma5 | -12.2% | Deep below MA5 (not chasing — in pullback) |
+| dist_ma10 | -21.8% | Deep below MA10 |
+| dist_ma20 | -24.9% | Deep below MA20 |
+| PE | 38.2 | Reasonable for semiconductor |
+| Catalyst | H1 guide: rev +30%, profit +20-40%, auto electronics doubling, SiC near-doubling | Fresh (7/21 announcement) |
+| Margin | Deleveraging (chg5 -12.48%, 5-day repay) | Caution flag — aligns with broad deleveraging |
+| IV Proxy | 创业板ETF, IV Rank 100% | Extreme — wide stops needed |
+
+**Thesis:** Power semiconductor upcycle + AI data center demand + automotive SiC ramp. The H1 guidance is solid with auto electronics revenue doubling and SiC near-doubling. 8-inch mature node capacity is tight industry-wide. The stock is in the #1 sector. However, it's deep below all MAs (post-crash), and while that means it's not extended, it also means the trend is broken — need a base to form.
+
+**Preliminary Verdict:** SKIP — breadth gate not met. Top candidate to buy when breadth confirms.
+
+---
+
+**② 凯莱英 (002821.SZ) — CRO/CDMO | RPS120 92.87% | Catalyst: 基药目录纳入创新药**
+
+| Metric | Value | Assessment |
+|---|---|---|
+| Sector | 医疗研发外包 | Not in top 5 sectors today, but CRO has been strong recently |
+| RPS120 | 92.87% | Sweet spot |
+| dist_ma5 | -8.1% | Moderate pullback |
+| dist_ma10 | -4.0% | Close to MA10 support — least damaged of the candidates |
+| dist_ma20 | +5.3% | Still above MA20 — trend intact! |
+| PE | 53.7 | Acceptable for CDMO leader |
+| Catalyst | 基药目录首纳创新药 (7/15) → 涨停创52周新高, but then crashed | Fresh but stock already pulled back |
+| Margin | Adding (chg5 +3.49%) | Mild positive — not deleveraging |
+
+**Thesis:** The 基药目录 inclusion of innovative drugs is a structural catalyst for the entire CRO/CDMO sector. 凯莱英 hit a 52-week high on 7/15 (涨停 at ¥195.75) but got caught in the sector-wide crash on 7/17. The stock is now at ¥161.99, below MA5/MA10 but still above MA20 — the medium-term trend is intact. This is one of the few candidates where the dist_ma20 is still positive, meaning the crash didn't fully break the trend.
+
+**Preliminary Verdict:** SKIP — breadth gate not met. This is the #1 candidate to buy when breadth confirms, given: (a) trend still above MA20, (b) close to MA10 support, (c) structural catalyst, (d) margin not deleveraging.
+
+---
+
+**③ 昭衍新药 (603127.SH) — CRO | RPS120 86.13% | dist_ma5 -0.7%**
+
+| Metric | Value | Assessment |
+|---|---|---|
+| Sector | 医疗研发外包 | Same as 凯莱英 |
+| RPS120 | 86.13% | Acceptable (above 75%) |
+| dist_ma5 | -0.7% | Extremely tight to MA5 — best MA proximity in entire pool |
+| dist_ma10 | +7.7% | Above MA10 |
+| dist_ma20 | +19.5% | Well above MA20 — but extended! |
+| PE | 72.7 | Elevated |
+| Catalyst | H1 profit +884-1377% (实验猴公允价值变动) | Huge number but driven by biological asset revaluation, not core business |
+| Risk | Company warned of "市场情绪过热、非理性炒作" | Self-acknowledged bubble risk |
+
+**Thesis:** The H1 profit explosion is real but driven by monkey asset revaluation — not recurring operating profit. The stock hit 跌停 on 7/17 after the company itself warned of overheating. dist_ma20 at +19.5% violates the anti-chase rule (Rule 2b says >12% = extreme extension). Despite being tight to MA5, the stock is deeply extended from MA20 and the catalyst quality is low (accounting-driven, not business-driven).
+
+**Preliminary Verdict:** SKIP — triple reason: (a) breadth gate, (b) dist_ma20 +19.5% violates Rule 2b, (c) catalyst quality is poor (asset revaluation, not operating improvement).
+
+---
+
+### Tier 2: Decent Setups, Lower Priority
+
+**④ 永和股份 (605020.SH) — 氟化工 | RPS120 89.12% | dist_ma5 -4.6%**
+
+Sector not in top 5 but not in bottom 5. RPS120 solid. dist_ma5 relatively close (-4.6%). In-house buyback (¥29.99M). But margin is deleveraging and the sector lacks today's momentum.
+
+**⑤ 横店东磁 (002056.SZ) — 光伏 | RPS120 85.17% | dist_ma5 -3.6%**
+
+Closest MA proximity after 昭衍新药. 光伏 sector not in today's top 5. RPS120 at lower end of range. Solid fundamentals (ROE 18%, dividend 2.8%) but lacking near-term catalyst.
+
+**⑥ 中石科技 (300684.SZ) — 电子化学品 | RPS120 89.66% | Sector #2 (+8.43%)**
+
+In the #2 hot sector — strong alignment. ¥60M buyback announced 7/20. But dist_ma5 -15.3% (deep crash damage) and RPS120 slightly below 90%.
+
+---
+
+## 5. SKIP LIST (Concise)
+
+| Code | Name | Primary Reason | RPS120 | Sector Today |
+|---|---|---|---|---|
+| 300373 | 扬杰科技 | Breadth gate failed; deep below MAs | 93.15% | 半导体 +8.43% |
+| 002821 | 凯莱英 | Breadth gate failed | 92.87% | CRO (mid-rank) |
+| 603127 | 昭衍新药 | dist_ma20 +19.5% violates Rule 2b; catalyst quality poor | 86.13% | CRO |
+| 605020 | 永和股份 | Breadth gate failed; sector not top 5 | 89.12% | 化学制品 |
+| 002056 | 横店东磁 | Breadth gate failed; sector not top 5 | 85.17% | 光伏设备 |
+| 300684 | 中石科技 | Breadth gate failed; dist_ma5 -15.3% | 89.66% | 电子化学品 +8.43% |
+| 301536 | 星宸科技 | Breadth gate failed; dist_ma20 -18.9% | 94.80% | 半导体 +8.43% |
+| 688777 | 中控技术 | Breadth gate failed; deleveraging + IV extreme | 94.96% | 自动化设备 |
+| 300475 | 香农芯创 | Breadth gate failed; storage crash ongoing | 89.22% | 其他电子 |
+
+---
+
+## 6. LEARNINGS
+
+1. **Post-crash bounce with weak breadth is a false signal.** Indices up +3-7% but more stocks down than up = index-level buying (国家队/机构), not broad recovery. Wait for breadth to cross above 1.5:1 before deploying. *Mechanism: 国家队 buys index heavyweights/ETFs which lifts indices, but underlying market internals remain weak until the deleveraging cycle completes.*
+
+2. **IV Rank 100% creates a paradox for new entries.** Historically this is a great medium-term entry zone (fear = opportunity), but the V2 framework's buy gate correctly blocks entries until breadth confirms. Being "right but early" in a momentum system is still wrong. *Mechanism: Extreme IV means the market is pricing massive 2-way risk — entering without breadth confirmation is gambling on direction, not riding momentum.*
+
+3. **凯莱英's MA structure is the cleanest in the pool.** dist_ma20 at +5.3% (still above MA20 after the crash) shows the medium-term trend survived the deleveraging. When breadth confirms, this should be the first entry. *Mechanism: Stocks that hold above MA20 through a sector-wide crash have relative strength that attracts institutional buyers first in the recovery.*
+
+4. **The 融资 deleveraging signal is pervasive.** 18 of 28 enriched candidates show "deleveraging" on margin. This is a macro phenomenon, not stock-specific. The signal loses differentiation value when it's universal — it confirms we're in a deleveraging cycle rather than flagging individual stock risk. *Related: active_learnings — the broad deleveraging supports h077 (hard block preventing FOMO entries during panic).*
+
+5. **Sector-first approach validated again.** 半导体 (+8.43%) and 电子化学品 (+8.43%) are today's leaders, and the top candidates (扬杰科技, 中石科技) are in these sectors. When breadth improves, the sector filter will naturally prioritize the right names. The framework works — we just need the gate to open.
+
+---
+
+## 7. UNCERTAINTY FLAGS
+
+- **Is the deleveraging cycle over?** 融资余额 declined for 11 consecutive days. Today's bounce might mark the end, but we can't know without another 1-2 days of data. If breadth improves tomorrow (up/down > 1.5:1), the regime likely shifts to "recovering."
+- **Is semiconductor leadership sustainable or a dead-cat bounce?** The sector is up +8.43% in a single day after a -22% crash. This could be short-covering. Need to see follow-through.
+- **The entry_regime vs buy gate conflict.** The system's entry_regime says `allow_new_positions: true` with 50% sizing, but the strict buy gate rules say breadth < 1:1 = no positions. I'm following the stricter rule. This is a good test of whether the automated regime or the manual gate is more predictive.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "半导体", "5d_pct": 8.43, "trend": "accelerating (post-crash bounce)"},
+      {"name": "电子化学品Ⅱ", "5d_pct": 8.43, "trend": "accelerating"},
+      {"name": "玻璃玻纤", "5d_pct": 7.28, "trend": "bouncing"},
+      {"name": "通信设备", "5d_pct": 6.77, "trend": "bouncing"},
+      {"name": "元件", "5d_pct": 6.15, "trend": "bouncing"}
+    ],
+    "cold_sectors": [
+      {"name": "油气开采Ⅱ", "5d_pct": -3.76, "trend": "deteriorating"},
+      {"name": "煤炭开采", "5d_pct": -3.32, "trend": "deteriorating"},
+      {"name": "油服工程", "5d_pct": -3.31, "trend": "deteriorating"},
+      {"name": "国有大型银行Ⅱ", "5d_pct": -2.74, "trend": "defensive rotation fading"},
+      {"name": "炼化及贸易", "5d_pct": -2.70, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/0 positions — all cash",
+    "regime": "Post-crash relief bounce; semiconductor/tech leadership, resources/energy capitulating. Index-level buying (国家队) driving bounce but breadth is weak at 0.93:1 — divergence between indices and market internals."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "reason": "Breadth gate failed (0.93:1 < 1.5:1 required). #1 candidate when gate opens: semiconductor sector top 1% (+8.43%), RPS120 93.15%, H1 guidance revenue +30%/profit +20-40%, auto electronics doubling, SiC near-doubling. Currently deep below MAs (dist_ma5 -12.2%) post-crash — needs base formation.",
+      "rps120": 93.15
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "Breadth gate failed. #1 priority when gate opens: only candidate where dist_ma20 is still positive (+5.3%), meaning the crash didn't break the medium-term trend. 基药目录纳入创新药 is structural catalyst. dist_ma10 only -4.0% — close to support. Margin not deleveraging (adding signal). 7/15 涨停创52周新高 then pulled back in sector crash — classic buy-the-dip setup when regime improves.",
+      "rps120": 92.87
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "reason": "Triple rejection: (1) breadth gate failed, (2) dist_ma20 +19.5% violates Rule 2b anti-chase (>12% extreme extension), (3) H1 profit +884-1377% driven by 实验猴 asset revaluation not operating improvement — catalyst quality is poor. Company itself warned of '市场情绪过热、非理性炒作'. dist_ma5 -0.7% is the tightest in pool but the MA20 extension and catalyst quality override.",
+      "rps120": 86.13
+    },
+    {
+      "code": "605020",
+      "name": "永和股份",
+      "reason": "Breadth gate failed. Sector (化学制品/氟化工) not in top 5 today. RPS120 89.12% acceptable, dist_ma5 -4.6% moderately close to support. In-house buyback ongoing (¥29.99M). Decent setup but lower priority than semiconductor/CRO names.",
+      "rps120": 89.12
+    },
+    {
+      "code": "002056",
+      "name": "横店东磁",
+      "reason": "Breadth gate failed. Sector (光伏设备) not in top 5. RPS120 85.17% at lower end of sweet spot. dist_ma5 -3.6% — close to MA5 but lacks near-term catalyst. Solid fundamentals (ROE 18%, dividend 2.8%) but no urgency to enter in weak breadth.",
+      "rps120": 85.17
+    },
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "reason": "Breadth gate failed. In #2 hot sector (电子化学品 +8.43%) with ¥60M buyback announced 7/20. But dist_ma5 -15.3% shows heavy crash damage — stock was hit hard and needs time to stabilize. RPS120 89.66%.",
+      "rps120": 89.66
+    },
+    {
+      "code": "301536",
+      "name": "星宸科技",
+      "reason": "Breadth gate failed. In top sector (半导体 +8.43%). RPS120 94.80% near extended zone. H1 guidance +583-650% profit growth very strong. But dist_ma20 -18.9% deep crash damage. Deleveraging on margin. Excellent fundamentals but wrong timing.",
+      "rps120": 94.80
+    },
+    {
+      "code": "688777",
+      "name": "中控技术",
+      "reason": "Breadth gate failed. Sector (自动化设备) not in today's top 5. RPS120 94.96%. IV proxy shows IV Rank 100% with 科创50 — extreme vol. Margin deleveraging (chg5 -6.03%, 5-day repay). Multiple caution flags stacking: weak sector + deleveraging + extreme IV.",
+      "rps120": 94.96
+    },
+    {
+      "code": "300475",
+      "name": "香农芯创",
+      "reason": "Breadth gate failed. Storage/electronics distribution sector in ongoing crash — 7/13 跌停 -20%. Margin deeply deleveraging (chg5 -22.31%). The storage sell-off (Korean contagion) may not be over. Avoid until sector stabilizes.",
+      "rps120": 89.22
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Post-crash index bounce with weak breadth (0.93:1 despite indices +3-7%) is a false signal: 国家队/机构 buying index heavyweights lifts headline numbers but market internals remain weak until deleveraging completes. Do not enter until breadth crosses above 1.5:1.",
+      "type": "heuristic",
+      "tags": ["entry-filter", "timing", "sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "国家队 buys ETFs/index heavyweights → indices rise, but underlying stocks are still in forced-selling mode from 融资 deleveraging → breadth divergence. The divergence resolves when forced selling exhausts, typically 1-3 days after policy intervention."
+    },
+    {
+      "text": "IV Rank at 100% (all ETFs) historically marks a good medium-term entry zone but the V2 buy gate correctly blocks entries until breadth confirms. 'Right but early' in a momentum system = wrong. Wait for breadth to turn before deploying into extreme IV.",
+      "type": "signal",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "Extreme IV = market pricing massive 2-way risk. Entering without breadth confirmation is gambling on bounce direction rather than riding confirmed momentum."
+    },
+    {
+      "text": "凯莱英 (002821) has the cleanest MA structure in the entire candidate pool: dist_ma20 still positive at +5.3% after the crash, meaning the medium-term trend survived. When breadth confirms, stocks holding above MA20 through a systemic sell-off should be first entries — they show relative strength that attracts institutional buying first in recovery.",
+      "type": "observation",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "Institutions rotate into relative-strength names first when re-entering after a crash. Stocks above MA20 post-crash have demonstrated demand absorption during the selling."
+    },
+    {
+      "text": "融资 deleveraging signal is pervasive (18/28 candidates show 'deleveraging') — this confirms a macro deleveraging cycle rather than stock-specific risk. When the signal is universal, it loses stock-level differentiation value. Use it to confirm regime (we're in deleveraging) rather than to filter individual names.",
+      "type": "observation",
+      "tags": ["entry-filter", "position-sizing"],
+      "evidence_type": "supporting",
+      "mechanism": "During systemic deleveraging, margin reduction is forced/mechanical rather than discretionary — even strong stocks see 融资 outflows as leveraged holders are compelled to reduce risk regardless of fundamentals."
+    }
+  ],
+  "market_summary": "Post-crash relief bounce: 科创50 +6.94%, 创业板 +5.20% after -22% crash. Breadth 0.93:1 bearish divergence — more stocks down than up despite green indices, confirming the bounce is concentrated in index heavyweights via 国家队 buying. IV Rank 100% across all ETFs (extreme fear). 融资余额 11-day decline, deleveraging cycle may be nearing end. 涨停46/跌停24. Policy support (央企增持, 稳市场座谈会) providing floor but recovery not yet confirmed by breadth. Buy gate NOT met — all cash, waiting for breadth >1.5:1.",
+  "market_sentiment": "mixed",
+  "market_call": "谨慎"
+}
+```

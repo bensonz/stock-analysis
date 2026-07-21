@@ -1,0 +1,82 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 257317,
+  "output_tokens": 8815,
+  "rounds": 4,
+  "duration_sec": 168.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月20日 市场暴跌 板块轮动 油气 煤炭 大涨",
+        "max_results": 5
+      },
+      "result_length": 3226
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月20日 半导体 电子 板块 大跌 原因",
+        "max_results": 5
+      },
+      "result_length": 2158
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "油气开采 板块 大涨 2026年7月 原因 油价",
+        "max_results": 5
+      },
+      "result_length": 2392
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "创新药 CRO 2026年7月20日 荣昌生物 凯莱英 昭衍新药 走势"
+      },
+      "result_length": 2957
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "PCB 电子化学品 玻璃玻纤 2026年7月 暴跌 原因"
+      },
+      "result_length": 3032
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "证监会 稳市场 座谈会 2026年7月20日 A股"
+      },
+      "result_length": 3121
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "中控技术 688777 工业AI 2026年7月 动态"
+      },
+      "result_length": 2026
+    }
+  ],
+  "fallback_used": false
+}

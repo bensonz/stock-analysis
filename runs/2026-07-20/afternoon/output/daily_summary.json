@@ -1,0 +1,37 @@
+{
+  "date": "2026-07-20",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 956221.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -4.38,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -43779.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.469,
+    "up": 1740,
+    "down": 3710,
+    "positive_indices": [
+      "上证指数",
+      "创业板指"
+    ],
+    "negative_indices": [
+      "深证成指"
+    ],
+    "limit_ups": 55,
+    "limit_downs": 267,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.47:1, 2/3 major indices green, 55 limit-ups / 267 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "PANIC regime with deceptive index. 上证 +0.85% driven by energy/financial heavyweight rotation; underneath, breadth 0.47:1 with 267 limit-downs. Tech/semiconductor sectors in liquidation (-8% to -10%). IV Rank 1.0 across all ETFs — extreme fear. CSRC holding stabilization meeting today; SOEs deploying ¥500B+. Oil surge on US-Iran conflict driving resource rotation. 100% cash is the correct position. No new entries until breadth recovers above 1.5:1 and f10 drops below 30."
+  }
+}

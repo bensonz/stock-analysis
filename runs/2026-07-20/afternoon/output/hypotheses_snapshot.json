@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-07-21",
+  "lastUpdated": "2026-07-20",
   "hypotheses": [
     {
       "id": "h001",
@@ -1318,7 +1318,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-07-21",
+      "lastTested": "2026-07-20",
       "mechanism": "When price gets too stretched above MA5/MA10/MA20, upside becomes dependent on continued euphoria instead of support-based demand, raising mean-reversion risk.",
       "evidence": {
         "supporting": [
@@ -1697,14 +1697,6 @@
           {
             "date": "2026-07-20",
             "detail": "Only 2 of 20 enriched candidates are above MA20 (凯莱英 +5.3%, 昭衍新药 +19.5%). 15 of 20 have dist_ma20 < -15%. This extreme ratio confirms the selloff is broad and deep — not a 'stock picker's market.' The correct action is patience, not bargain hunting."
-          },
-          {
-            "date": "2026-07-21",
-            "detail": "IV Rank at 100% (all ETFs) historically marks a good medium-term entry zone but the V2 buy gate correctly blocks entries until breadth confirms. 'Right but early' in a momentum system = wrong. Wait for breadth to turn before deploying into extreme IV."
-          },
-          {
-            "date": "2026-07-21",
-            "detail": "凯莱英 (002821) has the cleanest MA structure in the entire candidate pool: dist_ma20 still positive at +5.3% after the crash, meaning the medium-term trend survived. When breadth confirms, stocks holding above MA20 through a systemic sell-off should be first entries — they show relative strength that attracts institutional buying first in recovery."
           }
         ],
         "contradicting": [
@@ -1718,9 +1710,9 @@
           }
         ]
       },
-      "sampleSize": 98,
-      "hitRate": 0.98,
-      "confidence": 0.97,
+      "sampleSize": 96,
+      "hitRate": 0.979,
+      "confidence": 0.969,
       "tags": [
         "entry-filter",
         "timing"
@@ -3769,7 +3761,7 @@
       "type": "rule",
       "status": "validated",
       "created": "2026-06-29",
-      "lastTested": "2026-07-21",
+      "lastTested": "2026-07-20",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -3796,21 +3788,13 @@
           {
             "date": "2026-07-20",
             "detail": "Hard block validation: 0.68:1 breadth + 81跌停 + IV Rank 1.0 across all ETFs = correct to hold 100% cash. V1 FOMO would have bought 永和/凯莱英/星宸 into panic. V2 preserves capital."
-          },
-          {
-            "date": "2026-07-21",
-            "detail": "Post-crash index bounce with weak breadth (0.93:1 despite indices +3-7%) is a false signal: 国家队/机构 buying index heavyweights lifts headline numbers but market internals remain weak until deleveraging completes. Do not enter until breadth crosses above 1.5:1."
-          },
-          {
-            "date": "2026-07-21",
-            "detail": "融资 deleveraging signal is pervasive (18/28 candidates show 'deleveraging') — this confirms a macro deleveraging cycle rather than stock-specific risk. When the signal is universal, it loses stock-level differentiation value. Use it to confirm regime (we're in deleveraging) rather than to filter individual names."
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 8,
+      "sampleSize": 6,
       "hitRate": 1.0,
-      "confidence": 0.9,
+      "confidence": 0.875,
       "tags": [
         "entry-filter",
         "position-sizing"

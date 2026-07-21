@@ -1,0 +1,275 @@
+# Research Memo — 2026-07-20
+
+## 1. Market Regime
+
+**Verdict: PANIC — HARD BLOCK. No new positions.**
+
+The headline indices deceive. 上证指数 closed +0.85% and 创业板指 +0.42%, but 深证成指 was -0.71%. The real story is in breadth:
+
+| Metric | Value | Signal |
+|---|---|---|
+| Up/Down | 1,740 / 3,710 | **0.47:1** — severe |
+| 涨停/跌停 | 55 / 267 | 267 stocks at limit-down |
+| f10 (跌停≥10%) | 267 | well above panic threshold of 30 |
+| f7_10 + f4_7 + f2_4 | 707 + 905 + 928 = **2,540** | massive selling distribution |
+| 上证 | +0.85% | green |
+| 深证成指 | -0.71% | red |
+| 创业板指 | +0.42% | green |
+
+**Minimum buy gate check (all 3 must pass):**
+1. Up/Down ≥ 1.5:1 → **FAIL** (0.47:1)
+2. ≥2/3 major indices green → **PASS** (2 of 3)
+3. f10 < 30 → **FAIL** (267)
+
+**→ Hard block engaged. `allow_new_positions: false`, `sizing_multiplier: 0.0`.**
+
+**What's happening:** The 上证 gain is entirely driven by heavyweight rotation into resources/financials (油气+9.14%, 煤炭+5.57%, 保险+4.94%, 白酒+5.58%). Under the hood, tech/semiconductor/electronics names are getting liquidated — 电子化学品 -10.06%, 玻璃玻纤 -10.16%, 元件 -8.26%. This is a classic "index-up, breadth-down" trap tape.
+
+**IV Sentiment:** IV Rank = 1.0 (100%) across ALL ETFs (50ETF, 300ETF, 500ETF, 科创50, 创业板ETF, 500ETF深, 300ETF深, 深100ETF). Signal: "极度恐慌" (extreme fear). This means options are pricing massive volatility. Per framework: IV >75% means "only buy the strongest setups" — but with hard block engaged, this throttle is moot.
+
+**Macro drivers:**
+- 证监会 holding stabilization meeting today (7/20) — policy response to July 17 crash
+- 中国国新 deployed ¥500B+ for market stabilization; 中国诚通 bought ~¥10B
+- US-Iran military conflict → WTI crude +9.42% to $78.14 → energy sector rally
+- 长鑫科技 (CXMT) IPO draining ~¥50B+ from semiconductor liquidity pool
+- Global semiconductor panic continuing from July 17 rout
+
+**Breadth one-liner:** "Breadth 0.47:1 bearish, 55涨停/267跌停, severe distribution skew to downside — index green is a mirage driven by heavyweight rotation."
+
+---
+
+## 2. Sector Analysis
+
+### Hot Sectors (Top 5 by 5-day performance)
+
+| Sector | 5d% | Trend | Driver |
+|---|---|---|---|
+| 油气开采Ⅱ | +9.14% | accelerating | US-Iran conflict, crude +9.4% |
+| 油服工程 | +7.19% | accelerating | Oil service demand, 通源石油 catalyst |
+| 白酒Ⅱ | +5.58% | defensive rotation | Flight to consumption defensives |
+| 煤炭开采 | +5.57% | accelerating | Energy complex rally |
+| 保险Ⅱ | +4.94% | steady | Rate/regulatory expectations |
+
+### Cold Sectors (Bottom 5)
+
+| Sector | 5d% | Trend | Issue |
+|---|---|---|---|
+| 玻璃玻纤 | -10.16% | deteriorating | PCB supply chain unwind |
+| 电子化学品Ⅱ | -10.06% | deteriorating | Semiconductor sell-off |
+| 非金属材料Ⅱ | -9.31% | deteriorating | Broad materials weakness |
+| 元件 | -8.26% | deteriorating | Tech hardware liquidation |
+| 塑料 | -7.41% | deteriorating | Chemical chain weakness |
+
+### Rotation Signal
+
+This is **not** a healthy rotation — it's a **panic-driven liquidation of tech + flight to safety**. Energy/resource strength is geopolitically driven (US-Iran), not fundamentally driven. The tech sell-off is broad and indiscriminate: PCB, CCL, semiconductor materials, electronic chemicals all being dumped.
+
+**Position alignment:** 0/0 positions — 100% cash. Correctly positioned for this environment.
+
+---
+
+## 3. Position Review
+
+**No active positions.** Portfolio is 100% cash (¥956,221). All previous positions were closed. Realized PnL stands at -¥43,779 (-4.38%).
+
+This is the correct state given the market regime. Cash is a position.
+
+---
+
+## 4. New Entry Candidates
+
+**Verdict: NONE. Hard block prevents all new entries.**
+
+Even if the block weren't in place, the candidate pool is problematic:
+
+### Most interesting candidates (academic interest only):
+
+**恒逸石化 (000703.SZ)** — The one stock I'd want to buy if regime allowed it:
+- RPS120: 95.65% (extended zone — needs sector justification, which it has: 石油石化 is top sector today)
+- dist_ma5: +3.2%, dist_ma10: +3.4%, dist_ma20: +2.9% — all within Rule 2b limits
+- Sector alignment: top-tier (油气/石油石化 is #1 hot sector)
+- But: not in enriched_candidates (no detailed catalyst/fundamental data), RPS120 >95% borderline
+
+**凯莱英 (002821.SZ)** — Good setup, wrong time:
+- RPS120: 92.87% (sweet spot)
+- dist_ma5: -8.1%, dist_ma10: -4.0% — below MAs (not chasing, but falling)
+- Sector: 医药生物/医疗研发外包 — CRO had a spike on 7/15 but got crushed 7/17
+- Recent: 跌停 on 7/16, 7/17 CRO sector sell-off
+- Catalyst: 股权激励 7/9, 业绩超预期 4/28 (aging)
+- Problem: sector not in top 30% today; stock in correction
+
+**永和股份 (605020.SH)** — Interesting but cold sector:
+- RPS120: 89.12%, dist_ma5: -4.6%
+- Sector: 基础化工/化学制品 (氟化工) — near bottom sectors (塑料 -7.41%)
+- Catalyst: ¥1.5-3B buyback announced 7/16
+- Problem: sector gravity against it
+
+**荣昌生物 (688331.SH)** — Strong fundamentals, weak tape:
+- RPS120: 89.78%, dist_ma5: -12.5%, dist_ma20: -7.5%
+- Sector: 医药生物/生物制品 (创新药) — CRO/创新药 sector volatile
+- Revenue growth +42%, 公募持股 34%
+- Problem: still loss-making, sector not top-tier, price in freefall
+
+### The MA Distance Rule
+
+Nearly every stock in the strategy pool has dist_ma5_pct of -10% to -30% — they're in freefall, not consolidating. Even the ones near MA support (凯莱英 dist_ma10 -4.0%, 永和 dist_ma5 -4.6%) are sliding, not basing. This is not a dip-buying environment; it's a liquidation cascade.
+
+---
+
+## 5. Skip List
+
+| Code | Name | Reason |
+|---|---|---|
+| 000703 | 恒逸石化 | Market regime HARD BLOCK. Sector (石油石化) is hot but breadth 0.47:1, 267 limit-downs. RPS120=95.65% extended zone. Not in enriched_candidates. |
+| 002821 | 凯莱英 | Market regime HARD BLOCK. Sector 医药生物 not in top 30%. dist_ma20=+5.3% from enriched data; stock down from MA5/MA10. |
+| 605020 | 永和股份 | Market regime HARD BLOCK. Sector 化学制品 near bottom zones (塑料 -7.41%). |
+| 688331 | 荣昌生物 | Market regime HARD BLOCK. Sector 医药生物 not top-tier, stock in liquidation (-12.5% from MA5). |
+| 603127 | 昭衍新药 | dist_ma20_pct=+19.5% — violates Rule 2b (>12% from MA20). Also 跌停 7/17, sector whipsaw. |
+| 300684 | 中石科技 | Sector 电子化学品Ⅱ is BOTTOM 2 today (-10.06%) — hard no-buy zone per Rule 1. |
+| 601126 | 四方股份 | RPS20=12.23 (near-zero short-term momentum), sector 电网设备 not hot today. |
+| 688777 | 中控技术 | Sector 自动化设备 neutral. dist_ma5=-7.0%, PE=189 (red flag per enriched data). Deleveraging signal on margin. |
+| 688502 | 茂莱光学 | PE=827 (red flag), sector 光学光电子 in cold zone. Core technician selling. |
+
+**Bottom line:** Even if the hard block lifted, only 恒逸石化 has the sector alignment, and it's borderline on RPS (>95%).
+
+---
+
+## 6. Learnings
+
+1. **[h077 confirmed — new evidence]** The hard block is preventing FOMO entries into a trap tape. 上证 +0.85% masks 267 limit-downs. V1 would have seen "index green" and bought. V2 correctly reads breadth and stays cash. Type: `rule` | Tags: `entry-filter` | Evidence: `supporting` | Mechanism: Index-level gains driven by heavyweight rotation hide severe underlying breadth deterioration. The up/down ratio and limit-down count are far more informative than headline index changes for momentum entry decisions.
+
+2. **[New observation]** When IV Rank hits 1.0 across all ETFs simultaneously (as it does today), it signals systemic panic, not isolated sector fear. This is historically a bottoming signal — but the momentum framework correctly waits for confirmation (breadth recovery, sector stabilization) rather than trying to catch the knife. The trade-off: you may miss the exact bottom, but you avoid catching a falling knife that keeps falling. Type: `heuristic` | Tags: `entry-filter`, `timing` | Evidence: `supporting` | Related: h077.
+
+3. **[New observation]** The enriched_candidates show that when a broad sell-off hits, even the highest-quality stocks show dist_ma5_pct of -10% to -30%. These are not "pullbacks to support" — they are liquidation events. The MA-distance rule (Rule 2b) was designed to prevent chasing extended stocks to the upside, but the same principle applies in reverse: stocks that have crashed -15%+ below their MAs in a matter of days have broken their trend structure and need time to rebuild bases. Type: `observation` | Tags: `entry-filter`, `timing` | Evidence: `supporting`.
+
+4. **[New signal]** The sector rotation today (energy/resources up, tech/electronics down) is geopolitically driven (US-Iran) rather than fundamentally driven. Geopolitics-driven rotations tend to reverse quickly when headlines shift. The framework's requirement for sector persistence (not just one-day spikes) protects against chasing these false rotations. Type: `signal` | Tags: `sector` | Evidence: `observation`.
+
+5. **[New observation]** 证监会 stabilization meeting + SOE buying (中国国新 ¥500B, 中国诚通 ¥10B) are policy responses that may create a short-term bounce. But policy-driven bounces in a momentum-down tape are unreliable for new positions — they create false signals. The framework correctly waits for market-driven breadth improvement, not policy headlines. Type: `observation` | Tags: `entry-filter`, `macro` | Evidence: `observation`.
+
+---
+
+## 7. Uncertainty Flags
+
+- **Uncertain about when the hard block should lift.** IV Rank at 1.0 historically implies a bottom within days, but the framework has no "policy intervention" exception. If breadth snaps back to >2:1 tomorrow, should we enter? The framework says yes once the gate clears — but the damage to individual stock charts (most are -15% to -30% from MAs) may take weeks to repair.
+- **Uncertain about 恒逸石化's sector classification.** It's in strategy_pool but not enriched_candidates. Its sector (石油石化) is clearly hot, but without enriched data (MA distances, catalysts from enriched source), I can't fully evaluate it. The strategy_pool MA data (dist_ma5 +3.2%) looks reasonable, but I only have partial data.
+- **Uncertain whether the CSRC meeting + SOE buying will be enough.** July 17 was the worst single-day drop of 2026. Today's "recovery" is very uneven (上证 green, breadth terrible). Tomorrow could go either way.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "油气开采Ⅱ", "5d_pct": 9.14, "trend": "accelerating"},
+      {"name": "油服工程", "5d_pct": 7.19, "trend": "accelerating"},
+      {"name": "白酒Ⅱ", "5d_pct": 5.58, "trend": "defensive_rotation"},
+      {"name": "煤炭开采", "5d_pct": 5.57, "trend": "accelerating"},
+      {"name": "保险Ⅱ", "5d_pct": 4.94, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "玻璃玻纤", "5d_pct": -10.16, "trend": "deteriorating"},
+      {"name": "电子化学品Ⅱ", "5d_pct": -10.06, "trend": "deteriorating"},
+      {"name": "非金属材料Ⅱ", "5d_pct": -9.31, "trend": "deteriorating"},
+      {"name": "元件", "5d_pct": -8.26, "trend": "deteriorating"},
+      {"name": "塑料", "5d_pct": -7.41, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/0 positions (100% cash)",
+    "regime": "PANIC — tech liquidation into resource/defensive rotation. 上证 index gain (+0.85%) masks severe breadth deterioration (0.47:1, 267 limit-downs). US-Iran conflict driving energy, CSRC stabilization meeting today."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "Market regime HARD BLOCK (breadth 0.47:1, 267 limit-downs). Sector 石油石化 is hot (+9.14%) but RPS120=95.65% in extended zone. Not in enriched_candidates — insufficient data to size even if regime allowed.",
+      "rps120": 95.65
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "Market regime HARD BLOCK. Sector 医药生物 not in top 30%. RPS120=92.87% in sweet spot but dist_ma5=-8.1% — stock in correction, not basing. CRO sector whipsawed 7/15→7/17.",
+      "rps120": 92.87
+    },
+    {
+      "code": "605020",
+      "name": "永和股份",
+      "reason": "Market regime HARD BLOCK. Sector 化学制品 near bottom zones (塑料 -7.41%). RPS120=89.12%, dist_ma5=-4.6%. Buyback catalyst (¥1.5-3B) is positive but sector gravity against it.",
+      "rps120": 89.12
+    },
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "reason": "Sector 电子化学品Ⅱ is BOTTOM 2 today at -10.06% — hard no-buy zone per Rule 1 regardless of individual stock quality. RPS120=89.66%.",
+      "rps120": 89.66
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物",
+      "reason": "Market regime HARD BLOCK. Sector 医药生物 not in top 30%. RPS120=89.78%, dist_ma5=-12.5% — deep in liquidation. Strong fundamentals (revenue +42%, 公募 34%) but price is truth.",
+      "rps120": 89.78
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "reason": "dist_ma20_pct=+19.5% from enriched data — violates Rule 2b hard cap (>12% from MA20). Also 跌停 7/17 with sector whipsaw. Enriched data confirms MA20 extension risk.",
+      "rps120": 86.13
+    },
+    {
+      "code": "688777",
+      "name": "中控技术",
+      "reason": "Market regime HARD BLOCK. Sector 自动化设备 neutral. PE=189 (red flag per enriched data), dist_ma5=-7.0%. Margin signal: deleveraging (net5_repay_days=5). No sector catalyst edge.",
+      "rps120": 94.96
+    },
+    {
+      "code": "601126",
+      "name": "四方股份",
+      "reason": "Market regime HARD BLOCK. RPS20=12.23 — near-zero short-term momentum, stock in deep correction. Sector 电网设备 not in today's hot sectors despite fundamental quality (score_company 9.4).",
+      "rps120": 93.29
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Hard block confirmed effective: 上证 +0.85% masks 267 limit-downs and 0.47:1 breadth. V1 would have seen 'index green' and bought into a trap tape. V2 correctly reads breadth and stays cash. The index gain is entirely driven by heavyweight resource/financial rotation while the broad market liquidates.",
+      "type": "rule",
+      "tags": ["entry-filter", "breadth"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "Index-level gains from heavyweight rotation hide severe underlying breadth deterioration. The up/down ratio and limit-down count are far more informative than headline index changes for momentum entry decisions."
+    },
+    {
+      "text": "IV Rank at 1.0 across ALL ETFs simultaneously signals systemic panic, not isolated fear. Historically a bottoming signal — but momentum framework correctly waits for breadth recovery + sector stabilization rather than catching knives. The opportunity cost of waiting 1-3 days for confirmation is far lower than the risk of entering during a liquidation cascade.",
+      "type": "heuristic",
+      "tags": ["entry-filter", "timing", "volatility"],
+      "evidence_type": "supporting",
+      "mechanism": "Extreme IV across all underlyings means options market pricing systemic meltdown risk. While this often precedes a V-bottom, the momentum framework's edge comes from entering after trend re-establishment, not before."
+    },
+    {
+      "text": "When broad sell-off hits, even highest-quality stocks show dist_ma5_pct of -10% to -30% — these are liquidation events, not pullbacks. The MA-distance framework works in reverse: stocks that crashed through all MAs in days have broken trend structure and need weeks to rebuild bases before re-entry.",
+      "type": "observation",
+      "tags": ["entry-filter", "timing", "technical"],
+      "evidence_type": "supporting",
+      "mechanism": "A stock -15% below MA5 has broken its short-term trend. Momentum entries require an established uptrend; these stocks are in downtrends and need to form new bases before they become actionable."
+    },
+    {
+      "text": "Geopolitics-driven sector rotations (US-Iran → energy surge) tend to reverse quickly when headlines shift. The framework's implicit requirement for sector persistence protects against chasing one-day spikes into sectors that may not sustain.",
+      "type": "signal",
+      "tags": ["sector", "macro"],
+      "evidence_type": "observation",
+      "mechanism": "Supply-shock-driven sector moves (oil, defense) are headline-dependent. Unlike earnings-driven or policy-driven sector moves, they can reverse within hours if conflict de-escalates. Momentum framework should demand multi-day sector confirmation before entering geopolitically-driven sectors."
+    },
+    {
+      "text": "CSRC stabilization meeting + SOE buying (¥500B+) may create a short-term bounce, but policy-driven bounces in momentum-down tapes create false entry signals. Wait for market-driven breadth improvement, not policy headlines.",
+      "type": "observation",
+      "tags": ["macro", "entry-filter"],
+      "evidence_type": "observation",
+      "mechanism": "Policy interventions create transient liquidity events that fade. True regime change requires sustained breadth improvement (>1.5:1 for 2+ consecutive days) before re-entering."
+    }
+  ],
+  "market_summary": "PANIC regime with deceptive index. 上证 +0.85% driven by energy/financial heavyweight rotation; underneath, breadth 0.47:1 with 267 limit-downs. Tech/semiconductor sectors in liquidation (-8% to -10%). IV Rank 1.0 across all ETFs — extreme fear. CSRC holding stabilization meeting today; SOEs deploying ¥500B+. Oil surge on US-Iran conflict driving resource rotation. 100% cash is the correct position. No new entries until breadth recovers above 1.5:1 and f10 drops below 30.",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}
+```

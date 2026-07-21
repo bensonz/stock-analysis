@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 275646,
+  "output_tokens": 12109,
+  "rounds": 4,
+  "duration_sec": 219.3,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 今日 热点 板块 半导体 大涨 2026年7月21日",
+        "max_results": 5
+      },
+      "result_length": 3293
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "科创50 创业板 大涨 原因 2026年7月21日 政策",
+        "max_results": 5
+      },
+      "result_length": 2995
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体板块 8% 涨幅 2026年7月 催化 国产替代",
+        "max_results": 5
+      },
+      "result_length": 831
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "扬杰科技 300373 半年报 2026 碳化硅 功率半导体"
+      },
+      "result_length": 3336
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 融资盘 爆仓 去杠杆 2026年7月 市场调整"
+      },
+      "result_length": 3269
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "凯莱英 002821 CRO 医药 2026年7月 创新药"
+      },
+      "result_length": 2478
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 7月21日 探底回升 国家队 增持 央企 回购 稳定市场"
+      },
+      "result_length": 1159
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "昭衍新药 603127 半年报 2026 业绩 CRO 跌停"
+      },
+      "result_length": 2284
+    }
+  ],
+  "fallback_used": false
+}
