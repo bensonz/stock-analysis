@@ -1,0 +1,169 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": 11.84,
+        "trend": "accelerating — semiconductor material price surge"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": 11.81,
+        "trend": "accelerating — AI chip demand + earnings beats"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": 9.2,
+        "trend": "steady — AI infrastructure buildout"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": 8.18,
+        "trend": "recovering"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": 8.06,
+        "trend": "recovering"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": -3.64,
+        "trend": "deteriorating — resources rotating out"
+      },
+      {
+        "name": "油服工程",
+        "5d_pct": -3.11,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "渔业",
+        "5d_pct": -2.85,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": -2.69,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "养殖业",
+        "5d_pct": -2.35,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/0 positions (100% cash)",
+    "regime": "Tech/semiconductor leadership persisting through selloff and bounce. Resources, financials, agri rotating out. Post-panic recovery day — strong sector signal but individual stocks still repairing technical damage."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "reason": "Semiconductor #2 hot sector, RPS120 93.15 in sweet spot, H1 earnings +20-40% catalyst, SiC expansion, 0 risks. BUT: -12.2% below MA5 (stock still recovering from selloff), breadth gate 1.35 < 1.50. Top candidate to enter when breadth clears and stock stabilizes near MA5.",
+      "rps120": 93.15
+    },
+    {
+      "code": "301536",
+      "name": "星宸科技",
+      "reason": "Semiconductor #2 hot sector, RPS120 94.80, H1 earnings +583-650% (strongest catalyst in pool), AI edge computing secular trend, 0 risks, margin adding. BUT: -13.2% below MA5, breadth below gate. Best fundamental story — monitor closely for MA convergence.",
+      "rps120": 94.8
+    },
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "reason": "#1 sector 电子化学品Ⅱ, RPS120 89.66, margin surging +126%, company buyback program. BUT: -15.3% below MA5, deeply oversold from tech selloff. Sector leader but needs to show individual stock strength before entry.",
+      "rps120": 89.66
+    },
+    {
+      "code": "688378",
+      "name": "奥来德",
+      "reason": "光学光电子 sector, RPS120 93.93, +5950% profit growth catalyst. BUT: -11.9% below MA5, earnings quality risk (扣非仅37% of net profit). Defer.",
+      "rps120": 93.93
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "医药生物 is cold sector (bottom half). RPS120 92.87, good fundamentals, but sector gravity overrides. REJECT regardless of stock quality.",
+      "rps120": 92.87
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "reason": "Rule 2b violation: dist_ma20 +19.5% exceeds 12% max. Stock is dangerously overextended above MA20. Also cold sector (医药生物). Hard reject.",
+      "rps120": 86.13
+    },
+    {
+      "code": "002192",
+      "name": "融捷股份",
+      "reason": "锂板块 in bottom sectors — '近3月走势弱于98.8%板块'. 5 risk factors including sector weakness. Sector death — no entry possible.",
+      "rps120": 91.66
+    },
+    {
+      "code": "601958",
+      "name": "金钼股份",
+      "reason": "有色金属/小金属 sector rotating out (not in top 30%). Good fundamentals but wrong sector. No current price data for skip — sector rejection is sufficient.",
+      "rps120": 91.33
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Post-panic recovery days create tension: sectors are hot (+11%) but individual stocks remain below MAs (-12% to -25%). V2 momentum framework says wait for individual strength confirmation rather than buying the turn. This discipline prevented chasing 昭衍新药 (dist_ma20 +19.5%, Rule 2b violation).",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "Sector strength can mask individual stock weakness during V-bottoms. MA-distance discipline ensures entries happen when stocks confirm recovery, not when they're merely bouncing."
+    },
+    {
+      "text": "Breadth quality vs quantity: 1.35:1 ratio understates today's tape quality. r7_10 + r10 = 590 stocks surging 7%+ vs only 29 limit-downs. A modified breadth gate weighting magnitude (e.g., (r7_10+r10)/(f7_10+f10) > 5) could better identify high-conviction recovery days vs weak breadth days.",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Standard up/down ratio treats +0.01% and +10% equally. On strong sector rotation days, concentration of big movers in tech can produce high-quality breadth that a simple ratio misses."
+    },
+    {
+      "text": "IV at 1.00 rank (panic extremes) across all ETFs historically signals medium-term buying opportunity, but short-term volatility makes -5% hard stops vulnerable. Consider: when IV rank > 0.90, widen stops to -7% and reduce position size by 25% to accommodate gap risk, especially in 科创板 names.",
+      "type": "rule",
+      "tags": [
+        "position-sizing",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "Extreme IV implies daily swings of 5-10% are normal. A -5% stop in a 10% daily range environment triggers on noise, not thesis failure. Wider stops with smaller sizing preserve the trade thesis while managing total risk."
+    },
+    {
+      "text": "The 2-week tech selloff was driven by technical factors (长鑫存储 295亿 IPO liquidity drain, forced margin deleveraging) not fundamental deterioration. Star宸科技 H1 +583-650% and 扬杰科技 H1 +20-40% confirm AI/semiconductor demand remains strong. This pattern — technical flush in a structural bull trend — historically produces the best risk/reward entries.",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h028",
+      "mechanism": "IPO liquidity events and margin cascades are transient. When they hit structurally growing sectors, the subsequent recovery is typically sharp (today +10.73% on 科创50 confirms)."
+    },
+    {
+      "text": "Margin signal corroboration: 中石科技 margin chg5 +126% (adding) vs 思瑞浦/路维光电/扬杰科技 all showing deleveraging (-9% to -12%). In a recovery, stocks with margin adding are showing smart-money conviction. This should be weighted more heavily when comparing otherwise similar candidates.",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "Margin adding during a selloff indicates leveraged sophisticated investors see the dip as an opportunity, not a reason to exit. Deleveraging during the same period indicates forced selling or loss of conviction."
+    }
+  ],
+  "market_summary": "Explosive tech recovery day: 科创50 +10.73%, 创业板 +7.05%, driven by semiconductor material price surges (六氟化钨 +232% YoY) and AI demand. Breadth 1.35:1 (below 1.5 entry gate). 121 limit-ups, 29 limit-downs. IV at panic extremes (rank 1.00 across all ETFs) — historically a contrarian buy signal but short-term volatility remains extreme. Tech/semiconductor leadership structural; resources/banks/agri rotating out. Portfolio 100% cash — no forced entries on borderline breadth. Monitor 星宸科技, 扬杰科技, 中石科技 for entry when breadth > 1.5:1 and individual MAs stabilize.",
+  "market_sentiment": "cautiously_bullish",
+  "market_call": "观望偏积极 — strong sector signal but breadth below gate and all candidates still repairing technical damage. Cash is a position. Re-evaluate tomorrow."
+}

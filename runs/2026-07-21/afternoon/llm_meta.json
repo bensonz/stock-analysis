@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 282692,
+  "output_tokens": 14010,
+  "rounds": 4,
+  "duration_sec": 267.3,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月21日 半导体 电子化学品 大涨 原因",
+        "max_results": 5
+      },
+      "result_length": 2875
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "科创50 大涨10% 2026年7月21日 原因 算力 芯片",
+        "max_results": 5
+      },
+      "result_length": 1547
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "扬杰科技 300373 2026年半年报 业绩预告 SiC 碳化硅",
+        "max_results": 5
+      },
+      "result_length": 2624
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "扬杰科技 300373 2026上半年 业绩 功率半导体 AI服务器 碳化硅"
+      },
+      "result_length": 2594
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "星宸科技 301536 2026半年报 净利润 增长 业绩预告"
+      },
+      "result_length": 3189
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 2026年7月21日 复盘 市场总结 科技股 半导体 暴涨"
+      },
+      "result_length": 3243
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "中石科技 300684 2026 半年报 液冷 散热 业绩"
+      },
+      "result_length": 2394
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 2026年7月 科技股调整 半导体 回调 超跌反弹"
+      },
+      "result_length": 3371
+    }
+  ],
+  "fallback_used": false
+}

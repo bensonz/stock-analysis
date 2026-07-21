@@ -1,0 +1,50 @@
+{
+  "date": "2026-07-21",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1784619643.2120252,
+      "errors": [],
+      "end": 1784619699.752446,
+      "duration_sec": 56.5
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 16448,
+      "tokens": {
+        "input_tokens": 282692,
+        "output_tokens": 14010
+      },
+      "rounds": 4,
+      "tool_calls_count": 8,
+      "duration_sec": 267.3,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1784619967.102877,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=39",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=128",
+        "Hypothesis: Created h111 (observation): IV at 1.00 rank (panic extremes) across all ETFs historically signals medium-ter...",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=43",
+        "Hypothesis: Created h112 (observation): Margin signal corroboration: 中石科技 margin chg5 +126% (adding) vs 思瑞浦/路维光电/扬杰科技 al...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1784619967.608236,
+      "duration_sec": 0.5
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 324.3
+  }
+}

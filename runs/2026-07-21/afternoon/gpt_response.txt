@@ -1,0 +1,243 @@
+# Research Memo — 2026-07-21
+
+## 1. Market Regime
+
+**Today: Explosive tech recovery after a brutal 2-week selloff.**
+
+| Index | Close | Change |
+|-------|-------|--------|
+| 上证指数 | 3864 | +1.79% |
+| 深证成指 | 14264 | +4.81% |
+| 创业板指 | 3686 | +7.05% |
+| 科创50 | 1903 | **+10.73%** |
+
+**Breadth:** 3107↑ / 2301↓ / 118 flat — ratio **1.35:1** (below 1.5:1 entry gate). Distribution reveals a bifurcated tape: 590 stocks surged +7% or more (469 in r7_10, 121 limit-ups), while 1398 stocks are only marginally down (f0_2). The rally is **powerful at the top but thin in the middle** — not broad-based enough for the V2 entry gate.
+
+**IV Sentiment:** Extreme panic across all ETFs. 科创50 IV rank = 1.00, 创业板 = 1.00, 500ETF = 1.00. Overall signal: "极度恐慌 — historically a medium-term buying opportunity but short-term volatility remains extreme." Per Rule: IV > 75% → only buy strongest setups, wide stops.
+
+**Entry Regime:** System says `allow_new_positions: true, regime: balanced`. However, the V2 minimum buy gate (1.5:1 breadth) is not met at 1.35:1. Given the framework's explicit rule, I'm treating this as a **"close but no cigar"** day — no forced entries.
+
+**Macro context (from web research):** The 2-week selloff was driven by 长鑫存储's 295亿 IPO liquidity drain, Meta AI capex ROI fears, global tech rotation, and forced margin liquidations (融资爆仓). Today's bounce is fueled by semiconductor material price surges (六氟化钨 +232% YoY, 电子级氢氟酸 +18%), AI edge computing adoption (星宸科技 SSR670 chip ramp), and short-covering after the panic. Fundamentals have not deteriorated — this is a technical flush, not a thesis break.
+
+---
+
+## 2. Sector Analysis
+
+**Hot Sectors (today's 1d performance):**
+
+| Rank | Sector | Δ% | Theme |
+|------|--------|-----|-------|
+| #1 | 电子化学品Ⅱ | +11.84% | Semiconductor materials, 六氟化钨/氢氟酸 price surge |
+| #2 | 半导体 | +11.81% | AI chip demand, domestic substitution, earnings beats |
+| #3 | 通信设备 | +9.20% | AI infrastructure, data center buildout |
+| #4 | 其他电子Ⅱ | +8.18% | Broad electronics recovery |
+| #5 | 玻璃玻纤 | +8.06% | Materials reflation |
+
+**Cold Sectors:**
+
+| Rank | Sector | Δ% | Why cold |
+|------|--------|-----|----------|
+| Bottom 1 | 油气开采Ⅱ | -3.64% | Oil price pressure, energy rotation out |
+| Bottom 2 | 油服工程 | -3.11% | Same |
+| Bottom 3 | 渔业 | -2.85% | Defensive/cyclical laggard |
+| Bottom 4 | 国有大型银行Ⅱ | -2.69% | Rate-cut expectations hurting NIM |
+| Bottom 5 | 养殖业 | -2.35% | Agri cycle weak |
+
+**Rotation Signal:** Clear rotation FROM resources/defensives INTO tech/semiconductors. This is a **persistent theme** (AI + domestic substitution), not a one-day spike. The selloff was technical (IPO drain, margin deleveraging), not fundamental.
+
+**Position Alignment:** 0/0 — no active positions.
+
+---
+
+## 3. Position Review
+
+**No active positions.** Portfolio is 100% cash (¥956,221), realized PnL -¥43,779 (-4.38%).
+
+---
+
+## 4. New Entry Candidates — All DEFERRED
+
+The key issue today: **Every candidate in the strategy pool is significantly below its moving averages.** This is a consequence of the 2-week tech massacre. Even with today's +10.73% 科创50 surge, individual names haven't recovered to MA5 support.
+
+| Candidate | Sector (Rank) | RPS120 | dist_ma5 | dist_ma10 | dist_ma20 | Verdict |
+|-----------|---------------|--------|----------|-----------|-----------|---------|
+| 扬杰科技 300373 | 半导体 (#2) | 93.15 | **-12.2%** | -21.8% | -24.9% | DEFER — too far below MA |
+| 星宸科技 301536 | 半导体 (#2) | 94.80 | **-13.2%** | -18.4% | -18.9% | DEFER — despite +583% earnings catalyst |
+| 中石科技 300684 | 电子化学品Ⅱ (#1) | 89.66 | **-15.3%** | -18.8% | -13.0% | DEFER — #1 sector but deeply oversold |
+| 奥来德 688378 | 光学光电子 | 93.93 | **-11.9%** | -19.6% | -20.2% | DEFER |
+| 思瑞浦 688536 | 半导体 (#2) | 93.49 | **-14.4%** | -22.7% | -24.1% | DEFER |
+| 路维光电 688401 | 半导体 (#2) | 93.03 | **-14.2%** | -22.3% | -21.2% | DEFER |
+| 凯莱英 002821 | 医药生物 (COLD) | 92.87 | -8.1% | -4.0% | +5.3% | REJECT — cold sector |
+
+**The structural problem:** V2 says "buy strength." Every single candidate is showing weakness relative to its own trend (all below MA5, most -12% to -25% below MA20). The sector strength is real but hasn't translated to individual stock recovery yet. Today could be Day 1 of a recovery — but V2 enters on confirmation, not anticipation.
+
+**Top candidates to monitor tomorrow if breadth > 1.5:1:**
+1. **星宸科技** — Best catalyst (H1 +583-650%, AI edge computing secular trend), 0 risks, margin adding
+2. **扬杰科技** — Solid catalyst (H1 +20-40%, SiC doubling), 0 risks, semiconductor sector leader
+3. **中石科技** — #1 sector, margin surging +126%, company buying back stock
+
+---
+
+## 5. Skip List
+
+| Code | Name | Reason |
+|------|------|--------|
+| 300373 | 扬杰科技 | Semiconductor #2 sector, RPS 93.15, H1 +20-40% catalyst, 0 risks. DEFER: -12.2% below MA5, breadth gate (1.35) below 1.5 minimum. Top candidate when conditions clear. |
+| 301536 | 星宸科技 | Semiconductor #2 sector, RPS 94.80, H1 +583-650% monster earnings, AI edge computing catalyst. DEFER: -13.2% below MA5. Strongest fundamental story in pool. |
+| 300684 | 中石科技 | #1 sector 电子化学品Ⅱ, RPS 89.66, margin +126%, buyback program. DEFER: -15.3% below MA5. Sector leader but deeply oversold from selloff. |
+| 688378 | 奥来德 | 光学光电子 sector, RPS 93.93, +5950% profit growth. DEFER: -11.9% below MA5, earnings quality concerns (扣非仅37%). |
+| 002821 | 凯莱英 | 医药生物 is COLD sector. RPS 92.87, good fundamentals but sector gravity says no. REJECT. |
+| 603127 | 昭衍新药 | dist_ma20 +19.5% violates Rule 2b (>12% above MA20). Also 医药生物 cold sector. REJECT. |
+| 688777 | 中控技术 | 自动化设备 not in top sectors. -7.0% below MA5. REJECT — sector not hot enough. |
+| 688331 | 荣昌生物 | 医药生物 cold sector. Still operating at a loss (-5.5亿 net profit). REJECT. |
+| 601126 | 四方股份 | 电网设备 not in today's top 5. -9.5% below MA5. REJECT — sector not hot enough. |
+| 600961 | 株冶集团 | 有色金属/铅锌 — bottom sectors (resources rotating out). REJECT — cold sector. |
+| 002192 | 融捷股份 | 锂 — bottom sectors, "近3月锂板块疲软，走势弱于98.8%板块." REJECT — sector death. |
+| 601958 | 金钼股份 | 有色金属/小金属 — sector rotating out. REJECT — cold sector. |
+
+---
+
+## 6. Learnings
+
+1. **[h028 confirmed]** Today's relative leaders are concentrated in semiconductors and electronics chemicals, while resources/agri/banking laggards are being aggressively de-risked. This pattern has now held through both the selloff and the bounce — tech leadership is structural.
+
+2. **[New observation]** The 1.35:1 breadth today masks the quality of the rally: 590 stocks surged +7%+, only 29 hit limit-down. The breadth ratio is dragged down by 1398 stocks barely down (f0_2). A modified breadth metric weighting magnitude would show a much stronger tape. Hypothesis: when r7_10 + r10 > 500 and f10 < 30, the 1.5:1 gate could be relaxed.
+
+3. **[New observation]** Post-panic recovery days create a tension in V2: sectors are hot but individual stocks are below MAs. Pure momentum says wait. But mean-reversion buyers will get the best entries. V2 must decide whether it's momentum-first or willing to buy the turn. Current answer: wait for confirmation (MA convergence).
+
+4. **[New observation]** IV at 1.00 rank across all ETFs is historically a strong contrarian buy signal. But the last time this happened (July 17-20), it preceded today's +10.73% bounce. Panic IV is a regime indicator, not a timing tool.
+
+5. **[h027 confirmed]** MA-distance discipline remains critical: 昭衍新药 at +19.5% above MA20 was correctly rejected despite appearing "strong" — this is exactly the kind of overextension that leads to mean-reversion losses.
+
+6. **[h019 confirmed]** Bottom-list sectors (油气开采, 油服工程, 银行, 养殖) are hard no-buy zones. Multiple candidates (融捷股份, 金钼股份, 荣昌生物, 凯莱英) were correctly rejected purely on sector grounds.
+
+---
+
+## 7. Uncertainty Flags
+
+- **Breadth gate calibration:** The 1.35 vs 1.50 call is marginal. With 121 limit-ups and all 3 major indices strongly green, I could justify a SMALL BUY. I'm erring conservative because the portfolio is already -4.38% and V1's biggest sin was forcing entries in borderline conditions.
+- **MA-distance asymmetry:** All candidates are below MAs (not chasing risk). But being deeply below MAs is its own risk — these are stocks in downtrends bouncing. V2 doesn't have a clear rule for "too far BELOW MAs." Should it?
+- **Catalyst strength vs technical damage:** 星宸科技's +583-650% earnings growth is the strongest catalyst in the pool. If I believe catalysts drive price, buying the dip in a hot sector makes sense. But V2's Rule 2 (buy strength, RPS 75-95%) was built for trending markets, not V-bottoms.
+- **IV panic = opportunity or trap?** The system says IV at 1.00 historically marks buying opportunities. But buying into extreme volatility requires wider stops and smaller sizing — V2's -5% hard stop is particularly vulnerable in a +10%/-10% daily swing environment.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "电子化学品Ⅱ", "5d_pct": 11.84, "trend": "accelerating — semiconductor material price surge"},
+      {"name": "半导体", "5d_pct": 11.81, "trend": "accelerating — AI chip demand + earnings beats"},
+      {"name": "通信设备", "5d_pct": 9.20, "trend": "steady — AI infrastructure buildout"},
+      {"name": "其他电子Ⅱ", "5d_pct": 8.18, "trend": "recovering"},
+      {"name": "玻璃玻纤", "5d_pct": 8.06, "trend": "recovering"}
+    ],
+    "cold_sectors": [
+      {"name": "油气开采Ⅱ", "5d_pct": -3.64, "trend": "deteriorating — resources rotating out"},
+      {"name": "油服工程", "5d_pct": -3.11, "trend": "deteriorating"},
+      {"name": "渔业", "5d_pct": -2.85, "trend": "deteriorating"},
+      {"name": "国有大型银行Ⅱ", "5d_pct": -2.69, "trend": "deteriorating"},
+      {"name": "养殖业", "5d_pct": -2.35, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/0 positions (100% cash)",
+    "regime": "Tech/semiconductor leadership persisting through selloff and bounce. Resources, financials, agri rotating out. Post-panic recovery day — strong sector signal but individual stocks still repairing technical damage."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "reason": "Semiconductor #2 hot sector, RPS120 93.15 in sweet spot, H1 earnings +20-40% catalyst, SiC expansion, 0 risks. BUT: -12.2% below MA5 (stock still recovering from selloff), breadth gate 1.35 < 1.50. Top candidate to enter when breadth clears and stock stabilizes near MA5.",
+      "rps120": 93.15
+    },
+    {
+      "code": "301536",
+      "name": "星宸科技",
+      "reason": "Semiconductor #2 hot sector, RPS120 94.80, H1 earnings +583-650% (strongest catalyst in pool), AI edge computing secular trend, 0 risks, margin adding. BUT: -13.2% below MA5, breadth below gate. Best fundamental story — monitor closely for MA convergence.",
+      "rps120": 94.80
+    },
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "reason": "#1 sector 电子化学品Ⅱ, RPS120 89.66, margin surging +126%, company buyback program. BUT: -15.3% below MA5, deeply oversold from tech selloff. Sector leader but needs to show individual stock strength before entry.",
+      "rps120": 89.66
+    },
+    {
+      "code": "688378",
+      "name": "奥来德",
+      "reason": "光学光电子 sector, RPS120 93.93, +5950% profit growth catalyst. BUT: -11.9% below MA5, earnings quality risk (扣非仅37% of net profit). Defer.",
+      "rps120": 93.93
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "医药生物 is cold sector (bottom half). RPS120 92.87, good fundamentals, but sector gravity overrides. REJECT regardless of stock quality.",
+      "rps120": 92.87
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "reason": "Rule 2b violation: dist_ma20 +19.5% exceeds 12% max. Stock is dangerously overextended above MA20. Also cold sector (医药生物). Hard reject.",
+      "rps120": 86.13
+    },
+    {
+      "code": "002192",
+      "name": "融捷股份",
+      "reason": "锂板块 in bottom sectors — '近3月走势弱于98.8%板块'. 5 risk factors including sector weakness. Sector death — no entry possible.",
+      "rps120": 91.66
+    },
+    {
+      "code": "601958",
+      "name": "金钼股份",
+      "reason": "有色金属/小金属 sector rotating out (not in top 30%). Good fundamentals but wrong sector. No current price data for skip — sector rejection is sufficient.",
+      "rps120": 91.33
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Post-panic recovery days create tension: sectors are hot (+11%) but individual stocks remain below MAs (-12% to -25%). V2 momentum framework says wait for individual strength confirmation rather than buying the turn. This discipline prevented chasing 昭衍新药 (dist_ma20 +19.5%, Rule 2b violation).",
+      "type": "observation",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "Sector strength can mask individual stock weakness during V-bottoms. MA-distance discipline ensures entries happen when stocks confirm recovery, not when they're merely bouncing."
+    },
+    {
+      "text": "Breadth quality vs quantity: 1.35:1 ratio understates today's tape quality. r7_10 + r10 = 590 stocks surging 7%+ vs only 29 limit-downs. A modified breadth gate weighting magnitude (e.g., (r7_10+r10)/(f7_10+f10) > 5) could better identify high-conviction recovery days vs weak breadth days.",
+      "type": "heuristic",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Standard up/down ratio treats +0.01% and +10% equally. On strong sector rotation days, concentration of big movers in tech can produce high-quality breadth that a simple ratio misses."
+    },
+    {
+      "text": "IV at 1.00 rank (panic extremes) across all ETFs historically signals medium-term buying opportunity, but short-term volatility makes -5% hard stops vulnerable. Consider: when IV rank > 0.90, widen stops to -7% and reduce position size by 25% to accommodate gap risk, especially in 科创板 names.",
+      "type": "rule",
+      "tags": ["position-sizing", "exit-rule"],
+      "evidence_type": "supporting",
+      "mechanism": "Extreme IV implies daily swings of 5-10% are normal. A -5% stop in a 10% daily range environment triggers on noise, not thesis failure. Wider stops with smaller sizing preserve the trade thesis while managing total risk."
+    },
+    {
+      "text": "The 2-week tech selloff was driven by technical factors (长鑫存储 295亿 IPO liquidity drain, forced margin deleveraging) not fundamental deterioration. Star宸科技 H1 +583-650% and 扬杰科技 H1 +20-40% confirm AI/semiconductor demand remains strong. This pattern — technical flush in a structural bull trend — historically produces the best risk/reward entries.",
+      "type": "signal",
+      "tags": ["sector", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h028",
+      "mechanism": "IPO liquidity events and margin cascades are transient. When they hit structurally growing sectors, the subsequent recovery is typically sharp (today +10.73% on 科创50 confirms)."
+    },
+    {
+      "text": "Margin signal corroboration: 中石科技 margin chg5 +126% (adding) vs 思瑞浦/路维光电/扬杰科技 all showing deleveraging (-9% to -12%). In a recovery, stocks with margin adding are showing smart-money conviction. This should be weighted more heavily when comparing otherwise similar candidates.",
+      "type": "heuristic",
+      "tags": ["entry-filter"],
+      "evidence_type": "supporting",
+      "mechanism": "Margin adding during a selloff indicates leveraged sophisticated investors see the dip as an opportunity, not a reason to exit. Deleveraging during the same period indicates forced selling or loss of conviction."
+    }
+  ],
+  "market_summary": "Explosive tech recovery day: 科创50 +10.73%, 创业板 +7.05%, driven by semiconductor material price surges (六氟化钨 +232% YoY) and AI demand. Breadth 1.35:1 (below 1.5 entry gate). 121 limit-ups, 29 limit-downs. IV at panic extremes (rank 1.00 across all ETFs) — historically a contrarian buy signal but short-term volatility remains extreme. Tech/semiconductor leadership structural; resources/banks/agri rotating out. Portfolio 100% cash — no forced entries on borderline breadth. Monitor 星宸科技, 扬杰科技, 中石科技 for entry when breadth > 1.5:1 and individual MAs stabilize.",
+  "market_sentiment": "cautiously_bullish",
+  "market_call": "观望偏积极 — strong sector signal but breadth below gate and all candidates still repairing technical damage. Cash is a position. Re-evaluate tomorrow."
+}
+```
