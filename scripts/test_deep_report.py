@@ -131,10 +131,12 @@ def test_generate_openai_orchestration(monkeypatch):
     monkeypatch.setattr(llm_client, "OPENAI_MODEL", "fake-model")
     monkeypatch.setattr(llm_client, "_run_openai_tool_loop",
                         lambda *a, **k: ("# 报告\n结论：中性", 1000, 2000, 3))
-    res = deep_report.generate("000703", provider="openai", data={"code": "000703.SZ"})
+    res = deep_report.generate("000703", provider="openai", data={"code": "000703.SZ"},
+                               verify=False)
     assert res["text"].startswith("# 报告")
     assert res["provider"] == "openai" and res["model"] == "fake-model"
     assert res["input_tokens"] == 1000 and res["output_tokens"] == 2000 and res["rounds"] == 3
+    assert res["verify_audit"] is None and res["verify_rounds"] == 0
 
 
 def test_generate_anthropic_branch(monkeypatch):
@@ -144,8 +146,64 @@ def test_generate_anthropic_branch(monkeypatch):
     monkeypatch.setattr(llm_client, "DEFAULT_MODEL", "fake-claude")
     monkeypatch.setattr(llm_client, "_run_tool_loop",
                         lambda *a, **k: ("结论：看空", 5, 6, 1))
-    res = deep_report.generate("000703", provider="anthropic", data={"code": "000703.SZ"})
+    res = deep_report.generate("000703", provider="anthropic", data={"code": "000703.SZ"},
+                               verify=False)
     assert res["model"] == "fake-claude" and res["text"] == "结论：看空"
+
+
+# --------------------------------------------------------------------------- #
+# Citation-verify orchestration
+# --------------------------------------------------------------------------- #
+def test_generate_verify_orchestration(monkeypatch):
+    import deep_verify
+    import llm_client
+    monkeypatch.setattr(llm_client, "normalize_llm_provider", lambda p: "openai")
+    monkeypatch.setattr(llm_client, "_build_openai_client", lambda: object())
+    monkeypatch.setattr(llm_client, "OPENAI_MODEL", "fake-model")
+    monkeypatch.setattr(llm_client, "_run_openai_tool_loop",
+                        lambda *a, **k: ("# 草稿", 1000, 2000, 3))
+    canned_audit = {"rounds": [{"round": 1}], "final": {"total": 0}}
+    seen = {}
+
+    def fake_pipeline(draft, data, **kw):
+        seen["draft"] = draft
+        seen["max_rounds"] = kw["max_rounds"]
+        return "# 已核验报告\n\n---\n数据核验：0处数字。", canned_audit
+
+    monkeypatch.setattr(deep_verify, "run_pipeline", fake_pipeline)
+    res = deep_report.generate("000703", provider="openai", data={"code": "000703.SZ"},
+                               verify=True, max_verify_rounds=3)
+    assert seen["draft"] == "# 草稿" and seen["max_rounds"] == 3
+    assert res["text"].startswith("# 已核验报告")
+    assert res["verify_audit"] is canned_audit and res["verify_rounds"] == 1
+
+
+def test_write_verify_audit_path(tmp_path):
+    audit = {"final": {"total": 1}}
+    out = deep_report.write_verify_audit("000703.SZ", audit, output_dir=tmp_path)
+    assert out.parent == tmp_path
+    assert out.name.startswith("000703-") and out.name.endswith("-deep-verify.json")
+    import json
+    assert json.loads(out.read_text(encoding="utf-8")) == audit
+
+
+def test_cli_verify_flags(monkeypatch, tmp_path, capsys):
+    import sys as _sys
+    seen = {}
+
+    def fake_generate(code, provider=None, verify=True, max_verify_rounds=2):
+        seen["verify"] = verify
+        seen["max_verify_rounds"] = max_verify_rounds
+        return {"text": "# R", "tool_calls": [], "input_tokens": 1, "output_tokens": 1,
+                "rounds": 1, "provider": "openai", "model": "m", "data": {},
+                "verify_audit": None, "verify_rounds": 0}
+
+    monkeypatch.setattr(deep_report, "generate", fake_generate)
+    monkeypatch.setattr(_sys, "argv",
+                        ["deep_report.py", "000703", "--no-verify",
+                         "--max-verify-rounds", "1", "--output-dir", str(tmp_path)])
+    deep_report.main()
+    assert seen["verify"] is False and seen["max_verify_rounds"] == 1
 
 
 @pytest.mark.integration
@@ -153,3 +211,8 @@ def test_generate_live():
     res = deep_report.generate("000703")
     assert isinstance(res["text"], str) and len(res["text"]) > 500
     assert "核心观点" in res["text"]
+    # verified output must contain zero naked numbers
+    import deep_verify
+    body = res["text"].split("数据核验")[0]
+    naked = [c for c in deep_verify.extract_claims(body) if c["kind"] == "naked"]
+    assert naked == []

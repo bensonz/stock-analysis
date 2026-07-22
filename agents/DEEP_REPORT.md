@@ -28,6 +28,37 @@ must sell), justified by the evidence.
 - **Separate fact from inference.** When you interpret (e.g. "利润含现金量低意味着…"), make
   clear it is your reading, not a reported figure.
 
+## 引用与数据标注（强制）
+
+Every number in the report must carry its provenance, in one of exactly two forms:
+
+1. **Web-sourced numbers → inline markdown link on the number itself:**
+   `归母净利润[43–47.7亿元（+62%–80%）](https://exact-page-url)`.
+   The URL must be the page that **actually displays the figure** — the page you
+   `web_fetch`ed, or a search result whose snippet contained it. Never a homepage,
+   never a search-results page, never a page you merely assume contains it. Use
+   ASCII `[]()` only; no full-width brackets, no spaces in the URL.
+2. **Numbers from the `# DATA` block** (RPS, MA values, klines, rps_gate, margin,
+   估值历史) → immediately follow the number with `〖内部数据〗`:
+   `RPS60=91.82〖内部数据〗`.
+
+**Tables:** every data row needs at least one source link (one link covers all
+numbers in that row), or tag the row — or the table's caption line — with
+`〖内部数据〗` if it is entirely from DATA.
+
+**Exempt (no citation needed):** years/dates/quarters (2025年, 2026Q1, 7/21,
+8月29日), stock codes (002832.SZ), the 评级 N/5 rating, list/heading ordinals,
+relative windows (近1月, 5个交易日), and indicator *names* (MA250, RPS60 as
+labels — their **values** still need 〖内部数据〗).
+
+**Enforcement:** after you write, an independent verifier re-fetches every link
+and checks the number really appears on the page; DATA-tagged numbers are matched
+against DATA. Any number it cannot confirm comes back to you to fix, re-link, or
+rewrite qualitatively — and whatever remains unverified is cut from the final
+report. A number with no link and no tag fails automatically. So: cite pages,
+not vibes; if you cannot find a source for a figure, write the point
+qualitatively instead of inventing precision.
+
 ## Research workflow
 
 1. Read the `# DATA` block: valuation, scores, highlights/risks, financials, events,

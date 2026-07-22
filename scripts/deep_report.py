@@ -23,9 +23,11 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SPEC_FILE = PROJECT_ROOT / "agents" / "DEEP_REPORT.md"
+VERIFY_SPEC_FILE = PROJECT_ROOT / "agents" / "DEEP_VERIFY.md"
 
 MAX_TOKENS = 16384
 TEMPERATURE = 0.5
+MAX_VERIFY_ROUNDS = 2
 
 
 # --------------------------------------------------------------------------- #
@@ -167,8 +169,79 @@ def build_prompt(spec: str, code: str, data: dict) -> str:
     )
 
 
-def generate(code: str, provider: str | None = None, data: dict | None = None) -> dict:
-    """Run the LLM tool loop to produce the article. Returns text + run metadata."""
+def _provider_ctx(resolved: str) -> tuple:
+    """Client + model for a normalized provider name."""
+    import llm_client
+
+    if resolved == "anthropic":
+        return llm_client._build_anthropic_client(), llm_client.DEFAULT_MODEL
+    # openai (default) and hybrid both use the OpenAI tool loop for free-form output.
+    return llm_client._build_openai_client(), llm_client.OPENAI_MODEL
+
+
+def _run_writer_pass(client, model, resolved, messages, tool_log, label) -> tuple:
+    """One tool-loop pass (draft or revise). Returns (text, tin, tout, rounds)."""
+    import llm_client
+
+    if resolved == "anthropic":
+        return llm_client._run_tool_loop(
+            client, messages, model, MAX_TOKENS, TEMPERATURE, tool_log, label=label)
+    return llm_client._run_openai_tool_loop(
+        client, messages, model, MAX_TOKENS, TEMPERATURE, tool_log, label=label)
+
+
+def _make_runners(resolved, client, model, tool_log, totals) -> tuple:
+    """(revise_runner, judge_runner, cleanup_runner) for deep_verify.run_pipeline.
+
+    Judge/cleanup are single no-tools calls (the _call_hybrid Pass-2 pattern);
+    revise gets the full tool loop so it can re-search for better sources.
+    All accumulate into `totals` so generate() can aggregate token counts.
+    """
+    import deep_verify
+    import llm_client
+
+    def revise_runner(prompt: str):
+        t, i, o, r = _run_writer_pass(
+            client, model, resolved, [{"role": "user", "content": prompt}],
+            tool_log, label="verify-revise ")
+        totals["in"] += i
+        totals["out"] += o
+        totals["rounds"] += r
+        return t, i, o, r
+
+    def _text_once(prompt: str, label: str, max_tokens: int):
+        if resolved == "anthropic":
+            t, i, o, _ = llm_client._run_anthropic_text_once(
+                client, [{"role": "user", "content": prompt}], model,
+                max_tokens, deep_verify.JUDGE_TEMPERATURE, label=label)
+        else:
+            resp = client.chat.completions.create(
+                model=model,
+                max_tokens=max_tokens,
+                temperature=deep_verify.JUDGE_TEMPERATURE,
+                messages=[{"role": "user", "content": prompt}],
+                timeout=llm_client.GPT_TIMEOUT,
+            )
+            usage = resp.usage or type("U", (), {"prompt_tokens": 0, "completion_tokens": 0})()
+            t, i, o = resp.choices[0].message.content or "", usage.prompt_tokens, usage.completion_tokens
+        totals["in"] += i
+        totals["out"] += o
+        totals["rounds"] += 1
+        return t, i, o
+
+    # Judge emits small JSON verdicts; cleanup must re-emit a FULL report, so it
+    # gets the writer budget — 4096 would truncate it into uselessness.
+    return (revise_runner,
+            lambda p: _text_once(p, "verify-judge ", deep_verify.JUDGE_MAX_TOKENS),
+            lambda p: _text_once(p, "verify-cleanup ", MAX_TOKENS))
+
+
+def generate(code: str, provider: str | None = None, data: dict | None = None,
+             verify: bool = True, max_verify_rounds: int = MAX_VERIFY_ROUNDS) -> dict:
+    """Draft the article, then (unless verify=False) run the citation-verify
+    pipeline: every number must be inline-linked and confirmed at its source,
+    or tagged 〖内部数据〗 and matched against DATA. See agents/DEEP_VERIFY.md.
+    """
     import llm_client
 
     resolved = llm_client.normalize_llm_provider(provider)  # None -> env LLM_PROVIDER -> openai
@@ -179,19 +252,31 @@ def generate(code: str, provider: str | None = None, data: dict | None = None) -
     messages = [{"role": "user", "content": prompt}]
     tool_log: list = []
 
-    if resolved == "anthropic":
-        client = llm_client._build_anthropic_client()
-        model = llm_client.DEFAULT_MODEL
-        text, tin, tout, rounds = llm_client._run_tool_loop(
-            client, messages, model, MAX_TOKENS, TEMPERATURE, tool_log, label="deep_report "
+    client, model = _provider_ctx(resolved)
+    text, tin, tout, rounds = _run_writer_pass(
+        client, model, resolved, messages, tool_log, label="deep_report ")
+
+    verify_audit = None
+    verify_rounds = 0
+    if verify:
+        import deep_verify
+
+        spec_verify = VERIFY_SPEC_FILE.read_text(encoding="utf-8")
+        totals = {"in": 0, "out": 0, "rounds": 0}
+        revise_runner, judge_runner, cleanup_runner = _make_runners(
+            resolved, client, model, tool_log, totals)
+        text, verify_audit = deep_verify.run_pipeline(
+            text, data,
+            spec_writer=spec, spec_verify=spec_verify,
+            max_rounds=max_verify_rounds,
+            judge_runner=judge_runner, revise_runner=revise_runner,
+            cleanup_runner=cleanup_runner,
+            log=lambda m: print(f"  [verify] {m}", file=sys.stderr),
         )
-    else:
-        # openai (default) and hybrid both use the OpenAI tool loop for free-form output.
-        client = llm_client._build_openai_client()
-        model = llm_client.OPENAI_MODEL
-        text, tin, tout, rounds = llm_client._run_openai_tool_loop(
-            client, messages, model, MAX_TOKENS, TEMPERATURE, tool_log, label="deep_report "
-        )
+        verify_rounds = len(verify_audit["rounds"])
+        tin += totals["in"]
+        tout += totals["out"]
+        rounds += totals["rounds"]
 
     return {
         "text": text,
@@ -202,6 +287,8 @@ def generate(code: str, provider: str | None = None, data: dict | None = None) -
         "provider": resolved,
         "model": model,
         "data": data,
+        "verify_audit": verify_audit,
+        "verify_rounds": verify_rounds,
     }
 
 
@@ -217,6 +304,19 @@ def write_report(code: str, text: str, output_dir=None) -> Path:
     return out
 
 
+def write_verify_audit(code: str, audit: dict, output_dir=None) -> Path:
+    """Write the citation-verification audit JSON next to the report."""
+    import report_generator
+
+    code6 = str(code).split(".")[0]
+    date = datetime.now().strftime("%Y-%m-%d")
+    out_dir = Path(output_dir) if output_dir else report_generator.REPORTS_DIR
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out = out_dir / f"{code6}-{date}-deep-verify.json"
+    out.write_text(json.dumps(audit, ensure_ascii=False, indent=1), encoding="utf-8")
+    return out
+
+
 # --------------------------------------------------------------------------- #
 # CLI
 # --------------------------------------------------------------------------- #
@@ -229,7 +329,7 @@ def main():
     if not args or args[0].startswith("-"):
         print(
             "usage: deep_report.py <code> [--provider anthropic|openai] "
-            "[--output-dir DIR] [--human]",
+            "[--output-dir DIR] [--human] [--no-verify] [--max-verify-rounds N]",
             file=sys.stderr,
         )
         sys.exit(2)
@@ -238,10 +338,24 @@ def main():
     provider = _arg_value(args, "--provider")
     output_dir = _arg_value(args, "--output-dir")
     human = "--human" in args
+    verify = "--no-verify" not in args
+    mvr = _arg_value(args, "--max-verify-rounds")
 
     print(f"[deep_report] gathering data for {code} ...", file=sys.stderr)
-    result = generate(code, provider=provider)
+    result = generate(code, provider=provider, verify=verify,
+                      max_verify_rounds=int(mvr) if mvr else MAX_VERIFY_ROUNDS)
     out = write_report(code, result["text"], output_dir=output_dir)
+
+    if result.get("verify_audit"):
+        audit_path = write_verify_audit(code, result["verify_audit"], output_dir=output_dir)
+        f = result["verify_audit"]["final"]
+        print(
+            f"[deep_report] verify: {f['verified_linked'] + f['verified_internal']}"
+            f"/{f['total']} verified ({f['verified_linked']} linked/"
+            f"{f['verified_internal']} internal), {f['rewritten_qualitative']} rewritten"
+            f", rounds={result['verify_rounds']} | audit {audit_path}",
+            file=sys.stderr,
+        )
 
     print(
         f"[deep_report] {result['provider']}/{result['model']} | {result['rounds']} rounds "

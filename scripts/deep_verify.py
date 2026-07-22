@@ -1,0 +1,656 @@
+#!/usr/bin/env python3
+"""
+Deep-report citation verification — mechanical claim extraction + verify pipeline.
+
+Every number in a deep report must be either:
+  - a `linked` claim: inline markdown link on the number, [43.14亿](https://…)
+  - an `internal` claim: tagged 〖内部数据〗 (RPS/MA/klines from our own price DB)
+Anything else with an ASCII digit (outside the allowlist: dates, stock codes,
+评级 N/5, ordinals, indicator names…) is a `naked` claim and fails verification.
+
+Extraction is pure python (regex) so it is deterministic and unit-testable; the
+LLM is only used to judge whether a fetched page supports the numbers citing it.
+See agents/DEEP_VERIFY.md for the judge spec and docs/deep_report_verify/ for
+the implementation plan.
+"""
+import json
+import re
+
+TAG = "〖内部数据〗"
+VERIFY_FETCH_MAX_CHARS = 20000  # verifier fetches more than the drafter's 8000
+JUDGE_MAX_TOKENS = 4096
+JUDGE_TEMPERATURE = 0.0
+
+# --------------------------------------------------------------------------- #
+# Regexes
+# --------------------------------------------------------------------------- #
+LINK_RE = re.compile(r"\[([^\]]*)\]\((https?://[^)\s]+)\)")
+FENCE_RE = re.compile(r"```.*?```", re.S)
+FOOTER_RE = re.compile(r"^数据核验[:：].*$", re.M)
+
+# A number token: digits with optional decimals/commas, optional range tail,
+# optional unit suffix. Used for display + cache keys, not arithmetic.
+NUM_TOKEN_RE = re.compile(
+    r"[0-9][0-9,，]*(?:\.[0-9]+)?"
+    r"(?:\s*[–\-—~～至]\s*[0-9][0-9,，]*(?:\.[0-9]+)?)?"
+    r"\s*(?:%|％|万亿|亿元|亿股|亿|万元|万股|万|元|倍|pp|bp|个百分点|天|日|家|店|股|吨|人|次|席)?"
+)
+
+# Numbers that need NO citation. Order-independent; all matches become covered
+# spans. Tuned against reports/002832|002602|301345-2026-07-22-deep.md.
+_YEAR = r"(?:19|20)\d{2}"
+ALLOWLIST_RES = [re.compile(p) for p in [
+    rf"{_YEAR}\s*[–\-—~～/]\s*(?:{_YEAR})?\s*年?",          # 2011–2025, 2024/2025年
+    rf"{_YEAR}\s*年?(?:[QH][1-4])?",                        # 2025年, 2026Q1, 2026H1, bare 2026
+    rf"{_YEAR}-\d{{1,2}}-\d{{1,2}}",                        # ISO date
+    r"\d{1,2}月(?:\d{1,2}日)?",                              # 7月21日, 8月
+    r"\d{1,2}日(?![0-9])",                                   # …日 leftovers
+    # slash dates 7/21, 7/16–17 (month 1-12 / day 1-31, not part of a number)
+    r"(?<![0-9.])(?:1[0-2]|0?[1-9])/(?:3[01]|[12]?[0-9])(?:\s*[–\-~～]\s*\d{1,2})?(?![0-9/])",
+    r"\d{1,2}\s*个月(?![0-9])",                               # （9个月）duration
+    r"(?<![A-Za-z0-9])FY\d{2,4}",                            # FY2026
+    r"(?<![A-Za-z0-9])[QH][1-4](?![0-9])",                   # Q1 / H2 alone
+    r"\d{6}\.(?:SZ|SH|BJ|HK)",                               # 002832.SZ
+    r"[（(]\d{6}[）)]",                                       # （002832）
+    # bare 6-digit stock code (table cells, prose): not part of a larger/decimal
+    # number and not followed by a unit — real quantities carry 亿/万/元 etc.
+    r"(?<![0-9.，,])\d{6}(?![0-9.%％亿万元倍股])",
+    r"评级\s*[1-5]\s*[/／]\s*5",                              # 评级 4/5
+    r"(?<![0-9.])[1-5]\s*[/／]\s*5(?![0-9])",                 # bare 4/5
+    r"(?<![A-Za-z0-9])(?:RPS|MA|rps|ma)\s?\d{2,3}(?![0-9.=＝%％])",  # indicator names
+    r"RPS\s*[≥>＞=]{1,2}\s*\d{2,3}",                          # RPS≥80 gate mentions
+    r"近\s*\d+\s*(?:个)?(?:日|周|月|年|季|交易日)",             # 近1月
+    r"\d+\s*(?:个)?交易日",                                    # 5个交易日
+    r"[①②③④⑤⑥⑦⑧⑨⑩]",
+]]
+ALLOWLIST_LINE_RES = [re.compile(p, re.M) for p in [
+    r"^\s{0,3}#{1,6}\s*\d+[.、]?",                            # "### 3. 风险提示"
+    r"^\s*\d+[.、）)]",                                        # list ordinals
+]]
+
+_SEG_BOUNDARY_RE = re.compile(r"[。；;！？!?\n|]")
+
+
+def _has_ascii_digit(s: str) -> bool:
+    return any("0" <= ch <= "9" for ch in s)
+
+
+def normalize_number(tok: str) -> str:
+    """Canonical form for matching/caching: full-width→ASCII, strip separators."""
+    table = str.maketrans("０１２３４５６７８９％，．～", "0123456789%,.~")
+    tok = tok.translate(table).replace(",", "").replace(" ", "")
+    return tok
+
+
+def _allowlist_spans(text: str) -> list:
+    spans = []
+    for rx in ALLOWLIST_RES:
+        spans.extend(m.span() for m in rx.finditer(text))
+    for rx in ALLOWLIST_LINE_RES:
+        spans.extend(m.span() for m in rx.finditer(text))
+    return spans
+
+
+def _merge_spans(spans: list) -> list:
+    if not spans:
+        return []
+    spans = sorted(spans)
+    out = [list(spans[0])]
+    for s, e in spans[1:]:
+        if s <= out[-1][1]:
+            out[-1][1] = max(out[-1][1], e)
+        else:
+            out.append([s, e])
+    return [(s, e) for s, e in out]
+
+
+def _in_spans(pos: int, spans: list) -> bool:
+    return any(s <= pos < e for s, e in spans)
+
+
+def _context(text: str, start: int, end: int, radius: int = 80) -> str:
+    return text[max(0, start - radius):min(len(text), end + radius)].replace("\n", " ")
+
+
+_IND_NAME_PREFIX_RE = re.compile(r"(?:RPS|MA|rps|ma)\s?$")
+
+
+def _is_indicator_name_digits(text: str, tok_start: int) -> bool:
+    """True if the digit run at tok_start belongs to an indicator name (RPS60, MA20)."""
+    return bool(_IND_NAME_PREFIX_RE.search(text[max(0, tok_start - 4):tok_start]))
+
+
+def _claim_numbers(segment: str) -> list:
+    """Number tokens in a claim segment, minus indicator-name digits."""
+    return [m.group(0).strip() for m in NUM_TOKEN_RE.finditer(segment)
+            if not _is_indicator_name_digits(segment, m.start())]
+
+
+def _numbers_in(text: str, base_offset: int, covered: list) -> list:
+    """Number tokens in `text` whose absolute position is not covered."""
+    out = []
+    for m in NUM_TOKEN_RE.finditer(text):
+        if _in_spans(base_offset + m.start(), covered):
+            continue
+        if _is_indicator_name_digits(text, m.start()):
+            continue
+        out.append(m.group(0).strip())
+    return out
+
+
+# --------------------------------------------------------------------------- #
+# Table analysis
+# --------------------------------------------------------------------------- #
+def _table_lines(text: str) -> list:
+    """Return [(line_start, line_end, line, caption)] for markdown table rows."""
+    rows = []
+    lines = text.split("\n")
+    pos = 0
+    prev_nonempty = ""
+    block_caption = ""
+    in_table = False
+    for line in lines:
+        start, end = pos, pos + len(line)
+        stripped = line.strip()
+        if stripped.startswith("|"):
+            if not in_table:
+                block_caption = prev_nonempty
+                in_table = True
+            rows.append((start, end, line, block_caption))
+        else:
+            in_table = False
+            if stripped:
+                prev_nonempty = line
+        pos = end + 1
+    return rows
+
+
+# --------------------------------------------------------------------------- #
+# Claim extraction
+# --------------------------------------------------------------------------- #
+def extract_claims(markdown: str) -> list:
+    """Extract linked / internal / naked claims from a report draft.
+
+    Returns claim dicts sorted by span start:
+      {id, kind, numbers, context, url, span, status, reason, fallback_text}
+    """
+    text = markdown
+    covered = []          # spans exempt from the naked scan
+    claims = []
+
+    # 0. Structural exemptions
+    covered.extend(m.span() for m in FENCE_RE.finditer(text))
+    covered.extend(m.span() for m in FOOTER_RE.finditer(text))
+    allow = _allowlist_spans(text)
+    covered.extend(allow)
+    covered = _merge_spans(covered)
+
+    # 1. Tables: a row is covered by its first link (all row numbers → that URL)
+    #    or by 〖内部数据〗 in the row or the table caption.
+    table_row_spans = []
+    for start, end, line, caption in _table_lines(text):
+        link = LINK_RE.search(line)
+        tagged = TAG in line or TAG in caption
+        row_nums = _numbers_in(line, start, _merge_spans(allow))
+        if link and _has_ascii_digit(line):
+            claims.append({
+                "kind": "linked", "url": link.group(2),
+                "numbers": row_nums or [link.group(1)],
+                "span": (start, end), "context": line.strip()[:200],
+            })
+            table_row_spans.append((start, end))
+        elif tagged and _has_ascii_digit(line):
+            claims.append({
+                "kind": "internal", "url": None, "numbers": row_nums,
+                "span": (start, end), "context": line.strip()[:200],
+            })
+            table_row_spans.append((start, end))
+        elif not _has_ascii_digit(line):
+            table_row_spans.append((start, end))  # header/separator rows
+    covered = _merge_spans(covered + table_row_spans)
+
+    # 2. Inline links (outside covered table rows)
+    for m in LINK_RE.finditer(text):
+        if _in_spans(m.start(), covered):
+            continue
+        label, url = m.group(1), m.group(2)
+        if _has_ascii_digit(label):
+            claims.append({
+                "kind": "linked", "url": url,
+                "numbers": _claim_numbers(label),
+                "span": m.span(), "context": _context(text, m.start(), m.end()),
+            })
+        # digit-free labels create no claim, but the whole link (incl. URL
+        # digits) is exempt from the naked scan either way
+        covered = _merge_spans(covered + [m.span()])
+
+    # 3. 〖内部数据〗 segments (outside covered table rows)
+    for m in re.finditer(re.escape(TAG), text):
+        if _in_spans(m.start(), covered):
+            continue
+        seg_start = 0
+        for b in _SEG_BOUNDARY_RE.finditer(text, max(0, m.start() - 80), m.start()):
+            seg_start = b.end()
+        seg_start = max(seg_start, m.start() - 80)
+        segment = text[seg_start:m.start()]
+        claims.append({
+            "kind": "internal", "url": None,
+            "numbers": _claim_numbers(segment),
+            "span": (seg_start, m.end()), "context": segment.strip()[:200],
+        })
+        covered = _merge_spans(covered + [(seg_start, m.end())])
+
+    # 4. Naked numbers: anything left with an ASCII digit
+    for m in NUM_TOKEN_RE.finditer(text):
+        if _in_spans(m.start(), covered):
+            continue
+        claims.append({
+            "kind": "naked", "url": None, "numbers": [m.group(0).strip()],
+            "span": m.span(), "context": _context(text, m.start(), m.end()),
+        })
+
+    claims.sort(key=lambda c: c["span"][0])
+    for i, c in enumerate(claims, 1):
+        c["id"] = f"c{i:03d}"
+        c.setdefault("status", "pending")
+        c.setdefault("reason", "")
+        c.setdefault("fallback_text", None)
+    return claims
+
+
+def covered_spans(markdown: str) -> list:
+    """Expose the exempt spans (fences, footer, allowlist) — for tests."""
+    spans = [m.span() for m in FENCE_RE.finditer(markdown)]
+    spans += [m.span() for m in FOOTER_RE.finditer(markdown)]
+    spans += _allowlist_spans(markdown)
+    return _merge_spans(spans)
+
+
+# --------------------------------------------------------------------------- #
+# Internal-data matching
+# --------------------------------------------------------------------------- #
+def flatten_data_numbers(data: dict) -> set:
+    """All numeric values in the DATA block, as normalized string variants."""
+    out = set()
+
+    def _add(v: float):
+        if v != v:  # NaN
+            return
+        out.add(normalize_number(repr(v)))
+        out.add(normalize_number(f"{v:.1f}"))
+        out.add(normalize_number(f"{v:.2f}"))
+        if float(v).is_integer():
+            out.add(normalize_number(str(int(v))))
+
+    def _walk(node):
+        if isinstance(node, bool):
+            return
+        if isinstance(node, (int, float)):
+            _add(float(node))
+        elif isinstance(node, str):
+            # simple digit runs (NOT the range-aware token regex — each range
+            # endpoint must land in the set separately, e.g. "55~60亿" → 55, 60)
+            for t in re.finditer(r"[0-9][0-9,，]*(?:\.[0-9]+)?", node):
+                out.add(normalize_number(t.group(0)))
+        elif isinstance(node, dict):
+            for v in node.values():
+                _walk(v)
+        elif isinstance(node, (list, tuple)):
+            for v in node:
+                _walk(v)
+
+    _walk(data)
+    return out
+
+
+def _strip_units(tok: str) -> str:
+    return re.sub(r"[^\d.]", "", normalize_number(tok).split("~")[0].split("-")[0])
+
+
+def internal_numbers_match(numbers: list, data_numbers: set) -> bool:
+    """Mechanical check: every numeric token appears in the DATA block."""
+    for tok in numbers:
+        bare = _strip_units(tok)
+        if not bare:
+            continue
+        if normalize_number(tok) in data_numbers or bare in data_numbers:
+            continue
+        return False
+    return True
+
+
+# --------------------------------------------------------------------------- #
+# Verification round
+# --------------------------------------------------------------------------- #
+GENERIC_FALLBACK = "（数据未核实，略）"
+_FETCH_ERROR_PREFIXES = ("HTTP ", "Timeout", "Error", "Tavily")
+_MIN_PAGE_CHARS = 200
+
+
+def _numsig(claim: dict) -> tuple:
+    return tuple(sorted(normalize_number(t) for t in claim["numbers"]))
+
+
+def parse_verdicts(text: str) -> dict | None:
+    """Extract {"verdicts": {id: {...}}} from judge output; None on failure."""
+    import llm_client
+    try:
+        obj = llm_client._parse_json_from_text(text)
+    except Exception:
+        return None
+    verdicts = obj.get("verdicts") if isinstance(obj, dict) else None
+    return verdicts if isinstance(verdicts, dict) else None
+
+
+def _judge_with_retry(judge_runner, prompt: str):
+    """One retry on unparseable JSON. Returns (verdicts|None, tin, tout)."""
+    tin = tout = 0
+    for _ in range(2):
+        text, i, o = judge_runner(prompt)
+        tin += i
+        tout += o
+        verdicts = parse_verdicts(text)
+        if verdicts is not None:
+            return verdicts, tin, tout
+    return None, tin, tout
+
+
+def _apply_verdict(claim: dict, v: dict | None):
+    if not isinstance(v, dict) or v.get("verdict") not in ("supported", "not_found", "contradicted"):
+        claim["status"] = "unreachable"
+        claim["reason"] = "核验输出缺失或无法解析"
+        return
+    if v["verdict"] == "supported":
+        claim["status"] = "verified"
+    else:
+        claim["status"] = "failed"
+        claim["reason"] = v.get("reason", v["verdict"])
+        claim["fallback_text"] = v.get("fallback_text")
+
+
+def build_judge_prompt(spec_verify: str, url: str, page_text: str, claims: list) -> str:
+    items = [{"id": c["id"], "numbers": c["numbers"], "context": c["context"]} for c in claims]
+    return (
+        spec_verify
+        + "\n\n---\n\n# 模式\n外部页面核验\n"
+        + f"\n# 页面URL\n{url}\n"
+        + "\n# 页面文本（可能被截断，只依据在场内容判断）\n"
+        + page_text
+        + "\n\n# 待核验条目 (JSON)\n```json\n"
+        + json.dumps(items, ensure_ascii=False, indent=1)
+        + "\n```\n\n只输出JSON verdicts，不要任何其他文字。\n"
+    )
+
+
+def build_internal_judge_prompt(spec_verify: str, data: dict, claims: list) -> str:
+    slim = {k: data.get(k) for k in ("technicals", "rps_gate", "margin") if k in data}
+    items = [{"id": c["id"], "numbers": c["numbers"], "context": c["context"]} for c in claims]
+    return (
+        spec_verify
+        + "\n\n---\n\n# 模式\n内部DATA核验（数值须可由DATA直接得到或简单推导）\n"
+        + "\n# DATA (JSON)\n```json\n"
+        + json.dumps(slim, ensure_ascii=False, indent=1)
+        + "\n```\n\n# 待核验条目 (JSON)\n```json\n"
+        + json.dumps(items, ensure_ascii=False, indent=1)
+        + "\n```\n\n只输出JSON verdicts，不要任何其他文字。\n"
+    )
+
+
+def verify_claims(claims: list, data_numbers: set, data: dict, *, spec_verify: str,
+                  judge_runner, fetch, cache: dict) -> dict:
+    """Mutate claim statuses in place. Returns round record for the audit."""
+    fetches = []
+    judge_in = judge_out = 0
+
+    # Naked numbers fail mechanically — missing link/tag.
+    for c in claims:
+        if c["kind"] == "naked":
+            c["status"] = "failed"
+            c["reason"] = "数字缺少引用链接或〖内部数据〗标注"
+
+    # Internal: mechanical match first, one batched judge call for the rest.
+    unmatched = []
+    for c in (c for c in claims if c["kind"] == "internal"):
+        key = ("__internal__", _numsig(c))
+        if key in cache:
+            c["status"], c["reason"], c["fallback_text"] = cache[key]
+        elif internal_numbers_match(c["numbers"], data_numbers):
+            c["status"] = "verified"
+            cache[key] = ("verified", "", None)
+        else:
+            unmatched.append(c)
+    if unmatched:
+        verdicts, i, o = _judge_with_retry(
+            judge_runner, build_internal_judge_prompt(spec_verify, data, unmatched))
+        judge_in += i
+        judge_out += o
+        for c in unmatched:
+            _apply_verdict(c, (verdicts or {}).get(c["id"]))
+            cache[("__internal__", _numsig(c))] = (c["status"], c["reason"], c["fallback_text"])
+
+    # Linked: one fetch per unique URL, one batched judge call per URL.
+    groups: dict = {}
+    for c in (c for c in claims if c["kind"] == "linked"):
+        key = (c["url"], _numsig(c))
+        if key in cache:
+            c["status"], c["reason"], c["fallback_text"] = cache[key]
+        else:
+            groups.setdefault(c["url"], []).append(c)
+    for url, cs in groups.items():
+        page = fetch(url)
+        ok = bool(page) and not page.startswith(_FETCH_ERROR_PREFIXES) and len(page) >= _MIN_PAGE_CHARS
+        fetches.append({"url": url, "ok": ok, "chars": len(page or "")})
+        if not ok:
+            for c in cs:
+                c["status"] = "unreachable"
+                c["reason"] = "来源无法访问或内容过短，请更换可访问的来源（优先巨潮资讯/东方财富/官方公告）"
+                cache[(url, _numsig(c))] = (c["status"], c["reason"], None)
+            continue
+        verdicts, i, o = _judge_with_retry(
+            judge_runner, build_judge_prompt(spec_verify, url, page, cs))
+        judge_in += i
+        judge_out += o
+        for c in cs:
+            _apply_verdict(c, (verdicts or {}).get(c["id"]))
+            cache[(url, _numsig(c))] = (c["status"], c["reason"], c["fallback_text"])
+
+    counts = {
+        "linked": sum(1 for c in claims if c["kind"] == "linked"),
+        "internal": sum(1 for c in claims if c["kind"] == "internal"),
+        "naked": sum(1 for c in claims if c["kind"] == "naked"),
+        "verified": sum(1 for c in claims if c["status"] == "verified"),
+        "failed": sum(1 for c in claims if c["status"] == "failed"),
+        "unreachable": sum(1 for c in claims if c["status"] == "unreachable"),
+    }
+    return {
+        "claims": [dict(c, span=list(c["span"])) for c in claims],
+        "fetches": fetches,
+        "counts": counts,
+        "judge_tokens": {"in": judge_in, "out": judge_out},
+    }
+
+
+# --------------------------------------------------------------------------- #
+# Revise / cleanup / mechanical guarantee
+# --------------------------------------------------------------------------- #
+def _failed(claims: list) -> list:
+    return [c for c in claims if c["status"] in ("failed", "unreachable")]
+
+
+def _failed_items_json(failed: list) -> str:
+    items = [{"id": c["id"], "kind": c["kind"], "numbers": c["numbers"],
+              "context": c["context"], "url": c["url"],
+              "status": c["status"], "reason": c["reason"]} for c in failed]
+    return json.dumps(items, ensure_ascii=False, indent=1)
+
+
+def build_revise_prompt(spec_writer: str, draft: str, failed: list,
+                        data_slim: dict, round_no: int, max_rounds: int) -> str:
+    return (
+        spec_writer
+        + f"\n\n---\n\n# 修订任务（第{round_no}/{max_rounds}轮核验后）\n"
+        + "下面是你此前的报告草稿，以及未通过数据核验的条目清单。对每一条，你必须三选一：\n"
+        + "①把数字改为与所引来源一致；②用 web_search/web_fetch 找到真正包含该数字的页面并"
+        + "更换链接（优先巨潮资讯/东方财富/官方公告，避免需登录的页面）；③改写为不含具体数字"
+        + "的定性表述（如\"定位高端\"）或删除该句。\n"
+        + "严格要求：输出**完整**修订后报告；不得改动未被列出的部分；已通过核验的链接原样保留；"
+        + "不得新增任何没有链接或〖内部数据〗标注的数字。\n"
+        + "\n# 当前草稿\n"
+        + draft
+        + "\n\n# 核验失败清单 (JSON)\n```json\n"
+        + _failed_items_json(failed)
+        + "\n```\n\n# DATA（内部数据，供〖内部数据〗标注修正）\n```json\n"
+        + json.dumps(data_slim, ensure_ascii=False, indent=1)
+        + "\n```\n"
+    )
+
+
+def build_cleanup_prompt(draft: str, failed: list) -> str:
+    return (
+        "你是报告清理器。下面报告中列出的条目未通过数据核验。把每一条改写为不含具体数字的"
+        "定性表述，或删除整句。禁止新增任何数字、任何链接。输出完整报告，其余部分逐字保留。\n"
+        + "\n# 报告\n"
+        + draft
+        + "\n\n# 未通过核验条目 (JSON)\n```json\n"
+        + _failed_items_json(failed)
+        + "\n```\n"
+    )
+
+
+def apply_mechanical_fallback(text: str, failed: list) -> tuple:
+    """Deterministically replace failed claim spans. Returns (text, count)."""
+    count = 0
+    for c in sorted(failed, key=lambda c: c["span"][0], reverse=True):
+        s, e = c["span"]
+        repl = c.get("fallback_text") or GENERIC_FALLBACK
+        if _has_ascii_digit(repl):  # a fallback may not smuggle numbers back in
+            repl = GENERIC_FALLBACK
+        text = text[:s] + repl + text[e:]
+        count += 1
+    return text, count
+
+
+def strip_preamble(text: str) -> str:
+    """Cut writer chatter ("Now I have all the verified data…") before the report.
+
+    The report proper starts at the first markdown H1. Only strips when the H1
+    appears within the first 2000 chars — a missing H1 means degenerate output,
+    which the caller's length guard handles.
+    """
+    m = re.search(r"^# ", text, re.M)
+    if m and 0 < m.start() <= 2000:
+        return text[m.start():]
+    return text
+
+
+def verification_footer(final: dict) -> str:
+    return (
+        "\n\n---\n数据核验："
+        f"{final['total']}处数字，"
+        f"{final['verified_linked'] + final['verified_internal']}处已核验"
+        f"（{final['verified_linked']}外链/{final['verified_internal']}内部），"
+        f"{final['rewritten_qualitative']}处已改写为定性表述。\n"
+    )
+
+
+# --------------------------------------------------------------------------- #
+# Pipeline
+# --------------------------------------------------------------------------- #
+def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: str,
+                 max_rounds: int, judge_runner, revise_runner, cleanup_runner,
+                 fetch=None, log=None) -> tuple:
+    """draft → (verify → revise)* → cleanup → mechanical guarantee.
+
+    All LLM access goes through the injected runners:
+      judge_runner(prompt)   -> (text, tin, tout)          no tools
+      revise_runner(prompt)  -> (text, tin, tout, rounds)  with tools
+      cleanup_runner(prompt) -> (text, tin, tout)          no tools
+    Returns (final_text_with_footer, audit).
+    """
+    if fetch is None:
+        import llm_client
+        fetch = lambda url: llm_client.execute_web_fetch(url, VERIFY_FETCH_MAX_CHARS)  # noqa: E731
+    log = log if log is not None else (lambda msg: None)
+
+    data_numbers = flatten_data_numbers(data)
+    data_slim = {k: v for k, v in data.items() if k not in ("intro", "valuation_history")}
+    if isinstance(data_slim.get("technicals"), dict):
+        data_slim["technicals"] = {k: v for k, v in data_slim["technicals"].items() if k != "klines"}
+
+    cache: dict = {}
+    audit = {"max_rounds": max_rounds, "rounds": [],
+             "cleanup": {"used": False, "mechanical_fallbacks": 0}}
+    text = strip_preamble(draft_text)
+    claims: list = []
+
+    for rnd in range(1, max_rounds + 1):
+        claims = extract_claims(text)
+        log(f"verify round {rnd}: {len(claims)} claims")
+        rec = verify_claims(claims, data_numbers, data, spec_verify=spec_verify,
+                            judge_runner=judge_runner, fetch=fetch, cache=cache)
+        rec["round"] = rnd
+        audit["rounds"].append(rec)
+        failed = _failed(claims)
+        log(f"verify round {rnd}: {rec['counts']['verified']} verified, {len(failed)} failed")
+        if not failed:
+            break
+        if rnd == max_rounds:
+            break
+        revised, _tin, _tout, _rr = revise_runner(
+            build_revise_prompt(spec_writer, text, failed, data_slim, rnd, max_rounds))
+        revised = strip_preamble(revised or "")
+        if revised and len(revised) >= 0.4 * len(text):
+            text = revised
+        else:  # garbage/empty revision: keep draft, skip to cleanup
+            log("revise pass returned degenerate output; skipping to cleanup")
+            break
+
+    failed = _failed(claims)
+    if failed:
+        audit["cleanup"]["used"] = True
+        cleaned, _i, _o = cleanup_runner(build_cleanup_prompt(text, failed))
+        cleaned = strip_preamble(cleaned or "")
+        if cleaned and len(cleaned) >= 0.4 * len(text):
+            text = cleaned
+        # Post-cleanup: cache-verified claims pass; anything else unverified
+        # is mechanically replaced. Guarantees zero unverified numbers.
+        claims = extract_claims(text)
+        residual = []
+        for c in claims:
+            if c["kind"] == "naked":
+                residual.append(c)
+            elif c["kind"] == "internal":
+                key = ("__internal__", _numsig(c))
+                if cache.get(key, ("",))[0] == "verified" or \
+                        internal_numbers_match(c["numbers"], data_numbers):
+                    c["status"] = "verified"
+                else:
+                    residual.append(c)
+            else:
+                if cache.get((c["url"], _numsig(c)), ("",))[0] == "verified":
+                    c["status"] = "verified"
+                else:
+                    residual.append(c)
+        if residual:
+            text, n = apply_mechanical_fallback(text, residual)
+            audit["cleanup"]["mechanical_fallbacks"] = n
+            claims = extract_claims(text)
+            for c in claims:  # final bookkeeping: everything left is cache-verified
+                if c["kind"] == "internal" and (
+                        cache.get(("__internal__", _numsig(c)), ("",))[0] == "verified"
+                        or internal_numbers_match(c["numbers"], data_numbers)):
+                    c["status"] = "verified"
+                elif c["kind"] == "linked" and cache.get((c["url"], _numsig(c)), ("",))[0] == "verified":
+                    c["status"] = "verified"
+
+    rewritten = sum(r["counts"]["failed"] + r["counts"]["unreachable"]
+                    for r in audit["rounds"][-1:]) if audit["cleanup"]["used"] else 0
+    final = {
+        "total": len(claims),
+        "verified_linked": sum(1 for c in claims if c["kind"] == "linked" and c["status"] == "verified"),
+        "verified_internal": sum(1 for c in claims if c["kind"] == "internal" and c["status"] == "verified"),
+        "rewritten_qualitative": rewritten,
+        "unverified_remaining": sum(1 for c in claims if c["status"] not in ("verified",)),
+    }
+    audit["final"] = final
+    return text + verification_footer(final), audit
