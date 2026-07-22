@@ -318,7 +318,11 @@ def test_verification_footer_counts():
 # Fixture sweep: the real 002832 report (allowlist tuning harness)
 # --------------------------------------------------------------------------- #
 def test_fixture_002832_report_sweep():
-    fixture = Path(__file__).resolve().parent.parent / "reports" / "002832-2026-07-22-deep.md"
+    # Frozen copy of the ORIGINAL (unverified) 002832 report — the one with the
+    # fabricated ¥5000/件 — used as the allowlist tuning harness. The live
+    # reports/ copy is now the verified version and would trivially pass.
+    fixture = (Path(__file__).resolve().parent.parent / "tests" / "fixtures"
+               / "002832-2026-07-22-deep-unverified.md")
     if not fixture.exists():
         import pytest
         pytest.skip("fixture report not present")
