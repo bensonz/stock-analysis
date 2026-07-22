@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 127966,
+  "output_tokens": 9928,
+  "rounds": 2,
+  "duration_sec": 183.3,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 贵金属 工业金属 暴涨 2026年7月22日 原因",
+        "max_results": 5
+      },
+      "result_length": 2233
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 半导体板块 2026年7月 行情 催化剂",
+        "max_results": 5
+      },
+      "result_length": 2923
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股市场 2026年7月22日 涨跌比 恐慌 资金面",
+        "max_results": 5
+      },
+      "result_length": 3155
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药康生物 688046 业绩预告 2026半年报",
+        "max_results": 5
+      },
+      "result_length": 1888
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "株冶集团 600961 工业金属 铅锌 2026年7月 行情",
+        "max_results": 5
+      },
+      "result_length": 3158
+    }
+  ],
+  "fallback_used": false
+}

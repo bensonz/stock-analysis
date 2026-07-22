@@ -1,0 +1,288 @@
+# Research Memo — 2026-07-22
+
+---
+
+## 1. Market Regime
+
+**Verdict: WEAK — NO NEW POSITIONS**
+
+| Signal | Reading | Verdict |
+|---|---|---|
+| 上证指数 | +0.50% | Green ✓ |
+| 深证成指 | +0.61% | Green ✓ |
+| 创业板指 | -0.13% | Red ✗ |
+| 科创50 | +1.54% | Green |
+| Up/Down Breadth | 1923 / 3455 = **0.56:1** | ❌ Below 1:1 |
+| Limit Up/Down | 52涨停 / 5跌停 | Not panic |
+| f10 (跌停≥10%) | 5 | Safe |
+| Distribution skew | f0_2=2587 dominant | Heavy selling in 0-2% band |
+
+**Buy Gate Assessment**:
+- ❌ Up/Down ≥ 1.5:1 → **FAIL** (0.56)
+- ✓ 2+ major indices green → PASS
+- ❌ Breadth < 1:1 → **NO NEW POSITIONS** (V2 rule: "if breadth is below 1:1 or f10 >= 30, no new positions")
+
+**V2 Gate: FAILED. New positions: []**
+
+**IV Landscape**: Every single ETF proxy sits at IV Rank = 1.0 (100th percentile). 科创50 ETF IV at 0.904, 创业板ETF at 0.595, 500ETF at 0.451. This is extreme panic pricing — the options market is pricing in massive tail risk. Historically, IV Rank ~100% has marked excellent medium-term entry points, but the V2 rules demand breadth confirmation first. The 7/21 V-reversal (科创50 +10.73% from -6.7% intraday) was dramatic but has not yet translated into sustained breadth improvement. Today the tape is quietly bleeding — indices held up by large caps, but 3,455 stocks declining vs 1,923 advancing.
+
+**Macro context**: The 7/17-7/20 selloff was severe — 科创50 lost >7% in a single day, margin calls triggered, forced liquidation in leveraged tech positions. 7/21 was a policy-driven rescue rally (国家队 ETF buying, 证监会 chairman investor meeting). Today (7/22) is the "day after" — the real test of whether the bounce has legs. Breadth says no.
+
+---
+
+## 2. Sector Analysis
+
+### Today's Leaders
+
+| Rank | Sector | Δ% | Drivers |
+|------|--------|-----|---------|
+| #1 | 贵金属 | +8.1% | Gold at all-time highs, dollar credit concerns, geopolitical risk |
+| #2 | 工业金属 | +5.56% | Copper super-cycle, global reconfiguration, supply constraints |
+| #3 | 医疗美容 | +4.73% | Consumer recovery, policy tailwinds |
+| #4 | 油服工程 | +4.0% | Oil price stabilization, energy security theme |
+| #5 | 半导体 | +3.32% | 7/21 monster reversal (+14% intraday), AI capex narrative intact |
+
+### Today's Laggards
+
+| Rank | Sector | Δ% |
+|------|--------|-----|
+| Bottom 1 | 影视院线 | -2.76% |
+| Bottom 2 | 摩托车及其他 | -2.69% |
+| Bottom 3 | 游戏Ⅱ | -2.54% |
+| Bottom 4 | 服装家纺 | -2.31% |
+| Bottom 5 | 小家电 | -2.30% |
+
+**Rotation read**: Clear risk-off rotation. Resources/metals are the safe-haven trade within equities — gold/copper miners benefit from commodity price strength AND get the "defensive" bid from fleeing tech. Consumer discretionary (entertainment, apparel, appliances) is being de-risked. Semiconductors are in no-man's-land — yesterday was euphoric (+14%), today is likely consolidation/profit-taking. The rotation from tech → resources is the dominant narrative right now.
+
+**Candidate sector mapping** (which enriched candidates land in today's hot sectors):
+
+- **工业金属 (#2)**: 株冶集团 (600961), 金钼股份 (601958 - 小金属, adjacent)
+- **半导体 (#5)**: 星宸科技, 思瑞浦, 扬杰科技, 路维光电, 联瑞新材, 蓝特光学, 莱特光电, 芯源微
+- **贵金属 (#1)**: None in candidate pool
+- **医疗美容 (#3)**: None
+- **油服工程 (#4)**: None
+
+**Position alignment**: 0/0 (no active positions, but if I had positions, zero would be in today's top sectors unless holding metals/semis)
+
+---
+
+## 3. Position Review
+
+**No active positions.** Portfolio is 100% cash (¥956,221). Starting capital was ¥1,000,000. Realized losses of ¥43,779 (-4.38% all-time). 
+
+This is a clean slate. Good. The V1 positions were all closed. We start fresh with V2 rules.
+
+---
+
+## 4. New Entry Candidates — Analysis (for when gate re-opens)
+
+Despite the buy gate being closed, I've done the work so the PM can assess readiness:
+
+### 🥇 株冶集团 (600961) — Would be STRONG BUY if gate open
+
+| Dimension | Reading | Assessment |
+|-----------|---------|------------|
+| **Sector** | 工业金属 #2 (+5.56%) | ✅ Top 5%, perfect |
+| **RPS120** | 93.73% | Extended zone (92-95%), but sector top 10% → ALLOWED |
+| **dist_ma5** | +1.4% | Near MA5, not chasing ✅ |
+| **dist_ma10** | -7.0% | Pulled back to MA10 zone ✅ |
+| **dist_ma20** | -17.3% | Deep below MA20, but recovering |
+| **PE** | 13.19 | Reasonable for cyclicals |
+| **Catalyst** | Q1 profit +145% YoY, gold/copper bull thesis | Fresh & strong |
+| **Margin** | Deleveraging (-2.44% 5d) | Mild concern, not blocking |
+| **IV proxy** | 300ETF IV Rank 1.0 | Extreme — wide stops needed |
+| **VCP** | null | No VCP, but sector thesis overrides |
+| **Risks** | 1 (no dividend history) | Low |
+
+**Thesis**: Pure play on the 工业金属 super-cycle. Lead/zinc smelter benefiting from soaring metals prices + gold/silver byproduct credits. PE 13 with 145% profit growth = PEG < 0.1. This is exactly the kind of stock V2 was designed to catch: strong sector, strong catalyst, reasonable technical setup, ignored by V1 because it didn't fit the "quality" mold.
+
+### 🥈 金钼股份 (601958) — Would be BUY if gate open
+
+| Dimension | Reading | Assessment |
+|-----------|---------|------------|
+| **Sector** | 小金属 (adjacent to industrial metals) | Near top zone |
+| **RPS120** | 91.33% | Sweet spot (80-92%) ✅ |
+| **dist_ma5** | -8.7% | Pulled back from MA5, not chasing |
+| **dist_ma10** | -14.9% | Well below MA10 |
+| **PE** | 21.06 | Acceptable |
+| **Catalyst** | Molybdenum leader, 33% profit growth, dividend yield 2.8% | Moderate |
+| **Margin** | Neutral | Clean |
+| **VCP** | null | — |
+
+### 🥉 扬杰科技 (300373) — Interesting but pulled back hard
+
+| Dimension | Reading | Assessment |
+|-----------|---------|------------|
+| **Sector** | 半导体 #5 (+3.32%) | Top 5 ✅ |
+| **RPS120** | 93.15% | Extended zone, sector top 10% → allowed |
+| **dist_ma5** | -12.2% | Deep below MA5 — stock has been crushed |
+| **PE** | 40.44 | Higher but growth justifies |
+| **Catalyst** | H1 earnings +20-40%, SiC near-doubling, AI server demand | Fresh |
+| **Risks** | 0 | Clean |
+| **Note** | Price ¥93.07 vs enriched price in strategy pool shows huge gap — the enriched data shows current price diverging significantly from strategy pool data. The stock has clearly sold off hard. | ⚠️ |
+
+---
+
+## 5. Skip List
+
+Today I'm skipping **everything** because the breadth gate is closed, but here are the notable stocks and the primary reason:
+
+| Code | Name | Primary Skip Reason | Would Buy If |
+|------|------|--------------------|--------------|
+| 600961 | 株冶集团 | Breadth gate (0.56:1); would be top pick otherwise | Breadth > 1.5:1 |
+| 601958 | 金钼股份 | Breadth gate | Breadth > 1.5:1 |
+| 300373 | 扬杰科技 | Breadth gate | Breadth > 1.5:1 |
+| 688536 | 思瑞浦 | Breadth gate + dist_ma5 -14.4% (heavy drawdown) | Breadth + price stabilization |
+| 301536 | 星宸科技 | Breadth gate + dist_ma5 -13.2% + IV 100% | Breadth + pullback to MA20 |
+| 002821 | 凯莱英 | Sector (医疗研发外包 not in top 30%) + breadth | Sector rotation to healthcare |
+| 688046 | 药康生物 | Sector (医疗研发外包 not top) + breadth + dist_ma5 -10.6% | Sector improvement |
+| 603127 | 昭衍新药 | **dist_ma20 +19.5%** → Rule 2b SKIP (extreme extension >12%) | Pullback to MA5/MA10 |
+| 605020 | 永和股份 | Sector (氟化工 not in top 30%) | Sector rotation |
+| 002056 | 横店东磁 | Sector (光伏 not in top) + breadth | — |
+| 688777 | 中控技术 | dist_ma10 -13.5% (extended pullback) + deleveraging | Stabilization |
+| 600869 | 远东股份 | 5 risk factors + dist_ma20 -41.1% (massive drawdown) | — |
+| 002980 | 华盛昌 | RPS120 99.58% → above 95%, skip per Rule 2 | Pullback to 90% zone |
+
+**Key observation**: Nearly ALL candidates have negative MA distances, many deep in the -10% to -32% range. This is a market-wide drawdown, not stock-specific. The stocks that held up best relative to MAs: 株冶集团 (dist_ma5 +1.4%), 永和股份 (dist_ma5 -4.6%), 横店东磁 (dist_ma5 -3.6%). These are the relative strength survivors.
+
+---
+
+## 6. Learnings
+
+1. **Breadth gate works**: Today is a textbook case — indices are green (上证 +0.5%, 深证 +0.61%), but 3,455 stocks are declining vs 1,923 advancing. Without the breadth gate, a naive system would see "market up, let's buy." V2 correctly stays out. This is related to **h013** (strong breadth alone is not enough — and the inverse: weak breadth means stay out even when indices look OK).
+
+2. **IV 100% is not a buy signal by itself**: The options market pricing extreme tail risk is consistent with a post-crash fragile tape. History says these are good medium-term entry zones, but V2's job is to wait for breadth to confirm the turn before deploying capital. Related: **h017** (low IV doesn't justify freezing; high IV doesn't justify forcing).
+
+3. **株冶集团 is exactly the kind of stock V1 would have missed**: PE 13, "low quality" dividend score, industrial metals sector that V1 might have dismissed as cyclical. But it's in the #2 sector today with RPS in the sweet-extended zone and reasonable MA distances. This validates V2's philosophy shift.
+
+4. **Most candidates are in drawdown, not setup**: 90%+ of the strategy pool has negative MA distances. This is not a "buy the dip" list — it's a "wait for stabilization" list. Only 株冶集团 and 横店东磁 are within 5% of any short-term MA.
+
+5. **The "missed opportunities" from yesterday's WATCH list reinforce V2**: 扬杰科技 was WATCH yesterday at ¥102, today at ¥93.07 (-8.8%). 星宸科技 WATCH at ¥145.1, today at ¥91.85 (-36.7% — massive). V1's WATCH conservatism was accidentally correct in a crashing tape, but for the wrong reasons. V2's approach of "buy small or skip" would have avoided these traps.
+
+---
+
+## 7. Uncertainty Flags
+
+1. **I'm uncertain whether the breadth data reflects today's close or intraday snapshot.** The timestamp says 11:40 AM — this could be mid-session data. If breadth improves in the afternoon session, the gate might clear. But I must trade the data I have, not what I hope for.
+
+2. **The enriched_candidates prices differ from strategy_pool prices significantly for some stocks** — e.g., 星宸科技 shows current_price 91.85 in enriched but the strategy pool RPS data suggests it was much higher recently. The strategy pool data may be stale. I'm trusting the enriched_candidates prices as the source of truth.
+
+3. **Sector rankings are only top 5 / bottom 5.** I don't know where "化学制品" or "医疗研发外包" rank — they could be #6-10 (still top 30%) or #30-40 (cold). I'm being conservative and treating non-top-5 as uncertain.
+
+4. **The IV rank at 1.0 across all ETFs is historically extreme.** I don't have data on what happens after IV Rank 100% regimes — there's a risk I'm being too conservative by staying 100% cash. But V2 rules are clear: breadth must confirm first.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "贵金属", "5d_pct": 8.1, "trend": "accelerating"},
+      {"name": "工业金属", "5d_pct": 5.56, "trend": "accelerating"},
+      {"name": "医疗美容", "5d_pct": 4.73, "trend": "steady"},
+      {"name": "油服工程", "5d_pct": 4.0, "trend": "steady"},
+      {"name": "半导体", "5d_pct": 3.32, "trend": "recovering_after_crash"}
+    ],
+    "cold_sectors": [
+      {"name": "影视院线", "5d_pct": -2.76, "trend": "deteriorating"},
+      {"name": "摩托车及其他", "5d_pct": -2.69, "trend": "deteriorating"},
+      {"name": "游戏Ⅱ", "5d_pct": -2.54, "trend": "deteriorating"},
+      {"name": "服装家纺", "5d_pct": -2.31, "trend": "deteriorating"},
+      {"name": "小家电", "5d_pct": -2.3, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/0 positions (no active holdings)",
+    "regime": "Post-crash fragile recovery: 7/21 V-reversal (科创50 +10.73% intraday) followed by 7/22 weak breadth session. Resources/metals leading, tech consolidating after massive bounce, consumer discretionary being de-risked."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600961",
+      "name": "株冶集团",
+      "reason": "BREADTH GATE CLOSED (Up/Down 0.56:1 < 1:1 minimum). This is the #1 candidate — sector 工业金属 #2 (+5.56%), RPS120 93.73 (extended but sector allows), dist_ma5 +1.4% (near support), PE 13 with +145% profit growth. Would be STRONG BUY at 7-8% allocation if breadth > 1.5:1. Monitor for gate re-open.",
+      "rps120": 93.73
+    },
+    {
+      "code": "601958",
+      "name": "金钼股份",
+      "reason": "BREADTH GATE CLOSED. RPS120 91.33% sweet spot, molybdenum leader, dist_ma5 -8.7% (pulled back to support zone). Would be BUY candidate at 5-6% if gate opens.",
+      "rps120": 91.33
+    },
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "reason": "BREADTH GATE CLOSED. Sector 半导体 #5, RPS120 93.15%, 0 risk factors, fresh H1 earnings catalyst (+20-40%). But dist_ma5 -12.2% indicates significant drawdown — need price stabilization before entry even if gate opens.",
+      "rps120": 93.15
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "reason": "Rule 2b: dist_ma20 +19.5% exceeds 12% maximum. Extreme extension above MA20. Additionally breadth gate closed and sector (医疗研发外包) not in top 30%. Double-skip.",
+      "rps120": 86.13
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "Sector (医疗研发外包) not in today's top 5, uncertain if top 30%. RPS120 92.87% acceptable, but dist_ma20 +5.3% (above MA20 while below MA5/MA10 — unusual pattern suggesting volatile pullback). Breadth gate also closed.",
+      "rps120": 92.87
+    },
+    {
+      "code": "688046",
+      "name": "药康生物",
+      "reason": "BREADTH GATE + sector not in top 5. Fresh catalyst (H1 earnings +46-67%) is positive but dist_ma5 -10.6% shows recent selloff (had a -20% limit-down day on 7/17). Price needs to stabilize.",
+      "rps120": 88.23
+    },
+    {
+      "code": "301536",
+      "name": "星宸科技",
+      "reason": "BREADTH GATE + massive drawdown (dist_ma5 -13.2%, dist_ma20 -18.9%). RPS120 99.5% is above 95% ceiling — overheated and now mean-reverting. Wait for pullback to 90% RPS zone.",
+      "rps120": 99.5
+    },
+    {
+      "code": "688777",
+      "name": "中控技术",
+      "reason": "BREADTH GATE + deleveraging signal (融资 4/5 days net repay, -5.67% 5d). Sector (自动化设备) not in top 5. RPS120 94.96% near 95% ceiling. Multiple caution flags even without breadth issue.",
+      "rps120": 94.96
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Breadth gate correctly prevents entries when 0.56:1 despite 上证/深证 being green: large-cap index paint hides 3,455 declining stocks. This is the exact scenario V2's 'breadth below 1:1 = no new positions' rule was designed for. The 7/21 V-reversal euphoria has not translated into sustained breadth improvement.",
+      "type": "signal",
+      "tags": ["entry-filter", "market-regime"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Index-level green readings driven by mega-cap rotation can mask broad-based distribution. The breadth ratio captures what indices miss: participation breadth. When 65% of stocks decline while indices rise, it's a weak tape unsuited for new longs."
+    },
+    {
+      "text": "IV Rank 100% across all ETFs (科创50 IV=0.904, 500ETF IV=0.451) is extreme panic pricing consistent with post-crash fragility. History says these are medium-term buying opportunities, but V2 rules demand breadth confirmation first. Being 100% cash here is uncomfortable but correct per the framework.",
+      "type": "observation",
+      "tags": ["timing", "position-sizing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h017",
+      "mechanism": "Extreme IV reflects options market pricing crisis-level uncertainty. The regime can persist for days/weeks. Forcing entries during IV=100% without breadth confirmation risks catching a -5% stop within 48 hours."
+    },
+    {
+      "text": "株冶集团 (600961) is the archetypal V2 stock that V1 would have missed: PE 13, 'low quality' dividend score, industrial cyclical. But sector #2 (+5.56%), RPS120 93.73% with dist_ma5 +1.4% (near support), profit +145% YoY. This validates the sector-first, valuation-ignored philosophy.",
+      "type": "heuristic",
+      "tags": ["sector", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "In a metals super-cycle, the sector tide lifts all boats. A mediocre company in a #2 sector outperforms a great company in a #40 sector. V1's quality filters (dividend history, valuation percentile) would have downgraded this — exactly the error V2 fixes."
+    },
+    {
+      "text": "90%+ of strategy pool candidates have negative MA distances (most -10% to -32%). This is a market-wide drawdown, not stock-specific opportunity. Only 株冶集团 (dist_ma5 +1.4%) and 横店东磁 (dist_ma5 -3.6%) are near any short-term MA. The pool is in 'wait for stabilization' mode, not 'buy the dip.'",
+      "type": "observation",
+      "tags": ["timing", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "When broad market selloff pushes most stocks below MAs simultaneously, individual MA distances lose discriminatory power. The correct action is to identify the relative strength survivors (those holding near MAs) and wait for breadth to confirm before entering them."
+    }
+  ],
+  "market_summary": "Post-crash fragile tape. 7/21 was historic V-reversal (科创50 +10.73% intraday, 半导体设备 +14%) driven by 国家队 ETF buying and policy signaling. Today (7/22) indices hold green (+0.5% 上证, +0.6% 深证) but breadth is decisively negative: 3,455 declining vs 1,923 advancing (0.56:1). IV Rank 100% across all ETFs — extreme panic pricing. Resources/metals lead (贵金属 +8.1%, 工业金属 +5.6%) on dollar-credit concerns; consumer discretionary lags. No new positions: breadth below 1:1 minimum gate. 100% cash (¥956K), waiting for breadth >1.5:1 to deploy.株冶集团 is the #1 watch candidate when gate re-opens.",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}
+```

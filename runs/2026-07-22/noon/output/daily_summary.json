@@ -1,0 +1,37 @@
+{
+  "date": "2026-07-22",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 956221.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -4.38,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -43779.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.5566,
+    "up": 1923,
+    "down": 3455,
+    "positive_indices": [
+      "上证指数",
+      "深证成指"
+    ],
+    "negative_indices": [
+      "创业板指"
+    ],
+    "limit_ups": 52,
+    "limit_downs": 5,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.56:1, 2/3 major indices green, 52 limit-ups / 5 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Post-crash fragile tape. 7/21 was historic V-reversal (科创50 +10.73% intraday, 半导体设备 +14%) driven by 国家队 ETF buying and policy signaling. Today (7/22) indices hold green (+0.5% 上证, +0.6% 深证) but breadth is decisively negative: 3,455 declining vs 1,923 advancing (0.56:1). IV Rank 100% across all ETFs — extreme panic pricing. Resources/metals lead (贵金属 +8.1%, 工业金属 +5.6%) on dollar-credit concerns; consumer discretionary lags. No new positions: breadth below 1:1 minimum gate. 100% cash (¥956K), waiting for breadth >1.5:1 to deploy.株冶集团 is the #1 watch candidate when gate re-opens."
+  }
+}
