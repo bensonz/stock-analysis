@@ -362,7 +362,6 @@ def generate_candidates_md(date: str, data: dict, output_dir: Path | None = None
     lines.append("|------|------|--------|-------|-------|-----|------|-------|-------|--------|")
 
     sweet_spot = []
-    wait_list = []
 
     for s in pool:
         code = str(s.get("code", "")).split(".")[0]
@@ -399,10 +398,7 @@ def generate_candidates_md(date: str, data: dict, output_dir: Path | None = None
         if fails:
             status = f"❌ {','.join(fails)}"
         elif ma5 is not None:
-            if rps120 and rps120 > 95:
-                status = "⏳ >95"
-            else:
-                status = "✅ PASS"
+            status = "✅ PASS"
         else:
             status = "⚠️ no MA"
 
@@ -420,17 +416,14 @@ def generate_candidates_md(date: str, data: dict, output_dir: Path | None = None
         if not fails and ma5 is not None:
             entry = {"code": code, "name": name, "rps120": rps120, "rps60": rps60,
                      "trend": trend, "co": co, "ma5": ma5, "ma10": ma10, "ma20": ma20}
-            if rps120 and rps120 > 95:
-                wait_list.append(entry)
-            else:
-                sweet_spot.append(entry)
+            sweet_spot.append(entry)
 
     lines.append("")
 
     # Sweet spot summary
     if sweet_spot:
         lines.append(f"## Sweet Spot ({len(sweet_spot)})\n")
-        lines.append("RPS 75-95%, MA check pass — actionable when regime opens.\n")
+        lines.append("RPS ≥75%, MA check pass — actionable when regime opens.\n")
         for s in sweet_spot:
             lines.append(
                 f"- **{s['name']}** ({s['code']}) RPS120={s['rps120']:.0f} "
@@ -439,19 +432,7 @@ def generate_candidates_md(date: str, data: dict, output_dir: Path | None = None
             )
         lines.append("")
 
-    # Wait list
-    if wait_list:
-        lines.append(f"## Wait List ({len(wait_list)})\n")
-        lines.append("RPS >95% (relative-strength overheated, mean-reversion risk), MA pass — watch for pullback into 85-95 zone.\n")
-        for s in wait_list:
-            lines.append(
-                f"- **{s['name']}** ({s['code']}) RPS120={s['rps120']:.0f} "
-                f"Trend={s['trend']} Co={s['co']} "
-                f"MA5={s['ma5']:+.1f}% MA10={s['ma10']:+.1f}% MA20={s['ma20']:+.1f}%"
-            )
-        lines.append("")
-
-    if not sweet_spot and not wait_list:
+    if not sweet_spot:
         lines.append("## No candidates pass all filters today.\n")
 
     content = "\n".join(lines)

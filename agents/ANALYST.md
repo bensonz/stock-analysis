@@ -27,11 +27,11 @@ Use the sector data provided to rank sectors. If a stock's sector isn't in the t
 
 If these are not met, do not force a SMALL BUY. Focus on HOLD / SELL / skip_list only.
 
-### Rule 2: Buy Strength (RPS 75-95%)
-- **Sweet spot: RPS120 in 80-92%** — confirmed working from V1 data
-- **Extended zone: RPS120 in 92-95%** — ALLOWED if: (a) sector is top 10%, OR (b) stock has 0 risk factors, OR (c) recent earnings catalyst >50% growth
-- **Below 75%**: Skip — not enough momentum
-- **Above 95%**: Skip — relative strength overheated (prone to mean-reversion), wait for pullback to 90% zone. (Note: this is an RPS-cooling concern, NOT chasing — chasing is the price-vs-MA extension in Rule 2b.)
+### Rule 2: Buy Strength (RPS ≥75%)
+- **Sweet spot: RPS120 ≥ 80%** — confirmed working from V1 data. Higher is stronger.
+- **No upper cap** — RPS120 in the high 90s (even 100) is the *strongest* relative strength, not a disqualifier. Momentum-first means we want the leaders. A high RPS is buyable — the only thing that makes it "too hot" is price extension, which Rule 2b handles.
+- **Below 75%**: Skip — not enough momentum.
+- **The sole "too extended" guard is Rule 2b (MA distance), NOT the RPS level.** A very high RPS name is fine as long as price hasn't spiked far above its MAs; prefer entries near MA5/MA10 support.
 
 ### Rule 2b: No Chasing — MA Distance Check
 Before opening ANY new position, check the MA data in `enriched_candidates`:
@@ -166,7 +166,7 @@ sector rank, IV Rank and MA-extension:
 | V1 (Broken) | V2 (Fixed) |
 |---|---|
 | Valuation as primary filter | Valuation ignored for momentum plays |
-| RPS 80-92% hard cutoff | RPS 75-95% with sector exceptions |
+| RPS 80-92% hard cutoff | RPS ≥75%, no upper cap (Rule 2b guards extension) |
 | LOW confidence = skip | LOW confidence = SMALL BUY (these were the winners!) |
 | WATCH = don't buy | WATCH eliminated — buy small or skip entirely |
 | 20-day time stop with exceptions | 10-day time stop, no exceptions |

@@ -878,12 +878,15 @@ def phase1_collect(date: str, slot: str) -> dict:
 
     pool_stocks = data["strategy_pool"].get("stocks", [])
 
-    # Prepare enrichment candidates
+    # Prepare enrichment candidates. No upper RPS cap: high-RPS leaders (>95)
+    # are buyable per ANALYST.md Rule 2 (Rule 2b/MA distance is the sole
+    # extension guard), so they must be enriched too or the LLM sees them
+    # data-poor.
     candidates = [
         s for s in pool_stocks
-        if s.get("rps120") and 75 <= float(s["rps120"]) <= 95
+        if s.get("rps120") and float(s["rps120"]) >= 75
     ]
-    print(f"    → {len(candidates)} in RPS 75-95% zone", file=sys.stderr)
+    print(f"    → {len(candidates)} in RPS ≥75% zone", file=sys.stderr)
 
     # Steps 2-5: Run in parallel (different APIs, no shared rate limits)
     def _enrich():
@@ -926,9 +929,9 @@ def phase1_collect(date: str, slot: str) -> dict:
 
     def _ma_data():
         print("  [7/7] Fetching MA data...", file=sys.stderr)
-        # Fetch MA for ALL pool stocks, not just 75-95% candidates.
-        # Stocks with RPS>95 are skipped by Rule 2 but the LLM still needs
-        # MA distances to explain *why* in skip_list.
+        # Fetch MA for ALL pool stocks. MA distance (Rule 2b) is the sole
+        # extension guard, so every candidate — including high-RPS leaders —
+        # needs MA distances for the buy/skip decision.
         result = fetch_ma_data(pool_stocks)
         print(f"    → {len(result)} stocks with MA data (pool={len(pool_stocks)})", file=sys.stderr)
         return "ma_data", result
@@ -967,7 +970,7 @@ def phase1_collect(date: str, slot: str) -> dict:
     # Merge MA data into enrichment results AND strategy pool stocks
     ma_data = data.get("ma_data", {})
     if ma_data:
-        # Merge into enriched candidates (75-95% RPS)
+        # Merge into enriched candidates (RPS ≥75%)
         for stock in data.get("enriched", []):
             code = str(stock.get("code", "")).split(".")[0]
             if code in ma_data:
@@ -981,8 +984,8 @@ def phase1_collect(date: str, slot: str) -> dict:
                 stock["dist_ma5_pct"] = ma.get("dist_ma5_pct")
                 stock["dist_ma10_pct"] = ma.get("dist_ma10_pct")
                 stock["dist_ma20_pct"] = ma.get("dist_ma20_pct")
-        # Also merge into strategy pool stocks (covers >95% RPS stocks
-        # that aren't enriched — LLM needs MA distances for skip_list)
+        # Also merge into any strategy pool stocks not in the enriched set
+        # (belt-and-suspenders so every pool stock carries MA distances)
         for stock in data.get("strategy_pool", {}).get("stocks", []):
             code = str(stock.get("code", "")).split(".")[0]
             if code in ma_data:

@@ -4,7 +4,7 @@ Data Collector — All data fetching for the daily pipeline.
 
 Functions:
 - fetch_strategy_pool()      — CheeseForTune API strategy stock list
-- batch_enrich(stocks)       — Enrich stocks in RPS 75-95% zone
+- batch_enrich(stocks)       — Enrich stocks in RPS ≥75% zone
 - fetch_market_overview()    — AkShare indices + breadth + sectors
 - fetch_position_prices()    — Current prices for active positions
 - fetch_missed_opportunity_prices() — Prices for past recommendations
@@ -666,7 +666,7 @@ def _parse_strategy_stocks(raw: list) -> list[dict]:
 
 
 def batch_enrich(stocks: list[dict], max_workers: int = 8) -> list[dict]:
-    """Enrich stocks in RPS 75-95% zone using CheeseForTune API.
+    """Enrich stocks in RPS ≥75% zone using CheeseForTune API.
 
     Runs concurrent workers (each with its own client instance) to
     parallelize fetching. The server handles concurrent connections fine;
