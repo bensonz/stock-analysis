@@ -71,7 +71,7 @@ Use `###` subsections:
 - **同业对标** — a markdown table of the key peers with their latest earnings (from
   web_search) and a one-line edge/weakness each.
 - **技术与资金面 (our edge)** — read the DATA technical block honestly:
-  - RPS: rps60/rps120/rps250 and whether it clears our **RPS≥85 momentum gate** (`rps_gate`).
+  - RPS: rps60/rps120/rps250 and whether it clears our **RPS≥80 momentum gate** (`rps_gate`).
   - MA structure: price vs MA5/MA20/MA120/MA250, alignment, distance-to-MA (over/under-extended).
   - **Margin flow**: the `margin.signal` (deleveraging / adding / neutral) and what it says
     about whether leveraged holders are entering or fleeing.

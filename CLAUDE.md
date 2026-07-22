@@ -63,7 +63,7 @@ Note test files live in **two** places: `tests/` and `scripts/test_*.py` (both a
 
 1. **Phase 1 — DATA COLLECTION** (pure Python, no LLM). `data_collector.py` assembles the candidate universe and writes each artifact as a separate JSON into the run's `input/` dir:
    - Strategy pool from **CheeseForTune** (芝士财富) via `cheesefortune_client.py` (reverse-engineered API, JWT + AES-signed requests) — `intersect.json`, `crawl.json`.
-   - RPS + MA screening from the local price DB via `rps_calculator.py`. **Upstream hard gate:** a stock must have `rps120>=85, rps250>=85, rps60>=70` AND MA alignment `MA20 > MA120 > MA250` to survive (`data_collector.py`). This is the real tradeable filter — the candidates report is just display on top of it.
+   - RPS + MA screening from the local price DB via `rps_calculator.py`. **Upstream hard gate:** a stock must have `rps120>=80, rps250>=80, rps60>=80` (uniform momentum floor) AND MA alignment `MA20 > MA120 > MA250` to survive (`data_collector.py`). This is the real tradeable filter — the candidates report is just display on top of it.
    - Market breadth/sectors (`market.json`), position prices (`prices.json` — **empty `{}` when the portfolio holds nothing**, which is normal), IV sentiment (`iv_sentiment.json`).
 2. **Phase 2 — ANALYSIS** (LLM). `llm_client.py` sends the assembled prompt (system prompt = `agents/ANALYST.md` + `LEARNINGS.md`) to the model with a tool-use loop (`web_search` via Tavily, `web_fetch`). Provider modes: `anthropic` (Claude only), `openai` (GPT only), `hybrid` (Claude research pass → GPT final decision). Returns structured buy/hold/sell decisions.
 3. **Phase 3 — EXECUTION** (pure Python). `position_manager.py` applies decisions to the simulated portfolio in `tracking/`.

@@ -133,13 +133,15 @@ def gather_data(code: str) -> dict:
 
     r60, r120, r250 = tech.get("rps60"), tech.get("rps120"), tech.get("rps250")
     have_all = all(isinstance(v, (int, float)) for v in (r60, r120, r250))
+    # Gate floor kept in sync with data_collector.RPS_GATE_MIN (uniform 80).
+    gate_min = 80
     data["rps_gate"] = {
-        "threshold": 85,
+        "threshold": gate_min,
         "rps60": r60,
         "rps120": r120,
         "rps250": r250,
-        "passes_all_ge_85": (all(v >= 85 for v in (r60, r120, r250)) if have_all else None),
-        "note": "Our momentum screen requires rps60/rps120/rps250 all >= 85.",
+        "passes_all_ge_80": (all(v >= gate_min for v in (r60, r120, r250)) if have_all else None),
+        "note": "Our momentum screen requires rps60/rps120/rps250 all >= 80.",
     }
 
     from margin_flow import fetch_margin_flow

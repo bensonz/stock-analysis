@@ -80,7 +80,7 @@ def test_gather_data_assembles_expected_keys(monkeypatch):
                 "technicals", "rps_gate", "margin"):
         assert key in d, f"missing {key}"
     assert d["code6"] == "000703"
-    assert d["rps_gate"]["passes_all_ge_85"] is True  # 85.9/94.5/90.2 all >= 85
+    assert d["rps_gate"]["passes_all_ge_80"] is True  # 85.9/94.5/90.2 all >= 80
     assert d["technicals"]["klines"][0]["close"] == 20.5
     assert len(d["valuation_history"]["series"]) <= 25  # downsampled from 300
     assert "_gather_errors" not in d
@@ -103,7 +103,7 @@ def test_rps_gate_none_when_metrics_missing(monkeypatch):
     import rps_calculator
     monkeypatch.setattr(rps_calculator, "get_ma_rps_for_stocks", lambda db, codes, date=None: {})
     d = deep_report.gather_data("000703")
-    assert d["rps_gate"]["passes_all_ge_85"] is None  # can't evaluate without RPS
+    assert d["rps_gate"]["passes_all_ge_80"] is None  # can't evaluate without RPS
 
 
 # --------------------------------------------------------------------------- #

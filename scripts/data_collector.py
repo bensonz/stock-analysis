@@ -209,6 +209,20 @@ def _build_relaxed_local_strategy_pool(
     return relaxed
 
 
+# Uniform RPS momentum gate: rps60/rps120/rps250 must ALL clear this floor.
+# See agents/ANALYST.md. Kept uniform at 80 (was rps120/rps250>=85, rps60>=70) so a
+# name strong on two timeframes but marginal on the third isn't discarded on a
+# technicality, while still requiring genuine strength on every horizon.
+RPS_GATE_MIN = 80
+
+
+def passes_rps_gate(rps60, rps120, rps250, gate_min: float = RPS_GATE_MIN) -> bool:
+    """True iff all three RPS timeframes clear the uniform momentum floor."""
+    if rps60 is None or rps120 is None or rps250 is None:
+        return False
+    return rps60 >= gate_min and rps120 >= gate_min and rps250 >= gate_min
+
+
 def fetch_strategy_pool_local(db_path: str = None) -> dict:
     """Fetch strategy candidates using the local price DB + CheeseForTune filters.
 
@@ -273,7 +287,7 @@ def fetch_strategy_pool_local(db_path: str = None) -> dict:
             if rps60 is None or rps120 is None or rps250 is None or not alignment:
                 missing_metrics += 1
                 continue
-            if rps120 < 85 or rps250 < 85 or rps60 < 70 or not alignment.get("aligned"):
+            if not passes_rps_gate(rps60, rps120, rps250) or not alignment.get("aligned"):
                 threshold_or_alignment += 1
                 continue
 
