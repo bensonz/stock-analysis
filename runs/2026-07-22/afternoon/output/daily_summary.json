@@ -1,0 +1,37 @@
+{
+  "date": "2026-07-22",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 956221.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -4.38,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -43779.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.3948,
+    "up": 1530,
+    "down": 3875,
+    "positive_indices": [
+      "上证指数"
+    ],
+    "negative_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 48,
+    "limit_downs": 10,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.39:1, 1/3 major indices green, 48 limit-ups / 10 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Weak/panic-lite tape: breadth 0.39:1 (1530 up / 3875 down), only 上证指数 +0.07% green, 深证成指 -1.42%, 创业板指 -3.23%, 科创50 -2.26%. 48涨停/10跌停. IV extreme across all major ETFs (avg rank 0.80, 科创50 at all-time high IV). Resource rotation in full force — 贵金属 +6.45%, 医疗美容 +6.18%, 油服工程 +4.71% leading. Tech/optics/semis in freefall — 通信设备 -4.99%, 元件 -3.85%, 光学光电子 -3.24%. 100% of strategy pool stocks below MA5 — systematic correction. Cash (100%) is the correct position. Watch 恒逸石化 (000703) — only stock above all MAs with massive profit catalyst — for entry when breadth improves to ≥1.5:1 and ≥2 major indices green."
+  }
+}

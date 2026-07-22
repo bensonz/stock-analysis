@@ -1,0 +1,82 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 417401,
+  "output_tokens": 9711,
+  "rounds": 4,
+  "duration_sec": 198.9,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月22日 贵金属 工业金属 大涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3337
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月22日 创业板 科创50 大跌 原因 市场",
+        "max_results": 5
+      },
+      "result_length": 3101
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "贵金属 黄金 2026年7月 涨价 催化",
+        "max_results": 5
+      },
+      "result_length": 2886
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "医疗美容板块 2026年7月22日 大涨",
+        "max_results": 5
+      },
+      "result_length": 2334
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "油气开采 油服工程 板块 2026年7月22日 上涨 原因",
+        "max_results": 5
+      },
+      "result_length": 2702
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "query": "恒逸石化 000703 2026年7月 业绩 炼化",
+        "max_results": 5
+      },
+      "result_length": 1839
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "query": "株冶集团 600961 2026年7月 铅锌",
+        "max_results": 5
+      },
+      "result_length": 2382
+    }
+  ],
+  "fallback_used": false
+}

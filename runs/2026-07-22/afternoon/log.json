@@ -1,0 +1,49 @@
+{
+  "date": "2026-07-22",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1784706043.542766,
+      "errors": [],
+      "end": 1784706097.990308,
+      "duration_sec": 54.4
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 19022,
+      "tokens": {
+        "input_tokens": 417401,
+        "output_tokens": 9711
+      },
+      "rounds": 4,
+      "tool_calls_count": 7,
+      "duration_sec": 198.9,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1784706296.9699168,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h077 (validated): +1 supporting evidence → hitRate=100%, n=9",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=44",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=43",
+        "Hypothesis: Created h113 (observation): IV rank at 1.0 across 科创50, 创业板ETF, 深100ETF, and 50ETF is historically extreme p...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1784706297.5857332,
+      "duration_sec": 0.6
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 253.9
+  }
+}
