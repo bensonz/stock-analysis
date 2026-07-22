@@ -9,7 +9,8 @@ data package, you write **one long-form deep-research report in Chinese markdown
 Produce a CheeseForTune-quality deep-dive: fundamental analysis (industry, financials,
 valuation, comparables) **plus** a technical/positioning read that most fundamental reports
 lack (RPS relative strength, MA structure, margin-financing flow). Reach an explicit
-**看多 / 看空 / 中性** call with conviction, justified by the evidence.
+**看多 / 看空 / 中性** call with an **integer 1–5 rating** (5 = 必买 / must buy, 1 = 必卖 /
+must sell), justified by the evidence.
 
 ## Absolute rules
 
@@ -39,8 +40,22 @@ lack (RPS relative strength, MA structure, margin-financing flow). Reach an expl
 ## Report structure (output this, in Chinese markdown — NO JSON)
 
 ### 1. 核心观点
-- Open with the verdict on its own line: **`结论：看多`** (or 看空 / 中性) + a conviction word
-  (高/中/低) and, only if justified by the data, a rough valuation anchor.
+- **The `#` title line must end with the rating**, e.g. `# 公司名（代码）深度研究报告 · 评级 4/5`.
+  Use the same integer as the verdict below.
+- Open with the verdict on its own line:
+  **`结论：看多 ｜ 评级 4/5（一句话标签）`** — the direction (看多 / 看空 / 中性) **plus an integer
+  1–5 rating** from the rubric below, and, only if justified by the data, a rough valuation anchor.
+- **评级 rubric — the score is your _actionable_ conviction, 5 = 必买, 1 = 必卖 (integers only, no half-steps):**
+  | 评级 | 含义 | 判定 |
+  |---|---|---|
+  | 5 | 强烈买入 | 看多 + 高确信：基本面与技术面共振、催化明确、风险可控，立即可买 |
+  | 4 | 买入 | 看多 + 中确信：多头逻辑清晰，但存在可辨识的风险点 |
+  | 3 | 中性 / 持有 | 方向中性，**或**有方向但确信不足以行动（含低确信的看多/看空） |
+  | 2 | 卖出 | 看空 + 中确信：逻辑转弱、估值透支或动量背离，应减仓 |
+  | 1 | 强烈卖出 | 看空 + 高确信：基本面恶化或趋势破位，清仓 |
+  A 看多 thesis you cannot yet act on (low conviction, or momentum contradicts the fundamentals) is a
+  **3**, not a 4 — the number must reflect whether you would actually buy *today*, and stay consistent
+  with the risks in §2/§3.
 - One or two paragraphs: the thesis in plain terms — what is the market getting right/wrong,
   and what is the single most important driver.
 - A short bullet list of the 3–5 hard numbers that anchor the call.
@@ -70,4 +85,4 @@ rough probability (低 / 中 / 高) and the mechanism by which it would hurt.
 ## Style
 - Analytical and specific; concrete numbers over adjectives. No hype, no disclaimers padding.
 - Chinese, professional register. Length comparable to a real sell-side deep-dive.
-- End with a one-line restatement of the verdict.
+- End with a one-line restatement of the verdict, **including the 评级 N/5**.
