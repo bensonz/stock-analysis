@@ -1,21 +1,60 @@
 {
-  "lastUpdated": "2026-07-23T11:40:17.865751+08:00",
+  "lastUpdated": "2026-07-23T15:40:28.799614+08:00",
   "portfolio": {
     "startingCapital": 1000000,
     "totalEquity": 956221.0,
-    "cash": 956221.0,
-    "investedValue": 0.0,
+    "cash": 889233.0,
+    "investedValue": 66988.0,
     "unrealizedPnl": 0.0,
     "realizedPnl": -43779.0,
     "totalPnl": -43779.0,
     "totalReturnPct": -4.38,
-    "positionsUsed": 0,
+    "positionsUsed": 2,
     "positionsMax": 10,
-    "cashPct": 100.0,
+    "cashPct": 92.99,
     "dayPnl": 0.0,
     "minCashPct": 0,
     "minCashValue": 0.0,
-    "deployableCash": 956221.0
+    "deployableCash": 889233.0
   },
-  "activePositions": []
+  "activePositions": [
+    {
+      "code": "000811",
+      "name": "冰轮环境",
+      "entryDate": "2026-07-23",
+      "entryPrice": 42.85,
+      "currentPrice": 42.85,
+      "pnl_pct": 0.0,
+      "stopLoss": 40.71,
+      "currentStop": 40.71,
+      "targetPrice": 50.3,
+      "status": "active",
+      "sector": "通用设备",
+      "shares": 800,
+      "allocation_pct": 4.0,
+      "allocatedCapital": 34280.0,
+      "currentValue": 34280.0,
+      "unrealizedPnl": 0.0,
+      "weight_pct": 3.58
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "entryDate": "2026-07-23",
+      "entryPrice": 163.54,
+      "currentPrice": 163.54,
+      "pnl_pct": 0.0,
+      "stopLoss": 155.36,
+      "currentStop": 155.36,
+      "targetPrice": 195.0,
+      "status": "active",
+      "sector": "医疗服务",
+      "shares": 200,
+      "allocation_pct": 5.0,
+      "allocatedCapital": 32708.0,
+      "currentValue": 32708.0,
+      "unrealizedPnl": 0.0,
+      "weight_pct": 3.42
+    }
+  ]
 }

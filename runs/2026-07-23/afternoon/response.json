@@ -1,0 +1,223 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "电网设备",
+        "5d_pct": 6.19,
+        "trend": "accelerating",
+        "driver": "AI电力需求+国网4万亿投资+特高压超预期"
+      },
+      {
+        "name": "地面兵装Ⅱ",
+        "5d_pct": 6.03,
+        "trend": "steady",
+        "driver": "国防安全主题"
+      },
+      {
+        "name": "能源金属",
+        "5d_pct": 5.72,
+        "trend": "accelerating",
+        "driver": "锂盐供给收缩+美国DLA收储+锂电业绩预喜"
+      },
+      {
+        "name": "汽车服务",
+        "5d_pct": 4.38,
+        "trend": "steady",
+        "driver": "未明确"
+      },
+      {
+        "name": "油服工程",
+        "5d_pct": 4.25,
+        "trend": "steady",
+        "driver": "中东地缘"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "半导体",
+        "5d_pct": -4.2,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "游戏Ⅱ",
+        "5d_pct": -2.59,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "医疗美容",
+        "5d_pct": -1.89,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": -1.83,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": -1.11,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/0 positions (empty portfolio, deploying fresh)",
+    "regime": "Resources/defense/grid leadership, tech exodus persistent (科创50 -3.78% vs 上证 +0.25%). Rotation confirmed — 3rd day of tech underperformance."
+  },
+  "position_decisions": [],
+  "new_positions": [
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "entry_price": 163.54,
+      "allocation_pct": 5,
+      "stop": 155.36,
+      "target": 195.0,
+      "thesis": "CXO龙头回踩MA20支撑(0.0%偏离)，RPS20=99.6%极强短期动量，GLP-1/多肽CDMO高速增长，全球生物医药融资4倍YoY回暖，创新药BD出海H1达$997B。2026年营收目标+27%。",
+      "sector": "医疗服务",
+      "sector_rank": "mid-tier (not top5/bottom5)",
+      "catalyst": "GLP-1/多肽CDMO管线19个临床项目(8个后期)+激励计划目标营收+27%+BD出海爆发",
+      "catalyst_freshness": "ongoing",
+      "rps120": 95.17,
+      "conviction": "moderate"
+    },
+    {
+      "code": "000811",
+      "name": "冰轮环境",
+      "entry_price": 42.85,
+      "allocation_pct": 4,
+      "stop": 40.71,
+      "target": 50.3,
+      "thesis": "液冷龙头+144%YTD，并购华源泰盟进展，合同负债¥13B创新高，AI数据中心散热需求结构性增长。近MA5(0.4%)，RPS20=99.56%极强。",
+      "sector": "通用设备",
+      "sector_rank": "mid-tier (not top5/bottom5)",
+      "catalyst": "液冷AI基础设施+并购进展+合同负债¥13B历史新高",
+      "catalyst_freshness": "ongoing",
+      "rps120": 99.28,
+      "conviction": "moderate"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "半导体 sector bottom-1 (-4.20%), hard no-buy zone",
+      "rps120": 98.57
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "半导体 sector bottom-1, hard no-buy",
+      "rps120": 97.89
+    },
+    {
+      "code": "300285",
+      "name": "国瓷材料",
+      "reason": "电子化学品Ⅱ sector bottom-4 (-1.83%), hard no-buy",
+      "rps120": 98.49
+    },
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "reason": "元件 sector bottom-5 (-1.11%), hard no-buy",
+      "rps120": 98.13
+    },
+    {
+      "code": "301536",
+      "name": "星宸科技",
+      "reason": "Rule 2b: dist_ma5=22.0% > 6%, extreme short-term extension",
+      "rps120": 96.24
+    },
+    {
+      "code": "688629",
+      "name": "华丰科技",
+      "reason": "Rule 2b: dist_ma5=7.8% > 6%, overextended",
+      "rps120": 97.44
+    },
+    {
+      "code": "688046",
+      "name": "药康生物",
+      "reason": "Rule 2b: dist_ma5=7.0% > 6% AND dist_ma20=15.5% > 12%",
+      "rps120": 90.72
+    },
+    {
+      "code": "002192",
+      "name": "融捷股份",
+      "reason": "Rule 2b: dist_ma5=6.7% > 6%, chasing risk",
+      "rps120": 89.13
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "Rule 2b: dist_ma10=8.7% > 8%, overextended from MA10",
+      "rps120": 96.42
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "reason": "Rule 2b: dist_ma20=13.1% > 12%, extreme extension. Profit driven by monkey asset revaluation, not core business",
+      "rps120": 91.04
+    },
+    {
+      "code": "600428",
+      "name": "中远海特",
+      "reason": "Rule 2b: dist_ma20=17.7% > 12%, extreme extension",
+      "rps120": 90.66
+    },
+    {
+      "code": "002980",
+      "name": "华盛昌",
+      "reason": "电网设备 #1 sector but stock in correction (dist_ma20=-17.7%), July 17 -10% limit down. Hot sector, broken stock — wait for stabilization",
+      "rps120": 99.78
+    },
+    {
+      "code": "605376",
+      "name": "博迁新材",
+      "reason": "能源金属 #3 sector but dist_ma20=-30.6% deep correction, July 16跌停. MLCC theme real but stock broken",
+      "rps120": 99.4
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Hot sector ≠ buyable stocks. 电网设备 #1 sector had 2 candidates, both in deep corrections with -10% limit-downs. When hot sectors have no technically sound entries, cash is correct.",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "Sector momentum can persist while individual leaders correct — the sector ETF may be up but individual stocks that already ran are consolidating. Wait for the next wave of leaders."
+    },
+    {
+      "text": "dist_ma20 ≈ 0% combined with RPS20 > 95% is the highest-probability pullback entry pattern in the current pool. 凯莱英 fits this exactly.",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "A strongly trending stock (high RPS20) that pulls back precisely to its 20-day moving average represents a mean-reversion entry at support within an uptrend. This is the Minervini 'volatility contraction' principle."
+    },
+    {
+      "text": "科创50 -3.78% vs 上证 +0.25% confirms persistent sector rotation from tech to resources/defense. This divergence has held for 3 sessions — not a one-day blip. Zero semiconductor buys is correct.",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h028",
+      "mechanism": "Index divergence reflects institutional repositioning — large funds are rotating out of tech growth into value/cyclical. This is a macro regime signal, not stock-specific."
+    },
+    {
+      "text": "V2's hard sector filter + MA extension filter eliminates ~80% of candidates immediately. Reduced decision fatigue and forced focus on the 2-3 best setups. This is the right operational model.",
+      "type": "observation",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "Fewer decisions with higher conviction beats many decisions with low conviction. The framework's elimination logic is doing the heavy lifting."
+    }
+  ],
+  "market_summary": "Breadth 3.53:1 bullish, 129涨停/2跌停, broad rally but regime is bipolar: 上证+0.25%/深证+0.44%/创业板+0.25% vs 科创50-3.78%. Resources/defense/grid surging, semiconductor collapsing (3rd day). IV elevated across growth proxies (科创50 79.78% extreme, 创业板 64%). Entry regime STRONG allows new positions but tech sectors are hard no-buy zones. Best setups in mid-tier sectors: 凯莱英 at MA20 support, 冰轮环境 near MA5. Deploying 9% total, 91% cash reserve for better sector-aligned opportunities.",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

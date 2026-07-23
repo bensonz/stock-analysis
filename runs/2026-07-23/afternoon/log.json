@@ -1,0 +1,119 @@
+{
+  "date": "2026-07-23",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1784792121.165997,
+      "errors": [],
+      "end": 1784792174.89968,
+      "duration_sec": 53.7
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 14765,
+      "tokens": {
+        "input_tokens": 449129,
+        "output_tokens": 14982
+      },
+      "rounds": 4,
+      "tool_calls_count": 8,
+      "duration_sec": 253.7,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1784792428.6366878,
+      "actions": [
+        "OPEN 002821 @ 163.54",
+        "OPEN 000811 @ 42.85",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=44",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=100",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=47",
+        "Hypothesis: Created h115 (observation): V2's hard sector filter + MA extension filter eliminates ~80% of candidates imme...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "000811",
+                "name": "冰轮环境",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 42.85,
+                "stopLoss": 40.71,
+                "distance_pct": 4.99,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1784792429.176754,
+      "duration_sec": 0.5
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 000811 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 307.9
+  }
+}

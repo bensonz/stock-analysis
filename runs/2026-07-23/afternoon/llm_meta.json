@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 449129,
+  "output_tokens": 14982,
+  "rounds": 4,
+  "duration_sec": 253.7,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 电网设备 板块 大涨 原因 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 2745
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "能源金属 锂矿 钴 板块 上涨 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 3351
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "凯莱英 002821 CXO 创新药 2026年7月 催化剂",
+        "max_results": 5
+      },
+      "result_length": 90
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "凯莱英 002821 业绩 催化剂 2026",
+        "max_results": 5
+      },
+      "result_length": 3346
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "冰轮环境 000811 液冷 并购 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 2906
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "荣昌生物 688331 创新药 回购 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 2449
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 半导体 板块 下跌 2026年7月23日 科创50 重挫"
+      },
+      "result_length": 4025
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "CXO 创新药 板块 2026年7月 政策 利好"
+      },
+      "result_length": 2485
+    }
+  ],
+  "fallback_used": false
+}
