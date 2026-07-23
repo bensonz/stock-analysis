@@ -1,0 +1,316 @@
+# Research Memo — 2026-07-23
+
+## 1. Market Regime
+
+**Tape: Weak-to-Balanced, Buy Gate FAILED**
+
+| Condition | Required | Actual | Pass? |
+|---|---|---|---|
+| Up/Down ratio ≥ 1.5:1 | 1.50 | 1.496:1 | ❌ Marginal |
+| Major indices green ≥ 2/3 | 2 | 0/3 | ❌ FAIL |
+| Panic (f10 ≥ 30) | No | f10=2 | ✅ |
+
+- 上证 -0.19% | 深证 -0.19% | 创业板 -0.33% | 科创50 **-4.09%**
+- Breadth: 3,227↑ / 2,157↓ / 143 flat → 1.50:1 (barely positive)
+- Distribution: r10=71 涨停, f10=2 跌停 → no panic, but r4_7+r7_10+r10 = 358 — nowhere near euphoria
+- r0_2 dominates (2,161) → weak rally, most stocks barely up
+- **Verdict: Buy gate NOT met. No new positions today. Focus on sector analysis and candidate screening for future entry.**
+
+**IV Sentiment:** Elevated across board. Average IV rank 64.9%. 科创50 at 84.56% (extreme panic in tech). 创业板 at 71.3%. This is a stressed tape — options market pricing in continued volatility. The high IV ranks favor being selective, but the real blocker today is the index alignment.
+
+**Key Macro:** Massive sector rotation underway — commodities surging (能源金属 +5.21%), tech getting crushed (半导体 -4.54%). This is a "risk-off rotation into cyclicals/resources" day, not a broad selloff (breadth still 1.5:1).
+
+---
+
+## 2. Sector Analysis
+
+### Hot Sectors (Top 5)
+| Rank | Sector | 5d % | Trend |
+|---|---|---|---|
+| 1 | 能源金属 | +5.21% | Accelerating |
+| 2 | 油服工程 | +4.82% | Steady |
+| 3 | 工业金属 | +4.07% | Accelerating |
+| 4 | 电网设备 | +3.86% | Steady |
+| 5 | 汽车服务 | +3.56% | Steady |
+
+### Cold Sectors (Bottom 5)
+| Rank | Sector | 5d % | Trend |
+|---|---|---|---|
+| 1 | 半导体 | -4.54% | Deteriorating |
+| 2 | 游戏Ⅱ | -3.84% | Deteriorating |
+| 3 | 医疗美容 | -2.40% | Weak |
+| 4 | IT服务Ⅱ | -2.15% | Weak |
+| 5 | 电子化学品Ⅱ | -1.99% | Weak |
+
+### Sector Rotation Signal
+This is a **classic commodity rotation day**. Energy metals, oil services, and industrial metals are leading while semiconductors — the previous leadership — are in freefall (科创50 -4.09%). The rotation is sharp and binary. Tech-heavy names in the strategy pool are being destroyed by sector gravity.
+
+**Position alignment:** N/A — 0 positions, 100% cash.
+
+**Key insight:** 32 of 53 strategy pool stocks are in electronics/semiconductor/IT sectors. Only ~5 are in the hot commodity/energy metal sectors. When the buy gate eventually clears, commodity-leveraged names (博迁新材, 金钼股份, 株冶集团) will be the priority, not the tech names.
+
+---
+
+## 3. Position Review
+
+**No active positions.** Portfolio is 100% cash (¥956,221). Realized PnL: -¥43,779 (-4.38%).
+
+No position decisions to make.
+
+---
+
+## 4. New Entry Candidates
+
+**Buy gate FAILED → `new_positions: []` mandatory.** Below is the analysis of what I WOULD buy if the gate were met, for the PM's forward reference.
+
+### Tier 1: Would Enter If Gate Cleared
+
+**博迁新材 (605376)** — 能源金属 #1 sector (+5.21%)
+- RPS120: 99.4% ✓ | dist_ma5: -2.4% ✓ | dist_ma10: -17.1% | dist_ma20: -30.6%
+- **Problem:** Deep in correction — price is 30% below MA20. This isn't a "pullback to support," it's a downtrend. The -2.4% dist_ma5 suggests a bounce attempt, but the trend structure is broken.
+- Catalyst: MLCC supply chain tightness, expansion project, but July 16 had a limit-down (-10%).
+- Margin: deleveraging (net5_repay_days=4, chg5=-21%)
+- IV: 300ETF 52.5% (selective)
+- **Verdict:** Sector is #1 but technical structure is damaged. Wait for MA convergence (price getting closer to flattening MA20) before entry. **SKIP for now.**
+
+**金钼股份 (601958)** — 工业金属 #3 sector (+4.07%)
+- RPS120: 91.81% ✓ | dist_ma5: +3.0% ✓ | dist_ma10: -1.6% ✓ | dist_ma20: -13.3%
+- **Best technical setup in hot sector.** Price hugging near MA10 with modest MA5 bounce. Not overextended. MA10 acting as nearby support.
+- Catalyst: 钼 (molybdenum) — strategic metal, earnings growth +33%, 7 highlights, 股息 2.8%. Near 1-year high.
+- Margin: neutral (net5_repay_days=2)
+- IV: 300ETF 52.5% (selective)
+- **Verdict:** Top pick once buy gate clears. Clean setup, hot sector, no MA extension violations. Would allocate 7-8%.
+
+**株冶集团 (600961)** — 工业金属 #3 sector (+4.07%)
+- RPS120: 93.66% ✓ | dist_ma5: +2.8% ✓ | dist_ma10: -4.6% ✓ | dist_ma20: -16.7%
+- Good but behind 金钼. PE 12.9 (low), 铅锌 play. Profit growth +145%.
+- Margin: deleveraging (net5_repay_days=3)
+- **Verdict:** Second choice in industrial metals. Sector hot, MA distances acceptable. Would allocate 5% as secondary position.
+
+### Tier 2: Interesting But Sector or Structure Issues
+
+**恒逸石化 (000703)** — 炼化及贸易 (not in top 5 sectors)
+- RPS120: 96.42% | dist_ma5: +2.9% | dist_ma10: +5.9% (close to 8% limit) | dist_ma20: +4.0%
+- Catalyst: Monster earnings growth (+2044% net profit), 炼化一体化 benefiting from中东 conflict-driven product price increases. H1 net profit forecast 55-60 billion.
+- **Problem:** Sector not in top 30%. Rule 1 says no. This is a classic V1 mistake — great individual setup in non-leading sector.
+- **Verdict:** Track closely. If 炼化及贸易 enters top 5 sectors, this becomes a buy. For now, skip on sector.
+
+**荣昌生物 (688331)** — 生物制品 (not hot, not cold)
+- RPS120: 91.87% | dist_ma5: +0.6% (near MA5!) | dist_ma10: -4.1% | dist_ma20: -1.2%
+- **Beautiful VCP-like structure** — price consolidating near MA20 with tight MA distances. 回购 announced.创新药 catalyst.
+- Margin: deleveraging (net5_repay_days=4)
+- IV: 科创50 84.56% (extreme — sizing concern)
+- **Problem:** 生物制品 sector not in top 5. Middle of the pack. Plus IV extreme.
+- **Verdict:** Premium technical setup, wrong sector. Monitor for sector rotation into biotech.
+
+---
+
+## 5. Skip List
+
+| Code | Name | Reason |
+|---|---|---|
+| 605376 | 博迁新材 | Hot sector #1 but deep correction (dist_ma20 -30.6%), broken trend structure |
+| 601958 | 金钼股份 | Buy gate failed (0/3 indices green) — would be top pick otherwise |
+| 600961 | 株冶集团 | Buy gate failed — second choice in industrial metals |
+| 301536 | 星宸科技 | MA extension violation: dist_ma5 +22%, dist_ma10 +20.4% — chasing |
+| 688629 | 华丰科技 | MA extension: dist_ma5 +7.8% (>6% Rule 2b violation) |
+| 002432 | 九安医疗 | MA extension: dist_ma10 +18.9%, dist_ma20 +20.2% |
+| 688046 | 药康生物 | MA extension: dist_ma5 +7.0% (>6%), dist_ma20 +15.5% |
+| 600428 | 中远海特 | MA extension: dist_ma10 +8.4% (>8%) |
+| 688630 | 芯碁微装 | MA boundary (dist_ma5 6.0%) + semiconductor bottom sector (-4.54%) |
+| 688037 | 芯源微 | Semiconductor sector dead bottom (-4.54%) — Rule 1 hard block |
+| 000703 | 恒逸石化 | Sector (炼化及贸易) not in top 30% — great fundamentals, wrong sector |
+| 688331 | 荣昌生物 | Sector (生物制品) not hot — excellent VCP structure but sector gravity |
+| 002821 | 凯莱英 | Sector (医疗研发外包) not in top 5 — solid setup, wrong neighborhood |
+| 603127 | 昭衍新药 | MA extension: dist_ma20 +13.1% (>12%) |
+| 002980 | 华盛昌 | Buy gate failed —电网设备 hot sector, RPS great, but dist_ma5 -7.1% shows momentum fading |
+| 000811 | 冰轮环境 | Sector (通用设备) not hot — deep pullback, deleveraging |
+
+---
+
+## 6. Learnings
+
+1. **The buy gate is doing its job.** Three major indices all red + Up/Down ratio borderline at 1.496:1. V1 would have forced a "small buy" here. V2 correctly holds cash. The regime is not favorable for opening new risk.
+
+2. **Commodity rotation is violent and binary.** 能源金属 at +5.21% vs 半导体 at -4.54% in a single day. This is not sector rotation — it's sector regime change. Strategy pool is ~60% tech names. When the buy gate clears, the playbook shifts to commodities.
+
+3. **科创50 IV at 84.56% is a panic signal.** Previous outlier spikes at this level (July 17-22) coincided with massive tech selling. The options market is pricing continued downside risk in tech. Any tech entry must wait for IV to normalize below 60%.
+
+4. **博迁新材 illustrates the "hot sector, broken stock" trap.** #1 sector, RPS 99.4%, but price is -30.6% below MA20. Sector strength hasn't stopped the individual stock's downtrend. Sector gravity works both ways — hot sector helps but can't rescue a broken technical structure.
+
+5. **荣昌生物 has textbook VCP structure but wrong sector.** dist_ma5 +0.6%, dist_ma20 -1.2% — tight consolidation near key MAs. This is the kind of setup that produces breakouts, but sector (生物制品) needs to heat up first. Track for sector rotation.
+
+6. **[h019 reaffirmed]** Bottom-list sector (半导体 -4.54%) contains multiple strategy pool names (芯源微, 芯碁微装, 华峰测控, etc.). These are automatically disqualified regardless of individual RPS or fundamentals. Sector gravity always wins.
+
+7. **[h027 reaffirmed]** Multiple stocks with strong RPS killed by MA extension: 星宸科技 (dist_ma5 +22%), 华丰科技 (+7.8%), 药康生物 (+7.0%). The anti-chase rule prevents buying these even in hot sectors.
+
+---
+
+## 7. Uncertainty Flags
+
+- **Uncertain about the breadth reading:** Up/Down 1.496 is technically below 1.5 but the entry_regime computed "balanced" and allowed positions. I'm taking the conservative interpretation (fail) because the index condition (0/3 green) is unambiguously not met. The PM should verify this interpretation.
+
+- **Uncertain about how persistent the commodity rotation is.** Today's energy metal surge could be a 1-2 day event (中东 conflict headlines) or the start of a multi-week trend. Need 2-3 more days of data to confirm persistence. If energy metals hold top-3 for 3 consecutive days, the regime has shifted.
+
+- **Uncertain about 博迁新材's real technical state.** dist_ma20 at -30.6% looks dire, but the stock has been in a sharp V-shaped correction. If it bounces hard off current levels, the MA distances will compress rapidly. The -2.4% dist_ma5 suggests the selling may be exhausting. Worth monitoring but not buying.
+
+- **Cash drag risk:** Portfolio is 100% cash (-4.38% YTD). The buy gate has been a hard constraint for several days. If the market rallies sharply and the gate clears, there's FOMO risk in rushing entries. The PM should pre-identify the top 2-3 candidates now so that when the gate clears, decisions are instantaneous.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "能源金属", "5d_pct": 5.21, "trend": "accelerating"},
+      {"name": "油服工程", "5d_pct": 4.82, "trend": "steady"},
+      {"name": "工业金属", "5d_pct": 4.07, "trend": "accelerating"},
+      {"name": "电网设备", "5d_pct": 3.86, "trend": "steady"},
+      {"name": "汽车服务", "5d_pct": 3.56, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "半导体", "5d_pct": -4.54, "trend": "deteriorating"},
+      {"name": "游戏Ⅱ", "5d_pct": -3.84, "trend": "deteriorating"},
+      {"name": "医疗美容", "5d_pct": -2.4, "trend": "deteriorating"},
+      {"name": "IT服务Ⅱ", "5d_pct": -2.15, "trend": "deteriorating"},
+      {"name": "电子化学品Ⅱ", "5d_pct": -1.99, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/0 positions (100% cash)",
+    "regime": "Commodity/energy metals surging, semiconductors collapsing. Sharp binary rotation, not broad rally."
+  },
+  "position_decisions": [],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601958",
+      "name": "金钼股份",
+      "reason": "Buy gate FAILED: 0/3 major indices green. Would be top pick (工业金属 #3 sector +4.07%, RPS120 91.81%, dist_ma10 -1.6% near support, 钼 strategic metal catalyst). Re-evaluate when indices turn green.",
+      "rps120": 91.81
+    },
+    {
+      "code": "600961",
+      "name": "株冶集团",
+      "reason": "Buy gate FAILED. Second choice in industrial metals. RPS120 93.66%, dist_ma5 +2.8%, PE 12.9. 铅锌 play, profit +145%. Monitor.",
+      "rps120": 93.66
+    },
+    {
+      "code": "605376",
+      "name": "博迁新材",
+      "reason": "Hot sector #1 (能源金属 +5.21%) but deep correction: dist_ma20 -30.6%, July 16 limit-down. Broken trend structure — sector strength insufficient to override. Wait for MA convergence.",
+      "rps120": 99.4
+    },
+    {
+      "code": "301536",
+      "name": "星宸科技",
+      "reason": "MA extension violation: dist_ma5 +22.0%, dist_ma10 +20.4%, dist_ma20 +17.7%. All three exceed Rule 2b limits. Extreme chasing risk.",
+      "rps120": 96.24
+    },
+    {
+      "code": "688629",
+      "name": "华丰科技",
+      "reason": "MA extension: dist_ma5 +7.8% (>6% Rule 2b). Also in 军工电子 sector, not top 30%.",
+      "rps120": 97.44
+    },
+    {
+      "code": "688630",
+      "name": "芯碁微装",
+      "reason": "Semiconductor sector dead bottom (-4.54%) — Rule 1 hard block. dist_ma5 at 6.0% boundary. Despite excellent fundamentals (9.1 score_company), sector gravity kills it.",
+      "rps120": 99.46
+    },
+    {
+      "code": "688037",
+      "name": "芯源微",
+      "reason": "Semiconductor sector dead bottom (-4.54%) — Rule 1 no-entry zone.",
+      "rps120": 98.57
+    },
+    {
+      "code": "002432",
+      "name": "九安医疗",
+      "reason": "MA extension: dist_ma10 +18.9%, dist_ma20 +20.2%. Way above support. DeepSeek/Kimi investment catalysts already priced in.",
+      "rps120": 93.58
+    },
+    {
+      "code": "688046",
+      "name": "药康生物",
+      "reason": "MA extension: dist_ma5 +7.0% (>6%), dist_ma20 +15.5% (>12%). Also had -20% limit-down on July 17 — extreme volatility.",
+      "rps120": 90.72
+    },
+    {
+      "code": "600428",
+      "name": "中远海特",
+      "reason": "MA extension: dist_ma10 +8.4% (>8% Rule 2b). Also sector (航运) not in top 30%.",
+      "rps120": 90.66
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "Sector (炼化及贸易) not in top 30%. Monster earnings (+2044% net profit) but Rule 1: sector gravity wins. Track if sector enters top 5.",
+      "rps120": 96.42
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "reason": "MA extension: dist_ma20 +13.1% (>12% Rule 2b). Profits driven by biological asset revaluation, not operating improvement.",
+      "rps120": 91.04
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物",
+      "reason": "Sector (生物制品) not hot. Textbook VCP structure (dist_ma5 +0.6%, dist_ma20 -1.2%) but wrong neighborhood. IV extreme (科创50 84.56%). Track for biotech rotation.",
+      "rps120": 91.87
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Buy gate correctly blocking entries: 0/3 major indices green + Up/Down 1.496:1 below threshold. V1 would have forced a small buy; V2 preserves cash. When index breadth and direction disagree (breadth OK, indices red), indices matter more for timing.",
+      "type": "rule",
+      "tags": ["entry-filter", "regime"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "Major indices reflect institutional flow; breadth reflects retail participation. When institutions are selling (indices red) but retail is buying (breadth OK), the tape is distribution, not accumulation. New longs should wait for institutional confirmation."
+    },
+    {
+      "text": "Commodity rotation today is extreme: 能源金属 +5.21% vs 半导体 -4.54%. Strategy pool is 60%+ tech names — this misalignment means few actionable candidates even when buy gate clears. Need to source more commodity/cyclical candidates.",
+      "type": "observation",
+      "tags": ["sector", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h028",
+      "mechanism": "When sector leadership flips from tech to commodities, the existing candidate universe becomes stale. Momentum systems must adapt their candidate pool to the new leadership, not force entries in declining sectors."
+    },
+    {
+      "text": "博迁新材 illustrates 'hot sector, broken stock' trap: #1 sector (能源金属 +5.21%) cannot save a stock -30.6% below MA20 with a recent limit-down. Sector gravity helps but doesn't override individual technical damage. Entry requires both sector tailwind AND intact individual structure.",
+      "type": "heuristic",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "Sector momentum provides a tailwind for stocks already in uptrends. It does not reverse individual downtrends. A stock deeply below MAs in a hot sector is still in a downtrend — the sector bid may slow the decline but won't reverse it without technical confirmation."
+    },
+    {
+      "text": "科创50 IV rank at 84.56% is a panic regime signal. All recent outlier spikes (July 15-22) coincided with tech selloffs. Options market is pricing extreme tail risk in tech. Any tech entry should require IV to normalize below 60% as additional filter.",
+      "type": "signal",
+      "tags": ["entry-filter", "position-sizing"],
+      "evidence_type": "supporting",
+      "mechanism": "IV rank >75% in sector ETFs signals forced deleveraging and panic hedging. Prices can gap violently in either direction. Entries during extreme IV face adverse selection: you're buying into forced selling, which can continue for days."
+    },
+    {
+      "text": "荣昌生物 (688331) has textbook VCP structure: dist_ma5 +0.6%, dist_ma20 -1.2%, consolidating near key MAs. This is the optimal entry pattern — but sector (生物制品) is mid-pack. Demonstrates that VCP is necessary but not sufficient: sector context determines whether the breakout has follow-through.",
+      "type": "observation",
+      "tags": ["timing", "sector"],
+      "evidence_type": "supporting",
+      "mechanism": "VCP identifies compression before expansion, but expansion direction depends on sector flows. In a neutral sector, VCP breakouts have ~50% success. In a hot sector, success rate is significantly higher. Sector is the multiplier on VCP quality."
+    },
+    {
+      "text": "Multiple MA-extension violations today: 星宸科技 dist_ma5 +22%, 华丰科技 +7.8%, 药康生物 +7.0%, 九安医疗 dist_ma10 +18.9%, 中远海特 dist_ma10 +8.4%. Rule 2b is filtering out 5+ candidates that V1 would have considered. This is a feature, not a bug.",
+      "type": "rule",
+      "tags": ["entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "Stocks that spike far above MAs revert to mean with high probability. The anti-chase rule removes the worst entry timing while preserving the ability to enter the same names after pullbacks."
+    }
+  ],
+  "market_summary": "All three major indices red (上证-0.19%, 深证-0.19%, 创业板-0.33%), 科创50 slammed -4.09%. Breadth 1.50:1 marginally positive, 71涨停/2跌停 — no panic but no conviction. Commodity rotation in full force: 能源金属 +5.21%, 工业金属 +4.07% leading; 半导体 -4.54% worst. IV elevated across board (avg rank 64.9%), 科创50 extreme at 84.56%. Buy gate FAILS: 0/3 indices green + Up/Down ratio borderline 1.496:1. 100% cash maintained. Top pre-identified candidates for when gate clears: 金钼股份, 株冶集团 (工业金属), 恒逸石化 (needs sector confirmation).",
+  "market_sentiment": "cautious",
+  "market_call": "观望"
+}
+```

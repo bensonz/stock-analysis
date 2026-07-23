@@ -178,6 +178,52 @@ def test_generate_verify_orchestration(monkeypatch):
     assert res["verify_audit"] is canned_audit and res["verify_rounds"] == 1
 
 
+def test_split_provider_judge_runs_on_verify_provider(monkeypatch):
+    """Writer on anthropic (the brain), judge/cleanup on openai (fast agent)."""
+    import llm_client
+
+    class _FakeUsage:
+        prompt_tokens, completion_tokens = 7, 3
+
+    class _FakeMsg:
+        content = '{"verdicts": {}}'
+
+    class _FakeChoice:
+        message = _FakeMsg()
+
+    class _FakeResp:
+        usage, choices = _FakeUsage(), [_FakeChoice()]
+
+    judge_calls = []
+
+    class _FakeOpenAI:
+        class chat:
+            class completions:
+                @staticmethod
+                def create(**kw):
+                    judge_calls.append(kw["model"])
+                    return _FakeResp()
+
+    monkeypatch.setattr(llm_client, "normalize_llm_provider",
+                        lambda p: p or "anthropic")
+    monkeypatch.setattr(llm_client, "_build_anthropic_client", lambda: object())
+    monkeypatch.setattr(llm_client, "_build_openai_client", lambda: _FakeOpenAI())
+    monkeypatch.setattr(llm_client, "DEFAULT_MODEL", "kimi-k3")
+    monkeypatch.setattr(llm_client, "OPENAI_MODEL", "deepseek-fast")
+    # writer draft: contains one internal claim so the pipeline runs but needs
+    # no web fetch; judge gets exercised via the unmatched-internal batch
+    monkeypatch.setattr(llm_client, "_run_tool_loop",
+                        lambda *a, **k: ("# 报告\n站上MA20约2.3%〖内部数据〗。", 10, 20, 1))
+
+    res = deep_report.generate("000703", provider="anthropic",
+                               data={"code": "000703.SZ"},
+                               verify=True, verify_provider="openai")
+    # every verify-side LLM call (judge round 1 + cleanup) ran on the verify provider
+    assert judge_calls and all(m == "deepseek-fast" for m in judge_calls)
+    assert res["provider"] == "anthropic" and res["model"] == "kimi-k3"
+    assert res["verify_audit"]["final"]["unverified_remaining"] == 0
+
+
 def test_write_verify_audit_path(tmp_path):
     audit = {"final": {"total": 1}}
     out = deep_report.write_verify_audit("000703.SZ", audit, output_dir=tmp_path)
@@ -191,9 +237,11 @@ def test_cli_verify_flags(monkeypatch, tmp_path, capsys):
     import sys as _sys
     seen = {}
 
-    def fake_generate(code, provider=None, verify=True, max_verify_rounds=2):
+    def fake_generate(code, provider=None, verify=True, max_verify_rounds=2,
+                      verify_provider=None):
         seen["verify"] = verify
         seen["max_verify_rounds"] = max_verify_rounds
+        seen["verify_provider"] = verify_provider
         return {"text": "# R", "tool_calls": [], "input_tokens": 1, "output_tokens": 1,
                 "rounds": 1, "provider": "openai", "model": "m", "data": {},
                 "verify_audit": None, "verify_rounds": 0}

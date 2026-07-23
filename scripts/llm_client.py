@@ -260,10 +260,27 @@ def execute_tool(name: str, input_data: dict) -> str:
 
 # --- LLM call with tool loop ---
 
+# Models that rejected `temperature` ("deprecated for this model", e.g. Fable 5)
+# — remembered so we only pay the failed round-trip once per model.
+_NO_TEMPERATURE_MODELS: set = set()
+
+
 def _anthropic_messages_create(client: anthropic.Anthropic, **kwargs):
-    """Wrap Anthropic calls with a clearer model-availability error."""
+    """Wrap Anthropic calls with a clearer model-availability error.
+
+    Also drops `temperature` for models that no longer accept it (Fable 5
+    returns 400 "`temperature` is deprecated for this model").
+    """
+    if kwargs.get("model") in _NO_TEMPERATURE_MODELS:
+        kwargs.pop("temperature", None)
     try:
         return client.messages.create(**kwargs)
+    except anthropic.BadRequestError as exc:
+        if "temperature" in str(exc) and "deprecated" in str(exc):
+            _NO_TEMPERATURE_MODELS.add(kwargs.get("model"))
+            kwargs.pop("temperature", None)
+            return client.messages.create(**kwargs)
+        raise
     except anthropic.InternalServerError as exc:
         message = str(exc)
         if "No available Claude accounts support the requested model" in message:

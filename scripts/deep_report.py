@@ -190,33 +190,49 @@ def _run_writer_pass(client, model, resolved, messages, tool_log, label) -> tupl
         client, messages, model, MAX_TOKENS, TEMPERATURE, tool_log, label=label)
 
 
-def _make_runners(resolved, client, model, tool_log, totals) -> tuple:
+def _make_runners(resolved, client, model, tool_log, totals,
+                  verify_resolved=None, verify_client=None, verify_model=None) -> tuple:
     """(revise_runner, judge_runner, cleanup_runner) for deep_verify.run_pipeline.
 
     Judge/cleanup are single no-tools calls (the _call_hybrid Pass-2 pattern);
     revise gets the full tool loop so it can re-search for better sources.
     All accumulate into `totals` so generate() can aggregate token counts.
+
+    The verify_* trio lets judge/cleanup run on a DIFFERENT (fast/cheap) model
+    than the writer — e.g. Kimi as the brain, DeepSeek as the verify agent.
+    Defaults to the writer's provider when not given.
     """
+    if verify_resolved is None:
+        verify_resolved, verify_client, verify_model = resolved, client, model
+    import threading
+
     import deep_verify
     import llm_client
+
+    # judge_runner is called concurrently (per-URL fan-out) — guard the counters
+    lock = threading.Lock()
+
+    def _add(i: int, o: int, r: int):
+        with lock:
+            totals["in"] += i
+            totals["out"] += o
+            totals["rounds"] += r
 
     def revise_runner(prompt: str):
         t, i, o, r = _run_writer_pass(
             client, model, resolved, [{"role": "user", "content": prompt}],
             tool_log, label="verify-revise ")
-        totals["in"] += i
-        totals["out"] += o
-        totals["rounds"] += r
+        _add(i, o, r)
         return t, i, o, r
 
     def _text_once(prompt: str, label: str, max_tokens: int):
-        if resolved == "anthropic":
+        if verify_resolved == "anthropic":
             t, i, o, _ = llm_client._run_anthropic_text_once(
-                client, [{"role": "user", "content": prompt}], model,
+                verify_client, [{"role": "user", "content": prompt}], verify_model,
                 max_tokens, deep_verify.JUDGE_TEMPERATURE, label=label)
         else:
-            resp = client.chat.completions.create(
-                model=model,
+            resp = verify_client.chat.completions.create(
+                model=verify_model,
                 max_tokens=max_tokens,
                 temperature=deep_verify.JUDGE_TEMPERATURE,
                 messages=[{"role": "user", "content": prompt}],
@@ -224,9 +240,7 @@ def _make_runners(resolved, client, model, tool_log, totals) -> tuple:
             )
             usage = resp.usage or type("U", (), {"prompt_tokens": 0, "completion_tokens": 0})()
             t, i, o = resp.choices[0].message.content or "", usage.prompt_tokens, usage.completion_tokens
-        totals["in"] += i
-        totals["out"] += o
-        totals["rounds"] += 1
+        _add(i, o, 1)
         return t, i, o
 
     # Judge emits small JSON verdicts; cleanup must re-emit a FULL report, so it
@@ -237,10 +251,15 @@ def _make_runners(resolved, client, model, tool_log, totals) -> tuple:
 
 
 def generate(code: str, provider: str | None = None, data: dict | None = None,
-             verify: bool = True, max_verify_rounds: int = MAX_VERIFY_ROUNDS) -> dict:
+             verify: bool = True, max_verify_rounds: int = MAX_VERIFY_ROUNDS,
+             verify_provider: str | None = None) -> dict:
     """Draft the article, then (unless verify=False) run the citation-verify
     pipeline: every number must be inline-linked and confirmed at its source,
     or tagged 〖内部数据〗 and matched against DATA. See agents/DEEP_VERIFY.md.
+
+    verify_provider lets the judge/cleanup passes run on a different (fast/cheap)
+    model than the writer — e.g. --provider anthropic (Kimi brain) with
+    --verify-provider openai (DeepSeek verify agent). Default: same as writer.
     """
     import llm_client
 
@@ -263,8 +282,17 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
 
         spec_verify = VERIFY_SPEC_FILE.read_text(encoding="utf-8")
         totals = {"in": 0, "out": 0, "rounds": 0}
+        v_resolved = v_client = v_model = None
+        if verify_provider:
+            v_resolved = llm_client.normalize_llm_provider(verify_provider)
+            if v_resolved == resolved:
+                v_client, v_model = client, model
+            else:
+                v_client, v_model = _provider_ctx(v_resolved)
+            print(f"  [verify] judge/cleanup on {v_resolved}/{v_model}", file=sys.stderr)
         revise_runner, judge_runner, cleanup_runner = _make_runners(
-            resolved, client, model, tool_log, totals)
+            resolved, client, model, tool_log, totals,
+            verify_resolved=v_resolved, verify_client=v_client, verify_model=v_model)
         text, verify_audit = deep_verify.run_pipeline(
             text, data,
             spec_writer=spec, spec_verify=spec_verify,
@@ -329,7 +357,8 @@ def main():
     if not args or args[0].startswith("-"):
         print(
             "usage: deep_report.py <code> [--provider anthropic|openai] "
-            "[--output-dir DIR] [--human] [--no-verify] [--max-verify-rounds N]",
+            "[--output-dir DIR] [--human] [--no-verify] [--max-verify-rounds N] "
+            "[--verify-provider anthropic|openai]",
             file=sys.stderr,
         )
         sys.exit(2)
@@ -340,10 +369,12 @@ def main():
     human = "--human" in args
     verify = "--no-verify" not in args
     mvr = _arg_value(args, "--max-verify-rounds")
+    verify_provider = _arg_value(args, "--verify-provider")
 
     print(f"[deep_report] gathering data for {code} ...", file=sys.stderr)
     result = generate(code, provider=provider, verify=verify,
-                      max_verify_rounds=int(mvr) if mvr else MAX_VERIFY_ROUNDS)
+                      max_verify_rounds=int(mvr) if mvr else MAX_VERIFY_ROUNDS,
+                      verify_provider=verify_provider)
     out = write_report(code, result["text"], output_dir=output_dir)
 
     if result.get("verify_audit"):

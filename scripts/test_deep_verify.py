@@ -286,6 +286,35 @@ def test_run_pipeline_exhausted_uses_cleanup_and_mechanical_guard():
     assert dv.GENERIC_FALLBACK in text
 
 
+def test_verify_linked_parallel_fanout():
+    """URL groups verify concurrently and results stay correct."""
+    import threading
+    import time
+
+    md = " ".join(
+        f"指标[{i}.5亿](https://site{i}.com/p)。" for i in range(1, 7)
+    )
+    claims = dv.extract_claims(md)
+    active = {"now": 0, "peak": 0}
+    lk = threading.Lock()
+
+    def slow_fetch(url):
+        with lk:
+            active["now"] += 1
+            active["peak"] = max(active["peak"], active["now"])
+        time.sleep(0.05)
+        with lk:
+            active["now"] -= 1
+        return PAGE
+
+    rec = dv.verify_claims(claims, set(), {}, spec_verify="S",
+                           judge_runner=_auto_judge(), fetch=slow_fetch, cache={})
+    assert rec["counts"]["verified"] == 6
+    assert all(c["status"] == "verified" for c in claims)
+    assert len(rec["fetches"]) == 6
+    assert active["peak"] > 1, "fetches did not overlap — fan-out broken"
+
+
 def test_strip_preamble():
     chatty = "Now I have all the verified data. Let me write.\n\n---\n\n# 报告标题\n正文"
     assert dv.strip_preamble(chatty).startswith("# 报告标题")
@@ -305,6 +334,57 @@ def test_pipeline_strips_revise_preamble():
         cleanup_runner=_boom, fetch=lambda u: PAGE)
     assert text.startswith("# 报告")
     assert "好的，我来修订" not in text
+
+
+def test_fallback_snaps_spans_to_link_boundaries():
+    # A failed claim whose span cuts INTO the link must swallow the whole link,
+    # never leave half a URL behind as naked digits.
+    text = "营收快速增长[43.14亿元](https://static.example.com/26/0428/AB123.html)创新高。"
+    link_start = text.index("[")
+    failed = [{"span": (5, link_start + 10), "fallback_text": None,
+               "kind": "naked", "numbers": ["43.14"]}]
+    out, n = dv.apply_mechanical_fallback(text, failed)
+    assert n == 1
+    assert "AB123" not in out and "0428" not in out     # no half-URL residue
+    assert not [c for c in dv.extract_claims(out) if c["kind"] == "naked"]
+
+
+def test_fallback_merges_overlapping_spans():
+    # Two 〖内部数据〗 tags in one sentence produce nested spans; both failing
+    # must yield ONE clean replacement, not stale-offset double mangling.
+    text = "RPS60=91.82〖内部数据〗、RPS120=85.79〖内部数据〗，动量强。"
+    claims = [c for c in dv.extract_claims(text) if c["kind"] == "internal"]
+    assert len(claims) == 2
+    out, n = dv.apply_mechanical_fallback(text, claims)
+    assert n == 1                                        # merged, single span
+    assert "略）略）" not in out and "〖" not in out
+    assert not [c for c in dv.extract_claims(out) if c["kind"] == "naked"]
+
+
+def test_guard_converges_on_real_mangled_output():
+    # Distilled from the live Kimi run where the old guard mangled links.
+    damaged = (
+        "盈利下滑（数据未核实，略）c.weeklyonstock.com/26/0428/AB262107.html)对照即知，"
+        "并入[3.86亿元](https://（数据未核实，略）未核实，略）月起），"
+        "（数据未核实，略）0天17家机构（16家买入）目标价24.86元。"
+    )
+    text = damaged
+    for _ in range(4):
+        naked = [c for c in dv.extract_claims(text) if c["kind"] == "naked"]
+        if not naked:
+            break
+        text, _n = dv.apply_mechanical_fallback(text, naked)
+    assert not [c for c in dv.extract_claims(text) if c["kind"] == "naked"]
+
+
+def test_internal_segment_never_starts_mid_link():
+    # TAG within 80 chars of a long URL: the segment must not cut the link.
+    text = ("对照[5.51亿元](https://very-long-url.example.com/aaaaaaaa/bbbbbbbb/cccc.html)"
+            "后，RPS60=91.82〖内部数据〗。")
+    internal = [c for c in dv.extract_claims(text) if c["kind"] == "internal"][0]
+    link_start = text.index("[")
+    link_end = text.index(")") + 1
+    assert not (link_start < internal["span"][0] < link_end)
 
 
 def test_verification_footer_counts():

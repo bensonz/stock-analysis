@@ -1,0 +1,36 @@
+{
+  "date": "2026-07-23",
+  "actions": [],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 956221.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -4.38,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -43779.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 1.4961,
+    "up": 3227,
+    "down": 2157,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 71,
+    "limit_downs": 2,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 1.50:1, 0/3 major indices green, 71 limit-ups / 2 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "All three major indices red (上证-0.19%, 深证-0.19%, 创业板-0.33%), 科创50 slammed -4.09%. Breadth 1.50:1 marginally positive, 71涨停/2跌停 — no panic but no conviction. Commodity rotation in full force: 能源金属 +5.21%, 工业金属 +4.07% leading; 半导体 -4.54% worst. IV elevated across board (avg rank 64.9%), 科创50 extreme at 84.56%. Buy gate FAILS: 0/3 indices green + Up/Down ratio borderline 1.496:1. 100% cash maintained. Top pre-identified candidates for when gate clears: 金钼股份, 株冶集团 (工业金属), 恒逸石化 (needs sector confirmation)."
+  }
+}

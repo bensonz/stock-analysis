@@ -14,7 +14,10 @@ See agents/DEEP_VERIFY.md for the judge spec and docs/deep_report_verify/ for
 the implementation plan.
 """
 import json
+import os
 import re
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 TAG = "〖内部数据〗"
 VERIFY_FETCH_MAX_CHARS = 20000  # verifier fetches more than the drafter's 8000
@@ -225,6 +228,7 @@ def extract_claims(markdown: str) -> list:
         covered = _merge_spans(covered + [m.span()])
 
     # 3. 〖内部数据〗 segments (outside covered table rows)
+    link_spans = [lm.span() for lm in LINK_RE.finditer(text)]
     for m in re.finditer(re.escape(TAG), text):
         if _in_spans(m.start(), covered):
             continue
@@ -232,6 +236,11 @@ def extract_claims(markdown: str) -> list:
         for b in _SEG_BOUNDARY_RE.finditer(text, max(0, m.start() - 80), m.start()):
             seg_start = b.end()
         seg_start = max(seg_start, m.start() - 80)
+        # never start mid-link: a segment that cuts a [label](url) in half
+        # would later mangle the link when its span gets replaced
+        for ls, le in link_spans:
+            if ls < seg_start < le:
+                seg_start = le
         segment = text[seg_start:m.start()]
         claims.append({
             "kind": "internal", "url": None,
@@ -325,6 +334,9 @@ def internal_numbers_match(numbers: list, data_numbers: set) -> bool:
 GENERIC_FALLBACK = "（数据未核实，略）"
 _FETCH_ERROR_PREFIXES = ("HTTP ", "Timeout", "Error", "Tavily")
 _MIN_PAGE_CHARS = 200
+# Per-URL fetch+judge fan-out. Each unique URL is independent (own fetch, own
+# judge call, own claim group), so verify wall-clock ≈ slowest URL, not the sum.
+VERIFY_MAX_WORKERS = int(os.getenv("DEEP_VERIFY_MAX_WORKERS", "6"))
 
 
 def _numsig(claim: dict) -> tuple:
@@ -429,6 +441,7 @@ def verify_claims(claims: list, data_numbers: set, data: dict, *, spec_verify: s
             cache[("__internal__", _numsig(c))] = (c["status"], c["reason"], c["fallback_text"])
 
     # Linked: one fetch per unique URL, one batched judge call per URL.
+    # URLs are independent — fan out (wall-clock ≈ slowest URL, not the sum).
     groups: dict = {}
     for c in (c for c in claims if c["kind"] == "linked"):
         key = (c["url"], _numsig(c))
@@ -436,23 +449,36 @@ def verify_claims(claims: list, data_numbers: set, data: dict, *, spec_verify: s
             c["status"], c["reason"], c["fallback_text"] = cache[key]
         else:
             groups.setdefault(c["url"], []).append(c)
-    for url, cs in groups.items():
+
+    lock = threading.Lock()
+
+    def _verify_url_group(url: str, cs: list) -> tuple:
         page = fetch(url)
         ok = bool(page) and not page.startswith(_FETCH_ERROR_PREFIXES) and len(page) >= _MIN_PAGE_CHARS
-        fetches.append({"url": url, "ok": ok, "chars": len(page or "")})
+        rec = {"url": url, "ok": ok, "chars": len(page or "")}
         if not ok:
-            for c in cs:
-                c["status"] = "unreachable"
-                c["reason"] = "来源无法访问或内容过短，请更换可访问的来源（优先巨潮资讯/东方财富/官方公告）"
-                cache[(url, _numsig(c))] = (c["status"], c["reason"], None)
-            continue
+            with lock:
+                for c in cs:
+                    c["status"] = "unreachable"
+                    c["reason"] = "来源无法访问或内容过短，请更换可访问的来源（优先巨潮资讯/东方财富/官方公告）"
+                    cache[(url, _numsig(c))] = (c["status"], c["reason"], None)
+            return rec, 0, 0
         verdicts, i, o = _judge_with_retry(
             judge_runner, build_judge_prompt(spec_verify, url, page, cs))
-        judge_in += i
-        judge_out += o
-        for c in cs:
-            _apply_verdict(c, (verdicts or {}).get(c["id"]))
-            cache[(url, _numsig(c))] = (c["status"], c["reason"], c["fallback_text"])
+        with lock:
+            for c in cs:
+                _apply_verdict(c, (verdicts or {}).get(c["id"]))
+                cache[(url, _numsig(c))] = (c["status"], c["reason"], c["fallback_text"])
+        return rec, i, o
+
+    if groups:
+        with ThreadPoolExecutor(max_workers=min(VERIFY_MAX_WORKERS, len(groups))) as ex:
+            futures = [ex.submit(_verify_url_group, url, cs) for url, cs in groups.items()]
+            for fut in as_completed(futures):
+                rec, i, o = fut.result()
+                fetches.append(rec)
+                judge_in += i
+                judge_out += o
 
     counts = {
         "linked": sum(1 for c in claims if c["kind"] == "linked"),
@@ -518,16 +544,40 @@ def build_cleanup_prompt(draft: str, failed: list) -> str:
 
 
 def apply_mechanical_fallback(text: str, failed: list) -> tuple:
-    """Deterministically replace failed claim spans. Returns (text, count)."""
-    count = 0
-    for c in sorted(failed, key=lambda c: c["span"][0], reverse=True):
-        s, e = c["span"]
+    """Deterministically replace failed claim spans. Returns (text, count).
+
+    Two hazards handled here (both produced mangled output in live runs):
+    - a claim span may start/end MID-LINK (the internal-segment scan caps at 80
+      chars and URLs contain no sentence boundaries) → snap the span outward to
+      whole-link boundaries so no half-URL survives as naked digits;
+    - spans may overlap/nest (two 〖内部数据〗 tags in one sentence) → merge
+      overlapping spans and replace once, never with stale offsets.
+    """
+    links = [m.span() for m in LINK_RE.finditer(text)]
+
+    def _snap(s: int, e: int) -> tuple:
+        for ls, le in links:
+            if ls < s < le:
+                s = ls
+            if ls < e < le:
+                e = le
+        return s, e
+
+    scheduled = []  # non-overlapping (start, end, repl), ascending
+    for c in sorted(failed, key=lambda c: (c["span"][0], -c["span"][1])):
+        s, e = _snap(*c["span"])
         repl = c.get("fallback_text") or GENERIC_FALLBACK
         if _has_ascii_digit(repl):  # a fallback may not smuggle numbers back in
             repl = GENERIC_FALLBACK
+        if scheduled and s <= scheduled[-1][1]:
+            ps, pe, prepl = scheduled[-1]
+            scheduled[-1] = (ps, max(pe, e), prepl)  # merge into the earlier span
+        else:
+            scheduled.append((s, e, repl))
+
+    for s, e, repl in reversed(scheduled):
         text = text[:s] + repl + text[e:]
-        count += 1
-    return text, count
+    return text, len(scheduled)
 
 
 def strip_preamble(text: str) -> str:
@@ -612,36 +662,43 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
         cleaned = strip_preamble(cleaned or "")
         if cleaned and len(cleaned) >= 0.4 * len(text):
             text = cleaned
-        # Post-cleanup: cache-verified claims pass; anything else unverified
-        # is mechanically replaced. Guarantees zero unverified numbers.
-        claims = extract_claims(text)
-        residual = []
-        for c in claims:
-            if c["kind"] == "naked":
-                residual.append(c)
-            elif c["kind"] == "internal":
-                key = ("__internal__", _numsig(c))
-                if cache.get(key, ("",))[0] == "verified" or \
-                        internal_numbers_match(c["numbers"], data_numbers):
-                    c["status"] = "verified"
-                else:
+        # Post-cleanup: cache-verified claims pass; anything else unverified is
+        # mechanically replaced. Iterate until no residual remains — a single
+        # pass is not enough because replacing one span can expose neighbours
+        # (e.g. a snapped span deleting a link changes what is naked around it).
+        def _classify(cs: list) -> list:
+            residual = []
+            for c in cs:
+                if c["kind"] == "naked":
                     residual.append(c)
-            else:
-                if cache.get((c["url"], _numsig(c)), ("",))[0] == "verified":
-                    c["status"] = "verified"
+                elif c["kind"] == "internal":
+                    key = ("__internal__", _numsig(c))
+                    if cache.get(key, ("",))[0] == "verified" or \
+                            internal_numbers_match(c["numbers"], data_numbers):
+                        c["status"] = "verified"
+                    else:
+                        residual.append(c)
                 else:
-                    residual.append(c)
-        if residual:
-            text, n = apply_mechanical_fallback(text, residual)
-            audit["cleanup"]["mechanical_fallbacks"] = n
+                    if cache.get((c["url"], _numsig(c)), ("",))[0] == "verified":
+                        c["status"] = "verified"
+                    else:
+                        residual.append(c)
+            return residual
+
+        total_fallbacks = 0
+        for _pass in range(4):
             claims = extract_claims(text)
-            for c in claims:  # final bookkeeping: everything left is cache-verified
-                if c["kind"] == "internal" and (
-                        cache.get(("__internal__", _numsig(c)), ("",))[0] == "verified"
-                        or internal_numbers_match(c["numbers"], data_numbers)):
-                    c["status"] = "verified"
-                elif c["kind"] == "linked" and cache.get((c["url"], _numsig(c)), ("",))[0] == "verified":
-                    c["status"] = "verified"
+            residual = _classify(claims)
+            if not residual:
+                break
+            text, n = apply_mechanical_fallback(text, residual)
+            total_fallbacks += n
+            log(f"mechanical guard pass {_pass + 1}: replaced {n} spans")
+        else:  # exhausted: recompute final state (residual here should be impossible)
+            claims = extract_claims(text)
+            if _classify(claims):
+                log("WARNING: mechanical guard did not converge — unverified numbers remain")
+        audit["cleanup"]["mechanical_fallbacks"] = total_fallbacks
 
     rewritten = sum(r["counts"]["failed"] + r["counts"]["unreachable"]
                     for r in audit["rounds"][-1:]) if audit["cleanup"]["used"] else 0

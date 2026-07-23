@@ -1,0 +1,51 @@
+{
+  "date": "2026-07-23",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1784777827.6622112,
+      "errors": [],
+      "end": 1784777875.08184,
+      "duration_sec": 47.4
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 18322,
+      "tokens": {
+        "input_tokens": 100746,
+        "output_tokens": 8896
+      },
+      "rounds": 1,
+      "tool_calls_count": 0,
+      "duration_sec": 142.7,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1784778017.8573382,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=10",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=45",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=99",
+        "Hypothesis: Created h114 (observation): 科创50 IV rank at 84.56% is a panic regime signal. All recent outlier spikes (July...",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=46",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=41",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1784778018.529543,
+      "duration_sec": 0.7
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 190.79999999999998
+  }
+}
