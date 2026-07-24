@@ -250,6 +250,26 @@ def growth_persistence(min_growth_pct: float = 40.0, decel_below_pct: float = 20
     }
 
 
+def stock_in_config(code6: str, config: str, db_path: str | None = None) -> dict:
+    """Is `code6` currently (last covered session) in a technical config's
+    state? Used to auto-log a prediction only when the reference class
+    actually applies to the subject. Returns {in_class, as_of, close_adj,
+    close_raw is NOT included — adjusted scale matches future resolution}."""
+    if config not in TECHNICAL_CONFIGS:
+        return {"in_class": False, "as_of": None, "close_adj": None}
+    p = get_panel(db_path)
+    if code6 not in p["closes"].columns:
+        return {"in_class": False, "as_of": None, "close_adj": None}
+    cond = TECHNICAL_CONFIGS[config][1](p)[code6].fillna(False)
+    as_of = cond.index[-1]
+    close = p["closes"][code6].iloc[-1]
+    return {
+        "in_class": bool(cond.iloc[-1]),
+        "as_of": str(as_of),
+        "close_adj": round(float(close), 4) if close == close else None,
+    }
+
+
 def base_rate(config: str, horizon_days: int = 60, drawdown_pct: int = 15,
               db_path: str | None = None) -> dict:
     """Single entry point (the deep-report tool calls this)."""

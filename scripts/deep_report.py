@@ -261,6 +261,111 @@ def _make_report_tools(data: dict) -> tuple:
     return [STOCK_FUNDAMENTALS_TOOL, BASE_RATE_TOOL], executor
 
 
+PREDICTIONS_BLOCK_RE = None  # compiled lazily in extract_predictions_block
+
+
+def extract_predictions_block(text: str) -> tuple:
+    """Split the writer's ```predictions fenced JSON block (judgment bets)
+    out of the article. Returns (records_or_[], text_without_block).
+
+    Runs on the DRAFT before verification: the block is the writer's own
+    banded bets, not claims to verify, and its numbers must not trip the
+    naked-number guard."""
+    import re
+    global PREDICTIONS_BLOCK_RE
+    if PREDICTIONS_BLOCK_RE is None:
+        PREDICTIONS_BLOCK_RE = re.compile(
+            r"```predictions\s*\n(.*?)\n```\s*", re.DOTALL)
+    m = PREDICTIONS_BLOCK_RE.search(text)
+    if not m:
+        return [], text
+    try:
+        raw = json.loads(m.group(1))
+        records = raw if isinstance(raw, list) else []
+    except json.JSONDecodeError:
+        records = []
+    return records, text[:m.start()] + text[m.end():]
+
+
+def build_auto_predictions(data: dict, made: str | None = None) -> list:
+    """Mechanically derivable bets from the base_rate tool calls of this run.
+
+    A technical base rate becomes a prediction only if the subject is
+    actually in the config's state on the last covered session (the writer
+    calling the tool is evidence, but we verify against the panel). The
+    growth-persistence rate becomes a prediction if the subject qualifies as
+    high-growth via its latest report or forecast."""
+    import base_rates as br
+
+    made = made or datetime.now().strftime("%Y-%m-%d")
+    code6 = str(data.get("code6", ""))
+    out = []
+    for key, r in (data.get("base_rates") or {}).items():
+        cfg = r.get("config")
+        if r.get("frequency_pct") is None:
+            continue
+        if cfg in br.TECHNICAL_CONFIGS:
+            state = br.stock_in_config(code6, cfg)
+            if not state["in_class"] or state["close_adj"] is None:
+                continue
+            h = int(key.rsplit("_", 2)[-2].rstrip("d") or 60)
+            dd = int(key.rsplit("_", 2)[-1].rstrip("pct") or 15)
+            out.append({
+                "id": f"{code6}-{made}-{key}",
+                "code": code6, "made": made, "kind": "price_drawdown",
+                "event": f"进入{cfg}形态后{h}个交易日内最大回撤≥{dd}%",
+                "params": {"horizon_sessions": h, "drawdown_pct": dd},
+                "entry_adj": state["close_adj"], "entry_as_of": state["as_of"],
+                "p": round(r["frequency_pct"] / 100, 4),
+                "source": f"base_rate:{cfg}", "status": "open",
+            })
+        elif cfg == "growth_persistence":
+            target = _growth_target_period(data)
+            if target is None:
+                continue
+            out.append({
+                "id": f"{code6}-{made}-growth_persistence_{target}",
+                "code": code6, "made": made, "kind": "earnings_decel",
+                "event": f"{target}期累计归母净利同比降速至20%以下",
+                "params": {"target_period": target, "decel_below_pct": 20},
+                "p": round(r["frequency_pct"] / 100, 4),
+                "source": "base_rate:growth_persistence", "status": "open",
+            })
+    return out
+
+
+def _growth_target_period(data: dict):
+    """Next report period to test for deceleration, if the subject qualifies
+    as high-growth (>=40% YoY in its latest report, annual, or forecast)."""
+    f = data.get("fundamentals") or {}
+    _PERIODS = {"一季报": "0331", "中报": "0630", "三季报": "0930", "年报": "1231"}
+
+    def _parse(label):  # "2026一季报" -> ("2026", "0331")
+        for name, mmdd in _PERIODS.items():
+            if label and label.endswith(name):
+                return label[:-len(name)], mmdd
+        return None
+
+    candidates = []
+    for block, val_key in (("latest_report", "net_profit_yoy_pct"),
+                           ("annual_report", "net_profit_yoy_pct")):
+        b = f.get(block) or {}
+        if (b.get(val_key) or 0) >= 40 and _parse(b.get("period")):
+            candidates.append(_parse(b.get("period")))
+    for fc in f.get("forecast") or []:
+        if (fc.get("change_pct") or 0) >= 40:
+            per = str(fc.get("period", ""))  # "2026H1" style
+            mmdd = {"Q1": "0331", "H1": "0630", "Q1-Q3": "0930", "全年": "1231"}.get(per[4:])
+            if mmdd:
+                candidates.append((per[:4], mmdd))
+    if not candidates:
+        return None
+    year, mmdd = max(candidates, key=lambda c: c[0] + c[1])
+    order = ["0331", "0630", "0930", "1231"]
+    i = order.index(mmdd)
+    return f"{year}{order[i + 1]}" if i < 3 else f"{int(year) + 1}0331"
+
+
 def _provider_ctx(resolved: str) -> tuple:
     """Client + model for a normalized provider name."""
     import llm_client
@@ -373,6 +478,7 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
     text, tin, tout, rounds = _run_writer_pass(
         client, model, resolved, messages, tool_log, label="deep_report ",
         extra_tools=extra_tools, tool_executor=tool_executor)
+    judgment_bets, text = extract_predictions_block(text)
 
     verify_audit = None
     verify_rounds = 0
@@ -406,6 +512,27 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
         tout += totals["out"]
         rounds += totals["rounds"]
 
+    # The prediction ledger: auto bets from base_rate calls (verified against
+    # the subject's actual state) + the writer's judgment bets from the
+    # ```predictions block. Caller decides whether to log (main() does).
+    made = datetime.now().strftime("%Y-%m-%d")
+    code6 = str(data.get("code6", ""))
+    predictions = build_auto_predictions(data, made)
+    for i, j in enumerate(judgment_bets, 1):
+        if not isinstance(j, dict) or not j.get("event"):
+            continue
+        rec = {"id": f"{code6}-{made}-j{i}", "code": code6, "made": made,
+               "kind": "manual", "event": str(j["event"]),
+               "expires": str(j.get("expires", "")), "source": "judgment",
+               "status": "open"}
+        if j.get("p") is not None:
+            rec["p"] = float(j["p"])
+        elif j.get("p_low") is not None and j.get("p_high") is not None:
+            rec["p_low"], rec["p_high"] = float(j["p_low"]), float(j["p_high"])
+        else:
+            continue  # a bet without a probability is not a bet
+        predictions.append(rec)
+
     return {
         "text": text,
         "tool_calls": tool_log,
@@ -417,6 +544,7 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
         "data": data,
         "verify_audit": verify_audit,
         "verify_rounds": verify_rounds,
+        "predictions": predictions,
     }
 
 
@@ -485,6 +613,16 @@ def main():
             f"/{f['total']} verified ({f['verified_linked']} linked/"
             f"{f['verified_internal']} internal), {f['rewritten_qualitative']} rewritten"
             f", rounds={result['verify_rounds']} | audit {audit_path}",
+            file=sys.stderr,
+        )
+
+    if result.get("predictions"):
+        import prediction_log
+
+        n_new = prediction_log.append(result["predictions"])
+        print(
+            f"[deep_report] predictions: {len(result['predictions'])} bets "
+            f"({n_new} new) → {prediction_log.PRED_FILE}",
             file=sys.stderr,
         )
 
