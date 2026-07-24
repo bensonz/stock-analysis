@@ -14,8 +14,10 @@ text does not show the number, it is not supported — even if you believe the
 number is true.
 
 **内部DATA核验** — you get the pipeline's internal DATA JSON (technicals, rps_gate,
-margin) plus claims tagged 〖内部数据〗. A claim is supported if its numbers appear
-in DATA or are directly computable from DATA values by simple arithmetic
+margin, fundamentals, peer_fundamentals — exchange-disclosure 财报/预告/估值 numbers
+for the subject and fetched peers) plus claims tagged 〖内部数据〗. A claim is
+supported if its numbers appear in DATA or are directly computable from DATA values
+by simple arithmetic (note fundamentals money values are in 亿元, ratios in percent)
 (differences, percent distance from an MA, comparisons like 站上MA20).
 
 ## Verdicts

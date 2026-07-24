@@ -150,6 +150,14 @@ def gather_data(code: str) -> dict:
 
     data["margin"] = _safe(lambda: fetch_margin_flow(code6), "margin", errors)
 
+    # Exchange-disclosure financials for the SUBJECT (exact, current-period).
+    # Peers are fetched on demand by the writer via the stock_fundamentals tool.
+    import fundamentals
+
+    data["fundamentals"] = _safe(
+        lambda: fundamentals.stock_snapshot(code6, include_valuation=False, include_rps=False),
+        "fundamentals", errors)
+
     if errors:
         data["_gather_errors"] = errors
     return data
@@ -169,6 +177,48 @@ def build_prompt(spec: str, code: str, data: dict) -> str:
     )
 
 
+STOCK_FUNDAMENTALS_TOOL = {
+    "name": "stock_fundamentals",
+    "description": (
+        "获取任意A股的交易所披露口径财务数据：最新季报/年报（营收、净利、同比、EPS、ROE、"
+        "毛利率、每股经营现金流）、业绩预告/快报（含原文）、估值（PE/PB/估值分位）、RPS动量。"
+        "所有涉及A股个股财务数字（本股或同业对标）必须优先使用本工具，其返回的数字可直接引用"
+        "并标注〖内部数据〗（无需外部链接）。web_search 仅用于新闻、行业、定性信息。"
+    ),
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "code": {
+                "type": "string",
+                "description": "6位A股代码，如 300014 或 300014.SZ",
+            },
+        },
+        "required": ["code"],
+    },
+}
+
+
+def _make_fundamentals_tool(data: dict) -> tuple:
+    """([tool_def], executor) for the writer loop.
+
+    Every fetch is stored into data['peer_fundamentals'] so the verify
+    pipeline's DATA corpus covers it — that's what turns these numbers into
+    verifiable 〖内部数据〗 claims instead of unverifiable web claims.
+    """
+    import fundamentals
+
+    def executor(name: str, tool_input: dict):
+        if name != "stock_fundamentals":
+            return None  # fall through to web_search/web_fetch dispatch
+        code6 = str(tool_input.get("code", "")).split(".")[0].strip()
+        store = data.setdefault("peer_fundamentals", {})
+        if code6 not in store:  # revise rounds reuse the first fetch
+            store[code6] = fundamentals.stock_snapshot(code6)
+        return json.dumps(store[code6], ensure_ascii=False, indent=1)
+
+    return [STOCK_FUNDAMENTALS_TOOL], executor
+
+
 def _provider_ctx(resolved: str) -> tuple:
     """Client + model for a normalized provider name."""
     import llm_client
@@ -179,19 +229,23 @@ def _provider_ctx(resolved: str) -> tuple:
     return llm_client._build_openai_client(), llm_client.OPENAI_MODEL
 
 
-def _run_writer_pass(client, model, resolved, messages, tool_log, label) -> tuple:
+def _run_writer_pass(client, model, resolved, messages, tool_log, label,
+                     extra_tools=None, tool_executor=None) -> tuple:
     """One tool-loop pass (draft or revise). Returns (text, tin, tout, rounds)."""
     import llm_client
 
     if resolved == "anthropic":
         return llm_client._run_tool_loop(
-            client, messages, model, MAX_TOKENS, TEMPERATURE, tool_log, label=label)
+            client, messages, model, MAX_TOKENS, TEMPERATURE, tool_log, label=label,
+            extra_tools=extra_tools, tool_executor=tool_executor)
     return llm_client._run_openai_tool_loop(
-        client, messages, model, MAX_TOKENS, TEMPERATURE, tool_log, label=label)
+        client, messages, model, MAX_TOKENS, TEMPERATURE, tool_log, label=label,
+        extra_tools=extra_tools, tool_executor=tool_executor)
 
 
 def _make_runners(resolved, client, model, tool_log, totals,
-                  verify_resolved=None, verify_client=None, verify_model=None) -> tuple:
+                  verify_resolved=None, verify_client=None, verify_model=None,
+                  extra_tools=None, tool_executor=None) -> tuple:
     """(revise_runner, judge_runner, cleanup_runner) for deep_verify.run_pipeline.
 
     Judge/cleanup are single no-tools calls (the _call_hybrid Pass-2 pattern);
@@ -221,7 +275,8 @@ def _make_runners(resolved, client, model, tool_log, totals,
     def revise_runner(prompt: str):
         t, i, o, r = _run_writer_pass(
             client, model, resolved, [{"role": "user", "content": prompt}],
-            tool_log, label="verify-revise ")
+            tool_log, label="verify-revise ",
+            extra_tools=extra_tools, tool_executor=tool_executor)
         _add(i, o, r)
         return t, i, o, r
 
@@ -272,8 +327,10 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
     tool_log: list = []
 
     client, model = _provider_ctx(resolved)
+    extra_tools, tool_executor = _make_fundamentals_tool(data)
     text, tin, tout, rounds = _run_writer_pass(
-        client, model, resolved, messages, tool_log, label="deep_report ")
+        client, model, resolved, messages, tool_log, label="deep_report ",
+        extra_tools=extra_tools, tool_executor=tool_executor)
 
     verify_audit = None
     verify_rounds = 0
@@ -292,7 +349,8 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
             print(f"  [verify] judge/cleanup on {v_resolved}/{v_model}", file=sys.stderr)
         revise_runner, judge_runner, cleanup_runner = _make_runners(
             resolved, client, model, tool_log, totals,
-            verify_resolved=v_resolved, verify_client=v_client, verify_model=v_model)
+            verify_resolved=v_resolved, verify_client=v_client, verify_model=v_model,
+            extra_tools=extra_tools, tool_executor=tool_executor)
         text, verify_audit = deep_verify.run_pipeline(
             text, data,
             spec_writer=spec, spec_verify=spec_verify,

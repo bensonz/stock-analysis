@@ -395,7 +395,10 @@ def build_judge_prompt(spec_verify: str, url: str, page_text: str, claims: list)
 
 
 def build_internal_judge_prompt(spec_verify: str, data: dict, claims: list) -> str:
-    slim = {k: data.get(k) for k in ("technicals", "rps_gate", "margin") if k in data}
+    slim = {k: data.get(k)
+            for k in ("technicals", "rps_gate", "margin",
+                      "fundamentals", "peer_fundamentals")
+            if k in data}
     items = [{"id": c["id"], "numbers": c["numbers"], "context": c["context"]} for c in claims]
     return (
         spec_verify
@@ -420,15 +423,18 @@ def verify_claims(claims: list, data_numbers: set, data: dict, *, spec_verify: s
             c["status"] = "failed"
             c["reason"] = "数字缺少引用链接或〖内部数据〗标注"
 
-    # Internal: mechanical match first, one batched judge call for the rest.
+    # Internal: mechanical match first — BEFORE the cache. The DATA corpus can
+    # grow mid-pipeline (revise passes fetch peer fundamentals via the
+    # stock_fundamentals tool), so a claim that failed in round 1 may match
+    # mechanically in round 2; a stale cached "failed" must not pin it.
     unmatched = []
     for c in (c for c in claims if c["kind"] == "internal"):
         key = ("__internal__", _numsig(c))
-        if key in cache:
-            c["status"], c["reason"], c["fallback_text"] = cache[key]
-        elif internal_numbers_match(c["numbers"], data_numbers):
+        if internal_numbers_match(c["numbers"], data_numbers):
             c["status"] = "verified"
             cache[key] = ("verified", "", None)
+        elif key in cache:
+            c["status"], c["reason"], c["fallback_text"] = cache[key]
         else:
             unmatched.append(c)
     if unmatched:
@@ -622,10 +628,11 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
         fetch = lambda url: llm_client.execute_web_fetch(url, VERIFY_FETCH_MAX_CHARS)  # noqa: E731
     log = log if log is not None else (lambda msg: None)
 
-    data_numbers = flatten_data_numbers(data)
-    data_slim = {k: v for k, v in data.items() if k not in ("intro", "valuation_history")}
-    if isinstance(data_slim.get("technicals"), dict):
-        data_slim["technicals"] = {k: v for k, v in data_slim["technicals"].items() if k != "klines"}
+    def _slim(d: dict) -> dict:
+        s = {k: v for k, v in d.items() if k not in ("intro", "valuation_history")}
+        if isinstance(s.get("technicals"), dict):
+            s["technicals"] = {k: v for k, v in s["technicals"].items() if k != "klines"}
+        return s
 
     cache: dict = {}
     audit = {"max_rounds": max_rounds, "rounds": [],
@@ -634,6 +641,10 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
     claims: list = []
 
     for rnd in range(1, max_rounds + 1):
+        # Recomputed per round: revise passes can grow `data` (the
+        # stock_fundamentals tool stores peer snapshots into it), and new
+        # 〖内部数据〗 claims must verify against the grown corpus.
+        data_numbers = flatten_data_numbers(data)
         claims = extract_claims(text)
         log(f"verify round {rnd}: {len(claims)} claims")
         rec = verify_claims(claims, data_numbers, data, spec_verify=spec_verify,
@@ -647,7 +658,7 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
         if rnd == max_rounds:
             break
         revised, _tin, _tout, _rr = revise_runner(
-            build_revise_prompt(spec_writer, text, failed, data_slim, rnd, max_rounds))
+            build_revise_prompt(spec_writer, text, failed, _slim(data), rnd, max_rounds))
         revised = strip_preamble(revised or "")
         if revised and len(revised) >= 0.4 * len(text):
             text = revised
@@ -657,6 +668,7 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
 
     failed = _failed(claims)
     if failed:
+        data_numbers = flatten_data_numbers(data)  # corpus may have grown in the last revise
         audit["cleanup"]["used"] = True
         cleaned, _i, _o = cleanup_runner(build_cleanup_prompt(text, failed))
         cleaned = strip_preamble(cleaned or "")

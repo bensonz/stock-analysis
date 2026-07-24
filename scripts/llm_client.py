@@ -300,8 +300,15 @@ def _run_tool_loop(
     temperature: float,
     tool_log: list,
     label: str = "",
+    extra_tools: list | None = None,
+    tool_executor=None,
 ) -> tuple[str, int, int, int]:
     """Run LLM with tool-use loop until final text response.
+
+    extra_tools (Anthropic schema) + tool_executor(name, input) -> str | None
+    let a caller add run-scoped tools (e.g. deep_report's stock_fundamentals)
+    without exposing them to every pipeline. Executor returning None falls
+    through to the global execute_tool dispatch.
 
     Returns: (final_text, input_tokens, output_tokens, rounds)
     """
@@ -315,7 +322,7 @@ def _run_tool_loop(
             model=model,
             max_tokens=max_tokens,
             temperature=temperature,
-            tools=TOOLS,
+            tools=TOOLS + list(extra_tools or []),
             messages=messages,
         )
 
@@ -356,7 +363,9 @@ def _run_tool_loop(
             tool_input = tool_block.input
             print(f" → {tool_name}({_summarize_input(tool_input)})", file=sys.stderr, end="", flush=True)
 
-            result_text = execute_tool(tool_name, tool_input)
+            result_text = tool_executor(tool_name, tool_input) if tool_executor else None
+            if result_text is None:
+                result_text = execute_tool(tool_name, tool_input)
             tool_log.append({
                 "pass": label.strip(),
                 "round": round_num,
@@ -451,6 +460,18 @@ OPENAI_TOOLS = [
 ]
 
 
+def anthropic_tool_to_openai(tool: dict) -> dict:
+    """Convert an Anthropic tool definition to the OpenAI function schema."""
+    return {
+        "type": "function",
+        "function": {
+            "name": tool["name"],
+            "description": tool["description"],
+            "parameters": tool["input_schema"],
+        },
+    }
+
+
 def _as_dict(obj) -> dict:
     """Best-effort object-to-dict helper for SDK models with provider-specific fields."""
     if obj is None:
@@ -493,13 +514,19 @@ def _run_openai_tool_loop(
     temperature: float,
     tool_log: list,
     label: str = "",
+    extra_tools: list | None = None,
+    tool_executor=None,
 ) -> tuple[str, int, int, int]:
     """Run OpenAI LLM with tool-use loop until final text response.
+
+    extra_tools are given in ANTHROPIC schema (converted here) so callers
+    define a run-scoped tool once for both providers; see _run_tool_loop.
 
     Returns: (final_text, input_tokens, output_tokens, rounds)
     """
     total_input = 0
     total_output = 0
+    tools = OPENAI_TOOLS + [anthropic_tool_to_openai(t) for t in (extra_tools or [])]
 
     for round_num in range(1, MAX_TOOL_ROUNDS + 1):
         print(f"  {label}round {round_num}...", file=sys.stderr, end="", flush=True)
@@ -508,7 +535,7 @@ def _run_openai_tool_loop(
             model=model,
             max_tokens=max_tokens,
             temperature=temperature,
-            tools=OPENAI_TOOLS,
+            tools=tools,
             messages=messages,
         )
 
@@ -542,7 +569,9 @@ def _run_openai_tool_loop(
 
             print(f" → {tool_name}({_summarize_input(tool_input)})", file=sys.stderr, end="", flush=True)
 
-            result_text = execute_tool(tool_name, tool_input)
+            result_text = tool_executor(tool_name, tool_input) if tool_executor else None
+            if result_text is None:
+                result_text = execute_tool(tool_name, tool_input)
             tool_log.append({
                 "pass": label.strip(),
                 "round": round_num,
