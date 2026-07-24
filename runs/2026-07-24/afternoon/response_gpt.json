@@ -1,0 +1,175 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "地面兵装Ⅱ",
+        "5d_pct": 2.26,
+        "trend": "accelerating"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": 0.87,
+        "trend": "steady"
+      },
+      {
+        "name": "摩托车及其他",
+        "5d_pct": 0.73,
+        "trend": "steady"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": 0.62,
+        "trend": "resilient"
+      },
+      {
+        "name": "股份制银行Ⅱ",
+        "5d_pct": 0.32,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "医疗美容",
+        "5d_pct": -5.78,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "贵金属",
+        "5d_pct": -5.56,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "工业金属",
+        "5d_pct": -4.93,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "能源金属",
+        "5d_pct": -4.89,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "软件开发",
+        "5d_pct": -4.51,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/1 positions in hot sectors — 凯莱英(医疗服务)中性偏弱",
+    "regime": "全面恐慌：国防/银行防御性轮动，资源/金属/软件遭重锤，半导体是唯一成长板块相对抗跌"
+  },
+  "position_decisions": [
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "action": "SELL",
+      "reason": "🚨 CRITICAL止损接近：仅1.81%距155.36止损(现价158.22)。恐慌广度0.11:1，三大指数全绿。隔夜跳空跌破止损风险极高(h024: 止损接近应主动执行)。融资chg5=-13.46%持续撤离。行业不在热点。持仓2天即-3.25%说明入场时机错误。",
+      "sector_rank": "中性偏弱(医疗服务未在Top/Bottom 30%)",
+      "new_stop": null,
+      "pnl_pct": -3.25,
+      "days_held": 2,
+      "exit_price": 158.22
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "🚫 硬阻止：恐慌广度0.11:1禁止新开仓。正常市场应为STRONG BUY(半导体Top4行业, RPS120=99.36, 0风险, dist_ma5=-4.1%安全, QoQ+52%增长)",
+      "rps120": 99.36
+    },
+    {
+      "code": "688630",
+      "name": "芯碁微装",
+      "reason": "🚫 硬阻止 + dist_ma5=6.0%触发Rule 2b上限(>6%不得买入)。港股通调入催化虽强但已延伸",
+      "rps120": 99.32
+    },
+    {
+      "code": "688629",
+      "name": "华丰科技",
+      "reason": "🚫 硬阻止 + dist_ma5=7.8%严重违反Rule 2b(>6%)",
+      "rps120": 97.2
+    },
+    {
+      "code": "002396",
+      "name": "星网锐捷",
+      "reason": "🚫 硬阻止 + dist_ma5=6.8%/dist_ma10=12.5%/dist_ma20=27.3%三重严重违反Rule 2b",
+      "rps120": 91.2
+    },
+    {
+      "code": "301536",
+      "name": "星宸科技",
+      "reason": "🚫 硬阻止 + dist_ma5=22.0%/dist_ma10=20.4%极端延伸, 严重违反Rule 2b",
+      "rps120": 95.81
+    },
+    {
+      "code": "300285",
+      "name": "国瓷材料",
+      "reason": "🚫 硬阻止 + dist_ma5=5.8%接近Rule 2b上限。MLCC涨价催化虽强但不宜在恐慌日追",
+      "rps120": 98.35
+    },
+    {
+      "code": "002192",
+      "name": "融捷股份",
+      "reason": "🚫 硬阻止 + 能源金属板块Bottom 5(-4.89%) + 锂板块近3月弱于98.8%板块",
+      "rps120": 88.16
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "硬阻止在0.11:1广度下正确拦截了所有买入冲动。华峰测控(半导体龙头/0风险/RPS120=99.36/dist_ma5安全)在V1会被'小仓位试探'，V2强制保留现金。这是h077的又一次验证。",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "恐慌广度意味着系统性风险压倒个股基本面，任何新开仓的期望收益为负"
+    },
+    {
+      "text": "止损接近在恐慌环境中必须主动执行，不要等精确触发。凯莱英距止损仅1.81%，今日跌幅-3.25%加速恶化。历史案例(扬杰科技跳空至-8.37%)证明：等gap-down发生后再卖=多亏3-5个百分点。",
+      "type": "rule",
+      "tags": [
+        "exit-rule",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "恐慌日的低流动性+高波动意味着跳空概率远高于正常日，止损保护应前置到2%以内距离"
+    },
+    {
+      "text": "Rule 2b今日批量拦截4个'视觉强势'标的：星网锐捷(dist_ma5=6.8%/10=12.5%/20=27.3%)、星宸科技(22%/20.4%)、华丰科技(7.8%)、药康生物(7%/15.5%)。均线偏离是最客观的防追高机制，无需主观判断。",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "短中期均线偏离过大的股票即使趋势向上，也面临均值回归的统计压力，买入后需要先'还债'才能盈利"
+    },
+    {
+      "text": "半导体(+0.62%)是今日唯一进入Top5的成长板块，在全市场-2.5%的屠杀日展现强相对韧性。这确认了半导体作为AI算力核心基础设施的持续性主题地位。当市场反弹时，半导体将是领涨方向。",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h028",
+      "mechanism": "全球AI算力投资周期+国产替代加速+设备扩产订单持续，半导体具备独立于大盘的结构性需求支撑"
+    },
+    {
+      "text": "V2的5条规则框架在今日极端市场中表现完整：Rule1(行业优先)锁定半导体相对强度、硬阻止门槛正确拦截、Rule2(RPS≥75)快速筛选、Rule2b(均线偏离)过滤延伸标的、Rule5(止损-5%)触发主动卖出决策。没有规则冲突，没有过度分析。",
+      "type": "observation",
+      "tags": [
+        "rule"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "简化的5规则框架在极端市场中比V1的20+规则更可执行，因为每个规则都是硬约束而非模糊评分"
+    }
+  ],
+  "market_summary": "全面恐慌日：三大指数全线下跌(-1.61%/-2.47%/-2.65%)，涨跌比0.11:1(555涨/4940跌)，43涨停/25跌停。驱动因素：特朗普新关税+金价暴跌+伊朗冲突升级(美军连续空袭)。国防/银行防御性轮动，半导体为唯一成长板块相对抗跌(+0.62%)。IV全面偏高(平均IV Rank 0.61)，科创50 IV Rank 0.79(极高恐慌)。新开仓硬阻止生效，仅处理现有持仓。凯莱英止损接近触发主动卖出建议。",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}

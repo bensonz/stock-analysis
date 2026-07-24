@@ -1,0 +1,51 @@
+{
+  "date": "2026-07-24",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1784878845.987964,
+      "errors": [],
+      "end": 1784878901.943476,
+      "duration_sec": 56.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 9063,
+      "tokens": {
+        "input_tokens": 200784,
+        "output_tokens": 7676
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 143.1,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1784879045.096818,
+      "actions": [
+        "SELL 002821",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=13",
+        "Hypothesis: Updated h024 (validated): +1 supporting evidence → hitRate=100%, n=8",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=42",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=48",
+        "Hypothesis: Created h116 (observation): V2的5条规则框架在今日极端市场中表现完整：Rule1(行业优先)锁定半导体相对强度、硬阻止门槛正确拦截、Rule2(RPS≥75)快速筛选、Rule2b(均线...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1784879045.331681,
+      "duration_sec": 0.2
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 199.29999999999998
+  }
+}

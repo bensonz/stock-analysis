@@ -1,0 +1,45 @@
+{
+  "date": "2026-07-24",
+  "actions": [
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "action": "SELL",
+      "price": 158.22,
+      "pnl_pct": -3.25,
+      "note": "🚨 CRITICAL止损接近：仅1.81%距155.36止损(现价158.22)。恐慌广度0.11:1，三大指数全绿。隔夜跳空跌破止损风险极高(h024: 止损接近应主动执行)。融资chg5=-13.46%持续撤离。行业不在热点。持仓2天即-3.25%说明入场时机错误。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 953837.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -4.62,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -46163.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.1123,
+    "up": 555,
+    "down": 4940,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 43,
+    "limit_downs": 25,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.11:1, 0/3 major indices green, 43 limit-ups / 25 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "全面恐慌日：三大指数全线下跌(-1.61%/-2.47%/-2.65%)，涨跌比0.11:1(555涨/4940跌)，43涨停/25跌停。驱动因素：特朗普新关税+金价暴跌+伊朗冲突升级(美军连续空袭)。国防/银行防御性轮动，半导体为唯一成长板块相对抗跌(+0.62%)。IV全面偏高(平均IV Rank 0.61)，科创50 IV Rank 0.79(极高恐慌)。新开仓硬阻止生效，仅处理现有持仓。凯莱英止损接近触发主动卖出建议。"
+  }
+}

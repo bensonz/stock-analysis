@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 200784,
+  "output_tokens": 7676,
+  "rounds": 2,
+  "duration_sec": 143.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 今日大跌 原因 2026年7月24日",
+        "max_results": 5
+      },
+      "result_length": 1819
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体板块 上涨 2026年7月 政策利好",
+        "max_results": 5
+      },
+      "result_length": 3193
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "地面兵装 板块 上涨 国防军工 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 2870
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "凯莱英 002821 CXO 创新药 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 3336
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 市场情绪 恐慌 资金流出 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 3123
+    }
+  ],
+  "fallback_used": false
+}
