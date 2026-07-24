@@ -197,17 +197,30 @@ _PROXY_ENV_KEYS = (
 
 @contextlib.contextmanager
 def _no_proxy_env():
-    """Temporarily strip proxy env vars so libraries that ignore trust_env still work.
+    """Temporarily force DIRECT connections for libraries we don't control.
 
-    Why: Surge and similar local proxies intercept *.eastmoney.com and break price
-    fetches. Pricedb deliberately bypasses these.
+    Why: Surge and similar local proxies intercept *.eastmoney.com and break
+    price fetches. Stripping HTTP(S)_PROXY is NOT enough on macOS — python
+    `requests` falls back to the *system* proxy configuration
+    (urllib.request.getproxies), which routed the factor backfill through a
+    local Privoxy that collapsed under load ("Unable to connect to proxy").
+    Setting NO_PROXY='*' wins over both env and system config in requests'
+    should_bypass_proxies check, making the bypass actually stick.
     """
     saved = {k: os.environ.pop(k, None) for k in _PROXY_ENV_KEYS}
+    saved_no_proxy = {k: os.environ.get(k) for k in ("NO_PROXY", "no_proxy")}
+    os.environ["NO_PROXY"] = "*"
+    os.environ["no_proxy"] = "*"
     try:
         yield
     finally:
         for k, v in saved.items():
             if v is not None:
+                os.environ[k] = v
+        for k, v in saved_no_proxy.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
                 os.environ[k] = v
 
 
@@ -1753,6 +1766,13 @@ def _backfill_from_akshare_spot(conn: sqlite3.Connection, date_iso: str) -> int:
 # 2-dp adjusted closes, not a corporate action. Dividends below 0.5% are
 # negligible for MA/RPS anyway.
 ADJ_EVENT_THRESHOLD = 0.005
+# Politeness for the factor backfill. The first run hammered eastmoney's kline
+# API at ~3 req/s with no sleep and got this IP temporarily banned (empty
+# replies on push2his AND push2 — which also starves the daily pipeline).
+# Never again: pace requests, and circuit-break on failure bursts.
+ADJ_BACKFILL_SLEEP_SEC = float(os.getenv("ADJ_BACKFILL_SLEEP_SEC", "0.4"))
+ADJ_BACKFILL_COOLDOWN_SEC = float(os.getenv("ADJ_BACKFILL_COOLDOWN_SEC", "300"))
+ADJ_BACKFILL_MAX_COOLDOWNS = 3
 
 
 def _frame_close_series(frame) -> dict:
@@ -1994,7 +2014,7 @@ def cmd_factors(args: list):
         print(f"Backfilling factors for {len(todo)} codes ({beg} → {end})...",
               file=sys.stderr)
         earliest_changed: str | None = None
-        done = failed = 0
+        done = failed = consecutive_failures = cooldowns = 0
         for code in todo:
             try:
                 series = derive_factors_from_akshare(ak, code, beg, end)
@@ -2004,12 +2024,33 @@ def cmd_factors(args: list):
                     if changed and (earliest_changed is None or changed < earliest_changed):
                         earliest_changed = changed
                 done += 1
+                consecutive_failures = 0
             except Exception as e:  # keep sweeping; rerun heals the rest
                 failed += 1
+                consecutive_failures += 1
                 print(f"  {code}: FAILED ({str(e)[:80]})", file=sys.stderr)
+                if consecutive_failures >= 10:
+                    cooldowns += 1
+                    if cooldowns > ADJ_BACKFILL_MAX_COOLDOWNS:
+                        print(
+                            "ABORT: sustained connection failures — likely an "
+                            "upstream IP throttle/ban. Backfill is resumable; "
+                            "retry later with the same command.",
+                            file=sys.stderr,
+                        )
+                        break
+                    print(
+                        f"  circuit breaker: {consecutive_failures} consecutive "
+                        f"failures — cooling down {ADJ_BACKFILL_COOLDOWN_SEC:.0f}s "
+                        f"({cooldowns}/{ADJ_BACKFILL_MAX_COOLDOWNS})",
+                        file=sys.stderr,
+                    )
+                    time.sleep(ADJ_BACKFILL_COOLDOWN_SEC)
+                    consecutive_failures = 0
             if (done + failed) % 100 == 0:
                 print(f"  progress: {done + failed}/{len(todo)} "
                       f"({failed} failed)", file=sys.stderr)
+            time.sleep(ADJ_BACKFILL_SLEEP_SEC)
         filled = _forward_fill_factors(conn)
         print(f"Backfill done: {done} ok, {failed} failed, forward-filled {filled} rows.",
               file=sys.stderr)
