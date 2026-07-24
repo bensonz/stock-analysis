@@ -209,14 +209,29 @@ def _no_proxy_env():
     """
     saved = {k: os.environ.pop(k, None) for k in _PROXY_ENV_KEYS}
     saved_no_proxy = {k: os.environ.get(k) for k in ("NO_PROXY", "no_proxy")}
-    os.environ["NO_PROXY"] = "*"
-    os.environ["no_proxy"] = "*"
+    # Escape hatch: PRICEDB_FORCE_PROXY=<url> routes price fetches THROUGH a
+    # proxy instead of bypassing it — used when the direct IP is throttled by
+    # a provider and the user has routed the proxy's exit appropriately
+    # (e.g. Clash global mode). Explicit opt-in only; default stays direct.
+    forced = os.getenv("PRICEDB_FORCE_PROXY", "").strip()
+    if forced:
+        os.environ["HTTP_PROXY"] = forced
+        os.environ["HTTPS_PROXY"] = forced
+        os.environ["http_proxy"] = forced
+        os.environ["https_proxy"] = forced
+        os.environ.pop("NO_PROXY", None)
+        os.environ.pop("no_proxy", None)
+    else:
+        os.environ["NO_PROXY"] = "*"
+        os.environ["no_proxy"] = "*"
     try:
         yield
     finally:
         for k, v in saved.items():
             if v is not None:
                 os.environ[k] = v
+            elif k in os.environ:
+                os.environ.pop(k, None)
         for k, v in saved_no_proxy.items():
             if v is None:
                 os.environ.pop(k, None)
@@ -638,14 +653,19 @@ def _fetch_eastmoney_json_urllib(url: str) -> str:
 
 
 def _fetch_eastmoney_json_curl(url: str) -> str:
+    # Honors PRICEDB_FORCE_PROXY: curl's TLS fingerprint differs from python's,
+    # which matters when a provider fingerprint-blocks the python stack.
+    proxy = os.getenv("PRICEDB_FORCE_PROXY", "").strip()
     completed = subprocess.run(
         [
             "curl",
             "-sS",
             "--max-time",
             str(max(1, int(PRICEDB_CALL_TIMEOUT_SEC))),
+            "-H",
+            "User-Agent: Mozilla/5.0 pricedb",
             "-x",
-            "",
+            proxy,  # "" == explicit no-proxy (curl treats empty as direct)
             url,
         ],
         check=True,
@@ -658,6 +678,14 @@ def _fetch_eastmoney_json_curl(url: str) -> str:
 
 
 def _fetch_eastmoney_json(url: str) -> dict:
+    if os.getenv("PRICEDB_FORCE_PROXY", "").strip():
+        # python's urllib shares the (potentially blocked) python TLS
+        # fingerprint — in forced-proxy mode go straight to curl
+        raw = _run_with_timeout("Eastmoney curl", lambda: _fetch_eastmoney_json_curl(url))
+        try:
+            return json.loads(raw)
+        except json.JSONDecodeError as e:
+            raise RuntimeError(f"eastmoney curl returned non-JSON: {raw[:80]!r}") from e
     try:
         raw = _run_with_timeout("Eastmoney urllib", lambda: _fetch_eastmoney_json_urllib(url))
     except Exception as urllib_error:
@@ -1788,15 +1816,71 @@ def _frame_close_series(frame) -> dict:
     return out
 
 
-def derive_factors_from_akshare(ak, code: str, beg: str, end: str) -> list[tuple]:
-    """Dense [(iso_date, factor)] for one stock via the return-ratio method.
+def _return_ratio_factors(raw_s: dict, hfq_s: dict) -> list[tuple]:
+    """[(iso_date, factor)] from raw + adjusted close series.
 
-    Eastmoney's hfq series is additive-style, so hfq/raw is NOT a constant
-    factor — but on any single day, (hfq return) / (raw return) equals the
-    corporate-action multiplier (1.0 on normal days). Thresholding kills the
-    2-dp rounding noise; cumprod rebuilds a proper multiplicative hfq factor
-    with base 1.0 at the series start.
+    Any correctly-adjusted series works, additive or multiplicative: on a
+    single day, (adj return) / (raw return) equals the corporate-action
+    multiplier (1.0 on normal days). Thresholding kills rounding noise;
+    cumprod rebuilds a proper multiplicative hfq factor, base 1.0 at start.
     """
+    dates = sorted(set(raw_s) & set(hfq_s))
+    if not dates:
+        return []
+    factor = 1.0
+    out = [(dates[0], factor)]
+    for prev, cur in zip(dates, dates[1:]):
+        if raw_s[prev] <= 0 or hfq_s[prev] <= 0 or raw_s[cur] <= 0:
+            m = 1.0
+        else:
+            m = (hfq_s[cur] / hfq_s[prev]) / (raw_s[cur] / raw_s[prev])
+        if abs(m - 1.0) <= ADJ_EVENT_THRESHOLD:
+            m = 1.0
+        factor *= m
+        out.append((cur, round(factor, 8)))
+    return out
+
+
+def _kline_closes_eastmoney(secid: str, beg: str, end: str, fqt: int) -> dict:
+    """{iso_date: close} straight from eastmoney's kline API (curl-capable
+    transport, honors PRICEDB_FORCE_PROXY)."""
+    query = urllib.parse.urlencode({
+        "secid": secid,
+        "fields1": "f1",
+        "fields2": "f51,f53",  # date, close
+        "klt": "101",
+        "fqt": str(fqt),
+        "beg": beg,
+        "end": end,
+        "ut": "fa5fd1943c7b386f172d6893dbfba10b",
+    })
+    payload = _fetch_eastmoney_json(f"{EASTMONEY_KLINE_URL}?{query}")
+    klines = ((payload or {}).get("data") or {}).get("klines") or []
+    out: dict = {}
+    for line in klines:
+        parts = str(line).split(",")
+        if len(parts) >= 2:
+            close = _safe_float(parts[1])
+            if close and close > 0:
+                out[parts[0][:10]] = close
+    return out
+
+
+def derive_factors_eastmoney(code: str, exchange: str, beg: str, end: str) -> list[tuple]:
+    """Return-ratio factors from eastmoney's own raw (fqt=0) + hfq (fqt=2)
+    klines. Preferred over the akshare path: two curl fetches, no pandas, and
+    immune to python-TLS fingerprint blocks."""
+    secid = _eastmoney_secid({"code": code, "exchange": exchange})
+    if not secid:
+        return []
+    with _no_proxy_env():
+        raw_s = _kline_closes_eastmoney(secid, beg, end, fqt=0)
+        hfq_s = _kline_closes_eastmoney(secid, beg, end, fqt=2)
+    return _return_ratio_factors(raw_s, hfq_s)
+
+
+def derive_factors_from_akshare(ak, code: str, beg: str, end: str) -> list[tuple]:
+    """Return-ratio factors via akshare raw + hfq histories (fallback path)."""
     with _no_proxy_env():
         raw = _run_with_timeout(
             f"AkShare raw {code}",
@@ -1808,19 +1892,7 @@ def derive_factors_from_akshare(ak, code: str, beg: str, end: str) -> list[tuple
             lambda: ak.stock_zh_a_hist(symbol=code, period="daily",
                                        start_date=beg, end_date=end, adjust="hfq"),
         )
-    raw_s, hfq_s = _frame_close_series(raw), _frame_close_series(hfq)
-    dates = sorted(set(raw_s) & set(hfq_s))
-    if not dates:
-        return []
-    factor = 1.0
-    out = [(dates[0], factor)]
-    for prev, cur in zip(dates, dates[1:]):
-        m = (hfq_s[cur] / hfq_s[prev]) / (raw_s[cur] / raw_s[prev])
-        if abs(m - 1.0) <= ADJ_EVENT_THRESHOLD:
-            m = 1.0
-        factor *= m
-        out.append((cur, round(factor, 8)))
-    return out
+    return _return_ratio_factors(_frame_close_series(raw), _frame_close_series(hfq))
 
 
 def upsert_adj_factors(conn: sqlite3.Connection, rows: list) -> str | None:
@@ -2011,13 +2083,19 @@ def cmd_factors(args: list):
             "SELECT DISTINCT code FROM daily_prices "
             "EXCEPT SELECT DISTINCT code FROM adj_factors ORDER BY 1"
         )]
+        exchanges = dict(conn.execute("SELECT code, exchange FROM stocks"))
         print(f"Backfilling factors for {len(todo)} codes ({beg} → {end})...",
               file=sys.stderr)
         earliest_changed: str | None = None
         done = failed = consecutive_failures = cooldowns = 0
         for code in todo:
             try:
-                series = derive_factors_from_akshare(ak, code, beg, end)
+                # eastmoney-native first (curl transport, proxy-capable);
+                # akshare as fallback (python requests — same data, different
+                # client stack). BJ codes have no eastmoney secid → akshare.
+                series = derive_factors_eastmoney(code, exchanges.get(code, ""), beg, end)
+                if not series:
+                    series = derive_factors_from_akshare(ak, code, beg, end)
                 if series:
                     changed = upsert_adj_factors(
                         conn, [(code, d, f) for d, f in series])
