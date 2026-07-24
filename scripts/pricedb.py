@@ -1879,6 +1879,75 @@ def derive_factors_eastmoney(code: str, exchange: str, beg: str, end: str) -> li
     return _return_ratio_factors(raw_s, hfq_s)
 
 
+SINA_HFQ_URL = "https://finance.sina.com.cn/realstock/company/{sym}/hfq.js"
+
+
+def _sina_symbol(code: str, exchange: str) -> str | None:
+    exchange = (exchange or "").upper()
+    if exchange == "SH" or code.startswith(("600", "601", "603", "605", "688", "689")):
+        return f"sh{code}"
+    if exchange == "SZ" or code.startswith(("000", "001", "002", "003", "300", "301")):
+        return f"sz{code}"
+    return None  # BJ codes: sina hfq.js unsupported
+
+
+def fetch_adj_factor_events_sina(code: str, exchange: str) -> list[tuple] | None:
+    """Sparse hfq factor EVENTS for one stock straight from Sina.
+
+    Sina publishes the cumulative hfq factor series directly (one row per
+    corporate action since listing) — no derivation needed, one tiny request
+    per stock, from the provider this repo already trusts for realtime quotes.
+    Returns [(iso_date, factor)] ascending, or None when unsupported/parse
+    failure (caller falls back to derivation). Factors are absolute-scale
+    (since listing); only within-stock ratios matter downstream, and dates
+    before the first event correctly default to factor 1.0.
+    """
+    sym = _sina_symbol(code, exchange)
+    if not sym:
+        return None
+    import requests
+    with _no_proxy_env():
+        resp = requests.get(
+            SINA_HFQ_URL.format(sym=sym),
+            headers={"User-Agent": "Mozilla/5.0 pricedb", "Referer": "https://finance.sina.com.cn"},
+            timeout=PRICEDB_CALL_TIMEOUT_SEC,
+        )
+    if resp.status_code != 200 or "=" not in resp.text:
+        return None
+    try:
+        # payload is `var xxhfq={...};/* signature */` — raw_decode takes the
+        # first JSON value and ignores the trailing comment block
+        payload, _ = json.JSONDecoder().raw_decode(resp.text.split("=", 1)[1].strip())
+        events = [
+            (str(item["d"])[:10], float(item["f"]))
+            for item in (payload.get("data") or [])
+            if item.get("d") and item.get("f")
+        ]
+    except (json.JSONDecodeError, KeyError, ValueError, TypeError):
+        return None
+    events.sort()
+    return events
+
+
+def _expand_events_to_code_dates(conn: sqlite3.Connection, code: str,
+                                 events: list) -> list[tuple]:
+    """Map sparse factor events onto a code's actual traded dates (dense rows).
+
+    Applicable factor for date d = factor of the latest event <= d, else 1.0
+    (the pre-first-event hfq base). Guarantees the table is dense for the code
+    so COALESCE never mixes scales inside one window (hazard F1).
+    """
+    event_dates = [d for d, _ in events]
+    rows = []
+    for (d,) in conn.execute(
+        "SELECT date FROM daily_prices WHERE code = ? ORDER BY date", (code,)
+    ):
+        i = bisect.bisect_right(event_dates, d) - 1
+        factor = events[i][1] if i >= 0 else 1.0
+        rows.append((code, d, round(factor, 8)))
+    return rows
+
+
 def derive_factors_from_akshare(ak, code: str, beg: str, end: str) -> list[tuple]:
     """Return-ratio factors via akshare raw + hfq histories (fallback path)."""
     with _no_proxy_env():
@@ -2090,15 +2159,19 @@ def cmd_factors(args: list):
         done = failed = consecutive_failures = cooldowns = 0
         for code in todo:
             try:
-                # eastmoney-native first (curl transport, proxy-capable);
-                # akshare as fallback (python requests — same data, different
-                # client stack). BJ codes have no eastmoney secid → akshare.
-                series = derive_factors_eastmoney(code, exchanges.get(code, ""), beg, end)
-                if not series:
-                    series = derive_factors_from_akshare(ak, code, beg, end)
-                if series:
-                    changed = upsert_adj_factors(
-                        conn, [(code, d, f) for d, f in series])
+                # Sina publishes hfq factors directly (1 tiny request/stock) —
+                # primary source. Eastmoney return-ratio derivation and akshare
+                # remain as fallbacks for codes sina doesn't carry.
+                events = fetch_adj_factor_events_sina(code, exchanges.get(code, ""))
+                if events is not None:
+                    rows = _expand_events_to_code_dates(conn, code, events)
+                else:
+                    series = derive_factors_eastmoney(code, exchanges.get(code, ""), beg, end)
+                    if not series:
+                        series = derive_factors_from_akshare(ak, code, beg, end)
+                    rows = [(code, d, f) for d, f in series]
+                if rows:
+                    changed = upsert_adj_factors(conn, rows)
                     if changed and (earliest_changed is None or changed < earliest_changed):
                         earliest_changed = changed
                 done += 1

@@ -150,6 +150,36 @@ def test_factor_coverage():
     assert cov["max_price_date"] == "2026-07-01"
 
 
+def test_sina_event_parse_with_trailing_comment(monkeypatch):
+    """Sina hfq.js is `var x={json};/* signature */` — parse must survive it."""
+    class _Resp:
+        status_code = 200
+        text = ('var sz002832hfq={"total":2,"data":[{"d":"2026-06-09", "f":"6.01"},'
+                '{"d":"2025-12-29", "f":"5.81"}]};/* trailing signature */')
+
+    import requests
+    monkeypatch.setattr(requests, "get", lambda *a, **k: _Resp())
+    events = pricedb.fetch_adj_factor_events_sina("002832", "SZ")
+    assert events == [("2025-12-29", 5.81), ("2026-06-09", 6.01)]  # ascending
+
+
+def test_sina_expand_events_to_dates():
+    conn = _pricedb_conn()
+    for d in ["2026-06-05", "2026-06-09", "2026-06-10"]:
+        conn.execute("INSERT INTO daily_prices VALUES ('002832', ?, 1,1,1,20,0,0)", (d,))
+    rows = pricedb._expand_events_to_code_dates(
+        conn, "002832", [("2025-12-29", 5.81), ("2026-06-09", 6.01)])
+    assert rows == [("002832", "2026-06-05", 5.81),   # pre-ex: prior event's factor
+                    ("002832", "2026-06-09", 6.01),   # ex-day: new factor
+                    ("002832", "2026-06-10", 6.01)]   # carried forward
+
+
+def test_sina_symbol_mapping():
+    assert pricedb._sina_symbol("600000", "SH") == "sh600000"
+    assert pricedb._sina_symbol("002832", "") == "sz002832"
+    assert pricedb._sina_symbol("430047", "BJ") is None  # BJ unsupported
+
+
 # --------------------------------------------------------------------------- #
 # Read-path correctness (rps_calculator / fetch_ma_data with a dividend)
 # --------------------------------------------------------------------------- #
