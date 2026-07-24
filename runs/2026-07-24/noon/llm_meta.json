@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 205730,
+  "output_tokens": 8434,
+  "rounds": 2,
+  "duration_sec": 149.3,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月24日 大跌原因 市场恐慌",
+        "max_results": 5
+      },
+      "result_length": 3172
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "地面兵装 板块 大涨 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 2504
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体 板块 2026年7月 A股 景气度",
+        "max_results": 5
+      },
+      "result_length": 3248
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "冰轮环境 液冷 2026年7月 最新消息",
+        "max_results": 5
+      },
+      "result_length": 3310
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "凯莱英 CXO 2026年7月 最新动态",
+        "max_results": 5
+      },
+      "result_length": 2732
+    }
+  ],
+  "fallback_used": false
+}
