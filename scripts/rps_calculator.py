@@ -16,7 +16,11 @@ import os
 import sqlite3
 import sys
 from datetime import datetime, time as _time
+from pathlib import Path
 from typing import Optional
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import price_adjust
 
 
 def compute_ma_rps(
@@ -99,7 +103,16 @@ def compute_ma_rps(
             f"today window={today_dates[-1]}→{today_dates[0]} eligible_ma_today={len(ma_today)}",
         )
 
-        results = {code: {"ma10_today": round(ma, 4)} for code, ma in ma_today.items()}
+        # _get_ma returns hfq-scale values (dividend/split-corrected). The
+        # RPS deltas below use them directly; the *reported* ma10 (and the
+        # rps_cache.ma10 column) is normalized by the reference-date factor
+        # back into real price scale — identical to the raw MA whenever no
+        # corporate action falls inside the window.
+        f_ref = price_adjust.get_factors_on_date(conn, reference_date)
+        results = {
+            code: {"ma10_today": round(ma / f_ref.get(code, 1.0), 4)}
+            for code, ma in ma_today.items()
+        }
 
         for lookback in [20, 60, 120, 250]:
             rps_key = f"rps{lookback}"
@@ -176,16 +189,20 @@ def compute_ma(db_path: str, code: str, date: str, period: int = 10) -> Optional
         if not reference_date:
             return None
 
+        price_adjust.ensure_adj_schema(conn)
         rows = conn.execute(
-            "SELECT close FROM daily_prices "
-            "WHERE code=? AND date <= ? ORDER BY date DESC LIMIT ?",
+            f"SELECT {price_adjust.adjusted_close_sql()}, {price_adjust.factor_sql()} "
+            f"FROM daily_prices d{price_adjust.adj_join_sql()} "
+            "WHERE d.code=? AND d.date <= ? ORDER BY d.date DESC LIMIT ?",
             (code, reference_date, period),
         ).fetchall()
         if len(rows) < period:
             return None
 
-        closes = [float(row[0]) for row in rows]
-        return sum(closes) / period
+        # hfq average, normalized by the newest bar's factor → real price scale
+        adjusted = [float(row[0]) for row in rows]
+        newest_factor = float(rows[0][1]) or 1.0
+        return (sum(adjusted) / period) / newest_factor
     finally:
         conn.close()
 
@@ -208,6 +225,10 @@ def compute_ma_alignment(db_path: str, date: str = None) -> dict:
         if len(trading_dates) < 250:
             return {}
 
+        # Adjusted (hfq-scale) MAs: the aligned comparison is scale-invariant
+        # per stock, and reported values are normalized by the reference-date
+        # factor back into real price scale (see _get_ma docstring).
+        price_adjust.ensure_adj_schema(conn)
         results: dict[str, dict] = {}
         for period in [20, 120, 250]:
             period_dates = trading_dates[:period]
@@ -215,8 +236,9 @@ def compute_ma_alignment(db_path: str, date: str = None) -> dict:
                 continue
             placeholders = ",".join(["?"] * len(period_dates))
             rows = conn.execute(
-                f"SELECT code, AVG(close) FROM daily_prices "
-                f"WHERE date IN ({placeholders}) GROUP BY code HAVING COUNT(*) = ?",
+                f"SELECT d.code, AVG({price_adjust.adjusted_close_sql()}) FROM daily_prices d"
+                f"{price_adjust.adj_join_sql()} "
+                f"WHERE d.date IN ({placeholders}) GROUP BY d.code HAVING COUNT(*) = ?",
                 period_dates + [period],
             ).fetchall()
             for row in rows:
@@ -225,14 +247,16 @@ def compute_ma_alignment(db_path: str, date: str = None) -> dict:
                     results[code] = {}
                 results[code][f"ma{period}"] = row[1]
 
+        f_ref = price_adjust.get_factors_on_date(conn, reference_date)
         final: dict[str, dict] = {}
         for code, mas in results.items():
             ma20 = mas.get("ma20")
             ma120 = mas.get("ma120")
             ma250 = mas.get("ma250")
             if ma20 is not None and ma120 is not None and ma250 is not None:
+                norm = f_ref.get(code, 1.0)
                 final[code] = {
-                    "ma20": ma20, "ma120": ma120, "ma250": ma250,
+                    "ma20": ma20 / norm, "ma120": ma120 / norm, "ma250": ma250 / norm,
                     "aligned": ma20 > ma120 > ma250,
                 }
         return final
@@ -245,13 +269,22 @@ def compute_ma_alignment(db_path: str, date: str = None) -> dict:
 # ---------------------------------------------------------------------------
 
 def _get_ma(conn: sqlite3.Connection, dates: list, required_count: int) -> dict:
-    """Compute average close for all stocks over exactly `required_count` dates."""
+    """Average ADJUSTED close for all stocks over exactly `required_count` dates.
+
+    Values are in hfq scale (close × cumulative factor) — per-stock consistent,
+    so ratios across time windows are dividend/split-corrected. Callers that
+    report an MA must normalize by the stock's reference-date factor to get
+    back to real price scale. The adj_factors LEFT JOIN cannot fan out rows
+    ((code,date) is the PK), so HAVING COUNT(*) semantics are unchanged.
+    """
     if not dates:
         return {}
+    price_adjust.ensure_adj_schema(conn)
     placeholders = ",".join(["?"] * len(dates))
     rows = conn.execute(
-        f"SELECT code, AVG(close) FROM daily_prices "
-        f"WHERE date IN ({placeholders}) GROUP BY code HAVING COUNT(*) = ?",
+        f"SELECT d.code, AVG({price_adjust.adjusted_close_sql()}) FROM daily_prices d"
+        f"{price_adjust.adj_join_sql()} "
+        f"WHERE d.date IN ({placeholders}) GROUP BY d.code HAVING COUNT(*) = ?",
         dates + [required_count],
     ).fetchall()
     return {row[0]: row[1] for row in rows}

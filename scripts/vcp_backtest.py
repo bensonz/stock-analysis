@@ -38,9 +38,16 @@ def get_trading_dates(conn, min_date=None, max_date=None):
 
 
 def get_price_on_date(conn, code, date, field="open"):
-    """Get a stock's price on a specific date. Returns None if not found."""
+    """Get a stock's ADJUSTED price on a specific date (hfq scale).
+
+    Only return ratios are consumed by the backtest, so pure hfq is correct —
+    dividends no longer register as losses. Returns None if not found.
+    """
+    import price_adjust
+    price_adjust.ensure_adj_schema(conn)
     row = conn.execute(
-        f"SELECT {field} FROM daily_prices WHERE code=? AND date=?",
+        f"SELECT d.{field} * {price_adjust.factor_sql()} FROM daily_prices d"
+        f"{price_adjust.adj_join_sql()} WHERE d.code=? AND d.date=?",
         (code, date)
     ).fetchone()
     return row[0] if row and row[0] else None

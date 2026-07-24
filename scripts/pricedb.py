@@ -32,6 +32,9 @@ from datetime import date as _date, datetime, timedelta
 from pathlib import Path
 from typing import Iterable, Optional
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import price_adjust
+
 PROJECT_ROOT = Path(__file__).parent.parent
 DB_DIR = PROJECT_ROOT / "data" / "pricedb"
 DB_PATH = DB_DIR / "ashare_prices.db"
@@ -352,6 +355,9 @@ def ensure_schema(conn: sqlite3.Connection):
         );
         """
     )
+    # adj_factors (read-time price adjustment) is owned by price_adjust.py —
+    # single definition, shared by pricedb writers and indicator readers.
+    price_adjust.ensure_adj_schema(conn)
     conn.commit()
 
 
@@ -1640,6 +1646,29 @@ def cmd_update():
                     file=sys.stderr,
                 )
 
+            # Best-effort adjustment-factor sync for the freshest settled day
+            # (clist f18 event detector + forward-fill). Failure degrades to
+            # forward-filled factors == status quo and self-heals next run.
+            try:
+                latest_after = conn.execute(
+                    "SELECT MAX(date) FROM daily_prices"
+                ).fetchone()[0]
+                if latest_after and latest_after == datetime.now().strftime("%Y-%m-%d"):
+                    changed = sync_adj_factors_for_today(conn, latest_after)
+                    if changed:
+                        invalidate_rps_cache(conn, changed)
+                else:
+                    filled = _forward_fill_factors(conn)
+                    if filled:
+                        print(f"  factors: forward-filled {filled} rows "
+                              f"(no same-day f18 sync — latest={latest_after})",
+                              file=sys.stderr)
+            except Exception as factor_err:
+                print(f"  WARNING: adjustment-factor sync failed: {factor_err} "
+                      f"— indicators fall back to last known factors; "
+                      f"run 'pricedb.py factors update' to heal.",
+                      file=sys.stderr)
+
             conn.close()
             if _budget_exceeded():
                 print(
@@ -1717,6 +1746,285 @@ def _backfill_from_akshare_spot(conn: sqlite3.Connection, date_iso: str) -> int:
         return 0
 
 
+# --------------------------------------------------------------------------- #
+# Adjustment factors (read-time price adjustment; see price_adjust.py)
+# --------------------------------------------------------------------------- #
+# A daily return ratio |m-1| below this is rounding noise from eastmoney's
+# 2-dp adjusted closes, not a corporate action. Dividends below 0.5% are
+# negligible for MA/RPS anyway.
+ADJ_EVENT_THRESHOLD = 0.005
+
+
+def _frame_close_series(frame) -> dict:
+    """{iso_date: close} from an akshare hist frame."""
+    out: dict = {}
+    if _frame_empty(frame):
+        return out
+    for _, row in frame.iterrows():
+        date_iso = str(row.get("日期"))[:10]
+        close = _safe_float(row.get("收盘"))
+        if len(date_iso) == 10 and close and close > 0:
+            out[date_iso] = close
+    return out
+
+
+def derive_factors_from_akshare(ak, code: str, beg: str, end: str) -> list[tuple]:
+    """Dense [(iso_date, factor)] for one stock via the return-ratio method.
+
+    Eastmoney's hfq series is additive-style, so hfq/raw is NOT a constant
+    factor — but on any single day, (hfq return) / (raw return) equals the
+    corporate-action multiplier (1.0 on normal days). Thresholding kills the
+    2-dp rounding noise; cumprod rebuilds a proper multiplicative hfq factor
+    with base 1.0 at the series start.
+    """
+    with _no_proxy_env():
+        raw = _run_with_timeout(
+            f"AkShare raw {code}",
+            lambda: ak.stock_zh_a_hist(symbol=code, period="daily",
+                                       start_date=beg, end_date=end, adjust=""),
+        )
+        hfq = _run_with_timeout(
+            f"AkShare hfq {code}",
+            lambda: ak.stock_zh_a_hist(symbol=code, period="daily",
+                                       start_date=beg, end_date=end, adjust="hfq"),
+        )
+    raw_s, hfq_s = _frame_close_series(raw), _frame_close_series(hfq)
+    dates = sorted(set(raw_s) & set(hfq_s))
+    if not dates:
+        return []
+    factor = 1.0
+    out = [(dates[0], factor)]
+    for prev, cur in zip(dates, dates[1:]):
+        m = (hfq_s[cur] / hfq_s[prev]) / (raw_s[cur] / raw_s[prev])
+        if abs(m - 1.0) <= ADJ_EVENT_THRESHOLD:
+            m = 1.0
+        factor *= m
+        out.append((cur, round(factor, 8)))
+    return out
+
+
+def upsert_adj_factors(conn: sqlite3.Connection, rows: list) -> str | None:
+    """INSERT OR REPLACE (code, date, factor) rows with diff detection.
+
+    Returns the earliest date whose *effective* value changed, so the caller
+    can invalidate rps_cache from there. A fresh insert counts as a change
+    only when factor != 1.0 (a missing row already read as 1.0 via COALESCE).
+    """
+    earliest_changed: str | None = None
+    cur = conn.cursor()
+    for code, date_iso, factor in rows:
+        old = cur.execute(
+            "SELECT factor FROM adj_factors WHERE code = ? AND date = ?",
+            (code, date_iso),
+        ).fetchone()
+        effective_old = old[0] if old is not None else 1.0
+        if abs(effective_old - factor) < 1e-9:
+            if old is None and abs(factor - 1.0) < 1e-9:
+                # still write the 1.0 row: presence marks the code as processed
+                cur.execute("INSERT OR REPLACE INTO adj_factors VALUES (?, ?, ?)",
+                            (code, date_iso, factor))
+            continue
+        cur.execute("INSERT OR REPLACE INTO adj_factors VALUES (?, ?, ?)",
+                    (code, date_iso, factor))
+        if earliest_changed is None or date_iso < earliest_changed:
+            earliest_changed = date_iso
+    conn.commit()
+    return earliest_changed
+
+
+def _forward_fill_factors(conn: sqlite3.Connection) -> int:
+    """Densify: any (code, date) in daily_prices missing a factor gets the
+    code's most recent PRIOR factor. Dates before a code's first factor row
+    stay absent (COALESCE 1.0 == the pre-event base, which is correct).
+    Codes with no factor rows at all are untouched (unprocessed => raw)."""
+    filled = 0
+    codes = [r[0] for r in conn.execute("SELECT DISTINCT code FROM adj_factors")]
+    for code in codes:
+        factors = conn.execute(
+            "SELECT date, factor FROM adj_factors WHERE code = ? ORDER BY date",
+            (code,),
+        ).fetchall()
+        fdates = [f[0] for f in factors]
+        fset = set(fdates)
+        missing = [
+            r[0] for r in conn.execute(
+                "SELECT date FROM daily_prices WHERE code = ? ORDER BY date", (code,)
+            ) if r[0] not in fset
+        ]
+        rows = []
+        for d in missing:
+            i = bisect.bisect_right(fdates, d) - 1
+            if i < 0:
+                continue  # before first factor: leave absent (reads as 1.0)
+            rows.append((code, d, factors[i][1]))
+        if rows:
+            conn.executemany("INSERT OR REPLACE INTO adj_factors VALUES (?, ?, ?)", rows)
+            filled += len(rows)
+    conn.commit()
+    return filled
+
+
+def _fetch_clist_prev_close_map() -> dict:
+    """{code: f18} from today's clist snapshot. f18 (昨收) is the exchange's
+    ex-rights reference price — on an ex-div/split day it differs from the
+    literal previous close, which is exactly the event signal we want."""
+    out: dict = {}
+    page = 1
+    while True:
+        payload = _fetch_clist_page(page)
+        items = _iter_clist_diff(payload)
+        if not items:
+            break
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            code = str(item.get("f12") or "").strip()
+            f18 = _safe_float(item.get("f18"))
+            if code and code.isdigit() and f18 and f18 > 0:
+                out[code] = f18
+        if len(items) < EASTMONEY_CLIST_PAGE_SIZE:
+            break
+        page += 1
+    return out
+
+
+def sync_adj_factors_for_today(conn: sqlite3.Connection, date_iso: str) -> str | None:
+    """Incremental daily factor sync using the clist f18 detector.
+
+    For each stock: stored_prev_raw_close / f18 == the event multiplier for
+    `date_iso` (1.0 when no corporate action). New factor = prior factor × m.
+    Finishes with a forward-fill so the table stays dense. Returns earliest
+    changed date (for cache invalidation), or None.
+
+    Limitation (documented): this only detects events whose ex-date is TODAY.
+    After multi-day downtime, gap-day events are missed until a
+    `pricedb.py factors backfill` re-derivation — same self-heal philosophy
+    as the price cursor.
+    """
+    prev_row = conn.execute(
+        "SELECT MAX(date) FROM daily_prices WHERE date < ?", (date_iso,)
+    ).fetchone()
+    prev_date = prev_row[0] if prev_row else None
+    if not prev_date:
+        return None
+    f18_map = _fetch_clist_prev_close_map()
+    if not f18_map:
+        raise RuntimeError("clist f18 snapshot returned no rows")
+    prev_closes = dict(conn.execute(
+        "SELECT code, close FROM daily_prices WHERE date = ?", (prev_date,)
+    ))
+    prev_factors = dict(conn.execute(
+        "SELECT code, factor FROM adj_factors WHERE date = ?", (prev_date,)
+    ))
+    rows = []
+    events = 0
+    for code, prev_close in prev_closes.items():
+        f18 = f18_map.get(code)
+        if not f18 or not prev_close or prev_close <= 0:
+            continue
+        m = prev_close / f18
+        if abs(m - 1.0) <= ADJ_EVENT_THRESHOLD:
+            m = 1.0
+        else:
+            events += 1
+        base = prev_factors.get(code, 1.0)
+        rows.append((code, date_iso, round(base * m, 8)))
+    earliest = upsert_adj_factors(conn, rows)
+    _forward_fill_factors(conn)
+    print(f"  factors: {date_iso} synced ({events} corporate actions detected)",
+          file=sys.stderr)
+    return earliest
+
+
+def cmd_factors(args: list):
+    """CLI: pricedb.py factors backfill|update|verify [--beg YYYYMMDD] [--end YYYYMMDD]"""
+    global _UPDATE_DEADLINE
+    _UPDATE_DEADLINE = None  # factor work is budget-exempt (off-hours, resumable)
+
+    sub = args[0] if args else "verify"
+    conn = get_db()
+    ensure_schema(conn)
+
+    if sub == "verify":
+        cov = price_adjust.factor_coverage(conn)
+        print(f"Factor coverage: {cov['pair_coverage_pct']:.2f}% "
+              f"({cov['matched_rows']}/{cov['total_price_rows']} price rows)")
+        print(f"Codes without any factors: {cov['codes_without_factors']}")
+        print(f"Latest price date:  {cov['max_price_date']}")
+        print(f"Latest factor date: {cov['max_factor_date']}")
+        ok = (cov["pair_coverage_pct"] >= 99.5
+              and cov["max_factor_date"] == cov["max_price_date"])
+        conn.close()
+        if not ok:
+            print("VERIFY FAILED: coverage below 99.5% or factor date lags price date",
+                  file=sys.stderr)
+            sys.exit(1)
+        print("VERIFY OK")
+        return
+
+    if sub == "update":
+        latest = conn.execute("SELECT MAX(date) FROM daily_prices").fetchone()[0]
+        try:
+            changed = sync_adj_factors_for_today(conn, latest)
+            if changed:
+                invalidate_rps_cache(conn, changed)
+                print(f"  rps_cache invalidated from {changed}", file=sys.stderr)
+        finally:
+            conn.close()
+        return
+
+    if sub == "backfill":
+        import akshare as ak
+
+        def _arg(flag, default):
+            return args[args.index(flag) + 1] if flag in args else default
+
+        beg = _arg("--beg", None)
+        end = _arg("--end", datetime.now().strftime("%Y%m%d"))
+        if beg is None:
+            first = conn.execute("SELECT MIN(date) FROM daily_prices").fetchone()[0]
+            beg = first.replace("-", "") if first else "20241201"
+
+        # Resumable: a processed code has factor rows (incl. 1.0s); remaining
+        # work = codes present in daily_prices with zero factor rows.
+        todo = [r[0] for r in conn.execute(
+            "SELECT DISTINCT code FROM daily_prices "
+            "EXCEPT SELECT DISTINCT code FROM adj_factors ORDER BY 1"
+        )]
+        print(f"Backfilling factors for {len(todo)} codes ({beg} → {end})...",
+              file=sys.stderr)
+        earliest_changed: str | None = None
+        done = failed = 0
+        for code in todo:
+            try:
+                series = derive_factors_from_akshare(ak, code, beg, end)
+                if series:
+                    changed = upsert_adj_factors(
+                        conn, [(code, d, f) for d, f in series])
+                    if changed and (earliest_changed is None or changed < earliest_changed):
+                        earliest_changed = changed
+                done += 1
+            except Exception as e:  # keep sweeping; rerun heals the rest
+                failed += 1
+                print(f"  {code}: FAILED ({str(e)[:80]})", file=sys.stderr)
+            if (done + failed) % 100 == 0:
+                print(f"  progress: {done + failed}/{len(todo)} "
+                      f"({failed} failed)", file=sys.stderr)
+        filled = _forward_fill_factors(conn)
+        print(f"Backfill done: {done} ok, {failed} failed, forward-filled {filled} rows.",
+              file=sys.stderr)
+        if earliest_changed:
+            invalidate_rps_cache(conn, earliest_changed)
+            print(f"rps_cache invalidated from {earliest_changed} — run "
+                  f"'pricedb.py rps' to recompute.", file=sys.stderr)
+        conn.close()
+        return
+
+    conn.close()
+    print(f"Unknown factors subcommand: {sub}", file=sys.stderr)
+    sys.exit(1)
+
+
 def cmd_status():
     """Show DB stats."""
     if not DB_PATH.exists():
@@ -1732,6 +2040,7 @@ def cmd_status():
     date_row = conn.execute("SELECT MIN(date), MAX(date) FROM daily_prices").fetchone()
     rps_dates = conn.execute("SELECT COUNT(DISTINCT date) FROM rps_cache").fetchone()[0]
     last_update = conn.execute("SELECT MAX(last_updated) FROM stocks").fetchone()[0]
+    factor_cov = price_adjust.factor_coverage(conn)
     conn.close()
 
     size_mb = DB_PATH.stat().st_size / 1024 / 1024
@@ -1747,6 +2056,12 @@ def cmd_status():
     if last_update:
         print(f"Updated  : {last_update}")
     print(f"RPS cache: {rps_dates} dates computed")
+    print(f"Adj factors: {factor_cov['pair_coverage_pct']:.1f}% coverage "
+          f"(latest {factor_cov['max_factor_date'] or 'none'})")
+    if factor_cov["pair_coverage_pct"] < 99.0:
+        print("WARNING: adjustment-factor coverage below 99% — MA/RPS may use "
+              "unadjusted prices for uncovered stocks. Run "
+              "'python3 scripts/pricedb.py factors backfill'.")
 
 
 def cmd_rps(date: str = None):
@@ -1860,6 +2175,8 @@ if __name__ == "__main__":
         cmd_status()
     elif command == "rps":
         cmd_rps(sys.argv[2] if len(sys.argv) > 2 else None)
+    elif command == "factors":
+        cmd_factors(sys.argv[2:])
     elif command == "query":
         if len(sys.argv) < 3:
             print("Usage: pricedb.py query CODE", file=sys.stderr)

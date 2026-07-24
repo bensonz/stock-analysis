@@ -733,20 +733,29 @@ def fetch_ma_data(stocks: list[dict]) -> dict:
         return results
 
     try:
+        import price_adjust
+
         conn = sqlite3.connect(str(db_path))
+        price_adjust.ensure_adj_schema(conn)
         for stock in stocks:
             code = str(stock.get("code", "")).split(".")[0]
             if not code:
                 continue
+            # raw close for display + factor for dividend/split-corrected MAs
             rows = conn.execute(
-                "SELECT close FROM daily_prices WHERE code = ? ORDER BY date DESC LIMIT 20",
+                f"SELECT d.close, {price_adjust.factor_sql()} FROM daily_prices d"
+                f"{price_adjust.adj_join_sql()} "
+                "WHERE d.code = ? ORDER BY d.date DESC LIMIT 20",
                 (code,),
             ).fetchall()
-            closes = [r[0] for r in rows]
-            if len(closes) < 5:
+            if len(rows) < 5:
                 continue
 
-            latest = closes[0]
+            latest = rows[0][0]                       # raw: real tradeable price
+            f0 = float(rows[0][1]) or 1.0
+            # adjusted series normalized to today's scale: close_i * f_i / f_0
+            closes = [float(r[0]) * float(r[1]) / f0 for r in rows]
+
             ma5 = sum(closes[:5]) / 5
             ma10 = sum(closes[:10]) / 10 if len(closes) >= 10 else None
             ma20 = sum(closes[:20]) / 20 if len(closes) >= 20 else None

@@ -13,7 +13,11 @@ Swing detection: a swing high is a local max with lower highs on both sides
 import sqlite3
 import sys
 import os
+from pathlib import Path
 from typing import Optional
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import price_adjust
 
 
 def find_swings(highs: list, lows: list, lookback: int = 5) -> tuple:
@@ -109,16 +113,24 @@ def scan_vcp(
     
     results = []
     
+    price_adjust.ensure_adj_schema(conn)
     for code in stock_codes:
         rows = conn.execute(
-            "SELECT date, open, high, low, close, volume, amount FROM daily_prices "
-            "WHERE code = ? AND date <= ? ORDER BY date ASC",
+            f"SELECT d.date, d.open, d.high, d.low, d.close, d.volume, d.amount, "
+            f"{price_adjust.factor_sql()} AS factor FROM daily_prices d"
+            f"{price_adjust.adj_join_sql()} "
+            "WHERE d.code = ? AND d.date <= ? ORDER BY d.date ASC",
             (code, date)
         ).fetchall()
-        
-        closes = [r["close"] for r in rows if r["close"] is not None]
-        highs = [r["high"] for r in rows if r["high"] is not None]
-        lows = [r["low"] for r in rows if r["low"] is not None]
+
+        # Today-scale adjustment (x_i × f_i / f_last): dividend/split gaps no
+        # longer fake contractions, while current/pivot prices stay in real
+        # tradeable scale. Volume is NOT adjusted — across a split date volume
+        # ratios are distorted (rare within the 250d window; known caveat).
+        f_last = (float(rows[-1]["factor"]) or 1.0) if rows else 1.0
+        closes = [r["close"] * r["factor"] / f_last for r in rows if r["close"] is not None]
+        highs = [r["high"] * r["factor"] / f_last for r in rows if r["high"] is not None]
+        lows = [r["low"] * r["factor"] / f_last for r in rows if r["low"] is not None]
         volumes = [r["volume"] for r in rows if r["volume"] is not None and r["volume"] > 0]
         
         n = len(closes)
