@@ -287,11 +287,27 @@ def test_no_proxy_env_strips_and_restores(monkeypatch):
         assert "HTTP_PROXY" not in os.environ
         assert "https_proxy" not in os.environ
         assert "ALL_PROXY" not in os.environ
-        assert "NO_PROXY" not in os.environ
+        # NO_PROXY='*' beats macOS *system* proxy fallback in requests —
+        # stripping env vars alone is not enough (2026-07-24 backfill lesson)
+        assert os.environ["NO_PROXY"] == "*"
+        assert os.environ["no_proxy"] == "*"
 
     assert os.environ["HTTP_PROXY"] == "http://surge:6152"
     assert os.environ["https_proxy"] == "http://surge:6152"
     assert os.environ["ALL_PROXY"] == "socks5://surge:6153"
+    assert os.environ["NO_PROXY"] == "127.0.0.1"
+    assert "HTTPS_PROXY" not in os.environ
+
+
+def test_no_proxy_env_force_proxy_override(monkeypatch):
+    import pricedb
+
+    monkeypatch.setenv("PRICEDB_FORCE_PROXY", "socks5h://127.0.0.1:1080")
+    monkeypatch.setenv("NO_PROXY", "127.0.0.1")
+    with pricedb._no_proxy_env():
+        assert os.environ["HTTPS_PROXY"] == "socks5h://127.0.0.1:1080"
+        assert os.environ["HTTP_PROXY"] == "socks5h://127.0.0.1:1080"
+        assert "NO_PROXY" not in os.environ
     assert os.environ["NO_PROXY"] == "127.0.0.1"
     assert "HTTPS_PROXY" not in os.environ
 
