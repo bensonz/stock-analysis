@@ -207,8 +207,13 @@ def _no_proxy_env():
     Setting NO_PROXY='*' wins over both env and system config in requests'
     should_bypass_proxies check, making the bypass actually stick.
     """
-    saved = {k: os.environ.pop(k, None) for k in _PROXY_ENV_KEYS}
-    saved_no_proxy = {k: os.environ.get(k) for k in ("NO_PROXY", "no_proxy")}
+    touched = set(_PROXY_ENV_KEYS) | {
+        "HTTP_PROXY", "HTTPS_PROXY", "http_proxy", "https_proxy",
+        "NO_PROXY", "no_proxy",
+    }
+    saved = {k: os.environ.get(k) for k in touched}  # snapshot BEFORE mutating
+    for k in _PROXY_ENV_KEYS:
+        os.environ.pop(k, None)
     # Escape hatch: PRICEDB_FORCE_PROXY=<url> routes price fetches THROUGH a
     # proxy instead of bypassing it — used when the direct IP is throttled by
     # a provider and the user has routed the proxy's exit appropriately
@@ -228,11 +233,6 @@ def _no_proxy_env():
         yield
     finally:
         for k, v in saved.items():
-            if v is not None:
-                os.environ[k] = v
-            elif k in os.environ:
-                os.environ.pop(k, None)
-        for k, v in saved_no_proxy.items():
             if v is None:
                 os.environ.pop(k, None)
             else:
