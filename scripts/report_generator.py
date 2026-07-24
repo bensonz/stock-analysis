@@ -126,6 +126,22 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
     """
     lines = [f"# 每日研究报告 {date}\n"]
 
+    # Which model made these decisions (from the run dir's llm_meta.json,
+    # written by phase 2 — self-discovered so --apply replays work too)
+    if output_dir is not None:
+        meta_path = Path(output_dir).parent / "llm_meta.json"
+        if meta_path.exists():
+            try:
+                meta = json.loads(meta_path.read_text(encoding="utf-8"))
+            except (json.JSONDecodeError, OSError):
+                meta = {}
+            model = meta.get("primary_model") or meta.get("provider")
+            if model:
+                src = meta.get("decision_source") or ""
+                suffix = f"（{src}）" if src and src != model else ""
+                lines.append(f"> 模型: {model}{suffix} · "
+                             f"{meta.get('input_tokens', '?')}+{meta.get('output_tokens', '?')} tokens\n")
+
     # 1. Market Overview
     lines.append("## 市场概览\n")
     market = data.get("market", {})

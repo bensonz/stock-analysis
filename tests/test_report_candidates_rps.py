@@ -50,6 +50,29 @@ def test_rps_over_95_still_blocked_by_ma_extension(tmp_path):
     assert "Wait List" not in text
 
 
+def test_report_md_shows_model_from_llm_meta(tmp_path):
+    import json
+    run_dir = tmp_path / "run"
+    out_dir = run_dir / "output"
+    out_dir.mkdir(parents=True)
+    (run_dir / "llm_meta.json").write_text(json.dumps({
+        "provider": "openai", "primary_model": "deepseek-v4-pro",
+        "decision_source": "DeepSeek V4 Pro primary",
+        "input_tokens": 200784, "output_tokens": 7676,
+    }), encoding="utf-8")
+    out = report_generator.generate_report_md(
+        "2026-07-24", {"market": {}}, {}, output_dir=out_dir)
+    text = out.read_text(encoding="utf-8")
+    assert "模型: deepseek-v4-pro（DeepSeek V4 Pro primary）" in text
+    assert "200784+7676 tokens" in text
+
+
+def test_report_md_no_meta_no_model_line(tmp_path):
+    out = report_generator.generate_report_md(
+        "2026-07-24", {"market": {}}, {}, output_dir=tmp_path)
+    assert "模型:" not in out.read_text(encoding="utf-8")
+
+
 def test_mixed_pool_groups_all_ma_passers_together(tmp_path):
     # An 85-RPS and a 96-RPS name that both pass MA share the same Sweet Spot.
     data = _pool(
