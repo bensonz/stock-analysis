@@ -2108,19 +2108,35 @@ def cmd_factors(args: list):
 
     if sub == "verify":
         cov = price_adjust.factor_coverage(conn)
-        print(f"Factor coverage: {cov['pair_coverage_pct']:.2f}% "
-              f"({cov['matched_rows']}/{cov['total_price_rows']} price rows)")
-        print(f"Codes without any factors: {cov['codes_without_factors']}")
+        missing = [r[0] for r in conn.execute(
+            "SELECT DISTINCT code FROM daily_prices "
+            "EXCEPT SELECT DISTINCT code FROM adj_factors")]
+        # BJ-exchange codes (43x/83x/87x/92x) are deliberately unfactored —
+        # sina hfq.js doesn't carry them; they stay at 1.0 (status quo).
+        non_bj_missing = [c for c in missing if not c.startswith(("4", "8", "9"))]
+        covered_pairs = conn.execute(
+            "SELECT COUNT(*) FROM daily_prices d JOIN adj_factors a "
+            "ON a.code = d.code AND a.date = d.date").fetchone()[0]
+        coverable = conn.execute(
+            "SELECT COUNT(*) FROM daily_prices d WHERE d.code IN "
+            "(SELECT DISTINCT code FROM adj_factors)").fetchone()[0]
+        pct_covered_universe = (covered_pairs / coverable * 100.0) if coverable else 0.0
+        print(f"Factor coverage (all rows): {cov['pair_coverage_pct']:.2f}%")
+        print(f"Factor coverage (factored universe): {pct_covered_universe:.2f}%")
+        print(f"Codes without factors: {len(missing)} "
+              f"(non-BJ: {len(non_bj_missing)}{' — ' + ','.join(non_bj_missing[:5]) if non_bj_missing else ''})")
         print(f"Latest price date:  {cov['max_price_date']}")
         print(f"Latest factor date: {cov['max_factor_date']}")
-        ok = (cov["pair_coverage_pct"] >= 99.5
+        ok = (pct_covered_universe >= 99.5
+              and not non_bj_missing
               and cov["max_factor_date"] == cov["max_price_date"])
         conn.close()
         if not ok:
-            print("VERIFY FAILED: coverage below 99.5% or factor date lags price date",
+            print("VERIFY FAILED: factored-universe coverage below 99.5%, "
+                  "non-BJ codes missing, or factor date lags price date",
                   file=sys.stderr)
             sys.exit(1)
-        print("VERIFY OK")
+        print("VERIFY OK (BJ codes deliberately unfactored — read as 1.0)")
         return
 
     if sub == "update":
