@@ -198,25 +198,67 @@ STOCK_FUNDAMENTALS_TOOL = {
 }
 
 
-def _make_fundamentals_tool(data: dict) -> tuple:
-    """([tool_def], executor) for the writer loop.
+BASE_RATE_TOOL = {
+    "name": "base_rate",
+    "description": (
+        "参考类基准（历史频率）计算器：在本地全市场价格库/披露数据上统计\"该形态历史上"
+        "发生某结局的频率\"，含样本量、95%置信区间、样本窗口。风险提示中凡是价格路径类"
+        "（回撤/杀跌）或业绩持续性类的概率，必须引用本工具的频率并标注〖内部数据〗，"
+        "不得凭感觉写\"概率：中\"。configs: extended_high_momentum（RPS60≥90且跌破MA10，"
+        "强势股破位形态）、high_momentum_healthy（RPS60≥90且站上MA10，对照组）、"
+        "momentum_gate_pass（RPS三线全≥80，我们的可买池）、growth_persistence"
+        "（高增长公司下期降速频率）。结果附带的 caveats 必须一并向读者披露。"
+    ),
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "config": {
+                "type": "string",
+                "enum": ["extended_high_momentum", "high_momentum_healthy",
+                         "momentum_gate_pass", "growth_persistence"],
+            },
+            "horizon_days": {"type": "integer", "enum": [20, 60, 120],
+                             "description": "前瞻交易日数（默认60；growth_persistence 忽略）"},
+            "drawdown_pct": {"type": "integer", "enum": [10, 15, 20],
+                             "description": "回撤阈值%（默认15；growth_persistence 忽略）"},
+        },
+        "required": ["config"],
+    },
+}
 
-    Every fetch is stored into data['peer_fundamentals'] so the verify
-    pipeline's DATA corpus covers it — that's what turns these numbers into
-    verifiable 〖内部数据〗 claims instead of unverifiable web claims.
+
+def _make_report_tools(data: dict) -> tuple:
+    """([tool_defs], executor) for the writer loop.
+
+    Every fetch is stored into `data` (peer_fundamentals / base_rates) so the
+    verify pipeline's DATA corpus covers it — that's what turns these numbers
+    into verifiable 〖内部数据〗 claims instead of unverifiable web claims.
     """
+    import base_rates
     import fundamentals
 
     def executor(name: str, tool_input: dict):
-        if name != "stock_fundamentals":
-            return None  # fall through to web_search/web_fetch dispatch
-        code6 = str(tool_input.get("code", "")).split(".")[0].strip()
-        store = data.setdefault("peer_fundamentals", {})
-        if code6 not in store:  # revise rounds reuse the first fetch
-            store[code6] = fundamentals.stock_snapshot(code6)
-        return json.dumps(store[code6], ensure_ascii=False, indent=1)
+        if name == "stock_fundamentals":
+            code6 = str(tool_input.get("code", "")).split(".")[0].strip()
+            store = data.setdefault("peer_fundamentals", {})
+            if code6 not in store:  # revise rounds reuse the first fetch
+                store[code6] = fundamentals.stock_snapshot(code6)
+            return json.dumps(store[code6], ensure_ascii=False, indent=1)
+        if name == "base_rate":
+            cfg = str(tool_input.get("config", ""))
+            h = int(tool_input.get("horizon_days") or 60)
+            dd = int(tool_input.get("drawdown_pct") or 15)
+            key = f"{cfg}_{h}d_{dd}pct"
+            store = data.setdefault("base_rates", {})
+            if key not in store:
+                try:
+                    store[key] = base_rates.base_rate(cfg, h, dd)
+                except ValueError as e:
+                    return f"Error: {e}"
+            return json.dumps(store[key], ensure_ascii=False, indent=1)
+        return None  # fall through to web_search/web_fetch dispatch
 
-    return [STOCK_FUNDAMENTALS_TOOL], executor
+    return [STOCK_FUNDAMENTALS_TOOL, BASE_RATE_TOOL], executor
 
 
 def _provider_ctx(resolved: str) -> tuple:
@@ -327,7 +369,7 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
     tool_log: list = []
 
     client, model = _provider_ctx(resolved)
-    extra_tools, tool_executor = _make_fundamentals_tool(data)
+    extra_tools, tool_executor = _make_report_tools(data)
     text, tin, tout, rounds = _run_writer_pass(
         client, model, resolved, messages, tool_log, label="deep_report ",
         extra_tools=extra_tools, tool_executor=tool_executor)

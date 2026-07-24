@@ -84,7 +84,7 @@ def test_tool_executor_stores_into_data_corpus(monkeypatch):
         fundamentals, "stock_snapshot",
         lambda code, **kw: {"code": code, "latest_report": {"revenue_亿元": 47.68}})
     data = {"code6": "002245"}
-    tools, executor = deep_report._make_fundamentals_tool(data)
+    tools, executor = deep_report._make_report_tools(data)
 
     assert tools[0]["name"] == "stock_fundamentals"
     out = executor("stock_fundamentals", {"code": "300438.SZ"})
@@ -103,7 +103,7 @@ def test_tool_executor_caches_per_code(monkeypatch):
     monkeypatch.setattr(fundamentals, "stock_snapshot",
                         lambda code, **kw: calls.append(code) or {"code": code})
     data = {}
-    _, executor = deep_report._make_fundamentals_tool(data)
+    _, executor = deep_report._make_report_tools(data)
     executor("stock_fundamentals", {"code": "300014"})
     executor("stock_fundamentals", {"code": "300014.SZ"})  # revise-round repeat
     assert calls == ["300014"]

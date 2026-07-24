@@ -397,7 +397,7 @@ def build_judge_prompt(spec_verify: str, url: str, page_text: str, claims: list)
 def build_internal_judge_prompt(spec_verify: str, data: dict, claims: list) -> str:
     slim = {k: data.get(k)
             for k in ("technicals", "rps_gate", "margin",
-                      "fundamentals", "peer_fundamentals")
+                      "fundamentals", "peer_fundamentals", "base_rates")
             if k in data}
     items = [{"id": c["id"], "numbers": c["numbers"], "context": c["context"]} for c in claims]
     return (
