@@ -21,9 +21,23 @@ import fundamentals
 import llm_client
 
 
+def _offline_akshare():
+    import types
+
+    def _raise(*a, **k):
+        raise RuntimeError("offline in tests")
+
+    return types.SimpleNamespace(
+        stock_yjbb_em=_raise, stock_yjyg_em=_raise, stock_yjkb_em=_raise,
+        stock_zh_a_gdhs_detail_em=_raise)
+
+
 @pytest.fixture(autouse=True)
-def _clear_cache():
+def _clear_cache(monkeypatch):
     fundamentals._TABLE_CACHE.clear()
+    # keep tests offline: every akshare call fails gracefully unless a test
+    # installs its own fake (its monkeypatch wins inside the test)
+    monkeypatch.setitem(sys.modules, "akshare", _offline_akshare())
     yield
     fundamentals._TABLE_CACHE.clear()
 
@@ -70,6 +84,30 @@ def test_snapshot_walks_back_and_converts_units(monkeypatch):
     assert snap["latest_report"]["net_profit_亿元"] == 14.46
     assert snap["annual_report"]["period"] == "2025年报"
     assert snap["annual_report"]["revenue_亿元"] == 650.0
+
+
+def test_shareholder_counts_parses_and_flags_lag(monkeypatch):
+    import types
+
+    fake_ak = types.SimpleNamespace(stock_zh_a_gdhs_detail_em=lambda symbol: pd.DataFrame([
+        {"股东户数统计截止日": "2025-12-31", "股东户数-本次": 24472,
+         "股东户数-增减比例": 11.581251, "户均持股市值": 1.3e6, "股东户数公告日期": "2026-03-31"},
+        {"股东户数统计截止日": "2026-03-31", "股东户数-本次": 27695,
+         "股东户数-增减比例": 2.863616, "户均持股市值": 1.2e6, "股东户数公告日期": "2026-04-29"},
+    ]))
+    monkeypatch.setitem(sys.modules, "akshare", fake_ak)
+    res = fundamentals._shareholder_counts("688099")
+    assert res["series"][-1] == {
+        "as_of": "2026-03-31", "holders": 27695, "change_pct": 2.86,
+        "avg_holding_value_万元": 120.0, "announced": "2026-04-29"}
+    assert "滞后" in res["note"]
+
+
+def test_snapshot_offline_shareholder_counts_absent(monkeypatch):
+    monkeypatch.setattr(fundamentals, "_load_table", lambda k, p: _yjbb_df() if (k, p) == ("yjbb", "20260331") else None)
+    snap = fundamentals.stock_snapshot("300014", today=date(2026, 7, 24),
+                                       include_valuation=False, include_rps=False)
+    assert "shareholder_counts" not in snap  # fetch failed offline -> section omitted
 
 
 def test_snapshot_no_disclosures_notes_it(monkeypatch):

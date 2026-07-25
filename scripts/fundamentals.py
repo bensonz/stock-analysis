@@ -164,6 +164,45 @@ def _forecast_period_label(period: str) -> str:
     return f"{period[:4]}{names.get(period[4:], period[4:])}"
 
 
+def _shareholder_counts(code6: str, keep: int = 8) -> dict | None:
+    """Recent 股东户数 disclosures (eastmoney datacenter via akshare).
+
+    LAGGING, low-frequency data: mandatory only at quarter ends, published
+    with the periodic report weeks later (occasional voluntary interims).
+    Both dates are included so a report can never imply freshness.
+    """
+    import time
+
+    print(f"  [fundamentals] 股东户数({code6}) fetching ...",
+          file=sys.stderr, end="", flush=True)
+    t0 = time.time()
+    try:
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            import akshare as ak
+            df = ak.stock_zh_a_gdhs_detail_em(symbol=code6)
+        rows = df.tail(keep)
+        series = [{
+            "as_of": str(r.get("股东户数统计截止日") or ""),
+            "holders": int(f) if (f := _num(r.get("股东户数-本次"))) is not None else None,
+            "change_pct": _pct(r.get("股东户数-增减比例")),
+            "avg_holding_value_万元": (round(v / 1e4, 1)
+                                       if (v := _num(r.get("户均持股市值"))) is not None else None),
+            "announced": str(r.get("股东户数公告日期") or ""),
+        } for _, r in rows.iterrows()]
+        print(f" {len(series)} rows ({time.time() - t0:.1f}s)", file=sys.stderr)
+        if not series:
+            return None
+        return {
+            "series": series,
+            "note": ("滞后数据：截止日为季度末（偶有自愿披露的月度点），公告日晚于截止日数周至数月；"
+                     "解读应结合同期股价（涨+户数降=筹码集中，涨+户数升=筹码分散/派发）"),
+        }
+    except Exception:
+        print(" FAILED", file=sys.stderr)
+        return None
+
+
 def _valuation(code: str) -> dict | None:
     try:
         from cheesefortune_client import CheeseFortuneClient, normalize_code
@@ -243,6 +282,10 @@ def stock_snapshot(code: str, today: _date | None = None,
             "announced": str(r.get("公告日期") or ""),
         }
         out.setdefault("name", r.get("股票简称"))
+
+    gd = _shareholder_counts(code6)
+    if gd:
+        out["shareholder_counts"] = gd
 
     if include_valuation:
         v = _valuation(code)
