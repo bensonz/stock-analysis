@@ -109,6 +109,24 @@ def test_tool_executor_caches_per_code(monkeypatch):
     assert calls == ["300014"]
 
 
+def test_deep_report_defaults_to_fable_writer_deepseek_verify(monkeypatch):
+    monkeypatch.delenv("DEEP_REPORT_PROVIDER", raising=False)
+    monkeypatch.delenv("DEEP_REPORT_VERIFY_PROVIDER", raising=False)
+    w, v = deep_report._resolve_providers(None, None)
+    assert (w, v) == ("anthropic", "openai")
+    # explicit flags still win
+    assert deep_report._resolve_providers("openai", "anthropic") == ("openai", "anthropic")
+    # with no ANTHROPIC_MODEL anywhere, the anthropic side falls back to Fable
+    monkeypatch.delenv("ANTHROPIC_MODEL", raising=False)
+    monkeypatch.delenv("CLAUDE_MODEL", raising=False)
+    monkeypatch.setattr(llm_client, "_read_env_file", lambda: {})
+    monkeypatch.setattr(llm_client, "_read_claude_settings_env", lambda: {})
+    assert deep_report._provider_model("anthropic") == "claude-fable-5"
+    # ...but an explicit ANTHROPIC_MODEL wins over the fallback
+    monkeypatch.setenv("ANTHROPIC_MODEL", "kimi-k3")
+    assert deep_report._provider_model("anthropic") == "kimi-k3"
+
+
 def test_anthropic_tool_converts_to_openai_schema():
     t = llm_client.anthropic_tool_to_openai(deep_report.STOCK_FUNDAMENTALS_TOOL)
     assert t["type"] == "function"

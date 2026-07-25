@@ -29,15 +29,55 @@ MAX_TOKENS = 16384
 TEMPERATURE = 0.5
 MAX_VERIFY_ROUNDS = 2
 
+# Deep-report defaults: Fable 5 writes, DeepSeek judges/cleans. These are
+# deliberately LOCAL to deep reports — the daily pipeline keeps its own
+# LLM_PROVIDER default. Override per-run with --provider/--verify-provider,
+# or per-env with DEEP_REPORT_PROVIDER / DEEP_REPORT_VERIFY_PROVIDER;
+# ANTHROPIC_MODEL (env/.env) still wins over the Fable fallback.
+DEFAULT_WRITER_PROVIDER = "anthropic"
+DEFAULT_VERIFY_PROVIDER = "openai"
+FALLBACK_ANTHROPIC_MODEL = "claude-fable-5"
+
+
+def _resolve_providers(provider: str | None, verify_provider: str | None) -> tuple:
+    """(writer_provider, verify_provider), normalized, with deep-report defaults."""
+    import os
+
+    import llm_client
+
+    writer = llm_client.normalize_llm_provider(
+        provider or os.getenv("DEEP_REPORT_PROVIDER") or DEFAULT_WRITER_PROVIDER)
+    verify = llm_client.normalize_llm_provider(
+        verify_provider or os.getenv("DEEP_REPORT_VERIFY_PROVIDER") or DEFAULT_VERIFY_PROVIDER)
+    return writer, verify
+
+
+def _provider_model(resolved: str) -> str:
+    """Model name a provider resolves to (no client construction — safe for banners)."""
+    import llm_client
+
+    if resolved == "anthropic":
+        return (llm_client._get_env_value("ANTHROPIC_MODEL", "CLAUDE_MODEL")
+                or FALLBACK_ANTHROPIC_MODEL)
+    return llm_client.OPENAI_MODEL
+
 
 # --------------------------------------------------------------------------- #
 # Data gathering
 # --------------------------------------------------------------------------- #
 def _safe(fn, label: str, errors: list):
-    """Run a data-source call, recording (not raising) failures for graceful degradation."""
+    """Run a data-source call, recording (not raising) failures for graceful
+    degradation. Logs each source with timing so long gathers aren't silent."""
+    import time
+
+    print(f"  [gather] {label} ...", file=sys.stderr, end="", flush=True)
+    t0 = time.time()
     try:
-        return fn()
+        result = fn()
+        print(f" ok ({time.time() - t0:.1f}s)", file=sys.stderr)
+        return result
     except Exception as e:  # one flaky source must not sink the whole report
+        print(f" FAILED ({e})", file=sys.stderr)
         errors.append(f"{label}: {e}")
         return None
 
@@ -371,7 +411,7 @@ def _provider_ctx(resolved: str) -> tuple:
     import llm_client
 
     if resolved == "anthropic":
-        return llm_client._build_anthropic_client(), llm_client.DEFAULT_MODEL
+        return llm_client._build_anthropic_client(), _provider_model("anthropic")
     # openai (default) and hybrid both use the OpenAI tool loop for free-form output.
     return llm_client._build_openai_client(), llm_client.OPENAI_MODEL
 
@@ -465,7 +505,9 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
     """
     import llm_client
 
-    resolved = llm_client.normalize_llm_provider(provider)  # None -> env LLM_PROVIDER -> openai
+    resolved, default_verify = _resolve_providers(provider, verify_provider)
+    if verify_provider is None:
+        verify_provider = default_verify
     spec = SPEC_FILE.read_text(encoding="utf-8")
     if data is None:
         data = gather_data(code)
@@ -599,9 +641,22 @@ def main():
     mvr = _arg_value(args, "--max-verify-rounds")
     verify_provider = _arg_value(args, "--verify-provider")
 
-    print(f"[deep_report] gathering data for {code} ...", file=sys.stderr)
+    import time
+    t0 = time.time()
+    w, v = _resolve_providers(provider, verify_provider)
+    rounds_planned = int(mvr) if mvr else MAX_VERIFY_ROUNDS
+    print("=" * 62, file=sys.stderr)
+    print(f"[deep_report] {code}  {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", file=sys.stderr)
+    print(f"  writer : {w}/{_provider_model(w)}", file=sys.stderr)
+    if verify:
+        print(f"  verify : {v}/{_provider_model(v)}  (max {rounds_planned} rounds)", file=sys.stderr)
+    else:
+        print("  verify : OFF (--no-verify) — numbers will be unverified", file=sys.stderr)
+    print("  stages : gather → draft (tools) → claim-verify → revise → cleanup", file=sys.stderr)
+    print("=" * 62, file=sys.stderr)
+
     result = generate(code, provider=provider, verify=verify,
-                      max_verify_rounds=int(mvr) if mvr else MAX_VERIFY_ROUNDS,
+                      max_verify_rounds=rounds_planned,
                       verify_provider=verify_provider)
     out = write_report(code, result["text"], output_dir=output_dir)
 
@@ -632,7 +687,7 @@ def main():
         f"| {result['input_tokens']}+{result['output_tokens']} tok",
         file=sys.stderr,
     )
-    print(f"[deep_report] wrote {out}", file=sys.stderr)
+    print(f"[deep_report] wrote {out} ({(time.time() - t0) / 60:.1f} min total)", file=sys.stderr)
 
     if human:
         print(result["text"])

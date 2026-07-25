@@ -24,6 +24,7 @@ mechanically. Raw disclosure text is kept verbatim (its digit runs are also
 flattened into the match set).
 """
 
+import os
 import re
 import sys
 import warnings
@@ -31,6 +32,11 @@ from datetime import date as _date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+# akshare's bulk pagers spam tqdm bars for minutes — we log one line per fetch
+# instead. Must be set before tqdm is first imported (akshare imports it), and
+# nothing in this repo imports tqdm earlier, so module-top is early enough.
+os.environ.setdefault("TQDM_DISABLE", "1")
 
 # (kind, period) -> DataFrame | None (None = fetch failed / table not yet published)
 _TABLE_CACHE: dict = {}
@@ -61,11 +67,23 @@ def period_label(period: str) -> str:
     return f"{period[:4]}{names.get(period[4:], period[4:])}"
 
 
+_KIND_LABELS = {"yjbb": "业绩报表", "yjyg": "业绩预告", "yjkb": "业绩快报"}
+
+
 def _load_table(kind: str, period: str):
-    """One bulk datacenter table, cached. Returns DataFrame or None."""
+    """One bulk datacenter table, cached. Returns DataFrame or None.
+
+    One log line per network fetch (cache hits are silent) — this replaces
+    the tqdm bars, which were the only 'progress' a run showed for minutes.
+    """
+    import time
+
     key = (kind, period)
     if key in _TABLE_CACHE:
         return _TABLE_CACHE[key]
+    print(f"  [fundamentals] {_KIND_LABELS.get(kind, kind)}({period}) fetching ...",
+          file=sys.stderr, end="", flush=True)
+    t0 = time.time()
     df = None
     try:
         with warnings.catch_warnings():
@@ -78,6 +96,8 @@ def _load_table(kind: str, period: str):
                 df = None
     except Exception:
         df = None
+    n = len(df) if df is not None else 0
+    print(f" {n} rows ({time.time() - t0:.1f}s)", file=sys.stderr)
     _TABLE_CACHE[key] = df
     return df
 
