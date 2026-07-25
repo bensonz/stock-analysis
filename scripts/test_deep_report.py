@@ -143,7 +143,7 @@ def test_generate_anthropic_branch(monkeypatch):
     import llm_client
     monkeypatch.setattr(llm_client, "normalize_llm_provider", lambda p: "anthropic")
     monkeypatch.setattr(llm_client, "_build_anthropic_client", lambda: object())
-    monkeypatch.setattr(llm_client, "DEFAULT_MODEL", "fake-claude")
+    monkeypatch.setenv("ANTHROPIC_MODEL", "fake-claude")  # _provider_model reads env, not DEFAULT_MODEL
     monkeypatch.setattr(llm_client, "_run_tool_loop",
                         lambda *a, **k: ("结论：看空", 5, 6, 1))
     res = deep_report.generate("000703", provider="anthropic", data={"code": "000703.SZ"},
@@ -208,7 +208,7 @@ def test_split_provider_judge_runs_on_verify_provider(monkeypatch):
                         lambda p: p or "anthropic")
     monkeypatch.setattr(llm_client, "_build_anthropic_client", lambda: object())
     monkeypatch.setattr(llm_client, "_build_openai_client", lambda: _FakeOpenAI())
-    monkeypatch.setattr(llm_client, "DEFAULT_MODEL", "kimi-k3")
+    monkeypatch.setenv("ANTHROPIC_MODEL", "kimi-k3")  # _provider_model reads env, not DEFAULT_MODEL
     monkeypatch.setattr(llm_client, "OPENAI_MODEL", "deepseek-fast")
     # writer draft: contains one internal claim so the pipeline runs but needs
     # no web fetch; judge gets exercised via the unmatched-internal batch
