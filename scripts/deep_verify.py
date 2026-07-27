@@ -62,6 +62,9 @@ ALLOWLIST_RES = [re.compile(p) for p in [
     r"(?<![0-9.])[1-5]\s*[/／]\s*5(?![0-9])",                 # bare 4/5
     r"(?<![A-Za-z0-9])(?:RPS|MA|rps|ma)\s?\d{2,3}(?![0-9.=＝%％])",  # indicator names
     r"RPS\s*[≥>＞=]{1,2}\s*\d{2,3}",                          # RPS≥80 gate mentions
+    # indicator-with-threshold comparisons: RPS60≥90, rps120>85 — the digits
+    # name a screen condition, not a measured quantity
+    r"(?<![A-Za-z0-9])(?:RPS|rps)\s*\d{2,3}\s*[≥≤>＞<＜]=?\s*\d{1,3}(?![0-9.%％])",
     r"近\s*\d+\s*(?:个)?(?:日|周|月|年|季|交易日)",             # 近1月
     r"\d+\s*(?:个)?交易日",                                    # 5个交易日
     r"[①②③④⑤⑥⑦⑧⑨⑩]",
@@ -78,11 +81,35 @@ def _has_ascii_digit(s: str) -> bool:
     return any("0" <= ch <= "9" for ch in s)
 
 
+_FW_TABLE = str.maketrans("０１２３４５６７８９％，．～", "0123456789%,.~")
+
+
 def normalize_number(tok: str) -> str:
     """Canonical form for matching/caching: full-width→ASCII, strip separators."""
-    table = str.maketrans("０１２３４５６７８９％，．～", "0123456789%,.~")
-    tok = tok.translate(table).replace(",", "").replace(" ", "")
-    return tok
+    return tok.translate(_FW_TABLE).replace(",", "").replace(" ", "")
+
+
+def token_number_parts(tok: str) -> list:
+    """Constituent numbers of a token, for part-wise mechanical matching.
+
+    NUM_TOKEN_RE can produce compound tokens — "38.1–39.9" (range),
+    "11442，95%" (sentence comma gluing two numbers), "2025-04" (dates) —
+    whose normalize_number() form will never sit in the corpus as one string.
+    Split them: a comma is treated as a thousands separator only in the
+    strict 3-digit-groups form ("1,234"); otherwise it separates numbers.
+    """
+    parts = []
+    for m in re.finditer(r"[0-9][0-9,]*(?:\.[0-9]+)?", tok.translate(_FW_TABLE)):
+        p = m.group(0)
+        if "," in p:
+            segs = p.split(",")
+            if all(len(s) == 3 for s in segs[1:]) and "." not in "".join(segs[:-1]):
+                parts.append(p.replace(",", ""))
+            else:
+                parts.extend(s for s in segs if s)
+        else:
+            parts.append(p)
+    return parts
 
 
 def _allowlist_spans(text: str) -> list:
@@ -302,7 +329,12 @@ def flatten_data_numbers(data: dict) -> set:
             for t in re.finditer(r"[0-9][0-9,，]*(?:\.[0-9]+)?", node):
                 out.add(normalize_number(t.group(0)))
         elif isinstance(node, dict):
-            for v in node.values():
+            for k, v in node.items():
+                # key digits too: "wilson95_pct"/"rps60" label the values a
+                # writer restates alongside them ("95%CI", "RPS60")
+                if isinstance(k, str):
+                    for t in re.finditer(r"[0-9][0-9]*(?:\.[0-9]+)?", k):
+                        out.add(normalize_number(t.group(0)))
                 _walk(v)
         elif isinstance(node, (list, tuple)):
             for v in node:
@@ -312,17 +344,20 @@ def flatten_data_numbers(data: dict) -> set:
     return out
 
 
-def _strip_units(tok: str) -> str:
-    return re.sub(r"[^\d.]", "", normalize_number(tok).split("~")[0].split("-")[0])
-
-
 def internal_numbers_match(numbers: list, data_numbers: set) -> bool:
-    """Mechanical check: every numeric token appears in the DATA block."""
+    """Mechanical check: every numeric token appears in the DATA block.
+
+    Compound tokens (ranges, comma-glued pairs, partial dates) match part-wise:
+    EVERY constituent number must be in the corpus — "38.1–39.9" needs both
+    endpoints present, not just the first.
+    """
     for tok in numbers:
-        bare = _strip_units(tok)
-        if not bare:
+        if normalize_number(tok) in data_numbers:
             continue
-        if normalize_number(tok) in data_numbers or bare in data_numbers:
+        parts = token_number_parts(tok)
+        if not parts:  # no digits at all — nothing to verify
+            continue
+        if all(p in data_numbers for p in parts):
             continue
         return False
     return True

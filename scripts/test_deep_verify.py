@@ -138,6 +138,46 @@ def test_normalize_number():
     assert dv.normalize_number("1,234") == "1234"
 
 
+def test_token_number_parts_splits_compound_tokens():
+    assert dv.token_number_parts("38.1–39.9") == ["38.1", "39.9"]
+    assert dv.token_number_parts("11442，95%") == ["11442", "95"]   # sentence comma
+    assert dv.token_number_parts("1,234") == ["1234"]               # thousands separator
+    assert dv.token_number_parts("2025-04") == ["2025", "04"]
+    assert dv.token_number_parts("55~60亿") == ["55", "60"]
+
+
+def test_match_compound_tokens_partwise():
+    nums = {"11442", "95", "38.1", "39.9"}
+    assert dv.internal_numbers_match(["11442，95%"], nums)
+    assert dv.internal_numbers_match(["38.1–39.9"], nums)
+    # BOTH range endpoints must be present, not just the first
+    assert not dv.internal_numbers_match(["38.1–40.0"], nums)
+
+
+def test_flatten_includes_dict_key_digits():
+    nums = dv.flatten_data_numbers({"wilson95_pct": [38.1, 39.89], "rps60": 91.0})
+    assert "95" in nums and "60" in nums
+
+
+def test_base_rate_claim_matches_mechanically():
+    """Regression: claim c090 from the 300037 run — a fully corpus-backed
+    base-rate citation whose compound tokens fell to the (flaky) LLM judge
+    and got scrubbed to 「显著不为零」. Must now pass without any judge."""
+    data = {"base_rates": {"extended_high_momentum:60:15": {
+        "outcome": "进入形态后60个交易日内最大回撤≥15%",
+        "n_episodes": 11442, "n_hit": 4461, "frequency_pct": 38.99,
+        "wilson95_pct": [38.1, 39.89],
+        "sample_window": ["2025-04-02", "2026-02-12"],
+    }}}
+    numbers = ["60", "15%", "39.0%", "11442，95%", "38.1–39.9", "2025-04", "2026-02"]
+    assert dv.internal_numbers_match(numbers, dv.flatten_data_numbers(data))
+
+
+def test_rps_threshold_comparison_allowlisted():
+    md = "同形态（RPS60≥90且收盘跌破MA10）的历史频率需引用。"
+    assert dv.extract_claims(md) == []
+
+
 # --------------------------------------------------------------------------- #
 # Verification round
 # --------------------------------------------------------------------------- #
