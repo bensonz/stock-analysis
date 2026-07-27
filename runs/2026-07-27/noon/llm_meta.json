@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 326785,
+  "output_tokens": 13941,
+  "rounds": 3,
+  "duration_sec": 236.9,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 玻璃玻纤 板块 大涨 2026年7月27日",
+        "max_results": 5
+      },
+      "result_length": 1965
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "凯莱英 002821 最新消息 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 2933
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "冰轮环境 000811 液冷 并购 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 2960
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "CXO 医疗服务 板块 2026年7月 趋势",
+        "max_results": 5
+      },
+      "result_length": 2945
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "昊志机电 300503 机器人 减速器 2026年7月",
+        "max_results": 5
+      },
+      "result_length": 2097
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=凯莱英+002821+CXO+订单+2026年7月",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+今日热门板块+玻璃玻纤+医疗美容+2026年7月27日",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=昊志机电+300503+半年报+业绩+机器人+2026",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    }
+  ],
+  "fallback_used": false
+}

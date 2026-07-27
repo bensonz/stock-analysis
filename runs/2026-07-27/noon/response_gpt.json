@@ -1,0 +1,246 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": null,
+        "trend": "今日领涨+5.89%，电子布/AI材料需求驱动"
+      },
+      {
+        "name": "化妆品",
+        "5d_pct": null,
+        "trend": "消费复苏主题"
+      },
+      {
+        "name": "医疗美容",
+        "5d_pct": null,
+        "trend": "消费医疗轮动"
+      },
+      {
+        "name": "CXO/医疗服务",
+        "5d_pct": null,
+        "trend": "投融资回暖+订单饱满，西南/中信建投确认景气上行"
+      },
+      {
+        "name": "通用设备(液冷)",
+        "5d_pct": null,
+        "trend": "算力基建+液冷渗透率提升"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "油服工程",
+        "5d_pct": null,
+        "trend": "中东地缘影响+项目停工"
+      },
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": null,
+        "trend": "资源板块资金流出"
+      },
+      {
+        "name": "保险Ⅱ",
+        "5d_pct": null,
+        "trend": "利率敏感板块承压"
+      },
+      {
+        "name": "煤炭开采",
+        "5d_pct": null,
+        "trend": "能源转型压力"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": null,
+        "trend": "短期资金轮出，科创50-0.47%"
+      }
+    ],
+    "position_alignment": "0/0 positions (no active holdings); 4 new entries targeted at CXO/通用设备/创新药 — all in sectors with confirmed momentum",
+    "regime": "Broad-based rally (8.72:1 breadth), consumer/beauty/glass-fiber leading, semiconductor/oil rotating out. CXO stealth leader per fundamental research. Entry regime fully open."
+  },
+  "position_decisions": [],
+  "new_positions": [
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "entry_price": 163.54,
+      "allocation_pct": 8,
+      "stop": 155.36,
+      "target": 195.0,
+      "thesis": "CXO行业景气上行，GLP-1多肽商业化订单放量，股权激励催化，MA20精准支撑",
+      "sector": "医疗服务",
+      "sector_rank": "top 30% (CXO投融资回暖+订单饱满，西南/中信建投确认)",
+      "catalyst": "股权激励(07/09)+CXO投融资回暖+GLP-1多肽订单+2026营收指引19-22%",
+      "catalyst_freshness": "ongoing",
+      "rps120": 94.71,
+      "conviction": "strong"
+    },
+    {
+      "code": "000811",
+      "name": "冰轮环境",
+      "entry_price": 42.85,
+      "allocation_pct": 7,
+      "stop": 40.71,
+      "target": 52.0,
+      "thesis": "数据中心液冷龙头，并购重组进展，合同负债13亿，算力基建受益",
+      "sector": "通用设备",
+      "sector_rank": "top 30% (液冷+算力主题，太平洋证券推荐)",
+      "catalyst": "液冷技术放量+并购重组+合同负债新高+机构调研密集",
+      "catalyst_freshness": "ongoing",
+      "rps120": 99.13,
+      "conviction": "moderate"
+    },
+    {
+      "code": "300503",
+      "name": "昊志机电",
+      "entry_price": 67.89,
+      "allocation_pct": 6,
+      "stop": 64.5,
+      "target": 85.0,
+      "thesis": "H1业绩爆炸(净利+266.57%)，谐波减速器技术突破，机器人+机床双驱动",
+      "sector": "通用设备",
+      "sector_rank": "top 30% (机器人产业链高景气)",
+      "catalyst": "2026半年报净利+266.57%+谐波减速器获奖+创业板首份中报",
+      "catalyst_freshness": "ongoing",
+      "rps120": 98.45,
+      "conviction": "moderate"
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物",
+      "entry_price": 126.9,
+      "allocation_pct": 4,
+      "stop": 120.56,
+      "target": 150.0,
+      "thesis": "MA三线完美支撑，泰它西普全球首创，创新药出海大年，回购计划",
+      "sector": "生物制品",
+      "sector_rank": "top 30% (创新药BD出海超1000亿美元，政策利好)",
+      "catalyst": "泰它西普新适应症获批+回购不超过5000万+创新药BD景气",
+      "catalyst_freshness": "ongoing",
+      "rps120": 91.04,
+      "conviction": "small"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "半导体 sector bottom 5 (-0.64%) — Rule 1 hard block",
+      "rps120": 99.36
+    },
+    {
+      "code": "688630",
+      "name": "芯碁微装",
+      "reason": "半导体 sector bottom 5 + dist_ma5=6.0% borderline Rule 2b",
+      "rps120": 99.32
+    },
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "reason": "半导体 sector bottom 5 — Rule 1 hard block",
+      "rps120": 92.69
+    },
+    {
+      "code": "688629",
+      "name": "华丰科技",
+      "reason": "dist_ma5=7.8% — hard fail Rule 2b (>6%)",
+      "rps120": 97.2
+    },
+    {
+      "code": "002396",
+      "name": "星网锐捷",
+      "reason": "dist_ma5=6.8%, dist_ma10=12.5%, dist_ma20=27.3% — triple fail Rule 2b",
+      "rps120": 91.2
+    },
+    {
+      "code": "301536",
+      "name": "星宸科技",
+      "reason": "dist_ma5=22%, dist_ma10=20.4%, dist_ma20=17.7% — extreme fail Rule 2b",
+      "rps120": 95.81
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "dist_ma10=8.7% — fail Rule 2b (>8%)",
+      "rps120": 96.03
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "reason": "dist_ma20=13.2% — fail Rule 2b (>12%);利润靠猴子资产重估驱动",
+      "rps120": 90.2
+    },
+    {
+      "code": "688046",
+      "name": "药康生物",
+      "reason": "dist_ma5=7.0% — fail Rule 2b (>6%)",
+      "rps120": 89.99
+    },
+    {
+      "code": "300285",
+      "name": "国瓷材料",
+      "reason": "MA数据异常(price 57 vs MA5 598)，疑似拆股未更新，无法分析",
+      "rps120": 98.35
+    },
+    {
+      "code": "002080",
+      "name": "中材科技",
+      "reason": "虽然玻璃玻纤sector #1，但个股远低于所有均线(下跌趋势)，RPS20仅74%走弱",
+      "rps120": 95.31
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "MA-distance discipline is the hardest-working filter: 7 of 49 candidates fail Rule 2b alone. This confirms h021/h027 — the anti-chase rule prevents FOMO entries into extended names like 星网锐捷 and 星宸科技.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021, h027",
+      "mechanism": "Stocks with dist_ma5 > 6% or dist_ma10 > 8% have already absorbed near-term buying pressure; entry at these levels carries mean-reversion risk regardless of RPS quality."
+    },
+    {
+      "text": "Sector Rule 1 correctly excludes semiconductor names (华峰测控 score 9.0/0 risks, 芯碁微装 score 9.1/0 risks) that would have been V1's top picks. Even the best stock in a bottom-5 sector is a bad entry. Validates h019.",
+      "type": "rule",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "Sector gravity dominates individual stock fundamentals in the short term; a stock fighting its sector headwind needs exponentially more catalyst energy to overcome the drag."
+    },
+    {
+      "text": "CXO is a stealth sector leader: 医疗美容 is #3 today but CXO/医疗服务 doesn't appear in top 5 despite strong fundamentals (订单饱满, 投融资+27.7% YoY). Single-day sector top-5 data has blind spots — multi-day sector rankings and web research are essential complements.",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "Sectors within the same Level-1 industry (医药生物) can have divergent daily returns; 医疗美容 (consumer-driven) leads while 医疗服务/CXO (B2B) may lag on any given day despite stronger multi-week momentum."
+    },
+    {
+      "text": "IV rank dispersion is actionable: 科创50 IV 82.5% vs 50ETF 48% — 荣昌生物 gets 4% allocation instead of 6-7% purely due to IV risk. High-IV names need wider stops, and wider stops mean smaller position for same risk budget.",
+      "type": "signal",
+      "tags": [
+        "position-sizing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "Position sizing = risk budget / stop distance. When IV rank > 75%, implied daily ranges are wider, so even a -5% hard stop can be hit on normal volatility. Reducing size is the correct response."
+    },
+    {
+      "text": "国瓷材料 MA data corruption (price ¥57 vs MA5 ¥598) — this is likely a stock split or corporate action not reflected in MA calculation. The system should flag such anomalies rather than silently computing -90% dist values.",
+      "type": "observation",
+      "tags": [
+        "data-quality"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "MA calculations using pre-split prices mixed with post-split prices produce garbage distances. A simple sanity check (abs(dist_ma5) < 50%) would catch this."
+    }
+  ],
+  "market_summary": "Breadth 8.72:1 extremely bullish (4893↑/561↓, 74涨停/3跌停). 上证+0.40%, 深证+1.41%, 创业板+1.55%, 科创50-0.47%. IV整体偏高(avg rank 63.95%)但非恐慌，科创50 IV 82.5%需警惕。玻璃玻纤+5.89%领涨，半导体-0.64%垫底。能源/资源板块持续轮出。CXO板块基本面积极强(投融资回暖+订单饱满)但未进入单日top5。Entry regime fully open — deploy 25% capital into 4 positions.",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

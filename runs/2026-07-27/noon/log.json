@@ -1,0 +1,146 @@
+{
+  "date": "2026-07-27",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1785123640.581739,
+      "errors": [],
+      "end": 1785123696.8792598,
+      "duration_sec": 56.3
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 16977,
+      "tokens": {
+        "input_tokens": 326785,
+        "output_tokens": 13941
+      },
+      "rounds": 3,
+      "tool_calls_count": 8,
+      "duration_sec": 236.9,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1785123933.839027,
+      "actions": [
+        "OPEN 002821 @ 163.54",
+        "OPEN 000811 @ 42.85",
+        "PRICE_CORRECTED 300503: LLM=67.89 outside [64.1,66.92], using market=65.67",
+        "OPEN 300503 @ 65.67",
+        "PRICE_CORRECTED 688331: LLM=126.9 outside [116.5,125.39], using market=121.44",
+        "OPEN 688331 @ 121.44",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=101",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=46",
+        "Hypothesis: Created h117 (observation): CXO is a stealth sector leader: 医疗美容 is #3 today but CXO/医疗服务 doesn't appear in ...",
+        "Hypothesis: Created h118 (observation): IV rank dispersion is actionable: 科创50 IV 82.5% vs 50ETF 48% — 荣昌生物 gets 4% allo...",
+        "Hypothesis: Created h119 (observation): 国瓷材料 MA data corruption (price ¥57 vs MA5 ¥598) — this is likely a stock split o...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 3,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "000811",
+                "name": "冰轮环境",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 42.85,
+                "stopLoss": 40.71,
+                "distance_pct": 4.99,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "300503",
+                "name": "昊志机电",
+                "rule": "stop_proximity",
+                "severity": "CRITICAL",
+                "currentPrice": 65.67,
+                "stopLoss": 64.5,
+                "distance_pct": 1.78,
+                "suggestion": "🔴 CRITICAL — only 1.8% above stop! Gap risk is real (03-03 lesson: 扬杰科技 gapped to -8.37%). Strongly recommend proactive stop-loss NOW. Don't wait for exact trigger."
+              },
+              {
+                "code": "688331",
+                "name": "荣昌生物",
+                "rule": "stop_proximity",
+                "severity": "CRITICAL",
+                "currentPrice": 121.44,
+                "stopLoss": 120.56,
+                "distance_pct": 0.72,
+                "suggestion": "🔴 CRITICAL — only 0.7% above stop! Gap risk is real (03-03 lesson: 扬杰科技 gapped to -8.37%). Strongly recommend proactive stop-loss NOW. Don't wait for exact trigger."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1785123934.989824,
+      "duration_sec": 1.2
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 000811 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 300503 — 🔴 CRITICAL — only 1.8% above stop! Gap risk is real (03-03 lesson: 扬杰科技 gapped to -8.37%). Strongly recommend proactive stop-loss NOW. Don't wait for exact trigger.",
+    "RULE check_stop_proximity: 688331 — 🔴 CRITICAL — only 0.7% above stop! Gap risk is real (03-03 lesson: 扬杰科技 gapped to -8.37%). Strongly recommend proactive stop-loss NOW. Don't wait for exact trigger."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 294.4
+  }
+}

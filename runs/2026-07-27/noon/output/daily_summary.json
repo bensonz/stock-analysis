@@ -1,0 +1,82 @@
+{
+  "date": "2026-07-27",
+  "actions": [
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "action": "OPEN",
+      "price": 163.54,
+      "note": "CXO行业景气上行，GLP-1多肽商业化订单放量，股权激励催化，MA20精准支撑"
+    },
+    {
+      "code": "000811",
+      "name": "冰轮环境",
+      "action": "OPEN",
+      "price": 42.85,
+      "note": "数据中心液冷龙头，并购重组进展，合同负债13亿，算力基建受益"
+    },
+    {
+      "code": "300503",
+      "name": "昊志机电",
+      "action": "OPEN",
+      "price": 65.67,
+      "note": "H1业绩爆炸(净利+266.57%)，谐波减速器技术突破，机器人+机床双驱动"
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物",
+      "action": "OPEN",
+      "price": 121.44,
+      "note": "MA三线完美支撑，泰它西普全球首创，创新药出海大年，回购计划"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 953837.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -4.62,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -46163.0,
+    "cashPct": 79.49
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 8.7219,
+    "up": 4893,
+    "down": 561,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 74,
+    "limit_downs": 3,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 8.72:1, 3/3 major indices green, 74 limit-ups / 3 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [
+    {
+      "code": "002821",
+      "name": "凯莱英"
+    },
+    {
+      "code": "000811",
+      "name": "冰轮环境"
+    },
+    {
+      "code": "300503",
+      "name": "昊志机电"
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物"
+    }
+  ],
+  "marketContext": {
+    "summary": "Breadth 8.72:1 extremely bullish (4893↑/561↓, 74涨停/3跌停). 上证+0.40%, 深证+1.41%, 创业板+1.55%, 科创50-0.47%. IV整体偏高(avg rank 63.95%)但非恐慌，科创50 IV 82.5%需警惕。玻璃玻纤+5.89%领涨，半导体-0.64%垫底。能源/资源板块持续轮出。CXO板块基本面积极强(投融资回暖+订单饱满)但未进入单日top5。Entry regime fully open — deploy 25% capital into 4 positions."
+  }
+}
