@@ -592,27 +592,51 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
     }
 
 
-def write_report(code: str, text: str, output_dir=None) -> Path:
+def _stock_name(code6: str) -> str | None:
+    """Chinese name from the local stocks table; None when unavailable."""
+    try:
+        import pricedb
+
+        con = sqlite3.connect(str(pricedb.DB_PATH))
+        try:
+            row = con.execute("SELECT name FROM stocks WHERE code=?", (code6,)).fetchone()
+        finally:
+            con.close()
+        return row[0] if row and row[0] else None
+    except Exception:
+        return None
+
+
+def _report_group_dir(code6: str) -> Path:
+    """Per-stock report folder: reports/<code6>-<中文名> (name-less fallback:
+    just the code). Explicit --output-dir bypasses grouping entirely."""
+    import re
+
     import report_generator
 
+    name = re.sub(r"[*/\\\s]", "", _stock_name(code6) or "")
+    return report_generator.REPORTS_DIR / (f"{code6}-{name}" if name else code6)
+
+
+def _report_out_dir(code6: str, output_dir) -> Path:
+    out_dir = Path(output_dir) if output_dir else _report_group_dir(code6)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    return out_dir
+
+
+def write_report(code: str, text: str, output_dir=None) -> Path:
     code6 = str(code).split(".")[0]
     date = datetime.now().strftime("%Y-%m-%d")
-    out_dir = Path(output_dir) if output_dir else report_generator.REPORTS_DIR
-    out_dir.mkdir(parents=True, exist_ok=True)
-    out = out_dir / f"{code6}-{date}-deep.md"
+    out = _report_out_dir(code6, output_dir) / f"{code6}-{date}-deep.md"
     out.write_text(text, encoding="utf-8")
     return out
 
 
 def write_verify_audit(code: str, audit: dict, output_dir=None) -> Path:
     """Write the citation-verification audit JSON next to the report."""
-    import report_generator
-
     code6 = str(code).split(".")[0]
     date = datetime.now().strftime("%Y-%m-%d")
-    out_dir = Path(output_dir) if output_dir else report_generator.REPORTS_DIR
-    out_dir.mkdir(parents=True, exist_ok=True)
-    out = out_dir / f"{code6}-{date}-deep-verify.json"
+    out = _report_out_dir(code6, output_dir) / f"{code6}-{date}-deep-verify.json"
     out.write_text(json.dumps(audit, ensure_ascii=False, indent=1), encoding="utf-8")
     return out
 

@@ -118,10 +118,28 @@ def test_build_prompt_contains_spec_code_and_data():
 
 
 def test_write_report_path_and_content(tmp_path):
+    # explicit output_dir bypasses grouping — flat write, exactly where asked
     out = deep_report.write_report("000703.SZ", "# 报告\n结论：看多", output_dir=tmp_path)
     assert out.parent == tmp_path
     assert out.name.startswith("000703-") and out.name.endswith("-deep.md")
     assert "看多" in out.read_text(encoding="utf-8")
+
+
+def test_write_report_groups_by_code_and_chinese_name(tmp_path, monkeypatch):
+    import report_generator
+    monkeypatch.setattr(report_generator, "REPORTS_DIR", tmp_path)
+    monkeypatch.setattr(deep_report, "_stock_name", lambda c: "*ST 奥来德")
+    out = deep_report.write_report("688378", "# 报告")
+    # name sanitized (no *, no spaces) and grouped: <code>-<name>/<code>-<date>-deep.md
+    assert out.parent == tmp_path / "688378-ST奥来德"
+    assert out.name.startswith("688378-") and out.name.endswith("-deep.md")
+    # audit JSON lands in the same group folder
+    audit = deep_report.write_verify_audit("688378", {"final": {}})
+    assert audit.parent == out.parent
+    # no name available -> plain code folder
+    monkeypatch.setattr(deep_report, "_stock_name", lambda c: None)
+    out2 = deep_report.write_report("999999", "# 报告")
+    assert out2.parent == tmp_path / "999999"
 
 
 def test_generate_openai_orchestration(monkeypatch):
