@@ -21,8 +21,12 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 TAG = "〖内部数据〗"
 VERIFY_FETCH_MAX_CHARS = 20000  # verifier fetches more than the drafter's 8000
-JUDGE_MAX_TOKENS = 4096
+JUDGE_MAX_TOKENS = 8192
 JUDGE_TEMPERATURE = 0.0
+# Max claims per judge call. The 300037 run sent 23 internal claims in one
+# batch: the verdict JSON truncated at max_tokens, parse failed twice, and all
+# 23 correct numbers were scrubbed. Small batches keep each response parseable.
+JUDGE_BATCH = int(os.getenv("DEEP_VERIFY_JUDGE_BATCH", "20"))
 
 # --------------------------------------------------------------------------- #
 # Regexes
@@ -403,9 +407,14 @@ def _judge_with_retry(judge_runner, prompt: str):
 
 
 def _apply_verdict(claim: dict, v: dict | None):
+    # Missing/unparseable verdict is a JUDGE outage, not a verdict on the
+    # claim. judge_error claims are re-judged next round and, if the outage
+    # persists, KEPT with a footer disclosure — never scrubbed. (Scrubbing
+    # correct numbers because the verify service hiccuped is the wrong
+    # failure direction; see the 300037 post-mortem.)
     if not isinstance(v, dict) or v.get("verdict") not in ("supported", "not_found", "contradicted"):
-        claim["status"] = "unreachable"
-        claim["reason"] = "核验输出缺失或无法解析"
+        claim["status"] = "judge_error"
+        claim["reason"] = "核验服务输出缺失或无法解析（数字保留，未复核）"
         return
     if v["verdict"] == "supported":
         claim["status"] = "verified"
@@ -465,19 +474,24 @@ def verify_claims(claims: list, data_numbers: set, data: dict, *, spec_verify: s
     unmatched = []
     for c in (c for c in claims if c["kind"] == "internal"):
         key = ("__internal__", _numsig(c))
+        cached = cache.get(key)
         if internal_numbers_match(c["numbers"], data_numbers):
             c["status"] = "verified"
             cache[key] = ("verified", "", None)
-        elif key in cache:
-            c["status"], c["reason"], c["fallback_text"] = cache[key]
+        elif cached is not None and cached[0] != "judge_error":
+            # a judge_error is an outage marker, not a verdict — re-judge it
+            c["status"], c["reason"], c["fallback_text"] = cached
         else:
             unmatched.append(c)
-    if unmatched:
+    # Judge in small batches: one oversized call that truncates loses verdicts
+    # for the WHOLE batch; chunking bounds the blast radius of any one failure.
+    for start in range(0, len(unmatched), JUDGE_BATCH):
+        chunk = unmatched[start:start + JUDGE_BATCH]
         verdicts, i, o = _judge_with_retry(
-            judge_runner, build_internal_judge_prompt(spec_verify, data, unmatched))
+            judge_runner, build_internal_judge_prompt(spec_verify, data, chunk))
         judge_in += i
         judge_out += o
-        for c in unmatched:
+        for c in chunk:
             _apply_verdict(c, (verdicts or {}).get(c["id"]))
             cache[("__internal__", _numsig(c))] = (c["status"], c["reason"], c["fallback_text"])
 
@@ -486,8 +500,9 @@ def verify_claims(claims: list, data_numbers: set, data: dict, *, spec_verify: s
     groups: dict = {}
     for c in (c for c in claims if c["kind"] == "linked"):
         key = (c["url"], _numsig(c))
-        if key in cache:
-            c["status"], c["reason"], c["fallback_text"] = cache[key]
+        cached = cache.get(key)
+        if cached is not None and cached[0] != "judge_error":
+            c["status"], c["reason"], c["fallback_text"] = cached
         else:
             groups.setdefault(c["url"], []).append(c)
 
@@ -504,13 +519,18 @@ def verify_claims(claims: list, data_numbers: set, data: dict, *, spec_verify: s
                     c["reason"] = "来源无法访问或内容过短，请更换可访问的来源（优先巨潮资讯/东方财富/官方公告）"
                     cache[(url, _numsig(c))] = (c["status"], c["reason"], None)
             return rec, 0, 0
-        verdicts, i, o = _judge_with_retry(
-            judge_runner, build_judge_prompt(spec_verify, url, page, cs))
-        with lock:
-            for c in cs:
-                _apply_verdict(c, (verdicts or {}).get(c["id"]))
-                cache[(url, _numsig(c))] = (c["status"], c["reason"], c["fallback_text"])
-        return rec, i, o
+        ti = to = 0
+        for start in range(0, len(cs), JUDGE_BATCH):
+            chunk = cs[start:start + JUDGE_BATCH]
+            verdicts, i, o = _judge_with_retry(
+                judge_runner, build_judge_prompt(spec_verify, url, page, chunk))
+            ti += i
+            to += o
+            with lock:
+                for c in chunk:
+                    _apply_verdict(c, (verdicts or {}).get(c["id"]))
+                    cache[(url, _numsig(c))] = (c["status"], c["reason"], c["fallback_text"])
+        return rec, ti, to
 
     if groups:
         with ThreadPoolExecutor(max_workers=min(VERIFY_MAX_WORKERS, len(groups))) as ex:
@@ -528,6 +548,7 @@ def verify_claims(claims: list, data_numbers: set, data: dict, *, spec_verify: s
         "verified": sum(1 for c in claims if c["status"] == "verified"),
         "failed": sum(1 for c in claims if c["status"] == "failed"),
         "unreachable": sum(1 for c in claims if c["status"] == "unreachable"),
+        "judge_error": sum(1 for c in claims if c["status"] == "judge_error"),
     }
     return {
         "claims": [dict(c, span=list(c["span"])) for c in claims],
@@ -635,13 +656,16 @@ def strip_preamble(text: str) -> str:
 
 
 def verification_footer(final: dict) -> str:
-    return (
+    line = (
         "\n\n---\n数据核验："
         f"{final['total']}处数字，"
         f"{final['verified_linked'] + final['verified_internal']}处已核验"
         f"（{final['verified_linked']}外链/{final['verified_internal']}内部），"
-        f"{final['rewritten_qualitative']}处已改写为定性表述。\n"
+        f"{final['rewritten_qualitative']}处已改写为定性表述。"
     )
+    if final.get("kept_unreviewed"):
+        line += f"⚠️ {final['kept_unreviewed']}处因核验服务异常未复核（数字按原样保留）。"
+    return line + "\n"
 
 
 # --------------------------------------------------------------------------- #
@@ -687,11 +711,18 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
         rec["round"] = rnd
         audit["rounds"].append(rec)
         failed = _failed(claims)
-        log(f"verify round {rnd}: {rec['counts']['verified']} verified, {len(failed)} failed")
-        if not failed:
+        errored = [c for c in claims if c["status"] == "judge_error"]
+        log(f"verify round {rnd}: {rec['counts']['verified']} verified, "
+            f"{len(failed)} failed, {len(errored)} judge-errored")
+        if not failed and not errored:
             break
         if rnd == max_rounds:
             break
+        if not failed:
+            # judge outage only — there is nothing for the writer to fix.
+            # judge_error is never cache-pinned, so looping re-judges them.
+            log(f"verify round {rnd}: judge errors only — re-judging next round")
+            continue
         revised, _tin, _tout, _rr = revise_runner(
             build_revise_prompt(spec_writer, text, failed, _slim(data), rnd, max_rounds))
         revised = strip_preamble(revised or "")
@@ -719,15 +750,20 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
                 if c["kind"] == "naked":
                     residual.append(c)
                 elif c["kind"] == "internal":
-                    key = ("__internal__", _numsig(c))
-                    if cache.get(key, ("",))[0] == "verified" or \
+                    st = cache.get(("__internal__", _numsig(c)), ("",))[0]
+                    if st == "verified" or \
                             internal_numbers_match(c["numbers"], data_numbers):
                         c["status"] = "verified"
+                    elif st == "judge_error":
+                        c["status"] = "judge_error"  # kept; disclosed in footer
                     else:
                         residual.append(c)
                 else:
-                    if cache.get((c["url"], _numsig(c)), ("",))[0] == "verified":
+                    st = cache.get((c["url"], _numsig(c)), ("",))[0]
+                    if st == "verified":
                         c["status"] = "verified"
+                    elif st == "judge_error":
+                        c["status"] = "judge_error"  # kept; disclosed in footer
                     else:
                         residual.append(c)
             return residual
@@ -754,7 +790,10 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
         "verified_linked": sum(1 for c in claims if c["kind"] == "linked" and c["status"] == "verified"),
         "verified_internal": sum(1 for c in claims if c["kind"] == "internal" and c["status"] == "verified"),
         "rewritten_qualitative": rewritten,
-        "unverified_remaining": sum(1 for c in claims if c["status"] not in ("verified",)),
+        # judge outage: numbers deliberately kept, disclosed in the footer —
+        # counted apart from unverified_remaining (the guarantee-violation alarm)
+        "kept_unreviewed": sum(1 for c in claims if c["status"] == "judge_error"),
+        "unverified_remaining": sum(1 for c in claims if c["status"] not in ("verified", "judge_error")),
     }
     audit["final"] = final
     return text + verification_footer(final), audit

@@ -180,10 +180,11 @@ def test_verify_pipeline_grown_corpus_rescues_internal_claim():
     draft = "# R\n\n同业营收47.68亿元〖内部数据〗，RPS60=90.0〖内部数据〗\n"
 
     def judge_runner(prompt):
-        # unmatched internal claims get judged not_found (number not in DATA yet)
+        # unmatched internal claims get judged not_found (number not in DATA yet);
+        # verdicts is a dict keyed by id — the actual judge contract
         req = json.loads(prompt.split("# 待核验条目 (JSON)\n```json\n")[1].split("```")[0])
-        verdicts = [{"id": c["id"], "verdict": "not_found", "reason": "无",
-                     "fallback_text": "（略）"} for c in req]
+        verdicts = {c["id"]: {"verdict": "not_found", "reason": "无",
+                              "fallback_text": "（略）"} for c in req}
         return json.dumps({"verdicts": verdicts}), 10, 10
 
     def revise_runner(prompt):

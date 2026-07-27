@@ -220,7 +220,7 @@ def test_verify_linked_batches_per_url_and_unreachable():
     assert rec["counts"]["verified"] == 2
 
 
-def test_parse_verdicts_retry_then_unreachable():
+def test_parse_verdicts_retry_then_judge_error():
     md = "营收[43.14亿](https://a.com/1)。"
     claims = dv.extract_claims(md)
     calls = []
@@ -232,7 +232,41 @@ def test_parse_verdicts_retry_then_unreachable():
     dv.verify_claims(claims, set(), {}, spec_verify="S",
                      judge_runner=bad_judge, fetch=lambda u: PAGE, cache={})
     assert len(calls) == 2                        # one retry
-    assert claims[0]["status"] == "unreachable"
+    # a broken judge is an outage, NOT a verdict against the claim
+    assert claims[0]["status"] == "judge_error"
+
+
+def test_judge_error_is_not_cache_pinned():
+    md = "站上MA20约2.3%〖内部数据〗。"
+    cache = {}
+    calls = []
+
+    def flaky(prompt):
+        calls.append(prompt)
+        if len(calls) <= 2:
+            return "SERVICE ERROR", 1, 1
+        ids = re.findall(r'"id": "(c\d+)"', prompt)
+        return json.dumps({"verdicts": {i: {"verdict": "supported"} for i in ids}}), 1, 1
+
+    claims1 = dv.extract_claims(md)
+    dv.verify_claims(claims1, set(), {}, spec_verify="S",
+                     judge_runner=flaky, fetch=lambda u: PAGE, cache=cache)
+    assert claims1[0]["status"] == "judge_error"
+    claims2 = dv.extract_claims(md)                # next round: re-judged, not pinned
+    dv.verify_claims(claims2, set(), {}, spec_verify="S",
+                     judge_runner=flaky, fetch=lambda u: PAGE, cache=cache)
+    assert claims2[0]["status"] == "verified"
+
+
+def test_internal_judge_batches_are_chunked(monkeypatch):
+    monkeypatch.setattr(dv, "JUDGE_BATCH", 10)
+    md = "。".join(f"指标甲乙丙第{i}项数值为{i + 0.5}〖内部数据〗" for i in range(25))
+    claims = dv.extract_claims(md)
+    judged = []
+    dv.verify_claims(claims, set(), {}, spec_verify="S",
+                     judge_runner=_auto_judge(calls=judged), fetch=lambda u: PAGE, cache={})
+    assert len(judged) == 3                        # ceil(25/10) calls, not one giant batch
+    assert all(c["status"] == "verified" for c in claims if c["kind"] == "internal")
 
 
 def test_verified_cache_skips_refetch():
@@ -324,6 +358,64 @@ def test_run_pipeline_exhausted_uses_cleanup_and_mechanical_guard():
     body = text.split("数据核验")[0]
     assert not [c for c in dv.extract_claims(body) if c["kind"] == "naked"]
     assert dv.GENERIC_FALLBACK in text
+
+
+def test_pipeline_judge_outage_recovers_next_round():
+    """Round 1: judge down → judge_error. Round 2 re-judges (no revise wasted
+    on a claim that has nothing wrong with it) and verifies."""
+    draft = "站上MA20约2.3%〖内部数据〗。"        # not mechanically matchable
+    attempts = []
+
+    def flaky_judge(prompt):
+        attempts.append(1)
+        if len(attempts) <= 2:                     # round 1: both parse attempts die
+            return "SERVICE ERROR", 1, 1
+        ids = re.findall(r'"id": "(c\d+)"', prompt)
+        return json.dumps({"verdicts": {i: {"verdict": "supported"} for i in ids}}), 1, 1
+
+    text, audit = dv.run_pipeline(
+        draft, {"technicals": {"ma20": 62.0}}, spec_writer="W", spec_verify="V",
+        max_rounds=2, judge_runner=flaky_judge, revise_runner=_boom,
+        cleanup_runner=_boom, fetch=_boom)
+    assert "2.3%" in text                          # never scrubbed
+    assert audit["final"]["verified_internal"] == 1
+    assert audit["final"]["unverified_remaining"] == 0
+    assert audit["final"]["kept_unreviewed"] == 0
+    assert len(audit["rounds"]) == 2
+
+
+def test_pipeline_persistent_judge_outage_keeps_number_disclosed():
+    draft = "站上MA20约2.3%〖内部数据〗。"
+
+    def dead_judge(prompt):
+        return "oops", 1, 1
+
+    text, audit = dv.run_pipeline(
+        draft, {"technicals": {"ma20": 62.0}}, spec_writer="W", spec_verify="V",
+        max_rounds=2, judge_runner=dead_judge, revise_runner=_boom,
+        cleanup_runner=_boom, fetch=_boom)
+    assert "2.3%" in text                          # kept, not degraded to mush
+    assert audit["final"]["kept_unreviewed"] == 1
+    assert audit["final"]["unverified_remaining"] == 0
+    assert "未复核" in text                         # footer discloses the outage
+    assert audit["cleanup"]["used"] is False       # outage alone triggers no cleanup
+
+
+def test_pipeline_mixed_failure_scrubs_naked_but_keeps_judge_errored():
+    draft = "价格从5000元降级。站上MA20约2.3%〖内部数据〗。"
+
+    def dead_judge(prompt):
+        return "oops", 1, 1
+
+    text, audit = dv.run_pipeline(
+        draft, {"technicals": {"ma20": 62.0}}, spec_writer="W", spec_verify="V",
+        max_rounds=2, judge_runner=dead_judge, revise_runner=lambda p: (draft, 1, 1, 1),
+        cleanup_runner=lambda p: (draft.split("。")[0] + "。" + draft.split("。", 1)[1], 1, 1),
+        fetch=_boom)
+    body = text.split("数据核验")[0]
+    assert "5000" not in body                      # the truly-naked number is gone
+    assert "2.3%" in body                          # the judge-errored one survives
+    assert audit["final"]["kept_unreviewed"] == 1
 
 
 def test_verify_linked_parallel_fanout():
