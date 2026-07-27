@@ -1,0 +1,81 @@
+{
+  "date": "2026-07-27",
+  "actions": [
+    {
+      "code": "000811",
+      "name": "冰轮环境",
+      "action": "HOLD",
+      "price": 43.43,
+      "pnl_pct": 1.35,
+      "note": "Opened today +1.35%. Margin adding. Sector 通用设备 mid-tier but not cold. 液冷龙头 thesis intact. dist_ma5=+0.4% near support."
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "action": "HOLD",
+      "price": 162.95,
+      "pnl_pct": -0.36,
+      "note": "Opened today -0.36%. At MA20 support (dist_ma20=+0.1%). Stop proximity 4.66% — WATCH but manageable. Margin deleveraging is yellow flag. CXO/GLP-1 thesis valid."
+    },
+    {
+      "code": "300503",
+      "name": "昊志机电",
+      "action": "HOLD",
+      "price": 67.29,
+      "pnl_pct": 2.47,
+      "note": "Best performer today +2.47%. H1 earnings explosion (净利+266.57%) is genuine catalyst. Stop proximity 4.15% WATCH. Margin deleveraging noted. Positive momentum."
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物",
+      "action": "HOLD",
+      "price": 123.5,
+      "pnl_pct": 1.7,
+      "note": "Opened today +1.70%. CRITICAL: only 2.38% above stop (¥120.56). 科创50 IV rank 71.9% increases gap risk. Thesis (泰它西普, 创新药出海) valid but entry precision poor. MONITOR CLOSELY — sell immediately if gaps through stop."
+    },
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "action": "OPEN",
+      "price": 160.5,
+      "note": "PCB龙头，元件sector今日#2 (+6.23%)，AI算力硬件链核心受益。北向12%+公募6.2%机构重仓。泰国工厂产能爬坡提供增长。股价从MA20(189.91)回调至160.50，买在弱势等反弹。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 955959.0,
+    "dayPnl": 4836.0,
+    "dayReturnPct": 0.51,
+    "totalReturnPct": -4.4,
+    "unrealizedPnl": 2122.0,
+    "realizedPnl": -46163.0,
+    "cashPct": 75.95
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 18.1643,
+    "up": 5195,
+    "down": 286,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 121,
+    "limit_downs": 7,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 18.16:1, 3/3 major indices green, 121 limit-ups / 7 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [
+    {
+      "code": "001389",
+      "name": "广合科技"
+    }
+  ],
+  "marketContext": {
+    "summary": "Breadth 18.2:1 extremely bullish, 121涨停/7跌停, broad-based rally. 三大指数全红(创业板+3.16%领涨)。Tech/AI主线回归，玻璃玻纤(+10.56%)和元件(+6.23%)领涨。IV偏高(科创50 IV Rank 71.9%, 创业板59.6%)但已从上周极端值回落，恐慌消退中。持仓4只均在中游板块，0只在top5但在18:1普涨下可接受。新增广合科技(元件#2板块)作为sector-aligned仓位。"
+  }
+}

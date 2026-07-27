@@ -1,0 +1,82 @@
+{
+  "date": "2026-07-27",
+  "slot": "noon",
+  "run_started_at": "2026-07-27T11:35:07.338668+08:00",
+  "status": "degraded",
+  "exit_code": 0,
+  "total_duration_sec": 294.4,
+  "phases": {
+    "health_check": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "sources": {
+        "sina": {
+          "status": "ok",
+          "latency_ms": 169.1
+        },
+        "cheesefortune": {
+          "status": "ok",
+          "latency_ms": 544.8
+        },
+        "pricedb": {
+          "status": "ok",
+          "latest_date": "2026-07-24",
+          "stale": false
+        }
+      }
+    },
+    "preflight_pricedb": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "latest_date": "2026-07-24",
+      "target": "2026-07-24"
+    },
+    "collect": {
+      "status": "ok",
+      "duration_sec": 56.3,
+      "errors": []
+    },
+    "llm_analysis": {
+      "status": "ok",
+      "duration_sec": 236.9
+    },
+    "apply": {
+      "status": "ok",
+      "duration_sec": 1.2
+    },
+    "validate": {
+      "status": "warnings",
+      "duration_sec": 0.0,
+      "errors": [
+        "RULE check_stop_proximity: 000811 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
+        "RULE check_stop_proximity: 300503 — 🔴 CRITICAL — only 1.8% above stop! Gap risk is real (03-03 lesson: 扬杰科技 gapped to -8.37%). Strongly recommend proactive stop-loss NOW. Don't wait for exact trigger.",
+        "RULE check_stop_proximity: 688331 — 🔴 CRITICAL — only 0.7% above stop! Gap risk is real (03-03 lesson: 扬杰科技 gapped to -8.37%). Strongly recommend proactive stop-loss NOW. Don't wait for exact trigger."
+      ]
+    }
+  },
+  "gates": {
+    "phase1_to_phase2": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": []
+    },
+    "phase2_to_phase3": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [
+        "missing watchlist"
+      ]
+    },
+    "phase3_to_phase4": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [
+        "PRICE_CORRECTED 300503: LLM=67.89 outside [64.1,66.92], using market=65.67",
+        "PRICE_CORRECTED 688331: LLM=126.9 outside [116.5,125.39], using market=121.44",
+        "rule check_stop_proximity: 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
+        "rule check_stop_proximity: 🔴 CRITICAL — only 1.8% above stop! Gap risk is real (03-03 lesson: 扬杰科技 gapped to -8.37%). Strongly recommend proactive stop-loss NOW. Don't wait for exact trigger.",
+        "rule check_stop_proximity: 🔴 CRITICAL — only 0.7% above stop! Gap risk is real (03-03 lesson: 扬杰科技 gapped to -8.37%). Strongly recommend proactive stop-loss NOW. Don't wait for exact trigger."
+      ]
+    }
+  }
+}
