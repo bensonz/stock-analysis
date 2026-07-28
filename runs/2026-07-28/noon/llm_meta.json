@@ -1,0 +1,52 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 303029,
+  "output_tokens": 10597,
+  "rounds": 3,
+  "duration_sec": 174.2,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月28日 大跌 原因 创业板 暴跌",
+        "max_results": 5
+      },
+      "result_length": 3055
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "通信设备 元件 板块 暴跌 2026年7月 原因",
+        "max_results": 5
+      },
+      "result_length": 3222
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "冰轮环境 000811 2026年7月28日 跌停",
+        "max_results": 3
+      },
+      "result_length": 2092
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 科技股 半导体 通信 暴跌 2026年7月28日 外资流出",
+        "max_results": 3
+      },
+      "result_length": 1406
+    }
+  ],
+  "fallback_used": false
+}

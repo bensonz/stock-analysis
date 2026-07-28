@@ -1,0 +1,215 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "休闲食品",
+        "5d_pct": null,
+        "1d_pct": 3.76,
+        "trend": "defensive bid"
+      },
+      {
+        "name": "教育",
+        "5d_pct": null,
+        "1d_pct": 2.81,
+        "trend": "policy-driven"
+      },
+      {
+        "name": "工程咨询服务Ⅱ",
+        "5d_pct": null,
+        "1d_pct": 2.73,
+        "trend": "defensive"
+      },
+      {
+        "name": "一般零售",
+        "5d_pct": null,
+        "1d_pct": 2.3,
+        "trend": "consumer defensive"
+      },
+      {
+        "name": "饮料乳品",
+        "5d_pct": null,
+        "1d_pct": 2.24,
+        "trend": "consumer defensive"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "通信设备",
+        "5d_pct": null,
+        "1d_pct": -9.19,
+        "trend": "accelerating down"
+      },
+      {
+        "name": "元件",
+        "5d_pct": null,
+        "1d_pct": -8.11,
+        "trend": "accelerating down — 广合科技 sector"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": null,
+        "1d_pct": -6.13,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": null,
+        "1d_pct": -4.88,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": null,
+        "1d_pct": -4.86,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "1/5 in cold sector (广合科技→元件 bottom 2), 0/5 in hot sectors, 4/5 in neutral zone but market-wide selloff",
+    "regime": "Risk-off rotation: tech/AI massacred, consumer defensives bid. Global semiconductor rout (费城半导体 -22% from June peak) spreading. Fund style-control rules forcing capitulation selling in tech sectors. Defensive only."
+  },
+  "position_decisions": [
+    {
+      "code": "000811",
+      "name": "冰轮环境",
+      "action": "SELL",
+      "reason": "Hard stop triggered: entry ¥42.85, stop ¥40.71, current ¥39.09 (-8.77%). Rule 5: -5% from entry = automatic SELL. 跌停 -9.99% today. No exceptions.",
+      "sector_rank": "bottom 60% — 通用设备 not in hot/cold extremes but broad market down",
+      "new_stop": null,
+      "pnl_pct": -8.77,
+      "days_held": 1,
+      "exit_price": 39.09
+    },
+    {
+      "code": "001389",
+      "name": "广合科技",
+      "action": "SELL",
+      "reason": "Dual trigger: (1) Sector '元件' is bottom 5 (-8.11% today) — sector gravity rule mandates sell regardless of thesis. (2) Price ¥152.90 only 0.27% above ¥152.48 stop with -8.72% daily drop. Sector whiplash from hot to cold in one session.",
+      "sector_rank": "bottom 5% — 元件 -8.11%, #2 coldest sector",
+      "new_stop": null,
+      "pnl_pct": -4.74,
+      "days_held": 1,
+      "exit_price": 152.9
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "action": "HOLD",
+      "reason": "Within -5% hard stop (2.14% cushion). Sector '医疗服务' not in cold zone. dist_ma20 +0.1% — sitting at MA20 support. Outperforming market: -2.58% vs 创业板 -5.37%. CXO/GLP-1 thesis intact. Tight leash: sell immediately if opens weak or breaches ¥155.36. Margin deleveraging is yellow flag but not standalone trigger.",
+      "sector_rank": "middle 50% — 医疗服务 neutral",
+      "new_stop": 155.36,
+      "pnl_pct": -2.93,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "300503",
+      "name": "昊志机电",
+      "action": "SELL",
+      "reason": "Proactive stop-proximity sell per h024. Price ¥64.54 only 0.06% above ¥64.50 stop. 创业板 -5.37% with elevated IV (64%) creates massive gap risk. Yesterday's +2.47% gain fully reversed plus more. Better to exit at ¥64.54 than risk gap-through to ¥62 tomorrow.",
+      "sector_rank": "bottom 60% — 通用设备 neutral but heavy selling pressure",
+      "new_stop": null,
+      "pnl_pct": -1.72,
+      "days_held": 1,
+      "exit_price": 64.54
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物",
+      "action": "SELL",
+      "reason": "Stop breached: stop ¥120.56, current ¥120.42 (-0.84%). Today's low ¥119.49 already well below stop. 科创50 IV Rank 73% means gap risk extreme. 泰它西普 thesis still valid but timing wrong — can re-enter when market stabilizes.",
+      "sector_rank": "middle 50% — 生物制品 neutral",
+      "new_stop": null,
+      "pnl_pct": -0.84,
+      "days_held": 1,
+      "exit_price": 120.42
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688629",
+      "name": "华丰科技",
+      "reason": "Rule 2b: dist_ma5 +7.8% > 6%. Sector 军工电子 not in top 30%. 询价转让 ¥126.66 adds supply overhang. No entry regardless of quality.",
+      "rps120": 97.2
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "reason": "Rule 2b: dist_ma20 +13.2% > 12%. H1业绩催化 is genuine but price already extended beyond safe entry. Sector not top 30%. Wait for pullback to MA10/MA20.",
+      "rps120": 90.2
+    },
+    {
+      "code": "688046",
+      "name": "药康生物",
+      "reason": "Rule 2b: dist_ma5 +7.0% > 6% AND dist_ma20 +15.5% > 12%. Multiple extension triggers. Good catalyst (H1 +47-61%) but chasing into overextended tape.",
+      "rps120": 89.99
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "Rule 2b: dist_ma10 +8.7% > 8%. Sector 炼化及贸易 not in top 30%. 业绩爆炸 (+2326%) but price already ran. Margin deleveraging.",
+      "rps120": 96.03
+    },
+    {
+      "code": "688630",
+      "name": "芯碁微装",
+      "reason": "dist_ma5 +6.0% at Rule 2b threshold. Sector 专用设备 not in top 30%. Market buy gate failed. Would need pullback to MA5 before entry.",
+      "rps120": 99.32
+    },
+    {
+      "code": "301536",
+      "name": "星宸科技",
+      "reason": "Rule 2b: dist_ma5 +22.0%, dist_ma10 +20.4%, dist_ma20 +17.7% — extreme overextension on all timeframes. Sector 半导体 bottom 4. No current price needed to reject.",
+      "rps120": 95.81
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Yesterday opened 5 positions into a tape where breadth was already deteriorating and tech selloff was accelerating globally. The V2 buy gate correctly blocks new positions today (breadth 1.125:1, 0/4 indices green), but yesterday should have been more cautious. Lesson: when all major IV proxies are >60% and the global semi rout is ongoing, even a passing buy gate should be treated with reduced sizing.",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "position-sizing",
+        "timing"
+      ],
+      "evidence_type": "contradicting",
+      "related_hypothesis": "h017",
+      "mechanism": "Elevated IV (>60% across all ETFs) signals market stress. Opening 5 positions when IV is high and global sector is in freefall amplifies gap risk. The buy gate should incorporate IV as a sizing throttle even when breadth technically passes."
+    },
+    {
+      "text": "Sector gravity validated in real-time: 元件 was a hot sector when 广合科技 was opened yesterday. Today it's bottom 2 at -8.11%. This whiplash — from leader to laggard in one session — is the exact scenario Rule 1 (sector-first) is designed to protect against. When a position's sector drops into the cold zone, sell immediately regardless of thesis.",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "In a risk-off rotation, yesterday's momentum leaders become today's funding sources for defensive rotation. Sectors that led on the way up lead on the way down, magnifying individual stock losses."
+    },
+    {
+      "text": "h024 (proactive stop-proximity selling) is the single most valuable defense rule. 昊志机电 at 0.06% cushion and 广合科技 at 0.27% cushion in a -5.37% 创业板 day would almost certainly gap through stops tomorrow. Selling now at known prices avoids the 扬杰科技 scenario (-8.37% gap-through).",
+      "type": "heuristic",
+      "tags": [
+        "exit-rule",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "When a stock is within 1% of its stop and the market is down >3%, the probability of a gap-through overnight exceeds 50%. The expected value of proactive selling exceeds waiting for the exact stop trigger."
+    },
+    {
+      "text": "凯莱英's relative strength (-2.58% vs 创业板 -5.37%) is a valid HOLD signal even in a bad tape. The stock is showing genuine resilience at MA20 support (dist_ma20 +0.1%). In momentum frameworks, a stock that falls less than the market during a selloff is exhibiting relative strength and deserves patience.",
+      "type": "observation",
+      "tags": [
+        "position-sizing",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "During broad selloffs, relative performance vs index is a cleaner signal than absolute PnL. Stocks holding MA20 support while the index breaks down are showing institutional support."
+    }
+  ],
+  "market_summary": "RISK-OFF. 创业板 -5.37%, 科创50 -4.03%, 深证 -3.42%. Breadth 1.125:1 (below 1.5:1 buy gate). Tech massacre: 通信设备 -9.19%, 元件 -8.11%, 半导体 -4.88%. Only consumer defensives green (休闲食品 +3.76%, 饮料乳品 +2.24%). Global semiconductor rout (费城半导体 -22% from June peak) + fund style-control rules driving capitulation. IV elevated across all ETFs (科创50 73%, 创业板 64%). All 5 positions opened yesterday underwater — cutting 4, holding 1. Cash at ~77% after sells. No new positions.",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}

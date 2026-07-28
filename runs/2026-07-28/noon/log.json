@@ -1,0 +1,121 @@
+{
+  "date": "2026-07-28",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1785210041.2734249,
+      "errors": [],
+      "end": 1785210097.3657758,
+      "duration_sec": 56.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 9320,
+      "tokens": {
+        "input_tokens": 303029,
+        "output_tokens": 10597
+      },
+      "rounds": 3,
+      "tool_calls_count": 4,
+      "duration_sec": 174.2,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1785210271.652701,
+      "actions": [
+        "SELL 000811",
+        "SELL 001389",
+        "SELL 300503",
+        "SELL 688331",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h017 (rule): +1 contradicting evidence → hitRate=96%, n=27",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=47",
+        "Hypothesis: Updated h024 (rule): +1 supporting evidence → hitRate=100%, n=10",
+        "Hypothesis: Created h121 (observation): 凯莱英's relative strength (-2.58% vs 创业板 -5.37%) is a valid HOLD signal even in a ...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002821",
+                "name": "凯莱英",
+                "rule": "stop_proximity",
+                "severity": "WARNING",
+                "currentPrice": 158.75,
+                "stopLoss": 155.36,
+                "distance_pct": 2.14,
+                "suggestion": "🟡 WARNING — only 2.1% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1785210272.005026,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 002821 — 🟡 WARNING — only 2.1% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 230.7
+  }
+}
