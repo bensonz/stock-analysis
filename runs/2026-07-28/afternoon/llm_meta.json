@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 300239,
+  "output_tokens": 9648,
+  "rounds": 3,
+  "duration_sec": 179.9,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月28日 暴跌 原因",
+        "max_results": 5
+      },
+      "result_length": 3210
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "凯莱英 002821 2026年7月 最新消息",
+        "max_results": 5
+      },
+      "result_length": 3335
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "通信设备板块 暴跌 2026年7月28日",
+        "max_results": 5
+      },
+      "result_length": 2852
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 板块轮动 防御 消费 银行 2026年7月28日"
+      },
+      "result_length": 3061
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "CXO CRO 医疗服务板块 2026年7月 凯莱英"
+      },
+      "result_length": 3200
+    }
+  ],
+  "fallback_used": false
+}

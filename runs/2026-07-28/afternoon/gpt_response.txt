@@ -1,0 +1,262 @@
+# Research Memo — 2026-07-28
+
+## 1. Market Regime
+
+**Verdict: PANIC — Hard Block Active, No New Positions**
+
+All four major indices are deep red: 上证 -1.16%, 深证 -4.52%, 创业板 -7.35%, 科创50 -6.33%. This is a genuine liquidation event in tech/growth, spreading to the broader market.
+
+**Breadth:** 2603 up / 2769 down = 0.94:1. Technically nearly even, but the distribution tells the real story: 52 stocks at limit-down (f10), 287 in the f7_10 bucket. The right tail is weak: only 68 at limit-up, and r4_7 + r7_10 + r10 = 234 combined — no euphoria at all. This is a risk-off rout concentrated in specific sectors, not a broad-based collapse (2600+ stocks still green).
+
+**IV Sentiment:** Off the charts. Avg IV rank across core ETFs is 74.2% ("极度恐慌"). 500ETF深 IV rank 85.7%, 创业板ETF 83.5%, 科创50 79.9%. This is the highest IV regime I've seen. Historically, this level of fear signals a medium-term buying opportunity, but short-term volatility can be devastating. For new entries: sizing would be 0% anyway due to hard block, so IV throttling is moot.
+
+**Macro drivers (from web research):**
+- Global AI sector rout: SK Hynix broke below IPO price (-10%), Nvidia -5%, US semiconductor index -5%. A Chinese chip technology breakthrough report accelerated fears of competitive disruption in the AI hardware supply chain.
+- Oil crash: WTI -8%, Brent -9% on Trump hints of Iran deal and Oman-mediated Hormuz Strait reopening talks.
+- Rotation into defensives: 白酒 +2.36%, 国有大型银行 +2.63%, 休闲食品 +3.71% — classic flight to safety.
+- 长鑫科技 (DRAM) IPO on 7/27 was a massive success (+465% debut, ¥3.28T market cap), but this sucked liquidity from existing semiconductor names rather than lifting them.
+
+**Entry regime check:**
+- Up/Down ≥ 1.5:1? **NO** (0.94:1)
+- ≥2 major indices green? **NO** (0/3)
+- f10 ≥ 30? **YES** (52)
+- → **HARD BLOCK. `new_positions: []`**
+
+---
+
+## 2. Sector Analysis
+
+### Today's Leaders (Risk-Off Rotation)
+| Sector | 5d Pct | Character |
+|---|---|---|
+| 休闲食品 | +3.71% | Defensive consumption |
+| 国有大型银行 | +2.63% | Safe haven, dividend |
+| 白酒 | +2.36% | Premium consumption, defensive rotation |
+| 工程咨询服务 | +2.30% | Infrastructure, policy-linked |
+| 教育 | +2.27% | Policy tailwind, counter-cyclical |
+
+### Today's Laggards (AI/Tech Massacre)
+| Sector | 5d Pct | Character |
+|---|---|---|
+| 通信设备 | -12.42% | AI hardware chain — worst hit |
+| 元件 | -9.25% | PCB/passive components, MLCC chain |
+| 半导体 | -7.18% | Core tech, broad selloff |
+| 玻璃玻纤 | -7.02% | Electronic glass fiber |
+| 其他电子 | -6.61% | Electronics miscellaneous |
+
+### Regime Assessment
+This is a **violent sector rotation**, not a one-day blip. The AI hardware complex (通信设备, 半导体, 元件) is being de-risked globally. The rotation into defensives has been building for days (山西证券 noted "市场延续防御轮动" on 7/27). The question is whether this is a flush-the-weak-hands event that sets up a bounce, or the start of a sustained tech unwind.
+
+**Position sector alignment:** Our sole position (凯莱英, 医疗服务) is in a sector not listed in today's top or bottom 5. However, news reports CRO/医疗服务 was among the decliners. The sector is caught between two forces: the CXO cycle upturn narrative (experiment monkey shortage, GLP-1 orders) vs. the broad risk-off move. Not cold enough to trigger the "sector cold → sell" rule, but not providing tailwinds either.
+
+---
+
+## 3. Position Review
+
+### 凯莱英 (002821) — **SELL**
+
+| Field | Value |
+|---|---|
+| Entry date | 2026-07-27 |
+| Entry price | ¥163.54 |
+| Current price | ¥157.36 |
+| PnL | -3.78% |
+| Days held | 2 |
+| Hard stop | ¥155.36 (-5%) |
+| Distance to stop | 1.27% |
+| Sector | 医疗服务 |
+| RPS120 | 94.71 |
+| Thesis | CXO cycle upturn, GLP-1 orders, equity incentive catalyst |
+
+**What happened:** Entered yesterday at ¥163.54 on MA20 support thesis (dist_ma20 was +0.1%). Today the stock gapped down, opening at ¥162.00, and continued to ¥157.36 close (-3.43% on the day). Relative to 创业板 (-7.35%), the stock actually showed significant relative strength — it's outperforming by nearly 4 percentage points. The CXO thesis is intact and the stock is being dragged by macro, not by company-specific problems.
+
+**However — rules are rules:**
+- **Rule 5: "-3% in first 3 days → SELL."** We're at -3.78% on day 2. This triggers. No exceptions, even in a market-wide rout.
+- **Stop proximity CRITICAL:** Only 1.27% above the hard stop. Gap risk is real — if we gap down 2% tomorrow, the stop triggers intraday and we get a worse fill.
+- The V2 framework says: "Price is truth. Everything else is narrative."
+
+**Decision: SELL at ¥157.36.**
+
+**Post-mortem note for learning system:** If 凯莱英 bounces next week (which is plausible given relative strength today), this will be a case study in whether the -3%-in-3-days rule is too rigid during panic selloffs. The stock's thesis is solid, the CXO cycle is real, and the selloff is macro-driven. But V2's mandate is to cut fast and re-enter later if the setup re-emerges. We can always buy back when the market stabilizes and the stock reclaims MA10 support.
+
+---
+
+## 4. New Entry Candidates
+
+**No candidates today. The buy gate is closed.**
+
+Even setting aside the hard block, let me audit what *would* pass if the regime were normal:
+
+| Stock | RPS120 | Sector | MA Check | VCP | Would Pass? |
+|---|---|---|---|---|---|
+| 华峰测控 (688200) | 99.36 | 半导体 (bottom 3) | dist_ma5 -4.1% ✓ | null | Sector fail |
+| 冰轮环境 (000811) | 99.13 | 通用设备 | dist_ma5 +0.4% ✓ | null | Sector unclear |
+| 芯碁微装 (688630) | 99.32 | 专用设备 | dist_ma5 +6.0% ✗ | null | Rule 2b fail |
+| 华丰科技 (688629) | 97.20 | 军工电子 | dist_ma5 +7.8% ✗ | null | Rule 2b fail |
+| 星宸科技 (301536) | 95.81 | 半导体 (bottom 3) | dist_ma5 +22.0% ✗ | null | Both fail |
+| 恒逸石化 (000703) | 96.03 | 炼油化工 | dist_ma10 +8.7% ✗ | null | Rule 2b fail |
+| 凯莱英 (002821) | 94.71 | 医疗服务 | dist_ma5 -0.5% ✓ | null | Held (selling) |
+
+Even in a green market day, most of our strongest RPS names would fail Rule 2b (MA extension). The few that pass MA checks (华峰测控, 冰轮环境) are in the wrong sectors or sectors that aren't clearly hot.
+
+The **only** stock that passes all filters (RPS ≥75%, MA distance ok, decent sector) is **冰轮环境 (000811)** — RPS120=99.13, dist_ma5=+0.4% (near MA5 support), 通用设备 is not in cold sectors. But with the hard block active, it goes on the mental watchlist for when the regime normalizes.
+
+---
+
+## 5. Skip List
+
+| Code | Name | Reason |
+|---|---|---|
+| 688630 | 芯碁微装 | dist_ma5=+6.0% — Rule 2b triggers. Also panic regime. |
+| 688629 | 华丰科技 | dist_ma5=+7.8% — Rule 2b, chasing. |
+| 301536 | 星宸科技 | dist_ma5=+22%, dist_ma10=+20.4% — extreme extension. 半导体 in bottom 3. |
+| 688200 | 华峰测控 | 半导体 sector -7.18% today, bottom 3. Despite perfect fundamentals (0 risks, 9.0 score_company). |
+| 000703 | 恒逸石化 | dist_ma10=+8.7% — Rule 2b. Oil crash -8% today directly hits refining margins thesis. |
+| 300285 | 国瓷材料 | MA data appears corrupted (dist_ma5=-87.1%). Cannot evaluate. MLCC thesis valid but price data unreliable. |
+| 688300 | 联瑞新材 | dist_ma5=-6.3% (below MA5), but 非金属材料 sector unclear + panic regime. |
+| 002821 | 凯莱英 | Currently held, being sold per Rule 5 (-3% in 3 days). Will re-evaluate if it reclaims MA10 support. |
+
+---
+
+## 6. Learnings
+
+1. **The -3%-in-3-days rule vs. relative strength in panics** [type: observation, tags: exit-rule]: 凯莱英 is -3.78% but the market is -7.35%. The stock is showing genuine relative strength — money is choosing it over alternatives. Yet the rule mandates selling. This tension is worth tracking. If the stock rebounds strongly after we sell, this becomes evidence that the rule needs a "market-adjusted" variant (e.g., "PnL - market return < -3%"). For now, discipline prevails.
+
+2. **Hard block is preventing FOMO** [type: observation, tags: entry-filter, related_hypothesis: h077]: Multiple stocks with strong setups (冰轮环境 at MA5, 华峰测控 with 0 risks) would be tempting buys in a V1 world. The hard block correctly keeps us in cash. Evidence supporting h077.
+
+3. **MA data corruption is a real issue** [type: observation, tags: data-quality]: 国瓷材料 (300285) shows current_price=62.44 but MA5=483.93, dist_ma5=-87.1%. This is clearly a data error (likely a stock split or bonus issue not reflected in MA calculations). Similarly 中材科技, 蔚蓝锂芯, 星网锐捷, 顺络电子, 中远海特 show absurd MA distances. These stocks should NOT be acted upon until MA data is verified. The system should flag these as "data integrity risk."
+
+4. **Sector gravity confirmed in real time** [type: signal, tags: sector, related_hypothesis: h019]: The bottom 3 sectors (通信设备 -12.42%, 元件 -9.25%, 半导体 -7.18%) contain many of our highest-RPS candidates. Even if the stocks have great individual fundamentals, sector gravity is crushing them. This validates h019 (bottom-list sectors = hard no-buy zones).
+
+5. **Oil crash cascading** [type: signal, tags: macro]: WTI crude -8% to $81 wipes out the refining margin thesis for 恒逸石化 and creates headwinds for energy-linked names. This is a fresh negative catalyst for any petrochemical exposure.
+
+---
+
+## 7. Uncertainty Flags
+
+- **I'm uncertain whether selling 凯莱英 into a -7.35% market day is the right call.** The stock is outperforming by 4pp. In a normal drawdown, I'd raise the stop to breakeven rather than sell outright. But Rule 5 is explicit: -3% in 3 days = SELL, no exceptions. The PM should weigh whether the -3% rule was designed for normal market conditions and whether a panic overlay exception is warranted.
+
+- **The MA data corruption for ~6 stocks is concerning.** 国瓷材料, 中材科技, 蔚蓝锂芯, 星网锐捷, 顺络电子, 中远海特 all show current prices wildly different from MAs. This suggests the MA data source didn't adjust for corporate actions (splits, bonuses). These stocks should not appear in new position recommendations until this is fixed.
+
+- **IV is at extreme levels; this could mark a capitulation bottom.** Historically, avg IV rank >75% has been a contrarian buy signal for medium-term horizons. If the system had a "panic buying" rule (scaling into the strongest relative-strength names during capitulation), 华峰测控 and 冰轮环境 would be candidates. But V2 explicitly defaults to cash in panic — I'm flagging this as a potential future refinement.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "休闲食品", "5d_pct": 3.71, "trend": "defensive_rotation"},
+      {"name": "国有大型银行Ⅱ", "5d_pct": 2.63, "trend": "safe_haven"},
+      {"name": "白酒Ⅱ", "5d_pct": 2.36, "trend": "defensive_rotation"},
+      {"name": "工程咨询服务Ⅱ", "5d_pct": 2.30, "trend": "policy_linked"},
+      {"name": "教育", "5d_pct": 2.27, "trend": "counter_cyclical"}
+    ],
+    "cold_sectors": [
+      {"name": "通信设备", "5d_pct": -12.42, "trend": "capitulating"},
+      {"name": "元件", "5d_pct": -9.25, "trend": "deteriorating"},
+      {"name": "半导体", "5d_pct": -7.18, "trend": "deteriorating"},
+      {"name": "玻璃玻纤", "5d_pct": -7.02, "trend": "deteriorating"},
+      {"name": "其他电子Ⅱ", "5d_pct": -6.61, "trend": "weakening"}
+    ],
+    "position_alignment": "0/1 positions in hot sectors (凯莱英-医疗服务 not in top/bottom 5, mixed signals)",
+    "regime": "Panic rotation out of AI/tech into defensives. Global AI hardware rout (SK Hynix -10%, Nvidia -5%), oil crash -8%, China chip breakthrough fears. Hard block active."
+  },
+  "position_decisions": [
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "action": "SELL",
+      "reason": "Rule 5 triggered: -3.78% in first 2 days (entry 163.54, current 157.36). Stop proximity critical at 1.27%. Stock showed relative strength (-3.43% vs 创业板 -7.35%) but V2 discipline requires cutting fast. CXO thesis intact — will re-enter if stock reclaims MA10 (171.09) on above-average volume with market regime normalized.",
+      "sector_rank": "middle (医疗服务 not in top/bottom 5)",
+      "new_stop": null,
+      "pnl_pct": -3.78,
+      "days_held": 2,
+      "exit_price": 157.36
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688630",
+      "name": "芯碁微装",
+      "reason": "dist_ma5_pct=+6.0% triggers Rule 2b (no chasing). 专用设备 sector not in hot list. Panic regime.",
+      "rps120": 99.32
+    },
+    {
+      "code": "688629",
+      "name": "华丰科技",
+      "reason": "dist_ma5_pct=+7.8% triggers Rule 2b. 军工电子 sector. Panic regime.",
+      "rps120": 97.20
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "半导体 sector -7.18% (bottom 3 today). Despite perfect fundamentals (0 risks, RPS120=99.36, MA distances ok), sector gravity blocks entry. Panic regime.",
+      "rps120": 99.36
+    },
+    {
+      "code": "301536",
+      "name": "星宸科技",
+      "reason": "dist_ma5=+22.0%, dist_ma10=+20.4%, dist_ma20=+17.7% — extreme extension on all timeframes. 半导体 bottom 3. Panic regime.",
+      "rps120": 95.81
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "dist_ma10=+8.7% triggers Rule 2b. Oil crash -8% directly undermines refining margin thesis. Panic regime.",
+      "rps120": 96.03
+    },
+    {
+      "code": "300285",
+      "name": "国瓷材料",
+      "reason": "MA data corrupted (current_price=62.44 but MA5=483.93, dist_ma5=-87.1%). Likely corporate action not reflected. Cannot evaluate reliably. Panic regime.",
+      "rps120": 98.35
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "-3% in first 3 days triggered on 凯莱英 during a -7.35% market panic day. Stock showed +4pp relative strength vs 创业板. Rule executed as written, but the tension between absolute PnL stop and market-relative performance needs tracking. If 凯莱英 rebounds strongly, consider a 'market-adjusted' variant: trigger only when (PnL - index_return) < -3%.",
+      "type": "observation",
+      "tags": ["exit-rule", "timing"],
+      "evidence_type": "contradicting",
+      "mechanism": "The -3% rule was designed for normal markets where a -3% decline signals bad timing. In a -7% index day, a -3% stock decline actually indicates strong relative demand — money is choosing this stock over alternatives. The absolute rule may force selling into relative strength."
+    },
+    {
+      "text": "Hard block confirmed effective: prevented FOMO entries into 冰轮环境 (dist_ma5 +0.4%, RPS120=99.13) and 华峰测控 (0 risks, RPS120=99.36). Both would have been V1 buys. Cash preservation is correct in panic.",
+      "type": "signal",
+      "tags": ["entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "Panic regime rules are doing their job — preventing entries when the probability of a bounce is uncertain and gap risk is elevated."
+    },
+    {
+      "text": "MA data corruption detected in ~6 stocks (国瓷材料, 中材科技, 蔚蓝锂芯, 星网锐捷, 顺络电子, 中远海特). current_price vs MA values show 80-95% discrepancies, likely unadjusted corporate actions. These names should be flagged 'data integrity risk' and excluded from decisions until verified.",
+      "type": "observation",
+      "tags": ["data-quality"],
+      "evidence_type": "supporting",
+      "mechanism": "Stock splits, bonus issues, or rights offerings change share counts and per-share prices. If the MA calculation engine doesn't adjust historical prices, MA values become garbage. The dist_ma values become meaningless for entry/exit decisions."
+    },
+    {
+      "text": "Today's sector data confirms h019: 6 of top-10 RPS120 stocks in our pool are in today's bottom 3 sectors (通信设备/元件/半导体). Sector gravity is overwhelming individual stock quality. Bottom-list sectors = hard no-buy zones.",
+      "type": "signal",
+      "tags": ["sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "When a sector is in the bottom 3 by 5-day performance, even the best stocks in that sector get sold indiscriminately as institutions reduce exposure. Stock-level fundamentals cannot overcome sector-level flows during rotation events."
+    },
+    {
+      "text": "Oil crash (-8% WTI, -9% Brent) is a fresh macro catalyst that voids the refining-margin thesis for 恒逸石化 and any petrochemical exposure. When a commodity underlying the thesis crashes, the thesis is broken regardless of company fundamentals.",
+      "type": "signal",
+      "tags": ["macro", "entry-filter"],
+      "evidence_type": "supporting",
+      "mechanism": "恒逸石化's bull case was built on elevated refining margins from tight product markets. An 8% oil crash implies either demand destruction or supply glut — both undermine the margin thesis. Catalyst freshness just went from 'ongoing' to 'stale/broken'."
+    }
+  ],
+  "market_summary": "PANIC DAY. All 4 major indices deep red: 上证 -1.16%, 深证 -4.52%, 创业板 -7.35%, 科创50 -6.33%. Breadth 0.94:1 (2603↑/2769↓), 68涨停/52跌停. Distribution skewed negative — 287 stocks in f7_10 bucket vs only 26 in r7_10. IV extreme fear (avg rank 74.2%, 科创50 79.9%, 创业板 83.5%, 500ETF深 85.7%). Rotation: violent exit from AI/tech hardware (通信设备 -12.42%, 半导体 -7.18%) into defensives (白酒 +2.36%, 银行 +2.63%, 休闲食品 +3.71%). Global triggers: SK Hynix below IPO, Nvidia -5%, China chip breakthrough fears, oil -8%. Hard block active — no new positions. Sole position 凯莱英 being sold per -3%-in-3-days rule.",
+  "market_sentiment": "bearish",
+  "market_call": "极度恐慌"
+}
+```

@@ -1,0 +1,51 @@
+{
+  "date": "2026-07-28",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1785225165.732537,
+      "errors": [],
+      "end": 1785225234.562156,
+      "duration_sec": 68.8
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 17015,
+      "tokens": {
+        "input_tokens": 300239,
+        "output_tokens": 9648
+      },
+      "rounds": 3,
+      "tool_calls_count": 5,
+      "duration_sec": 179.9,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1785225414.519855,
+      "actions": [
+        "SELL 002821",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h024 (rule): +1 contradicting evidence → hitRate=91%, n=11",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=14",
+        "Hypothesis: Created h122 (observation): MA data corruption detected in ~6 stocks (国瓷材料, 中材科技, 蔚蓝锂芯, 星网锐捷, 顺络电子, 中远海特). c...",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=48",
+        "Hypothesis: Created h123 (observation): Oil crash (-8% WTI, -9% Brent) is a fresh macro catalyst that voids the refining...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1785225415.2251499,
+      "duration_sec": 0.7
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 249.39999999999998
+  }
+}

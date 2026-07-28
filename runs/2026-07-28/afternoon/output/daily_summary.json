@@ -1,0 +1,45 @@
+{
+  "date": "2026-07-28",
+  "actions": [
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "action": "SELL",
+      "price": 157.36,
+      "pnl_pct": -3.78,
+      "note": "Rule 5 triggered: -3.78% in first 2 days (entry 163.54, current 157.36). Stop proximity critical at 1.27%. Stock showed relative strength (-3.43% vs 创业板 -7.35%) but V2 discipline requires cutting fast. CXO thesis intact — will re-enter if stock reclaims MA10 (171.09) on above-average volume with market regime normalized."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 0,
+    "totalEquity": 945970.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -5.4,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -54030.0,
+    "cashPct": 100.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.9401,
+    "up": 2603,
+    "down": 2769,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 68,
+    "limit_downs": 52,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.94:1, 0/3 major indices green, 68 limit-ups / 52 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "PANIC DAY. All 4 major indices deep red: 上证 -1.16%, 深证 -4.52%, 创业板 -7.35%, 科创50 -6.33%. Breadth 0.94:1 (2603↑/2769↓), 68涨停/52跌停. Distribution skewed negative — 287 stocks in f7_10 bucket vs only 26 in r7_10. IV extreme fear (avg rank 74.2%, 科创50 79.9%, 创业板 83.5%, 500ETF深 85.7%). Rotation: violent exit from AI/tech hardware (通信设备 -12.42%, 半导体 -7.18%) into defensives (白酒 +2.36%, 银行 +2.63%, 休闲食品 +3.71%). Global triggers: SK Hynix below IPO, Nvidia -5%, China chip breakthrough fears, oil -8%. Hard block active — no new positions. Sole position 凯莱英 being sold per -3%-in-3-days rule."
+  }
+}
