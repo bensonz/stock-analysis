@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 669283,
+  "output_tokens": 13559,
+  "rounds": 4,
+  "duration_sec": 253.7,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月29日 热门板块 教育 游戏 食品饮料",
+        "max_results": 5
+      },
+      "result_length": 3205
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体板块 2026年7月29日 下跌 原因",
+        "max_results": 5
+      },
+      "result_length": 3338
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 2026年7月 催化剂 创新药 CRO",
+        "max_results": 5
+      },
+      "result_length": 3187
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "中国巨石 电子布 涨价 2026年7月 玻纤"
+      },
+      "result_length": 3281
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "恒逸石化 2026年7月 业绩 炼化 PTA"
+      },
+      "result_length": 3247
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "杰瑞股份 2026年7月 油服 业绩 催化剂"
+      },
+      "result_length": 3282
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "凯莱英 002821 2026年7月 业绩 CDMO 催化剂"
+      },
+      "result_length": 3152
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 2026年7月29日 消费板块 食品饮料 行情 原因"
+      },
+      "result_length": 3294
+    }
+  ],
+  "fallback_used": false
+}

@@ -1,0 +1,71 @@
+{
+  "date": "2026-07-29",
+  "actions": [
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "OPEN",
+      "price": 126.5,
+      "note": "CDMO龙头，完美MA汇聚(距MA5/10/20均在2%以内)，VCP SETUP，0风险9亮点，创新药出海+订单增长双催化，贝莱德增持至6.06%"
+    },
+    {
+      "code": "600176",
+      "name": "中国巨石",
+      "action": "OPEN",
+      "price": 38.39,
+      "note": "电子布5轮涨价AI算力驱动，H1净利+65-85%，股价从高点大幅回调(-26%距MA20)提供入场机会，12家券商覆盖83%买入评级"
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "OPEN",
+      "price": 15.6,
+      "note": "H1净利暴增+2326-2547%，文莱炼化独特资产享受税收+市场化定价红利，PTA产能周期见底，10亿回购进行中"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 945970.0,
+    "dayPnl": 0.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -5.4,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -54030.0,
+    "cashPct": 86.21
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 3.5004,
+    "up": 4253,
+    "down": 1215,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 86,
+    "limit_downs": 12,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 3.50:1, 3/3 major indices green, 86 limit-ups / 12 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [
+    {
+      "code": "603259",
+      "name": "药明康德"
+    },
+    {
+      "code": "600176",
+      "name": "中国巨石"
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化"
+    }
+  ],
+  "marketContext": {
+    "summary": "Breadth 3.5:1 bullish, 86涨停/12跌停, but deeply divergent: consumer/food surging (食品饮料+2% intraday) vs semiconductors collapsing (费城半导体 -4.49% overnight, 科创50 -0.87%). IV extreme fear (avg rank 86.4%). Global AI sell-off contagion meets China consumption stimulus — clear sector rotation underway. Deploying 15% into 3 non-tech names, holding 84% cash."
+  }
+}
