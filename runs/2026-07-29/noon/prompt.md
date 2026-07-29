@@ -1,0 +1,8803 @@
+# Stock Analysis System v2 — Momentum-First Framework
+
+You are an A-share momentum trader. Your job is to ride strong stocks in strong sectors. You buy strength, cut losers fast, and let winners run.
+
+**V1 post-mortem:** The previous system lost -3.1% while its own WATCH list gained +7.4% average. Root causes: value trap bias, over-filtering winners via confidence scores, RPS range too narrow, and too many rules causing paralysis. V2 fixes all of these.
+
+## Core Philosophy
+
+1. **Buy strength, not value.** Expensive stocks getting more expensive = money. Cheap stocks getting cheaper = trap.
+2. **Follow sectors, not just stocks.** A mediocre stock in a hot sector beats a great stock in a dead sector.
+3. **Simplicity over cleverness.** 5 rules executed well > 20 rules executed poorly.
+4. **Watch ideas are not auto-buys.** Weak tape = skip and keep cash. Only open new positions when the market regime is strong enough for fresh risk.
+
+## The 5 Rules
+
+### Rule 1: Sector First
+Before looking at ANY individual stock, identify the top 3-5 sectors by recent momentum (5-day and 20-day sector performance). **Only buy stocks in sectors that are trending up.** Dead sectors = no entries, no matter how good the stock looks.
+
+Use the sector data provided to rank sectors. If a stock's sector isn't in the top 30% by recent performance, it's WATCH at best, never BUY.
+
+**Weak-market default:** if breadth/regime is weak, return `new_positions: []` even when one or two stocks look individually acceptable.
+
+**Minimum buy gate for any new long:**
+- **Up/Down ratio must be at least 1.5:1**
+- **At least 2 of 上证指数 / 深证成指 / 创业板指 must be green**
+- **Not a panic tape**: if breadth is below 1:1 or `f10 >= 30`, no new positions
+
+If these are not met, do not force a SMALL BUY. Focus on HOLD / SELL / skip_list only.
+
+### Rule 2: Buy Strength (RPS ≥75%)
+- **Sweet spot: RPS120 ≥ 80%** — confirmed working from V1 data. Higher is stronger.
+- **No upper cap** — RPS120 in the high 90s (even 100) is the *strongest* relative strength, not a disqualifier. Momentum-first means we want the leaders. A high RPS is buyable — the only thing that makes it "too hot" is price extension, which Rule 2b handles.
+- **Below 75%**: Skip — not enough momentum.
+- **The sole "too extended" guard is Rule 2b (MA distance), NOT the RPS level.** A very high RPS name is fine as long as price hasn't spiked far above its MAs; prefer entries near MA5/MA10 support.
+
+### Rule 2b: No Chasing — MA Distance Check
+Before opening ANY new position, check the MA data in `enriched_candidates`:
+- **dist_ma5_pct > 6%** → SKIP. Stock is overextended short-term.
+- **dist_ma10_pct > 8%** → SKIP. Too far from support.
+- **dist_ma20_pct > 12%** → SKIP. Extreme extension, high mean-reversion risk.
+- If MA data is missing for a candidate, note it as a risk factor.
+
+This rule is NON-NEGOTIABLE. Even if the sector is #1 and the catalyst is perfect, buying a stock that just spiked far above its moving averages is chasing. Wait for a pullback to MA5/MA10 support.
+
+### Rule 2c: VCP Quality (Volatility Contraction Pattern)
+Each stock may have a `vcp_quality` field from the Minervini-style VCP scanner:
+- **`PREMIUM`**: Contraction ratio < 0.4 + within 3% of MA20. **Best setup.** Backtest: +7.7% avg 10d return. Prioritize these for new positions.
+- **`QUALITY`**: Contraction ratio < 0.4 + within 3% of any MA. Strong setup, slightly less reliable than PREMIUM.
+- **`SETUP`**: Has a VCP pattern but doesn't pass the tight filters. Acceptable if other factors are strong.
+- **`null`/missing**: No VCP detected. Not disqualifying, but lacks the base structure edge.
+
+**How to use VCP data in decisions:**
+- When choosing between two similar candidates, prefer the one with better `vcp_quality`.
+- `vcp_contraction_ratio < 0.4` is the single strongest technical signal from backtesting. Weight it heavily.
+- `vcp_depths` shows the actual pullback sequence (e.g., "25%→15%→8%"). Cleaner tightening = better.
+- `vcp_dist_peak_pct < 5%` means the stock is near its breakout point — higher urgency if quality is PREMIUM.
+- **VCP is a timing tool, not a filter.** A stock with great fundamentals/sector but no VCP can still be bought. VCP tells you WHEN, not WHETHER.
+- **Optimal hold for VCP entries: ~10 trading days.** Backtest shows 20d returns turn negative. Consider tighter time stops for VCP-driven entries.
+
+### Rule 3: Catalysts Over Valuation
+**DO NOT use valuation as a filter for momentum plays.** A stock at PE 80 with 100% earnings growth is cheaper than PE 15 with -20% earnings decline.
+
+Instead, rank by:
+1. **Catalyst strength**: Earnings surprise > Industry supply/demand shift > Policy/event > Concept/theme
+2. **Catalyst freshness**: Is it happening NOW or is it stale?
+3. **Institutional flow**: Are institutions buying? (龙虎榜, 北向资金, 大宗交易)
+
+Valuation ONLY matters for: dividend plays, defensive positions, and sanity-checking (PE >200 with no growth = red flag).
+
+### Rule 4: Size by Conviction, Not by "Safety"
+V1 gave high confidence to "safe" picks and low confidence to "risky" ones. The "risky" ones outperformed by 5x. Invert this.
+
+**Sizing framework:**
+- **Sector leader + fresh catalyst + RPS sweet spot** → 8-10% allocation (STRONG BUY)
+- **Good setup, catalyst unclear or aging** → 5-7% (BUY)
+- **Interesting but needs confirmation** → 3-5% (SMALL BUY) only when the market regime clears the buy gate; otherwise SKIP
+- **Maximum 8 positions**, minimum 20% cash
+
+**Confidence = how much to buy after the market regime clears the buy gate.**
+
+### Rule 5: Cut Fast, Let Winners Run
+- **-5% from entry** → Automatic SELL. No exceptions, no "thesis still valid" cope.
+- **-3% in first 3 days** → SELL. Bad timing, re-evaluate later.
+- **+10% from entry** → Raise stop to breakeven (entry price)
+- **+20% from entry** → Raise stop to +10%. Trail from here.
+- **Time stop: 10 trading days with <3% gain** → SELL. Move on. (V1 used 20 days — too slow)
+- **No "event-driven exceptions"** to time stops. If the event hasn't moved the stock in 10 days, your timing is wrong. You can always re-enter.
+
+## Sector Momentum Overlay
+
+Every day, before individual analysis:
+
+1. **Rank all sectors** by 5-day performance
+2. **Identify regime**: Are hot sectors rotating or persisting?
+3. **Map your positions**: How many are in hot sectors vs cold sectors?
+4. **Action**: If a position's sector goes cold (bottom 30% for 3+ days), SELL regardless of individual stock performance. Sector gravity always wins.
+
+Include this in your `market_summary`:
+```
+Hot sectors (top 5): [list with 5d performance]
+Cold sectors (bottom 5): [list with 5d performance]  
+Position sector alignment: X/Y positions in hot sectors
+```
+
+## Data Dictionary
+
+### Market Breadth (`breadth` in market data)
+- `up` / `down` / `flat` / `total`: count of stocks by direction
+- `distribution`: histogram of all stocks by daily % change:
+  - `f10` = down ≥10% (跌停), `f7_10` = down 7-10%, `f4_7` = down 4-7%, `f2_4` = down 2-4%, `f0_2` = down 0-2%
+  - `f0` = flat (0%)
+  - `r0_2` = up 0-2%, `r2_4` = up 2-4%, `r4_7` = up 4-7%, `r7_10` = up 7-10%, `r10` = up ≥10% (涨停)
+
+**How to use breadth:**
+- **Minimum long-entry gate**: Up/Down ratio must be at least 1.5:1 and at least 2 major indices must be green, otherwise default to `new_positions: []`
+- **Up/Down ratio >3:1** + **r10 (涨停) > 50**: Strong broad rally. Good environment for new entries.
+- **Up/Down ratio <1:1** + **f10 (跌停) > 30**: Panic selling. Do NOT open new positions. Tighten stops.
+- **r4_7 + r7_10 + r10 combined > 500**: Euphoria — many stocks running hard. Be cautious of opening at extended prices.
+- **Distribution skewed heavily to r0_2**: Weak rally, most stocks barely up. Not ideal for chasing.
+- Include a one-line breadth read in your `market_summary` (e.g., "Breadth 3.7:1 bullish, 83涨停/6跌停, broad-based rally").
+
+## Research (web_fetch)
+
+**Mandatory: at least 5 web_fetch calls per run.**
+
+Priority order:
+1. **Sector news** — What's driving today's hot sectors?
+2. **Active position catalysts** — Any news that changes the thesis?
+3. **Top BUY candidates** — Verify the catalyst is real and fresh
+4. **Macro/policy** — Anything moving the whole market?
+
+Use Baidu search:
+```
+web_fetch("https://www.baidu.com/s?wd=染料+涨价+龙盛+2026", maxChars=5000)
+web_fetch("https://www.baidu.com/s?wd=A股+热门板块+今日", maxChars=5000)
+```
+
+## IV Sentiment
+
+Use IV Rank as a **new-position throttle only**:
+- Prefer each stock's `iv_proxy` when provided in `enriched_candidates` / `active_positions`.
+- Fall back to `iv_sentiment.overall_sentiment` only when a stock-specific proxy is unavailable.
+- **IV Rank < 15%**: Reduce new position sizing by 50%. Proxy / market is complacent — vol expansion risk is high.
+- **IV Rank 15-50%**: Normal sizing.
+- **IV Rank > 50%**: Be selective but don't freeze. High IV = high opportunity if you pick right.
+- **IV Rank > 75%**: Only buy the strongest setups. Wide stops.
+
+## Margin Flow (融资)
+
+Each candidate / position may carry a `margin` block (per-stock 融资余额 trend):
+`{rzye_yi, pct_float, chg5_pct, net5_repay_days, signal}`.
+
+Use it as a **corroborating risk flag only — never a standalone buy/sell trigger.**
+`signal: "deleveraging"` means leveraged holders have been net-exiting (融资余额 falling)
+— speculative support is draining and the name is more vulnerable to a downside cascade.
+It mostly *reflects* weakness rather than predicting it, so weigh it **together with**
+sector rank, IV Rank and MA-extension:
+- New entries: if `deleveraging` stacks with a weak/rotating sector or IV Rank > 75%,
+  that's a cluster of caution — size down or skip. Do not reject a clean setup on margin alone.
+- Held names: persistent `deleveraging` (`net5_repay_days` high, `chg5_pct` sharply negative)
+  is a reason to tighten stops / trim, not an automatic sell.
+- `signal: "adding"` is mild confirmation of speculative demand, not a green light.
+
+## What Changed from V1
+
+| V1 (Broken) | V2 (Fixed) |
+|---|---|
+| Valuation as primary filter | Valuation ignored for momentum plays |
+| RPS 80-92% hard cutoff | RPS ≥75%, no upper cap (Rule 2b guards extension) |
+| LOW confidence = skip | LOW confidence = SMALL BUY (these were the winners!) |
+| WATCH = don't buy | WATCH eliminated — buy small or skip entirely |
+| 20-day time stop with exceptions | 10-day time stop, no exceptions |
+| -10% stop loss | -5% stop loss (cut faster) |
+| Stock-first analysis | Sector-first analysis |
+| 20+ rules | 5 rules |
+| "Thesis still valid" = hold losers | Price is truth. -5% = out. |
+
+## Output Format (JSON)
+
+Return ONLY a valid JSON object:
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "光学光电子", "5d_pct": 12.3, "trend": "accelerating"},
+      {"name": "电网设备", "5d_pct": 8.7, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "油服工程", "5d_pct": -6.6, "trend": "deteriorating"}
+    ],
+    "position_alignment": "2/3 positions in hot sectors",
+    "regime": "Tech/AI leadership, resources rotating out"
+  },
+  "position_decisions": [
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "action": "HOLD",
+      "reason": "Sector hot, within stop, thesis valid",
+      "sector_rank": "top 20%",
+      "new_stop": null,
+      "pnl_pct": -2.6,
+      "days_held": 17,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "600352",
+      "name": "浙江龙盛",
+      "entry_price": 15.81,
+      "allocation_pct": 7,
+      "stop": 15.02,
+      "target": 21.0,
+      "thesis": "染料龙头涨价催化，sector top 5%",
+      "sector": "化学制品",
+      "sector_rank": "top 5%",
+      "catalyst": "分散染料涨价2000元/吨，机构目标21.52",
+      "catalyst_freshness": "ongoing",
+      "rps120": 91.2,
+      "conviction": "strong"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "002448",
+      "name": "中原内配",
+      "reason": "Sector (汽车零部件) in bottom 40%, no entry regardless of stock quality",
+      "rps120": 91.8
+    }
+  ],
+  "new_learnings": [
+    "Specific, actionable insight from today's analysis"
+  ],
+  "market_summary": "Brief market + sector rotation summary with IV context",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}
+```
+
+### Field Notes
+
+**position_decisions**: Every active position MUST appear. Actions: HOLD | SELL | RAISE_STOP
+- Always include `sector_rank` — if sector goes cold, flag for sell
+- `days_held` is mandatory — triggers time stop check at 10 days
+
+**new_positions**: Stocks to open today. conviction: strong | moderate | small
+- Default to `[]` when breadth/regime is weak. Do not force a starter position just because a candidate is acceptable.
+- `stop` = entry_price × 0.95 (hard -5% stop, always)
+- `sector_rank` required — must be top 30% to enter
+- `catalyst_freshness`: ongoing | upcoming | aging | stale
+
+**skip_list**: Replaces the old WATCH list. Brief reason why you're not buying. If sector is wrong, just say so — don't waste words analyzing the stock.
+- **CRITICAL: Only cite price/change data that appears in the input.** You do NOT have current prices for non-held stocks. Never fabricate today's price movement, HK stock performance, or intraday changes for stocks not in `prices.json`. If you don't have the data, say "no current price data" — do NOT guess or hallucinate.
+
+**missed_opportunities**: REMOVED. Looking backwards at missed stocks created a "grass is greener" bias that led to FOMO entries. Focus forward.
+
+## Anti-Patterns (Things V1 Did Wrong — Don't Repeat)
+
+1. ❌ "Valuation at 90th percentile, lowering confidence" — Valuation doesn't predict short-term returns
+2. ❌ "RPS 94%, exceeds ideal range, skipping" — That stock went +29%. Buy strength.
+3. ❌ "WATCH/low confidence means force a small buy" — weak tape is a valid reason to skip and hold cash
+4. ❌ "Time_decay triggered but thesis still valid, adding exception..." — Cut it. Re-enter if it proves itself.
+5. ❌ "4 risk factors, lowering to low confidence" — Industry leaders with 4 risks outperformed no-risk stocks by 5x
+6. ❌ Buying stocks in cold sectors because the individual setup looked good — Sector gravity always wins
+7. ❌ "Score_company 8.9 but score_value 3.2, mixed signals" — Delete score_value from your brain
+8. ❌ "港股+12.15%, 不追高" (when no HK price data was provided) — NEVER fabricate price data. You only have prices for active positions. For skip_list stocks, use fundamentals/sector/RPS reasoning, not made-up price movements.
+
+## Output Mode: Research Memo
+
+You are the **research analyst** in a two-stage pipeline. A portfolio manager (GPT-5.4) will review your work and make final decisions. Your job is to do the research thoroughly and present your findings clearly.
+
+**Your output should be a research memo with these sections:**
+
+1. **Market Regime** — Bull/bear/range, breadth read, IV sentiment, key macro drivers
+2. **Sector Analysis** — Top/bottom sectors, rotation signals, persistence vs one-day spikes
+3. **Position Review** — For each active position: current status, sector alignment, stop/target levels, recommendation (HOLD/SELL/RAISE_STOP) with reasoning
+4. **New Entry Candidates** — For each candidate: thesis, sector rank, RPS, MA distances, catalyst, risk factors, preliminary verdict
+5. **Skip List** — Stocks considered but rejected, with brief reasons
+6. **Learnings** — New insights from today's analysis
+7. **Uncertainty Flags** — Anything you're unsure about ("I'm uncertain about X because...")
+
+**Write freely** — explain your reasoning, flag concerns, note where data is ambiguous. This is NOT the final output; the PM will read it and decide.
+
+**IMPORTANT: End your memo with a fallback JSON block.** After your analysis, output a complete JSON decision block wrapped in ```json fences, following the Output Format schema below. This serves as a fallback if the PM stage fails. Label it clearly:
+
+```
+## Fallback JSON Decision
+
+\`\`\`json
+{ ... your complete JSON following the Output Format schema ... }
+\`\`\`
+```
+
+## Final Reminder
+
+**The goal is to make money, not to be right.** V1 had beautiful analysis, detailed reasoning, 20 hypotheses — and lost money. V2 is dumber but follows the money. Buy what's going up, in sectors that are going up, and get out fast when it stops going up.
+
+Price is truth. Everything else is narrative.
+
+
+## 今日数据 (由 run_daily.py 自动收集)
+
+```json
+{
+  "date": "2026-07-29",
+  "portfolio": {
+    "startingCapital": 1000000,
+    "totalEquity": 945970.0,
+    "cash": 945970.0,
+    "investedValue": 0.0,
+    "unrealizedPnl": 0.0,
+    "realizedPnl": -54030.0,
+    "totalPnl": -54030.0,
+    "totalReturnPct": -5.4,
+    "positionsUsed": 0,
+    "positionsMax": 10,
+    "cashPct": 100.0,
+    "dayPnl": 0.0,
+    "minCashPct": 0,
+    "minCashValue": 0.0,
+    "deployableCash": 945970.0
+  },
+  "market": {
+    "timestamp": "2026-07-29T11:37:35.190585",
+    "indices": {
+      "上证指数": {
+        "code": "sh000001",
+        "close": 3793.181,
+        "change_pct": -0.53,
+        "date": "2026-07-29"
+      },
+      "深证成指": {
+        "code": "sz399001",
+        "close": 13452.05,
+        "change_pct": -0.43,
+        "date": "2026-07-29"
+      },
+      "创业板指": {
+        "code": "sz399006",
+        "close": 3311.32,
+        "change_pct": -0.47,
+        "date": "2026-07-29"
+      },
+      "科创50": {
+        "code": "sh000688",
+        "close": 1622.028,
+        "change_pct": -4.22,
+        "date": "2026-07-29"
+      }
+    },
+    "breadth": {
+      "up": 3430,
+      "down": 2001,
+      "flat": 94,
+      "total": 5525,
+      "distribution": {
+        "f10": 21,
+        "f7_10": 267,
+        "f4_7": 376,
+        "f2_4": 450,
+        "f0_2": 887,
+        "f0": 94,
+        "r0_2": 2380,
+        "r2_4": 767,
+        "r4_7": 178,
+        "r7_10": 47,
+        "r10": 58
+      }
+    },
+    "sectors": {
+      "top5": [
+        {
+          "板块名称": "教育",
+          "涨跌幅": 4.67
+        },
+        {
+          "板块名称": "休闲食品",
+          "涨跌幅": 4.48
+        },
+        {
+          "板块名称": "游戏Ⅱ",
+          "涨跌幅": 4.03
+        },
+        {
+          "板块名称": "非白酒",
+          "涨跌幅": 3.67
+        },
+        {
+          "板块名称": "饮料乳品",
+          "涨跌幅": 3.35
+        }
+      ],
+      "bottom5": [
+        {
+          "板块名称": "电子化学品Ⅱ",
+          "涨跌幅": -5.99
+        },
+        {
+          "板块名称": "半导体",
+          "涨跌幅": -5.61
+        },
+        {
+          "板块名称": "元件",
+          "涨跌幅": -5.09
+        },
+        {
+          "板块名称": "玻璃玻纤",
+          "涨跌幅": -4.59
+        },
+        {
+          "板块名称": "非金属材料Ⅱ",
+          "涨跌幅": -4.24
+        }
+      ]
+    }
+  },
+  "strategy_pool": {
+    "source": "cheesefortune_intersection",
+    "total_stocks": 50,
+    "stocks": [
+      {
+        "code": "301362",
+        "code_full": "301362.SZ",
+        "name": "民爆光电",
+        "source_date": "2026/06/16",
+        "highlights_count": 4,
+        "market_cap": 164.9029,
+        "pe": 2.9,
+        "risks_count": 2,
+        "rps20": 1.39,
+        "rps60": 98.8,
+        "rps120": 99.8,
+        "rps250": 98.79,
+        "ma10": 121.53,
+        "vcp_quality": null,
+        "ma5": 116.44,
+        "ma20": 140.65,
+        "dist_ma5_pct": -3.0,
+        "dist_ma10_pct": -7.0,
+        "dist_ma20_pct": -19.7
+      },
+      {
+        "code": "002980",
+        "code_full": "002980.SZ",
+        "name": "华盛昌",
+        "source_date": "2026/04/30",
+        "highlights_count": 4,
+        "market_cap": 144.0396,
+        "pe": 6.2,
+        "risks_count": 2,
+        "rps20": 19.45,
+        "rps60": 99.96,
+        "rps120": 99.68,
+        "rps250": 99.05,
+        "ma10": 90.0,
+        "vcp_quality": null,
+        "ma5": 82.9,
+        "ma20": 97.19,
+        "dist_ma5_pct": -8.3,
+        "dist_ma10_pct": -15.5,
+        "dist_ma20_pct": -21.8
+      },
+      {
+        "code": "688630",
+        "code_full": "688630.SH",
+        "name": "芯碁微装",
+        "source_date": "2026/03/12",
+        "highlights_count": 5,
+        "market_cap": 553.7893,
+        "pe": 5.3,
+        "risks_count": 0,
+        "rps20": 73.95,
+        "rps60": 99.28,
+        "rps120": 99.54,
+        "rps250": 99.15,
+        "ma10": 391.47,
+        "vcp_quality": null,
+        "ma5": 398.54,
+        "ma20": 445.36,
+        "dist_ma5_pct": -5.2,
+        "dist_ma10_pct": -3.4,
+        "dist_ma20_pct": -15.1
+      },
+      {
+        "code": "688200",
+        "code_full": "688200.SH",
+        "name": "华峰测控",
+        "source_date": "2026/07/22",
+        "highlights_count": 5,
+        "market_cap": 713.8467,
+        "pe": 6.4,
+        "risks_count": 0,
+        "rps20": 98.45,
+        "rps60": 98.9,
+        "rps120": 99.48,
+        "rps250": 98.28,
+        "ma10": 384.02,
+        "vcp_quality": null,
+        "ma5": 367.65,
+        "ma20": 439.7,
+        "dist_ma5_pct": -3.2,
+        "dist_ma10_pct": -7.3,
+        "dist_ma20_pct": -19.1
+      },
+      {
+        "code": "688308",
+        "code_full": "688308.SH",
+        "name": "欧科亿",
+        "source_date": "2026/07/25",
+        "highlights_count": 4,
+        "market_cap": 137.235,
+        "pe": 5.6,
+        "risks_count": 3,
+        "rps20": 2.3,
+        "rps60": 98.37,
+        "rps120": 99.46,
+        "rps250": 99.33,
+        "ma10": 98.87,
+        "vcp_quality": null,
+        "ma5": 93.61,
+        "ma20": 129.4,
+        "dist_ma5_pct": -7.7,
+        "dist_ma10_pct": -12.6,
+        "dist_ma20_pct": -33.2
+      },
+      {
+        "code": "000811",
+        "code_full": "000811.SZ",
+        "name": "冰轮环境",
+        "source_date": "2026/06/12",
+        "highlights_count": 4,
+        "market_cap": 387.9596,
+        "pe": 28.1,
+        "risks_count": 2,
+        "rps20": 98.97,
+        "rps60": 99.46,
+        "rps120": 99.22,
+        "rps250": 98.97,
+        "ma10": 43.65,
+        "vcp_quality": null,
+        "ma5": 42.32,
+        "ma20": 48.61,
+        "dist_ma5_pct": -7.6,
+        "dist_ma10_pct": -10.4,
+        "dist_ma20_pct": -19.6
+      },
+      {
+        "code": "605376",
+        "code_full": "605376.SH",
+        "name": "博迁新材",
+        "source_date": "2026/07/11",
+        "highlights_count": 4,
+        "market_cap": 357.0578,
+        "pe": 5.6,
+        "risks_count": 1,
+        "rps20": 19.09,
+        "rps60": 95.0,
+        "rps120": 99.18,
+        "rps250": 98.58,
+        "ma10": 149.98,
+        "vcp_quality": null,
+        "ma5": 143.49,
+        "ma20": 194.15,
+        "dist_ma5_pct": -4.9,
+        "dist_ma10_pct": -9.0,
+        "dist_ma20_pct": -29.7
+      },
+      {
+        "code": "300503",
+        "code_full": "300503.SZ",
+        "name": "昊志机电",
+        "source_date": "2026/07/24",
+        "highlights_count": 5,
+        "market_cap": 194.3678,
+        "pe": 10.3,
+        "risks_count": 2,
+        "rps20": 47.98,
+        "rps60": 93.52,
+        "rps120": 98.41,
+        "rps250": 96.36,
+        "ma10": 70.42,
+        "vcp_quality": null,
+        "ma5": 66.36,
+        "ma20": 83.3,
+        "dist_ma5_pct": -5.0,
+        "dist_ma10_pct": -10.5,
+        "dist_ma20_pct": -24.3
+      },
+      {
+        "code": "001389",
+        "code_full": "001389.SZ",
+        "name": "广合科技",
+        "source_date": "2026/07/22",
+        "highlights_count": 5,
+        "market_cap": 712.6563,
+        "pe": 2.3,
+        "risks_count": 2,
+        "rps20": 63.4,
+        "rps60": 97.61,
+        "rps120": 98.39,
+        "rps250": 97.57,
+        "ma10": 170.7,
+        "vcp_quality": null,
+        "ma5": 161.21,
+        "ma20": 180.59,
+        "dist_ma5_pct": -6.5,
+        "dist_ma10_pct": -11.7,
+        "dist_ma20_pct": -16.5
+      },
+      {
+        "code": "300285",
+        "code_full": "300285.SZ",
+        "name": "国瓷材料",
+        "source_date": "2026/07/08",
+        "highlights_count": 7,
+        "market_cap": 562.5347,
+        "pe": 14.5,
+        "risks_count": 2,
+        "rps20": 56.88,
+        "rps60": 98.64,
+        "rps120": 98.35,
+        "rps250": 97.59,
+        "ma10": 59.48,
+        "vcp_quality": null,
+        "ma5": 59.43,
+        "ma20": 73.18,
+        "dist_ma5_pct": -5.1,
+        "dist_ma10_pct": -5.1,
+        "dist_ma20_pct": -22.9
+      },
+      {
+        "code": "688300",
+        "code_full": "688300.SH",
+        "name": "联瑞新材",
+        "source_date": "2026/05/06",
+        "highlights_count": 6,
+        "market_cap": 286.7688,
+        "pe": 6.7,
+        "risks_count": 0,
+        "rps20": 6.15,
+        "rps60": 99.16,
+        "rps120": 98.21,
+        "rps250": 96.97,
+        "ma10": 135.25,
+        "vcp_quality": null,
+        "ma5": 125.95,
+        "ma20": 171.25,
+        "dist_ma5_pct": -5.7,
+        "dist_ma10_pct": -12.2,
+        "dist_ma20_pct": -30.7
+      },
+      {
+        "code": "688017",
+        "code_full": "688017.SH",
+        "name": "绿的谐波",
+        "source_date": "2026/07/08",
+        "highlights_count": 4,
+        "market_cap": 537.2123,
+        "pe": 5.9,
+        "risks_count": 1,
+        "rps20": 47.94,
+        "rps60": 95.58,
+        "rps120": 97.67,
+        "rps250": 93.43,
+        "ma10": 324.31,
+        "vcp_quality": null,
+        "ma5": 304.96,
+        "ma20": 369.6,
+        "dist_ma5_pct": -3.9,
+        "dist_ma10_pct": -9.6,
+        "dist_ma20_pct": -20.7
+      },
+      {
+        "code": "301536",
+        "code_full": "301536.SZ",
+        "name": "星宸科技",
+        "source_date": "2026/04/20",
+        "highlights_count": 4,
+        "market_cap": 500.9977,
+        "pe": 2.3,
+        "risks_count": 2,
+        "rps20": 98.87,
+        "rps60": 97.71,
+        "rps120": 97.45,
+        "rps250": 91.56,
+        "ma10": 118.08,
+        "vcp_quality": null,
+        "ma5": 129.81,
+        "ma20": 118.84,
+        "dist_ma5_pct": -8.5,
+        "dist_ma10_pct": 0.6,
+        "dist_ma20_pct": -0.0
+      },
+      {
+        "code": "688531",
+        "code_full": "688531.SH",
+        "name": "日联科技",
+        "source_date": "2026/06/16",
+        "highlights_count": 6,
+        "market_cap": 197.4045,
+        "pe": 3.3,
+        "risks_count": 0,
+        "rps20": 12.99,
+        "rps60": 98.49,
+        "rps120": 97.35,
+        "rps250": 96.48,
+        "ma10": 130.29,
+        "vcp_quality": null,
+        "ma5": 124.72,
+        "ma20": 151.65,
+        "dist_ma5_pct": -4.4,
+        "dist_ma10_pct": -8.5,
+        "dist_ma20_pct": -21.4
+      },
+      {
+        "code": "003031",
+        "code_full": "003031.SZ",
+        "name": "中瓷电子",
+        "source_date": "2026/07/01",
+        "highlights_count": 5,
+        "market_cap": 452.3158,
+        "pe": 5.5,
+        "risks_count": 3,
+        "rps20": 10.57,
+        "rps60": 96.13,
+        "rps120": 97.31,
+        "rps250": 93.99,
+        "ma10": 109.65,
+        "vcp_quality": null,
+        "ma5": 106.19,
+        "ma20": 132.18,
+        "dist_ma5_pct": -5.6,
+        "dist_ma10_pct": -8.5,
+        "dist_ma20_pct": -24.1
+      },
+      {
+        "code": "300806",
+        "code_full": "300806.SZ",
+        "name": "斯迪克",
+        "source_date": "2026/04/28",
+        "highlights_count": 6,
+        "market_cap": 261.4144,
+        "pe": 6.6,
+        "risks_count": 3,
+        "rps20": 6.96,
+        "rps60": 89.72,
+        "rps120": 97.18,
+        "rps250": 97.75,
+        "ma10": 59.19,
+        "vcp_quality": null,
+        "ma5": 52.61,
+        "ma20": 76.47,
+        "dist_ma5_pct": -21.6,
+        "dist_ma10_pct": -30.3,
+        "dist_ma20_pct": -46.1
+      },
+      {
+        "code": "000703",
+        "code_full": "000703.SZ",
+        "name": "恒逸石化",
+        "source_date": "2026/06/08",
+        "highlights_count": 6,
+        "market_cap": 584.699,
+        "pe": 15.2,
+        "risks_count": 3,
+        "rps20": 97.58,
+        "rps60": 91.39,
+        "rps120": 97.06,
+        "rps250": 94.86,
+        "ma10": 15.01,
+        "vcp_quality": null,
+        "ma5": 15.43,
+        "ma20": 14.64,
+        "dist_ma5_pct": -0.8,
+        "dist_ma10_pct": 1.9,
+        "dist_ma20_pct": 4.5
+      },
+      {
+        "code": "688150",
+        "code_full": "688150.SH",
+        "name": "莱特光电",
+        "source_date": "2026/04/16",
+        "highlights_count": 6,
+        "market_cap": 150.0287,
+        "pe": 4.3,
+        "risks_count": 2,
+        "rps20": 35.53,
+        "rps60": 95.89,
+        "rps120": 96.54,
+        "rps250": 90.39,
+        "ma10": 43.28,
+        "vcp_quality": null,
+        "ma5": 40.08,
+        "ma20": 52.05,
+        "dist_ma5_pct": -7.0,
+        "dist_ma10_pct": -13.9,
+        "dist_ma20_pct": -28.4
+      },
+      {
+        "code": "688629",
+        "code_full": "688629.SH",
+        "name": "华丰科技",
+        "source_date": "2026/07/15",
+        "highlights_count": 4,
+        "market_cap": 645.2553,
+        "pe": 3.0,
+        "risks_count": 1,
+        "rps20": 94.77,
+        "rps60": 96.49,
+        "rps120": 96.48,
+        "rps250": 95.67,
+        "ma10": 155.38,
+        "vcp_quality": null,
+        "ma5": 153.88,
+        "ma20": 171.1,
+        "dist_ma5_pct": -10.5,
+        "dist_ma10_pct": -11.3,
+        "dist_ma20_pct": -19.5
+      },
+      {
+        "code": "002957",
+        "code_full": "002957.SZ",
+        "name": "科瑞技术",
+        "source_date": "2026/07/15",
+        "highlights_count": 4,
+        "market_cap": 147.7498,
+        "pe": 7.0,
+        "risks_count": 3,
+        "rps20": 4.08,
+        "rps60": 93.7,
+        "rps120": 96.08,
+        "rps250": 94.54,
+        "ma10": 37.27,
+        "vcp_quality": null,
+        "ma5": 37.05,
+        "ma20": 42.6,
+        "dist_ma5_pct": -5.1,
+        "dist_ma10_pct": -5.6,
+        "dist_ma20_pct": -17.4
+      },
+      {
+        "code": "002821",
+        "code_full": "002821.SZ",
+        "name": "凯莱英",
+        "source_date": "2026/04/01",
+        "highlights_count": 7,
+        "market_cap": 567.7249,
+        "pe": 9.6,
+        "risks_count": 1,
+        "rps20": 99.62,
+        "rps60": 97.55,
+        "rps120": 95.86,
+        "rps250": 92.31,
+        "ma10": 167.61,
+        "vcp_quality": null,
+        "ma5": 161.27,
+        "ma20": 165.47,
+        "dist_ma5_pct": -2.4,
+        "dist_ma10_pct": -6.1,
+        "dist_ma20_pct": -4.9
+      },
+      {
+        "code": "688777",
+        "code_full": "688777.SH",
+        "name": "中控技术",
+        "source_date": "2026/07/13",
+        "highlights_count": 5,
+        "market_cap": 627.3342,
+        "pe": 5.6,
+        "risks_count": 2,
+        "rps20": 36.36,
+        "rps60": 86.53,
+        "rps120": 95.46,
+        "rps250": 89.72,
+        "ma10": 87.53,
+        "vcp_quality": null,
+        "ma5": 83.08,
+        "ma20": 98.5,
+        "dist_ma5_pct": -4.6,
+        "dist_ma10_pct": -9.4,
+        "dist_ma20_pct": -19.5
+      },
+      {
+        "code": "002432",
+        "code_full": "002432.SZ",
+        "name": "九安医疗",
+        "source_date": "2026/07/15",
+        "highlights_count": 4,
+        "market_cap": 312.2887,
+        "pe": 16.1,
+        "risks_count": 4,
+        "rps20": 91.02,
+        "rps60": 98.27,
+        "rps120": 95.38,
+        "rps250": 91.1,
+        "ma10": 73.26,
+        "vcp_quality": null,
+        "ma5": 72.43,
+        "ma20": 67.95,
+        "dist_ma5_pct": -7.5,
+        "dist_ma10_pct": -8.5,
+        "dist_ma20_pct": -1.3
+      },
+      {
+        "code": "002080",
+        "code_full": "002080.SZ",
+        "name": "中材科技",
+        "source_date": "2026/07/28",
+        "highlights_count": 5,
+        "market_cap": 784.5228,
+        "pe": 19.7,
+        "risks_count": 3,
+        "rps20": 20.48,
+        "rps60": 91.49,
+        "rps120": 94.55,
+        "rps250": 97.88,
+        "ma10": 53.43,
+        "vcp_quality": null,
+        "ma5": 49.22,
+        "ma20": 66.64,
+        "dist_ma5_pct": -5.0,
+        "dist_ma10_pct": -12.5,
+        "dist_ma20_pct": -29.8
+      },
+      {
+        "code": "688378",
+        "code_full": "688378.SH",
+        "name": "奥来德",
+        "source_date": "2026/06/06",
+        "highlights_count": 4,
+        "market_cap": 95.7078,
+        "pe": 5.9,
+        "risks_count": 2,
+        "rps20": 37.03,
+        "rps60": 88.66,
+        "rps120": 94.39,
+        "rps250": 95.45,
+        "ma10": 41.22,
+        "vcp_quality": null,
+        "ma5": 38.73,
+        "ma20": 48.74,
+        "dist_ma5_pct": -5.5,
+        "dist_ma10_pct": -11.2,
+        "dist_ma20_pct": -24.9
+      },
+      {
+        "code": "688536",
+        "code_full": "688536.SH",
+        "name": "思瑞浦",
+        "source_date": "2026/04/01",
+        "highlights_count": 5,
+        "market_cap": 323.0966,
+        "pe": 5.8,
+        "risks_count": 2,
+        "rps20": 30.95,
+        "rps60": 95.32,
+        "rps120": 94.09,
+        "rps250": 86.93,
+        "ma10": 252.53,
+        "vcp_quality": null,
+        "ma5": 248.03,
+        "ma20": 295.15,
+        "dist_ma5_pct": -5.7,
+        "dist_ma10_pct": -7.3,
+        "dist_ma20_pct": -20.7
+      },
+      {
+        "code": "002203",
+        "code_full": "002203.SZ",
+        "name": "海亮股份",
+        "source_date": "2026/07/28",
+        "highlights_count": 4,
+        "market_cap": 384.7857,
+        "pe": 18.5,
+        "risks_count": 5,
+        "rps20": 29.52,
+        "rps60": 94.0,
+        "rps120": 93.95,
+        "rps250": 90.05,
+        "ma10": 17.97,
+        "vcp_quality": null,
+        "ma5": 17.97,
+        "ma20": 19.4,
+        "dist_ma5_pct": -6.6,
+        "dist_ma10_pct": -6.6,
+        "dist_ma20_pct": -13.4
+      },
+      {
+        "code": "002975",
+        "code_full": "002975.SZ",
+        "name": "博杰股份",
+        "source_date": "2026/06/16",
+        "highlights_count": 5,
+        "market_cap": 165.8802,
+        "pe": 6.4,
+        "risks_count": 2,
+        "rps20": 5.47,
+        "rps60": 95.99,
+        "rps120": 93.93,
+        "rps250": 97.84,
+        "ma10": 89.74,
+        "vcp_quality": null,
+        "ma5": 84.9,
+        "ma20": 107.56,
+        "dist_ma5_pct": -6.1,
+        "dist_ma10_pct": -11.2,
+        "dist_ma20_pct": -25.9
+      },
+      {
+        "code": "603127",
+        "code_full": "603127.SH",
+        "name": "昭衍新药",
+        "source_date": "2026/07/08",
+        "highlights_count": 6,
+        "market_cap": 341.478,
+        "pe": 8.9,
+        "risks_count": 3,
+        "rps20": 99.64,
+        "rps60": 94.38,
+        "rps120": 93.91,
+        "rps250": 96.6,
+        "ma10": 48.5,
+        "vcp_quality": null,
+        "ma5": 47.42,
+        "ma20": 44.83,
+        "dist_ma5_pct": -3.9,
+        "dist_ma10_pct": -6.0,
+        "dist_ma20_pct": 1.7
+      },
+      {
+        "code": "600236",
+        "code_full": "600236.SH",
+        "name": "桂冠电力",
+        "source_date": "2026/07/28",
+        "highlights_count": 4,
+        "market_cap": 782.7201,
+        "pe": 26.3,
+        "risks_count": 3,
+        "rps20": 94.19,
+        "rps60": 93.64,
+        "rps120": 93.71,
+        "rps250": 88.87,
+        "ma10": 10.8,
+        "vcp_quality": null,
+        "ma5": 10.96,
+        "ma20": 10.07,
+        "dist_ma5_pct": -9.4,
+        "dist_ma10_pct": -8.0,
+        "dist_ma20_pct": -1.4
+      },
+      {
+        "code": "600961",
+        "code_full": "600961.SH",
+        "name": "株冶集团",
+        "source_date": "2026/07/27",
+        "highlights_count": 4,
+        "market_cap": 237.4267,
+        "pe": 21.9,
+        "risks_count": 2,
+        "rps20": 54.52,
+        "rps60": 89.24,
+        "rps120": 93.57,
+        "rps250": 93.65,
+        "ma10": 23.06,
+        "vcp_quality": null,
+        "ma5": 23.01,
+        "ma20": 26.65,
+        "dist_ma5_pct": -3.8,
+        "dist_ma10_pct": -4.0,
+        "dist_ma20_pct": -17.0
+      },
+      {
+        "code": "688376",
+        "code_full": "688376.SH",
+        "name": "美埃科技",
+        "source_date": "2026/04/28",
+        "highlights_count": 5,
+        "market_cap": 88.7659,
+        "pe": 3.6,
+        "risks_count": 1,
+        "rps20": 70.08,
+        "rps60": 87.52,
+        "rps120": 93.42,
+        "rps250": 91.02,
+        "ma10": 70.22,
+        "vcp_quality": null,
+        "ma5": 67.84,
+        "ma20": 86.37,
+        "dist_ma5_pct": -3.3,
+        "dist_ma10_pct": -6.5,
+        "dist_ma20_pct": -24.0
+      },
+      {
+        "code": "600428",
+        "code_full": "600428.SH",
+        "name": "中远海特",
+        "source_date": "2026/07/13",
+        "highlights_count": 5,
+        "market_cap": 307.3191,
+        "pe": 24.2,
+        "risks_count": 0,
+        "rps20": 99.46,
+        "rps60": 94.88,
+        "rps120": 93.2,
+        "rps250": 89.14,
+        "ma10": 10.85,
+        "vcp_quality": null,
+        "ma5": 10.97,
+        "ma20": 9.81,
+        "dist_ma5_pct": 2.1,
+        "dist_ma10_pct": 3.3,
+        "dist_ma20_pct": 14.2
+      },
+      {
+        "code": "300323",
+        "code_full": "300323.SZ",
+        "name": "华灿光电",
+        "source_date": "2026/04/29",
+        "highlights_count": 4,
+        "market_cap": 176.5823,
+        "pe": 14.1,
+        "risks_count": 2,
+        "rps20": 12.67,
+        "rps60": 95.02,
+        "rps120": 93.08,
+        "rps250": 87.92,
+        "ma10": 11.71,
+        "vcp_quality": null,
+        "ma5": 11.3,
+        "ma20": 14.81,
+        "dist_ma5_pct": -3.7,
+        "dist_ma10_pct": -7.1,
+        "dist_ma20_pct": -26.5
+      },
+      {
+        "code": "688046",
+        "code_full": "688046.SH",
+        "name": "药康生物",
+        "source_date": "2026/07/22",
+        "highlights_count": 4,
+        "market_cap": 105.329,
+        "pe": 4.2,
+        "risks_count": 1,
+        "rps20": 99.58,
+        "rps60": 96.57,
+        "rps120": 93.0,
+        "rps250": 93.49,
+        "ma10": 26.11,
+        "vcp_quality": null,
+        "ma5": 26.63,
+        "ma20": 25.05,
+        "dist_ma5_pct": -3.5,
+        "dist_ma10_pct": -1.6,
+        "dist_ma20_pct": 2.6
+      },
+      {
+        "code": "002245",
+        "code_full": "002245.SZ",
+        "name": "蔚蓝锂芯",
+        "source_date": "2026/07/14",
+        "highlights_count": 4,
+        "market_cap": 274.2469,
+        "pe": 18.1,
+        "risks_count": 2,
+        "rps20": 35.82,
+        "rps60": 96.45,
+        "rps120": 92.9,
+        "rps250": 91.0,
+        "ma10": 17.19,
+        "vcp_quality": null,
+        "ma5": 16.66,
+        "ma20": 18.79,
+        "dist_ma5_pct": -3.6,
+        "dist_ma10_pct": -6.6,
+        "dist_ma20_pct": -14.5
+      },
+      {
+        "code": "000672",
+        "code_full": "000672.SZ",
+        "name": "上峰材料",
+        "source_date": "2026/07/28",
+        "highlights_count": 4,
+        "market_cap": 125.052,
+        "pe": 13.2,
+        "risks_count": 1,
+        "rps20": 59.44,
+        "rps60": 85.99,
+        "rps120": 92.88,
+        "rps250": 91.04,
+        "ma10": 15.39,
+        "vcp_quality": null,
+        "ma5": 14.48,
+        "ma20": 18.04,
+        "dist_ma5_pct": -10.9,
+        "dist_ma10_pct": -16.2,
+        "dist_ma20_pct": -28.5
+      },
+      {
+        "code": "688392",
+        "code_full": "688392.SH",
+        "name": "骄成超声",
+        "source_date": "2026/04/22",
+        "highlights_count": 6,
+        "market_cap": 162.6401,
+        "pe": 3.8,
+        "risks_count": 1,
+        "rps20": 81.9,
+        "rps60": 92.03,
+        "rps120": 92.86,
+        "rps250": 96.82,
+        "ma10": 158.92,
+        "vcp_quality": null,
+        "ma5": 152.94,
+        "ma20": 185.32,
+        "dist_ma5_pct": -8.1,
+        "dist_ma10_pct": -11.6,
+        "dist_ma20_pct": -24.2
+      },
+      {
+        "code": "300373",
+        "code_full": "300373.SZ",
+        "name": "扬杰科技",
+        "source_date": "2026/07/22",
+        "highlights_count": 4,
+        "market_cap": 460.7589,
+        "pe": 12.5,
+        "risks_count": 0,
+        "rps20": 50.16,
+        "rps60": 89.3,
+        "rps120": 92.4,
+        "rps250": 91.4,
+        "ma10": 94.38,
+        "vcp_quality": null,
+        "ma5": 91.61,
+        "ma20": 113.94,
+        "dist_ma5_pct": -7.4,
+        "dist_ma10_pct": -10.2,
+        "dist_ma20_pct": -25.6
+      },
+      {
+        "code": "688401",
+        "code_full": "688401.SH",
+        "name": "路维光电",
+        "source_date": "2026/04/21",
+        "highlights_count": 4,
+        "market_cap": 132.1554,
+        "pe": 3.9,
+        "risks_count": 0,
+        "rps20": 46.91,
+        "rps60": 93.38,
+        "rps120": 91.84,
+        "rps250": 91.54,
+        "ma10": 66.9,
+        "vcp_quality": null,
+        "ma5": 66.09,
+        "ma20": 78.47,
+        "dist_ma5_pct": -2.6,
+        "dist_ma10_pct": -3.8,
+        "dist_ma20_pct": -18.0
+      },
+      {
+        "code": "688331",
+        "code_full": "688331.SH",
+        "name": "荣昌生物",
+        "source_date": "2026/07/06",
+        "highlights_count": 5,
+        "market_cap": 675.1151,
+        "pe": 4.3,
+        "risks_count": 2,
+        "rps20": 97.34,
+        "rps60": 92.77,
+        "rps120": 91.76,
+        "rps250": 95.31,
+        "ma10": 125.97,
+        "vcp_quality": null,
+        "ma5": 122.72,
+        "ma20": 130.39,
+        "dist_ma5_pct": -2.5,
+        "dist_ma10_pct": -5.1,
+        "dist_ma20_pct": -8.3
+      },
+      {
+        "code": "603156",
+        "code_full": "603156.SH",
+        "name": "养元饮品",
+        "source_date": "2026/03/12",
+        "highlights_count": 7,
+        "market_cap": 463.278,
+        "pe": 8.4,
+        "risks_count": 3,
+        "rps20": 51.92,
+        "rps60": 92.81,
+        "rps120": 90.81,
+        "rps250": 86.95,
+        "ma10": 36.75,
+        "vcp_quality": null,
+        "ma5": 36.3,
+        "ma20": 41.36,
+        "dist_ma5_pct": 1.3,
+        "dist_ma10_pct": 0.0,
+        "dist_ma20_pct": -11.1
+      },
+      {
+        "code": "300747",
+        "code_full": "300747.SZ",
+        "name": "锐科激光",
+        "source_date": "2026/07/22",
+        "highlights_count": 4,
+        "market_cap": 181.1722,
+        "pe": 8.0,
+        "risks_count": 2,
+        "rps20": 8.01,
+        "rps60": 87.82,
+        "rps120": 90.39,
+        "rps250": 86.83,
+        "ma10": 33.29,
+        "vcp_quality": null,
+        "ma5": 33.5,
+        "ma20": 38.77,
+        "dist_ma5_pct": -3.7,
+        "dist_ma10_pct": -3.1,
+        "dist_ma20_pct": -16.8
+      },
+      {
+        "code": "300811",
+        "code_full": "300811.SZ",
+        "name": "铂科新材",
+        "source_date": "2026/04/27",
+        "highlights_count": 4,
+        "market_cap": 242.505,
+        "pe": 6.5,
+        "risks_count": 3,
+        "rps20": 10.98,
+        "rps60": 91.53,
+        "rps120": 88.64,
+        "rps250": 93.1,
+        "ma10": 66.2,
+        "vcp_quality": null,
+        "ma5": 63.6,
+        "ma20": 77.36,
+        "dist_ma5_pct": -6.2,
+        "dist_ma10_pct": -9.9,
+        "dist_ma20_pct": -22.9
+      },
+      {
+        "code": "002138",
+        "code_full": "002138.SZ",
+        "name": "顺络电子",
+        "source_date": "2026/07/27",
+        "highlights_count": 5,
+        "market_cap": 336.0735,
+        "pe": 19.1,
+        "risks_count": 1,
+        "rps20": 13.26,
+        "rps60": 89.46,
+        "rps120": 88.06,
+        "rps250": 85.01,
+        "ma10": 43.12,
+        "vcp_quality": null,
+        "ma5": 43.25,
+        "ma20": 51.95,
+        "dist_ma5_pct": -3.6,
+        "dist_ma10_pct": -3.3,
+        "dist_ma20_pct": -19.8
+      },
+      {
+        "code": "301345",
+        "code_full": "301345.SZ",
+        "name": "涛涛车业",
+        "source_date": "2026/07/09",
+        "highlights_count": 7,
+        "market_cap": 262.5138,
+        "pe": 3.3,
+        "risks_count": 1,
+        "rps20": 98.39,
+        "rps60": 91.41,
+        "rps120": 87.33,
+        "rps250": 98.26,
+        "ma10": 250.39,
+        "vcp_quality": null,
+        "ma5": 247.72,
+        "ma20": 246.04,
+        "dist_ma5_pct": -2.8,
+        "dist_ma10_pct": -3.9,
+        "dist_ma20_pct": -2.2
+      },
+      {
+        "code": "688183",
+        "code_full": "688183.SH",
+        "name": "生益电子",
+        "source_date": "2026/07/28",
+        "highlights_count": 5,
+        "market_cap": 748.5553,
+        "pe": 5.4,
+        "risks_count": 0,
+        "rps20": 39.71,
+        "rps60": 93.26,
+        "rps120": 85.92,
+        "rps250": 97.77,
+        "ma10": 107.29,
+        "vcp_quality": null,
+        "ma5": 98.13,
+        "ma20": 116.42,
+        "dist_ma5_pct": -8.9,
+        "dist_ma10_pct": -16.7,
+        "dist_ma20_pct": -23.2
+      },
+      {
+        "code": "300438",
+        "code_full": "300438.SZ",
+        "name": "鹏辉能源",
+        "source_date": "2026/04/14",
+        "highlights_count": 5,
+        "market_cap": 308.2978,
+        "pe": 11.2,
+        "risks_count": 2,
+        "rps20": 30.04,
+        "rps60": 93.86,
+        "rps120": 85.82,
+        "rps250": 95.19,
+        "ma10": 61.66,
+        "vcp_quality": null,
+        "ma5": 60.49,
+        "ma20": 68.14,
+        "dist_ma5_pct": 1.3,
+        "dist_ma10_pct": -0.7,
+        "dist_ma20_pct": -10.1
+      },
+      {
+        "code": "601001",
+        "code_full": "601001.SH",
+        "name": "晋控煤业",
+        "source_date": "2026/03/12",
+        "highlights_count": 5,
+        "market_cap": 275.9931,
+        "pe": 20.1,
+        "risks_count": 1,
+        "rps20": 54.98,
+        "rps60": 89.54,
+        "rps120": 85.38,
+        "rps250": 86.79,
+        "ma10": 17.42,
+        "vcp_quality": null,
+        "ma5": 16.97,
+        "ma20": 17.27,
+        "dist_ma5_pct": -2.8,
+        "dist_ma10_pct": -5.3,
+        "dist_ma20_pct": -4.5
+      },
+      {
+        "code": "002056",
+        "code_full": "002056.SZ",
+        "name": "横店东磁",
+        "source_date": "2026/05/28",
+        "highlights_count": 4,
+        "market_cap": 340.4708,
+        "pe": 20.0,
+        "risks_count": 1,
+        "rps20": 50.12,
+        "rps60": 89.92,
+        "rps120": 85.08,
+        "rps250": 88.77,
+        "ma10": 22.7,
+        "vcp_quality": null,
+        "ma5": 21.54,
+        "ma20": 25.9,
+        "dist_ma5_pct": -2.8,
+        "dist_ma10_pct": -7.8,
+        "dist_ma20_pct": -19.2
+      }
+    ]
+  },
+  "enriched_candidates": [
+    {
+      "code": "301362.SZ",
+      "fetch_time": "2026-07-29T11:37:35+0800",
+      "name": "民爆光电",
+      "pe": 104.3764,
+      "pb": 6.3594,
+      "ps_ttm": 9.2133,
+      "pcf_ttm": 73.5512,
+      "valuation_percentile": 92.18,
+      "total_shares": 145944676,
+      "industries": [
+        {
+          "name": "家用电器",
+          "level": 1
+        },
+        {
+          "name": "照明设备Ⅱ",
+          "level": 2
+        },
+        {
+          "name": "照明设备Ⅲ",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "专精特新小巨人主题指数",
+        "QFII重仓指数",
+        "专精特新小巨人指数",
+        "AI算力指数",
+        "LED照明指数",
+        "高频PCB指数"
+      ],
+      "score_company": 7.7,
+      "score_trend": 6.7,
+      "score_value": 3.8,
+      "highlights": [
+        {
+          "tag": "龙头",
+          "text": "公司为 照明设备Ⅲ 行业龙头企业。"
+        },
+        {
+          "tag": "净现",
+          "text": "近5年，净现比达到 114% ，净利润现金含量较高。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 5.7% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "公募",
+          "text": "公募基金持股 3.2% ，较受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年06月22日 至今陷入调整，资金有出逃可能。"
+        },
+        {
+          "tag": "波动",
+          "text": "2026年07月14日，换手率 21% ，短线资金追逐，波动风险较高。"
+        }
+      ],
+      "events": [
+        {
+          "content": "2027/02/04解禁1.05亿股，占总股本71.95%",
+          "tags": [
+            "限售股票解禁"
+          ],
+          "date": "2027-02-04"
+        },
+        {
+          "content": "预计2026/08/25发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-25"
+        },
+        {
+          "content": "股东大会日通过增发预案，股价盘中下跌 -8.06%",
+          "tags": [
+            "股价下跌"
+          ]
+        },
+        {
+          "content": "民爆光电：关于发行股份购买资产暨关联交易报告书（草案）修订说明的公告",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "民爆光电：深圳民爆光电股份有限公司发行股份购买资产暨关联交易报告书（草案）（修订稿）",
+          "tags": [
+            "重要公告"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 1230420066.15,
+      "revenue_yoy": -0.000409,
+      "operating_profit": 164808152.79,
+      "operating_profit_yoy": -0.206349,
+      "net_profit": 147935759.82,
+      "net_profit_yoy": -0.199203,
+      "gross_profit": 349684411.27,
+      "gross_profit_yoy": -0.084385,
+      "cogs": 880735654.88,
+      "gross_margin": 28.42,
+      "pe_forward": null,
+      "valuation_history_days": 227,
+      "valuation_history_from": "20250804",
+      "current_price": 112.99,
+      "price": 112.99,
+      "ma5": 116.44,
+      "ma10": 121.53,
+      "ma20": 140.65,
+      "dist_ma5_pct": -3.0,
+      "dist_ma10_pct": -7.0,
+      "dist_ma20_pct": -19.7,
+      "iv_proxy": {
+        "primary_name": "创业板ETF",
+        "iv_rank": 0.8312,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 2.21,
+        "pct_float": 4.77,
+        "chg5_pct": 1.02,
+        "net5_repay_days": 3,
+        "signal": "adding"
+      }
+    },
+    {
+      "code": "002980.SZ",
+      "fetch_time": "2026-07-29T11:37:35+0800",
+      "name": "华盛昌",
+      "pe": 167.6053,
+      "pb": 11.5281,
+      "ps_ttm": 16.7421,
+      "pcf_ttm": null,
+      "valuation_percentile": 95.65,
+      "total_shares": 189401160,
+      "industries": [
+        {
+          "name": "电力设备",
+          "level": 1
+        },
+        {
+          "name": "电网设备",
+          "level": 2
+        },
+        {
+          "name": "电工仪器仪表",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "QFII重仓指数",
+        "AI应用指数",
+        "光模块(CPO)指数",
+        "预期提升指数",
+        "光通信指数",
+        "光伏指数",
+        "智能体指数",
+        "核废水指数",
+        "触板指数",
+        "抗核辐射指数"
+      ],
+      "score_company": 7.6,
+      "score_trend": 7.0,
+      "score_value": 3.6,
+      "highlights": [
+        {
+          "tag": "业绩",
+          "text": "2026年07月15日，业绩超预期引发股价跳空高开，但目前股价缺口已回补。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 19% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 1694万元 ，较上期增长 107% ，占2025年营收 2.1% ，在手订单充足。"
+        },
+        {
+          "tag": "公募",
+          "text": "公募基金持股 5.3% ，很受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月17日大跌 -10% ，股价跌停，抛压很重。"
+        },
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年06月22日 至今陷入调整，资金有出逃可能。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/26发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-26"
+        },
+        {
+          "content": "07:39 国家电网今年上半年完成固定资产投资超3100亿元，同比增长12.6%；南方电网完成固定资产投资近893亿元，同比增长14.79%。国家能源局表示，“十五五”期间全国电网固定资产投资将超5万亿元。国家电网、南方电网及内蒙古电力集团均已披露“十五五”期间的投资规划，旨在加强新型电力系统建设，推动跨区输电通道与新能源配套工程落地。\n国家发展改革委与国家能源局发布《可再生能源发展“十五五”规划》，提出适度超前推进电网基础设施建设。受政策及全球电力需求增长驱动，电网设备行业市场规模预计持续扩大。今年以来，华盛昌、杭电股份等22家电网设备公司累计涨幅超过10%。其中，华盛昌上半年预计净利润同比增长61.02%至84.02%；杭电股份上半年预计净利润同比增长852.03%至957.82%。\n远东股份上半年电池储能及相关业务订单同比增长262.14%。截至7月23日，电网设备行业融资余额合计近413亿元，较2025年末增长超7.5%。其中，华明装备、南网科技、思源电气、东方电子等16家公司今年以来机构调研家数不低于10家，且融资余额较去年末增幅超过10%。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "22:17 爱丽家居公告称，拟以自有及自筹资金收购欧康诺不低于77.08%股权，整体估值不超过6.5亿元。同时，控股股东博华企管拟向欧康诺实控人赵铭及其一致行动人转让20%上市公司股份。欧康诺主营存储测试设备，2025年净利润610.68万元，2026年上半年净利润为3719.67万元。交易双方约定四年业绩承诺期（2026-2029年），扣非净利润累计不低于2.3亿元。\n本次转让的20%股份中，15%锁定36个月，5%与业绩承诺挂钩。若未达业绩承诺或发生减值，该5%股份将用于抵扣补偿义务。法律人士指出，仅5%股权用于业绩补偿比例偏低，建议公司披露分层转让的商业逻辑及风险约束措施。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "公司发布2026半年报预告，股价开盘上涨 10.01% ，股价收盘涨幅 10.01%",
+          "tags": [
+            "股价上涨"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 530015857.54,
+      "revenue_yoy": -0.054925,
+      "operating_profit": 70665126.89,
+      "operating_profit_yoy": -0.421411,
+      "net_profit": 64106611.6,
+      "net_profit_yoy": -0.419854,
+      "gross_profit": 232366901.99,
+      "gross_profit_yoy": -0.1163,
+      "cogs": 297648955.55,
+      "gross_margin": 43.84,
+      "pe_forward": null,
+      "valuation_history_days": 260,
+      "valuation_history_from": "20220418",
+      "current_price": 76.05,
+      "price": 76.05,
+      "ma5": 82.9,
+      "ma10": 90.0,
+      "ma20": 97.19,
+      "dist_ma5_pct": -8.3,
+      "dist_ma10_pct": -15.5,
+      "dist_ma20_pct": -21.8,
+      "iv_proxy": {
+        "primary_name": "500ETF深",
+        "iv_rank": 0.857,
+        "sizing": "tight"
+      }
+    },
+    {
+      "code": "688630.SH",
+      "fetch_time": "2026-07-29T11:37:35+0800",
+      "name": "芯碁微装",
+      "pe": 140.8215,
+      "pb": 8.8996,
+      "ps_ttm": 29.0306,
+      "pcf_ttm": 169.5579,
+      "valuation_percentile": 93.9,
+      "total_shares": 146505116,
+      "industries": [
+        {
+          "name": "机械设备",
+          "level": 1
+        },
+        {
+          "name": "专用设备",
+          "level": 2
+        },
+        {
+          "name": "其他专用设备",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "TMT指数",
+        "双创100指数",
+        "专精特新小巨人主题指数",
+        "半导体产业指数",
+        "股权激励指数",
+        "专精特新小巨人指数",
+        "万得预增指数",
+        "半导体设备指数",
+        "光刻机指数",
+        "专用设备精选指数"
+      ],
+      "score_company": 9.1,
+      "score_trend": 7.7,
+      "score_value": 3.7,
+      "highlights": [
+        {
+          "tag": "龙头",
+          "text": "公司为 其他专用设备 行业龙头企业。"
+        },
+        {
+          "tag": "成长",
+          "text": "近3年营业收入每年增长 34% ，最新季度归母净利润同比增长 109% ，成长能力很强。"
+        },
+        {
+          "tag": "盈利",
+          "text": "近5年，净资产收益率为 11% ，投入资本回报率为 12% ，盈利能力很强。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 1.2亿元 ，较上期增长 109% ，占2025年营收 8.4% ，在手订单充足。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 2.9% ，较受外资机构青睐；公募基金持股 10% ，很受内资机构青睐。"
+        }
+      ],
+      "risks": [],
+      "events": [
+        {
+          "content": "预计2026/08/27发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-27"
+        },
+        {
+          "content": "16:16 港股收盘，恒生指数涨0.98%，恒生科技指数涨1.57%。恒指港股通ETF银华（159318）涨1.55%，港股通科技ETF鹏华（159751）涨2.31%。板块方面，其他计算机设备、塑料与橡胶板块涨幅靠前；可选消费经销Ⅳ、可选消费经销Ⅲ板块跌幅靠前。个股方面，芯碁微装涨19.33%，MINIMAX-W涨17.14%，卓越睿新涨11.98%，大金重工涨11.59%，晋景新能涨11.53%；今海医疗科技跌11.03%，力勤资源跌10.08%，万国黄金集团跌10.04%，麦科医药-B跌7.06%，维立志博-B跌7.05%。",
+          "tags": [
+            "快讯"
+          ]
+        },
+        {
+          "content": "12:49 合肥集成电路产业产值从2016年的约180亿元增长至2025年的1514亿元。截至2026年初，合肥集聚集成电路规上企业超600家，从业人员7万余人。在“芯屏汽合”产业框架下，合肥已形成涵盖设计、制造、封测及装备材料的产业链。晶合集成作为安徽省首家12英寸晶圆代工企业，其四期项目预计2026年第四季度投产。此外，沛顿科技、通富微电等企业在封测领域布局，汇聚了联发科（合肥）、龙迅半导体、杰发科技、恒烁半导体等设计企业。\n2026年上半年，合肥半导体赛道发生39起融资事件，涉及约25家项目公司。融资分布呈现设计主导、材料突围、设备升级及特色工艺并进的格局。其中，集成电路设计融资事件占比约26%，封装测试领域融资密度较高，芯碁微电子装备于6月26日完成IPO。融资阶段以天使轮及A轮为主，占比超过半数。此外，合肥近期落地多只基金，包括建投中瀛扶摇股权投资基金、合肥市专精特新基金、兴泰科转未来基金、匠心新研基金及兴泰天使基金，覆盖从天使期到成长期的投资链条。\n合肥国资通过多级联动进行投资，合肥产投资本、合肥高投、合肥建投资本及国耀资本等机构在芯合半导体、鑫丰科技、四象半导体、曦融兆波、赛美泰克等项目中均有参与。投资决策主要围绕产业链协同及技术方向进行，重点关注新能源汽车、光伏及量子计算等领域。合肥国资目前储备项目包括量子计算、先进显示及固态电池等方向。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "芯碁微装：国泰海通证券股份有限公司关于公司向特定对象发行股票募投项目结项并将节余募集资金永久补充流动资金及注销相关募集资金专户、理财产品专用结算账户的专项核查意见",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "芯碁微装：关于向特定对象发行股票募投项目结项并将节余募集资金永久补充流动资金及注销相关募集资金专户、理财产品专用结算账户的公告",
+          "tags": [
+            "重要公告"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 933504506.54,
+      "revenue_yoy": 0.300311,
+      "operating_profit": 220138591.24,
+      "operating_profit_yoy": 0.331095,
+      "net_profit": 198812348.7,
+      "net_profit_yoy": 0.282033,
+      "gross_profit": 392940189.83,
+      "gross_profit_yoy": 0.335179,
+      "cogs": 540564316.71,
+      "gross_margin": 42.09,
+      "pe_forward": null,
+      "valuation_history_days": 268,
+      "valuation_history_from": "20230403",
+      "current_price": 378.0,
+      "price": 378.0,
+      "ma5": 398.54,
+      "ma10": 391.47,
+      "ma20": 445.36,
+      "dist_ma5_pct": -5.2,
+      "dist_ma10_pct": -3.4,
+      "dist_ma20_pct": -15.1,
+      "iv_proxy": {
+        "primary_name": "科创50",
+        "iv_rank": 0.7756,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 9.81,
+        "pct_float": 1.97,
+        "chg5_pct": 3.77,
+        "net5_repay_days": 2,
+        "signal": "adding"
+      }
+    },
+    {
+      "code": "688200.SH",
+      "fetch_time": "2026-07-29T11:37:35+0800",
+      "name": "华峰测控",
+      "pe": 119.5789,
+      "pb": 16.8667,
+      "ps_ttm": 47.8439,
+      "pcf_ttm": 256.1638,
+      "valuation_percentile": 90.85,
+      "total_shares": 200575083,
+      "industries": [
+        {
+          "name": "电子",
+          "level": 1
+        },
+        {
+          "name": "半导体",
+          "level": 2
+        },
+        {
+          "name": "半导体设备",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "TMT指数",
+        "科技龙头指数",
+        "双创100指数",
+        "半导体产业指数",
+        "具身智能指数",
+        "芯片指数",
+        "股权激励指数",
+        "半导体精选指数",
+        "可转债正股指数",
+        "半导体设备指数",
+        "模拟芯片指数",
+        "可转债预案指数",
+        "先进封装指数"
+      ],
+      "score_company": 9.0,
+      "score_trend": 7.8,
+      "score_value": 3.8,
+      "highlights": [
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 52% ，利润成长性强。"
+        },
+        {
+          "tag": "盈利",
+          "text": "近5年，净资产收益率为 13% ，投入资本回报率为 13% ，盈利能力很强。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 1.0亿元 ，较上期增长 31% ，占2025年营收 7.6% ，在手订单充足。"
+        },
+        {
+          "tag": "预测",
+          "text": " 7家 机构预测，2026年-2028年营收和净利润每年增长均超过 20% ，未来成长较快。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 4.6% ，很受外资机构青睐；公募基金持股 20% ，很受内资机构青睐。"
+        }
+      ],
+      "risks": [],
+      "events": [
+        {
+          "content": "预计2026/08/31发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-31"
+        },
+        {
+          "content": "14:55 7月27日，长鑫科技（688825）在上海证券交易所科创板挂牌上市。公司发行价为每股8.66元，募资净额295亿元。上市首日，长鑫科技开盘价报12.10元，截至午间收盘报13.05元。\n长鑫科技募资将投向存储晶圆产线技术改造、DRAM存储工艺升级及前沿技术研发。其中，约205亿元资金预计在未来两至三年内用于设备采购。科创半导体ETF华夏（588170）重仓股包括华海清科、中微公司、中科飞测、拓荆科技和华峰测控等设备标的。截至7月23日，科创半导体ETF华夏（588170）近20个交易日份额增加278.98亿份，最新份额达327.63亿份。长鑫科技目前DRAM月产能约12万片，募投项目达产后预计提升至约18万片。后续市场关注设备招标验证进度及晶圆代工企业的资本开支指引。\n截至发稿，科创半导体ETF华夏（588170）盘中上涨3.37%，报1.013元。上证科创板半导体材料设备主题指数（950125）同期上涨约3.13%。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "14:37 2026年二季度基金季报显示，上证380ETF易方达新进重仓股包括源杰科技、华虹宏力、中科飞测、华峰测控、中控技术、芯源微、剑桥科技、长飞光纤、士兰微。今日午盘，上证380指数上涨1.054%，报6721.19点。上证380ETF易方达(530380)午盘上涨1.703%，成交额586万元，换手率3.89%，基金规模1.51亿元。资金面上，该ETF上一交易日主力资金净流出21万元，近5个交易日累计净流入31万元。前十大权重股合计占比14.49%，其中源杰科技涨2.88%，中科飞测涨6.97%。该ETF综合费率0.20%/年，近1月跟踪误差0.058%，近1年超基准年化+3.39%，并配有场外联接基金。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "华峰测控：华峰测控关于修改《公司章程》的公告",
+          "tags": [
+            "重要公告"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 939315871.52,
+      "revenue_yoy": 0.512102,
+      "operating_profit": 421498300.38,
+      "operating_profit_yoy": 0.840866,
+      "net_profit": 386924067.95,
+      "net_profit_yoy": 0.815747,
+      "gross_profit": 697919022.35,
+      "gross_profit_yoy": 0.485258,
+      "cogs": 241396849.17,
+      "gross_margin": 74.3,
+      "pe_forward": null,
+      "valuation_history_days": 269,
+      "valuation_history_from": "20220218",
+      "current_price": 355.9,
+      "price": 355.9,
+      "ma5": 367.65,
+      "ma10": 384.02,
+      "ma20": 439.7,
+      "dist_ma5_pct": -3.2,
+      "dist_ma10_pct": -7.3,
+      "dist_ma20_pct": -19.1,
+      "iv_proxy": {
+        "primary_name": "科创50",
+        "iv_rank": 0.7756,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 4.72,
+        "pct_float": 0.66,
+        "chg5_pct": -1.47,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "688308.SH",
+      "fetch_time": "2026-07-29T11:37:35+0800",
+      "name": "欧科亿",
+      "pe": 43.531,
+      "pb": 4.6728,
+      "ps_ttm": 7.2521,
+      "pcf_ttm": null,
+      "valuation_percentile": 79.24,
+      "total_shares": 158781708,
+      "industries": [
+        {
+          "name": "机械设备",
+          "level": 1
+        },
+        {
+          "name": "通用设备",
+          "level": 2
+        },
+        {
+          "name": "金属制品",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "专精特新小巨人主题指数",
+        "专精特新小巨人指数",
+        "万得预增指数",
+        "电路板指数",
+        "通用机械精选指数",
+        "仪器仪表精选指数",
+        "对日反制指数"
+      ],
+      "score_company": 7.8,
+      "score_trend": 6.4,
+      "score_value": 4.7,
+      "highlights": [
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 2802% ，利润成长性强。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 2506万元 ，较上期增长 61% ，占2025年营收 1.7% ，在手订单充足。"
+        },
+        {
+          "tag": "预测",
+          "text": " 3家 机构预测，2026年-2028年营收和净利润每年增长均超过 20% ，未来成长较快。"
+        },
+        {
+          "tag": "公募",
+          "text": "公募基金持股 3.8% ，较受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月20日大跌 -20% ，股价跌停，抛压很重。"
+        },
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年06月23日 至今陷入调整，资金有出逃可能。"
+        },
+        {
+          "tag": "收现",
+          "text": "近5年，收现比为 62% ，销售收入现金含量很低。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/26发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-26"
+        },
+        {
+          "content": "17:35 国金证券观点认为，Q3科技产业主要驱动力在于英伟达Vera Rubin与谷歌TPU进入量产阶段，算力紧缺仍是核心矛盾。英伟达Vera Rubin NVL72正在全球加速部署，已在CoreWeave、Google Cloud、Microsoft Azure及Oracle云基础设施运行。TPU方面，Alphabet确认TPU系统销售已于Q2启动交付，预计2026年收入加速，2027年确认多数收入。供给端，HBM4三家供应商已认证量产，SK海力士称需求超供给；Alphabet上调2026年资本开支指引至1950-2050亿美元。\nAlphabet Q2财报显示，收入1198亿美元，同比增长24%；Google Cloud收入248亿美元，同比增长82%。资本开支449亿美元，其中六成投向服务器。TPU系统销售模式打开云服务外增长空间。产业链方面，机柜、PCB、光互联是主线，工业富联Rubin机柜Q3量产，Spectrum-6确立CPO为标配。电容方面，三星电机MLCC涨价信号明确，AI服务器高容值产品现货价格涨幅显著。\n国金证券列示相关标的：超核心供应商包括工业富联、胜宏科技；海外算力链包括中际旭创、新易盛、东山精密、江海股份、中钨高新、蓝思科技、东阳光、光智科技、先导基电、火炬电子、三环集团、欧科亿、天孚通信、鼎泰高科、领益智造、兆易创新、鹏鼎控股、唯科科技、海川智能、天岳先进、大普微、源杰科技、麦格米特、景旺电子、英维克、京东方等；国内算力链包括寒武纪、海光信息、长鑫科技、中芯国际、华虹半导体、中科曙光、浪潮信息、胜蓝股份、华勤技术、国科微、中国长城、晶科科技、罗曼股份、盈峰环境、芯原股份、亿田智能、豫能控股、星环科技、鸿日达、盛视科技、神州数码、润泽科技、大位科技、润建股份、奥飞数据、瑞晟智能、科华数据、潍柴重机、欧陆通、杰创智能、奥尼电子；大模型与云厂商包括智谱、MiniMax、阿里巴巴、腾讯控股、金山云、百度集团、优刻得、首都在线、网宿科技、云赛智联、青云科技等。风险提示：Rubin量产爬坡不及预期、TPU收入确认节奏风险、HBM与高端元器件供给瓶颈风险。\nVera Rubin平台由七颗芯片与五类机架托盘组成，英伟达官方确认其系统协同设计。Vera Rubin NVL72机柜已在CoreWeave、Google Cloud、Microsoft Azure与Oracle云基础设施运行，CoreWeave实测显示其每兆瓦token吞吐量达Grace Blackwell NVL72的10倍。\nRubin GPU采用双芯粒设计，搭载288GB HBM4，带宽22TB/s。第三代Transformer引擎支持NVFP4精度，算力较Blackwell大幅提升。Vera Rubin NVL144机柜由72颗Rubin GPU与36颗Vera CPU构成。HBM4方面，三星电子、SK海力士、美光三家供应商已通过认证并量产，预计2026年Q3全面规模化量产。\n英伟达定义G3.5存储层以优化KV Cache，CMX平台由BlueField-4 DPU管理，单柜管理约9600TB闪存。该平台旨在提升token生成速度与能效，使存储系统成为AI基础设施的关键环节。\nVera CPU专为数据搬运与Agent推理设计，Groq 3 LPX定位低时延推理加速器。Spectrum-6以太网交换机采用CPO技术，英伟达确认其为首款进入量产阶段的此类产品，相比可插拔收发器功耗降低5倍。\nAlphabet Q2财报显示，Google Cloud积压订单达5140亿美元。管理层上调2026年资本开支指引，并预告2027年将显著增长。TPU系统销售已于Q2启动交付，预计2027年进入收入放量期。\n机柜环节，工业富联Rubin整机柜Q3启动量产。PCB环节，Vera Rubin NVL144采用中央PCB中板，价值量较GB代际提升。光模块环节，ConnectX-9提升端口带宽至1.6Tb/s，CPO随Spectrum-6确立为官方标配。\n液冷与供电方面，Vera Rubin NVL144采用100%液冷设计，800VDC高压直流确立为参考架构。电容方面，三星电机已与大型科技企业签署AI服务器MLCC长期供货合同，高端高容MLCC供需紧张预计持续至2027年上半年。\n相关标的与风险提示同前文所述。报告由国金证券发布，分析师为刘高畅、郑元昊、孙恺祈。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "13:38 A股半导体材料板块近期表现活跃，科创新材料ETF（589180）成交额放量。中船特气披露2026年半年报，上半年实现营业收入19.04亿元，同比增长83.13%；归母净利润3.48亿元，同比增长95.63%；扣非净利润3.26亿元，同比增长117.08%。国联民生证券指出，AI性能提升驱动算力与功耗增加，带动AI金属材料需求扩张，叠加供给约束与国产替代，行业迎来需求与价格共振。\n开源证券分析认为，AI材料领域需关注具备盈利兑现能力的品种。半导体材料方面，硅片行业存在高端缺口；碳化硅有待需求导入；光刻胶高端产品依赖进口；电子特气国产替代稳步推进；溅射靶材高端品类产能爬坡。此外，PCB材料、光模块材料、光纤材料、被动元器件及液冷材料等细分领域均受技术升级与国产替代驱动，呈现不同程度的供需格局变化。\n基金投资存在风险，过往业绩不预示未来表现。科创新材料ETF（589180）标的指数为上证科创板新材料指数，2021年至2025年涨跌幅分别为46.14%、-35.84%、-27.61%、-15.92%、55.70%。",
+          "tags": [
+            "资讯"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 1023296780.65,
+      "revenue_yoy": 0.143388,
+      "operating_profit": 49261644.2,
+      "operating_profit_yoy": -0.509262,
+      "net_profit": 48140353.72,
+      "net_profit_yoy": -0.461947,
+      "gross_profit": 200180860.26,
+      "gross_profit_yoy": -0.134136,
+      "cogs": 823115920.39,
+      "gross_margin": 19.56,
+      "pe_forward": null,
+      "valuation_history_days": 292,
+      "valuation_history_from": "20221212",
+      "current_price": 86.43,
+      "price": 86.43,
+      "ma5": 93.61,
+      "ma10": 98.87,
+      "ma20": 129.4,
+      "dist_ma5_pct": -7.7,
+      "dist_ma10_pct": -12.6,
+      "dist_ma20_pct": -33.2,
+      "iv_proxy": {
+        "primary_name": "科创50",
+        "iv_rank": 0.7756,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 8.1,
+        "pct_float": 5.9,
+        "chg5_pct": -5.93,
+        "net5_repay_days": 4,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "000811.SZ",
+      "fetch_time": "2026-07-29T11:37:35+0800",
+      "name": "冰轮环境",
+      "pe": 60.0146,
+      "pb": 5.484,
+      "ps_ttm": 4.8309,
+      "pcf_ttm": 44.0576,
+      "valuation_percentile": 98.89,
+      "total_shares": 992477985,
+      "industries": [
+        {
+          "name": "机械设备",
+          "level": 1
+        },
+        {
+          "name": "通用设备",
+          "level": 2
+        },
+        {
+          "name": "制冷空调设备",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "贷款回购指数",
+        "双百企业指数",
+        "氢能指数",
+        "能源出海指数",
+        "山东省国资指数",
+        "空气能热泵指数",
+        "燃料电池指数",
+        "集装箱指数",
+        "新能源设备指数",
+        "通用机械精选指数",
+        "仪器仪表精选指数",
+        "冬奥会指数",
+        "冷链物流指数",
+        "地热指数",
+        "余热利用指数",
+        "地热能指数",
+        "核电通风与空气处理指数",
+        "核电阀门指数"
+      ],
+      "score_company": 8.9,
+      "score_trend": 7.9,
+      "score_value": 3.4,
+      "highlights": [
+        {
+          "tag": "龙头",
+          "text": "公司为 制冷空调设备 行业龙头企业。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 13亿元 ，较上期增长 3.7% ，占2025年营收 18% ，在手订单充足。"
+        },
+        {
+          "tag": "预测",
+          "text": " 3家 机构预测，2026年-2028年营收和净利润每年增长均超过 15% ，未来成长较快。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 4.2% ，很受外资机构青睐；公募基金持股 11% ，很受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月28日大跌 -9.99% ，股价跌停，抛压很重。"
+        },
+        {
+          "tag": "商誉",
+          "text": "商誉占净资产 12% ，商誉减值风险较高。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/21发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-21"
+        },
+        {
+          "content": "16:40 太平洋证券分析师指出，电子行业半年报业绩增长主要集中在存储、海外算力及半导体设备领域。存储板块受益于AI服务器需求提升及备货旺季，供给端存在缺口；半导体设备受全球扩产及国产替代驱动，订单增长具有持续性。传媒行业方面，游戏板块维持高景气，二季度上市公司业绩实现环比增长，估值处于历史较低水平，看好恺英网络。\n机械行业方面，液冷技术成为散热领域重点，冰轮环境受益于全球算力建设，合同负债创新高；宁波精达通过并购拓展北美液冷市场，订单增长显著。通信行业中，光纤板块受无人机及算力需求驱动，长飞光纤业绩表现超预期；光模块板块景气度回升，剑桥科技二季度业绩环比增长，中际旭创获推荐。\n计算机行业方面，算力链相关的服务器硬件及算力租赁业务业绩增长符合预期，海外算力投入持续，看好智微智能与联想集团。文中列举了电子、传媒、机械、通信及计算机各细分领域的参考研报信息及投资评级说明。\n列示了各行业相关研究报告的发布时间及作者信息，并声明本报告仅向签约客户提供，不构成投资建议，投资者需自主决策并承担风险。\n声明报告信息来源于公开资料，不对准确性作保证，太平洋证券及其关联机构可能持有相关证券头寸，版权归太平洋证券所有。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "于2026-07-17接待9位投资者调研。",
+          "tags": [
+            "机构调研"
+          ]
+        },
+        {
+          "content": "15:00 今天大涨的原因可能是公司披露并购重组取得实质性进展，相关资产/资金安排和整合方案更明晰，有望增强高效节能装备业务规模与盈利预期。",
+          "tags": [
+            "快讯",
+            "大涨原因"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 4834976275.63,
+      "revenue_yoy": -0.024466,
+      "operating_profit": 597858322.44,
+      "operating_profit_yoy": 0.041605,
+      "net_profit": 488069735.53,
+      "net_profit_yoy": -0.037361,
+      "gross_profit": 1347581743.7,
+      "gross_profit_yoy": 0.014727,
+      "cogs": 3487394531.93,
+      "gross_margin": 27.87,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 39.09,
+      "price": 39.09,
+      "ma5": 42.32,
+      "ma10": 43.65,
+      "ma20": 48.61,
+      "dist_ma5_pct": -7.6,
+      "dist_ma10_pct": -10.4,
+      "dist_ma20_pct": -19.6,
+      "iv_proxy": {
+        "primary_name": "深100ETF",
+        "iv_rank": 0.6758,
+        "sizing": "selective"
+      },
+      "margin": {
+        "rzye_yi": 7.38,
+        "pct_float": 1.93,
+        "chg5_pct": 15.07,
+        "net5_repay_days": 3,
+        "signal": "adding"
+      }
+    },
+    {
+      "code": "605376.SH",
+      "fetch_time": "2026-07-29T11:37:35+0800",
+      "name": "博迁新材",
+      "pe": 147.307,
+      "pb": 20.6373,
+      "ps_ttm": 27.2836,
+      "pcf_ttm": 6282.2631,
+      "valuation_percentile": 90.69,
+      "total_shares": 261600000,
+      "industries": [
+        {
+          "name": "有色金属",
+          "level": 1
+        },
+        {
+          "name": "能源金属",
+          "level": 2
+        },
+        {
+          "name": "镍",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "资源股",
+        "专精特新小巨人主题指数",
+        "专精特新小巨人指数",
+        "有色金属指数",
+        "新能源指数",
+        "举牌指数"
+      ],
+      "score_company": 8.3,
+      "score_trend": 6.5,
+      "score_value": 3.9,
+      "highlights": [
+        {
+          "tag": "龙头",
+          "text": "公司为 镍 行业龙头企业。"
+        },
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 50% ，利润成长性强。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 3.9% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 2.9% ，较受外资机构青睐；公募基金持股 16% ，很受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月16日大跌 -10% ，股价跌停，抛压很重。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/29发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-29"
+        },
+        {
+          "content": "02:56 近期MLCC产业链调研显示，供需格局偏紧，主力企业产线满载，出厂价保持稳定。上游材料商订单充沛，部分企业扩产线已被客户提前锁定。离型膜、陶瓷粉及金属粉等主要原材料厂商产线开满，部分企业实行三班倒生产。受AI服务器等新兴应用需求带动，MLCC用量显著增加，相关材料出货量持续攀升。\n国瓷材料因原辅材料价格上涨，自7月27日起上调氧化锆粉体销售价格，涨幅约10%—40%。国内MLCC企业如三环集团表示，今年二季度起产品价格上调后未回调。三环集团预计2026年上半年盈利同比增长45%—65%，增长得益于行业景气度提升及产品价格修复。业内指出，AI服务器对高容MLCC需求形成虹吸效应，导致日韩厂商转产高容产品，推动行业涨价。\n业内人士认为，AI服务器带来的爆发式增量需求正推动MLCC进入新一轮景气周期。机构数据显示，AI服务器对MLCC的消耗量远高于手机和汽车。中商产业研究院预测，受新能源汽车、AI服务器及5G通信等需求拉动，全球MLCC市场规模至2030年将持续增长。上游原料厂商正竞相扩产，部分企业已与村田、三星电机等签署战略协议，新增产能获提前锁单。\n洁美科技正加速推进广东肇庆及天津基地离型膜产线建设，预计2026年底产能将达7.4亿平方米，并已启动安吉基地高端产品扩产计划。博迁新材拟投资约2.02亿元建设超细金属粉体材料扩产项目，以满足MLCC小型化、高容值需求。业内分析认为，本轮景气周期为国产MLCC产业链提供了国产替代机遇，随着产能落地，本土企业市场份额有望提升。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "博迁新材：江苏博迁新材料股份有限公司关于增加2026年度日常关联交易预计的公告",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "博迁新材：江苏博迁新材料股份有限公司关于投资建设新项目的公告",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "21:18 博迁新材（605376）今日涨停，全天换手率7.65%，成交额27.12亿元，振幅22.23%。因日振幅值达22.23%，该股登上龙虎榜。数据显示，机构专用席位合计买入1.04亿元，卖出1.02亿元，净买入235.71万元；沪股通专用席位买入1.38亿元，卖出4.04亿元，净卖出2.66亿元；营业部席位合计净买入2.07亿元。上榜前五大买卖营业部合计成交14.33亿元，净卖出5633.46万元。资金流向方面，今日主力资金净流入1434.28万元，其中特大单净流入6175.69万元，大单净流出4741.41万元。截至7月20日，两融余额为8.38亿元，其中融资余额8.32亿元，融券余额642.81万元。公司一季度实现营业收入4.10亿元，同比增长64.02%；净利润7162.63万元，同比增长49.64%。",
+          "tags": [
+            "资讯"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 805335723.32,
+      "revenue_yoy": 0.107872,
+      "operating_profit": 168359785.42,
+      "operating_profit_yoy": 0.844432,
+      "net_profit": 151584153.31,
+      "net_profit_yoy": 0.781687,
+      "gross_profit": 254663675.87,
+      "gross_profit_yoy": 0.665078,
+      "cogs": 550672047.45,
+      "gross_margin": 31.62,
+      "pe_forward": null,
+      "valuation_history_days": 292,
+      "valuation_history_from": "20221209",
+      "current_price": 136.49,
+      "price": 136.49,
+      "ma5": 143.49,
+      "ma10": 149.98,
+      "ma20": 194.15,
+      "dist_ma5_pct": -4.9,
+      "dist_ma10_pct": -9.0,
+      "dist_ma20_pct": -29.7,
+      "iv_proxy": {
+        "primary_name": "300ETF",
+        "iv_rank": 0.6588,
+        "sizing": "selective"
+      },
+      "margin": {
+        "rzye_yi": 7.35,
+        "pct_float": 2.06,
+        "chg5_pct": -3.0,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "300503.SZ",
+      "fetch_time": "2026-07-29T11:37:35+0800",
+      "name": "昊志机电",
+      "pe": 64.1545,
+      "pb": 11.6556,
+      "ps_ttm": 8.9851,
+      "pcf_ttm": 120.4229,
+      "valuation_percentile": 82.31,
+      "total_shares": 308226785,
+      "industries": [
+        {
+          "name": "机械设备",
+          "level": 1
+        },
+        {
+          "name": "通用设备",
+          "level": 2
+        },
+        {
+          "name": "其他通用设备",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "具身智能指数",
+        "股权激励指数",
+        "人形机器人指数",
+        "工业4.0指数",
+        "富士康产业链指数",
+        "通用机械精选指数",
+        "仪器仪表精选指数",
+        "新型工业化指数",
+        "3D玻璃指数",
+        "减速器指数",
+        "工业母机指数"
+      ],
+      "score_company": 7.7,
+      "score_trend": 7.2,
+      "score_value": 4.2,
+      "highlights": [
+        {
+          "tag": "业绩",
+          "text": "2026年07月21日，业绩超预期引发股价大幅上涨，当日收涨 13.3% 。"
+        },
+        {
+          "tag": "成长",
+          "text": "近3年营业收入每年增长 24% ，最新季度归母净利润同比增长 196% ，成长能力很强。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 4.3% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 2073万元 ，较上期增长 61% ，占2025年营收 1.3% ，在手订单充足。"
+        },
+        {
+          "tag": "公募",
+          "text": "公募基金持股 8.5% ，很受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月07日大跌 -10.3% ，且成交额为近20日均值的 1.8倍 ，抛压很重。"
+        },
+        {
+          "tag": "波动",
+          "text": "2026年07月07日，换手率 20% ，短线资金追逐，波动风险较高。"
+        }
+      ],
+      "events": [
+        {
+          "content": "06:30 昊志机电主营业务涵盖电主轴、转台、直线电机、谐波减速器、伺服电机及数控系统等，产品应用于数控机床、机器人、新能源汽车燃料电池及商业航天等领域。2026年上半年，公司实现营收11.66亿元，同比增长65.86%；归母净利润2.32亿元，同比增长266.57%；毛利率由35.84%提升至42.45%，ROE由5.13%增至15.55%。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "15:00 今天大涨的原因可能是公司主营（主轴、转台、减速器、运动控制器等）产品销售驱动营业收入同比大增65.86%，归母净利润同比暴增266.57%，且Q2环比增长55%，业绩超预期。",
+          "tags": [
+            "快讯",
+            "大涨原因"
+          ]
+        },
+        {
+          "content": "公司发布2026半年报报告，股价开盘上涨 6.55% ，股价收盘涨幅 13.32%",
+          "tags": [
+            "股价上涨"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 1143200539.32,
+      "revenue_yoy": 0.181012,
+      "operating_profit": 124327503.16,
+      "operating_profit_yoy": 0.388607,
+      "net_profit": 121638269.18,
+      "net_profit_yoy": 0.498441,
+      "gross_profit": 428232861.02,
+      "gross_profit_yoy": 0.257074,
+      "cogs": 714967678.3,
+      "gross_margin": 37.46,
+      "pe_forward": null,
+      "valuation_history_days": 303,
+      "valuation_history_from": "20210729",
+      "current_price": 63.06,
+      "price": 63.06,
+      "ma5": 66.36,
+      "ma10": 70.42,
+      "ma20": 83.3,
+      "dist_ma5_pct": -5.0,
+      "dist_ma10_pct": -10.5,
+      "dist_ma20_pct": -24.3,
+      "iv_proxy": {
+        "primary_name": "创业板ETF",
+        "iv_rank": 0.8312,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 8.31,
+        "pct_float": 5.47,
+        "chg5_pct": -4.61,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "001389.SZ",
+      "fetch_time": "2026-07-29T11:37:37+0800",
+      "name": "广合科技",
+      "pe": 56.5807,
+      "pb": 9.5593,
+      "ps_ttm": 10.5191,
+      "pcf_ttm": 57.9282,
+      "valuation_percentile": 85.08,
+      "total_shares": 472709164,
+      "industries": [
+        {
+          "name": "电子",
+          "level": 1
+        },
+        {
+          "name": "元件",
+          "level": 2
+        },
+        {
+          "name": "印制电路板",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "TMT指数",
+        "科技龙头指数",
+        "出海贸易指数",
+        "股权激励指数",
+        "预期提升指数",
+        "电路板指数",
+        "元件精选指数",
+        "可转债预案指数",
+        "高频PCB指数"
+      ],
+      "score_company": 8.8,
+      "score_trend": 7.3,
+      "score_value": 4.2,
+      "highlights": [
+        {
+          "tag": "成长",
+          "text": "近3年营业收入每年增长 39% ，最新季度归母净利润同比增长 116% ，成长能力很强。"
+        },
+        {
+          "tag": "盈利",
+          "text": "近5年，净资产收益率为 19% ，投入资本回报率为 19% ，盈利能力很强。"
+        },
+        {
+          "tag": "净现",
+          "text": "近5年，净现比达到 115% ，净利润现金含量较高。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 4.9% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 12% ，很受外资机构青睐；公募基金持股 6.2% ，很受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月17日大跌 -10% ，股价跌停，抛压很重。"
+        },
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年07月01日 至今陷入调整，资金有出逃可能。"
+        }
+      ],
+      "events": [
+        {
+          "content": "2027/04/02解禁2.72亿股，占总股本57.55%",
+          "tags": [
+            "限售股票解禁"
+          ],
+          "date": "2027-04-02"
+        },
+        {
+          "content": "预计2026/08/08发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-08"
+        },
+        {
+          "content": "09:33 印制电路板板块低开下挫，东山精密跌超7%，景旺电子、广合科技、深南电路、红板科技等跟跌。",
+          "tags": [
+            "快讯"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 3835129024.17,
+      "revenue_yoy": 0.430666,
+      "operating_profit": 824328613.01,
+      "operating_profit_yoy": 0.474528,
+      "net_profit": 723819563.55,
+      "net_profit_yoy": 0.469698,
+      "gross_profit": 1336538015.43,
+      "gross_profit_yoy": 0.497225,
+      "cogs": 2498591008.74,
+      "gross_margin": 34.85,
+      "pe_forward": null,
+      "valuation_history_days": 77,
+      "valuation_history_from": "20260403",
+      "current_price": 150.76,
+      "price": 150.76,
+      "ma5": 161.21,
+      "ma10": 170.7,
+      "ma20": 180.59,
+      "dist_ma5_pct": -6.5,
+      "dist_ma10_pct": -11.7,
+      "dist_ma20_pct": -16.5,
+      "iv_proxy": {
+        "primary_name": "深100ETF",
+        "iv_rank": 0.6758,
+        "sizing": "selective"
+      },
+      "margin": {
+        "rzye_yi": 12.49,
+        "pct_float": 5.44,
+        "chg5_pct": -4.68,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "300285.SZ",
+      "fetch_time": "2026-07-29T11:37:37+0800",
+      "name": "国瓷材料",
+      "pe": 91.9275,
+      "pb": 7.9741,
+      "ps_ttm": 12.1375,
+      "pcf_ttm": 64.3275,
+      "valuation_percentile": 77.83,
+      "total_shares": 997048299,
+      "industries": [
+        {
+          "name": "电子",
+          "level": 1
+        },
+        {
+          "name": "电子化学品Ⅱ",
+          "level": 2
+        },
+        {
+          "name": "电子化学品Ⅲ",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "三新指数",
+        "科技龙头指数",
+        "双创100指数",
+        "贷款回购指数",
+        "资源股",
+        "员工持股指数",
+        "QFII重仓指数",
+        "新材料指数",
+        "有色金属指数",
+        "高瓴资本指数",
+        "对日反制指数",
+        "MLCC指数",
+        "手机外壳指数",
+        "手机陶瓷外壳指数",
+        "氮化铝指数",
+        "碳纳米管指数",
+        "锆产业指数"
+      ],
+      "score_company": 8.3,
+      "score_trend": 7.5,
+      "score_value": 4.4,
+      "highlights": [
+        {
+          "tag": "龙头",
+          "text": "公司为 电子化学品Ⅲ 行业龙头企业。"
+        },
+        {
+          "tag": "业绩",
+          "text": "2026年04月28日，业绩超预期引发股价大幅上涨，当日收涨 5.77% 。"
+        },
+        {
+          "tag": "ROIC",
+          "text": "近5年，投入资本回报率为 10% ，创造价值的能力较强。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 4.1% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "评级",
+          "text": "近90天， 14家 机构给出评级，其中 64% 为“买入”，距目标价的上涨空间为 49% 。"
+        },
+        {
+          "tag": "预测",
+          "text": " 9家 机构预测，2026年-2028年营收和净利润每年增长均超过 15% ，未来成长较快。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 2.8% ，较受外资机构青睐；公募基金持股 3.7% ，较受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "商誉",
+          "text": "商誉占净资产 25% ，商誉减值风险较高。"
+        },
+        {
+          "tag": "波动",
+          "text": "近5天，日均换手率 15% ，短线资金追逐，波动风险较高。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/06发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-06"
+        },
+        {
+          "content": "13:35 MLCC概念股盘中走强，风华高科涨停，斯迪克、昀冢科技、三环集团、国瓷材料、宏达电子、火炬电子等跟涨。消息面上，三星电机近期连续披露两笔AI服务器专用MLCC供货合同，年内长协总额达约7500亿韩元。业内分析认为，全球头部云厂商及AI企业为保障算力建设，通过年度长协锁定产能，反映出AI服务器高端被动元件供需偏紧。此外，村田制作所与三星电机均有扩产计划。\n据中国电子元件行业协会报告，预计2026年全球MLCC市场规模约1341亿元。目前全球主要制造商包括村田、太阳诱电、京瓷、TDK、三星电机、国巨、华新科技、风华高科、三环集团、微容电子等。光大证券指出，随着海外厂商优化产品结构，国内厂商有望承接消费电子、家电及工业控制等领域的增量需求。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "02:56 近期MLCC产业链调研显示，供需格局偏紧，主力企业产线满载，出厂价保持稳定。上游材料商订单充沛，部分企业扩产线已被客户提前锁定。离型膜、陶瓷粉及金属粉等主要原材料厂商产线开满，部分企业实行三班倒生产。受AI服务器等新兴应用需求带动，MLCC用量显著增加，相关材料出货量持续攀升。\n国瓷材料因原辅材料价格上涨，自7月27日起上调氧化锆粉体销售价格，涨幅约10%—40%。国内MLCC企业如三环集团表示，今年二季度起产品价格上调后未回调。三环集团预计2026年上半年盈利同比增长45%—65%，增长得益于行业景气度提升及产品价格修复。业内指出，AI服务器对高容MLCC需求形成虹吸效应，导致日韩厂商转产高容产品，推动行业涨价。\n业内人士认为，AI服务器带来的爆发式增量需求正推动MLCC进入新一轮景气周期。机构数据显示，AI服务器对MLCC的消耗量远高于手机和汽车。中商产业研究院预测，受新能源汽车、AI服务器及5G通信等需求拉动，全球MLCC市场规模至2030年将持续增长。上游原料厂商正竞相扩产，部分企业已与村田、三星电机等签署战略协议，新增产能获提前锁单。\n洁美科技正加速推进广东肇庆及天津基地离型膜产线建设，预计2026年底产能将达7.4亿平方米，并已启动安吉基地高端产品扩产计划。博迁新材拟投资约2.02亿元建设超细金属粉体材料扩产项目，以满足MLCC小型化、高容值需求。业内分析认为，本轮景气周期为国产MLCC产业链提供了国产替代机遇，随着产能落地，本土企业市场份额有望提升。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "国瓷材料：关于公司氧化锆粉体价格调整的公告",
+          "tags": [
+            "重要公告"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 3283812196.8,
+      "revenue_yoy": 0.107068,
+      "operating_profit": 636889734.44,
+      "operating_profit_yoy": 0.037712,
+      "net_profit": 551568775.42,
+      "net_profit_yoy": 0.021391,
+      "gross_profit": 1242366254.88,
+      "gross_profit_yoy": 0.056426,
+      "cogs": 2041445941.92,
+      "gross_margin": 37.83,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 56.42,
+      "price": 56.42,
+      "ma5": 59.43,
+      "ma10": 59.48,
+      "ma20": 73.18,
+      "dist_ma5_pct": -5.1,
+      "dist_ma10_pct": -5.1,
+      "dist_ma20_pct": -22.9,
+      "iv_proxy": {
+        "primary_name": "创业板ETF",
+        "iv_rank": 0.8312,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 32.36,
+        "pct_float": 6.72,
+        "chg5_pct": 8.1,
+        "net5_repay_days": 1,
+        "signal": "adding"
+      }
+    },
+    {
+      "code": "688300.SH",
+      "fetch_time": "2026-07-29T11:37:37+0800",
+      "name": "联瑞新材",
+      "pe": 87.7888,
+      "pb": 15.9691,
+      "ps_ttm": 22.5883,
+      "pcf_ttm": 113.6023,
+      "valuation_percentile": 96.93,
+      "total_shares": 241469190,
+      "industries": [
+        {
+          "name": "基础化工",
+          "level": 1
+        },
+        {
+          "name": "非金属材料Ⅱ",
+          "level": 2
+        },
+        {
+          "name": "非金属材料Ⅲ",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "资源股",
+        "专精特新小巨人主题指数",
+        "专精特新小巨人指数",
+        "可转债正股指数",
+        "半导体材料指数",
+        "HBM指数"
+      ],
+      "score_company": 8.4,
+      "score_trend": 5.7,
+      "score_value": 3.5,
+      "highlights": [
+        {
+          "tag": "龙头",
+          "text": "公司为 非金属材料Ⅲ 行业龙头企业。"
+        },
+        {
+          "tag": "收入",
+          "text": "近3年，营业收入每年增长 23% ，收入成长性很强。"
+        },
+        {
+          "tag": "盈利",
+          "text": "近5年，净资产收益率为 16% ，投入资本回报率为 16% ，盈利能力很强。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 3.8% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "预测",
+          "text": " 3家 机构预测，2026年-2028年营收和净利润每年增长均超过 20% ，未来成长较快。"
+        },
+        {
+          "tag": "公募",
+          "text": "公募基金持股 4.2% ，较受内资机构青睐。"
+        }
+      ],
+      "risks": [],
+      "events": [
+        {
+          "content": "预计2026/08/15发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-15"
+        },
+        {
+          "content": "联瑞新材：联瑞新材关于“联瑞转债”预计满足赎回条件的提示性公告",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "14:00 创新药概念走强，脑机接口概念股表现活跃，我国医疗服务体系规模持续增长，2025年获批创新药数量较多。锂电池板块方面，宁德时代拟回购股份，电解液添加剂VC均价近期出现上涨。人形机器人概念震荡反弹，智元创新启动赴港上市流程，行业正从技术突破向规模化商业化迈进。机构分析认为，市场回暖受内外因素共同推动，包括美债收益率回落及科技产业景气预期修复。当前市场风险偏好由收缩向修复过渡，短期预计延续震荡回升格局，配置上关注半导体、存储、算力硬件及创新药、锂电储能和机器人等方向。\n截至2026年7月27日13:51，上证科创板200指数上涨1.20%，成分股诺唯赞、泛亚微透、迈信林等上涨。科创200ETF鹏华上涨1.55%，最新价报1.51元。该ETF跟踪上证科创板200指数，该指数选取科创板市值较小且流动性较好的证券作为样本。截至2026年6月30日，上证科创板200指数前十大权重股包括汇成股份、杰普特、鼎通科技、甬矽电子、嘉元科技、聚和材料、新锐股份、伟测科技、兴福电子、联瑞新材。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "20:32 国金证券李阳团队认为，CoWoS-L架构因具备无掩模缝合和良率优势，有望成为先进封装主流工艺。台积电预计到2026年底CoWoS-L占2.5D封装产能超50%，2027年将达70%。芯碁微装的先进封装直写光刻设备已导入长电、通富、甬矽等国内头部封测厂。预计全球先进封装直写光刻设备市场规模将从2024年的2亿元增长至2030年的31亿元。\n需求端数据显示国产算力景气度高：国内头部模型日均Token消耗量呈指数级增长，国产大模型绑定国产GPU芯片，寒武纪26Q1期末预付款同比大幅增长。封测行业出现“AI挤占”现象，AI相关需求高速增长，日月光等厂商上调先进封装报价。国内主流封测企业稼动率回升，长电科技、通富微电、甬矽电子、汇成股份、盛合晶微等企业积极扩产。\nCoWoS-L封装由top die、重组插层和基板组成，通过模塑化合物包围的TIV提供垂直路径。芯碁微装设备主要应用于中介层曝光。国产算力需求强劲，豆包全系产品日均Token消耗量增长显著，寒武纪预付款大幅增加。封测行业结构性分化明显，AI相关需求旺盛，国内封测企业订单预期乐观。\n受原料成本上涨及供给紧俏影响，日月光上调CoWoS、FoCoS等先进封装报价。国内5家主流上市封测企业2025年营收平均增速21%，26Q1增速19%，归母净利增速明显。长电科技、通富微电、甬矽电子、汇成股份、盛合晶微等公司均有高端先进封测产能扩产计划。\nCoWoS工艺路线迭代主要体现在中介层，包括CoWoS、CoWoS-R和CoWoS-L。CoWoS技术核心在于硅中介层，其制造流程复杂，涉及TSV形成、绝缘层沉积、阻挡层与种子层沉积、铜电镀填充、CMP平坦化及RDL制作等关键步骤。\n先进封装材料包括光刻胶、电镀液、刻蚀剂、溅射靶材、底部填充等。环氧塑封料（EMC）国产化率较低，高性能EMC国产化率仅10-20%。华海诚科通过收购衡所华威成为国内龙头，联瑞新材为衡所华威主要硅微粉供应商。\n湿电子化学品包括电镀液、蚀刻液、清洗液等。飞凯材料、艾森股份、上海新阳等厂商在先进制程湿电子化学品领域有布局。临时键合胶在晶圆承载系统中起重要作用，飞凯材料、鼎龙股份有相关布局，芯源微提供临时键合、解键合设备。\n江丰电子和有研新材在超高纯金属溅射靶材领域市场份额领先。底部填充胶是保证倒片封装和TSV工艺可靠性的关键，德邦科技提供包括底部填充胶在内的综合封装材料解决方案。\n康强电子引线框架产品产能处于满产状态。新技术方面，CoPoS技术通过大型矩形面板实现“化圆为方”，玻璃基板具备热膨胀系数接近硅、电气绝缘性能优异等优势。碳化硅（SiC）中介层因高热导率，被视为应对AI芯片高功耗散热挑战的潜在方案。\n国金证券提示风险：封装技术存在不确定性，国产替代进度可能不及预期，行业竞争格局可能恶化。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "联瑞新材：联瑞新材关于可转债投资者适当性要求的风险提示性公告",
+          "tags": [
+            "重要公告"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 823840389.56,
+      "revenue_yoy": 0.187588,
+      "operating_profit": 250665221.26,
+      "operating_profit_yoy": 0.204983,
+      "net_profit": 220024328.18,
+      "net_profit_yoy": 0.190123,
+      "gross_profit": 341128422.6,
+      "gross_profit_yoy": 0.166247,
+      "cogs": 482711966.96,
+      "gross_margin": 41.41,
+      "pe_forward": null,
+      "valuation_history_days": 285,
+      "valuation_history_from": "20211115",
+      "current_price": 118.76,
+      "price": 118.76,
+      "ma5": 125.95,
+      "ma10": 135.25,
+      "ma20": 171.25,
+      "dist_ma5_pct": -5.7,
+      "dist_ma10_pct": -12.2,
+      "dist_ma20_pct": -30.7,
+      "iv_proxy": {
+        "primary_name": "科创50",
+        "iv_rank": 0.7756,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 8.21,
+        "pct_float": 2.86,
+        "chg5_pct": -1.5,
+        "net5_repay_days": 4,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "688017.SH",
+      "fetch_time": "2026-07-29T11:37:37+0800",
+      "name": "绿的谐波",
+      "pe": 372.9576,
+      "pb": 14.4471,
+      "ps_ttm": 83.2263,
+      "pcf_ttm": 363.6637,
+      "valuation_percentile": 92.63,
+      "total_shares": 183330125,
+      "industries": [
+        {
+          "name": "机械设备",
+          "level": 1
+        },
+        {
+          "name": "自动化设备",
+          "level": 2
+        },
+        {
+          "name": "机器人",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "双创100指数",
+        "先进制造指数",
+        "专精特新小巨人主题指数",
+        "具身智能指数",
+        "股权激励指数",
+        "专精特新小巨人指数",
+        "人形机器人指数",
+        "工业4.0指数",
+        "机器人指数",
+        "新型工业化指数",
+        "减速器指数",
+        "宇树机器人指数",
+        "外骨骼机器人指数"
+      ],
+      "score_company": 8.6,
+      "score_trend": 7.6,
+      "score_value": 3.8,
+      "highlights": [
+        {
+          "tag": "龙头",
+          "text": "公司为 机器人 行业龙头企业。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 6.0% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "预测",
+          "text": " 5家 机构预测，2026年-2028年营收和净利润每年增长均超过 30% ，未来成长很快。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 5.1% ，很受外资机构青睐；公募基金持股 7.1% ，很受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "收现",
+          "text": "近5年，收现比为 72% ，销售收入现金含量较低。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/27发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-27"
+        },
+        {
+          "content": "17:46 上半年机器人赛道出现降价趋势，宇树将R1人形机器人售价降至3万元以下，松延动力小布米到手价降至约9000元，星尘智能T1起售价降至8.99万元。受产业确定性增强影响，上游供应商开始跨界布局。绿的谐波与斯凯孚签署协议成立合资公司，聚焦高精密轴承部件；双环传动则通过子公司环动科技布局RV减速器、精密配件及谐波减速器业务。\n兆威机电发布B20型号灵巧手整机，并计划投资8亿元建设灵巧手产业园。随着比亚迪、长安、小鹏、小米等车企入局，行业供给增加，降价压力持续。本体厂商倾向于全栈自研以降低成本，宇树通过自研电机、减速器等核心零部件，毛利率有所提升，并掌握了供应链议价权。\n短期内本体厂商仍需依赖供应商，如中大力德与宇树签署了长期订单。但长期来看，价格战将传导压力至供应链，促使双方关系更加“在商言商”。未来车企跨界入局可能进一步加剧博弈，供应商需通过提升不可替代性来应对市场竞争。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "10:14 企查查APP显示，近日，斯凯孚机器人精密轴承（宁波）有限公司成立，经营范围包含智能机器人的研发；智能机器人销售；工业机器人制造；人工智能硬件销售等。企查查股权穿透显示，该公司由绿的谐波等共同持股。（人民财讯）",
+          "tags": [
+            "快讯"
+          ]
+        },
+        {
+          "content": "绿的谐波：关于募集资金投资项目延期的公告",
+          "tags": [
+            "重要公告"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 406652949.93,
+      "revenue_yoy": 0.47362,
+      "operating_profit": 106100199.52,
+      "operating_profit_yoy": 0.605419,
+      "net_profit": 94933887.21,
+      "net_profit_yoy": 0.584647,
+      "gross_profit": 148826302.96,
+      "gross_profit_yoy": 0.364319,
+      "cogs": 257826646.97,
+      "gross_margin": 36.6,
+      "pe_forward": null,
+      "valuation_history_days": 315,
+      "valuation_history_from": "20220829",
+      "current_price": 293.03,
+      "price": 293.03,
+      "ma5": 304.96,
+      "ma10": 324.31,
+      "ma20": 369.6,
+      "dist_ma5_pct": -3.9,
+      "dist_ma10_pct": -9.6,
+      "dist_ma20_pct": -20.7,
+      "iv_proxy": {
+        "primary_name": "科创50",
+        "iv_rank": 0.7756,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 24.24,
+        "pct_float": 4.51,
+        "chg5_pct": -3.42,
+        "net5_repay_days": 4,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "301536.SZ",
+      "fetch_time": "2026-07-29T11:37:37+0800",
+      "name": "星宸科技",
+      "pe": 109.9899,
+      "pb": 16.9501,
+      "ps_ttm": 15.9099,
+      "pcf_ttm": 177.8438,
+      "valuation_percentile": 94.03,
+      "total_shares": 421715232,
+      "industries": [
+        {
+          "name": "电子",
+          "level": 1
+        },
+        {
+          "name": "半导体",
+          "level": 2
+        },
+        {
+          "name": "数字芯片设计",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "TMT指数",
+        "双创100指数",
+        "专精特新小巨人主题指数",
+        "具身智能指数",
+        "股权激励指数",
+        "半导体精选指数",
+        "专精特新小巨人指数",
+        "万得预增指数",
+        "人工智能指数",
+        "模拟芯片指数",
+        "安防监控指数"
+      ],
+      "score_company": 8.1,
+      "score_trend": 9.5,
+      "score_value": 3.6,
+      "highlights": [
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 831% ，利润成长性强。"
+        },
+        {
+          "tag": "盈利",
+          "text": "近5年，净资产收益率为 20% ，投入资本回报率为 17% ，盈利能力很强。"
+        },
+        {
+          "tag": "北向",
+          "text": "北向资金持股 8.2% ，很受外资机构青睐。"
+        },
+        {
+          "tag": "回购",
+          "text": "近6月，公司累计回购 174万股 ，占总股本比例 0.41% ，金额合计 1.2亿元 。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月23日大跌 -4.05% ，且成交额为近20日均值的 2.16倍 ，抛压很重。"
+        },
+        {
+          "tag": "波动",
+          "text": "近5天，日均换手率 15% ，短线资金追逐，波动风险较高。"
+        }
+      ],
+      "events": [
+        {
+          "content": "2027/03/29解禁2.34亿股，占总股本55.60%",
+          "tags": [
+            "限售股票解禁"
+          ],
+          "date": "2027-03-29"
+        },
+        {
+          "content": "预计2026/08/27发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-27"
+        },
+        {
+          "content": "16:19 2026年7月22日收盘，创业板指数下跌3.23%。成分股中，锐捷网络、星宸科技、全志科技涨幅居前，铜冠铜箔、国际复材、精测电子跌幅居前。创业板ETF华夏（159957）收跌3.73%，成交3.75亿元；创业板成长ETF华夏（159967）收跌4.35%，成交15.56亿元。Wind数据显示，截至7月20日，全市场17只创业板指ETF月内净流入超200亿元，境内共有51只跟踪创业板指的基金产品，规模合计近1200亿元。境外资本方面，2026年一季度，QFII对创业板指样本股持仓市值119亿元，较2025年底增长2.4倍；陆港通持仓市值达5734亿元，较2025年底增长14%。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "10:18股价达到 134.53 元，创历史新高",
+          "tags": [
+            "股价新高"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 2166189687.27,
+      "revenue_yoy": 0.194989,
+      "operating_profit": 202924835.97,
+      "operating_profit_yoy": -0.031514,
+      "net_profit": 202184328.67,
+      "net_profit_yoy": 0.030301,
+      "gross_profit": 723911631.76,
+      "gross_profit_yoy": 0.109578,
+      "cogs": 1442278055.51,
+      "gross_margin": 33.42,
+      "pe_forward": null,
+      "valuation_history_days": 81,
+      "valuation_history_from": "20260330",
+      "current_price": 118.8,
+      "price": 118.8,
+      "ma5": 129.81,
+      "ma10": 118.08,
+      "ma20": 118.84,
+      "dist_ma5_pct": -8.5,
+      "dist_ma10_pct": 0.6,
+      "dist_ma20_pct": -0.0,
+      "iv_proxy": {
+        "primary_name": "创业板ETF",
+        "iv_rank": 0.8312,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 11.57,
+        "pct_float": 5.2,
+        "chg5_pct": 11.84,
+        "net5_repay_days": 0,
+        "signal": "adding"
+      }
+    },
+    {
+      "code": "688531.SH",
+      "fetch_time": "2026-07-29T11:37:37+0800",
+      "name": "日联科技",
+      "pe": 100.6422,
+      "pb": 5.6049,
+      "ps_ttm": 15.843,
+      "pcf_ttm": 98.4314,
+      "valuation_percentile": 80.52,
+      "total_shares": 165593939,
+      "industries": [
+        {
+          "name": "机械设备",
+          "level": 1
+        },
+        {
+          "name": "专用设备",
+          "level": 2
+        },
+        {
+          "name": "其他专用设备",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "贷款回购指数",
+        "专精特新小巨人主题指数",
+        "股权激励指数",
+        "专精特新小巨人指数",
+        "可转债预案指数",
+        "专用设备精选指数"
+      ],
+      "score_company": 9.0,
+      "score_trend": 7.0,
+      "score_value": 4.6,
+      "highlights": [
+        {
+          "tag": "成长",
+          "text": "近3年营业收入每年增长 34% ，最新季度归母净利润同比增长 77% ，成长能力很强。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 4.5% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 1.4亿元 ，较上期增长 30% ，占2025年营收 13% ，在手订单充足。"
+        },
+        {
+          "tag": "预测",
+          "text": " 7家 机构预测，2026年-2028年营收和净利润每年增长均超过 30% ，未来成长很快。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 5.4% ，很受外资机构青睐；公募基金持股 3.4% ，较受内资机构青睐。"
+        },
+        {
+          "tag": "回购",
+          "text": "近2月，公司累计回购 22万股 ，占总股本比例 0.14% ，金额合计 1209万元 。"
+        }
+      ],
+      "risks": [],
+      "events": [
+        {
+          "content": "2026/09/30解禁5081.51万股，占总股本30.69%",
+          "tags": [
+            "限售股票解禁"
+          ],
+          "date": "2026-09-30"
+        },
+        {
+          "content": "预计2026/08/15发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-15"
+        },
+        {
+          "content": "2026/07/21 程树刚(核心技术人员)减持 2600股 ，类型为 二级市场买卖 ，成交均价为 118元/股 ，套现 30.8万元 ，此次减持后的持股数为10股",
+          "tags": [
+            "管理层减持"
+          ]
+        },
+        {
+          "content": "2026/07/21 程树刚(董事)增持 2400股 ，类型为 二级市场买卖 ，成交均价为 118元/股 ，耗资 28.2万元 ，此次增持后的持股数为5010股",
+          "tags": [
+            "管理层增持"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 737085605.14,
+      "revenue_yoy": 0.440124,
+      "operating_profit": 137761117.76,
+      "operating_profit_yoy": 0.166309,
+      "net_profit": 123891565.83,
+      "net_profit_yoy": 0.179562,
+      "gross_profit": 325980864.83,
+      "gross_profit_yoy": 0.408721,
+      "cogs": 411104740.31,
+      "gross_margin": 44.23,
+      "pe_forward": null,
+      "valuation_history_days": 311,
+      "valuation_history_from": "20250331",
+      "current_price": 119.21,
+      "price": 119.21,
+      "ma5": 124.72,
+      "ma10": 130.29,
+      "ma20": 151.65,
+      "dist_ma5_pct": -4.4,
+      "dist_ma10_pct": -8.5,
+      "dist_ma20_pct": -21.4,
+      "iv_proxy": {
+        "primary_name": "科创50",
+        "iv_rank": 0.7756,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 5.41,
+        "pct_float": 3.95,
+        "chg5_pct": -0.39,
+        "net5_repay_days": 3,
+        "signal": "neutral"
+      }
+    },
+    {
+      "code": "003031.SZ",
+      "fetch_time": "2026-07-29T11:37:37+0800",
+      "name": "中瓷电子",
+      "pe": 67.279,
+      "pb": 6.6446,
+      "ps_ttm": 12.6645,
+      "pcf_ttm": 37.3148,
+      "valuation_percentile": 54.95,
+      "total_shares": 451052859,
+      "industries": [
+        {
+          "name": "通信",
+          "level": 1
+        },
+        {
+          "name": "通信设备",
+          "level": 2
+        },
+        {
+          "name": "通信终端及配件",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "TMT指数",
+        "科技龙头指数",
+        "中字头央企指数",
+        "华为平台指数",
+        "专精特新小巨人主题指数",
+        "信创产业指数",
+        "央企通信指数",
+        "中电科技系指数",
+        "手机陶瓷外壳指数",
+        "氮化铝指数"
+      ],
+      "score_company": 6.3,
+      "score_trend": 6.6,
+      "score_value": 6.2,
+      "highlights": [
+        {
+          "tag": "龙头",
+          "text": "公司为 通信终端及配件 行业龙头企业。"
+        },
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 57% ，利润成长性强。"
+        },
+        {
+          "tag": "ROIC",
+          "text": "近5年，投入资本回报率为 10% ，创造价值的能力较强。"
+        },
+        {
+          "tag": "净现",
+          "text": "近5年，净现比达到 132% ，净利润现金含量很高。"
+        },
+        {
+          "tag": "户数",
+          "text": "2026年06月18日至2026年07月20日期间，股东户数减少 31% ，大资金买入。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月17日大跌 -10% ，股价跌停，抛压很重。"
+        },
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年06月26日 至今陷入调整，资金有出逃可能。"
+        },
+        {
+          "tag": "评级",
+          "text": "近6月，没有机构发布研究报告，机构关注度低。"
+        }
+      ],
+      "events": [
+        {
+          "content": "2026/09/11解禁1.11亿股，占总股本24.59%",
+          "tags": [
+            "限售股票解禁"
+          ],
+          "date": "2026-09-11"
+        },
+        {
+          "content": "预计2026/08/25发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-25"
+        },
+        {
+          "content": "中瓷电子：关于控股子公司河北博威集成电路有限公司使用部分闲置募集资金进行现金管理的进展公告",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "中瓷电子：关于控股子公司河北博威集成电路有限公司使用部分闲置募集资金进行现金管理到期赎回的公告",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "中瓷电子：关于使用部分闲置募集资金进行现金管理到期赎回公告",
+          "tags": [
+            "重要公告"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 2143361604.63,
+      "revenue_yoy": 0.136177,
+      "operating_profit": 533714271.66,
+      "operating_profit_yoy": 0.19171,
+      "net_profit": 500964846.15,
+      "net_profit_yoy": 0.180047,
+      "gross_profit": 792645249.02,
+      "gross_profit_yoy": 0.219947,
+      "cogs": 1350716355.61,
+      "gross_margin": 36.98,
+      "pe_forward": null,
+      "valuation_history_days": 287,
+      "valuation_history_from": "20230105",
+      "current_price": 100.28,
+      "price": 100.28,
+      "ma5": 106.19,
+      "ma10": 109.65,
+      "ma20": 132.18,
+      "dist_ma5_pct": -5.6,
+      "dist_ma10_pct": -8.5,
+      "dist_ma20_pct": -24.1,
+      "iv_proxy": {
+        "primary_name": "500ETF深",
+        "iv_rank": 0.857,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 8.15,
+        "pct_float": 2.39,
+        "chg5_pct": -5.83,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "300806.SZ",
+      "fetch_time": "2026-07-29T11:37:37+0800",
+      "name": "斯迪克",
+      "pe": 376.4733,
+      "pb": 10.6635,
+      "ps_ttm": 8.0026,
+      "pcf_ttm": 283.7384,
+      "valuation_percentile": 95.14,
+      "total_shares": 633731915,
+      "industries": [
+        {
+          "name": "基础化工",
+          "level": 1
+        },
+        {
+          "name": "塑料",
+          "level": 2
+        },
+        {
+          "name": "膜材料",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "资源股",
+        "专精特新小巨人主题指数",
+        "QFII重仓指数",
+        "专精特新小巨人指数",
+        "中小创蓝筹指数",
+        "对日反制指数",
+        "MLCC指数"
+      ],
+      "score_company": 7.7,
+      "score_trend": 6.2,
+      "score_value": 3.6,
+      "highlights": [
+        {
+          "tag": "龙头",
+          "text": "公司为 膜材料 行业龙头企业。"
+        },
+        {
+          "tag": "收入",
+          "text": "近3年，营业收入每年增长 18% ，收入成长性较强。"
+        },
+        {
+          "tag": "净现",
+          "text": "近5年，净现比达到 128% ，净利润现金含量很高。"
+        },
+        {
+          "tag": "评级",
+          "text": "近90天， 5家 机构给出评级，其中 80% 为“买入”，距目标价的上涨空间为 45% 。"
+        },
+        {
+          "tag": "预测",
+          "text": " 4家 机构预测，2026年-2028年营收和净利润每年增长均超过 20% ，未来成长较快。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 3.9% ，很受外资机构青睐；公募基金持股 5.2% ，很受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年06月26日 至今陷入调整，资金有出逃可能。"
+        },
+        {
+          "tag": "收益",
+          "text": "近12月，经营活动净收益占利润总额 -138% ，扣非净利润占净利润 51% ，收益质量很低。"
+        },
+        {
+          "tag": "偿债",
+          "text": "现金短债比为 0.17 ，带息债务占全部投入资本 60% ，现金保障很弱，偿债压力很大。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/27发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-27"
+        },
+        {
+          "content": "14:36 PCB概念午后持续走强，东方材料、红板科技、矩子科技、国际复材、宏和科技、贤丰控股、景旺电子涨停，贝斯特涨超10%，方邦股份、智信精密、斯迪克、泰和科技、金安国纪跟涨。相关ETF方面，消费电子ETF汇添富（159178）涨1.23%，成交额1427.69万元，消费电子ETF富国（561100）涨1.68%，成交额5934.94万元。",
+          "tags": [
+            "快讯"
+          ]
+        },
+        {
+          "content": "13:35 MLCC概念股盘中走强，风华高科涨停，斯迪克、昀冢科技、三环集团、国瓷材料、宏达电子、火炬电子等跟涨。消息面上，三星电机近期连续披露两笔AI服务器专用MLCC供货合同，年内长协总额达约7500亿韩元。业内分析认为，全球头部云厂商及AI企业为保障算力建设，通过年度长协锁定产能，反映出AI服务器高端被动元件供需偏紧。此外，村田制作所与三星电机均有扩产计划。\n据中国电子元件行业协会报告，预计2026年全球MLCC市场规模约1341亿元。目前全球主要制造商包括村田、太阳诱电、京瓷、TDK、三星电机、国巨、华新科技、风华高科、三环集团、微容电子等。光大证券指出，随着海外厂商优化产品结构，国内厂商有望承接消费电子、家电及工业控制等领域的增量需求。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "2026/07/20～2027/01/20 姜章健(副经理)计划增持，变动价格说明：本次增持计划不设价格区间，将根据公司股票价格波动情况及资本市场整体趋势，择机实施增持计划 ，拟增持金额不低于 500万元  交易方式：通过深圳证券交易所交易系统允许的方式（包括但不限于集中竞价、大宗交易等）增持公司股份。",
+          "tags": [
+            "非控股股东增持"
+          ]
+        },
+        {
+          "content": "2026/07/20～2027/01/20 杨比(董事，副经理)计划增持，变动价格说明：本次增持计划不设价格区间，将根据公司股票价格波动情况及资本市场整体趋势，择机实施增持计划 ，拟增持金额不低于 1250万元  交易方式：通过深圳证券交易所交易系统允许的方式（包括但不限于集中竞价、大宗交易等）增持公司股份。",
+          "tags": [
+            "管理层增持"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 2238758028.17,
+      "revenue_yoy": 0.115652,
+      "operating_profit": 31998807.37,
+      "operating_profit_yoy": 0.363512,
+      "net_profit": 45260131.5,
+      "net_profit_yoy": -0.158126,
+      "gross_profit": 499740031.28,
+      "gross_profit_yoy": 0.070336,
+      "cogs": 1739017996.89,
+      "gross_margin": 22.32,
+      "pe_forward": null,
+      "valuation_history_days": 283,
+      "valuation_history_from": "20211125",
+      "current_price": 41.25,
+      "price": 41.25,
+      "ma5": 52.61,
+      "ma10": 59.19,
+      "ma20": 76.47,
+      "dist_ma5_pct": -21.6,
+      "dist_ma10_pct": -30.3,
+      "dist_ma20_pct": -46.1,
+      "iv_proxy": {
+        "primary_name": "创业板ETF",
+        "iv_rank": 0.8312,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 3.76,
+        "pct_float": 2.0,
+        "chg5_pct": 42.87,
+        "net5_repay_days": 2,
+        "signal": "adding"
+      }
+    },
+    {
+      "code": "000703.SZ",
+      "fetch_time": "2026-07-29T11:37:39+0800",
+      "name": "恒逸石化",
+      "pe": 26.8019,
+      "pb": 2.2461,
+      "ps_ttm": 0.5073,
+      "pcf_ttm": 10.0155,
+      "valuation_percentile": 78.35,
+      "total_shares": 3821562147,
+      "industries": [
+        {
+          "name": "石油石化",
+          "level": 1
+        },
+        {
+          "name": "炼化及贸易",
+          "level": 2
+        },
+        {
+          "name": "炼油化工",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "贷款回购指数",
+        "资源股",
+        "西部大开发指数",
+        "可转债正股指数",
+        "借壳上市指数",
+        "万得预增指数",
+        "石化精选指数",
+        "油品升级指数",
+        "油气改革指数",
+        "供应链服务指数",
+        "涤纶指数",
+        "PTA指数"
+      ],
+      "score_company": 8.0,
+      "score_trend": 9.5,
+      "score_value": 4.2,
+      "highlights": [
+        {
+          "tag": "业绩",
+          "text": "2026年06月26日，业绩超预期引发股价大幅上涨，当日收涨 7.34% 。"
+        },
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 2044% ，利润成长性强。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 11% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "北向",
+          "text": "北向资金持股 3.3% ，较受外资机构青睐。"
+        },
+        {
+          "tag": "强势",
+          "text": "近1年，股价涨幅超过A股市场 97% 的股票，走势很强。"
+        },
+        {
+          "tag": "回购",
+          "text": "近3月，公司累计回购 7957万股 ，占总股本比例 2.1% ，金额合计 10亿元 。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年06月29日大跌 -10% ，股价跌停，抛压很重。"
+        },
+        {
+          "tag": "毛利",
+          "text": "毛利率为 6.7% ，行业处于衰退期，或企业缺乏竞争力。"
+        },
+        {
+          "tag": "偿债",
+          "text": "现金短债比为 0.23 ，带息债务占全部投入资本 67% ，现金保障很弱，偿债压力很大。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/11发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-11"
+        },
+        {
+          "content": "02:45 7月以来，共有375家A股上市公司获机构调研，其中新易盛、京东方A、华灿光电、华勤技术等22家公司获50家以上机构调研。新易盛获417家机构调研居首，公司称二季度业绩预告与年初预期基本吻合。京东方A获243家机构调研，公司表示未来折旧金额及资本开支预计将逐渐下降。在已发布半年度业绩相关公告的调研公司中，超七成实现业绩报喜，恒逸石化、三维通信、凯尔达预计净利润同比增长超1000%。分行业看，获调研且业绩预喜的公司中，电子行业数量居首，电力设备、基础化工及有色金属行业紧随其后。\n研究机构Omdia数据显示，2026年中国半导体市场规模预测值上调。在上述375家获调研公司中，67家获外资机构调研，其中电子行业公司有19家。广合科技、沪电股份、华勤技术等电子行业公司获外资机构调研较多。调研内容显示，外资机构关注相关公司的全球化布局，广合科技泰国工厂正推进产能爬坡，沪电股份泰国基地已进入规模化运营阶段。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "02:46 截至7月20日，已有28家石油石化上市公司披露上半年业绩预告，其中15家预增，5家实现扭亏或减亏。受中东地缘冲突影响，全球化工品价格上涨，库存去化带动部分产品盈利改善。炼化一体化企业表现突出，恒逸石化预计上半年归母净利润55亿元至60亿元，同比增长2326.31%至2546.88%，主要受益于海外成品油盈利及PX、苯等产品盈利维持高位，以及己内酰胺-聚酰胺一体化项目投产。荣盛石化预计上半年净利润50亿元至52亿元，同比增长730.45%至763.67%；东方盛虹预计上半年净利润42亿元至50亿元，同比增长987.39%至1194.51%。\n东方盛虹表示，石化行业供需格局改善及原油价格中枢上移，带动产品价差扩大，炼化一体化项目运行平稳。分析认为，炼化一体化龙头规模效应显著，若地缘冲突缓和，产业链定价权将回归供需端。受地缘局势影响，油服工程企业业绩承压，28家公司中6家油服企业有3家首亏，2家续亏，1家预减。中曼石油预计上半年归母净利润同比减少64.68%至70.46%，受伊拉克项目停工影响；惠博普预计亏损9000万元至1.2亿元，受海外项目进度放缓及汇兑损失影响；博迈科预计亏损7800万元至6500万元，受项目周期切换及海外投资节奏后移影响。\n贝肯能源预计上半年亏损1.15亿元至1.25亿元，受汇兑损失及部分钻机停工影响。展望下半年，机构分析认为，传统大宗化工品受益于补库与出口，AI产业催生的新材料需求值得关注。AI算力基建对半导体材料、电子化学品等提出更高要求，电子特气、含氟电子化学品及半导体材料等细分领域景气度有望上行。",
+          "tags": [
+            "资讯"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 83885464697.74,
+      "revenue_yoy": -0.115272,
+      "operating_profit": 354428780.49,
+      "operating_profit_yoy": 0.308904,
+      "net_profit": 242449906.41,
+      "net_profit_yoy": -0.264826,
+      "gross_profit": 3668604065.21,
+      "gross_profit_yoy": -0.043501,
+      "cogs": 80216860632.53,
+      "gross_margin": 4.37,
+      "pe_forward": null,
+      "valuation_history_days": 303,
+      "valuation_history_from": "20210729",
+      "current_price": 15.3,
+      "price": 15.3,
+      "ma5": 15.43,
+      "ma10": 15.01,
+      "ma20": 14.64,
+      "dist_ma5_pct": -0.8,
+      "dist_ma10_pct": 1.9,
+      "dist_ma20_pct": 4.5,
+      "iv_proxy": {
+        "primary_name": "深100ETF",
+        "iv_rank": 0.6758,
+        "sizing": "selective"
+      },
+      "margin": {
+        "rzye_yi": 9.31,
+        "pct_float": 1.6,
+        "chg5_pct": -2.11,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "688150.SH",
+      "fetch_time": "2026-07-29T11:37:39+0800",
+      "name": "莱特光电",
+      "pe": 66.5742,
+      "pb": 7.149,
+      "ps_ttm": 25.1686,
+      "pcf_ttm": 49.9172,
+      "valuation_percentile": 72.81,
+      "total_shares": 402437585,
+      "industries": [
+        {
+          "name": "电子",
+          "level": 1
+        },
+        {
+          "name": "电子化学品Ⅱ",
+          "level": 2
+        },
+        {
+          "name": "电子化学品Ⅲ",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "TMT指数",
+        "专精特新小巨人主题指数",
+        "专精特新小巨人指数",
+        "OLED指数",
+        "可转债预案指数"
+      ],
+      "score_company": 7.5,
+      "score_trend": 6.3,
+      "score_value": 4.9,
+      "highlights": [
+        {
+          "tag": "净现",
+          "text": "近5年，净现比达到 134% ，净利润现金含量很高。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 5.5% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "评级",
+          "text": "近90天， 9家 机构给出评级，其中 67% 为“买入”，距目标价的上涨空间为 52% 。"
+        },
+        {
+          "tag": "预测",
+          "text": " 7家 机构预测，2026年-2028年营收和净利润每年增长均超过 40% ，未来成长很快。"
+        },
+        {
+          "tag": "公募",
+          "text": "公募基金持股 4.5% ，较受内资机构青睐。"
+        },
+        {
+          "tag": "回购",
+          "text": "近6月，公司累计回购 212万股 ，占总股本比例 0.53% ，金额合计 5001万元 。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年05月26日大跌 -13.3% ，且成交额为近20日均值的 2.5倍 ，抛压很重。"
+        },
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年05月26日 至今陷入调整，资金有出逃可能。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/25发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-25"
+        },
+        {
+          "content": "莱特光电：北京市中伦律师事务所关于陕西莱特光电材料股份有限公司向不特定对象发行可转换公司债券的法律意见书",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "莱特光电：陕西莱特光电材料股份有限公司向不特定对象发行可转换公司债券的证券募集说明书（上会稿）",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "莱特光电：陕西莱特光电材料股份有限公司关于向不特定对象发行可转换公司债券的审核中心意见落实函回复及募集说明书等申请文件更新的提示性公告",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "莱特光电：中信证券股份有限公司关于陕西莱特光电材料股份有限公司向不特定对象发行可转换公司债券之发行保荐书",
+          "tags": [
+            "重要公告"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 423036664.64,
+      "revenue_yoy": 0.187665,
+      "operating_profit": 205676250.19,
+      "operating_profit_yoy": 0.392451,
+      "net_profit": 179859585.96,
+      "net_profit_yoy": 0.386167,
+      "gross_profit": 313785251.1,
+      "gross_profit_yoy": 0.326988,
+      "cogs": 109251413.54,
+      "gross_margin": 74.17,
+      "pe_forward": null,
+      "valuation_history_days": 285,
+      "valuation_history_from": "20240318",
+      "current_price": 37.28,
+      "price": 37.28,
+      "ma5": 40.08,
+      "ma10": 43.28,
+      "ma20": 52.05,
+      "dist_ma5_pct": -7.0,
+      "dist_ma10_pct": -13.9,
+      "dist_ma20_pct": -28.4,
+      "iv_proxy": {
+        "primary_name": "科创50",
+        "iv_rank": 0.7756,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 6.03,
+        "pct_float": 4.02,
+        "chg5_pct": -5.06,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "688629.SH",
+      "fetch_time": "2026-07-29T11:37:39+0800",
+      "name": "华丰科技",
+      "pe": 136.5295,
+      "pb": 20.3603,
+      "ps_ttm": 21.399,
+      "pcf_ttm": 112.3728,
+      "valuation_percentile": 67.26,
+      "total_shares": 468254966,
+      "industries": [
+        {
+          "name": "国防军工",
+          "level": 1
+        },
+        {
+          "name": "军工电子Ⅱ",
+          "level": 2
+        },
+        {
+          "name": "军工电子Ⅲ",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "TMT指数",
+        "双创100指数",
+        "西部大开发指数",
+        "科改示范企业指数",
+        "高速铜连接指数",
+        "华为鲲鹏指数",
+        "华鲲振宇指数"
+      ],
+      "score_company": 8.0,
+      "score_trend": 7.1,
+      "score_value": 5.4,
+      "highlights": [
+        {
+          "tag": "龙头",
+          "text": "公司为 军工电子Ⅲ 行业龙头企业。"
+        },
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 230% ，利润成长性强。"
+        },
+        {
+          "tag": "ROE",
+          "text": "近5年，净资产收益率为 11% ，获取收益的能力较强。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 3.9% ，未来产能扩张后，营收有望进一步增长。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月14日大跌 -11.8% ，且成交额为近20日均值的 1.74倍 ，抛压很重。"
+        }
+      ],
+      "events": [
+        {
+          "content": "2026/12/14解禁726.21万股，占总股本1.55%",
+          "tags": [
+            "限售股票解禁"
+          ],
+          "date": "2026-12-14"
+        },
+        {
+          "content": "预计2026/08/29发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-29"
+        },
+        {
+          "content": "15:00 今天大跌的原因可能是华丰科技股东通过询价转让方式减持651.38万股，转让价格126.66元/股，市场担忧股东套现及后续抛压，对股价形成利空",
+          "tags": [
+            "快讯",
+            "大跌原因"
+          ]
+        },
+        {
+          "content": "华丰科技：中国国际金融股份有限公司关于四川华丰科技股份有限公司股东向特定机构投资者询价转让股份相关资格的核查意见",
+          "tags": [
+            "重要公告"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 1659174540.1,
+      "revenue_yoy": 1.214709,
+      "operating_profit": 225744940.91,
+      "operating_profit_yoy": 5.132281,
+      "net_profit": 216659714.23,
+      "net_profit_yoy": 5.061553,
+      "gross_profit": 510533726.29,
+      "gross_profit_yoy": 3.076896,
+      "cogs": 1148640813.81,
+      "gross_margin": 30.77,
+      "pe_forward": null,
+      "valuation_history_days": 264,
+      "valuation_history_from": "20250627",
+      "current_price": 137.8,
+      "price": 137.8,
+      "ma5": 153.88,
+      "ma10": 155.38,
+      "ma20": 171.1,
+      "dist_ma5_pct": -10.5,
+      "dist_ma10_pct": -11.3,
+      "dist_ma20_pct": -19.5,
+      "iv_proxy": {
+        "primary_name": "科创50",
+        "iv_rank": 0.7756,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 19.32,
+        "pct_float": 3.04,
+        "chg5_pct": -4.25,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "002957.SZ",
+      "fetch_time": "2026-07-29T11:37:39+0800",
+      "name": "科瑞技术",
+      "pe": 46.4823,
+      "pb": 4.3253,
+      "ps_ttm": 5.106,
+      "pcf_ttm": 39.7377,
+      "valuation_percentile": 80.82,
+      "total_shares": 419982466,
+      "industries": [
+        {
+          "name": "机械设备",
+          "level": 1
+        },
+        {
+          "name": "自动化设备",
+          "level": 2
+        },
+        {
+          "name": "工控设备",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "股权激励指数",
+        "深圳本地股指数",
+        "人形机器人指数",
+        "外资企业指数",
+        "苹果指数",
+        "光模块(CPO)指数",
+        "工业4.0指数",
+        "合资企业指数",
+        "新能源设备指数",
+        "电子烟"
+      ],
+      "score_company": 7.9,
+      "score_trend": 6.5,
+      "score_value": 4.2,
+      "highlights": [
+        {
+          "tag": "净现",
+          "text": "近5年，净现比达到 137% ，净利润现金含量很高。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 9.5亿元 ，较上期增长 17% ，占2025年营收 36% ，在手订单充足。"
+        },
+        {
+          "tag": "评级",
+          "text": "近90天， 5家 机构给出评级，其中 80% 为“买入”，距目标价的上涨空间为 79% 。"
+        },
+        {
+          "tag": "户数",
+          "text": "2026年06月18日至2026年07月10日期间，股东户数减少 31% ，大资金买入。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月17日大跌 -9.99% ，股价跌停，抛压很重。"
+        },
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年06月03日 至今陷入调整，资金有出逃可能。"
+        },
+        {
+          "tag": "收益",
+          "text": "近12月，扣非净利润占净利润 60% ，收益质量较低。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/28发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-28"
+        },
+        {
+          "content": "科瑞技术：关于使用部分自有闲置资金进行理财的进展公告",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "12:45 科瑞技术7月1日在互动平台表示，公司积极承接国内大客户需求，已为国内大客户提供液冷相关设备。目前营收占比较小，敬请注意投资风险。（人民财讯）",
+          "tags": [
+            "快讯"
+          ]
+        },
+        {
+          "content": "2026/01/30～2026/06/30股东户数增加 123%",
+          "tags": [
+            "股东户数增加"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 1761190834.25,
+      "revenue_yoy": 0.002158,
+      "operating_profit": 294460718.69,
+      "operating_profit_yoy": 0.300605,
+      "net_profit": 273760038.81,
+      "net_profit_yoy": 0.360408,
+      "gross_profit": 614201016.32,
+      "gross_profit_yoy": -0.101483,
+      "cogs": 1146989817.93,
+      "gross_margin": 34.87,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 35.18,
+      "price": 35.18,
+      "ma5": 37.05,
+      "ma10": 37.27,
+      "ma20": 42.6,
+      "dist_ma5_pct": -5.1,
+      "dist_ma10_pct": -5.6,
+      "dist_ma20_pct": -17.4,
+      "iv_proxy": {
+        "primary_name": "500ETF深",
+        "iv_rank": 0.857,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 3.78,
+        "pct_float": 2.57,
+        "chg5_pct": 1.18,
+        "net5_repay_days": 3,
+        "signal": "adding"
+      }
+    },
+    {
+      "code": "002821.SZ",
+      "fetch_time": "2026-07-29T11:37:39+0800",
+      "name": "凯莱英",
+      "pe": 51.4248,
+      "pb": 3.2661,
+      "ps_ttm": 8.238,
+      "pcf_ttm": 38.4509,
+      "valuation_percentile": 41.1,
+      "total_shares": 360780970,
+      "industries": [
+        {
+          "name": "医药生物",
+          "level": 1
+        },
+        {
+          "name": "医疗服务",
+          "level": 2
+        },
+        {
+          "name": "医疗研发外包",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "双循环指数",
+        "自主可控指数",
+        "专精特新小巨人主题指数",
+        "RCEP指数",
+        "大消费指数",
+        "专精特新小巨人指数",
+        "银发经济指数",
+        "宁组合",
+        "外资企业指数",
+        "高瓴资本指数",
+        "合资企业指数",
+        "创新药指数",
+        "反内卷指数",
+        "医药数智化指数",
+        "医疗物资出口指数"
+      ],
+      "score_company": 9.1,
+      "score_trend": 7.9,
+      "score_value": 6.1,
+      "highlights": [
+        {
+          "tag": "业绩",
+          "text": "2026年04月28日，业绩超预期引发股价跳空高开，但目前股价缺口已回补。"
+        },
+        {
+          "tag": "净现",
+          "text": "近5年，净现比达到 113% ，净利润现金含量较高。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 10% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 4.0亿元 ，较上期增长 58% ，占2025年营收 5.9% ，在手订单充足。"
+        },
+        {
+          "tag": "预测",
+          "text": " 4家 机构预测，2026年-2028年营收和净利润每年增长均超过 20% ，未来成长较快。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 3.0% ，较受外资机构青睐；公募基金持股 20% ，很受内资机构青睐。"
+        },
+        {
+          "tag": "激励",
+          "text": "2026年07月09日，公司发布股票激励计划，当日收涨 7.8% 。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月16日大跌 -8.05% ，且成交额为近20日均值的 1.7倍 ，抛压很重。"
+        }
+      ],
+      "events": [
+        {
+          "content": "2026/09/04解禁99.96万股，占总股本0.28%",
+          "tags": [
+            "限售股票解禁"
+          ],
+          "date": "2026-09-04"
+        },
+        {
+          "content": "预计2026/08/25发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-25"
+        },
+        {
+          "content": "07:30 在2026年(第43届)全国医药工业信息年会上，2025年度中国医药工业主营业务收入前100位企业名单揭晓。国药集团、华润医药、齐鲁制药、远大集团、诺和诺德(中国)、复星医药、石药集团、恒瑞医药、正大天晴、上海医药位列前10位。2025年百强企业主营业务收入合计10002.2亿元，同比下降约0.5%。入围门槛为30.0亿元。34家企业实现营收和利润双增长，35家双下降。百强企业平均研发费用达8.4亿元，研发强度从8.2%提升至8.4%。\n百强名单包括：中国医药集团、华润医药、齐鲁制药、远大集团、诺和诺德(中国)、复星医药、石药集团、恒瑞医药、正大天晴、上海医药、拜耳医药保健、修正药业、北京诺华制药、科伦药业、沈阳三生制药、威高集团、晖致制药(大连)、广州医药集团、阿斯利康制药、人福医药、新和成、赛诺菲(中国)、扬子江药业、丽珠医药、江苏豪森药业、信达生物、江西济民可信、长春高新、步长制药、珠海联邦制药、北京同仁堂、鲁南制药、西安杨森、云南白药、东阳光实业、新华制药、杭州默沙东、华海药业、华北制药、天津市医药集团、鱼跃医疗、以岭药业、普洛药业、默克制药(江苏)、费森尤斯卡比(中国)、凯莱英、海正药业、上海罗氏制药、辉瑞制药、浙江医药、先声药业、哈药集团、济川药业、鲁抗医药、北京泰德制药、康恩贝、乐普医疗、九洲药业、海普瑞、上海创诺医药、恩华药业、红日药业、康弘药业、华兰生物、赫力昂(苏州)、青峰医药、绿叶医药、礼来苏州制药、海思科、上海勃林格殷格翰、片仔癀、四川好医生攀西药业、成都倍特药业、信立泰、上海莱士、南京健友、京新药业、东富龙、东北制药、石家庄四药、仙琚制药、羚锐制药、特宝生物、中美天津史克、神威药业、齐都药业、贝达药业、辰欣科技、东软医疗、苏中健康、广州康臣药业、华邦健康、安图生物、康缘药业、贵州健兴药业、卫材(中国)、瑞阳制药。\n名单还包括健康元、楚天科技、九典制药。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "09:33股价达到 185.0 元，创近24个月新高",
+          "tags": [
+            "股价新高"
+          ]
+        },
+        {
+          "content": "回购总金额不超过432万元，回购最高价不超过51.9元/股 （预案）",
+          "tags": [
+            "公司回购限售股"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 4629877130.98,
+      "revenue_yoy": 0.11825,
+      "operating_profit": 914440800.53,
+      "operating_profit_yoy": 0.200897,
+      "net_profit": 792478500.98,
+      "net_profit_yoy": 0.131822,
+      "gross_profit": 1964893526.41,
+      "gross_profit_yoy": 0.088369,
+      "cogs": 2664983604.57,
+      "gross_margin": 42.44,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 157.36,
+      "price": 157.36,
+      "ma5": 161.27,
+      "ma10": 167.61,
+      "ma20": 165.47,
+      "dist_ma5_pct": -2.4,
+      "dist_ma10_pct": -6.1,
+      "dist_ma20_pct": -4.9,
+      "iv_proxy": {
+        "primary_name": "500ETF深",
+        "iv_rank": 0.857,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 8.42,
+        "pct_float": 1.69,
+        "chg5_pct": -10.44,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "688777.SH",
+      "fetch_time": "2026-07-29T11:37:39+0800",
+      "name": "中控技术",
+      "pe": 157.0755,
+      "pb": 6.3385,
+      "ps_ttm": 7.8044,
+      "pcf_ttm": 230.7411,
+      "valuation_percentile": 67.83,
+      "total_shares": 791189527,
+      "industries": [
+        {
+          "name": "机械设备",
+          "level": 1
+        },
+        {
+          "name": "自动化设备",
+          "level": 2
+        },
+        {
+          "name": "工控设备",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "TMT指数",
+        "双创100指数",
+        "自主可控指数",
+        "先进制造指数",
+        "具身智能指数",
+        "人形机器人指数",
+        "GDR指数",
+        "人工智能指数",
+        "工业4.0指数",
+        "机器人指数",
+        "DeepSeek指数",
+        "新型工业化指数",
+        "工业软件指数"
+      ],
+      "score_company": 8.1,
+      "score_trend": 7.1,
+      "score_value": 4.9,
+      "highlights": [
+        {
+          "tag": "龙头",
+          "text": "公司为 工控设备 行业龙头企业。"
+        },
+        {
+          "tag": "业绩",
+          "text": "2026年04月27日，业绩超预期引发股价大幅上涨，当日收涨 11.2% 。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 15亿元 ，较上期增长 7.6% ，占2025年营收 19% ，在手订单充足。"
+        },
+        {
+          "tag": "预测",
+          "text": " 11家 机构预测，2026年-2028年营收和净利润每年增长均超过 15% ，未来成长较快。"
+        },
+        {
+          "tag": "公募",
+          "text": "公募基金持股 12% ，很受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "收益",
+          "text": "近12月，经营活动净收益占利润总额 4.1% ，收益质量较低。"
+        },
+        {
+          "tag": "收现",
+          "text": "近5年，收现比为 75% ，销售收入现金含量较低。"
+        }
+      ],
+      "events": [
+        {
+          "content": "2027/01/05解禁399.04万股，占总股本0.50%",
+          "tags": [
+            "限售股票解禁"
+          ],
+          "date": "2027-01-05"
+        },
+        {
+          "content": "预计2026/08/29发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-29"
+        },
+        {
+          "content": "14:37 2026年二季度基金季报显示，上证380ETF易方达新进重仓股包括源杰科技、华虹宏力、中科飞测、华峰测控、中控技术、芯源微、剑桥科技、长飞光纤、士兰微。今日午盘，上证380指数上涨1.054%，报6721.19点。上证380ETF易方达(530380)午盘上涨1.703%，成交额586万元，换手率3.89%，基金规模1.51亿元。资金面上，该ETF上一交易日主力资金净流出21万元，近5个交易日累计净流入31万元。前十大权重股合计占比14.49%，其中源杰科技涨2.88%，中科飞测涨6.97%。该ETF综合费率0.20%/年，近1月跟踪误差0.058%，近1年超基准年化+3.39%，并配有场外联接基金。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "中控技术：中控技术股份有限公司关于调整暨聘任部分高级管理人员的公告",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "孙华丰 任副总裁",
+          "tags": [
+            "管理层变更"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 5653987901.79,
+      "revenue_yoy": -0.107777,
+      "operating_profit": 466391868.46,
+      "operating_profit_yoy": -0.388337,
+      "net_profit": 438594253.77,
+      "net_profit_yoy": -0.397293,
+      "gross_profit": 1801796117.74,
+      "gross_profit_yoy": -0.1345,
+      "cogs": 3852191784.05,
+      "gross_margin": 31.87,
+      "pe_forward": null,
+      "valuation_history_days": 296,
+      "valuation_history_from": "20221125",
+      "current_price": 79.29,
+      "price": 79.29,
+      "ma5": 83.08,
+      "ma10": 87.53,
+      "ma20": 98.5,
+      "dist_ma5_pct": -4.6,
+      "dist_ma10_pct": -9.4,
+      "dist_ma20_pct": -19.5,
+      "iv_proxy": {
+        "primary_name": "科创50",
+        "iv_rank": 0.7756,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 27.77,
+        "pct_float": 4.45,
+        "chg5_pct": -6.56,
+        "net5_repay_days": 5,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "002432.SZ",
+      "fetch_time": "2026-07-29T11:37:39+0800",
+      "name": "九安医疗",
+      "pe": 13.2866,
+      "pb": 1.4564,
+      "ps_ttm": 26.2736,
+      "pcf_ttm": null,
+      "valuation_percentile": 55.78,
+      "total_shares": 465893881,
+      "industries": [
+        {
+          "name": "医药生物",
+          "level": 1
+        },
+        {
+          "name": "医疗器械",
+          "level": 2
+        },
+        {
+          "name": "体外诊断",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "贷款回购指数",
+        "小米产业链指数",
+        "医药数智化指数",
+        "肺炎主题指数",
+        "医疗改革指数",
+        "移动医疗指数",
+        "健康中国指数",
+        "新冠肺炎检测指数",
+        "互联网医疗指数",
+        "Kimi指数",
+        "新冠抗原检测指数",
+        "移动健康指数"
+      ],
+      "score_company": 7.6,
+      "score_trend": 7.8,
+      "score_value": 5.5,
+      "highlights": [
+        {
+          "tag": "龙头",
+          "text": "公司为 体外诊断 行业龙头企业。"
+        },
+        {
+          "tag": "业绩",
+          "text": "2026年07月15日，业绩超预期引发股价跳空高开，当日收涨 10.0% 。"
+        },
+        {
+          "tag": "ROIC",
+          "text": "近5年，投入资本回报率为 26% ，创造价值的能力较强。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 2.7% ，较受外资机构青睐；公募基金持股 6.2% ，很受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月20日大跌 -8.46% ，且成交额为近20日均值的 4.76倍 ，抛压很重。"
+        },
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年05月27日 至今陷入调整，资金有出逃可能。"
+        },
+        {
+          "tag": "收益",
+          "text": "近12月，经营活动净收益占利润总额 -16% ，收益质量很低。"
+        },
+        {
+          "tag": "波动",
+          "text": "近5天，日均换手率 12% ，短线资金追逐，波动风险较高。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/25发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-25"
+        },
+        {
+          "content": "07:36 截至7月27日，医药生物行业102家上市公司披露2026年中期业绩预告。其中，业绩预增、略增或扭亏的企业共47家，占比约46%。九安医疗、吉林敖东、艾力斯等企业预计净利润居前，以预告净利润下限统计，上述5家公司预计上半年净利润超过10亿元。九安医疗预计上半年归母净利润为28亿元至34亿元，同比增长204.29%至269.5%，主要系科创投资领域底层标的估值上涨。吉林敖东预计上半年归母净利润为19.22亿元至21.79亿元，同比增长50%至70%，主要系投资收益增加。石药创新预计上半年归母净利润为11.8亿元至13.6亿元，实现扭亏为盈，主要源于生物制药业务研发成果兑现及产品获批上市。\n富祥股份预计上半年归母净利润为1.65亿元至2.15亿元，同比扭亏为盈，主要受新能源业务驱动。此外，医药生物行业有45家公司预计上半年亏损，包括昆药集团、珍宝岛、双鹭药业等。昆药集团预计上半年归母净利润为-4亿元至-3.3亿元，由盈转亏，主要受行业政策收紧、市场环境调整及自身经营模式转型影响。珍宝岛预计上半年归母净利润为-2.55亿元至-2.98亿元，主要因主要产品销售未达预期及客户回款延迟导致信用减值损失增加。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "02:47 九安医疗以有限合伙人身份出资1亿元参与投资天津砺思星雀创业投资合伙企业（有限合伙）。近日，公司收到通知，该基金已完成募集，募集资金总额为9.28亿元。公司作为有限合伙人进行财务性投资，本次投资无保本及最低收益承诺，存在投资回收期长、流动性低及无法实现预期收益的风险。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "九安医疗：关于与专业投资机构共同投资的公告",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "公司发布2026半年报预告，股价开盘上涨 10.00% ，股价收盘涨幅 10.00%",
+          "tags": [
+            "股价上涨"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 1069311569.11,
+      "revenue_yoy": -0.488871,
+      "operating_profit": 1595068871.16,
+      "operating_profit_yoy": -0.122416,
+      "net_profit": 1587758433.66,
+      "net_profit_yoy": 0.035331,
+      "gross_profit": 699316044.79,
+      "gross_profit_yoy": -0.53366,
+      "cogs": 369995524.32,
+      "gross_margin": 65.4,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 67.03,
+      "price": 67.03,
+      "ma5": 72.43,
+      "ma10": 73.26,
+      "ma20": 67.95,
+      "dist_ma5_pct": -7.5,
+      "dist_ma10_pct": -8.5,
+      "dist_ma20_pct": -1.3,
+      "iv_proxy": {
+        "primary_name": "500ETF深",
+        "iv_rank": 0.857,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 13.11,
+        "pct_float": 4.21,
+        "chg5_pct": -7.35,
+        "net5_repay_days": 4,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "002080.SZ",
+      "fetch_time": "2026-07-29T11:37:39+0800",
+      "name": "中材科技",
+      "pe": 36.4337,
+      "pb": 3.6269,
+      "ps_ttm": 2.2675,
+      "pcf_ttm": 19.4588,
+      "valuation_percentile": 92.02,
+      "total_shares": 1678123584,
+      "industries": [
+        {
+          "name": "建筑材料",
+          "level": 1
+        },
+        {
+          "name": "玻璃玻纤",
+          "level": 2
+        },
+        {
+          "name": "玻纤制造",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "HALO指数",
+        "三新指数",
+        "中字头央企指数",
+        "资源股",
+        "碳中和指数",
+        "新材料指数",
+        "锂电池指数",
+        "养老金指数",
+        "电路板指数",
+        "新能源指数",
+        "老基建指数",
+        "氢能指数",
+        "燃料电池指数",
+        "风力发电指数",
+        "电子布指数",
+        "覆铜板指数",
+        "玻璃纤维指数",
+        "中国建材集团指数",
+        "中建材系指数",
+        "LNG指数"
+      ],
+      "score_company": 8.7,
+      "score_trend": 5.7,
+      "score_value": 3.9,
+      "highlights": [
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 40% ，利润成长性强。"
+        },
+        {
+          "tag": "净现",
+          "text": "近5年，净现比达到 158% ，净利润现金含量较高。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 3.0% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 4.2亿元 ，较上期增长 7.7% ，占2025年营收 1.4% ，在手订单充足。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 4.5% ，很受外资机构青睐；公募基金持股 4.7% ，较受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月16日大跌 -10% ，股价跌停，抛压很重。"
+        },
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年06月29日 至今陷入调整，资金有出逃可能。"
+        },
+        {
+          "tag": "偿债",
+          "text": "现金短债比为 0.14 ，货币资金对短期债务的保障很弱。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/22发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-22"
+        },
+        {
+          "content": "15:01 国际复材发布2026年上半年业绩预告，预计归母净利润为5.8亿元至6.8亿元，同比增长151%至194%。公司表示，业绩增长主要受电子级玻璃纤维及制品价格上涨带动。公司在5月份业绩说明会上透露，风电纱、电子布及高频低介电相关产品处于满负荷运行状态，在手订单充足，年产8万吨电子级玻璃纤维智能制造生产线已于2025年内点火投产。\n行业扩产潮引发供给压力担忧。国际复材于2025年12月公告拟投资16.93亿元建设年产3600万米高频高速电子纤维布项目。中材科技亦有相关低介电纤维布扩产计划。业内分析认为，高端电子布缺货态势预计2026年全年持续，但2027年下半年或2028年可能缓解。财务方面，国际复材2026年一季度应收账款达25.42亿元，经营活动现金流量净额为-8399.21万元，同比由正转负。公司在建工程规模增长，截至2026年一季度末，有息负债合计超过117亿元，货币资金为20.60亿元。\n国际复材面临重资产、高应收、紧现金的财务结构，电子布项目建设周期长，下游回款周期拉长，存在资金链风险。2025年公司资产减值损失达3.07亿元，涵盖存货、固定资产及应收款项，显示行业产能过剩与价格波动风险。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "12:45 国际复材发布2026年上半年业绩预告，预计归母净利润为5.8亿元至6.8亿元，同比增长151%至194%。公司表示，业绩增长主要受电子级玻璃纤维及制品价格上涨影响。受电子布市场需求及价格波动影响，公司股价在2026年上半年出现较大波动。经营数据显示，2026年一季度公司营收22.15亿元，应收账款为25.42亿元，经营现金流净额为-8399.21万元。\n行业扩产方面，国际复材于2025年12月公告拟投资16.93亿元建设高频高速电子纤维布项目，建设期至2027年6月。中材科技亦有相关低介电纤维布项目布局。财务数据显示，国际复材2026年一季度末有息负债合计超过117亿元，货币资金为20.60亿元，在建工程规模较期初大幅增长，短期债务压力及财务安全边际受到市场关注。\n国际复材面临重资产、高应收及紧现金的财务结构，电子布项目建设周期较长，需持续投入资金。2025年公司资产减值损失达3.07亿元，涵盖存货、固定资产及应收款项。在行业产能与价格波动背景下，公司资金链风险及后续经营情况仍需审慎考量。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "中材科技：北京市嘉源律师事务所关于中材科技股份有限公司2026年第二次临时股东会的法律意见书",
+          "tags": [
+            "重要公告"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 21700618098.45,
+      "revenue_yoy": 0.290883,
+      "operating_profit": 1993899595.22,
+      "operating_profit_yoy": 1.221464,
+      "net_profit": 1741127886.8,
+      "net_profit_yoy": 1.290205,
+      "gross_profit": 4269605611.42,
+      "gross_profit_yoy": 0.42598,
+      "cogs": 17431012487.03,
+      "gross_margin": 19.68,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 46.75,
+      "price": 46.75,
+      "ma5": 49.22,
+      "ma10": 53.43,
+      "ma20": 66.64,
+      "dist_ma5_pct": -5.0,
+      "dist_ma10_pct": -12.5,
+      "dist_ma20_pct": -29.8,
+      "iv_proxy": {
+        "primary_name": "500ETF深",
+        "iv_rank": 0.857,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 11.19,
+        "pct_float": 1.43,
+        "chg5_pct": -16.09,
+        "net5_repay_days": 4,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "688378.SH",
+      "fetch_time": "2026-07-29T11:37:41+0800",
+      "name": "奥来德",
+      "pe": 72.1195,
+      "pb": 4.5668,
+      "ps_ttm": 13.8953,
+      "pcf_ttm": 29.3378,
+      "valuation_percentile": 83.24,
+      "total_shares": 261425164,
+      "industries": [
+        {
+          "name": "电子",
+          "level": 1
+        },
+        {
+          "name": "光学光电子",
+          "level": 2
+        },
+        {
+          "name": "光学元件",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "TMT指数",
+        "万得预增指数",
+        "OLED指数",
+        "光学光电子精选指数",
+        "长吉图指数",
+        "OLED材料指数"
+      ],
+      "score_company": 8.0,
+      "score_trend": 5.8,
+      "score_value": 4.2,
+      "highlights": [
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 5950% ，利润成长性强。"
+        },
+        {
+          "tag": "净现",
+          "text": "近5年，净现比达到 117% ，净利润现金含量很高。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 1.4亿元 ，较上期增长 860% ，占2025年营收 25% ，在手订单充足。"
+        },
+        {
+          "tag": "评级",
+          "text": "近90天， 6家 机构给出评级，其中 83% 为“买入”，距目标价的上涨空间为 90% 。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年07月01日 至今陷入调整，资金有出逃可能。"
+        },
+        {
+          "tag": "收益",
+          "text": "近12月，经营活动净收益占利润总额 33% ，扣非净利润占净利润 37% ，收益质量很低。"
+        }
+      ],
+      "events": [
+        {
+          "content": "2026/08/25解禁831.87万股，占总股本3.18%",
+          "tags": [
+            "限售股票解禁"
+          ],
+          "date": "2026-08-25"
+        },
+        {
+          "content": "预计2026/08/20发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-20"
+        },
+        {
+          "content": "03:16 奥来德于2026年7月24日召开董事会，审议通过了关于首次公开发行股票超募资金投资项目结项并将节余募集资金永久补充流动资金的议案。结项项目包括“钙钛矿结构型太阳能电池蒸镀设备的开发项目”及“低成本有机钙钛矿载流子传输材料和长寿命器件开发项目”。该事项无需提交股东会审议。\n公司通过严控项目开支、优化资源配置及开展现金管理，形成了资金节余。计划将专户内剩余的1,462.56万元（实际金额以转出当日为准）永久补充流动资金，并办理相关募集资金专户销户手续。保荐机构东方证券对上述事项无异议，认为符合相关法律法规要求。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "奥来德：东方证券股份有限公司关于吉林奥来德光电材料股份有限公司首次公开发行股票超募资金投资项目结项并将节余募集资金永久补充流动资金的核查意见",
+          "tags": [
+            "重要公告"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 389005051.84,
+      "revenue_yoy": -0.161249,
+      "operating_profit": 20893824.87,
+      "operating_profit_yoy": -0.805635,
+      "net_profit": 31356053.44,
+      "net_profit_yoy": -0.690314,
+      "gross_profit": 175491111.3,
+      "gross_profit_yoy": -0.261232,
+      "cogs": 213513940.54,
+      "gross_margin": 45.11,
+      "pe_forward": null,
+      "valuation_history_days": 314,
+      "valuation_history_from": "20220905",
+      "current_price": 36.61,
+      "price": 36.61,
+      "ma5": 38.73,
+      "ma10": 41.22,
+      "ma20": 48.74,
+      "dist_ma5_pct": -5.5,
+      "dist_ma10_pct": -11.2,
+      "dist_ma20_pct": -24.9,
+      "iv_proxy": {
+        "primary_name": "科创50",
+        "iv_rank": 0.7756,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 4.89,
+        "pct_float": 5.54,
+        "chg5_pct": -1.05,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "688536.SH",
+      "fetch_time": "2026-07-29T11:37:41+0800",
+      "name": "思瑞浦",
+      "pe": 118.222,
+      "pb": 4.9009,
+      "ps_ttm": 12.826,
+      "pcf_ttm": 97.4977,
+      "valuation_percentile": 36.54,
+      "total_shares": 138075483,
+      "industries": [
+        {
+          "name": "电子",
+          "level": 1
+        },
+        {
+          "name": "半导体",
+          "level": 2
+        },
+        {
+          "name": "模拟芯片设计",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "TMT指数",
+        "5G应用指数",
+        "5G指数",
+        "专精特新小巨人主题指数",
+        "半导体产业指数",
+        "芯片指数",
+        "股权激励指数",
+        "半导体精选指数",
+        "专精特新小巨人指数",
+        "AIPC指数",
+        "智能家居指数",
+        "模拟芯片指数",
+        "苏州工业园区指数"
+      ],
+      "score_company": 8.3,
+      "score_trend": 7.1,
+      "score_value": 7.2,
+      "highlights": [
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 577% ，利润成长性强。"
+        },
+        {
+          "tag": "净现",
+          "text": "近5年，净现比达到 153% ，净利润现金含量较高。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 7.7% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 2459万元 ，较上期增长 43% ，占2025年营收 1.1% ，在手订单充足。"
+        },
+        {
+          "tag": "公募",
+          "text": "公募基金持股 11% ，很受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年07月01日 至今陷入调整，资金有出逃可能。"
+        },
+        {
+          "tag": "商誉",
+          "text": "商誉占净资产 11% ，商誉减值风险较高。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/20发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-20"
+        },
+        {
+          "content": "公司发布股权激励计划预案，股价盘中上涨 8.03% ，股价收盘涨幅 6.95%",
+          "tags": [
+            "股价上涨"
+          ]
+        },
+        {
+          "content": "思瑞浦：上海兰迪律师事务所关于思瑞浦微电子科技（苏州）股份有限公司2026年限制性股票激励计划（草案）的法律意见书",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "2026/07/14发布预案公告，本计划拟向激励对象授予134万股 ，约占总股本的 0.97%，授予价格为 201元/股 。",
+          "tags": [
+            "激励计划"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 1530764511,
+      "revenue_yoy": 0.804682,
+      "operating_profit": 130208206.38,
+      "operating_profit_yoy": 2.347147,
+      "net_profit": 126009880.99,
+      "net_profit_yoy": 2.276357,
+      "gross_profit": 711263254.49,
+      "gross_profit_yoy": 0.695221,
+      "cogs": 819501256.51,
+      "gross_margin": 46.46,
+      "pe_forward": null,
+      "valuation_history_days": 304,
+      "valuation_history_from": "20220922",
+      "current_price": 234.0,
+      "price": 234.0,
+      "ma5": 248.03,
+      "ma10": 252.53,
+      "ma20": 295.15,
+      "dist_ma5_pct": -5.7,
+      "dist_ma10_pct": -7.3,
+      "dist_ma20_pct": -20.7,
+      "iv_proxy": {
+        "primary_name": "科创50",
+        "iv_rank": 0.7756,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 11.21,
+        "pct_float": 3.53,
+        "chg5_pct": -4.9,
+        "net5_repay_days": 4,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "002203.SZ",
+      "fetch_time": "2026-07-29T11:37:41+0800",
+      "name": "海亮股份",
+      "pe": 38.0224,
+      "pb": 2.3442,
+      "ps_ttm": 0.4535,
+      "pcf_ttm": null,
+      "valuation_percentile": 70.12,
+      "total_shares": 2291755274,
+      "industries": [
+        {
+          "name": "有色金属",
+          "level": 1
+        },
+        {
+          "name": "工业金属",
+          "level": 2
+        },
+        {
+          "name": "铜",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "贷款回购指数",
+        "资源股",
+        "有色金属指数",
+        "工业金属精选指数",
+        "铜产业指数",
+        "铜冶炼指数",
+        "再生金属指数",
+        "涉矿指数"
+      ],
+      "score_company": 7.7,
+      "score_trend": 6.9,
+      "score_value": 4.4,
+      "highlights": [
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 3.3% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "评级",
+          "text": "近90天， 6家 机构给出评级，其中 83% 为“买入”，距目标价的上涨空间为 40% 。"
+        },
+        {
+          "tag": "北向",
+          "text": "北向资金持股 4.0% ，很受外资机构青睐。"
+        },
+        {
+          "tag": "强势",
+          "text": "近1年，股价涨幅超过A股市场 90% 的股票，走势较强。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年06月23日大跌 -7.22% ，且成交额为近20日均值的 1.6倍 ，抛压很重。"
+        },
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年06月23日 至今陷入调整，资金有出逃可能。"
+        },
+        {
+          "tag": "毛利",
+          "text": "毛利率为 4.0% ，行业处于衰退期，或企业缺乏竞争力。"
+        },
+        {
+          "tag": "净现",
+          "text": "近5年，净现比为 -177% ，净利润现金含量较低。"
+        },
+        {
+          "tag": "偿债",
+          "text": "现金短债比为 0.22 ，带息债务占全部投入资本 57% ，现金保障很弱，偿债压力很大。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/25发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-25"
+        },
+        {
+          "content": "2026/07/28～2027/01/28 海亮集团有限公司(控股股东)计划增持，变动价格说明：本次拟增持价格不超过35.00元/股，拟增持金额不超过 10.0亿元  ，拟增持金额不低于 6.00亿元  交易方式：集中竞价交易、大宗交易方式增持公司股份",
+          "tags": [
+            "控股股东增持"
+          ]
+        },
+        {
+          "content": "18:03 海亮股份公告，控股股东海亮集团有限公司计划自2026年7月29日起6个月内，通过集中竞价交易、大宗交易方式增持公司股份，增持总金额不低于6亿元（含），不超过10亿元（含），增持价格不超过35元/股。截至公告披露日，海亮集团持有公司股份6.12亿股，占总股本26.70%。",
+          "tags": [
+            "快讯"
+          ]
+        },
+        {
+          "content": "11:16 7月28日，有色金属板块集体回调，有色金属ETF华夏（516650）下跌2.95%，工业有色ETF华夏（515040）下跌2.99%。个股方面，云南锗业、华锡有色、海亮股份等跌幅居前。华创证券认为，当前有色各子板块估值处于淡季水平，整体处于低位区间，具备较高配置性价比，短期需关注美联储议息会议指引。国金证券指出，有色板块估值压制即将结束，有望迎来超跌修复，板块推荐顺序为铜、铝、金，预计修复时间在8-9月或Q4。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "海亮股份：海亮股份2026年员工持股计划调整之法律意见书",
+          "tags": [
+            "重要公告"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 65017794738.56,
+      "revenue_yoy": -0.045557,
+      "operating_profit": 1087241929.18,
+      "operating_profit_yoy": 0.438629,
+      "net_profit": 915882617.63,
+      "net_profit_yoy": 0.168721,
+      "gross_profit": 2475752883.86,
+      "gross_profit_yoy": 0.128395,
+      "cogs": 62542041854.7,
+      "gross_margin": 3.81,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 16.79,
+      "price": 16.79,
+      "ma5": 17.97,
+      "ma10": 17.97,
+      "ma20": 19.4,
+      "dist_ma5_pct": -6.6,
+      "dist_ma10_pct": -6.6,
+      "dist_ma20_pct": -13.4,
+      "iv_proxy": {
+        "primary_name": "500ETF深",
+        "iv_rank": 0.857,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 9.8,
+        "pct_float": 2.64,
+        "chg5_pct": -0.91,
+        "net5_repay_days": 3,
+        "signal": "neutral"
+      }
+    },
+    {
+      "code": "002975.SZ",
+      "fetch_time": "2026-07-29T11:37:41+0800",
+      "name": "博杰股份",
+      "pe": 66.5721,
+      "pb": 6.5875,
+      "ps_ttm": 7.3906,
+      "pcf_ttm": 196.6358,
+      "valuation_percentile": 70.48,
+      "total_shares": 208130736,
+      "industries": [
+        {
+          "name": "机械设备",
+          "level": 1
+        },
+        {
+          "name": "自动化设备",
+          "level": 2
+        },
+        {
+          "name": "工控设备",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "贷款回购指数",
+        "英伟达产业链指数",
+        "万得预增指数",
+        "机器人指数",
+        "液冷服务器指数",
+        "MLCC指数",
+        "玻璃基板指数",
+        "磷化铟指数"
+      ],
+      "score_company": 8.0,
+      "score_trend": 6.8,
+      "score_value": 4.7,
+      "highlights": [
+        {
+          "tag": "业绩",
+          "text": "2026年07月14日，业绩超预期引发股价大幅上涨，当日收涨 10.0% 。"
+        },
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 149% ，利润成长性强。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 1.5亿元 ，较上期增长 29% ，占2025年营收 8.3% ，在手订单充足。"
+        },
+        {
+          "tag": "北向",
+          "text": "北向资金持股 3.7% ，较受外资机构青睐。"
+        },
+        {
+          "tag": "回购",
+          "text": "近6月，公司累计回购 88万股 ，占总股本比例 0.42% ，金额合计 3002万元 。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月15日大跌 -10% ，股价跌停，抛压很重。"
+        },
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年06月26日 至今陷入调整，资金有出逃可能。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/29发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-29"
+        },
+        {
+          "content": "2026/01/20～2026/07/10股东户数增加 110%",
+          "tags": [
+            "股东户数增加"
+          ]
+        },
+        {
+          "content": "09:27 7月15日，部分市场焦点股竞价情况如下：\n\n恒尚节能（11天10板）高开1.58%。\n\n医药板块方面，哈药股份（3板）高开5.88%，济民健康（4天2板）低开1.51%。\n\n光通信板块方面，宿迁联盛（6天3板）低开2.12%，东山精密（4天2板）高开0.24%，博杰股份（4天2板）高开3.60%。\n\n其他概念股方面，分红送转概念信通电子（2板）高开4.81%，电解铝板块宏桥控股（2板）高开3.49%，并购重组概念中岩大地（3天2板）低开2.10%，玻璃基板概念三峡新材（3天2板）高开1.09%。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "15:00 今天大涨的原因可能是公司预计2026年上半年归母净利润同比大幅增长642.86%–816.20%，显示电子测试与工业自动化业务收入和盈利能力显著改善。",
+          "tags": [
+            "快讯",
+            "大涨原因"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 1116706802.44,
+      "revenue_yoy": 0.356112,
+      "operating_profit": 122079497.25,
+      "operating_profit_yoy": 15.175725,
+      "net_profit": 115308288.3,
+      "net_profit_yoy": 38.050693,
+      "gross_profit": 495787343.81,
+      "gross_profit_yoy": 0.392401,
+      "cogs": 620919458.63,
+      "gross_margin": 44.4,
+      "pe_forward": null,
+      "valuation_history_days": 272,
+      "valuation_history_from": "20220207",
+      "current_price": 79.7,
+      "price": 79.7,
+      "ma5": 84.9,
+      "ma10": 89.74,
+      "ma20": 107.56,
+      "dist_ma5_pct": -6.1,
+      "dist_ma10_pct": -11.2,
+      "dist_ma20_pct": -25.9,
+      "iv_proxy": {
+        "primary_name": "500ETF深",
+        "iv_rank": 0.857,
+        "sizing": "tight"
+      }
+    },
+    {
+      "code": "603127.SH",
+      "fetch_time": "2026-07-29T11:37:41+0800",
+      "name": "昭衍新药",
+      "pe": 66.2225,
+      "pb": 3.872,
+      "ps_ttm": 19.4408,
+      "pcf_ttm": 64.6616,
+      "valuation_percentile": 46.96,
+      "total_shares": 749348220,
+      "industries": [
+        {
+          "name": "医药生物",
+          "level": 1
+        },
+        {
+          "name": "医疗服务",
+          "level": 2
+        },
+        {
+          "name": "医疗研发外包",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "股权激励指数",
+        "宁组合",
+        "万得预增指数",
+        "创新药指数",
+        "反内卷指数",
+        "医疗服务精选指数",
+        "CRO指数",
+        "触板指数"
+      ],
+      "score_company": 8.2,
+      "score_trend": 8.9,
+      "score_value": 5.9,
+      "highlights": [
+        {
+          "tag": "业绩",
+          "text": "2026年07月15日，业绩超预期引发股价跳空高开，但目前股价缺口已回补。"
+        },
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 2483% ，利润成长性强。"
+        },
+        {
+          "tag": "净现",
+          "text": "近5年，净现比达到 124% ，净利润现金含量很高。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 10亿元 ，较上期增长 22% ，占2025年营收 63% ，在手订单充足。"
+        },
+        {
+          "tag": "预测",
+          "text": " 5家 机构预测，2026年-2028年营收和净利润每年增长均超过 15% ，未来成长较快。"
+        },
+        {
+          "tag": "公募",
+          "text": "公募基金持股 3.3% ，较受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月17日大跌 -9.99% ，股价跌停，抛压很重。"
+        },
+        {
+          "tag": "毛利",
+          "text": "近5年，毛利率从 49% 下滑至 19% ，企业缺乏竞争力。"
+        },
+        {
+          "tag": "收益",
+          "text": "近12月，经营活动净收益占利润总额 -31% ，收益质量很低。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/29发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-29"
+        },
+        {
+          "content": "20:00 7月27日，A股医疗板块反弹，医疗ETF（512170）收涨2.54%，港股通医疗ETF华宝（159137）收涨1.06%。个股方面，脑机接口及CXO概念表现活跃，三博脑科涨12.71%，昭衍新药、美好医疗涨超9%，泰格医药涨4.35%；港股微创机器人-B收涨6.23%，微创脑科学涨4.24%。消息面上，美国Science Corp.视网膜芯片获批在欧盟销售。国内方面，科研团队实现跨地域千人同步脑电信号采集，政策层面《国民健康“十五五”规划》提出加强脑机接口科技攻关。光大证券认为，随着政策发布、临床推进及技术迭代，今年有望成为脑机接口商业化落地元年，建议关注创新药产业链及创新医疗器械。\n风险提示：文中指数成份股仅作展示，不构成投资建议。基金管理人评估的港股通医疗ETF华宝、医疗ETF华宝联接基金风险等级为R4，医疗ETF华宝风险等级为R3。投资人须对自主决定的投资行为负责，基金过往业绩不代表未来表现。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "17:33 7月27日，A股医疗板块反弹，医疗ETF（512170）收涨2.54%，港股通医疗ETF（159137）收涨1.06%。个股方面，三博脑科涨12.71%，昭衍新药、美好医疗涨超9%，泰格医药涨4.35%；港股微创机器人-B收涨6.23%，微创脑科学涨4.24%。消息面上，美国ScienceCorp.获批在欧盟销售视网膜芯片，为脑机接口设备商业化进展。国内方面，科研团队实现跨地域脑电信号采集，政策层面《国民健康“十五五”规划》提出加强脑机接口科技攻关。光大证券认为，随着政策发布、临床推进及技术迭代，今年有望成为脑机接口商业化落地元年，建议关注创新药产业链及创新医疗器械。\n风险提示：文中指数成份股仅作展示，不构成投资建议。基金管理人评估的港股通医疗ETF华宝、医疗ETF华宝联接基金风险等级为R4，医疗ETF华宝风险等级为R3。投资人须对自主决定的投资行为负责，基金过往业绩不代表未来表现。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "昭衍新药：H股公告：变更联席公司秘书、授权代表及法律程序文件代理人",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "李晶莹 任法律程序文件代理人",
+          "tags": [
+            "管理层变更"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 984961529.76,
+      "revenue_yoy": -0.262287,
+      "operating_profit": 99452028.34,
+      "operating_profit_yoy": 2.427657,
+      "net_profit": 80706047.32,
+      "net_profit_yoy": 2.087038,
+      "gross_profit": 212280141.46,
+      "gross_profit_yoy": -0.421429,
+      "cogs": 772681388.3,
+      "gross_margin": 21.55,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 45.57,
+      "price": 45.57,
+      "ma5": 47.42,
+      "ma10": 48.5,
+      "ma20": 44.83,
+      "dist_ma5_pct": -3.9,
+      "dist_ma10_pct": -6.0,
+      "dist_ma20_pct": 1.7,
+      "iv_proxy": {
+        "primary_name": "300ETF",
+        "iv_rank": 0.6588,
+        "sizing": "selective"
+      },
+      "margin": {
+        "rzye_yi": 6.86,
+        "pct_float": 2.4,
+        "chg5_pct": 1.27,
+        "net5_repay_days": 2,
+        "signal": "adding"
+      }
+    },
+    {
+      "code": "600236.SH",
+      "fetch_time": "2026-07-29T11:37:41+0800",
+      "name": "桂冠电力",
+      "pe": 23.9405,
+      "pb": 5.005,
+      "ps_ttm": 7.7463,
+      "pcf_ttm": 11.7867,
+      "valuation_percentile": 93.49,
+      "total_shares": 7882377802,
+      "industries": [
+        {
+          "name": "公用事业",
+          "level": 1
+        },
+        {
+          "name": "电力",
+          "level": 2
+        },
+        {
+          "name": "水力发电",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "碳中和指数",
+        "西部大开发指数",
+        "双百企业指数",
+        "电力股精选指数",
+        "万得绿电指数",
+        "央企电力燃气指数",
+        "电改指数",
+        "水电指数",
+        "电解铝指数",
+        "大唐系指数"
+      ],
+      "score_company": 7.6,
+      "score_trend": 7.4,
+      "score_value": 3.7,
+      "highlights": [
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 58% ，利润成长性强。"
+        },
+        {
+          "tag": "ROE",
+          "text": "近5年，净资产收益率为 13% ，获取收益的能力很强。"
+        },
+        {
+          "tag": "分红",
+          "text": "近5年，股息收益率均值达到 3.2% ，现金分红较高。"
+        },
+        {
+          "tag": "强势",
+          "text": "近6月，股价涨幅超过A股市场 93% 的股票，走势较强。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月23日大跌 -7.19% ，且成交额为近20日均值的 3.19倍 ，抛压很重。"
+        },
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年07月23日 至今陷入调整，资金有出逃可能。"
+        },
+        {
+          "tag": "偿债",
+          "text": "现金短债比为 0.24 ，带息债务占全部投入资本 50% ，现金保障很弱，偿债压力很大。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/07/31发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-07-31"
+        },
+        {
+          "content": "09:57 7月24日，电力板块盘中出现异动，立新能源（001258）实现7连板，封板资金达2.31亿元。同板块中，新能股份（000595）亦封涨停。立新能源此前发布业绩预告，预计2026年上半年归母净利润盈利6,000万元至8,000万元，同比增长570.26%至793.68%。业绩增长主要系联营企业“疆电外送”项目并网投运带来投资收益增加，以及新能源补贴回款增加导致信用减值损失减少。受外部地缘风险及美股下跌影响，A股早盘低开，电力板块内部分个股如乐山电力、桂冠电力、华银电力、九洲集团等跌幅居前。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "14:49股价达到 12.36 元，创历史新高",
+          "tags": [
+            "股价新高"
+          ]
+        },
+        {
+          "content": "15:00 今天大涨的原因可能是江苏电网创历史用电高峰反映出电力需求走强与供需偏紧，推高电价与上网电量预期，利好以发电和售电为主营的桂冠电力业绩与利润。",
+          "tags": [
+            "快讯",
+            "大涨原因"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 7335479334.64,
+      "revenue_yoy": -0.002479,
+      "operating_profit": 3253371406.85,
+      "operating_profit_yoy": 0.115996,
+      "net_profit": 2766394705.31,
+      "net_profit_yoy": 0.107115,
+      "gross_profit": 4079377214.71,
+      "gross_profit_yoy": 0.128125,
+      "cogs": 3256102119.93,
+      "gross_margin": 55.61,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 9.93,
+      "price": 9.93,
+      "ma5": 10.96,
+      "ma10": 10.8,
+      "ma20": 10.07,
+      "dist_ma5_pct": -9.4,
+      "dist_ma10_pct": -8.0,
+      "dist_ma20_pct": -1.4,
+      "iv_proxy": {
+        "primary_name": "300ETF",
+        "iv_rank": 0.6588,
+        "sizing": "selective"
+      },
+      "margin": {
+        "rzye_yi": 1.37,
+        "pct_float": 0.17,
+        "chg5_pct": -15.35,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "600961.SH",
+      "fetch_time": "2026-07-29T11:37:41+0800",
+      "name": "株冶集团",
+      "pe": 11.962,
+      "pb": 4.7153,
+      "ps_ttm": 0.9745,
+      "pcf_ttm": 8.6427,
+      "valuation_percentile": 59.6,
+      "total_shares": 1072872703,
+      "industries": [
+        {
+          "name": "有色金属",
+          "level": 1
+        },
+        {
+          "name": "工业金属",
+          "level": 2
+        },
+        {
+          "name": "铅锌",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "专精特新小巨人主题指数",
+        "QFII重仓指数",
+        "有色金属指数",
+        "锌电池指数",
+        "铅锌矿指数",
+        "钴矿指数",
+        "央企有色指数",
+        "磷化铟指数",
+        "蓄电池指数"
+      ],
+      "score_company": 7.0,
+      "score_trend": 6.5,
+      "score_value": 5.6,
+      "highlights": [
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 145% ，利润成长性强。"
+        },
+        {
+          "tag": "盈利",
+          "text": "近5年，净资产收益率为 32% ，投入资本回报率为 17% ，盈利能力很强。"
+        },
+        {
+          "tag": "公募",
+          "text": "公募基金持股 3.8% ，较受内资机构青睐。"
+        },
+        {
+          "tag": "强势",
+          "text": "近1年，股价涨幅超过A股市场 94% 的股票，走势较强。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "分红",
+          "text": "近5年，从未实施现金分红，为一毛不拔的铁公鸡。"
+        },
+        {
+          "tag": "板块",
+          "text": "近3月， 铅锌 板块疲软，走势弱于其他 90.8% 的板块。"
+        }
+      ],
+      "events": [
+        {
+          "content": "2026/09/08解禁3.21亿股，占总股本29.93%",
+          "tags": [
+            "限售股票解禁"
+          ],
+          "date": "2026-09-08"
+        },
+        {
+          "content": "预计2026/08/19发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-19"
+        },
+        {
+          "content": "10:05 贵金属板块走弱，招金黄金跌超7%，晓程科技、西部黄金、四川黄金、株冶集团等跟跌。",
+          "tags": [
+            "快讯"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 16048295428.98,
+      "revenue_yoy": 0.115375,
+      "operating_profit": 1079119649.21,
+      "operating_profit_yoy": 0.517862,
+      "net_profit": 856623442.95,
+      "net_profit_yoy": 0.438565,
+      "gross_profit": 1980019317.39,
+      "gross_profit_yoy": 0.51115,
+      "cogs": 14068276111.59,
+      "gross_margin": 12.34,
+      "pe_forward": null,
+      "valuation_history_days": 301,
+      "valuation_history_from": "20210729",
+      "current_price": 22.13,
+      "price": 22.13,
+      "ma5": 23.01,
+      "ma10": 23.06,
+      "ma20": 26.65,
+      "dist_ma5_pct": -3.8,
+      "dist_ma10_pct": -4.0,
+      "dist_ma20_pct": -17.0,
+      "iv_proxy": {
+        "primary_name": "300ETF",
+        "iv_rank": 0.6588,
+        "sizing": "selective"
+      },
+      "margin": {
+        "rzye_yi": 9.01,
+        "pct_float": 5.41,
+        "chg5_pct": -0.25,
+        "net5_repay_days": 2,
+        "signal": "neutral"
+      }
+    },
+    {
+      "code": "688376.SH",
+      "fetch_time": "2026-07-29T11:37:41+0800",
+      "name": "美埃科技",
+      "pe": 73.7258,
+      "pb": 4.2181,
+      "ps_ttm": 3.9482,
+      "pcf_ttm": 25.09,
+      "valuation_percentile": 87.01,
+      "total_shares": 135251944,
+      "industries": [
+        {
+          "name": "环保",
+          "level": 1
+        },
+        {
+          "name": "环保设备Ⅱ",
+          "level": 2
+        },
+        {
+          "name": "环保设备Ⅲ",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "专精特新小巨人主题指数",
+        "专精特新小巨人指数"
+      ],
+      "score_company": 7.4,
+      "score_trend": 6.7,
+      "score_value": 3.8,
+      "highlights": [
+        {
+          "tag": "业绩",
+          "text": "2026年04月28日，业绩超预期引发股价大幅上涨，但目前股价已回落。"
+        },
+        {
+          "tag": "收入",
+          "text": "近3年，营业收入每年增长 19% ，收入成长性较强。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 7.6% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 2.8亿元 ，较上期增长 4.1% ，占2025年营收 15% ，在手订单充足。"
+        },
+        {
+          "tag": "预测",
+          "text": " 4家 机构预测，2026年-2028年营收和净利润每年增长均超过 25% ，未来成长较快。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年06月30日大跌 -3.08% ，且成交额为近20日均值的 2.94倍 ，抛压很重。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/29发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-29"
+        },
+        {
+          "content": "11:40 财通证券研报指出，AI训练及推理需求增长带动先进逻辑芯片、HBM及先进封装扩产，全球半导体资本开支进入上行周期。据测算，全球主要半导体企业2026年资本开支合计约1894.8亿美元，同比增长28.8%。基于此，该行预计2026-2028年洁净室建设产值分别为207、252、305亿美元，需求有望进入集中放量阶段。台积电、美光、三星及SK海力士等企业的重点项目在2025-2028年密集推进，将转化为洁净室及机电工程需求。\n财通证券认为，具备核心客户绑定、海外交付经验和高端项目业绩的企业有望受益。相关公司包括：亚翔集成、圣晖集成、柏诚股份、深桑达A、太极实业、华康洁净及美埃科技。风险提示：宏观经济波动、半导体投产不及预期、测算差异风险。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "美埃科技：中信建投证券股份有限公司关于美埃（中国）环境科技股份有限公司股东向特定机构投资者询价转让股份相关资格的核查意见",
+          "tags": [
+            "重要公告"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 1486421857.28,
+      "revenue_yoy": 0.236424,
+      "operating_profit": 153352741.15,
+      "operating_profit_yoy": -0.076139,
+      "net_profit": 152567751.66,
+      "net_profit_yoy": 0.030138,
+      "gross_profit": 409274788.02,
+      "gross_profit_yoy": 0.113578,
+      "cogs": 1077147069.26,
+      "gross_margin": 27.53,
+      "pe_forward": null,
+      "valuation_history_days": 409,
+      "valuation_history_from": "20241118",
+      "current_price": 65.63,
+      "price": 65.63,
+      "ma5": 67.84,
+      "ma10": 70.22,
+      "ma20": 86.37,
+      "dist_ma5_pct": -3.3,
+      "dist_ma10_pct": -6.5,
+      "dist_ma20_pct": -24.0,
+      "iv_proxy": {
+        "primary_name": "科创50",
+        "iv_rank": 0.7756,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 2.1,
+        "pct_float": 2.37,
+        "chg5_pct": -2.48,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "600428.SH",
+      "fetch_time": "2026-07-29T11:37:43+0800",
+      "name": "中远海特",
+      "pe": 16.3403,
+      "pb": 1.7585,
+      "ps_ttm": 1.2244,
+      "pcf_ttm": 4.1464,
+      "valuation_percentile": 66.54,
+      "total_shares": 2743920395,
+      "industries": [
+        {
+          "name": "交通运输",
+          "level": 1
+        },
+        {
+          "name": "航运港口",
+          "level": 2
+        },
+        {
+          "name": "航运",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "中字头央企指数",
+        "国企改革指数",
+        "贷款回购指数",
+        "珠三角指数",
+        "一带一路特估指数",
+        "一带一路指数",
+        "中非合作指数",
+        "央企物流运输指数",
+        "深海科技指数",
+        "海上丝绸之路指数",
+        "航运精选指数",
+        "港口精选指数",
+        "中远海运系指数",
+        "中远海运集团指数",
+        "粤港澳自贸区指数"
+      ],
+      "score_company": 7.2,
+      "score_trend": 9.8,
+      "score_value": 4.9,
+      "highlights": [
+        {
+          "tag": "业绩",
+          "text": "2026年07月10日，业绩超预期引发股价跳空高开，当日收涨 10.0% 。"
+        },
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 95% ，利润成长性强。"
+        },
+        {
+          "tag": "分红",
+          "text": "近5年，股息收益率均值达到 3.1% ，现金分红较高。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 13亿元 ，较上期增长 29% ，占2025年营收 5.8% ，在手订单充足。"
+        },
+        {
+          "tag": "强势",
+          "text": "近3月，股价涨幅超过A股市场 98% 的股票，收盘价接近 一年新高 ，走势很强。"
+        }
+      ],
+      "risks": [],
+      "events": [
+        {
+          "content": "预计2026/08/27发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-27"
+        },
+        {
+          "content": "2025年年度：每10股派3.25元",
+          "tags": [
+            "分红送转"
+          ],
+          "date": "2026-07-30"
+        },
+        {
+          "content": "中远海特：关于中远海运特种运输股份有限公司2026年第二次临时股东会的法律意见书",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "中远海特：中远海运特种运输股份有限公司关于委托中船澄西建造8艘6万吨级多用途重吊船的公告",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "陈帅 任提名委员会委员",
+          "tags": [
+            "管理层变更"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 16610522356.82,
+      "revenue_yoy": 0.379243,
+      "operating_profit": 2107481674.49,
+      "operating_profit_yoy": 0.358654,
+      "net_profit": 1763024837.6,
+      "net_profit_yoy": 0.289424,
+      "gross_profit": 3569777483.78,
+      "gross_profit_yoy": 0.434728,
+      "cogs": 13040744873.04,
+      "gross_margin": 21.49,
+      "pe_forward": null,
+      "valuation_history_days": 303,
+      "valuation_history_from": "20210729",
+      "current_price": 11.2,
+      "price": 11.2,
+      "ma5": 10.97,
+      "ma10": 10.85,
+      "ma20": 9.81,
+      "dist_ma5_pct": 2.1,
+      "dist_ma10_pct": 3.3,
+      "dist_ma20_pct": 14.2,
+      "iv_proxy": {
+        "primary_name": "300ETF",
+        "iv_rank": 0.6588,
+        "sizing": "selective"
+      },
+      "margin": {
+        "rzye_yi": 3.53,
+        "pct_float": 1.29,
+        "chg5_pct": -10.59,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "300323.SZ",
+      "fetch_time": "2026-07-29T11:37:43+0800",
+      "name": "华灿光电",
+      "pe": -60.9397,
+      "pb": 2.5349,
+      "ps_ttm": 2.5591,
+      "pcf_ttm": null,
+      "valuation_percentile": 60.93,
+      "total_shares": 1622998797,
+      "industries": [
+        {
+          "name": "电子",
+          "level": 1
+        },
+        {
+          "name": "光学光电子",
+          "level": 2
+        },
+        {
+          "name": "LED",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "TMT指数",
+        "业绩预亏指数",
+        "AI穿戴设备指数",
+        "Mini LED指数",
+        "LED照明指数",
+        "新型显示技术指数",
+        "广东省国资指数",
+        "LED指数",
+        "节能照明指数",
+        "蓝宝石指数",
+        "氧化锌指数"
+      ],
+      "score_company": 6.7,
+      "score_trend": 6.4,
+      "score_value": 5.4,
+      "highlights": [
+        {
+          "tag": "龙头",
+          "text": "公司为 LED 行业龙头企业。"
+        },
+        {
+          "tag": "业绩",
+          "text": "2026年04月29日，业绩超预期引发股价大幅上涨，当日收涨 6.67% 。"
+        },
+        {
+          "tag": "成长",
+          "text": "近3年营业收入每年增长 47% ，最新季度归母净利润同比增长 152% ，成长能力很强。"
+        },
+        {
+          "tag": "北向",
+          "text": "北向资金持股 3.6% ，较受外资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年07月02日 至今陷入调整，资金有出逃可能。"
+        },
+        {
+          "tag": "分红",
+          "text": "近5年，从未实施现金分红，为一毛不拔的铁公鸡。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/25发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-25"
+        },
+        {
+          "content": "07:00 过去十年，京东方被市场视为典型的周期型制造公司。随着产能建设高峰期过去，资本开支和折旧规模下降，公司财务结构改善，经营性净现金流提升。京东方通过分红和注销式回购回报股东，资本模式正从CAPEX驱动转向FCF驱动，市场对其定价逻辑或将从周期PE估值转向FCF定价。\n在LCD领域，全球格局趋于集中，周期波动减弱。在OLED领域，京东方量产了中国首条8.6代AMOLED产线，并实现了多项技术突破，在显示领域具备标准制定权。显示器件业务作为底层资产，提供了高现金流与稳定性。\n京东方与康宁在玻璃基封装载板、可折叠玻璃、钙钛矿玻璃基板及光互连领域达成合作。公司依托显示技术、玻璃基加工和集成制造能力，布局玻璃基封装载板、光互连及钙钛矿三条业务线，旨在解决AI算力基础设施的物理瓶颈。\n京东方董事长陈炎顺提出“第N曲线”理论，将显示产业底蕴延伸至AI应用、光电互联及高端制造。公司将玻璃基加工作为核心载体，通过稳健的显示业务基本盘与AI基建新赛道，寻求未来增长。\n此部分为滚动资讯播报，无实质性新增内容。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "02:45 7月以来，共有375家A股上市公司获机构调研，其中新易盛、京东方A、华灿光电、华勤技术等22家公司获50家以上机构调研。新易盛获417家机构调研居首，公司称二季度业绩预告与年初预期基本吻合。京东方A获243家机构调研，公司表示未来折旧金额及资本开支预计将逐渐下降。在已发布半年度业绩相关公告的调研公司中，超七成实现业绩报喜，恒逸石化、三维通信、凯尔达预计净利润同比增长超1000%。分行业看，获调研且业绩预喜的公司中，电子行业数量居首，电力设备、基础化工及有色金属行业紧随其后。\n研究机构Omdia数据显示，2026年中国半导体市场规模预测值上调。在上述375家获调研公司中，67家获外资机构调研，其中电子行业公司有19家。广合科技、沪电股份、华勤技术等电子行业公司获外资机构调研较多。调研内容显示，外资机构关注相关公司的全球化布局，广合科技泰国工厂正推进产能爬坡，沪电股份泰国基地已进入规模化运营阶段。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "华灿光电：关于使用部分闲置募集资金进行现金管理的公告",
+          "tags": [
+            "重要公告"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 4129071094.98,
+      "revenue_yoy": 0.398441,
+      "operating_profit": -247200388.81,
+      "operating_profit_yoy": 0.452304,
+      "net_profit": -195656259.36,
+      "net_profit_yoy": 0.45584,
+      "gross_profit": 253223465.16,
+      "gross_profit_yoy": 162.023979,
+      "cogs": 3875847629.82,
+      "gross_margin": 6.13,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 10.88,
+      "price": 10.88,
+      "ma5": 11.3,
+      "ma10": 11.71,
+      "ma20": 14.81,
+      "dist_ma5_pct": -3.7,
+      "dist_ma10_pct": -7.1,
+      "dist_ma20_pct": -26.5,
+      "iv_proxy": {
+        "primary_name": "创业板ETF",
+        "iv_rank": 0.8312,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 13.98,
+        "pct_float": 10.82,
+        "chg5_pct": -0.46,
+        "net5_repay_days": 2,
+        "signal": "neutral"
+      }
+    },
+    {
+      "code": "688046.SH",
+      "fetch_time": "2026-07-29T11:37:43+0800",
+      "name": "药康生物",
+      "pe": 65.4415,
+      "pb": 4.7497,
+      "ps_ttm": 12.5871,
+      "pcf_ttm": 41.876,
+      "valuation_percentile": 67.85,
+      "total_shares": 410000000,
+      "industries": [
+        {
+          "name": "医药生物",
+          "level": 1
+        },
+        {
+          "name": "医疗服务",
+          "level": 2
+        },
+        {
+          "name": "医疗研发外包",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "专精特新小巨人主题指数",
+        "股权激励指数",
+        "专精特新小巨人指数",
+        "创新药指数",
+        "医疗服务精选指数"
+      ],
+      "score_company": 8.2,
+      "score_trend": 8.2,
+      "score_value": 5.3,
+      "highlights": [
+        {
+          "tag": "业绩",
+          "text": "2026年07月22日，业绩超预期引发股价大幅上涨，当日收涨 10.7% 。"
+        },
+        {
+          "tag": "成长",
+          "text": "近3年营业收入每年增长 15% ，最新季度归母净利润同比增长 51% ，成长能力很强。"
+        },
+        {
+          "tag": "预测",
+          "text": " 4家 机构预测，2026年-2028年营收和净利润每年增长均超过 15% ，未来成长较快。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 3.0% ，较受外资机构青睐；公募基金持股 7.3% ，很受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月17日大跌 -20% ，股价跌停，抛压很重。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/20发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-20"
+        },
+        {
+          "content": "17:56 药康生物临床前服务平台副总监许舒欣博士在首届大国新药CPIC全球会议上表示，小核酸药物行业已抵达产业爆发拐点。随着化学修饰与靶向递送技术的突破，该领域已从罕见病扩展至常见病领域。许舒欣认为，递送体系是小核酸药物的核心竞争力。\n针对小核酸药物临床前评价中物种基因差异的痛点，药康生物搭建了质粒转染、AAV技术及人源化动物模型三层梯度互补平台。公司已建成超800个人源化品系，覆盖肿瘤、代谢、感染等领域，并针对乙肝、减重及心肾综合征等方向构建了特定模型，为药物研发提供临床前药效数据。\n展望未来，小核酸药物创新将聚焦肝外多组织靶向、多靶点联合研发及生产工艺降本。药康生物已通过扩容AAV建模平台、扩充人源化模型库及搭建体外快速筛选体系进行前置布局，以支持行业研发需求。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "15:00 今天大涨的原因可能是公司预计2026年上半年净利润同比增长46.67%至60.78%，显示其实验动物模型产品与相关技术服务销售规模和盈利能力显著提升，利好业绩预期。",
+          "tags": [
+            "快讯",
+            "大涨原因"
+          ]
+        },
+        {
+          "content": "公司发布2026半年报预告，股价盘中上涨 8.03% ，股价收盘涨幅 10.66%",
+          "tags": [
+            "股价上涨"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 575576818.48,
+      "revenue_yoy": 0.129206,
+      "operating_profit": 120290164.38,
+      "operating_profit_yoy": 0.212471,
+      "net_profit": 109900074.6,
+      "net_profit_yoy": 0.118982,
+      "gross_profit": 368462244.84,
+      "gross_profit_yoy": 0.135745,
+      "cogs": 207114573.64,
+      "gross_margin": 64.02,
+      "pe_forward": null,
+      "valuation_history_days": 272,
+      "valuation_history_from": "20240425",
+      "current_price": 25.69,
+      "price": 25.69,
+      "ma5": 26.63,
+      "ma10": 26.11,
+      "ma20": 25.05,
+      "dist_ma5_pct": -3.5,
+      "dist_ma10_pct": -1.6,
+      "dist_ma20_pct": 2.6,
+      "iv_proxy": {
+        "primary_name": "科创50",
+        "iv_rank": 0.7756,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 0.92,
+        "pct_float": 0.87,
+        "chg5_pct": 1.73,
+        "net5_repay_days": 4,
+        "signal": "adding"
+      }
+    },
+    {
+      "code": "002245.SZ",
+      "fetch_time": "2026-07-29T11:37:43+0800",
+      "name": "蔚蓝锂芯",
+      "pe": 35.0398,
+      "pb": 3.4709,
+      "ps_ttm": 3.138,
+      "pcf_ttm": 18.4798,
+      "valuation_percentile": 66.22,
+      "total_shares": 1707639594,
+      "industries": [
+        {
+          "name": "电力设备",
+          "level": 1
+        },
+        {
+          "name": "电池",
+          "level": 2
+        },
+        {
+          "name": "锂电池",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "专精特新小巨人主题指数",
+        "股权激励指数",
+        "锂电池指数",
+        "养老金指数",
+        "固态电池指数",
+        "钠离子电池指数",
+        "LED照明指数",
+        "金改指数",
+        "三元锂电池指数",
+        "节能照明指数",
+        "物流电商平台指数",
+        "金融改革指数",
+        "舟山新区指数",
+        "合同能源管理指数",
+        "长三角自贸区"
+      ],
+      "score_company": 8.5,
+      "score_trend": 6.7,
+      "score_value": 5.2,
+      "highlights": [
+        {
+          "tag": "业绩",
+          "text": "2026年07月14日，业绩超预期引发股价大幅上涨，当日收涨 10.0% 。"
+        },
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 64% ，利润成长性强。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 2.1亿元 ，较上期增长 742% ，占2025年营收 2.5% ，在手订单充足。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 6.4% ，很受外资机构青睐；公募基金持股 7.5% ，很受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月07日大跌 -7.06% ，且成交额为近20日均值的 1.51倍 ，抛压很重。"
+        },
+        {
+          "tag": "偿债",
+          "text": "现金短债比为 0.31 ，货币资金对短期债务的保障较弱。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/18发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-18"
+        },
+        {
+          "content": "15:00 今天大涨的原因可能是公司披露BBU备电业务在产品开发、客户拓展、产能准备和订单交付上均有序推进，提升业绩和成长预期。",
+          "tags": [
+            "快讯",
+            "大涨原因"
+          ]
+        },
+        {
+          "content": "09:32 锂电池板块短线走低，鹏辉能源跌超10%，蔚蓝锂芯、德福科技、铜冠铜箔、诺德股份等跟跌。",
+          "tags": [
+            "快讯"
+          ]
+        },
+        {
+          "content": "公司发布2026半年报预告，股价盘中上涨 8.69% ，股价收盘涨幅 10.01%",
+          "tags": [
+            "股价上涨"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 5814429411.23,
+      "revenue_yoy": 0.201713,
+      "operating_profit": 653430544.85,
+      "operating_profit_yoy": 0.72211,
+      "net_profit": 567618109.56,
+      "net_profit_yoy": 0.728916,
+      "gross_profit": 1151783114.18,
+      "gross_profit_yoy": 0.445764,
+      "cogs": 4662646297.05,
+      "gross_margin": 19.81,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 16.06,
+      "price": 16.06,
+      "ma5": 16.66,
+      "ma10": 17.19,
+      "ma20": 18.79,
+      "dist_ma5_pct": -3.6,
+      "dist_ma10_pct": -6.6,
+      "dist_ma20_pct": -14.5,
+      "iv_proxy": {
+        "primary_name": "500ETF深",
+        "iv_rank": 0.857,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 6.76,
+        "pct_float": 2.62,
+        "chg5_pct": -4.14,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "000672.SZ",
+      "fetch_time": "2026-07-29T11:37:43+0800",
+      "name": "上峰材料",
+      "pe": 20.5346,
+      "pb": 1.403,
+      "ps_ttm": 2.7132,
+      "pcf_ttm": 12.4043,
+      "valuation_percentile": 59.17,
+      "total_shares": 969395450,
+      "industries": [
+        {
+          "name": "建筑材料",
+          "level": 1
+        },
+        {
+          "name": "水泥",
+          "level": 2
+        },
+        {
+          "name": "水泥制造",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "银指数",
+        "资源股",
+        "员工持股指数",
+        "借壳上市指数",
+        "万得预增指数",
+        "长鑫存储指数",
+        "老基建指数",
+        "西部大基建指数",
+        "水泥指数",
+        "水泥制造精选指数",
+        "西部水泥指数"
+      ],
+      "score_company": 7.6,
+      "score_trend": 5.1,
+      "score_value": 5.0,
+      "highlights": [
+        {
+          "tag": "净现",
+          "text": "近5年，净现比达到 138% ，净利润现金含量很高。"
+        },
+        {
+          "tag": "分红",
+          "text": "近5年，股息收益率均值达到 4.5% ，现金分红极高。"
+        },
+        {
+          "tag": "评级",
+          "text": "近90天， 5家 机构给出评级，其中 60% 为“买入”，距目标价的上涨空间为 51% 。"
+        },
+        {
+          "tag": "公募",
+          "text": "公募基金持股 4.2% ，较受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月27日大跌 -10% ，股价跌停，抛压很重。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/24发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-24"
+        },
+        {
+          "content": "上峰材料：上峰材料2026年第六次临时股东会法律意见书",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "19:17 上峰材料发布公告，预计2026年半年度归属于上市公司股东的净利润区间为13.00亿元至14.00亿元，较上年同期增长426.59%至467.10%。\n\n公司表示，此次业绩变动的主要原因是公司通过基金持有的盛合晶微等标的股权确认了公允价值变动收益，该项收益预计增厚公司净利润约11.50亿元。",
+          "tags": [
+            "资讯"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 3598463266.51,
+      "revenue_yoy": -0.05688,
+      "operating_profit": 656072411.65,
+      "operating_profit_yoy": 0.374723,
+      "net_profit": 550843626.9,
+      "net_profit_yoy": 0.459256,
+      "gross_profit": 1074427003.52,
+      "gross_profit_yoy": 0.05424,
+      "cogs": 2524036262.99,
+      "gross_margin": 29.86,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 12.9,
+      "price": 12.9,
+      "ma5": 14.48,
+      "ma10": 15.39,
+      "ma20": 18.04,
+      "dist_ma5_pct": -10.9,
+      "dist_ma10_pct": -16.2,
+      "dist_ma20_pct": -28.5,
+      "iv_proxy": {
+        "primary_name": "深100ETF",
+        "iv_rank": 0.6758,
+        "sizing": "selective"
+      },
+      "margin": {
+        "rzye_yi": 3.91,
+        "pct_float": 3.13,
+        "chg5_pct": -6.29,
+        "net5_repay_days": 2,
+        "signal": "neutral"
+      }
+    },
+    {
+      "code": "688392.SH",
+      "fetch_time": "2026-07-29T11:37:43+0800",
+      "name": "骄成超声",
+      "pe": 102.0041,
+      "pb": 8.0213,
+      "ps_ttm": 17.8391,
+      "pcf_ttm": 115.9157,
+      "valuation_percentile": 78.22,
+      "total_shares": 115733360,
+      "industries": [
+        {
+          "name": "电力设备",
+          "level": 1
+        },
+        {
+          "name": "电池",
+          "level": 2
+        },
+        {
+          "name": "锂电专用设备",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "专精特新小巨人主题指数",
+        "专精特新小巨人指数"
+      ],
+      "score_company": 7.6,
+      "score_trend": 7.1,
+      "score_value": 4.5,
+      "highlights": [
+        {
+          "tag": "龙头",
+          "text": "公司为 锂电专用设备 行业龙头企业。"
+        },
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 113% ，利润成长性强。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 6.8% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 1.1亿元 ，较上期增长 54% ，占2025年营收 14% ，在手订单充足。"
+        },
+        {
+          "tag": "预测",
+          "text": " 3家 机构预测，2026年-2028年营收和净利润每年增长均超过 30% ，未来成长很快。"
+        },
+        {
+          "tag": "公募",
+          "text": "公募基金持股 12% ，很受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月10日大跌 -15.7% ，且成交额为近20日均值的 1.57倍 ，抛压很重。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/29发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-29"
+        },
+        {
+          "content": "11:59 为应对算力瓶颈，中国计划在未来五年内投入约2万亿元人民币建设数据中心。7月21日，A股芯片概念股集体反弹，正帆科技、臻宝科技、托伦斯涨停，华虹宏力涨超17%，东芯股份涨超16%，精智达、长川科技、精测电子、普冉股份涨超14%，骄成超声涨超13%，北京君正、江丰电子、中微公司、鼎龙股份涨超12%，圣邦股份涨超11%，澜起科技、京仪装备、华海清科、安集科技涨超10%，北方华创、大为股份涨停。消息面上，智谱已完成一座全部采用国产芯片的大型数据中心建设，并已开始部分运营，该中心旨在支持GLM平台开发。智谱目前已建成或运营多个计算集群，每个集群配备超过1万块芯片。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "14:22 锂电专用设备板块重挫，龙鑫智能跌超18%，骄成超声、星云股份、杭可科技、利元亨等跟跌。",
+          "tags": [
+            "快讯"
+          ]
+        },
+        {
+          "content": "骄成超声：江苏世纪同仁律师事务所关于上海骄成超声波技术股份有限公司2026年第三次临时股东会的法律意见书",
+          "tags": [
+            "重要公告"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 520517440.41,
+      "revenue_yoy": 0.27526,
+      "operating_profit": 97901473.56,
+      "operating_profit_yoy": 6.824508,
+      "net_profit": 86964078.78,
+      "net_profit_yoy": 3.361346,
+      "gross_profit": 338621908.99,
+      "gross_profit_yoy": 0.614836,
+      "cogs": 181895531.42,
+      "gross_margin": 65.05,
+      "pe_forward": null,
+      "valuation_history_days": 439,
+      "valuation_history_from": "20240927",
+      "current_price": 140.53,
+      "price": 140.53,
+      "ma5": 152.94,
+      "ma10": 158.92,
+      "ma20": 185.32,
+      "dist_ma5_pct": -8.1,
+      "dist_ma10_pct": -11.6,
+      "dist_ma20_pct": -24.2,
+      "iv_proxy": {
+        "primary_name": "科创50",
+        "iv_rank": 0.7756,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 5.0,
+        "pct_float": 3.08,
+        "chg5_pct": 6.11,
+        "net5_repay_days": 1,
+        "signal": "adding"
+      }
+    },
+    {
+      "code": "300373.SZ",
+      "fetch_time": "2026-07-29T11:37:43+0800",
+      "name": "扬杰科技",
+      "pe": 33.0139,
+      "pb": 4.6946,
+      "ps_ttm": 5.8908,
+      "pcf_ttm": 27.9977,
+      "valuation_percentile": 50.52,
+      "total_shares": 543347787,
+      "industries": [
+        {
+          "name": "电子",
+          "level": 1
+        },
+        {
+          "name": "半导体",
+          "level": 2
+        },
+        {
+          "name": "分立器件",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "TMT指数",
+        "科技龙头指数",
+        "双创100指数",
+        "华为平台指数",
+        "5G指数",
+        "半导体产业指数",
+        "半导体精选指数",
+        "集成电路指数",
+        "GDR指数",
+        "中小创蓝筹指数",
+        "晶圆产业指数",
+        "华为合作半导体企业指数",
+        "IGBT指数",
+        "汽车芯片指数"
+      ],
+      "score_company": 8.2,
+      "score_trend": 7.2,
+      "score_value": 5.7,
+      "highlights": [
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 21% ，利润成长性强。"
+        },
+        {
+          "tag": "盈利",
+          "text": "近5年，净资产收益率为 14% ，投入资本回报率为 12% ，盈利能力很强。"
+        },
+        {
+          "tag": "分红",
+          "text": "近5年，股息收益率均值达到 1.2% ，现金分红较高。"
+        },
+        {
+          "tag": "公募",
+          "text": "公募基金持股 2.9% ，较受内资机构青睐。"
+        }
+      ],
+      "risks": [],
+      "events": [
+        {
+          "content": "预计2026/08/22发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-22"
+        },
+        {
+          "content": "15:00 今天大涨的原因可能是扬杰科技发布2026年上半年业绩预告，预计净利同比增长20%-40%，表明公司半导体器件业务盈利能力和业绩预期显著改善。",
+          "tags": [
+            "快讯",
+            "大涨原因"
+          ]
+        },
+        {
+          "content": "17:33 扬杰科技披露2026年半年度业绩预告，预计上半年归母净利润为7.22亿元至8.42亿元，同比增长20.00%至40.00%；扣非净利润为7.00亿元至8.20亿元，同比增长25.21%至46.72%。公司上半年营业收入同比增长约30%，主要受功率半导体行业景气度上行、AI服务器及新能源汽车等需求释放驱动。汽车电子业务上半年收入同比增幅超100%，SiC碳化硅业务收入同比接近翻倍。公司目前拥有扬州6英寸车规SiC晶圆产线，七号厂车规级功率模块封装项目预计下半年启动设备调试，越南6英寸SiC晶圆工厂计划2027年一季度量产。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "公司发布2026半年报预告，股价盘中下跌 -8.03%",
+          "tags": [
+            "股价下跌"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 5347737516.95,
+      "revenue_yoy": 0.208906,
+      "operating_profit": 1131627914.34,
+      "operating_profit_yoy": 0.448632,
+      "net_profit": 965260944.26,
+      "net_profit_yoy": 0.442554,
+      "gross_profit": 1873671359.97,
+      "gross_profit_yoy": 0.365278,
+      "cogs": 3474066156.98,
+      "gross_margin": 35.04,
+      "pe_forward": null,
+      "valuation_history_days": 299,
+      "valuation_history_from": "20210729",
+      "current_price": 84.8,
+      "price": 84.8,
+      "ma5": 91.61,
+      "ma10": 94.38,
+      "ma20": 113.94,
+      "dist_ma5_pct": -7.4,
+      "dist_ma10_pct": -10.2,
+      "dist_ma20_pct": -25.6,
+      "iv_proxy": {
+        "primary_name": "创业板ETF",
+        "iv_rank": 0.8312,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 15.51,
+        "pct_float": 3.37,
+        "chg5_pct": -9.83,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "688401.SH",
+      "fetch_time": "2026-07-29T11:37:43+0800",
+      "name": "路维光电",
+      "pe": 45.2696,
+      "pb": 4.741,
+      "ps_ttm": 10.0438,
+      "pcf_ttm": 41.6026,
+      "valuation_percentile": 79.15,
+      "total_shares": 205369700,
+      "industries": [
+        {
+          "name": "电子",
+          "level": 1
+        },
+        {
+          "name": "半导体",
+          "level": 2
+        },
+        {
+          "name": "半导体材料",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "TMT指数",
+        "专精特新小巨人主题指数",
+        "半导体精选指数",
+        "专精特新小巨人指数",
+        "可转债正股指数",
+        "IPO现场检查指数"
+      ],
+      "score_company": 7.6,
+      "score_trend": 7.6,
+      "score_value": 4.5,
+      "highlights": [
+        {
+          "tag": "成长",
+          "text": "近3年营业收入每年增长 25% ，最新季度归母净利润同比增长 39% ，成长能力很强。"
+        },
+        {
+          "tag": "ROE",
+          "text": "近5年，净资产收益率为 12% ，获取收益的能力较强。"
+        },
+        {
+          "tag": "净现",
+          "text": "近5年，净现比达到 150% ，净利润现金含量较高。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 4.6% ，未来产能扩张后，营收有望进一步增长。"
+        }
+      ],
+      "risks": [],
+      "events": [
+        {
+          "content": "2027/01/15解禁1202.02万股，占总股本5.85%",
+          "tags": [
+            "限售股票解禁"
+          ],
+          "date": "2027-01-15"
+        },
+        {
+          "content": "预计2026/08/26发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-26"
+        },
+        {
+          "content": "07:50 7月27日，存储芯片企业长鑫科技在科创板上市。上市首日收盘报49元，较发行价上涨465.82%，总市值达3.28万亿元，全天成交额达1412亿元。长鑫科技目前已打通DRAM全链条，产品覆盖DDR与LPDDR序列。针对高端存储领域，公司正布局HBM及存算一体等技术，并计划将IPO募资中近一半金额用于存储器产线技术升级，90亿元用于前沿技术攻关。公司董事长朱一明表示，未来将持续拓展服务器等高端市场及海外市场。\n长鑫科技上市带动了产业链协同。澜起科技、拓荆科技等合作伙伴参与战略配售。路维光电相关负责人表示，长鑫科技的产能建设将带动半导体掩膜版等配套环节需求。北方华创与中微公司等设备厂商也在持续布局存储工艺相关设备。针对行业周期性波动风险，朱一明表示，公司将通过产能建设、产品研发和工艺提升，增强长期经营能力与抗风险能力。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "路维光电：深圳市路维光电股份有限公司2026年度向特定对象发行股票上市公告书",
+          "tags": [
+            "重要公告"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 827000185.91,
+      "revenue_yoy": 0.372465,
+      "operating_profit": 198550012.1,
+      "operating_profit_yoy": 0.435106,
+      "net_profit": 171750546.26,
+      "net_profit_yoy": 0.413717,
+      "gross_profit": 286227171.54,
+      "gross_profit_yoy": 0.377143,
+      "cogs": 540773014.37,
+      "gross_margin": 34.61,
+      "pe_forward": null,
+      "valuation_history_days": 467,
+      "valuation_history_from": "20240819",
+      "current_price": 64.35,
+      "price": 64.35,
+      "ma5": 66.09,
+      "ma10": 66.9,
+      "ma20": 78.47,
+      "dist_ma5_pct": -2.6,
+      "dist_ma10_pct": -3.8,
+      "dist_ma20_pct": -18.0,
+      "iv_proxy": {
+        "primary_name": "科创50",
+        "iv_rank": 0.7756,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 5.88,
+        "pct_float": 4.73,
+        "chg5_pct": -1.34,
+        "net5_repay_days": 2,
+        "signal": "neutral"
+      }
+    },
+    {
+      "code": "688331.SH",
+      "fetch_time": "2026-07-29T11:37:45+0800",
+      "name": "荣昌生物",
+      "pe": 51.5507,
+      "pb": 16.9515,
+      "ps_ttm": 19.6947,
+      "pcf_ttm": 263.6473,
+      "valuation_percentile": 47.61,
+      "total_shares": 564477483,
+      "industries": [
+        {
+          "name": "医药生物",
+          "level": 1
+        },
+        {
+          "name": "生物制品",
+          "level": 2
+        },
+        {
+          "name": "其他生物制品",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "双创100指数",
+        "贷款回购指数",
+        "大消费指数",
+        "股权激励指数",
+        "创新药指数",
+        "生物科技等权指数",
+        "单克隆抗体指数",
+        "生物制品精选指数"
+      ],
+      "score_company": 7.6,
+      "score_trend": 7.2,
+      "score_value": 6.6,
+      "highlights": [
+        {
+          "tag": "龙头",
+          "text": "公司为 其他生物制品 行业龙头企业。"
+        },
+        {
+          "tag": "成长",
+          "text": "近3年营业收入每年增长 62% ，最新季度归母净利润同比增长 229% ，成长能力很强。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 9.2% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 2.7% ，较受外资机构青睐；公募基金持股 28% ，很受内资机构青睐。"
+        },
+        {
+          "tag": "回购",
+          "text": "公司公告自2026年07月20日起，拟回购不超过 5000万元 ，回购价格不超过 149元/股 。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年07月06日 至今陷入调整，资金有出逃可能。"
+        },
+        {
+          "tag": "收益",
+          "text": "近12月，经营活动净收益占利润总额 21% ，扣非净利润占净利润 22% ，收益质量很低。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/25发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-25"
+        },
+        {
+          "content": "10:37 7月27日早盘，科创新药板块震荡走高。科创创新药ETF汇添富（589120）盘中涨幅超3%。资金面上，该ETF近期持续获资金净申购，最新融资余额突破4200万元。成分股方面，君实生物、皓元医药、荣昌生物、泽璟制药、艾力斯、百济神州、百利天恒、益方生物、博瑞医药等盘中上涨。百利天恒宣布其注射用T-Bren及BL-B01D1在胆道癌适应症的III期临床试验均已完成首例受试者入组。英矽智能公告称，其泛TEAD抑制剂ISM6331的I期临床数据获2026年ESMO年会接收。2026年ESMO大会中国创新药相关报告数量较去年增长，恒瑞医药、翰森制药、信达生物、康方生物、石药集团、齐鲁制药、君实生物、维立志博、基石药业等企业均有项目入选。\n东吴证券指出，多款ADC及PD-1/VEGF双抗产品将在今年ESMO披露数据。此外，创新药企中报预告密集披露：康诺亚预计上半年收入增长，利润不低于12亿元；艾力斯预计上半年归母净利润同比增长46.5%；美迪西预计上半年实现扭亏为盈。兴业证券认为，在政策支持、创新升级及出海常态化背景下，创新药行业景气度持续验证。\n风险提示：基金投资存在风险，二级市场交易价格存在溢价风险。科创创新药ETF汇添富属于较高风险等级（R4）产品，适合成长型（C4）及以上投资者。科创板股票涨跌幅限制比例为20%，业绩波动可能性较大。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "13:46 国家药监局数据显示，今年上半年我国批准上市38个创新药，其中11个为新靶点、新机制国产创新药；另批准42个创新医疗器械。我国生物医药产业规模位居全球第二，在研创新药管线约占全球总量的30%。荣昌生物制药（烟台）股份有限公司研发的泰它西普获批新适应症，实现治疗领域全球首创。\n微创医疗旗下旋律医疗研发的冠脉旋磨治疗系统于2024年12月获批上市，目前已在150多家医院完成超600例临床应用。北京中关村生命科学园汇集近1000家生物医药企业，当地通过“政府引导+社会资本参与”模式，设立总规模超217亿元的医药健康产业基金，并推动多家医院支持企业开展临床试验。\n上海械谷创新医疗器械产业园采取产医融合模式，通过共享实验室和产品注册指导服务降低企业成本。全国层面，药品医疗器械审评审批制度改革持续推进，创新药临床试验审批时间已从10年前的14个月缩短至30日。\n专家建议生物医药企业应强化源头创新，避免同质化竞争，并加强产学研深度融合。国家药监局表示，将持续优化审评审批机制，强化技术指导，缩短临床试验和上市审批时间，支持更多创新产品上市。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "公司发布回购公告，股价盘中上涨 8.27% ，股价收盘涨幅 6.12%",
+          "tags": [
+            "股价上涨"
+          ]
+        },
+        {
+          "content": "回购总金额不超过5000万元，回购最高价不超过149元/股 （预案）",
+          "tags": [
+            "公司回购流通股"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 1719833029.78,
+      "revenue_yoy": 0.422673,
+      "operating_profit": -537269154.58,
+      "operating_profit_yoy": 0.491156,
+      "net_profit": -550700575.38,
+      "net_profit_yoy": 0.486012,
+      "gross_profit": 1449239580.2,
+      "gross_profit_yoy": 0.503159,
+      "cogs": 270593449.58,
+      "gross_margin": 84.27,
+      "pe_forward": null,
+      "valuation_history_days": 282,
+      "valuation_history_from": "20240401",
+      "current_price": 119.6,
+      "price": 119.6,
+      "ma5": 122.72,
+      "ma10": 125.97,
+      "ma20": 130.39,
+      "dist_ma5_pct": -2.5,
+      "dist_ma10_pct": -5.1,
+      "dist_ma20_pct": -8.3,
+      "iv_proxy": {
+        "primary_name": "科创50",
+        "iv_rank": 0.7756,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 9.62,
+        "pct_float": 2.26,
+        "chg5_pct": -0.12,
+        "net5_repay_days": 2,
+        "signal": "neutral"
+      }
+    },
+    {
+      "code": "603156.SH",
+      "fetch_time": "2026-07-29T11:37:45+0800",
+      "name": "养元饮品",
+      "pe": 31.6874,
+      "pb": 5.2216,
+      "ps_ttm": 7.4866,
+      "pcf_ttm": 25.0679,
+      "valuation_percentile": 97.36,
+      "total_shares": 1260277566,
+      "industries": [
+        {
+          "name": "食品饮料",
+          "level": 1
+        },
+        {
+          "name": "饮料乳品",
+          "level": 2
+        },
+        {
+          "name": "软饮料",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "长江存储指数"
+      ],
+      "score_company": 7.5,
+      "score_trend": 7.3,
+      "score_value": 3.4,
+      "highlights": [
+        {
+          "tag": "龙头",
+          "text": "公司为 软饮料 行业龙头企业。"
+        },
+        {
+          "tag": "业绩",
+          "text": "2026年04月27日，业绩超预期引发股价大幅上涨，当日收涨 6.74% 。"
+        },
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 26% ，利润成长性强。"
+        },
+        {
+          "tag": "盈利",
+          "text": "近5年，净资产收益率为 15% ，投入资本回报率为 18% ，盈利能力很强。"
+        },
+        {
+          "tag": "净现",
+          "text": "近5年，净现比达到 113% ，净利润现金含量较高。"
+        },
+        {
+          "tag": "收现",
+          "text": "近5年，收现比达到 110% ，销售收入现金含量较强。"
+        },
+        {
+          "tag": "分红",
+          "text": "近5年，股息收益率均值达到 6.3% ，现金分红极高。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月01日大跌 -3.81% ，且成交额为近20日均值的 1.53倍 ，抛压很重。"
+        },
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年05月19日 至今陷入调整，资金有出逃可能。"
+        },
+        {
+          "tag": "评级",
+          "text": "近3月，没有机构发布研究报告，机构关注度低。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/22发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-22"
+        },
+        {
+          "content": "16:44 汤臣倍健发布公告披露，出资1.3亿元间接持有DeepSeek 0.04%股权。开润股份亦披露出资4000万元持有DeepSeek 0.0114%股权。据测算，DeepSeek本轮估值约在3250亿至3509亿元区间。自今年4月起，汤臣倍健已布局Kimi、DeepSeek、阶跃星辰等大模型企业及两家芯片公司，合计投入约4.5亿元。\n汤臣倍健通过投资砺思星灵基金间接参与DeepSeek融资。砺思星灵由Monolith砺思资本管理，合伙人包括多家国资及产业资本。汤臣倍健通过三层架构穿透持有DeepSeek股权。此外，汤臣倍健还通过关联人脉参与了月之暗面的融资。\n汤臣倍健以自有资金认购月之暗面D轮优先股，持股0.11%，并追加投资合计持有0.12%股权。公告显示，因公司实控人梁允超亲属孙晋瑜间接持有标的公司股权，该交易构成关联交易。此外，汤臣倍健还通过基金投资了阶跃星辰、XG TECH及原粒半导体。截至2025年末，公司货币资金为24.49亿元，资产负债率为19.95%。\n消费企业跨界AI现象频现，莲花味精、养元饮品、国投中鲁等公司均有相关布局。部分企业如莲花味精在算力投入后出现资金周转压力，且算力服务收入占比较低。市场对于传统企业跨界AI的风险及协同效应保持关注。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "17:58 养元饮品董事长姚奎章表示，公司正通过供给侧改革应对消费变迁。在稳固“六个核桃”基本盘方面，公司将持续挖掘核桃营养价值，通过产品规格调整推动产品日常化消费，并推行“3+6”全域深度分销模式，在稳固传统渠道的同时拓展新兴渠道。\n在增量业务上，养元饮品推出“六个核桃植物奶”系列，旨在解决动物蛋白摄入的健康顾虑。对于代理业务，姚奎章强调其仅为渠道能力的变现，公司主业仍聚焦核桃植物蛋白产品。此外，公司对外投资遵循审慎原则，确保不影响主业经营。\n姚奎章表示，公司重视投资者回报，坚持稳定的现金分红政策。未来三到五年，公司将继续深耕核桃饮品主业与植物基赛道，致力于提升经营质量，追求长期稳健发展。",
+          "tags": [
+            "资讯"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 3905326394.37,
+      "revenue_yoy": -0.076436,
+      "operating_profit": 1418722265.57,
+      "operating_profit_yoy": -0.095856,
+      "net_profit": 1119043029.7,
+      "net_profit_yoy": -0.089482,
+      "gross_profit": 1740516577.9,
+      "gross_profit_yoy": -0.115416,
+      "cogs": 2164809816.47,
+      "gross_margin": 44.57,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 36.76,
+      "price": 36.76,
+      "ma5": 36.3,
+      "ma10": 36.75,
+      "ma20": 41.36,
+      "dist_ma5_pct": 1.3,
+      "dist_ma10_pct": 0.0,
+      "dist_ma20_pct": -11.1,
+      "iv_proxy": {
+        "primary_name": "300ETF",
+        "iv_rank": 0.6588,
+        "sizing": "selective"
+      },
+      "margin": {
+        "rzye_yi": 4.28,
+        "pct_float": 0.92,
+        "chg5_pct": -5.82,
+        "net5_repay_days": 5,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "300747.SZ",
+      "fetch_time": "2026-07-29T11:37:45+0800",
+      "name": "锐科激光",
+      "pe": 71.2599,
+      "pb": 4.9764,
+      "ps_ttm": 4.7441,
+      "pcf_ttm": 107.1214,
+      "valuation_percentile": 40.5,
+      "total_shares": 561600000,
+      "industries": [
+        {
+          "name": "机械设备",
+          "level": 1
+        },
+        {
+          "name": "自动化设备",
+          "level": 2
+        },
+        {
+          "name": "激光设备",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "TMT指数",
+        "先进制造指数",
+        "消费电子产业指数",
+        "人形机器人指数",
+        "央企新型工业化指数",
+        "激光指数",
+        "触板指数",
+        "航天科工系指数"
+      ],
+      "score_company": 7.2,
+      "score_trend": 5.0,
+      "score_value": 6.2,
+      "highlights": [
+        {
+          "tag": "业绩",
+          "text": "2026年07月21日，业绩超预期引发股价大幅上涨，当日收涨 14.7% 。"
+        },
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 108% ，利润成长性强。"
+        },
+        {
+          "tag": "公募",
+          "text": "公募基金持股 3.2% ，较受内资机构青睐。"
+        },
+        {
+          "tag": "增持",
+          "text": "近1月，管理层累计实际增持 3.6万股 ，占总股本比例 0.01% ，金额合计 113万元 。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年06月26日 至今陷入调整，资金有出逃可能。"
+        },
+        {
+          "tag": "收益",
+          "text": "近12月，扣非净利润占净利润 60% ，收益质量较低。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/27发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-27"
+        },
+        {
+          "content": "13:38 7月20日，锐科激光发布2026年半年度业绩快报。报告期内，公司实现营业总收入19.10亿元，同比增长14.75%；归母净利润1.58亿元，同比增长116.73%；扣非净利润同比大幅增长。公司正推进全产业链产线布局：武汉睿芯启动高功率掺杂特种光纤数字化生产线二期项目；上海国神光电建设超快激光器研发生产基地，预计2026年内投产；锐科新型光源产研基地一期项目进入全面建设阶段。\n2026上半年，锐科激光针对新能源、算力、低空经济、3D打印、医疗科研五大领域推出多款新品。新能源方面，推出RayWeld焊接解决方案及单模小型化风冷500W MOPA脉冲激光器；算力方面，布局特种光纤、超快激光器及500W连续绿光激光器；低空经济方面，迭代升级轻量化户外风冷3kW光纤激光器；3D打印方面，发布小型化500W增材制造专用光纤激光器。\n公司推出单模块1000W 1940nm掺铥光纤激光器，适用于泌尿外科手术、皮肤美容、精密塑料焊接及科研场景。随着三大产能项目投产及新品放量，公司将继续拓展高附加值市场。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "2026/07/21 陈星星(董事、高管)增持 2.62万股 ，类型为 竞价交易 ，成交均价为 31.7元/股 ，耗资 83.1万元 ，此次增持后的持股数为2.62万股",
+          "tags": [
+            "管理层增持"
+          ]
+        },
+        {
+          "content": "2026/07/21 邓先琨(高管、董秘)增持 9700股 ，类型为 竞价交易 ，成交均价为 31.2元/股 ，耗资 30.3万元 ，此次增持后的持股数为9700股",
+          "tags": [
+            "管理层增持"
+          ]
+        },
+        {
+          "content": "15:00 今天大涨的原因可能是公司2026上半年营收19.1亿元、归母净利润同比+116.73%，Q2净利环比+178%，受激光器需求回升、提质增效带动毛利率提升及减值减少。",
+          "tags": [
+            "快讯",
+            "大涨原因"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 2505678215.77,
+      "revenue_yoy": 0.066688,
+      "operating_profit": 127191232.53,
+      "operating_profit_yoy": 0.021014,
+      "net_profit": 129081619.12,
+      "net_profit_yoy": 0.036921,
+      "gross_profit": 493465473.61,
+      "gross_profit_yoy": -0.078134,
+      "cogs": 2012212742.16,
+      "gross_margin": 19.69,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 32.26,
+      "price": 32.26,
+      "ma5": 33.5,
+      "ma10": 33.29,
+      "ma20": 38.77,
+      "dist_ma5_pct": -3.7,
+      "dist_ma10_pct": -3.1,
+      "dist_ma20_pct": -16.8,
+      "iv_proxy": {
+        "primary_name": "创业板ETF",
+        "iv_rank": 0.8312,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 8.29,
+        "pct_float": 4.92,
+        "chg5_pct": -1.6,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "300811.SZ",
+      "fetch_time": "2026-07-29T11:37:45+0800",
+      "name": "铂科新材",
+      "pe": 53.0113,
+      "pb": 7.4503,
+      "ps_ttm": 12.0241,
+      "pcf_ttm": 70.8126,
+      "valuation_percentile": 71.74,
+      "total_shares": 406614701,
+      "industries": [
+        {
+          "name": "有色金属",
+          "level": 1
+        },
+        {
+          "name": "金属新材料",
+          "level": 2
+        },
+        {
+          "name": "磁性材料",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "TMT指数",
+        "华为平台指数",
+        "QFII重仓指数",
+        "英伟达产业链指数",
+        "中小创蓝筹指数",
+        "ASIC芯片指数",
+        "稀土永磁指数",
+        "金属非金属新材料精选指数"
+      ],
+      "score_company": 7.8,
+      "score_trend": 5.9,
+      "score_value": 5.2,
+      "highlights": [
+        {
+          "tag": "龙头",
+          "text": "公司为 磁性材料 行业龙头企业。"
+        },
+        {
+          "tag": "收入",
+          "text": "近3年，营业收入每年增长 18% ，收入成长性较强。"
+        },
+        {
+          "tag": "盈利",
+          "text": "近5年，净资产收益率为 14% ，投入资本回报率为 13% ，盈利能力很强。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 6.9% ，未来产能扩张后，营收有望进一步增长。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年06月22日大跌 -5.84% ，且成交额为近20日均值的 1.81倍 ，抛压很重。"
+        },
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年06月22日 至今陷入调整，资金有出逃可能。"
+        },
+        {
+          "tag": "收现",
+          "text": "近5年，收现比为 66% ，销售收入现金含量很低。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/26发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-26"
+        },
+        {
+          "content": "16:12 铂科新材主营合金软磁粉芯、AI芯片电感及定制合金软磁粉末，是全产业链垂直整合磁材企业。公司长期合作华为、比亚迪、阳光电源、ABB、台达、MPS、伟创力等海内外龙头，产品应用于AI算力、新能源车、光伏储能及工业电源等领域。公司销售以直销为主，2023年至2026年一季度，前五大客户营收占比在44.1%至47.5%之间，存在客户集中度较高的经营风险。公司由杜江华、周后强、阮佳林、罗志敏四人共同创立，四人合计持股超46%。2025年公司实施统一董事薪酬制度，执行董事薪酬标准调整，创始人收益主要来自股权分红与激励。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "15:00 今天大涨的原因可能是公司在港交所提交上市申请并由中信证券独家保荐，预计借助港股融资与国际知名保荐人提升铂科在软磁粉及磁芯产品的资金实力、市场认可度与扩张能力，从而提振投资者预期。",
+          "tags": [
+            "快讯",
+            "大涨原因"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 1300792094.49,
+      "revenue_yoy": 0.060294,
+      "operating_profit": 356383220.67,
+      "operating_profit_yoy": 0.050781,
+      "net_profit": 296811221.06,
+      "net_profit_yoy": 0.041402,
+      "gross_profit": 527162481.58,
+      "gross_profit_yoy": 0.05746,
+      "cogs": 773629612.91,
+      "gross_margin": 40.53,
+      "pe_forward": null,
+      "valuation_history_days": 277,
+      "valuation_history_from": "20211230",
+      "current_price": 59.64,
+      "price": 59.64,
+      "ma5": 63.6,
+      "ma10": 66.2,
+      "ma20": 77.36,
+      "dist_ma5_pct": -6.2,
+      "dist_ma10_pct": -9.9,
+      "dist_ma20_pct": -22.9,
+      "iv_proxy": {
+        "primary_name": "创业板ETF",
+        "iv_rank": 0.8312,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 11.12,
+        "pct_float": 5.59,
+        "chg5_pct": -2.29,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "002138.SZ",
+      "fetch_time": "2026-07-29T11:37:45+0800",
+      "name": "顺络电子",
+      "pe": 34.7506,
+      "pb": 5.8726,
+      "ps_ttm": 4.8153,
+      "pcf_ttm": 22.9505,
+      "valuation_percentile": 63.23,
+      "total_shares": 806318354,
+      "industries": [
+        {
+          "name": "电子",
+          "level": 1
+        },
+        {
+          "name": "元件",
+          "level": 2
+        },
+        {
+          "name": "被动元件",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "TMT指数",
+        "科技龙头指数",
+        "消费电子产业指数",
+        "华为平台指数",
+        "贷款回购指数",
+        "珠三角指数",
+        "新基建指数",
+        "5G指数",
+        "员工持股指数",
+        "元宇宙指数",
+        "AI手机指数",
+        "养老金指数",
+        "元宇宙主题指数",
+        "基站指数",
+        "智能手表指数",
+        "小米产业链指数",
+        "元件精选指数"
+      ],
+      "score_company": 8.5,
+      "score_trend": 5.2,
+      "score_value": 4.9,
+      "highlights": [
+        {
+          "tag": "收入",
+          "text": "近3年，营业收入每年增长 18% ，收入成长性较强。"
+        },
+        {
+          "tag": "盈利",
+          "text": "近5年，净资产收益率为 13% ，投入资本回报率为 11% ，盈利能力很强。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 3.9% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "预测",
+          "text": " 3家 机构预测，2026年-2028年营收和净利润每年增长均超过 15% ，未来成长较快。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 6.9% ，很受外资机构青睐；公募基金持股 4.9% ，很受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "偿债",
+          "text": "现金短债比为 0.20 ，货币资金对短期债务的保障很弱。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/07/31发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-07-31"
+        },
+        {
+          "content": "12:00 7月21日，A股PCB概念股集体反弹。截至半日收盘，波长光电、金禄电子、戈碧迦、中富电路、埃科光电、路维光电、昊志机电、国际复材、锐科激光、欧科亿、鼎泰高科、东威科技、斯迪克涨幅居前；顺络电子、宏和科技、江南新材、大族激光、大为股份、木林森涨停。中信建投研报指出，感光干膜是PCB电路图形转印的核心耗材，受益于AI服务器、数据中心及高速网络设备驱动，行业进入结构性增长周期。预计2026年至2030年感光干膜市场空间将持续增长，年均复合增长率约为9.4%。目前全球感光干膜市场由中国台湾及日本企业主导，随着头部PCB企业批量采用国产产品，内资感光干膜市场份额有望提升。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "11:02 元件板块短线拉升，顺络电子涨停，东山精密、风华高科、三环集团、麦捷科技、中富电路等纷纷走高。相关ETF方面，消费电子ETF汇添富（159178）涨3.59%，成交额1588.05万元，消费电子ETF富国（561100）涨5.01%，成交额6965.71万元。",
+          "tags": [
+            "快讯"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 5032025812.67,
+      "revenue_yoy": 0.199482,
+      "operating_profit": 991233575.19,
+      "operating_profit_yoy": 0.19198,
+      "net_profit": 873315516.03,
+      "net_profit_yoy": 0.241406,
+      "gross_profit": 1848764304.79,
+      "gross_profit_yoy": 0.181167,
+      "cogs": 3183261507.88,
+      "gross_margin": 36.74,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 41.68,
+      "price": 41.68,
+      "ma5": 43.25,
+      "ma10": 43.12,
+      "ma20": 51.95,
+      "dist_ma5_pct": -3.6,
+      "dist_ma10_pct": -3.3,
+      "dist_ma20_pct": -19.8,
+      "iv_proxy": {
+        "primary_name": "500ETF深",
+        "iv_rank": 0.857,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 13.97,
+        "pct_float": 4.43,
+        "chg5_pct": -2.27,
+        "net5_repay_days": 2,
+        "signal": "neutral"
+      }
+    },
+    {
+      "code": "301345.SZ",
+      "fetch_time": "2026-07-29T11:37:45+0800",
+      "name": "涛涛车业",
+      "pe": 28.788,
+      "pb": 7.2179,
+      "ps_ttm": 5.9833,
+      "pcf_ttm": 33.0952,
+      "valuation_percentile": 79.37,
+      "total_shares": 109049071,
+      "industries": [
+        {
+          "name": "汽车",
+          "level": 1
+        },
+        {
+          "name": "摩托车及其他",
+          "level": 2
+        },
+        {
+          "name": "摩托车",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "出海贸易指数",
+        "股权激励指数",
+        "设备更新指数",
+        "万得预增指数"
+      ],
+      "score_company": 9.5,
+      "score_trend": 7.9,
+      "score_value": 4.5,
+      "highlights": [
+        {
+          "tag": "成长",
+          "text": "近3年营业收入每年增长 36% ，最新季度归母净利润同比增长 42% ，成长能力很强。"
+        },
+        {
+          "tag": "盈利",
+          "text": "近5年，净资产收益率为 22% ，投入资本回报率为 19% ，盈利能力很强。"
+        },
+        {
+          "tag": "分红",
+          "text": "近3年，股息收益率均值达到 2.6% ，现金分红较高。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 6724万元 ，较上期增长 18% ，占2025年营收 1.7% ，在手订单充足。"
+        },
+        {
+          "tag": "预测",
+          "text": " 5家 机构预测，2026年-2028年营收和净利润每年增长均超过 25% ，未来成长较快。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 14% ，很受外资机构青睐；公募基金持股 10% ，很受内资机构青睐；2026年01月30日至2026年07月20日期间，股东户数减少 33% ，大资金买入。"
+        },
+        {
+          "tag": "强势",
+          "text": "近6月，股价涨幅超过A股市场 91% 的股票，走势较强。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "解禁",
+          "text": "2026年09月21日，解禁 4512.80万股 ，占总股本 41% ，若股东减持，股价或受影响。"
+        }
+      ],
+      "events": [
+        {
+          "content": "2026/09/21解禁4512.80万股，占总股本41.38%",
+          "tags": [
+            "限售股票解禁"
+          ],
+          "date": "2026-09-21"
+        },
+        {
+          "content": "预计2026/08/24发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-24"
+        },
+        {
+          "content": "06:23 截至7月22日，申万汽车行业89家A股上市车企披露2026年中期业绩预告。其中，30家企业业绩偏正面，占比34%。从盈利规模看，长城汽车、长安汽车、宁波华翔等上半年预计净利润居前；广汽集团、北汽蓝谷、赛力斯等预计亏损超15亿元。宁波华翔、立中集团、涛涛车业等预计净利润超过5亿元。其中，宁波华翔预计上半年归母净利润6.1亿元至6.9亿元，同比扭亏为盈。此外，一汽解放、西上海、青岛双星、新朋股份、宁波华翔、顺景科技等6家公司预计上半年净利润同比增长超过200%。一汽解放预计上半年归母净利润2.70亿元至3.20亿元，同比增长1273.64%至1528.02%。\n广汽集团预计上半年归母净亏损40.6亿元至45.7亿元，亏损规模同比扩大。公司表示，受国内市场竞争加剧、自主品牌销售投入加大、产品结构变动、原材料成本上涨及合资品牌经营承压等因素影响，利润同比下降。北汽蓝谷预计归母净亏损17.7亿元至19.7亿元，受益于整车销量提升及降本措施，实现减亏。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "2027/09/21解禁2850.00万股，占总股本26.14%",
+          "tags": [
+            "限售股票解禁"
+          ],
+          "date": "2027-09-21"
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 2772810512.76,
+      "revenue_yoy": 0.248897,
+      "operating_profit": 718420856.65,
+      "operating_profit_yoy": 0.860164,
+      "net_profit": 606541820.03,
+      "net_profit_yoy": 1.012653,
+      "gross_profit": 1173162973.8,
+      "gross_profit_yoy": 0.454977,
+      "cogs": 1599647538.96,
+      "gross_margin": 42.31,
+      "pe_forward": null,
+      "valuation_history_days": 326,
+      "valuation_history_from": "20250321",
+      "current_price": 240.73,
+      "price": 240.73,
+      "ma5": 247.72,
+      "ma10": 250.39,
+      "ma20": 246.04,
+      "dist_ma5_pct": -2.8,
+      "dist_ma10_pct": -3.9,
+      "dist_ma20_pct": -2.2,
+      "iv_proxy": {
+        "primary_name": "创业板ETF",
+        "iv_rank": 0.8312,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 3.82,
+        "pct_float": 4.53,
+        "chg5_pct": 4.08,
+        "net5_repay_days": 1,
+        "signal": "adding"
+      }
+    },
+    {
+      "code": "688183.SH",
+      "fetch_time": "2026-07-29T11:37:45+0800",
+      "name": "生益电子",
+      "pe": 42.5203,
+      "pb": 12.9065,
+      "ps_ttm": 7.0738,
+      "pcf_ttm": 35.5639,
+      "valuation_percentile": 74.02,
+      "total_shares": 837591234,
+      "industries": [
+        {
+          "name": "电子",
+          "level": 1
+        },
+        {
+          "name": "元件",
+          "level": 2
+        },
+        {
+          "name": "印制电路板",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "TMT指数",
+        "科技龙头指数",
+        "双创100指数",
+        "出海贸易指数",
+        "股权激励指数",
+        "电路板指数",
+        "元件精选指数"
+      ],
+      "score_company": 8.6,
+      "score_trend": 6.4,
+      "score_value": 4.8,
+      "highlights": [
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 101% ，利润成长性强。"
+        },
+        {
+          "tag": "盈利",
+          "text": "近5年，净资产收益率为 13% ，投入资本回报率为 11% ，盈利能力很强。"
+        },
+        {
+          "tag": "净现",
+          "text": "近5年，净现比达到 147% ，净利润现金含量较高。"
+        },
+        {
+          "tag": "产能",
+          "text": "在建工程占总资产 7.1% ，未来产能扩张后，营收有望进一步增长。"
+        },
+        {
+          "tag": "回购",
+          "text": "近6月，公司累计回购 56万股 ，占总股本比例 0.07% ，金额合计 5001万元 。"
+        }
+      ],
+      "risks": [],
+      "events": [
+        {
+          "content": "预计2026/08/15发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-15"
+        },
+        {
+          "content": "11:18 长江证券研报指出，PCB及CCL板块多家公司披露2026年半年度业绩预告。CCL端，生益科技预计归母净利润同比增长117%至131%。PCB端，沪电股份、深南电路、生益电子预计归母净利润均实现较快增长。按半年度预告区间测算，上述公司Q2归母净利润均较一季度环比提升，显示产业景气度持续验证。AI算力需求扩张及技术升级拉动了高多层、高密度、低损耗PCB需求，相关厂商业绩增长已体现需求向利润端传导。\n长江证券认为，铜价高位运行、电子布涨价及高频高速铜箔供应偏紧，推动覆铜板进入价格传导阶段，金安国纪、华正新材和生益科技通过提价、扩产及产品结构优化实现盈利提升。同时，服务器平台升级带动对高速覆铜板需求，行业正由需求扩张迈向量价共振，高阶PCB与高速CCL仍是核心受益方向。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "10:29 科创50指数跌幅扩大至3%，现报1753.32点。成分股中，源杰科技跌超10%，生益电子、佰维存储跌超7%。",
+          "tags": [
+            "快讯"
+          ]
+        },
+        {
+          "content": "公司发布2026半年报预告，股价盘中上涨 8.30% ，股价收盘涨幅 14.21%",
+          "tags": [
+            "股价上涨"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 6828942763.59,
+      "revenue_yoy": 1.147914,
+      "operating_profit": 1259167039.02,
+      "operating_profit_yoy": 5.634878,
+      "net_profit": 1114677828.12,
+      "net_profit_yoy": 4.976069,
+      "gross_profit": 2183686365.16,
+      "gross_profit_yoy": 2.198296,
+      "cogs": 4645256398.43,
+      "gross_margin": 31.98,
+      "pe_forward": null,
+      "valuation_history_days": 276,
+      "valuation_history_from": "20230227",
+      "current_price": 89.37,
+      "price": 89.37,
+      "ma5": 98.13,
+      "ma10": 107.29,
+      "ma20": 116.42,
+      "dist_ma5_pct": -8.9,
+      "dist_ma10_pct": -16.7,
+      "dist_ma20_pct": -23.2,
+      "iv_proxy": {
+        "primary_name": "科创50",
+        "iv_rank": 0.7756,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 17.5,
+        "pct_float": 2.34,
+        "chg5_pct": -5.5,
+        "net5_repay_days": 2,
+        "signal": "neutral"
+      }
+    },
+    {
+      "code": "300438.SZ",
+      "fetch_time": "2026-07-29T11:37:46+0800",
+      "name": "鹏辉能源",
+      "pe": 54.3316,
+      "pb": 5.5081,
+      "ps_ttm": 2.0777,
+      "pcf_ttm": 28.3062,
+      "valuation_percentile": 51.43,
+      "total_shares": 503343360,
+      "industries": [
+        {
+          "name": "电力设备",
+          "level": 1
+        },
+        {
+          "name": "电池",
+          "level": 2
+        },
+        {
+          "name": "锂电池",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "QFII重仓指数",
+        "股权激励指数",
+        "锂电池指数",
+        "养老金指数",
+        "储能指数",
+        "固态电池指数",
+        "预期提升指数",
+        "钠离子电池指数",
+        "动力电池指数",
+        "TWS耳机指数",
+        "扭亏指数",
+        "ETC指数"
+      ],
+      "score_company": 8.3,
+      "score_trend": 7.1,
+      "score_value": 6.7,
+      "highlights": [
+        {
+          "tag": "利润",
+          "text": "最新季度，归母净利润同比增长 1278% ，利润成长性强。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 14亿元 ，较上期增长 70% ，占2025年营收 12% ，在手订单充足。"
+        },
+        {
+          "tag": "评级",
+          "text": "近90天， 8家 机构给出评级，其中 88% 为“买入”，距目标价的上涨空间为 98% 。"
+        },
+        {
+          "tag": "预测",
+          "text": " 5家 机构预测，2026年-2028年营收和净利润每年增长均超过 30% ，未来成长很快。"
+        },
+        {
+          "tag": "股东",
+          "text": "北向资金持股 5.3% ，很受外资机构青睐；公募基金持股 13% ，很受内资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年05月21日 至今陷入调整，资金有出逃可能。"
+        },
+        {
+          "tag": "收现",
+          "text": "近5年，收现比为 69% ，销售收入现金含量很低。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/28发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-28"
+        },
+        {
+          "content": "鹏辉能源：北京市中伦（深圳）律师事务所关于广州鹏辉能源科技股份有限公司2026年第二次临时股东会决议的法律意见书",
+          "tags": [
+            "重要公告"
+          ]
+        },
+        {
+          "content": "18:15 7月23日，电池产业链领涨。新能源电池ETF（159071）场内价格上涨3.93%。成份股中，明阳电气、金盘科技涨超10%，德业股份涨停，鹏辉能源涨超9%，阳光电源涨超7%，固德威、伊戈尔、上能电器涨超6%，亿纬锂能涨超4%。消息面上，发改委、能源局印发《可再生能源发展“十五五”规划》，提出到2030年可再生能源发电总装机达到35亿千瓦左右，风电和太阳能发电总装机达到28亿千瓦以上。东吴证券研报分析，随着容量电价机制落地及全球储能需求增长，储能产业链景气度有望持续。\n新能源电池ETF（159071）由华宝基金管理，跟踪国证新能源电池指数，风险等级为R3-中风险。投资人应阅读基金法律文件，了解风险收益特征。基金过往业绩不预示未来表现。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "10:22 2026年7月23日，受资产重组、业绩改善及股东增持等因素影响，新能股份盘中触及涨停。受此提振，新能源电池指数盘中上涨1.036%。储能电池ETF易方达(159566)盘中涨幅1.228%，成交额4365万元。该ETF前十大权重股包括阳光电源、亿纬锂能、宁德时代等。持仓方面，2026年二季度新进重仓股为海博思创、鹏辉能源。资金面上，储能电池ETF易方达近5个交易日主力资金累计净流入1182万元。东吴证券在《储能2026年中策略》中指出，全球储能市场需求增长，当前新能源电池指数市盈率为24.91倍。",
+          "tags": [
+            "资讯"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 7580860529.35,
+      "revenue_yoy": 0.342255,
+      "operating_profit": 104220164.37,
+      "operating_profit_yoy": 6.778252,
+      "net_profit": 104734476.67,
+      "net_profit_yoy": 2.384669,
+      "gross_profit": 1129603681.34,
+      "gross_profit_yoy": 0.422118,
+      "cogs": 6451256848.01,
+      "gross_margin": 14.9,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 61.25,
+      "price": 61.25,
+      "ma5": 60.49,
+      "ma10": 61.66,
+      "ma20": 68.14,
+      "dist_ma5_pct": 1.3,
+      "dist_ma10_pct": -0.7,
+      "dist_ma20_pct": -10.1,
+      "iv_proxy": {
+        "primary_name": "创业板ETF",
+        "iv_rank": 0.8312,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 7.92,
+        "pct_float": 3.2,
+        "chg5_pct": -12.0,
+        "net5_repay_days": 3,
+        "signal": "deleveraging"
+      }
+    },
+    {
+      "code": "601001.SH",
+      "fetch_time": "2026-07-29T11:37:47+0800",
+      "name": "晋控煤业",
+      "pe": 16.5065,
+      "pb": 1.4686,
+      "ps_ttm": 1.9929,
+      "pcf_ttm": 6.969,
+      "valuation_percentile": 71.28,
+      "total_shares": 1673700000,
+      "industries": [
+        {
+          "name": "煤炭",
+          "level": 1
+        },
+        {
+          "name": "煤炭开采",
+          "level": 2
+        },
+        {
+          "name": "动力煤",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "HALO指数",
+        "养老金指数",
+        "煤电重组指数",
+        "动力煤指数",
+        "煤炭指数",
+        "煤炭开采精选指数",
+        "山西省国资指数",
+        "触板指数"
+      ],
+      "score_company": 8.3,
+      "score_trend": 7.7,
+      "score_value": 4.9,
+      "highlights": [
+        {
+          "tag": "业绩",
+          "text": "2026年04月28日，业绩超预期引发股价大幅上涨，当日收涨 6.35% 。"
+        },
+        {
+          "tag": "ROIC",
+          "text": "近5年，投入资本回报率为 19% ，创造价值的能力很强。"
+        },
+        {
+          "tag": "净现",
+          "text": "近5年，净现比达到 154% ，净利润现金含量较高。"
+        },
+        {
+          "tag": "股东",
+          "text": "公募基金持股 5.4% ，很受内资机构青睐；2026年03月31日至2026年07月20日期间，股东户数减少 32% ，大资金买入。"
+        },
+        {
+          "tag": "强势",
+          "text": "近6月，股价涨幅超过A股市场 91% 的股票，走势较强。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "调整",
+          "text": "前期股价强势， 2026年06月05日 至今陷入调整，资金有出逃可能。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/28发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-28"
+        },
+        {
+          "content": "11:47 7月21日，A股科技股集体反攻。截至午盘，上证指数涨0.62%，深证成指涨3.41%，创业板指涨5.20%，科创50指数涨6.94%。盘面上，半导体、稀土、能源金属、贵金属、通信设备等板块上涨，煤炭、白酒股下跌。半导体板块中，格科微、臻宝科技、托伦斯涨停，强一股份、华虹宏力、东微半导等涨超10%。CPO概念股中，共进股份、紫光股份涨停，中富电路、联讯仪器等涨超10%。稀土股中，盛和资源涨超5%，中稀有色、中国稀土涨超4%，北方稀土涨超2%。煤炭股中，辽宁能源跌超6%，新大洲A、晋控煤业、安泰集团跌超5%。白酒股中，皇台酒业跌超5%，金种子酒跌超4%，泸州老窖跌超3%。平安证券指出，短期全球权益市场呈现科技调整、风格均衡特征，资金面去杠杆是核心矛盾，AI行情走向是后市关键。华西证券表示，A股市场韧性有基本面支撑，短期波动不改变长期向好趋势，国内AI产业链、资源品维持高景气度。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "15:38 7月20日，A股市场震荡整理。截至收盘，上证指数涨0.85%报3796.28点，深证成指跌0.71%报13610.23点，创业板指涨0.42%报3443.10点，北证50跌2.9%报1045.20点。全市场超3700家个股下跌，三市成交额27181亿元，较上一日增加465亿元。板块方面，油气开采、煤炭开采加工、白酒板块涨幅居前；电子化学品、元件、存储芯片板块跌幅居前。个股方面，中曼石油、博迈科、中国海油、郑州煤电、兖矿能源、大有能源、华电能源、淮北矿业、晋控煤业、中煤能源、古井贡酒涨停。",
+          "tags": [
+            "资讯"
+          ]
+        },
+        {
+          "content": "2026/07/01 王智君(监事)减持 6700股 ，类型为 二级市场买卖 ，成交均价为 17.8元/股 ，套现 11.9万元 ，此次减持后的持股数为2.40万股",
+          "tags": [
+            "管理层减持"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 9324862214.15,
+      "revenue_yoy": -0.169915,
+      "operating_profit": 2296524962.56,
+      "operating_profit_yoy": -0.415539,
+      "net_profit": 1699561627.2,
+      "net_profit_yoy": -0.42892,
+      "gross_profit": 3483826625.93,
+      "gross_profit_yoy": -0.325883,
+      "cogs": 5841035588.22,
+      "gross_margin": 37.36,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 16.49,
+      "price": 16.49,
+      "ma5": 16.97,
+      "ma10": 17.42,
+      "ma20": 17.27,
+      "dist_ma5_pct": -2.8,
+      "dist_ma10_pct": -5.3,
+      "dist_ma20_pct": -4.5,
+      "iv_proxy": {
+        "primary_name": "300ETF",
+        "iv_rank": 0.6588,
+        "sizing": "selective"
+      },
+      "margin": {
+        "rzye_yi": 1.79,
+        "pct_float": 0.65,
+        "chg5_pct": -0.46,
+        "net5_repay_days": 2,
+        "signal": "neutral"
+      }
+    },
+    {
+      "code": "002056.SZ",
+      "fetch_time": "2026-07-29T11:37:47+0800",
+      "name": "横店东磁",
+      "pe": 18.6349,
+      "pb": 3.2959,
+      "ps_ttm": 1.4513,
+      "pcf_ttm": 9.6911,
+      "valuation_percentile": 47.0,
+      "total_shares": 1626712074,
+      "industries": [
+        {
+          "name": "电力设备",
+          "level": 1
+        },
+        {
+          "name": "光伏设备",
+          "level": 2
+        },
+        {
+          "name": "光伏电池组件",
+          "level": 3
+        }
+      ],
+      "concepts": [
+        "消费电子产业指数",
+        "员工持股指数",
+        "QFII重仓指数",
+        "新材料指数",
+        "新能源汽车指数",
+        "锂电池指数",
+        "苹果指数",
+        "特斯拉指数",
+        "磷酸铁锂电池指数",
+        "新能源指数",
+        "光伏指数",
+        "能源出海指数",
+        "无线充电指数",
+        "电源设备精选指数",
+        "三元锂电池指数",
+        "稀土永磁指数",
+        "磁悬浮列车指数",
+        "钙钛矿电池指数",
+        "触板指数"
+      ],
+      "score_company": 8.5,
+      "score_trend": 6.6,
+      "score_value": 6.2,
+      "highlights": [
+        {
+          "tag": "盈利",
+          "text": "近5年，净资产收益率为 18% ，投入资本回报率为 16% ，盈利能力很强。"
+        },
+        {
+          "tag": "分红",
+          "text": "近5年，股息收益率均值达到 2.8% ，现金分红极高。"
+        },
+        {
+          "tag": "订单",
+          "text": "合同负债 6.5亿元 ，较上期增长 36% ，占2025年营收 2.9% ，在手订单充足。"
+        },
+        {
+          "tag": "北向",
+          "text": "北向资金持股 6.1% ，很受外资机构青睐。"
+        }
+      ],
+      "risks": [
+        {
+          "tag": "抛压",
+          "text": "2026年07月13日大跌 -9.98% ，股价跌停，抛压很重。"
+        }
+      ],
+      "events": [
+        {
+          "content": "预计2026/08/20发布中报",
+          "tags": [
+            "2026年中报"
+          ],
+          "date": "2026-08-20"
+        },
+        {
+          "content": "10:52 稀土永磁板块持续走低，争光股份跌超10%，中钢天源触及跌停，北方稀土、横店东磁、大地熊、中矿资源跟跌。",
+          "tags": [
+            "快讯"
+          ]
+        },
+        {
+          "content": "16:07 横店东磁7月1日在互动平台表示，公司现有光伏产品面向地面应用，目前没有太空光伏产品。（界面新闻）",
+          "tags": [
+            "快讯"
+          ]
+        }
+      ],
+      "report_period": "20250930",
+      "revenue": 17561698935.87,
+      "revenue_yoy": 0.293063,
+      "operating_profit": 2180995490.65,
+      "operating_profit_yoy": 1.153775,
+      "net_profit": 1808006456.6,
+      "net_profit_yoy": 0.971811,
+      "gross_profit": 3146659428.33,
+      "gross_profit_yoy": 0.522794,
+      "cogs": 14415039507.54,
+      "gross_margin": 17.92,
+      "pe_forward": null,
+      "valuation_history_days": 302,
+      "valuation_history_from": "20210729",
+      "current_price": 20.93,
+      "price": 20.93,
+      "ma5": 21.54,
+      "ma10": 22.7,
+      "ma20": 25.9,
+      "dist_ma5_pct": -2.8,
+      "dist_ma10_pct": -7.8,
+      "dist_ma20_pct": -19.2,
+      "iv_proxy": {
+        "primary_name": "500ETF深",
+        "iv_rank": 0.857,
+        "sizing": "tight"
+      },
+      "margin": {
+        "rzye_yi": 6.92,
+        "pct_float": 2.04,
+        "chg5_pct": 1.58,
+        "net5_repay_days": 3,
+        "signal": "adding"
+      }
+    }
+  ],
+  "active_positions": [],
+  "position_prices": {},
+  "missed_opportunity_prices": [
+    {
+      "code": "688630",
+      "name": "芯碁微装",
+      "recommended_date": "2026-07-28",
+      "recommended_price": null,
+      "recommendation": "WATCH",
+      "current_price": 333.0,
+      "return_pct": null
+    },
+    {
+      "code": "688629",
+      "name": "华丰科技",
+      "recommended_date": "2026-07-28",
+      "recommended_price": null,
+      "recommendation": "WATCH",
+      "current_price": 125.92,
+      "return_pct": null
+    },
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "recommended_date": "2026-07-28",
+      "recommended_price": null,
+      "recommendation": "WATCH",
+      "current_price": 338.85,
+      "return_pct": null
+    },
+    {
+      "code": "301536",
+      "name": "星宸科技",
+      "recommended_date": "2026-07-28",
+      "recommended_price": null,
+      "recommendation": "WATCH",
+      "current_price": 124.52,
+      "return_pct": null
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "recommended_date": "2026-07-28",
+      "recommended_price": null,
+      "recommendation": "WATCH",
+      "current_price": 15.44,
+      "return_pct": null
+    },
+    {
+      "code": "300285",
+      "name": "国瓷材料",
+      "recommended_date": "2026-07-28",
+      "recommended_price": null,
+      "recommendation": "WATCH",
+      "current_price": 56.87,
+      "return_pct": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "recommended_date": "2026-07-28",
+      "recommended_price": null,
+      "recommendation": "WATCH",
+      "current_price": 43.75,
+      "return_pct": null
+    },
+    {
+      "code": "688046",
+      "name": "药康生物",
+      "recommended_date": "2026-07-28",
+      "recommended_price": null,
+      "recommendation": "WATCH",
+      "current_price": 25.5,
+      "return_pct": null
+    },
+    {
+      "code": "603156",
+      "name": "养元饮品",
+      "recommended_date": "2026-07-27",
+      "recommended_price": null,
+      "recommendation": "WATCH",
+      "current_price": 35.84,
+      "return_pct": null
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "recommended_date": "2026-07-27",
+      "recommended_price": null,
+      "recommendation": "WATCH",
+      "current_price": 41.62,
+      "return_pct": null
+    },
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "recommended_date": "2026-07-27",
+      "recommended_price": null,
+      "recommendation": "WATCH",
+      "current_price": 83.27,
+      "return_pct": null
+    },
+    {
+      "code": "002396",
+      "name": "星网锐捷",
+      "recommended_date": "2026-07-27",
+      "recommended_price": null,
+      "recommendation": "WATCH",
+      "current_price": 25.52,
+      "return_pct": null
+    },
+    {
+      "code": "002080",
+      "name": "中材科技",
+      "recommended_date": "2026-07-27",
+      "recommended_price": null,
+      "recommendation": "WATCH",
+      "current_price": 42.62,
+      "return_pct": null
+    },
+    {
+      "code": "002192",
+      "name": "融捷股份",
+      "recommended_date": "2026-07-24",
+      "recommended_price": null,
+      "recommendation": "WATCH",
+      "current_price": 65.27,
+      "return_pct": null
+    }
+  ],
+  "iv_sentiment": {
+    "date": "2026-07-29",
+    "source": "options-learn backend (/api/history/iv-rank)",
+    "core_underlyings": [
+      "510050",
+      "510300",
+      "510500",
+      "588000",
+      "159915"
+    ],
+    "etf_iv_data": [
+      {
+        "underlying": "510050",
+        "lookback_days": 252,
+        "data_points": 225,
+        "data_points_filtered": 217,
+        "current_iv": 0.1801,
+        "is_live": false,
+        "iv_high": 0.2272,
+        "iv_low": 0.1137,
+        "iv_high_raw": 0.2625,
+        "iv_low_raw": 0.1137,
+        "iv_rank": 0.5851,
+        "iv_rank_raw": 0.4462,
+        "iv_percentile": 0.7005,
+        "iv_percentile_raw": 0.6756,
+        "outliers_removed": 8,
+        "outlier_details": [
+          {
+            "date": "2025-08-25",
+            "iv": 0.2287
+          },
+          {
+            "date": "2025-08-28",
+            "iv": 0.2286
+          },
+          {
+            "date": "2026-02-02",
+            "iv": 0.2471
+          },
+          {
+            "date": "2026-03-23",
+            "iv": 0.2291
+          },
+          {
+            "date": "2026-06-23",
+            "iv": 0.2503
+          },
+          {
+            "date": "2026-07-17",
+            "iv": 0.2443
+          },
+          {
+            "date": "2026-07-20",
+            "iv": 0.2333
+          },
+          {
+            "date": "2026-07-22",
+            "iv": 0.2625
+          }
+        ],
+        "sigma_range": [
+          0.1049,
+          0.228
+        ],
+        "name": "50ETF",
+        "desc": "大盘蓝筹",
+        "interpretation": "偏高 (市场谨慎，波动率偏贵)"
+      },
+      {
+        "underlying": "510300",
+        "lookback_days": 252,
+        "data_points": 225,
+        "data_points_filtered": 218,
+        "current_iv": 0.2041,
+        "is_live": false,
+        "iv_high": 0.2476,
+        "iv_low": 0.1201,
+        "iv_high_raw": 0.3137,
+        "iv_low_raw": 0.069,
+        "iv_rank": 0.6588,
+        "iv_rank_raw": 0.5521,
+        "iv_percentile": 0.789,
+        "iv_percentile_raw": 0.7733,
+        "outliers_removed": 7,
+        "outlier_details": [
+          {
+            "date": "2025-08-15",
+            "iv": 0.2599
+          },
+          {
+            "date": "2025-08-18",
+            "iv": 0.2694
+          },
+          {
+            "date": "2025-08-20",
+            "iv": 0.255
+          },
+          {
+            "date": "2026-04-16",
+            "iv": 0.069
+          },
+          {
+            "date": "2026-04-17",
+            "iv": 0.099
+          },
+          {
+            "date": "2026-07-17",
+            "iv": 0.3137
+          },
+          {
+            "date": "2026-07-20",
+            "iv": 0.2708
+          }
+        ],
+        "sigma_range": [
+          0.1096,
+          0.2484
+        ],
+        "name": "300ETF",
+        "desc": "沪深300",
+        "interpretation": "偏高 (市场谨慎，波动率偏贵)"
+      },
+      {
+        "underlying": "510500",
+        "lookback_days": 252,
+        "data_points": 225,
+        "data_points_filtered": 216,
+        "current_iv": 0.3128,
+        "is_live": false,
+        "iv_high": 0.3531,
+        "iv_low": 0.194,
+        "iv_high_raw": 0.4544,
+        "iv_low_raw": 0.107,
+        "iv_rank": 0.7467,
+        "iv_rank_raw": 0.5924,
+        "iv_percentile": 0.8565,
+        "iv_percentile_raw": 0.8311,
+        "outliers_removed": 9,
+        "outlier_details": [
+          {
+            "date": "2025-08-18",
+            "iv": 0.3616
+          },
+          {
+            "date": "2025-08-25",
+            "iv": 0.3612
+          },
+          {
+            "date": "2025-09-04",
+            "iv": 0.3769
+          },
+          {
+            "date": "2025-09-05",
+            "iv": 0.3575
+          },
+          {
+            "date": "2026-04-16",
+            "iv": 0.128
+          },
+          {
+            "date": "2026-04-17",
+            "iv": 0.107
+          },
+          {
+            "date": "2026-07-17",
+            "iv": 0.3612
+          },
+          {
+            "date": "2026-07-20",
+            "iv": 0.4544
+          },
+          {
+            "date": "2026-07-21",
+            "iv": 0.3659
+          }
+        ],
+        "sigma_range": [
+          0.1754,
+          0.3556
+        ],
+        "name": "500ETF",
+        "desc": "中证500",
+        "interpretation": "偏高 (市场谨慎，波动率偏贵)"
+      },
+      {
+        "underlying": "588000",
+        "lookback_days": 252,
+        "data_points": 225,
+        "data_points_filtered": 216,
+        "current_iv": 0.5391,
+        "is_live": false,
+        "iv_high": 0.6237,
+        "iv_low": 0.2467,
+        "iv_high_raw": 0.7788,
+        "iv_low_raw": 0.126,
+        "iv_rank": 0.7756,
+        "iv_rank_raw": 0.6328,
+        "iv_percentile": 0.8981,
+        "iv_percentile_raw": 0.8711,
+        "outliers_removed": 9,
+        "outlier_details": [
+          {
+            "date": "2025-08-29",
+            "iv": 0.6345
+          },
+          {
+            "date": "2026-04-16",
+            "iv": 0.145
+          },
+          {
+            "date": "2026-04-17",
+            "iv": 0.126
+          },
+          {
+            "date": "2026-07-15",
+            "iv": 0.6334
+          },
+          {
+            "date": "2026-07-16",
+            "iv": 0.6732
+          },
+          {
+            "date": "2026-07-17",
+            "iv": 0.7362
+          },
+          {
+            "date": "2026-07-20",
+            "iv": 0.7293
+          },
+          {
+            "date": "2026-07-21",
+            "iv": 0.7006
+          },
+          {
+            "date": "2026-07-22",
+            "iv": 0.7788
+          }
+        ],
+        "sigma_range": [
+          0.1614,
+          0.6281
+        ],
+        "name": "科创50",
+        "desc": "科创板",
+        "interpretation": "极高 (市场恐慌，可能是超卖反弹机会)"
+      },
+      {
+        "underlying": "159915",
+        "lookback_days": 252,
+        "data_points": 222,
+        "data_points_filtered": 218,
+        "current_iv": 0.4332,
+        "is_live": false,
+        "iv_high": 0.4789,
+        "iv_low": 0.2082,
+        "iv_high_raw": 0.6363,
+        "iv_low_raw": 0.2082,
+        "iv_rank": 0.8312,
+        "iv_rank_raw": 0.5256,
+        "iv_percentile": 0.8807,
+        "iv_percentile_raw": 0.8649,
+        "outliers_removed": 4,
+        "outlier_details": [
+          {
+            "date": "2025-09-05",
+            "iv": 0.5002
+          },
+          {
+            "date": "2025-09-17",
+            "iv": 0.4913
+          },
+          {
+            "date": "2026-07-17",
+            "iv": 0.5958
+          },
+          {
+            "date": "2026-07-20",
+            "iv": 0.6363
+          }
+        ],
+        "sigma_range": [
+          0.1766,
+          0.4845
+        ],
+        "name": "创业板ETF",
+        "desc": "创业板",
+        "interpretation": "极高 (市场恐慌，可能是超卖反弹机会)"
+      },
+      {
+        "underlying": "159922",
+        "lookback_days": 252,
+        "data_points": 222,
+        "data_points_filtered": 212,
+        "current_iv": 0.3224,
+        "is_live": false,
+        "iv_high": 0.3461,
+        "iv_low": 0.1804,
+        "iv_high_raw": 0.468,
+        "iv_low_raw": 0.1804,
+        "iv_rank": 0.857,
+        "iv_rank_raw": 0.4938,
+        "iv_percentile": 0.9528,
+        "iv_percentile_raw": 0.9099,
+        "outliers_removed": 10,
+        "outlier_details": [
+          {
+            "date": "2025-09-04",
+            "iv": 0.3669
+          },
+          {
+            "date": "2025-09-18",
+            "iv": 0.361
+          },
+          {
+            "date": "2025-09-19",
+            "iv": 0.3533
+          },
+          {
+            "date": "2025-09-23",
+            "iv": 0.3495
+          },
+          {
+            "date": "2026-02-02",
+            "iv": 0.352
+          },
+          {
+            "date": "2026-03-23",
+            "iv": 0.361
+          },
+          {
+            "date": "2026-07-17",
+            "iv": 0.36
+          },
+          {
+            "date": "2026-07-20",
+            "iv": 0.468
+          },
+          {
+            "date": "2026-07-21",
+            "iv": 0.3716
+          },
+          {
+            "date": "2026-07-22",
+            "iv": 0.4068
+          }
+        ],
+        "sigma_range": [
+          0.1777,
+          0.3481
+        ],
+        "name": "500ETF深",
+        "desc": "深市中盘",
+        "interpretation": "极高 (市场恐慌，可能是超卖反弹机会)"
+      },
+      {
+        "underlying": "159919",
+        "lookback_days": 252,
+        "data_points": 222,
+        "data_points_filtered": 216,
+        "current_iv": 0.2125,
+        "is_live": false,
+        "iv_high": 0.258,
+        "iv_low": 0.1298,
+        "iv_high_raw": 0.3431,
+        "iv_low_raw": 0.1298,
+        "iv_rank": 0.6452,
+        "iv_rank_raw": 0.3878,
+        "iv_percentile": 0.8148,
+        "iv_percentile_raw": 0.7928,
+        "outliers_removed": 6,
+        "outlier_details": [
+          {
+            "date": "2025-08-18",
+            "iv": 0.2642
+          },
+          {
+            "date": "2025-08-20",
+            "iv": 0.2681
+          },
+          {
+            "date": "2026-06-23",
+            "iv": 0.2815
+          },
+          {
+            "date": "2026-07-17",
+            "iv": 0.3036
+          },
+          {
+            "date": "2026-07-20",
+            "iv": 0.2755
+          },
+          {
+            "date": "2026-07-22",
+            "iv": 0.3431
+          }
+        ],
+        "sigma_range": [
+          0.1119,
+          0.2584
+        ],
+        "name": "300ETF深",
+        "desc": "深市宽基",
+        "interpretation": "偏高 (市场谨慎，波动率偏贵)"
+      },
+      {
+        "underlying": "159901",
+        "lookback_days": 252,
+        "data_points": 222,
+        "data_points_filtered": 216,
+        "current_iv": 0.2837,
+        "is_live": false,
+        "iv_high": 0.3391,
+        "iv_low": 0.1682,
+        "iv_high_raw": 0.4504,
+        "iv_low_raw": 0.1682,
+        "iv_rank": 0.6758,
+        "iv_rank_raw": 0.4092,
+        "iv_percentile": 0.7963,
+        "iv_percentile_raw": 0.7748,
+        "outliers_removed": 6,
+        "outlier_details": [
+          {
+            "date": "2025-08-20",
+            "iv": 0.3484
+          },
+          {
+            "date": "2025-08-29",
+            "iv": 0.3406
+          },
+          {
+            "date": "2026-07-17",
+            "iv": 0.4504
+          },
+          {
+            "date": "2026-07-20",
+            "iv": 0.4064
+          },
+          {
+            "date": "2026-07-21",
+            "iv": 0.3723
+          },
+          {
+            "date": "2026-07-22",
+            "iv": 0.3521
+          }
+        ],
+        "sigma_range": [
+          0.1466,
+          0.3399
+        ],
+        "name": "深100ETF",
+        "desc": "深市蓝筹",
+        "interpretation": "偏高 (市场谨慎，波动率偏贵)"
+      },
+      {
+        "underlying": "588080",
+        "lookback_days": 252,
+        "data_points": 224,
+        "data_points_filtered": 218,
+        "current_iv": 0.5511,
+        "is_live": false,
+        "iv_high": 0.6163,
+        "iv_low": 0.184,
+        "iv_high_raw": 0.756,
+        "iv_low_raw": 0.184,
+        "iv_rank": 0.8492,
+        "iv_rank_raw": 0.6418,
+        "iv_percentile": 0.9174,
+        "iv_percentile_raw": 0.8929,
+        "outliers_removed": 6,
+        "outlier_details": [
+          {
+            "date": "2026-07-15",
+            "iv": 0.6485
+          },
+          {
+            "date": "2026-07-16",
+            "iv": 0.676
+          },
+          {
+            "date": "2026-07-17",
+            "iv": 0.7362
+          },
+          {
+            "date": "2026-07-20",
+            "iv": 0.7044
+          },
+          {
+            "date": "2026-07-21",
+            "iv": 0.6686
+          },
+          {
+            "date": "2026-07-22",
+            "iv": 0.756
+          }
+        ],
+        "sigma_range": [
+          0.1652,
+          0.6234
+        ],
+        "name": "科创板50",
+        "desc": "科创板（备用代理）",
+        "interpretation": "极高 (市场恐慌，可能是超卖反弹机会)"
+      }
+    ],
+    "overall_sentiment": {
+      "signal": "极度恐慌",
+      "avg_iv_rank": 0.7195,
+      "avg_iv_percentile": 0.825,
+      "implication": "波动率处于高位，市场恐慌。历史上往往是中期买入机会，但短期可能继续剧烈波动。",
+      "based_on": [
+        "510050",
+        "510300",
+        "510500",
+        "588000",
+        "159915"
+      ]
+    }
+  },
+  "entry_regime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 1.7141,
+    "up": 3430,
+    "down": 2001,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 58,
+    "limit_downs": 21,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 1.71:1, 0/3 major indices green, 58 limit-ups / 21 limit-downs. Allow normal sizing."
+  },
+  "rule_violations": {
+    "status": "ok",
+    "total_rules": 6,
+    "total_violations": 0,
+    "rules": [
+      {
+        "rule": "check_breakout_failure",
+        "file": "scripts/rules/check_breakout_failure.py",
+        "status": "ok",
+        "exit_code": 0,
+        "violations": [],
+        "error": null
+      },
+      {
+        "rule": "check_iv_filter",
+        "file": "scripts/rules/check_iv_filter.py",
+        "status": "ok",
+        "exit_code": 0,
+        "violations": [],
+        "error": null
+      },
+      {
+        "rule": "check_overextended_entry",
+        "file": "scripts/rules/check_overextended_entry.py",
+        "status": "ok",
+        "exit_code": 0,
+        "violations": [],
+        "error": null
+      },
+      {
+        "rule": "check_stop_proximity",
+        "file": "scripts/rules/check_stop_proximity.py",
+        "status": "ok",
+        "exit_code": 0,
+        "violations": [],
+        "error": null
+      },
+      {
+        "rule": "check_time_decay",
+        "file": "scripts/rules/check_time_decay.py",
+        "status": "ok",
+        "exit_code": 0,
+        "violations": [],
+        "error": null
+      },
+      {
+        "rule": "check_volume_below_mavol30",
+        "file": "scripts/rules/check_volume_below_mavol30.py",
+        "status": "ok",
+        "exit_code": 0,
+        "violations": [],
+        "error": null
+      }
+    ]
+  },
+  "collection_errors": [],
+  "active_learnings": "## Active Rules (proven, hitRate ≥ 75%)\n- [h013] Strong breadth alone is not enough to force entries; without candidate RPS and MA-distance data, the correct momentum decision is to keep cash. (hitRate: 99%, n=129, confidence: 98%)\n- [h019] Bottom-list sectors should be treated as hard no-buy zones even when individual names still carry acceptable RPS readings. (hitRate: 100%, n=48, confidence: 98%)\n- [h028] Today’s relative leaders are concentrated in communication equipment and adjacent tech hardware, while cyclicals/agri/resource laggards are being de-risked aggressively. (hitRate: 100%, n=49, confidence: 98%)\n- [h027] MA-distance discipline remains critical inside hot sectors: a hot sector does not override chase risk when dist_ma5_pct exceeds 6% or dist_ma10_pct exceeds 8%. (hitRate: 100%, n=42, confidence: 98%)\n- [h023] Raising stops mechanically after +10% works well in weak tapes because it converts a fast winner into a low-risk hold without needing a fresh market call. (hitRate: 100%, n=36, confidence: 97%)\n- [h021] The MA-distance anti-chase rule is doing real work: several visually strong names fail because they are too far above short-term support. (hitRate: 98%, n=101, confidence: 97%)\n- [h077] The hard block is preventing FOMO entries. 新宙邦 (宁德时代协议 catalyst, VCP SETUP) and 奥来德 (dist_ma5 0.3%) would have been tempting buys in V1. V2 correctly forces cash preservation in panic regime. (hitRate: 100%, n=14, confidence: 94%)\n- [h017] Low-IV conditions around 16-22% IV rank do not justify freezing risk when breadth is 5.6:1; they argue for normal sizing but tighter discipline on chasing. (hitRate: 96%, n=27, confidence: 93%)\n- [h024] Stop-proximity violations deserve proactive action before the hard stop is hit, especially in 科创板 names where gap risk can erase the remaining cushion quickly. (hitRate: 91%, n=11, confidence: 85%)\n",
+  "learnings_excerpt": "# 📚 LEARNINGS.md - 自我改进记录\n\n*最后更新: 2026-03-06*\n\n## 🎯 使用说明\n\n每日报告前，阅读本文件回顾历史教训。\n每日报告后，更新预测记录。\n每周日，进行准确率回顾并更新策略。\n\n---\n\n## 📊 预测追踪\n\n预测记录保存在 `predictions/` 目录，格式为 `YYYY-MM-DD.json`\n\n### 追踪指标\n- **推荐股票3日涨跌幅** - 核心指标\n- **推荐股票7日涨跌幅** - 中期验证\n- **回避股票后续表现** - 验证风险判断\n- **市场判断准确性** - 观望/积极的择时\n\n### 评分标准\n| 结果 | 得分 | 说明 |\n|------|------|------|\n| ⭐⭐⭐推荐 3日涨>3% | +2 | 强推成功 |\n| ⭐⭐⭐推荐 3日涨0-3% | +1 | 强推一般 |\n| ⭐⭐⭐推荐 3日跌<-3% | -2 | 强推失败 |\n| 回避股票 3日跌>3% | +1 | 风险判断正确 |\n| 回避股票 3日涨>5% | -1 | 错过机会 |\n\n---\n\n## 📈 历史准确率\n\n| 周期 | 强推胜率 | 回避准确率 | 总分 | 备注 |\n|------|----------|------------|------|------|\n| 2026-W05 | - | - | - | 首周，暂无数据 |\n| 2026-W06 | 0/2 (0%) | 1/1 (100%) | - | 600988/688002开仓，首周均浮亏 |\n| 2026-W07 | 2/4 (50%) | 1/1 (100%) | - | 300684表现突出+3.61%，新开300373 |\n| 2026-W08 | - | - | - | 春节假期(02-14~02-23) |\n| 2026-W09 | 2/6 (33%) | 1/1 (100%) | - | 6持仓(全盈)均PnL+1.97%，新开科达/云天化，中石科技本周+9.52pp最佳，赤峰黄金18天接近时间止损 |\n| 2026-W10 | 0/2 (0%) | 1/1 (100%) | - | 灾难性一周：03-03系统性暴跌6持仓全亏，03-03平仓扬杰(-8.21%)+芯碁(-7.50%)，03-04平仓睿创(-4.76%)，组合从+2%跌至-2.72%。3只活跃持仓全部浮亏。规则进化：新增iv_filter+breakout_failure规则 |\n\n---\n\n## 🧠 策略教训\n\n### ✅ 有效策略\n\n1. **[W07验证] RPS 80-92%区间选股有效** — 4只持仓RPS均在88-91%区间，其中300684(RPS91.2%)本周+3.61%表现最佳。初步验证该区间选股逻辑成立。\n2. **[W07新发现] 业绩催化+高confidence信号质量高** — 300684中石科技(业绩预告+64-84%，8亮点0风险)连续3日获BUY/high推荐，开仓后4天即+3.61%，是组合最佳。决策质量高。\n3. **[W07新发现] 严格止损纪律保护资金** — 600988赤峰黄金在02-05跌至36.68(距止损36.00仅1.9%)但未触及，之后反弹至38.26(+4.02%)再回落。止损线设在合理位置，避免了提前止损的踏空。\n4. **[W07新发现] 跳过RPS>92%的股票是正确的** — 02-10跳过了大金重工(RPS=95.4%)，严格执行规则，避免追高风险。\n\n### ❌ 失败教训\n\n1. **[W06-W07] 黄金股持仓时间过长，回撤大** — 600988赤峰黄金持仓11天仍-6.06%，期间最大浮亏-7.79%。金价波动带来的回撤显著，且持仓期间watchlist评级已降为WATCH。教训：当watchlist评级从BUY降至WATCH时，应考虑减仓或收紧止损。\n   - ⚡ **W10更新**: 赤峰黄金最终因time_decay规则于02-27平仓@+0.50%，但03-02涨停+9.99%至¥43.91(如持有+10.39%)。**此教训需修正**：黄金股波动大不等于应该更早退出——相反，thesis有效时应更有耐心。真正的问题是time_decay规则对事件驱动型标的不够灵活。\n2. **[W06-W07] 688002睿创微纳横盘11天无方向** — 持仓11天PnL在-1.35%到+0.72%之间反复，无明显趋势。高RPS(89.2%)但缺乏短期催化剂的股票可能需要更长时间才能兑现。教训：无近期催化剂的标的应适当降低仓位预期。\n   - ⚡ **W10更新**: 睿创微纳持仓19天后终于突破¥120关口，PnL达+4.75%。耐心持有得到回报，验证了假设15(催化发酵期可能>10天)。\n3. **[W10] 赤峰黄金time_decay平仓错失涨停 — 最大\"卖早了\"错误** — 持仓24天PnL仅+0.50%触发time_decay，02-27平仓。3天后(03-02)中东冲突推高金价→涨停+9.99%。错失+9.89pp收益。**核心教训**: 机械性时间止损不适用于事件驱动型标的(黄金/大宗)，需增加催化剂例外条款。详见专项复盘。\n\n### 🔄 待验证假设\n1. ~~RPS120在80-92%区间的股票胜率更高~~ → **初步验证有效**(4/4持仓在此区间，2盈利1亏1持平)→ **持续验证**(5/5新持仓均在此区间,科达制造87.2%入场)\n2. 恐慌日(跌停>50家)次日反弹概率高 — 暂无数据\n3. 风险数≤1的股票回撤更小 — **初步验证**(300684 0风险→+3.61%→现+1.86%,300373 0风险→+4.65%)\n4. **[新假设] 有明确业绩催化的股票3-5日涨幅优于纯概念票** — 300684业绩预告催化 +1.86%(持仓中), 300373涨价催化+4.65%\n5. ~~**持仓超10天仍在成本附近(±2%)的标的应重新评估thesis**~~ → **部分验证**: 688002睿创微纳持仓22天仅+0.25%,赤峰黄金持仓22天-1.36%,均需重新评估\n6. **[W08假设] low confidence推荐中也有大牛股** — 中材科技(low)+34%，大族激光(low)+19.89%，华懋科技(low/02-13)+9.2%。**再次验证有效**，3/3 low confidence显著错过\n7. **[W08假设] 行业供需拐点催化>个股亮点数量** — 电子布缺货带动中材科技+34%，远超大多数高亮点个股\n8. **[W08假设] 大额回购(>5%股本)是2周内+10%的强信号** — 华懋科技8亿回购后+14%(截至02-25仍在高位¥85.38)\n9. **[W09新假设] 连续3期以上出现在watchlist的股票有更高胜率** — 科达制造(4期)终于入场,华懋科技(4期)持续上涨。假设：多次入选说明基本面持续达标，是强信号\n10. **[W09假设→验证中] 当日涨幅>8%的BUY推荐应跳过，等回调后再评估** — 云天化02-25 BUY但已+9.10%跳过→02-26入场(多付2.6%但安全) ✅ **已验证**。芯碁微装02-26 BUY +7.99%跳过→02-27 -1.65%回调至¥199(目标¥195距3.4%) **初步验证有效** — 不追高是对的\n11. **[W09新假设] 海外龙头财报日是A股硬件链的超级催化事件** — 英伟达02-26业绩后PCB/光纤/散热/光刻全链条爆发(5+只股涨停)，应提前布局受益标的\n12. **[W09假设→待验证] 超强业绩催化(净利增速>200%)可以覆盖\"追高\"风险** — 芯碁微装Q4净利+1522%，02-26 +7.99%→02-27 -1.65%回调中，尚未到目标¥195。两日累计+6.3%仍高于入场点。待继续跟踪\n13. **[W09教训] 单日涨幅规则不够，需检查多日累计涨幅和均线偏离** — 云天化02-26入场@¥44.05，但近3日累计涨幅~15%，远超MA10。单日+1.96%看似\"回归正常\"，但股价已严重超买。**新规则**: 入场前必须检查 (a) 近5日累计涨幅，>12%则等回调 (b) 与MA10偏离度，>10%则等回调。两者满足任一即跳过。不要被\"今天只涨了一点\"骗了，要看完整图形。\n14. **[W09新假设] 0风险标的的RPS容忍度可放宽至95%** — 常宝股份RPS=94.3%被降级跳过，但0风险+6亮点，结果+29.3%。华锐精密虽有风险但0风险标的特别：无风险=抗跌能力强，追高风险更低。待更多样本验证\n15. **[W09新假设] 催化发酵期可能>10个交易日** — 铂力特02-04 WATCH @¥105.13，前18个交易日回报-2.7%，但02-27已+8.4%。一些国产替代/军工标的需要更长的催化酝酿期，不应因短期无方向就放弃跟踪。⚡ **W10进一步验证**: 睿创微纳横盘19天后突破+4.75%；赤峰黄金如果多等3天就有+10.39%。**两个案例都说明耐心的价值远超time_decay的效率诉求**\n16. **[W10新假设] 标的应分类为\"趋势型\"和\"事件驱动型\"，适用不同退出规则** — 趋势型(如中石科技、扬杰科技)：RPS+业绩驱动，适合time_decay规则。事件驱动型(如赤峰黄金、大宗商品)：受地缘/供需事件脉冲驱动，PnL波动大但爆发力强。两者不应用同一套时间止损参数。黄金/石油/稀土等大宗商品标的建议归为\"事件驱动型\"\n17. **[W10验证] 03-03系统性暴跌验证了多条规则的失效和有效** — 6持仓同日全亏(-6%~-8%)，扬杰科技(-8.37%)和芯碁微装(-7.89%)被止损。stop_proximity规则03-03当日正确触发2次(扬杰1.8%+芯碁2.1%)，proactive止损避免了更大损失。✅ **已验证**: stop_proximity规则是组合最有价值的防御规则。\n18. **[W10核心教训] 突破失败是加速退出信号** — 睿创微纳03-02突破¥120(+4.75%)，03-04跌至¥109(-4.76%)，2天回撤9.5pp。**新规则(已实施)**: check_breakout_failure规则检测持仓>10天+PnL<-3%的\"曾经盈利现在亏损\"模式。突破失败比time_decay更紧急。\n19. **[W10核心教训] IV极低+短期涨幅已大=最差入场时机** — 芯碁微装03-02入场(IVRank~12%, 5日涨幅~8.2%)，次日-7.89%。**新规则(已实施)**: check_iv_filter规则标记开仓5天内即亏>4%的持仓，提示入场质量问题。**建议**: IVRank<15%且5日涨幅>6%时一律WATCH等回调。\n20. **[W10假设→验证失败] 超强业绩催化可以覆盖追高风险** — 芯碁微装Q4净利+1522%是历史级催化，03-02入场@¥201.72仍亏-7.5%止损。**结论**: 即使催化再强，市场环境(IV极低+系统性回调)才是决定短期走势的主导因素。催化剂决定方向，但市场环境决定时机。❌ **假设#12被否定**。\n\n---\n\n## 🔍 错过的机会 (截至 2026-03-02)\n\n### 📌 本次更新 (2026-03-02 周一 W10首日)\n\n**分析范围**: 全量未入场推荐价格更新(03-02收盘价) + 持仓状态更新\n\n#### 全量未入场推荐最新涨跌幅 (03-02收盘)\n\n| 股票 | 推荐日 | 推荐价 | 上次价(02-27) | 今日价(03-02) | 累计涨幅 | 周变化 |\n|------|--------|--------|--------------|--------------|---------|--------|\n| 002008 大族激光 | 02-05 | ¥49.18 | ¥72.30 | **¥74.62** | **+51.7%** 🔥🔥🔥 | +3.2%↑ |\n| 002080 中材科技 | 02-05 | ¥38.65 | ¥50.63 | **¥50.84** | **+31.5%** 🔥🔥🔥 | +0.4%↑ |\n| 002478 常宝股份 | 02-10 | ¥10.46 | ¥13.53 | **¥13.00** | **+24.3%** 🔥🔥 | -3.9%↓ 回调 |\n\n[... truncated, see hypothesis system for active rules ...]"
+}
+```
+
+请根据以上数据进行分析，按照 Required Output JSON 格式返回你的决策。
+
+重要提醒：请再次仔细阅读以上所有数据（特别是 enriched_candidates 中的详细指标、position_prices 中的实时价格、以及 iv_sentiment），严格按照 ANALYST.md 的5条规则和 Output Format 要求，返回完整的 JSON 决策。skip_list 中只能引用输入数据中实际存在的价格和指标，不要编造任何数据。
+
+**new_learnings 格式更新**: 尽量使用结构化格式返回 new_learnings：
+```json
+"new_learnings": [
+  {
+    "text": "具体、可操作的洞察",
+    "type": "heuristic|signal|rule|observation",
+    "tags": ["sector", "entry-filter", "exit-rule", "timing", "position-sizing"],
+    "evidence_type": "supporting|contradicting",
+    "related_hypothesis": "h001 (如果是对已有假设的新证据)",
+    "mechanism": "为什么这个规律成立的解释"
+  }
+]
+```
+也接受纯字符串格式(向后兼容)。如果 active_learnings 中有相关假设，请引用其 ID。

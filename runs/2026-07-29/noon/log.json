@@ -1,0 +1,50 @@
+{
+  "date": "2026-07-29",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1785296248.23208,
+      "errors": [],
+      "end": 1785296305.546567,
+      "duration_sec": 57.3
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 15166,
+      "tokens": {
+        "input_tokens": 310408,
+        "output_tokens": 9358
+      },
+      "rounds": 3,
+      "tool_calls_count": 5,
+      "duration_sec": 177.5,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1785296483.076715,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=130",
+        "Hypothesis: Created h124 (observation): Strategy pool has zero stocks in today's top 4 hot sectors (教育, 休闲食品, 游戏, 非白酒). ...",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=50",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=102",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=49",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1785296483.7420921,
+      "duration_sec": 0.7
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 235.5
+  }
+}

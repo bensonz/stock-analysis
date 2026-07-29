@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 310408,
+  "output_tokens": 9358,
+  "rounds": 3,
+  "duration_sec": 177.5,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月29日 教育板块 休闲食品 游戏 上涨原因",
+        "max_results": 5
+      },
+      "result_length": 3082
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月29日 半导体 电子化学品 暴跌原因 科创50",
+        "max_results": 5
+      },
+      "result_length": 2846
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年7月29日 A股 大盘 政策 宏观 新闻",
+        "max_results": 5
+      },
+      "result_length": 3186
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "Meta AI算力过剩 半导体暴跌 2026年7月 A股 科创50"
+      },
+      "result_length": 3298
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "恒逸石化 2026年7月 业绩 炼化 PX 苯 涨价"
+      },
+      "result_length": 3129
+    }
+  ],
+  "fallback_used": false
+}
