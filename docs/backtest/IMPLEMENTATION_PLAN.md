@@ -102,7 +102,10 @@ and the one-line verdict on "does mechanical ANALYST.md make money here".
 **Success criteria**: A reader can answer "did the strategy beat sitting in
 cash, net of costs, and where did it bleed" from the doc alone.
 **Tests**: Full pytest suite green (7 known pre-existing failures only).
-**Status**: Not Started
+**Status**: Complete — see RESULTS.md. Verdict: mechanical ANALYST.md lost
+-29.0% net Jan–Jul 2026 vs -14.9% EW market; live portfolio (-5.9%) beat its
+own ruleset by 23 points via selectivity/cash. The rules bleed; the throttles
+were the value.
 
 ## Stage 2 (sketch only — NOT in scope now)
 
