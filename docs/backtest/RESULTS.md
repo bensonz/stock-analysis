@@ -109,6 +109,41 @@ These are *hypotheses that survived their first test*, ranked for out-of-
 sample validation — the forward test is the live pipeline watching these
 signals in read-only mode for a few weeks, or new data as the DB grows.
 
+## Selection audit — rank-IC of the picker (run 2026-07-31)
+
+Question: within the ~500 gate-passing stocks each day, does sorting by RPS60
+(our picker) predict which do better? Daily Spearman rank-IC vs forward
+returns, 86 pool-days:
+
+| signal | horizon | mean IC | %days IC>0 | top-vs-bottom decile |
+|---|---|---|---|---|
+| rps60 | 5d | **-0.063** | 36% | **-1.10pp** |
+| rps60 | 10d | -0.068 | 35% | -1.55pp |
+| rps120 | 5d | -0.035 | 45% | -1.06pp |
+| rps20 | 5d | -0.045 | 42% | -0.59pp |
+| dist_ma10 | 5d | +0.005 | 54% | +2.20pp (nonlinear: deep-below-MA10 worst) |
+
+**The picker is not weak — it is inverted.** |IC| 0.06 is a genuinely strong
+cross-sectional signal (funds trade +0.03); ours points backwards in this
+regime: the hottest names in an already-hot pool were systematically the
+worst buys. Harness confirmation (one line changed — rank ascending):
+
+| run | return | maxDD | trades | win% |
+|---|---|---|---|---|
+| baseline | -28.98% | 29.1% | 148 | 8.1 |
+| baseline, inverted rank | **-3.47%** | 18.2% | 60 | 8.3 |
+| combo | -2.48% | 10.6% | 51 | 11.8 |
+| combo, inverted rank | **-1.87%** | **5.1%** | 44 | 15.9 |
+
+Selection was the dominant failure: ranking flipped alone recovers 25.5 of
+the 29 points. **Do NOT ship the inversion** — cross-sectional momentum
+classically flips sign between trending and choppy regimes, and flipping a
+sign in-sample is the canonical overfit. The durable finding is narrower:
+*within a pool that already passed the momentum gate, chasing the very
+hottest names was the toxic component in this regime* (rhymes with the
+pullback result). The actionable bar for any candidate picker (e.g. Kronos):
+positive mean rank-IC with a stable sign on our window, out-of-sample.
+
 ## Caveats
 
 Single regime (2026 downtrend/chop); no intraday data (close-based stops);
