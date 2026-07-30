@@ -72,8 +72,46 @@ Replay of the 41 actual closed trades through the same fill+cost model
    its own ruleset suggests encoding "few entries, high cash floor" explicitly
    rather than leaving it to LLM mood.
 
+## Stage 2 — experiment matrix (run 2026-07-30, `backtest.py compare`)
+
+| experiment | return% | maxDD% | trades | win% | avg win/loss | med hold |
+|---|---|---|---|---|---|---|
+| baseline | -28.98 | 29.14 | 148 | 8.1 | +2.67 / -8.44 | 2 |
+| pool_pain (halve@30, block@60) | -20.64 | 20.82 | 142 | 7.8 | +2.10 / -8.27 | 2 |
+| wide_stop (-10% @ 1.5% size) | -12.09 | 12.19 | 89 | 12.4 | +2.25 / -11.57 | 3 |
+| pullback (dist_ma10 ∈ [-3,+3]) | **-8.92** | 23.64 | 81 | 7.4 | +3.90 / -7.95 | 2 |
+| disciplined (≤2/day, 70% cash) | -24.74 | 24.79 | 126 | 10.3 | +2.99 / -8.64 | 2 |
+| combo (all of the above) | **-2.48** | **10.60** | 51 | 11.8 | +3.44 / -12.00 | 4 |
+
+(EW market proxy over the same tradeable span: -14.89%. Cash: 0%.)
+
+**Readings:**
+
+1. **Every single lever helps; the two biggest are the ones that fight the
+   whipsaw directly.** Wider-stop-smaller-size (+17pp vs baseline) stops the
+   -5%-close stop from being pure churn; pullback entries (+20pp) stop buying
+   the tops of intraday strength. The entry-budget/cash-floor alone barely
+   helps (-24.7) — *when* you buy matters more than *how much*.
+2. **Combo is near-flat (-2.5%, maxDD 10.6%) in a tape where the market lost
+   14.9%** — a 26.5pp improvement over the written rules. Note what combo
+   actually is: half-size, wide stops, only on pullbacks, only when the pool
+   isn't bleeding, max 2/day, 70% cash floor. In other words: *mostly don't
+   trade.* 51 trades in 7 months.
+3. **Nothing beat cash.** No tested configuration had positive absolute
+   return in this regime. The honest summary of 2026 so far: the best
+   momentum strategy was standing aside, and the best tested variant is the
+   one that most closely approximates that.
+
+**⚠️ In-sample warning — do not ship these numbers into ANALYST.md as
+"proven".** The knob values (pain 30/60, band ±3%, -10% stop) were chosen
+FROM studies on this same sample, and combo compounds five tuned choices.
+These are *hypotheses that survived their first test*, ranked for out-of-
+sample validation — the forward test is the live pipeline watching these
+signals in read-only mode for a few weeks, or new data as the DB grows.
+
 ## Caveats
 
 Single regime (2026 downtrend/chop); no intraday data (close-based stops);
 no liquidity/impact model; EW proxy ≠ investable benchmark; 100-share lots
 and ST 5% limits unmodeled. All conclusions are rejections, not validations.
+Stage-2 knob values are in-sample-tuned (see warning above).

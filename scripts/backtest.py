@@ -6,9 +6,10 @@ The ENGINE knows only market microstructure and accounting: t+1-open fills,
 A-share T+1 (no same-day exit), price-limit constraints, costs, equity marking.
 ALL entry selection and exit logic lives in strategy callables:
 
-    entries_fn(date, panels) -> list[str]
+    entries_fn(date, panels) -> list[str | (str, size_mult)]
         Codes desired, best-first, decided from data at `date`'s close.
         They fill at the NEXT session's open (queue trimmed to free slots).
+        Optional size_mult scales alloc_pct for that entry (throttles).
     exits_fn(date, panels, positions) -> list[str] | list[(code, reason)]
         Codes to sell at `date`'s close. `positions` is a read-only view
         carrying entry_date / days_held / pnl_pct, so stop rules are pure
@@ -39,6 +40,9 @@ DEFAULT_CONFIG = {
     "stamp_sell_pct": 0.05,     # sell side only
     "slippage_pct": 0.10,       # per side
     "limit_tolerance": 0.004,   # adjusted-space slack when detecting limit prices
+    # Stage-2 deployment-discipline knobs (None = off):
+    "max_new_entries_per_day": None,   # cap fills per session
+    "min_cash_pct": 0.0,               # never deploy below this cash share
 }
 
 
@@ -95,21 +99,29 @@ def run(panels: dict, entries_fn, exits_fn, config: dict | None = None,
         pc_row = closes.loc[dates[i - 1]] if i else None
 
         # 1) fill queued entries at today's open
-        for code in pending:
+        filled_today = 0
+        for item in pending:
+            code, size_mult = item if isinstance(item, tuple) else (item, 1.0)
             if len(positions) >= cfg["positions_max"] or code in positions:
                 continue
+            if (cfg["max_new_entries_per_day"] is not None
+                    and filled_today >= cfg["max_new_entries_per_day"]):
+                break
             op = o_row.get(code)
             pc = pc_row.get(code) if pc_row is not None else None
             if not _is_num(op):
                 continue                                   # no trade today: order dies
             if _is_num(pc) and op >= pc * (1 + board_limit(code) - tol):
                 continue                                   # limit-up open, unfillable
-            alloc = cfg["alloc_pct"] / 100.0 * equity
+            alloc = cfg["alloc_pct"] / 100.0 * equity * size_mult
             if alloc > cash + 1e-12:
                 continue                                   # out of cash
+            if cash - alloc < cfg["min_cash_pct"] / 100.0 * equity - 1e-12:
+                continue                                   # cash floor
             positions[code] = {"entry_date": d, "entry_i": i,
                                "px_eff": op * em, "alloc": alloc}
             cash -= alloc
+            filled_today += 1
         pending = []
 
         # 2) exits at today's close (T+1: never on the entry day)
@@ -251,6 +263,10 @@ ANALYST_RULES = {
     "time_decay_min_gain": 5.0,
     "rank_by": "rps60",
     "queue_depth": 15,          # candidates offered per day (engine trims)
+    # Stage-2 variant knobs (None = off):
+    "pool_pain_halve": None,    # % of gate pool down >=3% in 2 sessions → half size
+    "pool_pain_block": None,    # ... → no new entries at all
+    "dist_ma10_entry_min": None,  # pullback band: require dist_ma10 >= this
 }
 
 
@@ -262,6 +278,21 @@ def prepare_analyst_features(panels: dict) -> dict:
         if key not in panels:
             panels[key] = closes.rolling(w, min_periods=w).mean()
     return panels
+
+
+def _pool_pain(panels: dict, gate_rps: float):
+    """Per-date % of the gate pool already down >=3% over the prior 2 sessions
+    (the regime gauge from the 2026-07-30 study: >60% → 55% fwd stop rate).
+    Cached in panels; gate threshold assumed constant per run."""
+    if "pool_pain" not in panels:
+        closes = panels["closes"]
+        gate = ((panels["rps60"] >= gate_rps) & (panels["rps120"] >= gate_rps)
+                & (panels["rps250"] >= gate_rps)).fillna(False)
+        ret2 = closes / closes.shift(2) - 1.0
+        hurt = (ret2 <= -0.03) & gate
+        panels["pool_pain"] = (hurt.sum(axis=1)
+                               / gate.sum(axis=1).clip(lower=1) * 100)
+    return panels["pool_pain"]
 
 
 def make_mechanical_analyst(rules: dict | None = None):
@@ -278,12 +309,25 @@ def make_mechanical_analyst(rules: dict | None = None):
                  & (p["ma120"].loc[d] > p["ma250"].loc[d]))
         d5 = (c / p["ma5"].loc[d] - 1.0) * 100
         d20 = (c / p["ma20"].loc[d] - 1.0) * 100
+        d10 = p["dist_ma10_pct"].loc[d]
         not_extended = ((d5 <= r["dist_ma5_max"])
-                        & (p["dist_ma10_pct"].loc[d] <= r["dist_ma10_max"])
+                        & (d10 <= r["dist_ma10_max"])
                         & (d20 <= r["dist_ma20_max"]))
+        if r["dist_ma10_entry_min"] is not None:      # pullback band
+            not_extended &= d10 >= r["dist_ma10_entry_min"]
         ok = (gate & align & not_extended).fillna(False)
+
+        size_mult = 1.0
+        if r["pool_pain_halve"] is not None or r["pool_pain_block"] is not None:
+            pain = float(_pool_pain(p, r["gate_rps"]).loc[d])
+            if r["pool_pain_block"] is not None and pain >= r["pool_pain_block"]:
+                return []
+            if r["pool_pain_halve"] is not None and pain >= r["pool_pain_halve"]:
+                size_mult = 0.5
+
         ranked = p[r["rank_by"]].loc[d][ok].dropna().sort_values(ascending=False)
-        return list(ranked.index[: r["queue_depth"]])
+        codes = list(ranked.index[: r["queue_depth"]])
+        return codes if size_mult == 1.0 else [(c, size_mult) for c in codes]
 
     def exits(d, panels, positions):
         out = []
@@ -401,17 +445,67 @@ def replay_closed_trades(panels: dict | None = None, config: dict | None = None,
     }
 
 
+# --------------------------------------------------------------------------- #
+# Stage 2 — the experiment matrix (each entry = rules/config diffs vs baseline)
+# --------------------------------------------------------------------------- #
+EXPERIMENTS = {
+    "baseline": {},
+    # regime gauge from the breadth study: halve size at 30% pool pain,
+    # stand aside entirely at 60%
+    "pool_pain": {"rules": {"pool_pain_halve": 30.0, "pool_pain_block": 60.0}},
+    # same risk per trade (3%×5% ≈ 1.5%×10%), room to breathe: no early stop,
+    # hard stop -10%
+    "wide_stop": {"rules": {"hard_stop_pct": -10.0, "early_days": 0},
+                  "config": {"alloc_pct": 1.5}},
+    # buy near/below MA10 instead of strength: dist_ma10 in [-3%, +3%]
+    "pullback": {"rules": {"dist_ma10_entry_min": -3.0, "dist_ma10_max": 3.0}},
+    # the live pipeline's implicit throttles, written down: ≤2 entries/day,
+    # ≥70% cash floor
+    "disciplined": {"config": {"max_new_entries_per_day": 2, "min_cash_pct": 70.0}},
+    # everything that plausibly helps, together
+    "combo": {"rules": {"pool_pain_halve": 30.0, "pool_pain_block": 60.0,
+                        "hard_stop_pct": -10.0, "early_days": 0,
+                        "dist_ma10_entry_min": -3.0, "dist_ma10_max": 3.0},
+              "config": {"alloc_pct": 1.5, "max_new_entries_per_day": 2,
+                         "min_cash_pct": 70.0}},
+}
+
+
+def run_experiment(name: str, panels: dict | None = None,
+                   start: str | None = None, end: str | None = None) -> dict:
+    spec = EXPERIMENTS[name]
+    panels = panels if panels is not None else load_engine_panels()
+    entries_fn, exits_fn = make_mechanical_analyst(spec.get("rules"))
+    res = run(panels, entries_fn, exits_fn, config=spec.get("config"),
+              start=start, end=end)
+    return {"name": name, "metrics": metrics(res), "result": res}
+
+
+def compare(names=None, panels=None, start=None, end=None) -> list:
+    panels = panels if panels is not None else load_engine_panels()
+    out = [run_experiment(n, panels, start, end)
+           for n in (names or list(EXPERIMENTS))]
+    cols = ("total_return_pct", "max_drawdown_pct", "n_trades",
+            "win_rate_pct", "avg_win_pct", "avg_loss_pct", "median_days_held")
+    header = f"{'experiment':13s}" + "".join(f"{c.replace('_pct', '%'):>16s}" for c in cols)
+    print(header)
+    for r in out:
+        m = r["metrics"]
+        print(f"{r['name']:13s}" + "".join(
+            f"{(m[c] if m[c] is not None else '—'):>16}" for c in cols))
+    return out
+
+
 if __name__ == "__main__":
     import json as _json
     cmd = sys.argv[1] if len(sys.argv) > 1 else "baseline"
-    panels = load_engine_panels()
     if cmd == "replay":
-        rep = replay_closed_trades(panels)
+        rep = replay_closed_trades(load_engine_panels())
         print(_json.dumps(rep["summary"], ensure_ascii=False, indent=1))
         for r in rep["trades"]:
             print(r)
+    elif cmd == "compare":
+        compare(sys.argv[2:] or None)
     else:
-        entries_fn, exits_fn = make_mechanical_analyst()
-        res = run(panels, entries_fn, exits_fn,
-                  start=sys.argv[2] if len(sys.argv) > 2 else None)
-        print(_json.dumps(metrics(res), ensure_ascii=False, indent=1))
+        r = run_experiment(cmd if cmd in EXPERIMENTS else "baseline")
+        print(_json.dumps(r["metrics"], ensure_ascii=False, indent=1))

@@ -263,6 +263,110 @@ def test_mechanical_arm_end_to_end_stops_out():
 # --------------------------------------------------------------------------- #
 # Stage 1b — replay arm
 # --------------------------------------------------------------------------- #
+# --------------------------------------------------------------------------- #
+# Stage 2 — engine knobs and strategy variants
+# --------------------------------------------------------------------------- #
+def test_entry_size_multiplier_scales_alloc():
+    p = _panels({"600000": [10, 10, 12, 12, 12, 12, 12, 12, 12, 12]})
+
+    def buy_half(d, panels):
+        return [("600000", 0.5)] if d == DATES[0] else []
+
+    res = bt.run(p, buy_half, _never, config={**NO_COST, "alloc_pct": 4.0})
+    # 4% × 0.5 = 2% alloc; +20% move → equity 1 + 0.02*0.2 = 1.004
+    assert abs(dict(res["equity_curve"])[DATES[3]] - 1.004) < 1e-9
+
+
+def test_max_new_entries_per_day_caps_fills():
+    codes = [f"60000{i}" for i in range(5)]
+    p = _panels({c: [10] * 10 for c in codes})
+
+    def buy_all_once(d, panels):
+        return codes if d == DATES[0] else []
+
+    res = bt.run(p, buy_all_once, _never,
+                 config={**NO_COST, "max_new_entries_per_day": 2})
+    assert len(res["open_positions"]) == 2
+
+
+def test_min_cash_pct_floor_blocks_entry():
+    codes = [f"60000{i}" for i in range(5)]
+    p = _panels({c: [10] * 10 for c in codes})
+
+    def buy_all(d, panels):
+        return codes if d == DATES[0] else []
+
+    # 10% each, floor 75% → only 2 fit (cash 100→90→80; a third would hit 70)
+    res = bt.run(p, buy_all, _never,
+                 config={**NO_COST, "alloc_pct": 10.0, "min_cash_pct": 75.0})
+    assert len(res["open_positions"]) == 2
+
+
+def test_pool_pain_throttle_blocks_and_halves():
+    days = ["2026-06-01", "2026-06-02"]
+    entries_fn, _ = bt.make_mechanical_analyst(
+        {"pool_pain_halve": 30.0, "pool_pain_block": 60.0})
+    base = _analyst_panels()
+
+    p_block = dict(base)
+    p_block["pool_pain"] = pd.Series([70.0, 70.0], index=days)
+    assert entries_fn("2026-06-01", p_block) == []
+
+    p_half = dict(base)
+    p_half["pool_pain"] = pd.Series([45.0, 45.0], index=days)
+    assert entries_fn("2026-06-01", p_half) == [("A", 0.5)]
+
+    p_calm = dict(base)
+    p_calm["pool_pain"] = pd.Series([10.0, 10.0], index=days)
+    assert entries_fn("2026-06-01", p_calm) == ["A"]
+
+
+def test_pool_pain_series_computation():
+    days = [f"2026-06-{d:02d}" for d in range(1, 5)]
+    # A drops 5% over 2 sessions (hurt); B flat; both pass the gate
+    closes = pd.DataFrame({"A": [10, 9.8, 9.5, 9.5], "B": [10, 10, 10, 10]},
+                          index=days)
+    panels = {"closes": closes,
+              "rps60": closes * 0 + 90, "rps120": closes * 0 + 90,
+              "rps250": closes * 0 + 90}
+    pain = bt._pool_pain(panels, 80.0)
+    assert pain.loc[days[2]] == 50.0        # A hurt, B not → 1 of 2
+    assert pain.loc[days[1]] == 0.0         # 2-session window incomplete → no hurt
+
+
+def test_pullback_band_requires_dip():
+    days = ["2026-06-01", "2026-06-02"]
+    entries_fn, _ = bt.make_mechanical_analyst(
+        {"dist_ma10_entry_min": -3.0, "dist_ma10_max": 3.0})
+    # A at +2% from MA10 → inside band; strength name at +7% → excluded
+    p = _analyst_panels(dist_ma10_pct=pd.DataFrame(
+        {"A": [2.0] * 2, "B": [2.0] * 2, "C": [2.0] * 2}, index=days))
+    assert entries_fn("2026-06-01", p) == ["A"]
+    p2 = _analyst_panels(dist_ma10_pct=pd.DataFrame(
+        {"A": [7.0] * 2, "B": [2.0] * 2, "C": [2.0] * 2}, index=days))
+    assert entries_fn("2026-06-01", p2) == []
+
+
+def test_wide_stop_disables_early_rule():
+    _, exits_fn = bt.make_mechanical_analyst({"hard_stop_pct": -10.0, "early_days": 0})
+
+    def pos(pnl, held):
+        return {"X": {"entry_date": "d", "days_held": held, "pnl_pct": pnl}}
+
+    assert exits_fn("d", {}, pos(-4.0, 1)) == []                       # survives
+    assert exits_fn("d", {}, pos(-10.5, 1)) == [("X", "rule5_hard_stop")]
+
+
+def test_experiments_registry_names_resolve():
+    for name, spec in bt.EXPERIMENTS.items():
+        assert set(spec) <= {"rules", "config"}
+        # every rules/config key must exist in its target dict
+        for k in spec.get("rules", {}):
+            assert k in bt.ANALYST_RULES, f"{name}: unknown rule {k}"
+        for k in spec.get("config", {}):
+            assert k in bt.DEFAULT_CONFIG, f"{name}: unknown config {k}"
+
+
 def test_replay_closed_trades_reconciles(tmp_path):
     import json
     days = [f"2026-07-{d:02d}" for d in range(1, 6)]
