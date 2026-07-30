@@ -1,0 +1,61 @@
+{
+  "date": "2026-07-30",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 15.37,
+      "pnl_pct": -1.47,
+      "note": "PnL -1.47% within -3%警戒线, sector 石油石化 neutral not cold, H1净利+2326% catalyst intact, 10亿回购+增持支撑, dist_ma5 0.5%/dist_ma10 3.2%合理。距止损3.58%属WATCH级别，密切监控。"
+    },
+    {
+      "code": "600176",
+      "name": "中国巨石",
+      "action": "SELL",
+      "price": 36.12,
+      "pnl_pct": -5.91,
+      "note": "Rule 5硬止损触发: PnL -5.91%超过-5%阈值。现价36.12已跌破止损36.47。入场时股价低于MA5/MA10/MA20三条均线——V1价值陷阱思维残余，V2不应买入均线空头排列的股票。"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "SELL",
+      "price": 122.0,
+      "pnl_pct": -3.56,
+      "note": "Rule 5触发: -3.56%在入场2天内(-3% in first 3 days → SELL)。距硬止损120.18仅1.49%，stop_proximity CRITICAL。VCP结构和均线紧凑度仍然健康但规则优先。可等市场企稳后重新评估入场。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 1,
+    "totalEquity": 940855.0,
+    "dayPnl": -368.0,
+    "dayReturnPct": -0.04,
+    "totalReturnPct": -5.91,
+    "unrealizedPnl": -368.0,
+    "realizedPnl": -58777.0,
+    "cashPct": 97.39
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.5499,
+    "up": 1901,
+    "down": 3457,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 51,
+    "limit_downs": 48,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.55:1, 0/3 major indices green, 51 limit-ups / 48 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "PANIC TAPE. Breadth 0.55:1 (1901 up / 3457 down), 0/3 major indices green (上证-1.15%, 深成指-3.79%, 创业板-5.89%, 科创50-6.34%). 51涨停/48跌停, f7_10=484 large-scale heavy selling. IV Rank avg 84.5% extreme across all ETFs (科创50 92.4%, 创业板ETF 96.9%). Violent tech-to-defensive rotation: 通信设备-12%, 半导体-7.5% capitulating; 医疗美容+5%, 白酒+4% bid as safe havens. Likely margin call cascade in crowded AI/semi names. Cash is king — hard block on new positions remains. Portfolio: exiting 中国巨石 (-5.91% stop breach) and 药明康德 (-3.56% in 2 days triggers 3-day rule), holding 恒逸石化 (-1.47%, 3.58% above stop). Post-sell cash ~88%."
+  }
+}

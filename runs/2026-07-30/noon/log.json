@@ -1,0 +1,118 @@
+{
+  "date": "2026-07-30",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1785382518.33427,
+      "errors": [],
+      "end": 1785382574.185799,
+      "duration_sec": 55.9
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8984,
+      "tokens": {
+        "input_tokens": 301598,
+        "output_tokens": 9245
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 178.4,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1785382752.626624,
+      "actions": [
+        "SELL 600176",
+        "SELL 603259",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h127 (observation): 均线空头排列(股价<MA5<MA10<MA20)的股票即使RPS再高也不应买入。中国巨石入场时三条均线全部在股价上方——这是V1价值陷阱思维的残余(down -...",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=15",
+        "Hypothesis: Created h128 (observation): 通信设备-12%、半导体-7.5% vs 医疗美容+5%、白酒+3.6%的极端分化是融资盘踩踏信号。科技赛道前期拥挤度高，一旦触发margin call就是连锁...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "000703",
+                "name": "恒逸石化",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 15.37,
+                "stopLoss": 14.82,
+                "distance_pct": 3.58,
+                "suggestion": "🟠 WATCH — 3.6% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1785382752.965143,
+      "duration_sec": 0.3
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 000703 — 🟠 WATCH — 3.6% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 234.60000000000002
+  }
+}

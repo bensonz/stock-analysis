@@ -1,0 +1,278 @@
+# 🔬 Research Memo — 2026-07-30
+
+---
+
+## 1. Market Regime
+
+**Verdict: PANIC — 硬性禁止开新仓**
+
+| 指标 | 数值 | 判断 |
+|------|------|------|
+| Up/Down Ratio | 1901/3457 = **0.55:1** | ❌ 严重低于1.5:1门槛 |
+| 上证指数 | -1.15% | ❌ |
+| 深证成指 | -3.79% | ❌ |
+| 创业板指 | -5.89% | ❌ |
+| 科创50 | -6.34% | ❌ |
+| 涨停(r10) | 51 | 正常 |
+| 跌停(f10) | 48 | ⚠️ 接近30阈值，且f7_10=484大量个股重挫 |
+| IV Rank均值 | **84.5%** | 🔴 极度恐慌，所有主要ETF IV rank >66% |
+
+**Breadth深度**: f7_10=484, f4_7=596 — 这意味着超过1000只股票下跌4%以上。这是系统性去杠杆，不是温和调整。
+
+**Buy Gate**: 三项全不满足：(1) Up/Down<1.5 (2) 0/3指数绿 (3) f10=48≥30。`entry_regime.hard_block=true`。**今天绝对不能开新仓。**
+
+---
+
+## 2. Sector Analysis
+
+### Hot Sectors (Top 5)
+| 板块 | 涨跌幅 | 性质 |
+|------|--------|------|
+| 医疗美容 | +5.1% | 防御性轮动，一日脉冲 |
+| 商用车 | +4.02% | 政策/业绩驱动？待验证 |
+| 白酒Ⅱ | +3.58% | 典型防御轮动 |
+| 厨卫电器 | +3.06% | 消费复苏预期 |
+| 酒店餐饮 | +2.76% | 消费场景 |
+
+### Cold Sectors (Bottom 5)
+| 板块 | 涨跌幅 | 性质 |
+|------|--------|------|
+| 通信设备 | **-11.98%** | 🔴 踩踏式出逃 |
+| 元件 | -8.95% | PCB/被动元件重灾区 |
+| 电子化学品Ⅱ | -7.84% | 跟随半导体 |
+| 半导体 | -7.50% | 摩根士丹利拐点论持续发酵 |
+| 消费电子 | -6.10% | 需求担忧 |
+
+**Rotation Signal**: 这是一次教科书式的"Risk-Off"轮动——资金从前期拥挤的AI/半导体/光模块赛道疯狂撤出，涌入消费防御和公用事业。这不是"板块轮动"而是"系统性避险"。
+
+**Position Alignment**: **0/3持仓在热门板块。** 恒逸石化(石油石化)、中国巨石(建筑材料)、药明康德(医药生物)均在中性板块。
+
+---
+
+## 3. Position Review
+
+### 🔴 中国巨石 (600176) — **立即卖出**
+
+| 字段 | 值 |
+|------|-----|
+| 入场 | 7/29 @ 38.39 |
+| 现价 | **36.12** |
+| 涨跌 | **-5.91%** |
+| 止损 | 36.47 |
+| 止损状态 | 🔴 **已跌破** (36.12 < 36.47) |
+
+**触发规则**:
+- **Rule 5 硬止损**: -5.91% > 5%，无条件卖出
+- **止损位穿透**: 现价已低于止损线，任何延迟都是扩大亏损
+- **Rule Violations**: `overextended_entry` + `iv_filter` 双重标记——入场时IV偏低但5日涨幅可能已大，入场时机错误
+- **stop_proximity**: CRITICAL级别，已跌穿止损
+
+**教训**: 昨天入场中国巨石的理由是"股价从高点大幅回调(-26%距MA20)"，但MA20距离-26%恰恰说明趋势已坏，不是"抄底机会"。V1的价值陷阱思维再次出现。在V2框架下，均线全面空头排列(MA5<MA10<MA20，股价低于所有均线)的股票不应该买入，无论RPS多高。
+
+---
+
+### 🔴 药明康德 (603259) — **卖出 (3天-3%规则)**
+
+| 字段 | 值 |
+|------|-----|
+| 入场 | 7/29 @ 126.50 |
+| 现价 | **122.00** |
+| 涨跌 | **-3.56%** |
+| 止损 | 120.18 |
+| 距止损 | 仅1.49% |
+| 持仓天数 | 2天 |
+
+**触发规则**:
+- **Rule 5: -3% in first 3 days → SELL**。入场仅2天即亏损3.56%，时机不对。
+- **stop_proximity CRITICAL**: 仅剩1.49%到止损线。在今日恐慌盘面下，明天一个跳空低开就可能直接击穿120.18。
+
+**需要诚实面对的问题**: 药明康德的VCP SETUP和均线结构仍然健康(dist_ma5 0.9%, dist_ma10 1.4%, dist_ma20 1.5%——非常紧凑)。如果市场明天反弹，这可能是被错杀的票。但规则就是规则——-3%在3天内=卖。可以等市场企稳后重新评估。
+
+---
+
+### 🟡 恒逸石化 (000703) — **持有**
+
+| 字段 | 值 |
+|------|-----|
+| 入场 | 7/29 @ 15.60 |
+| 现价 | **15.37** |
+| 涨跌 | **-1.47%** |
+| 止损 | 14.82 |
+| 距止损 | 3.58% |
+| 持仓天数 | 2天 |
+
+**判断依据**:
+- PnL -1.47%，远未触及-3%或-5%规则
+- 距止损3.58% — stop_proximity为WATCH级别（非CRITICAL）
+- 板块(石油石化)非冷门板块，油价受中东地缘支撑
+- MA距离合理(dist_ma5 0.5%, dist_ma10 3.2%)
+- H1业绩暴增2326-2547%的催化剂仍然有效
+- 增持+回购双重支撑
+
+**风险**: 今日高低波幅达7%(15.33-16.43)，说明多空博弈激烈。如果明天继续下探至14.82以下，立即止损。
+
+---
+
+## 4. New Entry Candidates
+
+**结论: `new_positions: []`**
+
+Buy gate三项硬性条件全不满足。即使在恐慌中发现几个结构尚可的标的（如华峰测控dist_ma5仅-1.4%、涛涛车业MA距离极紧），买入等于对抗整个市场。V2的核心教训之一就是：**不逆势开仓。**
+
+以下是在正常市场环境下会认真考虑的标的（仅供参考，PM可在市场企稳后关注）：
+
+| 代码 | 名称 | RPS120 | MA结构 | 所属板块 | 板块状态 | 被拒原因 |
+|------|------|--------|--------|----------|----------|----------|
+| 688200 | 华峰测控 | 99.48 | dist_ma5 -1.4% ✓ | 半导体 | 冷门 -7.5% | 板块+恐慌 |
+| 301345 | 涛涛车业 | 87.73 | 三线紧凑 ✓ | 摩托车 | 中性 | 恐慌封锁 |
+| 688120 | 华海清科 | 98.83 | dist_ma5 +1.7% ✓ | 半导体 | 冷门 -7.5% | 板块+恐慌 |
+| 601168 | 西部矿业 | 93.67 | dist_ma20 +13.3% ✗ | 有色金属 | 中性 | Rule 2b MA超限+恐慌 |
+
+---
+
+## 5. Skip List
+
+```
+华峰测控 (688200) — RPS120=99.48, MA距离完美(dist_ma5 -1.4%)。但半导体板块今日-7.5%位列bottom 5。Rule 1: 不在热门板块不买入。等板块回暖再评估。
+
+西部矿业 (601168) — RPS120=93.67, H1净利润+123%业绩炸裂。但dist_ma20_pct=13.3%超过Rule 2b的12%上限，中期超买。等回调至MA20附近。
+```
+
+---
+
+## 6. Learnings
+
+### V2规则验证
+
+1. **硬性buy gate正在保护资金** (evidence_type: supporting, related: h077)
+   - 今天如果不设门槛，华峰测控(dist_ma5仅-1.4%!)和涛涛车业(MA三线紧凑)看起来都是诱人的入场点
+   - 但在0.55:1的涨跌比下，任何买入都是在对抗系统性抛压
+   - V1会在这里"精选个股"，V2正确地选择持币
+
+2. **-3%在3天内规则避免了"等待反弹"陷阱** (evidence_type: supporting)
+   - 药明康德入场仅2天即-3.56%。在V1体系下会"thesis still valid, hold"，但价格才是真相
+   - 早割早自由——如果企稳可以在更低位置重新进入
+
+3. **中国巨石入场违反了V2核心原则** (evidence_type: contradicting, mechanism: 价值陷阱)
+   - 昨天入场理由是"距MA20回调-26%提供入场机会"——这是V1价值陷阱思维的残余
+   - 股价全面低于MA5/MA10/MA20时，均线已经空头排列，不应买入
+   - **新规则建议**: 当股价低于所有三条均线(MA5/MA10/MA20)时，无论RPS多高都应跳过
+
+4. **板块轮动信号极为清晰** (evidence_type: observation)
+   - 通信设备-12%、半导体-7.5% vs 医疗美容+5%、白酒+3.6%
+   - 这不是"调整"而是"踩踏"——科技赛道融资盘正在被强制平仓
+   - 我们在通信/半导体相关板块零持仓，这是幸运的（昨天没有追AI硬件）
+
+---
+
+## 7. Uncertainty Flags
+
+1. **药明康德的VCP结构仍然完整**——如果明天市场反弹，122卖出可能是错误。但我必须执行-3%规则。建议PM自行判断是否给予豁免（V2框架不允许我豁免）。
+
+2. **恒逸石化的16.43盘中高点**说明有资金在抄底，但收盘回落至15.37说明抛压依然重。如果明天破14.82止损，不应犹豫。
+
+3. **IV Rank全线>75%**是极端恐慌信号——历史上往往是中期买入机会（learning系统也这么记录），但短期可能继续剧烈波动。我们应保持现金等待恐慌消退。
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "医疗美容", "5d_pct": 5.1, "trend": "defensive_rotation"},
+      {"name": "商用车", "5d_pct": 4.02, "trend": "one_day_spike"},
+      {"name": "白酒Ⅱ", "5d_pct": 3.58, "trend": "defensive_rotation"},
+      {"name": "厨卫电器", "5d_pct": 3.06, "trend": "steady"},
+      {"name": "酒店餐饮", "5d_pct": 2.76, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "通信设备", "5d_pct": -11.98, "trend": "capitulation"},
+      {"name": "元件", "5d_pct": -8.95, "trend": "deteriorating"},
+      {"name": "电子化学品Ⅱ", "5d_pct": -7.84, "trend": "deteriorating"},
+      {"name": "半导体", "5d_pct": -7.5, "trend": "deteriorating"},
+      {"name": "消费电子", "5d_pct": -6.1, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/3 positions in hot sectors — all in neutral sectors (石油石化, 建筑材料, 医药生物). Tech exposure: 0 (fortunate).",
+    "regime": "Panic risk-off: violent rotation from AI/semiconductor/optical to defensive consumer. Tech sector capitulation with 通信设备 -12%. Likely margin call cascade in crowded tech longs."
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "PnL -1.47% within -3%警戒线, sector 石油石化 neutral not cold, H1净利+2326% catalyst intact, 10亿回购+增持支撑, dist_ma5 0.5%/dist_ma10 3.2%合理。距止损3.58%属WATCH级别，密切监控。",
+      "sector_rank": "top 50% (neutral)",
+      "new_stop": null,
+      "pnl_pct": -1.47,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "600176",
+      "name": "中国巨石",
+      "action": "SELL",
+      "reason": "Rule 5硬止损触发: PnL -5.91%超过-5%阈值。现价36.12已跌破止损36.47。入场时股价低于MA5/MA10/MA20三条均线——V1价值陷阱思维残余，V2不应买入均线空头排列的股票。",
+      "sector_rank": "top 50% (neutral)",
+      "new_stop": null,
+      "pnl_pct": -5.91,
+      "days_held": 2,
+      "exit_price": 36.12
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "SELL",
+      "reason": "Rule 5触发: -3.56%在入场2天内(-3% in first 3 days → SELL)。距硬止损120.18仅1.49%，stop_proximity CRITICAL。VCP结构和均线紧凑度仍然健康但规则优先。可等市场企稳后重新评估入场。",
+      "sector_rank": "top 50% (neutral)",
+      "new_stop": null,
+      "pnl_pct": -3.56,
+      "days_held": 2,
+      "exit_price": 122.0
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "半导体板块今日-7.5%位列bottom 5 (Rule 1: 冷门板块不买入). RPS120=99.48, dist_ma5=-1.4% MA结构优秀, 但板块重力压倒个股质量. 等待半导体板块回暖后再评估.",
+      "rps120": 99.48
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "dist_ma20_pct=13.3%超过Rule 2b的12%上限, 中期超买需要回调. RPS120=93.67, H1净利+123%业绩优秀, 但等回调至MA20(32.57)附近再评估.",
+      "rps120": 93.67
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "均线空头排列(股价<MA5<MA10<MA20)的股票即使RPS再高也不应买入。中国巨石入场时三条均线全部在股价上方——这是V1价值陷阱思维的残余(down -26% from MA20被误读为'抄底机会')。V2应加入规则: 股价低于所有三条均线时自动跳过。",
+      "type": "rule",
+      "tags": ["entry-filter", "anti-value-trap"],
+      "evidence_type": "supporting",
+      "mechanism": "均线空头排列意味着中期趋势已坏，-26%距MA20不是'便宜'而是趋势衰减的信号。动量交易应顺着趋势方向操作，而非逆势抄底。"
+    },
+    {
+      "text": "硬性buy gate(h077)再次验证: 华峰测控(dist_ma5仅-1.4%)和涛涛车业(MA三线紧凑)在恐慌日看起来诱人但系统正确强制空仓。V1会在今天买入并承受明天可能的继续下跌。今天0.55:1的涨跌比下任何新仓都是冒险。",
+      "type": "signal",
+      "tags": ["entry-filter", "regime-detection"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "恐慌日(Up/Down<1:1 + 3/3指数绿失败)个股信号不可靠。系统性抛压下好股票也会被拖累，此时筛选个股是徒劳的。"
+    },
+    {
+      "text": "通信设备-12%、半导体-7.5% vs 医疗美容+5%、白酒+3.6%的极端分化是融资盘踩踏信号。科技赛道前期拥挤度高，一旦触发margin call就是连锁反应。我们幸运地在科技赛道零持仓——昨天的决策避免了今天的灾难。",
+      "type": "observation",
+      "tags": ["sector", "margin-risk"],
+      "evidence_type": "supporting",
+      "mechanism": "高拥挤度+高融资余额的板块在恐慌日承受双重抛压——持仓者被迫减仓+融资盘被强制平仓。这是通信设备板块日跌12%的核心驱动力。"
+    }
+  ],
+  "market_summary": "PANIC TAPE. Breadth 0.55:1 (1901 up / 3457 down), 0/3 major indices green (上证-1.15%, 深成指-3.79%, 创业板-5.89%, 科创50-6.34%). 51涨停/48跌停, f7_10=484 large-scale heavy selling. IV Rank avg 84.5% extreme across all ETFs (科创50 92.4%, 创业板ETF 96.9%). Violent tech-to-defensive rotation: 通信设备-12%, 半导体-7.5% capitulating; 医疗美容+5%, 白酒+4% bid as safe havens. Likely margin call cascade in crowded AI/semi names. Cash is king — hard block on new positions remains. Portfolio: exiting 中国巨石 (-5.91% stop breach) and 药明康德 (-3.56% in 2 days triggers 3-day rule), holding 恒逸石化 (-1.47%, 3.58% above stop). Post-sell cash ~88%.",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}
+```
