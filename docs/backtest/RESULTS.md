@@ -144,6 +144,43 @@ hottest names was the toxic component in this regime* (rhymes with the
 pullback result). The actionable bar for any candidate picker (e.g. Kronos):
 positive mean rank-IC with a stable sign on our window, out-of-sample.
 
+## Kronos audition — zero-shot picker (run 2026-07-31)
+
+Setup: Kronos-small (24.7M, AAAI'26 k-line foundation model), zero-shot, 250
+adjusted daily bars per stock, 10-session forecast, full gate pool every 3rd
+day (27 days × ~550 stocks, ~15k forecasts, 53min on MPS). Scores:
+`/tmp/kronos_scores.csv`, script `scripts/kronos_spike.py` (runs in the
+dedicated venv at ~/Work/Personal/Kronos/.venv-kronos). Window postdates the
+model's 2025-08 release → genuinely out-of-sample.
+
+| ranking signal | mean rank-IC (10d) | days IC>0 |
+|---|---|---|
+| RPS60 (incumbent) | -0.071 | 8/27 |
+| **inverted RPS60** | **+0.071** | 19/27 |
+| Kronos zero-shot | +0.056 | 16/27 |
+| Kronos orthogonalized to inverted-RPS60 | **+0.008** | 13/27 |
+
+**Verdict: audition failed — not because Kronos is bad, but because it is
+our own signal in disguise.** Its cross-sectional ranking correlates 0.70
+with inverted RPS60; the day-level IC series correlate -0.89 with RPS60
+(near-mirror). Orthogonalized to the inversion, its residual IC is +0.008 ≈
+nothing on average, and the residual is itself regime-flipping (+0.15 in the
+reversal regimes, -0.13 in the Apr–Jun momentum stretch). Zero-shot Kronos ≈
+a 70%-strength mean-reversion tilt, and the plain inversion of our existing
+signal scores higher (+0.071 vs +0.056) for free.
+
+What the spike DID establish: (1) an external model trained on 45 exchanges
+independently reads this pool's dominant structure as short-horizon reversal
+— corroborates the selection audit, so the inversion finding is not an
+artifact of our RPS math; (2) the regime question is the actual alpha
+question: with IC-series correlation -0.89, one binary switch between
+"rank by RPS60" and "rank by -RPS60" captures nearly everything either
+signal offers — IF the regime (momentum vs reversal, the Apr–Jun flip) can
+be predicted. Fitting that switch on 27 days would be pure overfit; it needs
+either much more data (gap repair → longer history) or an ex-ante regime
+proxy tested out-of-sample. (3) Fine-tuning Kronos on A-shares remains
+untried and is the only path by which it could still add value; parked.
+
 ## Caveats
 
 Single regime (2026 downtrend/chop); no intraday data (close-based stops);
