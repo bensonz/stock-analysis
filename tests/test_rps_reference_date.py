@@ -144,3 +144,46 @@ def test_compute_ma_rps_recomputes_when_cache_is_undersized(tmp_path):
         cached_count = conn.execute("SELECT COUNT(*) FROM rps_cache WHERE date=?", (latest_full_date,)).fetchone()[0]
 
     assert cached_count == 5
+
+
+def test_coverage_floor_tracks_live_universe_not_alltime_codes(tmp_path):
+    """Regression for coverage-floor drift: the denominator must be the recent
+    typical daily code count, NOT all-time COUNT(DISTINCT code). Delisted
+    codes never leave the all-time total, so that floor creeps above the live
+    universe and eventually rejects every legitimate full day — at which point
+    reference-date resolution falls back to MAX(date) and can pick a partial
+    intraday snapshot."""
+    db_path = tmp_path / "prices.db"
+    with sqlite3.connect(str(db_path)) as conn:
+        conn.execute("CREATE TABLE daily_prices (date TEXT, code TEXT, close REAL)")
+        # old era: 100 codes traded, half have since delisted
+        for i in range(100):
+            conn.execute(
+                "INSERT INTO daily_prices(date, code, close) VALUES (?, ?, ?)",
+                ("2025-01-06", f"{i:06d}", 10.0),
+            )
+        # recent era: live universe is 50 codes, fully covered every day
+        for day in range(1, 11):
+            for i in range(50):
+                conn.execute(
+                    "INSERT INTO daily_prices(date, code, close) VALUES (?, ?, ?)",
+                    (f"2026-03-{day:02d}", f"{i:06d}", 11.0),
+                )
+        # newest date: a partial fetch (30 of 50 codes)
+        for i in range(30):
+            conn.execute(
+                "INSERT INTO daily_prices(date, code, close) VALUES (?, ?, ?)",
+                ("2026-03-11", f"{i:06d}", 12.0),
+            )
+        conn.commit()
+
+        # all-time floor would be 0.9*100=90 > 50, rejecting every recent full
+        # day; the live-universe floor must sit at/below 50 and above the
+        # partial day's 30
+        floor = rps_calculator._reference_date_min_codes(conn)
+        assert 30 < floor <= 50
+
+        resolved = _resolve_reference_date(conn, None)
+
+    # full recent day chosen; the partial newest date is skipped
+    assert resolved == "2026-03-10"

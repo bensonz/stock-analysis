@@ -41,27 +41,25 @@ _PANEL_CACHE: dict = {}           # db_path -> feature panel dict
 # --------------------------------------------------------------------------- #
 # Panel construction (one bulk load, vectorized features)
 # --------------------------------------------------------------------------- #
-COVERAGE_FLOOR = 0.9  # of distinct codes — mirrors rps_calculator's reference-date rule
-
-
 def _load_closes(db_path: str):
     """Adjusted-close panel: DataFrame(index=date, columns=code).
 
     Under-covered dates (partial fetch days — the DB has ~50 of them since
     2026-03) are DROPPED, mirroring production: rps_calculator excludes them
     from reference-date resolution and MA windows, so a faithful replication
-    must too. Rolling windows below therefore run over covered sessions, and
+    must too (the floor itself comes from rps_calculator, single source of
+    truth). Rolling windows below therefore run over covered sessions, and
     windows simply reach further back across a dropped day — exactly like
     _load_trading_dates.
     """
     import pandas as pd
     import price_adjust
+    import rps_calculator
 
     conn = sqlite3.connect(db_path)
     try:
         price_adjust.ensure_adj_schema(conn)
-        total = conn.execute("SELECT COUNT(DISTINCT code) FROM daily_prices").fetchone()[0]
-        min_codes = int(total * COVERAGE_FLOOR)
+        min_codes = rps_calculator._reference_date_min_codes(conn)
         sql = (
             f"SELECT d.code AS code, d.date AS date, "
             f"{price_adjust.adjusted_close_sql()} AS close "

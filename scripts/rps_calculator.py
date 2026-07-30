@@ -430,11 +430,34 @@ def _reference_date_coverage_threshold() -> float:
     return min(1.0, max(0.0, value))
 
 
+# Coverage-floor denominator: how many recent dates to sample for the typical
+# daily code count.
+COVERAGE_RECENT_DAYS = 60
+
+
 def _reference_date_min_codes(conn: sqlite3.Connection) -> int:
+    """Coverage floor = threshold × the recent TYPICAL daily code count.
+
+    Denominator is the 80th percentile of per-date code counts over the last
+    COVERAGE_RECENT_DAYS dates — NOT all-time COUNT(DISTINCT code). The
+    all-time total only grows (IPOs accumulate, delisted codes never leave),
+    so a floor keyed to it drifts toward — and eventually past — the live
+    universe size, at which point every legitimate new day gets rejected as
+    "under-covered". The p80-of-recent form tracks the live universe and is
+    robust to both partial-fetch days (low outliers) and one-off inflated
+    backfill days (high outliers).
+    """
     coverage_threshold = _reference_date_coverage_threshold()
-    total_codes_row = conn.execute("SELECT COUNT(DISTINCT code) FROM daily_prices").fetchone()
-    total_codes = int(total_codes_row[0] or 0) if total_codes_row else 0
-    return int(total_codes * coverage_threshold)
+    rows = conn.execute(
+        "SELECT COUNT(DISTINCT code) AS n FROM daily_prices "
+        "GROUP BY date ORDER BY date DESC LIMIT ?",
+        (COVERAGE_RECENT_DAYS,),
+    ).fetchall()
+    counts = sorted(int(r[0]) for r in rows if r and r[0])
+    if not counts:
+        return 0
+    p80 = counts[min(len(counts) - 1, int(len(counts) * 0.8))]
+    return int(p80 * coverage_threshold)
 
 
 def _debug_codes() -> list[str]:
