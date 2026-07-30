@@ -1,0 +1,282 @@
+## Research Memo: 2026-07-30 — Momentum-First Framework Analysis
+
+---
+
+### 1. Market Regime — **PANIC. HARD BLOCK. NO NEW POSITIONS.**
+
+| Indicator | Value | Signal |
+|-----------|-------|--------|
+| 上证指数 | -0.62% | 🔴 |
+| 深证成指 | -2.73% | 🔴 |
+| 创业板指 | -3.97% | 🔴 |
+| 科创50 | -5.38% | 🔴 Severe |
+| Breadth | 1,768↑ / 3,635↓ (0.49:1) | 🔴 Panic |
+| 涨停/跌停 | 56 / 83 | 🔴 More limit-downs |
+| f10 (跌停≥10%) | 83 | 🔴 ≥30 = panic trigger |
+| Avg IV Rank | 91.13% | 🔴 Extreme fear |
+
+**Buy Gate (all three):**
+1. ✅❌ Up/Down ≥ 1.5:1 → **FAIL** (0.49:1)
+2. ✅❌ ≥2 major indices green → **FAIL** (0/3 green)
+3. ✅❌ NOT panic (f10 ≥ 30) → **FAIL** (83跌停)
+
+**Verdict: `entry_regime.hard_block = true`. No new positions today. Period.**
+
+Today is a severe risk-off day. Tech is being liquidated aggressively: 通信设备 -8.52%, 元件 -8.02%, 半导体 -6.32%, 电子化学品 -6.51%. The rotation is into defensive/value: 商用车 +4.41%, 白酒 +3.51%, 农商行 +3.26%. This is not a dip-buying environment — it's a liquidation cascade in the very sectors where our best RPS candidates sit.
+
+IV is at panic extremes across all core ETFs. 科创50 IV Rank 100%, IV at 66.85% — options market is pricing massive tail risk. 500ETF similarly at 100% IV rank. The 50ETF is relatively calmer at 68.9% — large-cap defensives are the only pocket of composure.
+
+**One-line breadth read:** Breadth 0.49:1 bearish-panic, 56涨停/83跌停, tech-led liquidation, defensive rotation.
+
+---
+
+### 2. Sector Analysis
+
+**Today's Hot Sectors (top 5 by 1-day performance):**
+| Sector | Change | Notes |
+|--------|--------|-------|
+| 商用车 | +4.41% | Defensive rotation |
+| 白酒Ⅱ | +3.51% | Consumer defensive bid |
+| 农商行Ⅱ | +3.26% | Value rotation |
+| 医疗美容 | +3.06% | Consumer |
+| 厨卫电器 | +3.04% | Consumer/Home |
+
+**Today's Cold Sectors (bottom 5):**
+| Sector | Change | Notes |
+|--------|--------|-------|
+| 通信设备 | -8.52% | CRUSHED — AI/光模块 fallout |
+| 元件 | -8.02% | PCB/被动元件 liquidation |
+| 电子化学品Ⅱ | -6.51% | Downstream tech |
+| 半导体 | -6.32% | Broad selloff |
+| 非金属材料Ⅱ | -5.81% | Materials |
+
+**Position Sector Alignment:** 1/1 in neutral zone (石油石化 not in top 30% nor bottom). 恒逸石化 benefited from the rotation into resources today: +2.88%.
+
+**Regime read:** This is NOT a one-day rotation — it's a deleveraging event. Morgan Stanley called the top on memory semis, 中际旭创 H-share listing disappointed, and the AI hardware complex is unwinding leveraged positions. The hot sectors today are not where our momentum candidates live. This means the strategy should be entirely on defense.
+
+**Key observation:** Of the ~77 candidates in strategy_pool, the highest RPS names are overwhelmingly concentrated in semiconductors, components, and communication equipment — all in today's bottom 5 sectors. This is exactly the scenario where V2's sector-first rule prevents disaster.
+
+---
+
+### 3. Position Review
+
+#### Active Position: 恒逸石化 (000703)
+
+| Field | Value |
+|-------|-------|
+| Entry Date | 2026-07-29 |
+| Entry Price | ¥15.60 |
+| Current Price | ¥16.05 |
+| PnL | **+2.88%** ✅ |
+| Days Held | 2 |
+| Sector | 石油石化 (炼化及贸易) |
+| Sector Today | Neutral (not hot, not cold) |
+| RPS120 | 97.37 |
+| Current Stop | ¥14.82 (-5%) |
+| Thesis | H1净利+2326-2547%, 文莱炼化, 10亿回购 |
+| Dist MA5 | -87.2% (see note below) |
+| Dist MA10 | -88.3% (see note below) |
+
+**MA data anomaly note:** The MA values in enriched_candidates (MA5=125.69, MA10=137.59, MA20=139.09) don't match the current price of ¥16.05. This appears to be a data issue where the MA calculations use pre-split or different share basis. The position_prices data is the ground truth for current price. The stop at ¥14.82 remains the operative risk control.
+
+**Recommendation: HOLD**
+
+- Thesis is intact: 恒逸石化's H1 profit guidance (+2326-2547%) is among the strongest in the market. The 10亿 buyback program provides a floor. Today's +2.88% confirms the catalyst is working.
+- Sector (石油石化) is neutral — not in danger zone. Energy/resources are actually benefiting from the rotation away from tech.
+- Stop at ¥14.82 is not threatened (current price ¥16.05, cushion 8.3%).
+- Only 2 days held — too early for any time-stop concern.
+- Margin signal is neutral — no alarm bells.
+- IV proxy (深100ETF) at 94.86% IV rank is high, indicating potential for volatility, but the position is small (3% allocation).
+
+**No action needed. Monitor sector rotation. If 石油石化 drifts into bottom 30% for 3+ consecutive days, reassess.**
+
+---
+
+### 4. New Entry Candidates — **ALL SKIPPED (PANIC REGIME)**
+
+The entry regime is `panic` with `hard_block: true`. Even if it weren't, virtually all high-RPS candidates are in bottom-5 sectors. A quick scan of what WOULD be interesting in a better tape:
+
+**Would-be contenders (all disqualified by sector or regime):**
+
+| Stock | RPS120 | Sector | Issue |
+|-------|--------|--------|-------|
+| 华峰测控 | 99.48% | 半导体 | Sector -6.32% (bottom 5) |
+| 中科飞测 | 99.01% | 半导体 | Sector -6.32% (bottom 5) |
+| 国瓷材料 | 98.43% | 电子化学品Ⅱ | Sector -6.51% (bottom 5) |
+| 三环集团 | 98.09% | 元件 | Sector -8.02% (bottom 5) |
+| 药明康德 | 90.81% | 医疗服务 | Not in hot sectors, VCP SETUP only |
+| 西部矿业 | 93.67% | 工业金属 | dist_ma20=13.3% > 12% (chase) |
+
+This is a perfect illustration of why the sector-first rule matters: the best RPS stocks in the worst sectors are death traps today.
+
+---
+
+### 5. Skip List
+
+| Code | Name | Reason |
+|------|------|--------|
+| 688200 | 华峰测控 | Sector 半导体 bottom 5 (-6.32%). RPS120=99.48% can't save it from sector gravity. |
+| 688361 | 中科飞测 | Sector 半导体 bottom 5. Perfect MA setup (dist_ma5=-0.4%) but sector drag kills entry. |
+| 300285 | 国瓷材料 | Sector 电子化学品Ⅱ bottom 5 (-6.51%). Good MA proximity but dead sector. |
+| 300408 | 三环集团 | Sector 元件 bottom 5 (-8.02%). Would otherwise be interesting (dist_ma5=3.2%). |
+| 603259 | 药明康德 | VCP SETUP, good MA proximity, but sector (医疗服务) not in hot sectors AND market in panic. Good candidate to track for when regime clears. |
+| 601168 | 西部矿业 | dist_ma20=13.3% exceeds 12% chase limit (Rule 2b). Plus market panic. |
+| 002353 | 杰瑞股份 | dist_ma10=6.6% approaching chase zone. Sector (专用设备) not hot. |
+| 688120 | 华海清科 | Sector 半导体 bottom 5. Good MA setup wasted. |
+| 300308 | 中际旭创 | Sector 通信设备 bottom 5 (-8.52%). H-share listing disappointment. A-share -15.77% intraday. |
+
+---
+
+### 6. Learnings
+
+```json
+[
+  {
+    "text": "Panic regime correctly blocks entries when 83 stocks hit limit-down and 0/3 major indices are green. Tech sector liquidation validates the sector-first rule: even RPS120=99%+ names in semiconductor/components are getting crushed.",
+    "type": "observation",
+    "tags": ["entry-filter", "sector"],
+    "evidence_type": "supporting",
+    "related_hypothesis": "h077",
+    "mechanism": "Sector gravity overwhelms individual stock momentum during deleveraging events. When a sector drops 6-8% in a day, even the strongest stocks within it get dragged down by forced selling and margin calls."
+  },
+  {
+    "text": "V2's hard block prevented disaster today. Under V1 rules, stocks like 华峰测控 (RPS120=99.48%, dist_ma5=-1.4%), 中科飞测 (RPS120=99.01%, dist_ma5=-0.4%), and 国瓷材料 (RPS120=98.43%, dist_ma5=-0.1%) would have been tempting 'value' entries. Today they're in sectors down 6-8%.",
+    "type": "rule",
+    "tags": ["entry-filter", "sector"],
+    "evidence_type": "supporting",
+    "related_hypothesis": "h077",
+    "mechanism": "The entry regime check (breadth + indices + limit-down count) catches macro liquidation events that individual stock analysis would miss."
+  },
+  {
+    "text": "恒逸石化 (+2.88%) is the only bright spot precisely because it's NOT in tech. 石油石化 sector benefits from the rotation into resources/energy. V1 might have sold this for a 'better' semiconductor name — which would have been a catastrophic swap.",
+    "type": "observation",
+    "tags": ["position-sizing", "sector"],
+    "evidence_type": "supporting",
+    "mechanism": "During sector rotation, holding positions in neutral/defensive sectors preserves capital while tech leverage unwinds."
+  },
+  {
+    "text": "MA data anomaly detected: multiple candidates show extreme negative dist_ma values (e.g., -87% to -97%) that don't match their current prices. This may indicate the MA calculations use a different share basis (pre-split, pre-rights, etc.). The position_prices should be used as the ground truth for stop calculations.",
+    "type": "signal",
+    "tags": ["data-quality"],
+    "evidence_type": "observation",
+    "mechanism": "Some enriched_candidates have MA values orders of magnitude away from current_price, suggesting the SMA engine uses unadjusted historical prices while current_price reflects corporate actions."
+  }
+]
+```
+
+---
+
+### 7. Uncertainty Flags
+
+1. **MA data mismatch for multiple stocks (冰轮环境, 中国巨石, 恒逸石化, 京东方A, etc.):** MA5/MA10/MA20 values appear to be 5-20x the current price for many names. This makes dist_ma checks unreliable for those candidates. I'm uncertain whether this is a pre-split price issue or a data pipeline bug. For position management, I rely on the hard stop rather than MA distances.
+
+2. **How long will this tech liquidation last?** The breadth suggests genuine deleveraging (margin calls in AI/tech names). The IV spike to 100th percentile on 科创50 suggests the options market expects more volatility. But historically, IV at these levels has been a medium-term buying opportunity. I'm uncertain about the timing of a reversal — could be days or weeks.
+
+3. **恒逸石化's MA anomaly:** The MA data doesn't match the current price, so I can't run a proper MA distance check. The thesis and price action (+2.88%) are positive, but I can't verify Rule 2b compliance for this holding.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "商用车", "5d_pct": 4.41, "trend": "defensive rotation, 1-day spike"},
+      {"name": "白酒Ⅱ", "5d_pct": 3.51, "trend": "defensive bid"},
+      {"name": "农商行Ⅱ", "5d_pct": 3.26, "trend": "value rotation"},
+      {"name": "医疗美容", "5d_pct": 3.06, "trend": "consumer defensive"},
+      {"name": "厨卫电器", "5d_pct": 3.04, "trend": "consumer defensive"}
+    ],
+    "cold_sectors": [
+      {"name": "通信设备", "5d_pct": -8.52, "trend": "accelerating down — AI liquidation"},
+      {"name": "元件", "5d_pct": -8.02, "trend": "accelerating down — PCB unwind"},
+      {"name": "电子化学品Ⅱ", "5d_pct": -6.51, "trend": "deteriorating"},
+      {"name": "半导体", "5d_pct": -6.32, "trend": "accelerating down — broad selloff"},
+      {"name": "非金属材料Ⅱ", "5d_pct": -5.81, "trend": "deteriorating"}
+    ],
+    "position_alignment": "1/1 positions in neutral sector (石油石化 not in hot or cold zones)",
+    "regime": "PANIC — Tech/AI deleveraging event, defensive/value rotation, 83跌停 vs 56涨停"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "Thesis intact: H1净利+2326-2547%, 10亿回购支撑. PnL +2.88% in 2 days confirms catalyst traction. Sector 石油石化 neutral — benefiting from rotation out of tech. Stop at ¥14.82 not threatened (8.3% cushion). Margin signal neutral. Only 2 days held — far from time-stop risk.",
+      "sector_rank": "neutral (not in top 30% or bottom 30%)",
+      "new_stop": null,
+      "pnl_pct": 2.88,
+      "days_held": 2,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688200",
+      "name": "华峰测控",
+      "reason": "Sector 半导体 in bottom 5 (-6.32%). RPS120=99.48% and good MA proximity (dist_ma5=-1.4%) don't override sector gravity during liquidation.",
+      "rps120": 99.48
+    },
+    {
+      "code": "688361",
+      "name": "中科飞测",
+      "reason": "Sector 半导体 in bottom 5 (-6.32%). Perfect MA setup (dist_ma5=-0.4%, dist_ma20=-2.2%) but sector-first rule blocks entry.",
+      "rps120": 99.01
+    },
+    {
+      "code": "300285",
+      "name": "国瓷材料",
+      "reason": "Sector 电子化学品Ⅱ in bottom 5 (-6.51%). Good MA proximity but dead sector.",
+      "rps120": 98.43
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "reason": "Sector 元件 in bottom 5 (-8.02%). Would be a strong candidate in a normal tape.",
+      "rps120": 98.09
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "dist_ma20=13.3% exceeds Rule 2b chase limit (12%). Plus market in panic regime.",
+      "rps120": 93.67
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "reason": "VCP SETUP with good MA proximity (dist_ma5=0.9%, dist_ma10=1.4%), but sector 医疗服务 not in hot sectors AND market panic regime blocks all new entries. Track for when regime clears.",
+      "rps120": 90.81
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Panic regime correctly blocks entries when 83 stocks hit limit-down and 0/3 major indices are green. Tech sector liquidation validates the sector-first rule: even RPS120=99%+ names in semiconductor/components are getting crushed by sector gravity during deleveraging.",
+      "type": "observation",
+      "tags": ["entry-filter", "sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "Sector gravity overwhelms individual stock momentum during deleveraging events."
+    },
+    {
+      "text": "V2's hard block prevented FOMO entries into tech. Under V1, 华峰测控 (RPS120=99.48%), 中科飞测 (RPS120=99.01%), and 国瓷材料 (RPS120=98.43%) would have been 'value' entries despite being in sectors down 6-8% today.",
+      "type": "rule",
+      "tags": ["entry-filter", "sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "Entry regime checks catch macro liquidation that individual stock analysis misses."
+    },
+    {
+      "text": "恒逸石化 (+2.88%) survives precisely because it's outside the tech liquidation. 石油石化 benefits from rotation into resources. Holding neutral-sector positions during panic preserves capital.",
+      "type": "observation",
+      "tags": ["position-sizing", "sector"],
+      "evidence_type": "supporting",
+      "mechanism": "During sector rotation, defensive/neutral holdings protect capital while tech leverage unwinds."
+    }
+  ],
+  "market_summary": "PANIC TAPE. All 3 major indices red (创业板指 -3.97%, 深证成指 -2.73%, 科创50 -5.38%). Breadth 0.49:1 with 83跌停 vs 56涨停. Tech sectors in freefall: 通信设备 -8.52%, 元件 -8.02%, 半导体 -6.32%. Defensive rotation into 商用车 +4.41%, 白酒 +3.51%. IV spike to 91% avg rank across core ETFs — extreme fear. Entry regime HARD BLOCK. Cash is king today.",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}
+```

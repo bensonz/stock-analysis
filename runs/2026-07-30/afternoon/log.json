@@ -1,0 +1,48 @@
+{
+  "date": "2026-07-30",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1785397245.1322172,
+      "errors": [],
+      "end": 1785397304.795691,
+      "duration_sec": 59.7
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 14358,
+      "tokens": {
+        "input_tokens": 146968,
+        "output_tokens": 7232
+      },
+      "rounds": 1,
+      "tool_calls_count": 0,
+      "duration_sec": 147.0,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1785397451.8627992,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=16",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=17",
+        "Hypothesis: Created h129 (observation): 恒逸石化 (+2.88%) survives precisely because it's outside the tech liquidation. 石油石化...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1785397452.159165,
+      "duration_sec": 0.3
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 207.0
+  }
+}
