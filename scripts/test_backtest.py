@@ -176,3 +176,117 @@ def test_board_limit_mapping():
     assert bt.board_limit("300037") == 0.20
     assert bt.board_limit("688378") == 0.20
     assert bt.board_limit("830001") == 0.30
+
+
+# --------------------------------------------------------------------------- #
+# Stage 1b — mechanical-ANALYST arm
+# --------------------------------------------------------------------------- #
+def _analyst_panels(**overrides):
+    """Panels with every feature the baseline reads, pre-injected (so
+    prepare_analyst_features computes nothing) — 3 codes, 2 days.
+    A: passes everything. B: fails the RPS gate. C: overextended (Rule 2b).
+    """
+    days = ["2026-06-01", "2026-06-02"]
+
+    def f(a, b, c):
+        return pd.DataFrame({"A": [a] * 2, "B": [b] * 2, "C": [c] * 2}, index=days)
+
+    panels = {
+        "closes": f(10, 10, 10), "opens": f(10, 10, 10),
+        "rps60": f(95, 60, 90), "rps120": f(90, 90, 90), "rps250": f(85, 85, 85),
+        "dist_ma10_pct": f(2, 2, 2),
+        "ma5": f(10, 10, 9.0),          # C: dist_ma5 = +11% > 6% → skip
+        "ma20": f(9.8, 9.8, 9.8),
+        "ma120": f(9.0, 9.0, 9.0),
+        "ma250": f(8.0, 8.0, 8.0),
+    }
+    panels.update(overrides)
+    return panels
+
+
+def test_mechanical_entries_gate_extension_and_ranking():
+    entries_fn, _ = bt.make_mechanical_analyst()
+    p = _analyst_panels()
+    assert entries_fn("2026-06-01", p) == ["A"]      # B gated out, C overextended
+
+    # break A's MA alignment → nothing qualifies
+    p2 = _analyst_panels(ma120=pd.DataFrame(
+        {"A": [9.9] * 2, "B": [9.0] * 2, "C": [9.0] * 2},
+        index=["2026-06-01", "2026-06-02"]))
+    assert entries_fn("2026-06-01", p2) == []
+
+    # two qualifiers rank by rps60 desc
+    p3 = _analyst_panels(rps60=pd.DataFrame(
+        {"A": [85] * 2, "B": [95] * 2, "C": [90] * 2},
+        index=["2026-06-01", "2026-06-02"]),
+        ma5=pd.DataFrame({"A": [10] * 2, "B": [10] * 2, "C": [9.0] * 2},
+                         index=["2026-06-01", "2026-06-02"]))
+    assert entries_fn("2026-06-01", p3) == ["B", "A"]
+
+
+def test_mechanical_exits_rules():
+    _, exits_fn = bt.make_mechanical_analyst()
+
+    def pos(pnl, held):
+        return {"X": {"entry_date": "d", "days_held": held, "pnl_pct": pnl}}
+
+    assert exits_fn("d", {}, pos(-5.5, 10)) == [("X", "rule5_hard_stop")]
+    assert exits_fn("d", {}, pos(-3.2, 2)) == [("X", "rule5_early")]
+    assert exits_fn("d", {}, pos(-3.2, 10)) == []          # early rule expired
+    assert exits_fn("d", {}, pos(3.0, 25)) == [("X", "time_decay")]
+    assert exits_fn("d", {}, pos(8.0, 25)) == []           # winner rides
+    assert exits_fn("d", {}, pos(None, 5)) == []           # suspended: no data
+
+
+def test_mechanical_arm_end_to_end_stops_out():
+    # A qualifies on day1, fills day2 open at 10, crashes -6% by day3 close
+    days = [f"2026-06-{d:02d}" for d in range(1, 6)]
+
+    def f(vals):
+        return pd.DataFrame({"A": vals}, index=days)
+
+    p = {
+        "closes": f([10, 10, 9.4, 9.4, 9.4]), "opens": f([10, 10, 9.9, 9.4, 9.4]),
+        "rps60": f([95] * 5), "rps120": f([90] * 5), "rps250": f([85] * 5),
+        "dist_ma10_pct": f([2] * 5), "ma5": f([10] * 5), "ma20": f([9.8] * 5),
+        "ma120": f([9.0] * 5), "ma250": f([8.0] * 5),
+    }
+    entries_fn, exits_fn = bt.make_mechanical_analyst()
+    res = bt.run(p, entries_fn, exits_fn, config=NO_COST)
+    assert len(res["trades"]) == 1
+    t = res["trades"][0]
+    assert t["reason"] in ("rule5_hard_stop", "rule5_early")
+    assert t["entry_date"] == days[1] and t["exit_date"] == days[2]
+    assert abs(t["pnl_pct"] - (-6.0)) < 1e-6
+
+
+# --------------------------------------------------------------------------- #
+# Stage 1b — replay arm
+# --------------------------------------------------------------------------- #
+def test_replay_closed_trades_reconciles(tmp_path):
+    import json
+    days = [f"2026-07-{d:02d}" for d in range(1, 6)]
+    closes = pd.DataFrame({"600176": [38.0, 38.4, 36.1, 36.0, 36.0]}, index=days)
+    opens = pd.DataFrame({"600176": [38.0, 38.39, 37.0, 36.0, 36.0]}, index=days)
+    panels = {"closes": closes, "opens": opens}
+
+    (tmp_path / "600176.json").write_text(json.dumps([{
+        "code": "600176", "name": "中国巨石",
+        "entryDate": days[1], "exitDate": days[2],
+        "entryPrice": 38.39, "exitPrice": 36.12, "returnPct": -5.91,
+    }, {
+        "code": "600176", "name": "旧交易",
+        "entryDate": "2025-01-01", "exitDate": "2025-01-05",   # pre-panel
+        "returnPct": 3.0,
+    }]), encoding="utf-8")
+
+    rep = bt.replay_closed_trades(panels=panels, config=NO_COST, closed_dir=tmp_path)
+    assert rep["summary"]["total"] == 2
+    assert rep["summary"]["replayable"] == 1
+    ok = [r for r in rep["trades"] if r["status"] == "ok"][0]
+    # sim: 38.39 open → 36.1 close = -5.96% vs recorded -5.91 → within 1.5pp
+    assert abs(ok["sim_pct"] - (-5.96)) < 0.02
+    assert abs(ok["diff_pp"]) <= 1.5
+    assert rep["summary"]["match_rate_pct"] == 100.0
+    uncovered = [r for r in rep["trades"] if r["status"] == "date_uncovered"]
+    assert len(uncovered) == 1
