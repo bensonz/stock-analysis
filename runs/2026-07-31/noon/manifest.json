@@ -1,0 +1,80 @@
+{
+  "date": "2026-07-31",
+  "slot": "noon",
+  "run_started_at": "2026-07-31T11:35:11.760849+08:00",
+  "status": "degraded",
+  "exit_code": 0,
+  "total_duration_sec": 294.0,
+  "phases": {
+    "health_check": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "sources": {
+        "sina": {
+          "status": "ok",
+          "latency_ms": 72.7
+        },
+        "cheesefortune": {
+          "status": "ok",
+          "latency_ms": 431.5
+        },
+        "pricedb": {
+          "status": "ok",
+          "latest_date": "2026-07-30",
+          "stale": false
+        }
+      }
+    },
+    "preflight_pricedb": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "latest_date": "2026-07-30",
+      "target": "2026-07-30"
+    },
+    "collect": {
+      "status": "ok",
+      "duration_sec": 56.9,
+      "errors": []
+    },
+    "llm_analysis": {
+      "status": "ok",
+      "duration_sec": 236.0
+    },
+    "apply": {
+      "status": "ok",
+      "duration_sec": 1.1
+    },
+    "validate": {
+      "status": "warnings",
+      "duration_sec": 0.0,
+      "errors": [
+        "RULE check_stop_proximity: 002916 — 🟡 WARNING — only 2.6% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
+        "RULE check_stop_proximity: 603259 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+      ]
+    }
+  },
+  "gates": {
+    "phase1_to_phase2": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": []
+    },
+    "phase2_to_phase3": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [
+        "missing watchlist"
+      ]
+    },
+    "phase3_to_phase4": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [
+        "PRICE_CORRECTED 300408: LLM=108.89 outside [112.94,121.54], using market=115.07",
+        "PRICE_CORRECTED 002916: LLM=316.01 outside [304.4,312.95], using market=308.35",
+        "rule check_stop_proximity: 🟡 WARNING — only 2.6% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
+        "rule check_stop_proximity: 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+      ]
+    }
+  }
+}

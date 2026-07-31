@@ -148,10 +148,11 @@ positive mean rank-IC with a stable sign on our window, out-of-sample.
 
 Setup: Kronos-small (24.7M, AAAI'26 k-line foundation model), zero-shot, 250
 adjusted daily bars per stock, 10-session forecast, full gate pool every 3rd
-day (27 days × ~550 stocks, ~15k forecasts, 53min on MPS). Scores:
-`/tmp/kronos_scores.csv`, script `scripts/kronos_spike.py` (runs in the
-dedicated venv at ~/Work/Personal/Kronos/.venv-kronos). Window postdates the
-model's 2025-08 release → genuinely out-of-sample.
+day (27 days × ~550 stocks, ~15k forecasts, 53min on MPS). Scores archived
+at `docs/backtest/kronos_scores_2026-07-31.csv`. Window postdates the
+model's 2025-08 release → genuinely out-of-sample. (Spike artifacts — repo
+clone, venv, weights, `scripts/kronos_spike.py` — deleted 2026-07-31 after
+the verdict; the script survives in git history at `897cb0f` if ever needed.)
 
 | ranking signal | mean rank-IC (10d) | days IC>0 |
 |---|---|---|
