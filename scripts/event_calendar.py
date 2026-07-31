@@ -195,8 +195,10 @@ def risk_window(today: _date | None = None, path: Path | None = None) -> dict:
         "ongoing_high_impact": [e["name"] for e in ongoing_high],
         "advice": {
             "event_imminent": "高冲击既定事件落地在即：新开仓减半或推迟至事件后一个交易日",
-            "elevated": "存在持续性高冲击风险源：仓位与止损按谨慎档执行",
-            "normal": "无临近高冲击既定事件",
+            "elevated": ("存在持续性高冲击风险源（背景风险，非临近事件）：单笔规模取谨慎档。"
+                         "注意：这不是停买信号——通过全部规则的标的仍应减量执行；"
+                         "持续性风险不得作为长期零部署的理由"),
+            "normal": "无临近高冲击既定事件：按规则正常执行，不要以泛化担忧替代规则",
         }[level],
     }
 

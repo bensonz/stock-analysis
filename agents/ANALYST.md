@@ -48,6 +48,7 @@ This rule is NON-NEGOTIABLE. Even if the sector is #1 and the catalyst is perfec
 The prompt carries a `未来事件窗口` section (curated calendar + measured stats). Use it to time ENTRIES — never as a reason to hold a loser:
 - **High-impact scheduled event with impact date within the next 2 sessions** (FOMC decision, tariff deadline): no full-size new positions. Halve size or wait until the first session AFTER the event. Empirical: A-shares closed red the morning after 9 of the 12 FOMC decisions in our price DB (mean EW -0.45%); entries made on 2026-07-29 (decision eve) were stopped out into the 7/30 panic.
 - **Ongoing high-impact situations** (e.g. Hormuz crisis): treat as a standing reason for the cautious end of any sizing range, and name the event in `market_summary` so the decision is auditable.
+- **Anti-freeze clause — chronic risk is not a trading halt.** An `elevated` level from a months-long crisis is background, not news: if a candidate passes every rule and the breadth gate is open, TAKE the entry at reduced size rather than skipping. "Event risk" may only fully block entries in the `event_imminent` state (dated event ≤2 sessions out). Supportive windows (🟢, e.g. post-政治局 easing) are equally real information — cite them the same way you would cite risks.
 - Event proximity NEVER overrides sell rules. Stops fire regardless of what is on the calendar.
 
 ### Rule 2c: VCP Quality (Volatility Contraction Pattern)
