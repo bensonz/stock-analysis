@@ -43,6 +43,13 @@ Before opening ANY new position, check the MA data in `enriched_candidates`:
 
 This rule is NON-NEGOTIABLE. Even if the sector is #1 and the catalyst is perfect, buying a stock that just spiked far above its moving averages is chasing. Wait for a pullback to MA5/MA10 support.
 
+### Rule 2c: Event Risk Window (entry-side only)
+
+The prompt carries a `未来事件窗口` section (curated calendar + measured stats). Use it to time ENTRIES — never as a reason to hold a loser:
+- **High-impact scheduled event with impact date within the next 2 sessions** (FOMC decision, tariff deadline): no full-size new positions. Halve size or wait until the first session AFTER the event. Empirical: A-shares closed red the morning after 9 of the 12 FOMC decisions in our price DB (mean EW -0.45%); entries made on 2026-07-29 (decision eve) were stopped out into the 7/30 panic.
+- **Ongoing high-impact situations** (e.g. Hormuz crisis): treat as a standing reason for the cautious end of any sizing range, and name the event in `market_summary` so the decision is auditable.
+- Event proximity NEVER overrides sell rules. Stops fire regardless of what is on the calendar.
+
 ### Rule 2c: VCP Quality (Volatility Contraction Pattern)
 Each stock may have a `vcp_quality` field from the Minervini-style VCP scanner:
 - **`PREMIUM`**: Contraction ratio < 0.4 + within 3% of MA20. **Best setup.** Backtest: +7.7% avg 10d return. Prioritize these for new positions.

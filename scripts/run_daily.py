@@ -1040,6 +1040,24 @@ def phase1_collect(date: str, slot: str) -> dict:
             encoding="utf-8",
         )
 
+    # Foreseeable-event risk window (curated calendar + formulaic OpEx +
+    # measured FOMC base rate). Advisory context for the LLM; degrades to
+    # absent on any failure.
+    try:
+        from event_calendar import phase1_payload as _events_payload
+        data["events"] = _events_payload()
+        (input_dir / "events.json").write_text(
+            json.dumps(data["events"], ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        rw = data["events"].get("risk_window", {})
+        print(f"    [events] risk window: {rw.get('level', '?')} "
+              f"({len(data['events'].get('dated', []))} dated, "
+              f"{len(data['events'].get('ongoing', []))} ongoing)",
+              file=sys.stderr)
+    except Exception as e:  # noqa: BLE001 — never fail the run over the calendar
+        print(f"    [events] unavailable: {e}", file=sys.stderr)
+
     # Hypothesis-based learnings (structured system)
     hyp_data = load_hypotheses()
     data["hypothesis_prompt"] = hypothesis_prompt(hyp_data)

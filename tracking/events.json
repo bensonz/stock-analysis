@@ -1,0 +1,87 @@
+{
+  "updated": "2026-07-31",
+  "note": "手动维护的前瞻事件日历（scripts/event_calendar.py 读取；到期/失效条目请及时清理）。tz=US 的事件影响其后第一个A股交易日。",
+  "events": [
+    {
+      "date": "2026-08-12",
+      "tz": "US",
+      "name": "美国7月CPI公布",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "北京时间20:30。6月CPI同比3.5%（7/14公布当日A股批量止损）。9月议息前两个关键读数之一。"
+    },
+    {
+      "date": "2026-09-11",
+      "tz": "US",
+      "name": "美国8月CPI公布",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "议息会议前5天，权重高于常规CPI。"
+    },
+    {
+      "date": "2026-10-13",
+      "tz": "US",
+      "name": "美国9月CPI公布（日期待BLS确认）",
+      "kind": "macro_release",
+      "certainty": "estimated",
+      "impact": "medium",
+      "notes": "常规为10月中旬周二/周三；以 bls.gov/schedule 为准。"
+    },
+    {
+      "date": "2026-09-16",
+      "tz": "US",
+      "name": "FOMC利率决议+点阵图",
+      "kind": "cb_decision",
+      "certainty": "scheduled",
+      "impact": "high",
+      "notes": "当前区间3.50-3.75%。北京时间9/17凌晨2:00公布——影响9/17A股。7/29决议次日(7/30)A股恐慌盘（涨跌比0.55:1）为最近先例。"
+    },
+    {
+      "date": "2026-10-28",
+      "tz": "US",
+      "name": "FOMC利率决议",
+      "kind": "cb_decision",
+      "certainty": "scheduled",
+      "impact": "high",
+      "notes": "无点阵图。影响10/29A股。"
+    },
+    {
+      "date": "2026-12-09",
+      "tz": "US",
+      "name": "FOMC利率决议+点阵图",
+      "kind": "cb_decision",
+      "certainty": "scheduled",
+      "impact": "high",
+      "notes": "年末流动性叠加。影响12/10A股。"
+    },
+    {
+      "date": "2026-11-10",
+      "tz": "CN",
+      "name": "中美关税休战到期",
+      "kind": "policy_deadline",
+      "certainty": "scheduled",
+      "impact": "high",
+      "notes": "2025-10北京会晤定一年休战：美对华关税47%暂停升级、中方稀土出口管制暂停。Section 301复审2026夏结束——续约谈判进展是提前信号，临近未续约=系统性风险。"
+    },
+    {
+      "date": "2026-12-31",
+      "tz": "CN",
+      "name": "中方反制措施暂停到期",
+      "kind": "policy_deadline",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "中方2025-03以来反制关税与非关税措施的暂停期。与11/10休战联动。"
+    },
+    {
+      "date": null,
+      "tz": "US",
+      "name": "霍尔木兹海峡危机（美伊冲突）",
+      "kind": "geopolitical",
+      "certainty": "ongoing",
+      "impact": "high",
+      "notes": "2/28美以对伊开战以来海峡断航；4月停火后7/7再度交火，南航道AIS过航归零（7/10）。油价与全球风险偏好的持续压力源——7月中旬A股动量池系统性崩塌与此同窗。观察：停火/协议进展、油轮通行恢复、再升级。"
+    }
+  ]
+}

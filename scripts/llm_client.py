@@ -736,6 +736,23 @@ def build_summary(phase1_data: dict) -> str:
             f"- Reason: {entry_regime.get('reason', '')}"
         )
 
+    events = phase1_data.get("events") or {}
+    if events.get("dated") or events.get("ongoing"):
+        rw = events.get("risk_window", {})
+        lines = ["## 未来事件窗口 (Foreseeable Events)",
+                 f"- 风险档: {rw.get('level', '?')} — {rw.get('advice', '')}"]
+        for e in events.get("dated", [])[:8]:
+            lines.append(f"- {e.get('a_share_impact_date')} (T-{e.get('days_until_impact')}) "
+                         f"[{e.get('impact')}] {e.get('name')} — {e.get('notes', '')}")
+        for e in events.get("ongoing", []):
+            lines.append(f"- 持续中 [{e.get('impact')}] {e.get('name')} — {e.get('notes', '')}")
+        st = events.get("fomc_next_session_stats")
+        if st:
+            lines.append(f"- 实测: FOMC决议次日A股 n={st.get('n')} 中 "
+                         f"{st.get('sessions_negative')} 次收跌, 平均EW {st.get('mean_ew_ret_pct')}% "
+                         f"({st.get('note', '')})")
+        sections.append("\n".join(lines))
+
     # Market indices — dict (actual) or list
     market = phase1_data.get("market") or {}
     indices = market.get("indices") or {}
