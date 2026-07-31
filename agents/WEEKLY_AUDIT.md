@@ -58,28 +58,32 @@ Calculate and report:
 - **If win rate <40% → strategy is broken**
 - **If avg loss > avg win → risk management is broken**
 
-### C. The "Inverse Test"
-- Look at the most recent watchlist/skip_list recommendations
-- Fetch current prices for 5-10 stocks that were recommended but NOT bought
-- Compare their performance to stocks that WERE bought
-- **If skipped stocks outperform bought stocks → selection criteria are inverted**
+### C. Cost of Caution (the inverse test, done properly)
 
-To fetch current prices:
+Stops make bad entries visible; this makes bad NON-entries visible. Run:
+
 ```bash
-python3 -c "
-from scripts.cheesefortune_client import CheeseForTuneClient
-import time
-client = CheeseForTuneClient()
-# Check a few skipped stocks
-for code in ['CODES_FROM_SKIP_LIST']:
-    try:
-        data = client.get_stock_detail(code)
-        print(f'{code}: ¥{data.get(\"price\", \"?\")}, change={data.get(\"change\", \"?\")}%')
-        time.sleep(3)
-    except Exception as e:
-        print(f'{code}: error - {e}')
-"
+python3 scripts/cost_of_caution.py --human --days 28
 ```
+
+It replays every skip_list decision as if taken — entry at the next open,
+under the SAME Rule-5 exit discipline and costs a real position would have
+faced (so "it went up 8% later" doesn't count if the path stopped out
+first). Read it as:
+
+- **净节省 (net savings) positive** → caution is earning its keep. Normal in
+  weak regimes; do NOT loosen rules just because a few wins were missed.
+- **净成本 (net cost) positive, driven by `win_missed`** → over-caution is
+  now a measurable strategic failure. Identify WHICH reason bucket
+  (sector/regime/event/stock) is producing the missed wins and challenge
+  that specific rule — with this number, not vibes.
+- **`event` bucket persistently costing money** → the event-risk window
+  (Rule 2c) is over-scaring the system; escalate to the owner.
+- Verdict counts matter more than the sum: 30 disasters avoided + 1 win
+  missed is a healthy asymmetry even if one miss was large.
+- **If skipped stocks systematically beat bought stocks → selection criteria
+  are inverted** (this happened: see docs/backtest/RESULTS.md selection
+  audit; the RPS band restoration on 2026-07-31 was the fix).
 
 ### D. Sector Alignment (V2 specific)
 - Were positions opened in hot sectors? (check sector_rank in new_positions)
