@@ -1876,3 +1876,10 @@
 - MA data for stocks with recent corporate actions (splits, major dividends, restructurings) can show absurdly high negative dist values (-80% to -96%). These should be flagged as 'unreliable MA data' and excluded from MA-based decisions.
 - Rule 2b (MA-distance) blocked 中船特气, 西部矿业, 中远海特 today — three stocks with strong fundamentals that are technically overextended. Without this rule, V1 would have chased into mean-reversion risk. The rule earns its place as non-negotiable.
 - 药明康德's VCP SETUP (contraction_ratio=0.99, within 1.5% of all three MAs) is not 'PREMIUM' quality but still meaningful: a 0.99 ratio means the stock is compressing near its recent range, with the MA cluster acting as a launchpad. Combined with imminent earnings (8/4), this is a classic 'coiled spring' pattern.
+
+### 手动复盘 (2026-07-31) — RPS上限恢复：7/22取消上限被数据证伪
+
+- **事件链**: 7/22 移除 RPS>95 跳过规则（论据："高RPS是最强动量，不是缺陷"）→ 7/27/7/29 买入 冰轮环境(RPS120=99.1)/中国巨石(98.7)/昊志机电(98.5)/广合科技(98.0) → 全部止损，且为当批最深亏损（-8.8%/-5.9%）。原设计（75-95区间、甜蜜点80-92、>95跳过）本会硬性拦截这四笔。
+- **测量结论（docs/backtest/RESULTS.md）**: 池内 RPS60 排序的日度 rank-IC 在所有周期为负（5日 -0.063，仅36%天数为正；前10%分组比后10%每5日落后1.1pp）。"越强越买"在本市场阶段是反向信号——池内最热的名字系统性地是最差买点。外部模型（Kronos零样本）独立复现同一结构，排除RPS计算口径造成的假象。
+- **规则**: RPS>95 跳过恢复为硬性规则并标注"empirically load-bearing"。今后任何取消上限的提议必须携带强于该审计的样本外证据，不接受纯逻辑论证（"最强动量"论已被本次实验证伪一次）。
+- **边界**: 该结论来自2026年震荡/下行阶段的单一市场周期。若未来出现持续趋势市（如4-6月动量占优阶段重现并延续），需重新测量而非直接外推——但重新测量的门槛同样是数据，不是叙事。
