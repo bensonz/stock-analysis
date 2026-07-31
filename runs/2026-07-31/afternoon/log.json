@@ -1,0 +1,130 @@
+{
+  "date": "2026-07-31",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1785483645.831299,
+      "errors": [],
+      "end": 1785483710.844192,
+      "duration_sec": 65.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 19066,
+      "tokens": {
+        "input_tokens": 81220,
+        "output_tokens": 13853
+      },
+      "rounds": 1,
+      "tool_calls_count": 0,
+      "duration_sec": 260.1,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1785483970.995908,
+      "actions": [
+        "OPEN 300373 @ 87.6",
+        "PRICE_CORRECTED 688536: LLM=240.0 outside [223.0,239.88], using market=223.0",
+        "SKIP OPEN 688536: Insufficient deployable cash for minimum lot in 688536: deployable=743396.00, entryPrice=223.00",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h130 (observation): MA数据对于约15只股票存在异常(ma值5-10倍于现价)，疑似送转/拆股后未复权。此bug导致这些股票无法通过Rule 2b验证，被动跳过了一些热门secto...",
+        "Hypothesis: Created h131 (observation): 深南电路和三环集团今日开仓时RPS120分别95.23%和98.09%，均超过Rule 2的95%上限。两者日内均浮亏，再次验证V2回测的核心发现：RPS在ga...",
+        "Hypothesis: Created h132 (observation): 高IV环境(avg rank 81.6%)中，gap-up开盘后追入是错误进场时机。三环集团今日从开盘121跌至111.68(-7.7%日内回落)就是典型案例。...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002916",
+                "name": "深南电路",
+                "rule": "stop_proximity",
+                "severity": "WARNING",
+                "currentPrice": 308.0,
+                "stopLoss": 300.21,
+                "distance_pct": 2.53,
+                "suggestion": "🟡 WARNING — only 2.5% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+              },
+              {
+                "code": "300373",
+                "name": "扬杰科技",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 87.6,
+                "stopLoss": 83.22,
+                "distance_pct": 5.0,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1785483971.562509,
+      "duration_sec": 0.6
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 002916 — 🟡 WARNING — only 2.5% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
+    "RULE check_stop_proximity: 300373 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 325.70000000000005
+  }
+}

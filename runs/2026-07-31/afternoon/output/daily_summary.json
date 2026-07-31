@@ -1,0 +1,85 @@
+{
+  "date": "2026-07-31",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 16.09,
+      "pnl_pct": 3.14,
+      "note": "+3.14% in 3 days, thesis intact (H1净利+2326-2547%, 文莱炼化, 10亿回购). Sector 石油石化 neutral. Stop at 14.82 safe (7.9% cushion). Days held 3 — far from 10-day time stop."
+    },
+    {
+      "code": "002916",
+      "name": "深南电路",
+      "action": "HOLD",
+      "price": 308.0,
+      "pnl_pct": -0.11,
+      "note": "Day 1 entry. -0.11% from entry but +8.26% from prev close — gapped up, entry just poorly timed intraday. WARNING: only 2.53% above stop at 300.21. Prepare sell order. PCB/AI thesis intact."
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "price": 111.68,
+      "pnl_pct": -2.95,
+      "note": "Day 1 entry. -2.95% from entry — entered at intraday high after gap-up open. MLCC catalyst (三星8/1涨价30%) is fresh. 回购5-10亿 floor. Monitor: if -5% (109.32) fires, sell immediately."
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 128.43,
+      "pnl_pct": 1.53,
+      "note": "+1.53% day 1. Strongest position: RPS 90.81% sweet spot, VCP SETUP (within 1.5% of all MAs), 0 risks, 8/4中报 catalyst. A/H折价-7%. 10亿回购+11%北向+15%公募."
+    },
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "action": "OPEN",
+      "price": 87.6,
+      "note": "功率半导体龙头，H1预增20-40%，SiC碳化硅收入翻倍。AI服务器+新能源车双驱动。0风险标签。RPS 92.42% sweet spot。股价在MA下方形成pullback入场机会。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 940517.0,
+    "dayPnl": 7127.0,
+    "dayReturnPct": 0.76,
+    "totalReturnPct": -5.95,
+    "unrealizedPnl": -706.0,
+    "realizedPnl": -58777.0,
+    "cashPct": 79.04
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 6.4437,
+    "up": 4691,
+    "down": 728,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 103,
+    "limit_downs": 0,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 6.44:1, 3/3 major indices green, 103 limit-ups / 0 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [
+    {
+      "code": "300373",
+      "name": "扬杰科技"
+    },
+    {
+      "code": "688536",
+      "name": "思瑞浦"
+    }
+  ],
+  "marketContext": {
+    "summary": "Breadth 6.44:1极度看涨，4691涨/728跌，103涨停/0跌停。三大指数全红(沪+0.72%/深+2.21%/创+3.06%)。AI算力超级周期驱动科技股全面爆发(广告营销+9.0%, IT服务+6.4%, 自动化设备+6.1%)。资金从银行(-1.9%)保险(-1.3%)流出进入成长股。IV环境极度恐慌(avg rank 81.6%)，历史上是中期买点但短期波动剧烈。新仓位控制在9%总敞口(5%+4%)，留足现金应对波动。"
+  }
+}

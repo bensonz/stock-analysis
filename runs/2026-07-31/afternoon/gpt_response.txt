@@ -1,0 +1,369 @@
+# Research Memo — 2026-07-31
+
+## 1. Market Regime
+
+**Breadth: 6.44:1 — extremely bullish.** 4691 up, 728 down, 103 stocks at 涨停, **zero** 跌停. All three major indices green (上证+0.72%, 深成指+2.21%, 创业板+3.06%). This is the strongest breadth reading we've seen in weeks.
+
+**Entry regime:** `strong` — gate wide open for new positions at full size.
+
+**IV sentiment:** 极度恐慌 — avg IV rank 81.6%. Every ETF proxy except 50ETF (62%) sits above 70%, with 科创50 at 92%, 创业板 at 96%, 500ETF深 at 98%. This is post-crash vol that hasn't fully normalized. Per V2 rules: high IV = "only the strongest setups, wide stops." It's a caution flag but not a freeze — the breadth is too good to sit entirely in cash.
+
+**Key macro:** Tech/AI super-cycle driving the tape. 国金证券 note details Vera Rubin NVL72 deployment across CoreWeave/Google Cloud/Azure/Oracle, HBM4 supply already tight, Google Cloud Q2 +82% YoY. The capital-expenditure cycle from hyperscalers is converting into A-share hardware revenue. On the domestic side, 央行 2.1万亿逆回购 continues to provide liquidity support.
+
+---
+
+## 2. Sector Analysis
+
+**Today's top 5 (single-day):**
+| 板块 | 涨跌幅 |
+|---|---|
+| 广告营销 | +8.98% |
+| IT服务Ⅱ | +6.43% |
+| 数字媒体 | +6.17% |
+| 自动化设备 | +6.06% |
+| 软件开发 | +6.00% |
+
+**Bottom 5:** Banks (-1.94%), insurers (-1.33%), white goods (-1.0%). Classic risk-on rotation: money fleeing defensives into growth/tech.
+
+**Sector regime assessment:** This is not a one-day spike. Tech hardware (PCB/元件, 半导体, 消费电子) has been building momentum for weeks. The AI capex cycle is the structural driver. Today is an acceleration day — 创业板 +3.06% on massive breadth confirms the rotation is institutional, not retail-chasing.
+
+**Position sector alignment:**
+- 恒逸石化: 石油石化 — neutral, not in top 30% (oil/chem missing the tech party)
+- 深南电路: 元件 — tech-adjacent, likely top 20%
+- 三环集团: 元件 — same, likely top 20%
+- 药明康德: 医疗服务 — rallied with 医药板块 this week, likely top 30%
+
+2-3 out of 4 positions sit in strong/neutral sectors. 恒逸石化 is the only one outside the tech umbrella — but its thesis (文莱炼化 + H1 profit explosion) is idiosyncratic, not sector-dependent.
+
+---
+
+## 3. Position Review
+
+### 恒逸石化 (000703) — HOLD
+- **Price:** 16.09 | Entry: 15.60 | PnL: **+3.14%** | Days: 3
+- **Stop:** 14.82 (cushion: 7.9%)
+- **Sector:** 石油石化 (neutral — not hot, not cold)
+- **RPS120:** 97.37% (above the 95% cap for *new* entries — but this was entered at 97.37%. Now that it's held, RPS cap doesn't trigger a sell. The cap is an entry-side filter, not a holding rule.)
+- **Assessment:** The thesis holds: H1 net profit +2326-2547%, 10亿回购, 文莱炼化 is a unique structural asset. Today's +0.25% is minor consolidation after a +2.88% day yesterday. No reason to act. Days held = 3 — nowhere near the 10-day time stop.
+
+→ **HOLD.** No changes.
+
+### 深南电路 (002916) — HOLD (WARNING: stop proximity)
+- **Price:** 308.00 | Entry: 308.35 | PnL: **-0.11%** | Days: 1
+- **Stop:** 300.21 | Distance to stop: **2.53%** ⚠️
+- **Sector:** 元件 — strong
+- **RPS120:** 95.23% — entered above the 95% cap. This was a Rule 2 violation at entry. But it's now held — the cap is entry-side. However, stop proximity is a real concern. Only 2.5% above stop on day 1 means any overnight gap could trigger it.
+- **Rule violation:** `stop_proximity` WARNING triggered — 2.5% above stop.
+- **Assessment:** The stock opened at 312 (up from prev close 284.50), so it actually *gapped up* significantly today (+8.26% vs prev close). The entry was just poorly timed intraday. Thesis (PCB leader, AI demand, Vera Rubin catalyst) is intact. Day 1 — no action warranted. But if it breaks below 304 tomorrow, the stop is very close.
+
+→ **HOLD.** Prepare sell order at 300.21. If market opens weak, may gap through.
+
+### 三环集团 (300408) — HOLD (monitor closely)
+- **Price:** 111.68 | Entry: 115.07 | PnL: **-2.95%** | Days: 1
+- **Stop:** 103.45 | Distance: 7.4%
+- **Sector:** 元件 — strong
+- **RPS120:** 98.09% — also entered above the 95% cap (entry-side violation). 
+- **Assessment:** The stock is up +6.06% vs prev close (105.30), but the intraday entry was at the high of the day (115.07). Price then drifted down. The MLCC catalyst (三星电机 8/1 涨价30%, 太阳诱电 9/1 跟进) is real and fresh. The -2.95% paper loss is intraday noise on day 1. 回购 5-10亿二期 just announced provides a floor. No concerns beyond timing.
+
+→ **HOLD.** If PnL reaches -5% (109.32), hard stop fires. Currently at 111.68 — 2.1% above that level. Monitor.
+
+### 药明康德 (603259) — HOLD (best position)
+- **Price:** 128.43 | Entry: 126.50 | PnL: **+1.53%** | Days: 1
+- **Stop:** 120.18 | Cushion: 6.4%
+- **Sector:** 医疗服务 — trending up with 医药板块
+- **RPS120:** 90.81% — perfectly in sweet spot ✅
+- **VCP:** SETUP — stock is within 1.5% of MA5/MA10/MA20. Extreme contraction — a coiled spring.
+- **Catalyst:** 8月4日中报 (2 sessions away). This is the highest-conviction position in the book. 0 risks. 10亿回购. A/H折价 -7%. 11%北向 + 15%公募.
+
+→ **HOLD.** Raise stop to entry price (126.50) if/when price hits +10% (139.15).
+
+---
+
+## 4. New Entry Candidates
+
+### Analysis framework applied:
+1. Sector must be strong (tech/hardware in today's regime)
+2. RPS120 75-95% (with exceptions for 92-95% zone)
+3. MA distance check (Rule 2b)
+4. Catalyst freshness
+5. IV >75% → only strongest setups, wide stops
+
+### Top candidate: 扬杰科技 (300373) — BUY at 5%
+
+**Thesis:** 功率半导体龙头，H1预增20-40%，SiC碳化硅业务收入翻倍。AI服务器+新能源汽车双轮驱动需求。0风险标签。RPS120 92.42%在sweet spot。股价在MA下方-2.5%~-5.4%，pullback中的入场机会而非追高。
+
+| Metric | Value | Assessment |
+|---|---|---|
+| Sector | 半导体 | Tech rally beneficiary |
+| RPS120 | 92.42% | Sweet spot ✅ |
+| dist_ma5 | -2.5% | Below MA (pullback) ✅ |
+| dist_ma10 | -5.4% | Safe ✅ |
+| dist_ma20 | -21.0% | Wide but not extended |
+| PE | 33.3 | Reasonable |
+| Risks | 0 | Clean ✅ |
+| Rev/NI growth | +20.9% / +44.3% | Strong |
+| Catalyst | H1预增20-40%, SiC翻倍 | Fresh |
+| IV proxy | 创业板ETF 95.6% | High — size conservatively |
+| Margin | Deleveraging -1.15% | Mild, not alarming |
+
+**Entry:** 87.60 | **Stop:** 83.22 (-5%) | **Target:** ~105 (MA20 convergence) | **Allocation:** 5%
+
+**Risk:** High IV environment (创业板 95.6% rank). Wide stops already built into the -5% rule. The setup quality (0 risks, pullback, fresh catalyst) justifies entry despite IV.
+
+### Second candidate: 思瑞浦 (688536) — SMALL BUY at 4%
+
+**Thesis:** 模拟芯片设计，营收+80.5%，净利+227.6%。7/29股权激励授予价201元 vs 当前240元 — 管理层有明确业绩诉求。2个风险标(商誉11%, 7月调整)，但仍属于优质半导体标的。
+
+| Metric | Value | Assessment |
+|---|---|---|
+| Sector | 半导体 | Tech rally beneficiary |
+| RPS120 | 94.21% | Extended zone (92-95%) — needs exception |
+| dist_ma5 | -1.7% | Safe ✅ |
+| dist_ma10 | -3.1% | Safe ✅ |
+| dist_ma20 | -17.1% | Wide, pullback |
+| PE | 117 | High but ignore for momentum |
+| Risks | 2 (商誉, 调整) | Manageable |
+| Rev/NI growth | +80.5% / +227.6% | Exceptional |
+| Catalyst | 股权激励7/29, 授予价201 | Fresh |
+| IV proxy | 科创50 92.0% | Very high |
+| Margin | Deleveraging -9.6% | Notable — size down |
+
+**Entry:** 240.0 | **Stop:** 228.0 (-5%) | **Target:** ~290 | **Allocation:** 4%
+
+**RPS exception justification:** RPS120 94.21% falls in the 92-95% extended zone. Rule 2 allows this if: (a) sector is top 10% — 半导体 is likely top 10-15% today given tech rally, borderline; (b) stock has 0 risk factors — NO, has 2; (c) recent earnings catalyst >50% growth — **YES**, revenue +80.5%. Criterion (c) is met. Also, the 股权激励 at 201元 (16% below market) creates an aligned-incentive floor.
+
+**The deleveraging at -9.6% is a concern** — it stacks with high IV. This is why I'm going 4% instead of 5-7%.
+
+---
+
+## 5. Skip List
+
+| Code | Name | Reason |
+|---|---|---|
+| 002975 | 博杰股份 | 昨日-9.99%跌停，抛压极重。同sector（自动化设备）虽热，但个股刚经历恐慌性抛售 |
+| 000938 | 紫光股份 | MA数据异常（ma5=238 vs price=33.6），无法验证Rule 2b。商誉占净资产90%，净利-14.9%下滑 |
+| 000988 | 华工科技 | MA数据同样异常。7/16跌停痕迹未消除，margin deleveraging -10.8% |
+| 600428 | 中远海特 | dist_ma20_pct=12.8% > 12%，Rule 2b硬触发。虽为航运龙头+业绩超预期，但价格已远离支撑 |
+| 601168 | 西部矿业 | dist_ma20_pct=13.3% > 12%，Rule 2b。好公司但太远了 |
+| 688256 | 寒武纪 | 0风险+91.59% RPS sweet spot，但IV rank 92% + margin deleveraging -8.44%堆叠。不在今天的新入场名单，但值得持续跟踪 |
+| 300285 | 国瓷材料 | 非enriched_candidates，无MA/IV/margin数据，无法验证规则 |
+| 688378 | 奥来德 | 光学光电子sector不在top5，营收-16%，净利-69%，基本面恶化 |
+| 603127 | 昭衍新药 | 毛利从49%降至19%（5年），收益质量低。虽有CRO板块回暖，但个股质量差 |
+| 688536 | 思瑞浦 | (Actually included as BUY above) |
+
+Also: many strategy_pool stocks show corrupted MA data (ma5/ma10/ma20 wildly mismatched vs current price — e.g. 紫光股份 ma5=238.25 vs price=33.6, 华工科技 ma5=884.71 vs price=91.1, 京东方 ma5=26.24 vs price=5.36). This is likely a stock-split or price-adjustment data pipeline bug. These stocks cannot pass Rule 2b verification.
+
+---
+
+## 6. Learnings
+
+```json
+[
+  {
+    "text": "Today's MA data for ~15 stocks shows values 5-10x above current price (e.g. 紫光股份 ma5=238.25, price=33.6). This appears to be a stock-split or price-adjustment pipeline bug in the enrichment layer. These stocks cannot pass Rule 2b (MA distance check), forcing skips on otherwise interesting candidates. The data team should investigate whether recent stock splits/送转 have broken the MA calculation logic.",
+    "type": "observation",
+    "tags": ["data-quality", "entry-filter"],
+    "evidence_type": "contradicting",
+    "mechanism": "MA values appear to be pre-split unadjusted prices. If 紫光股份 had a 送转 (e.g. 10送10), the unadjusted MA of 238.25 would correspond to an adjusted MA of ~119, which would give dist_ma5_pct closer to -72% instead of -85.9% — still wrong but less absurd. The enrichment pipeline needs to detect and adjust for corporate actions."
+  },
+  {
+    "text": "深南电路和三环集团 were both entered today above the RPS120 95% cap (95.23% and 98.09%). Rule 2 explicitly caps entries at 95% with narrow exceptions. The PM overrode this cap based on sector strength alone, and both positions are underwater intraday. This reinforces the empirical finding from the V2 post-mortem: RPS within the gate pool has negative rank-IC at every horizon. Top-of-pool = worst forward returns.",
+    "type": "rule",
+    "tags": ["entry-filter", "rps"],
+    "evidence_type": "supporting",
+    "mechanism": "Stocks at RPS 98-99% have exhausted their relative strength runway. Mean-reversion pressure builds from profit-taking and rebalancing flows. The next marginal buyer at these levels is always smaller than the next marginal seller."
+  },
+  {
+    "text": "High-IV entry regime (avg rank 81.6%) with 极度恐慌 signal historically marks good medium-term entry points, but day-1 PnL on 三环集团 (-2.95% from intraday entry) shows the importance of entry timing within the day. Entering on the open after a gap-up (opened 121 vs prev close 105.30) is precisely the wrong time. Wait for intraday pullback or use limit orders 2-3% below open in high-IV environments.",
+    "type": "heuristic",
+    "tags": ["timing", "position-sizing"],
+    "evidence_type": "supporting",
+    "mechanism": "High IV means large intraday ranges. Gap-up opens in high IV tend to see profit-taking within the first hour. A limit order at 2% below open would have captured 三环集团 near 111 instead of 115 — a ~3.5% improvement in entry price."
+  },
+  {
+    "text": "The stop_proximity rule flagged 深南电路 at 2.53% above stop on day 1. While no action is taken on day 1, this rule has proven load-bearing (91% hit rate per learnings). If the stock opens weak tomorrow and gaps through 300.21, the stop will fire. Having the sell order prepared in advance is the right discipline.",
+    "type": "signal",
+    "tags": ["exit-rule"],
+    "evidence_type": "supporting",
+    "related_hypothesis": "h024",
+    "mechanism": "科创板 names have higher gap risk due to lower liquidity and wider bid-ask spreads. 2.5% cushion on a 科创板 stock can evaporate in the first 5 minutes of trading."
+  }
+]
+```
+
+---
+
+## 7. Uncertainty Flags
+
+1. **MA data integrity for ~15 stocks is broken.** I have skipped all of them rather than guessing. This reduces the candidate pool significantly. If these MAs are wrong due to a known corporate action, the enrichment pipeline should be fixed — I'm potentially missing good setups in 自动化设备 and IT服务 (today's hottest sectors).
+
+2. **Sector ranking granularity is coarse.** I only have top 5 and bottom 5 sectors. I'm inferring that 半导体, 元件, 医疗服务 are in "top 30%" based on today's tech rally breadth. But I can't verify with hard data. If any of these sectors are actually in the 30-50% range, my sector-based entry rationale is weaker than it appears.
+
+3. **IV at 81.6% average is genuinely extreme.** The "极度恐慌" signal says "historically medium-term buying opportunity." But the last time we saw comparable levels (7/17-7/22), the market had a V-shaped panic and recovery. If this time is different — if vol stays elevated for weeks — the sizing framework that assumes "wide stops" will produce larger drawdowns. I'm limiting new positions to 9% total (5%+4%) rather than going to the full 15-20% the breadth alone would justify.
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "广告营销", "5d_pct": null, "1d_pct": 8.98, "trend": "accelerating"},
+      {"name": "IT服务Ⅱ", "5d_pct": null, "1d_pct": 6.43, "trend": "accelerating"},
+      {"name": "数字媒体", "5d_pct": null, "1d_pct": 6.17, "trend": "accelerating"},
+      {"name": "自动化设备", "5d_pct": null, "1d_pct": 6.06, "trend": "accelerating"},
+      {"name": "软件开发", "5d_pct": null, "1d_pct": 6.0, "trend": "accelerating"}
+    ],
+    "cold_sectors": [
+      {"name": "国有大型银行Ⅱ", "1d_pct": -1.94, "trend": "deteriorating"},
+      {"name": "股份制银行Ⅱ", "1d_pct": -1.38, "trend": "deteriorating"},
+      {"name": "保险Ⅱ", "1d_pct": -1.33, "trend": "deteriorating"}
+    ],
+    "position_alignment": "2-3/4 positions in strong/tech sectors. 恒逸石化 is the outlier in 石油石化 (neutral, idiosyncratic thesis).",
+    "regime": "Tech/AI super-cycle leadership confirmed. Money rotating from defensives (banks -1.94%, insurers -1.33%) into growth. Institutional, not retail-chasing — breadth 6.44:1 with zero 跌停 confirms quality of the move."
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "+3.14% in 3 days, thesis intact (H1净利+2326-2547%, 文莱炼化, 10亿回购). Sector 石油石化 neutral. Stop at 14.82 safe (7.9% cushion). Days held 3 — far from 10-day time stop.",
+      "sector_rank": "neutral (not in top/bottom 5)",
+      "new_stop": null,
+      "pnl_pct": 3.14,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "002916",
+      "name": "深南电路",
+      "action": "HOLD",
+      "reason": "Day 1 entry. -0.11% from entry but +8.26% from prev close — gapped up, entry just poorly timed intraday. WARNING: only 2.53% above stop at 300.21. Prepare sell order. PCB/AI thesis intact.",
+      "sector_rank": "top 30% (元件, tech hardware)",
+      "new_stop": null,
+      "pnl_pct": -0.11,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "reason": "Day 1 entry. -2.95% from entry — entered at intraday high after gap-up open. MLCC catalyst (三星8/1涨价30%) is fresh. 回购5-10亿 floor. Monitor: if -5% (109.32) fires, sell immediately.",
+      "sector_rank": "top 30% (元件, tech hardware)",
+      "new_stop": null,
+      "pnl_pct": -2.95,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "+1.53% day 1. Strongest position: RPS 90.81% sweet spot, VCP SETUP (within 1.5% of all MAs), 0 risks, 8/4中报 catalyst. A/H折价-7%. 10亿回购+11%北向+15%公募.",
+      "sector_rank": "top 30% (医疗服务, 医药反弹)",
+      "new_stop": null,
+      "pnl_pct": 1.53,
+      "days_held": 1,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "entry_price": 87.6,
+      "allocation_pct": 5,
+      "stop": 83.22,
+      "target": 105.0,
+      "thesis": "功率半导体龙头，H1预增20-40%，SiC碳化硅收入翻倍。AI服务器+新能源车双驱动。0风险标签。RPS 92.42% sweet spot。股价在MA下方形成pullback入场机会。",
+      "sector": "半导体",
+      "sector_rank": "top 20% (tech hardware rally)",
+      "catalyst": "H1业绩预增20-40%，SiC碳化硅翻倍，AI服务器+新能源车需求释放",
+      "catalyst_freshness": "ongoing",
+      "rps120": 92.42,
+      "conviction": "moderate"
+    },
+    {
+      "code": "688536",
+      "name": "思瑞浦",
+      "entry_price": 240.0,
+      "allocation_pct": 4,
+      "stop": 228.0,
+      "target": 290.0,
+      "thesis": "模拟芯片设计，营收+80.5%、净利+227.6%。7/29股权激励授予价201元(当前240)，管理层利益绑定。RPS 94.21%在92-95%扩展区，符合催化剂例外(净利增速>50%)。margin deleveraging -9.6%叠加高IV → 降低仓位至4%。",
+      "sector": "半导体",
+      "sector_rank": "top 20% (tech hardware rally)",
+      "catalyst": "股权激励7/29授予(201元)+营收+80.5%净利+227.6%",
+      "catalyst_freshness": "ongoing",
+      "rps120": 94.21,
+      "conviction": "small"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "002975",
+      "name": "博杰股份",
+      "reason": "昨日-9.99%跌停，抛压极重。虽在自动化设备(sector #4)但个股刚经历恐慌性抛售，今日反弹力度未知，不宜追入。",
+      "rps120": 93.46
+    },
+    {
+      "code": "000938",
+      "name": "紫光股份",
+      "reason": "MA数据异常(ma5=238 vs price=33.6)，无法验证Rule 2b。商誉占净资产90%，净利-14.9%下滑。IT服务sector虽热，个股质量不匹配。",
+      "rps120": 94.41
+    },
+    {
+      "code": "600428",
+      "name": "中远海特",
+      "reason": "Rule 2b硬触发：dist_ma20_pct=12.8% > 12%。航运龙头+业绩超预期，但价格已远离MA20支撑，追高风险大。",
+      "rps120": 93.79
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "Rule 2b硬触发：dist_ma20_pct=13.3% > 12%。好公司但价格太远，等待pullback。",
+      "rps120": 93.67
+    },
+    {
+      "code": "688256",
+      "name": "寒武纪",
+      "reason": "0风险+RPS 91.59% sweet spot，但IV rank 92% + margin deleveraging -8.44%堆叠风险。持续跟踪，今日不追。",
+      "rps120": 91.59
+    },
+    {
+      "code": "000988",
+      "name": "华工科技",
+      "reason": "MA数据异常(ma5=884.71 vs price=91.1)无法验证Rule 2b。margin deleveraging -10.8%严重。7/16跌停痕迹仍在。",
+      "rps120": 94.03
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "MA数据对于约15只股票存在异常(ma值5-10倍于现价)，疑似送转/拆股后未复权。此bug导致这些股票无法通过Rule 2b验证，被动跳过了一些热门sector的候选标的。应检查enrichment pipeline的复权逻辑。",
+      "type": "observation",
+      "tags": ["data-quality", "entry-filter"],
+      "evidence_type": "supporting",
+      "mechanism": "紫光股份、华工科技、京东方A等股票的MA值远高于现价，与正常的均线偏差模式不一致。如确为拆股未调整，修正后这些标的可能需要重新评估。"
+    },
+    {
+      "text": "深南电路和三环集团今日开仓时RPS120分别95.23%和98.09%，均超过Rule 2的95%上限。两者日内均浮亏，再次验证V2回测的核心发现：RPS在gate pool内的rank-IC为负(顶部=最差前瞻收益)。95%上限是经验性负载规则，不应被sector热度覆盖。",
+      "type": "rule",
+      "tags": ["entry-filter", "rps"],
+      "evidence_type": "supporting",
+      "mechanism": "RPS 98-99%的股票已耗尽相对强度动能，均值回归压力来自获利了结和再平衡资金流。下一批边际买家永远小于下一批边际卖家。"
+    },
+    {
+      "text": "高IV环境(avg rank 81.6%)中，gap-up开盘后追入是错误进场时机。三环集团今日从开盘121跌至111.68(-7.7%日内回落)就是典型案例。在高IV日，应使用限价单在开盘价下方2-3%挂单，利用日内波动改善入场价。",
+      "type": "heuristic",
+      "tags": ["timing", "position-sizing"],
+      "evidence_type": "supporting",
+      "mechanism": "高IV意味着大日内波幅。gap-up开盘后第一小时内常见获利了结。限价单设在开盘价-2%可显著改善入场价(三环集团案例可改善~3.5%)。"
+    }
+  ],
+  "market_summary": "Breadth 6.44:1极度看涨，4691涨/728跌，103涨停/0跌停。三大指数全红(沪+0.72%/深+2.21%/创+3.06%)。AI算力超级周期驱动科技股全面爆发(广告营销+9.0%, IT服务+6.4%, 自动化设备+6.1%)。资金从银行(-1.9%)保险(-1.3%)流出进入成长股。IV环境极度恐慌(avg rank 81.6%)，历史上是中期买点但短期波动剧烈。新仓位控制在9%总敞口(5%+4%)，留足现金应对波动。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}
+```
