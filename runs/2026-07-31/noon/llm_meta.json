@@ -1,0 +1,42 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 292251,
+  "output_tokens": 13999,
+  "rounds": 2,
+  "duration_sec": 236.0,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年7月31日 热门板块 通信设备 元件 大涨原因",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "MLCC涨价 三星电机 2026年7月 三环集团 风华高科",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "韩国股市暴涨 SK海力士 三星电子 2026年7月31日 A股半导体",
+        "max_results": 5
+      },
+      "result_length": 144
+    }
+  ],
+  "fallback_used": false
+}

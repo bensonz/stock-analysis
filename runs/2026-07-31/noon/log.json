@@ -1,0 +1,134 @@
+{
+  "date": "2026-07-31",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1785469245.7684858,
+      "errors": [],
+      "end": 1785469302.638029,
+      "duration_sec": 56.9
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 17931,
+      "tokens": {
+        "input_tokens": 292251,
+        "output_tokens": 13999
+      },
+      "rounds": 2,
+      "tool_calls_count": 3,
+      "duration_sec": 236.0,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1785469538.674315,
+      "actions": [
+        "PRICE_CORRECTED 300408: LLM=108.89 outside [112.94,121.54], using market=115.07",
+        "OPEN 300408 @ 115.07",
+        "PRICE_CORRECTED 002916: LLM=316.01 outside [304.4,312.95], using market=308.35",
+        "OPEN 002916 @ 308.35",
+        "OPEN 603259 @ 126.5",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h017 (rule): +1 supporting evidence → hitRate=97%, n=29",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=51",
+        "Hypothesis: Updated h115 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=103",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=104",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002916",
+                "name": "深南电路",
+                "rule": "stop_proximity",
+                "severity": "WARNING",
+                "currentPrice": 308.35,
+                "stopLoss": 300.21,
+                "distance_pct": 2.64,
+                "suggestion": "🟡 WARNING — only 2.6% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+              },
+              {
+                "code": "603259",
+                "name": "药明康德",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 126.5,
+                "stopLoss": 120.18,
+                "distance_pct": 5.0,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1785469539.8117938,
+      "duration_sec": 1.1
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 002916 — 🟡 WARNING — only 2.6% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
+    "RULE check_stop_proximity: 603259 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 294.0
+  }
+}
