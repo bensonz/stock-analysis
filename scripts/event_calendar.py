@@ -72,21 +72,65 @@ def _nth_weekday(year: int, month: int, weekday: int, n: int) -> _date:
     return d + timedelta(days=offset + 7 * (n - 1))
 
 
+def _roll_to_weekday(d: _date) -> _date:
+    while d.weekday() >= 5:
+        d += timedelta(days=1)
+    return d
+
+
+def _last_day_of_month(y: int, m: int) -> _date:
+    nxt = _date(y + 1, 1, 1) if m == 12 else _date(y, m + 1, 1)
+    return nxt - timedelta(days=1)
+
+
+# Fixed-date recurring CN events: (month, day, name, impact, notes)
+_CN_FIXED = [
+    (4, 30, "年报+一季报披露截止", "medium", "业绩雷集中引爆窗口；持仓个股若临近披露需单独评估"),
+    (8, 31, "中报披露截止", "medium", "业绩雷集中引爆窗口；持仓个股若临近披露需单独评估"),
+    (10, 31, "三季报披露截止", "medium", "业绩雷集中引爆窗口；持仓个股若临近披露需单独评估"),
+]
+
+
 def formulaic_events(start: _date, end: _date) -> list:
-    """US OpEx (3rd Friday) + A-share index-option expiry (4th Wednesday)."""
+    """Derived recurring events — zero maintenance.
+
+    US OpEx (3rd Fri), A-share option expiry (4th Wed), NBS PMI (last
+    calendar day, 9:30 → same session), Caixin PMI (1st business day),
+    LPR fix (20th, rolled to business day), US NFP (1st Friday),
+    A-share earnings-disclosure deadlines, Golden-Week reopening session.
+    """
     out = []
+
+    def _add(d: _date, tz: str, name: str, kind: str, impact: str, notes: str):
+        if start <= d <= end:
+            out.append({"date": d.isoformat(), "tz": tz, "name": name,
+                        "kind": kind, "certainty": "scheduled",
+                        "impact": impact, "direction": "two_sided"
+                        if kind in ("macro_release", "cb_rate") else "risk",
+                        "notes": notes})
+
     y, m = start.year, start.month
     while (y, m) <= (end.year, end.month):
-        for d, tz, name in (
-            (_nth_weekday(y, m, 4, 3), "US",
-             "美股月度OpEx（期权到期，GEX集中兑现）"),
-            (_nth_weekday(y, m, 2, 4), "CN",
-             "A股股指/ETF期权到期日"),
-        ):
-            if start <= d <= end:
-                out.append({"date": d.isoformat(), "tz": tz, "name": name,
-                            "kind": "opex", "certainty": "scheduled",
-                            "impact": "low", "notes": "机械性波动放大窗口"})
+        _add(_nth_weekday(y, m, 4, 3), "US", "美股月度OpEx（期权到期，GEX集中兑现）",
+             "opex", "low", "机械性波动放大窗口")
+        _add(_nth_weekday(y, m, 2, 4), "CN", "A股股指/ETF期权到期日",
+             "opex", "low", "机械性波动放大窗口")
+        _add(_last_day_of_month(y, m), "CN", "官方制造业PMI（9:30，当日盘中）",
+             "macro_release", "medium", "增长脉搏读数——A股实际交易的国内数据")
+        _add(_roll_to_weekday(_date(y, m, 1)), "CN", "财新制造业PMI（9:45，当日盘中）",
+             "macro_release", "low", "官方PMI的民企/出口侧补充")
+        _add(_roll_to_weekday(_date(y, m, 20)), "CN", "LPR报价",
+             "cb_rate", "low", "通常已被MLF预告；意外调降=政策信号事件")
+        _add(_nth_weekday(y, m, 4, 1), "US", "美国非农就业(NFP)",
+             "macro_release", "medium", "联储路径预期的主要输入；周五盘后→影响下周一A股")
+        for mm, dd, name, impact, notes in _CN_FIXED:
+            if mm == m:
+                _add(_date(y, mm, dd), "CN", name, "disclosure_deadline",
+                     impact, notes)
+        if m == 10:
+            _add(_roll_to_weekday(_date(y, 10, 9)), "CN",
+                 "国庆长假后首个交易日", "liquidity", "medium",
+                 "一次性吸收假期内全球市场累计波动的跳空窗口")
         y, m = (y + 1, 1) if m == 12 else (y, m + 1)
     return out
 
@@ -107,8 +151,9 @@ def upcoming(days: int = 21, today: _date | None = None,
     dated, ongoing = [], []
     for e in load_events(path) + formulaic_events(today, horizon):
         if e.get("certainty") == "ongoing" or not e.get("date"):
-            ongoing.append({k: e.get(k) for k in
-                            ("name", "kind", "impact", "notes")})
+            ongoing.append({**{k: e.get(k) for k in
+                               ("name", "kind", "impact", "notes")},
+                            "direction": e.get("direction", "risk")})
             continue
         try:
             d = _parse(e["date"])
@@ -120,6 +165,7 @@ def upcoming(days: int = 21, today: _date | None = None,
         dated.append({**{k: e.get(k) for k in
                          ("date", "tz", "name", "kind", "certainty",
                           "impact", "notes")},
+                      "direction": e.get("direction", "risk"),
                       "a_share_impact_date": impact_d.isoformat(),
                       "days_until_impact": (impact_d - today).days})
     dated.sort(key=lambda x: (x["a_share_impact_date"],
@@ -131,9 +177,14 @@ def upcoming(days: int = 21, today: _date | None = None,
 def risk_window(today: _date | None = None, path: Path | None = None) -> dict:
     """Compressed advisory: is a high-impact scheduled event imminent?"""
     up = upcoming(days=10, today=today, path=path)
+    # supportive events inform sizing upward in the prompt but never
+    # escalate the caution level
     imminent = [e for e in up["dated"]
-                if e["impact"] == "high" and e["days_until_impact"] <= 3]
-    ongoing_high = [e for e in up["ongoing"] if e.get("impact") == "high"]
+                if e["impact"] == "high" and e["days_until_impact"] <= 3
+                and e.get("direction") != "supportive"]
+    ongoing_high = [e for e in up["ongoing"]
+                    if e.get("impact") == "high"
+                    and e.get("direction") != "supportive"]
     level = ("event_imminent" if imminent
              else "elevated" if ongoing_high else "normal")
     return {

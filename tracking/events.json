@@ -1,7 +1,77 @@
 {
   "updated": "2026-07-31",
-  "note": "手动维护的前瞻事件日历（scripts/event_calendar.py 读取；到期/失效条目请及时清理）。tz=US 的事件影响其后第一个A股交易日。",
+  "note": "手动维护的前瞻事件日历（scripts/event_calendar.py 读取；到期/失效条目请及时清理）。tz=US 的事件影响其后第一个A股交易日。direction: risk(默认)|supportive|two_sided。",
   "events": [
+    {
+      "date": "2026-08-26",
+      "tz": "US",
+      "name": "英伟达FY27Q2财报（盘后）",
+      "kind": "earnings",
+      "certainty": "scheduled",
+      "impact": "high",
+      "direction": "two_sided",
+      "notes": "指引~$91B。本季AI基建的最终读数，直接牵动A股AI/半导体/算力链（我们的池子高度集中于此）。影响8/27A股。"
+    },
+    {
+      "date": "2026-08-28",
+      "tz": "US",
+      "name": "Jackson Hole央行年会主席演讲",
+      "kind": "cb_communication",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "direction": "two_sided",
+      "notes": "8/27-29堪萨斯城联储主办，主题为金融创新/支付。主席主旨演讲惯例在周五，为9月议息定调。"
+    },
+    {
+      "date": "2026-10-20",
+      "tz": "CN",
+      "name": "二十届五中全会（10月，具体日期待公布）",
+      "kind": "policy_meeting",
+      "certainty": "estimated",
+      "impact": "high",
+      "direction": "two_sided",
+      "notes": "7月政治局会议已定10月北京召开。审议'十五五'规划建议——规划主题板块（科技自立/新质生产力/生物医药/AI）的政策主线事件。"
+    },
+    {
+      "date": "2026-10-30",
+      "tz": "CN",
+      "name": "10月中央政治局会议（惯例月末，日期待公布）",
+      "kind": "policy_meeting",
+      "certainty": "estimated",
+      "impact": "high",
+      "direction": "two_sided",
+      "notes": "季度经济定调。历史规律：会后两周小盘风格占优。"
+    },
+    {
+      "date": "2026-12-11",
+      "tz": "CN",
+      "name": "中央经济工作会议（惯例12月中旬，日期待公布）",
+      "kind": "policy_meeting",
+      "certainty": "estimated",
+      "impact": "high",
+      "direction": "two_sided",
+      "notes": "定明年增长目标与政策基调。"
+    },
+    {
+      "date": "2027-03-05",
+      "tz": "CN",
+      "name": "全国两会开幕（惯例3月5日）",
+      "kind": "policy_meeting",
+      "certainty": "estimated",
+      "impact": "high",
+      "direction": "two_sided",
+      "notes": "GDP目标、赤字率、产业政策优先级。"
+    },
+    {
+      "date": null,
+      "tz": "CN",
+      "name": "7月政治局会议宽松定调窗口",
+      "kind": "policy_meeting",
+      "certainty": "ongoing",
+      "impact": "medium",
+      "direction": "supportive",
+      "notes": "7/30会议：加大逆周期调节、储备增量政策、稳市预期强化。历史规律：会后两周中证1000平均+2%、小盘占优。约至8月中旬失效——届时删除本条。"
+    },
     {
       "date": "2026-08-12",
       "tz": "US",

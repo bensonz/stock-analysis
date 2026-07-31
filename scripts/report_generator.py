@@ -181,6 +181,30 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
     if decisions.get("market_summary"):
         lines.append(f"{decisions['market_summary']}\n")
 
+    # 1b. Foreseeable-event window (from event_calendar via phase-1 `events`)
+    events = data.get("events") or {}
+    if events.get("dated") or events.get("ongoing"):
+        rw = events.get("risk_window", {})
+        _dir_mark = {"supportive": "🟢", "two_sided": "🔶", "risk": "🔴"}
+        lines.append("## 未来事件窗口\n")
+        lines.append(f"**风险档: {rw.get('level', '?')}** — {rw.get('advice', '')}\n")
+        for e in events.get("dated", [])[:10]:
+            mark = _dir_mark.get(e.get("direction", "risk"), "🔴")
+            est = "（日期待确认）" if e.get("certainty") == "estimated" else ""
+            lines.append(f"- {mark} **{e.get('a_share_impact_date')}** "
+                         f"(T-{e.get('days_until_impact')}) [{e.get('impact')}] "
+                         f"{e.get('name')}{est} — {e.get('notes', '')}")
+        for e in events.get("ongoing", []):
+            mark = _dir_mark.get(e.get("direction", "risk"), "🔴")
+            lines.append(f"- {mark} **持续中** [{e.get('impact')}] "
+                         f"{e.get('name')} — {e.get('notes', '')}")
+        st = events.get("fomc_next_session_stats")
+        if st:
+            lines.append(f"\n> 实测基准: FOMC决议次日A股 — 过去{st.get('n')}次中"
+                         f"{st.get('sessions_negative')}次收跌，平均EW "
+                         f"{st.get('mean_ew_ret_pct')}%（{st.get('note', '')}）")
+        lines.append("")
+
     # 2. Strategy Pool Scan
     lines.append("## 策略池扫描\n")
     pool = data.get("strategy_pool", {})
