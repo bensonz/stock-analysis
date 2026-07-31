@@ -67,6 +67,8 @@ def collect_skips(days: int, today: _date | None = None,
             decisions = json.loads(resp.read_text(encoding="utf-8"))
         except (json.JSONDecodeError, OSError):
             continue
+        if not isinstance(decisions, dict):   # some legacy runs stored a list
+            continue
         for s in decisions.get("skip_list") or []:
             code = str(s.get("code", "")).split(".")[0]
             if not code:
@@ -180,6 +182,8 @@ def main():
     sign = "净节省" if rep["net_savings_pct_sum"] >= 0 else "净成本"
     print(f"  合计: {sign} {abs(rep['net_savings_pct_sum']):.1f}% "
           f"(按{ALLOC_PCT:.0f}%仓位≈组合 {rep['portfolio_impact_pp']:+.2f}pp)")
+    print("  ⚠️ 组合影响为『每条skip都按标准仓位买入』的后悔上界——实际仓位上限只容纳"
+          "一小部分，读方向与量级，勿当作可实现的替代收益")
     print("  按理由分类:")
     for k, b in rep["by_reason_bucket"].items():
         print(f"    {k:8s} n={b['n']:3d}  平均如果买入 {b['mean_would_be_ret_pct']:+6.2f}%")
