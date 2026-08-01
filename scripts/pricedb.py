@@ -1599,9 +1599,11 @@ def cmd_update():
         )
     beg = (datetime.strptime(cursor_date, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y%m%d")
     # Never fetch today's bar while the session is open — every provider path
-    # (clist snapshot and per-stock kline) would return an unsettled intraday
-    # bar, which corrupts MA/RPS (RC1). Cap the window at the last closed
-    # trading day; the post-close run picks today up normally.
+    # would return an unsettled intraday bar, which corrupts MA/RPS (RC1).
+    # And never fetch a non-trading day at all: on weekends/holidays an
+    # uncapped window made the per-code sweep hammer ~5.5k symbols for zero
+    # rows until the budget died (surfaced 2026-08-01 by the akshare-primary
+    # chain). Cap at the last settled trading day in both cases.
     end_date = _now().date()
     if is_session_open():
         end_date = most_recent_trading_day(end_date - timedelta(days=1))
@@ -1610,6 +1612,8 @@ def cmd_update():
             f"(today's bar is not settled yet).",
             file=sys.stderr,
         )
+    else:
+        end_date = most_recent_trading_day(end_date)
     end = end_date.strftime("%Y%m%d")
     provider_errors = []
 
@@ -2057,10 +2061,15 @@ def _bulk_fetch_sina(
     if failures:
         print(f"  Sina skipped {len(failures)} symbols: "
               f"{'; '.join(failures[:5])}", file=sys.stderr)
-    if inserted == 0 and _weekday_list(beg, end):
+    if inserted == 0 and supported and _weekday_list(beg, end):
         raise RuntimeError(
             f"Sina returned no rows for {len(supported)} symbols in a "
             f"weekday window {beg}-{end}")
+    if not supported:
+        # e.g. a BJ-only backfill batch: nothing sina COULD fetch — vacuous
+        # success, not a provider failure (akshare covers BJ when healthy).
+        print("  Sina: no supported symbols in batch — nothing to do",
+              file=sys.stderr)
     print(f"  Total: {inserted:,} rows inserted", file=sys.stderr)
 
 
