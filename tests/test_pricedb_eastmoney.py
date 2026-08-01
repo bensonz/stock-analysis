@@ -36,15 +36,20 @@ def test_eastmoney_secid_maps_sh_sz_and_skips_bj():
     assert pricedb._eastmoney_secid({"code": "430047", "exchange": "BJ"}) is None
 
 
-def test_eastmoney_provider_is_before_akshare(monkeypatch):
+def test_eastmoney_retired_from_provider_chain(monkeypatch):
+    # Doctrine flip 2026-08-01 (was: eastmoney before akshare). After the
+    # IP-throttle outage the chain is akshare → sina ONLY; eastmoney paths
+    # survive as internal helpers, never as price providers.
     monkeypatch.setattr(pricedb, "get_tushare_token", lambda: None)
     monkeypatch.setitem(sys.modules, "akshare", object())
     monkeypatch.setitem(sys.modules, "baostock", None)
 
     providers = [name for name, _provider in pricedb.iter_providers()]
 
-    assert pricedb.PROVIDER_EASTMONEY in providers
-    assert providers.index(pricedb.PROVIDER_EASTMONEY) < providers.index(pricedb.PROVIDER_AKSHARE)
+    assert pricedb.PROVIDER_EASTMONEY not in providers
+    assert pricedb.PROVIDER_EASTMONEY_CLIST not in providers
+    assert pricedb.PROVIDER_BAOSTOCK not in providers
+    assert pricedb.PROVIDER_TUSHARE not in providers
 
 
 def test_eastmoney_kline_url_matches_endpoint_shape():

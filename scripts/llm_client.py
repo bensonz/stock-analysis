@@ -694,6 +694,17 @@ def build_summary(phase1_data: dict) -> str:
     """
     sections = []
 
+    # Data-quality banner FIRST: if screening data is stale/degraded the
+    # model must know before it reads a single number below.
+    _health = phase1_data.get("db_health") or {}
+    if _health.get("warnings"):
+        sections.append(
+            "## ⚠️ 数据质量警报 (Data Quality)\n"
+            + "\n".join(f"- {w}" for w in _health["warnings"])
+            + "\n- 提示: 数据陈旧/降级时, 下方所有指标以最近可用交易日为准; "
+              "新开仓决策应据此更保守 (信号可能滞后), 但持仓风控规则照常执行。"
+        )
+
     def _fmt_num(value):
         return f"{value:,}" if isinstance(value, (int, float)) else value
 

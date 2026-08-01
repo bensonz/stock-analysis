@@ -170,6 +170,34 @@ def validate_phase1_gate(data: dict) -> GateResult:
 
     gate.hard(valid_indices >= 2, f"only {valid_indices}/3 major indices have valid data")
 
+    # ── Data-quality health (2026-08-01, post-outage): never analyze
+    # antique or corrupt price data politely. Absent block = older run
+    # replay / minimal test fixture → skip (backward compatible). ──
+    health = data.get("db_health") or {}
+    if health:
+        lag = health.get("lag_sessions")
+        if lag is not None:
+            gate.hard(
+                lag <= 1,
+                f"price DB is {lag} sessions stale "
+                f"(latest {health.get('latest_price_date')}, "
+                f"expected {health.get('expected_latest')}) — halt, do not "
+                f"screen on antique data"
+            )
+            gate.soft(lag == 0, f"price DB is {lag} session stale (coverage-floor fallback in effect)")
+        gate.hard(
+            not health.get("latest_partial"),
+            f"latest price day is partial "
+            f"({health.get('latest_row_count')} rows vs "
+            f"~{health.get('median_row_count_30d')}) — run 'pricedb.py repair'"
+        )
+        spot = health.get("spot_check") or {}
+        gate.hard(
+            not spot.get("mismatches"),
+            f"cross-source spot audit found {len(spot.get('mismatches', []))} "
+            f"price mismatches vs sina — DB values may be corrupt"
+        )
+
     # ── Breadth: must exist with reasonable total ──
     breadth = market.get("breadth", {})
     breadth_total = breadth.get("total", 0)

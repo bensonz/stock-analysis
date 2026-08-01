@@ -126,6 +126,17 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
     """
     lines = [f"# 每日研究报告 {date}\n"]
 
+    # Data-quality banner: the 2026-07-30 outage ran two days silent because
+    # degradation only showed in stderr. If the DB is stale/partial/corrupt,
+    # say it HERE, first thing the reader sees.
+    health = data.get("db_health") or {}
+    if health.get("warnings"):
+        mark = "🔴" if not health.get("ok", True) else "🔶"
+        lines.append(f"> {mark} **数据质量警报**")
+        for w in health["warnings"]:
+            lines.append(f"> - {w}")
+        lines.append("")
+
     # Which model made these decisions (from the run dir's llm_meta.json,
     # written by phase 2 — self-discovered so --apply replays work too)
     if output_dir is not None:

@@ -85,6 +85,21 @@ first). Read it as:
   are inverted** (this happened: see docs/backtest/RESULTS.md selection
   audit; the RPS band restoration on 2026-07-31 was the fix).
 
+### C2. Data Hygiene (added 2026-08-01 after the eastmoney outage)
+
+The whole audit is worthless if the DB under it is wrong. Run both:
+
+```bash
+python3 scripts/pricedb.py factors verify     # exit 1 = adjustment factors broken
+python3 scripts/pricedb.py repair --dry-run   # lists partial price days, fixes nothing
+```
+
+- `factors verify` failing, or `repair --dry-run` listing any recent partial
+  day → run `python3 scripts/pricedb.py repair` (idempotent) before trusting
+  any number in this audit, and note the outage in the audit report.
+- Also check the week's daily reports for 数据质量警报 banners — a banner
+  that appeared and was never acted on is itself a finding.
+
 ### D. Sector Alignment (V2 specific)
 - Were positions opened in hot sectors? (check sector_rank in new_positions)
 - Were positions held in cold sectors too long?

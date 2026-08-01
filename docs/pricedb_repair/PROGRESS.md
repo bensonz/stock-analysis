@@ -70,7 +70,11 @@
   `pricedb.py factors heal --beg 2026-03-12 --end 2026-07-31` when the
   eastmoney throttle lifts — the flat-across-ex-date filter re-flags
   exactly these.
-- Eastmoney IP throttle: if it persists into Monday's noon run, `update`
-  will limp again — `repair` now exists as the manual recovery, but
-  consider promoting a sina bulk path into the provider chain.
+- ~~Eastmoney IP throttle Monday risk~~ → RESOLVED 2026-08-01 evening:
+  provider chain rewritten to **akshare primary → sina fallback** (user
+  decision; eastmoney/baostock/tushare retired for price bars), plus the
+  loudness layer: `db_health` block (staleness, partial-day, factor lag,
+  20-code cross-source spot audit) → input/db_health.json → prompt banner →
+  report banner → phase-1 hard gate (>1 session stale halts the run).
+  Weekly audit gained a data-hygiene step (C2).
 - 2026-03-12 was the earliest partial day; anything older is full.

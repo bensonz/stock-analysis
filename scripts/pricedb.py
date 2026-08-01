@@ -46,6 +46,7 @@ PROVIDER_EASTMONEY_CLIST = "eastmoney_clist"
 PROVIDER_EASTMONEY = "eastmoney_direct"
 PROVIDER_AKSHARE = "akshare"
 PROVIDER_BAOSTOCK = "baostock"
+PROVIDER_SINA = "sina"
 TUSHARE_TOKEN_ENV_NAMES = ("TUSHARE_TOKEN", "TUSHARE_PRO_TOKEN", "TS_TOKEN")
 
 # History needed: 250-day RPS + 10-day MA buffer → use extra holiday margin
@@ -474,42 +475,22 @@ def get_tushare_token() -> str | None:
 def iter_providers() -> Iterable[tuple[str, object]]:
     """Yield available providers in preferred price-bar order.
 
-    Order (post-2026-05 fix):
-      1. eastmoney_clist  — bulk daily snapshot, fast, no auth (single-day updates)
-      2. eastmoney_direct — per-stock kline (historical backfills)
-      3. akshare          — fallback
-      4. baostock         — last resort
-      5. tushare          — opt-in (token + paid endpoint access)
+    Doctrine (2026-08-01, user decision): **AkShare primary, Sina fallback.**
+    The old chain was one vendor in four costumes — eastmoney direct/clist
+    plus akshare (which fronts the same eastmoney endpoints) all died
+    together in the 07-30 IP throttle, while baostock is connection-dead
+    from this network and tushare's free tier denies daily bars. Those
+    providers are RETIRED for price bars — do not re-add them. Their
+    fetchers remain only as internal helpers (factor derivation, f18
+    same-day sync, repair fallbacks). See docs/pricedb_repair/PROGRESS.md.
     """
-    yield PROVIDER_EASTMONEY_CLIST, None
-    yield PROVIDER_EASTMONEY, None
-
     try:
         with _no_proxy_env():
             import akshare as ak
         yield PROVIDER_AKSHARE, ak
     except Exception as e:
         print(f"  Could not initialize AkShare: {e}", file=sys.stderr)
-
-    try:
-        import baostock as bs
-
-        with _no_proxy_env():
-            login_result = _run_with_timeout("BaoStock login", lambda: bs.login())
-        if getattr(login_result, "error_code", "0") != "0":
-            raise RuntimeError(getattr(login_result, "error_msg", "BaoStock login failed"))
-        yield PROVIDER_BAOSTOCK, bs
-    except Exception as e:
-        print(f"  Could not initialize BaoStock: {e}", file=sys.stderr)
-
-    token = get_tushare_token()
-    if token:
-        try:
-            import tushare as ts
-
-            yield PROVIDER_TUSHARE, ts.pro_api(token=token, timeout=30)
-        except Exception as e:
-            print(f"  Could not initialize Tushare: {e}", file=sys.stderr)
+    yield PROVIDER_SINA, None
 
 
 def close_provider(provider_name: str, provider: object):
@@ -1466,7 +1447,35 @@ def _bulk_fetch_baostock(
 # ---------------------------------------------------------------------------
 
 
+def _exchange_from_code(code: str) -> str:
+    if code.startswith(("6",)):
+        return "SH"
+    if code.startswith(("0", "3")):
+        return "SZ"
+    return "BJ"
+
+
+def fetch_stock_list_akshare(ak) -> list[dict]:
+    """Full A-share universe (code, name) via akshare; exchange from prefix."""
+    with _no_proxy_env():
+        df = _run_with_timeout(
+            "AkShare stock list", lambda: ak.stock_info_a_code_name()
+        )
+    if _frame_empty(df):
+        return []
+    out = []
+    for _, row in df.iterrows():
+        code = str(row.get("code") or "").strip().zfill(6)
+        name = str(row.get("name") or "").strip()
+        if code.isdigit() and len(code) == 6 and name:
+            out.append({"code": code, "name": name,
+                        "exchange": _exchange_from_code(code)})
+    return out
+
+
 def fetch_stock_list(provider_name: str, provider: object) -> list[dict]:
+    if provider_name == PROVIDER_AKSHARE:
+        return fetch_stock_list_akshare(provider)
     if provider_name == PROVIDER_TUSHARE:
         return fetch_stock_list_tushare(provider)
     if provider_name == PROVIDER_BAOSTOCK:
@@ -1482,14 +1491,18 @@ def bulk_fetch(
     provider_name: str,
     provider: object,
 ):
+    if provider_name == PROVIDER_AKSHARE:
+        return _bulk_fetch_akshare(conn, stocks, beg, end, provider)
+    if provider_name == PROVIDER_SINA:
+        return _bulk_fetch_sina(conn, stocks, beg, end, provider)
+    # Retired providers (kept callable for manual forensics only — they are
+    # NOT in iter_providers and must not return to the daily chain):
     if provider_name == PROVIDER_TUSHARE:
         return _bulk_fetch_tushare(conn, stocks, beg, end, provider)
     if provider_name == PROVIDER_EASTMONEY_CLIST:
         return _bulk_fetch_eastmoney_clist(conn, stocks, beg, end, provider)
     if provider_name == PROVIDER_EASTMONEY:
         return _bulk_fetch_eastmoney(conn, stocks, beg, end, provider)
-    if provider_name == PROVIDER_AKSHARE:
-        return _bulk_fetch_akshare(conn, stocks, beg, end, provider)
     if provider_name == PROVIDER_BAOSTOCK:
         return _bulk_fetch_baostock(conn, stocks, beg, end, provider)
     raise ValueError(f"Unknown provider: {provider_name}")
@@ -1517,7 +1530,9 @@ def cmd_init():
     provider_errors = []
 
     for provider_name, provider in iter_providers():
-        if provider_name in {PROVIDER_EASTMONEY_CLIST, PROVIDER_EASTMONEY, PROVIDER_AKSHARE}:
+        if provider_name == PROVIDER_SINA:
+            # sina has no stock-list endpoint; init needs list + history from
+            # one provider (akshare). repair/update cover sina afterwards.
             close_provider(provider_name, provider)
             continue
         conn = get_db()
@@ -1617,17 +1632,25 @@ def cmd_update():
             close_provider(provider_name, provider)
             continue
         try:
-            if provider_name in {PROVIDER_TUSHARE, PROVIDER_BAOSTOCK}:
-                print(f"Refreshing stock list via {provider_name}...", file=sys.stderr)
-                latest_stocks = fetch_stock_list(provider_name, provider)
-                if not latest_stocks:
-                    raise RuntimeError(f"{provider_name} returned no stock list")
-                upsert_stocks(conn, latest_stocks)
-                stocks = [
-                    {"code": row[0], "name": row[1], "exchange": row[2]}
-                    for row in conn.execute("SELECT code, name, exchange FROM stocks")
-                ]
-                print(f"  {len(latest_stocks)} stocks in universe", file=sys.stderr)
+            if provider_name == PROVIDER_AKSHARE:
+                # Best-effort universe refresh (new listings). A list failure
+                # must not cost us the price bars — degrade to the stored
+                # universe and keep going.
+                try:
+                    print("Refreshing stock list via akshare...", file=sys.stderr)
+                    latest_stocks = fetch_stock_list(provider_name, provider)
+                    if latest_stocks:
+                        upsert_stocks(conn, latest_stocks)
+                        stocks = [
+                            {"code": row[0], "name": row[1], "exchange": row[2]}
+                            for row in conn.execute(
+                                "SELECT code, name, exchange FROM stocks")
+                        ]
+                        print(f"  {len(latest_stocks)} stocks in universe",
+                              file=sys.stderr)
+                except Exception as list_err:
+                    print(f"  stock-list refresh failed ({list_err}) — using "
+                          f"stored universe of {len(stocks)}", file=sys.stderr)
             else:
                 print(f"Using existing stock universe for {provider_name}: {len(stocks)} stocks", file=sys.stderr)
 
@@ -1971,6 +1994,74 @@ def _fetch_klines_sina(stock: dict, datalen: int) -> list[tuple]:
             int(vol / 100) if vol else None, None,
         ))
     return rows
+
+
+def _bulk_fetch_sina(
+    conn: sqlite3.Connection,
+    stocks: list[dict],
+    beg: str,
+    end: str,
+    _provider,
+):
+    """Bulk daily bars via sina per-code klines (the fallback provider).
+
+    INSERT OR IGNORE: whatever the primary already landed stays canonical
+    (sina rows carry NULL amount). Respects the update budget; raises when a
+    weekday window yields nothing so cmd_update can report a real failure.
+    """
+    beg_iso, end_iso = _yyyymmdd_to_iso(beg), _yyyymmdd_to_iso(end)
+    n_dates = conn.execute(
+        "SELECT COUNT(DISTINCT date) FROM daily_prices WHERE date >= ?",
+        (beg_iso,)
+    ).fetchone()[0]
+    datalen = min(1023, max(20, n_dates + 15))
+
+    supported = [s for s in stocks if _sina_symbol(s["code"], s.get("exchange", ""))]
+    print(f"  Sina: {len(supported)} supported symbols (datalen={datalen})",
+          file=sys.stderr)
+
+    def _one(stock):
+        time.sleep(SINA_REPAIR_SLEEP_SEC)
+        return _fetch_klines_sina(stock, datalen)
+
+    inserted = 0
+    completed = 0
+    failures: list[str] = []
+    with ThreadPoolExecutor(max_workers=SINA_REPAIR_WORKERS,
+                            thread_name_prefix="pricedb-sina") as pool:
+        futures = {pool.submit(_one, s): s for s in supported}
+        for future in as_completed(futures):
+            stock = futures[future]
+            completed += 1
+            if _budget_exceeded():
+                for f in futures:
+                    f.cancel()
+                raise RuntimeError("update budget exceeded")
+            try:
+                rows = [r for r in future.result() if beg_iso <= r[1] <= end_iso]
+            except Exception as e:
+                failures.append(f"{stock['code']}: {str(e)[:60]}")
+                rows = []
+            if rows:
+                cur = conn.executemany(
+                    "INSERT OR IGNORE INTO daily_prices "
+                    "(code,date,open,high,low,close,volume,amount) "
+                    "VALUES (?,?,?,?,?,?,?,?)", rows)
+                inserted += cur.rowcount
+                conn.commit()
+            if completed % 250 == 0 or completed == len(supported):
+                print(f"  [Sina {completed}/{len(supported)}] "
+                      f"+{inserted} rows, {len(failures)} failed",
+                      file=sys.stderr)
+
+    if failures:
+        print(f"  Sina skipped {len(failures)} symbols: "
+              f"{'; '.join(failures[:5])}", file=sys.stderr)
+    if inserted == 0 and _weekday_list(beg, end):
+        raise RuntimeError(
+            f"Sina returned no rows for {len(supported)} symbols in a "
+            f"weekday window {beg}-{end}")
+    print(f"  Total: {inserted:,} rows inserted", file=sys.stderr)
 
 
 def _expand_events_to_code_dates(conn: sqlite3.Connection, code: str,
@@ -2500,6 +2591,119 @@ def _partial_price_dates(conn: sqlite3.Connection) -> list[str]:
     ordered = sorted(c for _, c in counts)
     median = ordered[len(ordered) // 2]
     return [d for d, c in counts if c < 0.5 * median]
+
+
+def db_health(conn: sqlite3.Connection, spot_check: bool = False) -> dict:
+    """Data-quality health block for the daily pipeline.
+
+    The 2026-07-30 outage lesson: every degradation path already *worked*
+    (coverage floor fell back to stale data) but stayed silent for days.
+    This block is the loudness layer — it rides into input/db_health.json,
+    the LLM prompt, the report banner, and the phase-1 contract.
+
+    ok=False on: screening data >1 session stale, latest day partial, or
+    spot-audit price mismatches. Anything notable lands in `warnings`.
+    """
+    out = {
+        "checked_at": datetime.now().isoformat(timespec="seconds"),
+        "ok": True,
+        "warnings": [],
+    }
+    latest = conn.execute("SELECT MAX(date) FROM daily_prices").fetchone()[0]
+    out["latest_price_date"] = latest
+    if not latest:
+        out["ok"] = False
+        out["warnings"].append("price DB is empty")
+        return out
+
+    counts = conn.execute(
+        "SELECT date, COUNT(*) FROM daily_prices GROUP BY date "
+        "ORDER BY date DESC LIMIT 30").fetchall()
+    ordered = sorted(c for _, c in counts)
+    median = ordered[len(ordered) // 2] if ordered else 0
+    latest_count = counts[0][1] if counts else 0
+    out["latest_row_count"] = latest_count
+    out["median_row_count_30d"] = median
+    out["latest_partial"] = bool(median and latest_count < 0.5 * median)
+    if out["latest_partial"]:
+        out["ok"] = False
+        out["warnings"].append(
+            f"latest day {latest} is PARTIAL ({latest_count} rows vs "
+            f"~{median} normal) — run 'pricedb.py repair'")
+
+    # Staleness vs the trading calendar (falls back to weekdays offline).
+    expected = last_settled_trading_day().strftime("%Y%m%d")
+    out["expected_latest"] = _yyyymmdd_to_iso(expected)
+    latest_compact = latest.replace("-", "")
+    try:
+        cal = _get_trade_calendar_cached()
+    except Exception:
+        cal = []
+    if cal:
+        lag = sum(1 for c in cal if latest_compact < c <= expected)
+    else:
+        lag = len(_weekday_list(latest_compact, expected)) - (
+            1 if latest_compact in _weekday_list(latest_compact, expected) else 0)
+    out["lag_sessions"] = lag
+    if lag >= 1:
+        if lag > 1:
+            out["ok"] = False
+        out["warnings"].append(
+            f"screening data is {lag} session(s) stale "
+            f"(latest {latest}, expected {out['expected_latest']})")
+
+    cov = price_adjust.factor_coverage(conn)
+    out["factor_max_date"] = cov["max_factor_date"]
+    if cov["max_factor_date"] and cov["max_factor_date"] < latest:
+        out["warnings"].append(
+            f"adj factors lag prices ({cov['max_factor_date']} < {latest}) "
+            f"— run 'pricedb.py factors heal'")
+
+    recent_partial = [d for d in _partial_price_dates(conn)
+                      if d >= (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")]
+    out["partial_days_30d"] = recent_partial
+
+    if spot_check:
+        out["spot_check"] = _spot_audit(conn, latest)
+        if out["spot_check"]["mismatches"]:
+            out["ok"] = False
+            out["warnings"].append(
+                f"spot audit: {len(out['spot_check']['mismatches'])} close-price "
+                f"mismatches vs sina on {latest} "
+                f"({','.join(m['code'] for m in out['spot_check']['mismatches'][:5])})")
+    return out
+
+
+def _spot_audit(conn: sqlite3.Connection, date_iso: str, sample: int = 20) -> dict:
+    """Cross-source correctness check: random codes' stored closes on
+    `date_iso` vs sina. Presence checks catch missing data; this catches
+    wrong-but-present data (the silent killer). Fetch failures are reported
+    but never counted as mismatches."""
+    import random
+    codes = [r[0] for r in conn.execute(
+        "SELECT d.code FROM daily_prices d JOIN stocks s ON s.code = d.code "
+        "WHERE d.date = ?", (date_iso,))]
+    codes = [c for c in codes if _sina_symbol(c, "")]
+    picked = random.sample(codes, min(sample, len(codes)))
+    checked, mismatches, failures = 0, [], 0
+    for code in picked:
+        stored = conn.execute(
+            "SELECT close FROM daily_prices WHERE code = ? AND date = ?",
+            (code, date_iso)).fetchone()[0]
+        try:
+            rows = _fetch_klines_sina({"code": code, "exchange": ""}, 5)
+        except Exception:
+            failures += 1
+            continue
+        ref = next((r[5] for r in rows if r[1] == date_iso), None)
+        if ref is None:
+            failures += 1
+            continue
+        checked += 1
+        if abs(ref - stored) > 0.011:  # prices are 2dp; anything more is real
+            mismatches.append({"code": code, "stored": stored, "sina": ref})
+    return {"date": date_iso, "sampled": len(picked), "checked": checked,
+            "fetch_failures": failures, "mismatches": mismatches}
 
 
 def cmd_repair(args: list):

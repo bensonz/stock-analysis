@@ -572,7 +572,7 @@ def preflight_pricedb_or_exit(manifest) -> None:
     if skip:
         print("  [preflight] PRICEDB_SKIP_UPDATE set — using existing pricedb", file=sys.stderr)
     else:
-        print("  [preflight] Refreshing local pricedb (clist → per-stock fallback)...", file=sys.stderr)
+        print("  [preflight] Refreshing local pricedb (akshare → sina fallback)...", file=sys.stderr)
         env = os.environ.copy()
         env.setdefault("PRICEDB_UPDATE_BUDGET", "300")
         try:
@@ -1057,6 +1057,29 @@ def phase1_collect(date: str, slot: str) -> dict:
               file=sys.stderr)
     except Exception as e:  # noqa: BLE001 — never fail the run over the calendar
         print(f"    [events] unavailable: {e}", file=sys.stderr)
+
+    # Data-quality health block (staleness / partial days / factor lag /
+    # cross-source spot audit). Loudness layer for the 2026-07-30 outage
+    # class: rides into the prompt, the report banner, and the phase-1 gate.
+    try:
+        import pricedb as _pricedb
+        _conn = _pricedb.get_db()
+        try:
+            data["db_health"] = _pricedb.db_health(_conn, spot_check=True)
+        finally:
+            _conn.close()
+        (input_dir / "db_health.json").write_text(
+            json.dumps(data["db_health"], ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        _h = data["db_health"]
+        print(f"    [db_health] ok={_h.get('ok')} "
+              f"lag={_h.get('lag_sessions')} "
+              f"warnings={len(_h.get('warnings', []))}", file=sys.stderr)
+        for _w in _h.get("warnings", []):
+            print(f"      ⚠ {_w}", file=sys.stderr)
+    except Exception as e:  # noqa: BLE001 — health check must not kill the run
+        print(f"    [db_health] unavailable: {e}", file=sys.stderr)
 
     # Hypothesis-based learnings (structured system)
     hyp_data = load_hypotheses()
