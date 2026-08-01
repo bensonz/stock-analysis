@@ -27,7 +27,7 @@ import json
 import subprocess
 import urllib.parse
 import urllib.request
-from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, as_completed, wait
 from datetime import date as _date, datetime, timedelta
 from pathlib import Path
 from typing import Iterable, Optional
@@ -1687,27 +1687,17 @@ def cmd_update():
                     file=sys.stderr,
                 )
 
-            # Best-effort adjustment-factor sync for the freshest settled day
-            # (clist f18 event detector + forward-fill). Failure degrades to
-            # forward-filled factors == status quo and self-heals next run.
+            # Best-effort adjustment-factor sync (same-day f18 fast path, or
+            # gap heal via the ex-div calendar after downtime). Failure
+            # degrades to forward-filled factors and self-heals next run.
             try:
-                latest_after = conn.execute(
-                    "SELECT MAX(date) FROM daily_prices"
-                ).fetchone()[0]
-                if latest_after and latest_after == datetime.now().strftime("%Y-%m-%d"):
-                    changed = sync_adj_factors_for_today(conn, latest_after)
-                    if changed:
-                        invalidate_rps_cache(conn, changed)
-                else:
-                    filled = _forward_fill_factors(conn)
-                    if filled:
-                        print(f"  factors: forward-filled {filled} rows "
-                              f"(no same-day f18 sync — latest={latest_after})",
-                              file=sys.stderr)
+                changed = _sync_or_heal_factors(conn)
+                if changed:
+                    invalidate_rps_cache(conn, changed)
             except Exception as factor_err:
                 print(f"  WARNING: adjustment-factor sync failed: {factor_err} "
                       f"— indicators fall back to last known factors; "
-                      f"run 'pricedb.py factors update' to heal.",
+                      f"run 'pricedb.py factors heal' to repair.",
                       file=sys.stderr)
 
             conn.close()
@@ -1799,6 +1789,11 @@ ADJ_EVENT_THRESHOLD = 0.005
 # replies on push2his AND push2 — which also starves the daily pipeline).
 # Never again: pace requests, and circuit-break on failure bursts.
 ADJ_BACKFILL_SLEEP_SEC = float(os.getenv("ADJ_BACKFILL_SLEEP_SEC", "0.4"))
+
+# Sina repair sweep: 4 workers × 0.25s/request ≈ 15 req/s — polite enough to
+# stay under sina's IP-ban radar while covering ~5.5k codes in a few minutes.
+SINA_REPAIR_WORKERS = int(os.getenv("SINA_REPAIR_WORKERS", "4"))
+SINA_REPAIR_SLEEP_SEC = float(os.getenv("SINA_REPAIR_SLEEP_SEC", "0.25"))
 ADJ_BACKFILL_COOLDOWN_SEC = float(os.getenv("ADJ_BACKFILL_COOLDOWN_SEC", "300"))
 ADJ_BACKFILL_MAX_COOLDOWNS = 3
 
@@ -1927,6 +1922,55 @@ def fetch_adj_factor_events_sina(code: str, exchange: str) -> list[tuple] | None
         return None
     events.sort()
     return events
+
+
+SINA_KLINE_URL = ("https://quotes.sina.cn/cn/api/jsonp_v2.php/x=/"
+                  "CN_MarketDataService.getKLineData")
+
+
+def _fetch_klines_sina(stock: dict, datalen: int) -> list[tuple]:
+    """Recent daily bars for one stock from Sina's kline service.
+
+    Raw/unadjusted prices (verified against stored eastmoney bars, including
+    the ex-div open drop on 601818 2026-07-30). Volume arrives in shares and
+    is stored as 手 (÷100) to match the eastmoney convention; Sina does not
+    publish turnover amount, so `amount` is NULL. Standard 8-tuples.
+    """
+    sym = _sina_symbol(stock["code"], stock.get("exchange", ""))
+    if not sym:
+        return []
+    import requests
+    with _no_proxy_env():
+        resp = requests.get(
+            SINA_KLINE_URL,
+            params={"symbol": sym, "scale": "240", "ma": "no",
+                    "datalen": str(datalen)},
+            headers={"User-Agent": "Mozilla/5.0 pricedb",
+                     "Referer": "https://finance.sina.com.cn"},
+            timeout=PRICEDB_CALL_TIMEOUT_SEC,
+        )
+    text = resp.text
+    if resp.status_code != 200 or "(" not in text:
+        raise RuntimeError(f"sina kline bad response for {sym} "
+                           f"(status {resp.status_code})")
+    try:
+        data = json.loads(text[text.index("(") + 1: text.rindex(")")])
+    except (ValueError, json.JSONDecodeError) as e:
+        raise RuntimeError(f"sina kline unparseable for {sym}: {e}")
+    rows = []
+    for item in data or []:
+        day = str((item or {}).get("day") or "")[:10]
+        close = _safe_float(item.get("close"))
+        if not day or close is None:
+            continue
+        vol = _safe_float(item.get("volume"))
+        rows.append((
+            stock["code"], day,
+            _safe_float(item.get("open")), _safe_float(item.get("high")),
+            _safe_float(item.get("low")), close,
+            int(vol / 100) if vol else None, None,
+        ))
+    return rows
 
 
 def _expand_events_to_code_dates(conn: sqlite3.Connection, code: str,
@@ -2077,6 +2121,13 @@ def sync_adj_factors_for_today(conn: sqlite3.Connection, date_iso: str) -> str |
     prev_factors = dict(conn.execute(
         "SELECT code, factor FROM adj_factors WHERE date = ?", (prev_date,)
     ))
+    if prev_closes and not prev_factors:
+        # Multi-day factor gap: every chain would restart at base 1.0 and
+        # silently destroy the cumulative factors. Refuse; heal instead.
+        raise RuntimeError(
+            f"adj_factors has no rows for {prev_date} — multi-day gap; "
+            f"run 'pricedb.py factors heal'"
+        )
     rows = []
     events = 0
     for code, prev_close in prev_closes.items():
@@ -2097,8 +2148,186 @@ def sync_adj_factors_for_today(conn: sqlite3.Connection, date_iso: str) -> str |
     return earliest
 
 
+DATACENTER_EXDIV_URL = "https://datacenter-web.eastmoney.com/api/data/v1/get"
+
+
+def _fetch_ex_div_codes_datacenter(date_iso: str) -> set | None:
+    """Codes whose ex-dividend/ex-rights date is `date_iso`.
+
+    Uses the eastmoney datacenter report API — a different host from the
+    push2 clist endpoint, so it stays reachable when clist is throttled
+    (the exact outage this function exists for). Returns None on fetch
+    failure so the caller can distinguish "no events" from "couldn't ask".
+    """
+    import requests
+    codes: set = set()
+    page = 1
+    while True:
+        try:
+            with _no_proxy_env():
+                resp = requests.get(
+                    DATACENTER_EXDIV_URL,
+                    params={
+                        "reportName": "RPT_SHAREBONUS_DET",
+                        "columns": "SECURITY_CODE,EX_DIVIDEND_DATE",
+                        "filter": f"(EX_DIVIDEND_DATE='{date_iso}')",
+                        "pageSize": "500",
+                        "pageNumber": str(page),
+                    },
+                    headers={"User-Agent": "Mozilla/5.0 pricedb"},
+                    timeout=PRICEDB_CALL_TIMEOUT_SEC,
+                )
+            payload = resp.json()
+        except Exception:
+            return None
+        rows = ((payload or {}).get("result") or {}).get("data") or []
+        for item in rows:
+            code = str((item or {}).get("SECURITY_CODE") or "").strip()
+            if code.isdigit():
+                codes.add(code)
+        if len(rows) < 500:
+            break
+        page += 1
+    return codes
+
+
+def heal_adj_factor_gap(conn: sqlite3.Connection, beg_iso: str, end_iso: str) -> str | None:
+    """Repair a multi-session factor gap [beg_iso, end_iso] inclusive.
+
+    Factors only change on corporate actions, so the gap splits cleanly:
+    the datacenter ex-div calendar names the codes with an event inside the
+    gap — those get a full re-derivation (sina events primary, eastmoney
+    return-ratio fallback), anchor-rescaled so pre-gap rows are unchanged
+    (keeps rps_cache invalidation shallow); every other code is an exact
+    plain forward-fill. Returns earliest changed date for cache invalidation.
+    """
+    dates = [r[0] for r in conn.execute(
+        "SELECT DISTINCT date FROM daily_prices WHERE date >= ? AND date <= ? "
+        "ORDER BY date", (beg_iso, end_iso))]
+    exchanges = dict(conn.execute("SELECT code, exchange FROM stocks"))
+    known = {r[0] for r in conn.execute("SELECT DISTINCT code FROM daily_prices")}
+
+    event_codes: set = set()
+    calendar_failures = 0
+    for d in dates:
+        codes = _fetch_ex_div_codes_datacenter(d)
+        if codes is None:
+            calendar_failures += 1
+            print(f"  factors heal: ex-div calendar FAILED for {d} — event "
+                  f"codes that day keep forward-filled factors until the next "
+                  f"heal", file=sys.stderr)
+            continue
+        hits = set()
+        for code in codes & known:
+            # Skip codes whose stored factor already jumps on the event date —
+            # they were derived event-aware; re-deriving is pure waste. A
+            # missing row, or a factor flat across its own ex-date, is damage.
+            row = conn.execute(
+                "SELECT factor FROM adj_factors WHERE code = ? AND date = ?",
+                (code, d)).fetchone()
+            prev = conn.execute(
+                "SELECT factor FROM adj_factors WHERE code = ? AND date < ? "
+                "ORDER BY date DESC LIMIT 1", (code, d)).fetchone()
+            prev_val = prev[0] if prev else 1.0
+            if row is None or abs(row[0] - prev_val) < 1e-12:
+                hits.add(code)
+        print(f"  factors heal: {d} — {len(hits)} ex-div codes needing "
+              f"re-derivation", file=sys.stderr)
+        event_codes |= hits
+
+    earliest: str | None = None
+    failed = 0
+    stale = []
+    for code in sorted(event_codes):
+        try:
+            events = fetch_adj_factor_events_sina(code, exchanges.get(code, ""))
+            if events:
+                rows = _expand_events_to_code_dates(conn, code, events)
+            else:
+                first = conn.execute(
+                    "SELECT MIN(date) FROM daily_prices WHERE code = ?", (code,)
+                ).fetchone()[0]
+                series = derive_factors_eastmoney(
+                    code, exchanges.get(code, ""),
+                    first.replace("-", ""), end_iso.replace("-", ""))
+                rows = [(code, d, f) for d, f in series]
+            if not rows:
+                failed += 1
+                continue
+            # Anchor-rescale: sources use absolute (since-listing) factor
+            # scale; existing rows use whatever scale backfill stored. Pin the
+            # new series to the stored factor on the last pre-gap date so
+            # pre-gap rows diff as unchanged and only the gap invalidates.
+            anchor = conn.execute(
+                "SELECT date, factor FROM adj_factors WHERE code = ? AND date < ? "
+                "ORDER BY date DESC LIMIT 1", (code, beg_iso)).fetchone()
+            if anchor:
+                new_at_anchor = next((f for _c, d, f in reversed(rows) if d <= anchor[0]), None)
+                if new_at_anchor:
+                    scale = anchor[1] / new_at_anchor
+                    rows = [(c, d, round(f * scale, 8)) for c, d, f in rows]
+            in_gap = [f for _, d, f in rows if beg_iso <= d <= end_iso]
+            pre_gap = anchor[1] if anchor else 1.0
+            if in_gap and all(abs(f - pre_gap) < 1e-9 for f in in_gap):
+                stale.append(code)  # calendar says event, source shows none yet
+            changed = upsert_adj_factors(conn, rows)
+            if changed and (earliest is None or changed < earliest):
+                earliest = changed
+        except Exception as e:
+            failed += 1
+            print(f"  factors heal: {code} FAILED ({str(e)[:80]})", file=sys.stderr)
+        time.sleep(ADJ_BACKFILL_SLEEP_SEC)
+
+    filled = _forward_fill_factors(conn)
+    print(f"  factors heal: {len(event_codes)} event codes re-derived "
+          f"({failed} failed), forward-filled {filled} rows", file=sys.stderr)
+    if stale:
+        print(f"  factors heal: WARNING — source has not yet published the "
+              f"event for: {','.join(stale[:10])}"
+              f"{' …' if len(stale) > 10 else ''} (re-run heal later)",
+              file=sys.stderr)
+    if calendar_failures == len(dates) and dates:
+        print("  factors heal: WARNING — ex-div calendar unreachable for the "
+              "entire gap; only forward-fill applied", file=sys.stderr)
+    return earliest
+
+
+def _sync_or_heal_factors(conn: sqlite3.Connection) -> str | None:
+    """Keep adj_factors caught up with daily_prices, whatever the lag.
+
+    Lag of exactly one session on today's date → fast same-day f18 sync
+    (falls back to heal when clist is down). Anything more → gap heal.
+    Returns earliest changed date, or None.
+    """
+    cov = price_adjust.factor_coverage(conn)
+    mpd, mfd = cov["max_price_date"], cov["max_factor_date"]
+    if not mpd or not mfd or mfd >= mpd:
+        filled = _forward_fill_factors(conn)
+        if filled:
+            print(f"  factors: forward-filled {filled} rows", file=sys.stderr)
+        return None
+    prev_date = conn.execute(
+        "SELECT MAX(date) FROM daily_prices WHERE date < ?", (mpd,)
+    ).fetchone()[0]
+    if mfd == prev_date and mpd == datetime.now().strftime("%Y-%m-%d"):
+        try:
+            return sync_adj_factors_for_today(conn, mpd)
+        except Exception as e:
+            print(f"  factors: same-day f18 sync failed ({str(e)[:80]}); "
+                  f"falling back to gap heal", file=sys.stderr)
+    beg = (datetime.strptime(mfd, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
+    return heal_adj_factor_gap(conn, beg, mpd)
+
+
 def cmd_factors(args: list):
-    """CLI: pricedb.py factors backfill|update|verify [--beg YYYYMMDD] [--end YYYYMMDD]"""
+    """CLI: pricedb.py factors backfill|update|heal|verify [--beg --end]
+
+    backfill — codes with zero factor rows (per-code sina/eastmoney, resumable)
+    update   — daily incremental (same-day f18 sync, auto-heals gaps)
+    heal     — repair a multi-session gap (ex-div calendar + re-derivation);
+               --beg/--end are ISO dates, default = the current gap
+    verify   — coverage/lag audit, exit 1 on failure
+    """
     global _UPDATE_DEADLINE
     _UPDATE_DEADLINE = None  # factor work is budget-exempt (off-hours, resumable)
 
@@ -2140,12 +2369,38 @@ def cmd_factors(args: list):
         return
 
     if sub == "update":
-        latest = conn.execute("SELECT MAX(date) FROM daily_prices").fetchone()[0]
         try:
-            changed = sync_adj_factors_for_today(conn, latest)
+            changed = _sync_or_heal_factors(conn)
             if changed:
                 invalidate_rps_cache(conn, changed)
                 print(f"  rps_cache invalidated from {changed}", file=sys.stderr)
+        finally:
+            conn.close()
+        return
+
+    if sub == "heal":
+        def _arg(flag, default):
+            return args[args.index(flag) + 1] if flag in args else default
+
+        cov = price_adjust.factor_coverage(conn)
+        mfd = cov["max_factor_date"]
+        default_beg = (
+            (datetime.strptime(mfd, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
+            if mfd else None
+        )
+        beg = _arg("--beg", default_beg)
+        end = _arg("--end", cov["max_price_date"])
+        if not beg or not end or beg > end:
+            print(f"Nothing to heal (factors {mfd} vs prices {cov['max_price_date']}).",
+                  file=sys.stderr)
+            conn.close()
+            return
+        try:
+            changed = heal_adj_factor_gap(conn, beg, end)
+            if changed:
+                invalidate_rps_cache(conn, changed)
+                print(f"  rps_cache invalidated from {changed} — run "
+                      f"'pricedb.py rps' to recompute.", file=sys.stderr)
         finally:
             conn.close()
         return
@@ -2231,6 +2486,124 @@ def cmd_factors(args: list):
     conn.close()
     print(f"Unknown factors subcommand: {sub}", file=sys.stderr)
     sys.exit(1)
+
+
+def _partial_price_dates(conn: sqlite3.Connection) -> list[str]:
+    """Dates whose row count is under half the median daily count — the
+    signature of a provider outage that landed only a fragment of the
+    universe (e.g. a clist sweep killed mid-flight)."""
+    counts = conn.execute(
+        "SELECT date, COUNT(*) FROM daily_prices GROUP BY date ORDER BY date"
+    ).fetchall()
+    if not counts:
+        return []
+    ordered = sorted(c for _, c in counts)
+    median = ordered[len(ordered) // 2]
+    return [d for d, c in counts if c < 0.5 * median]
+
+
+def cmd_repair(args: list):
+    """CLI: pricedb.py repair [--beg ISO] [--end ISO] [--dry-run]
+
+    Fill partial price days from Sina's per-code kline service (raw prices,
+    one request per stock covers every gap day in the window at once).
+    INSERT OR IGNORE — existing rows are never overwritten, so the primary
+    eastmoney data stays canonical and the sweep is idempotent. Finishes
+    with a factor-gap heal and rps_cache invalidation from the first
+    repaired date.
+    """
+    global _UPDATE_DEADLINE
+    _UPDATE_DEADLINE = None  # repair is budget-exempt (off-hours, resumable)
+
+    def _arg(flag, default):
+        return args[args.index(flag) + 1] if flag in args else default
+
+    conn = get_db()
+    ensure_schema(conn)
+    partial = _partial_price_dates(conn)
+    if not partial:
+        print("No partial days detected — nothing to repair.", file=sys.stderr)
+        conn.close()
+        return
+    beg = _arg("--beg", min(partial))
+    end = _arg("--end", conn.execute(
+        "SELECT MAX(date) FROM daily_prices").fetchone()[0])
+    targets = [d for d in partial if beg <= d <= end]
+    before = dict(conn.execute(
+        "SELECT date, COUNT(*) FROM daily_prices WHERE date >= ? AND date <= ? "
+        "GROUP BY date", (beg, end)))
+    print(f"Partial days in [{beg}, {end}]: "
+          f"{', '.join(f'{d}({before.get(d, 0)})' for d in targets)}",
+          file=sys.stderr)
+    if "--dry-run" in args:
+        conn.close()
+        return
+
+    # One sina call per code returns its last N bars — size N to reach back
+    # past the earliest target date, with margin for suspensions.
+    n_dates = conn.execute(
+        "SELECT COUNT(DISTINCT date) FROM daily_prices WHERE date >= ?", (beg,)
+    ).fetchone()[0]
+    datalen = min(1023, n_dates + 15)
+    stocks = [
+        {"code": r[0], "name": r[1], "exchange": r[2]}
+        for r in conn.execute("SELECT code, name, exchange FROM stocks")
+    ]
+    print(f"Sweeping {len(stocks)} codes via sina (datalen={datalen})...",
+          file=sys.stderr)
+
+    inserted = 0
+    failures: list[str] = []
+
+    def _one(stock):
+        time.sleep(SINA_REPAIR_SLEEP_SEC)
+        return _fetch_klines_sina(stock, datalen)
+
+    completed = 0
+    with ThreadPoolExecutor(max_workers=SINA_REPAIR_WORKERS,
+                            thread_name_prefix="pricedb-sina") as pool:
+        futures = {pool.submit(_one, s): s for s in stocks}
+        for future in as_completed(futures):
+            stock = futures[future]
+            completed += 1
+            try:
+                rows = [r for r in future.result() if beg <= r[1] <= end]
+            except Exception as e:
+                failures.append(f"{stock['code']}: {str(e)[:60]}")
+                rows = []
+            if rows:
+                # DB writes stay on this (main) thread; workers only fetch.
+                cur = conn.executemany(
+                    "INSERT OR IGNORE INTO daily_prices "
+                    "(code,date,open,high,low,close,volume,amount) "
+                    "VALUES (?,?,?,?,?,?,?,?)", rows)
+                inserted += cur.rowcount
+                conn.commit()
+            if completed % 250 == 0 or completed == len(stocks):
+                print(f"  [sina {completed}/{len(stocks)}] "
+                      f"+{inserted} rows, {len(failures)} failed",
+                      file=sys.stderr)
+
+    after = dict(conn.execute(
+        "SELECT date, COUNT(*) FROM daily_prices WHERE date >= ? AND date <= ? "
+        "GROUP BY date", (beg, end)))
+    for d in targets:
+        print(f"  {d}: {before.get(d, 0)} → {after.get(d, 0)} rows",
+              file=sys.stderr)
+    if failures:
+        print(f"  {len(failures)} codes failed (re-run repair to retry): "
+          f"{'; '.join(failures[:5])}", file=sys.stderr)
+
+    if inserted:
+        invalidate_rps_cache(conn, beg)
+        print(f"rps_cache invalidated from {beg}", file=sys.stderr)
+        try:
+            heal_adj_factor_gap(conn, beg, end)
+        except Exception as e:
+            print(f"WARNING: factor heal after repair failed: {e} — run "
+                  f"'pricedb.py factors heal --beg {beg}'", file=sys.stderr)
+    print(f"Repair done: {inserted} rows inserted.", file=sys.stderr)
+    conn.close()
 
 
 def cmd_status():
@@ -2385,6 +2758,8 @@ if __name__ == "__main__":
         cmd_rps(sys.argv[2] if len(sys.argv) > 2 else None)
     elif command == "factors":
         cmd_factors(sys.argv[2:])
+    elif command == "repair":
+        cmd_repair(sys.argv[2:])
     elif command == "query":
         if len(sys.argv) < 3:
             print("Usage: pricedb.py query CODE", file=sys.stderr)
