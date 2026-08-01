@@ -47,15 +47,29 @@
       anchor rescale, calendar-outage degradation, skip-already-derived,
       sina parse/convert, gap routing); 31 neighboring pricedb/rps tests
       still green.
-- [ ] Sweep completed, 39 partial days near-full (delisted-since codes
-      legitimately absent from sina)
-- [ ] `factors verify` exit 0
-- [ ] RPS recompute for 07-31; gate pool sane vs 07-29
-- [ ] Full pytest suite (7 known pre-existing failures only)
-- [ ] Replay coverage: unreplayable trades ≪ 21/41
+- [x] Sweep completed 2026-08-01: **191,062 rows, 0 fetch failures**; all
+      39 days at full coverage (April days ~5,490 > July ~5,185 — real:
+      ~300 codes delisted/suspended in between).
+- [x] `factors verify` exit 0 (factors dense through 07-31, factored
+      universe 100%). Heal re-derived 1,457 event codes — including latent
+      damage on *full* days where the 0.5% f18 threshold had skipped small
+      dividends.
+- [x] RPS recomputed for 07-29/30/31; 07-31: 5,174 cached, momentum-gate
+      pool 389 (plausible). Older invalidated dates refill lazily on
+      demand (base_rates/panels compute from closes, not rps_cache).
+- [x] Full pytest suite: 397 passed, only the 7 known pre-existing
+      failures.
+- [x] Replay coverage: **41/41 trades replayable** (was 21/41).
+      match_rate 53.7% @1.5pp, mean |diff| 1.93pp — dominated by the known
+      entry fill-timing noise (1.87%), not missing data.
 
 ## Follow-ups
 
+- **228 of 1,457 event codes failed re-derivation** (sina empty + eastmoney
+  fallback throttled + BJ codes): they keep forward-filled factors. Re-run
+  `pricedb.py factors heal --beg 2026-03-12 --end 2026-07-31` when the
+  eastmoney throttle lifts — the flat-across-ex-date filter re-flags
+  exactly these.
 - Eastmoney IP throttle: if it persists into Monday's noon run, `update`
   will limp again — `repair` now exists as the manual recovery, but
   consider promoting a sina bulk path into the provider chain.
