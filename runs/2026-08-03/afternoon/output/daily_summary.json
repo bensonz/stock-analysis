@@ -1,0 +1,61 @@
+{
+  "date": "2026-08-03",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 16.2,
+      "pnl_pct": 3.85,
+      "note": "+3.85% PnL, 5 days held. Thesis intact: H1净利+2326-2547%, 文莱炼化 tax+mkt pricing edge, 10亿回购. Sector 石油石化 mid-pack, no gravity. Stop at ¥14.82 (-5%) safe with 8.5% cushion. Far from 10-day time stop. Margin neutral."
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "price": 114.0,
+      "pnl_pct": -0.93,
+      "note": "-0.93% in 3 days. MLCC catalyst (Samsung 8/1涨价30%, 太阳诱电9/1跟进) just activated. Bounced +2.08% today after testing ¥110. Stop tightened from ¥103.45 (-10.1%, incorrect) to ¥109.32 (-5% per V2 Rule 5). Monitor -3% trigger at ¥111.62 — only ¥2.38 away. Margin adding (+7.22% 5d) — leveraged buyers accumulating."
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 128.5,
+      "pnl_pct": 1.58,
+      "note": "+1.58% in 3 days. VCP SETUP coiling within 1.9% of MA10 — classic pre-catalyst pattern. ⚠️ 中报 TOMORROW (8/4): binary catalyst with gap risk. 0 risk tags, 10亿回购, 11%北向+15%公募, A/H折价-7%. Stop at ¥120.18 (-5%) is correctly set. If 中报 misses, stop fires — no exceptions. Margin deleveraging (-4.6% 5d) a mild caution flag."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 947110.0,
+    "dayPnl": 1589.0,
+    "dayReturnPct": 0.17,
+    "totalReturnPct": -5.29,
+    "unrealizedPnl": 918.0,
+    "realizedPnl": -53808.0,
+    "cashPct": 85.97
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 2.7319,
+    "up": 4005,
+    "down": 1466,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 83,
+    "limit_downs": 9,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 2.73:1, 0/3 major indices green, 83 limit-ups / 9 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "Divergent tape: breadth 2.73:1 bullish (4005↑/1466↓, 83涨停/9跌停) but all 3 major indices red. 科创50 crashed -5.08% as semiconductor sector (-6.0%) led a concentrated tech liquidation. Active rotation into old economy: 林业+5.63%, 电机+4.76%, 风电+3.77%. IV at extreme panic across all ETFs — 科创板50 IV rank 1.00 (all-time max), avg 0.79. Buy gate FAILS: 0/3 major indices green → no new positions. Portfolio: 3 holdings, all in neutral sectors, total PnL +1.6% today. ⚠️ 药明康德 中报 tomorrow (8/4) — key binary catalyst. Cash at 85.97% — dry powder preserved for regime improvement."
+  }
+}

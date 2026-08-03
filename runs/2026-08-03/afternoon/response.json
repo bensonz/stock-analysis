@@ -1,0 +1,203 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": 5.63,
+        "trend": "spiking"
+      },
+      {
+        "name": "电机Ⅱ",
+        "5d_pct": 4.76,
+        "trend": "steady"
+      },
+      {
+        "name": "风电设备",
+        "5d_pct": 3.77,
+        "trend": "steady"
+      },
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": 3.51,
+        "trend": "steady"
+      },
+      {
+        "name": "环保设备Ⅱ",
+        "5d_pct": 2.83,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": -7.68,
+        "trend": "crashing"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": -6.0,
+        "trend": "capitulation"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": -5.34,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "煤炭开采",
+        "5d_pct": -2.72,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "消费电子",
+        "5d_pct": -2.35,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/3 positions in hot sectors, 0/3 in cold sectors — all mid-pack, no sector gravity risk",
+    "regime": "Tech capitulation / old economy rotation. 科创50 -5.08%, 半导体 -6.0%. Breadth 2.73:1 hides concentrated large-cap tech selling. Distribution pattern."
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "+3.85% PnL, 5 days held. Thesis intact: H1净利+2326-2547%, 文莱炼化 tax+mkt pricing edge, 10亿回购. Sector 石油石化 mid-pack, no gravity. Stop at ¥14.82 (-5%) safe with 8.5% cushion. Far from 10-day time stop. Margin neutral.",
+      "sector_rank": "mid-pack (石油石化)",
+      "new_stop": null,
+      "pnl_pct": 3.85,
+      "days_held": 5,
+      "exit_price": null
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "reason": "-0.93% in 3 days. MLCC catalyst (Samsung 8/1涨价30%, 太阳诱电9/1跟进) just activated. Bounced +2.08% today after testing ¥110. Stop tightened from ¥103.45 (-10.1%, incorrect) to ¥109.32 (-5% per V2 Rule 5). Monitor -3% trigger at ¥111.62 — only ¥2.38 away. Margin adding (+7.22% 5d) — leveraged buyers accumulating.",
+      "sector_rank": "mid-pack (元件)",
+      "new_stop": 109.32,
+      "pnl_pct": -0.93,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "+1.58% in 3 days. VCP SETUP coiling within 1.9% of MA10 — classic pre-catalyst pattern. ⚠️ 中报 TOMORROW (8/4): binary catalyst with gap risk. 0 risk tags, 10亿回购, 11%北向+15%公募, A/H折价-7%. Stop at ¥120.18 (-5%) is correctly set. If 中报 misses, stop fires — no exceptions. Margin deleveraging (-4.6% 5d) a mild caution flag.",
+      "sector_rank": "mid-pack (医疗服务)",
+      "new_stop": null,
+      "pnl_pct": 1.58,
+      "days_held": 3,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "reason": "BUY GATE CLOSED (0/3 indices green). Otherwise top candidate: RPS120 89.99% sweet spot, 0 risks, H1 earnings beat +19.89%, dist_ma5 3.3%/dist_ma10 4.1% clean, margin deleveraging (-19.6%). 电网设备 sector mid-pack. Would BUY if regime opens.",
+      "rps120": 89.99
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "BUY GATE CLOSED. Strong fundamentals: H1 profit +123%, Cu bull thesis, dist_ma5 0.6% tight, margin adding (+5.5%), 0 risks, VCP SETUP, 控股股东增持. 工业金属 sector not in top 30% today. RPS120 88.22%. Would BUY on regime improvement.",
+      "rps120": 88.22
+    },
+    {
+      "code": "688777",
+      "name": "中控技术",
+      "reason": "dist_ma5_pct 8.9% > 6% chase limit (Rule 2b). Also dist_ma10_pct 8.3% > 8%. Stock overextended above short-term MAs. RPS120 86.91%. 工控设备 sector not hot. Buy gate also closed. Would reconsider on pullback to MA5.",
+      "rps120": 86.91
+    },
+    {
+      "code": "603156",
+      "name": "养元饮品",
+      "reason": "dist_ma5_pct 10.5% > 6%, dist_ma10_pct 14.2% > 8% — extreme overextension on both MA measures (Rule 2b). RPS120 92.28% in sweet spot but chasing risk unacceptable. 软饮料 sector not in leading group. Buy gate also closed.",
+      "rps120": 92.28
+    },
+    {
+      "code": "688008",
+      "name": "澜起科技",
+      "reason": "半导体 sector BOTTOM 2 at -6.0% — hard no-buy zone per Rule 1 (sector gravity). Despite RPS120 94.03%, excellent fundamentals (9.4 score), A/H折价 -12%, 回购. Stick dropped -5.5% from MA5, -16.8% from MA20 — in freefall. Sector trumps stock.",
+      "rps120": 94.03
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "reason": "半导体 sector BOTTOM 2 at -6.0%. 科创50 -5.08% confirms rout. dist_ma20 -20.7% — in crash mode. PE 198x, high valuation at risk in sector selloff. Hard no-buy.",
+      "rps120": 89.87
+    },
+    {
+      "code": "688041",
+      "name": "海光信息",
+      "reason": "半导体 sector in bottom list. RPS120 89.83% acceptable but sector is toxic. dist_ma10 -13.3%, dist_ma20 -18.4% — deeply below MAs. MiniMax H3 open-source chip support not enough to counter sector headwinds.",
+      "rps120": 89.83
+    },
+    {
+      "code": "002440",
+      "name": "闰土股份",
+      "reason": "BUY GATE CLOSED. Otherwise interesting: 分散染料涨价 catalyst, RPS120 92.98% sweet spot, dist_ma5 -2.2% (recent pullback to MA5). But dist_ma20 11.7% borderline (close to 12% chase limit), margin deleveraging (-16.9%). 化学制品 sector mid-pack. Would consider on regime re-open with pullback to ¥12.50-12.80.",
+      "rps120": 92.98
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "Divergence between breadth (2.73:1 up) and indices (all 3 red) is a textbook distribution pattern: large-cap tech is being liquidated while small/mid caps rise. The buy gate rule requiring 2/3 indices green correctly prevented entries into this unconfirmed rotation. Without this rule, we would have bought into a tape where heavyweight selling was masked by broad small-cap participation.",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Indices are cap-weighted; when breadth is bullish but indices are red, the largest stocks (dominated by tech/semis today) are being distributed heavily while smaller names rise. This is not accumulation — it's sector rotation away from the names our strategy pool holds."
+    },
+    {
+      "text": "科创50 -5.08% with IV rank at 1.00 (all-time max for 252-day lookback) confirms semiconductor sector capitulation. The bottom 3 sectors (半导体 -6.0%, 电子化学品 -5.34%, 消费电子 -2.35%) should be treated as toxic no-buy zones for at least 3-5 sessions — buying into them now is catching a falling knife, regardless of individual RPS or fundamentals.",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "When IV rank hits 1.00 and the sector drops 6% in a single session, it indicates forced selling/deleveraging by institutional holders, not orderly rotation. Recovery requires vol compression and time — typically 3-10 sessions before the sector stabilizes enough for low-risk entries."
+    },
+    {
+      "text": "三环集团 stop was set at -10.1% from entry (¥103.45 instead of ¥109.32). The V2 -5% hard stop rule must be mechanically enforced at entry — never set looser stops to 'give the trade room.' The data is clear: losses beyond -5% compound quickly and are harder to recover. Every new position going forward must carry stop = entry_price × 0.95 from day 0.",
+      "type": "rule",
+      "tags": [
+        "exit-rule",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "The -5% rule exists because empirical data shows losses >5% in momentum strategies have sharply negative forward expectancy. Setting looser stops at entry (e.g., -10% to 'avoid noise') defeats the purpose of the fast-cut framework."
+    },
+    {
+      "text": "Today's leading sectors (林业 +5.63%, 电机 +4.76%, 风电 +3.77%, 航天 +3.51%, 环保 +2.83%) have zero representation in the cheesefortune strategy pool, which is dominated by tech/semis. This is a structural coverage gap: when tech rotates out, we have no offensive candidates. The correct response is cash preservation via buy gate closure, not forced entries into unfamiliar sectors.",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "The strategy pool is inherently biased toward growth/tech names (semis, electronics, AI hardware). In rotation environments where these sectors go cold, the system's only correct mode is defense — holding existing positions with tight stops and keeping cash. Expanding pool coverage to infrastructure/defense/industrial names would add offense during tech-off rotations."
+    },
+    {
+      "text": "药明康德 VCP SETUP coiling within 1.9% of MA10 ahead of tomorrow's 中报 is a high-quality pre-catalyst pattern. If the report beats and the stock gaps up >5%, this would validate the hypothesis that VCP coiling before a scheduled earnings catalyst is a high-probability breakout setup. If it misses, it provides a clean negative data point for the VCP-as-timing-tool thesis.",
+      "type": "heuristic",
+      "tags": [
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "A VCP (volatility contraction pattern) represents a period of supply-demand equilibrium. When a scheduled catalyst (earnings) resolves the uncertainty, the coiled energy releases directionally. The tighter the contraction (closer to MA with low dist%), the stronger the potential move."
+    }
+  ],
+  "market_summary": "Divergent tape: breadth 2.73:1 bullish (4005↑/1466↓, 83涨停/9跌停) but all 3 major indices red. 科创50 crashed -5.08% as semiconductor sector (-6.0%) led a concentrated tech liquidation. Active rotation into old economy: 林业+5.63%, 电机+4.76%, 风电+3.77%. IV at extreme panic across all ETFs — 科创板50 IV rank 1.00 (all-time max), avg 0.79. Buy gate FAILS: 0/3 major indices green → no new positions. Portfolio: 3 holdings, all in neutral sectors, total PnL +1.6% today. ⚠️ 药明康德 中报 tomorrow (8/4) — key binary catalyst. Cash at 85.97% — dry powder preserved for regime improvement.",
+  "market_sentiment": "neutral",
+  "market_call": "中性"
+}

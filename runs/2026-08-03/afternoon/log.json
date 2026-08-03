@@ -1,0 +1,50 @@
+{
+  "date": "2026-08-03",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1785743994.58284,
+      "errors": [],
+      "end": 1785744068.080574,
+      "duration_sec": 73.5
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 22564,
+      "tokens": {
+        "input_tokens": 67153,
+        "output_tokens": 14748
+      },
+      "rounds": 1,
+      "tool_calls_count": 0,
+      "duration_sec": 390.7,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1785744458.83003,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=131",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=53",
+        "Hypothesis: Created h136 (observation): 三环集团 stop was set at -10.1% from entry (¥103.45 instead of ¥109.32). The V2 -5% ...",
+        "Hypothesis: Created h137 (observation): Today's leading sectors (林业 +5.63%, 电机 +4.76%, 风电 +3.77%, 航天 +3.51%, 环保 +2.83%) ...",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=51",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1785744459.764523,
+      "duration_sec": 0.9
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 465.09999999999997
+  }
+}
