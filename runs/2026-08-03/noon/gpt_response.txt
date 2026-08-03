@@ -1,0 +1,390 @@
+# Research Memo: 2026-08-03
+
+## 1. Market Regime
+
+**Breadth: 2.2:1 bullish… but indices tell a different story.**
+
+- 上证指数 -0.59%, 深证成指 -0.45%, 创业板指 -0.44% — all three red.
+- 科创50 crushed at **-3.73%** — global semiconductor rout hitting hardest here.
+- Breadth: 3717 up / 1690 down / 122 flat. Ratio 2.20:1. 66 涨停 vs 3 跌停.
+- The paradox: breadth is constructive but the indices are red. This is large-cap/tech drag while small/mid-caps are fine. The r0_2 bucket dominates (2394 stocks), so most "up" stocks are barely positive — not a high-conviction rally.
+
+**IV Sentiment: Extreme fear.** Average IV Rank 84.89%. 科创50 at 94.2%, 创业板 at 95.8%, 500ETF深 at **100%**. This is a market pricing in volatility, not complacency. Historically, this level often marks near-term bottoms, but entry here requires precision.
+
+**Buy Gate: FAILED.** Up/Down ratio passes (2.2:1 ✅), f10=3 passes ✅, but **0/3 major indices green ❌**. Per Rule 1: no new positions today. Cash is king.
+
+**Macro context:** Global semiconductor selloff triggered by Broadcom's AI guidance miss (revenue guidance $160B vs street $172B). Korean market circuit-breakers triggered. This is a valuation reset, not a fundamental collapse — but the momentum unwind is real. FOMC already behind us (7/30), 政治局 meeting set "六张网" infrastructure push as H2 priority.
+
+**Market call: 谨慎 (Cautious).** Not panic territory (f10=3), but the buy gate hard-fails on index alignment. Hold existing, sell weak, no new entries.
+
+---
+
+## 2. Sector Analysis
+
+**Hot sectors (top 5 today):**
+| Sector | 5d Change | Character |
+|---|---|---|
+| 电机Ⅱ | +4.11% | Industrial rotation play |
+| 航天装备Ⅱ | +3.24% | Defense/military |
+| 风电设备 | +3.04% | Green energy infrastructure |
+| 环保设备Ⅱ | +2.74% | Environmental policy |
+| 林业Ⅱ | +2.69% | Niche commodity |
+
+**Cold sectors (bottom 5):**
+| Sector | 5d Change | Issue |
+|---|---|---|
+| 玻璃玻纤 | -6.22% | Materials weakness |
+| **半导体** | **-4.48%** | Global selloff, Broadcom catalyst |
+| 电子化学品Ⅱ | -4.12% | Semiconductor supply chain contagion |
+| 医疗美容 | -2.34% | Consumer/healthcare rotation out |
+| 非金属材料Ⅱ | -2.12% | Materials |
+
+**Rotation signal: Clear tech→industrial/defense rotation.** Money is fleeing semiconductors globally (Broadcom disappointment → Korea circuit breakers → A-share semiconductor -4.48%). The winners are non-tech: motors, aerospace, wind power — policy-backed industrial sectors. This is a classic risk-off rotation within a still-positive breadth tape.
+
+**Position sector alignment (post-sell):**
+- 恒逸石化 → 石油石化 (mid-pack, not top/bottom 5)
+- 三环集团 → 元件 (mid-pack)
+- 药明康德 → 医疗服务 (mid-pack)
+- ~~扬杰科技 → 半导体 (BOTTOM 5 — reason to sell)~~
+- ~~深南电路 → 元件 (mid-pack but stop proximity forces exit)~~
+
+**Regime: "Industrial rotation, tech de-rating."** Not a panic, but a sector reshuffling. 0/3 positions in today's top 5 sectors, but none in bottom 5 after selling 扬杰科技.
+
+---
+
+## 3. Position Review
+
+### ① 扬杰科技 (300373) — **SELL** 🔴
+
+| Field | Value |
+|---|---|
+| Entry | 7/31 @ 87.60 |
+| Current | **81.59** (-2.78% today) |
+| Stop | 83.22 |
+| PnL | **-6.86%** |
+| Days held | 3 |
+| Sector | 半导体 (BOTTOM 5: -4.48%) |
+| Margin | adding (mild positive, overwhelmed) |
+
+**Triggers fired:**
+1. **Stop breached.** 81.59 < 83.22. Rule 5: "-5% from entry → Automatic SELL. No exceptions."
+2. **-3% in first 3 days → SELL.** -6.86% is well past this threshold.
+3. **Sector in bottom 5.** 半导体 at -4.48%. h019: cold sectors = hard no-buy zones; applies to holding too.
+4. **Multiple rule violations:** iv_filter + overextended_entry both flagged this position.
+
+**Mechanism:** Entered 7/31 at the tail end of a semiconductor run. Global Broadcom disappointment (7/30) triggered a sector-wide valuation reset. Korea circuit breakers amplified. SiC/growth narrative is intact fundamentally, but the sector tide has turned. Price is truth — -6.86% in 3 days is not a timing issue, it's a regime shift against this name.
+
+**Action: SELL at market (81.59).** PnL: -6.86%. Realized loss: ~¥2,404 (400 shares × 6.01 loss).
+
+---
+
+### ② 深南电路 (002916) — **SELL** 🔴
+
+| Field | Value |
+|---|---|
+| Entry | 7/31 @ 308.35 |
+| Current | **304.31** (-1.20% today) |
+| Stop | 300.21 |
+| PnL | **-1.31%** |
+| Days held | 3 |
+| Sector | 元件 (mid-pack) |
+| Margin | deleveraging (chg5:-21.55%, net5_repay:3d) |
+
+**Triggers fired:**
+1. **CRITICAL stop proximity.** Only 1.35% above stop at 300.21. Gap risk is real — a -1.5% open tomorrow eats through the stop before you can act. Learnings h024: proactive action before hard stop is hit, especially in volatile names.
+2. **Below all MAs.** dist_ma5 -2.5%, dist_ma10 -5.6%, dist_ma20 -15.9%. Stock is in a downtrend.
+3. **Deleveraging.** Margin chg5_pct -21.55% — leveraged holders are exiting aggressively. Speculative support draining.
+4. **Sector not hot.** 元件 not in top 5.
+
+**Why not wait:** The stop_proximity rule exists because the gap between "1.3% above stop" and "stop breached" can disappear in a single morning session. 扬杰科技's -2.78% today from -2.78% yesterday shows how fast these moves compound. Selling now at -1.31% is better than selling at -3% tomorrow.
+
+**Action: SELL at market (304.31).** PnL: -1.31%. Realized loss: ~¥404 (100 shares × 4.04 loss).
+
+---
+
+### ③ 恒逸石化 (000703) — **HOLD** 🟢
+
+| Field | Value |
+|---|---|
+| Entry | 7/29 @ 15.60 |
+| Current | **16.23** (+0.87% today) |
+| Stop | 14.82 |
+| PnL | **+4.04%** |
+| Days held | 4 |
+| Sector | 石油石化 (mid-pack) |
+| Margin | neutral |
+
+**Assessment:** Best-performing position. +4.04% in 4 days. Thesis intact: H1净利+2326-2547%, 文莱炼化 tax advantage, PTA cycle bottoming, 10亿回购. Sector 石油石化 is in the middle — benefiting from rotation out of tech into resource/commodity names. Stop at 14.82 provides 8.7% cushion. No time-stop risk at 4 days.
+
+**Near-term catalyst:** Crude oil stability supports thesis. 文莱炼化 is a unique moat — enjoys Singapore-style market pricing + tax holiday. Not a sector leader but a company-specific story that's working.
+
+**Action: HOLD.** Stop unchanged at 14.82.
+
+---
+
+### ④ 三环集团 (300408) — **HOLD** 🟡
+
+| Field | Value |
+|---|---|
+| Entry | 7/31 @ 115.07 |
+| Current | **111.73** (+0.04% today) |
+| Stop | 103.45 (note: too loose, should be 109.32 per -5% rule) |
+| PnL | **-2.90%** |
+| Days held | 3 |
+| Sector | 元件 (mid-pack) |
+| Margin | adding (chg5:+7.22%) |
+
+**Assessment: CLOSE CALL but hold.** -2.90% in 3 days — nearly triggered the -3% rule. But the MLCC catalyst is FRESH and real: Samsung 8/1涨价30% just went into effect, 太阳诱电 9/1跟进. This is a sector-wide structural catalyst, not a one-day headline. Stock is stabilizing (+0.04% today after -2.95% entry day).
+
+**Risk:** The -3% rule is at the doorstep. If this drops another 0.4% tomorrow, it triggers. But the catalyst is too fresh to cut. Also: margin signal "adding" (+7.22% 5d) — leveraged buyers are accumulating, not exiting. This is different from 深南电路's deleveraging.
+
+**Stop concern:** Current stop 103.45 is -10.1% from entry. Per V2 rules, stops should be -5% from entry = 109.32. The system stop seems to be a V1 legacy. I'll note this but not change it — the system sets stops. However, I'll flag: if this were set properly at 109.32, we'd be only 2.15% above stop.
+
+**Action: HOLD.** Monitor -3% trigger closely tomorrow. Stop unchanged at 103.45 but note the looseness.
+
+---
+
+### ⑤ 药明康德 (603259) — **HOLD** 🟢
+
+| Field | Value |
+|---|---|
+| Entry | 7/31 @ 126.50 |
+| Current | **127.30** (-0.88% today) |
+| Stop | 120.18 (exactly -5%) |
+| PnL | **+0.63%** |
+| Days held | 3 |
+| Sector | 医疗服务 (mid-pack) |
+| Margin | deleveraging (chg5:-4.6%) |
+
+**Assessment:** Stabilizing with a slight gain. **中报 tomorrow (8/4)** — this is the make-or-break moment. Consensus expects ~131.5B Q2 revenue. The stock has been compressing into a VCP SETUP — within 2.2% of MA10, contraction pattern tightening. This is classic "coil before catalyst" behavior.
+
+**What could go wrong:** If 中报 misses, this gaps down. Current stop at 120.18 is 5.6% below — a miss could blow through that. But event risk does NOT override the hold: the thesis is intact, the setup is valid, and we manage by the stop. If it gaps below 120.18, we sell. If it beats and gaps up, we ride.
+
+**Positive signals:** A/H折价-7% (A-share discount), 10亿回购, 11%北向+15%公募, 0 risk tags. The deleveraging margin signal is a yellow flag but insufficient to override the catalyst setup.
+
+**Action: HOLD.** Stop unchanged at 120.18. Be prepared to act fast if 中报 disappoints.
+
+---
+
+## 4. New Entry Candidates — **NONE (Buy Gate Failed)**
+
+The buy gate requires at least 2 of 3 major indices green. Today: 0/3. No new positions.
+
+Stocks I would have considered if the gate were open:
+
+| Candidate | Why interesting | Why skip today |
+|---|---|---|
+| 宏发股份 (600885) | 电网设备 sector, 半年报+19.9%, 股东户数-39%, strong fundamentals | Buy gate closed |
+| 普洛药业 (000739) | VCP SETUP, near MA10, catalyst fresh, 原料药龙头 | Buy gate closed |
+| 西部矿业 (601168) | Copper bull, 半年报+123%净利, 增持 | dist_ma20 +14.4% — chasing even if gate open |
+| 闰土股份 (002440) | 染料涨价 cycle | dist_ma20 +19.1%, dist_ma10 +8.0% — extreme chase |
+| 海通发展 (603162) | Shipping boom, +1528%净利 | dist_ma20 clean, but 航运 not in top sectors |
+
+---
+
+## 5. Skip List
+
+| Code | Name | Reason |
+|---|---|---|
+| 002440 | 闰土股份 | dist_ma10 +8.0%, dist_ma20 +19.1% — extreme overextension (Rule 2b). Also buy gate closed. |
+| 601168 | 西部矿业 | dist_ma20 +14.4% >12% — chasing (Rule 2b). Strong fundamentals but wait for pullback to MA10. |
+| 688777 | 中控技术 | dist_ma5 +11.4%, dist_ma10 +8.9% — extreme overextension (Rule 2b). |
+| 002832 | 比音勒芬 | dist_ma10 +10.1%, dist_ma20 +16.6% — overextended. |
+| 600428 | 中远海特 | dist_ma20 +13.4% >12% — chasing. |
+| 688146 | 中船特气 | RPS120 100.0% — above 95% cap, extended (Rule 2). |
+| 002980 | 华盛昌 | RPS120 99.88% — above 95% cap. |
+| 002384 | 东山精密 | RPS120 99.65% — above 95% cap. |
+| All other candidates | — | Buy gate failed: 0/3 major indices green. No new entries. |
+
+---
+
+## 6. Learnings
+
+1. **[new] 广度与指数背离是隐形弱势信号。** Today: breadth 2.2:1 but all 3 major indices red. The r0_2 bucket (barely-up stocks) dominated — genuine buying conviction was absent. When breadth looks bullish but indices disagree, trust the indices for regime calls. [type: heuristic, tags: market-regime, entry-filter]
+
+2. **[confirming h019] 半导体板块跌入bottom5直接拖垮扬杰科技。** 扬杰科技自身基本面不差（H1预增20-40%，SiC翻倍），但板块-4.48%的系统性压力让个股无法对抗板块重力。冷门板块持仓应加速止损，不等待"个股叙事兑现"。 [type: signal, tags: sector, exit-rule, related_hypothesis: h019]
+
+3. **[confirming h024] 深南电路的stop_proximity主动止损再次验证价值。** 距止损仅1.35%时提前行动，避免了隔夜跳空风险。扬杰科技今天就是从类似位置（昨收83.92 vs 止损83.22）直接低开击穿止损的。 [type: rule, tags: exit-rule, related_hypothesis: h024]
+
+4. **[new] MLCC涨价催化剂的时效性极强。** 三星电机8/1涨价今日正式生效，太阳诱电9/1跟进。三环集团-2.90%逼近-3%规则，但催化剂刚落地，应给1-2天观察期而非机械止损。事件驱动型标的需要催化剂兑现窗口。 [type: observation, tags: catalyst, timing]
+
+5. **[new] 药明康德中报前夜的"线圈"模式值得记录。** 股价在MA5/MA10/MA20密集区（127.30 vs 125.62/125.71/124.41）极致收敛，VCP SETUP配合明日催化剂——这是教科书级的事件驱动VCP。无论结果如何，这个模式的记录对后续有参考价值。 [type: observation, tags: vcp, catalyst]
+
+---
+
+## 7. Uncertainty Flags
+
+- **三环集团stop太松。** 系统设置的stop在103.45（-10.1%），但V2规则要求-5%=109.32。我不确定系统为何保留了这个较宽的止损，但这意味着实际风险比表面看起来更大。如果按-5%规则，当前距正确止损仅2.15%。
+
+- **药明康德中报风险。** 明日中报是高风险二元事件。如果超预期，可能跳空+5-10%。如果miss，可能直接贯穿120.18止损。我无法预判结果，只能确保止损到位。
+
+- **科创50 -3.73%的严重性。** 这个跌幅远超三大指数，说明科创板正在经历独立于主板的资金撤出。如果这个趋势持续，所有科创板持仓（目前没有，但策略池中大量科创板标的）都应该回避。
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "电机Ⅱ", "5d_pct": 4.11, "trend": "rotation_in"},
+      {"name": "航天装备Ⅱ", "5d_pct": 3.24, "trend": "steady"},
+      {"name": "风电设备", "5d_pct": 3.04, "trend": "steady"},
+      {"name": "环保设备Ⅱ", "5d_pct": 2.74, "trend": "rotation_in"},
+      {"name": "林业Ⅱ", "5d_pct": 2.69, "trend": "niche"}
+    ],
+    "cold_sectors": [
+      {"name": "玻璃玻纤", "5d_pct": -6.22, "trend": "deteriorating"},
+      {"name": "半导体", "5d_pct": -4.48, "trend": "global_selloff"},
+      {"name": "电子化学品Ⅱ", "5d_pct": -4.12, "trend": "contagion"},
+      {"name": "医疗美容", "5d_pct": -2.34, "trend": "rotating_out"},
+      {"name": "非金属材料Ⅱ", "5d_pct": -2.12, "trend": "weak"}
+    ],
+    "position_alignment": "After SELL actions: 0/3 remaining positions in today's top5 sectors, but none in bottom5. 恒逸石化(石油石化), 三环集团(元件), 药明康德(医疗服务) all mid-pack.",
+    "regime": "Industrial/defense rotation in, tech/AI de-rating out. Global semiconductor selloff (Broadcom guidance miss → Korea circuit breakers) hammering 科创50 (-3.73%). Breadth 2.2:1 bullish in small-caps, indices red on large-cap/tech drag. IV extreme fear (avg 84.89% rank)."
+  },
+  "position_decisions": [
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "action": "SELL",
+      "reason": "STOP BREACHED: 81.59 < 83.22 stop. -6.86% from entry in 3 days. Sector 半导体 in bottom5 (-4.48%). Multiple rule violations (iv_filter, overextended_entry, stop_proximity). Rule 5: -5% from entry = automatic SELL. -3% in first 3 days = automatic SELL. Sector gravity overwhelms individual thesis.",
+      "sector_rank": "bottom 5 (半导体 -4.48%)",
+      "new_stop": null,
+      "pnl_pct": -6.86,
+      "days_held": 3,
+      "exit_price": 81.59
+    },
+    {
+      "code": "002916",
+      "name": "深南电路",
+      "action": "SELL",
+      "reason": "CRITICAL stop proximity: only 1.35% above stop at 300.21. Below all MAs (dist_ma5 -2.5%, dist_ma10 -5.6%, dist_ma20 -15.9%). Margin deleveraging (chg5 -21.55%). Gap risk is real — proactive stop-loss per h024. Sector 元件 not in top sectors. Better to exit at -1.31% than risk -3%+ gap-down tomorrow.",
+      "sector_rank": "mid-pack (元件, not in top/bottom 5)",
+      "new_stop": null,
+      "pnl_pct": -1.31,
+      "days_held": 3,
+      "exit_price": 304.31
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "+4.04% in 4 days, thesis intact (H1净利+2326-2547%, 文莱炼化, 10亿回购). Sector 石油石化 mid-pack — benefiting from rotation out of tech. Stop at 14.82 safe (8.7% cushion). 4 days held — far from 10-day time stop. Margin signal neutral.",
+      "sector_rank": "mid-pack (石油石化, not in top/bottom 5)",
+      "new_stop": null,
+      "pnl_pct": 4.04,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "reason": "-2.90% in 3 days — close to -3% rule but not breached. MLCC catalyst is FRESH: Samsung 8/1涨价30% just took effect, 太阳诱电 9/1跟进. Structural sector catalyst, not a one-day headline. Margin signal 'adding' (+7.22% 5d) — leveraged buyers accumulating. Stock stabilized today (+0.04%). Give 1-2 more days for catalyst to price in. NOTE: current stop 103.45 (-10.1%) is too loose per V2 -5% rule; correct stop would be 109.32.",
+      "sector_rank": "mid-pack (元件, not in top/bottom 5)",
+      "new_stop": null,
+      "pnl_pct": -2.9,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "+0.63% from entry. 中报 tomorrow (8/4) — key binary catalyst. VCP SETUP: price within 2.2% of MA10, classic coil-before-catalyst pattern. Consensus ~131.5B Q2 revenue. 0 risk tags, 10亿回购, A/H折价-7%. Stop at 120.18 (exactly -5%) is properly set. If 中报 beats, gap-up potential; if misses, stop fires. Event does not override stop.",
+      "sector_rank": "mid-pack (医疗服务, not in top/bottom 5)",
+      "new_stop": null,
+      "pnl_pct": 0.63,
+      "days_held": 3,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "002440",
+      "name": "闰土股份",
+      "reason": "dist_ma10 +8.0% (Rule 2b: >8% = SKIP), dist_ma20 +19.1% (>12% = SKIP). Extreme overextension. 染料涨价 catalyst is real but entry timing is wrong. Also: buy gate closed (0/3 indices green).",
+      "rps120": 93.74
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "dist_ma20 +14.4% >12% — chasing (Rule 2b). Strong fundamentals (半年报+123%净利, 铜 bull, 增持) but stock is too far from support. Wait for pullback to MA10 (~36.3). Also: buy gate closed.",
+      "rps120": 87.95
+    },
+    {
+      "code": "688777",
+      "name": "中控技术",
+      "reason": "dist_ma5 +11.4% (>6% = SKIP), dist_ma10 +8.9% (>8% = SKIP). Extreme short-term overextension. Also: buy gate closed.",
+      "rps120": 88.73
+    },
+    {
+      "code": "688146",
+      "name": "中船特气",
+      "reason": "RPS120 100.0% — above 95% cap (Rule 2). Also: dist_ma10 +6.6% approaching chase threshold. Also: buy gate closed.",
+      "rps120": 100.0
+    },
+    {
+      "code": "600428",
+      "name": "中远海特",
+      "reason": "dist_ma20 +13.4% >12% — SKIP (Rule 2b). Also: buy gate closed.",
+      "rps120": 96.19
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "reason": "Decent setup (dist_ma5 +2.4%, dist_ma10 +0.8%, RPS120 93.37% sweet spot, 充电桩 catalyst). Would be a BUY candidate if buy gate were open. Skipped today: 0/3 indices green.",
+      "rps120": 93.37
+    },
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "reason": "VCP SETUP, near MA10 (dist +0.0%), catalyst fresh. Would be a BUY candidate if buy gate open. Skipped: buy gate closed + 原料药 sector not in top sectors.",
+      "rps120": 88.96
+    },
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "reason": "Strong setup: 电网设备 sector, 半年报+19.9%, 股东户数-39%, dist_ma5 +3.2%, dist_ma10 +4.6%, RPS120 88.87%. Would be a BUY candidate if buy gate were open. Skipped: 0/3 indices green.",
+      "rps120": 88.87
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "广度与指数背离是隐形弱势信号。今日广度2.2:1但三大指数全绿。r0_2桶（微涨股）占2394只——涨幅分布极度左偏，买盘缺乏真实conviction。当广度与指数方向矛盾时，以指数方向为准做regime判断。",
+      "type": "heuristic",
+      "tags": ["market-regime", "entry-filter"],
+      "evidence_type": "supporting",
+      "mechanism": "广度计数不区分涨幅大小。r0_2（0-2%涨幅）占上涨家数的64%，说明大多数'上涨'股票实际涨幅极小，可能是无方向随机波动而非真实买盘。指数按市值加权，反映了真正有定价权的资金的判断。"
+    },
+    {
+      "text": "半导体板块跌入bottom5直接拖垮扬杰科技：个股基本面不差（H1预增20-40%, SiC翻倍），但板块-4.48%的系统性卖压无法对抗。冷门板块持仓应加速止损，不等待'个股叙事兑现'。h019再次验证。",
+      "type": "signal",
+      "tags": ["sector", "exit-rule"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "板块ETF和机构资金的被动减仓会对板块内所有个股形成无差别卖压。即使个股α强劲，β压力也能在1-2天内击穿技术止损位。"
+    },
+    {
+      "text": "MLCC涨价催化剂的时效性极强：三星8/1正式涨价今日生效，太阳诱电9/1跟进。三环集团-2.90%逼近-3%规则但催化剂刚落地，应给1-2天观察窗口而非机械止损。事件驱动型持仓需要催化剂兑现的时间容差。",
+      "type": "observation",
+      "tags": ["catalyst", "timing", "exit-rule"],
+      "evidence_type": "supporting",
+      "mechanism": "价格调整公告的生效日是一个离散事件节点。在生效日当天及次日，产业链客户会做出实际采购决策，这些决策才能转化为股价信号。公告日和生效日之间的gap需要耐心。"
+    },
+    {
+      "text": "药明康德中报前夜的VCP线圈模式：股价在MA5/MA10/MA20密集区（127.30 vs 125.62/125.71/124.41）极致收敛，配合明日中报催化剂——教科书级的事件驱动VCP。无论结果如何，应记录此模式供后续参考。",
+      "type": "observation",
+      "tags": ["vcp", "catalyst", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "VCP（波动收缩形态）在事件催化剂前的意义：价格在无信息环境下自然收敛到均衡区间，当信息冲击（中报）发生时，突破方向更可能是趋势性的而非噪音。收敛越紧，突破越有力。"
+    }
+  ],
+  "market_summary": "2026-08-03: Breadth 2.2:1 (3717↑/1690↓) but all 3 major indices red (上证-0.59%, 深证-0.44%, 创业板-0.44%). 科创50 crushed -3.73% on global semiconductor selloff (Broadcom guidance miss → Korea circuit breakers). 66涨停/3跌停 — no panic, but rotation is real: money fleeing tech into industrials (电机+4.11%, 航天装备+3.24%, 风电+3.04%). IV extreme fear (avg rank 84.89%): 科创50 94.2%, 创业板 95.8%, 500ETF深 100%. Buy gate FAILED (0/3 indices green) → no new positions. Selling 扬杰科技 (stop breached) and 深南电路 (stop proximity CRITICAL). Holding 恒逸石化 (+4.04%), 三环集团 (-2.90%, MLCC catalyst today), 药明康德 (+0.63%, 中报 tomorrow). Portfolio post-sells: ~79% cash, 3 positions.",
+  "market_sentiment": "mixed",
+  "market_call": "谨慎"
+}
+```

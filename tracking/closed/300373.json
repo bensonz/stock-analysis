@@ -2,12 +2,43 @@
   "code": "300373",
   "name": "扬杰科技",
   "status": "closed",
-  "entryDate": "2026-02-13",
-  "exitDate": "2026-03-03",
-  "entryPrice": 86.07,
-  "exitPrice": 79.0,
-  "returnPct": -8.21,
-  "holdingDays": 18,
-  "sector": "功率半导体",
-  "lessonLearned": "半导体涨价催化thesis需要验证业绩兑现周期。入场时RPS=88.4%合理但催化剂(MCU涨价)偏概念化，无明确业绩数据支撑。开仓后14天趋势持续恶化，说明入场时机不佳(02-13买入后连续回调)。教训：催化剂需更具体(如有明确涨价幅度/订单数据)，不能仅依赖行业趋势性判断。"
+  "thesis": "功率半导体龙头，H1预增20-40%，SiC碳化硅收入翻倍。AI服务器+新能源车双驱动。0风险标签。RPS 92.42% sweet spot。股价在MA下方形成pullback入场机会。",
+  "entryDate": "2026-07-31",
+  "entryPrice": 87.6,
+  "targetPrice": 105.0,
+  "stopLoss": 83.22,
+  "currentStop": 83.22,
+  "allocation_pct": 5.0,
+  "shares": 400,
+  "allocatedCapital": 35040.0,
+  "rating": 2,
+  "rps120": 92.42,
+  "sector": "半导体",
+  "catalysts": [],
+  "sourceWatchlist": "2026-07-31",
+  "history": [
+    {
+      "date": "2026-07-31",
+      "price": 87.6,
+      "change_pct": 0,
+      "action": "OPEN",
+      "note": "LLM开仓 扬杰科技"
+    },
+    {
+      "date": "2026-08-03",
+      "price": 81.59,
+      "change_pct": -6.86,
+      "action": "SELL",
+      "note": "STOP BREACHED: 81.59 < 83.22 stop. -6.86% from entry in 3 days. Sector 半导体 in bottom5 (-4.48%). Multiple rule violations (iv_filter, overextended_entry, stop_proximity). Rule 5: -5% from entry = automatic SELL. -3% in first 3 days = automatic SELL. Sector gravity overwhelms individual thesis."
+    }
+  ],
+  "exitDate": "2026-08-03",
+  "exitPrice": 81.59,
+  "exitReason": "STOP BREACHED: 81.59 < 83.22 stop. -6.86% from entry in 3 days. Sector 半导体 in bottom5 (-4.48%). Multiple rule violations (iv_filter, overextended_entry, stop_proximity). Rule 5: -5% from entry = automatic SELL. -3% in first 3 days = automatic SELL. Sector gravity overwhelms individual thesis.",
+  "returnPct": -6.86,
+  "holdingDays": 3,
+  "lessonLearned": "",
+  "createdAt": "2026-07-31T15:46:11.125228+08:00",
+  "updatedAt": "2026-08-03T11:41:04.599259+08:00",
+  "trackerVersion": "2.1"
 }

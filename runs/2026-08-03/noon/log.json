@@ -1,0 +1,51 @@
+{
+  "date": "2026-08-03",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1785728143.5897589,
+      "errors": [],
+      "end": 1785728218.787107,
+      "duration_sec": 75.2
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 19517,
+      "tokens": {
+        "input_tokens": 236400,
+        "output_tokens": 12735
+      },
+      "rounds": 3,
+      "tool_calls_count": 5,
+      "duration_sec": 245.7,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1785728464.598699,
+      "actions": [
+        "SELL 300373",
+        "SELL 002916",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h133 (observation): 广度与指数背离是隐形弱势信号。今日广度2.2:1但三大指数全绿。r0_2桶（微涨股）占2394只——涨幅分布极度左偏，买盘缺乏真实conviction。当广度与...",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=52",
+        "Hypothesis: Created h134 (observation): MLCC涨价催化剂的时效性极强：三星8/1正式涨价今日生效，太阳诱电9/1跟进。三环集团-2.90%逼近-3%规则但催化剂刚落地，应给1-2天观察窗口而非机械止...",
+        "Hypothesis: Created h135 (observation): 药明康德中报前夜的VCP线圈模式：股价在MA5/MA10/MA20密集区（127.30 vs 125.62/125.71/124.41）极致收敛，配合明日中报催...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1785728465.041074,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 321.29999999999995
+  }
+}

@@ -1,7 +1,7 @@
 {
   "code": "002916",
   "name": "深南电路",
-  "status": "active",
+  "status": "closed",
   "thesis": "PCB龙头，100%机构买入评级，目标价+92% upside。AI算力需求驱动高多层板放量，Vera Rubin量产拉动PCB价值量提升。H1业绩Q2环比增长。元件sector #3今日+7.66%。股价在MA5下方-4.7%形成pullback入场机会。",
   "entryDate": "2026-07-31",
   "entryPrice": 308.35,
@@ -30,15 +30,22 @@
       "change_pct": -0.11,
       "action": "HOLD",
       "note": "Day 1 entry. -0.11% from entry but +8.26% from prev close — gapped up, entry just poorly timed intraday. WARNING: only 2.53% above stop at 300.21. Prepare sell order. PCB/AI thesis intact."
+    },
+    {
+      "date": "2026-08-03",
+      "price": 304.31,
+      "change_pct": -1.31,
+      "action": "SELL",
+      "note": "CRITICAL stop proximity: only 1.35% above stop at 300.21. Below all MAs (dist_ma5 -2.5%, dist_ma10 -5.6%, dist_ma20 -15.9%). Margin deleveraging (chg5 -21.55%). Gap risk is real — proactive stop-loss per h024. Sector 元件 not in top sectors. Better to exit at -1.31% than risk -3%+ gap-down tomorrow."
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-08-03",
+  "exitPrice": 304.31,
+  "exitReason": "CRITICAL stop proximity: only 1.35% above stop at 300.21. Below all MAs (dist_ma5 -2.5%, dist_ma10 -5.6%, dist_ma20 -15.9%). Margin deleveraging (chg5 -21.55%). Gap risk is real — proactive stop-loss per h024. Sector 元件 not in top sectors. Better to exit at -1.31% than risk -3%+ gap-down tomorrow.",
+  "returnPct": -1.31,
+  "holdingDays": 3,
+  "lessonLearned": "",
   "createdAt": "2026-07-31T11:45:38.788764+08:00",
-  "updatedAt": "2026-07-31T15:46:11.001423+08:00",
+  "updatedAt": "2026-08-03T11:41:04.607992+08:00",
   "trackerVersion": "2.1"
 }

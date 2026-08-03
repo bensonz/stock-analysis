@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 236400,
+  "output_tokens": 12735,
+  "rounds": 3,
+  "duration_sec": 245.7,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月3日 半导体板块下跌 原因",
+        "max_results": 5
+      },
+      "result_length": 3438
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月 电机板块 航天装备 风电 领涨",
+        "max_results": 5
+      },
+      "result_length": 3197
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 2026年中报 业绩预告 8月4日",
+        "max_results": 5
+      },
+      "result_length": 3085
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "MLCC涨价 三星电机 2026年8月 三环集团"
+      },
+      "result_length": 3257
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "扬杰科技 功率半导体 半年报 2026 半导体板块"
+      },
+      "result_length": 2869
+    }
+  ],
+  "fallback_used": false
+}

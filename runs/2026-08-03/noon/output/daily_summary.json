@@ -1,0 +1,77 @@
+{
+  "date": "2026-08-03",
+  "actions": [
+    {
+      "code": "300373",
+      "name": "扬杰科技",
+      "action": "SELL",
+      "price": 81.59,
+      "pnl_pct": -6.86,
+      "note": "STOP BREACHED: 81.59 < 83.22 stop. -6.86% from entry in 3 days. Sector 半导体 in bottom5 (-4.48%). Multiple rule violations (iv_filter, overextended_entry, stop_proximity). Rule 5: -5% from entry = automatic SELL. -3% in first 3 days = automatic SELL. Sector gravity overwhelms individual thesis."
+    },
+    {
+      "code": "002916",
+      "name": "深南电路",
+      "action": "SELL",
+      "price": 304.31,
+      "pnl_pct": -1.31,
+      "note": "CRITICAL stop proximity: only 1.35% above stop at 300.21. Below all MAs (dist_ma5 -2.5%, dist_ma10 -5.6%, dist_ma20 -15.9%). Margin deleveraging (chg5 -21.55%). Gap risk is real — proactive stop-loss per h024. Sector 元件 not in top sectors. Better to exit at -1.31% than risk -3%+ gap-down tomorrow."
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 16.23,
+      "pnl_pct": 4.04,
+      "note": "+4.04% in 4 days, thesis intact (H1净利+2326-2547%, 文莱炼化, 10亿回购). Sector 石油石化 mid-pack — benefiting from rotation out of tech. Stop at 14.82 safe (8.7% cushion). 4 days held — far from 10-day time stop. Margin signal neutral."
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "price": 111.73,
+      "pnl_pct": -2.9,
+      "note": "-2.90% in 3 days — close to -3% rule but not breached. MLCC catalyst is FRESH: Samsung 8/1涨价30% just took effect, 太阳诱电 9/1跟进. Structural sector catalyst, not a one-day headline. Margin signal 'adding' (+7.22% 5d) — leveraged buyers accumulating. Stock stabilized today (+0.04%). Give 1-2 more days for catalyst to price in. NOTE: current stop 103.45 (-10.1%) is too loose per V2 -5% rule; correct stop would be 109.32."
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 127.3,
+      "pnl_pct": 0.63,
+      "note": "+0.63% from entry. 中报 tomorrow (8/4) — key binary catalyst. VCP SETUP: price within 2.2% of MA10, classic coil-before-catalyst pattern. Consensus ~131.5B Q2 revenue. 0 risk tags, 10亿回购, A/H折价-7%. Stop at 120.18 (exactly -5%) is properly set. If 中报 beats, gap-up potential; if misses, stop fires. Event does not override stop."
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 945436.0,
+    "dayPnl": -85.0,
+    "dayReturnPct": -0.01,
+    "totalReturnPct": -5.46,
+    "unrealizedPnl": -756.0,
+    "realizedPnl": -53808.0,
+    "cashPct": 86.12
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 2.1994,
+    "up": 3717,
+    "down": 1690,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 66,
+    "limit_downs": 3,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 2.20:1, 0/3 major indices green, 66 limit-ups / 3 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "2026-08-03: Breadth 2.2:1 (3717↑/1690↓) but all 3 major indices red (上证-0.59%, 深证-0.44%, 创业板-0.44%). 科创50 crushed -3.73% on global semiconductor selloff (Broadcom guidance miss → Korea circuit breakers). 66涨停/3跌停 — no panic, but rotation is real: money fleeing tech into industrials (电机+4.11%, 航天装备+3.24%, 风电+3.04%). IV extreme fear (avg rank 84.89%): 科创50 94.2%, 创业板 95.8%, 500ETF深 100%. Buy gate FAILED (0/3 indices green) → no new positions. Selling 扬杰科技 (stop breached) and 深南电路 (stop proximity CRITICAL). Holding 恒逸石化 (+4.04%), 三环集团 (-2.90%, MLCC catalyst today), 药明康德 (+0.63%, 中报 tomorrow). Portfolio post-sells: ~79% cash, 3 positions."
+  }
+}
