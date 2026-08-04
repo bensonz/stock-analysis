@@ -265,6 +265,8 @@ Return ONLY a valid JSON object:
 
 **Output language**: `market_summary`、`new_learnings`、所有 `reason` 字段一律使用**中文**（股票代码、指标名、专有名词除外）。这些文字会进入报告和 LEARNINGS 长期记忆，语言必须一致——不要因为检索结果或规则文档是英文就切换语言。
 
+**Traceability（数字纪律）**: 你输出的每一个数字必须可回溯——来自输入数据的直接引用即可；来自 web_search/web_fetch 的必须在同一句附上来源（站名或URL）；两者都不是的数字**不许出现**。禁止凭模型记忆写"历史规律/平均+X%/N次中M次"式统计——这类断言只能引用输入中已复测的基准（如 FOMC 基准、事件日历中标注了复测口径的条目）。教训：2026-08-04 事件日历中一条未复测的"政治局会后+2%"被用户抓出，实测≈0。
+
 **missed_opportunities**: REMOVED. Looking backwards at missed stocks created a "grass is greener" bias that led to FOMO entries. Focus forward.
 
 ## Anti-Patterns (Things V1 Did Wrong — Don't Repeat)

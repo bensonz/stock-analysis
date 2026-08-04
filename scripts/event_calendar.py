@@ -107,7 +107,8 @@ def formulaic_events(start: _date, end: _date) -> list:
                         "kind": kind, "certainty": "scheduled",
                         "impact": impact, "direction": "two_sided"
                         if kind in ("macro_release", "cb_rate") else "risk",
-                        "notes": notes})
+                        "notes": notes,
+                        "source": "公式推算(event_calendar.py:formulaic_events)"})
 
     y, m = start.year, start.month
     while (y, m) <= (end.year, end.month):
@@ -152,7 +153,7 @@ def upcoming(days: int = 21, today: _date | None = None,
     for e in load_events(path) + formulaic_events(today, horizon):
         if e.get("certainty") == "ongoing" or not e.get("date"):
             ongoing.append({**{k: e.get(k) for k in
-                               ("name", "kind", "impact", "notes")},
+                               ("name", "kind", "impact", "notes", "source")},
                             "direction": e.get("direction", "risk")})
             continue
         try:
@@ -164,7 +165,7 @@ def upcoming(days: int = 21, today: _date | None = None,
         impact_d = a_share_impact_date(d, e.get("tz", "CN"))
         dated.append({**{k: e.get(k) for k in
                          ("date", "tz", "name", "kind", "certainty",
-                          "impact", "notes")},
+                          "impact", "notes", "source")},
                       "direction": e.get("direction", "risk"),
                       "a_share_impact_date": impact_d.isoformat(),
                       "days_until_impact": (impact_d - today).days})

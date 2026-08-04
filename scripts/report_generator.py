@@ -197,23 +197,40 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
     if events.get("dated") or events.get("ongoing"):
         rw = events.get("risk_window", {})
         _dir_mark = {"supportive": "🟢", "two_sided": "🔶", "risk": "🔴"}
+        _impact_zh = {"high": "冲击:高", "medium": "冲击:中", "low": "冲击:低"}
+
+        def _impact(e):
+            return _impact_zh.get(e.get("impact"), f"冲击:{e.get('impact')}")
+
+        def _src(e):
+            s = (e.get("source") or "").strip()
+            if not s:
+                return " 〔来源: 未标注〕"
+            if s.startswith("http"):
+                return f" 〔[来源]({s})〕"
+            return f" 〔来源: {s}〕"
+
         lines.append("## 未来事件窗口\n")
+        lines.append("_图例: 图标=方向（🔴利空风险 / 🔶双向不确定 / 🟢利好支撑），"
+                     "[冲击:高/中/低]=预估冲击强度——两者独立：🔴[冲击:低]=偏利空但幅度小_\n")
         lines.append(f"**风险档: {rw.get('level', '?')}** — {rw.get('advice', '')}\n")
         for e in events.get("dated", [])[:10]:
             mark = _dir_mark.get(e.get("direction", "risk"), "🔴")
             est = "（日期待确认）" if e.get("certainty") == "estimated" else ""
             lines.append(f"- {mark} **{e.get('a_share_impact_date')}** "
-                         f"(T-{e.get('days_until_impact')}) [{e.get('impact')}] "
-                         f"{e.get('name')}{est} — {e.get('notes', '')}")
+                         f"(T-{e.get('days_until_impact')}) [{_impact(e)}] "
+                         f"{e.get('name')}{est} — {e.get('notes', '')}{_src(e)}")
         for e in events.get("ongoing", []):
             mark = _dir_mark.get(e.get("direction", "risk"), "🔴")
-            lines.append(f"- {mark} **持续中** [{e.get('impact')}] "
-                         f"{e.get('name')} — {e.get('notes', '')}")
+            lines.append(f"- {mark} **持续中** [{_impact(e)}] "
+                         f"{e.get('name')} — {e.get('notes', '')}{_src(e)}")
         st = events.get("fomc_next_session_stats")
         if st:
             lines.append(f"\n> 实测基准: FOMC决议次日A股 — 过去{st.get('n')}次中"
                          f"{st.get('sessions_negative')}次收跌，平均EW "
-                         f"{st.get('mean_ew_ret_pct')}%（{st.get('note', '')}）")
+                         f"{st.get('mean_ew_ret_pct')}%（{st.get('note', '')}）"
+                         f"〔来源: 内部复测 scripts/base_rates.py:fomc_next_session_stats，"
+                         f"本地价格库可重算〕")
         lines.append("")
 
     # 2. Strategy Pool Scan
