@@ -1,0 +1,123 @@
+{
+  "date": "2026-08-04",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1785814530.445311,
+      "errors": [],
+      "end": 1785814603.884348,
+      "duration_sec": 73.4
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 9397,
+      "tokens": {
+        "input_tokens": 67575,
+        "output_tokens": 15067
+      },
+      "rounds": 1,
+      "tool_calls_count": 0,
+      "duration_sec": 231.7,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1785814835.684385,
+      "actions": [
+        "RAISE_STOP 603259 → 126.5",
+        "OPEN 002138 @ 43.51",
+        "OPEN 300001 @ 35.66",
+        "OPEN 600885 @ 35.75",
+        "PRICE_CORRECTED 000739: LLM=20.11 outside [20.57,22.12], using market=22.12",
+        "SKIP OPEN 000739: 涨停 (change 10.0%), cannot buy at daily limit",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h138 (observation): 药明康德中报日涨停+10%验证了「催化剂兑现前持仓」策略的有效性。VCP SETUP+极致收敛至MA附近+即将兑现的催化剂=爆发力最强的时间窗口组合。未来应主动...",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=43",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=54",
+        "Hypothesis: Created h139 (observation): IV Rank整体仍处极度恐慌区间（科创50=95.65%, 创业板=86.05%），但广度2.35:1+三大指数全红表明恐慌正在消退。当前是「恐慌后的反弹窗口...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "300001",
+                "name": "特锐德",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 35.66,
+                "stopLoss": 33.88,
+                "distance_pct": 4.99,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1785814836.205842,
+      "duration_sec": 0.5
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 300001 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 305.6
+  }
+}

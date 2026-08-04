@@ -1,0 +1,99 @@
+{
+  "date": "2026-08-04",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 15.92,
+      "pnl_pct": 2.05,
+      "note": "PnL+2.05%持仓7天，thesis完整（H1净利暴增+2326-2547%，文莱炼化独特资产，10亿回购）。Sector石油石化中性，无板块拖累。距10日时间止损还有3天，当前无需动作。Stop¥14.82安全（6.9%缓冲）。今日-1.73%为温和回调。"
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "price": 119.55,
+      "pnl_pct": 3.89,
+      "note": "PnL+3.89%持仓4天，今日+4.87%强势反弹。Sector元件今日#2（+7.56%）极强势。MLCC涨价催化（三星8/1启动+太阳诱电9/1跟进）进入兑现期。当前止损¥103.45（-10.1%）设置偏松，应按Rule 5修正为¥109.32（entry-5%）。建议将止损收紧。"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "RAISE_STOP",
+      "price": 141.35,
+      "pnl_pct": 11.74,
+      "note": "PnL+11.74%持仓4天，今日涨停+10.00%！中报催化兑现完美。Sector医疗服务#3（+6.89%）。按Rule 5：+10%以上→止损提至成本价。新止损¥126.50（盈亏平衡），确保此笔交易不再亏损。CXO龙头+A/H折价+10亿回购+0风险，继续持有让利润奔跑。"
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "action": "OPEN",
+      "price": 43.51,
+      "note": "元件sector今日#2（+7.56%），RPS120=89.79%甜点位。被动元件龙头，H1营收+19.67%成长稳健。MA距离全部合规（dist_ma5+3.0%, dist_ma10+1.7%）。Margin adding（+7.19%）。北向6.9%+公募5.5%机构认可。净利微降-7.98%已被市场消化（今日+6.73%），利空出尽。"
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "action": "OPEN",
+      "price": 35.66,
+      "note": "充电桩龙头，特来电23%市场份额全国第一。8/1 3C认证强制实施重塑行业格局，头部集中利好。H1净利预增+20-40%，上半年充电量+47%。拟回购≤6亿。MA距离全部合规（dist_ma5+3.6%, dist_ma10+1.8%）。北向8.2%。"
+    },
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "action": "OPEN",
+      "price": 35.75,
+      "note": "电网自动化设备龙头，0风险标签。今日发布H1半年报：营收+32.05%，净利11.56亿（+19.9%），业绩扎实。北向20%极高外资认可，股东户数-39%大资金吸筹。MA距离全部合规（dist_ma5+3.3%, dist_ma10+4.1%）。继电器+新能源+消费电子多线增长。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 6,
+    "totalEquity": 953847.0,
+    "dayPnl": 6737.0,
+    "dayReturnPct": 0.71,
+    "totalReturnPct": -4.62,
+    "unrealizedPnl": 7655.0,
+    "realizedPnl": -53808.0,
+    "cashPct": 72.11
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 2.3494,
+    "up": 3759,
+    "down": 1600,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 85,
+    "limit_downs": 1,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 2.35:1, 3/3 major indices green, 85 limit-ups / 1 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [
+    {
+      "code": "002138",
+      "name": "顺络电子"
+    },
+    {
+      "code": "300001",
+      "name": "特锐德"
+    },
+    {
+      "code": "600885",
+      "name": "宏发股份"
+    },
+    {
+      "code": "000739",
+      "name": "普洛药业"
+    }
+  ],
+  "marketContext": {
+    "summary": "8月4日A股强势反弹：创业板指+4.83%领涨，深成指+2.74%，科创50+2.91%，上证+0.16%。广度2.35:1偏多，85涨停/1跌停无恐慌。通信设备+9.03%、元件+7.56%、医疗服务+6.89%三驾马车领涨，金融/汽车/机械垫底。科技主线强势回归——算力网政策+MLCC涨价+充电桩3C认证多催化共振。IV整体仍处极度恐慌区间（avg IV Rank 79.35%），科创50 IV Rank 95.65%近历史极值。高波动环境：机会大但需精选+控制仓位。组合3持仓全部盈利（药明康德涨停+10%触发盈亏平衡止损），今日新增4仓位（顺络电子/特锐德/宏发股份/普洛药业），总仓位约38%，保留62%现金应对高IV。"
+  }
+}
