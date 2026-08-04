@@ -336,7 +336,15 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
     if decisions.get("new_learnings"):
         lines.append("\n### 新教训")
         for lesson in decisions["new_learnings"]:
-            lines.append(f"- {lesson}")
+            # Hypothesis-system lessons arrive as dicts; render the text, not
+            # the raw Python repr (bug seen in the 2026-08-03 reports).
+            if isinstance(lesson, dict):
+                text = lesson.get("text") or json.dumps(lesson, ensure_ascii=False)
+                meta = "、".join(
+                    x for x in [lesson.get("type", "")] + list(lesson.get("tags", []) or []) if x)
+                lines.append(f"- {text}" + (f"（{meta}）" if meta else ""))
+            else:
+                lines.append(f"- {lesson}")
 
     lines.append("")
 

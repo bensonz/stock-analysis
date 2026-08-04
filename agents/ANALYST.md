@@ -240,7 +240,7 @@ Return ONLY a valid JSON object:
     }
   ],
   "new_learnings": [
-    "Specific, actionable insight from today's analysis"
+    "今日分析得出的具体、可执行的教训（中文）"
   ],
   "market_summary": "Brief market + sector rotation summary with IV context",
   "market_sentiment": "bullish",
@@ -262,6 +262,8 @@ Return ONLY a valid JSON object:
 
 **skip_list**: Replaces the old WATCH list. Brief reason why you're not buying. If sector is wrong, just say so — don't waste words analyzing the stock.
 - **CRITICAL: Only cite price/change data that appears in the input.** You do NOT have current prices for non-held stocks. Never fabricate today's price movement, HK stock performance, or intraday changes for stocks not in `prices.json`. If you don't have the data, say "no current price data" — do NOT guess or hallucinate.
+
+**Output language**: `market_summary`、`new_learnings`、所有 `reason` 字段一律使用**中文**（股票代码、指标名、专有名词除外）。这些文字会进入报告和 LEARNINGS 长期记忆，语言必须一致——不要因为检索结果或规则文档是英文就切换语言。
 
 **missed_opportunities**: REMOVED. Looking backwards at missed stocks created a "grass is greener" bias that led to FOMO entries. Focus forward.
 
