@@ -1040,6 +1040,26 @@ def phase1_collect(date: str, slot: str) -> dict:
             encoding="utf-8",
         )
 
+    # Gamma exposure (GEX) from the options-lab backend. Tier-2 advisory
+    # context (read-only, no mechanical rule); degrades to absent.
+    try:
+        from fetch_gex import fetch_all as _fetch_gex
+        gex = _fetch_gex()
+        if gex.get("etf_gex_data"):
+            data["gex"] = gex
+            (input_dir / "gex.json").write_text(
+                json.dumps(gex, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            print(f"    [gex] {gex['overall'].get('signal', '?')} "
+                  f"(低于翻转点 {gex['overall'].get('below_flip', '?')})",
+                  file=sys.stderr)
+        else:
+            print(f"    [gex] unavailable: {gex.get('error', 'no data')}",
+                  file=sys.stderr)
+    except Exception as e:  # noqa: BLE001 — never fail the run over GEX
+        print(f"    [gex] unavailable: {e}", file=sys.stderr)
+
     # Foreseeable-event risk window (curated calendar + formulaic OpEx +
     # measured FOMC base rate). Advisory context for the LLM; degrades to
     # absent on any failure.

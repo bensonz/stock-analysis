@@ -892,6 +892,24 @@ def build_summary(phase1_data: dict) -> str:
                     )
         sections.append("\n".join(lines))
 
+    gex = phase1_data.get("gex") or {}
+    if gex.get("etf_gex_data"):
+        lines = ["## Gamma敞口 (GEX, ETF期权做市对冲状态)"]
+        o = gex.get("overall", {})
+        lines.append(f"- 综合: {o.get('signal', '?')} "
+                     f"(现价低于零gamma翻转点: {o.get('below_flip', '?')})")
+        if o.get("implication"):
+            lines.append(f"- 含义: {o['implication']}")
+        for s in gex["etf_gex_data"]:
+            lines.append(
+                f"- {s.get('name', '?')}: 现价{s.get('spot')} vs 翻转点"
+                f"{s.get('flip_point')} ({s.get('dist_to_flip_pct'):+.2f}%) "
+                f"→ {s.get('regime')}; put墙{s.get('put_wall')}/"
+                f"call墙{s.get('call_wall')}")
+        lines.append("- 用法: 负gamma侧的大涨大跌都更易过冲——不追高、不预判反转; "
+                     "墙位是对冲盘的磁吸/阻力参考。此为顾问性状态, 无机械规则。")
+        sections.append("\n".join(lines))
+
     return "\n\n".join(sections)
 
 

@@ -233,6 +233,22 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
                          f"本地价格库可重算〕")
         lines.append("")
 
+    gex = data.get("gex") or {}
+    if gex.get("etf_gex_data"):
+        o = gex.get("overall", {})
+        lines.append("## Gamma敞口 (GEX)\n")
+        lines.append(f"**{o.get('signal', '?')}**（现价低于零gamma翻转点: "
+                     f"{o.get('below_flip', '?')}）— {o.get('implication', '')}\n")
+        lines.append("| 标的 | 现价 | 翻转点 | 距离 | 状态 | put墙/call墙 |")
+        lines.append("|------|------|--------|------|------|--------------|")
+        for s in gex["etf_gex_data"]:
+            lines.append(f"| {s.get('name')} | {s.get('spot')} "
+                         f"| {s.get('flip_point')} "
+                         f"| {s.get('dist_to_flip_pct'):+.2f}% "
+                         f"| {s.get('regime')} "
+                         f"| {s.get('put_wall')}/{s.get('call_wall')} |")
+        lines.append(f"\n〔来源: {gex.get('source', '未标注')}〕\n")
+
     # 2. Strategy Pool Scan
     lines.append("## 策略池扫描\n")
     pool = data.get("strategy_pool", {})
