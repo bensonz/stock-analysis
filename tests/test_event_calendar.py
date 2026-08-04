@@ -28,7 +28,12 @@ def test_formulaic_opex_dates():
     evs = ec.formulaic_events(date(2026, 8, 1), date(2026, 8, 31))
     by_name = {e["name"]: e["date"] for e in evs}
     assert by_name["美股月度OpEx（期权到期，GEX集中兑现）"] == "2026-08-21"  # 3rd Fri
-    assert by_name["A股股指/ETF期权到期日"] == "2026-08-26"                 # 4th Wed
+    assert by_name["A股ETF期权到期日（第4周三）"] == "2026-08-26"            # 4th Wed
+    assert by_name["CFFEX股指期货/期权交割日（第3周五）"] == "2026-08-21"    # 3rd Fri (CN)
+    # measured-base-rate discipline: every opex note must cite the rerunnable study
+    for e in evs:
+        if e["kind"] == "opex":
+            assert "index_event_study" in e["notes"]
 
 
 def test_formulaic_recurring_cn_and_us_events():

@@ -88,11 +88,56 @@ def study(event_dates: list, sessions: int = 10,
     }
 
 
+def expiry_study(beg_ym=(2022, 8), end_ym=(2026, 7)) -> None:
+    """Derivative-expiry base rates behind the calendar's opex notes.
+
+    Three legs vs the all-sample daily baseline (中证1000):
+    US monthly OpEx (3rd Fri, effect = next A-share session), A-share ETF
+    option expiry (4th Wed, same-day), CFFEX index futures/options
+    settlement (3rd Fri, same-day). Same-day legs pass the previous
+    calendar day so forward_return's +1 session lands on the event day.
+    """
+    import statistics
+    from datetime import date, timedelta
+
+    def nth_weekday(y, m, weekday, n):
+        d = date(y, m, 1)
+        d += timedelta(days=(weekday - d.weekday()) % 7)
+        return d + timedelta(weeks=n - 1)
+
+    months = [(y, m) for y in range(beg_ym[0], end_ym[0] + 1)
+              for m in range(1, 13)
+              if beg_ym <= (y, m) <= end_ym]
+    closes = fetch_index("sh000852")
+    dates = sorted(closes)
+    daily = [(closes[dates[i + 1]] / closes[dates[i]] - 1) * 100
+             for i in range(len(dates) - 1)]
+    print(f"基线(中证1000全样本日收益): mean {statistics.mean(daily):+.2f}% "
+          f"sd {statistics.stdev(daily):.2f} n={len(daily)}")
+
+    legs = [
+        ("美股OpEx次日", [nth_weekday(y, m, 4, 3) for y, m in months], 0),
+        ("A股ETF期权到期日当天", [nth_weekday(y, m, 2, 4) for y, m in months], -1),
+        ("CFFEX交割日当天", [nth_weekday(y, m, 4, 3) for y, m in months], -1),
+    ]
+    for label, evs, off in legs:
+        rets = [r for d in evs
+                if (r := forward_return(
+                    closes, (d + timedelta(days=off)).isoformat(), 1)) is not None]
+        print(f"{label}: n={len(rets)} mean {statistics.mean(rets):+.2f}% "
+              f"sd {statistics.stdev(rets):.2f} "
+              f"neg {sum(1 for x in rets if x < 0)}/{len(rets)}")
+
+
 if __name__ == "__main__":
     args = sys.argv[1:]
 
     def _arg(flag, default):
         return args[args.index(flag) + 1] if flag in args else default
+
+    if "--expiry-study" in args:
+        expiry_study()
+        sys.exit(0)
 
     dates = _arg("--dates", None)
     dates = dates.split(",") if dates else POLITBURO_DATES
