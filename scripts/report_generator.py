@@ -233,6 +233,18 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
                          f"本地价格库可重算〕")
         lines.append("")
 
+    regime = data.get("regime") or {}
+    if regime.get("label"):
+        lines.append("## 市场机制读数（只读实验）\n")
+        lines.append(
+            f"**{regime.get('label')}** — RPS60滚动rank-IC(20日) "
+            f"{regime.get('rolling_ic20')}（为正 {regime.get('ic_positive_days')}，"
+            f"最近已结算 {regime.get('ic_last_resolved')}）· "
+            f"池内3日止损率(10日均) {regime.get('pool_stop_rate10')}\n")
+        lines.append("> 说明: 此读数不接任何规则、不进入模型提示——先只读观察一段时间；"
+                     "两项输入均为滞后指标，转折点处会晚翻。"
+                     f"〔来源: {regime.get('source', '未标注')}〕\n")
+
     gex = data.get("gex") or {}
     if gex.get("etf_gex_data"):
         o = gex.get("overall", {})

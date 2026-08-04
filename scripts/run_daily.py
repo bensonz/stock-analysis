@@ -1040,6 +1040,22 @@ def phase1_collect(date: str, slot: str) -> dict:
             encoding="utf-8",
         )
 
+    # Regime detector (READ-ONLY: report display only — deliberately NOT
+    # in the LLM prompt; graduation requires out-of-sample evidence).
+    try:
+        from regime_detector import detect as _detect_regime
+        data["regime"] = _detect_regime()
+        (input_dir / "regime.json").write_text(
+            json.dumps(data["regime"], ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        print(f"    [regime] {data['regime'].get('label', '?')} "
+              f"(ic20={data['regime'].get('rolling_ic20')}, "
+              f"stop10={data['regime'].get('pool_stop_rate10')})",
+              file=sys.stderr)
+    except Exception as e:  # noqa: BLE001 — read-only, never fail the run
+        print(f"    [regime] unavailable: {e}", file=sys.stderr)
+
     # Gamma exposure (GEX) from the options-lab backend. Tier-2 advisory
     # context (read-only, no mechanical rule); degrades to absent.
     try:
