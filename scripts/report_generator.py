@@ -237,15 +237,16 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
     if gex.get("etf_gex_data"):
         o = gex.get("overall", {})
         lines.append("## Gamma敞口 (GEX)\n")
-        lines.append(f"**{o.get('signal', '?')}**（现价低于零gamma翻转点: "
+        lines.append(f"**{o.get('signal', '?')}**（净负gamma: "
+                     f"{o.get('net_negative', '?')}；现价处剖面零轴下方: "
                      f"{o.get('below_flip', '?')}）— {o.get('implication', '')}\n")
-        lines.append("| 标的 | 现价 | 翻转点 | 距离 | 状态 | put墙/call墙 |")
-        lines.append("|------|------|--------|------|------|--------------|")
+        lines.append("| 标的 | 净GEX | 状态 | 现价 | 剖面零轴 | 距离 | put墙/call墙 |")
+        lines.append("|------|-------|------|------|----------|------|--------------|")
         for s in gex["etf_gex_data"]:
-            lines.append(f"| {s.get('name')} | {s.get('spot')} "
+            lines.append(f"| {s.get('name')} | {s.get('total_net_gex'):.3g} "
+                         f"| {s.get('regime')} | {s.get('spot')} "
                          f"| {s.get('flip_point')} "
                          f"| {s.get('dist_to_flip_pct'):+.2f}% "
-                         f"| {s.get('regime')} "
                          f"| {s.get('put_wall')}/{s.get('call_wall')} |")
         lines.append(f"\n〔来源: {gex.get('source', '未标注')}〕\n")
 

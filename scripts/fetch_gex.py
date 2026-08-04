@@ -7,8 +7,15 @@ Source: the 期权实验室 backend (same /api/history/* family as the IV feed):
       → spot, flip_point, call_wall, put_wall, total_net_gex, levels[...]
 
 State reading per underlying (dealer-hedging mechanics):
-    spot < flip_point → 负gamma侧: hedging AMPLIFIES moves (追涨杀跌区)
-    spot > flip_point → 正gamma侧: hedging DAMPENS moves (钉住/压制区)
+    regime = sign of total_net_gex (the DIRECT measurement):
+        > 0 → 净正gamma: hedging DAMPENS moves (压制/钉住倾向)
+        < 0 → 净负gamma: hedging AMPLIFIES moves (追涨杀跌)
+    flip_point in this backend is the strike-profile zero-crossing (below
+    it the OI profile is put-gamma-dominated) — a landmark, NOT the
+    current-regime boundary. 2026-08-04 lesson: spot can sit below flip
+    while net GEX is positive; labeling that "负gamma" (the SpotGamma
+    convention) contradicted the backend's own numbers. Report both
+    dimensions separately, never derive one from the other.
 
 Tier-2 advisory context only (read-only): it rides into the prompt and the
 report; NO mechanical rule consumes it. Graduation to anything more requires
@@ -57,14 +64,18 @@ def read_state(raw: dict) -> dict | None:
     if not spot or not flip:
         return None
     dist_pct = (spot / flip - 1) * 100
-    below = spot < flip
+    net = raw.get("total_net_gex")
+    if net is None:
+        return None
     return {
         "underlying": raw.get("underlying"),
         "spot": spot,
         "flip_point": round(flip, 3),
         "dist_to_flip_pct": round(dist_pct, 2),
-        "regime": "负gamma放大区" if below else "正gamma压制区",
-        "total_net_gex": raw.get("total_net_gex"),
+        "regime": "净正gamma(压制倾向)" if net > 0 else "净负gamma(放大倾向)",
+        "spot_vs_flip": ("剖面零轴下方(put-gamma主导区)" if spot < flip
+                         else "剖面零轴上方(call-gamma主导区)"),
+        "total_net_gex": net,
         "call_wall": raw.get("call_wall"),
         "put_wall": raw.get("put_wall"),
         "expiry_month": raw.get("expiry_month"),
@@ -73,26 +84,32 @@ def read_state(raw: dict) -> dict | None:
 
 
 def overall_reading(states: list) -> dict:
-    """Aggregate: how much of the ETF complex sits below its flip point."""
+    """Aggregate the two dimensions separately: net-GEX sign (regime) and
+    spot-vs-profile-zero position (where hedging pressure concentrates)."""
     n = len(states)
-    below = sum(1 for s in states if s["regime"] == "负gamma放大区")
     if n == 0:
-        return {"signal": "无数据", "below_flip": "0/0", "implication": ""}
-    if below == n:
-        signal = "全面负gamma"
-        implication = ("全部标的现价低于零gamma翻转点——做市对冲放大双向波动，"
+        return {"signal": "无数据", "net_negative": "0/0",
+                "below_flip": "0/0", "implication": ""}
+    neg = sum(1 for s in states if s["total_net_gex"] < 0)
+    below = sum(1 for s in states if "下方" in s["spot_vs_flip"])
+    if neg == n:
+        signal = "全面净负gamma"
+        implication = ("全部标的做市净空gamma——对冲盘放大双向波动，"
                        "大涨大跌都更容易过冲；止损纪律照常，追高风险加倍。")
-    elif below >= (n + 1) // 2:
-        signal = "偏负gamma"
-        implication = "多数标的在负gamma侧，波动放大环境为主。"
-    elif below == 0:
-        signal = "全面正gamma"
-        implication = "全部标的在正gamma侧——对冲盘压制波动，倾向钉住/横盘。"
+    elif neg > n // 2:
+        signal = "偏净负gamma"
+        implication = "多数标的净负gamma，波动放大环境为主。"
+    elif neg == 0:
+        signal = "全面净正gamma"
+        implication = "全部标的做市净多gamma——对冲盘压制波动，倾向收敛/钉住。"
     else:
-        signal = "偏正gamma"
-        implication = "多数标的在正gamma侧，波动趋于收敛。"
-    return {"signal": signal, "below_flip": f"{below}/{n}",
-            "implication": implication}
+        signal = "偏净正gamma"
+        implication = "多数标的净正gamma，波动趋于收敛。"
+    if below == n and neg == 0:
+        implication += ("注意：现价虽均处行权价剖面put-gamma主导区（零轴下方），"
+                        "但整体净gamma为正——剖面位置是结构参考，不改变当前压制判读。")
+    return {"signal": signal, "net_negative": f"{neg}/{n}",
+            "below_flip": f"{below}/{n}", "implication": implication}
 
 
 def fetch_all() -> dict:
@@ -121,13 +138,14 @@ def main():
         print("=" * 50)
         for s in data["etf_gex_data"]:
             print(f"\n{s['name']} ({s['underlying']}) 到期月{s['expiry_month']}:")
-            print(f"  现价 {s['spot']}  零gamma翻转点 {s['flip_point']} "
-                  f"({s['dist_to_flip_pct']:+.2f}%) → {s['regime']}")
-            print(f"  净GEX {s['total_net_gex']:.3g}  "
+            print(f"  净GEX {s['total_net_gex']:.3g} → {s['regime']}")
+            print(f"  现价 {s['spot']} vs 剖面零轴 {s['flip_point']} "
+                  f"({s['dist_to_flip_pct']:+.2f}%, {s['spot_vs_flip']})  "
                   f"put墙 {s['put_wall']} / call墙 {s['call_wall']}")
         o = data["overall"]
         print(f"\n{'=' * 50}")
-        print(f"综合: {o['signal']} (低于翻转点 {o['below_flip']})")
+        print(f"综合: {o['signal']} (净负gamma {o['net_negative']}, "
+              f"现价处剖面零轴下方 {o['below_flip']})")
         if o.get("implication"):
             print(o["implication"])
         if data.get("error"):

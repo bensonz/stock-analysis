@@ -897,17 +897,19 @@ def build_summary(phase1_data: dict) -> str:
         lines = ["## Gamma敞口 (GEX, ETF期权做市对冲状态)"]
         o = gex.get("overall", {})
         lines.append(f"- 综合: {o.get('signal', '?')} "
-                     f"(现价低于零gamma翻转点: {o.get('below_flip', '?')})")
+                     f"(净负gamma标的: {o.get('net_negative', '?')}; "
+                     f"现价处剖面零轴下方: {o.get('below_flip', '?')})")
         if o.get("implication"):
             lines.append(f"- 含义: {o['implication']}")
         for s in gex["etf_gex_data"]:
             lines.append(
-                f"- {s.get('name', '?')}: 现价{s.get('spot')} vs 翻转点"
-                f"{s.get('flip_point')} ({s.get('dist_to_flip_pct'):+.2f}%) "
-                f"→ {s.get('regime')}; put墙{s.get('put_wall')}/"
+                f"- {s.get('name', '?')}: 净GEX{s.get('total_net_gex'):.3g} "
+                f"→ {s.get('regime')}; 现价{s.get('spot')} vs 剖面零轴"
+                f"{s.get('flip_point')} ({s.get('dist_to_flip_pct'):+.2f}%, "
+                f"{s.get('spot_vs_flip')}); put墙{s.get('put_wall')}/"
                 f"call墙{s.get('call_wall')}")
-        lines.append("- 用法: 负gamma侧的大涨大跌都更易过冲——不追高、不预判反转; "
-                     "墙位是对冲盘的磁吸/阻力参考。此为顾问性状态, 无机械规则。")
+        lines.append("- 用法: 判读以净GEX符号为准(正=压制/负=放大); 剖面零轴位置是"
+                     "结构参考; 墙位是对冲盘的磁吸/阻力参考。此为顾问性状态, 无机械规则。")
         sections.append("\n".join(lines))
 
     return "\n\n".join(sections)
