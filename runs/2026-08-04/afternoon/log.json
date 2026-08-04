@@ -1,0 +1,49 @@
+{
+  "date": "2026-08-04",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1785833099.7096121,
+      "errors": [],
+      "end": 1785833170.594141,
+      "duration_sec": 70.9
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 11892,
+      "tokens": {
+        "input_tokens": 307680,
+        "output_tokens": 17534
+      },
+      "rounds": 4,
+      "tool_calls_count": 8,
+      "duration_sec": 338.8,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1785833509.470079,
+      "actions": [
+        "OPEN 603127 @ 44.35",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=55",
+        "Hypothesis: Created h140 (observation): 药明康德'买在催化剂前'策略完美兑现：7/31入场（中报前最后交易日），8/3盘后中报超预期，8/4涨停+10%。VCP SETUP（MA收敛）+即将兑现催化剂...",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=56",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1785833509.883521,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 410.1
+  }
+}

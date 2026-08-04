@@ -1,0 +1,226 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "通信设备",
+        "5d_pct": 10.76,
+        "trend": "accelerating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": 8.45,
+        "trend": "accelerating"
+      },
+      {
+        "name": "医疗服务",
+        "5d_pct": 7.51,
+        "trend": "accelerating"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": 7.0,
+        "trend": "steady"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": 6.3,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": -3.47,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "乘用车",
+        "5d_pct": -3.07,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "保险Ⅱ",
+        "5d_pct": -2.84,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "农商行Ⅱ",
+        "5d_pct": -2.83,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "股份制银行Ⅱ",
+        "5d_pct": -2.5,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "3/6 positions in hot sectors (顺络电子+三环集团→元件#2, 药明康德→医疗服务#3); 3 in mid-pack sectors (恒逸石化→石油石化, 特锐德+宏发→电网设备)",
+    "regime": "科技/AI硬件全面领涨，MLCC涨价+算力网政策双催化；金融板块资金流出，典型risk-on轮动。药明康德H1超预期带动CRO板块共振。"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "PnL+1.09%持仓7天，thesis完整（H1净利暴增+2326-2547%，文莱炼化独特资产，10亿回购）。Sector石油石化中游无板块拖累。距10日时间止损仅剩3天——若8/7仍<+3%则触发SELL。今日-2.65%温和回调。",
+      "sector_rank": "mid-pack",
+      "new_stop": null,
+      "pnl_pct": 1.09,
+      "days_held": 7,
+      "exit_price": null
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "action": "HOLD",
+      "reason": "PnL+8.55%今日开仓即大涨！Sector元件#2（+8.45%）极强势。被动元件龙头直接受益MLCC涨价潮。逼近+10%止盈阈值——若明日触及¥47.86立即提止损至成本价¥43.51。今日+8.55%后MA偏离加大但不影响持仓（Rule 2b仅约束新开仓）。",
+      "sector_rank": "top 5%",
+      "new_stop": null,
+      "pnl_pct": 8.55,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "action": "HOLD",
+      "reason": "PnL+1.63%今日开仓。充电桩龙头，3C认证8/1强制实施利好头部集中（特来电23%市占率）。H1净利预增+20-40%，上半年充电量+47%。拟回购≤6亿。Margin deleveraging轻度警示。Sector电网设备中游。",
+      "sector_rank": "mid-pack",
+      "new_stop": null,
+      "pnl_pct": 1.63,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "reason": "PnL+5.14%持仓5天。Sector元件#2（+8.45%）极强势。MLCC涨价核心受益标的（三星电机8/1+30%已生效，太阳诱电9/1跟进），今日+6.12%强势延续。止损修正：原¥103.45（-10.1%）违反Rule 5，新止损¥109.32（entry×0.95）。逼近+10%（¥126.58）→届时提至盈亏平衡¥115.07。",
+      "sector_rank": "top 5%",
+      "new_stop": 109.32,
+      "pnl_pct": 5.14,
+      "days_held": 5,
+      "exit_price": null
+    },
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "action": "HOLD",
+      "reason": "PnL+1.57%今日开仓。电网自动化龙头，0风险标签。H1半年报扎实：营收+32.05%，净利11.56亿（+19.9%）。北向20%极高外资认可，股东户数-39%大资金吸筹。Margin deleveraging（-16.3% 5d）需关注但不改持仓。",
+      "sector_rank": "mid-pack",
+      "new_stop": null,
+      "pnl_pct": 1.57,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "PnL+11.74%持仓5天，今日涨停+10.00%！Sector医疗服务#3（+7.51%）。H1营收288.97亿（+38.93%），归母净利110.8亿（+29.43%），上调全年指引至585-605亿。止损已提至成本¥126.50（盈亏平衡），确保此笔不亏损。下一目标：+20%（¥151.80）→提止损至+10%（¥139.15）。",
+      "sector_rank": "top 5%",
+      "new_stop": null,
+      "pnl_pct": 11.74,
+      "days_held": 5,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "entry_price": 44.35,
+      "allocation_pct": 4,
+      "stop": 42.13,
+      "target": 55.0,
+      "thesis": "CRO安评龙头，医疗服务sector#3（+7.51%），受益药明康德H1超预期带动板块情绪。实验猴供需持续紧张（猴价突破20万/只），公司拥有约2.5万只实验猴储备构成稀缺壁垒。H1预增归母净利6-9亿（+885~1377%）。RPS120=91.56%甜点位，MA距离全部合规。⚠️利润质量差（猴价重估驱动非经营改善）+毛利率49%→19%结构性下滑+margin deleveraging，故仅SMALL BUY 4%。",
+      "sector": "医疗服务",
+      "sector_rank": "top 5%",
+      "catalyst": "药明康德H1超预期（营收+39%净利+29%）带动CRO板块情绪共振；实验猴价格突破20万/只持续上涨",
+      "catalyst_freshness": "ongoing",
+      "rps120": 91.56,
+      "conviction": "small"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "Sector有色金属/铜不在今日top5，无法确认top30%。Rule 1一票否决——尽管0风险+VCP SETUP+业绩+123%极其诱人，但V2 sector-first框架下不可破例",
+      "rps120": 88.43
+    },
+    {
+      "code": "688008",
+      "name": "澜起科技",
+      "reason": "Sector半导体不在top5板块；margin deleveraging（-2.22% 5d, 4天净偿还）",
+      "rps120": 93.66
+    },
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "reason": "dist_ma5 +7.2% > 6%，Rule 2b追高硬阻。无论原料药龙头多优质，今日不可追",
+      "rps120": 89.34
+    },
+    {
+      "code": "688777",
+      "name": "中控技术",
+      "reason": "dist_ma5 +11.9%, dist_ma10 +15.9%，极端超买。Sector自动化设备不在top5",
+      "rps120": 85.74
+    },
+    {
+      "code": "603156",
+      "name": "养元饮品",
+      "reason": "dist_ma5 +11.5%, dist_ma10 +17.2%, dist_ma20 +12.3%，三重超买触发Rule 2b全面否决。Sector食品饮料不在top5",
+      "rps120": 93.52
+    },
+    {
+      "code": "000725",
+      "name": "京东方A",
+      "reason": "Sector光学光电子不在top5板块；margin deleveraging（-1.26% 5d, 连续5天净偿还）",
+      "rps120": 94.71
+    },
+    {
+      "code": "002440",
+      "name": "闰土股份",
+      "reason": "Sector化学制品不在top5板块；margin deleveraging（-9.78% 5d, 3天净偿还）",
+      "rps120": 92.12
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "今日盘面验证sector-first框架有效性：元件#2和医疗服务#3中的持仓（三环+5.14%、顺络+8.55%、药明+11.74%）全面跑赢中游sector持仓（恒逸+1.09%、特锐德+1.63%、宏发+1.57%）。板块β对个股α的碾压效应再次确认。",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "热门板块吸引增量资金流入，个股享受流动性溢价；中游板块缺乏资金关注，即使基本面扎实也难以跑赢"
+    },
+    {
+      "text": "药明康德'买在催化剂前'策略完美兑现：7/31入场（中报前最后交易日），8/3盘后中报超预期，8/4涨停+10%。VCP SETUP（MA收敛）+即将兑现催化剂=高胜率组合。此模式可复用。",
+      "type": "signal",
+      "tags": [
+        "timing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "已知催化剂日期+技术面收敛=低风险高回报入场窗口。在催化剂兑现前1-3个交易日入场，既避免过早持仓的时间损耗，又能在催化剂兑现时享受最大弹性"
+    },
+    {
+      "text": "西部矿业是V1会犯的经典错误：0风险+业绩+123%+VCP SETUP，V1会给HIGH confidence大力买入。V2 sector-first框架下，铜不在top5板块，直接跳过。这是V2相比V1的核心改进：放弃'完美个股'幻觉，跟随板块资金流。",
+      "type": "rule",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "板块轮动是A股最强大的alpha来源。即使个股质地完美，若不在资金流入方向，短期也难以兑现。sector-first本质是尊重市场共识。"
+    }
+  ],
+  "market_summary": "强势risk-on反弹日。Breadth 2.08:1，141涨停/1跌停，三大指数全绿→全红。创业板+5.64%领涨，科技/AI硬件全面爆发（通信设备+10.76%、元件+8.45%），MLCC涨价周期进入主升浪。医药CRO共振（医疗服务+7.51%），药明康德H1超预期涨停。金融板块资金流出（银行-2.5~-3.5%）。IV整体偏高（科创50 rank 0.75），正常sizing不降仓。入场门全开——可正常开新仓。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

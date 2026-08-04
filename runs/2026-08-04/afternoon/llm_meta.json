@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 307680,
+  "output_tokens": 17534,
+  "rounds": 4,
+  "duration_sec": 338.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月4日 通信设备 元件 大涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3504
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体 元件 MLCC 2026年8月 涨价 景气",
+        "max_results": 5
+      },
+      "result_length": 3181
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "昭衍新药 603127 2026年8月 实验猴 CRO",
+        "max_results": 5
+      },
+      "result_length": 3451
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 2026年8月4日 创业板 大涨 5.64% 深证成指 3.25% 原因"
+      },
+      "result_length": 3310
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "药明康德 603259 2026半年报 业绩 8月4日"
+      },
+      "result_length": 3008
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "顺络电子 002138 2026半年报 元件 被动元件"
+      },
+      "result_length": 3410
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "2026年8月 未来事件 FOMC 政治局 关税 经济数据"
+      },
+      "result_length": 3639
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "三环集团 300408 MLCC 三星电机 涨价 2026年8月"
+      },
+      "result_length": 3324
+    }
+  ],
+  "fallback_used": false
+}

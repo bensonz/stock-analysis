@@ -1,0 +1,97 @@
+{
+  "date": "2026-08-04",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 15.77,
+      "pnl_pct": 1.09,
+      "note": "PnL+1.09%持仓7天，thesis完整（H1净利暴增+2326-2547%，文莱炼化独特资产，10亿回购）。Sector石油石化中游无板块拖累。距10日时间止损仅剩3天——若8/7仍<+3%则触发SELL。今日-2.65%温和回调。"
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "action": "HOLD",
+      "price": 47.23,
+      "pnl_pct": 8.55,
+      "note": "PnL+8.55%今日开仓即大涨！Sector元件#2（+8.45%）极强势。被动元件龙头直接受益MLCC涨价潮。逼近+10%止盈阈值——若明日触及¥47.86立即提止损至成本价¥43.51。今日+8.55%后MA偏离加大但不影响持仓（Rule 2b仅约束新开仓）。"
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "action": "HOLD",
+      "price": 36.24,
+      "pnl_pct": 1.63,
+      "note": "PnL+1.63%今日开仓。充电桩龙头，3C认证8/1强制实施利好头部集中（特来电23%市占率）。H1净利预增+20-40%，上半年充电量+47%。拟回购≤6亿。Margin deleveraging轻度警示。Sector电网设备中游。"
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "price": 120.98,
+      "pnl_pct": 5.14,
+      "note": "PnL+5.14%持仓5天。Sector元件#2（+8.45%）极强势。MLCC涨价核心受益标的（三星电机8/1+30%已生效，太阳诱电9/1跟进），今日+6.12%强势延续。止损修正：原¥103.45（-10.1%）违反Rule 5，新止损¥109.32（entry×0.95）。逼近+10%（¥126.58）→届时提至盈亏平衡¥115.07。"
+    },
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "action": "HOLD",
+      "price": 36.31,
+      "pnl_pct": 1.57,
+      "note": "PnL+1.57%今日开仓。电网自动化龙头，0风险标签。H1半年报扎实：营收+32.05%，净利11.56亿（+19.9%）。北向20%极高外资认可，股东户数-39%大资金吸筹。Margin deleveraging（-16.3% 5d）需关注但不改持仓。"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 141.35,
+      "pnl_pct": 11.74,
+      "note": "PnL+11.74%持仓5天，今日涨停+10.00%！Sector医疗服务#3（+7.51%）。H1营收288.97亿（+38.93%），归母净利110.8亿（+29.43%），上调全年指引至585-605亿。止损已提至成本¥126.50（盈亏平衡），确保此笔不亏损。下一目标：+20%（¥151.80）→提止损至+10%（¥139.15）。"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "OPEN",
+      "price": 44.35,
+      "note": "CRO安评龙头，医疗服务sector#3（+7.51%），受益药明康德H1超预期带动板块情绪。实验猴供需持续紧张（猴价突破20万/只），公司拥有约2.5万只实验猴储备构成稀缺壁垒。H1预增归母净利6-9亿（+885~1377%）。RPS120=91.56%甜点位，MA距离全部合规。⚠️利润质量差（猴价重估驱动非经营改善）+毛利率49%→19%结构性下滑+margin deleveraging，故仅SMALL BUY 4%。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 7,
+    "totalEquity": 959813.0,
+    "dayPnl": 12703.0,
+    "dayReturnPct": 1.32,
+    "totalReturnPct": -4.02,
+    "unrealizedPnl": 13621.0,
+    "realizedPnl": -53808.0,
+    "cashPct": 68.89
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 2.0847,
+    "up": 3642,
+    "down": 1747,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 141,
+    "limit_downs": 1,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 2.08:1, 3/3 major indices green, 141 limit-ups / 1 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [
+    {
+      "code": "603127",
+      "name": "昭衍新药"
+    }
+  ],
+  "marketContext": {
+    "summary": "强势risk-on反弹日。Breadth 2.08:1，141涨停/1跌停，三大指数全绿→全红。创业板+5.64%领涨，科技/AI硬件全面爆发（通信设备+10.76%、元件+8.45%），MLCC涨价周期进入主升浪。医药CRO共振（医疗服务+7.51%），药明康德H1超预期涨停。金融板块资金流出（银行-2.5~-3.5%）。IV整体偏高（科创50 rank 0.75），正常sizing不降仓。入场门全开——可正常开新仓。"
+  }
+}
