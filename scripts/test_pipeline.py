@@ -116,6 +116,20 @@ class TestPositionManager(unittest.TestCase):
         self.assertEqual(len(pj["activePositions"]), 1)
         self.assertEqual(pj["activePositions"][0]["code"], "688001")
 
+    def test_open_position_enforces_hard_stop(self):
+        # 2026-08-02 audit: 三环集团 opened with an LLM-argued -10.1% stop;
+        # placement is now mechanical — any provided value becomes entry×0.95.
+        pos = self.pm.open_position({
+            "code": "688002",
+            "name": "测试股2",
+            "entryPrice": 50.0,
+            "targetPrice": 60.0,
+            "stopLoss": 45.0,   # -10%, must be overridden
+            "thesis": "Test thesis",
+        })
+        self.assertEqual(pos["stopLoss"], 47.5)
+        self.assertEqual(pos["currentStop"], 47.5)
+
     def test_open_position_sizes_from_available_cash(self):
         (self.tracking / "portfolio_config.json").write_text(json.dumps({
             "starting_capital": 100000,

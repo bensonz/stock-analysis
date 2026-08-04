@@ -8,6 +8,7 @@ All mutations go through this module to ensure positions.json stays in sync.
 
 import json
 import shutil
+import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
@@ -312,6 +313,19 @@ def open_position(data: dict) -> dict:
         raise ValueError(f"Missing or invalid stopLoss for {code}: {stop_loss!r}")
     if not isinstance(target_price, (int, float)) or target_price <= 0:
         raise ValueError(f"Missing or invalid targetPrice for {code}: {target_price!r}")
+
+    # V2 hard rule: every new position carries stop = entry × 0.95 from day 0.
+    # Mechanically enforced, no discretion — 2026-08-02 audit found 三环集团
+    # opened with a -10.1% stop the LLM had argued for, and no rule engine
+    # checks stop PLACEMENT (only proximity). Looser AND tighter values are
+    # both overridden: uniform placement is what the rules' track record
+    # (and the -5% stop's measured -8.44% average realization) is built on.
+    hard_stop = round(entry_price * 0.95, 2)
+    if abs(stop_loss - hard_stop) > 0.005:
+        print(f"  [stop-enforce] {code}: overriding provided stop {stop_loss} "
+              f"-> {hard_stop} (entry {entry_price} x 0.95)", file=sys.stderr)
+    stop_loss = hard_stop
+    data = {**data, "stopLoss": hard_stop, "currentStop": hard_stop}
 
     # OHLC validation: entry price must be within the day's tradable range
     day_ohlc = data.get("day_ohlc")
