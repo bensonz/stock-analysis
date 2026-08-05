@@ -7,7 +7,7 @@
   "entryPrice": 115.07,
   "targetPrice": 130.0,
   "stopLoss": 103.45,
-  "currentStop": 103.45,
+  "currentStop": 115.07,
   "allocation_pct": 8.0,
   "shares": 600,
   "allocatedCapital": 69042.0,
@@ -44,6 +44,13 @@
       "change_pct": 5.14,
       "action": "HOLD",
       "note": "PnL+5.14%持仓5天。Sector元件#2（+8.45%）极强势。MLCC涨价核心受益标的（三星电机8/1+30%已生效，太阳诱电9/1跟进），今日+6.12%强势延续。止损修正：原¥103.45（-10.1%）违反Rule 5，新止损¥109.32（entry×0.95）。逼近+10%（¥126.58）→届时提至盈亏平衡¥115.07。"
+    },
+    {
+      "date": "2026-08-05",
+      "price": 129.99,
+      "change_pct": 12.97,
+      "action": "RAISE_STOP",
+      "note": "PnL+12.97%持仓6天，Rule 5强制触发：+10%以上→止损提至盈亏平衡¥115.07。MLCC涨价核心受益标的（三星电机8/1+30%已生效），今日+7.45%强势。"
     }
   ],
   "exitDate": null,
@@ -53,6 +60,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-07-31T11:45:38.781742+08:00",
-  "updatedAt": "2026-08-04T16:51:49.503717+08:00",
+  "updatedAt": "2026-08-05T11:42:09.753477+08:00",
   "trackerVersion": "2.1"
 }

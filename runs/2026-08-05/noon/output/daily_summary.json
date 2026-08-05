@@ -1,0 +1,116 @@
+{
+  "date": "2026-08-05",
+  "actions": [
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 146.94,
+      "pnl_pct": 16.16,
+      "note": "PnL+16.16%持仓6天，中报催化完美兑现（H1营收+39%净利+29%，全年指引上调至585-605亿）。止损已提至成本¥126.50（盈亏平衡），确保此笔不亏损。下一目标+20%=¥151.80→届时提止损至+10%。Sector医疗服务受益CXO板块扩散。"
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "action": "RAISE_STOP",
+      "price": 50.28,
+      "pnl_pct": 15.56,
+      "note": "PnL+15.56%持仓2天，Rule 5强制触发：+10%以上→止损提至盈亏平衡¥43.51。元件sector受益MLCC涨价潮，今日+6.46%继续强势。距+20%（¥52.21）仅差¥1.93——触及后止损提至+10%。"
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "RAISE_STOP",
+      "price": 129.99,
+      "pnl_pct": 12.97,
+      "note": "PnL+12.97%持仓6天，Rule 5强制触发：+10%以上→止损提至盈亏平衡¥115.07。MLCC涨价核心受益标的（三星电机8/1+30%已生效），今日+7.45%强势。"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 46.0,
+      "pnl_pct": 3.72,
+      "note": "PnL+3.72%持仓2天。CXO安评龙头，受益板块情绪扩散+实验猴稀缺。Margin deleveraging（-14.8% 5d）警示但不触发卖出。"
+    },
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "action": "HOLD",
+      "price": 36.85,
+      "pnl_pct": 3.08,
+      "note": "PnL+3.08%持仓2天。H1半年报扎实（营收+32%净利+19.9%），0风险标签，北向20%+股东户数-39%。Margin deleveraging（-21.21% 5d）严重但公司基本面极强，不构成卖出。"
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 16.43,
+      "pnl_pct": 5.32,
+      "note": "PnL+5.32%持仓8天。距10日时间止损仅剩2天但远高于+3%门槛，不会触发。⚠️油气开采Ⅱ今日在Bottom5——Rule 1要求板块持续冷门3天以上才触发卖出，今日为第1天。密切关注。"
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "action": "HOLD",
+      "price": 36.14,
+      "pnl_pct": 1.35,
+      "note": "PnL+1.35%持仓2天。充电桩龙头3C认证利好逻辑完好，H1充电量+47%。今日微跌-0.28%正常波动。IV rank 80%偏高但非卖出信号。"
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "action": "OPEN",
+      "price": 40.64,
+      "note": "工业金属/铜龙头，0风险标签。H1净利+123%爆发力极强。Sector贵金属+6.21%/小金属+6.15%今日Top5共振，整个有色板块顺风。VCP SETUP形态（contraction=0.69, dist_peak=3.0%）。北向5.5%+公募6.4%+股东户数-30%+控股股东增持7.4亿。MA全部合规（dist_ma5=1.8%/ma10=2.5%/ma20=10.8%）。"
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "OPEN",
+      "price": 121.1,
+      "note": "集成电路制造绝对龙头，0风险标签。科创50今日+5.18%极强势，半导体产业链全线上涨。在建工程20%产能大扩张周期，机构目标+41%。远低于各均线（dist_ma20=-16.8%）——非追涨而是抄回调。IV rank 75%偏紧但0风险+龙头地位满足仅选最强标的门槛。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 9,
+    "totalEquity": 972717.0,
+    "dayPnl": 12904.0,
+    "dayReturnPct": 1.33,
+    "totalReturnPct": -2.73,
+    "unrealizedPnl": 26525.0,
+    "realizedPnl": -53808.0,
+    "cashPct": 60.89
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 2.8696,
+    "up": 3940,
+    "down": 1373,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 90,
+    "limit_downs": 2,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 2.87:1, 3/3 major indices green, 90 limit-ups / 2 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [
+    {
+      "code": "601168",
+      "name": "西部矿业"
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际"
+    }
+  ],
+  "marketContext": {
+    "summary": "Breadth 2.87:1强烈看涨（3940涨/1373跌），90涨停/2跌停，三大指数全绿（上证+1.34%/深证+1.56%/创业板+0.89%），科创50暴涨+5.18%。IV整体偏高（科创75%/创业板80%）但不构成冻结——entry regime gate全部通过。今日Risk-On旋转明确：资金从防御（银行-1.68%/白酒-1.54%）和旧能源（油气-2.45%）涌入材料链（玻璃+7.88%/贵金属+6.21%/小金属+6.15%）和科技链（科创50+5.18%）。组合PnL今日+5.02%（估算），7持仓全部盈利，药明康德/顺络电子/三环集团触发Rule 5提止损。新开西部矿业（7%有色龙头）+中芯国际（5%半导体龙头），维持8/10仓位，现金约53%。"
+  }
+}

@@ -7,7 +7,7 @@
   "entryPrice": 43.51,
   "targetPrice": 52.0,
   "stopLoss": 41.33,
-  "currentStop": 41.33,
+  "currentStop": 43.51,
   "allocation_pct": 6.0,
   "shares": 1100,
   "allocatedCapital": 47861.0,
@@ -30,6 +30,13 @@
       "change_pct": 8.55,
       "action": "HOLD",
       "note": "PnL+8.55%今日开仓即大涨！Sector元件#2（+8.45%）极强势。被动元件龙头直接受益MLCC涨价潮。逼近+10%止盈阈值——若明日触及¥47.86立即提止损至成本价¥43.51。今日+8.55%后MA偏离加大但不影响持仓（Rule 2b仅约束新开仓）。"
+    },
+    {
+      "date": "2026-08-05",
+      "price": 50.28,
+      "change_pct": 15.56,
+      "action": "RAISE_STOP",
+      "note": "PnL+15.56%持仓2天，Rule 5强制触发：+10%以上→止损提至盈亏平衡¥43.51。元件sector受益MLCC涨价潮，今日+6.46%继续强势。距+20%（¥52.21）仅差¥1.93——触及后止损提至+10%。"
     }
   ],
   "exitDate": null,
@@ -39,6 +46,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-08-04T11:40:35.792759+08:00",
-  "updatedAt": "2026-08-04T16:51:49.496286+08:00",
+  "updatedAt": "2026-08-05T11:42:09.746289+08:00",
   "trackerVersion": "2.1"
 }
