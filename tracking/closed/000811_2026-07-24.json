@@ -1,0 +1,49 @@
+{
+  "code": "000811",
+  "name": "冰轮环境",
+  "status": "closed",
+  "thesis": "液冷龙头+144%YTD，并购华源泰盟进展，合同负债¥13B创新高，AI数据中心散热需求结构性增长。近MA5(0.4%)，RPS20=99.56%极强。",
+  "entryDate": "2026-07-23",
+  "entryPrice": 42.85,
+  "targetPrice": 50.3,
+  "stopLoss": 40.71,
+  "currentStop": 40.71,
+  "allocation_pct": 4.0,
+  "shares": 800,
+  "allocatedCapital": 34280.0,
+  "rating": 2,
+  "rps120": 99.28,
+  "sector": "通用设备",
+  "catalysts": [],
+  "sourceWatchlist": "2026-07-23",
+  "history": [
+    {
+      "date": "2026-07-23",
+      "price": 42.85,
+      "change_pct": 0,
+      "action": "OPEN",
+      "note": "LLM开仓 冰轮环境"
+    },
+    {
+      "date": "2026-07-24",
+      "price": 41.2,
+      "change_pct": -3.85,
+      "action": "SELL",
+      "note": "Rule 5 double trigger: (1) -3.85% from entry in <3 days = automatic SELL; (2) Stop proximity CRITICAL — only 1.19% above 40.71 stop, gap risk is real. Thesis (datacenter liquid cooling, AI demand, 合同负债¥13B) is valid but entry timing was terrible. Cut now, re-enter when market regime clears."
+    }
+  ],
+  "exitDate": "2026-07-24",
+  "exitPrice": 41.2,
+  "exitReason": "Rule 5 double trigger: (1) -3.85% from entry in <3 days = automatic SELL; (2) Stop proximity CRITICAL — only 1.19% above 40.71 stop, gap risk is real. Thesis (datacenter liquid cooling, AI demand, 合同负债¥13B) is valid but entry timing was terrible. Cut now, re-enter when market regime clears.",
+  "returnPct": -3.85,
+  "holdingDays": 1,
+  "lessonLearned": "",
+  "createdAt": "2026-07-23T15:40:28.790028+08:00",
+  "updatedAt": "2026-07-24T11:44:06.794646+08:00",
+  "trackerVersion": "2.1",
+  "_recovered": {
+    "from_commit": "3ecfd16^",
+    "on": "2026-08-06",
+    "reason": "closed/{code}.json 单文件命名导致再次建仓平仓时覆盖旧回合; 从git历史恢复"
+  }
+}

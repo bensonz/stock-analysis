@@ -130,6 +130,23 @@ class TestPositionManager(unittest.TestCase):
         self.assertEqual(pos["stopLoss"], 47.5)
         self.assertEqual(pos["currentStop"], 47.5)
 
+    def test_reclose_after_reentry_keeps_both_round_trips(self):
+        # 2026-08-06: closed/{code}.json naming silently overwrote the prior
+        # round-trip on re-entry+re-close, erasing its realized PnL (9 trips
+        # lost incl. two +30% winners, recovered from git history). Closed
+        # files are now {code}_{exitDate}.json.
+        self._write_position("600100", entryPrice=10.0, shares=1000)
+        self.pm.close_position("600100", "target_hit", 12.0, date="2026-06-01")
+        self._write_position("600100", entryPrice=11.0, shares=1000,
+                             entryDate="2026-07-01")
+        self.pm.close_position("600100", "stop_hit", 10.0, date="2026-07-10")
+
+        closed = sorted(f.name for f in (self.tracking / "closed").glob("*.json"))
+        self.assertEqual(closed, ["600100_2026-06-01.json",
+                                  "600100_2026-07-10.json"])
+        # realized PnL includes BOTH trips: +2000 and -1000
+        self.assertEqual(self.pm.compute_realized_pnl(), 1000.0)
+
     def test_open_position_sizes_from_available_cash(self):
         (self.tracking / "portfolio_config.json").write_text(json.dumps({
             "starting_capital": 100000,

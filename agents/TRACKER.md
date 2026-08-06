@@ -57,7 +57,7 @@ Update `tracking/{code}.json` history:
 **If SELL:**
 - Set `exitDate`, `exitPrice`, `exitReason`, `returnPct`, `holdingDays`
 - Write `lessonLearned`
-- Move file to `tracking/closed/{code}.json`
+- Move file to `tracking/closed/{code}_{exitDate}.json`（含平仓日期——同一代码可多次建平仓，纯 {code}.json 会覆盖旧回合，2026-08-06 曾因此丢失9笔已实现盈亏记录）
 
 ### Step 4: Consider New Positions
 Review watchlist candidates (today's + recent days if nothing compelling today):

@@ -1,0 +1,56 @@
+{
+  "code": "300438",
+  "name": "鹏辉能源",
+  "status": "closed",
+  "thesis": "储能+锂电池双赛道龙头。Q1业绩超预期(净利+819%)，合同负债14亿(+70%)在手订单爆发。今日锂电池板块集体异动(储能签单突破180GWh)。中信建投买入评级，预测26-28年净利CAGR 50%+。6家机构覆盖。near MA5支撑(-0.8%)，RPS120 94.45%甜点区。",
+  "entryDate": "2026-06-30",
+  "entryPrice": 82.3,
+  "targetPrice": 107.0,
+  "stopLoss": 78.19,
+  "currentStop": 78.19,
+  "allocation_pct": 5.0,
+  "shares": 400,
+  "allocatedCapital": 32920.0,
+  "rating": 2,
+  "rps120": 94.45,
+  "sector": "电池",
+  "catalysts": [],
+  "sourceWatchlist": "2026-06-30",
+  "history": [
+    {
+      "date": "2026-06-30",
+      "price": 82.3,
+      "change_pct": 0,
+      "action": "OPEN",
+      "note": "LLM开仓 鹏辉能源"
+    },
+    {
+      "date": "2026-07-01",
+      "price": 81.44,
+      "change_pct": -1.04,
+      "action": "HOLD",
+      "note": "-1.04% PnL does NOT trigger Rule 5 (-3% threshold). However, today's intraday action is alarming: hit ¥92.32 (24-month high) then reversed to ¥75.47 low (~18% swing) on 6.5× normal volume — institutional distribution. 碳酸锂期货暴跌7% sector headwind. Stop at ¥78.19 (3.99% away) in WATCH zone. Tight leash — cut immediately if -3% breached."
+    },
+    {
+      "date": "2026-07-01",
+      "price": 79.63,
+      "change_pct": -3.24,
+      "action": "SELL",
+      "note": "Rule 5 triggered: -3.24% in first 3 days. Entry timing was wrong — caught a distribution day (¥92.32→¥75.47 intraday swing, 18% range). 碳酸锂期货暴跌7% sector headwind. Stop proximity CRITICAL at 1.81%. Cut now, re-evaluate if lithium stabilizes and stock reclaims ¥82."
+    }
+  ],
+  "exitDate": "2026-07-01",
+  "exitPrice": 79.63,
+  "exitReason": "Rule 5 triggered: -3.24% in first 3 days. Entry timing was wrong — caught a distribution day (¥92.32→¥75.47 intraday swing, 18% range). 碳酸锂期货暴跌7% sector headwind. Stop proximity CRITICAL at 1.81%. Cut now, re-evaluate if lithium stabilizes and stock reclaims ¥82.",
+  "returnPct": -3.24,
+  "holdingDays": 1,
+  "lessonLearned": "",
+  "createdAt": "2026-06-30T15:39:03.385776+08:00",
+  "updatedAt": "2026-07-01T15:45:15.557479+08:00",
+  "trackerVersion": "2.1",
+  "_recovered": {
+    "from_commit": "9a3c0f8^",
+    "on": "2026-08-06",
+    "reason": "closed/{code}.json 单文件命名导致再次建仓平仓时覆盖旧回合; 从git历史恢复"
+  }
+}

@@ -281,8 +281,13 @@ def close_position(
         "note": f"{reason}: {lesson}" if lesson else reason,
     })
 
-    # Write to closed dir and remove from tracking root
-    _write_json(CLOSED_DIR / f"{code}.json", pos)
+    # Write to closed dir and remove from tracking root.
+    # Filename includes exitDate: plain {code}.json silently OVERWROTE the
+    # previous round-trip when a stock was re-entered and re-closed, erasing
+    # its realized PnL from compute_realized_pnl (found 2026-08-06: 9 lost
+    # round-trips incl. two +30% winners; recovered from git history as
+    # {code}_{exitDate}.json). All readers glob closed/*.json, names are free.
+    _write_json(CLOSED_DIR / f"{code}_{exit_date}.json", pos)
     pos_file.unlink()
 
     regenerate_positions_json()
