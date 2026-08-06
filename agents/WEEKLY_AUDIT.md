@@ -100,6 +100,22 @@ python3 scripts/pricedb.py repair --dry-run   # lists partial price days, fixes 
 - Also check the week's daily reports for 数据质量警报 banners — a banner
   that appeared and was never acted on is itself a finding.
 
+### C3. Rotation Ledger (added 2026-08-07)
+
+When the book runs full, the pipeline mechanically logs the top gate-passing
+candidates it could not buy (`tracking/rotation_ledger.json`). Measure the
+cost of NOT swapping:
+
+```bash
+python3 scripts/rotation_ledger.py backtest --horizon 10 --human
+```
+
+- 平均价差 > +1pp with >50% hit rate over a meaningful sample → the 换仓纪律
+  in ANALYST.md is too conservative; propose loosening (evidence in report).
+- 平均价差 ≤ 0 → the momentum-holdings-are-strongest prior holds; say so.
+- Any actual `reason: "rotation"` sells this week → grade each: did the
+  candidate beat the sold holding over the following 10 sessions?
+
 ### D. Sector Alignment (V2 specific)
 - Were positions opened in hot sectors? (check sector_rank in new_positions)
 - Were positions held in cold sectors too long?

@@ -20,6 +20,22 @@ Use the sector data provided to rank sectors. If a stock's sector isn't in the t
 
 **Weak-market default:** if breadth/regime is weak, return `new_positions: []` even when one or two stocks look individually acceptable.
 
+**换仓纪律（满仓时的替换规则，2026-08-07）:**
+默认答案是**不换**——动量系统里，现有持仓通常就是市场上最强的一批；"新出现的更亮眼"
+恰恰是过度交易的经典诱饵。仅当以下条件**全部**成立时，才允许在同一次响应中给出
+一组配对决策（对最弱持仓 `SELL` + 对候选 `new_positions`，SELL 的 reason 固定写
+`"rotation"`）：
+1. 持仓已满（positionsUsed == positionsMax），且候选通过当日**全部**买入门槛
+   （RPS 门槛、breadth、regime、非超买）；
+2. 被替换者必须已经"瘸了"：持有 ≥5 个交易日 **且**（pnl < +3% **或** 现价低于
+   MA10）——绝不替换 <5 日的新仓（不许追逐昨天的主意）；
+3. 有真实差距而非并列：候选的 rps120 至少比被替换者当前 rps120 高 10 个百分点；
+4. 每天最多 1 组换仓。
+不满足就明确不换——无需惋惜：满仓时被放弃的头部候选会由流水线自动记入
+`tracking/rotation_ledger.json`（机械记录，与你无关），每周用
+`rotation_ledger.py backtest` 回测"没换仓错过了多少"。如果数据证明换仓纪律太保守，
+规则会被放宽；证明保守是对的，就维持。你只需在满仓且确有极端候选时按上述四条判断。
+
 **Minimum buy gate for any new long:**
 - **Up/Down ratio must be at least 1.5:1**
 - **At least 2 of 上证指数 / 深证成指 / 创业板指 must be green**

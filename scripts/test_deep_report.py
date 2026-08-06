@@ -256,7 +256,7 @@ def test_cli_verify_flags(monkeypatch, tmp_path, capsys):
     seen = {}
 
     def fake_generate(code, provider=None, verify=True, max_verify_rounds=2,
-                      verify_provider=None):
+                      verify_provider=None, focus=None):
         seen["verify"] = verify
         seen["max_verify_rounds"] = max_verify_rounds
         seen["verify_provider"] = verify_provider

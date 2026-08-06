@@ -1716,6 +1716,20 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
     except Exception as e:
         log["actions"].append(f"ERROR post-apply rules: {e}")
 
+    # 8b. Rotation opportunity ledger — when the book ends the run full,
+    #     mechanically log the top gate-passing candidates we could not buy
+    #     (vs weakest holding) so `rotation_ledger.py backtest` can measure
+    #     the cost of not actively swapping. Never fails the run.
+    try:
+        from rotation_ledger import record_if_full
+        rot = record_if_full(date, data)
+        if rot:
+            log["actions"].append(
+                f"Rotation ledger: book full, logged {len(rot['candidates'])} "
+                f"candidates vs weakest {rot['weakest']['code'] if rot.get('weakest') else '?'}")
+    except Exception as e:
+        print(f"  [rotation-ledger] failed (non-fatal): {e}", file=sys.stderr)
+
     # 9. Take post-run snapshot
     post_snap = snapshot_positions("post_run", date)
     (output_dir / "positions_snapshot.json").write_text(

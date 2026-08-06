@@ -209,7 +209,8 @@ class TestPositionManager(unittest.TestCase):
         self.assertEqual(pos["returnPct"], 20.0)
         self.assertEqual(pos["holdingDays"], 31)
         self.assertFalse((self.tracking / "600001.json").exists())
-        self.assertTrue((self.tracking / "closed" / "600001.json").exists())
+        # exitDate in the filename since 2026-08-06 (re-entry overwrote history)
+        self.assertTrue((self.tracking / "closed" / "600001_2026-02-01.json").exists())
 
         # positions.json should be empty now
         pj = json.loads((self.tracking / "positions.json").read_text())

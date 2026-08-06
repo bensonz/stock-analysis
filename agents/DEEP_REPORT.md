@@ -116,6 +116,17 @@ Use `###` subsections:
 - **同业对标** — a markdown table of the key peers with their latest earnings (call
   `stock_fundamentals` per peer; tag the rows 〖内部数据〗) and a one-line edge/weakness
   each. Exact figures (营收/净利/同比/毛利率/预告), not vague "均实现增长".
+- **商品敞口与套保**（资源/周期股必写——矿业、有色、能源、化工、养殖等以商品价格为
+  第一利润驱动的公司；其他公司省略此节）:
+  - **价格敏感度（量化）**: 主力商品价格每变动 X%，对公司年净利的影响估算——用
+    产量 × 价格 × (1-税费) 或披露的敏感性数据推算，写出算式与假设，不许只写"弹性大"。
+  - **产量与成本**: 最新披露的主力商品年产量/指引、单位成本(C1或完全成本)与行业成本
+    曲线位置——低成本者对价格下跌的缓冲即是"受益弹性"的另一面。
+  - **库存与套保**: 年报/公告披露的原料及在产品存货（金额与大致实物量级）；是否有
+    期货套保（套期保值公告/衍生品持仓披露）、套保比例与方向——**满额卖出套保的公司
+    在涨价周期受益被锁死**，这直接改变"受益多少"的答案。披露查不到就明说。
+  - **同业弹性对比**: 上表同业中，谁的 产量/市值 弹性最高、谁套保最重——一句话回答
+    "这轮涨价谁受益最大"。
 - **技术与资金面 (our edge)** — read the DATA technical block honestly:
   - RPS: rps60/rps120/rps250 and whether it clears our **RPS≥80 momentum gate** (`rps_gate`).
   - MA structure: price vs MA5/MA20/MA120/MA250, alignment, distance-to-MA (over/under-extended).

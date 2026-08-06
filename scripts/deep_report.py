@@ -206,11 +206,21 @@ def gather_data(code: str) -> dict:
 # --------------------------------------------------------------------------- #
 # Prompt + generation
 # --------------------------------------------------------------------------- #
-def build_prompt(spec: str, code: str, data: dict) -> str:
+def build_prompt(spec: str, code: str, data: dict, focus: str | None = None) -> str:
+    focus_block = ""
+    if focus:
+        focus_block = (
+            "\n\n# 委托研究问题（必答）\n"
+            "报告除按 spec 结构外，必须在正文中直接、逐条回答以下委托问题——"
+            "每条答案服从同样的引用与数据标注纪律；确实无法获得的数据要明说"
+            "「披露中未找到」而不是绕开：\n"
+            + focus + "\n"
+        )
     return (
         spec
         + "\n\n---\n\n# 目标个股\n"
         + str(data.get("code", code))
+        + focus_block
         + "\n\n# DATA\n```json\n"
         + json.dumps(data, ensure_ascii=False, indent=2)
         + "\n```\n"
@@ -496,7 +506,7 @@ def _make_runners(resolved, client, model, tool_log, totals,
 
 def generate(code: str, provider: str | None = None, data: dict | None = None,
              verify: bool = True, max_verify_rounds: int = MAX_VERIFY_ROUNDS,
-             verify_provider: str | None = None) -> dict:
+             verify_provider: str | None = None, focus: str | None = None) -> dict:
     """Draft the article, then (unless verify=False) run the citation-verify
     pipeline: every number must be inline-linked and confirmed at its source,
     or tagged 〖内部数据〗 and matched against DATA. See agents/DEEP_VERIFY.md.
@@ -513,7 +523,7 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
     spec = SPEC_FILE.read_text(encoding="utf-8")
     if data is None:
         data = gather_data(code)
-    prompt = build_prompt(spec, code, data)
+    prompt = build_prompt(spec, code, data, focus=focus)
     messages = [{"role": "user", "content": prompt}]
     tool_log: list = []
 
@@ -654,7 +664,7 @@ def main():
         print(
             "usage: deep_report.py <code> [--provider anthropic|openai] "
             "[--output-dir DIR] [--human] [--no-verify] [--max-verify-rounds N] "
-            "[--verify-provider anthropic|openai]",
+            "[--verify-provider anthropic|openai] [--focus '委托研究问题...']",
             file=sys.stderr,
         )
         sys.exit(2)
@@ -666,6 +676,7 @@ def main():
     verify = "--no-verify" not in args
     mvr = _arg_value(args, "--max-verify-rounds")
     verify_provider = _arg_value(args, "--verify-provider")
+    focus = _arg_value(args, "--focus")
 
     import time
     t0 = time.time()
@@ -683,7 +694,7 @@ def main():
 
     result = generate(code, provider=provider, verify=verify,
                       max_verify_rounds=rounds_planned,
-                      verify_provider=verify_provider)
+                      verify_provider=verify_provider, focus=focus)
     out = write_report(code, result["text"], output_dir=output_dir)
 
     if result.get("verify_audit"):
