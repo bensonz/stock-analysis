@@ -3,9 +3,13 @@ __pycache__/
 *.pyc
 
 # Large regenerable files in runs/ — keep input/, output/, and log.json tracked
+# (both legacy runs/<date>/ and slotted runs/<date>/<slot>/ layouts)
 runs/*/phase1.json
 runs/*/prompt.md
 runs/*/response.json
+runs/*/*/phase1.json
+runs/*/*/prompt.md
+runs/*/*/response.json
 
 # Generated deep-research articles (regenerable via scripts/deep_report.py),
 # grouped as reports/<code>-<中文名>/ since 45c22b6
