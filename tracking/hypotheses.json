@@ -1880,7 +1880,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-07-07",
+      "lastTested": "2026-08-06",
       "mechanism": "In a deteriorating market, protecting open profits is more valuable than maximizing upside variance.",
       "evidence": {
         "supporting": [
@@ -2027,11 +2027,15 @@
           {
             "date": "2026-07-07",
             "detail": "恐慌日逆势抗跌标的应重点保护而非恐慌减仓。融捷股份在4700只下跌日+3.39%, 伴随雅化集团一字涨停催化, 这类资金认可的标的在反弹时弹性更大。当前PnL +5.98%接近+10%提止损阈值, 应HOLD."
+          },
+          {
+            "date": "2026-08-06",
+            "detail": "恒逸石化+9.74%（8天）验证事件驱动型持仓的爆发力：霍尔木兹危机背景下文莱炼化独特资产享受税收+市场化定价红利，叠加H1净利+2326-2547%，8天接近+10%。与h023（+10%后机械提止损）策略一致——事件驱动标的爆发力强但波动大，机械止损保护利润。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 36,
+      "sampleSize": 37,
       "hitRate": 1.0,
       "confidence": 0.974,
       "tags": [
@@ -2599,7 +2603,7 @@
           },
           {
             "date": "2026-08-06",
-            "detail": "资源避险轮动持续验证：煤炭+3.05%、贵金属+2.86%、小金属+2.45%领涨，同时科技/消费承压。这已是连续多日出现的模式——资金从进攻型板块向防御型板块转移，Risk-off信号明确。在此环境下开新仓应优先考虑资源类而非科技类"
+            "detail": "板块一日游风险加剧：昨日半导体/AI算力全线暴涨（科创50+5.18%），今日集体回调（深证-0.52%，科创50-0.16%）。资源股（煤炭+3.05%，贵金属+2.86%）接棒。这种'一天科技一天资源'的快速轮动不是趋势市特征，应降低新开仓频率，让现有仓位跑完趋势而非追逐轮动。"
           }
         ],
         "contradicting": []
@@ -4053,18 +4057,14 @@
           },
           {
             "date": "2026-08-06",
-            "detail": "弱势市场中VCP结构不起保护作用：宏发股份进入第2天即-2.10%（距-3%强制卖出仅0.9%），contraction=0.69的SETUP形态在板块轮动和资金避险面前失效。板块方向比个股形态更决定短期走势"
-          },
-          {
-            "date": "2026-08-06",
-            "detail": "买入门槛（breadth≥1.5:1 + ≥2/3指数翻红）再次证明其价值：澜起科技（dist_ma5=5.3%合规+margin adding+存储涨价）和闰土股份（dist_ma5=-1.3%回调到位+染料涨价）在正常市场下是合理BUY，但在0.46:1 breadth下开仓等于赌博。V1就是因为忽略了市场环境而频繁开仓亏损"
+            "detail": "买入门槛（Up/Down≥1.5:1 + 至少2个主要指数绿盘）再次验证价值：今日breadth 0.46:1+仅上证微红，若昨日在2.68万亿狂热成交中追入，新仓位今日全面浮亏。框架纪律保护了现金——与h077（硬阻断防FOMO）一致。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 19,
+      "sampleSize": 18,
       "hitRate": 1.0,
-      "confidence": 0.952,
+      "confidence": 0.95,
       "tags": [
         "entry-filter",
         "position-sizing"
@@ -5881,6 +5881,34 @@
       "confidence": 0.6,
       "tags": [
         "entry-filter",
+        "position-sizing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h143",
+      "text": "宏发股份警示：强基本面（H1净利+19.9%/北向20%/0风险/股东户数-39%）≠短期价格免疫。3天内-2.10%接近-3%三日触发线。价格是唯一真理——无论多好的基本面，破位就得出。",
+      "type": "heuristic",
+      "status": "observation",
+      "created": "2026-08-06",
+      "lastTested": "2026-08-06",
+      "mechanism": "基本面改善是慢变量，短期价格由资金流动和情绪驱动。在弱市中，即使是优质标的也可能被系统性拖累。",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-08-06",
+            "detail": "宏发股份警示：强基本面（H1净利+19.9%/北向20%/0风险/股东户数-39%）≠短期价格免疫。3天内-2.10%接近-3%三日触发线。价格是唯一真理——无论多好的基本面，破位就得出。"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "exit-rule",
         "position-sizing"
       ],
       "parentRule": null,

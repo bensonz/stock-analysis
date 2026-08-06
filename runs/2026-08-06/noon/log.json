@@ -4,21 +4,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1785988325.8612218,
+      "start": 1785988371.7942688,
       "errors": [],
-      "end": 1785988400.9393458,
-      "duration_sec": 75.1
+      "end": 1785988403.4751759,
+      "duration_sec": 31.7
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 10860,
+      "response_size_bytes": 11930,
       "tokens": {
-        "input_tokens": 167210,
-        "output_tokens": 10199
+        "input_tokens": 354624,
+        "output_tokens": 12155
       },
-      "rounds": 2,
-      "tool_calls_count": 3,
-      "duration_sec": 161.4,
+      "rounds": 4,
+      "tool_calls_count": 8,
+      "duration_sec": 219.7,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -26,14 +26,15 @@
     },
     {
       "phase": "apply",
-      "start": 1785988562.3504262,
+      "start": 1785988623.22409,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
         "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=18",
         "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=52",
-        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=19",
+        "Hypothesis: Created h143 (observation): 宏发股份警示：强基本面（H1净利+19.9%/北向20%/0风险/股东户数-39%）≠短期价格免疫。3天内-2.10%接近-3%三日触发线。价格是唯一真理——无...",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=37",
         "Updated LEARNINGS.md (legacy)"
       ],
       "post_apply_rule_violations": {
@@ -122,8 +123,8 @@
           }
         ]
       },
-      "end": 1785988562.572702,
-      "duration_sec": 0.2
+      "end": 1785988623.5182981,
+      "duration_sec": 0.3
     }
   ],
   "validation_errors": [
@@ -133,6 +134,6 @@
   ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 236.7
+    "totalDurationSec": 251.7
   }
 }

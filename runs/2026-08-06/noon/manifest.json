@@ -1,10 +1,10 @@
 {
   "date": "2026-08-06",
   "slot": "noon",
-  "run_started_at": "2026-08-06T11:35:06.270370+08:00",
-  "status": "failed",
-  "exit_code": 1,
-  "total_duration_sec": 0.0,
+  "run_started_at": "2026-08-06T11:51:46.229015+08:00",
+  "status": "degraded",
+  "exit_code": 0,
+  "total_duration_sec": 236.7,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -12,15 +12,15 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 200.3
+          "latency_ms": 153.8
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 370.6
+          "latency_ms": 283.9
         },
         "pricedb": {
           "status": "ok",
-          "latest_date": "2026-08-04",
+          "latest_date": "2026-08-05",
           "stale": false
         }
       }
@@ -32,18 +32,49 @@
       "target": "2026-08-05"
     },
     "collect": {
-      "status": "failed",
-      "duration_sec": 60.8,
+      "status": "ok",
+      "duration_sec": 75.1,
       "errors": []
+    },
+    "llm_analysis": {
+      "status": "ok",
+      "duration_sec": 161.4
+    },
+    "apply": {
+      "status": "ok",
+      "duration_sec": 0.2
+    },
+    "validate": {
+      "status": "warnings",
+      "duration_sec": 0.0,
+      "errors": [
+        "RULE check_stop_proximity: 300001 — 🟠 WATCH — 3.6% above stop. Monitor closely. No immediate action but be ready.",
+        "RULE check_stop_proximity: 600885 — 🟡 WARNING — only 3.0% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
+        "RULE check_stop_proximity: 601168 — 🟠 WATCH — 3.4% above stop. Monitor closely. No immediate action but be ready."
+      ]
     }
   },
   "gates": {
     "phase1_to_phase2": {
-      "passed": false,
-      "hard_fails": [
-        "latest price day is partial (141 rows vs ~5211) — run 'pricedb.py repair'"
-      ],
+      "passed": true,
+      "hard_fails": [],
       "soft_warns": []
+    },
+    "phase2_to_phase3": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [
+        "missing watchlist"
+      ]
+    },
+    "phase3_to_phase4": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [
+        "rule check_stop_proximity: 🟠 WATCH — 3.6% above stop. Monitor closely. No immediate action but be ready.",
+        "rule check_stop_proximity: 🟡 WARNING — only 3.0% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
+        "rule check_stop_proximity: 🟠 WATCH — 3.4% above stop. Monitor closely. No immediate action but be ready."
+      ]
     }
   }
 }

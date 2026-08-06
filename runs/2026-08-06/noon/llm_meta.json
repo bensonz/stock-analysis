@@ -2,40 +2,90 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 167210,
-  "output_tokens": 10199,
-  "rounds": 2,
-  "duration_sec": 161.4,
+  "input_tokens": 354624,
+  "output_tokens": 12155,
+  "rounds": 4,
+  "duration_sec": 219.7,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年8月6日 煤炭 贵金属 板块 上涨原因",
+        "query": "A股 2026年8月6日 市场热点 板块轮动",
         "max_results": 5
       },
-      "result_length": 3274
+      "result_length": 3106
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "三环集团 MLCC 涨价 2026年8月",
+        "query": "煤炭板块 上涨原因 2026年8月",
         "max_results": 5
       },
-      "result_length": 3159
+      "result_length": 3286
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "药明康德 CXO 2026年8月 最新消息",
+        "query": "贵金属 黄金 价格上涨 2026年8月 A股",
         "max_results": 5
       },
-      "result_length": 3273
+      "result_length": 3729
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 2026年8月6日 大盘走势 半导体 电子 回调"
+      },
+      "result_length": 3246
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "MLCC涨价 三环集团 顺络电子 2026年8月"
+      },
+      "result_length": 3151
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "药明康德 CXO 医药板块 2026年8月6日 走势"
+      },
+      "result_length": 2737
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "恒逸石化 文莱 炼化 2026年8月 业绩"
+      },
+      "result_length": 3247
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "西部矿业 铜价 2026年8月 有色金属"
+      },
+      "result_length": 3201
     }
   ],
   "fallback_used": false
