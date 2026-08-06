@@ -2111,6 +2111,14 @@ def main():
         else:
             print("  All checks passed!", file=sys.stderr)
 
+        # Refresh the static portfolio site (site/index.html) so it rides
+        # into the same commit. Never fails the run.
+        try:
+            from build_site import build as _build_site
+            _build_site()
+        except Exception as e:
+            print(f"  [site] regeneration failed (non-fatal): {e}", file=sys.stderr)
+
         # Git commit (blocked by CRITICAL validation errors)
         if not no_commit and not critical_errors:
             print(f"\nPhase 5: Git commit...", file=sys.stderr)

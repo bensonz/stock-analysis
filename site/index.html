@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>组合总览 · 模拟盘</title>
+<style>
+  :root { --up:#d43a3a; --down:#1a9c62; --fg:#1c2330; --muted:#6b7482;
+           --line:#e4e8ee; --bg:#f6f7f9; --card:#fff; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:14px/1.55 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+          color:var(--fg); background:var(--bg); }
+  .wrap { max-width:1080px; margin:0 auto; padding:28px 20px 48px; }
+  h1 { font-size:21px; margin:0 0 2px; }
+  .sub { color:var(--muted); font-size:12.5px; margin-bottom:20px; }
+  h2 { font-size:15.5px; margin:30px 0 10px; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(122px,1fr)); gap:10px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px 13px; }
+  .card .label { font-size:12px; color:var(--muted); }
+  .card .value { font-size:17px; font-weight:600; margin-top:2px; font-variant-numeric:tabular-nums; }
+  .up { color:var(--up); } .down { color:var(--down); } .flat { color:var(--fg); }
+  .panel { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px; }
+  #chart { width:100%; height:auto; display:block; }
+  #tip { position:fixed; display:none; pointer-events:none; background:#1c2330; color:#fff;
+          padding:6px 9px; border-radius:6px; font-size:12px; white-space:nowrap; z-index:9; }
+  table { width:100%; border-collapse:collapse; background:var(--card);
+           border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  th,td { padding:7px 10px; text-align:left; border-bottom:1px solid var(--line); font-size:13px; }
+  th { background:#fafbfc; color:var(--muted); font-weight:500; }
+  tr:last-child td { border-bottom:none; }
+  td.num { text-align:right; font-variant-numeric:tabular-nums; }
+  td.empty { text-align:center; color:var(--muted); padding:18px; }
+  .note { color:var(--muted); font-size:12px; margin-top:6px; }
+  footer { margin-top:34px; color:var(--muted); font-size:12px; border-top:1px solid var(--line); padding-top:12px; }
+  code { background:#eef0f3; padding:1px 5px; border-radius:4px; font-size:11.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>组合总览 <span style="font-weight:400;color:var(--muted);font-size:14px">模拟盘 · A股动量策略</span></h1>
+  <div class="sub">生成于 2026-08-06T12:18:20+08:00 · 红涨绿跌</div>
+
+  <div class="cards"><div class="card"><div class="label">总资产</div><div class="value down">964,319</div></div>
+<div class="card"><div class="label">总收益率</div><div class="value down">-3.57%</div></div>
+<div class="card"><div class="label">今日盈亏</div><div class="value down">-7,208</div></div>
+<div class="card"><div class="label">已实现盈亏</div><div class="value down">-53,808</div></div>
+<div class="card"><div class="label">未实现盈亏</div><div class="value up">18,127</div></div>
+<div class="card"><div class="label">现金占比</div><div class="value flat">61.42%</div></div>
+<div class="card"><div class="label">最大回撤</div><div class="value down">5.25%</div></div>
+<div class="card"><div class="label">持仓</div><div class="value flat">9/10</div></div></div>
+
+  <h2>每日总资产</h2>
+  <div class="panel">
+    <svg id="chart" viewBox="0 0 960 340" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="note">每个交易日取当日最后一次流水线快照的 totalEquity；虚线 = 初始资金 1,000,000。</div>
+  </div>
+  <div id="tip"></div>
+
+  <h2>当前持仓</h2>
+  <table>
+    <thead><tr><th>代码</th><th>名称</th><th>建仓日</th><th style="text-align:right">成本</th>
+    <th style="text-align:right">现价</th><th style="text-align:right">盈亏</th>
+    <th style="text-align:right">止损</th><th style="text-align:right">权重</th><th>板块</th></tr></thead>
+    <tbody><tr><td>603259</td><td>药明康德</td><td>2026-07-31</td><td class='num'>126.5</td><td class='num'>144.56</td><td class='num up'>+14.28%</td><td class='num'>126.5</td><td class='num'>4.50%</td><td>医疗服务</td></tr>
+<tr><td>002138</td><td>顺络电子</td><td>2026-08-04</td><td class='num'>43.51</td><td class='num'>48.2</td><td class='num up'>+10.78%</td><td class='num'>43.51</td><td class='num'>5.50%</td><td>元件</td></tr>
+<tr><td>000703</td><td>恒逸石化</td><td>2026-07-29</td><td class='num'>15.6</td><td class='num'>17.12</td><td class='num up'>+9.74%</td><td class='num'>14.82</td><td class='num'>2.84%</td><td>石油石化</td></tr>
+<tr><td>300408</td><td>三环集团</td><td>2026-07-31</td><td class='num'>115.07</td><td class='num'>124.15</td><td class='num up'>+7.89%</td><td class='num'>115.07</td><td class='num'>7.72%</td><td>元件</td></tr>
+<tr><td>603127</td><td>昭衍新药</td><td>2026-08-04</td><td class='num'>44.35</td><td class='num'>46.31</td><td class='num up'>+4.42%</td><td class='num'>42.13</td><td class='num'>2.88%</td><td>医疗服务</td></tr>
+<tr><td>688981</td><td>中芯国际</td><td>2026-08-05</td><td class='num'>121.1</td><td class='num'>124.18</td><td class='num up'>+2.54%</td><td class='num'>115.04</td><td class='num'>2.58%</td><td>半导体</td></tr>
+<tr><td>300001</td><td>特锐德</td><td>2026-08-04</td><td class='num'>35.66</td><td class='num'>35.14</td><td class='num down'>-1.46%</td><td class='num'>33.88</td><td class='num'>4.37%</td><td>电网设备</td></tr>
+<tr><td>601168</td><td>西部矿业</td><td>2026-08-05</td><td class='num'>40.64</td><td class='num'>39.96</td><td class='num down'>-1.67%</td><td class='num'>38.61</td><td class='num'>4.56%</td><td>工业金属</td></tr>
+<tr><td>600885</td><td>宏发股份</td><td>2026-08-04</td><td class='num'>35.75</td><td class='num'>35.0</td><td class='num down'>-2.10%</td><td class='num'>33.96</td><td class='num'>3.63%</td><td>电网设备</td></tr></tbody>
+  </table>
+
+  <h2>已平仓交易</h2>
+  <div class="note" style="margin:0 0 8px">共 42 笔 · 胜率 28.6% (12胜) · 平均盈利 +8.05% · 平均亏损 -5.64% · 盈亏比 0.57</div>
+  <table>
+    <thead><tr><th>代码</th><th>名称</th><th>建仓日</th><th>平仓日</th>
+    <th style="text-align:right">持有天数</th><th style="text-align:right">收益</th><th>平仓原因</th></tr></thead>
+    <tbody><tr><td>002916</td><td>深南电路</td><td>2026-07-31</td><td>2026-08-03</td><td class='num'>3</td><td class='num down'>-1.31%</td><td>CRITICAL stop proximity: only 1.35% above stop at 300.21. Below all MAs (dist_ma5 -2.5%, dist_ma10 -5.6%, dist_ma20 -15.9%). Margin deleveraging (chg5 -21.55%). Gap risk is real — proactive stop-loss per h024. Sector 元件 not in top sectors. Better to exit at -1.31% than risk -3%+ gap-down tomorrow.</td></tr>
+<tr><td>300373</td><td>扬杰科技</td><td>2026-07-31</td><td>2026-08-03</td><td class='num'>3</td><td class='num down'>-6.86%</td><td>STOP BREACHED: 81.59 &lt; 83.22 stop. -6.86% from entry in 3 days. Sector 半导体 in bottom5 (-4.48%). Multiple rule violations (iv_filter, overextended_entry, stop_proximity). Rule 5: -5% from entry = automatic SELL. -3% in first 3 days = automatic SELL. Sector gravity overwhelms individual thesis.</td></tr>
+<tr><td>600176</td><td>中国巨石</td><td>2026-07-29</td><td>2026-07-30</td><td class='num'>1</td><td class='num down'>-5.91%</td><td>Rule 5硬止损触发: PnL -5.91%超过-5%阈值。现价36.12已跌破止损36.47。入场时股价低于MA5/MA10/MA20三条均线——V1价值陷阱思维残余，V2不应买入均线空头排列的股票。</td></tr>
+<tr><td>603259</td><td>药明康德</td><td>2026-07-29</td><td>2026-07-30</td><td class='num'>1</td><td class='num down'>-3.56%</td><td>Rule 5触发: -3.56%在入场2天内(-3% in first 3 days → SELL)。距硬止损120.18仅1.49%，stop_proximity CRITICAL。VCP结构和均线紧凑度仍然健康但规则优先。可等市场企稳后重新评估入场。</td></tr>
+<tr><td>000811</td><td>冰轮环境</td><td>2026-07-27</td><td>2026-07-28</td><td class='num'>1</td><td class='num down'>-8.77%</td><td>Hard stop triggered: entry ¥42.85, stop ¥40.71, current ¥39.09 (-8.77%). Rule 5: -5% from entry = automatic SELL. 跌停 -9.99% today. No exceptions.</td></tr>
+<tr><td>001389</td><td>广合科技</td><td>2026-07-27</td><td>2026-07-28</td><td class='num'>1</td><td class='num down'>-4.74%</td><td>Dual trigger: (1) Sector &#x27;元件&#x27; is bottom 5 (-8.11% today) — sector gravity rule mandates sell regardless of thesis. (2) Price ¥152.90 only 0.27% above ¥152.48 stop with -8.72% daily drop. Sector whiplash from hot to cold in one session.</td></tr>
+<tr><td>002821</td><td>凯莱英</td><td>2026-07-27</td><td>2026-07-28</td><td class='num'>1</td><td class='num down'>-3.78%</td><td>Rule 5 triggered: -3.78% in first 2 days (entry 163.54, current 157.36). Stop proximity critical at 1.27%. Stock showed relative strength (-3.43% vs 创业板 -7.35%) but V2 discipline requires cutting fast. CXO thesis intact — will re-enter if stock reclaims MA10 (171.09) on above-average volume with market regime normalized.</td></tr>
+<tr><td>300503</td><td>昊志机电</td><td>2026-07-27</td><td>2026-07-28</td><td class='num'>1</td><td class='num down'>-1.72%</td><td>Proactive stop-proximity sell per h024. Price ¥64.54 only 0.06% above ¥64.50 stop. 创业板 -5.37% with elevated IV (64%) creates massive gap risk. Yesterday&#x27;s +2.47% gain fully reversed plus more. Better to exit at ¥64.54 than risk gap-through to ¥62 tomorrow.</td></tr>
+<tr><td>688331</td><td>荣昌生物</td><td>2026-07-27</td><td>2026-07-28</td><td class='num'>1</td><td class='num down'>-0.84%</td><td>Stop breached: stop ¥120.56, current ¥120.42 (-0.84%). Today&#x27;s low ¥119.49 already well below stop. 科创50 IV Rank 73% means gap risk extreme. 泰它西普 thesis still valid but timing wrong — can re-enter when market stabilizes.</td></tr>
+<tr><td>300236</td><td>上海新阳</td><td>2026-07-14</td><td>2026-07-15</td><td class='num'>1</td><td class='num down'>-6.00%</td><td>-6.0% in 1 day. -5% stop broken (¥105.12 &lt; ¥106.24). -3% in first 3 days triggered. Sector 电子化学品 bottom 5 (-3.81%). Sector gravity overriding individual thesis.</td></tr>
+<tr><td>601958</td><td>金钼股份</td><td>2026-07-14</td><td>2026-07-15</td><td class='num'>1</td><td class='num down'>-3.21%</td><td>-3.21% in 1 day triggers -3% in first 3 days rule. Stop distance only 1.87% with gap risk. Resource rotation fading. 钼 thesis structurally intact but timing was wrong — re-enter when sector stabilizes.</td></tr>
+<tr><td>688372</td><td>伟测科技</td><td>2026-07-14</td><td>2026-07-15</td><td class='num'>1</td><td class='num down'>-8.43%</td><td>-8.43% in 1 day. -5% stop massively broken (¥150.19 vs stop ¥169.86). -3% in first 3 days triggered. Sector 半导体 bottom 5 (-4.72%). Entry was overextended — stock had run significantly pre-entry.</td></tr>
+<tr><td>688401</td><td>路维光电</td><td>2026-07-14</td><td>2026-07-15</td><td class='num'>1</td><td class='num down'>-9.23%</td><td>-9.23% in 1 day. -5% stop broken (¥77.11 &lt; ¥80.70). -3% in first 3 days triggered. Sector 半导体材料 bottom 5. 0 risk factors meant nothing against sector gravity — validates Rule 1 (Sector First).</td></tr>
+<tr><td>300726</td><td>宏达电子</td><td>2026-07-10</td><td>2026-07-13</td><td class='num'>3</td><td class='num down'>-11.44%</td><td>STOP TRIGGERED: entry 69.33 × 0.95 = stop 65.86, current 61.40 (-7.26% below stop). -11.44% in 3 days. -3% in first 3 days rule also triggered. Sector 军工电子Ⅱ in bottom 5 at -6.24%. Triple exit signal. Sector gravity crushed this — stock was in downtrend before entry (07-02 -6.16%, 07-03 -5.06%, 07-07 -3.99%). RPS degraded to 91.85% but irrelevant now.</td></tr>
+<tr><td>688378</td><td>奥来德</td><td>2026-07-10</td><td>2026-07-10</td><td class='num'>0</td><td class='num down'>-4.01%</td><td>Triggers Rule 5: -4.01% in first 3 days → SELL. Bad timing. H1 +492~604% catalyst was &#x27;sell the news&#x27; — stock ran to ¥60.33 on 7/6 then crashed. Sector (光学光电子) outside top 30%. Stop proximity CRITICAL at 1.03%. Cut now, re-enter later if thesis re-proves itself.</td></tr>
+<tr><td>002192</td><td>融捷股份</td><td>2026-07-03</td><td>2026-07-08</td><td class='num'>5</td><td class='num down'>-4.62%</td><td>SECTOR GRAVITY + STOP PROXIMITY: 能源金属 is #1 worst sector today (-4.89%), stock hit -10% 跌停. Only 0.4% above stop (87.49). Rule violation CRITICAL — proactive exit before gap-through. Sector thesis destroyed in 1 day. PnL -4.62% in 5 days. Per h019: cold sector = unconditional exit.</td></tr>
+<tr><td>300438</td><td>鹏辉能源</td><td>2026-07-03</td><td>2026-07-06</td><td class='num'>3</td><td class='num down'>-4.14%</td><td>Rule 5 triggered: -4.14% in first 3 days → bad timing, cut. Only 0.9% above stop (¥73.96). Entry premise (MA20支撑) invalid — price ¥74.63 well below MA20 ¥78.00. 储能板块多数走低, sector momentum faded. iv_filter + overextended_entry both flagged. Cut before gap-down through stop.</td></tr>
+<tr><td>002947</td><td>恒铭达</td><td>2026-06-30</td><td>2026-07-01</td><td class='num'>1</td><td class='num down'>-3.86%</td><td>Rule 5 triggered: -3.87% in first 2 days (threshold: -3% in 3 days). Stop proximity CRITICAL at only 1.18% above stop. Below all MAs (MA5 -6.6%, MA10 -11.1%, MA20 -14.2%). Thesis (MA20低吸) invalidated. Cut now before gap-through. 扬杰科技 lesson: don&#x27;t wait for exact stop trigger.</td></tr>
+<tr><td>300037</td><td>新宙邦</td><td>2026-06-12</td><td>2026-06-26</td><td class='num'>14</td><td class='num up'>+11.75%</td><td>TRIPLE SELL SIGNAL: (1) Sector 电池 is bottom 5 (-5.81%) — sector-first rule requires exit regardless of individual thesis quality. (2) Stop proximity CRITICAL at 1.56% — gap-down risk on Monday is real per 03-03 扬杰科技 lesson. (3) -7.61% today on 6.9× normal volume = institutional distribution. 宁德时代 catalyst remains valid but sector gravity + stop risk override. Will re-enter if sector stabilizes and stock reclaims MA5.</td></tr>
+<tr><td>002436</td><td>兴森科技</td><td>2026-06-15</td><td>2026-06-23</td><td class='num'>8</td><td class='num up'>+21.98%</td><td>Sector 元件 dropped to BOTTOM 5 (-6.34%). Today -9.01% on 8.8x MAVOL30 = institutional distribution. Stop proximity CRITICAL at 1.63% (48.50 vs 47.71 stop). Proactive sell to lock +22% before mechanical stop triggers. ABF thesis valid but sector rotation demands exit. Per Rule 5: sector cold = sell regardless of individual thesis.</td></tr>
+<tr><td>600301</td><td>华锡有色</td><td>2026-05-22</td><td>2026-05-27</td><td class='num'>5</td><td class='num up'>+5.71%</td><td>Sector alignment broke badly: holding is in 有色金属 while cold list shows 贵金属 -5.05% and 工业金属 -3.51%. Stock is down -6.32% today to 57.35 from prev_close 61.22, which also breaches the hard -5% stop versus 54.25 entry threshold (51.54 stop remains the mechanical line, but today&#x27;s tape confirms sector failure risk). In V2, cold-sector gravity and panic regime both argue to exit rather than hope.</td></tr>
+<tr><td>301216</td><td>万凯新材</td><td>2026-05-19</td><td>2026-05-20</td><td class='num'>1</td><td class='num up'>+0.14%</td><td>Price closed 28.80 vs entry 28.76, but intraday drawdown was severe and daily change was -3.61%, triggering the first-3-days sell rule (-3% in first 3 days). Sector 塑料 is not in listed hot sectors, volume was below MAVOL30 (80.4% of average), and market regime is panic with breadth 0.43:1, so timing is wrong and capital should be freed.</td></tr>
+<tr><td>301003</td><td>江苏博云</td><td>2026-04-20</td><td>2026-04-27</td><td class='num'>7</td><td class='num up'>+18.25%</td><td>Price 61.55 remains above entry but has broken below the raised stop 57.26 intraday with low 57.84 nearby, and today collapsed -14.87% after weak 2026Q1 data; position has been held 7 days and momentum character is damaged. Sector 塑料 is not in top hot sectors, so protect capital and exit rather than hope.</td></tr>
+<tr><td>600268</td><td>国电南自</td><td>2026-04-16</td><td>2026-04-24</td><td class='num'>8</td><td class='num down'>-2.27%</td><td>Price 15.06 is only 1.13% above current stop 14.89, down -2.27% vs entry, with weak volume at 40.1% of MAVOL30 and a CRITICAL stop proximity violation. In a panic tape, proactively exit near-stop names rather than wait for a gap through support.</td></tr>
+<tr><td>600498</td><td>烽火通信</td><td>2026-04-16</td><td>2026-04-24</td><td class='num'>8</td><td class='num up'>+8.30%</td><td>Sector 通信设备 is the worst group today at -5.6% and falls in the cold bottom bucket; rule says sector gravity wins. Stock is still above entry (+8.30%) but broke hard today (-5.58%) on a cold-sector unwind, so protect gains and exit.</td></tr>
+<tr><td>300677</td><td>英科医疗</td><td>2026-04-20</td><td>2026-04-20</td><td class='num'>0</td><td class='num down'>-1.20%</td><td>入场当日即从54.20跌至53.55，距当前止损53.02仅0.99%，触发stop_proximity CRITICAL；成交量仅为MAVOL30的67.1%，且医疗器械不在今日top5热点。价格未跌破-3%/3日规则，但V2强调切快，近止损且量能弱，先主动退出避免隔夜跳空。</td></tr>
+<tr><td>600295</td><td>鄂尔多斯</td><td>2026-04-16</td><td>2026-04-20</td><td class='num'>4</td><td class='num down'>-0.53%</td><td>Sector rule overrides: position sector 冶钢原料 is in bottom 5 today and cold. Price also sits only 4.49% above stop and stock is below entry after 4 days, while sector gravity turned negative. Exit rather than hope.</td></tr>
+<tr><td>600499</td><td>科达制造</td><td>2026-04-20</td><td>2026-04-20</td><td class='num'>0</td><td class='num down'>-2.48%</td><td>入场当日从18.13跌至17.68，亏损-2.48%，距止损17.22仅2.6%且成交量仅MAVOL30的78.9%；所在专用设备未进入今日top5热点，且电池为冷板块、储能催化容易受冷板块拖累。未到-3%首三日但已接近，按V2价格优先和近止损规则主动退出。</td></tr>
+<tr><td>605167</td><td>利柏特</td><td>2026-04-07</td><td>2026-04-16</td><td class='num'>9</td><td class='num up'>+9.22%</td><td>Held 9 trading days with only about +9.22% open gain from entry, still below +10% threshold for a fresh stop upgrade, sector 建筑装饰 is not in today&#x27;s hot top list, and latest volume is below MAVOL30 per rule violation. With V2&#x27;s 10-day time stop approaching and momentum confirmation weak after yesterday&#x27;s跌停 reversal, this is a capital-recycling exit rather than waiting for thesis rescue.</td></tr>
+<tr><td>688037</td><td>芯源微</td><td>2026-04-08</td><td>2026-04-16</td><td class='num'>8</td><td class='num up'>+5.68%</td><td>Held 8 trading days and only about +5.68% versus entry, far from the +10% stop-raise trigger. Sector semicap has intraday support from board news, but it is not in supplied top sector leadership, volume is only 73.7% of MAVOL30, and the stock had a heavy down day on 2026-04-15. V2 says weak follow-through within a 10-day window should be cut and re-entered later if strength returns.</td></tr>
+<tr><td>600426</td><td>华鲁恒升</td><td>2026-04-07</td><td>2026-04-08</td><td class='num'>1</td><td class='num up'>+6.89%</td><td>Sector gravity turned negative: position sector 基础化工 aligns with 化学原料 in bottom group today, so despite price staying above stop the setup has lost sector support. Rule 1/sector overlay says cold sector positions should be exited rather than rationalized. Volume is also below MAVOL30, so no momentum confirmation.</td></tr>
+<tr><td>601208</td><td>东材科技</td><td>2026-04-07</td><td>2026-04-08</td><td class='num'>1</td><td class='num up'>+4.25%</td><td>Position is profitable, but sector is no longer in leadership: 基础化工/化学链 is in the market bottom group today. This violates the sector-first overlay. Holding a winner in a cold sector is exactly the V1 mistake. Volume is also only 69.1% of MAVOL30, so follow-through is weaker than the tape suggests.</td></tr>
+<tr><td>688025</td><td>杰普特</td><td>2026-04-01</td><td>2026-04-02</td><td class='num'>1</td><td class='num up'>+3.97%</td><td>Market entry regime is weak (breadth 0.22:1, 0/3 major indices green), 科创50 -2.89%, and the position has already been tightened to breakeven stop after +10%. Rule check also flags CRITICAL stop proximity at 0.0% above stop, so proactive exit is preferred rather than waiting for an exact trigger in a weak tape.</td></tr>
+<tr><td>002121</td><td>科陆电子</td><td>2026-03-10</td><td>2026-03-26</td><td class='num'>16</td><td class='num down'>-15.59%</td><td>Hard stop already violated. Current price 8.23 vs entry 9.75 is -15.59%, far beyond the non-negotiable -5% exit. Sector is not in the hot leadership group and position has also exceeded the 10-day time window without positive progress.</td></tr>
+<tr><td>601615</td><td>明阳智能</td><td>2026-03-12</td><td>2026-03-26</td><td class='num'>14</td><td class='num down'>-20.97%</td><td>Hard stop already violated. Current price 17.41 vs entry 22.03 is -20.97%, well beyond the -5% rule, and days held have reached the 10-day time-stop window with severe underperformance. Sector is not in leadership and no averaging or waiting is justified.</td></tr>
+<tr><td>002046</td><td>国机精工</td><td>2026-03-10</td><td>2026-03-12</td><td class='num'>2</td><td class='num down'>-4.32%</td><td></td></tr>
+<tr><td>002595</td><td>豪迈科技</td><td>2026-03-10</td><td>2026-03-12</td><td class='num'>2</td><td class='num down'>-3.70%</td><td></td></tr>
+<tr><td>600096</td><td>云天化</td><td>2026-02-26</td><td>2026-03-10</td><td class='num'>12</td><td class='num down'>-6.56%</td><td></td></tr>
+<tr><td>300684</td><td>中石科技</td><td>2026-02-10</td><td>2026-03-09</td><td class='num'>27</td><td class='num down'>-6.77%</td><td></td></tr>
+<tr><td>688002</td><td>睿创微纳</td><td>2026-02-03</td><td>2026-03-04</td><td class='num'>29</td><td class='num down'>-4.76%</td><td></td></tr>
+<tr><td>688630</td><td>芯碁微装</td><td>2026-03-02</td><td>2026-03-03</td><td class='num'>1</td><td class='num down'>-7.50%</td><td></td></tr>
+<tr><td>600988</td><td>赤峰黄金</td><td>2026-02-03</td><td>2026-02-27</td><td class='num'>24</td><td class='num up'>+0.50%</td><td></td></tr></tbody>
+  </table>
+
+  <footer>
+    数据来源〔内部数据〕: <code>runs/*/input/positions_snapshot.json</code>（资产曲线）·
+    <code>tracking/positions.json</code>（持仓）· <code>tracking/closed/</code>（历史交易）。
+    重新生成: <code>python3 scripts/build_site.py</code>
+  </footer>
+</div>
+
+<script>
+const DATA = [{"d": "2026-03-05", "e": 968982.0, "r": -3.1, "n": 3}, {"d": "2026-03-06", "e": 968982.0, "r": -3.1, "n": 3}, {"d": "2026-03-09", "e": 982307.0, "r": -1.77, "n": 3}, {"d": "2026-03-10", "e": 971319.0, "r": -2.87, "n": 3}, {"d": "2026-03-11", "e": 970688.0, "r": -2.93, "n": 3}, {"d": "2026-03-12", "e": 968006.0, "r": -3.2, "n": 3}, {"d": "2026-03-13", "e": 963199.0, "r": -3.68, "n": 2}, {"d": "2026-03-26", "e": 962845.0, "r": -3.72, "n": 2}, {"d": "2026-03-27", "e": 952633.0, "r": -4.74, "n": 0}, {"d": "2026-03-31", "e": 952633.0, "r": -4.74, "n": 1}, {"d": "2026-04-01", "e": 952633.0, "r": -4.74, "n": 2}, {"d": "2026-04-02", "e": 955733.0, "r": -4.43, "n": 1}, {"d": "2026-04-03", "e": 951399.0, "r": -4.86, "n": 0}, {"d": "2026-04-06", "e": 951399.0, "r": -4.86, "n": 0}, {"d": "2026-04-07", "e": 951399.0, "r": -4.86, "n": 0}, {"d": "2026-04-08", "e": 958499.0, "r": -4.15, "n": 2}, {"d": "2026-04-09", "e": 960225.0, "r": -3.98, "n": 2}, {"d": "2026-04-10", "e": 961533.0, "r": -3.85, "n": 2}, {"d": "2026-04-12", "e": 961533.0, "r": -3.85, "n": 2}, {"d": "2026-04-13", "e": 961817.0, "r": -3.82, "n": 2}, {"d": "2026-04-14", "e": 966389.0, "r": -3.36, "n": 2}, {"d": "2026-04-15", "e": 963831.0, "r": -3.62, "n": 2}, {"d": "2026-04-16", "e": 962931.0, "r": -3.71, "n": 2}, {"d": "2026-04-20", "e": 966645.0, "r": -3.34, "n": 5}, {"d": "2026-04-21", "e": 964463.0, "r": -3.55, "n": 3}, {"d": "2026-04-22", "e": 964275.0, "r": -3.57, "n": 3}, {"d": "2026-04-23", "e": 968765.0, "r": -3.12, "n": 3}, {"d": "2026-04-24", "e": 967240.0, "r": -3.28, "n": 3}, {"d": "2026-04-27", "e": 966373.0, "r": -3.36, "n": 1}, {"d": "2026-04-28", "e": 965710.0, "r": -3.43, "n": 0}, {"d": "2026-04-29", "e": 965710.0, "r": -3.43, "n": 0}, {"d": "2026-04-30", "e": 965710.0, "r": -3.43, "n": 0}, {"d": "2026-05-01", "e": 965710.0, "r": -3.43, "n": 0}, {"d": "2026-05-04", "e": 965710.0, "r": -3.43, "n": 0}, {"d": "2026-05-05", "e": 965710.0, "r": -3.43, "n": 0}, {"d": "2026-05-06", "e": 965710.0, "r": -3.43, "n": 0}, {"d": "2026-05-07", "e": 965710.0, "r": -3.43, "n": 0}, {"d": "2026-05-08", "e": 965710.0, "r": -3.43, "n": 0}, {"d": "2026-05-11", "e": 965710.0, "r": -3.43, "n": 0}, {"d": "2026-05-12", "e": 965710.0, "r": -3.43, "n": 0}, {"d": "2026-05-13", "e": 965710.0, "r": -3.43, "n": 0}, {"d": "2026-05-14", "e": 965710.0, "r": -3.43, "n": 0}, {"d": "2026-05-15", "e": 965710.0, "r": -3.43, "n": 0}, {"d": "2026-05-18", "e": 965710.0, "r": -3.43, "n": 0}, {"d": "2026-05-19", "e": 965710.0, "r": -3.43, "n": 0}, {"d": "2026-05-20", "e": 965558.0, "r": -3.44, "n": 1}, {"d": "2026-05-21", "e": 965742.0, "r": -3.43, "n": 0}, {"d": "2026-05-22", "e": 965742.0, "r": -3.43, "n": 1}, {"d": "2026-05-25", "e": 966434.0, "r": -3.36, "n": 1}, {"d": "2026-05-26", "e": 966302.0, "r": -3.37, "n": 1}, {"d": "2026-05-27", "e": 966982.0, "r": -3.3, "n": 0}, {"d": "2026-05-28", "e": 966982.0, "r": -3.3, "n": 0}, {"d": "2026-05-29", "e": 966982.0, "r": -3.3, "n": 0}, {"d": "2026-06-01", "e": 966982.0, "r": -3.3, "n": 0}, {"d": "2026-06-02", "e": 966982.0, "r": -3.3, "n": 0}, {"d": "2026-06-03", "e": 966982.0, "r": -3.3, "n": 0}, {"d": "2026-06-04", "e": 966982.0, "r": -3.3, "n": 0}, {"d": "2026-06-05", "e": 966982.0, "r": -3.3, "n": 0}, {"d": "2026-06-08", "e": 966982.0, "r": -3.3, "n": 0}, {"d": "2026-06-09", "e": 966982.0, "r": -3.3, "n": 0}, {"d": "2026-06-10", "e": 966982.0, "r": -3.3, "n": 5}, {"d": "2026-06-11", "e": 967805.0, "r": -3.22, "n": 3}, {"d": "2026-06-12", "e": 968462.0, "r": -3.15, "n": 4}, {"d": "2026-06-15", "e": 966480.0, "r": -3.35, "n": 4}, {"d": "2026-06-16", "e": 974166.0, "r": -2.58, "n": 5}, {"d": "2026-06-17", "e": 978925.0, "r": -2.11, "n": 5}, {"d": "2026-06-18", "e": 981649.0, "r": -1.84, "n": 5}, {"d": "2026-06-19", "e": 982700.0, "r": -1.73, "n": 5}, {"d": "2026-06-22", "e": 982951.0, "r": -1.7, "n": 5}, {"d": "2026-06-23", "e": 979606.0, "r": -2.04, "n": 4}, {"d": "2026-06-24", "e": 984127.0, "r": -1.59, "n": 3}, {"d": "2026-06-25", "e": 984669.0, "r": -1.53, "n": 3}, {"d": "2026-06-26", "e": 986177.0, "r": -1.38, "n": 3}, {"d": "2026-06-29", "e": 992999.0, "r": -0.7, "n": 2}, {"d": "2026-06-30", "e": 992933.0, "r": -0.71, "n": 2}, {"d": "2026-07-01", "e": 992390.0, "r": -0.76, "n": 3}, {"d": "2026-07-02", "e": 988002.0, "r": -1.2, "n": 0}, {"d": "2026-07-03", "e": 988002.0, "r": -1.2, "n": 2}, {"d": "2026-07-06", "e": 985757.0, "r": -1.42, "n": 1}, {"d": "2026-07-07", "e": 986237.0, "r": -1.38, "n": 1}, {"d": "2026-07-08", "e": 985121.0, "r": -1.49, "n": 0}, {"d": "2026-07-09", "e": 985121.0, "r": -1.49, "n": 0}, {"d": "2026-07-10", "e": 985121.0, "r": -1.49, "n": 2}, {"d": "2026-07-13", "e": 979809.0, "r": -2.02, "n": 0}, {"d": "2026-07-14", "e": 979809.0, "r": -2.02, "n": 0}, {"d": "2026-07-15", "e": 956221.0, "r": -4.38, "n": 0}, {"d": "2026-07-16", "e": 956221.0, "r": -4.38, "n": 0}, {"d": "2026-07-17", "e": 956221.0, "r": -4.38, "n": 0}, {"d": "2026-07-20", "e": 956221.0, "r": -4.38, "n": 0}, {"d": "2026-07-21", "e": 956221.0, "r": -4.38, "n": 0}, {"d": "2026-07-22", "e": 956221.0, "r": -4.38, "n": 0}, {"d": "2026-07-23", "e": 956221.0, "r": -4.38, "n": 0}, {"d": "2026-07-24", "e": 954471.0, "r": -4.55, "n": 1}, {"d": "2026-07-27", "e": 953837.0, "r": -4.62, "n": 4}, {"d": "2026-07-28", "e": 945462.0, "r": -5.45, "n": 1}, {"d": "2026-07-29", "e": 945970.0, "r": -5.4, "n": 0}, {"d": "2026-07-30", "e": 940855.0, "r": -5.91, "n": 1}, {"d": "2026-07-31", "e": 941655.0, "r": -5.83, "n": 4}, {"d": "2026-08-03", "e": 947110.0, "r": -5.29, "n": 3}, {"d": "2026-08-04", "e": 959813.0, "r": -4.02, "n": 6}, {"d": "2026-08-05", "e": 959813.0, "r": -4.02, "n": 7}, {"d": "2026-08-06", "e": 964319.0, "r": -3.57, "n": 9}];
+const STARTING = 1000000;
+(function() {
+  const svg = document.getElementById("chart"), tip = document.getElementById("tip");
+  if (!DATA.length) { svg.outerHTML = "<div class='empty'>暂无快照数据</div>"; return; }
+  const W = 960, H = 340, L = 74, R = 16, T = 16, B = 34;
+  const iw = W - L - R, ih = H - T - B;
+  const es = DATA.map(p => p.e);
+  let lo = Math.min(...es, STARTING), hi = Math.max(...es, STARTING);
+  const pad = (hi - lo) * 0.06 || 1; lo -= pad; hi += pad;
+  const x = i => L + (DATA.length === 1 ? iw / 2 : i * iw / (DATA.length - 1));
+  const y = v => T + (hi - v) / (hi - lo) * ih;
+  const S = [];
+  // gridlines + y labels
+  for (let g = 0; g <= 4; g++) {
+    const v = lo + (hi - lo) * g / 4, yy = y(v);
+    S.push(`<line x1="${L}" y1="${yy}" x2="${W - R}" y2="${yy}" stroke="#eef1f5"/>`);
+    S.push(`<text x="${L - 8}" y="${yy + 4}" text-anchor="end" font-size="11" fill="#8a93a2">${Math.round(v).toLocaleString()}</text>`);
+  }
+  // x labels: ~8 ticks
+  const step = Math.max(1, Math.round(DATA.length / 8));
+  for (let i = 0; i < DATA.length; i += step) {
+    S.push(`<text x="${x(i)}" y="${H - 10}" text-anchor="middle" font-size="11" fill="#8a93a2">${DATA[i].d.slice(5)}</text>`);
+  }
+  // baseline
+  S.push(`<line x1="${L}" y1="${y(STARTING)}" x2="${W - R}" y2="${y(STARTING)}" stroke="#9aa3b2" stroke-dasharray="5 4"/>`);
+  // area + line (blue neutral line; fill tinted by end-vs-start)
+  const pts = DATA.map((p, i) => `${x(i).toFixed(1)},${y(p.e).toFixed(1)}`).join(" ");
+  const last = DATA[DATA.length - 1].e;
+  const tone = last >= STARTING ? "212,58,58" : "26,156,98";
+  S.push(`<polygon points="${L},${y(STARTING)} ${pts} ${x(DATA.length - 1)},${y(STARTING)}" fill="rgba(${tone},0.07)"/>`);
+  S.push(`<polyline points="${pts}" fill="none" stroke="#3b6ea5" stroke-width="2"/>`);
+  S.push(`<circle id="dot" r="4" fill="#3b6ea5" stroke="#fff" stroke-width="1.5" style="display:none"/>`);
+  S.push(`<line id="guide" y1="${T}" y2="${T + ih}" stroke="#c3cad4" stroke-dasharray="3 3" style="display:none"/>`);
+  svg.innerHTML = S.join("");
+  const dot = svg.querySelector("#dot"), guide = svg.querySelector("#guide");
+  svg.addEventListener("mousemove", ev => {
+    const r = svg.getBoundingClientRect();
+    const mx = (ev.clientX - r.left) * W / r.width;
+    let i = Math.round((mx - L) / (iw / Math.max(DATA.length - 1, 1)));
+    i = Math.max(0, Math.min(DATA.length - 1, i));
+    const p = DATA[i];
+    dot.setAttribute("cx", x(i)); dot.setAttribute("cy", y(p.e)); dot.style.display = "";
+    guide.setAttribute("x1", x(i)); guide.setAttribute("x2", x(i)); guide.style.display = "";
+    tip.style.display = "block";
+    tip.style.left = (ev.clientX + 14) + "px"; tip.style.top = (ev.clientY - 12) + "px";
+    const ret = p.r == null ? "" : ` · ${p.r >= 0 ? "+" : ""}${p.r}%`;
+    tip.textContent = `${p.d} · ${p.e.toLocaleString()}${ret} · ${p.n ?? "?"}仓`;
+  });
+  svg.addEventListener("mouseleave", () => {
+    dot.style.display = "none"; guide.style.display = "none"; tip.style.display = "none";
+  });
+})();
+</script>
+</body>
+</html>
