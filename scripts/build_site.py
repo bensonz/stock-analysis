@@ -58,7 +58,8 @@ def _snapshot_point(path: Path):
         if not pf.get("startingCapital"):
             return None
         holdings = [
-            {"c": p.get("code", ""), "n": p.get("name", ""), "p": p.get("pnl_pct")}
+            {"c": p.get("code", ""), "n": p.get("name", ""), "p": p.get("pnl_pct"),
+             "v": p.get("currentValue"), "w": p.get("weight_pct")}
             for p in (pj.get("activePositions") or [])
         ]
         return {
@@ -129,9 +130,31 @@ def _trunc(text, limit=NOTE_MAX) -> str:
     return text if len(text) <= limit else text[: limit - 1] + "…"
 
 
-def collect_day_details(series: list[dict], trades: list[dict]) -> dict:
+def build_open_lookup(active: dict, trades: list[dict]) -> dict:
+    """(code, entryDate) → sizing facts, so OPEN actions can show how much
+    was bought. Sources: current positions + closed position files (both
+    carry shares/allocatedCapital written at open time)."""
+    lookup = {}
+    for p in list(active.get("activePositions") or []) + list(trades):
+        code = str(p.get("code", "")).split(".")[0]
+        if code and p.get("entryDate"):
+            lookup[(code, p["entryDate"])] = {
+                "sh": p.get("shares"), "amt": p.get("allocatedCapital"),
+                "ap": p.get("allocation_pct"),
+            }
+    return lookup
+
+
+OPEN_ACTIONS = {"OPEN", "BUY", "ADD"}
+
+
+def collect_day_details(series: list[dict], trades: list[dict],
+                        open_lookup: dict | None = None) -> dict:
     """Per-date payload for the hover side panel. day_pnl is the delta vs the
-    PREVIOUS REAL snapshot (labeled 较上一快照 in the UI — gaps happen)."""
+    PREVIOUS REAL snapshot (labeled 较上一快照 in the UI — gaps happen).
+    NOTE: snapshots are taken at run START, so a day's OPEN actions only show
+    up in holdings from the next snapshot — the UI labels this."""
+    open_lookup = open_lookup or {}
     closed_by_date = {}
     for t in trades:
         closed_by_date.setdefault(t.get("exitDate"), []).append(
@@ -161,12 +184,16 @@ def collect_day_details(series: list[dict], trades: list[dict]) -> dict:
             try:
                 summary = _read_json(summary_path)
                 for a in summary.get("actions", []) or []:
-                    det["actions"].append({
-                        "c": a.get("code", ""), "n": a.get("name", ""),
+                    code = str(a.get("code", "") or "").split(".")[0]
+                    act = {
+                        "c": code, "n": a.get("name", ""),
                         "a": str(a.get("action", "") or "").upper(),
                         "p": a.get("price"), "r": a.get("pnl_pct"),
                         "note": _trunc(a.get("note")),
-                    })
+                    }
+                    if act["a"] in OPEN_ACTIONS:
+                        act.update(open_lookup.get((code, d), {}))
+                    det["actions"].append(act)
             except Exception:
                 pass
         details[d] = det
@@ -377,22 +404,34 @@ const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;
 // ---------------- side panel
 const dayEl = document.getElementById("day");
 let pinned = null;
+let latestDay = null;
 const ACTION_CN = {OPEN:"开", BUY:"开", SELL:"平", ADD:"加", TRIM:"减", HOLD:"持"};
+const OPENS = {OPEN:1, BUY:1, ADD:1};
+function unpin() { pinned = null; if (latestDay) renderDay(latestDay); }
 function renderDay(d) {
   const det = DETAILS[d];
   if (!det) { dayEl.innerHTML = `<div class='d-date'>${esc(d)}</div><div class='note'>无记录</div>`; return; }
-  let h = `<div class="d-date">${esc(d)} <span class="chip">${esc(det.slot)}</span>${pinned ? " 📌" : ""}</div>`;
+  const pinBtn = pinned ? ` <button id="unpin" title="取消固定 (Esc)">📌 ✕</button>` : "";
+  let h = `<div class="d-date">${esc(d)} <span class="chip">${esc(det.slot)}</span>${pinBtn}</div>`;
   h += `<div class="d-equity">${fmtM(det.equity)}</div>`;
   const dp = det.day_pnl;
   h += `<div class="d-sub"><span class="${pnlCls(dp)}">${dp == null ? "—" : sign(dp) + fmtM(dp)}</span> 较上一快照`
      + ` · 累计 <span class="${pnlCls(det.ret)}">${det.ret == null ? "—" : sign(det.ret) + det.ret + "%"}</span></div>`;
   const trades = (det.actions || []).filter(a => a.a !== "HOLD");
+  const hasOpens = trades.some(a => OPENS[a.a]);
   if (trades.length) {
     h += `<h4>当日交易</h4>`;
     for (const a of trades) {
+      let size = "";
+      if (a.sh) {
+        size = `<div class="d-size">${a.sh.toLocaleString()}股`
+             + (a.amt ? ` ≈ ${fmtM(a.amt)}` : "")
+             + (a.ap ? ` · ${a.ap}%仓位` : "") + `</div>`;
+      }
       h += `<div class="d-act"><span class="badge b-${a.a === "SELL" ? "sell" : "open"}">${ACTION_CN[a.a] || esc(a.a)}</span>`
          + ` <b>${esc(a.n)}</b> <span class="muted">${a.p ?? ""}</span>`
          + ` <span class="${pnlCls(a.r)}">${a.r == null ? "" : sign(a.r) + a.r + "%"}</span>`
+         + size
          + `<div class="d-note">${esc(a.note)}</div></div>`;
     }
   }
@@ -404,18 +443,23 @@ function renderDay(d) {
     }
   }
   if (det.holdings && det.holdings.length) {
-    h += `<h4>持仓 (${det.holdings.length})</h4>`;
+    h += `<h4>持仓 (${det.holdings.length}) <span class="mini">快照=当次运行开始时点</span></h4>`;
     const holdNotes = {};
     for (const a of (det.actions || [])) if (a.a === "HOLD") holdNotes[a.c] = a.note;
     for (const p of det.holdings) {
+      const size = p.v != null ? `<span class="muted">${fmtM(p.v)}${p.w != null ? ` (${p.w}%)` : ""}</span> ` : "";
       h += `<div class="d-row" title="${esc(holdNotes[p.c] || "")}"><span>${esc(p.n)} <span class="muted">${esc(p.c)}</span></span>`
-         + `<span class="${pnlCls(p.p)}">${p.p == null ? "—" : sign(p.p) + p.p + "%"}</span></div>`;
+         + `<span>${size}<span class="${pnlCls(p.p)}">${p.p == null ? "—" : sign(p.p) + p.p + "%"}</span></span></div>`;
     }
-  } else if (!trades.length) {
-    h += `<div class="note" style="margin-top:8px">空仓 · 无操作</div>`;
+  } else {
+    h += `<div class="note" style="margin-top:8px">空仓 · 100%现金`
+       + (hasOpens ? " — 当日开仓于下一快照计入持仓" : "") + `</div>`;
   }
   dayEl.innerHTML = h;
+  const btn = document.getElementById("unpin");
+  if (btn) btn.addEventListener("click", unpin);
 }
+document.addEventListener("keydown", ev => { if (ev.key === "Escape" && pinned) unpin(); });
 
 // ---------------- charts
 (function() {
@@ -511,7 +555,8 @@ function renderDay(d) {
     dot.style.display = "none"; guide.style.display = "none"; tip.style.display = "none";
     if (!pinned) renderDay(DATA[DATA.length - 1].d);
   });
-  renderDay(DATA[DATA.length - 1].d);
+  latestDay = DATA[DATA.length - 1].d;
+  renderDay(latestDay);
 })();
 """
 
@@ -660,7 +705,12 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
   .d-sub {{ font-size:12.5px; color:var(--muted); }}
   .d-row {{ display:flex; justify-content:space-between; padding:3px 0; font-size:13px; }}
   .d-act {{ margin:7px 0; font-size:13px; }}
+  .d-size {{ font-size:12px; color:var(--fg); margin:1px 0 0 2px; font-variant-numeric:tabular-nums; }}
   .d-note {{ color:var(--muted); font-size:12px; margin:2px 0 0 2px; }}
+  .mini {{ font-weight:400; font-size:10.5px; color:var(--muted); }}
+  #unpin {{ border:1px solid var(--line); background:#fff; border-radius:6px; padding:1px 8px;
+            font-size:11.5px; cursor:pointer; color:var(--muted); }}
+  #unpin:hover {{ background:#f2f4f7; }}
   .badge {{ display:inline-block; border-radius:4px; padding:0 6px; font-size:11.5px; color:#fff; }}
   .b-open {{ background:var(--up); }} .b-sell {{ background:#4a5568; }}
   .muted {{ color:var(--muted); }}
@@ -754,7 +804,7 @@ def build(site_dir: Path = SITE_DIR) -> Path:
     active = load_active()
     trades = load_closed_trades()
     stats = compute_stats(series, trades)
-    details = collect_day_details(series, trades)
+    details = collect_day_details(series, trades, build_open_lookup(active, trades))
     starting = (series[0].get("starting") if series else None) or 1000000
     index_rebased = rebase_index(load_index_closes(),
                                  [p["date"] for p in series], float(starting))

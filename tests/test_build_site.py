@@ -109,14 +109,29 @@ def test_day_details_join(tmp_path):
     series = bs.collect_equity_series(runs)
     trades = [{"code": "600988", "name": "赤峰黄金", "exitDate": "2026-08-06",
                "returnPct": -5.2, "exitReason": "stop_hit"}]
-    details = bs.collect_day_details(series, trades)
+    lookup = {("603259", "2026-08-06"): {"sh": 800, "amt": 101200.0, "ap": 10}}
+    details = bs.collect_day_details(series, trades, lookup)
     d = details["2026-08-06"]
     assert d["day_pnl"] == 4319.0            # vs previous real snapshot
     assert d["slot"] == "午盘"
     assert len(d["actions"]) == 2
     assert len(d["actions"][0]["note"]) == bs.NOTE_MAX  # truncated
+    open_act = d["actions"][1]
+    assert (open_act["sh"], open_act["amt"]) == (800, 101200.0)  # sizing joined
+    assert "sh" not in d["actions"][0]       # HOLD rows untouched
     assert d["closed"][0]["c"] == "600988"
     assert details["2026-08-05"]["day_pnl"] is None  # no prior snapshot
+
+
+def test_open_lookup_from_active_and_closed():
+    active = {"activePositions": [
+        {"code": "603259", "entryDate": "2026-07-31", "shares": 800,
+         "allocatedCapital": 101200.0, "allocation_pct": 10}]}
+    trades = [{"code": "600988.SH", "entryDate": "2026-07-01", "shares": 5000,
+               "allocatedCapital": 99500.0}]
+    lk = bs.build_open_lookup(active, trades)
+    assert lk[("603259", "2026-07-31")]["sh"] == 800
+    assert lk[("600988", "2026-07-01")]["amt"] == 99500.0  # suffix stripped
 
 
 def test_rebase_index_forward_fills_holidays():
