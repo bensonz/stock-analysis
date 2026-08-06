@@ -519,6 +519,48 @@ def test_internal_segment_never_starts_mid_link():
     assert not (link_start < internal["span"][0] < link_end)
 
 
+def test_tag_guard_annotates_data_backed_naked_numbers():
+    # 2026-08-07 (601168): DATA-backed numbers missing their tag were scrubbed
+    # into adjectives. The guard must tag them instead — and the tagged text
+    # must extract as verified-able internal claims.
+    text = "归母净利41.69亿元，同比+123%。当日涨幅2.07%。"
+    data_numbers = {"41.69", "123", "2.07"}
+    out, n = dv._tag_naked_data_numbers(text, data_numbers)
+    assert n >= 1
+    assert dv.TAG in out
+    assert "41.69" in out and "123" in out          # numbers survived
+    assert not [c for c in dv.extract_claims(out) if c["kind"] == "naked"]
+    for c in (c for c in dv.extract_claims(out) if c["kind"] == "internal"):
+        assert dv.internal_numbers_match(c["numbers"], data_numbers)
+
+
+def test_tag_guard_refuses_to_cover_unmatched_neighbours():
+    # 90.5 is NOT in DATA and sits BEFORE 41.69 in the same segment — a tag
+    # after 41.69 would smuggle it through as verified. Must refuse.
+    text = "市占率90.5%、净利41.69亿元共振。"
+    out, n = dv._tag_naked_data_numbers(text, {"41.69"})
+    assert n == 0
+    assert out == text  # untouched — stays on the revise/cleanup path
+    # unmatched AFTER the matched number is safe: the tag only covers backwards
+    out2, n2 = dv._tag_naked_data_numbers("净利41.69亿元、市占率90.5%共振。", {"41.69"})
+    assert n2 == 1
+    naked_left = [c for c in dv.extract_claims(out2) if c["kind"] == "naked"]
+    assert [c["numbers"][0] for c in naked_left] == ["90.5%"]  # still failing, not smuggled
+
+
+def test_verify_claims_rescues_naked_data_matches():
+    text = "归母净利41.69亿元。神秘数字77.77%。"
+    claims = dv.extract_claims(text)
+    naked = [c for c in claims if c["kind"] == "naked"]
+    assert len(naked) == 2
+    rescued_or_failed = dv.verify_claims(
+        claims, {"41.69"}, {}, spec_verify="", judge_runner=None,
+        fetch=lambda url: "", cache={})
+    by_num = {c["numbers"][0]: c for c in claims}
+    assert by_num["41.69亿元"]["status"] == "verified"     # rescued as internal
+    assert by_num["77.77%"]["status"] == "failed"          # still naked-failed
+
+
 def test_verification_footer_counts():
     f = dv.verification_footer({"total": 45, "verified_linked": 37,
                                 "verified_internal": 6, "rewritten_qualitative": 2,

@@ -461,11 +461,20 @@ def verify_claims(claims: list, data_numbers: set, data: dict, *, spec_verify: s
     fetches = []
     judge_in = judge_out = 0
 
-    # Naked numbers fail mechanically — missing link/tag.
+    # Naked numbers: a number whose values all match the internal DATA corpus
+    # is an internal claim missing its tag — a formatting lapse, not a lie.
+    # Verify it as internal (2026-08-07: the 601168 run hard-failed 58 such
+    # claims, overloaded the revise pass into degenerate output, and the
+    # cleanup scrubbed the report into adjectives); the missing tag itself is
+    # added mechanically by _tag_naked_data_numbers at pipeline end. Numbers
+    # matching nothing still fail mechanically.
     for c in claims:
         if c["kind"] == "naked":
-            c["status"] = "failed"
-            c["reason"] = "数字缺少引用链接或〖内部数据〗标注"
+            if c["numbers"] and internal_numbers_match(c["numbers"], data_numbers):
+                c["kind"] = "internal"
+            else:
+                c["status"] = "failed"
+                c["reason"] = "数字缺少引用链接或〖内部数据〗标注"
 
     # Internal: mechanical match first — BEFORE the cache. The DATA corpus can
     # grow mid-pipeline (revise passes fetch peer fundamentals via the
@@ -591,6 +600,49 @@ def build_revise_prompt(spec_writer: str, draft: str, failed: list,
         + json.dumps(data_slim, ensure_ascii=False, indent=1)
         + "\n```\n"
     )
+
+
+def _seg_start_for(text: str, pos: int) -> int:
+    """Segment start exactly as extract_claims computes it for a tag at pos."""
+    seg_start = 0
+    for b in _SEG_BOUNDARY_RE.finditer(text, max(0, pos - 80), pos):
+        seg_start = b.end()
+    return max(seg_start, pos - 80)
+
+
+def _tag_naked_data_numbers(text: str, data_numbers: set) -> tuple:
+    """Mechanically append 〖内部数据〗 after naked numbers whose values all
+    match the internal DATA corpus (2026-08-07: labeling lapses must not get
+    true numbers scrubbed). A tag is only inserted when EVERY naked number in
+    the segment it would cover also matches — no smuggling an unverified
+    neighbour under a true tag. Returns (text, tags_inserted)."""
+    total = 0
+    for _ in range(4):  # insertions shift offsets → re-extract until stable
+        claims = extract_claims(text)
+        naked = [c for c in claims if c["kind"] == "naked"]
+        matched = {id(c) for c in naked
+                   if c["numbers"] and internal_numbers_match(c["numbers"], data_numbers)}
+        candidates = [c for c in naked if id(c) in matched]
+        if not candidates:
+            break
+        inserted = []
+        claimed_from = None  # left edge of the last (rightmost-first) segment
+        for c in sorted(candidates, key=lambda c: -c["span"][1]):
+            pos = c["span"][1]
+            if claimed_from is not None and pos > claimed_from:
+                continue  # already covered by a tag scheduled to its right
+            seg = _seg_start_for(text, pos)
+            in_seg = [o for o in naked if seg <= o["span"][0] and o["span"][1] <= pos]
+            if any(id(o) not in matched for o in in_seg):
+                continue  # an unverified number would ride under this tag
+            inserted.append(pos)
+            claimed_from = seg
+        if not inserted:
+            break
+        for pos in inserted:  # already descending
+            text = text[:pos] + TAG + text[pos:]
+        total += len(inserted)
+    return text, total
 
 
 def build_cleanup_prompt(draft: str, failed: list) -> str:
@@ -726,11 +778,33 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
         revised, _tin, _tout, _rr = revise_runner(
             build_revise_prompt(spec_writer, text, failed, _slim(data), rnd, max_rounds))
         revised = strip_preamble(revised or "")
+        if not revised or len(revised) < 0.4 * len(text):
+            # One retry on a fresh conversation before giving up — a single
+            # truncated/empty revision must not condemn the report to the
+            # qualitative scrubber (2026-08-07, 601168).
+            log("revise pass degenerate — retrying once")
+            revised, _tin, _tout, _rr = revise_runner(
+                build_revise_prompt(spec_writer, text, failed, _slim(data), rnd, max_rounds))
+            revised = strip_preamble(revised or "")
         if revised and len(revised) >= 0.4 * len(text):
             text = revised
-        else:  # garbage/empty revision: keep draft, skip to cleanup
+        else:  # garbage/empty revision twice: keep draft, skip to cleanup
             log("revise pass returned degenerate output; skipping to cleanup")
             break
+
+    # Mechanical tag guard: DATA-backed naked numbers get their missing
+    # 〖内部数据〗 tag appended, then re-verify (cache + mechanical match —
+    # no writer involvement) so downstream spans see the final text.
+    data_numbers = flatten_data_numbers(data)
+    text, tagged = _tag_naked_data_numbers(text, data_numbers)
+    if tagged:
+        log(f"tag guard: annotated {tagged} DATA-backed naked numbers")
+        audit["cleanup"]["tag_guard"] = tagged
+        claims = extract_claims(text)
+        rec = verify_claims(claims, data_numbers, data, spec_verify=spec_verify,
+                            judge_runner=judge_runner, fetch=fetch, cache=cache)
+        rec["round"] = "tag_guard"
+        audit["rounds"].append(rec)
 
     failed = _failed(claims)
     if failed:
@@ -770,6 +844,11 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
 
         total_fallbacks = 0
         for _pass in range(4):
+            # cleanup output can reintroduce naked-but-DATA-backed numbers;
+            # tag them rather than scrub them
+            text, t2 = _tag_naked_data_numbers(text, data_numbers)
+            if t2:
+                audit["cleanup"]["tag_guard"] = audit["cleanup"].get("tag_guard", 0) + t2
             claims = extract_claims(text)
             residual = _classify(claims)
             if not residual:
