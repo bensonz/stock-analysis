@@ -58,6 +58,16 @@ def test_series_skips_broken_and_empty_snapshots(tmp_path):
     assert [p["date"] for p in series] == ["2026-04-03"]
 
 
+def test_inception_anchor_from_config(tmp_path):
+    (tmp_path / "portfolio_config.json").write_text(json.dumps({
+        "starting_capital": 1000000, "created": "2026-02-03"}), encoding="utf-8")
+    p = bs.inception_point(tmp_path)
+    assert p == {"date": "2026-02-03", "time": "", "equity": 1000000.0,
+                 "ret_pct": 0.0, "positions": 0, "starting": 1000000,
+                 "synthetic": True}
+    assert bs.inception_point(tmp_path / "nope") is None
+
+
 def test_max_drawdown():
     series = [{"equity": e} for e in [100.0, 110.0, 99.0, 105.0]]
     stats = bs.compute_stats(series, [])

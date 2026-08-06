@@ -82,6 +82,22 @@ def collect_equity_series(runs_dir: Path = RUNS_DIR) -> list[dict]:
     return series
 
 
+def inception_point(tracking_dir: Path = TRACKING_DIR) -> dict | None:
+    """The one pre-snapshot fact we can state: at portfolio creation
+    (portfolio_config.created) equity was exactly starting_capital."""
+    try:
+        cfg = _read_json(tracking_dir / "portfolio_config.json")
+        created = cfg.get("created")
+        starting = cfg.get("starting_capital")
+        if created and starting:
+            return {"date": created, "time": "", "equity": float(starting),
+                    "ret_pct": 0.0, "positions": 0, "starting": starting,
+                    "synthetic": True}
+    except Exception:
+        pass
+    return None
+
+
 def load_active(tracking_dir: Path = TRACKING_DIR) -> dict:
     try:
         return _read_json(tracking_dir / "positions.json")
@@ -150,7 +166,8 @@ def render_html(series, active, trades, stats, generated_at=None) -> str:
     generated_at = generated_at or datetime.now().astimezone().isoformat(timespec="seconds")
 
     chart_data = [
-        {"d": p["date"], "e": round(p["equity"], 0), "r": p.get("ret_pct"), "n": p.get("positions")}
+        {"d": p["date"], "e": round(p["equity"], 0), "r": p.get("ret_pct"),
+         "n": p.get("positions"), **({"s": 1} if p.get("synthetic") else {})}
         for p in series if isinstance(p.get("equity"), (int, float))
     ]
     starting = (series[-1].get("starting") if series else None) or pf.get("startingCapital") or 1000000
@@ -255,7 +272,7 @@ def render_html(series, active, trades, stats, generated_at=None) -> str:
   <h2>每日总资产</h2>
   <div class="panel">
     <svg id="chart" viewBox="0 0 960 340" preserveAspectRatio="xMidYMid meet"></svg>
-    <div class="note">每个交易日取当日最后一次流水线快照的 totalEquity；虚线 = 初始资金 {_fmt_money(starting)}。</div>
+    <div class="note">每个交易日取当日最后一次流水线快照的 totalEquity；水平虚线 = 初始资金 {_fmt_money(starting)}。曲线首点为组合起始日（portfolio_config.created，等于初始资金）；起始日至首个每日快照之间无逐日数据，以斜虚线段直连示意。</div>
   </div>
   <div id="tip"></div>
 
@@ -309,12 +326,19 @@ const STARTING = {json.dumps(starting)};
   }}
   // baseline
   S.push(`<line x1="${{L}}" y1="${{y(STARTING)}}" x2="${{W - R}}" y2="${{y(STARTING)}}" stroke="#9aa3b2" stroke-dasharray="5 4"/>`);
-  // area + line (blue neutral line; fill tinted by end-vs-start)
+  // area + line (blue neutral line; fill tinted by end-vs-start).
+  // A leading synthetic inception point (p.s) gets a DASHED connector —
+  // there are no daily snapshots between inception and the first real one.
   const pts = DATA.map((p, i) => `${{x(i).toFixed(1)}},${{y(p.e).toFixed(1)}}`).join(" ");
   const last = DATA[DATA.length - 1].e;
   const tone = last >= STARTING ? "212,58,58" : "26,156,98";
   S.push(`<polygon points="${{L}},${{y(STARTING)}} ${{pts}} ${{x(DATA.length - 1)}},${{y(STARTING)}}" fill="rgba(${{tone}},0.07)"/>`);
-  S.push(`<polyline points="${{pts}}" fill="none" stroke="#3b6ea5" stroke-width="2"/>`);
+  const solidFrom = (DATA[0].s && DATA.length > 1) ? 1 : 0;
+  if (solidFrom) {{
+    S.push(`<line x1="${{x(0)}}" y1="${{y(DATA[0].e)}}" x2="${{x(1)}}" y2="${{y(DATA[1].e)}}" stroke="#3b6ea5" stroke-width="2" stroke-dasharray="6 5"/>`);
+  }}
+  const solidPts = DATA.slice(solidFrom).map((p, i) => `${{x(i + solidFrom).toFixed(1)}},${{y(p.e).toFixed(1)}}`).join(" ");
+  S.push(`<polyline points="${{solidPts}}" fill="none" stroke="#3b6ea5" stroke-width="2"/>`);
   S.push(`<circle id="dot" r="4" fill="#3b6ea5" stroke="#fff" stroke-width="1.5" style="display:none"/>`);
   S.push(`<line id="guide" y1="${{T}}" y2="${{T + ih}}" stroke="#c3cad4" stroke-dasharray="3 3" style="display:none"/>`);
   svg.innerHTML = S.join("");
@@ -329,8 +353,12 @@ const STARTING = {json.dumps(starting)};
     guide.setAttribute("x1", x(i)); guide.setAttribute("x2", x(i)); guide.style.display = "";
     tip.style.display = "block";
     tip.style.left = (ev.clientX + 14) + "px"; tip.style.top = (ev.clientY - 12) + "px";
-    const ret = p.r == null ? "" : ` · ${{p.r >= 0 ? "+" : ""}}${{p.r}}%`;
-    tip.textContent = `${{p.d}} · ${{p.e.toLocaleString()}}${{ret}} · ${{p.n ?? "?"}}仓`;
+    if (p.s) {{
+      tip.textContent = `${{p.d}} · ${{p.e.toLocaleString()}} · 组合起始(初始资金)`;
+    }} else {{
+      const ret = p.r == null ? "" : ` · ${{p.r >= 0 ? "+" : ""}}${{p.r}}%`;
+      tip.textContent = `${{p.d}} · ${{p.e.toLocaleString()}}${{ret}} · ${{p.n ?? "?"}}仓`;
+    }}
   }});
   svg.addEventListener("mouseleave", () => {{
     dot.style.display = "none"; guide.style.display = "none"; tip.style.display = "none";
@@ -344,6 +372,9 @@ const STARTING = {json.dumps(starting)};
 
 def build(site_dir: Path = SITE_DIR) -> Path:
     series = collect_equity_series()
+    anchor = inception_point()
+    if anchor and (not series or anchor["date"] < series[0]["date"]):
+        series.insert(0, anchor)
     active = load_active()
     trades = load_closed_trades()
     stats = compute_stats(series, trades)
