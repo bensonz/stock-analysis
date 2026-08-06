@@ -1,10 +1,10 @@
 {
   "date": "2026-08-06",
   "slot": "noon",
-  "run_started_at": "2026-08-06T11:51:46.229015+08:00",
+  "run_started_at": "2026-08-06T11:52:31.954757+08:00",
   "status": "degraded",
   "exit_code": 0,
-  "total_duration_sec": 236.7,
+  "total_duration_sec": 251.7,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -12,11 +12,11 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 153.8
+          "latency_ms": 104.2
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 283.9
+          "latency_ms": 314.1
         },
         "pricedb": {
           "status": "ok",
@@ -33,16 +33,16 @@
     },
     "collect": {
       "status": "ok",
-      "duration_sec": 75.1,
+      "duration_sec": 31.7,
       "errors": []
     },
     "llm_analysis": {
       "status": "ok",
-      "duration_sec": 161.4
+      "duration_sec": 219.7
     },
     "apply": {
       "status": "ok",
-      "duration_sec": 0.2
+      "duration_sec": 0.3
     },
     "validate": {
       "status": "warnings",
