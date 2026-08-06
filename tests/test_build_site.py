@@ -64,7 +64,7 @@ def test_inception_anchor_from_config(tmp_path):
     p = bs.inception_point(tmp_path)
     assert p == {"date": "2026-02-03", "time": "", "equity": 1000000.0,
                  "ret_pct": 0.0, "positions": 0, "starting": 1000000,
-                 "synthetic": True}
+                 "holdings": [], "synthetic": True}
     assert bs.inception_point(tmp_path / "nope") is None
 
 
@@ -74,7 +74,7 @@ def test_max_drawdown():
     assert stats["max_drawdown_pct"] == 10.0  # 110 → 99
 
 
-def test_render_html_contains_data_and_no_external_refs(tmp_path):
+def test_render_html_contains_data_and_no_external_resources(tmp_path):
     series = [{"date": "2026-08-06", "equity": 964319.0, "ret_pct": -3.57,
                "positions": 9, "starting": 1000000}]
     trades = [{"code": "600988", "name": "赤峰黄金", "entryDate": "2026-07-01",
@@ -85,5 +85,44 @@ def test_render_html_contains_data_and_no_external_refs(tmp_path):
                               trades, bs.compute_stats(series, trades))
     assert "964319" in html_out
     assert "赤峰黄金" in html_out
-    assert "http" not in html_out.split("<script>")[1]  # no CDN in the JS
+    # self-contained: nothing loaded from the network at view time
+    assert "<script src" not in html_out
+    assert "<link" not in html_out
+    assert "@import" not in html_out
     assert "胜率 100.0%" in html_out
+
+
+def test_day_details_join(tmp_path):
+    runs = tmp_path / "runs"
+    _snap(runs, "2026-08-05/noon/input/positions_snapshot.json",
+          "2026-08-05T11:35:00+08:00", 960000.0)
+    _snap(runs, "2026-08-06/noon/input/positions_snapshot.json",
+          "2026-08-06T11:35:00+08:00", 964319.0)
+    summary = runs / "2026-08-06/noon/output/daily_summary.json"
+    summary.parent.mkdir(parents=True)
+    summary.write_text(json.dumps({"actions": [
+        {"code": "002138", "name": "顺络电子", "action": "HOLD",
+         "price": 48.2, "pnl_pct": 10.78, "note": "x" * 500},
+        {"code": "603259", "name": "药明康德", "action": "OPEN",
+         "price": 126.5, "pnl_pct": 0, "note": "开仓"},
+    ]}), encoding="utf-8")
+    series = bs.collect_equity_series(runs)
+    trades = [{"code": "600988", "name": "赤峰黄金", "exitDate": "2026-08-06",
+               "returnPct": -5.2, "exitReason": "stop_hit"}]
+    details = bs.collect_day_details(series, trades)
+    d = details["2026-08-06"]
+    assert d["day_pnl"] == 4319.0            # vs previous real snapshot
+    assert d["slot"] == "午盘"
+    assert len(d["actions"]) == 2
+    assert len(d["actions"][0]["note"]) == bs.NOTE_MAX  # truncated
+    assert d["closed"][0]["c"] == "600988"
+    assert details["2026-08-05"]["day_pnl"] is None  # no prior snapshot
+
+
+def test_rebase_index_forward_fills_holidays():
+    closes = {"2026-02-02": 3000.0, "2026-02-04": 3300.0}
+    out = bs.rebase_index(closes, ["2026-02-03", "2026-02-05"], 1000000.0)
+    # base = last close <= 02-03 → 3000; 02-05 forward-fills 02-04's close
+    assert out == {"2026-02-03": 1000000.0, "2026-02-05": 1100000.0}
+    assert bs.rebase_index({}, ["2026-02-03"], 1e6) == {}
+    assert bs.rebase_index(closes, ["2026-01-01"], 1e6) == {}  # no base yet
