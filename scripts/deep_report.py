@@ -428,6 +428,38 @@ def _provider_ctx(resolved: str) -> tuple:
     return llm_client._build_openai_client(), llm_client.OPENAI_MODEL
 
 
+MIN_DRAFT_CHARS = 3000
+_DRAFT_RETRY_NUDGE = (
+    "你上一条回复没有包含完整的报告正文。现在请直接输出完整的深度研究报告"
+    "（从 `# …深度研究报告 · 评级 x/5` 标题行开始，包含全部章节，文末附 predictions 代码块），"
+    "不要再调用任何工具。"
+)
+
+
+def _ensure_full_draft(text: str, judgment_bets: list, rerun, retries: int = 2) -> tuple:
+    """Writer-pass floor guard (2026-08-07: a run ended its tool loop with only
+    the predictions block as final text — a 103-byte 'report' then overwrote
+    the previous file, because only the VERIFY stage had degenerate guards).
+    `rerun(attempt)` re-asks the same conversation for the full report and
+    returns (text, bets). Raises rather than let a stub reach write_report."""
+    for attempt in range(retries):
+        if len(text) >= MIN_DRAFT_CHARS and "深度研究报告" in text[:200]:
+            return text, judgment_bets
+        print(f"  [deep_report] degenerate draft ({len(text)} chars) — "
+              f"re-asking writer for the full report ({attempt + 1}/{retries})",
+              file=sys.stderr)
+        t2, bets2 = rerun(attempt)
+        if bets2:
+            judgment_bets = bets2
+        if len(t2) > len(text):
+            text = t2
+    if len(text) < MIN_DRAFT_CHARS:
+        raise RuntimeError(
+            f"deep_report writer returned a degenerate draft ({len(text)} chars) "
+            "after retries — refusing to write a stub report")
+    return text, judgment_bets
+
+
 def _run_writer_pass(client, model, resolved, messages, tool_log, label,
                      extra_tools=None, tool_executor=None) -> tuple:
     """One tool-loop pass (draft or revise). Returns (text, tin, tout, rounds)."""
@@ -533,6 +565,20 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
         client, model, resolved, messages, tool_log, label="deep_report ",
         extra_tools=extra_tools, tool_executor=tool_executor)
     judgment_bets, text = extract_predictions_block(text)
+
+    def _rerun_writer(_attempt):
+        nonlocal tin, tout, rounds
+        messages.append({"role": "user", "content": _DRAFT_RETRY_NUDGE})
+        t2, i2, o2, r2 = _run_writer_pass(
+            client, model, resolved, messages, tool_log, label="deep_report-retry ",
+            extra_tools=extra_tools, tool_executor=tool_executor)
+        tin += i2
+        tout += o2
+        rounds += r2
+        bets2, t2 = extract_predictions_block(t2)
+        return t2, bets2
+
+    text, judgment_bets = _ensure_full_draft(text, judgment_bets, _rerun_writer)
 
     verify_audit = None
     verify_rounds = 0

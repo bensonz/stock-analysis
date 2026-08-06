@@ -142,16 +142,21 @@ def test_write_report_groups_by_code_and_chinese_name(tmp_path, monkeypatch):
     assert out2.parent == tmp_path / "999999"
 
 
+def _ok_draft(body: str = "") -> str:
+    """Writer-mock draft that clears the 2026-08-07 degenerate-draft floor."""
+    return ("# 测试（000703）深度研究报告 · 评级 3/5\n" + body + "正文。" * 1500)
+
+
 def test_generate_openai_orchestration(monkeypatch):
     import llm_client
     monkeypatch.setattr(llm_client, "normalize_llm_provider", lambda p: "openai")
     monkeypatch.setattr(llm_client, "_build_openai_client", lambda: object())
     monkeypatch.setattr(llm_client, "OPENAI_MODEL", "fake-model")
     monkeypatch.setattr(llm_client, "_run_openai_tool_loop",
-                        lambda *a, **k: ("# 报告\n结论：中性", 1000, 2000, 3))
+                        lambda *a, **k: (_ok_draft("结论：中性"), 1000, 2000, 3))
     res = deep_report.generate("000703", provider="openai", data={"code": "000703.SZ"},
                                verify=False)
-    assert res["text"].startswith("# 报告")
+    assert res["text"].startswith("# 测试")
     assert res["provider"] == "openai" and res["model"] == "fake-model"
     assert res["input_tokens"] == 1000 and res["output_tokens"] == 2000 and res["rounds"] == 3
     assert res["verify_audit"] is None and res["verify_rounds"] == 0
@@ -163,10 +168,10 @@ def test_generate_anthropic_branch(monkeypatch):
     monkeypatch.setattr(llm_client, "_build_anthropic_client", lambda: object())
     monkeypatch.setenv("ANTHROPIC_MODEL", "fake-claude")  # _provider_model reads env, not DEFAULT_MODEL
     monkeypatch.setattr(llm_client, "_run_tool_loop",
-                        lambda *a, **k: ("结论：看空", 5, 6, 1))
+                        lambda *a, **k: (_ok_draft("结论：看空"), 5, 6, 1))
     res = deep_report.generate("000703", provider="anthropic", data={"code": "000703.SZ"},
                                verify=False)
-    assert res["model"] == "fake-claude" and res["text"] == "结论：看空"
+    assert res["model"] == "fake-claude" and "结论：看空" in res["text"]
 
 
 # --------------------------------------------------------------------------- #
@@ -179,7 +184,7 @@ def test_generate_verify_orchestration(monkeypatch):
     monkeypatch.setattr(llm_client, "_build_openai_client", lambda: object())
     monkeypatch.setattr(llm_client, "OPENAI_MODEL", "fake-model")
     monkeypatch.setattr(llm_client, "_run_openai_tool_loop",
-                        lambda *a, **k: ("# 草稿", 1000, 2000, 3))
+                        lambda *a, **k: (_ok_draft("草稿标记X7Y。"), 1000, 2000, 3))
     canned_audit = {"rounds": [{"round": 1}], "final": {"total": 0}}
     seen = {}
 
@@ -191,7 +196,7 @@ def test_generate_verify_orchestration(monkeypatch):
     monkeypatch.setattr(deep_verify, "run_pipeline", fake_pipeline)
     res = deep_report.generate("000703", provider="openai", data={"code": "000703.SZ"},
                                verify=True, max_verify_rounds=3)
-    assert seen["draft"] == "# 草稿" and seen["max_rounds"] == 3
+    assert "草稿标记X7Y" in seen["draft"] and seen["max_rounds"] == 3
     assert res["text"].startswith("# 已核验报告")
     assert res["verify_audit"] is canned_audit and res["verify_rounds"] == 1
 
@@ -231,7 +236,7 @@ def test_split_provider_judge_runs_on_verify_provider(monkeypatch):
     # writer draft: contains one internal claim so the pipeline runs but needs
     # no web fetch; judge gets exercised via the unmatched-internal batch
     monkeypatch.setattr(llm_client, "_run_tool_loop",
-                        lambda *a, **k: ("# 报告\n站上MA20约2.3%〖内部数据〗。", 10, 20, 1))
+                        lambda *a, **k: (_ok_draft("站上MA20约2.3%〖内部数据〗。"), 10, 20, 1))
 
     res = deep_report.generate("000703", provider="anthropic",
                                data={"code": "000703.SZ"},
@@ -249,6 +254,35 @@ def test_write_verify_audit_path(tmp_path):
     assert out.name.startswith("000703-") and out.name.endswith("-deep-verify.json")
     import json
     assert json.loads(out.read_text(encoding="utf-8")) == audit
+
+
+def test_ensure_full_draft_retries_then_accepts():
+    good = "# 测试（000001）深度研究报告 · 评级 3/5\n" + "正文" * 2000
+    calls = []
+
+    def rerun(attempt):
+        calls.append(attempt)
+        return good, [{"event": "x"}]
+
+    text, bets = deep_report._ensure_full_draft("太短", [], rerun)
+    assert text == good
+    assert bets == [{"event": "x"}]
+    assert calls == [0]  # accepted after first retry
+
+
+def test_ensure_full_draft_raises_on_persistent_stub():
+    import pytest
+    with pytest.raises(RuntimeError, match="degenerate draft"):
+        deep_report._ensure_full_draft("", [], lambda a: ("still short", []))
+
+
+def test_ensure_full_draft_passes_good_draft_through():
+    good = "# 测试（000001）深度研究报告 · 评级 4/5\n" + "x" * 4000
+    text, bets = deep_report._ensure_full_draft(
+        good, [{"event": "keep"}],
+        lambda a: (_ for _ in ()).throw(AssertionError("must not rerun")))
+    assert text == good
+    assert bets == [{"event": "keep"}]
 
 
 def test_cli_verify_flags(monkeypatch, tmp_path, capsys):
