@@ -1,0 +1,42 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 167210,
+  "output_tokens": 10199,
+  "rounds": 2,
+  "duration_sec": 161.4,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月6日 煤炭 贵金属 板块 上涨原因",
+        "max_results": 5
+      },
+      "result_length": 3274
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "三环集团 MLCC 涨价 2026年8月",
+        "max_results": 5
+      },
+      "result_length": 3159
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 CXO 2026年8月 最新消息",
+        "max_results": 5
+      },
+      "result_length": 3273
+    }
+  ],
+  "fallback_used": false
+}

@@ -1,0 +1,110 @@
+{
+  "date": "2026-08-06",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 17.12,
+      "pnl_pct": 9.74,
+      "note": "PnL+9.74%持仓8天，距+10%触发仅0.26pp，明日若触及¥17.16立即提止损至成本价。Thesis完整（H1净利+2326-2547%，文莱炼化独特资产，10亿回购）。距10天时间止损剩2天但远高于+3%门槛不会触发。Sector石油石化中游无板块拖累"
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "action": "HOLD",
+      "price": 48.2,
+      "pnl_pct": 10.78,
+      "note": "PnL+10.78%持仓2天，止损已在8/5提至盈亏平衡¥43.51。今日-2.82%是连涨后正常回调，距盈亏平衡止损仍有9.7%缓冲。被动元件龙头+MLCC涨价潮受益，sector元件不在今日Top5但仍在科技主线"
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "action": "HOLD",
+      "price": 35.14,
+      "pnl_pct": -1.46,
+      "note": "PnL-1.46%持仓2天，距Rule5首3日-3%触发(¥34.59)仅1.6%。Stop proximity WATCH（距止损3.59%）。充电桩龙头+3C认证利好逻辑完好，H1充电量+47%。明日是关键观察日"
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "price": 124.15,
+      "pnl_pct": 7.89,
+      "note": "PnL+7.89%持仓6天，止损已在8/5提至盈亏平衡¥115.07。今日-3.15%回调但MLCC涨价周期逻辑完好（三星电机+30%已生效，太阳诱电9/1跟进，供需紧张延续至2027H1）。web_search确认行业景气持续"
+    },
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "action": "HOLD",
+      "price": 35.0,
+      "pnl_pct": -2.1,
+      "note": "PnL-2.10%持仓2天，⚠️Stop proximity WARNING（距止损¥33.96仅2.97%），Rule5首3日-3%触发价¥34.68仅0.9%之遥。H1半年报扎实（营收+32%净利+19.9%），0风险标签，但margin deleveraging严重(-12.71%)。明日是关键——若再跌0.9%强制SELL"
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "action": "HOLD",
+      "price": 39.96,
+      "pnl_pct": -1.67,
+      "note": "PnL-1.67%持仓1天，昨日开仓今日随大势回调。Sector工业金属与贵金属/小金属共振（贵金属+2.86%小金属+2.45%均Top5），板块逻辑完好。H1净利+123%爆发力极强，0风险标签。Stop proximity WATCH（距止损3.38%）"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 46.31,
+      "pnl_pct": 4.42,
+      "note": "PnL+4.42%持仓2天，今日横盘整理+0.02%。CRO安评龙头受益药明康德中报超预期板块扩散，实验猴稀缺壁垒。Margin deleveraging警示但不触发卖出"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 144.56,
+      "pnl_pct": 14.28,
+      "note": "PnL+14.28%持仓6天，止损¥126.50（盈亏平衡），距+20%触发（¥151.80）仅5.0%。H1营收+39%净利+29%全年指引上调至585-605亿催化完美元现。今日-1.99%是涨停次日的正常获利回吐。等待+20%触发后将止损提至+10%（¥139.15）"
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "HOLD",
+      "price": 124.18,
+      "pnl_pct": 2.54,
+      "note": "PnL+2.54%持仓1天，昨日开仓今日半导体回调-1.01%属正常波动。集成电路制造绝对龙头，0风险标签，margin adding（+1.58%），产能在建20%。距止损¥115.04有7.4%缓冲"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 9,
+    "totalEquity": 964319.0,
+    "dayPnl": -7208.0,
+    "dayReturnPct": -0.75,
+    "totalReturnPct": -3.57,
+    "unrealizedPnl": 18127.0,
+    "realizedPnl": -53808.0,
+    "cashPct": 61.42
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.4634,
+    "up": 1717,
+    "down": 3705,
+    "positive_indices": [
+      "上证指数"
+    ],
+    "negative_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 58,
+    "limit_downs": 1,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.46:1, 1/3 major indices green, 58 limit-ups / 1 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "今日市场弱势：涨跌比0.46:1（1717涨/3705跌），仅上证指数+0.01%勉强翻红，深证成指-0.52%、创业板指-0.67%均收绿。买入门槛不达标，不开新仓。板块轮动呈现Risk-off格局：煤炭+3.05%、贵金属+2.86%、小金属+2.45%等资源/防御板块领涨，教育-3.02%、电池-2.91%等消费/新能源板块领跌。IV情绪偏高（平均IV Rank 56.7%，科创50达68%），市场偏谨慎。9持仓中：药明康德+14.28%和顺络电子+10.78%为明星持仓，均已提止损至盈亏平衡；宏发股份-2.10%距-3%强制卖出仅0.9%为最高风险持仓，明日是关键观察日。整体持仓盈亏参半，防守为主，等待市场breadth恢复至买入门槛以上再考虑新开仓"
+  }
+}
