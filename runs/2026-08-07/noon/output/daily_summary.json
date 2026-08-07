@@ -1,0 +1,109 @@
+{
+  "date": "2026-08-07",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 17.74,
+      "pnl_pct": 13.72,
+      "note": "PnL+13.72%持仓9天，文莱炼化核心逻辑持续兑现（H1净利+2326-2547%，东南亚裂解价差高位）。止损已在¥15.60盈亏平衡。距+20%阈值¥18.72差5.5%。"
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "action": "HOLD",
+      "price": 48.93,
+      "pnl_pct": 12.46,
+      "note": "PnL+12.46%持仓4天，元件sector#2热门（+6.14%），MLCC涨价潮核心受益（三星电机8/1+30%已生效，太阳诱电9/1跟进）。止损已在¥43.51盈亏平衡。"
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "action": "HOLD",
+      "price": 35.16,
+      "pnl_pct": -1.4,
+      "note": "PnL-1.40%持仓4天。充电桩3C认证长期利好未变（特来电23%市占率，H1充电量+47%），但短期走势疲弱。⚠️stop_proximity违规：距止损¥33.88仅3.64%。-3%/3日规则：第3日收盘¥35.14(-1.46%)未触发。若跌破¥34.59(-3%)立即SELL。"
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "price": 123.94,
+      "pnl_pct": 7.71,
+      "note": "PnL+7.71%持仓8天，元件sector#2热门。MLCC涨价核心受益（三星电机8/1+30%已生效，AI服务器MLCC需求爆发至2027H1），连续两期回购（合计~14-19亿）。今日-2.41%正常获利回吐。"
+    },
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "action": "HOLD",
+      "price": 35.18,
+      "pnl_pct": -1.59,
+      "note": "PnL-1.59%持仓4天。H1业绩扎实（营收+32%净利+19.9%），0风险，北向20%+股东户数-39%。但价格连续走弱+margin deleveraging（chg5=-2.62%）。⚠️stop_proximity违规：距止损¥33.96仅3.47%。跌破¥34.68(-3%)即SELL。"
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "action": "HOLD",
+      "price": 42.34,
+      "pnl_pct": 4.18,
+      "note": "PnL+4.18%持仓3天。今日+6.57%强力反弹！刚果禁止铜精矿出口+Codelco矿山停产风险→铜价$6.73/磅历史新高（Trading Economics 8/5）。H1净利41.69亿（+123%），铜价突破新高强力支撑。"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "RAISE_STOP",
+      "price": 49.69,
+      "pnl_pct": 12.04,
+      "note": "PnL+12.04%持仓4天，Rule 5强制触发：突破+10%→止损提至盈亏平衡¥44.35。医疗服务sector#1热门（+6.21%），CXO安评龙头+实验猴稀缺壁垒（猴价突破20万/只，2.5万只储备）。今日+7.41%板块集体爆发。"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 151.28,
+      "pnl_pct": 19.59,
+      "note": "PnL+19.59%持仓8天。中报催化完美兑现（H1营收+39%净利+29%，在手订单664亿创历史新高，全年指引上调至585-605亿）。今日+6.01%，距+20%阈值¥151.80仅差¥0.52（0.34%）。触及后止损提至+10%（¥139.15）。"
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "HOLD",
+      "price": 126.01,
+      "pnl_pct": 4.05,
+      "note": "PnL+4.05%持仓3天。集成电路制造龙头，0风险，在建工程20%产能大扩张。远低于MA20（dist_ma20=-12.5%）安全边际充足。半导体产业链受益AI算力+消费电子新品季。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 9,
+    "totalEquity": 979412.0,
+    "dayPnl": 7052.0,
+    "dayReturnPct": 0.72,
+    "totalReturnPct": -2.06,
+    "unrealizedPnl": 27028.0,
+    "realizedPnl": -47616.0,
+    "cashPct": 61.11
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.7727,
+    "up": 2353,
+    "down": 3045,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 60,
+    "limit_downs": 4,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.77:1, 3/3 major indices green, 60 limit-ups / 4 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "广度0.77:1窄幅行情——三大指数全绿（上证+0.49%/深成指+1.31%/创业板+1.75%）但个股涨跌比仅2353:3045，多数股票实际下跌。大市值CXO/半导体/MLCC龙头拉指数，中小盘跟随不足。IV整体偏悲观（avg_rank=58.2%），科创50 IV rank 68.7%/创业板72.9%偏高。医疗服务（+6.21%）和元件（+6.14%）双主线领涨，药明康德中报超预期+MLCC涨价潮持续发酵。铜价突破$6.73/磅历史新高驱动有色反弹。买入门禁未通过（广度0.77:1 < 1.5:1），不新开仓位，专注管理现有9只持仓。现金61%等待广度恢复。"
+  }
+}

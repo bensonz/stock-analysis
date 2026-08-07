@@ -1,0 +1,52 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 353335,
+  "output_tokens": 19170,
+  "rounds": 4,
+  "duration_sec": 397.9,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月7日 市场行情 板块 涨跌",
+        "max_results": 5
+      },
+      "result_length": 3335
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "医疗服务 板块 大涨 2026年8月 CXO 药明康德",
+        "max_results": 5
+      },
+      "result_length": 3260
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "元件板块 MLCC 涨价 2026年8月 三星电机 太阳诱电"
+      },
+      "result_length": 3192
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "西部矿业 铜价 2026年8月 有色金属 走势"
+      },
+      "result_length": 3194
+    }
+  ],
+  "fallback_used": false
+}

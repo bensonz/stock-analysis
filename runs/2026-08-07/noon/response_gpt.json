@@ -1,0 +1,260 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "医疗服务",
+        "5d_pct": 6.21,
+        "trend": "accelerating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": 6.14,
+        "trend": "steady"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": 5.23,
+        "trend": "one-day spike"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": 3.77,
+        "trend": "one-day spike"
+      },
+      {
+        "name": "化学制药",
+        "5d_pct": 3.63,
+        "trend": "accelerating"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "焦炭Ⅱ",
+        "5d_pct": -2.82,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "农业综合Ⅱ",
+        "5d_pct": -1.67,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "食品加工",
+        "5d_pct": -1.41,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电视广播Ⅱ",
+        "5d_pct": -1.38,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -1.37,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "4/9 in hot sectors (顺络电子+三环集团 in 元件#2, 昭衍新药+药明康德 in 医疗服务#1), 5/9 in mid sectors, 0/9 in cold",
+    "regime": "CXO/MLCC双主线领涨，有色反弹，广度0.77:1窄幅行情——大市值拉指数多数个股下跌"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "PnL+13.72%持仓9天，文莱炼化核心逻辑持续兑现（H1净利+2326-2547%，东南亚裂解价差高位）。止损已在¥15.60盈亏平衡。距+20%阈值¥18.72差5.5%。",
+      "sector_rank": "mid (石油石化不在top5/bottom5)",
+      "new_stop": null,
+      "pnl_pct": 13.72,
+      "days_held": 9,
+      "exit_price": null
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "action": "HOLD",
+      "reason": "PnL+12.46%持仓4天，元件sector#2热门（+6.14%），MLCC涨价潮核心受益（三星电机8/1+30%已生效，太阳诱电9/1跟进）。止损已在¥43.51盈亏平衡。",
+      "sector_rank": "top 5% (元件 #2 hot sector)",
+      "new_stop": null,
+      "pnl_pct": 12.46,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "action": "HOLD",
+      "reason": "PnL-1.40%持仓4天。充电桩3C认证长期利好未变（特来电23%市占率，H1充电量+47%），但短期走势疲弱。⚠️stop_proximity违规：距止损¥33.88仅3.64%。-3%/3日规则：第3日收盘¥35.14(-1.46%)未触发。若跌破¥34.59(-3%)立即SELL。",
+      "sector_rank": "mid (电网设备不在top5/bottom5)",
+      "new_stop": null,
+      "pnl_pct": -1.4,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "reason": "PnL+7.71%持仓8天，元件sector#2热门。MLCC涨价核心受益（三星电机8/1+30%已生效，AI服务器MLCC需求爆发至2027H1），连续两期回购（合计~14-19亿）。今日-2.41%正常获利回吐。",
+      "sector_rank": "top 5% (元件 #2 hot sector)",
+      "new_stop": null,
+      "pnl_pct": 7.71,
+      "days_held": 8,
+      "exit_price": null
+    },
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "action": "HOLD",
+      "reason": "PnL-1.59%持仓4天。H1业绩扎实（营收+32%净利+19.9%），0风险，北向20%+股东户数-39%。但价格连续走弱+margin deleveraging（chg5=-2.62%）。⚠️stop_proximity违规：距止损¥33.96仅3.47%。跌破¥34.68(-3%)即SELL。",
+      "sector_rank": "mid (电网设备不在top5/bottom5)",
+      "new_stop": null,
+      "pnl_pct": -1.59,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "action": "HOLD",
+      "reason": "PnL+4.18%持仓3天。今日+6.57%强力反弹！刚果禁止铜精矿出口+Codelco矿山停产风险→铜价$6.73/磅历史新高（Trading Economics 8/5）。H1净利41.69亿（+123%），铜价突破新高强力支撑。",
+      "sector_rank": "mid (工业金属不在top5/bottom5)",
+      "new_stop": null,
+      "pnl_pct": 4.18,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "RAISE_STOP",
+      "reason": "PnL+12.04%持仓4天，Rule 5强制触发：突破+10%→止损提至盈亏平衡¥44.35。医疗服务sector#1热门（+6.21%），CXO安评龙头+实验猴稀缺壁垒（猴价突破20万/只，2.5万只储备）。今日+7.41%板块集体爆发。",
+      "sector_rank": "top 3% (医疗服务 #1 hot sector)",
+      "new_stop": 44.35,
+      "pnl_pct": 12.04,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "PnL+19.59%持仓8天。中报催化完美兑现（H1营收+39%净利+29%，在手订单664亿创历史新高，全年指引上调至585-605亿）。今日+6.01%，距+20%阈值¥151.80仅差¥0.52（0.34%）。触及后止损提至+10%（¥139.15）。",
+      "sector_rank": "top 3% (医疗服务 #1 hot sector)",
+      "new_stop": null,
+      "pnl_pct": 19.59,
+      "days_held": 8,
+      "exit_price": null
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "HOLD",
+      "reason": "PnL+4.05%持仓3天。集成电路制造龙头，0风险，在建工程20%产能大扩张。远低于MA20（dist_ma20=-12.5%）安全边际充足。半导体产业链受益AI算力+消费电子新品季。",
+      "sector_rank": "mid (半导体不在top5/bottom5)",
+      "new_stop": null,
+      "pnl_pct": 4.05,
+      "days_held": 3,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "002440",
+      "name": "闰土股份",
+      "reason": "广度门禁未通过（涨跌比0.77:1 < 1.5:1最低要求）。否则为今日最优候选：RPS120=89.6%甜点位，MA全部合规（dist_ma5=-0.5%, dist_ma10=1.1%, dist_ma20=7.8%），分散染料涨价周期开启（申万宏源研报：库存低位8月后补库）。",
+      "rps120": 89.6
+    },
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "reason": "广度门禁未通过。化学制药sector#5热门（+3.63%），RPS120=89.09%甜点位，VCP SETUP，MA全部合规，今日涨停（氟泽雷塞原料药获批，创新药板块集体爆发）。但涨停后MA偏离将扩大，明日若广度恢复需重新评估追高风险。",
+      "rps120": 89.09
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "广度门禁未通过。医疗服务sector#1热门（+6.21%），RPS120=93.29%（扩展区但行业#1满足例外条件a），MA全部合规（dist_ma5=5.3%, dist_ma10=3.6%, dist_ma20=2.6%）。但PE为负+margin deleveraging叠加风险。",
+      "rps120": 93.29
+    },
+    {
+      "code": "603156",
+      "name": "养元饮品",
+      "reason": "行业食品加工在今日Bottom5（-1.41%），Rule 1硬性禁止。且dist_ma10=14.1%严重超买（Rule 2b违规）。三重否决（冷门行业+MA超买+广度门禁），无需进一步分析。",
+      "rps120": 94.96
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "dist_ma5=6.8% > 6%违规（Rule 2b），RPS120=93.68%扩展区且军工电子行业非top10%不满足扩展区例外条件。",
+      "rps120": 93.68
+    },
+    {
+      "code": "300503",
+      "name": "昊志机电",
+      "reason": "dist_ma5=6.2%违规 + dist_ma10=10.4%严重超买（Rule 2b双重违规）。",
+      "rps120": 90.16
+    },
+    {
+      "code": "688777",
+      "name": "中控技术",
+      "reason": "dist_ma10=15.6% + dist_ma20=13.7%双重严重超买（Rule 2b）。",
+      "rps120": 85.36
+    },
+    {
+      "code": "301526",
+      "name": "国际复材",
+      "reason": "RPS120=99.9% > 95%上限（RPS过热，均值回归风险），dist_ma5=10.5% + dist_ma10=14.4%多重违规。",
+      "rps120": 99.9
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "广度-指数背离是经典减仓信号：今日三大指数全绿但涨跌比0.77:1——大市值拉指数、多数个股下跌（f0_2=2632 vs r0_2=1482）。1.5:1广度门禁正确阻止新开仓。这种结构下即使有个股看起来可买也应保持现金。",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "指数由权重股拉动时广度往往滞后——ETF资金流入首先推升大市值成分股，中小盘跟随需要时间。此时追入中小盘动量股容易被假突破套住。"
+    },
+    {
+      "text": "热门行业扩散效应碾压个股瑕疵：昭衍新药4天+12.04%，毛利率从49%跌至19%、利润质量差、margin deleveraging——但医疗服务sector#1的顺风碾压所有个体风险。验证V2核心原则：平庸股票在热门行业胜过优秀股票在冷门行业。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "行业ETF资金流入带来被动买盘，个股基本面在短期动量中权重被稀释。只要行业趋势持续，个股即使有瑕疵也会被板块β抬升。"
+    },
+    {
+      "text": "铜供给冲击验证资源股持仓逻辑：刚果禁止铜精矿出口+Codelco矿山停产风险→铜价$6.73/磅历史新高（Trading Economics 8/5），西部矿业今日+6.57%。资源股的α往往来自供给端突发事件而非可预测的需求趋势。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "矿端供给集中度极高（刚果+智利占全球铜产量40%+），任何一国政策变动都能引发价格脉冲。铜价对西部矿业的盈利弹性约为1:3。"
+    },
+    {
+      "text": "stop_proximity预警应在止损触发前就收紧心态：特锐德（3.64%缓冲）和宏发股份（3.47%缓冲）同在中游行业、价格连续走弱。两只票的共性是：入场后无催化剂兑现、margin偏弱、行业不在热门。这类疲弱持仓即使未触发硬止损也应减少容忍度。",
+      "type": "heuristic",
+      "tags": [
+        "exit-rule",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "连续走弱+行业中游+margin deleveraging三重叠加的持仓，反弹概率显著低于热门行业中的浅亏持仓。"
+    }
+  ],
+  "market_summary": "广度0.77:1窄幅行情——三大指数全绿（上证+0.49%/深成指+1.31%/创业板+1.75%）但个股涨跌比仅2353:3045，多数股票实际下跌。大市值CXO/半导体/MLCC龙头拉指数，中小盘跟随不足。IV整体偏悲观（avg_rank=58.2%），科创50 IV rank 68.7%/创业板72.9%偏高。医疗服务（+6.21%）和元件（+6.14%）双主线领涨，药明康德中报超预期+MLCC涨价潮持续发酵。铜价突破$6.73/磅历史新高驱动有色反弹。买入门禁未通过（广度0.77:1 < 1.5:1），不新开仓位，专注管理现有9只持仓。现金61%等待广度恢复。",
+  "market_sentiment": "cautious",
+  "market_call": "观望（广度门禁未通过，虽指数偏强但个股层面偏弱，持有现金等待）"
+}
