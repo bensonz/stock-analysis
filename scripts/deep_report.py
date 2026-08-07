@@ -18,6 +18,7 @@ Usage:
 import json
 import sqlite3
 import sys
+import time
 from datetime import datetime
 from pathlib import Path
 
@@ -512,22 +513,35 @@ def _make_runners(resolved, client, model, tool_log, totals,
         return t, i, o, r
 
     def _text_once(prompt: str, label: str, max_tokens: int):
-        if verify_resolved == "anthropic":
-            t, i, o, _ = llm_client._run_anthropic_text_once(
-                verify_client, [{"role": "user", "content": prompt}], verify_model,
-                max_tokens, deep_verify.JUDGE_TEMPERATURE, label=label)
-        else:
-            resp = verify_client.chat.completions.create(
-                model=verify_model,
-                max_tokens=max_tokens,
-                temperature=deep_verify.JUDGE_TEMPERATURE,
-                messages=[{"role": "user", "content": prompt}],
-                timeout=llm_client.GPT_TIMEOUT,
-            )
-            usage = resp.usage or type("U", (), {"prompt_tokens": 0, "completion_tokens": 0})()
-            t, i, o = resp.choices[0].message.content or "", usage.prompt_tokens, usage.completion_tokens
-        _add(i, o, 1)
-        return t, i, o
+        # Transient connection errors must not kill a 20-minute pipeline run
+        # (2026-08-07: one APIConnectionError mid-verify vaporized a finished
+        # 601168 draft). 3 attempts with backoff, then re-raise.
+        last_err = None
+        for attempt in range(3):
+            if attempt:
+                time.sleep(5 * attempt)
+                print(f"  [{label.strip()}] connection retry {attempt + 1}/3",
+                      file=sys.stderr)
+            try:
+                if verify_resolved == "anthropic":
+                    t, i, o, _ = llm_client._run_anthropic_text_once(
+                        verify_client, [{"role": "user", "content": prompt}], verify_model,
+                        max_tokens, deep_verify.JUDGE_TEMPERATURE, label=label)
+                else:
+                    resp = verify_client.chat.completions.create(
+                        model=verify_model,
+                        max_tokens=max_tokens,
+                        temperature=deep_verify.JUDGE_TEMPERATURE,
+                        messages=[{"role": "user", "content": prompt}],
+                        timeout=llm_client.GPT_TIMEOUT,
+                    )
+                    usage = resp.usage or type("U", (), {"prompt_tokens": 0, "completion_tokens": 0})()
+                    t, i, o = resp.choices[0].message.content or "", usage.prompt_tokens, usage.completion_tokens
+                _add(i, o, 1)
+                return t, i, o
+            except Exception as e:  # noqa: BLE001 — includes APIConnectionError/timeouts
+                last_err = e
+        raise last_err
 
     # Judge emits small JSON verdicts; cleanup must re-emit a FULL report, so it
     # gets the writer budget — 4096 would truncate it into uselessness.
@@ -599,15 +613,27 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
             resolved, client, model, tool_log, totals,
             verify_resolved=v_resolved, verify_client=v_client, verify_model=v_model,
             extra_tools=extra_tools, tool_executor=tool_executor)
-        text, verify_audit = deep_verify.run_pipeline(
-            text, data,
-            spec_writer=spec, spec_verify=spec_verify,
-            max_rounds=max_verify_rounds,
-            judge_runner=judge_runner, revise_runner=revise_runner,
-            cleanup_runner=cleanup_runner,
-            log=lambda m: print(f"  [verify] {m}", file=sys.stderr),
-        )
-        verify_rounds = len(verify_audit["rounds"])
+        # A verify-stage crash must never vaporize a finished draft
+        # (2026-08-07: one APIConnectionError lost a complete 601168 report).
+        # Degrade to publishing the draft with a loud UNVERIFIED banner.
+        try:
+            text, verify_audit = deep_verify.run_pipeline(
+                text, data,
+                spec_writer=spec, spec_verify=spec_verify,
+                max_rounds=max_verify_rounds,
+                judge_runner=judge_runner, revise_runner=revise_runner,
+                cleanup_runner=cleanup_runner,
+                log=lambda m: print(f"  [verify] {m}", file=sys.stderr),
+            )
+            verify_rounds = len(verify_audit["rounds"])
+        except Exception as e:  # noqa: BLE001
+            print(f"  [verify] CRASHED ({type(e).__name__}: {str(e)[:120]}) — "
+                  "publishing UNVERIFIED draft instead of losing it", file=sys.stderr)
+            verify_audit = {"error": f"{type(e).__name__}: {str(e)[:300]}",
+                            "rounds": [], "final": None}
+            text = ("> ⚠️ **数据核验中断**（核验服务异常）——本文数字未经核验管线确认，"
+                    "引用前请自行核对。重跑核验: `python3 scripts/deep_report.py "
+                    + str(data.get("code6", code)) + "`\n\n" + text)
         tin += totals["in"]
         tout += totals["out"]
         rounds += totals["rounds"]
@@ -745,14 +771,19 @@ def main():
 
     if result.get("verify_audit"):
         audit_path = write_verify_audit(code, result["verify_audit"], output_dir=output_dir)
-        f = result["verify_audit"]["final"]
-        print(
-            f"[deep_report] verify: {f['verified_linked'] + f['verified_internal']}"
-            f"/{f['total']} verified ({f['verified_linked']} linked/"
-            f"{f['verified_internal']} internal), {f['rewritten_qualitative']} rewritten"
-            f", rounds={result['verify_rounds']} | audit {audit_path}",
-            file=sys.stderr,
-        )
+        f = result["verify_audit"].get("final")
+        if f:
+            print(
+                f"[deep_report] verify: {f['verified_linked'] + f['verified_internal']}"
+                f"/{f['total']} verified ({f['verified_linked']} linked/"
+                f"{f['verified_internal']} internal), {f['rewritten_qualitative']} rewritten"
+                f", rounds={result['verify_rounds']} | audit {audit_path}",
+                file=sys.stderr,
+            )
+        else:
+            print(f"[deep_report] verify CRASHED — report published UNVERIFIED "
+                  f"({result['verify_audit'].get('error', '?')}) | audit {audit_path}",
+                  file=sys.stderr)
 
     if result.get("predictions"):
         import prediction_log
