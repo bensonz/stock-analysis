@@ -463,8 +463,8 @@ def generate_candidates_md(date: str, data: dict, output_dir: Path | None = None
 
     # Table header
     lines.append(f"## 策略池 ({len(pool)} stocks)\n")
-    lines.append("| Code | Name | RPS120 | RPS60 | Trend | Co | MA5% | MA10% | MA20% | Status |")
-    lines.append("|------|------|--------|-------|-------|-----|------|-------|-------|--------|")
+    lines.append("| Code | Name | RPS120 | RPS60 | MA5% | MA10% | MA20% | Status |")
+    lines.append("|------|------|--------|-------|------|-------|-------|--------|")
 
     sweet_spot = []
     wait_list = []
@@ -474,8 +474,6 @@ def generate_candidates_md(date: str, data: dict, output_dir: Path | None = None
         name = s.get("name", code)
         rps120 = s.get("rps120", 0)
         rps60 = s.get("rps60", 0)
-        trend = s.get("score_trend", "-")
-        co = s.get("score_company", "-")
 
         # Get MA data: first from the stock itself (merged), then from ma_data dict
         ma5 = s.get("dist_ma5_pct")
@@ -518,13 +516,13 @@ def generate_candidates_md(date: str, data: dict, output_dir: Path | None = None
         rps60_s = f"{rps60:.0f}" if isinstance(rps60, (int, float)) else str(rps60)
 
         lines.append(
-            f"| {code} | {name} | {rps120_s} | {rps60_s} | {trend} | {co} "
+            f"| {code} | {name} | {rps120_s} | {rps60_s} "
             f"| {ma5_s} | {ma10_s} | {ma20_s} | {status} |"
         )
 
         if not fails and ma5 is not None:
             entry = {"code": code, "name": name, "rps120": rps120, "rps60": rps60,
-                     "trend": trend, "co": co, "ma5": ma5, "ma10": ma10, "ma20": ma20}
+                     "ma5": ma5, "ma10": ma10, "ma20": ma20}
             if rps120 and rps120 > 95:
                 wait_list.append(entry)
             else:
@@ -539,7 +537,6 @@ def generate_candidates_md(date: str, data: dict, output_dir: Path | None = None
         for s in sweet_spot:
             lines.append(
                 f"- **{s['name']}** ({s['code']}) RPS120={s['rps120']:.0f} "
-                f"Trend={s['trend']} Co={s['co']} "
                 f"MA5={s['ma5']:+.1f}% MA10={s['ma10']:+.1f}% MA20={s['ma20']:+.1f}%"
             )
         lines.append("")
@@ -551,7 +548,6 @@ def generate_candidates_md(date: str, data: dict, output_dir: Path | None = None
         for s in wait_list:
             lines.append(
                 f"- **{s['name']}** ({s['code']}) RPS120={s['rps120']:.0f} "
-                f"Trend={s['trend']} Co={s['co']} "
                 f"MA5={s['ma5']:+.1f}% MA10={s['ma10']:+.1f}% MA20={s['ma20']:+.1f}%"
             )
         lines.append("")

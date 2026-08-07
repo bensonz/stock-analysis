@@ -298,7 +298,7 @@ class CheeseFortuneClient:
         base = self.get_base_info(code)
         if base:
             summary["name"] = base.get("name")
-            pepb = base.get("pepb", {})
+            pepb = base.get("pepb") or {}
             summary["pe"] = pepb.get("pe")
             summary["pb"] = pepb.get("pb")
             summary["ps_ttm"] = pepb.get("ps")
@@ -320,18 +320,19 @@ class CheeseFortuneClient:
         # 2. AI scores + commentary
         vip = self.get_vip_data(code)
         if vip:
-            scores = vip.get("score1", {})
+            # score1 is null (not absent) on non-VIP tiers — 2026-08-07
+            scores = vip.get("score1") or {}
             summary["score_company"] = scores.get("scoreCompany")
             summary["score_trend"] = scores.get("scoreTrend")
             summary["score_value"] = scores.get("scoreValue")
-            comment = vip.get("comment_new", {})
+            comment = vip.get("comment_new") or {}
             summary["highlights"] = [
                 {"tag": c["tag"], "text": c["value"]}
-                for c in comment.get("positive_new", [])
+                for c in (comment.get("positive_new") or [])
             ]
             summary["risks"] = [
                 {"tag": c["tag"], "text": c["value"]}
-                for c in comment.get("unpositive_new", [])
+                for c in (comment.get("unpositive_new") or [])
             ]
 
         # 3. Upcoming events
@@ -352,7 +353,7 @@ class CheeseFortuneClient:
         for period in ["20250930", "20250630", "20251231"]:
             fin = self.get_financials(code, period)
             if fin:
-                income = fin.get("income", {}).get("sangji", {})
+                income = (fin.get("income") or {}).get("sangji") or {}
                 if income:
                     summary["report_period"] = period
                     rev = income.get("TOT_OPER_REV", {})
@@ -361,7 +362,7 @@ class CheeseFortuneClient:
                     profit = income.get("OPER_PROFIT", {})
                     summary["operating_profit"] = profit.get("value")
                     summary["operating_profit_yoy"] = profit.get("chgPct")
-                    net = profit.get("child", {}).get("NET_PROFIT_INCL_MIN_INT_INC", {})
+                    net = (profit.get("child") or {}).get("NET_PROFIT_INCL_MIN_INT_INC") or {}
                     summary["net_profit"] = net.get("value")
                     summary["net_profit_yoy"] = net.get("chgPct")
                     gross = income.get("GROSS_PROFIT", {})
@@ -379,10 +380,10 @@ class CheeseFortuneClient:
         # 5. PE/PB valuation context
         pepb_hist = self.get_pepb_history(code, "5Y")
         if pepb_hist:
-            newest = pepb_hist.get("newest", {})
+            newest = pepb_hist.get("newest") or {}
             summary["pe_forward"] = newest.get("peFor")
             # Count data points to understand history depth
-            datas = pepb_hist.get("datas", [])
+            datas = pepb_hist.get("datas") or []
             if datas:
                 summary["valuation_history_days"] = len(datas)
                 summary["valuation_history_from"] = datas[0].get("x")
