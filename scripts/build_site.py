@@ -6,8 +6,9 @@ network dependencies at view time (must render offline). Color convention
 is A-share: red = gain, green = loss.
 
 Data sources (数字纪律 — everything re-derivable):
-  - runs/<date>[/<slot>]/input/positions_snapshot.json → daily equity curve
-    + per-day holdings (per date the LATEST snapshot wins, by snapshot_time;
+  - runs/<date>[/<slot>]/{input,output}/positions_snapshot.json → daily equity
+    curve + per-day holdings (per date the LATEST snapshot wins by
+    snapshot_time — post_run output preferred over stale pre_run input;
     legacy no-slot layout supported)
   - runs/<date>[/<slot>]/output/daily_summary.json → per-day actions
     (taken from the same run dir as the winning snapshot)
@@ -64,6 +65,7 @@ def _snapshot_point(path: Path):
         ]
         return {
             "time": snap.get("snapshot_time", ""),
+            "stype": snap.get("snapshot_type", ""),
             "equity": pf.get("totalEquity"),
             "cash": pf.get("cash"),
             "ret_pct": pf.get("totalReturnPct"),
@@ -84,14 +86,22 @@ def collect_equity_series(runs_dir: Path = RUNS_DIR) -> list[dict]:
     for day_dir in sorted(runs_dir.iterdir()):
         if not day_dir.is_dir() or not DATE_RE.match(day_dir.name):
             continue
+        # input/ = pre_run (carries the PREVIOUS close's marks), output/ =
+        # post_run (the day's real marks + applied trades). Both are candidates;
+        # latest snapshot_time wins, so post_run is preferred when it exists
+        # (2026-08-07: input-only made today's equity == yesterday's, delta 0).
         candidates = []  # (snapshot_path, run_dir, slot)
-        legacy = day_dir / "input" / "positions_snapshot.json"
-        if legacy.exists():
-            candidates.append((legacy, day_dir, "legacy"))
+        for sub in ("input", "output"):
+            legacy = day_dir / sub / "positions_snapshot.json"
+            if legacy.exists():
+                candidates.append((legacy, day_dir, "legacy"))
         for slot_dir in day_dir.iterdir():
-            slotted = slot_dir / "input" / "positions_snapshot.json"
-            if slot_dir.is_dir() and slotted.exists():
-                candidates.append((slotted, slot_dir, slot_dir.name))
+            if not slot_dir.is_dir():
+                continue
+            for sub in ("input", "output"):
+                slotted = slot_dir / sub / "positions_snapshot.json"
+                if slotted.exists():
+                    candidates.append((slotted, slot_dir, slot_dir.name))
         points = []
         for snap_path, run_dir, slot in candidates:
             p = _snapshot_point(snap_path)
@@ -174,6 +184,8 @@ def collect_day_details(series: list[dict], trades: list[dict],
             "actions": [],
             "closed": closed_by_date.get(d, []),
         }
+        if p.get("stype") == "pre_run":
+            det["pre"] = 1  # stale marks: no post-run snapshot for this day
         if p.get("synthetic"):
             det["slot"] = "起始"
         elif prev_equity is not None and isinstance(p.get("equity"), (int, float)):
@@ -412,7 +424,9 @@ function renderDay(d) {
   const det = DETAILS[d];
   if (!det) { dayEl.innerHTML = `<div class='d-date'>${esc(d)}</div><div class='note'>无记录</div>`; return; }
   const pinBtn = pinned ? ` <button id="unpin" title="取消固定 (Esc)">📌 ✕</button>` : "";
-  let h = `<div class="d-date">${esc(d)} <span class="chip">${esc(det.slot)}</span>${pinBtn}</div>`;
+  let h = `<div class="d-date">${esc(d)} <span class="chip">${esc(det.slot)}</span>`
+        + (det.pre ? ` <span class="chip warn" title="该日仅有运行开始时点的快照，持仓市值为上一收盘标记">盘前快照·未含当日行情</span>` : "")
+        + `${pinBtn}</div>`;
   h += `<div class="d-equity">${fmtM(det.equity)}</div>`;
   const dp = det.day_pnl;
   h += `<div class="d-sub"><span class="${pnlCls(dp)}">${dp == null ? "—" : sign(dp) + fmtM(dp)}</span> 较上一快照`
@@ -443,7 +457,7 @@ function renderDay(d) {
     }
   }
   if (det.holdings && det.holdings.length) {
-    h += `<h4>持仓 (${det.holdings.length}) <span class="mini">快照=当次运行开始时点</span></h4>`;
+    h += `<h4>持仓 (${det.holdings.length}) <span class="mini">当日最后快照${det.pre ? "(盘前)" : ""}</span></h4>`;
     const holdNotes = {};
     for (const a of (det.actions || [])) if (a.a === "HOLD") holdNotes[a.c] = a.note;
     for (const p of det.holdings) {
@@ -716,6 +730,7 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
   .muted {{ color:var(--muted); }}
   .chip {{ display:inline-block; background:#eef1f6; border-radius:4px; padding:0 6px;
            font-size:11px; color:var(--muted); }}
+  .chip.warn {{ background:#fdf1e3; color:#9a6b1f; }}
   .events {{ display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:10px; }}
   .ev {{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:11px 13px; }}
   .ev-when {{ font-size:12.5px; }} .tminus {{ color:var(--muted); font-size:11.5px; }}

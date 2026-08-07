@@ -43,6 +43,41 @@ def test_series_legacy_and_slotted_latest_wins(tmp_path):
     assert series[1]["equity"] == 964319.0  # afternoon snapshot won
 
 
+def test_output_postrun_snapshot_beats_input_prerun(tmp_path):
+    # 2026-08-07: input/ (pre_run) carries the PREVIOUS close's marks — using
+    # it made today's equity equal yesterday's (delta 0). output/ must win.
+    runs = tmp_path / "runs"
+    _snap(runs, "2026-08-07/noon/input/positions_snapshot.json",
+          "2026-08-07T11:35:00+08:00", 972360.0)
+    out = runs / "2026-08-07/noon/output/positions_snapshot.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps({
+        "snapshot_time": "2026-08-07T11:45:02+08:00",
+        "snapshot_type": "post_run",
+        "positions_json": {"portfolio": {
+            "startingCapital": 1000000, "totalEquity": 979412.0,
+            "totalReturnPct": -2.06, "positionsUsed": 9}},
+    }), encoding="utf-8")
+    series = bs.collect_equity_series(runs)
+    assert series[0]["equity"] == 979412.0
+    assert series[0]["stype"] == "post_run"
+    details = bs.collect_day_details(series, [])
+    assert "pre" not in details["2026-08-07"]
+
+    # a day with ONLY a pre_run snapshot gets the visible stale marker
+    pre = runs / "2026-08-08/noon/input/positions_snapshot.json"
+    pre.parent.mkdir(parents=True)
+    pre.write_text(json.dumps({
+        "snapshot_time": "2026-08-08T11:35:00+08:00",
+        "snapshot_type": "pre_run",
+        "positions_json": {"portfolio": {
+            "startingCapital": 1000000, "totalEquity": 979412.0,
+            "positionsUsed": 9}},
+    }), encoding="utf-8")
+    details = bs.collect_day_details(bs.collect_equity_series(runs), [])
+    assert details["2026-08-08"]["pre"] == 1
+
+
 def test_series_skips_broken_and_empty_snapshots(tmp_path):
     runs = tmp_path / "runs"
     bad = runs / "2026-04-01/input/positions_snapshot.json"
