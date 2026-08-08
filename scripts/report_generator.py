@@ -211,16 +211,19 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
             return f" 〔来源: {s}〕"
 
         lines.append("## 未来事件窗口\n")
-        lines.append("_图例: 图标=方向（🔴利空风险 / 🔶双向不确定 / 🟢利好支撑），"
+        lines.append("_图例: 加粗日期=**A股影响日**（海外盘后公布的事件，影响日为下一A股交易日，"
+                     "公布日另行标注）；图标=方向（🔴利空风险 / 🔶双向不确定 / 🟢利好支撑），"
                      "[冲击:高/中/低]=预估冲击强度——两者独立：🔴[冲击:低]=偏利空但幅度小_\n")
         lines.append(f"**风险档: {rw.get('level', '?')}** — {rw.get('advice', '')}\n")
         for e in events.get("dated", [])[:10]:
             mark = _dir_mark.get(e.get("direction", "risk"), "🔴")
             est = "（日期待确认）" if e.get("certainty") == "estimated" else ""
             rel = "📊**结果已出·影响待落地** " if e.get("released") else ""
+            pub = (f"（公布日 {e.get('date')}）"
+                   if e.get("date") and e.get("date") != e.get("a_share_impact_date") else "")
             lines.append(f"- {mark} **{e.get('a_share_impact_date')}** "
                          f"(T-{e.get('days_until_impact')}) [{_impact(e)}] "
-                         f"{rel}{e.get('name')}{est} — {e.get('notes', '')}{_src(e)}")
+                         f"{rel}{e.get('name')}{pub}{est} — {e.get('notes', '')}{_src(e)}")
         for e in events.get("ongoing", []):
             mark = _dir_mark.get(e.get("direction", "risk"), "🔴")
             lines.append(f"- {mark} **持续中** [{_impact(e)}] "
