@@ -21,6 +21,9 @@ Usage:
     python scripts/run_daily.py --validate DATE    # Validate specific date
     python scripts/run_daily.py --reset-to DATE    # Reset state to end of DATE (afternoon slot by default)
     python scripts/run_daily.py --list-runs        # Show all runs with status
+    python scripts/run_daily.py --date DATE --slot afternoon --run
+                                                   # Re-run a missed slot for a SETTLED past session
+                                                   # (e.g. machine slept through it); refuses future dates
 
 Run slots (noon vs afternoon):
     The pipeline runs twice per trading day and each run writes to its own slot
@@ -1819,6 +1822,30 @@ def main():
     run_start = datetime.now().astimezone()
     date = run_start.strftime("%Y-%m-%d")
     args = sys.argv[1:]
+
+    # --date YYYY-MM-DD: analyze a PAST (settled) session — for re-running a
+    # slot the machine slept through (2026-08-07 afternoon: laptop woke at
+    # 17:36 with no DNS, run failed, weekend re-run needed the override).
+    # Only makes sense for the last settled trading day or later re-analysis;
+    # refuses future dates.
+    if "--date" in args:
+        idx = args.index("--date")
+        if idx + 1 >= len(args):
+            print("Usage: --date YYYY-MM-DD", file=sys.stderr)
+            sys.exit(1)
+        override = args[idx + 1]
+        try:
+            datetime.strptime(override, "%Y-%m-%d")
+        except ValueError:
+            print(f"Invalid --date {override!r}; expected YYYY-MM-DD", file=sys.stderr)
+            sys.exit(1)
+        if override > date:
+            print(f"--date {override} is in the future", file=sys.stderr)
+            sys.exit(1)
+        if override != date:
+            print(f"⚠ Running with date override {override} (today is {date}) — "
+                  "post-close re-analysis of a settled session", file=sys.stderr)
+        date = override
 
     # Slot: --slot override wins, else derived from the local clock at run start.
     slot_override = _parse_slot_arg(args)
