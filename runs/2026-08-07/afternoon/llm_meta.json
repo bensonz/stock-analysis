@@ -1,0 +1,42 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 150200,
+  "output_tokens": 17483,
+  "rounds": 2,
+  "duration_sec": 218.7,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月7日 医疗服务板块 大涨原因 创新药",
+        "max_results": 5
+      },
+      "result_length": 3346
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "刚果 禁止铜精矿出口 2026年8月 铜价 LME",
+        "max_results": 5
+      },
+      "result_length": 3038
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "MLCC 涨价 三星电机 2026年8月 元件板块",
+        "max_results": 5
+      },
+      "result_length": 1830
+    }
+  ],
+  "fallback_used": false
+}

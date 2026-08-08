@@ -1,0 +1,129 @@
+{
+  "date": "2026-08-07",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1786162741.500509,
+      "errors": [],
+      "end": 1786162808.340241,
+      "duration_sec": 66.8
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 12614,
+      "tokens": {
+        "input_tokens": 150200,
+        "output_tokens": 17483
+      },
+      "rounds": 2,
+      "tool_calls_count": 3,
+      "duration_sec": 218.7,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1786163027.058849,
+      "actions": [
+        "RAISE_STOP 603259 → 139.15",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=46",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=39",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=133",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=59",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "300001",
+                "name": "特锐德",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 35.13,
+                "stopLoss": 33.88,
+                "distance_pct": 3.56,
+                "suggestion": "🟠 WATCH — 3.6% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "600885",
+                "name": "宏发股份",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 35.41,
+                "stopLoss": 33.96,
+                "distance_pct": 4.09,
+                "suggestion": "🟠 WATCH — 4.1% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1786163027.2594712,
+      "duration_sec": 0.2
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 300001 — 🟠 WATCH — 3.6% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 600885 — 🟠 WATCH — 4.1% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 285.7
+  }
+}
