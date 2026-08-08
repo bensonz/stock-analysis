@@ -2443,6 +2443,17 @@ def cmd_factors(args: list):
         # BJ-exchange codes (43x/83x/87x/92x) are deliberately unfactored —
         # sina hfq.js doesn't carry them; they stay at 1.0 (status quo).
         non_bj_missing = [c for c in missing if not c.startswith(("4", "8", "9"))]
+        # Fresh IPOs (<30 sessions of history) have no corporate actions yet —
+        # factor 1.0 is exactly right, absence is not breakage. 2026-08-08:
+        # two week-old listings (301707/603468) false-tripped exit 1 in the
+        # weekly audit. Reported separately, exempt from the failure gate.
+        fresh_ipos = []
+        if non_bj_missing:
+            placeholders = ",".join("?" * len(non_bj_missing))
+            fresh_ipos = [r[0] for r in conn.execute(
+                f"SELECT code FROM daily_prices WHERE code IN ({placeholders}) "
+                "GROUP BY code HAVING COUNT(*) < 30", non_bj_missing)]
+            non_bj_missing = [c for c in non_bj_missing if c not in fresh_ipos]
         covered_pairs = conn.execute(
             "SELECT COUNT(*) FROM daily_prices d JOIN adj_factors a "
             "ON a.code = d.code AND a.date = d.date").fetchone()[0]
@@ -2453,7 +2464,8 @@ def cmd_factors(args: list):
         print(f"Factor coverage (all rows): {cov['pair_coverage_pct']:.2f}%")
         print(f"Factor coverage (factored universe): {pct_covered_universe:.2f}%")
         print(f"Codes without factors: {len(missing)} "
-              f"(non-BJ: {len(non_bj_missing)}{' — ' + ','.join(non_bj_missing[:5]) if non_bj_missing else ''})")
+              f"(non-BJ: {len(non_bj_missing)}{' — ' + ','.join(non_bj_missing[:5]) if non_bj_missing else ''}"
+              f"{f'; 次新豁免 {len(fresh_ipos)}: ' + ','.join(fresh_ipos[:5]) if fresh_ipos else ''})")
         print(f"Latest price date:  {cov['max_price_date']}")
         print(f"Latest factor date: {cov['max_factor_date']}")
         ok = (pct_covered_universe >= 99.5
