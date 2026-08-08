@@ -154,3 +154,31 @@ def test_prompt_section_renders_events():
     assert "FOMC利率决议" in text and "霍尔木兹海峡危机" in text
     assert "event_imminent" in text and "新开仓减半" in text
     assert "9 次收跌" in text
+
+
+def test_released_event_stays_until_impact_date(tmp_path):
+    # 2026-08-08: NFP released Fri 8/7 evening vanished from Saturday's report
+    # although its A-share impact day was Monday 8/10. A dated event must stay
+    # until IMPACT passes, flagged released once its own date is behind us.
+    nfp = {"date": "2026-08-07", "tz": "US", "name": "NFP",
+           "kind": "macro_release", "certainty": "scheduled", "impact": "medium"}
+    p = _write(tmp_path, [nfp])
+    # Saturday: released, impact Monday still ahead → stays in dated
+    up = ec.upcoming(days=21, today=date(2026, 8, 8), path=p)
+    names = [e["name"] for e in up["dated"]]
+    assert "NFP" in names
+    e = up["dated"][names.index("NFP")]
+    assert e["released"] is True
+    assert e["a_share_impact_date"] == "2026-08-10"
+    # before release: present, NOT flagged
+    up0 = ec.upcoming(days=21, today=date(2026, 8, 6), path=p)
+    e0 = next(x for x in up0["dated"] if x["name"] == "NFP")
+    assert "released" not in e0
+    # after the impact day passes: moves to recent (result bucket)
+    up2 = ec.upcoming(days=21, today=date(2026, 8, 11), path=p)
+    assert "NFP" not in [e["name"] for e in up2["dated"]]
+    assert "NFP" in [e["name"] for e in up2["recent"]]
+    # beyond the look-back: forgotten entirely (formulaic events may still
+    # populate the window — only NFP must be gone)
+    up3 = ec.upcoming(days=21, today=date(2026, 8, 20), path=p)
+    assert "NFP" not in [e["name"] for e in up3["recent"] + up3["dated"]]

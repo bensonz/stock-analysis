@@ -217,13 +217,22 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
         for e in events.get("dated", [])[:10]:
             mark = _dir_mark.get(e.get("direction", "risk"), "🔴")
             est = "（日期待确认）" if e.get("certainty") == "estimated" else ""
+            rel = "📊**结果已出·影响待落地** " if e.get("released") else ""
             lines.append(f"- {mark} **{e.get('a_share_impact_date')}** "
                          f"(T-{e.get('days_until_impact')}) [{_impact(e)}] "
-                         f"{e.get('name')}{est} — {e.get('notes', '')}{_src(e)}")
+                         f"{rel}{e.get('name')}{est} — {e.get('notes', '')}{_src(e)}")
         for e in events.get("ongoing", []):
             mark = _dir_mark.get(e.get("direction", "risk"), "🔴")
             lines.append(f"- {mark} **持续中** [{_impact(e)}] "
                          f"{e.get('name')} — {e.get('notes', '')}{_src(e)}")
+        recent = events.get("recent", [])
+        if recent:
+            lines.append("\n**已落地事件（近几日）** — 结果与市场反应见市场概览段"
+                         "（模型每次运行检索实际值）：\n")
+            for e in recent[:5]:
+                mark = _dir_mark.get(e.get("direction", "risk"), "🔴")
+                lines.append(f"- {mark} {e.get('date')} {e.get('name')}"
+                             f"（A股影响日 {e.get('a_share_impact_date')}）{_src(e)}")
         st = events.get("fomc_next_session_stats")
         if st:
             lines.append(f"\n> 实测基准: FOMC决议次日A股 — 过去{st.get('n')}次中"

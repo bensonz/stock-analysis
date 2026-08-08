@@ -753,10 +753,22 @@ def build_summary(phase1_data: dict) -> str:
         lines = ["## 未来事件窗口 (Foreseeable Events)",
                  f"- 风险档: {rw.get('level', '?')} — {rw.get('advice', '')}"]
         for e in events.get("dated", [])[:8]:
+            rel = "[结果已出·影响待落地] " if e.get("released") else ""
             lines.append(f"- {e.get('a_share_impact_date')} (T-{e.get('days_until_impact')}) "
-                         f"[{e.get('impact')}] {e.get('name')} — {e.get('notes', '')}")
+                         f"[{e.get('impact')}] {rel}{e.get('name')} — {e.get('notes', '')}")
         for e in events.get("ongoing", []):
             lines.append(f"- 持续中 [{e.get('impact')}] {e.get('name')} — {e.get('notes', '')}")
+        settled = ([e for e in events.get("dated", []) if e.get("released")]
+                   + list(events.get("recent", []))[:5])
+        if settled:
+            lines.append("")
+            lines.append("### 已公布事件——必须检索结果 (event results, MANDATORY)")
+            lines.append("以下日历事件的数据已经公布。对每一条, 用 web_search 查出实际结果"
+                         "(实际值 vs 预期值), 并在 market_summary 中用一句话给出"
+                         "「结果 + 对A股的含义」——不许只说'关注XX事件', 事件已经发生了:")
+            for e in settled:
+                lines.append(f"- {e.get('date')} {e.get('name')}"
+                             f"（A股影响日 {e.get('a_share_impact_date')}）")
         st = events.get("fomc_next_session_stats")
         if st:
             lines.append(f"- 实测: FOMC决议次日A股 n={st.get('n')} 中 "

@@ -154,13 +154,26 @@ def load_events(path: Path | None = None) -> list:
         return []
 
 
+RECENT_SETTLED_DAYS = 4  # look-back for the 已落地事件 bucket (covers a weekend)
+
+
 def upcoming(days: int = 21, today: _date | None = None,
              path: Path | None = None) -> dict:
-    """Events in the window + ongoing situations, sorted by A-share impact date."""
+    """Events in the window + ongoing situations, sorted by A-share impact date.
+
+    A dated event stays in `dated` until its A-SHARE IMPACT date has passed —
+    not its release date (2026-08-08: NFP released Fri 8/7 evening vanished
+    from Saturday's report although its A-share impact day was Monday 8/10).
+    Released-but-impact-pending events carry `released: true`. Events whose
+    impact date passed within RECENT_SETTLED_DAYS land in `recent` so the
+    report/LLM can state their RESULT instead of silently forgetting them.
+    """
     today = today or _date.today()
     horizon = today + timedelta(days=days)
-    dated, ongoing = [], []
-    for e in load_events(path) + formulaic_events(today, horizon):
+    recent_floor = today - timedelta(days=RECENT_SETTLED_DAYS)
+    dated, ongoing, recent = [], [], []
+    for e in (load_events(path)
+              + formulaic_events(recent_floor, horizon)):
         if e.get("certainty") == "ongoing" or not e.get("date"):
             ongoing.append({**{k: e.get(k) for k in
                                ("name", "kind", "impact", "notes", "source")},
@@ -170,19 +183,24 @@ def upcoming(days: int = 21, today: _date | None = None,
             d = _parse(e["date"])
         except (ValueError, TypeError):
             continue
-        if not (today <= d <= horizon):
-            continue
         impact_d = a_share_impact_date(d, e.get("tz", "CN"))
-        dated.append({**{k: e.get(k) for k in
-                         ("date", "tz", "name", "kind", "certainty",
-                          "impact", "notes", "source")},
-                      "direction": e.get("direction", "risk"),
-                      "a_share_impact_date": impact_d.isoformat(),
-                      "days_until_impact": (impact_d - today).days})
+        base = {**{k: e.get(k) for k in
+                   ("date", "tz", "name", "kind", "certainty",
+                    "impact", "notes", "source")},
+                "direction": e.get("direction", "risk"),
+                "a_share_impact_date": impact_d.isoformat(),
+                "days_until_impact": (impact_d - today).days}
+        if today <= impact_d and d <= horizon:
+            if d < today:
+                base["released"] = True  # data is out; A-share impact pending
+            dated.append(base)
+        elif recent_floor <= impact_d < today:
+            recent.append(base)
     dated.sort(key=lambda x: (x["a_share_impact_date"],
                               -IMPACT_ORDER.get(x["impact"], 0)))
+    recent.sort(key=lambda x: x["a_share_impact_date"], reverse=True)
     return {"as_of": today.isoformat(), "window_days": days,
-            "dated": dated, "ongoing": ongoing}
+            "dated": dated, "ongoing": ongoing, "recent": recent}
 
 
 def risk_window(today: _date | None = None, path: Path | None = None) -> dict:
