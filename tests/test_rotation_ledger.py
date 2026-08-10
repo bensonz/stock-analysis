@@ -24,7 +24,7 @@ def _data(pool_codes, positions):
         "slot": "noon",
         "positions": positions,
         "position_prices": {},
-        "intersect": {"stocks": [
+        "strategy_pool": {"stocks": [
             {"code": c, "name": f"C{c}", "rps60": 95, "rps120": 96, "rps250": 97}
             for c in pool_codes]},
         "entry_regime": {"allow_new_positions": True},

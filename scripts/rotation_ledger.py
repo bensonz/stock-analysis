@@ -85,7 +85,9 @@ def record_if_full(date: str, data: dict, ledger_path: Path = LEDGER_FILE,
     if len(positions) < max_positions:
         return None
 
-    pool = ((data.get("intersect") or {}).get("stocks")) or []
+    # phase-1 key is `strategy_pool` (intersect.json is only the FILENAME —
+    # 2026-08-10: the wrong key made the first-ever 10/10 day record nothing)
+    pool = ((data.get("strategy_pool") or data.get("intersect") or {}).get("stocks")) or []
     held = {str(p.get("code", "")).split(".")[0] for p in positions}
     candidates = [
         {"code": str(s.get("code", "")).split(".")[0], "name": s.get("name", ""),
