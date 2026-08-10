@@ -1,0 +1,127 @@
+{
+  "date": "2026-08-10",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1786332930.247568,
+      "errors": [],
+      "end": 1786333011.2889988,
+      "duration_sec": 81.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 12624,
+      "tokens": {
+        "input_tokens": 150726,
+        "output_tokens": 14276
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 211.7,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1786333223.0861409,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h146 (observation): 2/3指数买入门槛今天过滤了breadth陷阱：Breadth 1.74:1看起来健康，但仅上证微红(+0.20%)、深成指-1.13%、创业板-2.18%——...",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=60",
+        "Hypothesis: Created h147 (observation): 策略池VCP覆盖率极低：57只股票仅2只有VCP数据(桂冠电力SETUP、宏发股份SETUP)，其余全部null。当前候选池缺乏PREMIUM/QUALITY标...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "300001",
+                "name": "特锐德",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 35.03,
+                "stopLoss": 33.88,
+                "distance_pct": 3.28,
+                "suggestion": "🟠 WATCH — 3.3% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "600885",
+                "name": "宏发股份",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 35.5,
+                "stopLoss": 33.96,
+                "distance_pct": 4.34,
+                "suggestion": "🟠 WATCH — 4.3% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1786333223.502443,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 300001 — 🟠 WATCH — 3.3% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 600885 — 🟠 WATCH — 4.3% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 293.09999999999997
+  }
+}

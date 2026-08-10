@@ -1,0 +1,236 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "地面兵装Ⅱ",
+        "5d_pct": 4.11,
+        "trend": "one-day spike"
+      },
+      {
+        "name": "酒店餐饮",
+        "5d_pct": 4.05,
+        "trend": "rotation"
+      },
+      {
+        "name": "养殖业",
+        "5d_pct": 3.77,
+        "trend": "cyclical rebound"
+      },
+      {
+        "name": "医疗服务",
+        "5d_pct": 3.26,
+        "trend": "persistent(创新药license-out记录+药明康德中报超预期)"
+      },
+      {
+        "name": "渔业",
+        "5d_pct": 3.11,
+        "trend": "cyclical"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "通信设备",
+        "5d_pct": -5.43,
+        "trend": "profit-taking"
+      },
+      {
+        "name": "元件",
+        "5d_pct": -3.8,
+        "trend": "rotating-out(前期涨幅过大)"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": -3.72,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "自动化设备",
+        "5d_pct": -2.5,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": -2.23,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "3/9持仓在热门板块(药明康德+昭衍新药=医疗服务;中芯国际=半导体+2.82%), 2/9在冷门板块(顺络电子+三环集团=元件,第1天)",
+    "regime": "指数严重分化：上证+0.20%护盘 vs 深成指-1.13%/创业板-2.18%杀估值。科技→防御轮动中。Breadth 1.74:1但赚钱效应集中于微涨(r0_2占64%)。"
+  },
+  "position_decisions": [
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "PnL+26.52%持仓10天，医疗服务sector#4热门持续。中报催化完美兑现(H1营收+39%，在手订单664亿创新高，全年指引上调至585-605亿)。止损已提至+10%=¥139.15(Rule 5)。创新药板块License-out记录+药明系业绩超预期双驱动(来源:证券时报8/8)。",
+      "sector_rank": "top 5(医疗服务+3.26%)",
+      "new_stop": 139.15,
+      "pnl_pct": 26.52,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "PnL+16.62%持仓6天，医疗服务sector#4热门。CXO安评龙头+实验猴稀缺壁垒(猴价突破20万/只，2.5万只储备)。止损已提至盈亏平衡¥44.35。距+20%阈值¥53.22仅2.9%，若触及则提止损至+10%=¥48.79。",
+      "sector_rank": "top 5(医疗服务+3.26%)",
+      "new_stop": 44.35,
+      "pnl_pct": 16.62,
+      "days_held": 6,
+      "exit_price": null
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "PnL+14.17%持仓10天，文莱炼化核心逻辑持续兑现。止损已在¥15.60盈亏平衡。Margin deleveraging(chg5=-3.82%)警示但非卖出触发。距+20%阈值¥18.72差5.1%。",
+      "sector_rank": "中游(石油石化未入top/bottom)",
+      "new_stop": 15.6,
+      "pnl_pct": 14.17,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "action": "HOLD",
+      "reason": "PnL+8.92%持仓6天。⚠️元件sector今日#2冷门(-3.80%)，第1天——Rule 1要求连续3天冷门才触发卖出。今日-4.82%回调属前期大涨后获利回吐(8/7元件+6.74%为市场前三热点)。MLCC涨价周期未破(来源:东方财富/21经济报道，三环订单覆盖净利5.6倍)。止损已在¥43.51盈亏平衡。板块若再冷2天→SELL。",
+      "sector_rank": "bottom 5(元件-3.80%，第1天)",
+      "new_stop": 43.51,
+      "pnl_pct": 8.92,
+      "days_held": 6,
+      "exit_price": null
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "reason": "PnL+6.39%持仓10天。⚠️元件sector今日#2冷门(-3.80%)，第1天。今日-3.89%跌幅较大但PnL>3%不触发time stop。MLCC核心受益(三星电机8/1+30%已生效，三环订单覆盖净利5.6倍——来源:EET-China)。连续两期回购合计14-19亿。止损¥115.07盈亏平衡，距当前仅5.98%缓冲。板块若连续3天冷门→SELL。",
+      "sector_rank": "bottom 5(元件-3.80%，第1天)",
+      "new_stop": 115.07,
+      "pnl_pct": 6.39,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "action": "HOLD",
+      "reason": "PnL+2.63%持仓5天，今日-3.16%回调。刚果铜精矿禁令情绪消退后正常获利回吐。基本面强劲(H1净利+123%，控股股东增持7.4亿，股东户数-30%)。工业金属板块中性。止损¥38.61缓冲7.43%。",
+      "sector_rank": "中游(工业金属未入top/bottom)",
+      "new_stop": 38.61,
+      "pnl_pct": 2.63,
+      "days_held": 5,
+      "exit_price": null
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "HOLD",
+      "reason": "PnL+3.25%持仓5天，今日-2.70%随科创50回调。集成电路制造龙头0风险，在建工程20%产能大扩张，机构目标+33%。半导体产业链整体+2.82%(富途数据)未入冷门。Margin adding(+3.26%)杠杆资金流入确认。止损¥115.04缓冲8.0%。",
+      "sector_rank": "中游偏上(半导体+2.82%未入bottom5)",
+      "new_stop": 115.04,
+      "pnl_pct": 3.25,
+      "days_held": 5,
+      "exit_price": null
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "action": "HOLD",
+      "reason": "PnL-1.77%持仓6天，连续4天疲弱横盘。充电桩3C认证长期利好未变(特来电23%市占率，H1充电量+47%)但短期走势不利。⚠️距止损¥33.88仅3.28%——stop_proximity WATCH。距跌破3日-3%触发线¥34.59仅1.25%。若明日跌破34.59→SELL。",
+      "sector_rank": "中游(电网设备未入top/bottom)",
+      "new_stop": 33.88,
+      "pnl_pct": -1.77,
+      "days_held": 6,
+      "exit_price": null
+    },
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "action": "HOLD",
+      "reason": "PnL-0.70%持仓6天，今日+0.25%微涨。H1业绩扎实(营收+32%净利+19.9%)，QFII重仓>20亿(来源:证券时报8/5)，股东户数-39%，0风险标签。但短期走势纠结，电网设备非热点。⚠️距止损¥33.96仅4.34%——stop_proximity WATCH。",
+      "sector_rank": "中游(电网设备未入top/bottom)",
+      "new_stop": 33.96,
+      "pnl_pct": -0.7,
+      "days_held": 6,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "002440",
+      "name": "闰土股份",
+      "reason": "RPS甜点(87.65%)+MA全部合规(dist_ma5=1.8%/dist_ma10=1.6%/dist_ma20=7.9%)+染料涨价催化真实(还原物2.5→3.8万/吨+50%，H1净利+254-334%，来源:证券时报/中邮证券)，但化学制品板块非今日热点+仅1/3指数绿不满足买入门槛。指数修复后优先评估。",
+      "rps120": 87.65
+    },
+    {
+      "code": "600160",
+      "name": "巨化股份",
+      "reason": "RPS甜点(85.61%)+MA全部合规(dist_ma5=2.4%/dist_ma10=6.0%/dist_ma20=6.6%)+制冷剂景气延续(R32/R134a/R125供需紧平衡，来源:国信证券研报)，但化学制品板块非今日热点+弱市不急于出手。",
+      "rps120": 85.61
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "MA距离三项全部超限(dist_ma5=12.4%/dist_ma10=15.2%/dist_ma20=17.4%)，Rule 2b硬性否决。上周+20.04%涨幅后严重超买(来源:财通证券周报)。RPS120=94.01%扩展区。",
+      "rps120": 94.01
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "MA距离三项全部超限(dist_ma5=16.4%/dist_ma10=18.5%/dist_ma20=18.3%)。虽医疗服务sector热门但极度超买，Rule 2b硬性否决。等回调至MA10附近再评估。",
+      "rps120": 93.56
+    },
+    {
+      "code": "300503",
+      "name": "昊志机电",
+      "reason": "dist_ma5=6.3%触及6%红线，Rule 2b否决。虽宇树科技IPO催化人形机器人板块(8/10申购，来源:数据宝8/8)，但不可追高。",
+      "rps120": 90.94
+    },
+    {
+      "code": "000977",
+      "name": "浪潮信息",
+      "reason": "RPS120=92.79%扩展区，需强板块支撑但计算机板块非今日热点。DeepSeek涨价催化真实(来源:开源证券8/8)但时机不对。",
+      "rps120": 92.79
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "2/3指数买入门槛今天过滤了breadth陷阱：Breadth 1.74:1看起来健康，但仅上证微红(+0.20%)、深成指-1.13%、创业板-2.18%——赚钱效应集中于微涨股(r0_2占64%)而非真实强势。开仓次日极可能被反转绞杀。这个硬性门槛阻止了闰土股份、巨化股份等在弱市中的'看起来还行'式买入。",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "market-regime"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "Breadth反映广度，指数反映深度——二者同时弱才是真弱，breadth虚假繁荣时指数分化暴露了资金的防御性轮动而非进攻。"
+    },
+    {
+      "text": "板块轮动速度极快：元件从8/7市场#3热门(+6.74%)到今天#2冷门(-3.80%)仅隔1个交易日。Rule 1的3天缓冲区设计合理——如果1天冷就卖，会在MLCC大周期中被洗；但完全忽略板块也不行。MLCC涨价基础未破(三环订单覆盖净利5.6倍，来源:EET-China)，需未来2天验证是获利回吐还是真转弱。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "前期涨幅过大的板块出现单日大幅回调，往往是获利盘出逃而非基本面恶化——需要至少3天确认趋势。"
+    },
+    {
+      "text": "策略池VCP覆盖率极低：57只股票仅2只有VCP数据(桂冠电力SETUP、宏发股份SETUP)，其余全部null。当前候选池缺乏PREMIUM/QUALITY标的，最强技术信号无法使用。建议扩大VCP扫描范围或引入补充择时信号。",
+      "type": "signal",
+      "tags": [
+        "timing",
+        "data-quality"
+      ],
+      "evidence_type": "contradicting",
+      "mechanism": "VCP需要至少3次contraction+vol_declining才能被扫描器检测，当前候选以高RPS+强趋势为主，可能不满足VCP的'回调收敛'前置条件。"
+    }
+  ],
+  "market_summary": "2026-08-10指数严重分化：上证+0.20%勉强收红 vs 深成指-1.13%/创业板-2.18%/科创50-1.57%普跌。Breadth 1.74:1(3441涨/1973跌)，涨停74跌停5，无恐慌但赚钱效应弱(r0_2占64%)。市场从科技/成长向防御/价值轮动：医疗服务(创新药)+3.26%受益于中国创新药License-out上半年1100亿美元记录+药明康德中报超预期(证券时报)；通信设备-5.43%/元件-3.80%领跌属前期大涨后获利回吐(MLCC涨价周期未破)。仅1/3主要指数红→不满足新仓买入门槛。IV整体正常(average rank 0.48)，科创50/创业板偏紧(61-65%)。保持9成仓位观望，不急于开新仓。",
+  "market_sentiment": "neutral",
+  "market_call": "中性偏谨慎——指数分化+板块快速轮动，新仓暂停，专注持仓管理。"
+}
