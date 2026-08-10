@@ -130,6 +130,34 @@ class TestPositionManager(unittest.TestCase):
         self.assertEqual(pos["stopLoss"], 47.5)
         self.assertEqual(pos["currentStop"], 47.5)
 
+    def test_partial_day_autoheal_paths(self):
+        # 2026-08-10: gate-1 partial-day halts now self-heal via the sina
+        # sweep. Success → True (re-collect); repair failure → False (halt).
+        import run_daily
+        calls = []
+
+        class _R:
+            def __init__(self, rc):
+                self.returncode = rc
+
+        def fake_run_ok(cmd, **kw):
+            calls.append(cmd[2])          # subcommand: repair / rps
+            return _R(0)
+
+        orig = run_daily.subprocess.run
+        try:
+            run_daily.subprocess.run = fake_run_ok
+            ok = run_daily.attempt_partial_day_autoheal(
+                {"db_health": {"latest_price_date": "2026-08-10"}})
+            self.assertTrue(ok)
+            self.assertEqual(calls, ["repair", "rps"])
+
+            run_daily.subprocess.run = lambda cmd, **kw: _R(1)
+            self.assertFalse(run_daily.attempt_partial_day_autoheal(
+                {"db_health": {"latest_price_date": "2026-08-10"}}))
+        finally:
+            run_daily.subprocess.run = orig
+
     def test_reclose_after_reentry_keeps_both_round_trips(self):
         # 2026-08-06: closed/{code}.json naming silently overwrote the prior
         # round-trip on re-entry+re-close, erasing its realized PnL (9 trips

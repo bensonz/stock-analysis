@@ -1818,6 +1818,42 @@ def _parse_slot_arg(args: list[str]) -> str | None:
     return value
 
 
+def attempt_partial_day_autoheal(data: dict) -> bool:
+    """Run the proven partial-day cure in-place: budget-exempt sina repair
+    sweep (factor heal rides inside) + RPS recompute for the damaged date.
+    Returns True when the sweep succeeded and a re-collect is worthwhile.
+
+    Only ever invoked after Gate 1 flags the latest price day as partial —
+    i.e. a settled session with a died-mid-fetch bar set (eastmoney throttle
+    signature). Failure here is not fatal to the caller; the run then halts
+    exactly as it did before auto-heal existed (2026-08-10)."""
+    day = (data.get("db_health") or {}).get("latest_price_date")
+    if not day:
+        return False
+    pricedb_script = str(PROJECT_ROOT / "scripts" / "pricedb.py")
+    print(f"\n⚙ AUTO-HEAL: latest price day {day} is partial — sina repair "
+          f"sweep + RPS recompute (~10-12 min)...", file=sys.stderr)
+    try:
+        repair = subprocess.run(
+            [sys.executable, pricedb_script, "repair", "--beg", day, "--end", day],
+            cwd=str(PROJECT_ROOT), timeout=1800)
+        if repair.returncode != 0:
+            print("  ✗ auto-heal: repair sweep failed — halting as before",
+                  file=sys.stderr)
+            return False
+        rps = subprocess.run(
+            [sys.executable, pricedb_script, "rps", day],
+            cwd=str(PROJECT_ROOT), timeout=1800)
+        if rps.returncode != 0:
+            print("  ⚠ auto-heal: RPS recompute failed — collect will retry "
+                  "with cache invalidated", file=sys.stderr)
+        print("  ✓ auto-heal complete — re-collecting phase 1", file=sys.stderr)
+        return True
+    except Exception as e:  # noqa: BLE001 — timeouts, spawn failures
+        print(f"  ✗ auto-heal error: {e} — halting as before", file=sys.stderr)
+        return False
+
+
 def main():
     run_start = datetime.now().astimezone()
     date = run_start.strftime("%Y-%m-%d")
@@ -1935,30 +1971,43 @@ def main():
         # Done here (not inside phase1) so we refuse to start analysis on stale closes.
         preflight_pricedb_or_exit(manifest)
 
-        # Phase 1: Collect
-        data = phase1_collect(date, slot)
+        # Phase 1: Collect (+ Gate 1), with ONE partial-day auto-heal retry.
+        # Under the eastmoney throttle the settled-day fetch can die mid-sweep
+        # (24-141 of ~5211 rows, three manual repairs in four sessions to
+        # 2026-08-10); the cure is deterministic and proven, so the pipeline
+        # now runs it itself: sina repair sweep (+factor heal inside) + RPS
+        # recompute, then re-collect. Still halts if the sweep fails, and the
+        # sweep only touches settled dates — never intraday bars.
+        for gate1_attempt in (1, 2):
+            data = phase1_collect(date, slot)
 
-        # Save Phase 1 data
-        phase1_file = run_dir / "phase1.json"
-        save_data = {k: v for k, v in data.items() if k not in ("learnings", "_hypothesis_data", "hypothesis_prompt")}
-        phase1_file.write_text(
-            json.dumps(save_data, ensure_ascii=False, indent=2, default=str) + "\n",
-            encoding="utf-8",
-        )
+            # Save Phase 1 data
+            phase1_file = run_dir / "phase1.json"
+            save_data = {k: v for k, v in data.items() if k not in ("learnings", "_hypothesis_data", "hypothesis_prompt")}
+            phase1_file.write_text(
+                json.dumps(save_data, ensure_ascii=False, indent=2, default=str) + "\n",
+                encoding="utf-8",
+            )
 
-        # Gate 1: Validate Phase 1 output
-        print(f"\nGate 1: Validating Phase 1 data...", file=sys.stderr)
-        gate1 = validate_phase1_gate(data)
-        manifest.add_gate(gate1)
-        manifest.add_phase("collect", "ok" if gate1.passed else "failed",
-                           duration_sec=data.get("_log_phase1", {}).get("duration_sec", 0),
-                           details={"errors": data.get("_log_phase1", {}).get("errors", [])})
+            # Gate 1: Validate Phase 1 output
+            print(f"\nGate 1: Validating Phase 1 data...", file=sys.stderr)
+            gate1 = validate_phase1_gate(data)
+            manifest.add_gate(gate1)
+            manifest.add_phase("collect", "ok" if gate1.passed else "failed",
+                               duration_sec=data.get("_log_phase1", {}).get("duration_sec", 0),
+                               details={"errors": data.get("_log_phase1", {}).get("errors", [])})
 
-        if gate1.soft_warns:
-            for w in gate1.soft_warns:
-                print(f"  ⚠ {w}", file=sys.stderr)
+            if gate1.soft_warns:
+                for w in gate1.soft_warns:
+                    print(f"  ⚠ {w}", file=sys.stderr)
 
-        if not gate1.passed:
+            if gate1.passed:
+                break
+            if gate1_attempt == 1 and any("partial" in f for f in gate1.hard_fails) \
+                    and attempt_partial_day_autoheal(data):
+                manifest.add_phase("auto_heal", "ok")
+                continue
+
             for f in gate1.hard_fails:
                 print(f"  ✗ {f}", file=sys.stderr)
             manifest.finalize()
