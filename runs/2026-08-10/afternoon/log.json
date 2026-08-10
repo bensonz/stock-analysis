@@ -1,0 +1,140 @@
+{
+  "date": "2026-08-10",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1786358566.9315891,
+      "errors": [],
+      "end": 1786358641.183858,
+      "duration_sec": 74.3
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 12011,
+      "tokens": {
+        "input_tokens": 246084,
+        "output_tokens": 15793
+      },
+      "rounds": 3,
+      "tool_calls_count": 5,
+      "duration_sec": 274.3,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1786358915.503266,
+      "actions": [
+        "OPEN 600160 @ 44.26",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h148 (observation): 氟化工子行业本周+10.5%但化学制品母板块未入今日TOP5——子行业动量比母行业排名更有信息量。当子行业有独立产业逻辑(配额制+涨价周期)，应给子行业更高的s...",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=47",
+        "Hypothesis: Updated h076 (hypothesis): +1 supporting evidence → hitRate=100%, n=3",
+        "Hypothesis: Created h149 (observation): 药明康德1260H豁免认定(来源:财闻8/10)与H1业绩超预期形成双重催化共振，CXO主线第2周领涨验证了AI制药→CXO湿实验需求放量的产业逻辑。医疗服务板...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 3,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "300001",
+                "name": "特锐德",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 35.36,
+                "stopLoss": 33.88,
+                "distance_pct": 4.19,
+                "suggestion": "🟠 WATCH — 4.2% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "600160",
+                "name": "巨化股份",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 44.26,
+                "stopLoss": 42.05,
+                "distance_pct": 4.99,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "600885",
+                "name": "宏发股份",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 35.3,
+                "stopLoss": 33.96,
+                "distance_pct": 3.8,
+                "suggestion": "🟠 WATCH — 3.8% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1786358916.097816,
+      "duration_sec": 0.6
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 300001 — 🟠 WATCH — 4.2% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 600160 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 600885 — 🟠 WATCH — 3.8% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 349.2
+  }
+}

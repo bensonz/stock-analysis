@@ -1,0 +1,247 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "地面兵装Ⅱ",
+        "5d_pct": 5.1,
+        "trend": "脉冲"
+      },
+      {
+        "name": "医疗服务",
+        "5d_pct": 3.91,
+        "trend": "持续强势——CXO/AI制药主线第2周领涨"
+      },
+      {
+        "name": "贵金属",
+        "5d_pct": 3.87,
+        "trend": "黄金$4300+驱动"
+      },
+      {
+        "name": "氟化工(子行业)",
+        "5d_pct": 10.5,
+        "trend": "本周最强子行业，制冷剂配额景气延续"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "通信设备",
+        "5d_pct": -3.67,
+        "trend": "科技回调"
+      },
+      {
+        "name": "元件",
+        "5d_pct": -1.23,
+        "trend": "从TOP3骤降至BOTTOM2——第1天，密切关注"
+      }
+    ],
+    "position_alignment": "2/9在热门板块(昭衍新药+药明康德/医疗服务)，2/9在冷门板块(顺络电子+三环集团/元件——第1天)，5/9在中性板块",
+    "regime": "医疗服务/CXO持续领涨，元件从热点快速冷却，氟化工子行业独立走强。科技成长（创业板/科创50）承压，大盘蓝筹（上证）偏强。"
+  },
+  "position_decisions": [
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "PnL+27.53%持仓10天，医疗服务TOP4持续受益CXO/AI制药主线。今日+4.21%，新增催化剂：美国暂时豁免1260H名单认定(来源:财闻8/10)。止损已提至+10%线¥139.15，安全边际极高。",
+      "sector_rank": "top 13%",
+      "new_stop": 139.15,
+      "pnl_pct": 27.53,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "PnL+19.06%持仓6天，医疗服务TOP4热门。CXO安评龙头+实验猴稀缺壁垒(猴价突破20万/只，2.5万只储备)。距+20%阈值¥53.22仅差0.79%，触及后止损提至+10%=¥48.79。",
+      "sector_rank": "top 13%",
+      "new_stop": 44.35,
+      "pnl_pct": 19.06,
+      "days_held": 6,
+      "exit_price": null
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "PnL+16.54%持仓12天，文莱炼化核心逻辑持续兑现(H1净利+2326-2547%，东南亚裂解价差高位)。距+20%阈值¥18.72差2.97%。止损¥15.60已在盈亏平衡。",
+      "sector_rank": "middle",
+      "new_stop": 15.6,
+      "pnl_pct": 16.54,
+      "days_held": 12,
+      "exit_price": null
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "action": "HOLD",
+      "reason": "PnL+10.55%持仓6天。⚠️元件板块BOTTOM2(-1.23%)第1天冷门——Rule 1要求连续3天才触发卖出。MLCC涨价周期未破(三星8/1+30%已生效，21财经/EET-China)。今日-3.39%为前期大涨后获利回吐(8/7元件+6.74%为市场前三热点)。止损¥43.51盈亏平衡。板块再冷2天→SELL。",
+      "sector_rank": "bottom 6% (第1天)",
+      "new_stop": 43.51,
+      "pnl_pct": 10.55,
+      "days_held": 6,
+      "exit_price": null
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "reason": "PnL+10.28%持仓10天。⚠️元件板块BOTTOM2第1天。MLCC核心受益(三星8/1+30%已生效，三环订单覆盖净利5.6倍——EET-China)。10天持仓PnL>3%不触发time stop。连续两期回购合计14-19亿。止损¥115.07盈亏平衡。板块再冷2天→SELL。",
+      "sector_rank": "bottom 6% (第1天)",
+      "new_stop": 115.07,
+      "pnl_pct": 10.28,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "action": "HOLD",
+      "reason": "PnL+4.45%持仓5天。刚果铜精矿禁令情绪消退后正常获利回吐(-1.44%)。铜供应扰动结构性升级(H1净利+123%，控股股东增持7.4亿，股东户数-30%)。止损¥38.61缓冲7.43%。",
+      "sector_rank": "middle",
+      "new_stop": 38.61,
+      "pnl_pct": 4.45,
+      "days_held": 5,
+      "exit_price": null
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "HOLD",
+      "reason": "PnL+4.25%持仓5天，今日-1.75%随科创50回调。集成电路制造龙头0风险，在建工程20%产能大扩张，机构目标+33%。止损¥115.04缓冲8.0%。",
+      "sector_rank": "middle",
+      "new_stop": 115.04,
+      "pnl_pct": 4.25,
+      "days_held": 5,
+      "exit_price": null
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "action": "HOLD",
+      "reason": "PnL-0.84%持仓6天。充电桩3C认证长期利好(特来电23%市占率，H1充电量+47%)但短期持续疲弱横盘。⚠️距止损¥33.88仅4.19%(stop_proximity WATCH)，距-3%触发线¥34.59仅1.25%。若明日跌破¥34.59→SELL。",
+      "sector_rank": "middle",
+      "new_stop": 33.88,
+      "pnl_pct": -0.84,
+      "days_held": 6,
+      "exit_price": null
+    },
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "action": "HOLD",
+      "reason": "PnL-1.26%持仓6天。H1业绩扎实(营收+32%净利+19.9%)，QFII重仓>20亿(证券时报8/5)，股东户数-39%，0风险。但短期走势纠结。⚠️距止损¥33.96仅3.80%(stop_proximity WATCH)。严格执行止损纪律。",
+      "sector_rank": "middle",
+      "new_stop": 33.96,
+      "pnl_pct": -1.26,
+      "days_held": 6,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "600160",
+      "name": "巨化股份",
+      "entry_price": 44.26,
+      "allocation_pct": 5,
+      "stop": 42.05,
+      "target": 53.0,
+      "thesis": "制冷剂配额绝对龙头(HFCs占全国39.3%)，氟化工子行业本周+10.5%全市场最强板块之一(来源:开源证券8/9报告)。R32/R134a/R125价格高位运行，制冷剂景气周期延续。萤石价格回暖(+1.73% WoW)成本端支撑。净利+163% YoY，ROE 13%，在建工程23%产能大扩张。高纯PFA量产进军半导体高端市场。MA全部合规(dist_ma5=2.5%, dist_ma10=7.3%, dist_ma20=8.7%)。唯一遗憾：无VCP形态+母板块不在今日top5(子行业动量弥补)。",
+      "sector": "化学制品(氟化工)",
+      "sector_rank": "子行业本周+10.5%为全市场最强板块之一",
+      "catalyst": "制冷剂配额景气周期(R32¥64,500/吨高位运行)，萤石价格回暖，机构看好下半年补库行情",
+      "catalyst_freshness": "ongoing",
+      "rps120": 85.98,
+      "conviction": "moderate"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "dist_ma5=7.2%超6%追高红线(Rule 2b硬否决)。0风险+RPS94.26%+军工电子强势也救不了——h027反复验证：hot sector ≠ override chase risk。",
+      "rps120": 94.26
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "dist_ma5=8.7%+dist_ma10=14.7%双重MA违规(Rule 2b硬否决)。医疗服务TOP4也白搭。",
+      "rps120": 93.78
+    },
+    {
+      "code": "000725",
+      "name": "京东方A",
+      "reason": "光学光电子板块BOTTOM 4(-1.19%)，Rule 1硬否决(h019: cold sector = no-buy zone)。",
+      "rps120": 94.34
+    },
+    {
+      "code": "601233",
+      "name": "桐昆股份",
+      "reason": "石油石化板块中性，margin deleveraging信号，收益质量低(经营净收益仅占利润31%)，偿债压力大(带息债务60%)。优先选择有更强子行业催化的巨化股份。",
+      "rps120": 86.23
+    },
+    {
+      "code": "002440",
+      "name": "闰土股份",
+      "reason": "染料涨价催化但板块中性。收现比仅58%+扣非净利占58%，2个质量风险。优先选择产业逻辑更强的巨化股份。",
+      "rps120": 85.37
+    },
+    {
+      "code": "688777",
+      "name": "中控技术",
+      "reason": "自动化设备BOTTOM 2板块(-1.58%)，Rule 1硬否决。",
+      "rps120": 87.22
+    },
+    {
+      "code": "688131",
+      "name": "皓元医药",
+      "reason": "dist_ma5=12.6%/dist_ma10=20.4%/dist_ma20=24.1%三杀(Rule 2b)，虽医疗服务TOP4但严重超买。margin deleveraging叠加。",
+      "rps120": 89.03
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "氟化工子行业本周+10.5%但化学制品母板块未入今日TOP5——子行业动量比母行业排名更有信息量。当子行业有独立产业逻辑(配额制+涨价周期)，应给子行业更高的sector判断权重，而非机械套用母板块排名。",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "配额制制冷剂的供给天花板是独立于化工大盘的产业逻辑，子行业β应独立评估"
+    },
+    {
+      "text": "MA距离规则今天拦截了3个完美标的(睿创微纳0风险+军工、益诺思0风险+医疗服务TOP4、皓元医药医疗服务TOP4+净利+65%)——全部因dist_ma5>6%被否决。h027再次大规模验证：hot sector NEVER overrides chase risk。",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "均线过度偏离意味着短期获利盘堆积，即使催化剂完美，均值回归引力也会在1-3天内兑现"
+    },
+    {
+      "text": "元件板块2天从TOP3(+6.74%)骤降至BOTTOM2(-1.23%)——前期过热板块的均值回归速度远超预期。持有两只元件标的(顺络电子+三环集团，合计~14%仓位)需为连续3天冷门→双SELL做好预案。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "MLCC涨价利好已被充分定价，元件板块进入获利回吐阶段，动量资金的撤出速度通常快于入场"
+    },
+    {
+      "text": "药明康德1260H豁免认定(来源:财闻8/10)与H1业绩超预期形成双重催化共振，CXO主线第2周领涨验证了AI制药→CXO湿实验需求放量的产业逻辑。医疗服务板块持续性超出短期预期。",
+      "type": "signal",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "政策利好+业绩兑现双轮驱动，CXO从概念炒作进入订单兑现期"
+    }
+  ],
+  "market_summary": "Breadth 2.92:1偏强(4068涨/1391跌)，103涨停/6跌停无恐慌。上证+0.67%深证+0.04%收绿，创业板指-0.73%科创50-0.36%收跌——大盘蓝筹偏强、科技成长承压。分布偏弱(r0_2占38%)，多数股票勉强翻红。IV整体中性(avg rank 43.9%)，科创50 51.8%创业板57.3%偏高谨慎，50ETF仅29.1%偏低。板块轮动：医疗服务/CXO持续第2周领涨(AI制药管线临床验证+药明康德1260H豁免)，氟化工子行业本周+10.5%独立走强(制冷剂配额景气)，元件从上周TOP3骤降至BOTTOM2(MLCC涨价已被定价，获利回吐)。今日新开巨化股份(制冷剂龙头，5%仓位)，持仓增至10/10满仓。特锐德+宏发股份止损距离仅3.8-4.2%需密切监控。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

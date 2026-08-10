@@ -1,0 +1,82 @@
+{
+  "date": "2026-08-10",
+  "source": "期权实验室 http://47.94.238.128:8080/api/history/gex (自建后端, 每标的可复查)",
+  "etf_gex_data": [
+    {
+      "underlying": "510050",
+      "spot": 3.075,
+      "flip_point": 3.045,
+      "dist_to_flip_pct": 0.98,
+      "regime": "净正gamma(压制倾向)",
+      "spot_vs_flip": "剖面零轴上方(call-gamma主导区)",
+      "total_net_gex": 430432703.5391228,
+      "call_wall": 3.1,
+      "put_wall": 3.0,
+      "expiry_month": "2608",
+      "captured_at": "2026-08-10T07:01:00.000691+00:00",
+      "name": "50ETF"
+    },
+    {
+      "underlying": "510300",
+      "spot": 4.759,
+      "flip_point": 4.794,
+      "dist_to_flip_pct": -0.74,
+      "regime": "净正gamma(压制倾向)",
+      "spot_vs_flip": "剖面零轴下方(put-gamma主导区)",
+      "total_net_gex": 299584751.1520945,
+      "call_wall": 4.8,
+      "put_wall": 4.7,
+      "expiry_month": "2608",
+      "captured_at": "2026-08-10T07:01:05.301829+00:00",
+      "name": "300ETF"
+    },
+    {
+      "underlying": "510500",
+      "spot": 8.037,
+      "flip_point": 8.249,
+      "dist_to_flip_pct": -2.58,
+      "regime": "净正gamma(压制倾向)",
+      "spot_vs_flip": "剖面零轴下方(put-gamma主导区)",
+      "total_net_gex": 291307564.16409206,
+      "call_wall": 8.0,
+      "put_wall": 7.75,
+      "expiry_month": "2608",
+      "captured_at": "2026-08-10T07:01:10.577109+00:00",
+      "name": "500ETF"
+    },
+    {
+      "underlying": "588000",
+      "spot": 1.835,
+      "flip_point": 2.025,
+      "dist_to_flip_pct": -9.39,
+      "regime": "净正gamma(压制倾向)",
+      "spot_vs_flip": "剖面零轴下方(put-gamma主导区)",
+      "total_net_gex": 54254798.09476185,
+      "call_wall": 1.9,
+      "put_wall": 1.8,
+      "expiry_month": "2608",
+      "captured_at": "2026-08-10T07:01:15.958770+00:00",
+      "name": "科创50ETF"
+    },
+    {
+      "underlying": "159915",
+      "spot": 3.559,
+      "flip_point": 3.795,
+      "dist_to_flip_pct": -6.21,
+      "regime": "净正gamma(压制倾向)",
+      "spot_vs_flip": "剖面零轴下方(put-gamma主导区)",
+      "total_net_gex": 132566833.80248821,
+      "call_wall": 3.6,
+      "put_wall": 3.5,
+      "expiry_month": "2608",
+      "captured_at": "2026-08-10T07:01:21.329336+00:00",
+      "name": "创业板ETF"
+    }
+  ],
+  "overall": {
+    "signal": "全面净正gamma",
+    "net_negative": "0/5",
+    "below_flip": "4/5",
+    "implication": "全部标的做市净多gamma——对冲盘压制波动，倾向收敛/钉住。"
+  }
+}

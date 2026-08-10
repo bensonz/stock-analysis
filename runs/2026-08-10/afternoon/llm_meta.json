@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 246084,
+  "output_tokens": 15793,
+  "rounds": 3,
+  "duration_sec": 274.3,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月10日 热门板块 氟化工 制冷剂 巨化股份",
+        "max_results": 5
+      },
+      "result_length": 3286
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "分散染料涨价 闰土股份 浙江龙盛 2026年8月",
+        "max_results": 5
+      },
+      "result_length": 3165
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "MLCC涨价 三星电机 元件板块 2026年8月",
+        "max_results": 5
+      },
+      "result_length": 3623
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月10日 市场 医疗服务 CXO 创新药 板块",
+        "max_results": 5
+      },
+      "result_length": 3331
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "制冷剂 R32 R134a 涨价 巨化股份 2026年8月 景气",
+        "max_results": 5
+      },
+      "result_length": 3205
+    }
+  ],
+  "fallback_used": false
+}
