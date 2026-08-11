@@ -222,7 +222,9 @@ def snapshot_positions(snapshot_type: str, date: str) -> dict:
             continue
         try:
             data = json.loads(f.read_text(encoding="utf-8"))
-            if data.get("status") == "active":
+            # non-position state lives here too (rotation_ledger.json is a
+            # LIST — crashed this loop 2026-08-11); only dicts can be positions
+            if isinstance(data, dict) and data.get("status") == "active":
                 active[data["code"]] = data
         except (json.JSONDecodeError, KeyError):
             pass

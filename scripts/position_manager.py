@@ -215,7 +215,11 @@ def load_active_positions() -> list[dict]:
             continue
         try:
             pos = _read_json(f)
-            if pos.get("status") == "active":
+            # tracking/ also holds non-position state (events.json,
+            # hypotheses.json, rotation_ledger.json — the last is a LIST and
+            # crashed this loop with AttributeError on 2026-08-11). Anything
+            # that isn't a position-shaped dict is simply not a position.
+            if isinstance(pos, dict) and pos.get("status") == "active":
                 positions.append(pos)
         except (json.JSONDecodeError, KeyError) as e:
             print(f"  Warning: skipping {f.name}: {e}")

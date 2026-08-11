@@ -130,6 +130,22 @@ class TestPositionManager(unittest.TestCase):
         self.assertEqual(pos["stopLoss"], 47.5)
         self.assertEqual(pos["currentStop"], 47.5)
 
+    def test_non_position_json_in_tracking_is_ignored(self):
+        # 2026-08-11: tracking/rotation_ledger.json (a LIST) crashed
+        # load_active_positions with AttributeError and killed the noon run.
+        # tracking/ legitimately holds non-position state — skip non-dicts.
+        self._write_position("600001")
+        (self.tracking / "rotation_ledger.json").write_text(
+            json.dumps([{"date": "2026-08-10", "candidates": []}]), encoding="utf-8")
+        (self.tracking / "events.json").write_text(
+            json.dumps({"events": [{"name": "CPI"}]}), encoding="utf-8")
+
+        active = self.pm.load_active_positions()
+        self.assertEqual([p["code"] for p in active], ["600001"])
+        # and the whole-file loader stays usable too
+        self.assertTrue(any(isinstance(d, dict) and d.get("code") == "600001"
+                            for d in self.pm.load_all_tracking_files()))
+
     def test_partial_day_autoheal_paths(self):
         # 2026-08-10: gate-1 partial-day halts now self-heal via the sina
         # sweep. Success → True (re-collect); repair failure → False (halt).
