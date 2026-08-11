@@ -19,6 +19,7 @@
   "history": [
     {
       "date": "2026-07-23",
+      "slot": "afternoon",
       "price": 163.54,
       "change_pct": 0,
       "action": "OPEN",
@@ -26,6 +27,7 @@
     },
     {
       "date": "2026-07-24",
+      "slot": "noon",
       "price": 161.39,
       "change_pct": -1.31,
       "action": "HOLD",
@@ -33,6 +35,7 @@
     },
     {
       "date": "2026-07-24",
+      "slot": "afternoon",
       "price": 158.22,
       "change_pct": -3.25,
       "action": "SELL",
@@ -52,5 +55,7 @@
     "from_commit": "bad4f76^",
     "on": "2026-08-06",
     "reason": "closed/{code}.json 单文件命名导致再次建仓平仓时覆盖旧回合; 从git历史恢复"
-  }
+  },
+  "entrySlot": "afternoon",
+  "exitSlot": "afternoon"
 }

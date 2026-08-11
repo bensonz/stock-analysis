@@ -19,6 +19,7 @@
   "history": [
     {
       "date": "2026-06-09",
+      "slot": "afternoon",
       "price": 83.55,
       "change_pct": 0,
       "action": "OPEN",
@@ -26,6 +27,7 @@
     },
     {
       "date": "2026-06-10",
+      "slot": "afternoon",
       "price": 86.34,
       "change_pct": 3.34,
       "action": "HOLD",
@@ -33,6 +35,7 @@
     },
     {
       "date": "2026-06-11",
+      "slot": "afternoon",
       "price": 84.1,
       "change_pct": 0.66,
       "action": "HOLD",
@@ -40,6 +43,7 @@
     },
     {
       "date": "2026-06-12",
+      "slot": "afternoon",
       "price": 83.88,
       "change_pct": 0.39,
       "action": "HOLD",
@@ -47,6 +51,7 @@
     },
     {
       "date": "2026-06-15",
+      "slot": "afternoon",
       "price": 88.48,
       "change_pct": 5.9,
       "action": "HOLD",
@@ -54,6 +59,7 @@
     },
     {
       "date": "2026-06-16",
+      "slot": "afternoon",
       "price": 89.4,
       "change_pct": 7.0,
       "action": "HOLD",
@@ -61,6 +67,7 @@
     },
     {
       "date": "2026-06-17",
+      "slot": "afternoon",
       "price": 90.95,
       "change_pct": 8.86,
       "action": "HOLD",
@@ -68,6 +75,7 @@
     },
     {
       "date": "2026-06-18",
+      "slot": "afternoon",
       "price": 90.5,
       "change_pct": 8.32,
       "action": "HOLD",
@@ -75,6 +83,7 @@
     },
     {
       "date": "2026-06-19",
+      "slot": "afternoon",
       "price": 90.5,
       "change_pct": 8.32,
       "action": "RAISE_STOP",
@@ -89,6 +98,7 @@
     },
     {
       "date": "2026-06-22",
+      "slot": "afternoon",
       "price": 85.88,
       "change_pct": 2.79,
       "action": "SELL",
@@ -108,5 +118,7 @@
     "from_commit": "33e9b4c^",
     "on": "2026-08-06",
     "reason": "closed/{code}.json 单文件命名导致再次建仓平仓时覆盖旧回合; 从git历史恢复"
-  }
+  },
+  "entrySlot": "afternoon",
+  "exitSlot": "afternoon"
 }

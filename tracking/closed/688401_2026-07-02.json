@@ -19,6 +19,7 @@
   "history": [
     {
       "date": "2026-06-09",
+      "slot": "afternoon",
       "price": 72.58,
       "change_pct": 0,
       "action": "OPEN",
@@ -26,6 +27,7 @@
     },
     {
       "date": "2026-06-10",
+      "slot": "afternoon",
       "price": 73.35,
       "change_pct": 1.06,
       "action": "HOLD",
@@ -33,6 +35,7 @@
     },
     {
       "date": "2026-06-11",
+      "slot": "afternoon",
       "price": 78.77,
       "change_pct": 8.53,
       "action": "HOLD",
@@ -40,6 +43,7 @@
     },
     {
       "date": "2026-06-12",
+      "slot": "afternoon",
       "price": 75.98,
       "change_pct": 4.68,
       "action": "HOLD",
@@ -47,6 +51,7 @@
     },
     {
       "date": "2026-06-15",
+      "slot": "afternoon",
       "price": 79.63,
       "change_pct": 9.71,
       "action": "HOLD",
@@ -54,6 +59,7 @@
     },
     {
       "date": "2026-06-16",
+      "slot": "afternoon",
       "price": 79.18,
       "change_pct": 9.09,
       "action": "HOLD",
@@ -61,6 +67,7 @@
     },
     {
       "date": "2026-06-17",
+      "slot": "afternoon",
       "price": 83.05,
       "change_pct": 14.43,
       "action": "RAISE_STOP",
@@ -68,6 +75,7 @@
     },
     {
       "date": "2026-06-18",
+      "slot": "afternoon",
       "price": 81.12,
       "change_pct": 11.77,
       "action": "HOLD",
@@ -75,6 +83,7 @@
     },
     {
       "date": "2026-06-19",
+      "slot": "afternoon",
       "price": 81.12,
       "change_pct": 11.77,
       "action": "HOLD",
@@ -82,6 +91,7 @@
     },
     {
       "date": "2026-06-22",
+      "slot": "afternoon",
       "price": 80.5,
       "change_pct": 10.91,
       "action": "HOLD",
@@ -89,6 +99,7 @@
     },
     {
       "date": "2026-06-23",
+      "slot": "afternoon",
       "price": 75.4,
       "change_pct": 3.89,
       "action": "HOLD",
@@ -96,6 +107,7 @@
     },
     {
       "date": "2026-06-24",
+      "slot": "afternoon",
       "price": 84.41,
       "change_pct": 16.3,
       "action": "HOLD",
@@ -110,6 +122,7 @@
     },
     {
       "date": "2026-06-25",
+      "slot": "afternoon",
       "price": 89.2,
       "change_pct": 22.9,
       "action": "HOLD",
@@ -117,6 +130,7 @@
     },
     {
       "date": "2026-06-26",
+      "slot": "afternoon",
       "price": 89.63,
       "change_pct": 23.49,
       "action": "HOLD",
@@ -131,6 +145,7 @@
     },
     {
       "date": "2026-06-29",
+      "slot": "afternoon",
       "price": 94.56,
       "change_pct": 30.28,
       "action": "RAISE_STOP",
@@ -145,6 +160,7 @@
     },
     {
       "date": "2026-06-30",
+      "slot": "afternoon",
       "price": 95.98,
       "change_pct": 32.24,
       "action": "RAISE_STOP",
@@ -159,6 +175,7 @@
     },
     {
       "date": "2026-07-01",
+      "slot": "afternoon",
       "price": 99.49,
       "change_pct": 37.08,
       "action": "HOLD",
@@ -166,6 +183,7 @@
     },
     {
       "date": "2026-07-02",
+      "slot": "afternoon",
       "price": 95.0,
       "change_pct": 30.89,
       "action": "SELL",
@@ -185,5 +203,7 @@
     "from_commit": "18882d6^",
     "on": "2026-08-06",
     "reason": "closed/{code}.json 单文件命名导致再次建仓平仓时覆盖旧回合; 从git历史恢复"
-  }
+  },
+  "entrySlot": "afternoon",
+  "exitSlot": "afternoon"
 }
