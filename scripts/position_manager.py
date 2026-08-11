@@ -123,6 +123,7 @@ def build_positions_snapshot(price_data: dict | None = None) -> dict:
             "code": code,
             "name": p["name"],
             "entryDate": p["entryDate"],
+            "entrySlot": p.get("entrySlot"),
             "entryPrice": entry_price,
             "currentPrice": current_price,
             "pnl_pct": pnl_pct,
@@ -247,6 +248,7 @@ def close_position(
     exit_price: float,
     lesson: str = "",
     date: Optional[str] = None,
+    slot: Optional[str] = None,
 ) -> dict:
     """Close a position: update fields and move to tracking/closed/.
 
@@ -277,10 +279,13 @@ def close_position(
     pos["holdingDays"] = (exit_dt - entry_dt).days
     pos["lessonLearned"] = lesson
     pos["updatedAt"] = _now_iso()
+    if slot:
+        pos["exitSlot"] = slot  # which run closed it (noon vs afternoon)
 
     # Add SELL to history
     pos.setdefault("history", []).append({
         "date": exit_date,
+        **({"slot": slot} if slot else {}),
         "price": exit_price,
         "change_pct": pos["returnPct"],
         "action": "SELL",
@@ -403,6 +408,7 @@ def open_position(data: dict) -> dict:
         "status": "active",
         "thesis": data.get("thesis", ""),
         "entryDate": data.get("entryDate", today),
+        "entrySlot": data.get("slot"),  # which run opened it (noon vs afternoon)
         "entryPrice": entry_price,
         "targetPrice": data["targetPrice"],
         "stopLoss": data["stopLoss"],
@@ -418,6 +424,7 @@ def open_position(data: dict) -> dict:
         "history": [
             {
                 "date": data.get("entryDate", today),
+                **({"slot": data["slot"]} if data.get("slot") else {}),
                 "price": entry_price,
                 "change_pct": 0,
                 "action": "OPEN",
@@ -465,10 +472,14 @@ def update_position(code: str, updates: dict) -> dict:
         history = pos.setdefault("history", [])
         entry_date = history_entry.get("date")
         entry_action = history_entry.get("action")
-        # Replace existing entry for same date+action, or append if new
+        entry_slot = history_entry.get("slot")
+        # Replace the entry for the same date+action+SLOT (a re-run of one
+        # slot overwrites itself); noon and afternoon entries coexist so the
+        # audit trail says which run acted (2026-08-11).
         replaced = False
         for i, h in enumerate(history):
-            if h.get("date") == entry_date and h.get("action") == entry_action:
+            if (h.get("date") == entry_date and h.get("action") == entry_action
+                    and h.get("slot") == entry_slot):
                 history[i] = history_entry
                 replaced = True
                 break

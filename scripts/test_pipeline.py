@@ -130,6 +130,39 @@ class TestPositionManager(unittest.TestCase):
         self.assertEqual(pos["stopLoss"], 47.5)
         self.assertEqual(pos["currentStop"], 47.5)
 
+    def test_slot_recorded_on_open_close_and_history(self):
+        # 2026-08-11: history recorded only the DATE, so a same-day
+        # noon-vs-afternoon fill was indistinguishable in tracking/*.json.
+        pos = self.pm.open_position({
+            "code": "600002", "name": "午盘开仓", "entryPrice": 10.0,
+            "targetPrice": 12.0, "stopLoss": 9.5, "slot": "noon",
+        })
+        self.assertEqual(pos["entrySlot"], "noon")
+        self.assertEqual(pos["history"][0]["slot"], "noon")
+
+        # noon and afternoon HOLDs on the SAME day must both survive...
+        for slot, price in (("noon", 10.5), ("afternoon", 10.8)):
+            self.pm.update_position("600002", {"history_entry": {
+                "date": "2026-08-11", "slot": slot, "price": price,
+                "change_pct": 0, "action": "HOLD", "note": slot}})
+        holds = [h for h in self.pm._read_json(self.tracking / "600002.json")["history"]
+                 if h["action"] == "HOLD"]
+        self.assertEqual([h["slot"] for h in holds], ["noon", "afternoon"])
+
+        # ...while a RE-RUN of the same slot replaces, never duplicates
+        self.pm.update_position("600002", {"history_entry": {
+            "date": "2026-08-11", "slot": "noon", "price": 10.6,
+            "change_pct": 0, "action": "HOLD", "note": "rerun"}})
+        holds = [h for h in self.pm._read_json(self.tracking / "600002.json")["history"]
+                 if h["action"] == "HOLD"]
+        self.assertEqual(len(holds), 2)
+        self.assertEqual(next(h for h in holds if h["slot"] == "noon")["price"], 10.6)
+
+        closed = self.pm.close_position("600002", "target_hit", 12.0,
+                                        date="2026-08-12", slot="afternoon")
+        self.assertEqual(closed["exitSlot"], "afternoon")
+        self.assertEqual(closed["history"][-1]["slot"], "afternoon")
+
     def test_non_position_json_in_tracking_is_ignored(self):
         # 2026-08-11: tracking/rotation_ledger.json (a LIST) crashed
         # load_active_positions with AttributeError and killed the noon run.

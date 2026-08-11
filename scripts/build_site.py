@@ -369,6 +369,13 @@ def _pnl_cls(v) -> str:
     return "up" if v > 0 else "down"  # up=red, down=green (A-share)
 
 
+def _slot_tag(slot) -> str:
+    """Which run filled it — noon vs afternoon (blank when unknown: the
+    pre-2026-08-11 history has no slot recorded, and a guess would lie)."""
+    label = SLOT_LABEL.get(slot or "")
+    return f" <span class='slot'>{html.escape(label)}</span>" if label else ""
+
+
 def _pct(v, signed=True) -> str:
     if not isinstance(v, (int, float)):
         return "—"
@@ -627,7 +634,8 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
         "<tr>"
         f"<td>{html.escape(p.get('code', ''))}</td>"
         f"<td>{html.escape(p.get('name', ''))}</td>"
-        f"<td>{html.escape(p.get('entryDate', ''))}</td>"
+        f"<td>{html.escape(p.get('entryDate', ''))}"
+        f"{_slot_tag(p.get('entrySlot'))}</td>"
         f"<td class='num'>{p.get('entryPrice', '—')}</td>"
         f"<td class='num'>{p.get('currentPrice', '—')}</td>"
         f"<td class='num {_pnl_cls(p.get('pnl_pct'))}'>{_pct(p.get('pnl_pct'))}</td>"
@@ -642,8 +650,8 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
         "<tr>"
         f"<td>{html.escape(t.get('code', ''))}</td>"
         f"<td>{html.escape(t.get('name', ''))}</td>"
-        f"<td>{html.escape(t.get('entryDate', ''))}</td>"
-        f"<td>{html.escape(t.get('exitDate', ''))}</td>"
+        f"<td>{html.escape(t.get('entryDate', ''))}{_slot_tag(t.get('entrySlot'))}</td>"
+        f"<td>{html.escape(t.get('exitDate', ''))}{_slot_tag(t.get('exitSlot'))}</td>"
         f"<td class='num'>{t.get('holdingDays', '—')}</td>"
         f"<td class='num {_pnl_cls(t.get('returnPct'))}'>{_pct(t.get('returnPct'))}</td>"
         f"<td>{html.escape(str(t.get('exitReason', '') or ''))}</td>"
@@ -722,6 +730,8 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
   .d-size {{ font-size:12px; color:var(--fg); margin:1px 0 0 2px; font-variant-numeric:tabular-nums; }}
   .d-note {{ color:var(--muted); font-size:12px; margin:2px 0 0 2px; }}
   .mini {{ font-weight:400; font-size:10.5px; color:var(--muted); }}
+  .slot {{ font-size:10.5px; color:var(--muted); background:#f0f2f5;
+           border-radius:3px; padding:0 4px; margin-left:3px; }}
   #unpin {{ border:1px solid var(--line); background:#fff; border-radius:6px; padding:1px 8px;
             font-size:11.5px; cursor:pointer; color:var(--muted); }}
   #unpin:hover {{ background:#f2f4f7; }}

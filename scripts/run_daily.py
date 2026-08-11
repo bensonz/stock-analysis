@@ -1408,7 +1408,8 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
         Summary of actions taken.
     """
     log = {"phase": "apply", "start": time.time(), "actions": []}
-    run_dir = get_run_dir(date, data.get("slot") or resolve_slot())
+    slot = data.get("slot") or resolve_slot()
+    run_dir = get_run_dir(date, slot)
     output_dir = run_dir / "output"
 
     # 0. Enforce non-negotiable exits before applying LLM decisions. Stops and
@@ -1430,6 +1431,7 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
                     exit_price=exit_price,
                     lesson=d.get("lesson", ""),
                     date=date,
+                    slot=slot,
                 )
                 log["actions"].append(f"SELL {code}")
             elif action == "RAISE_STOP":
@@ -1450,6 +1452,7 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
                 update_position(code, {
                     "history_entry": {
                         "date": date,
+                        "slot": slot,
                         "price": price,
                         "change_pct": pnl_pct,
                         "action": action,
@@ -1616,6 +1619,7 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
                 "sector": p.get("sector", ""),
                 "catalysts": p.get("catalysts", []),
                 "sourceWatchlist": date,
+                "slot": slot,
                 "note": p.get("note", f"LLM开仓 {p.get('name', '')}"),
                 "day_ohlc": day_ohlc,
             })
