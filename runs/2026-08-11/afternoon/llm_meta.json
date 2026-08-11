@@ -1,0 +1,82 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 332710,
+  "output_tokens": 16897,
+  "rounds": 4,
+  "duration_sec": 295.7,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月11日 油气开采板块 大涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3088
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 工业金属 贵金属 暴跌 2026年8月11日",
+        "max_results": 5
+      },
+      "result_length": 3223
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "西部矿业 601168 2026年8月11日 大跌 原因",
+        "max_results": 5
+      },
+      "result_length": 3087
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股板块 5日涨跌幅排名 2026年8月11日 申万行业"
+      },
+      "result_length": 3146
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "普洛药业 000739 CXO 原料药 2026年8月 最新消息"
+      },
+      "result_length": 3251
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 5000,
+        "url": "https://www.stcn.com/article/detail/4067119.html"
+      },
+      "result_length": 3848
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "恒逸石化 000703 2026年8月11日 文莱炼化 最新"
+      },
+      "result_length": 3272
+    }
+  ],
+  "fallback_used": false
+}

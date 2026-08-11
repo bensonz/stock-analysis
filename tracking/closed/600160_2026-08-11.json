@@ -1,7 +1,7 @@
 {
   "code": "600160",
   "name": "巨化股份",
-  "status": "active",
+  "status": "closed",
   "thesis": "制冷剂配额绝对龙头(HFCs占全国39.3%)，氟化工子行业本周+10.5%全市场最强板块之一(来源:开源证券8/9报告)。R32/R134a/R125价格高位运行，制冷剂景气周期延续。萤石价格回暖(+1.73% WoW)成本端支撑。净利+163% YoY，ROE 13%，在建工程23%产能大扩张。高纯PFA量产进军半导体高端市场。MA全部合规(dist_ma5=2.5%, dist_ma10=7.3%, dist_ma20=8.7%)。唯一遗憾：无VCP形态+母板块不在今日top5(子行业动量弥补)。",
   "entryDate": "2026-08-10",
   "entryPrice": 44.26,
@@ -32,16 +32,25 @@
       "change_pct": -2.28,
       "action": "HOLD",
       "note": "PnL-2.28%(仅1天)，开仓次日回调。制冷剂R32维持6.45-6.55万/吨高位(氟务在线8/3)，萤石价格回暖。🚨STOP_PROXIMITY WARNING:距止损¥42.05仅2.77%！严格执行止损纪律，无论持仓时间多短。"
+    },
+    {
+      "date": "2026-08-11",
+      "slot": "afternoon",
+      "price": 42.22,
+      "change_pct": -4.61,
+      "action": "SELL",
+      "note": "Rule 5触发：开仓2日内跌-4.61%，'-3%在头3日'规则强制卖出。Pipeline同时标记stop_proximity CRITICAL(距止损0.4%)+iv_filter violation+overextended_entry violation。制冷剂景气逻辑仍在(R32维持6.45-6.55万/吨，开源证券8/9)，但入场时机错误——弱市中追入已延伸的个股。止损纪律优先，可等回调至MA10(¥41.62)附近再评估。"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-08-11",
+  "exitPrice": 42.22,
+  "exitReason": "Rule 5触发：开仓2日内跌-4.61%，'-3%在头3日'规则强制卖出。Pipeline同时标记stop_proximity CRITICAL(距止损0.4%)+iv_filter violation+overextended_entry violation。制冷剂景气逻辑仍在(R32维持6.45-6.55万/吨，开源证券8/9)，但入场时机错误——弱市中追入已延伸的个股。止损纪律优先，可等回调至MA10(¥41.62)附近再评估。",
+  "returnPct": -4.61,
+  "holdingDays": 1,
+  "lessonLearned": "",
   "createdAt": "2026-08-10T18:48:35.665496+08:00",
-  "updatedAt": "2026-08-11T12:23:26.492634+08:00",
+  "updatedAt": "2026-08-12T00:18:32.732102+08:00",
   "trackerVersion": "2.1",
-  "entrySlot": "afternoon"
+  "entrySlot": "afternoon",
+  "exitSlot": "afternoon"
 }

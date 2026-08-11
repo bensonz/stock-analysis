@@ -1,0 +1,142 @@
+{
+  "date": "2026-08-11",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1786464747.103908,
+      "errors": [],
+      "end": 1786464816.975895,
+      "duration_sec": 69.9
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 18048,
+      "tokens": {
+        "input_tokens": 332710,
+        "output_tokens": 16897
+      },
+      "rounds": 4,
+      "tool_calls_count": 7,
+      "duration_sec": 295.7,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1786465112.697676,
+      "actions": [
+        "SELL 600160",
+        "SELL 601168",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=48",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=63",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=41",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=134",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=49",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 3,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "300001",
+                "name": "特锐德",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 35.65,
+                "stopLoss": 33.88,
+                "distance_pct": 4.96,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "600885",
+                "name": "宏发股份",
+                "rule": "stop_proximity",
+                "severity": "WARNING",
+                "currentPrice": 34.99,
+                "stopLoss": 33.96,
+                "distance_pct": 2.94,
+                "suggestion": "🟡 WARNING — only 2.9% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+              },
+              {
+                "code": "603127",
+                "name": "昭衍新药",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 51.2,
+                "stopLoss": 48.79,
+                "distance_pct": 4.71,
+                "suggestion": "🟠 WATCH — 4.7% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1786465112.9378161,
+      "duration_sec": 0.2
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 300001 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 600885 — 🟡 WARNING — only 2.9% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
+    "RULE check_stop_proximity: 603127 — 🟠 WATCH — 4.7% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 365.8
+  }
+}

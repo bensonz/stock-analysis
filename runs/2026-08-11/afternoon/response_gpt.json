@@ -1,0 +1,280 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": null,
+        "trend": "accelerating",
+        "note": "今日+5.26%，连续10日主力净流入(证券时报)，中东地缘+原油上行驱动"
+      },
+      {
+        "name": "医药商业",
+        "5d_pct": null,
+        "trend": "steady",
+        "note": "今日+1.59%，CRO/AI制药主线延续强势(昨日医疗服务+4.35%)"
+      },
+      {
+        "name": "光伏设备",
+        "5d_pct": null,
+        "trend": "steady",
+        "note": "今日+1.76%，反内卷倡议+多晶硅成本支撑"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": null,
+        "trend": "deteriorating",
+        "note": "今日-6.26%"
+      },
+      {
+        "name": "贵金属",
+        "5d_pct": null,
+        "trend": "deteriorating",
+        "note": "今日-5.34%，金银回调被机构定性为牛市周期性调整(汇通财经/斯普罗特)"
+      },
+      {
+        "name": "工业金属",
+        "5d_pct": null,
+        "trend": "deteriorating",
+        "note": "今日-4.84%，连续多日净流出，8/10有色金属净流出57.63亿(证券时报)"
+      },
+      {
+        "name": "小金属",
+        "5d_pct": null,
+        "trend": "deteriorating",
+        "note": "今日-4.41%"
+      },
+      {
+        "name": "风电设备",
+        "5d_pct": null,
+        "trend": "deteriorating",
+        "note": "今日-3.08%"
+      }
+    ],
+    "position_alignment": "6/10在非冷门板块(恒逸石化受益油气顺风、药明康德/昭衍新药在CXO主线)，2只在冷门板块(西部矿业-工业金属bottom3、巨化股份-化学制品边跌)，2只在电网设备/半导体中性板块",
+    "regime": "金属→能源轮动明确，CXO独立主线持续。油气开采连续10日净流入接力医药成为新热点。弱市环境买盘门槛未达标(Up/Down 0.43:1，仅1/3指数红)，以防守为主。"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "H1净利+2500%至59.02亿、拟10派9元(证券时报8/10)，文莱炼化柴油裂解价差$40-60/桶维持高位。今日-3.74%属'利好兑现'正常获利回吐，PnL仍+12.18%且止损已在盈亏平衡¥15.60。油气开采板块连续10日净流入提供板块顺风。",
+      "sector_rank": "top 20% (石油石化受益油气开采热度)",
+      "new_stop": null,
+      "pnl_pct": 12.18,
+      "days_held": 13,
+      "exit_price": null
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "action": "HOLD",
+      "reason": "PnL+14.41%持仓7天，MLCC涨价周期持续(三星8/1+30%已生效)，今日+3.49%继续走强。止损已在盈亏平衡¥43.51。",
+      "sector_rank": "中位(元件板块今日不在top5/bottom5)",
+      "new_stop": null,
+      "pnl_pct": 14.41,
+      "days_held": 7,
+      "exit_price": null
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "action": "HOLD",
+      "reason": "PnL-0.03%持仓7天，充电桩3C认证长期逻辑未变但股价持续横盘。距止损¥33.88缓冲4.96%(WATCH)。⏰10天时间止损还剩3个交易日，若3天后仍<+3%则SELL。",
+      "sector_rank": "中位(电网设备)",
+      "new_stop": null,
+      "pnl_pct": -0.03,
+      "days_held": 7,
+      "exit_price": null
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "reason": "PnL+13.02%持仓11天，MLCC涨价核心受益(三星8/1+30%已生效)，连续两期回购合计14-19亿。今日+2.48%放量。止损在盈亏平衡¥115.07。",
+      "sector_rank": "中位(元件板块)",
+      "new_stop": null,
+      "pnl_pct": 13.02,
+      "days_held": 11,
+      "exit_price": null
+    },
+    {
+      "code": "600160",
+      "name": "巨化股份",
+      "action": "SELL",
+      "reason": "Rule 5触发：开仓2日内跌-4.61%，'-3%在头3日'规则强制卖出。Pipeline同时标记stop_proximity CRITICAL(距止损0.4%)+iv_filter violation+overextended_entry violation。制冷剂景气逻辑仍在(R32维持6.45-6.55万/吨，开源证券8/9)，但入场时机错误——弱市中追入已延伸的个股。止损纪律优先，可等回调至MA10(¥41.62)附近再评估。",
+      "sector_rank": "中位(化学制品/氟化工)",
+      "new_stop": null,
+      "pnl_pct": -4.61,
+      "days_held": 2,
+      "exit_price": 42.22
+    },
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "action": "HOLD",
+      "reason": "PnL-2.13%持仓7天，H1业绩扎实(营收+32%净利+19.9%)，QFII重仓>20亿(证券时报8/5)，0风险。但价格与基本面持续背离。stop_proximity WARNING距止损2.94%。⏰10天时间止损还剩3个交易日。若3天后仍<+3%→SELL。",
+      "sector_rank": "中位(电网设备)",
+      "new_stop": null,
+      "pnl_pct": -2.13,
+      "days_held": 7,
+      "exit_price": null
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "action": "SELL",
+      "reason": "工业金属板块连续多日位于底部(今日-4.84%排名倒数第3，8/10有色金属净流出57.63亿-证券时报)。今日放量暴跌-7.63%(1.74x均量)，stop_proximity CRITICAL仅距止损1.53%。h024: stop-proximity违规应主动止损。铜供应紧张逻辑长期仍成立(H1净利+123%)但行业轮动压倒个股基本面——Rule 1:行业引力永远优先。",
+      "sector_rank": "bottom 5 (工业金属-4.84%)",
+      "new_stop": null,
+      "pnl_pct": -3.52,
+      "days_held": 6,
+      "exit_price": 39.21
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "PnL+15.45%持仓7天，CRO安评龙头+实验猴稀缺壁垒(2.5万只储备)。止损已提至+10%=¥48.79锁定最低利润。今日-3.03%为昨日触及+20%阈值后的正常获利回吐。创新药'中国首发'叙事持续(证券时报8/11)。",
+      "sector_rank": "top 20% (医疗服务/CRO主线)",
+      "new_stop": null,
+      "pnl_pct": 15.45,
+      "days_held": 7,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "PnL+26.64%持仓11天，CXO绝对龙头。H1营收+39%净利+29%，在手订单664亿创新高，全年指引上调至585-605亿。美国法院批准1260H初步禁令(公司公告8/10)。AI制药放大CXO需求(财联社8/10)。止损已提至+10%线¥139.15，安全边际极高。",
+      "sector_rank": "top 20% (医疗服务/CXO主线)",
+      "new_stop": null,
+      "pnl_pct": 26.64,
+      "days_held": 11,
+      "exit_price": null
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "HOLD",
+      "reason": "PnL+3.56%持仓6天，集成电路制造龙头0风险。在建工程20%产能大扩张，远低于MA20(dist_ma20=-8.3%)安全边际充足。Margin adding确认杠杆资金流入。半导体板块休整中无卖出信号。",
+      "sector_rank": "中位(半导体)",
+      "new_stop": null,
+      "pnl_pct": 3.56,
+      "days_held": 6,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "MA追逐违规: dist_ma5=9.4%>6%, dist_ma10=18.5%>8%, dist_ma20=20.8%>12%。Rule 2b硬拦截。CRO叙事虽强(财通证券8/9看好临床前CRO)，股价创历史新高(¥92→¥93.85)后已过度延伸，等回调至MA10(¥79.22)附近。",
+      "rps120": 93.93
+    },
+    {
+      "code": "688469",
+      "name": "芯联集成-U",
+      "reason": "MA追逐: dist_ma5=7.2%>6%, dist_ma10=12.2%>8%。昨日H1扭亏为盈催化+8.14%已充分定价。margin deleveraging(chg5=-1.84%)+11月大规模解禁(13.74%)增加下行风险。",
+      "rps120": 87.32
+    },
+    {
+      "code": "688131",
+      "name": "皓元医药",
+      "reason": "MA追逐: dist_ma10=13.6%>8%, dist_ma5=6.0%≥6%。CXO主线但过度延伸。margin deleveraging(chg5=-12.96%, net5_repay_days=4)杠杆资金持续退出。",
+      "rps120": 90.27
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "双重否决: (1)行业航天装备Ⅱ今日底部第1(-6.26%)，Rule 1硬拦截(证券时报8/11:国防军工主力净流出20.29亿); (2)MA追逐dist_ma10=10.0%>8%。即使近一周+20.04%领涨军工(财通证券8/9)，行业轮动已转空。",
+      "rps120": 94.55
+    },
+    {
+      "code": "300503",
+      "name": "昊志机电",
+      "reason": "MA追逐: dist_ma10=10.8%>8%。减速器概念虽受宇树科技IPO催化但已过度延伸。PE 80.6x/PS 11.3x估值偏高，通用设备板块不在今日top5。",
+      "rps120": 91.6
+    },
+    {
+      "code": "301526",
+      "name": "国际复材",
+      "reason": "RPS120=99.9%>95%过热回撤风险+dist_ma5=6.3%>6%。RPS cap经7月实测确认不可移除(rank-IC在门槛内为负,高RPS=最差前向回报)。",
+      "rps120": 99.9
+    },
+    {
+      "code": "688519",
+      "name": "南亚新材",
+      "reason": "RPS120=99.75%>95%+dist_ma10=15.2%>8%+dist_ma20=12.3%>12%。三重否决。PE仅5.9x但动量过热。",
+      "rps120": 99.75
+    },
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "MA追逐: dist_ma10=10.9%>8%。半导体设备龙头但过度延伸。PE 161.8x+11月大规模解禁(28.13%)风险。",
+      "rps120": 89.86
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "巨化股份-3%头3日规则实战验证: 8/10入场→8/11跌-4.61%触发强制卖出。Pipeline同时标记stop_proximity CRITICAL+iv_filter+overextended_entry三重违规，系统正确识别了弱市中追入延伸股的入场错误。该规则在V2中首次实战触发即避免更大损失。",
+      "type": "rule",
+      "tags": [
+        "exit-rule",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "弱市(breadth 0.43:1)中追入已延伸个股(5日累计涨幅大概率>12%)，次日板块轮动+系统性回调叠加导致快速亏损。头3日-3%规则充当'快速熔断'防止小亏变大亏。"
+    },
+    {
+      "text": "西部矿业: H1净利+123%的'最强半年报'也无法对抗行业轮动。工业金属连续多日底部(8/10已净流出57.63亿-证券时报, 8/11继续-4.84%)，今日放量-7.63%确认机构系统性离场。Rule 1'行业引力优先'和h019'底部行业=硬不买区'同时验证。",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "金属板块的下跌由多重因素共振: (1)中东局势缓和降低避险需求; (2)刚果铜精矿禁令情绪消退; (3)前期涨幅过大后的获利了结。即使个股基本面无懈可击，行业资金流出会拖累所有成分股。"
+    },
+    {
+      "text": "恒逸石化'利好兑现'(-3.74%)属正常: H1净利+2500%+10派9元后获利了结，但持仓PnL仍+12.18%且止损已提至盈亏平衡。Rule 5的+10%→止损提至盈亏平衡机制正在保护收益。不要混淆获利回吐与论据失效。",
+      "type": "observation",
+      "tags": [
+        "position-sizing",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "超级催化剂(sell-the-news)后的-3~-5%回调是A股常态。只要(1)止损在盈亏平衡之上、(2)结构论据未破坏(文莱柴油裂解价差$40-60/bbl), 就应持有而非过早获利了结。"
+    },
+    {
+      "text": "今日breadth 0.43:1+仅1/3指数红→买入门槛未达标→new_positions=[]。系统正确阻止了在弱市中追逐普洛药业(VCP SETUP+margin adding+64.71%)等看似诱人的候选。h013再次验证: 没有买入门槛的动量系统=随机赌博。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Up/Down ratio 0.43:1意味着每1只上涨股对应2.3只下跌股——此时开新仓的胜率天生偏低。即使个别候选通过全部技术筛选，系统性逆风会压制短期收益。现金也是仓位。"
+    },
+    {
+      "text": "MA距离规则(Rule 2b)今日过滤掉至少6个候选(益诺思/芯联集成/皓元医药/睿创微纳/昊志机电/南亚新材)，全部因dist_ma10>8%或dist_ma5>6%。在弱市中，这些过度延伸的股票面临更大的均值回归风险。",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "dist_ma10>8%意味着股价比近10日均价高出8%以上——统计上短期回调概率显著升高。尤其在breadth<1:1的环境中，追入延伸股等于接飞刀。"
+    }
+  ],
+  "market_summary": "Breadth 0.43:1偏弱(1615涨/3777跌/147平)，60涨停/2跌停无恐慌但普跌。仅创业板指微涨+0.34%，上证-0.82%/深证-0.40%/科创50-1.63%。IV整体中性(avg rank 0.41)，创业板ETF略偏高(0.50)。油气开采+5.26%受中东地缘+原油上行驱动，主力净流入4.24亿连续10日(证券之星/证券时报)。金属板块集体暴跌: 工业金属-4.84%/贵金属-5.34%/小金属-4.41%，被机构定性为牛市周期性回调(汇通财经/斯普罗特)，8/10有色金属已净流出57.63亿(证券时报)。行业轮动明确: OUT金属→IN能源+CXO。买入门槛未达标(Up/Down 0.43:1<1.5, 仅1/3指数红)，今日仅HOLD/SELL操作。两笔卖出(巨化股份止损纪律+西部矿业行业轮动)释放现金至约65万，弱市中现金为王。",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}
