@@ -401,14 +401,17 @@ def validate_phase3_gate(date: str, apply_log: dict, data: dict) -> GateResult:
     return gate.check()
 
 
-def _check_position_file_consistency(gate: PipelineGate):
-    """Verify positions.json matches tracking/*.json on disk."""
+def _check_position_file_consistency(gate: PipelineGate, tracking_dir=None):
+    """Verify positions.json matches tracking/*.json on disk.
+
+    tracking_dir is injectable so tests can exercise this against a temp
+    directory (the real one is the default)."""
     import json
     from pathlib import Path
 
     project_root = Path(__file__).parent.parent
-    positions_file = project_root / "tracking" / "positions.json"
-    tracking_dir = project_root / "tracking"
+    tracking_dir = Path(tracking_dir) if tracking_dir else project_root / "tracking"
+    positions_file = tracking_dir / "positions.json"
 
     if not positions_file.exists():
         gate.hard(False, "positions.json does not exist after apply")
@@ -427,7 +430,9 @@ def _check_position_file_consistency(gate: PipelineGate):
             continue
         try:
             fdata = json.loads(f.read_text(encoding="utf-8"))
-            if fdata.get("status") == "active":
+            # tracking/ holds non-position state too (rotation_ledger.json is
+            # a LIST) — only dicts can be positions (2026-08-11)
+            if isinstance(fdata, dict) and fdata.get("status") == "active":
                 tracking_codes.add(fdata["code"])
         except (json.JSONDecodeError, KeyError):
             continue

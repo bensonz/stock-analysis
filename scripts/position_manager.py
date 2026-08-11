@@ -233,7 +233,9 @@ def load_all_tracking_files() -> list[dict]:
         if f.name == "positions.json":
             continue
         try:
-            positions.append(_read_json(f))
+            data = _read_json(f)
+            if isinstance(data, dict):  # skip non-position state (see above)
+                positions.append(data)
         except (json.JSONDecodeError, KeyError):
             pass
     return positions

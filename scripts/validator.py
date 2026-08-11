@@ -111,7 +111,8 @@ def validate_output(date: str, slot: str | None = None) -> list[str]:
                 continue
             try:
                 data = json.loads(f.read_text(encoding="utf-8"))
-                if data.get("status") == "active":
+                # non-position state lives here too (see contracts.py)
+                if isinstance(data, dict) and data.get("status") == "active":
                     tracking_codes.add(data["code"])
             except (json.JSONDecodeError, KeyError):
                 errors.append(f"WARNING: cannot read {f.name}")
@@ -131,7 +132,7 @@ def validate_output(date: str, slot: str | None = None) -> list[str]:
             continue
         try:
             data = json.loads(f.read_text(encoding="utf-8"))
-            if data.get("status") == "closed":
+            if isinstance(data, dict) and data.get("status") == "closed":
                 errors.append(
                     f"WARNING: {f.name} has status 'closed' but is not in closed/"
                 )

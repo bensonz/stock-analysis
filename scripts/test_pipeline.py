@@ -142,9 +142,25 @@ class TestPositionManager(unittest.TestCase):
 
         active = self.pm.load_active_positions()
         self.assertEqual([p["code"] for p in active], ["600001"])
-        # and the whole-file loader stays usable too
-        self.assertTrue(any(isinstance(d, dict) and d.get("code") == "600001"
-                            for d in self.pm.load_all_tracking_files()))
+        # whole-file loader returns dicts only — no list leaks to callers
+        all_files = self.pm.load_all_tracking_files()
+        self.assertTrue(all(isinstance(d, dict) for d in all_files))
+        self.assertTrue(any(d.get("code") == "600001" for d in all_files))
+
+        # every OTHER tracking/*.json consumer must survive it too — the
+        # 2026-08-11 noon run died at contracts, one layer past the two
+        # loaders fixed first. Patch the class, not the site.
+        import contracts
+        import validator
+        self.pm.regenerate_positions_json()  # so the consistency check has both sides
+        gate = contracts.PipelineGate("phase3")
+        contracts._check_position_file_consistency(gate, tracking_dir=self.tracking)
+        self.assertEqual(gate.hard_fails, [])  # ledger must not look like a position
+        validator.TRACKING_DIR = self.tracking
+        try:
+            validator.validate_output("2026-08-11", "noon")
+        finally:
+            validator.TRACKING_DIR = self._orig_tracking
 
     def test_partial_day_autoheal_paths(self):
         # 2026-08-10: gate-1 partial-day halts now self-heal via the sina
