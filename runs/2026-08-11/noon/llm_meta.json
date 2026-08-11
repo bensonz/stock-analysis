@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 310403,
+  "output_tokens": 14224,
+  "rounds": 4,
+  "duration_sec": 258.3,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月11日 热门板块 油气开采 医药 领涨",
+        "max_results": 5
+      },
+      "result_length": 3147
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "恒逸石化 000703 2026年8月 文莱炼化 最新消息",
+        "max_results": 5
+      },
+      "result_length": 3050
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "巨化股份 600160 制冷剂 氟化工 2026年8月 价格",
+        "max_results": 5
+      },
+      "result_length": 3254
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 2026年8月11日 医药板块 创新药 大涨 原因"
+      },
+      "result_length": 3011
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "西部矿业 601168 铜价 2026年8月 走势 回调"
+      },
+      "result_length": 3211
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "顺络电子 002138 MLCC 涨价 2026年8月"
+      },
+      "result_length": 3011
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "2026年8月11日 A股 市场 涨跌比 弱势 原因 分析"
+      },
+      "result_length": 2990
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "宏发股份 600885 继电器 2026年8月 最新消息"
+      },
+      "result_length": 3029
+    }
+  ],
+  "fallback_used": false
+}

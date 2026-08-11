@@ -1,0 +1,129 @@
+{
+  "date": "2026-08-11",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1786421891.201925,
+      "errors": [],
+      "end": 1786421948.089378,
+      "duration_sec": 56.9
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 13449,
+      "tokens": {
+        "input_tokens": 310403,
+        "output_tokens": 14224
+      },
+      "rounds": 4,
+      "tool_calls_count": 8,
+      "duration_sec": 258.3,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1786422206.457817,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h150 (observation): 涨跌比0.67:1+分布集中在±2%区间=无方向震荡市。即使entry_regime允许开仓(sizing 0.5)，也只在候选极端优质+板块共振时才破例。今天...",
+        "Hypothesis: Created h151 (observation): RPS>95%封顶规则过滤掉策略池约70%候选——当大量股票RPS进入98-99.9%时，动量已极致拥挤，均值回归风险极高。此规则不可移除(已由7/27-7/3...",
+        "Hypothesis: Updated h042 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Created h152 (observation): 宏发股份价格与基本面持续背离(7天-1.51%)：H1营收+32%净利+19.9%、QFII重仓>20亿、大宗交易1.03亿，但股价不涨。'价格是真理'——不因...",
+        "Hypothesis: Created h153 (observation): 医药板块持续性进入第2周(医疗服务上周+20%+今日继续强势)，创新药'中国首发'新叙事(证券时报8/11)可能延长行情生命周期。昭衍新药+药明康德受益明确。...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "600160",
+                "name": "巨化股份",
+                "rule": "stop_proximity",
+                "severity": "WARNING",
+                "currentPrice": 43.25,
+                "stopLoss": 42.05,
+                "distance_pct": 2.77,
+                "suggestion": "🟡 WARNING — only 2.8% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+              },
+              {
+                "code": "600885",
+                "name": "宏发股份",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 35.21,
+                "stopLoss": 33.96,
+                "distance_pct": 3.55,
+                "suggestion": "🟠 WATCH — 3.6% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1786422207.208833,
+      "duration_sec": 0.8
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 600160 — 🟡 WARNING — only 2.8% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
+    "RULE check_stop_proximity: 600885 — 🟠 WATCH — 3.6% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 316.0
+  }
+}
