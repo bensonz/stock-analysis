@@ -42,6 +42,13 @@ def build_action_index() -> dict:
             f = slot_dir / "output" / "daily_summary.json"
             if slot_dir.is_dir() and f.exists():
                 candidates.append((f, slot_dir.name))
+        # Chronological, NOT alphabetical: "afternoon" < "noon" as strings
+        # (CLAUDE.md's trap). Repeatable actions (HOLD/RAISE_STOP) appear in
+        # both slots — 31 such keys on 2026-08-11 — and the pre-backfill
+        # history kept the LAST writer (dedup was date+action), so the later
+        # run must win here too. OPEN/SELL never collide (verified: 0 cases).
+        candidates.sort(key=lambda c: 0 if c[1] == "legacy" else
+                        (1 if c[1] == "noon" else 2))
         for path, slot in candidates:
             try:
                 summary = json.loads(path.read_text(encoding="utf-8"))
@@ -51,11 +58,11 @@ def build_action_index() -> dict:
                 code = str(a.get("code", "")).split(".")[0]
                 action = str(a.get("action", "") or "").upper()
                 if code and action:
-                    index.setdefault((date, code, action), slot)
-            for p in summary.get("newPositions", []) or []:
-                code = str(p.get("code", "")).split(".")[0]
+                    index[(date, code, action)] = slot  # later slot overwrites
+            for np in summary.get("newPositions", []) or []:
+                code = str(np.get("code", "")).split(".")[0]
                 if code:
-                    index.setdefault((date, code, "OPEN"), slot)
+                    index[(date, code, "OPEN")] = slot
     return index
 
 
