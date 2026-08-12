@@ -1,0 +1,113 @@
+{
+  "date": "2026-08-12",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 17.15,
+      "pnl_pct": 9.9,
+      "note": "PnL+9.9%止损已提至盈亏平衡15.6；炼化板块今日跌入bottom5(第1天)，距'连续3日冷板块→SELL'仍有缓冲，持有并盯紧"
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "action": "HOLD",
+      "price": 50.0,
+      "pnl_pct": 14.9,
+      "note": "PnL+14.9%，MLCC涨价周期未破(三星8/1+30%已生效)，止损43.51盈亏平衡，元件板块中位"
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "action": "HOLD",
+      "price": 36.71,
+      "pnl_pct": 2.9,
+      "note": "PnL+2.9%今日+2.97%反弹；充电桩3C认证长期逻辑未变；10日时间止损逼近，若至day10仍<3%则SELL"
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "price": 127.97,
+      "pnl_pct": 11.2,
+      "note": "PnL+11.2%，MLCC涨价核心受益(三星8/1+30%已生效)，连续两期回购合计14-19亿，止损115.07盈亏平衡"
+    },
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "action": "SELL",
+      "price": 34.65,
+      "pnl_pct": -3.1,
+      "note": "8天阴跌-3.1%且距止损仅1.99%(CRITICAL)，价格低于MA5/MA10，电网设备非热点，按h024主动离场防gap风险，不等-5%硬止损"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 51.15,
+      "pnl_pct": 15.3,
+      "note": "PnL+15.3%，CRO安评龙头+实验猴稀缺壁垒，止损已提至+10%=48.79锁定利润，医疗服务强主题"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 159.04,
+      "pnl_pct": 25.7,
+      "note": "PnL+25.7%，CXO绝对龙头，H1指引上调+美国1260H初步禁令获批，止损已提至+10%=139.15"
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "HOLD",
+      "price": 127.96,
+      "pnl_pct": 5.7,
+      "note": "PnL+5.7%，集成电路制造龙头0风险，在建工程20%产能扩张，止损115.04缓冲8.0%，半导体板块休整无卖出信号"
+    },
+    {
+      "code": "600160",
+      "name": "巨化股份",
+      "action": "OPEN",
+      "price": 41.2,
+      "note": "氟化工/制冷剂龙头，RPS120=85.94甜点区，已回踩MA20支撑(dist_ma5=-4.1%不追高)；制冷剂Q3长协涨价超预期+萤石供给收紧"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 8,
+    "totalEquity": 982320.0,
+    "dayPnl": -165.0,
+    "dayReturnPct": -0.02,
+    "totalReturnPct": -1.77,
+    "unrealizedPnl": 33833.0,
+    "realizedPnl": -51513.0,
+    "cashPct": 64.95
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 3.225,
+    "up": 4128,
+    "down": 1280,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 97,
+    "limit_downs": 0,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 3.23:1, 3/3 major indices green, 97 limit-ups / 0 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [
+    {
+      "code": "600160",
+      "name": "巨化股份"
+    }
+  ],
+  "marketContext": {
+    "summary": "市场宽度3.23:1偏强(4128涨/1280跌)，97涨停/0跌停，三大指数全红(上证+0.32%/深成指+1.09%/创业板指+1.49%/科创50+1.61%)，IV中性(平均IV rank 35.8%)。板块再平衡：油气煤炭资源股单日暴力转冷跌入bottom5，地产链+通信设备+非金属材料领涨。持仓0/8在今日top5板块但医疗服务/半导体强主题延续；新仓仅氟化工龙头巨化股份(制冷剂Q3长协涨价催化)6%中等仓位，其余候选因冷板块/RPS过热/追高被过滤。"
+  }
+}

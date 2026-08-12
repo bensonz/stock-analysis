@@ -1,0 +1,119 @@
+{
+  "date": "2026-08-12",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1786552738.640207,
+      "errors": [],
+      "end": 1786552813.6202419,
+      "duration_sec": 75.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 9379,
+      "tokens": {
+        "input_tokens": 151344,
+        "output_tokens": 23525
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 359.9,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1786553173.620556,
+      "actions": [
+        "SELL 600885",
+        "OPEN 600160 @ 41.2",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h033 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Created h154 (observation): 策略池51只标的大量RPS120>95%被上限规则拦截，真正落在80-92甜点区且MA距离合规的仅巨化股份等极少数；甜点区稀缺性本身就是信号，应集中而非摊大饼...",
+        "Hypothesis: Updated h024 (rule): +1 supporting evidence → hitRate=92%, n=13",
+        "Hypothesis: Created h155 (observation): 巨化股份制冷剂业务毛利率约50%且上半年盈利翻倍(百度资讯7/8)，Q3长协涨价超预期(开源证券8/9)——供给收缩型催化(制冷剂配额+萤石涨价)比概念题材更可...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "603127",
+                "name": "昭衍新药",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 51.15,
+                "stopLoss": 48.79,
+                "distance_pct": 4.61,
+                "suggestion": "🟠 WATCH — 4.6% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1786553174.194705,
+      "duration_sec": 0.6
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 603127 — 🟠 WATCH — 4.6% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 435.5
+  }
+}
