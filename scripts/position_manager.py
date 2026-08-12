@@ -227,6 +227,52 @@ def load_active_positions() -> list[dict]:
     return positions
 
 
+def load_recent_exits(days: int = 14, today: str | None = None) -> list[dict]:
+    """Round trips closed within the last `days` calendar days, newest first.
+
+    Feeds the daily prompt: before 2026-08-13 the model re-decided a name with
+    no knowledge that WE had just stopped out of it (600160 was re-opened two
+    days after a -4.61% stop with zero context in the prompt)."""
+    from datetime import date, timedelta
+    ref = datetime.strptime(today, "%Y-%m-%d").date() if today else date.today()
+    floor = (ref - timedelta(days=days)).isoformat()
+    out = []
+    for f in sorted(CLOSED_DIR.glob("*.json")):
+        try:
+            p = _read_json(f)
+        except (json.JSONDecodeError, KeyError):
+            continue
+        if not isinstance(p, dict) or not p.get("exitDate"):
+            continue
+        if p["exitDate"] < floor or p["exitDate"] > ref.isoformat():
+            continue
+        out.append({
+            "code": str(p.get("code", "")).split(".")[0],
+            "name": p.get("name", ""),
+            "entryDate": p.get("entryDate"), "exitDate": p["exitDate"],
+            "exitSlot": p.get("exitSlot"),
+            "entryPrice": p.get("entryPrice"), "exitPrice": p.get("exitPrice"),
+            "returnPct": p.get("returnPct"), "holdingDays": p.get("holdingDays"),
+            "exitReason": p.get("exitReason", ""),
+            "lessonLearned": p.get("lessonLearned") or "",
+        })
+    return sorted(out, key=lambda x: x["exitDate"], reverse=True)
+
+
+def prior_round_trips(code: str) -> list[dict]:
+    """Closed round trips for a code, oldest first (empty when never traded)."""
+    code6 = str(code).split(".")[0]
+    trips = []
+    for f in sorted(CLOSED_DIR.glob(f"{code6}*.json")):
+        try:
+            p = _read_json(f)
+        except (json.JSONDecodeError, KeyError):
+            continue
+        if isinstance(p, dict) and str(p.get("code", "")).split(".")[0] == code6:
+            trips.append(p)
+    return sorted(trips, key=lambda x: x.get("exitDate") or "")
+
+
 def load_all_tracking_files() -> list[dict]:
     """Read ALL tracking/*.json files including non-active ones."""
     positions = []
@@ -303,6 +349,20 @@ def close_position(
 
     regenerate_positions_json()
     return pos
+
+
+def _reentry_stamp(code: str) -> dict:
+    """{} for a first-time name; re-entry provenance otherwise (2026-08-13).
+    Makes repeat trades self-describing instead of needing a cross-file join."""
+    prior = prior_round_trips(code)
+    if not prior:
+        return {}
+    last = prior[-1]
+    return {"reentry": True, "priorTrips": len(prior), "priorExit": {
+        "exitDate": last.get("exitDate"), "returnPct": last.get("returnPct"),
+        "exitReason": str(last.get("exitReason", ""))[:120],
+        "exitPrice": last.get("exitPrice"),
+    }}
 
 
 def open_position(data: dict) -> dict:
@@ -409,6 +469,7 @@ def open_position(data: dict) -> dict:
         "thesis": data.get("thesis", ""),
         "entryDate": data.get("entryDate", today),
         "entrySlot": data.get("slot"),  # which run opened it (noon vs afternoon)
+        **_reentry_stamp(code),         # if we traded this name before, say so
         "entryPrice": entry_price,
         "targetPrice": data["targetPrice"],
         "stopLoss": data["stopLoss"],

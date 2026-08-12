@@ -116,6 +116,23 @@ python3 scripts/rotation_ledger.py backtest --horizon 10 --human
 - Any actual `reason: "rotation"` sells this week → grade each: did the
   candidate beat the sold holding over the following 10 sessions?
 
+### C4. Re-entry Watch (added 2026-08-13)
+
+Trades in a name we already traded once. First measurement (n=9): 1 win,
+mean -3.71% vs the book's -0.78%/trade — suggestive but small.
+
+```bash
+python3 scripts/reentry_stats.py --human
+```
+
+- Report n, mean, win-rate vs the book baseline, and any open re-entries.
+- **Do NOT propose a cooldown/ban rule until n≥20 AND the gap persists** —
+  新宙邦 (+11.8% two days after a -5.3% stop) and 药明康德 (re-entered 07-31,
+  currently our best position) show re-entries can be the right call.
+- Since 2026-08-13 the prompt carries a 近期已平仓 block, so re-entries should
+  now come with an explicit "what's different this time" in the decision
+  reason. Grade that: a re-entry whose reason cites no change is a finding.
+
 ### D. Sector Alignment (V2 specific)
 - Were positions opened in hot sectors? (check sector_rank in new_positions)
 - Were positions held in cold sectors too long?

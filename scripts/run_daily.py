@@ -748,6 +748,15 @@ def phase1_collect(date: str, slot: str) -> dict:
     positions = load_active_positions()
     data["positions"] = positions
     data["positions_count"] = len(positions)
+    # What we RECENTLY exited — so a re-entry is an informed decision, not a
+    # blind rediscovery (2026-08-13: 600160 was re-opened 2 days after its own
+    # -4.61% stop with zero exit context in the prompt).
+    try:
+        from position_manager import load_recent_exits
+        data["recent_exits"] = load_recent_exits(days=14, today=date)
+    except Exception as e:
+        data["recent_exits"] = []
+        log["errors"].append(f"recent_exits: {e}")
     data["recent_watchlists"] = load_recent_watchlists(days=5)
 
     # VCP scan: add VCP data to strategy pool stocks + flag quality setups

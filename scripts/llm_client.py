@@ -776,6 +776,22 @@ def build_summary(phase1_data: dict) -> str:
                          f"({st.get('note', '')})")
         sections.append("\n".join(lines))
 
+    # Recent exits: the model must not re-buy a name it just stopped out of
+    # without saying why this time is different (2026-08-13). Measured record
+    # of re-entries: scripts/reentry_stats.py.
+    exits = phase1_data.get("recent_exits") or []
+    if exits:
+        lines = ["## 近期已平仓 (last 14 days — 我们自己刚卖出的标的)",
+                 "若今日候选中出现下列代码, 这是**重入**: 必须在 reason 里明确"
+                 "「上次为何离场、这次有何不同」(价位/形态/催化变了什么); 说不出差别就不要买。"]
+        for e in exits[:8]:
+            slot = {"noon": "午盘", "afternoon": "收盘"}.get(e.get("exitSlot") or "", "")
+            lines.append(
+                f"- {e['exitDate']}{slot} 卖出 {e['code']} {e['name']} "
+                f"@{e.get('exitPrice')} ({e.get('returnPct')}%, 持有{e.get('holdingDays')}天, "
+                f"入场{e.get('entryPrice')}) — {str(e.get('exitReason', ''))[:120]}")
+        sections.append("\n".join(lines))
+
     # Market indices — dict (actual) or list
     market = phase1_data.get("market") or {}
     indices = market.get("indices") or {}

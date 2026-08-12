@@ -735,3 +735,70 @@ class TestPromptPayloadSlimming(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class TestReentryContext(unittest.TestCase):
+    """Recent-exit context + re-entry stamping (2026-08-13)."""
+
+    def setUp(self):
+        self.tmpdir = Path(tempfile.mkdtemp())
+        self.tracking = self.tmpdir / "tracking"
+        (self.tracking / "closed").mkdir(parents=True)
+        import position_manager as pm
+        self._orig = (pm.TRACKING_DIR, pm.CLOSED_DIR, pm.POSITIONS_FILE,
+                      pm.PORTFOLIO_CONFIG_FILE, pm.DAILY_DIR)
+        pm.TRACKING_DIR = self.tracking
+        pm.CLOSED_DIR = self.tracking / "closed"
+        pm.DAILY_DIR = self.tracking / "daily"
+        pm.POSITIONS_FILE = self.tracking / "positions.json"
+        pm.PORTFOLIO_CONFIG_FILE = self.tracking / "portfolio_config.json"
+        pm.PORTFOLIO_CONFIG_FILE.write_text(json.dumps(
+            {"starting_capital": 1000000, "max_position_pct": 10,
+             "max_positions": 10, "min_cash_pct": 0}), encoding="utf-8")
+        self.pm = pm
+
+    def tearDown(self):
+        (self.pm.TRACKING_DIR, self.pm.CLOSED_DIR, self.pm.POSITIONS_FILE,
+         self.pm.PORTFOLIO_CONFIG_FILE, self.pm.DAILY_DIR) = self._orig
+        shutil.rmtree(self.tmpdir)
+
+    def _closed(self, code, exit_date, ret, price=42.22):
+        (self.tracking / "closed" / f"{code}_{exit_date}.json").write_text(
+            json.dumps({"code": code, "name": "测试股", "entryDate": "2026-08-10",
+                        "entryPrice": 44.26, "exitDate": exit_date,
+                        "exitPrice": price, "returnPct": ret, "holdingDays": 1,
+                        "exitReason": "Rule 5 强制卖出", "exitSlot": "afternoon"}),
+            encoding="utf-8")
+
+    def test_recent_exits_window_and_order(self):
+        self._closed("600160", "2026-08-11", -4.61)
+        self._closed("600885", "2026-08-12", -3.08)
+        self._closed("000001", "2026-07-01", -9.9)      # outside the 14d window
+        out = self.pm.load_recent_exits(days=14, today="2026-08-13")
+        self.assertEqual([e["code"] for e in out], ["600885", "600160"])  # newest first
+        self.assertEqual(out[1]["returnPct"], -4.61)
+        self.assertIn("Rule 5", out[1]["exitReason"])
+
+    def test_open_position_stamps_reentry_provenance(self):
+        self._closed("600160", "2026-08-11", -4.61)
+        pos = self.pm.open_position({
+            "code": "600160", "name": "巨化股份", "entryPrice": 41.20,
+            "targetPrice": 48.0, "stopLoss": 39.14, "slot": "afternoon"})
+        self.assertTrue(pos["reentry"])
+        self.assertEqual(pos["priorTrips"], 1)
+        self.assertEqual(pos["priorExit"]["returnPct"], -4.61)
+
+        # a first-time name carries no re-entry keys at all
+        fresh = self.pm.open_position({
+            "code": "600999", "name": "新标的", "entryPrice": 10.0,
+            "targetPrice": 12.0, "stopLoss": 9.5, "slot": "noon"})
+        self.assertNotIn("reentry", fresh)
+
+    def test_prompt_surfaces_recent_exits(self):
+        import llm_client
+        self._closed("600160", "2026-08-11", -4.61)
+        summary = llm_client.build_summary(
+            {"recent_exits": self.pm.load_recent_exits(days=14, today="2026-08-13")})
+        self.assertIn("近期已平仓", summary)
+        self.assertIn("600160", summary)
+        self.assertIn("重入", summary)  # the "justify or don't buy" instruction
