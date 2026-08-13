@@ -396,16 +396,21 @@ def validate_phase3_gate(date: str, apply_log: dict, data: dict) -> GateResult:
                     gate.soft(False, f"rule {rule['rule']}: {v.get('suggestion', v.get('code', '?'))}")
 
     # ── Check persisted state consistency ──
-    _check_position_file_consistency(gate)
+    opened_codes = {a.split()[1] for a in actions
+                    if isinstance(a, str) and a.startswith("OPEN ") and len(a.split()) > 1}
+    _check_position_file_consistency(gate, run_date=date, opened_codes=opened_codes)
 
     return gate.check()
 
 
-def _check_position_file_consistency(gate: PipelineGate, tracking_dir=None):
+def _check_position_file_consistency(gate: PipelineGate, tracking_dir=None,
+                                     run_date=None, opened_codes=None):
     """Verify positions.json matches tracking/*.json on disk.
 
     tracking_dir is injectable so tests can exercise this against a temp
     directory (the real one is the default)."""
+    future_dated = []
+    opened_codes = set(opened_codes or ())
     import json
     from pathlib import Path
 
@@ -434,12 +439,25 @@ def _check_position_file_consistency(gate: PipelineGate, tracking_dir=None):
             # a LIST) — only dicts can be positions (2026-08-11)
             if isinstance(fdata, dict) and fdata.get("status") == "active":
                 tracking_codes.add(fdata["code"])
+                # 2026-08-14: a slot that ran past midnight stamped entryDate
+                # from the wall clock, dating 600160 a day ahead of the close
+                # it actually bought — which runs the time-stop clock late.
+                # Only positions THIS run opened: pre-existing holdings are
+                # legitimately dated after an old --date backfill's run date.
+                entry_date = fdata.get("entryDate")
+                if (run_date and entry_date and entry_date > run_date
+                        and fdata["code"] in opened_codes):
+                    future_dated.append(f"{fdata['code']}({entry_date})")
         except (json.JSONDecodeError, KeyError):
             continue
 
     if pos_codes != tracking_codes:
         diff = pos_codes.symmetric_difference(tracking_codes)
         gate.hard(False, f"positions.json mismatch with tracking files: {diff}")
+
+    if future_dated:
+        gate.soft(False, f"entryDate ahead of run date {run_date} (time-stop "
+                         f"clock will run late): {', '.join(sorted(future_dated))}")
 
 
 # ─── Run Manifest ───

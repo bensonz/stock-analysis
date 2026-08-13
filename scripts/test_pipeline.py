@@ -130,6 +130,52 @@ class TestPositionManager(unittest.TestCase):
         self.assertEqual(pos["stopLoss"], 47.5)
         self.assertEqual(pos["currentStop"], 47.5)
 
+    def test_entry_date_comes_from_run_not_wall_clock(self):
+        # 2026-08-14: the 8/12 afternoon slot executed at 00:38 on 8/13, so
+        # open_position's datetime.now() default dated 巨化 a day after the
+        # close it actually bought — starting its time-stop clock late.
+        # The pipeline now passes the run date, as close_position already did.
+        pos = self.pm.open_position({
+            "code": "600003", "name": "隔夜开仓", "entryPrice": 10.0,
+            "targetPrice": 12.0, "stopLoss": 9.5,
+            "entryDate": "2026-08-12", "slot": "afternoon",
+        })
+        self.assertEqual(pos["entryDate"], "2026-08-12")
+        self.assertEqual(pos["history"][0]["date"], "2026-08-12")
+
+    def test_gate3_warns_on_future_dated_entry(self):
+        # Belt to the above brace: any writer that dates a position past the
+        # run date gets surfaced in the manifest instead of silently skewing
+        # the holding-day count. Soft — --date backfills trail legitimately.
+        import contracts
+        self.pm.open_position({
+            "code": "600004", "name": "未来开仓", "entryPrice": 10.0,
+            "targetPrice": 12.0, "stopLoss": 9.5, "entryDate": "2026-08-13",
+        })
+        self.pm.regenerate_positions_json()
+
+        gate = contracts.PipelineGate("phase3")
+        contracts._check_position_file_consistency(
+            gate, tracking_dir=self.tracking, run_date="2026-08-12",
+            opened_codes={"600004"})
+        self.assertEqual(gate.hard_fails, [])
+        self.assertTrue(any("600004" in w for w in gate.soft_warns), gate.soft_warns)
+
+        # same file, run caught up → silent
+        gate_ok = contracts.PipelineGate("phase3")
+        contracts._check_position_file_consistency(
+            gate_ok, tracking_dir=self.tracking, run_date="2026-08-13",
+            opened_codes={"600004"})
+        self.assertEqual(gate_ok.soft_warns, [])
+
+        # a HELD position dated after an old --date backfill is not this
+        # run's doing — must stay silent or every backfill drowns in warns
+        gate_held = contracts.PipelineGate("phase3")
+        contracts._check_position_file_consistency(
+            gate_held, tracking_dir=self.tracking, run_date="2026-04-09",
+            opened_codes=set())
+        self.assertEqual(gate_held.soft_warns, [])
+
     def test_slot_recorded_on_open_close_and_history(self):
         # 2026-08-11: history recorded only the DATE, so a same-day
         # noon-vs-afternoon fill was indistinguishable in tracking/*.json.

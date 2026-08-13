@@ -1628,6 +1628,11 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
                 "sector": p.get("sector", ""),
                 "catalysts": p.get("catalysts", []),
                 "sourceWatchlist": date,
+                # Run date, NOT the wall clock: a slot that executes after
+                # midnight (catch-up runs do) would otherwise stamp tomorrow
+                # and start the time-stop clock a day late. close_position
+                # already takes date=date; this keeps open symmetric.
+                "entryDate": date,
                 "slot": slot,
                 "note": p.get("note", f"LLM开仓 {p.get('name', '')}"),
                 "day_ohlc": day_ohlc,
