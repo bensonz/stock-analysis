@@ -1,0 +1,42 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 242188,
+  "output_tokens": 23353,
+  "rounds": 3,
+  "duration_sec": 364.7,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年8月13日 A股 医药 CXO 医疗服务 板块 上涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3269
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "2026年8月13日 A股 三大指数 上涨 下跌家数 二八分化"
+      },
+      "result_length": 3136
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "2026年8月 通信设备 板块 上涨 光模块 算力 原因"
+      },
+      "result_length": 3394
+    }
+  ],
+  "fallback_used": false
+}

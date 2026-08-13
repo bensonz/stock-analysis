@@ -1,0 +1,101 @@
+{
+  "date": "2026-08-13",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 17.13,
+      "pnl_pct": 9.8,
+      "note": "炼化/石油石化板块连续第2日位于bottom5区域（油气开采Ⅱ-2.68%），未满3日卖出阈值；PnL+9.8%且止损已提至盈亏平衡¥15.6，缓冲充足，持有并盯紧第3日"
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "action": "HOLD",
+      "price": 50.8,
+      "pnl_pct": 16.8,
+      "note": "MLCC涨价周期未破（三星8/1+30%已生效），元件板块中性，止损¥43.51盈亏平衡，今日+1.6%继续走强，持有"
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "action": "HOLD",
+      "price": 36.05,
+      "pnl_pct": 1.1,
+      "note": "PnL+1.09%仍<3%，已持有8个交易日逼近10日时间止损；充电桩3C认证长期逻辑未变但持续横盘，下一交易日若仍<3%触发SELL。距硬止损¥33.88缓冲6.0%"
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "price": 133.87,
+      "pnl_pct": 16.3,
+      "note": "MLCC涨价核心受益（三星8/1+30%已生效），连续两期回购，止损¥115.07盈亏平衡，今日+4.61%，未达+20%阈值¥138.08暂不上调止损"
+    },
+    {
+      "code": "600160",
+      "name": "巨化股份",
+      "action": "HOLD",
+      "price": 40.96,
+      "pnl_pct": -0.6,
+      "note": "今日新开仓（day1），-0.58%；⚠️stop_proximity警示距止损¥39.14仅4.44%，持仓<5日不换仓，仅监控不加仓"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 53.34,
+      "pnl_pct": 20.3,
+      "note": "医疗服务#1热门板块（+3.8%），CRO安评龙头+实验猴稀缺壁垒，止损已提至+10%¥48.79锁定利润，持有"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 163.69,
+      "pnl_pct": 29.4,
+      "note": "CXO绝对龙头，医疗服务#1热门板块，H1指引上调+美国1260H初步禁令获批，止损已提至+10%¥139.15，安全边际极高"
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "HOLD",
+      "price": 132.48,
+      "pnl_pct": 9.4,
+      "note": "集成电路制造龙头0风险，在建工程20%产能扩张，今日+3.53%至+9.4%接近+10%阈值，止损¥115.04，持有"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 8,
+    "totalEquity": 989313.0,
+    "dayPnl": 6993.0,
+    "dayReturnPct": 0.71,
+    "totalReturnPct": -1.07,
+    "unrealizedPnl": 40826.0,
+    "realizedPnl": -51513.0,
+    "cashPct": 64.49
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.7389,
+    "up": 2287,
+    "down": 3095,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 56,
+    "limit_downs": 0,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.74:1, 3/3 major indices green, 56 limit-ups / 0 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "二八分化弱盘：上证+0.42%、深成+0.73%、创业板+1.61%、科创50+1.9%全绿，但涨跌家数0.74:1（2287涨/3095跌），56涨停/0跌停——医药CXO与通信权重拉指数、多数个股下跌。板块上医疗服务(+3.8%)、生物制品(+3.34%)、通信设备(+3.2%)领涨，贵金属(-2.71%)、油气开采(-2.68%)、工业金属(-2.59%)领跌，资金从资源/周期撤向医药CXO。IV整体中性（avg IV rank 0.33），持仓per-stock iv_proxy均normal，无波动率极端信号。breadth未达1.5:1买入门槛且<1:1，按规则不开新仓，专注持仓管理。"
+  }
+}
