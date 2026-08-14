@@ -202,7 +202,13 @@ def create_hypothesis(
     }
 
     if initial_evidence:
+        # Anything outside the two buckets would KeyError below — an LLM that
+        # writes evidence_type:"observation" (a *type* value) must not be able
+        # to crash the run. process_learnings sanitizes first; this is the
+        # backstop for any other caller.
         ev_type = initial_evidence.get("type", "supporting")
+        if ev_type not in ("supporting", "contradicting"):
+            ev_type = "supporting"
         ev_entry = {
             "date": initial_evidence.get("date", today),
             "detail": initial_evidence.get("detail", text),
@@ -420,51 +426,75 @@ def process_learnings(data: dict, learnings: list[dict | str], run_date: str | N
     actions = []
 
     for learning in learnings:
-        # Normalize to dict
-        if isinstance(learning, str):
-            learning = {"text": learning, "type": "observation", "tags": []}
+        try:
+            actions.extend(_process_one_learning(data, learning, today))
+        except Exception as e:
+            # One malformed entry must not discard the rest of the batch, nor
+            # fail the run — the trades are already applied by this point and
+            # learnings are a side-channel (2026-08-14).
+            preview = (learning.get("text", "") if isinstance(learning, dict)
+                       else str(learning))[:60]
+            actions.append(f"WARN skipped malformed learning ({type(e).__name__}: {e}): {preview}")
 
-        text = learning.get("text", "")
-        if not text:
-            continue
+    return actions
 
-        h_type = learning.get("type", "observation")
-        tags = learning.get("tags", [])
-        mechanism = learning.get("mechanism")
-        evidence_type = learning.get("evidence_type", "supporting")
-        related_id = learning.get("related_hypothesis")
 
-        # Try to match existing hypothesis
-        match = None
-        if related_id:
-            # Explicit reference
-            for h in data["hypotheses"]:
-                if h["id"] == related_id:
-                    match = h
-                    break
+def _process_one_learning(data: dict, learning: dict | str, today: str) -> list[str]:
+    """Match-or-create for a single learning. Raises on malformed input;
+    process_learnings isolates that per entry."""
+    actions = []
 
-        if not match:
-            # Fuzzy match
-            match = find_matching(data, text, tags)
+    # Normalize to dict
+    if isinstance(learning, str):
+        learning = {"text": learning, "type": "observation", "tags": []}
 
-        if match:
-            # Add evidence to existing hypothesis
-            add_evidence(data, match["id"], evidence_type, text, ev_date=today)
-            actions.append(
-                f"Updated {match['id']} ({match['status']}): "
-                f"+1 {evidence_type} evidence → hitRate={match['hitRate']:.0%}, n={match['sampleSize']}"
-            )
-        else:
-            # Create new observation
-            h = create_hypothesis(
-                data,
-                text=text,
-                h_type=h_type if h_type in VALID_TYPES else "observation",
-                tags=tags,
-                mechanism=mechanism,
-                initial_evidence={"type": evidence_type, "detail": text, "date": today},
-            )
-            actions.append(f"Created {h['id']} ({h['status']}): {text[:80]}...")
+    text = learning.get("text", "")
+    if not text:
+        return actions
+
+    h_type = learning.get("type", "observation")
+    tags = learning.get("tags", [])
+    mechanism = learning.get("mechanism")
+    # LLM-authored field: 2026-08-14 a run wrote evidence_type:"observation"
+    # (confusing it with `type`), which KeyError'd the whole learnings step
+    # and hard-failed an otherwise clean run at Gate 3.
+    evidence_type = learning.get("evidence_type", "supporting")
+    if evidence_type not in ("supporting", "contradicting"):
+        actions.append(f"WARN coerced evidence_type={evidence_type!r} → supporting")
+        evidence_type = "supporting"
+    related_id = learning.get("related_hypothesis")
+
+    # Try to match existing hypothesis
+    match = None
+    if related_id:
+        # Explicit reference
+        for h in data["hypotheses"]:
+            if h["id"] == related_id:
+                match = h
+                break
+
+    if not match:
+        # Fuzzy match
+        match = find_matching(data, text, tags)
+
+    if match:
+        # Add evidence to existing hypothesis
+        add_evidence(data, match["id"], evidence_type, text, ev_date=today)
+        actions.append(
+            f"Updated {match['id']} ({match['status']}): "
+            f"+1 {evidence_type} evidence → hitRate={match['hitRate']:.0%}, n={match['sampleSize']}"
+        )
+    else:
+        # Create new observation
+        h = create_hypothesis(
+            data,
+            text=text,
+            h_type=h_type if h_type in VALID_TYPES else "observation",
+            tags=tags,
+            mechanism=mechanism,
+            initial_evidence={"type": evidence_type, "detail": text, "date": today},
+        )
+        actions.append(f"Created {h['id']} ({h['status']}): {text[:80]}...")
 
     return actions
 

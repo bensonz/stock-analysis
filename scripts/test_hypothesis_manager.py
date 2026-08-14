@@ -404,6 +404,48 @@ class TestProcessLearnings:
         assert h["mechanism"] == "Low IV = complacency, vol expansion imminent"
         print("✅ test_dict_format_new")
 
+    def test_invalid_evidence_type_is_coerced_not_fatal(self):
+        # 2026-08-14: the model wrote evidence_type:"observation" (a `type`
+        # value), which KeyError'd on evidence["observation"], aborted the
+        # whole learnings step and hard-failed an otherwise clean run at
+        # Gate 3 — no commit, no site rebuild, trades already applied.
+        data = _fresh_data()
+        actions = hm.process_learnings(data, [{
+            "text": "板块轮动加速=存量资金博弈",
+            "type": "signal",
+            "evidence_type": "observation",   # invalid
+            "tags": ["sector"],
+        }])
+        h = data["hypotheses"][0]
+        assert len(h["evidence"]["supporting"]) == 1
+        assert h["evidence"]["contradicting"] == []
+        assert any("coerced" in a for a in actions)   # degradation stays loud
+
+    def test_one_bad_learning_does_not_discard_the_batch(self):
+        # The three learnings from that run: two valid, one malformed. All
+        # three were lost. Now a bad entry costs only itself.
+        data = _fresh_data()
+        actions = hm.process_learnings(data, [
+            {"text": "Breadth below 0.5 blocks new entries", "type": "rule",
+             "tags": ["entry-filter"]},
+            12345,                        # neither dict nor str — raises
+            {"text": "Medical sector rotated out of the top five", "type": "signal",
+             "tags": ["sector"]},
+        ])
+        texts = [h["text"] for h in data["hypotheses"]]
+        assert "Breadth below 0.5 blocks new entries" in texts
+        assert "Medical sector rotated out of the top five" in texts
+        assert any("skipped malformed" in a for a in actions)   # and stays loud
+
+    def test_create_hypothesis_rejects_bad_initial_evidence_bucket(self):
+        # Backstop for any caller that bypasses process_learnings.
+        data = _fresh_data()
+        h = hm.create_hypothesis(
+            data, text="直接建仓的假设", h_type="observation", tags=[],
+            initial_evidence={"type": "nonsense", "detail": "d", "date": "2026-08-14"})
+        assert len(h["evidence"]["supporting"]) == 1
+        assert set(h["evidence"].keys()) == {"supporting", "contradicting"}
+
     def test_matches_existing(self):
         data = _fresh_data()
         # Create existing hypothesis
