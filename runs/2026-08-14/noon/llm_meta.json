@@ -1,0 +1,52 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 160290,
+  "output_tokens": 21746,
+  "rounds": 2,
+  "duration_sec": 256.3,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月14日 板块 玻璃玻纤 电子化学品 通信设备 领涨",
+        "max_results": 5
+      },
+      "result_length": 3314
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月14日 市场分化 涨跌家数 创业板 上证",
+        "max_results": 5
+      },
+      "result_length": 3252
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "通信设备 光模块 CPO 行情 2026年8月 催化",
+        "max_results": 5
+      },
+      "result_length": 3396
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "CXO 医药外包 药明康德 板块回调 2026年8月",
+        "max_results": 5
+      },
+      "result_length": 3285
+    }
+  ],
+  "fallback_used": false
+}

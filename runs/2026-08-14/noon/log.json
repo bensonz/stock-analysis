@@ -1,0 +1,128 @@
+{
+  "date": "2026-08-14",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1786678528.7332659,
+      "errors": [],
+      "end": 1786678601.5623941,
+      "duration_sec": 72.8
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 9218,
+      "tokens": {
+        "input_tokens": 160290,
+        "output_tokens": 21746
+      },
+      "rounds": 2,
+      "tool_calls_count": 4,
+      "duration_sec": 256.3,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1786678857.9829278,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=135",
+        "Hypothesis: Updated h076 (hypothesis): +1 supporting evidence → hitRate=100%, n=4",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=42",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=43",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "600160",
+                "name": "巨化股份",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 40.9,
+                "stopLoss": 39.14,
+                "distance_pct": 4.3,
+                "suggestion": "🟠 WATCH — 4.3% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "603127",
+                "name": "昭衍新药",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 50.51,
+                "stopLoss": 48.79,
+                "distance_pct": 3.41,
+                "suggestion": "🟠 WATCH — 3.4% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1786678858.2661939,
+      "duration_sec": 0.3
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 600160 — 🟠 WATCH — 4.3% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 603127 — 🟠 WATCH — 3.4% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 329.40000000000003
+  }
+}
