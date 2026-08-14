@@ -840,7 +840,11 @@ class TestReentryContext(unittest.TestCase):
             "targetPrice": 12.0, "stopLoss": 9.5, "slot": "noon"})
         self.assertNotIn("reentry", fresh)
 
-    def test_prompt_surfaces_recent_exits(self):
+    def test_gpt_pass2_summary_surfaces_recent_exits(self):
+        # build_summary feeds ONLY the hybrid GPT pass-2 prompt. Asserting it
+        # here is not evidence the primary decision prompt carries the block —
+        # that is test_primary_prompt_surfaces_recent_exits below, and its
+        # absence is exactly why the 2026-08-13 ship missed the real path.
         import llm_client
         self._closed("600160", "2026-08-11", -4.61)
         summary = llm_client.build_summary(
@@ -848,3 +852,40 @@ class TestReentryContext(unittest.TestCase):
         self.assertIn("近期已平仓", summary)
         self.assertIn("600160", summary)
         self.assertIn("重入", summary)  # the "justify or don't buy" instruction
+
+    def test_primary_prompt_surfaces_recent_exits(self):
+        # The prompt the model actually decides from is built in run_daily,
+        # not llm_client. On 2026-08-14 it contained zero occurrences of
+        # recent_exits while the feature was believed live for two sessions.
+        import run_daily
+        self._closed("600160", "2026-08-11", -4.61)
+        exits = self.pm.load_recent_exits(days=14, today="2026-08-13")
+        self.assertTrue(exits)
+
+        run_dir = self.tracking / "run"
+        (run_dir / "output").mkdir(parents=True, exist_ok=True)
+        orig_regen, orig_dir = run_daily.regenerate_positions_json, run_daily.get_run_dir
+        try:
+            run_daily.regenerate_positions_json = lambda price_data=None: {"portfolio": {}}
+            run_daily.get_run_dir = lambda *a, **k: run_dir
+            prompt = run_daily.phase2_build_prompt({
+                "date": "2026-08-13", "slot": "afternoon", "recent_exits": exits})
+        finally:
+            run_daily.regenerate_positions_json = orig_regen
+            run_daily.get_run_dir = orig_dir
+
+        self.assertIn("近期已平仓", prompt)     # prose instruction, not just JSON
+        self.assertIn("600160", prompt)
+        self.assertIn("重入", prompt)
+        self.assertIn('"recent_exits"', prompt)  # and the structured payload
+
+        # nothing sold recently → no empty section stub
+        try:
+            run_daily.regenerate_positions_json = lambda price_data=None: {"portfolio": {}}
+            run_daily.get_run_dir = lambda *a, **k: run_dir
+            quiet = run_daily.phase2_build_prompt({
+                "date": "2026-08-13", "slot": "afternoon", "recent_exits": []})
+        finally:
+            run_daily.regenerate_positions_json = orig_regen
+            run_daily.get_run_dir = orig_dir
+        self.assertNotIn("近期已平仓", quiet)

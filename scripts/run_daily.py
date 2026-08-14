@@ -1293,6 +1293,10 @@ def phase2_build_prompt(data: dict) -> str:
         "entry_regime": data.get("entry_regime", evaluate_new_entry_regime(data.get("market", {}))),
         "rule_violations": data.get("rule_violations", {}),
         "collection_errors": data.get("collection_errors", []),
+        # Names WE just sold. Shipped 2026-08-13 into llm_client.build_summary,
+        # which only feeds the hybrid GPT pass-2 — so the primary decision
+        # prompt (this one) never carried it. Caught 2026-08-14.
+        "recent_exits": data.get("recent_exits", []),
     }
 
     # Hypothesis-based learnings (compact, structured)
@@ -1307,6 +1311,28 @@ def phase2_build_prompt(data: dict) -> str:
         learnings = "\n".join(learnings_lines[:100]) + "\n\n[... truncated, see hypothesis system for active rules ...]"
     payload["learnings_excerpt"] = learnings
 
+    # Re-entry guard: JSON alone gets skimmed, so the instruction is spelled
+    # out in prose too. Empty string when we sold nothing recently.
+    exits = data.get("recent_exits") or []
+    reentry_note = ""
+    if exits:
+        rows = "\n".join(
+            f"- {e.get('exitDate')}"
+            f"{ {'noon': '午盘', 'afternoon': '收盘'}.get(e.get('exitSlot') or '', '') } "
+            f"卖出 {e.get('code')} {e.get('name')} @{e.get('exitPrice')} "
+            f"({e.get('returnPct')}%, 持有{e.get('holdingDays')}天, 入场{e.get('entryPrice')}) "
+            f"— {str(e.get('exitReason', ''))[:120]}"
+            for e in exits[:8]
+        )
+        reentry_note = (
+            "\n## 近期已平仓 (last 14 days — 我们自己刚卖出的标的)\n\n"
+            f"{rows}\n\n"
+            "若今日 new_positions 中出现上列代码, 这是**重入**: 必须在 reason 里写明"
+            "「上次为何离场、这次有何不同」(价位/形态/催化变了什么); 说不出差别就不要买。"
+            "实测记录: 重入 n=9 均值 -3.71% 胜率 11%, 全账本对照 -0.78%/笔 —— "
+            "不是禁令, 但举证责任在重入这一边。\n"
+        )
+
     prompt = f"""{analyst_prompt}
 
 ## 今日数据 (由 run_daily.py 自动收集)
@@ -1314,7 +1340,7 @@ def phase2_build_prompt(data: dict) -> str:
 ```json
 {json.dumps(payload, ensure_ascii=False, indent=2)}
 ```
-
+{reentry_note}
 请根据以上数据进行分析，按照 Required Output JSON 格式返回你的决策。
 
 重要提醒：请再次仔细阅读以上所有数据（特别是 enriched_candidates 中的详细指标、position_prices 中的实时价格、以及 iv_sentiment），严格按照 ANALYST.md 的5条规则和 Output Format 要求，返回完整的 JSON 决策。skip_list 中只能引用输入数据中实际存在的价格和指标，不要编造任何数据。
