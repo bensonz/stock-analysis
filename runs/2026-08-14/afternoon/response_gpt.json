@@ -1,0 +1,219 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": 4.02,
+        "trend": "加速"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": 3.6,
+        "trend": "走强"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": 3.39,
+        "trend": "走强"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": 3.37,
+        "trend": "走强"
+      },
+      {
+        "name": "小金属",
+        "5d_pct": 3.09,
+        "trend": "走强"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "影视院线",
+        "5d_pct": -2.72,
+        "trend": "走弱"
+      },
+      {
+        "name": "医疗美容",
+        "5d_pct": -2.23,
+        "trend": "走弱"
+      },
+      {
+        "name": "饰品",
+        "5d_pct": -2.21,
+        "trend": "走弱"
+      },
+      {
+        "name": "化妆品",
+        "5d_pct": -2.21,
+        "trend": "走弱"
+      },
+      {
+        "name": "养殖业",
+        "5d_pct": -2.08,
+        "trend": "走弱"
+      }
+    ],
+    "position_alignment": "0/8持仓位于今日top5板块",
+    "regime": "权重拉指数但个股分化：昨日领涨的医疗服务/元件已退出top5，材料/通信接棒，轮动加速、宽度不足的弱市"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "石油石化板块连续2日冷区后今日退出bottom5，未触发连续3日冷区SELL；PnL+7.6%，止损已提至盈亏平衡¥15.6，缓冲充足",
+      "sector_rank": "中游（退出bottom5）",
+      "new_stop": null,
+      "pnl_pct": 7.6,
+      "days_held": 12,
+      "exit_price": null
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "action": "RAISE_STOP",
+      "reason": "现价52.21达+20%阈值，按Rule 5止损上移至+10%锁定利润；MLCC涨价逻辑未变",
+      "sector_rank": "中游",
+      "new_stop": 47.86,
+      "pnl_pct": 20.0,
+      "days_held": 9,
+      "exit_price": null
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "action": "HOLD",
+      "reason": "day9 PnL+3.25%重回+3%时间止损阈值上方，未触发；若下一交易日跌破+3%无条件SELL",
+      "sector_rank": "中游",
+      "new_stop": null,
+      "pnl_pct": 3.3,
+      "days_held": 9,
+      "exit_price": null
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "reason": "MLCC涨价核心受益，PnL+12.2%，止损¥115.07盈亏平衡；未达+20%阈值¥138.08，暂不上移止损",
+      "sector_rank": "中游",
+      "new_stop": null,
+      "pnl_pct": 12.2,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "600160",
+      "name": "巨化股份",
+      "action": "HOLD",
+      "reason": "重入后day2 -1.04%未触发头3日-3%止损；距止损¥39.14约4.0%（stop_proximity WATCH），制冷剂长协涨价逻辑未变，持仓<5日不换仓仅监控",
+      "sector_rank": "中游",
+      "new_stop": null,
+      "pnl_pct": -1.0,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "CRO安评龙头，PnL+13.9%，止损已提至+10%¥48.79锁定利润；今日医疗服务退出top5、距止损4.9%（WATCH），继续盯紧",
+      "sector_rank": "退出top5",
+      "new_stop": null,
+      "pnl_pct": 15.7,
+      "days_held": 9,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "CXO绝对龙头，H1指引上调，PnL+25.7%，止损已提至+10%¥139.15，安全边际充足",
+      "sector_rank": "退出top5",
+      "new_stop": null,
+      "pnl_pct": 25.9,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "HOLD",
+      "reason": "集成电路制造龙头，PnL+9.7%接近但未达+10%阈值（¥133.21），止损¥115.04；半导体休整无卖出信号",
+      "sector_rank": "中游",
+      "new_stop": null,
+      "pnl_pct": 9.7,
+      "days_held": 8,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "RPS120=94.56扩展区、0风险、MA合规(dist_ma10 4.3%)，个例达标，但breadth 0.81:1低于1:1门槛，弱市不开新仓",
+      "rps120": 94.56
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "dist_ma10_pct 11.7% > 8% 追高违规（Rule 2b），且breadth弱",
+      "rps120": 94.87
+    },
+    {
+      "code": "688202",
+      "name": "美迪西",
+      "reason": "dist_ma10_pct 16.7%、dist_ma20_pct 26.2% 严重超买，追高违规",
+      "rps120": 94.64
+    },
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "reason": "重入候选：8/12刚止损离场@34.65(-3.08%)，现价36.2；VCP SETUP但breadth弱+重入举证不足（说不出有何不同），跳过",
+      "rps120": 90.0
+    },
+    {
+      "code": "601918",
+      "name": "新集能源",
+      "reason": "煤炭未进今日top5，且breadth 0.81:1弱市不开新仓",
+      "rps120": 93.65
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "指数全绿（上证+0.01%/深成+0.45%/创业板+1.12%）但涨跌家数2400:2970=0.81:1时，必须按1.5:1与1:1两道breadth门槛执行不开新仓——指数颜色不能覆盖涨跌家数宽度。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "market-regime"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "分化行情中指数由权重股拉动，涨跌家数反映真实宽度；弱宽度下新仓胜率系统性偏低，现金优于强行配置。"
+    },
+    {
+      "text": "顺络电子+20%机械止损上移至+10%锁定利润，再次验证弱市中快速获利股应立即把浮盈转为低风险持仓。",
+      "type": "observation",
+      "tags": [
+        "exit-rule",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "弱市反弹常快速回吐，机械止盈纪律能把纸面利润兑现为安全垫。"
+    },
+    {
+      "text": "今日0/8持仓位于top5板块，昨日领涨的医疗服务/元件全部退出top5，板块轮动加速=存量资金博弈，不宜追新热点、不宜加仓，只做持有与止盈管理。",
+      "type": "signal",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "observation",
+      "mechanism": "热点持续性差反映增量资金不足，追热点易被轮动闷杀；此时应收缩到已盈利持仓的管理。"
+    }
+  ],
+  "market_summary": "三大指数齐涨（上证+0.01%、深成+0.45%、创业板+1.12%）但涨跌家数2400:2970=0.81:1，64涨停/13跌停，权重拉指数、个股普跌的分化弱市；IV整体中性（平均IV Rank 0.33）。热区：玻璃玻纤+4.02%、通信设备+3.6%、非金属材料Ⅱ+3.39%、电子化学品Ⅱ+3.37%、小金属+3.09%；冷区：影视院线-2.72%、医疗美容-2.23%等。昨日领涨的医疗服务/元件已退出top5，轮动加速。按breadth门槛（0.81:1 < 1:1）不开新仓，专注持仓止盈与止损管理。",
+  "market_sentiment": "neutral",
+  "market_call": "谨慎"
+}

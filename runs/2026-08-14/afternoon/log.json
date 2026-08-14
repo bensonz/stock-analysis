@@ -1,0 +1,119 @@
+{
+  "date": "2026-08-14",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1786694033.310998,
+      "errors": [],
+      "end": 1786694097.496406,
+      "duration_sec": 64.2
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 5534,
+      "response_file": "runs/2026-08-14/afternoon/response.json"
+    },
+    {
+      "phase": "apply",
+      "start": 1786721914.697459,
+      "actions": [
+        "RAISE_STOP 002138 → 47.86",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=136",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=44",
+        "Hypothesis: WARN coerced evidence_type='observation' → supporting",
+        "Hypothesis: Created h157 (observation): 今日0/8持仓位于top5板块，昨日领涨的医疗服务/元件全部退出top5，板块轮动加速=存量资金博弈，不宜追新热点、不宜加仓，只做持有与止盈管理。...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "600160",
+                "name": "巨化股份",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 40.77,
+                "stopLoss": 39.14,
+                "distance_pct": 4.0,
+                "suggestion": "🟠 WATCH — 4.0% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "603127",
+                "name": "昭衍新药",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 51.3,
+                "stopLoss": 48.79,
+                "distance_pct": 4.89,
+                "suggestion": "🟠 WATCH — 4.9% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1786721914.93764,
+      "duration_sec": 0.2
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 600160 — 🟠 WATCH — 4.0% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 603127 — 🟠 WATCH — 4.9% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 64.4
+  }
+}

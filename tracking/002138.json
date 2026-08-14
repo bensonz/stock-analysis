@@ -7,7 +7,7 @@
   "entryPrice": 43.51,
   "targetPrice": 52.0,
   "stopLoss": 41.33,
-  "currentStop": 43.51,
+  "currentStop": 47.86,
   "allocation_pct": 6.0,
   "shares": 1100,
   "allocatedCapital": 47861.0,
@@ -112,6 +112,14 @@
       "change_pct": 17.19,
       "action": "HOLD",
       "note": "MLCC涨价周期未破（三星8/1+30%已生效），PnL+17.2%未达+20%阈值¥52.21，止损¥43.51盈亏平衡，持有"
+    },
+    {
+      "date": "2026-08-14",
+      "slot": "afternoon",
+      "price": 52.21,
+      "change_pct": 20.0,
+      "action": "RAISE_STOP",
+      "note": "现价52.21达+20%阈值，按Rule 5止损上移至+10%锁定利润；MLCC涨价逻辑未变"
     }
   ],
   "exitDate": null,
@@ -121,7 +129,7 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-08-04T11:40:35.792759+08:00",
-  "updatedAt": "2026-08-14T11:40:58.003049+08:00",
+  "updatedAt": "2026-08-14T23:38:34.709741+08:00",
   "trackerVersion": "2.1",
   "entrySlot": "noon"
 }
