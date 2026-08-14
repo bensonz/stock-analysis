@@ -465,13 +465,28 @@ function renderDay(d) {
   }
   if (det.holdings && det.holdings.length) {
     h += `<h4>持仓 (${det.holdings.length}) <span class="mini">当日最后快照${det.pre ? "(盘前)" : ""}</span></h4>`;
-    const holdNotes = {};
-    for (const a of (det.actions || [])) if (a.a === "HOLD") holdNotes[a.c] = a.note;
+    // Every action carries the model's reasoning — not just HOLD. Filtering
+    // to HOLD hid 91 of 255 notes (SELL/OPEN/RAISE_STOP), which read as
+    // "this row has nothing to say" when it had the most to say.
+    const rowNotes = {};
+    for (const a of (det.actions || [])) if (a.note) rowNotes[a.c] = {a: a.a, note: a.note};
+    let noted = 0;
     for (const p of det.holdings) {
       const size = p.v != null ? `<span class="muted">${fmtM(p.v)}${p.w != null ? ` (${p.w}%)` : ""}</span> ` : "";
-      h += `<div class="d-row" title="${esc(holdNotes[p.c] || "")}"><span>${esc(p.n)} <span class="muted">${esc(p.c)}</span></span>`
+      const rn = rowNotes[p.c];
+      if (rn) noted++;
+      // Glyph, not the word: the full action name is in the tooltip badge,
+      // and "RAISE_STOP" inline pushed the stock code out of the row.
+      const glyph = {RAISE_STOP: "⬆", OPEN: "＋", SELL: "✕"}[rn && rn.a] || "";
+      const tag = glyph ? ` <span class="act-tag">${glyph}</span>` : "";
+      h += `<div class="d-row${rn ? " has-note" : ""}"${rn ? ` data-note="${esc(rn.note)}" data-act="${esc(rn.a)}"` : ""}>`
+         + `<span>${esc(p.n)}${tag} <span class="muted">${esc(p.c)}</span></span>`
          + `<span>${size}<span class="${pnlCls(p.p)}">${p.p == null ? "—" : sign(p.p) + p.p + "%"}</span></span></div>`;
     }
+    // Absence must be visible, not mysterious: 39 of 108 days predate action
+    // logging, so no row on them has reasoning to show.
+    if (!noted) h += `<div class="note mini-note">该日无逐仓决策记录（早于决策日志上线）</div>`;
+    else h += `<div class="note mini-note">悬停持仓行查看当日决策理由</div>`;
   } else {
     h += `<div class="note" style="margin-top:8px">空仓 · 100%现金`
        + (hasOpens ? " — 当日开仓于下一快照计入持仓" : "") + `</div>`;
@@ -481,6 +496,42 @@ function renderDay(d) {
   if (btn) btn.addEventListener("click", unpin);
 }
 document.addEventListener("keydown", ev => { if (ev.key === "Escape" && pinned) unpin(); });
+
+// Hover reasoning for holding rows. Delegated so it survives every re-render
+// of the side panel; native title= was unstyled, ~1s delayed, and clipped the
+// 200-char Chinese notes these actually are.
+(function() {
+  const rt = document.getElementById("rowtip");
+  function place(ev) {
+    const pad = 14, w = rt.offsetWidth, hgt = rt.offsetHeight;
+    let x = ev.clientX - w - pad, y = ev.clientY + pad;
+    if (x < 8) x = ev.clientX + pad;                       // flip near left edge
+    if (y + hgt > window.innerHeight - 8) y = ev.clientY - hgt - pad;
+    rt.style.left = Math.max(8, x) + "px";
+    rt.style.top = Math.max(8, y) + "px";
+  }
+  document.addEventListener("mouseover", ev => {
+    const row = ev.target.closest && ev.target.closest(".d-row.has-note");
+    if (!row) return;
+    // textContent, not innerHTML: dataset gives back the DECODED note, so
+    // re-parsing it as HTML would undo the escaping done at render time.
+    rt.textContent = "";
+    const badge = document.createElement("span");
+    badge.className = "rt-act";
+    badge.textContent = row.dataset.act || "";
+    rt.appendChild(badge);
+    rt.appendChild(document.createElement("br"));
+    rt.appendChild(document.createTextNode(row.dataset.note || ""));
+    rt.style.display = "block";
+    place(ev);
+  });
+  document.addEventListener("mousemove", ev => {
+    if (rt.style.display === "block" && ev.target.closest && ev.target.closest(".d-row.has-note")) place(ev);
+  });
+  document.addEventListener("mouseout", ev => {
+    if (ev.target.closest && ev.target.closest(".d-row.has-note")) rt.style.display = "none";
+  });
+})();
 
 // ---------------- charts
 (function() {
@@ -725,10 +776,26 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
   .d-date {{ font-weight:600; font-size:15px; }}
   .d-equity {{ font-size:22px; font-weight:700; font-variant-numeric:tabular-nums; margin-top:2px; }}
   .d-sub {{ font-size:12.5px; color:var(--muted); }}
-  .d-row {{ display:flex; justify-content:space-between; padding:3px 0; font-size:13px; }}
+  .d-row {{ display:flex; justify-content:space-between; align-items:baseline; gap:8px;
+            padding:3px 0; font-size:13px; }}
+  .d-row > span:first-child {{ min-width:0; overflow:hidden; text-overflow:ellipsis;
+                               white-space:nowrap; }}
+  .d-row > span:last-child {{ flex:none; white-space:nowrap; }}
   .d-act {{ margin:7px 0; font-size:13px; }}
   .d-size {{ font-size:12px; color:var(--fg); margin:1px 0 0 2px; font-variant-numeric:tabular-nums; }}
   .d-note {{ color:var(--muted); font-size:12px; margin:2px 0 0 2px; }}
+  .d-row.has-note {{ cursor:help; border-bottom:1px dotted var(--line); }}
+  .d-row.has-note:hover {{ background:#f6f8fa; }}
+  .act-tag {{ font-size:9.5px; font-weight:700; letter-spacing:.03em; color:#8a5a00;
+              background:#fdf1d6; border-radius:3px; padding:0 3px; vertical-align:1px; }}
+  .mini-note {{ font-size:11px; color:var(--muted); margin-top:6px; }}
+  #rowtip {{ position:fixed; display:none; pointer-events:none; z-index:20;
+             background:#1c2330; color:#fff; padding:8px 10px; border-radius:7px;
+             font-size:12px; line-height:1.55; max-width:340px; white-space:normal;
+             box-shadow:0 6px 22px rgba(0,0,0,.28); }}
+  #rowtip .rt-act {{ display:inline-block; font-size:10px; font-weight:700;
+                     background:rgba(255,255,255,.16); border-radius:3px;
+                     padding:0 4px; margin-bottom:4px; }}
   .mini {{ font-weight:400; font-size:10.5px; color:var(--muted); }}
   .slot {{ font-size:10.5px; color:var(--muted); background:#f0f2f5;
            border-radius:3px; padding:0 4px; margin-left:3px; }}
@@ -785,6 +852,7 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
     <div class="panel side"><div id="day"></div></div>
   </div>
   <div id="tip"></div>
+  <div id="rowtip"></div>
 
   {events_html}
 

@@ -127,6 +127,21 @@ def test_render_html_contains_data_and_no_external_resources(tmp_path):
     assert "胜率 100.0%" in html_out
 
 
+def test_holding_row_notes_cover_every_action_type(tmp_path):
+    # Until 2026-08-14 the row tooltip read `if (a.a === "HOLD")`, so the
+    # 91 SELL/OPEN/RAISE_STOP notes (of 255) silently had no hover — a row
+    # that had just been acted on looked like it had nothing to say.
+    series = [{"date": "2026-08-14", "equity": 985708.0, "ret_pct": -1.43,
+               "positions": 8, "starting": 1000000}]
+    html_out = bs.render_html(series, {"portfolio": {"totalEquity": 985708.0},
+                                       "activePositions": []},
+                              [], bs.compute_stats(series, []))
+    assert 'if (a.note) rowNotes[a.c]' in html_out      # every action, not just HOLD
+    assert '=== "HOLD"' not in html_out.split("rowNotes")[1][:200]
+    assert 'id="rowtip"' in html_out                     # styled tooltip container
+    assert "无逐仓决策记录" in html_out                    # missing notes stay explicit
+
+
 def test_day_details_join(tmp_path):
     runs = tmp_path / "runs"
     _snap(runs, "2026-08-05/noon/input/positions_snapshot.json",
