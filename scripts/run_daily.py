@@ -1791,6 +1791,35 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
     return log
 
 
+def refresh_site() -> None:
+    """Regenerate site/index.html. Never fails the run.
+
+    site/ is git-ignored (2026-08-14) — a derived artifact, rebuildable from
+    tracked data — so this no longer has to happen before the commit. It runs
+    right after each manifest write instead, which means a run that dies at
+    Gate 3 still leaves the page matching what actually landed in tracking/,
+    with the failure banner on top. Before, a post-apply failure skipped the
+    rebuild entirely and the site silently disagreed with the books (7/20 and
+    8/14 both did exactly that)."""
+    try:
+        from build_site import build as _build_site
+        _build_site()
+    except Exception as e:
+        print(f"  [site] regeneration failed (non-fatal): {e}", file=sys.stderr)
+
+
+def write_manifest(manifest, run_dir: Path) -> None:
+    """Finalize + persist the manifest, then refresh the site so its status
+    banner matches the run that just ended. Kept together so the two can't
+    drift out of sync."""
+    manifest.finalize()
+    (run_dir / "manifest.json").write_text(
+        json.dumps(manifest.to_dict(), ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    refresh_site()
+
+
 def phase4_validate_and_log(date: str, logs: list[dict], slot: str) -> list[str]:
     """Phase 4: Validate output and save run log."""
     errors = validate_output(date, slot)
@@ -2056,12 +2085,7 @@ def main():
 
             for f in gate1.hard_fails:
                 print(f"  ✗ {f}", file=sys.stderr)
-            manifest.finalize()
-            # Save manifest
-            (run_dir / "manifest.json").write_text(
-                json.dumps(manifest.to_dict(), ensure_ascii=False, indent=2) + "\n",
-                encoding="utf-8",
-            )
+            write_manifest(manifest, run_dir)
             print(f"\n{'='*60}", file=sys.stderr)
             print(f"Pipeline FAILED at Gate 1 with {len(gate1.hard_fails)} hard failure(s)", file=sys.stderr)
             print(f"No LLM call made. No positions modified.", file=sys.stderr)
@@ -2157,11 +2181,7 @@ def main():
         if not gate2.passed:
             for f in gate2.hard_fails:
                 print(f"  ✗ {f}", file=sys.stderr)
-            manifest.finalize()
-            (run_dir / "manifest.json").write_text(
-                json.dumps(manifest.to_dict(), ensure_ascii=False, indent=2) + "\n",
-                encoding="utf-8",
-            )
+            write_manifest(manifest, run_dir)
             print(f"\n{'='*60}", file=sys.stderr)
             print(f"Pipeline FAILED at Gate 2 with {len(gate2.hard_fails)} hard failure(s)", file=sys.stderr)
             print(f"LLM ran but response is invalid. No positions modified.", file=sys.stderr)
@@ -2216,11 +2236,7 @@ def main():
         if not gate3.passed:
             for f in gate3.hard_fails:
                 print(f"  ✗ {f}", file=sys.stderr)
-            manifest.finalize()
-            (run_dir / "manifest.json").write_text(
-                json.dumps(manifest.to_dict(), ensure_ascii=False, indent=2) + "\n",
-                encoding="utf-8",
-            )
+            write_manifest(manifest, run_dir)
             print(f"\n{'='*60}", file=sys.stderr)
             print(f"Pipeline FAILED at Gate 3. Apply had errors. Review tracking state.", file=sys.stderr)
             print(f"{'='*60}", file=sys.stderr)
@@ -2247,13 +2263,8 @@ def main():
         else:
             print("  All checks passed!", file=sys.stderr)
 
-        # Refresh the static portfolio site (site/index.html) so it rides
-        # into the same commit. Never fails the run.
-        try:
-            from build_site import build as _build_site
-            _build_site()
-        except Exception as e:
-            print(f"  [site] regeneration failed (non-fatal): {e}", file=sys.stderr)
+        # (site rebuild moved to write_manifest — it no longer rides into the
+        # commit, so it can run after the manifest and reflect the real status)
 
         # Git commit (blocked by CRITICAL validation errors)
         if not no_commit and not critical_errors:
@@ -2307,11 +2318,7 @@ def main():
         manifest.add_phase("validate", "ok" if not errors else "warnings",
                            details={"errors": errors})
         manifest.total_duration_sec = total_sec
-        manifest.finalize()
-        (run_dir / "manifest.json").write_text(
-            json.dumps(manifest.to_dict(), ensure_ascii=False, indent=2) + "\n",
-            encoding="utf-8",
-        )
+        write_manifest(manifest, run_dir)
 
         print(f"\n{'='*60}", file=sys.stderr)
         print(f"Pipeline complete in {total_sec:.0f}s ({manifest.status.value})", file=sys.stderr)
@@ -2427,6 +2434,9 @@ def main():
             print(f"  Validation issues: {errors}", file=sys.stderr)
         else:
             print("  All checks passed!", file=sys.stderr)
+        # --apply writes no manifest, so refresh directly. Without this, a
+        # manual repair left the site on the pre-repair build (2026-08-14).
+        refresh_site()
         return
 
     # Full pipeline: Phase 1 + Phase 2 output

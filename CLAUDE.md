@@ -48,7 +48,16 @@ python3 scripts/run_rules.py --human
 
 # IV sentiment (needs options-learn backend on :8000)
 python3 scripts/fetch_iv_sentiment.py --human
+
+# Static portfolio site (open site/index.html via file://)
+python3 scripts/build_site.py
 ```
+
+**`site/index.html` is a derived artifact and is git-ignored.** It is a pure
+function of `tracking/`, `runs/`, and `data/index_cache/`, rebuilt (~0.5s) after
+every manifest write — including on failed runs, so the page always matches what
+actually landed on disk and carries a red banner naming the failure. Never commit
+it; regenerate instead. Sort runs by `run_started_at`, never by slot name.
 
 ### Tests
 

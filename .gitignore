@@ -19,3 +19,8 @@ data/pricedb/
 
 # secrets — never commit
 .env
+
+# Generated portfolio site — pure function of tracking/ + runs/ + data/index_cache/.
+# Rebuilt on every run (and by `python3 scripts/build_site.py`); committing it
+# added ~2 blobs of 180KB per trading day for an artifact nothing consumes.
+site/

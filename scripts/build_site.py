@@ -280,6 +280,41 @@ def load_events() -> dict | None:
         return None
 
 
+def load_latest_run_status() -> dict | None:
+    """Status of the most recent run, for the header banner.
+
+    The site is rebuilt right after every manifest write (2026-08-14), so a
+    run that fails downstream of apply still refreshes the page — the data
+    stays true and this says so out loud. Sorted by run_started_at, never by
+    slot name ("afternoon" < "noon" alphabetically)."""
+    newest = None
+    for mf in RUNS_DIR.glob("*/*/manifest.json"):
+        try:
+            m = _read_json(mf)
+        except (OSError, json.JSONDecodeError):
+            continue
+        if not isinstance(m, dict) or not m.get("run_started_at"):
+            continue
+        if newest is None or m["run_started_at"] > newest["run_started_at"]:
+            newest = m
+    if not newest:
+        return None
+    gates = newest.get("gates") or {}
+    failed_gates = [g for g, v in gates.items() if isinstance(v, dict) and v.get("passed") is False]
+    if newest.get("status") != "failed" and not failed_gates:
+        return None
+    reasons = []
+    for g in failed_gates:
+        reasons.extend(gates[g].get("hard_fails") or [])
+    return {
+        "date": newest.get("date", "?"),
+        "slot": newest.get("slot", "?"),
+        "reasons": reasons[:3],
+        # Apply ran ⇒ the numbers below are real, just uncommitted.
+        "applied": (newest.get("phases") or {}).get("apply") is not None,
+    }
+
+
 def load_badges(series: list[dict]) -> list[dict]:
     """Header badges from the latest real run's input artifacts."""
     badges = []
@@ -634,13 +669,26 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && pinned) 
 
 
 def render_html(series, active, trades, stats, details=None, index_rebased=None,
-                events=None, badges=None, generated_at=None) -> str:
+                events=None, badges=None, generated_at=None, run_status=None) -> str:
     pf = active.get("portfolio", {})
     positions = active.get("activePositions", [])
     details = details or {}
     index_rebased = index_rebased or {}
     badges = badges or []
     generated_at = generated_at or datetime.now().astimezone().isoformat(timespec="seconds")
+
+    run_banner = ""
+    if run_status:
+        why = "".join(f"<li>{html.escape(str(r))}</li>" for r in run_status.get("reasons") or [])
+        tail = ("下方数据已落盘，但该次运行未提交" if run_status.get("applied")
+                else "该次运行未写入新数据，下方为上一次成功运行的结果")
+        run_banner = (
+            f'<div class="runfail"><b>⚠ 最新一次运行未通过校验</b>'
+            f'（{html.escape(run_status.get("date", "?"))} '
+            f'{html.escape(run_status.get("slot", "?"))}）'
+            f'{f"<ul>{why}</ul>" if why else ""}'
+            f'<div class="rf-tail">{tail}</div></div>'
+        )
 
     chart_data = []
     prev_real = None
@@ -824,12 +872,18 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
   .note {{ color:var(--muted); font-size:12px; margin-top:6px; }}
   footer {{ margin-top:34px; color:var(--muted); font-size:12px; border-top:1px solid var(--line); padding-top:12px; }}
   code {{ background:#eef0f3; padding:1px 5px; border-radius:4px; font-size:11.5px; }}
+  .runfail {{ margin:10px 0 2px; padding:10px 13px; border-radius:8px; font-size:13px;
+              background:#fdf3f3; border:1px solid #f0cfcf; color:#8a2a2a; }}
+  .runfail ul {{ margin:5px 0 0; padding-left:19px; }}
+  .runfail li {{ font-size:12px; line-height:1.55; }}
+  .rf-tail {{ margin-top:5px; font-size:12px; color:#a2564f; }}
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>组合总览 <span style="font-weight:400;color:var(--muted);font-size:14px">模拟盘 · A股动量策略</span></h1>
   <div class="sub">生成于 {html.escape(generated_at)} · 红涨绿跌</div>
+  {run_banner}
   <div class="hbadges">{badges_html}</div>
 
   <div class="cards">{cards_html}</div>
@@ -907,7 +961,8 @@ def build(site_dir: Path = SITE_DIR) -> Path:
     out = site_dir / "index.html"
     out.write_text(render_html(series, active, trades, stats, details=details,
                                index_rebased=index_rebased, events=events,
-                               badges=badges), encoding="utf-8")
+                               badges=badges, run_status=load_latest_run_status()),
+                   encoding="utf-8")
     print(f"[site] {out} — {len(series)} equity points "
           f"({len(index_rebased)} with index overlay), "
           f"{len(active.get('activePositions', []))} positions, "
