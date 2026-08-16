@@ -111,28 +111,81 @@ def get_factor_series(conn: sqlite3.Connection, code: str, end_date: str = None)
     return list(rows)
 
 
+UNIVERSE_COVERAGE_FLOOR = 99.5
+
+
 def factor_coverage(conn: sqlite3.Connection) -> dict:
-    """Coverage stats for `factors verify` / `status`:
-    pair_coverage_pct — % of daily_prices rows that have a matching factor row;
-    codes_without_factors — stocks with zero factor rows (unprocessed / new);
-    max lag between price and factor dates."""
+    """Coverage stats + a single health verdict for `factors verify` / `status`.
+
+    Two coverage numbers, and only one of them means anything:
+
+    - `pair_coverage_pct` — % of ALL daily_prices rows with a matching factor
+      row. Its denominator includes ~324 BJ-exchange codes that can never be
+      factored (sina's hfq.js doesn't carry them), so it is permanently stuck
+      around 96% on a perfectly healthy DB. Kept for display only.
+    - `universe_coverage_pct` — % coverage over the codes that HAVE factors,
+      i.e. the rows adjustment actually applies to. This is the real metric.
+
+    Until 2026-08-16 `verify` judged on the universe metric while `status`
+    judged `pair_coverage_pct < 99` and told you to run a backfill — so a clean
+    DB printed VERIFY OK and a WARNING one second apart, and the warning was
+    always wrong. Both callers now read `healthy`/`problems` from here so they
+    cannot disagree again.
+    """
     ensure_adj_schema(conn)
     total = conn.execute("SELECT COUNT(*) FROM daily_prices").fetchone()[0]
     matched = conn.execute(
         "SELECT COUNT(*) FROM daily_prices d "
         "JOIN adj_factors a ON a.code = d.code AND a.date = d.date"
     ).fetchone()[0]
-    codes_missing = conn.execute(
-        "SELECT COUNT(*) FROM (SELECT DISTINCT code FROM daily_prices "
-        "EXCEPT SELECT DISTINCT code FROM adj_factors)"
-    ).fetchone()[0]
+    missing = [r[0] for r in conn.execute(
+        "SELECT DISTINCT code FROM daily_prices "
+        "EXCEPT SELECT DISTINCT code FROM adj_factors")]
+    # BJ-exchange codes (43x/83x/87x/92x) are deliberately unfactored — they
+    # read as 1.0, which is the status quo, not breakage.
+    non_bj_missing = [c for c in missing if not c.startswith(("4", "8", "9"))]
+    # Fresh IPOs (<30 sessions) have had no corporate actions yet, so factor
+    # 1.0 is exactly right. 2026-08-08: two week-old listings false-tripped
+    # exit 1 in the weekly audit. Reported separately, exempt from the gate.
+    fresh_ipos = []
+    if non_bj_missing:
+        placeholders = ",".join("?" * len(non_bj_missing))
+        fresh_ipos = [r[0] for r in conn.execute(
+            f"SELECT code FROM daily_prices WHERE code IN ({placeholders}) "
+            "GROUP BY code HAVING COUNT(*) < 30", non_bj_missing)]
+        non_bj_missing = [c for c in non_bj_missing if c not in fresh_ipos]
+    coverable = conn.execute(
+        "SELECT COUNT(*) FROM daily_prices d WHERE d.code IN "
+        "(SELECT DISTINCT code FROM adj_factors)").fetchone()[0]
+    universe_pct = (matched / coverable * 100.0) if coverable else 0.0
     max_price_date = conn.execute("SELECT MAX(date) FROM daily_prices").fetchone()[0]
     max_factor_date = conn.execute("SELECT MAX(date) FROM adj_factors").fetchone()[0]
+
+    problems = []
+    if universe_pct < UNIVERSE_COVERAGE_FLOOR:
+        problems.append(
+            f"factored-universe coverage {universe_pct:.2f}% below "
+            f"{UNIVERSE_COVERAGE_FLOOR}% — run 'pricedb.py factors backfill'")
+    if non_bj_missing:
+        problems.append(
+            f"{len(non_bj_missing)} non-BJ codes have no factors at all "
+            f"({','.join(sorted(non_bj_missing)[:5])}) — run 'factors backfill'")
+    if max_factor_date != max_price_date:
+        problems.append(
+            f"factor date {max_factor_date or 'none'} lags price date "
+            f"{max_price_date or 'none'} — run 'pricedb.py factors heal'")
+
     return {
         "pair_coverage_pct": (matched / total * 100.0) if total else 0.0,
+        "universe_coverage_pct": universe_pct,
         "total_price_rows": total,
         "matched_rows": matched,
-        "codes_without_factors": codes_missing,
+        "coverable_rows": coverable,
+        "codes_without_factors": len(missing),
+        "non_bj_missing": non_bj_missing,
+        "fresh_ipos": fresh_ipos,
         "max_price_date": max_price_date,
         "max_factor_date": max_factor_date,
+        "problems": problems,
+        "healthy": not problems,
     }

@@ -1,6 +1,7 @@
 """Unit tests for read-time price adjustment (price_adjust + consumers)."""
 import sqlite3
 import sys
+from datetime import date, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
@@ -148,6 +149,46 @@ def test_factor_coverage():
     assert cov["pair_coverage_pct"] == 50.0
     assert cov["codes_without_factors"] == 1
     assert cov["max_price_date"] == "2026-07-01"
+    # 000001 has factors for none of its rows, so the factored universe is
+    # 600000 alone and is fully covered — the DB is healthy despite 50%.
+    assert cov["universe_coverage_pct"] == 100.0
+
+
+def test_unfactorable_codes_do_not_raise_a_warning():
+    """A DB whose only gaps are BJ codes and fresh IPOs is HEALTHY.
+
+    Until 2026-08-16 `status` judged pair_coverage_pct (denominator includes
+    the ~324 permanently-unfactorable BJ codes) and printed a backfill warning
+    on a clean DB, one second after `factors verify` printed VERIFY OK. Both
+    read `healthy` now; this pins them together.
+    """
+    conn = _db()
+    conn.execute("INSERT INTO daily_prices VALUES ('600000','2026-07-01',1,1,1,10,0,0)")
+    conn.execute("INSERT INTO adj_factors VALUES ('600000','2026-07-01', 1.0)")
+    conn.execute("INSERT INTO daily_prices VALUES ('830001','2026-07-01',1,1,1,10,0,0)")   # BJ
+    conn.execute("INSERT INTO daily_prices VALUES ('301707','2026-07-01',1,1,1,10,0,0)")   # 次新
+    cov = pa.factor_coverage(conn)
+    assert cov["pair_coverage_pct"] < 99.0        # the misleading number
+    assert cov["healthy"] and cov["problems"] == []
+    assert cov["non_bj_missing"] == [] and cov["fresh_ipos"] == ["301707"]
+
+
+def test_real_gaps_still_reported():
+    """The exemptions must not swallow an actual hole."""
+    conn = _db()
+    for d in ("2026-07-01", "2026-07-02"):
+        conn.execute(f"INSERT INTO daily_prices VALUES ('600000','{d}',1,1,1,10,0,0)")
+    conn.execute("INSERT INTO adj_factors VALUES ('600000','2026-07-01', 1.0)")
+    # a mature non-BJ code with zero factors — the case backfill exists for
+    for i in range(40):
+        d = date(2026, 5, 1) + timedelta(days=i)
+        conn.execute("INSERT INTO daily_prices VALUES "
+                     f"('600519','{d.isoformat()}',1,1,1,10,0,0)")
+    cov = pa.factor_coverage(conn)
+    assert not cov["healthy"]
+    assert cov["non_bj_missing"] == ["600519"]
+    joined = " | ".join(cov["problems"])
+    assert "600519" in joined and "lags price date" in joined   # gap AND stale factors
 
 
 def test_sina_event_parse_with_trailing_comment(monkeypatch):

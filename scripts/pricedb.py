@@ -2437,45 +2437,18 @@ def cmd_factors(args: list):
 
     if sub == "verify":
         cov = price_adjust.factor_coverage(conn)
-        missing = [r[0] for r in conn.execute(
-            "SELECT DISTINCT code FROM daily_prices "
-            "EXCEPT SELECT DISTINCT code FROM adj_factors")]
-        # BJ-exchange codes (43x/83x/87x/92x) are deliberately unfactored —
-        # sina hfq.js doesn't carry them; they stay at 1.0 (status quo).
-        non_bj_missing = [c for c in missing if not c.startswith(("4", "8", "9"))]
-        # Fresh IPOs (<30 sessions of history) have no corporate actions yet —
-        # factor 1.0 is exactly right, absence is not breakage. 2026-08-08:
-        # two week-old listings (301707/603468) false-tripped exit 1 in the
-        # weekly audit. Reported separately, exempt from the failure gate.
-        fresh_ipos = []
-        if non_bj_missing:
-            placeholders = ",".join("?" * len(non_bj_missing))
-            fresh_ipos = [r[0] for r in conn.execute(
-                f"SELECT code FROM daily_prices WHERE code IN ({placeholders}) "
-                "GROUP BY code HAVING COUNT(*) < 30", non_bj_missing)]
-            non_bj_missing = [c for c in non_bj_missing if c not in fresh_ipos]
-        covered_pairs = conn.execute(
-            "SELECT COUNT(*) FROM daily_prices d JOIN adj_factors a "
-            "ON a.code = d.code AND a.date = d.date").fetchone()[0]
-        coverable = conn.execute(
-            "SELECT COUNT(*) FROM daily_prices d WHERE d.code IN "
-            "(SELECT DISTINCT code FROM adj_factors)").fetchone()[0]
-        pct_covered_universe = (covered_pairs / coverable * 100.0) if coverable else 0.0
+        non_bj_missing, fresh_ipos = cov["non_bj_missing"], cov["fresh_ipos"]
         print(f"Factor coverage (all rows): {cov['pair_coverage_pct']:.2f}%")
-        print(f"Factor coverage (factored universe): {pct_covered_universe:.2f}%")
-        print(f"Codes without factors: {len(missing)} "
+        print(f"Factor coverage (factored universe): {cov['universe_coverage_pct']:.2f}%")
+        print(f"Codes without factors: {cov['codes_without_factors']} "
               f"(non-BJ: {len(non_bj_missing)}{' — ' + ','.join(non_bj_missing[:5]) if non_bj_missing else ''}"
               f"{f'; 次新豁免 {len(fresh_ipos)}: ' + ','.join(fresh_ipos[:5]) if fresh_ipos else ''})")
         print(f"Latest price date:  {cov['max_price_date']}")
         print(f"Latest factor date: {cov['max_factor_date']}")
-        ok = (pct_covered_universe >= 99.5
-              and not non_bj_missing
-              and cov["max_factor_date"] == cov["max_price_date"])
         conn.close()
-        if not ok:
-            print("VERIFY FAILED: factored-universe coverage below 99.5%, "
-                  "non-BJ codes missing, or factor date lags price date",
-                  file=sys.stderr)
+        if not cov["healthy"]:
+            for p in cov["problems"]:
+                print(f"VERIFY FAILED: {p}", file=sys.stderr)
             sys.exit(1)
         print("VERIFY OK (BJ codes deliberately unfactored — read as 1.0)")
         return
@@ -2862,12 +2835,14 @@ def cmd_status():
     if last_update:
         print(f"Updated  : {last_update}")
     print(f"RPS cache: {rps_dates} dates computed")
-    print(f"Adj factors: {factor_cov['pair_coverage_pct']:.1f}% coverage "
-          f"(latest {factor_cov['max_factor_date'] or 'none'})")
-    if factor_cov["pair_coverage_pct"] < 99.0:
-        print("WARNING: adjustment-factor coverage below 99% — MA/RPS may use "
-              "unadjusted prices for uncovered stocks. Run "
-              "'python3 scripts/pricedb.py factors backfill'.")
+    # Judge on the factored universe, never on pair_coverage_pct — the latter
+    # counts unfactorable BJ codes in its denominator and so warns forever.
+    unfactored = factor_cov["codes_without_factors"]
+    note = f"; {unfactored} codes unfactored — BJ/次新, read as 1.0" if unfactored else ""
+    print(f"Adj factors: {factor_cov['universe_coverage_pct']:.1f}% coverage "
+          f"(latest {factor_cov['max_factor_date'] or 'none'}{note})")
+    for problem in factor_cov["problems"]:
+        print(f"WARNING: {problem}")
 
 
 def cmd_rps(date: str = None):
