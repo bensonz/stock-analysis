@@ -1,5 +1,14 @@
 # Backtest Stage-1 Results — Mechanical ANALYST.md, 2024-12 → 2026-07-29
 
+> **Stale as of 2026-08-16.** Every number below was produced with
+> `time_decay_days=20, time_decay_min_gain=5.0` — V1's time stop, which the
+> mechanical arm still carried long after ANALYST.md Rule 5 moved to 10d/<3%.
+> The defaults are now 10/3.0, so this run no longer describes the ruleset the
+> code implements. Re-run `backtest.py baseline` before citing these figures;
+> the time stop was the arm's most-fired exit, so the effect is unlikely to be
+> small. The qualitative finding (mechanical execution badly underperforms the
+> live pipeline's selectivity) is not in doubt, only the magnitudes.
+
 Run: `python3 scripts/backtest.py baseline` @ `80df134`, adjusted prices,
 costs on (0.30% round trip), T+1 + price-limit constraints modeled.
 **Framing reminder: one market regime, ~130 tradeable sessions. This run can

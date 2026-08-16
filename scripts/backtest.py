@@ -259,8 +259,13 @@ ANALYST_RULES = {
     "hard_stop_pct": -5.0,      # Rule 5: automatic sell, no exceptions
     "early_stop_pct": -3.0,     # Rule 5: -3% within the first N sessions
     "early_days": 3,
-    "time_decay_days": 20,      # held > N sessions with < min_gain → sell
-    "time_decay_min_gain": 5.0,
+    # Rule 5 time stop. 2026-08-16: was 20/5.0 (V1) — the third stale copy of a
+    # number ANALYST.md has specified as 10/3.0 for months. The mechanical arm is
+    # the baseline the LLM is judged against, so modelling a doctrine we don't run
+    # made that comparison meaningless. Results published before this date used
+    # 20/5.0; see docs/backtest/RESULTS.md.
+    "time_decay_days": 10,      # held >= N sessions with < min_gain → sell
+    "time_decay_min_gain": 3.0,
     "rank_by": "rps60",
     "queue_depth": 15,          # candidates offered per day (engine trims)
     # Stage-2 variant knobs (None = off):
@@ -339,7 +344,9 @@ def make_mechanical_analyst(rules: dict | None = None):
                 out.append((code, "rule5_hard_stop"))
             elif held <= r["early_days"] and pnl <= r["early_stop_pct"]:
                 out.append((code, "rule5_early"))
-            elif held > r["time_decay_days"] and pnl < r["time_decay_min_gain"]:
+            # >= not >: "10 trading days with <3%" fires ON day 10, and the old
+            # strict test silently ran every threshold a session long.
+            elif held >= r["time_decay_days"] and pnl < r["time_decay_min_gain"]:
                 out.append((code, "time_decay"))
         return out
 

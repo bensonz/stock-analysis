@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
-Rule: Time decay — flag positions held >20 trading days with <5% gain.
+Rule: Time decay — flag positions held >=10 trading days with <3% gain.
 Created: 2026-03-03
-Source: LEARNINGS #1 (time_decay), #18 (catalyst exception), #19 (commodity 30d),
+Source: agents/ANALYST.md Rule 5 (the spec of record), LEARNINGS #1 (time_decay),
+        #18 (catalyst exception), #19 (commodity 30d — RETIRED, see below),
         #20 (rebound-day delay)
-Last modified: 2026-03-06
+Last modified: 2026-08-16
 Track record: 3 fires, 2 correct, 1 incorrect
   - 600988 赤峰黄金: fired 02-27 (24d, +0.50%) → SOLD → 03-02 涨停+10% ❌ (missed +9.89pp)
   - 688002 睿创微纳: fired 03-04 (21d, -4.76%) → SOLD correctly ✅ (突破失败+动能逆转)
@@ -18,31 +19,81 @@ Evolution notes (2026-03-06):
     AND PnL just turned positive, delay 2 days
   - Removed: no longer just a binary fire/not-fire. Now provides severity levels:
     SELL (strong), REVIEW (catalyst exception may apply), INFO (approaching threshold)
+
+Evolution notes (2026-08-16) — reconciled with the spec after the first weekly audit:
+  - 20d/<5% → **10d/<3%**. ANALYST.md Rule 5 has mandated 10d/<3% for months
+    ("V1 used 20 days — too slow"); this file was never updated, so the tightening
+    lived in the spec with no mechanical backstop. In 54 closed trades the engine
+    never once flagged time decay inside the spec's window — the only 4 time-stop
+    exits were the LLM's own discretionary calls at 9-16 days.
+  - Replay of all 12 trades ever held >=10 sessions: the spec threshold fires on 9
+    for **+8.73pp net (+0.97pp/trade)** and touches NONE of the three big winners
+    (新宙邦 +11.8%, 上海新阳 +29.8%, 路维光电 +30.9% — all were >+3% at day 10, so
+    they never qualify). Catastrophes caught: 科陆电子 +2.36pp, 中石科技 +3.97pp,
+    睿创微纳 +5.07pp. Costs: 赤峰黄金 -1.96pp, 恒铭达 -1.70pp.
+  - **Commodity 30d grace REMOVED.** ANALYST.md Rule 5 is explicit: "No
+    'event-driven exceptions' to time stops. If the event hasn't moved the stock
+    in 10 days, your timing is wrong. You can always re-enter." LEARNINGS #19
+    (黄金股事件驱动型分类) is superseded by that line. Evidence is thin but points
+    the same way: over the two affected trades the carve-out was worth -0.51pp
+    (赤峰黄金 -1.96pp saved vs 云天化 +2.47pp lost). `is_commodity` is still
+    reported in the payload for post-hoc analysis; it no longer changes behaviour.
+  - Fires AT the threshold, not one day past it. The old `> threshold` test meant a
+    "20-day" rule actually fired on day 21, and the INFO branch's `<=` swallowed the
+    boundary day entirely. At a 10-day threshold that off-by-one is 10% of the window.
+  - Trading days are now counted as actual weekdays rather than `calendar * 5 // 7`.
+    The ratio drifts by up to a day depending on which weekday you entered on —
+    tolerable against 20, not against 10. Public holidays still inflate the count
+    slightly (no exchange calendar here, and every other rule in this directory is
+    pure stdin/stdout with no DB access — keeping that contract), so the rule can
+    fire up to ~1 session early around 春节/国庆. It errs toward exiting sooner,
+    which is the direction Rule 5 wants.
 """
 import json
 import sys
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 
 data = json.load(sys.stdin)
 today = date.today()
 violations = []
 
+# agents/ANALYST.md Rule 5. Keep these in sync with the spec and with
+# scripts/backtest.py's time_decay_days / time_decay_min_gain.
+THRESHOLD_DAYS = 10
+MIN_GAIN_PCT = 3.0
+WARN_WINDOW = 3          # INFO from day 7 through day 9
+
+# Retained for reporting only — no longer alters the threshold (see 08-16 notes).
 COMMODITY_KEYWORDS = ["化工", "黄金", "有色", "煤炭", "石油", "磷", "钾", "稀土", "矿"]
+
+
+def trading_days_between(entry: date, today: date) -> int:
+    """Weekdays elapsed since entry, entry day excluded (day 1 = next session).
+
+    Exchange holidays are not modelled — see the 2026-08-16 note in the module
+    docstring for why, and which way it biases.
+    """
+    days = 0
+    d = entry
+    while d < today:
+        d += timedelta(days=1)
+        if d.weekday() < 5:
+            days += 1
+    return days
+
 
 for p in data.get("activePositions", []):
     entry = datetime.strptime(p["entryDate"], "%Y-%m-%d").date()
-    total_days = (today - entry).days
-    trading_days = total_days * 5 // 7  # approximate
+    trading_days = trading_days_between(entry, today)
 
     pnl = p.get("pnl_pct", 0)
     sector = p.get("sector", "").lower()
 
-    # Commodity/event-driven stocks get 30 day grace (LEARNINGS #19)
     is_commodity = any(k in sector for k in COMMODITY_KEYWORDS)
-    threshold = 30 if is_commodity else 20
+    threshold = THRESHOLD_DAYS
 
-    # Pre-threshold warning (within 3 days of threshold)
-    if threshold - 3 <= trading_days <= threshold and pnl < 5:
+    # Pre-threshold warning (the WARN_WINDOW days before the threshold)
+    if threshold - WARN_WINDOW <= trading_days < threshold and pnl < MIN_GAIN_PCT:
         violations.append({
             "code": p["code"],
             "name": p["name"],
@@ -55,18 +106,19 @@ for p in data.get("activePositions", []):
             "suggestion": (
                 f"APPROACHING threshold — {trading_days}/{threshold} trading days, "
                 f"PnL={pnl:.1f}%. Will trigger in {threshold - trading_days} days "
-                f"unless PnL reaches 5%. Prepare exit plan or identify catalyst exceptions."
+                f"unless PnL reaches {MIN_GAIN_PCT:.0f}%. Prepare exit plan — note that "
+                f"Rule 5 allows no event-driven exception, so plan the exit, not a case for it."
             ),
         })
         continue
 
-    if trading_days <= threshold:
+    if trading_days < threshold:
         continue
 
-    if pnl >= 5:
+    if pnl >= MIN_GAIN_PCT:
         continue
 
-    # Beyond threshold with <5% gain — determine severity
+    # At/beyond threshold with <MIN_GAIN_PCT gain — determine severity
     severity = "SELL"
     suggestion_extra = ""
 
@@ -97,7 +149,7 @@ for p in data.get("activePositions", []):
         "is_commodity": is_commodity,
         "suggestion": (
             f"{severity} — held {trading_days} trading days (threshold: {threshold}d) "
-            f"with PnL={pnl:.1f}% (<5%).{suggestion_extra}"
+            f"with PnL={pnl:.1f}% (<{MIN_GAIN_PCT:.0f}%).{suggestion_extra}"
         ),
     })
 
