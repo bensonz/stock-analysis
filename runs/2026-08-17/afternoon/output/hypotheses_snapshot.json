@@ -2499,13 +2499,17 @@
           {
             "date": "2026-08-17",
             "detail": "芯联集成-U（半导体今日top2板块）因dist_ma20_pct=14.1%>12%被Rule 2b拦截——再次验证板块热度不能覆盖追高规则（h027）。"
+          },
+          {
+            "date": "2026-08-17",
+            "detail": "dist_ma20>12%在热门板块内部同样有效：芯联集成-U（半导体top2）因dist_ma20+14.1%被跳过，证明追高禁令不分板块热度"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 52,
+      "sampleSize": 53,
       "hitRate": 1.0,
-      "confidence": 0.981,
+      "confidence": 0.982,
       "tags": [
         "entry-filter",
         "timing",
@@ -6468,7 +6472,7 @@
       "id": "h158",
       "text": "安集科技(电子化学品Ⅱ今日top1)以RPS120=89.86甜点区+MA距离全部合规通过买入门槛，而多只RPS>95%的半导体/材料股(华虹、北方华创、芯联集成)因dist_ma20>12%被Rule 2b拦截——验证RPS 80-92%甜点区+不追高纪律的组合有效性",
       "type": "observation",
-      "status": "observation",
+      "status": "hypothesis",
       "created": "2026-08-17",
       "lastTested": "2026-08-17",
       "mechanism": "RPS甜点区代表中等偏强动量，MA距离合规保证未透支短期涨幅，两者叠加的入场点胜率更高",
@@ -6477,13 +6481,17 @@
           {
             "date": "2026-08-17",
             "detail": "安集科技(电子化学品Ⅱ今日top1)以RPS120=89.86甜点区+MA距离全部合规通过买入门槛，而多只RPS>95%的半导体/材料股(华虹、北方华创、芯联集成)因dist_ma20>12%被Rule 2b拦截——验证RPS 80-92%甜点区+不追高纪律的组合有效性"
+          },
+          {
+            "date": "2026-08-17",
+            "detail": "电子化学品（板块第1）+RPS甜点区+MA全部合规，是今日唯一通过全部门槛的候选——多个强信号共振时决策应果断，不要因margin deleveraging单个弱信号否决干净setup"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 1,
+      "sampleSize": 2,
       "hitRate": 1.0,
-      "confidence": 0.6,
+      "confidence": 0.75,
       "tags": [
         "entry-filter",
         "sector"
@@ -6598,6 +6606,61 @@
       "tags": [
         "exit-rule",
         "position-sizing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h163",
+      "text": "情绪亢奋日（r4_7+r7_10+r10=772>500）多数候选要么RPS>95过热、要么MA过度延伸——情绪高潮期现金纪律比强行满仓更重要，今天只开1仓、保留约56%现金是正确的",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-08-17",
+      "lastTested": "2026-08-17",
+      "mechanism": "亢奋读数意味着多数强势股已短线透支，可买的'未延伸+甜点区+热门板块'交集会天然缩小",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-08-17",
+            "detail": "情绪亢奋日（r4_7+r7_10+r10=772>500）多数候选要么RPS>95过热、要么MA过度延伸——情绪高潮期现金纪律比强行满仓更重要，今天只开1仓、保留约56%现金是正确的"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "position-sizing",
+        "timing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h164",
+      "text": "重入纪律：西部矿业(8/11平仓)、宏发股份(8/12平仓)今日无任何setup变化，不重入。重入实测n=9均值-3.71%胜率11%，举证责任在重入一侧",
+      "type": "rule",
+      "status": "observation",
+      "created": "2026-08-17",
+      "lastTested": "2026-08-17",
+      "mechanism": "刚平仓标的的离场逻辑（冷区/破位）在1周内通常未反转，重入更可能是对刚割肉标的的报复性追回",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-08-17",
+            "detail": "重入纪律：西部矿业(8/11平仓)、宏发股份(8/12平仓)今日无任何setup变化，不重入。重入实测n=9均值-3.71%胜率11%，举证责任在重入一侧"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "exit-rule"
       ],
       "parentRule": null,
       "retiredDate": null,

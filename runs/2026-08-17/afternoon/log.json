@@ -4,21 +4,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1786953319.801561,
+      "start": 1786953813.822099,
       "errors": [],
-      "end": 1786953383.59124,
-      "duration_sec": 63.8
+      "end": 1786953927.461668,
+      "duration_sec": 113.6
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 8802,
+      "response_size_bytes": 10078,
       "tokens": {
-        "input_tokens": 143273,
-        "output_tokens": 18360
+        "input_tokens": 138489,
+        "output_tokens": 19882
       },
       "rounds": 2,
       "tool_calls_count": 5,
-      "duration_sec": 248.6,
+      "duration_sec": 277.2,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -26,15 +26,16 @@
     },
     {
       "phase": "apply",
-      "start": 1786953632.289896,
+      "start": 1786954204.736421,
       "actions": [
+        "OPEN 688019 @ 261.92",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Created h160 (observation): 组合已满8仓（Rule 4最大8仓），今日top1板块电子化学品Ⅱ的最强候选安集科技（RPS120=89.73、dist_ma全部合规）因无空位只能进skip_...",
-        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=52",
-        "Hypothesis: Created h161 (observation): 睿创微纳中报披露日8/18（明日）落在事件窗口≤2个交易日，按Rule 2c应减半或等待——财报前夜不建仓，避免承担不对称的隔夜跳空风险。...",
-        "Hypothesis: Created h162 (observation): 重入标的巨化股份（8/11止损离场后8/13重入）当前-0.9%且距止损仅4.16%（stop_proximity WATCH）；历史重入n=9均值-3.71%...",
+        "Hypothesis: Updated h158 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=53",
+        "Hypothesis: Created h163 (observation): 情绪亢奋日（r4_7+r7_10+r10=772>500）多数候选要么RPS>95过热、要么MA过度延伸——情绪高潮期现金纪律比强行满仓更重要，今天只开1仓、保...",
+        "Hypothesis: Created h164 (observation): 重入纪律：西部矿业(8/11平仓)、宏发股份(8/12平仓)今日无任何setup变化，不重入。重入实测n=9均值-3.71%胜率11%，举证责任在重入一侧...",
         "Updated LEARNINGS.md (legacy)"
       ],
       "post_apply_rule_violations": {
@@ -103,8 +104,8 @@
           }
         ]
       },
-      "end": 1786953632.871596,
-      "duration_sec": 0.6
+      "end": 1786954205.6699378,
+      "duration_sec": 0.9
     }
   ],
   "validation_errors": [
@@ -112,6 +113,6 @@
   ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 313.0
+    "totalDurationSec": 391.69999999999993
   }
 }

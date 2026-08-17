@@ -7,7 +7,7 @@
       "action": "HOLD",
       "price": 16.86,
       "pnl_pct": 8.1,
-      "note": "PnL+8.1%，止损已上移至成本15.6；石油石化未入今日bottom5，未触发连续3日冷区SELL，持有"
+      "note": "PnL+8.1%高于+3%时间止损阈值，止损已提至盈亏平衡¥15.6；石油石化未入今日bottom5，未触发连续3日冷区SELL；14个交易日无时间止损压力"
     },
     {
       "code": "002138",
@@ -15,7 +15,7 @@
       "action": "HOLD",
       "price": 52.79,
       "pnl_pct": 21.3,
-      "note": "MLCC涨价逻辑未破，PnL+21.3%止损已锁+10%¥47.86，元件板块非冷区，持有"
+      "note": "MLCC涨价逻辑未破，PnL+21.3%，止损已锁+10%¥47.86；元件未进bottom5，持有"
     },
     {
       "code": "300001",
@@ -23,7 +23,7 @@
       "action": "HOLD",
       "price": 37.44,
       "pnl_pct": 5.0,
-      "note": "day10 PnL+5.0%高于+3%时间止损阈值，充电桩3C认证逻辑未变，持有"
+      "note": "充电桩3C认证逻辑未变，day10 PnL+5.0%高于+3%时间止损阈值；电网设备未入bottom5"
     },
     {
       "code": "300408",
@@ -31,7 +31,7 @@
       "action": "HOLD",
       "price": 130.15,
       "pnl_pct": 13.1,
-      "note": "MLCC涨价核心受益，PnL+13.1%，止损已提至盈亏平衡¥115.07，持有"
+      "note": "MLCC涨价核心受益，PnL+13.1%，止损已提至盈亏平衡¥115.07；元件未入bottom5"
     },
     {
       "code": "600160",
@@ -39,7 +39,7 @@
       "action": "HOLD",
       "price": 40.84,
       "pnl_pct": -0.9,
-      "note": "重入第3天PnL-0.9%未触发头3日-3%止损；stop_proximity WATCH（距止损39.14约4.16%）需盯紧，制冷剂长协涨价逻辑未变"
+      "note": "重入第3天PnL-0.9%未触发头3日-3%止损；stop_proximity WATCH（距止损¥39.14约4.2%）需盯紧；制冷剂长协涨价逻辑未变"
     },
     {
       "code": "603127",
@@ -47,7 +47,7 @@
       "action": "HOLD",
       "price": 53.48,
       "pnl_pct": 20.6,
-      "note": "CRO安评龙头，PnL+20.6%，止损已锁+10%¥48.79，医疗服务未入bottom5，持有"
+      "note": "CRO安评龙头，PnL+20.6%，止损已锁+10%¥48.79；医疗服务未入bottom5，CRO板块今日普涨（来源：输入快讯）"
     },
     {
       "code": "603259",
@@ -55,7 +55,7 @@
       "action": "HOLD",
       "price": 166.89,
       "pnl_pct": 31.9,
-      "note": "CXO龙头H1超预期并上调全年指引，PnL+31.9%，止损已锁+10%¥139.15，持有"
+      "note": "CXO龙头H1超预期并上调全年指引（来源：上证报8/3），PnL+31.9%，止损已锁+10%¥139.15"
     },
     {
       "code": "688981",
@@ -63,18 +63,25 @@
       "action": "HOLD",
       "price": 136.76,
       "pnl_pct": 12.9,
-      "note": "Q2收入首破30亿美元大超预期（来源：证券时报/21财经），PnL+12.9%，止损已上移至盈亏平衡¥121.1，半导体今日top2，持有"
+      "note": "Q2收入首破30亿美元超预期（来源：财报/华尔街见闻），PnL+12.9%，止损已提至盈亏平衡¥121.1；半导体今日top2"
+    },
+    {
+      "code": "688019",
+      "name": "安集科技",
+      "action": "OPEN",
+      "price": 261.92,
+      "note": "半导体材料涨价潮核心受益（CMP抛光液龙头、14nm供货），电子化学品板块今日第1；RPS120=89.73甜点区；MA全部合规（dist_ma5+4.9%/ma10+6.2%/ma20+6.1%）；北向15%+公募7.5%；margin deleveraging为唯一弱项，不否决主线龙头。目标314为+20%动量目标（非研报价）"
     }
   ],
   "portfolioStats": {
-    "totalPositions": 8,
+    "totalPositions": 9,
     "totalEquity": 992298.0,
     "dayPnl": 6590.0,
     "dayReturnPct": 0.66,
     "totalReturnPct": -0.77,
     "unrealizedPnl": 43811.0,
     "realizedPnl": -51513.0,
-    "cashPct": 64.29
+    "cashPct": 59.01
   },
   "entryRegime": {
     "allow_new_positions": true,
@@ -94,8 +101,13 @@
     "hard_block": false,
     "reason": "Entry regime strong: breadth 4.07:1, 3/3 major indices green, 110 limit-ups / 1 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
   },
-  "newPositions": [],
+  "newPositions": [
+    {
+      "code": "688019",
+      "name": "安集科技"
+    }
+  ],
   "marketContext": {
-    "summary": "全市场4.07:1多头广度（4335涨/1064跌，110涨停/1跌停），三大指数全红，科创50+4.14%领涨；电子化学品(+5.6%)/半导体(+5.45%)/通信设备(+4.82%)领涨，白酒/游戏/医美领跌。IV整体偏乐观（avg_iv_rank 0.25），科创50 iv_rank 0.33中性。r4_7+r7_10+r10合计772>500提示情绪偏热；regime=strong允许开新仓，但组合已达8仓上限，今日不新增。"
+    "summary": "三大指数全红，科创50+4.14%领涨；涨跌比4.07:1（涨4335/跌1064），涨停110家/跌停1家，广度强健、entry regime strong。但r4_7+r7_10+r10合计772>500属亢奋读数，需防追高。IV整体偏低（平均rank 0.27，偏乐观）。半导体/电子化学品/通信设备/其他电子/种植业领涨，资金从高位通信设备流向半导体（来源：moomoo午盘）；白酒/游戏/影视/医美/电视广播领跌。持仓8/10、全部盈利或微亏且在止损上方，无冷区持仓；仅安集科技1只通过全部买入门槛。"
   }
 }

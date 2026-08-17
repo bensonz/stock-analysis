@@ -3,67 +3,67 @@
     "hot_sectors": [
       {
         "name": "电子化学品Ⅱ",
-        "change_pct": 5.6,
+        "5d_pct": 5.6,
         "trend": "accelerating"
       },
       {
         "name": "半导体",
-        "change_pct": 5.45,
+        "5d_pct": 5.45,
         "trend": "accelerating"
       },
       {
         "name": "通信设备",
-        "change_pct": 4.82,
-        "trend": "steady"
+        "5d_pct": 4.82,
+        "trend": "rotating_out"
       },
       {
         "name": "其他电子Ⅱ",
-        "change_pct": 4.32,
+        "5d_pct": 4.32,
         "trend": "steady"
       },
       {
         "name": "种植业",
-        "change_pct": 4.28,
-        "trend": "steady"
+        "5d_pct": 4.28,
+        "trend": "new"
       }
     ],
     "cold_sectors": [
       {
         "name": "白酒Ⅱ",
-        "change_pct": -3.21,
+        "5d_pct": -3.21,
         "trend": "deteriorating"
       },
       {
         "name": "游戏Ⅱ",
-        "change_pct": -1.9,
+        "5d_pct": -1.9,
         "trend": "deteriorating"
       },
       {
         "name": "影视院线",
-        "change_pct": -1.61,
+        "5d_pct": -1.61,
         "trend": "deteriorating"
       },
       {
         "name": "医疗美容",
-        "change_pct": -1.24,
+        "5d_pct": -1.24,
         "trend": "deteriorating"
       },
       {
         "name": "电视广播Ⅱ",
-        "change_pct": -1.13,
+        "5d_pct": -1.13,
         "trend": "deteriorating"
       }
     ],
-    "position_alignment": "1/8持仓在今日top5板块（半导体），3/8在电子产业链（元件），2/8在CRO热点（医疗服务），0/8在cold板块",
-    "regime": "科技/AI硬件主线（半导体+电子化学品+先进封装），消费防御（白酒/游戏/医美）资金流出；注：板块数据仅有今日涨跌幅，无5日序列"
+    "position_alignment": "1/8持仓位于今日top5行业（中芯国际-半导体top2）；新增安集科技=电子化学品top1；其余持仓行业中游，无bottom5冷区持仓",
+    "regime": "半导体/电子材料主线领涨，资金从高位通信设备流向半导体（来源：moomoo午盘），农业种植异动；白酒/游戏/传媒防御板块领跌"
   },
   "position_decisions": [
     {
       "code": "000703",
       "name": "恒逸石化",
       "action": "HOLD",
-      "reason": "PnL+8.1%，止损已上移至成本15.6；石油石化未入今日bottom5，未触发连续3日冷区SELL，持有",
-      "sector_rank": "中性（石油石化未入今日top5/bottom5）",
+      "reason": "PnL+8.1%高于+3%时间止损阈值，止损已提至盈亏平衡¥15.6；石油石化未入今日bottom5，未触发连续3日冷区SELL；14个交易日无时间止损压力",
+      "sector_rank": "中游（未进top5/bottom5）",
       "new_stop": null,
       "pnl_pct": 8.1,
       "days_held": 14,
@@ -73,8 +73,8 @@
       "code": "002138",
       "name": "顺络电子",
       "action": "HOLD",
-      "reason": "MLCC涨价逻辑未破，PnL+21.3%止损已锁+10%¥47.86，元件板块非冷区，持有",
-      "sector_rank": "中性偏强（元件，电子链）",
+      "reason": "MLCC涨价逻辑未破，PnL+21.3%，止损已锁+10%¥47.86；元件未进bottom5，持有",
+      "sector_rank": "中游（元件未进top5）",
       "new_stop": null,
       "pnl_pct": 21.3,
       "days_held": 10,
@@ -84,8 +84,8 @@
       "code": "300001",
       "name": "特锐德",
       "action": "HOLD",
-      "reason": "day10 PnL+5.0%高于+3%时间止损阈值，充电桩3C认证逻辑未变，持有",
-      "sector_rank": "中性（电网设备未入今日top5）",
+      "reason": "充电桩3C认证逻辑未变，day10 PnL+5.0%高于+3%时间止损阈值；电网设备未入bottom5",
+      "sector_rank": "中游（电网设备未进top5）",
       "new_stop": null,
       "pnl_pct": 5.0,
       "days_held": 10,
@@ -95,8 +95,8 @@
       "code": "300408",
       "name": "三环集团",
       "action": "HOLD",
-      "reason": "MLCC涨价核心受益，PnL+13.1%，止损已提至盈亏平衡¥115.07，持有",
-      "sector_rank": "中性偏强（元件，电子链）",
+      "reason": "MLCC涨价核心受益，PnL+13.1%，止损已提至盈亏平衡¥115.07；元件未入bottom5",
+      "sector_rank": "中游（元件未进top5）",
       "new_stop": null,
       "pnl_pct": 13.1,
       "days_held": 12,
@@ -106,8 +106,8 @@
       "code": "600160",
       "name": "巨化股份",
       "action": "HOLD",
-      "reason": "重入第3天PnL-0.9%未触发头3日-3%止损；stop_proximity WATCH（距止损39.14约4.16%）需盯紧，制冷剂长协涨价逻辑未变",
-      "sector_rank": "中性（化学制品未入今日top5）",
+      "reason": "重入第3天PnL-0.9%未触发头3日-3%止损；stop_proximity WATCH（距止损¥39.14约4.2%）需盯紧；制冷剂长协涨价逻辑未变",
+      "sector_rank": "中游（化学制品未进top5）",
       "new_stop": null,
       "pnl_pct": -0.9,
       "days_held": 3,
@@ -117,8 +117,8 @@
       "code": "603127",
       "name": "昭衍新药",
       "action": "HOLD",
-      "reason": "CRO安评龙头，PnL+20.6%，止损已锁+10%¥48.79，医疗服务未入bottom5，持有",
-      "sector_rank": "中性偏强（医疗服务/CRO近期热点，今日未入top5）",
+      "reason": "CRO安评龙头，PnL+20.6%，止损已锁+10%¥48.79；医疗服务未入bottom5，CRO板块今日普涨（来源：输入快讯）",
+      "sector_rank": "中游（医疗服务未进top5）",
       "new_stop": null,
       "pnl_pct": 20.6,
       "days_held": 10,
@@ -128,8 +128,8 @@
       "code": "603259",
       "name": "药明康德",
       "action": "HOLD",
-      "reason": "CXO龙头H1超预期并上调全年指引，PnL+31.9%，止损已锁+10%¥139.15，持有",
-      "sector_rank": "中性偏强（医疗服务/CRO近期热点，今日未入top5）",
+      "reason": "CXO龙头H1超预期并上调全年指引（来源：上证报8/3），PnL+31.9%，止损已锁+10%¥139.15",
+      "sector_rank": "中游（医疗服务未进top5）",
       "new_stop": null,
       "pnl_pct": 31.9,
       "days_held": 12,
@@ -139,105 +139,136 @@
       "code": "688981",
       "name": "中芯国际",
       "action": "HOLD",
-      "reason": "Q2收入首破30亿美元大超预期（来源：证券时报/21财经），PnL+12.9%，止损已上移至盈亏平衡¥121.1，半导体今日top2，持有",
-      "sector_rank": "top 5%（半导体今日第2，+5.45%）",
+      "reason": "Q2收入首破30亿美元超预期（来源：财报/华尔街见闻），PnL+12.9%，止损已提至盈亏平衡¥121.1；半导体今日top2",
+      "sector_rank": "top5（第2，+5.45%）",
       "new_stop": null,
       "pnl_pct": 12.9,
       "days_held": 9,
       "exit_price": null
     }
   ],
-  "new_positions": [],
-  "skip_list": [
+  "new_positions": [
     {
       "code": "688019",
       "name": "安集科技",
-      "reason": "全场最强候选：电子化学品Ⅱ为今日top1板块(+5.6%)，RPS120=89.73甜点区，dist_ma5+4.9%/ma10+6.2%/ma20+6.1%全部合规，中报8/27非事件窗口；但组合已满8仓（Rule 4最大8仓），无空位可买，记入rotation_ledger",
-      "rps120": 89.73
-    },
+      "entry_price": 261.92,
+      "allocation_pct": 8,
+      "stop": 248.82,
+      "target": 314.0,
+      "thesis": "半导体材料涨价潮核心受益（CMP抛光液龙头、14nm供货），电子化学品板块今日第1；RPS120=89.73甜点区；MA全部合规（dist_ma5+4.9%/ma10+6.2%/ma20+6.1%）；北向15%+公募7.5%；margin deleveraging为唯一弱项，不否决主线龙头。目标314为+20%动量目标（非研报价）",
+      "sector": "电子化学品Ⅱ",
+      "sector_rank": "top5（今日第1，+5.6%）",
+      "catalyst": "半导体材料涨价（需求高增+成本上升+地缘冲突三重共振），中银证券8月金股；中报8/27",
+      "catalyst_freshness": "ongoing",
+      "rps120": 89.73,
+      "conviction": "strong"
+    }
+  ],
+  "skip_list": [
     {
       "code": "688002",
       "name": "睿创微纳",
-      "reason": "中报预计8/18（明日）披露，事件窗口≤2个交易日，Rule 2c要求减半或等待；军工电子未入今日top5，RPS120=94.54处于extended区",
+      "reason": "RPS120=94.54扩展区，军工电子今日未进top5，且中报8/18明日发布（≤2交易日事件窗口），等中报落地再评估",
       "rps120": 94.54
     },
     {
       "code": "688131",
       "name": "皓元医药",
-      "reason": "dist_ma10_pct=8.8%>8%，触发Rule 2b不追高；RPS120=92.25 extended区，margin deleveraging",
+      "reason": "dist_ma10 +8.8%>8%、dist_ma20 +21.3%>12%，短期过度延伸，Rule 2b追高禁止",
       "rps120": 92.25
+    },
+    {
+      "code": "688222",
+      "name": "成都先导",
+      "reason": "dist_ma10 +8.2%>8%、dist_ma20 +21.0%>12%，追高禁止",
+      "rps120": 89.2
     },
     {
       "code": "688469",
       "name": "芯联集成-U",
-      "reason": "半导体为今日top2板块但dist_ma20_pct=14.1%>12%，Rule 2b极端延伸跳过（板块热度不覆盖追高规则）",
+      "reason": "半导体top2但dist_ma20 +14.1%>12%，过度延伸",
       "rps120": 88.37
     },
     {
       "code": "000725",
       "name": "京东方A",
-      "reason": "光学光电子未入今日top5，RPS120=93.86 extended区+3风险标签，margin deleveraging",
+      "reason": "光学光电子今日未进top5，RPS 93.86扩展区，margin deleveraging，7/13跌停后资金出逃风险",
       "rps120": 93.86
     },
     {
       "code": "601168",
       "name": "西部矿业",
-      "reason": "重入：8/11因工业金属冷板块+放量暴跌-7.63%离场@39.21，今日有色金属仍不在top5，无实质变化，重入举证不足",
+      "reason": "重入：8/11刚平仓（工业金属冷区），今日工业金属仍未进top5，无setup变化，不重入",
       "rps120": 89.98
     },
     {
       "code": "600885",
       "name": "宏发股份",
-      "reason": "重入：8/12因阴跌-3.1%距止损1.99%离场@34.65，电网设备今日未入top5，无新催化，重入举证不足",
+      "reason": "重入：8/12刚平仓且enriched数据fetch失败（MA缺失），无重入理由",
       "rps120": 89.34
+    },
+    {
+      "code": "301345",
+      "name": "涛涛车业",
+      "reason": "摩托车行业非热点，行业轮动不配合（margin adding亦不足以单独支撑入场）",
+      "rps120": 89.16
+    },
+    {
+      "code": "601918",
+      "name": "新集能源",
+      "reason": "煤炭非热点 + margin deleveraging",
+      "rps120": 93.44
+    },
+    {
+      "code": "600497",
+      "name": "驰宏锌锗",
+      "reason": "铅锌非热点 + margin deleveraging",
+      "rps120": 87.45
     }
   ],
   "new_learnings": [
     {
-      "text": "组合已满8仓（Rule 4最大8仓），今日top1板块电子化学品Ⅱ的最强候选安集科技（RPS120=89.73、dist_ma全部合规）因无空位只能进skip_list。仓位上限本身是风控：强趋势市里满仓后不再加码，防止情绪化追入；被放弃的头部候选交由rotation_ledger机械回测。",
-      "type": "observation",
-      "tags": [
-        "position-sizing"
-      ],
-      "evidence_type": "supporting",
-      "related_hypothesis": null,
-      "mechanism": "满仓后每新增一笔都必须以替换为前提，默认不换的纪律降低了过度交易频率"
-    },
-    {
-      "text": "芯联集成-U（半导体今日top2板块）因dist_ma20_pct=14.1%>12%被Rule 2b拦截——再次验证板块热度不能覆盖追高规则（h027）。",
-      "type": "heuristic",
-      "tags": [
-        "entry-filter",
-        "sector"
-      ],
-      "evidence_type": "supporting",
-      "related_hypothesis": "h027",
-      "mechanism": "个股短期涨幅远超MA20时，即使板块最强，均值回归风险也大于板块beta收益"
-    },
-    {
-      "text": "睿创微纳中报披露日8/18（明日）落在事件窗口≤2个交易日，按Rule 2c应减半或等待——财报前夜不建仓，避免承担不对称的隔夜跳空风险。",
+      "text": "电子化学品（板块第1）+RPS甜点区+MA全部合规，是今日唯一通过全部门槛的候选——多个强信号共振时决策应果断，不要因margin deleveraging单个弱信号否决干净setup",
       "type": "signal",
       "tags": [
-        "timing",
+        "sector",
         "entry-filter"
       ],
       "evidence_type": "supporting",
-      "related_hypothesis": null,
-      "mechanism": "财报结果方向不可预知，披露日前夜建仓等于承担不对称的隔夜跳空风险"
+      "mechanism": "半导体材料涨价潮（需求高增+成本上升+地缘冲突三重共振）是行业级催化；个股融资余额下降更多是获利了结的滞后反映，不应否决主线龙头"
     },
     {
-      "text": "重入标的巨化股份（8/11止损离场后8/13重入）当前-0.9%且距止损仅4.16%（stop_proximity WATCH）；历史重入n=9均值-3.71%胜率11%——重入仓必须比首次仓更严格盯止损，不因'逻辑未变'放宽。",
+      "text": "dist_ma20>12%在热门板块内部同样有效：芯联集成-U（半导体top2）因dist_ma20+14.1%被跳过，证明追高禁令不分板块热度",
       "type": "rule",
       "tags": [
-        "exit-rule",
-        "position-sizing"
+        "entry-filter",
+        "timing"
       ],
       "evidence_type": "supporting",
-      "related_hypothesis": null,
-      "mechanism": "重入意味着首次入场时机已被证伪一次，胜率先天偏低，需用更紧的止损保护资金"
+      "related_hypothesis": "h021 / h027",
+      "mechanism": "MA偏离度衡量的是个股自身的均值回归风险，与行业动量正交；热门行业里的过度延伸个股同样面临高回撤"
+    },
+    {
+      "text": "情绪亢奋日（r4_7+r7_10+r10=772>500）多数候选要么RPS>95过热、要么MA过度延伸——情绪高潮期现金纪律比强行满仓更重要，今天只开1仓、保留约56%现金是正确的",
+      "type": "observation",
+      "tags": [
+        "position-sizing",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "亢奋读数意味着多数强势股已短线透支，可买的'未延伸+甜点区+热门板块'交集会天然缩小"
+    },
+    {
+      "text": "重入纪律：西部矿业(8/11平仓)、宏发股份(8/12平仓)今日无任何setup变化，不重入。重入实测n=9均值-3.71%胜率11%，举证责任在重入一侧",
+      "type": "rule",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "刚平仓标的的离场逻辑（冷区/破位）在1周内通常未反转，重入更可能是对刚割肉标的的报复性追回"
     }
   ],
-  "market_summary": "全市场4.07:1多头广度（4335涨/1064跌，110涨停/1跌停），三大指数全红，科创50+4.14%领涨；电子化学品(+5.6%)/半导体(+5.45%)/通信设备(+4.82%)领涨，白酒/游戏/医美领跌。IV整体偏乐观（avg_iv_rank 0.25），科创50 iv_rank 0.33中性。r4_7+r7_10+r10合计772>500提示情绪偏热；regime=strong允许开新仓，但组合已达8仓上限，今日不新增。",
+  "market_summary": "三大指数全红，科创50+4.14%领涨；涨跌比4.07:1（涨4335/跌1064），涨停110家/跌停1家，广度强健、entry regime strong。但r4_7+r7_10+r10合计772>500属亢奋读数，需防追高。IV整体偏低（平均rank 0.27，偏乐观）。半导体/电子化学品/通信设备/其他电子/种植业领涨，资金从高位通信设备流向半导体（来源：moomoo午盘）；白酒/游戏/影视/医美/电视广播领跌。持仓8/10、全部盈利或微亏且在止损上方，无冷区持仓；仅安集科技1只通过全部买入门槛。",
   "market_sentiment": "bullish",
   "market_call": "积极"
 }

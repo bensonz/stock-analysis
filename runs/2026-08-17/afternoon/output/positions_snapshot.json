@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-08-17T16:00:32.869876+08:00",
+  "snapshot_time": "2026-08-17T16:10:05.668349+08:00",
   "snapshot_type": "post_run",
   "date": "2026-08-17",
   "portfolio_config": {
@@ -11,23 +11,23 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-08-17T16:00:32.353818+08:00",
+    "lastUpdated": "2026-08-17T16:10:05.120650+08:00",
     "portfolio": {
       "startingCapital": 1000000,
       "totalEquity": 992298.0,
-      "cash": 637972.0,
-      "investedValue": 354326.0,
+      "cash": 585588.0,
+      "investedValue": 406710.0,
       "unrealizedPnl": 43811.0,
       "realizedPnl": -51513.0,
       "totalPnl": -7702.0,
       "totalReturnPct": -0.77,
-      "positionsUsed": 8,
+      "positionsUsed": 9,
       "positionsMax": 10,
-      "cashPct": 64.29,
+      "cashPct": 59.01,
       "dayPnl": 6590.0,
       "minCashPct": 0,
       "minCashValue": 0.0,
-      "deployableCash": 637972.0
+      "deployableCash": 585588.0
     },
     "activePositions": [
       {
@@ -190,6 +190,26 @@
         "mavol30": 6800.17,
         "volumeBelowMavol30": false,
         "weight_pct": 5.05
+      },
+      {
+        "code": "688019",
+        "name": "安集科技",
+        "entryDate": "2026-08-17",
+        "entrySlot": "afternoon",
+        "entryPrice": 261.92,
+        "currentPrice": 261.92,
+        "pnl_pct": 0.0,
+        "stopLoss": 248.82,
+        "currentStop": 248.82,
+        "targetPrice": 314.0,
+        "status": "active",
+        "sector": "电子化学品Ⅱ",
+        "shares": 200,
+        "allocation_pct": 8.0,
+        "allocatedCapital": 52384.0,
+        "currentValue": 52384.0,
+        "unrealizedPnl": 0.0,
+        "weight_pct": 5.28
       },
       {
         "code": "688981",
@@ -386,7 +406,7 @@
           "price": 16.86,
           "change_pct": 8.08,
           "action": "HOLD",
-          "note": "PnL+8.1%，止损已上移至成本15.6；石油石化未入今日bottom5，未触发连续3日冷区SELL，持有"
+          "note": "PnL+8.1%高于+3%时间止损阈值，止损已提至盈亏平衡¥15.6；石油石化未入今日bottom5，未触发连续3日冷区SELL；14个交易日无时间止损压力"
         }
       ],
       "exitDate": null,
@@ -396,7 +416,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-07-29T15:52:15.569338+08:00",
-      "updatedAt": "2026-08-17T16:00:32.290768+08:00",
+      "updatedAt": "2026-08-17T16:10:04.737240+08:00",
       "trackerVersion": "2.1",
       "entrySlot": "afternoon"
     },
@@ -537,7 +557,7 @@
           "price": 52.79,
           "change_pct": 21.33,
           "action": "HOLD",
-          "note": "MLCC涨价逻辑未破，PnL+21.3%止损已锁+10%¥47.86，元件板块非冷区，持有"
+          "note": "MLCC涨价逻辑未破，PnL+21.3%，止损已锁+10%¥47.86；元件未进bottom5，持有"
         }
       ],
       "exitDate": null,
@@ -547,7 +567,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-08-04T11:40:35.792759+08:00",
-      "updatedAt": "2026-08-17T16:00:32.318656+08:00",
+      "updatedAt": "2026-08-17T16:10:04.766273+08:00",
       "trackerVersion": "2.1",
       "entrySlot": "noon"
     },
@@ -688,7 +708,7 @@
           "price": 37.44,
           "change_pct": 4.99,
           "action": "HOLD",
-          "note": "day10 PnL+5.0%高于+3%时间止损阈值，充电桩3C认证逻辑未变，持有"
+          "note": "充电桩3C认证逻辑未变，day10 PnL+5.0%高于+3%时间止损阈值；电网设备未入bottom5"
         }
       ],
       "exitDate": null,
@@ -698,7 +718,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-08-04T11:40:35.799183+08:00",
-      "updatedAt": "2026-08-17T16:00:32.323481+08:00",
+      "updatedAt": "2026-08-17T16:10:04.772209+08:00",
       "trackerVersion": "2.1",
       "entrySlot": "noon"
     },
@@ -855,7 +875,7 @@
           "price": 130.15,
           "change_pct": 13.11,
           "action": "HOLD",
-          "note": "MLCC涨价核心受益，PnL+13.1%，止损已提至盈亏平衡¥115.07，持有"
+          "note": "MLCC涨价核心受益，PnL+13.1%，止损已提至盈亏平衡¥115.07；元件未入bottom5"
         }
       ],
       "exitDate": null,
@@ -865,7 +885,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-07-31T11:45:38.781742+08:00",
-      "updatedAt": "2026-08-17T16:00:32.328173+08:00",
+      "updatedAt": "2026-08-17T16:10:04.776326+08:00",
       "trackerVersion": "2.1",
       "entrySlot": "noon"
     },
@@ -943,7 +963,7 @@
           "price": 40.84,
           "change_pct": -0.87,
           "action": "HOLD",
-          "note": "重入第3天PnL-0.9%未触发头3日-3%止损；stop_proximity WATCH（距止损39.14约4.16%）需盯紧，制冷剂长协涨价逻辑未变"
+          "note": "重入第3天PnL-0.9%未触发头3日-3%止损；stop_proximity WATCH（距止损¥39.14约4.2%）需盯紧；制冷剂长协涨价逻辑未变"
         }
       ],
       "exitDate": null,
@@ -953,7 +973,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-08-13T00:46:13.769553+08:00",
-      "updatedAt": "2026-08-17T16:00:32.332026+08:00",
+      "updatedAt": "2026-08-17T16:10:04.780501+08:00",
       "trackerVersion": "2.1"
     },
     "603127": {
@@ -1100,7 +1120,7 @@
           "price": 53.48,
           "change_pct": 20.59,
           "action": "HOLD",
-          "note": "CRO安评龙头，PnL+20.6%，止损已锁+10%¥48.79，医疗服务未入bottom5，持有"
+          "note": "CRO安评龙头，PnL+20.6%，止损已锁+10%¥48.79；医疗服务未入bottom5，CRO板块今日普涨（来源：输入快讯）"
         }
       ],
       "exitDate": null,
@@ -1110,7 +1130,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-08-04T16:51:49.621174+08:00",
-      "updatedAt": "2026-08-17T16:00:32.336335+08:00",
+      "updatedAt": "2026-08-17T16:10:04.784538+08:00",
       "trackerVersion": "2.1",
       "entrySlot": "afternoon"
     },
@@ -1283,7 +1303,7 @@
           "price": 166.89,
           "change_pct": 31.93,
           "action": "HOLD",
-          "note": "CXO龙头H1超预期并上调全年指引，PnL+31.9%，止损已锁+10%¥139.15，持有"
+          "note": "CXO龙头H1超预期并上调全年指引（来源：上证报8/3），PnL+31.9%，止损已锁+10%¥139.15"
         }
       ],
       "exitDate": null,
@@ -1293,9 +1313,48 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-07-31T11:45:38.795030+08:00",
-      "updatedAt": "2026-08-17T16:00:32.340353+08:00",
+      "updatedAt": "2026-08-17T16:10:04.787981+08:00",
       "trackerVersion": "2.1",
       "entrySlot": "noon"
+    },
+    "688019": {
+      "code": "688019",
+      "name": "安集科技",
+      "status": "active",
+      "thesis": "半导体材料涨价潮核心受益（CMP抛光液龙头、14nm供货），电子化学品板块今日第1；RPS120=89.73甜点区；MA全部合规（dist_ma5+4.9%/ma10+6.2%/ma20+6.1%）；北向15%+公募7.5%；margin deleveraging为唯一弱项，不否决主线龙头。目标314为+20%动量目标（非研报价）",
+      "entryDate": "2026-08-17",
+      "entrySlot": "afternoon",
+      "entryPrice": 261.92,
+      "targetPrice": 314.0,
+      "stopLoss": 248.82,
+      "currentStop": 248.82,
+      "allocation_pct": 8.0,
+      "shares": 200,
+      "allocatedCapital": 52384.0,
+      "rating": 2,
+      "rps120": 89.73,
+      "sector": "电子化学品Ⅱ",
+      "catalysts": [],
+      "sourceWatchlist": "2026-08-17",
+      "history": [
+        {
+          "date": "2026-08-17",
+          "slot": "afternoon",
+          "price": 261.92,
+          "change_pct": 0,
+          "action": "OPEN",
+          "note": "LLM开仓 安集科技"
+        }
+      ],
+      "exitDate": null,
+      "exitPrice": null,
+      "exitReason": null,
+      "returnPct": null,
+      "holdingDays": null,
+      "lessonLearned": null,
+      "createdAt": "2026-08-17T16:10:05.105484+08:00",
+      "updatedAt": "2026-08-17T16:10:05.105493+08:00",
+      "trackerVersion": "2.1"
     },
     "688981": {
       "code": "688981",
@@ -1418,7 +1477,7 @@
           "price": 136.76,
           "change_pct": 12.93,
           "action": "HOLD",
-          "note": "Q2收入首破30亿美元大超预期（来源：证券时报/21财经），PnL+12.9%，止损已上移至盈亏平衡¥121.1，半导体今日top2，持有"
+          "note": "Q2收入首破30亿美元超预期（来源：财报/华尔街见闻），PnL+12.9%，止损已提至盈亏平衡¥121.1；半导体今日top2"
         }
       ],
       "exitDate": null,
@@ -1428,7 +1487,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-08-05T11:42:09.870826+08:00",
-      "updatedAt": "2026-08-17T16:00:32.344472+08:00",
+      "updatedAt": "2026-08-17T16:10:04.791127+08:00",
       "trackerVersion": "2.1",
       "entrySlot": "noon"
     }

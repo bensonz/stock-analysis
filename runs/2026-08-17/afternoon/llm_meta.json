@@ -2,60 +2,60 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 143273,
-  "output_tokens": 18360,
+  "input_tokens": 138489,
+  "output_tokens": 19882,
   "rounds": 2,
-  "duration_sec": 248.6,
+  "duration_sec": 277.2,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年8月17日 半导体 电子化学品 板块 领涨 原因",
+        "query": "2026年8月17日 A股 半导体 电子化学品 领涨 原因",
         "max_results": 5
       },
-      "result_length": 3238
+      "result_length": 3339
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "安集科技 中报 电子化学品 2026年8月",
+        "query": "安集科技 半导体材料 涨价 2026 电子化学品 龙头",
         "max_results": 5
       },
-      "result_length": 3204
+      "result_length": 3467
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "睿创微纳 2026年中报 8月18日 业绩",
+        "query": "中芯国际 2026 二季度 财报 收入 超预期",
         "max_results": 5
       },
-      "result_length": 3296
+      "result_length": 3836
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "药明康德 CRO 创新药 2026年8月 中报 超预期",
+        "query": "药明康德 2026中报 业绩超预期 上调全年指引 CRO",
         "max_results": 5
       },
-      "result_length": 3281
+      "result_length": 3188
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "中芯国际 半导体 算力 2026年8月17日 上涨",
+        "query": "2026年8月17日 A股 大涨 涨停 市场情绪 原因",
         "max_results": 5
       },
-      "result_length": 3213
+      "result_length": 3226
     }
   ],
   "fallback_used": false
