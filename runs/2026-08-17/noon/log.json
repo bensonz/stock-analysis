@@ -1,0 +1,117 @@
+{
+  "date": "2026-08-17",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1786937733.4075918,
+      "errors": [],
+      "end": 1786937815.9810472,
+      "duration_sec": 82.6
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 4257,
+      "tokens": {
+        "input_tokens": 140195,
+        "output_tokens": 27266
+      },
+      "rounds": 2,
+      "tool_calls_count": 0,
+      "duration_sec": 323.8,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1786938139.8616488,
+      "actions": [
+        "RAISE_STOP 688981 → 121.1",
+        "SKIP OPEN 688019: Insufficient deployable cash for minimum lot in 688019: deployable=637972.00, entryPrice=248.20",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h158 (observation): 安集科技(电子化学品Ⅱ今日top1)以RPS120=89.86甜点区+MA距离全部合规通过买入门槛，而多只RPS>95%的半导体/材料股(华虹、北方华创、芯联集...",
+        "Hypothesis: Created h159 (observation): 安集科技margin signal为deleveraging(chg5_pct-5.06%)，但sector top1+RPS甜点+IV Rank 38%正常，...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "600160",
+                "name": "巨化股份",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 40.74,
+                "stopLoss": 39.14,
+                "distance_pct": 3.93,
+                "suggestion": "🟠 WATCH — 3.9% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1786938140.445741,
+      "duration_sec": 0.6
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 600160 — 🟠 WATCH — 3.9% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 407.0
+  }
+}

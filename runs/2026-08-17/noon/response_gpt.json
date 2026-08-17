@@ -1,0 +1,230 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": 4.48,
+        "trend": "accelerating"
+      },
+      {
+        "name": "种植业",
+        "5d_pct": 4.37,
+        "trend": "steady"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": 4.17,
+        "trend": "accelerating"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": 2.93,
+        "trend": "steady"
+      },
+      {
+        "name": "贵金属",
+        "5d_pct": 2.86,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "白酒Ⅱ",
+        "5d_pct": -3.76,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "游戏Ⅱ",
+        "5d_pct": -2.39,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电视广播Ⅱ",
+        "5d_pct": -1.85,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "影视院线",
+        "5d_pct": -1.84,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "医疗美容",
+        "5d_pct": -1.41,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "1/8持仓在top5热门板块(中芯国际-半导体#3)，其余在中间板块，无持仓落入bottom5",
+    "regime": "科技/半导体/材料领涨，白酒消费/传媒承压"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "PnL+5.6%高于+3%时间止损阈值，止损已提至盈亏平衡¥15.6，石油石化板块未入今日bottom5，持有",
+      "sector_rank": "中间板块",
+      "new_stop": null,
+      "pnl_pct": 5.6,
+      "days_held": 14,
+      "exit_price": null
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "action": "HOLD",
+      "reason": "MLCC涨价逻辑未破，PnL+22.3%，止损已锁+10%¥47.86，元件板块非冷区，持有",
+      "sector_rank": "中间板块",
+      "new_stop": null,
+      "pnl_pct": 22.3,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "action": "HOLD",
+      "reason": "day10 PnL+5.9%高于+3%时间止损阈值，充电桩3C认证逻辑未变，止损¥33.88，持有",
+      "sector_rank": "中间板块",
+      "new_stop": null,
+      "pnl_pct": 5.9,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "reason": "MLCC涨价核心受益，PnL+10.1%达+10%阈值，止损已提至盈亏平衡¥115.07，持有",
+      "sector_rank": "中间板块",
+      "new_stop": null,
+      "pnl_pct": 10.1,
+      "days_held": 12,
+      "exit_price": null
+    },
+    {
+      "code": "600160",
+      "name": "巨化股份",
+      "action": "HOLD",
+      "reason": "新仓day3 -1.1%未触发头3日-3%止损，距止损¥39.14约3.9%(stop_proximity WATCH)需盯紧，制冷剂长协涨价逻辑未变",
+      "sector_rank": "中间板块",
+      "new_stop": null,
+      "pnl_pct": -1.1,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "CRO安评龙头，PnL+20.7%，止损已锁+10%¥48.79，医疗服务板块未入bottom5，持有",
+      "sector_rank": "中间板块",
+      "new_stop": null,
+      "pnl_pct": 20.7,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "CXO绝对龙头，PnL+31.9%，止损已锁+10%¥139.15，持有",
+      "sector_rank": "中间板块",
+      "new_stop": null,
+      "pnl_pct": 31.9,
+      "days_held": 12,
+      "exit_price": null
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "RAISE_STOP",
+      "reason": "PnL+12.4%突破+10%阈值(¥133.21)，Rule 5止损上移至盈亏平衡¥121.1；半导体板块今日top3(+4.17%)",
+      "sector_rank": "top 3(半导体+4.17%)",
+      "new_stop": 121.1,
+      "pnl_pct": 12.4,
+      "days_held": 9,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "688019",
+      "name": "安集科技",
+      "entry_price": 248.2,
+      "allocation_pct": 7,
+      "stop": 235.79,
+      "target": 285.0,
+      "thesis": "电子化学品Ⅲ龙头，今日电子化学品Ⅱ板块+4.48%排名第一；RPS120=89.86处于80-92%甜点区；MA距离全部合规(dist_ma5+0.1%/dist_ma10+2.5%/dist_ma20+1.3%)；中银证券8月金股，近3年营收年增34%",
+      "sector": "电子化学品Ⅱ",
+      "sector_rank": "top 1(+4.48%)",
+      "catalyst": "半导体材料涨价(中国断供稀土+长鑫科技上市产业链)，中银证券8月金股",
+      "catalyst_freshness": "ongoing",
+      "rps120": 89.86,
+      "conviction": "strong"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "dist_ma10+11.7%>8%、dist_ma20+18.4%>12%，短期超买不追高，等回踩MA10/MA20",
+      "rps120": 94.87
+    },
+    {
+      "code": "688469",
+      "name": "芯联集成-U",
+      "reason": "半导体板块虽热(top3)，但dist_ma20+13.6%>12%延伸过度，Rule 2b不追高",
+      "rps120": 88.47
+    },
+    {
+      "code": "688131",
+      "name": "皓元医药",
+      "reason": "dist_ma10+11.5%>8%、dist_ma20+22.8%>12%，短期超买",
+      "rps120": 91.84
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "国防军工板块近一月-9.62%排名27/31(财通证券周报)，非热门板块，Rule 1行业引力优先",
+      "rps120": 94.56
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "工业金属/铜板块未入今日top5，8/11刚止损离场，板块轮动压制个股",
+      "rps120": 90.54
+    },
+    {
+      "code": "000725",
+      "name": "京东方A",
+      "reason": "面板/光学光电子板块未入今日top5，margin deleveraging，RPS 94.02在扩展区需板块top10%支撑",
+      "rps120": 94.02
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "安集科技(电子化学品Ⅱ今日top1)以RPS120=89.86甜点区+MA距离全部合规通过买入门槛，而多只RPS>95%的半导体/材料股(华虹、北方华创、芯联集成)因dist_ma20>12%被Rule 2b拦截——验证RPS 80-92%甜点区+不追高纪律的组合有效性",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "RPS甜点区代表中等偏强动量，MA距离合规保证未透支短期涨幅，两者叠加的入场点胜率更高"
+    },
+    {
+      "text": "安集科技margin signal为deleveraging(chg5_pct-5.06%)，但sector top1+RPS甜点+IV Rank 38%正常，按纪律融资余额仅作佐证风险旗标不单独否决，仅将仓位从8%下调至7%",
+      "type": "signal",
+      "tags": [
+        "position-sizing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "margin deleveraging反映杠杆盘退出，与强板块+健康IV叠加时风险可控，折中处理为小幅降仓而非跳过"
+    }
+  ],
+  "market_summary": "市场强势：沪指+0.84%/深成指+1.26%/创业板+1.33%/科创50+3.04%，涨跌家数2.56:1(3853涨/1504跌)，80涨停/1跌停，三大指数全绿，广度健康。热点为电子化学品Ⅱ(+4.48%)、种植业(+4.37%)、半导体(+4.17%)领涨，白酒(-3.76%)、游戏(-2.39%)领跌。IV整体中性(平均IV Rank 32.9%)，科创50 IV Rank 38.2%正常。情绪偏多。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

@@ -120,6 +120,14 @@
       "change_pct": 20.0,
       "action": "RAISE_STOP",
       "note": "现价52.21达+20%阈值，按Rule 5止损上移至+10%锁定利润；MLCC涨价逻辑未变"
+    },
+    {
+      "date": "2026-08-17",
+      "slot": "noon",
+      "price": 53.22,
+      "change_pct": 22.32,
+      "action": "HOLD",
+      "note": "MLCC涨价逻辑未破，PnL+22.3%，止损已锁+10%¥47.86，元件板块非冷区，持有"
     }
   ],
   "exitDate": null,
@@ -129,7 +137,7 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-08-04T11:40:35.792759+08:00",
-  "updatedAt": "2026-08-14T23:38:34.709741+08:00",
+  "updatedAt": "2026-08-17T11:42:19.883692+08:00",
   "trackerVersion": "2.1",
   "entrySlot": "noon"
 }

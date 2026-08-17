@@ -7,7 +7,7 @@
   "entryPrice": 121.1,
   "targetPrice": 145.0,
   "stopLoss": 115.04,
-  "currentStop": 115.04,
+  "currentStop": 121.1,
   "allocation_pct": 5.0,
   "shares": 200,
   "allocatedCapital": 24220.0,
@@ -104,6 +104,14 @@
       "change_pct": 9.72,
       "action": "HOLD",
       "note": "集成电路制造龙头，PnL+9.7%接近但未达+10%阈值（¥133.21），止损¥115.04；半导体休整无卖出信号"
+    },
+    {
+      "date": "2026-08-17",
+      "slot": "noon",
+      "price": 136.1,
+      "change_pct": 12.39,
+      "action": "RAISE_STOP",
+      "note": "PnL+12.4%突破+10%阈值(¥133.21)，Rule 5止损上移至盈亏平衡¥121.1；半导体板块今日top3(+4.17%)"
     }
   ],
   "exitDate": null,
@@ -113,7 +121,7 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-08-05T11:42:09.870826+08:00",
-  "updatedAt": "2026-08-14T23:38:34.729899+08:00",
+  "updatedAt": "2026-08-17T11:42:19.921375+08:00",
   "trackerVersion": "2.1",
   "entrySlot": "noon"
 }
