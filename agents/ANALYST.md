@@ -108,7 +108,7 @@ V1 gave high confidence to "safe" picks and low confidence to "risky" ones. The 
 - **-3% in first 3 days** → SELL. Bad timing, re-evaluate later.
 - **+10% from entry** → Raise stop to breakeven (entry price)
 - **+20% from entry** → Raise stop to +10%. Trail from here.
-- **Time stop: 10 trading days with <3% gain** → SELL. Move on. (V1 used 20 days — too slow)
+- **Time stop: 15 trading days with <3% gain** → SELL. Move on. (V1 used 20 days — too slow; 10 was measured to be too impatient, see docs/audits/EXIT_ABLATION.md 2026-08-17)
 - **No "event-driven exceptions"** to time stops. If the event hasn't moved the stock in 10 days, your timing is wrong. You can always re-enter.
 
 ## Sector Momentum Overlay

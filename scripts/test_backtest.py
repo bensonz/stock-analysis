@@ -233,9 +233,11 @@ def test_mechanical_exits_rules():
     assert exits_fn("d", {}, pos(-5.5, 10)) == [("X", "rule5_hard_stop")]
     assert exits_fn("d", {}, pos(-3.2, 2)) == [("X", "rule5_early")]
     assert exits_fn("d", {}, pos(-3.2, 5)) == []           # early rule expired
-    # Rule 5 time stop = 10 sessions / <3% (ANALYST.md), reconciled 2026-08-16
-    assert exits_fn("d", {}, pos(2.9, 10)) == [("X", "time_decay")]   # fires ON day 10
-    assert exits_fn("d", {}, pos(2.9, 9)) == []            # ...not before
+    # Rule 5 time stop = 15 sessions / <3% (ANALYST.md). 20/5 → 10/3 on 08-16,
+    # then 10 measured worst of five variants → 15 on 08-17 (EXIT_ABLATION.md).
+    assert exits_fn("d", {}, pos(2.9, 15)) == [("X", "time_decay")]   # fires ON day 15
+    assert exits_fn("d", {}, pos(2.9, 14)) == []           # ...not before
+    assert exits_fn("d", {}, pos(2.9, 10)) == []           # ...and not at the old 10
     assert exits_fn("d", {}, pos(3.0, 25)) == []           # >=3% rides, at any age
     assert exits_fn("d", {}, pos(8.0, 25)) == []           # winner rides
     assert exits_fn("d", {}, pos(None, 5)) == []           # suspended: no data
