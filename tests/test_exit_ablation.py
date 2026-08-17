@@ -61,6 +61,34 @@ def test_hard_stop_takes_precedence_over_a_same_session_time_stop():
     assert why == "hard_stop" and held == 10
 
 
+def test_close_fill_ignores_intraday_dips_and_fills_worse():
+    """The twice-a-day problem: we don't hold a resting stop, we sample.
+
+    Measured on 21 real stop exits: mean -2.56pp past the stop level, 14 of 21
+    filling below it. `fill="close"` is the pessimistic bound on that.
+    """
+    # dips to -6% intraday, closes at -1%: a resting order fills, we never see it
+    dip = [bar("d1", 10.0, 10.0, 9.4, 9.9), bar("d2", 9.9, 10.2, 9.9, 10.2)]
+    assert ea.settle(dip, 10.0, -5.0, None, 0, None, None, fill="stop")[1] == "hard_stop"
+    assert ea.settle(dip, 10.0, -5.0, None, 0, None, None, fill="close")[1] == "horizon"
+
+    # closes at -8%: both see it, but close-fill takes the worse price
+    through = [bar("d1", 9.9, 9.9, 9.1, 9.2)]
+    opt = ea.settle(through, 10.0, -5.0, None, 0, None, None, fill="stop")
+    pess = ea.settle(through, 10.0, -5.0, None, 0, None, None, fill="close")
+    assert opt[1] == pess[1] == "hard_stop"
+    assert abs(opt[0] - (-5.0)) < 1e-9 and abs(pess[0] - (-8.0)) < 1e-9
+    assert pess[0] < opt[0]
+
+
+def test_date_triggered_rules_are_identical_under_both_fills():
+    """Only the hard stop is price-triggered; the time stop must not move."""
+    flat = [bar(f"d{i}", 10.0, 10.2, 9.9, 10.1) for i in range(1, 13)]
+    a = ea.settle(flat, 10.0, -5.0, None, 0, 10, 3.0, fill="stop")
+    b = ea.settle(flat, 10.0, -5.0, None, 0, 10, 3.0, fill="close")
+    assert a == b and a[1] == "time_stop"
+
+
 def test_no_rules_rides_to_the_horizon():
     bars = [bar(f"d{i}", 10.0, 10.0, 5.0, 6.0) for i in range(1, 4)]   # -40%
     gross, why, held = ea.settle(bars, 10.0, None, None, 0, None, None)

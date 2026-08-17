@@ -88,19 +88,39 @@ def bars_after(conn, code, entry_date, n):
         (code, entry_date, n)).fetchall()
 
 
-def settle(bars, entry_price, hard, early, early_days, time_days, time_gain):
+def settle(bars, entry_price, hard, early, early_days, time_days, time_gain,
+           fill="stop"):
     """Return (gross_pct, exit_reason, sessions_held) under one policy.
 
     `bars` starts at entry+1, so bars[i] is session i+1 — which makes T+1
     automatic: index 0 is already the first sellable session.
+
+    `fill` picks the execution model for the *price-triggered* hard stop. The
+    pipeline runs twice a day (~11:35 and ~15:35), so it is NOT sitting in the
+    market with a resting stop order — it samples, and sells at whatever it sees.
+    Measured on 21 real stop exits: mean **-2.56pp** past the stop level, median
+    -1.56pp, worst -15.97pp, with 14 of 21 filling below the stop. Neither bound
+    below is right on its own; run both and believe what survives.
+
+      "stop"  — optimistic: triggers on the intraday low, fills at the stop
+                (or the open if it gapped through). What a resting order gets.
+      "close" — pessimistic: only a *close* below the stop is ever seen, and it
+                fills at that close. What a system that only looks at 15:35 gets,
+                ignoring intraday dips it would never have acted on.
+
+    Date-triggered rules (early stop, time stop) already read the close and so
+    are identical under both.
     """
     for i, (_d, o, _h, low, close) in enumerate(bars, start=1):
         if hard is not None:
             stop_px = entry_price * (1 + hard / 100.0)
-            if low <= stop_px:
+            if fill == "close":
+                if close <= stop_px:
+                    return (close / entry_price - 1) * 100, "hard_stop", i
+            elif low <= stop_px:
                 # gap-through fills at the open, not at the stop level
-                fill = min(o, stop_px)
-                return (fill / entry_price - 1) * 100, "hard_stop", i
+                fill_px = min(o, stop_px)
+                return (fill_px / entry_price - 1) * 100, "hard_stop", i
         pnl_close = (close / entry_price - 1) * 100
         if early is not None and i <= early_days and pnl_close <= early:
             return pnl_close, "early_stop", i
@@ -111,7 +131,7 @@ def settle(bars, entry_price, hard, early, early_days, time_days, time_gain):
     return (bars[-1][4] / entry_price - 1) * 100, "horizon", len(bars)
 
 
-def run(horizon=10, root=ROOT, db_path=DB_PATH):
+def run(horizon=10, root=ROOT, db_path=DB_PATH, fill="stop"):
     entries = load_entries(root)
     conn = sqlite3.connect(db_path)
     results = {label: [] for (label, *_r) in POLICIES}
@@ -124,7 +144,7 @@ def run(horizon=10, root=ROOT, db_path=DB_PATH):
         replayed.append(e)
         for (label, hard, early, edays, tdays, tgain) in POLICIES:
             gross, why, _held = settle(bars, e["entryPrice"], hard, early,
-                                       edays, tdays, tgain)
+                                       edays, tdays, tgain, fill=fill)
             if gross is None:
                 continue
             results[label].append(gross - ROUND_TRIP_COST_PCT)
@@ -134,6 +154,7 @@ def run(horizon=10, root=ROOT, db_path=DB_PATH):
     actual = [e["actual"] for e in replayed if e["actual"] is not None]
     return {
         "horizon": horizon,
+        "fill": fill,
         "n_entries": len(entries),
         "n_replayed": len(replayed),
         "actual": _summ(actual),
@@ -153,8 +174,11 @@ def _summ(v):
 
 
 def human(d):
+    FILL = {"stop": "止损位成交 (乐观: 假设挂单在市)",
+            "close": "破位当日收盘成交 (悲观: 只在15:35看得见)"}
     print(f"出场规则消融 — 用我们【真实的】{d['n_replayed']} 笔入场回放 "
           f"(持有上限 {d['horizon']} 个交易日, 含 0.30% 双边成本)")
+    print(f"  成交模型: {FILL.get(d.get('fill'), d.get('fill'))}")
     print(f"  总入场 {d['n_entries']} 笔, 其中 {d['n_replayed']} 笔有满 {d['horizon']} 日行情可结算\n")
     a = d["actual"]
     if a:
@@ -171,7 +195,10 @@ def human(d):
     for p in d["policies"]:
         parts = ", ".join(f"{k}={v}" for k, v in sorted(p["reasons"].items()))
         print(f"    {p['label']:32s} {parts}")
-    print("\n  注: 未建模涨跌停 —— 跌停日现实中卖不掉, 此处允许成交,")
+    print("\n  注: 实测21笔止损平仓平均滑点 -2.56pp (中位 -1.56pp, 最差 -15.97pp),")
+    print("      14/21 成交在止损位之下 —— 系统一天只看两次, 抓不准止损价。")
+    print("      两个成交模型是上下界, 真相在中间; 只信两边都成立的结论。")
+    print("      未建模涨跌停 —— 跌停日现实中卖不掉, 此处允许成交,")
     print("      这一条对【带止损的策略偏乐观】, 与其余建模方向相反。")
     print("      n 小且只覆盖一个(整体下行的)行情, 只能证伪, 不能证明。")
 
@@ -179,9 +206,11 @@ def human(d):
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--horizon", type=int, default=10)
+    ap.add_argument("--fill", choices=("stop", "close"), default="stop",
+                    help="hard-stop execution model; see settle() (default stop)")
     ap.add_argument("--human", action="store_true")
     args = ap.parse_args()
-    d = run(horizon=args.horizon)
+    d = run(horizon=args.horizon, fill=args.fill)
     if args.human:
         human(d)
     else:
