@@ -321,10 +321,18 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
                 if reasoning:
                     lines.append(f"\n{reasoning}\n")
 
-        # V2: new positions opened today
-        if new_positions:
+        # V2: new positions opened today.
+        # `_not_opened` is stamped by phase3_apply when the intent did not become
+        # a position. Before 2026-08-17 this section rendered intent as fact:
+        # 688019 was printed under 今日开仓 with entry/stop/target/thesis while
+        # nothing was bought, and "新开仓: 1只" below it. A skip is fine; a skip
+        # that reads as a fill is not.
+        opened = [p for p in new_positions if not p.get("_not_opened")]
+        not_opened = [p for p in new_positions if p.get("_not_opened")]
+
+        if opened:
             lines.append("## 今日开仓\n")
-            for i, item in enumerate(new_positions, 1):
+            for i, item in enumerate(opened, 1):
                 name = item.get("name", "")
                 code = item.get("code", "")
                 conviction = item.get("conviction", "")
@@ -342,6 +350,16 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
                 thesis = item.get("thesis", "")
                 if thesis:
                     lines.append(f"\n{thesis}\n")
+
+        if not_opened:
+            lines.append("## ⚠️ 想开但没开成\n")
+            lines.append("模型决定买入, 但执行阶段被拦下 —— 这些**不是持仓**。\n")
+            for i, item in enumerate(not_opened, 1):
+                lines.append(
+                    f"{i}. **{item.get('name', '')}** ({item.get('code', '')})"
+                    f"{' 拟入场 ¥' + str(item['entry_price']) if item.get('entry_price') else ''}"
+                    f" — {item['_not_opened']}")
+            lines.append("")
 
         # V2: positions closed today (SELL)
         if sells:
@@ -386,8 +404,13 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
         lines.append(f"- WATCH推荐: {len(watch_recs)}只")
         lines.append(f"- AVOID推荐: {len(avoid_recs)}只")
     else:
-        # V2 summary
-        lines.append(f"- 新开仓: {len(new_positions)}只")
+        # V2 summary. Count what was actually opened, never the intent —
+        # `新开仓: 1只` alongside an unchanged 8-position book is how the
+        # 2026-08-17 sizing bug stayed invisible.
+        blocked = [p for p in new_positions if p.get("_not_opened")]
+        lines.append(f"- 新开仓: {len(new_positions) - len(blocked)}只")
+        if blocked:
+            lines.append(f"- ⚠️ 想开但被执行阶段拦下: {len(blocked)}只")
         lines.append(f"- 平仓: {len(sells)}只")
         lines.append(f"- 跳过: {len(skip_list)}只")
 

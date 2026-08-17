@@ -446,15 +446,53 @@ def open_position(data: dict) -> dict:
         )
 
     lot_size = _lot_size_for_code(code)
+    lot_cost = lot_size * entry_price
     target_capital = deployable_cash * float(alloc_pct) / 100
     shares = _round_down_to_lot(int(target_capital // entry_price), code)
     max_affordable_shares = _round_down_to_lot(int(deployable_cash // entry_price), code)
     shares = min(shares, max_affordable_shares)
 
     if shares < lot_size:
-        raise ValueError(
-            f"Insufficient deployable cash for minimum lot in {code}: deployable={deployable_cash:.2f}, entryPrice={entry_price:.2f}"
-        )
+        # The requested allocation cannot buy one lot. That is NOT automatically
+        # a rejection. STAR Market (688xxx) trades in 200-share lots, so a
+        # high-priced name overshoots a modest alloc_pct while still being tiny
+        # against the cap that actually governs (config max_position_pct).
+        #
+        # 2026-08-17: this branch had rejected 5 opens, every one a 688 code with
+        # six-figure idle cash, under the message "Insufficient deployable cash
+        # for minimum lot" — which was false and sent the diagnosis the wrong way
+        # each time. 安集科技 688019 @248.20 was refused for exceeding a 7%
+        # *request* while the lot was 5.01% of equity against a 10% *cap*. The
+        # effect was a systematic exclusion of high-priced STAR names — exactly
+        # where this strategy's semiconductor/materials momentum lives.
+        equity = float(portfolio.get("totalEquity") or config["starting_capital"])
+        max_pos_pct = float(config.get("max_position_pct",
+                                       DEFAULT_PORTFOLIO_CONFIG["max_position_pct"]))
+        cap_value = equity * max_pos_pct / 100
+        blockers = []
+        if lot_cost > deployable_cash:
+            blockers.append(
+                f"one lot ({lot_size}sh x {entry_price:.2f} = {lot_cost:.2f}) "
+                f"exceeds deployable cash {deployable_cash:.2f}")
+        if current_cash - lot_cost < min_cash_value:
+            blockers.append(
+                f"one lot ({lot_cost:.2f}) would breach the min cash reserve "
+                f"{min_cash_value:.2f} ({min_cash_pct:.1f}%) against cash {current_cash:.2f}")
+        if lot_cost > cap_value:
+            blockers.append(
+                f"one lot ({lot_cost:.2f}) exceeds max_position_pct {max_pos_pct:g}% "
+                f"of equity {equity:.2f} = {cap_value:.2f}")
+        if blockers:
+            raise ValueError(
+                f"Cannot open {code}: " + "; ".join(blockers)
+                + f" [requested alloc {alloc_pct:g}% of deployable = {target_capital:.2f}]")
+        # Affordable, within the reserve, and under the cap → round UP to one lot.
+        print(f"  [lot-round-up] {code}: alloc {alloc_pct:g}% of deployable "
+              f"({target_capital:.2f}) buys {int(target_capital // entry_price)}sh, "
+              f"below the {lot_size}sh lot; rounding up to {lot_size}sh "
+              f"({lot_cost:.2f} = {lot_cost / equity * 100:.2f}% of equity, "
+              f"cap {max_pos_pct:g}%)", file=sys.stderr)
+        shares = lot_size
 
     allocated_capital = round(shares * entry_price, 2)
     if current_cash - allocated_capital < min_cash_value:

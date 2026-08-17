@@ -1553,6 +1553,11 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
         except Exception as e:
             print(f"  ⚠ Failed to fetch new candidate prices: {e}", file=sys.stderr)
 
+    # Outcome per intended open, so the report can say "skipped" instead of
+    # printing a skipped candidate under 今日开仓 (2026-08-17: 688019 was
+    # reported as opened, with entry/stop/target, while nothing was bought).
+    open_outcomes: dict[str, str] = {}
+
     for p in allowed_new_positions:
         try:
             code = str(p["code"]).split(".")[0]
@@ -1625,6 +1630,7 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
 
             if entry_price in (None, "", 0):
                 log["actions"].append(f"SKIP OPEN {code}: missing entry price")
+                open_outcomes[code] = "missing entry price"
                 continue
 
             # Block 涨停 (limit-up) stocks — cannot buy at +10% daily limit
@@ -1639,6 +1645,7 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
                 stock_change = real_price_data.get("change_pct")
             if stock_change is not None and stock_change >= 9.8:
                 log["actions"].append(f"SKIP OPEN {code}: 涨停 (change {stock_change}%), cannot buy at daily limit")
+                open_outcomes[code] = f"涨停 (change {stock_change}%), cannot buy at daily limit"
                 continue
 
             open_position({
@@ -1673,8 +1680,17 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
             })
         except (ValueError, FileExistsError) as e:
             log["actions"].append(f"SKIP OPEN {p.get('code')}: {e}")
+            open_outcomes[str(p.get("code", "")).split(".")[0]] = str(e)
         except Exception as e:
             log["actions"].append(f"ERROR OPEN {p.get('code')}: {e}")
+            open_outcomes[str(p.get("code", "")).split(".")[0]] = f"ERROR: {e}"
+
+    # Stamp the outcome onto the decision records the report renders from, so a
+    # candidate that never became a position cannot be printed as one.
+    for p in allowed_new_positions:
+        reason = open_outcomes.get(str(p.get("code", "")).split(".")[0])
+        if reason:
+            p["_not_opened"] = reason
 
     # 3. Ensure positions.json is in sync (with live prices)
     regenerate_positions_json(price_data=data.get("position_prices", {}))
@@ -2224,7 +2240,7 @@ def main():
 
         # Gate 3: Validate Phase 3 output
         print(f"\nGate 3: Validating apply results...", file=sys.stderr)
-        gate3 = validate_phase3_gate(date, log3, data)
+        gate3 = validate_phase3_gate(date, log3, data, decisions=decisions)
         manifest.add_gate(gate3)
         manifest.add_phase("apply", "ok" if gate3.passed else "failed",
                            duration_sec=log3.get("duration_sec", 0))

@@ -359,16 +359,20 @@ def validate_llm_output_gate(decisions: dict, data: dict) -> GateResult:
 
 # ─── Gate 3: Phase 3 → Phase 4 (Apply → Commit) ───
 
-def validate_phase3_gate(date: str, apply_log: dict, data: dict) -> GateResult:
+def validate_phase3_gate(date: str, apply_log: dict, data: dict,
+                         decisions: dict | None = None) -> GateResult:
     """Validate Phase 3 output before committing.
 
     Hard failures:
     - Actions contain ERROR entries
     - Position file inconsistency (positions.json vs tracking/*.json)
+    - An intended new position neither opened nor accounted for by a SKIP
 
     Soft warnings:
     - Price corrections applied
     - Fallback prices used
+    - Intended new positions that were skipped (the report must not call these
+      "今日开仓")
     """
     gate = PipelineGate("phase3_to_phase4")
 
@@ -399,6 +403,34 @@ def validate_phase3_gate(date: str, apply_log: dict, data: dict) -> GateResult:
     opened_codes = {a.split()[1] for a in actions
                     if isinstance(a, str) and a.startswith("OPEN ") and len(a.split()) > 1}
     _check_position_file_consistency(gate, run_date=date, opened_codes=opened_codes)
+
+    # ── Intent vs reality ──
+    # 2026-08-17: the LLM asked to open 688019, position_manager refused it on a
+    # sizing bug, and report.md still printed "今日开仓 1只" with an entry price
+    # and a thesis. Every gate passed. Nothing in the pipeline compared what we
+    # said we did against what we did — the same shape as the 07-20 and 08-14
+    # failures. A skip is legitimate; a *silent* skip is not.
+    intended = [p for p in ((decisions or {}).get("new_positions") or [])
+                if isinstance(p, dict) and p.get("code")]
+    if intended:
+        skip_codes = {a.split()[2].rstrip(":") for a in actions
+                      if isinstance(a, str) and a.startswith("SKIP OPEN ")
+                      and len(a.split()) > 2}
+        skipped_all = any(isinstance(a, str) and a.startswith("SKIP OPEN ALL")
+                          for a in actions)
+        for p in intended:
+            code = str(p["code"]).split(".")[0]
+            if code in opened_codes:
+                continue
+            if code in skip_codes or skipped_all:
+                reason = next((a for a in actions if isinstance(a, str)
+                               and a.startswith(f"SKIP OPEN {code}")), "SKIP OPEN ALL")
+                gate.soft(False, f"intended new position not opened: {reason}")
+            else:
+                gate.hard(False,
+                          f"intended new position {code} ({p.get('name', '?')}) was "
+                          f"neither opened nor skipped with a reason — apply phase "
+                          f"lost it silently")
 
     return gate.check()
 
