@@ -1,10 +1,10 @@
 {
   "date": "2026-08-17",
   "slot": "afternoon",
-  "run_started_at": "2026-08-17T15:55:18.847678+08:00",
-  "status": "failed",
-  "exit_code": 1,
-  "total_duration_sec": 0.0,
+  "run_started_at": "2026-08-17T16:03:01.119932+08:00",
+  "status": "degraded",
+  "exit_code": 0,
+  "total_duration_sec": 391.7,
   "phases": {
     "health_check": {
       "status": "ok",
@@ -12,11 +12,11 @@
       "sources": {
         "sina": {
           "status": "ok",
-          "latency_ms": 68.8
+          "latency_ms": 496.6
         },
         "cheesefortune": {
           "status": "ok",
-          "latency_ms": 473.6
+          "latency_ms": 470.5
         },
         "pricedb": {
           "status": "ok",
@@ -33,12 +33,23 @@
     },
     "collect": {
       "status": "ok",
-      "duration_sec": 53.5,
+      "duration_sec": 113.6,
       "errors": []
     },
     "llm_analysis": {
-      "status": "failed",
-      "duration_sec": 373.9
+      "status": "ok",
+      "duration_sec": 277.2
+    },
+    "apply": {
+      "status": "ok",
+      "duration_sec": 0.9
+    },
+    "validate": {
+      "status": "warnings",
+      "duration_sec": 0.0,
+      "errors": [
+        "RULE check_stop_proximity: 600160 — 🟠 WATCH — 4.2% above stop. Monitor closely. No immediate action but be ready."
+      ]
     }
   },
   "gates": {
@@ -48,12 +59,17 @@
       "soft_warns": []
     },
     "phase2_to_phase3": {
-      "passed": false,
-      "hard_fails": [
-        "new position 688019: missing required field 'target'"
-      ],
+      "passed": true,
+      "hard_fails": [],
       "soft_warns": [
         "missing watchlist"
+      ]
+    },
+    "phase3_to_phase4": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [
+        "rule check_stop_proximity: 🟠 WATCH — 4.2% above stop. Monitor closely. No immediate action but be ready."
       ]
     }
   }

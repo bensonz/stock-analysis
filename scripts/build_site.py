@@ -268,6 +268,20 @@ def rebase_index(closes: dict, dates: list[str], starting: float) -> dict:
     return out
 
 
+def index_base(closes: dict, first_date: str) -> float | None:
+    """The index close the rebase is anchored to — last close <= first_date.
+
+    Exposed separately so the chart can label a right-hand axis in real index
+    points. Kept out of `rebase_index`'s return value on purpose: that function's
+    contract (date → rebased value) is asserted directly by tests and read by the
+    template, and widening it to a tuple would buy nothing here.
+    """
+    if not closes or not first_date:
+        return None
+    prior = [d for d in sorted(closes) if d <= first_date]
+    return closes[prior[-1]] if prior else None
+
+
 # ------------------------------------------------------------- events + badges
 
 def load_events() -> dict | None:
@@ -573,19 +587,35 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && pinned) 
   const svg = document.getElementById("chart"), tip = document.getElementById("tip");
   const bars = document.getElementById("bars");
   if (!DATA.length) { svg.outerHTML = "<div class='empty'>暂无快照数据</div>"; return; }
-  const W = 960, H = 340, L = 74, R = 16, T = 18, B = 30;
-  const iw = W - L - R, ih = H - T - B;
+  const IDXBASE = __IDXBASE__;
   const hasIdx = DATA.some(p => p.i != null);
+  // Right gutter only widens when there is a second axis to put in it.
+  const W = 960, H = 340, L = 74, R = (hasIdx && IDXBASE) ? 56 : 16, T = 18, B = 30;
+  const iw = W - L - R, ih = H - T - B;
   const es = DATA.map(p => p.e).concat(hasIdx ? DATA.filter(p => p.i != null).map(p => p.i) : []);
   let lo = Math.min(...es, STARTING), hi = Math.max(...es, STARTING);
   const pad = (hi - lo) * 0.06 || 1; lo -= pad; hi += pad;
   const x = i => L + (DATA.length === 1 ? iw / 2 : i * iw / (DATA.length - 1));
   const y = v => T + (hi - v) / (hi - lo) * ih;
   const S = [];
+  // Right axis = the SAME gridlines relabelled in index points. The overlay is
+  // rebased (index_t / index_base x STARTING), so equity value v corresponds to
+  // index level v / STARTING x IDXBASE exactly. Deliberately NOT an independent
+  // scale: the whole point of the overlay is "did we beat 上证", and giving each
+  // series its own range lets any pair of lines be made to look correlated or
+  // divergent by choosing limits. One scale, two readings.
+  const showIdxAxis = hasIdx && IDXBASE;
+  const toIdx = v => v / STARTING * IDXBASE;
   for (let g = 0; g <= 4; g++) {
     const v = lo + (hi - lo) * g / 4, yy = y(v);
     S.push(`<line x1="${L}" y1="${yy}" x2="${W - R}" y2="${yy}" stroke="#eef1f5"/>`);
     S.push(`<text x="${L - 8}" y="${yy + 4}" text-anchor="end" font-size="11" fill="#8a93a2">${Math.round(v).toLocaleString()}</text>`);
+    if (showIdxAxis)
+      S.push(`<text x="${W - R + 8}" y="${yy + 4}" font-size="11" fill="#c08a2e">${toIdx(v).toFixed(0)}</text>`);
+  }
+  if (showIdxAxis) {
+    S.push(`<text x="${W - R + 8}" y="${T - 6}" font-size="10" fill="#c08a2e">上证</text>`);
+    S.push(`<text x="${L - 8}" y="${T - 6}" text-anchor="end" font-size="10" fill="#8a93a2">净值</text>`);
   }
   const step = Math.max(1, Math.round(DATA.length / 8));
   for (let i = 0; i < DATA.length; i += step)
@@ -669,7 +699,8 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && pinned) 
 
 
 def render_html(series, active, trades, stats, details=None, index_rebased=None,
-                events=None, badges=None, generated_at=None, run_status=None) -> str:
+                events=None, badges=None, generated_at=None, run_status=None,
+                idx_base=None) -> str:
     pf = active.get("portfolio", {})
     positions = active.get("activePositions", [])
     details = details or {}
@@ -782,7 +813,8 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
     js = (CHART_JS
           .replace("__DATA__", json.dumps(chart_data, ensure_ascii=False))
           .replace("__DETAILS__", json.dumps(details, ensure_ascii=False))
-          .replace("__STARTING__", json.dumps(starting)))
+          .replace("__STARTING__", json.dumps(starting))
+          .replace("__IDXBASE__", json.dumps(idx_base)))
 
     return f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -953,15 +985,18 @@ def build(site_dir: Path = SITE_DIR) -> Path:
     stats = compute_stats(series, trades)
     details = collect_day_details(series, trades, build_open_lookup(active, trades))
     starting = (series[0].get("starting") if series else None) or 1000000
-    index_rebased = rebase_index(load_index_closes(),
-                                 [p["date"] for p in series], float(starting))
+    index_closes = load_index_closes()
+    dates = [p["date"] for p in series]
+    index_rebased = rebase_index(index_closes, dates, float(starting))
+    idx_base = index_base(index_closes, dates[0]) if dates else None
     events = load_events()
     badges = load_badges(series)
     site_dir.mkdir(parents=True, exist_ok=True)
     out = site_dir / "index.html"
     out.write_text(render_html(series, active, trades, stats, details=details,
                                index_rebased=index_rebased, events=events,
-                               badges=badges, run_status=load_latest_run_status()),
+                               badges=badges, run_status=load_latest_run_status(),
+                               idx_base=idx_base),
                    encoding="utf-8")
     print(f"[site] {out} — {len(series)} equity points "
           f"({len(index_rebased)} with index overlay), "

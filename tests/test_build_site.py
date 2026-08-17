@@ -234,3 +234,39 @@ def test_rebase_index_forward_fills_holidays():
     assert out == {"2026-02-03": 1000000.0, "2026-02-05": 1100000.0}
     assert bs.rebase_index({}, ["2026-02-03"], 1e6) == {}
     assert bs.rebase_index(closes, ["2026-01-01"], 1e6) == {}  # no base yet
+
+
+def test_index_base_is_the_rebase_anchor():
+    closes = {"2026-02-02": 3000.0, "2026-02-04": 3300.0}
+    assert bs.index_base(closes, "2026-02-03") == 3000.0   # last close <= start
+    assert bs.index_base(closes, "2026-02-02") == 3000.0
+    assert bs.index_base(closes, "2026-01-01") is None     # no base yet
+    assert bs.index_base({}, "2026-02-03") is None
+    assert bs.index_base(closes, "") is None
+
+
+def test_right_axis_labels_index_points_on_the_shared_scale():
+    """Second Y axis (2026-08-17): the SAME gridlines, relabelled in 上证 points.
+
+    Not an independent scale on purpose — the overlay exists to answer "did we
+    beat 上证", and separate ranges would let the two lines be made to look
+    correlated or divergent by choosing limits.
+    """
+    series = [{"date": "2026-02-03", "equity": 1000000.0, "ret_pct": 0.0,
+               "positions": 0, "starting": 1000000},
+              {"date": "2026-08-14", "equity": 985708.0, "ret_pct": -1.43,
+               "positions": 8, "starting": 1000000}]
+    active = {"portfolio": {"totalEquity": 985708.0}, "activePositions": []}
+    stats = bs.compute_stats(series, [])
+    idx = {"2026-02-03": 1000000.0, "2026-08-14": 965000.0}
+
+    html_out = bs.render_html(series, active, [], stats, index_rebased=idx,
+                              idx_base=4067.738)
+    assert "const IDXBASE = 4067.738" in html_out
+    assert "v / STARTING * IDXBASE" in html_out          # exact, not a second fit
+    assert ">上证</text>" in html_out and ">净值</text>" in html_out
+    assert "(hasIdx && IDXBASE) ? 56 : 16" in html_out   # gutter only when used
+
+    # no index → no right axis, and the gutter stays narrow
+    plain = bs.render_html(series, active, [], stats)
+    assert "const IDXBASE = null" in plain
