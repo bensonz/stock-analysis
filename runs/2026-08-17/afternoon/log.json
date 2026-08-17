@@ -1,0 +1,117 @@
+{
+  "date": "2026-08-17",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1786953319.801561,
+      "errors": [],
+      "end": 1786953383.59124,
+      "duration_sec": 63.8
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8802,
+      "tokens": {
+        "input_tokens": 143273,
+        "output_tokens": 18360
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 248.6,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1786953632.289896,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h160 (observation): 组合已满8仓（Rule 4最大8仓），今日top1板块电子化学品Ⅱ的最强候选安集科技（RPS120=89.73、dist_ma全部合规）因无空位只能进skip_...",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=52",
+        "Hypothesis: Created h161 (observation): 睿创微纳中报披露日8/18（明日）落在事件窗口≤2个交易日，按Rule 2c应减半或等待——财报前夜不建仓，避免承担不对称的隔夜跳空风险。...",
+        "Hypothesis: Created h162 (observation): 重入标的巨化股份（8/11止损离场后8/13重入）当前-0.9%且距止损仅4.16%（stop_proximity WATCH）；历史重入n=9均值-3.71%...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "600160",
+                "name": "巨化股份",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 40.84,
+                "stopLoss": 39.14,
+                "distance_pct": 4.16,
+                "suggestion": "🟠 WATCH — 4.2% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1786953632.871596,
+      "duration_sec": 0.6
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 600160 — 🟠 WATCH — 4.2% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 313.0
+  }
+}
