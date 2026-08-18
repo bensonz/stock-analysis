@@ -1,0 +1,102 @@
+{
+  "date": "2026-08-18",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 17.47,
+      "pnl_pct": 12.0,
+      "note": "PnL+12.0%，止损已提至成本15.6；石油石化未入bottom5；day15但+3%时间止损阈值远未触发"
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "action": "HOLD",
+      "price": 51.93,
+      "pnl_pct": 19.4,
+      "note": "PnL+19.4%，止损已锁+10%(47.86)；元件今日入bottom5为第1日，未达3日冷区卖出条件，MLCC涨价逻辑未破"
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "action": "HOLD",
+      "price": 37.53,
+      "pnl_pct": 5.2,
+      "note": "PnL+5.2%，高于+3%时间止损阈值；充电桩3C认证逻辑未变，电网设备未入bottom5"
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "price": 123.99,
+      "pnl_pct": 7.8,
+      "note": "PnL+7.8%，今日-4.73%为普涨后回吐，止损已提至成本115.07；元件入bottom5仅第1日，不触发3日冷区卖出"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 53.9,
+      "pnl_pct": 21.5,
+      "note": "PnL+21.5%，止损已锁+10%(48.79)；CRO链景气（药明康德中报超预期带动，来源：输入快讯）"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 167.18,
+      "pnl_pct": 32.2,
+      "note": "PnL+32.2%为组合最强仓，止损已锁+10%(139.15)；H1净利52.3亿超预期并上调全年指引（来源：21财经8/3），让利润奔跑"
+    },
+    {
+      "code": "688019",
+      "name": "安集科技",
+      "action": "HOLD",
+      "price": 272.98,
+      "pnl_pct": 4.2,
+      "note": "新仓第2日PnL+4.2%未触发任何止损；CMP抛光液龙头+半导体材料涨价逻辑未变"
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "HOLD",
+      "price": 134.98,
+      "pnl_pct": 11.5,
+      "note": "PnL+11.5%，止损已提至成本121.1；半导体今日回吐但未入bottom5，无卖出信号"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 8,
+    "totalEquity": 989927.0,
+    "dayPnl": -1363.0,
+    "dayReturnPct": -0.14,
+    "totalReturnPct": -1.01,
+    "unrealizedPnl": 42772.0,
+    "realizedPnl": -52845.0,
+    "cashPct": 62.77
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.6443,
+    "up": 2121,
+    "down": 3292,
+    "positive_indices": [
+      "上证指数"
+    ],
+    "negative_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 81,
+    "limit_downs": 6,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.64:1, 1/3 major indices green, 81 limit-ups / 6 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "上证指数+0.19%午后翻红，深成指-0.56%、创业板指-0.92%收跌；涨跌家数2121:3292(0.64:1)，涨停81/跌停6，广度偏弱。农业链防御性领涨（种植业+10.02%），驱动为超级厄尔尼诺+霍尔木兹地缘扰动推升全球食品通胀预期（来源：21财经/财联社）；元件(-2.02%)、能源金属、玻璃玻纤等前期热点获利回吐。IV整体偏低（平均IV rank 29.6%，500ETF/300ETF深约20%）。入场门槛未过（涨跌比<1.5:1且仅1/3指数红盘）→不新开仓，持仓全部HOLD"
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "种植业",
+        "chg_pct": 10.02,
+        "trend": "event-driven spike"
+      },
+      {
+        "name": "农业综合Ⅱ",
+        "chg_pct": 5.31,
+        "trend": "defensive rotation"
+      },
+      {
+        "name": "农产品加工",
+        "chg_pct": 4.32,
+        "trend": "defensive rotation"
+      },
+      {
+        "name": "渔业",
+        "chg_pct": 3.35,
+        "trend": "defensive rotation"
+      },
+      {
+        "name": "林业Ⅱ",
+        "chg_pct": 3.17,
+        "trend": "defensive rotation"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "广告营销",
+        "chg_pct": -2.42,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "玻璃玻纤",
+        "chg_pct": -2.33,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "能源金属",
+        "chg_pct": -2.28,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "元件",
+        "chg_pct": -2.02,
+        "trend": "pulled back from hot"
+      },
+      {
+        "name": "数字媒体",
+        "chg_pct": -1.76,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/8 持仓在今日hot sectors；2/8（顺络电子、三环集团）在cold sector（元件，bottom5第1日）",
+    "regime": "农业/防御领涨，科技成长（元件、半导体、能源金属）获利回吐，高低切换明显"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "PnL+12.0%，止损已提至成本15.6；石油石化未入bottom5；day15但+3%时间止损阈值远未触发",
+      "sector_rank": "中游（石油石化未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 12.0,
+      "days_held": 15,
+      "exit_price": null
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "action": "HOLD",
+      "reason": "PnL+19.4%，止损已锁+10%(47.86)；元件今日入bottom5为第1日，未达3日冷区卖出条件，MLCC涨价逻辑未破",
+      "sector_rank": "bottom5（元件当日-2.02%，第1日）",
+      "new_stop": null,
+      "pnl_pct": 19.4,
+      "days_held": 11,
+      "exit_price": null
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "action": "HOLD",
+      "reason": "PnL+5.2%，高于+3%时间止损阈值；充电桩3C认证逻辑未变，电网设备未入bottom5",
+      "sector_rank": "中游（电网设备未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 5.2,
+      "days_held": 11,
+      "exit_price": null
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "HOLD",
+      "reason": "PnL+7.8%，今日-4.73%为普涨后回吐，止损已提至成本115.07；元件入bottom5仅第1日，不触发3日冷区卖出",
+      "sector_rank": "bottom5（元件当日-2.02%，第1日）",
+      "new_stop": null,
+      "pnl_pct": 7.8,
+      "days_held": 13,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "PnL+21.5%，止损已锁+10%(48.79)；CRO链景气（药明康德中报超预期带动，来源：输入快讯）",
+      "sector_rank": "中游偏强（医疗服务未入top5，CRO链普涨）",
+      "new_stop": null,
+      "pnl_pct": 21.5,
+      "days_held": 11,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "PnL+32.2%为组合最强仓，止损已锁+10%(139.15)；H1净利52.3亿超预期并上调全年指引（来源：21财经8/3），让利润奔跑",
+      "sector_rank": "中游偏强（医疗服务未入top5，CXO景气）",
+      "new_stop": null,
+      "pnl_pct": 32.2,
+      "days_held": 13,
+      "exit_price": null
+    },
+    {
+      "code": "688019",
+      "name": "安集科技",
+      "action": "HOLD",
+      "reason": "新仓第2日PnL+4.2%未触发任何止损；CMP抛光液龙头+半导体材料涨价逻辑未变",
+      "sector_rank": "中游（电子化学品Ⅱ未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 4.2,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "HOLD",
+      "reason": "PnL+11.5%，止损已提至成本121.1；半导体今日回吐但未入bottom5，无卖出信号",
+      "sector_rank": "中游（半导体未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 11.5,
+      "days_held": 10,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600378",
+      "name": "昊华科技",
+      "reason": "RPS/MA全合规且margin adding，但广度门未过（0.64:1，仅沪指红）且氟化工非今日热点",
+      "rps120": 92.89
+    },
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "reason": "VCP QUALITY、MA收敛为最佳技术形态，但广度门未过+电网设备非热点+8/12刚平仓(-3.08%)重入举证责任未满足",
+      "rps120": 88.86
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "dist_ma20_pct 12.5%>12%极端延伸(Rule 2b)+广度门未过",
+      "rps120": 94.7
+    },
+    {
+      "code": "000725",
+      "name": "京东方A",
+      "reason": "dist_ma5_pct 7.3%>6%追高(Rule 2b)+广度门未过",
+      "rps120": 93.94
+    },
+    {
+      "code": "688131",
+      "name": "皓元医药",
+      "reason": "dist_ma20_pct 19.3%极端延伸(Rule 2b)+广度门未过",
+      "rps120": 92.6
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "8/11刚平仓(-3.52%)重入举证责任未满足+工业金属非热点+广度门未过",
+      "rps120": 89.63
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱市入场门槛（涨跌比≥1.5:1且≥2/3指数红盘）是硬约束：今日涨跌比0.64:1、仅上证指数红盘，多项候选（昊华科技、宏发股份VCP QUALITY）通过RPS/MA检查仍应new_positions:[]，不半仓试错",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "market-regime"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "弱势广度下个股动量胜率骤降，半仓入场仍暴露于系统性回撤；h077已证明硬门槛避免了FOMO入场"
+    },
+    {
+      "text": "热门主题（元件/MLCC）单日从热点跌入bottom5(-2.02%)，板块动量须每日复核；持有股按3日冷区规则处理（今日仅第1日不触发卖出），避免在噪声中误杀赢家",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "主题拥挤后获利回吐速度快，但单日回吐不足以判定趋势反转，3日冷区规则平衡敏感性与稳定性"
+    },
+    {
+      "text": "三环集团+13%后单日-4.73%回吐，成本止损(115.07)有效保护利润；让利润奔跑的正确姿势是机械上移止损，而非首个回撤日恐慌离场",
+      "type": "observation",
+      "tags": [
+        "exit-rule",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "+10%后止损上移至成本，把快速盈利仓变成低风险持仓，弱市中无需重新判断市场即可继续持有"
+    },
+    {
+      "text": "农业链脉冲（种植业+10.02%）是防御性轮动+厄尔尼诺/霍尔木兹事件驱动（来源：21财经、财联社），非动量主线，不作次日追入依据",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "observation",
+      "mechanism": "事件驱动型农业行情与科技主线高低切换，脉冲式主题持续性不确定，需辨别'上涨中的板块'是真趋势还是一日游"
+    }
+  ],
+  "market_summary": "上证指数+0.19%午后翻红，深成指-0.56%、创业板指-0.92%收跌；涨跌家数2121:3292(0.64:1)，涨停81/跌停6，广度偏弱。农业链防御性领涨（种植业+10.02%），驱动为超级厄尔尼诺+霍尔木兹地缘扰动推升全球食品通胀预期（来源：21财经/财联社）；元件(-2.02%)、能源金属、玻璃玻纤等前期热点获利回吐。IV整体偏低（平均IV rank 29.6%，500ETF/300ETF深约20%）。入场门槛未过（涨跌比<1.5:1且仅1/3指数红盘）→不新开仓，持仓全部HOLD",
+  "market_sentiment": "weak",
+  "market_call": "防守"
+}

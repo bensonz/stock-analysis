@@ -1,0 +1,50 @@
+{
+  "date": "2026-08-18",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1787039786.746887,
+      "errors": [],
+      "end": 1787039866.068865,
+      "duration_sec": 79.3
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 9325,
+      "tokens": {
+        "input_tokens": 146442,
+        "output_tokens": 18527
+      },
+      "rounds": 2,
+      "tool_calls_count": 4,
+      "duration_sec": 241.1,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1787040107.274739,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=138",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=67",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=45",
+        "Hypothesis: WARN coerced evidence_type='observation' → supporting",
+        "Hypothesis: Created h166 (observation): 农业链脉冲（种植业+10.02%）是防御性轮动+厄尔尼诺/霍尔木兹事件驱动（来源：21财经、财联社），非动量主线，不作次日追入依据...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1787040107.61499,
+      "duration_sec": 0.3
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 320.7
+  }
+}
