@@ -1,7 +1,7 @@
 {
   "code": "600160",
   "name": "巨化股份",
-  "status": "active",
+  "status": "closed",
   "thesis": "氟化工/制冷剂龙头，RPS120=85.94甜点区，已回踩MA20支撑(dist_ma5=-4.1%不追高)；制冷剂Q3长协涨价超预期+萤石供给收紧",
   "entryDate": "2026-08-13",
   "entrySlot": "afternoon",
@@ -73,15 +73,24 @@
       "change_pct": -0.87,
       "action": "HOLD",
       "note": "重入第3天PnL-0.9%未触发头3日-3%止损；stop_proximity WATCH（距止损¥39.14约4.2%）需盯紧；制冷剂长协涨价逻辑未变"
+    },
+    {
+      "date": "2026-08-18",
+      "slot": "noon",
+      "price": 39.72,
+      "change_pct": -3.59,
+      "action": "SELL",
+      "note": "stop_proximity CRITICAL——现价39.72距止损39.14仅1.46%（h024：跳空风险应主动止损，不等-5%硬触发）；重入第4日PnL-3.59%再次走弱（重入记录n=9均值-3.71%胜率11%）；今日breadth 0.38:1弱势+化学制品非热点。制冷剂涨价逻辑仍在（R32 6.45-6.55万/吨，来源：国信证券8/5），但入场时机错误，先离场待回调企稳"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-08-18",
+  "exitPrice": 39.72,
+  "exitReason": "stop_proximity CRITICAL——现价39.72距止损39.14仅1.46%（h024：跳空风险应主动止损，不等-5%硬触发）；重入第4日PnL-3.59%再次走弱（重入记录n=9均值-3.71%胜率11%）；今日breadth 0.38:1弱势+化学制品非热点。制冷剂涨价逻辑仍在（R32 6.45-6.55万/吨，来源：国信证券8/5），但入场时机错误，先离场待回调企稳",
+  "returnPct": -3.59,
+  "holdingDays": 5,
+  "lessonLearned": "",
   "createdAt": "2026-08-13T00:46:13.769553+08:00",
-  "updatedAt": "2026-08-17T16:10:04.780501+08:00",
-  "trackerVersion": "2.1"
+  "updatedAt": "2026-08-18T11:49:39.462994+08:00",
+  "trackerVersion": "2.1",
+  "exitSlot": "noon"
 }

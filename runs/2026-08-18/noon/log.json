@@ -1,0 +1,53 @@
+{
+  "date": "2026-08-18",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1787024301.915518,
+      "errors": [],
+      "end": 1787024587.722451,
+      "duration_sec": 285.8
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 9196,
+      "tokens": {
+        "input_tokens": 233007,
+        "output_tokens": 23780
+      },
+      "rounds": 3,
+      "tool_calls_count": 9,
+      "duration_sec": 391.6,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1787024979.412742,
+      "actions": [
+        "SELL 600160",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h165 (observation): 重入举证责任再次兑现：巨化股份08-13重入后第4日-3.59%且距止损仅1.46%，触发主动止损。与重入统计(n=9均值-3.71%胜率11%)一致——重入不...",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=137",
+        "Hypothesis: Updated h024 (rule): +1 supporting evidence → hitRate=93%, n=14",
+        "Hypothesis: WARN coerced evidence_type='observation' → supporting",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=53",
+        "Hypothesis: WARN coerced evidence_type='observation' → supporting",
+        "Hypothesis: Updated h152 (hypothesis): +1 supporting evidence → hitRate=100%, n=3",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1787024979.832875,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 677.8000000000001
+  }
+}

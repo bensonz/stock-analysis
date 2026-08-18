@@ -1,0 +1,102 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 233007,
+  "output_tokens": 23780,
+  "rounds": 3,
+  "duration_sec": 391.6,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月18日 种植业 农业板块 大涨 原因",
+        "max_results": 5
+      },
+      "result_length": 2995
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 CXO 2026年8月 中报 业绩 创新药",
+        "max_results": 5
+      },
+      "result_length": 3268
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月18日 大盘 下跌 半导体 元件 行情",
+        "max_results": 5
+      },
+      "result_length": 3226
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "巨化股份 制冷剂 R32 价格 2026年8月",
+        "max_results": 5
+      },
+      "result_length": 3189
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.163.com/dy/article/L4ITA9TU0556JWC6.html",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.caiwennews.com/article/1555770.shtml",
+        "maxChars": 4000
+      },
+      "result_length": 3771
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.ifnews.com/news.html?aid=849998&cid=49",
+        "maxChars": 5000
+      },
+      "result_length": 560
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://caifuhao.eastmoney.com/news/20260804171322459594110",
+        "maxChars": 4000
+      },
+      "result_length": 2931
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://stock.finance.sina.com.cn/stock/view/paper.php?symbol=sh000001&reportid=839298673013",
+        "maxChars": 4000
+      },
+      "result_length": 7
+    }
+  ],
+  "fallback_used": false
+}
