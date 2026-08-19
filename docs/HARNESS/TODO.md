@@ -9,9 +9,16 @@
       note that pre-08-19 statuses are not comparable  ← decide before doctor reads them
 
 ## Stage 2 — doctor.py
-- [ ] **FIRST**: audit whether `log.json` actions and `tracking/*.json` history are
-      written independently (if not, replay is decorative — see plan 2a precondition)
-- [ ] `replay_position()` — rebuild shares/currentStop/allocatedCapital from history[]
+- [ ] **2a-i FIRST, TIME-SENSITIVE**: widen history[] schema — OPEN records
+      shares/stop/allocatedCapital, RAISE_STOP records old_stop/new_stop, SELL records
+      shares/exit_price. Replay coverage starts the day this ships.
+      (Review 08-19 verified current entries carry NONE of these fields, 365/365.)
+- [x] ~~Audit log/state independence~~ — resolved by review: separate call sites, both
+      downstream of one decisions dict; reconciliation proves both writes happened,
+      which is what the ghosts violated
+- [ ] `replay_position()` — from the 2a-i epoch forward ONLY; checker must know the
+      epoch (9 Feb–Mar positions have no history[] at all — zero spurious findings on
+      pre-epoch data is part of the acceptance test)
 - [ ] Both-direction action↔history reconciliation
 - [ ] Conservation: equity identity, Δequity identity, realised identity
 - [ ] Cross-artifact: positions.json ↔ tracking/*.json ↔ snapshot ↔ report claims
@@ -28,9 +35,15 @@
 
 ## Stage 4 — scheduling
 - [ ] launchd plist for the pipeline (11:35 / 15:35 Asia/Shanghai, weekdays)
+      — note: StartCalendarInterval coalesces missed events on wake; a powered-off
+      machine runs nothing, which is why D7 exists
 - [ ] Retire the openclaw pipeline cron job (keep the agent for the sweep)
 - [ ] Heartbeat: expected-slot vs landed-manifest, independent of the invoker
 - [ ] Decide heartbeat notification channel
+- [ ] D7 off-machine dead-man's switch: scheduled GitHub Action checks a run commit
+      landed for the expected slot; verify the pipeline PUSHES (not just commits) —
+      if it only commits locally, the Action measures push staleness, which still
+      catches a dark fortnight
 
 ## Stage 5 — daily agent sweep
 - [ ] Sweep prompt/spec (standing question + explicit coverage reporting)
@@ -38,9 +51,16 @@
 - [ ] Schedule after the afternoon run
 - [ ] Retention/index so the files stay readable in bulk
 
+## Stage 1 leftovers (from review)
+- [ ] The 7 permanently-red tests are normalized deviance in our own quality gate —
+      "7 failed" is the new "degraded". Fix, or mark xfail with a written reason each,
+      so a fresh red actually stands out.
+
 ## Known bugs found on 2026-08-19, not yet fixed
 - [ ] 4 unexplained ghost positions: 02-13 (300373), 02-25 (600499), 02-26 (600096),
-      03-11 (002497/600096/603191) — root cause never established
+      03-11 (002497/600096/603191) — root cause never established. Review twist:
+      closed/ HAS a 300373 file with entryDate 02-13, so ghosts eventually existed
+      without apply ever logging the OPEN
 - [ ] `2026-03-11`: `ERROR OPEN 002497: unsupported operand type(s) for //: 'float'`
       — a TypeError in sizing; is it still reachable?
 - [ ] 21 run dirs have no manifest at all

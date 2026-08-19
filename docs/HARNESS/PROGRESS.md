@@ -28,3 +28,22 @@ findings no longer set status; a rule that fails to run still degrades. 14 of th
 
 **Next**: Stage 2 doctor.py, starting with the log/state independence audit — if
 Phase 3 writes both from one object, replay proves nothing and the design changes.
+
+## 2026-08-19 (later) — plan review
+
+Self-review before building. Three material findings, all folded into the plan:
+
+1. **2a replay was unimplementable as written** (verified): all 365 history entries
+   across 63 positions carry only {date, slot, price, change_pct, action, note} —
+   no shares/stop/capital. 9 Feb–Mar positions have no history[] at all — exactly
+   the ghost era. Split 2a into schema-widening (ships first, time-sensitive) /
+   action↔history reconciliation (possible today) / full replay post-epoch.
+2. **Heartbeat blind spot**: same-machine watchers can't see machine-off — plausibly
+   the real cause of the 33pp gap. Added D7 off-machine dead-man's switch (GitHub
+   Action over run commits).
+3. **Ordering inverted cost/benefit**: heartbeat is hours and covers the most
+   expensive class; doctor is days. Execution order revised.
+
+Also: drift gets a mandatory observe-only burn-in; sweep findings persist until
+acknowledged (D8); the 7 permanently-red tests flagged as our own normalized
+deviance; 300373 oddity logged (closed/ has the "ghost" with entryDate 02-13).

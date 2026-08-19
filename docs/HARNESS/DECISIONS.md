@@ -69,3 +69,19 @@ written independently — a precondition to verify, not assume.
 An empty findings list otherwise reads as proof of health. It usually means the check
 did not run, the data was missing, or nobody looked. Each daily file states coverage
 explicitly.
+
+## D7 — The absence watcher must be partly off-machine (review, 2026-08-19)
+
+Every same-machine watcher shares the machine's fate: a Mac that is off runs neither
+the pipeline nor the thing meant to notice the pipeline didn't run. The most expensive
+incident (03-13→03-26, −33pp) is plausibly exactly this. Fix: a dead-man's switch
+outside the machine — scheduled GitHub Action checking that a run commit landed for
+the expected slot (runs are already committed and pushed; infra exists). Local
+heartbeat still worth having for fast, rich diagnostics; the Action is the backstop.
+
+## D8 — Sweep findings persist until acknowledged (review, 2026-08-19)
+
+A dated file nobody is forced to revisit is a write-only alarm stream — the failure
+this plan documents twice (94% degraded, 100% phantom timeouts). An unacknowledged
+finding therefore reappears in every subsequent daily file and run report until a
+resolution line is written next to it. Acknowledgment is a written act, not a read.

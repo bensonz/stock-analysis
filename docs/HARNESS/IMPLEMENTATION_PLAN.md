@@ -39,19 +39,36 @@ Two rules that come straight from the failures:
 - **Sweep history, not just now.** Every incident was found late; a present-tense check
   would have missed all twelve.
 
-### 2a. Replay invariant (the strongest single check)
-Each `tracking/<code>.json` carries an append-only `history[]` of
-`{date, slot, action, price}`. Therefore `shares`, `currentStop`, `allocatedCapital`
-are *pure functions of that history*. Check both directions:
-- every position's fields reproduce from replaying its own history
-- every run action has a matching history entry, and vice versa
+### 2a. Replay invariant — REVISED after review (2026-08-19)
 
-Would have caught: 02-13 ghost, 03-11 crash, 07-20 orphan, 08-17 report lie — none
-anticipated.
+**Review finding (verified):** history entries carry only
+`{date, slot, price, change_pct, action, note}` — across all 365 entries in all 63
+positions, **no shares, no stop values, no capital**. A RAISE_STOP's new stop exists
+only inside free-text `note`. State cannot be replayed from an event log that never
+recorded the state-changing values. Additionally **9 positions have no history[] at
+all — precisely the Feb–Mar ghost era** (300373, 600499, 688002…), so a naive
+historical sweep is blind exactly where the unexplained incidents live.
 
-**Precondition (must verify first)**: the log and the state must be written
-*independently*. If Phase 3 serialises both from one in-memory object they will agree
-while both are wrong, and this check is decorative. **Audit before building.**
+Split into three parts:
+
+- **2a-i. Widen the event schema — SHIP IMMEDIATELY.** OPEN records
+  `shares/stop/allocatedCapital`; RAISE_STOP records `old_stop/new_stop` as fields;
+  SELL records `shares/exit_price`. Time-sensitive in a way nothing else here is:
+  replay coverage begins the day this lands, and each day of delay is another day of
+  permanently unreplayable history.
+- **2a-ii. Action↔history reconciliation — possible today.** Both `log.json` actions
+  and `history[]` carry date+action+price; check both directions across all history
+  since the schema epoch. (Independence audit still applies: log lines are written by
+  run_daily, history by position_manager — separate call sites, but both downstream
+  of the same decisions dict. What reconciliation proves is that *both writes
+  happened*, which is exactly what the ghosts violated.)
+- **2a-iii. Full state replay** — only from the 2a-i schema date forward. Positions
+  older than the epoch are checked by 2a-ii and conservation only, and the checker
+  must know the epoch so it emits zero spurious findings on pre-epoch data.
+
+Oddity logged during review: `closed/` contains a 300373 position with entryDate
+2026-02-13 — the very date apply never logged an OPEN for it. The ghost positions
+eventually *existed*. Root cause still unknown; see TODO.
 
 ### 2b. Conservation identities
 - `equity == cash + Σ(shares × price)`, derived two independent ways
@@ -65,7 +82,9 @@ Any residual beyond rounding is a defect that nobody had to predict.
 has a manifest. No future-dated entries. Every open position has a stop.
 
 **Success criteria**: running it over the full history reproduces the 12 known
-incidents and finds nothing spurious.
+incidents and finds nothing spurious. (Honesty note: that is a regression test, not
+proof of generality — the real test is the CHECKLIST drill of deliberately breaking
+something live and watching it surface.)
 **Tests**: every check ships with a deliberately-broken fixture proving it fires (see
 CHECKLIST.md — this is non-negotiable).
 **Status**: Not Started
@@ -80,7 +99,10 @@ holes from being born silent.
 - **3a. Structural drift**: compare each run against the trailing 20 — sections
   present, candidate count, decision count, artifact sizes, phase durations. Flags a
   half-dead data source or an LLM that quietly stopped emitting a field, with no rule
-  written in advance.
+  written in advance. **Highest false-alarm risk in the plan** — and false alarms are
+  what killed both previous layers. Mandatory two-week observe-only burn-in with a
+  measured flap count; it may not write to the report until its spurious rate on
+  known-good runs is ~zero.
 - **3b. Fail-loud audit**: sweep for bare `except:`, `except Exception: pass`, and
   `.get(k, <plausible default>)` on load-bearing paths. Missing/unknown must render as
   an explicit marker, never a plausible value. The null-visibility rule exists as
@@ -100,8 +122,13 @@ Split by nature of the work (rationale in DECISIONS.md):
 - **Pipeline execution → launchd.** Deterministic script, native to macOS, survives
   reboot, authoritative exit code, no LLM in the loop.
 - **Daily sweep → agent cron.** Judgement work; an agent is the right tool.
-- **Heartbeat → independent of both.** Reads `runs/*/manifest.json` and asks "did a
-  good run land for every expected slot". The invoker must never be the source of
+- **Heartbeat → independent of both, and partly OFF-MACHINE.** A same-machine
+  watcher cannot report that the machine was off or asleep — plausibly the actual
+  cause of the 03-13→03-26 gap, the single most expensive incident (−33pp). Local
+  layer: reads `runs/*/manifest.json` and asks "did a good run land for every
+  expected slot". Off-machine layer (D7): scheduled GitHub Action checking that a
+  run commit landed for the expected slot, alerting on silence — runs are already
+  committed and pushed, so the infra exists. The invoker must never be the source of
   truth for success.
 
 **Status**: Not Started
@@ -119,9 +146,21 @@ and the diff of `tracking/`. Writes one dated file: what it checked, what it fou
 what it could not verify. **Explicitly lists what it could NOT check** — absence of
 findings must never read as proof of health.
 
+**Findings lifecycle (D8)**: an unacknowledged finding persists into every subsequent
+daily file and the run report until a resolution line is written. Otherwise the daily
+files become the next write-only alarm stream — the very failure this plan documents
+twice.
+
 **Status**: Not Started
 
 ---
+
+## Execution order (revised by review)
+
+`2a-i schema widening` (immediately — accruing loss daily) → `Stage 4`
+(heartbeat + launchd; hours of work, addresses the 33pp class) → `rest of Stage 2` →
+`Stage 3` → `Stage 5`. Original ordering put days of doctor work ahead of the
+cheapest fix for the most expensive known failure.
 
 ## What this still won't catch
 
