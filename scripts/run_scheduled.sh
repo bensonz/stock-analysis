@@ -10,6 +10,12 @@
 # is the run's manifest on disk. This wrapper only executes and timestamps.
 set -uo pipefail
 export PATH="/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:$PATH"
+# Direct GitHub push hangs from this network; the owner's doctrine is the
+# Privoxy proxy, applied inline for manual pushes. The scheduler has no shell
+# to inherit it from, so export it as PUSH_PROXY — run_daily applies it ONLY
+# to the git push subprocess, never to the LLM/data fetches (which must not
+# inherit Privoxy's availability). Address lives here, not in run_daily.
+export PUSH_PROXY="${PUSH_PROXY:-http://127.0.0.1:8118}"
 cd "$(dirname "$0")/.."
 echo "=== run_scheduled $(date '+%Y-%m-%d %H:%M:%S %z') args=${*:---run} ==="
 source .venv/bin/activate

@@ -73,6 +73,15 @@
       connection refused. Sina healthy (0.7s/call). DB healed 08-19 via
       PRICEDB_UPDATE_BUDGET=7200 update (sina gets the remainder).
 
+## 2026-08-20 morning — night recovery complete
+- [x] DB healed for 08-19 (5,129 rows via sina, 0 failures; eastmoney dead)
+- [x] factors verify OK (9 ex-div re-derived, 5,189 forward-filled)
+- [x] Catch-up afternoon run: **success**, all gates passed, 4 HOLDs,
+      committed + pushed (manual proxy push)
+- [x] launchd push gap: run_daily now applies PUSH_PROXY (from
+      run_scheduled.sh) ONLY to the git push subprocess; wrapper no longer
+      exports proxy globally (would have routed LLM/data through Privoxy)
+
 ## Known bugs found on 2026-08-19, not yet fixed
 - [ ] 4 unexplained ghost positions: 02-13 (300373), 02-25 (600499), 02-26 (600096),
       03-11 (002497/600096/603191) — root cause never established. Review twist:

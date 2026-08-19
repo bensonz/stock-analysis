@@ -2325,6 +2325,18 @@ def main():
                 # common with GitHub over HTTP/2, so fall back to HTTP/1.1 on the
                 # final attempt. A push failure leaves the commit intact locally
                 # to be pushed by the next run.
+                # Push proxy: direct GitHub push hangs from this network, and
+                # the owner's doctrine is Privoxy, applied narrowly. PUSH_PROXY
+                # (set by ops/launchd wrapper run_scheduled.sh) is applied ONLY
+                # to the git subprocess here — never exported globally, or the
+                # LLM/data fetches would also ride through the proxy and the
+                # whole run would inherit Privoxy's availability.
+                push_env = os.environ.copy()
+                push_proxy = os.getenv("PUSH_PROXY", "").strip()
+                if push_proxy:
+                    push_env["HTTPS_PROXY"] = push_proxy
+                    push_env["HTTP_PROXY"] = push_proxy
+
                 max_attempts = 3
                 for attempt in range(1, max_attempts + 1):
                     push_cmd = ["git", "push"]
@@ -2333,7 +2345,7 @@ def main():
                         push_cmd = ["git", "-c", "http.version=HTTP/1.1", "push"]
                     try:
                         subprocess.run(push_cmd, cwd=str(PROJECT_ROOT), check=True,
-                                       capture_output=True)
+                                       capture_output=True, env=push_env)
                         print(f"  Pushed (attempt {attempt}).", file=sys.stderr)
                         break
                     except subprocess.CalledProcessError as e:
