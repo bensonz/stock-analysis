@@ -7,9 +7,32 @@
   "entryPrice": 44.05,
   "exitPrice": 41.16,
   "returnPct": -6.56,
-  "holdingDays": 12,
+  "holdingDays": 8,
   "sector": "磷化工",
   "lessonLearned": "",
   "entrySlot": "afternoon",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "holdingDaysMethod": "trading_sessions(pricedb)",
+  "exitReason": "V2 Rule 5 hard stop triggered. Entry 44.05, -5% stop = 41.85. Current price 41.16 = -6.56% PnL. AUTOMATIC SELL, no exceptions. Today -2.05% further decline. Sector (农化制品/磷化工) under pressure from 化学原料 weakness (-2.66% today). Price below all key stops. Cut and move on.",
+  "exitReasonBackfilled": "runs/2026-03-10/output/daily_summary.json",
+  "history": [
+    {
+      "date": "2026-02-26",
+      "slot": "afternoon",
+      "price": 44.05,
+      "change_pct": 0,
+      "action": "OPEN",
+      "note": "synthetic (backfilled 2026-08-19 from record fields)",
+      "synthetic": true
+    },
+    {
+      "date": "2026-03-10",
+      "slot": "afternoon",
+      "price": 41.16,
+      "change_pct": -6.56,
+      "action": "SELL",
+      "note": "synthetic (backfilled 2026-08-19 from record fields)",
+      "synthetic": true
+    }
+  ]
 }

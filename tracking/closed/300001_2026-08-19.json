@@ -166,11 +166,12 @@
   "exitPrice": 36.46,
   "exitReason": "PnL+2.2%跌破+3%警戒线（前日已明示'后续3日任一天跌破+3%即SELL'），day12逼近15日时间止损；电网设备未入top/bottom5，恐慌日收缩边际仓位先落袋",
   "returnPct": 2.24,
-  "holdingDays": 15,
+  "holdingDays": 10,
   "lessonLearned": "",
   "createdAt": "2026-08-04T11:40:35.799183+08:00",
   "updatedAt": "2026-08-19T11:42:25.877484+08:00",
   "trackerVersion": "2.1",
   "entrySlot": "noon",
-  "exitSlot": "noon"
+  "exitSlot": "noon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

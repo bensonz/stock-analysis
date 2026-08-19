@@ -7,8 +7,31 @@
   "entryPrice": 114.65,
   "exitPrice": 109.19,
   "returnPct": -4.76,
-  "holdingDays": 29,
+  "holdingDays": 15,
   "sector": "半导体设备",
   "lessonLearned": "突破关键阻力位后未能守住(¥120→¥109)是趋势恶化信号。time_decay规则对趋势型标的(非事件驱动型)仍然适用。延期观察的前提是动能在恢复，而非在恶化。",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "holdingDaysMethod": "trading_sessions(pricedb)",
+  "exitReason": "持仓第21个交易日，现价¥109.19(+0.24%)，PnL=-4.76%。已超time_decay的20天阈值且PnL<5%。03-02曾给予宽限期至03-06观察，但从¥120.09(+4.75%)两天内暴跌至¥109.19(-4.76%)，回撤幅度达9.5pp。虽然上周突破¥120但未能守住，说明突破失败。根据LEARNINGS#18的催化剂例外条款：近3日PnL从正转负(非从负转正)，不满足延期条件。红外热成像thesis长期有效但短期动能严重受损。执行time_decay平仓，避免重蹈赤峰黄金式长期耗着。这次与赤峰黄金不同：赤峰当时PnL在转正且有地缘催化即将爆发，而睿创微纳当前是突破失败+动能逆转。",
+  "exitReasonBackfilled": "runs/2026-03-04/output/daily_summary.json",
+  "history": [
+    {
+      "date": "2026-02-03",
+      "slot": null,
+      "price": 114.65,
+      "change_pct": 0,
+      "action": "OPEN",
+      "note": "synthetic (backfilled 2026-08-19 from record fields)",
+      "synthetic": true
+    },
+    {
+      "date": "2026-03-04",
+      "slot": "afternoon",
+      "price": 109.19,
+      "change_pct": -4.76,
+      "action": "SELL",
+      "note": "synthetic (backfilled 2026-08-19 from record fields)",
+      "synthetic": true
+    }
+  ]
 }

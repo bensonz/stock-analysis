@@ -46,11 +46,12 @@
   "exitPrice": 304.31,
   "exitReason": "CRITICAL stop proximity: only 1.35% above stop at 300.21. Below all MAs (dist_ma5 -2.5%, dist_ma10 -5.6%, dist_ma20 -15.9%). Margin deleveraging (chg5 -21.55%). Gap risk is real — proactive stop-loss per h024. Sector 元件 not in top sectors. Better to exit at -1.31% than risk -3%+ gap-down tomorrow.",
   "returnPct": -1.31,
-  "holdingDays": 3,
+  "holdingDays": 1,
   "lessonLearned": "",
   "createdAt": "2026-07-31T11:45:38.788764+08:00",
   "updatedAt": "2026-08-03T11:41:04.607992+08:00",
   "trackerVersion": "2.1",
   "entrySlot": "noon",
-  "exitSlot": "noon"
+  "exitSlot": "noon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

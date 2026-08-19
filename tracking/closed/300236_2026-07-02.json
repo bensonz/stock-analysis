@@ -194,7 +194,7 @@
   "exitPrice": 121.98,
   "exitReason": "Stop hit intraday. Trailing stop ¥123.28 breached (low ¥113.35, current ¥121.98). Sector (电子化学品Ⅱ) adjacent to semiconductor bottom-5. Volume 10.9× normal = heavy distribution. Lock in +29.8% gain.",
   "returnPct": 29.82,
-  "holdingDays": 23,
+  "holdingDays": 16,
   "lessonLearned": "",
   "createdAt": "2026-06-09T15:39:26.780692+08:00",
   "updatedAt": "2026-07-02T11:40:19.323335+08:00",
@@ -205,5 +205,6 @@
     "reason": "closed/{code}.json 单文件命名导致再次建仓平仓时覆盖旧回合; 从git历史恢复"
   },
   "entrySlot": "afternoon",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

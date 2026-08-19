@@ -84,10 +84,11 @@
   "exitPrice": 61.55,
   "exitReason": "Price 61.55 remains above entry but has broken below the raised stop 57.26 intraday with low 57.84 nearby, and today collapsed -14.87% after weak 2026Q1 data; position has been held 7 days and momentum character is damaged. Sector 塑料 is not in top hot sectors, so protect capital and exit rather than hope.",
   "returnPct": 18.25,
-  "holdingDays": 7,
+  "holdingDays": 5,
   "lessonLearned": "",
   "createdAt": "2026-04-20T11:44:00.029416+08:00",
   "updatedAt": "2026-04-27T14:38:03.987197+08:00",
   "trackerVersion": "2.1",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

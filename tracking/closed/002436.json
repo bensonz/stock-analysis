@@ -92,11 +92,12 @@
   "exitPrice": 48.5,
   "exitReason": "Sector 元件 dropped to BOTTOM 5 (-6.34%). Today -9.01% on 8.8x MAVOL30 = institutional distribution. Stop proximity CRITICAL at 1.63% (48.50 vs 47.71 stop). Proactive sell to lock +22% before mechanical stop triggers. ABF thesis valid but sector rotation demands exit. Per Rule 5: sector cold = sell regardless of individual thesis.",
   "returnPct": 21.98,
-  "holdingDays": 8,
+  "holdingDays": 5,
   "lessonLearned": "",
   "createdAt": "2026-06-15T11:41:24.228987+08:00",
   "updatedAt": "2026-06-23T15:38:43.598709+08:00",
   "trackerVersion": "2.1",
   "entrySlot": "afternoon",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

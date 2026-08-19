@@ -46,11 +46,12 @@
   "exitPrice": 17.41,
   "exitReason": "Hard stop already violated. Current price 17.41 vs entry 22.03 is -20.97%, well beyond the -5% rule, and days held have reached the 10-day time-stop window with severe underperformance. Sector is not in leadership and no averaging or waiting is justified.",
   "returnPct": -20.97,
-  "holdingDays": 14,
+  "holdingDays": 10,
   "lessonLearned": "",
   "createdAt": "2026-03-12T17:11:30.221545+08:00",
   "updatedAt": "2026-03-26T14:20:11.075858+08:00",
   "trackerVersion": "2.1",
   "entrySlot": "afternoon",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

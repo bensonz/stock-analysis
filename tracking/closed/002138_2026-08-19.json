@@ -166,11 +166,12 @@
   "exitPrice": 47.93,
   "exitReason": "现价47.93距+10%锁利止损47.86仅0.15%(CRITICAL)，今日-7.7%放量下跌；元件板块连续2日入bottom5(-7.34%)，h024主动止损离场不等硬触发",
   "returnPct": 10.16,
-  "holdingDays": 15,
+  "holdingDays": 10,
   "lessonLearned": "",
   "createdAt": "2026-08-04T11:40:35.792759+08:00",
   "updatedAt": "2026-08-19T11:42:25.872657+08:00",
   "trackerVersion": "2.1",
   "entrySlot": "noon",
-  "exitSlot": "noon"
+  "exitSlot": "noon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

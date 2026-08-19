@@ -10,5 +10,27 @@
   "holdingDays": 1,
   "sector": "半导体设备",
   "lessonLearned": "IV Rank极低(12.2%)时不应开新仓，尤其是已经涨了8%的标的。LEARNINGS#10(等回调)和#13(检查多日累计涨幅)的组合应用：即使催化再强(+1522%)，在市场波动率极低+短期涨幅已大的情况下入场，遭遇系统性回调的损失会很大。新规则：当IV Rank<15%且候选标的5日涨幅>6%时，一律WATCH等回调，不开仓。",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "exitReason": "持仓第2个交易日，今日暴跌-7.89%至¥185.80(收盘¥186.60)。PnL从0%直接恶化至-7.89%，距止损¥182.00仅2.1%。Q4净利+1522%催化虽强，但昨日开仓即遭市场系统性暴跌——这验证了IV极度乐观下追高的风险(LEARNINGS#10/13: 大涨后追高风险)。芯碁微装5日累计涨幅在开仓时约8.2%已偏高，今日直接跌穿多个支撑。虽止损182未严格触及(收盘186.6)，但盘中低点185.8距止损极近。考虑到：(1)仅第2天就-7.89%动能极差，(2)IV极度乐观下市场可能继续调整，(3)收盘价186.6距止损182仅2.5%，主动止损控制风险。",
+  "exitReasonBackfilled": "runs/2026-03-03/output/daily_summary.json",
+  "history": [
+    {
+      "date": "2026-03-02",
+      "slot": null,
+      "price": 201.72,
+      "change_pct": 0,
+      "action": "OPEN",
+      "note": "synthetic (backfilled 2026-08-19 from record fields)",
+      "synthetic": true
+    },
+    {
+      "date": "2026-03-03",
+      "slot": "afternoon",
+      "price": 186.6,
+      "change_pct": -7.5,
+      "action": "SELL",
+      "note": "synthetic (backfilled 2026-08-19 from record fields)",
+      "synthetic": true
+    }
+  ]
 }

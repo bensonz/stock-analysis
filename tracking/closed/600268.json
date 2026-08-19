@@ -70,11 +70,12 @@
   "exitPrice": 15.06,
   "exitReason": "Price 15.06 is only 1.13% above current stop 14.89, down -2.27% vs entry, with weak volume at 40.1% of MAVOL30 and a CRITICAL stop proximity violation. In a panic tape, proactively exit near-stop names rather than wait for a gap through support.",
   "returnPct": -2.27,
-  "holdingDays": 8,
+  "holdingDays": 6,
   "lessonLearned": "",
   "createdAt": "2026-04-16T11:49:22.393519+08:00",
   "updatedAt": "2026-04-24T11:37:09.812641+08:00",
   "trackerVersion": "2.1",
   "entrySlot": "afternoon",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

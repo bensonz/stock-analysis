@@ -44,5 +44,10 @@
   "updatedAt": "2026-07-10T15:39:05.174498+08:00",
   "trackerVersion": "2.1",
   "entrySlot": "noon",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "dataQuality": {
+    "t1_violation": "opened noon and sold afternoon of the same session — A-share T+1 forbids this; the sim lacked the guard until 2026-08-19",
+    "exit_price_unverified": "51.24 is below the day's DB low 52.92; next session opened 52.79 (normal gap from close 53.38, odd from 51.24) — the live quote likely never printed",
+    "flagged": "2026-08-19 data audit"
+  }
 }

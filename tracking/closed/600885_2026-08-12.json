@@ -94,11 +94,12 @@
   "exitPrice": 34.65,
   "exitReason": "8天阴跌-3.1%且距止损仅1.99%(CRITICAL)，价格低于MA5/MA10，电网设备非热点，按h024主动离场防gap风险，不等-5%硬止损",
   "returnPct": -3.08,
-  "holdingDays": 8,
+  "holdingDays": 6,
   "lessonLearned": "",
   "createdAt": "2026-08-04T11:40:35.805264+08:00",
   "updatedAt": "2026-08-13T00:46:13.661497+08:00",
   "trackerVersion": "2.1",
   "entrySlot": "noon",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

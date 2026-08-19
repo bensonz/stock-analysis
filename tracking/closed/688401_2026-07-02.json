@@ -194,7 +194,7 @@
   "exitPrice": 95.0,
   "exitReason": "Stop hit intraday. Trailing stop ¥93.51 breached (low ¥86.21, current ¥95.00). Sector 半导体材料 in parent sector 半导体 at bottom-2 (-4.85%). Volume 18.9× normal = extreme distribution. Lock in +30.9% gain.",
   "returnPct": 30.89,
-  "holdingDays": 23,
+  "holdingDays": 16,
   "lessonLearned": "",
   "createdAt": "2026-06-09T15:39:26.785471+08:00",
   "updatedAt": "2026-07-02T11:40:19.328583+08:00",
@@ -205,5 +205,6 @@
     "reason": "closed/{code}.json 单文件命名导致再次建仓平仓时覆盖旧回合; 从git历史恢复"
   },
   "entrySlot": "afternoon",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

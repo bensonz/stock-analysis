@@ -11,5 +11,27 @@
   "sector": "专用设备",
   "lessonLearned": "",
   "entrySlot": "afternoon",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "exitReason": "Only day 3 and already down about -3.7% from entry, which triggers the first-3-days sell rule. Also only 1.4% above hard stop with weak volume; sector support is not visible in today's hot boards.",
+  "exitReasonBackfilled": "runs/2026-03-12/output/daily_summary.json",
+  "history": [
+    {
+      "date": "2026-03-10",
+      "slot": "afternoon",
+      "price": 95.53,
+      "change_pct": 0,
+      "action": "OPEN",
+      "note": "synthetic (backfilled 2026-08-19 from record fields)",
+      "synthetic": true
+    },
+    {
+      "date": "2026-03-12",
+      "slot": "afternoon",
+      "price": 92.0,
+      "change_pct": -3.7,
+      "action": "SELL",
+      "note": "synthetic (backfilled 2026-08-19 from record fields)",
+      "synthetic": true
+    }
+  ]
 }

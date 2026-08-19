@@ -31,6 +31,36 @@ DEFAULT_PORTFOLIO_CONFIG = {
 }
 
 
+class SameDaySellError(ValueError):
+    """A-share T+1: selling shares bought the same session is illegal.
+
+    Raised by close_position; run_daily records it as SKIP SELL (not ERROR —
+    an impossible instruction refused is correct behaviour, not a defect)."""
+
+
+def _trading_days_held(code: str, entry_date: str, exit_date: str) -> int:
+    """Trading sessions in (entry, exit], preferring the price DB (which knows
+    holidays and per-stock suspensions), falling back to weekday count."""
+    try:
+        import sqlite3
+        db = sqlite3.connect(PROJECT_ROOT / "data" / "pricedb" / "ashare_prices.db")
+        n = db.execute(
+            "SELECT COUNT(DISTINCT date) FROM daily_prices WHERE code=? AND date>? AND date<=?",
+            (str(code).split(".")[0], entry_date, exit_date)).fetchone()[0]
+        db.close()
+        if n:
+            return n
+    except Exception:
+        pass
+    from datetime import date as _date, timedelta as _td
+    d, e, n = _date.fromisoformat(entry_date), _date.fromisoformat(exit_date), 0
+    while d < e:
+        d += _td(days=1)
+        if d.weekday() < 5:
+            n += 1
+    return n
+
+
 def _now_iso() -> str:
     return datetime.now().astimezone().isoformat()
 
@@ -315,14 +345,24 @@ def close_position(
     pos = _read_json(pos_file)
     exit_date = date or datetime.now().strftime("%Y-%m-%d")
 
+    # A-share T+1: shares bought today cannot be sold today. The sim executed
+    # 奥来德 688378 as a same-session round trip on 2026-07-10 (noon open,
+    # afternoon sell) — impossible in reality, and at a price below the day's
+    # low. Refuse; the caller records a SKIP and the next session may sell.
+    if exit_date == pos.get("entryDate"):
+        raise SameDaySellError(
+            f"T+1: {code} was opened {pos.get('entryDate')} and cannot be sold "
+            f"the same session; position stays open for the next run")
+
     pos["status"] = "closed"
     pos["exitDate"] = exit_date
     pos["exitPrice"] = exit_price
     pos["exitReason"] = reason
     pos["returnPct"] = round((exit_price - pos["entryPrice"]) / pos["entryPrice"] * 100, 2)
-    entry_dt = datetime.strptime(pos["entryDate"], "%Y-%m-%d")
-    exit_dt = datetime.strptime(exit_date, "%Y-%m-%d")
-    pos["holdingDays"] = (exit_dt - entry_dt).days
+    # Trading sessions, not calendar days (unified 2026-08-19: every consumer —
+    # the time stop, the audits, ANALYST.md — speaks in trading days, but this
+    # field held calendar days since inception; 32 historical records recomputed).
+    pos["holdingDays"] = _trading_days_held(code, pos["entryDate"], exit_date)
     pos["lessonLearned"] = lesson
     pos["updatedAt"] = _now_iso()
     if slot:

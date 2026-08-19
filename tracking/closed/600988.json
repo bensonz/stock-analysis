@@ -7,8 +7,31 @@
   "entryPrice": 39.78,
   "exitPrice": 39.98,
   "returnPct": 0.5,
-  "holdingDays": 24,
+  "holdingDays": 12,
   "sector": "黄金",
   "lessonLearned": "黄金股波动率极高(PnL从-7.79%到+3.92%再到+0.50%),持仓24天无明显趋势方向。LEARNINGS已确认黄金股不适合趋势交易。此外当watchlist评级从BUY降至WATCH后应更早考虑退出,不应等到时间止损才行动。",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "holdingDaysMethod": "trading_sessions(pricedb)",
+  "exitReason": "持仓24天PnL仅+0.50%,触发时间止损。黄金波动率过高无法形成趋势,今日反弹回正是最佳退出窗口",
+  "exitReasonBackfilled": "runs/2026-02-27/output/daily_summary.json",
+  "history": [
+    {
+      "date": "2026-02-03",
+      "slot": null,
+      "price": 39.78,
+      "change_pct": 0,
+      "action": "OPEN",
+      "note": "synthetic (backfilled 2026-08-19 from record fields)",
+      "synthetic": true
+    },
+    {
+      "date": "2026-02-27",
+      "slot": "afternoon",
+      "price": 39.98,
+      "change_pct": 0.5,
+      "action": "SELL",
+      "note": "synthetic (backfilled 2026-08-19 from record fields)",
+      "synthetic": true
+    }
+  ]
 }

@@ -87,10 +87,11 @@
   "exitPrice": 39.72,
   "exitReason": "stop_proximity CRITICAL——现价39.72距止损39.14仅1.46%（h024：跳空风险应主动止损，不等-5%硬触发）；重入第4日PnL-3.59%再次走弱（重入记录n=9均值-3.71%胜率11%）；今日breadth 0.38:1弱势+化学制品非热点。制冷剂涨价逻辑仍在（R32 6.45-6.55万/吨，来源：国信证券8/5），但入场时机错误，先离场待回调企稳",
   "returnPct": -3.59,
-  "holdingDays": 5,
+  "holdingDays": 3,
   "lessonLearned": "",
   "createdAt": "2026-08-13T00:46:13.769553+08:00",
   "updatedAt": "2026-08-18T11:49:39.462994+08:00",
   "trackerVersion": "2.1",
-  "exitSlot": "noon"
+  "exitSlot": "noon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

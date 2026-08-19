@@ -109,7 +109,7 @@
   "exitPrice": 85.88,
   "exitReason": "TIME STOP triggered: 10 trading days held, PnL +2.79% < 3% threshold. Stop proximity WARNING: only 2.71% above breakeven stop (83.55). Today -5.10% with volume 3.55x MAVOL30 signals distribution. Stock peaked +11.70% on 6/19, gave back -8.0% in 2 sessions. Mechanical stop-raise protected gains; exit proactively before gap-through of 83.55 stop. Can re-enter if it proves itself again.",
   "returnPct": 2.79,
-  "holdingDays": 13,
+  "holdingDays": 8,
   "lessonLearned": "",
   "createdAt": "2026-06-09T15:39:26.787737+08:00",
   "updatedAt": "2026-06-22T15:39:25.851057+08:00",
@@ -120,5 +120,6 @@
     "reason": "closed/{code}.json 单文件命名导致再次建仓平仓时覆盖旧回合; 从git历史恢复"
   },
   "entrySlot": "afternoon",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

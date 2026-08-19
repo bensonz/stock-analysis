@@ -346,7 +346,10 @@ class TestPositionManager(unittest.TestCase):
         self.assertEqual(pos["status"], "closed")
         self.assertEqual(pos["exitPrice"], 120.0)
         self.assertEqual(pos["returnPct"], 20.0)
-        self.assertEqual(pos["holdingDays"], 31)
+        # trading sessions, not calendar days (semantics unified 2026-08-19);
+        # 2026-01-01 → 2026-02-01 spans 31 calendar days but 21 weekdays
+        # (synthetic code → weekday fallback, no suspension/holiday data)
+        self.assertEqual(pos["holdingDays"], 21)
         self.assertFalse((self.tracking / "600001.json").exists())
         # exitDate in the filename since 2026-08-06 (re-entry overwrote history)
         self.assertTrue((self.tracking / "closed" / "600001_2026-02-01.json").exists())

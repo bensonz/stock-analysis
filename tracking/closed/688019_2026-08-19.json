@@ -55,10 +55,11 @@
   "exitPrice": 254.05,
   "exitReason": "开仓第3日PnL-3.00%触发'-3%在头3日'规则；电子化学品Ⅱ今日bottom5(-7.31%)；stop_proximity WARNING(距止损2.06%)，入场时机错误先离场",
   "returnPct": -3.0,
-  "holdingDays": 2,
+  "holdingDays": 1,
   "lessonLearned": "",
   "createdAt": "2026-08-17T16:10:05.105484+08:00",
   "updatedAt": "2026-08-19T11:42:25.893146+08:00",
   "trackerVersion": "2.1",
-  "exitSlot": "noon"
+  "exitSlot": "noon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

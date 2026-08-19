@@ -11,5 +11,27 @@
   "sector": "通用设备",
   "lessonLearned": "",
   "entrySlot": "afternoon",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "exitReason": "Day-3 loss is about -4.3% versus entry, breaching the first-3-days -3% rule; price is only 0.7% above hard stop and volume is below MAVOL30. Sector is not in today's hot list, so timing failed and capital should be recycled.",
+  "exitReasonBackfilled": "runs/2026-03-12/output/daily_summary.json",
+  "history": [
+    {
+      "date": "2026-03-10",
+      "slot": "afternoon",
+      "price": 52.3,
+      "change_pct": 0,
+      "action": "OPEN",
+      "note": "synthetic (backfilled 2026-08-19 from record fields)",
+      "synthetic": true
+    },
+    {
+      "date": "2026-03-12",
+      "slot": "afternoon",
+      "price": 50.04,
+      "change_pct": -4.32,
+      "action": "SELL",
+      "note": "synthetic (backfilled 2026-08-19 from record fields)",
+      "synthetic": true
+    }
+  ]
 }

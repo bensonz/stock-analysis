@@ -86,7 +86,7 @@
   "exitPrice": 17.89,
   "exitReason": "Held 9 trading days with only about +9.22% open gain from entry, still below +10% threshold for a fresh stop upgrade, sector 建筑装饰 is not in today's hot top list, and latest volume is below MAVOL30 per rule violation. With V2's 10-day time stop approaching and momentum confirmation weak after yesterday's跌停 reversal, this is a capital-recycling exit rather than waiting for thesis rescue.",
   "returnPct": 9.22,
-  "holdingDays": 9,
+  "holdingDays": 7,
   "lessonLearned": "",
   "createdAt": "2026-04-07T14:38:30.422544+08:00",
   "updatedAt": "2026-04-16T11:49:22.254211+08:00",
@@ -104,5 +104,6 @@
     }
   },
   "entrySlot": "afternoon",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

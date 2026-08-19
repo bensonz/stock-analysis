@@ -60,9 +60,10 @@
   "exitPrice": 57.35,
   "exitReason": "Sector alignment broke badly: holding is in 有色金属 while cold list shows 贵金属 -5.05% and 工业金属 -3.51%. Stock is down -6.32% today to 57.35 from prev_close 61.22, which also breaches the hard -5% stop versus 54.25 entry threshold (51.54 stop remains the mechanical line, but today's tape confirms sector failure risk). In V2, cold-sector gravity and panic regime both argue to exit rather than hope.",
   "returnPct": 5.71,
-  "holdingDays": 5,
+  "holdingDays": 3,
   "lessonLearned": "",
   "createdAt": "2026-05-22T11:36:51.029089+08:00",
   "updatedAt": "2026-05-27T11:41:54.310736+08:00",
-  "trackerVersion": "2.1"
+  "trackerVersion": "2.1",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

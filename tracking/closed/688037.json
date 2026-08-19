@@ -78,7 +78,7 @@
   "exitPrice": 187.44,
   "exitReason": "Held 8 trading days and only about +5.68% versus entry, far from the +10% stop-raise trigger. Sector semicap has intraday support from board news, but it is not in supplied top sector leadership, volume is only 73.7% of MAVOL30, and the stock had a heavy down day on 2026-04-15. V2 says weak follow-through within a 10-day window should be cut and re-entered later if strength returns.",
   "returnPct": 5.68,
-  "holdingDays": 8,
+  "holdingDays": 6,
   "lessonLearned": "",
   "createdAt": "2026-04-08T11:51:08.642286+08:00",
   "updatedAt": "2026-04-16T11:49:22.260995+08:00",
@@ -95,5 +95,6 @@
     }
   },
   "entrySlot": "afternoon",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

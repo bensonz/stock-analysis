@@ -62,11 +62,12 @@
   "exitPrice": 8.23,
   "exitReason": "Hard stop already violated. Current price 8.23 vs entry 9.75 is -15.59%, far beyond the non-negotiable -5% exit. Sector is not in the hot leadership group and position has also exceeded the 10-day time window without positive progress.",
   "returnPct": -15.59,
-  "holdingDays": 16,
+  "holdingDays": 12,
   "lessonLearned": "",
   "createdAt": "2026-03-10T12:18:41.727833+08:00",
   "updatedAt": "2026-03-26T14:20:11.073593+08:00",
   "trackerVersion": "2.1",
   "entrySlot": "afternoon",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

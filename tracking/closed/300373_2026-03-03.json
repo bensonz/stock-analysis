@@ -7,7 +7,7 @@
   "entryPrice": 86.07,
   "exitPrice": 79.0,
   "returnPct": -8.21,
-  "holdingDays": 18,
+  "holdingDays": 6,
   "sector": "功率半导体",
   "lessonLearned": "半导体涨价催化thesis需要验证业绩兑现周期。入场时RPS=88.4%合理但催化剂(MCU涨价)偏概念化，无明确业绩数据支撑。开仓后14天趋势持续恶化，说明入场时机不佳(02-13买入后连续回调)。教训：催化剂需更具体(如有明确涨价幅度/订单数据)，不能仅依赖行业趋势性判断。",
   "_recovered": {
@@ -17,5 +17,32 @@
     "note": "returnPct -8.21% vs 当日summary -8.37% 差0.16pp, 以tracker文件为准"
   },
   "entrySlot": "afternoon",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "holdingDaysMethod": "trading_sessions(pricedb)",
+  "exitReason": "今日暴跌-8.37%至¥78.87，距止损¥77.50仅1.8%。持仓14个交易日，PnL从-0.53%恶化至-8.37%。半导体板块今日遭重创，单日跌幅远超正常波动。虽未严格触及止损线，但距止损极近且动能严重恶化——继续持有的风险回报比已不合理。根据LEARNINGS#1(RPS区间选股)和止损纪律，主动止损保护资金。",
+  "exitReasonBackfilled": "runs/2026-03-03/output/daily_summary.json",
+  "history": [
+    {
+      "date": "2026-02-13",
+      "slot": "afternoon",
+      "price": 86.07,
+      "change_pct": 0,
+      "action": "OPEN",
+      "note": "synthetic (backfilled 2026-08-19 from record fields)",
+      "synthetic": true
+    },
+    {
+      "date": "2026-03-03",
+      "slot": "afternoon",
+      "price": 79.0,
+      "change_pct": -8.21,
+      "action": "SELL",
+      "note": "synthetic (backfilled 2026-08-19 from record fields)",
+      "synthetic": true
+    }
+  ],
+  "dataQuality": {
+    "provenance_unclear": "no OPEN action exists in any run log for this entry; report of 2026-02-13 claimed it, apply never recorded it, yet the position later existed (ERROR HOLD 03-03, then this close). Root cause unknown.",
+    "flagged": "2026-08-19 data audit"
+  }
 }

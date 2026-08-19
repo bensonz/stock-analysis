@@ -37,10 +37,11 @@
   "exitPrice": 14.92,
   "exitReason": "Sector rule overrides: position sector 冶钢原料 is in bottom 5 today and cold. Price also sits only 4.49% above stop and stock is below entry after 4 days, while sector gravity turned negative. Exit rather than hope.",
   "returnPct": -0.53,
-  "holdingDays": 4,
+  "holdingDays": 2,
   "lessonLearned": "",
   "createdAt": "2026-04-16T11:49:22.396673+08:00",
   "updatedAt": "2026-04-20T11:43:59.907810+08:00",
   "trackerVersion": "2.1",
-  "entrySlot": "afternoon"
+  "entrySlot": "afternoon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

@@ -14,6 +14,13 @@ commit would have shipped corrupted books.
 
 The guard makes that class of accident loud instead of silent. It does not
 fix the underlying global-reassignment pattern.
+
+2026-08-19: proven necessary a second time, and widened. A test patched
+``TRACKING_DIR`` but not ``CLOSED_DIR`` (bound at import from the former —
+patching one does not rebind the other) and wrote two synthetic closed
+trades into the LIVE tracking/closed/. This guard did not fire because it
+only watched four named files. It now also fingerprints every position
+file in tracking/ and tracking/closed/ — the books are the books.
 """
 import hashlib
 from pathlib import Path
@@ -34,6 +41,10 @@ def _state_digest():
     for rel in LIVE_STATE:
         f = root / rel
         digests[rel] = hashlib.sha256(f.read_bytes()).hexdigest() if f.exists() else None
+    # every position file, open and closed — additions and deletions count too
+    for pat in ("tracking/[0-9]*.json", "tracking/closed/*.json"):
+        for f in sorted(root.glob(pat)):
+            digests[str(f.relative_to(root))] = hashlib.sha256(f.read_bytes()).hexdigest()
     return digests
 
 
@@ -41,7 +52,9 @@ def _state_digest():
 def guard_live_tracking_state():
     before = _state_digest()
     yield
-    changed = [rel for rel, h in _state_digest().items() if before.get(rel) != h]
+    after = _state_digest()
+    changed = sorted({rel for rel in set(before) | set(after)
+                      if before.get(rel) != after.get(rel)})
     if changed:
         pytest.fail(
             "tests mutated LIVE portfolio state: " + ", ".join(changed) + "\n"

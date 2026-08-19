@@ -63,6 +63,7 @@ from data_collector import (
     save_strategy_pool_debug,
 )
 from position_manager import (
+    SameDaySellError,
     load_active_positions,
     load_portfolio_config,
     compute_realized_pnl,
@@ -1502,6 +1503,18 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
                 "price": data.get("position_prices", {}).get(code, {}).get("price"),
                 "pnl_pct": d.get("pnl_pct"),
                 "note": d.get("reason", ""),
+            })
+        except SameDaySellError as e:
+            # Refusing an impossible instruction is correct behaviour, not a
+            # defect — SKIP (visible in report + Gate 3 note), never ERROR
+            # (which now hard-fails the gate). The position stays open and the
+            # next session's run re-decides at a real price.
+            log["actions"].append(f"SKIP SELL {code}: {e}")
+            daily_actions.append({
+                "code": code, "name": d.get("name", ""), "action": "HOLD",
+                "price": data.get("position_prices", {}).get(code, {}).get("price"),
+                "pnl_pct": d.get("pnl_pct"),
+                "note": f"卖出被T+1拦下（当日开仓不可当日卖）: {d.get('reason', '')}"[:300],
             })
         except Exception as e:
             log["actions"].append(f"ERROR {action} {code}: {e}")

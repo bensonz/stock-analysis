@@ -44,9 +44,10 @@
   "exitPrice": 74.63,
   "exitReason": "Rule 5 triggered: -4.14% in first 3 days → bad timing, cut. Only 0.9% above stop (¥73.96). Entry premise (MA20支撑) invalid — price ¥74.63 well below MA20 ¥78.00. 储能板块多数走低, sector momentum faded. iv_filter + overextended_entry both flagged. Cut before gap-down through stop.",
   "returnPct": -4.14,
-  "holdingDays": 3,
+  "holdingDays": 1,
   "lessonLearned": "",
   "createdAt": "2026-07-03T11:41:08.618757+08:00",
   "updatedAt": "2026-07-06T11:39:50.402102+08:00",
-  "trackerVersion": "2.1"
+  "trackerVersion": "2.1",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

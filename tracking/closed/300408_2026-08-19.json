@@ -182,11 +182,12 @@
   "exitPrice": 112.2,
   "exitReason": "现价112.2已跌破盈亏平衡止损115.07(-2.56%)，今日-9.51%放量；元件板块连续2日bottom5(-7.34%)；time_decay 13/15且PnL-2.5%，板块轮动出清压倒MLCC涨价逻辑",
   "returnPct": -2.49,
-  "holdingDays": 19,
+  "holdingDays": 12,
   "lessonLearned": "",
   "createdAt": "2026-07-31T11:45:38.781742+08:00",
   "updatedAt": "2026-08-19T11:42:25.881726+08:00",
   "trackerVersion": "2.1",
   "entrySlot": "noon",
-  "exitSlot": "noon"
+  "exitSlot": "noon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }

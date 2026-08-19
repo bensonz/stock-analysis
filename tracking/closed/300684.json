@@ -7,9 +7,32 @@
   "entryPrice": 55.39,
   "exitPrice": 51.64,
   "returnPct": -6.77,
-  "holdingDays": 27,
+  "holdingDays": 13,
   "sector": "散热材料",
   "lessonLearned": "",
   "entrySlot": "afternoon",
-  "exitSlot": "afternoon"
+  "exitSlot": "afternoon",
+  "holdingDaysMethod": "trading_sessions(pricedb)",
+  "exitReason": "MANDATORY SELL. PnL = -6.77%, breached V2 -5% hard stop. No exceptions. Also 19 trading days with negative return = time stop triggered (threshold 10 days, <3% gain). Sector (电子化学品) not in hot sectors today, tech broadly crushed. Price is truth — cut and move on.",
+  "exitReasonBackfilled": "runs/2026-03-09/output/daily_summary.json",
+  "history": [
+    {
+      "date": "2026-02-10",
+      "slot": "afternoon",
+      "price": 55.39,
+      "change_pct": 0,
+      "action": "OPEN",
+      "note": "synthetic (backfilled 2026-08-19 from record fields)",
+      "synthetic": true
+    },
+    {
+      "date": "2026-03-09",
+      "slot": "afternoon",
+      "price": 51.64,
+      "change_pct": -6.77,
+      "action": "SELL",
+      "note": "synthetic (backfilled 2026-08-19 from record fields)",
+      "synthetic": true
+    }
+  ]
 }

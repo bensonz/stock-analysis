@@ -38,11 +38,12 @@
   "exitPrice": 81.59,
   "exitReason": "STOP BREACHED: 81.59 < 83.22 stop. -6.86% from entry in 3 days. Sector 半导体 in bottom5 (-4.48%). Multiple rule violations (iv_filter, overextended_entry, stop_proximity). Rule 5: -5% from entry = automatic SELL. -3% in first 3 days = automatic SELL. Sector gravity overwhelms individual thesis.",
   "returnPct": -6.86,
-  "holdingDays": 3,
+  "holdingDays": 1,
   "lessonLearned": "",
   "createdAt": "2026-07-31T15:46:11.125228+08:00",
   "updatedAt": "2026-08-03T11:41:04.599259+08:00",
   "trackerVersion": "2.1",
   "entrySlot": "afternoon",
-  "exitSlot": "noon"
+  "exitSlot": "noon",
+  "holdingDaysMethod": "trading_sessions(pricedb)"
 }
