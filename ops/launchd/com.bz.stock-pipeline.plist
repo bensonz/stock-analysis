@@ -3,7 +3,7 @@
 <plist version="1.0">
   <dict>
     <key>Label</key><string>com.bz.stock-pipeline</string>
-    <key>Comment</key><string>A-share daily pipeline, 11:35+15:35 CST weekdays. Source of truth: ops/launchd/ in the repo — edit there, reinstall, never edit ~/Library copy. Replaced the openclaw cron 2026-08-19 (60 phantom timeouts; DECISIONS.md D2).</string>
+    <key>Comment</key><string>A-share daily pipeline, 11:35+15:05 CST weekdays. Source of truth: ops/launchd/ in the repo — edit there, reinstall, never edit ~/Library copy. Replaced the openclaw cron 2026-08-19 (60 phantom timeouts; DECISIONS.md D2).</string>
     <key>ProgramArguments</key>
     <array>
       <string>/bin/bash</string>
@@ -13,15 +13,15 @@
     <key>StartCalendarInterval</key>
     <array>
       <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>11</integer><key>Minute</key><integer>35</integer></dict>
-      <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>15</integer><key>Minute</key><integer>35</integer></dict>
+      <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>15</integer><key>Minute</key><integer>5</integer></dict>
       <dict><key>Weekday</key><integer>2</integer><key>Hour</key><integer>11</integer><key>Minute</key><integer>35</integer></dict>
-      <dict><key>Weekday</key><integer>2</integer><key>Hour</key><integer>15</integer><key>Minute</key><integer>35</integer></dict>
+      <dict><key>Weekday</key><integer>2</integer><key>Hour</key><integer>15</integer><key>Minute</key><integer>5</integer></dict>
       <dict><key>Weekday</key><integer>3</integer><key>Hour</key><integer>11</integer><key>Minute</key><integer>35</integer></dict>
-      <dict><key>Weekday</key><integer>3</integer><key>Hour</key><integer>15</integer><key>Minute</key><integer>35</integer></dict>
+      <dict><key>Weekday</key><integer>3</integer><key>Hour</key><integer>15</integer><key>Minute</key><integer>5</integer></dict>
       <dict><key>Weekday</key><integer>4</integer><key>Hour</key><integer>11</integer><key>Minute</key><integer>35</integer></dict>
-      <dict><key>Weekday</key><integer>4</integer><key>Hour</key><integer>15</integer><key>Minute</key><integer>35</integer></dict>
+      <dict><key>Weekday</key><integer>4</integer><key>Hour</key><integer>15</integer><key>Minute</key><integer>5</integer></dict>
       <dict><key>Weekday</key><integer>5</integer><key>Hour</key><integer>11</integer><key>Minute</key><integer>35</integer></dict>
-      <dict><key>Weekday</key><integer>5</integer><key>Hour</key><integer>15</integer><key>Minute</key><integer>35</integer></dict>
+      <dict><key>Weekday</key><integer>5</integer><key>Hour</key><integer>15</integer><key>Minute</key><integer>5</integer></dict>
     </array>
     <key>StandardOutPath</key><string>/Users/bz/Work/Personal/stock-analysis/data/launchd/pipeline.log</string>
     <key>StandardErrorPath</key><string>/Users/bz/Work/Personal/stock-analysis/data/launchd/pipeline.log</string>

@@ -34,7 +34,7 @@
 - [ ] Decide which are real bugs vs intentional degradation
 
 ## Stage 4 — scheduling
-- [x] launchd plist (11:35 / 15:35 CST weekdays) — `com.bz.stock-pipeline`,
+- [x] launchd plist (11:35 / 15:05 CST weekdays — owner moved 15:35→15:05 on 08-19, restoring symmetry with the +5min noon slot; 15:35 was inherited from openclaw, never chosen) — `com.bz.stock-pipeline`,
       source of truth in ops/launchd/, wrapper scripts/run_scheduled.sh, logs in
       data/launchd/ (git-ignored). Installed + smoke-tested 2026-08-19 15:06.
       StartCalendarInterval coalesces missed events on wake; powered-off machine
