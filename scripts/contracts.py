@@ -30,6 +30,7 @@ class GateResult:
     passed: bool
     hard_fails: list[str] = field(default_factory=list)
     soft_warns: list[str] = field(default_factory=list)
+    notes: list[str] = field(default_factory=list)
 
 
 class PipelineGate:
@@ -39,6 +40,7 @@ class PipelineGate:
         self.name = name
         self.hard_fails: list[str] = []
         self.soft_warns: list[str] = []
+        self.notes: list[str] = []
 
     def hard(self, condition: bool, msg: str):
         """Add a hard requirement. If condition is False, pipeline must stop."""
@@ -46,9 +48,25 @@ class PipelineGate:
             self.hard_fails.append(msg)
 
     def soft(self, condition: bool, msg: str):
-        """Add a soft check. If condition is False, log warning but continue."""
+        """Something is WRONG but not fatal. Sets run status to `degraded`.
+
+        Reserve this for actual defects. 2026-08-19: 94% of runs (116/123) were
+        `degraded`, 120 of them on a single dead check — so the status carried no
+        information and nothing ever stood out. Routine observations belong in
+        `note()`.
+        """
         if not condition:
             self.soft_warns.append(msg)
+
+    def note(self, msg: str):
+        """Record something worth seeing that is NOT a defect.
+
+        Recorded in the manifest and surfaced in the report, but does not touch
+        run status. The risk engine's WATCH/WARNING output is the motivating
+        case: a position sitting 4% above its stop is the rules working, not the
+        pipeline degrading.
+        """
+        self.notes.append(msg)
 
     def check(self) -> GateResult:
         """Evaluate the gate. Returns GateResult with pass/fail and messages."""
@@ -58,6 +76,7 @@ class PipelineGate:
             passed=passed,
             hard_fails=list(self.hard_fails),
             soft_warns=list(self.soft_warns),
+            notes=list(self.notes),
         )
 
 
@@ -352,7 +371,13 @@ def validate_llm_output_gate(decisions: dict, data: dict) -> GateResult:
 
     # ── Soft checks ──
     gate.soft(bool(decisions.get("market_summary")), "missing market_summary")
-    gate.soft("watchlist" in decisions, "missing watchlist")
+    # NOTE: there used to be a `gate.soft("watchlist" in decisions, ...)` here.
+    # `watchlist` is the V1 response schema; V2 replaced it with skip_list +
+    # new_positions months ago (see report_generator.py's V1/V2 comments), and
+    # watchlist.json is produced separately by generate_watchlist_json and has
+    # always existed. So the check asked for a key that must not be there and
+    # fired on all 120 V2 runs, single-handedly making 94% of history "degraded".
+    # Removed 2026-08-19. If you want to assert the artifact, assert the FILE.
 
     return gate.check()
 
@@ -393,11 +418,17 @@ def validate_phase3_gate(date: str, apply_log: dict, data: dict,
 
     # Post-apply rule violations
     rule_violations = apply_log.get("post_apply_rule_violations", {})
+    # Rule output is the risk engine doing its job, not the pipeline degrading —
+    # recorded as notes so it reaches the report without setting run status.
+    # A rule that ERRORED is different: that is a real defect.
     if rule_violations.get("status") == "violations":
         for rule in rule_violations.get("rules", []):
             if rule.get("status") == "violations":
                 for v in rule.get("violations", []):
-                    gate.soft(False, f"rule {rule['rule']}: {v.get('suggestion', v.get('code', '?'))}")
+                    gate.note(f"rule {rule['rule']}: {v.get('suggestion', v.get('code', '?'))}")
+    for rule in rule_violations.get("rules", []):
+        if rule.get("error"):
+            gate.soft(False, f"rule {rule.get('rule')} failed to run: {rule['error']}")
 
     # ── Check persisted state consistency ──
     opened_codes = {a.split()[1] for a in actions
@@ -518,6 +549,7 @@ class RunManifest:
             "passed": result.passed,
             "hard_fails": result.hard_fails,
             "soft_warns": result.soft_warns,
+            "notes": getattr(result, "notes", []),
         }
 
     def finalize(self):

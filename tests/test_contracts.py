@@ -548,7 +548,14 @@ class TestPhase3Gate:
         assert result.passed is True
         assert len(result.soft_warns) == 1
 
-    def test_volume_rule_violation_soft_warns(self):
+    def test_rule_violation_is_a_note_not_a_degradation(self):
+        """Risk-engine output must not set run status (2026-08-19).
+
+        A position flagged by the rules is the engine working. Counting it as a
+        soft warn made it indistinguishable from a genuine pipeline defect, and
+        with the dead V1 watchlist check alongside it, 94% of runs (116/123)
+        landed on `degraded` — a status that therefore meant nothing.
+        """
         log = {
             "actions": ["HOLD 605167"],
             "post_apply_rule_violations": {
@@ -562,7 +569,33 @@ class TestPhase3Gate:
         }
         result = validate_phase3_gate("2026-04-09", log, {})
         assert result.passed is True
-        assert len(result.soft_warns) >= 1
+        assert result.soft_warns == []                       # not a defect
+        assert any("below MAVOL30" in n for n in result.notes)   # still surfaced
+
+    def test_a_rule_that_could_not_run_IS_a_degradation(self):
+        """The engine failing to execute is a real defect, unlike its findings."""
+        log = {
+            "actions": ["HOLD 605167"],
+            "post_apply_rule_violations": {
+                "status": "violations",
+                "rules": [{"rule": "check_time_decay", "status": "error",
+                           "error": "ModuleNotFoundError: no module named 'json5'"}],
+            },
+        }
+        result = validate_phase3_gate("2026-04-09", log, {})
+        assert result.passed is True
+        assert any("failed to run" in w for w in result.soft_warns)
+
+    def test_v2_response_no_longer_warns_about_the_v1_watchlist_key(self):
+        """`watchlist` is V1; V2 uses skip_list + new_positions.
+
+        This single dead check fired on all 120 V2 runs.
+        """
+        from contracts import validate_llm_output_gate
+        decisions = {"market_summary": "市场偏多", "position_decisions": [],
+                     "new_positions": [], "skip_list": []}
+        result = validate_llm_output_gate(decisions, {"positions": []})
+        assert not any("watchlist" in w for w in result.soft_warns)
 
 
 # ━━━ RunManifest tests ━━━
