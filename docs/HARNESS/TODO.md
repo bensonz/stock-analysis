@@ -58,6 +58,21 @@
       "7 failed" is the new "degraded". Fix, or mark xfail with a written reason each,
       so a fresh red actually stands out.
 
+## 2026-08-19 night — first launchd fire failed (found same evening)
+- [ ] **Preflight failures leave no trace**: run_daily exited 2 in preflight
+      (pricedb update hard-failed), runs/2026-08-19/afternoon/ has empty
+      input/output dirs — no manifest, no log.json. Only data/launchd/pipeline.log
+      records it. Fix: write a minimal manifest on preflight failure (status
+      failed + provider errors), so manifest-absence always means "never fired".
+- [ ] **Fallback starvation**: cmd_update checks ONE shared budget before each
+      provider — a throttled akshare consumed all 300s (5566 per-stock calls,
+      0 rows each) and sina was SKIPPED, not tried. Violates the akshare→sina
+      degrade-gracefully doctrine. Fix options: per-provider budget slice, or
+      abort the primary after N consecutive empty responses (throttle signature).
+- [ ] eastmoney throttle ESCALATED: 15:40 = empty responses (0 rows), 23:20 =
+      connection refused. Sina healthy (0.7s/call). DB healed 08-19 via
+      PRICEDB_UPDATE_BUDGET=7200 update (sina gets the remainder).
+
 ## Known bugs found on 2026-08-19, not yet fixed
 - [ ] 4 unexplained ghost positions: 02-13 (300373), 02-25 (600499), 02-26 (600096),
       03-11 (002497/600096/603191) — root cause never established. Review twist:
