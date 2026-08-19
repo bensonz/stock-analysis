@@ -47,3 +47,17 @@ Self-review before building. Three material findings, all folded into the plan:
 Also: drift gets a mandatory observe-only burn-in; sweep findings persist until
 acknowledged (D8); the 7 permanently-red tests flagged as our own normalized
 deviance; 300373 oddity logged (closed/ has the "ghost" with entryDate 02-13).
+
+## 2026-08-19 (afternoon) — 2a-i shipped, scheduler swapped
+
+- **2a-i** (`4bfacb6`): OPEN events record shares/stop/allocatedCapital, SELL
+  records shares, RAISE_STOP records old→RESULTING stop (refused lowers marked
+  `stop_not_raised`, never recorded as applied). `HISTORY_SCHEMA_EPOCH =
+  2026-08-19` importable from position_manager. Today's afternoon run is the
+  first recorded in replayable form.
+- **Scheduler**: owner removed the openclaw cron; launchd agent
+  `com.bz.stock-pipeline` installed 15:06, verified loaded, wrapper smoke-tested
+  (--list-runs through the venv). First scheduled fire: 15:35 same day.
+- Also same day, before these: data cleanup (`e512d98`) — see commit for the
+  census; the cleanup itself caught a test leaking synthetic trades into the
+  live closed/ (CLOSED_DIR import-binding), guard widened to all position files.

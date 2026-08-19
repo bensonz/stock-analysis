@@ -34,10 +34,12 @@
 - [ ] Decide which are real bugs vs intentional degradation
 
 ## Stage 4 — scheduling
-- [ ] launchd plist for the pipeline (11:35 / 15:35 Asia/Shanghai, weekdays)
-      — note: StartCalendarInterval coalesces missed events on wake; a powered-off
-      machine runs nothing, which is why D7 exists
-- [ ] Retire the openclaw pipeline cron job (keep the agent for the sweep)
+- [x] launchd plist (11:35 / 15:35 CST weekdays) — `com.bz.stock-pipeline`,
+      source of truth in ops/launchd/, wrapper scripts/run_scheduled.sh, logs in
+      data/launchd/ (git-ignored). Installed + smoke-tested 2026-08-19 15:06.
+      StartCalendarInterval coalesces missed events on wake; powered-off machine
+      runs nothing → D7
+- [x] Openclaw pipeline cron removed by owner 2026-08-19 (launchd is sole scheduler)
 - [ ] Heartbeat: expected-slot vs landed-manifest, independent of the invoker
 - [ ] Decide heartbeat notification channel
 - [ ] D7 off-machine dead-man's switch: scheduled GitHub Action checks a run commit
