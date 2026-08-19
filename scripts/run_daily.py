@@ -1473,9 +1473,12 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
             elif action == "RAISE_STOP":
                 new_stop = d.get("new_stop")
                 if new_stop:
-                    update_position(code, {"new_stop": new_stop})
                     log["actions"].append(f"RAISE_STOP {code} → {new_stop}")
-            # Always update history for active positions
+            # Always update history for active positions. new_stop rides in the
+            # SAME update_position call (2a-i): applying it there lets the
+            # RAISE_STOP entry record old_stop and the RESULTING stop — the
+            # two-call version couldn't know the old value, and a refused
+            # (lower) request must never be recorded as if applied.
             if action in ("HOLD", "RAISE_STOP"):
                 price_data = data.get("position_prices", {}).get(code, {})
                 price = price_data.get("price", 0)
@@ -1485,7 +1488,7 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
                         entry_price = p["entryPrice"]
                         break
                 pnl_pct = round((price - entry_price) / entry_price * 100, 2) if entry_price else 0
-                update_position(code, {
+                payload = {
                     "history_entry": {
                         "date": date,
                         "slot": slot,
@@ -1494,7 +1497,10 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
                         "action": action,
                         "note": d.get("reason", ""),
                     },
-                })
+                }
+                if action == "RAISE_STOP" and d.get("new_stop"):
+                    payload["new_stop"] = d.get("new_stop")
+                update_position(code, payload)
 
             daily_actions.append({
                 "code": code,

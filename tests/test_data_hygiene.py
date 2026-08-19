@@ -102,3 +102,65 @@ def test_every_run_dir_has_a_manifest():
                glob.glob(str(ROOT / "runs" / "*" / "*" / "log.json"))
                if not (Path(lp).parent / "manifest.json").exists()]
     assert missing == [], f"runs without manifest: {missing}"
+
+
+# ── 2a-i: replayable event schema (epoch 2026-08-19) ──
+
+def test_open_event_carries_position_defining_values(tmp_path, monkeypatch):
+    monkeypatch.setattr(pm, "TRACKING_DIR", tmp_path)
+    closed = tmp_path / "closed"; closed.mkdir()
+    monkeypatch.setattr(pm, "CLOSED_DIR", closed)
+    monkeypatch.setattr(pm, "regenerate_positions_json", lambda *a, **k: None)
+    monkeypatch.setattr(pm, "load_portfolio_config", lambda: {
+        "starting_capital": 1000000, "max_positions": 10,
+        "max_position_pct": 10, "min_cash_pct": 0})
+    monkeypatch.setattr(pm, "load_active_positions", lambda: [])
+    monkeypatch.setattr(pm, "build_positions_snapshot", lambda *a, **k: {
+        "portfolio": {"cash": 500000.0, "deployableCash": 500000.0,
+                      "minCashValue": 0.0, "totalEquity": 1000000.0}})
+    pm.open_position({"code": "600000", "name": "测试", "entryPrice": 10.0,
+                      "stopLoss": 9.5, "targetPrice": 11.5, "allocation_pct": 5,
+                      "entryDate": "2026-08-19", "slot": "noon"})
+    pos = json.loads((tmp_path / "600000.json").read_text(encoding="utf-8"))
+    ev = pos["history"][0]
+    assert ev["action"] == "OPEN"
+    # replay fields: without these the event log cannot rebuild the position
+    assert ev["shares"] == pos["shares"] == 2500
+    assert ev["stop"] == 9.5
+    assert ev["allocatedCapital"] == pos["allocatedCapital"] == 25000.0
+
+
+def test_sell_event_carries_shares(tmp_path, monkeypatch):
+    _mk_position(tmp_path, monkeypatch, "2026-08-14")
+    pm.close_position(code="600000", reason="x", exit_price=9.0, date="2026-08-18")
+    closed_files = list((tmp_path / "closed").glob("600000_*.json"))
+    assert len(closed_files) == 1
+    ev = json.loads(closed_files[0].read_text(encoding="utf-8"))["history"][-1]
+    assert ev["action"] == "SELL" and ev["shares"] == 100
+
+
+def test_raise_stop_event_records_old_and_resulting_stop(tmp_path, monkeypatch):
+    _mk_position(tmp_path, monkeypatch, "2026-08-14")
+    pos = pm.update_position("600000", {
+        "new_stop": 9.8,
+        "history_entry": {"date": "2026-08-18", "slot": "noon", "price": 10.2,
+                          "change_pct": 2.0, "action": "RAISE_STOP", "note": "n"}})
+    ev = pos["history"][-1]
+    assert (ev["old_stop"], ev["new_stop"]) == (9.5, 9.8)
+    assert pos["currentStop"] == 9.8
+
+    # a LOWER request is refused — the event must record the RESULTING stop,
+    # not the requested one, or replay would apply a raise that never happened
+    pos = pm.update_position("600000", {
+        "new_stop": 9.0,
+        "history_entry": {"date": "2026-08-19", "slot": "noon", "price": 10.0,
+                          "change_pct": 0.0, "action": "RAISE_STOP", "note": "n"}})
+    ev = pos["history"][-1]
+    assert ev["new_stop"] == 9.8 == pos["currentStop"]   # unchanged
+    assert "stop_not_raised" in ev
+
+
+def test_standalone_new_stop_still_works_without_history_entry(tmp_path, monkeypatch):
+    _mk_position(tmp_path, monkeypatch, "2026-08-14")
+    pos = pm.update_position("600000", {"new_stop": 9.9})
+    assert pos["currentStop"] == 9.9

@@ -15,6 +15,13 @@ from typing import Optional
 
 PROJECT_ROOT = Path(__file__).parent.parent
 TRACKING_DIR = PROJECT_ROOT / "tracking"
+
+# History-event schema epoch (2a-i, docs/HARNESS). From this date OPEN entries
+# carry shares/stop/allocatedCapital, SELL entries carry shares, RAISE_STOP
+# entries carry old_stop/new_stop — so position state is replayable from its
+# own event log. Entries BEFORE this date carry only price/action/note and can
+# never be replayed; doctor must treat the eras differently, not equally.
+HISTORY_SCHEMA_EPOCH = "2026-08-19"
 CLOSED_DIR = TRACKING_DIR / "closed"
 DAILY_DIR = TRACKING_DIR / "daily"
 POSITIONS_FILE = TRACKING_DIR / "positions.json"
@@ -375,6 +382,7 @@ def close_position(
         "price": exit_price,
         "change_pct": pos["returnPct"],
         "action": "SELL",
+        "shares": pos.get("shares"),          # 2a-i replay field
         "note": f"{reason}: {lesson}" if lesson else reason,
     })
 
@@ -567,6 +575,10 @@ def open_position(data: dict) -> dict:
                 "price": entry_price,
                 "change_pct": 0,
                 "action": "OPEN",
+                # 2a-i replay fields: the values that define the position
+                "shares": shares,
+                "stop": stop_loss,
+                "allocatedCapital": allocated_capital,
                 "note": data.get("note", f"开仓 {data['name']}"),
             }
         ],
@@ -605,8 +617,26 @@ def update_position(code: str, updates: dict) -> dict:
 
     pos = _read_json(pos_file)
 
-    # Handle history entry — deduplicate by (date, action)
     history_entry = updates.pop("history_entry", None)
+
+    # Handle stop raise BEFORE the history append so a RAISE_STOP entry can
+    # record what actually happened (2a-i). new_stop never lowers; recording
+    # a refused request as if applied would corrupt replay, so the entry gets
+    # the RESULTING stop and an explicit marker when the request was refused.
+    new_stop = updates.pop("new_stop", None)
+    if new_stop is not None:
+        current = pos.get("currentStop", pos.get("stopLoss", 0))
+        applied = new_stop > current
+        if applied:
+            pos["currentStop"] = new_stop
+        if history_entry is not None and history_entry.get("action") == "RAISE_STOP":
+            history_entry["old_stop"] = current
+            history_entry["new_stop"] = new_stop if applied else current
+            if not applied:
+                history_entry["stop_not_raised"] = (
+                    f"requested {new_stop} <= current {current}, refused")
+
+    # Handle history entry — deduplicate by (date, action)
     if history_entry:
         history = pos.setdefault("history", [])
         entry_date = history_entry.get("date")
@@ -624,13 +654,6 @@ def update_position(code: str, updates: dict) -> dict:
                 break
         if not replaced:
             history.append(history_entry)
-
-    # Handle stop raise (never lower)
-    new_stop = updates.pop("new_stop", None)
-    if new_stop is not None:
-        current = pos.get("currentStop", pos.get("stopLoss", 0))
-        if new_stop > current:
-            pos["currentStop"] = new_stop
 
     # Apply remaining updates
     for key, value in updates.items():
