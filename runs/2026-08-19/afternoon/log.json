@@ -1,0 +1,116 @@
+{
+  "date": "2026-08-19",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1787154711.4692621,
+      "errors": [],
+      "end": 1787154782.22366,
+      "duration_sec": 70.8
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 7735,
+      "tokens": {
+        "input_tokens": 246722,
+        "output_tokens": 13416
+      },
+      "rounds": 3,
+      "tool_calls_count": 6,
+      "duration_sec": 203.6,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1787154985.816082,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=23",
+        "Hypothesis: Created h168 (observation): 全市场恐慌中唯一逆势+9.22%的持仓(恒逸石化)正属于今日top5板块'炼化及贸易'——强势板块龙头在系统性去杠杆日有避险虹吸效应，sector-first再...",
+        "Hypothesis: Updated h076 (validated): +1 supporting evidence → hitRate=100%, n=5",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "603127",
+                "name": "昭衍新药",
+                "rule": "stop_proximity",
+                "severity": "WARNING",
+                "currentPrice": 49.8,
+                "stopLoss": 48.79,
+                "distance_pct": 2.03,
+                "suggestion": "🟡 WARNING — only 2.0% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1787154986.2255611,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 603127 — 🟡 WARNING — only 2.0% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 274.8
+  }
+}

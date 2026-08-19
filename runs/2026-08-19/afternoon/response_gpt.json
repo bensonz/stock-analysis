@@ -1,0 +1,174 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "焦炭Ⅱ",
+        "5d_pct": 7.56,
+        "trend": "steady"
+      },
+      {
+        "name": "厨卫电器",
+        "5d_pct": 4.56,
+        "trend": "steady"
+      },
+      {
+        "name": "炼化及贸易",
+        "5d_pct": 2.08,
+        "trend": "steady"
+      },
+      {
+        "name": "股份制银行Ⅱ",
+        "5d_pct": 1.91,
+        "trend": "steady"
+      },
+      {
+        "name": "城商行Ⅱ",
+        "5d_pct": 1.8,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": -9.07,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": -9.04,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": -8.96,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": -8.66,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": -8.56,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "1/4仓位于今日top5板块（恒逸石化-炼化及贸易），3/4在医疗服务/半导体（未入bottom5但科技成长遭重创）",
+    "regime": "美债利率飙升+美股科技暴跌传导，科技成长获利盘集中兑现，资金转向焦炭/银行/炼化等防御与资源"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "全组合唯一逆势仓，今日+9.22%；炼化及贸易居top5(+2.08%)，sector-first正样本；H1净利+2500.73%、文莱炼化核心引擎（来源：百度搜索/网易）；止损已锁+10%¥17.16，让利润奔跑",
+      "sector_rank": "top 5%",
+      "new_stop": 17.16,
+      "pnl_pct": 22.3,
+      "days_held": 16,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "PnL+12.3%，+10%锁利止损¥48.79未破；医疗服务未入bottom5，CRO链景气（药明康德中报超预期）未破；但现价49.8距止损仅2.03%（pipeline WARNING），明早跳空跌破48.79即机械止损",
+      "sector_rank": "top 30%",
+      "new_stop": 48.79,
+      "pnl_pct": 12.3,
+      "days_held": 12,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "PnL+29.6%为组合最强仓，止损已锁+10%¥139.15；H1净利超预期并上调全年指引逻辑未破，医疗服务未入bottom5，让利润奔跑",
+      "sector_rank": "top 30%",
+      "new_stop": 139.15,
+      "pnl_pct": 29.6,
+      "days_held": 14,
+      "exit_price": null
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "HOLD",
+      "reason": "PnL+5.7%，保本止损¥121.1上方5.7%；半导体未入bottom5不触发板块轮出；Q2营收首破30亿美元、订单排至Q4（来源：中新经纬8/14）；但科创50-6.89%，若半导体明日入bottom5需重评",
+      "sector_rank": "top 40%",
+      "new_stop": 121.1,
+      "pnl_pct": 5.7,
+      "days_held": 11,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601886",
+      "name": "江河集团",
+      "reason": "dist_ma10_pct=18.6%远超8%追高红线（Rule 2b）直接排除；装修装饰板块非top30%；且今日entry_regime=panic硬阻断",
+      "rps120": 88.97
+    },
+    {
+      "code": "688392",
+      "name": "骄成超声",
+      "reason": "dist_ma10_pct=13.0%、dist_ma20_pct=25.2%极度延伸（Rule 2b）；锂电专用设备非热点；panic硬阻断",
+      "rps120": 91.23
+    },
+    {
+      "code": "600188",
+      "name": "兖矿能源",
+      "reason": "RPS120=92.53在92-95扩展区，需sector top10%/0风险/催化>50%三选一，个股属动力煤非今日top5板块；panic硬阻断",
+      "rps120": 92.53
+    },
+    {
+      "code": "601918",
+      "name": "新集能源",
+      "reason": "RPS120=93.46扩展区+margin去杠杆(chg5_pct=-5.58%)+IV rank 68.95%，风险因子叠加；煤炭非top5板块；panic硬阻断",
+      "rps120": 93.46
+    },
+    {
+      "code": "603132",
+      "name": "金徽股份",
+      "reason": "VCP SETUP但margin剧烈去杠杆(chg5_pct=-35.19%)；铅锌板块非top30%；panic硬阻断",
+      "rps120": 85.81
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌日硬阻断(entry_regime=panic, breadth 0.09:1, 130跌停, 0/3指数红)把new_positions强制为[]——449只上涨的单边下跌日，任何新多单次日大概率被套；这正是不在恐慌里抄底反弹的纪律兑现",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "硬阻断把情绪化的'便宜了想抄底'转化为机械的现金保护"
+    },
+    {
+      "text": "全市场恐慌中唯一逆势+9.22%的持仓(恒逸石化)正属于今日top5板块'炼化及贸易'——强势板块龙头在系统性去杠杆日有避险虹吸效应，sector-first再次验证",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "恐慌日资金集中涌入少数防御/资源板块，板块强势即资金偏好"
+    },
+    {
+      "text": "电子化学品Ⅱ(-9.07%)与元件(-9.04%)连续bottom5，已传导至关联持仓（安集/三环/顺络当日清仓）；半导体尚未入bottom5但随科创50(-6.89%)重挫，需把'关联板块连续bottom5'作为半导体仓的提前预警，而非等半导体自身入榜",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "同一产业链的冷区会沿资金流出路径向相邻细分传导"
+    }
+  ],
+  "market_summary": "极度恐慌日：上证-2.4%、深成-5.01%、创业板-6.26%、科创50-6.89%；涨跌449:5069（0.09:1），涨停38/跌停130，f10=130、f7_10=929，超5000只下跌（每日经济新闻8/19）。驱动为隔夜美债利率飙升（30年期5.32%）+费半-4.98%传导，电子板块全天净流出581.88亿（新浪财经8/19）。热门仅焦炭Ⅱ(+7.56%)、厨卫电器(+4.56%)、炼化及贸易(+2.08%)、银行；科技成长(电子化学品-9.07%、元件-9.04%、通信设备-8.66%)领跌。IV整体'极度恐慌'(avg rank 0.71，科创50 79.9% tight)。仓位4/10、现金86%，entry_regime=panic硬阻断新开仓，今日持仓仅恒逸石化逆势+9.22%。",
+  "market_sentiment": "panic",
+  "market_call": "防御"
+}

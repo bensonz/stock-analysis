@@ -1,0 +1,69 @@
+{
+  "date": "2026-08-19",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 19.08,
+      "pnl_pct": 22.3,
+      "note": "全组合唯一逆势仓，今日+9.22%；炼化及贸易居top5(+2.08%)，sector-first正样本；H1净利+2500.73%、文莱炼化核心引擎（来源：百度搜索/网易）；止损已锁+10%¥17.16，让利润奔跑"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 49.8,
+      "pnl_pct": 12.3,
+      "note": "PnL+12.3%，+10%锁利止损¥48.79未破；医疗服务未入bottom5，CRO链景气（药明康德中报超预期）未破；但现价49.8距止损仅2.03%（pipeline WARNING），明早跳空跌破48.79即机械止损"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 164.0,
+      "pnl_pct": 29.6,
+      "note": "PnL+29.6%为组合最强仓，止损已锁+10%¥139.15；H1净利超预期并上调全年指引逻辑未破，医疗服务未入bottom5，让利润奔跑"
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "HOLD",
+      "price": 128.01,
+      "pnl_pct": 5.7,
+      "note": "PnL+5.7%，保本止损¥121.1上方5.7%；半导体未入bottom5不触发板块轮出；Q2营收首破30亿美元、订单排至Q4（来源：中新经纬8/14）；但科创50-6.89%，若半导体明日入bottom5需重评"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 971151.0,
+    "dayPnl": -2232.0,
+    "dayReturnPct": -0.23,
+    "totalReturnPct": -2.88,
+    "unrealizedPnl": 21470.0,
+    "realizedPnl": -50319.0,
+    "cashPct": 86.08
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.0886,
+    "up": 449,
+    "down": 5069,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 38,
+    "limit_downs": 130,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.09:1, 0/3 major indices green, 38 limit-ups / 130 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "极度恐慌日：上证-2.4%、深成-5.01%、创业板-6.26%、科创50-6.89%；涨跌449:5069（0.09:1），涨停38/跌停130，f10=130、f7_10=929，超5000只下跌（每日经济新闻8/19）。驱动为隔夜美债利率飙升（30年期5.32%）+费半-4.98%传导，电子板块全天净流出581.88亿（新浪财经8/19）。热门仅焦炭Ⅱ(+7.56%)、厨卫电器(+4.56%)、炼化及贸易(+2.08%)、银行；科技成长(电子化学品-9.07%、元件-9.04%、通信设备-8.66%)领跌。IV整体'极度恐慌'(avg rank 0.71，科创50 79.9% tight)。仓位4/10、现金86%，entry_regime=panic硬阻断新开仓，今日持仓仅恒逸石化逆势+9.22%。"
+  }
+}
