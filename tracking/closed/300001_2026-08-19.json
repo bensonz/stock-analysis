@@ -1,7 +1,7 @@
 {
   "code": "300001",
   "name": "特锐德",
-  "status": "active",
+  "status": "closed",
   "thesis": "充电桩龙头，特来电23%市场份额全国第一。8/1 3C认证强制实施重塑行业格局，头部集中利好。H1净利预增+20-40%，上半年充电量+47%。拟回购≤6亿。MA距离全部合规（dist_ma5+3.6%, dist_ma10+1.8%）。北向8.2%。",
   "entryDate": "2026-08-04",
   "entryPrice": 35.66,
@@ -152,16 +152,25 @@
       "change_pct": 5.24,
       "action": "HOLD",
       "note": "PnL+5.2%，高于+3%时间止损阈值；充电桩3C认证逻辑未变，电网设备未入bottom5"
+    },
+    {
+      "date": "2026-08-19",
+      "slot": "noon",
+      "price": 36.46,
+      "change_pct": 2.24,
+      "action": "SELL",
+      "note": "PnL+2.2%跌破+3%警戒线（前日已明示'后续3日任一天跌破+3%即SELL'），day12逼近15日时间止损；电网设备未入top/bottom5，恐慌日收缩边际仓位先落袋"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-08-19",
+  "exitPrice": 36.46,
+  "exitReason": "PnL+2.2%跌破+3%警戒线（前日已明示'后续3日任一天跌破+3%即SELL'），day12逼近15日时间止损；电网设备未入top/bottom5，恐慌日收缩边际仓位先落袋",
+  "returnPct": 2.24,
+  "holdingDays": 15,
+  "lessonLearned": "",
   "createdAt": "2026-08-04T11:40:35.799183+08:00",
-  "updatedAt": "2026-08-18T16:01:47.325979+08:00",
+  "updatedAt": "2026-08-19T11:42:25.877484+08:00",
   "trackerVersion": "2.1",
-  "entrySlot": "noon"
+  "entrySlot": "noon",
+  "exitSlot": "noon"
 }

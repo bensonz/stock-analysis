@@ -1,0 +1,244 @@
+# 研究备忘录 2026-08-19
+
+## 1. 市场状态（Market Regime）
+
+**恐慌日。** 上证 -1.96%、深证 -3.97%、创业板 -4.98%、科创50 -6.07%，四大指数全部收绿。Breadth 0.12:1（580涨 / 4927跌 / 34平），涨停31家 / 跌停36家，`f7_10` 高达608家——这是**深度普跌**而非温和回调。`entry_regime = panic`，`hard_block = true`，`sizing_multiplier = 0.0`：**新开仓被硬阻断，不允许任何新多头。**
+
+IV 整体中性（avg_iv_rank 0.396），但结构上偏谨慎：300ETF深 iv_rank 0.79（极高）、深100ETF 0.63（偏高）、创业板ETF 0.44。波动率不便宜，配合恐慌 tape，没有抄底理由。
+
+## 2. 板块分析（Sector Analysis）
+
+- **热点 top5（今日涨跌幅）**：焦炭Ⅱ +7.55%、厨卫电器 +4.57%、房地产服务 +2.32%、炼化及贸易 +2.22%、国有大型银行Ⅱ +1.77% —— **防守+资源轮动**。焦炭强势有产业逻辑支撑：原油站上高位后煤化工成本替代逻辑升温、焦煤现货偏强（来源：搜狐/证券时报检索）。炼化及贸易 top5 直接利好我持有的恒逸石化。
+- **冷区 bottom5**：玻璃玻纤 -7.82%、林业Ⅱ -7.41%、其他电子Ⅱ -7.4%、**元件 -7.34%**、**电子化学品Ⅱ -7.31%** —— 科技电子链被系统性去风险（昨夜美股存储板块大跌、费城半导体指数 -4.98%，来源：新浪财经 8/19）。
+- **持仓对齐**：8 只持仓中 **3 只在 bottom5**（元件×2、电子化学品×1），全部触发离场。
+
+⚠️ 数据说明：输入只提供**今日（1日）板块涨跌幅**，无 5日/20日 动量，故 sector 排序只能按今日口径，`hot_sectors` 字段改用 `1d_pct` 避免编造 5 日数据。
+
+## 3. 持仓回顾（Position Review）
+
+| 代码 | 名称 | 现价 | PnL | 止损 | 决策 | 依据 |
+|---|---|---|---|---|---|---|
+| 000703 | 恒逸石化 | 18.92 | +21.3% | 15.6→**17.16** | **RAISE_STOP** | 唯一逆势红盘 +8.3%，炼化及贸易 top5；+20% 抬止损至 +10% |
+| 002138 | 顺络电子 | 47.93 | +10.2% | 47.86 | **SELL** | 距锁利止损仅 0.15%（CRITICAL），-7.7% 放量，元件 bottom5 |
+| 300001 | 特锐德 | 36.46 | +2.2% | 33.88 | **SELL** | 跌破 +3% 警戒线（前日已明示"跌破+3%即SELL"），day12 逼近时间止损，电网设备非热点 |
+| 300408 | 三环集团 | 112.20 | -2.5% | 115.07 | **SELL** | 已跌破盈亏平衡止损（-2.6%），-9.51%，元件 bottom5，time_decay 13/15 |
+| 603127 | 昭衍新药 | 50.85 | +14.7% | 48.79 | **HOLD** | 距止损 4.1%，医疗服务未入冷区，CRO 链景气未破 |
+| 603259 | 药明康德 | 163.40 | +29.2% | 139.15 | **HOLD** | 组合最强仓，让利润奔跑 |
+| 688019 | 安集科技 | 254.05 | -3.0% | 248.82 | **SELL** | 开仓第 3 日 -3.00% 触发"-3%在头3日"，电子化学品 bottom5 |
+| 688981 | 中芯国际 | 127.00 | +4.9% | 121.10 | **HOLD** | 距成本止损 4.7%（WATCH），半导体未入冷区 |
+
+## 4. 新入场候选（New Entry Candidates）
+
+**无。** `hard_block = true`（breadth 0.12:1，0/3 指数红）。宏发股份 VCP QUALITY 结构再好、京东方A 再热，恐慌日一律不开新仓。持币等待 breadth ≥1.5:1 且至少 2 大指数转绿。
+
+## 5. Skip List
+
+- **600885 宏发股份**（rps120 88.9，VCP QUALITY、收缩比 0.38、距 MA10 0.5%）：结构优秀但**恐慌日 hard_block**；且 8/12 曾因 8 天阴跌 -3.1% 距止损 1.99% 离场，今日电网设备未入 top5，不重入。
+- **000725 京东方A**（rps120 93.9）：`dist_ma5_pct = 7.3%` > 6% 追高红线，即便非恐慌日也 SKIP。
+- **688002 睿创微纳**（rps120 94.7）：安防芯片 H1 营收 +72.84%（输入资讯），但军工电子未入 top5，恐慌日不接飞刀。
+- **601918 新集能源**（rps120 93.5）：焦炭虽为今日 top1，但动力煤未入 top5；margin `deleveraging`（chg5 -5.58%），不开新仓。
+- **601168 西部矿业**（rps120 89.6）：8/11 曾因放量暴跌 -7.63% 离场（工业金属冷区），今日有色未入 top5，不重入。
+
+## 6. Learnings
+
+见 JSON `new_learnings`（结构化，5 条）。
+
+## 7. Uncertainty Flags
+
+1. **特锐德的卖出依据**是前日记录的"跌破 +3% 即 SELL"自定纪律，而非 5 条硬规则（-5% / 3日-3% / 15日时间止损均未到）。存在被回测判定为过度交易的可能——但恐慌日收缩边际仓位，方向正确。
+2. 板块数据仅有 1 日涨跌幅，无法严格按 Rule 1 的 5日/20日 口径排序，"top 30%" 判断只能近似。
+3. 恒逸石化今日 +8.3% 与大盘 -4% 严重背离，可能是个股补涨或资金抱团，需防次日补跌；已将止损抬至 17.16 锁定 +10% 利润缓冲。
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "焦炭Ⅱ", "1d_pct": 7.55, "trend": "defensive rotation"},
+      {"name": "厨卫电器", "1d_pct": 4.57, "trend": "defensive"},
+      {"name": "房地产服务", "1d_pct": 2.32, "trend": "defensive"},
+      {"name": "炼化及贸易", "1d_pct": 2.22, "trend": "oil refining strength"},
+      {"name": "国有大型银行Ⅱ", "1d_pct": 1.77, "trend": "defensive"}
+    ],
+    "cold_sectors": [
+      {"name": "玻璃玻纤", "1d_pct": -7.82, "trend": "deteriorating"},
+      {"name": "林业Ⅱ", "1d_pct": -7.41, "trend": "deteriorating"},
+      {"name": "其他电子Ⅱ", "1d_pct": -7.40, "trend": "deteriorating"},
+      {"name": "元件", "1d_pct": -7.34, "trend": "deteriorating"},
+      {"name": "电子化学品Ⅱ", "1d_pct": -7.31, "trend": "deteriorating"}
+    ],
+    "position_alignment": "8持仓中3只在bottom5板块（元件×2、电子化学品×1），全部触发离场",
+    "regime": "panic"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "RAISE_STOP",
+      "reason": "PnL+21.3%触及+20%抬止损线，止损由盈亏平衡15.6提至+10%(17.16)；今日+8.3%为组合唯一逆势收红仓位，炼化及贸易板块top5(+2.22%)，石油石化未入bottom5",
+      "sector_rank": "炼化及贸易top5（+2.22%）",
+      "new_stop": 17.16,
+      "pnl_pct": 21.3,
+      "days_held": 16,
+      "exit_price": null
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "action": "SELL",
+      "reason": "现价47.93距+10%锁利止损47.86仅0.15%(CRITICAL)，今日-7.7%放量下跌；元件板块连续2日入bottom5(-7.34%)，h024主动止损离场不等硬触发",
+      "sector_rank": "bottom 5%（元件 -7.34%）",
+      "new_stop": null,
+      "pnl_pct": 10.2,
+      "days_held": 12,
+      "exit_price": 47.93
+    },
+    {
+      "code": "300001",
+      "name": "特锐德",
+      "action": "SELL",
+      "reason": "PnL+2.2%跌破+3%警戒线（前日已明示'后续3日任一天跌破+3%即SELL'），day12逼近15日时间止损；电网设备未入top/bottom5，恐慌日收缩边际仓位先落袋",
+      "sector_rank": "电网设备未入top/bottom5",
+      "new_stop": null,
+      "pnl_pct": 2.2,
+      "days_held": 12,
+      "exit_price": 36.46
+    },
+    {
+      "code": "300408",
+      "name": "三环集团",
+      "action": "SELL",
+      "reason": "现价112.2已跌破盈亏平衡止损115.07(-2.56%)，今日-9.51%放量；元件板块连续2日bottom5(-7.34%)；time_decay 13/15且PnL-2.5%，板块轮动出清压倒MLCC涨价逻辑",
+      "sector_rank": "bottom 5%（元件 -7.34%）",
+      "new_stop": null,
+      "pnl_pct": -2.5,
+      "days_held": 13,
+      "exit_price": 112.20
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "PnL+14.7%，止损已锁+10%(48.79)，现价距止损4.05%；医疗服务未入bottom5，CRO链景气（药明康德中报超预期）未破",
+      "sector_rank": "医疗服务未入top/bottom5",
+      "new_stop": null,
+      "pnl_pct": 14.7,
+      "days_held": 12,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "PnL+29.2%为组合最强仓，止损已锁+10%(139.15)；H1净利52.3亿超预期并上调全年指引，让利润奔跑",
+      "sector_rank": "医疗服务未入top/bottom5",
+      "new_stop": null,
+      "pnl_pct": 29.2,
+      "days_held": 13,
+      "exit_price": null
+    },
+    {
+      "code": "688019",
+      "name": "安集科技",
+      "action": "SELL",
+      "reason": "开仓第3日PnL-3.00%触发'-3%在头3日'规则；电子化学品Ⅱ今日bottom5(-7.31%)；stop_proximity WARNING(距止损2.06%)，入场时机错误先离场",
+      "sector_rank": "bottom 5%（电子化学品Ⅱ -7.31%）",
+      "new_stop": null,
+      "pnl_pct": -3.0,
+      "days_held": 3,
+      "exit_price": 254.05
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "HOLD",
+      "reason": "PnL+4.9%，止损已提至成本121.1，现价距止损4.65%(WATCH)；半导体未入bottom5，Q2收入首破30亿美元逻辑未破",
+      "sector_rank": "半导体未入top/bottom5",
+      "new_stop": null,
+      "pnl_pct": 4.9,
+      "days_held": 11,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "reason": "市场恐慌 regime hard_block（breadth 0.12:1、0/3指数红）不开新仓；且8/12曾因8天阴跌-3.1%距止损1.99%离场，今日电网设备未入top5，不重入",
+      "rps120": 88.86
+    },
+    {
+      "code": "000725",
+      "name": "京东方A",
+      "reason": "dist_ma5_pct=7.3% > 6% 追高红线，即便非恐慌日也SKIP；面板未入top5",
+      "rps120": 93.94
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "军工电子未入top5，恐慌日不接飞刀；安防芯片H1营收+72.84%（输入资讯）但板块不配合",
+      "rps120": 94.70
+    },
+    {
+      "code": "601918",
+      "name": "新集能源",
+      "reason": "焦炭虽为今日top1(+7.55%)但动力煤未入top5；margin deleveraging(chg5 -5.58%)，恐慌日不开新仓",
+      "rps120": 93.46
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "8/11曾因工业金属冷区+放量暴跌-7.63%离场，今日有色未入top5，不重入",
+      "rps120": 89.63
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "元件板块连续2日入bottom5(-7.34%)，三环/顺络两只MLCC持仓同日触发离场——板块轮动出清压倒个股涨价逻辑（三星/太阳诱电MLCC涨价仍在但资金已撤）。冷区连续多日在持仓端同样应作为卖出信号，不止是买入端禁入。",
+      "type": "signal",
+      "tags": ["sector", "exit-rule"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "行业资金流出是群体行为，个股α难以对抗板块β；冷区持仓的反弹多为逃命波而非反转。"
+    },
+    {
+      "text": "恐慌日breadth 0.12:1 + 0/3指数红 + 31涨停/36跌停，hard_block正确阻止FOMO新开仓；宏发股份VCP QUALITY、京东方A等再亮眼也不开仓。持币等breadth≥1.5:1且≥2大指数转绿。",
+      "type": "rule",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "恐慌日开新仓的期望收益为负，等breadth确认修复再进场可避开瀑布最陡段。"
+    },
+    {
+      "text": "安集科技开仓第3日PnL-3.00%触发'-3%在头3日'规则离场：8/17追入半导体材料(电子化学品)时机错误，今日电子化学品Ⅱ bottom5。入场时机比标的质地更决定短期盈亏。",
+      "type": "observation",
+      "tags": ["timing", "exit-rule"],
+      "evidence_type": "supporting",
+      "mechanism": "弱势市场中追入刚突破的票，次日板块补跌即吞噬浮盈，3日-3%规则是坏时机的快速止血阀。"
+    },
+    {
+      "text": "恒逸石化+21.3%为组合唯一逆势收红(+8.3%)，触及+20%抬止损至+10%(17.16)。炼化/石化是今日少数强势方向（炼化及贸易+2.22% top5）。弱市中机械抬止损把快赢家转成低风险持有。",
+      "type": "observation",
+      "tags": ["exit-rule", "position-sizing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "+20%后抬止损至+10%既锁定利润又不轻易下车，让强势股在防守轮动中继续奔跑。"
+    },
+    {
+      "text": "科技成长被系统性去风险：科创50 -6.07%最弱，元件/电子化学品/其他电子领跌，而焦炭/国有大行/房地产服务逆势上涨。防守轮动特征明显，短期主线从科技切换到资源+高股息。",
+      "type": "signal",
+      "tags": ["sector", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h028",
+      "mechanism": "流动性收缩期资金从高β成长切向低β防守/资源，板块动量反转往往持续数日而非一日。"
+    }
+  ],
+  "market_summary": "2026-08-19 恐慌日：上证-1.96%、深证-3.97%、创业板-4.98%、科创50-6.07%全绿，breadth 0.12:1（580涨/4927跌），31涨停/36跌停，f7_10达608家。IV整体中性(avg 0.40)，但300ETF深0.79、深100ETF0.63偏高。资金避险轮动：焦炭+7.55%/厨卫电器+4.57%/国有大行+1.77%领涨；元件-7.34%/电子化学品-7.31%/其他电子-7.4%领跌（昨夜费半-4.98%，来源：新浪财经8/19）。新开仓硬阻断，组合执行4笔离场+1笔抬止损，收缩至4持仓。注：板块数据为今日1日涨跌幅，无5日/20日动量。",
+  "market_sentiment": "panic",
+  "market_call": "防御"
+}
+```

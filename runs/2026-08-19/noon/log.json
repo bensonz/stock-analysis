@@ -1,0 +1,134 @@
+{
+  "date": "2026-08-19",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1787110533.085068,
+      "errors": [],
+      "end": 1787110607.9994502,
+      "duration_sec": 74.9
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 9147,
+      "tokens": {
+        "input_tokens": 161708,
+        "output_tokens": 22525
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 337.8,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1787110945.857316,
+      "actions": [
+        "RAISE_STOP 000703 → 17.16",
+        "SELL 002138",
+        "SELL 300001",
+        "SELL 300408",
+        "SELL 688019",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=68",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=22",
+        "Hypothesis: Created h167 (observation): 安集科技开仓第3日PnL-3.00%触发'-3%在头3日'规则离场：8/17追入半导体材料(电子化学品)时机错误，今日电子化学品Ⅱ bottom5。入场时机比标...",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=46",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=54",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "603127",
+                "name": "昭衍新药",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 50.85,
+                "stopLoss": 48.79,
+                "distance_pct": 4.05,
+                "suggestion": "🟠 WATCH — 4.1% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "688981",
+                "name": "中芯国际",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 127.0,
+                "stopLoss": 121.1,
+                "distance_pct": 4.65,
+                "suggestion": "🟠 WATCH — 4.6% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1787110946.21557,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 603127 — 🟠 WATCH — 4.1% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 688981 — 🟠 WATCH — 4.6% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 413.1
+  }
+}

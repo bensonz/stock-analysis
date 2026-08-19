@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 161708,
+  "output_tokens": 22525,
+  "rounds": 2,
+  "duration_sec": 337.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 今日 大跌 原因 2026年8月 板块",
+        "max_results": 5
+      },
+      "result_length": 3295
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "焦炭 煤炭 板块 上涨 逻辑 炼化",
+        "max_results": 5
+      },
+      "result_length": 1911
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "MLCC 元件 被动元件 下跌 原因",
+        "max_results": 5
+      },
+      "result_length": 5116
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "恒逸石化 文莱炼化 最新",
+        "max_results": 5
+      },
+      "result_length": 3249
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "中芯国际 半导体 最新消息",
+        "max_results": 5
+      },
+      "result_length": 2748
+    }
+  ],
+  "fallback_used": false
+}

@@ -1,7 +1,7 @@
 {
   "code": "300408",
   "name": "三环集团",
-  "status": "active",
+  "status": "closed",
   "thesis": "MLCC行业景气爆发：三星电机8/1起全系列MLCC涨价30%，太阳诱电9/1跟进涨价。AI服务器MLCC用量为普通服务器数倍，高端产品供需紧至2027H1。公司7月21日完成8.9亿回购+7月30日再推5-10亿二期回购。上半年业绩预增45-65%。零风险标签。元件sector #3今日+7.66%。",
   "entryDate": "2026-07-31",
   "entryPrice": 115.07,
@@ -168,16 +168,25 @@
       "change_pct": 7.75,
       "action": "HOLD",
       "note": "PnL+7.8%，今日-4.73%为普涨后回吐，止损已提至成本115.07；元件入bottom5仅第1日，不触发3日冷区卖出"
+    },
+    {
+      "date": "2026-08-19",
+      "slot": "noon",
+      "price": 112.2,
+      "change_pct": -2.49,
+      "action": "SELL",
+      "note": "现价112.2已跌破盈亏平衡止损115.07(-2.56%)，今日-9.51%放量；元件板块连续2日bottom5(-7.34%)；time_decay 13/15且PnL-2.5%，板块轮动出清压倒MLCC涨价逻辑"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-08-19",
+  "exitPrice": 112.2,
+  "exitReason": "现价112.2已跌破盈亏平衡止损115.07(-2.56%)，今日-9.51%放量；元件板块连续2日bottom5(-7.34%)；time_decay 13/15且PnL-2.5%，板块轮动出清压倒MLCC涨价逻辑",
+  "returnPct": -2.49,
+  "holdingDays": 19,
+  "lessonLearned": "",
   "createdAt": "2026-07-31T11:45:38.781742+08:00",
-  "updatedAt": "2026-08-18T16:01:47.333032+08:00",
+  "updatedAt": "2026-08-19T11:42:25.881726+08:00",
   "trackerVersion": "2.1",
-  "entrySlot": "noon"
+  "entrySlot": "noon",
+  "exitSlot": "noon"
 }

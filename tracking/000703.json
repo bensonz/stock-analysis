@@ -7,7 +7,7 @@
   "entryPrice": 15.6,
   "targetPrice": 21.0,
   "stopLoss": 14.82,
-  "currentStop": 15.6,
+  "currentStop": 17.16,
   "allocation_pct": 3.0,
   "shares": 1600,
   "allocatedCapital": 24960.0,
@@ -184,6 +184,14 @@
       "change_pct": 11.99,
       "action": "HOLD",
       "note": "PnL+12.0%，止损已提至成本15.6；石油石化未入bottom5；day15但+3%时间止损阈值远未触发"
+    },
+    {
+      "date": "2026-08-19",
+      "slot": "noon",
+      "price": 18.92,
+      "change_pct": 21.28,
+      "action": "RAISE_STOP",
+      "note": "PnL+21.3%触及+20%抬止损线，止损由盈亏平衡15.6提至+10%(17.16)；今日+8.3%为组合唯一逆势收红仓位，炼化及贸易板块top5(+2.22%)，石油石化未入bottom5"
     }
   ],
   "exitDate": null,
@@ -193,7 +201,7 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-07-29T15:52:15.569338+08:00",
-  "updatedAt": "2026-08-18T16:01:47.275815+08:00",
+  "updatedAt": "2026-08-19T11:42:25.867376+08:00",
   "trackerVersion": "2.1",
   "entrySlot": "afternoon"
 }

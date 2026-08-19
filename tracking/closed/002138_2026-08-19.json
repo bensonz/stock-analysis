@@ -1,7 +1,7 @@
 {
   "code": "002138",
   "name": "顺络电子",
-  "status": "active",
+  "status": "closed",
   "thesis": "元件sector今日#2（+7.56%），RPS120=89.79%甜点位。被动元件龙头，H1营收+19.67%成长稳健。MA距离全部合规（dist_ma5+3.0%, dist_ma10+1.7%）。Margin adding（+7.19%）。北向6.9%+公募5.5%机构认可。净利微降-7.98%已被市场消化（今日+6.73%），利空出尽。",
   "entryDate": "2026-08-04",
   "entryPrice": 43.51,
@@ -152,16 +152,25 @@
       "change_pct": 19.35,
       "action": "HOLD",
       "note": "PnL+19.4%，止损已锁+10%(47.86)；元件今日入bottom5为第1日，未达3日冷区卖出条件，MLCC涨价逻辑未破"
+    },
+    {
+      "date": "2026-08-19",
+      "slot": "noon",
+      "price": 47.93,
+      "change_pct": 10.16,
+      "action": "SELL",
+      "note": "现价47.93距+10%锁利止损47.86仅0.15%(CRITICAL)，今日-7.7%放量下跌；元件板块连续2日入bottom5(-7.34%)，h024主动止损离场不等硬触发"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-08-19",
+  "exitPrice": 47.93,
+  "exitReason": "现价47.93距+10%锁利止损47.86仅0.15%(CRITICAL)，今日-7.7%放量下跌；元件板块连续2日入bottom5(-7.34%)，h024主动止损离场不等硬触发",
+  "returnPct": 10.16,
+  "holdingDays": 15,
+  "lessonLearned": "",
   "createdAt": "2026-08-04T11:40:35.792759+08:00",
-  "updatedAt": "2026-08-18T16:01:47.313832+08:00",
+  "updatedAt": "2026-08-19T11:42:25.872657+08:00",
   "trackerVersion": "2.1",
-  "entrySlot": "noon"
+  "entrySlot": "noon",
+  "exitSlot": "noon"
 }

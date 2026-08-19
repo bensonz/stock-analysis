@@ -1,7 +1,7 @@
 {
   "code": "688019",
   "name": "安集科技",
-  "status": "active",
+  "status": "closed",
   "thesis": "半导体材料涨价潮核心受益（CMP抛光液龙头、14nm供货），电子化学品板块今日第1；RPS120=89.73甜点区；MA全部合规（dist_ma5+4.9%/ma10+6.2%/ma20+6.1%）；北向15%+公募7.5%；margin deleveraging为唯一弱项，不否决主线龙头。目标314为+20%动量目标（非研报价）",
   "entryDate": "2026-08-17",
   "entrySlot": "afternoon",
@@ -41,15 +41,24 @@
       "change_pct": 4.22,
       "action": "HOLD",
       "note": "新仓第2日PnL+4.2%未触发任何止损；CMP抛光液龙头+半导体材料涨价逻辑未变"
+    },
+    {
+      "date": "2026-08-19",
+      "slot": "noon",
+      "price": 254.05,
+      "change_pct": -3.0,
+      "action": "SELL",
+      "note": "开仓第3日PnL-3.00%触发'-3%在头3日'规则；电子化学品Ⅱ今日bottom5(-7.31%)；stop_proximity WARNING(距止损2.06%)，入场时机错误先离场"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-08-19",
+  "exitPrice": 254.05,
+  "exitReason": "开仓第3日PnL-3.00%触发'-3%在头3日'规则；电子化学品Ⅱ今日bottom5(-7.31%)；stop_proximity WARNING(距止损2.06%)，入场时机错误先离场",
+  "returnPct": -3.0,
+  "holdingDays": 2,
+  "lessonLearned": "",
   "createdAt": "2026-08-17T16:10:05.105484+08:00",
-  "updatedAt": "2026-08-18T16:01:47.347985+08:00",
-  "trackerVersion": "2.1"
+  "updatedAt": "2026-08-19T11:42:25.893146+08:00",
+  "trackerVersion": "2.1",
+  "exitSlot": "noon"
 }
