@@ -132,6 +132,28 @@
 - [ ] Watch the first runs after this change: if live quotes are flaky the pool
       could shrink sharply. Rejections are logged as SKIP OPEN, so count them.
 
+## 2026-08-20 night — snapshot writer built (BUILT, NOT WIRED)
+- [x] `scripts/snapshot_bars.py` + `pricedb.py snapshot [--date --dry-run --force]`.
+      Reads today's settled bar off Sina's REAL-TIME feed (hq.sinajs.cn) instead
+      of the daily-kline archive (quotes.sina.cn), which is batch-built and did
+      not finish publishing 08-20 until ~21:47. Batched ~100 codes/request:
+      5,229 codes in ~30s vs ~1h of per-code kline calls, and no eastmoney.
+      **Full-day validation vs the kline-sourced DB: 5,204 vs 5,204 rows,
+      0 OHLC mismatches, volume off by exactly 1 lot on 4.2% (max 0.0164%),
+      neither source held a stock the other missed.**
+      Volume trap: feed reports 股, daily_prices stores 手 → floor(/100). An
+      earlier 10-code check compared feed vs akshare kline (both shares) so it
+      agreed — would have written every volume 100x too large.
+      Refuses to run while the session is open (--force for testing only).
+      17 tests incl. every reject guard.
+- [ ] **NOT WIRED into the pipeline or the schedule yet** — this is a live
+      behaviour change and needs a decision: preflight should try snapshot
+      first when the session is closed, fall back to the kline archive.
+- [ ] Daily cross-check: once the archive publishes overnight, compare it
+      against what the snapshot wrote. Agreement = daily proof the writer is
+      honest; disagreement = a real finding. Costs nothing, both already exist.
+      (This is the check that caught the volume-unit bug.)
+
 ## Known bugs found on 2026-08-19, not yet fixed
 - [ ] 4 unexplained ghost positions: 02-13 (300373), 02-25 (600499), 02-26 (600096),
       03-11 (002497/600096/603191) — root cause never established. Review twist:

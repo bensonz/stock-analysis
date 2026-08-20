@@ -2890,6 +2890,79 @@ def cmd_rps(date: str = None):
         print(f"{code:<8} {r20:>6} {r60:>6} {r120:>7} {r250:>7} {ma10:>10}")
 
 
+
+def cmd_snapshot(argv: list):
+    """CLI: pricedb.py snapshot [--date ISO] [--dry-run] [--force]
+
+    Write today's settled bar from Sina's real-time quote feed (see
+    snapshot_bars.py for why this exists and how it was validated).
+
+    Refuses to run while the session is open: mid-session the feed reports an
+    unsettled intraday bar, and writing that into daily_prices corrupts every
+    MA and RPS downstream. --force overrides for testing only, never in a
+    scheduled run.
+
+    INSERT OR IGNORE, so existing rows are never overwritten — if the kline
+    archive already delivered a day, this cannot damage it.
+    """
+    import snapshot_bars
+
+    dry = "--dry-run" in argv
+    force = "--force" in argv
+    target = None
+    if "--date" in argv:
+        target = argv[argv.index("--date") + 1]
+
+    if is_session_open() and not force:
+        print("Session is still open — refusing to write an unsettled bar. "
+              "(--force overrides, for testing only.)", file=sys.stderr)
+        sys.exit(2)
+
+    if target is None:
+        target = most_recent_trading_day(_now().date()).isoformat()
+
+    conn = get_db()
+    ensure_schema(conn)
+    stocks = [r[0] for r in conn.execute("SELECT code FROM stocks")]
+    if not stocks:
+        print("No stocks in DB. Run 'init' first.", file=sys.stderr)
+        conn.close()
+        sys.exit(1)
+
+    before = conn.execute("SELECT COUNT(*) FROM daily_prices WHERE date = ?",
+                          (target,)).fetchone()[0]
+    print(f"Snapshot for {target}: {len(stocks)} codes, {before} rows already present",
+          file=sys.stderr)
+
+    def _progress(done, total, got):
+        if done % 1000 == 0 or done == total:
+            print(f"  [snapshot {done}/{total}] {got} bars parsed", file=sys.stderr)
+
+    rows, stats = snapshot_bars.fetch_snapshot_bars(stocks, target, progress=_progress)
+    print(f"  parsed {stats['rows']} bars "
+          f"(unsupported/BJ {stats['skipped_unsupported']}, "
+          f"rejected {stats['rejected']}, failed batches {stats['failed_batches']})",
+          file=sys.stderr)
+
+    if dry:
+        print("  --dry-run: nothing written", file=sys.stderr)
+        conn.close()
+        return
+
+    cur = conn.executemany(
+        "INSERT OR IGNORE INTO daily_prices "
+        "(code,date,open,high,low,close,volume,amount) VALUES (?,?,?,?,?,?,?,?)", rows)
+    conn.commit()
+    after = conn.execute("SELECT COUNT(*) FROM daily_prices WHERE date = ?",
+                         (target,)).fetchone()[0]
+    conn.close()
+    print(f"  {target}: {before} → {after} rows ({cur.rowcount} inserted)", file=sys.stderr)
+    if stats["failed_batches"]:
+        print(f"  WARNING: {stats['failed_batches']} batch(es) failed — day may be "
+              f"incomplete; re-run, or let the kline archive fill the rest tonight",
+              file=sys.stderr)
+
+
 def cmd_query(code: str):
     """Show a stock's recent prices and computed RPS values."""
     if not DB_PATH.exists():
@@ -2960,6 +3033,8 @@ if __name__ == "__main__":
         cmd_factors(sys.argv[2:])
     elif command == "repair":
         cmd_repair(sys.argv[2:])
+    elif command == "snapshot":
+        cmd_snapshot(sys.argv[2:])
     elif command == "query":
         if len(sys.argv) < 3:
             print("Usage: pricedb.py query CODE", file=sys.stderr)
