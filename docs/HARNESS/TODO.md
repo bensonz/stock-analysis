@@ -10,8 +10,11 @@
 - [x] Add `gate.note()` severity; rule findings no longer set run status
 - [x] A rule that fails to *run* still degrades
 - [x] Tests pin all three severities
-- [ ] Backfill: recompute status on the 123 historical manifests, or leave them and
-      note that pre-08-19 statuses are not comparable  ← decide before doctor reads them
+- [x] **Decided (D9)**: historical manifest statuses are MARKED, not recomputed.
+      `contracts.GATE_SEVERITY_EPOCH = "2026-08-19"`; the 147 pre-epoch files
+      (115 degraded / 8 failed / 23 success) stay untouched. Doctor and any
+      health-over-time comparison MUST split on the epoch and say so — reading
+      pre-epoch status as comparable is reading noise.
 
 ## Stage 2 — doctor.py
 - [x] **2a-i schema widening — SHIPPED 2026-08-19 (`4bfacb6`)**. OPEN records

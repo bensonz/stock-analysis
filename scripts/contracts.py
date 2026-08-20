@@ -12,6 +12,23 @@ from enum import Enum
 from typing import Any
 
 
+# Gate-severity epoch. Before this date `degraded` was produced by rules that
+# have since been retired: a dead V1 `watchlist` check fired on every run and
+# risk-engine findings counted as degradation, so 115 of 147 historical runs
+# say `degraded` and the word carried no information (fixed 6ab9377).
+#
+# Those manifests are NOT rewritten. A past run's manifest is the record of
+# what that run reported; recomputing it would make history claim something it
+# never said — the same reasoning that kept HISTORY_SCHEMA_EPOCH's pre-epoch
+# events unreplayed rather than back-filled with invented values, and that kept
+# the 奥来德 T+1 trade on the books with a marker instead of deleting it.
+#
+# Consumers that compare run health across time MUST split on this date and say
+# so in their output. Anything reading pre-epoch `status` as comparable to
+# post-epoch `status` is reading noise.
+GATE_SEVERITY_EPOCH = "2026-08-19"
+
+
 class PipelineStatus(Enum):
     SUCCESS = "success"        # All phases passed, all gates clear, no warnings
     DEGRADED = "degraded"      # Soft warnings but no hard failures

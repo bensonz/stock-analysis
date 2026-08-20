@@ -85,3 +85,23 @@ A dated file nobody is forced to revisit is a write-only alarm stream — the fa
 this plan documents twice (94% degraded, 100% phantom timeouts). An unacknowledged
 finding therefore reappears in every subsequent daily file and run report until a
 resolution line is written next to it. Acknowledgment is a written act, not a read.
+
+## D9 — Historical manifest statuses are marked, not recomputed (2026-08-19 epoch)
+
+`degraded` before 2026-08-19 was produced by retired rules (dead V1 watchlist
+check + risk findings counted as degradation), so 115 of 147 historical runs
+carry a status that means nothing. Two options: recompute them under today's
+rules, or mark the boundary.
+
+**Chosen: mark.** `contracts.GATE_SEVERITY_EPOCH = "2026-08-19"`. The files are
+not touched. A run's manifest is the record of what that run reported;
+recomputing it would make history claim something it never said. This is the
+third time the same call has been made — pre-epoch history events stay
+unreplayable rather than back-filled with invented values (HISTORY_SCHEMA_EPOCH),
+and the impossible 奥来德 T+1 trade stayed on the books with a `dataQuality`
+marker rather than being deleted.
+
+Binding on doctor and on any health-over-time comparison: **split on the epoch
+and say so in the output.** Reading pre-epoch status as comparable to
+post-epoch status is reading noise — and a sweep that floods on 115 phantom
+`degraded` runs would train exactly the blindness Stage 1 removed.
