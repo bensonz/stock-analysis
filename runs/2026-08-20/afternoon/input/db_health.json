@@ -1,0 +1,25 @@
+{
+  "checked_at": "2026-08-20T15:23:42",
+  "ok": false,
+  "warnings": [
+    "latest day 2026-08-20 is PARTIAL (454 rows vs ~5210 normal) — run 'pricedb.py repair'",
+    "adj factors lag prices (2026-08-19 < 2026-08-20) — run 'pricedb.py factors heal'"
+  ],
+  "latest_price_date": "2026-08-20",
+  "latest_row_count": 454,
+  "median_row_count_30d": 5210,
+  "latest_partial": true,
+  "expected_latest": "2026-08-20",
+  "lag_sessions": 0,
+  "factor_max_date": "2026-08-19",
+  "partial_days_30d": [
+    "2026-08-20"
+  ],
+  "spot_check": {
+    "date": "2026-08-20",
+    "sampled": 20,
+    "checked": 0,
+    "fetch_failures": 20,
+    "mismatches": []
+  }
+}
