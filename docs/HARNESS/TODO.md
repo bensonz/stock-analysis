@@ -146,9 +146,17 @@
       agreed — would have written every volume 100x too large.
       Refuses to run while the session is open (--force for testing only).
       17 tests incl. every reject guard.
-- [ ] **NOT WIRED into the pipeline or the schedule yet** — this is a live
-      behaviour change and needs a decision: preflight should try snapshot
-      first when the session is closed, fall back to the kline archive.
+- [x] **WIRED 2026-08-21**: run_daily preflight runs `pricedb.py snapshot`
+      BEFORE `update`. Ordering matters — update can burn its whole 300s budget
+      failing against dead akshare, and if it does, today's bar is already in.
+      The command self-skips mid-session (exit 2), so the 11:35 slot naturally
+      passes it by; only the close slot uses it. Outcome recorded on the
+      preflight phase in the manifest, so a run says which path supplied the day.
+- [x] Settle guard added: lines stamped before 15:00 are rejected. The closing
+      auction runs 14:57-15:00 and the run fires at 15:05, so without this the
+      "close" could be the last pre-auction print. Re-validated at full scale:
+      still 5,204 bars, 0 OHLC mismatches, 0 stocks lost — every legitimate
+      line was already stamped >= 15:00.
 - [ ] Daily cross-check: once the archive publishes overnight, compare it
       against what the snapshot wrote. Agreement = daily proof the writer is
       honest; disagreement = a real finding. Costs nothing, both already exist.

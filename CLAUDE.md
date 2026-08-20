@@ -36,6 +36,17 @@ python3 scripts/pricedb.py init      # first-time: fetch stock list + all histor
 python3 scripts/pricedb.py update    # incremental daily update (run before analysis)
 python3 scripts/pricedb.py rps [DATE]# recompute MA-based RPS for all stocks
 python3 scripts/pricedb.py status    # DB stats
+python3 scripts/pricedb.py snapshot [--date ISO --dry-run --force]
+                                     # today's settled bar from sina's REAL-TIME
+                                     # feed (hq.sinajs.cn), batched ~100 codes/req,
+                                     # ~30s for the universe. The daily-kline
+                                     # archive is batch-built and can lag 6h, so
+                                     # this is the fast path for the close slot.
+                                     # Refuses while the session is open; rejects
+                                     # lines stamped before 15:00 (pre-auction).
+                                     # Wired into run_daily preflight ahead of
+                                     # `update`. NOT a replacement for klines:
+                                     # history/backfill/factors still need them.
 python3 scripts/pricedb.py repair [--beg ISO --end ISO --dry-run]
                                      # fill partial days via sina per-code klines
                                      # (INSERT OR IGNORE; ends with factor heal)

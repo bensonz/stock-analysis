@@ -576,6 +576,38 @@ def preflight_pricedb_or_exit(manifest) -> None:
 
     skip = os.getenv("PRICEDB_SKIP_UPDATE", "").strip().lower() in {"1", "true", "yes", "on"}
     update_err: str | None = None
+    snapshot_note: str | None = None
+
+    # ── Fast path for TODAY's bar, ahead of the kline archive ──────────────
+    # Sina's real-time feed holds the settled day minutes after the close;
+    # its daily-kline archive is batch-built and on 2026-08-20 had not finished
+    # publishing until ~21:47. With eastmoney dead, the archive was the only
+    # path and the 15:05 run died on a 454-row partial day — twice in two days.
+    #
+    # Running this BEFORE `update` matters: update can burn its whole budget
+    # failing against dead akshare, and if it does, today's bar is already in.
+    # The command refuses mid-session on its own (exit 2), so the noon slot
+    # naturally skips it — at 11:35 the day is not settled yet.
+    if not skip:
+        try:
+            snap = subprocess.run(
+                [sys.executable, str(PROJECT_ROOT / "scripts" / "pricedb.py"), "snapshot"],
+                cwd=PROJECT_ROOT, capture_output=True, text=True,
+            )
+            tail = (snap.stderr.strip().splitlines() or ["(no output)"])[-1]
+            if snap.returncode == 0:
+                snapshot_note = tail
+                print(f"  [preflight] snapshot: {tail}", file=sys.stderr)
+            elif snap.returncode == 2:
+                print("  [preflight] snapshot skipped (session still open)", file=sys.stderr)
+            else:
+                snapshot_note = f"failed: {tail}"
+                print(f"    ⚠ snapshot failed (archive will be tried next): {tail}",
+                      file=sys.stderr)
+        except Exception as e:
+            snapshot_note = f"raised: {type(e).__name__}: {e}"
+            print(f"    ⚠ snapshot raised (non-fatal): {e}", file=sys.stderr)
+
     if skip:
         print("  [preflight] PRICEDB_SKIP_UPDATE set — using existing pricedb", file=sys.stderr)
     else:
@@ -614,7 +646,8 @@ def preflight_pricedb_or_exit(manifest) -> None:
         if not latest:
             print("  ✗ pricedb has no daily_prices rows — refusing to proceed", file=sys.stderr)
             manifest.add_phase("preflight_pricedb", "failed",
-                               details={"error": "empty", "update_err": update_err})
+                               details={"error": "empty", "update_err": update_err,
+                                        "snapshot": snapshot_note})
             manifest.finalize()
             sys.exit(2)
 
@@ -630,7 +663,9 @@ def preflight_pricedb_or_exit(manifest) -> None:
             print(f"  ✓ pricedb fresh (latest={latest}, target≥{latest_trading_day.isoformat()})",
                   file=sys.stderr)
             manifest.add_phase("preflight_pricedb", "ok",
-                               details={"latest_date": latest, "target": latest_trading_day.isoformat()})
+                               details={"latest_date": latest,
+                                        "target": latest_trading_day.isoformat(),
+                                        "snapshot": snapshot_note})
             return
 
         # Stale (latest is behind the last settled session). Only hard-refuse
@@ -650,7 +685,8 @@ def preflight_pricedb_or_exit(manifest) -> None:
             manifest.add_phase("preflight_pricedb", "failed",
                                details={"latest_date": latest,
                                         "expected": latest_trading_day.isoformat(),
-                                        "update_err": update_err})
+                                        "update_err": update_err,
+                                        "snapshot": snapshot_note})
             manifest.finalize()
             sys.exit(2)
 
@@ -663,7 +699,8 @@ def preflight_pricedb_or_exit(manifest) -> None:
         manifest.add_phase("preflight_pricedb", "degraded",
                            details={"latest_date": latest,
                                     "expected": latest_trading_day.isoformat(),
-                                    "update_err": update_err})
+                                    "update_err": update_err,
+                                    "snapshot": snapshot_note})
     except SystemExit:
         raise
     except Exception as e:

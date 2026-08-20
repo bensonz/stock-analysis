@@ -156,3 +156,17 @@ def test_unsupported_codes_are_counted_separately():
     sess = _Session(lambda i: line())
     _rows, stats = sb.fetch_snapshot_bars(["600000", "830799", "920059"], DAY, session=sess)
     assert stats["skipped_unsupported"] == 2
+
+
+# ── settle guard: 15:05 runs must not capture a pre-auction print ──
+
+def test_line_stamped_before_the_close_is_rejected():
+    """Closing auction runs 14:57-15:00; an earlier stamp isn't the close."""
+    assert sb.parse_quote_line(line(time="14:56:31"), DAY) is None
+    assert sb.parse_quote_line(line(time="11:29:59"), DAY) is None
+    assert sb.parse_quote_line(line(time="10:15:00"), DAY) is None   # halted mid-day
+
+
+def test_line_stamped_at_or_after_the_close_is_accepted():
+    for t in ("15:00:00", "15:00:03", "15:05:12", "15:34:59", "15:36:00"):
+        assert sb.parse_quote_line(line(time=t), DAY) is not None, t

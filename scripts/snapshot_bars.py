@@ -43,6 +43,15 @@ SINA_HEADERS = {"Referer": "https://finance.sina.com.cn"}
 BATCH_SIZE = 100          # codes per request; the feed accepts many
 SHARES_PER_LOT = 100      # 股 → 手
 
+# The feed stamps each line with the last time it updated (field 31). The
+# closing auction runs 14:57–15:00, so a line stamped before 15:00 does NOT
+# carry the settled close — it is the last intraday print. The afternoon run
+# fires at 15:05, minutes after the auction, so this is the difference between
+# writing the close and writing whatever traded just before it.
+# A stock halted mid-session keeps an early stamp; rejecting it costs one bar
+# and is the honest outcome (reject, never guess).
+SETTLE_AFTER = "15:00:00"
+
 # Field offsets in the comma-separated quote line.
 F_NAME, F_OPEN, F_PREV_CLOSE, F_PRICE = 0, 1, 2, 3
 F_HIGH, F_LOW, F_VOLUME, F_AMOUNT = 4, 5, 8, 9
@@ -84,6 +93,11 @@ def parse_quote_line(line: str, expect_date: str) -> tuple | None:
     # The feed's own date must be the session we asked for. This is the guard
     # against stale lines for suspended names.
     if fields[F_DATE].strip() != expect_date:
+        return None
+
+    # ...and its own timestamp must be at/after the close, or the "close" we
+    # would store is really a pre-auction intraday print.
+    if fields[F_TIME].strip() < SETTLE_AFTER:
         return None
 
     try:
