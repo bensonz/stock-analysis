@@ -1,0 +1,117 @@
+{
+  "date": "2026-08-20",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1787196925.172223,
+      "errors": [],
+      "end": 1787196998.733283,
+      "duration_sec": 73.6
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 3407,
+      "tokens": {
+        "input_tokens": 126731,
+        "output_tokens": 28029
+      },
+      "rounds": 2,
+      "tool_calls_count": 0,
+      "duration_sec": 373.6,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1787197372.336431,
+      "actions": [
+        "PRICE_CORRECTED 688222: LLM=35.15 outside [36.68,40.13], using market=39.78",
+        "SKIP OPEN 688222: 涨停 (change 13.17%), cannot buy at daily limit",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h169 (observation): 医药医疗全面领涨（生物制品+9.17%/医疗服务+6.31%/医疗器械+5.17%/医疗美容+4.12%，top5占4席），药明康德中报超预期催化已扩散至整个C...",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=54",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "688981",
+                "name": "中芯国际",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 126.49,
+                "stopLoss": 121.1,
+                "distance_pct": 4.26,
+                "suggestion": "🟠 WATCH — 4.3% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1787197372.769102,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 688981 — 🟠 WATCH — 4.3% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 447.6
+  }
+}
