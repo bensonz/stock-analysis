@@ -62,6 +62,7 @@ from data_collector import (
     save_price_data,
     save_strategy_pool_debug,
 )
+from market_rules import at_limit_up, price_limit_pct
 from position_manager import (
     SameDaySellError,
     load_active_positions,
@@ -1652,19 +1653,29 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
                 open_outcomes[code] = "missing entry price"
                 continue
 
-            # Block 涨停 (limit-up) stocks — cannot buy at +10% daily limit
+            # Block 涨停 (limit-up) stocks — a locked stock cannot be bought.
+            # The band is per-board, NOT a flat 10%: main 10 / ChiNext+STAR 20 /
+            # BJ 30, and 5 for ST on the main board (market_rules). Until
+            # 2026-08-20 this was hardcoded `>= 9.8` and refused 成都先导 688222
+            # at +13.17% — 7 points inside STAR's 20% band and freely tradable.
             stock_pool = data.get("strategy_pool", {}).get("stocks", [])
             stock_change = None
+            stock_name = p.get("name", "")
             for s in stock_pool:
                 if str(s.get("code", "")).split(".")[0] == code:
                     stock_change = s.get("change_pct")
+                    stock_name = s.get("name") or stock_name
                     break
             # Also check real-time change_pct from live data
             if stock_change is None and isinstance(real_price_data, dict):
                 stock_change = real_price_data.get("change_pct")
-            if stock_change is not None and stock_change >= 9.8:
-                log["actions"].append(f"SKIP OPEN {code}: 涨停 (change {stock_change}%), cannot buy at daily limit")
-                open_outcomes[code] = f"涨停 (change {stock_change}%), cannot buy at daily limit"
+                stock_name = (real_price_data.get("name") or stock_name)
+            if at_limit_up(stock_change, code, stock_name):
+                band = price_limit_pct(code, stock_name)
+                msg = (f"涨停 (change {stock_change}%, board limit {band:g}%), "
+                       f"cannot buy at daily limit")
+                log["actions"].append(f"SKIP OPEN {code}: {msg}")
+                open_outcomes[code] = msg
                 continue
 
             open_position({

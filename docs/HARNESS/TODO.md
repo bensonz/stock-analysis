@@ -82,6 +82,19 @@
       run_scheduled.sh) ONLY to the git push subprocess; wrapper no longer
       exports proxy globally (would have routed LLM/data through Privoxy)
 
+## 2026-08-20 — price-limit band was flat 10% for every board
+- [x] Fixed: `market_rules.py` is now the single definition (main 10 / ChiNext+
+      STAR 20 / BJ 30 / ST 5 on main board only); run_daily and backtest both
+      import it. 成都先导 688222 at +13.17% had been refused as 涨停 while 7
+      points inside STAR's 20% band.
+- [ ] **Limit-down is still unenforced on the SELL path.** run_daily books an
+      exit at whatever price it sees, so a 跌停 sale records a fill reality
+      would not have given us — this flatters every stop-loss statistic and the
+      exit ablation. `market_rules.at_limit_down()` exists and is unused.
+      Behaviour change on live exits → needs an explicit decision, and the
+      honest version also has to say what happens to the position afterwards
+      (it stays open and keeps losing, which is what really happens).
+
 ## Known bugs found on 2026-08-19, not yet fixed
 - [ ] 4 unexplained ghost positions: 02-13 (300373), 02-25 (600499), 02-26 (600096),
       03-11 (002497/600096/603191) — root cause never established. Review twist:

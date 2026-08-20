@@ -23,8 +23,10 @@ stamp 0.05% on sells, slippage 0.10%/side ≈ 0.30% round trip.
 
 Price limits are approximated in adjusted space with a small tolerance
 (exchange limits round raw prices to 0.01 CNY; adjusted ratios blur that).
-ST 5% limits are not modeled — the momentum gate essentially never admits ST
-names. Board caps by code prefix: 30/68 → 20%, 4/8/92 (BJ) → 30%, else 10%.
+Board caps come from market_rules (shared with the live pipeline since
+2026-08-20): 30/68 → 20%, 4/8/92 (BJ) → 30%, else 10%. ST 5% limits exist in
+market_rules but are not applied here — this call site has no stock name, and
+the momentum gate essentially never admits ST names.
 """
 import math
 import sqlite3
@@ -32,6 +34,8 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+import market_rules
 
 DEFAULT_CONFIG = {
     "alloc_pct": 3.0,           # % of current equity per new position
@@ -47,13 +51,16 @@ DEFAULT_CONFIG = {
 
 
 def board_limit(code: str) -> float:
-    """Daily price-limit fraction by board (main 10%, ChiNext/STAR 20%, BJ 30%)."""
-    c = str(code)
-    if c.startswith(("30", "68")):
-        return 0.20
-    if c.startswith(("4", "8", "92")):
-        return 0.30
-    return 0.10
+    """Daily price-limit FRACTION by board — thin wrapper over market_rules.
+
+    Shared with the live pipeline since 2026-08-20: this arm had the rule right
+    while run_daily hardcoded 9.8% for every board. One definition now, so the
+    research arm cannot drift from the market we actually trade.
+
+    (ST names take a narrower band; the backtest has no name at this call site,
+    so it gets the board limit — the permissive answer, unchanged from before.)
+    """
+    return market_rules.price_limit_pct(code) / 100.0
 
 
 def _entry_mult(cfg: dict) -> float:
