@@ -1,5 +1,10 @@
 # Harness TODO
 
+> Keep this honest. On 2026-08-20 three shipped items were still showing as
+> unchecked — including one labelled FIRST, TIME-SENSITIVE — which makes the
+> file exactly the kind of lying status signal Stage 1 existed to kill. Tick
+> items in the same commit that ships them.
+
 ## Stage 1 — signal restoration ✅ (`6ab9377`)
 - [x] Delete the dead V1 `watchlist` gate check (120x false alarm)
 - [x] Add `gate.note()` severity; rule findings no longer set run status
@@ -9,10 +14,12 @@
       note that pre-08-19 statuses are not comparable  ← decide before doctor reads them
 
 ## Stage 2 — doctor.py
-- [ ] **2a-i FIRST, TIME-SENSITIVE**: widen history[] schema — OPEN records
-      shares/stop/allocatedCapital, RAISE_STOP records old_stop/new_stop, SELL records
-      shares/exit_price. Replay coverage starts the day this ships.
-      (Review 08-19 verified current entries carry NONE of these fields, 365/365.)
+- [x] **2a-i schema widening — SHIPPED 2026-08-19 (`4bfacb6`)**. OPEN records
+      shares/stop/allocatedCapital, SELL records shares, RAISE_STOP records
+      old_stop → RESULTING stop (a refused lower is marked `stop_not_raised`,
+      never recorded as applied). `HISTORY_SCHEMA_EPOCH = "2026-08-19"` is
+      importable from position_manager — replay coverage starts there; earlier
+      entries carry none of these fields and can never be replayed.
 - [x] ~~Audit log/state independence~~ — resolved by review: separate call sites, both
       downstream of one decisions dict; reconciliation proves both writes happened,
       which is what the ghosts violated
@@ -22,7 +29,10 @@
 - [ ] Both-direction action↔history reconciliation
 - [ ] Conservation: equity identity, Δequity identity, realised identity
 - [ ] Cross-artifact: positions.json ↔ tracking/*.json ↔ snapshot ↔ report claims
-- [ ] Manifest presence per run dir (21 runs currently have none)
+- [x] Manifest presence per run dir — 25 legacy manifests backfilled from their
+      own log.json (`e512d98`, marked `backfilled`, gates explicitly empty ≠
+      passed). Now 0 run dirs without one, pinned by
+      tests/test_data_hygiene.py::test_every_run_dir_has_a_manifest
 - [ ] History sweep mode (`--since DATE`), not just present tense
 - [ ] Known-bad fixture per check (D4)
 - [ ] Validation: reproduces all 12 known incidents, zero spurious findings
@@ -47,7 +57,12 @@
       if it only commits locally, the Action measures push staleness, which still
       catches a dark fortnight
 
-## Stage 5 — daily agent sweep
+## Stage 5 — daily agent sweep  ← **NOTHING IS REVIEWING ANYTHING. This is the gap.**
+> Verified 2026-08-20: `com.bz.stock-pipeline` is the only scheduled job;
+> openclaw holds only two disabled jobs; no doctor.py, no sweep script, no
+> docs/audits/daily/. Every bug found this week (ghost positions, limit band,
+> dead-price screen) was caught by the owner's eye or by ad-hoc looking.
+> Owner asked for this on 08-19 and it has not been built.
 - [ ] Sweep prompt/spec (standing question + explicit coverage reporting)
 - [ ] `docs/audits/daily/YYYY-MM-DD.md` format
 - [ ] Schedule after the afternoon run
@@ -122,5 +137,5 @@
 - [ ] `2026-03-11`: `ERROR OPEN 002497: unsupported operand type(s) for //: 'float'`
       — a TypeError in sizing; is it still reachable?
 - [ ] 21 run dirs have no manifest at all
-- [ ] `runs/*/manifest.json` is written *after* the commit, so it never lands in its
-      own run's commit (cosmetic, but it is why failed runs' manifests go uncommitted)
+- [x] ~~manifest written after the commit~~ — fixed 2026-08-20 (`886a0dd`),
+      duplicate of the entry above; manifest now precedes Phase 5
