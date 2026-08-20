@@ -997,6 +997,12 @@ def phase1_collect(date: str, slot: str) -> dict:
                 stock["dist_ma5_pct"] = ma.get("dist_ma5_pct")
                 stock["dist_ma10_pct"] = ma.get("dist_ma10_pct")
                 stock["dist_ma20_pct"] = ma.get("dist_ma20_pct")
+                # provenance: distances are only a valid Rule 2b test when
+                # measured against a live price (2026-08-20)
+                stock["price_source"] = ma.get("price_source")
+                stock["screenable"] = ma.get("screenable")
+                if ma.get("screen_error"):
+                    stock["screen_error"] = ma.get("screen_error")
         # Also merge into strategy pool stocks (covers >95% RPS stocks
         # that aren't enriched — LLM needs MA distances for skip_list)
         for stock in data.get("strategy_pool", {}).get("stocks", []):
@@ -1009,6 +1015,12 @@ def phase1_collect(date: str, slot: str) -> dict:
                 stock["dist_ma5_pct"] = ma.get("dist_ma5_pct")
                 stock["dist_ma10_pct"] = ma.get("dist_ma10_pct")
                 stock["dist_ma20_pct"] = ma.get("dist_ma20_pct")
+                # provenance: distances are only a valid Rule 2b test when
+                # measured against a live price (2026-08-20)
+                stock["price_source"] = ma.get("price_source")
+                stock["screenable"] = ma.get("screenable")
+                if ma.get("screen_error"):
+                    stock["screen_error"] = ma.get("screen_error")
 
     # Attach stock-specific IV proxies to candidates/positions
     iv_data = data.get("iv_sentiment") or {}
@@ -1670,6 +1682,21 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
             if stock_change is None and isinstance(real_price_data, dict):
                 stock_change = real_price_data.get("change_pct")
                 stock_name = (real_price_data.get("name") or stock_name)
+            # Reject candidates we could not screen against a live price.
+            # Rule 2b (anti-chasing) is only a real test when the distance is
+            # measured from the price we would pay; with a stale close it can
+            # read "compliant" for a stock that has gapped far past the cap
+            # (688222, 2026-08-20: +8.1% on the prev close vs +19.6% live).
+            # Refusing to judge is honest; judging on a dead price is not.
+            ma_entry = (data.get("ma_data") or {}).get(code) or {}
+            if ma_entry and ma_entry.get("screenable") is False:
+                why = ma_entry.get("screen_error") or "no live quote"
+                msg = (f"未能获取实时价, 无法验证 Rule 2b 延伸度 ({why}); "
+                       f"拒绝按上一交易日收盘价 {ma_entry.get('prev_close')} 开仓")
+                log["actions"].append(f"SKIP OPEN {code}: {msg}")
+                open_outcomes[code] = msg
+                continue
+
             if at_limit_up(stock_change, code, stock_name):
                 band = price_limit_pct(code, stock_name)
                 msg = (f"涨停 (change {stock_change}%, board limit {band:g}%), "
@@ -2312,6 +2339,19 @@ def main():
         # (site rebuild moved to write_manifest — it no longer rides into the
         # commit, so it can run after the manifest and reflect the real status)
 
+        # Finalize + write the manifest BEFORE the commit, so a run's manifest
+        # lands in that run's own commit. Written after, it stayed untracked
+        # until the NEXT run's `git add -A` swept it up — which meant "a
+        # manifest exists" and "a commit exists" could disagree for the same
+        # run, and that disagreement is exactly the signal the off-machine
+        # dead-man's switch (D7) reads. Nothing in the manifest depends on the
+        # commit result, so there is no reason for it to wait.
+        total_sec = sum(l.get("duration_sec", 0) for l in all_logs)
+        manifest.add_phase("validate", "ok" if not errors else "warnings",
+                           details={"errors": errors})
+        manifest.total_duration_sec = total_sec
+        write_manifest(manifest, run_dir)
+
         # Git commit (blocked by CRITICAL validation errors)
         if not no_commit and not critical_errors:
             print(f"\nPhase 5: Git commit...", file=sys.stderr)
@@ -2369,14 +2409,7 @@ def main():
                             print("  Push failed; commit is saved locally and will "
                                   "be pushed by the next run.", file=sys.stderr)
 
-        # Summary
-        total_sec = sum(l.get("duration_sec", 0) for l in all_logs)
-
-        # Finalize manifest
-        manifest.add_phase("validate", "ok" if not errors else "warnings",
-                           details={"errors": errors})
-        manifest.total_duration_sec = total_sec
-        write_manifest(manifest, run_dir)
+        # Summary (manifest was written before the commit, see above)
 
         print(f"\n{'='*60}", file=sys.stderr)
         print(f"Pipeline complete in {total_sec:.0f}s ({manifest.status.value})", file=sys.stderr)

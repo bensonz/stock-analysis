@@ -95,6 +95,25 @@
       honest version also has to say what happens to the position afterwards
       (it stays open and keeps losing, which is what really happens).
 
+## 2026-08-20 — screening measured extension against a DEAD price
+- [x] **Fixed.** `fetch_ma_data` never attempted a live quote: it took the DB's
+      newest *settled* close as the distance numerator, so during a session
+      Rule 2b was tested against the PREVIOUS day's price. 688222 read
+      dist_ma20 = +8.1% (compliant) while actually at +19.6% (a 7.6-point
+      violation); the model wrote "MA距离全部合规" in good faith, and only the
+      unrelated limit-band bug stopped the buy. Now: MAs from settled bars,
+      distance from the live price, and on live-fetch failure the candidate is
+      REJECTED with the reason logged (`screenable=False`, `screen_error`) —
+      enforced at the open path, not just displayed.
+- [x] Manifest is now written BEFORE the Phase-5 commit, so a run's manifest
+      lands in its own commit ("manifest exists" and "commit exists" can no
+      longer disagree — the signal D7 reads).
+- [ ] Two artifacts disagreed and nothing reconciled them: candidates.md printed
+      `❌ MA5` for 688222 while the model's thesis claimed all distances
+      compliant. Worth a doctor check — display verdict vs decision rationale.
+- [ ] Watch the first runs after this change: if live quotes are flaky the pool
+      could shrink sharply. Rejections are logged as SKIP OPEN, so count them.
+
 ## Known bugs found on 2026-08-19, not yet fixed
 - [ ] 4 unexplained ghost positions: 02-13 (300373), 02-25 (600499), 02-26 (600096),
       03-11 (002497/600096/603191) — root cause never established. Review twist:

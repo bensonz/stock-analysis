@@ -718,19 +718,55 @@ def batch_enrich(stocks: list[dict], max_workers: int = 8) -> list[dict]:
 
 
 def fetch_ma_data(stocks: list[dict]) -> dict:
-    """Compute MA5/MA10/MA20 data for stocks from the local price DB.
+    """MA5/10/20 from settled bars, extension measured against the LIVE price.
+
+    The two prices do different jobs and must come from different places:
+
+    - **The moving averages** come from the price DB, which deliberately holds
+      only *settled* sessions. An unsettled intraday bar must never enter a
+      moving average.
+    - **The distance from those averages** is the anti-chasing test (Rule 2b),
+      and it is only meaningful against the price we would actually pay. Until
+      2026-08-20 it used the DB's newest close as the numerator, i.e. the
+      PREVIOUS session's close while the market was open.
+
+    What that cost, 2026-08-20 noon: 成都先导 688222 had gapped +8% at the open
+    and was +13% by 11:35. Screened against the previous close it read
+    dist_ma20 = +8.1%, comfortably inside Rule 2b's 12% cap, and the model
+    wrote "MA距离全部合规" in good faith. Against the real price it was
+    **+19.6%** — a 7.6-point violation. Screening and execution were looking at
+    two different prices; only a separate limit-band bug stopped the buy.
+
+    On live-fetch failure the candidate is **rejected, with the reason logged**
+    (`screenable=False`, `screen_error=...`) rather than silently falling back
+    to the stale close. Refusing to judge is honest; judging on a price that no
+    longer exists is not.
 
     Args:
         stocks: List of stock dicts with "code" or "code_full" keys.
 
     Returns:
-        Dict of {code: {price, ma5, ma10, ma20, dist_ma5_pct, dist_ma10_pct, dist_ma20_pct}}
+        Dict of {code: {price, price_source, screenable, ma5, ma10, ma20,
+                        dist_ma5_pct, dist_ma10_pct, dist_ma20_pct, ...}}
     """
     results = {}
     db_path = DEFAULT_PRICEDB_PATH
     if not db_path.exists():
         print("  MA data: local pricedb not found, skipping", file=sys.stderr)
         return results
+
+    # Live quotes for the whole pool, batched. Same Sina path the position
+    # marker uses — the price is trusted enough to spend money at, so it is
+    # trusted enough to screen with.
+    live = {}
+    live_err = None
+    try:
+        live = _fetch_position_prices_sina(stocks) or {}
+    except Exception as e:
+        live_err = f"{type(e).__name__}: {e}"
+        print(f"  MA data: live quote fetch failed ({live_err}) — "
+              f"candidates will be rejected, not screened on stale closes",
+              file=sys.stderr)
 
     try:
         import price_adjust
@@ -743,7 +779,7 @@ def fetch_ma_data(stocks: list[dict]) -> dict:
                 continue
             # raw close for display + factor for dividend/split-corrected MAs
             rows = conn.execute(
-                f"SELECT d.close, {price_adjust.factor_sql()} FROM daily_prices d"
+                f"SELECT d.close, {price_adjust.factor_sql()}, d.date FROM daily_prices d"
                 f"{price_adjust.adj_join_sql()} "
                 "WHERE d.code = ? ORDER BY d.date DESC LIMIT 20",
                 (code,),
@@ -751,7 +787,7 @@ def fetch_ma_data(stocks: list[dict]) -> dict:
             if len(rows) < 5:
                 continue
 
-            latest = rows[0][0]                       # raw: real tradeable price
+            prev_close = rows[0][0]                   # newest SETTLED close
             f0 = float(rows[0][1]) or 1.0
             # adjusted series normalized to today's scale: close_i * f_i / f_0
             closes = [float(r[0]) * float(r[1]) / f0 for r in rows]
@@ -760,9 +796,21 @@ def fetch_ma_data(stocks: list[dict]) -> dict:
             ma10 = sum(closes[:10]) / 10 if len(closes) >= 10 else None
             ma20 = sum(closes[:20]) / 20 if len(closes) >= 20 else None
 
-            results[code] = {
+            # Extension is measured against what we would actually pay.
+            quote = live.get(code) or {}
+            live_px = quote.get("price")
+            if isinstance(live_px, (int, float)) and live_px > 0:
+                latest, source, screenable, err = float(live_px), "live", True, None
+            else:
+                latest, source, screenable = prev_close, "prev_close", False
+                err = quote.get("error") or live_err or "no live quote returned"
+
+            entry = {
                 "code": code,
                 "price": latest,
+                "price_source": source,
+                "screenable": screenable,
+                "prev_close": prev_close,
                 "ma5": round(ma5, 2),
                 "ma10": round(ma10, 2) if ma10 else None,
                 "ma20": round(ma20, 2) if ma20 else None,
@@ -770,6 +818,14 @@ def fetch_ma_data(stocks: list[dict]) -> dict:
                 "dist_ma10_pct": round((latest - ma10) / ma10 * 100, 1) if ma10 else None,
                 "dist_ma20_pct": round((latest - ma20) / ma20 * 100, 1) if ma20 else None,
             }
+            if not screenable:
+                # Keep the numbers visible for forensics, but they are computed
+                # from a stale price and must not be treated as a pass.
+                entry["screen_error"] = str(err)[:200]
+                entry["dist_basis_note"] = (
+                    f"distances computed from the {rows[0][2]} close {prev_close} "
+                    f"— live quote unavailable, candidate rejected")
+            results[code] = entry
         conn.close()
     except Exception as e:
         print(f"  MA data fetch error: {e}", file=sys.stderr)
