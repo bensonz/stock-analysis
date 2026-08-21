@@ -1,0 +1,68 @@
+{
+  "date": "2026-08-21",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 20.35,
+      "pnl_pct": 30.45,
+      "note": "石油石化未入top/bottom5，+30.4%利润奔跑中，止损已锁+10%(17.16)，无时间止损压力，让利润奔跑"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "SELL",
+      "price": 49.43,
+      "pnl_pct": 11.45,
+      "note": "医疗服务今日跌入bottom5(-3.22%)，股价-5.97%跌破MA5(52.21)/MA10(51.9)；距止损48.79仅1.29%(CRITICAL)，按h024主动离场不等硬触发。板块热度从8/20的#2(+6.31%)一日翻冷，动量破位"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 164.74,
+      "pnl_pct": 30.23,
+      "note": "医疗服务今日跌入bottom5(-3.22%)但仅1日，未达'冷3日'轮出线；+30.2%组合最强仓，止损锁+10%(139.15)距现价15%安全；H1超预期+上调全年指引逻辑未破"
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "HOLD",
+      "price": 125.38,
+      "pnl_pct": 3.53,
+      "note": "半导体未入top/bottom5，+3.5%在保本止损121.1上方3.4%(WATCH)；Q2收入首破30亿美元逻辑未破，持有观察"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 972657.0,
+    "dayPnl": -572.0,
+    "dayReturnPct": -0.06,
+    "totalReturnPct": -2.73,
+    "unrealizedPnl": 19928.0,
+    "realizedPnl": -47271.0,
+    "cashPct": 88.99
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.5156,
+    "up": 1834,
+    "down": 3557,
+    "positive_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 47,
+    "limit_downs": 9,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.52:1, 2/3 major indices green, 47 limit-ups / 9 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "广度0.52:1弱势（上涨1834/下跌3557），47涨停/9跌停；上证平盘、深成指+0.63%、创业板指+1.21%——权重拉指数、七成个股下跌的背离盘面。IV Rank均值0.60偏悲观。能源金属(+4.31%)/贵金属(+3.67%)/通信设备(+2.45%)领涨，医疗服务(-3.22%)/化学制药(-3.95%)/种植业(-5.34%)重挫。恐慌带关闭新仓，仅做持仓止损管理。"
+  }
+}

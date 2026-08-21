@@ -1,0 +1,18 @@
+{
+  "date": "2026-08-21",
+  "label": "涨潮无序(池安全但排序无效)",
+  "rolling_ic20": -0.0203,
+  "ic_positive_days": "10/20",
+  "ic_last_resolved": "2026-08-13",
+  "pool_stop_rate10": 0.1849,
+  "params": {
+    "ic_horizon": 5,
+    "ic_window": 20,
+    "ic_band": 0.02,
+    "stop_pct": -5.0,
+    "stop_horizon": 3,
+    "stop_elevated": 0.4
+  },
+  "read_only": true,
+  "source": "内部复测 scripts/regime_detector.py (本地价格库可重算; --retro 验证)"
+}

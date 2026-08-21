@@ -1,0 +1,117 @@
+{
+  "date": "2026-08-21",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1787283325.2581398,
+      "errors": [],
+      "end": 1787283400.8851562,
+      "duration_sec": 75.6
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 7103,
+      "tokens": {
+        "input_tokens": 240503,
+        "output_tokens": 14276
+      },
+      "rounds": 3,
+      "tool_calls_count": 7,
+      "duration_sec": 247.0,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1787283647.956059,
+      "actions": [
+        "SELL 603127",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=139",
+        "Hypothesis: Updated h024 (rule): +1 supporting evidence → hitRate=93%, n=15",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=24",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "688981",
+                "name": "中芯国际",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 125.38,
+                "stopLoss": 121.1,
+                "distance_pct": 3.41,
+                "suggestion": "🟠 WATCH — 3.4% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1787283648.181751,
+      "duration_sec": 0.2
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 688981 — 🟠 WATCH — 3.4% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 322.8
+  }
+}

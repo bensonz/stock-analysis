@@ -1,0 +1,82 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 240503,
+  "output_tokens": 14276,
+  "rounds": 3,
+  "duration_sec": 247.0,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月21日 医疗服务 CRO 医药 下跌 原因",
+        "max_results": 5
+      },
+      "result_length": 3321
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "能源金属 贵金属 领涨 2026年8月21日 A股 板块",
+        "max_results": 5
+      },
+      "result_length": 3392
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月21日 上涨家数 下跌家数 弱势 市场",
+        "max_results": 5
+      },
+      "result_length": 2743
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "昭衍新药 2026年8月 股价 下跌",
+        "max_results": 5
+      },
+      "result_length": 3146
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 CRO 板块 2026年8月21日",
+        "max_results": 5
+      },
+      "result_length": 3182
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+今日+热门板块+医疗服务+下跌+2026年8月21日",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=能源金属+贵金属+领涨+2026年8月21日",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}
