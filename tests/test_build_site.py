@@ -75,7 +75,11 @@ def test_output_postrun_snapshot_beats_input_prerun(tmp_path):
             "positionsUsed": 9}},
     }), encoding="utf-8")
     details = bs.collect_day_details(bs.collect_equity_series(runs), [])
-    assert details["2026-08-08"]["pre"] == 1
+    # field renamed 2026-08-21: `pre` asked "is this a pre_run snapshot?",
+    # `stale_marks` asks "are the marks older than the day shown?" — the
+    # question the badge was always trying to answer. This fixture has no
+    # lastUpdated at all, which counts as stale (unknown must stay visible).
+    assert details["2026-08-08"]["stale_marks"] == 1
 
 
 def test_series_skips_broken_and_empty_snapshots(tmp_path):

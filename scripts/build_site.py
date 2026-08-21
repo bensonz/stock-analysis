@@ -10,8 +10,9 @@ Data sources (数字纪律 — everything re-derivable):
     curve + per-day holdings (per date the LATEST snapshot wins by
     snapshot_time — post_run output preferred over stale pre_run input;
     legacy no-slot layout supported)
-  - runs/<date>[/<slot>]/output/daily_summary.json → per-day actions
-    (taken from the same run dir as the winning snapshot)
+  - runs/<date>[/<slot>]/output/daily_summary.json → per-day actions (from the
+    winning snapshot's run dir; falls back to a sibling slot on the same date
+    when that run produced none, e.g. it failed before Phase 3)
   - tracking/positions.json → current portfolio + active positions
   - tracking/closed/*.json  → trade history + win-rate stats
   - tracking/portfolio_config.json → inception anchor (created = 1M)
@@ -66,6 +67,12 @@ def _snapshot_point(path: Path):
         return {
             "time": snap.get("snapshot_time", ""),
             "stype": snap.get("snapshot_type", ""),
+            # When the MARKS in this snapshot were last refreshed. A pre_run
+            # snapshot is written before Phase 1 fetches any price, so it
+            # carries whatever the PREVIOUS run left in positions.json — which
+            # may be the previous day (stale) or earlier the same day (fresh).
+            # The snapshot_type alone cannot tell them apart. None = unknown.
+            "marks_asof": pj.get("lastUpdated"),
             "equity": pf.get("totalEquity"),
             "cash": pf.get("cash"),
             "ret_pct": pf.get("totalReturnPct"),
@@ -86,10 +93,16 @@ def collect_equity_series(runs_dir: Path = RUNS_DIR) -> list[dict]:
     for day_dir in sorted(runs_dir.iterdir()):
         if not day_dir.is_dir() or not DATE_RE.match(day_dir.name):
             continue
-        # input/ = pre_run (carries the PREVIOUS close's marks), output/ =
-        # post_run (the day's real marks + applied trades). Both are candidates;
-        # latest snapshot_time wins, so post_run is preferred when it exists
+        # Both input/ (pre_run) and output/ (post_run) are candidates; the
+        # LATEST snapshot_time wins, which keeps the truest end-of-day equity
         # (2026-08-07: input-only made today's equity == yesterday's, delta 0).
+        #
+        # Note this is time-only: a later run's pre_run CAN beat an earlier
+        # run's post_run, including when that later run failed. That is
+        # deliberate — on 2026-08-20 the failed afternoon run's 15:23 snapshot
+        # held the real close while the successful noon run's held midday marks.
+        # The number is right; provenance is carried separately via
+        # marks_asof / _run_status_for rather than by distorting the curve.
         candidates = []  # (snapshot_path, run_dir, slot)
         for sub in ("input", "output"):
             legacy = day_dir / sub / "positions_snapshot.json"
@@ -158,6 +171,22 @@ def build_open_lookup(active: dict, trades: list[dict]) -> dict:
 OPEN_ACTIONS = {"OPEN", "BUY", "ADD"}
 
 
+def _run_status_for(point: dict) -> str | None:
+    """Status of the run that produced this point's snapshot, or None.
+
+    The equity value can be correct while its provenance is not: on 2026-08-20
+    the winning snapshot came from the run that died at Gate 1, and the page
+    said nothing about it.
+    """
+    run_dir = point.get("run_dir")
+    if not run_dir:
+        return None
+    try:
+        return (_read_json(Path(run_dir) / "manifest.json") or {}).get("status")
+    except Exception:
+        return None
+
+
 def collect_day_details(series: list[dict], trades: list[dict],
                         open_lookup: dict | None = None) -> dict:
     """Per-date payload for the hover side panel. day_pnl is the delta vs the
@@ -184,15 +213,42 @@ def collect_day_details(series: list[dict], trades: list[dict],
             "actions": [],
             "closed": closed_by_date.get(d, []),
         }
-        if p.get("stype") == "pre_run":
-            det["pre"] = 1  # stale marks: no post-run snapshot for this day
+        # Stale iff the marks predate the day being shown. Replaces the old
+        # `det["pre"]`, which asked "is this a pre_run snapshot?" — a different
+        # question that gave a false answer on 2026-08-20, where a 15:23
+        # pre_run snapshot held that day's real closing marks and was
+        # nonetheless badged 未含当日行情. Unknown freshness counts as stale:
+        # absence of evidence must not render as health.
+        asof = p.get("marks_asof")
+        if p.get("synthetic"):
+            pass                                   # inception anchor, not a run
+        elif not asof:
+            det["stale_marks"] = 1
+        elif str(asof)[:10] < d:
+            det["stale_marks"] = 1
         if p.get("synthetic"):
             det["slot"] = "起始"
         elif prev_equity is not None and isinstance(p.get("equity"), (int, float)):
             det["day_pnl"] = round(p["equity"] - prev_equity, 2)
+        # Decisions come from the winning snapshot's run dir; if that run
+        # produced none (it failed before Phase 3), fall back to a sibling slot
+        # on the same date rather than discarding real decisions. 2026-08-20:
+        # the afternoon run died at Gate 1 and the noon run's 4 decisions were
+        # thrown away purely because the afternoon snapshot won on timestamp.
         run_dir = p.get("run_dir")
+        summary_path, borrowed_from = None, None
         if run_dir:
-            summary_path = Path(run_dir) / "output" / "daily_summary.json"
+            own = Path(run_dir) / "output" / "daily_summary.json"
+            if own.exists():
+                summary_path = own
+            else:
+                day_dir = Path(run_dir).parent if p.get("slot") != "legacy" else Path(run_dir)
+                for sib in sorted(day_dir.glob("*/output/daily_summary.json")):
+                    summary_path, borrowed_from = sib, sib.parent.parent.name
+                    break
+        if summary_path:
+            if borrowed_from:
+                det["actions_from_slot"] = borrowed_from
             try:
                 summary = _read_json(summary_path)
                 for a in summary.get("actions", []) or []:
@@ -208,6 +264,22 @@ def collect_day_details(series: list[dict], trades: list[dict],
                     det["actions"].append(act)
             except Exception:
                 pass
+
+        # Why are there no per-position notes? Four different answers, and
+        # until 2026-08-21 all four rendered as "早于决策日志上线" — which is
+        # true for exactly ONE date in all history (2026-02-13). Everywhere
+        # else it appeared it was a fabricated explanation for a failure.
+        if any(a.get("note") for a in det["actions"]):
+            det["notes_absent_reason"] = None
+        elif det["actions"]:
+            det["notes_absent_reason"] = "predates_note_log"   # ran, logged, no notes
+        else:
+            status = _run_status_for(p)
+            det["notes_absent_reason"] = ("run_failed" if status == "failed"
+                                          else "unknown")
+        if _run_status_for(p) == "failed":
+            det["from_failed_run"] = True
+
         details[d] = det
         if not p.get("synthetic") and isinstance(p.get("equity"), (int, float)):
             prev_equity = p["equity"]
@@ -481,7 +553,8 @@ function renderDay(d) {
   if (!det) { dayEl.innerHTML = `<div class='d-date'>${esc(d)}</div><div class='note'>无记录</div>`; return; }
   const pinBtn = pinned ? ` <button id="unpin" title="取消固定 (Esc)">📌 ✕</button>` : "";
   let h = `<div class="d-date">${esc(d)} <span class="chip">${esc(det.slot)}</span>`
-        + (det.pre ? ` <span class="chip warn" title="该日仅有运行开始时点的快照，持仓市值为上一收盘标记">盘前快照·未含当日行情</span>` : "")
+        + (det.stale_marks ? ` <span class="chip warn" title="该日快照里的持仓市值早于当日，或无法确定其时点">持仓市值非当日</span>` : "")
+        + (det.from_failed_run ? ` <span class="chip warn" title="该数值取自当日一次失败的运行所留下的快照——数值本身可用，但该次运行未走完">来自失败运行</span>` : "")
         + `${pinBtn}</div>`;
   h += `<div class="d-equity">${fmtM(det.equity)}</div>`;
   const dp = det.day_pnl;
@@ -513,7 +586,7 @@ function renderDay(d) {
     }
   }
   if (det.holdings && det.holdings.length) {
-    h += `<h4>持仓 (${det.holdings.length}) <span class="mini">当日最后快照${det.pre ? "(盘前)" : ""}</span></h4>`;
+    h += `<h4>持仓 (${det.holdings.length}) <span class="mini">当日最后快照${det.stale_marks ? "(市值非当日)" : ""}</span></h4>`;
     // Every action carries the model's reasoning — not just HOLD. Filtering
     // to HOLD hid 91 of 255 notes (SELL/OPEN/RAISE_STOP), which read as
     // "this row has nothing to say" when it had the most to say.
@@ -534,7 +607,17 @@ function renderDay(d) {
     }
     // Absence must be visible, not mysterious: 39 of 108 days predate action
     // logging, so no row on them has reasoning to show.
-    if (!noted) h += `<div class="note mini-note">该日无逐仓决策记录（早于决策日志上线）</div>`;
+    if (!noted) {
+      // Four causes, four sentences. Until 2026-08-21 all of them rendered as
+      // "早于决策日志上线", which is true for exactly one date in all history
+      // (2026-02-13) and was a fabricated excuse everywhere else.
+      const why = {
+        run_failed: "该日该时段运行失败，未产生决策记录",
+        predates_note_log: "该日有决策但无逐仓理由（早于决策日志上线）",
+        unknown: "该日无逐仓决策记录（原因不明）",
+      }[det.notes_absent_reason] || "该日无逐仓决策记录";
+      h += `<div class="note mini-note">${esc(why)}</div>`;
+    }
     else h += `<div class="note mini-note">悬停持仓行查看当日决策理由</div>`;
   } else {
     h += `<div class="note" style="margin-top:8px">空仓 · 100%现金`
