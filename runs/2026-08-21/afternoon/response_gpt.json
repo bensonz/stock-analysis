@@ -1,0 +1,162 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "贵金属",
+        "1d_pct": 4.69,
+        "trend": "accelerating"
+      },
+      {
+        "name": "能源金属",
+        "1d_pct": 4.63,
+        "trend": "accelerating"
+      },
+      {
+        "name": "通信设备",
+        "1d_pct": 2.99,
+        "trend": "steady"
+      },
+      {
+        "name": "工业金属",
+        "1d_pct": 2.89,
+        "trend": "steady"
+      },
+      {
+        "name": "元件",
+        "1d_pct": 2.78,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "种植业",
+        "1d_pct": -5.05,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "化学制药",
+        "1d_pct": -4.31,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "医疗服务",
+        "1d_pct": -3.78,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "生物制品",
+        "1d_pct": -3.7,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "农产品加工",
+        "1d_pct": -3.53,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/3 positions in hot sectors; 1/3 in cold sector (医疗服务, 第1天)",
+    "regime": "金属/资源领涨，医药/农业轮出；指数与广度背离（3大指数全绿但超3500只个股下跌）"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "文莱炼化净利+2500.73%逻辑兑现（来源：新浪财经8/11），今日+3.48%，石油石化未入top/bottom5，止损已锁+10%(17.16)，让利润奔跑",
+      "sector_rank": "未入top5/bottom5（当日）",
+      "new_stop": null,
+      "pnl_pct": 33.3,
+      "days_held": 18,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "医疗服务今日跌入bottom5(-3.78%)但仅1日，未达'冷3日'轮出线；+28.7%距止损139.15有14.5%安全垫；H1超预期并上调全年指引逻辑未破（来源：证券时报/EET）",
+      "sector_rank": "bottom5（-3.78%，连续1日）",
+      "new_stop": null,
+      "pnl_pct": 28.7,
+      "days_held": 16,
+      "exit_price": null
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "HOLD",
+      "reason": "+3.1%在保本止损121.1上方仅3.0%（stop_proximity WARNING），半导体未入top/bottom5；Q2收入首破30亿美元、净利+261.7%逻辑未破（来源：新浪港股8/14），持有观察，明日低开防跳空",
+      "sector_rank": "未入top5/bottom5（当日）",
+      "new_stop": null,
+      "pnl_pct": 3.1,
+      "days_held": 13,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "reason": "dist_ma5 6.7%>6%、dist_ma10 10.8%>8%，超买追涨禁区；航运未入top5",
+      "rps120": 90.3
+    },
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "reason": "dist_ma10 17.2%、dist_ma20 42.2%极度延伸；8/19大跌-10.7%且近3日换手率20%（输入风险标签），回避",
+      "rps120": 91.6
+    },
+    {
+      "code": "688131",
+      "name": "皓元医药",
+      "reason": "医疗服务板块bottom5(-3.78%)，sector-first否决",
+      "rps120": 94.22
+    },
+    {
+      "code": "688222",
+      "name": "成都先导",
+      "reason": "医疗服务板块bottom5(-3.78%)，sector-first否决",
+      "rps120": 91.95
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "工业金属top5(+2.89%)、RPS120 87.53在甜蜜区，但市场宽度0.875:1<1.5:1门槛且广度<1:1，弱市不开新仓；融资deleveraging(chg5 -3.69%)",
+      "rps120": 87.53
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "指数红盘不等于可开仓日：宽度0.875:1（上涨2505 vs 下跌2862）同时触发'<1.5:1门槛'与'<1:1不开新仓'两条硬规则。今日3大指数全绿但全市场超3500只个股下跌（来源：财中社），正确动作是持盈观望而非被指数红盘骗进场。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "指数被资源/权重拉动而多数个股下跌，广度过滤防止在分化市中追入假强。"
+    },
+    {
+      "text": "医疗服务板块从8/20的#2(+6.31%)单日翻冷至8/21的bottom5(-3.78%)，不触发'冷3日'轮出规则，但应进入观察名单；同板块靠近止损的持仓（昭衍新药距止损1.29%）按h024主动离场优先于硬触发。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "单日板块排名噪声大，'连续3日bottom30%'规则防止在单日洗盘中误杀趋势仓；但止损临近时主动离场可防跳空。"
+    },
+    {
+      "text": "伊朗制裁升级+美元走软是本轮资源/油运链的真实强度来源（来源：TradingKey/财中社），恒逸石化文莱炼化正是该逻辑的A股兑现载体（净利+2500.73%，来源：新浪财经8/11）。",
+      "type": "signal",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "地缘+美元双驱动推高贵金属/能源金属/油运，资金从医药/农业切换至资源。"
+    }
+  ],
+  "market_summary": "指数红盘但广度绿盘：上证+0.04%/深证+0.87%/创业板+1.43%，上涨2505 vs 下跌2862（0.875:1），跌停15/涨停58，全市场超3500只个股下跌（来源：财中社）。贵金属/能源金属/工业金属领涨（伊朗制裁+美元走软，来源：TradingKey），医疗服务/种植业领跌。IV Rank整体中性(0.38)。宽度不达1.5:1开仓门槛，弱市只持强势仓、不开新仓。",
+  "market_sentiment": "mixed",
+  "market_call": "谨慎"
+}

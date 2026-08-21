@@ -1,0 +1,116 @@
+{
+  "date": "2026-08-21",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1787295959.415338,
+      "errors": [],
+      "end": 1787296031.9414349,
+      "duration_sec": 72.5
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 7402,
+      "tokens": {
+        "input_tokens": 143505,
+        "output_tokens": 14132
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 223.0,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1787296255.016994,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h170 (observation): 指数红盘不等于可开仓日：宽度0.875:1（上涨2505 vs 下跌2862）同时触发'<1.5:1门槛'与'<1:1不开新仓'两条硬规则。今日3大指数全绿但全...",
+        "Hypothesis: Updated h076 (validated): +1 supporting evidence → hitRate=100%, n=6",
+        "Hypothesis: Created h171 (observation): 伊朗制裁升级+美元走软是本轮资源/油运链的真实强度来源（来源：TradingKey/财中社），恒逸石化文莱炼化正是该逻辑的A股兑现载体（净利+2500.73%，...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "688981",
+                "name": "中芯国际",
+                "rule": "stop_proximity",
+                "severity": "WARNING",
+                "currentPrice": 124.8,
+                "stopLoss": 121.1,
+                "distance_pct": 2.96,
+                "suggestion": "🟡 WARNING — only 3.0% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1787296255.5600991,
+      "duration_sec": 0.5
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 688981 — 🟡 WARNING — only 3.0% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 296.0
+  }
+}

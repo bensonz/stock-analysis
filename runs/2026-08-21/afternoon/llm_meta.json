@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 143505,
+  "output_tokens": 14132,
+  "rounds": 2,
+  "duration_sec": 223.0,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月21日 贵金属 能源金属 领涨 原因",
+        "max_results": 5
+      },
+      "result_length": 2960
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "医疗服务 板块 大跌 药明康德 2026年8月21日",
+        "max_results": 5
+      },
+      "result_length": 3289
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "中芯国际 半导体 2026年8月 消息 订单",
+        "max_results": 5
+      },
+      "result_length": 3133
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "恒逸石化 文莱炼化 业绩 2026年8月",
+        "max_results": 5
+      },
+      "result_length": 3373
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 医药 调整 有色金属 领涨 2026年8月21日 行情",
+        "max_results": 5
+      },
+      "result_length": 3222
+    }
+  ],
+  "fallback_used": false
+}

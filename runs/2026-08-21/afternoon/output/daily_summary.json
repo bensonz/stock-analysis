@@ -1,0 +1,61 @@
+{
+  "date": "2026-08-21",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 20.8,
+      "pnl_pct": 33.3,
+      "note": "文莱炼化净利+2500.73%逻辑兑现（来源：新浪财经8/11），今日+3.48%，石油石化未入top/bottom5，止损已锁+10%(17.16)，让利润奔跑"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 162.86,
+      "pnl_pct": 28.7,
+      "note": "医疗服务今日跌入bottom5(-3.78%)但仅1日，未达'冷3日'轮出线；+28.7%距止损139.15有14.5%安全垫；H1超预期并上调全年指引逻辑未破（来源：证券时报/EET）"
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "action": "HOLD",
+      "price": 124.8,
+      "pnl_pct": 3.1,
+      "note": "+3.1%在保本止损121.1上方仅3.0%（stop_proximity WARNING），半导体未入top/bottom5；Q2收入首破30亿美元、净利+261.7%逻辑未破（来源：新浪港股8/14），持有观察，明日低开防跳空"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 972697.0,
+    "dayPnl": -532.0,
+    "dayReturnPct": -0.05,
+    "totalReturnPct": -2.73,
+    "unrealizedPnl": 19968.0,
+    "realizedPnl": -47271.0,
+    "cashPct": 88.99
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.8753,
+    "up": 2505,
+    "down": 2862,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 58,
+    "limit_downs": 15,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.88:1, 3/3 major indices green, 58 limit-ups / 15 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "marketContext": {
+    "summary": "指数红盘但广度绿盘：上证+0.04%/深证+0.87%/创业板+1.43%，上涨2505 vs 下跌2862（0.875:1），跌停15/涨停58，全市场超3500只个股下跌（来源：财中社）。贵金属/能源金属/工业金属领涨（伊朗制裁+美元走软，来源：TradingKey），医疗服务/种植业领跌。IV Rank整体中性(0.38)。宽度不达1.5:1开仓门槛，弱市只持强势仓、不开新仓。"
+  }
+}
