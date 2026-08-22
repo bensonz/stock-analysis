@@ -1,0 +1,22 @@
+{
+  "date": "2026-02-11",
+  "slot": "afternoon",
+  "verdict": "code_change_needed",
+  "checks_run": 0,
+  "checks_total": 12,
+  "skipped": [],
+  "findings": [
+    {
+      "id": "manifest-absent",
+      "check": "manifest_present",
+      "kind": "invariant",
+      "title": "该时段没有 manifest",
+      "detail": "运行目录存在但没有 manifest.json——无法区分'跑了但死在写清单前'与'根本没跑'。预检失败零留痕就是这个洞。",
+      "suspect": "scripts/run_daily.py (write the manifest before preflight)",
+      "fix_cmd": "",
+      "occurrences": 3,
+      "first_seen": "2026-02-05",
+      "accepted": ""
+    }
+  ]
+}

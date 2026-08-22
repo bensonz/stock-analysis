@@ -1,0 +1,35 @@
+{
+  "date": "2026-04-27",
+  "slot": "afternoon",
+  "verdict": "code_change_needed",
+  "checks_run": 9,
+  "checks_total": 12,
+  "skipped": [
+    {
+      "check": "check_postrun_marks_are_from_run_day",
+      "reason": "no positions to mark"
+    },
+    {
+      "check": "check_pricedb_current",
+      "reason": "preflight_pricedb has no latest_date/target"
+    },
+    {
+      "check": "check_snapshot_wrote_rows",
+      "reason": "no snapshot note in preflight (run predates the writer)"
+    }
+  ],
+  "findings": [
+    {
+      "id": "source-unhealthy:eastmoney",
+      "check": "source_unhealthy",
+      "kind": "env",
+      "title": "数据源 eastmoney 状态 down",
+      "detail": "{\"status\": \"down\", \"error\": \"<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>\"}",
+      "suspect": "",
+      "fix_cmd": "",
+      "occurrences": 10,
+      "first_seen": "2026-04-13",
+      "accepted": ""
+    }
+  ]
+}

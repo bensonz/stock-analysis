@@ -1,0 +1,55 @@
+{
+  "date": "2026-03-11",
+  "slot": "afternoon",
+  "verdict": "code_change_needed",
+  "checks_run": 10,
+  "checks_total": 12,
+  "skipped": [
+    {
+      "check": "check_pricedb_current",
+      "reason": "preflight_pricedb has no latest_date/target"
+    },
+    {
+      "check": "check_snapshot_wrote_rows",
+      "reason": "no snapshot note in preflight (run predates the writer)"
+    }
+  ],
+  "findings": [
+    {
+      "id": "new-position-not-held:002497",
+      "check": "new_positions_absent_from_snapshot",
+      "kind": "invariant",
+      "title": "daily_summary 声称新开 002497，持仓快照里没有",
+      "detail": "newPositions 含 002497 (雅化集团)，但 positions_snapshot.activePositions 不含该代码。T+1 排除了当日开平的解释——两份产物必然有一份在说谎。",
+      "suspect": "scripts/run_daily.py (newPositions written from intent, not from applied outcome)",
+      "fix_cmd": "",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "new-position-not-held:603191",
+      "check": "new_positions_absent_from_snapshot",
+      "kind": "invariant",
+      "title": "daily_summary 声称新开 603191，持仓快照里没有",
+      "detail": "newPositions 含 603191 (望变电气)，但 positions_snapshot.activePositions 不含该代码。T+1 排除了当日开平的解释——两份产物必然有一份在说谎。",
+      "suspect": "scripts/run_daily.py (newPositions written from intent, not from applied outcome)",
+      "fix_cmd": "",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "new-position-not-held:600096",
+      "check": "new_positions_absent_from_snapshot",
+      "kind": "invariant",
+      "title": "daily_summary 声称新开 600096，持仓快照里没有",
+      "detail": "newPositions 含 600096 (云天化)，但 positions_snapshot.activePositions 不含该代码。T+1 排除了当日开平的解释——两份产物必然有一份在说谎。",
+      "suspect": "scripts/run_daily.py (newPositions written from intent, not from applied outcome)",
+      "fix_cmd": "",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "date": "2026-04-30",
+  "slot": "afternoon",
+  "verdict": "clean",
+  "checks_run": 9,
+  "checks_total": 12,
+  "skipped": [
+    {
+      "check": "check_postrun_marks_are_from_run_day",
+      "reason": "no positions to mark"
+    },
+    {
+      "check": "check_pricedb_current",
+      "reason": "preflight_pricedb has no latest_date/target"
+    },
+    {
+      "check": "check_snapshot_wrote_rows",
+      "reason": "no snapshot note in preflight (run predates the writer)"
+    }
+  ],
+  "findings": []
+}

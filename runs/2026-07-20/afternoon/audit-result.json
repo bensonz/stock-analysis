@@ -1,0 +1,43 @@
+{
+  "date": "2026-07-20",
+  "slot": "afternoon",
+  "verdict": "action_needed",
+  "checks_run": 10,
+  "checks_total": 12,
+  "skipped": [
+    {
+      "check": "check_postrun_marks_are_from_run_day",
+      "reason": "no positions to mark"
+    },
+    {
+      "check": "check_snapshot_wrote_rows",
+      "reason": "no snapshot note in preflight (run predates the writer)"
+    }
+  ],
+  "findings": [
+    {
+      "id": "phase-failed:apply",
+      "check": "phase_failed",
+      "kind": "env",
+      "title": "阶段 apply 失败",
+      "detail": "无错误详情",
+      "suspect": "",
+      "fix_cmd": "python3 scripts/run_daily.py --slot afternoon --run",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "gate-hard-fail:phase3_to_phase4:73c18bc9",
+      "check": "gate_hard_fail",
+      "kind": "env",
+      "title": "phase3_to_phase4 硬闸门拦截",
+      "detail": "apply phase had errors: [\"ERROR learnings: 'observation'\"]",
+      "suspect": "",
+      "fix_cmd": "",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    }
+  ]
+}

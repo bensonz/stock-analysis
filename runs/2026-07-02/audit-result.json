@@ -1,0 +1,43 @@
+{
+  "date": "2026-07-02",
+  "slot": "afternoon",
+  "verdict": "action_needed",
+  "checks_run": 10,
+  "checks_total": 12,
+  "skipped": [
+    {
+      "check": "check_postrun_marks_are_from_run_day",
+      "reason": "no positions to mark"
+    },
+    {
+      "check": "check_snapshot_wrote_rows",
+      "reason": "no snapshot note in preflight (run predates the writer)"
+    }
+  ],
+  "findings": [
+    {
+      "id": "phase-failed:llm_analysis",
+      "check": "phase_failed",
+      "kind": "env",
+      "title": "阶段 llm_analysis 失败",
+      "detail": "无错误详情",
+      "suspect": "",
+      "fix_cmd": "python3 scripts/run_daily.py --slot afternoon --run",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "gate-hard-fail:phase2_to_phase3:ad52f914",
+      "check": "gate_hard_fail",
+      "kind": "env",
+      "title": "phase2_to_phase3 硬闸门拦截",
+      "detail": "LLM response is empty or not a dict",
+      "suspect": "",
+      "fix_cmd": "",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    }
+  ]
+}

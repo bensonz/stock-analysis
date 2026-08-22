@@ -1,0 +1,18 @@
+{
+  "date": "2026-03-06",
+  "slot": "afternoon",
+  "verdict": "clean",
+  "checks_run": 10,
+  "checks_total": 12,
+  "skipped": [
+    {
+      "check": "check_pricedb_current",
+      "reason": "preflight_pricedb has no latest_date/target"
+    },
+    {
+      "check": "check_snapshot_wrote_rows",
+      "reason": "no snapshot note in preflight (run predates the writer)"
+    }
+  ],
+  "findings": []
+}

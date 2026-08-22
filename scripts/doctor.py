@@ -510,10 +510,39 @@ def load_accepted(path: Path | None = None) -> dict[str, str]:
     return out
 
 
+#: noon precedes afternoon; legacy runs are an implicit afternoon.
+SLOT_RANK = {"noon": 0, "afternoon": 1}
+
+
+def calendar_order(runs_dir: Path) -> list[tuple[str, str, Path]]:
+    """Runs in CALENDAR order — deliberately not `list_runs_sorted`.
+
+    The house rule is to sort runs by `run_started_at`, because slot *names*
+    sort wrong ("afternoon" < "noon"). That rule is right for the equity curve,
+    which wants the true chronology of execution. It is wrong here, because
+    "the slot before this one" is a calendar question, and `run_started_at`
+    answers a different one:
+
+    - backfilled legacy manifests carry timestamps that do not track their own
+      dates, which put 2026-04-30 between 04-09 and 04-10 and scrambled the
+      whole April neighbour chain;
+    - the 08-11 afternoon rerun finished at 00:18 on 08-12, so by start time it
+      lands *after* 08-12 noon.
+
+    Either one silently breaks a recurrence streak — the counter would read
+    three consecutive eastmoney failures as three unrelated weather events,
+    which is precisely the promotion this tool exists to make. Sorting by
+    (date, slot rank) is immune to both, since it never consults a timestamp a
+    backfill or a late rerun could have written.
+    """
+    rows = list_runs_sorted(runs_dir, reverse=False)
+    return sorted(rows, key=lambda r: (r[0], SLOT_RANK.get(r[1], 1)))
+
+
 def prior_audits(runs_dir: Path, date: str, slot: str,
                  window: int = RECURRENCE_WINDOW) -> list[dict]:
     """Previous slots' audit-result.json, most recent first."""
-    ordered = list_runs_sorted(runs_dir, reverse=True)
+    ordered = list(reversed(calendar_order(runs_dir)))
     out, started = [], False
     for d, s, p in ordered:
         if not started:
@@ -653,7 +682,10 @@ def main(argv=None) -> int:
     runs_dir = Path(args.runs_dir) if args.runs_dir else RUNS_DIR
 
     if args.since:
-        rows = [(d, s, p) for d, s, p in list_runs_sorted(runs_dir, reverse=False)
+        # Calendar order matters twice over here: each audit reads the ones
+        # already written behind it, so processing out of order also means
+        # computing recurrence against files that do not exist yet.
+        rows = [(d, s, p) for d, s, p in calendar_order(runs_dir)
                 if d >= args.since]
         worst = 0
         for d, s, p in rows:

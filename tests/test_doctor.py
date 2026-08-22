@@ -340,3 +340,73 @@ def test_markdown_states_coverage_and_its_own_limits(tmp_path):
     assert "检查覆盖" in md
     assert "跳过" in md
     assert "只发现，不修复" in md
+
+
+# ── 8. recurrence walks the CALENDAR, not the execution clock ────────────────
+
+def test_neighbours_are_calendar_order_not_start_time(tmp_path):
+    """The house rule sorts runs by run_started_at because slot names sort wrong
+    ("afternoon" < "noon"). That is right for the equity curve and wrong here.
+
+    Backfilled legacy manifests carry timestamps that do not track their own
+    dates — one put 2026-04-30 between 04-09 and 04-10 — and a rerun finishing
+    after midnight sorts after the *next* day's noon. Either scrambles the
+    neighbour chain, and a scrambled chain reads three consecutive eastmoney
+    failures as three unrelated weather events, killing the one promotion this
+    tool exists to make.
+    """
+    runs = tmp_path / "runs"
+    for date, slot, started in [
+        ("2026-04-09", "afternoon", "2026-04-09T15:35:00+08:00"),
+        ("2026-04-30", "afternoon", "2026-04-09T20:00:00+08:00"),   # bad backfill
+        ("2026-04-10", "afternoon", "2026-04-10T15:35:00+08:00"),
+        ("2026-04-10", "noon", "2026-04-10T11:35:00+08:00"),
+    ]:
+        p = make_run(runs, date, slot)
+        m = json.loads((p / "manifest.json").read_text())
+        m["run_started_at"] = started
+        (p / "manifest.json").write_text(json.dumps(m), encoding="utf-8")
+
+    order = [(d, s) for d, s, _ in doc.calendar_order(runs)]
+    assert order == [("2026-04-09", "afternoon"),
+                     ("2026-04-10", "noon"),
+                     ("2026-04-10", "afternoon"),
+                     ("2026-04-30", "afternoon")]
+
+
+def test_a_late_rerun_does_not_break_a_streak(tmp_path):
+    """08-11 afternoon finished at 00:18 on 08-12 — by start time it lands after
+    08-12 noon, which would split one streak into two."""
+    runs = tmp_path / "runs"
+    phases = {"collect": {"status": "failed", "errors": ["eastmoney dead"]}}
+    plan = [("2026-08-11", "afternoon", "2026-08-12T00:18:32+08:00"),
+            ("2026-08-12", "noon", "2026-08-12T11:35:00+08:00"),
+            ("2026-08-12", "afternoon", "2026-08-12T15:05:00+08:00")]
+    for date, slot, started in plan:
+        p = make_run(runs, date, slot, status="failed", phases=phases)
+        m = json.loads((p / "manifest.json").read_text())
+        m["run_started_at"] = started
+        (p / "manifest.json").write_text(json.dumps(m), encoding="utf-8")
+
+    for date, slot, _ in plan:
+        p = runs / date / slot
+        doc.write_result(doc.audit_run(date, slot, p, runs_dir=runs,
+                                       accepted={}), p)
+
+    res = doc.audit_run("2026-08-12", "afternoon", runs / "2026-08-12" / "afternoon",
+                        runs_dir=runs, accepted={})
+    assert res.findings[0].occurrences == 3
+    assert res.findings[0].first_seen == "2026-08-11"
+
+
+def test_a_cold_sweep_converges_in_one_pass(tmp_path):
+    """Backfilling history must not need a second run to get counts right."""
+    runs = tmp_path / "runs"
+    phases = {"collect": {"status": "failed", "errors": ["x"]}}
+    for d in ("2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20"):
+        make_run(runs, d, "afternoon", status="failed", phases=phases)
+    doc.main(["--since", "2026-08-01", "--runs-dir", str(runs)])
+    last = json.loads((runs / "2026-08-20" / "afternoon" / "audit-result.json")
+                      .read_text(encoding="utf-8"))
+    assert last["findings"][0]["occurrences"] == 4
+    assert last["verdict"] == "code_change_needed"
