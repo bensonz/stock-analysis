@@ -16,7 +16,17 @@
       health-over-time comparison MUST split on the epoch and say so — reading
       pre-epoch status as comparable is reading noise.
 
-## Stage 2 — doctor.py
+## Stage 2 — doctor.py  ← **SHIPPED (detection only) 2026-08-22**
+- [x] `scripts/doctor.py` — invariant vs env classification, recurrence derived
+      from prior `audit-result.json` (no ledger), skips reported with reasons.
+      Verdict lands at `runs/<date>/<slot>/audit-result.{md,json}` — beside the
+      manifest it judges, per the owner's layout call. 25 tests.
+- [x] Scheduled: `com.bz.stock-doctor`, 11:55 + 15:25 CST weekdays, a SEPARATE
+      launchd job so a hard pipeline death cannot also kill the report saying so.
+      Installed + smoke-tested 2026-08-23 00:07.
+- [x] `audit/ACCEPTED.md` — the only human-authored input; doctor reads, never writes.
+- [ ] **Auto-heal was NOT built** — owner chose detection only. Every finding
+      still needs a human to act on it.
 - [x] **2a-i schema widening — SHIPPED 2026-08-19 (`4bfacb6`)**. OPEN records
       shares/stop/allocatedCapital, SELL records shares, RAISE_STOP records
       old_stop → RESULTING stop (a refused lower is marked `stop_not_raised`,
@@ -32,14 +42,33 @@
 - [ ] Both-direction action↔history reconciliation
 - [ ] Conservation: equity identity, Δequity identity, realised identity
 - [ ] Cross-artifact: positions.json ↔ tracking/*.json ↔ snapshot ↔ report claims
-- [x] Manifest presence per run dir — 25 legacy manifests backfilled from their
+- [~] Manifest presence per run dir — 25 legacy manifests backfilled from their
       own log.json (`e512d98`, marked `backfilled`, gates explicitly empty ≠
-      passed). Now 0 run dirs without one, pinned by
-      tests/test_data_hygiene.py::test_every_run_dir_has_a_manifest
+      passed). **The "now 0 run dirs without one" claim was false**: the test
+      globs `runs/*/log.json`, so the 6 dirs that have neither log.json nor
+      manifest.json are invisible to it and always were —
+      2026-02-02/05/10/11, 03-31, 04-12. The doctor's first full sweep found
+      them. Exactly the lying-status-signal family Stage 1 exists to kill; the
+      test needs to glob run DIRS, not log files.
 - [ ] History sweep mode (`--since DATE`), not just present tense
 - [ ] Known-bad fixture per check (D4)
 - [ ] Validation: reproduces all 12 known incidents, zero spurious findings
 - [ ] Wire into run_daily (report section, per D1) + site banner
+
+## Stage 2 findings — what the first full sweep actually found
+> 158 runs audited, 125 clean, 20 needing an operator, 13 needing code.
+> Two spurious classes were mine and are now regression-pinned: judging Feb runs
+> by August's artifact contract, and calling a post-midnight rerun's marks
+> "stale" for being *newer* than the run date.
+- [ ] **`newPositions` records intent, not outcome** — 8 dates across 6 months
+      (03-11 ×3, 04-08, 06-09 ×2, 07-14, 07-31, 08-04, 08-17, 08-20) claim opens
+      the snapshot never held. 08-17/688019 was "fixed" in the report prose only;
+      the machine-readable field still lies. Fix at the source: write
+      newPositions from applied outcomes, the way `open_outcomes` already does.
+- [ ] **Runs that die before the manifest leave nothing** — 6 dirs, incl. 03-31
+      and 04-12 which are NOT legacy-era. Absence still cannot distinguish
+      "failed" from "never fired". Doctor names it (`manifest-absent`) but cannot
+      fix it; run_daily must write the manifest before preflight.
 
 ## Stage 3 — drift + fail-loud
 - [ ] Trailing-20 structural comparison
@@ -60,14 +89,16 @@
       if it only commits locally, the Action measures push staleness, which still
       catches a dark fortnight
 
-## Stage 5 — daily agent sweep  ← **NOTHING IS REVIEWING ANYTHING. This is the gap.**
-> Verified 2026-08-20: `com.bz.stock-pipeline` is the only scheduled job;
-> openclaw holds only two disabled jobs; no doctor.py, no sweep script, no
-> docs/audits/daily/. Every bug found this week (ghost positions, limit band,
-> dead-price screen) was caught by the owner's eye or by ad-hoc looking.
-> Owner asked for this on 08-19 and it has not been built.
+## Stage 5 — daily agent sweep  ← **still the gap for UNKNOWN failure shapes**
+> Stage 2's doctor now runs twice a day, but it is mechanical: it catches
+> failure shapes someone already wrote a check for. A bug of a kind nobody
+> imagined is still invisible. That is what this stage is for, and it is a
+> different tool — an agent that reads the run and asks what looks wrong,
+> including "what would I not have caught?".
 - [ ] Sweep prompt/spec (standing question + explicit coverage reporting)
-- [ ] `docs/audits/daily/YYYY-MM-DD.md` format
+- [x] Output location decided by owner 2026-08-22: per-run
+      `runs/<date>/<slot>/audit-result.md`, NOT `docs/audits/daily/`. The agent
+      sweep should extend the same file rather than open a second channel.
 - [ ] Schedule after the afternoon run
 - [ ] Retention/index so the files stay readable in bulk
 

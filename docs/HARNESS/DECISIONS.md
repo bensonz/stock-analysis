@@ -105,3 +105,48 @@ Binding on doctor and on any health-over-time comparison: **split on the epoch
 and say so in the output.** Reading pre-epoch status as comparable to
 post-epoch status is reading noise — and a sweep that floods on 115 phantom
 `degraded` runs would train exactly the blindness Stage 1 removed.
+
+## D10 — audit output lives with the run, recurrence is derived
+
+**2026-08-22.** Owner rejected `docs/audits/daily/YYYY-MM-DD.md` in favour of
+`runs/<date>/<slot>/audit-result.{md,json}`, beside the manifest it judges.
+
+Reasons it is better than what I proposed: same lifecycle and same git tracking
+as the artifacts it describes; no separate index needed to answer "how did that
+run go"; and — the part I had not seen — because the doctor runs on its own
+schedule rather than as a pipeline phase, it can create the file even when the
+run left nothing, which turns the audit file's own presence into the signal that
+distinguishes *failed* from *never fired*.
+
+Recurrence counting is **derived** by re-reading the previous 12 slots'
+`audit-result.json` rather than kept in a ledger. A ledger is state that can
+drift out of agreement with the runs it summarises; derivation cannot. The one
+fact not derivable from run artifacts is a human deciding a finding is known and
+accepted, so that — and only that — lives in `audit/ACCEPTED.md`.
+
+Rejected: a third severity for "known". Acceptance already expresses it, and a
+third level invites the same saturation that made 94%-degraded meaningless.
+
+## D11 — the auditor does not share a fate with the audited
+
+**2026-08-22.** `com.bz.stock-doctor` is a separate launchd job, not the last
+line of `run_scheduled.sh`.
+
+If the doctor ran inside the pipeline wrapper, a pipeline that died hard —
+segfault, OOM, machine asleep through the slot — would take the audit down with
+it. The single most valuable thing the audit can say is "the run that should
+have happened left nothing behind", and that sentence is unwriteable by a
+process the dead run was hosting.
+
+Cost: two jobs to keep in sync instead of one. Accepted — the 20-minute offset
+(11:55 / 15:25) is the only coupling, and it is one integer in each plist.
+
+## D12 — detection only; the books are never repaired
+
+**2026-08-22.** Owner chose detection over detection+auto-heal.
+
+The boundary I would have held either way, now pinned by a test: the doctor may
+never write `tracking/` or `tracking/closed/`. A system that silently repairs
+its own trade records produces numbers nobody can audit — including us. Every
+finding needs a human to act, which is slower and is the point.
+

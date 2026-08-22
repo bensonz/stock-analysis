@@ -61,3 +61,25 @@ deviance; 300373 oddity logged (closed/ has the "ghost" with entryDate 02-13).
 - Also same day, before these: data cleanup (`e512d98`) — see commit for the
   census; the cleanup itself caught a test leaking synthetic trades into the
   live closed/ (CLOSED_DIR import-binding), guard widened to all position files.
+
+## 2026-08-22 — doctor.py shipped (detection only)
+
+Built `scripts/doctor.py`, 12 checks split invariant/env, 25 tests, scheduled as
+`com.bz.stock-doctor` (11:55 + 15:25 weekdays), smoke-tested through launchd.
+
+First full sweep, 158 runs: **125 clean, 20 operator, 13 code**. Two spurious
+classes were my checks being wrong and are now regression-pinned — judging Feb
+runs by August's artifact contract (positions_snapshot.json did not exist until
+03-05), and calling a post-midnight rerun's marks "stale" for being *newer* than
+the run date. Both were caught by reading the sweep output instead of trusting
+it, which is the only reason the tool is worth anything.
+
+Real finds: `newPositions` has been recording intent rather than outcome on 8
+dates since March — 688019 included, whose report prose we corrected while the
+machine-readable field kept lying. And `test_every_run_dir_has_a_manifest` globs
+`runs/*/log.json`, so 6 dirs with neither log nor manifest were never checked;
+the TODO's "now 0 run dirs without one" was false.
+
+Not built, still open: auto-heal (owner's call), and Stage 5's agent sweep —
+the doctor only catches shapes someone already wrote a check for.
+

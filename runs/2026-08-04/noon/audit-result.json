@@ -1,0 +1,27 @@
+{
+  "date": "2026-08-04",
+  "slot": "noon",
+  "verdict": "code_change_needed",
+  "checks_run": 11,
+  "checks_total": 12,
+  "skipped": [
+    {
+      "check": "check_snapshot_wrote_rows",
+      "reason": "no snapshot note in preflight (run predates the writer)"
+    }
+  ],
+  "findings": [
+    {
+      "id": "new-position-not-held:000739",
+      "check": "new_positions_absent_from_snapshot",
+      "kind": "invariant",
+      "title": "daily_summary 声称新开 000739，持仓快照里没有",
+      "detail": "newPositions 含 000739 (普洛药业)，但 positions_snapshot.activePositions 不含该代码。T+1 排除了当日开平的解释——两份产物必然有一份在说谎。",
+      "suspect": "scripts/run_daily.py (newPositions written from intent, not from applied outcome)",
+      "fix_cmd": "",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    }
+  ]
+}

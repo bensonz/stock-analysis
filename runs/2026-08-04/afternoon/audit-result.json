@@ -1,0 +1,14 @@
+{
+  "date": "2026-08-04",
+  "slot": "afternoon",
+  "verdict": "clean",
+  "checks_run": 11,
+  "checks_total": 12,
+  "skipped": [
+    {
+      "check": "check_snapshot_wrote_rows",
+      "reason": "no snapshot note in preflight (run predates the writer)"
+    }
+  ],
+  "findings": []
+}

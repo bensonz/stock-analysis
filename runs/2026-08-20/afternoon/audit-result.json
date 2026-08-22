@@ -1,0 +1,59 @@
+{
+  "date": "2026-08-20",
+  "slot": "afternoon",
+  "verdict": "action_needed",
+  "checks_run": 6,
+  "checks_total": 12,
+  "skipped": [
+    {
+      "check": "check_new_positions_absent_from_snapshot",
+      "reason": "snapshot missing or unreadable"
+    },
+    {
+      "check": "check_action_on_code_not_held",
+      "reason": "snapshot missing or unreadable"
+    },
+    {
+      "check": "check_sold_position_still_held",
+      "reason": "snapshot missing or unreadable"
+    },
+    {
+      "check": "check_duplicate_active_positions",
+      "reason": "snapshot missing or unreadable"
+    },
+    {
+      "check": "check_postrun_marks_are_from_run_day",
+      "reason": "snapshot missing or unreadable"
+    },
+    {
+      "check": "check_snapshot_wrote_rows",
+      "reason": "no snapshot note in preflight (run predates the writer)"
+    }
+  ],
+  "findings": [
+    {
+      "id": "phase-failed:collect",
+      "check": "phase_failed",
+      "kind": "env",
+      "title": "阶段 collect 失败",
+      "detail": "无错误详情",
+      "suspect": "",
+      "fix_cmd": "python3 scripts/run_daily.py --slot afternoon --run",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "gate-hard-fail:phase1_to_phase2:bc693771",
+      "check": "gate_hard_fail",
+      "kind": "env",
+      "title": "phase1_to_phase2 硬闸门拦截",
+      "detail": "latest price day is partial (454 rows vs ~5210) — run 'pricedb.py repair'",
+      "suspect": "",
+      "fix_cmd": "python3 scripts/pricedb.py repair",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    }
+  ]
+}
