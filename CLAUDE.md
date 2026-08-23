@@ -57,6 +57,14 @@ python3 scripts/pricedb.py factors heal     # repair a multi-session factor gap
 # Rules engine (mechanical sell/risk checks over current positions)
 python3 scripts/run_rules.py --human
 
+# Post-run audit — detection only, NEVER writes tracking/
+python3 scripts/doctor.py --open        # what is broken right now, folded by
+                                        # problem; also writes audit/OPEN.md.
+                                        # exit 1 = something needs a code change
+python3 scripts/doctor.py               # audit the most recent run, print + write
+python3 scripts/doctor.py --date 2026-08-20 --slot noon
+python3 scripts/doctor.py --since 2026-08-01   # sweep/recompute a range
+
 # IV sentiment (needs options-learn backend on :8000)
 python3 scripts/fetch_iv_sentiment.py --human
 
@@ -106,6 +114,38 @@ runs/<YYYY-MM-DD>/<slot>/output/    # report.md, candidates.md, decisions
 - **Legacy runs** (pre-slot) live at `runs/<date>/input|output` with no slot subdir and are treated as an implicit `afternoon`.
 - **Gotcha:** `"afternoon" < "noon"` alphabetically — never sort runs by slot name. Sort by `run_started_at` from each run's `manifest.json`.
 - Large regenerable per-run files (`phase1.json`, `prompt.md`, `response.json`) are git-ignored; `input/`, `output/`, and `log.json` are tracked.
+
+## The audit layer (`scripts/doctor.py`, `audit/`)
+
+Runs 20 min after each pipeline slot as **`com.bz.stock-doctor`** — a separate
+launchd job on purpose: a pipeline that dies hard must not take down the report
+saying so. Writes `runs/<date>/<slot>/audit-result.{md,json}` beside the
+manifest it judges, plus the standing view at `audit/OPEN.md`.
+
+Findings are one of two kinds, and the split is the whole design:
+
+- **invariant** — internally contradictory in a way no market condition can
+  produce (a `newPositions` entry the snapshot doesn't hold; a gate reporting
+  failure under a `status: success`). First occurrence is already a defect.
+- **env** — the outside world misbehaved. Weather until `PROMOTE_AFTER = 3`
+  consecutive occurrences, then treated as a design gap. Recurrence is *derived*
+  by re-reading prior `audit-result.json`, never stored in a ledger.
+
+Two rules to keep intact when editing:
+
+1. **It never writes `tracking/`.** Detection only (D12). A system that repairs
+   its own trade records produces numbers nobody can audit.
+2. **Checks stay independent of the writers they audit.** `newPositions` is
+   written from the execution outcome (`_not_opened`) rather than from
+   `positions.json` precisely so the doctor's snapshot comparison isn't a
+   tautology. Don't "simplify" either side to share a source.
+
+A check that can't run is reported as **skipped with its reason** — silently
+passing on a missing artifact is the exact lie this layer exists to catch.
+`audit/ACCEPTED.md` is the only human-authored input (doctor reads, never
+writes); entries are per *instance id*, so accepting history doesn't mute a
+fresh recurrence. Historical runs are judged against `ARTIFACT_EPOCHS`, not
+today's contract.
 
 ## State & the self-improvement loop
 
