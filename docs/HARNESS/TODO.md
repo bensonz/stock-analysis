@@ -60,7 +60,15 @@
 > Two spurious classes were mine and are now regression-pinned: judging Feb runs
 > by August's artifact contract, and calling a post-midnight rerun's marks
 > "stale" for being *newer* than the run date.
-- [ ] **`newPositions` records intent, not outcome** — 8 dates across 6 months
+- [x] **`newPositions` records intent, not outcome** — FIXED 2026-08-22.
+      `run_daily.opened_new_positions()` / `blocked_new_positions()`; blocked
+      candidates move to a new `blockedOpens` field with the reason rather than
+      being dropped. Writer deliberately still reads `_not_opened` (execution
+      outcome) rather than positions.json, so the doctor's snapshot comparison
+      stays an independent check instead of a tautology. 8 tests. The 11
+      historical instances are in audit/ACCEPTED.md as evidence — accepted by
+      instance id, so a new stock repeating it still shouts.
+      ~~8 dates across 6 months~~
       (03-11 ×3, 04-08, 06-09 ×2, 07-14, 07-31, 08-04, 08-17, 08-20) claim opens
       the snapshot never held. 08-17/688019 was "fixed" in the report prose only;
       the machine-readable field still lies. Fix at the source: write

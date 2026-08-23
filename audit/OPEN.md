@@ -5,7 +5,7 @@
 未结审计发现  (按问题归并, 不按实例)
 ==============================================================
 
-## 需要改代码 (3)
+## 需要改代码 (2)
 
   ▸ manifest_present  [invariant]
       5 次 / 5 天   2026-02-02 … 2026-04-12   最长连续 3
@@ -23,15 +23,6 @@
         · 2026-04-24 afternoon 数据源 eastmoney 状态 down
         · 2026-04-27 afternoon 数据源 eastmoney 状态 down
         · … 另有 8 次更早的
-
-  ▸ new_positions_absent_from_snapshot  [invariant]
-      11 次 / 8 天   2026-03-11 … 2026-08-20
-      改这里: scripts/run_daily.py (newPositions written from intent, not from applied outcome)
-        · 2026-07-31 afternoon daily_summary 声称新开 688536，持仓快照里没有
-        · 2026-08-04 noon      daily_summary 声称新开 000739，持仓快照里没有
-        · 2026-08-17 noon      daily_summary 声称新开 688019，持仓快照里没有
-        · 2026-08-20 noon      daily_summary 声称新开 688222，持仓快照里没有
-        · … 另有 7 次更早的
 
 
 ## 需要人工操作 (2)
@@ -53,6 +44,19 @@
         · 2026-08-12 noon      phase1_to_phase2 硬闸门拦截
         · 2026-08-20 afternoon phase1_to_phase2 硬闸门拦截
         · … 另有 15 次更早的
+
+
+## 已知并接受 (1)
+
+  ▸ new_positions_absent_from_snapshot  [invariant]
+      11 次 / 8 天   2026-03-11 … 2026-08-20
+      改这里: scripts/run_daily.py (newPositions written from intent, not from applied outcome)
+      已接受: 历史证据, 代码已于 2026-08-22 修复(run_daily.opened_new_positions); 2026-08-20 noon 的产物保持原样不改写
+        · 2026-07-31 afternoon daily_summary 声称新开 688536，持仓快照里没有
+        · 2026-08-04 noon      daily_summary 声称新开 000739，持仓快照里没有
+        · 2026-08-17 noon      daily_summary 声称新开 688019，持仓快照里没有
+        · 2026-08-20 noon      daily_summary 声称新开 688222，持仓快照里没有
+        · … 另有 7 次更早的
 
 
 ```

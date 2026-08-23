@@ -57,9 +57,21 @@ python3 scripts/doctor.py --open --since 2026-08-01   # 只看最近的未结项
 
 ## 当前接受的发现
 
-（空）
+- `new-position-not-held:002497` — 历史证据, 代码已于 2026-08-22 修复(run_daily.opened_new_positions); 2026-03-11 afternoon 的产物保持原样不改写
+- `new-position-not-held:603191` — 历史证据, 代码已于 2026-08-22 修复(run_daily.opened_new_positions); 2026-03-11 afternoon 的产物保持原样不改写
+- `new-position-not-held:600096` — 历史证据, 代码已于 2026-08-22 修复(run_daily.opened_new_positions); 2026-03-11 afternoon 的产物保持原样不改写
+- `new-position-not-held:688025` — 历史证据, 代码已于 2026-08-22 修复(run_daily.opened_new_positions); 2026-04-08 afternoon 的产物保持原样不改写
+- `new-position-not-held:688536` — 历史证据, 代码已于 2026-08-22 修复(run_daily.opened_new_positions); 2026-06-09 afternoon 的产物保持原样不改写
+- `new-position-not-held:688652` — 历史证据, 代码已于 2026-08-22 修复(run_daily.opened_new_positions); 2026-06-09 afternoon 的产物保持原样不改写
+- `new-position-not-held:002975` — 历史证据, 代码已于 2026-08-22 修复(run_daily.opened_new_positions); 2026-07-14 afternoon 的产物保持原样不改写
+- `new-position-not-held:688536` — 历史证据, 代码已于 2026-08-22 修复(run_daily.opened_new_positions); 2026-07-31 afternoon 的产物保持原样不改写
+- `new-position-not-held:000739` — 历史证据, 代码已于 2026-08-22 修复(run_daily.opened_new_positions); 2026-08-04 noon 的产物保持原样不改写
+- `new-position-not-held:688019` — 历史证据, 代码已于 2026-08-22 修复(run_daily.opened_new_positions); 2026-08-17 noon 的产物保持原样不改写
+- `new-position-not-held:688222` — 历史证据, 代码已于 2026-08-22 修复(run_daily.opened_new_positions); 2026-08-20 noon 的产物保持原样不改写
 
-> 现在故意留空。全量扫描 158 次运行给出 13 条「需要改代码」，其中 5 条是
-> `manifest-absent`、8 个日期是 `new-position-not-held`。两类都是**真缺陷**，
-> 都在 `docs/HARNESS/TODO.md` 里有条目，所以它们应该继续喊——把它们塞进这个
-> 文件只会让第一天就变成静音。
+> 上面这些是 `newPositions` 写意图不写结果那个缺陷留下的历史实例。代码已修
+> (2026-08-22, `run_daily.opened_new_positions`)，但那 8 天的 daily_summary.json
+> 里确实写着假话——它们是证据，不改写。接受的是**具体实例 id**，不是检查本身，
+> 所以换一只票再犯，照样会进「需要改代码」区喊人。
+>
+> `manifest-absent` 故意不接受: 它还没修，TODO Stage 4 里挂着，应该继续喊。

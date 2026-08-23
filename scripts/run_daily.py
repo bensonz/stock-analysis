@@ -1482,6 +1482,43 @@ def enforce_hard_sells(decisions: dict, data: dict, log: dict) -> None:
         )
 
 
+def _bare_code(p: dict) -> str:
+    return str(p.get("code", "")).split(".")[0]
+
+
+def opened_new_positions(candidates: list[dict]) -> list[dict]:
+    """Candidates that actually became positions.
+
+    `newPositions` used to be built straight from the intent list, so a
+    candidate the execution phase refused was still published as a new
+    position. The doctor found this on 8 dates across 6 months: on 2026-08-20
+    `report.md` correctly said 688222 was blocked at 涨停 while
+    `daily_summary.json` two files over called it a new position. 688019 in
+    August was the same defect — we corrected the report prose and left this
+    field lying, which is why 688222 repeated it three days later.
+
+    `_not_opened` is stamped by phase3_apply from the execution outcome, and
+    this deliberately reads that rather than positions.json: the doctor
+    compares this field against the position snapshot, and sourcing both sides
+    from one file would make that check tautological and blind to the next
+    disagreement.
+    """
+    return [{"code": _bare_code(p), "name": p.get("name")}
+            for p in candidates if not p.get("_not_opened")]
+
+
+def blocked_new_positions(candidates: list[dict]) -> list[dict]:
+    """Candidates the execution phase refused, with the reason.
+
+    Kept rather than dropped: silently deleting them would trade one lie for
+    another, and the entry filter working correctly — a 涨停 rejection, a lot
+    size that rounds to zero — is exactly the thing worth being able to audit.
+    """
+    return [{"code": _bare_code(p), "name": p.get("name"),
+             "reason": p["_not_opened"]}
+            for p in candidates if p.get("_not_opened")]
+
+
 def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
     """Phase 3: Apply LLM decisions. Pure Python.
 
@@ -1826,10 +1863,8 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
             output_dir=output_dir,
             portfolioStats=stats,
             entryRegime=entry_regime,
-            newPositions=[
-                {"code": str(p["code"]).split(".")[0], "name": p.get("name")}
-                for p in allowed_new_positions
-            ],
+            newPositions=opened_new_positions(allowed_new_positions),
+            blockedOpens=blocked_new_positions(allowed_new_positions),
             marketContext={
                 "summary": decisions.get("market_summary", ""),
             },

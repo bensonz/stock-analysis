@@ -1,16 +1,12 @@
 # 运行审计 2026-08-17 noon
 
-**结论: 🔴 需要改代码**
+**结论: ✅ 无发现**
 
-_生成于 2026-08-23T00:36:31+08:00_
+_生成于 2026-08-23T23:53:15+08:00_
 
-## 需要改代码 (1)
+## 已知并接受 (1)
 
-### [invariant] daily_summary 声称新开 688019，持仓快照里没有
-
-- `new-position-not-held:688019`
-- newPositions 含 688019 (安集科技)，但 positions_snapshot.activePositions 不含该代码。T+1 排除了当日开平的解释——两份产物必然有一份在说谎。
-- 可疑位置: `scripts/run_daily.py (newPositions written from intent, not from applied outcome)`
+- `new-position-not-held:688019` — 历史证据, 代码已于 2026-08-22 修复(run_daily.opened_new_positions); 2026-08-17 noon 的产物保持原样不改写
 
 ## 检查覆盖
 

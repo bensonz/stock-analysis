@@ -1,16 +1,12 @@
 # 运行审计 2026-04-08 afternoon
 
-**结论: 🔴 需要改代码**
+**结论: ✅ 无发现**
 
-_生成于 2026-08-23T00:36:30+08:00_
+_生成于 2026-08-23T23:53:14+08:00_
 
-## 需要改代码 (1)
+## 已知并接受 (1)
 
-### [invariant] daily_summary 声称新开 688025，持仓快照里没有
-
-- `new-position-not-held:688025`
-- newPositions 含 688025 (杰普特)，但 positions_snapshot.activePositions 不含该代码。T+1 排除了当日开平的解释——两份产物必然有一份在说谎。
-- 可疑位置: `scripts/run_daily.py (newPositions written from intent, not from applied outcome)`
+- `new-position-not-held:688025` — 历史证据, 代码已于 2026-08-22 修复(run_daily.opened_new_positions); 2026-04-08 afternoon 的产物保持原样不改写
 
 ## 检查覆盖
 
