@@ -410,3 +410,51 @@ def test_a_cold_sweep_converges_in_one_pass(tmp_path):
                       .read_text(encoding="utf-8"))
     assert last["findings"][0]["occurrences"] == 4
     assert last["verdict"] == "code_change_needed"
+
+
+# ── 9. the standing view: what is broken right now ───────────────────────────
+
+def test_open_view_folds_by_problem_not_by_instance(tmp_path):
+    """One defect on eight dates is ONE thing to go fix. Folding by finding id
+    was the obvious first cut and it was wrong — ids carry the stock code, so a
+    single bug in how newPositions is written rendered as eleven rows demanding
+    eleven fixes."""
+    runs = tmp_path / "runs"
+    for d, code in [("2026-08-04", "000739"), ("2026-08-17", "688019"),
+                    ("2026-08-20", "688222")]:
+        p = make_run(runs, d, "noon", new_positions=[{"code": code, "name": "x"}])
+        doc.write_result(doc.audit_run(d, "noon", p, runs_dir=runs, accepted={}), p)
+
+    groups = doc.open_findings(runs)
+    assert len(groups) == 1
+    g = groups[0]
+    assert g["check"] == "new_positions_absent_from_snapshot"
+    assert len(g["instances"]) == 3 and len(g["dates"]) == 3
+    assert g["needs_code"] and g["last_seen"] == "2026-08-20"
+
+
+def test_open_view_separates_code_from_operator_work(tmp_path):
+    runs = tmp_path / "runs"
+    p = make_run(runs, "2026-08-19", "afternoon", status="failed",
+                 phases={"collect": {"status": "failed", "errors": ["x"]}})
+    doc.write_result(doc.audit_run("2026-08-19", "afternoon", p, runs_dir=runs,
+                                   accepted={}), p)
+    p = make_run(runs, "2026-08-20", "noon",
+                 new_positions=[{"code": "688222", "name": "x"}])
+    doc.write_result(doc.audit_run("2026-08-20", "noon", p, runs_dir=runs,
+                                   accepted={}), p)
+
+    groups = {g["check"]: g for g in doc.open_findings(runs)}
+    assert groups["new_positions_absent_from_snapshot"]["needs_code"] is True
+    assert groups["phase_failed"]["needs_code"] is False
+    out = doc.render_open(list(groups.values()))
+    assert "需要改代码 (1)" in out and "需要人工操作 (1)" in out
+
+
+def test_open_view_is_empty_when_everything_is_clean(tmp_path):
+    runs = tmp_path / "runs"
+    p = make_run(runs, "2026-08-21", "afternoon")
+    doc.write_result(doc.audit_run("2026-08-21", "afternoon", p, runs_dir=runs,
+                                   accepted={}), p)
+    assert doc.open_findings(runs) == []
+    assert "（无）" in doc.render_open([])

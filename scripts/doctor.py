@@ -670,16 +670,105 @@ def write_result(res: AuditResult, path: Path) -> None:
     (path / "audit-result.md").write_text(render_md(res), encoding="utf-8")
 
 
+def open_findings(runs_dir: Path, since: str = "") -> list[dict]:
+    """Everything outstanding, folded by PROBLEM rather than by instance.
+
+    The per-run files answer "did THAT run go OK". They cannot answer "what is
+    broken right now", because one defect living on eight dates is one problem
+    in eight files, and the newest file says nothing about it.
+
+    Folding by finding id was the obvious first cut and it was wrong: ids carry
+    the stock code, so a single bug in how newPositions is written showed up as
+    eleven separate rows demanding eleven separate fixes. The unit of "a thing
+    to go fix" is the CHECK. Instances become evidence underneath it.
+    """
+    groups: dict[str, dict] = {}
+    for date, slot, p in calendar_order(runs_dir):
+        if since and date < since:
+            continue
+        try:
+            audit = json.loads((p / "audit-result.json").read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        for f in (audit.get("findings") or []):
+            g = groups.setdefault(f["check"], {
+                "check": f["check"], "kind": f["kind"], "suspect": f.get("suspect", ""),
+                "fix_cmd": f.get("fix_cmd", ""), "instances": [], "dates": set(),
+                "max_streak": 1, "accepted": "", "titles": []})
+            g["instances"].append({"date": date, "slot": slot, "id": f["id"],
+                                   "title": f["title"]})
+            g["dates"].add(date)
+            g["max_streak"] = max(g["max_streak"], f.get("occurrences", 1))
+            g["kind"] = f["kind"]
+            g["suspect"] = g["suspect"] or f.get("suspect", "")
+            g["fix_cmd"] = g["fix_cmd"] or f.get("fix_cmd", "")
+            if f.get("accepted"):
+                g["accepted"] = f["accepted"]
+    out = []
+    for g in groups.values():
+        g["dates"] = sorted(g["dates"])
+        g["last_seen"] = g["dates"][-1]
+        g["needs_code"] = bool(not g["accepted"] and (
+            g["kind"] == INVARIANT or g["max_streak"] >= PROMOTE_AFTER))
+        out.append(g)
+    out.sort(key=lambda g: (g["accepted"] != "", not g["needs_code"],
+                            g["last_seen"]), reverse=False)
+    out.sort(key=lambda g: (g["accepted"] != "", not g["needs_code"]))
+    return out
+
+
+def render_open(groups: list[dict]) -> str:
+    L = ["未结审计发现  (按问题归并, 不按实例)", "=" * 62, ""]
+    buckets = [("需要改代码", lambda g: g["needs_code"]),
+               ("需要人工操作", lambda g: not g["needs_code"] and not g["accepted"]),
+               ("已知并接受", lambda g: bool(g["accepted"]))]
+    for label, pick in buckets:
+        sel = [g for g in groups if pick(g)]
+        if not sel:
+            continue
+        L.append(f"## {label} ({len(sel)})")
+        L.append("")
+        for g in sel:
+            span = (f"{g['dates'][0]} … {g['last_seen']}"
+                    if len(g["dates"]) > 1 else g["last_seen"])
+            L.append(f"  ▸ {g['check']}  [{g['kind']}]")
+            L.append(f"      {len(g['instances'])} 次 / {len(g['dates'])} 天   {span}"
+                     + (f"   最长连续 {g['max_streak']}" if g["max_streak"] > 1 else ""))
+            if g["suspect"]:
+                L.append(f"      改这里: {g['suspect']}")
+            if g["fix_cmd"]:
+                L.append(f"      执行:   {g['fix_cmd']}")
+            if g["accepted"]:
+                L.append(f"      已接受: {g['accepted']}")
+            recent = g["instances"][-4:]
+            for i in recent:
+                L.append(f"        · {i['date']} {i['slot']:<9} {i['title']}")
+            if len(g["instances"]) > len(recent):
+                L.append(f"        · … 另有 {len(g['instances']) - len(recent)} 次更早的")
+            L.append("")
+        L.append("")
+    if len(L) == 3:
+        L.append("  （无）")
+    return "\n".join(L)
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Post-run audit (detection only).")
     ap.add_argument("--date")
     ap.add_argument("--slot", choices=("noon", "afternoon"))
     ap.add_argument("--since", help="sweep every run from this date forward")
+    ap.add_argument("--open", action="store_true", dest="open_",
+                    help="what is outstanding across all runs, folded by problem")
     ap.add_argument("--dry-run", action="store_true", help="print, do not write")
     ap.add_argument("--runs-dir", default=None)
     args = ap.parse_args(argv)
 
     runs_dir = Path(args.runs_dir) if args.runs_dir else RUNS_DIR
+
+    if args.open_:
+        groups = open_findings(runs_dir, since=args.since or "")
+        print(render_open(groups))
+        return 1 if any(g["needs_code"] for g in groups) else 0
 
     if args.since:
         # Calendar order matters twice over here: each audit reads the ones
