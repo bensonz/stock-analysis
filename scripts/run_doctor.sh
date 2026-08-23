@@ -18,6 +18,11 @@ echo "=== run_doctor $(date '+%Y-%m-%d %H:%M:%S %z') args=$* ==="
 source .venv/bin/activate
 python3 scripts/doctor.py "$@"
 rc=$?
+# Refresh the standing view as well. Auditing this run without updating the
+# aggregate leaves audit/OPEN.md describing yesterday, which is the same class
+# of stale-status lie the doctor exists to catch — and it would be sitting in
+# the doctor's own output.
+python3 scripts/doctor.py --open >/dev/null
 # Exit 1 means "findings need a code change" — real information, not a crash.
 # Report it verbatim rather than letting launchd's retry logic read it as one.
 echo "=== exit=$rc $(date '+%Y-%m-%d %H:%M:%S %z') ==="

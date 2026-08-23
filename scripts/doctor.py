@@ -52,6 +52,10 @@ from run_paths import RUNS_DIR, list_runs_sorted, find_run_dir  # noqa: E402
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 ACCEPTED_FILE = PROJECT_ROOT / "audit" / "ACCEPTED.md"
+#: the standing "what is broken right now" view, refreshed after every audit.
+#: A command you have to remember to run is a command nobody runs; the whole
+#: point of the aggregate is that it is sitting there when you go looking.
+OPEN_FILE = PROJECT_ROOT / "audit" / "OPEN.md"
 
 #: consecutive occurrences after which an env finding is treated as a defect
 PROMOTE_AFTER = 3
@@ -767,7 +771,21 @@ def main(argv=None) -> int:
 
     if args.open_:
         groups = open_findings(runs_dir, since=args.since or "")
-        print(render_open(groups))
+        text = render_open(groups)
+        print(text)
+        if not args.dry_run:
+            # Follow --runs-dir. A module-level constant here would mean any
+            # test passing a tmp runs dir still writes the REAL audit/OPEN.md —
+            # the same import-bound-path leak that put two synthetic trades in
+            # tracking/closed/ on 08-19.
+            out_file = (OPEN_FILE if runs_dir == RUNS_DIR
+                        else runs_dir.parent / "audit" / "OPEN.md")
+            out_file.parent.mkdir(parents=True, exist_ok=True)
+            out_file.write_text(
+                "<!-- 由 scripts/doctor.py --open 生成, 不要手改. -->\n"
+                "<!-- 要接受某条发现, 编辑同目录的 ACCEPTED.md. -->\n\n"
+                "```\n" + text + "\n```\n", encoding="utf-8")
+            print(f"→ {out_file}", file=sys.stderr)
         return 1 if any(g["needs_code"] for g in groups) else 0
 
     if args.since:

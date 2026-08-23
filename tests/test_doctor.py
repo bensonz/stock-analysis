@@ -458,3 +458,31 @@ def test_open_view_is_empty_when_everything_is_clean(tmp_path):
                                    accepted={}), p)
     assert doc.open_findings(runs) == []
     assert "（无）" in doc.render_open([])
+
+
+def test_open_writes_a_file_you_can_just_open(tmp_path):
+    """A command you have to remember to run is a command nobody runs."""
+    runs = tmp_path / "runs"
+    p = make_run(runs, "2026-08-20", "noon",
+                 new_positions=[{"code": "688222", "name": "x"}])
+    doc.write_result(doc.audit_run("2026-08-20", "noon", p, runs_dir=runs,
+                                   accepted={}), p)
+    rc = doc.main(["--open", "--runs-dir", str(runs)])
+    assert rc == 1
+    written = tmp_path / "audit" / "OPEN.md"
+    assert written.exists()
+    assert "new_positions_absent_from_snapshot" in written.read_text(encoding="utf-8")
+
+
+def test_open_respects_runs_dir_and_leaves_the_real_file_alone(tmp_path):
+    """Import-bound paths are how tests leaked two synthetic trades into
+    tracking/closed/ on 08-19. Not again."""
+    real = doc.OPEN_FILE
+    before = real.read_bytes() if real.exists() else None
+    runs = tmp_path / "runs"
+    p = make_run(runs, "2026-08-21", "noon")
+    doc.write_result(doc.audit_run("2026-08-21", "noon", p, runs_dir=runs,
+                                   accepted={}), p)
+    doc.main(["--open", "--runs-dir", str(runs)])
+    after = real.read_bytes() if real.exists() else None
+    assert after == before, "the real audit/OPEN.md must not be touched"
