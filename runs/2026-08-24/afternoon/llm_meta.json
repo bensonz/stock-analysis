@@ -1,0 +1,52 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 151717,
+  "output_tokens": 15505,
+  "rounds": 2,
+  "duration_sec": 255.4,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月24日 大盘 回调 原因 创业板 跌",
+        "max_results": 6
+      },
+      "result_length": 3863
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "CXO 医疗服务板块 2026年8月24日 下跌 药明康德",
+        "max_results": 6
+      },
+      "result_length": 3775
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "煤炭 焦炭 保险 板块 上涨 2026年8月24日 原因",
+        "max_results": 6
+      },
+      "result_length": 3805
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "恒逸石化 2026年8月 文莱 炼化 最新消息",
+        "max_results": 5
+      },
+      "result_length": 3309
+    }
+  ],
+  "fallback_used": false
+}

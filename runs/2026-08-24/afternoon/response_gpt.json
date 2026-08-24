@@ -1,0 +1,146 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "焦炭Ⅱ",
+        "day_pct": 5.28,
+        "trend": "accelerating"
+      },
+      {
+        "name": "保险Ⅱ",
+        "day_pct": 2.57,
+        "trend": "steady"
+      },
+      {
+        "name": "种植业",
+        "day_pct": 2.15,
+        "trend": "steady"
+      },
+      {
+        "name": "煤炭开采",
+        "day_pct": 2.14,
+        "trend": "steady"
+      },
+      {
+        "name": "农商行Ⅱ",
+        "day_pct": 1.97,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "玻璃玻纤",
+        "day_pct": -5.48,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "通信设备",
+        "day_pct": -5.17,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "生物制品",
+        "day_pct": -4.78,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "医疗服务",
+        "day_pct": -4.33,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "元件",
+        "day_pct": -4.18,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/2 positions in hot sectors（恒逸石化·石油石化未入top/bottom5；药明康德·医疗服务连续第2日bottom5）",
+    "regime": "科技/算力退潮，资金避险至煤炭、贵金属、农业、保险等防御板块；光模块权重股集体回调拖累创业板"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "+21.9%利润奔跑中，止损已锁+10%(17.16)，距现价约9.8%安全垫；今日-8.56%但文莱炼化逻辑未破（H1净利+2500.73%、文莱二期扩产，来源：新浪财经8/21）；石油石化未入top/bottom5，未触发冷区离场线，让利润奔跑",
+      "sector_rank": "中性（未入top/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 21.9,
+      "days_held": 16,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "+23.2%利润、止损锁+10%(139.15)距现价约10.7%安全垫；医疗服务连续第2日入bottom5(-4.33%)，未达'冷3日'轮出线，明日若第3日仍冷则按Rule 1机械离场，不被利润锚定",
+      "sector_rank": "bottom 5（医疗服务，连续第2日）",
+      "new_stop": null,
+      "pnl_pct": 23.2,
+      "days_held": 14,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601918",
+      "name": "新集能源",
+      "reason": "煤炭开采是今日热点(top5, +2.14%)、rps120=92.65，但全市场退潮(breadth 0.37:1、0/3指数翻红)不满足最低买入门槛(≥1.5:1且至少2/3指数翻红)，今日不建仓",
+      "rps120": 92.65
+    },
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "reason": "rps120=91.68处甜点区，但8/19放量大跌(-10.7%、3.85x均量)、估值处历史98%分位、明日(8/25)中报事件窗口，且电子化学品Ⅱ非今日热点，跳过",
+      "rps120": 91.68
+    },
+    {
+      "code": "688347",
+      "name": "华虹宏力",
+      "reason": "rps120=98.86 超过Rule 2的95%过热上限，且半导体/科创50今日-3.10%，板块冷，跳过",
+      "rps120": 98.86
+    },
+    {
+      "code": "000725",
+      "name": "京东方A",
+      "reason": "rps120=93.02，面板/光学光电子非今日热点（资金避险至煤炭/贵金属/农业），弱市跳过",
+      "rps120": 93.02
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱退潮日（三大指数全绿 + breadth 0.37:1）即使有个股处于热门板块（如新集能源·煤炭开采top5）也不应建仓——最低买入门槛（breadth≥1.5:1、至少2/3指数翻红）是硬闸门，个股α无法对抗系统性β",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "breadth<1:1属于恐慌盘，追入任何标的都面临次日跳空与滑点，应保持现金"
+    },
+    {
+      "text": "医疗服务连续第2日入bottom5(-4.33%)，药明康德(+23.2%)虽未到'冷3日'线，但板块引力正在拉低强势持仓——明日若第3日仍冷须按Rule 1机械离场，不被+23%利润锚定",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "热门板块翻冷通常先于个股破位，强势股也会被板块β拖垮"
+    },
+    {
+      "text": "enriched_candidates 的 dist_ma5/10/20_pct 普遍异常（如紫光股份 current 34.49 而 ma5=216.88、dist=-84%），疑似复权口径不一致，MA距离追高检查(Rule 2b)对这批候选不可用——本轮只能用 RPS+板块+市场闸门过滤，不可据此机械判定追高风险",
+      "type": "signal",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "observation",
+      "mechanism": "数据质量缺陷导致技术信号失真，需降级处理而非强行使用"
+    }
+  ],
+  "market_summary": "弱势退潮日：上证-0.59%、深成-2.13%、创业板-3.21%、科创50-3.10%，三大指数全绿。Breadth 0.37:1（上涨1460/下跌3965），涨停48/跌停14，放量普跌。光模块权重股集体回调拖累创业板AI指数-5.09%（来源：财中社），资金避险至煤炭、贵金属、农业、保险等防御板块（焦炭Ⅱ+5.28%、保险Ⅱ+2.57%、种植业+2.15%，来源：新华财经午评）。IV中性偏高（avg IV rank 0.47；深100ETF 0.72/创业板ETF 0.59偏高）。Entry regime weak：breadth 0.37:1、0/3指数翻红，最低买入门槛不满足，今日不建新仓，保持现金。",
+  "market_sentiment": "bearish",
+  "market_call": "观望"
+}
