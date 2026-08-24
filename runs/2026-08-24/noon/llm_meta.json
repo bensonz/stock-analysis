@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 215229,
+  "output_tokens": 12474,
+  "rounds": 3,
+  "duration_sec": 219.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 大跌 原因 2026年8月24日 创业板 科技股",
+        "max_results": 5
+      },
+      "result_length": 3211
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "中芯国际 688981 股价 2026年8月 半导体",
+        "max_results": 5
+      },
+      "result_length": 3153
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "恒逸石化 000703 文莱 炼化 2026年8月",
+        "max_results": 5
+      },
+      "result_length": 3313
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 CXO 医疗服务板块 2026年8月",
+        "max_results": 5
+      },
+      "result_length": 3435
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://news.cnyes.com/news/id/6538685",
+        "maxChars": 5000
+      },
+      "result_length": 62
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年8月24日 全球科技股卖压 美联储 关税 风险事件",
+        "max_results": 5
+      },
+      "result_length": 3373
+    }
+  ],
+  "fallback_used": false
+}

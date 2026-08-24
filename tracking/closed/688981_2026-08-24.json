@@ -1,7 +1,7 @@
 {
   "code": "688981",
   "name": "中芯国际",
-  "status": "active",
+  "status": "closed",
   "thesis": "集成电路制造绝对龙头，0风险标签。科创50今日+5.18%极强势，半导体产业链全线上涨。在建工程20%产能大扩张周期，机构目标+41%。远低于各均线（dist_ma20=-16.8%）——非追涨而是抄回调。IV rank 75%偏紧但0风险+龙头地位满足仅选最强标的门槛。",
   "entryDate": "2026-08-05",
   "entryPrice": 121.1,
@@ -176,16 +176,26 @@
       "change_pct": 3.06,
       "action": "HOLD",
       "note": "+3.1%在保本止损121.1上方仅3.0%（stop_proximity WARNING），半导体未入top/bottom5；Q2收入首破30亿美元、净利+261.7%逻辑未破（来源：新浪港股8/14），持有观察，明日低开防跳空"
+    },
+    {
+      "date": "2026-08-24",
+      "slot": "noon",
+      "price": 120.72,
+      "change_pct": -0.31,
+      "action": "SELL",
+      "shares": 200,
+      "note": "现价120.72已跌破保本止损121.1(-0.31%)，stop_proximity CRITICAL + time_decay 13/15叠加，半导体未入热点且科创50-3.26%，按h024主动止损不等跳空扩大亏损"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-08-24",
+  "exitPrice": 120.72,
+  "exitReason": "现价120.72已跌破保本止损121.1(-0.31%)，stop_proximity CRITICAL + time_decay 13/15叠加，半导体未入热点且科创50-3.26%，按h024主动止损不等跳空扩大亏损",
+  "returnPct": -0.31,
+  "holdingDays": 12,
+  "lessonLearned": "",
   "createdAt": "2026-08-05T11:42:09.870826+08:00",
-  "updatedAt": "2026-08-21T15:10:55.044172+08:00",
+  "updatedAt": "2026-08-24T11:40:11.496644+08:00",
   "trackerVersion": "2.1",
-  "entrySlot": "noon"
+  "entrySlot": "noon",
+  "exitSlot": "noon"
 }
