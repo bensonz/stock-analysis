@@ -57,6 +57,9 @@ TUSHARE_TOKEN_ENV_NAMES = ("TUSHARE_TOKEN", "TUSHARE_PRO_TOKEN", "TS_TOKEN")
 IFIND_BATCH_CODES = int(os.getenv("IFIND_BATCH_CODES", "1000"))
 IFIND_BATCH_TIMEOUT_SEC = float(os.getenv("IFIND_BATCH_TIMEOUT", "120"))
 IFIND_BAR_INDICATORS = "open,high,low,close,volume,amount"
+# ths_af_stock is an exact published factor, not an inference, so only float
+# noise needs suppressing — see the threshold note in sync_adj_factors_for_today.
+IFIND_ADJ_EVENT_EPSILON = 1e-9
 
 # History needed: 250-day RPS + 10-day MA buffer → use extra holiday margin
 INIT_HISTORY_DAYS = 450
@@ -2322,6 +2325,134 @@ def _fetch_clist_prev_close_map() -> dict:
     return out
 
 
+def _ifind_af_series(codes: list, ex_map: dict, beg: str, end: str) -> dict:
+    """{code: {date: af}} from iFinD's ths_af_stock over [beg, end].
+
+    `ths_af_stock` is iFinD's own cumulative adjustment factor. Note it uses a
+    DIFFERENT base from ours (theirs is anchored at listing, ours at the start
+    of our history), so absolute values are not interchangeable with the stored
+    table — only ratios within one code are. Callers must respect that.
+    """
+    client = ifind_client.get_client()
+    ths_to_code = {ifind_client.to_ths_code(c, ex_map.get(c)): c for c in codes}
+    out: dict = {}
+    batch = IFIND_BATCH_CODES
+    all_ths = list(ths_to_code)
+    for i in range(0, len(all_ths), batch):
+        chunk = all_ths[i:i + batch]
+        tables = _run_with_timeout(
+            "iFinD af series",
+            lambda c=chunk: client.date_sequence(
+                c, [{"indicator": "ths_af_stock", "indiparams": [""]}], beg, end),
+            timeout=IFIND_BATCH_TIMEOUT_SEC)
+        for table in tables:
+            code = ths_to_code.get(table.get("thscode"))
+            if not code:
+                continue
+            afs = (table.get("table") or {}).get("ths_af_stock") or []
+            series = {}
+            for j, day in enumerate(table.get("time") or []):
+                af = afs[j] if j < len(afs) else None
+                if af:
+                    series[str(day)[:10]] = af
+            if series:
+                out[code] = series
+    return out
+
+
+def _ifind_event_multipliers(conn: sqlite3.Connection, codes: list,
+                             prev_date: str, date_iso: str) -> dict:
+    """{code: multiplier} for `date_iso`, from the RATIO of iFinD's factors.
+
+    Deliberately a ratio, not an absolute value. Our stored chains are anchored
+    at 1.0 on each code's first date; iFinD anchors at listing. Writing their
+    absolute af into our table would jump the base mid-series and fabricate a
+    return on the splice date. Taking af[today]/af[prev] imports only the
+    corporate-action event, which is the part iFinD detects more reliably than
+    the retired eastmoney clist f18 probe.
+    """
+    ex_map = {c: e for c, e in conn.execute("SELECT code, exchange FROM stocks")}
+    series = _ifind_af_series(codes, ex_map, prev_date, date_iso)
+    out = {}
+    for code, by_date in series.items():
+        prev_af, today_af = by_date.get(prev_date), by_date.get(date_iso)
+        if prev_af and today_af and prev_af > 0:
+            out[code] = today_af / prev_af
+    return out
+
+
+def rebuild_factors_from_ifind(conn: sqlite3.Connection, codes: list | None = None,
+                               dry_run: bool = False, chunk: int = 300) -> dict:
+    """Rebuild adj_factors for whole codes from iFinD's ths_af_stock.
+
+    Rebuilds a code's ENTIRE series or none of it. Partial rebuilds are the one
+    thing that must not happen here: our chains are anchored at 1.0 on each
+    code's first date while iFinD anchors at listing, so splicing their absolute
+    values into the middle of one of our series would fabricate a return on the
+    splice date. Each series is renormalized to 1.0 at the code's first date,
+    which reproduces our existing convention exactly.
+    """
+    ex_map = {c: e for c, e in conn.execute("SELECT code, exchange FROM stocks")}
+    bounds = {}
+    for code, first, last in conn.execute(
+            "SELECT code, MIN(date), MAX(date) FROM daily_prices GROUP BY code"):
+        bounds[code] = (first, last)
+    targets = [c for c in (codes or bounds) if c in bounds]
+
+    stats = {"codes": len(targets), "rebuilt": 0, "rows": 0,
+             "no_data": 0, "failed": 0}
+    if not targets:
+        return stats
+
+    for i in range(0, len(targets), chunk):
+        batch = targets[i:i + chunk]
+        beg = min(bounds[c][0] for c in batch)
+        end = max(bounds[c][1] for c in batch)
+        try:
+            series = _ifind_af_series(batch, ex_map, beg, end)
+        except Exception as e:
+            stats["failed"] += len(batch)
+            print(f"    ⚠ batch {batch[0]}..{batch[-1]} failed: {str(e)[:70]}",
+                  file=sys.stderr)
+            continue
+
+        rows = []
+        for code in batch:
+            by_date = series.get(code)
+            if not by_date:
+                stats["no_data"] += 1
+                continue
+            dates = sorted(d for d in by_date
+                           if bounds[code][0] <= d <= bounds[code][1])
+            if not dates:
+                stats["no_data"] += 1
+                continue
+            base = by_date[dates[0]]
+            if not base or base <= 0:
+                stats["no_data"] += 1
+                continue
+            for d in dates:
+                rows.append((code, d, round(by_date[d] / base, 8)))
+            stats["rebuilt"] += 1
+
+        if rows and not dry_run:
+            # Replace the whole code's series atomically.
+            done = {c for c, _, _ in rows}
+            conn.executemany("DELETE FROM adj_factors WHERE code = ?",
+                             [(c,) for c in done])
+            conn.executemany(
+                "INSERT OR REPLACE INTO adj_factors(code,date,factor) "
+                "VALUES (?,?,?)", rows)
+            conn.commit()
+        stats["rows"] += len(rows)
+        print(f"    [{min(i + chunk, len(targets))}/{len(targets)}] "
+              f"{stats['rebuilt']} codes, {stats['rows']:,} rows", file=sys.stderr)
+
+    if not dry_run:
+        _forward_fill_factors(conn)
+    return stats
+
+
 def sync_adj_factors_for_today(conn: sqlite3.Connection, date_iso: str) -> str | None:
     """Incremental daily factor sync using the clist f18 detector.
 
@@ -2341,9 +2472,6 @@ def sync_adj_factors_for_today(conn: sqlite3.Connection, date_iso: str) -> str |
     prev_date = prev_row[0] if prev_row else None
     if not prev_date:
         return None
-    f18_map = _fetch_clist_prev_close_map()
-    if not f18_map:
-        raise RuntimeError("clist f18 snapshot returned no rows")
     prev_closes = dict(conn.execute(
         "SELECT code, close FROM daily_prices WHERE date = ?", (prev_date,)
     ))
@@ -2357,14 +2485,45 @@ def sync_adj_factors_for_today(conn: sqlite3.Connection, date_iso: str) -> str |
             f"adj_factors has no rows for {prev_date} — multi-day gap; "
             f"run 'pricedb.py factors heal'"
         )
+
+    # Primary: iFinD's own factor ratio. Fallback: the eastmoney clist f18
+    # probe, which is a RETIRED provider surviving only as this helper — it
+    # infers the event from prev_close/f18 and dies whenever eastmoney throttles.
+    source = "ifind"
+    mult_map: dict = {}
+    if ifind_client.is_available():
+        try:
+            mult_map = _ifind_event_multipliers(
+                conn, list(prev_closes), prev_date, date_iso)
+        except Exception as e:
+            print(f"  factors: iFinD multipliers failed ({str(e)[:80]}) — "
+                  f"falling back to clist f18", file=sys.stderr)
+    if not mult_map:
+        source = "clist-f18"
+        f18_map = _fetch_clist_prev_close_map()
+        if not f18_map:
+            raise RuntimeError("clist f18 snapshot returned no rows")
+        for code, prev_close in prev_closes.items():
+            f18 = f18_map.get(code)
+            if f18 and prev_close and prev_close > 0:
+                mult_map[code] = prev_close / f18
+
+    # The noise threshold is a property of the SOURCE, not of the market.
+    # clist f18 INFERS the event from prev_close/f18, so ratios within 0.5% are
+    # indistinguishable from rounding noise and get snapped to 1.0. iFinD's
+    # ths_af_stock is an exact published factor — applying the same 0.5% floor
+    # to it discarded 4 of the 6 real dividends on 2026-08-25 (steps of
+    # 1.0021–1.0039), so exact sources get only a float-noise epsilon.
+    threshold = (IFIND_ADJ_EVENT_EPSILON if source == "ifind"
+                 else ADJ_EVENT_THRESHOLD)
+
     rows = []
     events = 0
     for code, prev_close in prev_closes.items():
-        f18 = f18_map.get(code)
-        if not f18 or not prev_close or prev_close <= 0:
+        m = mult_map.get(code)
+        if not m or m <= 0:
             continue
-        m = prev_close / f18
-        if abs(m - 1.0) <= ADJ_EVENT_THRESHOLD:
+        if abs(m - 1.0) <= threshold:
             m = 1.0
         else:
             events += 1
@@ -2372,8 +2531,8 @@ def sync_adj_factors_for_today(conn: sqlite3.Connection, date_iso: str) -> str |
         rows.append((code, date_iso, round(base * m, 8)))
     earliest = upsert_adj_factors(conn, rows)
     _forward_fill_factors(conn)
-    print(f"  factors: {date_iso} synced ({events} corporate actions detected)",
-          file=sys.stderr)
+    print(f"  factors: {date_iso} synced via {source} "
+          f"({events} corporate actions detected)", file=sys.stderr)
     return earliest
 
 
@@ -2549,13 +2708,16 @@ def _sync_or_heal_factors(conn: sqlite3.Connection) -> str | None:
 
 
 def cmd_factors(args: list):
-    """CLI: pricedb.py factors backfill|update|heal|verify [--beg --end]
+    """CLI: pricedb.py factors backfill|update|heal|verify|rebuild [--beg --end]
 
     backfill — codes with zero factor rows (per-code sina/eastmoney, resumable)
-    update   — daily incremental (same-day f18 sync, auto-heals gaps)
+    update   — daily incremental (iFinD af ratio, clist f18 fallback; auto-heals)
     heal     — repair a multi-session gap (ex-div calendar + re-derivation);
                --beg/--end are ISO dates, default = the current gap
     verify   — coverage/lag audit, exit 1 on failure
+    rebuild  — rebuild whole series from iFinD ths_af_stock (--code CSV to
+               limit, --dry-run to preview). Destructive: it DELETEs each
+               rebuilt code's rows first, so back up adj_factors beforehand.
     """
     global _UPDATE_DEADLINE
     _UPDATE_DEADLINE = None  # factor work is budget-exempt (off-hours, resumable)
@@ -2580,6 +2742,35 @@ def cmd_factors(args: list):
                 print(f"VERIFY FAILED: {p}", file=sys.stderr)
             sys.exit(1)
         print("VERIFY OK (BJ codes deliberately unfactored — read as 1.0)")
+        return
+
+    if sub == "rebuild":
+        def _arg(flag, default=None):
+            return args[args.index(flag) + 1] if flag in args else default
+
+        if not ifind_client.is_available():
+            print("iFinD not configured — cannot rebuild", file=sys.stderr)
+            conn.close()
+            sys.exit(1)
+        dry = "--dry-run" in args
+        code_arg = _arg("--code")
+        codes = [c.strip() for c in code_arg.split(",")] if code_arg else None
+        print(f"factors rebuild from iFinD"
+              f"{' (dry run)' if dry else ''}"
+              f"{f' — {len(codes)} code(s)' if codes else ' — ALL codes'}",
+              file=sys.stderr)
+        stats = rebuild_factors_from_ifind(conn, codes, dry_run=dry)
+        try:
+            print(f"\n  codes targeted : {stats['codes']}", file=sys.stderr)
+            print(f"  rebuilt        : {stats['rebuilt']}", file=sys.stderr)
+            print(f"  factor rows    : {stats['rows']:,}", file=sys.stderr)
+            print(f"  no iFinD data  : {stats['no_data']}", file=sys.stderr)
+            print(f"  failed         : {stats['failed']}", file=sys.stderr)
+            if not dry:
+                invalidate_rps_cache(conn)
+                print("  rps_cache invalidated", file=sys.stderr)
+        finally:
+            conn.close()
         return
 
     if sub == "update":
