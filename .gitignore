@@ -19,6 +19,9 @@ data/pricedb/
 
 # secrets — never commit
 .env
+# Cached iFinD access token (derived from IFIND_REFRESH_TOKEN in .env, ~7d TTL).
+# Regenerated on demand by scripts/ifind_client.py; written 0600.
+data/ifind_token.json
 
 # Generated portfolio site — pure function of tracking/ + runs/ + data/index_cache/.
 # Rebuilt on every run (and by `python3 scripts/build_site.py`); committing it
