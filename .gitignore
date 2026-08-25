@@ -22,6 +22,9 @@ data/pricedb/
 # Cached iFinD access token (derived from IFIND_REFRESH_TOKEN in .env, ~7d TTL).
 # Regenerated on demand by scripts/ifind_client.py; written 0600.
 data/ifind_token.json
+# Derived SW level-1 industry membership cache (refreshed monthly from iFinD's
+# ths_the_sw_industry_stock). Regenerable; see data_collector._load_sw_industry_map.
+data/sw_industry_map.json
 
 # Generated portfolio site — pure function of tracking/ + runs/ + data/index_cache/.
 # Rebuilt on every run (and by `python3 scripts/build_site.py`); committing it

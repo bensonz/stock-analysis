@@ -883,6 +883,188 @@ def _fetch_indices_sina() -> dict:
         return {}
 
 
+def _fetch_indices_ifind() -> dict:
+    """Index quotes from iFinD. Same {name: {code, close, change_pct, date}} shape."""
+    try:
+        import ifind_client
+    except ImportError:
+        return {}
+    if not ifind_client.is_available():
+        return {}
+
+    wanted = {
+        "000001.SH": ("上证指数", "sh000001"),
+        "399001.SZ": ("深证成指", "sz399001"),
+        "399006.SZ": ("创业板指", "sz399006"),
+        "000688.SH": ("科创50", "sh000688"),
+    }
+    try:
+        tables = ifind_client.get_client().real_time(
+            list(wanted), "latest,preClose")
+    except Exception as e:
+        print(f"  iFinD index fetch failed: {e}", file=sys.stderr)
+        return {}
+
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    indices = {}
+    for table in tables:
+        entry = wanted.get(table.get("thscode"))
+        if not entry:
+            continue
+        name, our_code = entry
+        cols = table.get("table") or {}
+        latest = (cols.get("latest") or [None])[0]
+        prev = (cols.get("preClose") or [None])[0]
+        if latest is None:
+            continue
+        stamps = table.get("time") or []
+        indices[name] = {
+            "code": our_code,
+            "close": round(float(latest), 3),
+            "change_pct": (round((latest - prev) / prev * 100, 2) if prev else 0.0),
+            "date": (str(stamps[0])[:10] if stamps else today_str),
+        }
+    return indices
+
+
+def _ifind_universe_changes(date: str | None = None) -> tuple[dict, str] | None:
+    """{code: changeRatio} for the whole A-share universe, plus the date used.
+
+    One request set (~2.4s) replaces sina's 65-page pagination. Both breadth and
+    sector aggregation read from this, so they can never disagree with each
+    other the way two independent scrapes can.
+    """
+    try:
+        import ifind_client
+    except ImportError:
+        return None
+    if not ifind_client.is_available():
+        return None
+
+    db_path = str(PROJECT_ROOT / "data" / "pricedb" / "ashare_prices.db")
+    if not Path(db_path).exists():
+        return None
+    try:
+        conn = sqlite3.connect(db_path)
+        if date is None:
+            date = conn.execute("SELECT MAX(date) FROM daily_prices").fetchone()[0]
+        rows = conn.execute("SELECT d.code, s.exchange FROM daily_prices d "
+                            "LEFT JOIN stocks s ON s.code = d.code "
+                            "WHERE d.date = ?", (date,)).fetchall()
+        conn.close()
+    except Exception as e:
+        print(f"  iFinD breadth: pricedb read failed: {e}", file=sys.stderr)
+        return None
+    if not rows:
+        return None
+
+    ths_to_code = {ifind_client.to_ths_code(c, ex): c for c, ex in rows}
+    try:
+        tables = ifind_client.get_client().history_quotation(
+            list(ths_to_code), "changeRatio", date, date)
+    except Exception as e:
+        print(f"  iFinD universe change fetch failed: {e}", file=sys.stderr)
+        return None
+
+    changes = {}
+    for table in tables:
+        code = ths_to_code.get(table.get("thscode"))
+        series = (table.get("table") or {}).get("changeRatio") or []
+        if code and series and series[0] is not None:
+            changes[code] = series[0]
+    return (changes, date) if changes else None
+
+
+def _fetch_breadth_ifind() -> dict | None:
+    """Market breadth from the iFinD universe pull."""
+    result = _ifind_universe_changes()
+    if not result:
+        return None
+    changes, _date = result
+    up = sum(1 for v in changes.values() if v > 0)
+    down = sum(1 for v in changes.values() if v < 0)
+    flat = sum(1 for v in changes.values() if v == 0)
+    return {"up": up, "down": down, "flat": flat, "total": len(changes)}
+
+
+def _fetch_sectors_ifind() -> dict | None:
+    """Top/bottom SW level-1 sectors, aggregated from the universe pull.
+
+    Membership comes from `ths_the_sw_industry_stock` with params
+    **[level, date] — level FIRST**. Reversed, iFinD returns an empty string
+    rather than an error, which would silently produce zero sectors.
+
+    Membership changes slowly, so it is cached on disk and refreshed monthly.
+    """
+    result = _ifind_universe_changes()
+    if not result:
+        return None
+    changes, date = result
+
+    membership = _load_sw_industry_map(list(changes), date)
+    if not membership:
+        return None
+
+    buckets: dict = {}
+    for code, chg in changes.items():
+        name = membership.get(code)
+        if not name:
+            continue
+        buckets.setdefault(name, []).append(chg)
+
+    sectors = [{"板块名称": name, "涨跌幅": round(sum(v) / len(v), 2),
+                "个股数": len(v)}
+               for name, v in buckets.items() if v]
+    if not sectors:
+        return None
+    sectors.sort(key=lambda x: x["涨跌幅"], reverse=True)
+    return {"top5": sectors[:5], "bottom5": sectors[-5:][::-1]}
+
+
+SW_INDUSTRY_CACHE = PROJECT_ROOT / "data" / "sw_industry_map.json"
+SW_INDUSTRY_MAX_AGE_DAYS = 30
+
+
+def _load_sw_industry_map(codes: list, date: str) -> dict:
+    """{code: SW level-1 name}, cached on disk and refreshed monthly."""
+    try:
+        blob = json.loads(SW_INDUSTRY_CACHE.read_text(encoding="utf-8"))
+        fetched = datetime.strptime(blob["fetched"], "%Y-%m-%d")
+        if (datetime.now() - fetched).days < SW_INDUSTRY_MAX_AGE_DAYS and blob.get("map"):
+            return blob["map"]
+    except (OSError, ValueError, KeyError):
+        pass
+
+    try:
+        import ifind_client
+        tables = ifind_client.get_client().basic_data(
+            [ifind_client.to_ths_code(c) for c in codes],
+            [{"indicator": "ths_the_sw_industry_stock",
+              "indiparams": ["1", date]}])   # [level, date] — order matters
+    except Exception as e:
+        print(f"  iFinD SW industry fetch failed: {e}", file=sys.stderr)
+        return {}
+
+    mapping = {}
+    for table in tables:
+        code = str(table.get("thscode", "")).split(".")[0]
+        names = (table.get("table") or {}).get("ths_the_sw_industry_stock") or []
+        if code and names and names[0]:
+            mapping[code] = names[0]
+    if not mapping:
+        print("  iFinD SW industry returned no names — check the [level, date] "
+              "param order", file=sys.stderr)
+        return {}
+    try:
+        SW_INDUSTRY_CACHE.parent.mkdir(parents=True, exist_ok=True)
+        SW_INDUSTRY_CACHE.write_text(json.dumps(
+            {"fetched": datetime.now().strftime("%Y-%m-%d"), "map": mapping},
+            ensure_ascii=False), encoding="utf-8")
+    except OSError:
+        pass
+    return mapping
+
+
 def _fetch_breadth_sina() -> dict | None:
     """Fetch market breadth (up/down/flat counts) from Sina Finance.
 
@@ -1070,7 +1252,7 @@ def fetch_market_overview() -> dict:
     result = {"timestamp": datetime.now().isoformat()}
 
     # --- Major indices (Sina real-time, then AkShare historical fallback) ---
-    indices = _fetch_indices_sina()
+    indices = _fetch_indices_ifind() or _fetch_indices_sina()
 
     missing = {"上证指数", "深证成指", "创业板指", "科创50"} - set(indices.keys())
     if missing and ak:
@@ -1107,8 +1289,8 @@ def fetch_market_overview() -> dict:
     if cf and "breadth" in cf:
         result["breadth"] = cf["breadth"]
     else:
-        # Sina fallback for breadth
-        breadth = _fetch_breadth_sina()
+        # iFinD first (one universe pull), then sina's 65-page scrape
+        breadth = _fetch_breadth_ifind() or _fetch_breadth_sina()
         if breadth:
             result["breadth"] = breadth
         elif ak:
@@ -1125,8 +1307,8 @@ def fetch_market_overview() -> dict:
     if cf and "sectors" in cf:
         result["sectors"] = cf["sectors"]
     else:
-        # Sina fallback for sectors
-        sectors = _fetch_sectors_sina()
+        # iFinD first (SW level-1 aggregation), then sina's newSinaHy regex scrape
+        sectors = _fetch_sectors_ifind() or _fetch_sectors_sina()
         if sectors:
             result["sectors"] = sectors
         elif ak:
@@ -1140,6 +1322,75 @@ def fetch_market_overview() -> dict:
                 result["sectors_error"] = str(e)
 
     return result
+
+
+def _fetch_position_prices_ifind(positions: list[dict]) -> dict:
+    """Real-time position prices from iFinD. Same shape as the sina path.
+
+    Unit note: `real_time_quotation` returns volume already in 手 (lots), which
+    is the convention the rest of the pipeline expects — unlike
+    `cmd_history_quotation`, which returns shares. Do not divide here.
+    """
+    if not positions:
+        return {}
+    try:
+        import ifind_client
+    except ImportError:
+        return {}
+    if not ifind_client.is_available():
+        return {}
+
+    ths_to_code, name_map = {}, {}
+    for pos in positions:
+        code = str(pos.get("code", "")).split(".")[0]
+        if not code or len(code) != 6:
+            continue
+        ths_to_code[ifind_client.to_ths_code(code)] = code
+        name_map[code] = pos.get("name", "")
+    if not ths_to_code:
+        return {}
+
+    prices = {}
+    try:
+        tables = ifind_client.get_client().real_time(
+            list(ths_to_code), "latest,open,high,low,preClose,volume,amount")
+    except Exception as e:
+        print(f"  iFinD position price fetch failed: {e}", file=sys.stderr)
+        return {}
+
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    for table in tables:
+        code = ths_to_code.get(table.get("thscode"))
+        if not code:
+            continue
+        cols = table.get("table") or {}
+        stamps = table.get("time") or []
+
+        def _first(name):
+            seq = cols.get(name) or []
+            return seq[0] if seq else None
+
+        price = _first("latest")
+        prev_close = _first("preClose")
+        if not price or price <= 0:
+            continue  # suspended / not trading
+        volume = _first("volume")
+        prices[code] = {
+            "code": code,
+            "name": name_map.get(code, ""),
+            "date": (str(stamps[0])[:10] if stamps else today_str),
+            "price": price,
+            "open": _first("open"),
+            "high": _first("high"),
+            "low": _first("low"),
+            "prev_close": prev_close,
+            "change_pct": (round((price - prev_close) / prev_close * 100, 2)
+                           if prev_close else 0),
+            "volume": int(volume) if volume else 0,
+            "amount": _first("amount"),
+            "source": "ifind",
+        }
+    return prices
 
 
 def _fetch_position_prices_sina(positions: list[dict]) -> dict:
@@ -1284,6 +1535,7 @@ def fetch_position_prices(positions: list[dict]) -> dict:
     """Fetch current prices for active positions.
 
     Fallback chain (in order):
+    0. iFinD real_time_quotation — paid, primary since 2026-08-25
     1. Sina real-time (hq.sinajs.cn) — works through proxy, returns OHLC
     2. AkShare (Eastmoney push2) — may be proxy-blocked
     3. CheeseForTune kline — close only, no OHLC (last resort)
@@ -1300,10 +1552,24 @@ def fetch_position_prices(positions: list[dict]) -> dict:
     prices = {}
     failed_positions = []
 
-    # === Source 1: Sina real-time (primary) ===
+    # === Source 0: iFinD (primary) ===
     try:
-        sina_prices = _fetch_position_prices_sina(positions)
-        for pos in positions:
+        ifind_prices = _fetch_position_prices_ifind(positions)
+    except Exception as e:
+        print(f"  iFinD price fetch failed entirely: {e}", file=sys.stderr)
+        ifind_prices = {}
+    prices.update(ifind_prices)
+
+    remaining = [p for p in positions
+                 if p["code"].split(".")[0] not in prices]
+    if not remaining:
+        _enrich_with_mavol30(prices)
+        return prices
+
+    # === Source 1: Sina real-time ===
+    try:
+        sina_prices = _fetch_position_prices_sina(remaining)
+        for pos in remaining:
             code = pos["code"].split(".")[0]
             if code in sina_prices:
                 prices[code] = sina_prices[code]
@@ -1311,10 +1577,10 @@ def fetch_position_prices(positions: list[dict]) -> dict:
                 failed_positions.append(pos)
     except Exception as e:
         print(f"  Sina price fetch failed entirely: {e}", file=sys.stderr)
-        failed_positions = list(positions)
+        failed_positions = list(remaining)
 
     if not failed_positions:
-        # Add MAVOL30 from pricedb if available (Sina doesn't have it)
+        # Add MAVOL30 from pricedb if available (real-time feeds don't have it)
         _enrich_with_mavol30(prices)
         return prices
 
