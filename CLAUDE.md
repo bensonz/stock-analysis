@@ -12,7 +12,7 @@ The trading philosophy lives in `agents/ANALYST.md` (momentum-first: buy strengt
 
 - Python venv at `.venv` — **activate it first**, then use `python3` (never bare `python`): `source .venv/bin/activate`
 - Deps: `pip install -r requirements.txt` (akshare, anthropic, openai, baostock, tushare, pycryptodome, httpx, requests)
-- Secrets in `.env` (git-ignored): `TUSHARE_TOKEN`, `TAVILY_API_KEY` (web search), and OpenAI-compatible `OPENAI_*` / `LLM_PROVIDER`. `llm_client.py` also reads env from `~/.claude/settings.json`.
+- Secrets in `.env` (git-ignored): `IFIND_REFRESH_TOKEN` (primary price source — see below), `TUSHARE_TOKEN`, `TAVILY_API_KEY` (web search), and OpenAI-compatible `OPENAI_*` / `LLM_PROVIDER`. `llm_client.py` also reads env from `~/.claude/settings.json`. (`IFIND_USERNAME`/`IFIND_PASSWORD` are unused by the HTTP API; the refresh token alone suffices.)
 - **External dependency:** IV sentiment (`fetch_iv_sentiment.py`) requires the separate *options-learn* backend on `http://localhost:8000`. If it's down, `iv_sentiment.json` comes back empty (`signal: "无数据"`) and the report says "IV data unavailable" — this is a missing dependency, not a pipeline bug. It degrades gracefully (sizing falls back to "unknown").
 
 ## Common commands
@@ -53,6 +53,24 @@ python3 scripts/pricedb.py repair [--beg ISO --end ISO --dry-run]
 python3 scripts/pricedb.py factors verify   # factor coverage/lag audit (exit 1 = broken)
 python3 scripts/pricedb.py factors heal     # repair a multi-session factor gap
                                      # (ex-div calendar + per-code re-derivation)
+python3 scripts/pricedb.py factors rebuild [--code CSV] [--dry-run]
+                                     # rebuild whole series from iFinD
+                                     # ths_af_stock. DESTRUCTIVE: DELETEs each
+                                     # rebuilt code's rows first. Rebuilds a
+                                     # code entirely or not at all — iFinD
+                                     # anchors its factor base at listing while
+                                     # ours anchors at each code's first stored
+                                     # date, so a partial splice would fabricate
+                                     # a return on the splice date.
+python3 scripts/pricedb.py backfill-amount [--beg ISO --end ISO --dry-run]
+                                     # fill NULL `amount` from iFinD. Writes
+                                     # ONLY that column (OHLCV untouched, so
+                                     # first-writer-wins holds) and refuses any
+                                     # row whose stored close disagrees with
+                                     # iFinD's. Needed because the sina kline
+                                     # fallback doesn't publish turnover, and
+                                     # INSERT OR IGNORE means re-running
+                                     # `update` can never repair those rows.
 
 # Rules engine (mechanical sell/risk checks over current positions)
 python3 scripts/run_rules.py --human
@@ -155,4 +173,14 @@ today's contract.
 
 ## Data sources & fallbacks
 
-Price history (`pricedb.py`) fetches through a two-provider chain — **AkShare primary → Sina fallback** (doctrine set 2026-08-01 after the eastmoney IP-throttle outage; eastmoney direct/clist, baostock and tushare are RETIRED for price bars — do not re-add them, their fetchers survive only as internal helpers for factor derivation and forensics). When adding data fetching, follow the "try sources in order, degrade gracefully, never hard-fail the run" pattern, and make every degradation LOUD: `db_health` (staleness/partial/spot-audit) rides into the prompt, the report banner, and the phase-1 contract. Real-time position prices use Sina Finance with kline fallbacks (`data_collector.py`).
+Price history (`pricedb.py`) fetches through a three-provider chain — **iFinD primary → AkShare → Sina** (doctrine set 2026-08-25 when the paid iFinD seat landed; supersedes the 2026-08-01 "AkShare → Sina" doctrine that followed the eastmoney IP-throttle outage). The free chain is deliberately KEPT behind iFinD rather than retired: iFinD is a single commercial dependency whose token can lapse, and `db_health` gates the pipeline, so an outage with no fallback would hard-stop the run. eastmoney direct/clist, baostock and tushare remain RETIRED for price bars — do not re-add them, their fetchers survive only as internal helpers for factor derivation and forensics.
+
+When adding data fetching, follow the "try sources in order, degrade gracefully, never hard-fail the run" pattern, and make every degradation LOUD: `db_health` (staleness/partial/spot-audit) rides into the prompt, the report banner, and the phase-1 contract.
+
+**iFinD specifics** (`scripts/ifind_client.py`; full API reference in `docs/IFIND_EVAL/IFIND_API_GUIDE.md`, evaluation in `FINDINGS.md`). Auth is `IFIND_REFRESH_TOKEN` → a ~7-day access token cached at `data/ifind_token.json` (git-ignored, 0600). The client imports nothing from this project on purpose, so `pricedb` and `data_collector` can both depend on it without a cycle. Three traps are load-bearing and all fail *silently*:
+
+- `date_sequence` takes `indipara` (list of dicts), **not** `indicators`.
+- `ths_the_sw_industry_stock` params are `[level, date]` — **level first**. Reversed, it returns `""` with `errorcode: 0`, not an error.
+- **Volume units differ per endpoint**: `cmd_history_quotation` and `high_frequency` return 股 (÷100 to store 手); `real_time_quotation` returns 手 already. Getting this wrong is a silent 100× error.
+
+Real-time position prices, market breadth, sector ranking and index quotes all try iFinD first and fall back to the Sina paths (`data_collector.py`); breadth and sectors share one universe pull so they can't disagree. `input/ifind_candidates.json` holds iwencai natural-language screens as a **display-only second opinion** — it does NOT feed the hard RPS/MA gate, same posture as `regime.json`.
