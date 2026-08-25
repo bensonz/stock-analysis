@@ -1,7 +1,10 @@
 import json, sys, requests
 
 BASE = "https://quantapi.51ifind.com/api/v1/"
-AT = open('/tmp/ifind_at.txt').read().strip()
+import sys, pathlib
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / "scripts"))
+import ifind_client
+AT = ifind_client.get_client().access_token()
 H = {"Content-Type": "application/json", "access_token": AT}
 
 def call(ep, payload, timeout=60):
