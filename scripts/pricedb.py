@@ -2829,6 +2829,157 @@ def _spot_audit(conn: sqlite3.Connection, date_iso: str, sample: int = 20) -> di
             "fetch_failures": failures, "mismatches": mismatches}
 
 
+def backfill_amount(conn: sqlite3.Connection, beg: str, end: str,
+                    dry_run: bool = False, batch_days: int = 20) -> dict:
+    """Fill NULL `daily_prices.amount` from iFinD. Returns a stats dict.
+
+    Why this is a separate command rather than a re-fetch: `amount` is NULL
+    wherever _fetch_klines_sina did the filling (sina's kline archive doesn't
+    publish turnover), which in August was most sessions. Re-running `update`
+    cannot repair them — every writer is INSERT OR IGNORE, and first-writer-wins
+    is deliberate, so the existing rows would simply be skipped.
+
+    This writes ONLY the amount column. OHLCV is never touched, so the
+    first-writer-wins invariant holds and the command is idempotent.
+
+    Safety gate: iFinD's close for a bar must match the stored close before we
+    write. A mismatch means we are about to staple turnover onto a different
+    bar — count it and skip. Those are reported, never silently dropped.
+    """
+    client = ifind_client.get_client()
+    ex_map = {c: e for c, e in conn.execute("SELECT code, exchange FROM stocks")}
+
+    dates = [r[0] for r in conn.execute(
+        "SELECT DISTINCT date FROM daily_prices "
+        "WHERE amount IS NULL AND date BETWEEN ? AND ? ORDER BY date",
+        (beg, end))]
+    stats = {"dates": len(dates), "candidates": 0, "filled": 0,
+             "conflicted": 0, "missing": 0, "failed_batches": 0}
+    if not dates:
+        return stats
+
+    print(f"  {len(dates)} session(s) with NULL amount in {beg}..{end}",
+          file=sys.stderr)
+
+    # Group into contiguous date windows so one request covers many sessions.
+    for i in range(0, len(dates), batch_days):
+        window = dates[i:i + batch_days]
+        w_beg, w_end = window[0], window[-1]
+        wanted = {}
+        for code, date in conn.execute(
+                "SELECT code, date FROM daily_prices WHERE amount IS NULL "
+                "AND date BETWEEN ? AND ?", (w_beg, w_end)):
+            wanted.setdefault(code, set()).add(date)
+        if not wanted:
+            continue
+        stats["candidates"] += sum(len(v) for v in wanted.values())
+
+        ths_to_code = {ifind_client.to_ths_code(c, ex_map.get(c)): c for c in wanted}
+        try:
+            tables = _run_with_timeout(
+                "iFinD amount backfill",
+                lambda: client.history_quotation(
+                    list(ths_to_code), "close,amount", w_beg, w_end),
+                timeout=IFIND_BATCH_TIMEOUT_SEC)
+        except Exception as e:
+            stats["failed_batches"] += 1
+            print(f"    ⚠ {w_beg}..{w_end} failed: {str(e)[:80]}", file=sys.stderr)
+            continue
+
+        updates = []
+        for table in tables:
+            code = ths_to_code.get(table.get("thscode"))
+            if not code:
+                continue
+            cols = table.get("table") or {}
+            closes, amounts = cols.get("close") or [], cols.get("amount") or []
+            for j, day in enumerate(table.get("time") or []):
+                day = str(day)[:10]
+                if day not in wanted.get(code, ()):
+                    continue
+                amount = amounts[j] if j < len(amounts) else None
+                close = closes[j] if j < len(closes) else None
+                if amount is None or close is None:
+                    stats["missing"] += 1
+                    continue
+                stored = conn.execute(
+                    "SELECT close FROM daily_prices WHERE code=? AND date=?",
+                    (code, day)).fetchone()
+                if not stored or stored[0] is None:
+                    stats["missing"] += 1
+                    continue
+                if abs(stored[0] - close) > max(0.011, abs(close) * 0.0005):
+                    stats["conflicted"] += 1
+                    continue
+                updates.append((amount, code, day))
+
+        if updates and not dry_run:
+            cur = conn.executemany(
+                "UPDATE daily_prices SET amount = ? "
+                "WHERE code = ? AND date = ? AND amount IS NULL", updates)
+            conn.commit()
+            stats["filled"] += cur.rowcount
+        elif updates:
+            stats["filled"] += len(updates)
+        print(f"    {w_beg}..{w_end}: {len(updates)} filled, "
+              f"{stats['conflicted']} conflicted so far", file=sys.stderr)
+
+    return stats
+
+
+def cmd_backfill_amount(args: list):
+    """CLI: pricedb.py backfill-amount [--beg ISO] [--end ISO] [--dry-run]
+
+    Repairs the `amount` column, which is NULL wherever the sina kline fallback
+    did the filling. Writes nothing but `amount`.
+    """
+    global _UPDATE_DEADLINE
+    _UPDATE_DEADLINE = None  # off-hours repair, budget-exempt like cmd_repair
+
+    def _arg(flag, default):
+        return args[args.index(flag) + 1] if flag in args else default
+
+    dry = "--dry-run" in args
+    conn = get_db()
+    ensure_schema(conn)
+
+    if not ifind_client.is_available():
+        print("iFinD not configured (IFIND_REFRESH_TOKEN) — cannot backfill",
+              file=sys.stderr)
+        conn.close()
+        sys.exit(1)
+
+    first = conn.execute("SELECT MIN(date) FROM daily_prices").fetchone()[0]
+    last = conn.execute("SELECT MAX(date) FROM daily_prices").fetchone()[0]
+    beg = _arg("--beg", first)
+    end = _arg("--end", last)
+
+    before = conn.execute(
+        "SELECT COUNT(*) FROM daily_prices WHERE amount IS NULL "
+        "AND date BETWEEN ? AND ?", (beg, end)).fetchone()[0]
+    print(f"amount backfill {beg} → {end}: {before:,} NULL rows"
+          f"{' (dry run)' if dry else ''}", file=sys.stderr)
+
+    stats = backfill_amount(conn, beg, end, dry_run=dry)
+
+    after = conn.execute(
+        "SELECT COUNT(*) FROM daily_prices WHERE amount IS NULL "
+        "AND date BETWEEN ? AND ?", (beg, end)).fetchone()[0]
+    conn.close()
+
+    print(f"\n  sessions scanned : {stats['dates']}", file=sys.stderr)
+    print(f"  candidates       : {stats['candidates']:,}", file=sys.stderr)
+    print(f"  filled           : {stats['filled']:,}", file=sys.stderr)
+    print(f"  conflicted       : {stats['conflicted']:,}  "
+          f"(close mismatch — NOT written)", file=sys.stderr)
+    print(f"  no iFinD amount  : {stats['missing']:,}", file=sys.stderr)
+    print(f"  failed batches   : {stats['failed_batches']}", file=sys.stderr)
+    print(f"  NULL amount      : {before:,} → {after:,}", file=sys.stderr)
+    if stats["conflicted"]:
+        print("  ⚠ conflicts mean iFinD and the stored bar disagree on close — "
+              "inspect before assuming the stored bar is right", file=sys.stderr)
+
+
 def cmd_repair(args: list):
     """CLI: pricedb.py repair [--beg ISO] [--end ISO] [--dry-run]
 
@@ -3243,6 +3394,8 @@ if __name__ == "__main__":
         cmd_factors(sys.argv[2:])
     elif command == "repair":
         cmd_repair(sys.argv[2:])
+    elif command == "backfill-amount":
+        cmd_backfill_amount(sys.argv[2:])
     elif command == "snapshot":
         cmd_snapshot(sys.argv[2:])
     elif command == "query":
