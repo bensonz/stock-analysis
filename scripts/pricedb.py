@@ -2382,7 +2382,8 @@ def _ifind_event_multipliers(conn: sqlite3.Connection, codes: list,
 
 
 def rebuild_factors_from_ifind(conn: sqlite3.Connection, codes: list | None = None,
-                               dry_run: bool = False, chunk: int = 300) -> dict:
+                               dry_run: bool = False, chunk: int = 300,
+                               dry_run_sample: int = 20) -> dict:
     """Rebuild adj_factors for whole codes from iFinD's ths_af_stock.
 
     Rebuilds a code's ENTIRE series or none of it. Partial rebuilds are the one
@@ -2391,6 +2392,16 @@ def rebuild_factors_from_ifind(conn: sqlite3.Connection, codes: list | None = No
     values into the middle of one of our series would fabricate a return on the
     splice date. Each series is renormalized to 1.0 at the code's first date,
     which reproduces our existing convention exactly.
+
+    **Quota**: this is the most expensive call in the project. It bills to
+    `date_sequence`, which shares the 5,000,000-point 基本面数据 bucket (NOT the
+    150,000,000 行情数据 bucket that bars use). A full universe rebuild is
+    ~2.2M points — 44% of that bucket in one command. On 2026-08-25 a dry run
+    plus a real run consumed 89% of the month's fundamental allowance.
+
+    `dry_run` therefore **samples** rather than fetching the universe: it sizes
+    the job and proves the fetch works on `dry_run_sample` codes. A dry run that
+    costs as much as the real thing is not a safety net, it is double billing.
     """
     ex_map = {c: e for c, e in conn.execute("SELECT code, exchange FROM stocks")}
     bounds = {}
@@ -2400,9 +2411,22 @@ def rebuild_factors_from_ifind(conn: sqlite3.Connection, codes: list | None = No
     targets = [c for c in (codes or bounds) if c in bounds]
 
     stats = {"codes": len(targets), "rebuilt": 0, "rows": 0,
-             "no_data": 0, "failed": 0}
+             "no_data": 0, "failed": 0, "sampled": False,
+             "estimated_rows": 0}
     if not targets:
         return stats
+
+    if dry_run and len(targets) > dry_run_sample:
+        sessions = conn.execute(
+            "SELECT COUNT(DISTINCT date) FROM daily_prices").fetchone()[0]
+        stats["sampled"] = True
+        stats["estimated_rows"] = conn.execute(
+            "SELECT COUNT(*) FROM daily_prices").fetchone()[0]
+        print(f"  dry run: sampling {dry_run_sample} of {len(targets)} codes "
+              f"(a full fetch would cost ~{stats['estimated_rows']:,} points "
+              f"against the 5M 基本面 bucket)", file=sys.stderr)
+        targets = targets[::max(1, len(targets) // dry_run_sample)][:dry_run_sample]
+        stats["codes"] = len(targets)
 
     for i in range(0, len(targets), chunk):
         batch = targets[i:i + chunk]
@@ -2761,11 +2785,20 @@ def cmd_factors(args: list):
               file=sys.stderr)
         stats = rebuild_factors_from_ifind(conn, codes, dry_run=dry)
         try:
-            print(f"\n  codes targeted : {stats['codes']}", file=sys.stderr)
+            print(f"\n  codes targeted : {stats['codes']}"
+                  f"{' (SAMPLE)' if stats.get('sampled') else ''}", file=sys.stderr)
             print(f"  rebuilt        : {stats['rebuilt']}", file=sys.stderr)
             print(f"  factor rows    : {stats['rows']:,}", file=sys.stderr)
             print(f"  no iFinD data  : {stats['no_data']}", file=sys.stderr)
             print(f"  failed         : {stats['failed']}", file=sys.stderr)
+            print(f"  dataVol spent  : {ifind_client.get_client().data_vol:,}",
+                  file=sys.stderr)
+            if stats.get("sampled"):
+                print(f"  ⚠ SAMPLE ONLY — a real run would cost roughly "
+                      f"{stats['estimated_rows']:,} points against the "
+                      f"5,000,000 基本面数据 bucket (shared with basic_data_service "
+                      f"and report_query). Check the portal before running.",
+                      file=sys.stderr)
             if not dry:
                 invalidate_rps_cache(conn)
                 print("  rps_cache invalidated", file=sys.stderr)

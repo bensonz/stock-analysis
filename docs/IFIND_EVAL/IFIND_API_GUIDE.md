@@ -82,7 +82,8 @@ Every data endpoint returns the same outer shape:
 - **One entry per code**, keyed by `thscode`.
 - **`dataVol`** is the metered data volume for that call (≈ rows × indicators).
   There is no API endpoint that reports your remaining quota — `data_statistics`
-  **404s** — so if you need to track consumption, sum `dataVol` yourself.
+  **404s** — so sum `dataVol` yourself and read the real balance from the
+  account portal. **See §11a: there IS a quota, and it is bucketed.**
 - **`perf`** is server-side processing time in ms.
 
 ### Codes
@@ -346,6 +347,40 @@ Cheap: `dataVol` 260–6,888 per query.
 
 ---
 
+## 11a. Quota — read this before any universe-wide call
+
+**There is a quota, it is split into independent buckets, and the API will not
+tell you about it.** `data_statistics` 404s; the only source of truth is the
+account portal. Observed 2026-08-25 on a monthly seat:
+
+| Bucket | Size | Endpoints billed to it |
+|---|---|---|
+| 行情数据 | **150,000,000** | `cmd_history_quotation`, `real_time_quotation`, `high_frequency`, `snap_shot` |
+| 基本面数据 | **5,000,000** | `basic_data_service`, **`date_sequence`**, `report_query` |
+| 智能选股 | 15,000 | `smart_stock_picking` — counts **queries**, not rows |
+| 期股联动 | 10,000 | `stock_link` |
+| EDB | 5,000,000 | `edb_service` |
+| 公告查询 / 下载 | 1,000,000 / 100 | `report_query` downloads |
+
+**The trap that cost us 89% of a month's fundamental allowance in one evening:**
+`date_sequence` bills to the **5M** bucket, not the 150M one, even though it
+feels like market data. Pulling one indicator across ~5,500 A-shares over ~420
+sessions is ~2.2M points — **44% of the whole bucket in a single command**. We
+ran it twice (once as a "safe" dry run that fetched everything anyway) and went
+from 0% to 91.5%.
+
+Rules that follow:
+
+1. **Estimate before you call.** `rows × indicators` — for a universe-wide
+   `date_sequence` that is `codes × sessions × indicators`. Compare to 5M.
+2. **Prefer the 150M bucket.** If a question can be answered by
+   `cmd_history_quotation` (e.g. deriving adjustment events from raw vs `CPS:2`
+   closes instead of pulling `ths_af_stock` series), use it — same answer,
+   1/30th of the scarcity.
+3. **Make dry runs sample.** A dry run that fetches the full dataset to tell you
+   how big it is has already spent the money.
+4. Meter locally by summing `dataVol`, and reconcile against the portal.
+
 ## 11. Error codes
 
 | Code | Meaning | What to do |
@@ -455,5 +490,5 @@ Worth resolving if you need these:
 - **`report_query` parameters** — returns `-4210` for every shape tried.
 - **`edb_service` indicator IDs** — endpoint responds, but the ID tried returned
   an empty series.
-- **Quota.** No API surface reports it. If the seat has a ceiling, it must be
-  read from the vendor portal; meter `dataVol` locally in the meantime.
+- **Quota.** Resolved — see §11a. There is one, it is bucketed, and only the
+  portal reports it.
