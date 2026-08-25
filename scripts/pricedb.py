@@ -33,6 +33,7 @@ from pathlib import Path
 from typing import Iterable, Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import ifind_client
 import price_adjust
 
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -47,7 +48,15 @@ PROVIDER_EASTMONEY = "eastmoney_direct"
 PROVIDER_AKSHARE = "akshare"
 PROVIDER_BAOSTOCK = "baostock"
 PROVIDER_SINA = "sina"
+PROVIDER_IFIND = "ifind"
 TUSHARE_TOKEN_ENV_NAMES = ("TUSHARE_TOKEN", "TUSHARE_PRO_TOKEN", "TS_TOKEN")
+
+# iFinD bulk-fetch tuning. 800 codes/request measured clean (perf 111ms); 500
+# leaves headroom. The client threads within a batch, so this is the outer
+# chunk at which the update budget is re-checked.
+IFIND_BATCH_CODES = int(os.getenv("IFIND_BATCH_CODES", "1000"))
+IFIND_BATCH_TIMEOUT_SEC = float(os.getenv("IFIND_BATCH_TIMEOUT", "120"))
+IFIND_BAR_INDICATORS = "open,high,low,close,volume,amount"
 
 # History needed: 250-day RPS + 10-day MA buffer → use extra holiday margin
 INIT_HISTORY_DAYS = 450
@@ -475,15 +484,27 @@ def get_tushare_token() -> str | None:
 def iter_providers() -> Iterable[tuple[str, object]]:
     """Yield available providers in preferred price-bar order.
 
-    Doctrine (2026-08-01, user decision): **AkShare primary, Sina fallback.**
-    The old chain was one vendor in four costumes — eastmoney direct/clist
-    plus akshare (which fronts the same eastmoney endpoints) all died
-    together in the 07-30 IP throttle, while baostock is connection-dead
-    from this network and tushare's free tier denies daily bars. Those
-    providers are RETIRED for price bars — do not re-add them. Their
-    fetchers remain only as internal helpers (factor derivation, f18
-    same-day sync, repair fallbacks). See docs/pricedb_repair/PROGRESS.md.
+    Doctrine (2026-08-25, user decision): **iFinD primary, AkShare → Sina
+    fallback.** We now hold a paid iFinD seat, and it beat the free chain on
+    every axis measured in docs/IFIND_EVAL/FINDINGS.md — 1320/1320 bars matched
+    the local DB exactly, the full universe pulls in 2.4s against ~30s for the
+    sina snapshot, and it carries `amount`, which the sina path writes as NULL.
+
+    The free chain is deliberately KEPT behind it rather than retired: iFinD is
+    a single commercial dependency whose token can lapse, and db_health gates
+    the pipeline, so a vendor outage with no fallback would hard-stop the run.
+
+    Supersedes the 2026-08-01 "AkShare primary, Sina fallback" doctrine, which
+    followed the eastmoney IP-throttle outage. eastmoney direct/clist, baostock
+    and tushare remain RETIRED for price bars — do not re-add them. Their
+    fetchers survive only as internal helpers (factor derivation, f18 same-day
+    sync, repair fallbacks). See docs/pricedb_repair/PROGRESS.md.
     """
+    if ifind_client.is_available():
+        yield PROVIDER_IFIND, None
+    else:
+        print("  iFinD unavailable (no IFIND_REFRESH_TOKEN) — falling back",
+              file=sys.stderr)
     try:
         with _no_proxy_env():
             import akshare as ak
@@ -1491,6 +1512,8 @@ def bulk_fetch(
     provider_name: str,
     provider: object,
 ):
+    if provider_name == PROVIDER_IFIND:
+        return _bulk_fetch_ifind(conn, stocks, beg, end, provider)
     if provider_name == PROVIDER_AKSHARE:
         return _bulk_fetch_akshare(conn, stocks, beg, end, provider)
     if provider_name == PROVIDER_SINA:
@@ -2071,6 +2094,112 @@ def _bulk_fetch_sina(
         print("  Sina: no supported symbols in batch — nothing to do",
               file=sys.stderr)
     print(f"  Total: {inserted:,} rows inserted", file=sys.stderr)
+
+
+def _ifind_tables_to_rows(tables: list, ths_to_code: dict,
+                          beg_iso: str, end_iso: str) -> list[tuple]:
+    """Flatten iFinD history tables into pricedb's 8-tuples.
+
+    Two conversions matter and both are silent if wrong:
+      * volume arrives in SHARES; pricedb stores 手 (÷100), matching the
+        eastmoney/sina convention already on disk.
+      * `amount` is carried through — this is the whole point of the provider
+        swap, since the sina snapshot path writes NULL there.
+    """
+    rows: list[tuple] = []
+    for table in tables:
+        code = ths_to_code.get(table.get("thscode"))
+        if not code:
+            continue
+        cols = table.get("table") or {}
+        dates = table.get("time") or []
+        closes = cols.get("close") or []
+        for i, day in enumerate(dates):
+            day = str(day)[:10]
+            if not (beg_iso <= day <= end_iso):
+                continue
+            close = closes[i] if i < len(closes) else None
+            if close is None:
+                continue  # suspended session — no bar to store
+
+            def _at(name, idx=i):
+                seq = cols.get(name) or []
+                return seq[idx] if idx < len(seq) else None
+
+            volume = _at("volume")
+            rows.append((
+                code, day, _at("open"), _at("high"), _at("low"), close,
+                int(volume / 100) if volume else None, _at("amount"),
+            ))
+    return rows
+
+
+def _bulk_fetch_ifind(
+    conn: sqlite3.Connection,
+    stocks: list[dict],
+    beg: str,
+    end: str,
+    _provider,
+):
+    """Bulk daily bars via iFinD — the primary provider since 2026-08-25.
+
+    Batch-native, so this is far simpler than the per-code providers: the whole
+    5207-code universe for one day lands in ~2.4s. Chunked here (rather than
+    leaving it all to the client) so the update budget is checked between
+    chunks and progress is reportable.
+
+    INSERT OR IGNORE preserves first-writer-wins. Raises when a weekday window
+    yields nothing, so cmd_update can report a real failure and fall through to
+    akshare→sina.
+    """
+    beg_iso, end_iso = _yyyymmdd_to_iso(beg), _yyyymmdd_to_iso(end)
+    ths_to_code = {
+        ifind_client.to_ths_code(s["code"], s.get("exchange")): s["code"]
+        for s in stocks
+    }
+    all_ths = list(ths_to_code)
+    print(f"  iFinD: {len(all_ths)} codes, {beg_iso} → {end_iso}", file=sys.stderr)
+
+    client = ifind_client.get_client()
+    chunk = IFIND_BATCH_CODES
+    inserted = 0
+    failures: list[str] = []
+
+    for start in range(0, len(all_ths), chunk):
+        if _budget_exceeded():
+            raise RuntimeError("update budget exceeded")
+        batch = all_ths[start:start + chunk]
+        try:
+            tables = _run_with_timeout(
+                "iFinD history",
+                lambda b=batch: client.history_quotation(
+                    b, IFIND_BAR_INDICATORS, beg_iso, end_iso),
+                timeout=IFIND_BATCH_TIMEOUT_SEC)
+        except Exception as e:
+            failures.append(f"{batch[0]}..{batch[-1]}: {str(e)[:80]}")
+            continue
+
+        rows = _ifind_tables_to_rows(tables, ths_to_code, beg_iso, end_iso)
+        if rows:
+            cur = conn.executemany(
+                "INSERT OR IGNORE INTO daily_prices "
+                "(code,date,open,high,low,close,volume,amount) "
+                "VALUES (?,?,?,?,?,?,?,?)", rows)
+            inserted += cur.rowcount
+            conn.commit()
+        done = min(start + chunk, len(all_ths))
+        print(f"  [iFinD {done}/{len(all_ths)}] +{inserted} rows, "
+              f"{len(failures)} batches failed", file=sys.stderr)
+
+    if failures:
+        print(f"  iFinD failed {len(failures)} batch(es): "
+              f"{'; '.join(failures[:3])}", file=sys.stderr)
+    if inserted == 0 and all_ths and _weekday_list(beg, end):
+        raise RuntimeError(
+            f"iFinD returned no rows for {len(all_ths)} codes in a "
+            f"weekday window {beg}-{end}")
+    print(f"  Total: {inserted:,} rows inserted "
+          f"(dataVol={client.data_vol:,})", file=sys.stderr)
 
 
 def _expand_events_to_code_dates(conn: sqlite3.Connection, code: str,
@@ -2891,6 +3020,84 @@ def cmd_rps(date: str = None):
 
 
 
+def _snapshot_via_ifind(conn: sqlite3.Connection, codes: list, target: str):
+    """Today's settled bar from iFinD's real-time feed. (rows, stats) or (None, None).
+
+    Returns None to signal "fall back to sina" — a snapshot is best-effort by
+    design, and the caller already has a working sina path.
+
+    Applies the SAME guards as snapshot_bars.parse_quote_line, because the
+    failure they prevent is identical: a suspended name keeps reporting its last
+    session, and writing that stamped as today looks like real trading.
+
+    Unit trap: `real_time_quotation` returns volume in 手 (lots) — already the
+    stored convention — while `cmd_history_quotation` returns SHARES. Do not
+    divide here; _bulk_fetch_ifind does. Verified 2026-08-25 on 600519
+    (real-time 21111 lots vs history 2111118 shares).
+    """
+    if not ifind_client.is_available():
+        return None, None
+    import snapshot_bars  # local, mirroring cmd_snapshot's import
+
+    ex_map = {c: e for c, e in conn.execute("SELECT code, exchange FROM stocks")}
+    ths_to_code = {ifind_client.to_ths_code(c, ex_map.get(c)): c for c in codes}
+
+    client = ifind_client.get_client()
+    try:
+        tables = _run_with_timeout(
+            "iFinD snapshot",
+            lambda: client.real_time(list(ths_to_code),
+                                     "latest,open,high,low,volume,amount"),
+            timeout=IFIND_BATCH_TIMEOUT_SEC)
+    except Exception as e:
+        print(f"  iFinD snapshot failed ({str(e)[:100]}) — falling back to sina",
+              file=sys.stderr)
+        return None, None
+
+    rows, rejected = [], 0
+    for table in tables:
+        code = ths_to_code.get(table.get("thscode"))
+        cols = table.get("table") or {}
+        stamps = table.get("time") or []
+        if not code or not stamps:
+            rejected += 1
+            continue
+
+        # The feed's own timestamp must be today's session, at/after the close.
+        stamp = str(stamps[0])
+        if stamp[:10] != target or stamp[11:19] < snapshot_bars.SETTLE_AFTER:
+            rejected += 1
+            continue
+
+        def _first(name):
+            seq = cols.get(name) or []
+            return seq[0] if seq else None
+
+        o, h, low = _first("open"), _first("high"), _first("low")
+        c = _first("latest")
+        vol_lots, amount = _first("volume"), _first("amount")
+        if None in (o, h, low, c) or not vol_lots:
+            rejected += 1
+            continue
+        if min(o, h, low, c) <= 0 or vol_lots <= 0:
+            rejected += 1                      # suspended / no trade
+            continue
+        if not (low <= min(o, c) and max(o, c) <= h):
+            rejected += 1                      # incoherent bar, do not trust it
+            continue
+        rows.append((code, target, o, h, low, c, int(vol_lots), amount))
+
+    stats = {"rows": len(rows), "skipped_unsupported": 0,
+             "rejected": rejected, "failed_batches": 0}
+    print(f"  iFinD snapshot: {len(rows)} bars parsed, {rejected} rejected "
+          f"(dataVol={client.data_vol:,})", file=sys.stderr)
+    if not rows:
+        print("  iFinD snapshot returned nothing — falling back to sina",
+              file=sys.stderr)
+        return None, None
+    return rows, stats
+
+
 def cmd_snapshot(argv: list):
     """CLI: pricedb.py snapshot [--date ISO] [--dry-run] [--force]
 
@@ -2938,11 +3145,14 @@ def cmd_snapshot(argv: list):
         if done % 1000 == 0 or done == total:
             print(f"  [snapshot {done}/{total}] {got} bars parsed", file=sys.stderr)
 
-    rows, stats = snapshot_bars.fetch_snapshot_bars(stocks, target, progress=_progress)
-    print(f"  parsed {stats['rows']} bars "
-          f"(unsupported/BJ {stats['skipped_unsupported']}, "
-          f"rejected {stats['rejected']}, failed batches {stats['failed_batches']})",
-          file=sys.stderr)
+    rows, stats = _snapshot_via_ifind(conn, stocks, target)
+    if rows is None:
+        rows, stats = snapshot_bars.fetch_snapshot_bars(stocks, target,
+                                                        progress=_progress)
+        print(f"  parsed {stats['rows']} bars "
+              f"(unsupported/BJ {stats['skipped_unsupported']}, "
+              f"rejected {stats['rejected']}, failed batches {stats['failed_batches']})",
+              file=sys.stderr)
 
     if dry:
         print("  --dry-run: nothing written", file=sys.stderr)

@@ -91,9 +91,25 @@ same universe. History goes back to at least **2005-01-04**.
 2026-08-25, and >94% null on nearly every session in August. Only 08-21 and 08-24
 are complete. iFinD returns `amount` with 100% coverage on the same bars.
 
-This is a pre-existing local defect independent of the iFinD decision — the sina
-fallback path evidently doesn't populate `amount`. Worth fixing either way (any
-turnover/liquidity screening reading that column is silently degraded).
+**Verified mechanism** (traced 2026-08-25; an earlier guess blaming the snapshot
+path plus `INSERT OR IGNORE` ordering was wrong and is corrected here):
+
+- `snapshot_bars.parse_quote_line` **does** parse `amount` from sina's real-time
+  feed (`snapshot_bars.py:109`), and `_akshare_hist_row_to_tuple` **does** carry
+  `成交额` (`pricedb.py:1205`). Neither is the culprit.
+- `_fetch_klines_sina` — the *kline* fallback provider — hardcodes `amount` to
+  `None` (`pricedb.py:1998`), because sina's kline archive doesn't publish
+  turnover. Its own docstring says so.
+- So NULLs appear exactly on days where **both** better sources missed and the
+  sina kline fallback did the filling. The manifests confirm it: 08-24 afternoon
+  logged `0 → 5207 rows (5207 inserted)` from the snapshot and has 0 NULLs;
+  08-25 afternoon logged `WARNING: 53 batch(es) failed` and has 5172 NULLs.
+
+The read-through: `amount` coverage is a direct proxy for how often the free
+chain has been degrading to its weakest provider — which in August was most
+days. Independent of the iFinD decision, any turnover/liquidity screen reading
+that column is silently degraded (today nothing does: `vcp_scanner.py:119`
+selects it but never uses it).
 
 ## Unresolved
 
