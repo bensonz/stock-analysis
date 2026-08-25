@@ -38,14 +38,27 @@
 Backfill integrity vs a pre-run DB copy: 0 OHLCV rows changed, 0 rows
 added/lost, 0 existing amounts overwritten, 0 close conflicts.
 
+## `factors rebuild` — RUN on the live DB 2026-08-25
+
+Executed at the user's instruction after the staged work landed. It turned out
+to fix a real, undetected corruption; see `FINDINGS.md` § "The factor rebuild
+found a live corruption" for the full evidence.
+
+- 5568/5568 codes rebuilt, 2,216,878 factor rows, **0 failures, 0 no-data**.
+- Coverage 96.11% → **100.00%** (all rows); codes without factors 332 → **0**.
+- `factors verify` green; `rps_cache` invalidated and recomputed.
+- **96.56% of codes are unchanged** in the today-scale ratio `f[t]/f[last]` that
+  consumers actually use. 27 moved ≥1%.
+- Those 27 were **wrong before, not now**: 18 codes carried physically
+  impossible event counts (000002 had 216 "corporate actions" in 412 sessions).
+  953 spurious event-days removed in total.
+
+Rollback: `adj_factors_pre_ifind` inside the DB holds the pre-rebuild table
+(2,127,587 rows). Drop it once you're satisfied — it accounts for most of the
+503 MB → 624 MB growth.
+
 ## Deliberately NOT done
 
-- **`factors rebuild` was not run on the live DB.** It is implemented, tested,
-  and verified correct on a copy (all six 2026-08-25 ex-div names reproduce, five
-  at 0.00 bp; series re-anchor at 1.0). Running it swaps every factor to iFinD's
-  basis and invalidates `rps_cache` — a deliberate decision, not a side effect.
-  Current factors are at 100% coverage with `verify` green, so there is no
-  pressure to run it.
 - **iwencai does not feed the RPS/MA gate**, and `ifind_candidates.json` is not
   injected into the LLM prompt. It follows `regime.json`'s posture: display
   first, graduate on evidence. Wiring it into the prompt is a one-line change
@@ -53,6 +66,10 @@ added/lost, 0 existing amounts overwritten, 0 close conflicts.
 
 ## Known / open
 
+- **`factors verify` cannot catch what the rebuild found.** It audits coverage
+  and lag only, so 216 fabricated corporate actions on 000002 sat green for
+  months. A plausibility guard (event count per code per year, ~1–4 normal,
+  >12 impossible) would have caught it on day one. Not built — worth adding.
 - **603558's factor step differs 3.12 bp** between iFinD and our derivation
   (5 of 6 names match exactly). Unresolved which is right; immaterial for
   momentum over 120–250 d, but it is why sources must not be mixed mid-series.

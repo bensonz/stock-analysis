@@ -111,6 +111,51 @@ days. Independent of the iFinD decision, any turnover/liquidity screen reading
 that column is silently degraded (today nothing does: `vcp_scanner.py:119`
 selects it but never uses it).
 
+## The factor rebuild found a live corruption
+
+`pricedb.py factors rebuild` was run on the live DB on 2026-08-25. It was
+expected to be a cosmetic re-basing. It was not.
+
+**96.56%** of codes came back identical (<1 bp) in the today-scale ratio
+`f[t]/f[last]` that consumers actually use. But 27 moved ≥1%, led by
+**000002 (万科A) at 74.5%**. The old chain was wrong:
+
+| | old (clist f18) | new (iFinD) |
+|---|---|---|
+| 000002 event-days in 412 sessions | **216** | 0 |
+| 000036 | 172 | 0 |
+| 000058 | 154 | 2 |
+| 000004 | 123 | 0 |
+| 600519 (control) | 4 | 4 |
+| 603007 (control) | 1 | 1 |
+
+216 corporate actions in 412 trading sessions is impossible. Two independent
+confirmations that iFinD is right:
+
+1. iFinD's own 前复权 (`CPS:2`) series for 000002 is **byte-identical to raw**
+   over the divergent window — there were genuinely no corporate actions.
+2. Controls are untouched: 600519 stays 4↔4, 603007 stays 1↔1. Real events
+   survive; only the fabricated ones disappear.
+
+**Mechanism.** The corrupted codes are almost all low-numbered Shenzhen listings
+— 000002, 000004, 000006, 000016, 000017, 000026, 000027, 000030, 000036,
+000042, 000048, 000050, 000055, 000058. The old daily sync inferred the event
+multiplier as `stored_prev_close / eastmoney_clist_f18`. On those codes the f18
+lookup evidently resolved to a *different instrument*, so the ratio was garbage
+every single day, compounding into a fake 74.5% cumulative adjustment.
+
+Blast radius: 18 codes with impossible counts, 25 more merely suspicious,
+**953 spurious event-days removed** (9,783 → 8,830).
+
+**Why nobody noticed.** `factors verify` audits coverage and lag, not
+plausibility. 100% coverage with a fully-dense table is exactly what a chain
+fabricating a daily event looks like. An event-frequency check would have caught
+this immediately.
+
+Trading impact: of the 18 repaired codes, one (**000048**) now clears the
+RPS gate (rps60 99.5 / rps120 91.8 / rps250 85.6) on 2026-08-25. 000002's RPS250
+is now 1.4, which matches a stock that fell from 8.14 to 3.09.
+
 ## Unresolved
 
 - **Quota is unknown and unmeasurable via API.** There is no `data_statistics`
