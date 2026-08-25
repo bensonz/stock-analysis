@@ -56,7 +56,9 @@ from data_collector import (
     fetch_position_prices,
     fetch_missed_opportunity_prices,
     load_recent_watchlists,
+    fetch_ifind_candidates,
     save_crawl_data,
+    save_ifind_candidates,
     save_intersect_data,
     save_market_data,
     save_price_data,
@@ -977,6 +979,20 @@ def phase1_collect(date: str, slot: str) -> dict:
         )
         return "iv_sentiment", result
 
+    def _ifind_candidates():
+        # Display-only second opinion (see fetch_ifind_candidates). Never gates
+        # anything, so a failure here must not cost the run.
+        print("  [+] Fetching iFinD iwencai screens...", file=sys.stderr)
+        result = fetch_ifind_candidates()
+        if result.get("available"):
+            save_ifind_candidates(date, result, output_dir=input_dir)
+            summary = ", ".join(
+                f"{s['label']}={s.get('count', 'err')}" for s in result["screens"])
+            print(f"    → {summary}", file=sys.stderr)
+        else:
+            print(f"    → skipped: {result.get('reason')}", file=sys.stderr)
+        return "ifind_candidates", result
+
     def _ma_data():
         print("  [7/7] Fetching MA data...", file=sys.stderr)
         # Fetch MA for ALL pool stocks, not just 75-95% candidates.
@@ -994,6 +1010,7 @@ def phase1_collect(date: str, slot: str) -> dict:
             executor.submit(_missed): "watchlists",
             executor.submit(_iv_sentiment): "iv_sentiment",
             executor.submit(_ma_data): "ma_data",
+            executor.submit(_ifind_candidates): "ifind_candidates",
         }
         for future in as_completed(futures):
             task_name = futures[future]

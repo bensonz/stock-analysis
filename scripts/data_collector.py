@@ -14,6 +14,7 @@ All functions return dicts, handle errors gracefully, never crash.
 
 import json
 import os
+import re
 import sqlite3
 import sys
 import time
@@ -1793,6 +1794,115 @@ def save_intersect_data(date: str, data: dict, output_dir: Path | None = None) -
         out = CRAWL_DIR / f"{date}.intersect.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return out
+
+
+# iwencai screens, phrased to match ANALYST.md's momentum thesis. Kept few and
+# explicit: each is one request, and the value is in reading them side by side.
+IWENCAI_SCREENS = [
+    ("涨停", "今日涨停 非ST 上市天数大于60"),
+    ("强势动量", "RPS120大于80 且 RPS250大于80 且 MA20大于MA120 非ST"),
+    ("放量突破", "今日涨幅大于5% 换手率大于5% 量比大于2 非ST 上市天数大于60"),
+]
+# Debut sessions print absurd changes (+282% observed 2026-08-25) and have no
+# momentum history worth reading.
+IWENCAI_MIN_LISTED_DAYS = 60
+
+
+def _iwencai_rows(table: dict) -> list[dict]:
+    """Column-major iwencai table → row dicts with the date suffix stripped.
+
+    iwencai embeds the query date in column names (`涨跌幅:前复权[20260825]`),
+    so keys are not stable across days. Normalizing here keeps every consumer
+    from having to know today's date.
+    """
+    if not table:
+        return []
+    clean = {}
+    for name, values in table.items():
+        key = re.sub(r"\[\d{8}\]", "", str(name)).strip()
+        clean[key] = values
+    length = max((len(v) for v in clean.values() if isinstance(v, list)), default=0)
+    rows = []
+    for i in range(length):
+        row = {}
+        for key, values in clean.items():
+            if isinstance(values, list) and i < len(values):
+                row[key] = values[i]
+        if row.get("股票代码"):
+            rows.append(row)
+    return rows
+
+
+def _listed_days(row: dict):
+    """Listed-days value under whichever column name iwencai chose.
+
+    iwencai names columns after the query phrasing — "上市天数大于60" yields
+    `上市天数`, while other phrasings yield `上市交易日天数`. Matching on a
+    single literal silently disables the new-listing filter.
+    """
+    for key, value in row.items():
+        if "上市" in key and "天数" in key:
+            return value
+    return None
+
+
+def fetch_ifind_candidates() -> dict:
+    """Run the iwencai screens and return their results as a display artifact.
+
+    Deliberately NOT wired into the hard RPS/MA gate in fetch_strategy_pool_local
+    — this is a second opinion to read alongside the CheeseForTune pool, not a
+    new trading trigger. Graduating it into decisions is a separate call that
+    should follow evidence, the same way regime.json is display-only.
+    """
+    try:
+        import ifind_client
+    except ImportError:
+        return {"available": False, "reason": "ifind_client not importable"}
+    if not ifind_client.is_available():
+        return {"available": False, "reason": "IFIND_REFRESH_TOKEN not configured"}
+
+    client = ifind_client.get_client()
+    screens = []
+    for label, query in IWENCAI_SCREENS:
+        try:
+            rows = _iwencai_rows(client.iwencai(query))
+        except Exception as e:
+            screens.append({"label": label, "query": query,
+                            "error": f"{type(e).__name__}: {e}"[:200]})
+            continue
+
+        kept, dropped = [], 0
+        for row in rows:
+            listed = _listed_days(row)
+            try:
+                if listed is not None and float(listed) < IWENCAI_MIN_LISTED_DAYS:
+                    dropped += 1
+                    continue
+            except (TypeError, ValueError):
+                pass
+            kept.append(row)
+        screens.append({"label": label, "query": query,
+                        "count": len(kept), "dropped_new_listings": dropped,
+                        "stocks": kept})
+
+    return {
+        "available": True,
+        "fetched_at": datetime.now().astimezone().isoformat(),
+        "note": ("display-only second opinion; does NOT feed the RPS/MA gate. "
+                 "iwencai ignores searchtype and returns suspended names, so "
+                 "counts may exceed the tradeable universe."),
+        "screens": screens,
+    }
+
+
+def save_ifind_candidates(date: str, data: dict, output_dir: Path | None = None) -> Path:
+    """Save the iwencai screen results."""
+    out = (output_dir / "ifind_candidates.json") if output_dir \
+        else (DATA_DIR / "ifind_candidates" / f"{date}.json")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+                   encoding="utf-8")
     return out
 
 
