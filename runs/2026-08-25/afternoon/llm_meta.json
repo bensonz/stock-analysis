@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 150678,
+  "output_tokens": 16275,
+  "rounds": 2,
+  "duration_sec": 216.5,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月25日 板块 小家电 房地产服务 上涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3039
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "创业板指 深证成指 下跌 2026-08-25 原因",
+        "max_results": 5
+      },
+      "result_length": 3159
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "恒逸石化 文莱 炼化 2026年8月 最新",
+        "max_results": 5
+      },
+      "result_length": 3293
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 CRO 2026年8月 中报 最新",
+        "max_results": 5
+      },
+      "result_length": 3301
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "黄金 贵金属 下跌 2026-08-25 原因",
+        "max_results": 5
+      },
+      "result_length": 3294
+    }
+  ],
+  "fallback_used": false
+}

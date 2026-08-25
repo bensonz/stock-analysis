@@ -1,0 +1,55 @@
+{
+  "date": "2026-08-25",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 18.34,
+      "pnl_pct": 17.6,
+      "note": "PnL+17.6%利润奔跑中，止损已锁+10%(17.16)距现价约6.4%安全垫；文莱炼化逻辑兑现（H1净利+2500.73%、二期新增1200万吨炼化，来源：新浪财经8/21），石油石化未入冷区；今日-3.58%为强势中回撤，不触发任何卖出规则"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 161.0,
+      "pnl_pct": 27.3,
+      "note": "PnL+27.3%，止损锁+10%(139.15)距现价约13.6%安全垫；H1超预期+上调全年指引+1260H诉讼获初步禁令进展（来源：证券时报8/9），逻辑未破；医疗服务今日退出bottom5，冷区连续仅2日未达'冷3日'轮出线"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 2,
+    "totalEquity": 967387.0,
+    "dayPnl": 460.0,
+    "dayReturnPct": 0.05,
+    "totalReturnPct": -3.26,
+    "unrealizedPnl": 14734.0,
+    "realizedPnl": -47347.0,
+    "cashPct": 91.97
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 3.4008,
+    "up": 4234,
+    "down": 1245,
+    "positive_indices": [
+      "上证指数"
+    ],
+    "negative_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 70,
+    "limit_downs": 4,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 3.40:1, 1/3 major indices green, 70 limit-ups / 4 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "广度3.4:1（4234涨/1245跌，70涨停/4跌停）表面强势，但三大指数仅上证+0.19%收红、深证-0.35%、创业板-1.0%收绿——涨的是小家电/化妆品/地产链/种业等防御与低位板块，跌的是AI硬件/半导体/电子化学品/贵金属（来源：财中社、证券时报8/25）。买入门槛'至少2/3指数绿'不满足，故不新开仓。IV整体中性（平均IV Rank 0.449），300ETF/创业板ETF偏谨慎（0.555/0.512）。两持仓均在强势区（恒逸+17.6%、药明+27.3%），继续持有让利润奔跑。"
+  }
+}

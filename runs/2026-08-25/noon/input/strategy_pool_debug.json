@@ -1,0 +1,30 @@
+{
+  "mode": "cheesefortune_intersection",
+  "remote_strategy": {
+    "source": "none",
+    "strategy_id": "407228",
+    "date": null,
+    "total_stocks": 0,
+    "error": "Could not fetch strategy pool from API or crawl files"
+  },
+  "stage_counts": {
+    "remote_strategy_total": 0,
+    "rps_universe": 5195,
+    "intersection_total": 0
+  },
+  "drop_counts": {
+    "remote_missing_rps": 0,
+    "remote_below_rps_threshold": 0,
+    "duplicate_remote_codes": 0
+  },
+  "criteria": {
+    "rps60_gt": 85.0,
+    "rps120_gt": 85.0,
+    "rps250_gt": 85.0
+  },
+  "fallback": {
+    "used": false
+  },
+  "final_source": "cheesefortune_intersection",
+  "final_total_stocks": 0
+}

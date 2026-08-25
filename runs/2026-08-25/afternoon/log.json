@@ -1,0 +1,48 @@
+{
+  "date": "2026-08-25",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1787645681.1005409,
+      "errors": [],
+      "end": 1787645742.2554922,
+      "duration_sec": 61.2
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 7437,
+      "tokens": {
+        "input_tokens": 150678,
+        "output_tokens": 16275
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 216.5,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1787645958.830627,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h172 (observation): 分化盘里的'广度陷阱'：breadth 3.4:1（4234涨/1245跌，70涨停）表面强，但三大指数仅上证+0.19%收红、创业板-1.0%收绿——涨的是消...",
+        "Hypothesis: Created h173 (observation): 持仓大赢家日内回撤（恒逸石化-3.58%）不构成卖出：PnL+17.6%且止损锁+10%、板块未入冷区——价格+止损+板块冷区才是唯一退出依据，让利润奔跑须容忍...",
+        "Hypothesis: Updated h141 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1787645959.422776,
+      "duration_sec": 0.6
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 278.3
+  }
+}

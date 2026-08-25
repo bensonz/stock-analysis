@@ -1,0 +1,158 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "小家电",
+        "change_pct": 7.9,
+        "trend": "accelerating"
+      },
+      {
+        "name": "化妆品",
+        "change_pct": 5.4,
+        "trend": "steady"
+      },
+      {
+        "name": "其他家电Ⅱ",
+        "change_pct": 4.45,
+        "trend": "steady"
+      },
+      {
+        "name": "房地产服务",
+        "change_pct": 4.38,
+        "trend": "steady"
+      },
+      {
+        "name": "装修装饰Ⅱ",
+        "change_pct": 3.64,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "能源金属",
+        "change_pct": -3.87,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "贵金属",
+        "change_pct": -3.86,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "小金属",
+        "change_pct": -2.5,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电池",
+        "change_pct": -2.35,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "工业金属",
+        "change_pct": -2.24,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/2 positions in hot sectors; 0/2 in cold sectors（石油石化与医疗服务均处中游）",
+    "regime": "消费/地产链/家电防御性领涨，AI硬件/半导体/贵金属获利回吐；指数分化（仅上证收红，创业板-1.0%），属轮动而非增量普涨"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "PnL+17.6%利润奔跑中，止损已锁+10%(17.16)距现价约6.4%安全垫；文莱炼化逻辑兑现（H1净利+2500.73%、二期新增1200万吨炼化，来源：新浪财经8/21），石油石化未入冷区；今日-3.58%为强势中回撤，不触发任何卖出规则",
+      "sector_rank": "中游（未入今日top/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 17.6,
+      "days_held": 20,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "PnL+27.3%，止损锁+10%(139.15)距现价约13.6%安全垫；H1超预期+上调全年指引+1260H诉讼获初步禁令进展（来源：证券时报8/9），逻辑未破；医疗服务今日退出bottom5，冷区连续仅2日未达'冷3日'轮出线",
+      "sector_rank": "中游（今日退出bottom5）",
+      "new_stop": null,
+      "pnl_pct": 27.3,
+      "days_held": 18,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "reason": "Rule 2b：dist_ma10_pct=9.6%>8%、dist_ma20_pct=37.2%>12%，极端超买；电子化学品板块今日跌幅居前（来源：财中社8/25午评）",
+      "rps120": 94.28
+    },
+    {
+      "code": "688392",
+      "name": "骄成超声",
+      "reason": "Rule 2b：dist_ma20_pct=16.9%>12%极端延伸；电池/锂电设备板块今日cold（电池-2.35%）",
+      "rps120": 94.3
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "reason": "Rule 2b：dist_ma10_pct=9.0%>8%、dist_ma20_pct=13.9%>12%；贵金属今日bottom5(-3.86%)高位获利了结",
+      "rps120": 85.15
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "Rule 1：工业金属今日bottom5(-2.24%)，行业引力向下，个股逻辑再好也不进",
+      "rps120": 86.1
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "reason": "CRO，MA距离合规，但买入门槛未通过（三大指数仅上证收红，2/3绿规则失败），且医疗服务未确认重回top30%",
+      "rps120": 94.98
+    },
+    {
+      "code": "688131",
+      "name": "皓元医药",
+      "reason": "CXO，dist_ma20=8.0%合规，但买入门槛未通过（2/3指数绿规则失败），医疗服务未确认热点，放行后再评估",
+      "rps120": 94.69
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "分化盘里的'广度陷阱'：breadth 3.4:1（4234涨/1245跌，70涨停）表面强，但三大指数仅上证+0.19%收红、创业板-1.0%收绿——涨的是消费/地产链/种业等低位防御，跌的是AI硬件/半导体。'2/3指数绿'门槛正确拦住了在广度繁荣中追科技成长的冲动",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013（广度强不足以单独构成入场依据）",
+      "mechanism": "广度由低位/小市值防御股贡献，而成长指数领跌，说明资金在轮出而非增量进场；买入信号需指数与广度共振"
+    },
+    {
+      "text": "持仓大赢家日内回撤（恒逸石化-3.58%）不构成卖出：PnL+17.6%且止损锁+10%、板块未入冷区——价格+止损+板块冷区才是唯一退出依据，让利润奔跑须容忍强势股正常回撤",
+      "type": "observation",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "趋势股在中途回撤不破止损时离场，会系统性牺牲大波段收益；退出只能由硬止损或板块冷3日触发"
+    },
+    {
+      "text": "8/25消费/地产链接棒科技成长成为领涨主线（小家电+7.9%、化妆品+5.4%、房地产服务+4.38%），科技→防御轮动延续；驱动为海外极端天气+一线城市地产宽松（来源：财闻网8/25）",
+      "type": "signal",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076（科技→防御轮动加速）",
+      "mechanism": "AI硬件估值消化期，资金转向低位、有政策/需求催化（天气+地产宽松）的防御方向，轮动通常持续3-5个交易日"
+    }
+  ],
+  "market_summary": "广度3.4:1（4234涨/1245跌，70涨停/4跌停）表面强势，但三大指数仅上证+0.19%收红、深证-0.35%、创业板-1.0%收绿——涨的是小家电/化妆品/地产链/种业等防御与低位板块，跌的是AI硬件/半导体/电子化学品/贵金属（来源：财中社、证券时报8/25）。买入门槛'至少2/3指数绿'不满足，故不新开仓。IV整体中性（平均IV Rank 0.449），300ETF/创业板ETF偏谨慎（0.555/0.512）。两持仓均在强势区（恒逸+17.6%、药明+27.3%），继续持有让利润奔跑。",
+  "market_sentiment": "neutral",
+  "market_call": "中性"
+}
