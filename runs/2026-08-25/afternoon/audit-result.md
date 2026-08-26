@@ -1,21 +1,24 @@
 # 运行审计 2026-08-25 afternoon
 
-**结论: 🔴 需要改代码**
+**结论: 🟡 需要人工操作**
 
-_生成于 2026-08-25T15:32:47+08:00_
+_生成于 2026-08-25T16:20:00+08:00_
 
-## 需要改代码 (1)
+## 需要人工操作 (2)
 
-### [invariant] 该时段没有 manifest
+### [env] 数据源 sina 状态 down
 
-- `manifest-absent`
-- 运行目录存在但没有 manifest.json——无法区分'跑了但死在写清单前'与'根本没跑'。预检失败零留痕就是这个洞。
-- **连续第 2 次**（始于 2026-08-25）
-- 可疑位置: `scripts/run_daily.py (write the manifest before preflight)`
+- `source-unhealthy:sina`
+- {"status": "down", "error": "HTTPSConnectionPool(host='hq.sinajs.cn', port=443): Max retries exceeded with url: /list=s_sh000001 (Caused by NameResolutionError(\"HTTPSConnection(host='hq.sinajs.cn', port=443): Failed to resolve 'hq.sinajs.cn' ([Errno 8] nodename nor servname provided, or not known)\"))"}
+
+### [env] 数据源 cheesefortune 状态 down
+
+- `source-unhealthy:cheesefortune`
+- {"status": "down", "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"}
 
 ## 检查覆盖
 
-- 已执行: 0/12
+- 已执行: 12/12
 
 > 本审计只发现，不修复；从不写入 tracking/。
 > 它只能抓住已经写了检查的失败形状——没人想过的新 bug 不在覆盖内。

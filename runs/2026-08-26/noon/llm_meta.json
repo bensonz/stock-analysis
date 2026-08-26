@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 160299,
+  "output_tokens": 17415,
+  "rounds": 2,
+  "duration_sec": 256.2,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月26日 造纸板块 上涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3189
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 工业金属 铜 铝 板块 上涨 2026年8月",
+        "max_results": 5
+      },
+      "result_length": 2687
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 CRO 医疗服务 板块 下跌 2026年8月26日",
+        "max_results": 5
+      },
+      "result_length": 3181
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "券商 保险 板块 上涨 原因 2026年8月26日 A股",
+        "max_results": 5
+      },
+      "result_length": 2959
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "恒逸石化 文莱炼化 2026年8月 业绩",
+        "max_results": 5
+      },
+      "result_length": 3327
+    }
+  ],
+  "fallback_used": false
+}
