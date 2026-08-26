@@ -601,6 +601,18 @@ OPENAI_MODEL = _get_env_value("OPENAI_MODEL", "LLM_OPENAI_MODEL", default="gpt-5
 OPENAI_MODEL_LABEL = _get_env_value("OPENAI_MODEL_LABEL", default=OPENAI_MODEL) or OPENAI_MODEL
 GPT_TIMEOUT = 120  # seconds — no more hanging
 
+# Completion budget for every LLM entry point. Reasoning models bill their
+# thinking against this same ceiling, so it has to cover CoT *and* the answer.
+# At 16384 the 2026-08-26 noon run spent the whole budget reasoning and emitted
+# 0 chars — both passes reported exactly 16384 output tokens, Phase 2 could not
+# parse an empty string, and the run died before writing a manifest. The
+# pressure builds silently as LEARNINGS.md grows the prompt each session
+# (63333 in on 08-20 → 73225 on 08-26), so a fixed cap is a deadline.
+# 65536 is the endpoint's accepted ceiling, probed 2026-08-26. Taking it whole
+# costs nothing: the cap truncates, it does not reserve, and billing follows
+# tokens actually generated.
+MAX_OUTPUT_TOKENS = 65536
+
 
 def normalize_llm_provider(provider: str | None = None) -> str:
     """Normalize provider aliases to one of: openai, hybrid, anthropic."""
@@ -946,7 +958,7 @@ def build_summary(phase1_data: dict) -> str:
 def _call_anthropic_only(
     prompt: str,
     model: str = DEFAULT_MODEL,
-    max_tokens: int = 16384,
+    max_tokens: int = MAX_OUTPUT_TOKENS,
     temperature: float = 0.3,
     output_dir: Path | None = None,
 ) -> dict:
@@ -1007,7 +1019,7 @@ def _call_anthropic_only(
 
 def _call_openai_only(
     prompt: str,
-    max_tokens: int = 16384,
+    max_tokens: int = MAX_OUTPUT_TOKENS,
     temperature: float = 0.3,
     output_dir: Path | None = None,
 ) -> dict:
@@ -1069,7 +1081,7 @@ def _call_openai_only(
 def _call_hybrid(
     prompt: str,
     model: str = DEFAULT_MODEL,
-    max_tokens: int = 16384,
+    max_tokens: int = MAX_OUTPUT_TOKENS,
     temperature: float = 0.3,
     output_dir: Path | None = None,
     phase1_data: dict | None = None,
@@ -1185,7 +1197,7 @@ def _call_hybrid(
 def call_llm(
     prompt: str,
     model: str = DEFAULT_MODEL,
-    max_tokens: int = 16384,
+    max_tokens: int = MAX_OUTPUT_TOKENS,
     temperature: float = 0.3,
     output_dir: Path | None = None,
     phase1_data: dict | None = None,
@@ -1228,7 +1240,7 @@ REFINE_PROMPT = (
 def call_llm_v1(
     prompt: str,
     model: str = DEFAULT_MODEL,
-    max_tokens: int = 16384,
+    max_tokens: int = MAX_OUTPUT_TOKENS,
     temperature: float = 0.3,
     output_dir: Path | None = None,
 ) -> dict:
