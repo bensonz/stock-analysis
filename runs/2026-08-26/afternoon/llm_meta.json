@@ -1,0 +1,112 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 231170,
+  "output_tokens": 18430,
+  "rounds": 3,
+  "duration_sec": 266.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月26日 收盘 造纸 工业金属 证券 上涨原因",
+        "max_results": 5
+      },
+      "result_length": 3108
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "西部矿业 铜价 供给扰动 2026年8月",
+        "max_results": 5
+      },
+      "result_length": 3337
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "恒逸石化 文莱炼化 2026年8月 业绩",
+        "max_results": 5
+      },
+      "result_length": 3243
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 2026半年报 业绩 上调 指引",
+        "max_results": 5
+      },
+      "result_length": 3246
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月26日 涨停 复盘 市场情绪",
+        "max_results": 5
+      },
+      "result_length": 2763
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://cfi.net.cn/p20260814000124.html",
+        "maxChars": 3000
+      },
+      "result_length": 0
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.stcn.com/article/detail/4102322.html",
+        "maxChars": 3000
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.cls.cn/detail/2464754",
+        "maxChars": 2500
+      },
+      "result_length": 532
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/search/rptid/839173082905/index.phtml",
+        "maxChars": 2500
+      },
+      "result_length": 1619
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=造纸板块+2026年8月26日+上涨+原因",
+        "maxChars": 2500
+      },
+      "result_length": 2500
+    }
+  ],
+  "fallback_used": false
+}

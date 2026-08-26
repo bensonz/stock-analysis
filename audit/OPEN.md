@@ -7,6 +7,15 @@
 
 ## 需要改代码 (2)
 
+  ▸ manifest_present  [invariant]
+      6 次 / 6 天   2026-02-02 … 2026-08-25   最长连续 3
+      改这里: scripts/run_daily.py (write the manifest before preflight)
+        · 2026-02-10 afternoon 该时段没有 manifest
+        · 2026-02-11 afternoon 该时段没有 manifest
+        · 2026-04-12 afternoon 该时段没有 manifest
+        · 2026-08-25 noon      该时段没有 manifest
+        · … 另有 2 次更早的
+
   ▸ source_unhealthy  [env]
       14 次 / 13 天   2026-04-09 … 2026-08-25   最长连续 10
         · 2026-04-24 afternoon 数据源 eastmoney 状态 down
@@ -14,15 +23,6 @@
         · 2026-08-25 afternoon 数据源 sina 状态 down
         · 2026-08-25 afternoon 数据源 cheesefortune 状态 down
         · … 另有 10 次更早的
-
-  ▸ manifest_present  [invariant]
-      7 次 / 7 天   2026-02-02 … 2026-08-26   最长连续 3
-      改这里: scripts/run_daily.py (write the manifest before preflight)
-        · 2026-02-11 afternoon 该时段没有 manifest
-        · 2026-04-12 afternoon 该时段没有 manifest
-        · 2026-08-25 noon      该时段没有 manifest
-        · 2026-08-26 noon      该时段没有 manifest
-        · … 另有 3 次更早的
 
 
 ## 需要人工操作 (2)

@@ -1,22 +1,14 @@
 {
   "date": "2026-08-26",
   "slot": "noon",
-  "verdict": "code_change_needed",
-  "checks_run": 0,
+  "verdict": "clean",
+  "checks_run": 11,
   "checks_total": 12,
-  "skipped": [],
-  "findings": [
+  "skipped": [
     {
-      "id": "manifest-absent",
-      "check": "manifest_present",
-      "kind": "invariant",
-      "title": "该时段没有 manifest",
-      "detail": "运行目录存在但没有 manifest.json——无法区分'跑了但死在写清单前'与'根本没跑'。预检失败零留痕就是这个洞。",
-      "suspect": "scripts/run_daily.py (write the manifest before preflight)",
-      "fix_cmd": "",
-      "occurrences": 1,
-      "first_seen": "",
-      "accepted": ""
+      "check": "check_snapshot_wrote_rows",
+      "reason": "no snapshot note in preflight (run predates the writer)"
     }
-  ]
+  ],
+  "findings": []
 }

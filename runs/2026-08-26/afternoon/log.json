@@ -1,0 +1,49 @@
+{
+  "date": "2026-08-26",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1787755169.440486,
+      "errors": [],
+      "end": 1787755241.066849,
+      "duration_sec": 71.6
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8418,
+      "tokens": {
+        "input_tokens": 231170,
+        "output_tokens": 18430
+      },
+      "rounds": 3,
+      "tool_calls_count": 10,
+      "duration_sec": 266.1,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1787755507.226475,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=142",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=11",
+        "Hypothesis: Updated h158 (hypothesis): +1 supporting evidence → hitRate=100%, n=3",
+        "Hypothesis: Created h174 (observation): 药明康德现价159.25已超过targetPrice 150，但动量系统里target是软参考、trailing stop(+10%锁利139.15)才是硬约束...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1787755507.878117,
+      "duration_sec": 0.7
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 338.40000000000003
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "造纸",
+        "5d_pct": 3.79,
+        "trend": "steady"
+      },
+      {
+        "name": "工业金属",
+        "5d_pct": 3.33,
+        "trend": "accelerating"
+      },
+      {
+        "name": "证券Ⅱ",
+        "5d_pct": 2.75,
+        "trend": "steady"
+      },
+      {
+        "name": "冶钢原料",
+        "5d_pct": 2.71,
+        "trend": "steady"
+      },
+      {
+        "name": "农化制品",
+        "5d_pct": 2.25,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "出版",
+        "5d_pct": -1.44,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "小家电",
+        "5d_pct": -1.35,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "医疗服务",
+        "5d_pct": -1.34,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": -1.1,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电机Ⅱ",
+        "5d_pct": -0.95,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/2 positions in hot sectors（恒逸石油石化中性，药明康德医疗服务入bottom5）",
+    "regime": "铜/黄金资源+造纸+证券领涨，医疗服务转冷，窄幅弱涨（breadth 1.20:1）"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "石油石化未入bottom5，+16.7%利润奔跑，止损锁+10%(17.16)距现价约5.7%安全垫；文莱炼化H1净利+2500.73%、一期满产满销二期扩产逻辑未破（来源：中财网8/14），今日-0.76%高位整理，无卖出触发",
+      "sector_rank": "中性（未入top/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 16.7,
+      "days_held": 21,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "+25.9%利润奔跑，止损锁+10%(139.15)距现价约12.6%安全垫；H1收入+38.9%、经调利润+83.2%、全年指引上调至585-605亿逻辑未破（来源：申万宏源研报8/4）；医疗服务今日入bottom5(-1.34%)但为冷区连续第1日（8/25退出已重置），未达'冷3日'离场线，盯紧",
+      "sector_rank": "bottom5 (-1.34%)",
+      "new_stop": null,
+      "pnl_pct": 25.9,
+      "days_held": 19,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "工业金属top5(+3.33%)+RPS120 86.72甜点区+dist_ma5 +5.0%未超买+margin adding，铜供给扰动持续（刚果金出口禁令/智利下修，来源：证券时报8/22），唯一卡点是breadth 1.20:1<1.5:1最低买入门槛，待breadth转强优先考虑",
+      "sector_rank": "top5（工业金属 +3.33%）",
+      "rps120": 86.72
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "RPS120 94.63延展区（0风险+H1净利+258.78%通过例外），dist_ma5 -1.3%未追高，但军工电子未入top5且breadth门槛未过，VCP仅SETUP（contraction 0.94）",
+      "sector_rank": "中性（未入top/bottom5）",
+      "rps120": 94.63
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "reason": "RPS120 85.63甜点区+margin chg5 +18.4%强流入，但dist_ma20 +10.8%逼近12%超买线，贵金属未入top5，8/25现货黄金冲高回落失守4630（来源：输入events）",
+      "sector_rank": "中性（未入top/bottom5）",
+      "rps120": 85.63
+    },
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "reason": "RPS120 95.29超95%上限且dist_ma20 +35.0%极度超买，均值回归风险高",
+      "sector_rank": "中性（未入top/bottom5）",
+      "rps120": 95.29
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "reason": "公司自查AI服务器业务营收占比<1%、未与英伟达/谷歌开展订单合作（来源：公司公告8/26），催化证伪",
+      "sector_rank": "中性（未入top/bottom5）",
+      "rps120": 90.95
+    },
+    {
+      "code": "688403",
+      "name": "汇成股份",
+      "reason": "H1归母净利-94.78%（来源：输入events），RPS20仅3.79动量崩塌",
+      "sector_rank": "中性（未入top/bottom5）",
+      "rps120": 92.56
+    },
+    {
+      "code": "301345",
+      "name": "涛涛车业",
+      "reason": "2026/09/21解禁4512.80万股占总股本41.38%，抛压临近",
+      "sector_rank": "中性（未入top/bottom5）",
+      "rps120": 90.79
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "三大指数全红+56涨停/2跌停下，breadth仅1.20:1（2946涨/2448跌）未达1.5:1最低买入门槛，且分布集中于r0_2(2177只0-2%)与f0_2(1905只)双峰——窄幅弱涨，指数红盘由权重/少数热点拉动。即使西部矿业（工业金属top5+RPS甜点）这类强候选在场，也不破门开仓。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "market-regime"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "r0_2/f0_2双峰说明多数股票缺乏真实动能，追入新仓的胜率被广度稀释；1.5:1门槛正是为过滤这类'表面红盘、实质弱涨'的交易日。"
+    },
+    {
+      "text": "医疗服务板块冷热高频切换（8/24冷→8/25热→8/26冷），'冷3日'计数机制正确处理了单日反复：8/25退出重置计数，今日回到第1日，不触发机械离场。药明康德+25.9%继续持有、让利润奔跑。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "以连续计数而非单日状态做板块离场判断，免疫单日噪音，避免在高利润持仓上被日内波动洗出。"
+    },
+    {
+      "text": "铜供给扰动是持续性强催化（刚果金8/6出口禁令+智利2026产量下修创20年同期新低+必和必拓铜利润首次超铁矿，来源：证券时报8/22），工业金属今日top5(+3.33%)。西部矿业RPS120 86.72甜点+dist_ma5 +5.0%未超买+margin adding，是breadth转强后的优先候选。",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "供给端硬约束（矿端政策+品位下降）是数季度级别的趋势，非一日脉冲；板块排名领先+个股未超买=高质量入场时机的先决条件已就位，只差广度确认。"
+    },
+    {
+      "text": "药明康德现价159.25已超过targetPrice 150，但动量系统里target是软参考、trailing stop(+10%锁利139.15)才是硬约束；不让'目标已到'成为止盈借口，继续让利润奔跑，同时盯医疗服务冷3日线。",
+      "type": "rule",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "强趋势股的目标价常被突破，提前止盈会系统性卖飞主升浪；硬止损/锁利线承担风险控制，目标价只作为叙事锚点。"
+    }
+  ],
+  "market_summary": "三大指数全红（上证+0.59%/深证+0.69%/创业板+0.51%/科创50+1.71%），但breadth仅1.20:1（2946涨/2448跌）未达1.5:1买入门槛，涨跌分布集中于0-2%窄幅区间（弱涨）；56涨停/2跌停。铜/黄金资源+造纸+证券领涨，医疗服务转冷（药明康德所在板块入bottom5）。IV整体中性（avg rank 0.41）。英伟达8/26盘后财报为AI链事件风险（来源：财联社）。breadth未达标，new_positions空仓，聚焦两只盈利持仓的止损与板块冷热跟踪。",
+  "market_sentiment": "neutral",
+  "market_call": "中性"
+}

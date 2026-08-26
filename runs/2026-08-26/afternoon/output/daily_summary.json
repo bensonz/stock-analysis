@@ -1,0 +1,54 @@
+{
+  "date": "2026-08-26",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 18.2,
+      "pnl_pct": 16.7,
+      "note": "石油石化未入bottom5，+16.7%利润奔跑，止损锁+10%(17.16)距现价约5.7%安全垫；文莱炼化H1净利+2500.73%、一期满产满销二期扩产逻辑未破（来源：中财网8/14），今日-0.76%高位整理，无卖出触发"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 159.25,
+      "pnl_pct": 25.9,
+      "note": "+25.9%利润奔跑，止损锁+10%(139.15)距现价约12.6%安全垫；H1收入+38.9%、经调利润+83.2%、全年指引上调至585-605亿逻辑未破（来源：申万宏源研报8/4）；医疗服务今日入bottom5(-1.34%)但为冷区连续第1日（8/25退出已重置），未达'冷3日'离场线，盯紧"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 2,
+    "totalEquity": 966638.0,
+    "dayPnl": -749.0,
+    "dayReturnPct": -0.08,
+    "totalReturnPct": -3.34,
+    "unrealizedPnl": 13985.0,
+    "realizedPnl": -47347.0,
+    "cashPct": 92.05
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 1.2034,
+    "up": 2946,
+    "down": 2448,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 56,
+    "limit_downs": 2,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 1.20:1, 3/3 major indices green, 56 limit-ups / 2 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "三大指数全红（上证+0.59%/深证+0.69%/创业板+0.51%/科创50+1.71%），但breadth仅1.20:1（2946涨/2448跌）未达1.5:1买入门槛，涨跌分布集中于0-2%窄幅区间（弱涨）；56涨停/2跌停。铜/黄金资源+造纸+证券领涨，医疗服务转冷（药明康德所在板块入bottom5）。IV整体中性（avg rank 0.41）。英伟达8/26盘后财报为AI链事件风险（来源：财联社）。breadth未达标，new_positions空仓，聚焦两只盈利持仓的止损与板块冷热跟踪。"
+  }
+}
