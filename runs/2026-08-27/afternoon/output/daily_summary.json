@@ -1,0 +1,66 @@
+{
+  "date": "2026-08-27",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 19.2,
+      "pnl_pct": 23.1,
+      "note": "现价19.2(+5.49%)浮盈+23.1%，止损已锁+10%(17.16)；H1归母净利+2500.73%、文莱炼化满产满销+二期1200万吨推进中（来源：新浪财经8/11、8/21）；石油石化未入bottom5，无卖出触发，让利润奔跑"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 159.94,
+      "pnl_pct": 26.4,
+      "note": "现价159.94(+0.43%)浮盈+26.4%，止损已锁+10%(139.15)；H1收入+38.9%、经调利润+83.2%、全年指引上调逻辑未破；医疗服务今日退出bottom5，冷区计数重置，无卖出触发"
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "OPEN",
+      "price": 59.01,
+      "note": "元件板块top5(+5.09%)，PCB/覆铜板涨价链驱动（覆铜板年内第4次提价累计40%、电子行业前7月利润+1.1倍，来源：东吴证券/财闻8/27）；RPS120=90.58甜区，dist_ma5-0.5%/ma10-1.2%/ma20+6.1%均未超追高线；8/7澄清无英伟达/谷歌订单（陈旧），属板块贝塔标的而非纯AI链，故小仓"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 968445.0,
+    "dayPnl": 1807.0,
+    "dayReturnPct": 0.19,
+    "totalReturnPct": -3.16,
+    "unrealizedPnl": 15792.0,
+    "realizedPnl": -47347.0,
+    "cashPct": 89.44
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 1.7459,
+    "up": 3394,
+    "down": 1944,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 78,
+    "limit_downs": 4,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 1.75:1, 3/3 major indices green, 78 limit-ups / 4 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [
+    {
+      "code": "002913",
+      "name": "奥士康"
+    }
+  ],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "Breadth 1.75:1（涨3394/跌1944），78涨停/4跌停，上证+1.13%、深成+1.50%、创业板+1.71%、科创50+3.77%全绿，强普涨。热点：非金属材料Ⅱ+9.22%、林业Ⅱ+7.68%、电子化学品Ⅱ+5.58%、玻璃玻纤+5.3%、元件+5.09%（PCB涨价链+算力硬件驱动，来源：财闻/东吴证券8/27）；冷区：光伏设备-2.26%、调味发酵品-1.76%、电网设备-1.23%、银行。IV rank≈43%中性，正常仓位。持仓2只均在中游板块，无冷区暴露。"
+  }
+}

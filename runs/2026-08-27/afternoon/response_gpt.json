@@ -1,0 +1,191 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": 9.22,
+        "trend": "spike"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": 7.68,
+        "trend": "spike"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": 5.58,
+        "trend": "recovering"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": 5.3,
+        "trend": "steady"
+      },
+      {
+        "name": "元件",
+        "5d_pct": 5.09,
+        "trend": "recovering"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "光伏设备",
+        "5d_pct": -2.26,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "调味发酵品Ⅱ",
+        "5d_pct": -1.76,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电网设备",
+        "5d_pct": -1.23,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": -1.21,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "股份制银行Ⅱ",
+        "5d_pct": -1.1,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/2 持仓在今日top5板块（恒逸石化-石油石化、药明康德-医疗服务均在中游，未入冷区）",
+    "regime": "强普涨；科技/算力硬件链（元件、电子化学品、科创50）领涨回暖，防御与前期热点（电网设备、光伏、银行）退潮"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "现价19.2(+5.49%)浮盈+23.1%，止损已锁+10%(17.16)；H1归母净利+2500.73%、文莱炼化满产满销+二期1200万吨推进中（来源：新浪财经8/11、8/21）；石油石化未入bottom5，无卖出触发，让利润奔跑",
+      "sector_rank": "中游（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 23.1,
+      "days_held": 22,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "现价159.94(+0.43%)浮盈+26.4%，止损已锁+10%(139.15)；H1收入+38.9%、经调利润+83.2%、全年指引上调逻辑未破；医疗服务今日退出bottom5，冷区计数重置，无卖出触发",
+      "sector_rank": "中游（未入top5，已退出bottom5）",
+      "new_stop": null,
+      "pnl_pct": 26.4,
+      "days_held": 20,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "entry_price": 59.01,
+      "allocation_pct": 3,
+      "stop": 56.06,
+      "target": 64.9,
+      "thesis": "元件板块top5(+5.09%)，PCB/覆铜板涨价链驱动（覆铜板年内第4次提价累计40%、电子行业前7月利润+1.1倍，来源：东吴证券/财闻8/27）；RPS120=90.58甜区，dist_ma5-0.5%/ma10-1.2%/ma20+6.1%均未超追高线；8/7澄清无英伟达/谷歌订单（陈旧），属板块贝塔标的而非纯AI链，故小仓",
+      "sector": "元件",
+      "sector_rank": "top 5（今日第5，+5.09%）",
+      "catalyst": "PCB/覆铜板涨价链+算力硬件需求；中报8/28明日（二元事件，按Rule 2c减半仓）",
+      "catalyst_freshness": "ongoing",
+      "rps120": 90.58,
+      "conviction": "small"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "600176",
+      "name": "中国巨石",
+      "reason": "玻璃玻纤top5(+5.3%)但RPS120=96.04>95超买，按RPS上限规则跳过，等回调至90-95区间",
+      "rps120": 96.04
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "reason": "元件top5但为8/19已卖出标的（重入），现价48.26低于MA10(-5.9%)形态未修复，重入举证不足",
+      "rps120": 90.23
+    },
+    {
+      "code": "000725",
+      "name": "京东方A",
+      "reason": "面板/光学光电子未入今日top5，RPS120=93.68处扩展区且无板块豁免",
+      "rps120": 93.68
+    },
+    {
+      "code": "688392",
+      "name": "骄成超声",
+      "reason": "dist_ma20=14.7%>12%极端追高，锂电专用设备板块亦非热点",
+      "rps120": 94.88
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "铜/工业金属未入今日top5，现价38.67低于MA5(-2.9%)/MA10(-3.6%)，板块不在top30%",
+      "rps120": 87.05
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "reason": "黄金未入今日top5，dist_ma20=11.0%偏高，金价冲高回落",
+      "rps120": 86.52
+    },
+    {
+      "code": "601918",
+      "name": "新集能源",
+      "reason": "煤炭未入今日top5（今日冷区为银行/电网/光伏），板块不在top30%，无entry",
+      "rps120": 92.71
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "今日top5板块中池内个股大面积RPS120>95超买（中船特气100.0、南亚新材99.63、国际复材99.38、中国巨石96.04），唯一落80-92甜区的是元件板块的奥士康(90.58)。板块热≠板块内标的可买：中国巨石(玻璃玻纤top5)与中船特气(电子化学品top5)均因RPS上限被拦下，这正是7/22被否定的'高RPS=最强动量'陷阱。",
+      "type": "rule",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "RPS>95标的已透支相对强度，gate pool内rank-IC为负，均值回归风险高于板块贝塔收益"
+    },
+    {
+      "text": "元件板块8/19曾bottom5（顺络电子/三环集团当日被止损离场），8/27重回top5(+5.09%)且由PCB涨价链驱动（覆铜板年内第4次提价累计40%、电子行业前7月利润+1.1倍，来源：东吴证券/财闻8/27）。板块轮动可快速逆转，但被卖出的顺络电子现价48.26仍低于MA10(-5.9%)、形态未修复，不因板块回暖就立刻追回。",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "timing",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "重入标的需求先站回MA10修复形态；板块级回暖是必要非充分条件"
+    },
+    {
+      "text": "强普涨日(1.75:1、78涨停/4跌停、三大指数全绿)候选池仍大面积RPS过热，当日合格买入标的仅奥士康一只。正确动作是SMALL BUY+大量skip，而非为打满现金放宽RPS或追高——现金本身是仓位。",
+      "type": "observation",
+      "tags": [
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "买入闸门打开不等于必须满仓；合格标的稀缺时以小仓表达观点，保持纪律弹性"
+    },
+    {
+      "text": "奥士康中报8/28(明日)构成个股级二元事件，按Rule 2c事件前缩量——本次以3%小仓而非5-7%标准仓对待。8/28-8/29为中报密集窗口（奥士康8/28、骄成超声/京仪装备/京东方A/中控技术/涛涛车业8/29），未来2日开新仓需统一考虑该事件面。",
+      "type": "timing",
+      "tags": [
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "个股中报与FOMC同理：日期确定的二元事件前，减半仓位或等事件后首日再入"
+    }
+  ],
+  "market_summary": "Breadth 1.75:1（涨3394/跌1944），78涨停/4跌停，上证+1.13%、深成+1.50%、创业板+1.71%、科创50+3.77%全绿，强普涨。热点：非金属材料Ⅱ+9.22%、林业Ⅱ+7.68%、电子化学品Ⅱ+5.58%、玻璃玻纤+5.3%、元件+5.09%（PCB涨价链+算力硬件驱动，来源：财闻/东吴证券8/27）；冷区：光伏设备-2.26%、调味发酵品-1.76%、电网设备-1.23%、银行。IV rank≈43%中性，正常仓位。持仓2只均在中游板块，无冷区暴露。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

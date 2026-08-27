@@ -25,7 +25,7 @@
         · … 另有 10 次更早的
 
 
-## 需要人工操作 (2)
+## 需要人工操作 (3)
 
   ▸ phase_failed  [env]
       8 次 / 8 天   2026-05-28 … 2026-08-20
@@ -44,6 +44,11 @@
         · 2026-08-12 noon      phase1_to_phase2 硬闸门拦截
         · 2026-08-20 afternoon phase1_to_phase2 硬闸门拦截
         · … 另有 15 次更早的
+
+  ▸ snapshot_wrote_rows  [env]
+      1 次 / 1 天   2026-08-26
+      执行:   python3 scripts/pricedb.py snapshot --date 2026-08-26 --dry-run
+        · 2026-08-26 afternoon 快照写入 0 行
 
 
 ## 已知并接受 (1)

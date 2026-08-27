@@ -1,0 +1,118 @@
+{
+  "date": "2026-08-27",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1787814310.183444,
+      "errors": [],
+      "end": 1787814406.306612,
+      "duration_sec": 96.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8273,
+      "tokens": {
+        "input_tokens": 149967,
+        "output_tokens": 26049
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 360.2,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1787814766.484756,
+      "actions": [
+        "OPEN 002913 @ 59.01",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=106",
+        "Hypothesis: Created h175 (observation): 元件板块8/19曾bottom5（顺络电子/三环集团当日被止损离场），8/27重回top5(+5.09%)且由PCB涨价链驱动（覆铜板年内第4次提价累计40%、...",
+        "Hypothesis: Created h176 (observation): 强普涨日(1.75:1、78涨停/4跌停、三大指数全绿)候选池仍大面积RPS过热，当日合格买入标的仅奥士康一只。正确动作是SMALL BUY+大量skip，而非...",
+        "Hypothesis: Created h177 (observation): 奥士康中报8/28(明日)构成个股级二元事件，按Rule 2c事件前缩量——本次以3%小仓而非5-7%标准仓对待。8/28-8/29为中报密集窗口（奥士康8/2...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002913",
+                "name": "奥士康",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 59.01,
+                "stopLoss": 56.06,
+                "distance_pct": 5.0,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1787814767.354357,
+      "duration_sec": 0.9
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 002913 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 457.2
+  }
+}

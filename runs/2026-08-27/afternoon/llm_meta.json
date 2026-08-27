@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 149967,
+  "output_tokens": 26049,
+  "rounds": 2,
+  "duration_sec": 360.2,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 元件 PCB 板块 上涨 原因 2026年8月27日",
+        "max_results": 5
+      },
+      "result_length": 2961
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "奥士康 002913 澄清 英伟达 AMD AI业务 中报",
+        "max_results": 5
+      },
+      "result_length": 893
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "恒逸石化 文莱炼化 净利润 2026年8月",
+        "max_results": 5
+      },
+      "result_length": 3454
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年8月27日 收评 科创50 大涨 板块",
+        "max_results": 5
+      },
+      "result_length": 3074
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+2026年8月27日",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    }
+  ],
+  "fallback_used": false
+}
