@@ -88,22 +88,28 @@ Beat-index at 20d: 34.2% for MA-aligned against **53.6%** for MA-rejected. The
 confound is removed and the result gets *stronger*. In this sample the MA gate
 is not neutral — it is actively selecting the worse half.
 
-**Where the outperformance comes from.** `❌` fires on distance in *either*
-direction, so it mixes deeply-oversold names with wildly-overextended ones. By
-distance from MA20 at 20d:
+**A rule/implementation mismatch sits underneath this.** `ANALYST.md` Rule 2b is
+one-sided — *"dist_ma5_pct > 6% → SKIP. Stock is overextended short-term,"*
+with prose that names the target: *"buying a stock that just spiked far above
+its moving averages is chasing."* But `report_generator.py:528` implements it
+as `abs(ma5) > 6`. A stock **25% below** its MA5 is marked ❌ under a rule
+written to catch stocks far *above*.
 
-| bucket | mean excess | beat-index | n |
+Splitting the rejection by side (corrected parser, see Data-quality note):
+
+| bucket | 10d mean / beat | 20d mean / beat | n (20d) |
 |---|---|---|---|
-| >20% below | +7.46% | 74.5% | 55 |
-| 10–20% below | +1.25% | 54.0% | 494 |
-| 0–10% below | −4.70% | 36.3% | 2214 |
-| 0–10% above | +2.09% | 46.2% | 1808 |
-| >10% above | −3.15% | 40.5% | 509 |
+| >6% **above** MA5 (rule as written) | +1.60% / 47.7% | −1.89% / 41.0% | 991 |
+| >6% **below** MA5 (`abs()` only) | **−5.84% / 33.5%** | −2.51% / 43.9% | 1247 |
+| inside the band | +0.46% / 48.6% | −0.77% / 42.2% | 2842 |
 
-Not monotonic, so this is not a clean "mean reversion pays" story. The pattern
-is a penalty on the *middle* — names hugging just below MA20, which is where
-most of the PASS-adjacent population sits — and a premium on the deeply
-oversold tail (n=55, thin; do not build on that cell alone).
+This does **not** show the `abs()` is costing money — names far below MA5 are
+the worst bucket at 10d, so excluding them may well be right. The mismatch is
+that the code enforces something the spec never authorised, and nobody decided
+it. Distance from **MA20** points the other way at 20d (>20% below: **+8.55%**,
+**73.6%** beat-index, n=552), so "far below" is bad short-term and good
+longer-term. Different horizons, different MAs, different answers — which is
+why this needs replication before anything changes.
 
 ## Result 5 — the system as a whole trails the market
 
@@ -114,6 +120,27 @@ The shortfall is not beta and not over-exposure — roughly a tenth of capital w
 deployed. With 61 closed trades at a 31% win rate, it looks like churn. Note the
 other side of the same coin: since the candidate universe underperforms at every
 horizon, holding 89% cash has been *protective*, not timid.
+
+## Data-quality note (a correction to the first version of this doc)
+
+`candidates.md` has had two column layouts:
+
+```
+≤2026-05 : | Code | Name | RPS120 | RPS60 | Trend | Co | MA5% | MA10% | MA20% | Status |
+current  : | Code | Name | RPS120 | RPS60 | MA5% | MA10% | MA20% | Status |
+```
+
+The first version of `candidate_alpha.py` read columns by position, so for the
+~80% of the archive in the older layout it read **MA5% where it meant MA20%**.
+Status (last column) and RPS120 (index 2) are in the same place in both, so
+Results 1–4's headline tables were unaffected — but the MA-distance breakdown
+was wrong, and the published version of it understated the deep-below bucket by
+10× on n (55 vs 552). The parser now resolves columns from each file's own
+header; `tests/test_candidate_alpha.py` pins that both layouts yield identical
+values for the same row.
+
+The lesson generalises: the run archive spans schema changes, and any analysis
+reaching back through it has to read the schema rather than assume one.
 
 ## What this does not measure
 

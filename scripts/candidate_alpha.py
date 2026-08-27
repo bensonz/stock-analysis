@@ -85,7 +85,20 @@ def load_index(path=None):
 
 
 def parse_candidates(runs_dir=None):
-    """[(date, code, rps120, dist_ma20, status_class)] over every run ever written."""
+    """[(date, code, rps120, dist_ma5, dist_ma20, status_class)] over every run.
+
+    Columns are resolved from each file's OWN header, never by position. The
+    table has had at least two shapes:
+
+        …| RPS120 | RPS60 | Trend | Co | MA5% | MA10% | MA20% | Status |   (≤2026-05)
+        …| RPS120 | RPS60 | MA5% | MA10% | MA20% | Status |               (current)
+
+    Hardcoding indices silently reads MA5% as MA20% for ~80% of the archive —
+    which is exactly what an earlier version of this script did, producing a
+    distance-bucket table that mixed two different measurements. Status and
+    RPS120 happened to survive (last column, and index 2 in both), so only the
+    MA-distance breakdown was wrong; that is luck, not design.
+    """
     root = Path(runs_dir or PROJECT_ROOT / "runs")
     rows = []
     for f in sorted(root.glob("**/candidates.md")):
@@ -93,15 +106,26 @@ def parse_candidates(runs_dir=None):
             date = str(f.relative_to(root)).split("/")[0]
         except ValueError:
             continue
+        cols: dict[str, int] | None = None
         for line in f.read_text(encoding="utf-8").splitlines():
-            m = re.match(r"^\|\s*(\d{6})\s*\|", line)
-            if not m:
+            if not line.startswith("|"):
                 continue
             cells = [c.strip() for c in line.strip().strip("|").split("|")]
-            if len(cells) < 8:
+            if cells and cells[0] == "Code":
+                cols = {name: i for i, name in enumerate(cells)}
                 continue
-            rows.append((date, m.group(1),
-                         _num(cells[2]), _num(cells[6]), cells[-1][:1]))
+            if not re.match(r"^\d{6}$", cells[0] if cells else ""):
+                continue
+            if not cols:
+                continue          # data before a header we can trust: skip loudly-empty
+
+            def col(name):
+                i = cols.get(name)
+                return _num(cells[i]) if i is not None and i < len(cells) else None
+
+            status = cells[cols["Status"]] if "Status" in cols else ""
+            rows.append((date, cells[0], col("RPS120"),
+                         col("MA5%"), col("MA20%"), status[:1]))
     return rows
 
 
@@ -205,7 +229,7 @@ def analyse(runs_dir=None, tracking_dir=None, db_path=None, index_file=None):
     picks = llm_picks(tracking_dir)
 
     def sub(pred):
-        return [(d, c) for d, c, _rps, _ma, s in rows if pred(s)]
+        return [(d, c) for d, c, _rps, _ma5, _ma20, s in rows if pred(s)]
 
     groups = {
         "blind_all": sub(lambda s: True),
@@ -240,7 +264,7 @@ def analyse(runs_dir=None, tracking_dir=None, db_path=None, index_file=None):
         cells = {}
         for lo, hi in ((75, 95), (95, 101)):
             for label, want_reject in (("ma_ok", False), ("ma_fail", True)):
-                items = [(d, c) for d, c, rps, _ma, s in rows
+                items = [(d, c) for d, c, rps, _ma5, _ma20, s in rows
                          if rps is not None and lo <= rps < hi
                          and (s == REJECT) == want_reject]
                 cells[f"rps{lo}_{hi}_{label}"] = describe(
@@ -255,7 +279,7 @@ def analyse(runs_dir=None, tracking_dir=None, db_path=None, index_file=None):
         for lo, hi, name in ((-1e9, -20, "below_20pct"), (-20, -10, "below_10_20"),
                              (-10, 0, "below_0_10"), (0, 10, "above_0_10"),
                              (10, 1e9, "above_10pct")):
-            items = [(d, c) for d, c, _rps, ma, _s in rows
+            items = [(d, c) for d, c, _rps, _ma5, ma, _s in rows
                      if ma is not None and lo <= ma < hi]
             buckets[name] = describe(excess(panel, idx, idx_dates, items, h))
         result["ma20_distance_buckets"][h] = buckets

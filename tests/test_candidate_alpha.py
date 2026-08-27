@@ -94,9 +94,44 @@ def test_status_classes_are_read_from_the_first_glyph(tmp_path):
         "| 000003 | c | 80 | 78 | -9.0 | -9.0 | -9.0 | ❌ MA5,MA10,MA20 |\n",
         encoding="utf-8")
     rows = ca.parse_candidates(runs_dir=tmp_path)
-    assert [r[4] for r in rows] == ["✅", "⏳", "❌"]
+    assert [r[5] for r in rows] == ["✅", "⏳", "❌"]
     assert [r[0] for r in rows] == ["2026-01-02"] * 3
-    assert rows[0][2] == 90.0 and rows[2][3] == -9.0
+    assert rows[0][2] == 90.0 and rows[2][4] == -9.0
+
+
+def test_columns_come_from_each_files_own_header(tmp_path):
+    """candidates.md has had two shapes — the pre-2026-05 table carried extra
+    Trend and Co columns before the MA block:
+
+        | Code | Name | RPS120 | RPS60 | Trend | Co | MA5% | MA10% | MA20% | Status |
+        | Code | Name | RPS120 | RPS60 | MA5% | MA10% | MA20% | Status |
+
+    Positional parsing reads MA5% as MA20% for every row of the older format —
+    about 80% of the archive — and produced a published distance-bucket table
+    that silently mixed the two measurements. Both eras must yield identical
+    values for the same stock.
+    """
+    old = tmp_path / "2026-04-28" / "output"
+    new = tmp_path / "2026-08-27" / "afternoon" / "output"
+    old.mkdir(parents=True)
+    new.mkdir(parents=True)
+    (old / "candidates.md").write_text(
+        "| Code | Name | RPS120 | RPS60 | Trend | Co | MA5% | MA10% | MA20% | Status |\n"
+        "|---|---|---|---|---|---|---|---|---|---|\n"
+        "| 000001 | a | 90 | 88 | - | - | +1.5 | +2.5 | +3.5 | ✅ PASS |\n",
+        encoding="utf-8")
+    (new / "candidates.md").write_text(
+        "| Code | Name | RPS120 | RPS60 | MA5% | MA10% | MA20% | Status |\n"
+        "|---|---|---|---|---|---|---|---|\n"
+        "| 000001 | a | 90 | 88 | +1.5 | +2.5 | +3.5 | ✅ PASS |\n",
+        encoding="utf-8")
+
+    rows = ca.parse_candidates(runs_dir=tmp_path)
+    assert len(rows) == 2
+    old_row = next(r for r in rows if r[0] == "2026-04-28")
+    new_row = next(r for r in rows if r[0] == "2026-08-27")
+    # (rps120, dist_ma5, dist_ma20, status) must agree across the format change
+    assert old_row[2:] == new_row[2:] == (90.0, 1.5, 3.5, "✅")
 
 
 def test_thin_samples_are_flagged_rather_than_reported():
