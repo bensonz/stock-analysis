@@ -125,6 +125,55 @@ STRONG_TAPE_SIZE_MULTIPLIER = 1.0
 HARD_SELL_LOSS_PCT = -5.0
 
 
+def fetch_strategy_pool_with_fallback(strategy_debug: dict) -> dict:
+    """The CheeseForTune crawl, falling back to the local price DB on an outage.
+
+    2026-08-25: the crawl failed outright ("Could not fetch strategy pool from
+    API or crawl files") and the run died at Gate 1 with an empty pool, while a
+    perfectly current local pricedb sat unused. `fetch_strategy_pool_local()`
+    has existed the whole time — nothing called it.
+
+    It fires ONLY on an empty pool. The two paths screen differently (local:
+    rps>=80 plus MA20>MA120>MA250; live intersection: rps>85, no MA), so using
+    it on a normal day would quietly change what gets admitted. It is an outage
+    measure, not a second opinion.
+
+    A fallback that itself fails must not overwrite the original diagnosis — a
+    stale-pricedb message would send you debugging the wrong system.
+    """
+    import data_collector
+
+    crawl = fetch_strategy_pool()
+    if crawl.get("stocks"):
+        return crawl
+
+    reason = crawl.get("error") or "strategy pool returned no stocks"
+    print(f"    ⚠ strategy pool empty ({reason}) — trying local pricedb",
+          file=sys.stderr)
+    try:
+        local = data_collector.fetch_strategy_pool_local()
+    except Exception as e:
+        strategy_debug["fallback"]["error"] = str(e)
+        print(f"    ✗ local fallback also failed: {e}", file=sys.stderr)
+        return crawl
+
+    if not local.get("stocks"):
+        strategy_debug["fallback"]["error"] = "local pool also empty"
+        print("    ✗ local fallback returned no stocks either", file=sys.stderr)
+        return crawl
+
+    strategy_debug["fallback"] = {
+        "used": True,
+        "reason": reason,
+        "source": local.get("source", "local_pricedb"),
+        "total_stocks": len(local["stocks"]),
+    }
+    print(f"    → local fallback supplied {len(local['stocks'])} stocks "
+          f"(gate differs from the live intersection — see CLAUDE.md)",
+          file=sys.stderr)
+    return local
+
+
 def _build_strategy_intersection(remote_strategy: dict, rps_data: dict) -> tuple[dict, dict]:
     """Build the working pool as remote CheeseFortune crawl intersected with RPS-filtered local names."""
     remote_stocks = remote_strategy.get("stocks", []) or []
@@ -774,7 +823,7 @@ def phase1_collect(date: str, slot: str) -> dict:
         "final_total_stocks": 0,
     }
     try:
-        data["strategy_crawl"] = fetch_strategy_pool()
+        data["strategy_crawl"] = fetch_strategy_pool_with_fallback(strategy_debug)
         save_crawl_data(date, data["strategy_crawl"], output_dir=input_dir)
         strategy_source = data["strategy_crawl"].get("source", "unknown")
         print(

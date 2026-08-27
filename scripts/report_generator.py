@@ -525,17 +525,30 @@ def generate_candidates_md(date: str, data: dict, output_dir: Path | None = None
             ma10 = m.get("dist_ma10_pct")
             ma20 = m.get("dist_ma20_pct")
 
-        # MA check
-        fails = []
-        if ma5 is not None and abs(ma5) > 6:
-            fails.append("MA5")
-        if ma10 is not None and abs(ma10) > 8:
-            fails.append("MA10")
-        if ma20 is not None and abs(ma20) > 12:
-            fails.append("MA20")
+        # MA check — split by SIDE, because the two sides mean different things.
+        #
+        # ANALYST.md Rule 2b is one-sided: "dist_ma5_pct > 6% → SKIP. Stock is
+        # overextended short-term … buying a stock that just spiked far ABOVE
+        # its moving averages is chasing." This label used abs() and so also
+        # condemned deeply-oversold names, which Rule 2b never mentions — a
+        # stock 25% BELOW its MA5 was marked ❌ under a no-chasing rule.
+        #
+        # Both signals are worth having; conflating them is what made the label
+        # contradict the spec (2026-08-28 audit). ❌ keeps Rule 2b's meaning,
+        # 🔻 carries the below-band warning. Distinct leading glyphs matter:
+        # candidate_alpha.parse_candidates() classifies rows by first character
+        # and ⚠️ is already taken by "no MA".
+        BANDS = (("MA5", ma5, 6), ("MA10", ma10, 8), ("MA20", ma20, 12))
+        above = [n for n, v, b in BANDS if v is not None and v > b]
+        below = [n for n, v, b in BANDS if v is not None and v < -b]
+        fails = above + below
 
-        if fails:
-            status = f"❌ {','.join(fails)}"
+        if above:
+            # Chasing takes precedence: Rule 2b is the one the spec marks
+            # NON-NEGOTIABLE, so a stock breaching on both sides reads as ❌.
+            status = f"❌ {','.join(above)}"
+        elif below:
+            status = f"🔻 BELOW {','.join(below)}"
         elif ma5 is not None:
             if rps120 and rps120 > 95:
                 status = "⏳ >95"

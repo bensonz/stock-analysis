@@ -54,9 +54,15 @@ INDEX_FILE = PROJECT_ROOT / "data" / "index_cache" / "sh000001.json"
 HORIZONS = (5, 10, 20)
 
 # A row's Status is the screen's own verdict. PASS is what it considers buyable;
-# ⏳ means RPS above the 95 ceiling (ANALYST.md's sweet spot is 75-95); ❌ names
-# the MA gates the row failed.
-PASS, WAIT, REJECT = "✅", "⏳", "❌"
+# ⏳ means RPS above the 95 ceiling (ANALYST.md's sweet spot is 75-95); ❌ is a
+# Rule 2b breach (extended far ABOVE the MA — chasing); 🔻 is the below-band
+# warning, split out of ❌ on 2026-08-28.
+#
+# Rows written BEFORE that split carry the merged two-sided ❌, so historical ❌
+# buckets mix both sides and are not directly comparable with post-split runs.
+# Nothing back-fills them: rewriting a past run's artifact to match today's
+# labelling would destroy the record of what the screen actually said that day.
+PASS, WAIT, REJECT, BELOW = "✅", "⏳", "❌", "🔻"
 
 
 def load_panel(db_path=None):
@@ -235,7 +241,11 @@ def analyse(runs_dir=None, tracking_dir=None, db_path=None, index_file=None):
         "blind_all": sub(lambda s: True),
         "blind_pass": sub(lambda s: s == PASS),
         "blind_wait_rps_over_95": sub(lambda s: s == WAIT),
-        "blind_ma_rejected": sub(lambda s: s == REJECT),
+        # Pre-2026-08-28 rows merge both sides into ❌; post-split runs separate
+        # them. Grouping the two together keeps this series continuous across
+        # the change rather than making it look like ❌ suddenly collapsed.
+        "blind_ma_rejected": sub(lambda s: s in (REJECT, BELOW)),
+        "blind_below_band_only": sub(lambda s: s == BELOW),
         "llm_picks": picks,
     }
 
@@ -266,7 +276,7 @@ def analyse(runs_dir=None, tracking_dir=None, db_path=None, index_file=None):
             for label, want_reject in (("ma_ok", False), ("ma_fail", True)):
                 items = [(d, c) for d, c, rps, _ma5, _ma20, s in rows
                          if rps is not None and lo <= rps < hi
-                         and (s == REJECT) == want_reject]
+                         and (s in (REJECT, BELOW)) == want_reject]
                 cells[f"rps{lo}_{hi}_{label}"] = describe(
                     excess(panel, idx, idx_dates, items, h))
         result["ma_gate_holding_rps_fixed"][h] = cells

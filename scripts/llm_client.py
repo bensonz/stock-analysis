@@ -848,12 +848,25 @@ def build_summary(phase1_data: dict) -> str:
     # Strategy pool — compact table
     pool = (phase1_data.get("strategy_pool") or {}).get("stocks", [])
     if pool:
-        lines = ["## Strategy Pool", "| Code | Name | RPS120 | RPS20 | PE | MCap |", "|---|---|---|---|---|---|"]
+        # The pool gate has a floor (INTERSECT_MIN_RPS) but no ceiling, so most
+        # of it sits above the RPS band ANALYST.md Rule 2 permits — 26 of 45 on
+        # 2026-08-27. Rule 2 already says "Above 95%: Skip … empirically
+        # load-bearing", but this table showed a bare number and left the model
+        # to re-derive that every run. Say it here instead.
+        lines = ["## Strategy Pool",
+                 "> `OVER-EXTENDED` = RPS120 > 95. ANALYST.md Rule 2: skip these "
+                 "unless the catalyst is exceptional — top-of-pool RPS has "
+                 "NEGATIVE forward returns at every horizon.",
+                 "| Code | Name | RPS120 | RPS20 | PE | MCap | Flag |",
+                 "|---|---|---|---|---|---|---|"]
         for s in pool:
+            rps120 = s.get("rps120")
+            flag = ("OVER-EXTENDED"
+                    if isinstance(rps120, (int, float)) and rps120 > 95 else "")
             lines.append(
                 f"| {s.get('code', '?')} | {s.get('name', '?')} "
                 f"| {s.get('rps120', '?')} | {s.get('rps20', '?')} "
-                f"| {s.get('pe', '?')} | {s.get('market_cap', '?')} |"
+                f"| {s.get('pe', '?')} | {s.get('market_cap', '?')} | {flag} |"
             )
         sections.append("\n".join(lines))
 

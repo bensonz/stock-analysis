@@ -142,6 +142,23 @@ values for the same row.
 The lesson generalises: the run archive spans schema changes, and any analysis
 reaching back through it has to read the schema rather than assume one.
 
+## Label split (2026-08-28, after this audit)
+
+Acting on Result 4, `report_generator.py` now splits the two-sided `❌` into
+`❌` (extended far **above** — the actual Rule 2b breach) and `🔻 BELOW` (far
+below — broken trend). Two consequences for the tables above:
+
+- Every `❌` figure here was computed on the **merged** two-sided label, so it
+  mixes both sides. Runs from 2026-08-28 onward separate them.
+- Historical `candidates.md` files are **not** back-filled. Rewriting a past
+  run's artifact to match today's labelling would destroy the record of what the
+  screen actually said that day. `candidate_alpha.py` therefore groups `❌` and
+  `🔻` together for the `blind_ma_rejected` series so it stays continuous across
+  the change, and reports `blind_below_band_only` separately for post-split runs.
+
+Nothing about what gets *admitted* changed — the label moved, the tradeable set
+did not.
+
 ## What this does not measure
 
 Entry selection only. Exits, position sizing, and the choice to stay in cash are
