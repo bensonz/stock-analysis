@@ -2,8 +2,8 @@
   "date": "2026-08-20",
   "slot": "afternoon",
   "verdict": "action_needed",
-  "checks_run": 6,
-  "checks_total": 12,
+  "checks_run": 8,
+  "checks_total": 14,
   "skipped": [
     {
       "check": "check_new_positions_absent_from_snapshot",
@@ -51,6 +51,42 @@
       "detail": "latest price day is partial (454 rows vs ~5210) — run 'pricedb.py repair'",
       "suspect": "",
       "fix_cmd": "python3 scripts/pricedb.py repair",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "db-health-warning:84ad516e",
+      "check": "db_health_warnings",
+      "kind": "env",
+      "title": "数据健康告警: latest day 2026-08-20 is PARTIAL (454 rows vs ~5210 normal) — run 'pri",
+      "detail": "latest day 2026-08-20 is PARTIAL (454 rows vs ~5210 normal) — run 'pricedb.py repair'",
+      "suspect": "scripts/pricedb.py db_health",
+      "fix_cmd": "python3 scripts/pricedb.py factors verify",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "db-health-warning:c924b422",
+      "check": "db_health_warnings",
+      "kind": "env",
+      "title": "数据健康告警: adj factors lag prices (2026-08-19 < 2026-08-20) — run 'pricedb.py fac",
+      "detail": "adj factors lag prices (2026-08-19 < 2026-08-20) — run 'pricedb.py factors heal'",
+      "suspect": "scripts/pricedb.py db_health",
+      "fix_cmd": "python3 scripts/pricedb.py factors verify",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "db-health-spot-check-verified-nothing",
+      "check": "db_health_spot_check",
+      "kind": "env",
+      "title": "抽查 20 只、实际核对 0 只",
+      "detail": "spot_check: {\"date\": \"2026-08-20\", \"sampled\": 20, \"checked\": 0, \"fetch_failures\": 20, \"mismatches\": []}。0 处不一致来自 0 次比对，不能读作数据无误。",
+      "suspect": "",
+      "fix_cmd": "python3 scripts/pricedb.py status",
       "occurrences": 1,
       "first_seen": "",
       "accepted": ""

@@ -2,11 +2,11 @@
 
 **结论: ✅ 无发现**
 
-_生成于 2026-08-26T16:11:53+08:00_
+_生成于 2026-08-27T18:14:39+08:00_
 
 ## 检查覆盖
 
-- 已执行: 11/12
+- 已执行: 13/14
 - 跳过: 1
   - `check_snapshot_wrote_rows` — no snapshot note in preflight (run predates the writer)
 

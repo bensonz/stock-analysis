@@ -2,8 +2,8 @@
   "date": "2026-08-25",
   "slot": "afternoon",
   "verdict": "action_needed",
-  "checks_run": 12,
-  "checks_total": 12,
+  "checks_run": 14,
+  "checks_total": 14,
   "skipped": [],
   "findings": [
     {
@@ -14,8 +14,8 @@
       "detail": "{\"status\": \"down\", \"error\": \"HTTPSConnectionPool(host='hq.sinajs.cn', port=443): Max retries exceeded with url: /list=s_sh000001 (Caused by NameResolutionError(\\\"HTTPSConnection(host='hq.sinajs.cn', port=443): Failed to resolve 'hq.sinajs.cn' ([Errno 8] nodename nor servname provided, or not known)\\\"))\"}",
       "suspect": "",
       "fix_cmd": "",
-      "occurrences": 1,
-      "first_seen": "",
+      "occurrences": 2,
+      "first_seen": "2026-08-25",
       "accepted": ""
     },
     {
@@ -26,8 +26,8 @@
       "detail": "{\"status\": \"down\", \"error\": \"<urlopen error [Errno 8] nodename nor servname provided, or not known>\"}",
       "suspect": "",
       "fix_cmd": "",
-      "occurrences": 1,
-      "first_seen": "",
+      "occurrences": 2,
+      "first_seen": "2026-08-25",
       "accepted": ""
     }
   ]

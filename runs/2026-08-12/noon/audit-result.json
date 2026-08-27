@@ -2,8 +2,8 @@
   "date": "2026-08-12",
   "slot": "noon",
   "verdict": "action_needed",
-  "checks_run": 6,
-  "checks_total": 12,
+  "checks_run": 8,
+  "checks_total": 14,
   "skipped": [
     {
       "check": "check_new_positions_absent_from_snapshot",
@@ -159,6 +159,30 @@
       "detail": "breadth total=0 (expected >=1000 for A-share market)",
       "suspect": "",
       "fix_cmd": "",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "db-health-warning:50a825a4",
+      "check": "db_health_warnings",
+      "kind": "env",
+      "title": "数据健康告警: screening data is 1 session(s) stale (latest 2026-08-11, expected 2026",
+      "detail": "screening data is 1 session(s) stale (latest 2026-08-11, expected 2026-08-12)",
+      "suspect": "scripts/pricedb.py db_health",
+      "fix_cmd": "python3 scripts/pricedb.py factors verify",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "db-health-spot-check-verified-nothing",
+      "check": "db_health_spot_check",
+      "kind": "env",
+      "title": "抽查 20 只、实际核对 0 只",
+      "detail": "spot_check: {\"date\": \"2026-08-11\", \"sampled\": 20, \"checked\": 0, \"fetch_failures\": 20, \"mismatches\": []}。0 处不一致来自 0 次比对，不能读作数据无误。",
+      "suspect": "",
+      "fix_cmd": "python3 scripts/pricedb.py status",
       "occurrences": 1,
       "first_seen": "",
       "accepted": ""

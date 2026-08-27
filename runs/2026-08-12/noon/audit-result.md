@@ -2,9 +2,9 @@
 
 **结论: 🟡 需要人工操作**
 
-_生成于 2026-08-23T23:53:15+08:00_
+_生成于 2026-08-27T18:14:39+08:00_
 
-## 需要人工操作 (11)
+## 需要人工操作 (13)
 
 ### [env] 阶段 collect 失败
 
@@ -62,9 +62,22 @@ _生成于 2026-08-23T23:53:15+08:00_
 - `gate-hard-fail:phase1_to_phase2:002e6dfb`
 - breadth total=0 (expected >=1000 for A-share market)
 
+### [env] 数据健康告警: screening data is 1 session(s) stale (latest 2026-08-11, expected 2026
+
+- `db-health-warning:50a825a4`
+- screening data is 1 session(s) stale (latest 2026-08-11, expected 2026-08-12)
+- 可疑位置: `scripts/pricedb.py db_health`
+- 处理: `python3 scripts/pricedb.py factors verify`
+
+### [env] 抽查 20 只、实际核对 0 只
+
+- `db-health-spot-check-verified-nothing`
+- spot_check: {"date": "2026-08-11", "sampled": 20, "checked": 0, "fetch_failures": 20, "mismatches": []}。0 处不一致来自 0 次比对，不能读作数据无误。
+- 处理: `python3 scripts/pricedb.py status`
+
 ## 检查覆盖
 
-- 已执行: 6/12
+- 已执行: 8/14
 - 跳过: 6
   - `check_new_positions_absent_from_snapshot` — snapshot missing or unreadable
   - `check_action_on_code_not_held` — snapshot missing or unreadable

@@ -1,21 +1,130 @@
 {
   "date": "2026-08-25",
   "slot": "noon",
-  "verdict": "code_change_needed",
-  "checks_run": 0,
-  "checks_total": 12,
-  "skipped": [],
+  "verdict": "action_needed",
+  "checks_run": 8,
+  "checks_total": 14,
+  "skipped": [
+    {
+      "check": "check_new_positions_absent_from_snapshot",
+      "reason": "snapshot missing or unreadable"
+    },
+    {
+      "check": "check_action_on_code_not_held",
+      "reason": "snapshot missing or unreadable"
+    },
+    {
+      "check": "check_sold_position_still_held",
+      "reason": "snapshot missing or unreadable"
+    },
+    {
+      "check": "check_duplicate_active_positions",
+      "reason": "snapshot missing or unreadable"
+    },
+    {
+      "check": "check_postrun_marks_are_from_run_day",
+      "reason": "snapshot missing or unreadable"
+    },
+    {
+      "check": "check_snapshot_wrote_rows",
+      "reason": "no snapshot note in preflight (run predates the writer)"
+    }
+  ],
   "findings": [
     {
-      "id": "manifest-absent",
-      "check": "manifest_present",
-      "kind": "invariant",
-      "title": "该时段没有 manifest",
-      "detail": "运行目录存在但没有 manifest.json——无法区分'跑了但死在写清单前'与'根本没跑'。预检失败零留痕就是这个洞。",
-      "suspect": "scripts/run_daily.py (write the manifest before preflight)",
+      "id": "phase-failed:collect",
+      "check": "phase_failed",
+      "kind": "env",
+      "title": "阶段 collect 失败",
+      "detail": "无错误详情",
+      "suspect": "",
+      "fix_cmd": "python3 scripts/run_daily.py --slot noon --run",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "gate-hard-fail:phase1_to_phase2:47425c61",
+      "check": "gate_hard_fail",
+      "kind": "env",
+      "title": "phase1_to_phase2 硬闸门拦截",
+      "detail": "position 000703 (恒逸石化): price fetch error: all 3 sources failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "suspect": "",
       "fix_cmd": "",
       "occurrences": 1,
       "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "gate-hard-fail:phase1_to_phase2:f981b8cc",
+      "check": "gate_hard_fail",
+      "kind": "env",
+      "title": "phase1_to_phase2 硬闸门拦截",
+      "detail": "position 603259 (药明康德): price fetch error: all 3 sources failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "suspect": "",
+      "fix_cmd": "",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "gate-hard-fail:phase1_to_phase2:f6701cbe",
+      "check": "gate_hard_fail",
+      "kind": "env",
+      "title": "phase1_to_phase2 硬闸门拦截",
+      "detail": "only 0/3 major indices have valid data",
+      "suspect": "",
+      "fix_cmd": "",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "gate-hard-fail:phase1_to_phase2:002e6dfb",
+      "check": "gate_hard_fail",
+      "kind": "env",
+      "title": "phase1_to_phase2 硬闸门拦截",
+      "detail": "breadth total=0 (expected >=1000 for A-share market)",
+      "suspect": "",
+      "fix_cmd": "",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "source-unhealthy:sina",
+      "check": "source_unhealthy",
+      "kind": "env",
+      "title": "数据源 sina 状态 down",
+      "detail": "{\"status\": \"down\", \"error\": \"HTTPSConnectionPool(host='hq.sinajs.cn', port=443): Max retries exceeded with url: /list=s_sh000001 (Caused by NameResolutionError(\\\"HTTPSConnection(host='hq.sinajs.cn', port=443): Failed to resolve 'hq.sinajs.cn' ([Errno 8] nodename nor servname provided, or not known)\\\"))\"}",
+      "suspect": "",
+      "fix_cmd": "",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "source-unhealthy:cheesefortune",
+      "check": "source_unhealthy",
+      "kind": "env",
+      "title": "数据源 cheesefortune 状态 down",
+      "detail": "{\"status\": \"down\", \"error\": \"<urlopen error [Errno 8] nodename nor servname provided, or not known>\"}",
+      "suspect": "",
+      "fix_cmd": "",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "db-health-warning:c924b422",
+      "check": "db_health_warnings",
+      "kind": "env",
+      "title": "数据健康告警: adj factors lag prices (2026-08-21 < 2026-08-24) — run 'pricedb.py fac",
+      "detail": "adj factors lag prices (2026-08-21 < 2026-08-24) — run 'pricedb.py factors heal'",
+      "suspect": "scripts/pricedb.py db_health",
+      "fix_cmd": "python3 scripts/pricedb.py factors verify",
+      "occurrences": 2,
+      "first_seen": "2026-08-24",
       "accepted": ""
     }
   ]
