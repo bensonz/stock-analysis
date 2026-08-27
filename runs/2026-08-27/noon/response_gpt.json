@@ -1,0 +1,164 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": 8.12,
+        "trend": "accelerating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": 5.78,
+        "trend": "accelerating"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": 5.61,
+        "trend": "steady"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": 4.98,
+        "trend": "steady"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": 4.64,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "光伏设备",
+        "5d_pct": -2.58,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "调味发酵品Ⅱ",
+        "5d_pct": -2.12,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": -1.77,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "铁路公路",
+        "5d_pct": -1.62,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "房屋建设Ⅱ",
+        "5d_pct": -1.59,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/2 positions in hot sectors（石油石化、医疗服务均处中性区，未入top5）",
+    "regime": "科技材料领涨：MLCC涨价+PCB高端化+电子特气驱动元件/非金属材料/电子化学品；光伏/银行/铁路走弱"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "H1归母净利+2500.73%、文莱炼化二期新增1200万吨推进中（来源：财闻网8/21）；现价18.38高于止损17.16(+10%锁定)，安全垫约6.6%；石油石化未入bottom5，无卖出触发，利润奔跑中继续持有",
+      "sector_rank": "中性（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 17.8,
+      "days_held": 22,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "H1收入+38.93%、净利110.8亿+29.43%、全年指引上调至585-605亿（来源：21世纪经济报道8/3）；现价158.77高于止损139.15(+10%锁定)，安全垫约12.4%；医疗服务今日退出bottom5，冷区计数重置，无卖出触发",
+      "sector_rank": "中性（今日退出bottom5）",
+      "new_stop": null,
+      "pnl_pct": 25.5,
+      "days_held": 20,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "reason": "元件top2、RPS120=90.95达标，但8/28中报在即(≤2个交易日)触发Rule 2c事件窗口，且公司已自曝AI业务占比<1%(来源:公司快讯)、融资deleveraging、dist_ma20=11.8%逼近上限——等财报落地后再评估",
+      "rps120": 90.95
+    },
+    {
+      "code": "002138",
+      "name": "顺络电子",
+      "reason": "元件top2、RPS120=90.07、MA收敛佳，但属重入(8/19以+10.16%离场)；全账本重入n=9均值-3.71%胜率11%，且融资chg5=-9.39%仍在去杠杆——等回踩MA10且融资企稳",
+      "rps120": 90.07
+    },
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "RPS120=94.63(0风险+净利+258%满足扩展区豁免)、技术面好，但行业军工电子不在今日top5，无法确认top30%，Rule 1不满足",
+      "rps120": 94.63
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "RPS120=86.72甜蜜区、LME铜创新高催化，但铜/有色金属不在今日top5，Rule 1不满足",
+      "rps120": 86.72
+    },
+    {
+      "code": "000725",
+      "name": "京东方A",
+      "reason": "RPS120=93.76扩展区，但面板(光学光电子)不在top5、融资deleveraging、IV selective(深100=0.57>50%)、8/29中报临近",
+      "rps120": 93.76
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "reason": "RPS120=85.63甜蜜区，但dist_ma10=10.9%>8%、dist_ma20=16.2%>12%，Rule 2b追高不可协商跳过",
+      "rps120": 85.63
+    },
+    {
+      "code": "688392",
+      "name": "骄成超声",
+      "reason": "dist_ma20=18.4%>12%极端延伸，Rule 2b追高跳过；且融资deleveraging",
+      "rps120": 94.55
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "指数强≠breadth达标：今日科创50+3.45%但breadth仅1.34:1(低于1.5:1最低门槛)、±2%区间个股占多数、623只涨超4%呈集中式亢奋——此时不应因指数红盘强开新仓",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "指数由权重/题材龙头拉动，个股中位数未跟上，追高非龙头个股盈亏比差"
+    },
+    {
+      "text": "重入纪律：顺络电子行业已从8/19离场时的bottom5翻入top2，但融资chg5=-9.39%仍去杠杆+全账本重入n=9均值-3.71%胜率11%——行业转暖≠筹码结构修复同步完成，优先等回踩MA10企稳",
+      "type": "observation",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "去杠杆期间反弹持续性差，重入成本高于首次入场且胜率系统性偏低"
+    },
+    {
+      "text": "业绩事件窗口(≤2个交易日)严格不追：奥士康8/28中报在即且公司已主动降温AI预期(AI业务占比<1%)，按Rule 2c等财报落地后再看，避免业绩与AI叙事错位的隔夜跳空风险",
+      "type": "rule",
+      "tags": [
+        "timing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "财报是二元事件，叠加公司主动披露利空信号，披露前建仓承担不对称下行风险"
+    }
+  ],
+  "market_summary": "三大指数全红，科创50+3.45%领涨，但breadth仅1.34:1(低于1.5:1最低买入门槛)、多数个股落于±2%区间、623只涨超4%呈集中式亢奋——窄幅科技材料行情。元件/非金属材料/电子化学品领涨(MLCC涨价+PCB高端化+电子特气，来源:财联社/证券时报)，光伏/银行/铁路垫底。IV整体中性(avg rank 0.40)。持仓2只均大幅盈利且止损锁+10%。买入门槛未达，持币不加仓。",
+  "market_sentiment": "bullish",
+  "market_call": "谨慎"
+}

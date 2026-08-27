@@ -1,0 +1,22 @@
+{
+  "date": "2026-08-26",
+  "slot": "afternoon",
+  "verdict": "action_needed",
+  "checks_run": 12,
+  "checks_total": 12,
+  "skipped": [],
+  "findings": [
+    {
+      "id": "snapshot-inserted-nothing",
+      "check": "snapshot_wrote_rows",
+      "kind": "env",
+      "title": "快照写入 0 行",
+      "detail": "preflight snapshot:   2026-08-26: 5546 → 5546 rows (0 inserted)",
+      "suspect": "",
+      "fix_cmd": "python3 scripts/pricedb.py snapshot --date 2026-08-26 --dry-run",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    }
+  ]
+}
