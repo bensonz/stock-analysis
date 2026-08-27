@@ -148,6 +148,7 @@ class RunView:
     summary: dict | None = None
     snapshot: dict | None = None
     report: str | None = None
+    db_health: dict | None = None
 
     @classmethod
     def load(cls, date: str, slot: str, path: Path) -> "RunView":
@@ -166,7 +167,14 @@ class RunView:
                    manifest=js(path / "manifest.json"),
                    summary=js(out / "daily_summary.json"),
                    snapshot=js(out / "positions_snapshot.json"),
-                   report=report)
+                   report=report,
+                   # An INPUT artifact, unlike everything above it. db_health is
+                   # the single implementation of "is the price data sound" —
+                   # the phase-1 gate, the prompt and the report banner all read
+                   # this same file. We consume its verdict rather than deriving
+                   # our own, because two implementations that disagree leave
+                   # nobody able to say which is right.
+                   db_health=js(path / "input" / "db_health.json"))
 
     # -- accessors that fail loudly rather than defaulting to something plausible
 
@@ -459,6 +467,60 @@ def check_snapshot_wrote_rows(v: RunView) -> list[Finding]:
     return []
 
 
+def check_db_health_warnings(v: RunView) -> list[Finding]:
+    """Phase 1 recorded a data-quality warning that no one downstream acted on.
+
+    db_health rides into the prompt and the report banner, but until 2026-08-27
+    nothing compared it against later runs — so an adj-factor lag announced
+    itself for days while every audit read ✅ 无发现. The lag is what corrupts
+    rps_cache.ma10 into hfq units, so "just a warning" is how a wrong number
+    reaches a report.
+
+    Ids strip digits (via _digest) so the same warning on consecutive sessions
+    shares an id and can actually accumulate a streak. Per-date ids would reset
+    the count every day and never promote.
+    """
+    health = v.need("db_health")
+    warnings = health.get("warnings")
+    if warnings is None:
+        raise CannotCheck("db_health has no warnings list")
+    return [Finding(
+        id=f"db-health-warning:{_digest(str(w))}",
+        check="db_health_warnings",
+        kind=ENV,
+        title=f"数据健康告警: {str(w)[:70]}",
+        detail=str(w),
+        suspect="scripts/pricedb.py db_health",
+        fix_cmd="python3 scripts/pricedb.py factors verify")
+        for w in warnings]
+
+
+def check_db_health_spot_check(v: RunView) -> list[Finding]:
+    """The spot audit sampled rows but confirmed none of them.
+
+    `sampled: 20, checked: 0, fetch_failures: 20` shipped under `ok: true` on
+    2026-08-27. Zero mismatches out of zero comparisons is not a clean bill of
+    health; it is the absence of one, and reporting it as a pass is the exact
+    lie this layer exists to catch.
+    """
+    spot = (v.need("db_health") or {}).get("spot_check")
+    if not spot:
+        raise CannotCheck("db_health has no spot_check block")
+    sampled, checked = spot.get("sampled"), spot.get("checked")
+    if sampled is None or checked is None:
+        raise CannotCheck("spot_check has no sampled/checked counts")
+    if sampled > 0 and checked == 0:
+        return [Finding(
+            id="db-health-spot-check-verified-nothing",
+            check="db_health_spot_check",
+            kind=ENV,
+            title=f"抽查 {sampled} 只、实际核对 0 只",
+            detail=f"spot_check: {json.dumps(spot, ensure_ascii=False)}。"
+                   f"0 处不一致来自 0 次比对，不能读作数据无误。",
+            fix_cmd="python3 scripts/pricedb.py status")]
+    return []
+
+
 CHECKS = [
     # invariant
     check_new_positions_absent_from_snapshot,
@@ -474,6 +536,8 @@ CHECKS = [
     check_source_unhealthy,
     check_pricedb_current,
     check_snapshot_wrote_rows,
+    check_db_health_warnings,
+    check_db_health_spot_check,
 ]
 
 
