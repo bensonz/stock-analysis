@@ -1,0 +1,186 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "渔业",
+        "5d_pct": 4.67,
+        "trend": "单日领涨（防御/农业轮动）"
+      },
+      {
+        "name": "房地产服务",
+        "5d_pct": 3.75,
+        "trend": "单日领涨"
+      },
+      {
+        "name": "饰品",
+        "5d_pct": 3.33,
+        "trend": "单日领涨"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": 3.14,
+        "trend": "单日领涨"
+      },
+      {
+        "name": "农产品加工",
+        "5d_pct": 2.68,
+        "trend": "单日领涨"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "生物制品",
+        "5d_pct": -2.62,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "医疗服务",
+        "5d_pct": -2.13,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": -2.13,
+        "trend": "昨+5.04%今日反转（中新网）"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": -1.8,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": -1.56,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/3持仓在今日热点板块；1/3在冷区（药明康德·医疗服务，冷区第1日）；2/3中性（石油石化、元件未入top/bottom5）",
+    "regime": "防御/消费轮动领涨，科技（半导体/科创50）回调，breadth 1.26:1偏弱"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "浮盈+24.9%，止损已锁+10%(17.16)；文莱二期新增1200万吨+H1净利+2500.73%（网易/证券之星8/21）；石油石化未入bottom5，无卖出触发，让利润奔跑",
+      "sector_rank": "中性（未入今日top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 24.9,
+      "days_held": 22,
+      "exit_price": null
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "持仓第2日+0.1%，未触止损/时间止损；元件板块未入bottom5；新仓(<5日)不参与换仓，持有观察",
+      "sector_rank": "中性（未入今日top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 0.1,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+24.4%，止损已锁+10%(139.15)；医疗服务今日入bottom5(-2.13%)为冷区第1日，未达'冷3日'卖出线，明日续冷则计数2、后日触发无条件SELL",
+      "sector_rank": "bottom5（医疗服务 -2.13%，冷区第1日）",
+      "new_stop": null,
+      "pnl_pct": 24.4,
+      "days_held": 20,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "买入门槛未达标（0/3指数绿、breadth 1.26:1<1.5）；军工电子未入top5；融资deleveraging；VCP仅SETUP（收缩比0.94）",
+      "rps120": 94.8
+    },
+    {
+      "code": "688403",
+      "name": "汇成股份",
+      "reason": "半导体入bottom5(-2.13%)硬性禁买（h019）；H1净利-94.78%、PE 381（输入数据）；买入门槛未达标",
+      "rps120": 93.52
+    },
+    {
+      "code": "688222",
+      "name": "成都先导",
+      "reason": "医疗服务入bottom5(-2.13%)硬性禁买；买入门槛未达标",
+      "rps120": 92.2
+    },
+    {
+      "code": "688331",
+      "name": "荣昌生物",
+      "reason": "生物制品入bottom5(-2.62%)硬性禁买；买入门槛未达标",
+      "rps120": 91.44
+    },
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "半导体入bottom5硬性禁买；融资deleveraging；8/29中报（事件窗口）；买入门槛未达标",
+      "rps120": 92.06
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "reason": "贵金属未入top5；dist_ma20 +11.8%逼近12%追高线；买入门槛未达标",
+      "rps120": 87.54
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "reason": "航运未入top5；融资chg5 -15.9%大幅deleveraging；买入门槛未达标",
+      "rps120": 86.48
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "买入门槛是独立于entry_regime的硬约束：今日entry_regime标记allow_new_positions=true/hard_block=false，但三大指数0/3收绿且breadth 1.26:1<1.5，仍必须返回new_positions=[]。管线软信号不能覆盖ANALYST.md的最低买入门槛。",
+      "type": "rule",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "entry_regime只对恐慌(f10≥30或breadth<1:1)做hard_block；'1.5:1'与'2/3指数绿'是分析师层显式硬门槛，两者独立取最严。"
+    },
+    {
+      "text": "今日领涨板块（渔业/房地产服务/饰品/农产品加工）与候选池（军工电子/半导体/医疗服务/航运/有色）零重叠，强势候选集体落在非热点板块——板块优先的反面教材：个股RPS再高，板块不热也不开仓。",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "科技动量股在防御轮动日逆风，强RPS个股若板块冷，胜率被板块beta稀释。"
+    },
+    {
+      "text": "半导体单日反转：8/27 +5.04%（中新网）→ 8/28 -2.13%入bottom5，高RPS候选（京仪装备92.06/芯联集成90.05/汇成股份93.52）全部被板块冷区一票否决，再次验证h019。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "拥挤交易快速出清时板块动量一日反转，个股RPS滞后于板块beta。"
+    },
+    {
+      "text": "高RPS≠可买：策略池中rps120>95的个股（如中船特气100.0）dist_ma20已为-11.6%（跌破MA20），回撤中的高RPS同样危险——RPS是120日相对强度，不反映近端形态，须叠加MA距离判断。",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "RPS120窗口长，近期快速回撤时RPS仍高企，产生'强势'假象。"
+    }
+  ],
+  "market_summary": "三大指数全绿（上证-0.11%/深证-0.68%/创业板-1.41%），breadth 1.26:1（涨3013/跌2390），83涨停/3跌停，非恐慌但偏弱；买入门槛未达标（0/3指数绿、Up/Down<1.5），今日不开新仓。领涨：渔业+4.67%/房地产服务+3.75%/饰品+3.33%（防御消费）；领跌：生物制品-2.62%/医疗服务-2.13%/半导体-2.13%（昨+5.04%后反转，中新网）。IV整体中性（avg IV Rank 0.38，科创50 0.39）。",
+  "market_sentiment": "neutral",
+  "market_call": "谨慎"
+}

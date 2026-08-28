@@ -1,0 +1,49 @@
+{
+  "date": "2026-08-28",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1787900710.0212789,
+      "errors": [],
+      "end": 1787900783.690999,
+      "duration_sec": 73.7
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 7695,
+      "tokens": {
+        "input_tokens": 142837,
+        "output_tokens": 17806
+      },
+      "rounds": 2,
+      "tool_calls_count": 6,
+      "duration_sec": 248.0,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1787901031.7653608,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h178 (observation): 买入门槛是独立于entry_regime的硬约束：今日entry_regime标记allow_new_positions=true/hard_block=fal...",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=69",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=70",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=107",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1787901032.28163,
+      "duration_sec": 0.5
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 322.2
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "date": "2026-08-28",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 19.49,
+      "pnl_pct": 24.9,
+      "note": "浮盈+24.9%，止损已锁+10%(17.16)；文莱二期新增1200万吨+H1净利+2500.73%（网易/证券之星8/21）；石油石化未入bottom5，无卖出触发，让利润奔跑"
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 59.06,
+      "pnl_pct": 0.1,
+      "note": "持仓第2日+0.1%，未触止损/时间止损；元件板块未入bottom5；新仓(<5日)不参与换仓，持有观察"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 157.4,
+      "pnl_pct": 24.4,
+      "note": "浮盈+24.4%，止损已锁+10%(139.15)；医疗服务今日入bottom5(-2.13%)为冷区第1日，未达'冷3日'卖出线，明日续冷则计数2、后日触发无条件SELL"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 968167.0,
+    "dayPnl": -278.0,
+    "dayReturnPct": -0.03,
+    "totalReturnPct": -3.18,
+    "unrealizedPnl": 15514.0,
+    "realizedPnl": -47347.0,
+    "cashPct": 89.46
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 1.2607,
+    "up": 3013,
+    "down": 2390,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 83,
+    "limit_downs": 3,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 1.26:1, 0/3 major indices green, 83 limit-ups / 3 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "三大指数全绿（上证-0.11%/深证-0.68%/创业板-1.41%），breadth 1.26:1（涨3013/跌2390），83涨停/3跌停，非恐慌但偏弱；买入门槛未达标（0/3指数绿、Up/Down<1.5），今日不开新仓。领涨：渔业+4.67%/房地产服务+3.75%/饰品+3.33%（防御消费）；领跌：生物制品-2.62%/医疗服务-2.13%/半导体-2.13%（昨+5.04%后反转，中新网）。IV整体中性（avg IV Rank 0.38，科创50 0.39）。"
+  }
+}
