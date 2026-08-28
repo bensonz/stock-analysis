@@ -137,6 +137,46 @@ def test_a_normal_name_carries_no_flag_text():
     assert "OVER-EXTENDED" not in _prompt_pool_rows(88)[0]
 
 
+# The table above is build_summary(), which only the HYBRID provider's Pass 2
+# uses. The live `openai` path builds prompt.md in run_daily.phase2_build_prompt
+# as ANALYST.md + json.dumps(payload), where pool stocks are raw dicts — so the
+# flag has to ride as a FIELD there. Flagging only the table would have shipped
+# a change that never reached the running provider (caught 2026-08-28, after the
+# first live run showed no `## Strategy Pool` section in prompt.md at all).
+#
+# phase2_build_prompt writes to the live run dir and rewrites positions.json, so
+# it must never be called with synthetic data; the flagging is a pure helper.
+
+def test_the_live_payload_flags_over_extended_stocks():
+    got = run_daily.flag_over_extended([
+        {"code": "000001", "rps120": 99.0},
+        {"code": "000002", "rps120": 88.0},
+    ])
+    assert got[0]["rule2_over_extended"] is True
+    assert got[1]["rule2_over_extended"] is False
+
+
+def test_the_live_payload_uses_the_same_boundary_as_rule_2():
+    """'Above 95%' — 95.0 exactly is inside the band, in both renderings."""
+    got = run_daily.flag_over_extended([{"code": "000001", "rps120": 95.0}])
+    assert got[0]["rule2_over_extended"] is False
+
+
+def test_a_missing_rps_is_not_silently_called_safe():
+    """Absent RPS must not read as 'fine' — that is how a data gap becomes an
+    unflagged buy. It gets None, which is visibly not False."""
+    got = run_daily.flag_over_extended([{"code": "000001"}])
+    assert got[0]["rule2_over_extended"] is None
+
+
+def test_flagging_does_not_mutate_the_caller_s_stocks():
+    """The same dicts feed candidates.md and the run artifacts; stamping a
+    prompt-only field onto them in place would leak into both."""
+    original = [{"code": "000001", "rps120": 99.0}]
+    run_daily.flag_over_extended(original)
+    assert "rule2_over_extended" not in original[0]
+
+
 # --- Change 2: the local pool becomes an outage fallback --------------------
 
 def test_an_empty_crawl_falls_back_to_the_local_pool(monkeypatch):

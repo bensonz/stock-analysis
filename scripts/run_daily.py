@@ -125,6 +125,30 @@ STRONG_TAPE_SIZE_MULTIPLIER = 1.0
 HARD_SELL_LOSS_PCT = -5.0
 
 
+def flag_over_extended(stocks: list[dict]) -> list[dict]:
+    """Stamp ANALYST.md Rule 2's RPS ceiling onto each pool stock for the prompt.
+
+    The intersection gate has a floor (INTERSECT_MIN_RPS) and no ceiling, so most
+    of the pool sits above the 75-95 band Rule 2 permits — 26 of 45 on
+    2026-08-27, and that bucket has the worst measured forward returns in the
+    archive (20d -12.14% clustered, 22.1% beat-index; docs/audits/CANDIDATE_ALPHA.md).
+    Rule 2 already says "Above 95%: Skip", but the payload shipped a bare number
+    and left the model to re-derive it every run.
+
+    Returns NEW dicts: the same stock objects feed candidates.md and the run
+    artifacts, and a prompt-only field stamped in place would leak into both.
+
+    Missing RPS yields None, never False — an absent measurement must not read
+    as "checked and fine", which is how a data gap turns into an unflagged buy.
+    """
+    out = []
+    for s in stocks:
+        rps120 = s.get("rps120")
+        flagged = (rps120 > 95) if isinstance(rps120, (int, float)) else None
+        out.append({**s, "rule2_over_extended": flagged})
+    return out
+
+
 def fetch_strategy_pool_with_fallback(strategy_debug: dict) -> dict:
     """The CheeseForTune crawl, falling back to the local price DB on an outage.
 
@@ -1380,7 +1404,10 @@ def phase2_build_prompt(data: dict) -> str:
         "strategy_pool": {
             "source": data.get("strategy_pool", {}).get("source"),
             "total_stocks": data.get("strategy_pool", {}).get("total_stocks"),
-            "stocks": data.get("strategy_pool", {}).get("stocks", []),
+            # rule2_over_extended: true = RPS120 > 95, which ANALYST.md Rule 2
+            # says to skip unless the catalyst is exceptional.
+            "stocks": flag_over_extended(
+                data.get("strategy_pool", {}).get("stocks", [])),
         },
         "enriched_candidates": [_slim_candidate(c) for c in data.get("enriched", [])],
         "active_positions": [
