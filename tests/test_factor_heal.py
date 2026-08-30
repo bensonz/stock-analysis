@@ -21,6 +21,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
 import pricedb
+import pricedb_factors
 
 D1, D2, D3 = "2026-07-29", "2026-07-30", "2026-07-31"
 
@@ -136,7 +137,12 @@ def test_fetch_klines_sina_parses_and_converts(monkeypatch):
 def test_sync_or_heal_routes_multiday_gap_to_heal(monkeypatch):
     conn = _seed({"000001": 2.0})  # lag = 2 sessions, mpd is in the past
     calls = []
-    monkeypatch.setattr(pricedb, "heal_adj_factor_gap",
+    # Patch on pricedb_factors, not pricedb. Both functions moved there on
+    # 2026-08-30, so the caller resolves this name in that module's globals;
+    # patching the pricedb re-export leaves the fake inert and the REAL heal
+    # runs — which is exactly what happened when this was retargeted, and only
+    # the assertion below caught it.
+    monkeypatch.setattr(pricedb_factors, "heal_adj_factor_gap",
                         lambda c, beg, end: calls.append((beg, end)) or D2)
 
     changed = pricedb._sync_or_heal_factors(conn)
