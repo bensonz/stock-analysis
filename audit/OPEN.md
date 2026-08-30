@@ -51,23 +51,23 @@
         · 2026-08-26 afternoon 快照写入 0 行
 
   ▸ db_health_warnings  [env]
-      6 次 / 5 天   2026-08-12 … 2026-08-27   最长连续 2
+      7 次 / 6 天   2026-08-12 … 2026-08-28   最长连续 2
       改这里: scripts/pricedb.py db_health
       执行:   python3 scripts/pricedb.py factors verify
-        · 2026-08-20 afternoon 数据健康告警: adj factors lag prices (2026-08-19 < 2026-08-20) — run 'pricedb.py fac
         · 2026-08-24 afternoon 数据健康告警: adj factors lag prices (2026-08-21 < 2026-08-24) — run 'pricedb.py fac
         · 2026-08-25 noon      数据健康告警: adj factors lag prices (2026-08-21 < 2026-08-24) — run 'pricedb.py fac
         · 2026-08-27 afternoon 数据健康告警: adj factors lag prices (2026-08-26 < 2026-08-27) — run 'pricedb.py fac
-        · … 另有 2 次更早的
+        · 2026-08-28 afternoon 数据健康告警: adj factors lag prices (2026-08-27 < 2026-08-28) — run 'pricedb.py fac
+        · … 另有 3 次更早的
 
   ▸ db_health_spot_check  [env]
-      5 次 / 5 天   2026-08-12 … 2026-08-27
+      6 次 / 6 天   2026-08-12 … 2026-08-28
       执行:   python3 scripts/pricedb.py status
-        · 2026-08-20 afternoon 抽查 20 只、实际核对 0 只
         · 2026-08-21 afternoon 抽查 20 只、实际核对 0 只
         · 2026-08-24 afternoon 抽查 20 只、实际核对 0 只
         · 2026-08-27 afternoon 抽查 20 只、实际核对 0 只
-        · … 另有 1 次更早的
+        · 2026-08-28 afternoon 抽查 20 只、实际核对 0 只
+        · … 另有 2 次更早的
 
 
 ## 已知并接受 (1)

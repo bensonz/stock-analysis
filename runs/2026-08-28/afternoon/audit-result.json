@@ -1,0 +1,34 @@
+{
+  "date": "2026-08-28",
+  "slot": "afternoon",
+  "verdict": "action_needed",
+  "checks_run": 14,
+  "checks_total": 14,
+  "skipped": [],
+  "findings": [
+    {
+      "id": "db-health-warning:c924b422",
+      "check": "db_health_warnings",
+      "kind": "env",
+      "title": "数据健康告警: adj factors lag prices (2026-08-27 < 2026-08-28) — run 'pricedb.py fac",
+      "detail": "adj factors lag prices (2026-08-27 < 2026-08-28) — run 'pricedb.py factors heal'",
+      "suspect": "scripts/pricedb.py db_health",
+      "fix_cmd": "python3 scripts/pricedb.py factors verify",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "db-health-spot-check-verified-nothing",
+      "check": "db_health_spot_check",
+      "kind": "env",
+      "title": "抽查 20 只、实际核对 0 只",
+      "detail": "spot_check: {\"date\": \"2026-08-28\", \"sampled\": 20, \"checked\": 0, \"fetch_failures\": 20, \"mismatches\": []}。0 处不一致来自 0 次比对，不能读作数据无误。",
+      "suspect": "",
+      "fix_cmd": "python3 scripts/pricedb.py status",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    }
+  ]
+}
