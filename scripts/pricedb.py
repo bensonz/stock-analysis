@@ -1694,6 +1694,22 @@ def cmd_update():
             }
 
             if beg > end and not missing_codes:
+                # Nothing to FETCH is not nothing to DO. `snapshot` writes the
+                # close-slot bars without touching adj_factors, and that write
+                # is what lands us here — prices already at today, so beg > end.
+                # Returning now would skip the reconciliation below and leave
+                # factors a session behind on every afternoon run (2026-08-30).
+                # Catch-up is a reconciliation step, not a consequence of
+                # fetching, so it runs on this path too; it is a cheap no-op
+                # when nothing is out of step.
+                try:
+                    changed = _sync_or_heal_factors(conn)
+                    if changed:
+                        invalidate_rps_cache(conn, changed)
+                except Exception as factor_err:
+                    print(f"  WARNING: adjustment-factor sync failed: {factor_err} "
+                          f"— run 'pricedb.py factors heal' to repair.",
+                          file=sys.stderr)
                 print(f"Already up to date (latest: {latest}).", file=sys.stderr)
                 close_provider(provider_name, provider)
                 conn.close()
