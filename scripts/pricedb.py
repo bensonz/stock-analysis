@@ -59,6 +59,17 @@ from pricedb_bars import (  # noqa: F401
     _weekday_list,
     _yyyymmdd_to_iso,
 )
+# Schema + row persistence live in pricedb_storage; they take a conn and never
+# open one (get_db and DB_PATH stay here — tests monkeypatch pricedb.DB_PATH).
+from pricedb_storage import (  # noqa: F401
+    _last_fully_covered_date,
+    _partial_price_dates,
+    clear_all_data,
+    ensure_schema,
+    invalidate_rps_cache,
+    upsert_stocks,
+    write_bars,
+)
 
 PROJECT_ROOT = Path(__file__).parent.parent
 DB_DIR = PROJECT_ROOT / "data" / "pricedb"
@@ -202,27 +213,6 @@ def last_settled_trading_day(now: datetime | None = None) -> _date:
     return most_recent_trading_day(ref)
 
 
-def _last_fully_covered_date(conn: sqlite3.Connection) -> str | None:
-    """Latest date whose row count reaches PRICEDB_COVERAGE_THRESHOLD of the
-    known universe. Used as the incremental cursor so partially-fetched recent
-    days (truncated by the budget or a flaky provider) get re-fetched instead of
-    being skipped forever once a later day advances MAX(date)."""
-    total = conn.execute("SELECT COUNT(*) FROM stocks").fetchone()[0]
-    if not total:
-        return None
-    min_codes = int(total * PRICEDB_COVERAGE_THRESHOLD)
-    row = conn.execute(
-        """
-        SELECT date
-        FROM daily_prices
-        GROUP BY date
-        HAVING COUNT(DISTINCT code) >= ?
-        ORDER BY date DESC
-        LIMIT 1
-        """,
-        (min_codes,),
-    ).fetchone()
-    return row[0] if row and row[0] else None
 
 
 _PROXY_ENV_KEYS = (
@@ -366,89 +356,12 @@ def get_db() -> sqlite3.Connection:
     return conn
 
 
-def ensure_schema(conn: sqlite3.Connection):
-    conn.executescript(
-        """
-        CREATE TABLE IF NOT EXISTS stocks (
-            code        TEXT PRIMARY KEY,
-            name        TEXT,
-            exchange    TEXT,
-            listed_date TEXT,
-            last_updated TEXT
-        );
-
-        CREATE TABLE IF NOT EXISTS daily_prices (
-            code    TEXT,
-            date    TEXT,
-            open    REAL,
-            high    REAL,
-            low     REAL,
-            close   REAL,
-            volume  INTEGER,
-            amount  REAL,
-            PRIMARY KEY (code, date)
-        );
-
-        CREATE INDEX IF NOT EXISTS idx_dp_date
-            ON daily_prices(date);
-        CREATE INDEX IF NOT EXISTS idx_dp_code_date
-            ON daily_prices(code, date);
-
-        CREATE TABLE IF NOT EXISTS rps_cache (
-            date    TEXT,
-            code    TEXT,
-            rps20   REAL,
-            rps60   REAL,
-            rps120  REAL,
-            rps250  REAL,
-            ma10    REAL,
-            PRIMARY KEY (date, code)
-        );
-        """
-    )
-    # adj_factors (read-time price adjustment) is owned by price_adjust.py —
-    # single definition, shared by pricedb writers and indicator readers.
-    price_adjust.ensure_adj_schema(conn)
-    conn.commit()
 
 
-def clear_all_data(conn: sqlite3.Connection):
-    """Clear all data tables for a fresh init attempt."""
-    conn.execute("DELETE FROM rps_cache")
-    conn.execute("DELETE FROM daily_prices")
-    conn.execute("DELETE FROM stocks")
-    conn.commit()
 
 
-def invalidate_rps_cache(conn: sqlite3.Connection, from_date: str | None = None):
-    """Invalidate cached RPS rows from a given ISO date onward."""
-    if from_date:
-        conn.execute("DELETE FROM rps_cache WHERE date >= ?", (from_date,))
-    else:
-        conn.execute("DELETE FROM rps_cache")
-    conn.commit()
 
 
-def upsert_stocks(conn: sqlite3.Connection, stocks: list[dict]):
-    """Insert or refresh stock metadata."""
-    if not stocks:
-        return
-    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    conn.executemany(
-        "INSERT OR REPLACE INTO stocks (code, name, exchange, listed_date, last_updated) "
-        "VALUES (?, ?, ?, ?, ?)",
-        [
-            (
-                stock["code"],
-                stock.get("name"),
-                stock.get("exchange"),
-                stock.get("listed_date"),
-                now,
-            )
-            for stock in stocks
-        ],
-    )
-    conn.commit()
 
 
 # ---------------------------------------------------------------------------
@@ -2723,18 +2636,6 @@ def cmd_factors(args: list):
     sys.exit(1)
 
 
-def _partial_price_dates(conn: sqlite3.Connection) -> list[str]:
-    """Dates whose row count is under half the median daily count — the
-    signature of a provider outage that landed only a fragment of the
-    universe (e.g. a clist sweep killed mid-flight)."""
-    counts = conn.execute(
-        "SELECT date, COUNT(*) FROM daily_prices GROUP BY date ORDER BY date"
-    ).fetchall()
-    if not counts:
-        return []
-    ordered = sorted(c for _, c in counts)
-    median = ordered[len(ordered) // 2]
-    return [d for d, c in counts if c < 0.5 * median]
 
 
 def db_health(conn: sqlite3.Connection, spot_check: bool = False) -> dict:
