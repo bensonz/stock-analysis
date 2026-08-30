@@ -2,7 +2,7 @@
 
 - 日期：2026-08-04（只读研究，未改 pipeline/tracking，未 commit）
 - 数据源：期权实验室后端 `GET http://47.94.238.128:8080/api/history/gex-history?underlying={code}&days=200`
-- 复现：`python3 scripts/gex_audition.py`（全部数字由该脚本重算；`--q1/--q3/--q4` 可单跑）
+- 复现：`python3 scripts/research/gex_audition.py`（全部数字由该脚本重算；`--q1/--q3/--q4` 可单跑）
 - 语义（锁定，见 `scripts/fetch_gex.py` 2026-08-04 更正）：regime = `total_net_gex` 的**符号**（>0 净正gamma=对冲压制波动；<0 净负gamma=对冲放大波动）；`flip_point` 是行权价剖面零轴（结构地标），**不**当作当前regime边界，单列为一个维度。
 - 次日收益一律取自 GEX 历史**自身 spot 序列**（自洽）。
 
@@ -27,7 +27,7 @@
 
 ## Q1 放大效应：净负gamma日之后，次日|收益|更大吗？
 
-池合（`scripts/gex_audition.py` Q1 表）：
+池合（`scripts/research/gex_audition.py` Q1 表）：
 
 | 桶 | n | 次日\|收益\|均值 | sd | se |
 |---|---|---|---|---|
@@ -58,7 +58,7 @@
 
 ## Q3 距flip：spot-vs-flip 在净GEX符号之外另有信息吗？
 
-池合 n=306（`scripts/gex_audition.py` Q3）：
+池合 n=306（`scripts/research/gex_audition.py` Q3）：
 
 - corr(dist_flip, 次日\|收益\|)：Pearson −0.128，**Spearman −0.292**
 - corr(\|dist_flip\|, 次日\|收益\|)：Pearson +0.182，Spearman +0.283
@@ -112,4 +112,4 @@
 - 满足其一，再考虑把**波动情景**（非方向信号）以 Tier-2 advisory 形式送入 prompt。Q4 若仍无联系，则始终不与止损/仓位规则挂钩。
 
 ---
-*生成：gex-audition 子代理，2026-08-04。所有数字可由 `python3 scripts/gex_audition.py` 重算；08-04 当日行 spot 为最新一行，次日收益随后端回补后可延长。*
+*生成：gex-audition 子代理，2026-08-04。所有数字可由 `python3 scripts/research/gex_audition.py` 重算；08-04 当日行 spot 为最新一行，次日收益随后端回补后可延长。*

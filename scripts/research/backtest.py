@@ -33,7 +33,7 @@ import sqlite3
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import market_rules
 
@@ -368,7 +368,7 @@ def load_closed_trades(closed_dir: str | Path | None = None) -> list:
     replay needs. Entries without dates or a recorded return are skipped."""
     import json
     d = Path(closed_dir) if closed_dir else (
-        Path(__file__).resolve().parent.parent / "tracking" / "closed")
+        Path(__file__).resolve().parent.parent.parent / "tracking" / "closed")
     out = []
     for f in sorted(d.glob("*.json")):
         data = json.loads(f.read_text(encoding="utf-8"))

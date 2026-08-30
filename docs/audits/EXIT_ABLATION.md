@@ -1,6 +1,6 @@
 # Exit-rule ablation — 2026-08-17
 
-Reproduce: `python3 scripts/exit_ablation.py --horizon {10,20,30,40} [--fill close] --human`
+Reproduce: `python3 scripts/research/exit_ablation.py --horizon {10,20,30,40} [--fill close] --human`
 
 Replays every position we actually opened against the real price path and settles
 it under each candidate exit policy. Entries are held fixed at what the pipeline

@@ -51,7 +51,7 @@ result accordingly.
   direction + magnitude (tolerance band), and the reconciliation table ships
   with the results. If the simulator can't approximately reproduce July, its
   verdicts on hypotheticals are worthless.
-- **D6 — Location & reuse:** `scripts/backtest.py` (engine + CLI), building on
+- **D6 — Location & reuse:** `scripts/research/backtest.py` (engine + CLI), building on
   `base_rates.get_panel()` (adjusted closes, RPS features, coverage-floor
   dates) — no second data path. Results → `docs/backtest/RESULTS.md`.
 

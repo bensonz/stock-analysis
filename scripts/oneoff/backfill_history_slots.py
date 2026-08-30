@@ -18,7 +18,7 @@ import json
 import sys
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 RUNS_DIR = PROJECT_ROOT / "runs"
 TRACKING_DIR = PROJECT_ROOT / "tracking"
 CLOSED_DIR = TRACKING_DIR / "closed"

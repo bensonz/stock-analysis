@@ -20,7 +20,7 @@ from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 TRACKING_DIR = PROJECT_ROOT / "tracking"
 CLOSED_DIR = TRACKING_DIR / "closed"
 SKIP = {"positions.json", "portfolio_config.json", "events.json",

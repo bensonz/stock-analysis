@@ -15,7 +15,7 @@ import shutil
 import sys
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).parent.parent
+PROJECT_ROOT = Path(__file__).parent.parent.parent
 RUNS_DIR = PROJECT_ROOT / "runs"
 
 # Old source directories

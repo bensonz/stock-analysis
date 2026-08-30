@@ -109,6 +109,32 @@ pytest scripts/test_pipeline.py::test_name   # a single test
 
 Note test files live in **two** places: `tests/` and `scripts/test_*.py` (both are collected). `scripts/conftest.py` mirrors `tests/conftest.py` so the marker works when running `pytest scripts/` directly.
 
+## How `scripts/` is laid out
+
+```
+scripts/            the pipeline and everything it imports
+  research/         offline analysis tools — nothing in the pipeline imports these
+  oneoff/           migrations and dev utilities, kept for the record
+  rules/            the mechanical risk engine (one check_*.py per rule)
+```
+
+**The import namespace is flat.** Modules import each other by bare name
+(`import pricedb`) regardless of subdirectory; `scripts/`, `scripts/research/`
+and `scripts/oneoff/` are all on `sys.path` (added once in both `conftest.py`
+files, and via `sys.path.insert(...parent.parent)` in each moved module). The
+directories are for navigation, not namespacing — so a file can move between
+them without touching a single import statement.
+
+`research/` is defined by a property worth preserving: **nothing in the pipeline
+imports it.** That is what makes those files free to move, refactor, or delete
+without risking the daily run. If a pipeline module ever needs something from
+`research/`, move the shared piece up to `scripts/` rather than importing
+downward.
+
+Only **four** files are executed by path — `run_daily.py` and `doctor.py`
+(launchd), `pricedb.py` and `run_rules.py` (subprocess from `run_daily`). Those
+four must keep stable paths; everything else is imported or run by hand.
+
 ## Pipeline architecture (the big picture)
 
 `scripts/run_daily.py` is the orchestrator. Four phases, gated by data contracts:

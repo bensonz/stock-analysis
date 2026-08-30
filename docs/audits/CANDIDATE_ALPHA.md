@@ -1,6 +1,6 @@
 # Candidate-list alpha — 2026-08-28
 
-Reproduce: `python3 scripts/candidate_alpha.py --human` (or `--json`)
+Reproduce: `python3 scripts/research/candidate_alpha.py --human` (or `--json`)
 
 Asks one question: **do the LLM's picks beat picking at random from the same
 candidate list?** Every row of every `output/candidates.md` ever written is

@@ -63,7 +63,7 @@ Calculate and report:
 Stops make bad entries visible; this makes bad NON-entries visible. Run:
 
 ```bash
-python3 scripts/cost_of_caution.py --human --days 28
+python3 scripts/research/cost_of_caution.py --human --days 28
 ```
 
 It replays every skip_list decision as if taken — entry at the next open,
@@ -122,7 +122,7 @@ Trades in a name we already traded once. First measurement (n=9): 1 win,
 mean -3.71% vs the book's -0.78%/trade — suggestive but small.
 
 ```bash
-python3 scripts/reentry_stats.py --human
+python3 scripts/research/reentry_stats.py --human
 ```
 
 - Report n, mean, win-rate vs the book baseline, and any open re-entries.

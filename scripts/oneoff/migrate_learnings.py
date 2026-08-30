@@ -16,14 +16,14 @@ import sys
 from datetime import date
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from hypothesis_manager import (
     load_hypotheses, save_hypotheses, create_hypothesis,
     add_evidence, process_learnings, get_all_summary,
     HYPOTHESES_FILE,
 )
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 RUNS_DIR = PROJECT_ROOT / "runs"
 
 

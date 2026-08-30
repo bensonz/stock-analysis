@@ -17,11 +17,11 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import pricedb
 
-OUT = Path(__file__).parent / "test_fixtures"
+OUT = Path(__file__).parent.parent / "test_fixtures"
 
 
 def _trim(payload: dict, limit: int) -> dict:

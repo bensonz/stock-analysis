@@ -38,7 +38,7 @@ import sqlite3
 import statistics
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 DB_PATH = ROOT / "data" / "pricedb" / "ashare_prices.db"
 
 # Substantive strategy changes, from `git log -- agents/ANALYST.md scripts/rules/`.

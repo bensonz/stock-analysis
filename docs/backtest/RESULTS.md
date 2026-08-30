@@ -9,7 +9,7 @@
 > small. The qualitative finding (mechanical execution badly underperforms the
 > live pipeline's selectivity) is not in doubt, only the magnitudes.
 
-Run: `python3 scripts/backtest.py baseline` @ `80df134`, adjusted prices,
+Run: `python3 scripts/research/backtest.py baseline` @ `80df134`, adjusted prices,
 costs on (0.30% round trip), T+1 + price-limit constraints modeled.
 **Framing reminder: one market regime, ~130 tradeable sessions. This run can
 reject the ruleset for this regime; it cannot validate any ruleset in general.**
@@ -57,7 +57,7 @@ the pool-wide 97%/97%/80% stopout days measured mid-July.
 ## Fidelity (is the simulator believable?)
 
 Replay of the 41 actual closed trades through the same fill+cost model
-(`python3 scripts/backtest.py replay`):
+(`python3 scripts/research/backtest.py replay`):
 
 - 20 replayable; **mean |model residual| = 0.30pp** after fill-timing
   attribution — and that residual ≈ the cost load recorded gross returns

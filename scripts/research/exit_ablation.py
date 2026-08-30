@@ -36,7 +36,7 @@ import sqlite3
 import statistics
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 DB_PATH = ROOT / "data" / "pricedb" / "ashare_prices.db"
 
 ROUND_TRIP_COST_PCT = 0.30
