@@ -42,11 +42,12 @@ python3 scripts/pricedb.py update    # incremental daily update (run before anal
 python3 scripts/pricedb.py rps [DATE]# recompute MA-based RPS for all stocks
 python3 scripts/pricedb.py status    # DB stats
 python3 scripts/pricedb.py snapshot [--date ISO --dry-run --force]
-                                     # today's settled bar from sina's REAL-TIME
-                                     # feed (hq.sinajs.cn), batched ~100 codes/req,
-                                     # ~30s for the universe. The daily-kline
-                                     # archive is batch-built and can lag 6h, so
-                                     # this is the fast path for the close slot.
+                                     # today's settled bar from a REAL-TIME feed:
+                                     # iFinD real_time first (~2.4s for the
+                                     # universe), sina hq.sinajs.cn fallback
+                                     # (~30s, batched ~100 codes/req). The
+                                     # daily-kline archive is batch-built and can
+                                     # lag 6h, so this is the close-slot fast path.
                                      # Refuses while the session is open; rejects
                                      # lines stamped before 15:00 (pre-auction).
                                      # Wired into run_daily preflight ahead of
@@ -118,10 +119,18 @@ Note test files live in **two** places: `tests/` and `scripts/test_*.py` (both a
 
 ```
 scripts/            the pipeline and everything it imports
+  pricedb/          the price-DB package: __init__ (CLI+core), providers (all
+                    network fetchers), bars, storage, factors, health
   research/         offline analysis tools — nothing in the pipeline imports these
   oneoff/           migrations and dev utilities, kept for the record
   rules/            the mechanical risk engine (one check_*.py per rule)
 ```
+
+`scripts/pricedb.py` is a 25-line shim kept only so `python3 scripts/pricedb.py`
+keeps working when *executed by path*; `import pricedb` always resolves to the
+package (packages beat same-named modules). Tests that fake fetch internals
+patch `pricedb.providers`, not `pricedb` — the module that owns a name is the
+one to patch.
 
 **The import namespace is flat.** Modules import each other by bare name
 (`import pricedb`) regardless of subdirectory; `scripts/`, `scripts/research/`
@@ -202,7 +211,7 @@ today's contract.
 
 - **`tracking/`** is the live portfolio state: `positions.json` (active), `closed/` (exited), `portfolio_config.json`, `hypotheses.json`. Schema in `TRACKER_SCHEMA.md`.
 - **`scripts/rules/`** — the mechanical risk engine. Each `check_*.py` is a standalone script that reads `positions.json` on **stdin** and emits violations on **stdout**; `run_rules.py` runs them all. Rules encode hard-won sell discipline (time-decay, overextended-entry, stop-proximity, breakout-failure, volume, IV filter). Each rule file's docstring carries its own track record and evolution notes tied to `LEARNINGS.md` entries — preserve that history when editing.
-- **`LEARNINGS.md`** (large, ~188KB) is the accumulated trading post-mortem, read into the LLM prompt every run and updated after. `agents/*.md` (ANALYST, RESEARCHER, TRACKER, EVOLVER, ORCHESTRATOR, DAILY_AUDIT, WEEKLY_AUDIT) are the prompt specs for each role. Changes to strategy belong in these markdown specs, not hardcoded in Python.
+- **`LEARNINGS.md`** (large, ~250KB and growing) is the accumulated trading post-mortem, read into the LLM prompt every run and updated after. `agents/*.md` (ANALYST, RESEARCHER, TRACKER, EVOLVER, ORCHESTRATOR, DAILY_AUDIT, WEEKLY_AUDIT) are the prompt specs for each role. Changes to strategy belong in these markdown specs, not hardcoded in Python.
 
 ## Data sources & fallbacks
 
