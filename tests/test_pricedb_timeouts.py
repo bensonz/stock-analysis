@@ -36,8 +36,8 @@ def test_run_with_timeout_raises_on_hang():
 
 
 def test_call_tushare_retries_on_timeout(monkeypatch):
-    monkeypatch.setattr(pricedb, "PRICEDB_CALL_TIMEOUT_SEC", 0.3)
-    monkeypatch.setattr(pricedb, "TUSHARE_RETRY_DELAY", 0.01)
+    monkeypatch.setattr(pricedb.providers, "PRICEDB_CALL_TIMEOUT_SEC", 0.3)
+    monkeypatch.setattr(pricedb.providers, "TUSHARE_RETRY_DELAY", 0.01)
 
     calls = {"n": 0}
 
@@ -58,8 +58,8 @@ def test_call_tushare_retries_on_timeout(monkeypatch):
 
 
 def test_call_tushare_eventually_raises(monkeypatch):
-    monkeypatch.setattr(pricedb, "PRICEDB_CALL_TIMEOUT_SEC", 0.2)
-    monkeypatch.setattr(pricedb, "TUSHARE_RETRY_DELAY", 0.01)
+    monkeypatch.setattr(pricedb.providers, "PRICEDB_CALL_TIMEOUT_SEC", 0.2)
+    monkeypatch.setattr(pricedb.providers, "TUSHARE_RETRY_DELAY", 0.01)
 
     def always_hangs():
         time.sleep(5)
@@ -71,7 +71,11 @@ def test_call_tushare_eventually_raises(monkeypatch):
 
     assert "hangs" in str(excinfo.value)
     # 3 retries × 0.2s timeout + small slack. No retry sleeps on _TimeoutError.
-    assert elapsed < pricedb.PRICEDB_CALL_TIMEOUT_SEC * pricedb.TUSHARE_RETRIES + 0.5
+    # Read from providers — it owns these since the 2026-08-31 extraction,
+    # and the patches above land there. Reading pricedb here would compare
+    # against the UNPATCHED 10s default and pass vacuously.
+    assert elapsed < (pricedb.providers.PRICEDB_CALL_TIMEOUT_SEC
+                      * pricedb.providers.TUSHARE_RETRIES + 0.5)
 
 
 def test_budget_exceeded_when_deadline_passed(monkeypatch):

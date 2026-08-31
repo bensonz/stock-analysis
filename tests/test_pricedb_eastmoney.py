@@ -101,8 +101,8 @@ def test_fetch_eastmoney_json_falls_back_to_curl(monkeypatch):
     def fail_urllib(url):
         raise RuntimeError("proxy failure")
 
-    monkeypatch.setattr(pricedb, "_fetch_eastmoney_json_urllib", fail_urllib)
-    monkeypatch.setattr(pricedb, "_fetch_eastmoney_json_curl", lambda url: '{"data":{"klines":[]}}')
+    monkeypatch.setattr(pricedb.providers, "_fetch_eastmoney_json_urllib", fail_urllib)
+    monkeypatch.setattr(pricedb.providers, "_fetch_eastmoney_json_curl", lambda url: '{"data":{"klines":[]}}')
 
     assert pricedb._fetch_eastmoney_json("https://example.invalid") == {"data": {"klines": []}}
 
@@ -139,9 +139,9 @@ def test_bulk_fetch_eastmoney_retries_skips_bj_and_inserts_from_main_thread(tmp_
         ]
 
     monkeypatch.setenv("PRICEDB_EASTMONEY_WORKERS", "2")
-    monkeypatch.setattr(pricedb, "EASTMONEY_RETRY_DELAY", 0)
+    monkeypatch.setattr(pricedb.providers, "EASTMONEY_RETRY_DELAY", 0)
     monkeypatch.setattr(pricedb, "_UPDATE_DEADLINE", None)
-    monkeypatch.setattr(pricedb, "_fetch_klines_eastmoney", fake_fetch)
+    monkeypatch.setattr(pricedb.providers, "_fetch_klines_eastmoney", fake_fetch)
 
     pricedb._bulk_fetch_eastmoney(conn, stocks, "20260421", "20260430", None)
 

@@ -122,7 +122,7 @@ def test_bulk_fetch_akshare_retries_and_inserts_from_main_thread(tmp_path, monke
     conn.commit()
 
     monkeypatch.setenv("PRICEDB_AKSHARE_WORKERS", "2")
-    monkeypatch.setattr(pricedb, "AKSHARE_RETRY_DELAY", 0)
+    monkeypatch.setattr(pricedb.providers, "AKSHARE_RETRY_DELAY", 0)
     monkeypatch.setattr(pricedb, "_UPDATE_DEADLINE", None)
 
     fake_ak = _FakeAkShare()

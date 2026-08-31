@@ -20,6 +20,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
 import pricedb
+import pricedb.providers
 
 D1, D2 = "2026-07-30", "2026-07-31"
 
@@ -60,7 +61,7 @@ def test_bulk_fetch_sina_window_filter_and_ignore(monkeypatch):
                  "('000001', ?, 11.28, 11.62, 11.18, 11.61, 2777707, 999.0)", (D1,))
     conn.commit()
     monkeypatch.setattr(pricedb, "SINA_REPAIR_SLEEP_SEC", 0.0)
-    monkeypatch.setattr(pricedb, "_fetch_klines_sina", lambda stock, datalen: [
+    monkeypatch.setattr(pricedb.providers, "_fetch_klines_sina", lambda stock, datalen: [
         ("000001", "2026-07-29", 11.19, 11.36, 11.18, 11.28, 1511054, None),  # pre-window
         ("000001", D1, 11.28, 11.62, 11.18, 11.61, 2777707, None),            # exists
         ("000001", D2, 11.50, 11.63, 11.28, 11.63, 2024978, None),            # new
@@ -223,7 +224,7 @@ def test_snapshot_falls_back_when_client_raises(monkeypatch):
 def test_bulk_fetch_sina_raises_on_empty_weekday_window(monkeypatch):
     conn = _conn_with_stock()
     monkeypatch.setattr(pricedb, "SINA_REPAIR_SLEEP_SEC", 0.0)
-    monkeypatch.setattr(pricedb, "_fetch_klines_sina", lambda stock, datalen: [])
+    monkeypatch.setattr(pricedb.providers, "_fetch_klines_sina", lambda stock, datalen: [])
     with pytest.raises(RuntimeError, match="no rows"):
         pricedb._bulk_fetch_sina(conn, [{"code": "000001", "exchange": "SZ"}],
                                  "20260730", "20260731", None)

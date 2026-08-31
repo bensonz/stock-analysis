@@ -117,6 +117,7 @@ def test_compute_ma_resolves_latest_trading_date(tmp_path):
 def test_fetch_strategy_pool_local_uses_local_rps_and_filters(tmp_path, monkeypatch):
     import data_collector as dc
     import pricedb
+    import pricedb.providers
 
     db_path = tmp_path / "prices.db"
     conn = _create_test_db(db_path)
@@ -497,7 +498,7 @@ def test_clist_pagination_terminates(tmp_path, monkeypatch):
         calls.append(page)
         return {1: payload_page1, 2: payload_page2, 3: payload_page3}[page]
 
-    monkeypatch.setattr(pricedb, "_fetch_clist_page", fake_fetch)
+    monkeypatch.setattr(pricedb.providers, "_fetch_clist_page", fake_fetch)
     today_yyyymmdd = datetime.now().strftime("%Y%m%d")
 
     db_path = tmp_path / "pages.db"
@@ -521,7 +522,7 @@ def test_clist_pagination_terminates(tmp_path, monkeypatch):
 def test_bulk_fetch_clist_rejects_multi_day(tmp_path, monkeypatch):
     import pricedb
 
-    monkeypatch.setattr(pricedb, "_fetch_clist_page",
+    monkeypatch.setattr(pricedb.providers, "_fetch_clist_page",
                         lambda p: (_ for _ in ()).throw(AssertionError("should not be called")))
     db_path = tmp_path / "x.db"
     conn = _create_test_db(db_path)
@@ -537,7 +538,7 @@ def test_bulk_fetch_clist_rejects_multi_day(tmp_path, monkeypatch):
 def test_bulk_fetch_clist_rejects_non_today(tmp_path, monkeypatch):
     import pricedb
 
-    monkeypatch.setattr(pricedb, "_fetch_clist_page",
+    monkeypatch.setattr(pricedb.providers, "_fetch_clist_page",
                         lambda p: (_ for _ in ()).throw(AssertionError("should not be called")))
     db_path = tmp_path / "x.db"
     conn = _create_test_db(db_path)
