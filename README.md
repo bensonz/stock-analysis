@@ -4,6 +4,9 @@ Daily Chinese A-share stock analysis powered by AI.
 
 ## 关于本仓库
 
+> **运维手册**: 怎么手动触发运行、怎么确认跑成功、坏了怎么修 — 见
+> [docs/RUNBOOK.md](docs/RUNBOOK.md)。
+
 本仓库包含基于预设策略筛选的A股每日分析报告。分析内容包括：
 
 - **基本面分析** — PE、PB、ROE、营收增长、利润率

@@ -17,6 +17,11 @@ The trading philosophy lives in `agents/ANALYST.md` (momentum-first: buy strengt
 
 ## Common commands
 
+**Human-operator version of this section**: `docs/RUNBOOK.md` — manual
+triggering, slot semantics, verification order, failure patterns. When
+commands change here, update the runbook in the same commit; a runbook that
+drifts from reality is worse than none.
+
 ```bash
 # Full daily pipeline: collect → LLM → apply decisions → validate → git commit
 python3 scripts/run_daily.py --run
