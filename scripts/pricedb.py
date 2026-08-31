@@ -662,13 +662,7 @@ def _bulk_fetch_eastmoney(
                     rows = []
 
                 if rows:
-                    conn.executemany(
-                        "INSERT OR REPLACE INTO daily_prices "
-                        "(code,date,open,high,low,close,volume,amount) "
-                        "VALUES (?,?,?,?,?,?,?,?)",
-                        rows,
-                    )
-                    conn.commit()
+                    write_bars(conn, rows)
                     total_inserted += len(rows)
 
                 if completed % 100 == 0 or completed == len(stocks):
@@ -844,13 +838,7 @@ def _bulk_fetch_eastmoney_clist(
             f"eastmoney_clist parsed {len(all_rows)} rows but none matched known universe ({len(valid_codes)} codes)"
         )
 
-    conn.executemany(
-        "INSERT OR REPLACE INTO daily_prices "
-        "(code,date,open,high,low,close,volume,amount) "
-        "VALUES (?,?,?,?,?,?,?,?)",
-        filtered,
-    )
-    conn.commit()
+    write_bars(conn, filtered)
     if failures:
         print(f"  clist: {len(failures)} page(s) failed: {failures[0]}", file=sys.stderr)
     print(
@@ -990,13 +978,7 @@ def _bulk_fetch_tushare(
                 )
 
         if rows:
-            conn.executemany(
-                "INSERT OR REPLACE INTO daily_prices "
-                "(code,date,open,high,low,close,volume,amount) "
-                "VALUES (?,?,?,?,?,?,?,?)",
-                rows,
-            )
-            conn.commit()
+            write_bars(conn, rows)
             total_inserted += len(rows)
 
         if index % 20 == 0 or index == len(trade_dates):
@@ -1108,13 +1090,7 @@ def _bulk_fetch_akshare(
                     rows = []
 
                 if rows:
-                    conn.executemany(
-                        "INSERT OR REPLACE INTO daily_prices "
-                        "(code,date,open,high,low,close,volume,amount) "
-                        "VALUES (?,?,?,?,?,?,?,?)",
-                        rows,
-                    )
-                    conn.commit()
+                    write_bars(conn, rows)
                     total_inserted += len(rows)
 
                 if completed % 100 == 0 or completed == len(stocks):
@@ -1233,13 +1209,7 @@ def _bulk_fetch_baostock(
             raise RuntimeError("update budget exceeded")
         rows = _fetch_klines_baostock(bs, stock, beg, end)
         if rows:
-            conn.executemany(
-                "INSERT OR REPLACE INTO daily_prices "
-                "(code,date,open,high,low,close,volume,amount) "
-                "VALUES (?,?,?,?,?,?,?,?)",
-                rows,
-            )
-            conn.commit()
+            write_bars(conn, rows)
             total_inserted += len(rows)
             consecutive_empty = 0
         else:
@@ -1621,13 +1591,7 @@ def _backfill_from_akshare_spot(conn: sqlite3.Connection, date_iso: str) -> int:
             rows.append((code, date_iso, open_p, high_p, low_p, close_p, volume, amount))
 
         if rows:
-            conn.executemany(
-                "INSERT OR REPLACE INTO daily_prices "
-                "(code,date,open,high,low,close,volume,amount) "
-                "VALUES (?,?,?,?,?,?,?,?)",
-                rows,
-            )
-            conn.commit()
+            write_bars(conn, rows)
 
         return len(rows)
     except Exception as e:
@@ -1826,12 +1790,7 @@ def _bulk_fetch_sina(
                 failures.append(f"{stock['code']}: {str(e)[:60]}")
                 rows = []
             if rows:
-                cur = conn.executemany(
-                    "INSERT OR IGNORE INTO daily_prices "
-                    "(code,date,open,high,low,close,volume,amount) "
-                    "VALUES (?,?,?,?,?,?,?,?)", rows)
-                inserted += cur.rowcount
-                conn.commit()
+                inserted += write_bars(conn, rows, replace=False)
             if completed % 250 == 0 or completed == len(supported):
                 print(f"  [Sina {completed}/{len(supported)}] "
                       f"+{inserted} rows, {len(failures)} failed",
@@ -1901,12 +1860,7 @@ def _bulk_fetch_ifind(
 
         rows = _ifind_tables_to_rows(tables, ths_to_code, beg_iso, end_iso)
         if rows:
-            cur = conn.executemany(
-                "INSERT OR IGNORE INTO daily_prices "
-                "(code,date,open,high,low,close,volume,amount) "
-                "VALUES (?,?,?,?,?,?,?,?)", rows)
-            inserted += cur.rowcount
-            conn.commit()
+            inserted += write_bars(conn, rows, replace=False)
         done = min(start + chunk, len(all_ths))
         print(f"  [iFinD {done}/{len(all_ths)}] +{inserted} rows, "
               f"{len(failures)} batches failed", file=sys.stderr)
@@ -2465,12 +2419,7 @@ def cmd_repair(args: list):
                 rows = []
             if rows:
                 # DB writes stay on this (main) thread; workers only fetch.
-                cur = conn.executemany(
-                    "INSERT OR IGNORE INTO daily_prices "
-                    "(code,date,open,high,low,close,volume,amount) "
-                    "VALUES (?,?,?,?,?,?,?,?)", rows)
-                inserted += cur.rowcount
-                conn.commit()
+                inserted += write_bars(conn, rows, replace=False)
             if completed % 250 == 0 or completed == len(stocks):
                 print(f"  [sina {completed}/{len(stocks)}] "
                       f"+{inserted} rows, {len(failures)} failed",
@@ -2724,14 +2673,11 @@ def cmd_snapshot(argv: list):
         conn.close()
         return
 
-    cur = conn.executemany(
-        "INSERT OR IGNORE INTO daily_prices "
-        "(code,date,open,high,low,close,volume,amount) VALUES (?,?,?,?,?,?,?,?)", rows)
-    conn.commit()
+    n_ins = write_bars(conn, rows, replace=False)
     after = conn.execute("SELECT COUNT(*) FROM daily_prices WHERE date = ?",
                          (target,)).fetchone()[0]
     conn.close()
-    print(f"  {target}: {before} → {after} rows ({cur.rowcount} inserted)", file=sys.stderr)
+    print(f"  {target}: {before} → {after} rows ({n_ins} inserted)", file=sys.stderr)
     if stats["failed_batches"]:
         print(f"  WARNING: {stats['failed_batches']} batch(es) failed — day may be "
               f"incomplete; re-run, or let the kline archive fill the rest tonight",
