@@ -175,6 +175,81 @@ def _extract_text(html: str, max_chars: int) -> str:
     return text[:max_chars]
 
 
+# --- crawl4ai escalation (headless browser, separate venv) -------------------
+#
+# August measurement: 39 web_fetches, 6 came back as husks under 600 chars —
+# JS search wrappers (baidu /s?wd=), anti-bot shells (sina paper.php, cls.cn).
+# The model asked for evidence, got 7 chars, and kept reasoning. requests stays
+# the first attempt (~85% of targets are server-rendered articles and it is 5x
+# faster); the browser is the ESCALATION, not the default.
+#
+# The browser lives in its own venv (torch-heavy) and must stay optional: this
+# pipeline runs unattended on launchd, and a Chromium that breaks on update
+# must degrade to the thin text loudly, never take the run down.
+CRAWL4AI_PYTHON = os.getenv(
+    "CRAWL4AI_PYTHON",
+    "/Users/bz/Work/Personal/tools/crawl4ai-venv/bin/python")
+CRAWL4AI_TIMEOUT_SEC = float(os.getenv("CRAWL4AI_TIMEOUT_SEC", "60"))
+# Hard cap on escalations per process: a pathological page list must not add
+# minutes of browser spin-up to Phase 2. Counts attempts, not successes.
+CRAWL4AI_MAX_PER_RUN = int(os.getenv("CRAWL4AI_MAX_PER_RUN", "3"))
+_HUSK_CHARS = 600          # empirical: every observed husk was under this
+_crawl4ai_used = 0
+
+_CRAWL4AI_MD_SCRIPT = """
+import asyncio, sys
+from crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig, CacheMode
+async def main():
+    run = CrawlerRunConfig(cache_mode=CacheMode.BYPASS, wait_until="networkidle",
+                           scan_full_page=True)
+    async with AsyncWebCrawler(config=BrowserConfig(headless=True)) as c:
+        r = await c.arun(url=sys.argv[1], config=run)
+        if not r.success:
+            print(f"CRAWL_FAILED: {r.error_message}", file=sys.stderr); sys.exit(3)
+        sys.stdout.write(r.markdown or "")
+asyncio.run(main())
+"""
+
+_CRAWL4AI_PNG_SCRIPT = """
+import asyncio, base64, sys
+from crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig, CacheMode
+async def main():
+    run = CrawlerRunConfig(cache_mode=CacheMode.BYPASS, wait_until="networkidle",
+                           screenshot=True)
+    async with AsyncWebCrawler(config=BrowserConfig(headless=True)) as c:
+        r = await c.arun(url=sys.argv[1], config=run)
+        if not r.success or not r.screenshot:
+            print(f"CRAWL_FAILED: {r.error_message or 'no screenshot'}",
+                  file=sys.stderr); sys.exit(3)
+        sys.stdout.write(r.screenshot)   # already base64
+asyncio.run(main())
+"""
+
+
+def _crawl4ai_run(url: str, mode: str) -> tuple[bool, str]:
+    """(ok, payload). payload = markdown text, or base64 PNG for 'screenshot'.
+
+    Subprocess into the crawl4ai venv — its torch-weight deps must never enter
+    this one. All failure shapes collapse to (False, reason): missing venv,
+    non-zero exit, timeout. Callers decide how loud to be.
+    """
+    import subprocess
+    if not Path(CRAWL4AI_PYTHON).exists():
+        return False, f"crawl4ai venv not found at {CRAWL4AI_PYTHON}"
+    script = _CRAWL4AI_PNG_SCRIPT if mode == "screenshot" else _CRAWL4AI_MD_SCRIPT
+    try:
+        proc = subprocess.run(
+            [CRAWL4AI_PYTHON, "-c", script, url],
+            capture_output=True, text=True, timeout=CRAWL4AI_TIMEOUT_SEC)
+    except subprocess.TimeoutExpired:
+        return False, f"crawl4ai timed out after {CRAWL4AI_TIMEOUT_SEC:.0f}s"
+    except Exception as e:
+        return False, f"crawl4ai launch failed: {e}"
+    if proc.returncode != 0:
+        return False, (proc.stderr or "").strip()[-300:] or f"exit {proc.returncode}"
+    return True, proc.stdout
+
+
 def execute_web_fetch(url: str, max_chars: int = FETCH_MAX_CHARS) -> str:
     """Fetch a URL and return extracted text."""
     try:
@@ -191,13 +266,84 @@ def execute_web_fetch(url: str, max_chars: int = FETCH_MAX_CHARS) -> str:
         resp.encoding = resp.apparent_encoding or "utf-8"
 
         if resp.status_code != 200:
-            return f"HTTP {resp.status_code}: {resp.reason}"
-
-        return _extract_text(resp.text, max_chars)
+            text = f"HTTP {resp.status_code}: {resp.reason}"
+        else:
+            text = _extract_text(resp.text, max_chars)
     except requests.Timeout:
-        return f"Timeout fetching {url} (>{FETCH_TIMEOUT}s)"
+        text = f"Timeout fetching {url} (>{FETCH_TIMEOUT}s)"
     except Exception as e:
-        return f"Error fetching {url}: {e}"
+        text = f"Error fetching {url}: {e}"
+
+    if len(text) >= _HUSK_CHARS:
+        return text
+
+    # Husk or error: the page likely needs JavaScript (or blocked plain HTTP).
+    # Escalate to the headless browser — bounded, and loud either way.
+    global _crawl4ai_used
+    if _crawl4ai_used >= CRAWL4AI_MAX_PER_RUN:
+        return (f"{text}\n[note: thin result; crawl4ai budget "
+                f"({CRAWL4AI_MAX_PER_RUN}/run) already spent — treat as unverified]")
+    _crawl4ai_used += 1
+    print(f"    [web_fetch] thin result ({len(text)} chars) — escalating to "
+          f"crawl4ai ({_crawl4ai_used}/{CRAWL4AI_MAX_PER_RUN})", file=sys.stderr)
+    ok, payload = _crawl4ai_run(url, "markdown")
+    if not ok:
+        return (f"{text}\n[note: thin result and crawl4ai fallback failed "
+                f"({payload}) — treat as unverified]")
+    return (f"[via crawl4ai headless-browser fallback — JS was executed]\n"
+            f"{payload[:max_chars]}")
+
+
+# Anthropic-loop-only tool: the daily pipeline's decision model (DeepSeek,
+# openai path) is text-only, so this must never appear in ITS tool list —
+# an image block in a tool_result would be rejected or garbled. The Anthropic
+# loops (deep_report writer, hybrid research pass) are multimodal and this is
+# where chart-shaped pages become readable: crawl4ai's Markdown flattens charts
+# into number-soup ("09-0111-0512-31…"), but a rendered screenshot keeps them.
+ANTHROPIC_ONLY_TOOLS = [
+    {
+        "name": "web_screenshot",
+        "description": (
+            "Render a page in a real headless browser (JavaScript executed) and "
+            "return a SCREENSHOT to look at. Use for chart-dense or heavily "
+            "JS-rendered pages where web_fetch returns flattened number-soup — "
+            "dashboards, IV surfaces, k-line panels. Slower (~10-15s) than "
+            "web_fetch; prefer web_fetch for articles and text."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "url": {"type": "string", "description": "HTTP or HTTPS URL to render."},
+            },
+            "required": ["url"],
+        },
+    },
+]
+
+# Anthropic single-image ceiling is 5MB; base64 inflates 4/3, keep headroom.
+_SCREENSHOT_MAX_B64 = int(4.5 * 1024 * 1024)
+
+
+def execute_web_screenshot(url: str):
+    """Render `url` headlessly and return tool_result content BLOCKS (image+text).
+
+    Returns a list (Anthropic content blocks), not a str — callers on text-only
+    providers must not route here. Failure shapes return plain text so the
+    model knows to fall back to web_fetch.
+    """
+    ok, payload = _crawl4ai_run(url, "screenshot")
+    if not ok:
+        return f"Screenshot failed ({payload}). Try web_fetch for the text instead."
+    b64 = payload.strip()
+    if len(b64) > _SCREENSHOT_MAX_B64:
+        return (f"Screenshot too large ({len(b64)//1024}KB base64 > 4.5MB API "
+                f"limit). Try web_fetch for the text instead.")
+    return [
+        {"type": "image",
+         "source": {"type": "base64", "media_type": "image/png", "data": b64}},
+        {"type": "text",
+         "text": f"[rendered screenshot of {url} via crawl4ai headless browser]"},
+    ]
 
 
 def execute_web_search(query: str, max_results: int = 5) -> str:
@@ -249,6 +395,10 @@ def execute_tool(name: str, input_data: dict) -> str:
             url=input_data["url"],
             max_chars=input_data.get("maxChars", FETCH_MAX_CHARS),
         )
+    elif name == "web_screenshot":
+        # Only reachable from the Anthropic loop — the tool is declared in
+        # ANTHROPIC_ONLY_TOOLS, never in TOOLS, so DeepSeek cannot call it.
+        return execute_web_screenshot(url=input_data["url"])
     elif name == "web_search":
         return execute_web_search(
             query=input_data["query"],
@@ -322,7 +472,10 @@ def _run_tool_loop(
             model=model,
             max_tokens=max_tokens,
             temperature=temperature,
-            tools=TOOLS + list(extra_tools or []),
+            # ANTHROPIC_ONLY_TOOLS (web_screenshot) rides only in this loop:
+            # these models are multimodal; the openai loop's (DeepSeek) is not
+            # and must never see the tool.
+            tools=TOOLS + ANTHROPIC_ONLY_TOOLS + list(extra_tools or []),
             messages=messages,
         )
 
@@ -366,12 +519,20 @@ def _run_tool_loop(
             result_text = tool_executor(tool_name, tool_input) if tool_executor else None
             if result_text is None:
                 result_text = execute_tool(tool_name, tool_input)
+            # A result may be a BLOCK LIST (web_screenshot returns image+text
+            # blocks) rather than a str; log a size either way, and pass block
+            # lists through as content untouched — the API accepts both shapes.
+            if isinstance(result_text, list):
+                logged_len = sum(len(b.get("source", {}).get("data", ""))
+                                 + len(b.get("text", "")) for b in result_text)
+            else:
+                logged_len = len(result_text)
             tool_log.append({
                 "pass": label.strip(),
                 "round": round_num,
                 "tool": tool_name,
                 "input": tool_input,
-                "result_length": len(result_text),
+                "result_length": logged_len,
             })
 
             tool_results.append({
