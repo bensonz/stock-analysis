@@ -1,0 +1,22 @@
+{
+  "date": "2026-08-31",
+  "slot": "afternoon",
+  "verdict": "action_needed",
+  "checks_run": 14,
+  "checks_total": 14,
+  "skipped": [],
+  "findings": [
+    {
+      "id": "db-health-spot-check-verified-nothing",
+      "check": "db_health_spot_check",
+      "kind": "env",
+      "title": "抽查 20 只、实际核对 0 只",
+      "detail": "spot_check: {\"date\": \"2026-08-31\", \"sampled\": 20, \"checked\": 0, \"fetch_failures\": 20, \"mismatches\": []}。0 处不一致来自 0 次比对，不能读作数据无误。",
+      "suspect": "",
+      "fix_cmd": "python3 scripts/pricedb.py status",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    }
+  ]
+}

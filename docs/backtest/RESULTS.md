@@ -3,7 +3,7 @@
 > **Stale as of 2026-08-16.** Every number below was produced with
 > `time_decay_days=20, time_decay_min_gain=5.0` — V1's time stop, which the
 > mechanical arm still carried long after ANALYST.md Rule 5 moved to 10d/<3%.
-> The defaults are now 10/3.0, so this run no longer describes the ruleset the
+> The defaults are now 15/3.0 (raised from 10 on 2026-08-17, see EXIT_ABLATION.md), so this run no longer describes the ruleset the
 > code implements. Re-run `backtest.py baseline` before citing these figures;
 > the time stop was the arm's most-fired exit, so the effect is unlikely to be
 > small. The qualitative finding (mechanical execution badly underperforms the

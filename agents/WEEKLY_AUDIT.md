@@ -26,7 +26,7 @@ done
 echo "=== THIS WEEK'S RUNS ==="
 for d in $(ls runs/ | sort | tail -5); do
   echo "--- $d ---"
-  head -30 runs/$d/output/report.md 2>/dev/null
+  head -30 runs/$d/*/output/report.md 2>/dev/null   # <slot> = noon|afternoon
   echo ""
 done
 
@@ -140,7 +140,7 @@ python3 scripts/research/reentry_stats.py --human
 
 ### E. Rule Compliance
 - Were -5% stops respected? (any position held below -5%)
-- Were 10-day time stops respected?
+- Were 15-day time stops respected?
 - Were any positions opened in bottom 30% sectors?
 
 ## Step 3: Recommendations

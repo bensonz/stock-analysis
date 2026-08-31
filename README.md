@@ -31,4 +31,4 @@ Daily Chinese A-share stock analysis powered by AI.
 
 ## 最新报告
 
-查看 `reports/` 目录获取每日分析报告。
+每日分析在 `runs/<日期>/<slot>/output/report.md`（slot = noon/afternoon），组合总览见 `site/index.html`；`reports/` 存放的是个股深度研究报告。

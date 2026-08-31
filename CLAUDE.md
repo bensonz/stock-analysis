@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-An automated daily A-share (Chinese stock) momentum-analysis pipeline. Pure-Python data collection feeds an LLM that makes buy/hold/sell decisions, which are then applied to a simulated portfolio and committed to git. It runs **twice per trading day** (~11:35 "noon" intraday and ~15:35 "afternoon" post-close).
+An automated daily A-share (Chinese stock) momentum-analysis pipeline. Pure-Python data collection feeds an LLM that makes buy/hold/sell decisions, which are then applied to a simulated portfolio and committed to git. It runs **twice per trading day** (~11:35 "noon" intraday and ~15:05 "afternoon" post-close).
 
 The trading philosophy lives in `agents/ANALYST.md` (momentum-first: buy strength via RPS, follow hot sectors, cut losers fast). Read it before touching screening thresholds or decision logic — the magic numbers in the code (RPS 75-95%, `dist_ma5>6%`, breadth 1.5:1, `f10>=30` panic gate) are all specified there and must stay in sync.
 

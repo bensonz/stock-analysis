@@ -87,7 +87,7 @@ proof of generality — the real test is the CHECKLIST drill of deliberately bre
 something live and watching it surface.)
 **Tests**: every check ships with a deliberately-broken fixture proving it fires (see
 CHECKLIST.md — this is non-negotiable).
-**Status**: Not Started
+**Status**: Shipped 2026-08-22 (detection only, per D12) — see doctor.py + audit/
 
 ---
 
@@ -131,11 +131,12 @@ Split by nature of the work (rationale in DECISIONS.md):
   committed and pushed, so the infra exists. The invoker must never be the source of
   truth for success.
 
-**Status**: Not Started
+**Status**: Partial — launchd job com.bz.stock-doctor shipped 2026-08-22; heartbeat still open
 
 ---
 
-## Stage 5: Daily agent sweep → `docs/audits/daily/YYYY-MM-DD.md`
+## Stage 5: Daily agent sweep → `runs/<date>/<slot>/audit-result.md`
+(target retargeted 2026-08-22 — owner overruled docs/audits/daily/, results live beside the run)
 
 **Goal**: the residual — failures no invariant models. Today's sweep found 12
 incidents in an hour and happened *by accident*. Make it a scheduled ritual with a

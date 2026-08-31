@@ -44,7 +44,7 @@ generate tests updated to verify=False (they test the draft pass).
 ## Stage 4: Live proof + regression
 **Goal**: Full pytest (only the 7 known pre-existing failures); live 002832 run to /tmp
 with audit all-supported + 5 URLs hand-checked; `000703 --no-verify` regression.
-**Status**: In Progress
+**Status**: Complete
 - Full pytest: 278 passed, same 7 pre-existing failures, 0 new.
 - **Live run #1** (/tmp/verified-reports): guarantee HELD — 0 naked numbers,
   67/67 surviving claims verified (45 linked/22 internal), 59 failures rewritten.

@@ -78,3 +78,10 @@
   report banner → phase-1 hard gate (>1 session stale halts the run).
   Weekly audit gained a data-hygiene step (C2).
 - 2026-03-12 was the earliest partial day; anything older is full.
+
+---
+
+> **Supersession note (2026-08-25):** the "akshare primary → sina fallback"
+> doctrine recorded above was superseded when the paid iFinD seat landed —
+> the chain is now **iFinD → AkShare → Sina** (see CLAUDE.md, providers.py).
+> This file remains the record of the August outage as it happened.

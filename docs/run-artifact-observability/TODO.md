@@ -1,2 +1,0 @@
-- No open TODOs in the current scope.
-- Follow-up only if you want the manifest itself to enumerate Phase 1 artifacts; the files are now written consistently to the run directory.

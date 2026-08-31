@@ -64,7 +64,7 @@ slot re-runs after close on true closes.
   missing the target days. On a tight budget a multi-day backfill may not reach
   full coverage in one run and re-does work each run. The one-time repair below
   uses a raised `PRICEDB_UPDATE_BUDGET`. A proper fix would fetch only stocks
-  missing the target day(s) so runs converge under the default budget — TODO.
+  missing the target day(s) so runs converge under the default budget — LANDED (resumable coverage cursor, pricedb/__init__.py + tests/test_pricedb_coverage_cursor.py).
 
 ## RC4 — Staleness gates conflicted with the end-cap (regression from RC1 fix)
 
@@ -89,6 +89,6 @@ pipeline end-to-end afterward — the gate interaction only shows up there. Run
 - Investigation: COMPLETE (RC1/RC2/RC3 confirmed empirically)
 - Fix RC2 (resolver guard): DONE + tests, committed e548fee
 - Fix RC1/RC3 (ingestion): DONE + tests, committed fe528d8 (+ end-cap follow-up)
-- Data repair (07-14/15/16 backfill, RPS recompute): in progress
+- Data repair (07-14/15/16 backfill, RPS recompute): DONE (see pricedb_repair/PROGRESS.md)
 - Follow-up: make backfill resumable (fetch only missing stocks) so it converges
   under the default 300s budget

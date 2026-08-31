@@ -3,7 +3,7 @@
 ## 2026-07-08: Separate noon vs afternoon runs (stop overwriting run folders)
 
 Prompt: `docs/done/split-noon-afternoon-runs.md`. The daily pipeline runs twice
-per trading day (11:35 noon / 15:35 afternoon) but both wrote to
+per trading day (11:35 noon / 15:05 afternoon) but both wrote to
 `runs/<date>/`, so the afternoon run clobbered the noon run's data. Now each run
 gets its own slot subfolder and both survive.
 

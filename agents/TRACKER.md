@@ -36,7 +36,7 @@ For each `tracking/{code}.json`:
 1. **Stop Loss Hit?** → `price <= currentStop` → SELL (reason: "stop_hit")
 2. **Target Hit?** → `price >= targetPrice` → SELL (reason: "target_hit")
 3. **Thesis Invalid?** → Search for negative news → SELL (reason: "thesis_invalid")
-4. **Time Decay?** → Held >20 days with <5% gain → Consider SELL (reason: "time_decay")
+4. **Time Decay?** → Held ≥15 trading days with <3% gain → Consider SELL (reason: "time_decay")
 
 **Check Profit Protection:**
 - Gain >10% → Raise stop to breakeven
@@ -86,7 +86,7 @@ Before opening ANY position, check if stock is at 涨停:
 ```bash
 python scripts/fetch_price.py CODE
 ```
-If `change_pct >= 9.9%` (主板/创业板) or `change_pct >= 19.9%` (科创板/北交所):
+If `change_pct >= 9.9%` (主板) or `change_pct >= 19.9%` (创业板/科创板) or `change_pct >= 29.9%` (北交所):
 - **DO NOT OPEN** — cannot buy at limit up
 - Add to "missed" list for next day follow-up
 - Note: "涨停无法买入，明日观察"
@@ -205,7 +205,7 @@ For new positions:
 ├── Portfolio full (10)? → SKIP
 ├── No high-confidence BUY? → SKIP
 ├── Already tracking this stock? → SKIP
-├── Stock at 涨停 (change >= 9.9%)? → SKIP (add to missed list)
+├── Stock at 涨停 (主板≥9.9% / 创业板科创板≥19.9% / 北交所≥29.9%)? → SKIP (add to missed list)
 └── Otherwise → OPEN
 ```
 

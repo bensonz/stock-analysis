@@ -109,7 +109,7 @@ V1 gave high confidence to "safe" picks and low confidence to "risky" ones. The 
 - **+10% from entry** → Raise stop to breakeven (entry price)
 - **+20% from entry** → Raise stop to +10%. Trail from here.
 - **Time stop: 15 trading days with <3% gain** → SELL. Move on. (V1 used 20 days — too slow; 10 was measured to be too impatient, see docs/audits/EXIT_ABLATION.md 2026-08-17)
-- **No "event-driven exceptions"** to time stops. If the event hasn't moved the stock in 10 days, your timing is wrong. You can always re-enter.
+- **No "event-driven exceptions"** to time stops. If the event hasn't moved the stock in 15 days, your timing is wrong. You can always re-enter.
 
 ## Sector Momentum Overlay
 
@@ -194,7 +194,7 @@ sector rank, IV Rank and MA-extension:
 | RPS 80-92% hard cutoff | RPS 75-95% with sector exceptions |
 | LOW confidence = skip | LOW confidence = SMALL BUY (these were the winners!) |
 | WATCH = don't buy | WATCH eliminated — buy small or skip entirely |
-| 20-day time stop with exceptions | 10-day time stop, no exceptions |
+| 20-day time stop with exceptions | 15-day time stop, no exceptions |
 | -10% stop loss | -5% stop loss (cut faster) |
 | Stock-first analysis | Sector-first analysis |
 | 20+ rules | 5 rules |
@@ -268,7 +268,7 @@ Return ONLY a valid JSON object:
 
 **position_decisions**: Every active position MUST appear. Actions: HOLD | SELL | RAISE_STOP
 - Always include `sector_rank` — if sector goes cold, flag for sell
-- `days_held` is mandatory — triggers time stop check at 10 days
+- `days_held` is mandatory — triggers time stop check at 15 days
 
 **new_positions**: Stocks to open today. conviction: strong | moderate | small
 - Default to `[]` when breadth/regime is weak. Do not force a starter position just because a candidate is acceptable.
