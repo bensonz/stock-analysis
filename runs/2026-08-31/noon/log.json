@@ -4,21 +4,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1788147313.552054,
+      "start": 1788149751.0378802,
       "errors": [],
-      "end": 1788147387.2130282,
-      "duration_sec": 73.7
+      "end": 1788149820.911849,
+      "duration_sec": 69.9
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 6918,
+      "response_size_bytes": 7107,
       "tokens": {
-        "input_tokens": 136210,
-        "output_tokens": 11065
+        "input_tokens": 136551,
+        "output_tokens": 12390
       },
       "rounds": 2,
       "tool_calls_count": 5,
-      "duration_sec": 179.2,
+      "duration_sec": 184.0,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -26,23 +26,23 @@
     },
     {
       "phase": "apply",
-      "start": 1788147566.46258,
+      "start": 1788150004.913924,
       "actions": [
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=26",
-        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=12",
-        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=49",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=145",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=100%, n=55",
+        "Hypothesis: Created h180 (observation): 奥士康第3日+6.6%验证：覆铜板涨价链(建滔年内第7次FR-4+10%)是真实且持续的板块贝塔，板块动量>个股alpha；但<5日新仓不参与换仓、不追高...",
         "Updated LEARNINGS.md (legacy)"
       ],
-      "end": 1788147566.7802181,
+      "end": 1788150005.263267,
       "duration_sec": 0.3
     }
   ],
   "validation_errors": [],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 253.2
+    "totalDurationSec": 254.20000000000002
   }
 }

@@ -332,7 +332,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-03-27",
-      "lastTested": "2026-08-28",
+      "lastTested": "2026-08-31",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -907,6 +907,10 @@
           {
             "date": "2026-08-28",
             "detail": "buy gate双条件(up/down≥1.5且≥2/3指数收红)比entry_regime.allow_new_positions更权威：今日breadth 1.45:1且仅上证收红，即使睿创微纳(0风险+VCP+H1+258.78%)、中远海特(0风险)全部过关也必须new_positions=[]"
+          },
+          {
+            "date": "2026-08-31",
+            "detail": "弱市铁律再验证：0/3指数绿+breadth 0.77:1(<1:1)时，即使策略池内多个RPS 90+候选(睿创微纳/京东方A/卫星化学等)，也应一律new_positions:[]，现金为王"
           }
         ],
         "contradicting": [
@@ -916,7 +920,7 @@
           }
         ]
       },
-      "sampleSize": 144,
+      "sampleSize": 145,
       "hitRate": 0.993,
       "confidence": 0.986,
       "tags": [],
@@ -2625,7 +2629,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-08-19",
+      "lastTested": "2026-08-31",
       "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally.",
       "evidence": {
         "supporting": [
@@ -2844,11 +2848,15 @@
           {
             "date": "2026-08-19",
             "detail": "科技成长被系统性去风险：科创50 -6.07%最弱，元件/电子化学品/其他电子领跌，而焦炭/国有大行/房地产服务逆势上涨。防守轮动特征明显，短期主线从科技切换到资源+高股息。"
+          },
+          {
+            "date": "2026-08-31",
+            "detail": "传媒/影视链(暑期档票房催化)成新热点，资源股(贵金属/工业金属)被美联储鹰派预期(金价失守4500)系统性去风险——轮动从AI硬件切向消费娱乐+防御；持仓若2-3天内滑入bottom30%将触发Rule1冷3日卖出"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 54,
+      "sampleSize": 55,
       "hitRate": 1.0,
       "confidence": 0.982,
       "tags": [
@@ -7270,6 +7278,34 @@
       "tags": [
         "sector",
         "exit-rule"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h180",
+      "text": "奥士康第3日+6.6%验证：覆铜板涨价链(建滔年内第7次FR-4+10%)是真实且持续的板块贝塔，板块动量>个股alpha；但<5日新仓不参与换仓、不追高",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-08-31",
+      "lastTested": "2026-08-31",
+      "mechanism": "龙头连续发涨价函验证供需缺口，板块Beta在涨价周期中持续性强",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-08-31",
+            "detail": "奥士康第3日+6.6%验证：覆铜板涨价链(建滔年内第7次FR-4+10%)是真实且持续的板块贝塔，板块动量>个股alpha；但<5日新仓不参与换仓、不追高"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
+        "position-sizing"
       ],
       "parentRule": null,
       "retiredDate": null,

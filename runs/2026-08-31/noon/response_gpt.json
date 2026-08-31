@@ -3,68 +3,68 @@
     "hot_sectors": [
       {
         "name": "数字媒体",
-        "5d_pct": null,
-        "trend": "event-driven"
+        "change_pct": 5.88,
+        "trend": "accelerating"
       },
       {
         "name": "影视院线",
-        "5d_pct": null,
-        "trend": "event-driven"
+        "change_pct": 4.8,
+        "trend": "accelerating"
       },
       {
         "name": "出版",
-        "5d_pct": null,
-        "trend": "event-driven"
+        "change_pct": 3.35,
+        "trend": "steady"
       },
       {
         "name": "房地产服务",
-        "5d_pct": null,
+        "change_pct": 2.99,
         "trend": "steady"
       },
       {
         "name": "装修装饰Ⅱ",
-        "5d_pct": null,
+        "change_pct": 2.72,
         "trend": "steady"
       }
     ],
     "cold_sectors": [
       {
         "name": "贵金属",
-        "5d_pct": null,
+        "change_pct": -6.01,
         "trend": "deteriorating"
       },
       {
         "name": "饰品",
-        "5d_pct": null,
+        "change_pct": -5.31,
         "trend": "deteriorating"
       },
       {
         "name": "光伏设备",
-        "5d_pct": null,
+        "change_pct": -4.0,
         "trend": "deteriorating"
       },
       {
         "name": "工业金属",
-        "5d_pct": null,
+        "change_pct": -3.64,
         "trend": "deteriorating"
       },
       {
         "name": "乘用车",
-        "5d_pct": null,
+        "change_pct": -2.98,
         "trend": "deteriorating"
       }
     ],
-    "position_alignment": "0/3 positions in hot sectors (top5); 3/3 in neutral sectors, none in bottom5",
-    "regime": "Weak tape: 0/3 major indices green, breadth 0.77:1. Media/AI-content event-driven spike, resources/EV de-risking."
+    "position_alignment": "0/3 positions in hot sectors (top5); 0/3 in cold sectors (bottom5)",
+    "regime": "传媒/影视领涨(暑期档票房催化)，资源股(贵金属/工业金属)遭美联储鹰派预期重挫；三大指数全绿，breadth 0.77:1弱市"
   },
   "position_decisions": [
     {
       "code": "000703",
       "name": "恒逸石化",
       "action": "HOLD",
-      "reason": "浮盈+23.1%，止损已锁+10%(17.16)，现价19.21远高于止损；文莱二期1200万吨/年已全面启动(来源:恒逸公告/新浪财经)，东南亚炼厂景气度提升，逻辑未变；石油石化未入bottom5，让利润奔跑",
+      "reason": "浮盈+23.1%，止损已锁+10%(17.16)，现价19.21远高于止损；文莱二期1200万吨已全面启动、H1净利+2500.73%(来源:恒逸公告/新浪财经)，石油石化未入bottom5，无卖出触发，让利润奔跑",
       "sector_rank": "中性(未入top5/bottom5)",
-      "new_stop": 17.16,
+      "new_stop": null,
       "pnl_pct": 23.14,
       "days_held": 24,
       "exit_price": null
@@ -73,9 +73,9 @@
       "code": "002913",
       "name": "奥士康",
       "action": "HOLD",
-      "reason": "持仓第3日+6.6%(现价62.89)，未触-3%/时间止损；覆铜板龙头建滔年内第7次涨价落地(FR-4+10%, 来源:财闻网8-31)，PCB/覆铜板涨价链强化；元件未入bottom5；新仓<5日不参与换仓",
+      "reason": "持仓第3日+6.6%，未触-3%/时间止损；覆铜板龙头建滔年内第7次涨价落地(FR-4+10%, 来源:中国证券报/财闻网8-28)，PCB/覆铜板涨价链强化；元件未入bottom5；新仓<5日不参与换仓",
       "sector_rank": "中性(未入top5/bottom5)",
-      "new_stop": 56.06,
+      "new_stop": null,
       "pnl_pct": 6.58,
       "days_held": 3,
       "exit_price": null
@@ -84,9 +84,9 @@
       "code": "603259",
       "name": "药明康德",
       "action": "HOLD",
-      "reason": "浮盈+19.7%，止损已锁+10%(139.15)，现价151.44高于止损；今日-3.79%但医疗服务退出bottom5，冷区计数重置，无卖出触发",
+      "reason": "浮盈+19.7%，止损已锁+10%(139.15)，现价151.44高于止损；今日-3.79%但医疗服务退出bottom5，冷区计数重置；中报强劲+上调全年指引(来源:药明康德官网)，无卖出触发",
       "sector_rank": "中性(退出bottom5)",
-      "new_stop": 139.15,
+      "new_stop": null,
       "pnl_pct": 19.72,
       "days_held": 22,
       "exit_price": null
@@ -97,81 +97,74 @@
     {
       "code": "688002",
       "name": "睿创微纳",
-      "reason": "RPS120≈94.7延伸区 + dist_ma5 +10.9%超追高线(Rule 2b硬跳过) + 融资deleveraging；且市场breadth 0.77:1弱市禁止新开仓",
+      "reason": "市场买入门槛未达标(breadth 0.77:1、0/3指数绿)；且dist_ma5+10.9%超追高线",
       "rps120": 94.7
     },
     {
       "code": "600378",
       "name": "昊华科技",
-      "reason": "dist_ma5 +10.7% / dist_ma10 +9.9%远超追高线，Rule 2b硬跳过",
+      "reason": "市场买入门槛未达标；dist_ma5+10.7%超追高线",
       "rps120": 91.46
     },
     {
       "code": "301003",
       "name": "江苏博云",
-      "reason": "dist_ma20 +13.4%超12%极端延伸线，Rule 2b硬跳过",
+      "reason": "市场买入门槛未达标；dist_ma20+13.4%极端乖离",
       "rps120": 90.34
+    },
+    {
+      "code": "688403",
+      "name": "汇成股份",
+      "reason": "市场买入门槛未达标；PE 383+H1净利-94.78%基本面恶化",
+      "rps120": 93.34
     },
     {
       "code": "000725",
       "name": "京东方A",
-      "reason": "RPS120 93.66在92-95%延伸区，需例外条件(3个风险因子、面板板块不在top5)均不满足；弱市不追",
+      "reason": "市场买入门槛未达标(弱市不建新仓)，技术面合格",
       "rps120": 93.66
     },
     {
       "code": "002648",
       "name": "卫星化学",
-      "reason": "基本面最干净(0风险、H1净利+126.9%)，但化学原料板块不在top5且今日弱市禁入，记为强市候选待复看",
+      "reason": "市场买入门槛未达标；dist_ma20+7.7%偏高",
       "rps120": 85.68
-    },
-    {
-      "code": "603162",
-      "name": "海通发展",
-      "reason": "2026-09-29解禁67.86%大额解禁压顶(输入数据events)，避开",
-      "rps120": 89.79
-    },
-    {
-      "code": "688403",
-      "name": "汇成股份",
-      "reason": "H1归母净利-94.78%(输入数据快讯)，业绩爆雷，不碰",
-      "rps120": 93.34
     }
   ],
   "new_learnings": [
     {
-      "text": "弱市下即使个股/板块结构强(奥士康+6.6%、覆铜板第7次涨价落地)，breadth 0.77:1 + 0/3指数翻绿仍触发最低买入门槛否决，正确动作是持币不新开仓",
+      "text": "弱市铁律再验证：0/3指数绿+breadth 0.77:1(<1:1)时，即使策略池内多个RPS 90+候选(睿创微纳/京东方A/卫星化学等)，也应一律new_positions:[]，现金为王",
       "type": "rule",
       "tags": [
         "entry-filter",
-        "position-sizing"
-      ],
-      "evidence_type": "supporting",
-      "related_hypothesis": "h013, h077",
-      "mechanism": "弱势普跌盘里，个股alpha被市场beta压制，V1教训即弱市强行开仓导致-3.1%跑输自选股"
-    },
-    {
-      "text": "今日热点(数字媒体/影视院线/出版)由暑期档票房+AI影视事件驱动，属脉冲式题材而非趋势动量；弱市不追事件题材",
-      "type": "observation",
-      "tags": [
-        "sector",
         "timing"
       ],
       "evidence_type": "supporting",
-      "related_hypothesis": "h076",
-      "mechanism": "事件驱动行情涨的是预期，靴子落地即兑现，持续性差(来源:36氪/财闻网8-31)"
+      "related_hypothesis": "h013",
+      "mechanism": "breadth<1:1时个股选强胜率骤降，强票也难抗市场Beta向下"
     },
     {
-      "text": "覆铜板涨价链仍在强化(建滔年内第7次涨价落地, FR-4+10%)，奥士康作为板块贝塔标的持有逻辑未破，应继续持有而非普跌日被动减仓",
+      "text": "传媒/影视链(暑期档票房催化)成新热点，资源股(贵金属/工业金属)被美联储鹰派预期(金价失守4500)系统性去风险——轮动从AI硬件切向消费娱乐+防御；持仓若2-3天内滑入bottom30%将触发Rule1冷3日卖出",
       "type": "signal",
       "tags": [
-        "sector",
-        "exit-rule"
+        "sector"
       ],
       "evidence_type": "supporting",
-      "mechanism": "上游主材(玻璃布/铜箔)紧缺推动涨价，PCB板块今日逆势走强(来源:财闻网8-31)"
+      "related_hypothesis": "h028",
+      "mechanism": "加息预期抬升实际利率→贵金属/高贝塔资源遭抛售；暑期档票房驱动传媒估值修复"
+    },
+    {
+      "text": "奥士康第3日+6.6%验证：覆铜板涨价链(建滔年内第7次FR-4+10%)是真实且持续的板块贝塔，板块动量>个股alpha；但<5日新仓不参与换仓、不追高",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "龙头连续发涨价函验证供需缺口，板块Beta在涨价周期中持续性强"
     }
   ],
-  "market_summary": "弱市普跌：三大指数全绿(上证-0.2%/深成指-1.0%/创业板指-1.29%)，涨跌家数0.77:1，涨停60/跌停11(非恐慌盘)。IV整体中性(avg rank≈0.449)，创业板/深市IV偏高。今日热点为传媒/影视/AI内容事件驱动(数字媒体+5.88%、影视院线+4.8%、出版+3.35%)，贵金属/工业金属/光伏被去风险。0/3持仓在热点板块，3/3持仓在板块中性区且均无卖出触发，全部持有。买入门槛未满足(0.77:1<1.5:1且0/3指数翻红)，new_positions为空，持币等待。",
+  "market_summary": "2026-08-31 A股弱市：上证-0.2%/深成-1.0%/创业板-1.29%全绿，breadth 0.77:1(2353涨/3053跌)，60涨停/11跌停，未达买入门槛(需≥1.5:1且≥2指数绿)。结构轮动：传媒链(数字媒体+5.88%/影视院线+4.8%/出版+3.35%)受暑期档票房催化领涨；贵金属-6.01%/工业金属-3.64%受美联储鹰派预期重挫(金价失守4500，来源:新浪财经)。IV整体中性偏高(创业板ETF IVR 54%/科创50 45%)，新开仓默认关闭，持有现金89.5%",
   "market_sentiment": "bearish",
-  "market_call": "观望"
+  "market_call": "谨慎防守"
 }
