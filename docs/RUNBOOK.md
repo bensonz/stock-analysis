@@ -87,6 +87,32 @@ Known cosmetic lie (open bug): the noon audit may say a skipped check is
 because "run predates the writer" — actually the snapshot just declines while
 the session is open.
 
+## Deep research report on one stock
+
+Long-form 看多/看空/中性 article for a single name — CheeseForTune
+financials + local RPS/MA/klines + margin flow, written by the LLM with web
+search, then every number claim adversarially verified by a second model.
+
+```bash
+python3 scripts/research/deep_report.py 002293                # ~10–15 min
+python3 scripts/research/deep_report.py 002293 --human        # progress to stderr
+python3 scripts/research/deep_report.py 002293 --focus "中报后还能追吗"
+python3 scripts/research/deep_report.py 002293 --no-verify    # faster, numbers UNVERIFIED
+```
+
+Output lands in `reports/<code>-<name>/` as `<code>-<date>-deep.md` plus a
+`-deep-verify.json` audit trail; falsifiable predictions from the article are
+appended to the prediction log automatically. Writer defaults to Fable 5,
+verifier to DeepSeek (`--provider` / `--verify-provider` to override; env
+`DEEP_REPORT_PROVIDER` / `DEEP_REPORT_VERIFY_PROVIDER` set defaults).
+
+Read it knowing two things. The 〖内部数据〗 markers mean *verified against our
+own DB* — the verifier confirms we reported what we stored, not that what we
+stored is right (a unit-corrupted MA10 sailed through verification on
+2026-08-25). And it costs real tokens: two models, web search, up to two
+verify rounds — a tool for one name you're seriously weighing, not a batch
+screener.
+
 ## When something is broken
 
 ```bash

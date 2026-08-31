@@ -10,9 +10,9 @@ Reuses llm_client._run_tool_loop directly (NOT call_llm, which is hard-wired to 
 decision-JSON format and would corrupt a markdown article).
 
 Usage:
-    python3 scripts/deep_report.py 000703
-    python3 scripts/deep_report.py 000703 --provider anthropic --human
-    python3 scripts/deep_report.py 000703.SZ --output-dir /tmp/reports
+    python3 scripts/research/deep_report.py 000703
+    python3 scripts/research/deep_report.py 000703 --provider anthropic --human
+    python3 scripts/research/deep_report.py 000703.SZ --output-dir /tmp/reports
 """
 
 import json
@@ -632,7 +632,7 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
             verify_audit = {"error": f"{type(e).__name__}: {str(e)[:300]}",
                             "rounds": [], "final": None}
             text = ("> ⚠️ **数据核验中断**（核验服务异常）——本文数字未经核验管线确认，"
-                    "引用前请自行核对。重跑核验: `python3 scripts/deep_report.py "
+                    "引用前请自行核对。重跑核验: `python3 scripts/research/deep_report.py "
                     + str(data.get("code6", code)) + "`\n\n" + text)
         tin += totals["in"]
         tout += totals["out"]
