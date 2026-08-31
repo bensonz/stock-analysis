@@ -1,0 +1,170 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "数字媒体",
+        "5d_pct": 5.88,
+        "trend": "steady"
+      },
+      {
+        "name": "影视院线",
+        "5d_pct": 4.8,
+        "trend": "steady"
+      },
+      {
+        "name": "出版",
+        "5d_pct": 3.35,
+        "trend": "steady"
+      },
+      {
+        "name": "房地产服务",
+        "5d_pct": 2.99,
+        "trend": "steady"
+      },
+      {
+        "name": "装修装饰Ⅱ",
+        "5d_pct": 2.72,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "贵金属",
+        "5d_pct": -6.01,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "饰品",
+        "5d_pct": -5.31,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "光伏设备",
+        "5d_pct": -4.0,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "工业金属",
+        "5d_pct": -3.64,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "乘用车",
+        "5d_pct": -2.98,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/3 持仓在今日top5热门板块；3/3 持仓板块均未跌入bottom5冷区（石油石化/元件/医疗服务均为中游）",
+    "regime": "传媒/地产链题材轮动，科技硬件与资源股退潮"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "浮盈+23.1%，止损已锁+10%(17.16)，现价19.21高于止损；文莱二期1200万吨/年逻辑未变(来源:中证网)；石油石化未入bottom5，无卖出触发，让利润奔跑",
+      "sector_rank": "中游（未入top/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 23.1,
+      "days_held": 23,
+      "exit_price": null
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "持仓第3日+6.6%(现价62.89，当日+6.48%)，未触-3%/时间止损；元件板块未入bottom5；PCB/覆铜板涨价链仍在(建滔年内第4次提价累计40%，来源:21经济网)；新仓<5日不参与换仓",
+      "sector_rank": "中游（未入top/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 6.6,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+19.7%，止损已锁+10%(139.15)，现价151.44高于止损；H1收入+38.9%/全年指引上调至585-605亿(来源:药明康德公告)；医疗服务今日退出bottom5，冷区计数重置(非连续3日)，无卖出触发",
+      "sector_rank": "中游（今日退出bottom5）",
+      "new_stop": null,
+      "pnl_pct": 19.7,
+      "days_held": 22,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688002",
+      "name": "睿创微纳",
+      "reason": "dist_ma5 +10.9%超追高线(>6%)；融资deleveraging；且今日breadth 0.77:1弱市不新开仓",
+      "rps120": 94.7
+    },
+    {
+      "code": "688146",
+      "name": "中船特气",
+      "reason": "RPS120=100，超95%上限，相对强度过热，等回调至90%区",
+      "rps120": 100.0
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "工业金属今日-3.64%入bottom5，冷区硬性禁买(h019)，个股再好也不进",
+      "rps120": 87.52
+    },
+    {
+      "code": "600378",
+      "name": "昊华科技",
+      "reason": "dist_ma5 +10.7%超追高线(>6%)，短期过度延伸；弱市不新开仓",
+      "rps120": 91.46
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "reason": "航运港口未入top5；margin chg5 -21.09%大幅去杠杆；弱市不新开仓",
+      "rps120": 86.44
+    },
+    {
+      "code": "000725",
+      "name": "京东方A",
+      "reason": "面板/光学光电子未入今日top5；margin deleveraging；弱市不新开仓",
+      "rps120": 93.66
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱市(0.77:1 + 0/3指数翻红)下，entry_regime的0.5 sizing_multiplier不应被当作强行小仓买入的许可——V2明文breadth<1:1即不新开仓，正确动作是空仓观察",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "弱市里好票也会折价，0.5 sizing是对可买信号的减仓处理，不是对禁止信号的开闸"
+    },
+    {
+      "text": "'板块冷3日卖出'是连续计数而非累计计数：药明康德医疗服务昨日冷第1日、今日退出bottom5，计数器清零，不应误杀",
+      "type": "rule",
+      "tags": [
+        "exit-rule",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "冷区3日规则针对持续弱势，单日扰动不应累积成卖出信号"
+    },
+    {
+      "text": "弱市中让赢家奔跑依然成立：恒逸+23%、奥士康第3日+6.6%均无卖出触发，不需要落袋为安式主动干预",
+      "type": "observation",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "+10%机械锁利已把赢家转成低风险持仓，剩余交给趋势"
+    }
+  ],
+  "market_summary": "三大指数全绿(沪-0.2%/深-1.0%/创-1.29%)，breadth 0.77:1(2353涨/3053跌)，涨停60/跌停11，弱势整理非恐慌盘；IV整体中性(avg rank 44.9%，创业板/深市代理偏高)。影视院线/数字媒体暑期档领涨，贵金属-6.01%/光伏-4.0%领跌。最低买入门槛未满足(需≥1.5:1且2/3指数翻红且breadth>1:1)，今日不新开仓",
+  "market_sentiment": "bearish",
+  "market_call": "防守"
+}
