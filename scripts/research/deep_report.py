@@ -32,7 +32,15 @@ SPEC_FILE = PROJECT_ROOT / "agents" / "DEEP_REPORT.md"
 VERIFY_SPEC_FILE = PROJECT_ROOT / "agents" / "DEEP_VERIFY.md"
 
 MAX_TOKENS = 16384
-TEMPERATURE = 0.5
+# 1.0 per owner decision 2026-09-01, raised from 0.5 as an EXPERIMENT in rating
+# stability. Context: identical same-week runs produced 3/5 vs 4/5 on 002293
+# with no fundamental change. The owner deliberately wants NO memory between
+# reports (consistency must come from the system, not from anchoring on the
+# previous answer, so the same rubric transfers across models); the hypothesis
+# under test is whether the verdict survives high sampling temperature. If the
+# spread widens, the next lever is a scoring equation (decomposed sub-scores,
+# mechanical combination), not memory.
+TEMPERATURE = 1.0
 MAX_VERIFY_ROUNDS = 2
 
 # Deep-report defaults: Fable 5 writes, DeepSeek judges/cleans. These are
