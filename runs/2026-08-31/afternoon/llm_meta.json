@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 214209,
+  "output_tokens": 19759,
+  "rounds": 3,
+  "duration_sec": 309.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 8月31日 收盘 数字媒体 影视院线 出版 板块大涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3281
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 2026年中报 全年业绩指引 上调 CRO",
+        "max_results": 5
+      },
+      "result_length": 3198
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "恒逸石化 文莱二期 2026 业绩 净利润",
+        "max_results": 5
+      },
+      "result_length": 3246
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "覆铜板 PCB 涨价 2026年8月 奥士康 元件",
+        "max_results": 5
+      },
+      "result_length": 3125
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "军工电子 板块 2026年8月31日 上涨 催化",
+        "max_results": 5
+      },
+      "result_length": 3180
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.stcn.com/article/detail/3637030.html",
+        "maxChars": 5000
+      },
+      "result_length": 2448
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://jnz.cs.com.cn/app/html/jnz/131889.html",
+        "maxChars": 5000
+      },
+      "result_length": 1103
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.ifnews.com/news.html?aid=859748&cid=49",
+        "maxChars": 5000
+      },
+      "result_length": 934
+    }
+  ],
+  "fallback_used": false
+}

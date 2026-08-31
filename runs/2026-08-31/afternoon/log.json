@@ -1,0 +1,49 @@
+{
+  "date": "2026-08-31",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1788159918.747664,
+      "errors": [],
+      "end": 1788159991.668473,
+      "duration_sec": 72.9
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8831,
+      "tokens": {
+        "input_tokens": 214209,
+        "output_tokens": 19759
+      },
+      "rounds": 3,
+      "tool_calls_count": 8,
+      "duration_sec": 309.1,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1788160300.802552,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=146",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=71",
+        "Hypothesis: Updated h140 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Created h181 (observation): 覆铜板建滔年内第7次涨价(FR-4+10%)落地(来源：中国证券报8/29)，PCB/覆铜板涨价链是当前少有的业绩验证型主线，支撑奥士康持仓；反衬传媒/军工电子...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1788160301.248532,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 382.40000000000003
+  }
+}

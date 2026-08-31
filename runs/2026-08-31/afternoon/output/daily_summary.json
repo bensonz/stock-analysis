@@ -1,0 +1,62 @@
+{
+  "date": "2026-08-31",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 19.52,
+      "pnl_pct": 25.1,
+      "note": "浮盈+25.1%，止损已锁+10%(17.16)，现价19.52远高于止损；文莱二期1200万吨全面启动、H1净利+2500.73%（来源：恒逸公告/新浪财经）；石油石化未入bottom5，无卖出触发，让利润奔跑"
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 64.05,
+      "pnl_pct": 8.5,
+      "note": "持仓第3日+8.5%，未触-3%/时间止损；覆铜板龙头建滔年内第7次涨价落地（FR-4+10%，来源：中国证券报8/29），PCB/覆铜板涨价链强化；元件未入bottom5；新仓<5日不参与换仓；逼近+10%锁利线(64.91)需跟踪"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 154.78,
+      "pnl_pct": 22.4,
+      "note": "浮盈+22.4%，止损已锁+10%(139.15)，现价154.78高于止损；医疗服务今日退出bottom5、冷区计数重置；中报强劲并上调全年指引至585-605亿（来源：药明康德公告/新京报），无卖出触发"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 969425.0,
+    "dayPnl": 1258.0,
+    "dayReturnPct": 0.13,
+    "totalReturnPct": -3.06,
+    "unrealizedPnl": 16772.0,
+    "realizedPnl": -47347.0,
+    "cashPct": 89.35
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 1.4342,
+    "up": 3181,
+    "down": 2218,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 89,
+    "limit_downs": 13,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 1.43:1, 3/3 major indices green, 89 limit-ups / 13 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "沪指+0.86%收3986.3，三大指数全红，但涨跌比1.43:1(3181涨/2218跌)未达1.5:1买入门槛，89涨停/13跌停；分布偏斜r0_2(1762家仅涨0-2%)，属指数强个股弱的窄普涨。IV rank均值0.38中性(深100ETF 0.53偏高)。领涨：数字媒体+7.07%、影视院线+6.93%、出版+5.38%、军工电子+3.36%(AI应用链+十五五规划题材)；领跌：饰品-4.75%、乘用车-3.0%、光伏-2.77%、贵金属-2.69%。持仓3只全部浮盈、无卖出触发；因breadth门槛未过且热区无池内标的，今日不开新仓，保持约89%现金"
+  }
+}

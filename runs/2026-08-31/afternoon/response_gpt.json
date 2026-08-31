@@ -1,0 +1,203 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "数字媒体",
+        "5d_pct": null,
+        "trend": "单日脉冲(AI应用链)",
+        "today_pct": 7.07
+      },
+      {
+        "name": "影视院线",
+        "5d_pct": null,
+        "trend": "单日脉冲(政策/题材)",
+        "today_pct": 6.93
+      },
+      {
+        "name": "出版",
+        "5d_pct": null,
+        "trend": "单日脉冲",
+        "today_pct": 5.38
+      },
+      {
+        "name": "电视广播Ⅱ",
+        "5d_pct": null,
+        "trend": "单日脉冲",
+        "today_pct": 4.52
+      },
+      {
+        "name": "军工电子Ⅱ",
+        "5d_pct": null,
+        "trend": "政策催化(十五五规划)",
+        "today_pct": 3.36
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "饰品",
+        "5d_pct": null,
+        "trend": "deteriorating",
+        "today_pct": -4.75
+      },
+      {
+        "name": "乘用车",
+        "5d_pct": null,
+        "trend": "deteriorating",
+        "today_pct": -3.0
+      },
+      {
+        "name": "光伏设备",
+        "5d_pct": null,
+        "trend": "deteriorating",
+        "today_pct": -2.77
+      },
+      {
+        "name": "贵金属",
+        "5d_pct": null,
+        "trend": "deteriorating",
+        "today_pct": -2.69
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": null,
+        "trend": "deteriorating",
+        "today_pct": -2.63
+      }
+    ],
+    "position_alignment": "0/3 positions in today's top5, 0/3 in bottom5, 3/3 in neutral sectors",
+    "regime": "指数全红但涨跌比1.43:1<1.5买入门槛，r0_2偏斜的弱势普涨；资金从资源切向AI内容/军工电子"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "浮盈+25.1%，止损已锁+10%(17.16)，现价19.52远高于止损；文莱二期1200万吨全面启动、H1净利+2500.73%（来源：恒逸公告/新浪财经）；石油石化未入bottom5，无卖出触发，让利润奔跑",
+      "sector_rank": "中位（未入top5/bottom5）",
+      "new_stop": 17.16,
+      "pnl_pct": 25.1,
+      "days_held": 24,
+      "exit_price": null
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "持仓第3日+8.5%，未触-3%/时间止损；覆铜板龙头建滔年内第7次涨价落地（FR-4+10%，来源：中国证券报8/29），PCB/覆铜板涨价链强化；元件未入bottom5；新仓<5日不参与换仓；逼近+10%锁利线(64.91)需跟踪",
+      "sector_rank": "中位（未入top5/bottom5）",
+      "new_stop": 56.06,
+      "pnl_pct": 8.5,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+22.4%，止损已锁+10%(139.15)，现价154.78高于止损；医疗服务今日退出bottom5、冷区计数重置；中报强劲并上调全年指引至585-605亿（来源：药明康德公告/新京报），无卖出触发",
+      "sector_rank": "中位（退出bottom5）",
+      "new_stop": 139.15,
+      "pnl_pct": 22.4,
+      "days_held": 22,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600378",
+      "name": "昊华科技",
+      "reason": "RPS120=91.96处甜区，但dist_ma5 +9.4%>6%、dist_ma10 +12.0%>8%，Rule 2b追高，硬跳过（另breadth 1.43:1<1.5门槛）",
+      "rps120": 91.96
+    },
+    {
+      "code": "688222",
+      "name": "成都先导",
+      "reason": "股东钧天投资9/3起拟减持654万股(占总股本1.63%)，事件风险≤2交易日；现价32.24低于MA20 -8.5%，弱势结构，跳过",
+      "rps120": 91.9
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "reason": "重入候选但举证责任未满足：8/21以+11.45%离场(医疗服务入bottom5+破MA5/MA10)，现价46.47低于离场价49.43且仍在MA10(-5.0%)/MA20(-6.0%)下方，无新催化，不重入",
+      "rps120": 94.89
+    },
+    {
+      "code": "688403",
+      "name": "汇成股份",
+      "reason": "RPS120=93.87延伸区，H1归母净利-94.78%(扣非亏损)，且dist_ma5 +7.0%>6%追高，业绩+形态双杀，跳过",
+      "rps120": 93.87
+    },
+    {
+      "code": "301003",
+      "name": "江苏博云",
+      "reason": "估值处上市以来98.76%分位极高位，dist_ma20 +11.3%逼近追高线，小市值(59亿)无概念，跳过",
+      "rps120": 91.11
+    },
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "2026/09/29解禁9.33亿股占总股本67.86%，巨大解禁悬顶，跳过",
+      "rps120": 90.55
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "贵金属今日-2.69%入bottom5，有色/工业金属转冷，Rule 1冷区不买（h019）",
+      "rps120": 88.14
+    },
+    {
+      "code": "688019",
+      "name": "安集科技",
+      "reason": "8/19刚以-3.0%离场(入场时机错误)，现价239.0更低+margin deleveraging，无重入理由，跳过",
+      "rps120": 91.28
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "涨跌比1.43:1虽接近1.5门槛，但r0_2桶(1762家仅涨0-2%)为最大桶、f0_2次之(1509家)，约59%个股几乎未动，属指数强个股弱的窄普涨——即使entry_regime标记balanced，也应执行1.5:1硬门槛不开新仓",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "market-regime"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "普涨宽度不足意味着赚钱效应集中在少数领涨板块，追入池内错配板块的个股胜率低"
+    },
+    {
+      "text": "今日热区(数字媒体/影视院线/出版/军工电子)与策略池候选(半导体/医药CXO/化工/航运/有色)完全错配，池内无可买标的——板块错配本身就是不开仓的独立理由，无需个股级分析",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "Rule 1板块优先：热区无标的时，宁缺毋滥，不跨板块强买"
+    },
+    {
+      "text": "昭衍新药重入被否：8/21以+11.45%离场后现价更低且仍在MA10/MA20下方，重入举证责任(价位/形态/催化变了什么)不满足——重入候选默认跳过，除非出现明确的新催化或形态修复",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "重入实测n=9均值-3.71%胜率11%，离场后若无新变化，旧问题大概率依旧"
+    },
+    {
+      "text": "覆铜板建滔年内第7次涨价(FR-4+10%)落地(来源：中国证券报8/29)，PCB/覆铜板涨价链是当前少有的业绩验证型主线，支撑奥士康持仓；反衬传媒/军工电子为政策题材脉冲",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "catalyst"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "涨价落地(业绩验证)比政策叙事(预期)持续性更强，持仓应优先留在业绩兑现链"
+    }
+  ],
+  "market_summary": "沪指+0.86%收3986.3，三大指数全红，但涨跌比1.43:1(3181涨/2218跌)未达1.5:1买入门槛，89涨停/13跌停；分布偏斜r0_2(1762家仅涨0-2%)，属指数强个股弱的窄普涨。IV rank均值0.38中性(深100ETF 0.53偏高)。领涨：数字媒体+7.07%、影视院线+6.93%、出版+5.38%、军工电子+3.36%(AI应用链+十五五规划题材)；领跌：饰品-4.75%、乘用车-3.0%、光伏-2.77%、贵金属-2.69%。持仓3只全部浮盈、无卖出触发；因breadth门槛未过且热区无池内标的，今日不开新仓，保持约89%现金",
+  "market_sentiment": "neutral",
+  "market_call": "中性"
+}
