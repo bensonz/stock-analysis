@@ -38,9 +38,36 @@ def test_negative_net_gex_is_amplification_regime():
     assert s["spot_vs_flip"] == "剖面零轴上方(call-gamma主导区)"
 
 
-def test_read_state_missing_fields_returns_none():
-    assert fetch_gex.read_state({**RAW, "flip_point": None}) is None
+def test_read_state_without_net_gex_returns_none():
+    """Regime cannot be inferred from anything else, so a row without it says
+    nothing and must not pad a denominator."""
     assert fetch_gex.read_state({**RAW, "total_net_gex": None}) is None
+
+
+def test_read_state_keeps_a_row_that_has_no_flip_point():
+    """REVERSES this file's earlier assertion, which required flip_point and so
+    pinned a real bug in place.
+
+    On 2026-08-31 the backend returned all five underlyings; three came back
+    with flip_point=None and net GEX of -74.8M, -2.8M and -18.8M. Requiring the
+    flip point discarded exactly those three, leaving the two positive ones, and
+    the report published 全面净正gamma (0/2 negative) when the truth across all
+    five was 偏净负gamma (3/5) — the opposite reading, sent to the model.
+
+    The correlation is what makes it dangerous: flip_point is a zero-crossing of
+    the gamma profile, and the backend cannot locate one when the profile never
+    crosses zero within the strike range — much likelier under strongly negative
+    net gamma. So the absent field tracks the signal, and dropping on it
+    silently deleted the amplifying half of the board.
+
+    flip_point is descriptive: it feeds dist_to_flip_pct and spot_vs_flip and
+    nothing else. Both go null; the regime survives.
+    """
+    s = fetch_gex.read_state({**RAW, "flip_point": None, "total_net_gex": -7.48e7})
+    assert s is not None
+    assert s["regime"] == "净负gamma(放大倾向)"
+    assert s["flip_point"] is None and s["dist_to_flip_pct"] is None
+    assert s["spot_vs_flip"] is None
 
 
 def test_overall_all_net_positive_below_flip_keeps_positive_reading():
