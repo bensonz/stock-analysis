@@ -13,6 +13,12 @@ LLM is only used to judge whether a fetched page supports the numbers citing it.
 See agents/DEEP_VERIFY.md for the judge spec and docs/deep_report_verify/ for
 the implementation plan.
 """
+import sys
+from pathlib import Path
+
+# Same path-execution bootstrap as deep_report.py (see note there).
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 import json
 import os
 import re

@@ -23,6 +23,11 @@ from datetime import datetime
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+# Executed by path from scripts/research/, so sys.path[0] is THIS directory —
+# the flat namespace (llm_client, base_rates, ...) lives one level up in
+# scripts/. Before the 2026-08-30 move this file sat in scripts/ and got that
+# for free, which is why no bootstrap existed to move with it.
+sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 SPEC_FILE = PROJECT_ROOT / "agents" / "DEEP_REPORT.md"
 VERIFY_SPEC_FILE = PROJECT_ROOT / "agents" / "DEEP_VERIFY.md"
 
