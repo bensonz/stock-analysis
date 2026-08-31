@@ -21,7 +21,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
 import pricedb
-import pricedb_factors
+import pricedb.factors as pricedb_factors
 
 D1, D2, D3 = "2026-07-29", "2026-07-30", "2026-07-31"
 

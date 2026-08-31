@@ -29,8 +29,8 @@ import sqlite3
 from datetime import datetime, timedelta
 
 import price_adjust
-from pricedb_bars import _safe_float, _sina_symbol, _yyyymmdd_to_iso
-from pricedb_storage import _partial_price_dates
+from pricedb.bars import _safe_float, _sina_symbol, _yyyymmdd_to_iso
+from pricedb.storage import _partial_price_dates
 
 def db_health(conn: sqlite3.Connection, spot_check: bool = False) -> dict:
     """Data-quality health block for the daily pipeline.

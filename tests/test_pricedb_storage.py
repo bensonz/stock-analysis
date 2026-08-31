@@ -23,7 +23,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
-import pricedb_storage as storage
+import pricedb.storage as storage
 
 BAR = ("600000", "2026-08-28", 10.0, 10.8, 9.9, 10.5, 123456, 7890123.0)
 

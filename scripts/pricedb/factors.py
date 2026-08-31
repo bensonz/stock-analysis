@@ -42,13 +42,13 @@ import price_adjust
 import bisect
 
 import ifind_client
-from pricedb_bars import _eastmoney_secid, _frame_close_series, _return_ratio_factors
+from pricedb.bars import _eastmoney_secid, _frame_close_series, _return_ratio_factors
 
 ADJ_BACKFILL_SLEEP_SEC = float(os.getenv("ADJ_BACKFILL_SLEEP_SEC", "0.4"))
 ADJ_EVENT_THRESHOLD = 0.005
 IFIND_ADJ_EVENT_EPSILON = 1e-9
-from pricedb_bars import _safe_float, _yyyymmdd_to_iso
-from pricedb_storage import invalidate_rps_cache
+from pricedb.bars import _safe_float, _yyyymmdd_to_iso
+from pricedb.storage import invalidate_rps_cache
 
 def _expand_events_to_code_dates(conn: sqlite3.Connection, code: str,
                                  events: list) -> list[tuple]:

@@ -20,7 +20,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
-import pricedb_bars as bars
+import pricedb.bars as bars
 
 
 # --- date / code normalisation ---------------------------------------------
