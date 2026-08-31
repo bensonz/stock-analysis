@@ -2,60 +2,80 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 136210,
-  "output_tokens": 11065,
-  "rounds": 2,
-  "duration_sec": 179.2,
+  "input_tokens": 209632,
+  "output_tokens": 10590,
+  "rounds": 3,
+  "duration_sec": 145.9,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "A股 2026年8月31日 板块 涨跌 数字媒体 影视院线 领涨",
+        "query": "A股 2026-08-31 数字媒体 影视院线 出版 板块 大涨 原因",
         "max_results": 5
       },
-      "result_length": 3099
+      "result_length": 3321
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "恒逸石化 文莱 二期 炼化 最新消息 2026",
+        "query": "恒逸石化 文莱炼化 二期 最新 2026",
         "max_results": 5
       },
-      "result_length": 3295
+      "result_length": 3181
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "药明康德 2026半年报 业绩 全年指引 上调",
+        "query": "覆铜板 PCB 涨价 建滔 奥士康 2026年8月",
         "max_results": 5
       },
-      "result_length": 3484
+      "result_length": 3250
     },
     {
       "pass": "P1",
       "round": 1,
       "tool": "web_search",
       "input": {
-        "query": "奥士康 PCB 覆铜板 涨价 2026年8月",
+        "query": "A股 2026年8月31日 大盘 下跌 原因",
         "max_results": 5
       },
-      "result_length": 3093
+      "result_length": 3450
     },
     {
       "pass": "P1",
-      "round": 1,
-      "tool": "web_search",
+      "round": 2,
+      "tool": "web_fetch",
       "input": {
-        "query": "2026年8月31日 A股 半导体 贵金属 光伏 板块 下跌 原因",
-        "max_results": 5
+        "url": "https://www.caiwennews.com/article/1573367.shtml",
+        "maxChars": 4000
       },
-      "result_length": 3239
+      "result_length": 2869
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=药明康德+2026半年报+全年指引+585亿",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+2026年8月31日+贵金属+光伏+下跌+原因",
+        "maxChars": 4000
+      },
+      "result_length": 4000
     }
   ],
   "fallback_used": false

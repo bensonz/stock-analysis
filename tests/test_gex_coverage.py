@@ -158,3 +158,40 @@ def test_the_human_report_survives_a_row_with_no_profile(monkeypatch, capsys):
     out = capsys.readouterr().out
     assert "净负gamma" in out
     assert "None" not in out, "a null leaked into the human report"
+
+
+# --- 5. EVERY consumer of the nullable fields, not just the one I fixed -----
+
+GEX_NO_PROFILE = {
+    "date": "2026-08-31", "source": "test",
+    "etf_gex_data": [{
+        "name": "500ETF", "underlying": "510500", "spot": 7.828,
+        "flip_point": None, "dist_to_flip_pct": None, "spot_vs_flip": None,
+        "regime": "净负gamma(放大倾向)", "total_net_gex": -7.48e7,
+        "call_wall": 8.0, "put_wall": 7.75, "expiry_month": "2609",
+    }],
+    "overall": {"signal": "偏净负gamma", "net_negative": "3/5",
+                "below_flip": "2/2", "implication": "x"},
+}
+
+
+def test_the_report_renders_a_profile_less_row(tmp_path):
+    """This is the one that actually broke. Fixing --human but not the report
+    meant the 12:12 re-run died at Gate 3 with the identical NoneType error —
+    I had fixed one consumer of the nulls and assumed it was the only one."""
+    import report_generator
+    p = report_generator.generate_report_md(
+        "2026-08-31", {"gex": GEX_NO_PROFILE, "strategy_pool": {"stocks": []}},
+        {}, output_dir=tmp_path)
+    body = p.read_text(encoding="utf-8")
+    assert "500ETF" in body and "净负gamma" in body
+    assert "None" not in body
+
+
+def test_the_prompt_renders_a_profile_less_row():
+    """Latent rather than fired — llm_client's GEX block is on the hybrid
+    Pass-2 path, so the live `openai` provider never reached it. A crash that
+    only triggers on a provider switch is worse than one that fires today."""
+    import llm_client
+    text = llm_client.build_summary({"gex": GEX_NO_PROFILE})
+    assert "500ETF" in text and "None" not in text

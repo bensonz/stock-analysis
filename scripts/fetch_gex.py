@@ -96,6 +96,29 @@ def read_state(raw: dict) -> dict | None:
     }
 
 
+NO_PROFILE = "无"          # backend gave no zero-crossing for this underlying
+
+
+def fmt_flip(state: dict) -> str:
+    """The profile zero-axis, or 无 when the backend could not locate one."""
+    v = state.get("flip_point")
+    return NO_PROFILE if v is None else f"{v}"
+
+
+def fmt_dist(state: dict) -> str:
+    """Distance to the zero axis as a signed percent, or 无.
+
+    Exists so the three places that render GEX — report_generator, llm_client
+    and this module's --human output — share one definition. When read_state
+    stopped discarding profile-less rows on 2026-08-31, every one of those sites
+    was formatting the field with `:+.2f`, and the first to run took down the
+    pipeline at Gate 3 with NoneType.__format__. Three hand-rolled null checks
+    would just have invited a fourth site to forget.
+    """
+    v = state.get("dist_to_flip_pct")
+    return NO_PROFILE if v is None else f"{v:+.2f}%"
+
+
 def overall_reading(states: list) -> dict:
     """Aggregate the two dimensions separately: net-GEX sign (regime) and
     spot-vs-profile-zero position (where hedging pressure concentrates)."""

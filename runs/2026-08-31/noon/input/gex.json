@@ -29,12 +29,60 @@
       "expiry_month": "2609",
       "captured_at": "2026-08-31T03:30:05.578889+00:00",
       "name": "300ETF"
+    },
+    {
+      "underlying": "510500",
+      "spot": 7.828,
+      "flip_point": null,
+      "dist_to_flip_pct": null,
+      "regime": "净负gamma(放大倾向)",
+      "spot_vs_flip": null,
+      "total_net_gex": -74761216.1502819,
+      "call_wall": 8.0,
+      "put_wall": 7.75,
+      "expiry_month": "2609",
+      "captured_at": "2026-08-31T03:30:12.031374+00:00",
+      "name": "500ETF"
+    },
+    {
+      "underlying": "588000",
+      "spot": 1.726,
+      "flip_point": null,
+      "dist_to_flip_pct": null,
+      "regime": "净负gamma(放大倾向)",
+      "spot_vs_flip": null,
+      "total_net_gex": -2795018.652979493,
+      "call_wall": 1.8,
+      "put_wall": 1.7,
+      "expiry_month": "2609",
+      "captured_at": "2026-08-31T03:30:17.405530+00:00",
+      "name": "科创50ETF"
+    },
+    {
+      "underlying": "159915",
+      "spot": 3.398,
+      "flip_point": null,
+      "dist_to_flip_pct": null,
+      "regime": "净负gamma(放大倾向)",
+      "spot_vs_flip": null,
+      "total_net_gex": -18804398.16215509,
+      "call_wall": 3.5,
+      "put_wall": 3.4,
+      "expiry_month": "2609",
+      "captured_at": "2026-08-31T03:30:22.924298+00:00",
+      "name": "创业板ETF"
     }
   ],
+  "coverage": {
+    "expected": 5,
+    "fetched": 5,
+    "missing": [],
+    "partial": false
+  },
   "overall": {
-    "signal": "全面净正gamma",
-    "net_negative": "0/2",
+    "signal": "偏净负gamma",
+    "net_negative": "3/5",
     "below_flip": "2/2",
-    "implication": "全部标的做市净多gamma——对冲盘压制波动，倾向收敛/钉住。注意：现价虽均处行权价剖面put-gamma主导区（零轴下方），但整体净gamma为正——剖面位置是结构参考，不改变当前压制判读。"
+    "implication": "多数标的净负gamma，波动放大环境为主。"
   }
 }

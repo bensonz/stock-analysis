@@ -954,12 +954,14 @@ def build_summary(phase1_data: dict) -> str:
                      f"现价处剖面零轴下方: {o.get('below_flip', '?')})")
         if o.get("implication"):
             lines.append(f"- 含义: {o['implication']}")
+        # Same null-safe rendering as the report — see fetch_gex.fmt_dist.
+        from fetch_gex import fmt_dist, fmt_flip
         for s in gex["etf_gex_data"]:
             lines.append(
                 f"- {s.get('name', '?')}: 净GEX{s.get('total_net_gex'):.3g} "
                 f"→ {s.get('regime')}; 现价{s.get('spot')} vs 剖面零轴"
-                f"{s.get('flip_point')} ({s.get('dist_to_flip_pct'):+.2f}%, "
-                f"{s.get('spot_vs_flip')}); put墙{s.get('put_wall')}/"
+                f"{fmt_flip(s)} ({fmt_dist(s)}, "
+                f"{s.get('spot_vs_flip') or '剖面不可得'}); put墙{s.get('put_wall')}/"
                 f"call墙{s.get('call_wall')}")
         lines.append("- 用法: 判读以净GEX符号为准(正=压制/负=放大); 剖面零轴位置是"
                      "结构参考; 墙位是对冲盘的磁吸/阻力参考。此为顾问性状态, 无机械规则。")

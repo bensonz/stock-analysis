@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-08-31T11:35:13.573064+08:00",
+  "snapshot_time": "2026-08-31T12:09:02.171743+08:00",
   "snapshot_type": "pre_run",
   "date": "2026-08-31",
   "portfolio_config": {
@@ -11,20 +11,20 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-08-28T15:10:31.813891+08:00",
+    "lastUpdated": "2026-08-31T11:39:26.545496+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 968167.0,
+      "totalEquity": 967463.0,
       "cash": 866139.0,
-      "investedValue": 102028.0,
-      "unrealizedPnl": 15514.0,
+      "investedValue": 101324.0,
+      "unrealizedPnl": 14810.0,
       "realizedPnl": -47347.0,
-      "totalPnl": -31833.0,
-      "totalReturnPct": -3.18,
+      "totalPnl": -32537.0,
+      "totalReturnPct": -3.25,
       "positionsUsed": 3,
       "positionsMax": 10,
-      "cashPct": 89.46,
-      "dayPnl": -278.0,
+      "cashPct": 89.53,
+      "dayPnl": -704.0,
       "minCashPct": 0,
       "minCashValue": 0.0,
       "deployableCash": 866139.0
@@ -36,8 +36,8 @@
         "entryDate": "2026-07-29",
         "entrySlot": "afternoon",
         "entryPrice": 15.6,
-        "currentPrice": 19.49,
-        "pnl_pct": 24.94,
+        "currentPrice": 19.21,
+        "pnl_pct": 23.14,
         "stopLoss": 14.82,
         "currentStop": 17.16,
         "targetPrice": 21.0,
@@ -46,12 +46,12 @@
         "shares": 1600,
         "allocation_pct": 3.0,
         "allocatedCapital": 24960.0,
-        "currentValue": 31184.0,
-        "unrealizedPnl": 6224.0,
-        "volume": 939117,
+        "currentValue": 30736.0,
+        "unrealizedPnl": 5776.0,
+        "volume": 783582,
         "mavol30": 9785.43,
         "volumeBelowMavol30": false,
-        "weight_pct": 3.22
+        "weight_pct": 3.18
       },
       {
         "code": "002913",
@@ -59,8 +59,8 @@
         "entryDate": "2026-08-27",
         "entrySlot": "afternoon",
         "entryPrice": 59.01,
-        "currentPrice": 59.06,
-        "pnl_pct": 0.08,
+        "currentPrice": 62.89,
+        "pnl_pct": 6.58,
         "stopLoss": 56.06,
         "currentStop": 56.06,
         "targetPrice": 64.9,
@@ -69,12 +69,12 @@
         "shares": 400,
         "allocation_pct": 3.0,
         "allocatedCapital": 23604.0,
-        "currentValue": 23624.0,
-        "unrealizedPnl": 20.0,
-        "volume": 49154,
+        "currentValue": 25156.0,
+        "unrealizedPnl": 1552.0,
+        "volume": 54704,
         "mavol30": 713.63,
         "volumeBelowMavol30": false,
-        "weight_pct": 2.44
+        "weight_pct": 2.6
       },
       {
         "code": "603259",
@@ -82,8 +82,8 @@
         "entryDate": "2026-07-31",
         "entrySlot": "noon",
         "entryPrice": 126.5,
-        "currentPrice": 157.4,
-        "pnl_pct": 24.43,
+        "currentPrice": 151.44,
+        "pnl_pct": 19.72,
         "stopLoss": 120.18,
         "currentStop": 139.15,
         "targetPrice": 150.0,
@@ -92,12 +92,12 @@
         "shares": 300,
         "allocation_pct": 5.0,
         "allocatedCapital": 37950.0,
-        "currentValue": 47220.0,
-        "unrealizedPnl": 9270.0,
-        "volume": 291937,
+        "currentValue": 45432.0,
+        "unrealizedPnl": 7482.0,
+        "volume": 281508,
         "mavol30": 6440.27,
         "volumeBelowMavol30": false,
-        "weight_pct": 4.88
+        "weight_pct": 4.7
       }
     ]
   },
@@ -400,6 +400,14 @@
           "change_pct": 24.94,
           "action": "HOLD",
           "note": "浮盈+24.9%，止损已锁+10%(17.16)；文莱二期新增1200万吨+H1净利+2500.73%（网易/证券之星8/21）；石油石化未入bottom5，无卖出触发，让利润奔跑"
+        },
+        {
+          "date": "2026-08-31",
+          "slot": "noon",
+          "price": 19.21,
+          "change_pct": 23.14,
+          "action": "HOLD",
+          "note": "浮盈+23.1%，止损已锁+10%(17.16)，现价19.21高于止损；文莱二期1200万吨/年逻辑未变(来源:中证网)；石油石化未入bottom5，无卖出触发，让利润奔跑"
         }
       ],
       "exitDate": null,
@@ -409,7 +417,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-07-29T15:52:15.569338+08:00",
-      "updatedAt": "2026-08-28T15:10:31.766205+08:00",
+      "updatedAt": "2026-08-31T11:39:26.464047+08:00",
       "trackerVersion": "2.1",
       "entrySlot": "afternoon"
     },
@@ -459,6 +467,14 @@
           "change_pct": 0.08,
           "action": "HOLD",
           "note": "持仓第2日+0.1%，未触止损/时间止损；元件板块未入bottom5；新仓(<5日)不参与换仓，持有观察"
+        },
+        {
+          "date": "2026-08-31",
+          "slot": "noon",
+          "price": 62.89,
+          "change_pct": 6.58,
+          "action": "HOLD",
+          "note": "持仓第3日+6.6%(现价62.89，当日+6.48%)，未触-3%/时间止损；元件板块未入bottom5；PCB/覆铜板涨价链仍在(建滔年内第4次提价累计40%，来源:21经济网)；新仓<5日不参与换仓"
         }
       ],
       "exitDate": null,
@@ -468,7 +484,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-08-27T15:12:46.690531+08:00",
-      "updatedAt": "2026-08-28T15:10:31.791148+08:00",
+      "updatedAt": "2026-08-31T11:39:26.515138+08:00",
       "trackerVersion": "2.1"
     },
     "603259": {
@@ -769,6 +785,14 @@
           "change_pct": 24.43,
           "action": "HOLD",
           "note": "浮盈+24.4%，止损已锁+10%(139.15)；医疗服务今日入bottom5(-2.13%)为冷区第1日，未达'冷3日'卖出线，明日续冷则计数2、后日触发无条件SELL"
+        },
+        {
+          "date": "2026-08-31",
+          "slot": "noon",
+          "price": 151.44,
+          "change_pct": 19.72,
+          "action": "HOLD",
+          "note": "浮盈+19.7%，止损已锁+10%(139.15)，现价151.44高于止损；H1收入+38.9%/全年指引上调至585-605亿(来源:药明康德公告)；医疗服务今日退出bottom5，冷区计数重置(非连续3日)，无卖出触发"
         }
       ],
       "exitDate": null,
@@ -778,7 +802,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-07-31T11:45:38.795030+08:00",
-      "updatedAt": "2026-08-28T15:10:31.798837+08:00",
+      "updatedAt": "2026-08-31T11:39:26.525054+08:00",
       "trackerVersion": "2.1",
       "entrySlot": "noon"
     }

@@ -266,11 +266,15 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
                      f"{o.get('below_flip', '?')}）— {o.get('implication', '')}\n")
         lines.append("| 标的 | 净GEX | 状态 | 现价 | 剖面零轴 | 距离 | put墙/call墙 |")
         lines.append("|------|-------|------|------|----------|------|--------------|")
+        # A row can carry a regime without a profile (flip_point=None) since
+        # 2026-08-31 — formatting those directly crashed the run at Gate 3.
+        # fetch_gex owns the null rendering so all three consumers agree.
+        from fetch_gex import fmt_dist, fmt_flip
         for s in gex["etf_gex_data"]:
             lines.append(f"| {s.get('name')} | {s.get('total_net_gex'):.3g} "
                          f"| {s.get('regime')} | {s.get('spot')} "
-                         f"| {s.get('flip_point')} "
-                         f"| {s.get('dist_to_flip_pct'):+.2f}% "
+                         f"| {fmt_flip(s)} "
+                         f"| {fmt_dist(s)} "
                          f"| {s.get('put_wall')}/{s.get('call_wall')} |")
         lines.append(f"\n〔来源: {gex.get('source', '未标注')}〕\n")
 

@@ -4250,13 +4250,17 @@
           {
             "date": "2026-08-31",
             "detail": "'板块冷3日卖出'是连续计数而非累计计数：药明康德医疗服务昨日冷第1日、今日退出bottom5，计数器清零，不应误杀"
+          },
+          {
+            "date": "2026-08-31",
+            "detail": "今日热点(数字媒体/影视院线/出版)由暑期档票房+AI影视事件驱动，属脉冲式题材而非趋势动量；弱市不追事件题材"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 12,
+      "sampleSize": 13,
       "hitRate": 1.0,
-      "confidence": 0.929,
+      "confidence": 0.933,
       "tags": [
         "sector",
         "exit-rule"
@@ -4378,13 +4382,17 @@
           {
             "date": "2026-08-31",
             "detail": "弱市(0.77:1 + 0/3指数翻红)下，entry_regime的0.5 sizing_multiplier不应被当作强行小仓买入的许可——V2明文breadth<1:1即不新开仓，正确动作是空仓观察"
+          },
+          {
+            "date": "2026-08-31",
+            "detail": "弱市下即使个股/板块结构强(奥士康+6.6%、覆铜板第7次涨价落地)，breadth 0.77:1 + 0/3指数翻绿仍触发最低买入门槛否决，正确动作是持币不新开仓"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 26,
+      "sampleSize": 27,
       "hitRate": 1.0,
-      "confidence": 0.964,
+      "confidence": 0.966,
       "tags": [
         "entry-filter",
         "position-sizing"
@@ -7234,6 +7242,34 @@
       "confidence": 0.6,
       "tags": [
         "entry-filter"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h179",
+      "text": "覆铜板涨价链仍在强化(建滔年内第7次涨价落地, FR-4+10%)，奥士康作为板块贝塔标的持有逻辑未破，应继续持有而非普跌日被动减仓",
+      "type": "signal",
+      "status": "observation",
+      "created": "2026-08-31",
+      "lastTested": "2026-08-31",
+      "mechanism": "上游主材(玻璃布/铜箔)紧缺推动涨价，PCB板块今日逆势走强(来源:财闻网8-31)",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-08-31",
+            "detail": "覆铜板涨价链仍在强化(建滔年内第7次涨价落地, FR-4+10%)，奥士康作为板块贝塔标的持有逻辑未破，应继续持有而非普跌日被动减仓"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
+        "exit-rule"
       ],
       "parentRule": null,
       "retiredDate": null,
