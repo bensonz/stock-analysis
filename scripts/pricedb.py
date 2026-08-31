@@ -1266,6 +1266,25 @@ def fetch_stock_list(provider_name: str, provider: object) -> list[dict]:
     raise ValueError(f"Unknown provider: {provider_name}")
 
 
+def _bulk_fetchers() -> dict:
+    """{provider_name: bulk-fetch callable}, built fresh so tests can patch the
+    individual functions on this module and still be seen.
+
+    Only the first three are in `iter_providers` and reachable from the daily
+    chain. The rest are RETIRED for price bars (see the doctrine note there) and
+    stay callable for manual forensics only — do not put them back in the chain.
+    """
+    return {
+        PROVIDER_IFIND: _bulk_fetch_ifind,
+        PROVIDER_AKSHARE: _bulk_fetch_akshare,
+        PROVIDER_SINA: _bulk_fetch_sina,
+        PROVIDER_TUSHARE: _bulk_fetch_tushare,
+        PROVIDER_EASTMONEY_CLIST: _bulk_fetch_eastmoney_clist,
+        PROVIDER_EASTMONEY: _bulk_fetch_eastmoney,
+        PROVIDER_BAOSTOCK: _bulk_fetch_baostock,
+    }
+
+
 def bulk_fetch(
     conn: sqlite3.Connection,
     stocks: list[dict],
@@ -1273,24 +1292,25 @@ def bulk_fetch(
     end: str,
     provider_name: str,
     provider: object,
+    *,
+    dispatch: dict | None = None,
 ):
-    if provider_name == PROVIDER_IFIND:
-        return _bulk_fetch_ifind(conn, stocks, beg, end, provider)
-    if provider_name == PROVIDER_AKSHARE:
-        return _bulk_fetch_akshare(conn, stocks, beg, end, provider)
-    if provider_name == PROVIDER_SINA:
-        return _bulk_fetch_sina(conn, stocks, beg, end, provider)
-    # Retired providers (kept callable for manual forensics only — they are
-    # NOT in iter_providers and must not return to the daily chain):
-    if provider_name == PROVIDER_TUSHARE:
-        return _bulk_fetch_tushare(conn, stocks, beg, end, provider)
-    if provider_name == PROVIDER_EASTMONEY_CLIST:
-        return _bulk_fetch_eastmoney_clist(conn, stocks, beg, end, provider)
-    if provider_name == PROVIDER_EASTMONEY:
-        return _bulk_fetch_eastmoney(conn, stocks, beg, end, provider)
-    if provider_name == PROVIDER_BAOSTOCK:
-        return _bulk_fetch_baostock(conn, stocks, beg, end, provider)
-    raise ValueError(f"Unknown provider: {provider_name}")
+    """Route a fetch to its provider.
+
+    `dispatch` is an injection seam for tests: pass {name: fake} to exercise the
+    provider chain — fallback order, budget aborts, error propagation — without
+    monkeypatching private fetch functions by name. Patching internals is what
+    the pricedb split set out to stop needing, and it is fragile in a specific
+    way: on 2026-08-30 a function moved modules and a `monkeypatch.setattr` went
+    silently inert, so the REAL fetcher ran inside a test.
+
+    Production never passes it, so the live path is the table below, unchanged.
+    """
+    table = dispatch if dispatch is not None else _bulk_fetchers()
+    fn = table.get(provider_name)
+    if fn is None:
+        raise ValueError(f"Unknown provider: {provider_name}")
+    return fn(conn, stocks, beg, end, provider)
 
 
 # ---------------------------------------------------------------------------
