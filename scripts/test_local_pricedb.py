@@ -558,7 +558,11 @@ def test_fetch_trade_dates_free_weekday_fallback(monkeypatch):
     # Force akshare to be unavailable so we exercise the weekday fallback
     def boom():
         raise RuntimeError("no akshare here")
-    monkeypatch.setattr(pricedb, "_run_with_timeout",
+    # Patch the OWNER: fetch_trade_dates_free lives in pricedb.providers since
+    # 2026-08-31 and resolves _run_with_timeout in ITS module — the old patch on
+    # pricedb was inert and this test passed for an unrelated reason (audit).
+    import pricedb.providers
+    monkeypatch.setattr(pricedb.providers, "_run_with_timeout",
                         lambda label, fn, timeout=None: boom() if "akshare" in label else fn())
     # Also force the akshare import to fail
     import builtins

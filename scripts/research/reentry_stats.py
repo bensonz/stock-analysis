@@ -7,7 +7,7 @@ mean -3.71% vs the book's -0.61% per trade — suggestive at ~1.5 SE, NOT yet
 grounds for a cooldown rule (新宙邦 re-entered 2 days after a -5.3% stop and
 made +11.8%). Re-measure as n grows; the weekly audit calls this.
 
-    python3 scripts/reentry_stats.py [--human]
+    python3 scripts/research/reentry_stats.py [--human]
 
 Sources: tracking/closed/*.json (completed round trips) + active tracking
 files (open re-entries shown as 持仓中, excluded from the averages).

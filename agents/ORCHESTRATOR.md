@@ -266,7 +266,7 @@ stock-analysis/
 ├── logs/                # 🆕 Agent运行日志
 │   └── YYYY-MM-DD.json  # 每日运行记录
 ├── scripts/
-│   └── fetch_price.py   # 价格获取工具
+│   └── pricedb/         # 价格库包（fetch_price.py 已删）
 ├── LEARNINGS.md         # 累积经验
 └── README.md
 ```

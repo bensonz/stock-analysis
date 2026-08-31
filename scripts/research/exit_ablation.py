@@ -26,8 +26,8 @@ over one broadly falling regime; this can reject a rule for this regime, it
 cannot validate one in general.
 
 Usage:
-    python3 scripts/exit_ablation.py --human
-    python3 scripts/exit_ablation.py --horizon 20 --human
+    python3 scripts/research/exit_ablation.py --human
+    python3 scripts/research/exit_ablation.py --horizon 20 --human
 """
 import argparse
 import glob

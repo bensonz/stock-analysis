@@ -58,7 +58,7 @@ def test_sync_refuses_chain_reset_on_gap(monkeypatch):
 
 def test_heal_rederives_event_code_and_ffills_the_rest(monkeypatch):
     conn = _seed({"000001": 2.0, "000002": 1.5})
-    monkeypatch.setattr(pricedb, "ADJ_BACKFILL_SLEEP_SEC", 0.0)
+    monkeypatch.setattr(pricedb_factors, "ADJ_BACKFILL_SLEEP_SEC", 0.0)
     monkeypatch.setattr(pricedb, "_fetch_ex_div_codes_datacenter",
                         lambda d: {"000001"} if d == D2 else set())
     # sina absolute scale: 4.0 before the gap, 4.4 from the D2 ex-div on.
@@ -81,7 +81,7 @@ def test_heal_rederives_event_code_and_ffills_the_rest(monkeypatch):
 
 def test_heal_calendar_unreachable_degrades_to_ffill(monkeypatch):
     conn = _seed({"000001": 2.0})
-    monkeypatch.setattr(pricedb, "ADJ_BACKFILL_SLEEP_SEC", 0.0)
+    monkeypatch.setattr(pricedb_factors, "ADJ_BACKFILL_SLEEP_SEC", 0.0)
     monkeypatch.setattr(pricedb, "_fetch_ex_div_codes_datacenter", lambda d: None)
 
     earliest = pricedb.heal_adj_factor_gap(conn, D2, D3)
@@ -101,7 +101,7 @@ def test_heal_skips_codes_already_event_derived(monkeypatch):
     conn.execute("INSERT INTO adj_factors VALUES ('000001', ?, 2.2)", (D2,))
     conn.execute("INSERT INTO adj_factors VALUES ('000001', ?, 2.2)", (D3,))
     conn.commit()
-    monkeypatch.setattr(pricedb, "ADJ_BACKFILL_SLEEP_SEC", 0.0)
+    monkeypatch.setattr(pricedb_factors, "ADJ_BACKFILL_SLEEP_SEC", 0.0)
     monkeypatch.setattr(pricedb, "_fetch_ex_div_codes_datacenter",
                         lambda d: {"000001"} if d == D2 else set())
 

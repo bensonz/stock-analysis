@@ -12,23 +12,5 @@ for _d in (_SCRIPTS, _SCRIPTS / "research", _SCRIPTS / "oneoff"):
     if str(_d) not in sys.path:
         sys.path.insert(0, str(_d))
 
-import pytest
-
-
-def pytest_addoption(parser):
-    parser.addoption(
-        "--run-integration", action="store_true", default=False,
-        help="Run integration tests that hit real APIs"
-    )
-
-
-def pytest_configure(config):
-    config.addinivalue_line("markers", "integration: marks tests that hit real APIs")
-
-
-def pytest_collection_modifyitems(config, items):
-    if not config.getoption("--run-integration"):
-        skip_integration = pytest.mark.skip(reason="need --run-integration option to run")
-        for item in items:
-            if "integration" in item.keywords:
-                item.add_marker(skip_integration)
+# Integration-test gating lives in the ROOT conftest.py (pytest only honours
+# pytest_addoption there). This file now owns sys.path setup only.

@@ -14,7 +14,7 @@ something. The point is not to have checks; it is to not be lied to.
 - [ ] Reads raw artifacts, not the pipeline's own summary of itself
 
 ## Per stage
-- [ ] Full suite green (7 known pre-existing failures only)
+- [ ] Full suite green (ZERO failures — the 7 chronic reds were fixed/removed 2026-09-01; any red is new)
 - [ ] Run against **full history**, not just today — every incident so far was found late
 - [ ] Spurious-finding count is zero on known-good history; if not, the check is noise
       and must be fixed or dropped before it ships

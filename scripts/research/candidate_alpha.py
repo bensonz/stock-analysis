@@ -33,8 +33,8 @@ are all out of scope — and when the candidate universe underperforms, staying 
 cash is itself a source of return. `exit_ablation.py` covers the exit side.
 
 Usage:
-    python3 scripts/candidate_alpha.py --human
-    python3 scripts/candidate_alpha.py --horizon 20 --json
+    python3 scripts/research/candidate_alpha.py --human
+    python3 scripts/research/candidate_alpha.py --horizon 20 --json
 """
 
 import glob

@@ -24,7 +24,7 @@ Also fetch market snapshot:
 ```bash
 cd /Users/bz/Work/Personal/stock-analysis
 source .venv/bin/activate
-python scripts/fetch_and_save.py market
+python3 scripts/pricedb.py update   # (fetch_and_save.py deleted 2026-09-01 — unused since 2026-03)
 ```
 
 ### Step 3: Scan 芝士财富 Strategy Pool
@@ -112,10 +112,10 @@ Save the enriched scan to `data/crawl/YYYY-MM-DD.json`:
 ### Step 5: Fetch Real Prices & History
 ```bash
 # Fetch latest prices for all scanned stocks
-python scripts/fetch_and_save.py prices CODE1 CODE2 CODE3...
+python3 scripts/pricedb.py update   # (fetch_and_save.py deleted 2026-09-01 — unused since 2026-03)
 
 # Save 60-day history for tracked/portfolio stocks
-python scripts/fetch_and_save.py history CODE --days 60
+python3 scripts/pricedb.py update   # (fetch_and_save.py deleted 2026-09-01 — unused since 2026-03)
 ```
 
 ### Step 6: Deep Research on Top Candidates

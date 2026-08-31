@@ -14,6 +14,21 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import hypothesis_manager as hm
 
+def _recent(day_offset: int) -> str:
+    """Evidence date `day_offset` days into a window ending yesterday.
+
+    These tests hardcoded 2026-03-XX dates; RETIRE_STALE_DAYS(30) compares
+    lastTested to date.today(), so every hypothesis was auto-retired before the
+    promotion chain could run once the calendar moved on — the suite rotted
+    silently around 2026-04-06 and stayed red for five months. Relative dates
+    keep the fixture inside the freshness window forever. Offsets preserve the
+    original ordering (old 2026-03-01 == offset 1).
+    """
+    from datetime import date, timedelta
+    base = date.today() - timedelta(days=15)
+    return (base + timedelta(days=day_offset - 1)).isoformat()
+
+
 
 def _fresh_data():
     """Return empty hypothesis data."""
@@ -175,8 +190,8 @@ class TestAddEvidence:
     def test_different_date_not_duplicate(self):
         data = _fresh_data()
         h = _make_hypothesis(data, "Test")
-        hm.add_evidence(data, h["id"], "supporting", "Same detail", ev_date="2026-03-01")
-        hm.add_evidence(data, h["id"], "supporting", "Same detail", ev_date="2026-03-02")
+        hm.add_evidence(data, h["id"], "supporting", "Same detail", ev_date=_recent(1))
+        hm.add_evidence(data, h["id"], "supporting", "Same detail", ev_date=_recent(2))
         assert h["sampleSize"] == 2  # Different dates = different evidence
         print("✅ test_different_date_not_duplicate")
 
@@ -215,9 +230,9 @@ class TestAutoLifecycle:
         h = _make_hypothesis(data, "Seems to work", status="hypothesis")
         # Need 5+ evidence with hitRate >= 0.65
         for i in range(4):
-            hm.add_evidence(data, h["id"], "supporting", f"Win {i}", ev_date=f"2026-03-{i+1:02d}")
+            hm.add_evidence(data, h["id"], "supporting", f"Win {i}", ev_date=_recent(i+1))
         assert h["status"] == "hypothesis"  # Only 4, not enough
-        hm.add_evidence(data, h["id"], "supporting", "Win 4", ev_date="2026-03-05")
+        hm.add_evidence(data, h["id"], "supporting", "Win 4", ev_date=_recent(5))
         assert h["status"] == "validated"  # 5 supporting, hitRate=1.0
         print("✅ test_promote_hypothesis_to_validated")
 
@@ -226,9 +241,9 @@ class TestAutoLifecycle:
         h = _make_hypothesis(data, "Shaky pattern", status="hypothesis")
         # 3 supporting, 3 contradicting = 50% hitRate < 65%
         for i in range(3):
-            hm.add_evidence(data, h["id"], "supporting", f"Win {i}", ev_date=f"2026-03-{i+1:02d}")
+            hm.add_evidence(data, h["id"], "supporting", f"Win {i}", ev_date=_recent(i+1))
         for i in range(3):
-            hm.add_evidence(data, h["id"], "contradicting", f"Loss {i}", ev_date=f"2026-03-{i+4:02d}")
+            hm.add_evidence(data, h["id"], "contradicting", f"Loss {i}", ev_date=_recent(i+4))
         assert h["status"] == "hypothesis"  # 6 samples but 50% < 65%
         print("✅ test_no_promote_with_low_hitrate")
 
@@ -237,10 +252,10 @@ class TestAutoLifecycle:
         h = _make_hypothesis(data, "Rock solid", status="validated")
         # Need 10+ evidence with hitRate >= 0.75
         for i in range(8):
-            hm.add_evidence(data, h["id"], "supporting", f"Win {i}", ev_date=f"2026-03-{i+1:02d}")
+            hm.add_evidence(data, h["id"], "supporting", f"Win {i}", ev_date=_recent(i+1))
         assert h["status"] == "validated"  # 8, not enough
-        hm.add_evidence(data, h["id"], "supporting", "Win 8", ev_date="2026-03-09")
-        hm.add_evidence(data, h["id"], "supporting", "Win 9", ev_date="2026-03-10")
+        hm.add_evidence(data, h["id"], "supporting", "Win 8", ev_date=_recent(9))
+        hm.add_evidence(data, h["id"], "supporting", "Win 9", ev_date=_recent(10))
         assert h["status"] == "rule"  # 10 supporting, hitRate=1.0
         print("✅ test_promote_validated_to_rule")
 
@@ -253,7 +268,7 @@ class TestAutoLifecycle:
         assert h["status"] == "rule"
         # Add contradicting to drop hitRate below 75%
         for i in range(4):
-            hm.add_evidence(data, h["id"], "contradicting", f"Loss {i}", ev_date=f"2026-03-{i+1:02d}")
+            hm.add_evidence(data, h["id"], "contradicting", f"Loss {i}", ev_date=_recent(i+1))
         # 8/12 = 66.7% < 75% → demote
         assert h["status"] == "validated"
         print("✅ test_demote_rule_to_validated")
@@ -264,7 +279,7 @@ class TestAutoLifecycle:
         for i in range(3):
             hm.add_evidence(data, h["id"], "supporting", f"Win {i}", ev_date=f"2026-02-{i+1:02d}")
         for i in range(4):
-            hm.add_evidence(data, h["id"], "contradicting", f"Loss {i}", ev_date=f"2026-03-{i+1:02d}")
+            hm.add_evidence(data, h["id"], "contradicting", f"Loss {i}", ev_date=_recent(i+1))
         # 3/7 = 42.9% < 65% → demote
         assert h["status"] == "hypothesis"
         print("✅ test_demote_validated_to_hypothesis")
@@ -272,9 +287,9 @@ class TestAutoLifecycle:
     def test_auto_retire_low_hitrate(self):
         data = _fresh_data()
         h = _make_hypothesis(data, "Bad idea", status="hypothesis")
-        hm.add_evidence(data, h["id"], "supporting", "Win once", ev_date="2026-03-01")
+        hm.add_evidence(data, h["id"], "supporting", "Win once", ev_date=_recent(1))
         for i in range(4):
-            hm.add_evidence(data, h["id"], "contradicting", f"Loss {i}", ev_date=f"2026-03-{i+2:02d}")
+            hm.add_evidence(data, h["id"], "contradicting", f"Loss {i}", ev_date=_recent(i+2))
         # 1/5 = 20% < 40% threshold → retired
         assert h["status"] == "retired"
         assert h["retiredReason"] is not None
@@ -494,7 +509,7 @@ class TestFullLifecycle:
             "text": "Sector gravity always wins — cold sector stock fell",
             "type": "heuristic",
             "tags": ["sector", "exit-rule"],
-        }], run_date="2026-03-01")
+        }], run_date=_recent(1))
         h = data["hypotheses"][0]
         assert h["status"] == "observation"
 
@@ -503,7 +518,7 @@ class TestFullLifecycle:
             "text": "Sector gravity confirmed — another cold sector stock fell despite good fundamentals",
             "related_hypothesis": h["id"],
             "evidence_type": "supporting",
-        }], run_date="2026-03-02")
+        }], run_date=_recent(2))
         assert h["status"] == "hypothesis"
         assert h["sampleSize"] == 2
 
@@ -513,7 +528,7 @@ class TestFullLifecycle:
                 "text": f"Sector gravity case day {i}: wrong-sector stock dragged down",
                 "related_hypothesis": h["id"],
                 "evidence_type": "supporting",
-            }], run_date=f"2026-03-{i:02d}")
+            }], run_date=_recent(i))
         assert h["status"] == "validated"
         assert h["sampleSize"] == 6
 
@@ -523,7 +538,7 @@ class TestFullLifecycle:
                 "text": f"Yet another sector gravity case day {i}",
                 "related_hypothesis": h["id"],
                 "evidence_type": "supporting",
-            }], run_date=f"2026-03-{i:02d}")
+            }], run_date=_recent(i))
         assert h["status"] == "rule"
         assert h["sampleSize"] == 12
         assert h["hitRate"] == 1.0
@@ -534,7 +549,7 @@ class TestFullLifecycle:
                 "text": f"Exception: stock in cold sector rallied despite sector gravity (day {i})",
                 "related_hypothesis": h["id"],
                 "evidence_type": "contradicting",
-            }], run_date=f"2026-03-{i:02d}")
+            }], run_date=_recent(i))
 
         # 12/16 = 75% → still rule (at boundary)
         assert h["hitRate"] == 0.75
@@ -545,7 +560,7 @@ class TestFullLifecycle:
             "text": "Another cold-sector exception",
             "related_hypothesis": h["id"],
             "evidence_type": "contradicting",
-        }], run_date="2026-03-17")
+        }], run_date=_recent(17))
         assert h["hitRate"] < 0.75
         assert h["status"] == "validated"
 
@@ -575,63 +590,12 @@ class TestPersistence:
         print("✅ test_save_and_load")
 
 
-class TestHistoricalReplay:
-    def test_replay_existing_runs(self):
-        """Replay all new_learnings from existing runs through the hypothesis manager."""
-        runs_dir = Path(__file__).resolve().parent.parent / "runs"
-        if not runs_dir.exists():
-            print("⏭️  test_replay_existing_runs — no runs/ directory, skipping")
-            return
-
-        data = _fresh_data()
-        total_learnings = 0
-        total_actions = 0
-
-        for run_dir in sorted(runs_dir.iterdir()):
-            response_file = run_dir / "response.json"
-            if not response_file.exists():
-                continue
-            try:
-                response = json.loads(response_file.read_text(encoding="utf-8"))
-            except (json.JSONDecodeError, UnicodeDecodeError):
-                continue
-
-            learnings = response.get("new_learnings", [])
-            if not learnings:
-                continue
-
-            run_date = run_dir.name  # e.g., "2026-03-09"
-            actions = hm.process_learnings(data, learnings, run_date=run_date)
-            total_learnings += len(learnings)
-            total_actions += len(actions)
-
-        # Verify: no crashes, reasonable output
-        assert len(data["hypotheses"]) > 0, "Should have created some hypotheses"
-        assert total_learnings > 0, "Should have found some learnings in runs"
-
-        # Check all hypotheses have valid fields
-        for h in data["hypotheses"]:
-            assert h["id"].startswith("h")
-            assert h["status"] in hm.VALID_STATUSES
-            assert 0 <= h["hitRate"] <= 1
-            assert 0 <= h["confidence"] <= 1
-            assert h["sampleSize"] >= 0
-
-        # Stats
-        by_status = {}
-        for h in data["hypotheses"]:
-            by_status[h["status"]] = by_status.get(h["status"], 0) + 1
-
-        print(f"  Replayed {total_learnings} learnings from {total_actions} actions")
-        print(f"  Created {len(data['hypotheses'])} hypotheses")
-        for s, c in sorted(by_status.items()):
-            print(f"    {s}: {c}")
-
-        # Verify fuzzy matching reduced duplicates (should be fewer hypotheses than learnings)
-        dedup_ratio = len(data["hypotheses"]) / total_learnings if total_learnings else 1
-        print(f"  Dedup ratio: {dedup_ratio:.1%} ({len(data['hypotheses'])}/{total_learnings})")
-
-        print("✅ test_replay_existing_runs")
+# TestHistoricalReplay::test_replay_existing_runs deleted 2026-09-01 (repo
+# audit): it iterated runs/*/response.json — a GIT-IGNORED artifact — so its
+# inputs were untracked local state and it could never pass on a clean clone.
+# Production already guards the list-shaped response it tripped on
+# (run_daily._extract_json). A replay harness belongs in scripts/research/
+# against tracked fixtures, not in the unit suite against local debris.
 
 
 # ─── Run all tests ───────────────────────────────────────────────────────────

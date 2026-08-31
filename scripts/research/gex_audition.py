@@ -28,9 +28,9 @@ independent samples; net-negative GEX is a RARE state in this window. n per
 bucket, mean±sd±se, and honest verdicts are printed for every test.
 
 Usage:
-    python3 scripts/gex_audition.py            # all tables
-    python3 scripts/gex_audition.py --q1       # a single question
-    GEX_BACKEND_URL=... python3 scripts/gex_audition.py
+    python3 scripts/research/gex_audition.py            # all tables
+    python3 scripts/research/gex_audition.py --q1       # a single question
+    GEX_BACKEND_URL=... python3 scripts/research/gex_audition.py
 """
 import math
 import os

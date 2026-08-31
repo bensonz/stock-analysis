@@ -25,7 +25,7 @@ Read: watchlist/YYYY-MM-DD.json (today's research)
 ```bash
 cd /Users/bz/Work/Personal/stock-analysis
 source .venv/bin/activate
-python scripts/fetch_price.py CODE1 CODE2 CODE3...
+python3 scripts/pricedb.py query CODE   # (fetch_price.py deleted 2026-09-01 — unused since 2026-02)
 ```
 Fetch prices for ALL active positions.
 
@@ -74,7 +74,7 @@ Review watchlist candidates (today's + recent days if nothing compelling today):
 **多日超买检查 (CRITICAL):**
 Before opening ANY position, fetch 10-day history:
 ```bash
-python scripts/fetch_price.py CODE
+python3 scripts/pricedb.py query CODE   # (fetch_price.py deleted 2026-09-01 — unused since 2026-02)
 ```
 Then check:
 1. **5日累计涨幅 >12%** → SKIP, wait for pullback. "今天只涨1%"不代表安全，要看近5天完整走势。
@@ -84,7 +84,7 @@ Then check:
 **涨停检查 (CRITICAL):**
 Before opening ANY position, check if stock is at 涨停:
 ```bash
-python scripts/fetch_price.py CODE
+python3 scripts/pricedb.py query CODE   # (fetch_price.py deleted 2026-09-01 — unused since 2026-02)
 ```
 If `change_pct >= 9.9%` (主板) or `change_pct >= 19.9%` (创业板/科创板) or `change_pct >= 29.9%` (北交所):
 - **DO NOT OPEN** — cannot buy at limit up

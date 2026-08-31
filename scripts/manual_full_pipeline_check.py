@@ -1,3 +1,16 @@
+"""RENAMED from test_full_pipeline.py (repo audit 2026-09-01).
+
+Under pytest its 7 test_* functions could NEVER fail: every assertion routed
+through a check() helper that prints and counts instead of raising, so a
+failing check was invisible green — and test_4_rules subprocessed the whole
+rule engine against LIVE tracking/positions.json on every suite run. It was
+fake coverage over live state. The prefix rename removes it from collection;
+run it BY HAND as the smoke tool it actually is:
+
+    python3 scripts/manual_full_pipeline_check.py
+
+Original docstring follows.
+"""
 #!/usr/bin/env python3
 """
 test_full_pipeline.py — End-to-end simulation of the daily + evolution pipeline.

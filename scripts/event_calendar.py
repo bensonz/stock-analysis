@@ -118,14 +118,14 @@ def formulaic_events(start: _date, end: _date) -> list:
         # CFFEX交割日 -0.33% (~1.5se, 偏弱不显著). 均为提示项, 不构成缩仓依据.
         _add(_nth_weekday(y, m, 4, 3), "US", "美股月度OpEx（期权到期，GEX集中兑现）",
              "opex", "low", "复测(n=48): 次日中证1000均值-0.18% vs 基线+0.03%——"
-             "无显著效应, 仅作提示（复测: scripts/index_event_study.py --expiry-study）")
+             "无显著效应, 仅作提示（复测: scripts/research/index_event_study.py --expiry-study）")
         _add(_nth_weekday(y, m, 2, 4), "CN", "A股ETF期权到期日（第4周三）",
              "opex", "low", "复测(n=48): 当日中证1000均值-0.01%≈基线——无效应, 仅作日历提示"
-             "（复测: scripts/index_event_study.py --expiry-study）")
+             "（复测: scripts/research/index_event_study.py --expiry-study）")
         _add(_nth_weekday(y, m, 4, 3), "CN", "CFFEX股指期货/期权交割日（第3周五）",
              "opex", "low", "复测(n=48): 当日中证1000均值-0.33% vs 基线+0.03%"
              "(26/48收跌, ~1.5se)——偏弱但不显著, 观察项"
-             "（复测: scripts/index_event_study.py --expiry-study）")
+             "（复测: scripts/research/index_event_study.py --expiry-study）")
         _add(_last_day_of_month(y, m), "CN", "官方制造业PMI（9:30，当日盘中）",
              "macro_release", "medium", "增长脉搏读数——A股实际交易的国内数据")
         _add(_roll_to_weekday(_date(y, m, 1)), "CN", "财新制造业PMI（9:45，当日盘中）",

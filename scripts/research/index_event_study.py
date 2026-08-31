@@ -11,8 +11,8 @@ close-to-close from the last close <= event date to N sessions later.
 Coverage: sina serves ~1023 bars ≈ back to mid-2022.
 
 Usage:
-  python3 scripts/index_event_study.py                      # politburo default
-  python3 scripts/index_event_study.py --sessions 10 --dates 2024-09-26,2025-07-30
+  python3 scripts/research/index_event_study.py                      # politburo default
+  python3 scripts/research/index_event_study.py --sessions 10 --dates 2024-09-26,2025-07-30
 """
 import json
 import statistics

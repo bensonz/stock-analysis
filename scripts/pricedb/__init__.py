@@ -709,7 +709,9 @@ ADJ_EVENT_THRESHOLD = 0.005
 # API at ~3 req/s with no sleep and got this IP temporarily banned (empty
 # replies on push2his AND push2 — which also starves the daily pipeline).
 # Never again: pace requests, and circuit-break on failure bursts.
-ADJ_BACKFILL_SLEEP_SEC = float(os.getenv("ADJ_BACKFILL_SLEEP_SEC", "0.4"))
+# Owned by pricedb.factors since 2026-09-01 (was defined twice; the duplicate
+# made monkeypatch.setattr(pricedb, ...) inert for the heal path).
+from pricedb.factors import ADJ_BACKFILL_SLEEP_SEC  # noqa: F401
 
 # Sina repair sweep: 4 workers × 0.25s/request ≈ 15 req/s — polite enough to
 # stay under sina's IP-ban radar while covering ~5.5k codes in a few minutes.

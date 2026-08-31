@@ -113,7 +113,7 @@ pytest tests/test_contracts.py  # a single file
 pytest scripts/test_pipeline.py::test_name   # a single test
 ```
 
-Note test files live in **two** places: `tests/` and `scripts/test_*.py` (both are collected). `scripts/conftest.py` mirrors `tests/conftest.py` so the marker works when running `pytest scripts/` directly.
+Note test files live in **two** places: `tests/` and `scripts/test_*.py` (both are collected). The integration gate lives in the **root** `conftest.py` (pytest only honours `pytest_addoption` there — the previous two-conftest split silently disabled `--run-integration` from 2026-05 to 2026-09); the sub-conftests own `sys.path` setup only. The suite is expected **fully green** — any failure is new.
 
 ## How `scripts/` is laid out
 

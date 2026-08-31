@@ -668,7 +668,15 @@ class TestRunDailyParser(unittest.TestCase):
         self.assertEqual(regime["regime"], "weak")
         self.assertEqual(regime["sizing_multiplier"], 0.5)
 
-    def test_entry_regime_throttles_strong_market(self):
+    def test_entry_regime_strong_market_gets_full_size(self):
+        """RENAMED from ..._throttles_strong_market (repo audit 2026-09-01).
+
+        Commit a9d2077 (2026-07-03) deliberately set
+        STRONG_TAPE_SIZE_MULTIPLIER 0.75 → 1.0: "don't chase" is enforced
+        per-stock via the dist_ma SKIP filters, not by shrinking every position
+        market-wide. This test kept asserting 0.75 — red for two months while
+        claiming, in its very name, the opposite of the current doctrine.
+        """
         from run_daily import evaluate_new_entry_regime
 
         regime = evaluate_new_entry_regime({
@@ -682,7 +690,7 @@ class TestRunDailyParser(unittest.TestCase):
 
         self.assertTrue(regime["allow_new_positions"])
         self.assertEqual(regime["regime"], "strong")
-        self.assertEqual(regime["sizing_multiplier"], 0.75)
+        self.assertEqual(regime["sizing_multiplier"], 1.0)
 
     def test_entry_regime_blocks_panic_market(self):
         from run_daily import evaluate_new_entry_regime
