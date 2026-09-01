@@ -1,112 +1,107 @@
-# Stock Tracker State Schema
+# tracking/ schema — v2.1 (rewritten 2026-09-01 against the code)
 
-## Portfolio Config
+**Authority: `scripts/position_manager.py` is the schema.** This document
+describes what that code writes, generated from the live files on
+2026-09-01. If this page and the code disagree, the code is right and this
+page has rotted — fix it in the same commit that changed the writer.
+(The previous version of this file described a v1.0 that no code had written
+since February; it sat here stale for six months while CLAUDE.md called it
+canonical. Rewritten per repo audit decision B5.)
 
-- **Total Capital**: 1,000,000 RMB
-- **Max Position Size**: 20% (200k per stock)
-- **Default Position**: 10% (100k per stock)
-- **Max Open Positions**: 5-8
+## Files
 
-Position sizing rules:
-- **High confidence (BUY)**: 15-20% of capital
-- **Medium confidence (WATCH→BUY)**: 10-15% of capital
-- **Speculative**: 5-10% of capital
+```
+tracking/
+  positions.json           aggregate view (portfolio + activePositions) — REGENERATED,
+                           never hand-edited; rebuilt from the per-code files
+  {code}.json              one file per active position (the source of truth)
+  closed/{code}_{exitDate}.json    moved here on close — date suffix REQUIRED
+                           (naming without the date silently erased 9 round-trips
+                           pre-2026-08-06; see docs/tracking_fixes/)
+  portfolio_config.json    hard limits (see below)
+  hypotheses.json          the learning loop's state (separate schema, owned by
+                           hypothesis_manager.py)
+```
 
-## tracking/{code}.json
+## portfolio_config.json — the hard limits
 
 ```json
-{
-  "code": "002721",
-  "name": "菜百股份",
-  "status": "active",           // active | closed | stopped
-  
-  // Position Info
-  "thesis": "Gold jewelry retail leader, RPS in ideal range, breakout pattern",
-  "entryDate": "2026-02-03",
-  "entryPrice": 23.93,
-  "shares": 4000,               // Number of shares (must be 100s for A-stock)
-  "capital": 95720,             // Capital allocated (shares × entryPrice)
-  "capitalPct": 9.57,           // % of total portfolio capital
-  "targetPrice": 28.00,         // +17% target
-  "stopLoss": 22.00,            // -8% stop
-  "currentStop": 22.00,         // May be raised as position profits (trailing stop)
-  "rating": 2,                  // 1-3 stars from initial recommendation
-  
-  // Technical Context (at entry)
-  "rps120": 85.2,
-  "sector": "黄金珠宝",
-  "catalysts": ["黄金涨价周期", "春节消费旺季"],
-  
-  // Tracking History
-  "history": [
-    {
-      "date": "2026-02-03",
-      "price": 23.93,
-      "change_pct": 0,
-      "action": "OPEN",
-      "note": "Initial position, watching for breakout confirmation"
-    },
-    {
-      "date": "2026-02-04", 
-      "price": 24.50,
-      "change_pct": 2.38,
-      "action": "HOLD",
-      "note": "Strength confirmed, thesis intact"
-    },
-    {
-      "date": "2026-02-05",
-      "price": 25.20,
-      "change_pct": 5.31,
-      "action": "RAISE_STOP",
-      "note": "Raising stop to 23.50 (breakeven+), momentum strong"
-    }
-  ],
-  
-  // Exit Info (populated when closed)
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,           // "target_hit" | "stop_hit" | "thesis_invalid" | "manual"
-  "returnPct": null,
-  "holdingDays": null,
-  
-  // Learnings (populated on exit)
-  "lessonLearned": null,
-  
-  // Metadata
-  "createdAt": "2026-02-03T14:00:00+08:00",
-  "updatedAt": "2026-02-05T14:00:00+08:00",
-  "trackerVersion": "1.0"
-}
+{"starting_capital": 1000000, "max_position_pct": 10, "max_positions": 10,
+ "min_cash_pct": 0, "created": "2026-02-03", "currency": "CNY"}
 ```
 
-## Actions
+These are the authoritative limits (owner decision 2026-09-01, audit B2):
+**max 10 positions, no minimum-cash floor.** ANALYST.md mirrors these numbers;
+if they differ, this file wins and the prompt is stale.
 
-| Action | Description |
-|--------|-------------|
-| `OPEN` | Initial position opened |
-| `HOLD` | Continue holding, thesis intact |
-| `ADD` | Adding to position (rare) |
-| `RAISE_STOP` | Trailing stop raised |
-| `PARTIAL_EXIT` | Partial profit taking |
-| `EXIT` | Full exit |
+## tracking/{code}.json — a position
 
-## Status Transitions
+Live keys (all present on an active position):
+
+| key | meaning |
+|---|---|
+| `code`, `name`, `sector` | identity; `code` is the bare 6-digit form |
+| `status` | `active` → `closed` (no other values in 64 opens to date) |
+| `thesis` | LLM's entry reasoning, free text |
+| `entryDate`, `entrySlot` | date + `noon`/`afternoon` |
+| `entryPrice`, `shares`, `allocation_pct`, `allocatedCapital` | entry sizing |
+| `stopLoss` | the ORIGINAL stop (never moves) |
+| `currentStop` | the trailing stop (RAISE_STOP moves this one only) |
+| `targetPrice` | soft reference — momentum doctrine treats the trailing stop as the hard constraint, not the target (see h174) |
+| `rating`, `rps120`, `catalysts`, `sourceWatchlist` | entry-time context |
+| `trackerVersion` | `"2.1"` |
+| `createdAt`, `updatedAt` | ISO timestamps |
+| `history` | append-only event list, below |
+
+**On close, added:** `exitDate`, `exitPrice`, `exitReason`, `holdingDays`,
+`returnPct`, `lessonLearned`.
+
+**`exitReason` is free-text LLM prose, NOT an enum** — measured: 0 of 61
+closed positions match the old enum. That is the accepted design (audit B5):
+narrative goes here; anything queryable must be derived from `history` actions
+and prices, not parsed out of this field.
+
+## history[] — one entry per run that touched the position
+
+```json
+{"date": "2026-08-27", "slot": "afternoon", "price": 59.01,
+ "change_pct": 0, "action": "OPEN", "note": "LLM开仓 奥士康"}
+```
+
+- **Action vocabulary (measured over 432 entries): `OPEN` / `HOLD` /
+  `RAISE_STOP` / `SELL`.** Nothing else exists — no ADD, no PARTIAL_EXIT
+  (adding to positions was evaluated 2026-08-27 and rejected: no edge at any
+  P&L threshold).
+- `slot` present since the 2026-07 noon/afternoon split (legacy entries lack it).
+- OPEN entries may additionally carry `shares` / `stop` / `allocatedCapital`
+  (the 2a-i widening, so the doctor can audit sizing from the history alone).
+- `synthetic: true` marks backfilled entries from the 2026-08 history repair —
+  they are reconstructions, not live marks.
+
+## positions.json — the regenerated aggregate
 
 ```
-[new stock] → OPEN → active
-                ↓
-        HOLD/RAISE_STOP (daily updates)
-                ↓
-           EXIT → closed
+lastUpdated            ISO timestamp of last regeneration
+activePositions[]      per-code snapshot + live-mark fields:
+                       currentPrice, pnl_pct, currentValue, unrealizedPnl,
+                       volume, mavol30, volumeBelowMavol30, weight_pct
+portfolio{}            startingCapital, totalEquity, cash, investedValue,
+                       unrealizedPnl, realizedPnl, totalPnl, totalReturnPct,
+                       positionsUsed, positionsMax, cashPct, dayPnl,
+                       minCashPct, minCashValue, deployableCash
 ```
 
-## Exit Reasons
+Regenerated by `position_manager.regenerate_positions_json()` on every run
+(and, note well, by `--phase1` too — there is no read-only pipeline mode).
+Because it is derived, hand-edits are lost on the next run; edit the per-code
+files (or better, don't — the pipeline owns them, `--reset-to` for rollbacks).
 
-| Reason | Description |
-|--------|-------------|
-| `target_hit` | Price reached target |
-| `stop_hit` | Price hit stop loss |
-| `thesis_invalid` | Original thesis no longer valid |
-| `time_decay` | Held too long without progress |
-| `better_opportunity` | Capital reallocation |
-| `manual` | Manual override |
+## Rules for anything that touches these files
+
+1. **`position_manager.py` is the only writer.** The audit found two
+   violations (`--reset-to`, and phase functions with side effects); those are
+   scheduled refactor work, not precedent.
+2. **The doctor never writes here** (D12) — detection only.
+3. `closed/` filenames MUST carry the exit date.
+4. History is append-only; repairs add `synthetic` entries rather than
+   rewriting real ones.
