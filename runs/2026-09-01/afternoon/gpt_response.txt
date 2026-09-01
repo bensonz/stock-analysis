@@ -1,0 +1,151 @@
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "种植业", "5d_pct": 7.55, "trend": "accelerating"},
+      {"name": "数字媒体", "5d_pct": 5.44, "trend": "steady"},
+      {"name": "农业综合Ⅱ", "5d_pct": 4.21, "trend": "accelerating"},
+      {"name": "林业Ⅱ", "5d_pct": 4.16, "trend": "steady"},
+      {"name": "一般零售", "5d_pct": 3.87, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "元件", "5d_pct": -4.71, "trend": "deteriorating"},
+      {"name": "电子化学品Ⅱ", "5d_pct": -4.68, "trend": "deteriorating"},
+      {"name": "非金属材料Ⅱ", "5d_pct": -4.27, "trend": "deteriorating"},
+      {"name": "玻璃玻纤", "5d_pct": -3.87, "trend": "deteriorating"},
+      {"name": "小金属", "5d_pct": -3.18, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/3 positions in hot sectors; 1/3 (奥士康·元件) in cold sector, 2/3 in mid sectors",
+    "regime": "防御性轮动：资金从AI硬件(元件/电子化学品/半导体)流出，流入农业与消费"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "浮盈+21.7%，止损已锁+10%(17.16)，现价18.98远高于止损；文莱炼化二期新增1200万吨炼化能力+H1净利+2500.73%(来源:财闻网8/21)；石油石化未入top/bottom5，无卖出触发，让利润奔跑",
+      "sector_rank": "中游（未入top/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 21.67,
+      "days_held": 25,
+      "exit_price": null
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "持仓第4日+5.0%，未触-5%止损/-3%三日规则/时间止损；但元件今日bottom5(-4.71%)为冷区第1日——若元件连续3日处bottom30%则无条件SELL；覆铜板涨价链仍在(建滔九轮涨价累计约134%,来源:电子工程专辑)；<5日新仓不参与换仓",
+      "sector_rank": "bottom 5%（-4.71%，冷区第1日）",
+      "new_stop": null,
+      "pnl_pct": 5.03,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+22.1%，止损已锁+10%(139.15)，现价154.4远高于止损；中报H1营收+38.93%/归母净利110.8亿+29.43%，全年指引上调至585-605亿(来源:新京报8/3)；医疗服务未入bottom5，无卖出触发",
+      "sector_rank": "中游（未入top/bottom5，CXO近期降温）",
+      "new_stop": null,
+      "pnl_pct": 22.06,
+      "days_held": 23,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688019",
+      "name": "安集科技",
+      "reason": "电子化学品Ⅱ今日bottom5(-4.68%)，冷区禁买；且三大指数0/3上涨，买入门槛关闭",
+      "rps120": 91.32
+    },
+    {
+      "code": "688403",
+      "name": "汇成股份",
+      "reason": "半导体封测属科技硬件冷区(元件-4.71%/电子化学品-4.68%)；PE 395极高，H1净利同比-94.78%(来源:公司公告快讯)",
+      "rps120": 94.37
+    },
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "半导体设备属冷区；dist_ma5 -6.2%破位调整中",
+      "rps120": 92.25
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "reason": "重入标的：8/21以+11.45%离场(当日医疗服务跌入bottom5)；今日医疗服务未入top5，融资deleveraging(chg5 -5.9%)，指数门槛关闭，重入举证不足",
+      "rps120": 94.76
+    },
+    {
+      "code": "300677",
+      "name": "英科医疗",
+      "reason": "Rule 2b追高：dist_ma10 +10.2%>8%、dist_ma20 +12.9%>12%，禁买",
+      "rps120": 85.12
+    },
+    {
+      "code": "601233",
+      "name": "桐昆股份",
+      "reason": "逼近追高线：dist_ma10 +7.7%、dist_ma20 +11.7%，且指数门槛关闭",
+      "rps120": 86.67
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "reason": "贵金属未入top5，板块强度不足；指数门槛关闭",
+      "rps120": 87.84
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "有色/铜属资源冷区(小金属bottom5 -3.18%)；融资deleveraging(net5_repay_days 5)",
+      "rps120": 89.02
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "reason": "航运未入top5；融资deleveraging(chg5 -14.93%, net5_repay_days 4)；指数门槛关闭",
+      "rps120": 86.17
+    },
+    {
+      "code": "600378",
+      "name": "昊华科技",
+      "reason": "氟化工未入top5，板块强度不足；指数门槛关闭",
+      "rps120": 92.19
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "今日宽度1.66:1为正且涨停86家，但三大指数0/3上涨——买入门槛应依据指数绿灯数关闭，而非只看宽度。防御性轮动(科技→农业/消费)中宽度为正不代表beta为正，指数门槛有效阻止在负beta环境追入科技硬件。",
+      "type": "rule",
+      "tags": ["entry-filter", "sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "宽度反映中小盘普涨，但资金从高权重科技股撤离时指数收绿，此时新开仓承受的是整体beta下移而非个股动量红利。"
+    },
+    {
+      "text": "科技硬件(元件/电子化学品/半导体/CPO)连续多日遭抛售，外因是华尔街AI估值逻辑重构(费半两日蒸发1.3万亿美元,来源:雅虎财经)。持仓中元件标的今日入bottom5为冷区第1日，需紧盯3日冷区规则。此前'科技硬件是相对领导板块'(h028)今日被证伪。",
+      "type": "signal",
+      "tags": ["sector", "exit-rule"],
+      "evidence_type": "contradicting",
+      "related_hypothesis": "h028",
+      "mechanism": "华尔街对AI硬件资本开支的定价逻辑转向，A股映射CPO/半导体/元件拥挤交易反噬，动量反转快于传统板块轮动。"
+    },
+    {
+      "text": "农业种植为今日绝对主线(种植业+7.55%，万向德农6连板等近10股涨停)，驱动是全球粮价：彭博农业现货指数8月+13%创2012年以来最大单月涨幅(来源:财联社9/1)。但策略池45只标的零农业敞口——遇此类轮动日宁可空仓也不追入池外标的。",
+      "type": "observation",
+      "tags": ["sector", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "策略池由RPS/财报交叉筛选生成，天然偏向科技/化工/医药；当最强板块为防御性农业时池内无合规标的，正确动作是持币等待。"
+    }
+  ],
+  "market_summary": "三大指数全线收绿(上证-0.16%/深证-1.02%/创业板-1.32%/科创50-2.19%)，但宽度1.66:1仍为正(涨3386/跌2040,涨停86/跌停0)——典型防御性轮动，资金从科技硬件(元件-4.71%/电子化学品-4.68%领跌)流向农业与消费(种植业+7.55%/数字媒体+5.44%)。IV整体中性(avg iv_rank 0.38)，创业板/深100偏高(selective)。买入门槛未满足(三大指数0/3上涨)→不开新仓，专注HOLD。",
+  "market_sentiment": "mixed",
+  "market_call": "观望"
+}
+```
