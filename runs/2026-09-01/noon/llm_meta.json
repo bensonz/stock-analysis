@@ -1,0 +1,82 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 224161,
+  "output_tokens": 17880,
+  "rounds": 3,
+  "duration_sec": 251.2,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 种植业 农业板块 大涨 原因 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3272
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 半导体 元件 电子化学品 下跌 原因 2026-09-01",
+        "max_results": 5
+      },
+      "result_length": 3173
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "恒逸石化 文莱 二期 最新消息 2026",
+        "max_results": 5
+      },
+      "result_length": 3376
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 中报 上调 全年业绩指引 2026",
+        "max_results": 5
+      },
+      "result_length": 3332
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "奥士康 PCB 覆铜板 涨价 元件板块 2026",
+        "max_results": 5
+      },
+      "result_length": 2821
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+今日+热门板块+种植业+半导体",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=黄金+油运+招商轮船+赤峰黄金+2026",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}
