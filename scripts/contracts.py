@@ -210,6 +210,13 @@ def validate_phase1_gate(data: dict) -> GateResult:
     # antique or corrupt price data politely. Absent block = older run
     # replay / minimal test fixture → skip (backward compatible). ──
     health = data.get("db_health") or {}
+    if health.get("check_failed"):
+        # The checker itself died. Before 2026-09-01 this left db_health
+        # absent, which skipped all three gates below — the exact gates that
+        # halted the DNS-outage runs. A dead smoke detector is a hard fail.
+        gate.hard(False,
+                  f"db_health check itself failed ({health['check_failed']}) — "
+                  f"cannot certify price data; halt rather than analyze blind")
     if health:
         lag = health.get("lag_sessions")
         if lag is not None:

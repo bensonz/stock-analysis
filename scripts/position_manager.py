@@ -7,6 +7,7 @@ All mutations go through this module to ensure positions.json stays in sync.
 """
 
 import json
+import os
 import shutil
 import sys
 from datetime import datetime
@@ -77,10 +78,27 @@ def _read_json(path: Path) -> dict:
 
 
 def _write_json(path: Path, data: dict) -> None:
-    path.write_text(
-        json.dumps(data, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    """Atomic write: temp file beside the target, fsync, os.replace.
+
+    This is the single choke point for nearly every book mutation
+    (positions.json, tracking/{code}.json, closed/ moves, config), which is
+    exactly why it must not truncate-then-write: the pipeline and the doctor
+    have already fired simultaneously once (2026-08-26 sleep deferral), and a
+    torn tracking/{code}.json does not error — it makes load_active_positions
+    skip the file, so the position silently VANISHES from the book and cash is
+    recomputed as if it was never held (audit A6). Same-directory temp because
+    os.replace is only atomic within one filesystem.
+    """
+    payload = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+    tmp = path.with_name(f".{path.name}.tmp")
+    try:
+        with open(tmp, "w", encoding="utf-8") as fh:
+            fh.write(payload)
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(tmp, path)
+    finally:
+        tmp.unlink(missing_ok=True)
 
 
 def load_portfolio_config() -> dict:
@@ -345,6 +363,12 @@ def close_position(
     Returns:
         The updated position dict.
     """
+    # Symmetric with open_position's entry-price guard (audit #5): a failed
+    # fetch must not book a SELL at 0 — that writes a fake total loss into
+    # realized P&L, permanently. open_position has refused invalid prices
+    # since 2026-07; the asymmetry was the defect.
+    if not isinstance(exit_price, (int, float)) or exit_price <= 0:
+        raise ValueError(f"close_position: invalid exit_price {exit_price!r} for {code}")
     pos_file = TRACKING_DIR / f"{code}.json"
     if not pos_file.exists():
         raise FileNotFoundError(f"Position file not found: {pos_file}")

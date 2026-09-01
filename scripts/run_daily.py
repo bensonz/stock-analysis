@@ -424,8 +424,17 @@ def evaluate_new_entry_regime(market: dict) -> dict:
     up = int(breadth.get("up") or 0)
     down = int(breadth.get("down") or 0)
     ratio = (up / down) if down else (float("inf") if up else 0.0)
-    limit_downs = int(distribution.get("f10") or 0)
-    limit_ups = int(distribution.get("r10") or 0)
+    # Only CheeseForTune emits `distribution`; every fallback provider returns
+    # bare counts. `or 0` made absence print as "0 limit-downs" AS IF MEASURED
+    # and silently disarmed the f10>=30 panic clause on any CF outage (audit
+    # #8). Absence stays visible: counts become None and the reason string
+    # names the gap instead of claiming zeros.
+    has_distribution = bool(distribution)
+    limit_downs = int(distribution.get("f10") or 0) if has_distribution else None
+    limit_ups = int(distribution.get("r10") or 0) if has_distribution else None
+    limit_str = (f"{limit_ups} limit-ups / {limit_downs} limit-downs"
+                 if has_distribution else
+                 "limit-up/down distribution unavailable (fallback breadth provider)")
 
     positive_indices = []
     negative_indices = []
@@ -439,7 +448,7 @@ def evaluate_new_entry_regime(market: dict) -> dict:
 
     has_breadth = up > 0 or down > 0
     broad_index_support = len(positive_indices) >= 2
-    panic_tape = has_breadth and (ratio < 0.35 or limit_downs >= 30)
+    panic_tape = has_breadth and (ratio < 0.35 or (limit_downs is not None and limit_downs >= 30))
     weak_tape = has_breadth and ratio < 1.0
     strong_tape = has_breadth and ratio >= 1.5 and broad_index_support
 
@@ -456,7 +465,7 @@ def evaluate_new_entry_regime(market: dict) -> dict:
         sizing_multiplier = 0.0
         reason = (
             f"Entry regime panic: breadth {ratio:.2f}:1, "
-            f"{len(positive_indices)}/3 major indices green, {limit_ups} limit-ups / {limit_downs} limit-downs. "
+            f"{len(positive_indices)}/3 major indices green, {limit_str}. "
             "Block new longs."
         )
     elif weak_tape:
@@ -464,7 +473,7 @@ def evaluate_new_entry_regime(market: dict) -> dict:
         sizing_multiplier = WEAK_TAPE_SIZE_MULTIPLIER
         reason = (
             f"Entry regime weak: breadth {ratio:.2f}:1, "
-            f"{len(positive_indices)}/3 major indices green, {limit_ups} limit-ups / {limit_downs} limit-downs. "
+            f"{len(positive_indices)}/3 major indices green, {limit_str}. "
             f"Allow entries only with {int(WEAK_TAPE_SIZE_MULTIPLIER * 100)}% sizing."
         )
     elif strong_tape:
@@ -472,7 +481,7 @@ def evaluate_new_entry_regime(market: dict) -> dict:
         sizing_multiplier = STRONG_TAPE_SIZE_MULTIPLIER
         reason = (
             f"Entry regime strong: breadth {ratio:.2f}:1, "
-            f"{len(positive_indices)}/3 major indices green, {limit_ups} limit-ups / {limit_downs} limit-downs. "
+            f"{len(positive_indices)}/3 major indices green, {limit_str}. "
             "Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
         )
     else:
@@ -480,7 +489,7 @@ def evaluate_new_entry_regime(market: dict) -> dict:
         sizing_multiplier = 1.0
         reason = (
             f"Entry regime balanced: breadth {ratio:.2f}:1, "
-            f"{len(positive_indices)}/3 major indices green, {limit_ups} limit-ups / {limit_downs} limit-downs. "
+            f"{len(positive_indices)}/3 major indices green, {limit_str}. "
             "Allow normal sizing."
         )
 
@@ -780,6 +789,53 @@ def preflight_pricedb_or_exit(manifest) -> None:
         raise
     except Exception as e:
         print(f"  ⚠ preflight_pricedb check raised: {e}", file=sys.stderr)
+
+
+def build_mark_entry(date: str, slot: str, price_data: dict,
+                     entry_price, action: str, note: str) -> dict:
+    """History entry for a HOLD/RAISE_STOP mark — missing prices stay VISIBLE.
+
+    A failed fetch emits {"code":..., "error":...} with NO price key. The old
+    inline code did price_data.get("price", 0) and then computed pnl against
+    entry — a fetch failure became price 0 / pnl −100.0 in PERMANENT history,
+    read back into every later prompt as a real crash (audit #5). Per the
+    null-visibility rule: absent data is recorded as None plus a loud note,
+    never as a plausible number. Zero is treated as missing — no A-share
+    trades at 0.
+    """
+    raw = price_data.get("price")
+    price = raw if isinstance(raw, (int, float)) and raw > 0 else None
+    if price is None:
+        err = price_data.get("error", "no price in fetch result")
+        return {"date": date, "slot": slot, "price": None, "change_pct": None,
+                "action": action,
+                "note": f"[PRICE UNAVAILABLE: {err}] {note}".strip()}
+    pnl = (round((price - entry_price) / entry_price * 100, 2)
+           if isinstance(entry_price, (int, float)) and entry_price > 0 else None)
+    return {"date": date, "slot": slot, "price": price, "change_pct": pnl,
+            "action": action, "note": note}
+
+
+def resolve_rule_script_path(rel_path: str, project_root: Path | None = None) -> Path:
+    """Containment for LLM-authored rule scripts (audit 2026-08-31, finding #2).
+
+    `decisions["new_scripts"]` is MODEL OUTPUT that becomes an executable file
+    on this host and is then committed and pushed by Phase 5. Before this
+    guard, any path under PROJECT_ROOT was accepted verbatim — including
+    `agents/ANALYST.md` (overwrite the strategy spec) and `../../.ssh/...`
+    (Path joins do not constrain traversal). The contract: rule scripts live
+    in scripts/rules/ and are named check_*.py, because run_rules.py executes
+    every file matching exactly that pattern — the name IS the execution
+    contract. Anything else raises; the caller logs and refuses.
+    """
+    root = (project_root or PROJECT_ROOT).resolve()
+    rules_dir = root / "scripts" / "rules"
+    candidate = (root / rel_path).resolve()
+    if not candidate.is_relative_to(rules_dir):
+        raise ValueError(f"refused: {rel_path!r} resolves outside scripts/rules/")
+    if not (candidate.name.startswith("check_") and candidate.suffix == ".py"):
+        raise ValueError(f"refused: {rel_path!r} must be named check_*.py")
+    return candidate
 
 
 def phase1_collect(date: str, slot: str) -> dict:
@@ -1270,7 +1326,18 @@ def phase1_collect(date: str, slot: str) -> dict:
         for _w in _h.get("warnings", []):
             print(f"      ⚠ {_w}", file=sys.stderr)
     except Exception as e:  # noqa: BLE001 — health check must not kill the run
-        print(f"    [db_health] unavailable: {e}", file=sys.stderr)
+        # ... but its DEATH must not silently delete the data-quality gates
+        # either (audit #3): absent db_health made contracts skip staleness,
+        # partial-day AND spot-audit — indistinguishable from a legacy replay.
+        # Write a sentinel; the gate hard-fails on check_failed.
+        data["db_health"] = {"ok": False, "check_failed": str(e)}
+        try:
+            (input_dir / "db_health.json").write_text(
+                json.dumps(data["db_health"], ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8")
+        except Exception:
+            pass
+        print(f"    [db_health] CHECK FAILED (sentinel written): {e}", file=sys.stderr)
 
     # Hypothesis-based learnings (structured system)
     hyp_data = load_hypotheses()
@@ -1661,22 +1728,15 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
             # (lower) request must never be recorded as if applied.
             if action in ("HOLD", "RAISE_STOP"):
                 price_data = data.get("position_prices", {}).get(code, {})
-                price = price_data.get("price", 0)
                 entry_price = 0
                 for p in data.get("positions", []):
                     if p["code"] == code:
                         entry_price = p["entryPrice"]
                         break
-                pnl_pct = round((price - entry_price) / entry_price * 100, 2) if entry_price else 0
                 payload = {
-                    "history_entry": {
-                        "date": date,
-                        "slot": slot,
-                        "price": price,
-                        "change_pct": pnl_pct,
-                        "action": action,
-                        "note": d.get("reason", ""),
-                    },
+                    "history_entry": build_mark_entry(
+                        date, slot, price_data, entry_price,
+                        action, d.get("reason", "")),
                 }
                 if action == "RAISE_STOP" and d.get("new_stop"):
                     payload["new_stop"] = d.get("new_stop")
@@ -1987,11 +2047,17 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
     # 7. Create/update agent-written rule scripts
     for script in decisions.get("new_scripts", []):
         try:
-            path = PROJECT_ROOT / script["path"]
+            path = resolve_rule_script_path(script["path"])
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(script["content"], encoding="utf-8")
             path.chmod(0o755)
             log["actions"].append(f"Created rule: {script['path']}")
+        except ValueError as e:
+            # Containment refusal — deliberate, loud, and it must NOT look
+            # like an incidental error: model output asked to write outside
+            # its sandbox.
+            log["actions"].append(f"REFUSED rule script: {e}")
+            print(f"    ⚠ {e}", file=sys.stderr)
         except Exception as e:
             log["actions"].append(f"ERROR creating rule {script.get('path')}: {e}")
 
@@ -2069,8 +2135,14 @@ def phase4_validate_and_log(date: str, logs: list[dict], slot: str) -> list[str]
             for r in rule_results.get("rules", []):
                 for v in r.get("violations", []):
                     errors.append(f"RULE {r['rule']}: {v.get('code', '?')} — {v.get('suggestion', '')}")
-    except Exception:
-        pass
+        # A crashed check is NOT zero violations — the stop-watching layer
+        # going dark must be at least as loud as a violation (audit #7).
+        for r in rule_results.get("rules", []):
+            if r.get("status") == "error":
+                errors.append(f"RULE CRASHED {r['rule']}: {r.get('error', '?')[:120]}")
+    except Exception as e:
+        errors.append(f"RULES ENGINE CRASHED: {e}")
+        print(f"  ⚠ rules engine crashed in post-apply check: {e}", file=sys.stderr)
 
     # Save run log to runs/<date>/<slot>/log.json
     run_dir = get_run_dir(date, slot)

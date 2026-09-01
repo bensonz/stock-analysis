@@ -275,11 +275,27 @@ def fetch_all() -> dict:
 
     sentiment = overall_sentiment(results, codes=CORE_UNDERLYINGS)
 
+    # Partial coverage must be VISIBLE (audit A5): this used to drop failed
+    # underlyings silently and average the survivors into a definite label —
+    # the exact GEX 2/5-rendered-as-全面 shape, except IV feeds SIZING while
+    # GEX is advisory. The label now carries its denominator when short.
+    fetched = {r.get("underlying") for r in results}
+    missing = [u["code"] for u in UNDERLYINGS if u["code"] not in fetched]
+    coverage = {"expected": len(UNDERLYINGS), "fetched": len(results),
+                "missing": missing, "partial": bool(missing)}
+    if missing and results:
+        sentiment["signal"] = (f"{sentiment['signal']}"
+                               f"（覆盖不全 {len(results)}/{len(UNDERLYINGS)}，"
+                               f"缺 {', '.join(missing)}）")
+        print(f"  IV: PARTIAL coverage {len(results)}/{len(UNDERLYINGS)} "
+              f"(missing {', '.join(missing)})", file=sys.stderr)
+
     return {
         "date": datetime.now().strftime("%Y-%m-%d"),
         "source": "options-learn backend (/api/history/iv-rank)",
         "core_underlyings": CORE_UNDERLYINGS,
         "etf_iv_data": results,
+        "coverage": coverage,
         "overall_sentiment": sentiment,
     }
 

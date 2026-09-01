@@ -45,6 +45,7 @@ def run_all_rules(portfolio_data: dict | None = None) -> dict:
 
     results = []
     total_violations = 0
+    crashed_rules = 0
 
     for rule_file in rule_files:
         rule_name = rule_file.stem
@@ -57,26 +58,52 @@ def run_all_rules(portfolio_data: dict | None = None) -> dict:
                 timeout=10,
                 cwd=str(PROJECT_ROOT),
             )
+            # Protocol: a rule MUST print a JSON object with a "violations"
+            # list. Anything else is a CRASH, not a clean pass — the old code
+            # nulled stderr for exit 0/1 and turned garbage stdout into
+            # violations=[], so a traceback in check_stop_proximity read as
+            # "0 violations" (audit #7). Exit codes are recorded but status is
+            # judged by the protocol, because exit 1 means BOTH "violations
+            # found" and "python died".
+            valid_protocol = False
+            output = {}
             try:
-                output = json.loads(proc.stdout) if proc.stdout.strip() else {}
+                parsed = json.loads(proc.stdout) if proc.stdout.strip() else None
+                if isinstance(parsed, dict) and isinstance(parsed.get("violations"), list):
+                    output = parsed
+                    valid_protocol = True
             except json.JSONDecodeError:
-                output = {"raw_output": proc.stdout[:500]}
+                pass
 
-            violations = output.get("violations", [])
-            total_violations += len(violations)
-
-            results.append({
-                "rule": rule_name,
-                "file": str(rule_file.relative_to(PROJECT_ROOT)),
-                "status": "ok" if proc.returncode == 0 else "violations",
-                "exit_code": proc.returncode,
-                "violations": violations,
-                "error": proc.stderr.strip() if proc.returncode not in (0, 1) else None,
-            })
+            if valid_protocol:
+                violations = output["violations"]
+                total_violations += len(violations)
+                results.append({
+                    "rule": rule_name,
+                    "file": str(rule_file.relative_to(PROJECT_ROOT)) if rule_file.is_relative_to(PROJECT_ROOT) else str(rule_file),
+                    "status": "violations" if violations else "ok",
+                    "exit_code": proc.returncode,
+                    "violations": violations,
+                    "error": None,
+                })
+            else:
+                crashed_rules += 1
+                evidence = (proc.stderr.strip() or proc.stdout.strip()
+                            or f"exit {proc.returncode}, empty output")[:500]
+                results.append({
+                    "rule": rule_name,
+                    "file": str(rule_file.relative_to(PROJECT_ROOT)) if rule_file.is_relative_to(PROJECT_ROOT) else str(rule_file),
+                    "status": "error",
+                    "exit_code": proc.returncode,
+                    "violations": [],
+                    "error": evidence,
+                })
+                print(f"  ⚠ RULE CRASHED: {rule_name} — {evidence[:120]}",
+                      file=sys.stderr)
         except subprocess.TimeoutExpired:
             results.append({
                 "rule": rule_name,
-                "file": str(rule_file.relative_to(PROJECT_ROOT)),
+                "file": str(rule_file.relative_to(PROJECT_ROOT)) if rule_file.is_relative_to(PROJECT_ROOT) else str(rule_file),
                 "status": "timeout",
                 "exit_code": -1,
                 "violations": [],
@@ -85,7 +112,7 @@ def run_all_rules(portfolio_data: dict | None = None) -> dict:
         except Exception as e:
             results.append({
                 "rule": rule_name,
-                "file": str(rule_file.relative_to(PROJECT_ROOT)),
+                "file": str(rule_file.relative_to(PROJECT_ROOT)) if rule_file.is_relative_to(PROJECT_ROOT) else str(rule_file),
                 "status": "error",
                 "exit_code": -1,
                 "violations": [],
@@ -96,6 +123,7 @@ def run_all_rules(portfolio_data: dict | None = None) -> dict:
         "status": "ok" if total_violations == 0 else "violations",
         "total_rules": len(results),
         "total_violations": total_violations,
+        "crashed_rules": crashed_rules,
         "rules": results,
     }
 
