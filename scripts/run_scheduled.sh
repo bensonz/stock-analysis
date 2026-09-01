@@ -21,5 +21,11 @@ echo "=== run_scheduled $(date '+%Y-%m-%d %H:%M:%S %z') args=${*:---run} ==="
 source .venv/bin/activate
 python3 scripts/run_daily.py "${@:---run}"
 rc=$?
+# PIT raw-data archive (revived 2026-09-01, repo audit B7 — owner: "revive and
+# come back later"; usefulness review scheduled in FUTURE.md). Backfill-first
+# and append-only, so running after both slots is idempotent and a missed day
+# self-heals. Its failure must never contaminate the pipeline's exit code —
+# the doctor and manifest judge THAT; this is best-effort archival.
+python3 scripts/pit_archive.py run || echo "WARN: pit_archive failed (non-fatal)"
 echo "=== exit=$rc $(date '+%Y-%m-%d %H:%M:%S %z') ==="
 exit $rc

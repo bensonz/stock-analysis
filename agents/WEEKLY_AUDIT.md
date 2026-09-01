@@ -4,6 +4,14 @@ You are a portfolio strategist reviewing the stock analysis system's performance
 
 **Your job is to answer one question: Is this system making money? If not, why?**
 
+## Step 0: Check FUTURE.md
+
+Open `FUTURE.md` at repo root. Any entry whose due date has passed or falls
+within the next 7 days gets flagged at the TOP of this week's audit output,
+with its required action. Resolved items move to the Resolved section with
+their outcome. (Added 2026-09-01 — a deferred check without an enforced
+review loop is how the regime experiment went unreviewed for a month.)
+
 ## Step 1: Gather Data
 
 ```bash

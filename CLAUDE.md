@@ -8,10 +8,12 @@ An automated daily A-share (Chinese stock) momentum-analysis pipeline. Pure-Pyth
 
 The trading philosophy lives in `agents/ANALYST.md` (momentum-first: buy strength via RPS, follow hot sectors, cut losers fast). Read it before touching screening thresholds or decision logic — the magic numbers in the code (RPS 75-95%, `dist_ma5>6%`, breadth 1.5:1, `f10>=30` panic gate) are all specified there and must stay in sync.
 
+**`FUTURE.md`** (repo root) holds deferred checks with due dates — reviewed by the weekly audit's Step 0. When the user says "check this later", the entry goes there WITH a due date, not into memory.
+
 ## Environment & setup
 
 - Python venv at `.venv` — **activate it first**, then use `python3` (never bare `python`): `source .venv/bin/activate`
-- Deps: `pip install -r requirements.txt` (akshare, anthropic, openai, baostock, tushare, pycryptodome, httpx, requests)
+- Deps: `pip install -r requirements.txt` (akshare, anthropic, openai, pycryptodome, httpx, requests — baostock/tushare removed 2026-09-01, imported by nothing; install by hand for forensics)
 - Secrets in `.env` (git-ignored): `IFIND_REFRESH_TOKEN` (primary price source — see below), `TUSHARE_TOKEN`, `TAVILY_API_KEY` (web search), and OpenAI-compatible `OPENAI_*` / `LLM_PROVIDER`. `llm_client.py` also reads env from `~/.claude/settings.json`. (`IFIND_USERNAME`/`IFIND_PASSWORD` are unused by the HTTP API; the refresh token alone suffices.)
 - **External dependency:** IV sentiment (`fetch_iv_sentiment.py`) requires the separate *options-learn* backend on `http://localhost:8000`. If it's down, `iv_sentiment.json` comes back empty (`signal: "无数据"`) and the report says "IV data unavailable" — this is a missing dependency, not a pipeline bug. It degrades gracefully (sizing falls back to "unknown").
 
@@ -211,7 +213,7 @@ today's contract.
 
 - **`tracking/`** is the live portfolio state: `positions.json` (active), `closed/` (exited), `portfolio_config.json`, `hypotheses.json`. Schema in `TRACKER_SCHEMA.md`.
 - **`scripts/rules/`** — the mechanical risk engine. Each `check_*.py` is a standalone script that reads `positions.json` on **stdin** and emits violations on **stdout**; `run_rules.py` runs them all. Rules encode hard-won sell discipline (time-decay, overextended-entry, stop-proximity, breakout-failure, volume, IV filter). Each rule file's docstring carries its own track record and evolution notes tied to `LEARNINGS.md` entries — preserve that history when editing.
-- **`LEARNINGS.md`** (large, ~250KB and growing) is the accumulated trading post-mortem, read into the LLM prompt every run and updated after. `agents/*.md` (ANALYST, RESEARCHER, TRACKER, EVOLVER, ORCHESTRATOR, DAILY_AUDIT, WEEKLY_AUDIT) are the prompt specs for each role. Changes to strategy belong in these markdown specs, not hardcoded in Python.
+- **`LEARNINGS.md`** (large, ~250KB and growing) is the accumulated trading post-mortem, read into the LLM prompt every run and updated after. `agents/*.md` (ANALYST, EVOLVER, WEEKLY_AUDIT, DEEP_REPORT, DEEP_VERIFY) are the prompt specs for each role — ORCHESTRATOR/RESEARCHER/TRACKER/DAILY_AUDIT were deleted 2026-09-01 (owner decision: orphaned since the Python pipeline replaced the agent roles, and their instructions had drifted to actively wrong). Changes to strategy belong in these markdown specs, not hardcoded in Python.
 
 ## Data sources & fallbacks
 

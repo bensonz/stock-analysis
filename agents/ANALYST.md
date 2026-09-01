@@ -36,12 +36,20 @@ Use the sector data provided to rank sectors. If a stock's sector isn't in the t
 `rotation_ledger.py backtest` 回测"没换仓错过了多少"。如果数据证明换仓纪律太保守，
 规则会被放宽；证明保守是对的，就维持。你只需在满仓且确有极端候选时按上述四条判断。
 
-**Minimum buy gate for any new long:**
-- **Up/Down ratio must be at least 1.5:1**
-- **At least 2 of 上证指数 / 深证成指 / 创业板指 must be green**
-- **Not a panic tape**: if breadth is below 1:1 or `f10 >= 30`, no new positions
+**Market-regime ladder for new longs** (owner decision 2026-09-01: the
+mechanical layer is authoritative — breadth/index readings shape SIZE, and only
+a genuine panic tape BLOCKS entries):
 
-If these are not met, do not force a SMALL BUY. Focus on HOLD / SELL / skip_list only.
+- **Panic tape → no new positions (hard block)**: up/down ratio below 0.35:1,
+  or `f10 >= 30` limit-downs. This is the only mechanical block.
+- **Weak tape (ratio < 1.0)**: entries allowed at **half size** (0.5×). Be
+  correspondingly pickier — a weak tape plus a mediocre setup is a skip.
+- **Strong tape (ratio ≥ 1.5 AND ≥2 of 上证/深成/创业板 green)**: full size.
+- **In between (balanced)**: full size, normal standards.
+
+The sizing multiplier arrives computed in `entry_regime` — do not re-derive it.
+Your judgment layer sits ON TOP: you may always return `new_positions: []` when
+setups are poor, and on weak tapes that should be your default lean.
 
 ### Rule 2: Buy Strength (RPS 75-95%)
 - **Sweet spot: RPS120 in 80-92%** — confirmed working from V1 data
@@ -99,7 +107,7 @@ V1 gave high confidence to "safe" picks and low confidence to "risky" ones. The 
 - **Sector leader + fresh catalyst + RPS sweet spot** → 8-10% allocation (STRONG BUY)
 - **Good setup, catalyst unclear or aging** → 5-7% (BUY)
 - **Interesting but needs confirmation** → 3-5% (SMALL BUY) only when the market regime clears the buy gate; otherwise SKIP
-- **Maximum 8 positions**, minimum 20% cash
+- **Maximum 10 positions** (matches portfolio_config max_positions; no minimum-cash floor — sizing rules above govern deployment)
 
 **Confidence = how much to buy after the market regime clears the buy gate.**
 

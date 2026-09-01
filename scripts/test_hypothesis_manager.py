@@ -296,17 +296,8 @@ class TestAutoLifecycle:
         assert "hitRate" in h["retiredReason"]
         print("✅ test_auto_retire_low_hitrate")
 
-    def test_auto_retire_stale(self):
-        data = _fresh_data()
-        h = _make_hypothesis(data, "Old news")
-        stale_date = str(date.today() - timedelta(days=35))
-        h["lastTested"] = stale_date
-        # Trigger lifecycle check via add_evidence... but actually _auto_lifecycle
-        # is called after add_evidence. Let's simulate by calling it directly.
-        hm._auto_lifecycle(h)
-        assert h["status"] == "retired"
-        assert "days" in h["retiredReason"]
-        print("✅ test_auto_retire_stale")
+    # test_auto_retire_stale removed 2026-09-01: staleness retirement was
+    # deleted by owner decision (repo audit B6) — see _auto_lifecycle's note.
 
     def test_retired_stays_retired(self):
         data = _fresh_data()

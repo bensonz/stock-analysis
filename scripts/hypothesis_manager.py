@@ -24,7 +24,7 @@ PROMOTE_TO_RULE_MIN_EVIDENCE = 10
 PROMOTE_TO_RULE_MIN_HITRATE = 0.75
 RETIRE_MIN_EVIDENCE = 5
 RETIRE_MAX_HITRATE = 0.40
-RETIRE_STALE_DAYS = 30
+# RETIRE_STALE_DAYS removed 2026-09-01 with the staleness mechanism (B6).
 
 VALID_TYPES = {"observation", "heuristic", "signal", "rule"}
 VALID_STATUSES = {"observation", "hypothesis", "validated", "rule", "retired"}
@@ -292,15 +292,15 @@ def _auto_lifecycle(h: dict) -> None:
         h["retiredReason"] = f"hitRate {hr:.0%} < {RETIRE_MAX_HITRATE:.0%} after {n} samples"
         return
 
-    # Stale check
-    if h.get("lastTested"):
-        last = datetime.strptime(h["lastTested"], "%Y-%m-%d").date()
-        days_stale = (date.today() - last).days
-        if days_stale > RETIRE_STALE_DAYS and status in ("observation", "hypothesis"):
-            h["status"] = "retired"
-            h["retiredDate"] = str(date.today())
-            h["retiredReason"] = f"No new evidence in {days_stale} days"
-            return
+    # Staleness retirement REMOVED 2026-09-01 (owner decision, repo audit B6).
+    # It was dead in production either way: this path only ran inside
+    # add_evidence, which stamps lastTested = today's run date immediately
+    # before — so a hypothesis could only ever look stale to a backdated test
+    # fixture (which is exactly what kept 5 tests red for five months), and a
+    # hypothesis receiving NO evidence was never evaluated at all. Five months
+    # of live data: 180 hypotheses, zero retired by staleness. Lifecycle is
+    # hit-rate driven only; garbage collection, if ever wanted, needs a
+    # sweep that runs on its own clock, not a branch here.
 
     # Promotion chain
     if status == "observation" and n >= PROMOTE_TO_HYPOTHESIS_MIN_EVIDENCE:
@@ -512,7 +512,6 @@ def main():
         print("  hypothesis_manager.py stats           — Quick stats")
         print("  hypothesis_manager.py get <id>        — Show single hypothesis")
         print("  hypothesis_manager.py retire <id> <reason>  — Retire a hypothesis")
-        print("  hypothesis_manager.py stale-check     — Retire stale hypotheses")
         return
 
     data = load_hypotheses()
@@ -548,22 +547,6 @@ def main():
         retire_hypothesis(data, h_id, reason)
         save_hypotheses(data)
         print(f"Retired {h_id}: {reason}")
-
-    elif cmd == "stale-check":
-        count = 0
-        for h in data["hypotheses"]:
-            if h["status"] in ("observation", "hypothesis") and h.get("lastTested"):
-                last = datetime.strptime(h["lastTested"], "%Y-%m-%d").date()
-                days = (date.today() - last).days
-                if days > RETIRE_STALE_DAYS:
-                    h["status"] = "retired"
-                    h["retiredDate"] = str(date.today())
-                    h["retiredReason"] = f"Stale: no evidence in {days} days"
-                    count += 1
-                    print(f"  Retired {h['id']}: stale ({days} days)")
-        if count:
-            save_hypotheses(data)
-        print(f"Retired {count} stale hypotheses")
 
     else:
         print(f"Unknown command: {cmd}")

@@ -6,11 +6,11 @@ re-verified at `file:line` before being written down — the four most severe
 (arbitrary-path write, entry gates, price-0 fabrication, rules-engine
 swallow) by reading the live code directly.
 
-| report | scope |
-|---|---|
-| `DOCS_AUDIT.md` | all 79 hand-written markdown files: CURRENT / STALE / DEAD |
-| `DEADCODE_AUDIT.md` | unused modules/functions, the 7 red tests, test-layer rot |
-| `ARCHITECTURE_REVIEW.md` | layering, top-10 risk findings, run_daily split proposal |
+| report                   | scope                                                      |
+| ------------------------ | ---------------------------------------------------------- |
+| `DOCS_AUDIT.md`          | all 79 hand-written markdown files: CURRENT / STALE / DEAD |
+| `DEADCODE_AUDIT.md`      | unused modules/functions, the 7 red tests, test-layer rot  |
+| `ARCHITECTURE_REVIEW.md` | layering, top-10 risk findings, run_daily split proposal   |
 
 **State in one sentence:** the structure is sound and the recent refactors
 held; the real risk is that `agents/ANALYST.md` and the Python gates have
@@ -45,18 +45,26 @@ runs toward taking MORE risk.
 1. Entry gates: spec says breadth ≥1.5:1 and 2-of-3 indices are MANDATORY;
    code blocks only below 0.35:1 and treats both as sizing labels. Which is
    the strategy?
+   code is right, only sizing on a bad day.
 2. Position limits: prompt 8 / 20% cash vs config 10 / 0% — the model sees both.
+   config is right, udpate the prompt one
 3. Time stop: 15d (code + one spec line) vs 10d (three other lines the model
    reads every run); TRACKER.md has a third variant.
+   15d is correct
 4. The four orphaned agent specs (ORCHESTRATOR / RESEARCHER / TRACKER /
    DAILY_AUDIT): archive, delete, or rewrite? TRACKER.md as written would
    destroy the portfolio block.
+   delete
 5. TRACKER_SCHEMA.md: rewrite against code, or delete and point at code?
+   rewrite
 6. Hypothesis staleness is dead in production (retire check only fires when
    evidence arrives): wire `stale-check` into the pipeline, or drop it?
+   delete it.
 7. `pit_archive.py`: revive or delete?
+   revive and come back later
 8. requirements: `baostock` / `tushare` imported by nothing — keep as forensic
    conveniences or drop?
+   remove
 
 ## C. Approved-convention work (mechanical)
 
@@ -95,6 +103,6 @@ per-rule thresholds beside their track records, dated records never rewritten.
 
 ---
 
-*Reports generated 2026-08-31 by read-only survey agents; synthesis and
+_Reports generated 2026-08-31 by read-only survey agents; synthesis and
 spot-verification by the coordinating session. Nothing was modified during
-the survey.*
+the survey._
