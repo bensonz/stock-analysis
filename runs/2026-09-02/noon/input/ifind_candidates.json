@@ -1,0 +1,22 @@
+{
+  "available": true,
+  "fetched_at": "2026-09-02T13:20:22.431507+08:00",
+  "note": "display-only second opinion; does NOT feed the RPS/MA gate. iwencai ignores searchtype and returns suspended names, so counts may exceed the tradeable universe.",
+  "screens": [
+    {
+      "label": "涨停",
+      "query": "今日涨停 非ST 上市天数大于60",
+      "error": "ConnectionError: HTTPSConnectionPool(host='quantapi.51ifind.com', port=443): Max retries exceeded with url: /api/v1/smart_stock_picking (Caused by NameResolutionError(\"HTTPSConnection(host='quantapi.5"
+    },
+    {
+      "label": "强势动量",
+      "query": "RPS120大于80 且 RPS250大于80 且 MA20大于MA120 非ST",
+      "error": "ConnectionError: HTTPSConnectionPool(host='quantapi.51ifind.com', port=443): Max retries exceeded with url: /api/v1/smart_stock_picking (Caused by NameResolutionError(\"HTTPSConnection(host='quantapi.5"
+    },
+    {
+      "label": "放量突破",
+      "query": "今日涨幅大于5% 换手率大于5% 量比大于2 非ST 上市天数大于60",
+      "error": "ConnectionError: HTTPSConnectionPool(host='quantapi.51ifind.com', port=443): Max retries exceeded with url: /api/v1/smart_stock_picking (Caused by NameResolutionError(\"HTTPSConnection(host='quantapi.5"
+    }
+  ]
+}

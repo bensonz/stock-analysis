@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key><string>com.bz.stock-pit</string>
+    <!-- PIT raw-data archive (audit B7). Own label ON PURPOSE: on 2026-09-02
+         its historical backfill ran 4.6h inside the pipeline wrapper and
+         launchd silently skipped the 15:05 run (one instance per label).
+         Here, a long backfill can only block ITSELF — append-only and
+         resumable, so a skipped day self-heals tomorrow. -->
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/bash</string>
+      <string>-c</string>
+      <string>cd /Users/bz/Work/Personal/stock-analysis &amp;&amp; source .venv/bin/activate &amp;&amp; python3 scripts/pit_archive.py run</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <array>
+      <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>17</integer><key>Minute</key><integer>40</integer></dict>
+      <dict><key>Weekday</key><integer>2</integer><key>Hour</key><integer>17</integer><key>Minute</key><integer>40</integer></dict>
+      <dict><key>Weekday</key><integer>3</integer><key>Hour</key><integer>17</integer><key>Minute</key><integer>40</integer></dict>
+      <dict><key>Weekday</key><integer>4</integer><key>Hour</key><integer>17</integer><key>Minute</key><integer>40</integer></dict>
+      <dict><key>Weekday</key><integer>5</integer><key>Hour</key><integer>17</integer><key>Minute</key><integer>40</integer></dict>
+    </array>
+    <key>StandardOutPath</key><string>/Users/bz/Work/Personal/stock-analysis/data/launchd/pit.log</string>
+    <key>StandardErrorPath</key><string>/Users/bz/Work/Personal/stock-analysis/data/launchd/pit.log</string>
+  </dict>
+</plist>

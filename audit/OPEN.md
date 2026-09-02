@@ -17,33 +17,15 @@
         · … 另有 1 次更早的
 
   ▸ source_unhealthy  [env]
-      16 次 / 13 天   2026-04-09 … 2026-08-25   最长连续 10
-        · 2026-08-25 noon      数据源 sina 状态 down
-        · 2026-08-25 noon      数据源 cheesefortune 状态 down
+      18 次 / 14 天   2026-04-09 … 2026-09-02   最长连续 10
         · 2026-08-25 afternoon 数据源 sina 状态 down
         · 2026-08-25 afternoon 数据源 cheesefortune 状态 down
-        · … 另有 12 次更早的
+        · 2026-09-02 noon      数据源 sina 状态 down
+        · 2026-09-02 noon      数据源 cheesefortune 状态 down
+        · … 另有 14 次更早的
 
 
 ## 需要人工操作 (5)
-
-  ▸ phase_failed  [env]
-      9 次 / 9 天   2026-05-28 … 2026-08-25
-      执行:   python3 scripts/run_daily.py --slot afternoon --run
-        · 2026-07-20 afternoon 阶段 apply 失败
-        · 2026-08-12 noon      阶段 collect 失败
-        · 2026-08-20 afternoon 阶段 collect 失败
-        · 2026-08-25 noon      阶段 collect 失败
-        · … 另有 5 次更早的
-
-  ▸ gate_hard_fail  [env]
-      23 次 / 9 天   2026-05-28 … 2026-08-25
-      执行:   python3 scripts/pricedb.py repair
-        · 2026-08-25 noon      phase1_to_phase2 硬闸门拦截
-        · 2026-08-25 noon      phase1_to_phase2 硬闸门拦截
-        · 2026-08-25 noon      phase1_to_phase2 硬闸门拦截
-        · 2026-08-25 noon      phase1_to_phase2 硬闸门拦截
-        · … 另有 19 次更早的
 
   ▸ snapshot_wrote_rows  [env]
       1 次 / 1 天   2026-08-26
@@ -68,6 +50,24 @@
         · 2026-08-31 afternoon 抽查 20 只、实际核对 0 只
         · 2026-09-01 afternoon 抽查 20 只、实际核对 0 只
         · … 另有 4 次更早的
+
+  ▸ phase_failed  [env]
+      10 次 / 10 天   2026-05-28 … 2026-09-02
+      执行:   python3 scripts/run_daily.py --slot afternoon --run
+        · 2026-08-12 noon      阶段 collect 失败
+        · 2026-08-20 afternoon 阶段 collect 失败
+        · 2026-08-25 noon      阶段 collect 失败
+        · 2026-09-02 noon      阶段 collect 失败
+        · … 另有 6 次更早的
+
+  ▸ gate_hard_fail  [env]
+      28 次 / 10 天   2026-05-28 … 2026-09-02
+      执行:   python3 scripts/pricedb.py repair
+        · 2026-09-02 noon      phase1_to_phase2 硬闸门拦截
+        · 2026-09-02 noon      phase1_to_phase2 硬闸门拦截
+        · 2026-09-02 noon      phase1_to_phase2 硬闸门拦截
+        · 2026-09-02 noon      phase1_to_phase2 硬闸门拦截
+        · … 另有 24 次更早的
 
 
 ## 已知并接受 (1)

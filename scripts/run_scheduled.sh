@@ -21,11 +21,11 @@ echo "=== run_scheduled $(date '+%Y-%m-%d %H:%M:%S %z') args=${*:---run} ==="
 source .venv/bin/activate
 python3 scripts/run_daily.py "${@:---run}"
 rc=$?
-# PIT raw-data archive (revived 2026-09-01, repo audit B7 — owner: "revive and
-# come back later"; usefulness review scheduled in FUTURE.md). Backfill-first
-# and append-only, so running after both slots is idempotent and a missed day
-# self-heals. Its failure must never contaminate the pipeline's exit code —
-# the doctor and manifest judge THAT; this is best-effort archival.
-python3 scripts/pit_archive.py run || echo "WARN: pit_archive failed (non-fatal)"
+# pit_archive REMOVED from this wrapper 2026-09-02 after one day in service.
+# Lesson: launchd will not start a new instance of a label while one is still
+# running — the 09-02 noon wrapper sat 4.6h in pit's historical backfill, so
+# the 15:05 afternoon run was silently SKIPPED. "Non-fatal to the exit code"
+# is not the same as "non-fatal to the schedule". PIT now runs as its own
+# label (com.bz.stock-pit, ops/launchd/) where blocking itself is harmless.
 echo "=== exit=$rc $(date '+%Y-%m-%d %H:%M:%S %z') ==="
 exit $rc
