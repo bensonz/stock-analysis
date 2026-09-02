@@ -1,0 +1,48 @@
+{
+  "date": "2026-09-02",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1788340680.341915,
+      "errors": [],
+      "end": 1788340755.122648,
+      "duration_sec": 74.8
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8216,
+      "tokens": {
+        "input_tokens": 127076,
+        "output_tokens": 16145
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 216.8,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1788340971.978134,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=28",
+        "Hypothesis: Created h182 (observation): 重入标的(昭衍新药8/21卖出、安集科技8/19卖出)现均低于MA20且非热区，重入举证责任未满足，维持跳过...",
+        "Hypothesis: Created h183 (observation): 输入events中的'大涨原因'标签可能是旧闻：西部矿业标注'隔夜LME期铜创历史新高'，但9/2铜价实际-0.88%(tradingeconomics)，追滞...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1788340972.4736378,
+      "duration_sec": 0.5
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 292.1
+  }
+}

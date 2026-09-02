@@ -1,0 +1,62 @@
+{
+  "date": "2026-09-02",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 18.52,
+      "pnl_pct": 18.7,
+      "note": "浮盈+18.7%，止损已锁+10%(17.16)，现价18.52高于止损；美伊冲突推升油价(WTI+4.65%至89.37美元，来源：金十数据9/2)对炼化/文莱资产构成顺风；石油石化未入今日bottom5，无卖出触发，让利润奔跑"
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 61.56,
+      "pnl_pct": 4.3,
+      "note": "浮盈+4.3%，第5个交易日；未触-5%止损/-3%三日规则/15日时间止损；元件9/1曾入bottom5(冷区第1日)，今日已退出bottom5，冷区计数重置；覆铜板涨价链仍在，继续持有"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 155.99,
+      "pnl_pct": 23.3,
+      "note": "浮盈+23.3%，止损已锁+10%(139.15)，现价155.99远高于止损；中报上调全年指引至585-605亿(来源：输入events/新京报)；医疗服务未入bottom5，无卖出触发"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 967192.0,
+    "dayPnl": -427.0,
+    "dayReturnPct": -0.04,
+    "totalReturnPct": -3.28,
+    "unrealizedPnl": 14539.0,
+    "realizedPnl": -47347.0,
+    "cashPct": 89.55
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.395,
+    "up": 1541,
+    "down": 3901,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 55,
+    "limit_downs": 9,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.40:1, 0/3 major indices green, 55 limit-ups / 9 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "弱市(breadth 0.40:1，涨跌1541/3901，涨停55/跌停9)，三大指数全绿(上证-0.97%/深成-1.88%/创业板-2.39%，科创50-1.82%)。驱动：美伊冲突升级+油价急升(WTI+4.65%至89.37美元、布伦特94.41美元，来源：金十/新浪财经)+10Y美债4.803%，压制科技/半导体(通富微电跌停、半导体收跌-1.80%)，资金转向军工/防御(地面兵装+6.42%领涨、玻璃玻纤+1.02%)。IV整体中性(avg rank 0.489)，中证500/创业板偏高。entry_regime=weak、0.5×仓位非硬阻断，但候选池无今日热区标的，空仓观望。持续跟踪：美伊/霍尔木兹局势(standing风险，油运与油价双向扰动)。"
+  }
+}

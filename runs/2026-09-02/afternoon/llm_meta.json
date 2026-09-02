@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 127076,
+  "output_tokens": 16145,
+  "rounds": 2,
+  "duration_sec": 216.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月2日 市场 下跌 板块 涨跌 原因",
+        "max_results": 5
+      },
+      "result_length": 3581
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "地面兵装 军工 板块 上涨 原因 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3283
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "LME铜价 历史新高 2026年9月 铜价",
+        "max_results": 5
+      },
+      "result_length": 3232
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "霍尔木兹 油运 VLCC 运价 2026年9月 招商轮船",
+        "max_results": 5
+      },
+      "result_length": 3294
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体板块 2026年9月2日 下跌 通富微电 跌停",
+        "max_results": 5
+      },
+      "result_length": 3269
+    }
+  ],
+  "fallback_used": false
+}
