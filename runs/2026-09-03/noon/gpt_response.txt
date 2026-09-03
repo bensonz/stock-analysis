@@ -1,0 +1,172 @@
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "航运港口", "5d_pct": 3.47, "trend": "persisting（霍尔木兹油运运价历史高位）"},
+      {"name": "保险Ⅱ", "5d_pct": 3.2, "trend": "steady"},
+      {"name": "贵金属", "5d_pct": 2.95, "trend": "rotating（龙头由湖南黄金重组驱动，跟风分化）"},
+      {"name": "电机Ⅱ", "5d_pct": 2.46, "trend": "steady"},
+      {"name": "其他电子Ⅱ", "5d_pct": 1.99, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "饲料", "5d_pct": -2.35, "trend": "deteriorating"},
+      {"name": "玻璃玻纤", "5d_pct": -1.94, "trend": "deteriorating"},
+      {"name": "林业Ⅱ", "5d_pct": -1.8, "trend": "deteriorating"},
+      {"name": "房地产服务", "5d_pct": -1.59, "trend": "deteriorating"},
+      {"name": "农业综合Ⅱ", "5d_pct": -1.47, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/3 positions in hot sectors",
+    "regime": "航运/油运+贵金属+保险领涨，农业/地产链走弱；指数全绿但宽度0.69:1普跌，弱反弹结构"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "浮盈+21.8%，止损已锁+10%(17.16)，现价19.0远高于止损；石油石化未入top/bottom5，无卖出触发，让利润奔跑",
+      "sector_rank": "中游（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 21.8,
+      "days_held": 27,
+      "exit_price": null
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "浮盈+6.7%，第6个交易日，未触-5%止损/-3%三日规则/15日时间止损；元件今日未入bottom5，9/1冷区计数已重置，无卖出触发",
+      "sector_rank": "中游（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 6.7,
+      "days_held": 6,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+22.4%，止损已锁+10%(139.15)，现价154.83远高于止损；医疗服务未入bottom5，无卖出触发",
+      "sector_rank": "中游（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 22.4,
+      "days_held": 25,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "entry_price": 19.29,
+      "allocation_pct": 4,
+      "stop": 18.33,
+      "target": 25.3,
+      "thesis": "航运港口今日板块#1(+3.47%)，霍尔木兹通航未实质恢复、油运运价历史高位；招商轮船为航运龙头(中银证券推荐)。RPS120=85.89甜区，dist_ma5+4.2%/ma10+3.2%/ma20+6.2%均未触追高线。弱宽度按0.5倍仓位小仓进场。风险：margin signal=deleveraging、霍尔木兹为ongoing事件(已按anti-freeze条款减仓而非跳过)",
+      "sector": "航运港口",
+      "sector_rank": "top 5%（今日#1）",
+      "catalyst": "VLCC TCE 8/28达554,791美元/天、周环比+9.89%；中银证券推荐招商轮船，目标价对应+31%上涨空间（来源：输入events/中银证券研报）",
+      "catalyst_freshness": "ongoing",
+      "rps120": 85.89,
+      "conviction": "strong"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "航运港口#1板块但dist_ma5+8.1%>6%、dist_ma10+9.2%>8%(Rule 2b追高红线)，且9/29解禁占总股本67.86%（输入events）；rps120=91.02",
+      "rps120": 91.02
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "reason": "贵金属top5但个股催化偏负：半年报Q2净利环比-24%（来源：财联社8/30）、二季度公募大幅减持（132只基金不再重仓）、半年报发布日开盘-6.29%（输入events）；板块领涨为湖南黄金（重组驱动）非本股；rps120=87.84",
+      "rps120": 87.84
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "reason": "重入举证不足：8/21因医疗服务跌入bottom5离场(+11.45%)，今日医疗服务仍未入top5；rps120=94.73扩展区，dist_ma10-7.1%/ma20-10.6%均线下方",
+      "rps120": 94.73
+    },
+    {
+      "code": "688403",
+      "name": "汇成股份",
+      "reason": "半导体未入top5；H1净利同比-94.78%（输入events），盈利崩塌；rps120=94.93扩展区",
+      "rps120": 94.93
+    },
+    {
+      "code": "600378",
+      "name": "昊华科技",
+      "reason": "氟化工未入top5；rps120=92.5扩展区，9/1大跌-7.83%且成交额为20日均值1.67倍、抛压重（输入events）",
+      "rps120": 92.5
+    },
+    {
+      "code": "688222",
+      "name": "成都先导",
+      "reason": "医疗服务未入top5；股东钧天投资拟减持1.63%（9/3起，输入events）；rps120=91.74",
+      "rps120": 91.74
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "铜（工业金属）未入top5（今日上榜为贵金属非工业金属），虽LME铜新高但板块今日未上榜；rps120=89.78",
+      "rps120": 89.78
+    },
+    {
+      "code": "601233",
+      "name": "桐昆股份",
+      "reason": "石油石化未入top5，且已持有同板块恒逸石化（集中度控制）；rps120=88.09",
+      "rps120": 88.09
+    },
+    {
+      "code": "688019",
+      "name": "安集科技",
+      "reason": "电子化学品未入top5；rps120=91.12，dist_ma20-8.3%均线下方",
+      "rps120": 91.12
+    },
+    {
+      "code": "301003",
+      "name": "江苏博云",
+      "reason": "塑料未入top5；估值处上市以来98.83%分位（输入）；rps120=91.41",
+      "rps120": 91.41
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱宽度(涨跌比0.69:1)+三大指数全绿=大盘股护盘的弱反弹，多数个股普跌(f0_2桶2546只)。这种盘面下只允许对#1板块+甜区RPS+不追高的干净标的以0.5倍仓位进场，其余一律跳过。",
+      "type": "heuristic",
+      "tags": ["regime", "position-sizing", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "涨跌比反映个股真实强弱，指数绿但普跌说明资金只托大票，弱盘面追高中小盘标的胜率低"
+    },
+    {
+      "text": "航运港口为当前最强主线：霍尔木兹通航未实质恢复，VLCC TCE 8/28达554,791美元/天(周环比+9.89%)。招商轮船作为航运龙头通过RPS甜区+MA距离双重过滤，是主线内唯一可入场标的；海通发展同板块但dist_ma5+8.1%触发追高红线。",
+      "type": "signal",
+      "tags": ["sector", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "主线内也要区分'龙头不追高'与'跟风已超买'，MA距离过滤在热门板块内继续有效"
+    },
+    {
+      "text": "贵金属板块top5但龙头由个股事件驱动(湖南黄金=重大资产重组+黄金储量增厚涨停)，跟风股赤峰黄金自身信号偏负(半年报Q2环比-24%、公募二季度大幅减持、半年报发布日开盘-6.29%)——板块热度≠板块内每只都能买，跟风+负催化在弱宽度下应跳过。",
+      "type": "heuristic",
+      "tags": ["sector", "entry-filter"],
+      "evidence_type": "supporting",
+      "mechanism": "板块beta由龙头事件驱动时，跟风股缺乏独立催化，弱盘面下资金不会扩散到跟风股"
+    },
+    {
+      "text": "重入纪律再次验证：昭衍新药8/21因医疗服务跌入bottom5离场(+11.45%)，今日医疗服务仍未回top5、RPS120=94.73在扩展区且价在MA10/MA20下方，举证责任不满足，继续跳过而非重入。",
+      "type": "rule",
+      "tags": ["entry-filter", "exit-rule"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "重入需证明'上次离场原因已消除'，板块未回暖+形态未修复=离场逻辑仍成立"
+    }
+  ],
+  "market_summary": "指数全绿(上证+0.43%/深成+0.39%/创业板+0.43%)但宽度偏弱：涨跌比0.69:1(2178涨/3168跌)，43涨停/8跌停，呈'大盘股护盘、多数个股普跌'的弱反弹结构。IV整体中性(avg IV Rank 0.45)，创业板/中证500 IV偏高。主线集中在航运港口(+3.47%，霍尔木兹油运运价历史高位)+贵金属(+2.95%)+保险(+3.2%)；农业/饲料/玻璃玻纤等品种走弱。持仓0/3在今日热门板块，但均未入冷区，无卖出触发。弱宽度按规则允许半仓开新仓，仅对#1板块+甜区RPS+不追高的干净标的(招商轮船)给0.5倍小仓。",
+  "market_sentiment": "neutral",
+  "market_call": "谨慎"
+}
+```

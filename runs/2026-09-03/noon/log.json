@@ -1,0 +1,120 @@
+{
+  "date": "2026-09-03",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1788406509.605758,
+      "errors": [],
+      "end": 1788406576.247814,
+      "duration_sec": 66.6
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 5919,
+      "tokens": {
+        "input_tokens": 129078,
+        "output_tokens": 20646
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 299.2,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1788406875.5067918,
+      "actions": [
+        "SIZE THROTTLE 601872: 4% -> 2% (regime=weak)",
+        "OPEN 601872 @ 19.29",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=149",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=56",
+        "Hypothesis: Created h184 (observation): 贵金属板块top5但龙头由个股事件驱动(湖南黄金=重大资产重组+黄金储量增厚涨停)，跟风股赤峰黄金自身信号偏负(半年报Q2环比-24%、公募二季度大幅减持、半年...",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=73",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "601872",
+                "name": "招商轮船",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 19.29,
+                "stopLoss": 18.33,
+                "distance_pct": 4.98,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1788406876.111834,
+      "duration_sec": 0.6
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 601872 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 366.4
+  }
+}

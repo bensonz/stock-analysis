@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 129078,
+  "output_tokens": 20646,
+  "rounds": 2,
+  "duration_sec": 299.2,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "航运港口 油运 招商轮船 霍尔木兹 VLCC运价 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3222
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月3日 市场行情 板块 航运 贵金属",
+        "max_results": 5
+      },
+      "result_length": 3252
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "贵金属 黄金股 湖南黄金 涨停 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3261
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "招商轮船 601872 目标价 研报 中银证券",
+        "max_results": 5
+      },
+      "result_length": 2984
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "赤峰黄金 半年报 2026 公募减持 黄金",
+        "max_results": 5
+      },
+      "result_length": 3262
+    }
+  ],
+  "fallback_used": false
+}

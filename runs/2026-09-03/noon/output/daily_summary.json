@@ -1,0 +1,74 @@
+{
+  "date": "2026-09-03",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 19.0,
+      "pnl_pct": 21.8,
+      "note": "浮盈+21.8%，止损已锁+10%(17.16)，现价19.0远高于止损；石油石化未入top/bottom5，无卖出触发，让利润奔跑"
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 62.94,
+      "pnl_pct": 6.7,
+      "note": "浮盈+6.7%，第6个交易日，未触-5%止损/-3%三日规则/15日时间止损；元件今日未入bottom5，9/1冷区计数已重置，无卖出触发"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 154.83,
+      "pnl_pct": 22.4,
+      "note": "浮盈+22.4%，止损已锁+10%(139.15)，现价154.83远高于止损；医疗服务未入bottom5，无卖出触发"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "OPEN",
+      "price": 19.29,
+      "note": "航运港口今日板块#1(+3.47%)，霍尔木兹通航未实质恢复、油运运价历史高位；招商轮船为航运龙头(中银证券推荐)。RPS120=85.89甜区，dist_ma5+4.2%/ma10+3.2%/ma20+6.2%均未触追高线。弱宽度按0.5倍仓位小仓进场。风险：margin signal=deleveraging、霍尔木兹为ongoing事件(已按anti-freeze条款减仓而非跳过)"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 968164.0,
+    "dayPnl": 972.0,
+    "dayReturnPct": 0.1,
+    "totalReturnPct": -3.18,
+    "unrealizedPnl": 15511.0,
+    "realizedPnl": -47347.0,
+    "cashPct": 87.87
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.6875,
+    "up": 2178,
+    "down": 3168,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 43,
+    "limit_downs": 8,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.69:1, 3/3 major indices green, 43 limit-ups / 8 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [
+    {
+      "code": "601872",
+      "name": "招商轮船"
+    }
+  ],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "指数全绿(上证+0.43%/深成+0.39%/创业板+0.43%)但宽度偏弱：涨跌比0.69:1(2178涨/3168跌)，43涨停/8跌停，呈'大盘股护盘、多数个股普跌'的弱反弹结构。IV整体中性(avg IV Rank 0.45)，创业板/中证500 IV偏高。主线集中在航运港口(+3.47%，霍尔木兹油运运价历史高位)+贵金属(+2.95%)+保险(+3.2%)；农业/饲料/玻璃玻纤等品种走弱。持仓0/3在今日热门板块，但均未入冷区，无卖出触发。弱宽度按规则允许半仓开新仓，仅对#1板块+甜区RPS+不追高的干净标的(招商轮船)给0.5倍小仓。"
+  }
+}
