@@ -1,0 +1,70 @@
+{
+  "date": "2026-09-04",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 17.86,
+      "pnl_pct": 14.5,
+      "note": "浮盈+14.5%仍高于+10%追踪止损17.16，未触发任何卖出规则；但今日-5.4%是石油石化板块回调领先信号，距止损仅3.9%（stop_proximity WATCH），紧盯17.16不放松"
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 62.37,
+      "pnl_pct": 5.7,
+      "note": "浮盈+5.7%，第7个交易日，未触-5%止损/-3%三日规则/15日时间止损；元件板块今日未入bottom5，无卖出触发"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 19.25,
+      "pnl_pct": -0.2,
+      "note": "第2日浮盈-0.2%，未触-5%硬止损/-3%三日规则；航运港口今日未入bottom5，霍尔木兹油运高位逻辑未变（中银证券推荐，来源：输入events）"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 154.78,
+      "pnl_pct": 22.4,
+      "note": "浮盈+22.4%远高于+10%止损139.15，未触发卖出规则；医疗服务未入bottom5（CRO 9/2曾跌2%但今日不在冷区），让利润奔跑"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 966065.0,
+    "dayPnl": -2498.0,
+    "dayReturnPct": -0.26,
+    "totalReturnPct": -3.39,
+    "unrealizedPnl": 13412.0,
+    "realizedPnl": -47347.0,
+    "cashPct": 88.06
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 3.1476,
+    "up": 4136,
+    "down": 1314,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 46,
+    "limit_downs": 2,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 3.15:1, 3/3 major indices green, 46 limit-ups / 2 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "Breadth 3.15:1 强势（上涨4136/下跌1314，涨停46/跌停2），上证+0.35%/深成+0.27%/创业板+0.43%三绿，但科创50独跌-0.70%。今日是防御性轮动：林业/广告营销/房地产服务/渔业/养殖领涨，玻璃玻纤/贵金属/电子化学品/小金属领跌。IV整体40.4%中性（创业板ETF 50.1%、深100 55.2%偏高）。机械层regime=strong允许满仓开仓，但候选池与今日热门板块零交集，持仓4票（石油石化/元件/航运/医疗服务）全在中游，恒逸石化-5.4%提示石化回调——故new_positions空仓，持币等轮动给出清晰板块对齐，不让强势宽度逼出非领涨板块的强开仓。"
+  }
+}

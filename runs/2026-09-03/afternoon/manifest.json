@@ -1,0 +1,61 @@
+{
+  "date": "2026-09-03",
+  "slot": "afternoon",
+  "run_started_at": "2026-09-03T15:05:05.715245+08:00",
+  "status": "failed",
+  "exit_code": 1,
+  "total_duration_sec": 0.0,
+  "phases": {
+    "health_check": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "sources": {
+        "sina": {
+          "status": "ok",
+          "latency_ms": 55.6
+        },
+        "cheesefortune": {
+          "status": "ok",
+          "latency_ms": 386.7
+        },
+        "pricedb": {
+          "status": "ok",
+          "latest_date": "2026-09-02",
+          "stale": false
+        }
+      }
+    },
+    "preflight_pricedb": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "latest_date": "2026-09-03",
+      "target": "2026-09-03",
+      "snapshot": "  2026-09-03: 0 → 5543 rows (5543 inserted)"
+    },
+    "collect": {
+      "status": "ok",
+      "duration_sec": 72.2,
+      "errors": []
+    },
+    "llm_analysis": {
+      "status": "failed",
+      "duration_sec": 354.6
+    }
+  },
+  "gates": {
+    "phase1_to_phase2": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": []
+    },
+    "phase2_to_phase3": {
+      "passed": false,
+      "hard_fails": [
+        "new position 600988: missing required field 'target'"
+      ],
+      "soft_warns": [],
+      "notes": []
+    }
+  }
+}

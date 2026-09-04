@@ -1,0 +1,67 @@
+{
+  "date": "2026-09-03",
+  "slot": "afternoon",
+  "verdict": "action_needed",
+  "checks_run": 9,
+  "checks_total": 14,
+  "skipped": [
+    {
+      "check": "check_new_positions_absent_from_snapshot",
+      "reason": "snapshot missing or unreadable"
+    },
+    {
+      "check": "check_action_on_code_not_held",
+      "reason": "snapshot missing or unreadable"
+    },
+    {
+      "check": "check_sold_position_still_held",
+      "reason": "snapshot missing or unreadable"
+    },
+    {
+      "check": "check_duplicate_active_positions",
+      "reason": "snapshot missing or unreadable"
+    },
+    {
+      "check": "check_postrun_marks_are_from_run_day",
+      "reason": "snapshot missing or unreadable"
+    }
+  ],
+  "findings": [
+    {
+      "id": "phase-failed:llm_analysis",
+      "check": "phase_failed",
+      "kind": "env",
+      "title": "阶段 llm_analysis 失败",
+      "detail": "无错误详情",
+      "suspect": "",
+      "fix_cmd": "python3 scripts/run_daily.py --slot afternoon --run",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "gate-hard-fail:phase2_to_phase3:ba2bd65b",
+      "check": "gate_hard_fail",
+      "kind": "env",
+      "title": "phase2_to_phase3 硬闸门拦截",
+      "detail": "new position 600988: missing required field 'target'",
+      "suspect": "",
+      "fix_cmd": "",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "db-health-spot-check-verified-nothing",
+      "check": "db_health_spot_check",
+      "kind": "env",
+      "title": "抽查 20 只、实际核对 0 只",
+      "detail": "spot_check: {\"date\": \"2026-09-03\", \"sampled\": 20, \"checked\": 0, \"fetch_failures\": 20, \"mismatches\": []}。0 处不一致来自 0 次比对，不能读作数据无误。",
+      "suspect": "",
+      "fix_cmd": "python3 scripts/pricedb.py status",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    }
+  ]
+}

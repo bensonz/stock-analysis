@@ -42,32 +42,32 @@
         · 2026-08-28 afternoon 数据健康告警: adj factors lag prices (2026-08-27 < 2026-08-28) — run 'pricedb.py fac
         · … 另有 3 次更早的
 
-  ▸ db_health_spot_check  [env]
-      8 次 / 8 天   2026-08-12 … 2026-09-01
-      执行:   python3 scripts/pricedb.py status
-        · 2026-08-27 afternoon 抽查 20 只、实际核对 0 只
-        · 2026-08-28 afternoon 抽查 20 只、实际核对 0 只
-        · 2026-08-31 afternoon 抽查 20 只、实际核对 0 只
-        · 2026-09-01 afternoon 抽查 20 只、实际核对 0 只
-        · … 另有 4 次更早的
-
   ▸ phase_failed  [env]
-      10 次 / 10 天   2026-05-28 … 2026-09-02
+      11 次 / 11 天   2026-05-28 … 2026-09-03
       执行:   python3 scripts/run_daily.py --slot afternoon --run
-        · 2026-08-12 noon      阶段 collect 失败
         · 2026-08-20 afternoon 阶段 collect 失败
         · 2026-08-25 noon      阶段 collect 失败
         · 2026-09-02 noon      阶段 collect 失败
-        · … 另有 6 次更早的
+        · 2026-09-03 afternoon 阶段 llm_analysis 失败
+        · … 另有 7 次更早的
 
   ▸ gate_hard_fail  [env]
-      28 次 / 10 天   2026-05-28 … 2026-09-02
+      29 次 / 11 天   2026-05-28 … 2026-09-03
       执行:   python3 scripts/pricedb.py repair
         · 2026-09-02 noon      phase1_to_phase2 硬闸门拦截
         · 2026-09-02 noon      phase1_to_phase2 硬闸门拦截
         · 2026-09-02 noon      phase1_to_phase2 硬闸门拦截
-        · 2026-09-02 noon      phase1_to_phase2 硬闸门拦截
-        · … 另有 24 次更早的
+        · 2026-09-03 afternoon phase2_to_phase3 硬闸门拦截
+        · … 另有 25 次更早的
+
+  ▸ db_health_spot_check  [env]
+      9 次 / 9 天   2026-08-12 … 2026-09-03
+      执行:   python3 scripts/pricedb.py status
+        · 2026-08-28 afternoon 抽查 20 只、实际核对 0 只
+        · 2026-08-31 afternoon 抽查 20 只、实际核对 0 只
+        · 2026-09-01 afternoon 抽查 20 只、实际核对 0 只
+        · 2026-09-03 afternoon 抽查 20 只、实际核对 0 只
+        · … 另有 5 次更早的
 
 
 ## 已知并接受 (1)

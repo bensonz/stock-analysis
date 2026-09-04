@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 215720,
+  "output_tokens": 22088,
+  "rounds": 3,
+  "duration_sec": 354.6,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "航运 油运 霍尔木兹海峡 运价 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3289
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "贵金属 黄金板块 A股 2026年9月 走势",
+        "max_results": 5
+      },
+      "result_length": 3029
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "赤峰黄金 2026 半年报 业绩 减持",
+        "max_results": 5
+      },
+      "result_length": 3251
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "LME铜价 历史新高 铜 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3571
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月3日 市场 板块涨跌 涨跌家数",
+        "max_results": 5
+      },
+      "result_length": 2985
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.cls.cn/detail/2468798",
+        "maxChars": 3000
+      },
+      "result_length": 730
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.stcn.com/article/detail/4079888.html",
+        "maxChars": 3000
+      },
+      "result_length": 2763
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.cfi.cn/p20260831000603.html",
+        "maxChars": 3000
+      },
+      "result_length": 3059
+    }
+  ],
+  "fallback_used": false
+}
