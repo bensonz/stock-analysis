@@ -1,0 +1,70 @@
+{
+  "date": "2026-09-04",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 17.93,
+      "pnl_pct": 14.9,
+      "note": "浮盈+14.9%仍高于+10%追踪止损17.16，未触发任何卖出规则；今日-5.03%主因「恒逸转2」可转债强赎最后转股日临近(最后交易日9/3、赎回日9/9，来源：搜狐/证券之星)，属一次性技术抛压而非基本面恶化；石油石化未入Bottom5。距止损仅4.29%(stop_proximity WATCH)，紧盯17.16"
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 61.0,
+      "pnl_pct": 3.4,
+      "note": "浮盈+3.4%，第7个交易日，未触-5%硬止损/-3%三日规则/15日时间止损；元件板块今日未入Bottom5，无卖出触发"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 19.2,
+      "pnl_pct": -0.5,
+      "note": "第2日浮盈-0.5%，未触-5%硬止损/-3%三日规则；航运港口未入Bottom5，霍尔木兹通航未实质恢复、油运高位逻辑未变（中银证券，来源：输入events）；距止损18.33约4.5%(WATCH)，2日新仓不动"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 153.83,
+      "pnl_pct": 21.6,
+      "note": "浮盈+21.6%远超+10%止损139.15，未触发卖出规则；医疗服务未入Bottom5，让利润奔跑"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 965304.0,
+    "dayPnl": -3259.0,
+    "dayReturnPct": -0.34,
+    "totalReturnPct": -3.47,
+    "unrealizedPnl": 12651.0,
+    "realizedPnl": -47347.0,
+    "cashPct": 88.13
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.8387,
+    "up": 2444,
+    "down": 2914,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 42,
+    "limit_downs": 9,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.84:1, 0/3 major indices green, 42 limit-ups / 9 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "弱市：三大指数全绿(上证-0.30%/深成-0.79%/创业板-0.78%/科创50-2.10%)，breadth 0.84:1(涨2444/跌2914)，42涨停/9跌停，0/3主要指数收红，entry_regime=weak、sizing 0.5×。IV Rank中枢约0.50(300ETF 0.50/500ETF 0.58/创业板ETF 0.59，中性偏高)。热点为农业防御链(林业+7.67%/养殖+5.30%/饲料+4.83%)与航海装备(+6.31%)，科技领跌(半导体-2.91%/电子化学品-3.85%)，科技→防御轮动延续。候选池与当日热点零交集，弱宽度下新仓默认空仓。"
+  }
+}
