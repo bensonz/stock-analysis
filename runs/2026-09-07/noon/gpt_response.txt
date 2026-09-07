@@ -1,0 +1,207 @@
+## Research Memo — 2026-09-07（午盘）
+
+### 1. Market Regime
+**Balanced，允许建仓但不强求。** 涨跌比 2946/2414 = 1.22:1（未到 1.5 的强势线，也非 <1.0 弱市），72 涨停 / 3 跌停；上证 -0.24%，但深成 +1.38%、创业板 +2.63%、科创50 +1.56% —— 2/3 主要指数红盘，entry_regime 判定 `balanced`，sizing_multiplier=1.0，无 hard block。这是"指数分化、个股活跃"的存量博弈格局（东方财富早评：缩量震荡磨底、轮动极快）。IV 中性：avg_iv_rank 0.458，创业板ETF 0.56 / 深100ETF 0.60 偏高（selective），其余 normal。**无未来事件窗口数据，未发现 ≤2 交易日内的高影响日程事件。**
+
+### 2. Sector Analysis
+热点（top5）：元件 +6.49%、通信设备 +5.90%、渔业 +4.56%、林业Ⅱ +4.33%、种植业 +4.26% —— 元件/通信设备是 AI 硬件链经前期充分调整后的修复（来源：金融界），农业走强。
+冷区（bottom5）：煤炭开采 -3.56%、保险Ⅱ -2.94%、厨卫电器 -2.75%、炼化及贸易 -2.32%、油气开采Ⅱ -2.10%。
+关键轮动信号：**半导体设备子板块正在降温**（北方华创 rps20=12.98、拓荆 17.77、中科飞测 28.68，多只跌破 MA20），而元件/PCB/通信设备接棒领涨。这是科技内部资金的换仓，不是全面回调。
+
+### 3. Position Review
+- **000703 恒逸石化**（+13.0%，29日）：炼化及贸易今日跌入 bottom5（冷区第1日，未满3日）；距 +10% 追踪止损 17.16 仅 2.67%（WARNING）。基本面逻辑（文莱炼化）未破，但板块轮动领先个股。**HOLD**，跌破 17.16 或冷区满 3 日即卖。
+- **002913 奥士康**（+8.3%，8日）：元件板块 #1（+6.49%），持仓唯一在热点板块的仓位。**HOLD**，让利润奔跑。
+- **601872 招商轮船**（-2.6%，3日）：最弱持仓，距硬止损 18.33 仅 2.4%，-3%三日规则阈值 18.71 尚未触发。航运中位。**HOLD**，紧盯 18.71/18.33。
+- **603259 药明康德**（+20.9%，27日）：远超 +10% 止损 139.15，中金上调目标价至 167 元、1260H 诉讼进展（来源：证券时报）。**HOLD**，let winner run。
+
+### 4. New Entry Candidates
+**无合格标的。** 今日热点（元件/通信设备）在股票池中的对应标的 RPS120 普遍 >95（南亚新材 99.59、源杰科技 99.67）——Rule 2 的 95% 上限直接过滤；落入 75-95 甜区的候选（西部矿业 91.4、赤峰黄金 88.29、金徽股份 86.59、罗莱生活 89.21 等）所属行业均不在今日 top5，未满足 Rule 1 的"行业 top30%"；海通发展三重 MA 追高（dist_ma5 8.3%/ma10 11.9%/ma20 15.1%）被 Rule 2b 硬拦；淮北矿业（煤炭）、桐昆股份/东方盛虹（炼化）在 bottom5 硬不买区。结论：**new_positions = []**，保持现金（88%），不因"允许建仓"而强行开仓。
+
+### 5. Skip List
+见 JSON `skip_list`。核心被拒原因三类：行业不在 top5、RPS >95 过热、MA 追高。
+
+### 6. Learnings
+见 JSON `new_learnings`。
+
+### 7. Uncertainty Flags
+- 输入仅提供 top5/bottom5 板块涨跌幅，**没有全 30 行业排名，也没有 5d/20d 板块动量**。"top 30%"我只能用 top5 + 趋势判断近似，若某些未上榜板块实际处于 top 30% 边缘（如铜、黄金、CRO），我的跳过可能偏保守。
+- 恒逸石化的"炼化及贸易 bottom5"是冷区第 1 日（此前 9/3、9/4 均未入 bottom5），无法确认是否持续；今日不触发 3 日冷区卖出，但需连续跟踪。
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "元件", "5d_pct": null, "trend": "accelerating", "note": "今日+6.49%"},
+      {"name": "通信设备", "5d_pct": null, "trend": "steady", "note": "今日+5.90%"},
+      {"name": "渔业", "5d_pct": null, "trend": "steady", "note": "今日+4.56%"},
+      {"name": "林业Ⅱ", "5d_pct": null, "trend": "steady", "note": "今日+4.33%"},
+      {"name": "种植业", "5d_pct": null, "trend": "steady", "note": "今日+4.26%"}
+    ],
+    "cold_sectors": [
+      {"name": "煤炭开采", "5d_pct": null, "trend": "deteriorating", "note": "今日-3.56%"},
+      {"name": "保险Ⅱ", "5d_pct": null, "trend": "deteriorating", "note": "今日-2.94%"},
+      {"name": "厨卫电器", "5d_pct": null, "trend": "deteriorating", "note": "今日-2.75%"},
+      {"name": "炼化及贸易", "5d_pct": null, "trend": "deteriorating", "note": "今日-2.32%"},
+      {"name": "油气开采Ⅱ", "5d_pct": null, "trend": "deteriorating", "note": "今日-2.10%"}
+    ],
+    "position_alignment": "1/4 仓位在热点板块（奥士康/元件），1/4 在冷区（恒逸/炼化及贸易 bottom5），2/4 中位（招商轮船/航运、药明康德/医疗服务）",
+    "regime": "AI硬件链（元件/通信设备）领涨，半导体设备降温，农业/资源轮动，防御（煤炭/保险/炼化）走弱"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "浮盈+13.0%仍高于+10%追踪止损17.16，未触发任何卖出规则；但炼化及贸易今日跌入bottom5(-2.32%)为冷区第1日（未满3日），且距止损仅2.67%（stop_proximity WARNING）。板块回调主因库存与财务风险担忧（来源：腾讯新闻8/11），文莱炼化基本面逻辑未破；若跌破17.16或板块连续3日bottom5则卖出。",
+      "sector_rank": "bottom 5%（炼化及贸易 -2.32%）",
+      "new_stop": null,
+      "pnl_pct": 13.0,
+      "days_held": 29,
+      "exit_price": null
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "元件今日板块#1(+6.49%)，持仓唯一在热点板块的仓位；浮盈+8.3%第8日，未触-5%止损/-3%三日规则/15日时间止损；PCB/覆铜板涨价链逻辑延续，让利润奔跑。",
+      "sector_rank": "top 5%（元件 #1，+6.49%）",
+      "new_stop": null,
+      "pnl_pct": 8.3,
+      "days_held": 8,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "第3日浮盈-2.6%，未触-5%硬止损18.33，也未触-3%三日规则（阈值18.71）；航运港口未入bottom5，油运高位逻辑未变；但距止损仅2.4%且今日-2.19%，为最弱持仓，紧盯18.71(-3%)与18.33(硬止损)。",
+      "sector_rank": "中位（航运港口未入top/bottom5）",
+      "new_stop": null,
+      "pnl_pct": -2.6,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+20.9%远超+10%止损139.15；中报超预期+1260H诉讼进展+中金上调目标价至167元（来源：证券时报），医疗服务未入bottom5，让利润奔跑。",
+      "sector_rank": "中位（医疗服务未入top/bottom5，CRO偏强）",
+      "new_stop": null,
+      "pnl_pct": 20.9,
+      "days_held": 27,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "航运未入今日top5；dist_ma5=8.3%/dist_ma10=11.9%/dist_ma20=15.1%三重追高（Rule 2b硬跳过）",
+      "rps120": 92.62
+    },
+    {
+      "code": "688519",
+      "name": "南亚新材",
+      "reason": "元件#1行业但RPS120=99.59>95上限，相对强度过热，等回踩90%区间",
+      "rps120": 99.59
+    },
+    {
+      "code": "688498",
+      "name": "源杰科技",
+      "reason": "RPS120=99.67>95上限，且dist_ma5=8.2%超6%追高线",
+      "rps120": 99.67
+    },
+    {
+      "code": "300857",
+      "name": "协创数据",
+      "reason": "消费电子未入今日top5；RPS120=94.68处92-95扩展区且行业非top10%；dist_ma10=7.9%逼近8%追高线",
+      "rps120": 94.68
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "reason": "CRO未入今日top5；现价已跌破MA20(-12.3%)趋势转弱；margin signal=deleveraging",
+      "rps120": 94.45
+    },
+    {
+      "code": "688652",
+      "name": "京仪装备",
+      "reason": "半导体设备子板块降温（rps20=49.9，跌破MA20 -10.3%），行业未入top5",
+      "rps120": 92.22
+    },
+    {
+      "code": "600985",
+      "name": "淮北矿业",
+      "reason": "煤炭开采bottom5(-3.56%)，硬不买区（h019）",
+      "rps120": 92.2
+    },
+    {
+      "code": "601233",
+      "name": "桐昆股份",
+      "reason": "炼化及贸易bottom5(-2.32%)，硬不买区",
+      "rps120": 90.74
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "铜行业未入今日top5；RPS120=91.4处甜区且MA未追高，但行业未确认top30%，等待确认",
+      "rps120": 91.4
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "reason": "黄金未入今日top5；RPS120=88.29、0风险因子、MA未追高，但行业未确认top30%",
+      "rps120": 88.29
+    },
+    {
+      "code": "688469",
+      "name": "芯联集成-U",
+      "reason": "半导体未入top5；亏损（PE为负）；今日解禁2076.75万股",
+      "rps120": 89.98
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "今日热点（元件+6.49%/通信设备+5.90%）在股票池中的对应标的RPS120普遍>95（南亚新材99.59、源杰科技99.67），RPS上限+行业过滤叠加后无合格买点——Rule 2的95%上限正在发挥防追高作用，不应为凑单而放宽门槛。",
+      "type": "observation",
+      "tags": ["entry-filter", "sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021、h013",
+      "mechanism": "强势行业的领涨股相对强度过热，RPS>95处动量均值回归风险最高，强制等待回踩是保护性过滤"
+    },
+    {
+      "text": "炼化及贸易今日跌入bottom5(-2.32%)，而持仓恒逸石化仍+13%——板块轮动领先个股信号明显；启动'冷区3日'计数，若连续3日bottom5则无条件卖出，不因浮盈姑息。",
+      "type": "signal",
+      "tags": ["exit-rule", "sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "板块引力>个股动量，冷区板块中的强势股最终会被行业贝塔拖累"
+    },
+    {
+      "text": "半导体设备子板块正在降温（北方华创rps20=12.98、拓荆17.77、中科飞测28.68，多只跌破MA20），而元件/通信设备接棒领涨——科技内部资金从设备转向元件/PCB链，不在降温子板块抄底。",
+      "type": "observation",
+      "tags": ["sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h028",
+      "mechanism": "存量博弈下资金在科技内部细分赛道快速换仓，追入降温子板块胜率低"
+    },
+    {
+      "text": "balanced regime（1.22:1，2/3指数红，上证仍-0.24%）≠full-size conviction tape；'允许建仓'≠'必须建仓'，无行业+RPS双达标候选时保持现金是正确的动量决策。",
+      "type": "heuristic",
+      "tags": ["position-sizing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "入场门是'行业趋势×个股动量'的联合过滤，缺少任一维度即不满足入场条件"
+    }
+  ],
+  "market_summary": "Breadth 1.22:1（涨2946/跌2414），72涨停/3跌停；上证-0.24%但深成+1.38%、创业板+2.63%、科创50+1.56%，balanced regime允许满额建仓。IV中性（avg_iv_rank 0.458，创业板ETF 0.56/深100ETF 0.60偏高）。热点：元件+6.49%、通信设备+5.90%领涨（AI硬件链修复，来源：金融界），渔业/林业/种植业走强；冷区：煤炭-3.56%、保险-2.94%、炼化及贸易-2.32%。板块轮动极快、量能不足（来源：渤海证券9/4晨会、东方财富早评）。持仓板块对齐：1/4在热点（奥士康/元件），1/4在冷区（恒逸/炼化底部5%），2/4中位。无合格新标的，保持现金。",
+  "market_sentiment": "neutral",
+  "market_call": "谨慎"
+}
+```

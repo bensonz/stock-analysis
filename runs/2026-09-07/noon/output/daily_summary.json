@@ -1,0 +1,71 @@
+{
+  "date": "2026-09-07",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 17.63,
+      "pnl_pct": 13.0,
+      "note": "浮盈+13.0%仍高于+10%追踪止损17.16，未触发任何卖出规则；但炼化及贸易今日跌入bottom5(-2.32%)为冷区第1日（未满3日），且距止损仅2.67%（stop_proximity WARNING）。板块回调主因库存与财务风险担忧（来源：腾讯新闻8/11），文莱炼化基本面逻辑未破；若跌破17.16或板块连续3日bottom5则卖出。"
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 63.91,
+      "pnl_pct": 8.3,
+      "note": "元件今日板块#1(+6.49%)，持仓唯一在热点板块的仓位；浮盈+8.3%第8日，未触-5%止损/-3%三日规则/15日时间止损；PCB/覆铜板涨价链逻辑延续，让利润奔跑。"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 18.78,
+      "pnl_pct": -2.6,
+      "note": "第3日浮盈-2.6%，未触-5%硬止损18.33，也未触-3%三日规则（阈值18.71）；航运港口未入bottom5，油运高位逻辑未变；但距止损仅2.4%且今日-2.19%，为最弱持仓，紧盯18.71(-3%)与18.33(硬止损)。"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 152.98,
+      "pnl_pct": 20.9,
+      "note": "浮盈+20.9%远超+10%止损139.15；中报超预期+1260H诉讼进展+中金上调目标价至167元（来源：证券时报），医疗服务未入bottom5，让利润奔跑。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 965397.0,
+    "dayPnl": 93.0,
+    "dayReturnPct": 0.01,
+    "totalReturnPct": -3.46,
+    "unrealizedPnl": 12744.0,
+    "realizedPnl": -47347.0,
+    "cashPct": 88.12
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 1.2204,
+    "up": 2946,
+    "down": 2414,
+    "positive_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [
+      "上证指数"
+    ],
+    "limit_ups": 72,
+    "limit_downs": 3,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 1.22:1, 2/3 major indices green, 72 limit-ups / 3 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "Breadth 1.22:1（涨2946/跌2414），72涨停/3跌停；上证-0.24%但深成+1.38%、创业板+2.63%、科创50+1.56%，balanced regime允许满额建仓。IV中性（avg_iv_rank 0.458，创业板ETF 0.56/深100ETF 0.60偏高）。热点：元件+6.49%、通信设备+5.90%领涨（AI硬件链修复，来源：金融界），渔业/林业/种植业走强；冷区：煤炭-3.56%、保险-2.94%、炼化及贸易-2.32%。板块轮动极快、量能不足（来源：渤海证券9/4晨会、东方财富早评）。持仓板块对齐：1/4在热点（奥士康/元件），1/4在冷区（恒逸/炼化底部5%），2/4中位。无合格新标的，保持现金。"
+  }
+}

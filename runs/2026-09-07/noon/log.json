@@ -1,0 +1,129 @@
+{
+  "date": "2026-09-07",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1788752113.017154,
+      "errors": [],
+      "end": 1788752186.152651,
+      "duration_sec": 73.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 7909,
+      "tokens": {
+        "input_tokens": 219910,
+        "output_tokens": 21594
+      },
+      "rounds": 3,
+      "tool_calls_count": 8,
+      "duration_sec": 308.5,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1788752494.6926389,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h158 (hypothesis): +1 supporting evidence → hitRate=100%, n=4",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=74",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=98%, n=59",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=151",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "000703",
+                "name": "恒逸石化",
+                "rule": "stop_proximity",
+                "severity": "WARNING",
+                "currentPrice": 17.63,
+                "stopLoss": 17.16,
+                "distance_pct": 2.67,
+                "suggestion": "🟡 WARNING — only 2.7% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+              },
+              {
+                "code": "601872",
+                "name": "招商轮船",
+                "rule": "stop_proximity",
+                "severity": "WARNING",
+                "currentPrice": 18.78,
+                "stopLoss": 18.33,
+                "distance_pct": 2.4,
+                "suggestion": "🟡 WARNING — only 2.4% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1788752495.10623,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 000703 — 🟡 WARNING — only 2.7% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
+    "RULE check_stop_proximity: 601872 — 🟡 WARNING — only 2.4% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 382.0
+  }
+}
