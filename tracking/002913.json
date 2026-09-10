@@ -8,7 +8,7 @@
   "entryPrice": 59.01,
   "targetPrice": 64.9,
   "stopLoss": 56.06,
-  "currentStop": 59.01,
+  "currentStop": 64.91,
   "allocation_pct": 3.0,
   "shares": 400,
   "allocatedCapital": 23604.0,
@@ -126,6 +126,16 @@
       "note": "昨日涨停创历史新高（松下上调覆铜板价最高30%，来源：财闻/证券时报），今日-1.5%为涨停次日回吐；浮盈+18.8%已达+10%线，按Rule 5把止损抬到成本价59.01锁定利润",
       "old_stop": 56.06,
       "new_stop": 59.01
+    },
+    {
+      "date": "2026-09-10",
+      "slot": "afternoon",
+      "price": 70.99,
+      "change_pct": 20.3,
+      "action": "RAISE_STOP",
+      "note": "收盘70.99越过+20%线(59.01×1.20=70.81)，按Rule5把止损由成本价59.01上移至+10%=64.91锁定利润；PCB/覆铜板涨价链延续(南亚塑胶9月提价、供给紧张至2027，来源：金融界/新浪检索)",
+      "old_stop": 59.01,
+      "new_stop": 64.91
     }
   ],
   "exitDate": null,
@@ -135,6 +145,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-08-27T15:12:46.690531+08:00",
-  "updatedAt": "2026-09-10T11:40:18.610961+08:00",
+  "updatedAt": "2026-09-10T15:09:56.141436+08:00",
   "trackerVersion": "2.1"
 }

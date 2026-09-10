@@ -1,0 +1,179 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "航海装备Ⅱ",
+        "chg_pct": 2.73,
+        "trend": "防御性轮动"
+      },
+      {
+        "name": "玻璃玻纤",
+        "chg_pct": 2.67,
+        "trend": "persisting"
+      },
+      {
+        "name": "城商行Ⅱ",
+        "chg_pct": 2.37,
+        "trend": "risk-off避险"
+      },
+      {
+        "name": "厨卫电器",
+        "chg_pct": 1.71,
+        "trend": "防御"
+      },
+      {
+        "name": "林业Ⅱ",
+        "chg_pct": 1.63,
+        "trend": "零散"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "种植业",
+        "chg_pct": -5.13,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "渔业",
+        "chg_pct": -4.78,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "农产品加工",
+        "chg_pct": -4.73,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "饲料",
+        "chg_pct": -3.06,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "专业连锁Ⅱ",
+        "chg_pct": -2.92,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/4 positions in hot sectors (top5); 0/4 in bottom5, all middle",
+    "regime": "panic — bank/defensive rotation, agri chain de-risked, stealth distribution"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "强赎抛压已落地(恒逸转2赎回日9/9，来源：证券日报/新浪财经检索)；浮盈+15.4%高于+10%追踪止损17.16；距止损4.67%(WATCH)紧盯17.16；石油石化未入Bottom5",
+      "sector_rank": "未入今日Top5/Bottom5（无完整排名数据）",
+      "new_stop": null,
+      "pnl_pct": 15.4,
+      "days_held": 32,
+      "exit_price": null
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "RAISE_STOP",
+      "reason": "收盘70.99越过+20%线(59.01×1.20=70.81)，按Rule5把止损由成本价59.01上移至+10%=64.91锁定利润；PCB/覆铜板涨价链延续(南亚塑胶9月提价、供给紧张至2027，来源：金融界/新浪检索)",
+      "sector_rank": "未入今日Top5/Bottom5（无完整排名数据）",
+      "new_stop": 64.91,
+      "pnl_pct": 20.3,
+      "days_held": 11,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+6.7%未触-5%止损18.33；油运景气未变(公司指引2026运价中枢高于2025，来源：财联社/国际船舶网检索)；今日-1.95%为9/9涨停次日回吐；margin仍deleveraging为最弱持仓，紧盯18.33",
+      "sector_rank": "未入今日Top5/Bottom5（无完整排名数据）",
+      "new_stop": null,
+      "pnl_pct": 6.7,
+      "days_held": 6,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+22.1%，止损已在+10%(139.15)；中报指引上调至585-605亿+1260H胜诉+在手订单664.3亿同比+25%(来源：新浪财经/知乎研报检索)；医疗服务未入Bottom5，让利润奔跑",
+      "sector_rank": "未入今日Top5/Bottom5（无完整排名数据）",
+      "new_stop": null,
+      "pnl_pct": 22.1,
+      "days_held": 30,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "市场panic硬阻(广度0.21:1、0/3指数绿)禁止新仓；RPS120=94.15处扩展区，铜价新高催化真实(LME 14533美元/吨创历史新高，来源：新浪财经检索)，但有色金属未入今日Top5——等广度修复再评估",
+      "rps120": 94.15
+    },
+    {
+      "code": "600497",
+      "name": "驰宏锌锗",
+      "reason": "RPS120=86.18甜区、dist_ma5+2.8%未超追高线；但panic硬阻+有色金属未入今日Top5，禁止新仓",
+      "rps120": 86.18
+    },
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "reason": "RPS120=90.62甜区、原料药龙头0风险；但panic硬阻+医药生物未入今日Top5，禁止新仓",
+      "rps120": 90.62
+    },
+    {
+      "code": "601233",
+      "name": "桐昆股份",
+      "reason": "RPS120=93.28扩展区，石化；panic硬阻+石油石化未入今日Top5，禁止新仓",
+      "rps120": 93.28
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "涨跌比0.21:1(955/4512)而指数仅-0.43%是'隐式派发'形态：银行/防御板块护盘权重、4500只个股普跌。这是最需要持币的环境，而非崩盘式恐慌——广度差比指数跌幅更关键。",
+      "type": "signal",
+      "tags": [
+        "market-regime",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "权重股护盘掩盖了中小盘的集中减仓，广度比指数更能反映真实的资金撤离强度。"
+    },
+    {
+      "text": "涨停40家/跌停14家、f10仅14家说明非崩盘式恐慌，但0/3指数绿+广度0.21:1已触发唯一机械硬阻(panic)，new_positions留空是正确执行，不因个股RPS/催化好而例外。",
+      "type": "rule",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "硬阻的意义在于禁止在概率最差的环境里追逐'看起来好'的标的，防止FOMO进场。"
+    },
+    {
+      "text": "奥士康+20%后把止损从成本价抬到+10%锁定利润：弱市中机械止损上移把快速赢家变成低风险持仓，无需重新做市场判断。",
+      "type": "rule",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "+20%浮盈意味着趋势已确认，+10%止损既锁定一半利润又给趋势继续奔跑留出空间。"
+    },
+    {
+      "text": "农业/养殖链今日被集中减仓(种植业-5.13%、渔业-4.78%、农产品加工-4.73%)，再次印证bottom5=硬禁买区——即使个股RPS合格也不碰。",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "板块级的资金撤离形成'行业重力'，个股动量无法对抗。"
+    }
+  ],
+  "market_summary": "广度0.21:1(955涨/4512跌)、三大指数全绿、40涨停/14跌停，机械层判panic硬阻。指数仅-0.43%但个股普跌，是银行/防御护盘下的隐式派发(城商行+2.37%)，资金从农业链撤出(种植业-5.13%、渔业-4.78%、农产品加工-4.73%)。IV整体中性偏高(300ETF iv_rank 51.9%、500ETF深53.1%、深100ETF 55.7%)，波动率偏贵不追新仓。hot:航海装备/玻璃玻纤/城商行/厨卫电器/林业；持仓4/4均不在Top5亦不在Bottom5。决策：禁止新仓，持币，持仓机械止损纪律执行。",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}

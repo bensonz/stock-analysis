@@ -1,0 +1,112 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 191015,
+  "output_tokens": 12643,
+  "rounds": 3,
+  "duration_sec": 204.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月10日 收评 下跌 原因 涨跌家数",
+        "max_results": 6
+      },
+      "result_length": 3720
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "招商轮船 油运 VLCC 运价 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3346
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 中报 2026 CXO 订单 指引",
+        "max_results": 5
+      },
+      "result_length": 3201
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "覆铜板 涨价 PCB 奥士康 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3280
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "恒逸石化 恒逸转2 强赎 2026",
+        "max_results": 5
+      },
+      "result_length": 3206
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+今日+收评+2026年9月10日",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=铜价+LME+新高+西部矿业+2026",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=有色+贵金属+黄金+板块+2026年9月",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=CRO+医疗研发外包+2026年9月",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+板块+涨幅榜+2026年9月10日",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}

@@ -1,0 +1,84 @@
+{
+  "date": "2026-09-10",
+  "market_overview": {
+    "shanghai_composite": {
+      "value": 3934.4,
+      "change_pct": -0.43
+    },
+    "shenzhen_component": {
+      "value": 13617.67,
+      "change_pct": -0.77
+    },
+    "chinext": {
+      "value": 3338.422,
+      "change_pct": -0.49
+    },
+    "sentiment": "bearish",
+    "hot_sectors": [
+      "航海装备Ⅱ",
+      "玻璃玻纤",
+      "城商行Ⅱ",
+      "厨卫电器",
+      "林业Ⅱ"
+    ],
+    "cold_sectors": [
+      "种植业",
+      "渔业",
+      "农产品加工",
+      "饲料",
+      "专业连锁Ⅱ"
+    ],
+    "notes": "广度0.21:1(955涨/4512跌)、三大指数全绿、40涨停/14跌停，机械层判panic硬阻。指数仅-0.43%但个股普跌，是银行/防御护盘下的隐式派发(城商行+2.37%)，资金从农业链撤出(种植业-5.13%、渔业-4.78%、农产品加工-4.73%)。IV整体中性偏高(300ETF iv_rank 51.9%、500ETF深53.1%、深100ETF 55.7%)，波动率偏贵不追新仓。hot:航海装备/玻璃玻纤/城商行/厨卫电器/林业；持仓4/4均不在Top5亦不在Bottom5。决策：禁止新仓，持币，持仓机械止损纪律执行。"
+  },
+  "strategy_scan": {
+    "total_stocks_scanned": 31,
+    "strategy_name": "小市值-无 20RP",
+    "scan_time": "2026-09-10T15:09:56.169684+08:00"
+  },
+  "recommendations": [
+    {
+      "code": "601168.SH",
+      "name": "西部矿业",
+      "price": null,
+      "rps120": 94.15,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600497.SH",
+      "name": "驰宏锌锗",
+      "price": null,
+      "rps120": 86.18,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "000739.SZ",
+      "name": "普洛药业",
+      "price": null,
+      "rps120": 90.62,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "601233.SH",
+      "name": "桐昆股份",
+      "price": null,
+      "rps120": 93.28,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    }
+  ],
+  "summary": {
+    "total_scanned": 31,
+    "buy_recommendations": 0,
+    "watch_recommendations": 4,
+    "avoid_recommendations": 0,
+    "market_call": "防御",
+    "reasoning": "广度0.21:1(955涨/4512跌)、三大指数全绿、40涨停/14跌停，机械层判panic硬阻。指数仅-0.43%但个股普跌，是银行/防御护盘下的隐式派发(城商行+2.37%)，资金从农业链撤出(种植业-5.13%、渔业-4.78%、农产品加工-4.73%)。IV整体中性偏高(300ETF iv_rank 51.9%、500ETF深53.1%、深100ETF 55.7%)，波动率偏贵不追新仓。hot:航海装备/玻璃玻纤/城商行/厨卫电器/林业；持仓4/4均不在Top5亦不在Bottom5。决策：禁止新仓，持币，持仓机械止损纪律执行。"
+  }
+}

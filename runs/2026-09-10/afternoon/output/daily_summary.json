@@ -1,0 +1,70 @@
+{
+  "date": "2026-09-10",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "price": 18.0,
+      "pnl_pct": 15.4,
+      "note": "强赎抛压已落地(恒逸转2赎回日9/9，来源：证券日报/新浪财经检索)；浮盈+15.4%高于+10%追踪止损17.16；距止损4.67%(WATCH)紧盯17.16；石油石化未入Bottom5"
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "RAISE_STOP",
+      "price": 70.99,
+      "pnl_pct": 20.3,
+      "note": "收盘70.99越过+20%线(59.01×1.20=70.81)，按Rule5把止损由成本价59.01上移至+10%=64.91锁定利润；PCB/覆铜板涨价链延续(南亚塑胶9月提价、供给紧张至2027，来源：金融界/新浪检索)"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 20.58,
+      "pnl_pct": 6.7,
+      "note": "浮盈+6.7%未触-5%止损18.33；油运景气未变(公司指引2026运价中枢高于2025，来源：财联社/国际船舶网检索)；今日-1.95%为9/9涨停次日回吐；margin仍deleveraging为最弱持仓，紧盯18.33"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 154.5,
+      "pnl_pct": 22.1,
+      "note": "浮盈+22.1%，止损已在+10%(139.15)；中报指引上调至585-605亿+1260H胜诉+在手订单664.3亿同比+25%(来源：新浪财经/知乎研报检索)；医疗服务未入Bottom5，让利润奔跑"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 970717.0,
+    "dayPnl": -1566.0,
+    "dayReturnPct": -0.16,
+    "totalReturnPct": -2.93,
+    "unrealizedPnl": 18064.0,
+    "realizedPnl": -47347.0,
+    "cashPct": 87.64
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.2117,
+    "up": 955,
+    "down": 4512,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 40,
+    "limit_downs": 14,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.21:1, 0/3 major indices green, 40 limit-ups / 14 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "广度0.21:1(955涨/4512跌)、三大指数全绿、40涨停/14跌停，机械层判panic硬阻。指数仅-0.43%但个股普跌，是银行/防御护盘下的隐式派发(城商行+2.37%)，资金从农业链撤出(种植业-5.13%、渔业-4.78%、农产品加工-4.73%)。IV整体中性偏高(300ETF iv_rank 51.9%、500ETF深53.1%、深100ETF 55.7%)，波动率偏贵不追新仓。hot:航海装备/玻璃玻纤/城商行/厨卫电器/林业；持仓4/4均不在Top5亦不在Bottom5。决策：禁止新仓，持币，持仓机械止损纪律执行。"
+  }
+}
