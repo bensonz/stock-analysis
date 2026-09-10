@@ -1,0 +1,205 @@
+# 研究备忘录 — 2026-09-10（分析师阶段）
+
+## 1. Market Regime
+
+**结论：恐慌盘，硬阻断，持币。**
+
+机械层已给出权威判断：`entry_regime.allow_new_positions = false`，`regime = "panic"`，`hard_block = true`，`sizing_multiplier = 0.0`。这是唯一能完全封死新开仓的状态。
+
+- 涨跌比 **0.26:1**（涨 1117 / 跌 4284），远低于 1.0 的弱盘线，更低于 0.35:1 的恐慌硬阻断线。
+- 三大指数全绿：上证 -0.35%、深成 -0.55%、创业板 -0.15%（科创50 -0.43%），0/3 红盘。
+- 分布：涨停 35 / 跌停 4，但下跌家数压倒性（f2_4=1069、f0_2=2999 占绝对多数），是普跌而非结构性调整。
+- IV：整体中性（平均 IV rank 0.4496），但中证500(0.50)、创业板ETF(0.53)、深100ETF(0.56)、500ETF深(0.54) 均"偏高（市场谨慎，波动率偏贵）"——与恐慌盘一致。
+
+**宏观驱动（检索确认）：** 美债收益率下行 + 中东战事升级（9/9 美军摧毁 5 艘伊朗油轮，来源：东方财富网专题）+ 成长股获利了结。科技/AI 链是抛售重灾区（共同社、21经济）。
+
+## 2. Sector Analysis
+
+**今日 top5（防御小板块全面上位）**：航海装备Ⅱ +2.83%、厨卫电器 +2.41%、玻璃玻纤 +2.36%、城商行Ⅱ +2.16%、林业Ⅱ +2.14%。
+
+**今日 bottom5**：种植业 -3.42%、渔业 -3.25%、农产品加工 -3.13%、专业连锁Ⅱ -2.49%、数字媒体 -2.47%。
+
+**轮动信号（关键）**：昨日强势的 PCB/覆铜板、铜、油运、CXO 今日全部回吐，top5 被厨卫电器/玻璃玻纤/城商行/林业这类小防御板块接管——这是典型的 **risk-off 一天轮动**，不是新主线。与恐慌 regime 互为印证。持仓四只所属板块（石油石化、元件、航运港口、医疗服务）今日均未进 top5/bottom5，**0/4 在热点**。
+
+## 3. Position Review（4 持仓全部 HOLD/抬止损，无卖出触发）
+
+| 持仓 | 现价 | PnL | 止损 | 板块 | 决策 |
+|---|---|---|---|---|---|
+| 恒逸石化 000703 | 18.09 (-3.0%) | +15.96% | 17.16 (+10%) | 石油石化 | HOLD |
+| 奥士康 002913 | 70.13 (-1.5%) | +18.84% | 56.06 (entry-5%) | 元件 | **RAISE_STOP → 59.01** |
+| 招商轮船 601872 | 19.93 (-5.05%) | +3.32% | 18.33 (entry-5%) | 航运港口 | HOLD（最弱，紧盯） |
+| 药明康德 603259 | 154.37 (-0.33%) | +22.03% | 139.15 (+10%) | 医疗服务 | HOLD |
+
+- **恒逸石化**：强赎抛压已落地——"恒逸转2"最后转股日 9/8、赎回日 9/9（来源：新浪财经/上海证券报），今日 -3.0% 属技术性惯性，非基本面恶化；+16% 远高于 +10% 追踪止损，石油石化今日未入 bottom5。HOLD。
+- **奥士康**：昨日涨停 +10% 创历史新高（松下上调覆铜板价格最高 30% 催化，来源：财闻/证券时报），今日 -1.5% 是涨停次日正常回吐。**问题**：+18.8% 浮盈仍挂着入场 -5% 止损（56.06），违反 Rule 5 的"+10% 抬到成本价"。机械阶梯需要手动补上 → RAISE_STOP 到成本价 59.01。
+- **招商轮船**：Q2 油轮净利 +359%、VLCC 8 月破 20 万美元/天、管理层确认 Q4 高景气（来源：中财网/证券时报）。今日 -5.05% 是 9/9 涨停（+10.01%，来源：财中社）后的获利回吐。+3.3%、day 6，未触任何止损线。但 margin=deleveraging + 涨停次日大阴，是**最弱持仓**，盯 18.33 硬止损。
+- **药明康德**：中报超预期 + 上调 2026 指引至 585-605 亿 + 1260H 诉讼胜诉（来源：新浪/知乎研报），+22% 已把止损抬到 +10%（139.15）。让利润奔跑，HOLD。
+
+**无 SELL**：四只全部浮盈、全部高于止损、所在板块无一进入 bottom5，无任何卖出规则触发。恐慌是市场级的，不是持仓级的。
+
+## 4. New Entry Candidates
+
+**全部封死。** 机械层 `hard_block=true`，我不会强行开仓。即便有干净候选也一律 `new_positions: []`。
+
+值得记录为"若 regime 转好即优先"的名字：**西部矿业 601168**（RPS120=93.58 甜区、dist_ma5 +0.9% 不追高、margin=adding +17.21%、LME 铜 9/8 创历史新高 14624 美元/吨，来源：证券时报）。今日被恐慌硬阻断拦下，属正确的持币而非踏空。
+
+## 5. Skip List（恐慌硬阻断下的具体拒绝理由）
+
+- **西部矿业 601168**：恐慌 regime 硬阻断（0.26:1），有色未进今日 top5。
+- **源杰科技 688498**：RPS120=99.65（>95 过热）+ dist_ma5 +6.2%（>6% 追高线）+ `rule2_over_extended=true`——即使无恐慌也跳过。
+- **皓元医药 688131**：RPS120=94.81 处于 92-95 扩展区，需"行业 top10% 或 0 风险或业绩>50% 增长"方可进；有 1 项风险（商誉占净资产 11%），医疗服务/CRO 今日未进 top5 → 不满足例外条件。
+- **昭衍新药 603127**：RPS120=94.73 扩展区 + margin=deleveraging + dist_ma20 -10.7%（短期结构走弱）。
+
+## 6. Learnings
+
+见下方 JSON `new_learnings`（结构化）。
+
+## 7. Uncertainty Flags
+
+- **招商轮船是今天唯一让我皱眉的持仓**：+3.3% 浮盈、单日 -5.05%、deleveraging，但规则没有给出卖出信号（未触 -5% 硬止损、未触 -3% 三日线、板块未冷、day 6 未到时间止损）。我选择按纪律 HOLD 并盯 18.33，但若明日继续 -4% 以上会逼近硬止损。
+- **奥士康的止损阶梯此前漏抬**：说明机械层对"手动抬止损"的依赖存在执行缺口，本次已手动纠正，但系统层面值得在 PM 阶段确认。
+- 今日 top5 全是防御小板块，缺乏 5 日 vs 20 日的完整行业排名，无法精确判断持仓板块是否滑入 bottom 30%——我只能依据 top5/bottom5 快照判断"未冷"。
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "航海装备Ⅱ", "5d_pct": 2.83, "trend": "defensive-rotation"},
+      {"name": "厨卫电器", "5d_pct": 2.41, "trend": "defensive-rotation"},
+      {"name": "玻璃玻纤", "5d_pct": 2.36, "trend": "defensive-rotation"},
+      {"name": "城商行Ⅱ", "5d_pct": 2.16, "trend": "defensive-rotation"},
+      {"name": "林业Ⅱ", "5d_pct": 2.14, "trend": "defensive-rotation"}
+    ],
+    "cold_sectors": [
+      {"name": "种植业", "5d_pct": -3.42, "trend": "deteriorating"},
+      {"name": "渔业", "5d_pct": -3.25, "trend": "deteriorating"},
+      {"name": "农产品加工", "5d_pct": -3.13, "trend": "deteriorating"},
+      {"name": "专业连锁Ⅱ", "5d_pct": -2.49, "trend": "deteriorating"},
+      {"name": "数字媒体", "5d_pct": -2.47, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/4 positions in today's top5 sectors; all 4 in middle, none in bottom5",
+    "regime": "panic hard block — defensive small-caps led, momentum leaders (PCB/copper/oil-shipping/CXO) profit-taking"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "强赎抛压已落地（恒逸转2最后转股日9/8、赎回日9/9，来源：新浪财经）；浮盈+16%远高于+10%追踪止损17.16；石油石化今日未入bottom5，无卖出触发",
+      "sector_rank": "中游（未进今日top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 15.96,
+      "days_held": 32,
+      "exit_price": null
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "RAISE_STOP",
+      "reason": "昨日涨停创历史新高（松下上调覆铜板价最高30%，来源：财闻/证券时报），今日-1.5%为涨停次日回吐；浮盈+18.8%已达+10%线，按Rule 5把止损抬到成本价59.01锁定利润",
+      "sector_rank": "中游（元件未进今日top5/bottom5）",
+      "new_stop": 59.01,
+      "pnl_pct": 18.84,
+      "days_held": 11,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "油运景气未变（Q2油轮净利+359%、VLCC 8月破20万美元/天、Q4高景气确认，来源：中财网/证券时报）；今日-5.05%是9/9涨停后获利回吐，+3.3%未触-5%硬止损18.33；但deleveraging+大阴线，为最弱持仓，紧盯18.33",
+      "sector_rank": "中游（航运未进今日top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 3.32,
+      "days_held": 6,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "中报超预期+上调2026指引至585-605亿+1260H胜诉（来源：新浪/知乎研报）；+22%已把止损抬到+10%（139.15），医疗服务未入bottom5，让利润奔跑",
+      "sector_rank": "中游（医疗服务未进今日top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 22.03,
+      "days_held": 30,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "恐慌regime硬阻断（up/down 0.26:1，allow_new_positions=false）；有色未进今日top5",
+      "rps120": 93.58
+    },
+    {
+      "code": "688498",
+      "name": "源杰科技",
+      "reason": "RPS120=99.65（>95过热）+ dist_ma5 +6.2%（>6%追高线）+ rule2_over_extended=true；即使无恐慌也应跳过",
+      "rps120": 99.65
+    },
+    {
+      "code": "688131",
+      "name": "皓元医药",
+      "reason": "RPS120=94.81处于92-95扩展区，需行业top10%/0风险/业绩>50%增长例外方可进；有1风险（商誉占净资产11%），医疗服务/CRO今日未进top5，不满足例外",
+      "rps120": 94.81
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "reason": "RPS120=94.73扩展区 + margin=deleveraging + dist_ma20 -10.7%短期结构走弱；恐慌regime不接",
+      "rps120": 94.73
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌regime的机械硬阻断正确阻止了FOMO：西部矿业（RPS120=93.58甜区、LME铜9/8创历史新高14624美元/吨，来源：证券时报）是干净候选，但up/down 0.26:1迫使持币，V1会在这里追入。",
+      "type": "observation",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "个股质量无法对抗全市场普跌（跌4284/涨1117），恐慌日开新仓的胜率极低。"
+    },
+    {
+      "text": "奥士康浮盈+18.8%仍挂着入场-5%止损56.06，止损阶梯（+10%抬到成本价）此前未被执行——机械抬止损动作需要每次复核，否则让利润回吐。",
+      "type": "rule",
+      "tags": ["exit-rule", "position-sizing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "止损阶梯依赖人工触发，浮盈快速积累时容易漏抬，形成隐性的过度风险敞口。"
+    },
+    {
+      "text": "招商轮船9/9涨停(+10.01%，来源：财中社)次日单日-5.05%回吐，仍+3.3%未触任何止损；deleveraging+涨停次日大阴=收紧盯盘而非卖出。",
+      "type": "signal",
+      "tags": ["exit-rule", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "涨停次日回吐是获利盘离场的正常脉冲，价格仍在止损上方时纪律是盯盘而非恐慌性卖出。"
+    },
+    {
+      "text": "恒逸转债2强赎（最后转股日9/8、赎回日9/9，来源：新浪财经）的技术性抛压已过，今日-3.0%是强赎完成后的惯性，不影响+16%的追踪持仓。",
+      "type": "observation",
+      "tags": ["timing"],
+      "evidence_type": "supporting",
+      "mechanism": "可转债强赎造成的转股抛压是有明确截止日的一次性事件，事件落地后价格回落属技术性，非基本面恶化。"
+    },
+    {
+      "text": "今日top5全是防御小板块（厨卫电器/玻璃玻纤/城商行/林业），昨日强势的PCB/铜/油运/CXO集体回吐——这是risk-off单日轮动，不是新主线，佐证恐慌regime而非结构切换。",
+      "type": "observation",
+      "tags": ["sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "防御小板块在普跌日领涨是资金避险的典型形态，不具备持续性主线特征。"
+    }
+  ],
+  "market_summary": "今日恐慌regime：涨跌比0.26:1（涨1117/跌4284），三大指数全绿（上证-0.35%/深成-0.55%/创业板-0.15%），涨停35/跌停4。宏观驱动：美债收益率下行+中东战事升级（9/9美军摧毁5艘伊朗油轮，来源：东方财富网）+成长股获利了结（来源：共同社/21经济）。板块risk-off轮动：今日top5全是防御小板块（航海装备/厨卫电器/玻璃玻纤/城商行/林业），昨日强势的PCB、铜、油运、CXO集体回吐。IV整体中性（平均IV rank 0.45），中证500/创业板/深市IV rank 0.50-0.56偏谨慎。硬阻断：不允许开新仓，全部持币待变。",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}
+```

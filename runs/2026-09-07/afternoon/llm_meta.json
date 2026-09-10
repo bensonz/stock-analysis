@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 226822,
+  "output_tokens": 38028,
+  "rounds": 3,
+  "duration_sec": 510.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月7日 元件 通信设备 大涨 原因 涨停",
+        "max_results": 6
+      },
+      "result_length": 3895
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "协创数据 算力租赁 tokenshare AI算力 2026",
+        "max_results": 5
+      },
+      "result_length": 2809
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 2026 中报 目标价 上调 业绩",
+        "max_results": 5
+      },
+      "result_length": 3409
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "招商轮船 油运 VLCC 霍尔木兹 2026年9月 运价",
+        "max_results": 5
+      },
+      "result_length": 3237
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "恒逸石化 炼化 可转债 强赎 2026年9月 板块下跌",
+        "max_results": 5
+      },
+      "result_length": 3014
+    }
+  ],
+  "fallback_used": false
+}

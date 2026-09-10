@@ -1,0 +1,51 @@
+{
+  "date": "2026-09-10",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1789011340.835458,
+      "errors": [],
+      "end": 1789011417.309946,
+      "duration_sec": 76.5
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8219,
+      "tokens": {
+        "input_tokens": 121733,
+        "output_tokens": 14667
+      },
+      "rounds": 2,
+      "tool_calls_count": 6,
+      "duration_sec": 201.2,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1789011618.5815182,
+      "actions": [
+        "RAISE_STOP 002913 → 59.01",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=29",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=50",
+        "Hypothesis: Updated h024 (rule): +1 supporting evidence → hitRate=94%, n=17",
+        "Hypothesis: Created h189 (observation): 恒逸转债2强赎（最后转股日9/8、赎回日9/9，来源：新浪财经）的技术性抛压已过，今日-3.0%是强赎完成后的惯性，不影响+16%的追踪持仓。...",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=16",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1789011618.917523,
+      "duration_sec": 0.3
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 278.0
+  }
+}

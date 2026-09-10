@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 121733,
+  "output_tokens": 14667,
+  "rounds": 2,
+  "duration_sec": 201.2,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月10日 大盘 下跌 原因 板块",
+        "max_results": 5
+      },
+      "result_length": 3235
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "招商轮船 油运 运价 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3261
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "恒逸石化 2026年9月 可转债 公告",
+        "max_results": 5
+      },
+      "result_length": 3364
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 CXO 中报 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3001
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "铜价 西部矿业 LME铜 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3020
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "奥士康 PCB 覆铜板 涨价 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 2952
+    }
+  ],
+  "fallback_used": false
+}

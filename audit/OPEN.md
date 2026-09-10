@@ -7,22 +7,22 @@
 
 ## 需要改代码 (2)
 
+  ▸ source_unhealthy  [env]
+      20 次 / 15 天   2026-04-09 … 2026-09-08   最长连续 10
+        · 2026-09-02 noon      数据源 sina 状态 down
+        · 2026-09-02 noon      数据源 cheesefortune 状态 down
+        · 2026-09-08 noon      数据源 sina 状态 down
+        · 2026-09-08 noon      数据源 cheesefortune 状态 down
+        · … 另有 16 次更早的
+
   ▸ manifest_present  [invariant]
-      5 次 / 5 天   2026-02-02 … 2026-04-12   最长连续 3
+      6 次 / 6 天   2026-02-02 … 2026-09-09   最长连续 3
       改这里: scripts/run_daily.py (write the manifest before preflight)
-        · 2026-02-05 afternoon 该时段没有 manifest
         · 2026-02-10 afternoon 该时段没有 manifest
         · 2026-02-11 afternoon 该时段没有 manifest
         · 2026-04-12 afternoon 该时段没有 manifest
-        · … 另有 1 次更早的
-
-  ▸ source_unhealthy  [env]
-      18 次 / 14 天   2026-04-09 … 2026-09-02   最长连续 10
-        · 2026-08-25 afternoon 数据源 sina 状态 down
-        · 2026-08-25 afternoon 数据源 cheesefortune 状态 down
-        · 2026-09-02 noon      数据源 sina 状态 down
-        · 2026-09-02 noon      数据源 cheesefortune 状态 down
-        · … 另有 14 次更早的
+        · 2026-09-09 noon      该时段没有 manifest
+        · … 另有 2 次更早的
 
 
 ## 需要人工操作 (5)
@@ -32,42 +32,42 @@
       执行:   python3 scripts/pricedb.py snapshot --date 2026-08-26 --dry-run
         · 2026-08-26 afternoon 快照写入 0 行
 
+  ▸ phase_failed  [env]
+      13 次 / 13 天   2026-05-28 … 2026-09-08
+      执行:   python3 scripts/run_daily.py --slot afternoon --run
+        · 2026-09-02 noon      阶段 collect 失败
+        · 2026-09-03 afternoon 阶段 llm_analysis 失败
+        · 2026-09-07 afternoon 阶段 llm_analysis 失败
+        · 2026-09-08 noon      阶段 collect 失败
+        · … 另有 9 次更早的
+
+  ▸ gate_hard_fail  [env]
+      36 次 / 13 天   2026-05-28 … 2026-09-08
+      执行:   python3 scripts/pricedb.py repair
+        · 2026-09-08 noon      phase1_to_phase2 硬闸门拦截
+        · 2026-09-08 noon      phase1_to_phase2 硬闸门拦截
+        · 2026-09-08 noon      phase1_to_phase2 硬闸门拦截
+        · 2026-09-08 noon      phase1_to_phase2 硬闸门拦截
+        · … 另有 32 次更早的
+
   ▸ db_health_warnings  [env]
-      7 次 / 6 天   2026-08-12 … 2026-08-28   最长连续 2
+      8 次 / 7 天   2026-08-12 … 2026-09-08   最长连续 2
       改这里: scripts/pricedb.py db_health
       执行:   python3 scripts/pricedb.py factors verify
-        · 2026-08-24 afternoon 数据健康告警: adj factors lag prices (2026-08-21 < 2026-08-24) — run 'pricedb.py fac
         · 2026-08-25 noon      数据健康告警: adj factors lag prices (2026-08-21 < 2026-08-24) — run 'pricedb.py fac
         · 2026-08-27 afternoon 数据健康告警: adj factors lag prices (2026-08-26 < 2026-08-27) — run 'pricedb.py fac
         · 2026-08-28 afternoon 数据健康告警: adj factors lag prices (2026-08-27 < 2026-08-28) — run 'pricedb.py fac
-        · … 另有 3 次更早的
-
-  ▸ phase_failed  [env]
-      11 次 / 11 天   2026-05-28 … 2026-09-03
-      执行:   python3 scripts/run_daily.py --slot afternoon --run
-        · 2026-08-20 afternoon 阶段 collect 失败
-        · 2026-08-25 noon      阶段 collect 失败
-        · 2026-09-02 noon      阶段 collect 失败
-        · 2026-09-03 afternoon 阶段 llm_analysis 失败
-        · … 另有 7 次更早的
-
-  ▸ gate_hard_fail  [env]
-      29 次 / 11 天   2026-05-28 … 2026-09-03
-      执行:   python3 scripts/pricedb.py repair
-        · 2026-09-02 noon      phase1_to_phase2 硬闸门拦截
-        · 2026-09-02 noon      phase1_to_phase2 硬闸门拦截
-        · 2026-09-02 noon      phase1_to_phase2 硬闸门拦截
-        · 2026-09-03 afternoon phase2_to_phase3 硬闸门拦截
-        · … 另有 25 次更早的
+        · 2026-09-08 noon      数据健康告警: screening data is 1 session(s) stale (latest 2026-09-07, expected 2026
+        · … 另有 4 次更早的
 
   ▸ db_health_spot_check  [env]
-      10 次 / 10 天   2026-08-12 … 2026-09-04
+      12 次 / 12 天   2026-08-12 … 2026-09-08   最长连续 2
       执行:   python3 scripts/pricedb.py status
-        · 2026-08-31 afternoon 抽查 20 只、实际核对 0 只
-        · 2026-09-01 afternoon 抽查 20 只、实际核对 0 只
         · 2026-09-03 afternoon 抽查 20 只、实际核对 0 只
         · 2026-09-04 afternoon 抽查 20 只、实际核对 0 只
-        · … 另有 6 次更早的
+        · 2026-09-07 afternoon 抽查 20 只、实际核对 0 只
+        · 2026-09-08 noon      抽查 20 只、实际核对 0 只
+        · … 另有 8 次更早的
 
 
 ## 已知并接受 (1)

@@ -1,0 +1,242 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "元件",
+        "5d_pct": 7.56,
+        "trend": "accelerating"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": 7.22,
+        "trend": "accelerating"
+      },
+      {
+        "name": "渔业",
+        "5d_pct": 4.7,
+        "trend": "steady"
+      },
+      {
+        "name": "种植业",
+        "5d_pct": 4.5,
+        "trend": "steady"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": 4.48,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "保险Ⅱ",
+        "5d_pct": -3.0,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "贵金属",
+        "5d_pct": -2.89,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "煤炭开采",
+        "5d_pct": -2.67,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "厨卫电器",
+        "5d_pct": -2.44,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "炼化及贸易",
+        "5d_pct": -1.95,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "1/4持仓在热点板块（奥士康/元件#1）；药明康德CXO景气但医疗服务未入top5；恒逸石化炼化冷区第2日；招商轮船今日触发卖出",
+    "regime": "AI硬件链（PCB/CPO/光模块）领涨，防御与资源板块（煤炭/保险/贵金属/炼化）退潮，成长强于权重"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "HOLD",
+      "reason": "浮盈+13.4%仍高于+10%追踪止损17.16，未触发卖出；炼化及贸易连续2日bottom5（9/4 -2.32%、今日-1.95%）冷区第2日未满3日不触发板块卖出；恒逸转2 9/8登记日、9/9赎回摘牌为一次性技术抛压（格隆汇）；距止损仅3.0%(WARNING)，紧盯17.16",
+      "sector_rank": "bottom5（炼化及贸易-1.95%，冷区第2日）",
+      "new_stop": null,
+      "pnl_pct": 13.4,
+      "days_held": 29,
+      "exit_price": null
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "RAISE_STOP",
+      "reason": "今日+6.74%收65.11，浮盈+10.34%突破+10%阈值，止损上移至保本59.01；元件今日板块#1(+7.56%)，PCB涨价链逻辑延续，让利润奔跑",
+      "sector_rank": "top 1（元件+7.56%）",
+      "new_stop": 59.01,
+      "pnl_pct": 10.34,
+      "days_held": 8,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "SELL",
+      "reason": "第3日浮盈-3.11%触发-3%三日规则（阈值18.71），叠加stop_proximity CRITICAL（距止损18.33仅1.93%），坏timing先退出；油运基本面（中报净利+227%）未破，可再观察重入",
+      "sector_rank": "中位（航运港口未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": -3.11,
+      "days_held": 3,
+      "exit_price": 18.69
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+21.2%远超+10%追踪止损139.15；中报超预期（全年指引上调至585-605亿，杰富瑞A股目标165元），CXO景气向上，让利润奔跑",
+      "sector_rank": "中位偏强（医疗服务/CRO，未入top5但非冷区）",
+      "new_stop": null,
+      "pnl_pct": 21.15,
+      "days_held": 27,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "300857",
+      "name": "协创数据",
+      "entry_price": 274.03,
+      "allocation_pct": 3,
+      "stop": 260.33,
+      "target": null,
+      "thesis": "算力租赁龙头，RPS120=94.91、站上全部均线（dist_ma5 4.6%/ma10 7.0%/ma20 7.5%均未超追高线）、融资adding、IV 47.5% normal；RPS落在92-95扩展区，靠业绩增速>50%例外放行，且股东户数6个月+158%，故仅3%小仓；无机构目标价",
+      "sector": "电子/消费电子",
+      "sector_rank": "top 30%（电子大板块，元件今日+7.56%#1，创业板+3.41%）",
+      "catalyst": "算力租赁龙头，2026Q1净利预增284-402%（金融界），定增80亿智算中心（证券时报）；最新季度净利+314%",
+      "catalyst_freshness": "ongoing",
+      "rps120": 94.91,
+      "conviction": "small"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "688519",
+      "name": "南亚新材",
+      "reason": "RPS120=99.57>95%硬上限（相对强度过热，Rule2实证负载），dist_ma5仅1.4%未超追高线但仍跳过，等回调至90%区",
+      "rps120": 99.57
+    },
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "dist_ma10=10.8%>8%、dist_ma20=15.0%>12%追高线（Rule2b硬规则），且9/29解禁9.33亿股占总股本68%",
+      "rps120": 93.28
+    },
+    {
+      "code": "688209",
+      "name": "英集芯",
+      "reason": "dist_ma10=16.1%、dist_ma20=31.4%严重超买，远离均线，追高硬伤",
+      "rps120": 93.34
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "reason": "贵金属板块bottom5(-2.89%)冷区，板块动量优先于个股",
+      "rps120": 88.02
+    },
+    {
+      "code": "601233",
+      "name": "桐昆股份",
+      "reason": "炼化及贸易板块bottom5(-1.95%)冷区，板块第一",
+      "rps120": 91.24
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "reason": "rps20仅33.7短线动量弱、价格低于MA20达-11.6%、margin deleveraging，属买弱非买强",
+      "rps120": 94.47
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "铜板块今日未入热点、rps20仅28.0，LME铜新高催化已陈旧",
+      "rps120": 91.98
+    },
+    {
+      "code": "688222",
+      "name": "成都先导",
+      "reason": "非控股股东减持1.63%在途+前股东减持套现1.14亿，价格低于MA20达-10.1%",
+      "rps120": 90.93
+    },
+    {
+      "code": "688469",
+      "name": "芯联集成-U",
+      "reason": "PE为负(亏损)，且11/10解禁13.74%股本、今日亦有解禁",
+      "rps120": 89.87
+    },
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "reason": "原料药板块未入热点、margin deleveraging(net5_repay_days=4)",
+      "rps120": 89.94
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "-3%三日规则今日精准触发招商轮船（第3日-3.11%<阈值18.71），叠加stop_proximity CRITICAL（距止损1.93%），机械纪律在基本面未破时仍强制离场——价格是真理，坏timing先退出",
+      "type": "rule",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "入场时机错=3日内亏损说明买点差，纪律性退出比保留'thesis still valid'更能保护资金"
+    },
+    {
+      "text": "今日热点元件(+7.56%)/通信设备(+7.22%)的池内候选（南亚新材RPS99.57、源杰科技99.65、中石科技97.63等）全部RPS120>95%被硬上限卡掉——板块动量跑赢个股RPS甜区时，纪律是跳过而非追overheated相对强度",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "板块爆发期龙头股相对强度先冲顶，RPS>95%负IC意味着追入即接盘，等回调至90%区"
+    },
+    {
+      "text": "平衡盘（breadth1.44:1、3/3指数绿、95涨停）机械层允许正常开仓，但r0_2(1884)与f0_2(1792)为最大两桶、广度偏浅；15只候选仅协创数据通过RPS/MA/融资/IV全部门槛，按small 3%而非full size",
+      "type": "observation",
+      "tags": [
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "平衡盘≠强盘，浅广度下只有少数真强票，控制单笔敞口"
+    },
+    {
+      "text": "协创数据股东户数6个月+158%（散户追高）+1个'资金出逃'风险标签，叠加RPS120=94.91在92-95扩展区（需例外条款），故压至3%小仓——low-confidence小仓常是赢家，但扩展区+散户拥挤仍需控仓",
+      "type": "signal",
+      "tags": [
+        "position-sizing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "股东户数激增=筹码从机构向散户转移，短期动量强但中期脆弱，小仓快进快出"
+    },
+    {
+      "text": "恒逸石化炼化及贸易连续2日bottom5（9/4 -2.32%、9/7 -1.95%），未满3日不卖；恒逸转2于9/8登记、9/9赎回摘牌为一次性技术抛压（格隆汇），与板块冷区叠加，紧盯17.16追踪止损（现价17.69仅3.0%缓冲）",
+      "type": "rule",
+      "tags": [
+        "exit-rule",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "板块冷3日才触发卖出给回调留余地，但可转债强赎造成的技术抛压会放大下行波动，需预埋止损"
+    }
+  ],
+  "market_summary": "成长科技领涨、权重疲软：创业板指+3.41%、科创50+2.42%、深成+1.91%，上证仅+0.07%。PCB概念爆发（迅捷兴20cm涨停，兴森/深南/景旺涨停），元件+7.56%、通信设备+7.22%领涨，驱动为国金证券'下半年PCB新品拉货+盈利修复'逻辑及美股光通信走高（迈威尔+7%/Coherent+6%）带动CPO；种植业/渔业走强（厄尔尼诺+粮食安全）。煤炭/保险/贵金属/炼化退潮。Breadth 1.44:1中性偏多（3167涨/2196跌），95涨停/2跌停，r0_2与f0_2为最大两桶、广度偏浅。IV平均rank39.3%中性。药明康德中报超预期（全年指引上调至585-605亿，杰富瑞A股目标165元）支撑CXO。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}
