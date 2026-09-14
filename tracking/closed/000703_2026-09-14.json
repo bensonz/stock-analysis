@@ -1,7 +1,7 @@
 {
   "code": "000703",
   "name": "恒逸石化",
-  "status": "active",
+  "status": "closed",
   "thesis": "H1净利暴增+2326-2547%，文莱炼化独特资产享受税收+市场化定价红利，PTA产能周期见底，10亿回购进行中",
   "entryDate": "2026-07-29",
   "entryPrice": 15.6,
@@ -384,16 +384,26 @@
       "change_pct": 15.38,
       "action": "HOLD",
       "note": "强赎抛压已落地(恒逸转2赎回日9/9，来源：证券日报/新浪财经检索)；浮盈+15.4%高于+10%追踪止损17.16；距止损4.67%(WATCH)紧盯17.16；石油石化未入Bottom5"
+    },
+    {
+      "date": "2026-09-14",
+      "slot": "noon",
+      "price": 16.98,
+      "change_pct": 8.85,
+      "action": "SELL",
+      "shares": 1600,
+      "note": "现价16.98已跌破追踪止损17.16（Rule5触发；stop_proximity CRITICAL，距止损-1.06%），浮盈自+16%回落至+8.85%仍锁定正收益离场"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-09-14",
+  "exitPrice": 16.98,
+  "exitReason": "现价16.98已跌破追踪止损17.16（Rule5触发；stop_proximity CRITICAL，距止损-1.06%），浮盈自+16%回落至+8.85%仍锁定正收益离场",
+  "returnPct": 8.85,
+  "holdingDays": 32,
+  "lessonLearned": "",
   "createdAt": "2026-07-29T15:52:15.569338+08:00",
-  "updatedAt": "2026-09-10T15:09:56.122403+08:00",
+  "updatedAt": "2026-09-14T11:41:41.737414+08:00",
   "trackerVersion": "2.1",
-  "entrySlot": "afternoon"
+  "entrySlot": "afternoon",
+  "exitSlot": "noon"
 }

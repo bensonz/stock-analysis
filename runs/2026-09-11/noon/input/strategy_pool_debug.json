@@ -1,0 +1,30 @@
+{
+  "mode": "cheesefortune_intersection",
+  "remote_strategy": {
+    "source": "local_pricedb_relaxed",
+    "strategy_id": "407228-local-ma-rps",
+    "date": "2026-09-10",
+    "total_stocks": 190,
+    "error": null
+  },
+  "stage_counts": {
+    "remote_strategy_total": 190,
+    "rps_universe": 5530,
+    "intersection_total": 142
+  },
+  "drop_counts": {
+    "remote_missing_rps": 0,
+    "remote_below_rps_threshold": 48,
+    "duplicate_remote_codes": 0
+  },
+  "criteria": {
+    "rps60_gt": 85.0,
+    "rps120_gt": 85.0,
+    "rps250_gt": 85.0
+  },
+  "fallback": {
+    "used": false
+  },
+  "final_source": "cheesefortune_intersection",
+  "final_total_stocks": 142
+}

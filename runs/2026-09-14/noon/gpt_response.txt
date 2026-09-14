@@ -1,0 +1,206 @@
+## 研究备忘录（Research Memo）
+
+### 1. Market Regime
+- 涨跌比 1.99:1（涨3576/跌1797），50涨停/10跌停。上证+0.16%独红，深成-0.25%、创业板-0.47%翻绿——仅1/3主要指数收红。
+- 分布偏 r0_2（2461只微涨0-2%），属"弱普涨"：指数分歧、赚钱效应不集中。
+- IV Rank均值 0.61（偏高/选择性），300ETF 0.70、500ETF 0.72、深100ETF 0.74，无 <15% 或 >75% 触发，正常/选择性建仓。
+- entry_regime：balanced，multiplier 1.0，硬封锁未触发。结论：**门开着，但只做 selective 小仓，不重仓追**。
+
+### 2. Sector Analysis
+- 热门（今日）：医疗服务 +4.01%（CRO/CXO主线）、电池 +2.64%、电子化学品Ⅱ +2.60%、非金属材料Ⅱ +2.22%、生物制品 +2.15%。
+- 冷门：种植业 -4.54%、地面兵装Ⅱ -3.12%、通信设备 -2.82%、农产品加工 -2.63%、航空装备Ⅱ -2.12%。
+- 轮动：医药/CRO为唯一强主线；资源/军工/农业退潮。通信设备(-2.82%)掉出热门，与"科技硬件领涨"的旧学习(h028)背离——注意验证。
+- 持仓对齐：1/4（药明康德-医疗服务#1）；恒逸石化(石油石化)触发止损、奥士康(元件)、招商轮船(航运港口)板块中游。
+
+### 3. Position Review
+- **恒逸石化**：现价16.98 **跌破追踪止损17.16**（浮盈+8.85%），stop_proximity CRITICAL(-1.06%)。SELL。
+- **奥士康**：+26.4%，止损已抬至+10%(64.91)，元件中游未入冷区。HOLD，让利润奔跑。
+- **招商轮船**：+4.6%，未触止损18.33；油运景气(BDTI周+43%/VLCC周+56%，输入事件数据)延续，margin转adding。HOLD。
+- **药明康德**：+24.5%，医疗服务#1，止损+10%(139.15)。HOLD，让利润奔跑。
+
+### 4. New Entry Candidates
+- **昭衍新药(603127)**：医疗服务#1(+4.01%)；实验猴供需紧张、猴价上行，中报净利+1126.8%（财联社/证券时报/澎湃）；9/8业绩说明会确认供需持续紧张。RPS120=94.94（扩展区，板块top10%+业绩催化双重豁免）。贴MA5(+0.1%)、不追高。**瑕疵**：rps20仅6.21、价低于MA20(-8.3%)（个股短期弱于板块）、margin deleveraging、IV 0.70偏高、无VCP。→ **SMALL BUY 4%**。
+- **皓元医药(688131)**：同板块但9/17起三股东合计减持≤2.34%，供给压力临近 → SKIP。
+- **凯莱英(002821)**：rps120=97.56 >95%过热封顶线 → SKIP。
+
+### 5. Skip List（详见JSON）
+
+### 6. Learnings（详见JSON new_learnings）
+
+### 7. Uncertainty Flags
+- 不确定医疗服务(+4.01%)是否可持续——若为单日脉冲，昭衍新药作为板块内偏弱个股（rps20 6.21）补涨胜率打折，故仅小仓。
+- 不确定恒逸石化是否应在 9/18 除息（10派9元）前更早处理——但机械止损已触发，按规则执行。
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "医疗服务", "chg_pct": 4.01, "trend": "accelerating"},
+      {"name": "电池", "chg_pct": 2.64, "trend": "steady"},
+      {"name": "电子化学品Ⅱ", "chg_pct": 2.6, "trend": "steady"},
+      {"name": "非金属材料Ⅱ", "chg_pct": 2.22, "trend": "steady"},
+      {"name": "生物制品", "chg_pct": 2.15, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "种植业", "chg_pct": -4.54, "trend": "deteriorating"},
+      {"name": "地面兵装Ⅱ", "chg_pct": -3.12, "trend": "deteriorating"},
+      {"name": "通信设备", "chg_pct": -2.82, "trend": "deteriorating"},
+      {"name": "农产品加工", "chg_pct": -2.63, "trend": "deteriorating"},
+      {"name": "航空装备Ⅱ", "chg_pct": -2.12, "trend": "deteriorating"}
+    ],
+    "position_alignment": "1/4持仓在热门板块（药明康德-医疗服务#1）；恒逸石化触发止损，奥士康/招商轮船板块中游",
+    "regime": "医药/CRO主线领涨，资源/军工/农业退潮"
+  },
+  "position_decisions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "SELL",
+      "reason": "现价16.98已跌破追踪止损17.16（Rule5触发；stop_proximity CRITICAL，距止损-1.06%），浮盈自+16%回落至+8.85%仍锁定正收益离场",
+      "sector_rank": "石油石化未入今日top5/bottom5（中游）",
+      "new_stop": null,
+      "pnl_pct": 8.85,
+      "days_held": 34,
+      "exit_price": 16.98
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "浮盈+26.4%，止损已抬至+10%(64.91)；元件板块未入冷区，PCB/覆铜板涨价链延续，让利润奔跑",
+      "sector_rank": "元件未入今日top5/bottom5（中游）",
+      "new_stop": 64.91,
+      "pnl_pct": 26.4,
+      "days_held": 13,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+4.6%未触止损18.33；油运景气延续（BDTI周+43.14%/VLCC周+56.06%，输入事件数据），margin转adding；距止损仍近，继续紧盯",
+      "sector_rank": "航运港口未入今日top5/bottom5（中游）",
+      "new_stop": 18.33,
+      "pnl_pct": 4.61,
+      "days_held": 8,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "医疗服务今日板块#1(+4.01%)，CRO/CXO主线延续；浮盈+24.5%，止损已抬至+10%(139.15)，让利润奔跑",
+      "sector_rank": "top 5%（医疗服务#1）",
+      "new_stop": 139.15,
+      "pnl_pct": 24.52,
+      "days_held": 32,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "entry_price": 42.85,
+      "allocation_pct": 4,
+      "stop": 40.71,
+      "target": 46.71,
+      "thesis": "医疗服务板块#1(+4.01%)；实验猴供需紧张价格上行驱动中报净利+1126.8%（财联社/证券时报/澎湃）；RPS120=94.94扩展区获板块top10%+业绩催化双重豁免；贴MA5(+0.1%)不追高。风险：rps20仅6.21个股短期偏弱、margin deleveraging、IV 0.70偏高→小仓试探",
+      "sector": "医疗服务",
+      "sector_rank": "top 5%（医疗服务#1）",
+      "catalyst": "实验猴供需紧张+猴价上涨→生物资产公允价值增厚净利；9/8业绩说明会确认供需持续紧张",
+      "catalyst_freshness": "ongoing",
+      "rps120": 94.94,
+      "conviction": "small"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "688131",
+      "name": "皓元医药",
+      "reason": "医疗服务#1板块且rps120=94.22，但9/17起三股东合计减持≤2.34%（输入事件/公司公告），减持窗口临近的供给压力否决买入",
+      "rps120": 94.22
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "rps120=97.56超过95%过热封顶线（Rule2硬约束），医疗服务虽热仍跳过",
+      "rps120": 97.56
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "工业金属/铜非今日热门板块；9/11大跌-7.12%且dist_ma5 -7.4%（输入事件数据），弱势下跌不接",
+      "rps120": 94.46
+    },
+    {
+      "code": "601233",
+      "name": "桐昆股份",
+      "reason": "石油石化非今日top30%板块，不满足Rule1板块门槛",
+      "rps120": 93.21
+    },
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "reason": "化学制药非今日热门板块（今日热的是医疗服务/生物制品），不满足Rule1",
+      "rps120": 90.97
+    },
+    {
+      "code": "688469",
+      "name": "芯联集成-U",
+      "reason": "半导体非今日热门板块，不满足Rule1板块门槛",
+      "rps120": 90.5
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "reason": "贵金属非今日热门板块，且margin signal=deleveraging（输入数据）",
+      "rps120": 86.28
+    },
+    {
+      "code": "002458",
+      "name": "益生股份",
+      "reason": "农林牧渔冷区（种植业/农产品加工在今日bottom5），Rule1硬性不买区",
+      "rps120": 90.31
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "医疗服务为今日唯一强势主线（板块#1 +4.01%），昭衍新药实验猴涨价催化真实且持续（中报净利+1126.8%），但个股rps20仅6.21且价低于MA20(-8.3%)——'热板块+强催化+弱个股'只给small仓位试探，不给重仓强买。",
+      "type": "observation",
+      "tags": ["sector", "entry-filter", "position-sizing"],
+      "evidence_type": "supporting",
+      "mechanism": "板块动量与个股短期动量背离时，催化可驱动补涨但胜率低于板块龙头，需控制仓位"
+    },
+    {
+      "text": "恒逸石化追踪止损17.16被跌破（现价16.98，浮盈+8.85%），'+10%后上移止损'在热点退潮时把+16%浮盈锁成+8.8%正收益，避免利润回吐。",
+      "type": "rule",
+      "tags": ["exit-rule"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "机械上移止损将快速赢家转为低风险持有，无需重新判断市场方向"
+    },
+    {
+      "text": "皓元医药虽处#1热门板块且rps120=94.22，但9/17起三股东合计减持≤2.34%，减持窗口临近的供给压力应作为买入否决项——板块贝塔难敌个股供给冲击。",
+      "type": "heuristic",
+      "tags": ["entry-filter"],
+      "evidence_type": "supporting",
+      "mechanism": "临近减持日的新增供给预期压制个股弹性，即使板块强劲"
+    },
+    {
+      "text": "今日breadth 1.99:1但仅1/3主要指数收红、涨幅集中于r0_2(2461只微涨0-2%)——属'弱普涨'结构，不适合重仓追热门，只做small仓试探。",
+      "type": "signal",
+      "tags": ["timing", "position-sizing"],
+      "evidence_type": "supporting",
+      "mechanism": "多数个股微涨说明赚钱效应不集中，追高赔率差"
+    }
+  ],
+  "market_summary": "Breadth 1.99:1（涨3576/跌1797），50涨停/10跌停；上证+0.16%领涨但深成/创业板翻绿，仅1/3主要指数收红，涨幅分布偏r0_2(2461只微涨)——偏温和但动能不强的弱普涨。IV Rank均值0.61(偏高/选择性，300ETF 0.70、500ETF 0.72)。板块轮动：医疗服务(+4.01%)/电池/电子化学品领涨，种植业(-4.54%)/地面兵装/通信设备领跌——医药CRO为今日唯一强主线。",
+  "market_sentiment": "neutral",
+  "market_call": "中性偏积极"
+}
+```

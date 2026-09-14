@@ -1,0 +1,83 @@
+{
+  "date": "2026-09-14",
+  "actions": [
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "action": "SELL",
+      "price": 16.98,
+      "pnl_pct": 8.85,
+      "note": "现价16.98已跌破追踪止损17.16（Rule5触发；stop_proximity CRITICAL，距止损-1.06%），浮盈自+16%回落至+8.85%仍锁定正收益离场"
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 74.62,
+      "pnl_pct": 26.4,
+      "note": "浮盈+26.4%，止损已抬至+10%(64.91)；元件板块未入冷区，PCB/覆铜板涨价链延续，让利润奔跑"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 20.18,
+      "pnl_pct": 4.61,
+      "note": "浮盈+4.6%未触止损18.33；油运景气延续（BDTI周+43.14%/VLCC周+56.06%，输入事件数据），margin转adding；距止损仍近，继续紧盯"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 157.52,
+      "pnl_pct": 24.52,
+      "note": "医疗服务今日板块#1(+4.01%)，CRO/CXO主线延续；浮盈+24.5%，止损已抬至+10%(139.15)，让利润奔跑"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "OPEN",
+      "price": 42.85,
+      "note": "医疗服务板块#1(+4.01%)；实验猴供需紧张价格上行驱动中报净利+1126.8%（财联社/证券时报/澎湃）；RPS120=94.94扩展区获板块top10%+业绩催化双重豁免；贴MA5(+0.1%)不追高。风险：rps20仅6.21个股短期偏弱、margin deleveraging、IV 0.70偏高→小仓试探"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 971123.0,
+    "dayPnl": 2880.0,
+    "dayReturnPct": 0.3,
+    "totalReturnPct": -2.89,
+    "unrealizedPnl": 16262.0,
+    "realizedPnl": -45139.0,
+    "cashPct": 86.87
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 1.99,
+    "up": 3576,
+    "down": 1797,
+    "positive_indices": [
+      "上证指数"
+    ],
+    "negative_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 50,
+    "limit_downs": 10,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 1.99:1, 1/3 major indices green, 50 limit-ups / 10 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [
+    {
+      "code": "603127",
+      "name": "昭衍新药"
+    }
+  ],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "Breadth 1.99:1（涨3576/跌1797），50涨停/10跌停；上证+0.16%领涨但深成/创业板翻绿，仅1/3主要指数收红，涨幅分布偏r0_2(2461只微涨)——偏温和但动能不强的弱普涨。IV Rank均值0.61(偏高/选择性，300ETF 0.70、500ETF 0.72)。板块轮动：医疗服务(+4.01%)/电池/电子化学品领涨，种植业(-4.54%)/地面兵装/通信设备领跌——医药CRO为今日唯一强主线。"
+  }
+}

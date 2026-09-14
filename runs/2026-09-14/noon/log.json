@@ -1,0 +1,120 @@
+{
+  "date": "2026-09-14",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1789356928.2673018,
+      "errors": [],
+      "end": 1789357006.641557,
+      "duration_sec": 78.4
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 6926,
+      "tokens": {
+        "input_tokens": 192866,
+        "output_tokens": 21432
+      },
+      "rounds": 3,
+      "tool_calls_count": 9,
+      "duration_sec": 295.1,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1789357301.734528,
+      "actions": [
+        "SELL 000703",
+        "OPEN 603127 @ 42.85",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h190 (observation): 医疗服务为今日唯一强势主线（板块#1 +4.01%），昭衍新药实验猴涨价催化真实且持续（中报净利+1126.8%），但个股rps20仅6.21且价低于MA20(...",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=52",
+        "Hypothesis: Created h191 (observation): 皓元医药虽处#1热门板块且rps120=94.22，但9/17起三股东合计减持≤2.34%，减持窗口临近的供给压力应作为买入否决项——板块贝塔难敌个股供给冲击。...",
+        "Hypothesis: Updated h144 (hypothesis): +1 supporting evidence → hitRate=50%, n=2",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "603127",
+                "name": "昭衍新药",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 42.85,
+                "stopLoss": 40.71,
+                "distance_pct": 4.99,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1789357302.5198998,
+      "duration_sec": 0.8
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 603127 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 374.3
+  }
+}
