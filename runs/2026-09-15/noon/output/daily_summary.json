@@ -1,0 +1,71 @@
+{
+  "date": "2026-09-15",
+  "actions": [
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 75.23,
+      "pnl_pct": 27.5,
+      "note": "浮盈+27.5%远超+20%线，止损已在+10%(64.91)；元件板块未入今日top5/bottom5（中游），不触发Rule1冷区卖出；PCB/覆铜板涨价链延续（9/14 PCB概念涨幅居前，来源：证券时报），让利润奔跑"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 21.04,
+      "pnl_pct": 9.1,
+      "note": "浮盈+9.1%、今日+5.2%，未触+10%线(21.22)故止损维持18.33；油运景气延续（VLCC 2026运价中枢有望高于2025，来源：财联社/国际船舶网检索），margin已转adding；航运港口未入冷区，继续紧盯18.33"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 42.66,
+      "pnl_pct": -0.4,
+      "note": "持仓1天，浮盈-0.4%未触-3%/前3日止损；距止损40.71仅4.6%（stop_proximity WATCH），紧盯；医疗服务未入冷区（9/14 CRO概念逆市走强，来源：证券时报），安评龙头+实验猴资源壁垒（来源：东方财富CXO梳理）"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 157.66,
+      "pnl_pct": 24.6,
+      "note": "浮盈+24.6%，止损已在+10%(139.15)；CRO/CXO景气延续（上调2026指引、在手订单近600亿创新高、TIDES高增，来源：东方财富/证券时报检索）；医疗服务未入冷区，让利润奔跑"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 971945.0,
+    "dayPnl": -164.0,
+    "dayReturnPct": -0.02,
+    "totalReturnPct": -2.81,
+    "unrealizedPnl": 17084.0,
+    "realizedPnl": -45139.0,
+    "cashPct": 86.79
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.395,
+    "up": 1547,
+    "down": 3916,
+    "positive_indices": [
+      "深证成指"
+    ],
+    "negative_indices": [
+      "上证指数",
+      "创业板指"
+    ],
+    "limit_ups": 28,
+    "limit_downs": 18,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.40:1, 1/3 major indices green, 28 limit-ups / 18 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "弱宽度市场：上涨1547/下跌3916（0.40:1），涨停28/跌停18，仅深证成指微涨0.04%，上证-0.10%/创业板-0.18%，科创50逆势+1.79%领涨；分布重心在跌0-2%区间（2737只），普跌但无恐慌。IV整体中性（平均rank 0.448），500ETF/创业板ETF/深100ETF偏高（谨慎）。板块：风电设备+3.34%/玻璃玻纤+3.29%/半导体+1.90%/塑料+1.53%/电子化学品+1.52%领涨，种植业-4.34%/旅游及景区-4.08%/渔业-3.63%领跌；农业消费退潮、科技硬件与新能源材料轮动。0/4持仓在今日top5、4/4中游未入冷区。弱宽度下不新开仓，持有并紧盯止损。"
+  }
+}

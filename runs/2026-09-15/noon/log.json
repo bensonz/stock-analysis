@@ -1,0 +1,117 @@
+{
+  "date": "2026-09-15",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1789443321.516412,
+      "errors": [],
+      "end": 1789443379.461257,
+      "duration_sec": 57.9
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 9385,
+      "tokens": {
+        "input_tokens": 181888,
+        "output_tokens": 21504
+      },
+      "rounds": 3,
+      "tool_calls_count": 9,
+      "duration_sec": 280.4,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1789443659.926862,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h192 (observation): 弱宽度(0.40:1)下，即使板块top5+个股RPS甜区，若个股位于均线下方且margin deleveraging+基本面下滑，仍应skip——'板块热'不...",
+        "Hypothesis: Updated h021 (rule): +1 supporting evidence → hitRate=98%, n=108",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=76",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "603127",
+                "name": "昭衍新药",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 42.66,
+                "stopLoss": 40.71,
+                "distance_pct": 4.57,
+                "suggestion": "🟠 WATCH — 4.6% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1789443660.317867,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 603127 — 🟠 WATCH — 4.6% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 338.7
+  }
+}

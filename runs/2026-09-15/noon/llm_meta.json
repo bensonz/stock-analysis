@@ -1,0 +1,102 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 181888,
+  "output_tokens": 21504,
+  "rounds": 3,
+  "duration_sec": 280.4,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 今日 热点板块 风电设备 玻璃玻纤 半导体 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3235
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "改性塑料 塑料板块 涨价 2026年9月 行情",
+        "max_results": 5
+      },
+      "result_length": 3039
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "油运 VLCC 运价 招商轮船 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3313
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 CXO 医疗服务 板块 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3233
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月15日 市场 复盘 涨跌 跌停",
+        "max_results": 5
+      },
+      "result_length": 3185
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "http://www.stcn.com/article/detail/4183824.html",
+        "maxChars": 4000
+      },
+      "result_length": 2425
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.cls.cn/detail/2222990",
+        "maxChars": 4000
+      },
+      "result_length": 745
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.100ppi.com/data/detail-20260909-1247652.html",
+        "maxChars": 3000
+      },
+      "result_length": 2516
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://caifuhao.eastmoney.com/news/20260804085636382884120",
+        "maxChars": 4000
+      },
+      "result_length": 3765
+    }
+  ],
+  "fallback_used": false
+}
