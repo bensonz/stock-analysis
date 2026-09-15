@@ -1,0 +1,70 @@
+{
+  "date": "2026-09-15",
+  "actions": [
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 75.55,
+      "pnl_pct": 28.03,
+      "note": "浮盈+28.0%远超+20%线，止损已抬至+10%(64.91)锁定利润；元件板块未入冷区，PCB/覆铜板涨价链延续，让利润奔跑"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 20.5,
+      "pnl_pct": 6.27,
+      "note": "浮盈+6.3%未触+10%线(21.22)，止损维持18.33；油运景气延续（霍尔木兹通航未实质恢复、VLCC运价历史高位），margin已转adding；航运港口未入冷区"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 42.32,
+      "pnl_pct": -1.24,
+      "note": "持仓1天，浮盈-1.2%未触-3%/前3日止损、未触-5%止损40.71；但距止损仅3.8%（stop_proximity WATCH），明日紧盯40.71，破位无条件离场；医疗服务未入冷区"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 156.67,
+      "pnl_pct": 23.85,
+      "note": "浮盈+23.9%，止损已在+10%(139.15)；CRO/CXO景气延续（上调2026指引、在手订单近600亿创新高），医疗服务未入冷区，让利润奔跑"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 971072.0,
+    "dayPnl": -1037.0,
+    "dayReturnPct": -0.11,
+    "totalReturnPct": -2.89,
+    "unrealizedPnl": 16211.0,
+    "realizedPnl": -45139.0,
+    "cashPct": 86.87
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.2559,
+    "up": 1120,
+    "down": 4376,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 32,
+    "limit_downs": 34,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.26:1, 0/3 major indices green, 32 limit-ups / 34 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "恐慌盘硬阻断：涨跌比0.26:1（1120涨/4376跌）、34家跌停（f10=34≥30门槛）、上证-0.54%/深成-0.72%/创业板-1.15%三大主板全绿，机械层entry_regime=panic、hard_block=true，今日禁止任何新开仓。局部亮点仅科创50+1.55%，对应半导体+1.58%、电子化学品Ⅱ+1.64%、风电设备+2.56%、玻璃玻纤+2.41%、小金属+1.48%领涨——属窄幅抱团而非全面反弹。冷区集中在旅游（-4.96%）、种植业（-4.79%）、渔业（-4.51%）等。IV整体中性偏谨慎（300ETF IV rank 0.58、创业板ETF 0.51、整体avg 0.46）。持仓4/4未触止损、无时间止损触发，让利润奔跑，持有86.9%现金待宽度修复。"
+  }
+}

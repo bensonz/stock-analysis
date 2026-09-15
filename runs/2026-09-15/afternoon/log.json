@@ -1,0 +1,117 @@
+{
+  "date": "2026-09-15",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1789455918.40322,
+      "errors": [],
+      "end": 1789455995.839298,
+      "duration_sec": 77.4
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 4660,
+      "tokens": {
+        "input_tokens": 48703,
+        "output_tokens": 12772
+      },
+      "rounds": 1,
+      "tool_calls_count": 0,
+      "duration_sec": 184.1,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1789456180.0000231,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=31",
+        "Hypothesis: Created h193 (observation): 半导体/电子化学品今日逆势领涨但科创50是唯一收绿指数，说明资金高度集中在少数龙头，不是可参与的环境。...",
+        "Hypothesis: Created h194 (observation): 昭衍新药开仓次日即贴止损（42.32 vs 40.71，距离3.8%）：医疗服务今日-1.12%回落，验证'贴MA5开仓+板块未入top5'的小仓试探风险仍在，...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "603127",
+                "name": "昭衍新药",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 42.32,
+                "stopLoss": 40.71,
+                "distance_pct": 3.8,
+                "suggestion": "🟠 WATCH — 3.8% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1789456180.434433,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 603127 — 🟠 WATCH — 3.8% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 261.9
+  }
+}

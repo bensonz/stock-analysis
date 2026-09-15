@@ -1,0 +1,78 @@
+{
+  "date": "2026-09-15",
+  "slot": "afternoon",
+  "run_started_at": "2026-09-15T15:05:04.480836+08:00",
+  "status": "success",
+  "exit_code": 0,
+  "total_duration_sec": 261.9,
+  "phases": {
+    "health_check": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "sources": {
+        "sina": {
+          "status": "ok",
+          "latency_ms": 61.4
+        },
+        "cheesefortune": {
+          "status": "ok",
+          "latency_ms": 390.6
+        },
+        "pricedb": {
+          "status": "ok",
+          "latest_date": "2026-09-14",
+          "stale": false
+        }
+      }
+    },
+    "preflight_pricedb": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "latest_date": "2026-09-15",
+      "target": "2026-09-15",
+      "snapshot": "  2026-09-15: 0 → 5535 rows (5535 inserted)"
+    },
+    "collect": {
+      "status": "ok",
+      "duration_sec": 77.4,
+      "errors": []
+    },
+    "llm_analysis": {
+      "status": "ok",
+      "duration_sec": 184.1
+    },
+    "apply": {
+      "status": "ok",
+      "duration_sec": 0.4
+    },
+    "validate": {
+      "status": "warnings",
+      "duration_sec": 0.0,
+      "errors": [
+        "RULE check_stop_proximity: 603127 — 🟠 WATCH — 3.8% above stop. Monitor closely. No immediate action but be ready."
+      ]
+    }
+  },
+  "gates": {
+    "phase1_to_phase2": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": []
+    },
+    "phase2_to_phase3": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": []
+    },
+    "phase3_to_phase4": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": [
+        "rule check_stop_proximity: 🟠 WATCH — 3.8% above stop. Monitor closely. No immediate action but be ready."
+      ]
+    }
+  }
+}

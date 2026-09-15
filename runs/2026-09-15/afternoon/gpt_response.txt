@@ -1,0 +1,140 @@
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "风电设备", "chg_pct": 2.56, "trend": "单日领涨"},
+      {"name": "玻璃玻纤", "chg_pct": 2.41, "trend": "单日领涨"},
+      {"name": "电子化学品Ⅱ", "chg_pct": 1.64, "trend": "单日领涨"},
+      {"name": "半导体", "chg_pct": 1.58, "trend": "单日领涨"},
+      {"name": "小金属", "chg_pct": 1.48, "trend": "单日领涨"}
+    ],
+    "cold_sectors": [
+      {"name": "旅游及景区", "chg_pct": -4.96, "trend": "单日领跌"},
+      {"name": "种植业", "chg_pct": -4.79, "trend": "单日领跌"},
+      {"name": "渔业", "chg_pct": -4.51, "trend": "单日领跌"},
+      {"name": "一般零售", "chg_pct": -4.07, "trend": "单日领跌"},
+      {"name": "农产品加工", "chg_pct": -3.65, "trend": "单日领跌"}
+    ],
+    "position_alignment": "0/4持仓在今日top5热门板块；0/4在bottom5冷门板块（元件、航运港口、医疗服务均处中游）",
+    "regime": "恐慌盘：宽度0.26:1（1120涨/4376跌）、34家跌停≥30、0/3主板指数收绿；局部科创50+1.55%为窄幅分化，非全面行情"
+  },
+  "position_decisions": [
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "浮盈+28.0%远超+20%线，止损已抬至+10%(64.91)锁定利润；元件板块未入冷区，PCB/覆铜板涨价链延续，让利润奔跑",
+      "sector_rank": "中游（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 28.03,
+      "days_held": 14,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+6.3%未触+10%线(21.22)，止损维持18.33；油运景气延续（霍尔木兹通航未实质恢复、VLCC运价历史高位），margin已转adding；航运港口未入冷区",
+      "sector_rank": "中游（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 6.27,
+      "days_held": 9,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "持仓1天，浮盈-1.2%未触-3%/前3日止损、未触-5%止损40.71；但距止损仅3.8%（stop_proximity WATCH），明日紧盯40.71，破位无条件离场；医疗服务未入冷区",
+      "sector_rank": "中游（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": -1.24,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+23.9%，止损已在+10%(139.15)；CRO/CXO景气延续（上调2026指引、在手订单近600亿创新高），医疗服务未入冷区，让利润奔跑",
+      "sector_rank": "中游（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 23.85,
+      "days_held": 33,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688120",
+      "name": "华海清科",
+      "reason": "恐慌盘hard_block禁止新开仓；且RPS120=98.73>95超买（Rule2上限），即便半导体为top5板块也不追",
+      "rps120": 98.73
+    },
+    {
+      "code": "688361",
+      "name": "中科飞测",
+      "reason": "RPS120=98.49>95超买 + 恐慌盘hard_block",
+      "rps120": 98.49
+    },
+    {
+      "code": "301165",
+      "name": "锐捷网络",
+      "reason": "RPS120=97.81>95超买 + 恐慌盘hard_block",
+      "rps120": 97.81
+    },
+    {
+      "code": "301366",
+      "name": "一博科技",
+      "reason": "RPS120=97.78>95超买，且dist_ma10=12.6%>8%、dist_ma20=15.6%>12%严重追高 + hard_block",
+      "rps120": 97.78
+    },
+    {
+      "code": "601233",
+      "name": "桐昆股份",
+      "reason": "板块（炼化/其他石化）未入top5；现价22.83跌破MA10(24.75)/MA20(24.98)，短期弱势 + hard_block",
+      "rps120": 93.11
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "RPS120=94.97在扩展区，但PE=503（无增长红利警戒）、margin=deleveraging、医疗服务未入top5 + hard_block",
+      "rps120": 94.97
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "reason": "贵金属板块未入今日top5；RPS120=86.32在甜区但板块非领涨 + hard_block",
+      "rps120": 86.32
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌盘硬阻断是正确防线：今日宽度0.26:1、34家跌停、0/3主板绿，但科创50+1.55%与半导体/电子化学品top5形成窄幅分化。这类'单指数红、全场绿'的假强势最容易诱导FOMO入场，机械层hard_block强制空仓是正确的。",
+      "type": "rule",
+      "tags": ["entry-filter", "sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "窄幅分化行情中top5板块的上涨没有宽度支撑，个股次日易补跌；只有宽度恢复（≥1.5:1且≥2指数绿）才重新开启买门。"
+    },
+    {
+      "text": "半导体/电子化学品今日逆势领涨但科创50是唯一收绿指数，说明资金高度集中在少数龙头，不是可参与的环境。",
+      "type": "signal",
+      "tags": ["sector", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "窄基指数与宽基背离时，领涨板块多为资金避险性抱团，持续性差。"
+    },
+    {
+      "text": "昭衍新药开仓次日即贴止损（42.32 vs 40.71，距离3.8%）：医疗服务今日-1.12%回落，验证'贴MA5开仓+板块未入top5'的小仓试探风险仍在，明日破40.71无条件离场，不找理由。",
+      "type": "observation",
+      "tags": ["exit-rule", "position-sizing"],
+      "evidence_type": "supporting",
+      "mechanism": "新仓（<3日）无利润垫，任何贴近止损的弱势都要按Rule5机械处理。"
+    }
+  ],
+  "market_summary": "恐慌盘硬阻断：涨跌比0.26:1（1120涨/4376跌）、34家跌停（f10=34≥30门槛）、上证-0.54%/深成-0.72%/创业板-1.15%三大主板全绿，机械层entry_regime=panic、hard_block=true，今日禁止任何新开仓。局部亮点仅科创50+1.55%，对应半导体+1.58%、电子化学品Ⅱ+1.64%、风电设备+2.56%、玻璃玻纤+2.41%、小金属+1.48%领涨——属窄幅抱团而非全面反弹。冷区集中在旅游（-4.96%）、种植业（-4.79%）、渔业（-4.51%）等。IV整体中性偏谨慎（300ETF IV rank 0.58、创业板ETF 0.51、整体avg 0.46）。持仓4/4未触止损、无时间止损触发，让利润奔跑，持有86.9%现金待宽度修复。",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}
+```
