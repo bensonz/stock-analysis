@@ -1,0 +1,120 @@
+{
+  "date": "2026-09-16",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1789542319.728659,
+      "errors": [],
+      "end": 1789542394.6838331,
+      "duration_sec": 75.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8665,
+      "tokens": {
+        "input_tokens": 199644,
+        "output_tokens": 31285
+      },
+      "rounds": 3,
+      "tool_calls_count": 5,
+      "duration_sec": 478.2,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1789542872.889775,
+      "actions": [
+        "OPEN 600988 @ 45.44",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=98%, n=60",
+        "Hypothesis: Updated h163 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Created h197 (observation): FOMC落地前夜(9/16美盘)对黄金标的按Rule 2c半仓试探而非满配：黄金是对利率最敏感资产，'利空出尽'逻辑在决议未落地前是抛硬币，半仓可在跳空时不重伤...",
+        "Hypothesis: Updated h152 (hypothesis): +1 supporting evidence → hitRate=100%, n=4",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=54",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "600988",
+                "name": "赤峰黄金",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 45.44,
+                "stopLoss": 43.17,
+                "distance_pct": 5.0,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1789542873.715606,
+      "duration_sec": 0.8
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 600988 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 554.0
+  }
+}

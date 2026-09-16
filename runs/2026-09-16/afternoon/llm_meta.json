@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 199644,
+  "output_tokens": 31285,
+  "rounds": 3,
+  "duration_sec": 478.2,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月16日 半导体 通信设备 板块 领涨 原因",
+        "max_results": 6
+      },
+      "result_length": 3712
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "赤峰黄金 贵金属 2026年9月 上涨 原因 加息",
+        "max_results": 6
+      },
+      "result_length": 3912
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "招商轮船 油运 VLCC 运价 2026年9月 霍尔木兹",
+        "max_results": 6
+      },
+      "result_length": 3825
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=赤峰黄金+紫金矿业+入主+2026年9月",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=美联储+议息+9月16日+加息+黄金+A股",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    }
+  ],
+  "fallback_used": false
+}
