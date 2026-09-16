@@ -1,0 +1,82 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 186586,
+  "output_tokens": 28488,
+  "rounds": 3,
+  "duration_sec": 398.6,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月16日 半导体 通信设备 领涨 原因",
+        "max_results": 6
+      },
+      "result_length": 3839
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "医疗研发外包 CRO 板块 走势 2026年9月 药明康德",
+        "max_results": 6
+      },
+      "result_length": 3936
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "赤峰黄金 黄金 美联储 加息预期 2026年9月",
+        "max_results": 6
+      },
+      "result_length": 3781
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "普洛药业 原料药 催化 2026年9月 头孢托仑匹酯",
+        "max_results": 6
+      },
+      "result_length": 1033
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "招商轮船 油运 VLCC运价 霍尔木兹 2026年9月",
+        "max_results": 6
+      },
+      "result_length": 3987
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 6,
+        "query": "美联储 FOMC 议息会议 2026年9月 具体日期 加息决议"
+      },
+      "result_length": 3827
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 6,
+        "query": "半导体板块 5日 20日涨幅 2026年9月16日 申万 通信设备"
+      },
+      "result_length": 3811
+    }
+  ],
+  "fallback_used": false
+}

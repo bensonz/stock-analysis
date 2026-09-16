@@ -1,0 +1,49 @@
+{
+  "date": "2026-09-16",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1789529708.400054,
+      "errors": [],
+      "end": 1789529780.3832462,
+      "duration_sec": 72.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8563,
+      "tokens": {
+        "input_tokens": 186586,
+        "output_tokens": 28488
+      },
+      "rounds": 3,
+      "tool_calls_count": 7,
+      "duration_sec": 398.6,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1789530179.0085802,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=153",
+        "Hypothesis: Created h195 (observation): 9/16是FOMC决议前夜（美东9/15-16议息，北京时间9/17凌晨02:00公布声明，加息概率计价至90%）。按Rule 2c：dated event ≤...",
+        "Hypothesis: Created h196 (observation): 皓元医药通过RPS扩展区豁免（业绩+64.6%>50%），但9/17起三股东合计减持2.34%——新鲜负面催化是入场否决项，优先级高于技术形态。Rule 3对'...",
+        "Hypothesis: Updated h023 (rule): +1 supporting evidence → hitRate=100%, n=53",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1789530179.586678,
+      "duration_sec": 0.6
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 471.20000000000005
+  }
+}
