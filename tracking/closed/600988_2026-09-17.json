@@ -1,7 +1,7 @@
 {
   "code": "600988",
   "name": "赤峰黄金",
-  "status": "active",
+  "status": "closed",
   "thesis": "贵金属今日top5(+3.53%)，RPS120=86.27甜区、0风险因子、净利同比+84.3%、近3月涨幅超99%个股；紫金矿业约182.58亿取得控制权(来源：百度/网易2026年3月公告)。本可8%强配，但FOMC今晚落地、黄金对利率最敏感，按Rule 2c减半至4%试探",
   "entryDate": "2026-09-16",
   "entrySlot": "afternoon",
@@ -36,15 +36,25 @@
       "stop": 43.17,
       "allocatedCapital": 31808.0,
       "note": "LLM开仓 赤峰黄金"
+    },
+    {
+      "date": "2026-09-17",
+      "slot": "noon",
+      "price": 43.03,
+      "change_pct": -5.3,
+      "action": "SELL",
+      "shares": 700,
+      "note": "现价43.03跌破硬止损43.17（-5%规则：入场45.44→止损43.17，实际-5.3%）；贵金属板块今日-6.19%为跌幅榜第1行业转冷；stop_proximity CRITICAL(-0.33%)。无条件离场，不找'thesis仍有效'借口"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-09-17",
+  "exitPrice": 43.03,
+  "exitReason": "现价43.03跌破硬止损43.17（-5%规则：入场45.44→止损43.17，实际-5.3%）；贵金属板块今日-6.19%为跌幅榜第1行业转冷；stop_proximity CRITICAL(-0.33%)。无条件离场，不找'thesis仍有效'借口",
+  "returnPct": -5.3,
+  "holdingDays": 1,
+  "lessonLearned": "",
   "createdAt": "2026-09-16T15:14:33.129181+08:00",
-  "updatedAt": "2026-09-16T15:14:33.129193+08:00",
-  "trackerVersion": "2.1"
+  "updatedAt": "2026-09-17T11:40:37.924653+08:00",
+  "trackerVersion": "2.1",
+  "exitSlot": "noon"
 }

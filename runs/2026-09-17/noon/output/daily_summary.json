@@ -1,0 +1,78 @@
+{
+  "date": "2026-09-17",
+  "actions": [
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 82.34,
+      "pnl_pct": 39.5,
+      "note": "浮盈+39.5%，止损已机械锁+10%(64.91)；元件板块未入冷区，PCB/覆铜板涨价链延续，让利润奔跑"
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "action": "SELL",
+      "price": 43.03,
+      "pnl_pct": -5.3,
+      "note": "现价43.03跌破硬止损43.17（-5%规则：入场45.44→止损43.17，实际-5.3%）；贵金属板块今日-6.19%为跌幅榜第1行业转冷；stop_proximity CRITICAL(-0.33%)。无条件离场，不找'thesis仍有效'借口"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 21.1,
+      "pnl_pct": 9.4,
+      "note": "浮盈+9.4%逼近+10%(21.22)，未触止损18.33；油运景气延续（VLCC运价历史高位，霍尔木兹未实质恢复），margin已转adding；航运港口未入冷区。关注破21.22后抬止损至盈亏平衡19.29"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 44.18,
+      "pnl_pct": 3.1,
+      "note": "浮盈+3.1%(4日)未触-3%/前3日止损、未触-5%止损40.71；医疗服务未入冷区，CRO主线内持有"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 160.94,
+      "pnl_pct": 27.2,
+      "note": "浮盈+27.2%，止损已锁+10%(139.15)；CXO龙头，医疗服务未入冷区，让利润奔跑"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 975350.0,
+    "dayPnl": 1933.0,
+    "dayReturnPct": 0.2,
+    "totalReturnPct": -2.46,
+    "unrealizedPnl": 22176.0,
+    "realizedPnl": -46826.0,
+    "cashPct": 86.32
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.7286,
+    "up": 2260,
+    "down": 3102,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 34,
+    "limit_downs": 1,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.73:1, 0/3 major indices green, 34 limit-ups / 1 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "弱市：宽度0.73:1（涨2260/跌3102），三大指数齐跌（上证-0.36%/深成-0.29%/创业板-0.12%），涨停34/跌停1。FOMC 9月加息落地（来源：百度热搜'美联储加息 黄金'），贵金属板块-6.19%领跌、赤峰黄金-5.3%破止损离场。资金轮动至种植业(+3.11%)/玻璃玻纤(+2.46%)/房地产服务(+2.15%)/数字媒体(+1.98%)/汽车零部件(+1.86%)。IV整体偏悲观(avg iv_rank 0.51)，300ETF iv_rank 0.62。弱宽度下新开仓默认克制，今日无候选通过板块+RPS+非追高三重门槛，保持现金。"
+  }
+}

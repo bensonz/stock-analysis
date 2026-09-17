@@ -1,0 +1,50 @@
+{
+  "date": "2026-09-17",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1789616112.794204,
+      "errors": [],
+      "end": 1789616188.270441,
+      "duration_sec": 75.5
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8596,
+      "tokens": {
+        "input_tokens": 185379,
+        "output_tokens": 18235
+      },
+      "rounds": 3,
+      "tool_calls_count": 7,
+      "duration_sec": 249.6,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1789616437.8897548,
+      "actions": [
+        "SELL 600988",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h198 (observation): FOMC加息次日，贵金属板块-6.19%领跌、赤峰黄金单日-5.3%直接击穿-5%硬止损。对利率高度敏感品种（黄金/贵金属），即使按Rule 2c在FOMC当晚...",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=154",
+        "Hypothesis: Updated h151 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=17",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1789616438.468338,
+      "duration_sec": 0.6
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 325.7
+  }
+}

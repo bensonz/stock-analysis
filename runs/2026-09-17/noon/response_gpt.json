@@ -1,0 +1,198 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "种植业",
+        "5d_pct": 3.11,
+        "trend": "单日+3.11%领涨，防御性轮动"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": 2.46,
+        "trend": "单日+2.46%"
+      },
+      {
+        "name": "房地产服务",
+        "5d_pct": 2.15,
+        "trend": "单日+2.15%"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": 1.98,
+        "trend": "单日+1.98%"
+      },
+      {
+        "name": "汽车零部件",
+        "5d_pct": 1.86,
+        "trend": "单日+1.86%"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "贵金属",
+        "5d_pct": -6.19,
+        "trend": "单日-6.19%领跌，FOMC加息重创"
+      },
+      {
+        "name": "工业金属",
+        "5d_pct": -2.93,
+        "trend": "单日-2.93%"
+      },
+      {
+        "name": "风电设备",
+        "5d_pct": -2.4,
+        "trend": "单日-2.40%"
+      },
+      {
+        "name": "油服工程",
+        "5d_pct": -2.32,
+        "trend": "单日-2.32%"
+      },
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": -2.29,
+        "trend": "单日-2.29%"
+      }
+    ],
+    "position_alignment": "0/5 持仓在今日top5；1/5（赤峰黄金-贵金属）在bottom1，今日SELL",
+    "regime": "FOMC加息落地→贵金属/工业金属领跌，资金切向种植业/玻璃玻纤/房地产服务/数字媒体；三大指数齐跌、宽度0.73:1弱市"
+  },
+  "position_decisions": [
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "浮盈+39.5%，止损已机械锁+10%(64.91)；元件板块未入冷区，PCB/覆铜板涨价链延续，让利润奔跑",
+      "sector_rank": "middle（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 39.5,
+      "days_held": 16,
+      "exit_price": null
+    },
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "action": "SELL",
+      "reason": "现价43.03跌破硬止损43.17（-5%规则：入场45.44→止损43.17，实际-5.3%）；贵金属板块今日-6.19%为跌幅榜第1行业转冷；stop_proximity CRITICAL(-0.33%)。无条件离场，不找'thesis仍有效'借口",
+      "sector_rank": "bottom 1/5（贵金属 -6.19%）",
+      "new_stop": null,
+      "pnl_pct": -5.3,
+      "days_held": 1,
+      "exit_price": 43.03
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+9.4%逼近+10%(21.22)，未触止损18.33；油运景气延续（VLCC运价历史高位，霍尔木兹未实质恢复），margin已转adding；航运港口未入冷区。关注破21.22后抬止损至盈亏平衡19.29",
+      "sector_rank": "middle（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 9.4,
+      "days_held": 11,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+3.1%(4日)未触-3%/前3日止损、未触-5%止损40.71；医疗服务未入冷区，CRO主线内持有",
+      "sector_rank": "middle（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 3.1,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+27.2%，止损已锁+10%(139.15)；CXO龙头，医疗服务未入冷区，让利润奔跑",
+      "sector_rank": "middle（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 27.2,
+      "days_held": 35,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "工业金属板块今日-2.93%为跌幅榜第2；现价35.41低于MA10(-8.2%)形态破位。板块冷，RPS120 94.73救不了冷板块",
+      "rps120": 94.73
+    },
+    {
+      "code": "301529",
+      "name": "福赛科技",
+      "reason": "汽车零部件为今日top5(+1.86%)但RPS120=95.91>95%，触发Rule2过热线硬上限，等回调至90%区间",
+      "rps120": 95.91
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "CRO/医疗研发外包未入今日top5；RPS120=94.75扩展区无豁免（1风险、净利同比-96%）；dist_ma10=8.0%贴追高线；margin deleveraging；弱市跳过",
+      "rps120": 94.75
+    },
+    {
+      "code": "000301",
+      "name": "东方盛虹",
+      "reason": "现价13.41低于MA5/MA10/MA20，油气开采Ⅱ在跌幅榜，炼化板块不热，跳过",
+      "rps120": 91.15
+    },
+    {
+      "code": "603132",
+      "name": "金徽股份",
+      "reason": "铅锌属工业金属（今日-2.93%跌幅榜第2），现价18.18低于MA10(-7.1%)，板块冷，跳过",
+      "rps120": 90.38
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "FOMC加息次日，贵金属板块-6.19%领跌、赤峰黄金单日-5.3%直接击穿-5%硬止损。对利率高度敏感品种（黄金/贵金属），即使按Rule 2c在FOMC当晚减半仓试探，次日仍可能跳空击穿止损。减半仓是正确的前置动作，而-5%止损纪律兜底了更坏情形——今天再次证明：止损不等、不解释。",
+      "type": "observation",
+      "tags": [
+        "timing",
+        "exit-rule",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "加息落地→实际利率上行→无息资产黄金承压；A股贵金属板块与国内期市共振下跌，跳空风险由stop_proximity规则提前预警"
+    },
+    {
+      "text": "弱宽度(0.73:1，0/3指数绿)下，没有任何候选能通过'板块top30%+RPS75-95+非追高'三重门槛，new_positions保持空。这是h013(强宽度不足也强制空仓)的反向版本：弱宽度下更不能硬找starter仓。",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "弱宽度=多数个股下跌，即使个别setup达标也缺市场beta配合；0.5倍仓的收益不足以补偿追高风险"
+    },
+    {
+      "text": "今日唯一位于top5板块(汽车零部件)的策略池标的福赛科技RPS120=95.91>95%，被Rule2过热线硬上限挡下。板块热度不能豁免RPS>95%的均值回归风险——该上限2026-07-31恢复后经审计load-bearing，今天再次体现价值。",
+      "type": "rule",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "RPS>95%的标的在门池内rank-IC为负，顶部动量易均值回归；等回调至90%区间再评估"
+    },
+    {
+      "text": "FOMC加息引发'避险资源→防御题材'快速轮动（贵金属-6.19% vs 种植业+3.11%，9.3pp极差）。这类轮动通常持续3-5个交易日，持仓若在未来2-3天滑入bottom30%需按Rule1执行'行业冷3天→卖出'。",
+      "type": "signal",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "利率冲击先杀资源/无息资产，资金短期切防御与题材，轮动惯性3-5日"
+    }
+  ],
+  "market_summary": "弱市：宽度0.73:1（涨2260/跌3102），三大指数齐跌（上证-0.36%/深成-0.29%/创业板-0.12%），涨停34/跌停1。FOMC 9月加息落地（来源：百度热搜'美联储加息 黄金'），贵金属板块-6.19%领跌、赤峰黄金-5.3%破止损离场。资金轮动至种植业(+3.11%)/玻璃玻纤(+2.46%)/房地产服务(+2.15%)/数字媒体(+1.98%)/汽车零部件(+1.86%)。IV整体偏悲观(avg iv_rank 0.51)，300ETF iv_rank 0.62。弱宽度下新开仓默认克制，今日无候选通过板块+RPS+非追高三重门槛，保持现金。",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}
