@@ -1,0 +1,70 @@
+{
+  "date": "2026-09-17",
+  "actions": [
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 82.15,
+      "pnl_pct": 39.2,
+      "note": "浮盈+39.2%，止损已机械锁+10%(64.91)；元件板块今日滑入跌幅榜第5(-2.43%)为转冷第1日，未达'冷3日卖出'阈值，继续持有并紧盯；个股今日-1.16%属正常波动，让利润奔跑"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "RAISE_STOP",
+      "price": 21.85,
+      "pnl_pct": 13.3,
+      "note": "浮盈+13.3%触发Rule5(+10%→抬止损至盈亏平衡19.29)；今日涨停+10.02%(position_prices)，油运超级周期延续(霍尔木兹扰动+VLCC运价历史高位，来源:证券时报/华创证券)，让利润奔跑"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 44.12,
+      "pnl_pct": 3.0,
+      "note": "浮盈+3.0%(4日)，未触-5%止损40.71，前3日-3%窗口已过；CRO主线今日走强，医疗服务未入冷区，继续持有"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 160.49,
+      "pnl_pct": 26.9,
+      "note": "浮盈+26.9%，止损已锁+10%(139.15)；CXO龙头(在手订单664亿创新高，来源:经济观察报)，医疗服务未入冷区，让利润奔跑"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 975691.0,
+    "dayPnl": 2274.0,
+    "dayReturnPct": 0.23,
+    "totalReturnPct": -2.43,
+    "unrealizedPnl": 22517.0,
+    "realizedPnl": -46826.0,
+    "cashPct": 86.29
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.9135,
+    "up": 2576,
+    "down": 2820,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 50,
+    "limit_downs": 2,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.91:1, 0/3 major indices green, 50 limit-ups / 2 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "市场弱势：上证-0.41%/深成-0.33%/创业板-0.40%三大指数全绿，涨跌比0.91:1(涨2576/跌2820)，涨停50/跌停2，regime=weak(半仓门槛)。IV中性(平均IV Rank 0.38，深100ETF 0.52偏高)。板块偏防御：种植业+3.99%领涨(厄尔尼诺+全球粮价上行，CBOT玉米年内+23%/小麦+21%，来源:证券时报网)、CRO概念走强、招商轮船涨停带动航运；贵金属-5.36%领跌(美国8月PPI超预期+核心CPI超预期，9月加息概率约90%，来源:新浪财经/21财经)，工业金属/元件/油服走弱。PCB涨价链中长期逻辑仍在(建滔年内第7轮涨价函，来源:新浪财经)但今日MLCC/PCB概念跌幅居前。策略池无top30%板块内RPS甜区候选，弱tape默认空仓，保持86%现金。"
+  }
+}

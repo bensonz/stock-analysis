@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 110375,
+  "output_tokens": 19506,
+  "rounds": 2,
+  "duration_sec": 359.5,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月17日 收盘 种植业 领涨 板块",
+        "max_results": 5
+      },
+      "result_length": 3260
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "贵金属 大跌 加息预期 2026年9月 A股 黄金",
+        "max_results": 5
+      },
+      "result_length": 3629
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "招商轮船 涨停 油运 VLCC 运价 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3209
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "PCB 元件 板块 覆铜板 涨价 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3344
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月17日 沪指 弱势 市场",
+        "max_results": 5
+      },
+      "result_length": 3941
+    }
+  ],
+  "fallback_used": false
+}

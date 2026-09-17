@@ -1,0 +1,171 @@
+Based on my analysis of the input data and research, here is my decision.
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "种植业", "5d_pct": 3.99, "trend": "accelerating"},
+      {"name": "航海装备Ⅱ", "5d_pct": 2.71, "trend": "steady"},
+      {"name": "房地产服务", "5d_pct": 2.57, "trend": "steady"},
+      {"name": "互联网电商", "5d_pct": 2.55, "trend": "steady"},
+      {"name": "数字媒体", "5d_pct": 2.1, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "贵金属", "5d_pct": -5.36, "trend": "deteriorating"},
+      {"name": "林业Ⅱ", "5d_pct": -3.46, "trend": "deteriorating"},
+      {"name": "工业金属", "5d_pct": -2.72, "trend": "deteriorating"},
+      {"name": "元件", "5d_pct": -2.43, "trend": "deteriorating"},
+      {"name": "油服工程", "5d_pct": -2.34, "trend": "deteriorating"}
+    ],
+    "position_alignment": "1/4持仓在明显热点板块(航运涨停)，2/4在CRO主线(今日走强)，1/4(奥士康/元件)今日滑入跌幅榜第5(转冷第1日)",
+    "regime": "防御轮动：农业(厄尔尼诺+全球粮价上行)+CRO+航运领涨；资源(贵金属/工业金属)与电子(元件/PCB)退潮，美联储9月加息预期(约90%)压制有色，整体风险偏好偏弱"
+  },
+  "position_decisions": [
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "浮盈+39.2%，止损已机械锁+10%(64.91)；元件板块今日滑入跌幅榜第5(-2.43%)为转冷第1日，未达'冷3日卖出'阈值，继续持有并紧盯；个股今日-1.16%属正常波动，让利润奔跑",
+      "sector_rank": "元件 今日跌幅榜第5(-2.43%)，转冷第1日",
+      "new_stop": null,
+      "pnl_pct": 39.2,
+      "days_held": 16,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "RAISE_STOP",
+      "reason": "浮盈+13.3%触发Rule5(+10%→抬止损至盈亏平衡19.29)；今日涨停+10.02%(position_prices)，油运超级周期延续(霍尔木兹扰动+VLCC运价历史高位，来源:证券时报/华创证券)，让利润奔跑",
+      "sector_rank": "航运港口 走强(今日涨停，非冷区)",
+      "new_stop": 19.29,
+      "pnl_pct": 13.3,
+      "days_held": 11,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+3.0%(4日)，未触-5%止损40.71，前3日-3%窗口已过；CRO主线今日走强，医疗服务未入冷区，继续持有",
+      "sector_rank": "医疗服务/CRO 今日走强，非冷区",
+      "new_stop": null,
+      "pnl_pct": 3.0,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+26.9%，止损已锁+10%(139.15)；CXO龙头(在手订单664亿创新高，来源:经济观察报)，医疗服务未入冷区，让利润奔跑",
+      "sector_rank": "医疗服务/CRO 走强，非冷区",
+      "new_stop": null,
+      "pnl_pct": 26.9,
+      "days_held": 34,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "reason": "贵金属跌幅榜第1(-5.36%)转冷；昨日刚止损离场(-5.3%)，重入举证责任未满足；RPS120 85.25",
+      "rps120": 85.25
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "工业金属跌幅榜第5(-2.72%)冷区，Rule1不买入；RPS120 94.62扩展区",
+      "rps120": 94.62
+    },
+    {
+      "code": "603132",
+      "name": "金徽股份",
+      "reason": "工业金属/铅锌冷区；RPS120 89.63",
+      "rps120": 89.63
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "医疗服务(CRO)板块动量未确认top30%；RPS20 10.9个股短期偏弱；margin deleveraging；PE 533、净利润-96%；弱tape跳过；RPS120 94.53",
+      "rps120": 94.53
+    },
+    {
+      "code": "688131",
+      "name": "皓元医药",
+      "reason": "三股东拟合计减持≤2.34%(9/17公告)；RPS120 92.97扩展区；弱tape跳过",
+      "rps120": 92.97
+    },
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "reason": "原料药板块动量未确认；margin deleveraging(chg5 -5.47%)；弱tape跳过；RPS120 91.51",
+      "rps120": 91.51
+    },
+    {
+      "code": "000301",
+      "name": "东方盛虹",
+      "reason": "炼化板块动量未确认top30%；margin deleveraging；弱tape跳过；RPS120 90.76",
+      "rps120": 90.76
+    },
+    {
+      "code": "002293",
+      "name": "罗莱生活",
+      "reason": "家纺非热点；股价位于MA10/MA20下方动量偏弱(dist_ma10 -1.0%/ma20 -2.1%)；无新催化；RPS120 87.42",
+      "rps120": 87.42
+    },
+    {
+      "code": "688120",
+      "name": "华海清科",
+      "reason": "RPS120 98.75超95上限(相对强度过热)，Rule2封顶——同组RPS>95名单(中科飞测98.42/锐捷网络97.85/中石科技97.61等)今日一律不追",
+      "rps120": 98.75
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱tape(涨跌比0.91:1、三大指数全绿、50涨停/2跌停)且策略池无top30%板块内RPS甜区(80-92%)候选时，正确决策是空仓new_positions:[]，不为'可接受'的候选强行上车。",
+      "type": "rule",
+      "tags": ["entry-filter", "position-sizing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "宽度不足时个股即使通过RPS/MA门槛，板块贝塔也不支持新开仓，现金等待优于强行半仓。"
+    },
+    {
+      "text": "元件板块今日滑入跌幅榜第5(-2.43%)，持仓奥士康进入'行业冷3天→卖出'监控窗口第1天；PCB涨价链中长期逻辑未破(建滔年内第7轮涨价函，来源:新浪财经)，但短期板块退潮需盯紧。",
+      "type": "observation",
+      "tags": ["sector", "exit-rule"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "强势主线也会出现单日退潮，3日窗口用于区分噪音与真正轮动。"
+    },
+    {
+      "text": "招商轮船浮盈+13.3%且今日涨停+10.02%，机械抬止损至盈亏平衡19.29，弱tape下把快赢家转为低风险持仓。",
+      "type": "heuristic",
+      "tags": ["exit-rule"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "+10%后抬止损锁住本金风险，剩余浮盈由市场决定。"
+    },
+    {
+      "text": "贵金属-5.36%领跌主因美国8月PPI超预期+核心CPI超预期、9月加息概率约90%(来源:新浪财经/21财经)，赤峰黄金昨止损离场(-5.3%)后今日板块继续下杀，验证'冷区无条件离场'不抄底。",
+      "type": "signal",
+      "tags": ["sector", "exit-rule"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "加息预期压制无息资产黄金，板块beta向下时个股弹性向下放大。"
+    },
+    {
+      "text": "种植业+3.99%领涨由厄尔尼诺+全球粮价上行驱动(CBOT玉米年内+23%/小麦+21%，来源:证券时报网)，但策略池无农业标的，不强行追；防御性板块领涨提示整体风险偏好低。",
+      "type": "observation",
+      "tags": ["sector", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "防御性板块领涨通常意味着资金避险，与弱宽度互相印证。"
+    }
+  ],
+  "market_summary": "市场弱势：上证-0.41%/深成-0.33%/创业板-0.40%三大指数全绿，涨跌比0.91:1(涨2576/跌2820)，涨停50/跌停2，regime=weak(半仓门槛)。IV中性(平均IV Rank 0.38，深100ETF 0.52偏高)。板块偏防御：种植业+3.99%领涨(厄尔尼诺+全球粮价上行，CBOT玉米年内+23%/小麦+21%，来源:证券时报网)、CRO概念走强、招商轮船涨停带动航运；贵金属-5.36%领跌(美国8月PPI超预期+核心CPI超预期，9月加息概率约90%，来源:新浪财经/21财经)，工业金属/元件/油服走弱。PCB涨价链中长期逻辑仍在(建滔年内第7轮涨价函，来源:新浪财经)但今日MLCC/PCB概念跌幅居前。策略池无top30%板块内RPS甜区候选，弱tape默认空仓，保持86%现金。",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}
+```

@@ -8,7 +8,7 @@
   "entryPrice": 19.29,
   "targetPrice": 25.3,
   "stopLoss": 18.33,
-  "currentStop": 18.33,
+  "currentStop": 19.29,
   "allocation_pct": 2.0,
   "shares": 800,
   "allocatedCapital": 15432.0,
@@ -116,6 +116,16 @@
       "change_pct": 9.38,
       "action": "HOLD",
       "note": "浮盈+9.4%逼近+10%(21.22)，未触止损18.33；油运景气延续（VLCC运价历史高位，霍尔木兹未实质恢复），margin已转adding；航运港口未入冷区。关注破21.22后抬止损至盈亏平衡19.29"
+    },
+    {
+      "date": "2026-09-17",
+      "slot": "afternoon",
+      "price": 21.85,
+      "change_pct": 13.27,
+      "action": "RAISE_STOP",
+      "note": "浮盈+13.3%触发Rule5(+10%→抬止损至盈亏平衡19.29)；今日涨停+10.02%(position_prices)，油运超级周期延续(霍尔木兹扰动+VLCC运价历史高位，来源:证券时报/华创证券)，让利润奔跑",
+      "old_stop": 18.33,
+      "new_stop": 19.29
     }
   ],
   "exitDate": null,
@@ -125,6 +135,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-09-03T11:41:15.769336+08:00",
-  "updatedAt": "2026-09-17T11:40:37.932936+08:00",
+  "updatedAt": "2026-09-17T15:12:36.008100+08:00",
   "trackerVersion": "2.1"
 }
