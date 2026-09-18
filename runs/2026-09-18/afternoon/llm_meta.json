@@ -1,0 +1,112 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 172267,
+  "output_tokens": 25944,
+  "rounds": 3,
+  "duration_sec": 549.9,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年9月18日 A股 半导体板块 领涨 原因",
+        "max_results": 6
+      },
+      "result_length": 3825
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年9月18日 A股 收盘 三大指数 涨 板块",
+        "max_results": 6
+      },
+      "result_length": 3647
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "招商轮船 油运 运价 TD3C 2026年9月",
+        "max_results": 6
+      },
+      "result_length": 3842
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年9月 光伏设备 板块 行情 涨价",
+        "max_results": 6
+      },
+      "result_length": 3916
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "CRO 创新药 医疗服务 板块 2026年9月18日",
+        "max_results": 6
+      },
+      "result_length": 3889
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://wallstreetcn.com/articles/3782045",
+        "maxChars": 5000
+      },
+      "result_length": 107
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.caiwennews.com/article/1608990.shtml",
+        "maxChars": 5000
+      },
+      "result_length": 2731
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "http://stock.eastmoney.com/a/202609143873299880.html",
+        "maxChars": 5000
+      },
+      "result_length": 2367
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://cfi.net.cn/p20260918000256.html",
+        "maxChars": 5000
+      },
+      "result_length": 2916
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.caiwennews.com/article/1611366.shtml",
+        "maxChars": 5000
+      },
+      "result_length": 4154
+    }
+  ],
+  "fallback_used": false
+}
