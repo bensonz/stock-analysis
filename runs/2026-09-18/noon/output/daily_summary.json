@@ -1,0 +1,70 @@
+{
+  "date": "2026-09-18",
+  "actions": [
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 82.03,
+      "pnl_pct": 39.0,
+      "note": "浮盈+39%让利润奔跑，止损已锁+10%(64.91)；元件板块今日未入bottom5(昨日转冷第1日已修复)，PCB/覆铜板涨价链延续"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 22.35,
+      "pnl_pct": 15.9,
+      "note": "浮盈+15.9%，止损已抬至盈亏平衡19.29；VLCC运价历史高位(霍尔木兹+曼德双通道承压，来源:中银证券9/15/证券时报)，油运景气延续，+20%未到暂不抬止损"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 45.63,
+      "pnl_pct": 6.5,
+      "note": "浮盈+6.5%未触-5%止损40.71、前3日-3%窗口已过；CRO主线(高盛/招银国际上调行业预期)，医疗服务未入bottom5，继续持有"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 160.56,
+      "pnl_pct": 26.9,
+      "note": "浮盈+26.9%，止损已锁+10%(139.15)；CXO龙头在手订单664亿创新高(来源:东方财富)，让利润奔跑"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 977272.0,
+    "dayPnl": 1581.0,
+    "dayReturnPct": 0.16,
+    "totalReturnPct": -2.27,
+    "unrealizedPnl": 24098.0,
+    "realizedPnl": -46826.0,
+    "cashPct": 86.15
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 5.6227,
+    "up": 4560,
+    "down": 811,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 64,
+    "limit_downs": 0,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 5.62:1, 3/3 major indices green, 64 limit-ups / 0 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "强势普涨日：涨跌比5.62:1(4560涨/811跌)，64涨停/0跌停，3/3主要指数红盘(上证+1.04%/深成+1.52%/创业板+2.11%/科创50+3.93%)。驱动=美联储9/16加息落地后首个完整交易日美股科技反弹(纳指+1.69%)、10Y美债收益率下行7bp，资金回流半导体/AI硬件(来源:第一财经/新浪财经/财联社)。IV整体中性(avg_iv_rank 0.41)，个股iv_proxy均normal。热门板块(半导体/通信/航天)全部候选RPS120>95且dist_ma超追高线，无合规入场点；持仓4只全部盈利、板块未入bottom5，继续让利润奔跑并保留86%现金。板块数据仅提供今日单日涨跌幅，无5/20日序列。"
+  }
+}

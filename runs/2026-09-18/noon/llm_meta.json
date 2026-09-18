@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 167709,
+  "output_tokens": 21316,
+  "rounds": 3,
+  "duration_sec": 309.6,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月18日 半导体 板块 大涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3254
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "普洛药业 头孢托仑匹酯 原料药 获批 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 2481
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "油运 VLCC运价 招商轮船 2026年9月 航运",
+        "max_results": 5
+      },
+      "result_length": 3245
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "化学制药 原料药 板块 表现 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3276
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://finance.sina.com.cn/wm/2026-09-18/doc-inisewtp0218498.shtml",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.stcn.com/article/detail/3651851.html",
+        "maxChars": 4000
+      },
+      "result_length": 3332
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026-09-18 收盘 板块 涨幅 半导体 通信 航天",
+        "max_results": 5
+      },
+      "result_length": 3064
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "医疗服务 CRO 板块 2026年9月 表现 昭衍新药 药明康德",
+        "max_results": 5
+      },
+      "result_length": 3436
+    }
+  ],
+  "fallback_used": false
+}
