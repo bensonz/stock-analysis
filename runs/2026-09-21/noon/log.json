@@ -1,0 +1,49 @@
+{
+  "date": "2026-09-21",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1789961713.461063,
+      "errors": [],
+      "end": 1789961779.430045,
+      "duration_sec": 66.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8183,
+      "tokens": {
+        "input_tokens": 106882,
+        "output_tokens": 18557
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 254.6,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1789962034.09272,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=57",
+        "Hypothesis: Updated h151 (hypothesis): +1 supporting evidence → hitRate=100%, n=4",
+        "Hypothesis: Created h199 (observation): 招商轮船融资信号从'deleveraging'翻转为'adding'(chg5_pct +3.27%)，与VLCC运价历史新高(来源:中银证券9/15、财闻网)...",
+        "Hypothesis: Updated h182 (hypothesis): +1 supporting evidence → hitRate=100%, n=3",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1789962034.853226,
+      "duration_sec": 0.8
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 321.4
+  }
+}

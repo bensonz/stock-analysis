@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 106882,
+  "output_tokens": 18557,
+  "rounds": 2,
+  "duration_sec": 254.6,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 医疗服务 化学制药 板块 上涨 原因 2026-09-21",
+        "max_results": 5
+      },
+      "result_length": 3294
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 今日 热门板块 领涨 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3124
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "招商轮船 油运 VLCC 运价 历史高位 2026",
+        "max_results": 5
+      },
+      "result_length": 3179
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "创新药 CXO 药明康德 2026年9月 政策 订单",
+        "max_results": 5
+      },
+      "result_length": 4081
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "美联储 9月 议息会议 加息 2026 时间",
+        "max_results": 5
+      },
+      "result_length": 3230
+    }
+  ],
+  "fallback_used": false
+}
