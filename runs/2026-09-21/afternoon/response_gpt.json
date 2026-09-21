@@ -1,0 +1,216 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "房地产服务",
+        "1d_pct": 6.03,
+        "trend": "accelerating"
+      },
+      {
+        "name": "其他家电Ⅱ",
+        "1d_pct": 5.81,
+        "trend": "one-day spike"
+      },
+      {
+        "name": "医疗服务",
+        "1d_pct": 4.53,
+        "trend": "accelerating"
+      },
+      {
+        "name": "化学制药",
+        "1d_pct": 4.4,
+        "trend": "steady"
+      },
+      {
+        "name": "航海装备Ⅱ",
+        "1d_pct": 4.22,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "白色家电",
+        "1d_pct": -3.35,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "贵金属",
+        "1d_pct": -2.02,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电池",
+        "1d_pct": -1.08,
+        "trend": "weakening"
+      },
+      {
+        "name": "林业Ⅱ",
+        "1d_pct": -0.89,
+        "trend": "weakening"
+      },
+      {
+        "name": "自动化设备",
+        "1d_pct": -0.57,
+        "trend": "weakening"
+      }
+    ],
+    "position_alignment": "2/4 positions in hot sectors（昭衍新药、药明康德均在医疗服务top5）；招商轮船航运港口不在今日top5但油运独立驱动，奥士康元件未入bottom5",
+    "regime": "医药(创新药/CRO)+房地产+航海装备领涨，贵金属/白电逆市走弱；科技(算力/PCB)资金蓄势"
+  },
+  "position_decisions": [
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "浮盈+43.2%让利润奔跑，止损已机械锁+10%(64.91)；元件板块未入今日bottom5(9/17转冷第1日已修复)，PCB/覆铜板涨价链延续；margin deleveraging(chg5 -24.74%)为警示非卖出触发",
+      "sector_rank": "未入bottom5（元件板块已修复）",
+      "new_stop": null,
+      "pnl_pct": 43.2,
+      "days_held": 18,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+18.8%逼近+20%抬损线(未触发)，止损已锁breakeven(19.29)；VLCC运价续创历史新高(来源:财闻网9/21东方证券报告)，margin signal已翻转adding(chg5 +3.27%)，油运景气延续",
+      "sector_rank": "非今日top5，油运独立驱动（东方证券推荐买入）",
+      "new_stop": null,
+      "pnl_pct": 18.8,
+      "days_held": 13,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+9.1%逼近+10%抬损线(47.14，未触发)，止损40.71；医疗服务今日+4.53%列top3热区，创新药/CRO爆发(来源:新华财经9/21)；margin adding(chg5 +4.61%)",
+      "sector_rank": "top5（医疗服务+4.53%）",
+      "new_stop": null,
+      "pnl_pct": 9.1,
+      "days_held": 6,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+32.8%让利润奔跑，止损已锁+10%(139.15)；医疗服务今日+4.53%热区，在手订单664.3亿创新高(来源:东方财富8/3中报)、CRO景气延续",
+      "sector_rank": "top5（医疗服务+4.53%）",
+      "new_stop": null,
+      "pnl_pct": 32.8,
+      "days_held": 37,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "reason": "化学制药热区(+4.40%)且RPS120=90.97甜点区，但dist_ma5=6.7%>6%、dist_ma10=8.9%>8%双超追高线，Rule 2b跳过，等回调至MA5/MA10",
+      "rps120": 90.97
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "医疗服务热区(+4.53%)但dist_ma10=9.0%>8%超追高线；PE 565、营收-35.3%/净利-96.3%无增长催化可豁免扩展区",
+      "rps120": 93.72
+    },
+    {
+      "code": "688046",
+      "name": "药康生物",
+      "reason": "医疗服务热区但RPS120=99.34>95%超热(均值回归风险)，且dist_ma5=6.3%/ma10=11.3%/ma20=12.9%三线超阈",
+      "rps120": 99.34
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "化学制药热区但RPS120=97.27>95%超热，dist_ma20=10.8%",
+      "rps120": 97.27
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "石油石化非今日热点；且9/14刚以16.98离场(跌破17.16追踪止损)，现价16.95仍在17.16之下、无新催化差异，重入举证责任未满足",
+      "rps120": 94.11
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "有色金属/铜非今日热点(贵金属今日bottom5)，Rule 1行业未趋强不进场",
+      "rps120": 94.02
+    },
+    {
+      "code": "601918",
+      "name": "新集能源",
+      "reason": "煤炭非今日热点，margin deleveraging(chg5 -9.26%)，行业未趋强",
+      "rps120": 91.6
+    },
+    {
+      "code": "000301",
+      "name": "东方盛虹",
+      "reason": "石油石化非今日热点；vcp仅SETUP且contraction_ratio=0.8偏弱",
+      "rps120": 89.88
+    },
+    {
+      "code": "603132",
+      "name": "金徽股份",
+      "reason": "铅锌/有色非今日热点(贵金属走弱)，margin deleveraging(chg5 -17.37%)",
+      "rps120": 87.88
+    },
+    {
+      "code": "600546",
+      "name": "山煤国际",
+      "reason": "煤炭非今日热点，行业未趋强不进场",
+      "rps120": 85.85
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "强宽度(4.85:1)+极度乐观IV(avg rank 11%)组合下，候选池内所有热点板块标的(医疗服务/化学制药)全部因RPS>95或dist_ma超阈被拦截——普洛药业dist_ma5=6.7%/ma10=8.9%、益诺思dist_ma10=9.0%均超追高线。验证MA纪律在热区内仍不可豁免(h021)，低IV+强宽度=追高陷阱高发区(h017)。",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021, h017",
+      "mechanism": "低IV+强宽度意味着市场自满且多数股票已快速拉升，热点股普遍远离MA支撑，此时进场即追高，回撤风险集中。"
+    },
+    {
+      "text": "今日热点板块(医疗服务/化学制药/房地产服务/航海装备)在候选池中无一个'甜点区RPS+MA合规'的可买标的，而煤炭/石化/有色等非热点标的即使RPS合规也不进场——强宽度不强制开仓(h013)，宁可持币85%也不买冷门行业(h019)。",
+      "type": "rule",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013, h019",
+      "mechanism": "板块动量是入场的第一过滤网；冷行业个股动量不可持续，行业重力终将吞噬个股alpha。"
+    },
+    {
+      "text": "招商轮船margin signal从deleveraging翻转为adding(chg5 +3.27%)，与VLCC运价历史新高共振(来源:财闻网9/21东方证券报告)。margin流是滞后确认，不单独构成买卖触发，但翻转方向可作为持有佐证记录。",
+      "type": "signal",
+      "tags": [
+        "position-sizing",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "融资余额变动反映杠杆资金方向，chg5转正说明投机盘回流，与运价上行同向。"
+    },
+    {
+      "text": "恒逸石化9/14以16.98离场(跌破17.16追踪止损)，今日现价16.95仍在17.16之下、无新催化差异，重入举证责任未满足——维持不重入(重入历史n=9均值-3.71%、胜率11%)。",
+      "type": "rule",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "刚止损离场的标的通常仍在弱势结构中，无实质变化就重入等于用亏损教训换同样错误。"
+    }
+  ],
+  "market_summary": "Breadth 4.85:1 极强(4536涨/936跌/106涨停/3跌停)，上证+0.97%/深成+0.65%/创业板+0.80%三指全红，entry_regime=strong 全仓可开新仓；但IV整体极度乐观(avg rank 11%<15%)，追高安全边际薄。热点：医疗服务(+4.53%)/化学制药(+4.40%)/房地产服务(+6.03%)/航海装备(+4.22%)，创新药+CRO爆发(来源:新华财经9/21)；贵金属(-2.02%)/白色家电(-3.35%)逆市走弱。组合4持仓全部浮盈、2只在医疗服务热区，招商轮船受益VLCC运价历史新高(来源:财闻网9/21)。候选池热区标的全部RPS>95或MA超阈，故不追高、new_positions为空——市场强但无干净买点，持币等待回调。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

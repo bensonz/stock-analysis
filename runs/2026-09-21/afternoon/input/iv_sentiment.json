@@ -1,0 +1,602 @@
+{
+  "date": "2026-09-21",
+  "source": "options-learn backend (/api/history/iv-rank)",
+  "core_underlyings": [
+    "510050",
+    "510300",
+    "510500",
+    "588000",
+    "159915"
+  ],
+  "etf_iv_data": [
+    {
+      "underlying": "510050",
+      "lookback_days": 252,
+      "data_points": 224,
+      "data_points_filtered": 216,
+      "current_iv": 0.1164,
+      "is_live": false,
+      "iv_high": 0.2131,
+      "iv_low": 0.1137,
+      "iv_high_raw": 0.2625,
+      "iv_low_raw": 0.1137,
+      "iv_rank": 0.0271,
+      "iv_rank_raw": 0.0181,
+      "iv_percentile": 0.0231,
+      "iv_percentile_raw": 0.0223,
+      "outliers_removed": 8,
+      "outlier_details": [
+        {
+          "date": "2026-02-02",
+          "iv": 0.2471
+        },
+        {
+          "date": "2026-03-23",
+          "iv": 0.2291
+        },
+        {
+          "date": "2026-06-23",
+          "iv": 0.2503
+        },
+        {
+          "date": "2026-07-16",
+          "iv": 0.2195
+        },
+        {
+          "date": "2026-07-17",
+          "iv": 0.2443
+        },
+        {
+          "date": "2026-07-20",
+          "iv": 0.2333
+        },
+        {
+          "date": "2026-07-21",
+          "iv": 0.2211
+        },
+        {
+          "date": "2026-07-22",
+          "iv": 0.2625
+        }
+      ],
+      "sigma_range": [
+        0.1039,
+        0.2137
+      ],
+      "name": "50ETF",
+      "desc": "大盘蓝筹",
+      "interpretation": "极低 (市场极度乐观/自满，适合买入保护)"
+    },
+    {
+      "underlying": "510300",
+      "lookback_days": 252,
+      "data_points": 224,
+      "data_points_filtered": 216,
+      "current_iv": 0.1374,
+      "is_live": false,
+      "iv_high": 0.2285,
+      "iv_low": 0.1201,
+      "iv_high_raw": 0.3137,
+      "iv_low_raw": 0.069,
+      "iv_rank": 0.1592,
+      "iv_rank_raw": 0.2795,
+      "iv_percentile": 0.0926,
+      "iv_percentile_raw": 0.0982,
+      "outliers_removed": 8,
+      "outlier_details": [
+        {
+          "date": "2026-02-02",
+          "iv": 0.2467
+        },
+        {
+          "date": "2026-04-16",
+          "iv": 0.069
+        },
+        {
+          "date": "2026-04-17",
+          "iv": 0.099
+        },
+        {
+          "date": "2026-06-23",
+          "iv": 0.2448
+        },
+        {
+          "date": "2026-07-16",
+          "iv": 0.2333
+        },
+        {
+          "date": "2026-07-17",
+          "iv": 0.3137
+        },
+        {
+          "date": "2026-07-20",
+          "iv": 0.2708
+        },
+        {
+          "date": "2026-07-30",
+          "iv": 0.2307
+        }
+      ],
+      "sigma_range": [
+        0.1131,
+        0.2298
+      ],
+      "name": "300ETF",
+      "desc": "沪深300",
+      "interpretation": "低 (市场偏乐观，波动率便宜)"
+    },
+    {
+      "underlying": "510500",
+      "lookback_days": 252,
+      "data_points": 224,
+      "data_points_filtered": 213,
+      "current_iv": 0.1927,
+      "is_live": false,
+      "iv_high": 0.3322,
+      "iv_low": 0.1927,
+      "iv_high_raw": 0.4544,
+      "iv_low_raw": 0.107,
+      "iv_rank": 0.0,
+      "iv_rank_raw": 0.2467,
+      "iv_percentile": 0.0,
+      "iv_percentile_raw": 0.0089,
+      "outliers_removed": 11,
+      "outlier_details": [
+        {
+          "date": "2025-09-23",
+          "iv": 0.336
+        },
+        {
+          "date": "2025-10-17",
+          "iv": 0.3519
+        },
+        {
+          "date": "2026-02-02",
+          "iv": 0.3531
+        },
+        {
+          "date": "2026-03-23",
+          "iv": 0.353
+        },
+        {
+          "date": "2026-04-16",
+          "iv": 0.128
+        },
+        {
+          "date": "2026-04-17",
+          "iv": 0.107
+        },
+        {
+          "date": "2026-07-17",
+          "iv": 0.3612
+        },
+        {
+          "date": "2026-07-20",
+          "iv": 0.4544
+        },
+        {
+          "date": "2026-07-21",
+          "iv": 0.3659
+        },
+        {
+          "date": "2026-07-30",
+          "iv": 0.3886
+        },
+        {
+          "date": "2026-07-31",
+          "iv": 0.3374
+        }
+      ],
+      "sigma_range": [
+        0.1791,
+        0.3337
+      ],
+      "name": "500ETF",
+      "desc": "中证500",
+      "interpretation": "极低 (市场极度乐观/自满，适合买入保护)"
+    },
+    {
+      "underlying": "588000",
+      "lookback_days": 252,
+      "data_points": 224,
+      "data_points_filtered": 211,
+      "current_iv": 0.315,
+      "is_live": false,
+      "iv_high": 0.6035,
+      "iv_low": 0.2467,
+      "iv_high_raw": 0.7788,
+      "iv_low_raw": 0.126,
+      "iv_rank": 0.1915,
+      "iv_rank_raw": 0.2895,
+      "iv_percentile": 0.3175,
+      "iv_percentile_raw": 0.308,
+      "outliers_removed": 13,
+      "outlier_details": [
+        {
+          "date": "2026-04-16",
+          "iv": 0.145
+        },
+        {
+          "date": "2026-04-17",
+          "iv": 0.126
+        },
+        {
+          "date": "2026-06-30",
+          "iv": 0.6103
+        },
+        {
+          "date": "2026-07-01",
+          "iv": 0.6127
+        },
+        {
+          "date": "2026-07-09",
+          "iv": 0.6098
+        },
+        {
+          "date": "2026-07-15",
+          "iv": 0.6334
+        },
+        {
+          "date": "2026-07-16",
+          "iv": 0.6732
+        },
+        {
+          "date": "2026-07-17",
+          "iv": 0.7362
+        },
+        {
+          "date": "2026-07-20",
+          "iv": 0.7293
+        },
+        {
+          "date": "2026-07-21",
+          "iv": 0.7006
+        },
+        {
+          "date": "2026-07-22",
+          "iv": 0.7788
+        },
+        {
+          "date": "2026-07-30",
+          "iv": 0.6685
+        },
+        {
+          "date": "2026-08-03",
+          "iv": 0.6225
+        }
+      ],
+      "sigma_range": [
+        0.1617,
+        0.6097
+      ],
+      "name": "科创50",
+      "desc": "科创板",
+      "interpretation": "低 (市场偏乐观，波动率便宜)"
+    },
+    {
+      "underlying": "159915",
+      "lookback_days": 252,
+      "data_points": 221,
+      "data_points_filtered": 214,
+      "current_iv": 0.2538,
+      "is_live": false,
+      "iv_high": 0.4669,
+      "iv_low": 0.2082,
+      "iv_high_raw": 0.6363,
+      "iv_low_raw": 0.2082,
+      "iv_rank": 0.1764,
+      "iv_rank_raw": 0.1066,
+      "iv_percentile": 0.1075,
+      "iv_percentile_raw": 0.1041,
+      "outliers_removed": 7,
+      "outlier_details": [
+        {
+          "date": "2025-09-26",
+          "iv": 0.472
+        },
+        {
+          "date": "2026-07-17",
+          "iv": 0.5958
+        },
+        {
+          "date": "2026-07-20",
+          "iv": 0.6363
+        },
+        {
+          "date": "2026-07-21",
+          "iv": 0.4789
+        },
+        {
+          "date": "2026-07-29",
+          "iv": 0.4705
+        },
+        {
+          "date": "2026-07-30",
+          "iv": 0.5331
+        },
+        {
+          "date": "2026-08-03",
+          "iv": 0.4685
+        }
+      ],
+      "sigma_range": [
+        0.1853,
+        0.4674
+      ],
+      "name": "创业板ETF",
+      "desc": "创业板",
+      "interpretation": "低 (市场偏乐观，波动率便宜)"
+    },
+    {
+      "underlying": "159922",
+      "lookback_days": 252,
+      "data_points": 221,
+      "data_points_filtered": 207,
+      "current_iv": 0.1865,
+      "is_live": false,
+      "iv_high": 0.333,
+      "iv_low": 0.1865,
+      "iv_high_raw": 0.468,
+      "iv_low_raw": 0.1804,
+      "iv_rank": 0.0,
+      "iv_rank_raw": 0.0213,
+      "iv_percentile": 0.0,
+      "iv_percentile_raw": 0.009,
+      "outliers_removed": 14,
+      "outlier_details": [
+        {
+          "date": "2025-09-22",
+          "iv": 0.3397
+        },
+        {
+          "date": "2025-09-23",
+          "iv": 0.3495
+        },
+        {
+          "date": "2025-10-17",
+          "iv": 0.3461
+        },
+        {
+          "date": "2025-12-22",
+          "iv": 0.1804
+        },
+        {
+          "date": "2025-12-23",
+          "iv": 0.1825
+        },
+        {
+          "date": "2026-02-02",
+          "iv": 0.352
+        },
+        {
+          "date": "2026-03-23",
+          "iv": 0.361
+        },
+        {
+          "date": "2026-07-16",
+          "iv": 0.3397
+        },
+        {
+          "date": "2026-07-17",
+          "iv": 0.36
+        },
+        {
+          "date": "2026-07-20",
+          "iv": 0.468
+        },
+        {
+          "date": "2026-07-21",
+          "iv": 0.3716
+        },
+        {
+          "date": "2026-07-22",
+          "iv": 0.4068
+        },
+        {
+          "date": "2026-07-30",
+          "iv": 0.3904
+        },
+        {
+          "date": "2026-07-31",
+          "iv": 0.3456
+        }
+      ],
+      "sigma_range": [
+        0.1839,
+        0.3378
+      ],
+      "name": "500ETF深",
+      "desc": "深市中盘",
+      "interpretation": "极低 (市场极度乐观/自满，适合买入保护)"
+    },
+    {
+      "underlying": "159919",
+      "lookback_days": 252,
+      "data_points": 221,
+      "data_points_filtered": 215,
+      "current_iv": 0.1448,
+      "is_live": false,
+      "iv_high": 0.2357,
+      "iv_low": 0.1298,
+      "iv_high_raw": 0.3431,
+      "iv_low_raw": 0.1298,
+      "iv_rank": 0.1418,
+      "iv_rank_raw": 0.0704,
+      "iv_percentile": 0.1209,
+      "iv_percentile_raw": 0.1176,
+      "outliers_removed": 6,
+      "outlier_details": [
+        {
+          "date": "2026-02-02",
+          "iv": 0.2473
+        },
+        {
+          "date": "2026-06-23",
+          "iv": 0.2815
+        },
+        {
+          "date": "2026-07-16",
+          "iv": 0.2451
+        },
+        {
+          "date": "2026-07-17",
+          "iv": 0.3036
+        },
+        {
+          "date": "2026-07-20",
+          "iv": 0.2755
+        },
+        {
+          "date": "2026-07-22",
+          "iv": 0.3431
+        }
+      ],
+      "sigma_range": [
+        0.1157,
+        0.2362
+      ],
+      "name": "300ETF深",
+      "desc": "深市宽基",
+      "interpretation": "低 (市场偏乐观，波动率便宜)"
+    },
+    {
+      "underlying": "159901",
+      "lookback_days": 252,
+      "data_points": 221,
+      "data_points_filtered": 214,
+      "current_iv": 0.1933,
+      "is_live": false,
+      "iv_high": 0.3275,
+      "iv_low": 0.1682,
+      "iv_high_raw": 0.4504,
+      "iv_low_raw": 0.1682,
+      "iv_rank": 0.1574,
+      "iv_rank_raw": 0.0888,
+      "iv_percentile": 0.1542,
+      "iv_percentile_raw": 0.1493,
+      "outliers_removed": 7,
+      "outlier_details": [
+        {
+          "date": "2026-06-23",
+          "iv": 0.3391
+        },
+        {
+          "date": "2026-07-02",
+          "iv": 0.3346
+        },
+        {
+          "date": "2026-07-17",
+          "iv": 0.4504
+        },
+        {
+          "date": "2026-07-20",
+          "iv": 0.4064
+        },
+        {
+          "date": "2026-07-21",
+          "iv": 0.3723
+        },
+        {
+          "date": "2026-07-22",
+          "iv": 0.3521
+        },
+        {
+          "date": "2026-07-30",
+          "iv": 0.3317
+        }
+      ],
+      "sigma_range": [
+        0.1488,
+        0.3294
+      ],
+      "name": "深100ETF",
+      "desc": "深市蓝筹",
+      "interpretation": "低 (市场偏乐观，波动率便宜)"
+    },
+    {
+      "underlying": "588080",
+      "lookback_days": 252,
+      "data_points": 223,
+      "data_points_filtered": 213,
+      "current_iv": 0.2752,
+      "is_live": false,
+      "iv_high": 0.6087,
+      "iv_low": 0.184,
+      "iv_high_raw": 0.756,
+      "iv_low_raw": 0.184,
+      "iv_rank": 0.2147,
+      "iv_rank_raw": 0.1594,
+      "iv_percentile": 0.1362,
+      "iv_percentile_raw": 0.13,
+      "outliers_removed": 10,
+      "outlier_details": [
+        {
+          "date": "2026-06-30",
+          "iv": 0.6147
+        },
+        {
+          "date": "2026-07-01",
+          "iv": 0.6163
+        },
+        {
+          "date": "2026-07-15",
+          "iv": 0.6485
+        },
+        {
+          "date": "2026-07-16",
+          "iv": 0.676
+        },
+        {
+          "date": "2026-07-17",
+          "iv": 0.7362
+        },
+        {
+          "date": "2026-07-20",
+          "iv": 0.7044
+        },
+        {
+          "date": "2026-07-21",
+          "iv": 0.6686
+        },
+        {
+          "date": "2026-07-22",
+          "iv": 0.756
+        },
+        {
+          "date": "2026-07-30",
+          "iv": 0.6632
+        },
+        {
+          "date": "2026-08-03",
+          "iv": 0.6248
+        }
+      ],
+      "sigma_range": [
+        0.1622,
+        0.6105
+      ],
+      "name": "科创板50",
+      "desc": "科创板（备用代理）",
+      "interpretation": "低 (市场偏乐观，波动率便宜)"
+    }
+  ],
+  "coverage": {
+    "expected": 9,
+    "fetched": 9,
+    "missing": [],
+    "partial": false
+  },
+  "overall_sentiment": {
+    "signal": "极度乐观",
+    "avg_iv_rank": 0.1108,
+    "avg_iv_percentile": 0.1081,
+    "implication": "市场自满，波动率处于低位。短期可能继续上涨但缺乏安全边际。适合：(1)买入便宜的看跌保护 (2)谨慎追高 (3)注意可能的波动率突然飙升",
+    "based_on": [
+      "510050",
+      "510300",
+      "510500",
+      "588000",
+      "159915"
+    ]
+  }
+}

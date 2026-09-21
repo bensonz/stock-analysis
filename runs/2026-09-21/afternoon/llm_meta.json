@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 163362,
+  "output_tokens": 16654,
+  "rounds": 3,
+  "duration_sec": 238.3,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 医疗服务板块 上涨 原因 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3137
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 化学制药 房地产服务 板块 领涨 2026-09-21",
+        "max_results": 5
+      },
+      "result_length": 3231
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 在手订单 664亿 CXO 2026",
+        "max_results": 5
+      },
+      "result_length": 2922
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "VLCC运价 历史新高 霍尔木兹 油运 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3285
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://m.cnfin.com/yw-lb//zixun/20260921/4472865_1.html",
+        "maxChars": 4000
+      },
+      "result_length": 1622
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.caiwennews.com/article/1616484.shtml",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}

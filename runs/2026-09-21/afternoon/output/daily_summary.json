@@ -1,0 +1,70 @@
+{
+  "date": "2026-09-21",
+  "actions": [
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 84.5,
+      "pnl_pct": 43.2,
+      "note": "浮盈+43.2%让利润奔跑，止损已机械锁+10%(64.91)；元件板块未入今日bottom5(9/17转冷第1日已修复)，PCB/覆铜板涨价链延续；margin deleveraging(chg5 -24.74%)为警示非卖出触发"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 22.91,
+      "pnl_pct": 18.8,
+      "note": "浮盈+18.8%逼近+20%抬损线(未触发)，止损已锁breakeven(19.29)；VLCC运价续创历史新高(来源:财闻网9/21东方证券报告)，margin signal已翻转adding(chg5 +3.27%)，油运景气延续"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 46.74,
+      "pnl_pct": 9.1,
+      "note": "浮盈+9.1%逼近+10%抬损线(47.14，未触发)，止损40.71；医疗服务今日+4.53%列top3热区，创新药/CRO爆发(来源:新华财经9/21)；margin adding(chg5 +4.61%)"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 167.96,
+      "pnl_pct": 32.8,
+      "note": "浮盈+32.8%让利润奔跑，止损已锁+10%(139.15)；医疗服务今日+4.53%热区，在手订单664.3亿创新高(来源:东方财富8/3中报)、CRO景气延续"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 981816.0,
+    "dayPnl": 3788.0,
+    "dayReturnPct": 0.39,
+    "totalReturnPct": -1.82,
+    "unrealizedPnl": 28642.0,
+    "realizedPnl": -46826.0,
+    "cashPct": 85.75
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 4.8462,
+    "up": 4536,
+    "down": 936,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 106,
+    "limit_downs": 3,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 4.85:1, 3/3 major indices green, 106 limit-ups / 3 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "Breadth 4.85:1 极强(4536涨/936跌/106涨停/3跌停)，上证+0.97%/深成+0.65%/创业板+0.80%三指全红，entry_regime=strong 全仓可开新仓；但IV整体极度乐观(avg rank 11%<15%)，追高安全边际薄。热点：医疗服务(+4.53%)/化学制药(+4.40%)/房地产服务(+6.03%)/航海装备(+4.22%)，创新药+CRO爆发(来源:新华财经9/21)；贵金属(-2.02%)/白色家电(-3.35%)逆市走弱。组合4持仓全部浮盈、2只在医疗服务热区，招商轮船受益VLCC运价历史新高(来源:财闻网9/21)。候选池热区标的全部RPS>95或MA超阈，故不追高、new_positions为空——市场强但无干净买点，持币等待回调。"
+  }
+}
