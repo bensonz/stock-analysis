@@ -1,0 +1,82 @@
+{
+  "date": "2026-09-22",
+  "actions": [
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 89.52,
+      "pnl_pct": 51.7,
+      "note": "浮盈+51.7%让利润奔跑，止损已锁+10%(64.91)；元件板块未入今日bottom5，PCB/覆铜板涨价链延续；margin deleveraging(chg5 -20.9%)为警示非卖出触发"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 21.55,
+      "pnl_pct": 11.7,
+      "note": "浮盈+11.7%，止损锁breakeven(19.29)；今日-5.94%且航运港口进入bottom5(-2.45%)为转冷第1日，未触发'冷3日才卖'规则；VLCC运价仍处历史高位（来源：东方证券09-21），但需连续跟踪板块转冷是否持续"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 46.4,
+      "pnl_pct": 8.3,
+      "note": "浮盈+8.3%逼近+10%抬损线(47.14)未触发，止损40.71；医疗服务/CRO/化学制药09-21涨幅居前（来源：证券时报），医药生物热度延续；margin adding(chg5 +13.4%)"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 168.14,
+      "pnl_pct": 32.9,
+      "note": "浮盈+32.9%让利润奔跑，止损已锁+10%(139.15)；CRO/创新药主线强势（来源：证券时报09-21），在手订单与政策双催化延续；margin adding"
+    },
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "OPEN",
+      "price": 24.21,
+      "note": "原料药龙头，0风险，RPS120=90.97甜区，MA距离全合规(dist_ma5 +4.0%/ma10 +6.2%/ma20 +9.2%)；医药生物热度延续（09-21医疗服务/CRO/化学制药涨幅居前，来源：证券时报）；'做精原料'连续兑现（头孢托仑匹酯09-09获批，来源：新浪财经/第一财经；氟泽雷塞08-07获批）；公募7.6%+北向2.7%+增持回购"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 982518.0,
+    "dayPnl": 702.0,
+    "dayReturnPct": 0.07,
+    "totalReturnPct": -1.75,
+    "unrealizedPnl": 29344.0,
+    "realizedPnl": -46826.0,
+    "cashPct": 81.5
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 1.1648,
+    "up": 2883,
+    "down": 2475,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 59,
+    "limit_downs": 2,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 1.16:1, 3/3 major indices green, 59 limit-ups / 2 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [
+    {
+      "code": "000739",
+      "name": "普洛药业"
+    }
+  ],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "平衡市：涨2883/跌2475，宽度1.16:1，上证+0.22%/深成+0.62%/创业板+0.93%全红，59涨停/2跌停。热点由医药/科技轮动至家电(+5.12%)/房地产服务(+3.6%)/出版/广告营销/数字媒体；航运港口(-2.45%)与油气链转冷。IV整体偏乐观(avg rank 22.6%，50ETF仅6.8%极低)。医药生物热度延续(09-21医疗服务/CRO/化学制药涨幅居前，来源：证券时报)。无高风险事件窗口。"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 110868,
+  "output_tokens": 25642,
+  "rounds": 2,
+  "duration_sec": 352.6,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月22日 领涨板块 家电 传媒 房地产服务",
+        "max_results": 5
+      },
+      "result_length": 3203
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "普洛药业 头孢托仑匹酯 原料药 获批 公告",
+        "max_results": 5
+      },
+      "result_length": 2940
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "招商轮船 航运港口 板块 下跌 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 2464
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "医疗服务 CRO 创新药 板块 2026年9月 行情",
+        "max_results": 5
+      },
+      "result_length": 3247
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "霍尔木兹海峡 油运运价 VLCC 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3222
+    }
+  ],
+  "fallback_used": false
+}

@@ -1,0 +1,231 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "其他家电Ⅱ",
+        "5d_pct": 5.12,
+        "trend": "今日领涨（单日数据）"
+      },
+      {
+        "name": "房地产服务",
+        "5d_pct": 3.6,
+        "trend": "延续09-21地产领涨（来源：证券日报）"
+      },
+      {
+        "name": "出版",
+        "5d_pct": 3.33,
+        "trend": "传媒轮动"
+      },
+      {
+        "name": "广告营销",
+        "5d_pct": 3.23,
+        "trend": "传媒轮动"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": 2.06,
+        "trend": "传媒轮动"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "航运港口",
+        "5d_pct": -2.45,
+        "trend": "转冷第1日"
+      },
+      {
+        "name": "航海装备Ⅱ",
+        "5d_pct": -2.27,
+        "trend": "走弱"
+      },
+      {
+        "name": "旅游及景区",
+        "5d_pct": -1.56,
+        "trend": "走弱"
+      },
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": -1.49,
+        "trend": "走弱"
+      },
+      {
+        "name": "油服工程",
+        "5d_pct": -1.31,
+        "trend": "走弱"
+      }
+    ],
+    "position_alignment": "4/4持仓盈利；1/4在冷区（招商轮船/航运港口bottom5转冷第1日），2/4在医药生物（09-21领涨今日回吐、未入top5），1/4在元件（中性）",
+    "regime": "医药/科技轮动至家电/地产服务/传媒，航运与油气链转冷"
+  },
+  "position_decisions": [
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "浮盈+51.7%让利润奔跑，止损已锁+10%(64.91)；元件板块未入今日bottom5，PCB/覆铜板涨价链延续；margin deleveraging(chg5 -20.9%)为警示非卖出触发",
+      "sector_rank": "元件：中性（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 51.7,
+      "days_held": 19,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+11.7%，止损锁breakeven(19.29)；今日-5.94%且航运港口进入bottom5(-2.45%)为转冷第1日，未触发'冷3日才卖'规则；VLCC运价仍处历史高位（来源：东方证券09-21），但需连续跟踪板块转冷是否持续",
+      "sector_rank": "航运港口：bottom5（转冷第1日）",
+      "new_stop": null,
+      "pnl_pct": 11.7,
+      "days_held": 14,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+8.3%逼近+10%抬损线(47.14)未触发，止损40.71；医疗服务/CRO/化学制药09-21涨幅居前（来源：证券时报），医药生物热度延续；margin adding(chg5 +13.4%)",
+      "sector_rank": "医疗服务：top30%（09-21领涨）",
+      "new_stop": null,
+      "pnl_pct": 8.3,
+      "days_held": 7,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+32.9%让利润奔跑，止损已锁+10%(139.15)；CRO/创新药主线强势（来源：证券时报09-21），在手订单与政策双催化延续；margin adding",
+      "sector_rank": "医疗服务：top30%（09-21领涨）",
+      "new_stop": null,
+      "pnl_pct": 32.9,
+      "days_held": 38,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "entry_price": 24.21,
+      "allocation_pct": 5,
+      "stop": 23.0,
+      "target": 27.0,
+      "thesis": "原料药龙头，0风险，RPS120=90.97甜区，MA距离全合规(dist_ma5 +4.0%/ma10 +6.2%/ma20 +9.2%)；医药生物热度延续（09-21医疗服务/CRO/化学制药涨幅居前，来源：证券时报）；'做精原料'连续兑现（头孢托仑匹酯09-09获批，来源：新浪财经/第一财经；氟泽雷塞08-07获批）；公募7.6%+北向2.7%+增持回购",
+      "sector": "化学制药/原料药",
+      "sector_rank": "top30%（医药生物09-21领涨，来源：证券日报）",
+      "catalyst": "头孢托仑匹酯原料药获批（09-09，新浪财经/第一财经）+ 创新药BD交易+36%带动原料药/CDMO景气（证券时报09-21）",
+      "catalyst_freshness": "ongoing",
+      "rps120": 90.97,
+      "conviction": "moderate"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "688046",
+      "name": "药康生物",
+      "reason": "RPS120=99.34>95%超买区，且dist_ma5=8.3%>6%追高线(Rule 2b)",
+      "rps120": 99.34
+    },
+    {
+      "code": "688361",
+      "name": "中科飞测",
+      "reason": "RPS120=98.81>95%超买区，dist_ma10=14.4%>8%追高线",
+      "rps120": 98.81
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "RPS120=93.72扩展区但dist_ma10=8.8%>8%追高线硬跳过；PE564、净利-96%YoY",
+      "rps120": 93.72
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "RPS120=94.02扩展区，有色金属未确认top10%，09-11放量-7.12%抛压(1.93倍量)，margin deleveraging",
+      "rps120": 94.02
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "重入：09-14追踪止损@16.98(+8.85%)离场，现价16.8与离场价基本持平、无新催化差异，重入举证责任不满足；RPS120=94.11扩展区+2风险",
+      "rps120": 94.11
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "reason": "航运港口今日bottom5(-2.45%)，板块转冷第1日，已持仓不新增",
+      "rps120": 87.8
+    },
+    {
+      "code": "600546",
+      "name": "山煤国际",
+      "reason": "煤炭未确认top30%，动力煤周涨0.00%价格走平，净利-47%YoY，RPS85.85甜区下沿",
+      "rps120": 85.85
+    },
+    {
+      "code": "601918",
+      "name": "新集能源",
+      "reason": "煤炭未确认top30%，margin deleveraging(chg5 -10.5%)，新集一矿32万处罚负面",
+      "rps120": 91.6
+    },
+    {
+      "code": "603132",
+      "name": "金徽股份",
+      "reason": "铅锌未确认top30%，2风险(质押78%/偿债)，margin deleveraging(chg5 -13.7%)",
+      "rps120": 87.88
+    },
+    {
+      "code": "000301",
+      "name": "东方盛虹",
+      "reason": "炼化未确认top30%，现价13.73低于MA20(-1.0%)，2风险(偿债/收益质量)",
+      "rps120": 89.88
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "今日top5热点(家电/地产服务/传媒)与策略池(科技/资源/医药)几乎零重叠：池内RPS>95%的科技股全被Rule 2超买线过滤，真正可买标的集中在医药生物。池子与当日热点错位时应服从板块动量而非硬凑仓位。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h028",
+      "mechanism": "策略池按RPS选股存在滞后，当日热点切换时池内标的天然落后；板块动量优先是纪律。"
+    },
+    {
+      "text": "招商轮船今日-5.94%且航运港口进入bottom5，但'冷3日才卖'规则未触发(第1日)，且止损已锁breakeven。板块转冷第1日不恐慌卖出，连续跟踪3日再定夺。",
+      "type": "rule",
+      "tags": [
+        "exit-rule",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "单日bottom5含噪声，不足以证伪趋势；breakeven止损兜底风险。"
+    },
+    {
+      "text": "普洛药业0风险+RPS90.97甜区+MA全合规+医药生物热度延续，即使margin deleveraging(chg5 -12.34%)也不单独否决——融资信号只是corroborating而非触发。",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "融资余额变化多反映而非预测价格，与热板块+0风险组合不应等权重。"
+    },
+    {
+      "text": "恒逸石化重入案例：现价16.8与09-14离场价16.98基本持平、无新催化差异，重入举证责任不满足→跳过。重入必须'价位/形态/催化'至少一项有实质变化。",
+      "type": "rule",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "输入基准：重入n=9均值-3.71%胜率11%，无差异重入是过度交易。"
+    }
+  ],
+  "market_summary": "平衡市：涨2883/跌2475，宽度1.16:1，上证+0.22%/深成+0.62%/创业板+0.93%全红，59涨停/2跌停。热点由医药/科技轮动至家电(+5.12%)/房地产服务(+3.6%)/出版/广告营销/数字媒体；航运港口(-2.45%)与油气链转冷。IV整体偏乐观(avg rank 22.6%，50ETF仅6.8%极低)。医药生物热度延续(09-21医疗服务/CRO/化学制药涨幅居前，来源：证券时报)。无高风险事件窗口。",
+  "market_sentiment": "balanced",
+  "market_call": "中性偏积极"
+}
