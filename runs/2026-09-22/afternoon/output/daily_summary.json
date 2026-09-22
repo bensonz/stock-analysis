@@ -1,0 +1,79 @@
+{
+  "date": "2026-09-22",
+  "actions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "price": 24.0,
+      "pnl_pct": -0.87,
+      "note": "今日新建仓浮亏-0.87%，未触发-3%三日线；stop_proximity WATCH距止损4.17%需盯紧；原料药主线今日降温未入top5但趋势未破坏，止损23.0保持"
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 88.12,
+      "pnl_pct": 49.3,
+      "note": "浮盈+49.3%让利润奔跑，止损已锁+10%(64.91)；元件板块未入今日bottom5，PCB/覆铜板涨价链延续；margin deleveraging(chg5 -20.9%)为警示非卖出触发"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 21.48,
+      "pnl_pct": 11.4,
+      "note": "航运港口今日bottom5第1(-2.56%)为转冷第1日，未触发'冷3日才卖'规则；VLCC运价仍处历史高位(来源:中银证券9/15财闻)，今日-6.24%属获利回吐；止损保本19.29，若板块连续冷满3日则执行Rule1离场"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 46.12,
+      "pnl_pct": 7.6,
+      "note": "浮盈+7.6%逼近+10%抬损线(47.14)未触发；医疗服务/CRO主线9/21爆发后今日降温未入top5；margin adding(+13.4%)；止损40.71保持"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 167.85,
+      "pnl_pct": 32.7,
+      "note": "浮盈+32.7%让利润奔跑，止损已锁+10%(139.15)；CRO/创新药主线今日降温但趋势未破坏，在手订单664.3亿(来源:东方财富8/3中报)支撑；持有"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 981234.0,
+    "dayPnl": -1619.0,
+    "dayReturnPct": -0.16,
+    "totalReturnPct": -1.88,
+    "unrealizedPnl": 28060.0,
+    "realizedPnl": -46826.0,
+    "cashPct": 81.61
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.7838,
+    "up": 2374,
+    "down": 3029,
+    "positive_indices": [
+      "上证指数",
+      "创业板指"
+    ],
+    "negative_indices": [
+      "深证成指"
+    ],
+    "limit_ups": 65,
+    "limit_downs": 5,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.78:1, 2/3 major indices green, 65 limit-ups / 5 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "弱市(涨跌比0.78:1，2374涨/3029跌)，上证+0.06%/创业板+0.01%微涨、深成-0.05%，65涨停/5跌停，分布集中在-2%~+2%(f0_2=2457)非普涨。IV偏乐观(avg_iv_rank 0.15，50ETF/500ETF极低)。领涨：其他家电+5.03%、广告营销+3.56%、出版+3.42%、房地产服务+3.39%(万科A/绿地2连板,来源财联社9/21)、商用车+2.91%。领跌：航运港口-2.56%(持仓招商轮船板块转冷第1日)、地面兵装-1.97%、航海装备-1.92%、旅游及景区-1.89%、风电设备-1.42%。昨日主线医药/CRO降温(今日未入top5)。弱市+候选股无一在今日top5→不开新仓持币。"
+  }
+}

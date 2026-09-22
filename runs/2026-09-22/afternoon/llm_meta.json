@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 116191,
+  "output_tokens": 21792,
+  "rounds": 2,
+  "duration_sec": 361.9,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月22日 板块 涨幅 其他家电 广告营销 出版 房地产服务 商用车",
+        "max_results": 5
+      },
+      "result_length": 3127
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "煤炭板块 大涨 炼焦煤涨价 新集能源 山煤国际 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3103
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "航运港口 板块 下跌 VLCC 油运运价 2026年9月22日",
+        "max_results": 5
+      },
+      "result_length": 3221
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 市场 成交 涨跌家数 2026年9月22日 复盘",
+        "max_results": 5
+      },
+      "result_length": 2973
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "医药 CRO 创新药 AI制药 十五五规划 2026年9月 成都先导",
+        "max_results": 5
+      },
+      "result_length": 3408
+    }
+  ],
+  "fallback_used": false
+}

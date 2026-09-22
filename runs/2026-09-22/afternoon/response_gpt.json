@@ -1,0 +1,237 @@
+{
+  "sector_analysis": {
+    "data_note": "输入仅提供板块当日涨跌幅，无5日/20日数据，下列数值均为当日涨跌幅",
+    "hot_sectors": [
+      {
+        "name": "其他家电Ⅱ",
+        "change_pct": 5.03,
+        "trend": "当日领涨"
+      },
+      {
+        "name": "广告营销",
+        "change_pct": 3.56,
+        "trend": "当日领涨"
+      },
+      {
+        "name": "出版",
+        "change_pct": 3.42,
+        "trend": "当日领涨"
+      },
+      {
+        "name": "房地产服务",
+        "change_pct": 3.39,
+        "trend": "地产链2连板驱动(财联社)"
+      },
+      {
+        "name": "商用车",
+        "change_pct": 2.91,
+        "trend": "当日领涨"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "航运港口",
+        "change_pct": -2.56,
+        "trend": "转冷第1日(持仓板块)"
+      },
+      {
+        "name": "地面兵装Ⅱ",
+        "change_pct": -1.97,
+        "trend": "下跌"
+      },
+      {
+        "name": "航海装备Ⅱ",
+        "change_pct": -1.92,
+        "trend": "下跌"
+      },
+      {
+        "name": "旅游及景区",
+        "change_pct": -1.89,
+        "trend": "下跌"
+      },
+      {
+        "name": "风电设备",
+        "change_pct": -1.42,
+        "trend": "下跌"
+      }
+    ],
+    "position_alignment": "0/5 持仓在今日top5热门板块；1/5(招商轮船-航运港口)滑入bottom5",
+    "regime": "弱市轮动：医药/CRO主线降温，地产链+防御类(家电/出版/广告/商用车)领涨，航运港口转冷"
+  },
+  "position_decisions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "reason": "今日新建仓浮亏-0.87%，未触发-3%三日线；stop_proximity WATCH距止损4.17%需盯紧；原料药主线今日降温未入top5但趋势未破坏，止损23.0保持",
+      "sector_rank": "未入今日top5（化学制药/原料药）",
+      "new_stop": 23.0,
+      "pnl_pct": -0.87,
+      "days_held": 0,
+      "exit_price": null
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "浮盈+49.3%让利润奔跑，止损已锁+10%(64.91)；元件板块未入今日bottom5，PCB/覆铜板涨价链延续；margin deleveraging(chg5 -20.9%)为警示非卖出触发",
+      "sector_rank": "未入今日top5/bottom5（元件）",
+      "new_stop": 64.91,
+      "pnl_pct": 49.3,
+      "days_held": 19,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "航运港口今日bottom5第1(-2.56%)为转冷第1日，未触发'冷3日才卖'规则；VLCC运价仍处历史高位(来源:中银证券9/15财闻)，今日-6.24%属获利回吐；止损保本19.29，若板块连续冷满3日则执行Rule1离场",
+      "sector_rank": "bottom 5%（今日跌幅榜第1）",
+      "new_stop": 19.29,
+      "pnl_pct": 11.4,
+      "days_held": 14,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+7.6%逼近+10%抬损线(47.14)未触发；医疗服务/CRO主线9/21爆发后今日降温未入top5；margin adding(+13.4%)；止损40.71保持",
+      "sector_rank": "未入今日top5（医疗服务）",
+      "new_stop": 40.71,
+      "pnl_pct": 7.6,
+      "days_held": 6,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+32.7%让利润奔跑，止损已锁+10%(139.15)；CRO/创新药主线今日降温但趋势未破坏，在手订单664.3亿(来源:东方财富8/3中报)支撑；持有",
+      "sector_rank": "未入今日top5（医疗服务）",
+      "new_stop": 139.15,
+      "pnl_pct": 32.7,
+      "days_held": 38,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600546",
+      "name": "山煤国际",
+      "reason": "煤炭/动力煤：rps120=86.0甜区、MA全合规、0风险，但(a)弱市breadth 0.78:1默认不追(b)煤炭未入今日top5(c)动力煤价周0.00%持平、公司净利同比-47%下滑，焦煤强势未映射到动力煤标的",
+      "rps120": 86.03
+    },
+    {
+      "code": "601918",
+      "name": "新集能源",
+      "reason": "煤炭/动力煤：rps120=91.5甜区但margin deleveraging(chg5 -10.47%)+1风险(偿债)+安全生产罚款事件+动力煤价持平，弱市跳过",
+      "rps120": 91.5
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "石油石化：rps120=93.2扩展区无豁免(行业非top10%+2风险+净利-26.5%)；且9/14刚以+8.85%离场，重入举证责任不满足(无新催化)",
+      "rps120": 93.21
+    },
+    {
+      "code": "000301",
+      "name": "东方盛虹",
+      "reason": "石油石化：rps120=89.2甜区但2风险(经营净收益占利润总额-23%/现金短债比0.24)，行业未入今日top5",
+      "rps120": 89.19
+    },
+    {
+      "code": "603132",
+      "name": "金徽股份",
+      "reason": "有色/铅锌：rps120=86.8但2风险(现金短债比0.15+大股东质押78%)+margin deleveraging(chg5 -13.68%,净偿还5日)，行业未入今日top5",
+      "rps120": 86.78
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "有色/铜：rps120=93.6扩展区无豁免(行业非top10%+1风险+净利+11.5%无>50%催化)，9/11抛压事件(-7.12%放量1.93倍)",
+      "rps120": 93.64
+    },
+    {
+      "code": "688222",
+      "name": "成都先导",
+      "reason": "医疗服务/CRO：rps120=93.6但dist_ma5+8.7%/ma10+22.3%/ma20+29%极端超买，Rule 2b硬性跳过(追高)",
+      "rps120": 93.6
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "医疗服务/CRO：rps120=93.2扩展区，PE 541且净利-96%下滑(红旗)，1风险(扣非净利占48%)",
+      "rps120": 93.15
+    },
+    {
+      "code": "002832",
+      "name": "比音勒芬",
+      "reason": "服装家纺：rps120=94.8扩展区无豁免(行业非top10%+1风险+净利-18.7%)；margin deleveraging(chg5 -2.05%)",
+      "rps120": 94.83
+    },
+    {
+      "code": "688046",
+      "name": "药康生物",
+      "reason": "rps120=99.4>95过热(Rule2上限)，dist_ma10+12.4%超追高线",
+      "rps120": 99.36
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱市(breadth 0.78:1)且候选股行业无一进入当日top5时，即使多只个股通过RPS/MA门槛也应持币——RPS/MA是必要非充分条件，行业首筛才是绑定约束",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "弱市中下跌家数多于上涨，非热门板块的个股即使自身动量好，也缺乏板块β支撑，赔率被压缩"
+    },
+    {
+      "text": "煤炭板块内部分化：焦煤价(周+9.53%/月+36.12%)强势，但候选动力煤标的(山煤国际/新集能源)动力煤价周0.00%持平且基本面下滑(净利-47%/-21%)，不可用'煤炭'主题盲目映射到动力煤个股",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "同一申万一级行业内，子板块供需结构不同，价格强势集中在焦煤而非动力煤，选股必须落到三级行业"
+    },
+    {
+      "text": "板块轮动切换确认：昨日主线医药/CRO今日未入top5，地产链(万科A/绿地2连板,来源财联社9/21)+家电/出版/广告/商用车防御类接棒；持仓医药股虽降温但趋势未破，持有并盯3日冷规则",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "强主线单日退潮往往是轮动而非终结，持仓用机械止损应对，不因单日降温砍盈利仓"
+    },
+    {
+      "text": "招商轮船案例：+11%盈利仓遇板块转冷第1日(-6.24%)，'冷3日才卖'规则给出缓冲，不因单日板块冷就砍盈利仓；但需连续跟踪，若满3日冷执行Rule1离场",
+      "type": "rule",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "板块转冷是渐进信号，3日窗口过滤单日噪声，避免在赢家回撤中被洗出"
+    },
+    {
+      "text": "重入纪律验证：恒逸石化9/14以+8.85%离场后仍留池内，但行业未热、无新催化，不重入——重入账本n=9均值-3.71%胜率11%，举证责任在重入一方",
+      "type": "rule",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "重入标的往往已失去上一轮的催化与板块共振，单纯价格回落不足以构成新买点"
+    }
+  ],
+  "market_summary": "弱市(涨跌比0.78:1，2374涨/3029跌)，上证+0.06%/创业板+0.01%微涨、深成-0.05%，65涨停/5跌停，分布集中在-2%~+2%(f0_2=2457)非普涨。IV偏乐观(avg_iv_rank 0.15，50ETF/500ETF极低)。领涨：其他家电+5.03%、广告营销+3.56%、出版+3.42%、房地产服务+3.39%(万科A/绿地2连板,来源财联社9/21)、商用车+2.91%。领跌：航运港口-2.56%(持仓招商轮船板块转冷第1日)、地面兵装-1.97%、航海装备-1.92%、旅游及景区-1.89%、风电设备-1.42%。昨日主线医药/CRO降温(今日未入top5)。弱市+候选股无一在今日top5→不开新仓持币。",
+  "market_sentiment": "weak",
+  "market_call": "谨慎"
+}
