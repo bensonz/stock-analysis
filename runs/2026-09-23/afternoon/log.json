@@ -1,0 +1,48 @@
+{
+  "date": "2026-09-23",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1790147119.981042,
+      "errors": [],
+      "end": 1790147194.794989,
+      "duration_sec": 74.8
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8500,
+      "tokens": {
+        "input_tokens": 122007,
+        "output_tokens": 18653
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 327.2,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1790147522.0592918,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=60",
+        "Hypothesis: Created h202 (observation): 医药主线内部已分化：成都先导近4日+41.64%(金融投资报)属'催化兑现后加速段'，RPS120虽在92-95扩展区但追高线全破；对比持仓药明康德/昭衍新药已...",
+        "Hypothesis: Created h203 (observation): 招商轮船盘中一度跌超7%收盘-3.26%但未破保本止损、板块仅转冷1日即出榜——不因单日盘中波动机械卖出，'冷3日才卖'规则给赢家波动留出空间...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1790147522.580234,
+      "duration_sec": 0.5
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 402.5
+  }
+}

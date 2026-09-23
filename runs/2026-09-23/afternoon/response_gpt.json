@@ -1,0 +1,204 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "房地产服务",
+        "5d_pct": 3.33,
+        "trend": "单日脉冲，小作文驱动存疑"
+      },
+      {
+        "name": "其他家电Ⅱ",
+        "5d_pct": 2.94,
+        "trend": "steady"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": 2.74,
+        "trend": "steady"
+      },
+      {
+        "name": "生物制品",
+        "5d_pct": 1.69,
+        "trend": "accelerating，医药十五五主线"
+      },
+      {
+        "name": "商用车",
+        "5d_pct": 1.61,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -6.06,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "焦炭Ⅱ",
+        "5d_pct": -4.69,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航海装备Ⅱ",
+        "5d_pct": -3.29,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "广告营销",
+        "5d_pct": -3.17,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": -2.65,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "3/5持仓在医药生物主线(普洛药业/昭衍新药/药明康德)；奥士康(元件)与招商轮船(航运港口)不在今日top5",
+    "regime": "弱市结构性行情：医药十五五规划为唯一主线，但涨幅居前板块全部个位数，广度0.53:1、指数全绿，追高风险大"
+  },
+  "position_decisions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "reason": "医药十五五主线内(来源:新华社9-18/21财经)，今日+5.5%领涨原料药，浮盈+4.6%未触发任何止损，距止损23.0尚有9.2%缓冲；H1营收-11.4%但动量系统不做基本面过滤，持有",
+      "sector_rank": "top 30%",
+      "new_stop": null,
+      "pnl_pct": 4.6,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "浮盈+54.0%让利润奔跑，止损已锁+10%(64.91)；元件板块未入bottom5，PCB/覆铜板涨价链延续；margin deleveraging(chg5 -16.4%)为警示非卖出触发",
+      "sector_rank": "top 40%",
+      "new_stop": null,
+      "pnl_pct": 54.0,
+      "days_held": 19,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+7.7%守保本止损19.29；今日-3.26%(盘中一度跌超7%后回收)，航运港口9-22入bottom5为转冷第1日、今日已出榜，未触发'冷3日才卖'；VLCC运价仍创历史新高(来源:东方证券9-21/新浪财经)",
+      "sector_rank": "top 40%",
+      "new_stop": null,
+      "pnl_pct": 7.7,
+      "days_held": 14,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+11.5%，昨日已机械抬损至保本42.85；医疗服务/CRO主线(十五五规划)延续，margin adding(chg5 +12.4%)；持有让赢家奔跑，下一抬损线+20%(51.42)",
+      "sector_rank": "top 20%",
+      "new_stop": null,
+      "pnl_pct": 11.5,
+      "days_held": 7,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+32.8%让利润奔跑，止损已锁+10%(139.15)；CXO龙头，在手订单664.3亿(来源:东方财富8-3中报)，十五五规划将CRO/CDMO提升为产业基础设施(来源:工银瑞信9-22)",
+      "sector_rank": "top 20%",
+      "new_stop": null,
+      "pnl_pct": 32.8,
+      "days_held": 38,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688222",
+      "name": "成都先导",
+      "reason": "医疗服务/CRO主线催化(十五五规划)但近4日累计+41.64%(来源:金融投资报)，dist_ma5 +7.7%/ma10 +22.2%/ma20 +31.4%全线突破Rule 2b追高线，硬跳过",
+      "rps120": 94.15
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "CRO主线但dist_ma5 +9.8%/ma10 +15.6%/ma20 +20.8%极端超买(Rule 2b)，PE 619，收益质量风险1条，跳过等回调",
+      "rps120": 92.84
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "CDMO主线但RPS120 96.49超95%过热上限(Rule 2经验证不可移除)，MA距离合规不追高，等回调至90%甜区",
+      "rps120": 96.49
+    },
+    {
+      "code": "688046",
+      "name": "药康生物",
+      "reason": "RPS120 99.34超95%上限且dist_ma10 +12.7%/ma20 +16.9%追高，硬跳过",
+      "rps120": 99.34
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "重入候选——9-14刚因追踪止损平仓，行业(石油石化/炼化)今日不在top30%，无差异化催化，举证责任不满足，跳过",
+      "rps120": 92.26
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "行业(有色金属/铜)今日不在top5，宏观美元压制铜价(来源:华龙证券/中邮证券研报)，跳过",
+      "rps120": 92.98
+    },
+    {
+      "code": "601918",
+      "name": "新集能源",
+      "reason": "煤炭板块焦炭Ⅱ今日bottom5(-4.69%)转冷，行业不在top30%，跳过",
+      "rps120": 91.49
+    },
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "航运港口不在top30%，且2026-09-29解禁9.33亿股占总股本68%为事件风险(来源:输入events)，RPS120 94.95扩展区，跳过",
+      "rps120": 94.95
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱广度日(breadth 0.53:1、0/3指数绿)即使有医药十五五主线，唯一通过行业门槛的CRO标的(成都先导/益诺思)全部因dist_ma10>8%/ma20>12%被Rule 2b拦截——验证'热板块不豁免追高风险'(h027)与'弱市默认空仓'纪律",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "催化落地后龙头已连续拉升4-5日，均线乖离过大，追高即接盘；弱市资金不足以支撑高位继续发散"
+    },
+    {
+      "text": "医药主线内部已分化：成都先导近4日+41.64%(金融投资报)属'催化兑现后加速段'，RPS120虽在92-95扩展区但追高线全破；对比持仓药明康德/昭衍新药已在上车点持有——验证'买在启动、持有赢家'优于'追已爆发的龙头'",
+      "type": "heuristic",
+      "tags": [
+        "timing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "动量收益来自早期介入，加速段末端风险收益比反转"
+    },
+    {
+      "text": "招商轮船盘中一度跌超7%收盘-3.26%但未破保本止损、板块仅转冷1日即出榜——不因单日盘中波动机械卖出，'冷3日才卖'规则给赢家波动留出空间",
+      "type": "rule",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "单日情绪波动与趋势转冷是两种信号，需连续确认而非单点触发"
+    }
+  ],
+  "market_summary": "2026-09-23全市场广度弱：涨跌比0.53:1(涨1891/跌3564)，上证-0.39%/深成-0.64%/创业板-0.60%全绿，涨停51/跌停15。主线为医药(工信部等十部门9-18印发《医药工业发展\"十五五\"规划》，CRO/AI制药/创新药领涨，来源:新华社/21财经)，生物制品+1.69%居板块前五；但涨幅居前板块全部个位数，属弱市结构性行情。IV整体偏低(avg IV rank 0.18，300ETF/500ETF处极低)，市场偏乐观但量能不足。CRO龙头(成都先导/益诺思)已严重超买，追高风险大。结论：弱市默认不加新仓，持币81%，让5只浮盈仓位奔跑。",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}

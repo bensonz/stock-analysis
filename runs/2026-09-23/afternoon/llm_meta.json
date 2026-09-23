@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 122007,
+  "output_tokens": 18653,
+  "rounds": 2,
+  "duration_sec": 327.2,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "医药工业发展\"十五五\"规划 CRO 创新药 A股 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3462
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "VLCC运价 霍尔木兹海峡 招商轮船 油运 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3287
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月23日 收盘 板块涨跌 房地产服务 生物制品",
+        "max_results": 5
+      },
+      "result_length": 3442
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "普洛药业 原料药 业绩 订单 2026",
+        "max_results": 5
+      },
+      "result_length": 3059
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "成都先导 益诺思 CRO AI制药 涨幅 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3061
+    }
+  ],
+  "fallback_used": false
+}
