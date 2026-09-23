@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 111961,
+  "output_tokens": 14144,
+  "rounds": 2,
+  "duration_sec": 227.4,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月23日 市场 板块 涨跌 医药 CRO",
+        "max_results": 5
+      },
+      "result_length": 3408
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "油运 VLCC 运价 招商轮船 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3291
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "创新药 CRO 板块 2026年9月 十五五 医药工业 政策",
+        "max_results": 5
+      },
+      "result_length": 3438
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "煤炭 焦炭 价格 2026年9月 动力煤",
+        "max_results": 5
+      },
+      "result_length": 3018
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "房地产服务 板块 2026年9月 上涨 政策",
+        "max_results": 5
+      },
+      "result_length": 3289
+    }
+  ],
+  "fallback_used": false
+}

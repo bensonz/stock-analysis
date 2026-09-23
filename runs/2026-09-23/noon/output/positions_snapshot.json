@@ -1,0 +1,2013 @@
+{
+  "snapshot_time": "2026-09-23T11:40:03.614687+08:00",
+  "snapshot_type": "post_run",
+  "date": "2026-09-23",
+  "portfolio_config": {
+    "starting_capital": 1000000,
+    "max_position_pct": 10,
+    "max_positions": 10,
+    "min_cash_pct": 0,
+    "created": "2026-02-03",
+    "currency": "CNY"
+  },
+  "positions_json": {
+    "lastUpdated": "2026-09-23T11:40:03.449063+08:00",
+    "portfolio": {
+      "startingCapital": 1000000,
+      "totalEquity": 983832.0,
+      "cash": 800751.0,
+      "investedValue": 183081.0,
+      "unrealizedPnl": 30658.0,
+      "realizedPnl": -46826.0,
+      "totalPnl": -16168.0,
+      "totalReturnPct": -1.62,
+      "positionsUsed": 5,
+      "positionsMax": 10,
+      "cashPct": 81.39,
+      "dayPnl": 2598.0,
+      "minCashPct": 0,
+      "minCashValue": 0.0,
+      "deployableCash": 800751.0
+    },
+    "activePositions": [
+      {
+        "code": "000739",
+        "name": "普洛药业",
+        "entryDate": "2026-09-22",
+        "entrySlot": "noon",
+        "entryPrice": 24.21,
+        "currentPrice": 25.07,
+        "pnl_pct": 3.55,
+        "stopLoss": 23.0,
+        "currentStop": 23.0,
+        "targetPrice": 27.0,
+        "status": "active",
+        "sector": "化学制药/原料药",
+        "shares": 1700,
+        "allocation_pct": 5.0,
+        "allocatedCapital": 41157.0,
+        "currentValue": 42619.0,
+        "unrealizedPnl": 1462.0,
+        "volume": 131428,
+        "mavol30": 2142.3,
+        "volumeBelowMavol30": false,
+        "weight_pct": 4.33
+      },
+      {
+        "code": "002913",
+        "name": "奥士康",
+        "entryDate": "2026-08-27",
+        "entrySlot": "afternoon",
+        "entryPrice": 59.01,
+        "currentPrice": 88.2,
+        "pnl_pct": 49.47,
+        "stopLoss": 56.06,
+        "currentStop": 64.91,
+        "targetPrice": 64.9,
+        "status": "active",
+        "sector": "元件",
+        "shares": 400,
+        "allocation_pct": 3.0,
+        "allocatedCapital": 23604.0,
+        "currentValue": 35280.0,
+        "unrealizedPnl": 11676.0,
+        "volume": 88391,
+        "mavol30": 937.4,
+        "volumeBelowMavol30": false,
+        "weight_pct": 3.59
+      },
+      {
+        "code": "601872",
+        "name": "招商轮船",
+        "entryDate": "2026-09-03",
+        "entrySlot": "noon",
+        "entryPrice": 19.29,
+        "currentPrice": 20.89,
+        "pnl_pct": 8.29,
+        "stopLoss": 18.33,
+        "currentStop": 19.29,
+        "targetPrice": 25.3,
+        "status": "active",
+        "sector": "航运港口",
+        "shares": 800,
+        "allocation_pct": 2.0,
+        "allocatedCapital": 15432.0,
+        "currentValue": 16712.0,
+        "unrealizedPnl": 1280.0,
+        "volume": 866433,
+        "mavol30": 13298.67,
+        "volumeBelowMavol30": false,
+        "weight_pct": 1.7
+      },
+      {
+        "code": "603127",
+        "name": "昭衍新药",
+        "entryDate": "2026-09-14",
+        "entrySlot": "noon",
+        "entryPrice": 42.85,
+        "currentPrice": 47.79,
+        "pnl_pct": 11.53,
+        "stopLoss": 40.71,
+        "currentStop": 42.85,
+        "targetPrice": 46.71,
+        "status": "active",
+        "sector": "医疗服务",
+        "shares": 800,
+        "allocation_pct": 4.0,
+        "allocatedCapital": 34280.0,
+        "currentValue": 38232.0,
+        "unrealizedPnl": 3952.0,
+        "volume": 398128,
+        "mavol30": 3515.97,
+        "volumeBelowMavol30": false,
+        "weight_pct": 3.89
+      },
+      {
+        "code": "603259",
+        "name": "药明康德",
+        "entryDate": "2026-07-31",
+        "entrySlot": "noon",
+        "entryPrice": 126.5,
+        "currentPrice": 167.46,
+        "pnl_pct": 32.38,
+        "stopLoss": 120.18,
+        "currentStop": 139.15,
+        "targetPrice": 150.0,
+        "status": "active",
+        "sector": "医疗服务",
+        "shares": 300,
+        "allocation_pct": 5.0,
+        "allocatedCapital": 37950.0,
+        "currentValue": 50238.0,
+        "unrealizedPnl": 12288.0,
+        "volume": 188778,
+        "mavol30": 4414.77,
+        "volumeBelowMavol30": false,
+        "weight_pct": 5.11
+      }
+    ]
+  },
+  "active_positions": {
+    "000739": {
+      "code": "000739",
+      "name": "普洛药业",
+      "status": "active",
+      "thesis": "原料药龙头，0风险，RPS120=90.97甜区，MA距离全合规(dist_ma5 +4.0%/ma10 +6.2%/ma20 +9.2%)；医药生物热度延续（09-21医疗服务/CRO/化学制药涨幅居前，来源：证券时报）；'做精原料'连续兑现（头孢托仑匹酯09-09获批，来源：新浪财经/第一财经；氟泽雷塞08-07获批）；公募7.6%+北向2.7%+增持回购",
+      "entryDate": "2026-09-22",
+      "entrySlot": "noon",
+      "entryPrice": 24.21,
+      "targetPrice": 27.0,
+      "stopLoss": 23.0,
+      "currentStop": 23.0,
+      "allocation_pct": 5.0,
+      "shares": 1700,
+      "allocatedCapital": 41157.0,
+      "rating": 2,
+      "rps120": 90.97,
+      "sector": "化学制药/原料药",
+      "catalysts": [],
+      "sourceWatchlist": "2026-09-22",
+      "history": [
+        {
+          "date": "2026-09-22",
+          "slot": "noon",
+          "price": 24.21,
+          "change_pct": 0,
+          "action": "OPEN",
+          "shares": 1700,
+          "stop": 23.0,
+          "allocatedCapital": 41157.0,
+          "note": "LLM开仓 普洛药业"
+        },
+        {
+          "date": "2026-09-22",
+          "slot": "afternoon",
+          "price": 24.0,
+          "change_pct": -0.87,
+          "action": "HOLD",
+          "note": "今日新建仓浮亏-0.87%，未触发-3%三日线；stop_proximity WATCH距止损4.17%需盯紧；原料药主线今日降温未入top5但趋势未破坏，止损23.0保持"
+        },
+        {
+          "date": "2026-09-23",
+          "slot": "noon",
+          "price": 25.07,
+          "change_pct": 3.55,
+          "action": "HOLD",
+          "note": "持有1日浮盈+3.55%未触发任何止损；原料药今日退出top5但'医药十五五'规划催化仍在发酵（来源：21财经/新京报9-18）；dist_ma5已+6.2%达追高线，故不加仓但也不卖赢家"
+        }
+      ],
+      "exitDate": null,
+      "exitPrice": null,
+      "exitReason": null,
+      "returnPct": null,
+      "holdingDays": null,
+      "lessonLearned": null,
+      "createdAt": "2026-09-22T11:42:09.967443+08:00",
+      "updatedAt": "2026-09-23T11:40:03.384507+08:00",
+      "trackerVersion": "2.1"
+    },
+    "002913": {
+      "code": "002913",
+      "name": "奥士康",
+      "status": "active",
+      "thesis": "元件板块top5(+5.09%)，PCB/覆铜板涨价链驱动（覆铜板年内第4次提价累计40%、电子行业前7月利润+1.1倍，来源：东吴证券/财闻8/27）；RPS120=90.58甜区，dist_ma5-0.5%/ma10-1.2%/ma20+6.1%均未超追高线；8/7澄清无英伟达/谷歌订单（陈旧），属板块贝塔标的而非纯AI链，故小仓",
+      "entryDate": "2026-08-27",
+      "entrySlot": "afternoon",
+      "entryPrice": 59.01,
+      "targetPrice": 64.9,
+      "stopLoss": 56.06,
+      "currentStop": 64.91,
+      "allocation_pct": 3.0,
+      "shares": 400,
+      "allocatedCapital": 23604.0,
+      "rating": 2,
+      "rps120": 90.58,
+      "sector": "元件",
+      "catalysts": [],
+      "sourceWatchlist": "2026-08-27",
+      "history": [
+        {
+          "date": "2026-08-27",
+          "slot": "afternoon",
+          "price": 59.01,
+          "change_pct": 0,
+          "action": "OPEN",
+          "shares": 400,
+          "stop": 56.06,
+          "allocatedCapital": 23604.0,
+          "note": "LLM开仓 奥士康"
+        },
+        {
+          "date": "2026-08-28",
+          "slot": "noon",
+          "price": 59.93,
+          "change_pct": 1.56,
+          "action": "HOLD",
+          "note": "持仓第2日浮盈+1.6%，现价59.93高于止损56.06；元件板块今日未入bottom5，PCB/覆铜板涨价链逻辑未破，持有观察"
+        },
+        {
+          "date": "2026-08-28",
+          "slot": "afternoon",
+          "price": 59.06,
+          "change_pct": 0.08,
+          "action": "HOLD",
+          "note": "持仓第2日+0.1%，未触止损/时间止损；元件板块未入bottom5；新仓(<5日)不参与换仓，持有观察"
+        },
+        {
+          "date": "2026-08-31",
+          "slot": "noon",
+          "price": 62.89,
+          "change_pct": 6.58,
+          "action": "HOLD",
+          "note": "持仓第3日+6.6%，未触-3%/时间止损；覆铜板龙头建滔年内第7次涨价落地(FR-4+10%, 来源:中国证券报/财闻网8-28)，PCB/覆铜板涨价链强化；元件未入bottom5；新仓<5日不参与换仓"
+        },
+        {
+          "date": "2026-08-31",
+          "slot": "afternoon",
+          "price": 64.05,
+          "change_pct": 8.54,
+          "action": "HOLD",
+          "note": "持仓第3日+8.5%，未触-3%/时间止损；覆铜板龙头建滔年内第7次涨价落地（FR-4+10%，来源：中国证券报8/29），PCB/覆铜板涨价链强化；元件未入bottom5；新仓<5日不参与换仓；逼近+10%锁利线(64.91)需跟踪"
+        },
+        {
+          "date": "2026-09-01",
+          "slot": "noon",
+          "price": 61.87,
+          "change_pct": 4.85,
+          "action": "HOLD",
+          "note": "浮盈+4.8%(今日-3.4%)，第4个交易日；未触-5%止损、未触冷区3日规则；元件今日入bottom5(-4.18%)为冷区第1日，历史(8/28、8/31)未入bottom5，按纪律持有但明确警戒：若元件连续3日bottom30%则无条件SELL"
+        },
+        {
+          "date": "2026-09-01",
+          "slot": "afternoon",
+          "price": 61.98,
+          "change_pct": 5.03,
+          "action": "HOLD",
+          "note": "持仓第4日+5.0%，未触-5%止损/-3%三日规则/时间止损；但元件今日bottom5(-4.71%)为冷区第1日——若元件连续3日处bottom30%则无条件SELL；覆铜板涨价链仍在(建滔九轮涨价累计约134%,来源:电子工程专辑)；<5日新仓不参与换仓"
+        },
+        {
+          "date": "2026-09-02",
+          "slot": "afternoon",
+          "price": 61.56,
+          "change_pct": 4.32,
+          "action": "HOLD",
+          "note": "浮盈+4.3%，第5个交易日；未触-5%止损/-3%三日规则/15日时间止损；元件9/1曾入bottom5(冷区第1日)，今日已退出bottom5，冷区计数重置；覆铜板涨价链仍在，继续持有"
+        },
+        {
+          "date": "2026-09-03",
+          "slot": "noon",
+          "price": 62.94,
+          "change_pct": 6.66,
+          "action": "HOLD",
+          "note": "浮盈+6.7%，第6个交易日，未触-5%止损/-3%三日规则/15日时间止损；元件今日未入bottom5，9/1冷区计数已重置，无卖出触发"
+        },
+        {
+          "date": "2026-09-04",
+          "slot": "noon",
+          "price": 62.37,
+          "change_pct": 5.69,
+          "action": "HOLD",
+          "note": "浮盈+5.7%，第7个交易日，未触-5%止损/-3%三日规则/15日时间止损；元件板块今日未入bottom5，无卖出触发"
+        },
+        {
+          "date": "2026-09-04",
+          "slot": "afternoon",
+          "price": 61.0,
+          "change_pct": 3.37,
+          "action": "HOLD",
+          "note": "浮盈+3.4%，第7个交易日，未触-5%硬止损/-3%三日规则/15日时间止损；元件板块今日未入Bottom5，无卖出触发"
+        },
+        {
+          "date": "2026-09-07",
+          "slot": "noon",
+          "price": 63.91,
+          "change_pct": 8.3,
+          "action": "HOLD",
+          "note": "元件今日板块#1(+6.49%)，持仓唯一在热点板块的仓位；浮盈+8.3%第8日，未触-5%止损/-3%三日规则/15日时间止损；PCB/覆铜板涨价链逻辑延续，让利润奔跑。"
+        },
+        {
+          "date": "2026-09-10",
+          "slot": "noon",
+          "price": 70.13,
+          "change_pct": 18.84,
+          "action": "RAISE_STOP",
+          "note": "昨日涨停创历史新高（松下上调覆铜板价最高30%，来源：财闻/证券时报），今日-1.5%为涨停次日回吐；浮盈+18.8%已达+10%线，按Rule 5把止损抬到成本价59.01锁定利润",
+          "old_stop": 56.06,
+          "new_stop": 59.01
+        },
+        {
+          "date": "2026-09-10",
+          "slot": "afternoon",
+          "price": 70.99,
+          "change_pct": 20.3,
+          "action": "RAISE_STOP",
+          "note": "收盘70.99越过+20%线(59.01×1.20=70.81)，按Rule5把止损由成本价59.01上移至+10%=64.91锁定利润；PCB/覆铜板涨价链延续(南亚塑胶9月提价、供给紧张至2027，来源：金融界/新浪检索)",
+          "old_stop": 59.01,
+          "new_stop": 64.91
+        },
+        {
+          "date": "2026-09-14",
+          "slot": "noon",
+          "price": 74.62,
+          "change_pct": 26.45,
+          "action": "HOLD",
+          "note": "浮盈+26.4%，止损已抬至+10%(64.91)；元件板块未入冷区，PCB/覆铜板涨价链延续，让利润奔跑"
+        },
+        {
+          "date": "2026-09-15",
+          "slot": "noon",
+          "price": 75.23,
+          "change_pct": 27.49,
+          "action": "HOLD",
+          "note": "浮盈+27.5%远超+20%线，止损已在+10%(64.91)；元件板块未入今日top5/bottom5（中游），不触发Rule1冷区卖出；PCB/覆铜板涨价链延续（9/14 PCB概念涨幅居前，来源：证券时报），让利润奔跑"
+        },
+        {
+          "date": "2026-09-15",
+          "slot": "afternoon",
+          "price": 75.55,
+          "change_pct": 28.03,
+          "action": "HOLD",
+          "note": "浮盈+28.0%远超+20%线，止损已抬至+10%(64.91)锁定利润；元件板块未入冷区，PCB/覆铜板涨价链延续，让利润奔跑"
+        },
+        {
+          "date": "2026-09-16",
+          "slot": "noon",
+          "price": 83.11,
+          "change_pct": 40.84,
+          "action": "HOLD",
+          "note": "今日涨停+10.01%，浮盈+40.8%，止损已机械抬至+10%(64.91)锁定利润；元件板块未入冷区，PCB/覆铜板涨价链延续，让利润奔跑"
+        },
+        {
+          "date": "2026-09-16",
+          "slot": "afternoon",
+          "price": 83.11,
+          "change_pct": 40.84,
+          "action": "HOLD",
+          "note": "涨停+10.01%，浮盈+40.8%，止损已锁+10%(64.91)；元件板块未入冷区，PCB/覆铜板涨价链延续，让利润奔跑"
+        },
+        {
+          "date": "2026-09-17",
+          "slot": "noon",
+          "price": 82.34,
+          "change_pct": 39.54,
+          "action": "HOLD",
+          "note": "浮盈+39.5%，止损已机械锁+10%(64.91)；元件板块未入冷区，PCB/覆铜板涨价链延续，让利润奔跑"
+        },
+        {
+          "date": "2026-09-17",
+          "slot": "afternoon",
+          "price": 82.15,
+          "change_pct": 39.21,
+          "action": "HOLD",
+          "note": "浮盈+39.2%，止损已机械锁+10%(64.91)；元件板块今日滑入跌幅榜第5(-2.43%)为转冷第1日，未达'冷3日卖出'阈值，继续持有并紧盯；个股今日-1.16%属正常波动，让利润奔跑"
+        },
+        {
+          "date": "2026-09-18",
+          "slot": "noon",
+          "price": 82.03,
+          "change_pct": 39.01,
+          "action": "HOLD",
+          "note": "浮盈+39%让利润奔跑，止损已锁+10%(64.91)；元件板块今日未入bottom5(昨日转冷第1日已修复)，PCB/覆铜板涨价链延续"
+        },
+        {
+          "date": "2026-09-18",
+          "slot": "afternoon",
+          "price": 84.06,
+          "change_pct": 42.45,
+          "action": "HOLD",
+          "note": "浮盈+42.4%，止损已锁+10%(64.91)；元件板块未入bottom5(9/17转冷第1日已修复)，PCB/覆铜板涨价链延续，让利润奔跑"
+        },
+        {
+          "date": "2026-09-21",
+          "slot": "noon",
+          "price": 82.45,
+          "change_pct": 39.72,
+          "action": "HOLD",
+          "note": "浮盈+39.7%让利润奔跑，止损已机械锁+10%(64.91)；元件板块未入今日bottom5(9/17转冷第1日已修复)，PCB/覆铜板涨价链延续；今日-1.92%属大涨后正常波动。margin deleveraging(chg5 -24.7%)为警示非卖出触发"
+        },
+        {
+          "date": "2026-09-21",
+          "slot": "afternoon",
+          "price": 84.5,
+          "change_pct": 43.2,
+          "action": "HOLD",
+          "note": "浮盈+43.2%让利润奔跑，止损已机械锁+10%(64.91)；元件板块未入今日bottom5(9/17转冷第1日已修复)，PCB/覆铜板涨价链延续；margin deleveraging(chg5 -24.74%)为警示非卖出触发"
+        },
+        {
+          "date": "2026-09-22",
+          "slot": "noon",
+          "price": 89.52,
+          "change_pct": 51.7,
+          "action": "HOLD",
+          "note": "浮盈+51.7%让利润奔跑，止损已锁+10%(64.91)；元件板块未入今日bottom5，PCB/覆铜板涨价链延续；margin deleveraging(chg5 -20.9%)为警示非卖出触发"
+        },
+        {
+          "date": "2026-09-22",
+          "slot": "afternoon",
+          "price": 88.12,
+          "change_pct": 49.33,
+          "action": "HOLD",
+          "note": "浮盈+49.3%让利润奔跑，止损已锁+10%(64.91)；元件板块未入今日bottom5，PCB/覆铜板涨价链延续；margin deleveraging(chg5 -20.9%)为警示非卖出触发"
+        },
+        {
+          "date": "2026-09-23",
+          "slot": "noon",
+          "price": 88.2,
+          "change_pct": 49.47,
+          "action": "HOLD",
+          "note": "浮盈+49.5%让利润奔跑，止损已机械锁+10%(64.91)；持有约19日但收益远超3%，时间止损不适用；元件板块未入bottom5"
+        }
+      ],
+      "exitDate": null,
+      "exitPrice": null,
+      "exitReason": null,
+      "returnPct": null,
+      "holdingDays": null,
+      "lessonLearned": null,
+      "createdAt": "2026-08-27T15:12:46.690531+08:00",
+      "updatedAt": "2026-09-23T11:40:03.403706+08:00",
+      "trackerVersion": "2.1"
+    },
+    "601872": {
+      "code": "601872",
+      "name": "招商轮船",
+      "status": "active",
+      "thesis": "航运港口今日板块#1(+3.47%)，霍尔木兹通航未实质恢复、油运运价历史高位；招商轮船为航运龙头(中银证券推荐)。RPS120=85.89甜区，dist_ma5+4.2%/ma10+3.2%/ma20+6.2%均未触追高线。弱宽度按0.5倍仓位小仓进场。风险：margin signal=deleveraging、霍尔木兹为ongoing事件(已按anti-freeze条款减仓而非跳过)",
+      "entryDate": "2026-09-03",
+      "entrySlot": "noon",
+      "entryPrice": 19.29,
+      "targetPrice": 25.3,
+      "stopLoss": 18.33,
+      "currentStop": 19.29,
+      "allocation_pct": 2.0,
+      "shares": 800,
+      "allocatedCapital": 15432.0,
+      "rating": 2,
+      "rps120": 85.89,
+      "sector": "航运港口",
+      "catalysts": [],
+      "sourceWatchlist": "2026-09-03",
+      "history": [
+        {
+          "date": "2026-09-03",
+          "slot": "noon",
+          "price": 19.29,
+          "change_pct": 0,
+          "action": "OPEN",
+          "shares": 800,
+          "stop": 18.33,
+          "allocatedCapital": 15432.0,
+          "note": "LLM开仓 招商轮船"
+        },
+        {
+          "date": "2026-09-04",
+          "slot": "noon",
+          "price": 19.25,
+          "change_pct": -0.21,
+          "action": "HOLD",
+          "note": "第2日浮盈-0.2%，未触-5%硬止损/-3%三日规则；航运港口今日未入bottom5，霍尔木兹油运高位逻辑未变（中银证券推荐，来源：输入events）"
+        },
+        {
+          "date": "2026-09-04",
+          "slot": "afternoon",
+          "price": 19.2,
+          "change_pct": -0.47,
+          "action": "HOLD",
+          "note": "第2日浮盈-0.5%，未触-5%硬止损/-3%三日规则；航运港口未入Bottom5，霍尔木兹通航未实质恢复、油运高位逻辑未变（中银证券，来源：输入events）；距止损18.33约4.5%(WATCH)，2日新仓不动"
+        },
+        {
+          "date": "2026-09-07",
+          "slot": "noon",
+          "price": 18.78,
+          "change_pct": -2.64,
+          "action": "HOLD",
+          "note": "第3日浮盈-2.6%，未触-5%硬止损18.33，也未触-3%三日规则（阈值18.71）；航运港口未入bottom5，油运高位逻辑未变；但距止损仅2.4%且今日-2.19%，为最弱持仓，紧盯18.71(-3%)与18.33(硬止损)。"
+        },
+        {
+          "date": "2026-09-10",
+          "slot": "noon",
+          "price": 19.93,
+          "change_pct": 3.32,
+          "action": "HOLD",
+          "note": "油运景气未变（Q2油轮净利+359%、VLCC 8月破20万美元/天、Q4高景气确认，来源：中财网/证券时报）；今日-5.05%是9/9涨停后获利回吐，+3.3%未触-5%硬止损18.33；但deleveraging+大阴线，为最弱持仓，紧盯18.33"
+        },
+        {
+          "date": "2026-09-10",
+          "slot": "afternoon",
+          "price": 20.58,
+          "change_pct": 6.69,
+          "action": "HOLD",
+          "note": "浮盈+6.7%未触-5%止损18.33；油运景气未变(公司指引2026运价中枢高于2025，来源：财联社/国际船舶网检索)；今日-1.95%为9/9涨停次日回吐；margin仍deleveraging为最弱持仓，紧盯18.33"
+        },
+        {
+          "date": "2026-09-14",
+          "slot": "noon",
+          "price": 20.18,
+          "change_pct": 4.61,
+          "action": "HOLD",
+          "note": "浮盈+4.6%未触止损18.33；油运景气延续（BDTI周+43.14%/VLCC周+56.06%，输入事件数据），margin转adding；距止损仍近，继续紧盯"
+        },
+        {
+          "date": "2026-09-15",
+          "slot": "noon",
+          "price": 21.04,
+          "change_pct": 9.07,
+          "action": "HOLD",
+          "note": "浮盈+9.1%、今日+5.2%，未触+10%线(21.22)故止损维持18.33；油运景气延续（VLCC 2026运价中枢有望高于2025，来源：财联社/国际船舶网检索），margin已转adding；航运港口未入冷区，继续紧盯18.33"
+        },
+        {
+          "date": "2026-09-15",
+          "slot": "afternoon",
+          "price": 20.5,
+          "change_pct": 6.27,
+          "action": "HOLD",
+          "note": "浮盈+6.3%未触+10%线(21.22)，止损维持18.33；油运景气延续（霍尔木兹通航未实质恢复、VLCC运价历史高位），margin已转adding；航运港口未入冷区"
+        },
+        {
+          "date": "2026-09-16",
+          "slot": "noon",
+          "price": 19.78,
+          "change_pct": 2.54,
+          "action": "HOLD",
+          "note": "浮盈+2.5%未触止损18.33；今日-3.51%属正常波动，VLCC运价历史高位（TD3C TCE 76万美元/天，来源：中财网），margin已转adding；10个交易日浮盈<3%，逼近15日时间止损，紧盯不加仓"
+        },
+        {
+          "date": "2026-09-16",
+          "slot": "afternoon",
+          "price": 19.86,
+          "change_pct": 2.95,
+          "action": "HOLD",
+          "note": "浮盈+2.9%未触止损18.33；今日-3.12%跌破MA5(20.19)，持有10日浮盈<3%逼近15日时间止损线，紧盯不加仓；航运港口未入冷区，margin已转adding"
+        },
+        {
+          "date": "2026-09-17",
+          "slot": "noon",
+          "price": 21.1,
+          "change_pct": 9.38,
+          "action": "HOLD",
+          "note": "浮盈+9.4%逼近+10%(21.22)，未触止损18.33；油运景气延续（VLCC运价历史高位，霍尔木兹未实质恢复），margin已转adding；航运港口未入冷区。关注破21.22后抬止损至盈亏平衡19.29"
+        },
+        {
+          "date": "2026-09-17",
+          "slot": "afternoon",
+          "price": 21.85,
+          "change_pct": 13.27,
+          "action": "RAISE_STOP",
+          "note": "浮盈+13.3%触发Rule5(+10%→抬止损至盈亏平衡19.29)；今日涨停+10.02%(position_prices)，油运超级周期延续(霍尔木兹扰动+VLCC运价历史高位，来源:证券时报/华创证券)，让利润奔跑",
+          "old_stop": 18.33,
+          "new_stop": 19.29
+        },
+        {
+          "date": "2026-09-18",
+          "slot": "noon",
+          "price": 22.35,
+          "change_pct": 15.86,
+          "action": "HOLD",
+          "note": "浮盈+15.9%，止损已抬至盈亏平衡19.29；VLCC运价历史高位(霍尔木兹+曼德双通道承压，来源:中银证券9/15/证券时报)，油运景气延续，+20%未到暂不抬止损"
+        },
+        {
+          "date": "2026-09-18",
+          "slot": "afternoon",
+          "price": 22.36,
+          "change_pct": 15.91,
+          "action": "HOLD",
+          "note": "浮盈+15.9%，止损已锁breakeven(19.29)；TD3C运价历史高位但原油主力今日-9%(财闻)、公司IR称霍尔木兹恢复趋势确定，盈亏平衡止损保护下持有"
+        },
+        {
+          "date": "2026-09-21",
+          "slot": "noon",
+          "price": 22.4,
+          "change_pct": 16.12,
+          "action": "HOLD",
+          "note": "浮盈+16.1%，止损已锁breakeven(19.29)；VLCC运价历史新高+两大能源通道承压(来源:中银证券9/15、财闻网)，margin signal已翻转为adding(chg5 +3.27%)动量佐证持有；+20%未到暂不抬止损"
+        },
+        {
+          "date": "2026-09-21",
+          "slot": "afternoon",
+          "price": 22.91,
+          "change_pct": 18.77,
+          "action": "HOLD",
+          "note": "浮盈+18.8%逼近+20%抬损线(未触发)，止损已锁breakeven(19.29)；VLCC运价续创历史新高(来源:财闻网9/21东方证券报告)，margin signal已翻转adding(chg5 +3.27%)，油运景气延续"
+        },
+        {
+          "date": "2026-09-22",
+          "slot": "noon",
+          "price": 21.55,
+          "change_pct": 11.72,
+          "action": "HOLD",
+          "note": "浮盈+11.7%，止损锁breakeven(19.29)；今日-5.94%且航运港口进入bottom5(-2.45%)为转冷第1日，未触发'冷3日才卖'规则；VLCC运价仍处历史高位（来源：东方证券09-21），但需连续跟踪板块转冷是否持续"
+        },
+        {
+          "date": "2026-09-22",
+          "slot": "afternoon",
+          "price": 21.48,
+          "change_pct": 11.35,
+          "action": "HOLD",
+          "note": "航运港口今日bottom5第1(-2.56%)为转冷第1日，未触发'冷3日才卖'规则；VLCC运价仍处历史高位(来源:中银证券9/15财闻)，今日-6.24%属获利回吐；止损保本19.29，若板块连续冷满3日则执行Rule1离场"
+        },
+        {
+          "date": "2026-09-23",
+          "slot": "noon",
+          "price": 20.89,
+          "change_pct": 8.29,
+          "action": "HOLD",
+          "note": "浮盈+8.3%守住保本止损19.29；航运港口9-22入bottom5为转冷第1日，今日已修复出榜，未触发'冷3日才卖'；VLCC TD3C TCE破100万美元/天（来源：第一财经9-17），Q4为VLCC船队盈利最好季度（来源：招商轮船IR记录9-7）。此仓最脆弱，若板块连续冷满3日即按Rule1离场"
+        }
+      ],
+      "exitDate": null,
+      "exitPrice": null,
+      "exitReason": null,
+      "returnPct": null,
+      "holdingDays": null,
+      "lessonLearned": null,
+      "createdAt": "2026-09-03T11:41:15.769336+08:00",
+      "updatedAt": "2026-09-23T11:40:03.413984+08:00",
+      "trackerVersion": "2.1"
+    },
+    "603127": {
+      "code": "603127",
+      "name": "昭衍新药",
+      "status": "active",
+      "thesis": "医疗服务板块#1(+4.01%)；实验猴供需紧张价格上行驱动中报净利+1126.8%（财联社/证券时报/澎湃）；RPS120=94.94扩展区获板块top10%+业绩催化双重豁免；贴MA5(+0.1%)不追高。风险：rps20仅6.21个股短期偏弱、margin deleveraging、IV 0.70偏高→小仓试探",
+      "entryDate": "2026-09-14",
+      "entrySlot": "noon",
+      "reentry": true,
+      "priorTrips": 1,
+      "priorExit": {
+        "exitDate": "2026-08-21",
+        "returnPct": 11.45,
+        "exitReason": "医疗服务今日跌入bottom5(-3.22%)，股价-5.97%跌破MA5(52.21)/MA10(51.9)；距止损48.79仅1.29%(CRITICAL)，按h024主动离场不等硬触发。板块热度从8/20的#2(+6.31%)一日翻冷",
+        "exitPrice": 49.43
+      },
+      "entryPrice": 42.85,
+      "targetPrice": 46.71,
+      "stopLoss": 40.71,
+      "currentStop": 42.85,
+      "allocation_pct": 4.0,
+      "shares": 800,
+      "allocatedCapital": 34280.0,
+      "rating": 2,
+      "rps120": 94.94,
+      "sector": "医疗服务",
+      "catalysts": [],
+      "sourceWatchlist": "2026-09-14",
+      "history": [
+        {
+          "date": "2026-09-14",
+          "slot": "noon",
+          "price": 42.85,
+          "change_pct": 0,
+          "action": "OPEN",
+          "shares": 800,
+          "stop": 40.71,
+          "allocatedCapital": 34280.0,
+          "note": "LLM开仓 昭衍新药"
+        },
+        {
+          "date": "2026-09-15",
+          "slot": "noon",
+          "price": 42.66,
+          "change_pct": -0.44,
+          "action": "HOLD",
+          "note": "持仓1天，浮盈-0.4%未触-3%/前3日止损；距止损40.71仅4.6%（stop_proximity WATCH），紧盯；医疗服务未入冷区（9/14 CRO概念逆市走强，来源：证券时报），安评龙头+实验猴资源壁垒（来源：东方财富CXO梳理）"
+        },
+        {
+          "date": "2026-09-15",
+          "slot": "afternoon",
+          "price": 42.32,
+          "change_pct": -1.24,
+          "action": "HOLD",
+          "note": "持仓1天，浮盈-1.2%未触-3%/前3日止损、未触-5%止损40.71；但距止损仅3.8%（stop_proximity WATCH），明日紧盯40.71，破位无条件离场；医疗服务未入冷区"
+        },
+        {
+          "date": "2026-09-16",
+          "slot": "noon",
+          "price": 43.32,
+          "change_pct": 1.1,
+          "action": "HOLD",
+          "note": "浮盈+1.1%（3日），未触-3%/前3日止损、未触-5%止损40.71，距止损6%警戒解除；医疗服务未入冷区，CRO主线内持有"
+        },
+        {
+          "date": "2026-09-16",
+          "slot": "afternoon",
+          "price": 43.83,
+          "change_pct": 2.29,
+          "action": "HOLD",
+          "note": "浮盈+2.3%(3日)未触-3%/前3日止损、未触-5%止损40.71；医疗服务未入冷区，CRO主线内持有"
+        },
+        {
+          "date": "2026-09-17",
+          "slot": "noon",
+          "price": 44.18,
+          "change_pct": 3.1,
+          "action": "HOLD",
+          "note": "浮盈+3.1%(4日)未触-3%/前3日止损、未触-5%止损40.71；医疗服务未入冷区，CRO主线内持有"
+        },
+        {
+          "date": "2026-09-17",
+          "slot": "afternoon",
+          "price": 44.12,
+          "change_pct": 2.96,
+          "action": "HOLD",
+          "note": "浮盈+3.0%(4日)，未触-5%止损40.71，前3日-3%窗口已过；CRO主线今日走强，医疗服务未入冷区，继续持有"
+        },
+        {
+          "date": "2026-09-18",
+          "slot": "noon",
+          "price": 45.63,
+          "change_pct": 6.49,
+          "action": "HOLD",
+          "note": "浮盈+6.5%未触-5%止损40.71、前3日-3%窗口已过；CRO主线(高盛/招银国际上调行业预期)，医疗服务未入bottom5，继续持有"
+        },
+        {
+          "date": "2026-09-18",
+          "slot": "afternoon",
+          "price": 45.76,
+          "change_pct": 6.79,
+          "action": "HOLD",
+          "note": "浮盈+6.8%，未触-5%止损40.71、前3日窗口已过；医药工业十五五规划(9/18)+AI原研药获批双催化，CRO主线内持有"
+        },
+        {
+          "date": "2026-09-21",
+          "slot": "noon",
+          "price": 46.59,
+          "change_pct": 8.73,
+          "action": "HOLD",
+          "note": "浮盈+8.7%逼近+10%抬损线(尚未触发)；医疗服务今日+4.03%列第2热区，医药工业十五五规划+CXO订单高增双催化；margin adding(chg5 +4.6%)。持有，待+10%后抬止损至breakeven"
+        },
+        {
+          "date": "2026-09-21",
+          "slot": "afternoon",
+          "price": 46.74,
+          "change_pct": 9.08,
+          "action": "HOLD",
+          "note": "浮盈+9.1%逼近+10%抬损线(47.14，未触发)，止损40.71；医疗服务今日+4.53%列top3热区，创新药/CRO爆发(来源:新华财经9/21)；margin adding(chg5 +4.61%)"
+        },
+        {
+          "date": "2026-09-22",
+          "slot": "noon",
+          "price": 46.4,
+          "change_pct": 8.28,
+          "action": "HOLD",
+          "note": "浮盈+8.3%逼近+10%抬损线(47.14)未触发，止损40.71；医疗服务/CRO/化学制药09-21涨幅居前（来源：证券时报），医药生物热度延续；margin adding(chg5 +13.4%)"
+        },
+        {
+          "date": "2026-09-22",
+          "slot": "afternoon",
+          "price": 46.12,
+          "change_pct": 7.63,
+          "action": "HOLD",
+          "note": "浮盈+7.6%逼近+10%抬损线(47.14)未触发；医疗服务/CRO主线9/21爆发后今日降温未入top5；margin adding(+13.4%)；止损40.71保持"
+        },
+        {
+          "date": "2026-09-23",
+          "slot": "noon",
+          "price": 47.79,
+          "change_pct": 11.53,
+          "action": "RAISE_STOP",
+          "note": "浮盈+11.5%已越过+10%抬损线(47.14)，按Rule5机械抬损至保本42.85，将快赢家转为低风险持有",
+          "old_stop": 40.71,
+          "new_stop": 42.85
+        }
+      ],
+      "exitDate": null,
+      "exitPrice": null,
+      "exitReason": null,
+      "returnPct": null,
+      "holdingDays": null,
+      "lessonLearned": null,
+      "createdAt": "2026-09-14T11:41:41.947954+08:00",
+      "updatedAt": "2026-09-23T11:40:03.422741+08:00",
+      "trackerVersion": "2.1"
+    },
+    "603259": {
+      "code": "603259",
+      "name": "药明康德",
+      "status": "active",
+      "thesis": "CXO龙头，A/H溢价-8%(A股折价)。近3月涨幅超98%个股，强势动量。10亿回购+11%北向+15%公募。VCP SETUP：价格在MA5/MA10/MA20的1.5%范围内极致收敛，突破在即。8月4日中报发布（催化剂即将兑现）。零风险。唯一风险：医疗服务sector未进入今日top5，但大概率在top30%。",
+      "entryDate": "2026-07-31",
+      "entryPrice": 126.5,
+      "targetPrice": 150.0,
+      "stopLoss": 120.18,
+      "currentStop": 139.15,
+      "allocation_pct": 5.0,
+      "shares": 300,
+      "allocatedCapital": 37950.0,
+      "rating": 2,
+      "rps120": 90.81,
+      "sector": "医疗服务",
+      "catalysts": [],
+      "sourceWatchlist": "2026-07-31",
+      "history": [
+        {
+          "date": "2026-07-31",
+          "slot": "noon",
+          "price": 126.5,
+          "change_pct": 0,
+          "action": "OPEN",
+          "note": "LLM开仓 药明康德"
+        },
+        {
+          "date": "2026-07-31",
+          "slot": "afternoon",
+          "price": 128.43,
+          "change_pct": 1.53,
+          "action": "HOLD",
+          "note": "+1.53% day 1. Strongest position: RPS 90.81% sweet spot, VCP SETUP (within 1.5% of all MAs), 0 risks, 8/4中报 catalyst. A/H折价-7%. 10亿回购+11%北向+15%公募."
+        },
+        {
+          "date": "2026-08-03",
+          "slot": "afternoon",
+          "price": 128.5,
+          "change_pct": 1.58,
+          "action": "HOLD",
+          "note": "+1.58% in 3 days. VCP SETUP coiling within 1.9% of MA10 — classic pre-catalyst pattern. ⚠️ 中报 TOMORROW (8/4): binary catalyst with gap risk. 0 risk tags, 10亿回购, 11%北向+15%公募, A/H折价-7%. Stop at ¥120.18 (-5%) is correctly set. If 中报 misses, stop fires — no exceptions. Margin deleveraging (-4.6% 5d) a mild caution flag."
+        },
+        {
+          "date": "2026-08-04",
+          "slot": "noon",
+          "price": 141.35,
+          "change_pct": 11.74,
+          "action": "RAISE_STOP",
+          "note": "PnL+11.74%持仓4天，今日涨停+10.00%！中报催化兑现完美。Sector医疗服务#3（+6.89%）。按Rule 5：+10%以上→止损提至成本价。新止损¥126.50（盈亏平衡），确保此笔交易不再亏损。CXO龙头+A/H折价+10亿回购+0风险，继续持有让利润奔跑。"
+        },
+        {
+          "date": "2026-08-04",
+          "slot": "afternoon",
+          "price": 141.35,
+          "change_pct": 11.74,
+          "action": "HOLD",
+          "note": "PnL+11.74%持仓5天，今日涨停+10.00%！Sector医疗服务#3（+7.51%）。H1营收288.97亿（+38.93%），归母净利110.8亿（+29.43%），上调全年指引至585-605亿。止损已提至成本¥126.50（盈亏平衡），确保此笔不亏损。下一目标：+20%（¥151.80）→提止损至+10%（¥139.15）。"
+        },
+        {
+          "date": "2026-08-05",
+          "slot": "noon",
+          "price": 146.94,
+          "change_pct": 16.16,
+          "action": "HOLD",
+          "note": "PnL+16.16%持仓6天，中报催化完美兑现（H1营收+39%净利+29%，全年指引上调至585-605亿）。止损已提至成本¥126.50（盈亏平衡），确保此笔不亏损。下一目标+20%=¥151.80→届时提止损至+10%。Sector医疗服务受益CXO板块扩散。"
+        },
+        {
+          "date": "2026-08-06",
+          "slot": "afternoon",
+          "price": 142.7,
+          "change_pct": 12.81,
+          "action": "HOLD",
+          "note": "PnL+12.81%持仓7天。中报催化完美兑现（H1营收+39%净利+29%，全年指引上调至585-605亿，在手订单664亿创历史新高）。今日-3.25%获利回吐。止损¥126.50（盈亏平衡）。距+20%（¥151.80）还有6.4%。⚠️医疗服务bottom5第1天——获利回吐非基本面恶化，但需监控板块持续性。"
+        },
+        {
+          "date": "2026-08-07",
+          "slot": "noon",
+          "price": 151.28,
+          "change_pct": 19.59,
+          "action": "HOLD",
+          "note": "PnL+19.59%持仓8天。中报催化完美兑现（H1营收+39%净利+29%，在手订单664亿创历史新高，全年指引上调至585-605亿）。今日+6.01%，距+20%阈值¥151.80仅差¥0.52（0.34%）。触及后止损提至+10%（¥139.15）。"
+        },
+        {
+          "date": "2026-08-07",
+          "slot": "afternoon",
+          "price": 154.82,
+          "change_pct": 22.39,
+          "action": "RAISE_STOP",
+          "note": "PnL+22.39%持仓8天，Rule 5强制触发：突破+20%阈值¥151.80→止损提至+10%=¥139.15。中报催化完美兑现（H1营收+39%净利+29%，在手订单664亿创历史新高，全年指引上调至585-605亿）。今日+8.49%继续强势，医疗服务sector#1全市场最热。"
+        },
+        {
+          "date": "2026-08-10",
+          "slot": "afternoon",
+          "price": 161.34,
+          "change_pct": 27.54,
+          "action": "HOLD",
+          "note": "PnL+27.53%持仓10天，医疗服务TOP4持续受益CXO/AI制药主线。今日+4.21%，新增催化剂：美国暂时豁免1260H名单认定(来源:财闻8/10)。止损已提至+10%线¥139.15，安全边际极高。"
+        },
+        {
+          "date": "2026-08-11",
+          "slot": "noon",
+          "price": 164.25,
+          "change_pct": 29.84,
+          "action": "HOLD",
+          "note": "PnL+29.84%(11天)，今日+1.80%稳健。催化剂持续升级：H1营收+39%净利+29%，在手订单664亿创历史新高，全年指引上调至585-605亿，美国法院批准1260H初步禁令(公司公告8/10)，AI制药放大CXO需求(财联社8/10)。止损已提至+10%线¥139.15，安全边际极高。"
+        },
+        {
+          "date": "2026-08-11",
+          "slot": "afternoon",
+          "price": 160.21,
+          "change_pct": 26.65,
+          "action": "HOLD",
+          "note": "PnL+26.64%持仓11天，CXO绝对龙头。H1营收+39%净利+29%，在手订单664亿创新高，全年指引上调至585-605亿。美国法院批准1260H初步禁令(公司公告8/10)。AI制药放大CXO需求(财联社8/10)。止损已提至+10%线¥139.15，安全边际极高。"
+        },
+        {
+          "date": "2026-08-12",
+          "slot": "afternoon",
+          "price": 159.04,
+          "change_pct": 25.72,
+          "action": "HOLD",
+          "note": "PnL+25.7%，CXO绝对龙头，H1指引上调+美国1260H初步禁令获批，止损已提至+10%=139.15"
+        },
+        {
+          "date": "2026-08-13",
+          "slot": "noon",
+          "price": 163.69,
+          "change_pct": 29.4,
+          "action": "HOLD",
+          "note": "CXO绝对龙头，医疗服务#1热门板块，H1指引上调+美国1260H初步禁令获批，止损已提至+10%¥139.15，安全边际极高"
+        },
+        {
+          "date": "2026-08-13",
+          "slot": "afternoon",
+          "price": 162.33,
+          "change_pct": 28.32,
+          "action": "HOLD",
+          "note": "CXO绝对龙头，医疗服务#1热门板块，H1指引上调+美国1260H初步禁令获批，止损已提至+10%¥139.15，安全边际极高，持有"
+        },
+        {
+          "date": "2026-08-14",
+          "slot": "noon",
+          "price": 158.95,
+          "change_pct": 25.65,
+          "action": "HOLD",
+          "note": "CXO绝对龙头，H1指引上调（8/3公告），PnL+25.7%，止损已提至+10%¥139.15，安全边际充足，持有"
+        },
+        {
+          "date": "2026-08-14",
+          "slot": "afternoon",
+          "price": 159.24,
+          "change_pct": 25.88,
+          "action": "HOLD",
+          "note": "CXO绝对龙头，H1指引上调，PnL+25.7%，止损已提至+10%¥139.15，安全边际充足"
+        },
+        {
+          "date": "2026-08-17",
+          "slot": "noon",
+          "price": 166.9,
+          "change_pct": 31.94,
+          "action": "HOLD",
+          "note": "CXO绝对龙头，PnL+31.9%，止损已锁+10%¥139.15，持有"
+        },
+        {
+          "date": "2026-08-17",
+          "slot": "afternoon",
+          "price": 166.89,
+          "change_pct": 31.93,
+          "action": "HOLD",
+          "note": "CXO龙头H1超预期并上调全年指引（来源：上证报8/3），PnL+31.9%，止损已锁+10%¥139.15"
+        },
+        {
+          "date": "2026-08-18",
+          "slot": "noon",
+          "price": 167.12,
+          "change_pct": 32.11,
+          "action": "HOLD",
+          "note": "CXO龙头H1净利52.3亿超预期并上调全年指引至585-605亿（来源：21财经8/3），PnL+32.1%为组合最强仓，止损已锁+10%¥139.15，持有让利润奔跑"
+        },
+        {
+          "date": "2026-08-18",
+          "slot": "afternoon",
+          "price": 167.18,
+          "change_pct": 32.16,
+          "action": "HOLD",
+          "note": "PnL+32.2%为组合最强仓，止损已锁+10%(139.15)；H1净利52.3亿超预期并上调全年指引（来源：21财经8/3），让利润奔跑"
+        },
+        {
+          "date": "2026-08-19",
+          "slot": "noon",
+          "price": 163.4,
+          "change_pct": 29.17,
+          "action": "HOLD",
+          "note": "PnL+29.2%为组合最强仓，止损已锁+10%(139.15)；H1净利52.3亿超预期并上调全年指引，让利润奔跑"
+        },
+        {
+          "date": "2026-08-19",
+          "slot": "afternoon",
+          "price": 164.0,
+          "change_pct": 29.64,
+          "action": "HOLD",
+          "note": "PnL+29.6%为组合最强仓，止损已锁+10%¥139.15；H1净利超预期并上调全年指引逻辑未破，医疗服务未入bottom5，让利润奔跑"
+        },
+        {
+          "date": "2026-08-20",
+          "slot": "noon",
+          "price": 171.16,
+          "change_pct": 35.3,
+          "action": "HOLD",
+          "note": "医疗服务今日#2(+6.31%)，+35.3%组合最强仓，止损已锁+10%(139.15)，H1超预期并上调全年指引逻辑未破，让利润奔跑"
+        },
+        {
+          "date": "2026-08-21",
+          "slot": "noon",
+          "price": 164.74,
+          "change_pct": 30.23,
+          "action": "HOLD",
+          "note": "医疗服务今日跌入bottom5(-3.22%)但仅1日，未达'冷3日'轮出线；+30.2%组合最强仓，止损锁+10%(139.15)距现价15%安全；H1超预期+上调全年指引逻辑未破"
+        },
+        {
+          "date": "2026-08-21",
+          "slot": "afternoon",
+          "price": 162.86,
+          "change_pct": 28.74,
+          "action": "HOLD",
+          "note": "医疗服务今日跌入bottom5(-3.78%)但仅1日，未达'冷3日'轮出线；+28.7%距止损139.15有14.5%安全垫；H1超预期并上调全年指引逻辑未破（来源：证券时报/EET）"
+        },
+        {
+          "date": "2026-08-24",
+          "slot": "noon",
+          "price": 155.87,
+          "change_pct": 23.22,
+          "action": "HOLD",
+          "note": "+23.2%利润、止损锁+10%(139.15)距现价+12%；医疗服务连续第2日入bottom5，未达'冷3日'轮出线，明日若第3日仍冷则按Rule 1离场"
+        },
+        {
+          "date": "2026-08-24",
+          "slot": "afternoon",
+          "price": 155.84,
+          "change_pct": 23.19,
+          "action": "HOLD",
+          "note": "+23.2%利润、止损锁+10%(139.15)距现价约10.7%安全垫；医疗服务连续第2日入bottom5(-4.33%)，未达'冷3日'轮出线，明日若第3日仍冷则按Rule 1机械离场，不被利润锚定"
+        },
+        {
+          "date": "2026-08-25",
+          "slot": "afternoon",
+          "price": 161.0,
+          "change_pct": 27.27,
+          "action": "HOLD",
+          "note": "PnL+27.3%，止损锁+10%(139.15)距现价约13.6%安全垫；H1超预期+上调全年指引+1260H诉讼获初步禁令进展（来源：证券时报8/9），逻辑未破；医疗服务今日退出bottom5，冷区连续仅2日未达'冷3日'轮出线"
+        },
+        {
+          "date": "2026-08-26",
+          "slot": "noon",
+          "price": 159.15,
+          "change_pct": 25.81,
+          "action": "HOLD",
+          "note": "+25.8%利润奔跑，止损锁+10%(139.15)距现价约12.6%安全垫；医疗服务今日再度入bottom5(-1.38%)但8/25退出已重置冷区计数，当前为连续第1日，未达Rule 1'冷3日'离场线；H1超预期+上调全年指引逻辑未破，HOLD并盯紧板块连续冷区"
+        },
+        {
+          "date": "2026-08-26",
+          "slot": "afternoon",
+          "price": 159.25,
+          "change_pct": 25.89,
+          "action": "HOLD",
+          "note": "+25.9%利润奔跑，止损锁+10%(139.15)距现价约12.6%安全垫；H1收入+38.9%、经调利润+83.2%、全年指引上调至585-605亿逻辑未破（来源：申万宏源研报8/4）；医疗服务今日入bottom5(-1.34%)但为冷区连续第1日（8/25退出已重置），未达'冷3日'离场线，盯紧"
+        },
+        {
+          "date": "2026-08-27",
+          "slot": "noon",
+          "price": 158.77,
+          "change_pct": 25.51,
+          "action": "HOLD",
+          "note": "H1收入+38.93%、净利110.8亿+29.43%、全年指引上调至585-605亿（来源：21世纪经济报道8/3）；现价158.77高于止损139.15(+10%锁定)，安全垫约12.4%；医疗服务今日退出bottom5，冷区计数重置，无卖出触发"
+        },
+        {
+          "date": "2026-08-27",
+          "slot": "afternoon",
+          "price": 159.94,
+          "change_pct": 26.43,
+          "action": "HOLD",
+          "note": "现价159.94(+0.43%)浮盈+26.4%，止损已锁+10%(139.15)；H1收入+38.9%、经调利润+83.2%、全年指引上调逻辑未破；医疗服务今日退出bottom5，冷区计数重置，无卖出触发"
+        },
+        {
+          "date": "2026-08-28",
+          "slot": "noon",
+          "price": 158.06,
+          "change_pct": 24.95,
+          "action": "HOLD",
+          "note": "浮盈+24.9%，止损139.15已锁+10%安全垫约12%；H1收入+38.9%、全年指引上调585-605亿(来源:药明康德官网)；但医疗服务今日再入bottom5(-1.56%)为冷区第1日，未达'冷3日'卖出线，盯紧板块计数"
+        },
+        {
+          "date": "2026-08-28",
+          "slot": "afternoon",
+          "price": 157.4,
+          "change_pct": 24.43,
+          "action": "HOLD",
+          "note": "浮盈+24.4%，止损已锁+10%(139.15)；医疗服务今日入bottom5(-2.13%)为冷区第1日，未达'冷3日'卖出线，明日续冷则计数2、后日触发无条件SELL"
+        },
+        {
+          "date": "2026-08-31",
+          "slot": "noon",
+          "price": 151.44,
+          "change_pct": 19.72,
+          "action": "HOLD",
+          "note": "浮盈+19.7%，止损已锁+10%(139.15)，现价151.44高于止损；今日-3.79%但医疗服务退出bottom5，冷区计数重置；中报强劲+上调全年指引(来源:药明康德官网)，无卖出触发"
+        },
+        {
+          "date": "2026-08-31",
+          "slot": "afternoon",
+          "price": 154.78,
+          "change_pct": 22.36,
+          "action": "HOLD",
+          "note": "浮盈+22.4%，止损已锁+10%(139.15)，现价154.78高于止损；医疗服务今日退出bottom5、冷区计数重置；中报强劲并上调全年指引至585-605亿（来源：药明康德公告/新京报），无卖出触发"
+        },
+        {
+          "date": "2026-09-01",
+          "slot": "noon",
+          "price": 153.12,
+          "change_pct": 21.04,
+          "action": "HOLD",
+          "note": "浮盈+21.0%，止损已锁+10%(139.15)，现价153.12高于止损；中报H1营收+38.93%/净利110.8亿+29.43%，全面上调全年指引至585-605亿(来源:新京报/腾讯新闻8/4)；医疗服务退出bottom5，冷区计数重置，无卖出触发"
+        },
+        {
+          "date": "2026-09-01",
+          "slot": "afternoon",
+          "price": 154.4,
+          "change_pct": 22.06,
+          "action": "HOLD",
+          "note": "浮盈+22.1%，止损已锁+10%(139.15)，现价154.4远高于止损；中报H1营收+38.93%/归母净利110.8亿+29.43%，全年指引上调至585-605亿(来源:新京报8/3)；医疗服务未入bottom5，无卖出触发"
+        },
+        {
+          "date": "2026-09-02",
+          "slot": "afternoon",
+          "price": 155.99,
+          "change_pct": 23.31,
+          "action": "HOLD",
+          "note": "浮盈+23.3%，止损已锁+10%(139.15)，现价155.99远高于止损；中报上调全年指引至585-605亿(来源：输入events/新京报)；医疗服务未入bottom5，无卖出触发"
+        },
+        {
+          "date": "2026-09-03",
+          "slot": "noon",
+          "price": 154.83,
+          "change_pct": 22.4,
+          "action": "HOLD",
+          "note": "浮盈+22.4%，止损已锁+10%(139.15)，现价154.83远高于止损；医疗服务未入bottom5，无卖出触发"
+        },
+        {
+          "date": "2026-09-04",
+          "slot": "noon",
+          "price": 154.78,
+          "change_pct": 22.36,
+          "action": "HOLD",
+          "note": "浮盈+22.4%远高于+10%止损139.15，未触发卖出规则；医疗服务未入bottom5（CRO 9/2曾跌2%但今日不在冷区），让利润奔跑"
+        },
+        {
+          "date": "2026-09-04",
+          "slot": "afternoon",
+          "price": 153.83,
+          "change_pct": 21.6,
+          "action": "HOLD",
+          "note": "浮盈+21.6%远超+10%止损139.15，未触发卖出规则；医疗服务未入Bottom5，让利润奔跑"
+        },
+        {
+          "date": "2026-09-07",
+          "slot": "noon",
+          "price": 152.98,
+          "change_pct": 20.93,
+          "action": "HOLD",
+          "note": "浮盈+20.9%远超+10%止损139.15；中报超预期+1260H诉讼进展+中金上调目标价至167元（来源：证券时报），医疗服务未入bottom5，让利润奔跑。"
+        },
+        {
+          "date": "2026-09-10",
+          "slot": "noon",
+          "price": 154.37,
+          "change_pct": 22.03,
+          "action": "HOLD",
+          "note": "中报超预期+上调2026指引至585-605亿+1260H胜诉（来源：新浪/知乎研报）；+22%已把止损抬到+10%（139.15），医疗服务未入bottom5，让利润奔跑"
+        },
+        {
+          "date": "2026-09-10",
+          "slot": "afternoon",
+          "price": 154.5,
+          "change_pct": 22.13,
+          "action": "HOLD",
+          "note": "浮盈+22.1%，止损已在+10%(139.15)；中报指引上调至585-605亿+1260H胜诉+在手订单664.3亿同比+25%(来源：新浪财经/知乎研报检索)；医疗服务未入Bottom5，让利润奔跑"
+        },
+        {
+          "date": "2026-09-14",
+          "slot": "noon",
+          "price": 157.52,
+          "change_pct": 24.52,
+          "action": "HOLD",
+          "note": "医疗服务今日板块#1(+4.01%)，CRO/CXO主线延续；浮盈+24.5%，止损已抬至+10%(139.15)，让利润奔跑"
+        },
+        {
+          "date": "2026-09-15",
+          "slot": "noon",
+          "price": 157.66,
+          "change_pct": 24.63,
+          "action": "HOLD",
+          "note": "浮盈+24.6%，止损已在+10%(139.15)；CRO/CXO景气延续（上调2026指引、在手订单近600亿创新高、TIDES高增，来源：东方财富/证券时报检索）；医疗服务未入冷区，让利润奔跑"
+        },
+        {
+          "date": "2026-09-15",
+          "slot": "afternoon",
+          "price": 156.67,
+          "change_pct": 23.85,
+          "action": "HOLD",
+          "note": "浮盈+23.9%，止损已在+10%(139.15)；CRO/CXO景气延续（上调2026指引、在手订单近600亿创新高），医疗服务未入冷区，让利润奔跑"
+        },
+        {
+          "date": "2026-09-16",
+          "slot": "noon",
+          "price": 157.36,
+          "change_pct": 24.4,
+          "action": "HOLD",
+          "note": "浮盈+24.4%，止损已锁+10%(139.15)；CXO龙头（半年报扣非+89%、在手订单664亿创新高，来源：经济观察报），医疗服务未入冷区，让利润奔跑"
+        },
+        {
+          "date": "2026-09-16",
+          "slot": "afternoon",
+          "price": 157.71,
+          "change_pct": 24.67,
+          "action": "HOLD",
+          "note": "浮盈+24.7%，止损已锁+10%(139.15)；CXO龙头(在手订单664亿创新高，来源：经济观察报)，医疗服务未入冷区，让利润奔跑"
+        },
+        {
+          "date": "2026-09-17",
+          "slot": "noon",
+          "price": 160.94,
+          "change_pct": 27.23,
+          "action": "HOLD",
+          "note": "浮盈+27.2%，止损已锁+10%(139.15)；CXO龙头，医疗服务未入冷区，让利润奔跑"
+        },
+        {
+          "date": "2026-09-17",
+          "slot": "afternoon",
+          "price": 160.49,
+          "change_pct": 26.87,
+          "action": "HOLD",
+          "note": "浮盈+26.9%，止损已锁+10%(139.15)；CXO龙头(在手订单664亿创新高，来源:经济观察报)，医疗服务未入冷区，让利润奔跑"
+        },
+        {
+          "date": "2026-09-18",
+          "slot": "noon",
+          "price": 160.56,
+          "change_pct": 26.92,
+          "action": "HOLD",
+          "note": "浮盈+26.9%，止损已锁+10%(139.15)；CXO龙头在手订单664亿创新高(来源:东方财富)，让利润奔跑"
+        },
+        {
+          "date": "2026-09-18",
+          "slot": "afternoon",
+          "price": 160.0,
+          "change_pct": 26.48,
+          "action": "HOLD",
+          "note": "浮盈+26.5%，止损已锁+10%(139.15)；CXO龙头在手订单664亿并上调全年指引(界面/财闻)，十五五规划利好，让利润奔跑"
+        },
+        {
+          "date": "2026-09-21",
+          "slot": "noon",
+          "price": 166.78,
+          "change_pct": 31.84,
+          "action": "HOLD",
+          "note": "浮盈+31.8%让利润奔跑，止损已锁+10%(139.15)；医疗服务今日+4.03%热区，CXO龙头在手订单664.3亿创新高(来源:证券时报/东方财富)，政策+订单双催化；今日+4.24%"
+        },
+        {
+          "date": "2026-09-21",
+          "slot": "afternoon",
+          "price": 167.96,
+          "change_pct": 32.77,
+          "action": "HOLD",
+          "note": "浮盈+32.8%让利润奔跑，止损已锁+10%(139.15)；医疗服务今日+4.53%热区，在手订单664.3亿创新高(来源:东方财富8/3中报)、CRO景气延续"
+        },
+        {
+          "date": "2026-09-22",
+          "slot": "noon",
+          "price": 168.14,
+          "change_pct": 32.92,
+          "action": "HOLD",
+          "note": "浮盈+32.9%让利润奔跑，止损已锁+10%(139.15)；CRO/创新药主线强势（来源：证券时报09-21），在手订单与政策双催化延续；margin adding"
+        },
+        {
+          "date": "2026-09-22",
+          "slot": "afternoon",
+          "price": 167.85,
+          "change_pct": 32.69,
+          "action": "HOLD",
+          "note": "浮盈+32.7%让利润奔跑，止损已锁+10%(139.15)；CRO/创新药主线今日降温但趋势未破坏，在手订单664.3亿(来源:东方财富8/3中报)支撑；持有"
+        },
+        {
+          "date": "2026-09-23",
+          "slot": "noon",
+          "price": 167.46,
+          "change_pct": 32.38,
+          "action": "HOLD",
+          "note": "浮盈+32.4%让利润奔跑，止损已锁+10%(139.15)；CXO龙头，在手订单664.3亿（来源：东方财富8-3中报），'十五五'规划将CRO/CDMO提升为产业基础设施（来源：工银瑞信9-22）"
+        }
+      ],
+      "exitDate": null,
+      "exitPrice": null,
+      "exitReason": null,
+      "returnPct": null,
+      "holdingDays": null,
+      "lessonLearned": null,
+      "createdAt": "2026-07-31T11:45:38.795030+08:00",
+      "updatedAt": "2026-09-23T11:40:03.430501+08:00",
+      "trackerVersion": "2.1",
+      "entrySlot": "noon"
+    }
+  },
+  "closed_positions": {
+    "000703": {
+      "code": "000703",
+      "name": "恒逸石化",
+      "status": "closed",
+      "entryDate": "2026-07-29",
+      "exitDate": "2026-09-14",
+      "entryPrice": 15.6,
+      "exitPrice": 16.98,
+      "returnPct": 8.85,
+      "holdingDays": 32,
+      "sector": "石油石化",
+      "lessonLearned": ""
+    },
+    "000811": {
+      "code": "000811",
+      "name": "冰轮环境",
+      "status": "closed",
+      "entryDate": "2026-07-23",
+      "exitDate": "2026-07-24",
+      "entryPrice": 42.85,
+      "exitPrice": 41.2,
+      "returnPct": -3.85,
+      "holdingDays": 1,
+      "sector": "通用设备",
+      "lessonLearned": ""
+    },
+    "001389": {
+      "code": "001389",
+      "name": "广合科技",
+      "status": "closed",
+      "entryDate": "2026-07-27",
+      "exitDate": "2026-07-28",
+      "entryPrice": 160.5,
+      "exitPrice": 152.9,
+      "returnPct": -4.74,
+      "holdingDays": 1,
+      "sector": "元件",
+      "lessonLearned": ""
+    },
+    "002046": {
+      "code": "002046",
+      "name": "国机精工",
+      "status": "closed",
+      "entryDate": "2026-03-10",
+      "exitDate": "2026-03-12",
+      "entryPrice": 52.3,
+      "exitPrice": 50.04,
+      "returnPct": -4.32,
+      "holdingDays": 2,
+      "sector": "通用设备",
+      "lessonLearned": ""
+    },
+    "002121": {
+      "code": "002121",
+      "name": "科陆电子",
+      "status": "closed",
+      "entryDate": "2026-03-10",
+      "exitDate": "2026-03-26",
+      "entryPrice": 9.75,
+      "exitPrice": 8.23,
+      "returnPct": -15.59,
+      "holdingDays": 12,
+      "sector": "电网设备",
+      "lessonLearned": ""
+    },
+    "002138": {
+      "code": "002138",
+      "name": "顺络电子",
+      "status": "closed",
+      "entryDate": "2026-08-04",
+      "exitDate": "2026-08-19",
+      "entryPrice": 43.51,
+      "exitPrice": 47.93,
+      "returnPct": 10.16,
+      "holdingDays": 10,
+      "sector": "元件",
+      "lessonLearned": ""
+    },
+    "002192": {
+      "code": "002192",
+      "name": "融捷股份",
+      "status": "closed",
+      "entryDate": "2026-07-03",
+      "exitDate": "2026-07-08",
+      "entryPrice": 92.09,
+      "exitPrice": 87.84,
+      "returnPct": -4.62,
+      "holdingDays": 3,
+      "sector": "能源金属",
+      "lessonLearned": ""
+    },
+    "002436": {
+      "code": "002436",
+      "name": "兴森科技",
+      "status": "closed",
+      "entryDate": "2026-06-15",
+      "exitDate": "2026-06-23",
+      "entryPrice": 39.76,
+      "exitPrice": 48.5,
+      "returnPct": 21.98,
+      "holdingDays": 5,
+      "sector": "元件",
+      "lessonLearned": ""
+    },
+    "002595": {
+      "code": "002595",
+      "name": "豪迈科技",
+      "status": "closed",
+      "entryDate": "2026-03-10",
+      "exitDate": "2026-03-12",
+      "entryPrice": 95.53,
+      "exitPrice": 92.0,
+      "returnPct": -3.7,
+      "holdingDays": 2,
+      "sector": "专用设备",
+      "lessonLearned": ""
+    },
+    "002821": {
+      "code": "002821",
+      "name": "凯莱英",
+      "status": "closed",
+      "entryDate": "2026-07-23",
+      "exitDate": "2026-07-24",
+      "entryPrice": 163.54,
+      "exitPrice": 158.22,
+      "returnPct": -3.25,
+      "holdingDays": 1,
+      "sector": "医疗服务",
+      "lessonLearned": ""
+    },
+    "002916": {
+      "code": "002916",
+      "name": "深南电路",
+      "status": "closed",
+      "entryDate": "2026-07-31",
+      "exitDate": "2026-08-03",
+      "entryPrice": 308.35,
+      "exitPrice": 304.31,
+      "returnPct": -1.31,
+      "holdingDays": 1,
+      "sector": "元件",
+      "lessonLearned": ""
+    },
+    "002947": {
+      "code": "002947",
+      "name": "恒铭达",
+      "status": "closed",
+      "entryDate": "2026-06-09",
+      "exitDate": "2026-06-22",
+      "entryPrice": 83.55,
+      "exitPrice": 85.88,
+      "returnPct": 2.79,
+      "holdingDays": 8,
+      "sector": "消费电子",
+      "lessonLearned": ""
+    },
+    "300001": {
+      "code": "300001",
+      "name": "特锐德",
+      "status": "closed",
+      "entryDate": "2026-08-04",
+      "exitDate": "2026-08-19",
+      "entryPrice": 35.66,
+      "exitPrice": 36.46,
+      "returnPct": 2.24,
+      "holdingDays": 10,
+      "sector": "电网设备",
+      "lessonLearned": ""
+    },
+    "300037": {
+      "code": "300037",
+      "name": "新宙邦",
+      "status": "closed",
+      "entryDate": "2026-06-09",
+      "exitDate": "2026-06-10",
+      "entryPrice": 75.11,
+      "exitPrice": 71.14,
+      "returnPct": -5.29,
+      "holdingDays": 1,
+      "sector": "电池化学品",
+      "lessonLearned": ""
+    },
+    "300236": {
+      "code": "300236",
+      "name": "上海新阳",
+      "status": "closed",
+      "entryDate": "2026-06-09",
+      "exitDate": "2026-07-02",
+      "entryPrice": 93.96,
+      "exitPrice": 121.98,
+      "returnPct": 29.82,
+      "holdingDays": 16,
+      "sector": "电子化学品Ⅱ",
+      "lessonLearned": ""
+    },
+    "300373": {
+      "code": "300373",
+      "name": "扬杰科技",
+      "status": "closed",
+      "entryDate": "2026-02-13",
+      "exitDate": "2026-03-03",
+      "entryPrice": 86.07,
+      "exitPrice": 79.0,
+      "returnPct": -8.21,
+      "holdingDays": 6,
+      "sector": "功率半导体",
+      "lessonLearned": "半导体涨价催化thesis需要验证业绩兑现周期。入场时RPS=88.4%合理但催化剂(MCU涨价)偏概念化，无明确业绩数据支撑。开仓后14天趋势持续恶化，说明入场时机不佳(02-13买入后连续回调)。教训：催化剂需更具体(如有明确涨价幅度/订单数据)，不能仅依赖行业趋势性判断。"
+    },
+    "300408": {
+      "code": "300408",
+      "name": "三环集团",
+      "status": "closed",
+      "entryDate": "2026-07-31",
+      "exitDate": "2026-08-19",
+      "entryPrice": 115.07,
+      "exitPrice": 112.2,
+      "returnPct": -2.49,
+      "holdingDays": 12,
+      "sector": "元件",
+      "lessonLearned": ""
+    },
+    "300438": {
+      "code": "300438",
+      "name": "鹏辉能源",
+      "status": "closed",
+      "entryDate": "2026-06-30",
+      "exitDate": "2026-07-01",
+      "entryPrice": 82.3,
+      "exitPrice": 79.63,
+      "returnPct": -3.24,
+      "holdingDays": 1,
+      "sector": "电池",
+      "lessonLearned": ""
+    },
+    "300503": {
+      "code": "300503",
+      "name": "昊志机电",
+      "status": "closed",
+      "entryDate": "2026-07-27",
+      "exitDate": "2026-07-28",
+      "entryPrice": 65.67,
+      "exitPrice": 64.54,
+      "returnPct": -1.72,
+      "holdingDays": 1,
+      "sector": "通用设备",
+      "lessonLearned": ""
+    },
+    "300677": {
+      "code": "300677",
+      "name": "英科医疗",
+      "status": "closed",
+      "entryDate": "2026-04-20",
+      "exitDate": "2026-04-20",
+      "entryPrice": 54.2,
+      "exitPrice": 53.55,
+      "returnPct": -1.2,
+      "holdingDays": 0,
+      "sector": "医疗器械",
+      "lessonLearned": ""
+    },
+    "300684": {
+      "code": "300684",
+      "name": "中石科技",
+      "status": "closed",
+      "entryDate": "2026-02-10",
+      "exitDate": "2026-03-09",
+      "entryPrice": 55.39,
+      "exitPrice": 51.64,
+      "returnPct": -6.77,
+      "holdingDays": 13,
+      "sector": "散热材料",
+      "lessonLearned": ""
+    },
+    "300726": {
+      "code": "300726",
+      "name": "宏达电子",
+      "status": "closed",
+      "entryDate": "2026-07-10",
+      "exitDate": "2026-07-13",
+      "entryPrice": 69.33,
+      "exitPrice": 61.4,
+      "returnPct": -11.44,
+      "holdingDays": 1,
+      "sector": "军工电子Ⅱ",
+      "lessonLearned": ""
+    },
+    "301003": {
+      "code": "301003",
+      "name": "江苏博云",
+      "status": "closed",
+      "entryDate": "2026-04-20",
+      "exitDate": "2026-04-27",
+      "entryPrice": 52.05,
+      "exitPrice": 61.55,
+      "returnPct": 18.25,
+      "holdingDays": 5,
+      "sector": "塑料",
+      "lessonLearned": ""
+    },
+    "301216": {
+      "code": "301216",
+      "name": "万凯新材",
+      "status": "closed",
+      "entryDate": "2026-05-19",
+      "exitDate": "2026-05-20",
+      "entryPrice": 28.76,
+      "exitPrice": 28.8,
+      "returnPct": 0.14,
+      "holdingDays": 1,
+      "sector": "塑料",
+      "lessonLearned": ""
+    },
+    "600096": {
+      "code": "600096",
+      "name": "云天化",
+      "status": "closed",
+      "entryDate": "2026-02-26",
+      "exitDate": "2026-03-10",
+      "entryPrice": 44.05,
+      "exitPrice": 41.16,
+      "returnPct": -6.56,
+      "holdingDays": 8,
+      "sector": "磷化工",
+      "lessonLearned": ""
+    },
+    "600160": {
+      "code": "600160",
+      "name": "巨化股份",
+      "status": "closed",
+      "entryDate": "2026-08-13",
+      "exitDate": "2026-08-18",
+      "entryPrice": 41.2,
+      "exitPrice": 39.72,
+      "returnPct": -3.59,
+      "holdingDays": 3,
+      "sector": "化学制品",
+      "lessonLearned": ""
+    },
+    "600176": {
+      "code": "600176",
+      "name": "中国巨石",
+      "status": "closed",
+      "entryDate": "2026-07-29",
+      "exitDate": "2026-07-30",
+      "entryPrice": 38.39,
+      "exitPrice": 36.12,
+      "returnPct": -5.91,
+      "holdingDays": 1,
+      "sector": "建筑材料",
+      "lessonLearned": ""
+    },
+    "600268": {
+      "code": "600268",
+      "name": "国电南自",
+      "status": "closed",
+      "entryDate": "2026-04-16",
+      "exitDate": "2026-04-24",
+      "entryPrice": 15.41,
+      "exitPrice": 15.06,
+      "returnPct": -2.27,
+      "holdingDays": 6,
+      "sector": "电网设备",
+      "lessonLearned": ""
+    },
+    "600295": {
+      "code": "600295",
+      "name": "鄂尔多斯",
+      "status": "closed",
+      "entryDate": "2026-04-16",
+      "exitDate": "2026-04-20",
+      "entryPrice": 15.0,
+      "exitPrice": 14.92,
+      "returnPct": -0.53,
+      "holdingDays": 2,
+      "sector": "冶钢原料",
+      "lessonLearned": ""
+    },
+    "600301": {
+      "code": "600301",
+      "name": "华锡有色",
+      "status": "closed",
+      "entryDate": "2026-05-22",
+      "exitDate": "2026-05-27",
+      "entryPrice": 54.25,
+      "exitPrice": 57.35,
+      "returnPct": 5.71,
+      "holdingDays": 3,
+      "sector": "有色金属",
+      "lessonLearned": ""
+    },
+    "600426": {
+      "code": "600426",
+      "name": "华鲁恒升",
+      "status": "closed",
+      "entryDate": "2026-04-07",
+      "exitDate": "2026-04-08",
+      "entryPrice": 35.55,
+      "exitPrice": 38.0,
+      "returnPct": 6.89,
+      "holdingDays": 1,
+      "sector": "基础化工",
+      "lessonLearned": ""
+    },
+    "600498": {
+      "code": "600498",
+      "name": "烽火通信",
+      "status": "closed",
+      "entryDate": "2026-04-16",
+      "exitDate": "2026-04-24",
+      "entryPrice": 47.96,
+      "exitPrice": 51.94,
+      "returnPct": 8.3,
+      "holdingDays": 6,
+      "sector": "通信设备",
+      "lessonLearned": ""
+    },
+    "600499": {
+      "code": "600499",
+      "name": "科达制造",
+      "status": "closed",
+      "entryDate": "2026-02-25",
+      "exitDate": "2026-03-10",
+      "entryPrice": 17.48,
+      "exitPrice": 17.8,
+      "returnPct": 1.83,
+      "holdingDays": 9,
+      "sector": "建材",
+      "lessonLearned": ""
+    },
+    "600885": {
+      "code": "600885",
+      "name": "宏发股份",
+      "status": "closed",
+      "entryDate": "2026-08-04",
+      "exitDate": "2026-08-12",
+      "entryPrice": 35.75,
+      "exitPrice": 34.65,
+      "returnPct": -3.08,
+      "holdingDays": 6,
+      "sector": "电网设备",
+      "lessonLearned": ""
+    },
+    "600988": {
+      "code": "600988",
+      "name": "赤峰黄金",
+      "status": "closed",
+      "entryDate": "2026-09-16",
+      "exitDate": "2026-09-17",
+      "entryPrice": 45.44,
+      "exitPrice": 43.03,
+      "returnPct": -5.3,
+      "holdingDays": 1,
+      "sector": "贵金属",
+      "lessonLearned": ""
+    },
+    "601168": {
+      "code": "601168",
+      "name": "西部矿业",
+      "status": "closed",
+      "entryDate": "2026-08-05",
+      "exitDate": "2026-08-11",
+      "entryPrice": 40.64,
+      "exitPrice": 39.21,
+      "returnPct": -3.52,
+      "holdingDays": 4,
+      "sector": "工业金属",
+      "lessonLearned": ""
+    },
+    "601208": {
+      "code": "601208",
+      "name": "东材科技",
+      "status": "closed",
+      "entryDate": "2026-04-07",
+      "exitDate": "2026-04-08",
+      "entryPrice": 31.77,
+      "exitPrice": 33.12,
+      "returnPct": 4.25,
+      "holdingDays": 1,
+      "sector": "基础化工",
+      "lessonLearned": ""
+    },
+    "601615": {
+      "code": "601615",
+      "name": "明阳智能",
+      "status": "closed",
+      "entryDate": "2026-03-12",
+      "exitDate": "2026-03-26",
+      "entryPrice": 22.03,
+      "exitPrice": 17.41,
+      "returnPct": -20.97,
+      "holdingDays": 10,
+      "sector": "风电设备",
+      "lessonLearned": ""
+    },
+    "601958": {
+      "code": "601958",
+      "name": "金钼股份",
+      "status": "closed",
+      "entryDate": "2026-07-14",
+      "exitDate": "2026-07-15",
+      "entryPrice": 22.71,
+      "exitPrice": 21.98,
+      "returnPct": -3.21,
+      "holdingDays": 1,
+      "sector": "工业金属",
+      "lessonLearned": ""
+    },
+    "603127": {
+      "code": "603127",
+      "name": "昭衍新药",
+      "status": "closed",
+      "entryDate": "2026-08-04",
+      "exitDate": "2026-08-21",
+      "entryPrice": 44.35,
+      "exitPrice": 49.43,
+      "returnPct": 11.45,
+      "holdingDays": 12,
+      "sector": "医疗服务",
+      "lessonLearned": ""
+    },
+    "603259": {
+      "code": "603259",
+      "name": "药明康德",
+      "status": "closed",
+      "entryDate": "2026-07-29",
+      "exitDate": "2026-07-30",
+      "entryPrice": 126.5,
+      "exitPrice": 122.0,
+      "returnPct": -3.56,
+      "holdingDays": 1,
+      "sector": "医药生物",
+      "lessonLearned": ""
+    },
+    "605167": {
+      "code": "605167",
+      "name": "利柏特",
+      "status": "closed",
+      "entryDate": "2026-04-07",
+      "exitDate": "2026-04-16",
+      "entryPrice": 16.38,
+      "exitPrice": 17.89,
+      "returnPct": 9.22,
+      "holdingDays": 7,
+      "sector": "建筑装饰",
+      "lessonLearned": ""
+    },
+    "688002": {
+      "code": "688002",
+      "name": "睿创微纳",
+      "status": "closed",
+      "entryDate": "2026-02-03",
+      "exitDate": "2026-03-04",
+      "entryPrice": 114.65,
+      "exitPrice": 109.19,
+      "returnPct": -4.76,
+      "holdingDays": 15,
+      "sector": "半导体设备",
+      "lessonLearned": "突破关键阻力位后未能守住(¥120→¥109)是趋势恶化信号。time_decay规则对趋势型标的(非事件驱动型)仍然适用。延期观察的前提是动能在恢复，而非在恶化。"
+    },
+    "688019": {
+      "code": "688019",
+      "name": "安集科技",
+      "status": "closed",
+      "entryDate": "2026-08-17",
+      "exitDate": "2026-08-19",
+      "entryPrice": 261.92,
+      "exitPrice": 254.05,
+      "returnPct": -3.0,
+      "holdingDays": 1,
+      "sector": "电子化学品Ⅱ",
+      "lessonLearned": ""
+    },
+    "688025": {
+      "code": "688025",
+      "name": "杰普特",
+      "status": "closed",
+      "entryDate": "2026-04-01",
+      "exitDate": "2026-04-02",
+      "entryPrice": 224.0,
+      "exitPrice": 232.9,
+      "returnPct": 3.97,
+      "holdingDays": 1,
+      "sector": "激光设备",
+      "lessonLearned": ""
+    },
+    "688037": {
+      "code": "688037",
+      "name": "芯源微",
+      "status": "closed",
+      "entryDate": "2026-04-08",
+      "exitDate": "2026-04-16",
+      "entryPrice": 177.36,
+      "exitPrice": 187.44,
+      "returnPct": 5.68,
+      "holdingDays": 6,
+      "sector": "电子/半导体设备",
+      "lessonLearned": ""
+    },
+    "688331": {
+      "code": "688331",
+      "name": "荣昌生物",
+      "status": "closed",
+      "entryDate": "2026-07-27",
+      "exitDate": "2026-07-28",
+      "entryPrice": 121.44,
+      "exitPrice": 120.42,
+      "returnPct": -0.84,
+      "holdingDays": 1,
+      "sector": "生物制品",
+      "lessonLearned": ""
+    },
+    "688372": {
+      "code": "688372",
+      "name": "伟测科技",
+      "status": "closed",
+      "entryDate": "2026-07-14",
+      "exitDate": "2026-07-15",
+      "entryPrice": 164.02,
+      "exitPrice": 150.19,
+      "returnPct": -8.43,
+      "holdingDays": 1,
+      "sector": "集成电路封测",
+      "lessonLearned": ""
+    },
+    "688378": {
+      "code": "688378",
+      "name": "奥来德",
+      "status": "closed",
+      "entryDate": "2026-07-10",
+      "exitDate": "2026-07-10",
+      "entryPrice": 53.38,
+      "exitPrice": 51.24,
+      "returnPct": -4.01,
+      "holdingDays": 0,
+      "sector": "光学光电子",
+      "lessonLearned": ""
+    },
+    "688401": {
+      "code": "688401",
+      "name": "路维光电",
+      "status": "closed",
+      "entryDate": "2026-06-09",
+      "exitDate": "2026-07-02",
+      "entryPrice": 72.58,
+      "exitPrice": 95.0,
+      "returnPct": 30.89,
+      "holdingDays": 16,
+      "sector": "半导体材料",
+      "lessonLearned": ""
+    },
+    "688630": {
+      "code": "688630",
+      "name": "芯碁微装",
+      "status": "closed",
+      "entryDate": "2026-03-02",
+      "exitDate": "2026-03-03",
+      "entryPrice": 201.72,
+      "exitPrice": 186.6,
+      "returnPct": -7.5,
+      "holdingDays": 1,
+      "sector": "半导体设备",
+      "lessonLearned": "IV Rank极低(12.2%)时不应开新仓，尤其是已经涨了8%的标的。LEARNINGS#10(等回调)和#13(检查多日累计涨幅)的组合应用：即使催化再强(+1522%)，在市场波动率极低+短期涨幅已大的情况下入场，遭遇系统性回调的损失会很大。新规则：当IV Rank<15%且候选标的5日涨幅>6%时，一律WATCH等回调，不开仓。"
+    },
+    "688981": {
+      "code": "688981",
+      "name": "中芯国际",
+      "status": "closed",
+      "entryDate": "2026-08-05",
+      "exitDate": "2026-08-24",
+      "entryPrice": 121.1,
+      "exitPrice": 120.72,
+      "returnPct": -0.31,
+      "holdingDays": 12,
+      "sector": "半导体",
+      "lessonLearned": ""
+    }
+  }
+}

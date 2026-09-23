@@ -16,7 +16,7 @@
   "entryPrice": 42.85,
   "targetPrice": 46.71,
   "stopLoss": 40.71,
-  "currentStop": 40.71,
+  "currentStop": 42.85,
   "allocation_pct": 4.0,
   "shares": 800,
   "allocatedCapital": 34280.0,
@@ -132,6 +132,16 @@
       "change_pct": 7.63,
       "action": "HOLD",
       "note": "浮盈+7.6%逼近+10%抬损线(47.14)未触发；医疗服务/CRO主线9/21爆发后今日降温未入top5；margin adding(+13.4%)；止损40.71保持"
+    },
+    {
+      "date": "2026-09-23",
+      "slot": "noon",
+      "price": 47.79,
+      "change_pct": 11.53,
+      "action": "RAISE_STOP",
+      "note": "浮盈+11.5%已越过+10%抬损线(47.14)，按Rule5机械抬损至保本42.85，将快赢家转为低风险持有",
+      "old_stop": 40.71,
+      "new_stop": 42.85
     }
   ],
   "exitDate": null,
@@ -141,6 +151,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-09-14T11:41:41.947954+08:00",
-  "updatedAt": "2026-09-22T15:12:38.708565+08:00",
+  "updatedAt": "2026-09-23T11:40:03.422741+08:00",
   "trackerVersion": "2.1"
 }

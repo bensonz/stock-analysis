@@ -1,0 +1,236 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "房地产服务",
+        "5d_pct": 4.13,
+        "trend": "policy-driven"
+      },
+      {
+        "name": "其他家电Ⅱ",
+        "5d_pct": 3.04,
+        "trend": "defensive"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": 2.45,
+        "trend": "steady"
+      },
+      {
+        "name": "非白酒",
+        "5d_pct": 2.0,
+        "trend": "defensive"
+      },
+      {
+        "name": "生物制品",
+        "5d_pct": 1.7,
+        "trend": "cooling"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "焦炭Ⅱ",
+        "5d_pct": -4.06,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": -3.04,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -2.96,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "影视院线",
+        "5d_pct": -2.79,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "广告营销",
+        "5d_pct": -2.67,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/5 positions in today's top5 hot sectors; no position sector in bottom5",
+    "regime": "Momentum (CRO/医疗服务/化学制药) cooling out of top5, defensive/policy sectors (地产服务/家电/白酒) taking over leadership — risk-off rotation day"
+  },
+  "position_decisions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "reason": "持有1日浮盈+3.55%未触发任何止损；原料药今日退出top5但'医药十五五'规划催化仍在发酵（来源：21财经/新京报9-18）；dist_ma5已+6.2%达追高线，故不加仓但也不卖赢家",
+      "sector_rank": "化学制药未入今日top5（生物制品+1.7%为医药链唯一top5）",
+      "new_stop": null,
+      "pnl_pct": 3.55,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "浮盈+49.5%让利润奔跑，止损已机械锁+10%(64.91)；持有约19日但收益远超3%，时间止损不适用；元件板块未入bottom5",
+      "sector_rank": "元件未入今日top5/bottom5",
+      "new_stop": null,
+      "pnl_pct": 49.47,
+      "days_held": 19,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+8.3%守住保本止损19.29；航运港口9-22入bottom5为转冷第1日，今日已修复出榜，未触发'冷3日才卖'；VLCC TD3C TCE破100万美元/天（来源：第一财经9-17），Q4为VLCC船队盈利最好季度（来源：招商轮船IR记录9-7）。此仓最脆弱，若板块连续冷满3日即按Rule1离场",
+      "sector_rank": "航运港口已修复，今日不在bottom5",
+      "new_stop": null,
+      "pnl_pct": 8.29,
+      "days_held": 15,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "RAISE_STOP",
+      "reason": "浮盈+11.5%已越过+10%抬损线(47.14)，按Rule5机械抬损至保本42.85，将快赢家转为低风险持有",
+      "sector_rank": "医疗服务未入今日top5（生物制品+1.7%为医药链top5）",
+      "new_stop": 42.85,
+      "pnl_pct": 11.53,
+      "days_held": 8,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+32.4%让利润奔跑，止损已锁+10%(139.15)；CXO龙头，在手订单664.3亿（来源：东方财富8-3中报），'十五五'规划将CRO/CDMO提升为产业基础设施（来源：工银瑞信9-22）",
+      "sector_rank": "医疗服务未入今日top5（生物制品+1.7%为医药链top5）",
+      "new_stop": null,
+      "pnl_pct": 32.38,
+      "days_held": 38,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688046",
+      "name": "药康生物",
+      "reason": "RPS120=99.36超过95%冷却上限，且dist_ma10=+14.0%超过8%追高线（enriched数据），双重否决",
+      "rps120": 99.36
+    },
+    {
+      "code": "301366",
+      "name": "一博科技",
+      "reason": "RPS120=98.87超过95%上限，dist_ma20=+20.4%严重超买",
+      "rps120": 98.87
+    },
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "reason": "RPS120=97.97超过95%上限，dist_ma5=+18.7%极端追高",
+      "rps120": 97.97
+    },
+    {
+      "code": "301165",
+      "name": "锐捷网络",
+      "reason": "RPS120=97.93超过95%冷却上限",
+      "rps120": 97.93
+    },
+    {
+      "code": "688222",
+      "name": "成都先导",
+      "reason": "RPS120=93.6处于扩展区但无豁免（净利增速不足50%），且dist_ma5=+12.4%、dist_ma10=+26.5%严重追高",
+      "rps120": 93.6
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "RPS120=93.15扩展区无豁免，dist_ma5=+9.5%、dist_ma10=+14.1%超过追高线，PE=597.9",
+      "rps120": 93.15
+    },
+    {
+      "code": "002832",
+      "name": "比音勒芬",
+      "reason": "RPS120=94.83扩展区，纺织服饰非热区，净利同比-18.7%无催化豁免，margin deleveraging",
+      "rps120": 94.83
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "RPS120=93.64扩展区，有色金属非Top10%板块，净利同比+11.5%不足50%豁免门槛",
+      "rps120": 93.64
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "重入（09-14刚以+8.85%离场），RPS120=93.21扩展区，净利同比-26.5%+2项风险，无豁免依据",
+      "rps120": 93.21
+    },
+    {
+      "code": "601918",
+      "name": "新集能源",
+      "reason": "RPS120=91.5甜点区但煤炭板块弱势（焦炭Ⅱ今日bottom5 -4.06%），板块不在Top30%，margin deleveraging，Rule 1否决",
+      "rps120": 91.5
+    },
+    {
+      "code": "000301",
+      "name": "东方盛虹",
+      "reason": "RPS120=89.19甜点区但石油石化非热区，2项风险（偿债/收益质量），弱宽度下无入场理由",
+      "rps120": 89.19
+    },
+    {
+      "code": "603132",
+      "name": "金徽股份",
+      "reason": "RPS120=86.78，有色金属非热区，大股东质押占持股78%，margin deleveraging",
+      "rps120": 86.78
+    },
+    {
+      "code": "600546",
+      "name": "山煤国际",
+      "reason": "RPS120=86.03，煤炭板块弱势（焦炭Ⅱ今日bottom5 -4.06%），板块重力优先",
+      "rps120": 86.03
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱宽度日（breadth 0.53:1 + 0/3指数绿）机械层仅给0.5×仓，且策略池无候选同时通过'板块Top30%+RPS甜点+不追高'三关时，正确动作是new_positions=[]而非凑starter仓",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "弱宽度下市场风险偏好收缩，追涨胜率骤降，持有现金的期望收益高于强行进场"
+    },
+    {
+      "text": "RPS冷却封顶（>95%禁入）与扩展区（92-95%）豁免机制今日协同拦截了全部高动量候选：策略池头部99.x/98.x触顶，扩展区候选无豁免且多只dist_ma5>6%追高",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "高RPS的rank-IC在门内为负，过热动量股短期均值回归概率大；MA距离过滤进一步剔除短线超买"
+    },
+    {
+      "text": "+10%机械抬损在弱势盘照常兑现：昭衍新药+11.5%越线即上移止损至保本42.85，把快赢家转成低风险持有，不需要重新判断市场方向",
+      "type": "heuristic",
+      "tags": [
+        "exit-rule",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "机械抬损锁住浮盈、降低回撤风险，在弱宽度下尤其宝贵"
+    }
+  ],
+  "market_summary": "弱宽度日：Up/Down 0.53:1（1874涨/3557跌），三大指数全绿（上证-0.36%/深成-0.58%/创业板-0.43%），涨停37/跌停10，无恐慌硬封锁但regime=weak仅给0.5×仓。领涨全是防御/政策板块（房地产服务+4.13%/家电/非白酒/生物制品），动量主线CRO与医疗服务退出top5——风险偏好收缩日。IV整体偏乐观（avg rank 0.2875），持仓proxy均在15-50%正常区间。纪律：不追高、不加仓、守住赢家；昭衍新药+10%抬损，其余HOLD；新仓空仓。",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}

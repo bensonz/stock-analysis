@@ -1,0 +1,78 @@
+{
+  "date": "2026-09-23",
+  "actions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "price": 25.07,
+      "pnl_pct": 3.55,
+      "note": "持有1日浮盈+3.55%未触发任何止损；原料药今日退出top5但'医药十五五'规划催化仍在发酵（来源：21财经/新京报9-18）；dist_ma5已+6.2%达追高线，故不加仓但也不卖赢家"
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 88.2,
+      "pnl_pct": 49.47,
+      "note": "浮盈+49.5%让利润奔跑，止损已机械锁+10%(64.91)；持有约19日但收益远超3%，时间止损不适用；元件板块未入bottom5"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 20.89,
+      "pnl_pct": 8.29,
+      "note": "浮盈+8.3%守住保本止损19.29；航运港口9-22入bottom5为转冷第1日，今日已修复出榜，未触发'冷3日才卖'；VLCC TD3C TCE破100万美元/天（来源：第一财经9-17），Q4为VLCC船队盈利最好季度（来源：招商轮船IR记录9-7）。此仓最脆弱，若板块连续冷满3日即按Rule1离场"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "RAISE_STOP",
+      "price": 47.79,
+      "pnl_pct": 11.53,
+      "note": "浮盈+11.5%已越过+10%抬损线(47.14)，按Rule5机械抬损至保本42.85，将快赢家转为低风险持有"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 167.46,
+      "pnl_pct": 32.38,
+      "note": "浮盈+32.4%让利润奔跑，止损已锁+10%(139.15)；CXO龙头，在手订单664.3亿（来源：东方财富8-3中报），'十五五'规划将CRO/CDMO提升为产业基础设施（来源：工银瑞信9-22）"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 983832.0,
+    "dayPnl": 2598.0,
+    "dayReturnPct": 0.26,
+    "totalReturnPct": -1.62,
+    "unrealizedPnl": 30658.0,
+    "realizedPnl": -46826.0,
+    "cashPct": 81.39
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.5268,
+    "up": 1874,
+    "down": 3557,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 37,
+    "limit_downs": 10,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.53:1, 0/3 major indices green, 37 limit-ups / 10 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "弱宽度日：Up/Down 0.53:1（1874涨/3557跌），三大指数全绿（上证-0.36%/深成-0.58%/创业板-0.43%），涨停37/跌停10，无恐慌硬封锁但regime=weak仅给0.5×仓。领涨全是防御/政策板块（房地产服务+4.13%/家电/非白酒/生物制品），动量主线CRO与医疗服务退出top5——风险偏好收缩日。IV整体偏乐观（avg rank 0.2875），持仓proxy均在15-50%正常区间。纪律：不追高、不加仓、守住赢家；昭衍新药+10%抬损，其余HOLD；新仓空仓。"
+  }
+}
