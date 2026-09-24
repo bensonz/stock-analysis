@@ -1,0 +1,188 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "其他家电Ⅱ",
+        "5d_pct": 4.31,
+        "trend": "defensive pop"
+      },
+      {
+        "name": "风电设备",
+        "5d_pct": 1.72,
+        "trend": "steady"
+      },
+      {
+        "name": "纺织制造",
+        "5d_pct": 1.36,
+        "trend": "steady"
+      },
+      {
+        "name": "城商行Ⅱ",
+        "5d_pct": 1.35,
+        "trend": "defensive"
+      },
+      {
+        "name": "教育",
+        "5d_pct": 1.14,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "贵金属",
+        "5d_pct": -4.11,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": -3.88,
+        "trend": "cooling"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": -3.27,
+        "trend": "cooling"
+      },
+      {
+        "name": "工业金属",
+        "5d_pct": -3.09,
+        "trend": "cooling"
+      },
+      {
+        "name": "房地产服务",
+        "5d_pct": -3.02,
+        "trend": "cooling"
+      }
+    ],
+    "position_alignment": "0/5持仓在今日top5；3/5医药(退潮催化未破)、1/5元件(今日bottom5第2转冷第1日)、1/5航运港口中性",
+    "regime": "科技→防御轮动加速，前期热点(元件/工业金属/贵金属)领跌；板块数字为输入提供的当日涨跌幅"
+  },
+  "position_decisions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "reason": "浮盈+3.68%未触发任何止损，2日仓不触发-3%首三日线；原料药今日退潮但'十五五'规划催化仍在(来源:东方财富/21经济网9-18)；止损23.0保持",
+      "sector_rank": "未入top5(医药今日退潮)",
+      "new_stop": 23.0,
+      "pnl_pct": 3.68,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "浮盈+46.9%让利润奔跑，止损已锁+10%(64.91)未触发；今日-4.62%为获利回吐；元件板块今日bottom5第2(-3.88%)为转冷第1日，未触发'冷3日才卖'，若连冷满3日按Rule1离场",
+      "sector_rank": "bottom 5 (今日第2, 转冷第1日)",
+      "new_stop": 64.91,
+      "pnl_pct": 46.86,
+      "days_held": 20,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+8.8%守住保本止损19.29；今日+1.01%修复；VLCC运价历史新高、Q4为VLCC盈利最好季度(来源:每日经济新闻/雪球9-7)；航运港口未入bottom5",
+      "sector_rank": "中游",
+      "new_stop": 19.29,
+      "pnl_pct": 8.81,
+      "days_held": 15,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+10.2%已过+10%抬损线、止损已机械锁保本42.85未触发；医疗服务今日退潮但CRO主线催化未破；让赢家奔跑",
+      "sector_rank": "中游(医药退潮)",
+      "new_stop": 42.85,
+      "pnl_pct": 10.18,
+      "days_held": 8,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+30.5%让利润奔跑，止损已锁+10%(139.15)未触发；CXO龙头、在手订单664.3亿(来源:东方财富8/3中报)，'十五五'规划将CRO/CDMO提升为产业基础设施(来源:工银瑞信9-22)",
+      "sector_rank": "中游(医药退潮)",
+      "new_stop": 139.15,
+      "pnl_pct": 30.54,
+      "days_held": 39,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688222",
+      "name": "成都先导",
+      "reason": "dist_ma10 +19.2%/dist_ma20 +28.2%严重追高(Rule 2b)，叠加恐慌hard block",
+      "rps120": 94.15
+    },
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "reason": "RPS120 98.13超95%上限(RPS过热)，dist_ma10 +24.2%追高；恐慌hard block",
+      "rps120": 98.13
+    },
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "09-29解禁67.85%股本事件风险；MA合规但恐慌hard block",
+      "rps120": 94.95
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "工业金属今日bottom5(-3.09%)冷板块，不进场",
+      "rps120": 92.98
+    },
+    {
+      "code": "002832",
+      "name": "比音勒芬",
+      "reason": "纺织服饰非top5，margin signal=deleveraging，恐慌hard block",
+      "rps120": 94.56
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌hard block再次拦下FOMO：广度0.25:1触发机械阻断，若无此闸门，成都先导(医药+AI催化)、海通发展等候选会被追入",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "恐慌盘面下候选个股的催化与RPS质量失真，唯一正确动作是保留现金"
+    },
+    {
+      "text": "元件板块今日入bottom5第2(转冷第1日)，奥士康持仓需按Rule1盯'冷3日才卖'纪律，与个股+46.9%浮盈无关",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "板块引力大于个股动量，连续转冷即触发离场"
+    },
+    {
+      "text": "节前缩量+高位股跳水+防御板块领涨(其他家电/城商行/教育)，验证科技→防御轮动加速",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "节前避险资金从高波动主线撤向低波动防御板块"
+    }
+  ],
+  "market_summary": "三大指数全绿(上证-0.93%/深成-1.74%/创业板-1.84%)，广度0.25:1(1070涨/4333跌)、39涨停/5跌停，entry_regime判定panic并hard block新仓(0/3指数收红)。节前缩量+高位股跳水，半导体/元件/AI硬件领跌(来源:网易/每日经济新闻)。IV整体中性(avg_rank 0.44)，深100ETF偏高0.57。前期主线医药(十五五规划)今日退潮但催化未破，元件转冷第1日。板块数字为输入提供的当日涨跌幅。",
+  "market_sentiment": "bearish",
+  "market_call": "防守观望"
+}

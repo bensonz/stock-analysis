@@ -1,0 +1,78 @@
+{
+  "date": "2026-09-24",
+  "actions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "price": 25.1,
+      "pnl_pct": 3.68,
+      "note": "浮盈+3.68%未触发任何止损，2日仓不触发-3%首三日线；原料药今日退潮但'十五五'规划催化仍在(来源:东方财富/21经济网9-18)；止损23.0保持"
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 86.66,
+      "pnl_pct": 46.86,
+      "note": "浮盈+46.9%让利润奔跑，止损已锁+10%(64.91)未触发；今日-4.62%为获利回吐；元件板块今日bottom5第2(-3.88%)为转冷第1日，未触发'冷3日才卖'，若连冷满3日按Rule1离场"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 20.99,
+      "pnl_pct": 8.81,
+      "note": "浮盈+8.8%守住保本止损19.29；今日+1.01%修复；VLCC运价历史新高、Q4为VLCC盈利最好季度(来源:每日经济新闻/雪球9-7)；航运港口未入bottom5"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 47.21,
+      "pnl_pct": 10.18,
+      "note": "浮盈+10.2%已过+10%抬损线、止损已机械锁保本42.85未触发；医疗服务今日退潮但CRO主线催化未破；让赢家奔跑"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 165.13,
+      "pnl_pct": 30.54,
+      "note": "浮盈+30.5%让利润奔跑，止损已锁+10%(139.15)未触发；CXO龙头、在手订单664.3亿(来源:东方财富8/3中报)，'十五五'规划将CRO/CDMO提升为产业基础设施(来源:工银瑞信9-22)"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 982184.0,
+    "dayPnl": -3180.0,
+    "dayReturnPct": -0.32,
+    "totalReturnPct": -1.78,
+    "unrealizedPnl": 29010.0,
+    "realizedPnl": -46826.0,
+    "cashPct": 81.53
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.2469,
+    "up": 1070,
+    "down": 4333,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 39,
+    "limit_downs": 5,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.25:1, 0/3 major indices green, 39 limit-ups / 5 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "三大指数全绿(上证-0.93%/深成-1.74%/创业板-1.84%)，广度0.25:1(1070涨/4333跌)、39涨停/5跌停，entry_regime判定panic并hard block新仓(0/3指数收红)。节前缩量+高位股跳水，半导体/元件/AI硬件领跌(来源:网易/每日经济新闻)。IV整体中性(avg_rank 0.44)，深100ETF偏高0.57。前期主线医药(十五五规划)今日退潮但催化未破，元件转冷第1日。板块数字为输入提供的当日涨跌幅。"
+  }
+}
