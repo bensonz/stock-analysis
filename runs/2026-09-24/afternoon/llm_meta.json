@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 112963,
+  "output_tokens": 13333,
+  "rounds": 2,
+  "duration_sec": 231.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月24日 大跌 原因 市场",
+        "max_results": 5
+      },
+      "result_length": 3095
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "VLCC 油运 运价 招商轮船 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3304
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "医药 十五五 规划 CRO 创新药 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3441
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "PCB 覆铜板 涨价 元件板块 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 2927
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "煤炭 焦煤 焦炭 价格 2026年9月 新集能源",
+        "max_results": 5
+      },
+      "result_length": 3047
+    }
+  ],
+  "fallback_used": false
+}

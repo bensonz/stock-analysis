@@ -1,0 +1,207 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": 8.8,
+        "trend": "领涨"
+      },
+      {
+        "name": "其他家电Ⅱ",
+        "5d_pct": 4.66,
+        "trend": "防御补涨"
+      },
+      {
+        "name": "纺织制造",
+        "5d_pct": 1.48,
+        "trend": "抗跌"
+      },
+      {
+        "name": "焦炭Ⅱ",
+        "5d_pct": 1.48,
+        "trend": "资源抗跌"
+      },
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": 1.31,
+        "trend": "油运共振"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "贵金属",
+        "5d_pct": -5.04,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": -4.49,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": -4.24,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": -4.05,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "工业金属",
+        "5d_pct": -3.75,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/5 positions in top5 hot sectors; 1/5 (奥士康/元件) in bottom5 cold (第1日)",
+    "regime": "恐慌盘：前期强势的元件/贵金属遭获利了结，防御(纺织/家电/林业)+资源(焦炭/油气)抗跌"
+  },
+  "position_decisions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "reason": "浮盈+4.5%，止损23.0未触发（当前25.3）；持仓3日不触发-3%首三日线；原料药未入top/bottom5；'十五五'规划催化仍在但今日医药退潮，不追卖",
+      "sector_rank": "中游（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 4.5,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "浮盈+47.1%让利润奔跑，止损已锁+10%(64.91)未触发；今日-4.47%为获利回吐；元件板块今日bottom5第2(-4.49%)为转冷第1日，未触发'冷3日才卖'，若连冷满3日按Rule1离场",
+      "sector_rank": "bottom5（元件-4.49%，冷第1日）",
+      "new_stop": null,
+      "pnl_pct": 47.1,
+      "days_held": 20,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+8.5%守保本止损19.29；今日+0.72%为5持仓中唯一翻红者；VLCC运价历史高位、Q4为VLCC盈利最好季度(来源:每经/搜狐9-7)，油气开采Ⅱ今日top5；航运港口未入bottom5",
+      "sector_rank": "中游（未入bottom5；油气开采Ⅱ为今日top5）",
+      "new_stop": null,
+      "pnl_pct": 8.5,
+      "days_held": 16,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+8.3%，止损已锁保本42.85未触发（当前46.39，缓冲7.6%）；医疗服务未入bottom5；CRO主线催化未破；让赢家奔跑",
+      "sector_rank": "中游（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 8.3,
+      "days_held": 9,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+28.4%让利润奔跑，止损已锁+10%(139.15)未触发（当前162.4）；CXO龙头、在手订单664.3亿(来源:东方财富8/3中报)；医疗服务未入bottom5",
+      "sector_rank": "中游（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 28.4,
+      "days_held": 38,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688222",
+      "name": "成都先导",
+      "reason": "Rule 2b硬拦截：dist_ma10_pct 13.5%>8%、dist_ma20_pct 24.3%>12%严重超买；且今日恐慌盘硬阻断新仓",
+      "rps120": 94.57
+    },
+    {
+      "code": "002832",
+      "name": "比音勒芬",
+      "reason": "个股指标合规(RPS120 94.38、MA距离未超线)，但margin deleveraging(净还款4日)+IV Rank 0.50，且今日恐慌盘硬阻断新仓",
+      "rps120": 94.38
+    },
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "2026/09/29解禁9.33亿股占总股本67.85%（输入事件），解禁窗口临近；且恐慌盘硬阻断新仓",
+      "rps120": 94.34
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "工业金属板块今日bottom5(-3.75%)转冷，Rule1禁入；且恐慌盘硬阻断新仓",
+      "rps120": 92.25
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "PE 567.6、dist_ma20_pct 10.3%临近追高线；且恐慌盘硬阻断新仓",
+      "rps120": 92.43
+    },
+    {
+      "code": "601918",
+      "name": "新集能源",
+      "reason": "margin deleveraging(chg5 -10.99%)+偿债压力风险；且恐慌盘硬阻断新仓",
+      "rps120": 91.65
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "重入标的(09-14已+8.85%止盈离场)——举证责任在重入这边，今日无新的价位/形态/催化差异；且恐慌盘硬阻断新仓",
+      "rps120": 91.7
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌盘硬阻断（breadth 0.26:1 + 三大指数全绿）再次证明价值：成都先导(RPS120 94.57甜点区)、比音勒芬(94.38、MA全合规)等个股指标达标，但0/3指数收红时开新仓就是接飞刀，空仓等待比勉强进场更赚钱。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "系统性抛压日个股α会被β吞没，动量候选在恐慌日入场易被整体砸盘止损"
+    },
+    {
+      "text": "元件板块今日bottom5第2(-4.49%)，奥士康(+47.1%)转冷第1日——机械执行'冷3日才卖'，不因大赢家就豁免，也不因第1日就恐慌离场。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "板块贝塔见顶往往滞后于个股，3日确认窗口过滤单日噪声"
+    },
+    {
+      "text": "招商轮船今日+0.72%为5持仓中唯一翻红者，油气开采Ⅱ列今日top5——强势板块中的强势股在恐慌日相对抗跌，验证'板块第一'的反向保护。",
+      "type": "signal",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "资金在恐慌日涌向有基本面支撑(油运运价高位)的热点，冷门股遭无差别抛售"
+    },
+    {
+      "text": "医药'十五五'政策催化仍在发酵（创新药+CXO+AI三主线，来源：财联社/山西证券9-18），但今日医疗服务退潮、昭衍-2.89%/药明-3.3%——政策催化决定方向，市场环境决定时机，恐慌日不追加政策仓位。",
+      "type": "observation",
+      "tags": [
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "再强的产业催化也敌不过系统性去杠杆日的流动性抽离"
+    }
+  ],
+  "market_summary": "恐慌盘：三大指数全绿（上证-1.22%/深成-2.34%/创业板-2.68%/科创50-2.35%），breadth 0.26:1（涨1120/跌4306），涨停53/跌停16。entry_regime=panic硬阻断新仓（sizing_multiplier=0）。今日top5为林业Ⅱ(+8.8%)、其他家电Ⅱ(+4.66%)、纺织制造(+1.48%)、焦炭Ⅱ(+1.48%)、油气开采Ⅱ(+1.31%)，均为防御/资源类；bottom5为贵金属(-5.04%)、元件(-4.49%)、玻璃玻纤(-4.24%)、非金属材料Ⅱ(-4.05%)、工业金属(-3.75%)，前期强势的元件与贵金属遭获利了结（来源：财联社/新浪财经——紧缩预期+油价上行+AI交易拥挤）。IV整体中位（avg rank 0.495），300/深100/创业板偏谨慎。5持仓全部HOLD，止损均未触发；持仓0/5在今日top5，1/5(奥士康/元件)转冷第1日。空仓等待，不接飞刀。",
+  "market_sentiment": "bearish",
+  "market_call": "观望"
+}
