@@ -1,0 +1,84 @@
+{
+  "date": "2026-09-25",
+  "market_overview": {
+    "shanghai_composite": {
+      "value": 3888.374,
+      "change_pct": -1.22
+    },
+    "shenzhen_component": {
+      "value": 13316.97,
+      "change_pct": -2.34
+    },
+    "chinext": {
+      "value": 3288.95,
+      "change_pct": -2.68
+    },
+    "sentiment": "bearish",
+    "hot_sectors": [
+      "林业Ⅱ",
+      "其他家电Ⅱ",
+      "纺织制造",
+      "焦炭Ⅱ",
+      "油气开采Ⅱ"
+    ],
+    "cold_sectors": [
+      "贵金属",
+      "元件",
+      "玻璃玻纤",
+      "非金属材料Ⅱ",
+      "工业金属"
+    ],
+    "notes": "2026-09-25恐慌盘：涨跌比0.26:1（涨1120/跌4306/平131），三大指数全绿（上证-1.22%/深成-2.34%/创业板-2.68%），涨停53/跌停16。entry_regime=panic，hard_block=true，sizing=0.0，机械层禁止新开仓。IV整体偏悲观（avg IV Rank 50.2%；300ETF 0.566、深100ETF 0.613偏高）。跌因：美股加息担忧+科技股估值去化（来源：财经网收评/BBC）；元件/PCB受CPO降级杂音拖累（来源：Threads台股PCB崩跌），贵金属/工业金属受美元美债压制（来源：华龙证券研报）。今日领涨为防御性板块（林业/家电/纺织/焦炭/油气，涨幅1-9%），属下跌日避险轮动、无持续性。持仓5只全部浮盈、无一触发止损，继续持有。"
+  },
+  "strategy_scan": {
+    "total_stocks_scanned": 22,
+    "strategy_name": "小市值-无 20RP",
+    "scan_time": "2026-09-25T15:09:54.212346+08:00"
+  },
+  "recommendations": [
+    {
+      "code": "688222.SH",
+      "name": "成都先导",
+      "price": null,
+      "rps120": 94.57,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "603162.SH",
+      "name": "海通发展",
+      "price": null,
+      "rps120": 94.34,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "601168.SH",
+      "name": "西部矿业",
+      "price": null,
+      "rps120": 92.25,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "688710.SH",
+      "name": "益诺思",
+      "price": null,
+      "rps120": 92.43,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    }
+  ],
+  "summary": {
+    "total_scanned": 22,
+    "buy_recommendations": 0,
+    "watch_recommendations": 4,
+    "avoid_recommendations": 0,
+    "market_call": "观望",
+    "reasoning": "2026-09-25恐慌盘：涨跌比0.26:1（涨1120/跌4306/平131），三大指数全绿（上证-1.22%/深成-2.34%/创业板-2.68%），涨停53/跌停16。entry_regime=panic，hard_block=true，sizing=0.0，机械层禁止新开仓。IV整体偏悲观（avg IV Rank 50.2%；300ETF 0.566、深100ETF 0.613偏高）。跌因：美股加息担忧+科技股估值去化（来源：财经网收评/BBC）；元件/PCB受CPO降级杂音拖累（来源：Threads台股PCB崩跌），贵金属/工业金属受美元美债压制（来源：华龙证券研报）。今日领涨为防御性板块（林业/家电/纺织/焦炭/油气，涨幅1-9%），属下跌日避险轮动、无持续性。持仓5只全部浮盈、无一触发止损，继续持有。"
+  }
+}

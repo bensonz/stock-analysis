@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 121403,
+  "output_tokens": 16312,
+  "rounds": 2,
+  "duration_sec": 184.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月25日 大跌 原因 市场 普跌",
+        "max_results": 6
+      },
+      "result_length": 3947
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "元件 PCB 板块 下跌 原因 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 4050
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "VLCC 油运 运价 霍尔木兹海峡 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3237
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "医药 CRO 创新药 十五五规划 2026",
+        "max_results": 5
+      },
+      "result_length": 3346
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+今日+大跌+原因",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=元件+PCB+板块+下跌",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    }
+  ],
+  "fallback_used": false
+}

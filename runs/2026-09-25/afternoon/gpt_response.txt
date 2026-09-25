@@ -1,0 +1,211 @@
+# 研究备忘录 — 2026-09-25（A股动量交易）
+
+## 1. Market Regime（市场状态）
+
+**恐慌盘，硬阻塞生效。** 关键读数全部来自输入数据：
+
+- **宽度**：涨跌比 **0.26:1**（涨1120 / 跌4306 / 平131），涨停53 / 跌停16。
+- **指数**：上证 -1.22%、深成 -2.34%、创业板 -2.68%、科创50 -2.35% —— **0/3 大指数翻红**。
+- **机械层**：`entry_regime.regime = "panic"`，`hard_block = true`，`sizing_multiplier = 0.0`，`allow_new_positions = false`。这是全系统唯一允许的硬阻塞条件（涨跌比<0.35:1），已触发。
+- **IV情绪**：`iv_sentiment.overall_sentiment.signal = "偏悲观"`，avg IV Rank 50.2%。300ETF IV Rank 0.566、深100ETF 0.613 —— 波动率偏贵、市场谨慎，但未到极端恐慌水平。
+
+**宏观驱动（来源：检索）**：美股加息担忧 + 科技股估值去化是普跌主因（财经网收评：沪指-1.22%/深成-2.34%/创业板-2.68%，超4300股下跌；BBC：美联储鹰派加息预期）。元件/PCB受"CPO降级杂音"拖累（Threads 9-17 台股PCB/CCL崩跌），贵金属/工业金属被美元美债压制（华龙证券研报）。
+
+**结论**：`new_positions: []` —— 不因个别候选合格而破例，这是硬阻塞，不是判断。
+
+## 2. Sector Analysis（板块分析）
+
+**当日顶/底部（输入仅提供当日涨跌幅，无5日板块数据，数字均为当日涨跌幅，可回溯）：**
+
+- **Top5（涨幅）**：林业Ⅱ +8.8%、其他家电Ⅱ +4.66%、纺织制造 +1.54%、焦炭Ⅱ +1.48%、油气开采Ⅱ +1.31%。
+- **Bottom5（跌幅）**：贵金属 -5.03%、元件 -4.48%、玻璃玻纤 -4.36%、非金属材料Ⅱ -4.28%、工业金属 -3.76%。
+
+**轮动性质**：上涨的领涨板块（林业/家电/纺织/焦炭/油气）多为防御/避险品种，且涨幅仅1-9%，是下跌日资金避险性轮动，**无动量追入价值、持续性存疑**。真正的主线（元件/PCB、贵金属/工业金属）在被动去风险。
+
+**持仓板块对齐**：0/5 在今日 top5；1/5（奥士康/元件）在 bottom5。
+
+## 3. Position Review（持仓审视）
+
+| 代码 | 名称 | 入场 | 现价 | PnL | 止损 | 板块 | 动作 |
+|---|---|---|---|---|---|---|---|
+| 000739 | 普洛药业 | 24.21 | 25.3 | +4.5% | 23.0 | 化学制药(中性) | HOLD |
+| 002913 | 奥士康 | 59.01 | 86.8 | +47.1% | 64.91(保本+10%) | 元件(bottom5第2日) | HOLD（警戒） |
+| 601872 | 招商轮船 | 19.29 | 20.93 | +8.5% | 19.29(保本) | 航运港口(中性) | HOLD |
+| 603127 | 昭衍新药 | 42.85 | 46.39 | +8.3% | 42.85(保本) | 医疗服务(中性) | HOLD |
+| 603259 | 药明康德 | 126.5 | 162.4 | +28.4% | 139.15(+10%) | 医疗服务(中性) | HOLD |
+
+**要点：**
+- 5只持仓**全部浮盈、无一触发止损**。保本/抬升后的止损在恐慌日自动过滤噪音，无需临场干预。
+- **奥士康是唯一风险点**：元件今日 bottom5 第2名（-4.48%），为**转冷第2日**。按 Rule 1「冷3日才卖」，今日不卖；若 9/26 元件仍处 bottom30%，机械触发卖出，**与个股 +47% 浮盈无关——板块重力优先**。
+- 招商轮船：VLCC 运价历史新高、美伊未实质突破（东方证券 9-21，财闻网），催化未破，持有。
+- 普洛/昭衍/药明：医药「十五五」规划（新华社/人民网 9-18）政策催化仍在，医疗服务今日未入 bottom5，持有。
+- 无 time-decay 风险：所有持仓浮盈 >3%（15日时间止损只针对 <3% 浮盈者）。
+
+## 4. New Entry Candidates（新开仓候选）
+
+**无。** 硬阻塞下不评估任何新开仓。即便成都先导/海通发展等 RPS 合格，机械层已封锁。
+
+## 5. Skip List（跳过名单）
+
+- **688222 成都先导**：RPS120=94.57，但 dist_ma10 +13.5% / dist_ma20 +24.3% 触发 Rule 2b 超买（dist_ma20>12%），且 margin signal=deleveraging；叠加 panic 硬阻塞。
+- **603162 海通发展**：RPS120=94.34，但 09-29 解禁 9.33亿股占总股本 67.85%（输入事件日历），事件风险叠加 panic 硬阻塞。
+- **601168 西部矿业**：RPS120=92.25，但工业金属板块 bottom5（-3.76%）冷板块，Rule 1 禁止入场；叠加 panic。
+- **688710 益诺思**：RPS120=92.43，但 PE 567×营收yoy -35%/净利yoy -96%（输入财报），成长红旗；dist_ma20 +10.3%；叠加 panic。
+
+## 6. Learnings（今日教训）
+
+见 fallback JSON 的 `new_learnings`（结构化格式，4条）。
+
+## 7. Uncertainty Flags（不确定性）
+
+- **5日板块动量数据缺失**：输入 `market.sectors` 只给当日涨跌幅，我无法验证 Rule 1 的「5日/20日板块动量排名」。我按当日涨跌幅 + 检索到的板块叙事做近似判断，但严格意义上「top30% by recent performance」无法用5日口径复核。
+- **元件板块冷3日判定**：我依据持仓 history 记录「9/24转冷第1日、9/25转冷第2日」推断；若实际定义不同，9/26 的机械触发时点可能有偏差。
+- **今日盘中价 vs 收盘价**：持仓现价取自 9/25 noon 快照（history），`position_prices` 为 9/24 收盘。恐慌盘尾盘可能有更大波动，若尾盘跌破止损，应以机械层收盘价为准。
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "林业Ⅱ", "chg_pct": 8.8, "trend": "避险脉冲"},
+      {"name": "其他家电Ⅱ", "chg_pct": 4.66, "trend": "防御"},
+      {"name": "纺织制造", "chg_pct": 1.54, "trend": "防御"},
+      {"name": "焦炭Ⅱ", "chg_pct": 1.48, "trend": "防御"},
+      {"name": "油气开采Ⅱ", "chg_pct": 1.31, "trend": "防御"}
+    ],
+    "cold_sectors": [
+      {"name": "贵金属", "chg_pct": -5.03, "trend": "deteriorating"},
+      {"name": "元件", "chg_pct": -4.48, "trend": "deteriorating"},
+      {"name": "玻璃玻纤", "chg_pct": -4.36, "trend": "deteriorating"},
+      {"name": "非金属材料Ⅱ", "chg_pct": -4.28, "trend": "deteriorating"},
+      {"name": "工业金属", "chg_pct": -3.76, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/5 positions in top5 hot sectors; 1/5 (奥士康/元件) in bottom5",
+    "regime": "panic tape: breadth 0.26:1, 0/3 indices green; 防御板块避险轮动无持续性，主线(元件/金属)被去风险"
+  },
+  "position_decisions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "reason": "浮盈+4.5%未触发任何止损（止损23.0）；持仓3日不触发-3%首三日线；化学制药未入bottom5，'十五五'规划催化仍在（来源：新华社/人民网9-18）",
+      "sector_rank": "未入top/bottom5（中性）",
+      "new_stop": null,
+      "pnl_pct": 4.5,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "reason": "浮盈+47.1%让利润奔跑，止损已锁+10%(64.91)未触发；但元件板块今日bottom5第2(-4.48%)为转冷第2日，若9/26仍冷满3日机械触发Rule1卖出（板块重力优先，与个股浮盈无关）",
+      "sector_rank": "bottom5第2（转冷第2日）",
+      "new_stop": null,
+      "pnl_pct": 47.09,
+      "days_held": 22,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+8.5%守保本止损19.29未触发；VLCC运价历史新高、美伊未实质突破（来源：东方证券9-21/财闻网），航运港口未入bottom5，持有",
+      "sector_rank": "未入top/bottom5（中性）",
+      "new_stop": null,
+      "pnl_pct": 8.5,
+      "days_held": 17,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+8.3%守保本止损42.85未触发（缓冲7.6%）；医疗服务未入bottom5，CRO主线催化（十五五规划）未破，让赢家奔跑",
+      "sector_rank": "未入top/bottom5（中性）",
+      "new_stop": null,
+      "pnl_pct": 8.26,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+28.4%让利润奔跑，止损已锁+10%(139.15)未触发；CXO龙头，医疗服务未入bottom5，十五五规划将CRO/CDMO提升为产业基础设施，持有",
+      "sector_rank": "未入top/bottom5（中性）",
+      "new_stop": null,
+      "pnl_pct": 28.38,
+      "days_held": 40,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688222",
+      "name": "成都先导",
+      "reason": "panic硬阻塞；Rule2b超买(dist_ma10+13.5%/dist_ma20+24.3%)+margin deleveraging",
+      "rps120": 94.57
+    },
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "panic硬阻塞；09-29解禁9.33亿股占总股本67.85%事件风险",
+      "rps120": 94.34
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "panic硬阻塞；工业金属板块bottom5(-3.76%)冷板块，Rule1无入场",
+      "rps120": 92.25
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "panic硬阻塞；PE567×营收yoy-35%/净利yoy-96%成长红旗；dist_ma20+10.3%",
+      "rps120": 92.43
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌硬阻塞再次生效：涨跌比0.26:1、0/3指数翻红时，机械层(entry_regime=panic)直接拦截所有新开仓，即使医药/航运仍有合格候选也不动手。",
+      "type": "rule",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "恐慌日追入胜率极低，保现金是动量系统的核心护城河。"
+    },
+    {
+      "text": "奥士康的元件板块连续第2日处于bottom5(-4.48%)，9/26若仍冷满3日将机械触发Rule1卖出——即使个股浮盈+47%，板块重力优先。",
+      "type": "observation",
+      "tags": ["sector", "exit-rule"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "冷板块里的强个股最终被板块贝塔拖累，冷3日即离场避免利润回吐。"
+    },
+    {
+      "text": "下跌日领涨板块(林业/家电/纺织/焦炭/油气)涨幅仅1-9%且多为防御避险轮动，不具备动量追入价值；真正的动量机会要等宽度恢复(涨跌比≥1.5且≥2指数翻红)后再评估。",
+      "type": "signal",
+      "tags": ["sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "恐慌日避险资金流入低波动防御板块，持续性差，不宜作为新仓方向。"
+    },
+    {
+      "text": "5只持仓在-1.2%~-2.7%的普跌日全部浮盈且无一触发止损，验证保本止损(+10%)让利润奔跑、无需临场干预的价值。",
+      "type": "observation",
+      "tags": ["exit-rule", "position-sizing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "止损已抬到盈亏平衡线之上，恐慌回撤不构成卖出信号，机械纪律替代情绪决策。"
+    }
+  ],
+  "market_summary": "2026-09-25恐慌盘：涨跌比0.26:1（涨1120/跌4306/平131），三大指数全绿（上证-1.22%/深成-2.34%/创业板-2.68%），涨停53/跌停16。entry_regime=panic，hard_block=true，sizing=0.0，机械层禁止新开仓。IV整体偏悲观（avg IV Rank 50.2%；300ETF 0.566、深100ETF 0.613偏高）。跌因：美股加息担忧+科技股估值去化（来源：财经网收评/BBC）；元件/PCB受CPO降级杂音拖累（来源：Threads台股PCB崩跌），贵金属/工业金属受美元美债压制（来源：华龙证券研报）。今日领涨为防御性板块（林业/家电/纺织/焦炭/油气，涨幅1-9%），属下跌日避险轮动、无持续性。持仓5只全部浮盈、无一触发止损，继续持有。",
+  "market_sentiment": "bearish",
+  "market_call": "观望"
+}
+```
