@@ -1,0 +1,22 @@
+{
+  "available": true,
+  "fetched_at": "2026-09-25T11:35:15.267917+08:00",
+  "note": "display-only second opinion; does NOT feed the RPS/MA gate. iwencai ignores searchtype and returns suspended names, so counts may exceed the tradeable universe.",
+  "screens": [
+    {
+      "label": "涨停",
+      "query": "今日涨停 非ST 上市天数大于60",
+      "error": "IFindError: iFinD get_access_token failed: errorcode=-1301 Refresh_Token is expired or illegal."
+    },
+    {
+      "label": "强势动量",
+      "query": "RPS120大于80 且 RPS250大于80 且 MA20大于MA120 非ST",
+      "error": "IFindError: iFinD get_access_token failed: errorcode=-1301 Refresh_Token is expired or illegal."
+    },
+    {
+      "label": "放量突破",
+      "query": "今日涨幅大于5% 换手率大于5% 量比大于2 非ST 上市天数大于60",
+      "error": "IFindError: iFinD get_access_token failed: errorcode=-1301 Refresh_Token is expired or illegal."
+    }
+  ]
+}

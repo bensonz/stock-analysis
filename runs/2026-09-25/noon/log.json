@@ -1,0 +1,48 @@
+{
+  "date": "2026-09-25",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1790307308.107768,
+      "errors": [],
+      "end": 1790307376.588096,
+      "duration_sec": 68.5
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 7680,
+      "tokens": {
+        "input_tokens": 119304,
+        "output_tokens": 15683
+      },
+      "rounds": 2,
+      "tool_calls_count": 6,
+      "duration_sec": 137.4,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1790307513.986707,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=34",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=83",
+        "Hypothesis: Created h204 (observation): 今日热门板块(林业Ⅱ+8.8%/其他家电Ⅱ+4.66%)均为小市值/防御性题材，无强趋势主线可追——热门≠可交易，恐慌日逆势板块多为资金避险噪音。...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1790307514.329211,
+      "duration_sec": 0.3
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 206.20000000000002
+  }
+}

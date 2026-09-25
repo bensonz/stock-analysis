@@ -1,0 +1,78 @@
+{
+  "date": "2026-09-25",
+  "actions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "price": 25.3,
+      "pnl_pct": 4.5,
+      "note": "浮盈+4.5%未触发任何止损（止损23.0，缓冲9.1%），3日仓不触发-3%首三日线；化学制药/原料药未入bottom5，'十五五'规划催化仍在；恐慌盘不影响已持仓，持有"
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "HOLD",
+      "price": 86.8,
+      "pnl_pct": 47.09,
+      "note": "浮盈+47.1%让利润奔跑，止损已锁+10%(64.91)未触发；元件今日bottom5(-4.48%)为转冷第2日，未达Rule1'冷3日才卖'阈值，覆铜板涨价链仍在（宏瑞兴+10%/建滔提价，来源：财联社），明日若元件再入bottom30%则机械触发卖出"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 20.93,
+      "pnl_pct": 8.5,
+      "note": "浮盈+8.5%守保本止损19.29未触发；VLCC运价历史新高、Q4为VLCC盈利最好季度（来源：东方证券9/21、公司业绩说明会）；航运港口未入bottom5，持有"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 46.39,
+      "pnl_pct": 8.26,
+      "note": "浮盈+8.3%守保本止损42.85未触发（缓冲7.6%）；医疗服务未入bottom5，CRO主线催化（十五五规划）未破；让赢家奔跑"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 162.4,
+      "pnl_pct": 28.38,
+      "note": "浮盈+28.4%让利润奔跑，止损已锁+10%(139.15)未触发；CXO龙头、在手订单664.3亿（来源：东方财富8/3中报），医疗服务未入bottom5；持有"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 981057.0,
+    "dayPnl": -4307.0,
+    "dayReturnPct": -0.44,
+    "totalReturnPct": -1.89,
+    "unrealizedPnl": 27883.0,
+    "realizedPnl": -46826.0,
+    "cashPct": 81.62
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.2601,
+    "up": 1120,
+    "down": 4306,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 53,
+    "limit_downs": 16,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.26:1, 0/3 major indices green, 53 limit-ups / 16 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "恐慌盘：涨跌比0.26:1（1120涨/4306跌），三大指数全绿（上证-1.22%/深成-2.34%/创业板-2.68%），0/3收红，53涨停/16跌停→entry_regime=panic硬阻断新开仓。宏观驱动：中美贸易休战延期不确定性（来源：TradingEconomics/百度财经）。IV情绪偏悲观（avg IV rank 50.19%）。热门板块为林业Ⅱ(+8.8%)等小市值题材，无强趋势主线；元件(-4.48%)虽入bottom5但覆铜板涨价链仍在（宏瑞兴+10%/建滔提价/中国巨石电子布+15-20%，来源：百度/财联社）。持仓1/5在冷区（奥士康/元件转冷第2日），4/5中性，0止损触发。"
+  }
+}
