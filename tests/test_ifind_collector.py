@@ -6,6 +6,7 @@ and more reliable source, not a new schema — every function here has a sina
 counterpart it must be drop-in compatible with.
 """
 import json
+from datetime import datetime
 import sys
 from pathlib import Path
 
@@ -163,7 +164,10 @@ def test_sw_industry_uses_level_then_date_param_order(monkeypatch, tmp_path):
 
 def test_sw_industry_cache_is_reused(monkeypatch, tmp_path):
     cache = tmp_path / "sw.json"
-    cache.write_text(json.dumps({"fetched": "2026-08-25",
+    # Fetched "today": a hardcoded date aged past SW_INDUSTRY_MAX_AGE_DAYS
+    # and turned this test red on 2026-09-24 with no code change.
+    today = datetime.now().strftime("%Y-%m-%d")
+    cache.write_text(json.dumps({"fetched": today,
                                  "map": {"600519": "食品饮料"}}), encoding="utf-8")
     monkeypatch.setattr(dc, "SW_INDUSTRY_CACHE", cache)
     monkeypatch.setattr(ifind_client, "get_client",
