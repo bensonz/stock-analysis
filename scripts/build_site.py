@@ -318,6 +318,36 @@ def load_index_closes(cache_path: Path = INDEX_CACHE) -> dict:
     return closes
 
 
+def settled_index_closes(runs_dir: Path = RUNS_DIR) -> dict:
+    """{iso_date: close} for 上证指数 from each run's real-time market.json quote,
+    kept only when the quote is for the run's own day and taken at/after 15:00.
+
+    Sina's daily kline is batch-built and can lag the close by hours: on
+    2026-09-28 the 15:13 build had no bar for the day and forward-filled 09-24
+    through a -1.67% session. Noon quotes are intraday and never qualify; a
+    holiday run carries the previous session's date and is dropped too.
+    """
+    closes = {}
+    if not runs_dir.is_dir():
+        return closes
+    for path in runs_dir.rglob("input/market.json"):
+        try:
+            data = _read_json(path)
+            quote = data["indices"]["上证指数"]
+            taken = datetime.fromisoformat(data["timestamp"])
+            close = float(quote["close"])
+        except Exception:
+            continue
+        if quote.get("date") == taken.date().isoformat() and taken.hour >= 15:
+            closes[quote["date"]] = close
+    return closes
+
+
+def merge_index_closes(kline: dict, quotes: dict) -> dict:
+    """Kline closes win; quotes only fill dates the kline doesn't have yet."""
+    return {**quotes, **kline}
+
+
 def rebase_index(closes: dict, dates: list[str], starting: float) -> dict:
     """Map each series date → index rebased to `starting` at the first date.
     Uses the last close <= date (holiday forward-fill). {} if no coverage."""
@@ -1068,7 +1098,7 @@ def build(site_dir: Path = SITE_DIR) -> Path:
     stats = compute_stats(series, trades)
     details = collect_day_details(series, trades, build_open_lookup(active, trades))
     starting = (series[0].get("starting") if series else None) or 1000000
-    index_closes = load_index_closes()
+    index_closes = merge_index_closes(load_index_closes(), settled_index_closes())
     dates = [p["date"] for p in series]
     index_rebased = rebase_index(index_closes, dates, float(starting))
     idx_base = index_base(index_closes, dates[0]) if dates else None

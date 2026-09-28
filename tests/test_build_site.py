@@ -274,3 +274,40 @@ def test_right_axis_labels_index_points_on_the_shared_scale():
     # no index → no right axis, and the gutter stays narrow
     plain = bs.render_html(series, active, [], stats)
     assert "const IDXBASE = null" in plain
+
+
+def _market(tmp, rel, timestamp, close, date):
+    path = tmp / rel / "input" / "market.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps({"timestamp": timestamp, "indices": {
+        "上证指数": {"code": "sh000001", "close": close, "date": date}}}),
+        encoding="utf-8")
+
+
+def test_settled_index_closes_keeps_only_post_close_quotes(tmp_path):
+    # 2026-09-28: the site built at 15:13 before sina's daily kline carried the
+    # day, so the chart forward-filled 09-24 through a -1.67% session.
+    _market(tmp_path, "2026-09-28/noon", "2026-09-28T11:35:17", 3820.819, "2026-09-28")
+    _market(tmp_path, "2026-09-28/afternoon", "2026-09-28T15:05:40", 3823.621, "2026-09-28")
+    assert bs.settled_index_closes(tmp_path) == {"2026-09-28": 3823.621}
+
+
+def test_settled_index_closes_rejects_quote_dated_another_day(tmp_path):
+    # A post-close run on a holiday sees the previous session's quote.
+    _market(tmp_path, "2026-09-25/afternoon", "2026-09-25T15:05:00", 3888.374, "2026-09-24")
+    assert bs.settled_index_closes(tmp_path) == {}
+
+
+def test_settled_index_closes_skips_missing_or_broken(tmp_path):
+    _market(tmp_path, "2026-09-22/afternoon", "2026-09-22T15:05:00", None, "2026-09-22")
+    (tmp_path / "2026-09-23/afternoon/input").mkdir(parents=True)
+    (tmp_path / "2026-09-23/afternoon/input/market.json").write_text("{", encoding="utf-8")
+    assert bs.settled_index_closes(tmp_path) == {}
+    assert bs.settled_index_closes(tmp_path / "nope") == {}
+
+
+def test_merge_index_closes_kline_wins_over_quote():
+    kline = {"2026-09-24": 3888.374, "2026-09-28": 3823.62}
+    quotes = {"2026-09-28": 3823.9, "2026-09-29": 3850.0}
+    assert bs.merge_index_closes(kline, quotes) == {
+        "2026-09-24": 3888.374, "2026-09-28": 3823.62, "2026-09-29": 3850.0}
