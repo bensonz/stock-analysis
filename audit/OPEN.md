@@ -27,11 +27,6 @@
 
 ## 需要人工操作 (5)
 
-  ▸ snapshot_wrote_rows  [env]
-      1 次 / 1 天   2026-08-26
-      执行:   python3 scripts/pricedb.py snapshot --date 2026-08-26 --dry-run
-        · 2026-08-26 afternoon 快照写入 0 行
-
   ▸ phase_failed  [env]
       13 次 / 13 天   2026-05-28 … 2026-09-08
       执行:   python3 scripts/run_daily.py --slot afternoon --run
@@ -68,6 +63,12 @@
         · 2026-09-23 afternoon 抽查 20 只、实际核对 0 只
         · 2026-09-24 afternoon 抽查 20 只、实际核对 0 只
         · … 另有 16 次更早的
+
+  ▸ snapshot_wrote_rows  [env]
+      2 次 / 2 天   2026-08-26 … 2026-09-25
+      执行:   python3 scripts/pricedb.py snapshot --date 2026-08-26 --dry-run
+        · 2026-08-26 afternoon 快照写入 0 行
+        · 2026-09-25 afternoon 快照写入 0 行
 
 
 ## 已知并接受 (1)

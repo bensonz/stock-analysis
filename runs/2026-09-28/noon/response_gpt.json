@@ -1,0 +1,181 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": 3.83,
+        "trend": "defensive bid"
+      },
+      {
+        "name": "商用车",
+        "5d_pct": 3.14,
+        "trend": "defensive bid"
+      },
+      {
+        "name": "养殖业",
+        "5d_pct": 1.42,
+        "trend": "defensive bid"
+      },
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": 1.2,
+        "trend": "defensive bid"
+      },
+      {
+        "name": "非白酒",
+        "5d_pct": 0.82,
+        "trend": "defensive bid"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "通信设备",
+        "5d_pct": -7.92,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": -7.4,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": -6.44,
+        "trend": "cold 3rd day"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": -6.33,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": -6.25,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/5持仓在热门板块，1/5(奥士康/元件)在冷门板块，4/5在中性板块(医药/CXO/航运)",
+    "regime": "恐慌性风险释放：科技硬件(PCB/通信/元件)领跌，防御板块(林业/商用车/养殖/油气)抗跌，国庆长假前机构持币避险"
+  },
+  "position_decisions": [
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "SELL",
+      "reason": "元件板块连续第3个交易日位于bottom5(09-24 -4.49%/09-25 -4.48%/09-28 -6.44%)，Rule 1板块重力触发：板块转冷3日无条件离场，与个股浮盈无关。锁定+39.9%利润。",
+      "sector_rank": "bottom 5（冷3日）",
+      "new_stop": null,
+      "pnl_pct": 39.9,
+      "days_held": 23,
+      "exit_price": 82.54
+    },
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "RAISE_STOP",
+      "reason": "今日恐慌中逆势+4.98%(26.56)，日内高点26.76已达入场价24.21的+10.5%，触发Rule 5'+10%→止损升至保本'，止损23.0升至24.21。化学制药/原料药未入cold，让赢家奔跑。",
+      "sector_rank": "中性（未入top/bottom5）",
+      "new_stop": 24.21,
+      "pnl_pct": 9.7,
+      "days_held": 5,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "VLCC运价历史高位、Q4为全年最好季度(来源:21经济网/公司业绩说明会)，航运港口未入bottom5，保本止损19.29未触发，持有。",
+      "sector_rank": "中性（未入top/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 6.7,
+      "days_held": 18,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "医疗服务未入bottom5，CRO景气延续(临床前订单充沛，来源:国金证券研报)，保本止损42.85未触发，持有。",
+      "sector_rank": "中性（未入top/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 6.4,
+      "days_held": 11,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "CXO龙头，医疗服务未入bottom5，+28.0%浮盈，止损已锁+10%(139.15)未触发，让赢家奔跑。",
+      "sector_rank": "中性（未入top/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 28.0,
+      "days_held": 42,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688222",
+      "name": "成都先导",
+      "reason": "恐慌硬封锁(涨跌比0.14:1, 41跌停)不开新仓；且Rule 2b追高违规：dist_ma10 +11.7%>8%、dist_ma20 +22.4%>12%，即便无封锁也跳过",
+      "rps120": 94.57
+    },
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "恐慌硬封锁；且明日09-29解禁9.33亿股占总股本67.85%，高冲击事件窗口，双重跳过",
+      "rps120": 94.34
+    },
+    {
+      "code": "002832",
+      "name": "比音勒芬",
+      "reason": "恐慌硬封锁；MA距离合规(RPS120=94.38)但纺织服饰板块不在今日top5，非top30%动量板块",
+      "rps120": 94.38
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "恐慌硬封锁；医疗服务今日未入top5，且营收同比-35.3%，不开新仓",
+      "rps120": 92.43
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "元件板块连续3个交易日列bottom5(09-24 -4.49%→09-25 -4.48%→09-28 -6.44%)，Rule 1板块重力在+39.9%大赢家奥士康身上照常执行卖出——板块转冷3日纪律优先于个股浮盈",
+      "type": "rule",
+      "tags": [
+        "exit-rule",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "动量股的alpha来自板块beta，板块转冷意味着资金流出该行业，个股浮盈将被系统性回撤侵蚀，提前锁定优于等待回调"
+    },
+    {
+      "text": "恐慌硬封锁(涨跌比0.14:1, 0/3指数红, 41跌停)继续挡住FOMO：成都先导/海通发展/比音勒芬等RPS 94+动量候选一个都不该买，与历史h077口径一致",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "恐慌日整体beta为负，个股alpha难以对抗系统性抛售，开新仓即承担无补偿的下跌风险"
+    },
+    {
+      "text": "原料药普洛药业在科技领跌的恐慌日逆势+4.98%，医药/CRO防御属性兑现；日内高点触及+10%阈值即升止损至保本24.21",
+      "type": "observation",
+      "tags": [
+        "exit-rule",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "防御性行业在risk-off环境中吸引避险资金，逆势走强是强势信号，应通过止损升级锁住收益而非过早止盈"
+    }
+  ],
+  "market_summary": "恐慌市：沪指-1.74%/深成-3.37%/创业板-4.32%，涨跌比676:4802(0.14:1)，0/3指数收红，24涨停/41跌停。科技硬件领跌(通信设备-7.92%/元件-6.44%/玻璃玻纤-6.33%)，防御板块(林业Ⅱ+3.83%/商用车+3.14%/养殖业+1.42%)抗跌。国庆长假前机构持币避险+美股科技调整+加息预期共振。IV Rank均值0.53偏高偏悲观。机械层硬封锁：不开新仓；元件板块冷3日触发奥士康离场。",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}

@@ -1,0 +1,78 @@
+{
+  "date": "2026-09-28",
+  "actions": [
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "action": "SELL",
+      "price": 82.54,
+      "pnl_pct": 39.9,
+      "note": "元件板块连续第3个交易日位于bottom5(09-24 -4.49%/09-25 -4.48%/09-28 -6.44%)，Rule 1板块重力触发：板块转冷3日无条件离场，与个股浮盈无关。锁定+39.9%利润。"
+    },
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "RAISE_STOP",
+      "price": 26.56,
+      "pnl_pct": 9.7,
+      "note": "今日恐慌中逆势+4.98%(26.56)，日内高点26.76已达入场价24.21的+10.5%，触发Rule 5'+10%→止损升至保本'，止损23.0升至24.21。化学制药/原料药未入cold，让赢家奔跑。"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 20.58,
+      "pnl_pct": 6.7,
+      "note": "VLCC运价历史高位、Q4为全年最好季度(来源:21经济网/公司业绩说明会)，航运港口未入bottom5，保本止损19.29未触发，持有。"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 45.58,
+      "pnl_pct": 6.4,
+      "note": "医疗服务未入bottom5，CRO景气延续(临床前订单充沛，来源:国金证券研报)，保本止损42.85未触发，持有。"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 161.96,
+      "pnl_pct": 28.0,
+      "note": "CXO龙头，医疗服务未入bottom5，+28.0%浮盈，止损已锁+10%(139.15)未触发，让赢家奔跑。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 980435.0,
+    "dayPnl": 1082.0,
+    "dayReturnPct": 0.11,
+    "totalReturnPct": -1.96,
+    "unrealizedPnl": 17849.0,
+    "realizedPnl": -37414.0,
+    "cashPct": 85.04
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.1408,
+    "up": 676,
+    "down": 4802,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 24,
+    "limit_downs": 41,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.14:1, 0/3 major indices green, 24 limit-ups / 41 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "恐慌市：沪指-1.74%/深成-3.37%/创业板-4.32%，涨跌比676:4802(0.14:1)，0/3指数收红，24涨停/41跌停。科技硬件领跌(通信设备-7.92%/元件-6.44%/玻璃玻纤-6.33%)，防御板块(林业Ⅱ+3.83%/商用车+3.14%/养殖业+1.42%)抗跌。国庆长假前机构持币避险+美股科技调整+加息预期共振。IV Rank均值0.53偏高偏悲观。机械层硬封锁：不开新仓；元件板块冷3日触发奥士康离场。"
+  }
+}

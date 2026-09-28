@@ -8,7 +8,7 @@
   "entryPrice": 24.21,
   "targetPrice": 27.0,
   "stopLoss": 23.0,
-  "currentStop": 23.0,
+  "currentStop": 24.21,
   "allocation_pct": 5.0,
   "shares": 1700,
   "allocatedCapital": 41157.0,
@@ -84,6 +84,16 @@
       "change_pct": 4.5,
       "action": "HOLD",
       "note": "浮盈+4.5%未触发任何止损（止损23.0）；持仓3日不触发-3%首三日线；化学制药未入bottom5，'十五五'规划催化仍在（来源：新华社/人民网9-18）"
+    },
+    {
+      "date": "2026-09-28",
+      "slot": "noon",
+      "price": 26.56,
+      "change_pct": 9.71,
+      "action": "RAISE_STOP",
+      "note": "今日恐慌中逆势+4.98%(26.56)，日内高点26.76已达入场价24.21的+10.5%，触发Rule 5'+10%→止损升至保本'，止损23.0升至24.21。化学制药/原料药未入cold，让赢家奔跑。",
+      "old_stop": 23.0,
+      "new_stop": 24.21
     }
   ],
   "exitDate": null,
@@ -93,6 +103,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-09-22T11:42:09.967443+08:00",
-  "updatedAt": "2026-09-25T15:09:54.139363+08:00",
+  "updatedAt": "2026-09-28T11:39:14.052412+08:00",
   "trackerVersion": "2.1"
 }

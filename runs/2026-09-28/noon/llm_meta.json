@@ -1,0 +1,52 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 174527,
+  "output_tokens": 13641,
+  "rounds": 3,
+  "duration_sec": 168.0,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月28日 大跌 原因 创业板",
+        "max_results": 6
+      },
+      "result_length": 3897
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "通信设备 元件 PCB 板块 下跌 原因 2026年9月",
+        "max_results": 6
+      },
+      "result_length": 3978
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "医药 CRO 创新药 板块 2026年9月28日 走势"
+      },
+      "result_length": 3307
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "航运 VLCC 运价 招商轮船 2026年9月末"
+      },
+      "result_length": 2995
+    }
+  ],
+  "fallback_used": false
+}

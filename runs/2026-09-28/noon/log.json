@@ -1,0 +1,50 @@
+{
+  "date": "2026-09-28",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1790566512.7405179,
+      "errors": [],
+      "end": 1790566585.943205,
+      "duration_sec": 73.2
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 7534,
+      "tokens": {
+        "input_tokens": 174527,
+        "output_tokens": 13641
+      },
+      "rounds": 3,
+      "tool_calls_count": 4,
+      "duration_sec": 168.0,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1790566754.020663,
+      "actions": [
+        "SELL 002913",
+        "RAISE_STOP 000739 → 24.21",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=85",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=36",
+        "Hypothesis: Created h205 (observation): 原料药普洛药业在科技领跌的恐慌日逆势+4.98%，医药/CRO防御属性兑现；日内高点触及+10%阈值即升止损至保本24.21...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "end": 1790566754.368476,
+      "duration_sec": 0.3
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 241.5
+  }
+}

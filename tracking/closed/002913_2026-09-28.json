@@ -1,7 +1,7 @@
 {
   "code": "002913",
   "name": "奥士康",
-  "status": "active",
+  "status": "closed",
   "thesis": "元件板块top5(+5.09%)，PCB/覆铜板涨价链驱动（覆铜板年内第4次提价累计40%、电子行业前7月利润+1.1倍，来源：东吴证券/财闻8/27）；RPS120=90.58甜区，dist_ma5-0.5%/ma10-1.2%/ma20+6.1%均未超追高线；8/7澄清无英伟达/谷歌订单（陈旧），属板块贝塔标的而非纯AI链，故小仓",
   "entryDate": "2026-08-27",
   "entrySlot": "afternoon",
@@ -288,15 +288,25 @@
       "change_pct": 47.09,
       "action": "HOLD",
       "note": "浮盈+47.1%让利润奔跑，止损已锁+10%(64.91)未触发；但元件板块今日bottom5第2(-4.48%)为转冷第2日，若9/26仍冷满3日机械触发Rule1卖出（板块重力优先，与个股浮盈无关）"
+    },
+    {
+      "date": "2026-09-28",
+      "slot": "noon",
+      "price": 82.54,
+      "change_pct": 39.87,
+      "action": "SELL",
+      "shares": 400,
+      "note": "元件板块连续第3个交易日位于bottom5(09-24 -4.49%/09-25 -4.48%/09-28 -6.44%)，Rule 1板块重力触发：板块转冷3日无条件离场，与个股浮盈无关。锁定+39.9%利润。"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-09-28",
+  "exitPrice": 82.54,
+  "exitReason": "元件板块连续第3个交易日位于bottom5(09-24 -4.49%/09-25 -4.48%/09-28 -6.44%)，Rule 1板块重力触发：板块转冷3日无条件离场，与个股浮盈无关。锁定+39.9%利润。",
+  "returnPct": 39.87,
+  "holdingDays": 20,
+  "lessonLearned": "",
   "createdAt": "2026-08-27T15:12:46.690531+08:00",
-  "updatedAt": "2026-09-25T15:09:54.174929+08:00",
-  "trackerVersion": "2.1"
+  "updatedAt": "2026-09-28T11:39:14.023368+08:00",
+  "trackerVersion": "2.1",
+  "exitSlot": "noon"
 }
