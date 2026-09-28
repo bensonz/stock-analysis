@@ -834,6 +834,45 @@ def fetch_ma_data(stocks: list[dict]) -> dict:
     return results
 
 
+_SINA_INDEX_CODES = {
+    "sh000001": "上证指数",
+    "sz399001": "深证成指",
+    "sz399006": "创业板指",
+    "sh000688": "科创50",
+}
+
+
+def _parse_sina_index_quotes(text: str) -> dict:
+    """Parse sina's FULL-format index quotes into {name: {code, close, change_pct, date}}.
+
+    Full format: name,open,prev_close,price,high,low,...,date(30),time(31). The
+    short `s_` format used until 2026-09-28 carried no date, so every quote was
+    stamped with the clock — a holiday run recorded the prior session's close
+    under the holiday's date.
+    """
+    import re
+
+    indices = {}
+    for line in text.strip().split("\n"):
+        m = re.match(r'var hq_str_(\w+)="(.*?)";', line.strip())
+        if not m or m.group(1) not in _SINA_INDEX_CODES:
+            continue
+        parts = m.group(2).split(",")
+        if len(parts) < 31:
+            continue
+        try:
+            prev_close, price = float(parts[2]), float(parts[3])
+        except ValueError:
+            continue
+        indices[_SINA_INDEX_CODES[m.group(1)]] = {
+            "code": m.group(1),
+            "close": round(price, 3),
+            "change_pct": round((price - prev_close) / prev_close * 100, 2) if prev_close else 0.0,
+            "date": parts[30],
+        }
+    return indices
+
+
 def _fetch_indices_sina() -> dict:
     """Fetch real-time index data from Sina Finance API.
 
@@ -843,42 +882,15 @@ def _fetch_indices_sina() -> dict:
     Returns dict of {name: {code, close, change_pct, date}} or empty on failure.
     """
     import requests as _req
-    import re
-
-    sina_codes = {
-        "s_sh000001": ("上证指数", "sh000001"),
-        "s_sz399001": ("深证成指", "sz399001"),
-        "s_sz399006": ("创业板指", "sz399006"),
-        "s_sh000688": ("科创50", "sh000688"),
-    }
 
     try:
-        codes_str = ",".join(sina_codes.keys())
-        url = f"https://hq.sinajs.cn/list={codes_str}"
+        url = f"https://hq.sinajs.cn/list={','.join(_SINA_INDEX_CODES)}"
         s = _req.Session()
         s.trust_env = False  # Skip system proxy
         r = s.get(url, headers={"Referer": "https://finance.sina.com.cn"}, timeout=10)
         r.raise_for_status()
-
-        indices = {}
-        today_str = datetime.now().strftime("%Y-%m-%d")
-        # Parse: var hq_str_s_sh000001="上证指数,4082.4740,-40.2020,-0.98,7651695,111308199";
-        for line in r.text.strip().split("\n"):
-            m = re.match(r'var hq_str_(\w+)="(.+?)";', line)
-            if not m:
-                continue
-            sina_code = m.group(1)
-            parts = m.group(2).split(",")
-            if len(parts) < 4 or sina_code not in sina_codes:
-                continue
-            name, our_code = sina_codes[sina_code]
-            indices[name] = {
-                "code": our_code,
-                "close": round(float(parts[1]), 3),
-                "change_pct": round(float(parts[3]), 2),
-                "date": today_str,
-            }
-        return indices
+        r.encoding = "gbk"
+        return _parse_sina_index_quotes(r.text)
     except Exception as e:
         print(f"  Sina index fetch failed: {e}", file=sys.stderr)
         return {}
