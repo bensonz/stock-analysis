@@ -1,0 +1,186 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "商用车",
+        "5d_pct": 3.4,
+        "trend": "defensive-rotation"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": 2.79,
+        "trend": "defensive-rotation"
+      },
+      {
+        "name": "养殖业",
+        "5d_pct": 1.99,
+        "trend": "defensive-rotation"
+      },
+      {
+        "name": "非白酒",
+        "5d_pct": 1.79,
+        "trend": "defensive-rotation"
+      },
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": 1.5,
+        "trend": "defensive-rotation"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "通信设备",
+        "5d_pct": -8.21,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": -8.1,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": -6.8,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": -6.74,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "贵金属",
+        "5d_pct": -6.1,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/4持仓在今日top5热门板块；0/4持仓在bottom5冷门板块（全部位于医疗服务/化学制药/航运港口中位板块）",
+    "regime": "Panic硬封禁：涨跌比0.20:1，60家跌停，三大指数全绿；科技硬件/贵金属领跌，防御板块抗跌"
+  },
+  "position_decisions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "reason": "今日恐慌中逆势+5.97%至26.81，浮盈+10.7%已触发Rule 5'+10%→止损升至保本24.21'（午盘已执行）；化学制药/原料药未入bottom5；让赢家奔跑",
+      "sector_rank": "未入bottom5（中位板块）",
+      "new_stop": null,
+      "pnl_pct": 10.74,
+      "days_held": 5,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+7.1%守保本止损19.29未触发；VLCC运价历史高位、Q4为全年最好季度；航运港口未入bottom5；今日-1.34%属强势整理",
+      "sector_rank": "未入bottom5（中位板块）",
+      "new_stop": null,
+      "pnl_pct": 7.05,
+      "days_held": 18,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+6.0%守保本止损42.85未触发；医疗服务未入bottom5；在手订单37亿(+60.9%)/新签20.2亿(+98%)，CRO主线催化未破；今日-2.05%回撤在正常范围",
+      "sector_rank": "未入bottom5（中位板块）",
+      "new_stop": null,
+      "pnl_pct": 6.04,
+      "days_held": 11,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+27.9%让利润奔跑，止损已锁+10%(139.15)未触发；CXO龙头、在手订单664.3亿(+25.2%)、全年指引上调至585-605亿；医疗服务未入bottom5；今日-0.37%抗跌",
+      "sector_rank": "未入bottom5（中位板块）",
+      "new_stop": null,
+      "pnl_pct": 27.91,
+      "days_held": 42,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688046",
+      "name": "药康生物",
+      "reason": "RPS120=99.18>95%超买区（Rule 2封顶），且今日panic硬封禁，无板块共振",
+      "rps120": 99.18
+    },
+    {
+      "code": "301366",
+      "name": "一博科技",
+      "reason": "RPS120=99.1>95%超买区（Rule 2封顶），vcp仅SETUP，跳过",
+      "rps120": 99.1
+    },
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "明日(2026-09-29)解禁9.33亿股占总股本67.85%（输入风险标签），事件风险窗口+panic硬封禁；即便RPS120=94.17在甜区也不碰",
+      "rps120": 94.17
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "PE=561.9且营收同比-35.3%/净利-96.3%（输入财报），'PE>200且无增长'红旗；RPS120=92.33甜区但无基本面支撑，跳过",
+      "rps120": 92.33
+    },
+    {
+      "code": "002832",
+      "name": "比音勒芬",
+      "reason": "纺织服饰板块今日不在top5（无动量共振），margin=deleveraging，且panic硬封禁",
+      "rps120": 94.48
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "今日恐慌带（涨跌比0.20:1、60家跌停、三大指数全绿）触发硬封禁，即使策略池22只个股中有多只RPS>90的强势票，也必须new_positions=[]。机械层权威再次生效，避免恐慌抄底FOMO。",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "恐慌日（跌停≥30或涨跌比<0.35）是硬封禁，持仓端只让赢家奔跑，不在泥沙俱下时开新仓。"
+    },
+    {
+      "text": "持仓4只全部浮盈（普洛+10.7%/招商轮船+7.1%/昭衍+6.0%/药明+27.9%）且无一只跌破保本止损，恐慌日未触发任何卖出——验证机械止损纪律在弱带中的有效性。",
+      "type": "observation",
+      "tags": [
+        "exit-rule",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "保本/+10%止损已提前锁住利润，恐慌盘中无需主动减仓，规则自动执行。"
+    },
+    {
+      "text": "今日行业极差达11.6pp（商用车+3.4% vs 通信设备-8.21%），防御/农业/商用车领涨、科技硬件/贵金属领跌。持仓全在医药/航运中位板块，未卷入bottom5，无需Rule 1离场。",
+      "type": "signal",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "板块冷热轮动加速时，bottom5板块是硬离场区，中位板块持仓不因大盘恐慌而离场。"
+    },
+    {
+      "text": "海通发展RPS120=94.17在甜区且MA距离合规，但明日(09-29)解禁9.33亿股占总股本67.85%，属事件风险窗口，叠加panic封禁，跳过。解禁>60%总股本的标的在解禁日前1-2日开新仓风险极高。",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "巨额解禁（占总股本67.85%）带来供给冲击预期，开仓前必须检查近期解禁事件。"
+    }
+  ],
+  "market_summary": "恐慌日：三大指数全绿（上证-1.67%/深成-3.44%/创业板-4.53%），涨跌比0.20:1（898涨/4554跌），60家跌停vs35家涨停，机械层硬封禁新开仓。导火索：OpenAI暂停最新模型训练（美联社9/26）+美国两党提案限制中国光模块（香港商报），算力硬件/CPO/通信设备/元件/贵金属领跌，防御板块（商用车+3.4%/林业/养殖/非白酒/油气开采）逆势。IV整体偏悲观（平均IV Rank 0.57）。持仓4只全在医药/航运中位板块且全浮盈，止损纪律与让赢家奔跑纪律同时生效。",
+  "market_sentiment": "bearish",
+  "market_call": "防守（硬封禁，现金为王，不开新仓）"
+}

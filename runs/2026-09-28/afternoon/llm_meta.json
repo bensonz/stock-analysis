@@ -1,0 +1,112 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 192402,
+  "output_tokens": 18253,
+  "rounds": 3,
+  "duration_sec": 405.6,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月28日 大跌 原因 创业板 科技股",
+        "max_results": 6
+      },
+      "result_length": 3850
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 CXO 最新消息 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3411
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "VLCC 油运运价 招商轮船 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3291
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "普洛药业 原料药 2026年9月 最新",
+        "max_results": 5
+      },
+      "result_length": 3277
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "昭衍新药 CRO 临床前 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3543
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.hkcd.com.hk/content_app/2026-09/28/content_8777464.html",
+        "maxChars": 5000
+      },
+      "result_length": 670
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.chnfund.com/article/AR01727858-0d73-ac1f-cf9e-3a23f85c73e8",
+        "maxChars": 5000
+      },
+      "result_length": 2542
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.sohu.com/a/1076897734_121123884",
+        "maxChars": 5000
+      },
+      "result_length": 5059
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://wallstreetcn.com/articles/3782625",
+        "maxChars": 5000
+      },
+      "result_length": 107
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+2026年9月28日",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    }
+  ],
+  "fallback_used": false
+}
