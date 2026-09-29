@@ -14,7 +14,7 @@ The trading philosophy lives in `agents/ANALYST.md` (momentum-first: buy strengt
 
 - Python venv at `.venv` — **activate it first**, then use `python3` (never bare `python`): `source .venv/bin/activate`
 - Deps: `pip install -r requirements.txt` (akshare, anthropic, openai, pycryptodome, httpx, requests — baostock/tushare removed 2026-09-01, imported by nothing; install by hand for forensics)
-- Secrets in `.env` (git-ignored): `IFIND_REFRESH_TOKEN` (primary price source — see below), `TUSHARE_TOKEN`, `TAVILY_API_KEY` (web search), and OpenAI-compatible `OPENAI_*` / `LLM_PROVIDER`. `llm_client.py` also reads env from `~/.claude/settings.json`. (`IFIND_USERNAME`/`IFIND_PASSWORD` are unused by the HTTP API; the refresh token alone suffices.)
+- Secrets in `.env` (git-ignored): `LIXINGER_TOKEN` (trial — see `docs/LIXINGER_EVAL/FINDINGS.md`; nothing in the pipeline uses it yet), `TUSHARE_TOKEN`, `TAVILY_API_KEY` (web search), and OpenAI-compatible `OPENAI_*` / `LLM_PROVIDER`. `llm_client.py` also reads env from `~/.claude/settings.json`. The `IFIND_*` lines are **commented out** since 2026-09-29 — the seat lapsed and will not be renewed (see Data sources).
 - **External dependency:** IV sentiment (`fetch_iv_sentiment.py`) requires the separate *options-learn* backend on `http://localhost:8000`. If it's down, `iv_sentiment.json` comes back empty (`signal: "无数据"`) and the report says "IV data unavailable" — this is a missing dependency, not a pipeline bug. It degrades gracefully (sizing falls back to "unknown").
 
 ## Common commands
@@ -55,9 +55,9 @@ python3 scripts/pricedb.py rps [DATE]# recompute MA-based RPS for all stocks
 python3 scripts/pricedb.py status    # DB stats
 python3 scripts/pricedb.py snapshot [--date ISO --dry-run --force]
                                      # today's settled bar from a REAL-TIME feed:
-                                     # iFinD real_time first (~2.4s for the
-                                     # universe), sina hq.sinajs.cn fallback
-                                     # (~30s, batched ~100 codes/req). The
+                                     # sina hq.sinajs.cn (~30s, batched ~100
+                                     # codes/req; BJ as bj920xxx). iFinD
+                                     # real_time first when configured. The
                                      # daily-kline archive is batch-built and can
                                      # lag 6h, so this is the close-slot fast path.
                                      # Refuses while the session is open; rejects
@@ -73,7 +73,8 @@ python3 scripts/pricedb.py factors heal     # repair a multi-session factor gap
                                      # (ex-div calendar + per-code re-derivation)
 python3 scripts/pricedb.py factors rebuild [--code CSV] [--dry-run]
                                      # rebuild whole series from iFinD
-                                     # ths_af_stock. DESTRUCTIVE: DELETEs each
+                                     # ths_af_stock — DORMANT (needs the lapsed
+                                     # iFinD seat). DESTRUCTIVE: DELETEs each
                                      # rebuilt code's rows first. Rebuilds a
                                      # code entirely or not at all — iFinD
                                      # anchors its factor base at listing while
@@ -81,7 +82,8 @@ python3 scripts/pricedb.py factors rebuild [--code CSV] [--dry-run]
                                      # date, so a partial splice would fabricate
                                      # a return on the splice date.
 python3 scripts/pricedb.py backfill-amount [--beg ISO --end ISO --dry-run]
-                                     # fill NULL `amount` from iFinD. Writes
+                                     # fill NULL `amount` from iFinD — DORMANT
+                                     # (needs the lapsed iFinD seat). Writes
                                      # ONLY that column (OHLCV untouched, so
                                      # first-writer-wins holds) and refuses any
                                      # row whose stored close disagrees with
@@ -227,14 +229,16 @@ today's contract.
 
 ## Data sources & fallbacks
 
-Price history (`pricedb.py`) fetches through a three-provider chain — **iFinD primary → AkShare → Sina** (doctrine set 2026-08-25 when the paid iFinD seat landed; supersedes the 2026-08-01 "AkShare → Sina" doctrine that followed the eastmoney IP-throttle outage). The free chain is deliberately KEPT behind iFinD rather than retired: iFinD is a single commercial dependency whose token can lapse, and `db_health` gates the pipeline, so an outage with no fallback would hard-stop the run. eastmoney direct/clist, baostock and tushare remain RETIRED for price bars — do not re-add them, their fetchers survive only as internal helpers for factor derivation and forensics.
+Price history (`pricedb.py`) fetches through **AkShare → Sina** (doctrine reset 2026-09-29: the paid iFinD seat lapsed 2026-09-25 and the owner chose not to renew). iFinD is still first in `iter_providers`, but with the `IFIND_*` lines commented out in `.env`, `ifind_client.configured` is False and every iFinD path returns immediately — the code is **dormant, not deleted**, so re-enabling is uncommenting four lines. What was lost: exact adj factors (daily sync fell back to eastmoney clist f18 — 0.5% noise floor, misses small dividends, throttle-prone), iwencai screens, `factors rebuild`, `backfill-amount`. Lixinger (`docs/LIXINGER_EVAL/FINDINGS.md`) is the evaluated replacement for factors + BJ-complete bulk closes; not purchased. eastmoney direct/clist, baostock and tushare remain RETIRED for price bars — do not re-add them, their fetchers survive only as internal helpers for factor derivation and forensics.
+
+Sina carries BJ 920x codes as `bj920xxx` (quotes and daily klines) — fixed 2026-09-29; before that every sina-sourced day silently lacked ~340 BJ bars. `_partial_price_dates` judges each exchange separately so a missing exchange is a partial day that `repair` targets.
 
 When adding data fetching, follow the "try sources in order, degrade gracefully, never hard-fail the run" pattern, and make every degradation LOUD: `db_health` (staleness/partial/spot-audit) rides into the prompt, the report banner, and the phase-1 contract.
 
-**iFinD specifics** (`scripts/ifind_client.py`; full API reference in `docs/IFIND_EVAL/IFIND_API_GUIDE.md`, evaluation in `FINDINGS.md`). Auth is `IFIND_REFRESH_TOKEN` → a ~7-day access token cached at `data/ifind_token.json` (git-ignored, 0600). The client imports nothing from this project on purpose, so `pricedb` and `data_collector` can both depend on it without a cycle. Three traps are load-bearing and all fail *silently*:
+**iFinD specifics — dormant since 2026-09-29, kept for if the seat returns** (`scripts/ifind_client.py`; full API reference in `docs/IFIND_EVAL/IFIND_API_GUIDE.md`, evaluation in `FINDINGS.md`). Auth is `IFIND_REFRESH_TOKEN` → a ~7-day access token cached at `data/ifind_token.json` (git-ignored, 0600). The client imports nothing from this project on purpose, so `pricedb` and `data_collector` can both depend on it without a cycle. Three traps are load-bearing and all fail *silently*:
 
 - `date_sequence` takes `indipara` (list of dicts), **not** `indicators`.
 - `ths_the_sw_industry_stock` params are `[level, date]` — **level first**. Reversed, it returns `""` with `errorcode: 0`, not an error.
 - **Volume units differ per endpoint**: `cmd_history_quotation` and `high_frequency` return 股 (÷100 to store 手); `real_time_quotation` returns 手 already. Getting this wrong is a silent 100× error.
 
-Real-time position prices, market breadth, sector ranking and index quotes all try iFinD first and fall back to the Sina paths (`data_collector.py`); breadth and sectors share one universe pull so they can't disagree. `input/ifind_candidates.json` holds iwencai natural-language screens as a **display-only second opinion** — it does NOT feed the hard RPS/MA gate, same posture as `regime.json`.
+Real-time position prices, market breadth, sector ranking and index quotes come from the Sina paths (`data_collector.py`; iFinD first only when configured). Sina index quotes use the full `hq_str_sh000001` format, whose field 30 is the quote's own date — the short `s_` format has none and stamped holidays with the prior close (fixed 2026-09-29). `input/ifind_candidates.json` (iwencai screens, display-only) now records `available: false` every run.
