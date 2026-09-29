@@ -251,6 +251,9 @@ def _sina_symbol(code: str, exchange: str) -> str | None:
         return f"sh{code}"
     if exchange == "SZ" or code.startswith(("000", "001", "002", "003", "300", "301")):
         return f"sz{code}"
+    # BJ 920x is on sina as `bj`; legacy 43x/83x/87x answer all-zero quotes.
+    if code.startswith("92"):
+        return f"bj{code}"
     return None
 
 def _ifind_tables_to_rows(tables: list, ths_to_code: dict,

@@ -64,14 +64,17 @@ _LINE_RE = re.compile(r'var hq_str_[a-z]{2}(\d+)="(.*)";')
 def sina_symbol(code: str) -> str | None:
     """Prefixed symbol for the quote feed, or None if unsupported.
 
-    BJ codes (43x/83x/87x/92x) are not carried by this feed. They are already
-    the permanently-unfactored set the adjustment layer reads as 1.0, so a
-    missing bar here is the status quo, not a regression.
+    BJ 920x codes are carried as `bj920xxx`. Until 2026-09-29 all BJ returned
+    None on the belief the feed had no BJ, so every sina-sourced day lacked
+    ~340 BJ bars. Legacy 43x/83x/87x codes moved to 920x; sina still answers
+    them, with all-zero quotes, so they stay unsupported.
     """
     c = str(code).split(".")[0].strip()
     if not c.isdigit() or len(c) != 6:
         return None
-    if c.startswith(("4", "8", "92")):
+    if c.startswith("92"):
+        return "bj" + c
+    if c.startswith(("4", "8")):
         return None
     return ("sh" if c.startswith(("6", "9")) else "sz") + c
 

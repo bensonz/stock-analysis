@@ -53,6 +53,12 @@ def test_sina_symbol_prefixes_the_exchange_in_lower_case():
     assert bars._sina_symbol("000001", "SZ") == "sz000001"
 
 
+def test_sina_symbol_maps_bj_920_codes_and_drops_legacy_ones():
+    assert bars._sina_symbol("920002", "BJ") == "bj920002"
+    assert bars._sina_symbol("920002", "") == "bj920002"
+    assert bars._sina_symbol("430047", "BJ") is None   # moved to 920x
+
+
 # --- numeric coercion -------------------------------------------------------
 
 def test_safe_float_turns_junk_into_none_not_zero():

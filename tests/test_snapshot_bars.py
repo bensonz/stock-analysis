@@ -43,9 +43,17 @@ def test_symbol_prefixes_by_exchange():
     assert sb.sina_symbol("688222.SH") == "sh688222"      # suffix tolerated
 
 
-def test_bj_codes_are_unsupported_not_broken():
-    """BJ isn't on this feed. Already read as factor 1.0 — absence is status quo."""
-    for code in ("430047", "830799", "920059"):
+def test_bj_920_codes_map_to_the_bj_prefix():
+    """Sina carries BJ as `bj920xxx`. Until 2026-09-29 this returned None on the
+    belief the feed had no BJ, so every sina-sourced day lacked ~340 BJ bars
+    (09-21, 09-28, 09-29 at 5199 rows vs ~5537)."""
+    assert sb.sina_symbol("920002") == "bj920002"
+    assert sb.sina_symbol("920799.BJ") == "bj920799"
+
+
+def test_legacy_bj_codes_stay_unsupported():
+    """43x/83x/87x moved to 920x; sina still answers them, with all-zero quotes."""
+    for code in ("430047", "830799", "870299"):
         assert sb.sina_symbol(code) is None
 
 
@@ -154,7 +162,7 @@ def test_stats_report_rejections_rather_than_swallowing_them():
 
 def test_unsupported_codes_are_counted_separately():
     sess = _Session(lambda i: line())
-    _rows, stats = sb.fetch_snapshot_bars(["600000", "830799", "920059"], DAY, session=sess)
+    _rows, stats = sb.fetch_snapshot_bars(["600000", "830799", "430047"], DAY, session=sess)
     assert stats["skipped_unsupported"] == 2
 
 
