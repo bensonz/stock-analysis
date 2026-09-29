@@ -1,0 +1,70 @@
+{
+  "date": "2026-09-29",
+  "actions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "price": 25.92,
+      "pnl_pct": 7.06,
+      "note": "浮盈+7.06%守保本止损24.21未触发(现价25.92, 缓冲6.6%); 化学制药/原料药未入bottom5; 09-28 +9.71%后今日-3.32%属获利回吐, 让赢家奔跑; 股权登记日9/30、除权10/8(10派1.39元)影响可忽略"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 19.97,
+      "pnl_pct": 3.52,
+      "note": "浮盈+3.52%守保本止损19.29未触发(现价19.97, 距止损仅3.4%, stop_proximity WATCH); 油运超级周期强化(BDTI 5250、VLCC TCE 63.1万美元/天历史高位, 中信证券'节后10-11月货盘好于9月', 来源: 证券时报/网易09-26); 航运港口未入bottom5; 19天仅+3.5%逼近15日时间止损线(<3%才触发), 密切监控"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 44.89,
+      "pnl_pct": 4.76,
+      "note": "浮盈+4.76%守保本止损42.85未触发(现价44.89, 距止损4.5%, stop_proximity WATCH); 医疗服务未入bottom5; CRO景气延续('十五五'规划催化); 12天持仓未触时间止损"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 160.79,
+      "pnl_pct": 27.11,
+      "note": "浮盈+27.11%, 止损已锁+10%(139.15)未触发(现价160.79); CXO龙头, 医疗服务未入bottom5; 让赢家奔跑"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 977956.0,
+    "dayPnl": -2800.0,
+    "dayReturnPct": -0.29,
+    "totalReturnPct": -2.2,
+    "unrealizedPnl": 15370.0,
+    "realizedPnl": -37414.0,
+    "cashPct": 85.26
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 2.8991,
+    "up": 4053,
+    "down": 1398,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 44,
+    "limit_downs": 9,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 2.90:1, 3/3 major indices green, 44 limit-ups / 9 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "Breadth 2.90:1偏强(4053涨/1398跌, 44涨停/9跌停), 三大指数全红, 机械层strong(sizing 1.0)。但r0_2=2816占50.7%(普涨无主线)、节前缩量、IV rank均值0.60偏高(偏悲观), 反弹质量薄。国常会9/28增量政策+上海新政驱动地产, AIGC长剧驱动传媒, 元件一日反转回top5; 煤炭/炼化/农产品垫底。新仓无合格标的, 保持85%现金。"
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "date": "2026-09-29",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1790652912.41072,
+      "errors": [],
+      "end": 1790652982.438715,
+      "duration_sec": 70.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 7978,
+      "tokens": {
+        "input_tokens": 277412,
+        "output_tokens": 25486
+      },
+      "rounds": 4,
+      "tool_calls_count": 11,
+      "duration_sec": 278.6,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1790653261.0228229,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=158",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=86",
+        "Hypothesis: Updated h144 (hypothesis): +1 supporting evidence → hitRate=67%, n=3",
+        "Hypothesis: Created h206 (observation): 海通发展 RPS94.17 + 今日解禁9.33亿股(占总股本67.85%)构成'扩展区无豁免+天量解禁'双重风险簇, 此类应直接跳过不犹豫...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "601872",
+                "name": "招商轮船",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 19.97,
+                "stopLoss": 19.29,
+                "distance_pct": 3.41,
+                "suggestion": "🟠 WATCH — 3.4% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "603127",
+                "name": "昭衍新药",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 44.89,
+                "stopLoss": 42.85,
+                "distance_pct": 4.54,
+                "suggestion": "🟠 WATCH — 4.5% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1790653261.462143,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 601872 — 🟠 WATCH — 3.4% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 603127 — 🟠 WATCH — 4.5% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 349.0
+  }
+}

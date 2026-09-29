@@ -1,0 +1,122 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 277412,
+  "output_tokens": 25486,
+  "rounds": 4,
+  "duration_sec": 278.6,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月29日 数字媒体 出版 影视院线 板块 上涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3233
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "房地产开发 板块 上涨 原因 2026年9月 政策",
+        "max_results": 5
+      },
+      "result_length": 3778
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "油运 VLCC 运价 招商轮船 2026年9月29日",
+        "max_results": 5
+      },
+      "result_length": 3707
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "普洛药业 原料药 2026年9月 股价",
+        "max_results": 5
+      },
+      "result_length": 3431
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 节前 2026年9月29日 大盘 成交 涨跌",
+        "max_results": 5
+      },
+      "result_length": 3533
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://finance.sina.com.cn/stock/bxjj/2026-09-29/doc-initmzhk2636612.shtml",
+        "maxChars": 4000
+      },
+      "result_length": 3885
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=元件板块+PCB+上涨原因+2026年9月29日",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=CRO+创新药+医药板块+2026年9月29日",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=国庆节前+A股+资金+缩量+2026年9月29日",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.chinanews.com.cn/cj/2026/09-01/10688061.shtml"
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 3000,
+        "url": "https://www.163.com/dy/article/L7O4B30R053469RG.html"
+      },
+      "result_length": 3000
+    }
+  ],
+  "fallback_used": false
+}

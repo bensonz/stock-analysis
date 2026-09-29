@@ -55,20 +55,20 @@
         · 2026-09-08 noon      数据健康告警: screening data is 1 session(s) stale (latest 2026-09-07, expected 2026
         · … 另有 4 次更早的
 
-  ▸ db_health_spot_check  [env]
-      20 次 / 20 天   2026-08-12 … 2026-09-24   最长连续 2
-      执行:   python3 scripts/pricedb.py status
-        · 2026-09-18 afternoon 抽查 20 只、实际核对 0 只
-        · 2026-09-22 afternoon 抽查 20 只、实际核对 0 只
-        · 2026-09-23 afternoon 抽查 20 只、实际核对 0 只
-        · 2026-09-24 afternoon 抽查 20 只、实际核对 0 只
-        · … 另有 16 次更早的
-
   ▸ snapshot_wrote_rows  [env]
       2 次 / 2 天   2026-08-26 … 2026-09-25
       执行:   python3 scripts/pricedb.py snapshot --date 2026-08-26 --dry-run
         · 2026-08-26 afternoon 快照写入 0 行
         · 2026-09-25 afternoon 快照写入 0 行
+
+  ▸ db_health_spot_check  [env]
+      21 次 / 21 天   2026-08-12 … 2026-09-28   最长连续 2
+      执行:   python3 scripts/pricedb.py status
+        · 2026-09-22 afternoon 抽查 20 只、实际核对 0 只
+        · 2026-09-23 afternoon 抽查 20 只、实际核对 0 只
+        · 2026-09-24 afternoon 抽查 20 只、实际核对 0 只
+        · 2026-09-28 afternoon 抽查 20 只、实际核对 0 只
+        · … 另有 17 次更早的
 
 
 ## 已知并接受 (1)
