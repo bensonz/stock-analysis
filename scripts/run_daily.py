@@ -65,6 +65,7 @@ from data_collector import (
     save_strategy_pool_debug,
 )
 from market_rules import at_limit_up, price_limit_pct
+from pricedb import most_recent_trading_day
 from position_manager import (
     SameDaySellError,
     load_active_positions,
@@ -2263,6 +2264,22 @@ def attempt_partial_day_autoheal(data: dict) -> bool:
         return False
 
 
+def non_trading_day_reason(date_iso: str, calendar: list[str] | None = None) -> str | None:
+    """Why `date_iso` has no session to analyse, or None if it is a trading day.
+
+    launchd fires every weekday; until 2026-09-29 nothing consulted the exchange
+    calendar, so the 09-25 Mid-Autumn run re-analysed 09-24 and put a fake point
+    on the equity chart. The akshare calendar lists holidays ahead of time. When
+    it is unreachable, most_recent_trading_day falls back to weekdays, so an
+    outage fails OPEN: one redundant run rather than a skipped real session.
+    """
+    day = datetime.strptime(date_iso, "%Y-%m-%d").date()
+    last = most_recent_trading_day(day, calendar)
+    if last == day:
+        return None
+    return f"{date_iso} is not a trading day (last session {last.isoformat()})"
+
+
 def main():
     run_start = datetime.now().astimezone()
     date = run_start.strftime("%Y-%m-%d")
@@ -2326,6 +2343,12 @@ def main():
 
     if "--run" in args:
         # Full automated pipeline: Phase 1 → LLM → Phase 3 → Phase 4 → git commit
+        if "--allow-non-trading-day" not in args:
+            reason = non_trading_day_reason(date)
+            if reason:
+                print(f"⏸ {reason} — nothing to analyse, exiting without a run dir "
+                      f"(--allow-non-trading-day to force).", file=sys.stderr)
+                return
         legacy_llm = "--legacy-llm" in args
         llm_provider = None
         if "--llm-provider" in args:

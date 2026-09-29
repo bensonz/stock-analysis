@@ -19,6 +19,11 @@ source .venv/bin/activate        # always — bare `python` is never right here
 | 15:05 | `com.bz.stock-pipeline` | afternoon run (post-close, settled) |
 | 11:55 / 15:25 | `com.bz.stock-doctor` | audits the run 20 min after each slot |
 
+On exchange holidays (e.g. National Day week) the pipeline job still fires but
+exits immediately — `⏸ … is not a trading day` in `pipeline.log`, no run dir.
+The doctor then re-audits the last real run, which is harmless. Force a run
+anyway with `--run --allow-non-trading-day`.
+
 Both are launchd jobs (`ops/launchd/*.plist`), logging to
 `data/launchd/pipeline.log` and `doctor.log`. **The laptop must be awake and
 preferably on power** — lid closed on battery means the job is deferred until
