@@ -136,17 +136,32 @@ def _last_fully_covered_date(conn: sqlite3.Connection) -> str | None:
     return row[0] if row and row[0] else None
 
 def _partial_price_dates(conn: sqlite3.Connection) -> list[str]:
-    """Dates whose row count is under half the median daily count — the
-    signature of a provider outage that landed only a fragment of the
-    universe (e.g. a clist sweep killed mid-flight)."""
-    counts = conn.execute(
-        "SELECT date, COUNT(*) FROM daily_prices GROUP BY date ORDER BY date"
+    """Dates where the whole day, or any one exchange, has under half its
+    median daily row count — the signature of a provider outage that landed
+    only a fragment of the universe (e.g. a clist sweep killed mid-flight).
+
+    Per exchange since 2026-09-29: a sina-only day lacked every BJ code yet
+    kept ~94% of the total, so the whole-day test never fired and May-Sep 2026
+    accumulated months of BJ gaps that no repair targeted.
+    """
+    rows = conn.execute(
+        "SELECT date, CASE WHEN code LIKE '6%' THEN 'SH' "
+        "WHEN code LIKE '0%' OR code LIKE '3%' THEN 'SZ' ELSE 'BJ' END, COUNT(*) "
+        "FROM daily_prices GROUP BY 1, 2"
     ).fetchall()
-    if not counts:
+    if not rows:
         return []
-    ordered = sorted(c for _, c in counts)
-    median = ordered[len(ordered) // 2]
-    return [d for d, c in counts if c < 0.5 * median]
+    dates = sorted({d for d, _, _ in rows})
+    per: dict[str, dict[str, int]] = {"ALL": {}}
+    for d, ex, c in rows:
+        per.setdefault(ex, {})[d] = c
+        per["ALL"][d] = per["ALL"].get(d, 0) + c
+    partial = set()
+    for counts in per.values():
+        ordered = sorted(counts.get(d, 0) for d in dates)
+        median = ordered[len(ordered) // 2]
+        partial.update(d for d in dates if counts.get(d, 0) < 0.5 * median)
+    return sorted(partial)
 
 
 BAR_COLUMNS = "(code,date,open,high,low,close,volume,amount)"

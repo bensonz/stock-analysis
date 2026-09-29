@@ -110,3 +110,34 @@ def test_partial_days_are_identified_against_the_universe():
 def test_the_coverage_cursor_is_none_on_an_empty_db():
     """Must not invent a date — callers use this to decide what to fetch."""
     assert storage._last_fully_covered_date(fresh()) is None
+
+
+def _day(date, sh, bj):
+    return ([(f"{600000+i:06d}", date, 1, 1, 1, 1, 1, 1.0) for i in range(sh)]
+            + [(f"{920000+i:06d}", date, 1, 1, 1, 1, 1, 1.0) for i in range(bj)])
+
+
+def test_a_day_missing_one_whole_exchange_is_partial():
+    """2026-09-28 landed 5199 of ~5537 rows: every BJ code absent, the total
+    comfortably above half the median, so no repair ever targeted it. May-Aug
+    2026 averaged 56-122 BJ rows/day against ~300 the same way."""
+    conn = fresh()
+    storage.write_bars(conn, _day("2026-09-22", 90, 10) + _day("2026-09-23", 90, 10)
+                       + _day("2026-09-24", 90, 10) + _day("2026-09-28", 90, 0))
+    assert storage._partial_price_dates(conn) == ["2026-09-28"]
+
+
+def test_an_exchange_that_is_usually_absent_flags_nothing():
+    """Median per exchange, so a segment that is thin across history is the
+    baseline, not a gap on every day."""
+    conn = fresh()
+    storage.write_bars(conn, _day("2026-09-22", 90, 0) + _day("2026-09-23", 90, 0)
+                       + _day("2026-09-24", 90, 1))
+    assert storage._partial_price_dates(conn) == []
+
+
+def test_a_day_missing_half_the_market_is_still_partial():
+    conn = fresh()
+    storage.write_bars(conn, _day("2026-09-22", 90, 10) + _day("2026-09-23", 90, 10)
+                       + _day("2026-09-24", 30, 10))
+    assert storage._partial_price_dates(conn) == ["2026-09-24"]
