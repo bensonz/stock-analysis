@@ -1,0 +1,70 @@
+{
+  "date": "2026-09-29",
+  "actions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "price": 26.56,
+      "pnl_pct": 9.7,
+      "note": "浮盈+9.7%守保本止损24.21未触发(现价26.56)；化学制药/原料药未入bottom5；今日-0.93%属获利回吐，让赢家奔跑"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 19.89,
+      "pnl_pct": 3.1,
+      "note": "浮盈+3.1%守保本止损19.29未触发(现价19.89，距止损仅3.0%，stop_proximity WATCH)；航运港口未入bottom5；VLCC运价历史高位Q4旺季逻辑未破，但19个交易日仅+3.1%且今日-3.68%回吐，逼近时间止损线(<3%触发)，明日跌破19.29无条件离场"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 44.82,
+      "pnl_pct": 4.6,
+      "note": "浮盈+4.6%守保本止损42.85未触发(现价44.82，距止损4.4%，stop_proximity WATCH)；医疗服务未入bottom5；CRO量价齐升+十五五规划催化延续"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 160.66,
+      "pnl_pct": 27.0,
+      "note": "浮盈+27.0%让赢家奔跑，止损已锁+10%(139.15)未触发(现价160.66)；CXO龙头，医疗服务未入bottom5"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 978885.0,
+    "dayPnl": -1871.0,
+    "dayReturnPct": -0.19,
+    "totalReturnPct": -2.11,
+    "unrealizedPnl": 16299.0,
+    "realizedPnl": -37414.0,
+    "cashPct": 85.18
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 1.7957,
+    "up": 3471,
+    "down": 1933,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 57,
+    "limit_downs": 12,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 1.80:1, 3/3 major indices green, 57 limit-ups / 12 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "2026-09-29三大指数微幅收红(上证+0.18%/深成+0.34%/创业板+0.09%/科创50+0.86%)，breadth 1.80:1偏多(3471涨/1933跌)，涨停57/跌停12，机械层判定strong、允许满仓。但分布右偏到r0_2(2452只占上涨股约70%)，属弱质量普涨。当日主线为政策驱动地产链(房地产开发+4.14%/房地产服务+2.72%)与AI应用(数字媒体+3.65%/出版+3.11%)，冷门为林业(-3.41%)/炼化(-2.32%)/煤炭(-1.38%)。候选池与当日主线完全错位(无一在top5)，RPS>95封顶拦截10只、扩展区2只无豁免、甜区1只跌破MA20——判断层选择空仓等更好结构，而非强制小仓。IV整体0.48中性(深100ETF 0.59/300ETF 0.52偏高，selective)，不构成额外限制。持仓4只均未落bottom5，让赢家奔跑；招商轮船(距保本止损3.0%)与昭衍新药(距4.4%)贴止损需紧盯。"
+  }
+}

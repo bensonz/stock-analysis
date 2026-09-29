@@ -1,0 +1,226 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "房地产开发",
+        "1d_pct": 4.14,
+        "trend": "accelerating"
+      },
+      {
+        "name": "数字媒体",
+        "1d_pct": 3.65,
+        "trend": "accelerating"
+      },
+      {
+        "name": "出版",
+        "1d_pct": 3.11,
+        "trend": "steady"
+      },
+      {
+        "name": "房地产服务",
+        "1d_pct": 2.72,
+        "trend": "steady"
+      },
+      {
+        "name": "元件",
+        "1d_pct": 2.53,
+        "trend": "rebounding"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "林业Ⅱ",
+        "1d_pct": -3.41,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "炼化及贸易",
+        "1d_pct": -2.32,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "非白酒",
+        "1d_pct": -2.19,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "其他家电Ⅱ",
+        "1d_pct": -2.06,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "煤炭开采",
+        "1d_pct": -1.38,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/4持仓在今日top5热门板块；4/4均未落入bottom5冷门板块",
+    "regime": "政策驱动地产链+AI应用(数字媒体/出版)领涨，元件反弹；煤炭/炼化/林业偏冷；候选池与当日主线完全错位"
+  },
+  "position_decisions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "reason": "浮盈+9.7%守保本止损24.21未触发(现价26.56)；化学制药/原料药未入bottom5；今日-0.93%属获利回吐，让赢家奔跑",
+      "sector_rank": "中游(未入今日top5/bottom5)",
+      "new_stop": null,
+      "pnl_pct": 9.7,
+      "days_held": 6,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+3.1%守保本止损19.29未触发(现价19.89，距止损仅3.0%，stop_proximity WATCH)；航运港口未入bottom5；VLCC运价历史高位Q4旺季逻辑未破，但19个交易日仅+3.1%且今日-3.68%回吐，逼近时间止损线(<3%触发)，明日跌破19.29无条件离场",
+      "sector_rank": "中游(未入今日top5/bottom5)",
+      "new_stop": null,
+      "pnl_pct": 3.1,
+      "days_held": 19,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+4.6%守保本止损42.85未触发(现价44.82，距止损4.4%，stop_proximity WATCH)；医疗服务未入bottom5；CRO量价齐升+十五五规划催化延续",
+      "sector_rank": "中游(未入今日top5/bottom5)",
+      "new_stop": null,
+      "pnl_pct": 4.6,
+      "days_held": 12,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+27.0%让赢家奔跑，止损已锁+10%(139.15)未触发(现价160.66)；CXO龙头，医疗服务未入bottom5",
+      "sector_rank": "中游(未入今日top5/bottom5)",
+      "new_stop": null,
+      "pnl_pct": 27.0,
+      "days_held": 43,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "301366",
+      "name": "一博科技",
+      "reason": "RPS120 99.2超过95封顶；dist_ma20 +16.3%>12%同时触追高线(rule2_over_extended=true)",
+      "rps120": 99.2
+    },
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "reason": "RPS120 98.87超过95封顶；dist_ma5 -5.2%跌破MA5，动量冷却",
+      "rps120": 98.87
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "RPS120 95.73超过95封顶",
+      "rps120": 95.73
+    },
+    {
+      "code": "688222",
+      "name": "成都先导",
+      "reason": "RPS120 95.45超过95封顶；dist_ma20 +19.2%>12%严重追高",
+      "rps120": 95.45
+    },
+    {
+      "code": "002832",
+      "name": "比音勒芬",
+      "reason": "RPS120 94.54处扩展区92-95%，1项风险(07-29 -4.22%抛压)、净利同比-18.7%、纺织服饰非top10%、无新鲜催化——三项豁免(板块top10%/0风险/催化>50%)均不满足",
+      "rps120": 94.54
+    },
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "RPS120 93.68扩展区；现价12.72跌破MA5/10/20(dist_ma5 -4.8%/ma10 -6.5%/ma20 -7.7%)，09-11曾-8.76%抛压；航运今日未入top5",
+      "rps120": 93.68
+    },
+    {
+      "code": "601918",
+      "name": "新集能源",
+      "reason": "煤炭开采今日bottom5(-1.38%)，Rule 1硬性禁入；margin deleveraging(chg5 -11.18%)",
+      "rps120": 92.76
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "RPS120 92.25扩展区，2项风险、净利同比-96%、PE 572(PE>200且无增长红旗)——无豁免",
+      "rps120": 92.25
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "RPS120 91.69处甜区，但现价跌破MA20(dist_ma20 -6.3%)+margin deleveraging(chg5 -5.6%)+有色金属未确认top30%，三重疑虑叠加→skip",
+      "rps120": 91.69
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "炼化及贸易今日bottom5(-2.32%)硬性禁入；跌破全部MA+margin deleveraging(chg5 -6.15%)",
+      "rps120": 90.46
+    },
+    {
+      "code": "600546",
+      "name": "山煤国际",
+      "reason": "煤炭开采今日bottom5(-1.38%)硬性禁入；margin deleveraging",
+      "rps120": 86.71
+    },
+    {
+      "code": "600428",
+      "name": "中远海特",
+      "reason": "现价跌破MA5/10/20(dist_ma5 -5.0%/ma10 -5.9%/ma20 -7.5%)，航运今日未入top5",
+      "rps120": 87.75
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "机械层报'strong'(breadth 1.80:1、3/3指数收红、满仓允许)≠应该开仓：今日涨跌分布右偏到r0_2(2452只，约占上涨股70%)，是弱质量普涨；且候选池无一只落在当日热门板块(房地产/数字媒体/出版)，此时空仓是正确动量决策而非瘫痪。",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "普涨但多数个股涨幅<2%说明无领涨主线，追涨易买在日内高点；候选池与当日主线错位时开仓胜率低。"
+    },
+    {
+      "text": "RPS>95封顶继续拦截：策略池20只中10只RPS120>95(一博99.2/药康99.12/中石98.87/锐捷97.76/英集芯97.25/松发97.09/睿创97.07/凯莱英95.73/福赛95.51/成都先导95.45)，全部按Rule 2封顶跳过，无一例外。",
+      "type": "rule",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "池内rank-IC为负(复测结论)：RPS接近满分的过热个股前向收益最差，98-99分位入场者历史上亏损最深。"
+    },
+    {
+      "text": "扩展区(92-95%)豁免条款成为关键过滤器：比音勒芬(94.54, 1风险+净利-18.7%)、益诺思(92.25, 2风险+净利-96%+PE572)均因不满足(板块top10%/0风险/催化>50%)三项豁免之一而被拦截。",
+      "type": "rule",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "扩展区入场需要超额理由(强板块/零风险/强催化)，否则高位均值回归风险高。"
+    },
+    {
+      "text": "甜区RPS不等于可买：西部矿业(RPS120=91.69)是唯一进入甜区的非冷门候选，但dist_ma20=-6.3%(跌破MA20)+margin deleveraging(chg5 -5.6%)+板块未确认top30%三重疑虑叠加→skip而非勉强小仓。",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "价格跌破MA20且融资盘净流出说明动量正在冷却，甜区打分被价格行为与资金面证伪。"
+    }
+  ],
+  "market_summary": "2026-09-29三大指数微幅收红(上证+0.18%/深成+0.34%/创业板+0.09%/科创50+0.86%)，breadth 1.80:1偏多(3471涨/1933跌)，涨停57/跌停12，机械层判定strong、允许满仓。但分布右偏到r0_2(2452只占上涨股约70%)，属弱质量普涨。当日主线为政策驱动地产链(房地产开发+4.14%/房地产服务+2.72%)与AI应用(数字媒体+3.65%/出版+3.11%)，冷门为林业(-3.41%)/炼化(-2.32%)/煤炭(-1.38%)。候选池与当日主线完全错位(无一在top5)，RPS>95封顶拦截10只、扩展区2只无豁免、甜区1只跌破MA20——判断层选择空仓等更好结构，而非强制小仓。IV整体0.48中性(深100ETF 0.59/300ETF 0.52偏高，selective)，不构成额外限制。持仓4只均未落bottom5，让赢家奔跑；招商轮船(距保本止损3.0%)与昭衍新药(距4.4%)贴止损需紧盯。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 109620,
+  "output_tokens": 23106,
+  "rounds": 2,
+  "duration_sec": 323.5,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年9月29日 A股 房地产板块 大涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3734
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年9月29日 A股 收盘 上证指数 板块 行情",
+        "max_results": 5
+      },
+      "result_length": 3329
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "数字媒体 出版 板块 上涨 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3879
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "VLCC 运价 油运 霍尔木兹 2026年9月 招商轮船",
+        "max_results": 5
+      },
+      "result_length": 3823
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "医药 CRO 十五五 规划 板块 2026年9月 药明康德",
+        "max_results": 5
+      },
+      "result_length": 3731
+    }
+  ],
+  "fallback_used": false
+}
