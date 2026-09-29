@@ -100,6 +100,11 @@ def db_health(conn: sqlite3.Connection, spot_check: bool = False) -> dict:
             f"adj factors lag prices ({cov['max_factor_date']} < {latest}) "
             f"— run 'pricedb.py factors heal'")
 
+    # Measured, not judged: doctor.check_stock_list_fresh compares it with the
+    # run date. The prompt has no use for it, so it is not a warning.
+    out["stock_list_updated"] = conn.execute(
+        "SELECT MAX(last_updated) FROM stocks").fetchone()[0]
+
     recent_partial = [d for d in _partial_price_dates(conn)
                       if d >= (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")]
     out["partial_days_30d"] = recent_partial

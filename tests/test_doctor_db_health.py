@@ -121,3 +121,36 @@ def test_a_missing_db_health_is_skipped_with_a_reason_not_passed(tmp_path):
     skipped = {s["check"]: s["reason"] for s in res.skipped}
     assert "check_db_health_warnings" in skipped
     assert "db_health" in skipped["check_db_health_warnings"]
+
+
+def test_a_stock_list_not_refreshed_today_is_reported(tmp_path):
+    """2026-09-29: the list had last been refreshed 2026-08-24 — 20 listings
+    missing, and every audit in between read clean."""
+    p = with_health(tmp_path, "2026-09-28", "afternoon", dict(
+        HEALTHY, stock_list_updated="2026-08-24 15:05:21"))
+    res = doc.audit_run("2026-09-28", "afternoon", p, runs_dir=tmp_path, accepted={})
+    found = [f for f in res.findings if f.check == "stock_list_fresh"]
+    assert len(found) == 1
+    assert found[0].kind == doc.ENV
+    assert "2026-08-24" in found[0].title
+
+
+def test_a_stock_list_refreshed_today_is_clean(tmp_path):
+    p = with_health(tmp_path, "2026-09-28", "noon", dict(
+        HEALTHY, stock_list_updated="2026-09-28 11:35:04"))
+    res = doc.audit_run("2026-09-28", "noon", p, runs_dir=tmp_path, accepted={})
+    assert not [f for f in res.findings if f.check == "stock_list_fresh"]
+
+
+def test_a_stock_list_never_stamped_is_reported(tmp_path):
+    p = with_health(tmp_path, "2026-09-28", "afternoon", dict(
+        HEALTHY, stock_list_updated=None))
+    res = doc.audit_run("2026-09-28", "afternoon", p, runs_dir=tmp_path, accepted={})
+    assert [f for f in res.findings if f.check == "stock_list_fresh"]
+
+
+def test_a_run_predating_the_field_is_skipped_with_a_reason(tmp_path):
+    p = with_health(tmp_path, "2026-09-24", "afternoon", HEALTHY)
+    res = doc.audit_run("2026-09-24", "afternoon", p, runs_dir=tmp_path, accepted={})
+    skipped = {s["check"]: s["reason"] for s in res.skipped}
+    assert "stock_list_updated" in skipped.get("check_stock_list_fresh", "")

@@ -126,3 +126,17 @@ def test_phase1_gate_hard_fails_on_spot_mismatch():
 def test_phase1_gate_skips_when_health_absent():
     result = contracts.validate_phase1_gate(_gate_data({}) | {"db_health": None})
     assert result.passed
+
+
+def test_health_reports_when_the_stock_list_was_last_refreshed(monkeypatch):
+    conn = _db({D1: 2, D2: 2, D3: 2}, factors_through=D3)
+    conn.execute("UPDATE stocks SET last_updated='2026-07-31 11:35:02' WHERE code='600000'")
+    conn.execute("UPDATE stocks SET last_updated='2026-07-30 15:05:09' WHERE code='600001'")
+    _pin_calendar(monkeypatch, D3, [D1, D2, D3])
+    assert pricedb.db_health(conn)["stock_list_updated"] == "2026-07-31 11:35:02"
+
+
+def test_health_stock_list_updated_is_none_when_never_stamped(monkeypatch):
+    conn = _db({D3: 2}, factors_through=D3)
+    _pin_calendar(monkeypatch, D3, [D3])
+    assert pricedb.db_health(conn)["stock_list_updated"] is None

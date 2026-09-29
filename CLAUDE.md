@@ -41,6 +41,13 @@ python3 scripts/run_daily.py --reset-to DATE   # roll portfolio state back to en
 # Local price database (SQLite at data/pricedb/ashare_prices.db, git-ignored)
 python3 scripts/pricedb.py init      # first-time: fetch stock list + all history
 python3 scripts/pricedb.py update    # incremental daily update (run before analysis)
+python3 scripts/pricedb.py stocks    # refresh the stock list (new listings) via
+                                     # akshare. Its own preflight step, every slot,
+                                     # ahead of `snapshot`; `update` backfills any
+                                     # listed code with no rows. Until 2026-09-29 it
+                                     # ran only inside update's akshare fallback, so
+                                     # the list froze at 08-24 — doctor
+                                     # check_stock_list_fresh now catches that.
 python3 scripts/pricedb.py rps [DATE]# recompute MA-based RPS for all stocks
 python3 scripts/pricedb.py status    # DB stats
 python3 scripts/pricedb.py snapshot [--date ISO --dry-run --force]

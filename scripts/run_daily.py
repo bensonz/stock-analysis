@@ -661,6 +661,26 @@ def preflight_pricedb_or_exit(manifest) -> None:
     skip = os.getenv("PRICEDB_SKIP_UPDATE", "").strip().lower() in {"1", "true", "yes", "on"}
     update_err: str | None = None
     snapshot_note: str | None = None
+    stock_list_note: str | None = None
+
+    # ── Universe refresh (new listings), every slot, ahead of the snapshot so
+    # a new code gets today's bar in the same run. Its own step since
+    # 2026-09-29 — as a side effect of update's akshare fallback it never ran,
+    # and the list froze at 08-24. Failure is non-fatal: the stored universe
+    # still prices; doctor.check_stock_list_fresh makes it loud.
+    if not skip:
+        try:
+            lst = subprocess.run(
+                [sys.executable, str(PROJECT_ROOT / "scripts" / "pricedb.py"), "stocks"],
+                cwd=PROJECT_ROOT, capture_output=True, text=True,
+            )
+            tail = (lst.stderr.strip().splitlines() or ["(no output)"])[-1]
+            stock_list_note = tail if lst.returncode == 0 else f"failed: {tail}"
+            mark = "" if lst.returncode == 0 else "⚠ "
+            print(f"  [preflight] {mark}{stock_list_note}", file=sys.stderr)
+        except Exception as e:
+            stock_list_note = f"raised: {type(e).__name__}: {e}"
+            print(f"    ⚠ stock-list refresh raised (non-fatal): {e}", file=sys.stderr)
 
     # ── Fast path for TODAY's bar, ahead of the kline archive ──────────────
     # Sina's real-time feed holds the settled day minutes after the close;
@@ -731,7 +751,8 @@ def preflight_pricedb_or_exit(manifest) -> None:
             print("  ✗ pricedb has no daily_prices rows — refusing to proceed", file=sys.stderr)
             manifest.add_phase("preflight_pricedb", "failed",
                                details={"error": "empty", "update_err": update_err,
-                                        "snapshot": snapshot_note})
+                                        "snapshot": snapshot_note,
+                                        "stock_list": stock_list_note})
             manifest.finalize()
             sys.exit(2)
 
@@ -749,7 +770,8 @@ def preflight_pricedb_or_exit(manifest) -> None:
             manifest.add_phase("preflight_pricedb", "ok",
                                details={"latest_date": latest,
                                         "target": latest_trading_day.isoformat(),
-                                        "snapshot": snapshot_note})
+                                        "snapshot": snapshot_note,
+                                        "stock_list": stock_list_note})
             return
 
         # Stale (latest is behind the last settled session). Only hard-refuse
@@ -770,7 +792,8 @@ def preflight_pricedb_or_exit(manifest) -> None:
                                details={"latest_date": latest,
                                         "expected": latest_trading_day.isoformat(),
                                         "update_err": update_err,
-                                        "snapshot": snapshot_note})
+                                        "snapshot": snapshot_note,
+                                        "stock_list": stock_list_note})
             manifest.finalize()
             sys.exit(2)
 
@@ -784,7 +807,8 @@ def preflight_pricedb_or_exit(manifest) -> None:
                            details={"latest_date": latest,
                                     "expected": latest_trading_day.isoformat(),
                                     "update_err": update_err,
-                                    "snapshot": snapshot_note})
+                                    "snapshot": snapshot_note,
+                                        "stock_list": stock_list_note})
     except SystemExit:
         raise
     except Exception as e:

@@ -10,6 +10,7 @@ Data sources:
 Usage:
     python scripts/pricedb.py init          # Create DB, fetch stock list, download ALL historical data
     python scripts/pricedb.py update        # Incremental update: fetch missing dates since last update
+    python scripts/pricedb.py stocks        # Refresh the stock list (new listings) via akshare
     python scripts/pricedb.py status        # Show DB stats: total stocks, date range, last update
     python scripts/pricedb.py rps [DATE]    # Compute MA-based RPS for all stocks on DATE (default: latest)
     python scripts/pricedb.py query CODE    # Show a stock's recent prices + computed RPS values
@@ -497,6 +498,48 @@ def cmd_init():
     sys.exit(1)
 
 
+def _fetch_stock_list_default() -> list[dict]:
+    import akshare as ak
+    return fetch_stock_list_akshare(ak)
+
+
+def refresh_stock_list(conn: sqlite3.Connection, fetch=None) -> dict:
+    """Merge today's A-share listing into `stocks`; returns {total, added}.
+
+    Adds and re-stamps, never prunes — delisted codes keep their history.
+    Its own step since 2026-09-29: it used to run only inside update's akshare
+    branch, i.e. only when every provider ahead of akshare had failed. iFinD
+    (from 08-25) and then the close-slot snapshot (from 09-25) kept that branch
+    from ever running, the list froze at 2026-08-24, and 20 new listings never
+    entered the DB. db_health's `stock_list_updated` + doctor's
+    check_stock_list_fresh now make a frozen list loud.
+    """
+    listing = (fetch or _fetch_stock_list_default)()
+    if not listing:
+        raise RuntimeError("stock listing came back empty — universe left as is")
+    known = {r[0] for r in conn.execute("SELECT code FROM stocks")}
+    upsert_stocks(conn, listing)
+    return {"total": len(listing),
+            "added": sorted(s["code"] for s in listing if s["code"] not in known)}
+
+
+def cmd_stocks():
+    """CLI: pricedb.py stocks — refresh the universe. Exit 1 on failure."""
+    conn = get_db()
+    ensure_schema(conn)
+    try:
+        out = refresh_stock_list(conn)
+    except Exception as e:
+        print(f"stock-list refresh failed: {e}", file=sys.stderr)
+        sys.exit(1)
+    finally:
+        conn.close()
+    added = out["added"]
+    print(f"stock list: {out['total']} listed, {len(added)} new"
+          + (f" ({', '.join(added[:10])}{' …' if len(added) > 10 else ''})" if added else ""),
+          file=sys.stderr)
+
+
 def cmd_update():
     """Incremental update: fetch missing dates since last update."""
     if not DB_PATH.exists():
@@ -566,27 +609,9 @@ def cmd_update():
             close_provider(provider_name, provider)
             continue
         try:
-            if provider_name == PROVIDER_AKSHARE:
-                # Best-effort universe refresh (new listings). A list failure
-                # must not cost us the price bars — degrade to the stored
-                # universe and keep going.
-                try:
-                    print("Refreshing stock list via akshare...", file=sys.stderr)
-                    latest_stocks = fetch_stock_list(provider_name, provider)
-                    if latest_stocks:
-                        upsert_stocks(conn, latest_stocks)
-                        stocks = [
-                            {"code": row[0], "name": row[1], "exchange": row[2]}
-                            for row in conn.execute(
-                                "SELECT code, name, exchange FROM stocks")
-                        ]
-                        print(f"  {len(latest_stocks)} stocks in universe",
-                              file=sys.stderr)
-                except Exception as list_err:
-                    print(f"  stock-list refresh failed ({list_err}) — using "
-                          f"stored universe of {len(stocks)}", file=sys.stderr)
-            else:
-                print(f"Using existing stock universe for {provider_name}: {len(stocks)} stocks", file=sys.stderr)
+            # The universe is refreshed by `pricedb.py stocks`, its own preflight
+            # step — see refresh_stock_list for why it no longer lives here.
+            print(f"Using stored stock universe for {provider_name}: {len(stocks)} stocks", file=sys.stderr)
 
             missing_codes = {
                 row[0]
@@ -1445,6 +1470,8 @@ def main():
         cmd_init()
     elif command == "update":
         cmd_update()
+    elif command == "stocks":
+        cmd_stocks()
     elif command == "status":
         cmd_status()
     elif command == "rps":

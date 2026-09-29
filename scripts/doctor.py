@@ -521,6 +521,31 @@ def check_db_health_spot_check(v: RunView) -> list[Finding]:
     return []
 
 
+def check_stock_list_fresh(v: RunView) -> list[Finding]:
+    """The stock list was not refreshed on the run's own day.
+
+    Every run refreshes it in preflight (`pricedb.py stocks`), so anything
+    older than the run date means that step failed. Until 2026-09-29 the
+    refresh was a side effect of update's akshare fallback, which never ran:
+    the list froze at 2026-08-24 and 20 new listings stayed out of the DB for
+    five weeks while every audit read clean.
+    """
+    health = v.need("db_health")
+    if "stock_list_updated" not in health:
+        raise CannotCheck("db_health has no stock_list_updated (run predates the field)")
+    stamp = health["stock_list_updated"]
+    if stamp and str(stamp)[:10] >= v.date:
+        return []
+    return [Finding(
+        id="stock-list-stale",
+        check="stock_list_fresh",
+        kind=ENV,
+        title=f"股票列表未在当日刷新（最后 {str(stamp)[:10] if stamp else '从未'}）",
+        detail="新上市股票不会进入价格库，也不会进入 RPS 与候选池。",
+        suspect="scripts/pricedb refresh_stock_list",
+        fix_cmd="python3 scripts/pricedb.py stocks && python3 scripts/pricedb.py update")]
+
+
 CHECKS = [
     # invariant
     check_new_positions_absent_from_snapshot,
@@ -538,6 +563,7 @@ CHECKS = [
     check_snapshot_wrote_rows,
     check_db_health_warnings,
     check_db_health_spot_check,
+    check_stock_list_fresh,
 ]
 
 

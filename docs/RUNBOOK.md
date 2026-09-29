@@ -128,6 +128,9 @@ report banner first):
 python3 scripts/pricedb.py status              # DB stats at a glance
 python3 scripts/pricedb.py update              # incremental catch-up (also
                                                #   reconciles adjustment factors)
+python3 scripts/pricedb.py stocks              # refresh the stock list (new
+                                               #   listings); `update` then
+                                               #   backfills their history
 python3 scripts/pricedb.py factors verify      # exit 1 = factor table broken
 python3 scripts/pricedb.py factors heal        # repair a factor gap, then:
 python3 scripts/pricedb.py rps                 #   recompute RPS (heal invalidates it)
@@ -152,6 +155,7 @@ Failure patterns seen in production, fastest diagnosis first:
 | "Pricedb is stale — refusing" | `pricedb.py status` | update couldn't fetch; run `update` by hand, then re-run |
 | run dir exists, no manifest, no audit | `tail data/launchd/pipeline.log` | died before writing the manifest, or still running — check `pgrep -f run_daily` |
 | push failed | — | transient; the commit is local and the next run pushes it |
+| doctor: "股票列表未在当日刷新" | `pricedb.py stocks` | akshare listing endpoint down — run `stocks` then `update` by hand; 3 in a row = look at the code |
 | report banner warns "adj factors lag prices" | `pricedb.py factors verify` | factor sync missed — `factors heal`, then `rps` |
 
 ## Where everything lives
