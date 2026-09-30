@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 114001,
+  "output_tokens": 15979,
+  "rounds": 2,
+  "duration_sec": 184.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 医疗美容 生物制品 医疗服务 化学制药 板块大涨 2026年9月30日",
+        "max_results": 5
+      },
+      "result_length": 3309
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 半导体 元件 下跌 科创50 2026年9月30日",
+        "max_results": 5
+      },
+      "result_length": 3540
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "招商轮船 VLCC运价 霍尔木兹海峡 油运 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3173
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "医药工业十五五规划 创新药 CRO 医疗服务 政策 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 4069
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "普洛药业 原料药 催化 2026年9月",
+        "max_results": 5
+      },
+      "result_length": 3549
+    }
+  ],
+  "fallback_used": false
+}

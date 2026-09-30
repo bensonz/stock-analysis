@@ -1,0 +1,71 @@
+{
+  "date": "2026-09-30",
+  "actions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "price": 27.74,
+      "pnl_pct": 14.58,
+      "note": "浮盈+14.58%让赢家奔跑；化学制药今日top5(+2.81%)；保本止损24.21未触发；原料药催化连续兑现（头孢托仑匹酯原料药09-16获批、布立西坦片FDA获批、海外CDMO商业化首批交付09-21，来源：普洛药业官网）。"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 20.15,
+      "pnl_pct": 4.46,
+      "note": "浮盈+4.46%守保本止损19.29未触发（现价20.15距止损4.27%，stop_proximity WATCH）；20天未触发时间止损（<3%才触发）；航运港口未入top5/bottom5；VLCC运价历史新高但股价反应平淡（09-21当日+0.61%，来源：同花顺/新浪财经）——价不跟量警示，跌破19.29无条件离场。"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 49.3,
+      "pnl_pct": 15.05,
+      "note": "浮盈+15.05%让赢家奔跑；医疗服务今日top5#3(+3.89%)；保本止损42.85未触发；CRO景气延续（医药工业'十五五'规划催化+实验猴供需紧张）。"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 167.34,
+      "pnl_pct": 32.28,
+      "note": "浮盈+32.28%让利润奔跑；止损已锁+10%(139.15)未触发；CXO龙头、医疗服务今日top5#3；未入bottom5。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 986687.0,
+    "dayPnl": 7802.0,
+    "dayReturnPct": 0.79,
+    "totalReturnPct": -1.33,
+    "unrealizedPnl": 24101.0,
+    "realizedPnl": -37414.0,
+    "cashPct": 84.5
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.909,
+    "up": 2567,
+    "down": 2824,
+    "positive_indices": [
+      "上证指数"
+    ],
+    "negative_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 56,
+    "limit_downs": 14,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.91:1, 1/3 major indices green, 56 limit-ups / 14 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "弱宽度盘面：涨跌比0.91:1（2567涨/2824跌），涨停56/跌停14；仅上证收红(+0.31%)，深成-0.11%/创业板-0.23%/科创50-2.51%；IV整体中性(avg IV Rank 0.38)。医药生物complex全面领涨（医疗美容+4.24%/生物制品+3.99%/医疗服务+3.89%/化学制药+2.81%），驱动为《医药工业发展'十五五'规划》(9/18十部门印发，来源:新华社/人民网)+国产创新药出海+10月ESMO年会；半导体/元件等科技硬件连续走弱居跌幅榜，防御医药强、科技硬件弱的高低切换。entry_regime=weak(0.5倍仓位、无硬性阻断)，候选池无干净通过全部门槛的标的，维持空仓等待。"
+  }
+}

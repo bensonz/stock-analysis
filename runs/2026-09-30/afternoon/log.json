@@ -1,0 +1,118 @@
+{
+  "date": "2026-09-30",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1790751956.792914,
+      "errors": [],
+      "end": 1790752037.9095428,
+      "duration_sec": 81.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8178,
+      "tokens": {
+        "input_tokens": 114001,
+        "output_tokens": 15979
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 184.1,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1790752222.0269692,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=160",
+        "Hypothesis: Updated h151 (validated): +1 supporting evidence → hitRate=100%, n=7",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=98%, n=63",
+        "Hypothesis: Updated h024 (rule): +1 supporting evidence → hitRate=90%, n=20",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "601872",
+                "name": "招商轮船",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 20.15,
+                "stopLoss": 19.29,
+                "distance_pct": 4.27,
+                "suggestion": "🟠 WATCH — 4.3% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1790752222.282219,
+      "duration_sec": 0.3
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 601872 — 🟠 WATCH — 4.3% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 265.5
+  }
+}
