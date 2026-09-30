@@ -1,0 +1,207 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "医疗美容",
+        "5d_pct": 5.28,
+        "trend": "accelerating"
+      },
+      {
+        "name": "生物制品",
+        "5d_pct": 3.84,
+        "trend": "steady"
+      },
+      {
+        "name": "医疗服务",
+        "5d_pct": 3.26,
+        "trend": "steady"
+      },
+      {
+        "name": "种植业",
+        "5d_pct": 3.09,
+        "trend": "steady"
+      },
+      {
+        "name": "商用车",
+        "5d_pct": 2.87,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "半导体",
+        "5d_pct": -2.47,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": -2.39,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": -1.9,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "其他家电Ⅱ",
+        "5d_pct": -1.58,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": -1.53,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "3/4 positions in hot sectors (医疗服务×2 + 化学制药/原料药×1)，航运港口(招商轮船)非今日top5",
+    "regime": "医药/医疗服务领涨延续，半导体/电子硬件持续流出；科创50 -2.09% 印证科技退潮"
+  },
+  "position_decisions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "reason": "浮盈+10.3%止损已升至保本24.21未触发(现价26.7)；化学制药/原料药未入bottom5，医药complex今日领涨；让赢家奔跑",
+      "sector_rank": "医药生物(化学制药/原料药)，未入bottom5",
+      "new_stop": null,
+      "pnl_pct": 10.3,
+      "days_held": 7,
+      "exit_price": null
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+5.0%守保本止损19.29未触发(现价20.25, 距止损仅4.74% WATCH)；已跌破MA5/MA10为组合最弱持仓；VLCC名义运费历史新高+管理层称Q4为今年VLCC盈利最好季度(来源:每日经济新闻/搜狐)支撑持有；跌破19.29无条件离场",
+      "sector_rank": "航运港口，未入今日top5/bottom5",
+      "new_stop": null,
+      "pnl_pct": 5.0,
+      "days_held": 20,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "今日涨停+10.0%至49.3，浮盈+15.1%守保本止损42.85未触发；医疗服务今日#3(+3.26%)；CRO景气延续，让赢家奔跑(+20%才升止损)",
+      "sector_rank": "医疗服务，今日top5 #3",
+      "new_stop": null,
+      "pnl_pct": 15.1,
+      "days_held": 13,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+30.8%让利润奔跑，止损已锁+10%(139.15)未触发(现价165.42)；CXO龙头、医疗服务今日#3；未入bottom5",
+      "sector_rank": "医疗服务，今日top5 #3",
+      "new_stop": null,
+      "pnl_pct": 30.8,
+      "days_held": 43,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "医疗服务(#3热)但dist_ma10 +9.2%>8%、dist_ma20 +16.6%>12%，Rule 2b追高硬拦截，无豁免",
+      "rps120": 92.57
+    },
+    {
+      "code": "301080",
+      "name": "百普赛斯",
+      "reason": "RPS120=99.45>95封顶(历史回测rank-IC为负)，且dist_ma20 +37.9%严重超买",
+      "rps120": 99.45
+    },
+    {
+      "code": "688046",
+      "name": "药康生物",
+      "reason": "RPS120=99.12>95封顶",
+      "rps120": 99.12
+    },
+    {
+      "code": "002821",
+      "name": "凯莱英",
+      "reason": "RPS120=95.89>95封顶，动量过热",
+      "rps120": 95.89
+    },
+    {
+      "code": "688222",
+      "name": "成都先导",
+      "reason": "RPS120=95.63>95封顶，且dist_ma20 +23.1%超买",
+      "rps120": 95.63
+    },
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "航运非今日top5(Rule 1)，RPS120=93.95扩展区无豁免条件",
+      "rps120": 93.95
+    },
+    {
+      "code": "601918",
+      "name": "新集能源",
+      "reason": "煤炭非热门板块，margin signal=deleveraging(chg5 -11.71%)叠加",
+      "rps120": 93.09
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "有色金属非热门板块，rps20仅18.88个股短期弱+margin deleveraging(chg5 -8.89%)",
+      "rps120": 92.04
+    },
+    {
+      "code": "002832",
+      "name": "比音勒芬",
+      "reason": "服装家纺非热门板块，RPS120=94.76扩展区无豁免，净利同比-18.7%无业绩催化",
+      "rps120": 94.76
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "石油石化非热门板块，现价低于MA5/MA10/MA20且margin deleveraging",
+      "rps120": 90.84
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱tape(涨跌比0.96:1, 半仓multiplier)下，池内热门板块候选要么RPS>95封顶、要么MA超买，正确动作是new_positions:[]而非强行凑一单",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013, h077",
+      "mechanism": "weak breadth时边缘setup的期望收益为负，半仓multiplier进一步降低赔率，空仓是正期望的默认选择"
+    },
+    {
+      "text": "医疗服务(#3热)内唯一合规RPS候选益诺思因dist_ma10+9.2%/dist_ma20+16.6%被Rule 2b拦截——验证'热门板块不覆盖追高风险'(h027)在医疗板块同样成立",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "板块热度推高的是整体水位，个股相对均线的极端偏离仍有独立均值回归风险，MA纪律必须优先于板块动量"
+    },
+    {
+      "text": "持仓侧：招商轮船20天+5%且跌破MA10，虽未触发时间止损(<3%才触发)但已是组合最弱持仓；油运运价历史新高+Q4最佳季度(管理层表态)撑HOLD，跌破保本止损19.29无条件离场",
+      "type": "observation",
+      "tags": [
+        "exit-rule",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "强势主线中的滞涨持仓(长时间低收益+破MA)是边际转弱信号，应贴紧保本止损监控而非立即杀跌"
+    }
+  ],
+  "market_summary": "Breadth 0.96:1弱势(涨2623/跌2743)，仅上证+0.27%收红，深成指-0.06%、创业板指-0.17%、科创50-2.09%；45涨停/10跌停。医药医疗领涨(医疗美容+5.28%/生物制品+3.84%/医疗服务+3.26%，驱动:创新药BD交易升温+医药工业十五五规划+估值从修复转向兑现，来源:21经济网/新浪财经)；半导体/元件领跌(AI动能退潮、拥挤交易平仓，来源:知乎/腾讯)。IV中性(avg_iv_rank 0.50)。weak tape允许半仓入场，但池内无热门板块合规候选，默认空仓。",
+  "market_sentiment": "neutral",
+  "market_call": "谨慎"
+}

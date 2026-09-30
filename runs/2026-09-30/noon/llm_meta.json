@@ -1,0 +1,52 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 118661,
+  "output_tokens": 14323,
+  "rounds": 2,
+  "duration_sec": 174.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月30日 医药 医疗美容 板块 大涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3258
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体 元件 板块 下跌 2026年9月30日 原因",
+        "max_results": 5
+      },
+      "result_length": 2592
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "VLCC 油运 运价 历史新高 2026年9月 招商轮船",
+        "max_results": 5
+      },
+      "result_length": 3705
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年9月30日 大盘 行情 复盘 涨跌",
+        "max_results": 5
+      },
+      "result_length": 3050
+    }
+  ],
+  "fallback_used": false
+}
