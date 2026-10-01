@@ -7,12 +7,18 @@ mean -3.71% vs the book's -0.61% per trade — suggestive at ~1.5 SE, NOT yet
 grounds for a cooldown rule (新宙邦 re-entered 2 days after a -5.3% stop and
 made +11.8%). Re-measure as n grows; the weekly audit calls this.
 
-    python3 scripts/research/reentry_stats.py [--human]
+    python3 scripts/research/reentry_stats.py [--human] [--since ISO | --all-history]
 
 Sources: tracking/closed/*.json (completed round trips) + active tracking
 files (open re-entries shown as 持仓中, excluded from the averages).
+
+Scope: only re-entries (and book trades) whose entryDate is on/after the
+evaluation epoch count — earlier trades are a retired system. The PRIOR trip
+of a pair may predate the epoch: the current system still sees that history
+when it re-buys, so it stays as pairing context.
 """
 
+import argparse
 import json
 import statistics
 import sys
@@ -21,6 +27,10 @@ from datetime import datetime
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
+
+from evaluation_epoch import EVALUATION_EPOCH  # noqa: E402
+
 TRACKING_DIR = PROJECT_ROOT / "tracking"
 CLOSED_DIR = TRACKING_DIR / "closed"
 SKIP = {"positions.json", "portfolio_config.json", "events.json",
@@ -48,12 +58,16 @@ def _trips_by_code(tracking_dir: Path = TRACKING_DIR) -> dict:
     return {c: sorted(v, key=lambda x: x["entryDate"]) for c, v in trips.items()}
 
 
-def compute(tracking_dir: Path = TRACKING_DIR) -> dict:
+def compute(tracking_dir: Path = TRACKING_DIR, since: str | None = None) -> dict:
+    """since: first entryDate (ISO) a re-entry or book trade must have to be
+    counted; None = all history."""
     trips = _trips_by_code(tracking_dir)
     pairs = []
     for code, v in trips.items():
         for prev, nxt in zip(v, v[1:]):
             if not prev.get("exitDate"):
+                continue
+            if since and nxt["entryDate"] < since:
                 continue
             gap = (datetime.strptime(nxt["entryDate"], "%Y-%m-%d")
                    - datetime.strptime(prev["exitDate"], "%Y-%m-%d")).days
@@ -70,7 +84,9 @@ def compute(tracking_dir: Path = TRACKING_DIR) -> dict:
     done = [p for p in pairs if not p["open"]]
     rets = [p["reentry_return"] for p in done]
 
-    all_trades = [t for v in trips.values() for t in v if t.get("returnPct") is not None]
+    all_trades = [t for v in trips.values() for t in v
+                  if t.get("returnPct") is not None
+                  and (not since or t["entryDate"] >= since)]
     book_rets = [t["returnPct"] for t in all_trades]
 
     def block(rs):
@@ -81,6 +97,7 @@ def compute(tracking_dir: Path = TRACKING_DIR) -> dict:
                 "win_rate_pct": round(sum(1 for r in rs if r > 0) / len(rs) * 100, 1)}
 
     return {
+        "since": since,
         "pairs": sorted(pairs, key=lambda p: p["reentry_date"]),
         "reentry": block(rets),
         "book": block(book_rets),
@@ -95,12 +112,22 @@ def compute(tracking_dir: Path = TRACKING_DIR) -> dict:
 
 
 def main():
-    out = compute()
-    if "--human" not in sys.argv:
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--human", action="store_true", help="readable summary instead of JSON")
+    ap.add_argument("--since", default=EVALUATION_EPOCH,
+                    help=f"first re-entry/book entryDate to include (ISO; default: "
+                         f"evaluation epoch {EVALUATION_EPOCH} — earlier trades are a "
+                         f"retired system)")
+    ap.add_argument("--all-history", action="store_true",
+                    help="include pre-epoch trades (forensics only)")
+    args = ap.parse_args()
+    out = compute(since=None if args.all_history else args.since)
+    if not args.human:
         print(json.dumps(out, ensure_ascii=False, indent=1))
         return
     r, b = out["reentry"], out["book"]
-    print(f"重入交易表现 (同一代码的第2+次买入)")
+    scope = f"入场 ≥ {out['since']}" if out["since"] else "全部历史"
+    print(f"重入交易表现 (同一代码的第2+次买入; {scope})")
     if not r.get("n"):
         print("  尚无已完成的重入样本")
     else:
