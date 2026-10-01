@@ -135,3 +135,43 @@ Open, not actioned:
   an earlier exit frees capital. That argues for shorter time stops and is
   invisible to this instrument. `rotation_ledger.py backtest` is the right tool
   and still has n=0.
+
+## Addendum 2026-10-01 — adjusted bars, and the evaluation epoch
+
+**Two changes to the replay.** (1) `bars_after` now scales OHLC by
+factor(t)/factor(entry); it used raw bars, so an ex-dividend or bonus-share
+drop inside the window read as a real fall and could fire a stop. (2) Entries
+default to `EVALUATION_EPOCH` (2026-07-23, see CLAUDE.md); `--all-history`
+replays everything.
+
+**Full history, adjusted (n=64/63, stop fill):** every 08-17 ranking holds —
+
+| policy | h=20 | h=30 |
+|---|---|---|
+| 无止损 | −0.97% (worst −33.5%) | −3.89% |
+| 仅硬止损 −5% | +2.18% | +0.66% |
+| 仅硬止损 −8% | +0.69% | −1.51% |
+| 硬止损 + 头3日−3% | +2.49% | +0.98% |
+| └ 10d/<3% (现行) | +1.50% | +0.45% |
+| └ 15d/<3% | **+2.77%** | **+1.79%** |
+
+**Post-epoch only (n=26 at h=10, 24 at h=20; stop fill / close fill):**
+
+| policy | h=10 | h=20 |
+|---|---|---|
+| 【实际发生】 | +2.28% | +1.65% |
+| 无止损 | **+7.19%** (worst −14.9%) | +3.19% (worst −17.9%) |
+| 仅硬止损 −5% | +3.69% / +3.36% | +2.27% / +1.23% |
+| 仅硬止损 −8% | +2.84% / +1.91% | +0.55% / −0.23% |
+| 硬止损 + 头3日−3% + 10d/<3% (现行) | +3.23% / +3.27% | +2.84% / +2.18% |
+
+Reading: within the post-epoch sample the **mean** favours no stops (a
+broadly rising regime — stops are insurance, and insurance costs in rallies),
+but its tail is 3x worse and **−5% still beats −8%**, so "tighter beats looser"
+holds in both regimes. Realized (+2.28% / +1.65%) sits *below* the mechanical
+rule set at h=10: by trade attribution (23 closed post-epoch trades vs a
+10-session hold), the gap splits hard-stop −55pp, proactive stop-proximity
+sells (h024, before the stop is hit) −42pp, trailing/breakeven ratchets −34pp,
+first-3-days −23pp, sector gravity +10pp. About half the shortfall is
+discretionary early exits layered on top of the stop rules, not the stops.
+n=24 in one regime: this can't overturn the full-history ranking.

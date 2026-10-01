@@ -98,3 +98,47 @@ def test_no_rules_rides_to_the_horizon():
 
 def test_empty_bars_settle_to_nothing():
     assert ea.settle([], 10.0, -5.0, None, 0, None, None) == (None, None, 0)
+
+
+# --- replay inputs: adjusted bars and the evaluation epoch (2026-10-01) ---
+
+import json
+import sqlite3
+
+
+def _db(rows, factors):
+    conn = sqlite3.connect(":memory:")
+    conn.execute("CREATE TABLE daily_prices (code TEXT, date TEXT, open REAL, "
+                 "high REAL, low REAL, close REAL, volume REAL, amount REAL)")
+    conn.execute("CREATE TABLE adj_factors (code TEXT, date TEXT, factor REAL)")
+    conn.executemany("INSERT INTO daily_prices VALUES (?,?,?,?,?,?,0,0)", rows)
+    conn.executemany("INSERT INTO adj_factors VALUES (?,?,?)", factors)
+    return conn
+
+
+def test_an_ex_dividend_drop_inside_the_window_is_not_a_loss():
+    """Raw bars made a 10% payout read as a 10% fall — enough to fire a −5%
+    stop that no holder ever suffered. Bars are scaled to the entry day."""
+    conn = _db([("600000", "2026-08-03", 10, 10, 10, 10),
+                ("600000", "2026-08-04", 9, 9, 9, 9)],
+               [("600000", "2026-08-03", 1.0), ("600000", "2026-08-04", 10 / 9)])
+    (_, o, h, low, c), = ea.bars_after(conn, "600000", "2026-08-03", 5)
+    assert (round(o, 6), round(low, 6), round(c, 6)) == (10.0, 10.0, 10.0)
+
+
+def test_codes_without_factors_replay_raw():
+    conn = _db([("920002", "2026-08-03", 50, 50, 50, 50),
+                ("920002", "2026-08-04", 51, 52, 49, 50.5)], [])
+    assert ea.bars_after(conn, "920002", "2026-08-03", 5) == [
+        ("2026-08-04", 51.0, 52.0, 49.0, 50.5)]
+
+
+def test_entries_before_the_epoch_are_excluded(tmp_path):
+    closed = tmp_path / "tracking" / "closed"
+    closed.mkdir(parents=True)
+    for code, d in (("600000", "2026-07-22"), ("600001", "2026-07-23")):
+        (closed / f"{code}.json").write_text(json.dumps(
+            {"code": code, "entryDate": d, "entryPrice": 10.0, "returnPct": 1.0}))
+    got = [e["code"] for e in ea.load_entries(tmp_path, since="2026-07-23")]
+    assert got == ["600001"]
+    assert len(ea.load_entries(tmp_path)) == 2

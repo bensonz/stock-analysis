@@ -34,10 +34,14 @@ import glob
 import json
 import sqlite3
 import statistics
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 DB_PATH = ROOT / "data" / "pricedb" / "ashare_prices.db"
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from evaluation_epoch import EVALUATION_EPOCH  # noqa: E402
 
 ROUND_TRIP_COST_PCT = 0.30
 
@@ -58,8 +62,9 @@ POLICIES = [
 ]
 
 
-def load_entries(root=ROOT):
-    """Every position ever opened, closed or not — the entry is what we replay."""
+def load_entries(root=ROOT, since=None):
+    """Every position opened on/after `since`, closed or not — the entry is what
+    we replay. `since` is the evaluation epoch by default at the CLI."""
     out = []
     for f in sorted(glob.glob(str(root / "tracking" / "closed" / "*.json"))):
         with open(f, encoding="utf-8") as fh:
@@ -78,14 +83,28 @@ def load_entries(root=ROOT):
                             "entryDate": a.get("entryDate"), "entryPrice": ep,
                             "actual": (cp / ep - 1) * 100 if ep and cp else None,
                             "open": True})
-    return [e for e in out if e["code"] and e["entryPrice"] and e["entryDate"]]
+    return [e for e in out if e["code"] and e["entryPrice"] and e["entryDate"]
+            and (since is None or e["entryDate"] >= since)]
 
 
 def bars_after(conn, code, entry_date, n):
-    return conn.execute(
-        "SELECT date, open, high, low, close FROM daily_prices "
-        "WHERE code = ? AND date > ? ORDER BY date LIMIT ?",
-        (code, entry_date, n)).fetchall()
+    """The n sessions after entry, OHLC scaled into the entry day's price units.
+
+    Until 2026-10-01 these were raw bars, so an ex-dividend or bonus-share drop
+    inside the window read as a real fall and could fire a stop no holder ever
+    suffered. Scaling by factor(t)/factor(entry) keeps entryPrice (a raw fill on
+    the entry day) directly comparable. No factor rows (BJ, fresh listings)
+    means a ratio of 1.0 — raw, which is what those codes always were.
+    """
+    row = conn.execute("SELECT factor FROM adj_factors WHERE code = ? AND date = ?",
+                       (code, entry_date)).fetchone()
+    base = row[0] if row and row[0] else 1.0
+    return [(d, o * k, h * k, low * k, c * k) for d, o, h, low, c, k in conn.execute(
+        "SELECT d.date, d.open, d.high, d.low, d.close, COALESCE(a.factor, ?) / ? "
+        "FROM daily_prices d LEFT JOIN adj_factors a "
+        "ON a.code = d.code AND a.date = d.date "
+        "WHERE d.code = ? AND d.date > ? ORDER BY d.date LIMIT ?",
+        (base, base, code, entry_date, n))]
 
 
 def settle(bars, entry_price, hard, early, early_days, time_days, time_gain,
@@ -131,8 +150,8 @@ def settle(bars, entry_price, hard, early, early_days, time_days, time_gain,
     return (bars[-1][4] / entry_price - 1) * 100, "horizon", len(bars)
 
 
-def run(horizon=10, root=ROOT, db_path=DB_PATH, fill="stop"):
-    entries = load_entries(root)
+def run(horizon=10, root=ROOT, db_path=DB_PATH, fill="stop", since=None):
+    entries = load_entries(root, since)
     conn = sqlite3.connect(db_path)
     results = {label: [] for (label, *_r) in POLICIES}
     reasons = {label: {} for (label, *_r) in POLICIES}
@@ -208,9 +227,15 @@ def main():
     ap.add_argument("--horizon", type=int, default=10)
     ap.add_argument("--fill", choices=("stop", "close"), default="stop",
                     help="hard-stop execution model; see settle() (default stop)")
+    ap.add_argument("--since", default=EVALUATION_EPOCH,
+                    help=f"first entryDate to replay (default: evaluation epoch "
+                         f"{EVALUATION_EPOCH} — earlier entries are a retired system)")
+    ap.add_argument("--all-history", action="store_true",
+                    help="replay pre-epoch entries too (forensics only)")
     ap.add_argument("--human", action="store_true")
     args = ap.parse_args()
-    d = run(horizon=args.horizon, fill=args.fill)
+    d = run(horizon=args.horizon, fill=args.fill,
+            since=None if args.all_history else args.since)
     if args.human:
         human(d)
     else:
