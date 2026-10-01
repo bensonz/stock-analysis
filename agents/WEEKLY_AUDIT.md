@@ -55,9 +55,19 @@ Calculate and report:
 - Starting capital vs current equity
 - Total return % (realized + unrealized)
 - Compare to benchmark: 沪深300ETF (510300) over same period
+- **Also: return since the evaluation epoch** — equity at the last snapshot on
+  or before 2026-07-23 → now, vs 300ETF over the same window. This, not the
+  inception number, is the verdict on the current system (the inception
+  number includes the retired system's trades).
 - **If underperforming 300ETF → flag as strategic failure**
 
 ### B. Win/Loss Analysis
+
+**Scope: trades with `entryDate >= 2026-07-23` only** (`EVALUATION_EPOCH`,
+`scripts/evaluation_epoch.py`). Earlier trades came from a retired system;
+pooling them into these numbers judges the wrong strategy. Report the
+pre-epoch count separately if you mention it at all.
+
 - Total trades closed: X
 - Winners: X (avg return %)
 - Losers: X (avg return %)

@@ -10,6 +10,26 @@ The trading philosophy lives in `agents/ANALYST.md` (momentum-first: buy strengt
 
 **`FUTURE.md`** (repo root) holds deferred checks with due dates — reviewed by the weekly audit's Step 0. When the user says "check this later", the entry goes there WITH a due date, not into memory.
 
+## Evaluation epoch: 2026-07-23
+
+**Judge the system only on picks and trades from 2026-07-23 onward** (owner
+decision 2026-10-01; constant `EVALUATION_EPOCH` in `scripts/evaluation_epoch.py`
+— import it, never retype the date). Before that, picks came from an earlier,
+retired system; the complete self-evolving agent starts here. The git record
+agrees: RPS gate + Rule 2b rewritten 2026-07-22, adjustment factors first
+existed 2026-07-24 (RPS before ran on unadjusted prices).
+
+- **In scope** (filter `entryDate`/run date `>= EVALUATION_EPOCH`): win rates,
+  P&L stats, drift/edge research (`research/entry_drift.py` defaults to it),
+  base rates, weekly-audit totals, any claim of "the strategy works / doesn't".
+  Pre-epoch trades may be cited as history, never pooled into a statistic.
+- **Out of scope — keep full history:** price DB and RPS/MA250 windows (they
+  need 250 sessions back), the portfolio book in `tracking/` (never delete or
+  rewrite pre-epoch trades — equity continuity), the site's equity curve, the
+  doctor's audit trail and `ARTIFACT_EPOCHS`.
+- `LEARNINGS.md` still carries pre-epoch lessons; weigh them as lessons from
+  the old system, not evidence about this one.
+
 ## Environment & setup
 
 - Python venv at `.venv` — **activate it first**, then use `python3` (never bare `python`): `source .venv/bin/activate`

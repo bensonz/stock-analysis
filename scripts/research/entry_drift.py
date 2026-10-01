@@ -77,6 +77,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 
 import price_adjust  # noqa: E402
 import run_paths  # noqa: E402
+from evaluation_epoch import EVALUATION_EPOCH  # noqa: E402
 
 DB_PATH = PROJECT_ROOT / "data" / "pricedb" / "ashare_prices.db"
 RUNS_DIR = PROJECT_ROOT / "runs"
@@ -442,10 +443,14 @@ def human(r):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[1])
-    ap.add_argument("--since", help="first run date to include (ISO)")
+    ap.add_argument("--since", default=EVALUATION_EPOCH,
+                    help=f"first run date to include (ISO; default: evaluation "
+                         f"epoch {EVALUATION_EPOCH} — earlier picks are a retired system)")
+    ap.add_argument("--all-history", action="store_true",
+                    help="include pre-epoch runs (forensics only)")
     ap.add_argument("--json", action="store_true", help="machine-readable output")
     args = ap.parse_args()
-    r = analyse(since=args.since)
+    r = analyse(since=None if args.all_history else args.since)
     if args.json:
         print(json.dumps(r, ensure_ascii=False, indent=2, default=str))
     else:
