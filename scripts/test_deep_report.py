@@ -247,6 +247,60 @@ def test_split_provider_judge_runs_on_verify_provider(monkeypatch):
     assert res["verify_audit"]["final"]["unverified_remaining"] == 0
 
 
+def _capturing_openai(calls, finish_reason="stop"):
+    class _Usage:
+        prompt_tokens, completion_tokens = 7, 3
+
+    class _Choice:
+        def __init__(self):
+            self.message = type("M", (), {"content": '{"verdicts": {}}'})()
+            self.finish_reason = finish_reason
+
+    class _Resp:
+        usage, choices = _Usage(), [_Choice()]
+
+    class _Client:
+        class chat:
+            class completions:
+                @staticmethod
+                def create(**kw):
+                    calls.append(kw)
+                    return _Resp()
+    return _Client()
+
+
+def test_deepseek_judge_runs_with_thinking_disabled():
+    """deepseek-v4-pro thinking spent the judge's whole 8192-token budget on
+    reasoning and returned "" (000002, 2026-10-01). A verdict check needs no
+    chain of thought — the judge call turns it off; cleanup is left alone."""
+    calls = []
+    _rev, judge, cleanup = deep_report._make_runners(
+        "openai", _capturing_openai(calls), "deepseek-v4-pro", [],
+        {"in": 0, "out": 0, "rounds": 0})
+    text, _i, _o, finish = judge("p")
+    cleanup("p")
+    assert calls[0]["extra_body"] == {"thinking": {"type": "disabled"}}
+    assert "extra_body" not in calls[1]
+    assert finish == "stop"
+
+
+def test_non_deepseek_judge_gets_no_thinking_param():
+    calls = []
+    _rev, judge, _cl = deep_report._make_runners(
+        "openai", _capturing_openai(calls), "gpt-5.4", [],
+        {"in": 0, "out": 0, "rounds": 0})
+    judge("p")
+    assert "extra_body" not in calls[0]
+
+
+def test_judge_runner_reports_length_finish():
+    calls = []
+    _rev, judge, _cl = deep_report._make_runners(
+        "openai", _capturing_openai(calls, finish_reason="length"), "gpt-5.4", [],
+        {"in": 0, "out": 0, "rounds": 0})
+    assert judge("p")[3] == "length"
+
+
 def test_write_verify_audit_path(tmp_path):
     audit = {"final": {"total": 1}}
     out = deep_report.write_verify_audit("000703.SZ", audit, output_dir=tmp_path)

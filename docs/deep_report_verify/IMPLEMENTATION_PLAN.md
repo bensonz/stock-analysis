@@ -66,3 +66,19 @@ with audit all-supported + 5 URLs hand-checked; `000703 --no-verify` regression.
   test_generate_openai_orchestration(verify=False) exercises the identical path;
   --no-verify short-circuits before any new code). Run live if desired.
 **Status**: Complete
+
+## Fix 2026-10-01: reasoning judge truncation (000002 万科A)
+Footer said "20处因核验服务异常未复核" — no service error. deepseek-v4-pro (verify
+judge) bills thinking against JUDGE_MAX_TOKENS=8192; replay of the failing
+internal batch: finish_reason=length, reasoning_tokens=8192, content "" (78s).
+Same prompt with `extra_body={"thinking":{"type":"disabled"}}`: 975 tokens, 7s,
+valid JSON. Exactly 20 = JUDGE_BATCH → one whole batch, all 3 rounds.
+- Judge call now runs with DeepSeek thinking disabled (DeepSeek models only —
+  the field is not sent to other OpenAI-compatible endpoints). Cleanup untouched.
+- Judge runner returns finish_reason as an optional 4th element; a "length"
+  finish with unparseable output is NOT retried (identical prompt re-truncates)
+  and records JUDGE_TRUNCATED_REASON. Footer/final split the cause
+  (`kept_unreviewed_truncated`) instead of calling everything 服务异常.
+Considered and rejected: raising JUDGE_MAX_TOKENS to 65536 (each call ~80s+,
+spends tokens on reasoning a lookup check doesn't need).
+**Status**: Complete — 5 new tests; full suite green.

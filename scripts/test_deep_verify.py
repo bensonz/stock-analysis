@@ -236,6 +236,26 @@ def test_parse_verdicts_retry_then_judge_error():
     assert claims[0]["status"] == "judge_error"
 
 
+def test_truncated_judge_is_not_retried_and_says_why():
+    """A reasoning judge that burns its whole budget (finish_reason=length,
+    empty content) would burn it again on the identical prompt — 000002
+    2026-10-01 lost 20 internal claims × 3 rounds × 2 tries this way."""
+    md = "站上MA20约2.3%〖内部数据〗。"
+    claims = dv.extract_claims(md)
+    calls = []
+
+    def truncating_judge(prompt):
+        calls.append(prompt)
+        return "", 1, 8192, "length"
+
+    rec = dv.verify_claims(claims, set(), {}, spec_verify="S",
+                           judge_runner=truncating_judge, fetch=lambda u: PAGE, cache={})
+    assert len(calls) == 1                        # no identical-prompt retry
+    assert claims[0]["status"] == "judge_error"   # still an outage, not a verdict
+    assert claims[0]["reason"] == dv.JUDGE_TRUNCATED_REASON
+    assert rec["counts"]["judge_truncated"] == 1
+
+
 def test_judge_error_is_not_cache_pinned():
     md = "站上MA20约2.3%〖内部数据〗。"
     cache = {}
@@ -399,6 +419,32 @@ def test_pipeline_persistent_judge_outage_keeps_number_disclosed():
     assert audit["final"]["unverified_remaining"] == 0
     assert "未复核" in text                         # footer discloses the outage
     assert audit["cleanup"]["used"] is False       # outage alone triggers no cleanup
+
+
+def test_pipeline_truncated_judge_footer_names_token_budget():
+    draft = "站上MA20约2.3%〖内部数据〗。"
+
+    def truncating_judge(prompt):
+        return "", 1, 8192, "length"
+
+    text, audit = dv.run_pipeline(
+        draft, {"technicals": {"ma20": 62.0}}, spec_writer="W", spec_verify="V",
+        max_rounds=2, judge_runner=truncating_judge, revise_runner=_boom,
+        cleanup_runner=_boom, fetch=_boom)
+    assert "2.3%" in text
+    assert audit["final"]["kept_unreviewed"] == 1
+    assert audit["final"]["kept_unreviewed_truncated"] == 1
+    assert "超出token上限" in text
+    assert "服务异常" not in text                  # not misreported as an outage
+
+
+def test_verification_footer_splits_mixed_unreviewed_causes():
+    final = {"total": 5, "verified_linked": 1, "verified_internal": 1,
+             "rewritten_qualitative": 0, "kept_unreviewed": 3,
+             "kept_unreviewed_truncated": 2}
+    footer = dv.verification_footer(final)
+    assert "3处未复核" in footer
+    assert "2处核验模型输出超出token上限" in footer and "1处核验服务异常" in footer
 
 
 def test_pipeline_mixed_failure_scrubs_naked_but_keeps_judge_errored():

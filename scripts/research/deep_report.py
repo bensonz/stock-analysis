@@ -525,7 +525,8 @@ def _make_runners(resolved, client, model, tool_log, totals,
         _add(i, o, r)
         return t, i, o, r
 
-    def _text_once(prompt: str, label: str, max_tokens: int):
+    def _text_once(prompt: str, label: str, max_tokens: int, no_thinking: bool = False):
+        """(text, tin, tout, finish_reason). finish_reason is None on anthropic."""
         # Transient connection errors must not kill a 20-minute pipeline run
         # (2026-08-07: one APIConnectionError mid-verify vaporized a finished
         # 601168 draft). 3 attempts with backoff, then re-raise.
@@ -536,31 +537,46 @@ def _make_runners(resolved, client, model, tool_log, totals,
                 print(f"  [{label.strip()}] connection retry {attempt + 1}/3",
                       file=sys.stderr)
             try:
+                finish = None
                 if verify_resolved == "anthropic":
                     t, i, o, _ = llm_client._run_anthropic_text_once(
                         verify_client, [{"role": "user", "content": prompt}], verify_model,
                         max_tokens, deep_verify.JUDGE_TEMPERATURE, label=label)
                 else:
+                    kw = {}
+                    if no_thinking and "deepseek" in str(verify_model).lower():
+                        # DeepSeek-only switch — other OpenAI-compatible
+                        # endpoints may reject an unknown body field.
+                        kw["extra_body"] = {"thinking": {"type": "disabled"}}
                     resp = verify_client.chat.completions.create(
                         model=verify_model,
                         max_tokens=max_tokens,
                         temperature=deep_verify.JUDGE_TEMPERATURE,
                         messages=[{"role": "user", "content": prompt}],
                         timeout=llm_client.GPT_TIMEOUT,
+                        **kw,
                     )
                     usage = resp.usage or type("U", (), {"prompt_tokens": 0, "completion_tokens": 0})()
-                    t, i, o = resp.choices[0].message.content or "", usage.prompt_tokens, usage.completion_tokens
+                    choice = resp.choices[0]
+                    t, i, o = choice.message.content or "", usage.prompt_tokens, usage.completion_tokens
+                    finish = getattr(choice, "finish_reason", None)
                 _add(i, o, 1)
-                return t, i, o
+                return t, i, o, finish
             except Exception as e:  # noqa: BLE001 — includes APIConnectionError/timeouts
                 last_err = e
         raise last_err
 
     # Judge emits small JSON verdicts; cleanup must re-emit a FULL report, so it
     # gets the writer budget — 4096 would truncate it into uselessness.
+    # The judge runs with thinking off: a "is this number in DATA/page" check
+    # needs no chain of thought, and deepseek-v4-pro thinking spent the whole
+    # JUDGE_MAX_TOKENS on reasoning and returned "" for every internal batch
+    # (000002, 2026-10-01: 20 claims unreviewed; same prompt, thinking off:
+    # 975 tokens, 7s, valid JSON).
     return (revise_runner,
-            lambda p: _text_once(p, "verify-judge ", deep_verify.JUDGE_MAX_TOKENS),
-            lambda p: _text_once(p, "verify-cleanup ", MAX_TOKENS))
+            lambda p: _text_once(p, "verify-judge ", deep_verify.JUDGE_MAX_TOKENS,
+                                 no_thinking=True),
+            lambda p: _text_once(p, "verify-cleanup ", MAX_TOKENS)[:3])
 
 
 def generate(code: str, provider: str | None = None, data: dict | None = None,

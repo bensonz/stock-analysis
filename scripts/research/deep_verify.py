@@ -399,20 +399,32 @@ def parse_verdicts(text: str) -> dict | None:
     return verdicts if isinstance(verdicts, dict) else None
 
 
+JUDGE_ERROR_REASON = "核验服务输出缺失或无法解析（数字保留，未复核）"
+JUDGE_TRUNCATED_REASON = "核验模型输出超出token上限（数字保留，未复核）"
+
+
 def _judge_with_retry(judge_runner, prompt: str):
-    """One retry on unparseable JSON. Returns (verdicts|None, tin, tout)."""
+    """One retry on unparseable JSON. Returns (verdicts|None, tin, tout, truncated).
+
+    A runner may return a 4th element, the provider's finish reason. "length"
+    with no parseable verdicts means the model spent its whole budget (a
+    reasoning judge thinks against the same cap): the identical prompt would
+    truncate again, so it is not retried (000002, 2026-10-01).
+    """
     tin = tout = 0
     for _ in range(2):
-        text, i, o = judge_runner(prompt)
+        text, i, o, *rest = judge_runner(prompt)
         tin += i
         tout += o
         verdicts = parse_verdicts(text)
         if verdicts is not None:
-            return verdicts, tin, tout
-    return None, tin, tout
+            return verdicts, tin, tout, False
+        if rest and rest[0] == "length":
+            return None, tin, tout, True
+    return None, tin, tout, False
 
 
-def _apply_verdict(claim: dict, v: dict | None):
+def _apply_verdict(claim: dict, v: dict | None, truncated: bool = False):
     # Missing/unparseable verdict is a JUDGE outage, not a verdict on the
     # claim. judge_error claims are re-judged next round and, if the outage
     # persists, KEPT with a footer disclosure — never scrubbed. (Scrubbing
@@ -420,7 +432,7 @@ def _apply_verdict(claim: dict, v: dict | None):
     # failure direction; see the 300037 post-mortem.)
     if not isinstance(v, dict) or v.get("verdict") not in ("supported", "not_found", "contradicted"):
         claim["status"] = "judge_error"
-        claim["reason"] = "核验服务输出缺失或无法解析（数字保留，未复核）"
+        claim["reason"] = JUDGE_TRUNCATED_REASON if truncated else JUDGE_ERROR_REASON
         return
     if v["verdict"] == "supported":
         claim["status"] = "verified"
@@ -502,12 +514,12 @@ def verify_claims(claims: list, data_numbers: set, data: dict, *, spec_verify: s
     # for the WHOLE batch; chunking bounds the blast radius of any one failure.
     for start in range(0, len(unmatched), JUDGE_BATCH):
         chunk = unmatched[start:start + JUDGE_BATCH]
-        verdicts, i, o = _judge_with_retry(
+        verdicts, i, o, truncated = _judge_with_retry(
             judge_runner, build_internal_judge_prompt(spec_verify, data, chunk))
         judge_in += i
         judge_out += o
         for c in chunk:
-            _apply_verdict(c, (verdicts or {}).get(c["id"]))
+            _apply_verdict(c, (verdicts or {}).get(c["id"]), truncated)
             cache[("__internal__", _numsig(c))] = (c["status"], c["reason"], c["fallback_text"])
 
     # Linked: one fetch per unique URL, one batched judge call per URL.
@@ -537,13 +549,13 @@ def verify_claims(claims: list, data_numbers: set, data: dict, *, spec_verify: s
         ti = to = 0
         for start in range(0, len(cs), JUDGE_BATCH):
             chunk = cs[start:start + JUDGE_BATCH]
-            verdicts, i, o = _judge_with_retry(
+            verdicts, i, o, truncated = _judge_with_retry(
                 judge_runner, build_judge_prompt(spec_verify, url, page, chunk))
             ti += i
             to += o
             with lock:
                 for c in chunk:
-                    _apply_verdict(c, (verdicts or {}).get(c["id"]))
+                    _apply_verdict(c, (verdicts or {}).get(c["id"]), truncated)
                     cache[(url, _numsig(c))] = (c["status"], c["reason"], c["fallback_text"])
         return rec, ti, to
 
@@ -564,6 +576,8 @@ def verify_claims(claims: list, data_numbers: set, data: dict, *, spec_verify: s
         "failed": sum(1 for c in claims if c["status"] == "failed"),
         "unreachable": sum(1 for c in claims if c["status"] == "unreachable"),
         "judge_error": sum(1 for c in claims if c["status"] == "judge_error"),
+        "judge_truncated": sum(1 for c in claims if c["status"] == "judge_error"
+                               and c["reason"] == JUDGE_TRUNCATED_REASON),
     }
     return {
         "claims": [dict(c, span=list(c["span"])) for c in claims],
@@ -721,8 +735,15 @@ def verification_footer(final: dict) -> str:
         f"（{final['verified_linked']}外链/{final['verified_internal']}内部），"
         f"{final['rewritten_qualitative']}处已改写为定性表述。"
     )
-    if final.get("kept_unreviewed"):
-        line += f"⚠️ {final['kept_unreviewed']}处因核验服务异常未复核（数字按原样保留）。"
+    kept = final.get("kept_unreviewed", 0)
+    truncated = final.get("kept_unreviewed_truncated", 0)
+    if kept and truncated == kept:
+        line += f"⚠️ {kept}处因核验模型输出超出token上限未复核（数字按原样保留）。"
+    elif kept and truncated:
+        line += (f"⚠️ {kept}处未复核（{truncated}处核验模型输出超出token上限，"
+                 f"{kept - truncated}处核验服务异常；数字按原样保留）。")
+    elif kept:
+        line += f"⚠️ {kept}处因核验服务异常未复核（数字按原样保留）。"
     return line + "\n"
 
 
@@ -735,7 +756,7 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
     """draft → (verify → revise)* → cleanup → mechanical guarantee.
 
     All LLM access goes through the injected runners:
-      judge_runner(prompt)   -> (text, tin, tout)          no tools
+      judge_runner(prompt)   -> (text, tin, tout[, finish_reason])  no tools
       revise_runner(prompt)  -> (text, tin, tout, rounds)  with tools
       cleanup_runner(prompt) -> (text, tin, tout)          no tools
     Returns (final_text_with_footer, audit).
@@ -830,20 +851,22 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
                 if c["kind"] == "naked":
                     residual.append(c)
                 elif c["kind"] == "internal":
-                    st = cache.get(("__internal__", _numsig(c)), ("",))[0]
+                    st, *cached = cache.get(("__internal__", _numsig(c)), ("",))
                     if st == "verified" or \
                             internal_numbers_match(c["numbers"], data_numbers):
                         c["status"] = "verified"
                     elif st == "judge_error":
                         c["status"] = "judge_error"  # kept; disclosed in footer
+                        c["reason"] = cached[0]
                     else:
                         residual.append(c)
                 else:
-                    st = cache.get((c["url"], _numsig(c)), ("",))[0]
+                    st, *cached = cache.get((c["url"], _numsig(c)), ("",))
                     if st == "verified":
                         c["status"] = "verified"
                     elif st == "judge_error":
                         c["status"] = "judge_error"  # kept; disclosed in footer
+                        c["reason"] = cached[0]
                     else:
                         residual.append(c)
             return residual
@@ -878,6 +901,8 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
         # judge outage: numbers deliberately kept, disclosed in the footer —
         # counted apart from unverified_remaining (the guarantee-violation alarm)
         "kept_unreviewed": sum(1 for c in claims if c["status"] == "judge_error"),
+        "kept_unreviewed_truncated": sum(1 for c in claims if c["status"] == "judge_error"
+                                         and c.get("reason") == JUDGE_TRUNCATED_REASON),
         "unverified_remaining": sum(1 for c in claims if c["status"] not in ("verified", "judge_error")),
     }
     audit["final"] = final
