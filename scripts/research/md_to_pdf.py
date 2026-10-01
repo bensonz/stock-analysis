@@ -5,10 +5,16 @@
     python3 scripts/research/md_to_pdf.py a.md b.md          # several at once
     python3 scripts/research/md_to_pdf.py a.md -o /tmp/a.pdf
 
-Pipeline: pandoc (gfm → standalone HTML with the CSS below) → weasyprint.
-Chosen over pandoc+xelatex because weasyprint picks up the macOS CJK system
-fonts (PingFang SC) with no LaTeX font setup. Both are external CLIs
-(`brew install pandoc weasyprint`), not pip deps — the pipeline never runs this.
+Pipeline: pandoc (gfm → standalone HTML with the CSS below) → headless Chrome
+print-to-pdf. Chrome picks up the macOS CJK system fonts (PingFang SC) with no
+LaTeX font setup. Both are external tools, not pip deps — the pipeline never
+runs this.
+
+Not weasyprint (the first version, 2026-10-01): weasyprint 61's subset of
+PingFang (a CFF .ttc) rendered as garbage in Preview/Acrobat while pdf.js
+(VS Code) showed it fine; `--full-fonts` fixed it at 240 MB per report.
+Chrome embeds the glyphs as Type 3 and renders everywhere (check with
+`sips -s format png x.pdf --out x.png` — same Quartz engine as Preview).
 
 Output defaults to the .md path with a .pdf suffix. reports/ is git-ignored,
 so the PDF stays local.
@@ -41,6 +47,12 @@ blockquote { border-left: 3px solid #ccc; margin-left: 0; padding-left: 10px; co
 a { color: #1a5fb4; text-decoration: none; word-break: break-all; }
 """
 
+CHROME_CANDIDATES = (
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "/Applications/Chromium.app/Contents/MacOS/Chromium",
+    "google-chrome", "chromium", "chromium-browser",
+)
+
 _H1 = re.compile(r"^#\s+(.*\S)\s*$")
 
 
@@ -69,7 +81,14 @@ def first_h1(md: str) -> str | None:
     return None
 
 
-def render(md_path: Path, pdf_path: Path) -> None:
+def find_chrome() -> str | None:
+    for c in CHROME_CANDIDATES:
+        if Path(c).is_file() or shutil.which(c):
+            return c
+    return None
+
+
+def render(md_path: Path, pdf_path: Path, chrome: str) -> None:
     md = strip_placeholder_title(md_path.read_text(encoding="utf-8"))
     title = first_h1(md) or md_path.stem
     with tempfile.TemporaryDirectory() as tmp:
@@ -82,10 +101,19 @@ def render(md_path: Path, pdf_path: Path) -> None:
              "--css", str(css), "--embed-resources", "-o", str(html)],
             input=md, text=True, check=True,
         )
-        # weasyprint's stderr is mostly harmless font-subsetting chatter
-        # ("CFF FDArray keys ignored"); real failures surface via check=True.
-        subprocess.run(["weasyprint", str(html), str(pdf_path)],
-                       check=True, stderr=subprocess.DEVNULL)
+        out = pdf_path.resolve()
+        out.unlink(missing_ok=True)
+        # No --user-data-dir: a fresh profile makes Chrome print the PDF and
+        # then never exit (hung until timeout, 2026-10-01); the default
+        # headless profile coexists with a running desktop Chrome fine.
+        # Chrome's stderr is GPU/updater chatter; success is judged by the file.
+        subprocess.run(
+            [chrome, "--headless=new", "--disable-gpu", "--no-pdf-header-footer",
+             f"--print-to-pdf={out}", html.as_uri()],
+            check=True, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL, timeout=120,
+        )
+        if not out.is_file() or out.stat().st_size == 0:
+            raise RuntimeError(f"Chrome produced no PDF for {md_path}")
 
 
 def main() -> int:
@@ -95,9 +123,11 @@ def main() -> int:
                     help="output PDF path (single input only; default: <input>.pdf)")
     args = ap.parse_args()
 
-    missing = [t for t in ("pandoc", "weasyprint") if shutil.which(t) is None]
-    if missing:
-        sys.exit(f"missing tool(s): {', '.join(missing)} — brew install {' '.join(missing)}")
+    if shutil.which("pandoc") is None:
+        sys.exit("missing pandoc — brew install pandoc")
+    chrome = find_chrome()
+    if chrome is None:
+        sys.exit("missing Google Chrome/Chromium — needed to print the PDF")
     if args.output and len(args.inputs) > 1:
         sys.exit("--output only works with a single input")
 
@@ -105,7 +135,7 @@ def main() -> int:
         if not md_path.is_file():
             sys.exit(f"not a file: {md_path}")
         pdf_path = args.output or md_path.with_suffix(".pdf")
-        render(md_path, pdf_path)
+        render(md_path, pdf_path, chrome)
         print(pdf_path)
     return 0
 
