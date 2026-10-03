@@ -13,6 +13,7 @@ Usage:
     python3 scripts/research/deep_report.py 000703
     python3 scripts/research/deep_report.py 000703 --provider anthropic --human
     python3 scripts/research/deep_report.py 000703.SZ --output-dir /tmp/reports
+    python3 scripts/research/deep_report.py 000703 --no-bear   # skip the bear-research pass
 """
 
 import json
@@ -30,6 +31,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 SPEC_FILE = PROJECT_ROOT / "agents" / "DEEP_REPORT.md"
 VERIFY_SPEC_FILE = PROJECT_ROOT / "agents" / "DEEP_VERIFY.md"
+BEAR_SPEC_FILE = PROJECT_ROOT / "agents" / "DEEP_BEAR.md"
 
 MAX_TOKENS = 16384
 # 1.0 per owner decision 2026-09-01, raised from 0.5 as an EXPERIMENT in rating
@@ -220,7 +222,8 @@ def gather_data(code: str) -> dict:
 # --------------------------------------------------------------------------- #
 # Prompt + generation
 # --------------------------------------------------------------------------- #
-def build_prompt(spec: str, code: str, data: dict, focus: str | None = None) -> str:
+def build_prompt(spec: str, code: str, data: dict, focus: str | None = None,
+                 bear_brief: str | None = None) -> str:
     focus_block = ""
     if focus:
         focus_block = (
@@ -230,11 +233,26 @@ def build_prompt(spec: str, code: str, data: dict, focus: str | None = None) -> 
             "「披露中未找到」而不是绕开：\n"
             + focus + "\n"
         )
+    # The brief gets its own block and NEVER goes into `data` (D1, 2026-10-03):
+    # `data` is flattened into the verifier's 〖内部数据〗 corpus, so web numbers
+    # placed there would verify without a link.
+    bear_block = ""
+    if bear_brief:
+        bear_block = (
+            "\n\n# 反方研究简报（独立空头研究员预先检索，非DATA）\n"
+            "这是一位独立空头研究员在你动笔前完成的检索。你必须在「风险提示」与「关键日期」中"
+            "逐条回应其中的每一项：采纳（写入风险/日期表）或说明为何不构成实质风险。"
+            "简报中带链接的条目，引用时须附同一原始链接；不带链接的条目只是线索——"
+            "须自行 web_search 核实后才能引用其中的数字或日期。"
+            "简报内容不属于 DATA，不得标注〖内部数据〗。\n\n"
+            + bear_brief + "\n"
+        )
     return (
         spec
         + "\n\n---\n\n# 目标个股\n"
         + str(data.get("code", code))
         + focus_block
+        + bear_block
         + "\n\n# DATA\n```json\n"
         + json.dumps(data, ensure_ascii=False, indent=2)
         + "\n```\n"
@@ -488,6 +506,85 @@ def _run_writer_pass(client, model, resolved, messages, tool_log, label,
         extra_tools=extra_tools, tool_executor=tool_executor)
 
 
+# --------------------------------------------------------------------------- #
+# Bear-research pass (2026-10-03: the 600150 report missed the USTR 301
+# port-fee suspension expiring 2026-11-09 — the writer only searched the bull
+# side). A separate web-only loop runs BEFORE the draft; its brief is injected
+# into the writer prompt. See docs/deep_report_bear_case/.
+# --------------------------------------------------------------------------- #
+MIN_BEAR_CHARS = 500
+
+
+def build_bear_prompt(bear_spec: str, code: str, data: dict, today: str) -> str:
+    """Bear-pass prompt: spec + target + date + a SLIM context (summary/intro
+    only). The full data package stays out — the bear researcher's job is the
+    web, not re-reading our numbers."""
+    summary = data.get("summary") if isinstance(data.get("summary"), dict) else {}
+    name = summary.get("name")
+    target = str(data.get("code", code)) + (f" {name}" if name else "")
+    context = {k: data[k] for k in ("summary", "intro") if k in data}
+    return (
+        bear_spec
+        + "\n\n---\n\n# 目标个股\n" + target
+        + "\n\n# 今日日期\n" + today
+        + "\n\n# 公司概况（仅供定位，不是检索结论）\n```json\n"
+        + json.dumps(context, ensure_ascii=False, indent=2)
+        + "\n```\n"
+    )
+
+
+def extract_bear_events(brief: str) -> list:
+    """Dated events from the LAST ```events fenced JSON block of the brief.
+
+    Tolerant: missing block / bad JSON → []. Keeps only dicts carrying both
+    "event" and "date". The block stays in the brief (the writer sees it);
+    the list exists for a later coverage guard (D4)."""
+    import re
+
+    blocks = re.findall(r"```events\s*\n(.*?)\n```", brief or "", re.DOTALL)
+    if not blocks:
+        return []
+    try:
+        raw = json.loads(blocks[-1])
+    except json.JSONDecodeError:
+        return []
+    if not isinstance(raw, list):
+        return []
+    return [e for e in raw if isinstance(e, dict) and "event" in e and "date" in e]
+
+
+def _strip_bear_preamble(text: str) -> str:
+    """Cut chatter before the first markdown heading of ANY level within the
+    first 2000 chars. Like deep_verify.strip_preamble, but that one is H1-only
+    and the bear spec doesn't promise its brief opens with an H1."""
+    import re
+
+    m = re.search(r"^#{1,6} ", text, re.M)
+    if m and 0 < m.start() <= 2000:
+        return text[m.start():]
+    return text
+
+
+def run_bear_pass(client, model, resolved, tool_log, prompt) -> tuple:
+    """Web-only tool loop on the writer's model. Returns (brief|None, tin,
+    tout, rounds). Degrades, never raises: a failed or thin bear pass must not
+    cost the report — the draft proceeds without a brief, loudly."""
+    try:
+        text, tin, tout, rounds = _run_writer_pass(
+            client, model, resolved, [{"role": "user", "content": prompt}],
+            tool_log, label="deep_report-bear ")
+    except Exception as e:  # noqa: BLE001
+        print(f"  [deep_report] bear pass FAILED ({type(e).__name__}: {str(e)[:120]}) "
+              "— drafting without bear brief", file=sys.stderr)
+        return None, 0, 0, 0
+    brief = _strip_bear_preamble(text or "").strip()
+    if len(brief) < MIN_BEAR_CHARS:
+        print(f"  [deep_report] bear pass returned a thin brief ({len(brief)} chars "
+              f"< {MIN_BEAR_CHARS}) — drafting without bear brief", file=sys.stderr)
+        return None, tin, tout, rounds
+    return brief, tin, tout, rounds
+
+
 def _make_runners(resolved, client, model, tool_log, totals,
                   verify_resolved=None, verify_client=None, verify_model=None,
                   extra_tools=None, tool_executor=None) -> tuple:
@@ -581,7 +678,8 @@ def _make_runners(resolved, client, model, tool_log, totals,
 
 def generate(code: str, provider: str | None = None, data: dict | None = None,
              verify: bool = True, max_verify_rounds: int = MAX_VERIFY_ROUNDS,
-             verify_provider: str | None = None, focus: str | None = None) -> dict:
+             verify_provider: str | None = None, focus: str | None = None,
+             bear: bool = True) -> dict:
     """Draft the article, then (unless verify=False) run the citation-verify
     pipeline: every number must be inline-linked and confirmed at its source,
     or tagged 〖内部数据〗 and matched against DATA. See agents/DEEP_VERIFY.md.
@@ -589,6 +687,9 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
     verify_provider lets the judge/cleanup passes run on a different (fast/cheap)
     model than the writer — e.g. --provider anthropic (Kimi brain) with
     --verify-provider openai (DeepSeek verify agent). Default: same as writer.
+
+    bear=True first runs an independent bear-research pass (agents/DEEP_BEAR.md,
+    web tools only, writer's model) and injects its brief into the draft prompt.
     """
     import llm_client
 
@@ -598,15 +699,32 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
     spec = SPEC_FILE.read_text(encoding="utf-8")
     if data is None:
         data = gather_data(code)
-    prompt = build_prompt(spec, code, data, focus=focus)
-    messages = [{"role": "user", "content": prompt}]
     tool_log: list = []
-
     client, model = _provider_ctx(resolved)
+
+    tin = tout = rounds = 0
+    bear_brief = None
+    if bear:
+        try:
+            bear_prompt = build_bear_prompt(
+                BEAR_SPEC_FILE.read_text(encoding="utf-8"), code, data,
+                datetime.now().strftime("%Y-%m-%d"))
+        except Exception as e:  # noqa: BLE001 — missing spec degrades like a failed pass
+            print(f"  [deep_report] bear pass FAILED ({type(e).__name__}: {str(e)[:120]}) "
+                  "— drafting without bear brief", file=sys.stderr)
+        else:
+            bear_brief, tin, tout, rounds = run_bear_pass(
+                client, model, resolved, tool_log, bear_prompt)
+
+    prompt = build_prompt(spec, code, data, focus=focus, bear_brief=bear_brief)
+    messages = [{"role": "user", "content": prompt}]
     extra_tools, tool_executor = _make_report_tools(data)
-    text, tin, tout, rounds = _run_writer_pass(
+    text, i0, o0, r0 = _run_writer_pass(
         client, model, resolved, messages, tool_log, label="deep_report ",
         extra_tools=extra_tools, tool_executor=tool_executor)
+    tin += i0
+    tout += o0
+    rounds += r0
     judgment_bets, text = extract_predictions_block(text)
 
     def _rerun_writer(_attempt):
@@ -700,6 +818,8 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
         "verify_audit": verify_audit,
         "verify_rounds": verify_rounds,
         "predictions": predictions,
+        "bear_brief": bear_brief,
+        "bear_events": extract_bear_events(bear_brief) if bear_brief else [],
     }
 
 
@@ -752,6 +872,16 @@ def write_verify_audit(code: str, audit: dict, output_dir=None) -> Path:
     return out
 
 
+def write_bear_brief(code: str, brief: str, output_dir=None) -> Path:
+    """Write the bear-research brief next to the report, so a missed risk can be
+    traced to "pass didn't find it" vs "writer ignored it"."""
+    code6 = str(code).split(".")[0]
+    date = datetime.now().strftime("%Y-%m-%d")
+    out = _report_out_dir(code6, output_dir) / f"{code6}-{date}-deep-bear.md"
+    out.write_text(brief, encoding="utf-8")
+    return out
+
+
 # --------------------------------------------------------------------------- #
 # CLI
 # --------------------------------------------------------------------------- #
@@ -765,7 +895,7 @@ def main():
         print(
             "usage: deep_report.py <code> [--provider anthropic|openai] "
             "[--output-dir DIR] [--human] [--no-verify] [--max-verify-rounds N] "
-            "[--verify-provider anthropic|openai] [--focus '委托研究问题...']",
+            "[--verify-provider anthropic|openai] [--focus '委托研究问题...'] [--no-bear]",
             file=sys.stderr,
         )
         sys.exit(2)
@@ -778,6 +908,7 @@ def main():
     mvr = _arg_value(args, "--max-verify-rounds")
     verify_provider = _arg_value(args, "--verify-provider")
     focus = _arg_value(args, "--focus")
+    bear = "--no-bear" not in args
 
     import time
     t0 = time.time()
@@ -790,13 +921,26 @@ def main():
         print(f"  verify : {v}/{_provider_model(v)}  (max {rounds_planned} rounds)", file=sys.stderr)
     else:
         print("  verify : OFF (--no-verify) — numbers will be unverified", file=sys.stderr)
-    print("  stages : gather → draft (tools) → claim-verify → revise → cleanup", file=sys.stderr)
+    if bear:
+        print("  bear   : ON (independent bear-research pass before draft)", file=sys.stderr)
+    else:
+        print("  bear   : OFF (--no-bear)", file=sys.stderr)
+    print("  stages : gather → " + ("bear (web) → " if bear else "")
+          + "draft (tools) → claim-verify → revise → cleanup", file=sys.stderr)
     print("=" * 62, file=sys.stderr)
 
     result = generate(code, provider=provider, verify=verify,
                       max_verify_rounds=rounds_planned,
-                      verify_provider=verify_provider, focus=focus)
+                      verify_provider=verify_provider, focus=focus, bear=bear)
     out = write_report(code, result["text"], output_dir=output_dir)
+
+    if result.get("bear_brief"):
+        bear_path = write_bear_brief(code, result["bear_brief"], output_dir=output_dir)
+        print(f"[deep_report] bear brief: {len(result.get('bear_events') or [])} dated events "
+              f"| {bear_path}", file=sys.stderr)
+    elif bear:
+        print("[deep_report] ⚠️ bear pass produced no brief — report drafted WITHOUT "
+              "bear research", file=sys.stderr)
 
     if result.get("verify_audit"):
         audit_path = write_verify_audit(code, result["verify_audit"], output_dir=output_dir)

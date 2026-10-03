@@ -155,7 +155,7 @@ def test_generate_openai_orchestration(monkeypatch):
     monkeypatch.setattr(llm_client, "_run_openai_tool_loop",
                         lambda *a, **k: (_ok_draft("结论：中性"), 1000, 2000, 3))
     res = deep_report.generate("000703", provider="openai", data={"code": "000703.SZ"},
-                               verify=False)
+                               verify=False, bear=False)
     assert res["text"].startswith("# 测试")
     assert res["provider"] == "openai" and res["model"] == "fake-model"
     assert res["input_tokens"] == 1000 and res["output_tokens"] == 2000 and res["rounds"] == 3
@@ -170,7 +170,7 @@ def test_generate_anthropic_branch(monkeypatch):
     monkeypatch.setattr(llm_client, "_run_tool_loop",
                         lambda *a, **k: (_ok_draft("结论：看空"), 5, 6, 1))
     res = deep_report.generate("000703", provider="anthropic", data={"code": "000703.SZ"},
-                               verify=False)
+                               verify=False, bear=False)
     assert res["model"] == "fake-claude" and "结论：看空" in res["text"]
 
 
@@ -195,7 +195,7 @@ def test_generate_verify_orchestration(monkeypatch):
 
     monkeypatch.setattr(deep_verify, "run_pipeline", fake_pipeline)
     res = deep_report.generate("000703", provider="openai", data={"code": "000703.SZ"},
-                               verify=True, max_verify_rounds=3)
+                               verify=True, max_verify_rounds=3, bear=False)
     assert "草稿标记X7Y" in seen["draft"] and seen["max_rounds"] == 3
     assert res["text"].startswith("# 已核验报告")
     assert res["verify_audit"] is canned_audit and res["verify_rounds"] == 1
@@ -240,7 +240,7 @@ def test_split_provider_judge_runs_on_verify_provider(monkeypatch):
 
     res = deep_report.generate("000703", provider="anthropic",
                                data={"code": "000703.SZ"},
-                               verify=True, verify_provider="openai")
+                               verify=True, verify_provider="openai", bear=False)
     # every verify-side LLM call (judge round 1 + cleanup) ran on the verify provider
     assert judge_calls and all(m == "deepseek-fast" for m in judge_calls)
     assert res["provider"] == "anthropic" and res["model"] == "kimi-k3"
@@ -344,7 +344,7 @@ def test_cli_verify_flags(monkeypatch, tmp_path, capsys):
     seen = {}
 
     def fake_generate(code, provider=None, verify=True, max_verify_rounds=2,
-                      verify_provider=None, focus=None):
+                      verify_provider=None, focus=None, bear=True):
         seen["verify"] = verify
         seen["max_verify_rounds"] = max_verify_rounds
         seen["verify_provider"] = verify_provider
@@ -358,6 +358,212 @@ def test_cli_verify_flags(monkeypatch, tmp_path, capsys):
                          "--max-verify-rounds", "1", "--output-dir", str(tmp_path)])
     deep_report.main()
     assert seen["verify"] is False and seen["max_verify_rounds"] == 1
+
+
+# --------------------------------------------------------------------------- #
+# Bear-research pass (2026-10-03: 600150 report missed the port-fee expiry)
+# --------------------------------------------------------------------------- #
+_BRIEF = ("# 反方研究简报\n"
+          "BRIEF-SENTINEL 港口费暂停将于11月9日到期。" + "风险线索。" * 200 + "\n"
+          "```events\n"
+          '[{"event": "USTR 301港口费暂停到期", "date": "2026-11-09", "url": "https://x.gov/a"}]\n'
+          "```\n")
+
+
+def test_build_prompt_puts_bear_brief_in_own_block_not_data():
+    prompt = deep_report.build_prompt("SPEC", "600150", {"code": "600150.SH", "pe": 24},
+                                      bear_brief=_BRIEF)
+    before_data, after_data = prompt.split("# DATA", 1)
+    assert "# 反方研究简报（独立空头研究员预先检索，非DATA）" in before_data
+    assert "BRIEF-SENTINEL" in before_data
+    assert "BRIEF-SENTINEL" not in after_data  # D1: never in the verifier's corpus
+
+
+def test_build_prompt_bear_block_follows_focus_block():
+    prompt = deep_report.build_prompt("SPEC", "600150", {"code": "600150.SH"},
+                                      focus="FOCUS-Q", bear_brief=_BRIEF)
+    assert prompt.index("FOCUS-Q") < prompt.index("# 反方研究简报") < prompt.index("# DATA")
+
+
+def test_build_prompt_without_bear_brief_has_no_bear_header():
+    prompt = deep_report.build_prompt("SPEC", "600150", {"code": "600150.SH"})
+    assert "反方研究简报" not in prompt
+
+
+def test_build_bear_prompt_is_slim():
+    data = {"code": "600150.SH", "summary": {"name": "中国船舶"}, "intro": {"basic": "造船"},
+            "technicals": {"klines": ["KLINE-SENTINEL"]}}
+    prompt = deep_report.build_bear_prompt("BEAR-SPEC", "600150", data, "2026-10-03")
+    assert "BEAR-SPEC" in prompt and "600150.SH" in prompt and "中国船舶" in prompt
+    assert "2026-10-03" in prompt and "造船" in prompt
+    assert "KLINE-SENTINEL" not in prompt  # full data package stays out
+
+
+def test_build_bear_prompt_tolerates_failed_summary():
+    prompt = deep_report.build_bear_prompt("BEAR-SPEC", "600150",
+                                           {"code": "600150.SH", "summary": None}, "2026-10-03")
+    assert "600150.SH" in prompt
+
+
+def test_extract_bear_events_valid_block():
+    events = deep_report.extract_bear_events(_BRIEF)
+    assert events == [{"event": "USTR 301港口费暂停到期", "date": "2026-11-09",
+                       "url": "https://x.gov/a"}]
+
+
+def test_extract_bear_events_bad_json_is_empty():
+    assert deep_report.extract_bear_events("x\n```events\n[{not json\n```\n") == []
+
+
+def test_extract_bear_events_missing_block_is_empty():
+    assert deep_report.extract_bear_events("# 简报\n没有事件块") == []
+
+
+def test_extract_bear_events_drops_undated_entries():
+    brief = ('```events\n[{"event": "A", "date": "2026-11-09"}, {"event": "B"}, "junk"]\n```\n')
+    assert deep_report.extract_bear_events(brief) == [{"event": "A", "date": "2026-11-09"}]
+
+
+def test_extract_bear_events_last_block_wins():
+    brief = ('```events\n[{"event": "OLD", "date": "2026-01-01"}]\n```\n正文\n'
+             '```events\n[{"event": "NEW", "date": "2026-11-09"}]\n```\n')
+    assert deep_report.extract_bear_events(brief) == [{"event": "NEW", "date": "2026-11-09"}]
+
+
+def test_run_bear_pass_degrades_on_exception(monkeypatch, capsys):
+    def boom(*a, **k):
+        raise RuntimeError("search API down")
+
+    monkeypatch.setattr(deep_report, "_run_writer_pass", boom)
+    assert deep_report.run_bear_pass(None, "m", "openai", [], "p") == (None, 0, 0, 0)
+    assert "bear pass FAILED" in capsys.readouterr().err
+
+
+def test_run_bear_pass_thin_text_keeps_tokens(monkeypatch, capsys):
+    monkeypatch.setattr(deep_report, "_run_writer_pass", lambda *a, **k: ("太短", 11, 22, 2))
+    assert deep_report.run_bear_pass(None, "m", "openai", [], "p") == (None, 11, 22, 2)
+    assert "thin brief" in capsys.readouterr().err
+
+
+def test_run_bear_pass_returns_brief_web_tools_only(monkeypatch):
+    seen = {}
+
+    def fake(client, model, resolved, messages, tool_log, label, **kw):
+        seen.update(kw, label=label, prompt=messages[0]["content"])
+        return "好的，我来检索。\n" + _BRIEF, 11, 22, 2
+
+    monkeypatch.setattr(deep_report, "_run_writer_pass", fake)
+    brief, i, o, r = deep_report.run_bear_pass(None, "m", "openai", [], "BEAR-P")
+    assert brief.startswith("# 反方研究简报")  # leading chatter stripped
+    assert (i, o, r) == (11, 22, 2)
+    assert seen["prompt"] == "BEAR-P" and seen["label"] == "deep_report-bear "
+    assert not seen.get("extra_tools") and not seen.get("tool_executor")
+
+
+def _openai_fakes(monkeypatch, responses):
+    """Stateful writer-loop fake: returns `responses` in order, records prompts."""
+    import llm_client
+    monkeypatch.setattr(llm_client, "normalize_llm_provider", lambda p: "openai")
+    monkeypatch.setattr(llm_client, "_build_openai_client", lambda: object())
+    monkeypatch.setattr(llm_client, "OPENAI_MODEL", "fake-model")
+    prompts = []
+
+    def loop(client, messages, *a, **k):
+        prompts.append(messages[0]["content"])
+        return responses[len(prompts) - 1]
+
+    monkeypatch.setattr(llm_client, "_run_openai_tool_loop", loop)
+    return prompts
+
+
+def test_generate_bear_pass_feeds_brief_into_draft(monkeypatch, tmp_path):
+    spec = tmp_path / "DEEP_BEAR.md"
+    spec.write_text("BEAR-SPEC-SENTINEL", encoding="utf-8")
+    monkeypatch.setattr(deep_report, "BEAR_SPEC_FILE", spec)
+    prompts = _openai_fakes(monkeypatch, [(_BRIEF, 100, 200, 2),
+                                          (_ok_draft("结论：中性"), 1000, 2000, 3)])
+    data = {"code": "600150.SH"}
+    res = deep_report.generate("600150", provider="openai", data=data, verify=False)
+    assert len(prompts) == 2
+    assert "BEAR-SPEC-SENTINEL" in prompts[0] and "# DATA" not in prompts[0]
+    assert "BRIEF-SENTINEL" in prompts[1]
+    assert "# 反方研究简报（独立空头研究员预先检索，非DATA）" in prompts[1]
+    assert res["bear_brief"].startswith("# 反方研究简报")
+    assert res["bear_events"][0]["date"] == "2026-11-09"
+    assert (res["input_tokens"], res["output_tokens"], res["rounds"]) == (1100, 2200, 5)
+    assert "BRIEF-SENTINEL" not in json.dumps(data, ensure_ascii=False)  # D1
+
+
+def test_generate_bear_off_makes_no_bear_call(monkeypatch):
+    prompts = _openai_fakes(monkeypatch, [(_ok_draft(), 1, 2, 1)])
+    res = deep_report.generate("600150", provider="openai", data={"code": "600150.SH"},
+                               verify=False, bear=False)
+    # compare to the brief-less prompt: the spec itself mentions the block name
+    spec = deep_report.SPEC_FILE.read_text(encoding="utf-8")
+    assert prompts == [deep_report.build_prompt(spec, "600150", {"code": "600150.SH"})]
+    assert res["bear_brief"] is None and res["bear_events"] == []
+
+
+def test_generate_missing_bear_spec_degrades(monkeypatch, tmp_path, capsys):
+    monkeypatch.setattr(deep_report, "BEAR_SPEC_FILE", tmp_path / "nope.md")
+    prompts = _openai_fakes(monkeypatch, [(_ok_draft(), 1, 2, 1)])
+    res = deep_report.generate("600150", provider="openai", data={"code": "600150.SH"},
+                               verify=False)
+    assert len(prompts) == 1  # straight to the draft
+    assert res["bear_brief"] is None and res["bear_events"] == []
+    assert "bear pass FAILED" in capsys.readouterr().err
+
+
+def test_write_bear_brief_path(tmp_path):
+    out = deep_report.write_bear_brief("600150.SH", _BRIEF, output_dir=tmp_path)
+    assert out.parent == tmp_path
+    assert out.name.startswith("600150-") and out.name.endswith("-deep-bear.md")
+    assert "BRIEF-SENTINEL" in out.read_text(encoding="utf-8")
+
+
+def _cli_fake_generate(seen, bear_brief=None):
+    def fake(code, provider=None, verify=True, max_verify_rounds=2,
+             verify_provider=None, focus=None, bear=True):
+        seen["bear"] = bear
+        return {"text": "# R", "tool_calls": [], "input_tokens": 1, "output_tokens": 1,
+                "rounds": 1, "provider": "openai", "model": "m", "data": {},
+                "verify_audit": None, "verify_rounds": 0,
+                "bear_brief": bear_brief,
+                "bear_events": deep_report.extract_bear_events(bear_brief or "")}
+    return fake
+
+
+def test_cli_no_bear_flag(monkeypatch, tmp_path, capsys):
+    import sys as _sys
+    seen = {}
+    monkeypatch.setattr(deep_report, "generate", _cli_fake_generate(seen))
+    monkeypatch.setattr(_sys, "argv", ["deep_report.py", "600150", "--no-verify",
+                                       "--no-bear", "--output-dir", str(tmp_path)])
+    deep_report.main()
+    assert seen["bear"] is False
+    assert "bear   : OFF" in capsys.readouterr().err
+    assert not list(tmp_path.glob("*-deep-bear.md"))
+
+
+def test_cli_writes_bear_brief(monkeypatch, tmp_path, capsys):
+    import sys as _sys
+    seen = {}
+    monkeypatch.setattr(deep_report, "generate", _cli_fake_generate(seen, _BRIEF))
+    monkeypatch.setattr(_sys, "argv", ["deep_report.py", "600150", "--no-verify",
+                                       "--output-dir", str(tmp_path)])
+    deep_report.main()
+    assert seen["bear"] is True
+    assert len(list(tmp_path.glob("600150-*-deep-bear.md"))) == 1
+    assert "bear brief: 1 dated events" in capsys.readouterr().err
+
+
+def test_cli_warns_when_bear_on_but_no_brief(monkeypatch, tmp_path, capsys):
+    import sys as _sys
+    monkeypatch.setattr(deep_report, "generate", _cli_fake_generate({}))
+    monkeypatch.setattr(_sys, "argv", ["deep_report.py", "600150", "--no-verify",
+                                       "--output-dir", str(tmp_path)])
+    deep_report.main()
+    assert "drafted WITHOUT bear research" in capsys.readouterr().err
 
 
 @pytest.mark.integration

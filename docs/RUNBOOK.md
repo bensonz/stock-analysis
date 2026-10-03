@@ -103,13 +103,22 @@ python3 scripts/research/deep_report.py 002293                # ~10–15 min
 python3 scripts/research/deep_report.py 002293 --human        # progress to stderr
 python3 scripts/research/deep_report.py 002293 --focus "中报后还能追吗"
 python3 scripts/research/deep_report.py 002293 --no-verify    # faster, numbers UNVERIFIED
+python3 scripts/research/deep_report.py 002293 --no-bear      # skip the bear-research pass
 ```
 
 Output lands in `reports/<code>-<name>/` as `<code>-<date>-deep.md` plus a
-`-deep-verify.json` audit trail; falsifiable predictions from the article are
-appended to the prediction log automatically. Writer defaults to Fable 5,
+`-deep-verify.json` audit trail and a `-deep-bear.md` bear brief; falsifiable
+predictions from the article are appended to the prediction log automatically. Writer defaults to Fable 5,
 verifier to DeepSeek (`--provider` / `--verify-provider` to override; env
 `DEEP_REPORT_PROVIDER` / `DEEP_REPORT_VERIFY_PROVIDER` set defaults).
+
+Before drafting, an independent bear-research pass (`agents/DEEP_BEAR.md`,
+web tools only) runs one more tool loop on the writer model and hands its
+brief to the writer as a separate prompt block — never as DATA. The brief is
+saved as `-deep-bear.md`, so a missed risk can be told apart: not found by the
+bear pass, or found and ignored by the writer. A failed or thin pass is loud
+(`bear pass FAILED` / `drafted WITHOUT bear research`) but never kills the
+report. Added 2026-10-03 after 600150's report missed a dated port-fee expiry.
 
 Read it knowing two things. The 〖内部数据〗 markers mean *verified against our
 own DB* — the verifier confirms we reported what we stored, not that what we
