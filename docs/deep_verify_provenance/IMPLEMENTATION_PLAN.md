@@ -29,7 +29,11 @@ no-anchor claims keyed by context, so a judged "15%" does not verify another "15
 Claims whose tokens are all date fragments are dropped at extraction.
 **Tests**: c021-shaped claim → judge; judge-supported weak claim survives cleanup
 `_classify`; anchored claim still mechanical; context-keyed cache.
-**Status**: Not Started
+**Status**: Complete — has_anchor / internal_numbers_present / internal_numbers_match
+  (= present AND anchored) / _internal_key used at all 3 cache sites; judge gets full
+  DATA. 6 new tests; test_flatten_and_match rewritten to assert the new routing
+  (present ≠ verified), not loosened. Known gap: a weak naked number that first
+  appears AFTER cleanup has no judge verdict → mechanical fallback scrubs it.
 
 ## Stage 3: Live re-measure (600150)
 **Pass criteria** (written before the run):

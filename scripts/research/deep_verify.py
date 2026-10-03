@@ -399,8 +399,33 @@ def flatten_data_numbers(data: dict) -> set:
     return out
 
 
+_YEAR_PART_RE = re.compile(r"(?:19|20)\d{2}")
+
+
+def _is_anchor_part(p: str) -> bool:
+    """A number distinctive enough that finding it in DATA is evidence, not
+    coincidence: a decimal with a nonzero fraction (99.54, 0.81) or ≥3
+    significant digits (163, 5262) that is not a bare year."""
+    if "." in p and p.split(".", 1)[1].strip("0"):
+        return True
+    return len(p.replace(".", "").lstrip("0")) >= 3 and not _YEAR_PART_RE.fullmatch(p)
+
+
+def has_anchor(numbers: list) -> bool:
+    return any(_is_anchor_part(p) for tok in numbers for p in token_number_parts(tok))
+
+
 def internal_numbers_match(numbers: list, data_numbers: set) -> bool:
-    """Mechanical check: every numeric token appears in the DATA block.
+    """Mechanical VERIFICATION: every number is in DATA **and** at least one is
+    an anchor (has_anchor). Without an anchor, presence proves nothing — DATA
+    holds nearly every 1–2 digit number, so "9月…逾10亿" (a web fact) passed as
+    internal data (2026-10-03, 600150 c021). Such claims go to the judge."""
+    return internal_numbers_present(numbers, data_numbers) and has_anchor(numbers)
+
+
+def internal_numbers_present(numbers: list, data_numbers: set) -> bool:
+    """Every numeric token appears in the DATA block. Enough to treat a naked
+    number as an untagged internal claim (and tag it), NOT to verify it.
 
     Compound tokens (ranges, comma-glued pairs, partial dates) match part-wise:
     EVERY constituent number must be in the corpus — "38.1–39.9" needs both
@@ -431,6 +456,16 @@ VERIFY_MAX_WORKERS = int(os.getenv("DEEP_VERIFY_MAX_WORKERS", "6"))
 
 def _numsig(claim: dict) -> tuple:
     return tuple(sorted(normalize_number(t) for t in claim["numbers"]))
+
+
+def _internal_key(claim: dict) -> tuple:
+    """THE cache key for an internal claim — every site must use this one.
+    Anchored numbers identify themselves; weak ones ("15%") do not, so their
+    verdict is keyed by context too: a judged "15%" in one sentence must not
+    verify a different "15%" elsewhere."""
+    if has_anchor(claim["numbers"]):
+        return ("__internal__", _numsig(claim))
+    return ("__internal__", _numsig(claim), claim["context"])
 
 
 def parse_verdicts(text: str) -> dict | None:
@@ -502,16 +537,15 @@ def build_judge_prompt(spec_verify: str, url: str, page_text: str, claims: list)
 
 
 def build_internal_judge_prompt(spec_verify: str, data: dict, claims: list) -> str:
-    slim = {k: data.get(k)
-            for k in ("technicals", "rps_gate", "margin",
-                      "fundamentals", "peer_fundamentals", "base_rates")
-            if k in data}
+    # The FULL DATA (2026-10-03): the mechanical matcher walks every section
+    # (flatten_data_numbers), so a judge shown less would reject true numbers
+    # from summary/intro/peers. ~16k chars for 600150 — no reason to slim.
     items = [{"id": c["id"], "numbers": c["numbers"], "context": c["context"]} for c in claims]
     return (
         spec_verify
         + "\n\n---\n\n# 模式\n内部DATA核验（数值须可由DATA直接得到或简单推导）\n"
         + "\n# DATA (JSON)\n```json\n"
-        + json.dumps(slim, ensure_ascii=False, indent=1)
+        + json.dumps(data, ensure_ascii=False, indent=1, default=str)
         + "\n```\n\n# 待核验条目 (JSON)\n```json\n"
         + json.dumps(items, ensure_ascii=False, indent=1)
         + "\n```\n\n只输出JSON verdicts，不要任何其他文字。\n"
@@ -533,7 +567,7 @@ def verify_claims(claims: list, data_numbers: set, data: dict, *, spec_verify: s
     # matching nothing still fail mechanically.
     for c in claims:
         if c["kind"] == "naked":
-            if c["numbers"] and internal_numbers_match(c["numbers"], data_numbers):
+            if c["numbers"] and internal_numbers_present(c["numbers"], data_numbers):
                 c["kind"] = "internal"
             else:
                 c["status"] = "failed"
@@ -545,7 +579,7 @@ def verify_claims(claims: list, data_numbers: set, data: dict, *, spec_verify: s
     # mechanically in round 2; a stale cached "failed" must not pin it.
     unmatched = []
     for c in (c for c in claims if c["kind"] == "internal"):
-        key = ("__internal__", _numsig(c))
+        key = _internal_key(c)
         cached = cache.get(key)
         if internal_numbers_match(c["numbers"], data_numbers):
             c["status"] = "verified"
@@ -565,7 +599,7 @@ def verify_claims(claims: list, data_numbers: set, data: dict, *, spec_verify: s
         judge_out += o
         for c in chunk:
             _apply_verdict(c, (verdicts or {}).get(c["id"]), truncated)
-            cache[("__internal__", _numsig(c))] = (c["status"], c["reason"], c["fallback_text"])
+            cache[_internal_key(c)] = (c["status"], c["reason"], c["fallback_text"])
 
     # Linked: one fetch per unique URL, one batched judge call per URL.
     # URLs are independent — fan out (wall-clock ≈ slowest URL, not the sum).
@@ -686,7 +720,7 @@ def _tag_naked_data_numbers(text: str, data_numbers: set) -> tuple:
         claims = extract_claims(text)
         naked = [c for c in claims if c["kind"] == "naked"]
         matched = {id(c) for c in naked
-                   if c["numbers"] and internal_numbers_match(c["numbers"], data_numbers)}
+                   if c["numbers"] and internal_numbers_present(c["numbers"], data_numbers)}
         candidates = [c for c in naked if id(c) in matched]
         if not candidates:
             break
@@ -896,7 +930,7 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
                 if c["kind"] == "naked":
                     residual.append(c)
                 elif c["kind"] == "internal":
-                    st, *cached = cache.get(("__internal__", _numsig(c)), ("",))
+                    st, *cached = cache.get(_internal_key(c), ("",))
                     if st == "verified" or \
                             internal_numbers_match(c["numbers"], data_numbers):
                         c["status"] = "verified"

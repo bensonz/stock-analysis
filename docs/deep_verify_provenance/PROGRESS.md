@@ -6,3 +6,5 @@
 - Plan + pass criteria written before code (advisor-reviewed).
 - Stage 1 done: 5 exemption forms + strip_exempt_tags + writer told not to cite
   the brief by number. Suite 885 passed / 12 skipped.
+- Stage 2 done: anchor rule + single cache key + full-DATA judge. Suite 891 passed / 12 skipped.
+  Expect ~135/961 historically-mechanical claims to route to the judge instead.

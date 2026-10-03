@@ -196,7 +196,9 @@ def test_flatten_and_match():
     assert dv.internal_numbers_match(["91.82"], nums)
     assert dv.internal_numbers_match(["67.48"], nums)      # rounded variant
     assert dv.internal_numbers_match(["20.5", "80"], nums)
-    assert dv.internal_numbers_match(["55"], nums)         # from string leaf
+    assert dv.internal_numbers_present(["55"], nums)       # from string leaf
+    # …but present is not verified: "55" alone has no anchor → judge decides
+    assert not dv.internal_numbers_match(["55"], nums)
     assert not dv.internal_numbers_match(["999.9"], nums)
 
 
@@ -382,6 +384,88 @@ def test_internal_mechanical_and_llm_fallback():
     assert all(c["status"] == "verified" for c in claims)
     assert len(judged) == 1                       # only the derived claim hit the LLM
     assert "内部DATA核验" in judged[0]
+
+
+# Anchor rule (2026-10-03, 600150 c021): "does every number occur somewhere in
+# DATA" is true for almost any 1–2 digit number, so a web fact like
+# "9月广船国际逾10亿" passed as internal data. A mechanical pass now needs an
+# anchor — a decimal or ≥3 significant digits; anything weaker goes to the judge.
+def test_weak_internal_claim_goes_to_judge_not_mechanical():
+    md = "9月广船国际斩获逾10亿〖内部数据〗订单。"
+    claims = dv.extract_claims(md)
+    data = {"summary": {"x": 10, "y": 9}}
+    judged = []
+    judge = _auto_judge(verdict_for={"c001": {"verdict": "not_found", "reason": "DATA无此订单"}},
+                        calls=judged)
+    dv.verify_claims(claims, dv.flatten_data_numbers(data), data, spec_verify="S",
+                     judge_runner=judge, fetch=lambda u: PAGE, cache={})
+    assert len(judged) == 1
+    assert claims[0]["status"] == "failed"
+
+
+def test_anchored_internal_claim_still_mechanical():
+    md = "RPS60=91.82〖内部数据〗，2026H1归母净利99.54亿元〖内部数据〗。"
+    claims = dv.extract_claims(md)
+    data = {"technicals": {"rps60": 91.82}, "fundamentals": {"np": 99.54}}
+    dv.verify_claims(claims, dv.flatten_data_numbers(data), data, spec_verify="S",
+                     judge_runner=_boom, fetch=lambda u: PAGE, cache={})
+    assert all(c["status"] == "verified" for c in claims)
+
+
+def test_has_anchor():
+    assert dv.has_anchor(["99.54亿元"]) and dv.has_anchor(["163%"]) and dv.has_anchor(["0.81%"])
+    assert not dv.has_anchor(["10亿"]) and not dv.has_anchor(["15%", "9"])
+    assert not dv.has_anchor(["2026", "9"])       # a year is not an anchor
+    assert not dv.has_anchor(["3.0"])             # zero fraction is not distinctive
+
+
+def test_weak_claim_verdict_is_keyed_by_context():
+    """A judged-supported "15%" in one sentence must not verify a different
+    "15%" elsewhere — weak numbers carry no identity of their own."""
+    data = {"base_rates": {"threshold_pct": 15}}
+    nums = dv.flatten_data_numbers(data)
+    cache, judged = {}, []
+    a = dv.extract_claims("回撤≥15%〖内部数据〗的频率。")
+    dv.verify_claims(a, nums, data, spec_verify="S",
+                     judge_runner=_auto_judge(calls=judged), fetch=lambda u: PAGE, cache=cache)
+    b = dv.extract_claims("海外收入占比15%〖内部数据〗。")
+    dv.verify_claims(b, nums, data, spec_verify="S",
+                     judge_runner=_auto_judge(calls=judged), fetch=lambda u: PAGE, cache=cache)
+    assert len(judged) == 2
+
+
+def test_judge_verified_weak_claim_survives_cleanup():
+    """Weak internal claim → judge supports it → cleanup's mechanical guard
+    must find that verdict (same cache key) and keep the number."""
+    draft = "近5年ROE 14%〖内部数据〗。营收增长[37.5%](https://a.com/x)。"
+    data = {"summary": {"roe5y": 14}}
+
+    def judge(prompt):
+        ids = re.findall(r'"id": "(c\d+)"', prompt)
+        if "内部DATA核验" in prompt:
+            v = {i: {"verdict": "supported"} for i in ids}
+        else:   # the linked claim fails, forcing revise → cleanup
+            v = {i: {"verdict": "not_found", "reason": "无", "fallback_text": "营收增长"} for i in ids}
+        return json.dumps({"verdicts": v}), 1, 1
+
+    text, audit = dv.run_pipeline(
+        draft, data, spec_writer="W", spec_verify="V", max_rounds=1,
+        judge_runner=judge, revise_runner=_boom,
+        cleanup_runner=lambda p: (draft.replace("[37.5%](https://a.com/x)", ""), 1, 1),
+        fetch=lambda u: PAGE)
+    assert "ROE 14%〖内部数据〗" in text
+    assert audit["final"]["unverified_remaining"] == 0
+
+
+def test_internal_judge_sees_full_data():
+    """The judge must see every DATA section the matcher walks — a slimmer
+    view makes it reject true numbers from summary/intro/peers."""
+    data = {"summary": {"roe5y": 14}, "intro": {"basic": {"name": "X"}},
+            "peers": [{"code": "1"}], "technicals": {"rps60": 9}}
+    claims = dv.extract_claims("ROE 14%〖内部数据〗。")
+    prompt = dv.build_internal_judge_prompt("S", data, claims)
+    for key in ("roe5y", '"intro"', '"peers"', "rps60"):
+        assert key in prompt, key
 
 
 # --------------------------------------------------------------------------- #
