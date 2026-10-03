@@ -36,3 +36,10 @@
   2. writer still emits a stray leading "# 报告" H1 (md_to_pdf hides it).
   3. two §3 rows have no source link ("—"); verifier can't see it (no numbers).
   4. bear-pass cost: cap rounds or trim fetched page text if 2.4× is too much.
+  5. published text cites the brief by number ("对反方简报第5条…的回应") — the reader
+     never sees the brief; bear-block instruction should say respond in substance.
+- Open judgment call for the owner: 风险三's 5–15% rests on the writer's inference
+  that "延期吉隆坡经贸磋商成果" covers the port-fee truce. The brief itself flagged
+  this as unverified ("未找到官方原文…作者必须核实"); CheeseForTune reads it the
+  opposite way. Both linked facts verified; the step between them is not checkable
+  by the verifier.
