@@ -78,10 +78,23 @@ ALLOWLIST_RES = [re.compile(p) for p in [
     r"近\s*\d+\s*(?:个)?(?:日|周|月|年|季|交易日)",             # 近1月
     r"\d+\s*(?:个)?交易日",                                    # 5个交易日
     r"[①②③④⑤⑥⑦⑧⑨⑩]",
+    # 2026-10-03 (600150): the forms below were extracted as naked claims and
+    # the tag guard stamped 〖内部数据〗 on them because their digits occur
+    # somewhere in DATA — false provenance on text that is not data at all.
+    # The writer's own judgment band 「判断」（5–15%／<15%／>40%…）: a
+    # probability estimate, not a sourced figure. Bare thresholds (">20%")
+    # stay claims — only the spec-defined band form is exempt.
+    r"「判断」\s*[（(]\s*(?:[<>＜＞]\s*\d{1,3}|\d{1,3}\s*[–\-~～—]\s*\d{1,3})\s*[%％]",
+    # incident labels "9·10" / "9・10" (month·day)
+    r"(?<![0-9.])(?:1[0-2]|0?[1-9])\s*[·・]\s*(?:3[01]|[12]?[0-9])(?![0-9])",
+    r"\d{1,2}月\d{1,2}\s*[–\-~～—]\s*\d{1,2}日",                # 9月23-25日
+    # 第5条 / 第12项 — also with a misplaced tag inside: 第5〖内部数据〗条
+    r"第\s*\d{1,3}\s*(?:〖内部数据〗)?\s*[条项点款](?![0-9])",
 ]]
 ALLOWLIST_LINE_RES = [re.compile(p, re.M) for p in [
     r"^\s{0,3}#{1,6}\s*\d+[.、]?",                            # "### 3. 风险提示"
     r"^\s*\d+[.、）)]",                                        # list ordinals
+    r"^\s*\*\*\d+[.、）)]",                                    # **1. bold ordinals
 ]]
 
 _SEG_BOUNDARY_RE = re.compile(r"[。；;！？!?\n|]")
@@ -266,24 +279,21 @@ def extract_claims(markdown: str) -> list:
 
     # 3. 〖内部数据〗 segments (outside covered table rows)
     link_spans = [lm.span() for lm in LINK_RE.finditer(text)]
+    allow_m = _merge_spans(allow)
     for m in re.finditer(re.escape(TAG), text):
         if _in_spans(m.start(), covered):
             continue
-        seg_start = 0
-        for b in _SEG_BOUNDARY_RE.finditer(text, max(0, m.start() - 80), m.start()):
-            seg_start = b.end()
-        seg_start = max(seg_start, m.start() - 80)
-        # never start mid-link: a segment that cuts a [label](url) in half
-        # would later mangle the link when its span gets replaced
-        for ls, le in link_spans:
-            if ls < seg_start < le:
-                seg_start = le
+        seg_start = _tag_segment_start(text, m.start(), link_spans)
         segment = text[seg_start:m.start()]
-        claims.append({
-            "kind": "internal", "url": None,
-            "numbers": _claim_numbers(segment),
-            "span": (seg_start, m.end()), "context": segment.strip()[:200],
-        })
+        # exempt tokens (dates, bands, ordinals) are not data claims even
+        # under a tag; a tag covering nothing else makes no claim at all —
+        # strip_exempt_tags removes such tags from the published text
+        numbers = _numbers_in(segment, seg_start, allow_m)
+        if numbers:
+            claims.append({
+                "kind": "internal", "url": None, "numbers": numbers,
+                "span": (seg_start, m.end()), "context": segment.strip()[:200],
+            })
         covered = _merge_spans(covered + [(seg_start, m.end())])
 
     # 4. Naked numbers: anything left with an ASCII digit
@@ -302,6 +312,41 @@ def extract_claims(markdown: str) -> list:
         c.setdefault("reason", "")
         c.setdefault("fallback_text", None)
     return claims
+
+
+def _tag_segment_start(text: str, tag_pos: int, link_spans: list) -> int:
+    """Start of the segment a 〖内部数据〗 tag at tag_pos covers: back to the
+    last sentence/cell boundary, at most 80 chars, never mid-link (a segment
+    that cuts a [label](url) in half would mangle the link when replaced)."""
+    seg_start = 0
+    for b in _SEG_BOUNDARY_RE.finditer(text, max(0, tag_pos - 80), tag_pos):
+        seg_start = b.end()
+    seg_start = max(seg_start, tag_pos - 80)
+    for ls, le in link_spans:
+        if ls < seg_start < le:
+            seg_start = le
+    return seg_start
+
+
+def strip_exempt_tags(text: str) -> str:
+    """Remove 〖内部数据〗 tags whose segment holds no checkable number — only
+    exempt text (a judgment band, an incident label "9·10", 第N条, a date).
+    Such a tag claims DATA provenance for something that is not data
+    (2026-10-03, 600150: "5-15%〖内部数据〗" on the writer's own estimate).
+    Tags inside fences, the footer and table rows are left alone."""
+    skip = _merge_spans([m.span() for m in FENCE_RE.finditer(text)]
+                        + [m.span() for m in FOOTER_RE.finditer(text)]
+                        + [(a, b) for a, b, _l, _c in _table_lines(text)])
+    allow_m = _merge_spans(_allowlist_spans(text))
+    link_spans = [lm.span() for lm in LINK_RE.finditer(text)]
+    # right-to-left: removing a tag never shifts positions still to be checked
+    for m in reversed(list(re.finditer(re.escape(TAG), text))):
+        if _in_spans(m.start(), skip):
+            continue
+        seg_start = _tag_segment_start(text, m.start(), link_spans)
+        if not _numbers_in(text[seg_start:m.start()], seg_start, allow_m):
+            text = text[:m.start()] + text[m.end():]
+    return text
 
 
 def covered_spans(markdown: str) -> list:
@@ -775,7 +820,7 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
     cache: dict = {}
     audit = {"max_rounds": max_rounds, "rounds": [],
              "cleanup": {"used": False, "mechanical_fallbacks": 0}}
-    text = strip_preamble(draft_text)
+    text = strip_exempt_tags(strip_preamble(draft_text))
     claims: list = []
 
     for rnd in range(1, max_rounds + 1):
@@ -906,4 +951,4 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
         "unverified_remaining": sum(1 for c in claims if c["status"] not in ("verified", "judge_error")),
     }
     audit["final"] = final
-    return text + verification_footer(final), audit
+    return strip_exempt_tags(text) + verification_footer(final), audit

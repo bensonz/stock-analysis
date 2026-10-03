@@ -60,6 +60,73 @@ def test_allowlist_passes():
     assert claims == [], f"false positives: {[(c['kind'], c['numbers']) for c in claims]}"
 
 
+def _naked_numbers(md):
+    return [c["numbers"] for c in dv.extract_claims(md) if c["kind"] == "naked"]
+
+
+# 2026-10-03, 600150: each of these got a false 〖内部数据〗 stamped on it by the
+# tag guard because its digits happened to occur somewhere in DATA.
+def test_judgment_band_is_not_a_claim():
+    for md in ("概率：低「判断」（5-15%，至2026-12-15）。",
+               "概率：中「判断」（15–40%，至2026中报）。",
+               "概率：低「判断」（<15%，至2027中报）。",
+               "概率：高「判断」（>40%，至2027-04-30）。"):
+        assert _naked_numbers(md) == [], md
+
+
+def test_middle_dot_incident_label_is_not_a_claim():
+    assert _naked_numbers('国务院"9·10"北海造船事故调查。') == []
+    assert _naked_numbers("「9・10」事故。") == []
+
+
+def test_cjk_date_range_is_not_a_claim():
+    assert _naked_numbers("2026年9月23-25日中美元首会谈。") == []
+    assert _naked_numbers("9月23–25日会谈。") == []
+
+
+def test_article_ordinal_is_not_a_claim():
+    assert _naked_numbers("对第5条的回应，以及第12项、第3点。") == []
+
+
+def test_bold_list_ordinal_is_not_a_claim():
+    assert _naked_numbers("**1. 北海造船事故调查**\n**2）汇率**\n") == []
+
+
+def test_tag_over_exempt_text_makes_no_internal_claim():
+    for md in ("概率：低「判断」（5-15%〖内部数据〗，至2026-12-15）。",
+               '风险一：国务院"9·10〖内部数据〗"北海造船事故。',
+               "对反方简报第5〖内部数据〗条的回应。",
+               "2026年9月23-25日〖内部数据〗中美元首会谈。"):
+        assert [c for c in dv.extract_claims(md) if c["numbers"]] == [], md
+
+
+def test_strip_exempt_tags_removes_false_provenance():
+    md = ("概率：低「判断」（5-15%〖内部数据〗，至2026-12-15）。"
+          '国务院"9·10〖内部数据〗"调查。第5〖内部数据〗条。')
+    assert dv.TAG not in dv.strip_exempt_tags(md)
+
+
+def test_strip_exempt_tags_keeps_real_data_tags():
+    md = "RPS60=91.82〖内部数据〗。9月30日收盘4.26元〖内部数据〗。"
+    assert dv.strip_exempt_tags(md) == md
+
+
+def test_pipeline_output_has_no_tag_on_judgment_band():
+    draft = "风险：概率：低「判断」（5-15%〖内部数据〗，至2026-12-15）。"
+    text, audit = dv.run_pipeline(
+        draft, {"technicals": {"ma20": 62.0}}, spec_writer="W", spec_verify="V",
+        max_rounds=1, judge_runner=_boom, revise_runner=_boom,
+        cleanup_runner=_boom, fetch=_boom)
+    assert "5-15%" in text and "5-15%〖内部数据〗" not in text
+
+
+def test_threshold_comparisons_stay_claims():
+    """Only spec-defined judgment bands are exempt — a bare threshold is a
+    claim about the world and must still be sourced."""
+    assert _naked_numbers("预计同比增长>20%。")
+    assert _naked_numbers("回撤≥15%的概率。")
+
+
 def test_real_figures_are_flagged():
     md = (
         "从5000元/件降级至1000元/件。营收43.14亿元，同比+108%。"
