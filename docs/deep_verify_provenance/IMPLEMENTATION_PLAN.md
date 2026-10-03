@@ -41,4 +41,11 @@ Claims whose tokens are all date fragments are dropped at extraction.
   (b) no （数据未核实，略） on a claim whose numbers are genuinely in DATA;
   (c) no 〖内部数据〗 on a band, ordinal, incident label or date in the report;
   (d) 0 judge errors, 0 unverified remaining.
-**Status**: Not Started
+**Status**: Complete — 4/4 PASS (run 3, 2026-10-03, 107/107 verified, 19.3 min):
+  (a) PASS — round 1 the judge failed 5 weak-number claims tagged 〖内部数据〗 that
+      were web facts (25人 deaths, 50万元 fine, 约60% USD revenue…); the old rule
+      would have passed them mechanically. Round 2: all re-sourced with links.
+  (b) PASS — zero （数据未核实，略）.
+  (c) PASS — no tag on any band/label/ordinal/date; remaining short-number tags
+      (≥80 gate, 21倍 PE, RPS percentiles, 15% base-rate threshold) judge-verified.
+  (d) PASS — 0 judge errors, 0 unverified.
