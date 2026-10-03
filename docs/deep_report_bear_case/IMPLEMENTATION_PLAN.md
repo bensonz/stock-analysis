@@ -37,4 +37,13 @@ full suite green.
       "writer ignored");
   (e) verification still holds (0 unverified remaining, no judge errors).
 One run at TEMPERATURE 1.0 is a smoke test, not proof.
-**Status**: Not Started
+**Status**: Complete (smoke test passed 5/5, 2026-10-03 run) —
+  (a) PASS 2026-11-10 (brief notes US media say 11-09) in 核心观点, §3 table, 风险三;
+  (b) PASS own slot (风险三) — ranked 3rd, but the writer argued it explicitly as the
+      spec allows: 9/26 中美八点共识 includes 延期吉隆坡经贸磋商成果 → 5–15%;
+      核心观点 calls it 最大的破局变量;
+  (c) PASS bet j1 expires 2026-12-15, p 0.05–0.15;
+  (d) PASS brief item #1 (and in the ```events block);
+  (e) PASS 79/79 verified (25 linked/54 internal), 0 judge errors.
+  Bonus finds absent from the 10-01 report: 9·10 北海造船 fire (25 dead, State
+  Council investigation) as 风险一; RMB appreciation vs ~60% USD revenue.

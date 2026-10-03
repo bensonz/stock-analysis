@@ -4,5 +4,5 @@
 - [x] Bear pass failure cannot fail the report (unit-tested)
 - [x] Existing deep_report tests unchanged in intent
 - [x] RUNBOOK updated in the same commit as the CLI flag
-- [ ] 600150 re-run scored on (a)–(e), result recorded in PROGRESS.md
-- [ ] Token cost of the extra pass recorded
+- [x] 600150 re-run scored on (a)–(e), result recorded in PROGRESS.md
+- [x] Token cost of the extra pass recorded
