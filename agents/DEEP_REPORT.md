@@ -79,8 +79,22 @@ qualitatively instead of inventing precision.
    where the 同业对标 numbers come from. Run `web_search` for the freshest catalysts,
    announcements, and industry context. Prefer 官方公告 / 财报 / reputable financial
    media. Note the date of anything you cite.
-3. Cross-check the DATA figures against what you find. Flag any contradictions.
-4. Form your verdict, then write the report.
+3. **Bear-side research (mandatory, before you form a verdict).** Searching only for
+   catalysts produces a one-sided report that misses the risk the market is actually
+   pricing (see docs/deep_report_bear_case/). Run **at least two** `web_search` queries
+   aimed at what would *break* the thesis:
+   - company-level: `<公司> 风险 利空`, `<公司> 减持 / 诉讼 / 问询函 / 处罚`;
+   - the sector's dominant **external** threat — exporters, shipbuilding, chips, solar,
+     EV: 美国 关税 / 制裁 / 301 / 实体清单; pharma: 集采; property: 债务展期;
+     consumer: 价格管制; etc.
+   Hunt specifically for **dated** events: a policy suspension or deadline expiring, a
+   tariff's effective date, 限售股解禁, a scheduled earnings date, a court or regulator
+   date. A risk with a date is worth far more than one without.
+   If a `# 反方研究简报` block is present, an independent bear researcher already did a
+   first pass — respond to every item in it (see that block's instructions) and search
+   further where it only gives leads.
+4. Cross-check the DATA figures against what you find. Flag any contradictions.
+5. Form your verdict, then write the report.
 
 ## Report structure (output this, in Chinese markdown — NO JSON)
 
@@ -102,7 +116,9 @@ qualitatively instead of inventing precision.
   **3**, not a 4 — the number must reflect whether you would actually buy *today*, and stay consistent
   with the risks in §2/§3.
 - One or two paragraphs: the thesis in plain terms — what is the market getting right/wrong,
-  and what is the single most important driver.
+  what is the single most important driver, **and the single biggest thing that could break
+  it** (with its date, if it has one). A 4/5 that never names its top risk up front is a
+  cheerleader's 4/5.
 - A short bullet list of the 3–5 hard numbers that anchor the call.
 
 ### 2. 深度剖析
@@ -135,10 +151,34 @@ Use `###` subsections:
   - State plainly whether momentum **confirms or contradicts** the fundamental thesis. A
     strong fundamental story with weak/deteriorating momentum is a "right but early" flag.
 
-### 3. 风险提示
+### 3. 关键日期（未来6个月）
+A markdown table of every **dated** event you found (bear-side research, the bear brief,
+announcements) falling within ~6 months of today: `| 日期 | 事件 | 对本股影响 | 来源 |`.
+Include policy expiries and deadlines, tariff effective dates, 限售股解禁, scheduled
+earnings/业绩预告 windows, shareholder meetings on material deals, court/regulatory dates.
+Each row carries a source link (dates themselves need no citation). Sort by date. If you
+genuinely found none, write `检索未发现未来6个月内的已知日期事件` and name the searches you ran
+— an empty table must be a finding, not an omission.
+
+### 4. 风险提示
 Three concrete, specific scenarios (not boilerplate) that would break your thesis, each with
 a **quantified probability** and the mechanism by which it would hurt. Probability is math —
-a reference class and a count — not vibes. Two allowed forms:
+a reference class and a count — not vibes.
+
+**Slot rules:**
+- **At least two of the three must be specific to this company or its sector** — policy,
+  competition, customers, financing, a dated event from §3 — something that would not be
+  equally true of any other stock in the same momentum state.
+- **Order by expected damage** (probability × impact), most severe first. A dated event
+  inside the 6-month window that could move the stock materially goes in the **first** slot
+  unless you argue explicitly why it is not material.
+- **Never bundle** two unrelated risks into one slot to save space; one mechanism per slot.
+- The **generic price-path base rate** (momentum drawdown after a pattern) does **not**
+  occupy a slot. It is still mandatory: put it after the three scenarios as a separate line
+  `**附：动量回撤基准**——…`, citing the `base_rate` result and its caveats as below. An
+  earnings-persistence (增速回落) base rate may fill a slot — it is about this company.
+
+Two allowed probability forms:
 
 1. **Computed (mandatory where applicable):** price-path risks (回撤/杀跌/破位后续)
    and earnings-persistence risks (增速回落) MUST cite a `base_rate` tool result:
@@ -150,6 +190,10 @@ a reference class and a count — not vibes. Two allowed forms:
    M&A — events with no reference class. Label them 「判断」 with a defined band and
    horizon: `概率：中「判断」（15–40%，至2026中报）`. Bands: 低 <15%, 中 15–40%,
    高 >40%. Never use a bare 低/中/高 without the band and the 「判断」 tag.
+   **If the risk is tied to a known date from §3, the horizon is that date** (or a few
+   weeks after it, to observe the outcome) — e.g. `（15–40%，至2027-01-31，即某关税豁免
+   2026-12-31到期后）` — never a generic report-period horizon that lets the dated event
+   pass unscored.
 
 If neither form fits (e.g. a computable risk but the tool has no matching config),
 say so explicitly rather than inventing a number.
@@ -167,6 +211,7 @@ output (it is stripped before publication, so it needs no citations):
 
 One entry per judgment risk; `event` must be checkable by a human at `expires`
 (a concrete happening, not a vibe); probabilities as decimals matching your band.
+For a risk tied to a §3 date, `expires` matches the horizon above — shortly after that date.
 
 ## Style
 - Analytical and specific; concrete numbers over adjectives. No hype, no disclaimers padding.
