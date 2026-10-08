@@ -311,3 +311,87 @@ def test_merge_index_closes_kline_wins_over_quote():
     quotes = {"2026-09-28": 3823.9, "2026-09-29": 3850.0}
     assert bs.merge_index_closes(kline, quotes) == {
         "2026-09-24": 3888.374, "2026-09-28": 3823.62, "2026-09-29": 3850.0}
+
+
+def test_merge_index_closes_drops_quotes_inside_kline_coverage():
+    # 2026-09-25 (中秋) had a quote stamped 09-25 carrying 09-24's close. The
+    # kline covers past it with no bar, so it was not a trading day.
+    kline = {"2026-09-24": 3888.374, "2026-09-28": 3823.621}
+    quotes = {"2026-09-25": 3888.374, "2026-09-29": 3830.0}
+    assert bs.merge_index_closes(kline, quotes) == {
+        "2026-09-24": 3888.374, "2026-09-28": 3823.621, "2026-09-29": 3830.0}
+    assert bs.merge_index_closes({}, quotes) == quotes
+
+
+_KLINE = [{"day": "2026-09-29", "open": "3816.154", "high": "3843.838",
+           "low": "3810.812", "close": "3830.451", "volume": "1"},
+          {"day": "2026-09-30", "open": "3839.253", "high": "3851.217",
+           "low": "3833.086", "close": "3842.195", "volume": "1"}]
+
+
+def test_load_index_bars_merges_kline_into_cache(tmp_path):
+    cache = tmp_path / "ohlc.json"
+    cache.write_text(json.dumps({"2026-09-28": [1, 2, 0.5, 1.5]}), encoding="utf-8")
+    bars = bs.load_index_bars(_KLINE, cache)
+    assert bars["2026-09-30"] == [3839.253, 3851.217, 3833.086, 3842.195]
+    assert bars["2026-09-28"] == [1.0, 2.0, 0.5, 1.5]          # cache kept
+    assert json.loads(cache.read_text())["2026-09-29"][3] == 3830.451
+
+
+def test_index_loaders_fall_back_to_cache_when_fetch_failed(tmp_path):
+    bs.load_index_bars(_KLINE, tmp_path / "ohlc.json")
+    bs.load_index_closes(_KLINE, tmp_path / "close.json")
+    assert set(bs.load_index_bars(None, tmp_path / "ohlc.json")) == {"2026-09-29", "2026-09-30"}
+    assert bs.load_index_closes(None, tmp_path / "close.json")["2026-09-30"] == 3842.195
+    assert bs.load_index_bars(None, tmp_path / "missing.json") == {}
+
+
+def test_index_day_change_is_vs_previous_index_close_without_forward_fill():
+    closes = {"2026-09-30": 3842.195, "2026-10-08": 3811.904}
+    assert bs.index_day_change(closes, "2026-10-08") == (-0.79, "2026-09-30")
+    assert bs.index_day_change(closes, "2026-10-01") is None    # holiday
+    assert bs.index_day_change(closes, "2026-09-30") is None    # no prior close
+
+
+def _chart_data(html_out):
+    import re
+    return json.loads(re.search(r"const DATA = (\[.*?\]);\n", html_out).group(1))
+
+
+def test_chart_points_carry_candle_only_on_exact_bar_dates():
+    series = [{"date": "2026-09-29", "equity": 1000000.0, "time": "2026-09-29T15:10:00+08:00"},
+              {"date": "2026-09-30", "equity": 1010000.0, "time": "2026-09-30T15:10:00+08:00"},
+              {"date": "2026-10-01", "equity": 1010000.0, "time": "2026-10-01T15:10:00+08:00"},
+              {"date": "2026-10-08", "equity": 1005000.0, "time": "2026-10-08T11:41:00+08:00"}]
+    closes = {"2026-09-29": 3830.451, "2026-09-30": 3842.195, "2026-10-08": 3811.904}
+    bars = {"2026-09-29": [3816.154, 3843.838, 3810.812, 3830.451],
+            "2026-09-30": [3839.253, 3851.217, 3833.086, 3842.195]}
+    active = {"portfolio": {}, "activePositions": []}
+    out = _chart_data(bs.render_html(
+        series, active, [], bs.compute_stats(series, []),
+        index_rebased=bs.rebase_index(closes, [p["date"] for p in series], 1e6),
+        idx_base=3830.451, index_bars=bars, index_closes=closes,
+        intraday_idx={"2026-10-08": -0.27}))
+    by = {p["d"]: p for p in out}
+    assert by["2026-09-30"]["k"] == bars["2026-09-30"]
+    assert by["2026-09-30"]["pr"] == 1.0 and by["2026-09-30"]["ic"] == 0.31
+    assert "k" not in by["2026-10-01"] and "kc" not in by["2026-10-01"]   # holiday
+    assert "ic" not in by["2026-10-01"]
+    assert by["2026-10-08"]["kc"] == 3811.904 and "k" not in by["2026-10-08"]
+    assert by["2026-10-08"]["iq"] == -0.27 and by["2026-10-08"]["t"] == "11:41"
+    assert by["2026-10-08"]["pd"] == "2026-10-01" and by["2026-10-08"]["ipd"] == "2026-09-30"
+
+
+def test_intraday_index_pcts_only_for_pre_close_snapshots(tmp_path):
+    _market(tmp_path, "2026-10-08/noon", "2026-10-08T11:35:30", 3831.8, "2026-10-08")
+    json_path = tmp_path / "2026-10-08/noon/input/market.json"
+    data = json.loads(json_path.read_text()); data["indices"]["上证指数"]["change_pct"] = -0.27
+    json_path.write_text(json.dumps(data), encoding="utf-8")
+    _market(tmp_path, "2026-09-30/afternoon", "2026-09-30T15:05:00", 3842.2, "2026-09-30")
+    series = [{"date": "2026-09-30", "time": "2026-09-30T15:10:00+08:00",
+               "run_dir": tmp_path / "2026-09-30/afternoon"},
+              {"date": "2026-10-08", "time": "2026-10-08T11:41:28+08:00",
+               "run_dir": tmp_path / "2026-10-08/noon"},
+              {"date": "2026-09-08", "time": "2026-09-08T12:20:00+08:00",
+               "run_dir": tmp_path / "nope"}]
+    assert bs.intraday_index_pcts(series) == {"2026-10-08": -0.27}

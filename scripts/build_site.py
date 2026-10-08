@@ -16,9 +16,10 @@ Data sources (数字纪律 — everything re-derivable):
   - tracking/positions.json → current portfolio + active positions
   - tracking/closed/*.json  → trade history + win-rate stats
   - tracking/portfolio_config.json → inception anchor (created = 1M)
-  - sina index kline (sh000001) → 上证指数 overlay, rebased to starting
-    capital at inception; cached in data/index_cache/sh000001.json so
-    offline rebuilds still work (build degrades to cache, then to no overlay)
+  - sina index kline (sh000001) → 上证指数 daily candles, rebased to starting
+    capital at inception, plus per-day % (组合 / 上证 / 超额); closes cached in
+    data/index_cache/sh000001.json, OHLC in sh000001_ohlc.json, so offline
+    rebuilds still work (build degrades to cache, then to no overlay)
   - scripts/event_calendar.upcoming() → 未来事件窗口 section
   - latest run input/regime.json + input/gex.json → header badges
 
@@ -38,6 +39,7 @@ RUNS_DIR = PROJECT_ROOT / "runs"
 TRACKING_DIR = PROJECT_ROOT / "tracking"
 SITE_DIR = PROJECT_ROOT / "site"
 INDEX_CACHE = PROJECT_ROOT / "data" / "index_cache" / "sh000001.json"
+INDEX_OHLC_CACHE = PROJECT_ROOT / "data" / "index_cache" / "sh000001_ohlc.json"
 
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 NOTE_MAX = 170
@@ -288,15 +290,10 @@ def collect_day_details(series: list[dict], trades: list[dict],
 
 # ---------------------------------------------------------------- index overlay
 
-def load_index_closes(cache_path: Path = INDEX_CACHE) -> dict:
-    """{iso_date: close} for 上证指数. Network first (merged into cache so
-    coverage only grows), cache fallback, {} when neither works."""
-    closes = {}
-    if cache_path.exists():
-        try:
-            closes = {k: float(v) for k, v in _read_json(cache_path).items()}
-        except Exception:
-            closes = {}
+def fetch_index_kline() -> list[dict] | None:
+    """Sina daily kline for 上证指数 (sh000001): [{day, open, high, low, close}].
+    None on any failure — callers fall back to their caches. One call feeds
+    both the close cache and the OHLC cache."""
     try:
         import requests
         resp = requests.get(
@@ -306,16 +303,50 @@ def load_index_closes(cache_path: Path = INDEX_CACHE) -> dict:
             headers={"User-Agent": "Mozilla/5.0",
                      "Referer": "https://finance.sina.com.cn"})
         text = resp.text
-        data = json.loads(text[text.index("(") + 1: text.rindex(")")])
-        closes.update({d["day"]: float(d["close"]) for d in data})
-        cache_path.parent.mkdir(parents=True, exist_ok=True)
-        cache_path.write_text(
-            json.dumps(dict(sorted(closes.items())), ensure_ascii=False, indent=0) + "\n",
-            encoding="utf-8")
+        return json.loads(text[text.index("(") + 1: text.rindex(")")])
     except Exception as e:
-        print(f"[site] index fetch failed ({e}); using cache "
-              f"({len(closes)} closes)", file=sys.stderr)
-    return closes
+        print(f"[site] index fetch failed ({e}); using caches", file=sys.stderr)
+        return None
+
+
+def _merge_into_cache(cache_path: Path, fresh: dict, parse) -> dict:
+    """Cache ∪ fresh (fresh wins), written back so coverage only grows."""
+    cached = {}
+    if cache_path.exists():
+        try:
+            cached = {k: parse(v) for k, v in _read_json(cache_path).items()}
+        except Exception:
+            cached = {}
+    if not fresh:
+        return cached
+    merged = {**cached, **fresh}
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    cache_path.write_text(
+        json.dumps(dict(sorted(merged.items())), ensure_ascii=False, indent=0) + "\n",
+        encoding="utf-8")
+    return merged
+
+
+def load_index_closes(kline: list[dict] | None,
+                      cache_path: Path = INDEX_CACHE) -> dict:
+    """{iso_date: close} for 上证指数: kline merged into the cache, cache alone
+    when the fetch failed, {} when neither exists."""
+    fresh = {d["day"]: float(d["close"]) for d in (kline or [])}
+    return _merge_into_cache(cache_path, fresh, float)
+
+
+def load_index_bars(kline: list[dict] | None,
+                    cache_path: Path = INDEX_OHLC_CACHE) -> dict:
+    """{iso_date: [open, high, low, close]} for 上证指数, same merge rules as
+    the close cache. Kept in its own file: settled market.json quotes only
+    give a close, so close coverage and bar coverage differ by design."""
+    fresh = {}
+    for d in kline or []:
+        try:
+            fresh[d["day"]] = [float(d[k]) for k in ("open", "high", "low", "close")]
+        except (KeyError, TypeError, ValueError):
+            continue
+    return _merge_into_cache(cache_path, fresh, lambda v: [float(x) for x in v])
 
 
 def settled_index_closes(runs_dir: Path = RUNS_DIR) -> dict:
@@ -344,8 +375,14 @@ def settled_index_closes(runs_dir: Path = RUNS_DIR) -> dict:
 
 
 def merge_index_closes(kline: dict, quotes: dict) -> dict:
-    """Kline closes win; quotes only fill dates the kline doesn't have yet."""
-    return {**quotes, **kline}
+    """Kline closes win; quotes only fill dates AFTER the kline's last bar.
+
+    The kline only lags at its tail. A quote for a date inside its coverage
+    that it has no bar for is a non-trading day: 2026-09-25 (中秋) carried a
+    quote stamped 09-25 with 09-24's close — the holiday-stamping bug fixed
+    09-29 — and drew a fake close-only tick on the chart."""
+    last = max(kline) if kline else ""
+    return {**{d: c for d, c in quotes.items() if d > last}, **kline}
 
 
 def rebase_index(closes: dict, dates: list[str], starting: float) -> dict:
@@ -382,6 +419,42 @@ def index_base(closes: dict, first_date: str) -> float | None:
         return None
     prior = [d for d in sorted(closes) if d <= first_date]
     return closes[prior[-1]] if prior else None
+
+
+def index_day_change(closes: dict, date: str) -> tuple[float, str] | None:
+    """(上证 % change, previous index date) for `date` vs the previous index
+    close — the number a quote app shows. None unless `date` has its own close
+    (no forward-fill: a holiday has no day change)."""
+    if date not in closes:
+        return None
+    prior = [d for d in closes if d < date]
+    if not prior:
+        return None
+    prev = max(prior)
+    return round((closes[date] / closes[prev] - 1) * 100, 2), prev
+
+
+def intraday_index_pcts(series: list[dict]) -> dict:
+    """{date: 上证 change_pct seen by the run} for days whose chart point is a
+    snapshot taken before 15:00.
+
+    Such a point's equity is an intraday mark, while the day's candle is the
+    15:00 close — on 2026-10-08 the noon run saw 上证 −0.27%, the close was
+    −0.79%. Showing both keeps the two from being read as the same moment.
+    """
+    out = {}
+    for p in series:
+        if p.get("synthetic") or not p.get("run_dir") or not p.get("time"):
+            continue
+        try:
+            if datetime.fromisoformat(p["time"]).hour >= 15:
+                continue
+            quote = _read_json(Path(p["run_dir"]) / "input" / "market.json")["indices"]["上证指数"]
+            if quote.get("date") == p["date"]:
+                out[p["date"]] = float(quote["change_pct"])
+        except Exception:
+            continue
+    return out
 
 
 # ------------------------------------------------------------- events + badges
@@ -570,6 +643,31 @@ const fmtM = v => (v == null ? "—" : Math.round(v).toLocaleString());
 const pnlCls = v => (typeof v !== "number" || v === 0) ? "flat" : (v > 0 ? "up" : "down");
 const sign = v => (v > 0 ? "+" : "");
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pctTxt = v => (v == null ? "—" : `${sign(v)}${v.toFixed(2)}%`);
+const BYDATE = {}; DATA.forEach(p => { BYDATE[p.d] = p; });
+// 组合 day % minus 上证 day %, only over the same span. A pre-15:00 snapshot is
+// compared with the 上证 % its own run saw, not with the later close.
+const isNoon = p => !!(p.t && p.t < "15:00");
+function excess(p) {
+  if (p.pr == null) return null;
+  if (isNoon(p) && p.iq == null) return null;   // no 上证 for that moment
+  const ix = p.iq != null ? p.iq : p.ic;
+  if (ix == null || (p.pd && p.ipd && p.pd !== p.ipd)) return null;
+  return Math.round((p.pr - ix) * 100) / 100;
+}
+function cmpHtml(p) {
+  const pc = v => `<b class="${pnlCls(v)}">${pctTxt(v)}</b>`;
+  const ex = excess(p);
+  let h = `<div class="d-cmp">当日 组合 ${pc(p.pr)} · 上证 ${pc(p.ic)} · 超额 ${ex == null ? "—" : pc(ex)}</div>`;
+  if (p.k) h += `<div class="mini">上证 开 ${p.k[0].toFixed(2)} 高 ${p.k[1].toFixed(2)} 低 ${p.k[2].toFixed(2)} 收 ${p.k[3].toFixed(2)}</div>`;
+  if (p.iq != null)
+    h += `<div class="d-note">组合取 ${esc(p.t || "")} 午盘快照，当时上证 ${pctTxt(p.iq)}，收盘 ${pctTxt(p.ic)}；超额按运行时计算</div>`;
+  else if (isNoon(p))
+    h += `<div class="d-note">组合取 ${esc(p.t)} 午盘快照，该次运行无上证行情——与收盘涨跌不可比，不算超额</div>`;
+  if (p.pd && p.ipd && p.pd !== p.ipd)
+    h += `<div class="d-note">组合较 ${esc(p.pd)} 快照，上证较 ${esc(p.ipd)} 收盘——区间不同，不算超额</div>`;
+  return h;
+}
 
 // ---------------- side panel
 const dayEl = document.getElementById("day");
@@ -590,6 +688,7 @@ function renderDay(d) {
   const dp = det.day_pnl;
   h += `<div class="d-sub"><span class="${pnlCls(dp)}">${dp == null ? "—" : sign(dp) + fmtM(dp)}</span> 较上一快照`
      + ` · 累计 <span class="${pnlCls(det.ret)}">${det.ret == null ? "—" : sign(det.ret) + det.ret + "%"}</span></div>`;
+  if (BYDATE[d] && !BYDATE[d].s) h += cmpHtml(BYDATE[d]);
   const trades = (det.actions || []).filter(a => a.a !== "HOLD");
   const hasOpens = trades.some(a => OPENS[a.a]);
   if (trades.length) {
@@ -698,20 +797,14 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && pinned) 
 // ---------------- charts
 (function() {
   const svg = document.getElementById("chart"), tip = document.getElementById("tip");
-  const bars = document.getElementById("bars");
+  const bars = document.getElementById("bars"), cmp = document.getElementById("cmp");
   if (!DATA.length) { svg.outerHTML = "<div class='empty'>暂无快照数据</div>"; return; }
   const IDXBASE = __IDXBASE__;
   const hasIdx = DATA.some(p => p.i != null);
   // Right gutter only widens when there is a second axis to put in it.
   const W = 960, H = 340, L = 74, R = (hasIdx && IDXBASE) ? 56 : 16, T = 18, B = 30;
   const iw = W - L - R, ih = H - T - B;
-  const es = DATA.map(p => p.e).concat(hasIdx ? DATA.filter(p => p.i != null).map(p => p.i) : []);
-  let lo = Math.min(...es, STARTING), hi = Math.max(...es, STARTING);
-  const pad = (hi - lo) * 0.06 || 1; lo -= pad; hi += pad;
-  const x = i => L + (DATA.length === 1 ? iw / 2 : i * iw / (DATA.length - 1));
-  const y = v => T + (hi - v) / (hi - lo) * ih;
-  const S = [];
-  // Right axis = the SAME gridlines relabelled in index points. The overlay is
+  // Right axis = the SAME gridlines relabelled in index points. The candles are
   // rebased (index_t / index_base x STARTING), so equity value v corresponds to
   // index level v / STARTING x IDXBASE exactly. Deliberately NOT an independent
   // scale: the whole point of the overlay is "did we beat 上证", and giving each
@@ -719,92 +812,179 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && pinned) 
   // divergent by choosing limits. One scale, two readings.
   const showIdxAxis = hasIdx && IDXBASE;
   const toIdx = v => v / STARTING * IDXBASE;
-  for (let g = 0; g <= 4; g++) {
-    const v = lo + (hi - lo) * g / 4, yy = y(v);
-    S.push(`<line x1="${L}" y1="${yy}" x2="${W - R}" y2="${yy}" stroke="#eef1f5"/>`);
-    S.push(`<text x="${L - 8}" y="${yy + 4}" text-anchor="end" font-size="11" fill="#8a93a2">${Math.round(v).toLocaleString()}</text>`);
-    if (showIdxAxis)
-      S.push(`<text x="${W - R + 8}" y="${yy + 4}" font-size="11" fill="#c08a2e">${toIdx(v).toFixed(0)}</text>`);
-  }
-  if (showIdxAxis) {
-    S.push(`<text x="${W - R + 8}" y="${T - 6}" font-size="10" fill="#c08a2e">上证</text>`);
-    S.push(`<text x="${L - 8}" y="${T - 6}" text-anchor="end" font-size="10" fill="#8a93a2">净值</text>`);
-  }
-  const step = Math.max(1, Math.round(DATA.length / 8));
-  for (let i = 0; i < DATA.length; i += step)
-    S.push(`<text x="${x(i)}" y="${H - 8}" text-anchor="middle" font-size="11" fill="#8a93a2">${DATA[i].d.slice(5)}</text>`);
-  S.push(`<line x1="${L}" y1="${y(STARTING)}" x2="${W - R}" y2="${y(STARTING)}" stroke="#9aa3b2" stroke-dasharray="5 4"/>`);
-  const pts = DATA.map((p, i) => `${x(i).toFixed(1)},${y(p.e).toFixed(1)}`).join(" ");
-  const tone = DATA[DATA.length - 1].e >= STARTING ? "212,58,58" : "26,156,98";
-  S.push(`<polygon points="${L},${y(STARTING)} ${pts} ${x(DATA.length - 1)},${y(STARTING)}" fill="rgba(${tone},0.07)"/>`);
-  if (hasIdx) {
-    const ipts = DATA.map((p, i) => p.i == null ? null : `${x(i).toFixed(1)},${y(p.i).toFixed(1)}`).filter(Boolean).join(" ");
-    S.push(`<polyline id="idxline" points="${ipts}" fill="none" stroke="#c08a2e" stroke-width="1.6" opacity="0.85"/>`);
-  }
-  const solidFrom = (DATA[0].s && DATA.length > 1) ? 1 : 0;
-  if (solidFrom)
-    S.push(`<line x1="${x(0)}" y1="${y(DATA[0].e)}" x2="${x(1)}" y2="${y(DATA[1].e)}" stroke="#3b6ea5" stroke-width="2" stroke-dasharray="6 5"/>`);
-  const solidPts = DATA.slice(solidFrom).map((p, i) => `${x(i + solidFrom).toFixed(1)},${y(p.e).toFixed(1)}`).join(" ");
-  S.push(`<polyline points="${solidPts}" fill="none" stroke="#3b6ea5" stroke-width="2"/>`);
-  S.push(`<circle id="dot" r="4" fill="#3b6ea5" stroke="#fff" stroke-width="1.5" style="display:none"/>`);
-  S.push(`<line id="guide" y1="${T}" y2="${T + ih}" stroke="#c3cad4" stroke-dasharray="3 3" style="display:none"/>`);
-  svg.innerHTML = S.join("");
+  const toEq = v => v / IDXBASE * STARTING;
+  const MIN_PX_FOR_LABELS = 34;   // below this the % strip can't fit "+0.79%"
+  let V = DATA, x, y, idxHidden = false;
 
-  // daily pnl bars (shared x)
-  if (bars) {
-    const BH = 96, BT = 6, BB = 4, bih = BH - BT - BB;
-    const ps = DATA.map(p => p.p).filter(v => typeof v === "number");
-    const mx = Math.max(1, ...ps.map(Math.abs));
-    const by = v => BT + (mx - v) / (2 * mx) * bih;
-    const bw = Math.max(1.5, Math.min(7, iw / DATA.length * 0.62));
-    const BS = [`<line x1="${L}" y1="${by(0)}" x2="${W - R}" y2="${by(0)}" stroke="#e4e8ee"/>`,
-                `<text x="${L - 8}" y="${by(mx) + 8}" text-anchor="end" font-size="10" fill="#8a93a2">+${fmtM(mx)}</text>`,
-                `<text x="${L - 8}" y="${by(-mx)}" text-anchor="end" font-size="10" fill="#8a93a2">-${fmtM(mx)}</text>`];
-    DATA.forEach((p, i) => {
-      if (typeof p.p !== "number") return;
-      const yy = by(Math.max(p.p, 0)), hh = Math.abs(by(p.p) - by(0)) || 0.5;
-      BS.push(`<rect x="${(x(i) - bw / 2).toFixed(1)}" y="${yy.toFixed(1)}" width="${bw.toFixed(1)}" height="${hh.toFixed(1)}" fill="${p.p >= 0 ? "#d43a3a" : "#1a9c62"}" opacity="0.8"/>`);
+  function draw(n) {
+    V = n ? DATA.slice(-n) : DATA;
+    const full = V.length === DATA.length;
+    const es = V.map(p => p.e);
+    if (hasIdx) V.forEach(p => {
+      if (p.i != null) es.push(p.i);
+      if (showIdxAxis && p.k) es.push(toEq(p.k[1]), toEq(p.k[2]));
     });
-    bars.innerHTML = BS.join("");
+    if (full) es.push(STARTING);   // zoomed views scale to what they show
+    let lo = Math.min(...es), hi = Math.max(...es);
+    const pad = (hi - lo) * 0.06 || 1; lo -= pad; hi += pad;
+    const slot = iw / Math.max(V.length, 1);
+    x = i => L + slot * (i + 0.5);   // centred in its own slot, so candles never clip
+    y = v => T + (hi - v) / (hi - lo) * ih;
+    const base = Math.min(hi, Math.max(lo, STARTING));
+    const bw = Math.max(1.5, Math.min(16, slot * 0.6));
+    const S = [];
+    for (let g = 0; g <= 4; g++) {
+      const v = lo + (hi - lo) * g / 4, yy = y(v);
+      S.push(`<line x1="${L}" y1="${yy}" x2="${W - R}" y2="${yy}" stroke="#eef1f5"/>`);
+      S.push(`<text x="${L - 8}" y="${yy + 4}" text-anchor="end" font-size="11" fill="#8a93a2">${Math.round(v).toLocaleString()}</text>`);
+      if (showIdxAxis)
+        S.push(`<text x="${W - R + 8}" y="${yy + 4}" font-size="11" fill="#c08a2e">${toIdx(v).toFixed(0)}</text>`);
+    }
+    if (showIdxAxis) {
+      S.push(`<text x="${W - R + 8}" y="${T - 6}" font-size="10" fill="#c08a2e">上证</text>`);
+      S.push(`<text x="${L - 8}" y="${T - 6}" text-anchor="end" font-size="10" fill="#8a93a2">净值</text>`);
+    }
+    const step = Math.max(1, Math.round(V.length / 8));
+    for (let i = 0; i < V.length; i += step)
+      S.push(`<text x="${x(i)}" y="${H - 8}" text-anchor="middle" font-size="11" fill="#8a93a2">${V[i].d.slice(5)}</text>`);
+    if (STARTING >= lo && STARTING <= hi)
+      S.push(`<line x1="${L}" y1="${y(STARTING)}" x2="${W - R}" y2="${y(STARTING)}" stroke="#9aa3b2" stroke-dasharray="5 4"/>`);
+    const pts = V.map((p, i) => `${x(i).toFixed(1)},${y(p.e).toFixed(1)}`).join(" ");
+    const tone = V[V.length - 1].e >= STARTING ? "212,58,58" : "26,156,98";
+    S.push(`<polygon points="${x(0)},${y(base)} ${pts} ${x(V.length - 1)},${y(base)}" fill="rgba(${tone},0.07)"/>`);
+    // 上证 daily candles, only on dates with a real bar — never forward-filled.
+    // A date with only a settled close (kline not built yet) gets a flat tick.
+    if (showIdxAxis) {
+      const C = [];
+      V.forEach((p, i) => {
+        const cx = x(i).toFixed(1);
+        if (p.k) {
+          const [o, h, l, c] = p.k.map(toEq), col = p.k[3] >= p.k[0] ? "#d43a3a" : "#1a9c62";
+          const top = y(Math.max(o, c)), hgt = Math.max(1, Math.abs(y(o) - y(c)));
+          C.push(`<line x1="${cx}" y1="${y(h).toFixed(1)}" x2="${cx}" y2="${y(l).toFixed(1)}" stroke="${col}" stroke-width="1"/>`
+               + `<rect x="${(x(i) - bw / 2).toFixed(1)}" y="${top.toFixed(1)}" width="${bw.toFixed(1)}" height="${hgt.toFixed(1)}" fill="${col}" fill-opacity="0.55" stroke="${col}" stroke-width="0.8"/>`);
+        } else if (p.kc != null) {
+          const yy = y(toEq(p.kc)).toFixed(1);
+          C.push(`<line x1="${(x(i) - bw / 2).toFixed(1)}" y1="${yy}" x2="${(x(i) + bw / 2).toFixed(1)}" y2="${yy}" stroke="#c08a2e" stroke-width="2"/>`);
+        }
+      });
+      S.push(`<g id="idxline"${idxHidden ? ' style="display:none"' : ""}>${C.join("")}</g>`);
+    }
+    const solidFrom = (V[0].s && V.length > 1) ? 1 : 0;
+    if (solidFrom)
+      S.push(`<line x1="${x(0)}" y1="${y(V[0].e)}" x2="${x(1)}" y2="${y(V[1].e)}" stroke="#3b6ea5" stroke-width="2" stroke-dasharray="6 5"/>`);
+    const solidPts = V.slice(solidFrom).map((p, i) => `${x(i + solidFrom).toFixed(1)},${y(p.e).toFixed(1)}`).join(" ");
+    S.push(`<polyline points="${solidPts}" fill="none" stroke="#3b6ea5" stroke-width="2"/>`);
+    if (slot >= MIN_PX_FOR_LABELS)
+      V.forEach((p, i) => { if (!p.s) S.push(`<circle cx="${x(i)}" cy="${y(p.e)}" r="2.2" fill="#3b6ea5"/>`); });
+    S.push(`<circle id="dot" r="4" fill="#3b6ea5" stroke="#fff" stroke-width="1.5" style="display:none"/>`);
+    S.push(`<line id="guide" y1="${T}" y2="${T + ih}" stroke="#c3cad4" stroke-dasharray="3 3" style="display:none"/>`);
+    svg.innerHTML = S.join("");
+
+    // daily pnl bars (shared x)
+    if (bars) {
+      const BH = 96, BT = 6, BB = 4, bih = BH - BT - BB;
+      const ps = V.map(p => p.p).filter(v => typeof v === "number");
+      const mx = Math.max(1, ...ps.map(Math.abs));
+      const by = v => BT + (mx - v) / (2 * mx) * bih;
+      const BS = [`<line x1="${L}" y1="${by(0)}" x2="${W - R}" y2="${by(0)}" stroke="#e4e8ee"/>`,
+                  `<text x="${L - 8}" y="${by(mx) + 8}" text-anchor="end" font-size="10" fill="#8a93a2">+${fmtM(mx)}</text>`,
+                  `<text x="${L - 8}" y="${by(-mx)}" text-anchor="end" font-size="10" fill="#8a93a2">-${fmtM(mx)}</text>`];
+      V.forEach((p, i) => {
+        if (typeof p.p !== "number") return;
+        const yy = by(Math.max(p.p, 0)), hh = Math.abs(by(p.p) - by(0)) || 0.5;
+        BS.push(`<rect x="${(x(i) - bw / 2).toFixed(1)}" y="${yy.toFixed(1)}" width="${bw.toFixed(1)}" height="${hh.toFixed(1)}" fill="${p.p >= 0 ? "#d43a3a" : "#1a9c62"}" opacity="0.8"/>`);
+      });
+      bars.innerHTML = BS.join("");
+    }
+
+    // day-% strip: 组合 / 上证 / 超额 per column, only when it can be read
+    if (cmp) {
+      const rows = [["组合", 15], ["上证", 33], ["超额", 51]];
+      const CS = rows.map(([t, yy]) => `<text x="${L - 8}" y="${yy}" text-anchor="end" font-size="10.5" fill="#8a93a2">${t}</text>`);
+      if (slot < MIN_PX_FOR_LABELS) {
+        CS.length = 0;
+        CS.push(`<text x="${W / 2}" y="33" text-anchor="middle" font-size="11.5" fill="#8a93a2">逐日涨跌需更窄的范围——切换到「近20日」，或悬停查看</text>`);
+      } else {
+        const cell = (v, yy, i, extra) => v == null
+          ? `<text x="${x(i)}" y="${yy}" text-anchor="middle" font-size="10.5" fill="#b4bcc8">—</text>`
+          : `<text x="${x(i)}" y="${yy}" text-anchor="middle" font-size="10.5" fill="${v > 0 ? "#d43a3a" : v < 0 ? "#1a9c62" : "#1c2330"}">${sign(v)}${v.toFixed(2)}${extra || ""}</text>`;
+        V.forEach((p, i) => {
+          if (p.s) return;
+          CS.push(cell(p.pr, 15, i, isNoon(p) ? "*" : ""), cell(p.ic, 33, i), cell(excess(p), 51, i, p.iq != null ? "*" : ""));
+        });
+      }
+      cmp.innerHTML = CS.join("");
+    }
+    const dot = svg.querySelector("#dot"), guide = svg.querySelector("#guide");
+    svg.onmouseleave = () => {
+      dot.style.display = "none"; guide.style.display = "none"; tip.style.display = "none";
+      if (!pinned) renderDay(DATA[DATA.length - 1].d);
+    };
+    svg.onmousemove = ev => {
+      const i = idxFromEvent(ev), p = V[i];
+      dot.setAttribute("cx", x(i)); dot.setAttribute("cy", y(p.e)); dot.style.display = "";
+      guide.setAttribute("x1", x(i)); guide.setAttribute("x2", x(i)); guide.style.display = "";
+      tip.innerHTML = tipHtml(p);
+      tip.style.display = "block";
+      // flip left near the right edge so the multi-line tip stays on screen
+      const left = ev.clientX + 14 + tip.offsetWidth > window.innerWidth ? ev.clientX - 14 - tip.offsetWidth : ev.clientX + 14;
+      tip.style.left = Math.max(4, left) + "px"; tip.style.top = (ev.clientY - 12) + "px";
+      if (!pinned) renderDay(p.d);
+    };
   }
+
+  function idxFromEvent(ev) {
+    const r = svg.getBoundingClientRect();
+    const mx = (ev.clientX - r.left) * W / r.width;
+    const slot = iw / Math.max(V.length, 1);
+    return Math.max(0, Math.min(V.length - 1, Math.floor((mx - L) / slot)));
+  }
+
+  function tipHtml(p) {
+    if (p.s) return `${p.d} · ${fmtM(p.e)} · 组合起始(初始资金)`;
+    let h = `<b>${p.d}</b>${p.t ? ` · ${isNoon(p) ? "午盘" : ""}快照 ${p.t}` : ""}`
+          + `<br>组合 ${fmtM(p.e)} · ${pctTxt(p.pr)}${p.pd ? ` <span class="tm">较 ${p.pd.slice(5)}</span>` : ""}`;
+    if (p.k) h += `<br>上证 开 ${p.k[0].toFixed(2)} 高 ${p.k[1].toFixed(2)} 低 ${p.k[2].toFixed(2)} 收 ${p.k[3].toFixed(2)}`;
+    else if (p.kc != null) h += `<br>上证 收 ${p.kc.toFixed(2)} <span class="tm">(仅实时收盘价，无日K)</span>`;
+    else if (hasIdx) h += `<br>上证 当日无日K`;
+    if (p.ic != null) h += ` · ${pctTxt(p.ic)}${p.ipd ? ` <span class="tm">较 ${p.ipd.slice(5)}</span>` : ""}`;
+    if (p.iq != null) h += `<br>运行时上证 ${pctTxt(p.iq)} <span class="tm">(快照早于收盘)</span>`;
+    else if (isNoon(p)) h += `<br><span class="tm">快照早于收盘，运行时无上证行情</span>`;
+    const ex = excess(p);
+    h += `<br>超额 ${ex == null ? "—" : pctTxt(ex)}${p.iq != null && ex != null ? ` <span class="tm">按运行时上证</span>` : ""}`;
+    return h;
+  }
+
+  // range selector
+  const rangeEl = document.getElementById("range");
+  let n = 20;
+  try { const v = localStorage.getItem("site.range"); if (v != null) n = +v; } catch (e) {}
+  function setRange(k) {
+    n = k;
+    if (rangeEl) rangeEl.querySelectorAll("button").forEach(b => b.classList.toggle("on", +b.dataset.n === n));
+    try { localStorage.setItem("site.range", String(n)); } catch (e) {}
+    draw(n && n < DATA.length ? n : 0);
+  }
+  if (rangeEl) rangeEl.addEventListener("click", ev => {
+    const b = ev.target.closest("button"); if (b) setRange(+b.dataset.n);
+  });
 
   // legend toggle
   const lg = document.getElementById("lg-idx");
   if (lg && hasIdx) lg.addEventListener("click", () => {
+    idxHidden = !idxHidden;
     const el = svg.querySelector("#idxline");
-    const off = el.style.display === "none";
-    el.style.display = off ? "" : "none";
-    lg.classList.toggle("off", !off);
+    if (el) el.style.display = idxHidden ? "none" : "";
+    lg.classList.toggle("off", idxHidden);
   });
 
-  // hover + pin
-  const dot = svg.querySelector("#dot"), guide = svg.querySelector("#guide");
-  function idxFromEvent(ev) {
-    const r = svg.getBoundingClientRect();
-    const mx = (ev.clientX - r.left) * W / r.width;
-    let i = Math.round((mx - L) / (iw / Math.max(DATA.length - 1, 1)));
-    return Math.max(0, Math.min(DATA.length - 1, i));
-  }
-  svg.addEventListener("mousemove", ev => {
-    const i = idxFromEvent(ev), p = DATA[i];
-    dot.setAttribute("cx", x(i)); dot.setAttribute("cy", y(p.e)); dot.style.display = "";
-    guide.setAttribute("x1", x(i)); guide.setAttribute("x2", x(i)); guide.style.display = "";
-    tip.style.display = "block";
-    tip.style.left = (ev.clientX + 14) + "px"; tip.style.top = (ev.clientY - 12) + "px";
-    const idxTxt = p.i != null ? ` · 上证(等额) ${fmtM(p.i)}` : "";
-    tip.textContent = p.s ? `${p.d} · ${fmtM(p.e)} · 组合起始(初始资金)`
-      : `${p.d} · ${fmtM(p.e)}${p.r != null ? ` · ${sign(p.r)}${p.r}%` : ""}${idxTxt}`;
-    if (!pinned) renderDay(p.d);
-  });
   svg.addEventListener("click", ev => {
-    const d = DATA[idxFromEvent(ev)].d;
+    const d = V[idxFromEvent(ev)].d;
     pinned = (pinned === d) ? null : d;
     renderDay(pinned || d);
   });
-  svg.addEventListener("mouseleave", () => {
-    dot.style.display = "none"; guide.style.display = "none"; tip.style.display = "none";
-    if (!pinned) renderDay(DATA[DATA.length - 1].d);
-  });
+  setRange(n);
   latestDay = DATA[DATA.length - 1].d;
   renderDay(latestDay);
 })();
@@ -813,11 +993,15 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && pinned) 
 
 def render_html(series, active, trades, stats, details=None, index_rebased=None,
                 events=None, badges=None, generated_at=None, run_status=None,
-                idx_base=None) -> str:
+                idx_base=None, index_bars=None, index_closes=None,
+                intraday_idx=None) -> str:
     pf = active.get("portfolio", {})
     positions = active.get("activePositions", [])
     details = details or {}
     index_rebased = index_rebased or {}
+    index_bars = index_bars or {}
+    index_closes = index_closes or {}
+    intraday_idx = intraday_idx or {}
     badges = badges or []
     generated_at = generated_at or datetime.now().astimezone().isoformat(timespec="seconds")
 
@@ -834,21 +1018,43 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
             f'<div class="rf-tail">{tail}</div></div>'
         )
 
+    # Per-point keys: d date · e equity · r cum ret% · n positions · s synthetic
+    # · t snapshot HH:MM · p day pnl · pr day % · pd prev snapshot date · i rebased 上证 close
+    # (forward-filled, sets the y-range) · k real [o,h,l,c] (exact date only)
+    # · kc real close when only a settled quote exists · ic 上证 day % ·
+    # ipd prev index date · iq 上证 % at a pre-15:00 snapshot.
     chart_data = []
     prev_real = None
+    prev_real_date = None
     for p in series:
         if not isinstance(p.get("equity"), (int, float)):
             continue
-        pt = {"d": p["date"], "e": round(p["equity"], 0), "r": p.get("ret_pct"),
+        d = p["date"]
+        pt = {"d": d, "e": round(p["equity"], 0), "r": p.get("ret_pct"),
               "n": p.get("positions")}
         if p.get("synthetic"):
             pt["s"] = 1
-        elif prev_real is not None:
+        elif p.get("time"):
+            pt["t"] = str(p["time"])[11:16]
+        if not p.get("synthetic") and prev_real is not None:
             pt["p"] = round(p["equity"] - prev_real, 2)
-        if p["date"] in index_rebased:
-            pt["i"] = index_rebased[p["date"]]
+            if prev_real:
+                pt["pr"] = round((p["equity"] / prev_real - 1) * 100, 2)
+            pt["pd"] = prev_real_date
+        if d in index_rebased:
+            pt["i"] = index_rebased[d]
+        if d in index_bars:
+            pt["k"] = index_bars[d]
+        elif d in index_closes:
+            pt["kc"] = index_closes[d]
+        chg = index_day_change(index_closes, d)
+        if chg:
+            pt["ic"], pt["ipd"] = chg
+        if d in intraday_idx:
+            pt["iq"] = intraday_idx[d]
         if not p.get("synthetic"):
             prev_real = p["equity"]
+            prev_real_date = d
         chart_data.append(pt)
     starting = (series[0].get("starting") if series else None) or pf.get("startingCapital") or 1000000
 
@@ -920,7 +1126,7 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
         )
 
     idx_note = ("上证指数取自新浪财经日K(sh000001)，等额起点=起始日按初始资金折算，缓存于 "
-                "<code>data/index_cache/sh000001.json</code>。" if index_rebased else
+                "<code>data/index_cache/sh000001{,_ohlc}.json</code>。" if index_rebased else
                 "（上证指数数据不可用——离线且无缓存）")
 
     js = (CHART_JS
@@ -957,12 +1163,21 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
   .main {{ display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:14px; align-items:start; }}
   @media (max-width: 900px) {{ .main {{ grid-template-columns:1fr; }} }}
   .panel {{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px; }}
-  #chart, #bars {{ width:100%; height:auto; display:block; }}
+  #chart, #bars, #cmp {{ width:100%; height:auto; display:block; }}
+  .range {{ float:right; font-weight:400; }}
+  @media (max-width: 640px) {{ .range {{ float:none; display:block; margin-top:6px; }} }}
+  .range button {{ font:12px inherit; border:1px solid var(--line); background:#fff; color:var(--muted);
+                   padding:2px 10px; margin-left:4px; border-radius:12px; cursor:pointer; }}
+  .range button.on {{ background:#1c2330; color:#fff; border-color:#1c2330; }}
+  .sw-k {{ background:linear-gradient(90deg,var(--up) 50%,var(--down) 50%); height:8px !important; }}
+  .d-cmp {{ font-size:13px; margin:4px 0 2px; }}
+  #tip .tm {{ color:#aab3c2; }}
   .legend {{ font-size:12px; color:var(--muted); margin:4px 2px 0; user-select:none; }}
   .legend .sw {{ display:inline-block; width:16px; height:3px; vertical-align:middle; margin-right:4px; border-radius:2px; }}
   #lg-idx {{ cursor:pointer; }} #lg-idx.off {{ opacity:0.35; }}
   #tip {{ position:fixed; display:none; pointer-events:none; background:#1c2330; color:#fff;
-          padding:6px 9px; border-radius:6px; font-size:12px; white-space:nowrap; z-index:9; }}
+          padding:6px 9px; border-radius:6px; font-size:12px; z-index:9;
+          max-width:min(600px, calc(100vw - 8px)); }}
   .side {{ position:sticky; top:14px; max-height:calc(100vh - 28px); overflow-y:auto; }}
   .side h4 {{ margin:13px 0 5px; font-size:12.5px; color:var(--muted); font-weight:600;
               border-top:1px solid var(--line); padding-top:10px; }}
@@ -1033,16 +1248,19 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
 
   <div class="cards">{cards_html}</div>
 
-  <h2>每日总资产 <span class="muted-h">悬停查看当日详情 · 点击固定</span></h2>
+  <h2>每日总资产 <span class="muted-h">悬停查看当日详情 · 点击固定</span>
+    <span class="range" id="range"><button data-n="20">近20日</button><button data-n="60">近60日</button><button data-n="0">全部</button></span></h2>
   <div class="main">
     <div>
       <div class="panel">
         <svg id="chart" viewBox="0 0 960 340" preserveAspectRatio="xMidYMid meet"></svg>
         <div class="legend">
           <span><span class="sw" style="background:#3b6ea5"></span>组合总资产</span>&nbsp;&nbsp;
-          <span id="lg-idx"><span class="sw" style="background:#c08a2e"></span>上证指数（等额起点，点击隐藏）</span>&nbsp;&nbsp;
+          <span id="lg-idx"><span class="sw sw-k"></span>上证指数日K（等额起点，红涨绿跌，点击隐藏）</span>&nbsp;&nbsp;
           <span><span class="sw" style="background:#9aa3b2;height:1px;border-top:2px dashed #9aa3b2"></span>初始资金 {_fmt_money(starting)}</span>
         </div>
+        <svg id="cmp" viewBox="0 0 960 58" preserveAspectRatio="xMidYMid meet" style="margin-top:6px"></svg>
+        <div class="legend">逐日涨跌 %：组合较上一快照 · 上证较前一交易日收盘 · 超额 = 组合 − 上证（区间不同不算；* = 午盘快照：组合为盘中值，超额按运行时上证计算，无运行时行情则不算）</div>
         <svg id="bars" viewBox="0 0 960 96" preserveAspectRatio="xMidYMid meet" style="margin-top:8px"></svg>
         <div class="legend">每日盈亏（较上一快照）</div>
         <div class="note">每个交易日取当日最后一次流水线快照的 totalEquity；曲线首点为组合起始日（portfolio_config.created，等于初始资金），起始日至首个每日快照间无逐日数据（斜虚线段示意）。{idx_note}</div>
@@ -1098,7 +1316,9 @@ def build(site_dir: Path = SITE_DIR) -> Path:
     stats = compute_stats(series, trades)
     details = collect_day_details(series, trades, build_open_lookup(active, trades))
     starting = (series[0].get("starting") if series else None) or 1000000
-    index_closes = merge_index_closes(load_index_closes(), settled_index_closes())
+    kline = fetch_index_kline()
+    index_closes = merge_index_closes(load_index_closes(kline), settled_index_closes())
+    index_bars = load_index_bars(kline)
     dates = [p["date"] for p in series]
     index_rebased = rebase_index(index_closes, dates, float(starting))
     idx_base = index_base(index_closes, dates[0]) if dates else None
@@ -1109,7 +1329,9 @@ def build(site_dir: Path = SITE_DIR) -> Path:
     out.write_text(render_html(series, active, trades, stats, details=details,
                                index_rebased=index_rebased, events=events,
                                badges=badges, run_status=load_latest_run_status(),
-                               idx_base=idx_base),
+                               idx_base=idx_base, index_bars=index_bars,
+                               index_closes=index_closes,
+                               intraday_idx=intraday_index_pcts(series)),
                    encoding="utf-8")
     print(f"[site] {out} — {len(series)} equity points "
           f"({len(index_rebased)} with index overlay), "
