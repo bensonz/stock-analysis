@@ -10,3 +10,4 @@
   −0.79% close (3842.195 → 3811.904), 超额 +0.58% vs run-time 上证.
 - Dates with no candle (all holidays with a pipeline snapshot): 04-06,
   04-12, 05-01, 05-04, 05-05, 06-19, 09-25.
+- Fix: zoomed ranges dropped the 1M (0%) baseline; STARTING is always in the y-range again (owner report).

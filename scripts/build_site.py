@@ -818,19 +818,17 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && pinned) 
 
   function draw(n) {
     V = n ? DATA.slice(-n) : DATA;
-    const full = V.length === DATA.length;
     const es = V.map(p => p.e);
     if (hasIdx) V.forEach(p => {
       if (p.i != null) es.push(p.i);
       if (showIdxAxis && p.k) es.push(toEq(p.k[1]), toEq(p.k[2]));
     });
-    if (full) es.push(STARTING);   // zoomed views scale to what they show
+    es.push(STARTING);   // the 0% baseline stays on screen in every range
     let lo = Math.min(...es), hi = Math.max(...es);
     const pad = (hi - lo) * 0.06 || 1; lo -= pad; hi += pad;
     const slot = iw / Math.max(V.length, 1);
     x = i => L + slot * (i + 0.5);   // centred in its own slot, so candles never clip
     y = v => T + (hi - v) / (hi - lo) * ih;
-    const base = Math.min(hi, Math.max(lo, STARTING));
     const bw = Math.max(1.5, Math.min(16, slot * 0.6));
     const S = [];
     for (let g = 0; g <= 4; g++) {
@@ -847,11 +845,10 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && pinned) 
     const step = Math.max(1, Math.round(V.length / 8));
     for (let i = 0; i < V.length; i += step)
       S.push(`<text x="${x(i)}" y="${H - 8}" text-anchor="middle" font-size="11" fill="#8a93a2">${V[i].d.slice(5)}</text>`);
-    if (STARTING >= lo && STARTING <= hi)
-      S.push(`<line x1="${L}" y1="${y(STARTING)}" x2="${W - R}" y2="${y(STARTING)}" stroke="#9aa3b2" stroke-dasharray="5 4"/>`);
+    S.push(`<line x1="${L}" y1="${y(STARTING)}" x2="${W - R}" y2="${y(STARTING)}" stroke="#9aa3b2" stroke-dasharray="5 4"/>`);
     const pts = V.map((p, i) => `${x(i).toFixed(1)},${y(p.e).toFixed(1)}`).join(" ");
     const tone = V[V.length - 1].e >= STARTING ? "212,58,58" : "26,156,98";
-    S.push(`<polygon points="${x(0)},${y(base)} ${pts} ${x(V.length - 1)},${y(base)}" fill="rgba(${tone},0.07)"/>`);
+    S.push(`<polygon points="${x(0)},${y(STARTING)} ${pts} ${x(V.length - 1)},${y(STARTING)}" fill="rgba(${tone},0.07)"/>`);
     // 上证 daily candles, only on dates with a real bar — never forward-filled.
     // A date with only a settled close (kline not built yet) gets a flat tick.
     if (showIdxAxis) {

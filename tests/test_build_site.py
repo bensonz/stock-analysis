@@ -395,3 +395,11 @@ def test_intraday_index_pcts_only_for_pre_close_snapshots(tmp_path):
               {"date": "2026-09-08", "time": "2026-09-08T12:20:00+08:00",
                "run_dir": tmp_path / "nope"}]
     assert bs.intraday_index_pcts(series) == {"2026-10-08": -0.27}
+
+
+def test_starting_capital_baseline_is_always_in_range():
+    # Zoomed ranges once scaled to visible data only, so a 20-day window
+    # entirely below 1M dropped the 0% dashed line off the chart.
+    js = bs.CHART_JS
+    assert "es.push(STARTING);" in js
+    assert "if (full) es.push(STARTING)" not in js
