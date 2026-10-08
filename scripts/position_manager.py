@@ -117,8 +117,29 @@ def _round_down_to_lot(raw_shares: int, code: str) -> int:
     return (max(int(raw_shares), 0) // lot_size) * lot_size
 
 
+def dividend_cash(pos: dict) -> float:
+    """Net cash a position has received from corporate actions (dividends).
+
+    The ONE source for dividend cash: summed from the position's own
+    `corporateActions` records (written by corporate_actions.apply_due), never
+    cached in a second field. Records only exist from 2026-10-08 forward, so
+    every older closed trade sums to 0 by construction — closed history is
+    never restated.
+    """
+    return round(sum(float(a.get("netCash") or 0)
+                     for a in (pos.get("corporateActions") or [])), 2)
+
+
 def build_positions_snapshot(price_data: dict | None = None) -> dict:
-    """Build the in-memory positions snapshot without writing positions.json."""
+    """Build the in-memory positions snapshot without writing positions.json.
+
+    Cash is DERIVED, never stored:
+        cash = starting − Σ open (shares × entryPrice)
+                        + realized (closed trades, incl. their dividends)
+                        + Σ open-position dividend cash
+    Dividend cash is realized income, so portfolio.realizedPnl includes the
+    open term too and totalEquity − starting == totalPnl stays an identity.
+    """
     active = load_active_positions()
     config = load_portfolio_config()
     starting = config["starting_capital"]
@@ -129,6 +150,7 @@ def build_positions_snapshot(price_data: dict | None = None) -> dict:
     total_current_value = 0.0
     total_unrealized = 0.0
     total_day_pnl = 0.0
+    total_open_dividends = 0.0
 
     for p in active:
         code = p["code"].split(".")[0]
@@ -161,6 +183,8 @@ def build_positions_snapshot(price_data: dict | None = None) -> dict:
         total_current_value += current_val
         total_unrealized += unrealized
         total_day_pnl += day_pnl
+        div_cash = dividend_cash(p)
+        total_open_dividends += div_cash
 
         live_volume = None
         live_mavol30 = None
@@ -193,6 +217,8 @@ def build_positions_snapshot(price_data: dict | None = None) -> dict:
             "currentValue": current_val,
             "unrealizedPnl": unrealized,
         }
+        if div_cash:
+            entry["dividendCash"] = div_cash
         if live_volume is not None:
             entry["volume"] = live_volume
         if live_mavol30 is not None:
@@ -202,8 +228,10 @@ def build_positions_snapshot(price_data: dict | None = None) -> dict:
 
         entries.append(entry)
 
-    realized = compute_realized_pnl()
-    cash = round(starting - total_allocated + realized, 2)
+    closed_realized = compute_realized_pnl()
+    open_dividends = round(total_open_dividends, 2)
+    cash = round(starting - total_allocated + closed_realized + open_dividends, 2)
+    realized = round(closed_realized + open_dividends, 2)
     total_equity = round(cash + total_current_value, 2)
     total_pnl = round(total_unrealized + realized, 2)
     min_cash_pct = config.get("min_cash_pct", DEFAULT_PORTFOLIO_CONFIG["min_cash_pct"])
@@ -220,6 +248,7 @@ def build_positions_snapshot(price_data: dict | None = None) -> dict:
         "investedValue": round(total_current_value, 2),
         "unrealizedPnl": round(total_unrealized, 2),
         "realizedPnl": realized,
+        "dividendCash": open_dividends,   # open positions' share of realizedPnl
         "totalPnl": total_pnl,
         "totalReturnPct": round(total_pnl / starting * 100, 2) if starting else 0,
         "positionsUsed": len(entries),
@@ -239,7 +268,10 @@ def build_positions_snapshot(price_data: dict | None = None) -> dict:
 
 
 def compute_realized_pnl() -> float:
-    """Scan tracking/closed/*.json, compute total realized P&L in dollars."""
+    """Scan tracking/closed/*.json, compute total realized P&L in dollars.
+
+    Includes each closed trade's dividend cash (dividend_cash) — zero for
+    every trade closed before corporate actions were booked (2026-10-08)."""
     config = load_portfolio_config()
     starting = config["starting_capital"]
     max_pct = config["max_position_pct"]
@@ -255,7 +287,7 @@ def compute_realized_pnl() -> float:
             if not shares:
                 raw = int((starting * max_pct / 100) // entry)
                 shares = _round_down_to_lot(raw, p.get("code", "")) or _lot_size_for_code(p.get("code", ""))
-            realized += (exit_p - entry) * shares
+            realized += (exit_p - entry) * shares + dividend_cash(p)
         except Exception:
             pass
     return round(realized, 2)
@@ -389,7 +421,17 @@ def close_position(
     pos["exitDate"] = exit_date
     pos["exitPrice"] = exit_price
     pos["exitReason"] = reason
-    pos["returnPct"] = round((exit_price - pos["entryPrice"]) / pos["entryPrice"] * 100, 2)
+    divs = dividend_cash(pos)
+    if divs and pos.get("shares"):
+        # Dividends received are part of this trade's return (2026-10-08).
+        # entryPrice × shares is the cost basis — 送转 rescales both and
+        # keeps the product. Trades without dividends keep the old formula
+        # byte-for-byte so no historical rounding can shift.
+        cost = pos["entryPrice"] * pos["shares"]
+        pos["returnPct"] = round(
+            ((exit_price - pos["entryPrice"]) * pos["shares"] + divs) / cost * 100, 2)
+    else:
+        pos["returnPct"] = round((exit_price - pos["entryPrice"]) / pos["entryPrice"] * 100, 2)
     # Trading sessions, not calendar days (unified 2026-08-19: every consumer —
     # the time stop, the audits, ANALYST.md — speaks in trading days, but this
     # field held calendar days since inception; 32 historical records recomputed).
