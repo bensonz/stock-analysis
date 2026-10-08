@@ -63,7 +63,8 @@ def _snapshot_point(path: Path):
             return None
         holdings = [
             {"c": p.get("code", ""), "n": p.get("name", ""), "p": p.get("pnl_pct"),
-             "v": p.get("currentValue"), "w": p.get("weight_pct")}
+             "v": p.get("currentValue"), "w": p.get("weight_pct"),
+             "px": p.get("currentPrice")}
             for p in (pj.get("activePositions") or [])
         ]
         return {
@@ -130,6 +131,71 @@ def collect_equity_series(runs_dir: Path = RUNS_DIR) -> list[dict]:
         best["date"] = day_dir.name
         series.append(best)
     return series
+
+
+def attach_holding_day_pcts(series: list[dict], sessions=None) -> None:
+    """Set each holding's `d` = its day % (price vs the quote's prev_close),
+    from the prices.json of the run that produced the day's snapshot.
+
+    Only when the quote is dated that day AND its price is the snapshot's own
+    mark — a stale pre_run mark must not borrow today's quote %. Otherwise the
+    holding gets no `d` and the UI shows "—". A noon snapshot gives an
+    intraday %, matching its intraday equity.
+
+    Also sets `xd` = the book's previous-point price when it differs from the
+    quote's prev_close. That is an ex-dividend/ex-rights day (2026-10-08
+    普洛药业: book 27.74, quote prev_close 27.61 after 10派1.39 — the book
+    took the drop and credits no dividend) or a previous mark that was not
+    the close. Either way the stock's quote % and its move in the book differ.
+
+    `xd` is only judged when the previous point is a post-15:00 mark of the
+    previous session (`sessions` = trading dates; a holiday snapshot counts as
+    its last session). A gap day or a noon mark differs from prev_close for
+    ordinary reasons and flagged 50+ days of noise before this guard.
+    """
+    sessions = sorted(sessions or [])
+
+    def session_of(day):
+        before = [x for x in sessions if x <= day]
+        return before[-1] if before else None
+
+    def prev_session(day):
+        before = [x for x in sessions if x < day]
+        return before[-1] if before else None
+
+    prev_px, prev_pt = {}, None
+    for p in series:
+        run_dir, holdings = p.get("run_dir"), p.get("holdings") or []
+        last_px, prev_px = prev_px, {str(h.get("c", "")).split(".")[0]: h.get("px")
+                                     for h in holdings}
+        last_pt, prev_pt = prev_pt, p
+        judge_xd = bool(
+            sessions and last_pt and not last_pt.get("synthetic")
+            and str(last_pt.get("time", ""))[11:16] >= "15:00"
+            and session_of(last_pt["date"]) == prev_session(p["date"]))
+        if not run_dir or not holdings:
+            continue
+        try:
+            quotes = _read_json(Path(run_dir) / "input" / "prices.json")
+        except Exception:
+            continue
+        if not isinstance(quotes, dict):
+            continue
+        for h in holdings:
+            q = quotes.get(str(h.get("c", "")).split(".")[0])
+            try:
+                px, prev = float(h["px"]), float(q["prev_close"])
+                if q.get("date") != p.get("date") or prev <= 0:
+                    continue
+                if abs(float(q["price"]) - px) > 0.006:
+                    continue
+            except (KeyError, TypeError, ValueError):
+                continue
+            h["d"] = round((px / prev - 1) * 100, 2)
+            book_prev = last_px.get(str(h.get("c", "")).split(".")[0])
+            if judge_xd and isinstance(book_prev, (int, float)) and abs(book_prev - prev) > 0.006:
+                h["xd"] = book_prev
+                h["qp"] = prev
 
 
 def inception_point(tracking_dir: Path = TRACKING_DIR) -> dict | None:
@@ -652,8 +718,29 @@ function excess(p) {
   if (p.pr == null) return null;
   if (isNoon(p) && p.iq == null) return null;   // no 上证 for that moment
   const ix = p.iq != null ? p.iq : p.ic;
-  if (ix == null || (p.pd && p.ipd && p.pd !== p.ipd)) return null;
+  if (ix == null || (p.pd && p.ipd && (p.pdi || p.pd) !== p.ipd)) return null;
   return Math.round((p.pr - ix) * 100) / 100;
+}
+// Σ holding P&L today ÷ yesterday's equity. On a day with no trades and fresh
+// marks this equals 组合 day % (cash does not move); a gap means trades,
+// a missing quote, or a mark problem — said, not hidden.
+function holdingsCheck(det, p) {
+  if (!p || p.pr == null || det.equity == null || det.day_pnl == null) return "";
+  const hs = det.holdings || [];
+  if (!hs.length || hs.some(x => x.d == null || x.v == null)) return "";
+  const pnl = hs.reduce((a, x) => a + x.v * x.d / (100 + x.d), 0);
+  const c = Math.round(pnl / (det.equity - det.day_pnl) * 10000) / 100;
+  const gap = Math.round(pnl - det.day_pnl);
+  // Only actions that move cash or shares; RAISE_STOP / HOLD change nothing.
+  const trades = (det.actions || []).some(a => TRADE_ACTS[a.a]) || (det.closed || []).length;
+  return `<div class="mini">持仓当日贡献合计 <b class="${pnlCls(c)}">${pctTxt(c)}</b> (${sign(pnl)}${fmtM(pnl)}) · 组合 ${pctTxt(p.pr)} (${sign(det.day_pnl)}${fmtM(det.day_pnl)})`
+       + (Math.abs(gap) > 20 ? ` · 差 ${sign(gap)}${fmtM(gap)}` : "")
+       + (Math.abs(gap) > 20
+          ? (trades ? "（当日有交易，二者不必相等）"
+             : hs.some(x => x.xd != null) ? "（不一致：⚠ 标记的股票账本前值≠行情昨收，常见于除权除息日——模拟盘未计入分红）"
+             : "（不一致：行情或市值时点不同）")
+          : " ✓")
+       + `</div>`;
 }
 function cmpHtml(p) {
   const pc = v => `<b class="${pnlCls(v)}">${pctTxt(v)}</b>`;
@@ -664,7 +751,7 @@ function cmpHtml(p) {
     h += `<div class="d-note">组合取 ${esc(p.t || "")} 午盘快照，当时上证 ${pctTxt(p.iq)}，收盘 ${pctTxt(p.ic)}；超额按运行时计算</div>`;
   else if (isNoon(p))
     h += `<div class="d-note">组合取 ${esc(p.t)} 午盘快照，该次运行无上证行情——与收盘涨跌不可比，不算超额</div>`;
-  if (p.pd && p.ipd && p.pd !== p.ipd)
+  if (p.pd && p.ipd && (p.pdi || p.pd) !== p.ipd)
     h += `<div class="d-note">组合较 ${esc(p.pd)} 快照，上证较 ${esc(p.ipd)} 收盘——区间不同，不算超额</div>`;
   return h;
 }
@@ -675,6 +762,7 @@ let pinned = null;
 let latestDay = null;
 const ACTION_CN = {OPEN:"开", BUY:"开", SELL:"平", ADD:"加", TRIM:"减", HOLD:"持"};
 const OPENS = {OPEN:1, BUY:1, ADD:1};
+const TRADE_ACTS = {OPEN:1, BUY:1, ADD:1, SELL:1, TRIM:1};
 function unpin() { pinned = null; if (latestDay) renderDay(latestDay); }
 function renderDay(d) {
   const det = DETAILS[d];
@@ -715,7 +803,8 @@ function renderDay(d) {
     }
   }
   if (det.holdings && det.holdings.length) {
-    h += `<h4>持仓 (${det.holdings.length}) <span class="mini">当日最后快照${det.stale_marks ? "(市值非当日)" : ""}</span></h4>`;
+    h += `<h4>持仓 (${det.holdings.length}) <span class="mini">当日最后快照${det.stale_marks ? "(市值非当日)" : ""}</span></h4>`
+       + `<div class="d-row mini"><span>市值 (权重)</span><span>当日 · 累计</span></div>`;
     // Every action carries the model's reasoning — not just HOLD. Filtering
     // to HOLD hid 91 of 255 notes (SELL/OPEN/RAISE_STOP), which read as
     // "this row has nothing to say" when it had the most to say.
@@ -723,7 +812,7 @@ function renderDay(d) {
     for (const a of (det.actions || [])) if (a.note) rowNotes[a.c] = {a: a.a, note: a.note};
     let noted = 0;
     for (const p of det.holdings) {
-      const size = p.v != null ? `<span class="muted">${fmtM(p.v)}${p.w != null ? ` (${p.w}%)` : ""}</span> ` : "";
+      const size = p.v != null ? `<span class="hv mini">${fmtM(p.v)}${p.w != null ? ` (${p.w}%)` : ""}</span>` : "";
       const rn = rowNotes[p.c];
       if (rn) noted++;
       // Glyph, not the word: the full action name is in the tooltip badge,
@@ -731,9 +820,13 @@ function renderDay(d) {
       const glyph = {RAISE_STOP: "⬆", OPEN: "＋", SELL: "✕"}[rn && rn.a] || "";
       const tag = glyph ? ` <span class="act-tag">${glyph}</span>` : "";
       h += `<div class="d-row${rn ? " has-note" : ""}"${rn ? ` data-note="${esc(rn.note)}" data-act="${esc(rn.a)}"` : ""}>`
-         + `<span>${esc(p.n)}${tag} <span class="muted">${esc(p.c)}</span></span>`
-         + `<span>${size}<span class="${pnlCls(p.p)}">${p.p == null ? "—" : sign(p.p) + p.p + "%"}</span></span></div>`;
+         + `<span>${esc(p.n)}${tag} <span class="muted">${esc(p.c)}</span>${size}</span>`
+         + `<span>${p.xd != null ? `<span class="xd" title="账本前值 ${p.xd} ≠ 行情昨收 ${p.qp}：除权除息日，或前一快照非收盘价。行情涨跌按昨收计，账本按前值计">⚠</span>` : ""}`
+         + `<span class="dpct ${pnlCls(p.d)}">${pctTxt(p.d)}</span> · `
+         + `<span class="${pnlCls(p.p)}">${p.p == null ? "—" : sign(p.p) + p.p + "%"}</span></span></div>`;
     }
+    const chk = holdingsCheck(det, BYDATE[d]);
+    if (chk) h += chk;
     // Absence must be visible, not mysterious: 39 of 108 days predate action
     // logging, so no row on them has reasoning to show.
     if (!noted) {
@@ -1019,7 +1112,7 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
     # · t snapshot HH:MM · p day pnl · pr day % · pd prev snapshot date · i rebased 上证 close
     # (forward-filled, sets the y-range) · k real [o,h,l,c] (exact date only)
     # · kc real close when only a settled quote exists · ic 上证 day % ·
-    # ipd prev index date · iq 上证 % at a pre-15:00 snapshot.
+    # ipd prev index date · pdi pd mapped to its last session (holiday) · iq 上证 % at a pre-15:00 snapshot.
     chart_data = []
     prev_real = None
     prev_real_date = None
@@ -1047,6 +1140,13 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
         chg = index_day_change(index_closes, d)
         if chg:
             pt["ic"], pt["ipd"] = chg
+            # A previous snapshot on a non-trading day (a holiday run) holds
+            # the last session's values: compare spans by that session.
+            pd = pt.get("pd")
+            if pd and pd not in index_closes:
+                before = [x for x in index_closes if x <= pd]
+                if before:
+                    pt["pdi"] = max(before)
         if d in intraday_idx:
             pt["iq"] = intraday_idx[d]
         if not p.get("synthetic"):
@@ -1168,6 +1268,9 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
   .range button.on {{ background:#1c2330; color:#fff; border-color:#1c2330; }}
   .sw-k {{ background:linear-gradient(90deg,var(--up) 50%,var(--down) 50%); height:8px !important; }}
   .d-cmp {{ font-size:13px; margin:4px 0 2px; }}
+  .dpct {{ display:inline-block; min-width:52px; text-align:right; }}
+  .xd {{ color:#c08a2e; cursor:help; margin-left:4px; }}
+  .hv {{ display:block; }}
   #tip .tm {{ color:#aab3c2; }}
   .legend {{ font-size:12px; color:var(--muted); margin:4px 2px 0; user-select:none; }}
   .legend .sw {{ display:inline-block; width:16px; height:3px; vertical-align:middle; margin-right:4px; border-radius:2px; }}
@@ -1311,11 +1414,12 @@ def build(site_dir: Path = SITE_DIR) -> Path:
     active = load_active()
     trades = load_closed_trades()
     stats = compute_stats(series, trades)
-    details = collect_day_details(series, trades, build_open_lookup(active, trades))
-    starting = (series[0].get("starting") if series else None) or 1000000
     kline = fetch_index_kline()
     index_closes = merge_index_closes(load_index_closes(kline), settled_index_closes())
     index_bars = load_index_bars(kline)
+    attach_holding_day_pcts(series, sessions=index_closes)   # before details copies holdings
+    details = collect_day_details(series, trades, build_open_lookup(active, trades))
+    starting = (series[0].get("starting") if series else None) or 1000000
     dates = [p["date"] for p in series]
     index_rebased = rebase_index(index_closes, dates, float(starting))
     idx_base = index_base(index_closes, dates[0]) if dates else None

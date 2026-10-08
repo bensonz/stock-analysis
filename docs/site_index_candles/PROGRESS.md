@@ -11,3 +11,15 @@
 - Dates with no candle (all holidays with a pipeline snapshot): 04-06,
   04-12, 05-01, 05-04, 05-05, 06-19, 09-25.
 - Fix: zoomed ranges dropped the 1M (0%) baseline; STARTING is always in the y-range again (owner report).
+- Owner ask: per-stock day %. Holding `d` = snapshot price / the run's own
+  prices.json prev_close (quote dated that day, price == the mark), else "—".
+  279/364 holding-days covered (old prices.json are `{}`).
+- Side panel: 当日 · 累计 per stock; check line Σ holding P&L vs 组合 day P&L
+  in yuan; RAISE_STOP/HOLD no longer count as trades.
+- FOUND: 普洛药业 ex-dividend 2026-10-08 (10派1.39, prev_close 27.74→27.61).
+  position_manager has no dividend handling → book short ≈ ¥236 (1700 sh).
+  Flag `xd` marks book prev ≠ quote prev_close, judged only when yesterday's
+  point is a ≥15:00 mark of the previous session: 54 → 11 flags. Others
+  (04-14, 06-10, 09-04) cluster per day both directions = previous "close"
+  snapshot not at the real close — separate issue, not investigated.
+- Holiday-run snapshot (09-25) as previous point no longer blanks 超额 (pdi).

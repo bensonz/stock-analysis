@@ -24,3 +24,6 @@
 - **Noon snapshot with no run-time 上证 quote → no 超额.** 09-08 and 09-11
   noon runs had a DNS failure on the index fetch; comparing an 11:xx equity
   with the 15:00 close would be a wrong number, so the cell shows "—".
+- **Per-stock day % from the run's own quote, not snapshot-to-snapshot.**
+  It is the number a quote app shows; a book-vs-quote difference is shown as
+  a ⚠ flag + a yuan gap in the check line instead of being blended away.

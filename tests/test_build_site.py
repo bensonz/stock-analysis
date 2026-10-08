@@ -380,6 +380,8 @@ def test_chart_points_carry_candle_only_on_exact_bar_dates():
     assert by["2026-10-08"]["kc"] == 3811.904 and "k" not in by["2026-10-08"]
     assert by["2026-10-08"]["iq"] == -0.27 and by["2026-10-08"]["t"] == "11:41"
     assert by["2026-10-08"]["pd"] == "2026-10-01" and by["2026-10-08"]["ipd"] == "2026-09-30"
+    assert by["2026-10-08"]["pdi"] == "2026-09-30"   # holiday snapshot → its session
+    assert "pdi" not in by["2026-09-30"]
 
 
 def test_intraday_index_pcts_only_for_pre_close_snapshots(tmp_path):
@@ -403,3 +405,50 @@ def test_starting_capital_baseline_is_always_in_range():
     js = bs.CHART_JS
     assert "es.push(STARTING);" in js
     assert "if (full) es.push(STARTING)" not in js
+
+
+def _prices(tmp, rel, quotes):
+    path = tmp / rel / "input" / "prices.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(quotes), encoding="utf-8")
+    return tmp / rel
+
+
+def test_holding_day_pct_from_own_runs_quote(tmp_path):
+    run = _prices(tmp_path, "2026-10-08/noon", {
+        "603259": {"date": "2026-10-08", "price": 165.95, "prev_close": 167.34},
+        "601872": {"date": "2026-10-08", "price": 22.20, "prev_close": 20.15},   # not the mark
+        "603127": {"date": "2026-09-30", "price": 52.88, "prev_close": 49.30}})  # other day
+    series = [{"date": "2026-10-08", "run_dir": run, "holdings": [
+        {"c": "603259", "px": 165.95}, {"c": "601872", "px": 22.17},
+        {"c": "603127", "px": 52.88}, {"c": "000001", "px": 10.0}]}]
+    bs.attach_holding_day_pcts(series)
+    hs = series[0]["holdings"]
+    assert hs[0]["d"] == -0.83
+    assert [("d" in h) for h in hs[1:]] == [False, False, False]
+
+
+def test_holding_flags_book_prev_price_that_is_not_the_quote_prev_close(tmp_path):
+    # 2026-10-08 普洛药业 ex-dividend 10派1.39: book 27.74, quote prev_close 27.61.
+    run = _prices(tmp_path, "2026-10-08/noon", {
+        "000739": {"date": "2026-10-08", "price": 27.13, "prev_close": 27.61},
+        "603259": {"date": "2026-10-08", "price": 165.95, "prev_close": 167.34}})
+    def series(prev_date, prev_time):
+        return [{"date": prev_date, "time": f"{prev_date}T{prev_time}+08:00", "holdings": [
+                    {"c": "000739", "px": 27.74}, {"c": "603259", "px": 167.34}]},
+                {"date": "2026-10-08", "run_dir": run, "holdings": [
+                    {"c": "000739", "px": 27.13}, {"c": "603259", "px": 165.95}]}]
+    sessions = {"2026-09-29": 1, "2026-09-30": 1, "2026-10-08": 1}
+
+    s = series("2026-09-30", "15:10:22")
+    bs.attach_holding_day_pcts(s, sessions)
+    pulo, wuxi = s[1]["holdings"]
+    assert pulo["d"] == -1.74 and pulo["xd"] == 27.74 and pulo["qp"] == 27.61
+    assert "xd" not in wuxi
+
+    # Not judged when yesterday's mark was a noon mark or not the prior session:
+    # those differ from prev_close for ordinary reasons.
+    for prev_date, prev_time in [("2026-09-30", "11:41:00"), ("2026-09-29", "15:10:00")]:
+        s = series(prev_date, prev_time)
+        bs.attach_holding_day_pcts(s, sessions)
+        assert "xd" not in s[1]["holdings"][0] and s[1]["holdings"][0]["d"] == -1.74
