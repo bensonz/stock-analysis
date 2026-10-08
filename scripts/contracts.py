@@ -454,6 +454,30 @@ def validate_phase3_gate(date: str, apply_log: dict, data: dict,
         if rule.get("error"):
             gate.soft(False, f"rule {rule.get('rule')} failed to run: {rule['error']}")
 
+    # ── Corporate actions (dividends / 送转, 2026-10-08) ──
+    # A fetch failure is a degradation, never a hard fail: the book was left
+    # untouched and the next run retries. A cash dividend is the book working
+    # (note). A 送转 rescales shares/entryPrice but NOT the stop, so it is
+    # soft-warned loudly — the stop will very likely trip this session.
+    corp = apply_log.get("corporate_actions") or {}
+    if corp.get("error"):
+        gate.soft(False, f"corporate actions apply crashed — dividends/送转 not "
+                         f"checked this run: {corp['error']}")
+    for code in corp.get("fetch_failed") or []:
+        gate.soft(False, f"corporate actions not checked for {code}: ex-div "
+                         f"event fetch failed (book untouched, next run retries)")
+    for a in corp.get("applied") or []:
+        if a.get("sharesAfter") != a.get("sharesBefore"):
+            gate.soft(False,
+                      f"送转 applied to {a.get('code')} ex {a.get('exDate')}: shares "
+                      f"{a.get('sharesBefore')}→{a.get('sharesAfter')}, entryPrice "
+                      f"{a.get('entryPriceBefore')}→{a.get('entryPriceAfter')}; "
+                      f"stop/target NOT adjusted — stop likely to trip")
+        if a.get("grossCash"):
+            gate.note(f"dividend {a.get('code')} ex {a.get('exDate')}: gross "
+                      f"{a.get('grossCash')} tax {a.get('tax')} net {a.get('netCash')} "
+                      f"credited to cash")
+
     # ── Check persisted state consistency ──
     opened_codes = {a.split()[1] for a in actions
                     if isinstance(a, str) and a.startswith("OPEN ") and len(a.split()) > 1}

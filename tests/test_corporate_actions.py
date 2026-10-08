@@ -338,3 +338,94 @@ def test_close_without_dividends_keeps_old_return_formula(book):
     closed = pm.close_position("000739", reason="test", exit_price=26.0,
                                date="2026-10-09")
     assert closed["returnPct"] == round((26.0 - 24.21) / 24.21 * 100, 2)
+
+
+def test_writer_refuses_a_non_active_position(book):
+    pos = _put(book)
+    with pytest.raises(ValueError):
+        pm.save_corporate_actions("000739", {**pos, "status": "closed"})
+    with pytest.raises(FileNotFoundError):
+        pm.save_corporate_actions("600000", {**pos, "code": "600000"})
+
+
+# ── pipeline wiring (phase 3 step 0 + Gate 3) ──
+
+def _ca_result(applied=(), failed=(), warnings=(), status=None, **extra):
+    return {"date": "2026-10-08", "status": status or ("degraded" if failed else "ok"),
+            "checked": 1, "applied": list(applied), "fetch_failed": list(failed),
+            "warnings": list(warnings), **extra}
+
+
+_DIV = {"code": "000739", "name": "普洛药业", "exDate": "2026-10-08",
+        "cashPer10": 1.39, "bonusPer10": 0.0, "sharesBefore": 1700,
+        "sharesAfter": 1700, "entryPriceBefore": 24.21, "entryPriceAfter": 24.21,
+        "grossCash": 236.3, "taxRate": 0.2, "tax": 47.26, "netCash": 189.04}
+_BONUS = {**_DIV, "cashPer10": 0.0, "bonusPer10": 4.0, "sharesAfter": 2380,
+          "entryPriceAfter": 17.292857, "grossCash": 0, "tax": 0, "netCash": 0}
+
+
+def test_phase3_step_records_result_and_never_errors():
+    import run_daily
+    log = {"actions": []}
+    data = {"positions": [{"code": "000739", "entryPrice": 24.21, "shares": 1700}]}
+    run_daily.apply_corporate_actions("2026-10-08", data, log,
+                                      apply_fn=lambda d: _ca_result([_DIV]))
+    assert log["corporate_actions"]["applied"][0]["netCash"] == 189.04
+    assert any("000739" in a and "189.04" in a for a in log["actions"])
+    assert not any(a.startswith("ERROR") for a in log["actions"])
+    assert data["positions"][0]["entryPrice"] == 24.21   # cash-only: unchanged
+
+
+def test_phase3_step_refreshes_phase1_positions_after_bonus_shares():
+    """enforce_hard_sells reads data['positions']; a stale pre-送转 entryPrice
+    would read the ex-rights price as a -28% loss and force a hard sell."""
+    import run_daily
+    log = {"actions": []}
+    data = {"positions": [{"code": "000739", "entryPrice": 24.21, "shares": 1700}]}
+    run_daily.apply_corporate_actions("2026-10-08", data, log,
+                                      apply_fn=lambda d: _ca_result([_BONUS]))
+    assert data["positions"][0]["entryPrice"] == 17.292857
+    assert data["positions"][0]["shares"] == 2380
+
+
+def test_phase3_step_survives_a_crashing_apply():
+    import run_daily
+    log = {"actions": []}
+
+    def boom(d):
+        raise RuntimeError("disk full")
+    run_daily.apply_corporate_actions("2026-10-08", {}, log, apply_fn=boom)
+    assert log["corporate_actions"]["status"] == "degraded"
+    assert "disk full" in log["corporate_actions"]["error"]
+    assert not any(a.startswith("ERROR") for a in log["actions"])
+
+
+def test_gate3_soft_warns_on_fetch_failure():
+    from contracts import validate_phase3_gate
+    log = {"actions": [], "corporate_actions": _ca_result(failed=["000739"])}
+    g = validate_phase3_gate("2026-10-08", log, {})
+    assert g.passed
+    assert any("000739" in w and "corporate" in w for w in g.soft_warns)
+
+
+def test_gate3_notes_a_dividend_without_degrading():
+    from contracts import validate_phase3_gate
+    log = {"actions": [], "corporate_actions": _ca_result([_DIV])}
+    g = validate_phase3_gate("2026-10-08", log, {})
+    assert not any("000739" in w for w in g.soft_warns)
+    assert any("000739" in n and "189.04" in n for n in g.notes)
+
+
+def test_gate3_soft_warns_loudly_on_bonus_shares():
+    from contracts import validate_phase3_gate
+    log = {"actions": [], "corporate_actions": _ca_result([_BONUS])}
+    g = validate_phase3_gate("2026-10-08", log, {})
+    assert any("000739" in w and "stop" in w.lower() for w in g.soft_warns)
+
+
+def test_gate3_soft_warns_when_apply_crashed():
+    from contracts import validate_phase3_gate
+    log = {"actions": [], "corporate_actions": _ca_result(status="degraded",
+                                                          error="disk full")}
+    g = validate_phase3_gate("2026-10-08", log, {})
+    assert any("disk full" in w for w in g.soft_warns)

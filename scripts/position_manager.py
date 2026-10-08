@@ -732,6 +732,22 @@ def update_position(code: str, updates: dict) -> dict:
     return pos
 
 
+def save_corporate_actions(code: str, pos: dict) -> None:
+    """Persist an OPEN position that corporate_actions.apply_due booked events on.
+
+    The arithmetic lives in corporate_actions.py; the write lives here so this
+    module stays the only writer of tracking/ (TRACKER_SCHEMA rule 1). Refuses
+    anything but an existing active position — corporate actions never touch
+    closed/ (owner decision 2026-10-08: closed trades are never restated).
+    """
+    pos_file = TRACKING_DIR / f"{code}.json"
+    if not pos_file.exists():
+        raise FileNotFoundError(f"Position file not found: {pos_file}")
+    if _read_json(pos_file).get("status") != "active" or pos.get("status") != "active":
+        raise ValueError(f"save_corporate_actions: {code} is not an active position")
+    _write_json(pos_file, pos)
+
+
 def regenerate_positions_json(price_data: dict | None = None) -> dict:
     """Scan tracking/*.json, build positions.json from active positions.
     ALWAYS called after any mutation.

@@ -20,9 +20,10 @@ Source: eastmoney datacenter RPT_SHAREBONUS_DET (the host pricedb already uses
 for ex-div dates). A fetch failure is a LOUD degradation, never a hard fail:
 the book is untouched and the next run retries (apply is idempotent by exDate).
 
-Path globals are read from position_manager AT CALL TIME (pm.TRACKING_DIR),
-never `from position_manager import TRACKING_DIR`, so a test that rebinds the
-position_manager globals also rebinds this module.
+This module computes; position_manager writes (save_corporate_actions) — it
+stays the only writer of tracking/. Everything is reached as `pm.<name>` at
+call time, never `from position_manager import ...`, so a test that rebinds
+the position_manager path globals also rebinds this module.
 """
 from __future__ import annotations
 
@@ -260,7 +261,7 @@ def apply_due(date: str, fetcher=None) -> dict:
             result["applied"].append({"code": code, "name": pos.get("name", ""), **rec})
             result["warnings"].extend(warns)
         pos["updatedAt"] = applied_at
-        pm._write_json(pm.TRACKING_DIR / f"{code}.json", pos)
+        pm.save_corporate_actions(code, pos)
 
     if result["fetch_failed"]:
         result["status"] = "degraded"

@@ -82,6 +82,7 @@ from position_manager import (
     PORTFOLIO_CONFIG_FILE,
 )
 from report_generator import generate_candidates_md, generate_watchlist_json, generate_report_md
+import corporate_actions
 from run_rules import run_all_rules
 from run_paths import (
     RUNS_DIR,
@@ -1704,6 +1705,43 @@ def blocked_new_positions(candidates: list[dict]) -> list[dict]:
             for p in candidates if p.get("_not_opened")]
 
 
+def apply_corporate_actions(date: str, data: dict, log: dict, apply_fn=None) -> dict:
+    """Phase 3 step 0: book due dividends / 送转 on open positions (2026-10-08).
+
+    Runs every slot, before any sell: a same-day SELL must close the post-送转
+    share count, and enforce_hard_sells must judge the price against the
+    rescaled entryPrice — so the phase-1 `data["positions"]` copy is refreshed
+    for any position whose shares changed. Never fails the run: a source or
+    apply problem is recorded as a degradation (Gate 3 soft-warns), the book is
+    left as it was, and the next slot retries (apply_due is idempotent).
+    """
+    apply_fn = apply_fn or corporate_actions.apply_due
+    try:
+        res = apply_fn(date)
+    except Exception as e:
+        res = {"date": date, "status": "degraded", "checked": 0, "applied": [],
+               "fetch_failed": [], "error": f"{type(e).__name__}: {e}",
+               "warnings": [f"WARN corporate actions apply crashed: {e}"]}
+        print(f"  ⚠ corporate actions apply crashed: {e}", file=sys.stderr)
+    log["corporate_actions"] = res
+
+    for a in res.get("applied") or []:
+        log["actions"].append(
+            f"CORP_ACTION {a['code']} ex {a['exDate']}: cash net {a['netCash']} "
+            f"(gross {a['grossCash']}, tax {a['tax']}), shares "
+            f"{a['sharesBefore']}→{a['sharesAfter']}")
+        if a.get("sharesAfter") != a.get("sharesBefore"):
+            for p in data.get("positions") or []:
+                if str(p.get("code", "")).split(".")[0] == a["code"]:
+                    p["shares"] = a["sharesAfter"]
+                    p["entryPrice"] = a["entryPriceAfter"]
+    if res.get("fetch_failed"):
+        log["actions"].append(
+            f"CORP_ACTION SKIP {','.join(res['fetch_failed'])}: event fetch failed, "
+            f"next run retries")
+    return res
+
+
 def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
     """Phase 3: Apply LLM decisions. Pure Python.
 
@@ -1720,7 +1758,10 @@ def phase3_apply(date: str, decisions: dict, data: dict) -> dict:
     run_dir = get_run_dir(date, slot)
     output_dir = run_dir / "output"
 
-    # 0. Enforce non-negotiable exits before applying LLM decisions. Stops and
+    # 0a. Dividends / 送转 due on open positions — before any sell (see helper).
+    apply_corporate_actions(date, data, log)
+
+    # 0b. Enforce non-negotiable exits before applying LLM decisions. Stops and
     #    the -5% hard loss are mechanical, not subject to LLM discretion.
     enforce_hard_sells(decisions, data, log)
 
