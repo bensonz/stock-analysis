@@ -34,4 +34,4 @@ event before entryDate ignored; fetch failure leaves book untouched.
 ## Stage 3: pipeline wiring
 **Goal**: applied at the start of Phase 3 every slot, recorded in the run log /
 manifest; doctor stays green.
-**Status**: Not Started
+**Status**: Complete

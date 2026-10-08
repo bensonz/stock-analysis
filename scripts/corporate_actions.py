@@ -270,20 +270,3 @@ def apply_due(date: str, fetcher=None) -> dict:
     for w in result["warnings"]:
         print(f"  {w}", file=sys.stderr)
     return result
-
-
-if __name__ == "__main__":
-    # Read-only preview: what WOULD be applied. Never writes the book.
-    import json
-    run_date = sys.argv[1] if len(sys.argv) > 1 else _date.today().isoformat()
-    out = []
-    for p in pm.load_active_positions():
-        code = str(p.get("code", "")).split(".")[0]
-        evs = fetch_events(code)
-        done = {a.get("exDate") for a in (p.get("corporateActions") or [])}
-        due = None if evs is None else [
-            e for e in evs if p["entryDate"] < e["exDate"] <= run_date
-            and e["exDate"] not in done]
-        out.append({"code": code, "name": p.get("name"), "entryDate": p.get("entryDate"),
-                    "due": due})
-    print(json.dumps(out, ensure_ascii=False, indent=2))
