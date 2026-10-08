@@ -20,6 +20,7 @@ Rules for this file:
 | 2026-09-01 | deep_report TEMPERATURE 0.5→1.0（同日双跑 4/5+4/5，判定边界陡而非骰子问题） | **2026-09-15 due**: 若评分方程（docs/deep_report_scoring/PROPOSAL.md）已批准落地，跑验证计划（同日 2×2 股 + 跨模型）；未批准则催决策 |
 | 2026-09-01 | web_fetch 稀薄结果升级 crawl4ai（预算 3/run）+ web_screenshot 上线 | **2026-10-01 due**: 扫 llm_meta.json 统计升级触发次数/成功率/预算耗尽次数；从未触发或全失败 → 简化或下线 |
 | 2026-08-28 | CANDIDATE_ALPHA 审计发现 MA 对齐门在 20 日口径反向（+8.75pt gap），结论"需更长窗口复现后再动规则" | **2026-11-01 due**: 数据多两个月后重跑 `python3 scripts/research/candidate_alpha.py --human`，MA-gate 结论仍成立 → 提改 Rule 2b 的正式提案 |
+| 2026-10-08 | 账本开始记入分红/送转（corporate_actions.apply_due，phase 3 step 0a；000739 与 603259 两笔待回补，干跑合计到账 326.74） | **2026-10-09 due**: 合并后首个流水线 slot 跑完，核对 tracking/000739.json + 603259.json 带 `corporateActions`、positions.json `portfolio.dividendCash == 326.74`、Gate 3 notes 有两条 dividend、`doctor.py --open` 无新 invariant |
 
 ## Resolved
 

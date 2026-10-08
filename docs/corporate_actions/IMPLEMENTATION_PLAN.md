@@ -19,7 +19,7 @@ cash (~¥236). position_manager.py has no corporate-action handling at all;
 EX_DIVIDEND_DATE, ASSIGN_PROGRESS == 实施分配). Fetch failure → None (loud),
 never a hard fail.
 **Tests**: parse fixture rows; failure returns None; non-implemented plans skipped.
-**Status**: Not Started
+**Status**: Complete
 
 ## Stage 2: apply to the book (idempotent)
 **Goal**: for each active position, events with entryDate < exDate <= run date
@@ -29,9 +29,9 @@ credited (tax by holding period), 送转 → shares × (1+r/10) floored, entryPr
 dividend cash; a later close's returnPct includes dividends received.
 **Tests**: cash credit + tax brackets; 送转 shares/entry; idempotent re-run;
 event before entryDate ignored; fetch failure leaves book untouched.
-**Status**: Not Started
+**Status**: Complete
 
 ## Stage 3: pipeline wiring
 **Goal**: applied at the start of Phase 3 every slot, recorded in the run log /
 manifest; doctor stays green.
-**Status**: Not Started
+**Status**: Complete
