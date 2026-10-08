@@ -23,3 +23,13 @@
   (04-14, 06-10, 09-04) cluster per day both directions = previous "close"
   snapshot not at the real close — separate issue, not investigated.
 - Holiday-run snapshot (09-25) as previous point no longer blanks 超额 (pdi).
+- Click-a-position history window: any side-panel holding / 当前持仓 /
+  历史交易 row opens raw daily candles (20 sessions before entry → 5 after
+  exit) from the local price DB, entry/exit/add/trim markers, cost + target
+  lines, stop as a step line through KNOWN levels only (OPEN `stop`,
+  RAISE_STOP `new_stop`; older RAISE_STOPs lack the value), thesis, exit
+  reason, and the day-by-day action timeline. 68 trades (64 closed + 4 open).
+- Bug caught in browser test: `#posmodal{display:flex}` overrode `hidden`,
+  so the invisible window blocked every click → `#posmodal[hidden]`.
+- Trade tables: names/dates no longer wrap one char per line; exit reason
+  clipped to 2 lines (full text in the window); tables scroll on phones.

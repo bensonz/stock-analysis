@@ -452,3 +452,64 @@ def test_holding_flags_book_prev_price_that_is_not_the_quote_prev_close(tmp_path
         s = series(prev_date, prev_time)
         bs.attach_holding_day_pcts(s, sessions)
         assert "xd" not in s[1]["holdings"][0] and s[1]["holdings"][0]["d"] == -1.74
+
+
+def _price_db(path, rows):
+    import sqlite3
+    conn = sqlite3.connect(path)
+    conn.execute("CREATE TABLE daily_prices (code TEXT, date TEXT, open REAL, high REAL,"
+                 " low REAL, close REAL, volume INTEGER, amount REAL, PRIMARY KEY (code, date))")
+    conn.executemany("INSERT INTO daily_prices VALUES (?,?,?,?,?,?,0,0)", rows)
+    conn.commit(); conn.close()
+
+
+def test_trade_history_bars_window_and_known_stops_only(tmp_path, monkeypatch):
+    monkeypatch.setattr(bs, "HIST_BARS_BEFORE", 2)
+    monkeypatch.setattr(bs, "HIST_BARS_AFTER", 1)
+    days = [f"2026-09-{d:02d}" for d in (14, 15, 16, 17, 18, 21, 22)]
+    _price_db(tmp_path / "p.db", [("000739", d, 10, 11, 9, 10.5) for d in days])
+    trade = {"code": "000739.SZ", "name": "普洛药业", "entryDate": "2026-09-16",
+             "exitDate": "2026-09-18", "entryPrice": 10.0, "exitPrice": 10.5,
+             "returnPct": 5.0, "stopLoss": 9.5, "history": [
+                 {"date": "2026-09-16", "slot": "noon", "action": "OPEN", "price": 10.0, "stop": 9.5},
+                 {"date": "2026-09-17", "action": "RAISE_STOP", "price": 10.4},          # level unknown
+                 {"date": "2026-09-18", "action": "RAISE_STOP", "price": 10.5, "new_stop": 10.0},
+                 {"date": "2026-09-18", "action": "SELL", "price": 10.5}]}
+    out = bs.collect_trade_histories([trade], tmp_path / "p.db")
+    t = out["000739|2026-09-16"]
+    assert [b[0] for b in t["bars"]] == ["2026-09-14", "2026-09-15", "2026-09-16",
+                                         "2026-09-17", "2026-09-18", "2026-09-21"]
+    assert t["stops"] == [["2026-09-16", 9.5], ["2026-09-18", 10.0]]
+    assert "st" not in t["ev"][1] and t["ev"][2]["st"] == 10.0
+    assert t["ev"][0]["s"] == "午盘"
+
+
+def test_trade_history_open_trade_runs_to_latest_bar(tmp_path):
+    _price_db(tmp_path / "p.db", [("603259", d, 1, 2, 0.5, 1.5)
+                                  for d in ("2026-09-30", "2026-10-08")])
+    out = bs.collect_trade_histories(
+        [{"code": "603259", "entryDate": "2026-09-30", "pnl_pct": 3.0, "history": []}],
+        tmp_path / "p.db")
+    t = out["603259|2026-09-30"]
+    assert [b[0] for b in t["bars"]] == ["2026-09-30", "2026-10-08"]
+    assert t["xd"] is None and t["r"] == 3.0
+
+
+def test_trade_history_without_price_db_says_why(tmp_path):
+    out = bs.collect_trade_histories(
+        [{"code": "603259", "entryDate": "2026-09-30", "history": []}], tmp_path / "none.db")
+    t = out["603259|2026-09-30"]
+    assert t["bars"] == [] and t["bars_missing"]
+
+
+def test_trade_rows_are_clickable_only_with_a_history():
+    series = [{"date": "2026-09-30", "equity": 1e6}]
+    trades = [{"code": "000739", "name": "普洛药业", "entryDate": "2026-09-16",
+               "exitDate": "2026-09-18", "returnPct": 5.0},
+              {"code": "601872", "name": "招商轮船", "entryDate": "2026-09-01",
+               "exitDate": "2026-09-05", "returnPct": -2.0}]
+    hist = {"000739|2026-09-16": {"c": "000739"}}
+    out = bs.render_html(series, {"portfolio": {}, "activePositions": []}, trades,
+                         bs.compute_stats(series, trades), trade_hist=hist)
+    assert "data-tk='000739|2026-09-16'" in out
+    assert "601872|2026-09-01" not in out.split("const TRADES")[0]

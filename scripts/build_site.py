@@ -40,6 +40,7 @@ TRACKING_DIR = PROJECT_ROOT / "tracking"
 SITE_DIR = PROJECT_ROOT / "site"
 INDEX_CACHE = PROJECT_ROOT / "data" / "index_cache" / "sh000001.json"
 INDEX_OHLC_CACHE = PROJECT_ROOT / "data" / "index_cache" / "sh000001_ohlc.json"
+PRICE_DB = PROJECT_ROOT / "data" / "pricedb" / "ashare_prices.db"
 
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 NOTE_MAX = 170
@@ -626,6 +627,104 @@ def load_closed_trades(tracking_dir: Path = TRACKING_DIR) -> list[dict]:
     return trades
 
 
+# ------------------------------------------------------------ position history
+
+HIST_BARS_BEFORE = 20   # sessions of context before entry
+HIST_BARS_AFTER = 5     # and after exit
+HIST_NOTE_MAX = 400
+
+
+def trade_key(code: str, entry_date: str) -> str:
+    """One round trip = code + entry date (a code can be traded many times)."""
+    return f"{str(code).split('.')[0]}|{entry_date}"
+
+
+def load_active_trade_files(tracking_dir: Path = TRACKING_DIR) -> list[dict]:
+    """tracking/<code>.json for open positions — positions.json has no history."""
+    out = []
+    for f in sorted(tracking_dir.glob("*.json")):
+        try:
+            p = _read_json(f)
+        except Exception:
+            continue
+        if isinstance(p, dict) and p.get("status") == "active" and p.get("entryDate"):
+            out.append(p)
+    return out
+
+
+def _stock_bars(conn, code: str, start: str, end: str | None) -> list[list]:
+    """Raw (unadjusted, as the book prices them) daily bars around a trade:
+    HIST_BARS_BEFORE sessions before `start`, through `end` (None = latest),
+    plus HIST_BARS_AFTER sessions after it."""
+    q = "SELECT date, open, high, low, close FROM daily_prices WHERE code = ? AND "
+    before = conn.execute(q + "date < ? ORDER BY date DESC LIMIT ?",
+                          (code, start, HIST_BARS_BEFORE)).fetchall()[::-1]
+    if end:
+        during = conn.execute(q + "date >= ? AND date <= ? ORDER BY date",
+                              (code, start, end)).fetchall()
+        after = conn.execute(q + "date > ? ORDER BY date LIMIT ?",
+                             (code, end, HIST_BARS_AFTER)).fetchall()
+    else:
+        during = conn.execute(q + "date >= ? ORDER BY date", (code, start)).fetchall()
+        after = []
+    return [[d, o, h, l, c] for d, o, h, l, c in before + during + after
+            if None not in (o, h, l, c)]
+
+
+def collect_trade_histories(trades: list[dict], db_path: Path = PRICE_DB) -> dict:
+    """{trade_key: payload} for the click-a-position view.
+
+    Bars come from the local price DB; when it is missing or unreadable each
+    trade still gets its timeline, with `bars_missing` set so the UI says why
+    there is no chart instead of drawing an empty one.
+    """
+    conn = None
+    if db_path and Path(db_path).exists():
+        try:
+            import sqlite3
+            conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
+        except Exception as e:
+            print(f"[site] price DB unreadable ({e}); position charts off", file=sys.stderr)
+    out = {}
+    for t in trades:
+        code = str(t.get("code", "")).split(".")[0]
+        ed = t.get("entryDate")
+        if not code or not ed:
+            continue
+        events = []
+        stops = []   # known stop levels only: OPEN `stop`, RAISE_STOP `new_stop`
+        if t.get("stopLoss") is not None:
+            stops.append([ed, t["stopLoss"]])
+        for h in t.get("history") or []:
+            ev = {"d": h.get("date"), "s": SLOT_LABEL.get(h.get("slot"), h.get("slot") or ""),
+                  "a": h.get("action"), "px": h.get("price"), "r": h.get("change_pct"),
+                  "note": _trunc(h.get("note"), HIST_NOTE_MAX)}
+            new_stop = h.get("new_stop", h.get("stop"))
+            if isinstance(new_stop, (int, float)):
+                ev["st"] = new_stop
+                if not stops or stops[-1][1] != new_stop:
+                    stops.append([h.get("date"), new_stop])
+            events.append(ev)
+        rec = {"c": code, "n": t.get("name", ""), "ed": ed, "xd": t.get("exitDate"),
+               "ep": t.get("entryPrice"), "xp": t.get("exitPrice"),
+               "r": t.get("returnPct") if t.get("exitDate") else t.get("pnl_pct"),
+               "tp": t.get("targetPrice"), "cs": t.get("currentStop"),
+               "sec": t.get("sector") or "", "why": _trunc(t.get("exitReason"), HIST_NOTE_MAX),
+               "th": _trunc(t.get("thesis"), HIST_NOTE_MAX), "sh": t.get("shares"),
+               "stops": stops, "ev": events, "bars": []}
+        if conn is None:
+            rec["bars_missing"] = "本地价格库不可用"
+        else:
+            try:
+                rec["bars"] = _stock_bars(conn, code, ed, t.get("exitDate"))
+            except Exception as e:
+                rec["bars_missing"] = f"价格库读取失败: {e}"
+        out[trade_key(code, ed)] = rec
+    if conn is not None:
+        conn.close()
+    return out
+
+
 def compute_stats(series: list[dict], trades: list[dict]) -> dict:
     stats = {}
     if series:
@@ -703,7 +802,7 @@ ASSETS_DIR = Path(__file__).parent / "site_assets"
 # The page's JS and CSS live in real files (2026-10-08) so editors and
 # linters can see them; build inlines them, so the output is still one
 # offline HTML file. JS data arrives by token replacement:
-# __DATA__ __DETAILS__ __STARTING__ __IDXBASE__
+# __DATA__ __DETAILS__ __STARTING__ __IDXBASE__ __TRADES__
 CHART_JS = (ASSETS_DIR / "app.js").read_text(encoding="utf-8").rstrip("\n")
 SITE_CSS = (ASSETS_DIR / "app.css").read_text(encoding="utf-8").rstrip("\n")
 
@@ -711,7 +810,7 @@ SITE_CSS = (ASSETS_DIR / "app.css").read_text(encoding="utf-8").rstrip("\n")
 def render_html(series, active, trades, stats, details=None, index_rebased=None,
                 events=None, badges=None, generated_at=None, run_status=None,
                 idx_base=None, index_bars=None, index_closes=None,
-                intraday_idx=None) -> str:
+                intraday_idx=None, trade_hist=None) -> str:
     pf = active.get("portfolio", {})
     positions = active.get("activePositions", [])
     details = details or {}
@@ -719,6 +818,7 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
     index_bars = index_bars or {}
     index_closes = index_closes or {}
     intraday_idx = intraday_idx or {}
+    trade_hist = trade_hist or {}
     badges = badges or []
     generated_at = generated_at or datetime.now().astimezone().isoformat(timespec="seconds")
 
@@ -803,8 +903,12 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
         for b in badges
     )
 
+    def _tk_attr(t):
+        k = trade_key(t.get("code", ""), t.get("entryDate", ""))
+        return f" class='tk' data-tk='{html.escape(k)}' title='点击查看该笔交易走势'" if k in trade_hist else ""
+
     pos_rows = "\n".join(
-        "<tr>"
+        f"<tr{_tk_attr(p)}>"
         f"<td>{html.escape(p.get('code', ''))}</td>"
         f"<td>{html.escape(p.get('name', ''))}</td>"
         f"<td>{html.escape(p.get('entryDate', ''))}"
@@ -820,14 +924,14 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
     ) or "<tr><td colspan='9' class='empty'>当前空仓</td></tr>"
 
     trade_rows = "\n".join(
-        "<tr>"
+        f"<tr{_tk_attr(t)}>"
         f"<td>{html.escape(t.get('code', ''))}</td>"
         f"<td>{html.escape(t.get('name', ''))}</td>"
         f"<td>{html.escape(t.get('entryDate', ''))}{_slot_tag(t.get('entrySlot'))}</td>"
         f"<td>{html.escape(t.get('exitDate', ''))}{_slot_tag(t.get('exitSlot'))}</td>"
         f"<td class='num'>{t.get('holdingDays', '—')}</td>"
         f"<td class='num {_pnl_cls(t.get('returnPct'))}'>{_pct(t.get('returnPct'))}</td>"
-        f"<td>{html.escape(str(t.get('exitReason', '') or ''))}</td>"
+        f"<td class='why'><div>{html.escape(str(t.get('exitReason', '') or ''))}</div></td>"
         "</tr>"
         for t in trades
     ) or "<tr><td colspan='7' class='empty'>暂无已平仓交易</td></tr>"
@@ -857,7 +961,8 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
           .replace("__DATA__", json.dumps(chart_data, ensure_ascii=False))
           .replace("__DETAILS__", json.dumps(details, ensure_ascii=False))
           .replace("__STARTING__", json.dumps(starting))
-          .replace("__IDXBASE__", json.dumps(idx_base)))
+          .replace("__IDXBASE__", json.dumps(idx_base))
+          .replace("__TRADES__", json.dumps(trade_hist, ensure_ascii=False)))
 
     return f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -900,6 +1005,8 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
   </div>
   <div id="tip"></div>
   <div id="rowtip"></div>
+  <div id="posmodal" hidden><div class="pm-box" role="dialog" aria-modal="true">
+    <button class="pm-x" id="pm-x" title="关闭 (Esc)">✕</button><div id="pm-body"></div></div></div>
 
   {events_html}
 
@@ -953,6 +1060,12 @@ def build(site_dir: Path = SITE_DIR) -> Path:
     dates = [p["date"] for p in series]
     index_rebased = rebase_index(index_closes, dates, float(starting))
     idx_base = index_base(index_closes, dates[0]) if dates else None
+    open_files = load_active_trade_files()
+    live_pnl = {str(p.get("code", "")).split(".")[0]: p.get("pnl_pct")
+                for p in active.get("activePositions", [])}
+    for t in open_files:
+        t.setdefault("pnl_pct", live_pnl.get(str(t.get("code", "")).split(".")[0]))
+    trade_hist = collect_trade_histories(trades + open_files)
     events = load_events()
     badges = load_badges(series)
     site_dir.mkdir(parents=True, exist_ok=True)
@@ -962,7 +1075,8 @@ def build(site_dir: Path = SITE_DIR) -> Path:
                                badges=badges, run_status=load_latest_run_status(),
                                idx_base=idx_base, index_bars=index_bars,
                                index_closes=index_closes,
-                               intraday_idx=intraday_index_pcts(series)),
+                               intraday_idx=intraday_index_pcts(series),
+                               trade_hist=trade_hist),
                    encoding="utf-8")
     print(f"[site] {out} — {len(series)} equity points "
           f"({len(index_rebased)} with index overlay), "
