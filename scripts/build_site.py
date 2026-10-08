@@ -82,6 +82,9 @@ def _snapshot_point(path: Path):
             "ret_pct": pf.get("totalReturnPct"),
             "positions": pf.get("positionsUsed"),
             "starting": pf.get("startingCapital"),
+            # Open positions' dividend cash (field exists from 2026-10-08;
+            # absent = none booked yet, the book credited no dividends before).
+            "div": pf.get("dividendCash") or 0.0,
             "holdings": holdings,
         }
     except Exception:
@@ -271,6 +274,7 @@ def collect_day_details(series: list[dict], trades: list[dict],
 
     details = {}
     prev_equity = None
+    prev_div = None
     for p in series:
         d = p["date"]
         det = {
@@ -297,6 +301,10 @@ def collect_day_details(series: list[dict], trades: list[dict],
             det["stale_marks"] = 1
         if p.get("synthetic"):
             det["slot"] = "起始"
+        elif prev_div is not None and round((p.get("div") or 0) - prev_div, 2):
+            # dividend cash booked since the previous snapshot — moves equity
+            # with no price move, so the holdings check must not call it a gap
+            det["div_in"] = round((p.get("div") or 0) - prev_div, 2)
         elif prev_equity is not None and isinstance(p.get("equity"), (int, float)):
             det["day_pnl"] = round(p["equity"] - prev_equity, 2)
         # Decisions come from the winning snapshot's run dir; if that run
@@ -352,6 +360,7 @@ def collect_day_details(series: list[dict], trades: list[dict],
         details[d] = det
         if not p.get("synthetic") and isinstance(p.get("equity"), (int, float)):
             prev_equity = p["equity"]
+            prev_div = p.get("div") or 0.0
     return details
 
 

@@ -35,10 +35,13 @@ function holdingsCheck(det, p) {
   if (!hs.length || hs.some(x => x.d == null || x.v == null)) return "";
   const pnl = hs.reduce((a, x) => a + x.v * x.d / (100 + x.d), 0);
   const c = Math.round(pnl / (det.equity - det.day_pnl) * 10000) / 100;
-  const gap = Math.round(pnl - det.day_pnl);
+  // Dividend cash booked since the last snapshot raises equity with no
+  // price move: take it out of the gap and name it.
+  const gap = Math.round(pnl - det.day_pnl + (det.div_in || 0));
   // Only actions that move cash or shares; RAISE_STOP / HOLD change nothing.
   const trades = (det.actions || []).some(a => TRADE_ACTS[a.a]) || (det.closed || []).length;
   return `<div class="mini">持仓当日贡献合计 <b class="${pnlCls(c)}">${pctTxt(c)}</b> (${sign(pnl)}${fmtM(pnl)}) · 组合 ${pctTxt(p.pr)} (${sign(det.day_pnl)}${fmtM(det.day_pnl)})`
+       + (det.div_in ? ` · 含分红到账 ${sign(det.div_in)}${fmtM(det.div_in)}` : "")
        + (Math.abs(gap) > 20 ? ` · 差 ${sign(gap)}${fmtM(gap)}` : "")
        + (Math.abs(gap) > 20
           ? (trades ? "（当日有交易，二者不必相等）"
