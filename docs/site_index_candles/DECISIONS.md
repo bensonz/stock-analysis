@@ -27,3 +27,8 @@
 - **Per-stock day % from the run's own quote, not snapshot-to-snapshot.**
   It is the number a quote app shows; a book-vs-quote difference is shown as
   a ⚠ flag + a yuan gap in the check line instead of being blended away.
+- **Site JS/CSS moved to scripts/site_assets/{app.js,app.css}** (owner choice
+  2026-10-08), inlined at build — output stays one offline HTML. Not
+  `scripts/site/`: a dir named `site` on sys.path shadows the stdlib module.
+  Verified: rendered HTML identical except one blank line at each end of
+  the script block.
