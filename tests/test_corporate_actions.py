@@ -398,6 +398,7 @@ def test_phase3_step_survives_a_crashing_apply():
     assert log["corporate_actions"]["status"] == "degraded"
     assert "disk full" in log["corporate_actions"]["error"]
     assert not any(a.startswith("ERROR") for a in log["actions"])
+    assert any("CORP_ACTION FAILED" in a and "disk full" in a for a in log["actions"])
 
 
 def test_gate3_soft_warns_on_fetch_failure():

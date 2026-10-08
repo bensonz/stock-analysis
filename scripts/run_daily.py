@@ -1723,6 +1723,8 @@ def apply_corporate_actions(date: str, data: dict, log: dict, apply_fn=None) -> 
                "fetch_failed": [], "error": f"{type(e).__name__}: {e}",
                "warnings": [f"WARN corporate actions apply crashed: {e}"]}
         print(f"  ⚠ corporate actions apply crashed: {e}", file=sys.stderr)
+        # not "ERROR …": that prefix hard-fails Gate 3; this one soft-warns
+        log["actions"].append(f"CORP_ACTION FAILED: {res['error']}")
     log["corporate_actions"] = res
 
     for a in res.get("applied") or []:
