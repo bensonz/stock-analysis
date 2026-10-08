@@ -16,13 +16,13 @@
         · … 另有 16 次更早的
 
   ▸ manifest_present  [invariant]
-      9 次 / 8 天   2026-02-02 … 2026-09-21   最长连续 3
+      10 次 / 9 天   2026-02-02 … 2026-10-06   最长连续 3
       改这里: scripts/run_daily.py (write the manifest before preflight)
-        · 2026-09-09 noon      该时段没有 manifest
         · 2026-09-11 noon      该时段没有 manifest
         · 2026-09-11 afternoon 该时段没有 manifest
         · 2026-09-21 afternoon 该时段没有 manifest
-        · … 另有 5 次更早的
+        · 2026-10-06 afternoon 该时段没有 manifest
+        · … 另有 6 次更早的
 
 
 ## 需要人工操作 (5)
@@ -62,13 +62,13 @@
         · 2026-09-25 afternoon 快照写入 0 行
 
   ▸ db_health_spot_check  [env]
-      22 次 / 22 天   2026-08-12 … 2026-09-29   最长连续 2
+      23 次 / 23 天   2026-08-12 … 2026-09-30   最长连续 2
       执行:   python3 scripts/pricedb.py status
-        · 2026-09-23 afternoon 抽查 20 只、实际核对 0 只
         · 2026-09-24 afternoon 抽查 20 只、实际核对 0 只
         · 2026-09-28 afternoon 抽查 20 只、实际核对 0 只
         · 2026-09-29 afternoon 抽查 20 只、实际核对 0 只
-        · … 另有 18 次更早的
+        · 2026-09-30 afternoon 抽查 20 只、实际核对 0 只
+        · … 另有 19 次更早的
 
 
 ## 已知并接受 (1)

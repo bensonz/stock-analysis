@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 199806,
+  "output_tokens": 23675,
+  "rounds": 3,
+  "duration_sec": 285.5,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "航运港口 板块 上涨 原因 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3844
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月8日 大盘 下跌 半导体 原因",
+        "max_results": 5
+      },
+      "result_length": 4383
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "油运 原油 运价 上涨 2026年10月 油服",
+        "max_results": 5
+      },
+      "result_length": 3972
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "海通发展 干散货 航运 业绩 2026",
+        "max_results": 5
+      },
+      "result_length": 3699
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "炼化 油价 上涨 恒逸石化 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3896
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年10月8日 A股 收盘 半导体 医药 下跌 热点",
+        "max_results": 5
+      },
+      "result_length": 3457
+    }
+  ],
+  "fallback_used": false
+}

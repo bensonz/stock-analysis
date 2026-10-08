@@ -1,0 +1,141 @@
+{
+  "as_of": "2026-10-08",
+  "window_days": 21,
+  "dated": [
+    {
+      "date": "2026-10-09",
+      "tz": "CN",
+      "name": "国庆长假后首个交易日",
+      "kind": "liquidity",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "一次性吸收假期内全球市场累计波动的跳空窗口",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "direction": "risk",
+      "a_share_impact_date": "2026-10-09",
+      "days_until_impact": 1
+    },
+    {
+      "date": "2026-10-13",
+      "tz": "US",
+      "name": "美国9月CPI公布（日期待BLS确认）",
+      "kind": "macro_release",
+      "certainty": "estimated",
+      "impact": "medium",
+      "notes": "常规为10月中旬周二/周三；以 bls.gov/schedule 为准。",
+      "source": "https://www.bls.gov/schedule/news_release/cpi.htm",
+      "direction": "risk",
+      "a_share_impact_date": "2026-10-14",
+      "days_until_impact": 6
+    },
+    {
+      "date": "2026-10-16",
+      "tz": "CN",
+      "name": "CFFEX股指期货/期权交割日（第3周五）",
+      "kind": "opex",
+      "certainty": "scheduled",
+      "impact": "low",
+      "notes": "复测(n=48): 当日中证1000均值-0.33% vs 基线+0.03%(26/48收跌, ~1.5se)——偏弱但不显著, 观察项（复测: scripts/research/index_event_study.py --expiry-study）",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "direction": "risk",
+      "a_share_impact_date": "2026-10-16",
+      "days_until_impact": 8
+    },
+    {
+      "date": "2026-10-16",
+      "tz": "US",
+      "name": "美股月度OpEx（期权到期，GEX集中兑现）",
+      "kind": "opex",
+      "certainty": "scheduled",
+      "impact": "low",
+      "notes": "复测(n=48): 次日中证1000均值-0.18% vs 基线+0.03%——无显著效应, 仅作提示（复测: scripts/research/index_event_study.py --expiry-study）",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "direction": "risk",
+      "a_share_impact_date": "2026-10-19",
+      "days_until_impact": 11
+    },
+    {
+      "date": "2026-10-20",
+      "tz": "CN",
+      "name": "二十届五中全会（10月，具体日期待公布）",
+      "kind": "policy_meeting",
+      "certainty": "estimated",
+      "impact": "high",
+      "notes": "7月政治局会议已定10月北京召开。审议'十五五'规划建议——规划主题板块（科技自立/新质生产力/生物医药/AI）的政策主线事件。",
+      "source": "新华社7/30政治局会议通稿(官宣10月召开); 具体日期未公布",
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-10-20",
+      "days_until_impact": 12
+    },
+    {
+      "date": "2026-10-20",
+      "tz": "CN",
+      "name": "LPR报价",
+      "kind": "cb_rate",
+      "certainty": "scheduled",
+      "impact": "low",
+      "notes": "通常已被MLF预告；意外调降=政策信号事件",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-10-20",
+      "days_until_impact": 12
+    },
+    {
+      "date": "2026-10-28",
+      "tz": "CN",
+      "name": "A股ETF期权到期日（第4周三）",
+      "kind": "opex",
+      "certainty": "scheduled",
+      "impact": "low",
+      "notes": "复测(n=48): 当日中证1000均值-0.01%≈基线——无效应, 仅作日历提示（复测: scripts/research/index_event_study.py --expiry-study）",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "direction": "risk",
+      "a_share_impact_date": "2026-10-28",
+      "days_until_impact": 20
+    },
+    {
+      "date": "2026-10-28",
+      "tz": "US",
+      "name": "FOMC利率决议",
+      "kind": "cb_decision",
+      "certainty": "scheduled",
+      "impact": "high",
+      "notes": "无点阵图。影响10/29A股。",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "direction": "risk",
+      "a_share_impact_date": "2026-10-29",
+      "days_until_impact": 21
+    }
+  ],
+  "ongoing": [
+    {
+      "name": "霍尔木兹海峡危机（美伊冲突）",
+      "kind": "geopolitical",
+      "impact": "high",
+      "notes": "2/28美以对伊开战以来海峡断航；4月停火后7/7再度交火，南航道AIS过航归零（7/10）。油价与全球风险偏好的持续压力源——7月中旬A股动量池系统性崩塌与此同窗。观察：停火/协议进展、油轮通行恢复、再升级。",
+      "source": "新闻跟踪(多源); 南航道AIS过航数据见公开船讯平台",
+      "direction": "risk"
+    }
+  ],
+  "recent": [],
+  "risk_window": {
+    "level": "elevated",
+    "imminent": [],
+    "ongoing_high_impact": [
+      "霍尔木兹海峡危机（美伊冲突）"
+    ],
+    "advice": "存在持续性高冲击风险源（背景风险，非临近事件）：单笔规模取谨慎档。注意：这不是停买信号——通过全部规则的标的仍应减量执行；持续性风险不得作为长期零部署的理由"
+  },
+  "fomc_next_session_stats": {
+    "n": 13,
+    "sessions_negative": 10,
+    "mean_ew_ret_pct": -0.74,
+    "worst": {
+      "decision": "2026-03-18",
+      "session": "2026-03-19",
+      "ew_ret_pct": -2.43,
+      "up_ratio_pct": 9.0
+    },
+    "note": "样本仅13次（本地价格库范围），供参考不构成概率"
+  }
+}

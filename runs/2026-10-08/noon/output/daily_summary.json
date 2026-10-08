@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-08",
+  "actions": [
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 22.17,
+      "pnl_pct": 14.9,
+      "note": "浮盈+14.9%守住保本止损19.29未触发(现价22.17，今日+10.02%近涨停)；航运港口今日#1(+4.05%)，正处油运超级周期核心(VLCC TCE 63.1万美元/天历史高点，来源:21经济网)，让赢家奔跑"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "RAISE_STOP",
+      "price": 52.88,
+      "pnl_pct": 23.4,
+      "note": "浮盈+23.4%突破+20%阈值，按Rule 5机械上移止损至+10%(47.14)；医疗服务未入bottom5；今日+7.26%"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 165.95,
+      "pnl_pct": 31.2,
+      "note": "浮盈+31.2%让利润奔跑，止损已锁+10%(139.15)未触发(现价165.95，今日-0.83%)；CXO龙头，医疗服务未入bottom5"
+    },
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "price": 27.13,
+      "pnl_pct": 12.1,
+      "note": "浮盈+12.1%守住保本止损24.21未触发(现价27.13，今日-1.74%)；化学制药/原料药未入bottom5；margin deleveraging为风险提示非卖出触发"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 989713.0,
+    "dayPnl": 3247.0,
+    "dayReturnPct": 0.33,
+    "totalReturnPct": -1.03,
+    "unrealizedPnl": 27127.0,
+    "realizedPnl": -37414.0,
+    "cashPct": 84.24
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.6253,
+    "up": 2076,
+    "down": 3320,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 43,
+    "limit_downs": 9,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.63:1, 0/3 major indices green, 43 limit-ups / 9 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "弱市防御轮动：0/3指数红盘(上证-0.27%/深成-1.24%/创业板-2.13%/科创50-3.66%)，宽度0.63:1(2076涨/3320跌/43涨停/9跌停)，非恐慌但明显偏弱。资金从科技(半导体-3.87%/通信设备-3.58%)切向地缘溢价防御板块：航运港口#1(+4.05%)由霍尔木兹海峡关闭+油运超级周期驱动(VLCC TCE 63.1万美元/天历史高点，来源:21经济网)，油服工程+3.17%/炼化及贸易+3.15%跟涨。IV整体偏乐观(avg iv_rank 0.25)，500ETF iv_rank 0.145/深500 0.05偏低。sector数据为今日单日涨跌幅。弱市默认不新开仓，持有现金84%。"
+  }
+}

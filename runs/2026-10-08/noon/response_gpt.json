@@ -1,0 +1,204 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "航运港口",
+        "5d_pct": 4.05,
+        "trend": "accelerating"
+      },
+      {
+        "name": "其他家电Ⅱ",
+        "5d_pct": 3.22,
+        "trend": "steady"
+      },
+      {
+        "name": "油服工程",
+        "5d_pct": 3.17,
+        "trend": "steady"
+      },
+      {
+        "name": "炼化及贸易",
+        "5d_pct": 3.15,
+        "trend": "steady"
+      },
+      {
+        "name": "航海装备Ⅱ",
+        "5d_pct": 2.77,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "半导体",
+        "5d_pct": -3.87,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": -3.58,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": -3.4,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "生物制品",
+        "5d_pct": -3.36,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": -3.26,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "1/4 positions in hot sectors（招商轮船-航运港口#1；普洛/昭衍/药明属医药生物，今日中性偏弱）",
+    "regime": "防御板块领涨(航运/油服/炼化)，科技(半导体/通信)领跌，弱势避险轮动"
+  },
+  "position_decisions": [
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+14.9%守住保本止损19.29未触发(现价22.17，今日+10.02%近涨停)；航运港口今日#1(+4.05%)，正处油运超级周期核心(VLCC TCE 63.1万美元/天历史高点，来源:21经济网)，让赢家奔跑",
+      "sector_rank": "top 5%（航运港口#1 +4.05%）",
+      "new_stop": null,
+      "pnl_pct": 14.9,
+      "days_held": 21,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "RAISE_STOP",
+      "reason": "浮盈+23.4%突破+20%阈值，按Rule 5机械上移止损至+10%(47.14)；医疗服务未入bottom5；今日+7.26%",
+      "sector_rank": "中性（未入top5/bottom5）",
+      "new_stop": 47.14,
+      "pnl_pct": 23.4,
+      "days_held": 14,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+31.2%让利润奔跑，止损已锁+10%(139.15)未触发(现价165.95，今日-0.83%)；CXO龙头，医疗服务未入bottom5",
+      "sector_rank": "中性（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 31.2,
+      "days_held": 45,
+      "exit_price": null
+    },
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "HOLD",
+      "reason": "浮盈+12.1%守住保本止损24.21未触发(现价27.13，今日-1.74%)；化学制药/原料药未入bottom5；margin deleveraging为风险提示非卖出触发",
+      "sector_rank": "中性（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 12.1,
+      "days_held": 8,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "航运港口#1但核心运力为干散货船，与驱动板块的油运VLCC超级周期基本脱节(来源:ZAKER)，仅被板块情绪带动；RPS120=93.99扩展区、2风险因子(09-11抛压/换手15%)、无VCP；弱市宽度0.63:1不追",
+      "rps120": 93.99
+    },
+    {
+      "code": "600428",
+      "name": "中远海特",
+      "reason": "航运#1但rps20=30.1、现价11.01低于MA20(11.22,-1.8%)，是滞涨非买强",
+      "rps120": 88.4
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "炼化及贸易#4(+3.15%)+Q1净利+3773%(来源:雪球/证券市场周刊)，但rps20=8.45、现价低于MA20(-2.7%)，催化未传导到价格，不接",
+      "rps120": 91.13
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "dist_ma5=12.5%/ma10=16.7%/ma20=25.6%严重超买，Rule 2b追高跳过",
+      "rps120": 93.76
+    },
+    {
+      "code": "002832",
+      "name": "比音勒芬",
+      "reason": "RPS120=94.63扩展区，纺织服饰非top10%、1风险、净利-18.7%，三项豁免条件均不满足",
+      "rps120": 94.63
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "rps20=16.28短期动量衰竭，有色金属非今日热区，margin chg5=-9.67%去杠杆",
+      "rps120": 91.79
+    },
+    {
+      "code": "601918",
+      "name": "新集能源",
+      "reason": "煤炭非今日热区，margin signal=deleveraging(chg5=-9.82%)",
+      "rps120": 93.1
+    },
+    {
+      "code": "001378",
+      "name": "德冠新材",
+      "reason": "基础化工/膜材料非热区，margin chg5=-23.48%强去杠杆",
+      "rps120": 90.19
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "板块热≠个股催化对得上：海通发展(603162)位列航运港口#1，但核心运力是干散货船，与驱动板块的油运VLCC超级周期基本脱节(来源:ZAKER明确区分)，今日仅被板块情绪带动。买入前须核对催化是否真正属于该股，而非只看板块排名。",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h028",
+      "mechanism": "同板块内子行业供需周期独立，板块指数被龙头驱动时，尾部个股易出现'假热点'跟涨"
+    },
+    {
+      "text": "弱市宽度0.63:1+0/3指数红盘时，即便#1板块存在RPS/MA合规个股，也按default返回new_positions:[]。今日航运港口#1有海通发展/中远海特两名候选，但均非干净setup，弱市纪律优先于FOMO。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "弱市中防御板块上涨多为避险资金脉冲，追入次日回撤概率高"
+    },
+    {
+      "text": "恒逸石化(000703)炼化#4板块+Q1净利+3773%(来源:雪球/证券市场周刊)超级催化，但rps20=8.45、现价低于MA20(-2.7%)——催化未传导到价格时是'滞涨'而非'买强'，动量系统不接。",
+      "type": "observation",
+      "tags": [
+        "timing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "强板块内的弱个股往往有资金流出/抛压等隐性原因，价格相对强弱是最终裁判"
+    },
+    {
+      "text": "昭衍新药+23.4%突破+20%阈值，按Rule 5机械上移止损至+10%(47.14)——弱市里把快赢家转成低风险持仓，与h023一致。",
+      "type": "rule",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "止损上移锁定已实现区间，无需新的市场方向判断"
+    }
+  ],
+  "market_summary": "弱市防御轮动：0/3指数红盘(上证-0.27%/深成-1.24%/创业板-2.13%/科创50-3.66%)，宽度0.63:1(2076涨/3320跌/43涨停/9跌停)，非恐慌但明显偏弱。资金从科技(半导体-3.87%/通信设备-3.58%)切向地缘溢价防御板块：航运港口#1(+4.05%)由霍尔木兹海峡关闭+油运超级周期驱动(VLCC TCE 63.1万美元/天历史高点，来源:21经济网)，油服工程+3.17%/炼化及贸易+3.15%跟涨。IV整体偏乐观(avg iv_rank 0.25)，500ETF iv_rank 0.145/深500 0.05偏低。sector数据为今日单日涨跌幅。弱市默认不新开仓，持有现金84%。",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}
