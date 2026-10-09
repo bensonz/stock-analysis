@@ -399,11 +399,11 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && pinned) 
   function chart(t) {
     const B = t.bars;
     if (!B.length) return `<div class="empty">无K线：${esc(t.bars_missing || "价格库中无该股数据")}</div>`;
-    const W = 860, H = 300, L = 56, R = 64, T = 14, BOT = 26, iw = W - L - R, ih = H - T - BOT;
+    const W = 860, H = 300, L = 56, R = 104, T = 14, BOT = 26, iw = W - L - R, ih = H - T - BOT;
     const vals = B.flatMap(b => [b[2], b[3]]);
     for (const v of [t.ep, t.xp, t.tp, ...t.stops.map(s => s[1])]) if (typeof v === "number") vals.push(v);
     let lo = Math.min(...vals), hi = Math.max(...vals);
-    const pad = (hi - lo) * 0.06 || 1; lo -= pad; hi += pad;
+    const pad = (hi - lo) * 0.12 || 1; lo -= pad; hi += pad;   // room for 买/卖 markers
     const slot = iw / B.length, bw = Math.max(1.5, Math.min(12, slot * 0.62));
     const x = i => L + slot * (i + 0.5), y = v => T + (hi - v) / (hi - lo) * ih;
     const idx = {}; B.forEach((b, i) => { idx[b[0]] = i; });
@@ -426,26 +426,50 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && pinned) 
       S.push(`<line x1="${x(i)}" y1="${y(h)}" x2="${x(i)}" y2="${y(l)}" stroke="${col}"/>`
            + `<rect x="${x(i) - bw / 2}" y="${y(Math.max(o, c))}" width="${bw}" height="${Math.max(1, Math.abs(y(o) - y(c)))}" fill="${col}" fill-opacity="${i >= i0 && i <= i1 ? 0.75 : 0.3}" stroke="${col}" stroke-width="0.8"/>`);
     });
-    const hline = (v, col, label, dash, x0, x1) => {
+    // Right-edge labels are collected and laid out together: equal values
+    // merge into one label ("成本/止损 19.29" — the breakeven stop), close
+    // values are pushed apart so no two overlap.
+    const labels = [];
+    const label = (v, col, name) => { if (typeof v === "number") labels.push({v, col, name}); };
+    const hline = (v, col, name, dash) => {
       if (typeof v !== "number") return;
-      S.push(`<line x1="${x0 ?? L}" y1="${y(v)}" x2="${x1 ?? W - R}" y2="${y(v)}" stroke="${col}" stroke-width="1.3" ${dash ? `stroke-dasharray="${dash}"` : ""}/>`
-           + `<text x="${W - R + 4}" y="${y(v) + 4}" font-size="10.5" fill="${col}">${label} ${v}</text>`);
+      S.push(`<line x1="${L}" y1="${y(v)}" x2="${W - R}" y2="${y(v)}" stroke="${col}" stroke-width="1.3" ${dash ? `stroke-dasharray="${dash}"` : ""}/>`);
+      label(v, col, name);
     };
     hline(t.ep, "#3b6ea5", "成本", "5 4");
     hline(t.tp, "#c08a2e", "目标", "2 3");
     // stop: a step line through the KNOWN levels only (older RAISE_STOPs lack new_stop)
     t.stops.forEach((s, k) => {
       const nx = k + 1 < t.stops.length ? x(at(t.stops[k + 1][0])) : x(i1) + slot / 2;
-      const yy = y(s[1]);
-      S.push(`<line x1="${x(at(s[0])) - slot / 2}" y1="${yy}" x2="${nx}" y2="${yy}" stroke="#7a4fc0" stroke-width="1.6"/>`);
-      if (k + 1 === t.stops.length) S.push(`<text x="${W - R + 4}" y="${yy + 4}" font-size="10.5" fill="#7a4fc0">止损 ${s[1]}</text>`);
+      S.push(`<line x1="${x(at(s[0])) - slot / 2}" y1="${y(s[1])}" x2="${nx}" y2="${y(s[1])}" stroke="#7a4fc0" stroke-width="1.6"/>`);
+      if (k + 1 === t.stops.length) label(s[1], "#7a4fc0", "止损");
     });
-    // entry / exit markers
-    const mark = (d, px, up, col, label) => {
-      if (typeof px !== "number" || !d) return;
-      const i = at(d), yy = y(px), dy = up ? 14 : -14;
-      S.push(`<path d="M${x(i)},${yy} l-5,${dy} h10 z" fill="${col}"/>`
-           + `<text x="${x(i)}" y="${yy + dy * 1.9}" text-anchor="middle" font-size="10.5" font-weight="600" fill="${col}">${label}</text>`);
+    const merged = [];
+    for (const lb of labels.sort((a, b) => b.v - a.v)) {
+      const same = merged.find(m => Math.abs(m.v - lb.v) < 1e-6);
+      if (same) same.parts.push(lb); else merged.push({v: lb.v, parts: [lb]});
+    }
+    const LGAP = 13, ytop = T + 4, ybot = T + ih + 4;
+    const ys = merged.map(m => y(m.v) + 4);
+    for (let k = 1; k < ys.length; k++) ys[k] = Math.max(ys[k], ys[k - 1] + LGAP);
+    if (ys.length && ys[ys.length - 1] > ybot) {
+      ys[ys.length - 1] = ybot;
+      for (let k = ys.length - 2; k >= 0; k--) ys[k] = Math.min(ys[k], ys[k + 1] - LGAP);
+    }
+    merged.forEach((m, k) => {
+      const names = m.parts.map(p => `<tspan fill="${p.col}">${p.name}</tspan>`).join("/");
+      S.push(`<text x="${W - R + 4}" y="${Math.max(ytop, ys[k])}" font-size="10.5" fill="${m.parts[0].col}">${names} ${m.v}</text>`);
+    });
+    // trade markers sit just OUTSIDE their day's bar (买/加 under the low,
+    // 卖/减 above the high) so they never cover the candle they mark
+    const mark = (d, px, up, col, text) => {
+      if (!d) return;
+      const i = at(d), b = B[i];
+      const tip = b ? (up ? y(b[3]) + 3 : y(b[2]) - 3) : (typeof px === "number" ? y(px) : null);
+      if (tip == null) return;
+      const dy = up ? 9 : -9;
+      S.push(`<path d="M${x(i)},${tip} l-5,${dy} h10 z" fill="${col}"/>`
+           + `<text x="${x(i)}" y="${tip + dy + (up ? 11 : -3)}" text-anchor="middle" font-size="10.5" font-weight="600" fill="${col}">${text}</text>`);
     };
     mark(t.ed, t.ep, true, "#d43a3a", "买");
     for (const e of t.ev) if ((e.a === "ADD" || e.a === "TRIM") && e.px) mark(e.d, e.px, e.a === "ADD", e.a === "ADD" ? "#d43a3a" : "#1a9c62", e.a === "ADD" ? "加" : "减");
@@ -464,6 +488,7 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && pinned) 
     h += `<div class="mini">成本 ${t.ep ?? "—"}${t.xp != null ? ` · 卖出 ${t.xp}` : ""}${t.sh ? ` · ${t.sh.toLocaleString()}股` : ""}`
        + `${t.cs != null ? ` · 最终止损 ${t.cs}` : ""}${t.tp != null ? ` · 目标 ${t.tp}` : ""} · 日K不复权（与账本一致）</div>`;
     h += chart(t);
+    h += `<div class="pm-scroll">`;
     if (t.th) h += `<div class="pm-sec"><h4>建仓理由</h4><div class="d-note">${esc(t.th)}</div></div>`;
     if (t.why) h += `<div class="pm-sec"><h4>离场原因</h4><div class="d-note">${esc(t.why)}</div></div>`;
     h += `<div class="pm-sec"><h4>逐日记录 (${t.ev.length})</h4>`;
@@ -475,8 +500,9 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && pinned) 
          + `${e.st != null ? ` <span class="muted">止损→${e.st}</span>` : ""}`
          + `${e.note ? `<div class="d-note">${esc(e.note)}</div>` : ""}</div>`;
     }
-    body.innerHTML = h + `</div>`;
+    body.innerHTML = h + `</div></div>`;
     modal.hidden = false;
+    body.querySelector(".pm-scroll").scrollTop = 0;
   }
   const close = () => { modal.hidden = true; };
   document.getElementById("pm-x").addEventListener("click", close);

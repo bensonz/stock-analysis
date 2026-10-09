@@ -33,3 +33,8 @@
   so the invisible window blocked every click → `#posmodal[hidden]`.
 - Trade tables: names/dates no longer wrap one char per line; exit reason
   clipped to 2 lines (full text in the window); tables scroll on phones.
+- 2026-10-09 owner feedback: right-edge labels overlapped (成本 = breakeven
+  止损 19.29); window scrolled as a whole. Fix: labels merged when equal,
+  pushed ≥13px apart otherwise (sweep: 68 trades, 0 overlaps, 2 merged);
+  window height bounded, head + chart fixed, only text below scrolls;
+  买/卖 markers moved just outside their bar so they don't cover it.

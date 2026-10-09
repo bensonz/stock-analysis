@@ -105,11 +105,20 @@
   .tk { cursor:pointer; }
   tr.tk:hover td, .d-row.tk:hover { background:#f1f5fb; }
   #posmodal { position:fixed; inset:0; background:rgba(20,26,36,.45); z-index:20;
-              display:flex; align-items:flex-start; justify-content:center;
-              padding:max(24px, env(safe-area-inset-top, 0px)) 12px 24px; overflow-y:auto; }
+              display:flex; align-items:center; justify-content:center;
+              padding:max(24px, env(safe-area-inset-top, 0px)) 12px 24px; }
   #posmodal[hidden] { display:none; }
-  .pm-box { background:#fff; border-radius:12px; width:min(920px, 100%); padding:18px 20px 22px;
-            position:relative; box-shadow:0 10px 40px rgba(0,0,0,.2); }
+  /* Bounded height: header + chart stay put, only .pm-scroll (thesis, exit
+     reason, daily log) scrolls. */
+  .pm-box { background:#fff; border-radius:12px; width:min(920px, 100%); padding:18px 20px 0;
+            position:relative; box-shadow:0 10px 40px rgba(0,0,0,.2);
+            max-height:calc(100vh - 48px); max-height:calc(100dvh - 48px);
+            display:flex; flex-direction:column; }
+  #pm-body { display:flex; flex-direction:column; min-height:0; flex:1 1 auto; }
+  #pm-body > * { flex:none; }
+  #pm-body > .pm-scroll { flex:1 1 auto; min-height:0; overflow-y:auto;
+                          border-top:1px solid var(--line); padding-bottom:18px;
+                          overscroll-behavior:contain; }
   .pm-x { position:absolute; top:10px; right:12px; border:none; background:none; font-size:18px;
           cursor:pointer; color:var(--muted); }
   .pm-head { font-size:16px; margin-right:28px; }
