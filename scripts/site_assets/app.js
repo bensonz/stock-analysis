@@ -439,8 +439,11 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && pinned) 
     hline(t.ep, "#3b6ea5", "成本", "5 4");
     hline(t.tp, "#c08a2e", "目标", "2 3");
     // stop: a step line through the KNOWN levels only (older RAISE_STOPs lack new_stop)
+    // A null level = a raise whose value was not recorded: leave a gap
+    // rather than draw a level that was not in force.
     t.stops.forEach((s, k) => {
-      const nx = k + 1 < t.stops.length ? x(at(t.stops[k + 1][0])) : x(i1) + slot / 2;
+      if (s[1] == null) return;
+      const nx = k + 1 < t.stops.length ? x(at(t.stops[k + 1][0])) - slot / 2 : x(i1) + slot / 2;
       S.push(`<line x1="${x(at(s[0])) - slot / 2}" y1="${y(s[1])}" x2="${nx}" y2="${y(s[1])}" stroke="#7a4fc0" stroke-width="1.6"/>`);
       if (k + 1 === t.stops.length) label(s[1], "#7a4fc0", "止损");
     });
@@ -486,7 +489,8 @@ document.addEventListener("keydown", ev => { if (ev.key === "Escape" && pinned) 
           + `<span class="${pnlCls(t.r)}"><b>${t.r == null ? "—" : sign(t.r) + t.r + "%"}</b></span>`
           + `${t.sec ? ` <span class="muted">· ${esc(t.sec)}</span>` : ""}</div>`;
     h += `<div class="mini">成本 ${t.ep ?? "—"}${t.xp != null ? ` · 卖出 ${t.xp}` : ""}${t.sh ? ` · ${t.sh.toLocaleString()}股` : ""}`
-       + `${t.cs != null ? ` · 最终止损 ${t.cs}` : ""}${t.tp != null ? ` · 目标 ${t.tp}` : ""} · 日K不复权（与账本一致）</div>`;
+       + `${t.cs != null ? ` · 最终止损 ${t.cs}` : ""}${t.tp != null ? ` · 目标 ${t.tp}` : ""} · 日K不复权（与账本一致）`
+       + `${t.stops.some(s => s[1] == null) ? " · 止损线断开处：该次上移未记录数值，见逐日记录" : ""}</div>`;
     h += chart(t);
     h += `<div class="pm-scroll">`;
     if (t.th) h += `<div class="pm-sec"><h4>建仓理由</h4><div class="d-note">${esc(t.th)}</div></div>`;

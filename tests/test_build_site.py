@@ -479,7 +479,8 @@ def test_trade_history_bars_window_and_known_stops_only(tmp_path, monkeypatch):
     t = out["000739|2026-09-16"]
     assert [b[0] for b in t["bars"]] == ["2026-09-14", "2026-09-15", "2026-09-16",
                                          "2026-09-17", "2026-09-18", "2026-09-21"]
-    assert t["stops"] == [["2026-09-16", 9.5], ["2026-09-18", 10.0]]
+    # the 09-17 raise recorded no value: 9.5 ends there, a gap, then 10.0
+    assert t["stops"] == [["2026-09-16", 9.5], ["2026-09-17", None], ["2026-09-18", 10.0]]
     assert "st" not in t["ev"][1] and t["ev"][2]["st"] == 10.0
     assert t["ev"][0]["s"] == "午盘"
 
@@ -538,3 +539,27 @@ def test_snapshot_point_reads_dividend_cash(tmp_path):
     assert bs._snapshot_point(path)["div"] == 326.74
     _snap(tmp_path, "old.json", "2026-10-07T15:00:00+08:00", 980000.0)
     assert bs._snapshot_point(tmp_path / "old.json")["div"] == 0.0
+
+
+def test_trade_history_never_carries_a_stop_past_an_unrecorded_raise(tmp_path):
+    # 603259: opened with stop 120.18, raised 08-04 (→126.50) and 08-07
+    # (→139.15) before raises recorded their value. The chart drew 120.18
+    # through 10-08. currentStop is the result of the LAST raise.
+    trade = {"code": "603259", "entryDate": "2026-07-31", "stopLoss": 120.18,
+             "currentStop": 139.15, "history": [
+                 {"date": "2026-07-31", "action": "OPEN", "price": 126.5},
+                 {"date": "2026-08-04", "action": "RAISE_STOP", "price": 141.35},
+                 {"date": "2026-08-05", "action": "HOLD", "price": 150.0},
+                 {"date": "2026-08-07", "action": "RAISE_STOP", "price": 154.82},
+                 {"date": "2026-10-08", "action": "HOLD", "price": 165.95}]}
+    t = bs.collect_trade_histories([trade], tmp_path / "none.db")["603259|2026-07-31"]
+    assert t["stops"] == [["2026-07-31", 120.18], ["2026-08-04", None],
+                          ["2026-08-07", 139.15]]
+
+
+def test_trade_history_without_raises_keeps_the_opening_stop(tmp_path):
+    trade = {"code": "000739", "entryDate": "2026-09-22", "stopLoss": 23.0,
+             "currentStop": 23.0, "history": [
+                 {"date": "2026-09-22", "action": "OPEN", "price": 24.21, "stop": 23.0}]}
+    t = bs.collect_trade_histories([trade], tmp_path / "none.db")["000739|2026-09-22"]
+    assert t["stops"] == [["2026-09-22", 23.0]]

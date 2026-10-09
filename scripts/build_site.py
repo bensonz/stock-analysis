@@ -701,9 +701,15 @@ def collect_trade_histories(trades: list[dict], db_path: Path = PRICE_DB) -> dic
         if not code or not ed:
             continue
         events = []
-        stops = []   # known stop levels only: OPEN `stop`, RAISE_STOP `new_stop`
-        if t.get("stopLoss") is not None:
+        # Stop levels over time: [date, level] from that date on; level None =
+        # unknown from that date (a RAISE_STOP that recorded no value — true of
+        # every raise before the run log started writing new_stop). Never carry
+        # an old level past a raise: 603259 drew its 120.18 opening stop to
+        # 10-08 while the real stop had been 139.15 since 08-07.
+        stops = []
+        if isinstance(t.get("stopLoss"), (int, float)):
             stops.append([ed, t["stopLoss"]])
+        last_raise = None
         for h in t.get("history") or []:
             ev = {"d": h.get("date"), "s": SLOT_LABEL.get(h.get("slot"), h.get("slot") or ""),
                   "a": h.get("action"), "px": h.get("price"), "r": h.get("change_pct"),
@@ -713,7 +719,18 @@ def collect_trade_histories(trades: list[dict], db_path: Path = PRICE_DB) -> dic
                 ev["st"] = new_stop
                 if not stops or stops[-1][1] != new_stop:
                     stops.append([h.get("date"), new_stop])
+            elif h.get("action") == "RAISE_STOP":
+                # one entry per raise, so the last one can take currentStop
+                stops.append([h.get("date"), None])
+            if h.get("action") == "RAISE_STOP":
+                last_raise = len(stops) - 1
             events.append(ev)
+        # currentStop is the result of the LAST raise, so it is known from
+        # that raise on even when the raise itself recorded no value.
+        cs = t.get("currentStop")
+        if (last_raise is not None and isinstance(cs, (int, float))
+                and stops[last_raise][1] is None):
+            stops[last_raise][1] = cs
         rec = {"c": code, "n": t.get("name", ""), "ed": ed, "xd": t.get("exitDate"),
                "ep": t.get("entryPrice"), "xp": t.get("exitPrice"),
                "r": t.get("returnPct") if t.get("exitDate") else t.get("pnl_pct"),

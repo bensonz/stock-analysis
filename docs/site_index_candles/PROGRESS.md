@@ -38,3 +38,9 @@
   pushed ≥13px apart otherwise (sweep: 68 trades, 0 overlaps, 2 merged);
   window height bounded, head + chart fixed, only text below scrolls;
   买/卖 markers moved just outside their bar so they don't cover it.
+- 2026-10-09 owner: 603259 chart showed stop 120.18 to 10-08, note says
+  139.15. Old RAISE_STOPs recorded no value and the step line carried the
+  opening stop forward. Now: an unrecorded raise ends the known level (gap),
+  and currentStop is assigned to the LAST raise (it is that raise's result).
+  9 of 68 trades have such a gap. Values in note text (新止损¥126.50) not
+  parsed — free text, fragile.
