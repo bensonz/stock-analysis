@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-09",
+  "slot": "afternoon",
+  "run_started_at": "2026-10-09T15:05:05.913993+08:00",
+  "status": "success",
+  "exit_code": 0,
+  "total_duration_sec": 382.9,
+  "phases": {
+    "health_check": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "sources": {
+        "sina": {
+          "status": "ok",
+          "latency_ms": 43.2
+        },
+        "cheesefortune": {
+          "status": "ok",
+          "latency_ms": 397.0
+        },
+        "pricedb": {
+          "status": "ok",
+          "latest_date": "2026-10-08",
+          "stale": false
+        }
+      }
+    },
+    "preflight_pricedb": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "latest_date": "2026-10-09",
+      "target": "2026-10-09",
+      "snapshot": "  2026-10-09: 0 → 5559 rows (5559 inserted)",
+      "stock_list": "stock list: 5573 listed, 0 new"
+    },
+    "collect": {
+      "status": "ok",
+      "duration_sec": 78.0,
+      "errors": []
+    },
+    "llm_analysis": {
+      "status": "ok",
+      "duration_sec": 303.9
+    },
+    "apply": {
+      "status": "ok",
+      "duration_sec": 1.0
+    },
+    "validate": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "errors": []
+    }
+  },
+  "gates": {
+    "phase1_to_phase2": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": []
+    },
+    "phase2_to_phase3": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": []
+    },
+    "phase3_to_phase4": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": []
+    }
+  }
+}
