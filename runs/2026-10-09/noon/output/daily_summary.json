@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-09",
+  "actions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "SELL",
+      "price": 24.53,
+      "pnl_pct": 1.32,
+      "note": "stop_proximity CRITICAL(距保本止损24.21仅1.3%)+time_decay逼近(13/15天,浮盈+1.32%<3%)+今日-10.01%近跌停三重叠加，主动止损保本优于赌隔夜跳空；医药生物今日集体下挫(来源:华尔街见闻)。非rotation，为防御性止损。"
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 21.04,
+      "pnl_pct": 9.07,
+      "note": "浮盈+9.07%守保本止损19.29未触发(缓冲8.3%)；航运港口未入bottom5；VLCC美-亚航线运价7700万美元vs2025年均值920万(来源:界面新闻/波罗的海交易所)，油运超级周期逻辑未变；今日-4.49%为获利回吐非趋势破坏，让赢家奔跑。"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 51.32,
+      "pnl_pct": 19.77,
+      "note": "浮盈+19.77%止损已锁+10%(47.14)未触发(缓冲8.1%)；医疗服务未入bottom5；今日-1.42%抗跌于CRO板块整体下挫(来源:华尔街见闻)，让赢家奔跑。"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 153.43,
+      "pnl_pct": 21.29,
+      "note": "浮盈+21.29%止损已锁+10%(139.15)未触发(缓冲9.3%)；医疗服务未入bottom5；今日-5.29%属CRO板块性回调(来源:华尔街见闻)非个股逻辑破坏——在手订单近600亿/Q1净利+72%(来源:新浪财经半年报)，让赢家奔跑。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 979711.74,
+    "dayPnl": -3955.0,
+    "dayReturnPct": -0.4,
+    "totalReturnPct": -2.03,
+    "unrealizedPnl": 16255.0,
+    "realizedPnl": -36543.26,
+    "cashPct": 89.39
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.246,
+    "up": 1075,
+    "down": 4370,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 27,
+    "limit_downs": 19,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.25:1, 0/3 major indices green, 27 limit-ups / 19 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "2026-10-09恐慌盘：breadth 0.25:1(1075涨/4370跌)，上证-1.21%/深成-2.09%/创业板-2.61%/科创50-3.78%，27涨停/19跌停，entry_regime=panic hard block禁止新开仓。节后连续第二日调整，主因国庆期间美债收益率高企压制全球风险资产、高估值科技股首当其冲(来源:中国证券报/华尔街见闻)，券商定性为结构再平衡而非系统性下跌。资金防御性高低切：电池+2.43%(七部门《新型电池'十五五'规划》)/煤炭+1.78%/贵金属+1.72%/白色家电+1.44%/种植业+1.16%逆势；元件-7.72%/玻璃玻纤-6.64%/电子化学品-6.31%杀跌，生物医药/CRO集体承压(来源:华尔街见闻)。IV中性(平均IV Rank 0.32)。板块数据仅今日涨跌幅，无5日/20日序列。决策：禁止新开仓，普洛药业主动止损，其余3仓让赢家奔跑。"
+  }
+}

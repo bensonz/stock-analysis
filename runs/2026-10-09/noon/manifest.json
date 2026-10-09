@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-09",
+  "slot": "noon",
+  "run_started_at": "2026-10-09T11:35:04.612340+08:00",
+  "status": "success",
+  "exit_code": 0,
+  "total_duration_sec": 255.9,
+  "phases": {
+    "health_check": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "sources": {
+        "sina": {
+          "status": "ok",
+          "latency_ms": 46.8
+        },
+        "cheesefortune": {
+          "status": "ok",
+          "latency_ms": 446.7
+        },
+        "pricedb": {
+          "status": "ok",
+          "latest_date": "2026-09-30",
+          "stale": true
+        }
+      }
+    },
+    "preflight_pricedb": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "latest_date": "2026-10-08",
+      "target": "2026-10-08",
+      "snapshot": null,
+      "stock_list": "stock list: 5573 listed, 1 new (920157)"
+    },
+    "collect": {
+      "status": "ok",
+      "duration_sec": 63.6,
+      "errors": []
+    },
+    "auto_heal": {
+      "status": "ok",
+      "duration_sec": 0.0
+    },
+    "llm_analysis": {
+      "status": "ok",
+      "duration_sec": 191.5
+    },
+    "apply": {
+      "status": "ok",
+      "duration_sec": 0.8
+    },
+    "validate": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "errors": []
+    }
+  },
+  "gates": {
+    "phase1_to_phase2": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": []
+    },
+    "phase2_to_phase3": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": []
+    },
+    "phase3_to_phase4": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": [
+        "dividend 000739 ex 2026-10-08: gross 236.3 tax 47.26 net 189.04 credited to cash",
+        "dividend 603259 ex 2026-09-04: gross 153.0 tax 15.3 net 137.7 credited to cash"
+      ]
+    }
+  }
+}

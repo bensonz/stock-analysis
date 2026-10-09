@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-09",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1791517968.558929,
+      "errors": [],
+      "end": 1791518032.165374,
+      "duration_sec": 63.6
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8624,
+      "tokens": {
+        "input_tokens": 189954,
+        "output_tokens": 16408
+      },
+      "rounds": 3,
+      "tool_calls_count": 8,
+      "duration_sec": 191.5,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1791518223.701211,
+      "actions": [
+        "CORP_ACTION 000739 ex 2026-10-08: cash net 189.04 (gross 236.3, tax 47.26), shares 1700→1700",
+        "CORP_ACTION 603259 ex 2026-09-04: cash net 137.7 (gross 153.0, tax 15.3), shares 300→300",
+        "SELL 000739",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=38",
+        "Hypothesis: Updated h024 (rule): +1 supporting evidence → hitRate=90%, n=21",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=23",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-10-09",
+        "status": "ok",
+        "checked": 4,
+        "applied": [
+          {
+            "code": "000739",
+            "name": "普洛药业",
+            "exDate": "2026-10-08",
+            "cashPer10": 1.39,
+            "bonusPer10": 0.0,
+            "plan": "10派1.39元(含税,扣税后1.251元)",
+            "sharesBefore": 1700,
+            "sharesAfter": 1700,
+            "entryPriceBefore": 24.21,
+            "entryPriceAfter": 24.21,
+            "grossCash": 236.3,
+            "taxRate": 0.2,
+            "tax": 47.26,
+            "netCash": 189.04,
+            "appliedAt": "2026-10-09T11:57:03.701415+08:00"
+          },
+          {
+            "code": "603259",
+            "name": "药明康德",
+            "exDate": "2026-09-04",
+            "cashPer10": 5.1,
+            "bonusPer10": 0.0,
+            "plan": "10派5.10元(含税,扣税后4.59元)",
+            "sharesBefore": 300,
+            "sharesAfter": 300,
+            "entryPriceBefore": 126.5,
+            "entryPriceAfter": 126.5,
+            "grossCash": 153.0,
+            "taxRate": 0.1,
+            "tax": 15.3,
+            "netCash": 137.7,
+            "appliedAt": "2026-10-09T11:57:03.701415+08:00"
+          }
+        ],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "end": 1791518224.485605,
+      "duration_sec": 0.8
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 255.9
+  }
+}

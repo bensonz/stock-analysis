@@ -1,7 +1,7 @@
 {
   "code": "000739",
   "name": "普洛药业",
-  "status": "active",
+  "status": "closed",
   "thesis": "原料药龙头，0风险，RPS120=90.97甜区，MA距离全合规(dist_ma5 +4.0%/ma10 +6.2%/ma20 +9.2%)；医药生物热度延续（09-21医疗服务/CRO/化学制药涨幅居前，来源：证券时报）；'做精原料'连续兑现（头孢托仑匹酯09-09获批，来源：新浪财经/第一财经；氟泽雷塞08-07获批）；公募7.6%+北向2.7%+增持回购",
   "entryDate": "2026-09-22",
   "entrySlot": "noon",
@@ -142,15 +142,53 @@
       "change_pct": 12.06,
       "action": "HOLD",
       "note": "浮盈+12.1%守住保本止损24.21未触发(现价27.13，今日-1.74%)；化学制药/原料药未入bottom5；margin deleveraging为风险提示非卖出触发"
+    },
+    {
+      "date": "2026-10-08",
+      "action": "DIVIDEND",
+      "shares": 1700,
+      "cashPer10": 1.39,
+      "grossCash": 236.3,
+      "taxRate": 0.2,
+      "tax": 47.26,
+      "netCash": 189.04,
+      "note": "除息 10派1.39: 税前236.3 税47.26 (20%) 到账189.04"
+    },
+    {
+      "date": "2026-10-09",
+      "slot": "noon",
+      "price": 24.53,
+      "change_pct": 1.78,
+      "action": "SELL",
+      "shares": 1700,
+      "note": "stop_proximity CRITICAL(距保本止损24.21仅1.3%)+time_decay逼近(13/15天,浮盈+1.32%<3%)+今日-10.01%近跌停三重叠加，主动止损保本优于赌隔夜跳空；医药生物今日集体下挫(来源:华尔街见闻)。非rotation，为防御性止损。"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-10-09",
+  "exitPrice": 24.53,
+  "exitReason": "stop_proximity CRITICAL(距保本止损24.21仅1.3%)+time_decay逼近(13/15天,浮盈+1.32%<3%)+今日-10.01%近跌停三重叠加，主动止损保本优于赌隔夜跳空；医药生物今日集体下挫(来源:华尔街见闻)。非rotation，为防御性止损。",
+  "returnPct": 1.78,
+  "holdingDays": 6,
+  "lessonLearned": "",
   "createdAt": "2026-09-22T11:42:09.967443+08:00",
-  "updatedAt": "2026-10-08T11:41:28.538501+08:00",
-  "trackerVersion": "2.1"
+  "updatedAt": "2026-10-09T11:57:04.260981+08:00",
+  "trackerVersion": "2.1",
+  "corporateActions": [
+    {
+      "exDate": "2026-10-08",
+      "cashPer10": 1.39,
+      "bonusPer10": 0.0,
+      "plan": "10派1.39元(含税,扣税后1.251元)",
+      "sharesBefore": 1700,
+      "sharesAfter": 1700,
+      "entryPriceBefore": 24.21,
+      "entryPriceAfter": 24.21,
+      "grossCash": 236.3,
+      "taxRate": 0.2,
+      "tax": 47.26,
+      "netCash": 189.04,
+      "appliedAt": "2026-10-09T11:57:03.701415+08:00"
+    }
+  ],
+  "exitSlot": "noon"
 }

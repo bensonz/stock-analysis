@@ -1,0 +1,176 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "电池",
+        "1d_pct": 2.43,
+        "trend": "defensive-rotation"
+      },
+      {
+        "name": "煤炭开采",
+        "1d_pct": 1.78,
+        "trend": "defensive"
+      },
+      {
+        "name": "贵金属",
+        "1d_pct": 1.72,
+        "trend": "defensive"
+      },
+      {
+        "name": "白色家电",
+        "1d_pct": 1.44,
+        "trend": "steady"
+      },
+      {
+        "name": "种植业",
+        "1d_pct": 1.16,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "元件",
+        "1d_pct": -7.72,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "玻璃玻纤",
+        "1d_pct": -6.64,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "1d_pct": -6.31,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "1d_pct": -5.57,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "1d_pct": -5.15,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/4 positions in hot sectors (top5)；0/4 positions in cold sectors (bottom5)",
+    "regime": "恐慌盘高低切换：防御(煤炭/贵金属/电池/家电/种植业)逆势，科技硬件(元件/电子化学品/其他电子)与医药CRO杀跌"
+  },
+  "position_decisions": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "action": "SELL",
+      "reason": "stop_proximity CRITICAL(距保本止损24.21仅1.3%)+time_decay逼近(13/15天,浮盈+1.32%<3%)+今日-10.01%近跌停三重叠加，主动止损保本优于赌隔夜跳空；医药生物今日集体下挫(来源:华尔街见闻)。非rotation，为防御性止损。",
+      "sector_rank": "化学制药/原料药未入今日top5/bottom5",
+      "new_stop": null,
+      "pnl_pct": 1.32,
+      "days_held": 13,
+      "exit_price": 24.53
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+9.07%守保本止损19.29未触发(缓冲8.3%)；航运港口未入bottom5；VLCC美-亚航线运价7700万美元vs2025年均值920万(来源:界面新闻/波罗的海交易所)，油运超级周期逻辑未变；今日-4.49%为获利回吐非趋势破坏，让赢家奔跑。",
+      "sector_rank": "航运港口今日未入top5/bottom5",
+      "new_stop": null,
+      "pnl_pct": 9.07,
+      "days_held": 22,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+19.77%止损已锁+10%(47.14)未触发(缓冲8.1%)；医疗服务未入bottom5；今日-1.42%抗跌于CRO板块整体下挫(来源:华尔街见闻)，让赢家奔跑。",
+      "sector_rank": "医疗服务今日未入top5/bottom5",
+      "new_stop": null,
+      "pnl_pct": 19.77,
+      "days_held": 15,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+21.29%止损已锁+10%(139.15)未触发(缓冲9.3%)；医疗服务未入bottom5；今日-5.29%属CRO板块性回调(来源:华尔街见闻)非个股逻辑破坏——在手订单近600亿/Q1净利+72%(来源:新浪财经半年报)，让赢家奔跑。",
+      "sector_rank": "医疗服务今日未入top5/bottom5",
+      "new_stop": null,
+      "pnl_pct": 21.29,
+      "days_held": 46,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601918",
+      "name": "新集能源",
+      "reason": "煤炭开采今日top5#2、RPS120=93.8甜区、MA距离合规，但panic hard block(涨跌比0.25:1,0/3指数红)禁止开仓；margin signal=deleveraging为次要谨慎项。",
+      "rps120": 93.8
+    },
+    {
+      "code": "600546",
+      "name": "山煤国际",
+      "reason": "煤炭开采top5、RPS120=87.43、MA合规，但panic hard block禁止开仓；margin deleveraging。",
+      "rps120": 87.43
+    },
+    {
+      "code": "002832",
+      "name": "比音勒芬",
+      "reason": "RPS120=94.96甜区上沿，dist_ma5=6.0%恰压在追高线，IV rank 0.1242偏低(→半仓)，纺织服饰非热区，且panic hard block禁止开仓。",
+      "rps120": 94.96
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "RPS120=92.1，但属铜/工业金属(今日top5为贵金属非铜)，margin deleveraging，且panic hard block禁止开仓。",
+      "rps120": 92.1
+    },
+    {
+      "code": "300981",
+      "name": "中红医疗",
+      "reason": "即使无hard block也会被Rule 2b拦截：dist_ma5=24.5%/dist_ma10=27.0%/dist_ma20=37.5%极端超买；且panic hard block禁止开仓。",
+      "rps120": 91.46
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌盘(涨跌比0.25:1)当日，即使个股RPS甜区+板块top5(如新集能源RPS120=93.8、煤炭开采今日#2)同时达标，也禁止开新仓——hard block是机械层权威，判断层之上不得强制入场。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "恐慌盘下隔夜跳空风险与流动性收缩会同时恶化入场质量，结构再平衡未完成前追强势板块=在均值回归前接刀。"
+    },
+    {
+      "text": "stop_proximity CRITICAL(距止损仅1.3%)+time_decay逼近(13/15天,浮盈<3%)+当日-10%三者叠加时，应主动止损而非等硬止损击穿——普洛药业今日即此组合，保本离场优于隔夜跳空风险。",
+      "type": "rule",
+      "tags": [
+        "exit-rule",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "保本止损上方仅剩1.3%缓冲，-10%放量下跌后隔夜跳空概率高，止损单可能以显著更差价格成交；且time_decay两日后必然触发，持有无正期望。"
+    },
+    {
+      "text": "节后连续两日调整但券商定性为'结构再平衡而非系统性下跌'：红利/煤炭/贵金属/电池逆势，前期科技硬件(元件/电子化学品/其他电子)与医药CRO杀跌。恐慌硬阻断期间持仓策略转为'让赢家奔跑+收紧弱仓'，而非找新标的。",
+      "type": "signal",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "美债收益率高企压制高估值成长，资金从高位AI/CPO/医药CRO切换至低位防御与政策催化的电池链，属典型高低切换。"
+    }
+  ],
+  "market_summary": "2026-10-09恐慌盘：breadth 0.25:1(1075涨/4370跌)，上证-1.21%/深成-2.09%/创业板-2.61%/科创50-3.78%，27涨停/19跌停，entry_regime=panic hard block禁止新开仓。节后连续第二日调整，主因国庆期间美债收益率高企压制全球风险资产、高估值科技股首当其冲(来源:中国证券报/华尔街见闻)，券商定性为结构再平衡而非系统性下跌。资金防御性高低切：电池+2.43%(七部门《新型电池'十五五'规划》)/煤炭+1.78%/贵金属+1.72%/白色家电+1.44%/种植业+1.16%逆势；元件-7.72%/玻璃玻纤-6.64%/电子化学品-6.31%杀跌，生物医药/CRO集体承压(来源:华尔街见闻)。IV中性(平均IV Rank 0.32)。板块数据仅今日涨跌幅，无5日/20日序列。决策：禁止新开仓，普洛药业主动止损，其余3仓让赢家奔跑。",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}

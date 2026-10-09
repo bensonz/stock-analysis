@@ -592,6 +592,25 @@
       "change_pct": 31.19,
       "action": "HOLD",
       "note": "浮盈+31.2%让利润奔跑，止损已锁+10%(139.15)未触发(现价165.95，今日-0.83%)；CXO龙头，医疗服务未入bottom5"
+    },
+    {
+      "date": "2026-09-04",
+      "action": "DIVIDEND",
+      "shares": 300,
+      "cashPer10": 5.1,
+      "grossCash": 153.0,
+      "taxRate": 0.1,
+      "tax": 15.3,
+      "netCash": 137.7,
+      "note": "除息 10派5.1: 税前153.0 税15.3 (10%) 到账137.7"
+    },
+    {
+      "date": "2026-10-09",
+      "slot": "noon",
+      "price": 153.43,
+      "change_pct": 21.29,
+      "action": "HOLD",
+      "note": "浮盈+21.29%止损已锁+10%(139.15)未触发(缓冲9.3%)；医疗服务未入bottom5；今日-5.29%属CRO板块性回调(来源:华尔街见闻)非个股逻辑破坏——在手订单近600亿/Q1净利+72%(来源:新浪财经半年报)，让赢家奔跑。"
     }
   ],
   "exitDate": null,
@@ -601,7 +620,24 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-07-31T11:45:38.795030+08:00",
-  "updatedAt": "2026-10-08T11:41:28.529171+08:00",
+  "updatedAt": "2026-10-09T11:57:04.296617+08:00",
   "trackerVersion": "2.1",
-  "entrySlot": "noon"
+  "entrySlot": "noon",
+  "corporateActions": [
+    {
+      "exDate": "2026-09-04",
+      "cashPer10": 5.1,
+      "bonusPer10": 0.0,
+      "plan": "10派5.10元(含税,扣税后4.59元)",
+      "sharesBefore": 300,
+      "sharesAfter": 300,
+      "entryPriceBefore": 126.5,
+      "entryPriceAfter": 126.5,
+      "grossCash": 153.0,
+      "taxRate": 0.1,
+      "tax": 15.3,
+      "netCash": 137.7,
+      "appliedAt": "2026-10-09T11:57:03.701415+08:00"
+    }
+  ]
 }

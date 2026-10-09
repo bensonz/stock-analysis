@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 189954,
+  "output_tokens": 16408,
+  "rounds": 3,
+  "duration_sec": 191.5,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026-10-09 大跌 原因 上证指数 创业板",
+        "max_results": 6
+      },
+      "result_length": 3191
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "普洛药业 000739 2026-10-09 大跌 跌停",
+        "max_results": 6
+      },
+      "result_length": 3858
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "煤炭板块 电池 贵金属 上涨 2026年10月 A股 板块",
+        "max_results": 6
+      },
+      "result_length": 3966
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "招商轮船 油运 VLCC 2026年10月 运价",
+        "max_results": 6
+      },
+      "result_length": 4332
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 昭衍新药 CRO 创新药 2026年10月 医药",
+        "max_results": 6
+      },
+      "result_length": 4282
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.163.com/dy/article/L8PQOAA505198NMR.html",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.stcn.com/article/detail/4209042.html",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://finance.sina.com.cn/tech/roll/2026-10-08/doc-iniunvxc7648207.shtml",
+        "maxChars": 4000
+      },
+      "result_length": 3151
+    }
+  ],
+  "fallback_used": false
+}
