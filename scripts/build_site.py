@@ -82,9 +82,6 @@ def _snapshot_point(path: Path):
             "ret_pct": pf.get("totalReturnPct"),
             "positions": pf.get("positionsUsed"),
             "starting": pf.get("startingCapital"),
-            # Open positions' dividend cash (field exists from 2026-10-08;
-            # absent = none booked yet, the book credited no dividends before).
-            "div": pf.get("dividendCash") or 0.0,
             "holdings": holdings,
         }
     except Exception:
@@ -259,13 +256,37 @@ def _run_status_for(point: dict) -> str | None:
         return None
 
 
+def booked_dividends(runs_dir: Path = RUNS_DIR) -> dict:
+    """{date: net dividend cash booked by that day's runs}, from each run's
+    log.json `corporate_actions.applied`. Not from positions.json
+    `dividendCash`: that counts OPEN positions only, so a dividend booked and
+    the stock sold the same day (000739 on 2026-10-09) vanished from it."""
+    out = {}
+    if not runs_dir.is_dir():
+        return out
+    for path in list(runs_dir.glob("*/*/log.json")) + list(runs_dir.glob("*/log.json")):
+        try:
+            log = _read_json(path)
+        except Exception:
+            continue
+        for run in (log.get("runs") or []) if isinstance(log, dict) else []:
+            corp = (run or {}).get("corporate_actions") or {}
+            for a in corp.get("applied") or []:
+                day = corp.get("date")
+                if day and isinstance(a.get("netCash"), (int, float)):
+                    out[day] = round(out.get(day, 0.0) + a["netCash"], 2)
+    return out
+
+
 def collect_day_details(series: list[dict], trades: list[dict],
-                        open_lookup: dict | None = None) -> dict:
+                        open_lookup: dict | None = None,
+                        booked_divs: dict | None = None) -> dict:
     """Per-date payload for the hover side panel. day_pnl is the delta vs the
     PREVIOUS REAL snapshot (labeled 较上一快照 in the UI — gaps happen).
     NOTE: snapshots are taken at run START, so a day's OPEN actions only show
     up in holdings from the next snapshot — the UI labels this."""
     open_lookup = open_lookup or {}
+    booked_divs = booked_divs or {}
     closed_by_date = {}
     for t in trades:
         closed_by_date.setdefault(t.get("exitDate"), []).append(
@@ -274,7 +295,6 @@ def collect_day_details(series: list[dict], trades: list[dict],
 
     details = {}
     prev_equity = None
-    prev_div = None
     for p in series:
         d = p["date"]
         det = {
@@ -301,12 +321,13 @@ def collect_day_details(series: list[dict], trades: list[dict],
             det["stale_marks"] = 1
         if p.get("synthetic"):
             det["slot"] = "起始"
-        elif prev_div is not None and round((p.get("div") or 0) - prev_div, 2):
-            # dividend cash booked since the previous snapshot — moves equity
-            # with no price move, so the holdings check must not call it a gap
-            det["div_in"] = round((p.get("div") or 0) - prev_div, 2)
         elif prev_equity is not None and isinstance(p.get("equity"), (int, float)):
             det["day_pnl"] = round(p["equity"] - prev_equity, 2)
+        # Dividend cash booked that day moves equity with no price move, so the
+        # holdings check must not call it a gap. Kept OUT of the if/elif above:
+        # on 2026-10-09 it sat there as an elif and blanked the day's P&L.
+        if not p.get("synthetic") and booked_divs.get(d):
+            det["div_in"] = booked_divs[d]
         # Decisions come from the winning snapshot's run dir; if that run
         # produced none (it failed before Phase 3), fall back to a sibling slot
         # on the same date rather than discarding real decisions. 2026-08-20:
@@ -360,7 +381,6 @@ def collect_day_details(series: list[dict], trades: list[dict],
         details[d] = det
         if not p.get("synthetic") and isinstance(p.get("equity"), (int, float)):
             prev_equity = p["equity"]
-            prev_div = p.get("div") or 0.0
     return details
 
 
@@ -1081,7 +1101,8 @@ def build(site_dir: Path = SITE_DIR) -> Path:
     index_closes = merge_index_closes(load_index_closes(kline), settled_index_closes())
     index_bars = load_index_bars(kline)
     attach_holding_day_pcts(series, sessions=index_closes)   # before details copies holdings
-    details = collect_day_details(series, trades, build_open_lookup(active, trades))
+    details = collect_day_details(series, trades, build_open_lookup(active, trades),
+                                  booked_divs=booked_dividends())
     starting = (series[0].get("starting") if series else None) or 1000000
     dates = [p["date"] for p in series]
     index_rebased = rebase_index(index_closes, dates, float(starting))

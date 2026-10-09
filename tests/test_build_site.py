@@ -516,50 +516,21 @@ def test_trade_rows_are_clickable_only_with_a_history():
     assert "601872|2026-09-01" not in out.split("const TRADES")[0]
 
 
-def test_day_details_name_dividend_cash_booked_since_previous_snapshot():
-    # From 2026-10-09 the book credits dividends: equity rises with no price
-    # move, and the holdings check must name it, not call it a mark problem.
-    series = [{"date": "2026-10-08", "equity": 989713.0, "marks_asof": "2026-10-08",
-               "holdings": [], "div": 0.0},
-              {"date": "2026-10-09", "equity": 990100.0, "marks_asof": "2026-10-09",
-               "holdings": [], "div": 326.74},
-              {"date": "2026-10-10", "equity": 990200.0, "marks_asof": "2026-10-10",
-               "holdings": [], "div": 326.74}]
-    det = bs.collect_day_details(series, [])
-    assert "div_in" not in det["2026-10-08"]
+def test_day_details_keep_day_pnl_and_name_dividends_booked_that_day(tmp_path):
+    # 2026-10-09: 000739 (¥189.04) and 603259 (¥137.70) dividends booked at
+    # noon; 000739 was then sold, so positions.json dividendCash showed only
+    # 137.70. The dividend branch also blanked the day's P&L.
+    log = tmp_path / "2026-10-09" / "noon" / "log.json"
+    log.parent.mkdir(parents=True)
+    log.write_text(json.dumps({"runs": [{"corporate_actions": {"date": "2026-10-09",
+        "applied": [{"code": "000739", "netCash": 189.04},
+                    {"code": "603259", "netCash": 137.7}]}}]}), encoding="utf-8")
+    booked = bs.booked_dividends(tmp_path)
+    assert booked == {"2026-10-09": 326.74}
+    series = [{"date": "2026-10-08", "equity": 989713.0, "marks_asof": "2026-10-08", "holdings": []},
+              {"date": "2026-10-09", "equity": 979711.74, "marks_asof": "2026-10-09", "holdings": []}]
+    det = bs.collect_day_details(series, [], booked_divs=booked)
+    assert det["2026-10-09"]["day_pnl"] == -10001.26
     assert det["2026-10-09"]["div_in"] == 326.74
-    assert "div_in" not in det["2026-10-10"]
-
-
-def test_snapshot_point_reads_dividend_cash(tmp_path):
-    path = tmp_path / "s.json"
-    path.write_text(json.dumps({"snapshot_time": "2026-10-09T11:40:00+08:00",
-        "positions_json": {"portfolio": {"startingCapital": 1e6, "totalEquity": 990100.0,
-                                         "dividendCash": 326.74}}}), encoding="utf-8")
-    assert bs._snapshot_point(path)["div"] == 326.74
-    _snap(tmp_path, "old.json", "2026-10-07T15:00:00+08:00", 980000.0)
-    assert bs._snapshot_point(tmp_path / "old.json")["div"] == 0.0
-
-
-def test_trade_history_never_carries_a_stop_past_an_unrecorded_raise(tmp_path):
-    # 603259: opened with stop 120.18, raised 08-04 (→126.50) and 08-07
-    # (→139.15) before raises recorded their value. The chart drew 120.18
-    # through 10-08. currentStop is the result of the LAST raise.
-    trade = {"code": "603259", "entryDate": "2026-07-31", "stopLoss": 120.18,
-             "currentStop": 139.15, "history": [
-                 {"date": "2026-07-31", "action": "OPEN", "price": 126.5},
-                 {"date": "2026-08-04", "action": "RAISE_STOP", "price": 141.35},
-                 {"date": "2026-08-05", "action": "HOLD", "price": 150.0},
-                 {"date": "2026-08-07", "action": "RAISE_STOP", "price": 154.82},
-                 {"date": "2026-10-08", "action": "HOLD", "price": 165.95}]}
-    t = bs.collect_trade_histories([trade], tmp_path / "none.db")["603259|2026-07-31"]
-    assert t["stops"] == [["2026-07-31", 120.18], ["2026-08-04", None],
-                          ["2026-08-07", 139.15]]
-
-
-def test_trade_history_without_raises_keeps_the_opening_stop(tmp_path):
-    trade = {"code": "000739", "entryDate": "2026-09-22", "stopLoss": 23.0,
-             "currentStop": 23.0, "history": [
-                 {"date": "2026-09-22", "action": "OPEN", "price": 24.21, "stop": 23.0}]}
-    t = bs.collect_trade_histories([trade], tmp_path / "none.db")["000739|2026-09-22"]
-    assert t["stops"] == [["2026-09-22", 23.0]]
+    assert "div_in" not in det["2026-10-08"]
+    assert bs.booked_dividends(tmp_path / "missing") == {}

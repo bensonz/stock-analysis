@@ -53,10 +53,11 @@ function holdingsCheck(det, p) {
 function cmpHtml(p) {
   const pc = v => `<b class="${pnlCls(v)}">${pctTxt(v)}</b>`;
   const ex = excess(p);
-  let h = `<div class="d-cmp">当日 组合 ${pc(p.pr)} · 上证 ${pc(p.ic)} · 超额 ${ex == null ? "—" : pc(ex)}</div>`;
+  const idx = p.ic != null ? pc(p.ic) : p.iq != null ? `${pc(p.iq)}<span class="mini">(运行时)</span>` : "—";
+  let h = `<div class="d-cmp">当日 组合 ${pc(p.pr)} · 上证 ${idx} · 超额 ${ex == null ? "—" : pc(ex)}</div>`;
   if (p.k) h += `<div class="mini">上证 开 ${p.k[0].toFixed(2)} 高 ${p.k[1].toFixed(2)} 低 ${p.k[2].toFixed(2)} 收 ${p.k[3].toFixed(2)}</div>`;
   if (p.iq != null)
-    h += `<div class="d-note">组合取 ${esc(p.t || "")} 午盘快照，当时上证 ${pctTxt(p.iq)}，收盘 ${pctTxt(p.ic)}；超额按运行时计算</div>`;
+    h += `<div class="d-note">组合取 ${esc(p.t || "")} 午盘快照，当时上证 ${pctTxt(p.iq)}，收盘 ${p.ic == null ? "待出（日K收盘后数小时才更新）" : pctTxt(p.ic)}；超额按运行时计算</div>`;
   else if (isNoon(p))
     h += `<div class="d-note">组合取 ${esc(p.t)} 午盘快照，该次运行无上证行情——与收盘涨跌不可比，不算超额</div>`;
   if (p.pd && p.ipd && (p.pdi || p.pd) !== p.ipd)

@@ -44,3 +44,14 @@
   and currentStop is assigned to the LAST raise (it is that raise's result).
   9 of 68 trades have such a gap. Values in note text (新止损¥126.50) not
   parsed — free text, fragile.
+- 2026-10-09 owner: noon panel showed '— 较上一快照' and 上证 '—'. Bug: the
+  dividend branch was an elif ahead of day_pnl, so the first dividend day
+  lost its P&L. Also dividendCash (open-only) missed 000739's ¥189.04 as it
+  was sold the same day → div_in now summed from runs/*/log.json
+  corporate_actions.applied. 上证 '—' at noon is expected (no daily bar
+  until hours after close); now shows the run-time - 2026-10-09 owner: noon panel showed '— 较上一快照' and 上证 '—'. Bug: the
+  dividend branch was an elif ahead of day_pnl, so the first dividend day
+  lost its P&L. Also dividendCash (open-only) missed 000739's 189.04 as it
+  was sold the same day; div_in is now summed from runs/*/log.json
+  corporate_actions.applied. 上证 '—' at noon is expected (no daily bar
+  until hours after close); now shows the run-time pct labelled (运行时).
