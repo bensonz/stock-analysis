@@ -12,4 +12,4 @@
 - [ ] events.json `美国9月CPI公布（日期待BLS确认）` says 2026-10-13; wallstreetcn
       lists 美国9月CPI 2026-10-14 20:30 Beijing (impact 10-15). The fuzzy
       dedupe matched them (±1 day) so no inbox item was raised — fix the date by hand.
-- [ ] Consider raising MIN_IMPORTANCE to 4 or filtering regions if triage is too heavy.
+- [x] Raise MIN_IMPORTANCE to 4 (owner 2026-10-12: 91 items at >=3, mostly noise).

@@ -124,7 +124,7 @@ python3 scripts/doctor.py --date 2026-08-20 --slot noon
 python3 scripts/doctor.py --since 2026-08-01   # sweep/recompute a range
 
 # Event inbox — 华尔街见闻 calendar candidates for tracking/events.json
-python3 scripts/event_inbox.py refresh   # fetch 45 days (imp>=3), append NEW items to
+python3 scripts/event_inbox.py refresh   # fetch 45 days (imp>=4), append NEW items to
                                          # tracking/event_inbox.md; owner marks are kept
 python3 scripts/event_inbox.py promote   # [x] → events.json (+inbox_id); [x]/[-] →
                                          # tracking/event_inbox_ledger.json (never return)

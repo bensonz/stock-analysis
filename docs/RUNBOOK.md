@@ -176,7 +176,7 @@ Failure patterns seen in production, fastest diagnosis first:
 
 `tracking/events.json` feeds the report's 未来事件窗口 and the prompt. You no
 longer have to find events yourself: every run fetches the 华尔街见闻 calendar
-(importance >= 3, next 45 days) into **`tracking/event_inbox.md`**. Open it in
+(importance >= 4, next 45 days) into **`tracking/event_inbox.md`**. Open it in
 the IDE and mark each item:
 
 - `[x]` keep — the next run (or `promote` below) adds it to events.json

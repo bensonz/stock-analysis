@@ -1,8 +1,15 @@
 # Event inbox — decisions
 
-## D1. Source = 华尔街见闻 only, importance >= 3, 45 days forward
+## D1. Source = 华尔街见闻 only, importance >= 4, 45 days forward
 Owner choice. One `macro_info_ws(date=YYYYMMDD)` call per date. `重要性`
 goes 1–4 (the midterm is 4). Default impact: imp>=4 → high, imp 3 → medium.
+
+Threshold raised 3 → 4 on 2026-10-12 (owner): the first live refresh at >=3
+gave 91 items in 45 days (70 at imp 3), most of them product launches and
+conferences. imp 4 keeps ~21 (midterm, APEC, port fees, EU Council). Lost at
+imp 3: China CPI/PPI/trade prints and Fed speakers. Undecided items below the
+threshold are dropped on refresh WITHOUT a ledger entry, so lowering
+`MIN_IMPORTANCE` again brings them back.
 
 ## D2. "Errors" vs "empty days"
 akshare builds a DataFrame from `data.items` and then indexes `public_date`;

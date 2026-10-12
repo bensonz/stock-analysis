@@ -23,8 +23,11 @@ MIDTERM = {"时间": "2026-11-03 00:00:00", "地区": "美国", "事件": "美�
            "重要性": 4, "今值": float("nan"), "预期": float("nan"), "前值": float("nan"),
            "链接": ""}
 KR_CPI = {"时间": "2026-11-03 07:00:00", "地区": "韩国", "事件": "10月CPI同比",
-          "重要性": 3, "今值": float("nan"), "预期": float("nan"), "前值": 2.9,
+          "重要性": 4, "今值": float("nan"), "预期": float("nan"), "前值": 2.9,
           "链接": "https://wallstreetcn.com/calendar/KR2608052/overview"}
+IMP3 = {"时间": "2026-11-03 08:00:00", "地区": "日本", "事件": "9月失业率", "重要性": 3,
+        "今值": float("nan"), "预期": float("nan"), "前值": float("nan"),
+        "链接": "https://wallstreetcn.com/calendar/JP3/overview"}
 LOW = {"时间": "2026-11-03 09:00:00", "地区": "日本", "事件": "不重要", "重要性": 2,
        "今值": float("nan"), "预期": float("nan"), "前值": float("nan"), "链接": ""}
 
@@ -53,8 +56,8 @@ def paths(tmp_path):
             "events_path": events}
 
 
-def refresh(paths, fetch, today=TODAY, days=30):
-    return ei.refresh(today, fetch_fn=fetch, days=days, **paths)
+def refresh(paths, fetch, today=TODAY, days=30, **kw):
+    return ei.refresh(today, fetch_fn=fetch, days=days, **paths, **kw)
 
 
 def items(paths):
@@ -99,17 +102,32 @@ def test_non_us_is_cn_same_day_and_region_prefixed():
     it = ei.candidate_from_row(KR_CPI)
     assert (it.tz, it.date, it.name) == ("CN", "2026-11-03", "韩国10月CPI同比")
     assert it.id == "wscn-20261103-KR2608052"
-    assert it.kind == "macro_release" and it.impact == "medium"
+    assert it.kind == "macro_release" and it.impact == "high"   # importance 4
 
 
 # ── refresh ──────────────────────────────────────────────────────────────────
 
 def test_refresh_filters_importance_and_writes_inbox(paths):
-    res = refresh(paths, fake_fetch({"20261103": [MIDTERM, KR_CPI, LOW]}))
-    assert res["new"] == 2 and res["pending"] == 2
+    res = refresh(paths, fake_fetch({"20261103": [MIDTERM, IMP3, LOW]}))
+    assert res["new"] == 1 and res["pending"] == 1
     text = paths["inbox_path"].read_text(encoding="utf-8")
     assert "## 2026-11-04 (T-23) 美国 — 美国 11 月 3 日中期选举" in text
     assert "不重要" not in text
+    assert "日本9月失业率" not in text        # imp 3 < MIN_IMPORTANCE 4
+
+
+def test_refresh_drops_undecided_items_below_threshold_but_keeps_marked(paths):
+    """Raising the threshold prunes old undecided items, not owner picks."""
+    imp3b = {**IMP3, "事件": "9月求人倍率", "链接": "https://wallstreetcn.com/calendar/JP3b/overview"}
+    refresh(paths, fake_fetch({"20261103": [MIDTERM, IMP3, imp3b]}), min_importance=3)
+    a_id, b_id = "wscn-20261103-JP3", "wscn-20261103-JP3b"
+    set_mark(paths, b_id, "x")
+    res = refresh(paths, fake_fetch({"20261103": [MIDTERM, IMP3, imp3b]}))
+    left = items(paths)
+    assert a_id not in left
+    assert left[b_id].mark == "x"
+    assert res["below_threshold"] == 1
+    assert ei.load_ledger(paths["ledger_path"])["decisions"] == []
 
 
 def test_per_date_failure_is_counted_not_fatal(paths):

@@ -7,7 +7,7 @@ for two months: it missed the US midterm election (2026-11-03). The owner does
 not want the calendar limited to news they personally see, but also does not
 want a noisy feed written straight into the LLM prompt. So:
 
-    华尔街见闻 calendar (akshare.macro_info_ws, importance >= 3, 45 days)
+    华尔街见闻 calendar (akshare.macro_info_ws, importance >= 4, 45 days)
         └─ refresh ─► tracking/event_inbox.md      (owner ticks a checklist)
                          └─ promote ─► tracking/events.json   ([x] keep)
                                    └─► tracking/event_inbox_ledger.json
@@ -48,7 +48,7 @@ LEDGER_FILE = PROJECT_ROOT / "tracking" / "event_inbox_ledger.json"
 EVENTS_FILE = event_calendar.EVENTS_FILE
 
 HORIZON_DAYS = 45
-MIN_IMPORTANCE = 3
+MIN_IMPORTANCE = 4   # owner 2026-10-12: >=3 gave 91 items/45d, mostly noise
 #: akshare's macro_info_ws calls requests.get with no timeout at all
 CALL_TIMEOUT_SEC = 20
 #: whole-fetch budget; dates not reached count as fetch errors
@@ -285,7 +285,7 @@ _HEADER = """\
 # 事件收件箱 (event inbox)
 
 > 由 `python3 scripts/event_inbox.py refresh` 生成，每次流水线运行自动刷新
-> （来源: 华尔街见闻财经日历，重要性>=3，未来45天）。你只需要打勾：
+> （来源: 华尔街见闻财经日历，重要性>=4，未来45天）。你只需要打勾：
 >
 > - `[x]` 保留 → 下次运行（或 `python3 scripts/event_inbox.py promote`）写入 `tracking/events.json`
 > - `[-]` 跳过 → 记入台账，不再出现
@@ -424,15 +424,20 @@ def _record(ledger: dict, it: Item, decision: str, today: _date) -> None:
 
 def refresh(today: _date | None = None, inbox_path: Path = INBOX_FILE,
             ledger_path: Path = LEDGER_FILE, events_path: Path = EVENTS_FILE,
-            fetch_fn=None, days: int = HORIZON_DAYS) -> dict:
-    """Append NEW candidates; keep every owner mark/edit already in the file."""
+            fetch_fn=None, days: int = HORIZON_DAYS,
+            min_importance: int = MIN_IMPORTANCE) -> dict:
+    """Append NEW candidates; keep every owner mark/edit already in the file.
+
+    Undecided items below `min_importance` (left from a lower threshold) are
+    dropped without a ledger entry, so lowering the threshold brings them back.
+    """
     today = today or _date.today()
     items, warnings = read_inbox(inbox_path)
     ledger = load_ledger(ledger_path)
     decided = {d.get("inbox_id") for d in ledger["decisions"]}
     events = load_events_doc(events_path)["events"]
 
-    kept, expired, dup_existing = [], [], 0
+    kept, expired, dup_existing, below = [], [], 0, 0
     for it in items:
         d = it.impact_date()
         if it.mark == " " and d is not None and d < today:
@@ -440,10 +445,13 @@ def refresh(today: _date | None = None, inbox_path: Path = INBOX_FILE,
             _record(ledger, it, "expired", today)
         elif it.mark == " " and match_event(it, events):
             dup_existing += 1   # the owner hand-added it to events.json meanwhile
+        elif it.mark == " " and it.importance < min_importance:
+            below += 1
         else:
             kept.append(it)
 
-    candidates, stats = fetch_candidates(today, days=days, fetch_fn=fetch_fn)
+    candidates, stats = fetch_candidates(today, days=days, fetch_fn=fetch_fn,
+                                        min_importance=min_importance)
     listed = {it.id for it in kept}
     new = []
     counts = {"already_listed": 0, "decided": 0, "past": 0,
@@ -473,7 +481,8 @@ def refresh(today: _date | None = None, inbox_path: Path = INBOX_FILE,
     return {
         "fetched": stats["candidates"], "new": len(new),
         "pending": sum(1 for i in final if i.mark == " "),
-        "expired": len(expired), "dup_existing": dup_existing, **counts,
+        "expired": len(expired), "dup_existing": dup_existing,
+        "below_threshold": below, **counts,
         "fetch_errors": len(stats["errors"]), "empty_days": len(stats["empty_days"]),
         "errors": stats["errors"], "warnings": warnings,
     }

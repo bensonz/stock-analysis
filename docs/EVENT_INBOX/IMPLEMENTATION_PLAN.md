@@ -8,7 +8,7 @@ checklist; ticked items are promoted into `events.json`.
 Flow:
 
 ```
-akshare.macro_info_ws (华尔街见闻, imp>=3, 45 days)
+akshare.macro_info_ws (华尔街见闻, imp>=4, 45 days)
         │ refresh: drop past / already-in-events.json / already-decided
         ▼
 tracking/event_inbox.md      ← owner edits: [x] keep  [-] skip  impact/direction/date/tz/kind/note
