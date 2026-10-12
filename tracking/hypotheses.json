@@ -2391,13 +2391,17 @@
           {
             "date": "2026-10-12",
             "detail": "招商轮船单日-9.79%但仍在保本止损19.29上方3.1%，HOLD让机械止损工作而非情绪化主动卖飞；油运景气未变（克拉克森VLCC-TCE 81.4万美元/天，来源:中财网10-11）"
+          },
+          {
+            "date": "2026-10-12",
+            "detail": "招商轮船-9.38%大跌仍守保本止损19.29(距3.55%)：让机械止损工作而非恐慌手动砍仓；油运VLCC景气未变(Clarksons Q3均值27.8万美元/天，来源金融界/网易10-08)。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 62,
+      "sampleSize": 63,
       "hitRate": 1.0,
-      "confidence": 0.984,
+      "confidence": 0.985,
       "tags": [
         "exit-rule",
         "timing",
@@ -4759,11 +4763,15 @@
           {
             "date": "2026-10-12",
             "detail": "panic硬阻断（涨跌比0.35:1<0.35，0/3指数绿）机械生效，禁止任何新开仓——即使策略池存在RPS甜区候选也一律不买，避免FOMO追恐慌反弹"
+          },
+          {
+            "date": "2026-10-12",
+            "detail": "机械层hard block再次证明价值：宁波银行(银行top5板块、RPS120=87.63甜区、dist_ma均<4%未追高)本可通过全部个股门槛，但breadth 0.27:1 panic硬性封禁新仓，V2正确执行现金为王而非追逐单一合格标的。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 39,
+      "sampleSize": 40,
       "hitRate": 1.0,
       "confidence": 0.976,
       "tags": [
@@ -6838,7 +6846,7 @@
       "type": "rule",
       "status": "validated",
       "created": "2026-08-11",
-      "lastTested": "2026-10-09",
+      "lastTested": "2026-10-12",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -6873,13 +6881,17 @@
           {
             "date": "2026-10-09",
             "detail": "策略池27只中约15只rps120>95%（百普赛斯99.65/药康99.19/中石科技98.99等），RPS封顶规则再次挡住最大一批'最强动量'——而今日实际领涨的传媒+7~8%个股根本不在高RPS池内，印证封顶防的是拥挤回撤而非错过主升"
+          },
+          {
+            "date": "2026-10-12",
+            "detail": "RPS>95%封顶继续过滤策略池：百普赛斯99.65/一博科技99.21/药康生物99.17/中石科技99.02均超95%上限，且当日多只dist_ma深度为负(已跌破短期均线)，动量极致拥挤后率先回落。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 8,
+      "sampleSize": 9,
       "hitRate": 1.0,
-      "confidence": 0.9,
+      "confidence": 0.909,
       "tags": [
         "entry-filter"
       ],

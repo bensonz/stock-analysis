@@ -1,0 +1,176 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "出版",
+        "5d_pct": 3.95,
+        "trend": "defensive"
+      },
+      {
+        "name": "影视院线",
+        "5d_pct": 3.81,
+        "trend": "defensive"
+      },
+      {
+        "name": "农商行Ⅱ",
+        "5d_pct": 2.58,
+        "trend": "steady"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": 2.57,
+        "trend": "defensive"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": 2.54,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -8.12,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": -5.18,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "房地产服务",
+        "5d_pct": -4.92,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": -4.5,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "焦炭Ⅱ",
+        "5d_pct": -4.44,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/3持仓在今日top5，0/3在bottom5；航运港口×1、医疗服务×2均居中游",
+    "regime": "防御性轮动：资金抱团传媒/银行高股息，抛售AI硬件/海运/半导体；breadth 0.27:1为恐慌级"
+  },
+  "position_decisions": [
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+3.68%，保本止损19.29未触发(距3.55%→stop_proximity WATCH)；油运VLCC景气未变(Clarksons Q3 VLCC均值27.8万美元/天、10月初部分航线超160万美元/天，来源金融界/网易10-08)；今日-9.38%为海运板块集体杀跌(新浪财经)，让机械止损工作，跌破19.29自动离场。",
+      "sector_rank": "未入top5/bottom5(中游，海运今日大跌需盯紧)",
+      "new_stop": null,
+      "pnl_pct": 3.68,
+      "days_held": 21,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+18.4%，止损已锁+10%(47.14)未触发；医疗服务未入bottom5；CRO订单拐点确认(Q1新签+111.6%、实验猴价一年翻倍，来源澎湃/ByDrug)，今日-3.56%抗跌，让赢家奔跑。",
+      "sector_rank": "未入top5/bottom5(中游)",
+      "new_stop": null,
+      "pnl_pct": 18.39,
+      "days_held": 15,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+24.8%，止损已锁+10%(139.15)未触发；医疗服务未入bottom5；CRO龙头订单回升(全年收入指引上调，来源东财研报/输入历史)，恐慌日逆势+0.03%，让赢家奔跑。",
+      "sector_rank": "未入top5/bottom5(中游)",
+      "new_stop": null,
+      "pnl_pct": 24.78,
+      "days_held": 45,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "reason": "银行板块今日top5(农商行+2.58%/国有大行+2.54%)，RPS120=87.63甜区、dist_ma5+1.9%/ma10+2.9%/ma20+3.1%未追高、margin adding，个股门槛全过；但entry_regime=panic(breadth 0.27:1, 0/3指数绿)硬性封禁新仓，现金为王。",
+      "rps120": 87.63
+    },
+    {
+      "code": "300981",
+      "name": "中红医疗",
+      "reason": "dist_ma5+7.9%/ma10+14.0%/ma20+26.6%三条追高线全破(Rule 2b硬性拦截)；PE 235且净利润同比-117%无增长红色警戒；恐慌盘禁新仓。",
+      "rps120": 94.12
+    },
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "reason": "重入标的(10-09刚卖@24.53)：RPS120=94.74扩展区、医药生物板块未入今日top5、无价位/形态/催化新变化，重入举证责任不满足；恐慌盘禁新仓。",
+      "rps120": 94.74
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "RPS120=94.6扩展区、PE 575(净利润-96%)无增长红色警戒、IV rank 0.545、医疗服务未入top5；恐慌盘禁新仓。",
+      "rps120": 94.6
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "rps20仅12.53短期动量崩塌、margin signal=deleveraging、有色板块未入top5；恐慌盘禁新仓。",
+      "rps120": 92.59
+    },
+    {
+      "code": "600428",
+      "name": "中远海特",
+      "reason": "航运板块今日大跌(海运跌幅居前，新浪财经)、rps20=36.14动量转弱；恐慌盘禁新仓。",
+      "rps120": 88.81
+    },
+    {
+      "code": "301080",
+      "name": "百普赛斯",
+      "reason": "RPS120=99.65超95%封顶(h151)，动量极致过热，拥挤交易恐慌日率先踩踏；恐慌盘禁新仓。",
+      "rps120": 99.65
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "机械层hard block再次证明价值：宁波银行(银行top5板块、RPS120=87.63甜区、dist_ma均<4%未追高)本可通过全部个股门槛，但breadth 0.27:1 panic硬性封禁新仓，V2正确执行现金为王而非追逐单一合格标的。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "恐慌盘下个股alpha被系统性beta淹没，最强防御板块的合格标的也应等breadth修复后再入场。"
+    },
+    {
+      "text": "RPS>95%封顶继续过滤策略池：百普赛斯99.65/一博科技99.21/药康生物99.17/中石科技99.02均超95%上限，且当日多只dist_ma深度为负(已跌破短期均线)，动量极致拥挤后率先回落。",
+      "type": "rule",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "RPS>95%代表相对强度过热，拥挤交易在恐慌日率先踩踏。"
+    },
+    {
+      "text": "招商轮船-9.38%大跌仍守保本止损19.29(距3.55%)：让机械止损工作而非恐慌手动砍仓；油运VLCC景气未变(Clarksons Q3均值27.8万美元/天，来源金融界/网易10-08)。",
+      "type": "observation",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "机械保本止损把快速盈利转为低风险持有，单日板块性波动不构成卖出理由。"
+    }
+  ],
+  "market_summary": "恐慌盘：breadth 0.27:1(涨1167/跌4325)，0/3指数收绿(上证-0.43%/深成-2.03%/创业板-2.61%/科创50-2.1%)，48涨停/23跌停，超4000股下跌(证券时报/新浪财经)。资金防御性轮动：传媒(出版+3.95%/影视院线+3.81%)与银行(农商行+2.58%/国有大行+2.54%)创新高，海运/石化/通信设备/半导体杀跌。IV整体中性(avg rank 0.458)但创业板/科创50/中证500偏高(0.55-0.57)。机械层entry_regime=panic hard block，新仓全禁，现金为王。",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}

@@ -302,6 +302,14 @@
       "change_pct": 3.21,
       "action": "HOLD",
       "note": "保本止损19.29未触发（现价19.91，缓冲3.1%），航运港口未入bottom5；今日-9.79%为恐慌盘获利回吐，油运景气未变（克拉克森VLCC-TCE 81.4万美元/天，来源:中财网10-11）；stop_proximity为WATCH级别，让机械止损工作，跌破19.29自动离场；margin deleveraging需盯紧"
+    },
+    {
+      "date": "2026-10-12",
+      "slot": "afternoon",
+      "price": 20.0,
+      "change_pct": 3.68,
+      "action": "HOLD",
+      "note": "浮盈+3.68%，保本止损19.29未触发(距3.55%→stop_proximity WATCH)；油运VLCC景气未变(Clarksons Q3 VLCC均值27.8万美元/天、10月初部分航线超160万美元/天，来源金融界/网易10-08)；今日-9.38%为海运板块集体杀跌(新浪财经)，让机械止损工作，跌破19.29自动离场。"
     }
   ],
   "exitDate": null,
@@ -311,6 +319,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-09-03T11:41:15.769336+08:00",
-  "updatedAt": "2026-10-12T11:38:59.191714+08:00",
+  "updatedAt": "2026-10-12T15:11:14.616739+08:00",
   "trackerVersion": "2.1"
 }
