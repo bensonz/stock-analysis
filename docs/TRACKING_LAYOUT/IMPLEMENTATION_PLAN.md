@@ -19,9 +19,7 @@
 
 ## Stage 2: Move `tracking/` to book / ledgers / calendar
 
-Owner-approved. **Waits for the `feat/event-triage` merge** (it edits
-`event_inbox.py`, the run_daily phase-1 event-inbox block and the doctor —
-the same files this stage must touch).
+Owner-approved. Started after `feat/event-triage` merged (60f84e3).
 
 **Goal**: Split `tracking/` by kind, so a "book" operation cannot reach
 non-book state by a glob:
@@ -29,7 +27,7 @@ non-book state by a glob:
 ```
 tracking/
   book/      config.json, positions.json,
-             active/{code}.json, closed/{code}_{exitDate}.json
+             active/{code}.json, closed/{code}_{exitDate}.json (42 legacy {code}.json kept)
   ledgers/   hypotheses.json, predictions.jsonl, rotation_ledger.json
   calendar/  events.json, event_inbox.md, event_inbox_ledger.json
 ```
@@ -65,4 +63,11 @@ paths; full suite green.
   Decide in stage 2 whether to move `plan_book_restore` into
   `position_manager`.
 
-**Status**: Not Started
+**Result** (2026-10-12): done on `feat/tracking-layout`. Code, migrate script
+and data move are separate commits (D17). Doctor needs no epoch entry — it
+never reads tracking/ (D13). `plan_book_restore` moved to position_manager
+(D9); reset order fixed (D10). Suite 1056 passed / 13 skipped (baseline 1027).
+Site, doctor `--open`, `run_rules`, `event_inbox status` and five research
+tools give the same output as master; 391/391 snapshots plan with 0 errors.
+
+**Status**: Complete
