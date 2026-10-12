@@ -172,6 +172,33 @@ Failure patterns seen in production, fastest diagnosis first:
 | doctor: "股票列表未在当日刷新" | `pricedb.py stocks` | akshare listing endpoint down — run `stocks` then `update` by hand; 3 in a row = look at the code |
 | report banner warns "adj factors lag prices" | `pricedb.py factors verify` | factor sync missed — `factors heal`, then `rps` |
 
+## Choosing upcoming events (the event inbox)
+
+`tracking/events.json` feeds the report's 未来事件窗口 and the prompt. You no
+longer have to find events yourself: every run fetches the 华尔街见闻 calendar
+(importance >= 3, next 45 days) into **`tracking/event_inbox.md`**. Open it in
+the IDE and mark each item:
+
+- `[x]` keep — the next run (or `promote` below) adds it to events.json
+- `[-]` skip — recorded in `tracking/event_inbox_ledger.json`, never shown again
+- `[ ]` undecided — stays; the doctor reminds you once its A-share impact date
+  is within 7 days
+
+You may edit the name (after `—` in the heading), `impact`, `direction`
+(risk / two_sided / supportive), `date`, `tz` (US = hits the next A-share
+session / CN = same day), `kind` and `note`. Leave `src:` and `id:` alone.
+
+```bash
+python3 scripts/event_inbox.py status    # what is waiting, what is due soon
+python3 scripts/event_inbox.py promote   # apply your marks now (no need to wait for a run)
+python3 scripts/event_inbox.py refresh   # re-fetch by hand
+```
+
+Each run prints `[event-inbox] new N, pending N, promoted N, … fetch errors N`.
+"empty days" are dates wallstreetcn lists nothing for yet — normal 3+ weeks
+out. If an `[x]` item has a bad value (e.g. `direction: bearish`) it is NOT
+promoted, stays in the inbox, and the line says `INVALID`.
+
 ## Where everything lives
 
 ```
@@ -179,6 +206,7 @@ runs/<date>/<slot>/input/     phase-1 JSON artifacts (what the model saw)
 runs/<date>/<slot>/output/    report.md, candidates.md, daily_summary.json
 runs/<date>/<slot>/manifest.json, audit-result.md
 tracking/                     the live book (positions, closed/, hypotheses)
+tracking/event_inbox.md       event candidates for you to tick (see above)
 audit/OPEN.md                 standing problems, folded by cause
 data/pricedb/                 SQLite price DB (git-ignored, rebuildable)
 data/launchd/*.log            scheduler logs

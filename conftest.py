@@ -38,6 +38,8 @@ import pytest
 LIVE_STATE = (
     "tracking/positions.json",
     "tracking/events.json",
+    "tracking/event_inbox.md",
+    "tracking/event_inbox_ledger.json",
     "tracking/hypotheses.json",
     "tracking/portfolio_config.json",
 )

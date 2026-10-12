@@ -123,6 +123,16 @@ python3 scripts/doctor.py               # audit the most recent run, print + wri
 python3 scripts/doctor.py --date 2026-08-20 --slot noon
 python3 scripts/doctor.py --since 2026-08-01   # sweep/recompute a range
 
+# Event inbox — 华尔街见闻 calendar candidates for tracking/events.json
+python3 scripts/event_inbox.py refresh   # fetch 45 days (imp>=3), append NEW items to
+                                         # tracking/event_inbox.md; owner marks are kept
+python3 scripts/event_inbox.py promote   # [x] → events.json (+inbox_id); [x]/[-] →
+                                         # tracking/event_inbox_ledger.json (never return)
+python3 scripts/event_inbox.py status    # pending / due within 7 days / invalid [x]
+                                         # run_daily phase 1 runs promote→refresh every
+                                         # slot ([event-inbox] line); rules in
+                                         # docs/EVENT_INBOX/DECISIONS.md
+
 # IV sentiment (needs options-learn backend on :8000)
 python3 scripts/fetch_iv_sentiment.py --human
 
