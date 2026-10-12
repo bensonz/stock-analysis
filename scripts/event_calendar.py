@@ -186,7 +186,7 @@ def upcoming(days: int = 21, today: _date | None = None,
         impact_d = a_share_impact_date(d, e.get("tz", "CN"))
         base = {**{k: e.get(k) for k in
                    ("date", "tz", "name", "kind", "certainty",
-                    "impact", "notes", "source")},
+                    "impact", "notes", "source", "decided_by")},
                 "direction": e.get("direction", "risk"),
                 "a_share_impact_date": impact_d.isoformat(),
                 "days_until_impact": (impact_d - today).days}

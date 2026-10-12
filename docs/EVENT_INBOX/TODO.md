@@ -7,9 +7,17 @@
 - [x] Stage 5: real refresh, tick midterm, promote, data commit
 - [x] Add inbox + ledger to root conftest LIVE_STATE guard
 
+## AI triage (owner 2026-10-12)
+- [x] Stage 6: event_triage.py + agents/EVENT_TRIAGE.md + triage/override in event_inbox; CLAUDE.md + RUNBOOK
+- [x] Stage 7: report 〔AI选入〕 marker (event_calendar passes decided_by)
+- [x] Stage 8: doctor triage-failure finding; status AI stats; WEEKLY_AUDIT step
+- [x] Stage 9: live triage of the 22 undecided items; data commit
+
 ## Follow-ups for the owner (not done here)
-- [ ] Triage the first inbox: 91 undecided items, 48 inside the 7-day window.
+- [x] Triage the first inbox — now done by the AI (Stage 9).
 - [ ] events.json `美国9月CPI公布（日期待BLS确认）` says 2026-10-13; wallstreetcn
       lists 美国9月CPI 2026-10-14 20:30 Beijing (impact 10-15). The fuzzy
       dedupe matched them (±1 day) so no inbox item was raised — fix the date by hand.
 - [x] Raise MIN_IMPORTANCE to 4 (owner 2026-10-12: 91 items at >=3, mostly noise).
+- [ ] Owner: decide whether event triage should run with DeepSeek reasoning
+      off (seconds instead of ~5 min for a 22-row burst; D19).

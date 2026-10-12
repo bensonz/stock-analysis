@@ -151,6 +151,29 @@ python3 scripts/research/reentry_stats.py --human
   now come with an explicit "what's different this time" in the decision
   reason. Grade that: a re-entry whose reason cites no change is a finding.
 
+### C5. Event Calendar AI Triage (added 2026-10-12)
+
+Since 2026-10-12 an LLM decides which 华尔街见闻 calendar events enter
+`tracking/events.json` (spec `agents/EVENT_TRIAGE.md`); the owner only
+overrules. Review its week:
+
+```bash
+python3 scripts/event_inbox.py status
+python3 -c "import json; [print(d['decided'], d['decision'], d.get('impact'), d['name'], '—', d.get('reason')) for d in json.load(open('tracking/event_inbox_ledger.json'))['decisions'] if d.get('decided_by') == 'ai' or d.get('overrode_ai')]"
+```
+
+- Report kept / skipped / `impact=high` counts and the owner override rate
+  (`overrides`, split by AI keep vs AI skip).
+- Grade the `high` keeps: `high` within 3 days sets `risk_window` to
+  `event_imminent` (new buys halved/postponed). A `high` that did not move the
+  market is a cost — over-use makes the system under-deploy. Check each one
+  against the index move on its A-share impact day.
+- Grade the skips: did a skipped event move the market? That is a miss.
+- Any owner override, or a pattern in the misses → propose a wording change to
+  `agents/EVENT_TRIAGE.md` (the spec, not code), with the examples.
+- `AI 事件分拣失败` doctor findings this week → note them; three in a row is a
+  config/spec problem.
+
 ### D. Sector Alignment (V2 specific)
 - Were positions opened in hot sectors? (check sector_rank in new_positions)
 - Were positions held in cold sectors too long?

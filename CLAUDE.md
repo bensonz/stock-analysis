@@ -127,11 +127,17 @@ python3 scripts/doctor.py --since 2026-08-01   # sweep/recompute a range
 python3 scripts/event_inbox.py refresh   # fetch 45 days (imp>=4), append NEW items to
                                          # tracking/event_inbox.md; owner marks are kept
 python3 scripts/event_inbox.py promote   # [x] → events.json (+inbox_id); [x]/[-] →
-                                         # tracking/event_inbox_ledger.json (never return)
-python3 scripts/event_inbox.py status    # pending / due within 7 days / invalid [x]
-                                         # run_daily phase 1 runs promote→refresh every
-                                         # slot ([event-inbox] line); rules in
-                                         # docs/EVENT_INBOX/DECISIONS.md
+                                         # tracking/event_inbox_ledger.json (never return).
+                                         # An owner edit of a 🤖 (AI) item overrides it
+python3 scripts/event_inbox.py triage    # ONE LLM call (LLM_PROVIDER's model, no tools,
+                                         # spec agents/EVENT_TRIAGE.md) judges NEW [ ]
+                                         # items: keep → events.json at once (decided_by
+                                         # ai). 🤖 items stay until their impact date
+python3 scripts/event_inbox.py status    # pending / due within 7 days / invalid [x] /
+                                         # AI kept/skipped/high + owner override rate
+                                         # run_daily phase 1 runs promote→refresh→triage
+                                         # every slot ([event-inbox] line); rules in
+                                         # docs/EVENT_INBOX/DECISIONS.md (AI: D12–D17)
 
 # IV sentiment (needs options-learn backend on :8000)
 python3 scripts/fetch_iv_sentiment.py --human

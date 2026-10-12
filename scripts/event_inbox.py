@@ -13,6 +13,12 @@ want a noisy feed written straight into the LLM prompt. So:
                                    └─► tracking/event_inbox_ledger.json
                                        ([x] keep / [-] skip — never re-proposed)
 
+Owner decision 2026-10-12: "AI decides, owner can overrule." Each NEW
+undecided item gets one LLM judgement (event_triage.py, spec in
+agents/EVENT_TRIAGE.md), applied at once: keep → events.json. The AI-decided
+item STAYS in the inbox (🤖 + an `ai:` line) until its impact date passes, so
+the owner can flip it; any owner edit of an AI-held item wins (promote).
+
 event_calendar.py stays the only READER of events.json; this module only
 proposes and appends. Every rule with a judgment call in it (Beijing time →
 date/tz, the fuzzy dedupe, why "00:00" is a placeholder) is recorded with its
@@ -20,7 +26,9 @@ known limits in docs/EVENT_INBOX/DECISIONS.md.
 
 CLI:
     python3 scripts/event_inbox.py refresh   # fetch + append new candidates
-    python3 scripts/event_inbox.py promote   # [x] → events.json, [x]/[-] → ledger
+    python3 scripts/event_inbox.py promote   # [x] → events.json, [x]/[-] → ledger,
+                                             # owner edits of AI items win
+    python3 scripts/event_inbox.py triage    # AI-judge new undecided items now
     python3 scripts/event_inbox.py status    # counts + undecided items due soon
 """
 import argparse
@@ -31,7 +39,7 @@ import os
 import re
 import sys
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import date as _date, timedelta
 from pathlib import Path
 
@@ -40,6 +48,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import akshare as ak  # noqa: E402
 
 import event_calendar  # noqa: E402
+import event_triage  # noqa: E402
 from pricedb.providers import _TimeoutError, _run_with_timeout  # noqa: E402
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -55,6 +64,15 @@ CALL_TIMEOUT_SEC = 20
 FETCH_DEADLINE_SEC = 60
 #: the doctor reminds about undecided items this close to their impact date
 REMIND_WITHIN_DAYS = 7
+#: items per triage call; the rest wait for the next run (a lowered
+#: MIN_IMPORTANCE can bring back ~90 at once). The first live call took ~5 min
+#: for 22 rows on a reasoning model, so keep a batch inside the deadline.
+MAX_TRIAGE_ITEMS = 25
+#: wall-clock bound on the whole LLM call — the client's own timeout is not one
+TRIAGE_DEADLINE_SEC = 480
+TRIAGE_REASON_MAX = 120
+#: an owner edit to any of these on an AI-held item is an override (D15)
+OVERRIDE_FIELDS = ("name", "date", "tz", "kind", "impact", "direction", "note")
 
 IMPACTS = ("high", "medium", "low")
 DIRECTIONS = ("risk", "two_sided", "supportive")  # event_calendar's vocabulary
@@ -79,6 +97,7 @@ class Item:
     link: str = ""
     note: str = ""
     mark: str = " "     # " " undecided | "x" keep | "-" skip
+    ai: str = ""        # the AI's judgement line; non-empty = shown with 🤖
 
     def impact_date(self) -> _date | None:
         try:
@@ -285,14 +304,17 @@ _HEADER = """\
 # 事件收件箱 (event inbox)
 
 > 由 `python3 scripts/event_inbox.py refresh` 生成，每次流水线运行自动刷新
-> （来源: 华尔街见闻财经日历，重要性>=4，未来45天）。你只需要打勾：
+> （来源: 华尔街见闻财经日历，重要性>=4，未来45天）。新候选由 AI 先决定（🤖 + `ai:` 行），
+> 保留的立即写入 `tracking/events.json`。你不必打开这里；想推翻就直接改：
 >
+> - 🤖 项: 改勾选或任一字段 = 推翻 AI，你的版本生效（`[-]` 从 events.json 撤下，`[x]` 写入，
+>   改 impact/direction 等 = 更新条目，`[ ]` = 撤回 AI 决定、留给你定）。🤖 项在A股影响日过后自动移出
 > - `[x]` 保留 → 下次运行（或 `python3 scripts/event_inbox.py promote`）写入 `tracking/events.json`
 > - `[-]` 跳过 → 记入台账，不再出现
 > - `[ ]` 待定 → 留在这里
 >
 > 可直接改: 标题里 `—` 后的名称、`impact` (high/medium/low)、`direction` (risk/two_sided/supportive)、
-> `date`、`tz` (US=影响其后第一个A股交易日 / CN=当日)、`kind`、`note`。不要改 `src:` 和 `id:` 两行。
+> `date`、`tz` (US=影响其后第一个A股交易日 / CN=当日)、`kind`、`note`。不要改 `ai:`、`src:` 和 `id:` 三行（🤖 可留可删）。
 > 标题日期 = A股影响日，由 date+tz 推算，重写时刷新。规则与局限: docs/EVENT_INBOX/DECISIONS.md
 """
 
@@ -309,10 +331,13 @@ def render_inbox(items: list, today: _date) -> str:
         d = it.impact_date()
         when = f"{d.isoformat()} (T-{(d - today).days})" if d else f"{it.date} (T-?)"
         L += [f"## {when} {it.region} — {it.name}",
-              f"- [{it.mark}] keep   impact: {it.impact}   direction: {it.direction}",
+              f"- [{it.mark}] keep{' 🤖' if it.ai else ''}   "
+              f"impact: {it.impact}   direction: {it.direction}",
               f"  date: {it.date}   tz: {it.tz}   kind: {it.kind}",
-              f"  note: {it.note}".rstrip(),
-              f"  src: wallstreetcn imp={it.importance} 北京 {it.beijing_time} | {it.link}".rstrip(),
+              f"  note: {it.note}".rstrip()]
+        if it.ai:
+            L.append(f"  ai: {it.ai}")
+        L += [f"  src: wallstreetcn imp={it.importance} 北京 {it.beijing_time} | {it.link}".rstrip(),
               f"  id: {it.id}",
               ""]
     return "\n".join(L).rstrip() + "\n"
@@ -333,7 +358,7 @@ def parse_inbox(text: str) -> tuple[list, list]:
         f = {"region": "?", "name": heading.split("—", 1)[-1].strip(),
              "mark": " ", "note": "", "link": "", "importance": 0,
              "beijing_time": "", "date": "", "tz": "", "impact": "",
-             "direction": "", "kind": "other", "id": ""}
+             "direction": "", "kind": "other", "id": "", "ai": ""}
         hm = re.match(r"\S+\s+\(T-?[-\d?]+\)\s+(\S+)\s+—\s+(.+)$", heading)
         if hm:
             f["region"], f["name"] = hm.group(1), hm.group(2).strip()
@@ -346,6 +371,9 @@ def parse_inbox(text: str) -> tuple[list, list]:
                 rest = cb.group(2)
             elif s.startswith("note:"):
                 f["note"] = s[5:].strip()
+                continue
+            elif s.startswith("ai:"):
+                f["ai"] = s[3:].strip()   # machine-owned; the ledger is the authority
                 continue
             elif s.startswith("src:"):
                 sm = re.match(r"src:\s*\S+\s+imp=(\d+)\s+北京\s+(\S+\s+\S+)\s*\|?\s*(.*)$", s)
@@ -399,8 +427,9 @@ def read_inbox(path: Path) -> tuple[list, list]:
 
 def load_ledger(path: Path) -> dict:
     if not path.exists():
-        return {"note": "event_inbox.py 决策台账: 已保留(keep)/跳过(skip)/过期未决(expired) "
-                        "的候选，按 inbox_id 永不再提议。只追加。", "decisions": []}
+        return {"note": "event_inbox.py 决策台账: 已保留(keep)/跳过(skip)/过期未决(expired)/"
+                        "撤回AI(reopen) 的候选，按 inbox_id 永不再提议。只追加；"
+                        "decided_by=ai|owner，同一 id 以最后一条为准。", "decisions": []}
     return json.loads(path.read_text(encoding="utf-8"))
 
 
@@ -414,10 +443,45 @@ def load_events_doc(path: Path) -> dict:
     return doc
 
 
-def _record(ledger: dict, it: Item, decision: str, today: _date) -> None:
+def _record(ledger: dict, it: Item, decision: str, today: _date, **extra) -> None:
     ledger["decisions"].append({
         "inbox_id": it.id, "decision": decision, "decided": today.isoformat(),
-        "name": it.name, "date": it.date, "tz": it.tz})
+        "name": it.name, "date": it.date, "tz": it.tz, **extra})
+
+
+def _latest(ledger: dict) -> dict:
+    """inbox_id → its LAST ledger entry (an owner override follows the AI's)."""
+    return {d.get("inbox_id"): d for d in ledger["decisions"]}
+
+
+def ai_held(ledger: dict) -> dict:
+    """Items whose standing decision is the AI's — the owner may still flip them."""
+    return {k: d for k, d in _latest(ledger).items() if d.get("decided_by") == "ai"}
+
+
+def _overridden(it: Item, ai: dict) -> bool:
+    """Has the owner changed the mark or any editable field since the AI wrote it?
+
+    Compared against the ledger's snapshot, not against the 🤖 / `ai:` line,
+    so the owner only ever edits the mark or a field (D15).
+    """
+    want = "x" if ai.get("decision") == "keep" else "-"
+    return it.mark != want or any(getattr(it, k) != ai.get(k) for k in OVERRIDE_FIELDS)
+
+
+def _ai_event(it: Item, reason: str) -> dict:
+    """An AI keep: the owner's schema plus who decided and why (D16)."""
+    return {**it.to_event(), "decided_by": "ai", "reason": reason}
+
+
+def _upsert_events(doc: dict, put: list, drop: set) -> None:
+    """Replace/insert `put` entries and remove `drop` ids, both by inbox_id.
+
+    Idempotent, so a crash between the events write and the ledger/inbox
+    writes leaves nothing to undo: the rerun writes the same result.
+    """
+    gone = drop | {e["inbox_id"] for e in put}
+    doc["events"] = [e for e in doc["events"] if e.get("inbox_id") not in gone] + put
 
 
 # ── operations ───────────────────────────────────────────────────────────────
@@ -437,12 +501,15 @@ def refresh(today: _date | None = None, inbox_path: Path = INBOX_FILE,
     decided = {d.get("inbox_id") for d in ledger["decisions"]}
     events = load_events_doc(events_path)["events"]
 
-    kept, expired, dup_existing, below = [], [], 0, 0
+    held = ai_held(ledger)
+    kept, expired, dup_existing, below, ai_retired = [], [], 0, 0, 0
     for it in items:
         d = it.impact_date()
         if it.mark == " " and d is not None and d < today:
             expired.append(it)
             _record(ledger, it, "expired", today)
+        elif it.id in held and d is not None and d < today:
+            ai_retired += 1     # past its impact date: too late to flip (D14)
         elif it.mark == " " and match_event(it, events):
             dup_existing += 1   # the owner hand-added it to events.json meanwhile
         elif it.mark == " " and it.importance < min_importance:
@@ -481,8 +548,8 @@ def refresh(today: _date | None = None, inbox_path: Path = INBOX_FILE,
     return {
         "fetched": stats["candidates"], "new": len(new),
         "pending": sum(1 for i in final if i.mark == " "),
-        "expired": len(expired), "dup_existing": dup_existing,
-        "below_threshold": below, **counts,
+        "expired": len(expired), "ai_retired": ai_retired,
+        "dup_existing": dup_existing, "below_threshold": below, **counts,
         "fetch_errors": len(stats["errors"]), "empty_days": len(stats["empty_days"]),
         "errors": stats["errors"], "warnings": warnings,
     }
@@ -490,42 +557,163 @@ def refresh(today: _date | None = None, inbox_path: Path = INBOX_FILE,
 
 def promote(today: _date | None = None, inbox_path: Path = INBOX_FILE,
             ledger_path: Path = LEDGER_FILE, events_path: Path = EVENTS_FILE) -> dict:
-    """[x] → events.json (+ledger keep); [-] → ledger skip; both leave the inbox.
+    """Apply the owner's marks. Owner-decided items leave the inbox.
 
-    Write order is events → ledger → inbox, and the events append is
+    Plain items: [x] → events.json (+ledger keep); [-] → ledger skip.
+    AI-held items (D15) are untouched while they match the AI's ledger
+    snapshot; once the owner changes the mark or a field, the owner's version
+    wins: [x] → the entry is written/replaced, [-] → it is removed, [ ] → it is
+    removed and the item stays as an ordinary undecided one ("reopen").
+
+    Write order is events → ledger → inbox, and the events change is
     idempotent on inbox_id, so a crash between writes can only leave an item
-    to be promoted again harmlessly — never a duplicate event.
+    to be applied again harmlessly — never a duplicate event.
     """
     today = today or _date.today()
     items, warnings = read_inbox(inbox_path)
-    keep = [i for i in items if i.mark == "x"]
-    skip = [i for i in items if i.mark == "-"]
+    ledger = load_ledger(ledger_path)
+    held = ai_held(ledger)
+    keep, skip, reopen = [], [], []
+    for i in items:
+        if i.id in held and not _overridden(i, held[i.id]):
+            continue                      # the AI's decision stands
+        if i.mark == "x":
+            keep.append(i)
+        elif i.mark == "-":
+            skip.append(i)
+        elif i.id in held:
+            reopen.append(i)
     invalid = [{"id": i.id, "name": i.name, "problems": i.problems()}
                for i in keep if i.problems()]
     bad = {x["id"] for x in invalid}
     good = [i for i in keep if i.id not in bad]
-    if not good and not skip:
-        return {"promoted": 0, "skipped": 0, "invalid": invalid,
-                "pending": sum(1 for i in items if i.mark == " "),
-                "warnings": warnings}
+    overrides = sum(1 for i in good + skip + reopen if i.id in held)
+    base = {"invalid": invalid, "overrides": overrides, "warnings": warnings}
+    if not good and not skip and not reopen:
+        return {"promoted": 0, "skipped": 0, "reopened": 0, **base,
+                "pending": sum(1 for i in items if i.mark == " ")}
 
-    if good:
+    drop = {i.id for i in skip + reopen
+            if held.get(i.id, {}).get("decision") == "keep"}
+    if good or drop:
         doc = load_events_doc(events_path)
-        have = {e.get("inbox_id") for e in doc["events"]}
-        doc["events"].extend(i.to_event() for i in good if i.id not in have)
+        _upsert_events(doc, [i.to_event() for i in good], drop)
         doc["updated"] = today.isoformat()
         _write_json(events_path, doc)
-    ledger = load_ledger(ledger_path)
-    for i in good:
-        _record(ledger, i, "keep", today)
-    for i in skip:
-        _record(ledger, i, "skip", today)
+    for decision, group in (("keep", good), ("skip", skip), ("reopen", reopen)):
+        for i in group:
+            extra = {"overrode_ai": held[i.id]["decision"]} if i.id in held else {}
+            _record(ledger, i, decision, today, decided_by="owner", **extra)
     _write_json(ledger_path, ledger)
     gone = {i.id for i in good} | {i.id for i in skip}
-    rest = [i for i in items if i.id not in gone]
+    reopened = {i.id for i in reopen}
+    rest = [replace(i, ai="") if i.id in reopened else i
+            for i in items if i.id not in gone]
     _atomic_write(inbox_path, render_inbox(rest, today))
-    return {"promoted": len(good), "skipped": len(skip), "invalid": invalid,
-            "pending": sum(1 for i in rest if i.mark == " "), "warnings": warnings}
+    return {"promoted": len(good), "skipped": len(skip), "reopened": len(reopen),
+            **base, "pending": sum(1 for i in rest if i.mark == " ")}
+
+
+def _triage_problem(d) -> str | None:
+    """Why one AI judgement cannot be applied (None = fine)."""
+    if not isinstance(d, dict):
+        return f"not an object: {type(d).__name__}"
+    if d.get("decision") not in ("keep", "skip"):
+        return f"decision {d.get('decision')!r} not keep/skip"
+    if str(d.get("impact", "")).lower() not in IMPACTS:
+        return f"impact {d.get('impact')!r} not in {'/'.join(IMPACTS)}"
+    if str(d.get("direction", "")).lower().replace("-", "_") not in DIRECTIONS:
+        return f"direction {d.get('direction')!r} not in {'/'.join(DIRECTIONS)}"
+    if not isinstance(d.get("reason"), str) or not d["reason"].strip():
+        return "reason missing"
+    return None
+
+
+def triage(today: _date | None = None, inbox_path: Path = INBOX_FILE,
+           ledger_path: Path = LEDGER_FILE, events_path: Path = EVENTS_FILE,
+           triage_fn=None, max_items: int = MAX_TRIAGE_ITEMS,
+           deadline_sec: float = TRIAGE_DEADLINE_SEC) -> dict:
+    """AI-judge undecided items the AI has never judged; apply at once (D12–D14).
+
+    Only `[ ]` items with NO ledger entry are sent, so an owner mark — set
+    before or after the AI runs — always wins, and each item is judged once.
+    An item the AI fails on (missing, invalid, whole call failed) stays
+    undecided and is sent again next run. The LLM failing never raises; it is
+    recorded in the returned dict (the run's `input/event_inbox.json`).
+    """
+    today = today or _date.today()
+    items, _ = read_inbox(inbox_path)
+    ledger = load_ledger(ledger_path)
+    seen = {d.get("inbox_id") for d in ledger["decisions"]}
+    todo = [i for i in items if i.mark == " " and i.id not in seen][:max_items]
+    rec = {"attempted": len(todo), "kept": 0, "skipped": 0, "high": 0,
+           "invalid": [], "missing": [], "unknown_ids": 0, "error": None,
+           "decisions": []}
+    if not todo:
+        return rec
+    try:
+        up = event_calendar.upcoming(days=HORIZON_DAYS, today=today, path=events_path)
+        calendar = ([{"impact_date": e["a_share_impact_date"], "name": e["name"],
+                      "impact": e.get("impact")} for e in up["dated"]]
+                    + [{"impact_date": None, "name": e["name"], "impact": e.get("impact")}
+                       for e in up["ongoing"]])
+        rows = [{"id": i.id, "impact_date": str(i.impact_date() or i.date),
+                 "region": i.region, "name": i.name, "importance": i.importance,
+                 "beijing_time": i.beijing_time} for i in todo]
+        prompt = event_triage.build_prompt(today, rows, calendar)
+        call = triage_fn or event_triage.call_model
+        text, meta = _run_with_timeout("event-triage", lambda: call(prompt),
+                                       timeout=deadline_sec)
+        raw = event_triage.extract(text)
+    except Exception as e:  # noqa: BLE001 — items stay undecided, retried next run
+        rec["error"] = f"{type(e).__name__}: {e}"
+        return rec
+    rec.update(meta)
+    model = meta.get("model", "?")
+    rec["unknown_ids"] = sum(1 for k in raw if k not in {i.id for i in todo})
+
+    decided = {}
+    for i in todo:
+        if i.id not in raw:
+            rec["missing"].append(i.id)
+            continue
+        d = raw[i.id]
+        prob = _triage_problem(d)
+        if prob is None:
+            reason = " ".join(d["reason"].split())[:TRIAGE_REASON_MAX]
+            keep = d["decision"] == "keep"
+            new = replace(i, mark="x" if keep else "-", impact=d["impact"].lower(),
+                          direction=d["direction"].lower().replace("-", "_"),
+                          ai=(f"{'保留' if keep else '跳过'} · {d['impact'].lower()}/"
+                              f"{d['direction'].lower().replace('-', '_')} · {reason}"
+                              f"（{model}，{today.isoformat()}）"))
+            prob = "; ".join(new.problems()) if keep else None
+        if prob:
+            rec["invalid"].append({"id": i.id, "problem": prob})
+            continue
+        decided[i.id] = (new, reason)
+
+    if decided:
+        doc = load_events_doc(events_path)
+        _upsert_events(doc, [_ai_event(n, r) for n, r in decided.values() if n.mark == "x"],
+                       {k for k, (n, _) in decided.items() if n.mark == "-"})
+        doc["updated"] = today.isoformat()
+        _write_json(events_path, doc)
+        for n, r in decided.values():
+            _record(ledger, n, "keep" if n.mark == "x" else "skip", today,
+                    decided_by="ai", model=model, reason=r,
+                    **{k: getattr(n, k) for k in OVERRIDE_FIELDS if k not in ("name", "date", "tz")})
+        _write_json(ledger_path, ledger)
+        _atomic_write(inbox_path, render_inbox(
+            [decided[i.id][0] if i.id in decided else i for i in items], today))
+    for n, r in decided.values():
+        rec["kept" if n.mark == "x" else "skipped"] += 1
+        rec["high"] += int(n.mark == "x" and n.impact == "high")
+        rec["decisions"].append({"id": n.id, "name": n.name, "decision":
+                                 "keep" if n.mark == "x" else "skip",
+                                 "impact": n.impact, "direction": n.direction,
+                                 "reason": r})
+    return rec
 
 
 def pending_items(today: _date | None = None, inbox_path: Path = INBOX_FILE) -> list:
@@ -557,20 +745,41 @@ def status(today: _date | None = None, inbox_path: Path = INBOX_FILE,
         "due_soon": [p for p in pend if p["days_until_impact"] is not None
                      and p["days_until_impact"] <= REMIND_WITHIN_DAYS],
         "ledger": {k: sum(1 for d in ledger["decisions"] if d.get("decision") == k)
-                   for k in ("keep", "skip", "expired")},
+                   for k in ("keep", "skip", "expired", "reopen")},
+        "ai": ai_stats(ledger, items),
         "warnings": warnings,
+    }
+
+
+def ai_stats(ledger: dict, items: list = ()) -> dict:
+    """For the weekly review: what the AI decided and how often the owner flipped it."""
+    ai = [d for d in ledger["decisions"] if d.get("decided_by") == "ai"]
+    flips = [d for d in ledger["decisions"] if d.get("overrode_ai")]
+    held = ai_held(ledger)
+    return {
+        "kept": sum(1 for d in ai if d["decision"] == "keep"),
+        "skipped": sum(1 for d in ai if d["decision"] == "skip"),
+        "kept_high": sum(1 for d in ai if d["decision"] == "keep"
+                         and d.get("impact") == "high"),
+        "overrides": len(flips),
+        "overrides_by_ai_decision": {k: sum(1 for d in flips if d["overrode_ai"] == k)
+                                     for k in ("keep", "skip")},
+        "override_rate": round(len(flips) / len(ai), 3) if ai else None,
+        "flippable_in_inbox": sum(1 for i in items if i.id in held),
     }
 
 
 def pipeline_step(today: _date | None = None, inbox_path: Path = INBOX_FILE,
                   ledger_path: Path = LEDGER_FILE, events_path: Path = EVENTS_FILE,
-                  fetch_fn=None) -> dict:
-    """promote then refresh, for run_daily phase 1. Each half fails alone.
+                  fetch_fn=None, triage_fn=None) -> dict:
+    """promote → refresh → AI triage, for run_daily phase 1. Each part fails alone.
 
-    Promote first so items ticked since the last run reach this run's
-    event_calendar read; refresh second so they are already in the ledger.
-    The return value is the run's record (`input/event_inbox.json`), which is
-    what the doctor reads — not the live inbox.
+    Promote first so the owner's marks and overrides land before anything
+    else (and the AI never sees an item the owner already decided); refresh
+    second so they are already in the ledger; triage last so new items are
+    judged and AI keeps reach this run's event_calendar read. The return value
+    is the run's record (`input/event_inbox.json`), which is what the doctor
+    reads — not the live inbox.
     """
     today = today or _date.today()
     out = {"as_of": today.isoformat(), "step_errors": []}
@@ -584,10 +793,20 @@ def pipeline_step(today: _date | None = None, inbox_path: Path = INBOX_FILE,
     except Exception as e:  # noqa: BLE001
         out["step_errors"].append(f"refresh: {type(e).__name__}: {e}")
     try:
+        out["triage"] = triage(today, inbox_path, ledger_path, events_path,
+                               triage_fn=triage_fn)
+    except Exception as e:  # noqa: BLE001 — LLM failures are recorded inside triage
+        out["step_errors"].append(f"triage: {type(e).__name__}: {e}")
+    try:
         out["pending_items"] = pending_items(today, inbox_path)
     except Exception as e:  # noqa: BLE001
         out["step_errors"].append(f"pending: {type(e).__name__}: {e}")
     return out
+
+
+def triage_errors(t: dict) -> int:
+    """Items the AI was asked about and that stayed undecided."""
+    return t["attempted"] if t.get("error") else len(t["invalid"]) + len(t["missing"])
 
 
 def summary_line(rec: dict) -> str:
@@ -597,8 +816,14 @@ def summary_line(rec: dict) -> str:
             f"promoted {p.get('promoted', '?')}, skipped {p.get('skipped', '?')}, "
             f"fetch errors {r.get('fetch_errors', '?')} "
             f"(+{r.get('empty_days', '?')} empty days)")
+    t = rec.get("triage")
+    if t is not None:
+        line += (f", ai kept {t['kept']}/skipped {t['skipped']}/errors {triage_errors(t)}"
+                 f", overrides {p.get('overrides', '?')}")
     if p.get("invalid"):
         line += f", INVALID [x] {len(p['invalid'])} (kept in inbox)"
+    if t is not None and t.get("error"):
+        line += f" — AI TRIAGE FAILED: {t['error']}"
     if rec.get("step_errors"):
         line += " — FAILED: " + "; ".join(rec["step_errors"])
     return line
@@ -606,7 +831,7 @@ def summary_line(rec: dict) -> str:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Event inbox: candidates → events.json.")
-    ap.add_argument("cmd", choices=("refresh", "promote", "status"))
+    ap.add_argument("cmd", choices=("refresh", "promote", "triage", "status"))
     args = ap.parse_args(argv)
     if args.cmd == "refresh":
         res = refresh()
@@ -619,14 +844,38 @@ def main(argv=None) -> int:
     elif args.cmd == "promote":
         res = promote()
         print(f"promoted {res['promoted']}, skipped {res['skipped']}, "
+              f"reopened {res['reopened']} (owner overrides of AI {res['overrides']}), "
               f"pending {res['pending']}")
         for x in res["invalid"]:
             print(f"  ! NOT promoted {x['id']} ({x['name']}): "
                   + "; ".join(x["problems"]), file=sys.stderr)
+    elif args.cmd == "triage":
+        res = triage()
+        print(f"ai triage: attempted {res['attempted']}, kept {res['kept']} "
+              f"(high {res['high']}), skipped {res['skipped']}, errors {triage_errors(res)}, "
+              f"unknown ids {res['unknown_ids']} — {res.get('model', 'no call')} "
+              f"{res.get('tokens_in', 0)}+{res.get('tokens_out', 0)} tokens")
+        for d in res["decisions"]:
+            print(f"  {d['decision']:4} {d['impact']:6} {d['direction']:10} "
+                  f"{d['name']} — {d['reason']}  [{d['id']}]")
+        for x in res["invalid"]:
+            print(f"  ! invalid {x['id']}: {x['problem']}", file=sys.stderr)
+        if res["missing"]:
+            print(f"  ! missing from reply: {', '.join(res['missing'])}", file=sys.stderr)
+        if res["error"]:
+            print(f"  ! AI triage failed: {res['error']}", file=sys.stderr)
+            return 1
     else:
         res = status()
+        a = res["ai"]
         print(f"pending {res['pending']}, marked keep {res['marked_keep']}, "
               f"marked skip {res['marked_skip']}, ledger {res['ledger']}")
+        rate = "n/a" if a["override_rate"] is None else f"{a['override_rate']:.0%}"
+        print(f"ai: kept {a['kept']} (impact=high {a['kept_high']}), skipped {a['skipped']}, "
+              f"owner overrides {a['overrides']} (rate {rate}; of AI keep "
+              f"{a['overrides_by_ai_decision']['keep']} / of AI skip "
+              f"{a['overrides_by_ai_decision']['skip']}), "
+              f"🤖 still in inbox {a['flippable_in_inbox']}")
         for p in res["due_soon"]:
             print(f"  ⏰ {p['a_share_impact_date']} (T-{p['days_until_impact']}) "
                   f"{p['name']}  [{p['id']}]")

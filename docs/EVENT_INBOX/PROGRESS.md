@@ -40,3 +40,37 @@
   inbox_id `wscn-20261103-8615302d`; `upcoming(days=30)` lists it at
   2026-11-04 (T-23). Ledger has 1 keep. 91 items left undecided for the owner.
 - Full suite: 976 passed, 13 skipped (integration).
+
+## 2026-10-12 (later) — AI triage
+
+- Worktree `/Users/bz/Work/Personal/stock-analysis-event-triage`, branch
+  `feat/event-triage` from master 5e19ea6. `data/pricedb` symlinked for tests
+  (untracked: the `.gitignore` rule `data/pricedb/` does not match a symlink,
+  so it shows as `??` — never `git add -A` here).
+- Provider check: from the main repo `.env`, `LLM_PROVIDER` → openai,
+  `OPENAI_MODEL=deepseek-v4-pro` (label "DeepSeek V4 Pro"), base URL
+  api.deepseek.com. The worktree has no `.env`, so llm_client falls back to
+  defaults there — a real call from the worktree needs the main `.env`.
+- Stage 6: `scripts/event_triage.py` + `agents/EVENT_TRIAGE.md`;
+  `event_inbox.triage()`, override-aware `promote()`, `ai_retired` in refresh,
+  `pipeline_step` promote → refresh → triage, CLI `triage`. The old
+  `test_pipeline_step_*` tests would have reached the real LLM (KR CPI is a new
+  undecided item) — an autouse fixture now makes any real call fail the test.
+  First spec draft used the real midterm id as its JSON example — it showed up in
+  every prompt (caught by a test asserting the id was NOT sent); now fake ids.
+- Full suite: 1003 passed, 13 skipped (baseline 977 + 26 new).
+- Stage 7: `event_calendar.upcoming()` now copies `decided_by`; report.md's
+  未来事件窗口 line gets 〔AI选入〕 after the name for AI keeps only. The Phase-2
+  prompt section and the site are unchanged (kept minimal).
+- Stage 8: doctor `check_event_inbox_triage` (D18); `status` → `ai` block
+  (kept / skipped / kept_high / overrides split by AI decision / override rate /
+  🤖 still flippable); WEEKLY_AUDIT C5 asks the auditor to grade `high` keeps
+  against the impact-day index move and skips for misses. RUNBOOK failure table
+  row added. Full suite: 1012 passed, 13 skipped.
+- Stage 9 (live): `.env` symlinked into the worktree (git-ignored) so llm_client
+  sees the real config. Previewed the prompt on tmp copies first (6.3K chars).
+  One real call: deepseek-v4-pro, 2647+15185 tokens, ~295 s wall, 22/22 valid,
+  10 kept (all medium, 1 risk = US port fees), 12 skipped, 0 high. Data commit
+  f4d54d9. Then D19 hardening: token cap 65536, 480 s wall deadline around the
+  call, batch 25 (+1 test). The 180 s client timeout did not fire on a 295 s
+  call — keep-alive resets the read timer.

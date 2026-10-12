@@ -491,11 +491,13 @@ def test_open_respects_runs_dir_and_leaves_the_real_file_alone(tmp_path):
 
 # ── event inbox: a human-action reminder, never a code defect ────────────────
 
-def write_inbox_record(p, pending, step_errors=()):
+def write_inbox_record(p, pending, step_errors=(), triage=None):
     (p / "input").mkdir(parents=True, exist_ok=True)
     rec = {"as_of": p.parent.name, "step_errors": list(step_errors)}
     if pending is not None:
         rec["pending_items"] = pending
+    if triage is not None:
+        rec["triage"] = triage
     (p / "input" / "event_inbox.json").write_text(
         json.dumps(rec, ensure_ascii=False), encoding="utf-8")
 
@@ -560,3 +562,74 @@ def test_event_inbox_check_skips_with_step_error_when_step_failed(tmp_path):
 
 def test_inbox_remind_window_matches_event_inbox():
     assert doc.INBOX_REMIND_DAYS == event_inbox.REMIND_WITHIN_DAYS
+
+
+# ── event inbox: AI triage failures ──────────────────────────────────────────
+
+def _triage(attempted=0, error=None, invalid=(), missing=()):
+    return {"attempted": attempted, "kept": 0, "skipped": 0, "error": error,
+            "invalid": list(invalid), "missing": list(missing), "unknown_ids": 0}
+
+
+def _triage_findings(runs, d="2026-10-12", slot="noon"):
+    return [f for f in audit(runs, d, slot).findings if f.check == "event_inbox_triage"]
+
+
+def test_triage_call_failure_is_an_env_finding(tmp_path):
+    runs = tmp_path / "runs"
+    p = make_run(runs, "2026-10-12", "noon")
+    write_inbox_record(p, [], triage=_triage(5, error="ValueError: No OpenAI API key found."))
+    [f] = _triage_findings(runs)
+    assert f.id == "event-inbox-triage-failed" and f.kind == doc.ENV
+    assert "5 条新候选仍待定" in f.title and "No OpenAI API key" in f.detail
+    assert not f.needs_code_change
+
+
+def test_triage_invalid_and_missing_items_are_listed(tmp_path):
+    runs = tmp_path / "runs"
+    p = make_run(runs, "2026-10-12", "noon")
+    write_inbox_record(p, [], triage=_triage(
+        4, invalid=[{"id": "wscn-a", "problem": "impact 'huge'"}], missing=["wscn-b"]))
+    [f] = _triage_findings(runs)
+    assert "2 条" in f.title
+    assert "wscn-a — impact 'huge'" in f.detail and "回复缺失: wscn-b" in f.detail
+
+
+def test_clean_triage_and_nothing_to_triage_are_silent(tmp_path):
+    runs = tmp_path / "runs"
+    p = make_run(runs, "2026-10-12", "noon")
+    write_inbox_record(p, [], triage=_triage(3))
+    assert _triage_findings(runs) == []
+    q = make_run(runs, "2026-10-12", "afternoon")
+    write_inbox_record(q, [], triage=_triage(0))
+    assert _triage_findings(runs, slot="afternoon") == []
+
+
+def test_triage_step_crash_is_a_finding(tmp_path):
+    runs = tmp_path / "runs"
+    p = make_run(runs, "2026-10-12", "noon")
+    write_inbox_record(p, [], step_errors=["triage: ValueError: bad events.json"])
+    [f] = _triage_findings(runs)
+    assert "bad events.json" in f.title
+
+
+def test_triage_check_skips_on_runs_before_ai_triage(tmp_path):
+    runs = tmp_path / "runs"
+    p = make_run(runs, "2026-10-12", "noon")
+    write_inbox_record(p, [])
+    res = audit(runs, "2026-10-12", "noon")
+    skip = [s for s in res.skipped if s["check"] == "check_event_inbox_triage"]
+    assert skip and "predates AI triage" in skip[0]["reason"]
+
+
+def test_triage_failing_three_runs_running_needs_a_fix(tmp_path):
+    """Retried every run, so a persistent failure streaks — unlike the reminder."""
+    runs = tmp_path / "runs"
+    slots = [("2026-10-12", "noon"), ("2026-10-12", "afternoon"), ("2026-10-13", "noon")]
+    for d, slot in slots:
+        p = make_run(runs, d, slot)
+        write_inbox_record(p, [], triage=_triage(2, error="TimeoutError: relay"))
+        doc.write_result(audit(runs, d, slot), p)
+    [f] = _triage_findings(runs, "2026-10-13", "noon")
+    assert f.occurrences == 3 and f.needs_code_change
+
