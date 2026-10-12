@@ -1,4 +1,4 @@
-# tracking/ schema — v2.1 (rewritten 2026-09-01 against the code)
+# tracking/ schema — v2.1 (rewritten 2026-09-01 against the code; layout 2026-10-12)
 
 **Authority: `scripts/position_manager.py` is the schema.** This document
 describes what that code writes, generated from the live files on
@@ -10,20 +10,39 @@ canonical. Rewritten per repo audit decision B5.)
 
 ## Files
 
+Layout since 2026-10-12 (docs/TRACKING_LAYOUT stage 2). Every path is named
+once, in `scripts/tracking_paths.py`.
+
 ```
 tracking/
-  positions.json           aggregate view (portfolio + activePositions) — REGENERATED,
+  book/                    the portfolio — position_manager.py is the only writer
+    positions.json         aggregate view (portfolio + activePositions) — REGENERATED,
                            never hand-edited; rebuilt from the per-code files
-  {code}.json              one file per active position (the source of truth)
-  closed/{code}_{exitDate}.json    moved here on close — date suffix REQUIRED
+    active/{code}.json     one file per active position (the source of truth);
+                           NOTHING else lives in active/
+    closed/{code}_{exitDate}.json    moved here on close — date suffix REQUIRED
                            (naming without the date silently erased 9 round-trips
-                           pre-2026-08-06; see docs/tracking_fixes/)
-  portfolio_config.json    hard limits (see below)
-  hypotheses.json          the learning loop's state (separate schema, owned by
+                           pre-2026-08-06; see docs/tracking_fixes/). The 42
+                           pre-2026-08-06 files keep their undated {code}.json name.
+    config.json            hard limits (see below); was portfolio_config.json
+  ledgers/
+    hypotheses.json        the learning loop's state (separate schema, owned by
                            hypothesis_manager.py)
+    predictions.jsonl      prediction_log.py
+    rotation_ledger.json   rotation_ledger.py
+  calendar/
+    events.json            curated event calendar (event_calendar.py reads it)
+    event_inbox.md         candidates for the owner (event_inbox.py)
+    event_inbox_ledger.json  keep/skip decisions (event_inbox.py)
+  README.md
 ```
 
-## portfolio_config.json — the hard limits
+Before 2026-10-12 all of this sat flat in `tracking/` (`tracking/{code}.json`,
+`tracking/closed/`, `tracking/portfolio_config.json`, …). Run snapshots
+(`runs/*/positions_snapshot.json`) do not store paths, so they are the same
+before and after the move.
+
+## config.json — the hard limits
 
 ```json
 {"starting_capital": 1000000, "max_position_pct": 10, "max_positions": 10,
@@ -34,7 +53,7 @@ These are the authoritative limits (owner decision 2026-09-01, audit B2):
 **max 10 positions, no minimum-cash floor.** ANALYST.md mirrors these numbers;
 if they differ, this file wins and the prompt is stale.
 
-## tracking/{code}.json — a position
+## book/active/{code}.json — a position
 
 Live keys (all present on an active position):
 
@@ -142,10 +161,15 @@ files (or better, don't — the pipeline owns them, `--reset-to` for rollbacks).
 
 ## Rules for anything that touches these files
 
-1. **`position_manager.py` is the only writer.** The audit found two
-   violations (`--reset-to`, and phase functions with side effects); those are
-   scheduled refactor work, not precedent.
+1. **`position_manager.py` is the only writer of `book/`.** The audit found
+   two violations (`--reset-to`, and phase functions with side effects). The
+   reset is fixed: since 2026-10-12 `plan_book_restore` / `apply_book_restore`
+   live in position_manager (docs/TRACKING_LAYOUT D9). The phase-function side
+   effects remain scheduled refactor work, not precedent.
 2. **The doctor never writes here** (D12) — detection only.
 3. `closed/` filenames MUST carry the exit date.
 4. History is append-only; repairs add `synthetic` entries rather than
    rewriting real ones.
+5. `book/active/` holds position records only. A reader still checks each
+   file with `position_manager.is_position_record`; `--reset-to` aborts on a
+   file there that is not one.

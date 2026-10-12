@@ -14,8 +14,14 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
+from tracking_paths import (
+    ACTIVE_DIR,
+    CLOSED_DIR,
+    POSITIONS_FILE,
+    PORTFOLIO_CONFIG_FILE,
+)
+
 PROJECT_ROOT = Path(__file__).parent.parent
-TRACKING_DIR = PROJECT_ROOT / "tracking"
 
 # History-event schema epoch (2a-i, docs/HARNESS). From this date OPEN entries
 # carry shares/stop/allocatedCapital, SELL entries carry shares, RAISE_STOP
@@ -23,13 +29,11 @@ TRACKING_DIR = PROJECT_ROOT / "tracking"
 # own event log. Entries BEFORE this date carry only price/action/note and can
 # never be replayed; doctor must treat the eras differently, not equally.
 HISTORY_SCHEMA_EPOCH = "2026-08-19"
-CLOSED_DIR = TRACKING_DIR / "closed"
-DAILY_DIR = TRACKING_DIR / "daily"
-POSITIONS_FILE = TRACKING_DIR / "positions.json"
-PORTFOLIO_CONFIG_FILE = TRACKING_DIR / "portfolio_config.json"
 
+# The book: tracking/book/ (tracking_paths). ACTIVE_DIR holds only open
+# position files; ledgers and the calendar live in their own directories.
+ACTIVE_DIR.mkdir(parents=True, exist_ok=True)
 CLOSED_DIR.mkdir(parents=True, exist_ok=True)
-DAILY_DIR.mkdir(parents=True, exist_ok=True)
 
 DEFAULT_PORTFOLIO_CONFIG = {
     "starting_capital": 1000000,
@@ -81,10 +85,10 @@ def _write_json(path: Path, data: dict) -> None:
     """Atomic write: temp file beside the target, fsync, os.replace.
 
     This is the single choke point for nearly every book mutation
-    (positions.json, tracking/{code}.json, closed/ moves, config), which is
+    (positions.json, book/active/{code}.json, closed/ moves, config), which is
     exactly why it must not truncate-then-write: the pipeline and the doctor
     have already fired simultaneously once (2026-08-26 sleep deferral), and a
-    torn tracking/{code}.json does not error — it makes load_active_positions
+    torn book/active/{code}.json does not error — it makes load_active_positions
     skip the file, so the position silently VANISHES from the book and cash is
     recomputed as if it was never held (audit A6). Same-directory temp because
     os.replace is only atomic within one filesystem.
@@ -102,7 +106,7 @@ def _write_json(path: Path, data: dict) -> None:
 
 
 def load_portfolio_config() -> dict:
-    """Read tracking/portfolio_config.json."""
+    """Read book/config.json (the hard limits, TRACKER_SCHEMA)."""
     if PORTFOLIO_CONFIG_FILE.exists():
         return {**DEFAULT_PORTFOLIO_CONFIG, **_read_json(PORTFOLIO_CONFIG_FILE)}
     return dict(DEFAULT_PORTFOLIO_CONFIG)
@@ -268,7 +272,7 @@ def build_positions_snapshot(price_data: dict | None = None) -> dict:
 
 
 def compute_realized_pnl() -> float:
-    """Scan tracking/closed/*.json, compute total realized P&L in dollars.
+    """Scan book/closed/*.json, compute total realized P&L in dollars.
 
     Includes each closed trade's dividend cash (dividend_cash) — zero for
     every trade closed before corporate actions were booked (2026-10-08)."""
@@ -294,27 +298,26 @@ def compute_realized_pnl() -> float:
 
 
 def is_position_record(data) -> bool:
-    """True when parsed JSON is a position (tracking/{code}.json, closed/*.json).
+    """True when parsed JSON is a position (book/active/{code}.json, book/closed/*.json).
 
-    tracking/ also holds non-position state (events.json, hypotheses.json,
-    rotation_ledger.json — the last is a LIST and crashed load_active_positions
-    with AttributeError on 2026-08-11). The readers and --reset-to share this
-    one test so the reset can never delete a file the readers skip.
+    Until 2026-10-12 tracking/ held position files and non-position state side
+    by side (events.json, hypotheses.json, rotation_ledger.json — the last is a
+    LIST and crashed load_active_positions with AttributeError on 2026-08-11).
+    book/active/ now holds positions only; this stays as the guard. The readers
+    and --reset-to share this one test so the reset can never delete a file
+    the readers skip.
     """
     return isinstance(data, dict) and bool(data.get("code")) and bool(data.get("status"))
 
 
 def load_active_positions() -> list[dict]:
-    """Read all tracking/*.json files (skip positions.json, README.md).
+    """Read every book/active/*.json file.
     Returns list of position dicts for active positions only.
     """
     positions = []
-    for f in sorted(TRACKING_DIR.glob("*.json")):
-        if f.name == "positions.json":
-            continue
+    for f in sorted(ACTIVE_DIR.glob("*.json")):
         try:
             pos = _read_json(f)
-            # non-position state lives here too — see is_position_record
             if is_position_record(pos) and pos["status"] == "active":
                 positions.append(pos)
         except (json.JSONDecodeError, KeyError) as e:
@@ -369,14 +372,12 @@ def prior_round_trips(code: str) -> list[dict]:
 
 
 def load_all_tracking_files() -> list[dict]:
-    """Read ALL tracking/*.json files including non-active ones."""
+    """Read ALL book/active/*.json position files, whatever their status."""
     positions = []
-    for f in sorted(TRACKING_DIR.glob("*.json")):
-        if f.name == "positions.json":
-            continue
+    for f in sorted(ACTIVE_DIR.glob("*.json")):
         try:
             data = _read_json(f)
-            if is_position_record(data):  # skip non-position state
+            if is_position_record(data):
                 positions.append(data)
         except (json.JSONDecodeError, KeyError):
             pass
@@ -391,7 +392,7 @@ def close_position(
     date: Optional[str] = None,
     slot: Optional[str] = None,
 ) -> dict:
-    """Close a position: update fields and move to tracking/closed/.
+    """Close a position: update fields and move it to book/closed/.
 
     Args:
         code: Stock code (e.g., "600988")
@@ -409,7 +410,7 @@ def close_position(
     # since 2026-07; the asymmetry was the defect.
     if not isinstance(exit_price, (int, float)) or exit_price <= 0:
         raise ValueError(f"close_position: invalid exit_price {exit_price!r} for {code}")
-    pos_file = TRACKING_DIR / f"{code}.json"
+    pos_file = ACTIVE_DIR / f"{code}.json"
     if not pos_file.exists():
         raise FileNotFoundError(f"Position file not found: {pos_file}")
 
@@ -460,7 +461,7 @@ def close_position(
         "note": f"{reason}: {lesson}" if lesson else reason,
     })
 
-    # Write to closed dir and remove from tracking root.
+    # Write to closed dir and remove from book/active/.
     # Filename includes exitDate: plain {code}.json silently OVERWROTE the
     # previous round-trip when a stock was re-entered and re-closed, erasing
     # its realized PnL from compute_realized_pnl (found 2026-08-06: 9 lost
@@ -488,7 +489,7 @@ def _reentry_stamp(code: str) -> dict:
 
 
 def open_position(data: dict) -> dict:
-    """Create a new position file in tracking/.
+    """Create a new position file in book/active/.
 
     Args:
         data: Must contain at minimum: code, name, entryPrice, targetPrice, stopLoss, thesis.
@@ -542,7 +543,7 @@ def open_position(data: dict) -> dict:
                     f"tradable range [{day_low}, {day_high}]"
                 )
 
-    pos_file = TRACKING_DIR / f"{code}.json"
+    pos_file = ACTIVE_DIR / f"{code}.json"
     if pos_file.exists():
         raise FileExistsError(f"Position already exists for {code}")
 
@@ -685,7 +686,7 @@ def update_position(code: str, updates: dict) -> dict:
     Returns:
         The updated position dict.
     """
-    pos_file = TRACKING_DIR / f"{code}.json"
+    pos_file = ACTIVE_DIR / f"{code}.json"
     if not pos_file.exists():
         raise FileNotFoundError(f"Position file not found: {pos_file}")
 
@@ -744,11 +745,11 @@ def save_corporate_actions(code: str, pos: dict) -> None:
     """Persist an OPEN position that corporate_actions.apply_due booked events on.
 
     The arithmetic lives in corporate_actions.py; the write lives here so this
-    module stays the only writer of tracking/ (TRACKER_SCHEMA rule 1). Refuses
+    module stays the only writer of the book (TRACKER_SCHEMA rule 1). Refuses
     anything but an existing active position — corporate actions never touch
     closed/ (owner decision 2026-10-08: closed trades are never restated).
     """
-    pos_file = TRACKING_DIR / f"{code}.json"
+    pos_file = ACTIVE_DIR / f"{code}.json"
     if not pos_file.exists():
         raise FileNotFoundError(f"Position file not found: {pos_file}")
     if _read_json(pos_file).get("status") != "active" or pos.get("status") != "active":
@@ -757,7 +758,7 @@ def save_corporate_actions(code: str, pos: dict) -> None:
 
 
 def regenerate_positions_json(price_data: dict | None = None) -> dict:
-    """Scan tracking/*.json, build positions.json from active positions.
+    """Scan book/active/*.json, build positions.json from active positions.
     ALWAYS called after any mutation.
 
     Args:
@@ -774,13 +775,16 @@ def regenerate_positions_json(price_data: dict | None = None) -> dict:
     return positions_data
 
 
-def save_daily_summary(date: str, actions: list[dict], output_dir: Path | None = None, **extra) -> Path:
-    """Write daily summary JSON.
+def save_daily_summary(date: str, actions: list[dict], output_dir: Path, **extra) -> Path:
+    """Write daily summary JSON to output_dir/daily_summary.json (the run's output/).
+
+    The tracking/daily/ fallback is gone (2026-10-12): it was empty since the
+    runs/ migration (ef461f8, 2026-03-05) and only kept a stray mkdir alive.
 
     Args:
         date: Date string "YYYY-MM-DD"
         actions: List of action dicts (code, name, action, price, pnl_pct, note)
-        output_dir: If provided, write to output_dir/daily_summary.json instead of tracking/daily/YYYY-MM-DD.json
+        output_dir: The run's output/ directory
         **extra: Additional top-level keys (closedPositionNote, newPositions,
                  portfolioStats, marketContext)
 
@@ -788,14 +792,113 @@ def save_daily_summary(date: str, actions: list[dict], output_dir: Path | None =
         Path to written file.
     """
     summary = {"date": date, "actions": actions, **extra}
-    if output_dir:
-        out = output_dir / "daily_summary.json"
-    else:
-        out = DAILY_DIR / f"{date}.json"
+    out = Path(output_dir) / "daily_summary.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     _write_json(out, summary)
     return out
 
+
+
+# ── --reset-to: restore the book from a run's snapshot ──────────────────────
+# Lives here, not in run_daily, so this module stays the only writer of the
+# book (TRACKER_SCHEMA rule 1; docs/TRACKING_LAYOUT D9). run_daily owns the
+# CLI, the run-dir cleanup and the hypotheses/LEARNINGS aux restore.
+
+
+class ResetError(Exception):
+    """A --reset-to that cannot run safely. Raised before anything changes."""
+
+
+def _read_book_file(path: Path):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as e:
+        raise ResetError(f"cannot read {path}: {e}") from e
+
+
+def _validate_snapshot(snapshot) -> None:
+    """Fail loudly on a snapshot the reset cannot trust. All 391 snapshots on
+    disk at 2026-10-12 (input + output, back to 2026-03-05) pass this. The
+    snapshot format does not depend on the tracking/ layout, so snapshots
+    written before the 2026-10-12 move restore the same way."""
+    if not isinstance(snapshot, dict):
+        raise ResetError("snapshot is not a JSON object")
+    for key in ("active_positions", "positions_json", "portfolio_config"):
+        if not isinstance(snapshot.get(key), dict):
+            raise ResetError(f"snapshot has no {key} object")
+    for code, pos in snapshot["active_positions"].items():
+        if not (is_position_record(pos) and pos["status"] == "active"
+                and pos["code"] == code and pos.get("entryDate")):
+            raise ResetError(
+                f"snapshot active_positions[{code!r}] is not an active position record")
+
+
+def plan_book_restore(snapshot: dict, target_date: str) -> dict:
+    """Decide what a reset deletes and writes in the portfolio book. Touches nothing.
+
+    The book is tracking/book/: active/, closed/, positions.json, config.json.
+    ledgers/ and calendar/ are not position state and are never touched here.
+
+    Closed trades are never rewritten: the snapshot holds only a summary of
+    them (keyed by code, no history). Closed files do not change after exit
+    (corporate actions only touch open positions), so a file is still exactly
+    what it was at the snapshot unless its trade had not closed yet. It goes
+    when exitDate is after the target, or when the snapshot still holds the
+    same trade (code + entryDate) as active — a noon snapshot whose afternoon
+    run sold it the same day. That trade comes back from the snapshot's full
+    active record.
+    """
+    _validate_snapshot(snapshot)
+    active = snapshot["active_positions"]
+    open_trades = {(p["code"], p["entryDate"]) for p in active.values()}
+
+    # book/active/ holds positions only. Anything else there is a defect to
+    # stop on, not a file to skip: skipping it is how the old root glob
+    # deleted ledgers.
+    delete_active = []
+    for f in sorted(ACTIVE_DIR.glob("*.json")):
+        if not is_position_record(_read_book_file(f)):
+            raise ResetError(f"{f} is in book/active/ but is not a position record")
+        if f.stem not in active:
+            delete_active.append(f)
+
+    delete_closed, kept_closed = [], 0
+    for f in sorted(CLOSED_DIR.glob("*.json")):
+        pos = _read_book_file(f)
+        if not (is_position_record(pos) and pos.get("exitDate")):
+            raise ResetError(f"{f} is not a closed position record (no code/status/exitDate)")
+        trade = (pos["code"], pos.get("entryDate"))
+        if pos["exitDate"] > target_date:
+            if (pos.get("entryDate") or "") < target_date and trade not in open_trades:
+                raise ResetError(
+                    f"{f.name} was held across {target_date} (entry {pos.get('entryDate')}, "
+                    f"exit {pos['exitDate']}) but the snapshot does not hold it as active")
+            delete_closed.append(f)
+        elif trade in open_trades:
+            if pos["exitDate"] < target_date:
+                raise ResetError(
+                    f"{f.name} closed {pos['exitDate']}, before {target_date}, but the "
+                    f"snapshot still holds {pos['code']} (entry {pos.get('entryDate')}) as active")
+            delete_closed.append(f)
+        else:
+            kept_closed += 1
+
+    write_active = {ACTIVE_DIR / f"{code}.json": pos for code, pos in active.items()}
+    write_state = {POSITIONS_FILE: snapshot["positions_json"],
+                   PORTFOLIO_CONFIG_FILE: snapshot["portfolio_config"]}
+    return {"write": {**write_active, **write_state},
+            "write_active": list(write_active), "write_state": list(write_state),
+            "delete_active": delete_active, "delete_closed": delete_closed,
+            "kept_closed": kept_closed}
+
+
+def apply_book_restore(plan: dict) -> None:
+    """Write first, delete second: an interrupted reset leaves an extra file,
+    never a lost one."""
+    for path, data in plan["write"].items():
+        _write_json(path, data)
+    for f in plan["delete_active"] + plan["delete_closed"]:
+        f.unlink()
 
 if __name__ == "__main__":
     import sys

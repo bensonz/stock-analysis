@@ -24,7 +24,7 @@ existed 2026-07-24 (RPS before ran on unadjusted prices).
   base rates, weekly-audit totals, any claim of "the strategy works / doesn't".
   Pre-epoch trades may be cited as history, never pooled into a statistic.
 - **Out of scope — keep full history:** price DB and RPS/MA250 windows (they
-  need 250 sessions back), the portfolio book in `tracking/` (never delete or
+  need 250 sessions back), the portfolio book in `tracking/book/` (never delete or
   rewrite pre-epoch trades — equity continuity), the site's equity curve, the
   doctor's audit trail and `ARTIFACT_EPOCHS`.
 - `LEARNINGS.md` still carries pre-epoch lessons; weigh them as lessons from
@@ -123,11 +123,11 @@ python3 scripts/doctor.py               # audit the most recent run, print + wri
 python3 scripts/doctor.py --date 2026-08-20 --slot noon
 python3 scripts/doctor.py --since 2026-08-01   # sweep/recompute a range
 
-# Event inbox — 华尔街见闻 calendar candidates for tracking/events.json
+# Event inbox — 华尔街见闻 calendar candidates for tracking/calendar/events.json
 python3 scripts/event_inbox.py refresh   # fetch 45 days (imp>=4), append NEW items to
-                                         # tracking/event_inbox.md; owner marks are kept
+                                         # tracking/calendar/event_inbox.md; owner marks are kept
 python3 scripts/event_inbox.py promote   # [x] → events.json (+inbox_id); [x]/[-] →
-                                         # tracking/event_inbox_ledger.json (never return).
+                                         # calendar/event_inbox_ledger.json (never return).
                                          # An owner edit of a 🤖 (AI) item overrides it
 python3 scripts/event_inbox.py triage    # ONE LLM call (LLM_PROVIDER's model, no tools,
                                          # spec agents/EVENT_TRIAGE.md) judges NEW [ ]
@@ -147,7 +147,7 @@ python3 scripts/build_site.py
 ```
 
 **`site/index.html` is a derived artifact and is git-ignored.** It is a pure
-function of `tracking/`, `runs/`, and `data/index_cache/`, rebuilt (~0.5s) after
+function of `tracking/book/`, `runs/`, and `data/index_cache/`, rebuilt (~0.5s) after
 every manifest write — including on failed runs, so the page always matches what
 actually landed on disk and carries a red banner naming the failure. Never commit
 it; regenerate instead. Sort runs by `run_started_at`, never by slot name.
@@ -210,7 +210,7 @@ four must keep stable paths; everything else is imported or run by hand.
      - MA *distance* (`dist_ma5/10/20`) filters nothing in Python. It is enforced by the LLM via `ANALYST.md` Rule 2b, and rendered in `candidates.md` as `❌` (extended far **above** — chasing, Rule 2b), `🔻 BELOW` (far below — broken trend, split out of `❌` on 2026-08-28), `⏳ >95`, or `✅ PASS`. Those labels are **display only**; see `docs/audits/CANDIDATE_ALPHA.md`.
    - Market breadth/sectors (`market.json`), position prices (`prices.json` — **empty `{}` when the portfolio holds nothing**, which is normal), IV sentiment (`iv_sentiment.json`).
 2. **Phase 2 — ANALYSIS** (LLM). `llm_client.py` sends the assembled prompt (system prompt = `agents/ANALYST.md` + `LEARNINGS.md`) to the model with a tool-use loop (`web_search` via Tavily, `web_fetch`). `web_fetch` tries `requests` first and **escalates thin/failed results (<600 chars) to a crawl4ai headless browser** (separate venv at `CRAWL4AI_PYTHON`, budget 3/run, loud provenance prefix; browser missing/broken degrades to the thin text with a note — it can never fail the run). Anthropic loops only (deep_report writer, hybrid research pass) additionally get **`web_screenshot`** — render a JS page and return a PNG for chart-dense pages; it is deliberately absent from the openai loop's tool list because DeepSeek is text-only. Provider modes: `anthropic` (Claude only), `openai` (GPT only), `hybrid` (Claude research pass → GPT final decision). Returns structured buy/hold/sell decisions.
-3. **Phase 3 — EXECUTION** (pure Python). `position_manager.py` applies decisions to the simulated portfolio in `tracking/`.
+3. **Phase 3 — EXECUTION** (pure Python). `position_manager.py` applies decisions to the simulated portfolio in `tracking/book/`.
 4. **Phase 4 — VALIDATION + COMMIT**. `validator.py` checks all output artifacts exist and are consistent; `contracts.py` defines the per-phase input/output contracts and fails loudly on violations. On success, results are git-committed (unless `--no-commit`).
 
 ### Run directory layout (read `scripts/run_paths.py` before touching run I/O)
@@ -259,7 +259,11 @@ today's contract.
 
 ## State & the self-improvement loop
 
-- **`tracking/`** is the live portfolio state: `positions.json` (active), `closed/` (exited), `portfolio_config.json`, `hypotheses.json`. Schema in `TRACKER_SCHEMA.md`.
+- **`tracking/`** is the live state, split by kind since 2026-10-12 (`docs/TRACKING_LAYOUT/`). **`scripts/tracking_paths.py` is the one place that names these paths** — import from it, never build `PROJECT_ROOT / "tracking" / ...` by hand. Schema in `TRACKER_SCHEMA.md`.
+  - `book/` — the portfolio: `active/{code}.json` (open positions, nothing else), `closed/` (exited), `positions.json` (regenerated aggregate), `config.json` (hard limits; was `portfolio_config.json`). `position_manager.py` is its only writer, `--reset-to` included.
+  - `ledgers/` — `hypotheses.json`, `predictions.jsonl`, `rotation_ledger.json`.
+  - `calendar/` — `events.json`, `event_inbox.md`, `event_inbox_ledger.json`.
+  - Nothing reads `tracking/` at old git revisions; the doctor reads `runs/` only. The pre-move paths survive only in `scripts/oneoff/migrate_tracking_layout.py`. The root conftest guard hashes every file under `tracking/`.
 - **`scripts/rules/`** — the mechanical risk engine. Each `check_*.py` is a standalone script that reads `positions.json` on **stdin** and emits violations on **stdout**; `run_rules.py` runs them all. Rules encode hard-won sell discipline (time-decay, overextended-entry, stop-proximity, breakout-failure, volume, IV filter). Each rule file's docstring carries its own track record and evolution notes tied to `LEARNINGS.md` entries — preserve that history when editing.
 - **`LEARNINGS.md`** (large, ~250KB and growing) is the accumulated trading post-mortem, read into the LLM prompt every run and updated after. `agents/*.md` (ANALYST, EVOLVER, WEEKLY_AUDIT, DEEP_REPORT, DEEP_VERIFY) are the prompt specs for each role — ORCHESTRATOR/RESEARCHER/TRACKER/DAILY_AUDIT were deleted 2026-09-01 (owner decision: orphaned since the Python pipeline replaced the agent roles, and their instructions had drifted to actively wrong). Changes to strategy belong in these markdown specs, not hardcoded in Python.
 

@@ -11,6 +11,8 @@ from datetime import datetime, timedelta
 from enum import Enum
 from typing import Any
 
+from tracking_paths import LIVE, Layout
+
 
 # Gate-severity epoch. Before this date `degraded` was produced by rules that
 # have since been retired: a dead V1 `watchlist` check fired on every run and
@@ -414,7 +416,7 @@ def validate_phase3_gate(date: str, apply_log: dict, data: dict,
 
     Hard failures:
     - Actions contain ERROR entries
-    - Position file inconsistency (positions.json vs tracking/*.json)
+    - Position file inconsistency (positions.json vs book/active/*.json)
     - An intended new position neither opened nor accounted for by a SKIP
 
     Soft warnings:
@@ -516,18 +518,17 @@ def validate_phase3_gate(date: str, apply_log: dict, data: dict,
 
 def _check_position_file_consistency(gate: PipelineGate, tracking_dir=None,
                                      run_date=None, opened_codes=None):
-    """Verify positions.json matches tracking/*.json on disk.
+    """Verify book/positions.json matches book/active/*.json on disk.
 
-    tracking_dir is injectable so tests can exercise this against a temp
-    directory (the real one is the default)."""
+    tracking_dir (the tracking/ root) is injectable so tests can exercise this
+    against a temp directory (the real one is the default)."""
     future_dated = []
     opened_codes = set(opened_codes or ())
     import json
     from pathlib import Path
 
-    project_root = Path(__file__).parent.parent
-    tracking_dir = Path(tracking_dir) if tracking_dir else project_root / "tracking"
-    positions_file = tracking_dir / "positions.json"
+    layout = Layout(Path(tracking_dir)) if tracking_dir else LIVE
+    positions_file = layout.positions
 
     if not positions_file.exists():
         gate.hard(False, "positions.json does not exist after apply")
@@ -541,13 +542,11 @@ def _check_position_file_consistency(gate: PipelineGate, tracking_dir=None,
         return
 
     tracking_codes = set()
-    for f in tracking_dir.glob("*.json"):
-        if f.name == "positions.json":
-            continue
+    for f in layout.active.glob("*.json"):
         try:
             fdata = json.loads(f.read_text(encoding="utf-8"))
-            # tracking/ holds non-position state too (rotation_ledger.json is
-            # a LIST) — only dicts can be positions (2026-08-11)
+            # only dicts can be positions (rotation_ledger.json, a LIST, sat
+            # in this glob until the 2026-10-12 layout move — 2026-08-11)
             if isinstance(fdata, dict) and fdata.get("status") == "active":
                 tracking_codes.add(fdata["code"])
                 # 2026-08-14: a slot that ran past midnight stamped entryDate

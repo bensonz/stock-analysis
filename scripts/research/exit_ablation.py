@@ -42,6 +42,7 @@ DB_PATH = ROOT / "data" / "pricedb" / "ashare_prices.db"
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from evaluation_epoch import EVALUATION_EPOCH  # noqa: E402
+from tracking_paths import Layout  # noqa: E402
 
 ROUND_TRIP_COST_PCT = 0.30
 
@@ -66,7 +67,8 @@ def load_entries(root=ROOT, since=None):
     """Every position opened on/after `since`, closed or not — the entry is what
     we replay. `since` is the evaluation epoch by default at the CLI."""
     out = []
-    for f in sorted(glob.glob(str(root / "tracking" / "closed" / "*.json"))):
+    book = Layout(root / "tracking")
+    for f in sorted(glob.glob(str(book.closed / "*.json"))):
         with open(f, encoding="utf-8") as fh:
             d = json.load(fh)
         for r in (d if isinstance(d, list) else [d]):
@@ -74,7 +76,7 @@ def load_entries(root=ROOT, since=None):
                         "name": r.get("name"), "entryDate": r.get("entryDate"),
                         "entryPrice": r.get("entryPrice"),
                         "actual": r.get("returnPct"), "open": False})
-    pos = root / "tracking" / "positions.json"
+    pos = book.positions
     if pos.exists():
         with open(pos, encoding="utf-8") as fh:
             for a in json.load(fh).get("activePositions", []):

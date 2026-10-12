@@ -3,7 +3,7 @@
 prediction_log.py — the prediction-scoring loop: log → resolve → score.
 
 Every probability the system emits is a bet. This module writes each bet down
-in a resolvable form at the moment it's made (tracking/predictions.jsonl),
+in a resolvable form at the moment it's made (tracking/ledgers/predictions.jsonl),
 resolves the auto-resolvable ones against the price DB / disclosure tables,
 and Brier-scores the ledger so we can measure — not assert — calibration.
 
@@ -35,7 +35,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-PRED_FILE = PROJECT_ROOT / "tracking" / "predictions.jsonl"
+from tracking_paths import PREDICTIONS_FILE as PRED_FILE  # noqa: E402
 
 
 # --------------------------------------------------------------------------- #

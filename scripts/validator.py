@@ -12,13 +12,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from run_paths import find_run_dir
+from tracking_paths import ACTIVE_DIR, POSITIONS_FILE
 
 PROJECT_ROOT = Path(__file__).parent.parent
-TRACKING_DIR = PROJECT_ROOT / "tracking"
 WATCHLIST_DIR = PROJECT_ROOT / "watchlist"
 REPORTS_DIR = PROJECT_ROOT / "reports"
-DAILY_DIR = TRACKING_DIR / "daily"
-POSITIONS_FILE = TRACKING_DIR / "positions.json"
 
 
 def validate_data(data: dict) -> list[str]:
@@ -74,8 +72,8 @@ def validate_output(date: str, slot: str | None = None) -> list[str]:
     """Check all output files exist and are consistent after pipeline run.
 
     Checks:
-    - positions.json matches tracking/*.json active set
-    - No closed positions in tracking/ root
+    - positions.json matches the book/active/*.json active set
+    - No closed positions in book/active/
     - watchlist exists and is valid JSON (runs/ then legacy)
     - report exists (runs/ then legacy)
     - daily summary exists (runs/ then legacy)
@@ -92,10 +90,10 @@ def validate_output(date: str, slot: str | None = None) -> list[str]:
     errors = []
     run_dir = find_run_dir(date, slot)
     # Fall back to the legacy path when no run dir is found so the downstream
-    # legacy fallbacks (watchlist/, reports/, tracking/daily/) still apply.
+    # legacy fallbacks (watchlist/, reports/) still apply.
     output_dir = (run_dir / "output") if run_dir else (PROJECT_ROOT / "runs" / date / "output")
 
-    # 1. positions.json matches tracking/*.json
+    # 1. positions.json matches book/active/*.json
     if POSITIONS_FILE.exists():
         try:
             pos_data = json.loads(POSITIONS_FILE.read_text(encoding="utf-8"))
@@ -104,14 +102,13 @@ def validate_output(date: str, slot: str | None = None) -> list[str]:
             errors.append(f"CRITICAL: positions.json is invalid: {e}")
             pos_codes = set()
 
-        # Scan tracking/*.json for active positions
+        # Scan book/active/*.json for active positions
         tracking_codes = set()
-        for f in TRACKING_DIR.glob("*.json"):
-            if f.name == "positions.json":
-                continue
+        for f in ACTIVE_DIR.glob("*.json"):
             try:
                 data = json.loads(f.read_text(encoding="utf-8"))
-                # non-position state lives here too (see contracts.py)
+                # a position-shape check of its own, not position_manager's
+                # (checks stay independent of the writers they audit)
                 if isinstance(data, dict) and data.get("status") == "active":
                     tracking_codes.add(data["code"])
             except (json.JSONDecodeError, KeyError):
@@ -126,10 +123,8 @@ def validate_output(date: str, slot: str | None = None) -> list[str]:
     else:
         errors.append("CRITICAL: positions.json does not exist")
 
-    # 2. No closed positions in tracking/ root
-    for f in TRACKING_DIR.glob("*.json"):
-        if f.name == "positions.json":
-            continue
+    # 2. No closed positions in book/active/
+    for f in ACTIVE_DIR.glob("*.json"):
         try:
             data = json.loads(f.read_text(encoding="utf-8"))
             if isinstance(data, dict) and data.get("status") == "closed":
@@ -162,9 +157,9 @@ def validate_output(date: str, slot: str | None = None) -> list[str]:
         errors.append(f"WARNING: no report found for {date}")
 
     # 5. Daily summary exists
+    # (the tracking/daily/{date}.json fallback is gone: that directory was
+    # empty from the 2026-03-05 runs/ migration until its removal 2026-10-12)
     daily_file = output_dir / "daily_summary.json"
-    if not daily_file.exists():
-        daily_file = DAILY_DIR / f"{date}.json"
     if daily_file.exists():
         try:
             json.loads(daily_file.read_text(encoding="utf-8"))

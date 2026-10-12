@@ -2,15 +2,15 @@
 """
 event_inbox.py — automated candidates for the curated event calendar.
 
-`tracking/events.json` is hand-curated, and by 2026-10 it had not been edited
+`tracking/calendar/events.json` is hand-curated, and by 2026-10 it had not been edited
 for two months: it missed the US midterm election (2026-11-03). The owner does
 not want the calendar limited to news they personally see, but also does not
 want a noisy feed written straight into the LLM prompt. So:
 
     华尔街见闻 calendar (akshare.macro_info_ws, importance >= 4, 45 days)
-        └─ refresh ─► tracking/event_inbox.md      (owner ticks a checklist)
-                         └─ promote ─► tracking/events.json   ([x] keep)
-                                   └─► tracking/event_inbox_ledger.json
+        └─ refresh ─► tracking/calendar/event_inbox.md   (owner ticks a checklist)
+                         └─ promote ─► tracking/calendar/events.json   ([x] keep)
+                                   └─► tracking/calendar/event_inbox_ledger.json
                                        ([x] keep / [-] skip — never re-proposed)
 
 Owner decision 2026-10-12: "AI decides, owner can overrule." Each NEW
@@ -51,9 +51,10 @@ import event_calendar  # noqa: E402
 import event_triage  # noqa: E402
 from pricedb.providers import _TimeoutError, _run_with_timeout  # noqa: E402
 
+from tracking_paths import EVENT_INBOX_FILE as INBOX_FILE  # noqa: E402
+from tracking_paths import EVENT_INBOX_LEDGER_FILE as LEDGER_FILE  # noqa: E402
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-INBOX_FILE = PROJECT_ROOT / "tracking" / "event_inbox.md"
-LEDGER_FILE = PROJECT_ROOT / "tracking" / "event_inbox_ledger.json"
 EVENTS_FILE = event_calendar.EVENTS_FILE
 
 HORIZON_DAYS = 45
@@ -305,11 +306,11 @@ _HEADER = """\
 
 > 由 `python3 scripts/event_inbox.py refresh` 生成，每次流水线运行自动刷新
 > （来源: 华尔街见闻财经日历，重要性>=4，未来45天）。新候选由 AI 先决定（🤖 + `ai:` 行），
-> 保留的立即写入 `tracking/events.json`。你不必打开这里；想推翻就直接改：
+> 保留的立即写入 `tracking/calendar/events.json`。你不必打开这里；想推翻就直接改：
 >
 > - 🤖 项: 改勾选或任一字段 = 推翻 AI，你的版本生效（`[-]` 从 events.json 撤下，`[x]` 写入，
 >   改 impact/direction 等 = 更新条目，`[ ]` = 撤回 AI 决定、留给你定）。🤖 项在A股影响日过后自动移出
-> - `[x]` 保留 → 下次运行（或 `python3 scripts/event_inbox.py promote`）写入 `tracking/events.json`
+> - `[x]` 保留 → 下次运行（或 `python3 scripts/event_inbox.py promote`）写入 `tracking/calendar/events.json`
 > - `[-]` 跳过 → 记入台账，不再出现
 > - `[ ]` 待定 → 留在这里
 >

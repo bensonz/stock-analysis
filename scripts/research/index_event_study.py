@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """index_event_study.py — forward index returns after a list of event dates.
 
-The tool behind every "会后N日指数平均±X%" claim in tracking/events.json:
+The tool behind every "会后N日指数平均±X%" claim in tracking/calendar/events.json:
 numbers in the calendar must be re-runnable, and this is the re-run
 (traceability rule, 2026-08-04 — after the unmeasured "+2% 小盘占优"
 politburo folklore was caught by the user and refuted).

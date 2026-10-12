@@ -14,7 +14,8 @@ from pathlib import Path
 from difflib import SequenceMatcher
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-HYPOTHESES_FILE = PROJECT_ROOT / "tracking" / "hypotheses.json"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from tracking_paths import HYPOTHESES_FILE  # noqa: E402
 
 # Status lifecycle thresholds
 PROMOTE_TO_HYPOTHESIS_MIN_EVIDENCE = 2

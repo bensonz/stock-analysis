@@ -23,14 +23,14 @@ Read these files:
 # Current rules
 ls scripts/rules/*.py
 
-# Recent trading history (last 5 trading days)
-ls tracking/daily/
+# Recent trading history (last 5 trading days, both slots)
+ls runs/*/*/output/daily_summary.json | tail -10
 
 # Closed positions (check outcomes)
-ls tracking/closed/
+ls tracking/book/closed/
 
 # Active positions
-cat tracking/positions.json
+cat tracking/book/positions.json
 
 # Learnings
 cat LEARNINGS.md

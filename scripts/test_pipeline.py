@@ -31,24 +31,22 @@ class TestPositionManager(unittest.TestCase):
 
     def setUp(self):
         """Create a temp tracking directory."""
+        from tracking_paths import Layout
         self.tmpdir = Path(tempfile.mkdtemp())
-        self.tracking = self.tmpdir / "tracking"
-        self.tracking.mkdir()
-        (self.tracking / "closed").mkdir()
-        (self.tracking / "daily").mkdir()
+        self.lay = Layout(self.tmpdir / "tracking").make_dirs()
+        self.tracking = self.lay.root
+        self.active = self.lay.active
 
         # Patch module-level paths
         import position_manager as pm
-        self._orig_tracking = pm.TRACKING_DIR
+        self._orig_active = pm.ACTIVE_DIR
         self._orig_closed = pm.CLOSED_DIR
-        self._orig_daily = pm.DAILY_DIR
         self._orig_positions = pm.POSITIONS_FILE
         self._orig_config = pm.PORTFOLIO_CONFIG_FILE
-        pm.TRACKING_DIR = self.tracking
-        pm.CLOSED_DIR = self.tracking / "closed"
-        pm.DAILY_DIR = self.tracking / "daily"
-        pm.POSITIONS_FILE = self.tracking / "positions.json"
-        pm.PORTFOLIO_CONFIG_FILE = self.tracking / "portfolio_config.json"
+        pm.ACTIVE_DIR = self.lay.active
+        pm.CLOSED_DIR = self.lay.closed
+        pm.POSITIONS_FILE = self.lay.positions
+        pm.PORTFOLIO_CONFIG_FILE = self.lay.config
         pm.PORTFOLIO_CONFIG_FILE.write_text(json.dumps({
             "starting_capital": 1000000,
             "max_position_pct": 10,
@@ -59,9 +57,8 @@ class TestPositionManager(unittest.TestCase):
 
     def tearDown(self):
         """Restore paths and clean up."""
-        self.pm.TRACKING_DIR = self._orig_tracking
+        self.pm.ACTIVE_DIR = self._orig_active
         self.pm.CLOSED_DIR = self._orig_closed
-        self.pm.DAILY_DIR = self._orig_daily
         self.pm.POSITIONS_FILE = self._orig_positions
         self.pm.PORTFOLIO_CONFIG_FILE = self._orig_config
         shutil.rmtree(self.tmpdir)
@@ -81,7 +78,7 @@ class TestPositionManager(unittest.TestCase):
             "history": [],
             **overrides,
         }
-        path = self.tracking / f"{code}.json"
+        path = self.active / f"{code}.json"
         path.write_text(json.dumps(pos, ensure_ascii=False, indent=2))
         return path
 
@@ -108,11 +105,11 @@ class TestPositionManager(unittest.TestCase):
         self.assertEqual(pos["code"], "688001")
         self.assertEqual(pos["status"], "active")
         self.assertEqual(pos["entryPrice"], 50.0)
-        self.assertTrue((self.tracking / "688001.json").exists())
+        self.assertTrue((self.active / "688001.json").exists())
 
         # Check positions.json was regenerated
-        self.assertTrue((self.tracking / "positions.json").exists())
-        pj = json.loads((self.tracking / "positions.json").read_text())
+        self.assertTrue(self.lay.positions.exists())
+        pj = json.loads(self.lay.positions.read_text())
         self.assertEqual(len(pj["activePositions"]), 1)
         self.assertEqual(pj["activePositions"][0]["code"], "688001")
 
@@ -178,7 +175,7 @@ class TestPositionManager(unittest.TestCase):
 
     def test_slot_recorded_on_open_close_and_history(self):
         # 2026-08-11: history recorded only the DATE, so a same-day
-        # noon-vs-afternoon fill was indistinguishable in tracking/*.json.
+        # noon-vs-afternoon fill was indistinguishable in the position files.
         pos = self.pm.open_position({
             "code": "600002", "name": "午盘开仓", "entryPrice": 10.0,
             "targetPrice": 12.0, "stopLoss": 9.5, "slot": "noon",
@@ -191,7 +188,7 @@ class TestPositionManager(unittest.TestCase):
             self.pm.update_position("600002", {"history_entry": {
                 "date": "2026-08-11", "slot": slot, "price": price,
                 "change_pct": 0, "action": "HOLD", "note": slot}})
-        holds = [h for h in self.pm._read_json(self.tracking / "600002.json")["history"]
+        holds = [h for h in self.pm._read_json(self.active / "600002.json")["history"]
                  if h["action"] == "HOLD"]
         self.assertEqual([h["slot"] for h in holds], ["noon", "afternoon"])
 
@@ -199,7 +196,7 @@ class TestPositionManager(unittest.TestCase):
         self.pm.update_position("600002", {"history_entry": {
             "date": "2026-08-11", "slot": "noon", "price": 10.6,
             "change_pct": 0, "action": "HOLD", "note": "rerun"}})
-        holds = [h for h in self.pm._read_json(self.tracking / "600002.json")["history"]
+        holds = [h for h in self.pm._read_json(self.active / "600002.json")["history"]
                  if h["action"] == "HOLD"]
         self.assertEqual(len(holds), 2)
         self.assertEqual(next(h for h in holds if h["slot"] == "noon")["price"], 10.6)
@@ -212,11 +209,13 @@ class TestPositionManager(unittest.TestCase):
     def test_non_position_json_in_tracking_is_ignored(self):
         # 2026-08-11: tracking/rotation_ledger.json (a LIST) crashed
         # load_active_positions with AttributeError and killed the noon run.
-        # tracking/ legitimately holds non-position state — skip non-dicts.
+        # Since the 2026-10-12 layout move ledgers live in ledgers/, out of the
+        # book glob — but a stray non-position file in book/active/ must
+        # still be skipped by every reader, not crash it.
         self._write_position("600001")
-        (self.tracking / "rotation_ledger.json").write_text(
+        (self.active / "rotation_ledger.json").write_text(
             json.dumps([{"date": "2026-08-10", "candidates": []}]), encoding="utf-8")
-        (self.tracking / "events.json").write_text(
+        (self.active / "events.json").write_text(
             json.dumps({"events": [{"name": "CPI"}]}), encoding="utf-8")
 
         active = self.pm.load_active_positions()
@@ -226,7 +225,7 @@ class TestPositionManager(unittest.TestCase):
         self.assertTrue(all(isinstance(d, dict) for d in all_files))
         self.assertTrue(any(d.get("code") == "600001" for d in all_files))
 
-        # every OTHER tracking/*.json consumer must survive it too — the
+        # every OTHER book/active/*.json consumer must survive it too — the
         # 2026-08-11 noon run died at contracts, one layer past the two
         # loaders fixed first. Patch the class, not the site.
         import contracts
@@ -235,11 +234,13 @@ class TestPositionManager(unittest.TestCase):
         gate = contracts.PipelineGate("phase3")
         contracts._check_position_file_consistency(gate, tracking_dir=self.tracking)
         self.assertEqual(gate.hard_fails, [])  # ledger must not look like a position
-        validator.TRACKING_DIR = self.tracking
+        orig = validator.ACTIVE_DIR, validator.POSITIONS_FILE
+        validator.ACTIVE_DIR, validator.POSITIONS_FILE = self.active, self.lay.positions
         try:
-            validator.validate_output("2026-08-11", "noon")
+            errors = validator.validate_output("2026-08-11", "noon")
         finally:
-            validator.TRACKING_DIR = self._orig_tracking
+            validator.ACTIVE_DIR, validator.POSITIONS_FILE = orig
+        self.assertFalse(any("mismatch" in e for e in errors), errors)
 
     def test_partial_day_autoheal_paths(self):
         # 2026-08-10: gate-1 partial-day halts now self-heal via the sina
@@ -280,14 +281,14 @@ class TestPositionManager(unittest.TestCase):
                              entryDate="2026-07-01")
         self.pm.close_position("600100", "stop_hit", 10.0, date="2026-07-10")
 
-        closed = sorted(f.name for f in (self.tracking / "closed").glob("*.json"))
+        closed = sorted(f.name for f in self.lay.closed.glob("*.json"))
         self.assertEqual(closed, ["600100_2026-06-01.json",
                                   "600100_2026-07-10.json"])
         # realized PnL includes BOTH trips: +2000 and -1000
         self.assertEqual(self.pm.compute_realized_pnl(), 1000.0)
 
     def test_open_position_sizes_from_available_cash(self):
-        (self.tracking / "portfolio_config.json").write_text(json.dumps({
+        self.lay.config.write_text(json.dumps({
             "starting_capital": 100000,
             "max_position_pct": 10,
             "max_positions": 10,
@@ -310,7 +311,7 @@ class TestPositionManager(unittest.TestCase):
         self.assertEqual(pos["allocatedCapital"], 10000.0)
 
     def test_open_position_respects_min_cash_reserve(self):
-        (self.tracking / "portfolio_config.json").write_text(json.dumps({
+        self.lay.config.write_text(json.dumps({
             "starting_capital": 100000,
             "max_position_pct": 10,
             "max_positions": 10,
@@ -350,12 +351,12 @@ class TestPositionManager(unittest.TestCase):
         # 2026-01-01 → 2026-02-01 spans 31 calendar days but 21 weekdays
         # (synthetic code → weekday fallback, no suspension/holiday data)
         self.assertEqual(pos["holdingDays"], 21)
-        self.assertFalse((self.tracking / "600001.json").exists())
+        self.assertFalse((self.active / "600001.json").exists())
         # exitDate in the filename since 2026-08-06 (re-entry overwrote history)
-        self.assertTrue((self.tracking / "closed" / "600001_2026-02-01.json").exists())
+        self.assertTrue((self.lay.closed / "600001_2026-02-01.json").exists())
 
         # positions.json should be empty now
-        pj = json.loads((self.tracking / "positions.json").read_text())
+        pj = json.loads(self.lay.positions.read_text())
         self.assertEqual(len(pj["activePositions"]), 0)
 
     def test_update_position_raise_stop(self):
@@ -396,11 +397,14 @@ class TestPositionManager(unittest.TestCase):
         self.assertIn("lastUpdated", result)
 
     def test_save_daily_summary(self):
+        out = self.tmpdir / "runs" / "2026-01-01" / "afternoon" / "output"
         path = self.pm.save_daily_summary(
             "2026-01-01",
             [{"code": "000001", "action": "HOLD", "price": 100}],
+            output_dir=out,
             portfolioStats={"totalPositions": 1},
         )
+        self.assertEqual(path, out / "daily_summary.json")
         self.assertTrue(path.exists())
         data = json.loads(path.read_text())
         self.assertEqual(data["date"], "2026-01-01")
@@ -411,11 +415,10 @@ class TestValidator(unittest.TestCase):
     """Test consistency checks."""
 
     def setUp(self):
+        from tracking_paths import Layout
         self.tmpdir = Path(tempfile.mkdtemp())
-        self.tracking = self.tmpdir / "tracking"
-        self.tracking.mkdir()
-        (self.tracking / "closed").mkdir()
-        (self.tracking / "daily").mkdir()
+        self.lay = Layout(self.tmpdir / "tracking").make_dirs()
+        self.active = self.lay.active
         self.watchlist = self.tmpdir / "watchlist"
         self.watchlist.mkdir()
         self.reports = self.tmpdir / "reports"
@@ -423,17 +426,21 @@ class TestValidator(unittest.TestCase):
 
         import validator as v
         self._orig = {
-            "TRACKING_DIR": v.TRACKING_DIR,
+            "ACTIVE_DIR": v.ACTIVE_DIR,
             "WATCHLIST_DIR": v.WATCHLIST_DIR,
             "REPORTS_DIR": v.REPORTS_DIR,
-            "DAILY_DIR": v.DAILY_DIR,
             "POSITIONS_FILE": v.POSITIONS_FILE,
+            "find_run_dir": v.find_run_dir,
         }
-        v.TRACKING_DIR = self.tracking
+        v.ACTIVE_DIR = self.lay.active
         v.WATCHLIST_DIR = self.watchlist
         v.REPORTS_DIR = self.reports
-        v.DAILY_DIR = self.tracking / "daily"
-        v.POSITIONS_FILE = self.tracking / "positions.json"
+        v.POSITIONS_FILE = self.lay.positions
+        # a temp run dir, so the daily summary has somewhere to live (the old
+        # tracking/daily/ fallback is gone)
+        self.run_dir = self.tmpdir / "runs" / "2026-01-01" / "afternoon"
+        (self.run_dir / "output").mkdir(parents=True)
+        v.find_run_dir = lambda date, slot=None: self.run_dir
         self.v = v
 
     def tearDown(self):
@@ -470,17 +477,17 @@ class TestValidator(unittest.TestCase):
         # Create consistent state
         pos = {"code": "000001", "name": "Test", "status": "active", "entryPrice": 100,
                "entryDate": "2026-01-01", "targetPrice": 120, "stopLoss": 90}
-        (self.tracking / "000001.json").write_text(json.dumps(pos))
+        (self.active / "000001.json").write_text(json.dumps(pos))
         positions = {
             "lastUpdated": "2026-01-01",
             "activePositions": [{"code": "000001", "name": "Test"}],
         }
-        (self.tracking / "positions.json").write_text(json.dumps(positions))
+        self.lay.positions.write_text(json.dumps(positions))
 
         wl = {"date": "2026-01-01", "recommendations": []}
         (self.watchlist / "2026-01-01.json").write_text(json.dumps(wl))
         (self.reports / "2026-01-01.md").write_text("# Report")
-        (self.tracking / "daily" / "2026-01-01.json").write_text(json.dumps({"date": "2026-01-01"}))
+        (self.run_dir / "output" / "daily_summary.json").write_text(json.dumps({"date": "2026-01-01"}))
 
         errors = self.v.validate_output("2026-01-01")
         self.assertEqual(len(errors), 0)
@@ -488,28 +495,28 @@ class TestValidator(unittest.TestCase):
     def test_validate_output_position_mismatch(self):
         # positions.json says 000001 but tracking has 000002
         pos = {"code": "000002", "name": "Wrong", "status": "active"}
-        (self.tracking / "000002.json").write_text(json.dumps(pos))
+        (self.active / "000002.json").write_text(json.dumps(pos))
         positions = {
             "lastUpdated": "2026-01-01",
             "activePositions": [{"code": "000001", "name": "Missing"}],
         }
-        (self.tracking / "positions.json").write_text(json.dumps(positions))
+        self.lay.positions.write_text(json.dumps(positions))
 
         errors = self.v.validate_output("2026-01-01")
         self.assertTrue(any("mismatch" in e for e in errors))
 
     def test_validate_output_closed_in_root(self):
         pos = {"code": "000001", "name": "Closed", "status": "closed"}
-        (self.tracking / "000001.json").write_text(json.dumps(pos))
+        (self.active / "000001.json").write_text(json.dumps(pos))
         positions = {"lastUpdated": "2026-01-01", "activePositions": []}
-        (self.tracking / "positions.json").write_text(json.dumps(positions))
+        self.lay.positions.write_text(json.dumps(positions))
 
         errors = self.v.validate_output("2026-01-01")
         self.assertTrue(any("closed" in e.lower() for e in errors))
 
     def test_validate_output_missing_files(self):
         positions = {"lastUpdated": "2026-01-01", "activePositions": []}
-        (self.tracking / "positions.json").write_text(json.dumps(positions))
+        self.lay.positions.write_text(json.dumps(positions))
 
         errors = self.v.validate_output("2026-01-01")
         self.assertTrue(any("watchlist" in e for e in errors))
@@ -798,29 +805,29 @@ class TestReentryContext(unittest.TestCase):
     """Recent-exit context + re-entry stamping (2026-08-13)."""
 
     def setUp(self):
+        from tracking_paths import Layout
         self.tmpdir = Path(tempfile.mkdtemp())
-        self.tracking = self.tmpdir / "tracking"
-        (self.tracking / "closed").mkdir(parents=True)
+        self.lay = Layout(self.tmpdir / "tracking").make_dirs()
+        self.tracking = self.lay.root
         import position_manager as pm
-        self._orig = (pm.TRACKING_DIR, pm.CLOSED_DIR, pm.POSITIONS_FILE,
-                      pm.PORTFOLIO_CONFIG_FILE, pm.DAILY_DIR)
-        pm.TRACKING_DIR = self.tracking
-        pm.CLOSED_DIR = self.tracking / "closed"
-        pm.DAILY_DIR = self.tracking / "daily"
-        pm.POSITIONS_FILE = self.tracking / "positions.json"
-        pm.PORTFOLIO_CONFIG_FILE = self.tracking / "portfolio_config.json"
+        self._orig = (pm.ACTIVE_DIR, pm.CLOSED_DIR, pm.POSITIONS_FILE,
+                      pm.PORTFOLIO_CONFIG_FILE)
+        pm.ACTIVE_DIR = self.lay.active
+        pm.CLOSED_DIR = self.lay.closed
+        pm.POSITIONS_FILE = self.lay.positions
+        pm.PORTFOLIO_CONFIG_FILE = self.lay.config
         pm.PORTFOLIO_CONFIG_FILE.write_text(json.dumps(
             {"starting_capital": 1000000, "max_position_pct": 10,
              "max_positions": 10, "min_cash_pct": 0}), encoding="utf-8")
         self.pm = pm
 
     def tearDown(self):
-        (self.pm.TRACKING_DIR, self.pm.CLOSED_DIR, self.pm.POSITIONS_FILE,
-         self.pm.PORTFOLIO_CONFIG_FILE, self.pm.DAILY_DIR) = self._orig
+        (self.pm.ACTIVE_DIR, self.pm.CLOSED_DIR, self.pm.POSITIONS_FILE,
+         self.pm.PORTFOLIO_CONFIG_FILE) = self._orig
         shutil.rmtree(self.tmpdir)
 
     def _closed(self, code, exit_date, ret, price=42.22):
-        (self.tracking / "closed" / f"{code}_{exit_date}.json").write_text(
+        (self.lay.closed / f"{code}_{exit_date}.json").write_text(
             json.dumps({"code": code, "name": "测试股", "entryDate": "2026-08-10",
                         "entryPrice": 44.26, "exitDate": exit_date,
                         "exitPrice": price, "returnPct": ret, "holdingDays": 1,

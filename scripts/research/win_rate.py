@@ -36,9 +36,14 @@ import glob
 import json
 import sqlite3
 import statistics
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from tracking_paths import Layout  # noqa: E402
+
 DB_PATH = ROOT / "data" / "pricedb" / "ashare_prices.db"
 
 # Substantive strategy changes, from `git log -- agents/ANALYST.md scripts/rules/`.
@@ -67,7 +72,8 @@ def era_of(entry_date):
 def load_trades(root=ROOT):
     """Every position ever opened: closed ones at their exit, open ones marked."""
     out = []
-    for f in sorted(glob.glob(str(root / "tracking" / "closed" / "*.json"))):
+    book = Layout(root / "tracking")
+    for f in sorted(glob.glob(str(book.closed / "*.json"))):
         with open(f, encoding="utf-8") as fh:
             d = json.load(fh)
         for r in (d if isinstance(d, list) else [d]):
@@ -77,7 +83,7 @@ def load_trades(root=ROOT):
                 "entryPrice": r.get("entryPrice"), "ret": r.get("returnPct"),
                 "open": False,
             })
-    pos_file = root / "tracking" / "positions.json"
+    pos_file = book.positions
     if pos_file.exists():
         with open(pos_file, encoding="utf-8") as fh:
             for a in json.load(fh).get("activePositions", []):

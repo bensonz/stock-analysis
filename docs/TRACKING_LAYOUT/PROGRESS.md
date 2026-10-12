@@ -22,3 +22,23 @@
   and keep 64 closed files.
 - Full suite: 991 passed, 13 skipped.
 - Next: stage 2 after `feat/event-triage` merges.
+
+## 2026-10-12 — Stage 2
+
+- Worktree `/Users/bz/Work/Personal/stock-analysis-tracking-move`, branch
+  `feat/tracking-layout` from master 60f84e3. Baseline 1027 passed / 13 skipped
+  (with `data/pricedb` + `.env` symlinked, untracked).
+- Found: the doctor never reads tracking/ (only runs/ + audit/ACCEPTED.md), and
+  nothing reads tracking/ at old git revisions. No epoch gate, no old-path
+  fallback needed (D13).
+- Found: Gate-3 tests in test_contracts / test_corporate_actions compared the
+  LIVE book; they broke as soon as the code moved. Made hermetic (D16).
+- Found: the conftest guard never watched predictions.jsonl /
+  rotation_ledger.json; it now hashes the whole tree (D12).
+- Commits: code (47c1d56), migrate script, docs, data move (76 git renames).
+- After the move: suite 1056 / 13; site, doctor --open, run_rules,
+  event_inbox status, research tools identical to master; current
+  snapshot_positions() == the last post-run snapshot on disk; 391/391
+  snapshot plans, 0 errors; validator and Gate-3 consistency clean.
+- Next: lead merges, re-runs the migrate script on master's tracking/ after
+  the 2026-10-13 pipeline commits (D17).

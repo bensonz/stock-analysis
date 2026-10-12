@@ -98,7 +98,8 @@ def test_series_skips_broken_and_empty_snapshots(tmp_path):
 
 
 def test_inception_anchor_from_config(tmp_path):
-    (tmp_path / "portfolio_config.json").write_text(json.dumps({
+    (tmp_path / "book").mkdir()
+    (tmp_path / "book" / "config.json").write_text(json.dumps({
         "starting_capital": 1000000, "created": "2026-02-03"}), encoding="utf-8")
     p = bs.inception_point(tmp_path)
     assert p == {"date": "2026-02-03", "time": "", "equity": 1000000.0,

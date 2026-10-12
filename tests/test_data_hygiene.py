@@ -20,13 +20,14 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import position_manager as pm
+from tracking_paths import CLOSED_DIR as LIVE_CLOSED_DIR
 
 
 # ── code semantics ──
 
 def _mk_position(tmp_path, monkeypatch, entry_date):
-    monkeypatch.setattr(pm, "TRACKING_DIR", tmp_path)
-    # CLOSED_DIR is bound at import from TRACKING_DIR — patching one does NOT
+    monkeypatch.setattr(pm, "ACTIVE_DIR", tmp_path)
+    # Each book path is bound separately at import — patching one does NOT
     # rebind the other. The first version of this test patched only
     # TRACKING_DIR and silently wrote two synthetic trades into the LIVE
     # tracking/closed/ (found by the very census this file pins, 2026-08-19).
@@ -68,7 +69,7 @@ def test_trading_days_weekday_fallback():
 # ── on-disk history state ──
 
 def _closed_records():
-    for f in glob.glob(str(ROOT / "tracking" / "closed" / "*.json")):
+    for f in glob.glob(str(LIVE_CLOSED_DIR / "*.json")):
         yield f, json.loads(Path(f).read_text(encoding="utf-8"))
 
 
@@ -107,7 +108,7 @@ def test_every_run_dir_has_a_manifest():
 # ── 2a-i: replayable event schema (epoch 2026-08-19) ──
 
 def test_open_event_carries_position_defining_values(tmp_path, monkeypatch):
-    monkeypatch.setattr(pm, "TRACKING_DIR", tmp_path)
+    monkeypatch.setattr(pm, "ACTIVE_DIR", tmp_path)
     closed = tmp_path / "closed"; closed.mkdir()
     monkeypatch.setattr(pm, "CLOSED_DIR", closed)
     monkeypatch.setattr(pm, "regenerate_positions_json", lambda *a, **k: None)

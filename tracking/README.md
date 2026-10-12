@@ -1,14 +1,23 @@
-# Stock Tracking Directory
+# tracking/ — the live state
 
-Each `.json` file represents an actively tracked stock position.
+Split by kind since 2026-10-12 (`docs/TRACKING_LAYOUT/`). The paths are named
+once, in `scripts/tracking_paths.py`; schema in `TRACKER_SCHEMA.md`.
 
-## File Naming
-`{code}.json` — e.g., `002721.json` for 菜百股份
+```
+book/        the portfolio — written only by scripts/position_manager.py
+  active/    {code}.json, one per OPEN position (nothing else lives here)
+  closed/    {code}_{exitDate}.json on close (pre-2026-08-06 trades: {code}.json)
+  positions.json   aggregate, regenerated every run — never hand-edit
+  config.json      hard limits (starting capital, max positions, max %)
+ledgers/     hypotheses.json, predictions.jsonl, rotation_ledger.json
+calendar/    events.json, event_inbox.md (the owner ticks here),
+             event_inbox_ledger.json
+```
 
-## Lifecycle
-1. **Created** by `scripts/position_manager.py` when the LLM opens a position
-2. **Updated** twice per trading day by the pipeline (`position_manager.py`)
-3. **Archived** to `closed/` when position is closed
+## Position lifecycle
+1. **Opened** by `position_manager.open_position` → `book/active/{code}.json`
+2. **Updated** twice per trading day by the pipeline
+3. **Closed** by `position_manager.close_position` → moved to `book/closed/`
 
-## State Fields
-See `TRACKER_SCHEMA.md` for full schema.
+`python3 scripts/run_daily.py --reset-to DATE` rolls back `book/` only.
+Everything here is git-committed by every successful run.

@@ -18,12 +18,14 @@ def _trip(code, entry, exit_, ret, entry_px=10.0, exit_px=10.0):
 
 
 def make_tracking(tmp_path, closed, active=()):
-    (tmp_path / "closed").mkdir()
+    """A tracking/ root in the 2026-10-12 layout (book/active, book/closed)."""
+    (tmp_path / "book" / "closed").mkdir(parents=True)
+    (tmp_path / "book" / "active").mkdir()
     for i, t in enumerate(closed):
-        (tmp_path / "closed" / f"{t['code']}_{i}.json").write_text(
+        (tmp_path / "book" / "closed" / f"{t['code']}_{i}.json").write_text(
             json.dumps(t), encoding="utf-8")
     for t in active:
-        (tmp_path / f"{t['code']}.json").write_text(
+        (tmp_path / "book" / "active" / f"{t['code']}.json").write_text(
             json.dumps({**t, "status": "active"}), encoding="utf-8")
     return tmp_path
 
