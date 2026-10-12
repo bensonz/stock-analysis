@@ -161,6 +161,19 @@ python3 scripts/run_daily.py --reset-to DATE   # roll the book back to end of DA
                                                #   yourself twice)
 ```
 
+What `--reset-to DATE [--slot noon]` touches (since 2026-10-12): the book
+only. It writes the snapshot's active positions, `positions.json` and
+`portfolio_config.json`; deletes active files not in the snapshot; deletes
+closed trades that had not closed yet at the snapshot (exit after DATE, or
+sold by a later slot the same day); deletes `runs/` dates after DATE. Closed
+trades from before are kept byte-for-byte. `hypotheses.json` and
+`LEARNINGS.md` come back from the run's `output/` copies when they exist.
+Everything else in `tracking/` (events, ledgers, inbox, predictions) is NOT
+rolled back — the last line of the plan names those files. It prints the
+whole plan before it changes anything; a missing, malformed or contradictory
+snapshot exits 1 with "Reset aborted, nothing changed". Note: `--slot noon`
+does not delete that date's afternoon run dir.
+
 Failure patterns seen in production, fastest diagnosis first:
 
 | symptom | first check | usual cause |
