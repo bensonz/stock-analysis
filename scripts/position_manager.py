@@ -293,6 +293,17 @@ def compute_realized_pnl() -> float:
     return round(realized, 2)
 
 
+def is_position_record(data) -> bool:
+    """True when parsed JSON is a position (tracking/{code}.json, closed/*.json).
+
+    tracking/ also holds non-position state (events.json, hypotheses.json,
+    rotation_ledger.json — the last is a LIST and crashed load_active_positions
+    with AttributeError on 2026-08-11). The readers and --reset-to share this
+    one test so the reset can never delete a file the readers skip.
+    """
+    return isinstance(data, dict) and bool(data.get("code")) and bool(data.get("status"))
+
+
 def load_active_positions() -> list[dict]:
     """Read all tracking/*.json files (skip positions.json, README.md).
     Returns list of position dicts for active positions only.
@@ -303,11 +314,8 @@ def load_active_positions() -> list[dict]:
             continue
         try:
             pos = _read_json(f)
-            # tracking/ also holds non-position state (events.json,
-            # hypotheses.json, rotation_ledger.json — the last is a LIST and
-            # crashed this loop with AttributeError on 2026-08-11). Anything
-            # that isn't a position-shaped dict is simply not a position.
-            if isinstance(pos, dict) and pos.get("status") == "active":
+            # non-position state lives here too — see is_position_record
+            if is_position_record(pos) and pos["status"] == "active":
                 positions.append(pos)
         except (json.JSONDecodeError, KeyError) as e:
             print(f"  Warning: skipping {f.name}: {e}")
@@ -368,7 +376,7 @@ def load_all_tracking_files() -> list[dict]:
             continue
         try:
             data = _read_json(f)
-            if isinstance(data, dict):  # skip non-position state (see above)
+            if is_position_record(data):  # skip non-position state
                 positions.append(data)
         except (json.JSONDecodeError, KeyError):
             pass

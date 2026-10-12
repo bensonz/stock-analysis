@@ -68,6 +68,8 @@ from market_rules import at_limit_up, price_limit_pct
 from pricedb import most_recent_trading_day
 from position_manager import (
     SameDaySellError,
+    _write_json,
+    is_position_record,
     load_active_positions,
     load_portfolio_config,
     compute_realized_pnl,
@@ -301,9 +303,8 @@ def snapshot_positions(snapshot_type: str, date: str) -> dict:
             continue
         try:
             data = json.loads(f.read_text(encoding="utf-8"))
-            # non-position state lives here too (rotation_ledger.json is a
-            # LIST — crashed this loop 2026-08-11); only dicts can be positions
-            if isinstance(data, dict) and data.get("status") == "active":
+            # non-position state lives here too — see is_position_record
+            if is_position_record(data) and data["status"] == "active":
                 active[data["code"]] = data
         except (json.JSONDecodeError, KeyError):
             pass
@@ -345,48 +346,102 @@ def snapshot_positions(snapshot_type: str, date: str) -> dict:
     }
 
 
-def restore_snapshot(snapshot: dict) -> None:
-    """Restore tracking state from a snapshot.
+# The book files a reset restores from the snapshot besides active positions.
+BOOK_STATE_FILES = ("positions.json", "portfolio_config.json")
 
-    WARNING: This overwrites all tracking/*.json, tracking/closed/*.json,
-    tracking/positions.json, and tracking/portfolio_config.json.
-    Note: LEARNINGS.md is no longer included in snapshots (too large, lives in repo).
+
+class ResetError(Exception):
+    """A --reset-to that cannot run safely. Raised before anything changes."""
+
+
+def _read_book_file(path: Path):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as e:
+        raise ResetError(f"cannot read {path}: {e}") from e
+
+
+def _validate_snapshot(snapshot) -> None:
+    """Fail loudly on a snapshot the reset cannot trust. All 391 snapshots on
+    disk at 2026-10-12 (input + output, back to 2026-03-05) pass this."""
+    if not isinstance(snapshot, dict):
+        raise ResetError("snapshot is not a JSON object")
+    for key in ("active_positions", "positions_json", "portfolio_config"):
+        if not isinstance(snapshot.get(key), dict):
+            raise ResetError(f"snapshot has no {key} object")
+    for code, pos in snapshot["active_positions"].items():
+        if not (is_position_record(pos) and pos["status"] == "active"
+                and pos["code"] == code and pos.get("entryDate")):
+            raise ResetError(
+                f"snapshot active_positions[{code!r}] is not an active position record")
+
+
+def plan_book_restore(snapshot: dict, target_date: str) -> dict:
+    """Decide what a reset deletes and writes in the portfolio book. Touches nothing.
+
+    The book is tracking/{code}.json, positions.json, portfolio_config.json and
+    tracking/closed/. Everything else in tracking/ (hypotheses.json, events.json,
+    rotation_ledger.json, ...) is not position state and is never touched here.
+
+    Closed trades are never rewritten: the snapshot holds only a summary of
+    them (keyed by code, no history). Closed files do not change after exit
+    (corporate actions only touch open positions), so a file is still exactly
+    what it was at the snapshot unless its trade had not closed yet. It goes
+    when exitDate is after the target, or when the snapshot still holds the
+    same trade (code + entryDate) as active — a noon snapshot whose afternoon
+    run sold it the same day. That trade comes back from the snapshot's full
+    active record.
     """
-    # Clear active positions (but not the directory itself)
-    for f in TRACKING_DIR.glob("*.json"):
-        if f.name in ("positions.json", "portfolio_config.json"):
+    _validate_snapshot(snapshot)
+    active = snapshot["active_positions"]
+    open_trades = {(p["code"], p["entryDate"]) for p in active.values()}
+
+    delete_active, untouched = [], []
+    for f in sorted(TRACKING_DIR.iterdir()):
+        if not f.is_file() or f.name in BOOK_STATE_FILES:
             continue
+        if f.suffix == ".json" and is_position_record(_read_book_file(f)):
+            if f.stem not in active:
+                delete_active.append(f)
+        else:
+            untouched.append(f.name)
+
+    delete_closed, kept_closed = [], 0
+    for f in sorted(CLOSED_DIR.glob("*.json")):
+        pos = _read_book_file(f)
+        if not (is_position_record(pos) and pos.get("exitDate")):
+            raise ResetError(f"{f} is not a closed position record (no code/status/exitDate)")
+        trade = (pos["code"], pos.get("entryDate"))
+        if pos["exitDate"] > target_date:
+            if (pos.get("entryDate") or "") < target_date and trade not in open_trades:
+                raise ResetError(
+                    f"{f.name} was held across {target_date} (entry {pos.get('entryDate')}, "
+                    f"exit {pos['exitDate']}) but the snapshot does not hold it as active")
+            delete_closed.append(f)
+        elif trade in open_trades:
+            if pos["exitDate"] < target_date:
+                raise ResetError(
+                    f"{f.name} closed {pos['exitDate']}, before {target_date}, but the "
+                    f"snapshot still holds {pos['code']} (entry {pos.get('entryDate')}) as active")
+            delete_closed.append(f)
+        else:
+            kept_closed += 1
+
+    write = {TRACKING_DIR / f"{code}.json": pos for code, pos in active.items()}
+    write[POSITIONS_FILE] = snapshot["positions_json"]
+    write[PORTFOLIO_CONFIG_FILE] = snapshot["portfolio_config"]
+    return {"write": write, "delete_active": delete_active,
+            "delete_closed": delete_closed, "kept_closed": kept_closed,
+            "untouched": untouched}
+
+
+def apply_book_restore(plan: dict) -> None:
+    """Write first, delete second: an interrupted reset leaves an extra file,
+    never a lost one."""
+    for path, data in plan["write"].items():
+        _write_json(path, data)
+    for f in plan["delete_active"] + plan["delete_closed"]:
         f.unlink()
-
-    # Clear closed positions
-    for f in CLOSED_DIR.glob("*.json"):
-        f.unlink()
-
-    # Write active positions
-    for code, data in snapshot.get("active_positions", {}).items():
-        path = TRACKING_DIR / f"{code}.json"
-        path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-    # Write closed positions
-    for code, data in snapshot.get("closed_positions", {}).items():
-        path = CLOSED_DIR / f"{code}.json"
-        path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-    # Write positions.json
-    if snapshot.get("positions_json"):
-        POSITIONS_FILE.write_text(
-            json.dumps(snapshot["positions_json"], ensure_ascii=False, indent=2) + "\n",
-            encoding="utf-8"
-        )
-
-    # Write portfolio_config.json
-    if snapshot.get("portfolio_config"):
-        PORTFOLIO_CONFIG_FILE.write_text(
-            json.dumps(snapshot["portfolio_config"], ensure_ascii=False, indent=2) + "\n",
-            encoding="utf-8"
-        )
-
-    # LEARNINGS.md no longer stored in snapshots — lives in repo directly
 
 
 def snapshot_aux_state(output_dir: Path) -> None:
@@ -563,9 +618,11 @@ def check_snapshot_consistency(date: str, current_snapshot: dict) -> list[str]:
 def reset_to_date(target_date: str, slot: str | None = None) -> None:
     """Reset mutable state to the end-of-day state of target_date.
 
-    Restores tracking position files from the target date's post-run snapshot,
-    deletes any run dirs after target_date, and restores auxiliary state
-    snapshots like tracking/hypotheses.json and LEARNINGS.md when available.
+    Restores the portfolio book (see plan_book_restore) from the target date's
+    post-run snapshot, deletes any run dirs after target_date, and restores
+    tracking/hypotheses.json and LEARNINGS.md from the run's output/ copies
+    when they exist. Other tracking/ state (events, ledgers) is not rolled
+    back. Prints the full plan first; a bad snapshot exits 1 before any change.
 
     When multiple slots exist for target_date, the afternoon (settled) run is
     used by default; pass ``slot`` to force a specific one. Legacy layouts
@@ -589,27 +646,41 @@ def reset_to_date(target_date: str, slot: str | None = None) -> None:
                 print(f"  {run_date}  {run_slot:9s}  {status}", file=sys.stderr)
             sys.exit(1)
 
-    snapshot = json.loads(snapshot_file.read_text(encoding="utf-8"))
+    try:
+        snapshot = json.loads(snapshot_file.read_text(encoding="utf-8"))
+        plan = plan_book_restore(snapshot, target_date)
+    except (json.JSONDecodeError, ResetError) as e:
+        print(f"✗ Reset aborted, nothing changed: {snapshot_file}: {e}", file=sys.stderr)
+        sys.exit(1)
 
-    # Confirm
-    active_count = len(snapshot.get("active_positions", {}))
-    closed_count = len(snapshot.get("closed_positions", {}))
-    print(f"Resetting to {target_date} ({snapshot_file.parent.name} snapshot)", file=sys.stderr)
-    print(f"  Active positions: {active_count}", file=sys.stderr)
-    print(f"  Closed positions: {closed_count}", file=sys.stderr)
+    later_runs = sorted(d for d in RUNS_DIR.iterdir()
+                        if d.is_dir() and d.name > target_date) if RUNS_DIR.exists() else []
+    aux = [name for name, src in (("hypotheses.json", "hypotheses_snapshot.json"),
+                                  ("LEARNINGS.md", "LEARNINGS.md"))
+           if (run_dir / "output" / src).exists()]
 
-    # Delete run dirs after target_date
-    deleted = []
-    if RUNS_DIR.exists():
-        for d in sorted(RUNS_DIR.iterdir()):
-            if d.is_dir() and d.name > target_date:
-                shutil.rmtree(d)
-                deleted.append(d.name)
-    if deleted:
-        print(f"  Deleted runs: {', '.join(deleted)}", file=sys.stderr)
+    def names(paths):
+        return ", ".join(p.name for p in paths) or "none"
 
-    # Restore
-    restore_snapshot(snapshot)
+    active_files = [p for p in plan["write"] if p.name not in BOOK_STATE_FILES]
+    print(f"Resetting to {target_date} from {snapshot_file}", file=sys.stderr)
+    print(f"  Write:  {len(active_files)} active position(s) [{names(active_files)}], "
+          f"{', '.join(BOOK_STATE_FILES)}", file=sys.stderr)
+    print(f"  Delete: {len(plan['delete_active'])} active file(s) not in the snapshot "
+          f"[{names(plan['delete_active'])}]", file=sys.stderr)
+    print(f"  Delete: {len(plan['delete_closed'])} closed trade(s) not yet closed at the "
+          f"snapshot [{names(plan['delete_closed'])}]", file=sys.stderr)
+    print(f"  Keep:   {plan['kept_closed']} closed trade(s) byte-for-byte", file=sys.stderr)
+    print(f"  Delete: runs after {target_date} [{names(later_runs)}]", file=sys.stderr)
+    if aux:
+        print(f"  Restore from the run's output/: {', '.join(aux)}", file=sys.stderr)
+    not_rolled = [n for n in plan["untouched"] if n not in aux]
+    print(f"  NOT rolled back (not position state, left as is): {', '.join(not_rolled) or 'none'}",
+          file=sys.stderr)
+
+    for d in later_runs:
+        shutil.rmtree(d)
+    apply_book_restore(plan)
 
     aux_warnings = restore_aux_state(run_dir)
     for warning in aux_warnings:
