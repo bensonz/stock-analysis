@@ -28,3 +28,15 @@
   window is a local constant `INBOX_REMIND_DAYS`, not imported: event_inbox
   imports akshare + pricedb, and the doctor must survive those breaking. A
   test pins the two constants equal.
+- First live refresh: 96 candidates (imp>=3), 0 fetch errors, 18 empty days.
+  It dropped 中国9月CPI同比 as a fuzzy "duplicate" of the hand-written US CPI
+  → fix: fuzzy now needs the same tz (D5). Second refresh: 96 fetched, 92
+  new, 4 fuzzy dups (美国9月CPI/核心CPI vs the hand CPI entry; FOMC 上限/下限
+  vs FOMC利率决议 10-28 — all genuine), 0 errors, 18 empty days.
+- 48 of those land inside the 7-day doctor window → the doctor check now
+  emits ONE finding per run listing all due items (D11), not one per item.
+- Demo: ticked only the midterm ([x], high, two_sided, kind political, note
+  on the 2026-11-10 tariff-truce deadline), `promote` → events.json +1 with
+  inbox_id `wscn-20261103-8615302d`; `upcoming(days=30)` lists it at
+  2026-11-04 (T-23). Ledger has 1 keep. 91 items left undecided for the owner.
+- Full suite: 976 passed, 13 skipped (integration).

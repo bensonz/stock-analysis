@@ -567,6 +567,10 @@ def check_event_inbox_undecided(v: RunView) -> list[Finding]:
     PROMOTE_AFTER in 1.5 days of the owner being busy and then claim a code
     change is needed. So the id carries the run, the streak never builds, and
     `--open` still folds every instance under this one check.
+
+    ONE finding per run listing every due item, not one per item: the first
+    live refresh put 51 undecided items inside the window, and 51 findings
+    would bury every other line of the audit.
     """
     rec = v.need("event_inbox")
     pending = rec.get("pending_items")
@@ -574,23 +578,28 @@ def check_event_inbox_undecided(v: RunView) -> list[Finding]:
         raise CannotCheck("event_inbox.json has no pending_items: "
                           + ("; ".join(rec.get("step_errors") or []) or "unknown"))
     run_day = datetime.strptime(v.date, "%Y-%m-%d").date()
-    out = []
+    due = []
     for p in pending:
         try:
             days = (_date.fromisoformat(p["a_share_impact_date"]) - run_day).days
         except (KeyError, TypeError, ValueError):
             continue
         if 0 <= days <= INBOX_REMIND_DAYS:
-            out.append(Finding(
-                id=f"event-inbox-undecided:{p.get('id')}:{v.date}-{v.slot}",
-                check="event_inbox_undecided",
-                kind=ENV,
-                title=f"事件待定 {p['a_share_impact_date']} (T-{days}) {p.get('name', '')}"[:90],
-                detail=("收件箱里仍为 [ ] 的候选事件，A股影响日在 "
-                        f"{INBOX_REMIND_DAYS} 天内。不决定就不会进入报告的未来事件窗口。"),
-                fix_cmd=("在 tracking/event_inbox.md 标记 [x] 保留 / [-] 跳过，"
-                         "然后 python3 scripts/event_inbox.py promote")))
-    return out
+            due.append((p["a_share_impact_date"], days, p.get("name", ""), p.get("id")))
+    if not due:
+        return []
+    due.sort()
+    first = due[0]
+    return [Finding(
+        id=f"event-inbox-undecided:{v.date}-{v.slot}",
+        check="event_inbox_undecided",
+        kind=ENV,
+        title=(f"{len(due)} 条待定事件 {INBOX_REMIND_DAYS} 天内到A股影响日"
+               f"（最近 {first[0]} {first[2]}）")[:90],
+        detail=("收件箱里仍为 [ ] 的候选事件，不决定就不会进入报告的未来事件窗口:\n"
+                + "\n".join(f"  - {d} (T-{n}) {name}  [{i}]" for d, n, name, i in due)),
+        fix_cmd=("在 tracking/event_inbox.md 标记 [x] 保留 / [-] 跳过，"
+                 "然后 python3 scripts/event_inbox.py promote"))]
 
 
 CHECKS = [

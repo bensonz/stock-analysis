@@ -68,7 +68,7 @@ Neither kind fits exactly. Not invariant — nothing is contradictory, and
 "code change needed" would be a lie. env puts it in the "需要人工操作"
 bucket, which is right. But env promotes to "code change" after 3
 consecutive occurrences, and a stable id would reach that in 1.5 days of the
-owner not deciding. So the id carries the run (`…:<date>-<slot>`): it never
+owner not deciding. So the id carries the run (`event-inbox-undecided:<date>-<slot>`): it never
 streaks, stays in the human-action bucket, and is still folded by check in
 `--open`. The doctor reads the run's own `input/event_inbox.json` (written by
 the pipeline step), not the live `tracking/event_inbox.md`, so a historical
@@ -84,3 +84,9 @@ Runs both slots (~10 s); overall deadline 60 s.
 `event_inbox.REMIND_WITHIN_DAYS`. Importing event_inbox would pull akshare and
 the pricedb package into the doctor, a separate launchd job that exists to
 keep reporting when the pipeline's dependencies are broken.
+
+## D11. One doctor finding per run, not per item
+The first live refresh put 51 undecided items inside the 7-day window
+(importance >= 3 is noisy). One finding per item would bury every other line
+of audit-result.md. So the check emits one finding whose title gives the count
+and the nearest item, and whose detail lists them all.

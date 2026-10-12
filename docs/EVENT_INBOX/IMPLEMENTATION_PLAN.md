@@ -62,4 +62,4 @@ reason on runs that predate the artifact.
 **Goal**: real `refresh`; tick only the US midterm (high, two_sided, note on
 2026-11-10 tariff-truce deadline); `promote`; `upcoming(days=30)` shows it on
 2026-11-04. Separate data commit.
-**Status**: Not Started
+**Status**: Complete

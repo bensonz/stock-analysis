@@ -512,9 +512,20 @@ def test_event_inbox_undecided_within_7_days_is_an_ops_reminder(tmp_path):
                            _pending("c", "2026-10-09")])   # already past
     res = audit(runs, "2026-10-12", "noon")
     got = [f for f in res.findings if f.check == "event_inbox_undecided"]
-    assert [f.id for f in got] == ["event-inbox-undecided:a:2026-10-12-noon"]
+    assert [f.id for f in got] == ["event-inbox-undecided:2026-10-12-noon"]
+    assert got[0].title.startswith("1 条待定事件")
+    assert "[a]" in got[0].detail and "[b]" not in got[0].detail and "[c]" not in got[0].detail
     assert got[0].kind == doc.ENV and not got[0].needs_code_change
     assert res.verdict == "action_needed"
+
+
+def test_event_inbox_many_due_items_make_one_finding(tmp_path):
+    runs = tmp_path / "runs"
+    p = make_run(runs, "2026-10-12", "noon")
+    write_inbox_record(p, [_pending(str(n), "2026-10-14") for n in range(51)])
+    got = [f for f in audit(runs, "2026-10-12", "noon").findings
+           if f.check == "event_inbox_undecided"]
+    assert len(got) == 1 and got[0].title.startswith("51 条")
 
 
 def test_event_inbox_reminder_never_streaks_into_a_code_finding(tmp_path):
