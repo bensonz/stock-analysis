@@ -17,3 +17,10 @@
 - `tests/test_event_inbox.py`: 26 unit (fake fetch, tmp paths) + 1 integration
   (real API, passed). Root conftest LIVE_STATE now also fingerprints
   `tracking/event_inbox.md` and `tracking/event_inbox_ledger.json`.
+- Stage 3: wired into `phase1_collect` just before the event-calendar block.
+  `tests/test_strategy_pool_observability.py` runs the real phase1_collect —
+  it would have hit the network and written the live tracking/ inbox, so it
+  now stubs `event_inbox` in sys.modules (same pattern as fetch_iv_sentiment)
+  and is parametrized to prove a raising inbox costs only its own artifact.
+- The worktree has no price DB (git-ignored); `data/pricedb` is a symlink to
+  the main repo's for the test suite. Untracked, never committed.

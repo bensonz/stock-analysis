@@ -44,8 +44,8 @@ the inbox.
 event-calendar block; never fails the run; loud `[event-inbox]` line; writes
 `input/event_inbox.json` (the run's own record, read by the doctor).
 **Success Criteria**: an exception inside the inbox step is caught and printed.
-**Tests**: `run_inbox_step` swallows errors and returns a summary.
-**Status**: Not Started
+**Tests**: `pipeline_step` records step failures (test_event_inbox); phase1_collect test parametrized inbox-ok / inbox-raises (test_strategy_pool_observability).
+**Status**: Complete
 
 ## Stage 4: Doctor check
 
