@@ -250,7 +250,11 @@ def _longest_common(a: str, b: str) -> int:
 
 
 def match_event(item: Item, events: list) -> str | None:
-    """"id" / "fuzzy" if events.json already carries this item, else None (D5)."""
+    """"id" / "fuzzy" if events.json already carries this item, else None (D5).
+
+    Fuzzy = same tz, A-share impact dates within ±1 day, and the normalized
+    names share a run of >= FUZZY_MIN_COMMON characters.
+    """
     if any(e.get("inbox_id") == item.id for e in events):
         return "id"
     mine = item.impact_date()
@@ -258,7 +262,9 @@ def match_event(item: Item, events: list) -> str | None:
         return None
     a = _norm_name(item.name, item.region)
     for e in events:
-        if not e.get("date"):
+        # same tz too: without it 中国9月CPI matched a hand-written 美国9月CPI
+        # (the region word is stripped, leaving "CPI" on both sides)
+        if not e.get("date") or e.get("tz", "CN") != item.tz:
             continue
         try:
             theirs = event_calendar.a_share_impact_date(

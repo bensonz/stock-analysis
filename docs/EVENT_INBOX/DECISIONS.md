@@ -38,12 +38,17 @@ refreshes as long as wallstreetcn keeps the title.
 
 ## D5. Dedupe against events.json
 1. exact: an event whose `inbox_id` equals the candidate's id;
-2. fuzzy (for hand-written entries): A-share impact dates within ±1 day AND
+2. fuzzy (for hand-written entries): same `tz`, A-share impact dates within ±1 day AND
    the normalized names share a substring of >= 3 characters. Normalize =
    drop whitespace/punctuation, the region word, and `\d+月` / `\d+日` / years.
    ("美国9月CPI公布（日期待BLS确认）" vs "美国9月CPI年率" → "CPI").
 False positive risk: two different releases on adjacent days sharing a
 3-char token. Fuzzy drops are counted (`dup_fuzzy`) so it is visible.
+The same-tz condition was added after the first live refresh dropped
+中国9月CPI同比 as a "duplicate" of the hand-written 美国9月CPI entry (region
+words are stripped, leaving "CPI" on both). Remaining limit: two non-US
+regions both map to CN, so e.g. 欧元区CPI vs a hand-written 中国CPI on the same
+day would still collide.
 
 ## D6. Ledger
 `tracking/event_inbox_ledger.json` records `keep`/`skip` (owner) and

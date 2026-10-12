@@ -175,6 +175,20 @@ def test_fuzzy_needs_both_date_and_name(paths):
     assert res["new"] == 1
 
 
+def test_fuzzy_requires_same_tz(paths):
+    """Real false positive from the first live refresh: 中国9月CPI was dropped
+    as a duplicate of the hand-written 美国9月CPI — region stripped, "CPI" left."""
+    us = {"date": "2026-10-13", "tz": "US", "name": "美国9月CPI公布（日期待BLS确认）"}
+    paths["events_path"].write_text(json.dumps({"events": [us]}, ensure_ascii=False),
+                                    encoding="utf-8")
+    cn = {**KR_CPI, "时间": "2026-10-14 09:30:00", "地区": "中国", "事件": "中国9月CPI同比",
+          "链接": ""}
+    us_row = {**cn, "时间": "2026-10-14 20:30:00", "地区": "美国", "事件": "美国9月CPI同比"}
+    res = refresh(paths, fake_fetch({"20261014": [cn, us_row]}))
+    assert res["new"] == 1 and res["dup_fuzzy"] == 1
+    assert [i.name for i in items(paths).values()] == ["中国9月CPI同比"]
+
+
 def test_ledger_prevents_return(paths):
     fetch = fake_fetch({"20261103": [MIDTERM, KR_CPI]})
     refresh(paths, fetch)
