@@ -67,3 +67,10 @@
   🤖 still flippable); WEEKLY_AUDIT C5 asks the auditor to grade `high` keeps
   against the impact-day index move and skips for misses. RUNBOOK failure table
   row added. Full suite: 1012 passed, 13 skipped.
+- Stage 9 (live): `.env` symlinked into the worktree (git-ignored) so llm_client
+  sees the real config. Previewed the prompt on tmp copies first (6.3K chars).
+  One real call: deepseek-v4-pro, 2647+15185 tokens, ~295 s wall, 22/22 valid,
+  10 kept (all medium, 1 risk = US port fees), 12 skipped, 0 high. Data commit
+  f4d54d9. Then D19 hardening: token cap 65536, 480 s wall deadline around the
+  call, batch 25 (+1 test). The 180 s client timeout did not fire on a 295 s
+  call — keep-alive resets the read timer.

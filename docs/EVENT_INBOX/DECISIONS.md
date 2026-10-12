@@ -105,7 +105,7 @@ trading decisions). `event_triage.call_model` reuses llm_client's config and
 clients: `LLM_PROVIDER` openai or hybrid → the OpenAI-compatible
 `OPENAI_MODEL` (DeepSeek V4 Pro today; in hybrid mode that model makes the
 final trading decision too); anthropic → `ANTHROPIC_MODEL`. No tools, no web
-search, temperature 0, max_tokens 16384 (reasoning headroom), timeout 180 s;
+search, temperature 0, max_tokens = llm_client.MAX_OUTPUT_TOKENS (D19);
 `finish_reason == "length"` is an error, not a partial answer. The prompt text
 lives in `agents/EVENT_TRIAGE.md` (strategy belongs in agents/*.md); the code
 appends today, the calendar as `event_calendar.upcoming(45 days)` sees it
@@ -126,8 +126,9 @@ object) leaves every item `[ ]` and records `error`. Nothing raises out of
 ## D14. Triage once; failures retry
 An item is sent only if it is `[ ]` AND has no ledger entry. After an AI
 decision it has one, so it is never sent again; a failed item has none, so the
-next run sends it again. Max 40 items per call (the rest wait a run) — a lowered
-`MIN_IMPORTANCE` can bring back ~90 at once. AI-held items leave the inbox
+next run sends it again. Max 25 items per call (the rest wait a run; was 40
+until the live call's timing, D19) — a lowered `MIN_IMPORTANCE` can bring back
+~90 at once. AI-held items leave the inbox
 silently once their A-share impact date has passed (`ai_retired`): too late to
 flip, and their ledger entry already blocks them from returning.
 
@@ -178,3 +179,21 @@ spec problem worth a fix, not weather. A run with nothing to triage
 (`attempted: 0`) is clean. Runs before AI triage are skipped with a reason.
 The existing undecided reminder (D8) stays as the backstop; with triage on it
 only fires for items the AI failed on or the owner reopened.
+
+## D19. Live call findings: token cap and wall-clock deadline
+The first live call (22 rows, deepseek-v4-pro, thinking on by default):
+2647 in + 15185 out tokens, ~295 s, 22/22 valid. Two fixes after it:
+- max_tokens 16384 → `llm_client.MAX_OUTPUT_TOKENS` (65536). The reply used 93%
+  of 16384 on reasoning; at 40 rows it would truncate, fail, and be retried with
+  the same rows every run. The cap truncates, it does not reserve, so the higher
+  ceiling costs nothing extra.
+- The OpenAI client's `timeout=180` did not stop a 295 s call (the read timer
+  resets while the endpoint keeps the connection alive). `triage()` now wraps
+  the call in `pricedb.providers._run_with_timeout` (480 s; the abandoned
+  thread is a daemon) and the batch is 25 rows, so a burst stays inside it.
+  Steady state is ~0–3 new rows a run (the 45-day window moves a day a day),
+  so the normal call is small.
+Not done: turning reasoning off (`extra_body={"thinking": {"type":
+"disabled"}}`, as deep_report's judge does). It would cut the call to seconds,
+but the live decisions came from reasoning-on, and the choice of "how much
+thinking an event judgement deserves" is the owner's.

@@ -17,4 +17,4 @@
 - [x] LLM failure recorded, run continues, items retried; doctor finding
 - [x] CLAUDE.md + RUNBOOK updated with the behaviour change
 - [x] Full suite green (1012 passed, 13 skipped)
-- [ ] Live triage on the real inbox (Stage 9)
+- [x] Live triage on the real inbox (Stage 9)

@@ -65,8 +65,11 @@ FETCH_DEADLINE_SEC = 60
 #: the doctor reminds about undecided items this close to their impact date
 REMIND_WITHIN_DAYS = 7
 #: items per triage call; the rest wait for the next run (a lowered
-#: MIN_IMPORTANCE can bring back ~90 at once)
-MAX_TRIAGE_ITEMS = 40
+#: MIN_IMPORTANCE can bring back ~90 at once). The first live call took ~5 min
+#: for 22 rows on a reasoning model, so keep a batch inside the deadline.
+MAX_TRIAGE_ITEMS = 25
+#: wall-clock bound on the whole LLM call — the client's own timeout is not one
+TRIAGE_DEADLINE_SEC = 480
 TRIAGE_REASON_MAX = 120
 #: an owner edit to any of these on an AI-held item is an override (D15)
 OVERRIDE_FIELDS = ("name", "date", "tz", "kind", "impact", "direction", "note")
@@ -628,7 +631,8 @@ def _triage_problem(d) -> str | None:
 
 def triage(today: _date | None = None, inbox_path: Path = INBOX_FILE,
            ledger_path: Path = LEDGER_FILE, events_path: Path = EVENTS_FILE,
-           triage_fn=None, max_items: int = MAX_TRIAGE_ITEMS) -> dict:
+           triage_fn=None, max_items: int = MAX_TRIAGE_ITEMS,
+           deadline_sec: float = TRIAGE_DEADLINE_SEC) -> dict:
     """AI-judge undecided items the AI has never judged; apply at once (D12–D14).
 
     Only `[ ]` items with NO ledger entry are sent, so an owner mark — set
@@ -657,7 +661,9 @@ def triage(today: _date | None = None, inbox_path: Path = INBOX_FILE,
                  "region": i.region, "name": i.name, "importance": i.importance,
                  "beijing_time": i.beijing_time} for i in todo]
         prompt = event_triage.build_prompt(today, rows, calendar)
-        text, meta = (triage_fn or event_triage.call_model)(prompt)
+        call = triage_fn or event_triage.call_model
+        text, meta = _run_with_timeout("event-triage", lambda: call(prompt),
+                                       timeout=deadline_sec)
         raw = event_triage.extract(text)
     except Exception as e:  # noqa: BLE001 — items stay undecided, retried next run
         rec["error"] = f"{type(e).__name__}: {e}"

@@ -11,7 +11,7 @@ This module only builds the prompt (agents/EVENT_TRIAGE.md + the data), makes
 ONE small call with no tools through llm_client's provider config, and pulls
 the `decisions` object out of the reply. It writes nothing; every state change
 and every per-item validity check lives in event_inbox.triage(). Rules and
-limits: docs/EVENT_INBOX/DECISIONS.md D12–D17.
+limits: docs/EVENT_INBOX/DECISIONS.md D12–D19.
 """
 import sys
 from datetime import date as _date
@@ -24,10 +24,16 @@ import llm_client  # noqa: E402
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SPEC_FILE = PROJECT_ROOT / "agents" / "EVENT_TRIAGE.md"
 
-#: a judgement per row is ~60 output tokens; the rest is headroom for a
-#: reasoning model, which bills its thinking against the same ceiling
-MAX_OUTPUT_TOKENS = 16384
+#: a judgement per row is ~60 output tokens, but a reasoning model bills its
+#: thinking against the same ceiling: the first live call (22 rows, DeepSeek
+#: V4 Pro) used 15185 of 16384. The cap truncates, it does not reserve, so
+#: take llm_client's endpoint ceiling — a truncated reply would fail and be
+#: retried with the same rows every run.
+MAX_OUTPUT_TOKENS = llm_client.MAX_OUTPUT_TOKENS
 TEMPERATURE = 0.0
+#: httpx's per-read timeout. It does NOT bound the call: the first live call
+#: ran ~295 s against 180 (the endpoint keeps the connection alive while it
+#: thinks). event_inbox.triage() bounds the wall time instead.
 CALL_TIMEOUT_SEC = 180
 
 _WEEKDAY_ZH = "一二三四五六日"

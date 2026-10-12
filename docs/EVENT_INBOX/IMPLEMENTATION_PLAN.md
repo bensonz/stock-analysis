@@ -116,4 +116,6 @@ triage, skip on old runs; test_event_inbox — status AI stats.
 
 **Goal**: one real call on the 22 undecided items in the worktree's inbox;
 decisions table reported; data commit (inbox, ledger, events.json).
-**Status**: Not Started
+**Result**: 22/22 valid, 10 kept (all medium), 12 skipped; 2647+15185 tokens,
+~295 s → hardening commit (D19: token cap, wall deadline, batch 25).
+**Status**: Complete

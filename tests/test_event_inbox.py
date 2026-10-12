@@ -512,6 +512,22 @@ def test_llm_exception_leaves_items_undecided_and_run_continues(paths):
     assert "ai kept 0/skipped 0/errors 1" in line and "AI TRIAGE FAILED: ConnectionError" in line
 
 
+def test_a_call_past_the_deadline_is_a_triage_error(paths):
+    """The client's own timeout does not bound a reasoning call (D19)."""
+    import threading
+    refresh(paths, fake_fetch({"20261103": [MIDTERM]}))
+    release = threading.Event()
+
+    def slow(prompt):
+        release.wait(5)
+        return "{}", {}
+    try:
+        rec = ei.triage(TODAY, **paths, triage_fn=slow, deadline_sec=0.05)
+    finally:
+        release.set()
+    assert "exceeded" in rec["error"] and items(paths)[MID_ID].mark == " "
+
+
 def test_unparseable_reply_is_a_triage_error(paths):
     refresh(paths, fake_fetch({"20261103": [MIDTERM]}))
     rec = ei.triage(TODAY, **paths, triage_fn=lambda p: ("sorry, no JSON", {"model": "m"}))
