@@ -62,3 +62,8 @@
 - Stage 7: `event_calendar.upcoming()` now copies `decided_by`; report.md's
   未来事件窗口 line gets 〔AI选入〕 after the name for AI keeps only. The Phase-2
   prompt section and the site are unchanged (kept minimal).
+- Stage 8: doctor `check_event_inbox_triage` (D18); `status` → `ai` block
+  (kept / skipped / kept_high / overrides split by AI decision / override rate /
+  🤖 still flippable); WEEKLY_AUDIT C5 asks the auditor to grade `high` keeps
+  against the impact-day index move and skips for misses. RUNBOOK failure table
+  row added. Full suite: 1012 passed, 13 skipped.

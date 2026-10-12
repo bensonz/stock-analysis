@@ -9,3 +9,12 @@
 - [x] Doctor reads only; check skipped with reason on old runs
 - [x] CLAUDE.md + RUNBOOK updated in the CLI commit
 - [x] DECISIONS.md records date/tz rule + fuzzy rule + doctor classification
+
+## AI triage
+- [x] No unit test reaches the real LLM (autouse refusal in test_event_inbox)
+- [x] AI never adds events / changes name, date, tz (only marks, impact, direction)
+- [x] Owner mark before AI wins; any owner edit of a 🤖 item wins after
+- [x] LLM failure recorded, run continues, items retried; doctor finding
+- [x] CLAUDE.md + RUNBOOK updated with the behaviour change
+- [x] Full suite green (1012 passed, 13 skipped)
+- [ ] Live triage on the real inbox (Stage 9)

@@ -674,3 +674,21 @@ def test_call_model_refuses_a_truncated_reply(real_call_model):
     with pytest.raises(RuntimeError, match="truncated"):
         et.call_model("PROMPT")
 
+
+def test_status_reports_ai_stats_and_override_rate(ai_decided):
+    flip(ai_decided, KR_ID, "- [-] keep", "- [x] keep")
+    ei.promote(TODAY, **ai_decided)
+    a = ei.status(TODAY, ai_decided["inbox_path"], ai_decided["ledger_path"])["ai"]
+    assert (a["kept"], a["skipped"], a["kept_high"]) == (1, 1, 1)
+    assert a["overrides"] == 1 and a["overrides_by_ai_decision"] == {"keep": 0, "skip": 1}
+    assert a["override_rate"] == 0.5 and a["flippable_in_inbox"] == 1
+
+
+def test_status_cli_prints_ai_line(ai_decided, monkeypatch, capsys):
+    # status()'s path defaults are bound at def time; point them at tmp
+    monkeypatch.setattr(ei.status, "__defaults__",
+                        (None, ai_decided["inbox_path"], ai_decided["ledger_path"]))
+    assert ei.main(["status"]) == 0
+    out = capsys.readouterr().out
+    assert "ai: kept 1 (impact=high 1), skipped 1, owner overrides 0 (rate 0%" in out
+

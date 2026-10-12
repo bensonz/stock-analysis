@@ -167,3 +167,14 @@ the same result next run. A crash between ledger and inbox write leaves the
 inbox showing `[ ]` for an item whose ledger says AI — promote then reads that
 as the owner un-ticking it (reopen). Accepted: it needs a crash in a ~1 ms
 window, and the outcome is safe (the owner gets the decision).
+
+## D18. Doctor: triage failure is ENV with a STABLE id
+`check_event_inbox_triage` reads the run's `input/event_inbox.json`: a `triage`
+record with `error`, or with `invalid`/`missing` items, or a `triage:` step
+error → one finding `event-inbox-triage-failed`. Unlike D8's reminder, the id
+is stable on purpose: failed items are retried every run, so a persistent
+failure recurs each slot, and three in a row (PROMOTE_AFTER) is a config or
+spec problem worth a fix, not weather. A run with nothing to triage
+(`attempted: 0`) is clean. Runs before AI triage are skipped with a reason.
+The existing undecided reminder (D8) stays as the backstop; with triage on it
+only fires for items the AI failed on or the owner reopened.

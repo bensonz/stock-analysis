@@ -133,7 +133,8 @@ python3 scripts/event_inbox.py triage    # ONE LLM call (LLM_PROVIDER's model, n
                                          # spec agents/EVENT_TRIAGE.md) judges NEW [ ]
                                          # items: keep → events.json at once (decided_by
                                          # ai). 🤖 items stay until their impact date
-python3 scripts/event_inbox.py status    # pending / due within 7 days / invalid [x]
+python3 scripts/event_inbox.py status    # pending / due within 7 days / invalid [x] /
+                                         # AI kept/skipped/high + owner override rate
                                          # run_daily phase 1 runs promote→refresh→triage
                                          # every slot ([event-inbox] line); rules in
                                          # docs/EVENT_INBOX/DECISIONS.md (AI: D12–D17)

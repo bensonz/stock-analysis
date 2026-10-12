@@ -602,6 +602,49 @@ def check_event_inbox_undecided(v: RunView) -> list[Finding]:
                  "然后 python3 scripts/event_inbox.py promote"))]
 
 
+def check_event_inbox_triage(v: RunView) -> list[Finding]:
+    """The AI triage of new inbox candidates failed, so they stay undecided.
+
+    Owner decision 2026-10-12: the AI judges every new candidate and the
+    owner only overrules. When the call fails (key, relay, timeout, no JSON)
+    or individual judgements are invalid/missing, those items stay `[ ]` and
+    are retried next run — this check is what makes that failure visible.
+    ENV with a STABLE id, unlike the undecided reminder: the retry means a
+    persistent failure recurs every run, and three in a row is something to
+    fix (config or spec), not weather. Reads only the run's own record.
+    """
+    rec = v.need("event_inbox")
+    t = rec.get("triage")
+    if t is None:
+        failed = [e for e in rec.get("step_errors") or [] if e.startswith("triage:")]
+        if not failed:
+            raise CannotCheck("event_inbox.json has no triage record "
+                              "(run predates AI triage, or an earlier step failed: "
+                              + ("; ".join(rec.get("step_errors") or []) or "none") + ")")
+        error, left, lines = failed[0], None, []
+    else:
+        error = t.get("error")
+        bad, missing = t.get("invalid") or [], t.get("missing") or []
+        left = t.get("attempted", 0) if error else len(bad) + len(missing)
+        if not left and not error:
+            return []
+        lines = ([f"  - 无效: {x.get('id')} — {x.get('problem')}" for x in bad]
+                 + [f"  - 回复缺失: {i}" for i in missing])
+    head = f"调用失败: {error}" if error else f"{left} 条判断无效或缺失"
+    return [Finding(
+        id="event-inbox-triage-failed",
+        check="event_inbox_triage",
+        kind=ENV,
+        title=(f"AI 事件分拣失败（{left if left is not None else '?'} 条新候选仍待定）"
+               f"— {head}")[:90],
+        detail=("这些候选留在 tracking/event_inbox.md 为 [ ]，下次运行重试；"
+                "持续失败则不会进入未来事件窗口。\n" + head
+                + ("\n" + "\n".join(lines) if lines else "")),
+        suspect="scripts/event_triage.py call_model / agents/EVENT_TRIAGE.md",
+        fix_cmd=("检查 .env 的 LLM_PROVIDER / OPENAI_*，然后 "
+                 "python3 scripts/event_inbox.py triage"))]
+
+
 CHECKS = [
     # invariant
     check_new_positions_absent_from_snapshot,
@@ -621,6 +664,7 @@ CHECKS = [
     check_db_health_spot_check,
     check_stock_list_fresh,
     check_event_inbox_undecided,
+    check_event_inbox_triage,
 ]
 
 

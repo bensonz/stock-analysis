@@ -110,7 +110,7 @@ triage error (call failed or items left undecided by the AI); `status` shows AI
 stats (kept/skipped/high/overrides); WEEKLY_AUDIT step to review AI decisions.
 **Tests**: test_doctor — finding on error, on invalid items, none on clean
 triage, skip on old runs; test_event_inbox — status AI stats.
-**Status**: Not Started
+**Status**: Complete
 
 ## Stage 9: Live triage
 

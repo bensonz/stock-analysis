@@ -739,8 +739,27 @@ def status(today: _date | None = None, inbox_path: Path = INBOX_FILE,
         "due_soon": [p for p in pend if p["days_until_impact"] is not None
                      and p["days_until_impact"] <= REMIND_WITHIN_DAYS],
         "ledger": {k: sum(1 for d in ledger["decisions"] if d.get("decision") == k)
-                   for k in ("keep", "skip", "expired")},
+                   for k in ("keep", "skip", "expired", "reopen")},
+        "ai": ai_stats(ledger, items),
         "warnings": warnings,
+    }
+
+
+def ai_stats(ledger: dict, items: list = ()) -> dict:
+    """For the weekly review: what the AI decided and how often the owner flipped it."""
+    ai = [d for d in ledger["decisions"] if d.get("decided_by") == "ai"]
+    flips = [d for d in ledger["decisions"] if d.get("overrode_ai")]
+    held = ai_held(ledger)
+    return {
+        "kept": sum(1 for d in ai if d["decision"] == "keep"),
+        "skipped": sum(1 for d in ai if d["decision"] == "skip"),
+        "kept_high": sum(1 for d in ai if d["decision"] == "keep"
+                         and d.get("impact") == "high"),
+        "overrides": len(flips),
+        "overrides_by_ai_decision": {k: sum(1 for d in flips if d["overrode_ai"] == k)
+                                     for k in ("keep", "skip")},
+        "override_rate": round(len(flips) / len(ai), 3) if ai else None,
+        "flippable_in_inbox": sum(1 for i in items if i.id in held),
     }
 
 
@@ -842,8 +861,15 @@ def main(argv=None) -> int:
             return 1
     else:
         res = status()
+        a = res["ai"]
         print(f"pending {res['pending']}, marked keep {res['marked_keep']}, "
               f"marked skip {res['marked_skip']}, ledger {res['ledger']}")
+        rate = "n/a" if a["override_rate"] is None else f"{a['override_rate']:.0%}"
+        print(f"ai: kept {a['kept']} (impact=high {a['kept_high']}), skipped {a['skipped']}, "
+              f"owner overrides {a['overrides']} (rate {rate}; of AI keep "
+              f"{a['overrides_by_ai_decision']['keep']} / of AI skip "
+              f"{a['overrides_by_ai_decision']['skip']}), "
+              f"🤖 still in inbox {a['flippable_in_inbox']}")
         for p in res["due_soon"]:
             print(f"  ⏰ {p['a_share_impact_date']} (T-{p['days_until_impact']}) "
                   f"{p['name']}  [{p['id']}]")

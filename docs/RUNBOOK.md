@@ -170,6 +170,7 @@ Failure patterns seen in production, fastest diagnosis first:
 | run dir exists, no manifest, no audit | `tail data/launchd/pipeline.log` | died before writing the manifest, or still running — check `pgrep -f run_daily` |
 | push failed | — | transient; the commit is local and the next run pushes it |
 | doctor: "股票列表未在当日刷新" | `pricedb.py stocks` | akshare listing endpoint down — run `stocks` then `update` by hand; 3 in a row = look at the code |
+| doctor: "AI 事件分拣失败" | `event_inbox.py triage` | the event-triage LLM call failed or gave invalid judgements; items stay `[ ]` and retry each run. Check `.env` LLM_PROVIDER / OPENAI_*; 3 in a row = fix config or `agents/EVENT_TRIAGE.md` |
 | report banner warns "adj factors lag prices" | `pricedb.py factors verify` | factor sync missed — `factors heal`, then `rps` |
 
 ## Choosing upcoming events (the event inbox)
