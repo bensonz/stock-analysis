@@ -85,7 +85,8 @@ def test_fetch_strategy_pool_local_uses_relaxed_local_fallback_when_strict_filte
     assert result["stocks"][0]["strict_filter_reasons"] == ["weak_highlights_or_risks(highlights=1,risks=0)"]
 
 
-def test_phase1_collect_writes_crawl_intersect_rps_and_vcp_artifacts(tmp_path, monkeypatch):
+@pytest.mark.parametrize("inbox_ok", [True, False], ids=["inbox-ok", "inbox-raises"])
+def test_phase1_collect_writes_crawl_intersect_rps_and_vcp_artifacts(tmp_path, monkeypatch, inbox_ok):
     date_str = datetime.now().strftime("%Y-%m-%d")
     project_root = tmp_path
     runs_dir = project_root / "runs"
@@ -136,6 +137,17 @@ def test_phase1_collect_writes_crawl_intersect_rps_and_vcp_artifacts(tmp_path, m
     }
     fake_iv.stock_iv_proxy = lambda code, iv_data, market_cap=None: None
     monkeypatch.setitem(sys.modules, "fetch_iv_sentiment", fake_iv)
+
+    # The real event inbox fetches over the network and writes tracking/.
+    # A raising one must cost the run only its own artifact.
+    def _inbox_step(today=None):
+        if not inbox_ok:
+            raise RuntimeError("inbox broke")
+        return {"as_of": str(today), "step_errors": [], "pending_items": []}
+    fake_inbox = types.ModuleType("event_inbox")
+    fake_inbox.pipeline_step = _inbox_step
+    fake_inbox.summary_line = lambda rec: "[event-inbox] fake"
+    monkeypatch.setitem(sys.modules, "event_inbox", fake_inbox)
 
     monkeypatch.setattr(run_daily, "fetch_strategy_pool", lambda: {
         "source": "api",
@@ -209,3 +221,8 @@ def test_phase1_collect_writes_crawl_intersect_rps_and_vcp_artifacts(tmp_path, m
     assert debug_data["criteria"] == {"rps60_gt": 85.0, "rps120_gt": 85.0, "rps250_gt": 85.0}
     assert list(rps_data.keys()) == ["600001", "600999"]
     assert len(vcp_data) == 1
+    inbox_file = input_dir / "event_inbox.json"
+    if inbox_ok:
+        assert json.loads(inbox_file.read_text(encoding="utf-8"))["as_of"] == date_str
+    else:
+        assert not inbox_file.exists()

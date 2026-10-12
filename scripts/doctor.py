@@ -43,7 +43,7 @@ import json
 import re
 import sys
 from dataclasses import dataclass, field, asdict
-from datetime import datetime
+from datetime import date as _date, datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -77,6 +77,12 @@ ARTIFACT_EPOCHS = {
     "daily_summary.json": "2026-02-03",
     "positions_snapshot.json": "2026-03-05",
 }
+
+#: remind about undecided event-inbox items this close to their A-share impact
+#: date. Mirrors event_inbox.REMIND_WITHIN_DAYS (a test pins them equal) —
+#: not imported, because event_inbox pulls in akshare and the price-DB
+#: package, and the doctor must keep running when those are broken.
+INBOX_REMIND_DAYS = 7
 
 # Actions that assert the portfolio already holds the code.
 HOLDING_ACTIONS = {"HOLD", "RAISE_STOP", "SELL", "TRIM", "ADD"}
@@ -149,6 +155,7 @@ class RunView:
     snapshot: dict | None = None
     report: str | None = None
     db_health: dict | None = None
+    event_inbox: dict | None = None
 
     @classmethod
     def load(cls, date: str, slot: str, path: Path) -> "RunView":
@@ -174,7 +181,11 @@ class RunView:
                    # this same file. We consume its verdict rather than deriving
                    # our own, because two implementations that disagree leave
                    # nobody able to say which is right.
-                   db_health=js(path / "input" / "db_health.json"))
+                   db_health=js(path / "input" / "db_health.json"),
+                   # Also an input: what the event-inbox step saw THIS run, so
+                   # a historical sweep never judges an old run by today's
+                   # tracking/event_inbox.md.
+                   event_inbox=js(path / "input" / "event_inbox.json"))
 
     # -- accessors that fail loudly rather than defaulting to something plausible
 
@@ -546,6 +557,51 @@ def check_stock_list_fresh(v: RunView) -> list[Finding]:
         fix_cmd="python3 scripts/pricedb.py stocks && python3 scripts/pricedb.py update")]
 
 
+def check_event_inbox_undecided(v: RunView) -> list[Finding]:
+    """An inbox candidate is still undecided and hits A-shares within a week.
+
+    A human-action reminder, not a fault: the owner chooses which wallstreetcn
+    events enter tracking/events.json, and an undecided item never reaches the
+    report. Not INVARIANT (nothing contradicts itself). ENV puts it in the
+    "需要人工操作" bucket, which is right — but a stable id would streak to
+    PROMOTE_AFTER in 1.5 days of the owner being busy and then claim a code
+    change is needed. So the id carries the run, the streak never builds, and
+    `--open` still folds every instance under this one check.
+
+    ONE finding per run listing every due item, not one per item: the first
+    live refresh put 51 undecided items inside the window, and 51 findings
+    would bury every other line of the audit.
+    """
+    rec = v.need("event_inbox")
+    pending = rec.get("pending_items")
+    if pending is None:
+        raise CannotCheck("event_inbox.json has no pending_items: "
+                          + ("; ".join(rec.get("step_errors") or []) or "unknown"))
+    run_day = datetime.strptime(v.date, "%Y-%m-%d").date()
+    due = []
+    for p in pending:
+        try:
+            days = (_date.fromisoformat(p["a_share_impact_date"]) - run_day).days
+        except (KeyError, TypeError, ValueError):
+            continue
+        if 0 <= days <= INBOX_REMIND_DAYS:
+            due.append((p["a_share_impact_date"], days, p.get("name", ""), p.get("id")))
+    if not due:
+        return []
+    due.sort()
+    first = due[0]
+    return [Finding(
+        id=f"event-inbox-undecided:{v.date}-{v.slot}",
+        check="event_inbox_undecided",
+        kind=ENV,
+        title=(f"{len(due)} 条待定事件 {INBOX_REMIND_DAYS} 天内到A股影响日"
+               f"（最近 {first[0]} {first[2]}）")[:90],
+        detail=("收件箱里仍为 [ ] 的候选事件，不决定就不会进入报告的未来事件窗口:\n"
+                + "\n".join(f"  - {d} (T-{n}) {name}  [{i}]" for d, n, name, i in due)),
+        fix_cmd=("在 tracking/event_inbox.md 标记 [x] 保留 / [-] 跳过，"
+                 "然后 python3 scripts/event_inbox.py promote"))]
+
+
 CHECKS = [
     # invariant
     check_new_positions_absent_from_snapshot,
@@ -564,6 +620,7 @@ CHECKS = [
     check_db_health_warnings,
     check_db_health_spot_check,
     check_stock_list_fresh,
+    check_event_inbox_undecided,
 ]
 
 

@@ -1313,6 +1313,23 @@ def phase1_collect(date: str, slot: str) -> dict:
     except Exception as e:  # noqa: BLE001 — never fail the run over GEX
         print(f"    [gex] unavailable: {e}", file=sys.stderr)
 
+    # Event inbox: promote the owner's [x] picks from tracking/event_inbox.md
+    # into tracking/events.json, then refresh candidates from the 华尔街见闻
+    # calendar. Runs BEFORE the calendar read below so a pick ticked since the
+    # last run reaches this run's report. input/event_inbox.json is the run's
+    # own record — the doctor reads that, not the live inbox. Never fails the run.
+    try:
+        import event_inbox as _event_inbox
+        _inbox = _event_inbox.pipeline_step(
+            today=datetime.strptime(date, "%Y-%m-%d").date())
+        (input_dir / "event_inbox.json").write_text(
+            json.dumps(_inbox, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        print(f"    {_event_inbox.summary_line(_inbox)}", file=sys.stderr)
+    except Exception as e:  # noqa: BLE001 — never fail the run over the inbox
+        print(f"    [event-inbox] FAILED: {type(e).__name__}: {e}", file=sys.stderr)
+
     # Foreseeable-event risk window (curated calendar + formulaic OpEx +
     # measured FOMC base rate). Advisory context for the LLM; degrades to
     # absent on any failure.

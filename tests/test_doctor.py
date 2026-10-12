@@ -24,6 +24,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
 import doctor as doc
+import event_inbox
 
 
 # ── fixtures ─────────────────────────────────────────────────────────────────
@@ -486,3 +487,76 @@ def test_open_respects_runs_dir_and_leaves_the_real_file_alone(tmp_path):
     doc.main(["--open", "--runs-dir", str(runs)])
     after = real.read_bytes() if real.exists() else None
     assert after == before, "the real audit/OPEN.md must not be touched"
+
+
+# ── event inbox: a human-action reminder, never a code defect ────────────────
+
+def write_inbox_record(p, pending, step_errors=()):
+    (p / "input").mkdir(parents=True, exist_ok=True)
+    rec = {"as_of": p.parent.name, "step_errors": list(step_errors)}
+    if pending is not None:
+        rec["pending_items"] = pending
+    (p / "input" / "event_inbox.json").write_text(
+        json.dumps(rec, ensure_ascii=False), encoding="utf-8")
+
+
+def _pending(id_, impact_date):
+    return {"id": id_, "name": f"事件{id_}", "a_share_impact_date": impact_date}
+
+
+def test_event_inbox_undecided_within_7_days_is_an_ops_reminder(tmp_path):
+    runs = tmp_path / "runs"
+    p = make_run(runs, "2026-10-12", "noon")
+    write_inbox_record(p, [_pending("a", "2026-10-19"),    # T-7 → due
+                           _pending("b", "2026-10-20"),    # T-8 → not yet
+                           _pending("c", "2026-10-09")])   # already past
+    res = audit(runs, "2026-10-12", "noon")
+    got = [f for f in res.findings if f.check == "event_inbox_undecided"]
+    assert [f.id for f in got] == ["event-inbox-undecided:2026-10-12-noon"]
+    assert got[0].title.startswith("1 条待定事件")
+    assert "[a]" in got[0].detail and "[b]" not in got[0].detail and "[c]" not in got[0].detail
+    assert got[0].kind == doc.ENV and not got[0].needs_code_change
+    assert res.verdict == "action_needed"
+
+
+def test_event_inbox_many_due_items_make_one_finding(tmp_path):
+    runs = tmp_path / "runs"
+    p = make_run(runs, "2026-10-12", "noon")
+    write_inbox_record(p, [_pending(str(n), "2026-10-14") for n in range(51)])
+    got = [f for f in audit(runs, "2026-10-12", "noon").findings
+           if f.check == "event_inbox_undecided"]
+    assert len(got) == 1 and got[0].title.startswith("51 条")
+
+
+def test_event_inbox_reminder_never_streaks_into_a_code_finding(tmp_path):
+    """Owner busy for a week: still a reminder, never 'code_change_needed'."""
+    runs = tmp_path / "runs"
+    for d in ("2026-10-12", "2026-10-13", "2026-10-14"):
+        for slot in ("noon", "afternoon"):
+            p = make_run(runs, d, slot)
+            write_inbox_record(p, [_pending("a", "2026-10-16")])
+            doc.write_result(audit(runs, d, slot), p)
+    res = audit(runs, "2026-10-14", "afternoon")
+    f = [x for x in res.findings if x.check == "event_inbox_undecided"][0]
+    assert f.occurrences == 1 and res.verdict == "action_needed"
+
+
+def test_event_inbox_check_skips_with_reason_when_artifact_absent(tmp_path):
+    runs = tmp_path / "runs"
+    make_run(runs, "2026-10-12", "noon")
+    res = audit(runs, "2026-10-12", "noon")
+    skip = [s for s in res.skipped if s["check"] == "check_event_inbox_undecided"]
+    assert skip and "event_inbox missing" in skip[0]["reason"]
+
+
+def test_event_inbox_check_skips_with_step_error_when_step_failed(tmp_path):
+    runs = tmp_path / "runs"
+    p = make_run(runs, "2026-10-12", "noon")
+    write_inbox_record(p, None, step_errors=["refresh: ValueError: bad events.json"])
+    res = audit(runs, "2026-10-12", "noon")
+    skip = [s for s in res.skipped if s["check"] == "check_event_inbox_undecided"]
+    assert "bad events.json" in skip[0]["reason"]
+
+
+def test_inbox_remind_window_matches_event_inbox():
+    assert doc.INBOX_REMIND_DAYS == event_inbox.REMIND_WITHIN_DAYS
