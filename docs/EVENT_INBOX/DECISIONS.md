@@ -73,3 +73,9 @@ sweep judges each run by what that run saw.
 Promote first so items ticked since the last run appear in the same run's
 report; refresh second so a just-decided item is already in the ledger.
 Runs both slots (~10 s); overall deadline 60 s.
+
+## D10. Doctor does not import event_inbox
+`INBOX_REMIND_DAYS = 7` is duplicated in doctor.py; a test pins it to
+`event_inbox.REMIND_WITHIN_DAYS`. Importing event_inbox would pull akshare and
+the pricedb package into the doctor, a separate launchd job that exists to
+keep reporting when the pipeline's dependencies are broken.

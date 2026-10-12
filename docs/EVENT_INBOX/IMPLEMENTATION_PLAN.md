@@ -54,8 +54,8 @@ impact date is within 7 days of the run date. Reads the run's
 `input/event_inbox.json` only.
 **Success Criteria**: env kind, never promotes to "code change"; skipped with
 reason on runs that predate the artifact.
-**Tests**: in `tests/test_doctor.py` style.
-**Status**: Not Started
+**Tests**: tests/test_doctor.py — T-7 due / T-8 not / past ignored; 6 consecutive slots never streak to code; skip when artifact absent; skip carries step error; window constant pinned to event_inbox.
+**Status**: Complete
 
 ## Stage 5: End-to-end demo (real network)
 

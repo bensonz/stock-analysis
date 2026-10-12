@@ -24,3 +24,7 @@
   and is parametrized to prove a raising inbox costs only its own artifact.
 - The worktree has no price DB (git-ignored); `data/pricedb` is a symlink to
   the main repo's for the test suite. Untracked, never committed.
+- Stage 4: `check_event_inbox_undecided` (env, per-run id — see D8). The
+  window is a local constant `INBOX_REMIND_DAYS`, not imported: event_inbox
+  imports akshare + pricedb, and the doctor must survive those breaking. A
+  test pins the two constants equal.
