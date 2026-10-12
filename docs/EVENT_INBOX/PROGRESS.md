@@ -40,3 +40,22 @@
   inbox_id `wscn-20261103-8615302d`; `upcoming(days=30)` lists it at
   2026-11-04 (T-23). Ledger has 1 keep. 91 items left undecided for the owner.
 - Full suite: 976 passed, 13 skipped (integration).
+
+## 2026-10-12 (later) — AI triage
+
+- Worktree `/Users/bz/Work/Personal/stock-analysis-event-triage`, branch
+  `feat/event-triage` from master 5e19ea6. `data/pricedb` symlinked for tests
+  (untracked: the `.gitignore` rule `data/pricedb/` does not match a symlink,
+  so it shows as `??` — never `git add -A` here).
+- Provider check: from the main repo `.env`, `LLM_PROVIDER` → openai,
+  `OPENAI_MODEL=deepseek-v4-pro` (label "DeepSeek V4 Pro"), base URL
+  api.deepseek.com. The worktree has no `.env`, so llm_client falls back to
+  defaults there — a real call from the worktree needs the main `.env`.
+- Stage 6: `scripts/event_triage.py` + `agents/EVENT_TRIAGE.md`;
+  `event_inbox.triage()`, override-aware `promote()`, `ai_retired` in refresh,
+  `pipeline_step` promote → refresh → triage, CLI `triage`. The old
+  `test_pipeline_step_*` tests would have reached the real LLM (KR CPI is a new
+  undecided item) — an autouse fixture now makes any real call fail the test.
+  First spec draft used the real midterm id as its JSON example — it showed up in
+  every prompt (caught by a test asserting the id was NOT sent); now fake ids.
+- Full suite: 1003 passed, 13 skipped (baseline 977 + 26 new).

@@ -63,3 +63,57 @@ reason on runs that predate the artifact.
 2026-11-10 tariff-truce deadline); `promote`; `upcoming(days=30)` shows it on
 2026-11-04. Separate data commit.
 **Status**: Complete
+
+---
+
+# AI triage (owner decision 2026-10-12: "AI decides, owner can overrule")
+
+The owner should not have to open the inbox. Each NEW undecided item gets one
+LLM judgement (keep/skip, impact, direction, one-line reason), applied at once.
+AI-decided items stay in the inbox (🤖 + `ai:` line) until their impact date,
+so the owner can flip them; the owner's version always wins.
+
+```
+promote (owner marks + overrides of 🤖 items)
+  → refresh (fetch; 🤖 items past impact date retire)
+  → triage (new [ ] items without a ledger entry → 1 LLM call → apply)
+  → event_calendar read (same run's report sees AI keeps)
+```
+
+## Stage 6: AI triage + owner override
+
+**Goal**: `scripts/event_triage.py` (prompt from `agents/EVENT_TRIAGE.md`, one
+no-tools call through llm_client's provider, extract `decisions`);
+`event_inbox.triage()` validates per item and applies; `promote()` detects owner
+overrides against the ledger's AI snapshot; `pipeline_step` runs
+promote → refresh → triage. CLI `triage`. CLAUDE.md + RUNBOOK in the same commit.
+**Success Criteria**: AI only judges (no new events, no name/date/tz change);
+each item judged once; failures stay undecided and retry; owner marks win,
+before or after the AI ran; LLM failure never fails the run.
+**Tests**: tests/test_event_inbox.py — valid applied; invalid/unknown/missing;
+once; owner-first wins; keep→[-] removes; skip→[x] promotes; impact edit updates;
+untick reopens; 🤖 removal is no override; retires after impact date; LLM
+exception; prompt contents; call_model plumbing with a fake client.
+**Status**: Complete
+
+## Stage 7: Report marker
+
+**Goal**: an AI-kept entry renders with 〔AI选入〕 in report.md's 未来事件窗口.
+`event_calendar.upcoming()` passes `decided_by` through.
+**Tests**: test_event_calendar — marker rendered for decided_by=ai only.
+**Status**: Not Started
+
+## Stage 8: Doctor + status + weekly audit
+
+**Goal**: doctor env finding when the run's `input/event_inbox.json` records a
+triage error (call failed or items left undecided by the AI); `status` shows AI
+stats (kept/skipped/high/overrides); WEEKLY_AUDIT step to review AI decisions.
+**Tests**: test_doctor — finding on error, on invalid items, none on clean
+triage, skip on old runs; test_event_inbox — status AI stats.
+**Status**: Not Started
+
+## Stage 9: Live triage
+
+**Goal**: one real call on the 22 undecided items in the worktree's inbox;
+decisions table reported; data commit (inbox, ledger, events.json).
+**Status**: Not Started

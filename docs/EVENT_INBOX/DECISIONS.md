@@ -97,3 +97,73 @@ The first live refresh put 51 undecided items inside the 7-day window
 (importance >= 3 is noisy). One finding per item would bury every other line
 of audit-result.md. So the check emits one finding whose title gives the count
 and the nearest item, and whose detail lists them all.
+
+## D12. AI triage: a separate, small, no-tools call on the pipeline's model
+Owner decision 2026-10-12: "AI decides, owner can overrule." Not part of the
+Phase-2 trading prompt (that prompt is ~70K tokens and its output contract is
+trading decisions). `event_triage.call_model` reuses llm_client's config and
+clients: `LLM_PROVIDER` openai or hybrid → the OpenAI-compatible
+`OPENAI_MODEL` (DeepSeek V4 Pro today; in hybrid mode that model makes the
+final trading decision too); anthropic → `ANTHROPIC_MODEL`. No tools, no web
+search, temperature 0, max_tokens 16384 (reasoning headroom), timeout 180 s;
+`finish_reason == "length"` is an error, not a partial answer. The prompt text
+lives in `agents/EVENT_TRIAGE.md` (strategy belongs in agents/*.md); the code
+appends today, the calendar as `event_calendar.upcoming(45 days)` sees it
+(events.json AND formulaic events — otherwise the AI would re-add NFP/PMI),
+and the candidate table. The spec's example ids are fake on purpose: the first
+draft used the real midterm id, which then appeared in every prompt.
+
+## D13. AI judges only; strict per-item validation
+The reply is `{"decisions": {<inbox id>: {decision, impact, direction,
+reason}}}`. The AI cannot add events or change name/date/tz/kind/source —
+those come from the fetched row. Unknown ids are ignored and counted
+(`unknown_ids`). An item whose judgement is missing or invalid (decision not
+keep/skip, impact/direction outside the vocabulary, empty reason) stays `[ ]`
+and is counted as a triage error. A failed call (exception, no `decisions`
+object) leaves every item `[ ]` and records `error`. Nothing raises out of
+`triage()`; the run continues. Reasons are collapsed to one line, 120 chars.
+
+## D14. Triage once; failures retry
+An item is sent only if it is `[ ]` AND has no ledger entry. After an AI
+decision it has one, so it is never sent again; a failed item has none, so the
+next run sends it again. Max 40 items per call (the rest wait a run) — a lowered
+`MIN_IMPORTANCE` can bring back ~90 at once. AI-held items leave the inbox
+silently once their A-share impact date has passed (`ai_retired`): too late to
+flip, and their ledger entry already blocks them from returning.
+
+## D15. Override detection: the ledger's snapshot, not the 🤖
+Every AI ledger entry stores the fields as the AI left them (name, date, tz,
+kind, impact, direction, note) plus decision/model/reason. `promote()` compares
+the file's item against that snapshot: same mark (keep ↔ `[x]`, skip ↔ `[-]`)
+and same fields → the AI decision stands, the item stays. Any difference → the
+owner's version wins, recorded `decided_by: "owner"` with `overrode_ai`, and the
+item leaves the inbox like any owner decision:
+- `[x]` → the events.json entry is written or REPLACED (owner's fields, no
+  `decided_by`), so an impact/direction/date edit on an AI keep updates it and
+  an AI skip ticked `[x]` is promoted;
+- `[-]` on an AI keep → the entry with that inbox_id is removed;
+- `[ ]` on an AI item → entry removed, ledger `reopen`, the item stays as an
+  ordinary undecided item (no 🤖) for the owner; the AI does not judge it again
+  and the doctor's 7-day reminder applies.
+The spec asked to compare mark/impact/direction; this compares every editable
+field — a date/tz correction (D3 limits) must reach events.json too. The 🤖 and
+the `ai:` line are display only (removing the 🤖 changes nothing). An invalid
+owner edit (`direction: bearish`) is refused as before; the AI entry stays.
+Owner marks set BEFORE the AI ran win trivially: promote runs first, and triage
+only sends `[ ]` items.
+
+## D16. AI keeps in events.json: `decided_by` + `reason` fields
+An AI keep is the owner schema (`Item.to_event()`) plus `"decided_by": "ai"` and
+`"reason"` (separate field, not folded into `notes`, so a later owner override
+— which replaces the entry with the owner's version — drops both cleanly and the
+report marker disappears with them). The model id lives in the ledger, not in
+events.json. Owner-promoted entries carry no `decided_by` (same as hand-written
+ones): absence means a human chose it.
+
+## D17. Write order and idempotency
+triage and promote both write events → ledger → inbox. The events change is an
+upsert/remove keyed on inbox_id, so a crash after the events write re-applies
+the same result next run. A crash between ledger and inbox write leaves the
+inbox showing `[ ]` for an item whose ledger says AI — promote then reads that
+as the owner un-ticking it (reopen). Accepted: it needs a crash in a ~1 ms
+window, and the outcome is safe (the owner gets the decision).

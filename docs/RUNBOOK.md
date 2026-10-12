@@ -175,29 +175,50 @@ Failure patterns seen in production, fastest diagnosis first:
 ## Choosing upcoming events (the event inbox)
 
 `tracking/events.json` feeds the report's 未来事件窗口 and the prompt. You no
-longer have to find events yourself: every run fetches the 华尔街见闻 calendar
-(importance >= 4, next 45 days) into **`tracking/event_inbox.md`**. Open it in
-the IDE and mark each item:
+longer have to find events, or even pick them: every run fetches the
+华尔街见闻 calendar (importance >= 4, next 45 days) into
+**`tracking/event_inbox.md`**, and an LLM judges each NEW item once
+(keep/skip, impact, direction, one-line reason — guidance in
+`agents/EVENT_TRIAGE.md`). AI keeps go straight into events.json and show in
+the report as 〔AI选入〕. **You do not have to open the inbox.**
+
+AI-decided items stay in the inbox, marked 🤖 with an `ai:` line, until their
+A-share impact date passes. To overrule one, just edit it — your version wins
+on the next run (or `promote`):
+
+- 🤖 `[x]` → `[-]` — removed from events.json
+- 🤖 `[-]` → `[x]` — added to events.json
+- change `impact` / `direction` / `date` / … on a 🤖 `[x]` — the entry is updated
+- 🤖 → `[ ]` — removed; the item becomes yours to decide (the AI will not judge it again)
+
+Leave the 🤖 alone or delete it — it changes nothing; the ledger records what
+the AI decided. Items you decide leave the inbox. For items the AI has not
+judged (its call failed) the old checklist applies:
 
 - `[x]` keep — the next run (or `promote` below) adds it to events.json
 - `[-]` skip — recorded in `tracking/event_inbox_ledger.json`, never shown again
 - `[ ]` undecided — stays; the doctor reminds you once its A-share impact date
-  is within 7 days
+  is within 7 days (with AI triage on, this only happens when the AI failed)
 
 You may edit the name (after `—` in the heading), `impact`, `direction`
 (risk / two_sided / supportive), `date`, `tz` (US = hits the next A-share
-session / CN = same day), `kind` and `note`. Leave `src:` and `id:` alone.
+session / CN = same day), `kind` and `note`. Leave `ai:`, `src:` and `id:` alone.
+A mark you set BEFORE the AI sees an item always wins.
 
 ```bash
-python3 scripts/event_inbox.py status    # what is waiting, what is due soon
-python3 scripts/event_inbox.py promote   # apply your marks now (no need to wait for a run)
+python3 scripts/event_inbox.py status    # what is waiting, what is due soon, AI stats
+python3 scripts/event_inbox.py promote   # apply your marks/overrides now
+python3 scripts/event_inbox.py triage    # let the AI judge new items now (one LLM call)
 python3 scripts/event_inbox.py refresh   # re-fetch by hand
 ```
 
-Each run prints `[event-inbox] new N, pending N, promoted N, … fetch errors N`.
-"empty days" are dates wallstreetcn lists nothing for yet — normal 3+ weeks
-out. If an `[x]` item has a bad value (e.g. `direction: bearish`) it is NOT
-promoted, stays in the inbox, and the line says `INVALID`.
+Each run prints `[event-inbox] new N, pending N, promoted N, … fetch errors N,
+ai kept K/skipped S/errors E, overrides O`. "empty days" are dates
+wallstreetcn lists nothing for yet — normal 3+ weeks out. `AI TRIAGE FAILED:
+…` means the LLM call failed (key, relay, timeout): the items stay `[ ]` and are
+sent again next run; the doctor raises it as an env finding. If an `[x]` item
+has a bad value (e.g. `direction: bearish`) it is NOT promoted, stays in the
+inbox, and the line says `INVALID`.
 
 ## Where everything lives
 

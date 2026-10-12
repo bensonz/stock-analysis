@@ -1313,10 +1313,11 @@ def phase1_collect(date: str, slot: str) -> dict:
     except Exception as e:  # noqa: BLE001 — never fail the run over GEX
         print(f"    [gex] unavailable: {e}", file=sys.stderr)
 
-    # Event inbox: promote the owner's [x] picks from tracking/event_inbox.md
-    # into tracking/events.json, then refresh candidates from the 华尔街见闻
-    # calendar. Runs BEFORE the calendar read below so a pick ticked since the
-    # last run reaches this run's report. input/event_inbox.json is the run's
+    # Event inbox: apply the owner's marks/overrides from tracking/event_inbox.md
+    # to tracking/events.json, refresh candidates from the 华尔街见闻 calendar,
+    # then let the LLM triage NEW undecided items (agents/EVENT_TRIAGE.md; AI
+    # keeps go straight to events.json). Runs BEFORE the calendar read below so
+    # this run's report sees all of it. input/event_inbox.json is the run's
     # own record — the doctor reads that, not the live inbox. Never fails the run.
     try:
         import event_inbox as _event_inbox
