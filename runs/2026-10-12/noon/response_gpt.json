@@ -1,0 +1,167 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "影视院线",
+        "5d_pct": 4.05,
+        "trend": "accelerating"
+      },
+      {
+        "name": "出版",
+        "5d_pct": 3.8,
+        "trend": "steady"
+      },
+      {
+        "name": "风电设备",
+        "5d_pct": 2.14,
+        "trend": "steady"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": 2.07,
+        "trend": "accelerating"
+      },
+      {
+        "name": "农商行Ⅱ",
+        "5d_pct": 1.99,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -7.64,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "种植业",
+        "5d_pct": -4.0,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "房地产服务",
+        "5d_pct": -3.55,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "油服工程",
+        "5d_pct": -3.38,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "焦炭Ⅱ",
+        "5d_pct": -3.36,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/3 持仓在今日top5热点板块（航运港口、医疗服务未入top5亦未入bottom5）",
+    "regime": "恐慌盘：资金从算力硬件/周期切向防御与AI应用（影视/出版），油运与CRO龙头抗跌"
+  },
+  "position_decisions": [
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "保本止损19.29未触发（现价19.91，缓冲3.1%），航运港口未入bottom5；今日-9.79%为恐慌盘获利回吐，油运景气未变（克拉克森VLCC-TCE 81.4万美元/天，来源:中财网10-11）；stop_proximity为WATCH级别，让机械止损工作，跌破19.29自动离场；margin deleveraging需盯紧",
+      "sector_rank": "中性（未入今日top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 3.21,
+      "days_held": 23,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "止损已锁+10%(47.14)，现价51.90缓冲9.2%；医疗服务未入bottom5；CRO景气延续（药明康德上调全年指引至585-605亿，来源:凤凰网），今日-1.33%抗跌，让赢家奔跑",
+      "sector_rank": "中性（未入今日top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 21.12,
+      "days_held": 16,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "止损已锁+10%(139.15)，现价159.07；恐慌盘逆势+0.8%（input价格数据），医疗服务未入bottom5；CRO龙头全年指引上调，让赢家奔跑",
+      "sector_rank": "中性（未入今日top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 25.75,
+      "days_held": 45,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "300981",
+      "name": "中红医疗",
+      "reason": "dist_ma5 +16.2%/ma10 +20.9%/ma20 +33.6%严重追高（Rule 2b）；RPS120 93.19扩展区；且恐慌盘硬阻断新开仓",
+      "rps120": 93.19
+    },
+    {
+      "code": "301080",
+      "name": "百普赛斯",
+      "reason": "RPS120 99.65超95%过热上限（Rule 2）；且恐慌盘硬阻断新开仓",
+      "rps120": 99.65
+    },
+    {
+      "code": "601918",
+      "name": "新集能源",
+      "reason": "RPS120 94.59扩展区、煤炭板块非今日热点（未入top5）；且恐慌盘硬阻断新开仓",
+      "rps120": 94.59
+    },
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "reason": "10-09刚止损离场(+1.78%)，重入举证责任不满足（无新催化差异）；且恐慌盘硬阻断新开仓",
+      "rps120": 94.11
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "panic硬阻断（涨跌比0.35:1<0.35，0/3指数绿）机械生效，禁止任何新开仓——即使策略池存在RPS甜区候选也一律不买，避免FOMO追恐慌反弹",
+      "type": "observation",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "恐慌盘流动性收缩，个股alpha让位于beta风险，机械硬阻断保护现金"
+    },
+    {
+      "text": "招商轮船单日-9.79%但仍在保本止损19.29上方3.1%，HOLD让机械止损工作而非情绪化主动卖飞；油运景气未变（克拉克森VLCC-TCE 81.4万美元/天，来源:中财网10-11）",
+      "type": "signal",
+      "tags": [
+        "exit-rule",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "已锁保本后，恐慌日的波动交由止损处理，避免情绪化踏空强势板块"
+    },
+    {
+      "text": "药明康德在恐慌盘逆势收红+0.8%（input价格数据），CRO/医疗服务不是今日杀跌方向——持仓板块未入bottom5则继续持有，强势龙头在系统性回调中相对抗跌",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "资金在恐慌中仍守住高景气板块龙头，验证让赢家奔跑"
+    },
+    {
+      "text": "今日top5全部为防御/应用端（影视院线/出版/农商行），策略池26只股票无一属于今日top5板块——恐慌日宁可空仓也不追防御主题的短期脉冲",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "主题行情非业绩行情（新浪财经10-12抱富指南明示应用端业绩兑现弱），动量系统应等待主线回归而非追逐轮动脉冲"
+    }
+  ],
+  "market_summary": "恐慌盘硬阻断：涨跌比0.35:1（1407涨/4031跌），0/3主要指数收绿（上证-0.12%、深成-1.03%、创业板-1.27%），38涨停/10跌停。entry_regime=panic，禁止新开仓。外围美联储转鹰（丹斯克银行预期2026年12月/2027年3月各加息25bp，来源:证券时报网）叠加前期涨幅过大板块获利兑现，早盘冲高午后跳水。防御板块领涨（影视院线+4.05%、出版+3.80%、农商行+1.99%），周期与算力硬件普跌。IV情绪中性（平均IV Rank 0.38）。持仓3只（航运+医疗CRO）未入bottom5，继续持有、让止损工作。",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}

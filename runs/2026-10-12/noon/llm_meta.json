@@ -1,0 +1,102 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 190158,
+  "output_tokens": 15517,
+  "rounds": 3,
+  "duration_sec": 184.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月12日 大盘 下跌 原因 板块",
+        "max_results": 6
+      },
+      "result_length": 4043
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "招商轮船 油运 运价 下跌 2026年10月",
+        "max_results": 6
+      },
+      "result_length": 4210
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "CRO 创新药 药明康德 昭衍新药 板块 2026年10月",
+        "max_results": 6
+      },
+      "result_length": 3979
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "影视院线 出版 风电设备 板块 上涨 原因 2026年10月12日",
+        "max_results": 6
+      },
+      "result_length": 4107
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+今日+大跌+原因+2026年10月12日",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=招商轮船+油运+运价+2026年10月",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.stcn.com/article/detail/3920353.html",
+        "maxChars": 4000
+      },
+      "result_length": 2396
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.cfi.net.cn/p20261011000451.html",
+        "maxChars": 4000
+      },
+      "result_length": 4059
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://finance.sina.com.cn/stock/s/2026-10-12/doc-iniuxmtm5380928.shtml",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}

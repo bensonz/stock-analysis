@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-10-09",
+  "lastUpdated": "2026-10-12",
   "hypotheses": [
     {
       "id": "h001",
@@ -1246,7 +1246,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-09-29",
+      "lastTested": "2026-10-12",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1593,11 +1593,15 @@
           {
             "date": "2026-09-29",
             "detail": "元件板块从连续3日bottom5(09-24/25/28)一日反转回今日top5(+2.65%), 反证09-28离场奥士康(+39.9%)的Rule 1板块重力离场正确——板块反转无法事前预测, 机械纪律已锁定利润, 不追悔"
+          },
+          {
+            "date": "2026-10-12",
+            "detail": "今日top5全部为防御/应用端（影视院线/出版/农商行），策略池26只股票无一属于今日top5板块——恐慌日宁可空仓也不追防御主题的短期脉冲"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 86,
+      "sampleSize": 87,
       "hitRate": 1.0,
       "confidence": 0.989,
       "tags": [
@@ -2136,7 +2140,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-10-09",
+      "lastTested": "2026-10-12",
       "mechanism": "In a deteriorating market, protecting open profits is more valuable than maximizing upside variance.",
       "evidence": {
         "supporting": [
@@ -2383,11 +2387,15 @@
           {
             "date": "2026-10-09",
             "detail": "油运超级周期持仓让利润奔跑：招商轮船盘中-4.49%回吐后收盘+0.18%，VLCC运价BDTI较2025年初约5倍（来源:搜狐财经），Q4为验证窗口、10-29三季报催化。获利回吐≠趋势破坏，不因单日波动减仓"
+          },
+          {
+            "date": "2026-10-12",
+            "detail": "招商轮船单日-9.79%但仍在保本止损19.29上方3.1%，HOLD让机械止损工作而非情绪化主动卖飞；油运景气未变（克拉克森VLCC-TCE 81.4万美元/天，来源:中财网10-11）"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 61,
+      "sampleSize": 62,
       "hitRate": 1.0,
       "confidence": 0.984,
       "tags": [
@@ -4592,7 +4600,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-10-09",
+      "lastTested": "2026-10-12",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -4747,13 +4755,17 @@
           {
             "date": "2026-10-09",
             "detail": "恐慌盘(涨跌比0.25:1)当日，即使个股RPS甜区+板块top5(如新集能源RPS120=93.8、煤炭开采今日#2)同时达标，也禁止开新仓——hard block是机械层权威，判断层之上不得强制入场。"
+          },
+          {
+            "date": "2026-10-12",
+            "detail": "panic硬阻断（涨跌比0.35:1<0.35，0/3指数绿）机械生效，禁止任何新开仓——即使策略池存在RPS甜区候选也一律不买，避免FOMO追恐慌反弹"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 38,
+      "sampleSize": 39,
       "hitRate": 1.0,
-      "confidence": 0.975,
+      "confidence": 0.976,
       "tags": [
         "entry-filter",
         "position-sizing"
@@ -7409,7 +7421,7 @@
       "type": "observation",
       "status": "hypothesis",
       "created": "2026-08-19",
-      "lastTested": "2026-09-24",
+      "lastTested": "2026-10-12",
       "mechanism": "恐慌日资金集中涌入少数防御/资源板块，板块强势即资金偏好",
       "evidence": {
         "supporting": [
@@ -7420,13 +7432,17 @@
           {
             "date": "2026-09-24",
             "detail": "招商轮船今日+0.72%为5持仓中唯一翻红者，油气开采Ⅱ列今日top5——强势板块中的强势股在恐慌日相对抗跌，验证'板块第一'的反向保护。"
+          },
+          {
+            "date": "2026-10-12",
+            "detail": "药明康德在恐慌盘逆势收红+0.8%（input价格数据），CRO/医疗服务不是今日杀跌方向——持仓板块未入bottom5则继续持有，强势龙头在系统性回调中相对抗跌"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 2,
+      "sampleSize": 3,
       "hitRate": 1.0,
-      "confidence": 0.75,
+      "confidence": 0.8,
       "tags": [
         "sector"
       ],
