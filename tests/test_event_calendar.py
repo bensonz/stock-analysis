@@ -89,6 +89,25 @@ def test_report_md_renders_event_window(tmp_path):
     assert "9次收跌" in text
 
 
+def test_report_marks_ai_chosen_events_only(tmp_path):
+    """event_inbox triage writes decided_by=ai; upcoming() must pass it through."""
+    import report_generator
+    p = _write(tmp_path, [
+        {"date": "2026-11-03", "tz": "US", "name": "美国中期选举", "certainty": "scheduled",
+         "impact": "high", "direction": "two_sided", "notes": "n",
+         "decided_by": "ai", "reason": "r"},
+        {"date": "2026-11-05", "tz": "CN", "name": "手写事件", "certainty": "scheduled",
+         "impact": "medium", "notes": "n"}])
+    data = {"market": {}, "events": {
+        **ec.upcoming(days=30, today=date(2026, 10, 12), path=p),
+        "risk_window": {"level": "normal", "advice": ""}}}
+    text = report_generator.generate_report_md(
+        "2026-10-12", data, {}, output_dir=tmp_path).read_text(encoding="utf-8")
+    ai_line = [ln for ln in text.splitlines() if "美国中期选举" in ln][0]
+    hand_line = [ln for ln in text.splitlines() if "手写事件" in ln][0]
+    assert "〔AI选入〕" in ai_line and "〔AI选入〕" not in hand_line
+
+
 def test_upcoming_window_and_ordering(tmp_path):
     p = _write(tmp_path, [
         {"date": "2026-08-12", "tz": "US", "name": "CPI", "kind": "macro_release",

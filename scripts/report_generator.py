@@ -221,9 +221,10 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
             rel = "📊**结果已出·影响待落地** " if e.get("released") else ""
             pub = (f"（公布日 {e.get('date')}）"
                    if e.get("date") and e.get("date") != e.get("a_share_impact_date") else "")
+            ai = "〔AI选入〕" if e.get("decided_by") == "ai" else ""   # event_inbox triage
             lines.append(f"- {mark} **{e.get('a_share_impact_date')}** "
                          f"(T-{e.get('days_until_impact')}) [{_impact(e)}] "
-                         f"{rel}{e.get('name')}{pub}{est} — {e.get('notes', '')}{_src(e)}")
+                         f"{rel}{e.get('name')}{pub}{est}{ai} — {e.get('notes', '')}{_src(e)}")
         for e in events.get("ongoing", []):
             mark = _dir_mark.get(e.get("direction", "risk"), "🔴")
             lines.append(f"- {mark} **持续中** [{_impact(e)}] "

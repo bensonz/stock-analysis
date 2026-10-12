@@ -101,7 +101,7 @@ exception; prompt contents; call_model plumbing with a fake client.
 **Goal**: an AI-kept entry renders with 〔AI选入〕 in report.md's 未来事件窗口.
 `event_calendar.upcoming()` passes `decided_by` through.
 **Tests**: test_event_calendar — marker rendered for decided_by=ai only.
-**Status**: Not Started
+**Status**: Complete
 
 ## Stage 8: Doctor + status + weekly audit
 

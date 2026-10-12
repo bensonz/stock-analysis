@@ -59,3 +59,6 @@
   First spec draft used the real midterm id as its JSON example — it showed up in
   every prompt (caught by a test asserting the id was NOT sent); now fake ids.
 - Full suite: 1003 passed, 13 skipped (baseline 977 + 26 new).
+- Stage 7: `event_calendar.upcoming()` now copies `decided_by`; report.md's
+  未来事件窗口 line gets 〔AI选入〕 after the name for AI keeps only. The Phase-2
+  prompt section and the site are unchanged (kept minimal).

@@ -9,7 +9,7 @@
 
 ## AI triage (owner 2026-10-12)
 - [x] Stage 6: event_triage.py + agents/EVENT_TRIAGE.md + triage/override in event_inbox; CLAUDE.md + RUNBOOK
-- [ ] Stage 7: report 〔AI选入〕 marker (event_calendar passes decided_by)
+- [x] Stage 7: report 〔AI选入〕 marker (event_calendar passes decided_by)
 - [ ] Stage 8: doctor triage-failure finding; status AI stats; WEEKLY_AUDIT step
 - [ ] Stage 9: live triage of the 22 undecided items; data commit
 
