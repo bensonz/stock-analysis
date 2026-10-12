@@ -25,6 +25,20 @@ from contracts import (
 )
 from datetime import datetime, timedelta
 
+import contracts
+from tracking_paths import Layout
+
+
+@pytest.fixture(autouse=True)
+def empty_book(tmp_path, monkeypatch):
+    """Gate 3 compares positions.json with book/active/. Point it at an empty
+    temp book: before 2026-10-12 these tests read the LIVE book, so they
+    passed or failed with whatever the pipeline held that day."""
+    book = Layout(tmp_path / "tracking").make_dirs()
+    book.positions.write_text('{"activePositions": []}', encoding="utf-8")
+    monkeypatch.setattr(contracts, "LIVE", book)
+    return book
+
 
 # ─── Helpers ───
 

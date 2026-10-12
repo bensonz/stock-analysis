@@ -26,50 +26,36 @@ full-suite run left tracking/positions.json regenerated with zeroed marks —
 equity 982,049 → 948,487 — silently. On 2026-08-19 a test patched
 ``TRACKING_DIR`` but not ``CLOSED_DIR`` (bound at import from the former) and
 wrote two synthetic closed trades into the LIVE tracking/closed/. So it
-fingerprints the four state files AND every position file, open and closed,
-including additions and deletions. It makes the accident loud; it does not
-fix the global-reassignment pattern.
+fingerprints EVERY file under tracking/ (scripts/live_state_guard.py),
+including additions and deletions. Until the 2026-10-12 layout move
+(docs/TRACKING_LAYOUT) it watched six named files plus the
+tracking/[0-9]*.json and tracking/closed/*.json globs — which left
+predictions.jsonl and rotation_ledger.json unwatched, and would have watched
+nothing in book/active/ after the move. It makes the accident loud; it does
+not fix the global-reassignment pattern.
 """
-import hashlib
+import sys
 from pathlib import Path
 
 import pytest
 
-LIVE_STATE = (
-    "tracking/positions.json",
-    "tracking/events.json",
-    "tracking/event_inbox.md",
-    "tracking/event_inbox_ledger.json",
-    "tracking/hypotheses.json",
-    "tracking/portfolio_config.json",
-)
+ROOT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT / "scripts"))
 
-
-def _state_digest():
-    root = Path(__file__).resolve().parent
-    digests = {}
-    for rel in LIVE_STATE:
-        f = root / rel
-        digests[rel] = hashlib.sha256(f.read_bytes()).hexdigest() if f.exists() else None
-    # every position file, open and closed — additions and deletions count too
-    for pat in ("tracking/[0-9]*.json", "tracking/closed/*.json"):
-        for f in sorted(root.glob(pat)):
-            digests[str(f.relative_to(root))] = hashlib.sha256(f.read_bytes()).hexdigest()
-    return digests
+from live_state_guard import changed_paths, state_digest  # noqa: E402
 
 
 @pytest.fixture(scope="session", autouse=True)
 def guard_live_tracking_state():
-    before = _state_digest()
+    before = state_digest(ROOT)
     yield
-    after = _state_digest()
-    changed = sorted({rel for rel in set(before) | set(after)
-                      if before.get(rel) != after.get(rel)})
+    changed = changed_paths(before, state_digest(ROOT))
     if changed:
         pytest.fail(
             "tests mutated LIVE portfolio state: " + ", ".join(changed) + "\n"
-            "Restore with `git checkout -- tracking/` and fix the leaked path "
-            "global before trusting any result from this run.",
+            "Restore with `git checkout -- tracking/` (and delete any added "
+            "file) and fix the leaked path global before trusting any result "
+            "from this run.",
             pytrace=False,
         )
 

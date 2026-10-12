@@ -32,7 +32,7 @@ def test_star_lot_size_is_200():
 def _open(monkeypatch, tmp_path, *, code, price, alloc, deployable, equity,
           max_pos_pct=10, min_cash_value=0.0):
     """Drive open_position with a synthetic portfolio, writing to a temp dir."""
-    monkeypatch.setattr(pm, "TRACKING_DIR", tmp_path)
+    monkeypatch.setattr(pm, "ACTIVE_DIR", tmp_path)
     monkeypatch.setattr(pm, "load_portfolio_config", lambda: {
         "starting_capital": 1000000, "max_positions": 10,
         "max_position_pct": max_pos_pct, "min_cash_pct": 0})

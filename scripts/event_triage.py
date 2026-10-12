@@ -3,7 +3,7 @@
 event_triage.py — the LLM half of the event inbox's AI triage.
 
 Owner decision 2026-10-12: "AI decides, owner can overrule." The owner should
-not have to open tracking/event_inbox.md. So each NEW undecided candidate gets
+not have to open tracking/calendar/event_inbox.md. So each NEW undecided candidate gets
 one judgement — keep/skip, impact, direction, a one-line reason — from the
 pipeline's configured model, and event_inbox.triage() applies it at once.
 

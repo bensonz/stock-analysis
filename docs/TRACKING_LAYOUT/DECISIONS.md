@@ -77,3 +77,114 @@ changed" warning on the next run. Revisit in stage 2 if wanted.
 `reset_to_date` deletes `runs/` dirs whose date is after the target only.
 After a noon reset, `runs/<target>/afternoon/` stays. Deleting run data was
 not asked for; recorded in RUNBOOK and reported.
+
+## D8 (2026-10-12, stage 2): One path module; modules still bind names at import
+
+**Chosen**: `scripts/tracking_paths.py` names every tracking/ path once
+(`Layout(root)` + module constants for the live tree). Each user imports the
+names it needs (`from tracking_paths import ACTIVE_DIR`), as before with its
+own constants, so tests repoint them per module exactly as they did.
+
+**Rejected**: every call site reading `tracking_paths.X` at call time, so one
+patch redirects all modules. It would close the 2026-08-19 class of leak
+(patched one path, forgot another) for good, but it changes the idiom of ~25
+modules and every test fixture in one stage. The root conftest guard (D12
+below) already makes such a leak fail the run. Revisit if a leak recurs.
+
+Tools that take a `tracking_dir` argument (build_site, contracts, research/*)
+keep it as the tracking/ ROOT and derive sub-paths through `Layout`, so their
+signatures did not change.
+
+## D9: The book restore moves into position_manager
+
+`ResetError`, `plan_book_restore`, `apply_book_restore` and the snapshot
+validation moved from run_daily to position_manager; run_daily imports them
+(so `run_daily.plan_book_restore` still works). Why: TRACKER_SCHEMA rule 1
+("position_manager is the only writer") listed `--reset-to` as a violation,
+and the reset's writes already went through `position_manager._write_json`.
+With the plan in the same module as the paths it touches, the reset tests
+patch one module's book paths, not two (stage 1 patched pm AND run_daily —
+the double binding that caused 2026-08-19). run_daily keeps the CLI, the run
+dir cleanup and the hypotheses/LEARNINGS aux restore (not book state).
+`snapshot_positions` stays in run_daily: it only reads.
+
+## D10: Reset order is book → aux → run-dir deletes
+
+Stage 1 deleted the later `runs/` dirs before `apply_book_restore`. If a book
+write then failed, the later runs (with their snapshots) were gone, and the
+book was half-written. Now the run dirs go last. A failed write leaves them
+on disk; the reset can be re-run. Test:
+`test_book_is_written_before_later_run_dirs_are_deleted`.
+
+## D11: A non-position file in book/active/ aborts the reset
+
+Before, the root glob had to skip non-position files (ledgers lived there).
+book/active/ holds positions only, so a file there that is not a position is
+a defect: `plan_book_restore` raises `ResetError` (exit 1, nothing changed)
+instead of skipping it. Readers (`load_active_positions`, validator,
+contracts, build_site) still skip such a file — they must not crash the run
+over it. `is_position_record` stays the shared test (D4).
+
+## D12: The conftest guard hashes the whole tracking/ tree
+
+`scripts/live_state_guard.py` hashes every file under tracking/, any depth.
+The old guard listed six names plus `tracking/[0-9]*.json` and
+`tracking/closed/*.json`; `predictions.jsonl` and `rotation_ledger.json` were
+never covered, and after the move the globs would match nothing. A whole-tree
+hash needs no list to keep in sync, and it still trips on a leaked OLD path
+(`tracking/{code}.json`). It does not import tracking_paths on purpose: a
+guard that reads the writers' path table shares its mistakes.
+
+## D13: The doctor needs no ARTIFACT_EPOCHS entry
+
+Checked every read in `doctor.py`: it reads `runs/<date>/<slot>/` only
+(manifest, daily_summary, positions_snapshot, report, input/db_health,
+input/event_inbox) and `audit/ACCEPTED.md`. It never reads tracking/ and does
+not import position_manager or tracking_paths. The snapshot format did not
+change. So no judgement depends on the layout at the time of a run, and an
+epoch entry would gate nothing. Changed: only the human text that names the
+inbox path in two findings (`fix_cmd` / `detail`) — it tells the owner where
+to edit NOW. Pinned by
+`test_runs_from_before_the_layout_move_are_judged_from_their_own_artifacts`
+(records every file the audit reads; none is under tracking/; no import).
+
+Also checked: no code reads tracking/ at old git revisions (`git show
+<rev>:tracking/...` / `git log -- tracking/...`) — the only `git` calls are
+run_daily's commit/push and a comment in research/win_rate.py. So no old-path
+fallback is needed anywhere.
+
+## D14: portfolio_config.json → book/config.json (renamed)
+
+No trouble found: one reader (`load_portfolio_config`), build_site's
+inception anchor, the reset. The snapshot key stays `portfolio_config` (D6:
+format unchanged), so old snapshots restore into `book/config.json`.
+
+## D15: tracking/daily/ and its fallbacks are gone
+
+`tracking/daily/` was empty since ef461f8 (2026-03-05) and not in git; only
+`position_manager`'s import-time mkdir kept it alive on disk.
+`save_daily_summary` now requires `output_dir` (its one pipeline caller
+always passed it), and validator's `tracking/daily/{date}.json` fallback is
+removed. agents/EVOLVER.md listed `tracking/daily/` — now
+`runs/*/*/output/daily_summary.json`.
+
+## D16: Gate-3 tests no longer read the live book
+
+`tests/test_contracts.py` TestPhase3Gate/TestEndToEnd and one corporate
+actions test called `validate_phase3_gate` with the default tracking dir,
+i.e. they compared the LIVE positions.json with the live active files. They
+passed or failed with whatever the pipeline held that day (they failed on the
+code commit before the data moved). They now point `contracts.LIVE` at an
+empty temp book. Live-data census tests (`test_data_hygiene`) still read the
+live `book/closed/` on purpose.
+
+## D17: Code and data in separate commits; the data move is a script
+
+The live pipeline commits to master at the OLD paths until the merge. So the
+code commit, the migrate script commit and the data-move commit are separate,
+and the data move is `scripts/oneoff/migrate_tracking_layout.py` (git mv;
+re-runnable; refuses on old+new with different content or on an unknown root
+file). At merge time: merge the code and script commits, run the script on
+master's current tracking/, commit that. Between the code commit and the data
+commit the tree is inconsistent (two live-census tests fail; the pipeline
+would see an empty book) — never deploy one without the other.

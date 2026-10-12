@@ -10,7 +10,7 @@ holding. Later, `backtest` replays every entry from the local price DB and
 answers: how much did we miss by not actively swapping?
 
 - record_if_full(date, data): called from run_daily Phase 3 (non-fatal,
-  deterministic — no LLM involvement). Appends to tracking/rotation_ledger.json.
+  deterministic — no LLM involvement). Appends to tracking/ledgers/rotation_ledger.json.
 - backtest CLI: forward return of each logged candidate vs the weakest holding
   over N sessions (close-to-close from pricedb). Spread > 0 = we missed alpha.
 
@@ -23,7 +23,8 @@ import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-LEDGER_FILE = PROJECT_ROOT / "tracking" / "rotation_ledger.json"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from tracking_paths import ROTATION_LEDGER_FILE as LEDGER_FILE  # noqa: E402
 TOP_N = 3
 
 

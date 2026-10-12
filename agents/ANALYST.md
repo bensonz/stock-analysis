@@ -32,7 +32,7 @@ Use the sector data provided to rank sectors. If a stock's sector isn't in the t
 3. 有真实差距而非并列：候选的 rps120 至少比被替换者当前 rps120 高 10 个百分点；
 4. 每天最多 1 组换仓。
 不满足就明确不换——无需惋惜：满仓时被放弃的头部候选会由流水线自动记入
-`tracking/rotation_ledger.json`（机械记录，与你无关），每周用
+`tracking/ledgers/rotation_ledger.json`（机械记录，与你无关），每周用
 `rotation_ledger.py backtest` 回测"没换仓错过了多少"。如果数据证明换仓纪律太保守，
 规则会被放宽；证明保守是对的，就维持。你只需在满仓且确有极端候选时按上述四条判断。
 

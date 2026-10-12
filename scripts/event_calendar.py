@@ -10,7 +10,7 @@ no representation of "what is scheduled to happen next"; this module gives
 it one.
 
 Three layers, honest about what each knows:
-  1. Curated calendar (tracking/events.json) — scheduled macro events,
+  1. Curated calendar (tracking/calendar/events.json) — scheduled macro events,
      policy deadlines, ongoing crises. Hand-maintained; dates verified
      against primary sources when added.
   2. Formulaic events — US monthly OpEx (3rd Friday, GEX unwind) and
@@ -35,7 +35,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-EVENTS_FILE = PROJECT_ROOT / "tracking" / "events.json"
+from tracking_paths import EVENTS_FILE  # noqa: E402
 
 # FOMC decision days (2nd meeting day, US date), published Fed calendars.
 # Used for the measured next-session base rate — extend as meetings occur.

@@ -16,11 +16,11 @@ import win_rate as wr
 
 
 def _book(tmp, closed, active):
-    (tmp / "tracking" / "closed").mkdir(parents=True)
+    (tmp / "tracking" / "book" / "closed").mkdir(parents=True)
     for i, c in enumerate(closed):
-        (tmp / "tracking" / "closed" / f"{i}.json").write_text(
+        (tmp / "tracking" / "book" / "closed" / f"{i}.json").write_text(
             json.dumps(c), encoding="utf-8")
-    (tmp / "tracking" / "positions.json").write_text(
+    (tmp / "tracking" / "book" / "positions.json").write_text(
         json.dumps({"activePositions": active}), encoding="utf-8")
     return tmp
 

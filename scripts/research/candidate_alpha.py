@@ -49,6 +49,8 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 
+from tracking_paths import TRACKING_DIR, Layout  # noqa: E402
+
 DB_PATH = PROJECT_ROOT / "data" / "pricedb" / "ashare_prices.db"
 INDEX_FILE = PROJECT_ROOT / "data" / "index_cache" / "sh000001.json"
 HORIZONS = (5, 10, 20)
@@ -144,13 +146,13 @@ def _num(s):
 
 def llm_picks(tracking_dir=None):
     """Every entry the LLM actually made: closed trades + still-open positions."""
-    t = Path(tracking_dir or PROJECT_ROOT / "tracking")
+    t = Layout(Path(tracking_dir or TRACKING_DIR))
     out = []
-    for f in glob.glob(str(t / "closed" / "*.json")):
+    for f in glob.glob(str(t.closed / "*.json")):
         d = json.loads(Path(f).read_text(encoding="utf-8"))
         if d.get("entryDate") and d.get("code"):
             out.append((d["entryDate"], str(d["code"])))
-    pos = json.loads((t / "positions.json").read_text(encoding="utf-8"))
+    pos = json.loads(t.positions.read_text(encoding="utf-8"))
     for p in pos.get("activePositions") or []:
         if p.get("entryDate") and p.get("code"):
             out.append((p["entryDate"], str(p["code"])))

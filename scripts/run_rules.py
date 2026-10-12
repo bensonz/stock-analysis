@@ -17,7 +17,8 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent
 RULES_DIR = PROJECT_ROOT / "scripts" / "rules"
-POSITIONS_FILE = PROJECT_ROOT / "tracking" / "positions.json"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from tracking_paths import POSITIONS_FILE  # noqa: E402
 
 
 def run_all_rules(portfolio_data: dict | None = None) -> dict:

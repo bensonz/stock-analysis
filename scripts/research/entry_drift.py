@@ -25,7 +25,7 @@ Cohorts, per run date
 - `over_extended` the part of `gate` with RPS120 > 95 — the prompt's
                   `OVER-EXTENDED` flag (llm_client.py uses the same cut).
 - `bought`        codes the pipeline actually opened on that date (closed
-                  trades + open positions, read-only from tracking/).
+                  trades + open positions, read-only from tracking/book/).
 - `universe`      every code with a price on that date — the benchmark.
 
 A day with both slots uses the afternoon run (latest settled state, same as
@@ -81,7 +81,7 @@ from evaluation_epoch import EVALUATION_EPOCH  # noqa: E402
 
 DB_PATH = PROJECT_ROOT / "data" / "pricedb" / "ashare_prices.db"
 RUNS_DIR = PROJECT_ROOT / "runs"
-TRACKING_DIR = PROJECT_ROOT / "tracking"
+from tracking_paths import TRACKING_DIR, Layout  # noqa: E402
 HORIZONS = (1, 5, 10, 20)
 COHORTS = ("gate", "in_band", "over_extended", "bought")
 
@@ -193,11 +193,11 @@ def load_gate_cohorts(runs_dir=None) -> dict:
 
 
 def load_trades(tracking_dir=None) -> tuple[list, list]:
-    """(closed, open) trade dicts from tracking/. Read-only."""
-    t = Path(tracking_dir or TRACKING_DIR)
+    """(closed, open) trade dicts from tracking/book/. Read-only."""
+    t = Layout(Path(tracking_dir or TRACKING_DIR))
     closed = [json.loads(Path(f).read_text(encoding="utf-8"))
-              for f in sorted(glob.glob(str(t / "closed" / "*.json")))]
-    pos = json.loads((t / "positions.json").read_text(encoding="utf-8"))
+              for f in sorted(glob.glob(str(t.closed / "*.json")))]
+    pos = json.loads(t.positions.read_text(encoding="utf-8"))
     return closed, list(pos.get("activePositions") or [])
 
 

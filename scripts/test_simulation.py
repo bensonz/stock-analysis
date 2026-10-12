@@ -80,7 +80,7 @@ def show_portfolio(positions_file):
 def show_rules(sim_root):
     """Run rules and display results."""
     # We need to run run_rules against the sim positions.json
-    positions_file = sim_root / "tracking" / "positions.json"
+    positions_file = sim_root / "tracking" / "book" / "positions.json"
     data = json.loads(positions_file.read_text())
 
     import subprocess
@@ -113,7 +113,7 @@ def setup_sim():
     sim_root = Path(tempfile.mkdtemp(prefix="stock-sim-"))
     print(f"  {DIM}Sim directory: {sim_root}{E}")
 
-    # Copy tracking/ (positions, active, closed, daily, config)
+    # Copy tracking/ (book/, ledgers/, calendar/)
     shutil.copytree(PROJECT_ROOT / "tracking", sim_root / "tracking")
 
     # Copy scripts/ (position_manager, run_daily, rules, etc)
@@ -148,11 +148,12 @@ def patch_imports(sim_root):
     # Easiest: just monkey-patch the paths
 
     import position_manager as pm
-    pm.TRACKING_DIR = sim_root / "tracking"
-    pm.CLOSED_DIR = sim_root / "tracking" / "closed"
-    pm.DAILY_DIR = sim_root / "tracking" / "daily"
-    pm.POSITIONS_FILE = sim_root / "tracking" / "positions.json"
-    pm.PORTFOLIO_CONFIG_FILE = sim_root / "tracking" / "portfolio_config.json"
+    from tracking_paths import Layout
+    book = Layout(sim_root / "tracking").make_dirs()
+    pm.ACTIVE_DIR = book.active
+    pm.CLOSED_DIR = book.closed
+    pm.POSITIONS_FILE = book.positions
+    pm.PORTFOLIO_CONFIG_FILE = book.config
 
     return pm
 
@@ -162,7 +163,7 @@ def sim_day(pm, sim_root, date_str, mock_prices, decisions, day_label):
 
     # 1. Regenerate positions with mock prices
     result = pm.regenerate_positions_json(price_data=mock_prices)
-    positions_file = sim_root / "tracking" / "positions.json"
+    positions_file = sim_root / "tracking" / "book" / "positions.json"
 
     # 2. Show portfolio state
     show_portfolio(positions_file)
@@ -239,7 +240,8 @@ def sim_day(pm, sim_root, date_str, mock_prices, decisions, day_label):
             ok(f"Agent created rule: {script['path']}")
 
         # Save daily summary
-        pm.save_daily_summary(date_str, daily_actions)
+        pm.save_daily_summary(date_str, daily_actions,
+                              output_dir=sim_root / "runs" / date_str / "afternoon" / "output")
 
     # 5. Regenerate with updates
     result = pm.regenerate_positions_json(price_data=mock_prices)
@@ -255,7 +257,7 @@ def sim_evolver(pm, sim_root):
     sub(f"{B}Evolver reads:{E}")
 
     # Read closed positions
-    closed_dir = sim_root / "tracking" / "closed"
+    closed_dir = sim_root / "tracking" / "book" / "closed"
     closed = list(closed_dir.glob("*.json"))
     sub(f"  {len(closed)} closed positions")
 
@@ -471,7 +473,7 @@ def main():
         sim_day(pm, sim_root, "2026-03-06", day3_prices, day3_decisions, "Day 3")
 
         # Verify the new position has correct sizing
-        positions_data = json.loads((sim_root / "tracking" / "positions.json").read_text())
+        positions_data = json.loads((sim_root / "tracking" / "book" / "positions.json").read_text())
         new_pos = [p for p in positions_data["activePositions"] if p["code"] == "601231"]
         if new_pos:
             p = new_pos[0]
@@ -525,12 +527,11 @@ def main():
 
         # Regenerate with Day 4 prices (last trading day)
         pm.regenerate_positions_json(price_data=day4_prices)
-        show_portfolio(sim_root / "tracking" / "positions.json")
+        show_portfolio(sim_root / "tracking" / "book" / "positions.json")
 
         # Show all daily summaries created
         sub(f"{B}Daily summaries created:{E}")
-        daily_dir = sim_root / "tracking" / "daily"
-        for f in sorted(daily_dir.glob("*.json"))[-5:]:
+        for f in sorted((sim_root / "runs").glob("*/*/output/daily_summary.json"))[-5:]:
             d = json.loads(f.read_text())
             actions = d.get("actions", [])
             action_summary = ", ".join(f"{a['action']} {a.get('name','')}" for a in actions[:3])

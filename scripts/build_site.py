@@ -13,9 +13,10 @@ Data sources (数字纪律 — everything re-derivable):
   - runs/<date>[/<slot>]/output/daily_summary.json → per-day actions (from the
     winning snapshot's run dir; falls back to a sibling slot on the same date
     when that run produced none, e.g. it failed before Phase 3)
-  - tracking/positions.json → current portfolio + active positions
-  - tracking/closed/*.json  → trade history + win-rate stats
-  - tracking/portfolio_config.json → inception anchor (created = 1M)
+  - tracking/book/positions.json → current portfolio + active positions
+  - tracking/book/active/*.json  → open trades' history
+  - tracking/book/closed/*.json  → trade history + win-rate stats
+  - tracking/book/config.json    → inception anchor (created = 1M)
   - sina index kline (sh000001) → 上证指数 daily candles, rebased to starting
     capital at inception, plus per-day % (组合 / 上证 / 超额); closes cached in
     data/index_cache/sh000001.json, OHLC in sh000001_ohlc.json, so offline
@@ -34,9 +35,11 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from tracking_paths import TRACKING_DIR, Layout  # noqa: E402
+
 PROJECT_ROOT = Path(__file__).parent.parent
 RUNS_DIR = PROJECT_ROOT / "runs"
-TRACKING_DIR = PROJECT_ROOT / "tracking"
 SITE_DIR = PROJECT_ROOT / "site"
 INDEX_CACHE = PROJECT_ROOT / "data" / "index_cache" / "sh000001.json"
 INDEX_OHLC_CACHE = PROJECT_ROOT / "data" / "index_cache" / "sh000001_ohlc.json"
@@ -201,9 +204,9 @@ def attach_holding_day_pcts(series: list[dict], sessions=None) -> None:
 
 def inception_point(tracking_dir: Path = TRACKING_DIR) -> dict | None:
     """The one pre-snapshot fact we can state: at portfolio creation
-    (portfolio_config.created) equity was exactly starting_capital."""
+    (book/config.json `created`) equity was exactly starting_capital."""
     try:
-        cfg = _read_json(tracking_dir / "portfolio_config.json")
+        cfg = _read_json(Layout(tracking_dir).config)
         created = cfg.get("created")
         starting = cfg.get("starting_capital")
         if created and starting:
@@ -635,14 +638,14 @@ def load_badges(series: list[dict]) -> list[dict]:
 
 def load_active(tracking_dir: Path = TRACKING_DIR) -> dict:
     try:
-        return _read_json(tracking_dir / "positions.json")
+        return _read_json(Layout(tracking_dir).positions)
     except Exception:
         return {"portfolio": {}, "activePositions": []}
 
 
 def load_closed_trades(tracking_dir: Path = TRACKING_DIR) -> list[dict]:
     trades = []
-    closed = tracking_dir / "closed"
+    closed = Layout(tracking_dir).closed
     if not closed.is_dir():
         return trades
     for f in sorted(closed.glob("*.json")):
@@ -669,9 +672,9 @@ def trade_key(code: str, entry_date: str) -> str:
 
 
 def load_active_trade_files(tracking_dir: Path = TRACKING_DIR) -> list[dict]:
-    """tracking/<code>.json for open positions — positions.json has no history."""
+    """book/active/<code>.json for open positions — positions.json has no history."""
     out = []
-    for f in sorted(tracking_dir.glob("*.json")):
+    for f in sorted(Layout(tracking_dir).active.glob("*.json")):
         try:
             p = _read_json(f)
         except Exception:
@@ -1075,7 +1078,7 @@ def render_html(series, active, trades, stats, details=None, index_rebased=None,
   <footer>
     数据来源〔内部数据〕: <code>runs/*/input/positions_snapshot.json</code>（资产曲线/每日持仓）·
     <code>runs/*/output/daily_summary.json</code>（每日操作）·
-    <code>tracking/</code>（持仓/历史交易/起始配置）·
+    <code>tracking/book/</code>（持仓/历史交易/起始配置）·
     <code>scripts/event_calendar.py</code>（事件窗口）· 新浪财经 sh000001 日K（上证对比）。
     重新生成: <code>python3 scripts/build_site.py</code>
   </footer>

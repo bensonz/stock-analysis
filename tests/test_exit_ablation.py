@@ -134,7 +134,7 @@ def test_codes_without_factors_replay_raw():
 
 
 def test_entries_before_the_epoch_are_excluded(tmp_path):
-    closed = tmp_path / "tracking" / "closed"
+    closed = tmp_path / "tracking" / "book" / "closed"
     closed.mkdir(parents=True)
     for code, d in (("600000", "2026-07-22"), ("600001", "2026-07-23")):
         (closed / f"{code}.json").write_text(json.dumps(

@@ -184,7 +184,7 @@ class RunView:
                    db_health=js(path / "input" / "db_health.json"),
                    # Also an input: what the event-inbox step saw THIS run, so
                    # a historical sweep never judges an old run by today's
-                   # tracking/event_inbox.md.
+                   # tracking/calendar/event_inbox.md.
                    event_inbox=js(path / "input" / "event_inbox.json"))
 
     # -- accessors that fail loudly rather than defaulting to something plausible
@@ -561,7 +561,7 @@ def check_event_inbox_undecided(v: RunView) -> list[Finding]:
     """An inbox candidate is still undecided and hits A-shares within a week.
 
     A human-action reminder, not a fault: the owner chooses which wallstreetcn
-    events enter tracking/events.json, and an undecided item never reaches the
+    events enter tracking/calendar/events.json, and an undecided item never reaches the
     report. Not INVARIANT (nothing contradicts itself). ENV puts it in the
     "需要人工操作" bucket, which is right — but a stable id would streak to
     PROMOTE_AFTER in 1.5 days of the owner being busy and then claim a code
@@ -598,7 +598,7 @@ def check_event_inbox_undecided(v: RunView) -> list[Finding]:
                f"（最近 {first[0]} {first[2]}）")[:90],
         detail=("收件箱里仍为 [ ] 的候选事件，不决定就不会进入报告的未来事件窗口:\n"
                 + "\n".join(f"  - {d} (T-{n}) {name}  [{i}]" for d, n, name, i in due)),
-        fix_cmd=("在 tracking/event_inbox.md 标记 [x] 保留 / [-] 跳过，"
+        fix_cmd=("在 tracking/calendar/event_inbox.md 标记 [x] 保留 / [-] 跳过，"
                  "然后 python3 scripts/event_inbox.py promote"))]
 
 
@@ -637,7 +637,7 @@ def check_event_inbox_triage(v: RunView) -> list[Finding]:
         kind=ENV,
         title=(f"AI 事件分拣失败（{left if left is not None else '?'} 条新候选仍待定）"
                f"— {head}")[:90],
-        detail=("这些候选留在 tracking/event_inbox.md 为 [ ]，下次运行重试；"
+        detail=("这些候选留在 tracking/calendar/event_inbox.md 为 [ ]，下次运行重试；"
                 "持续失败则不会进入未来事件窗口。\n" + head
                 + ("\n" + "\n".join(lines) if lines else "")),
         suspect="scripts/event_triage.py call_model / agents/EVENT_TRIAGE.md",

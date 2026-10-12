@@ -9,7 +9,7 @@ worse: a 10转4 would have read as −28%. See docs/corporate_actions/.
 Owner decisions (DECISIONS.md):
 - Scope: CURRENTLY OPEN positions only, events with entryDate < exDate <= run
   date. A missed event is back-credited by the same idempotent apply. Closed
-  trades in tracking/closed/ are never restated.
+  trades in tracking/book/closed/ are never restated.
 - Tax on cash dividends, A-share holding-period rule judged at the ex-date:
   held ≤ 1 calendar month 20%, ≤ 1 year 10%, longer 0%. Net cash is credited.
 - 送转: shares × (1 + ratio/10) floored, entryPrice ÷ the same factor (cost
@@ -21,7 +21,7 @@ for ex-div dates). A fetch failure is a LOUD degradation, never a hard fail:
 the book is untouched and the next run retries (apply is idempotent by exDate).
 
 This module computes; position_manager writes (save_corporate_actions) — it
-stays the only writer of tracking/. Everything is reached as `pm.<name>` at
+stays the only writer of the book (tracking/book/). Everything is reached as `pm.<name>` at
 call time, never `from position_manager import ...`, so a test that rebinds
 the position_manager path globals also rebinds this module.
 """

@@ -41,8 +41,8 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(Path(__file__).parent))
 
-# Test uses a temp copy to avoid mutating real data
-ORIGINAL_TRACKING = PROJECT_ROOT / "tracking"
+from tracking_paths import CLOSED_DIR, POSITIONS_FILE  # noqa: E402
+
 ORIGINAL_RULES = PROJECT_ROOT / "scripts" / "rules"
 
 
@@ -107,7 +107,7 @@ def test_2_realized_pnl():
     print(f"  Realized P&L: ¥{realized:,.2f}")
 
     # Check each closed position
-    closed_dir = PROJECT_ROOT / "tracking" / "closed"
+    closed_dir = CLOSED_DIR
     if closed_dir.exists():
         for f in closed_dir.glob("*.json"):
             p = json.loads(f.read_text())
@@ -135,7 +135,7 @@ def test_3_regenerate_positions():
         return
 
     # Read current positions.json (don't regenerate — that mutates files)
-    positions_file = PROJECT_ROOT / "tracking" / "positions.json"
+    positions_file = POSITIONS_FILE
     result = json.loads(positions_file.read_text())
     portfolio = result.get("portfolio", {})
     positions = result.get("activePositions", [])
@@ -263,10 +263,11 @@ def test_7_evolver_prerequisites():
         has_stdout = "json.dump(" in content
         check(has_docstring and has_stdin and has_stdout, f"{r.name}: proper format (docstring + stdin/stdout)")
 
-    closed = list((PROJECT_ROOT / "tracking" / "closed").glob("*.json"))
+    closed = list(CLOSED_DIR.glob("*.json"))
     check(len(closed) > 0, f"{len(closed)} closed positions for counterfactual analysis")
 
-    daily = list((PROJECT_ROOT / "tracking" / "daily").glob("*.json"))
+    # tracking/daily/ was empty from 2026-03-05 and is gone; summaries live in runs/
+    daily = list((PROJECT_ROOT / "runs").glob("*/*/output/daily_summary.json"))
     check(len(daily) > 0, f"{len(daily)} daily logs for history review")
 
 

@@ -9,7 +9,7 @@ did not exist until 2026-07-24 (e1845cb) — RPS before that ran on unadjusted
 prices, so an ex-dividend drop read as a loss.
 
 Scope is EVALUATION only. Price history, RPS/MA250 windows, the portfolio book
-in tracking/ and the doctor's audit trail all keep their full history.
+in tracking/book/ and the doctor's audit trail all keep their full history.
 """
 
 EVALUATION_EPOCH = "2026-07-23"

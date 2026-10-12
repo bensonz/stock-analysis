@@ -5,7 +5,7 @@ took the price drop with no cash credit. See docs/corporate_actions/.
 
 Every test here runs on a tmp book. The module-scoped guard below hashes the
 repo's tracking/ before and after: a leaked path global (CLOSED_DIR is bound
-at import, separately from TRACKING_DIR — the 2026-08-19 incident) fails the
+at import, separately from the other book paths — the 2026-08-19 incident) fails the
 run instead of silently writing into the real book.
 """
 import hashlib
@@ -16,6 +16,7 @@ import pytest
 
 import corporate_actions as ca
 import position_manager as pm
+from tracking_paths import Layout
 
 ROOT = Path(__file__).resolve().parent.parent
 LIVE_TRACKING = ROOT / "tracking"
@@ -42,22 +43,19 @@ def _live_book_untouched():
 
 @pytest.fixture
 def book(tmp_path, monkeypatch):
-    """A tmp book with every position_manager path global rebound."""
-    closed = tmp_path / "closed"
-    closed.mkdir()
-    daily = tmp_path / "daily"
-    daily.mkdir()
-    monkeypatch.setattr(pm, "TRACKING_DIR", tmp_path)
-    monkeypatch.setattr(pm, "CLOSED_DIR", closed)
-    monkeypatch.setattr(pm, "DAILY_DIR", daily)
-    monkeypatch.setattr(pm, "POSITIONS_FILE", tmp_path / "positions.json")
-    monkeypatch.setattr(pm, "PORTFOLIO_CONFIG_FILE", tmp_path / "portfolio_config.json")
-    (tmp_path / "portfolio_config.json").write_text(json.dumps({
+    """A tmp book with every position_manager path global rebound.
+    Returns book/active/, where the per-code files live."""
+    lay = Layout(tmp_path / "tracking").make_dirs()
+    monkeypatch.setattr(pm, "ACTIVE_DIR", lay.active)
+    monkeypatch.setattr(pm, "CLOSED_DIR", lay.closed)
+    monkeypatch.setattr(pm, "POSITIONS_FILE", lay.positions)
+    monkeypatch.setattr(pm, "PORTFOLIO_CONFIG_FILE", lay.config)
+    lay.config.write_text(json.dumps({
         "starting_capital": 1000000, "max_position_pct": 10,
         "max_positions": 10, "min_cash_pct": 20}), encoding="utf-8")
     # no price DB lookups from close_position
     monkeypatch.setattr(pm, "_trading_days_held", lambda *a, **k: 10)
-    return tmp_path
+    return lay.active
 
 
 def _put(book, code="000739", entry_date="2026-09-22", entry=24.21, shares=1700,
@@ -401,8 +399,13 @@ def test_phase3_step_survives_a_crashing_apply():
     assert any("CORP_ACTION FAILED" in a and "disk full" in a for a in log["actions"])
 
 
-def test_gate3_soft_warns_on_fetch_failure():
+def test_gate3_soft_warns_on_fetch_failure(tmp_path, monkeypatch):
+    import contracts
     from contracts import validate_phase3_gate
+    # an empty, consistent temp book — not the live one
+    empty = Layout(tmp_path / "tracking").make_dirs()
+    empty.positions.write_text('{"activePositions": []}', encoding="utf-8")
+    monkeypatch.setattr(contracts, "LIVE", empty)
     log = {"actions": [], "corporate_actions": _ca_result(failed=["000739"])}
     g = validate_phase3_gate("2026-10-08", log, {})
     assert g.passed

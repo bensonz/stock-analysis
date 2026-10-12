@@ -16,6 +16,7 @@ regressions: judging Feb runs by August's artifact contract, and calling a
 post-midnight rerun's marks "stale" because they were *newer* than the run date.
 """
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -633,3 +634,33 @@ def test_triage_failing_three_runs_running_needs_a_fix(tmp_path):
     [f] = _triage_findings(runs, "2026-10-13", "noon")
     assert f.occurrences == 3 and f.needs_code_change
 
+
+
+# ── 8. the 2026-10-12 tracking/ layout move ─────────────────────────────────
+
+def test_runs_from_before_the_layout_move_are_judged_from_their_own_artifacts(
+        tmp_path, monkeypatch):
+    """tracking/ moved to book/ ledgers/ calendar/ on 2026-10-12. The doctor
+    needs no ARTIFACT_EPOCHS gate for it because it never reads tracking/ at
+    all: every judgement comes from the run dir (snapshot, summary, manifest,
+    input/event_inbox.json) — the snapshot format did not change. Pin that, so
+    a check added later cannot start judging an old run by today's layout."""
+    runs = tmp_path / "runs"
+    make_run(runs, "2026-10-09", "afternoon", held=("601872",),
+             new_positions=[{"code": "688019", "name": "x"}])
+    read = []
+    real_read_text = Path.read_text
+
+    def recording_read_text(self, *a, **k):
+        read.append(Path(self))
+        return real_read_text(self, *a, **k)
+    monkeypatch.setattr(Path, "read_text", recording_read_text)
+
+    res = audit(runs, "2026-10-09", "afternoon")
+
+    assert "new-position-not-held:688019" in [f.id for f in res.code_findings]
+    assert read, "the audit read nothing — the recording hook is not wired"
+    assert not [p for p in read if "tracking" in p.parts]
+    src = Path(doc.__file__).read_text(encoding="utf-8")
+    assert not re.search(r"^\s*(import|from)\s+(tracking_paths|position_manager)\b",
+                         src, re.M)

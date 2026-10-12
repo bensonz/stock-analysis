@@ -19,11 +19,11 @@ cd /Users/bz/Work/Personal/stock-analysis
 source .venv/bin/activate
 
 # Portfolio state
-cat tracking/positions.json | python3 -m json.tool
+cat tracking/book/positions.json | python3 -m json.tool
 
 # All closed trades
 echo "=== CLOSED TRADES ==="
-for f in tracking/closed/*.json; do
+for f in tracking/book/closed/*.json; do
   python3 -c "
 import json, sys
 d = json.load(open('$f'))
@@ -121,7 +121,7 @@ python3 scripts/pricedb.py repair --dry-run   # lists partial price days, fixes 
 ### C3. Rotation Ledger (added 2026-08-07)
 
 When the book runs full, the pipeline mechanically logs the top gate-passing
-candidates it could not buy (`tracking/rotation_ledger.json`). Measure the
+candidates it could not buy (`tracking/ledgers/rotation_ledger.json`). Measure the
 cost of NOT swapping:
 
 ```bash
@@ -154,12 +154,12 @@ python3 scripts/research/reentry_stats.py --human
 ### C5. Event Calendar AI Triage (added 2026-10-12)
 
 Since 2026-10-12 an LLM decides which 华尔街见闻 calendar events enter
-`tracking/events.json` (spec `agents/EVENT_TRIAGE.md`); the owner only
+`tracking/calendar/events.json` (spec `agents/EVENT_TRIAGE.md`); the owner only
 overrules. Review its week:
 
 ```bash
 python3 scripts/event_inbox.py status
-python3 -c "import json; [print(d['decided'], d['decision'], d.get('impact'), d['name'], '—', d.get('reason')) for d in json.load(open('tracking/event_inbox_ledger.json'))['decisions'] if d.get('decided_by') == 'ai' or d.get('overrode_ai')]"
+python3 -c "import json; [print(d['decided'], d['decision'], d.get('impact'), d['name'], '—', d.get('reason')) for d in json.load(open('tracking/calendar/event_inbox_ledger.json'))['decisions'] if d.get('decided_by') == 'ai' or d.get('overrode_ai')]"
 ```
 
 - Report kept / skipped / `impact=high` counts and the owner override rate

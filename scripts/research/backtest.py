@@ -364,11 +364,11 @@ def make_mechanical_analyst(rules: dict | None = None):
 # Stage 1b — arm (b): replay of actual trades (fidelity check, plan D5)
 # --------------------------------------------------------------------------- #
 def load_closed_trades(closed_dir: str | Path | None = None) -> list:
-    """Flatten tracking/closed/*.json into trade dicts with the fields the
+    """Flatten tracking/book/closed/*.json into trade dicts with the fields the
     replay needs. Entries without dates or a recorded return are skipped."""
     import json
-    d = Path(closed_dir) if closed_dir else (
-        Path(__file__).resolve().parent.parent.parent / "tracking" / "closed")
+    from tracking_paths import CLOSED_DIR
+    d = Path(closed_dir) if closed_dir else CLOSED_DIR
     out = []
     for f in sorted(d.glob("*.json")):
         data = json.loads(f.read_text(encoding="utf-8"))

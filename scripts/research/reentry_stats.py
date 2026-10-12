@@ -9,7 +9,7 @@ made +11.8%). Re-measure as n grows; the weekly audit calls this.
 
     python3 scripts/research/reentry_stats.py [--human] [--since ISO | --all-history]
 
-Sources: tracking/closed/*.json (completed round trips) + active tracking
+Sources: tracking/book/closed/*.json (completed round trips) + active tracking
 files (open re-entries shown as 持仓中, excluded from the averages).
 
 Scope: only re-entries (and book trades) whose entryDate is on/after the
@@ -31,24 +31,20 @@ sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 
 from evaluation_epoch import EVALUATION_EPOCH  # noqa: E402
 
-TRACKING_DIR = PROJECT_ROOT / "tracking"
-CLOSED_DIR = TRACKING_DIR / "closed"
-SKIP = {"positions.json", "portfolio_config.json", "events.json",
-        "hypotheses.json", "rotation_ledger.json"}
+from tracking_paths import TRACKING_DIR, Layout  # noqa: E402
 
 
 def _trips_by_code(tracking_dir: Path = TRACKING_DIR) -> dict:
     trips = defaultdict(list)
-    for f in sorted((tracking_dir / "closed").glob("*.json")):
+    book = Layout(tracking_dir)
+    for f in sorted(book.closed.glob("*.json")):
         try:
             p = json.loads(f.read_text(encoding="utf-8"))
         except Exception:
             continue
         if isinstance(p, dict) and p.get("entryDate") and p.get("returnPct") is not None:
             trips[str(p["code"]).split(".")[0]].append(p)
-    for f in sorted(tracking_dir.glob("*.json")):
-        if f.name in SKIP:
-            continue
+    for f in sorted(book.active.glob("*.json")):
         try:
             p = json.loads(f.read_text(encoding="utf-8"))
         except Exception:

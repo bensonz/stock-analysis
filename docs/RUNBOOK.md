@@ -59,7 +59,7 @@ leaves the portfolio untouched.
    schedule do it.
 
 2. **There is no sandbox.** `--run` and even `--phase1` refresh
-   `tracking/positions.json` with live marks — that's the real book. `tracking/`
+   `tracking/book/positions.json` with live marks — that's the real book. `tracking/`
    is git-committed on every successful run, so any state is recoverable, but
    don't run "just to see" while a scheduled run is minutes away.
 
@@ -82,7 +82,7 @@ open site/index.html                                   # equity curve + banner
 A good run: manifest `status: success, exit_code: 0`, all three gates
 `passed: true`, audit `✅ 无发现`. The human-readable output is
 `runs/<date>/<slot>/output/report.md`; decisions land in
-`output/daily_summary.json`; the book is `tracking/positions.json`.
+`output/daily_summary.json`; the book is `tracking/book/positions.json`.
 
 **Trust the audit over the exit code.** A run can exit 0 while an artifact is
 quietly wrong — that's the whole reason the doctor exists. Standing problems
@@ -162,17 +162,21 @@ python3 scripts/run_daily.py --reset-to DATE   # roll the book back to end of DA
 ```
 
 What `--reset-to DATE [--slot noon]` touches (since 2026-10-12): the book
-only. It writes the snapshot's active positions, `positions.json` and
-`portfolio_config.json`; deletes active files not in the snapshot; deletes
-closed trades that had not closed yet at the snapshot (exit after DATE, or
-sold by a later slot the same day); deletes `runs/` dates after DATE. Closed
-trades from before are kept byte-for-byte. `hypotheses.json` and
+(`tracking/book/`) only. It writes the snapshot's active positions to
+`book/active/`, `book/positions.json` and `book/config.json`; deletes active
+files not in the snapshot; deletes closed trades that had not closed yet at
+the snapshot (exit after DATE, or sold by a later slot the same day). Closed
+trades from before are kept byte-for-byte. `ledgers/hypotheses.json` and
 `LEARNINGS.md` come back from the run's `output/` copies when they exist.
-Everything else in `tracking/` (events, ledgers, inbox, predictions) is NOT
-rolled back — the last line of the plan names those files. It prints the
-whole plan before it changes anything; a missing, malformed or contradictory
-snapshot exits 1 with "Reset aborted, nothing changed". Note: `--slot noon`
-does not delete that date's afternoon run dir.
+Last, it deletes `runs/` dates after DATE — after the book writes, so a
+failed write leaves those runs to retry from. The rest of `ledgers/` and
+`calendar/` (events, inbox, predictions, rotation ledger) is NOT rolled
+back — the "NOT rolled back" line of the plan names those files. It prints
+the whole plan before it changes anything; a missing, malformed or
+contradictory snapshot, or a non-position file in `book/active/`, exits 1
+with "Reset aborted, nothing changed". Snapshots written before the
+2026-10-12 layout move restore the same way (the format did not change).
+Note: `--slot noon` does not delete that date's afternoon run dir.
 
 Failure patterns seen in production, fastest diagnosis first:
 
@@ -188,10 +192,10 @@ Failure patterns seen in production, fastest diagnosis first:
 
 ## Choosing upcoming events (the event inbox)
 
-`tracking/events.json` feeds the report's 未来事件窗口 and the prompt. You no
+`tracking/calendar/events.json` feeds the report's 未来事件窗口 and the prompt. You no
 longer have to find events, or even pick them: every run fetches the
 华尔街见闻 calendar (importance >= 4, next 45 days) into
-**`tracking/event_inbox.md`**, and an LLM judges each NEW item once
+**`tracking/calendar/event_inbox.md`**, and an LLM judges each NEW item once
 (keep/skip, impact, direction, one-line reason — guidance in
 `agents/EVENT_TRIAGE.md`). AI keeps go straight into events.json and show in
 the report as 〔AI选入〕. **You do not have to open the inbox.**
@@ -210,7 +214,7 @@ the AI decided. Items you decide leave the inbox. For items the AI has not
 judged (its call failed) the old checklist applies:
 
 - `[x]` keep — the next run (or `promote` below) adds it to events.json
-- `[-]` skip — recorded in `tracking/event_inbox_ledger.json`, never shown again
+- `[-]` skip — recorded in `tracking/calendar/event_inbox_ledger.json`, never shown again
 - `[ ]` undecided — stays; the doctor reminds you once its A-share impact date
   is within 7 days (with AI triage on, this only happens when the AI failed)
 
@@ -240,8 +244,9 @@ inbox, and the line says `INVALID`.
 runs/<date>/<slot>/input/     phase-1 JSON artifacts (what the model saw)
 runs/<date>/<slot>/output/    report.md, candidates.md, daily_summary.json
 runs/<date>/<slot>/manifest.json, audit-result.md
-tracking/                     the live book (positions, closed/, hypotheses)
-tracking/event_inbox.md       event candidates for you to tick (see above)
+tracking/book/                the live book: active/, closed/, positions.json, config.json
+tracking/ledgers/             hypotheses.json, predictions.jsonl, rotation_ledger.json
+tracking/calendar/            events.json, event_inbox.md (tick here), event_inbox_ledger.json
 audit/OPEN.md                 standing problems, folded by cause
 data/pricedb/                 SQLite price DB (git-ignored, rebuildable)
 data/launchd/*.log            scheduler logs
