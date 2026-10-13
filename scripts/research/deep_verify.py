@@ -827,6 +827,51 @@ def verification_footer(final: dict) -> str:
 
 
 # --------------------------------------------------------------------------- #
+# Whole-report rewrite guard (revise + cleanup both re-emit the full report)
+# --------------------------------------------------------------------------- #
+# H2 and deeper only: the H1 title carries the rating (评级 x/5), which a
+# revision may legitimately change, and some drafts carry a stray "# 报告".
+_HEADING_RE = re.compile(r"^#{2,6}\s+(.+?)\s*$", re.MULTILINE)
+TRUNCATED_STOPS = ("length", "max_tokens")
+
+
+def section_headings(md: str) -> list:
+    """H2+ heading texts in order (the report's structure)."""
+    return [m.group(1) for m in _HEADING_RE.finditer(md or "")]
+
+
+def lost_sections(before: str, after: str) -> list:
+    """Headings ``before`` had that ``after`` lacks."""
+    kept = set(section_headings(after))
+    return [h for h in section_headings(before) if h not in kept]
+
+
+def rewrite_rejection(before: str, after: str, stop=None) -> str | None:
+    """Why a full-report rewrite must not replace ``before`` — None when it may.
+
+    2026-10-13, 688018: a revision cut off at max_tokens came back at ~60% of
+    the draft, mid-sentence, without §3 关键日期 / §4 风险提示. The old guard
+    only rejected < 40%, so it passed, and the verifier (which checks numbers
+    in the text that exists) stamped 76/76 on a half report.
+    """
+    if not after:
+        return "empty"
+    if stop in TRUNCATED_STOPS:
+        return f"cut off at max_tokens (stop={stop})"
+    if len(after) < 0.4 * len(before):
+        return f"{len(after)} chars vs {len(before)} (< 40%)"
+    lost = lost_sections(before, after)
+    if lost:
+        return "lost sections: " + " / ".join(lost)
+    return None
+
+
+def structure_banner(lost: list) -> str:
+    return ("> ⚠️ **报告不完整**——核验后的正文缺少初稿中的章节："
+            + "、".join(lost) + "。请勿据此决策，重跑本报告。\n\n")
+
+
+# --------------------------------------------------------------------------- #
 # Pipeline
 # --------------------------------------------------------------------------- #
 def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: str,
@@ -836,8 +881,13 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
 
     All LLM access goes through the injected runners:
       judge_runner(prompt)   -> (text, tin, tout[, finish_reason])  no tools
-      revise_runner(prompt)  -> (text, tin, tout, rounds)  with tools
-      cleanup_runner(prompt) -> (text, tin, tout)          no tools
+      revise_runner(prompt)  -> (text, tin, tout, rounds[, finish_reason])  with tools
+      cleanup_runner(prompt) -> (text, tin, tout[, finish_reason])          no tools
+    Revise and cleanup re-emit the whole report; a rewrite that is cut off,
+    shrunk, or missing a section is rejected (rewrite_rejection) and the prior
+    text kept. The final text is checked against the draft's headings; any
+    missing one puts a structure_banner on top and lands in
+    audit["final"]["lost_sections"].
     Returns (final_text_with_footer, audit).
     """
     if fetch is None:
@@ -855,6 +905,7 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
     audit = {"max_rounds": max_rounds, "rounds": [],
              "cleanup": {"used": False, "mechanical_fallbacks": 0}}
     text = strip_exempt_tags(strip_preamble(draft_text))
+    draft = text
     claims: list = []
 
     for rnd in range(1, max_rounds + 1):
@@ -881,21 +932,25 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
             # judge_error is never cache-pinned, so looping re-judges them.
             log(f"verify round {rnd}: judge errors only — re-judging next round")
             continue
-        revised, _tin, _tout, _rr = revise_runner(
-            build_revise_prompt(spec_writer, text, failed, _slim(data), rnd, max_rounds))
-        revised = strip_preamble(revised or "")
-        if not revised or len(revised) < 0.4 * len(text):
-            # One retry on a fresh conversation before giving up — a single
-            # truncated/empty revision must not condemn the report to the
-            # qualitative scrubber (2026-08-07, 601168).
-            log("revise pass degenerate — retrying once")
-            revised, _tin, _tout, _rr = revise_runner(
+        # One retry on a fresh conversation before giving up — a single
+        # truncated/empty revision must not condemn the report to the
+        # qualitative scrubber (2026-08-07, 601168).
+        reason = None
+        for attempt in (1, 2):
+            revised, _tin, _tout, _rr, *rest = revise_runner(
                 build_revise_prompt(spec_writer, text, failed, _slim(data), rnd, max_rounds))
             revised = strip_preamble(revised or "")
-        if revised and len(revised) >= 0.4 * len(text):
+            reason = rewrite_rejection(text, revised, rest[0] if rest else None)
+            if reason is None:
+                break
+            audit.setdefault("rejected_rewrites", []).append(
+                {"stage": "revise", "round": rnd, "attempt": attempt, "reason": reason})
+            log(f"revise pass rejected ({reason})"
+                + (" — retrying once" if attempt == 1 else ""))
+        if reason is None:
             text = revised
-        else:  # garbage/empty revision twice: keep draft, skip to cleanup
-            log("revise pass returned degenerate output; skipping to cleanup")
+        else:  # degenerate revision twice: keep the prior text, skip to cleanup
+            log("revise pass degenerate twice; keeping the prior text, skipping to cleanup")
             break
 
     # Mechanical tag guard: DATA-backed naked numbers get their missing
@@ -916,10 +971,15 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
     if failed:
         data_numbers = flatten_data_numbers(data)  # corpus may have grown in the last revise
         audit["cleanup"]["used"] = True
-        cleaned, _i, _o = cleanup_runner(build_cleanup_prompt(text, failed))
+        cleaned, _i, _o, *rest = cleanup_runner(build_cleanup_prompt(text, failed))
         cleaned = strip_preamble(cleaned or "")
-        if cleaned and len(cleaned) >= 0.4 * len(text):
+        reason = rewrite_rejection(text, cleaned, rest[0] if rest else None)
+        if reason is None:
             text = cleaned
+        else:  # the mechanical guard below still scrubs the failed numbers
+            audit.setdefault("rejected_rewrites", []).append(
+                {"stage": "cleanup", "reason": reason})
+            log(f"cleanup rewrite rejected ({reason}); mechanical guard only")
         # Post-cleanup: cache-verified claims pass; anything else unverified is
         # mechanically replaced. Iterate until no residual remains — a single
         # pass is not enough because replacing one span can expose neighbours
@@ -984,5 +1044,12 @@ def run_pipeline(draft_text: str, data: dict, *, spec_writer: str, spec_verify: 
                                          and c.get("reason") == JUDGE_TRUNCATED_REASON),
         "unverified_remaining": sum(1 for c in claims if c["status"] not in ("verified", "judge_error")),
     }
+    # Last line of defence: every guard above judges one rewrite against the
+    # text before it; this judges the published text against the draft.
+    lost = lost_sections(draft, text)
+    final["lost_sections"] = lost
     audit["final"] = final
-    return strip_exempt_tags(text) + verification_footer(final), audit
+    if lost:
+        log("WARNING: final text lacks draft sections: " + " / ".join(lost))
+    banner = structure_banner(lost) if lost else ""
+    return banner + strip_exempt_tags(text) + verification_footer(final), audit

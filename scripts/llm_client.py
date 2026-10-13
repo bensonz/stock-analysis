@@ -442,6 +442,25 @@ def _anthropic_messages_create(client: anthropic.Anthropic, **kwargs):
         raise
 
 
+# Stop reasons meaning "the model ran out of output budget": openai-compatible
+# finish_reason "length", anthropic stop_reason "max_tokens".
+TRUNCATED_STOPS = ("length", "max_tokens")
+
+
+def _record_stop(meta: dict | None, stop, label: str) -> None:
+    """A tool loop's final turn ends with no tool calls — which a cut-off reply
+    also does. Without this the loop returned truncated text as a finished
+    answer (2026-10-13: a 688018 deep-report revision lost §3/§4 mid-sentence
+    and was published). Warn always; tell the caller through meta."""
+    truncated = stop in TRUNCATED_STOPS
+    if truncated:
+        print(f"  WARNING: {label.strip() or 'llm'} reply cut off at max_tokens "
+              f"(stop={stop}) — the text is incomplete", file=sys.stderr)
+    if meta is not None:
+        meta["stop_reason"] = stop
+        meta["truncated"] = truncated
+
+
 def _run_tool_loop(
     client: anthropic.Anthropic,
     messages: list,
@@ -452,6 +471,7 @@ def _run_tool_loop(
     label: str = "",
     extra_tools: list | None = None,
     tool_executor=None,
+    meta: dict | None = None,
 ) -> tuple[str, int, int, int]:
     """Run LLM with tool-use loop until final text response.
 
@@ -459,6 +479,8 @@ def _run_tool_loop(
     let a caller add run-scoped tools (e.g. deep_report's stock_fundamentals)
     without exposing them to every pipeline. Executor returning None falls
     through to the global execute_tool dispatch.
+
+    meta, when given, receives the final turn's stop: see _record_stop.
 
     Returns: (final_text, input_tokens, output_tokens, rounds)
     """
@@ -488,6 +510,7 @@ def _run_tool_loop(
         if not tool_use_blocks:
             final_text = "\n".join(b.text for b in text_blocks)
             print(f" done ({total_input}+{total_output} tokens)", file=sys.stderr)
+            _record_stop(meta, getattr(response, "stop_reason", None), label)
             # Append assistant response to messages for conversation continuity
             # Convert to dicts to avoid Pydantic serialization issues on re-send
             content_dicts = []
@@ -677,11 +700,13 @@ def _run_openai_tool_loop(
     label: str = "",
     extra_tools: list | None = None,
     tool_executor=None,
+    meta: dict | None = None,
 ) -> tuple[str, int, int, int]:
     """Run OpenAI LLM with tool-use loop until final text response.
 
     extra_tools are given in ANTHROPIC schema (converted here) so callers
     define a run-scoped tool once for both providers; see _run_tool_loop.
+    meta, when given, receives the final turn's stop: see _record_stop.
 
     Returns: (final_text, input_tokens, output_tokens, rounds)
     """
@@ -712,6 +737,7 @@ def _run_openai_tool_loop(
             # Final text response
             final_text = msg.content or ""
             print(f" done ({total_input}+{total_output} tokens)", file=sys.stderr)
+            _record_stop(meta, getattr(choice, "finish_reason", None), label)
             messages.append({"role": "assistant", "content": final_text})
             return final_text, total_input, total_output, round_num
 

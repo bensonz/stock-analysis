@@ -788,3 +788,63 @@ def test_fixture_002832_report_sweep():
     joined = " ".join(c["numbers"][0] for c in naked)
     assert "2025年" not in joined
     assert "002832" not in joined
+
+
+# --------------------------------------------------------------------------- #
+# Whole-report rewrite guard (2026-10-13, 688018: a revision cut off at
+# max_tokens lost §3/§4 at ~60% length, passed the < 40% guard, and was
+# published with a clean "76/76 verified" footer)
+# --------------------------------------------------------------------------- #
+FULL = ("# 甲公司深度研究报告 · 评级 3/5\n\n## 1. 核心观点\n营收43.14亿元创新高。\n\n"
+        "## 2. 深度剖析\n" + "分析正文。" * 40 + "\n\n## 3. 关键日期\n表格\n\n## 4. 风险提示\n风险一\n")
+CUT = FULL.split("## 3. 关键日期")[0].replace("营收43.14亿元", "营收[43.14亿元](https://a.com/1)")
+
+
+def test_rewrite_missing_a_section_is_rejected():
+    assert "关键日期" in dv.rewrite_rejection(FULL, CUT)
+
+
+def test_rewrite_cut_off_at_max_tokens_is_rejected():
+    assert "max_tokens" in dv.rewrite_rejection(FULL, FULL, "length")
+
+
+def test_rewrite_that_changes_only_the_title_rating_is_accepted():
+    assert dv.rewrite_rejection(FULL, FULL.replace("评级 3/5", "评级 4/5")) is None
+
+
+def test_revise_that_loses_sections_twice_keeps_the_complete_draft():
+    calls = []
+
+    def truncating_revise(prompt):
+        calls.append(prompt)
+        return CUT, 1, 1, 1, "length"
+
+    text, audit = dv.run_pipeline(
+        FULL, {}, spec_writer="W", spec_verify="V", max_rounds=2,
+        judge_runner=_auto_judge(), revise_runner=truncating_revise,
+        cleanup_runner=lambda p: (FULL, 1, 1), fetch=lambda u: PAGE)
+    assert len(calls) == 2                                  # retried once
+    assert "## 4. 风险提示" in text
+    assert [r["stage"] for r in audit["rejected_rewrites"]] == ["revise", "revise"]
+
+
+def test_cleanup_that_loses_sections_is_rejected():
+    text, audit = dv.run_pipeline(
+        FULL, {}, spec_writer="W", spec_verify="V", max_rounds=1,
+        judge_runner=_auto_judge(), revise_runner=_boom,
+        cleanup_runner=lambda p: (CUT, 1, 1), fetch=lambda u: PAGE)
+    assert "## 3. 关键日期" in text
+    assert audit["rejected_rewrites"][0]["stage"] == "cleanup"
+
+
+def test_complete_report_has_no_banner():
+    text, audit = dv.run_pipeline(
+        "## 1. 核心观点\nRPS60=91.82〖内部数据〗。", {"technicals": {"rps60": 91.82}},
+        spec_writer="W", spec_verify="V", max_rounds=1,
+        judge_runner=_boom, revise_runner=_boom, cleanup_runner=_boom, fetch=_boom)
+    assert audit["final"]["lost_sections"] == []
+    assert "报告不完整" not in text
+
+
+def test_structure_banner_names_the_lost_sections():
+    assert "关键日期" in dv.structure_banner(["3. 关键日期"])

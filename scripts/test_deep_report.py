@@ -576,3 +576,55 @@ def test_generate_live():
     body = res["text"].split("数据核验")[0]
     naked = [c for c in deep_verify.extract_claims(body) if c["kind"] == "naked"]
     assert naked == []
+
+
+# --------------------------------------------------------------------------- #
+# Truncation feedback (2026-10-13, 688018: a revision cut off at max_tokens was
+# published as the report — nothing passed the stop reason along)
+# --------------------------------------------------------------------------- #
+_GOOD_DRAFT = "# 测试（000001）深度研究报告 · 评级 3/5\n" + "正文" * 2000
+
+
+def test_ensure_full_draft_re_asks_when_the_draft_was_cut_off():
+    calls = []
+
+    def rerun(attempt):
+        calls.append(attempt)
+        return _GOOD_DRAFT, [], False
+
+    text, _ = deep_report._ensure_full_draft(_GOOD_DRAFT + "截断", [], rerun, truncated=True)
+    assert calls == [0]
+    assert text == _GOOD_DRAFT
+
+
+def test_ensure_full_draft_refuses_a_draft_cut_off_every_time():
+    import pytest
+    with pytest.raises(RuntimeError, match="cut off"):
+        deep_report._ensure_full_draft(_GOOD_DRAFT, [], lambda a: (_GOOD_DRAFT, [], True),
+                                       truncated=True)
+
+
+def test_ensure_full_draft_takes_a_complete_retry_over_a_longer_cut_off_one():
+    retries = [(_GOOD_DRAFT * 2, [], True), (_GOOD_DRAFT, [], False)]
+    text, _ = deep_report._ensure_full_draft(
+        _GOOD_DRAFT, [], lambda a: retries[a], truncated=True)
+    assert text == _GOOD_DRAFT
+
+
+def test_revise_runner_passes_the_stop_reason(monkeypatch):
+    def fake(*a, meta=None, **k):
+        meta.update(stop_reason="length", truncated=True)
+        return "修订稿", 1, 1, 1
+
+    monkeypatch.setattr(deep_report, "_run_writer_pass", fake)
+    rev, _judge, _cl = deep_report._make_runners(
+        "openai", object(), "m", [], {"in": 0, "out": 0, "rounds": 0})
+    assert rev("p")[4] == "length"
+
+
+def test_cleanup_runner_reports_length_finish():
+    calls = []
+    _rev, _judge, cleanup = deep_report._make_runners(
+        "openai", _capturing_openai(calls, finish_reason="length"), "gpt-5.4", [],
+        {"in": 0, "out": 0, "rounds": 0})
+    assert cleanup("p")[3] == "length"

@@ -468,44 +468,65 @@ _DRAFT_RETRY_NUDGE = (
     "（从 `# …深度研究报告 · 评级 x/5` 标题行开始，包含全部章节，文末附 predictions 代码块），"
     "不要再调用任何工具。"
 )
+_DRAFT_TRUNCATED_NUDGE = (
+    "你上一条回复在输出长度上限处被截断，报告不完整。现在请重新输出完整的深度研究报告"
+    "（从 `# …深度研究报告 · 评级 x/5` 标题行开始，包含全部章节，文末附 predictions 代码块），"
+    "压缩措辞以确保全部章节都能输出完，不要再调用任何工具。"
+)
 
 
-def _ensure_full_draft(text: str, judgment_bets: list, rerun, retries: int = 2) -> tuple:
+def _draft_ok(text: str, truncated: bool) -> bool:
+    return len(text) >= MIN_DRAFT_CHARS and "深度研究报告" in text[:200] and not truncated
+
+
+def _ensure_full_draft(text: str, judgment_bets: list, rerun, retries: int = 2,
+                       truncated: bool = False) -> tuple:
     """Writer-pass floor guard (2026-08-07: a run ended its tool loop with only
     the predictions block as final text — a 103-byte 'report' then overwrote
     the previous file, because only the VERIFY stage had degenerate guards).
     `rerun(attempt)` re-asks the same conversation for the full report and
-    returns (text, bets). Raises rather than let a stub reach write_report."""
+    returns (text, bets[, truncated]). A draft cut off at max_tokens is as
+    incomplete as a stub (2026-10-13). Raises rather than let either reach
+    write_report."""
     for attempt in range(retries):
-        if len(text) >= MIN_DRAFT_CHARS and "深度研究报告" in text[:200]:
+        if _draft_ok(text, truncated):
             return text, judgment_bets
-        print(f"  [deep_report] degenerate draft ({len(text)} chars) — "
+        what = "draft cut off at max_tokens" if truncated else f"degenerate draft ({len(text)} chars)"
+        print(f"  [deep_report] {what} — "
               f"re-asking writer for the full report ({attempt + 1}/{retries})",
               file=sys.stderr)
-        t2, bets2 = rerun(attempt)
+        t2, bets2, *rest = rerun(attempt)
+        t2_truncated = bool(rest and rest[0])
         if bets2:
             judgment_bets = bets2
-        if len(t2) > len(text):
-            text = t2
+        # A complete retry always wins; otherwise keep the longer text, but
+        # never trade an untruncated draft for a truncated one.
+        if _draft_ok(t2, t2_truncated) or (len(t2) > len(text) and (truncated or not t2_truncated)):
+            text, truncated = t2, t2_truncated
     if len(text) < MIN_DRAFT_CHARS:
         raise RuntimeError(
             f"deep_report writer returned a degenerate draft ({len(text)} chars) "
             "after retries — refusing to write a stub report")
+    if truncated:
+        raise RuntimeError(
+            "deep_report writer draft was cut off at max_tokens after retries — "
+            "refusing to write an incomplete report")
     return text, judgment_bets
 
 
 def _run_writer_pass(client, model, resolved, messages, tool_log, label,
-                     extra_tools=None, tool_executor=None) -> tuple:
-    """One tool-loop pass (draft or revise). Returns (text, tin, tout, rounds)."""
+                     extra_tools=None, tool_executor=None, meta=None) -> tuple:
+    """One tool-loop pass (draft or revise). Returns (text, tin, tout, rounds).
+    meta, when given, gets the final turn's stop_reason / truncated flag."""
     import llm_client
 
     if resolved == "anthropic":
         return llm_client._run_tool_loop(
             client, messages, model, MAX_TOKENS, TEMPERATURE, tool_log, label=label,
-            extra_tools=extra_tools, tool_executor=tool_executor)
+            extra_tools=extra_tools, tool_executor=tool_executor, meta=meta)
     return llm_client._run_openai_tool_loop(
         client, messages, model, MAX_TOKENS, TEMPERATURE, tool_log, label=label,
-        extra_tools=extra_tools, tool_executor=tool_executor)
+        extra_tools=extra_tools, tool_executor=tool_executor, meta=meta)
 
 
 # --------------------------------------------------------------------------- #
@@ -617,12 +638,13 @@ def _make_runners(resolved, client, model, tool_log, totals,
             totals["rounds"] += r
 
     def revise_runner(prompt: str):
+        meta: dict = {}
         t, i, o, r = _run_writer_pass(
             client, model, resolved, [{"role": "user", "content": prompt}],
             tool_log, label="verify-revise ",
-            extra_tools=extra_tools, tool_executor=tool_executor)
+            extra_tools=extra_tools, tool_executor=tool_executor, meta=meta)
         _add(i, o, r)
-        return t, i, o, r
+        return t, i, o, r, meta.get("stop_reason")
 
     def _text_once(prompt: str, label: str, max_tokens: int, no_thinking: bool = False):
         """(text, tin, tout, finish_reason). finish_reason is None on anthropic."""
@@ -675,7 +697,7 @@ def _make_runners(resolved, client, model, tool_log, totals,
     return (revise_runner,
             lambda p: _text_once(p, "verify-judge ", deep_verify.JUDGE_MAX_TOKENS,
                                  no_thinking=True),
-            lambda p: _text_once(p, "verify-cleanup ", MAX_TOKENS)[:3])
+            lambda p: _text_once(p, "verify-cleanup ", MAX_TOKENS))
 
 
 def generate(code: str, provider: str | None = None, data: dict | None = None,
@@ -721,9 +743,10 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
     prompt = build_prompt(spec, code, data, focus=focus, bear_brief=bear_brief)
     messages = [{"role": "user", "content": prompt}]
     extra_tools, tool_executor = _make_report_tools(data)
+    draft_meta: dict = {}
     text, i0, o0, r0 = _run_writer_pass(
         client, model, resolved, messages, tool_log, label="deep_report ",
-        extra_tools=extra_tools, tool_executor=tool_executor)
+        extra_tools=extra_tools, tool_executor=tool_executor, meta=draft_meta)
     tin += i0
     tout += o0
     rounds += r0
@@ -731,17 +754,19 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
 
     def _rerun_writer(_attempt):
         nonlocal tin, tout, rounds
-        messages.append({"role": "user", "content": _DRAFT_RETRY_NUDGE})
+        nudge = _DRAFT_TRUNCATED_NUDGE if draft_meta.get("truncated") else _DRAFT_RETRY_NUDGE
+        messages.append({"role": "user", "content": nudge})
         t2, i2, o2, r2 = _run_writer_pass(
             client, model, resolved, messages, tool_log, label="deep_report-retry ",
-            extra_tools=extra_tools, tool_executor=tool_executor)
+            extra_tools=extra_tools, tool_executor=tool_executor, meta=draft_meta)
         tin += i2
         tout += o2
         rounds += r2
         bets2, t2 = extract_predictions_block(t2)
-        return t2, bets2
+        return t2, bets2, draft_meta.get("truncated", False)
 
-    text, judgment_bets = _ensure_full_draft(text, judgment_bets, _rerun_writer)
+    text, judgment_bets = _ensure_full_draft(text, judgment_bets, _rerun_writer,
+                                             truncated=draft_meta.get("truncated", False))
 
     verify_audit = None
     verify_rounds = 0

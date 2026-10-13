@@ -131,6 +131,16 @@ bear pass, or found and ignored by the writer. A failed or thin pass is loud
 (`bear pass FAILED` / `drafted WITHOUT bear research`) but never kills the
 report. Added 2026-10-03 after 600150's report missed a dated port-fee expiry.
 
+Every pass that re-emits the whole report (the draft, each verify revision,
+the cleanup) is checked for completeness. A reply cut off at the model's
+output limit, shrunk below 40%, or missing a `##`/`###` section the draft had
+is rejected: the draft is re-asked (then refused — the old report stays), a
+revision is retried once, then the prior text is kept. If the published text
+still lacks a draft section it opens with **⚠️ 报告不完整** and
+`-deep-verify.json` lists it under `final.lost_sections`; rejected rewrites
+are under `rejected_rewrites`. Added 2026-10-13 after a 688018 revision was
+cut off mid-sentence, lost §3/§4, and was published with a clean footer.
+
 Read it knowing two things. The 〖内部数据〗 markers mean *verified against our
 own DB* — the verifier confirms we reported what we stored, not that what we
 stored is right (a unit-corrupted MA10 sailed through verification on

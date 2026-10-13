@@ -100,3 +100,45 @@ def test_get_env_value_falls_back_to_claude_settings(tmp_path: Path, monkeypatch
     monkeypatch.delenv("ANTHROPIC_BASE_URL", raising=False)
     assert llm_client._get_env_value("ANTHROPIC_AUTH_TOKEN") == "settings_token"
     assert llm_client._get_env_value("ANTHROPIC_API_URL", "ANTHROPIC_BASE_URL") == "http://settings.example/api"
+
+
+# --------------------------------------------------------------------------- #
+# Truncation signal (2026-10-13: a cut-off deep-report revision was returned as
+# a finished answer — the loop treated "no tool calls" as "done").
+# --------------------------------------------------------------------------- #
+from types import SimpleNamespace
+
+
+def _openai_client(finish_reason):
+    msg = SimpleNamespace(content="报告正文", tool_calls=None)
+    resp = SimpleNamespace(choices=[SimpleNamespace(message=msg, finish_reason=finish_reason)],
+                           usage=SimpleNamespace(prompt_tokens=10, completion_tokens=5))
+    return SimpleNamespace(chat=SimpleNamespace(
+        completions=SimpleNamespace(create=lambda **k: resp)))
+
+
+def test_openai_loop_reports_a_cut_off_reply():
+    meta = {}
+    llm_client._run_openai_tool_loop(_openai_client("length"), [], "m", 100, 0, [], meta=meta)
+    assert meta == {"stop_reason": "length", "truncated": True}
+
+
+def test_openai_loop_reports_a_complete_reply():
+    meta = {}
+    llm_client._run_openai_tool_loop(_openai_client("stop"), [], "m", 100, 0, [], meta=meta)
+    assert meta["truncated"] is False
+
+
+def test_openai_loop_without_meta_still_returns_the_text():
+    text, *_ = llm_client._run_openai_tool_loop(_openai_client("length"), [], "m", 100, 0, [])
+    assert text == "报告正文"
+
+
+def test_anthropic_loop_reports_a_cut_off_reply(monkeypatch):
+    block = SimpleNamespace(type="text", text="报告正文", model_dump=lambda: {"type": "text", "text": "报告正文"})
+    resp = SimpleNamespace(content=[block], stop_reason="max_tokens",
+                           usage=SimpleNamespace(input_tokens=10, output_tokens=5))
+    monkeypatch.setattr(llm_client, "_anthropic_messages_create", lambda client, **k: resp)
+    meta = {}
+    llm_client._run_tool_loop(object(), [], "m", 100, 0, [], meta=meta)
+    assert meta["truncated"] is True
