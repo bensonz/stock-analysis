@@ -26,4 +26,8 @@ round-1 revision came back at ~6.7k. Three layers let it through:
 
 ## Stage 4: Re-run 688018
 **Pass criteria**: report has §3 关键日期 and §4 风险提示; tariff risk present; `final.lost_sections == []`; any rejected rewrite visible in the audit
-**Status**: In Progress
+**Status**: Complete (2026-10-13 re-run, 4/4) — 17,168 chars (was 13,820, cut);
+  关键日期 table + 风险提示 present; 风险一 = 232/301 tariffs; lost_sections [];
+  106/106 verified. The guard fired twice in one run: the Claude draft hit
+  max_tokens (re-asked → complete), and the DeepSeek cleanup hit `length`
+  (rejected → mechanical guard). Both would have published a cut report before.
