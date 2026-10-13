@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-13",
+  "actions": [
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 21.31,
+      "pnl_pct": 10.47,
+      "note": "浮盈+10.47%已保本止损19.29，VLCC运价历史高位（美湾→亚洲7700万美元 vs 2025年均920万美元，来源界面新闻/财中社），H1净利+227.6%，margin转adding，让赢家奔跑"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 50.42,
+      "pnl_pct": 17.67,
+      "note": "浮盈+17.67%止损锁+10%(47.14)未触发；CRO订单拐点确认（Q1新签+111.6%，来源ByDrug）；医疗服务午盘首次落bottom5(-2.16%第1天)但收盘未入，未触发3日冷区卖出，继续计数观察"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 157.35,
+      "pnl_pct": 24.39,
+      "note": "浮盈+24.39%止损锁+10%(139.15)未触发；CRO龙头；警示：成交量323015低于MAVOL30 360352(89.6%)动量确认转弱，不加仓、审慎观察，若价格停滞则收紧"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 980383.74,
+    "dayPnl": 650.0,
+    "dayReturnPct": 0.07,
+    "totalReturnPct": -1.96,
+    "unrealizedPnl": 16927.0,
+    "realizedPnl": -36543.26,
+    "cashPct": 89.33
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 1.1702,
+    "up": 2909,
+    "down": 2486,
+    "positive_indices": [
+      "上证指数"
+    ],
+    "negative_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 70,
+    "limit_downs": 10,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 1.17:1, 1/3 major indices green, 70 limit-ups / 10 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "A股窄幅震荡：上证+0.10%独红，深成-0.25%/创业板-0.18%收跌，涨跌家数2909:2486(1.17:1)，涨停70/跌停10，多数个股微涨微跌(r0_2=1992家)为弱平衡盘。entry_regime=balanced(1.0x)无硬阻断，但仅1/3主要指数红、IV整体偏悲观(avg_iv_rank 0.555)。热点集中在军工链(地面兵装+5.0%/航空装备+3.38%，'十五五'订单+军贸+珠海航展催化，来源财闻网/彭博)，医药/电池/保险/风电流出。策略池26只候选0只在今日top5板块、14只RPS120>95%过热封顶；持仓3只均不在热门亦未入冷区。无clean entry，持币观望，new_positions=[]。"
+  }
+}

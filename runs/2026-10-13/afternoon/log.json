@@ -1,0 +1,126 @@
+{
+  "date": "2026-10-13",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1791875222.461492,
+      "errors": [],
+      "end": 1791875414.373284,
+      "duration_sec": 191.9,
+      "reused_phase1": true
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 9134,
+      "tokens": {
+        "input_tokens": 172454,
+        "output_tokens": 18840
+      },
+      "rounds": 3,
+      "tool_calls_count": 6,
+      "duration_sec": 243.0,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1791878902.884553,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=89",
+        "Hypothesis: Created h208 (observation): 弱平衡盘(breadth 1.17:1、仅1/3主要指数红、IV avg_iv_rank 0.555偏悲观)下，甜点区候选宁波银行(88.21)/山煤国际(89...",
+        "Hypothesis: WARN coerced evidence_type='observation' → supporting",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=26",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-10-13",
+        "status": "ok",
+        "checked": 3,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "603259",
+                "name": "药明康德",
+                "rule": "volume_below_mavol30",
+                "volume": 323015,
+                "mavol30": 360351.5,
+                "ratio_pct": 89.6,
+                "suggestion": "Latest volume 323,015 is below MAVOL30 360,352 (89.6% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+              }
+            ],
+            "error": null
+          }
+        ]
+      },
+      "end": 1791878903.9900868,
+      "duration_sec": 1.1
+    }
+  ],
+  "validation_errors": [
+    "RULE check_volume_below_mavol30: 603259 — Latest volume 323,015 is below MAVOL30 360,352 (89.6% of average). Momentum confirmation is weak; avoid adding and review closely if price action stalls or reverses."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 436.0
+  }
+}

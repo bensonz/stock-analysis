@@ -27,24 +27,6 @@
 
 ## 需要人工操作 (5)
 
-  ▸ phase_failed  [env]
-      13 次 / 13 天   2026-05-28 … 2026-09-08
-      执行:   python3 scripts/run_daily.py --slot afternoon --run
-        · 2026-09-02 noon      阶段 collect 失败
-        · 2026-09-03 afternoon 阶段 llm_analysis 失败
-        · 2026-09-07 afternoon 阶段 llm_analysis 失败
-        · 2026-09-08 noon      阶段 collect 失败
-        · … 另有 9 次更早的
-
-  ▸ gate_hard_fail  [env]
-      36 次 / 13 天   2026-05-28 … 2026-09-08
-      执行:   python3 scripts/pricedb.py repair
-        · 2026-09-08 noon      phase1_to_phase2 硬闸门拦截
-        · 2026-09-08 noon      phase1_to_phase2 硬闸门拦截
-        · 2026-09-08 noon      phase1_to_phase2 硬闸门拦截
-        · 2026-09-08 noon      phase1_to_phase2 硬闸门拦截
-        · … 另有 32 次更早的
-
   ▸ db_health_warnings  [env]
       8 次 / 7 天   2026-08-12 … 2026-09-08   最长连续 2
       改这里: scripts/pricedb.py db_health
@@ -61,14 +43,32 @@
         · 2026-08-26 afternoon 快照写入 0 行
         · 2026-09-25 afternoon 快照写入 0 行
 
+  ▸ phase_failed  [env]
+      14 次 / 14 天   2026-05-28 … 2026-10-13
+      执行:   python3 scripts/run_daily.py --slot afternoon --run
+        · 2026-09-03 afternoon 阶段 llm_analysis 失败
+        · 2026-09-07 afternoon 阶段 llm_analysis 失败
+        · 2026-09-08 noon      阶段 collect 失败
+        · 2026-10-13 afternoon 阶段 llm_analysis 失败
+        · … 另有 10 次更早的
+
+  ▸ gate_hard_fail  [env]
+      37 次 / 14 天   2026-05-28 … 2026-10-13
+      执行:   python3 scripts/pricedb.py repair
+        · 2026-09-08 noon      phase1_to_phase2 硬闸门拦截
+        · 2026-09-08 noon      phase1_to_phase2 硬闸门拦截
+        · 2026-09-08 noon      phase1_to_phase2 硬闸门拦截
+        · 2026-10-13 afternoon phase2_to_phase3 硬闸门拦截
+        · … 另有 33 次更早的
+
   ▸ db_health_spot_check  [env]
-      25 次 / 25 天   2026-08-12 … 2026-10-12   最长连续 2
+      26 次 / 26 天   2026-08-12 … 2026-10-13   最长连续 2
       执行:   python3 scripts/pricedb.py status
-        · 2026-09-29 afternoon 抽查 20 只、实际核对 0 只
         · 2026-09-30 afternoon 抽查 20 只、实际核对 0 只
         · 2026-10-09 afternoon 抽查 20 只、实际核对 0 只
         · 2026-10-12 afternoon 抽查 20 只、实际核对 0 只
-        · … 另有 21 次更早的
+        · 2026-10-13 afternoon 抽查 20 只、实际核对 0 只
+        · … 另有 22 次更早的
 
 
 ## 已知并接受 (1)

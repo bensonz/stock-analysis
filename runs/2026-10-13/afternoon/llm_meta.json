@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 172454,
+  "output_tokens": 18840,
+  "rounds": 3,
+  "duration_sec": 243.0,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026-10-13 军工 航空装备 地面兵装 板块 上涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3786
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "CRO 医疗服务 板块 2026-10-13 药明康德 昭衍新药 走势",
+        "max_results": 5
+      },
+      "result_length": 3296
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "招商轮船 油运 VLCC 运价 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3719
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "动力煤 价格 2026年10月 山煤国际 煤炭板块",
+        "max_results": 5
+      },
+      "result_length": 3533
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 2026年10月13日 大盘 涨跌 板块 资金 宏观"
+      },
+      "result_length": 3986
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "中国银行 宁波银行 银行板块 2026年10月 创新高 中期分红"
+      },
+      "result_length": 3549
+    }
+  ],
+  "fallback_used": false
+}

@@ -1,0 +1,207 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "地面兵装Ⅱ",
+        "5d_pct": 5.0,
+        "trend": "accelerating"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": 4.79,
+        "trend": "accelerating"
+      },
+      {
+        "name": "航空装备Ⅱ",
+        "5d_pct": 3.38,
+        "trend": "accelerating"
+      },
+      {
+        "name": "航海装备Ⅱ",
+        "5d_pct": 3.22,
+        "trend": "steady"
+      },
+      {
+        "name": "旅游及景区",
+        "5d_pct": 3.16,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "电池",
+        "5d_pct": -3.13,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "保险Ⅱ",
+        "5d_pct": -3.11,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "风电设备",
+        "5d_pct": -2.82,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "能源金属",
+        "5d_pct": -2.01,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "生物制品",
+        "5d_pct": -1.76,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/3 positions in hot sectors（招商轮船=航运港口，昭衍新药/药明康德=医疗服务，均未入今日top5亦未入bottom5）",
+    "regime": "军工链领涨（十五五订单+军贸+珠海航展催化，来源财闻网/彭博），医药/电池/保险/风电资金流出；策略池与当日热点完全错位"
+  },
+  "position_decisions": [
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+10.47%已保本止损19.29，VLCC运价历史高位（美湾→亚洲7700万美元 vs 2025年均920万美元，来源界面新闻/财中社），H1净利+227.6%，margin转adding，让赢家奔跑",
+      "sector_rank": "中性（航运港口未入今日top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 10.47,
+      "days_held": 26,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+17.67%止损锁+10%(47.14)未触发；CRO订单拐点确认（Q1新签+111.6%，来源ByDrug）；医疗服务午盘首次落bottom5(-2.16%第1天)但收盘未入，未触发3日冷区卖出，继续计数观察",
+      "sector_rank": "中性（医疗服务午盘转冷第1天，收盘未入bottom5）",
+      "new_stop": null,
+      "pnl_pct": 17.67,
+      "days_held": 16,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+24.39%止损锁+10%(139.15)未触发；CRO龙头；警示：成交量323015低于MAVOL30 360352(89.6%)动量确认转弱，不加仓、审慎观察，若价格停滞则收紧",
+      "sector_rank": "中性（医疗服务未入今日bottom5）",
+      "new_stop": null,
+      "pnl_pct": 24.39,
+      "days_held": 50,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "300981",
+      "name": "中红医疗",
+      "reason": "dist_ma20 +19.2%严重超买(>12%追高线)+RPS120 94.66扩展区+4风险因子+拟出售回购股143.62万股",
+      "rps120": 94.66
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "PE 565且营收-35%/净利-96%红旗+RPS120 94.93扩展区+医疗服务非今日热门",
+      "rps120": 94.93
+    },
+    {
+      "code": "300404",
+      "name": "博济医药",
+      "reason": "RPS120 94.29扩展区+4风险因子+医疗服务非今日热门",
+      "rps120": 94.29
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "RPS20仅13.28短期动量已死+RPS120 92.89扩展区+有色非今日热门",
+      "rps120": 92.89
+    },
+    {
+      "code": "600546",
+      "name": "山煤国际",
+      "reason": "煤炭基本面强(秦皇岛动力煤1003元/吨+40%YoY，来源证券时报)但今日板块未入top5+margin deleveraging+RPS20仅62.01",
+      "rps120": 89.39
+    },
+    {
+      "code": "601988",
+      "name": "中国银行",
+      "reason": "周线超买+margin deleveraging+银行今日未入top5(保险已入bottom5)",
+      "rps120": 88.38
+    },
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "reason": "0风险+甜点区(88.21)但银行今日未入top5+IV proxy 0.6081偏高+金融板块分化",
+      "rps120": 88.21
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "RPS20仅14.08+股价低于MA20 -12.3%下跌趋势+偿债压力大",
+      "rps120": 88.8
+    },
+    {
+      "code": "600428",
+      "name": "中远海特",
+      "reason": "RPS20 36.6+2026/09/21解禁10.88%+航运非今日热门",
+      "rps120": 89.19
+    },
+    {
+      "code": "001378",
+      "name": "德冠新材",
+      "reason": "VCP contraction 0.87无收紧结构+股东户数+51%散户拥挤+基础化工非热门",
+      "rps120": 90.71
+    },
+    {
+      "code": "603519",
+      "name": "立霸股份",
+      "reason": "股东减持进行中(蒋达伟-3%计划)+家电零部件非热门",
+      "rps120": 92.24
+    },
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "股价低于MA20 -13.3%下跌趋势+RPS20 77.41走弱",
+      "rps120": 93.9
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "策略池与当日热点完全错位(0/26候选落在top5、14/26只RPS120>95%被过热封顶)时，正确动作是new_positions=[]，而不是在非热门板块硬找甜点区标的凑仓位",
+      "type": "rule",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "板块优先是硬门槛：板块不热=无入场，个股RPS/MA再合规也不构成例外"
+    },
+    {
+      "text": "弱平衡盘(breadth 1.17:1、仅1/3主要指数红、IV avg_iv_rank 0.555偏悲观)下，甜点区候选宁波银行(88.21)/山煤国际(89.39)被跳过的叠加理由：板块未入今日top5+margin deleveraging(山煤)+周线超买(中行)/IV偏高(宁波0.61)",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "弱宽度下选股标准应上调，宁可错过不可勉强"
+    },
+    {
+      "text": "医疗服务午盘首次落bottom5(-2.16%第1天)但收盘未入；药明康德+昭衍新药2/3持仓同板块暴露集中，若连续3日居bottom30%则Rule 1将同时打击两只持仓",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "observation",
+      "mechanism": "板块集中度风险：同一板块双持仓在板块转冷时回撤相关性接近1"
+    }
+  ],
+  "market_summary": "A股窄幅震荡：上证+0.10%独红，深成-0.25%/创业板-0.18%收跌，涨跌家数2909:2486(1.17:1)，涨停70/跌停10，多数个股微涨微跌(r0_2=1992家)为弱平衡盘。entry_regime=balanced(1.0x)无硬阻断，但仅1/3主要指数红、IV整体偏悲观(avg_iv_rank 0.555)。热点集中在军工链(地面兵装+5.0%/航空装备+3.38%，'十五五'订单+军贸+珠海航展催化，来源财闻网/彭博)，医药/电池/保险/风电流出。策略池26只候选0只在今日top5板块、14只RPS120>95%过热封顶；持仓3只均不在热门亦未入冷区。无clean entry，持币观望，new_positions=[]。",
+  "market_sentiment": "neutral",
+  "market_call": "观望"
+}

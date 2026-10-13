@@ -1601,11 +1601,15 @@
           {
             "date": "2026-10-13",
             "detail": "弱盘(0.53:1)+策略池无一候选落在今日top5板块时，正确决策是new_positions=[]持币，而非勉强挑一个平庸setup入场——'弱盘+平庸setup=跳过'纪律再次执行"
+          },
+          {
+            "date": "2026-10-13",
+            "detail": "策略池与当日热点完全错位(0/26候选落在top5、14/26只RPS120>95%被过热封顶)时，正确动作是new_positions=[]，而不是在非热门板块硬找甜点区标的凑仓位"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 88,
+      "sampleSize": 89,
       "hitRate": 1.0,
       "confidence": 0.989,
       "tags": [
@@ -4595,13 +4599,17 @@
           {
             "date": "2026-10-13",
             "detail": "医疗服务今日首次落入bottom5(-2.16%)，持仓昭衍新药/药明康德需盯3日冷区规则；CRO龙头虽已锁+10%止损，但板块转冷是比个股浮盈更早的领先信号"
+          },
+          {
+            "date": "2026-10-13",
+            "detail": "医疗服务午盘首次落bottom5(-2.16%第1天)但收盘未入；药明康德+昭衍新药2/3持仓同板块暴露集中，若连续3日居bottom30%则Rule 1将同时打击两只持仓"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 25,
+      "sampleSize": 26,
       "hitRate": 1.0,
-      "confidence": 0.963,
+      "confidence": 0.964,
       "tags": [
         "sector",
         "exit-rule"
@@ -8570,6 +8578,35 @@
       "tags": [
         "sector",
         "entry-filter"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h208",
+      "text": "弱平衡盘(breadth 1.17:1、仅1/3主要指数红、IV avg_iv_rank 0.555偏悲观)下，甜点区候选宁波银行(88.21)/山煤国际(89.39)被跳过的叠加理由：板块未入今日top5+margin deleveraging(山煤)+周线超买(中行)/IV偏高(宁波0.61)",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-10-13",
+      "lastTested": "2026-10-13",
+      "mechanism": "弱宽度下选股标准应上调，宁可错过不可勉强",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-10-13",
+            "detail": "弱平衡盘(breadth 1.17:1、仅1/3主要指数红、IV avg_iv_rank 0.555偏悲观)下，甜点区候选宁波银行(88.21)/山煤国际(89.39)被跳过的叠加理由：板块未入今日top5+margin deleveraging(山煤)+周线超买(中行)/IV偏高(宁波0.61)"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
+        "entry-filter",
+        "position-sizing"
       ],
       "parentRule": null,
       "retiredDate": null,
