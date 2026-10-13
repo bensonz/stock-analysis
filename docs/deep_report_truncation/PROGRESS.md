@@ -9,3 +9,6 @@
   DeepSeek — my first guess (DeepSeek thinking) was wrong: the report simply
   does not fit 16384 output tokens on either model. Broken copy kept at
   /tmp/688018-broken/.
+- Owner: raise MAX_TOKENS. 65536 needed streaming for anthropic (SDK guard,
+  also a latent bug in the daily anthropic path) and a 900s cleanup timeout.
+  Live probe through the relay OK. Suite 1084 passed / 13 skipped.

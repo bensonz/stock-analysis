@@ -4,6 +4,6 @@
 - [x] wire into deep_report
 - [x] RUNBOOK
 - [x] re-run 688018 and score against Stage 4 criteria (4/4)
-- [ ] owner: raise MAX_TOKENS? both writer (Claude) and cleanup (DeepSeek) hit 16384 on one report
+- [x] raise MAX_TOKENS to 65536 (owner) + anthropic streaming + cleanup timeout (D6–D8)
 - [ ] revise re-emits the ```predictions block; it is published raw (extraction runs on the draft only)
 - [ ] mechanical guard leaves "见（数据未核实，略）" in 风险二 when cleanup is rejected

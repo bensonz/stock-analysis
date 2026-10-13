@@ -55,3 +55,41 @@ def test_the_budget_clears_the_observed_failure():
     clear of the burn that failed, not merely larger than it."""
     observed_exhausted_budget = 16384
     assert lc.MAX_OUTPUT_TOKENS >= 4 * observed_exhausted_budget
+
+
+def test_deep_report_uses_the_same_ceiling():
+    """deep_report kept its own 16384 after the 08-26 bump; on 2026-10-13 a full
+    688018 report hit it twice in one run (Claude draft, DeepSeek cleanup)."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts" / "research"))
+    import deep_report
+
+    assert deep_report.MAX_TOKENS == lc.MAX_OUTPUT_TOKENS
+
+
+def test_anthropic_calls_stream_so_the_sdk_accepts_the_ceiling():
+    """anthropic 0.84 raises ValueError ("Streaming is required…") for a
+    non-streaming request above ~21k max_tokens — before any network I/O."""
+    seen = {}
+
+    class _Stream:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def get_final_message(self):
+            return "final"
+
+    class _Messages:
+        def stream(self, **kw):
+            seen.update(kw)
+            return _Stream()
+
+        def create(self, **kw):
+            raise AssertionError("non-streaming create must not be used")
+
+    client = type("C", (), {"messages": _Messages()})()
+    out = lc._anthropic_messages_create(client, model="m", max_tokens=lc.MAX_OUTPUT_TOKENS,
+                                        messages=[])
+    assert out == "final" and seen["max_tokens"] == lc.MAX_OUTPUT_TOKENS

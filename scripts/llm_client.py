@@ -415,21 +415,32 @@ def execute_tool(name: str, input_data: dict) -> str:
 _NO_TEMPERATURE_MODELS: set = set()
 
 
+def _stream_final_message(client: anthropic.Anthropic, kwargs: dict):
+    with client.messages.stream(**kwargs) as stream:
+        return stream.get_final_message()
+
+
 def _anthropic_messages_create(client: anthropic.Anthropic, **kwargs):
     """Wrap Anthropic calls with a clearer model-availability error.
 
     Also drops `temperature` for models that no longer accept it (Fable 5
     returns 400 "`temperature` is deprecated for this model").
+
+    Always streams. The SDK refuses a NON-streaming request whose max_tokens
+    implies > 10 min ("Streaming is required…", above ~21k tokens) — so every
+    MAX_OUTPUT_TOKENS (65536) call raised ValueError before reaching the
+    network (found 2026-10-13 raising deep_report's 16384 cap). The final
+    message is the same `Message` object create() returns.
     """
     if kwargs.get("model") in _NO_TEMPERATURE_MODELS:
         kwargs.pop("temperature", None)
     try:
-        return client.messages.create(**kwargs)
+        return _stream_final_message(client, kwargs)
     except anthropic.BadRequestError as exc:
         if "temperature" in str(exc) and "deprecated" in str(exc):
             _NO_TEMPERATURE_MODELS.add(kwargs.get("model"))
             kwargs.pop("temperature", None)
-            return client.messages.create(**kwargs)
+            return _stream_final_message(client, kwargs)
         raise
     except anthropic.InternalServerError as exc:
         message = str(exc)

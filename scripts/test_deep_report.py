@@ -628,3 +628,18 @@ def test_cleanup_runner_reports_length_finish():
         "openai", _capturing_openai(calls, finish_reason="length"), "gpt-5.4", [],
         {"in": 0, "out": 0, "rounds": 0})
     assert cleanup("p")[3] == "length"
+
+
+def test_cleanup_gets_a_long_timeout_and_the_judge_keeps_the_short_one():
+    """At MAX_TOKENS the non-streaming cleanup can write a whole report; 120s
+    would time it out three times and crash verify into the UNVERIFIED path."""
+    import llm_client
+    calls = []
+    _rev, judge, cleanup = deep_report._make_runners(
+        "openai", _capturing_openai(calls), "deepseek-v4-pro", [],
+        {"in": 0, "out": 0, "rounds": 0})
+    judge("p")
+    cleanup("p")
+    assert calls[0]["timeout"] == llm_client.GPT_TIMEOUT
+    assert calls[1]["timeout"] == deep_report.CLEANUP_TIMEOUT
+    assert calls[1]["max_tokens"] == deep_report.MAX_TOKENS

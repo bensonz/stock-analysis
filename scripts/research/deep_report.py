@@ -33,7 +33,13 @@ SPEC_FILE = PROJECT_ROOT / "agents" / "DEEP_REPORT.md"
 VERIFY_SPEC_FILE = PROJECT_ROOT / "agents" / "DEEP_VERIFY.md"
 BEAR_SPEC_FILE = PROJECT_ROOT / "agents" / "DEEP_BEAR.md"
 
-MAX_TOKENS = 16384
+# = llm_client.MAX_OUTPUT_TOKENS (the probed DeepSeek ceiling; anthropic calls
+# stream, so the SDK's 10-minute guard does not apply). Was 16384 until
+# 2026-10-13: a full report did not fit — the 688018 Claude draft and the
+# DeepSeek cleanup both hit it in one run. The cap truncates, it does not
+# reserve; billing follows tokens generated. Literal, not imported, because
+# llm_client is imported lazily here; tests/test_llm_max_tokens.py pins them equal.
+MAX_TOKENS = 65536
 # 1.0 per owner decision 2026-09-01, raised from 0.5 as an EXPERIMENT in rating
 # stability. Context: identical same-week runs produced 3/5 vs 4/5 on 002293
 # with no fundamental change. The owner deliberately wants NO memory between
@@ -43,6 +49,12 @@ MAX_TOKENS = 16384
 # spread widens, the next lever is a scoring equation (decomposed sub-scores,
 # mechanical combination), not memory.
 TEMPERATURE = 1.0
+# The cleanup re-emits the whole report in one NON-streaming call. Under the
+# old 16384 cap it was cut off early enough to fit llm_client.GPT_TIMEOUT
+# (120s); at MAX_TOKENS a full report at DeepSeek speed can take minutes, and
+# three timeouts would crash verify into the UNVERIFIED fallback. The judge
+# (small JSON verdicts) keeps GPT_TIMEOUT.
+CLEANUP_TIMEOUT = 900
 MAX_VERIFY_ROUNDS = 2
 
 # Deep-report defaults: Fable 5 writes, DeepSeek judges/cleans. These are
@@ -646,7 +658,8 @@ def _make_runners(resolved, client, model, tool_log, totals,
         _add(i, o, r)
         return t, i, o, r, meta.get("stop_reason")
 
-    def _text_once(prompt: str, label: str, max_tokens: int, no_thinking: bool = False):
+    def _text_once(prompt: str, label: str, max_tokens: int, no_thinking: bool = False,
+                   timeout: float | None = None):
         """(text, tin, tout, finish_reason). finish_reason is None on anthropic."""
         # Transient connection errors must not kill a 20-minute pipeline run
         # (2026-08-07: one APIConnectionError mid-verify vaporized a finished
@@ -674,7 +687,7 @@ def _make_runners(resolved, client, model, tool_log, totals,
                         max_tokens=max_tokens,
                         temperature=deep_verify.JUDGE_TEMPERATURE,
                         messages=[{"role": "user", "content": prompt}],
-                        timeout=llm_client.GPT_TIMEOUT,
+                        timeout=timeout or llm_client.GPT_TIMEOUT,
                         **kw,
                     )
                     usage = resp.usage or type("U", (), {"prompt_tokens": 0, "completion_tokens": 0})()
@@ -697,7 +710,7 @@ def _make_runners(resolved, client, model, tool_log, totals,
     return (revise_runner,
             lambda p: _text_once(p, "verify-judge ", deep_verify.JUDGE_MAX_TOKENS,
                                  no_thinking=True),
-            lambda p: _text_once(p, "verify-cleanup ", MAX_TOKENS))
+            lambda p: _text_once(p, "verify-cleanup ", MAX_TOKENS, timeout=CLEANUP_TIMEOUT))
 
 
 def generate(code: str, provider: str | None = None, data: dict | None = None,
