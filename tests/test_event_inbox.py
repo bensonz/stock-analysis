@@ -684,6 +684,23 @@ def test_call_model_uses_the_pipeline_openai_model_without_tools(real_call_model
     assert fake.kw["messages"] == [{"role": "user", "content": "PROMPT"}]
 
 
+def test_call_model_turns_deepseek_thinking_off(real_call_model):
+    """Owner 2026-10-13: triage is a simple sort; reasoning took ~295 s."""
+    fake = _FakeOpenAI('{"decisions": {}}')
+    real_call_model.setattr(llm_client, "_build_openai_client", lambda: fake)
+    et.call_model("PROMPT")
+    assert fake.kw["extra_body"] == {"thinking": {"type": "disabled"}}
+
+
+def test_call_model_sends_no_thinking_field_to_other_models(real_call_model):
+    """Other OpenAI-compatible endpoints may reject an unknown body field."""
+    real_call_model.setattr(llm_client, "OPENAI_MODEL", "gpt-5.4")
+    fake = _FakeOpenAI('{"decisions": {}}')
+    real_call_model.setattr(llm_client, "_build_openai_client", lambda: fake)
+    et.call_model("PROMPT")
+    assert "extra_body" not in fake.kw
+
+
 def test_call_model_refuses_a_truncated_reply(real_call_model):
     real_call_model.setattr(llm_client, "_build_openai_client",
                             lambda: _FakeOpenAI('{"decisions": {', finish="length"))

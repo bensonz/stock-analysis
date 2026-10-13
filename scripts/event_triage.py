@@ -35,6 +35,11 @@ TEMPERATURE = 0.0
 #: ran ~295 s against 180 (the endpoint keeps the connection alive while it
 #: thinks). event_inbox.triage() bounds the wall time instead.
 CALL_TIMEOUT_SEC = 180
+#: Owner 2026-10-13: triage is a simple sort, and a missed or extra event is
+#: cheap, so DeepSeek thinking is OFF (the first call, with it on, took ~295 s).
+#: DeepSeek's documented switch; sent only to deepseek-* models, because other
+#: OpenAI-compatible endpoints may reject an unknown body field.
+DEEPSEEK_EXTRA_BODY = {"thinking": {"type": "disabled"}}
 
 _WEEKDAY_ZH = "一二三四五六日"
 
@@ -87,9 +92,11 @@ def call_model(prompt: str) -> tuple[str, dict]:
     else:
         client = llm_client._build_openai_client()
         model = llm_client.OPENAI_MODEL
+        extra = ({"extra_body": DEEPSEEK_EXTRA_BODY}
+                 if model.lower().startswith("deepseek") else {})
         resp = client.chat.completions.create(
             model=model, messages=messages, max_tokens=MAX_OUTPUT_TOKENS,
-            temperature=TEMPERATURE, timeout=CALL_TIMEOUT_SEC)
+            temperature=TEMPERATURE, timeout=CALL_TIMEOUT_SEC, **extra)
         choice = resp.choices[0]
         text = choice.message.content or ""
         usage = resp.usage

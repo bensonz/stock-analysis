@@ -19,5 +19,4 @@
       lists 美国9月CPI 2026-10-14 20:30 Beijing (impact 10-15). The fuzzy
       dedupe matched them (±1 day) so no inbox item was raised — fix the date by hand.
 - [x] Raise MIN_IMPORTANCE to 4 (owner 2026-10-12: 91 items at >=3, mostly noise).
-- [ ] Owner: decide whether event triage should run with DeepSeek reasoning
-      off (seconds instead of ~5 min for a 22-row burst; D19).
+- [x] Owner 2026-10-13: run event triage with DeepSeek reasoning OFF (D20).

@@ -197,3 +197,17 @@ Not done: turning reasoning off (`extra_body={"thinking": {"type":
 "disabled"}}`, as deep_report's judge does). It would cut the call to seconds,
 but the live decisions came from reasoning-on, and the choice of "how much
 thinking an event judgement deserves" is the owner's.
+
+## D20. DeepSeek thinking OFF for triage (owner, 2026-10-13)
+Owner: triage is a simple sort that needs no complex reasoning, and a missed or
+extra event is cheap. `event_triage.call_model` sends DeepSeek's documented
+switch `extra_body={"thinking": {"type": "disabled"}}` (thinking is on by
+default, effort high — api-docs.deepseek.com/guides/thinking_mode). It is sent
+only when the model name starts with `deepseek`, because other
+OpenAI-compatible endpoints may reject an unknown body field; the anthropic
+branch is unchanged. Live check: a 1-row call took 1.3 s and 34 output tokens
+(the 22-row call with thinking on took ~295 s and 15185). The D19 wall-clock
+deadline and token ceiling stay as a backstop. The 22 decisions of 2026-10-12
+were made with thinking on and are not re-run; the weekly audit's override
+rate (WEEKLY_AUDIT C5) is where a drop in quality would show.
+
