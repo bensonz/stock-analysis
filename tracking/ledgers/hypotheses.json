@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-10-12",
+  "lastUpdated": "2026-10-13",
   "hypotheses": [
     {
       "id": "h001",
@@ -1246,7 +1246,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-10-12",
+      "lastTested": "2026-10-13",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1597,11 +1597,15 @@
           {
             "date": "2026-10-12",
             "detail": "今日top5全部为防御/应用端（影视院线/出版/农商行），策略池26只股票无一属于今日top5板块——恐慌日宁可空仓也不追防御主题的短期脉冲"
+          },
+          {
+            "date": "2026-10-13",
+            "detail": "弱盘(0.53:1)+策略池无一候选落在今日top5板块时，正确决策是new_positions=[]持币，而非勉强挑一个平庸setup入场——'弱盘+平庸setup=跳过'纪律再次执行"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 87,
+      "sampleSize": 88,
       "hitRate": 1.0,
       "confidence": 0.989,
       "tags": [
@@ -2596,7 +2600,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-09-30",
+      "lastTested": "2026-10-13",
       "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes.",
       "evidence": {
         "supporting": [
@@ -2843,11 +2847,15 @@
           {
             "date": "2026-09-30",
             "detail": "医疗服务(#3热)内唯一合规RPS候选益诺思因dist_ma10+9.2%/dist_ma20+16.6%被Rule 2b拦截——验证'热门板块不覆盖追高风险'(h027)在医疗板块同样成立"
+          },
+          {
+            "date": "2026-10-13",
+            "detail": "中红医疗RPS120=94.12在甜区但dist_ma10+8.4%/dist_ma20+20.3%触发Rule 2b硬拦截——再次验证'甜区RPS≠可追高'，均线偏离才是短期风险的真实度量"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 61,
+      "sampleSize": 62,
       "hitRate": 1.0,
       "confidence": 0.984,
       "tags": [
@@ -4484,7 +4492,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-10-09",
+      "lastTested": "2026-10-13",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4583,13 +4591,17 @@
           {
             "date": "2026-10-09",
             "detail": "CRO持仓今日板块性回调（药明-2.59%）但订单面强（药明上调全年指引至585-605亿、昭衍H1新签+98%，来源:东财研报/21经济网）——板块未入bottom5、个股止损未近，判定为回吐而非逻辑破坏，继续HOLD"
+          },
+          {
+            "date": "2026-10-13",
+            "detail": "医疗服务今日首次落入bottom5(-2.16%)，持仓昭衍新药/药明康德需盯3日冷区规则；CRO龙头虽已锁+10%止损，但板块转冷是比个股浮盈更早的领先信号"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 24,
+      "sampleSize": 25,
       "hitRate": 1.0,
-      "confidence": 0.962,
+      "confidence": 0.963,
       "tags": [
         "sector",
         "exit-rule"
@@ -7330,7 +7342,7 @@
       "type": "heuristic",
       "status": "validated",
       "created": "2026-08-18",
-      "lastTested": "2026-09-22",
+      "lastTested": "2026-10-13",
       "mechanism": "重入标的往往是已被市场证明弱势的名字，首次离场即是对thesis的否定信号，除非出现新的突破结构，否则大概率延续弱势",
       "evidence": {
         "supporting": [
@@ -7353,13 +7365,17 @@
           {
             "date": "2026-09-22",
             "detail": "重入纪律验证：恒逸石化9/14以+8.85%离场后仍留池内，但行业未热、无新催化，不重入——重入账本n=9均值-3.71%胜率11%，举证责任在重入一方"
+          },
+          {
+            "date": "2026-10-13",
+            "detail": "重入纪律再次生效：普洛药业10-09刚止损离场(+1.78%)，今日现价24.63与离场价24.53几乎无差，无价位/形态/催化差异，默认不重入"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 5,
+      "sampleSize": 6,
       "hitRate": 1.0,
-      "confidence": 0.857,
+      "confidence": 0.875,
       "tags": [
         "entry-filter"
       ],

@@ -1,0 +1,56 @@
+{
+  "as_of": "2026-10-13",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 23,
+    "new": 1,
+    "pending": 1,
+    "expired": 0,
+    "ai_retired": 1,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 18,
+    "decided": 2,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 2,
+    "fetch_errors": 0,
+    "empty_days": 18,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 1,
+    "kept": 0,
+    "skipped": 1,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261127-77abe93e",
+        "name": "中国商务部：中美双方约定在今年11月底前举行下一次人工智能对话",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "中美AI对话为事务性沟通，非系统性政策事件，对A股整体影响有限"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1627,
+    "tokens_out": 80
+  },
+  "pending_items": []
+}

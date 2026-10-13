@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 175341,
+  "output_tokens": 17271,
+  "rounds": 3,
+  "duration_sec": 205.5,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月13日 下跌 原因 市场 调整",
+        "max_results": 6
+      },
+      "result_length": 3808
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "医疗服务 CRO 板块 下跌 2026年10月",
+        "max_results": 6
+      },
+      "result_length": 3690
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "招商轮船 油运 VLCC 运价 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3525
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+元件+商用车+领涨",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=旅游及景区+板块+上涨+今日+原因",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 5000,
+        "url": "https://www.baidu.com/s?wd=元件板块+PCB+被动元件+上涨+原因+2026年10月"
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 5000,
+        "url": "https://www.baidu.com/s?wd=商用车+板块+上涨+原因+2026年10月"
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 5000,
+        "url": "https://www.baidu.com/s?wd=互联网电商+板块+领涨+原因+2026年10月"
+      },
+      "result_length": 5000
+    }
+  ],
+  "fallback_used": false
+}

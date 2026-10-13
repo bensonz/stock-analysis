@@ -16,14 +16,6 @@
 
 _更新: 2026-10-13 · 共 21 条 · 待定 0 条_
 
-## 2026-10-12 (T--1) 泰国 — 泰国IMF与世界银行年会：多国央行行长集中亮相、沃什发表讲话
-- [x] keep 🤖   impact: medium   direction: two_sided
-  date: 2026-10-12   tz: CN   kind: other
-  note:
-  ai: 保留 · medium/two_sided · IMF/世行年会是系统性政策场合，多国央行行长讲话或释放政策信号（deepseek-v4-pro，2026-10-12）
-  src: wallstreetcn imp=4 北京 2026-10-12 12:02 |
-  id: wscn-20261012-0a40cdd0
-
 ## 2026-10-13 (T-0) 美国 — 美国继续关注中东局势，特朗普改口称“可能”中选前对伊朗采取军事行动
 - [-] keep 🤖   impact: high   direction: risk
   date: 2026-10-12   tz: US   kind: other
@@ -183,3 +175,11 @@ _更新: 2026-10-13 · 共 21 条 · 待定 0 条_
   ai: 跳过 · medium/two_sided · 普京出席系APEC领导人会议组成部分，与APEC事件重复（deepseek-v4-pro，2026-10-12）
   src: wallstreetcn imp=4 北京 2026-11-18 00:00 |
   id: wscn-20261118-35908d3e
+
+## 2026-11-27 (T-45) 中国 — 中国商务部：中美双方约定在今年11月底前举行下一次人工智能对话
+- [-] keep 🤖   impact: low   direction: two_sided
+  date: 2026-11-27   tz: CN   kind: other
+  note:
+  ai: 跳过 · low/two_sided · 中美AI对话为事务性沟通，非系统性政策事件，对A股整体影响有限（deepseek-v4-pro，2026-10-13）
+  src: wallstreetcn imp=4 北京 2026-11-27 12:02 |
+  id: wscn-20261127-77abe93e

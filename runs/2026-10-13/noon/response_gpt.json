@@ -1,0 +1,218 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "旅游及景区",
+        "5d_pct": 2.26,
+        "trend": "steady"
+      },
+      {
+        "name": "元件",
+        "5d_pct": 2.05,
+        "trend": "steady"
+      },
+      {
+        "name": "商用车",
+        "5d_pct": 1.98,
+        "trend": "steady"
+      },
+      {
+        "name": "互联网电商",
+        "5d_pct": 1.92,
+        "trend": "steady"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": 1.58,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "电池",
+        "5d_pct": -3.47,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "风电设备",
+        "5d_pct": -3.21,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "能源金属",
+        "5d_pct": -3.09,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "光伏设备",
+        "5d_pct": -2.24,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "医疗服务",
+        "5d_pct": -2.16,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/3持仓在今日热门板块；2/3持仓（昭衍新药、药明康德）的医疗服务今日首次落入bottom5",
+    "regime": "弱市避险轮动：低位防御题材领涨，新能源产业链集体杀跌，医疗服务转冷"
+  },
+  "position_decisions": [
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "油运超级周期未变（BDTI较2025年初约5倍，招商轮船H1净利+228%，来源:中国水运网/网易）；今日+4.5%抗跌（input价格数据），保本止损19.29未触发，浮盈+8.35%；航运港口未入bottom5，让赢家奔跑",
+      "sector_rank": "中性（今日未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 8.35,
+      "days_held": 24,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+16.08%，止损已锁+10%(47.14)未触发；医疗服务今日首次落入bottom5(-2.16%，第1天转冷)，未触发3日冷区卖出规则，flag观察；CRO龙头逻辑未破坏",
+      "sector_rank": "bottom（医疗服务今日-2.16%入bottom5，第1天）",
+      "new_stop": null,
+      "pnl_pct": 16.08,
+      "days_held": 17,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+22.96%，止损已锁+10%(139.15)未触发；医疗服务今日首次落入bottom5(-2.16%，第1天转冷)，未触发3日冷区卖出规则；若板块连续3日居bottom30%则按Rule 1卖出",
+      "sector_rank": "bottom（医疗服务今日-2.16%入bottom5，第1天）",
+      "new_stop": null,
+      "pnl_pct": 22.96,
+      "days_held": 48,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "000739",
+      "name": "普洛药业",
+      "reason": "重入禁止：10-09刚以+1.78%止损离场（stop_proximity+time_decay+近跌停三重叠加），现价24.63与离场价24.53几乎无差，无价位/形态/催化差异；RPS120=94.74扩展区但化学制药非top10%板块且有1项抛压风险，不满足扩展区豁免",
+      "rps120": 94.74
+    },
+    {
+      "code": "300981",
+      "name": "中红医疗",
+      "reason": "Rule 2b硬拦截：dist_ma10 +8.4%>8%、dist_ma20 +20.3%>12%，严重超买，不可追高",
+      "rps120": 94.12
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "医疗服务今日bottom5(-2.16%)，Rule 1板块冷区不买入；PE 554.8极高",
+      "rps120": 94.6
+    },
+    {
+      "code": "300404",
+      "name": "博济医药",
+      "reason": "医疗服务今日bottom5；现价13.17低于MA10(14.39)，dist_ma10 -8.5%走弱非强势",
+      "rps120": 94.19
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "RPS20仅12.53短期动量崩塌，现价34.8低于MA5/10/20全线；工业金属/铜今日未入top5",
+      "rps120": 92.59
+    },
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "现价11.29深度跌破均线（dist_ma20 -17.9%），下跌趋势非动量",
+      "rps120": 94.15
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "现价14.37深度跌破均线（dist_ma20 -14.0%），走弱非强势",
+      "rps120": 89.58
+    },
+    {
+      "code": "600546",
+      "name": "山煤国际",
+      "reason": "煤炭年内强但今日未入top5；RPS20=53.37短期动量平庸；margin signal=deleveraging；弱盘下平庸setup跳过",
+      "rps120": 88.92
+    },
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "reason": "银行今日未入top5，防御板块非动量首选；VCP SETUP但contraction_ratio 0.56偏松",
+      "rps120": 87.63
+    },
+    {
+      "code": "603519",
+      "name": "立霸股份",
+      "reason": "家电零部件今日未入top5，板块不符合Rule 1",
+      "rps120": 91.81
+    },
+    {
+      "code": "001378",
+      "name": "德冠新材",
+      "reason": "膜材料今日未入top5；2027-04-30解禁49.08%股本",
+      "rps120": 90.43
+    },
+    {
+      "code": "600428",
+      "name": "中远海特",
+      "reason": "航运港口今日未入top5；现价10.65低于MA5/10/20",
+      "rps120": 88.81
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱盘(0.53:1)+策略池无一候选落在今日top5板块时，正确决策是new_positions=[]持币，而非勉强挑一个平庸setup入场——'弱盘+平庸setup=跳过'纪律再次执行",
+      "type": "rule",
+      "tags": [
+        "sector",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "板块重力优先于个股；弱盘下无热门板块支撑的个股缺乏后续买盘，入场胜率低"
+    },
+    {
+      "text": "医疗服务今日首次落入bottom5(-2.16%)，持仓昭衍新药/药明康德需盯3日冷区规则；CRO龙头虽已锁+10%止损，但板块转冷是比个股浮盈更早的领先信号",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "板块转冷先于个股走弱，连续3日bottom30%触发Rule 1卖出"
+    },
+    {
+      "text": "中红医疗RPS120=94.12在甜区但dist_ma10+8.4%/dist_ma20+20.3%触发Rule 2b硬拦截——再次验证'甜区RPS≠可追高'，均线偏离才是短期风险的真实度量",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "短期涨幅过大后均值回归概率高，MA偏离>阈值时即使RPS在甜区也是追高"
+    },
+    {
+      "text": "重入纪律再次生效：普洛药业10-09刚止损离场(+1.78%)，今日现价24.63与离场价24.53几乎无差，无价位/形态/催化差异，默认不重入",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h165",
+      "mechanism": "重入历史n=9均值-3.71%胜率11%，举证责任在重入方，无差异则放弃"
+    }
+  ],
+  "market_summary": "弱市防守：上涨1842/下跌3503（0.53:1），三大指数全绿（上证-0.27%/深成-0.78%/创业板-0.95%），涨停46/跌停8，regime=weak按0.5倍仓位；IV rank均值0.57偏悲观/selective。热门板块(top5)：旅游及景区+2.26%、元件+2.05%、商用车+1.98%、互联网电商+1.92%、林业Ⅱ+1.58%；冷门板块(bottom5)：电池-3.47%、风电设备-3.21%、能源金属-3.09%、光伏设备-2.24%、医疗服务-2.16%。持仓板块对齐：0/3在热门板块，2/3（昭衍新药、药明康德）的医疗服务今日首次落入bottom5。策略池候选无一落在今日top5板块，弱盘下不新开仓，持币观望",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}
