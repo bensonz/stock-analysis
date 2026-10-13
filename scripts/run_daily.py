@@ -14,6 +14,7 @@ Usage:
     python scripts/run_daily.py --run --llm-provider anthropic         # Full pipeline with Claude only
     python scripts/run_daily.py --run --no-commit                      # Full pipeline without git commit
     python scripts/run_daily.py --run --legacy-llm                     # Full pipeline with old 4-pass LLM approach
+    python scripts/run_daily.py --run --reuse-phase1                   # Re-run a failed slot from its saved phase1.json (no fetch)
     python scripts/run_daily.py                    # Phase 1+2 only (outputs prompt to stdout, legacy mode)
     python scripts/run_daily.py --phase1           # Data collection only
     python scripts/run_daily.py --apply FILE       # Apply LLM response from file (Phase 3+4)
@@ -1425,6 +1426,56 @@ def phase1_collect(date: str, slot: str) -> dict:
     return data
 
 
+class ReusePhase1Error(RuntimeError):
+    """A saved phase-1 collection cannot be reused for this run."""
+
+
+def load_saved_phase1(run_dir: Path, date: str, slot: str,
+                      snapshot_fn=snapshot_positions) -> tuple[dict, dict]:
+    """Reload a slot's saved phase-1 data for ``--run --reuse-phase1``.
+
+    A Gate 2 failure leaves the book untouched, so the slot's collection is
+    still the truth — re-fetching it costs ~4 min for nothing. Refuses when the
+    file belongs to another date/slot or when the book has moved since it was
+    collected (the prompt would describe positions that no longer exist).
+
+    Returns ``(data, prior_phases)``: the data with the keys the save strips
+    re-attached exactly as ``phase1_collect`` builds them, and the prior
+    manifest's phases (empty when it has none).
+    """
+    phase1_file = run_dir / "phase1.json"
+    if not phase1_file.exists():
+        raise ReusePhase1Error(f"no saved collection at {phase1_file} — run without --reuse-phase1")
+    data = json.loads(phase1_file.read_text(encoding="utf-8"))
+    if (data.get("date"), data.get("slot")) != (date, slot):
+        raise ReusePhase1Error(
+            f"{phase1_file} is for {data.get('date')} [{data.get('slot')}], "
+            f"this run is {date} [{slot}]")
+
+    snap_file = run_dir / "input" / "positions_snapshot.json"
+    if not snap_file.exists():
+        raise ReusePhase1Error(f"no pre-run snapshot at {snap_file} — cannot prove the book is unchanged")
+    saved = json.loads(snap_file.read_text(encoding="utf-8"))
+    current = snapshot_fn("pre_run", date)
+    for key in ("active_positions", "closed_positions"):
+        if saved.get(key) != current.get(key):
+            raise ReusePhase1Error(
+                f"book changed since collection ({key} differs from {snap_file}) — "
+                "run without --reuse-phase1")
+
+    hyp_data = load_hypotheses()
+    data["hypothesis_prompt"] = hypothesis_prompt(hyp_data)
+    data["_hypothesis_data"] = hyp_data
+    learnings_file = PROJECT_ROOT / "LEARNINGS.md"
+    data["learnings"] = learnings_file.read_text(encoding="utf-8") if learnings_file.exists() else ""
+
+    prior_phases = {}
+    manifest_file = run_dir / "manifest.json"
+    if manifest_file.exists():
+        prior_phases = json.loads(manifest_file.read_text(encoding="utf-8")).get("phases") or {}
+    return data, prior_phases
+
+
 _HTML_TAG_RE = re.compile(r"<[^>]+>")
 # Event entries that merely restate relative price strength (already sent as
 # rps120/rps60 structured numbers) — drop them as prompt-only noise.
@@ -2364,6 +2415,10 @@ def main():
     slot = resolve_slot(slot_override, run_start)
     run_started_at_iso = run_start.isoformat()
 
+    if "--reuse-phase1" in args and "--run" not in args:
+        print("--reuse-phase1 only works with --run", file=sys.stderr)
+        sys.exit(1)
+
     if "--list-runs" in args:
         list_runs()
         return
@@ -2418,96 +2473,156 @@ def main():
             provider_label = normalize_llm_provider(llm_provider)
 
         no_commit = "--no-commit" in args
+        reuse_phase1 = "--reuse-phase1" in args
 
         print(f"{'='*60}", file=sys.stderr)
         print(f"Stock Analysis Pipeline — {date} [{slot}] (full auto, {provider_label})", file=sys.stderr)
         print(f"{'='*60}", file=sys.stderr)
 
-        # Pre-flight: Source health check
-        print("Pre-flight: Checking data sources...", file=sys.stderr)
-        health = check_source_health()
-        for src, status in health.items():
-            icon = "✓" if status.get("status") == "ok" else "✗" if status.get("status") in ("down", "proxy_blocked") else "⚠"
-            latency = f" ({status['latency_ms']:.0f}ms)" if "latency_ms" in status else ""
-            extra = f" — {status.get('error', '')}" if status.get("error") else ""
-            if src == "pricedb" and status.get("latest_date"):
-                extra = f" (latest: {status['latest_date']}, stale: {status.get('stale')})"
-            print(f"  {icon} {src}: {status['status']}{latency}{extra}", file=sys.stderr)
-
-        run_dir = get_run_dir(date, slot)
-        manifest = RunManifest(
-            date=date,
-            status=PipelineStatus.SUCCESS,
-            slot=slot,
-            run_started_at=run_started_at_iso,
-        )
-        manifest.add_phase("health_check", "ok", details={"sources": health})
-
-        # Warn if critical sources are all down
-        sina_down = health.get("sina", {}).get("status") != "ok"
-        cf_down = health.get("cheesefortune", {}).get("status") != "ok"
-        if sina_down and cf_down:
-            print("  ✗ ALL external data sources are down — pipeline will likely fail", file=sys.stderr)
-
-        # Pre-flight: refresh local pricedb and hard-gate on staleness.
-        # Done here (not inside phase1) so we refuse to start analysis on stale closes.
-        preflight_pricedb_or_exit(manifest)
-
-        # Phase 1: Collect (+ Gate 1), with ONE partial-day auto-heal retry.
-        # Under the eastmoney throttle the settled-day fetch can die mid-sweep
-        # (24-141 of ~5211 rows, three manual repairs in four sessions to
-        # 2026-08-10); the cure is deterministic and proven, so the pipeline
-        # now runs it itself: sina repair sweep (+factor heal inside) + RPS
-        # recompute, then re-collect. Still halts if the sweep fails, and the
-        # sweep only touches settled dates — never intraday bars.
-        for gate1_attempt in (1, 2):
-            data = phase1_collect(date, slot)
-
-            # Save Phase 1 data
-            phase1_file = run_dir / "phase1.json"
-            save_data = {k: v for k, v in data.items() if k not in ("learnings", "_hypothesis_data", "hypothesis_prompt")}
-            phase1_file.write_text(
-                json.dumps(save_data, ensure_ascii=False, indent=2, default=str) + "\n",
-                encoding="utf-8",
+        if reuse_phase1:
+            # Re-run from the slot's saved collection: skip health check,
+            # pricedb preflight and phase 1. The prior manifest's phases are
+            # carried over — they are the conditions the reused data was
+            # collected under, and the doctor audits them.
+            run_dir = get_run_dir(date, slot)
+            try:
+                data, prior_phases = load_saved_phase1(run_dir, date, slot)
+            except ReusePhase1Error as e:
+                print(f"✗ --reuse-phase1: {e}", file=sys.stderr)
+                sys.exit(1)
+            collected_at = (data.get("_log_phase1") or {}).get("start")
+            age_min = (time.time() - collected_at) / 60 if collected_at else None
+            age = f"{age_min:.0f} min ago" if age_min is not None else "at an unknown time"
+            print(f"♻ REUSING phase-1 data collected {age} — no fetch, prices are as of then",
+                  file=sys.stderr)
+            manifest = RunManifest(
+                date=date,
+                status=PipelineStatus.SUCCESS,
+                slot=slot,
+                run_started_at=run_started_at_iso,
             )
-
-            # Gate 1: Validate Phase 1 output
-            print(f"\nGate 1: Validating Phase 1 data...", file=sys.stderr)
+            for name in ("health_check", "preflight_pricedb"):
+                if name in prior_phases:
+                    manifest.phases[name] = prior_phases[name]
+            print(f"\nGate 1: Validating reused Phase 1 data...", file=sys.stderr)
             gate1 = validate_phase1_gate(data)
             manifest.add_gate(gate1)
+            # duration_sec 0: no collection ran; the original lives in
+            # collect.reused_duration_sec.
             manifest.add_phase("collect", "ok" if gate1.passed else "failed",
-                               duration_sec=data.get("_log_phase1", {}).get("duration_sec", 0),
-                               details={"errors": data.get("_log_phase1", {}).get("errors", [])})
+                               details={"reused_phase1": True,
+                                        "collected_at": collected_at,
+                                        "reused_duration_sec": (data.get("_log_phase1") or {}).get("duration_sec"),
+                                        "errors": (data.get("_log_phase1") or {}).get("errors", [])})
+            for w in gate1.soft_warns:
+                print(f"  ⚠ {w}", file=sys.stderr)
+            if not gate1.passed:
+                # No auto-heal here: it re-collects, which this flag exists to avoid.
+                for f in gate1.hard_fails:
+                    print(f"  ✗ {f}", file=sys.stderr)
+                write_manifest(manifest, run_dir)
+                print(f"Pipeline FAILED at Gate 1 on reused data — run without --reuse-phase1",
+                      file=sys.stderr)
+                print(json.dumps({
+                    "date": date,
+                    "status": "failed",
+                    "failed_at": "gate1_phase1_validation",
+                    "hard_fails": gate1.hard_fails,
+                    "soft_warns": gate1.soft_warns,
+                }, ensure_ascii=False))
+                sys.exit(1)
+            # log.json keeps the original collect entry; mark it so its
+            # duration_sec isn't read as time this run spent.
+            if data.get("_log_phase1"):
+                data["_log_phase1"]["reused_phase1"] = True
+            print(f"  ✓ Gate 1 passed", file=sys.stderr)
 
-            if gate1.soft_warns:
-                for w in gate1.soft_warns:
-                    print(f"  ⚠ {w}", file=sys.stderr)
+        else:
+            # Pre-flight: Source health check
+            print("Pre-flight: Checking data sources...", file=sys.stderr)
+            health = check_source_health()
+            for src, status in health.items():
+                icon = "✓" if status.get("status") == "ok" else "✗" if status.get("status") in ("down", "proxy_blocked") else "⚠"
+                latency = f" ({status['latency_ms']:.0f}ms)" if "latency_ms" in status else ""
+                extra = f" — {status.get('error', '')}" if status.get("error") else ""
+                if src == "pricedb" and status.get("latest_date"):
+                    extra = f" (latest: {status['latest_date']}, stale: {status.get('stale')})"
+                print(f"  {icon} {src}: {status['status']}{latency}{extra}", file=sys.stderr)
 
-            if gate1.passed:
-                break
-            if gate1_attempt == 1 and any("partial" in f for f in gate1.hard_fails) \
-                    and attempt_partial_day_autoheal(data):
-                manifest.add_phase("auto_heal", "ok")
-                continue
+            run_dir = get_run_dir(date, slot)
+            manifest = RunManifest(
+                date=date,
+                status=PipelineStatus.SUCCESS,
+                slot=slot,
+                run_started_at=run_started_at_iso,
+            )
+            manifest.add_phase("health_check", "ok", details={"sources": health})
 
-            for f in gate1.hard_fails:
-                print(f"  ✗ {f}", file=sys.stderr)
-            write_manifest(manifest, run_dir)
-            print(f"\n{'='*60}", file=sys.stderr)
-            print(f"Pipeline FAILED at Gate 1 with {len(gate1.hard_fails)} hard failure(s)", file=sys.stderr)
-            print(f"No LLM call made. No positions modified.", file=sys.stderr)
-            print(f"{'='*60}", file=sys.stderr)
-            # Print machine-readable failure to stdout for cron
-            print(json.dumps({
-                "date": date,
-                "status": "failed",
-                "failed_at": "gate1_phase1_validation",
-                "hard_fails": gate1.hard_fails,
-                "soft_warns": gate1.soft_warns,
-            }, ensure_ascii=False))
-            sys.exit(1)
+            # Warn if critical sources are all down
+            sina_down = health.get("sina", {}).get("status") != "ok"
+            cf_down = health.get("cheesefortune", {}).get("status") != "ok"
+            if sina_down and cf_down:
+                print("  ✗ ALL external data sources are down — pipeline will likely fail", file=sys.stderr)
 
-        print(f"  ✓ Gate 1 passed", file=sys.stderr)
+            # Pre-flight: refresh local pricedb and hard-gate on staleness.
+            # Done here (not inside phase1) so we refuse to start analysis on stale closes.
+            preflight_pricedb_or_exit(manifest)
+
+            # Phase 1: Collect (+ Gate 1), with ONE partial-day auto-heal retry.
+            # Under the eastmoney throttle the settled-day fetch can die mid-sweep
+            # (24-141 of ~5211 rows, three manual repairs in four sessions to
+            # 2026-08-10); the cure is deterministic and proven, so the pipeline
+            # now runs it itself: sina repair sweep (+factor heal inside) + RPS
+            # recompute, then re-collect. Still halts if the sweep fails, and the
+            # sweep only touches settled dates — never intraday bars.
+            for gate1_attempt in (1, 2):
+                data = phase1_collect(date, slot)
+
+                # Save Phase 1 data
+                phase1_file = run_dir / "phase1.json"
+                save_data = {k: v for k, v in data.items() if k not in ("learnings", "_hypothesis_data", "hypothesis_prompt")}
+                phase1_file.write_text(
+                    json.dumps(save_data, ensure_ascii=False, indent=2, default=str) + "\n",
+                    encoding="utf-8",
+                )
+
+                # Gate 1: Validate Phase 1 output
+                print(f"\nGate 1: Validating Phase 1 data...", file=sys.stderr)
+                gate1 = validate_phase1_gate(data)
+                manifest.add_gate(gate1)
+                manifest.add_phase("collect", "ok" if gate1.passed else "failed",
+                                   duration_sec=data.get("_log_phase1", {}).get("duration_sec", 0),
+                                   details={"errors": data.get("_log_phase1", {}).get("errors", [])})
+
+                if gate1.soft_warns:
+                    for w in gate1.soft_warns:
+                        print(f"  ⚠ {w}", file=sys.stderr)
+
+                if gate1.passed:
+                    break
+                if gate1_attempt == 1 and any("partial" in f for f in gate1.hard_fails) \
+                        and attempt_partial_day_autoheal(data):
+                    manifest.add_phase("auto_heal", "ok")
+                    continue
+
+                for f in gate1.hard_fails:
+                    print(f"  ✗ {f}", file=sys.stderr)
+                write_manifest(manifest, run_dir)
+                print(f"\n{'='*60}", file=sys.stderr)
+                print(f"Pipeline FAILED at Gate 1 with {len(gate1.hard_fails)} hard failure(s)", file=sys.stderr)
+                print(f"No LLM call made. No positions modified.", file=sys.stderr)
+                print(f"{'='*60}", file=sys.stderr)
+                # Print machine-readable failure to stdout for cron
+                print(json.dumps({
+                    "date": date,
+                    "status": "failed",
+                    "failed_at": "gate1_phase1_validation",
+                    "hard_fails": gate1.hard_fails,
+                    "soft_warns": gate1.soft_warns,
+                }, ensure_ascii=False))
+                sys.exit(1)
+
+            print(f"  ✓ Gate 1 passed", file=sys.stderr)
 
         # Phase 2: Build prompt and call LLM
         phase2_label = "legacy 4-pass" if legacy_llm else provider_label

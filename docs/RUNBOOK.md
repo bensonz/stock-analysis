@@ -41,6 +41,8 @@ tail -f data/launchd/pipeline.log      # watch a scheduled run live
 python3 scripts/run_daily.py --run                    # the full pipeline, ~5 min
 python3 scripts/run_daily.py --run --no-commit        # ... without the git commit
 python3 scripts/run_daily.py --run --slot noon        # force a slot
+python3 scripts/run_daily.py --run --reuse-phase1     # re-run a failed slot from its saved
+                                                      # phase1.json: no fetch, LLM onward (~10 min less)
 python3 scripts/run_daily.py --phase1                 # data collection only, no LLM
 python3 scripts/run_daily.py --list-runs              # history with status
 ```
@@ -49,6 +51,15 @@ A manual `--run` is *identical* to the scheduled one — same phases, same gates
 same commit. Re-running a slot is safe by design: decisions recompute on
 current data, HOLDs are idempotent, and the gates fail closed, so a broken run
 leaves the portfolio untouched.
+
+When the run failed **after** collection (Gate 2: the LLM answer was invalid),
+add `--reuse-phase1`. It skips the health check, the price-DB preflight and
+phase 1, loads `runs/<date>/<slot>/phase1.json`, and runs Gate 1 → LLM →
+apply → commit. It refuses (exit 1, nothing written) when the file is for
+another date/slot, or when the book changed since `input/positions_snapshot.json`.
+Prices are as of the original collection — it prints their age. For the
+afternoon slot that is the settled close; for noon, a reuse hours later
+analyses stale intraday prices, so collect again instead.
 
 ### The three things to know first
 
@@ -185,6 +196,7 @@ Failure patterns seen in production, fastest diagnosis first:
 | run failed at Gate 1, "all sources down" | `nslookup hq.sinajs.cn` | DNS/network outage — data, not code. Re-run when it resolves. |
 | "Pricedb is stale — refusing" | `pricedb.py status` | update couldn't fetch; run `update` by hand, then re-run |
 | run dir exists, no manifest, no audit | `tail data/launchd/pipeline.log` | died before writing the manifest, or still running — check `pgrep -f run_daily` |
+| run failed at Gate 2 (LLM answer invalid, e.g. missing `target`) | `manifest.json` gates | model output, not data — `--run --reuse-phase1` re-asks the LLM on the same data |
 | push failed | — | transient; the commit is local and the next run pushes it |
 | doctor: "股票列表未在当日刷新" | `pricedb.py stocks` | akshare listing endpoint down — run `stocks` then `update` by hand; 3 in a row = look at the code |
 | doctor: "AI 事件分拣失败" | `event_inbox.py triage` | the event-triage LLM call failed or gave invalid judgements; items stay `[ ]` and retry each run. Check `.env` LLM_PROVIDER / OPENAI_*; 3 in a row = fix config or `agents/EVENT_TRIAGE.md` |

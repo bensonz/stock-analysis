@@ -50,6 +50,8 @@ python3 scripts/run_daily.py --run
 python3 scripts/run_daily.py --run --llm-provider anthropic   # or openai / hybrid
 python3 scripts/run_daily.py --run --no-commit                # skip the git commit
 python3 scripts/run_daily.py --slot noon --run                # force slot (default: auto from clock)
+python3 scripts/run_daily.py --run --reuse-phase1             # re-run a failed slot from its saved phase1.json
+                                                               # (no fetch; refuses if date/slot/book differ)
 python3 scripts/run_daily.py --run --allow-non-trading-day     # --run exits 0 with no run dir on
                                                                # holidays/weekends (akshare calendar;
                                                                # weekday fallback if it is down)
