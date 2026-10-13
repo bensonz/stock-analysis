@@ -65,6 +65,11 @@ rollback for consistent reruns (`snapshot_aux_state`). It is not the data-loss
 bug, so it stays; the plan names it as "Restore from the run's output/", and
 those names are left out of the "NOT rolled back" line.
 
+Owner confirmed 2026-10-13: keep rolling back LEARNINGS.md. A reset means the
+runs after the target went wrong, so lessons written by those runs are suspect
+too; restoring the target's copy keeps reruns consistent. (Git still holds the
+discarded version if one of those lessons was worth keeping.)
+
 ## D6: Snapshot format unchanged
 
 `snapshot_positions` still writes `closed_positions` keyed by code. Nothing
