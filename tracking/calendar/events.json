@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-12",
+  "updated": "2026-10-13",
   "note": "手动维护的前瞻事件日历（scripts/event_calendar.py 读取；到期/失效条目请及时清理）。tz=US 的事件影响其后第一个A股交易日。direction: risk(默认)|supportive|two_sided。 【数字纪律】notes 中禁止出现未经复测的数字或\"历史规律\"——任何统计口径的断言必须先用真实数据复测并标注 n 与口径（教训: 2026-08-04 政治局+2%小盘占优系模型folklore, 实测≈0, 见 git log）。 每条必须带 source（URL或可重算的脚本/口径说明）。",
   "events": [
     {
@@ -302,13 +302,11 @@
       "name": "中国APEC领导人非正式会议",
       "kind": "other",
       "certainty": "scheduled",
-      "impact": "medium",
+      "impact": "high",
       "direction": "two_sided",
-      "notes": "北京时间 2026-11-18 12:02（华尔街见闻财经日历）",
+      "notes": "11-10中美关税休战到期后8天；或有中美元首会晤——续约/升级的关键窗口（owner 2026-10-13 改为high）",
       "source": "华尔街见闻财经日历 imp=4",
-      "inbox_id": "wscn-20261118-226309d5",
-      "decided_by": "ai",
-      "reason": "APEC领导人非正式会议为高层外交场合，可能释放贸易与地缘信号"
+      "inbox_id": "wscn-20261118-226309d5"
     }
   ]
 }
