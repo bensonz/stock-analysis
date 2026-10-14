@@ -1,0 +1,247 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "数字媒体",
+        "5d_pct": null,
+        "1d_pct": 4.32,
+        "trend": "今日领涨(传媒/防御)"
+      },
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": null,
+        "1d_pct": 4.1,
+        "trend": "地缘油价驱动"
+      },
+      {
+        "name": "出版",
+        "5d_pct": null,
+        "1d_pct": 4.08,
+        "trend": "防御轮动"
+      },
+      {
+        "name": "油服工程",
+        "5d_pct": null,
+        "1d_pct": 3.81,
+        "trend": "地缘油价驱动"
+      },
+      {
+        "name": "影视院线",
+        "5d_pct": null,
+        "1d_pct": 3.35,
+        "trend": "传媒轮动"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": null,
+        "1d_pct": -3.61,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "风电设备",
+        "5d_pct": null,
+        "1d_pct": -2.97,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": null,
+        "1d_pct": -2.91,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "商用车",
+        "5d_pct": null,
+        "1d_pct": -2.79,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "小家电",
+        "5d_pct": null,
+        "1d_pct": -2.38,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/3持仓在今日top5热区；3/3均不在bottom5冷区",
+    "regime": "能源(油气/油服)+传媒/银行防御领涨，成长(创业板/科创/CXO)休整；煤炭年内+24.45%领跑但今日未入top5"
+  },
+  "position_decisions": [
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "reason": "浮盈+11.77%，保本止损19.29未触发；油运受益于中东地缘油价强势(布伦特10/12收106.65美元，来源:英为财情)，航运港口今日未入bottom5；让赢家奔跑",
+      "sector_rank": "未入top5/bottom5(中性)",
+      "new_stop": null,
+      "pnl_pct": 11.77,
+      "days_held": 24,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+16.08%，止损已锁+10%(47.14)未触发；医疗服务昨日短暂进bottom5(第1天)今日退出，未触发3日冷区卖出；CRO订单拐点确认(Q1新签+111.6%，来源:ByDrug)",
+      "sector_rank": "中性(昨日bottom5第1天，今日未入)",
+      "new_stop": null,
+      "pnl_pct": 16.08,
+      "days_held": 17,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+23.44%，止损锁+10%(139.15)未触发；在手订单597.7亿(+23.6%，来源:ByDrug)基本面未变；医疗服务今日未入bottom5；让赢家奔跑",
+      "sector_rank": "中性(昨日bottom5第1天，今日未入)",
+      "new_stop": null,
+      "pnl_pct": 23.44,
+      "days_held": 46,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "300981",
+      "name": "中红医疗",
+      "reason": "dist_ma20_pct +18.3% 超12%追高线(Rule 2b硬性跳过)；RPS120 94.66扩展区需板块豁免而医疗器械非今日top5",
+      "rps120": 94.66
+    },
+    {
+      "code": "688710",
+      "name": "益诺思",
+      "reason": "医疗服务非今日热区；现价92.85低于MA5(101.05)/MA10(98.94)，10/09大跌-6.91%抛压重(输入风险标签)；RPS120 94.93扩展区无豁免",
+      "rps120": 94.93
+    },
+    {
+      "code": "300404",
+      "name": "博济医药",
+      "reason": "现价13.06全线跌破MA5/MA10/MA20；医疗服务非热区；RPS120 94.29扩展区无豁免",
+      "rps120": 94.29
+    },
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "航运非今日top5；dist_ma20 -13.1%深度跌破均线；RPS120 93.9扩展区无豁免",
+      "rps120": 93.9
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "rps20 13.28短期动量枯竭；铜/工业金属非今日热区",
+      "rps120": 92.89
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "炼化(石油石化)非今日top5的油气开采；dist_ma10 -8.6%/ma20 -10.6%跌破均线；rps20 14.08",
+      "rps120": 88.8
+    },
+    {
+      "code": "600546",
+      "name": "山煤国际",
+      "reason": "煤炭年内+24.45%领跑全A(来源:证券时报网)但今日未入top5；margin signal=deleveraging；弱宽度(0.5:1)下半仓门槛不满足热点优先，跳过",
+      "rps120": 89.39
+    },
+    {
+      "code": "601988",
+      "name": "中国银行",
+      "reason": "银行防守强但今日未入top5；输入风险标签'周级别显著超买'；弱盘不追银行历史新高",
+      "rps120": 88.38
+    },
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "reason": "银行，非今日热区；弱盘下跳过",
+      "rps120": 88.21
+    },
+    {
+      "code": "600428",
+      "name": "中远海特",
+      "reason": "rps20 36.6、08-19以来调整(输入风险标签)；航运非今日top5",
+      "rps120": 89.19
+    },
+    {
+      "code": "603519",
+      "name": "立霸股份",
+      "reason": "家电零部件，小家电居bottom5(-2.38%)家电链冷；RPS120 92.24扩展区",
+      "rps120": 92.24
+    },
+    {
+      "code": "001378",
+      "name": "德冠新材",
+      "reason": "现价低于MA5/MA10；膜材料非热区",
+      "rps120": 90.71
+    },
+    {
+      "code": "301080",
+      "name": "百普赛斯",
+      "reason": "RPS120 99.65 >95% 超买封顶(Rule 2)；且dist_ma5 -9.3%/ma10 -9.2%短期已走弱",
+      "rps120": 99.65
+    },
+    {
+      "code": "688046",
+      "name": "药康生物",
+      "reason": "RPS120 99.1 >95% 超买封顶(Rule 2)",
+      "rps120": 99.1
+    },
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "reason": "RPS120 99.01 >95% 超买封顶(Rule 2)；dist_ma10 -14.6%短期走弱",
+      "rps120": 99.01
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "候选池与当日热区不重叠时，弱盘下唯一正确动作是空仓：今天的钱在油气/传媒/银行，候选池满手CRO/科技，硬买就是逆着轮动。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "动量系统只赚'个股强+板块强'的重叠段；板块错配时胜率骤降，空仓等重叠窗口优于将就入场。"
+    },
+    {
+      "text": "医疗服务昨日进bottom5(1天)今日退出，验证'冷区3日'规则避免对单日波动的过激反应——不因一天回调就砍掉有订单拐点的CRO赢家。",
+      "type": "rule",
+      "tags": [
+        "exit-rule",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "板块单日排名噪声大，连续3日才构成趋势性转冷信号。"
+    },
+    {
+      "text": "中红医疗RPS120甜区(94.66)但dist_ma20_pct +18.3%直接否决——MA距离纪律在热区内仍然有效，追高线不因板块热度让步。",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "dist_ma20>12%意味着近一个月涨幅过度透支，均值回归风险压倒趋势惯性。"
+    },
+    {
+      "text": "26只策略池中约14只RPS120>95%被95%封顶拦截，成长动量极致拥挤；拥挤度本身就是风险信号，进一步支持不新开仓。",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "大量个股同时进入98-99.9%分位，说明资金高度集中于少数强势股，后续接盘动能衰竭概率大。"
+    }
+  ],
+  "market_summary": "弱宽度(涨1788/跌3609，0.50:1，45涨停/5跌停)，上证勉强收红(+0.01%)，创业板-1.15%/科创50-1.07%成长股回吐；IV整体偏悲观(avg_iv_rank 0.5436，中小盘波动率偏贵)。资金做能源+防御轮动：油气开采/油服/传媒/出版领涨(中东油轮遇袭推升油价，布伦特10/12收106.65美元)，煤炭年内+24.45%领跑但今日未入top5；候选池满手CRO/科技与今日热区错配，故保持空仓、让3只赢家(油运+CRO)继续奔跑。",
+  "market_sentiment": "weak",
+  "market_call": "谨慎"
+}

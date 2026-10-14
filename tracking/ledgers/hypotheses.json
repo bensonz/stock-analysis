@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-10-13",
+  "lastUpdated": "2026-10-14",
   "hypotheses": [
     {
       "id": "h001",
@@ -1246,7 +1246,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-10-13",
+      "lastTested": "2026-10-14",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1605,11 +1605,19 @@
           {
             "date": "2026-10-13",
             "detail": "策略池与当日热点完全错位(0/26候选落在top5、14/26只RPS120>95%被过热封顶)时，正确动作是new_positions=[]，而不是在非热门板块硬找甜点区标的凑仓位"
+          },
+          {
+            "date": "2026-10-14",
+            "detail": "候选池与当日热区不重叠时，弱盘下唯一正确动作是空仓：今天的钱在油气/传媒/银行，候选池满手CRO/科技，硬买就是逆着轮动。"
+          },
+          {
+            "date": "2026-10-14",
+            "detail": "医疗服务昨日进bottom5(1天)今日退出，验证'冷区3日'规则避免对单日波动的过激反应——不因一天回调就砍掉有订单拐点的CRO赢家。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 89,
+      "sampleSize": 91,
       "hitRate": 1.0,
       "confidence": 0.989,
       "tags": [
@@ -2604,7 +2612,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-10-13",
+      "lastTested": "2026-10-14",
       "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes.",
       "evidence": {
         "supporting": [
@@ -2855,13 +2863,17 @@
           {
             "date": "2026-10-13",
             "detail": "中红医疗RPS120=94.12在甜区但dist_ma10+8.4%/dist_ma20+20.3%触发Rule 2b硬拦截——再次验证'甜区RPS≠可追高'，均线偏离才是短期风险的真实度量"
+          },
+          {
+            "date": "2026-10-14",
+            "detail": "中红医疗RPS120甜区(94.66)但dist_ma20_pct +18.3%直接否决——MA距离纪律在热区内仍然有效，追高线不因板块热度让步。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 62,
+      "sampleSize": 63,
       "hitRate": 1.0,
-      "confidence": 0.984,
+      "confidence": 0.985,
       "tags": [
         "entry-filter",
         "timing",
@@ -6864,9 +6876,9 @@
       "id": "h151",
       "text": "RPS>95%封顶规则过滤掉策略池约70%候选——当大量股票RPS进入98-99.9%时，动量已极致拥挤，均值回归风险极高。此规则不可移除(已由7/27-7/31 audit验证)。",
       "type": "rule",
-      "status": "validated",
+      "status": "rule",
       "created": "2026-08-11",
-      "lastTested": "2026-10-12",
+      "lastTested": "2026-10-14",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -6905,13 +6917,17 @@
           {
             "date": "2026-10-12",
             "detail": "RPS>95%封顶继续过滤策略池：百普赛斯99.65/一博科技99.21/药康生物99.17/中石科技99.02均超95%上限，且当日多只dist_ma深度为负(已跌破短期均线)，动量极致拥挤后率先回落。"
+          },
+          {
+            "date": "2026-10-14",
+            "detail": "26只策略池中约14只RPS120>95%被95%封顶拦截，成长动量极致拥挤；拥挤度本身就是风险信号，进一步支持不新开仓。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 9,
+      "sampleSize": 10,
       "hitRate": 1.0,
-      "confidence": 0.909,
+      "confidence": 0.917,
       "tags": [
         "entry-filter"
       ],

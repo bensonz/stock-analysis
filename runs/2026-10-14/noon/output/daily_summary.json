@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-14",
+  "actions": [
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 21.56,
+      "pnl_pct": 11.77,
+      "note": "浮盈+11.77%，保本止损19.29未触发；油运受益于中东地缘油价强势(布伦特10/12收106.65美元，来源:英为财情)，航运港口今日未入bottom5；让赢家奔跑"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 49.74,
+      "pnl_pct": 16.08,
+      "note": "浮盈+16.08%，止损已锁+10%(47.14)未触发；医疗服务昨日短暂进bottom5(第1天)今日退出，未触发3日冷区卖出；CRO订单拐点确认(Q1新签+111.6%，来源:ByDrug)"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 156.15,
+      "pnl_pct": 23.44,
+      "note": "浮盈+23.44%，止损锁+10%(139.15)未触发；在手订单597.7亿(+23.6%，来源:ByDrug)基本面未变；医疗服务今日未入bottom5；让赢家奔跑"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 979679.74,
+    "dayPnl": -704.0,
+    "dayReturnPct": -0.07,
+    "totalReturnPct": -2.03,
+    "unrealizedPnl": 16223.0,
+    "realizedPnl": -36543.26,
+    "cashPct": 89.4
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.4954,
+    "up": 1788,
+    "down": 3609,
+    "positive_indices": [
+      "上证指数"
+    ],
+    "negative_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 45,
+    "limit_downs": 5,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.50:1, 1/3 major indices green, 45 limit-ups / 5 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "弱宽度(涨1788/跌3609，0.50:1，45涨停/5跌停)，上证勉强收红(+0.01%)，创业板-1.15%/科创50-1.07%成长股回吐；IV整体偏悲观(avg_iv_rank 0.5436，中小盘波动率偏贵)。资金做能源+防御轮动：油气开采/油服/传媒/出版领涨(中东油轮遇袭推升油价，布伦特10/12收106.65美元)，煤炭年内+24.45%领跑但今日未入top5；候选池满手CRO/科技与今日热区错配，故保持空仓、让3只赢家(油运+CRO)继续奔跑。"
+  }
+}
