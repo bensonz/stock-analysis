@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-14",
+  "actions": [
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "HOLD",
+      "price": 21.48,
+      "pnl_pct": 11.35,
+      "note": "浮盈+11.35%，保本止损19.29未触发；油运超级周期未变(VLCC美湾→亚洲运费7700万美元vs2025年均920万美元，来源:波罗的海交易所/界面新闻)，油气开采/油服今日top1-2提供板块共振；让赢家奔跑"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 48.79,
+      "pnl_pct": 13.86,
+      "note": "浮盈+13.86%，止损已锁+10%(47.14)未触发但距止损仅3.38%，stop_proximity WATCH需次日盯防；2026H1新签订单20.2亿(+98%)、Q2环比+22%(来源:东吴证券CXO中报总结)；医疗服务今日未入bottom5，未触发冷区3日卖出"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 154.18,
+      "pnl_pct": 21.88,
+      "note": "浮盈+21.88%，止损已锁+10%(139.15)未触发；在手订单664.3亿(+25.2%)、全年收入指引上调至585-605亿(来源:药明康德2026H1演示材料)；医疗服务今日未入bottom5；让赢家奔跑"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 978264.74,
+    "dayPnl": -2119.0,
+    "dayReturnPct": -0.22,
+    "totalReturnPct": -2.17,
+    "unrealizedPnl": 14808.0,
+    "realizedPnl": -36543.26,
+    "cashPct": 89.53
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.2177,
+    "up": 979,
+    "down": 4496,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 39,
+    "limit_downs": 13,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.22:1, 0/3 major indices green, 39 limit-ups / 13 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "恐慌性普跌：上涨979/下跌4496(0.22:1)，0/3主要指数红盘，39涨停/13跌停，量能萎缩至约1.36万亿(来源:东方财富)。油气/煤炭/银行等防御+资源逆势领涨(油气开采Ⅱ+4.14%/油服工程+3.03%)，通信设备(-4.46%)/风电设备(-5.29%)/汽车链领跌。IV情绪偏悲观(avg rank 0.63)。机械层panic硬性空仓，今日不开新仓，三只持仓(招商轮船/昭衍新药/药明康德)均浮盈>11%继续持有。"
+  }
+}

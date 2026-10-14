@@ -1,0 +1,112 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 164505,
+  "output_tokens": 14816,
+  "rounds": 3,
+  "duration_sec": 240.4,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月14日 大跌 原因 创业板",
+        "max_results": 5
+      },
+      "result_length": 3535
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "油气开采 油服工程 板块 上涨 2026年10月14日",
+        "max_results": 5
+      },
+      "result_length": 3705
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "招商轮船 油运 VLCC 运价 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3369
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 昭衍新药 CXO 订单 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3454
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "通信设备 风电 玻璃玻纤 下跌 2026年10月14日",
+        "max_results": 5
+      },
+      "result_length": 3662
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://finance.eastmoney.com/a/202610143895201238.html",
+        "maxChars": 5000
+      },
+      "result_length": 2538
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://stock.eastmoney.com/a/cdpfx.html",
+        "maxChars": 5000
+      },
+      "result_length": 1880
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://finance.sina.com.cn/jjxw/2026-10-08/doc-iniunmin5277485.shtml",
+        "maxChars": 5000
+      },
+      "result_length": 4256
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.caiwennews.com/article/1650302.shtml",
+        "maxChars": 5000
+      },
+      "result_length": 4109
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://m.sohu.com/a/1087557515_362042",
+        "maxChars": 5000
+      },
+      "result_length": 765
+    }
+  ],
+  "fallback_used": false
+}

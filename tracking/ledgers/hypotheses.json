@@ -2156,7 +2156,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-10-12",
+      "lastTested": "2026-10-14",
       "mechanism": "In a deteriorating market, protecting open profits is more valuable than maximizing upside variance.",
       "evidence": {
         "supporting": [
@@ -2411,11 +2411,15 @@
           {
             "date": "2026-10-12",
             "detail": "招商轮船-9.38%大跌仍守保本止损19.29(距3.55%)：让机械止损工作而非恐慌手动砍仓；油运VLCC景气未变(Clarksons Q3均值27.8万美元/天，来源金融界/网易10-08)。"
+          },
+          {
+            "date": "2026-10-14",
+            "detail": "三只持仓均浮盈>11%且所在板块未入bottom5，未触发Rule1(冷区3天卖出)与15日时间止损(<3%才触发)——继续让利润奔跑，符合h023弱市下止损上移后低风险持有原则"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 63,
+      "sampleSize": 64,
       "hitRate": 1.0,
       "confidence": 0.985,
       "tags": [
@@ -2433,7 +2437,7 @@
       "type": "signal",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-10-09",
+      "lastTested": "2026-10-14",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -2512,6 +2516,10 @@
           {
             "date": "2026-10-09",
             "detail": "stop_proximity CRITICAL(距止损仅1.3%)+time_decay逼近(13/15天,浮盈<3%)+当日-10%三者叠加时，应主动止损而非等硬止损击穿——普洛药业今日即此组合，保本离场优于隔夜跳空风险。"
+          },
+          {
+            "date": "2026-10-14",
+            "detail": "昭衍新药距止损47.14仅3.38%(今日-3.23%)，stop_proximity WATCH——若继续下探将触发+10%锁利止损，无需主动操作但需次日盯紧，符合h024"
           }
         ],
         "contradicting": [
@@ -2525,9 +2533,9 @@
           }
         ]
       },
-      "sampleSize": 21,
-      "hitRate": 0.905,
-      "confidence": 0.87,
+      "sampleSize": 22,
+      "hitRate": 0.909,
+      "confidence": 0.875,
       "tags": [
         "exit-rule",
         "timing"
@@ -4508,7 +4516,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-10-13",
+      "lastTested": "2026-10-14",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4615,13 +4623,17 @@
           {
             "date": "2026-10-13",
             "detail": "医疗服务午盘首次落bottom5(-2.16%第1天)但收盘未入；药明康德+昭衍新药2/3持仓同板块暴露集中，若连续3日居bottom30%则Rule 1将同时打击两只持仓"
+          },
+          {
+            "date": "2026-10-14",
+            "detail": "防御+资源板块(油气开采Ⅱ+4.14%/油服工程+3.03%/煤炭)逆势领涨，而前期强势的通信设备(-4.46%)/风电设备(-5.29%)/汽车链领跌——科技→防御轮动今日加速，验证h076"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 26,
+      "sampleSize": 27,
       "hitRate": 1.0,
-      "confidence": 0.964,
+      "confidence": 0.966,
       "tags": [
         "sector",
         "exit-rule"
@@ -4636,7 +4648,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-10-12",
+      "lastTested": "2026-10-14",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -4799,13 +4811,17 @@
           {
             "date": "2026-10-12",
             "detail": "机械层hard block再次证明价值：宁波银行(银行top5板块、RPS120=87.63甜区、dist_ma均<4%未追高)本可通过全部个股门槛，但breadth 0.27:1 panic硬性封禁新仓，V2正确执行现金为王而非追逐单一合格标的。"
+          },
+          {
+            "date": "2026-10-14",
+            "detail": "恐慌盘(上涨979/下跌4496=0.22:1，0/3指数红盘)触发机械层硬性空仓门槛——今日无一候选开仓，验证h077/h013：硬性门槛阻止FOMO式入场，现金保护优先"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 40,
+      "sampleSize": 41,
       "hitRate": 1.0,
-      "confidence": 0.976,
+      "confidence": 0.977,
       "tags": [
         "entry-filter",
         "position-sizing"
@@ -6921,13 +6937,17 @@
           {
             "date": "2026-10-14",
             "detail": "26只策略池中约14只RPS120>95%被95%封顶拦截，成长动量极致拥挤；拥挤度本身就是风险信号，进一步支持不新开仓。"
+          },
+          {
+            "date": "2026-10-14",
+            "detail": "策略池24只中约半数RPS120>95%(百普赛斯99.72/一博99.21/药康99.08/中石98.99/松发98.21等)被RPS上限拦截，再次印证h151：动量极致拥挤时均值回归风险高，RPS>95%封顶规则不可移除"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 10,
+      "sampleSize": 11,
       "hitRate": 1.0,
-      "confidence": 0.917,
+      "confidence": 0.923,
       "tags": [
         "entry-filter"
       ],
