@@ -1,0 +1,183 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "医疗美容",
+        "chg_pct": 1.65,
+        "trend": "避险反弹"
+      },
+      {
+        "name": "白酒Ⅱ",
+        "chg_pct": 1.33,
+        "trend": "避险反弹"
+      },
+      {
+        "name": "出版",
+        "chg_pct": 0.24,
+        "trend": "防御"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "chg_pct": 0.03,
+        "trend": "新高/防御"
+      },
+      {
+        "name": "化学制药",
+        "chg_pct": -0.28,
+        "trend": "弱势翻红"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "航海装备Ⅱ",
+        "chg_pct": -5.33,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航运港口",
+        "chg_pct": -5.2,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "通信设备",
+        "chg_pct": -5.07,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "焦炭Ⅱ",
+        "chg_pct": -4.96,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "油服工程",
+        "chg_pct": -4.72,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/3 在热门板块；1/3 在冷区（招商轮船/航运港口 bottom5）；2/3 中性（医疗服务）",
+    "regime": "恐慌避险：科技重挫，资金转向银行/白酒/医美防御板块"
+  },
+  "position_decisions": [
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "SELL",
+      "reason": "stop_proximity CRITICAL：现价19.35距保本止损19.29仅0.31%，time_decay触发（持有30个交易日、浮盈+0.31%<3%），且航运港口今日bottom5(-5.2%)、个股-9.92%。三重叠加主动止损，不等精确触发。非rotation，为防御性止损",
+      "sector_rank": "bottom5（航运港口 -5.2%）",
+      "new_stop": null,
+      "pnl_pct": 0.31,
+      "days_held": 30,
+      "exit_price": 19.35
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+16.62%，止损已锁+10%(47.14)未触发，今日逆势+2.42%；医疗服务未入bottom5，未触发冷区3日卖出；CRO订单拐点未变，让赢家奔跑",
+      "sector_rank": "中性（医疗服务，未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 16.62,
+      "days_held": 19,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+20.94%，止损已锁+10%(139.15)未触发，今日-0.77%小幅回撤；医疗服务未入bottom5；GLP-1/TIDES在手订单景气未变；margin deleveraging仅作观察，让赢家奔跑",
+      "sector_rank": "中性（医疗服务，未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 20.94,
+      "days_held": 50,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601939",
+      "name": "建设银行",
+      "reason": "恐慌regime硬性禁仓（breadth 0.09:1、0/3指数翻红）；个股属top5板块（国有大型银行Ⅱ +0.03%）且今日创新高，RPS120=90.01甜区、dist_ma10 +2.3%未追高，但避险流入≠动量，禁新开仓",
+      "rps120": 90.01
+    },
+    {
+      "code": "601988",
+      "name": "中国银行",
+      "reason": "恐慌regime硬性禁仓；输入风险标签「截至10/14周级别超买」，RPS120=89.36、dist_ma20 +5.0%",
+      "rps120": 89.36
+    },
+    {
+      "code": "002913",
+      "name": "奥士康",
+      "reason": "RPS120=98.31超95%封顶线（Rule 2），VCP仅SETUP（收缩比0.66），叠加恐慌禁仓",
+      "rps120": 98.31
+    },
+    {
+      "code": "301080",
+      "name": "百普赛斯",
+      "reason": "RPS120=99.72远超95%封顶线，dist_ma5 -9.7%处均线下方偏弱，恐慌禁仓",
+      "rps120": 99.72
+    },
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "航运港口今日bottom5(-5.2%)属硬性禁买区，dist_ma5 -14.1%破位，恐慌禁仓",
+      "rps120": 93.89
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "RPS20=12.18短期动量塌陷，有色金属未入top5，dist_ma10 -7.3%破位，恐慌禁仓",
+      "rps120": 92.75
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌regime硬性禁仓正确拦截今日全部候选：即使国有大型银行Ⅱ（建设银行/中国银行）逆势创新高、RPS120在80-92甜区且未追高，breadth 0.09:1 + 0/3指数翻红仍应空仓。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "系统性下跌中防御板块的相对强势是避险资金流入而非动量，此时开仓承接的是抛压而非趋势。"
+    },
+    {
+      "text": "招商轮船从+11.77%赢家两日回吐至+0.31%并今日-9.92%，保本止损19.29+stop_proximity(0.31%)+time_decay(30日<3%)三重叠加应主动离场——赢家一旦跌回成本且所属板块入bottom5，'让赢家奔跑'的前提已不存在。",
+      "type": "heuristic",
+      "tags": [
+        "exit-rule",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "板块冷区对个股的引力在下跌日放大；贴近止损的仓位在跳空风险下优先主动了结。"
+    },
+    {
+      "text": "今日top5（医疗美容+1.65/白酒+1.33/出版+0.24/国有大行+0.03/化学制药-0.28）几乎全是防御与红利板块且涨幅极弱——典型恐慌避险轮动，不是可交易热点。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "风险偏好收缩时资金流向低beta红利，热点板块的'热'是相对抗跌而非绝对动量，不适合追买。"
+    },
+    {
+      "text": "IV全线极端高位（整体IV Rank均值0.93、创业板/500ETF/深100ETF均=1.0）确认恐慌情绪；按IV>75%只买最强setups的规则，叠加hard block，今日正确动作是持币。",
+      "type": "signal",
+      "tags": [
+        "position-sizing",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "极高IV代表市场在为尾部风险定价，追入任何仓位都承担vol expansion风险。"
+    }
+  ],
+  "market_summary": "2026-10-15 恐慌日：三大指数齐跌（上证-1.98%、深成-2.78%、创业板-3.42%），breadth 0.09:1（涨465/跌5060），33涨停/13跌停，0/3指数翻红——机械层硬性禁止新开仓。外围：美国9月CPI 3.7%超预期推升加息预期、隔夜纳指-1.88%费半-4.3%、韩国KOSPI触发熔断（来源：央广网/上海证券报）。资金避险转向银行/白酒/医美防御板块。IV全线极端高位（整体IV Rank均值0.93，极度恐慌）。决策：不新增，主动止损卖出招商轮船，保留两只盈利CRO持仓让赢家奔跑。",
+  "market_sentiment": "bearish",
+  "market_call": "防御（禁止新开仓）"
+}

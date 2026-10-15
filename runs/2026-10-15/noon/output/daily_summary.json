@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-15",
+  "actions": [
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "action": "SELL",
+      "price": 19.35,
+      "pnl_pct": 0.31,
+      "note": "stop_proximity CRITICAL：现价19.35距保本止损19.29仅0.31%，time_decay触发（持有30个交易日、浮盈+0.31%<3%），且航运港口今日bottom5(-5.2%)、个股-9.92%。三重叠加主动止损，不等精确触发。非rotation，为防御性止损"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 49.97,
+      "pnl_pct": 16.62,
+      "note": "浮盈+16.62%，止损已锁+10%(47.14)未触发，今日逆势+2.42%；医疗服务未入bottom5，未触发冷区3日卖出；CRO订单拐点未变，让赢家奔跑"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 152.99,
+      "pnl_pct": 20.94,
+      "note": "浮盈+20.94%，止损已锁+10%(139.15)未触发，今日-0.77%小幅回撤；医疗服务未入bottom5；GLP-1/TIDES在手订单景气未变；margin deleveraging仅作观察，让赢家奔跑"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 2,
+    "totalEquity": 977147.74,
+    "dayPnl": 587.0,
+    "dayReturnPct": 0.06,
+    "totalReturnPct": -2.29,
+    "unrealizedPnl": 13643.0,
+    "realizedPnl": -36495.26,
+    "cashPct": 91.21
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.0919,
+    "up": 465,
+    "down": 5060,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 33,
+    "limit_downs": 13,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.09:1, 0/3 major indices green, 33 limit-ups / 13 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "2026-10-15 恐慌日：三大指数齐跌（上证-1.98%、深成-2.78%、创业板-3.42%），breadth 0.09:1（涨465/跌5060），33涨停/13跌停，0/3指数翻红——机械层硬性禁止新开仓。外围：美国9月CPI 3.7%超预期推升加息预期、隔夜纳指-1.88%费半-4.3%、韩国KOSPI触发熔断（来源：央广网/上海证券报）。资金避险转向银行/白酒/医美防御板块。IV全线极端高位（整体IV Rank均值0.93，极度恐慌）。决策：不新增，主动止损卖出招商轮船，保留两只盈利CRO持仓让赢家奔跑。"
+  }
+}

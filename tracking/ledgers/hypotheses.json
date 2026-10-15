@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-10-14",
+  "lastUpdated": "2026-10-15",
   "hypotheses": [
     {
       "id": "h001",
@@ -2437,7 +2437,7 @@
       "type": "signal",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-10-14",
+      "lastTested": "2026-10-15",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -2520,6 +2520,10 @@
           {
             "date": "2026-10-14",
             "detail": "昭衍新药距止损47.14仅3.38%(今日-3.23%)，stop_proximity WATCH——若继续下探将触发+10%锁利止损，无需主动操作但需次日盯紧，符合h024"
+          },
+          {
+            "date": "2026-10-15",
+            "detail": "招商轮船从+11.77%赢家两日回吐至+0.31%并今日-9.92%，保本止损19.29+stop_proximity(0.31%)+time_decay(30日<3%)三重叠加应主动离场——赢家一旦跌回成本且所属板块入bottom5，'让赢家奔跑'的前提已不存在。"
           }
         ],
         "contradicting": [
@@ -2533,9 +2537,9 @@
           }
         ]
       },
-      "sampleSize": 22,
-      "hitRate": 0.909,
-      "confidence": 0.875,
+      "sampleSize": 23,
+      "hitRate": 0.913,
+      "confidence": 0.88,
       "tags": [
         "exit-rule",
         "timing"
@@ -4516,7 +4520,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-10-14",
+      "lastTested": "2026-10-15",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4627,13 +4631,17 @@
           {
             "date": "2026-10-14",
             "detail": "防御+资源板块(油气开采Ⅱ+4.14%/油服工程+3.03%/煤炭)逆势领涨，而前期强势的通信设备(-4.46%)/风电设备(-5.29%)/汽车链领跌——科技→防御轮动今日加速，验证h076"
+          },
+          {
+            "date": "2026-10-15",
+            "detail": "今日top5（医疗美容+1.65/白酒+1.33/出版+0.24/国有大行+0.03/化学制药-0.28）几乎全是防御与红利板块且涨幅极弱——典型恐慌避险轮动，不是可交易热点。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 27,
+      "sampleSize": 28,
       "hitRate": 1.0,
-      "confidence": 0.966,
+      "confidence": 0.967,
       "tags": [
         "sector",
         "exit-rule"
@@ -4648,7 +4656,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-10-14",
+      "lastTested": "2026-10-15",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -4815,11 +4823,15 @@
           {
             "date": "2026-10-14",
             "detail": "恐慌盘(上涨979/下跌4496=0.22:1，0/3指数红盘)触发机械层硬性空仓门槛——今日无一候选开仓，验证h077/h013：硬性门槛阻止FOMO式入场，现金保护优先"
+          },
+          {
+            "date": "2026-10-15",
+            "detail": "恐慌regime硬性禁仓正确拦截今日全部候选：即使国有大型银行Ⅱ（建设银行/中国银行）逆势创新高、RPS120在80-92甜区且未追高，breadth 0.09:1 + 0/3指数翻红仍应空仓。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 41,
+      "sampleSize": 42,
       "hitRate": 1.0,
       "confidence": 0.977,
       "tags": [
@@ -6541,22 +6553,26 @@
       "id": "h139",
       "text": "IV Rank整体仍处极度恐慌区间（科创50=95.65%, 创业板=86.05%），但广度2.35:1+三大指数全红表明恐慌正在消退。当前是「恐慌后的反弹窗口」——高IV提供机会但也要求更严格的风控和仓位管理。",
       "type": "observation",
-      "status": "observation",
+      "status": "hypothesis",
       "created": "2026-08-04",
-      "lastTested": "2026-08-04",
+      "lastTested": "2026-10-15",
       "mechanism": "高IV+强广度=恐慌消退初期的反弹窗口，应参与但控制仓位（本次总仓位~38%，保留62%现金应对高IV冲击）",
       "evidence": {
         "supporting": [
           {
             "date": "2026-08-04",
             "detail": "IV Rank整体仍处极度恐慌区间（科创50=95.65%, 创业板=86.05%），但广度2.35:1+三大指数全红表明恐慌正在消退。当前是「恐慌后的反弹窗口」——高IV提供机会但也要求更严格的风控和仓位管理。"
+          },
+          {
+            "date": "2026-10-15",
+            "detail": "IV全线极端高位（整体IV Rank均值0.93、创业板/500ETF/深100ETF均=1.0）确认恐慌情绪；按IV>75%只买最强setups的规则，叠加hard block，今日正确动作是持币。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 1,
+      "sampleSize": 2,
       "hitRate": 1.0,
-      "confidence": 0.6,
+      "confidence": 0.75,
       "tags": [
         "timing",
         "position-sizing"
