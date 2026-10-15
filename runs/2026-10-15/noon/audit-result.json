@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-15",
+  "slot": "noon",
+  "verdict": "action_needed",
+  "checks_run": 16,
+  "checks_total": 17,
+  "skipped": [
+    {
+      "check": "check_snapshot_wrote_rows",
+      "reason": "no snapshot note in preflight (run predates the writer)"
+    }
+  ],
+  "findings": [
+    {
+      "id": "event-inbox-triage-failed",
+      "check": "event_inbox_triage",
+      "kind": "env",
+      "title": "AI 事件分拣失败（1 条新候选仍待定）— 调用失败: _TimeoutError: event-triage exceeded 480s timeout",
+      "detail": "这些候选留在 tracking/calendar/event_inbox.md 为 [ ]，下次运行重试；持续失败则不会进入未来事件窗口。\n调用失败: _TimeoutError: event-triage exceeded 480s timeout",
+      "suspect": "scripts/event_triage.py call_model / agents/EVENT_TRIAGE.md",
+      "fix_cmd": "检查 .env 的 LLM_PROVIDER / OPENAI_*，然后 python3 scripts/event_inbox.py triage",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    }
+  ]
+}

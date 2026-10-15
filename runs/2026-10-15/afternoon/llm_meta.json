@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 117455,
+  "output_tokens": 15712,
+  "rounds": 2,
+  "duration_sec": 233.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年10月15日 A股 大跌 原因 跌停 恐慌",
+        "max_results": 5
+      },
+      "result_length": 4283
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 银行板块 房贷贴息 创新高 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3307
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "航运 影子船队 制裁放宽 海运费率 2026年10月 跌停",
+        "max_results": 5
+      },
+      "result_length": 3897
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "CRO 医疗服务 医药工业十五五规划 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3765
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 通信设备 板块 大跌 2026年10月15日",
+        "max_results": 5
+      },
+      "result_length": 3208
+    }
+  ],
+  "fallback_used": false
+}

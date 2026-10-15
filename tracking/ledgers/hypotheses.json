@@ -332,7 +332,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-03-27",
-      "lastTested": "2026-10-08",
+      "lastTested": "2026-10-15",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -975,6 +975,10 @@
           {
             "date": "2026-10-08",
             "detail": "弱市宽度0.63:1+0/3指数红盘时，即便#1板块存在RPS/MA合规个股，也按default返回new_positions:[]。今日航运港口#1有海通发展/中远海特两名候选，但均非干净setup，弱市纪律优先于FOMO。"
+          },
+          {
+            "date": "2026-10-15",
+            "detail": "IV极端恐慌(avg_iv_rank 0.90)+涨跌比0.08:1组合下，任何新仓的隔夜跳空风险不可控；保持91%现金是正确的，不因个别合格候选强开。"
           }
         ],
         "contradicting": [
@@ -984,7 +988,7 @@
           }
         ]
       },
-      "sampleSize": 161,
+      "sampleSize": 162,
       "hitRate": 0.994,
       "confidence": 0.988,
       "tags": [],
@@ -1246,7 +1250,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-10-14",
+      "lastTested": "2026-10-15",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1613,11 +1617,15 @@
           {
             "date": "2026-10-14",
             "detail": "医疗服务昨日进bottom5(1天)今日退出，验证'冷区3日'规则避免对单日波动的过激反应——不因一天回调就砍掉有订单拐点的CRO赢家。"
+          },
+          {
+            "date": "2026-10-15",
+            "detail": "航运港口连续bottom5(-5.13%)叠加影子船队制裁放宽预期，验证h019冷区硬不买：海通发展(RPS120=93.65)、招商轮船个体指标尚可也一律不碰；今日招商轮船三重止损离场是正确执行。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 91,
+      "sampleSize": 92,
       "hitRate": 1.0,
       "confidence": 0.989,
       "tags": [
@@ -2156,7 +2164,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-10-14",
+      "lastTested": "2026-10-15",
       "mechanism": "In a deteriorating market, protecting open profits is more valuable than maximizing upside variance.",
       "evidence": {
         "supporting": [
@@ -2415,11 +2423,15 @@
           {
             "date": "2026-10-14",
             "detail": "三只持仓均浮盈>11%且所在板块未入bottom5，未触发Rule1(冷区3天卖出)与15日时间止损(<3%才触发)——继续让利润奔跑，符合h023弱市下止损上移后低风险持有原则"
+          },
+          {
+            "date": "2026-10-15",
+            "detail": "大赢家+已上移的+10%止损=弱市里'让赢家奔跑'的正确形态：昭衍(+18.2%)与药明(+22.1%)今日逆势或抗跌，止损分别锁47.14/139.15，无需因大盘恐慌临场减仓。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 64,
+      "sampleSize": 65,
       "hitRate": 1.0,
       "confidence": 0.985,
       "tags": [
@@ -4827,13 +4839,17 @@
           {
             "date": "2026-10-15",
             "detail": "恐慌regime硬性禁仓正确拦截今日全部候选：即使国有大型银行Ⅱ（建设银行/中国银行）逆势创新高、RPS120在80-92甜区且未追高，breadth 0.09:1 + 0/3指数翻红仍应空仓。"
+          },
+          {
+            "date": "2026-10-15",
+            "detail": "恐慌日'防御板块上涨'是risk-off确认信号而非买点：建设银行(国有大行top3+RPS120=91.09甜点区+MA距离合规+margin adding)纸面完全合格，但涨跌比0.08:1+0/3指数翻绿时机械层禁止一切新仓——防御股此时承接的是最后抛压。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 42,
+      "sampleSize": 43,
       "hitRate": 1.0,
-      "confidence": 0.977,
+      "confidence": 0.978,
       "tags": [
         "entry-filter",
         "position-sizing"

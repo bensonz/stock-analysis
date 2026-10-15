@@ -14,7 +14,7 @@
 > `date`、`tz` (US=影响其后第一个A股交易日 / CN=当日)、`kind`、`note`。不要改 `ai:`、`src:` 和 `id:` 三行（🤖 可留可删）。
 > 标题日期 = A股影响日，由 date+tz 推算，重写时刷新。规则与局限: docs/EVENT_INBOX/DECISIONS.md
 
-_更新: 2026-10-15 · 共 17 条 · 待定 1 条_
+_更新: 2026-10-15 · 共 17 条 · 待定 0 条_
 
 ## 2026-10-15 (T-0) 美国 — 美国Anthropic预计将举行上市前的投资者日活动
 - [-] keep 🤖   impact: low   direction: two_sided
@@ -97,9 +97,10 @@ _更新: 2026-10-15 · 共 17 条 · 待定 1 条_
   id: wscn-20261027-3c4f02f2
 
 ## 2026-10-27 (T-12) 沙特阿拉伯 — 沙特阿拉伯以色列大选
-- [ ] keep   impact: high   direction: two_sided
+- [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-10-27   tz: CN   kind: other
   note:
+  ai: 跳过 · low/two_sided · 沙特以色列大选非系统性事件，对A股市场影响有限（deepseek-v4-pro，2026-10-15）
   src: wallstreetcn imp=4 北京 2026-10-27 00:00 |
   id: wscn-20261027-730308dd
 
