@@ -1,0 +1,138 @@
+{
+  "date": "2026-10-16",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1792137246.1728158,
+      "errors": [],
+      "end": 1792137348.6732621,
+      "duration_sec": 102.5
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 9208,
+      "tokens": {
+        "input_tokens": 125614,
+        "output_tokens": 22430
+      },
+      "rounds": 2,
+      "tool_calls_count": 7,
+      "duration_sec": 390.2,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1792137738.918729,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h207 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=95",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=64",
+        "Hypothesis: Updated h144 (hypothesis): +1 supporting evidence → hitRate=75%, n=4",
+        "Hypothesis: Created h209 (observation): 军工(地面兵装/航空装备)自10/13连续领涨(珠海航展12/7+十五五订单窗口,来源:证券时报/中金/东方证券)，但候选池无军工股——记录候选池来源缺口，避免...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-10-16",
+        "status": "ok",
+        "checked": 3,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "603127",
+                "name": "昭衍新药",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 48.71,
+                "stopLoss": 47.14,
+                "distance_pct": 3.22,
+                "suggestion": "🟠 WATCH — 3.2% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "603259",
+                "name": "药明康德",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 144.3,
+                "stopLoss": 139.15,
+                "distance_pct": 3.57,
+                "suggestion": "🟠 WATCH — 3.6% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1792137740.585033,
+      "duration_sec": 1.7
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 603127 — 🟠 WATCH — 3.2% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 603259 — 🟠 WATCH — 3.6% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 494.4
+  }
+}

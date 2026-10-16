@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-16",
+  "actions": [
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "action": "HOLD",
+      "price": 28.28,
+      "pnl_pct": 0.6,
+      "note": "今日刚开仓(+0.64%)，距-5%止损26.70尚远；煤炭未入今日top5/bottom5但年内申万第一(+24.3%,来源:输入events)，趋势未破；margin deleveraging(chg5 -23.12%)仅作观察不单独触发卖出"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 48.71,
+      "pnl_pct": 13.7,
+      "note": "浮盈+13.7%，止损已锁+10%(47.14)未有效触发，现价距止损仅3.2%(WATCH)；盘中低点47.12一度触及止损位；医疗服务今日bottom5第1天(-4.79%)，未达冷区3日卖出线——跌破47.14收盘或板块续冷3日即无条件SELL"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 144.3,
+      "pnl_pct": 14.1,
+      "note": "浮盈+14.1%，止损已锁+10%(139.15)未有效触发，现价距止损3.6%(WATCH)；盘中低点139.05一度击穿止损位但收盘144.30收回；今日-6.6%放量回撤未破止损；医疗服务bottom5第1天——跌破139.15收盘或板块续冷3日即无条件SELL"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 973787.74,
+    "dayPnl": -4342.0,
+    "dayReturnPct": -0.45,
+    "totalReturnPct": -2.62,
+    "unrealizedPnl": 10283.0,
+    "realizedPnl": -36495.26,
+    "cashPct": 87.2
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 1.5512,
+    "up": 3301,
+    "down": 2128,
+    "positive_indices": [
+      "上证指数"
+    ],
+    "negative_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 63,
+    "limit_downs": 12,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 1.55:1, 1/3 major indices green, 63 limit-ups / 12 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "上证+0.24%独红，深证成指-0.12%、创业板指-0.39%走弱；涨跌比1.55:1(3301涨/2128跌)、63涨停/12跌停，但涨幅集中于r0_2(2204家涨0-2%)属弱扩散；IV Rank均值0.63偏悲观(50ETF 0.50/300ETF 0.66/500ETF 0.71)；军工(地面兵装+5.95%/航空装备+3.87%)受珠海航展(12/7)与十五五订单催化领涨，水泥/商用车跟随；医疗服务-4.79%垫底，医疗/传媒成长全线承压。"
+  }
+}

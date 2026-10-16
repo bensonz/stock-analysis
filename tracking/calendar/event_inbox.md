@@ -14,7 +14,7 @@
 > `date`、`tz` (US=影响其后第一个A股交易日 / CN=当日)、`kind`、`note`。不要改 `ai:`、`src:` 和 `id:` 三行（🤖 可留可删）。
 > 标题日期 = A股影响日，由 date+tz 推算，重写时刷新。规则与局限: docs/EVENT_INBOX/DECISIONS.md
 
-_更新: 2026-10-16 · 共 20 条 · 待定 0 条_
+_更新: 2026-10-16 · 共 22 条 · 待定 0 条_
 
 ## 2026-10-16 (T-0) 美国 — 美国特斯拉正式展示新一代“飞行汽车”Roadster
 - [-] keep 🤖   impact: low   direction: two_sided
@@ -112,6 +112,14 @@ _更新: 2026-10-16 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-10-27 12:02 |
   id: wscn-20261027-b84a6961
 
+## 2026-10-28 (T-12) 韩国 — 韩国SK海力士三季报及电话会（预计时间）
+- [-] keep 🤖   impact: low   direction: two_sided
+  date: 2026-10-28   tz: CN   kind: other
+  note:
+  ai: 跳过 · low/two_sided · 单一公司财报，SK海力士虽为半导体龙头但非系统性影响A股整体的事件（deepseek-v4-pro，2026-10-16）
+  src: wallstreetcn imp=4 北京 2026-10-28 12:02 |
+  id: wscn-20261028-b84a6961
+
 ## 2026-10-29 (T-13) 韩国 — 韩国三星电子三季报及电话会
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-10-29   tz: CN   kind: other
@@ -135,6 +143,14 @@ _更新: 2026-10-16 · 共 20 条 · 待定 0 条_
   ai: 跳过 · low/two_sided · 进博会为贸易博览会，非系统性政策事件（deepseek-v4-pro，2026-10-12）
   src: wallstreetcn imp=4 北京 2026-11-05 12:02 |
   id: wscn-20261105-6153f180
+
+## 2026-11-17 (T-32) 美国 — 美国沃什：美联储生产率与就业特别工作组将举行听证会
+- [-] keep 🤖   impact: low   direction: two_sided
+  date: 2026-11-16   tz: US   kind: other
+  note:
+  ai: 跳过 · low/two_sided · 美联储工作组听证会属常规程序性会议，非政策信号事件（deepseek-v4-pro，2026-10-16）
+  src: wallstreetcn imp=4 北京 2026-11-16 12:02 |
+  id: wscn-20261116-7d533f14
 
 ## 2026-11-17 (T-32) 中国 — 中美俄元首将于深圳APEC期间会晤？外交部回应：中方愿同各方一道，共同推动APEC“中国年”取得丰硕成果
 - [-] keep 🤖   impact: medium   direction: two_sided

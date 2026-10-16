@@ -1,0 +1,64 @@
+{
+  "as_of": "2026-10-16",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 21,
+    "new": 2,
+    "pending": 2,
+    "expired": 0,
+    "ai_retired": 0,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 16,
+    "decided": 2,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 1,
+    "fetch_errors": 0,
+    "empty_days": 11,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 2,
+    "kept": 0,
+    "skipped": 2,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261028-b84a6961",
+        "name": "韩国SK海力士三季报及电话会（预计时间）",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报，SK海力士虽为半导体龙头但非系统性影响A股整体的事件"
+      },
+      {
+        "id": "wscn-20261116-7d533f14",
+        "name": "美国沃什：美联储生产率与就业特别工作组将举行听证会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "美联储工作组听证会属常规程序性会议，非政策信号事件"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1620,
+    "tokens_out": 139
+  },
+  "pending_items": []
+}

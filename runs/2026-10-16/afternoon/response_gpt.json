@@ -1,0 +1,214 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "地面兵装Ⅱ",
+        "5d_pct": 5.95,
+        "trend": "accelerating"
+      },
+      {
+        "name": "其他家电Ⅱ",
+        "5d_pct": 4.51,
+        "trend": "steady"
+      },
+      {
+        "name": "水泥",
+        "5d_pct": 4.1,
+        "trend": "steady"
+      },
+      {
+        "name": "航空装备Ⅱ",
+        "5d_pct": 3.87,
+        "trend": "accelerating"
+      },
+      {
+        "name": "商用车",
+        "5d_pct": 3.57,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "医疗服务",
+        "5d_pct": -4.79,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "游戏Ⅱ",
+        "5d_pct": -2.78,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "广告营销",
+        "5d_pct": -2.72,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": -2.54,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "影视院线",
+        "5d_pct": -2.23,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/3 持仓在今日热门板块；2/3(医疗服务)今日垫底，1/3(煤炭)中性",
+    "regime": "防御轮动：军工(地面兵装/航空装备)+水泥+商用车领涨，医疗/传媒成长垫底；上证独红、深成创业板走弱"
+  },
+  "position_decisions": [
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "action": "HOLD",
+      "reason": "今日刚开仓(+0.64%)，距-5%止损26.70尚远；煤炭未入今日top5/bottom5但年内申万第一(+24.3%,来源:输入events)，趋势未破；margin deleveraging(chg5 -23.12%)仅作观察不单独触发卖出",
+      "sector_rank": "煤炭未入今日top5（年内申万第一）",
+      "new_stop": null,
+      "pnl_pct": 0.6,
+      "days_held": 0,
+      "exit_price": null
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "浮盈+13.7%，止损已锁+10%(47.14)未有效触发，现价距止损仅3.2%(WATCH)；盘中低点47.12一度触及止损位；医疗服务今日bottom5第1天(-4.79%)，未达冷区3日卖出线——跌破47.14收盘或板块续冷3日即无条件SELL",
+      "sector_rank": "医疗服务 bottom5 第1天（-4.79%，今日最差）",
+      "new_stop": null,
+      "pnl_pct": 13.7,
+      "days_held": 22,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+14.1%，止损已锁+10%(139.15)未有效触发，现价距止损3.6%(WATCH)；盘中低点139.05一度击穿止损位但收盘144.30收回；今日-6.6%放量回撤未破止损；医疗服务bottom5第1天——跌破139.15收盘或板块续冷3日即无条件SELL",
+      "sector_rank": "医疗服务 bottom5 第1天（-4.79%，今日最差）",
+      "new_stop": null,
+      "pnl_pct": 14.1,
+      "days_held": 54,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "300404",
+      "name": "博济医药",
+      "reason": "医疗服务今日bottom5(-4.79%)，Rule 1板块禁入；RPS120=94.41虽达标但板块引力胜个股",
+      "rps120": 94.41
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "铜价三连跌(LME -1.1%,来源:输入events)、10/15跌超6%；dist_ma20 -12.9%破位，板块动量向下",
+      "rps120": 92.93
+    },
+    {
+      "code": "601939",
+      "name": "建设银行",
+      "reason": "银行未入今日top5；现价11.45低于MA5(12.21,-6.2%)，创历史新高后回落，非动量买点",
+      "rps120": 91.09
+    },
+    {
+      "code": "601988",
+      "name": "中国银行",
+      "reason": "银行未入今日top5；带周级别超买标签；现价6.92低于MA5 -7.7%",
+      "rps120": 90.78
+    },
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "reason": "银行未入今日top5；现价34.72低于MA5 -7.0%",
+      "rps120": 89.94
+    },
+    {
+      "code": "601998",
+      "name": "中信银行",
+      "reason": "银行未入今日top5；带周级别超买标签；现价9.09低于MA5 -6.5%",
+      "rps120": 87.23
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "石油石化未入今日top5；margin deleveraging(chg5 -4.82%)；现价低于MA5 -5.2%；Q3预增+3318%催化虽强但板块不在风口",
+      "rps120": 86.44
+    },
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "航运港口走弱(10/15跌停-9.99%,来源:输入events)；dist_ma20 -46.2%深度破位",
+      "rps120": 93.65
+    },
+    {
+      "code": "603519",
+      "name": "立霸股份",
+      "reason": "家电零部件(非领涨的其他家电Ⅱ)；股东减持进行中；dist_ma5 -13.8%破位",
+      "rps120": 93.3
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "reason": "10/15刚以+0.31%离场(航运跌停,来源:输入recent_exits)，板块仍弱，重入无差异化理由",
+      "rps120": 85.57
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "今日热门板块(地面兵装+5.95%/航空装备+3.87%/水泥+4.1%/商用车+3.57%)与策略池28只股票零重合，13只enriched候选无一在热门板块——动量池空仓是正确的，不要硬凑。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "候选池由基本面+动量筛选生成，与单日板块热点存在时滞；板块轮动快时池子会阶段性与热点脱节，此时应持币等待而非强行入场。"
+    },
+    {
+      "text": "医疗服务(两只CRO持仓所在板块)从9/14入场时#1(+4.01%)跌至今日bottom5第1(-4.79%)，板块动量完全反转——紧盯3日冷区卖出线，下周一/二是关键窗口。",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "CXO成长股高度受风险偏好驱动，板块从领涨到垫底往往先于个股止损触发，板块引力胜个股。"
+    },
+    {
+      "text": "5只银行候选今日全部跌破MA5(dist_ma5 -6.2%~-9.7%)，创新高后集体回吐——买低于MA5的股票是接回落不是追动量，不符合Rule 2，等银行重新进top5再考虑。",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "跌破MA5意味着短期动能衰减；动量系统应买重新站上/贴均线上行的强势股。"
+    },
+    {
+      "text": "IV Rank均值0.63(偏悲观)、500ETF 0.71/创业板ETF 0.70偏高，叠加涨跌比1.55:1但仅1/3指数翻红、涨幅集中于r0_2(2204家涨0-2%)——典型弱扩散防御市，不宜激进开新仓，87%现金是合理状态。",
+      "type": "observation",
+      "tags": [
+        "position-sizing",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "高IV+弱扩散=涨势脆弱，新仓位易被情绪反转清洗。"
+    },
+    {
+      "text": "军工(地面兵装/航空装备)自10/13连续领涨(珠海航展12/7+十五五订单窗口,来源:证券时报/中金/东方证券)，但候选池无军工股——记录候选池来源缺口，避免系统性踏空主线。",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "主线板块与候选池错配是流程问题而非选股问题，应反馈候选池来源调整。"
+    }
+  ],
+  "market_summary": "上证+0.24%独红，深证成指-0.12%、创业板指-0.39%走弱；涨跌比1.55:1(3301涨/2128跌)、63涨停/12跌停，但涨幅集中于r0_2(2204家涨0-2%)属弱扩散；IV Rank均值0.63偏悲观(50ETF 0.50/300ETF 0.66/500ETF 0.71)；军工(地面兵装+5.95%/航空装备+3.87%)受珠海航展(12/7)与十五五订单催化领涨，水泥/商用车跟随；医疗服务-4.79%垫底，医疗/传媒成长全线承压。",
+  "market_sentiment": "neutral",
+  "market_call": "谨慎"
+}
