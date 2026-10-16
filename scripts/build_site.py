@@ -241,6 +241,55 @@ def build_open_lookup(active: dict, trades: list[dict]) -> dict:
 
 
 OPEN_ACTIONS = {"OPEN", "BUY", "ADD"}
+TRADE_ACTIONS = OPEN_ACTIONS | {"SELL", "TRIM"}
+
+
+def _summary_actions(summary: dict, d: str, open_lookup: dict) -> list[dict]:
+    """daily_summary.json actions → the side panel's compact rows."""
+    out = []
+    for a in summary.get("actions", []) or []:
+        code = str(a.get("code", "") or "").split(".")[0]
+        act = {
+            "c": code, "n": a.get("name", ""),
+            "a": str(a.get("action", "") or "").upper(),
+            "p": a.get("price"), "r": a.get("pnl_pct"),
+            "note": _trunc(a.get("note")),
+        }
+        if act["a"] in OPEN_ACTIONS:
+            act.update(open_lookup.get((code, d), {}))
+        out.append(act)
+    return out
+
+
+def _earlier_slot_trades(run_dir: Path, d: str, open_lookup: dict) -> list[dict]:
+    """Trade actions from sibling slots of `run_dir` that STARTED before it,
+    in run order (run_started_at, never slot name), each tagged with its
+    slot label. Siblings without a manifest or summary are skipped."""
+    def started(rd: Path):
+        try:
+            return (_read_json(rd / "manifest.json") or {}).get("run_started_at")
+        except Exception:
+            return None
+    own = started(run_dir)
+    if not own:
+        return []
+    sibs = []
+    for sib in run_dir.parent.iterdir():
+        t = started(sib) if sib.is_dir() and sib != run_dir else None
+        if t and t < own and (sib / "output" / "daily_summary.json").exists():
+            sibs.append((t, sib))
+    out = []
+    for _, sib in sorted(sibs):
+        try:
+            acts = _summary_actions(
+                _read_json(sib / "output" / "daily_summary.json"), d, open_lookup)
+        except Exception:
+            continue
+        for act in acts:
+            if act["a"] in TRADE_ACTIONS:
+                act["slot"] = SLOT_LABEL.get(sib.name, sib.name)
+                out.append(act)
+    return out
 
 
 def _run_status_for(point: dict) -> str | None:
@@ -350,19 +399,14 @@ def collect_day_details(series: list[dict], trades: list[dict],
         if summary_path:
             if borrowed_from:
                 det["actions_from_slot"] = borrowed_from
+            elif p.get("slot") != "legacy":
+                # Trades made by an EARLIER slot that day: the winning run only
+                # sees those positions as HOLD. 2026-10-16: 601225 opened at
+                # noon and was missing from 当日交易. Prepended so each holding
+                # row's note stays the latest run's.
+                det["actions"] += _earlier_slot_trades(Path(run_dir), d, open_lookup)
             try:
-                summary = _read_json(summary_path)
-                for a in summary.get("actions", []) or []:
-                    code = str(a.get("code", "") or "").split(".")[0]
-                    act = {
-                        "c": code, "n": a.get("name", ""),
-                        "a": str(a.get("action", "") or "").upper(),
-                        "p": a.get("price"), "r": a.get("pnl_pct"),
-                        "note": _trunc(a.get("note")),
-                    }
-                    if act["a"] in OPEN_ACTIONS:
-                        act.update(open_lookup.get((code, d), {}))
-                    det["actions"].append(act)
+                det["actions"] += _summary_actions(_read_json(summary_path), d, open_lookup)
             except Exception:
                 pass
 

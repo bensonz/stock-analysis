@@ -221,6 +221,35 @@ def test_day_details_join(tmp_path):
     assert details["2026-08-05"]["day_pnl"] is None  # no prior snapshot
 
 
+def test_day_details_include_earlier_slot_trades(tmp_path):
+    # 2026-10-16: 601225 opened at noon; the afternoon snapshot won and its
+    # summary carried 601225 only as HOLD, so 当日交易 lost the noon OPEN.
+    runs = tmp_path / "runs"
+    _snap(runs, "2026-10-16/noon/output/positions_snapshot.json",
+          "2026-10-16T11:41:00+08:00", 978000.0)
+    _snap(runs, "2026-10-16/afternoon/output/positions_snapshot.json",
+          "2026-10-16T16:57:00+08:00", 973788.0)
+    for slot, started in (("noon", "2026-10-16T11:35:00+08:00"),
+                          ("afternoon", "2026-10-16T16:46:00+08:00")):
+        _manifest(runs, "2026-10-16", slot, started, "success")
+    (runs / "2026-10-16/noon/output/daily_summary.json").write_text(json.dumps({"actions": [
+        {"code": "601225", "name": "陕西煤业", "action": "OPEN", "price": 28.1, "note": "开仓"},
+        {"code": "603127", "name": "昭衍新药", "action": "HOLD", "price": 50.6, "note": "午盘持有"},
+    ]}), encoding="utf-8")
+    (runs / "2026-10-16/afternoon/output/daily_summary.json").write_text(json.dumps({"actions": [
+        {"code": "601225", "name": "陕西煤业", "action": "HOLD", "price": 28.28, "note": "收盘持有"},
+        {"code": "601665", "name": "齐鲁银行", "action": "OPEN", "price": 6.62, "note": "开仓"},
+    ]}), encoding="utf-8")
+    lookup = {("601225", "2026-10-16"): {"sh": 1500, "amt": 42150.0, "ap": 4}}
+    acts = bs.collect_day_details(bs.collect_equity_series(runs), [], lookup)["2026-10-16"]["actions"]
+    assert [(a["c"], a["a"], a.get("slot")) for a in acts] == [
+        ("601225", "OPEN", "午盘"),        # earlier slot's trade, first
+        ("601225", "HOLD", None),          # winning run's rows after it
+        ("601665", "OPEN", None),
+    ]                                      # noon HOLD of 603127 not added
+    assert acts[0]["sh"] == 1500           # sizing joined for the noon open
+
+
 def test_open_lookup_from_active_and_closed():
     active = {"activePositions": [
         {"code": "603259", "entryDate": "2026-07-31", "shares": 800,

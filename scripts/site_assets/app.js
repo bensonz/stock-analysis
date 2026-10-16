@@ -99,6 +99,7 @@ function renderDay(d) {
       }
       h += `<div class="d-act"><span class="badge b-${a.a === "SELL" ? "sell" : "open"}">${ACTION_CN[a.a] || esc(a.a)}</span>`
          + ` <b>${esc(a.n)}</b> <span class="muted">${a.p ?? ""}</span>`
+         + (a.slot ? ` <span class="mini">${esc(a.slot)}</span>` : "")
          + ` <span class="${pnlCls(a.r)}">${a.r == null ? "" : sign(a.r) + a.r + "%"}</span>`
          + size
          + `<div class="d-note">${esc(a.note)}</div></div>`;
@@ -119,6 +120,9 @@ function renderDay(d) {
     // "this row has nothing to say" when it had the most to say.
     const rowNotes = {};
     for (const a of (det.actions || [])) if (a.note) rowNotes[a.c] = {a: a.a, note: a.note};
+    // An earlier slot's OPEN is overwritten above by the later run's HOLD note;
+    // the row still opened today.
+    const openedToday = new Set(trades.filter(a => OPENS[a.a]).map(a => a.c));
     let noted = 0;
     for (const p of det.holdings) {
       const size = p.v != null ? `<span class="hv mini">${fmtM(p.v)}${p.w != null ? ` (${p.w}%)` : ""}</span>` : "";
@@ -126,7 +130,8 @@ function renderDay(d) {
       if (rn) noted++;
       // Glyph, not the word: the full action name is in the tooltip badge,
       // and "RAISE_STOP" inline pushed the stock code out of the row.
-      const glyph = {RAISE_STOP: "⬆", OPEN: "＋", SELL: "✕"}[rn && rn.a] || "";
+      const glyph = {RAISE_STOP: "⬆", OPEN: "＋", SELL: "✕"}[rn && rn.a]
+                    || (openedToday.has(p.c) ? "＋" : "");
       const tag = glyph ? ` <span class="act-tag">${glyph}</span>` : "";
       const tk = tradeFor(p.c, d);
       h += `<div class="d-row${rn ? " has-note" : ""}${tk ? " tk" : ""}"${rn ? ` data-note="${esc(rn.note)}" data-act="${esc(rn.a)}"` : ""}${tk ? ` data-tk="${esc(tk)}"` : ""}>`
