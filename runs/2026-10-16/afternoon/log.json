@@ -4,21 +4,21 @@
   "runs": [
     {
       "phase": "collect",
-      "start": 1792137246.1728158,
+      "start": 1792140438.567227,
       "errors": [],
-      "end": 1792137348.6732621,
-      "duration_sec": 102.5
+      "end": 1792140535.133358,
+      "duration_sec": 96.6
     },
     {
       "phase": "llm_analysis",
-      "response_size_bytes": 9208,
+      "response_size_bytes": 9744,
       "tokens": {
-        "input_tokens": 125614,
-        "output_tokens": 22430
+        "input_tokens": 205155,
+        "output_tokens": 29190
       },
-      "rounds": 2,
+      "rounds": 3,
       "tool_calls_count": 7,
-      "duration_sec": 390.2,
+      "duration_sec": 480.9,
       "fallback_used": false,
       "provider": "openai",
       "decision_source": "DeepSeek V4 Pro primary",
@@ -26,16 +26,16 @@
     },
     {
       "phase": "apply",
-      "start": 1792137738.918729,
+      "start": 1792141016.0470881,
       "actions": [
+        "OPEN 601665 @ 6.62",
         "Generated watchlist",
         "Generated report",
         "Saved daily summary",
-        "Hypothesis: Updated h207 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
-        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=95",
-        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=64",
-        "Hypothesis: Updated h144 (hypothesis): +1 supporting evidence → hitRate=75%, n=4",
-        "Hypothesis: Created h209 (observation): 军工(地面兵装/航空装备)自10/13连续领涨(珠海航展12/7+十五五订单窗口,来源:证券时报/中金/东方证券)，但候选池无军工股——记录候选池来源缺口，避免...",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=96",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=98%, n=65",
+        "Hypothesis: Updated h024 (rule): +1 supporting evidence → hitRate=92%, n=24",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=98%, n=66",
         "Updated LEARNINGS.md (legacy)"
       ],
       "corporate_actions": {
@@ -49,7 +49,7 @@
       "post_apply_rule_violations": {
         "status": "violations",
         "total_rules": 6,
-        "total_violations": 2,
+        "total_violations": 3,
         "crashed_rules": 0,
         "rules": [
           {
@@ -82,6 +82,16 @@
             "status": "violations",
             "exit_code": 1,
             "violations": [
+              {
+                "code": "601665",
+                "name": "齐鲁银行",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 6.62,
+                "stopLoss": 6.29,
+                "distance_pct": 4.98,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              },
               {
                 "code": "603127",
                 "name": "昭衍新药",
@@ -123,16 +133,17 @@
           }
         ]
       },
-      "end": 1792137740.585033,
-      "duration_sec": 1.7
+      "end": 1792141024.14481,
+      "duration_sec": 8.1
     }
   ],
   "validation_errors": [
+    "RULE check_stop_proximity: 601665 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
     "RULE check_stop_proximity: 603127 — 🟠 WATCH — 3.2% above stop. Monitor closely. No immediate action but be ready.",
     "RULE check_stop_proximity: 603259 — 🟠 WATCH — 3.6% above stop. Monitor closely. No immediate action but be ready."
   ],
   "summary": {
     "totalPhases": 3,
-    "totalDurationSec": 494.4
+    "totalDurationSec": 585.6
   }
 }

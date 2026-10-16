@@ -1633,11 +1633,15 @@
           {
             "date": "2026-10-16",
             "detail": "医疗服务(两只CRO持仓所在板块)从9/14入场时#1(+4.01%)跌至今日bottom5第1(-4.79%)，板块动量完全反转——紧盯3日冷区卖出线，下周一/二是关键窗口。"
+          },
+          {
+            "date": "2026-10-16",
+            "detail": "医疗服务今日bottom5(-4.79%)+药明康德闪崩上热搜(-6.6%成交123亿)，昭衍/药明双双进入距止损3%内的stop_proximity WATCH：板块冷区第1天不构成卖出，但跌破止损收盘或续冷3日即无条件SELL，不给thesis例外"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 95,
+      "sampleSize": 96,
       "hitRate": 1.0,
       "confidence": 0.99,
       "tags": [
@@ -2461,7 +2465,7 @@
       "type": "signal",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-10-15",
+      "lastTested": "2026-10-16",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -2548,6 +2552,10 @@
           {
             "date": "2026-10-15",
             "detail": "招商轮船从+11.77%赢家两日回吐至+0.31%并今日-9.92%，保本止损19.29+stop_proximity(0.31%)+time_decay(30日<3%)三重叠加应主动离场——赢家一旦跌回成本且所属板块入bottom5，'让赢家奔跑'的前提已不存在。"
+          },
+          {
+            "date": "2026-10-16",
+            "detail": "药明康德闪崩验证：止损已锁+10%后，接近止损位(3.6%)+板块转冷时应提前预警收紧，而非等精确触发——盘中一度击穿139.15又收回"
           }
         ],
         "contradicting": [
@@ -2561,9 +2569,9 @@
           }
         ]
       },
-      "sampleSize": 23,
-      "hitRate": 0.913,
-      "confidence": 0.88,
+      "sampleSize": 24,
+      "hitRate": 0.917,
+      "confidence": 0.885,
       "tags": [
         "exit-rule",
         "timing"
@@ -2929,7 +2937,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-10-08",
+      "lastTested": "2026-10-16",
       "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally.",
       "evidence": {
         "supporting": [
@@ -3184,6 +3192,14 @@
           {
             "date": "2026-10-08",
             "detail": "板块热≠个股催化对得上：海通发展(603162)位列航运港口#1，但核心运力是干散货船，与驱动板块的油运VLCC超级周期基本脱节(来源:ZAKER明确区分)，今日仅被板块情绪带动。买入前须核对催化是否真正属于该股，而非只看板块排名。"
+          },
+          {
+            "date": "2026-10-16",
+            "detail": "今日top5板块(地面兵装/家电/水泥/航空装备/商用车)在策略池零覆盖——候选池与当日动量错位时，宁可持币或只给非领涨板块小仓，不硬买"
+          },
+          {
+            "date": "2026-10-16",
+            "detail": "军工板块受珠海航展(12/7-13，10/13发布会)催化走强(地面兵装+5.95%/航空装备+3.87%)——事件驱动型板块轮动爆发力强，但策略池无对应标的无法参与，暴露候选池板块覆盖不足"
           }
         ],
         "contradicting": [
@@ -3193,9 +3209,9 @@
           }
         ]
       },
-      "sampleSize": 64,
-      "hitRate": 0.984,
-      "confidence": 0.97,
+      "sampleSize": 66,
+      "hitRate": 0.985,
+      "confidence": 0.971,
       "tags": [
         "sector",
         "timing"

@@ -2,37 +2,17 @@
   "provider": "openai",
   "primary_model": "deepseek-v4-pro",
   "decision_source": "DeepSeek V4 Pro primary",
-  "input_tokens": 125614,
-  "output_tokens": 22430,
-  "rounds": 2,
-  "duration_sec": 390.2,
+  "input_tokens": 205155,
+  "output_tokens": 29190,
+  "rounds": 3,
+  "duration_sec": 480.9,
   "tool_calls": [
     {
       "pass": "P1",
       "round": 1,
-      "tool": "web_search",
-      "input": {
-        "query": "2026年10月16日 A股 医疗服务 医药 CRO 板块 下跌 原因",
-        "max_results": 6
-      },
-      "result_length": 3712
-    },
-    {
-      "pass": "P1",
-      "round": 1,
-      "tool": "web_search",
-      "input": {
-        "query": "2026年10月16日 军工 地面兵装 航空装备 水泥 商用车 板块 上涨 原因",
-        "max_results": 6
-      },
-      "result_length": 3940
-    },
-    {
-      "pass": "P1",
-      "round": 1,
       "tool": "web_fetch",
       "input": {
-        "url": "https://www.baidu.com/s?wd=A股+军工+地面兵装+航空装备+大涨+2026年10月16日",
+        "url": "https://www.baidu.com/s?wd=A股+2026年10月16日+国防军工+地面兵装+上涨原因",
         "maxChars": 4000
       },
       "result_length": 4000
@@ -42,7 +22,7 @@
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "url": "https://www.baidu.com/s?wd=医疗服务+CRO+医药+下跌+原因+2026年10月16日",
+        "url": "https://www.baidu.com/s?wd=医疗服务+CRO+板块+大跌+原因+2026年10月",
         "maxChars": 4000
       },
       "result_length": 4000
@@ -52,7 +32,7 @@
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "url": "https://www.baidu.com/s?wd=水泥+板块+大涨+原因+2026年10月",
+        "url": "https://www.baidu.com/s?wd=银行板块+房贷贴息+创新高+2026年10月",
         "maxChars": 4000
       },
       "result_length": 4000
@@ -62,7 +42,7 @@
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "url": "https://www.baidu.com/s?wd=医药工业十五五规划+CRO+利好",
+        "url": "https://www.baidu.com/s?wd=煤炭板块+动力煤价格+上涨+2026年10月",
         "maxChars": 4000
       },
       "result_length": 4000
@@ -72,7 +52,27 @@
       "round": 1,
       "tool": "web_fetch",
       "input": {
-        "url": "https://www.baidu.com/s?wd=A股+今日+热门板块+2026年10月16日",
+        "url": "https://www.baidu.com/s?wd=A股+今日+市场+走势+涨停+2026年10月16日",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=药明康德+闪崩+原因+2026年10月16日",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=水泥+航空装备+商用车+板块+上涨+2026年10月16日",
         "maxChars": 4000
       },
       "result_length": 4000

@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-10-16T16:02:20.584129+08:00",
+  "snapshot_time": "2026-10-16T16:57:04.143762+08:00",
   "snapshot_type": "post_run",
   "date": "2026-10-16",
   "portfolio_config": {
@@ -11,24 +11,24 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-10-16T16:02:19.970059+08:00",
+    "lastUpdated": "2026-10-16T16:57:03.806018+08:00",
     "portfolio": {
       "startingCapital": 1000000,
       "totalEquity": 973787.74,
-      "cash": 849109.74,
-      "investedValue": 124678.0,
+      "cash": 823953.74,
+      "investedValue": 149834.0,
       "unrealizedPnl": 10283.0,
       "realizedPnl": -36495.26,
       "dividendCash": 137.7,
       "totalPnl": -26212.26,
       "totalReturnPct": -2.62,
-      "positionsUsed": 3,
+      "positionsUsed": 4,
       "positionsMax": 10,
-      "cashPct": 87.2,
+      "cashPct": 84.61,
       "dayPnl": -4342.0,
       "minCashPct": 0,
       "minCashValue": 0.0,
-      "deployableCash": 849109.74
+      "deployableCash": 823953.74
     },
     "activePositions": [
       {
@@ -53,6 +53,26 @@
         "mavol30": 3597.17,
         "volumeBelowMavol30": false,
         "weight_pct": 4.36
+      },
+      {
+        "code": "601665",
+        "name": "齐鲁银行",
+        "entryDate": "2026-10-16",
+        "entrySlot": "afternoon",
+        "entryPrice": 6.62,
+        "currentPrice": 6.62,
+        "pnl_pct": 0.0,
+        "stopLoss": 6.29,
+        "currentStop": 6.29,
+        "targetPrice": 7.28,
+        "status": "active",
+        "sector": "银行（城商行）",
+        "shares": 3800,
+        "allocation_pct": 3.0,
+        "allocatedCapital": 25156.0,
+        "currentValue": 25156.0,
+        "unrealizedPnl": 0.0,
+        "weight_pct": 2.58
       },
       {
         "code": "603127",
@@ -141,7 +161,7 @@
           "price": 28.28,
           "change_pct": 0.6,
           "action": "HOLD",
-          "note": "今日刚开仓(+0.64%)，距-5%止损26.70尚远；煤炭未入今日top5/bottom5但年内申万第一(+24.3%,来源:输入events)，趋势未破；margin deleveraging(chg5 -23.12%)仅作观察不单独触发卖出"
+          "note": "今日新开仓+0.60%，煤炭板块年内涨幅A股第一(输入events:截至10/10 +24.3%)，动力煤价格破千元；margin deleveraging(chg5 -23.12%)仅作观察不单独触发卖出"
         }
       ],
       "exitDate": null,
@@ -151,7 +171,49 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-10-16T11:41:59.171772+08:00",
-      "updatedAt": "2026-10-16T16:02:19.892417+08:00",
+      "updatedAt": "2026-10-16T16:57:01.935976+08:00",
+      "trackerVersion": "2.1"
+    },
+    "601665": {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "status": "active",
+      "thesis": "城商行0风险因子+RPS120=91.14甜点区+MA距离全部合规(无追高)+margin adding；银行板块10月普涨多股创新高(输入events)，房贷贴息政策+三季报窗口催化。IV 0.66偏高+银行未入今日top5→仅3%小仓",
+      "entryDate": "2026-10-16",
+      "entrySlot": "afternoon",
+      "entryPrice": 6.62,
+      "targetPrice": 7.28,
+      "stopLoss": 6.29,
+      "currentStop": 6.29,
+      "allocation_pct": 3.0,
+      "shares": 3800,
+      "allocatedCapital": 25156.0,
+      "rating": 2,
+      "rps120": 91.14,
+      "sector": "银行（城商行）",
+      "catalysts": [],
+      "sourceWatchlist": "2026-10-16",
+      "history": [
+        {
+          "date": "2026-10-16",
+          "slot": "afternoon",
+          "price": 6.62,
+          "change_pct": 0,
+          "action": "OPEN",
+          "shares": 3800,
+          "stop": 6.29,
+          "allocatedCapital": 25156.0,
+          "note": "LLM开仓 齐鲁银行"
+        }
+      ],
+      "exitDate": null,
+      "exitPrice": null,
+      "exitReason": null,
+      "returnPct": null,
+      "holdingDays": null,
+      "lessonLearned": null,
+      "createdAt": "2026-10-16T16:57:03.796806+08:00",
+      "updatedAt": "2026-10-16T16:57:03.796812+08:00",
       "trackerVersion": "2.1"
     },
     "603127": {
@@ -491,7 +553,7 @@
           "price": 48.71,
           "change_pct": 13.68,
           "action": "HOLD",
-          "note": "浮盈+13.7%，止损已锁+10%(47.14)未有效触发，现价距止损仅3.2%(WATCH)；盘中低点47.12一度触及止损位；医疗服务今日bottom5第1天(-4.79%)，未达冷区3日卖出线——跌破47.14收盘或板块续冷3日即无条件SELL"
+          "note": "浮盈+13.68%止损已锁+10%(47.14)，现价48.71距止损3.2%未破收盘；医疗服务今日bottom5(-4.79%)为冷区第1天，未达3日卖出线——跌破47.14收盘或板块续冷3日即无条件SELL"
         }
       ],
       "exitDate": null,
@@ -501,7 +563,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-09-14T11:41:41.947954+08:00",
-      "updatedAt": "2026-10-16T16:02:19.936858+08:00",
+      "updatedAt": "2026-10-16T16:57:01.945076+08:00",
       "trackerVersion": "2.1"
     },
     "603259": {
@@ -1204,7 +1266,7 @@
           "price": 144.3,
           "change_pct": 14.07,
           "action": "HOLD",
-          "note": "浮盈+14.1%，止损已锁+10%(139.15)未有效触发，现价距止损3.6%(WATCH)；盘中低点139.05一度击穿止损位但收盘144.30收回；今日-6.6%放量回撤未破止损；医疗服务bottom5第1天——跌破139.15收盘或板块续冷3日即无条件SELL"
+          "note": "浮盈+14.07%止损已锁+10%(139.15)，现价144.30距止损3.6%未破收盘；今日-6.6%放量闪崩(成交123亿，上热搜)但收盘在止损上方；医疗服务bottom5第1天——跌破139.15收盘或板块续冷3日即无条件SELL"
         }
       ],
       "exitDate": null,
@@ -1214,7 +1276,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-07-31T11:45:38.795030+08:00",
-      "updatedAt": "2026-10-16T16:02:19.950231+08:00",
+      "updatedAt": "2026-10-16T16:57:01.948065+08:00",
       "trackerVersion": "2.1",
       "entrySlot": "noon",
       "corporateActions": [

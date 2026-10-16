@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-16",
+  "slot": "afternoon",
+  "verdict": "action_needed",
+  "checks_run": 17,
+  "checks_total": 17,
+  "skipped": [],
+  "findings": [
+    {
+      "id": "source-unhealthy:sina",
+      "check": "source_unhealthy",
+      "kind": "env",
+      "title": "数据源 sina 状态 down",
+      "detail": "{\"status\": \"down\", \"error\": \"HTTPSConnectionPool(host='hq.sinajs.cn', port=443): Max retries exceeded with url: /list=s_sh000001 (Caused by NameResolutionError(\\\"HTTPSConnection(host='hq.sinajs.cn', port=443): Failed to resolve 'hq.sinajs.cn' ([Errno 8] nodename nor servname provided, or not known)\\\"))\"}",
+      "suspect": "",
+      "fix_cmd": "",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "source-unhealthy:cheesefortune",
+      "check": "source_unhealthy",
+      "kind": "env",
+      "title": "数据源 cheesefortune 状态 down",
+      "detail": "{\"status\": \"down\", \"error\": \"<urlopen error [Errno 8] nodename nor servname provided, or not known>\"}",
+      "suspect": "",
+      "fix_cmd": "",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    },
+    {
+      "id": "db-health-warning:c924b422",
+      "check": "db_health_warnings",
+      "kind": "env",
+      "title": "数据健康告警: adj factors lag prices (2026-10-15 < 2026-10-16) — run 'pricedb.py fac",
+      "detail": "adj factors lag prices (2026-10-15 < 2026-10-16) — run 'pricedb.py factors heal'",
+      "suspect": "scripts/pricedb.py db_health",
+      "fix_cmd": "python3 scripts/pricedb.py factors verify",
+      "occurrences": 1,
+      "first_seen": "",
+      "accepted": ""
+    }
+  ]
+}

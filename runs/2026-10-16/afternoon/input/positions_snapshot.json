@@ -1,5 +1,5 @@
 {
-  "snapshot_time": "2026-10-16T15:54:06.184544+08:00",
+  "snapshot_time": "2026-10-16T16:47:18.575447+08:00",
   "snapshot_type": "pre_run",
   "date": "2026-10-16",
   "portfolio_config": {
@@ -11,21 +11,21 @@
     "currency": "CNY"
   },
   "positions_json": {
-    "lastUpdated": "2026-10-16T11:41:59.187760+08:00",
+    "lastUpdated": "2026-10-16T16:02:19.970059+08:00",
     "portfolio": {
       "startingCapital": 1000000,
-      "totalEquity": 978016.74,
+      "totalEquity": 973787.74,
       "cash": 849109.74,
-      "investedValue": 128907.0,
-      "unrealizedPnl": 14512.0,
+      "investedValue": 124678.0,
+      "unrealizedPnl": 10283.0,
       "realizedPnl": -36495.26,
       "dividendCash": 137.7,
-      "totalPnl": -21983.26,
-      "totalReturnPct": -2.2,
+      "totalPnl": -26212.26,
+      "totalReturnPct": -2.62,
       "positionsUsed": 3,
       "positionsMax": 10,
-      "cashPct": 86.82,
-      "dayPnl": -128.0,
+      "cashPct": 87.2,
+      "dayPnl": -4342.0,
       "minCashPct": 0,
       "minCashValue": 0.0,
       "deployableCash": 849109.74
@@ -37,8 +37,8 @@
         "entryDate": "2026-10-16",
         "entrySlot": "noon",
         "entryPrice": 28.11,
-        "currentPrice": 28.11,
-        "pnl_pct": 0.0,
+        "currentPrice": 28.28,
+        "pnl_pct": 0.6,
         "stopLoss": 26.7,
         "currentStop": 26.7,
         "targetPrice": 33.7,
@@ -47,9 +47,12 @@
         "shares": 1500,
         "allocation_pct": 5.0,
         "allocatedCapital": 42165.0,
-        "currentValue": 42165.0,
-        "unrealizedPnl": 0.0,
-        "weight_pct": 4.31
+        "currentValue": 42420.0,
+        "unrealizedPnl": 255.0,
+        "volume": 399964,
+        "mavol30": 3597.17,
+        "volumeBelowMavol30": false,
+        "weight_pct": 4.36
       },
       {
         "code": "603127",
@@ -57,8 +60,8 @@
         "entryDate": "2026-09-14",
         "entrySlot": "noon",
         "entryPrice": 42.85,
-        "currentPrice": 50.52,
-        "pnl_pct": 17.9,
+        "currentPrice": 48.71,
+        "pnl_pct": 13.68,
         "stopLoss": 40.71,
         "currentStop": 47.14,
         "targetPrice": 46.71,
@@ -67,12 +70,12 @@
         "shares": 800,
         "allocation_pct": 4.0,
         "allocatedCapital": 34280.0,
-        "currentValue": 40416.0,
-        "unrealizedPnl": 6136.0,
-        "volume": 260690,
-        "mavol30": 3522.0,
+        "currentValue": 38968.0,
+        "unrealizedPnl": 4688.0,
+        "volume": 441046,
+        "mavol30": 3578.87,
         "volumeBelowMavol30": false,
-        "weight_pct": 4.13
+        "weight_pct": 4.0
       },
       {
         "code": "603259",
@@ -80,8 +83,8 @@
         "entryDate": "2026-07-31",
         "entrySlot": "noon",
         "entryPrice": 126.5,
-        "currentPrice": 154.42,
-        "pnl_pct": 22.07,
+        "currentPrice": 144.3,
+        "pnl_pct": 14.07,
         "stopLoss": 120.18,
         "currentStop": 139.15,
         "targetPrice": 150.0,
@@ -90,13 +93,13 @@
         "shares": 300,
         "allocation_pct": 5.0,
         "allocatedCapital": 37950.0,
-        "currentValue": 46326.0,
-        "unrealizedPnl": 8376.0,
+        "currentValue": 43290.0,
+        "unrealizedPnl": 5340.0,
         "dividendCash": 137.7,
-        "volume": 233293,
-        "mavol30": 3474.47,
+        "volume": 836091,
+        "mavol30": 3636.67,
         "volumeBelowMavol30": false,
-        "weight_pct": 4.74
+        "weight_pct": 4.45
       }
     ]
   },
@@ -131,6 +134,14 @@
           "stop": 26.7,
           "allocatedCapital": 42165.0,
           "note": "LLM开仓 陕西煤业"
+        },
+        {
+          "date": "2026-10-16",
+          "slot": "afternoon",
+          "price": 28.28,
+          "change_pct": 0.6,
+          "action": "HOLD",
+          "note": "今日刚开仓(+0.64%)，距-5%止损26.70尚远；煤炭未入今日top5/bottom5但年内申万第一(+24.3%,来源:输入events)，趋势未破；margin deleveraging(chg5 -23.12%)仅作观察不单独触发卖出"
         }
       ],
       "exitDate": null,
@@ -140,7 +151,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-10-16T11:41:59.171772+08:00",
-      "updatedAt": "2026-10-16T11:41:59.171801+08:00",
+      "updatedAt": "2026-10-16T16:02:19.892417+08:00",
       "trackerVersion": "2.1"
     },
     "603127": {
@@ -473,6 +484,14 @@
           "change_pct": 17.9,
           "action": "HOLD",
           "note": "医疗服务/CRO今日未入top5或bottom5，浮盈+17.9%距止损47.14(+10%)尚远，未触发任何卖出规则；实验猴供需+CRO订单景气未变，让赢家奔跑"
+        },
+        {
+          "date": "2026-10-16",
+          "slot": "afternoon",
+          "price": 48.71,
+          "change_pct": 13.68,
+          "action": "HOLD",
+          "note": "浮盈+13.7%，止损已锁+10%(47.14)未有效触发，现价距止损仅3.2%(WATCH)；盘中低点47.12一度触及止损位；医疗服务今日bottom5第1天(-4.79%)，未达冷区3日卖出线——跌破47.14收盘或板块续冷3日即无条件SELL"
         }
       ],
       "exitDate": null,
@@ -482,7 +501,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-09-14T11:41:41.947954+08:00",
-      "updatedAt": "2026-10-16T11:41:59.045609+08:00",
+      "updatedAt": "2026-10-16T16:02:19.936858+08:00",
       "trackerVersion": "2.1"
     },
     "603259": {
@@ -1178,6 +1197,14 @@
           "change_pct": 22.07,
           "action": "HOLD",
           "note": "浮盈+22.1%，止损已锁+10%(139.15)未触发；在手订单+25.2%、全年收入指引上调，margin deleveraging仅作观察；让赢家奔跑"
+        },
+        {
+          "date": "2026-10-16",
+          "slot": "afternoon",
+          "price": 144.3,
+          "change_pct": 14.07,
+          "action": "HOLD",
+          "note": "浮盈+14.1%，止损已锁+10%(139.15)未有效触发，现价距止损3.6%(WATCH)；盘中低点139.05一度击穿止损位但收盘144.30收回；今日-6.6%放量回撤未破止损；医疗服务bottom5第1天——跌破139.15收盘或板块续冷3日即无条件SELL"
         }
       ],
       "exitDate": null,
@@ -1187,7 +1214,7 @@
       "holdingDays": null,
       "lessonLearned": null,
       "createdAt": "2026-07-31T11:45:38.795030+08:00",
-      "updatedAt": "2026-10-16T11:41:59.069656+08:00",
+      "updatedAt": "2026-10-16T16:02:19.950231+08:00",
       "trackerVersion": "2.1",
       "entrySlot": "noon",
       "corporateActions": [

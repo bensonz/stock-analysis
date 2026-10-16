@@ -1,26 +1,26 @@
 {
   "date": "2026-10-16",
   "slot": "afternoon",
-  "run_started_at": "2026-10-16T15:39:48.170812+08:00",
+  "run_started_at": "2026-10-16T16:46:05.889760+08:00",
   "status": "success",
   "exit_code": 0,
-  "total_duration_sec": 494.4,
+  "total_duration_sec": 585.6,
   "phases": {
     "health_check": {
       "status": "ok",
       "duration_sec": 0.0,
       "sources": {
         "sina": {
-          "status": "down",
-          "error": "HTTPSConnectionPool(host='hq.sinajs.cn', port=443): Max retries exceeded with url: /list=s_sh000001 (Caused by NameResolutionError(\"HTTPSConnection(host='hq.sinajs.cn', port=443): Failed to resolve 'hq.sinajs.cn' ([Errno 8] nodename nor servname provided, or not known)\"))"
+          "status": "ok",
+          "latency_ms": 1027.8
         },
         "cheesefortune": {
-          "status": "down",
-          "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+          "status": "ok",
+          "latency_ms": 1563.7
         },
         "pricedb": {
           "status": "ok",
-          "latest_date": "2026-10-15",
+          "latest_date": "2026-10-16",
           "stale": false
         }
       }
@@ -30,26 +30,27 @@
       "duration_sec": 0.0,
       "latest_date": "2026-10-16",
       "target": "2026-10-16",
-      "snapshot": "  WARNING: 56 batch(es) failed — day may be incomplete; re-run, or let the kline archive fill the rest tonight",
-      "stock_list": "failed: stock-list refresh failed: HTTPSConnectionPool(host='query.sse.com.cn', port=443): Max retries exceeded with url: /sseQuery/commonQuery.do?STOCK_TYPE=1&REG_PROVINCE=&CSRC_CODE=&STOCK_CODE=&sqlId=COMMON_SSE_CP_GPJCTPZ_GPLB_GP_L&COMPANY_STATUS=2%2C4%2C5%2C7%2C8&type=inParams&isPagination=true&pageHelp.cacheSize=1&pageHelp.beginPage=1&pageHelp.pageSize=10000&pageHelp.pageNo=1&pageHelp.endPage=1 (Caused by NameResolutionError(\"HTTPSConnection(host='query.sse.com.cn', port=443): Failed to resolve 'query.sse.com.cn' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      "snapshot": "  2026-10-16: 5564 → 5567 rows (3 inserted)",
+      "stock_list": "failed: 0%|          | 0/18 [00:00<?, ?it/s]stock-list refresh failed: AkShare stock list exceeded 30s timeout"
     },
     "collect": {
       "status": "ok",
-      "duration_sec": 102.5,
+      "duration_sec": 96.6,
       "errors": []
     },
     "llm_analysis": {
       "status": "ok",
-      "duration_sec": 390.2
+      "duration_sec": 480.9
     },
     "apply": {
       "status": "ok",
-      "duration_sec": 1.7
+      "duration_sec": 8.1
     },
     "validate": {
       "status": "warnings",
       "duration_sec": 0.0,
       "errors": [
+        "RULE check_stop_proximity: 601665 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
         "RULE check_stop_proximity: 603127 — 🟠 WATCH — 3.2% above stop. Monitor closely. No immediate action but be ready.",
         "RULE check_stop_proximity: 603259 — 🟠 WATCH — 3.6% above stop. Monitor closely. No immediate action but be ready."
       ]
@@ -73,6 +74,7 @@
       "hard_fails": [],
       "soft_warns": [],
       "notes": [
+        "rule check_stop_proximity: 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
         "rule check_stop_proximity: 🟠 WATCH — 3.2% above stop. Monitor closely. No immediate action but be ready.",
         "rule check_stop_proximity: 🟠 WATCH — 3.6% above stop. Monitor closely. No immediate action but be ready."
       ]
