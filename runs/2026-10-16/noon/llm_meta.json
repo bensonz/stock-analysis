@@ -1,0 +1,102 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 201982,
+  "output_tokens": 24855,
+  "rounds": 3,
+  "duration_sec": 344.6,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "陕西煤业 动力煤价格 新高 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3427
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "医药工业十五五规划 CRO 昭衍新药 药明康德 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3826
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 军工 航天装备 地面兵装 大涨 2026年10月16日",
+        "max_results": 5
+      },
+      "result_length": 3677
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "银行股 国有大行 下跌 保险 2026年10月16日",
+        "max_results": 5
+      },
+      "result_length": 3772
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=军工+航天装备+地面兵装+大涨+2026年10月16日",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=陕西煤业+股价+创历史新高+2026年10月",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=煤炭板块+动力煤价格+今日+2026年10月",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日+2026年10月16日",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=霍尔木兹海峡+航运+军工+油价+2026年10月",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    }
+  ],
+  "fallback_used": false
+}

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-10-15",
+  "lastUpdated": "2026-10-16",
   "hypotheses": [
     {
       "id": "h001",
@@ -1250,7 +1250,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-10-15",
+      "lastTested": "2026-10-16",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1621,13 +1621,21 @@
           {
             "date": "2026-10-15",
             "detail": "航运港口连续bottom5(-5.13%)叠加影子船队制裁放宽预期，验证h019冷区硬不买：海通发展(RPS120=93.65)、招商轮船个体指标尚可也一律不碰；今日招商轮船三重止损离场是正确执行。"
+          },
+          {
+            "date": "2026-10-16",
+            "detail": "今日主线为军工/航天（珠海航展12月+十五五订单+军贸催化，长城军工、晨曦航空涨停，来源:证券时报），但策略池内无任何军工标的——事件驱动轮动可让基本面动量池整体踏空，此时正确做法是不强行买入非热点板块，而非因breadth强就凑数。"
+          },
+          {
+            "date": "2026-10-16",
+            "detail": "航运港口今日bottom5(-0.27%)是霍尔木兹战争溢价退潮的体现（伊朗-阿曼已达成海峡通行协议，来源:百度检索），验证10/15平仓招商轮船(+0.31%)正确——bottom5板块是硬性禁买区，即使个股RPS合格。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 92,
+      "sampleSize": 94,
       "hitRate": 1.0,
-      "confidence": 0.989,
+      "confidence": 0.99,
       "tags": [
         "sector",
         "entry-filter"
@@ -6926,7 +6934,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-08-11",
-      "lastTested": "2026-10-14",
+      "lastTested": "2026-10-16",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -6973,13 +6981,17 @@
           {
             "date": "2026-10-14",
             "detail": "策略池24只中约半数RPS120>95%(百普赛斯99.72/一博99.21/药康99.08/中石98.99/松发98.21等)被RPS上限拦截，再次印证h151：动量极致拥挤时均值回归风险高，RPS>95%封顶规则不可移除"
+          },
+          {
+            "date": "2026-10-16",
+            "detail": "今日策略池RPS>95%的股票（奥士康98.44/中石科技98.88/一博科技99.28/百普赛斯99.72等）全部被Rule2封顶拦截，唯一通过全部门槛的陕西煤业RPS120=86.03恰在80-92甜点区——再次验证RPS封顶(h151)与甜点区纪律(h158)。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 11,
+      "sampleSize": 12,
       "hitRate": 1.0,
-      "confidence": 0.923,
+      "confidence": 0.929,
       "tags": [
         "entry-filter"
       ],
@@ -8430,22 +8442,26 @@
       "id": "h200",
       "text": "招商轮船margin signal从deleveraging翻转为adding(chg5 +3.27%)，与VLCC运价历史新高共振(来源:财闻网9/21东方证券报告)。margin流是滞后确认，不单独构成买卖触发，但翻转方向可作为持有佐证记录。",
       "type": "signal",
-      "status": "observation",
+      "status": "hypothesis",
       "created": "2026-09-21",
-      "lastTested": "2026-09-21",
+      "lastTested": "2026-10-16",
       "mechanism": "融资余额变动反映杠杆资金方向，chg5转正说明投机盘回流，与运价上行同向。",
       "evidence": {
         "supporting": [
           {
             "date": "2026-09-21",
             "detail": "招商轮船margin signal从deleveraging翻转为adding(chg5 +3.27%)，与VLCC运价历史新高共振(来源:财闻网9/21东方证券报告)。margin流是滞后确认，不单独构成买卖触发，但翻转方向可作为持有佐证记录。"
+          },
+          {
+            "date": "2026-10-16",
+            "detail": "陕西煤业margin signal=deleveraging(chg5 -23.12%)而股价连续两日创历史新高——杠杆资金强势中离场与价格新高的背离，属观察项而非买卖触发；不单独据此拒绝干净setup。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 1,
+      "sampleSize": 2,
       "hitRate": 1.0,
-      "confidence": 0.6,
+      "confidence": 0.75,
       "tags": [
         "position-sizing",
         "timing"

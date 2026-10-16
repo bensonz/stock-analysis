@@ -1,0 +1,104 @@
+{
+  "as_of": "2026-10-16",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 20,
+    "new": 7,
+    "pending": 7,
+    "expired": 0,
+    "ai_retired": 4,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 10,
+    "decided": 2,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 1,
+    "fetch_errors": 0,
+    "empty_days": 12,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 7,
+    "kept": 3,
+    "skipped": 4,
+    "high": 1,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261019-CN101256",
+        "name": "中国三季度GDP同比",
+        "decision": "keep",
+        "impact": "high",
+        "direction": "two_sided",
+        "reason": "中国三季度GDP为最核心宏观数据，直接影响全市场风险偏好与政策预期"
+      },
+      {
+        "id": "wscn-20261019-CN141330",
+        "name": "中国9月规模以上工业增加值同比",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "工业增加值反映生产端动能，与GDP同步公布，影响周期板块与增长预期"
+      },
+      {
+        "id": "wscn-20261019-CN171405",
+        "name": "中国9月社会消费品零售总额同比",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "社零反映消费复苏成色，影响消费板块及内需政策预期"
+      },
+      {
+        "id": "wscn-20261020-33014306",
+        "name": "2026年APEC财长会，首度在中国香港举行",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "APEC财长会为论坛性质，非系统性政策决策场合，对A股直接影响有限"
+      },
+      {
+        "id": "wscn-20261027-b84a6961",
+        "name": "韩国SK海力士三季报及电话会（预计时间）",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报，SK海力士非A股系统性重要标的，对大盘影响有限"
+      },
+      {
+        "id": "wscn-20261029-6a652201",
+        "name": "韩国三星电子三季报及电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "三星电子财报为单一公司事件，对A股整体市场无系统性影响"
+      },
+      {
+        "id": "wscn-20261031-c88c7231",
+        "name": "中国10月底，苹果国行Apple Intelligence上线测试版（接入阿里千问）",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "supportive",
+        "reason": "产品功能上线，非系统性政策或宏观事件，对A股大盘影响有限"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1813,
+    "tokens_out": 461
+  },
+  "pending_items": []
+}

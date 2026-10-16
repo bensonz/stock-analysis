@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-16",
+  "actions": [
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "price": 50.52,
+      "pnl_pct": 17.9,
+      "note": "医疗服务/CRO今日未入top5或bottom5，浮盈+17.9%距止损47.14(+10%)尚远，未触发任何卖出规则；实验猴供需+CRO订单景气未变，让赢家奔跑"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 154.42,
+      "pnl_pct": 22.1,
+      "note": "浮盈+22.1%，止损已锁+10%(139.15)未触发；在手订单+25.2%、全年收入指引上调，margin deleveraging仅作观察；让赢家奔跑"
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "action": "OPEN",
+      "price": 28.11,
+      "note": "煤炭年内申万第一（来源:输入events，截至10/9 +24.3%），陕西煤业连续两日创历史新高，RPS120=86.03甜点区，0风险因子，MA距离全部合规；margin deleveraging(chg5 -23%)仅作观察不拒绝"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 978016.74,
+    "dayPnl": -128.0,
+    "dayReturnPct": -0.01,
+    "totalReturnPct": -2.2,
+    "unrealizedPnl": 14512.0,
+    "realizedPnl": -36495.26,
+    "cashPct": 86.82
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 7.8349,
+    "up": 4889,
+    "down": 624,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 78,
+    "limit_downs": 0,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 7.83:1, 3/3 major indices green, 78 limit-ups / 0 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [
+    {
+      "code": "601225",
+      "name": "陕西煤业"
+    }
+  ],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "Breadth 7.83:1强多头（4889涨/624跌，78涨停/0跌停），上证+0.95%/深成+1.19%/创业板+0.96%全红，科创50+1.64%领涨。主线：军工/航天（长城军工、晨曦航空涨停，珠海航展+十五五订单催化）、其他家电(+5.8%)、水泥(+4.64%)；航运港口(-0.27%)、国有大行(-0.51%)、保险(-0.2%)走弱——霍尔木兹溢价退潮压制航运，银行获利回吐。IV整体偏高(avg_rank 0.58, percentile 0.71偏悲观)，r4_7+r7_10+r10=839>500存亢奋信号，不宜追高。策略池与热点错位：池内无军工/家电/水泥标的，仅煤炭（陕西煤业）为持续趋势板块中的干净setup。"
+  }
+}

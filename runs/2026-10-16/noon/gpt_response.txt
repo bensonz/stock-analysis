@@ -1,0 +1,203 @@
+# Research Memo — 2026-10-16
+
+## 1. Market Regime
+**强多头 tape。** Breadth 7.83:1（涨4889/跌624），涨停78家、跌停0家，上证+0.95%/深成+1.19%/创业板+0.96%/科创50+1.64%——3/3 主要指数收红，`entry_regime` 判定 strong、full size、无硬封锁。
+
+但有两个**非封锁性警示**：
+- **IV 整体偏高**：`overall_sentiment` 偏悲观，avg_iv_rank 0.58 / avg_iv_percentile 0.71（>50% 区间，应"selective 但不冻结"）。个股层面，陕西煤业 iv_proxy=50ETF 0.4578（normal），不受 throttling。
+- **亢奋信号**：r4_7+r7_10+r10 = 646+115+78 = **839 > 500**，数据字典提示"不宜在扩展价位追高"。今日主线里没有我们池内的票，不存在追高冲动。
+
+## 2. Sector Analysis
+- **Hot（top5）**：地面兵装Ⅱ +7.4%、其他家电Ⅱ +5.8%、航天装备Ⅱ +5.32%、航空装备Ⅱ +5.01%、水泥 +4.64%。军工/航天是绝对主线——长城军工、晨曦航空涨停（来源:证券时报，10/16），催化为珠海航展（12月）+十五五订单落地+军贸。
+- **Cold（bottom5）**：国有大型银行 -0.51%、数字媒体 -0.36%、游戏 -0.34%、航运港口 -0.27%、保险 -0.2%。航运走弱是**霍尔木兹战争溢价退潮**（伊朗-阿曼已达成海峡通行协议，来源:百度检索）——验证了我们 10/15 平仓招商轮船的决定。
+- **关键错位**：策略池（28只）与 enriched_candidates（13只）中**没有任何军工/家电/水泥标的**。池子以银行、CRO、煤炭、航运、化工为主。今日热点板块我们"没有马"。
+- **Position alignment**：0/2 持仓在今日 top5；两只都在医疗服务/CRO（今日既未入 top5 也未入 bottom5）。
+
+## 3. Position Review
+| 代码 | 名称 | 现价 | PnL | 止损 | days_held | 决策 |
+|---|---|---|---|---|---|---|
+| 603127 | 昭衍新药 | 50.52 | +17.9% | 47.14 (+10%锁) | ~17 | HOLD |
+| 603259 | 药明康德 | 154.42 | +22.1% | 139.15 (+10%锁) | ~50 | HOLD |
+
+两只都是赢家、止损已锁 +10%、医疗服务未入 bottom5、无任何卖出规则触发（无 -5% 触发、无 3日 -3%、无 15日 <3% 时间止损、无突破失败）。**让赢家奔跑，不动。** 药明康德 margin 仍显示 deleveraging，仅作观察（止损已上移）。
+
+## 4. New Entry Candidates
+逐票过筛后，唯一通过全部门槛的是 **陕西煤业（601225）**：
+
+| 检查项 | 结果 |
+|---|---|
+| Sector（Rule 1） | 煤炭 = 年内申万第一（来源:输入 events，截至10/9 +24.3%），连续创新高，趋势向上 ✓ |
+| RPS120（Rule 2） | 86.03 → 80-92 甜点区 ✓ |
+| MA 距离（Rule 2b） | +1.9%/+4.9%/+7.0%，全部低于 6/8/12 阈值 ✓ |
+| VCP | SETUP（contraction 0.61，vol declining）✓ |
+| 风险 | 0 风险因子 ✓ |
+| Margin | deleveraging（chg5 -23%）——单独观察项，不拒绝干净 setup |
+| IV | 0.4578 normal ✓ |
+
+**催化**：秦港5500大卡动力煤平仓价 990元/吨（来源:金十数据，10/8），高位稳定；机构预计11月中上旬前持续刷新年内高点（来源:输入 events）。属"ongoing 但非新鲜爆点"。
+
+**结论**：按"Good setup, catalyst ongoing 但非 spiking"给 5% 中等仓位，conviction=moderate。不追大仓——margin 去杠杆 + 该股自7月低点已涨超40%（来源:网易，2天前）+ 今日单日热点不在煤炭。
+
+其余全部进 skip：航运港口（海通发展/中远海特/招商轮船）bottom5 硬禁买；国有大行（建设/中国银行）bottom5；银行系（宁波/齐鲁/中信）今日整体走弱；博济医药 RPS 94.41 扩展区但 4 风险+净利 yoy -47.4% 无豁免；恒逸石化/西部矿业现价跌破全部均线、rps20 崩塌。
+
+## 5. Skip List（详见 JSON）
+
+## 6. Learnings（详见 JSON new_learnings）
+核心四条：① 事件驱动热点（军工）可能让基本面动量池整体踏空，此时不凑数是纪律而非错失；② 航运 bottom5 = 地缘溢价退潮，验证 h019 与招商轮船平仓；③ 陕西煤业"价格新高 + 融资去杠杆"背离为观察项；④ 今日 RPS>95 票全被 h151 封顶拦截，唯一过关票恰在甜点区。
+
+## 7. Uncertainty Flags
+- **煤炭 5日/20日板块排名缺失**：输入只给了单日 top5/bottom5。我以"年内申万第一 + 连续创新高"判定煤炭为趋势向上（top 30%），但无法用 5d/20d 精确验证——这是本次决策最大的不确定性。
+- **换仓纪律不适用**：positionsUsed=2 < 10，无满仓换仓判断。
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "地面兵装Ⅱ", "5d_pct": 7.4, "trend": "accelerating"},
+      {"name": "其他家电Ⅱ", "5d_pct": 5.8, "trend": "steady"},
+      {"name": "航天装备Ⅱ", "5d_pct": 5.32, "trend": "accelerating"},
+      {"name": "航空装备Ⅱ", "5d_pct": 5.01, "trend": "accelerating"},
+      {"name": "水泥", "5d_pct": 4.64, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "国有大型银行Ⅱ", "5d_pct": -0.51, "trend": "cooling"},
+      {"name": "航运港口", "5d_pct": -0.27, "trend": "deteriorating"},
+      {"name": "保险Ⅱ", "5d_pct": -0.2, "trend": "cooling"}
+    ],
+    "position_alignment": "0/2 positions in today's top5; both in 医疗服务/CRO（未入top5或bottom5）",
+    "regime": "军工/航天领涨（珠海航展+十五五订单催化），航运港口地缘溢价退潮，银行获利回吐；策略池与热点错位"
+  },
+  "position_decisions": [
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "HOLD",
+      "reason": "医疗服务/CRO今日未入top5或bottom5，浮盈+17.9%距止损47.14(+10%)尚远，未触发任何卖出规则；实验猴供需+CRO订单景气未变，让赢家奔跑",
+      "sector_rank": "中游（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 17.9,
+      "days_held": 17,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+22.1%，止损已锁+10%(139.15)未触发；在手订单+25.2%、全年收入指引上调，margin deleveraging仅作观察；让赢家奔跑",
+      "sector_rank": "中游（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 22.1,
+      "days_held": 50,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "entry_price": 28.11,
+      "allocation_pct": 5,
+      "stop": 26.70,
+      "target": 33.7,
+      "thesis": "煤炭年内申万第一（来源:输入events，截至10/9 +24.3%），陕西煤业连续两日创历史新高，RPS120=86.03甜点区，0风险因子，MA距离全部合规；margin deleveraging(chg5 -23%)仅作观察不拒绝",
+      "sector": "煤炭",
+      "sector_rank": "top 10%（年内申万第一）",
+      "catalyst": "秦港5500大卡动力煤平仓价990元/吨（来源:金十数据10/8），机构预计11月中上旬前持续刷新年内高点（来源:输入events）",
+      "catalyst_freshness": "ongoing",
+      "rps120": 86.03,
+      "conviction": "moderate"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "603162",
+      "name": "海通发展",
+      "reason": "航运港口今日bottom5(-0.27%)，sector-first硬禁买；且10/15跌停-9.99%（来源:输入events），dist_ma5 -9.1%破位",
+      "rps120": 93.65
+    },
+    {
+      "code": "601939",
+      "name": "建设银行",
+      "reason": "国有大型银行今日bottom5(-0.51%)，冷区不买，即使RPS120=91.09在甜点区",
+      "rps120": 91.09
+    },
+    {
+      "code": "601988",
+      "name": "中国银行",
+      "reason": "国有大型银行今日bottom5(-0.51%)，冷区不买",
+      "rps120": 90.78
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "reason": "航运港口bottom5；10/15刚平仓(+0.31%)，重入需举证差异化，本次无任何差异（板块地缘溢价仍在退潮），不买",
+      "rps120": 85.57
+    },
+    {
+      "code": "300404",
+      "name": "博济医药",
+      "reason": "RPS120=94.41处扩展区(92-95)需豁免，但4风险因子+净利yoy-47.4%无一满足；且现价低于MA5/MA10/MA20",
+      "rps120": 94.41
+    },
+    {
+      "code": "000703",
+      "name": "恒逸石化",
+      "reason": "现价低于MA5(-4.1%)/MA10(-8.7%)/MA20(-11.9%)，rps20仅11.13，业绩预告(前三季净利+3318-3405%)后股价仍在下跌——便宜且在跌=陷阱",
+      "rps120": 86.44
+    },
+    {
+      "code": "601168",
+      "name": "西部矿业",
+      "reason": "铜价下跌（10/15西部矿业跌超6%，来源:输入events），rps20=12.11，行业走弱",
+      "rps120": 92.93
+    },
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "reason": "银行板块今日走弱（国有大行入bottom5），城商行未入top5，sector-first不满足；机构口径'10月银行积极但不追高'",
+      "rps120": 89.94
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "今日主线为军工/航天（珠海航展12月+十五五订单+军贸催化，长城军工、晨曦航空涨停，来源:证券时报），但策略池内无任何军工标的——事件驱动轮动可让基本面动量池整体踏空，此时正确做法是不强行买入非热点板块，而非因breadth强就凑数。",
+      "type": "observation",
+      "tags": ["sector", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "策略池按基本面+动量交集构建，覆盖不了突发事件主题；sector-first要求只买趋势向上板块，池内无对应标的时宁可空仓。"
+    },
+    {
+      "text": "航运港口今日bottom5(-0.27%)是霍尔木兹战争溢价退潮的体现（伊朗-阿曼已达成海峡通行协议，来源:百度检索），验证10/15平仓招商轮船(+0.31%)正确——bottom5板块是硬性禁买区，即使个股RPS合格。",
+      "type": "signal",
+      "tags": ["sector", "exit-rule"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "地缘溢价一旦消退，运价与股价同步均值回归，板块bottom5信号领先个股。"
+    },
+    {
+      "text": "陕西煤业margin signal=deleveraging(chg5 -23.12%)而股价连续两日创历史新高——杠杆资金强势中离场与价格新高的背离，属观察项而非买卖触发；不单独据此拒绝干净setup。",
+      "type": "observation",
+      "tags": ["position-sizing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "融资盘高位获利了结常见于趋势中段，价格新高说明承接力仍强；deleveraging单独无预测力，需与sector/IV叠加才有意义。"
+    },
+    {
+      "text": "今日策略池RPS>95%的股票（奥士康98.44/中石科技98.88/一博科技99.28/百普赛斯99.72等）全部被Rule2封顶拦截，唯一通过全部门槛的陕西煤业RPS120=86.03恰在80-92甜点区——再次验证RPS封顶(h151)与甜点区纪律(h158)。",
+      "type": "rule",
+      "tags": ["entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "RPS极高意味着相对强度已极致拥挤，均值回归风险高于甜点区刚启动的标的。"
+    }
+  ],
+  "market_summary": "Breadth 7.83:1强多头（4889涨/624跌，78涨停/0跌停），上证+0.95%/深成+1.19%/创业板+0.96%全红，科创50+1.64%领涨。主线：军工/航天（长城军工、晨曦航空涨停，珠海航展+十五五订单催化）、其他家电(+5.8%)、水泥(+4.64%)；航运港口(-0.27%)、国有大行(-0.51%)、保险(-0.2%)走弱——霍尔木兹溢价退潮压制航运，银行获利回吐。IV整体偏高(avg_rank 0.58, percentile 0.71偏悲观)，r4_7+r7_10+r10=839>500存亢奋信号，不宜追高。策略池与热点错位：池内无军工/家电/水泥标的，仅煤炭（陕西煤业）为持续趋势板块中的干净setup。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}
+```
