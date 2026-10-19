@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-19",
+  "actions": [
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 146.5,
+      "pnl_pct": 15.8,
+      "note": "浮盈+15.8%，现价146.5高于+10%止损139.15（缓冲5.3%）未破；医疗服务今日未入bottom5，板块冷3日卖出未触发；CRO 10-16闪崩为高拥挤仓位获利了结（来源:21经济网），复苏逻辑未破；跌破139.15收盘无条件卖，政策/情绪不给例外"
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "action": "HOLD",
+      "price": 28.19,
+      "pnl_pct": 0.28,
+      "note": "浮盈+0.28%，止损26.7未破；煤炭年内申万第一（指数+24.45%，来源:新浪财经），动力煤破千元淡季不淡（秦皇岛1013元/吨，来源:华夏时报）；今日未入top5但非冷区；margin deleveraging(chg5 -11.13%)仅作观察"
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "price": 6.7,
+      "pnl_pct": 1.21,
+      "note": "浮盈+1.21%，止损6.29未破；银行主线强势（国有大行Ⅱ今日top5 +2.16%），margin adding(chg5 +13.06%)确认资金流入；城商行Ⅱ未入top5但板块整体走强"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 971032.74,
+    "dayPnl": 829.0,
+    "dayReturnPct": 0.09,
+    "totalReturnPct": -2.9,
+    "unrealizedPnl": 6424.0,
+    "realizedPnl": -35391.26,
+    "cashPct": 88.5
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.7271,
+    "up": 2275,
+    "down": 3129,
+    "positive_indices": [
+      "上证指数",
+      "深证成指"
+    ],
+    "negative_indices": [
+      "创业板指"
+    ],
+    "limit_ups": 50,
+    "limit_downs": 27,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.73:1, 2/3 major indices green, 50 limit-ups / 27 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "弱市防御轮动：上证+0.39%/深成+0.13%微涨，但创业板-0.94%/科创50-2.17%杀跌，广度0.73:1(涨2275/跌3129，跌停27/涨停50)偏弱无恐慌。资金从科技成长切向银行/煤炭/兵装高股息防御，国有大型银行Ⅱ入top5(+2.16%)。IV整体偏悲观(avg iv rank 0.56)，波动率偏贵。弱市默认半仓/空仓，不追高。"
+  }
+}

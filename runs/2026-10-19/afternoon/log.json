@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-19",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1792393545.788227,
+      "errors": [],
+      "end": 1792393591.878367,
+      "duration_sec": 46.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8230,
+      "tokens": {
+        "input_tokens": 211628,
+        "output_tokens": 22086
+      },
+      "rounds": 3,
+      "tool_calls_count": 7,
+      "duration_sec": 330.4,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1792393922.281326,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h210 (observation): 弱市(广度0.73:1)中唯一在top5且可买的板块是国有大型银行(建设银行/中国银行，RPS120≈92-93扩展区+创新高)，但二者均带超买/融资去杠杆信号...",
+        "Hypothesis: Updated h151 (rule): +1 supporting evidence → hitRate=100%, n=13",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=97",
+        "Hypothesis: Updated h174 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-10-19",
+        "status": "ok",
+        "checked": 3,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "end": 1792393923.42895,
+      "duration_sec": 1.1
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 377.59999999999997
+  }
+}

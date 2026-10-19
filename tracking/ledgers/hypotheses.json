@@ -1250,7 +1250,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-10-16",
+      "lastTested": "2026-10-19",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1637,11 +1637,15 @@
           {
             "date": "2026-10-16",
             "detail": "医疗服务今日bottom5(-4.79%)+药明康德闪崩上热搜(-6.6%成交123亿)，昭衍/药明双双进入距止损3%内的stop_proximity WATCH：板块冷区第1天不构成卖出，但跌破止损收盘或续冷3日即无条件SELL，不给thesis例外"
+          },
+          {
+            "date": "2026-10-19",
+            "detail": "航运港口板块(招商轮船/中远海特/招商港口/海通发展)因美国拟放宽影子船队制裁+霍尔木兹袭击，10-15集体跌停后持续走弱——即使RPS120在甜点区(86-92)，板块冷区仍是hard no-buy"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 96,
+      "sampleSize": 97,
       "hitRate": 1.0,
       "confidence": 0.99,
       "tags": [
@@ -6974,7 +6978,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-08-11",
-      "lastTested": "2026-10-16",
+      "lastTested": "2026-10-19",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -7025,13 +7029,17 @@
           {
             "date": "2026-10-16",
             "detail": "今日策略池RPS>95%的股票（奥士康98.44/中石科技98.88/一博科技99.28/百普赛斯99.72等）全部被Rule2封顶拦截，唯一通过全部门槛的陕西煤业RPS120=86.03恰在80-92甜点区——再次验证RPS封顶(h151)与甜点区纪律(h158)。"
+          },
+          {
+            "date": "2026-10-19",
+            "detail": "RPS120>95%封顶规则今日再次过滤策略池大部分候选(百普赛斯99.76/一博99.34/奥士康98.71/松发98.44/中石98.33等)，且这些高RPS个股dist_ma5/ma10/ma20普遍为负(已在向均线回落)——高RPS拥挤后的均值回归正在发生"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 12,
+      "sampleSize": 13,
       "hitRate": 1.0,
-      "confidence": 0.929,
+      "confidence": 0.933,
       "tags": [
         "entry-filter"
       ],
@@ -7747,22 +7755,26 @@
       "id": "h174",
       "text": "药明康德现价159.25已超过targetPrice 150，但动量系统里target是软参考、trailing stop(+10%锁利139.15)才是硬约束；不让'目标已到'成为止盈借口，继续让利润奔跑，同时盯医疗服务冷3日线。",
       "type": "rule",
-      "status": "observation",
+      "status": "hypothesis",
       "created": "2026-08-26",
-      "lastTested": "2026-08-26",
+      "lastTested": "2026-10-19",
       "mechanism": "强趋势股的目标价常被突破，提前止盈会系统性卖飞主升浪；硬止损/锁利线承担风险控制，目标价只作为叙事锚点。",
       "evidence": {
         "supporting": [
           {
             "date": "2026-08-26",
             "detail": "药明康德现价159.25已超过targetPrice 150，但动量系统里target是软参考、trailing stop(+10%锁利139.15)才是硬约束；不让'目标已到'成为止盈借口，继续让利润奔跑，同时盯医疗服务冷3日线。"
+          },
+          {
+            "date": "2026-10-19",
+            "detail": "药明康德10-16闪崩-6.6%(成交123亿)但收盘守住+10%止损139.15，今日+1.52%反弹至146.5——跌破止损收盘才卖、板块情绪不给例外，移动止损保护下让赢家奔跑"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 1,
+      "sampleSize": 2,
       "hitRate": 1.0,
-      "confidence": 0.6,
+      "confidence": 0.75,
       "tags": [
         "exit-rule"
       ],
@@ -8761,6 +8773,35 @@
       "hitRate": 1.0,
       "confidence": 0.6,
       "tags": [
+        "sector"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h210",
+      "text": "弱市(广度0.73:1)中唯一在top5且可买的板块是国有大型银行(建设银行/中国银行，RPS120≈92-93扩展区+创新高)，但二者均带超买/融资去杠杆信号，且组合已持有齐鲁银行——弱市默认空仓优于在拥挤防御交易顶部追入",
+      "type": "heuristic",
+      "status": "observation",
+      "created": "2026-10-19",
+      "lastTested": "2026-10-19",
+      "mechanism": "弱市窄幅防御轮动时，唯一强势板块往往已极度拥挤(历史新高+超买+融资盘退潮)，追入风险收益比差；同主题持仓已存在，边际分散价值低",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-10-19",
+            "detail": "弱市(广度0.73:1)中唯一在top5且可买的板块是国有大型银行(建设银行/中国银行，RPS120≈92-93扩展区+创新高)，但二者均带超买/融资去杠杆信号，且组合已持有齐鲁银行——弱市默认空仓优于在拥挤防御交易顶部追入"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "entry-filter",
+        "position-sizing",
         "sector"
       ],
       "parentRule": null,

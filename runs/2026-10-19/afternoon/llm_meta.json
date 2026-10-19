@@ -1,0 +1,82 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 211628,
+  "output_tokens": 22086,
+  "rounds": 3,
+  "duration_sec": 330.4,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 银行股 创新高 房贷贴息 三季报 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3777
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 CRO板块 2026年10月 行情",
+        "max_results": 5
+      },
+      "result_length": 3393
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "动力煤价格 破千元 煤炭板块 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3556
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月19日 板块涨跌 防御 科技调整",
+        "max_results": 5
+      },
+      "result_length": 3533
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "航运股 大跌 影子船队 制裁 霍尔木兹 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3170
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=10月19日+A股+收盘+银行+煤炭+科创50",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=银行板块+国有大行+创新高+2026年10月",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    }
+  ],
+  "fallback_used": false
+}
