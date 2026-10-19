@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-10-16",
+  "lastUpdated": "2026-10-19",
   "hypotheses": [
     {
       "id": "h001",
@@ -2180,7 +2180,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-10-15",
+      "lastTested": "2026-10-19",
       "mechanism": "In a deteriorating market, protecting open profits is more valuable than maximizing upside variance.",
       "evidence": {
         "supporting": [
@@ -2443,11 +2443,15 @@
           {
             "date": "2026-10-15",
             "detail": "大赢家+已上移的+10%止损=弱市里'让赢家奔跑'的正确形态：昭衍(+18.2%)与药明(+22.1%)今日逆势或抗跌，止损分别锁47.14/139.15，无需因大盘恐慌临场减仓。"
+          },
+          {
+            "date": "2026-10-19",
+            "detail": "+10%移动止损锁盈后必须机械执行：昭衍新药锁+10%(47.14)后今日-9.2%击穿止损，果断卖出而非'CRO政策面仍有利'式等待——事件利好永不覆盖止损规则"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 65,
+      "sampleSize": 66,
       "hitRate": 1.0,
       "confidence": 0.985,
       "tags": [
@@ -2937,7 +2941,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-10-16",
+      "lastTested": "2026-10-19",
       "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally.",
       "evidence": {
         "supporting": [
@@ -3200,6 +3204,10 @@
           {
             "date": "2026-10-16",
             "detail": "军工板块受珠海航展(12/7-13，10/13发布会)催化走强(地面兵装+5.95%/航空装备+3.87%)——事件驱动型板块轮动爆发力强，但策略池无对应标的无法参与，暴露候选池板块覆盖不足"
+          },
+          {
+            "date": "2026-10-19",
+            "detail": "弱势带(breadth 0.42:1)+银行股历史新高+margin deleveraging叠加=不加仓：新高需要增量资金接力，但融资盘净偿还说明杠杆资金在撤，边际买盘弱；宁可持币等宽度修复"
           }
         ],
         "contradicting": [
@@ -3209,7 +3217,7 @@
           }
         ]
       },
-      "sampleSize": 66,
+      "sampleSize": 67,
       "hitRate": 0.985,
       "confidence": 0.971,
       "tags": [
@@ -4564,7 +4572,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-10-15",
+      "lastTested": "2026-10-19",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4679,13 +4687,17 @@
           {
             "date": "2026-10-15",
             "detail": "今日top5（医疗美容+1.65/白酒+1.33/出版+0.24/国有大行+0.03/化学制药-0.28）几乎全是防御与红利板块且涨幅极弱——典型恐慌避险轮动，不是可交易热点。"
+          },
+          {
+            "date": "2026-10-19",
+            "detail": "防御性轮动加速：白色家电/地面兵装/油气/银行上涨 vs 创业板-1.07%/科创50-1.68%杀跌，CRO板块10-16集体跳水后今日续跌；成长资金持续撤出，持仓应优先砍医疗服务等失血板块"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 28,
+      "sampleSize": 29,
       "hitRate": 1.0,
-      "confidence": 0.967,
+      "confidence": 0.968,
       "tags": [
         "sector",
         "exit-rule"

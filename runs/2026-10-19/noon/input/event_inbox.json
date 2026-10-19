@@ -1,0 +1,56 @@
+{
+  "as_of": "2026-10-19",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 21,
+    "new": 1,
+    "pending": 1,
+    "expired": 0,
+    "ai_retired": 1,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 17,
+    "decided": 2,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 1,
+    "fetch_errors": 0,
+    "empty_days": 14,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 1,
+    "kept": 0,
+    "skipped": 1,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261025-39997f26",
+        "name": "巴西将举行总统选举第二轮决选",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "巴西总统选举对A股市场系统性影响有限，非主要经济体政治事件"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1556,
+    "tokens_out": 77
+  },
+  "pending_items": []
+}

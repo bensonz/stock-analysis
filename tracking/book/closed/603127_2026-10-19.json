@@ -1,7 +1,7 @@
 {
   "code": "603127",
   "name": "昭衍新药",
-  "status": "active",
+  "status": "closed",
   "thesis": "医疗服务板块#1(+4.01%)；实验猴供需紧张价格上行驱动中报净利+1126.8%（财联社/证券时报/澎湃）；RPS120=94.94扩展区获板块top10%+业绩催化双重豁免；贴MA5(+0.1%)不追高。风险：rps20仅6.21个股短期偏弱、margin deleveraging、IV 0.70偏高→小仓试探",
   "entryDate": "2026-09-14",
   "entrySlot": "noon",
@@ -336,15 +336,25 @@
       "change_pct": 13.68,
       "action": "HOLD",
       "note": "浮盈+13.68%止损已锁+10%(47.14)，现价48.71距止损3.2%未破收盘；医疗服务今日bottom5(-4.79%)为冷区第1天，未达3日卖出线——跌破47.14收盘或板块续冷3日即无条件SELL"
+    },
+    {
+      "date": "2026-10-19",
+      "slot": "noon",
+      "price": 44.23,
+      "change_pct": 3.22,
+      "action": "SELL",
+      "shares": 800,
+      "note": "跌破+10%移动止损47.14（现价44.23，低于止损6.58%），stop_proximity CRITICAL，今日-9.2%放量下跌；CRO板块持续回落（输入events+CRO概念集体跳水，证券时报/格隆汇10-16），浮盈从+18.2%回吐至+3.2%，无条件执行止损不等精确触发"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-10-19",
+  "exitPrice": 44.23,
+  "exitReason": "跌破+10%移动止损47.14（现价44.23，低于止损6.58%），stop_proximity CRITICAL，今日-9.2%放量下跌；CRO板块持续回落（输入events+CRO概念集体跳水，证券时报/格隆汇10-16），浮盈从+18.2%回吐至+3.2%，无条件执行止损不等精确触发",
+  "returnPct": 3.22,
+  "holdingDays": 18,
+  "lessonLearned": "",
   "createdAt": "2026-09-14T11:41:41.947954+08:00",
-  "updatedAt": "2026-10-16T16:57:01.945076+08:00",
-  "trackerVersion": "2.1"
+  "updatedAt": "2026-10-19T11:41:06.252796+08:00",
+  "trackerVersion": "2.1",
+  "exitSlot": "noon"
 }

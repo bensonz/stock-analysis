@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-19",
+  "actions": [
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "action": "HOLD",
+      "price": 28.39,
+      "pnl_pct": 1.0,
+      "note": "浮盈+1.0%，止损26.7未破；煤炭年内申万第一（输入events）+动力煤破千元（输入events）；今日未入top5但非冷区，不触发卖出；margin deleveraging(5日-11.13%)仅作收紧观察，非卖出信号"
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "price": 6.67,
+      "pnl_pct": 0.8,
+      "note": "浮盈+0.8%，城商行Ⅱ今日top5(+1.61%)，margin adding(5日+13.06%)确认资金流入，持有"
+    },
+    {
+      "code": "603127",
+      "name": "昭衍新药",
+      "action": "SELL",
+      "price": 44.23,
+      "pnl_pct": 3.2,
+      "note": "跌破+10%移动止损47.14（现价44.23，低于止损6.58%），stop_proximity CRITICAL，今日-9.2%放量下跌；CRO板块持续回落（输入events+CRO概念集体跳水，证券时报/格隆汇10-16），浮盈从+18.2%回吐至+3.2%，无条件执行止损不等精确触发"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 144.0,
+      "pnl_pct": 13.8,
+      "note": "浮盈+13.8%，现价144.0高于+10%止损139.15(+3.4%缓冲)未破；在手订单+25.2%/全年指引上调（输入highlights）让赢家奔跑；margin deleveraging仅观察——跌破139.15收盘即卖，政策面不给例外"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 970468.74,
+    "dayPnl": 265.0,
+    "dayReturnPct": 0.03,
+    "totalReturnPct": -2.95,
+    "unrealizedPnl": 5860.0,
+    "realizedPnl": -35391.26,
+    "cashPct": 88.55
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.4202,
+    "up": 1613,
+    "down": 3839,
+    "positive_indices": [
+      "上证指数"
+    ],
+    "negative_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 30,
+    "limit_downs": 10,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.42:1, 1/3 major indices green, 30 limit-ups / 10 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "Breadth 0.42:1弱势(1613涨/3839跌,30涨停/10跌停)，上证+0.16%独红、创业板-1.07%/科创50-1.68%杀跌，IV偏悲观(avg rank 0.57)；防御性轮动：银行/军工/家电/油气领涨，成长与CRO资金流出；半仓观望，砍昭衍新药，留现金等宽度修复"
+  }
+}
