@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-20",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1792479935.395231,
+      "errors": [],
+      "end": 1792479978.976297,
+      "duration_sec": 43.6
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 10033,
+      "tokens": {
+        "input_tokens": 156816,
+        "output_tokens": 34371
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 484.1,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1792480463.153093,
+      "actions": [
+        "OPEN 002142 @ 34.79",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h151 (rule): +1 supporting evidence → hitRate=100%, n=15",
+        "Hypothesis: Updated h204 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: WARN coerced evidence_type='observation' → supporting",
+        "Hypothesis: Updated h129 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Updated h144 (validated): +1 supporting evidence → hitRate=80%, n=5",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-10-20",
+        "status": "ok",
+        "checked": 3,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "601225",
+                "name": "陕西煤业",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 27.88,
+                "stopLoss": 26.7,
+                "distance_pct": 4.23,
+                "suggestion": "🟠 WATCH — 4.2% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "601665",
+                "name": "齐鲁银行",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 6.62,
+                "stopLoss": 6.29,
+                "distance_pct": 4.98,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1792480464.532269,
+      "duration_sec": 1.4
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 601225 — 🟠 WATCH — 4.2% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 601665 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 529.1
+  }
+}

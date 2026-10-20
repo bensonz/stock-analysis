@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 156816,
+  "output_tokens": 34371,
+  "rounds": 2,
+  "duration_sec": 484.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 银行板块 上涨 房贷贴息 三季报 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3702
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "宁波银行 城商行 业绩 分红 2026",
+        "max_results": 5
+      },
+      "result_length": 3697
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "动力煤 价格 破千元 煤炭板块 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3620
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "消费电子 PCB 板块 上涨 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3859
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 市场 板块轮动 2026年10月20日",
+        "max_results": 5
+      },
+      "result_length": 3848
+    }
+  ],
+  "fallback_used": false
+}

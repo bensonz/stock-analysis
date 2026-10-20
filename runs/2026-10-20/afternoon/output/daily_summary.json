@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-20",
+  "actions": [
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 147.66,
+      "pnl_pct": 16.7,
+      "note": "浮盈+16.7%，现价147.66高于+10%移动止损139.15(缓冲6.1%)，未达+20%(151.8)不抬止损；医疗服务未入今日bottom5，冷区3日卖出未触发；让赢家奔跑，margin deleveraging仅观察"
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "price": 6.62,
+      "pnl_pct": 0.0,
+      "note": "银行主线强势+margin adding(chg5 +11.54%)确认资金流入；浮盈0%，距止损6.29约5.0%(stop_proximity WATCH)；持有3日未破止损"
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "action": "HOLD",
+      "price": 27.88,
+      "pnl_pct": -0.82,
+      "note": "煤炭年内申万第一+动力煤破千元(来源:输入events/web证券日报)主线未破，但今日震荡调整(来源:东方财富早盘)+margin deleveraging(chg5 -4.8%)；浮盈-0.82%，距止损26.7约4.2%(stop_proximity WATCH)；持有3日，不加仓煤炭"
+    },
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "action": "OPEN",
+      "price": 34.79,
+      "note": "银行持续主线(房贷贴息10-01生效+PSL降息+大行注资,来源:web凤凰网)+北向10-17增配银行(来源:国泰海通)；宁波银行0风险+RPS120=91.69甜点区+MA距离全合规(不追高)；margin deleveraging(-5.81%)作谨慎项压仓到5%；三季报10-30发布(来源:雪球)为后续催化"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 970611.74,
+    "dayPnl": -421.0,
+    "dayReturnPct": -0.04,
+    "totalReturnPct": -2.94,
+    "unrealizedPnl": 6003.0,
+    "realizedPnl": -35391.26,
+    "cashPct": 84.23
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 2.2663,
+    "up": 3778,
+    "down": 1667,
+    "positive_indices": [
+      "上证指数"
+    ],
+    "negative_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 57,
+    "limit_downs": 7,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 2.27:1, 1/3 major indices green, 57 limit-ups / 7 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [
+    {
+      "code": "002142",
+      "name": "宁波银行"
+    }
+  ],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "2026-10-20平衡偏多市：breadth 2.27:1(3778涨/1667跌)，57涨停/7跌停，但仅上证收红+0.12%，深成-0.14%、创业板-0.26%，科创50+1.0%；分布严重偏r0_2(2029只仅+0~2%)，弱质量反弹。IV整体中性(平均rank 49%)，300/500/创业板ETF约55%偏高(selective)，50ETF 35%(normal)。热点为题材脉冲(医疗美容+4.96%/消费电子+3.08%/照明+2.72%/非金属材料+2.54%/自动化+2.5%)，与策略池错位；持续主线银行(房贷贴息+三季报窗口+北向增配)与煤炭(动力煤破千元/年内申万第一)今日休整，航运/CRO冷区。注：输入仅提供当日板块top5/bottom5涨跌幅，无5日动量序列。持仓对齐：0/3在今日top5，银行/煤炭趋势向上，医疗服务中性。regime balanced允许正常仓位开仓，弱反弹质量下仅开1笔5%中等仓。"
+  }
+}

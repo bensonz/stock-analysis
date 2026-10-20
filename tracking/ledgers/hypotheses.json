@@ -6344,22 +6344,26 @@
       "id": "h129",
       "text": "恒逸石化 (+2.88%) survives precisely because it's outside the tech liquidation. 石油石化 benefits from rotation into resources. Holding neutral-sector positions during panic preserves capital.",
       "type": "observation",
-      "status": "observation",
+      "status": "hypothesis",
       "created": "2026-07-30",
-      "lastTested": "2026-07-30",
+      "lastTested": "2026-10-20",
       "mechanism": "During sector rotation, defensive/neutral holdings protect capital while tech leverage unwinds.",
       "evidence": {
         "supporting": [
           {
             "date": "2026-07-30",
             "detail": "恒逸石化 (+2.88%) survives precisely because it's outside the tech liquidation. 石油石化 benefits from rotation into resources. Holding neutral-sector positions during panic preserves capital."
+          },
+          {
+            "date": "2026-10-20",
+            "detail": "银行板块内融资流分化：国有大行(中国银行+2.56%)与齐鲁银行(+11.54%)margin adding，宁波银行(-5.81%)/中信银行(-1.83%)deleveraging——同热板块内应用per-stock margin信号选股排序，而非用deleveraging拒绝整个板块"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 1,
+      "sampleSize": 2,
       "hitRate": 1.0,
-      "confidence": 0.6,
+      "confidence": 0.75,
       "tags": [
         "position-sizing",
         "sector"
@@ -6776,9 +6780,9 @@
       "id": "h144",
       "text": "西部矿业昨日开仓（8/5）今日-3.14%，距止损仅2.82%。在breadth 1.08:1的弱市中开仓即使标的再优秀（H1+123%净利、0风险、股东户数-30%），时机上也偏早。弱市应降低仓位或等待breadth改善后再入场。",
       "type": "heuristic",
-      "status": "hypothesis",
+      "status": "validated",
       "created": "2026-08-06",
-      "lastTested": "2026-10-16",
+      "lastTested": "2026-10-20",
       "mechanism": "强基本面的股票在弱市中同样会跟随大盘回调——市场beta在短期压倒alpha。弱breadth环境中开仓应更严格或减半仓位。",
       "evidence": {
         "supporting": [
@@ -6793,6 +6797,10 @@
           {
             "date": "2026-10-16",
             "detail": "IV Rank均值0.63(偏悲观)、500ETF 0.71/创业板ETF 0.70偏高，叠加涨跌比1.55:1但仅1/3指数翻红、涨幅集中于r0_2(2204家涨0-2%)——典型弱扩散防御市，不宜激进开新仓，87%现金是合理状态。"
+          },
+          {
+            "date": "2026-10-20",
+            "detail": "breadth 2.27:1但分布严重偏r0_2(2029/5567只仅+0~2%)+仅1/3指数收红=弱质量反弹；比率达标不必然等于强市，应保持中等仓位而非激进"
           }
         ],
         "contradicting": [
@@ -6802,9 +6810,9 @@
           }
         ]
       },
-      "sampleSize": 4,
-      "hitRate": 0.75,
-      "confidence": 0.667,
+      "sampleSize": 5,
+      "hitRate": 0.8,
+      "confidence": 0.714,
       "tags": [
         "timing",
         "position-sizing"
@@ -7045,13 +7053,17 @@
           {
             "date": "2026-10-20",
             "detail": "策略池与市场热点错位时：热点板块（消费电子/自动化设备）个股RPS120全部>95%被Rule2封顶，而80-92甜点区个股集中在银行/煤炭/石油等今日非领涨板块，无交集→new_positions:[]，不强行入场"
+          },
+          {
+            "date": "2026-10-20",
+            "detail": "今日消费电子/AI-PCB真热点但池内个股RPS120全部>95%(景旺97.76/崇达97.43/骏亚95.28)，封顶规则全部拦截，再次验证h151不可移除——热点≠可买，动量过热就是均值回归风险"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 14,
+      "sampleSize": 15,
       "hitRate": 1.0,
-      "confidence": 0.938,
+      "confidence": 0.941,
       "tags": [
         "entry-filter"
       ],
@@ -8624,22 +8636,26 @@
       "id": "h204",
       "text": "今日热门板块(林业Ⅱ+8.8%/其他家电Ⅱ+4.66%)均为小市值/防御性题材，无强趋势主线可追——热门≠可交易，恐慌日逆势板块多为资金避险噪音。",
       "type": "observation",
-      "status": "observation",
+      "status": "hypothesis",
       "created": "2026-09-25",
-      "lastTested": "2026-09-25",
+      "lastTested": "2026-10-20",
       "mechanism": "恐慌日逆势上涨板块多为小盘题材脉冲，缺乏持续性，不值得在硬阻断解除前提前布局。",
       "evidence": {
         "supporting": [
           {
             "date": "2026-09-25",
             "detail": "今日热门板块(林业Ⅱ+8.8%/其他家电Ⅱ+4.66%)均为小市值/防御性题材，无强趋势主线可追——热门≠可交易，恐慌日逆势板块多为资金避险噪音。"
+          },
+          {
+            "date": "2026-10-20",
+            "detail": "当今日热点板块与候选池错位时，正确动作是买持续走强且今日休整的主线(银行)而非追一日脉冲题材(医疗美容/照明)；银行10-19全板块收涨+多股创新高是持续主线的证据"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 1,
+      "sampleSize": 2,
       "hitRate": 1.0,
-      "confidence": 0.6,
+      "confidence": 0.75,
       "tags": [
         "sector",
         "timing"

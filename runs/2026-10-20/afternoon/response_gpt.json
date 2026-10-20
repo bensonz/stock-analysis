@@ -1,0 +1,220 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "医疗美容",
+        "5d_pct": 4.96,
+        "trend": "题材脉冲"
+      },
+      {
+        "name": "消费电子",
+        "5d_pct": 3.08,
+        "trend": "题材脉冲"
+      },
+      {
+        "name": "照明设备Ⅱ",
+        "5d_pct": 2.72,
+        "trend": "题材脉冲"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": 2.54,
+        "trend": "题材脉冲"
+      },
+      {
+        "name": "自动化设备",
+        "5d_pct": 2.5,
+        "trend": "题材脉冲"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "航海装备Ⅱ",
+        "5d_pct": -2.7,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "地面兵装Ⅱ",
+        "5d_pct": -2.64,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "白色家电",
+        "5d_pct": -2.09,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "工业金属",
+        "5d_pct": -1.96,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "商用车",
+        "5d_pct": -1.83,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/3持仓位于今日top5；银行/煤炭为持续强势主线，医疗服务中性",
+    "regime": "题材脉冲(医疗美容/消费电子)与持续主线(银行/煤炭)并存；航运/CRO冷区；煤炭今日震荡调整"
+  },
+  "position_decisions": [
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+16.7%，现价147.66高于+10%移动止损139.15(缓冲6.1%)，未达+20%(151.8)不抬止损；医疗服务未入今日bottom5，冷区3日卖出未触发；让赢家奔跑，margin deleveraging仅观察",
+      "sector_rank": "医疗服务中性(未入bottom5)",
+      "new_stop": null,
+      "pnl_pct": 16.7,
+      "days_held": 52,
+      "exit_price": null
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "reason": "银行主线强势+margin adding(chg5 +11.54%)确认资金流入；浮盈0%，距止损6.29约5.0%(stop_proximity WATCH)；持有3日未破止损",
+      "sector_rank": "银行趋势向上",
+      "new_stop": null,
+      "pnl_pct": 0.0,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "action": "HOLD",
+      "reason": "煤炭年内申万第一+动力煤破千元(来源:输入events/web证券日报)主线未破，但今日震荡调整(来源:东方财富早盘)+margin deleveraging(chg5 -4.8%)；浮盈-0.82%，距止损26.7约4.2%(stop_proximity WATCH)；持有3日，不加仓煤炭",
+      "sector_rank": "煤炭趋势向上但今日休整",
+      "new_stop": null,
+      "pnl_pct": -0.82,
+      "days_held": 3,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "entry_price": 34.79,
+      "allocation_pct": 5,
+      "stop": 33.05,
+      "target": 38.27,
+      "thesis": "银行持续主线(房贷贴息10-01生效+PSL降息+大行注资,来源:web凤凰网)+北向10-17增配银行(来源:国泰海通)；宁波银行0风险+RPS120=91.69甜点区+MA距离全合规(不追高)；margin deleveraging(-5.81%)作谨慎项压仓到5%；三季报10-30发布(来源:雪球)为后续催化",
+      "sector": "银行(城商行)",
+      "sector_rank": "top 30%(银行板块10-19全板块收涨/多股创新高,来源:输入events)",
+      "catalyst": "房贷贴息政策+三季报窗口(10-30)+北向增配",
+      "catalyst_freshness": "ongoing",
+      "rps120": 91.69,
+      "conviction": "moderate"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "601988",
+      "name": "中国银行",
+      "reason": "RPS120 93.75处扩展区(92-95%)需例外但1风险(周级别超买)不满足(b)；margin adding虽好，同板块已选更干净的宁波银行",
+      "rps120": 93.75
+    },
+    {
+      "code": "600901",
+      "name": "江苏金租",
+      "reason": "0风险+margin adding+VCP QUALITY(收缩比0.38)+今日新高，个股面强但板块(多元金融/租赁)未入top30%，Rule 1 sector-first不满足",
+      "rps120": 86.55
+    },
+    {
+      "code": "300404",
+      "name": "博济医药",
+      "reason": "CRO冷区(10-16集体跳水,来源:输入events)+RPS120 94.95扩展区无例外(4风险且净利-47%)+12/08解禁3.05%",
+      "rps120": 94.95
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "reason": "航运冷区(10-15跌停,影子船队制裁风险,来源:输入events)；且为10-15刚卖出标的，重入需举证差别，说不出差别不买",
+      "rps120": 86.86
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "reason": "dist_ma20 +11.6%逼近12%上限+margin deleveraging(-6.12%)+油品板块今日未入top5",
+      "rps120": 87.83
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "2风险(大股东质押77%/现金短债比0.16)+margin deleveraging；油品石化贸易板块未确认热",
+      "rps120": 89.27
+    },
+    {
+      "code": "002815",
+      "name": "崇达技术",
+      "reason": "消费电子/PCB热点但RPS120 97.43>95%封顶(动量过热)，不追，等回调至90%区",
+      "rps120": 97.43
+    },
+    {
+      "code": "603228",
+      "name": "景旺电子",
+      "reason": "PCB热点+Q3预增(来源:web东财)但RPS120 97.76>95%封顶",
+      "rps120": 97.76
+    },
+    {
+      "code": "603386",
+      "name": "骏亚科技",
+      "reason": "今日涨停+Q3净利+259.4%(来源:web新浪)但RPS120 95.28>95%封顶+dist_ma10 +18.3%严重超买，Rule 2b硬拦截",
+      "rps120": 95.28
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "reason": "0风险但margin deleveraging(-8.57%)+已持同板块陕西煤业+煤炭今日震荡调整，避免过度集中",
+      "rps120": 88.95
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "今日消费电子/AI-PCB真热点但池内个股RPS120全部>95%(景旺97.76/崇达97.43/骏亚95.28)，封顶规则全部拦截，再次验证h151不可移除——热点≠可买，动量过热就是均值回归风险",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "热点板块个股RPS 97-99时动量已极致拥挤，短期赔率恶化，封顶强制等回调到90%区再评估"
+    },
+    {
+      "text": "当今日热点板块与候选池错位时，正确动作是买持续走强且今日休整的主线(银行)而非追一日脉冲题材(医疗美容/照明)；银行10-19全板块收涨+多股创新高是持续主线的证据",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "持续主线有趋势惯性+资金沉淀，一日脉冲多为情绪驱动，追高易被闷杀"
+    },
+    {
+      "text": "银行板块内融资流分化：国有大行(中国银行+2.56%)与齐鲁银行(+11.54%)margin adding，宁波银行(-5.81%)/中信银行(-1.83%)deleveraging——同热板块内应用per-stock margin信号选股排序，而非用deleveraging拒绝整个板块",
+      "type": "signal",
+      "tags": [
+        "position-sizing",
+        "sector"
+      ],
+      "evidence_type": "observation",
+      "mechanism": "融资余额变化反映边际杠杆资金流向，同板块分化说明资金在向龙头集中"
+    },
+    {
+      "text": "breadth 2.27:1但分布严重偏r0_2(2029/5567只仅+0~2%)+仅1/3指数收红=弱质量反弹；比率达标不必然等于强市，应保持中等仓位而非激进",
+      "type": "observation",
+      "tags": [
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "r0_2占比过高说明普涨幅度小、赚钱效应弱，开仓应控制仓位和追高意愿"
+    }
+  ],
+  "market_summary": "2026-10-20平衡偏多市：breadth 2.27:1(3778涨/1667跌)，57涨停/7跌停，但仅上证收红+0.12%，深成-0.14%、创业板-0.26%，科创50+1.0%；分布严重偏r0_2(2029只仅+0~2%)，弱质量反弹。IV整体中性(平均rank 49%)，300/500/创业板ETF约55%偏高(selective)，50ETF 35%(normal)。热点为题材脉冲(医疗美容+4.96%/消费电子+3.08%/照明+2.72%/非金属材料+2.54%/自动化+2.5%)，与策略池错位；持续主线银行(房贷贴息+三季报窗口+北向增配)与煤炭(动力煤破千元/年内申万第一)今日休整，航运/CRO冷区。注：输入仅提供当日板块top5/bottom5涨跌幅，无5日动量序列。持仓对齐：0/3在今日top5，银行/煤炭趋势向上，医疗服务中性。regime balanced允许正常仓位开仓，弱反弹质量下仅开1笔5%中等仓。",
+  "market_sentiment": "neutral",
+  "market_call": "中性偏多"
+}
