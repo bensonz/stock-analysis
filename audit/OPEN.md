@@ -61,20 +61,20 @@
         · 2026-10-13 afternoon phase2_to_phase3 硬闸门拦截
         · … 另有 33 次更早的
 
-  ▸ db_health_spot_check  [env]
-      28 次 / 28 天   2026-08-12 … 2026-10-15   最长连续 2
-      执行:   python3 scripts/pricedb.py status
-        · 2026-10-12 afternoon 抽查 20 只、实际核对 0 只
-        · 2026-10-13 afternoon 抽查 20 只、实际核对 0 只
-        · 2026-10-14 afternoon 抽查 20 只、实际核对 0 只
-        · 2026-10-15 afternoon 抽查 20 只、实际核对 0 只
-        · … 另有 24 次更早的
-
   ▸ event_inbox_triage  [env]
       1 次 / 1 天   2026-10-15
       改这里: scripts/event_triage.py call_model / agents/EVENT_TRIAGE.md
       执行:   检查 .env 的 LLM_PROVIDER / OPENAI_*，然后 python3 scripts/event_inbox.py triage
         · 2026-10-15 noon      AI 事件分拣失败（1 条新候选仍待定）— 调用失败: _TimeoutError: event-triage exceeded 480s timeout
+
+  ▸ db_health_spot_check  [env]
+      29 次 / 29 天   2026-08-12 … 2026-10-19   最长连续 2
+      执行:   python3 scripts/pricedb.py status
+        · 2026-10-13 afternoon 抽查 20 只、实际核对 0 只
+        · 2026-10-14 afternoon 抽查 20 只、实际核对 0 只
+        · 2026-10-15 afternoon 抽查 20 只、实际核对 0 只
+        · 2026-10-19 afternoon 抽查 20 只、实际核对 0 只
+        · … 另有 25 次更早的
 
 
 ## 已知并接受 (1)

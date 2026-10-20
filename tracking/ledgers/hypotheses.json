@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-10-19",
+  "lastUpdated": "2026-10-20",
   "hypotheses": [
     {
       "id": "h001",
@@ -2945,7 +2945,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-10-19",
+      "lastTested": "2026-10-20",
       "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally.",
       "evidence": {
         "supporting": [
@@ -3212,6 +3212,10 @@
           {
             "date": "2026-10-19",
             "detail": "弱势带(breadth 0.42:1)+银行股历史新高+margin deleveraging叠加=不加仓：新高需要增量资金接力，但融资盘净偿还说明杠杆资金在撤，边际买盘弱；宁可持币等宽度修复"
+          },
+          {
+            "date": "2026-10-20",
+            "detail": "VCP QUALITY（江苏金租：contraction 0.38+margin adding+创历史新高）仍被sector-first拦截——VCP是timing工具不是filter，板块不领涨时再好的VCP也不能买"
           }
         ],
         "contradicting": [
@@ -3221,7 +3225,7 @@
           }
         ]
       },
-      "sampleSize": 67,
+      "sampleSize": 68,
       "hitRate": 0.985,
       "confidence": 0.971,
       "tags": [
@@ -4576,7 +4580,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-10-19",
+      "lastTested": "2026-10-20",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4695,13 +4699,17 @@
           {
             "date": "2026-10-19",
             "detail": "防御性轮动加速：白色家电/地面兵装/油气/银行上涨 vs 创业板-1.07%/科创50-1.68%杀跌，CRO板块10-16集体跳水后今日续跌；成长资金持续撤出，持仓应优先砍医疗服务等失血板块"
+          },
+          {
+            "date": "2026-10-20",
+            "detail": "银行/煤炭持仓今日未入top5亦未入bottom5，不触发行业冷3日卖出；但今日资金明显流向科技硬件（证券时报：芯片全线爆发、消费电子主力净流入超百亿），防御板块相对走弱，收紧对陕煤/齐鲁的观察"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 29,
+      "sampleSize": 30,
       "hitRate": 1.0,
-      "confidence": 0.968,
+      "confidence": 0.969,
       "tags": [
         "sector",
         "exit-rule"
@@ -6978,7 +6986,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-08-11",
-      "lastTested": "2026-10-19",
+      "lastTested": "2026-10-20",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -7033,13 +7041,17 @@
           {
             "date": "2026-10-19",
             "detail": "RPS120>95%封顶规则今日再次过滤策略池大部分候选(百普赛斯99.76/一博99.34/奥士康98.71/松发98.44/中石98.33等)，且这些高RPS个股dist_ma5/ma10/ma20普遍为负(已在向均线回落)——高RPS拥挤后的均值回归正在发生"
+          },
+          {
+            "date": "2026-10-20",
+            "detail": "策略池与市场热点错位时：热点板块（消费电子/自动化设备）个股RPS120全部>95%被Rule2封顶，而80-92甜点区个股集中在银行/煤炭/石油等今日非领涨板块，无交集→new_positions:[]，不强行入场"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 13,
+      "sampleSize": 14,
       "hitRate": 1.0,
-      "confidence": 0.933,
+      "confidence": 0.938,
       "tags": [
         "entry-filter"
       ],

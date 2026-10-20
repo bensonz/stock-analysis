@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 217777,
+  "output_tokens": 29236,
+  "rounds": 3,
+  "duration_sec": 349.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月20日 热点板块 自动化设备 消费电子 涨停",
+        "max_results": 5
+      },
+      "result_length": 3181
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "银行股 宁波银行 建设银行 2026年10月 新高 三季报",
+        "max_results": 5
+      },
+      "result_length": 3706
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "动力煤价格 2026年10月 千元 陕西煤业 中国神华",
+        "max_results": 5
+      },
+      "result_length": 3609
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+今日+热门板块+自动化设备+消费电子+2026年10月",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=药明康德+CRO+2026年10月+行情",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=A股+2026年10月20日+收评+三大指数+涨停"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=PCB+消费电子+芯片+2026年10月+涨停+崇达技术+景旺电子"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=宁波银行+江苏金租+2026年10月20日+行情"
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}

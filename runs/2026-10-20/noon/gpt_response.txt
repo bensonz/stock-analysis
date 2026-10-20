@@ -1,0 +1,191 @@
+## Research Memo — 2026-10-20
+
+### 1. Market Regime
+
+**Breadth 2.6:1 多头**（3915涨 / 1507跌 / 148平，60涨停 / 1跌停，f10仅1家跌停）。但指数涨跌互现：上证 -0.08%、深成 +0.18%、创业板 +0.27%、科创50 +0.79%。"宽度强、指数弱"是典型的**板块轮动结构**——资金在换仓而非离场。机械层判定 strong（2.6:1、2/3指数红、60涨停），买入闸门打开、满额仓位。
+
+**IV 情绪**：整体中性（avg_iv_rank 0.4673）。但分结构看 300ETF 0.52、创业板ETF 0.52、深100ETF 0.55、500ETF深 0.51 均处于"选择性（selective）"区间，仅 50ETF 0.34 为 normal。新仓应保持选择性，不冻结。
+
+**关键矛盾**：今日热点（自动化设备/消费电子/芯片）的池内个股 RPS120 全部 >95%（Rule 2 封顶）；80–92 甜点区个股集中在银行/煤炭/石油等今日非领涨板块。**板块与动量无交集。**
+
+### 2. Sector Analysis
+
+- **Hot（今日）**：自动化设备 +3.01%、消费电子 +2.95%、非金属材料Ⅱ +2.79%、照明设备Ⅱ +2.71%、玻璃玻纤 +2.69%。驱动力：芯片概念全线爆发（苹果接受三星2027存储报价涨30–40%传闻、DRAM/HBM产能紧张，来源：证券时报）；光通信/AI/消费电子主力净流入超百亿。
+- **Cold（今日）**：地面兵装Ⅱ -2.98%、航海装备Ⅱ -2.41%、白色家电 -1.95%、焦炭Ⅱ -1.74%、工业金属 -1.72%。
+- **Rotation 信号**：防御（银行/煤炭）→科技硬件。银行近两周连续新高后今日未入 top5；煤炭（动力煤价格 1025 元/吨年内 +47%，来源：输入events/证券时报）今日亦休整，陕西煤业 -1.17%。
+- **Position alignment**：0/3 持仓在今日热门板块（煤炭/银行/医疗服务今日均未入 top5，亦未入 bottom5）。
+
+### 3. Position Review
+
+| 持仓 | 现价 | PnL | 持有天数 | 止损 | 判断 |
+|---|---|---|---|---|---|
+| 陕西煤业 601225 | 27.86 | -0.89% | 3 | 26.7（距4.2%） | **HOLD** |
+| 齐鲁银行 601665 | 6.64 | +0.30% | 3 | 6.29 | **HOLD** |
+| 药明康德 603259 | 149.17 | +17.92% | ~55 | 139.15（+10%锁利） | **HOLD** |
+
+- **陕西煤业**：动力煤淡季不淡破千元、煤炭年内申万第一（输入events），逻辑未破；margin deleveraging（chg5 -4.8%）仅观察。若煤炭板块连续3日滑入 bottom 30% 则触发 Rule 1 卖出。
+- **齐鲁银行**：margin adding（chg5 +11.54%）确认资金流入，银行4年长牛+房贷贴息+三季报窗口（输入events）。今日 -0.9% 微调，止损远未破。
+- **药明康德**：大赢家，+10% 止损 139.15 上方 6.7% 缓冲；未达 +20%（151.8）不抬止损。医疗服务今日未入 bottom5，冷3日卖出未触发。让赢家奔跑。
+
+### 4. New Entry Candidates
+
+逐一过 5 规则后，**无标的通过全部门槛**：
+
+- **江苏金租 600901**：技术上全池最强（VCP QUALITY、contraction 0.38、dist_peak 1.9%、margin adding chg5 +4.52%、0风险、今日创历史新高、RPS120=85.7甜点区、无追高）。但**租赁/多元金融板块今日未入 top5，无法验证 top30%**——Rule 1 sector-first 拦截。VCP 是 timing 工具不是 filter。
+- **宁波银行 002142**：RPS120=91.32甜点区、0风险、无追高、银行5/20日强势。但 margin deleveraging（chg5 -5.81%）、IV 0.51 selective、且已持齐鲁银行（同城商行）→ 避免集中，放弃。
+- **科技硬件（崇达/景旺/金禄/威尔高/一博/中石科技）**：板块是今日热点，但 RPS120 全部 >95%，Rule 2 封顶（实证 load-bearing，7/27-7/31 audit 验证 top-of-pool 负 IC），等回调至 90% 区间。
+
+### 5. Skip List
+
+见 Fallback JSON `skip_list`。核心结论：热点板块的标的 RPS 封顶、甜点区标的板块不领涨，二者无交集 → 保持 88% 现金，不强行入场（h013/h151/h019 支持）。
+
+### 6. Learnings
+
+见 Fallback JSON `new_learnings`。
+
+### 7. Uncertainty Flags
+
+1. **板块数据仅提供今日 top5/bottom5**，无 5日/20日板块涨跌幅，无法精确验证"top 30%"门槛。银行/煤炭的板块排名判断基于近期事件（连续新高、年内申万第一）推断，非硬数据。
+2. **药明康德业绩指引方向矛盾**：输入 history 记载"全年指引上调"，但网络检索到一条"三季报调低全年预期（收入增速5-7%→2-3%）"的旧文（百度，可能为往期），建议 PM 核实三季报口径。止损纪律不受此影响——跌破 139.15 无条件卖。
+3. 非持仓股无当日价格数据，skip_list 全部基于输入指标（RPS/MA/margin/板块），未引用任何盘中涨跌。
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "自动化设备", "1d_pct": 3.01, "trend": "accelerating"},
+      {"name": "消费电子", "1d_pct": 2.95, "trend": "accelerating"},
+      {"name": "非金属材料Ⅱ", "1d_pct": 2.79, "trend": "steady"},
+      {"name": "照明设备Ⅱ", "1d_pct": 2.71, "trend": "steady"},
+      {"name": "玻璃玻纤", "1d_pct": 2.69, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "地面兵装Ⅱ", "1d_pct": -2.98, "trend": "deteriorating"},
+      {"name": "航海装备Ⅱ", "1d_pct": -2.41, "trend": "deteriorating"},
+      {"name": "白色家电", "1d_pct": -1.95, "trend": "deteriorating"},
+      {"name": "焦炭Ⅱ", "1d_pct": -1.74, "trend": "deteriorating"},
+      {"name": "工业金属", "1d_pct": -1.72, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/3 positions in today's hot sectors（煤炭/银行/医疗服务今日均未入top5）",
+    "regime": "科技硬件领涨（芯片/消费电子/光通信），防御（银行/煤炭）休整轮动"
+  },
+  "position_decisions": [
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "action": "HOLD",
+      "reason": "动力煤淡季不淡破千元、煤炭年内申万第一（输入events），今日-1.17%休整未入bottom5；止损26.7未破（距约4.2%）；margin deleveraging(chg5 -4.8%)仅观察。若煤炭连续3日滑入bottom30%则触发Rule1卖出",
+      "sector_rank": "煤炭：年内申万第一，今日未入top5/bottom5",
+      "new_stop": null,
+      "pnl_pct": -0.89,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "reason": "银行4年长牛+房贷贴息+三季报窗口（输入events），margin adding(chg5 +11.54%)确认资金流入；今日-0.9%微调，止损6.29未破；持有",
+      "sector_rank": "城商行：5/20日强势，今日未入top5",
+      "new_stop": null,
+      "pnl_pct": 0.3,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+17.9%，现价149.17高于+10%止损139.15（缓冲6.7%）；未达+20%(151.8)不抬止损；医疗服务今日未入bottom5，冷3日卖出未触发；让赢家奔跑",
+      "sector_rank": "医疗服务：今日未入bottom5（10/16曾bottom5已恢复）",
+      "new_stop": null,
+      "pnl_pct": 17.92,
+      "days_held": 55,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600901",
+      "name": "江苏金租",
+      "reason": "租赁/多元金融板块今日未入top5、无法验证top30%（sector-first门槛）；虽VCP QUALITY(0.38)+margin adding(chg5 +4.52%)+创历史新高，但板块不领涨，等回调或板块确认",
+      "rps120": 85.7
+    },
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "reason": "城商行5/20日强势但今日未入top5；margin deleveraging(chg5 -5.81%)；IV 0.51选择性；已持有齐鲁银行（同城商行）避免过度集中",
+      "rps120": 91.32
+    },
+    {
+      "code": "002815",
+      "name": "崇达技术",
+      "reason": "PCB/消费电子为今日热点板块，但RPS120=97.42>95%封顶（Rule2实证load-bearing），等回调至90%区间",
+      "rps120": 97.42
+    },
+    {
+      "code": "603228",
+      "name": "景旺电子",
+      "reason": "同上，PCB热点但RPS120=97.83>95%封顶",
+      "rps120": 97.83
+    },
+    {
+      "code": "601939",
+      "name": "建设银行",
+      "reason": "RPS120=92.9扩展区，1风险因子（估值）且无>50%成长催化，不满足扩展区豁免；margin deleveraging(chg5 -10.46%)",
+      "rps120": 92.9
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "reason": "煤炭甜点区(87.25)但今日板块休整未入top5；已持有陕西煤业避免同板块集中；margin deleveraging(chg5 -8.57%)",
+      "rps120": 87.25
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "reason": "重入举证责任（10/15刚止损离场、当日跌停-10%，输入risks）；航海装备今日bottom5(-2.41%)趋冷；无新催化差异，不重入",
+      "rps120": 86.38
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "reason": "dist_ma20=11.7%接近12%追高阈值；margin deleveraging(chg5 -6.12%)；石油石化今日未入top5",
+      "rps120": 85.23
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "策略池与市场热点错位时：热点板块（消费电子/自动化设备）个股RPS120全部>95%被Rule2封顶，而80-92甜点区个股集中在银行/煤炭/石油等今日非领涨板块，无交集→new_positions:[]，不强行入场",
+      "type": "heuristic",
+      "tags": ["entry-filter", "sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "Rule2 RPS封顶与Rule1 sector-first同时约束时，合格标的集合可为空；空集时持有现金优于强行降标（与h013同理）"
+    },
+    {
+      "text": "VCP QUALITY（江苏金租：contraction 0.38+margin adding+创历史新高）仍被sector-first拦截——VCP是timing工具不是filter，板块不领涨时再好的VCP也不能买",
+      "type": "observation",
+      "tags": ["timing", "sector"],
+      "evidence_type": "supporting",
+      "mechanism": "Rule1 sector-first优先级高于Rule2c VCP；VCP只决定何时买，不决定是否买"
+    },
+    {
+      "text": "银行/煤炭持仓今日未入top5亦未入bottom5，不触发行业冷3日卖出；但今日资金明显流向科技硬件（证券时报：芯片全线爆发、消费电子主力净流入超百亿），防御板块相对走弱，收紧对陕煤/齐鲁的观察",
+      "type": "signal",
+      "tags": ["sector", "exit-rule"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "板块轮动（防御→科技）通常持续3-5个交易日，若持仓板块2-3日内滑入bottom30%则Rule1冷3日卖出可能触发"
+    }
+  ],
+  "market_summary": "Breadth 2.6:1多头（3915涨/1507跌，60涨停/1跌停），指数涨跌互现（上证-0.08%、深成+0.18%、创业板+0.27%、科创50+0.79%）——宽度强指数弱，典型板块轮动结构。资金从防御（银行/煤炭）转向科技硬件：芯片概念全线爆发、消费电子/光通信主力净流入超百亿（来源:证券时报）。IV整体中性偏高（均值0.47；300ETF/创业板0.52、深100 0.55为选择性区间）。策略池与热点错位：热点科技股RPS120全>95%被Rule2封顶，80-92甜点区集中在银行/煤炭/石油等今日非领涨板块，无板块+动量交集，保持现金观望，继续持有现有3仓",
+  "market_sentiment": "bullish",
+  "market_call": "中性"
+}
+```
