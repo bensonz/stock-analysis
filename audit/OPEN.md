@@ -68,13 +68,13 @@
         · 2026-10-15 noon      AI 事件分拣失败（1 条新候选仍待定）— 调用失败: _TimeoutError: event-triage exceeded 480s timeout
 
   ▸ db_health_spot_check  [env]
-      29 次 / 29 天   2026-08-12 … 2026-10-19   最长连续 2
+      30 次 / 30 天   2026-08-12 … 2026-10-20   最长连续 2
       执行:   python3 scripts/pricedb.py status
-        · 2026-10-13 afternoon 抽查 20 只、实际核对 0 只
         · 2026-10-14 afternoon 抽查 20 只、实际核对 0 只
         · 2026-10-15 afternoon 抽查 20 只、实际核对 0 只
         · 2026-10-19 afternoon 抽查 20 只、实际核对 0 只
-        · … 另有 25 次更早的
+        · 2026-10-20 afternoon 抽查 20 只、实际核对 0 只
+        · … 另有 26 次更早的
 
 
 ## 已知并接受 (1)

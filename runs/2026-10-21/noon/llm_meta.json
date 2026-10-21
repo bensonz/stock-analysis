@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 155496,
+  "output_tokens": 23549,
+  "rounds": 2,
+  "duration_sec": 263.4,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=油运价格暴涨+VLCC+中远海能+涨停+2026",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+林业+养殖业+渔业+板块上涨原因+2026年10月",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=银行板块+房贷贴息+三季报+2026",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=动力煤价格+煤炭板块+陕西煤业+2026",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=中远海控+集运运价+回购+2026",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}

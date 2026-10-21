@@ -14,25 +14,9 @@
 > `date`、`tz` (US=影响其后第一个A股交易日 / CN=当日)、`kind`、`note`。不要改 `ai:`、`src:` 和 `id:` 三行（🤖 可留可删）。
 > 标题日期 = A股影响日，由 date+tz 推算，重写时刷新。规则与局限: docs/EVENT_INBOX/DECISIONS.md
 
-_更新: 2026-10-20 · 共 17 条 · 待定 0 条_
+_更新: 2026-10-21 · 共 17 条 · 待定 0 条_
 
-## 2026-10-20 (T-0) 德国 — 德国英伟达GTC大会（柏林）
-- [-] keep 🤖   impact: low   direction: two_sided
-  date: 2026-10-20   tz: CN   kind: other
-  note:
-  ai: 跳过 · low/two_sided · 英伟达GTC为公司技术大会，非系统性政策事件（deepseek-v4-pro，2026-10-12）
-  src: wallstreetcn imp=4 北京 2026-10-20 12:02 |
-  id: wscn-20261020-1aaacb8a
-
-## 2026-10-20 (T-0) 中国 — 2026年APEC财长会，首度在中国香港举行
-- [-] keep 🤖   impact: low   direction: two_sided
-  date: 2026-10-20   tz: CN   kind: other
-  note:
-  ai: 跳过 · low/two_sided · APEC财长会为论坛性质，非系统性政策决策场合，对A股直接影响有限（deepseek-v4-pro，2026-10-16）
-  src: wallstreetcn imp=4 北京 2026-10-20 12:02 |
-  id: wscn-20261020-33014306
-
-## 2026-10-21 (T-1) 德国 — 德国柏林GTC大会，黄仁勋将发表演讲
+## 2026-10-21 (T-0) 德国 — 德国柏林GTC大会，黄仁勋将发表演讲
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-10-21   tz: CN   kind: other
   note:
@@ -40,7 +24,7 @@ _更新: 2026-10-20 · 共 17 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-10-21 12:02 |
   id: wscn-20261021-2f2142a9
 
-## 2026-10-26 (T-6) 巴西 — 巴西将举行总统选举第二轮决选
+## 2026-10-26 (T-5) 巴西 — 巴西将举行总统选举第二轮决选
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-10-25   tz: CN   kind: other
   note:
@@ -48,7 +32,7 @@ _更新: 2026-10-20 · 共 17 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-10-25 00:00 |
   id: wscn-20261025-39997f26
 
-## 2026-10-27 (T-7) 沙特阿拉伯 — 沙特阿拉伯以色列选举
+## 2026-10-27 (T-6) 沙特阿拉伯 — 沙特阿拉伯以色列选举
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-10-27   tz: CN   kind: other
   note:
@@ -56,7 +40,7 @@ _更新: 2026-10-20 · 共 17 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-10-27 12:02 |
   id: wscn-20261027-3c4f02f2
 
-## 2026-10-27 (T-7) 沙特阿拉伯 — 沙特阿拉伯以色列大选
+## 2026-10-27 (T-6) 沙特阿拉伯 — 沙特阿拉伯以色列大选
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-10-27   tz: CN   kind: other
   note:
@@ -64,7 +48,7 @@ _更新: 2026-10-20 · 共 17 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-10-27 00:00 |
   id: wscn-20261027-730308dd
 
-## 2026-10-27 (T-7) 韩国 — 韩国SK海力士三季报及电话会（预计时间）
+## 2026-10-27 (T-6) 韩国 — 韩国SK海力士三季报及电话会（预计时间）
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-10-27   tz: CN   kind: other
   note:
@@ -72,7 +56,7 @@ _更新: 2026-10-20 · 共 17 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-10-27 12:02 |
   id: wscn-20261027-b84a6961
 
-## 2026-10-28 (T-8) 韩国 — 韩国SK海力士三季报及电话会（预计时间）
+## 2026-10-28 (T-7) 韩国 — 韩国SK海力士三季报及电话会（预计时间）
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-10-28   tz: CN   kind: other
   note:
@@ -80,7 +64,7 @@ _更新: 2026-10-20 · 共 17 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-10-28 12:02 |
   id: wscn-20261028-b84a6961
 
-## 2026-10-29 (T-9) 韩国 — 韩国三星电子三季报及电话会
+## 2026-10-29 (T-8) 韩国 — 韩国三星电子三季报及电话会
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-10-29   tz: CN   kind: other
   note:
@@ -88,7 +72,7 @@ _更新: 2026-10-20 · 共 17 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-10-29 09:00 |
   id: wscn-20261029-6a652201
 
-## 2026-11-02 (T-13) 中国 — 中国10月底，苹果国行Apple Intelligence上线测试版（接入阿里千问）
+## 2026-11-02 (T-12) 中国 — 中国10月底，苹果国行Apple Intelligence上线测试版（接入阿里千问）
 - [-] keep 🤖   impact: low   direction: supportive
   date: 2026-10-31   tz: CN   kind: other
   note:
@@ -96,7 +80,7 @@ _更新: 2026-10-20 · 共 17 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-10-31 12:02 |
   id: wscn-20261031-c88c7231
 
-## 2026-11-05 (T-16) 中国 — 第九届中国国际进口博览会
+## 2026-11-05 (T-15) 中国 — 第九届中国国际进口博览会
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-11-05   tz: CN   kind: other
   note:
@@ -104,7 +88,7 @@ _更新: 2026-10-20 · 共 17 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-05 12:02 |
   id: wscn-20261105-6153f180
 
-## 2026-11-17 (T-28) 美国 — 美国沃什：美联储生产率与就业特别工作组将举行听证会
+## 2026-11-17 (T-27) 美国 — 美国沃什：美联储生产率与就业特别工作组将举行听证会
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-11-16   tz: US   kind: other
   note:
@@ -112,7 +96,7 @@ _更新: 2026-10-20 · 共 17 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-16 12:02 |
   id: wscn-20261116-7d533f14
 
-## 2026-11-17 (T-28) 中国 — 中美俄元首将于深圳APEC期间会晤？外交部回应：中方愿同各方一道，共同推动APEC“中国年”取得丰硕成果
+## 2026-11-17 (T-27) 中国 — 中美俄元首将于深圳APEC期间会晤？外交部回应：中方愿同各方一道，共同推动APEC“中国年”取得丰硕成果
 - [-] keep 🤖   impact: medium   direction: two_sided
   date: 2026-11-17   tz: CN   kind: other
   note:
@@ -120,7 +104,7 @@ _更新: 2026-10-20 · 共 17 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-17 12:02 |
   id: wscn-20261117-67281d27
 
-## 2026-11-17 (T-28) 中国 — 中国亚太经合组织会议（APEC）11月17日至18日在深圳举办
+## 2026-11-17 (T-27) 中国 — 中国亚太经合组织会议（APEC）11月17日至18日在深圳举办
 - [-] keep 🤖   impact: medium   direction: two_sided
   date: 2026-11-17   tz: CN   kind: other
   note:
@@ -128,7 +112,7 @@ _更新: 2026-10-20 · 共 17 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-17 12:02 |
   id: wscn-20261117-7268b241
 
-## 2026-11-18 (T-29) 美国 — 美国微软开发者与IT大会（Microsoft Ignite）
+## 2026-11-18 (T-28) 美国 — 美国微软开发者与IT大会（Microsoft Ignite）
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-11-17   tz: US   kind: other
   note:
@@ -136,7 +120,7 @@ _更新: 2026-10-20 · 共 17 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-17 12:02 |
   id: wscn-20261117-befb8c6f
 
-## 2026-11-18 (T-29) 中国 — 中国普京出席APEC领导人非正式会议
+## 2026-11-18 (T-28) 中国 — 中国普京出席APEC领导人非正式会议
 - [-] keep 🤖   impact: medium   direction: two_sided
   date: 2026-11-18   tz: CN   kind: other
   note:
@@ -144,10 +128,26 @@ _更新: 2026-10-20 · 共 17 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-18 00:00 |
   id: wscn-20261118-35908d3e
 
-## 2026-11-27 (T-38) 中国 — 中国商务部：中美双方约定在今年11月底前举行下一次人工智能对话
+## 2026-11-27 (T-37) 中国 — 中国商务部：中美双方约定在今年11月底前举行下一次人工智能对话
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-11-27   tz: CN   kind: other
   note:
   ai: 跳过 · low/two_sided · 中美AI对话为事务性沟通，非系统性政策事件，对A股整体影响有限（deepseek-v4-pro，2026-10-13）
   src: wallstreetcn imp=4 北京 2026-11-27 12:02 |
   id: wscn-20261127-77abe93e
+
+## 2026-12-07 (T-47) 美国 — 美国纳斯达克拟推出全新“23小时”交易时段，美东时间晚9点至凌晨4点
+- [-] keep 🤖   impact: low   direction: two_sided
+  date: 2026-12-06   tz: US   kind: other
+  note:
+  ai: 跳过 · low/two_sided · 交易时段延长属市场基础设施变化，非系统性宏观事件，对A股无直接冲击（deepseek-v4-pro，2026-10-21）
+  src: wallstreetcn imp=4 北京 2026-12-06 00:00 |
+  id: wscn-20261206-3ba46065
+
+## 2026-12-07 (T-47) 美国 — 美国美股进入每天23小时的“通宵交易”的时代
+- [-] keep 🤖   impact: low   direction: two_sided
+  date: 2026-12-06   tz: US   kind: other
+  note:
+  ai: 跳过 · low/two_sided · 与另一候选重复，均为美股通宵交易时段启动，非A股系统性事件（deepseek-v4-pro，2026-10-21）
+  src: wallstreetcn imp=4 北京 2026-12-06 00:00 |
+  id: wscn-20261206-e4bdae4a

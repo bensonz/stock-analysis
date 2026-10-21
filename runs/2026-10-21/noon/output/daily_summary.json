@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-21",
+  "actions": [
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "action": "HOLD",
+      "price": 34.87,
+      "pnl_pct": 0.23,
+      "note": "新仓第1日，浮盈+0.23%，<5日不动；银行长牛主线未破，止损33.05未破；margin deleveraging(chg5-3.37%)仅观察"
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "action": "HOLD",
+      "price": 27.6,
+      "pnl_pct": -1.81,
+      "note": "煤炭开采今日滑入bottom5(-1.73%)但仅1日，未触发Rule1冷3日卖出；浮盈-1.81%未破-5%止损；距止损26.70约3.26%(stop_proximity WATCH)，若煤炭连续3日留bottom30%则卖出"
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "price": 6.6,
+      "pnl_pct": -0.3,
+      "note": "浮盈-0.30%，距止损6.29约4.7%(WATCH)；margin adding(chg5+9.84%)资金流入确认；银行主线未破，持有"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 147.52,
+      "pnl_pct": 16.6,
+      "note": "浮盈+16.6%，现价147.52高于+10%移动止损139.15(缓冲5.7%)；未达+20%(151.80)不抬止损；医疗服务未入今日bottom5，冷3日卖出未触发；让赢家奔跑"
+    },
+    {
+      "code": "601919",
+      "name": "中远海控",
+      "action": "OPEN",
+      "price": 16.59,
+      "note": "VCP PREMIUM(收缩比0.38<0.4+距MA20仅0.1%)+RPS120=91.4甜点区+MA距离全合规(不追高)+margin adding(chg5+5.72%)；油运价格暴涨(BDTI月+69.5%/VLCC月+151%，来源:输入events)带动航运板块，中远海能今日涨停；近5年股息均值12%+7.55亿回购完成；软平衡市故压至5%而非满配"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 970169.74,
+    "dayPnl": -442.0,
+    "dayReturnPct": -0.05,
+    "totalReturnPct": -2.98,
+    "unrealizedPnl": 5561.0,
+    "realizedPnl": -35391.26,
+    "cashPct": 80.17
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 1.1552,
+    "up": 2859,
+    "down": 2475,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 45,
+    "limit_downs": 0,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 1.16:1, 0/3 major indices green, 45 limit-ups / 0 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [
+    {
+      "code": "601919",
+      "name": "中远海控"
+    }
+  ],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "上证-0.31%/深成-0.31%/创业板-1.07%/科创50+0.53%，广度1.16:1(涨2859/跌2475)，45涨停/0跌停——平衡偏弱市，三大指数全绿但无跌停潮。农业(林业+8.18%/渔业+3.29%/养殖+2.98%)与IT服务(+2.82%)领涨，电池(-5.99%)/白电(-2.2%)/煤炭开采(-1.73%)垫底。IV整体0.477中性偏高(50ETF 0.379正常/300ETF与创业板ETF 0.515-0.555偏高)。持仓板块与今日热门错位，仅对具备独立油运催化的中远海控(VCP PREMIUM)小额5%参与，其余现金观望。"
+  }
+}

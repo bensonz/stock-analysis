@@ -1,0 +1,196 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": 8.18,
+        "trend": "accelerating"
+      },
+      {
+        "name": "渔业",
+        "5d_pct": 3.29,
+        "trend": "steady"
+      },
+      {
+        "name": "养殖业",
+        "5d_pct": 2.98,
+        "trend": "steady"
+      },
+      {
+        "name": "IT服务Ⅱ",
+        "5d_pct": 2.82,
+        "trend": "steady"
+      },
+      {
+        "name": "电视广播Ⅱ",
+        "5d_pct": 2.63,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "电池",
+        "5d_pct": -5.99,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "白色家电",
+        "5d_pct": -2.2,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "煤炭开采",
+        "5d_pct": -1.73,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "商用车",
+        "5d_pct": -1.68,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "乘用车",
+        "5d_pct": -1.65,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/4 持仓在今日top5热门板块；陕西煤业(煤炭开采)今日滑入bottom5，银行/医疗服务中性",
+    "regime": "农业/防御领涨，成长(电池-5.99%/创业板-1.07%)退潮；银行长牛与航运油运为隐性主线，持仓与当日领导板块错位"
+  },
+  "position_decisions": [
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "action": "HOLD",
+      "reason": "新仓第1日，浮盈+0.23%，<5日不动；银行长牛主线未破，止损33.05未破；margin deleveraging(chg5-3.37%)仅观察",
+      "sector_rank": "top 30%（银行长牛主线，未入今日top5）",
+      "new_stop": 33.05,
+      "pnl_pct": 0.23,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "action": "HOLD",
+      "reason": "煤炭开采今日滑入bottom5(-1.73%)但仅1日，未触发Rule1冷3日卖出；浮盈-1.81%未破-5%止损；距止损26.70约3.26%(stop_proximity WATCH)，若煤炭连续3日留bottom30%则卖出",
+      "sector_rank": "bottom 30%（今日bottom5，煤炭开采-1.73%）",
+      "new_stop": 26.7,
+      "pnl_pct": -1.81,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "reason": "浮盈-0.30%，距止损6.29约4.7%(WATCH)；margin adding(chg5+9.84%)资金流入确认；银行主线未破，持有",
+      "sector_rank": "top 30%（银行长牛主线，未入今日top5）",
+      "new_stop": 6.29,
+      "pnl_pct": -0.3,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "浮盈+16.6%，现价147.52高于+10%移动止损139.15(缓冲5.7%)；未达+20%(151.80)不抬止损；医疗服务未入今日bottom5，冷3日卖出未触发；让赢家奔跑",
+      "sector_rank": "top 30%（医疗服务，未入今日top5/bottom5）",
+      "new_stop": 139.15,
+      "pnl_pct": 16.6,
+      "days_held": 56,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "601919",
+      "name": "中远海控",
+      "entry_price": 16.59,
+      "allocation_pct": 5,
+      "stop": 15.76,
+      "target": 19.5,
+      "thesis": "VCP PREMIUM(收缩比0.38<0.4+距MA20仅0.1%)+RPS120=91.4甜点区+MA距离全合规(不追高)+margin adding(chg5+5.72%)；油运价格暴涨(BDTI月+69.5%/VLCC月+151%，来源:输入events)带动航运板块，中远海能今日涨停；近5年股息均值12%+7.55亿回购完成；软平衡市故压至5%而非满配",
+      "sector": "航运港口",
+      "sector_rank": "top 30%（油运催化，中远海能今日涨停；未入今日机械top5，存在排名不确定性）",
+      "catalyst": "油运运价暴涨(BDTI月+69.5%/VLCC月+151%/CTFI月+137%，来源:输入events)，中远海能涨停",
+      "catalyst_freshness": "ongoing",
+      "rps120": 91.4,
+      "conviction": "moderate"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "601988",
+      "name": "中国银行",
+      "reason": "RPS120=93.75处92-95延展区，需板块top10%/0风险/业绩+50%三选一均不满足(1风险=周级别超买，净利+1.1%)，且今日创历史新高7.20元(输入events)——延展区+超买不追",
+      "rps120": 93.75
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "Q3净利+795%催化虽强(输入资讯)，但大股东质押77%+现金短债比0.16(输入risks)+margin chg5-4.43%，风险聚集；石油石化未入top5，软市不追",
+      "rps120": 89.27
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "reason": "RPS120=87.83甜点区+0风险，但dist_ma20=+9.8%逼近12%追高线，margin deleveraging(net5_repay_days=4)，不追高",
+      "rps120": 87.83
+    },
+    {
+      "code": "600428",
+      "name": "中远海特",
+      "reason": "RPS120=93.27延展区+1风险(8/19以来调整)，同板块已有更优选中远海控(VCP PREMIUM+甜点区)，不重复建仓",
+      "rps120": 93.27
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "reason": "RPS120=88.95甜点区但煤炭开采今日bottom5(-1.73%)，Rule1冷区禁买(h019)",
+      "rps120": 88.95
+    },
+    {
+      "code": "600901",
+      "name": "江苏金租",
+      "reason": "RPS120=86.55+VCP QUALITY+0风险，但无新鲜催化(仅开源研报，输入events)，非银未入top5，备选观察",
+      "rps120": 86.55
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "平衡偏弱市(三大指数全绿+广度1.16:1)不等于机械空仓，但只允许单一最优标的(VCP PREMIUM+RPS甜点区+MA全合规+margin adding)以5%中等仓位入场，而非8-10%满配",
+      "type": "heuristic",
+      "tags": [
+        "position-sizing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "entry_regime只决定能否开仓，仓位幅度由候选质量与软市程度共同决定"
+    },
+    {
+      "text": "今日top5(林业/渔业/养殖/IT服务/电视广播)与策略池候选(银行/航运/石油/电力)完全错位；热门板块无票可选时宁可少买，不硬买错位板块",
+      "type": "rule",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "板块优先于个股：错位日硬买等于放弃板块动量这一最主要alpha来源"
+    },
+    {
+      "text": "煤炭开采今日滑入bottom5(-1.73%)，陕西煤业距止损26.70仅3.26%(stop_proximity WATCH)；Rule1冷3日卖出未触发但需提前准备，观察年内第一板块向冷区切换",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "领先板块的动量反转是逐步的，第1天冷是预警信号而非卖出信号"
+    }
+  ],
+  "market_summary": "上证-0.31%/深成-0.31%/创业板-1.07%/科创50+0.53%，广度1.16:1(涨2859/跌2475)，45涨停/0跌停——平衡偏弱市，三大指数全绿但无跌停潮。农业(林业+8.18%/渔业+3.29%/养殖+2.98%)与IT服务(+2.82%)领涨，电池(-5.99%)/白电(-2.2%)/煤炭开采(-1.73%)垫底。IV整体0.477中性偏高(50ETF 0.379正常/300ETF与创业板ETF 0.515-0.555偏高)。持仓板块与今日热门错位，仅对具备独立油运催化的中远海控(VCP PREMIUM)小额5%参与，其余现金观望。",
+  "market_sentiment": "neutral",
+  "market_call": "中性偏谨慎"
+}

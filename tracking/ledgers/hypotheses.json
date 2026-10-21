@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-21",
   "hypotheses": [
     {
       "id": "h001",
@@ -1250,7 +1250,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-10-19",
+      "lastTested": "2026-10-21",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1641,11 +1641,15 @@
           {
             "date": "2026-10-19",
             "detail": "航运港口板块(招商轮船/中远海特/招商港口/海通发展)因美国拟放宽影子船队制裁+霍尔木兹袭击，10-15集体跌停后持续走弱——即使RPS120在甜点区(86-92)，板块冷区仍是hard no-buy"
+          },
+          {
+            "date": "2026-10-21",
+            "detail": "今日top5(林业/渔业/养殖/IT服务/电视广播)与策略池候选(银行/航运/石油/电力)完全错位；热门板块无票可选时宁可少买，不硬买错位板块"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 97,
+      "sampleSize": 98,
       "hitRate": 1.0,
       "confidence": 0.99,
       "tags": [
@@ -4580,7 +4584,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-10-20",
+      "lastTested": "2026-10-21",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4703,13 +4707,17 @@
           {
             "date": "2026-10-20",
             "detail": "银行/煤炭持仓今日未入top5亦未入bottom5，不触发行业冷3日卖出；但今日资金明显流向科技硬件（证券时报：芯片全线爆发、消费电子主力净流入超百亿），防御板块相对走弱，收紧对陕煤/齐鲁的观察"
+          },
+          {
+            "date": "2026-10-21",
+            "detail": "煤炭开采今日滑入bottom5(-1.73%)，陕西煤业距止损26.70仅3.26%(stop_proximity WATCH)；Rule1冷3日卖出未触发但需提前准备，观察年内第一板块向冷区切换"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 30,
+      "sampleSize": 31,
       "hitRate": 1.0,
-      "confidence": 0.969,
+      "confidence": 0.97,
       "tags": [
         "sector",
         "exit-rule"
@@ -8294,22 +8302,26 @@
       "id": "h192",
       "text": "弱宽度(0.40:1)下，即使板块top5+个股RPS甜区，若个股位于均线下方且margin deleveraging+基本面下滑，仍应skip——'板块热'不覆盖'个股不强势+弱盘'的双重折价（江苏博云案例）",
       "type": "heuristic",
-      "status": "observation",
+      "status": "hypothesis",
       "created": "2026-09-15",
-      "lastTested": "2026-09-15",
+      "lastTested": "2026-10-21",
       "mechanism": "弱宽度=多数个股普跌，均线下方=个股自身动量已破位，融资盘去杠杆放大下行弹性；三因素叠加时追强势板块的边际风险远超潜在收益",
       "evidence": {
         "supporting": [
           {
             "date": "2026-09-15",
             "detail": "弱宽度(0.40:1)下，即使板块top5+个股RPS甜区，若个股位于均线下方且margin deleveraging+基本面下滑，仍应skip——'板块热'不覆盖'个股不强势+弱盘'的双重折价（江苏博云案例）"
+          },
+          {
+            "date": "2026-10-21",
+            "detail": "平衡偏弱市(三大指数全绿+广度1.16:1)不等于机械空仓，但只允许单一最优标的(VCP PREMIUM+RPS甜点区+MA全合规+margin adding)以5%中等仓位入场，而非8-10%满配"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 1,
+      "sampleSize": 2,
       "hitRate": 1.0,
-      "confidence": 0.6,
+      "confidence": 0.75,
       "tags": [
         "entry-filter",
         "position-sizing"

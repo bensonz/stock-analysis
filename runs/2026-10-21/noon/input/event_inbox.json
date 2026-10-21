@@ -1,0 +1,64 @@
+{
+  "as_of": "2026-10-21",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 17,
+    "new": 2,
+    "pending": 2,
+    "expired": 0,
+    "ai_retired": 2,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 13,
+    "decided": 2,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 0,
+    "fetch_errors": 0,
+    "empty_days": 15,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 2,
+    "kept": 0,
+    "skipped": 2,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261206-3ba46065",
+        "name": "美国纳斯达克拟推出全新“23小时”交易时段，美东时间晚9点至凌晨4点",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "交易时段延长属市场基础设施变化，非系统性宏观事件，对A股无直接冲击"
+      },
+      {
+        "id": "wscn-20261206-e4bdae4a",
+        "name": "美国美股进入每天23小时的“通宵交易”的时代",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "与另一候选重复，均为美股通宵交易时段启动，非A股系统性事件"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1472,
+    "tokens_out": 146
+  },
+  "pending_items": []
+}
