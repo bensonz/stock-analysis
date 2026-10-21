@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 136186,
+  "output_tokens": 17284,
+  "rounds": 2,
+  "duration_sec": 233.7,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 今日 林业 养殖业 渔业 板块 上涨 原因 2026年10月21日",
+        "max_results": 5
+      },
+      "result_length": 3477
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "银行板块 房贷贴息 大行 走势 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3715
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "动力煤 价格 破千 冬储 2026年10月 煤炭板块",
+        "max_results": 5
+      },
+      "result_length": 3800
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "油运 VLCC 运价 上涨 中远海控 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 2856
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "药明康德 CXO 板块 2026年10月 最新消息",
+        "max_results": 5
+      },
+      "result_length": 3597
+    }
+  ],
+  "fallback_used": false
+}

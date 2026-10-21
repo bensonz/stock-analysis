@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-21",
+  "actions": [
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "action": "HOLD",
+      "price": 34.65,
+      "pnl_pct": -0.4,
+      "note": "新仓第2日(<5日不动)，现价34.65距止损33.05约4.6%(stop_proximity WATCH)；-0.40%未破-5%止损；银行主线(房贷贴息10-01落地,来源:新浪财经)未破，仅观察"
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "action": "HOLD",
+      "price": 27.69,
+      "pnl_pct": -1.49,
+      "note": "动力煤破千元冬储主线未破(来源:证券日报10-19)，但煤炭开采今日bottom5(-1.94%)仅第1日，未触发Rule1冷3日卖出；-1.49%未破-5%止损26.70；stop_proximity 3.58% WATCH，若煤炭连续3日留bottom30%则执行卖出"
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "price": 6.64,
+      "pnl_pct": 0.3,
+      "note": "浮盈+0.30%，margin adding(chg5+9.84%)资金流入确认；银行主线未破，止损6.29未破；持有"
+    },
+    {
+      "code": "601919",
+      "name": "中远海控",
+      "action": "HOLD",
+      "price": 16.63,
+      "pnl_pct": 0.24,
+      "note": "今日新开仓第1日(<5日不动)，+0.24%；VCP PREMIUM+margin adding逻辑未变，止损15.76未破；注意其为集运龙头，VLCC油运暴涨(利好中远海能/招商轮船)对其直接传导有限"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 147.35,
+      "pnl_pct": 16.48,
+      "note": "大赢家+16.5%，现价147.35高于+10%移动止损139.15(缓冲5.6%)，未达+20%(151.80)不抬止损；医疗服务未入bottom5；CXO板块10-16曾集中调整(药明盘中近跌停,来源:东方财富)后已收复；让赢家奔跑"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 970237.74,
+    "dayPnl": -470.0,
+    "dayReturnPct": -0.05,
+    "totalReturnPct": -2.98,
+    "unrealizedPnl": 5629.0,
+    "realizedPnl": -35391.26,
+    "cashPct": 80.16
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.5889,
+    "up": 1981,
+    "down": 3364,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 50,
+    "limit_downs": 5,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.59:1, 0/3 major indices green, 50 limit-ups / 5 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "沪指-0.6%、深成指-0.82%、创业板-1.62%全线收绿，科创50微涨0.06%；涨跌1981/3364，多空比0.59:1，涨停50/跌停5——弱势盘面。IV整体偏悲观(avg_iv_rank 0.52，500ETF/创业板偏高)。热点轮动到农林牧渔防御(林业+5.96%/养殖业+2.94%/渔业+1.93%)，银行/煤炭/航运前期主线今日让位。策略池无标落在今日top5行业，弱市默认空仓不开新仓。"
+  }
+}

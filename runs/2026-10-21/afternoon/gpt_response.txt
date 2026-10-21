@@ -1,0 +1,196 @@
+## 研究备忘录 (Research Memo)
+
+### 1. Market Regime — 弱势盘面，防御轮动
+- 上证 -0.6%、深成指 -0.82%、创业板 -1.62% 全线收绿，仅科创50 +0.06%。
+- Breadth 0.59:1（涨1981/跌3364），涨停50/跌停5——非恐慌但明显偏弱；entry_regime 判定 **weak**（sizing 0.5×，未硬阻断）。
+- IV 情绪偏悲观：avg_iv_rank 0.52，500ETF(0.63)/创业板ETF(0.65)/深市宽基偏高。
+- 结论：弱市。允许开新仓但默认半仓，且必须更挑剔；我的默认倾向是**空仓等待**。
+
+### 2. Sector Analysis — 农林牧渔防御领涨，前期主线让位
+- 今日 top5：林业Ⅱ +5.96%、养殖业 +2.94%、电视广播Ⅱ +2.49%、渔业 +1.93%、出版 +1.82% —— 全是防御/农业方向（来源：输入 market.sectors）。
+- 今日 bottom5：电池 -7.34%、商用车、乘用车、白色家电、**煤炭开采 -1.94%**。
+- 银行、航运、煤炭等前期主线今日全部让位，策略池 34 只标的中**无一落在今日 top5 行业**。
+- 位置对齐：0/5 持仓在今日 top5；2 银行 / 1 煤炭 / 1 航运 / 1 医药。
+
+### 3. Position Review
+| 代码 | 名称 | 持有 | 浮盈 | 止损距 | 决定 |
+|---|---|---|---|---|---|
+| 002142 | 宁波银行 | 2日 | -0.40% | 4.62% WATCH | HOLD |
+| 601225 | 陕西煤业 | 4日 | -1.49% | 3.58% WATCH | HOLD（煤炭bottom5第1日，未触冷3日） |
+| 601665 | 齐鲁银行 | 4日 | +0.30% | 5.0% | HOLD |
+| 601919 | 中远海控 | 1日 | +0.24% | - | HOLD（新仓不动） |
+| 603259 | 药明康德 | ~58日 | +16.48% | +10%止损139.15 | HOLD（让赢家奔跑，未到+20%不抬止损） |
+
+全部无触发 -5%/-3%前3日/时间止损（药明盈利远超3%）。陕西煤业是唯一需紧盯项：煤炭入 bottom5 第1日，若连续3日留在 bottom30% 则 Rule1 卖出。
+
+### 4. New Entry Candidates — 今日不建仓
+严格按 Rule1，候选必须落在趋势向上的行业。今日 top5 是农林牧渔防御，策略池无匹配标的；银行（中国银行 RPS 94.46 扩展区、1风险因子不满足例外）、煤炭（中国神华，冷区）、石油（中国石油，deleveraging）、租赁（江苏金租 RPS87 甜点但行业无动量）全部因**行业不在今日 top5 + 弱市**而放弃。弱市默认空仓，不硬找标的。
+
+### 5. Skip List
+- 中国银行（扩展区+周级超买+银行让位）、江苏金租（甜点但无行业动量）、中国神华（煤炭冷区）、中国石油（石油石化非top5+deleveraging）、招商轮船（10-15刚止损，重入举证不成立，已破MA10/MA20）、博济医药（CRO冷区）。
+
+### 6. Learnings
+见 JSON `new_learnings`（4条结构化）。
+
+### 7. Uncertainty Flags
+- 输入仅给 top5/bottom5，无法精确判定"top 30%"边界；银行等前期主线可能仍在 top30% 但今日不在 top5。弱市下我选择保守（不建仓），若有5日/20日行业动量数据可再校准。
+- 中远海控是**集运**龙头，非油运直接受益者（VLCC 暴涨利好中远海能/招商轮船）；持有其应盯 SCFI/CCFI 集运运价，而非油运运价。
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "林业Ⅱ", "5d_pct": 5.96, "trend": "rotating-in"},
+      {"name": "养殖业", "5d_pct": 2.94, "trend": "steady"},
+      {"name": "电视广播Ⅱ", "5d_pct": 2.49, "trend": "steady"},
+      {"name": "渔业", "5d_pct": 1.93, "trend": "steady"},
+      {"name": "出版", "5d_pct": 1.82, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "电池", "5d_pct": -7.34, "trend": "deteriorating"},
+      {"name": "商用车", "5d_pct": -2.46, "trend": "deteriorating"},
+      {"name": "乘用车", "5d_pct": -2.27, "trend": "deteriorating"},
+      {"name": "白色家电", "5d_pct": -2.23, "trend": "deteriorating"},
+      {"name": "煤炭开采", "5d_pct": -1.94, "trend": "turning"}
+    ],
+    "position_alignment": "0/5持仓在今日top5行业；2银行/1煤炭/1航运/1医药，全部落在今日让位的前期主线",
+    "regime": "防御性轮动(农林牧渔领涨)，前期主线(银行/煤炭/航运)让位，弱势盘面"
+  },
+  "position_decisions": [
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "action": "HOLD",
+      "reason": "新仓第2日(<5日不动)，现价34.65距止损33.05约4.6%(stop_proximity WATCH)；-0.40%未破-5%止损；银行主线(房贷贴息10-01落地,来源:新浪财经)未破，仅观察",
+      "sector_rank": "银行未在今日top5/bottom5，前期主线让位",
+      "new_stop": null,
+      "pnl_pct": -0.40,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "action": "HOLD",
+      "reason": "动力煤破千元冬储主线未破(来源:证券日报10-19)，但煤炭开采今日bottom5(-1.94%)仅第1日，未触发Rule1冷3日卖出；-1.49%未破-5%止损26.70；stop_proximity 3.58% WATCH，若煤炭连续3日留bottom30%则执行卖出",
+      "sector_rank": "煤炭开采 bottom5 第1日",
+      "new_stop": null,
+      "pnl_pct": -1.49,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "reason": "浮盈+0.30%，margin adding(chg5+9.84%)资金流入确认；银行主线未破，止损6.29未破；持有",
+      "sector_rank": "银行未在今日top5/bottom5",
+      "new_stop": null,
+      "pnl_pct": 0.30,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "601919",
+      "name": "中远海控",
+      "action": "HOLD",
+      "reason": "今日新开仓第1日(<5日不动)，+0.24%；VCP PREMIUM+margin adding逻辑未变，止损15.76未破；注意其为集运龙头，VLCC油运暴涨(利好中远海能/招商轮船)对其直接传导有限",
+      "sector_rank": "航运港口未在今日top5/bottom5",
+      "new_stop": null,
+      "pnl_pct": 0.24,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "reason": "大赢家+16.5%，现价147.35高于+10%移动止损139.15(缓冲5.6%)，未达+20%(151.80)不抬止损；医疗服务未入bottom5；CXO板块10-16曾集中调整(药明盘中近跌停,来源:东方财富)后已收复；让赢家奔跑",
+      "sector_rank": "医疗服务未在今日top5/bottom5",
+      "new_stop": null,
+      "pnl_pct": 16.48,
+      "days_held": 58,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601988",
+      "name": "中国银行",
+      "reason": "RPS120 94.46处扩展区(92-95)，1风险因子(周级别超买)不满足扩展区例外(需行业top10%/0风险/业绩催化>50%)，且银行未入今日top5",
+      "rps120": 94.46
+    },
+    {
+      "code": "600901",
+      "name": "江苏金租",
+      "reason": "RPS120 87.05甜点区+0风险+VCP QUALITY(收缩比0.38)，但非银金融未入今日top5，弱市下无行业动量，按Rule1不买",
+      "rps120": 87.05
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "reason": "煤炭开采今日bottom5(-1.94%)，冷区不买(与持仓陕西煤业同逻辑)",
+      "rps120": 89.87
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "reason": "RPS120 89.39，石油石化未入top5，margin signal deleveraging(chg5 -5.95%)叠加弱市→观望",
+      "rps120": 89.39
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "reason": "10-15刚止损离场(+0.31%)；重入举证不成立：油运VLCC虽强(月+151%,来源:输入events)但个股已破MA10(-10.8%)/MA20(-13.7%)趋势走坏，无明确价位/形态差异",
+      "rps120": 87.62
+    },
+    {
+      "code": "300404",
+      "name": "博济医药",
+      "reason": "RPS120 94.72扩展区，CRO/医疗服务板块近期持续回落(昭衍新药10-19止损离场)，冷区不买",
+      "rps120": 94.72
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱市(breadth 0.59:1、0/3指数红)叠加热点轮动到农林牧渔防御(林业+5.96%)，而策略池无标落在今日top5行业时，正确动作是空仓等待，而非在让位的前期主线里硬找标的。",
+      "type": "heuristic",
+      "tags": ["sector", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "行业动量是选股的第一层过滤器；主线让位时个股动量会被行业引力拖累。"
+    },
+    {
+      "text": "前期主线(银行/煤炭/航运)今日让位但仅煤炭开采入bottom5第1日——持仓不恐慌卖出，Rule1的'冷3日'才触发；但陕西煤业stop_proximity 3.58%需盯紧。",
+      "type": "observation",
+      "tags": ["exit-rule", "sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "单日行业降温是轮动噪音，连续3日才构成趋势反转信号。"
+    },
+    {
+      "text": "重入举证再验证：招商轮船10-15止损(+0.31%)后虽油运VLCC续强，但个股已破MA10/MA20趋势走坏，不满足重入的'价位/形态差异'要求，继续不碰。",
+      "type": "observation",
+      "tags": ["entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h165",
+      "mechanism": "重入历史胜率仅11%，趋势走坏的标的即使行业景气也无安全边际。"
+    },
+    {
+      "text": "中远海控是集运龙头而非油运直接受益者，VLCC暴涨利好的是中远海能/招商轮船(油运)；持有中远海控应盯SCFI/CCFI集运运价而非油运运价。",
+      "type": "observation",
+      "tags": ["sector"],
+      "evidence_type": "contradicting",
+      "mechanism": "同一行业板块内子赛道催化不同，用错催化会高估标的弹性。"
+    }
+  ],
+  "market_summary": "沪指-0.6%、深成指-0.82%、创业板-1.62%全线收绿，科创50微涨0.06%；涨跌1981/3364，多空比0.59:1，涨停50/跌停5——弱势盘面。IV整体偏悲观(avg_iv_rank 0.52，500ETF/创业板偏高)。热点轮动到农林牧渔防御(林业+5.96%/养殖业+2.94%/渔业+1.93%)，银行/煤炭/航运前期主线今日让位。策略池无标落在今日top5行业，弱市默认空仓不开新仓。",
+  "market_sentiment": "bearish",
+  "market_call": "防守"
+}
+```

@@ -1,0 +1,137 @@
+{
+  "date": "2026-10-21",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1792566338.534946,
+      "errors": [],
+      "end": 1792566377.694182,
+      "duration_sec": 39.2
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 6863,
+      "tokens": {
+        "input_tokens": 136186,
+        "output_tokens": 17284
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 233.7,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1792566611.375346,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=99",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=32",
+        "Hypothesis: Updated h165 (validated): +1 supporting evidence → hitRate=100%, n=7",
+        "Hypothesis: Created h211 (observation): 中远海控是集运龙头而非油运直接受益者，VLCC暴涨利好的是中远海能/招商轮船(油运)；持有中远海控应盯SCFI/CCFI集运运价而非油运运价。...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-10-21",
+        "status": "ok",
+        "checked": 5,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002142",
+                "name": "宁波银行",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 34.65,
+                "stopLoss": 33.05,
+                "distance_pct": 4.62,
+                "suggestion": "🟠 WATCH — 4.6% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "601225",
+                "name": "陕西煤业",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 27.69,
+                "stopLoss": 26.7,
+                "distance_pct": 3.58,
+                "suggestion": "🟠 WATCH — 3.6% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1792566613.1478322,
+      "duration_sec": 1.8
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 002142 — 🟠 WATCH — 4.6% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 601225 — 🟠 WATCH — 3.6% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 274.7
+  }
+}
