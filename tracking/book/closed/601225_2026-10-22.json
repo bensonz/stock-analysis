@@ -1,7 +1,7 @@
 {
   "code": "601225",
   "name": "陕西煤业",
-  "status": "active",
+  "status": "closed",
   "thesis": "煤炭年内申万第一（来源:输入events，截至10/9 +24.3%），陕西煤业连续两日创历史新高，RPS120=86.03甜点区，0风险因子，MA距离全部合规；margin deleveraging(chg5 -23%)仅作观察不拒绝",
   "entryDate": "2026-10-16",
   "entrySlot": "noon",
@@ -84,15 +84,53 @@
       "change_pct": -1.49,
       "action": "HOLD",
       "note": "动力煤破千元冬储主线未破(来源:证券日报10-19)，但煤炭开采今日bottom5(-1.94%)仅第1日，未触发Rule1冷3日卖出；-1.49%未破-5%止损26.70；stop_proximity 3.58% WATCH，若煤炭连续3日留bottom30%则执行卖出"
+    },
+    {
+      "date": "2026-10-22",
+      "action": "DIVIDEND",
+      "shares": 1500,
+      "cashPer10": 0.58,
+      "grossCash": 87.0,
+      "taxRate": 0.2,
+      "tax": 17.4,
+      "netCash": 69.6,
+      "note": "除息 10派0.58: 税前87.0 税17.4 (20%) 到账69.6"
+    },
+    {
+      "date": "2026-10-22",
+      "slot": "noon",
+      "price": 27.05,
+      "change_pct": -3.61,
+      "action": "SELL",
+      "shares": 1500,
+      "note": "stop_proximity CRITICAL：现价27.05距止损26.70仅1.29%，今日最低26.75几乎触及止损；连续3日下跌(-0.82%/-1.49%/-2.10%)且弱市(涨跌比0.36:1、创业板-2.77%)；今日煤炭板块逆势上扬(安泰集团涨停)而陕煤逆势下跌，板块内相对弱势；主动止损不等精确触发(h024)"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-10-22",
+  "exitPrice": 27.05,
+  "exitReason": "stop_proximity CRITICAL：现价27.05距止损26.70仅1.29%，今日最低26.75几乎触及止损；连续3日下跌(-0.82%/-1.49%/-2.10%)且弱市(涨跌比0.36:1、创业板-2.77%)；今日煤炭板块逆势上扬(安泰集团涨停)而陕煤逆势下跌，板块内相对弱势；主动止损不等精确触发(h024)",
+  "returnPct": -3.61,
+  "holdingDays": 3,
+  "lessonLearned": "",
   "createdAt": "2026-10-16T11:41:59.171772+08:00",
-  "updatedAt": "2026-10-21T15:10:12.855469+08:00",
-  "trackerVersion": "2.1"
+  "updatedAt": "2026-10-22T11:39:35.901122+08:00",
+  "trackerVersion": "2.1",
+  "corporateActions": [
+    {
+      "exDate": "2026-10-22",
+      "cashPer10": 0.58,
+      "bonusPer10": 0.0,
+      "plan": "10派0.58元(含税,扣税后0.522元)",
+      "sharesBefore": 1500,
+      "sharesAfter": 1500,
+      "entryPriceBefore": 28.11,
+      "entryPriceAfter": 28.11,
+      "grossCash": 87.0,
+      "taxRate": 0.2,
+      "tax": 17.4,
+      "netCash": 69.6,
+      "appliedAt": "2026-10-22T11:39:35.065207+08:00"
+    }
+  ],
+  "exitSlot": "noon"
 }

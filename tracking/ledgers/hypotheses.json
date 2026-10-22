@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-10-22",
   "hypotheses": [
     {
       "id": "h001",
@@ -332,7 +332,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-03-27",
-      "lastTested": "2026-10-15",
+      "lastTested": "2026-10-22",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -979,6 +979,10 @@
           {
             "date": "2026-10-15",
             "detail": "IV极端恐慌(avg_iv_rank 0.90)+涨跌比0.08:1组合下，任何新仓的隔夜跳空风险不可控；保持91%现金是正确的，不因个别合格候选强开。"
+          },
+          {
+            "date": "2026-10-22",
+            "detail": "弱市(涨跌比0.36:1、0/3指数红)当日，即使entry_regime机械层允许0.5×开仓，判断层也应默认new_positions=[]——今日策略池无一只候选落在top5板块，现金为王是对的"
           }
         ],
         "contradicting": [
@@ -988,7 +992,7 @@
           }
         ]
       },
-      "sampleSize": 162,
+      "sampleSize": 163,
       "hitRate": 0.994,
       "confidence": 0.988,
       "tags": [],
@@ -2481,7 +2485,7 @@
       "type": "signal",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-10-16",
+      "lastTested": "2026-10-22",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -2572,6 +2576,10 @@
           {
             "date": "2026-10-16",
             "detail": "药明康德闪崩验证：止损已锁+10%后，接近止损位(3.6%)+板块转冷时应提前预警收紧，而非等精确触发——盘中一度击穿139.15又收回"
+          },
+          {
+            "date": "2026-10-22",
+            "detail": "陕西煤业stop_proximity CRITICAL(1.29%)且今日最低26.75几乎触及止损26.70时，主动止损优先于等-5%精确触发；煤炭年内第一的板块叙事不能覆盖个股破位——板块逆势上扬而个股领跌是更危险的相对弱势信号"
           }
         ],
         "contradicting": [
@@ -2585,9 +2593,9 @@
           }
         ]
       },
-      "sampleSize": 24,
-      "hitRate": 0.917,
-      "confidence": 0.885,
+      "sampleSize": 25,
+      "hitRate": 0.92,
+      "confidence": 0.889,
       "tags": [
         "exit-rule",
         "timing"
@@ -4588,7 +4596,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-10-21",
+      "lastTested": "2026-10-22",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4719,11 +4727,15 @@
           {
             "date": "2026-10-21",
             "detail": "前期主线(银行/煤炭/航运)今日让位但仅煤炭开采入bottom5第1日——持仓不恐慌卖出，Rule1的'冷3日'才触发；但陕西煤业stop_proximity 3.58%需盯紧。"
+          },
+          {
+            "date": "2026-10-22",
+            "detail": "今日热点轮动到防御(电机Ⅱ+4.95%/医疗美容+2.76%/白色家电+1.03%)而科技硬件(通信设备-5.36%/元件-4.67%)领跌；持仓板块与今日领涨零对齐，验证'轮动加速期不宜在弱市追加新仓'"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 32,
+      "sampleSize": 33,
       "hitRate": 1.0,
       "confidence": 0.971,
       "tags": [

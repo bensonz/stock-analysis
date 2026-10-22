@@ -1,0 +1,178 @@
+{
+  "date": "2026-10-22",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1792640121.4934871,
+      "errors": [],
+      "end": 1792640162.2840629,
+      "duration_sec": 40.8
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 7575,
+      "tokens": {
+        "input_tokens": 137728,
+        "output_tokens": 18961
+      },
+      "rounds": 2,
+      "tool_calls_count": 4,
+      "duration_sec": 212.8,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1792640375.0633159,
+      "actions": [
+        "CORP_ACTION 601225 ex 2026-10-22: cash net 69.6 (gross 87.0, tax 17.4), shares 1500→1500",
+        "SELL 601225",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=163",
+        "Hypothesis: Updated h024 (rule): +1 supporting evidence → hitRate=92%, n=25",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=33",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-10-22",
+        "status": "ok",
+        "checked": 5,
+        "applied": [
+          {
+            "code": "601225",
+            "name": "陕西煤业",
+            "exDate": "2026-10-22",
+            "cashPer10": 0.58,
+            "bonusPer10": 0.0,
+            "plan": "10派0.58元(含税,扣税后0.522元)",
+            "sharesBefore": 1500,
+            "sharesAfter": 1500,
+            "entryPriceBefore": 28.11,
+            "entryPriceAfter": 28.11,
+            "grossCash": 87.0,
+            "taxRate": 0.2,
+            "tax": 17.4,
+            "netCash": 69.6,
+            "appliedAt": "2026-10-22T11:39:35.065207+08:00"
+          }
+        ],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 4,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "002142",
+                "name": "宁波银行",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 34.24,
+                "stopLoss": 33.05,
+                "distance_pct": 3.48,
+                "suggestion": "🟠 WATCH — 3.5% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "601665",
+                "name": "齐鲁银行",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 6.54,
+                "stopLoss": 6.29,
+                "distance_pct": 3.82,
+                "suggestion": "🟠 WATCH — 3.8% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "601919",
+                "name": "中远海控",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 16.29,
+                "stopLoss": 15.76,
+                "distance_pct": 3.25,
+                "suggestion": "🟠 WATCH — 3.3% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "603259",
+                "name": "药明康德",
+                "rule": "stop_proximity",
+                "severity": "WARNING",
+                "currentPrice": 142.1,
+                "stopLoss": 139.15,
+                "distance_pct": 2.08,
+                "suggestion": "🟡 WARNING — only 2.1% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1792640376.0980852,
+      "duration_sec": 1.0
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 002142 — 🟠 WATCH — 3.5% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 601665 — 🟠 WATCH — 3.8% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 601919 — 🟠 WATCH — 3.3% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 603259 — 🟡 WARNING — only 2.1% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 254.60000000000002
+  }
+}

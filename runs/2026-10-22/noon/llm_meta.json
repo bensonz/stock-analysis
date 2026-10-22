@@ -1,0 +1,52 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 137728,
+  "output_tokens": 18961,
+  "rounds": 2,
+  "duration_sec": 212.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月22日 下跌 原因 市场",
+        "max_results": 6
+      },
+      "result_length": 3934
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "煤炭板块 动力煤价格 陕西煤业 2026年10月",
+        "max_results": 6
+      },
+      "result_length": 4301
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "银行板块 房贷贴息 国有大行 2026年10月",
+        "max_results": 6
+      },
+      "result_length": 4626
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "电机板块 医疗美容 白色家电 上涨 2026年10月22日",
+        "max_results": 6
+      },
+      "result_length": 4274
+    }
+  ],
+  "fallback_used": false
+}

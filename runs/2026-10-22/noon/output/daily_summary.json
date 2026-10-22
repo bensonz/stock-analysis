@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-22",
+  "actions": [
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "action": "HOLD",
+      "price": 34.24,
+      "pnl_pct": -1.6,
+      "note": "新仓第3日(<5日不动)，-1.6%未破-5%止损，距止损33.05约3.48%(WATCH)；银行主线(房贷贴息10-01落地)未破，margin deleveraging仅观察"
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "action": "SELL",
+      "price": 27.05,
+      "pnl_pct": -3.8,
+      "note": "stop_proximity CRITICAL：现价27.05距止损26.70仅1.29%，今日最低26.75几乎触及止损；连续3日下跌(-0.82%/-1.49%/-2.10%)且弱市(涨跌比0.36:1、创业板-2.77%)；今日煤炭板块逆势上扬(安泰集团涨停)而陕煤逆势下跌，板块内相对弱势；主动止损不等精确触发(h024)"
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "price": 6.54,
+      "pnl_pct": -1.2,
+      "note": "-1.2%未破-5%止损，距止损6.29约3.82%(WATCH)；margin adding(chg5 +3.45%)资金流入确认；银行主线未破"
+    },
+    {
+      "code": "601919",
+      "name": "中远海控",
+      "action": "HOLD",
+      "price": 16.29,
+      "pnl_pct": -1.8,
+      "note": "新仓第2日(<5日不动)，-1.8%未破-5%止损，距止损15.76约3.25%(WATCH)；VCP PREMIUM+margin adding逻辑未变，航运主线未破"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "HOLD",
+      "price": 142.1,
+      "pnl_pct": 12.3,
+      "note": "大赢家+12.3%，现价142.1高于+10%移动止损139.15(缓冲2.08% WARNING)；今日-3.56%回调但未破止损，未达+20%(151.8)不抬止损；医疗服务未入bottom5；让赢家奔跑"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 966084.34,
+    "dayPnl": -3263.0,
+    "dayReturnPct": -0.34,
+    "totalReturnPct": -3.39,
+    "unrealizedPnl": 2996.0,
+    "realizedPnl": -36911.66,
+    "cashPct": 84.71
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.3583,
+    "up": 1428,
+    "down": 3985,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 32,
+    "limit_downs": 10,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.36:1, 0/3 major indices green, 32 limit-ups / 10 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "弱市：三大指数全绿(上证-0.89%/深成-1.78%/创业板-2.77%)，涨跌比0.36:1(1428涨/3985跌)，涨停32/跌停10，IV偏悲观(均rank 0.66，创业板ETF 0.768)。资金从科技硬件(通信设备-5.36%/元件-4.67%)切向防御(电机Ⅱ+4.95%/医疗美容+2.76%/白色家电+1.03%)。持仓5只全部收绿，主动止损陕西煤业(距止损1.29% CRITICAL)，今日不新增仓位。"
+  }
+}
