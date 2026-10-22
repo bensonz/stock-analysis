@@ -1,0 +1,186 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "电机Ⅱ",
+        "5d_pct": 3.59,
+        "trend": "defensive"
+      },
+      {
+        "name": "医疗美容",
+        "5d_pct": 1.65,
+        "trend": "defensive"
+      },
+      {
+        "name": "白色家电",
+        "5d_pct": 1.12,
+        "trend": "defensive"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": 0.81,
+        "trend": "steady"
+      },
+      {
+        "name": "照明设备Ⅱ",
+        "5d_pct": 0.38,
+        "trend": "flat"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "通信设备",
+        "5d_pct": -7.03,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": -6.19,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "影视院线",
+        "5d_pct": -5.85,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -5.64,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电视广播Ⅱ",
+        "5d_pct": -5.25,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "2/4持仓在银行防御主线(国有大型银行Ⅱ今日+0.81%入top5)；药明康德(医疗服务/CXO)与中远海控(航运港口)未入今日top5/bottom5",
+    "regime": "恐慌盘：科技硬件(通信设备/元件)领跌，防御(银行/白电/医美)抗跌，创业板-4.37%"
+  },
+  "position_decisions": [
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "action": "HOLD",
+      "reason": "新仓第3日，-2.1%未破-5%止损(33.05)、未触发-3%/3日规则；银行防御主线未破(国有大型银行Ⅱ今日+0.81%入top5)；stop_proximity WARNING仅观察，已挂止损单备触发",
+      "sector_rank": "银行(国有大型银行Ⅱ top5, 防御主线)",
+      "new_stop": null,
+      "pnl_pct": -2.1,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "reason": "-1.5%未破-5%止损(6.29)；银行防御主线未破；margin adding(chg5 +3.45%)资金流入确认；stop_proximity WATCH观察",
+      "sector_rank": "银行(城商行, 防御主线)",
+      "new_stop": null,
+      "pnl_pct": -1.5,
+      "days_held": 5,
+      "exit_price": null
+    },
+    {
+      "code": "601919",
+      "name": "中远海控",
+      "action": "HOLD",
+      "reason": "新仓第2日，-2.05%未破-5%止损(15.76)；VCP PREMIUM+margin adding逻辑未变；航运港口未入bottom5；stop_proximity WATCH观察",
+      "sector_rank": "航运港口(未入top5/bottom5)",
+      "new_stop": null,
+      "pnl_pct": -2.05,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "SELL",
+      "reason": "浮盈+11.7%但距+10%移动止损139.15仅1.53%(CRITICAL)；今日-4.1%单日回吐；恐慌盘(涨跌比0.11:1)隔夜跳空风险高；主动锁利不等精确触发，与昭衍新药10-19教训一致(浮盈+18.2%回吐至+3.2%才被动止损)",
+      "sector_rank": "医疗服务/CXO(未入bottom5, 板块偏弱)",
+      "new_stop": null,
+      "pnl_pct": 11.7,
+      "days_held": 55,
+      "exit_price": 141.31
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601988",
+      "name": "中国银行",
+      "reason": "RPS120=94.94(92-95%延伸区, 国有大型银行Ⅱ top5满足sector top10%豁免)，但恐慌盘硬阻断(涨跌比0.11:1, 62跌停)新仓为0",
+      "rps120": 94.94
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "reason": "VCP QUALITY(收缩比0.21)但输入risks显示10-21大跌-3.96%、成交额1.8倍抛压重；煤炭未入top5；恐慌盘阻断",
+      "rps120": 90.9
+    },
+    {
+      "code": "600674",
+      "name": "川投能源",
+      "reason": "RPS120=94.13, MA距离全部合规(不追高), 控股股东增持进行中；但电力板块未入top5，恐慌盘阻断",
+      "rps120": 94.13
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "reason": "dist_ma10 -15.1%深度破位；10-15刚因时间止损+止损临界离场，重入举证责任不满足(n=9均值-3.71%)；恐慌盘阻断",
+      "rps120": 87.11
+    },
+    {
+      "code": "002443",
+      "name": "金洲管道",
+      "reason": "液冷概念但输入events显示Q3营收-15.95%、净利-28.74%；特钢板块不在top5；恐慌盘阻断",
+      "rps120": 94.76
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌盘硬阻断再次保护组合：涨跌比0.11:1、62跌停、三大指数全绿时新仓必须为0，无任何候选值得用现金冒险——即使银行/白电等防御板块仍有个股创新高",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "恐慌盘下流动性恶化，隔夜跳空风险高，防御板块的边际收益远小于开盘价不确定性"
+    },
+    {
+      "text": "药明康德从10-21浮盈+16.6%单日回吐至+11.7%(-4.1%)，距+10%移动止损仅1.53%触发CRITICAL，主动止损锁利优于赌隔夜跳空，与昭衍新药10-19教训同构",
+      "type": "heuristic",
+      "tags": [
+        "exit-rule",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "大赢家在恐慌盘中回吐速度极快，CRITICAL级止损距离(≤2%)下主动锁利可避免跳空侵蚀全部安全垫"
+    },
+    {
+      "text": "科技→防御轮动持续加速：通信设备-7.03%领跌、元件-6.19%，国有大型银行Ⅱ+0.81%入top5、白色家电+1.12%；两只银行持仓(-1.7%/-1.8%)显著抗跌于创业板-4.37%",
+      "type": "signal",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "恐慌盘资金涌入高股息/低波动防御资产，科技高波动板块被系统性去杠杆"
+    },
+    {
+      "text": "陕西煤业今日-3.61%离场时煤炭板块反而逆势上扬(安泰集团涨停, 来源:输入events)而个股逆势下跌——板块内相对弱势股应先出，即使板块当日上涨",
+      "type": "observation",
+      "tags": [
+        "exit-rule",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "板块上涨而个股下跌说明资金在板块内换仓，该个股已失去相对强度，不应因板块暖而留"
+    }
+  ],
+  "market_summary": "恐慌盘硬阻断：涨跌比0.11:1(535涨/4999跌)、62跌停/33涨停、三大指数全绿(上证-1.48%/深成-2.97%/创业板-4.37%)，IV整体偏高(均值0.66)偏悲观；通信设备-7.03%领跌科技硬件，银行/白电/医美防御抗跌。新仓全停，主动止损药明康德锁定+11.7%，其余3仓HOLD观察",
+  "market_sentiment": "panic",
+  "market_call": "防御"
+}

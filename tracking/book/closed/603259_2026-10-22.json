@@ -1,7 +1,7 @@
 {
   "code": "603259",
   "name": "药明康德",
-  "status": "active",
+  "status": "closed",
   "thesis": "CXO龙头，A/H溢价-8%(A股折价)。近3月涨幅超98%个股，强势动量。10亿回购+11%北向+15%公募。VCP SETUP：价格在MA5/MA10/MA20的1.5%范围内极致收敛，突破在即。8月4日中报发布（催化剂即将兑现）。零风险。唯一风险：医疗服务sector未进入今日top5，但大概率在top30%。",
   "entryDate": "2026-07-31",
   "entryPrice": 126.5,
@@ -755,16 +755,25 @@
       "change_pct": 12.33,
       "action": "HOLD",
       "note": "大赢家+12.3%，现价142.1高于+10%移动止损139.15(缓冲2.08% WARNING)；今日-3.56%回调但未破止损，未达+20%(151.8)不抬止损；医疗服务未入bottom5；让赢家奔跑"
+    },
+    {
+      "date": "2026-10-22",
+      "slot": "afternoon",
+      "price": 141.31,
+      "change_pct": 12.07,
+      "action": "SELL",
+      "shares": 300,
+      "note": "浮盈+11.7%但距+10%移动止损139.15仅1.53%(CRITICAL)；今日-4.1%单日回吐；恐慌盘(涨跌比0.11:1)隔夜跳空风险高；主动锁利不等精确触发，与昭衍新药10-19教训一致(浮盈+18.2%回吐至+3.2%才被动止损)"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-10-22",
+  "exitPrice": 141.31,
+  "exitReason": "浮盈+11.7%但距+10%移动止损139.15仅1.53%(CRITICAL)；今日-4.1%单日回吐；恐慌盘(涨跌比0.11:1)隔夜跳空风险高；主动锁利不等精确触发，与昭衍新药10-19教训一致(浮盈+18.2%回吐至+3.2%才被动止损)",
+  "returnPct": 12.07,
+  "holdingDays": 53,
+  "lessonLearned": "",
   "createdAt": "2026-07-31T11:45:38.795030+08:00",
-  "updatedAt": "2026-10-22T11:39:35.918871+08:00",
+  "updatedAt": "2026-10-22T15:09:50.889845+08:00",
   "trackerVersion": "2.1",
   "entrySlot": "noon",
   "corporateActions": [
@@ -783,5 +792,6 @@
       "netCash": 137.7,
       "appliedAt": "2026-10-09T11:57:03.701415+08:00"
     }
-  ]
+  ],
+  "exitSlot": "afternoon"
 }

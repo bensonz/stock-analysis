@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-22",
+  "actions": [
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "action": "HOLD",
+      "price": 34.06,
+      "pnl_pct": -2.1,
+      "note": "新仓第3日，-2.1%未破-5%止损(33.05)、未触发-3%/3日规则；银行防御主线未破(国有大型银行Ⅱ今日+0.81%入top5)；stop_proximity WARNING仅观察，已挂止损单备触发"
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "price": 6.52,
+      "pnl_pct": -1.5,
+      "note": "-1.5%未破-5%止损(6.29)；银行防御主线未破；margin adding(chg5 +3.45%)资金流入确认；stop_proximity WATCH观察"
+    },
+    {
+      "code": "601919",
+      "name": "中远海控",
+      "action": "HOLD",
+      "price": 16.25,
+      "pnl_pct": -2.05,
+      "note": "新仓第2日，-2.05%未破-5%止损(15.76)；VCP PREMIUM+margin adding逻辑未变；航运港口未入bottom5；stop_proximity WATCH观察"
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "action": "SELL",
+      "price": 141.31,
+      "pnl_pct": 11.7,
+      "note": "浮盈+11.7%但距+10%移动止损139.15仅1.53%(CRITICAL)；今日-4.1%单日回吐；恐慌盘(涨跌比0.11:1)隔夜跳空风险高；主动锁利不等精确触发，与昭衍新药10-19教训一致(浮盈+18.2%回吐至+3.2%才被动止损)"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 965459.34,
+    "dayPnl": -2076.0,
+    "dayReturnPct": -0.22,
+    "totalReturnPct": -3.45,
+    "unrealizedPnl": -2072.0,
+    "realizedPnl": -32468.66,
+    "cashPct": 89.16
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.107,
+    "up": 535,
+    "down": 4999,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 33,
+    "limit_downs": 62,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.11:1, 0/3 major indices green, 33 limit-ups / 62 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "恐慌盘硬阻断：涨跌比0.11:1(535涨/4999跌)、62跌停/33涨停、三大指数全绿(上证-1.48%/深成-2.97%/创业板-4.37%)，IV整体偏高(均值0.66)偏悲观；通信设备-7.03%领跌科技硬件，银行/白电/医美防御抗跌。新仓全停，主动止损药明康德锁定+11.7%，其余3仓HOLD观察"
+  }
+}

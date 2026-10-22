@@ -2580,6 +2580,10 @@
           {
             "date": "2026-10-22",
             "detail": "陕西煤业stop_proximity CRITICAL(1.29%)且今日最低26.75几乎触及止损26.70时，主动止损优先于等-5%精确触发；煤炭年内第一的板块叙事不能覆盖个股破位——板块逆势上扬而个股领跌是更危险的相对弱势信号"
+          },
+          {
+            "date": "2026-10-22",
+            "detail": "药明康德从10-21浮盈+16.6%单日回吐至+11.7%(-4.1%)，距+10%移动止损仅1.53%触发CRITICAL，主动止损锁利优于赌隔夜跳空，与昭衍新药10-19教训同构"
           }
         ],
         "contradicting": [
@@ -2593,9 +2597,9 @@
           }
         ]
       },
-      "sampleSize": 25,
-      "hitRate": 0.92,
-      "confidence": 0.889,
+      "sampleSize": 26,
+      "hitRate": 0.923,
+      "confidence": 0.893,
       "tags": [
         "exit-rule",
         "timing"
@@ -4731,13 +4735,17 @@
           {
             "date": "2026-10-22",
             "detail": "今日热点轮动到防御(电机Ⅱ+4.95%/医疗美容+2.76%/白色家电+1.03%)而科技硬件(通信设备-5.36%/元件-4.67%)领跌；持仓板块与今日领涨零对齐，验证'轮动加速期不宜在弱市追加新仓'"
+          },
+          {
+            "date": "2026-10-22",
+            "detail": "科技→防御轮动持续加速：通信设备-7.03%领跌、元件-6.19%，国有大型银行Ⅱ+0.81%入top5、白色家电+1.12%；两只银行持仓(-1.7%/-1.8%)显著抗跌于创业板-4.37%"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 33,
+      "sampleSize": 34,
       "hitRate": 1.0,
-      "confidence": 0.971,
+      "confidence": 0.972,
       "tags": [
         "sector",
         "exit-rule"
@@ -4752,7 +4760,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-10-15",
+      "lastTested": "2026-10-22",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -4927,11 +4935,15 @@
           {
             "date": "2026-10-15",
             "detail": "恐慌日'防御板块上涨'是risk-off确认信号而非买点：建设银行(国有大行top3+RPS120=91.09甜点区+MA距离合规+margin adding)纸面完全合格，但涨跌比0.08:1+0/3指数翻绿时机械层禁止一切新仓——防御股此时承接的是最后抛压。"
+          },
+          {
+            "date": "2026-10-22",
+            "detail": "恐慌盘硬阻断再次保护组合：涨跌比0.11:1、62跌停、三大指数全绿时新仓必须为0，无任何候选值得用现金冒险——即使银行/白电等防御板块仍有个股创新高"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 43,
+      "sampleSize": 44,
       "hitRate": 1.0,
       "confidence": 0.978,
       "tags": [
@@ -8893,6 +8905,34 @@
       "hitRate": 0.0,
       "confidence": 0.4,
       "tags": [
+        "sector"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h212",
+      "text": "陕西煤业今日-3.61%离场时煤炭板块反而逆势上扬(安泰集团涨停, 来源:输入events)而个股逆势下跌——板块内相对弱势股应先出，即使板块当日上涨",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-10-22",
+      "lastTested": "2026-10-22",
+      "mechanism": "板块上涨而个股下跌说明资金在板块内换仓，该个股已失去相对强度，不应因板块暖而留",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-10-22",
+            "detail": "陕西煤业今日-3.61%离场时煤炭板块反而逆势上扬(安泰集团涨停, 来源:输入events)而个股逆势下跌——板块内相对弱势股应先出，即使板块当日上涨"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "exit-rule",
         "sector"
       ],
       "parentRule": null,
