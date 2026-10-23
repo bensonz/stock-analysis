@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 133796,
+  "output_tokens": 18633,
+  "rounds": 2,
+  "duration_sec": 242.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月23日 领涨板块 电池 软件开发 自动化设备",
+        "max_results": 6
+      },
+      "result_length": 3899
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "银行股 下跌 国有大行 城商行 2026年10月 原因",
+        "max_results": 6
+      },
+      "result_length": 4187
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 风险偏好 科技成长 轮动 防御板块 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3856
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "宁波银行 齐鲁银行 城商行 2026年10月 新闻",
+        "max_results": 5
+      },
+      "result_length": 3570
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "动力煤 价格 重回千元 2026年10月 煤炭板块",
+        "max_results": 5
+      },
+      "result_length": 3558
+    }
+  ],
+  "fallback_used": false
+}

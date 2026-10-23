@@ -1,0 +1,129 @@
+{
+  "date": "2026-10-23",
+  "market_overview": {
+    "shanghai_composite": {
+      "value": 3690.475,
+      "change_pct": 0.89
+    },
+    "shenzhen_component": {
+      "value": 11673.826,
+      "change_pct": 2.79
+    },
+    "chinext": {
+      "value": 2684.097,
+      "change_pct": 4.16
+    },
+    "sentiment": "bullish",
+    "hot_sectors": [
+      "电池",
+      "软件开发",
+      "自动化设备",
+      "电机Ⅱ",
+      "影视院线"
+    ],
+    "cold_sectors": [
+      "国有大型银行Ⅱ",
+      "特钢Ⅱ",
+      "城商行Ⅱ",
+      "电力",
+      "股份制银行Ⅱ"
+    ],
+    "notes": "强普涨日：breadth 4.98:1、84涨停/10跌停、上证/深成/创业板全绿，entry_regime=strong；但结构是risk-on轮动——电池/软件/自动化/电机领涨，银行三条子线同入bottom5(国有大行-2.79%领跌)。IV整体偏悲观(avg_iv_rank 0.6283，500ETF深0.7463/深100ETF0.7581)。宁波银行触stop_proximity CRITICAL主动止损，齐鲁银行观察；候选池与今日动量板块零对齐，new_positions=[]持币。注：输入sector仅今日涨跌幅，非5日/20日。"
+  },
+  "strategy_scan": {
+    "total_stocks_scanned": 33,
+    "strategy_name": "小市值-无 20RP",
+    "scan_time": "2026-10-23T15:10:44.233713+08:00"
+  },
+  "recommendations": [
+    {
+      "code": "601088.SH",
+      "name": "中国神华",
+      "price": null,
+      "rps120": 91.43,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "601857.SH",
+      "name": "中国石油",
+      "price": null,
+      "rps120": 91.76,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "601919.SH",
+      "name": "中远海控",
+      "price": null,
+      "rps120": 93.54,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "601225.SH",
+      "name": "陕西煤业",
+      "price": null,
+      "rps120": 92.37,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "601939.SH",
+      "name": "建设银行",
+      "price": null,
+      "rps120": 94.83,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600674.SH",
+      "name": "川投能源",
+      "price": null,
+      "rps120": 94.5,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "002443.SZ",
+      "name": "金洲管道",
+      "price": null,
+      "rps120": 93.76,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "301080.SZ",
+      "name": "百普赛斯",
+      "price": null,
+      "rps120": 99.72,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "301529.SZ",
+      "name": "福赛科技",
+      "price": null,
+      "rps120": 98.77,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    }
+  ],
+  "summary": {
+    "total_scanned": 33,
+    "buy_recommendations": 0,
+    "watch_recommendations": 9,
+    "avoid_recommendations": 0,
+    "market_call": "积极",
+    "reasoning": "强普涨日：breadth 4.98:1、84涨停/10跌停、上证/深成/创业板全绿，entry_regime=strong；但结构是risk-on轮动——电池/软件/自动化/电机领涨，银行三条子线同入bottom5(国有大行-2.79%领跌)。IV整体偏悲观(avg_iv_rank 0.6283，500ETF深0.7463/深100ETF0.7581)。宁波银行触stop_proximity CRITICAL主动止损，齐鲁银行观察；候选池与今日动量板块零对齐，new_positions=[]持币。注：输入sector仅今日涨跌幅，非5日/20日。"
+  }
+}

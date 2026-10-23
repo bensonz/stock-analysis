@@ -1,0 +1,189 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "电池",
+        "change_pct": 5.85,
+        "trend": "accelerating"
+      },
+      {
+        "name": "软件开发",
+        "change_pct": 5.82,
+        "trend": "accelerating"
+      },
+      {
+        "name": "自动化设备",
+        "change_pct": 5.63,
+        "trend": "accelerating"
+      },
+      {
+        "name": "电机Ⅱ",
+        "change_pct": 5.62,
+        "trend": "steady"
+      },
+      {
+        "name": "影视院线",
+        "change_pct": 4.75,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "国有大型银行Ⅱ",
+        "change_pct": -2.79,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "特钢Ⅱ",
+        "change_pct": -1.39,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "城商行Ⅱ",
+        "change_pct": -1.02,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电力",
+        "change_pct": -0.67,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "股份制银行Ⅱ",
+        "change_pct": -0.4,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/2 positions in hot sectors（两只持仓均在城商行Ⅱ，今日 bottom5）",
+    "regime": "Risk-on 轮动：资金从防御(银行/电力/特钢)流向成长(电池/软件/自动化/电机)，银行三条子线同入bottom5",
+    "sector_data_note": "输入仅提供今日板块涨跌幅(top5/bottom5)，未提供5日/20日板块数据；本表按今日涨跌幅排序"
+  },
+  "position_decisions": [
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "action": "SELL",
+      "reason": "stop_proximity CRITICAL：现价33.64距止损33.05仅1.75%；浮亏-3.31%(第4日)；城商行Ⅱ今日bottom5(-1.02%)、国有大行-2.79%领跌，银行防御主线失血。主动止损不等精确触发(h024，与今日中远海控/10-22陕煤先例一致)",
+      "sector_rank": "bottom 5% (城商行Ⅱ今日-1.02%)",
+      "new_stop": null,
+      "pnl_pct": -3.31,
+      "days_held": 4,
+      "exit_price": 33.64
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "reason": "距止损6.29约3.23%(WATCH未至CRITICAL)，浮亏-1.81%未破-5%硬止损；第6日未触发首3日-3%与time_decay；margin adding(chg5+5.07%)资金未撤。但城商行Ⅱ今日bottom5转冷，若连续3日位于bottom30%将按Rule1机械卖出",
+      "sector_rank": "bottom 5% (城商行Ⅱ今日-1.02%)",
+      "new_stop": 6.29,
+      "pnl_pct": -1.81,
+      "days_held": 6,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "reason": "VCP QUALITY(contraction 0.21)+RPS120=91.43甜点区+煤价千元催化真实(输入events:动力煤1025元/吨)，但煤炭板块今日未入top5，top30%无法确认，Rule1板块门槛未过；且10-21大跌-3.96%放量(输入events抛压)",
+      "rps120": 91.43
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "reason": "VCP QUALITY+RPS120=91.76，但炼化板块未入top5(top30%无法确认)，dist_ma20=+8.1%接近追高阈值，margin deleveraging(chg5 -7.36%)",
+      "rps120": 91.76
+    },
+    {
+      "code": "601919",
+      "name": "中远海控",
+      "reason": "重入：今日午盘刚以-1.3%平仓(距止损1.68%主动止损)，一日内无价位/形态/催化差异，举证责任不满足(h165)",
+      "rps120": 93.54
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "reason": "重入：10-22刚以-3.61%平仓，今日无差异；煤炭板块未入top5",
+      "rps120": 92.37
+    },
+    {
+      "code": "601939",
+      "name": "建设银行",
+      "reason": "国有大型银行Ⅱ今日bottom5(-2.79%)，Rule1硬禁止(h019)",
+      "rps120": 94.83
+    },
+    {
+      "code": "600674",
+      "name": "川投能源",
+      "reason": "电力今日bottom5(-0.67%)，Rule1硬禁止",
+      "rps120": 94.5
+    },
+    {
+      "code": "002443",
+      "name": "金洲管道",
+      "reason": "特钢Ⅱ今日bottom5(-1.39%)，Rule1硬禁止",
+      "rps120": 93.76
+    },
+    {
+      "code": "301080",
+      "name": "百普赛斯",
+      "reason": "RPS120=99.72超95%封顶(Rule2,h151)，已回落至MA下方(dist_ma20 -21.0%)",
+      "rps120": 99.72
+    },
+    {
+      "code": "301529",
+      "name": "福赛科技",
+      "reason": "RPS120=98.77超95%封顶，且dist_ma5=+10.1%/dist_ma10=+19.6%极端追高(Rule2b硬拦)",
+      "rps120": 98.77
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "银行防御主线今日瓦解：国有大型银行Ⅱ(-2.79%)/城商行Ⅱ(-1.02%)/股份制银行Ⅱ(-0.4%)三条线同入bottom5，与成长板块(电池+5.85%/软件+5.82%/自动化+5.63%)形成risk-on轮动。持仓若落在转冷首日的板块，叠加stop_proximity CRITICAL应主动离场。",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "防御板块10月多股创历史新高后拥挤度极高，普涨日资金流出防御流向成长，股息逻辑在risk-on日失血"
+    },
+    {
+      "text": "强市场(breadth 4.98:1、3/3指数绿、84涨停)但策略池33只候选全部落在冷/中性板块(银行/煤炭/油运/特钢/电力)，无一在今日top5——0新仓是正确的，再次验证h013。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "sector-first要求板块动量领先，强breadth不等于候选板块对齐；无对齐候选时持币"
+    },
+    {
+      "text": "RPS>95%封顶继续过滤策略池非enriched候选约70%(百普赛斯99.72/一博99.12/福赛98.77/富瀚微98.11等)，这批高RPS股今日多已回落至MA下方(dist_ma10负值)，验证h151均值回归风险。",
+      "type": "observation",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "RPS极致拥挤(98-99分位)后均值回归，高RPS入场者承担最深回撤"
+    },
+    {
+      "text": "重入纪律再次守住：中远海控今日午盘-1.3%刚平仓、陕西煤业10-22刚平仓，两者今日无任何价位/形态/催化差异，拒绝重入正确。",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h165",
+      "mechanism": "重入n=9均值-3.71%胜率11%，举证责任在重入一侧"
+    }
+  ],
+  "market_summary": "强普涨日：breadth 4.98:1、84涨停/10跌停、上证/深成/创业板全绿，entry_regime=strong；但结构是risk-on轮动——电池/软件/自动化/电机领涨，银行三条子线同入bottom5(国有大行-2.79%领跌)。IV整体偏悲观(avg_iv_rank 0.6283，500ETF深0.7463/深100ETF0.7581)。宁波银行触stop_proximity CRITICAL主动止损，齐鲁银行观察；候选池与今日动量板块零对齐，new_positions=[]持币。注：输入sector仅今日涨跌幅，非5日/20日。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

@@ -1,7 +1,7 @@
 {
   "code": "002142",
   "name": "宁波银行",
-  "status": "active",
+  "status": "closed",
   "thesis": "银行持续主线(房贷贴息10-01生效+PSL降息+大行注资,来源:web凤凰网)+北向10-17增配银行(来源:国泰海通)；宁波银行0风险+RPS120=91.69甜点区+MA距离全合规(不追高)；margin deleveraging(-5.81%)作谨慎项压仓到5%；三季报10-30发布(来源:雪球)为后续催化",
   "entryDate": "2026-10-20",
   "entrySlot": "afternoon",
@@ -68,15 +68,25 @@
       "change_pct": -1.26,
       "action": "HOLD",
       "note": "持仓第4日，-1.26%未破-5%止损(33.05)、未触发首3日-3%规则；银行防御主线未破(农商行Ⅱ今日top3 +1.15%，工行/建行/中行创新高，来源:网易财经早餐)；margin adding(chg5 +1.95%)资金未撤；stop_proximity WATCH(距止损3.78%)仅观察"
+    },
+    {
+      "date": "2026-10-23",
+      "slot": "afternoon",
+      "price": 33.64,
+      "change_pct": -3.31,
+      "action": "SELL",
+      "shares": 1200,
+      "note": "stop_proximity CRITICAL：现价33.64距止损33.05仅1.75%；浮亏-3.31%(第4日)；城商行Ⅱ今日bottom5(-1.02%)、国有大行-2.79%领跌，银行防御主线失血。主动止损不等精确触发(h024，与今日中远海控/10-22陕煤先例一致)"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-10-23",
+  "exitPrice": 33.64,
+  "exitReason": "stop_proximity CRITICAL：现价33.64距止损33.05仅1.75%；浮亏-3.31%(第4日)；城商行Ⅱ今日bottom5(-1.02%)、国有大行-2.79%领跌，银行防御主线失血。主动止损不等精确触发(h024，与今日中远海控/10-22陕煤先例一致)",
+  "returnPct": -3.31,
+  "holdingDays": 3,
+  "lessonLearned": "",
   "createdAt": "2026-10-20T15:14:23.893414+08:00",
-  "updatedAt": "2026-10-23T11:39:35.409817+08:00",
-  "trackerVersion": "2.1"
+  "updatedAt": "2026-10-23T15:10:44.193516+08:00",
+  "trackerVersion": "2.1",
+  "exitSlot": "afternoon"
 }

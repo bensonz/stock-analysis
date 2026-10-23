@@ -100,6 +100,14 @@
       "change_pct": -1.21,
       "action": "HOLD",
       "note": "持仓第6日，-1.21%未破-5%止损(6.29)、未触发time_decay(15日规则第6日)；银行防御主线未破(农商行Ⅱ今日top3 +1.15%)；margin adding(chg5 +5.07%)资金流入确认；stop_proximity WATCH(距止损3.82%)仅观察"
+    },
+    {
+      "date": "2026-10-23",
+      "slot": "afternoon",
+      "price": 6.5,
+      "change_pct": -1.81,
+      "action": "HOLD",
+      "note": "距止损6.29约3.23%(WATCH未至CRITICAL)，浮亏-1.81%未破-5%硬止损；第6日未触发首3日-3%与time_decay；margin adding(chg5+5.07%)资金未撤。但城商行Ⅱ今日bottom5转冷，若连续3日位于bottom30%将按Rule1机械卖出"
     }
   ],
   "exitDate": null,
@@ -109,6 +117,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-10-16T16:57:03.796806+08:00",
-  "updatedAt": "2026-10-23T11:39:35.424732+08:00",
+  "updatedAt": "2026-10-23T15:10:44.223210+08:00",
   "trackerVersion": "2.1"
 }

@@ -332,7 +332,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-03-27",
-      "lastTested": "2026-10-22",
+      "lastTested": "2026-10-23",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -983,6 +983,10 @@
           {
             "date": "2026-10-22",
             "detail": "弱市(涨跌比0.36:1、0/3指数红)当日，即使entry_regime机械层允许0.5×开仓，判断层也应默认new_positions=[]——今日策略池无一只候选落在top5板块，现金为王是对的"
+          },
+          {
+            "date": "2026-10-23",
+            "detail": "强市场(breadth 4.98:1、3/3指数绿、84涨停)但策略池33只候选全部落在冷/中性板块(银行/煤炭/油运/特钢/电力)，无一在今日top5——0新仓是正确的，再次验证h013。"
           }
         ],
         "contradicting": [
@@ -992,7 +996,7 @@
           }
         ]
       },
-      "sampleSize": 163,
+      "sampleSize": 164,
       "hitRate": 0.994,
       "confidence": 0.988,
       "tags": [],
@@ -4751,13 +4755,17 @@
           {
             "date": "2026-10-23",
             "detail": "防御轮动加速：白酒/保险/农商行/调味品/非白酒霸占今日top5，元件/通信设备/电子化学品领跌bottom5；科技链融资余额七连降(电子、通信净卖前二，来源:财联社10-20)，资金抱团确定性资产(工行/建行/中行创新高，来源:网易财经早餐10-23)。"
+          },
+          {
+            "date": "2026-10-23",
+            "detail": "银行防御主线今日瓦解：国有大型银行Ⅱ(-2.79%)/城商行Ⅱ(-1.02%)/股份制银行Ⅱ(-0.4%)三条线同入bottom5，与成长板块(电池+5.85%/软件+5.82%/自动化+5.63%)形成risk-on轮动。持仓若落在转冷首日的板块，叠加stop_proximity CRITICAL应主动离场。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 35,
+      "sampleSize": 36,
       "hitRate": 1.0,
-      "confidence": 0.973,
+      "confidence": 0.974,
       "tags": [
         "sector",
         "exit-rule"
@@ -7050,7 +7058,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-08-11",
-      "lastTested": "2026-10-20",
+      "lastTested": "2026-10-23",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -7113,13 +7121,17 @@
           {
             "date": "2026-10-20",
             "detail": "今日消费电子/AI-PCB真热点但池内个股RPS120全部>95%(景旺97.76/崇达97.43/骏亚95.28)，封顶规则全部拦截，再次验证h151不可移除——热点≠可买，动量过热就是均值回归风险"
+          },
+          {
+            "date": "2026-10-23",
+            "detail": "RPS>95%封顶继续过滤策略池非enriched候选约70%(百普赛斯99.72/一博99.12/福赛98.77/富瀚微98.11等)，这批高RPS股今日多已回落至MA下方(dist_ma10负值)，验证h151均值回归风险。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 15,
+      "sampleSize": 16,
       "hitRate": 1.0,
-      "confidence": 0.941,
+      "confidence": 0.944,
       "tags": [
         "entry-filter"
       ],
@@ -7558,7 +7570,7 @@
       "type": "heuristic",
       "status": "validated",
       "created": "2026-08-18",
-      "lastTested": "2026-10-21",
+      "lastTested": "2026-10-23",
       "mechanism": "重入标的往往是已被市场证明弱势的名字，首次离场即是对thesis的否定信号，除非出现新的突破结构，否则大概率延续弱势",
       "evidence": {
         "supporting": [
@@ -7589,13 +7601,17 @@
           {
             "date": "2026-10-21",
             "detail": "重入举证再验证：招商轮船10-15止损(+0.31%)后虽油运VLCC续强，但个股已破MA10/MA20趋势走坏，不满足重入的'价位/形态差异'要求，继续不碰。"
+          },
+          {
+            "date": "2026-10-23",
+            "detail": "重入纪律再次守住：中远海控今日午盘-1.3%刚平仓、陕西煤业10-22刚平仓，两者今日无任何价位/形态/催化差异，拒绝重入正确。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 7,
+      "sampleSize": 8,
       "hitRate": 1.0,
-      "confidence": 0.889,
+      "confidence": 0.9,
       "tags": [
         "entry-filter"
       ],

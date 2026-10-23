@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-23",
+  "actions": [
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "action": "SELL",
+      "price": 33.64,
+      "pnl_pct": -3.31,
+      "note": "stop_proximity CRITICAL：现价33.64距止损33.05仅1.75%；浮亏-3.31%(第4日)；城商行Ⅱ今日bottom5(-1.02%)、国有大行-2.79%领跌，银行防御主线失血。主动止损不等精确触发(h024，与今日中远海控/10-22陕煤先例一致)"
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "price": 6.5,
+      "pnl_pct": -1.81,
+      "note": "距止损6.29约3.23%(WATCH未至CRITICAL)，浮亏-1.81%未破-5%硬止损；第6日未触发首3日-3%与time_decay；margin adding(chg5+5.07%)资金未撤。但城商行Ⅱ今日bottom5转冷，若连续3日位于bottom30%将按Rule1机械卖出"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 1,
+    "totalEquity": 965176.94,
+    "dayPnl": -76.0,
+    "dayReturnPct": -0.01,
+    "totalReturnPct": -3.48,
+    "unrealizedPnl": -456.0,
+    "realizedPnl": -34367.06,
+    "cashPct": 97.44
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 4.9791,
+    "up": 4526,
+    "down": 909,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 84,
+    "limit_downs": 10,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 4.98:1, 3/3 major indices green, 84 limit-ups / 10 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "强普涨日：breadth 4.98:1、84涨停/10跌停、上证/深成/创业板全绿，entry_regime=strong；但结构是risk-on轮动——电池/软件/自动化/电机领涨，银行三条子线同入bottom5(国有大行-2.79%领跌)。IV整体偏悲观(avg_iv_rank 0.6283，500ETF深0.7463/深100ETF0.7581)。宁波银行触stop_proximity CRITICAL主动止损，齐鲁银行观察；候选池与今日动量板块零对齐，new_positions=[]持币。注：输入sector仅今日涨跌幅，非5日/20日。"
+  }
+}

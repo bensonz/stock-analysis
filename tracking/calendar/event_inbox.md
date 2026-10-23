@@ -14,7 +14,7 @@
 > `date`、`tz` (US=影响其后第一个A股交易日 / CN=当日)、`kind`、`note`。不要改 `ai:`、`src:` 和 `id:` 三行（🤖 可留可删）。
 > 标题日期 = A股影响日，由 date+tz 推算，重写时刷新。规则与局限: docs/EVENT_INBOX/DECISIONS.md
 
-_更新: 2026-10-23 · 共 32 条 · 待定 0 条_
+_更新: 2026-10-23 · 共 33 条 · 待定 0 条_
 
 ## 2026-10-26 (T-3) 巴西 — 巴西将举行总统选举第二轮决选
 - [-] keep 🤖   impact: low   direction: two_sided
@@ -183,6 +183,14 @@ _更新: 2026-10-23 · 共 32 条 · 待定 0 条_
   ai: 保留 · medium/two_sided · 日本央行利率决议影响全球套息交易与亚太风险偏好（deepseek-v4-pro，2026-10-23）
   src: wallstreetcn imp=4 北京 2026-10-30 11:30 |
   id: wscn-20261030-6f9f0b46
+
+## 2026-11-02 (T-10) 美国 — 美国Anthropic计划最快于10月底公开招股说明书
+- [-] keep 🤖   impact: low   direction: two_sided
+  date: 2026-10-30   tz: US   kind: other
+  note:
+  ai: 跳过 · low/two_sided · 单一公司IPO招股说明书，非系统性事件，不构成A股市场整体驱动因素（deepseek-v4-pro，2026-10-23）
+  src: wallstreetcn imp=4 北京 2026-10-30 12:02 |
+  id: wscn-20261030-05065514
 
 ## 2026-11-02 (T-10) 中国 — 中国10月官方制造业PMI
 - [-] keep 🤖   impact: medium   direction: two_sided
