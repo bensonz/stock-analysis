@@ -1,0 +1,182 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "白酒Ⅱ",
+        "5d_pct": 1.92,
+        "trend": "steady"
+      },
+      {
+        "name": "保险Ⅱ",
+        "5d_pct": 1.29,
+        "trend": "steady"
+      },
+      {
+        "name": "农商行Ⅱ",
+        "5d_pct": 1.15,
+        "trend": "steady"
+      },
+      {
+        "name": "调味发酵品Ⅱ",
+        "5d_pct": 1.05,
+        "trend": "steady"
+      },
+      {
+        "name": "非白酒",
+        "5d_pct": 0.95,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "元件",
+        "5d_pct": -6.28,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": -5.93,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "照明设备Ⅱ",
+        "5d_pct": -5.81,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": -5.43,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": -5.31,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "2/3 positions in hot defensive sectors (银行), 1/3 in 航运港口 (中性, 今日处置)",
+    "regime": "恐慌盘: 资金从科技链(元件/通信设备/电子化学品)向防御(白酒/保险/银行)轮动, 融资盘七连降去杠杆"
+  },
+  "position_decisions": [
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "action": "HOLD",
+      "reason": "持仓第4日，-1.26%未破-5%止损(33.05)、未触发首3日-3%规则；银行防御主线未破(农商行Ⅱ今日top3 +1.15%，工行/建行/中行创新高，来源:网易财经早餐)；margin adding(chg5 +1.95%)资金未撤；stop_proximity WATCH(距止损3.78%)仅观察",
+      "sector_rank": "top 30%（银行防御主线）",
+      "new_stop": null,
+      "pnl_pct": -1.26,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "reason": "持仓第6日，-1.21%未破-5%止损(6.29)、未触发time_decay(15日规则第6日)；银行防御主线未破(农商行Ⅱ今日top3 +1.15%)；margin adding(chg5 +5.07%)资金流入确认；stop_proximity WATCH(距止损3.82%)仅观察",
+      "sector_rank": "top 30%（银行防御主线）",
+      "new_stop": null,
+      "pnl_pct": -1.21,
+      "days_held": 6,
+      "exit_price": null
+    },
+    {
+      "code": "601919",
+      "name": "中远海控",
+      "action": "SELL",
+      "reason": "持仓第3日-3.38%触发'首3日-3%离场'规则；stop_proximity CRITICAL(距止损15.76仅1.68%)；今日盘中最低15.68已跌破硬止损15.76；恐慌盘(涨跌比0.13:1/53跌停)隔夜跳空风险高，主动止损不等精确触发",
+      "sector_rank": "航运港口（今日未入top5/bottom5，中性偏弱）",
+      "new_stop": null,
+      "pnl_pct": -3.38,
+      "days_held": 3,
+      "exit_price": 16.03
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601988",
+      "name": "中国银行",
+      "reason": "rps120=94.94甜点区且银行防御主线，但入场闸门hard block(恐慌盘涨跌比0.13:1/53跌停/0指数红盘)，禁止新仓",
+      "rps120": 94.94
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "reason": "VCP PREMIUM(收缩比0.35)+rps120=92.13，但10-22刚止损离场(-3.61%)，重入举证责任未满足，且hard block禁止新仓",
+      "rps120": 92.13
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "reason": "VCP QUALITY+rps120=90.9煤炭防御，但hard block禁止新仓",
+      "rps120": 90.9
+    },
+    {
+      "code": "002003",
+      "name": "伟星股份",
+      "reason": "rps120=94.85，iv_proxy rank=1.0(tight)波动风险高，且hard block禁止新仓",
+      "rps120": 94.85
+    },
+    {
+      "code": "301080",
+      "name": "百普赛斯",
+      "reason": "rps120=99.74超95%封顶规则，相对强度过热，均值回归风险高",
+      "rps120": 99.74
+    },
+    {
+      "code": "300684",
+      "name": "中石科技",
+      "reason": "rps120=97.7超95%封顶规则，且dist_ma5_pct=-12.4%已深跌破位",
+      "rps120": 97.7
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌盘硬阻断正确拦截所有新仓：涨跌比0.13:1、53家跌停、0/3主要指数红盘，entry_regime hard_block=true。即使中国银行(rps120=94.94甜点区)与陕西煤业(VCP PREMIUM)等合格候选也应空仓——资金保护优先于机会成本。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "恐慌盘(跌停≥30家或涨跌比<0.35)是唯一机械硬阻断，避免FOMO式抄底，历史样本显示hard block正确率100%(n=44)。"
+    },
+    {
+      "text": "中远海控首3日-3.38%触发'首3日-3%离场'规则，且盘中最低15.68已跌破硬止损15.76(现价16.03仅距止损1.68% CRITICAL)——入场时机错误时，主动止损优于等待精确触发。",
+      "type": "signal",
+      "tags": [
+        "exit-rule",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "恐慌盘放大隔夜跳空风险(历史教训:扬杰科技跳空-8.37%)，stop_proximity CRITICAL与首3日-3%双触发时离场胜率更高。"
+    },
+    {
+      "text": "防御轮动加速：白酒/保险/农商行/调味品/非白酒霸占今日top5，元件/通信设备/电子化学品领跌bottom5；科技链融资余额七连降(电子、通信净卖前二，来源:财联社10-20)，资金抱团确定性资产(工行/建行/中行创新高，来源:网易财经早餐10-23)。",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "科技→防御轮动通常持续3-5个交易日；融资盘去杠杆(累计净卖912亿)与宽基ETF净申购(1300亿)并存的资金结构说明主力在防御中等待企稳。"
+    },
+    {
+      "text": "持仓2只银行(-1.2%上下)显著跑赢大盘(-1.2%~-3%)，验证'防御主线+0风险因子+RPS甜点区'在恐慌盘中的抗跌性；但两行距止损仅约3.8%，若明日继续下探将触发proactive止损，需逐日监控stop_proximity。",
+      "type": "observation",
+      "tags": [
+        "position-sizing",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "防御板块在恐慌中相对抗跌但非免疫，stop_proximity WATCH需逐日监控，避免被动止损扩大回撤。"
+    }
+  ],
+  "market_summary": "恐慌盘：涨跌比0.13:1(涨643/跌4872)，53家跌停 vs 19家涨停，上证-1.2%/深成-1.6%/创业板-2.14%/科创50-3.07%，0/3主要指数红盘。IV整体极度恐慌(avg_iv_rank 0.83)。防御抱团：白酒(+1.92%)/保险(+1.29%)/农商行(+1.15%)/调味品(+1.05%)/非白酒(+0.95%)领涨，科技链(元件-6.28%/通信设备-5.93%/电子化学品-5.31%)领跌，融资盘七连降去杠杆。入场闸门硬阻断，新仓位[]；持仓2只银行防御持有，中远海控首3日-3.38%+盘中破止损主动离场。",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}

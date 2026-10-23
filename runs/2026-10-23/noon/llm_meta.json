@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 136487,
+  "output_tokens": 18481,
+  "rounds": 2,
+  "duration_sec": 199.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月23日 大跌 原因 涨跌比",
+        "max_results": 5
+      },
+      "result_length": 3298
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "中远海控 集运 运价 2026年10月 股价",
+        "max_results": 5
+      },
+      "result_length": 3443
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "银行股 房贷贴息 PSL降息 2026年10月 板块",
+        "max_results": 5
+      },
+      "result_length": 3803
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "白酒 保险 农商行 防御板块 逆势上涨 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3286
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "元件 通信设备 电子化学品 板块下跌 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3852
+    }
+  ],
+  "fallback_used": false
+}

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-21",
+  "updated": "2026-10-23",
   "note": "手动维护的前瞻事件日历（scripts/event_calendar.py 读取；到期/失效条目请及时清理）。tz=US 的事件影响其后第一个A股交易日。direction: risk(默认)|supportive|two_sided。 【数字纪律】notes 中禁止出现未经复测的数字或\"历史规律\"——任何统计口径的断言必须先用真实数据复测并标注 n 与口径（教训: 2026-08-04 政治局+2%小盘占优系模型folklore, 实测≈0, 见 git log）。 每条必须带 source（URL或可重算的脚本/口径说明）。",
   "events": [
     {
@@ -349,6 +349,62 @@
       "inbox_id": "wscn-20261019-CN171405",
       "decided_by": "ai",
       "reason": "社零反映消费复苏成色，影响消费板块及内需政策预期"
+    },
+    {
+      "date": "2026-10-26",
+      "tz": "CN",
+      "name": "中国第二十届中央委员会第五次全体会议召开",
+      "kind": "other",
+      "certainty": "scheduled",
+      "impact": "high",
+      "direction": "two_sided",
+      "notes": "北京时间 2026-10-26 12:02（华尔街见闻财经日历）",
+      "source": "华尔街见闻财经日历 imp=4",
+      "inbox_id": "wscn-20261026-c915d7ca",
+      "decided_by": "ai",
+      "reason": "二十届五中全会为顶层政策会议，可能定调重大经济与改革方向"
+    },
+    {
+      "date": "2026-10-29",
+      "tz": "CN",
+      "name": "欧元区欧洲央行主要再融资利率",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "direction": "two_sided",
+      "notes": "北京时间 2026-10-29 21:15（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/EA192061/overview",
+      "inbox_id": "wscn-20261029-EA192061",
+      "decided_by": "ai",
+      "reason": "欧央行利率决议影响全球流动性与风险偏好，对A股有传导效应"
+    },
+    {
+      "date": "2026-10-29",
+      "tz": "US",
+      "name": "美国9月核心PCE物价指数环比",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "direction": "two_sided",
+      "notes": "北京时间 2026-10-29 20:30（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/US111047/overview",
+      "inbox_id": "wscn-20261029-US111047",
+      "decided_by": "ai",
+      "reason": "核心PCE为美联储关注的核心通胀指标，影响全球利率预期"
+    },
+    {
+      "date": "2026-10-30",
+      "tz": "CN",
+      "name": "日本央行公布利率决议",
+      "kind": "other",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "direction": "two_sided",
+      "notes": "北京时间 2026-10-30 11:30（华尔街见闻财经日历）",
+      "source": "华尔街见闻财经日历 imp=4",
+      "inbox_id": "wscn-20261030-6f9f0b46",
+      "decided_by": "ai",
+      "reason": "日本央行利率决议影响全球套息交易与亚太风险偏好"
     }
   ]
 }

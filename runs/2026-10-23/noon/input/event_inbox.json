@@ -1,0 +1,176 @@
+{
+  "as_of": "2026-10-23",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 31,
+    "new": 16,
+    "pending": 16,
+    "expired": 0,
+    "ai_retired": 0,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 11,
+    "decided": 2,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 2,
+    "fetch_errors": 0,
+    "empty_days": 12,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 16,
+    "kept": 4,
+    "skipped": 12,
+    "high": 1,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261025-a1f9c500",
+        "name": "巴西将举行总统选举第二轮决选投票开始",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "巴西大选对A股无系统性影响，非主要经济体政治事件"
+      },
+      {
+        "id": "wscn-20261026-627c8855",
+        "name": "巴西将举行总统选举第二轮决选投票结果或出炉",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "巴西大选结果对A股无系统性影响，非主要经济体政治事件"
+      },
+      {
+        "id": "wscn-20261026-c915d7ca",
+        "name": "中国第二十届中央委员会第五次全体会议召开",
+        "decision": "keep",
+        "impact": "high",
+        "direction": "two_sided",
+        "reason": "二十届五中全会为顶层政策会议，可能定调重大经济与改革方向"
+      },
+      {
+        "id": "wscn-20261028-1e9f939f",
+        "name": "韩国SK海力士三季报电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报电话会，非系统性事件"
+      },
+      {
+        "id": "wscn-20261029-4acfa391",
+        "name": "美国谷歌三季报电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报电话会，非系统性事件"
+      },
+      {
+        "id": "wscn-20261029-7da9f94e",
+        "name": "美国微软三季报电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报电话会，非系统性事件"
+      },
+      {
+        "id": "wscn-20261029-EA192061",
+        "name": "欧元区欧洲央行主要再融资利率",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "欧央行利率决议影响全球流动性与风险偏好，对A股有传导效应"
+      },
+      {
+        "id": "wscn-20261029-c5c83746",
+        "name": "韩国三星电子三季报电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报电话会，非系统性事件"
+      },
+      {
+        "id": "wscn-20261029-d84ebcc1",
+        "name": "美国美联储主席沃什召开货币政策新闻发布会",
+        "decision": "skip",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "与FOMC决议同日，已在日历中覆盖，不重复记录"
+      },
+      {
+        "id": "wscn-20261029-US111047",
+        "name": "美国9月核心PCE物价指数环比",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "核心PCE为美联储关注的核心通胀指标，影响全球利率预期"
+      },
+      {
+        "id": "wscn-20261030-13af1534",
+        "name": "美国英特尔三季报电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报电话会，非系统性事件"
+      },
+      {
+        "id": "wscn-20261030-20cf0df5",
+        "name": "日本央行行长植田和男召开货币政策新闻发布会",
+        "decision": "skip",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "与日本央行决议同日，植田讲话为决议后例行发布会，不单独记录"
+      },
+      {
+        "id": "wscn-20261030-57b27496",
+        "name": "美国亚马逊三季报电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报电话会，非系统性事件"
+      },
+      {
+        "id": "wscn-20261030-6d082d46",
+        "name": "日本铠侠财报电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报电话会，非系统性事件"
+      },
+      {
+        "id": "wscn-20261030-6f9f0b46",
+        "name": "日本央行公布利率决议",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "日本央行利率决议影响全球套息交易与亚太风险偏好"
+      },
+      {
+        "id": "wscn-20261031-CN151359",
+        "name": "中国10月官方制造业PMI",
+        "decision": "skip",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "与日历中11月2日官方制造业PMI为同一事件，日期差异为发布时点不同"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 2162,
+    "tokens_out": 870
+  },
+  "pending_items": []
+}

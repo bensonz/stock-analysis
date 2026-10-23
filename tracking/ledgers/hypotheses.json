@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-10-23",
   "hypotheses": [
     {
       "id": "h001",
@@ -2485,7 +2485,7 @@
       "type": "signal",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-10-22",
+      "lastTested": "2026-10-23",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -2584,6 +2584,14 @@
           {
             "date": "2026-10-22",
             "detail": "药明康德从10-21浮盈+16.6%单日回吐至+11.7%(-4.1%)，距+10%移动止损仅1.53%触发CRITICAL，主动止损锁利优于赌隔夜跳空，与昭衍新药10-19教训同构"
+          },
+          {
+            "date": "2026-10-23",
+            "detail": "中远海控首3日-3.38%触发'首3日-3%离场'规则，且盘中最低15.68已跌破硬止损15.76(现价16.03仅距止损1.68% CRITICAL)——入场时机错误时，主动止损优于等待精确触发。"
+          },
+          {
+            "date": "2026-10-23",
+            "detail": "持仓2只银行(-1.2%上下)显著跑赢大盘(-1.2%~-3%)，验证'防御主线+0风险因子+RPS甜点区'在恐慌盘中的抗跌性；但两行距止损仅约3.8%，若明日继续下探将触发proactive止损，需逐日监控stop_proximity。"
           }
         ],
         "contradicting": [
@@ -2597,9 +2605,9 @@
           }
         ]
       },
-      "sampleSize": 26,
-      "hitRate": 0.923,
-      "confidence": 0.893,
+      "sampleSize": 28,
+      "hitRate": 0.929,
+      "confidence": 0.9,
       "tags": [
         "exit-rule",
         "timing"
@@ -4600,7 +4608,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-10-22",
+      "lastTested": "2026-10-23",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4739,13 +4747,17 @@
           {
             "date": "2026-10-22",
             "detail": "科技→防御轮动持续加速：通信设备-7.03%领跌、元件-6.19%，国有大型银行Ⅱ+0.81%入top5、白色家电+1.12%；两只银行持仓(-1.7%/-1.8%)显著抗跌于创业板-4.37%"
+          },
+          {
+            "date": "2026-10-23",
+            "detail": "防御轮动加速：白酒/保险/农商行/调味品/非白酒霸占今日top5，元件/通信设备/电子化学品领跌bottom5；科技链融资余额七连降(电子、通信净卖前二，来源:财联社10-20)，资金抱团确定性资产(工行/建行/中行创新高，来源:网易财经早餐10-23)。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 34,
+      "sampleSize": 35,
       "hitRate": 1.0,
-      "confidence": 0.972,
+      "confidence": 0.973,
       "tags": [
         "sector",
         "exit-rule"
@@ -4760,7 +4772,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-10-22",
+      "lastTested": "2026-10-23",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -4939,13 +4951,17 @@
           {
             "date": "2026-10-22",
             "detail": "恐慌盘硬阻断再次保护组合：涨跌比0.11:1、62跌停、三大指数全绿时新仓必须为0，无任何候选值得用现金冒险——即使银行/白电等防御板块仍有个股创新高"
+          },
+          {
+            "date": "2026-10-23",
+            "detail": "恐慌盘硬阻断正确拦截所有新仓：涨跌比0.13:1、53家跌停、0/3主要指数红盘，entry_regime hard_block=true。即使中国银行(rps120=94.94甜点区)与陕西煤业(VCP PREMIUM)等合格候选也应空仓——资金保护优先于机会成本。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 44,
+      "sampleSize": 45,
       "hitRate": 1.0,
-      "confidence": 0.978,
+      "confidence": 0.979,
       "tags": [
         "entry-filter",
         "position-sizing"

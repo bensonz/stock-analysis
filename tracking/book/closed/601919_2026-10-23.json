@@ -1,7 +1,7 @@
 {
   "code": "601919",
   "name": "中远海控",
-  "status": "active",
+  "status": "closed",
   "thesis": "VCP PREMIUM(收缩比0.38<0.4+距MA20仅0.1%)+RPS120=91.4甜点区+MA距离全合规(不追高)+margin adding(chg5+5.72%)；油运价格暴涨(BDTI月+69.5%/VLCC月+151%，来源:输入events)带动航运板块，中远海能今日涨停；近5年股息均值12%+7.55亿回购完成；软平衡市故压至5%而非满配",
   "entryDate": "2026-10-21",
   "entrySlot": "noon",
@@ -52,15 +52,53 @@
       "change_pct": -2.05,
       "action": "HOLD",
       "note": "新仓第2日，-2.05%未破-5%止损(15.76)；VCP PREMIUM+margin adding逻辑未变；航运港口未入bottom5；stop_proximity WATCH观察"
+    },
+    {
+      "date": "2026-10-23",
+      "action": "DIVIDEND",
+      "shares": 2400,
+      "cashPer10": 4.3,
+      "grossCash": 1032.0,
+      "taxRate": 0.2,
+      "tax": 206.4,
+      "netCash": 825.6,
+      "note": "除息 10派4.3: 税前1032.0 税206.4 (20%) 到账825.6"
+    },
+    {
+      "date": "2026-10-23",
+      "slot": "noon",
+      "price": 16.03,
+      "change_pct": -1.3,
+      "action": "SELL",
+      "shares": 2400,
+      "note": "持仓第3日-3.38%触发'首3日-3%离场'规则；stop_proximity CRITICAL(距止损15.76仅1.68%)；今日盘中最低15.68已跌破硬止损15.76；恐慌盘(涨跌比0.13:1/53跌停)隔夜跳空风险高，主动止损不等精确触发"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-10-23",
+  "exitPrice": 16.03,
+  "exitReason": "持仓第3日-3.38%触发'首3日-3%离场'规则；stop_proximity CRITICAL(距止损15.76仅1.68%)；今日盘中最低15.68已跌破硬止损15.76；恐慌盘(涨跌比0.13:1/53跌停)隔夜跳空风险高，主动止损不等精确触发",
+  "returnPct": -1.3,
+  "holdingDays": 1,
+  "lessonLearned": "",
   "createdAt": "2026-10-21T11:40:30.335665+08:00",
-  "updatedAt": "2026-10-22T15:09:50.879442+08:00",
-  "trackerVersion": "2.1"
+  "updatedAt": "2026-10-23T11:39:35.435189+08:00",
+  "trackerVersion": "2.1",
+  "corporateActions": [
+    {
+      "exDate": "2026-10-23",
+      "cashPer10": 4.3,
+      "bonusPer10": 0.0,
+      "plan": "10派4.30元(含税,扣税后3.87元)",
+      "sharesBefore": 2400,
+      "sharesAfter": 2400,
+      "entryPriceBefore": 16.59,
+      "entryPriceAfter": 16.59,
+      "grossCash": 1032.0,
+      "taxRate": 0.2,
+      "tax": 206.4,
+      "netCash": 825.6,
+      "appliedAt": "2026-10-23T11:39:34.972682+08:00"
+    }
+  ],
+  "exitSlot": "noon"
 }
