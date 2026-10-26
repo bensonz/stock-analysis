@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 114382,
+  "output_tokens": 16285,
+  "rounds": 2,
+  "duration_sec": 309.9,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月26日 油气板块 上涨 原因 石油",
+        "max_results": 5
+      },
+      "result_length": 3752
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 电子 半导体 板块 大跌 元件 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 3777
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "广汇能源 前三季度 业绩预增 煤价",
+        "max_results": 5
+      },
+      "result_length": 3770
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "银行板块 中国银行 下跌 2026年10月26日",
+        "max_results": 5
+      },
+      "result_length": 2932
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 收评 2026年10月26日 上证指数 深成指",
+        "max_results": 5
+      },
+      "result_length": 3398
+    }
+  ],
+  "fallback_used": false
+}

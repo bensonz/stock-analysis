@@ -1,0 +1,228 @@
+{
+  "as_of": "2026-10-26",
+  "window_days": 21,
+  "dated": [
+    {
+      "date": "2026-10-26",
+      "tz": "CN",
+      "name": "中国第二十届中央委员会第五次全体会议召开",
+      "kind": "other",
+      "certainty": "scheduled",
+      "impact": "high",
+      "notes": "北京时间 2026-10-26 12:02（华尔街见闻财经日历）",
+      "source": "华尔街见闻财经日历 imp=4",
+      "decided_by": "ai",
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-10-26",
+      "days_until_impact": 0
+    },
+    {
+      "date": "2026-10-28",
+      "tz": "CN",
+      "name": "A股ETF期权到期日（第4周三）",
+      "kind": "opex",
+      "certainty": "scheduled",
+      "impact": "low",
+      "notes": "复测(n=48): 当日中证1000均值-0.01%≈基线——无效应, 仅作日历提示（复测: scripts/research/index_event_study.py --expiry-study）",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "risk",
+      "a_share_impact_date": "2026-10-28",
+      "days_until_impact": 2
+    },
+    {
+      "date": "2026-10-28",
+      "tz": "US",
+      "name": "FOMC利率决议",
+      "kind": "cb_decision",
+      "certainty": "scheduled",
+      "impact": "high",
+      "notes": "无点阵图。影响10/29A股。",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "decided_by": null,
+      "direction": "risk",
+      "a_share_impact_date": "2026-10-29",
+      "days_until_impact": 3
+    },
+    {
+      "date": "2026-10-29",
+      "tz": "CN",
+      "name": "欧元区欧洲央行主要再融资利率",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "北京时间 2026-10-29 21:15（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/EA192061/overview",
+      "decided_by": "ai",
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-10-29",
+      "days_until_impact": 3
+    },
+    {
+      "date": "2026-10-30",
+      "tz": "CN",
+      "name": "10月中央政治局会议（惯例月末，日期待公布）",
+      "kind": "policy_meeting",
+      "certainty": "estimated",
+      "impact": "high",
+      "notes": "季度经济定调。复测(2022-2025四次12月会议): 会后10交易日小盘对沪深300价差 -1.9/-2.7/-2.5/+0.0pp — 12月会后小盘占优系谣传, 实测偏弱。",
+      "source": "惯例推算(季度会议月末); 复测数字: scripts/index_event_study.py 可重算",
+      "decided_by": null,
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-10-30",
+      "days_until_impact": 4
+    },
+    {
+      "date": "2026-10-29",
+      "tz": "US",
+      "name": "美国9月核心PCE物价指数环比",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "北京时间 2026-10-29 20:30（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/US111047/overview",
+      "decided_by": "ai",
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-10-30",
+      "days_until_impact": 4
+    },
+    {
+      "date": "2026-10-30",
+      "tz": "CN",
+      "name": "日本央行公布利率决议",
+      "kind": "other",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "北京时间 2026-10-30 11:30（华尔街见闻财经日历）",
+      "source": "华尔街见闻财经日历 imp=4",
+      "decided_by": "ai",
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-10-30",
+      "days_until_impact": 4
+    },
+    {
+      "date": "2026-10-31",
+      "tz": "CN",
+      "name": "官方制造业PMI（9:30，当日盘中）",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "增长脉搏读数——A股实际交易的国内数据",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-11-02",
+      "days_until_impact": 7
+    },
+    {
+      "date": "2026-10-31",
+      "tz": "CN",
+      "name": "三季报披露截止",
+      "kind": "disclosure_deadline",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "业绩雷集中引爆窗口；持仓个股若临近披露需单独评估",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "risk",
+      "a_share_impact_date": "2026-11-02",
+      "days_until_impact": 7
+    },
+    {
+      "date": "2026-11-02",
+      "tz": "CN",
+      "name": "财新制造业PMI（9:45，当日盘中）",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "low",
+      "notes": "官方PMI的民企/出口侧补充",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-11-02",
+      "days_until_impact": 7
+    },
+    {
+      "date": "2026-11-03",
+      "tz": "US",
+      "name": "美国 11 月 3 日中期选举",
+      "kind": "political",
+      "certainty": "scheduled",
+      "impact": "high",
+      "notes": "美国中期选举投票日（美东时间11/3），计票结果北京时间11/4起陆续公布。6天后 2026-11-10 为中美关税休战到期日（见同表条目），选举结果可能左右休战续期预期——两事件连读。",
+      "source": "华尔街见闻财经日历 imp=4",
+      "decided_by": null,
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-11-04",
+      "days_until_impact": 9
+    },
+    {
+      "date": "2026-11-06",
+      "tz": "US",
+      "name": "美国非农就业(NFP)",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "联储路径预期的主要输入；周五盘后→影响下周一A股",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-11-09",
+      "days_until_impact": 14
+    },
+    {
+      "date": "2026-11-10",
+      "tz": "CN",
+      "name": "中美关税休战到期",
+      "kind": "policy_deadline",
+      "certainty": "scheduled",
+      "impact": "high",
+      "notes": "2025-10北京会晤定一年休战：美对华关税47%暂停升级、中方稀土出口管制暂停。Section 301复审2026夏结束——续约谈判进展是提前信号，临近未续约=系统性风险。",
+      "source": "2025-10中美元首会晤联合声明(新闻多源, 2026-07-31核实)",
+      "decided_by": null,
+      "direction": "risk",
+      "a_share_impact_date": "2026-11-10",
+      "days_until_impact": 15
+    }
+  ],
+  "ongoing": [
+    {
+      "name": "霍尔木兹海峡危机（美伊冲突）",
+      "kind": "geopolitical",
+      "impact": "high",
+      "notes": "2/28美以对伊开战以来海峡断航；4月停火后7/7再度交火，南航道AIS过航归零（7/10）。油价与全球风险偏好的持续压力源——7月中旬A股动量池系统性崩塌与此同窗。观察：停火/协议进展、油轮通行恢复、再升级。",
+      "source": "新闻跟踪(多源); 南航道AIS过航数据见公开船讯平台",
+      "direction": "risk"
+    }
+  ],
+  "recent": [],
+  "risk_window": {
+    "level": "event_imminent",
+    "imminent": [
+      {
+        "name": "中国第二十届中央委员会第五次全体会议召开",
+        "a_share_impact_date": "2026-10-26"
+      },
+      {
+        "name": "FOMC利率决议",
+        "a_share_impact_date": "2026-10-29"
+      }
+    ],
+    "ongoing_high_impact": [
+      "霍尔木兹海峡危机（美伊冲突）"
+    ],
+    "advice": "高冲击既定事件落地在即：新开仓减半或推迟至事件后一个交易日"
+  },
+  "fomc_next_session_stats": {
+    "n": 13,
+    "sessions_negative": 10,
+    "mean_ew_ret_pct": -0.74,
+    "worst": {
+      "decision": "2026-03-18",
+      "session": "2026-03-19",
+      "ew_ret_pct": -2.43,
+      "up_ratio_pct": 9.0
+    },
+    "note": "样本仅13次（本地价格库范围），供参考不构成概率"
+  }
+}

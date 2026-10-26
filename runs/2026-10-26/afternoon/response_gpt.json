@@ -1,0 +1,166 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": 3.85,
+        "trend": "accelerating"
+      },
+      {
+        "name": "油服工程",
+        "5d_pct": 3.27,
+        "trend": "steady"
+      },
+      {
+        "name": "房地产服务",
+        "5d_pct": 2.96,
+        "trend": "steady"
+      },
+      {
+        "name": "医药商业",
+        "5d_pct": 2.92,
+        "trend": "steady"
+      },
+      {
+        "name": "休闲食品",
+        "5d_pct": 2.91,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "元件",
+        "5d_pct": -6.78,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": -5.37,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": -4.35,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "贵金属",
+        "5d_pct": -4.32,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": -3.76,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/1 positions in hot sectors",
+    "regime": "科技股杀跌、资金避险转向资源/防御（油气+3.85% vs 元件-6.78%），窄幅轮动非普涨"
+  },
+  "position_decisions": [
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "reason": "持仓第7日，现价6.6浮亏-0.3%，未破-5%硬止损6.29，未触发首3日-3%与15日时间止损；距止损约4.7%(WATCH非CRITICAL)。margin adding(chg5+4.71%)资金未撤。银行板块今日未入top5/bottom5(中性)，10-23一度转冷后企稳，未达'冷3日→卖出'门槛；个股+1.54%逆势走强与板块中性背离时以板块为准，不加仓，维持HOLD。",
+      "sector_rank": "银行（中性，未入今日top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": -0.3,
+      "days_held": 7,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "reason": "板块油气开采Ⅱ top1(+3.85%)但dist_ma20_pct=+12.1%>12%，触发Rule 2b追高禁令；margin deleveraging。板块再热也不追高，等回调MA10/MA20。",
+      "rps120": 93.05
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "Q3净利预增+795%~858%催化强但RPS120=92.35处扩展区(非80-92甜点)；行业(炼化及贸易/煤炭)未确认top30%且煤炭板块上周-5.80%(input events)；个股近一周-5.94%在走弱而非走强；大股东质押77%。弱市+板块不明，跳过。",
+      "rps120": 92.35
+    },
+    {
+      "code": "601998",
+      "name": "中信银行",
+      "reason": "RPS120=91.89甜点区且0风险，但银行板块今日回落(中国银行跌超4%，input events)，未入top5，Rule 1板块不合。",
+      "rps120": 91.89
+    },
+    {
+      "code": "601328",
+      "name": "交通银行",
+      "reason": "RPS120=94.71扩展区，银行板块回落未入top5；margin deleveraging(chg5-9.34%)。",
+      "rps120": 94.71
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "reason": "重入(2026-10-15刚离场@+0.31%)无价位/形态/催化差异可举证；航运VLCC周-23.01%(input events)，板块未入top5。",
+      "rps120": 86.33
+    },
+    {
+      "code": "603259",
+      "name": "药明康德",
+      "reason": "RPS120=98.12>95触发RPS封顶Rule 2(不可移除)；且10-22刚离场(+12.07%)，重入需举证。",
+      "rps120": 98.12
+    },
+    {
+      "code": "300404",
+      "name": "博济医药",
+      "reason": "RPS120=93.81扩展区但CRO非医药商业top5板块；净利同比-47.4%(input)，4风险因子，价格跌破全部短均线(dist_ma20-15.7%)在走弱。",
+      "rps120": 93.81
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱市(涨跌比0.71:1、仅1/3指数翻红)叠加窄幅防御轮动时，默认空仓是对的：唯一确认top1板块的候选中国石油也被Rule 2b的dist_ma20+12.1%追高禁令拦截，证明'板块热≠可以追'。",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "弱市中上涨集中度低，追高强势股的均值回归风险被放大，MA距离纪律与弱市默认空仓形成双重保护。"
+    },
+    {
+      "text": "科技→资源/防御轮动今天加速(元件-6.78% vs 油气开采+3.85%，约10.6pp极差)。历史上此类轮动通常持续3-5个交易日(h076)；持仓齐鲁银行所在银行板块今日中性，若未来2-3日滑入bottom30%需按Rule 1机械卖出。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "资金从高估值成长撤向红利/资源是risk-off轮动的典型形态，通常有惯性，持仓需按板块动量而非个股表现管理。"
+    },
+    {
+      "text": "RPS>95封顶规则再次生效：策略池25只中大量rps120>95(百普赛斯99.74、一博科技99.08、福赛科技98.95、先导基电98.75等)，动量已极致拥挤，今日科技股集体杀跌验证了顶部均值回归风险。此规则不可移除。",
+      "type": "rule",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "RPS>95意味着短期相对强度过热，拥挤交易在高波动日首先被清算。"
+    },
+    {
+      "text": "重入举证责任再次兑现场景：招商轮船(10-15离场)、药明康德(10-22离场)今日重现候选池，但均无价位/形态/催化差异，默认不买。重入不是禁令，但举证责任在重入一方。",
+      "type": "rule",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h165",
+      "mechanism": "刚离场的标的往往基本面/板块逻辑未变，短期重入大概率重复同样的弱势。"
+    }
+  ],
+  "market_summary": "弱市：涨跌比0.71:1(2252涨/3157跌)，59涨停/28跌停；仅上证+0.19%翻红，深成-1.19%、创业板-1.71%、科创50-2.23%。IV整体偏高(avg rank 0.67，偏悲观)。资金自高估值科技(元件-6.78%、电子化学品-4.35%)撤向资源/防御(油气开采+3.85%、油服+3.27%)，美伊冲突概率上升支撑油价(来源:东方财富/智通财经)。持仓齐鲁银行所在银行板块中性。弱市默认不开新仓，97.4%现金观望。",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}
