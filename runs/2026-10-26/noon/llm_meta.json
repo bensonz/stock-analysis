@@ -1,0 +1,52 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 142378,
+  "output_tokens": 21307,
+  "rounds": 2,
+  "duration_sec": 278.6,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月26日 油气开采 石油 板块 上涨 原因",
+        "max_results": 6
+      },
+      "result_length": 3993
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "中国石油 股价 新高 原油价格 2026年10月",
+        "max_results": 6
+      },
+      "result_length": 3678
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月26日 市场 弱势 板块轮动 银行 科技",
+        "max_results": 6
+      },
+      "result_length": 4157
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "房地产服务 医药商业 板块 2026年10月 上涨",
+        "max_results": 6
+      },
+      "result_length": 4171
+    }
+  ],
+  "fallback_used": false
+}

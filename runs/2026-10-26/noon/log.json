@@ -1,0 +1,125 @@
+{
+  "date": "2026-10-26",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1792985721.085373,
+      "errors": [],
+      "end": 1792985759.9123468,
+      "duration_sec": 38.8
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 7581,
+      "tokens": {
+        "input_tokens": 142378,
+        "output_tokens": 21307
+      },
+      "rounds": 2,
+      "tool_calls_count": 4,
+      "duration_sec": 278.6,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1792986038.5558772,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=100",
+        "Hypothesis: Created h213 (observation): 油气开采Ⅱ(+3.09%)与炼化及贸易的分化：同属油价行情，上游开采直接受益，中下游炼化/贸易受成本传导挤压(web检索:证券市场周刊)。中国石油虽为一体化龙头...",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=101",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-10-26",
+        "status": "ok",
+        "checked": 1,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "601665",
+                "name": "齐鲁银行",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 6.56,
+                "stopLoss": 6.29,
+                "distance_pct": 4.12,
+                "suggestion": "🟠 WATCH — 4.1% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1792986039.2332642,
+      "duration_sec": 0.7
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 601665 — 🟠 WATCH — 4.1% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 318.1
+  }
+}

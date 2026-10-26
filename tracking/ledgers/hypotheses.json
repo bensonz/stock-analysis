@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-10-23",
+  "lastUpdated": "2026-10-26",
   "hypotheses": [
     {
       "id": "h001",
@@ -1258,7 +1258,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-10-21",
+      "lastTested": "2026-10-26",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1657,11 +1657,19 @@
           {
             "date": "2026-10-21",
             "detail": "弱市(breadth 0.59:1、0/3指数红)叠加热点轮动到农林牧渔防御(林业+5.96%)，而策略池无标落在今日top5行业时，正确动作是空仓等待，而非在让位的前期主线里硬找标的。"
+          },
+          {
+            "date": "2026-10-26",
+            "detail": "今日策略池甜点区候选(RPS 90-92: 银行/煤炭/港口/航运/炼化)无一落在今日top5板块(地产服务/油气开采/医药商业/休闲食品/油服工程)。热点板块与候选池完全错位本身就是弱市信号——此时持币优于在冷板块强行开仓。"
+          },
+          {
+            "date": "2026-10-26",
+            "detail": "齐鲁银行margin adding(chg5 +4.71%)与银行板块10-23转冷今日企稳背离——个股资金流入不能覆盖板块动量，HOLD不加仓；若城商行连续3日位于bottom30%将触发Rule 1机械卖出。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 99,
+      "sampleSize": 101,
       "hitRate": 1.0,
       "confidence": 0.99,
       "tags": [
@@ -8965,6 +8973,33 @@
       "confidence": 0.6,
       "tags": [
         "exit-rule",
+        "sector"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h213",
+      "text": "油气开采Ⅱ(+3.09%)与炼化及贸易的分化：同属油价行情，上游开采直接受益，中下游炼化/贸易受成本传导挤压(web检索:证券市场周刊)。中国石油虽为一体化龙头，但SW分类'炼化及贸易'不享受今日上游板块的top5加成，Rule 1按精确二级板块执行。",
+      "type": "signal",
+      "status": "observation",
+      "created": "2026-10-26",
+      "lastTested": "2026-10-26",
+      "mechanism": "板块动量须精确到申万二级，'油气主题模糊归类'会把中下游标的误判为上游直接受益标的。",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-10-26",
+            "detail": "油气开采Ⅱ(+3.09%)与炼化及贸易的分化：同属油价行情，上游开采直接受益，中下游炼化/贸易受成本传导挤压(web检索:证券市场周刊)。中国石油虽为一体化龙头，但SW分类'炼化及贸易'不享受今日上游板块的top5加成，Rule 1按精确二级板块执行。"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
         "sector"
       ],
       "parentRule": null,

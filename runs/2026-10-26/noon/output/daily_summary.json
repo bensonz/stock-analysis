@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-26",
+  "actions": [
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "price": 6.56,
+      "pnl_pct": -0.9,
+      "note": "现价6.56距硬止损6.29尚有4.1%(stop_proximity WATCH)，浮亏-0.9%未破-5%；持有7个交易日未触发首3日-3%与15日时间止损；margin adding(chg5 +4.71%)资金未撤。银行板块10-23一度转冷今日企稳(未入top5/bottom5)，未达'冷3日→卖出'门槛；个股资金流入与板块动量背离时以板块为准，不加仓。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 1,
+    "totalEquity": 965404.94,
+    "dayPnl": 228.0,
+    "dayReturnPct": 0.02,
+    "totalReturnPct": -3.46,
+    "unrealizedPnl": -228.0,
+    "realizedPnl": -34367.06,
+    "cashPct": 97.42
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.8292,
+    "up": 2446,
+    "down": 2950,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 45,
+    "limit_downs": 15,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.83:1, 0/3 major indices green, 45 limit-ups / 15 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "市场偏弱：三大指数全线收跌(上证-0.18%/深成-1.05%/创业板-1.65%)，涨跌比0.83:1(2446涨/2950跌)，45涨停/15跌停，分布集中于±2%区间(弱势整固)；IV情绪偏悲观(平均rank 0.668，500ETF/创业板rank>0.75)。板块防御/资源轮动：油气开采+3.09%、油服工程+2.59%领涨(Hormuz地缘+高油价)，地产服务+3.27%(贴息政策延续)、医药商业+2.83%、休闲食品+2.82%；元件-6.11%、通信设备-3.89%、电子化学品-3.25%领跌(科技硬件退潮)。策略池甜点区候选无一落在今日top5，弱市默认持币。"
+  }
+}
