@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-27",
+  "actions": [
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "price": 6.7,
+      "pnl_pct": 1.2,
+      "note": "现价6.70(+1.52%)浮盈+1.2%，距硬止损6.29约6.1%未触及；持有8个交易日未触发首3日-3%与15日时间止损；城商行Ⅱ今日涨幅第3(+1.44%)板块重力向上；margin adding(chg5+1.67%)资金未撤。恐慌日唯一绿仓，持有不加仓"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 1,
+    "totalEquity": 965936.94,
+    "dayPnl": 380.0,
+    "dayReturnPct": 0.04,
+    "totalReturnPct": -3.41,
+    "unrealizedPnl": 304.0,
+    "realizedPnl": -34367.06,
+    "cashPct": 97.36
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.1231,
+    "up": 606,
+    "down": 4922,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 44,
+    "limit_downs": 28,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.12:1, 0/3 major indices green, 44 limit-ups / 28 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "恐慌普跌：涨跌家数606/4922（0.12:1），上证-1.33%、深成-2.50%、创业板-3.41%、科创50-4.81%，IV极度恐慌(avg_iv_rank 0.797)。资金从科技/军工/半导体撤向银行与航运港口防御板块（银行四子板块全进top5），齐鲁银行为唯一持仓逆势+1.52%。entry_regime硬阻断，不开新仓，持有现金97.4%。"
+  }
+}

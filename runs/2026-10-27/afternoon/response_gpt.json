@@ -1,0 +1,145 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "股份制银行Ⅱ",
+        "5d_pct": 1.63,
+        "trend": "defensive-rotation"
+      },
+      {
+        "name": "农商行Ⅱ",
+        "5d_pct": 1.56,
+        "trend": "defensive-rotation"
+      },
+      {
+        "name": "城商行Ⅱ",
+        "5d_pct": 1.44,
+        "trend": "defensive-rotation"
+      },
+      {
+        "name": "航运港口",
+        "5d_pct": 1.02,
+        "trend": "steady"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": 0.81,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "农业综合Ⅱ",
+        "5d_pct": -5.76,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航空装备Ⅱ",
+        "5d_pct": -5.11,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "软件开发",
+        "5d_pct": -4.59,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": -4.56,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "军工电子Ⅱ",
+        "5d_pct": -4.41,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "1/1 positions in hot sectors（齐鲁银行/城商行Ⅱ今日第3）",
+    "regime": "恐慌普跌，资金从科技/军工撤向银行与航运港口等高股息防御板块"
+  },
+  "position_decisions": [
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "reason": "现价6.70(+1.52%)浮盈+1.2%，距硬止损6.29约6.1%未触及；持有8个交易日未触发首3日-3%与15日时间止损；城商行Ⅱ今日涨幅第3(+1.44%)板块重力向上；margin adding(chg5+1.67%)资金未撤。恐慌日唯一绿仓，持有不加仓",
+      "sector_rank": "top 5%（城商行Ⅱ今日+1.44%，全市场第3）",
+      "new_stop": null,
+      "pnl_pct": 1.2,
+      "days_held": 8,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601398",
+      "name": "工商银行",
+      "reason": "硬阻断：entry_regime panic(breadth 0.12:1, 0/3指数红)。个股RPS120 94.26甜点区、dist_ma20 4.2%本可通过，但regime不允许新仓；另有10-23大跌-3.14%且成交额为20日均值2.29倍的抛压风险",
+      "rps120": 94.26
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "reason": "硬阻断；且dist_ma20_pct 9.4%逼近12%追高上限，石油石化（炼化及贸易）今日不在top5",
+      "rps120": 93.65
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "reason": "硬阻断；煤炭开采板块今日不在top5（非强势区），虽VCP QUALITY也暂不参与",
+      "rps120": 92.5
+    },
+    {
+      "code": "301080",
+      "name": "百普赛斯",
+      "reason": "RPS120 99.74 > 95%封顶（动量过热，均值回归风险）；且硬阻断",
+      "rps120": 99.74
+    },
+    {
+      "code": "301529",
+      "name": "福赛科技",
+      "reason": "RPS120 99.11 > 95%封顶；且硬阻断",
+      "rps120": 99.11
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌日硬阻断再次保护资金：breadth 0.12:1 + 三大指数全绿 + IV极度恐慌时，机械层强制空仓，满仓时被放弃的候选今日大概率全绿。不因'某个票还行'强行下单",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "恐慌tape下个股RPS与MA数据已失真，普跌中逆势个股多为防御票，新仓隔夜跳空风险远超收益，空仓即最优"
+    },
+    {
+      "text": "防御轮动是恐慌日唯一alpha：科技/军工/半导体bottom5全线崩，银行四子板块全部top5，齐鲁银行逆势+1.52%。板块动量>个股质量再次验证",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "恐慌中去杠杆资金从高波动成长撤向类债高股息资产，站在热板块的持仓自然抗跌"
+    },
+    {
+      "text": "持仓健康+margin adding+板块第3，恐慌日也不加仓：iv_rank 0.8351高位+普跌tape下，加仓等于单票集中风险，HOLD即为最优解",
+      "type": "signal",
+      "tags": [
+        "position-sizing",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "高IV环境下波动率风险已定价，防御票的浮盈可能被次日跳空抹平，集中加仓无风险收益比"
+    }
+  ],
+  "market_summary": "恐慌普跌：涨跌家数606/4922（0.12:1），上证-1.33%、深成-2.50%、创业板-3.41%、科创50-4.81%，IV极度恐慌(avg_iv_rank 0.797)。资金从科技/军工/半导体撤向银行与航运港口防御板块（银行四子板块全进top5），齐鲁银行为唯一持仓逆势+1.52%。entry_regime硬阻断，不开新仓，持有现金97.4%。",
+  "market_sentiment": "bearish",
+  "market_call": "观望"
+}

@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-27",
+  "market_overview": {
+    "shanghai_composite": {
+      "value": 3648.301,
+      "change_pct": -1.33
+    },
+    "shenzhen_component": {
+      "value": 11245.731,
+      "change_pct": -2.5
+    },
+    "chinext": {
+      "value": 2548.149,
+      "change_pct": -3.41
+    },
+    "sentiment": "bearish",
+    "hot_sectors": [
+      "股份制银行Ⅱ",
+      "农商行Ⅱ",
+      "城商行Ⅱ",
+      "航运港口",
+      "国有大型银行Ⅱ"
+    ],
+    "cold_sectors": [
+      "农业综合Ⅱ",
+      "航空装备Ⅱ",
+      "软件开发",
+      "半导体",
+      "军工电子Ⅱ"
+    ],
+    "notes": "恐慌普跌：涨跌家数606/4922（0.12:1），上证-1.33%、深成-2.50%、创业板-3.41%、科创50-4.81%，IV极度恐慌(avg_iv_rank 0.797)。资金从科技/军工/半导体撤向银行与航运港口防御板块（银行四子板块全进top5），齐鲁银行为唯一持仓逆势+1.52%。entry_regime硬阻断，不开新仓，持有现金97.4%。"
+  },
+  "strategy_scan": {
+    "total_stocks_scanned": 28,
+    "strategy_name": "小市值-无 20RP",
+    "scan_time": "2026-10-27T15:09:06.671702+08:00"
+  },
+  "recommendations": [
+    {
+      "code": "601398.SH",
+      "name": "工商银行",
+      "price": null,
+      "rps120": 94.26,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "601857.SH",
+      "name": "中国石油",
+      "price": null,
+      "rps120": 93.65,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "601088.SH",
+      "name": "中国神华",
+      "price": null,
+      "rps120": 92.5,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "301080.SZ",
+      "name": "百普赛斯",
+      "price": null,
+      "rps120": 99.74,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "301529.SZ",
+      "name": "福赛科技",
+      "price": null,
+      "rps120": 99.11,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    }
+  ],
+  "summary": {
+    "total_scanned": 28,
+    "buy_recommendations": 0,
+    "watch_recommendations": 5,
+    "avoid_recommendations": 0,
+    "market_call": "观望",
+    "reasoning": "恐慌普跌：涨跌家数606/4922（0.12:1），上证-1.33%、深成-2.50%、创业板-3.41%、科创50-4.81%，IV极度恐慌(avg_iv_rank 0.797)。资金从科技/军工/半导体撤向银行与航运港口防御板块（银行四子板块全进top5），齐鲁银行为唯一持仓逆势+1.52%。entry_regime硬阻断，不开新仓，持有现金97.4%。"
+  }
+}

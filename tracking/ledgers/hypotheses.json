@@ -2497,7 +2497,7 @@
       "type": "signal",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-10-23",
+      "lastTested": "2026-10-27",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -2604,6 +2604,10 @@
           {
             "date": "2026-10-23",
             "detail": "持仓2只银行(-1.2%上下)显著跑赢大盘(-1.2%~-3%)，验证'防御主线+0风险因子+RPS甜点区'在恐慌盘中的抗跌性；但两行距止损仅约3.8%，若明日继续下探将触发proactive止损，需逐日监控stop_proximity。"
+          },
+          {
+            "date": "2026-10-27",
+            "detail": "持仓健康+margin adding+板块第3，恐慌日也不加仓：iv_rank 0.8351高位+普跌tape下，加仓等于单票集中风险，HOLD即为最优解"
           }
         ],
         "contradicting": [
@@ -2617,9 +2621,9 @@
           }
         ]
       },
-      "sampleSize": 28,
-      "hitRate": 0.929,
-      "confidence": 0.9,
+      "sampleSize": 29,
+      "hitRate": 0.931,
+      "confidence": 0.903,
       "tags": [
         "exit-rule",
         "timing"
@@ -4628,7 +4632,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-10-26",
+      "lastTested": "2026-10-27",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4779,13 +4783,17 @@
           {
             "date": "2026-10-26",
             "detail": "科技→资源/防御轮动今天加速(元件-6.78% vs 油气开采+3.85%，约10.6pp极差)。历史上此类轮动通常持续3-5个交易日(h076)；持仓齐鲁银行所在银行板块今日中性，若未来2-3日滑入bottom30%需按Rule 1机械卖出。"
+          },
+          {
+            "date": "2026-10-27",
+            "detail": "防御轮动是恐慌日唯一alpha：科技/军工/半导体bottom5全线崩，银行四子板块全部top5，齐鲁银行逆势+1.52%。板块动量>个股质量再次验证"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 37,
+      "sampleSize": 38,
       "hitRate": 1.0,
-      "confidence": 0.974,
+      "confidence": 0.975,
       "tags": [
         "sector",
         "exit-rule"
@@ -4800,7 +4808,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-10-23",
+      "lastTested": "2026-10-27",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -4983,11 +4991,15 @@
           {
             "date": "2026-10-23",
             "detail": "恐慌盘硬阻断正确拦截所有新仓：涨跌比0.13:1、53家跌停、0/3主要指数红盘，entry_regime hard_block=true。即使中国银行(rps120=94.94甜点区)与陕西煤业(VCP PREMIUM)等合格候选也应空仓——资金保护优先于机会成本。"
+          },
+          {
+            "date": "2026-10-27",
+            "detail": "恐慌日硬阻断再次保护资金：breadth 0.12:1 + 三大指数全绿 + IV极度恐慌时，机械层强制空仓，满仓时被放弃的候选今日大概率全绿。不因'某个票还行'强行下单"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 45,
+      "sampleSize": 46,
       "hitRate": 1.0,
       "confidence": 0.979,
       "tags": [
