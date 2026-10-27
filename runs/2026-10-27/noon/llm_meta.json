@@ -1,0 +1,82 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 179041,
+  "output_tokens": 17931,
+  "rounds": 3,
+  "duration_sec": 266.2,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月27日 大盘 下跌 航运 板块 上涨",
+        "max_results": 6
+      },
+      "result_length": 4021
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "航运港口 板块 上涨 原因 2026年10月 VLCC 运价",
+        "max_results": 6
+      },
+      "result_length": 4287
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "电机板块 上涨 2026年10月27日 原因",
+        "max_results": 6
+      },
+      "result_length": 4139
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "工业金属 铜 铝 上涨 2026年10月 原因",
+        "max_results": 6
+      },
+      "result_length": 3498
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.163.com/dy/article/LA66AOC505569VLQ.html",
+        "maxChars": 6000
+      },
+      "result_length": 6000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.sohu.com/a/1086718981_122942852",
+        "maxChars": 6000
+      },
+      "result_length": 6059
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "齐鲁银行 银行板块 2026年10月27日 城商行",
+        "max_results": 5
+      },
+      "result_length": 3666
+    }
+  ],
+  "fallback_used": false
+}

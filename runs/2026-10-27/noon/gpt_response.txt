@@ -1,0 +1,167 @@
+# 研究备忘录（Research Memo）
+
+## 1. Market Regime — 弱市（Weak Tape）
+
+今日（2026-10-27 午盘）三大指数全绿：上证 -0.13%、深成 -0.33%、创业板 -0.45%，科创50 -1.5%。涨跌家数 1676 涨 / 3715 跌，涨跌比 **0.45:1**，47 涨停 / 7 跌停，跌幅集中在 -0~2% 区间（2764 只）——典型阴跌而非恐慌抛售（跌停仅 7 家，未到 30 家硬阻断线）。`entry_regime` 判定为 **weak**，sizing_multiplier = 0.5，allow_new_positions = true（非 hard block）。
+
+但机械层允许≠必须买。按 owner 2026-09-01 纪律："on weak tapes your default lean should be new_positions: []"。叠加 IV 整体偏悲观（avg iv_rank 0.6534，500ETF 0.85 / 创业板 0.75 均 >75%），这是"恐慌性波动率 + 弱势广度"的组合，适合持币观察而非开新仓。
+
+**IV 读数**：50ETF 0.37（中性）、300ETF 0.69（偏高）、500ETF 0.85（极高）、创业板 0.75（极高）——市场对中小盘/成长方向的波动率定价很贵，追高风险大。
+
+**宏观驱动**：美股 10-25 纳指重挫近 700 点（财联社）；10-26 周一 A 股缩量 3497 亿至 1.62 万亿，人气情绪仅 2.6 度（网易）；今日为"变盘日"，资金在等方向。
+
+## 2. Sector Analysis — 热点轮动、持续性存疑
+
+**Hot sectors（top5，5日涨幅）**：
+1. 电机Ⅱ +2.73% — 机器人主题驱动（人形机器人 0-1，兆威机电等），但大洋电机已公告"机器人关节模组业务尚无收入"（21经济网/证券时报）——纯概念，且电机板块无候选在策略池内。
+2. 饲料 +1.81%
+3. 航运港口 +1.65% — **唯一有真实催化+候选在池内的热区**。VLCC 运价创 60 年新高（TD3C 约 135 万美元/天，搜狐/恒商网），红海绕行+船队老龄化结构性紧缺。但注意波动剧烈：输入数据（招商轮船 events）显示 VLCC 周跌 23.01%、BDTI 周跌 5.10%（月仍 +37.72%），10-15 招商轮船曾跌停 -10%。**热点在剧烈回撤中，不是稳定趋势。**
+4. 农商行Ⅱ +1.49% — 银行防御属性，今日银行板块震荡走高（每日经济新闻）。
+5. 工业金属 +1.47%
+
+**Cold sectors（bottom5）**：农业综合 -3.67%、非白酒 -2.74%、航空装备 -2.58%、化学制药 -2.48%、生物制品 -2.31%——医药/CRO 持续失血，与 10-22 已卖出的药明康德、昭衍新药方向一致。
+
+**Position alignment：1/1 持仓在银行（城商行）。** 今日农商行Ⅱ进 top5 但齐鲁银行属城商行，未入 top/bottom，板块中性，不构成 Rule 1 卖出条件。
+
+## 3. Position Review — 齐鲁银行（601665）：HOLD
+
+- 现价 6.67（今日 +1.06%），入场 6.62，浮盈 **+0.76%**，未破 -5% 硬止损 6.29（距止损约 6%）。
+- 持有 **8 个交易日**，未触发首 3 日 -3%、未触发 15 日时间止损（<3% 需 15 日）。
+- margin 仍为 adding（chg5 +1.67%），杠杆资金未撤。
+- 板块中性，不触发 Rule 1"冷 3 日卖出"。维持 HOLD，止损维持 6.29 不变。
+
+## 4. New Entry Candidates — 全部 SKIP（弱市默认持币）
+
+航运港口是本日唯一"热板块+有候选"的方向，逐票过门槛：
+
+**青岛港（601298）**：RPS120 92.26（extended zone，但 0 风险+sector top10% 豁免成立）、MA 全部合规（-1.8%/-3.4%/-3.8%）、0 风险因子。**但**：margin deleveraging（chg5 -6.6%）、现价 9.47 低于 MA5/MA10/MA20（回撤而非突破）、IV 0.69 偏高。弱市下"回撤中的二线港口"不构成足够强的 setup → SKIP。
+
+**锦江航运（601083）**：RPS120 90.4（甜点区）、0 风险、MA 合规。**但**：margin deleveraging（chg5 -2.26%）、现价 12.61 低于 MA5/MA10、IV 0.69。同上 → SKIP。
+
+**招商轮船（601872）**：RPS120 86.33、MA 合规、margin neutral。**但这是重入**——10-15 刚于 +0.31% 离场（23 天 time_decay + 航运当日 bottom5 -5.2% + 个股 -9.92%），风险项"10-15 跌停 -10% 抛压重"仍在。重入 n=9 均值 -3.71% 胜率 11%，举证责任未满足 → SKIP。
+
+结论：三个航运候选都通过个股门槛，但**弱市 regime + 高 IV + margin deleveraging 三因子叠加**，且本周航运运价正在周跌回撤——这不是"追强"，是"追一个正在回撤的强板块"，不符合 Rule 4 的买入时机要求。**new_positions = []，持币。**
+
+## 5. Skip List（简版见 JSON）
+
+- **中国石油（601857）**：Rule 2b 硬拦截——dist_ma20_pct 12.1% > 12%，极度过延伸，追高禁区（RPS120 93.05）。
+- **交通银行（601328）**：国有大行未入今日 top5，RPS 94.71 在 extended zone 且无 sector 豁免，margin deleveraging（chg5 -11.71%）。
+- **博济医药（300404）**：CRO 冷区（化学制药 -2.48%/生物制品 -2.31% bottom5）+ 个股破位（dist_ma5 -7.4%）。
+- **金洲管道/广汇能源/中信银行等**：sector 不在 top30% 或个股破位。
+
+## 6. Learnings
+
+见 JSON 的 new_learnings（结构化 3 条）。
+
+## 7. Uncertainty Flags
+
+1. **不确定航运热点的持续性**：VLCC 运价 60 年新高是真实供给约束，但本周周跌 23% 显示高波动，且高度依赖地缘（红海/霍尔木兹）——若局势缓和运价急跌，航运股会瞬间转冷。这是我不开仓的主因之一，但若明后日 breadth 回到 1.5:1 以上且航运继续放量，青岛港/锦江航运是优先重估对象。
+2. **不确定电机/机器人主题的成色**：板块 top1 但龙头公司自己公告"尚无收入"，纯资金驱动，无候选在池内，无法用规则评估。
+3. **对齐鲁银行的板块判断**：农商行Ⅱ（top5）与城商行是不同的三级行业，我按"中性"处理；若明日城商行指数进入 bottom30%，需按 Rule 1 复核。
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "电机Ⅱ", "5d_pct": 2.73, "trend": "accelerating"},
+      {"name": "饲料", "5d_pct": 1.81, "trend": "steady"},
+      {"name": "航运港口", "5d_pct": 1.65, "trend": "choppy"},
+      {"name": "农商行Ⅱ", "5d_pct": 1.49, "trend": "steady"},
+      {"name": "工业金属", "5d_pct": 1.47, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "农业综合Ⅱ", "5d_pct": -3.67, "trend": "deteriorating"},
+      {"name": "非白酒", "5d_pct": -2.74, "trend": "deteriorating"},
+      {"name": "航空装备Ⅱ", "5d_pct": -2.58, "trend": "deteriorating"},
+      {"name": "化学制药", "5d_pct": -2.48, "trend": "deteriorating"},
+      {"name": "生物制品", "5d_pct": -2.31, "trend": "deteriorating"}
+    ],
+    "position_alignment": "1/1持仓在银行(城商行)，农商行Ⅱ今日top5但城商行未入冷区，板块中性",
+    "regime": "弱市：breadth 0.45:1、三大指数全绿，防御与题材(电机/航运/农商行)领涨，医药/白酒/航空杀跌"
+  },
+  "position_decisions": [
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "reason": "现价6.67(今日+1.06%)，浮盈+0.76%未破-5%硬止损6.29(距止损约6%)；持有8个交易日未触发首3日-3%与15日时间止损；margin adding(chg5+1.67%)资金未撤；银行板块今日震荡走高(每日经济新闻)，农商行Ⅱ进top5而城商行未入冷区，维持持有",
+      "sector_rank": "银行(城商行)中性，农商行Ⅱ今日top5(+1.49%)",
+      "new_stop": null,
+      "pnl_pct": 0.76,
+      "days_held": 8,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "reason": "航运港口top5(+1.65%)+RPS120=92.26+MA全部合规+0风险，但weak tape(breadth 0.45:1/三指数全绿)+margin deleveraging(chg5-6.6%)+现价9.47低于MA5/MA10/MA20(回撤非突破)。弱市默认持币",
+      "rps120": 92.26
+    },
+    {
+      "code": "601083",
+      "name": "锦江航运",
+      "reason": "航运top5+RPS120=90.4甜点区+0风险，但margin deleveraging(chg5-2.26%)+现价12.61低于MA5/MA10(回撤中)+IV 0.69偏高，弱市跳过",
+      "rps120": 90.4
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "reason": "重入：10-15刚于+0.31%离场(23天time_decay+航运当日bottom5-5.2%+个股-9.92%)，风险项'10-15跌停-10%抛压重'仍在，重入举证责任未满足",
+      "rps120": 86.33
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "reason": "Rule 2b硬拦截：dist_ma20_pct=12.1%>12%，极度过延伸，追高禁区；RPS120=93.05在extended zone，等回撤至MA10/MA20",
+      "rps120": 93.05
+    },
+    {
+      "code": "601328",
+      "name": "交通银行",
+      "reason": "国有大行sector未入今日top5，RPS120=94.71在extended zone且无sector豁免，margin deleveraging(chg5-11.71%)",
+      "rps120": 94.71
+    },
+    {
+      "code": "300404",
+      "name": "博济医药",
+      "reason": "CRO/医疗服务冷区(化学制药-2.48%/生物制品-2.31%在bottom5)+个股破位(dist_ma5-7.4%/dist_ma10-11.2%)，行业冷+个股弱双杀",
+      "rps120": 93.81
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "breadth 0.45:1+三大指数全绿+IV整体偏悲观(avg 0.65、500ETF/创业板>0.75)时，即使有sector top5的候选(RPS/MA全部合规)也默认持币——青岛港/锦江航运虽过个股门槛，但weak tape下'回撤中'的候选不值得半仓试错",
+      "type": "signal",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h144",
+      "mechanism": "弱市开仓的时机风险大于个股alpha；breadth<1.0时上涨靠少数板块脉冲，次日反转概率高"
+    },
+    {
+      "text": "Sector heat不等于stock momentum：航运港口今日top5(+1.65%)，但青岛港/锦江航运现价均低于MA5/MA10/MA20(回撤中)，板块指数由涨停龙头拉动而二线标的滞后回撤，说明资金聚焦龙头、二线买点未到",
+      "type": "heuristic",
+      "tags": ["sector", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "板块热而个股在均线下方=等回调确认而非追买"
+    },
+    {
+      "text": "margin deleveraging与weak tape、高IV三者叠加是明确跳过信号：青岛港(deleveraging chg5-6.6%)+锦江航运(deleveraging)+IV 0.69偏高，三因子成cluster→跳过，margin不单独决定但作为cluster一员否决弱市开仓",
+      "type": "rule",
+      "tags": ["position-sizing", "entry-filter"],
+      "evidence_type": "supporting",
+      "mechanism": "杠杆资金持续净偿还意味着投机支撑流失，弱市中这类标的下行cascade风险更高"
+    }
+  ],
+  "market_summary": "弱市阴跌：breadth 0.45:1(1676涨/3715跌)，47涨停/7跌停，三大指数全绿(上证-0.13%/深成-0.33%/创业板-0.45%)，科创50-1.5%。IV整体偏悲观(avg iv_rank 0.65，500ETF 0.85/创业板0.75极高压)。热点：电机Ⅱ+2.73%(机器人主题但龙头公告无收入)、饲料+1.81%、航运港口+1.65%(VLCC运价60年新高但本周运价周跌23%高波动)、农商行Ⅱ+1.49%、工业金属+1.47%；冷区：农业综合-3.67%、非白酒-2.74%、化学制药-2.48%、生物制品-2.31%。持仓对齐：1/1在银行(城商行)，板块中性。弱市默认持币，齐鲁银行HOLD。",
+  "market_sentiment": "bearish",
+  "market_call": "防守"
+}
+```

@@ -1,0 +1,56 @@
+{
+  "as_of": "2026-10-27",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 30,
+    "new": 1,
+    "pending": 1,
+    "expired": 0,
+    "ai_retired": 4,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 25,
+    "decided": 2,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 2,
+    "fetch_errors": 0,
+    "empty_days": 16,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 1,
+    "kept": 0,
+    "skipped": 1,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261116-19ce9494",
+        "name": "美国Anthropic IPO窗口（11月16日当周）",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司IPO窗口，非系统性事件，对A股整体无实质影响"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1514,
+    "tokens_out": 77
+  },
+  "pending_items": []
+}

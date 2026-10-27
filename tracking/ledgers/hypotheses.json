@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-10-26",
+  "lastUpdated": "2026-10-27",
   "hypotheses": [
     {
       "id": "h001",
@@ -2704,7 +2704,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-10-26",
+      "lastTested": "2026-10-27",
       "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes.",
       "evidence": {
         "supporting": [
@@ -2967,11 +2967,15 @@
           {
             "date": "2026-10-26",
             "detail": "弱市(涨跌比0.71:1、仅1/3指数翻红)叠加窄幅防御轮动时，默认空仓是对的：唯一确认top1板块的候选中国石油也被Rule 2b的dist_ma20+12.1%追高禁令拦截，证明'板块热≠可以追'。"
+          },
+          {
+            "date": "2026-10-27",
+            "detail": "Sector heat不等于stock momentum：航运港口今日top5(+1.65%)，但青岛港/锦江航运现价均低于MA5/MA10/MA20(回撤中)，板块指数由涨停龙头拉动而二线标的滞后回撤，说明资金聚焦龙头、二线买点未到"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 65,
+      "sampleSize": 66,
       "hitRate": 1.0,
       "confidence": 0.985,
       "tags": [
@@ -6862,7 +6866,7 @@
       "type": "heuristic",
       "status": "validated",
       "created": "2026-08-06",
-      "lastTested": "2026-10-20",
+      "lastTested": "2026-10-27",
       "mechanism": "强基本面的股票在弱市中同样会跟随大盘回调——市场beta在短期压倒alpha。弱breadth环境中开仓应更严格或减半仓位。",
       "evidence": {
         "supporting": [
@@ -6881,6 +6885,10 @@
           {
             "date": "2026-10-20",
             "detail": "breadth 2.27:1但分布严重偏r0_2(2029/5567只仅+0~2%)+仅1/3指数收红=弱质量反弹；比率达标不必然等于强市，应保持中等仓位而非激进"
+          },
+          {
+            "date": "2026-10-27",
+            "detail": "breadth 0.45:1+三大指数全绿+IV整体偏悲观(avg 0.65、500ETF/创业板>0.75)时，即使有sector top5的候选(RPS/MA全部合规)也默认持币——青岛港/锦江航运虽过个股门槛，但weak tape下'回撤中'的候选不值得半仓试错"
           }
         ],
         "contradicting": [
@@ -6890,9 +6898,9 @@
           }
         ]
       },
-      "sampleSize": 5,
-      "hitRate": 0.8,
-      "confidence": 0.714,
+      "sampleSize": 6,
+      "hitRate": 0.833,
+      "confidence": 0.75,
       "tags": [
         "timing",
         "position-sizing"
@@ -7408,7 +7416,7 @@
       "type": "signal",
       "status": "hypothesis",
       "created": "2026-08-17",
-      "lastTested": "2026-09-29",
+      "lastTested": "2026-10-27",
       "mechanism": "margin deleveraging反映杠杆盘退出，与强板块+健康IV叠加时风险可控，折中处理为小幅降仓而非跳过",
       "evidence": {
         "supporting": [
@@ -7423,13 +7431,17 @@
           {
             "date": "2026-09-29",
             "detail": "甜区RPS不等于可买：西部矿业(RPS120=91.69)是唯一进入甜区的非冷门候选，但dist_ma20=-6.3%(跌破MA20)+margin deleveraging(chg5 -5.6%)+板块未确认top30%三重疑虑叠加→skip而非勉强小仓。"
+          },
+          {
+            "date": "2026-10-27",
+            "detail": "margin deleveraging与weak tape、高IV三者叠加是明确跳过信号：青岛港(deleveraging chg5-6.6%)+锦江航运(deleveraging)+IV 0.69偏高，三因子成cluster→跳过，margin不单独决定但作为cluster一员否决弱市开仓"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 3,
+      "sampleSize": 4,
       "hitRate": 1.0,
-      "confidence": 0.8,
+      "confidence": 0.833,
       "tags": [
         "position-sizing",
         "entry-filter"
