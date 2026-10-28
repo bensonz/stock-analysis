@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-28",
+  "actions": [
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "price": 6.68,
+      "pnl_pct": 0.9,
+      "note": "现价6.68浮盈+0.9%，持有第9日，未触发-5%硬止损(6.29)/首3日-3%/15日时间止损；银行防御主线今日跑输科技但未连续3日入bottom30%；齐鲁银行10-30披露三季报(证券之星日历)为近期催化；维持HOLD不加仓，若城商行连续3日入bottom30%或跌破6.29则卖出"
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "action": "OPEN",
+      "price": 13.26,
+      "note": "石油石化龙头，0风险因子，RPS120 94.29扩展区(0风险豁免)+MA距离全部合规(dist_ma5 1.5%/ma10 3.0%/ma20 8.8%)+VCP SETUP(收缩比0.29)；10-26创18年新高(网易/每经)，油价Brent月+18.61%与红利轮动共振；因FOMC临近+扩展区RPS，从强买档减半至4%"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "OPEN",
+      "price": 9.65,
+      "note": "港口龙头，0风险因子，RPS120 92.49扩展区(0风险豁免)+MA距离全部合规(2.5%/0.5%/-0.5%)+margin adding(chg5+9.05%)+今日创历史新高(10:09达9.98)；因IV 300ETF 0.68偏高+油运运价周线回落，仅小仓"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 965860.94,
+    "dayPnl": -76.0,
+    "dayReturnPct": -0.01,
+    "totalReturnPct": -3.41,
+    "unrealizedPnl": 228.0,
+    "realizedPnl": -34367.06,
+    "cashPct": 90.73
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 3.3543,
+    "up": 4156,
+    "down": 1239,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 74,
+    "limit_downs": 8,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 3.35:1, 3/3 major indices green, 74 limit-ups / 8 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [
+    {
+      "code": "601857",
+      "name": "中国石油"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港"
+    }
+  ],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "今日市场强反弹：上证+0.91%、深成+2.02%、创业板+3.40%、科创50+2.45%，三大指数全红；涨跌比3.35:1(4156涨/1239跌)，涨停74/跌停8，机械层判定strong、sizing×1.0、hard_block=false。领涨为科技制造(通信设备+6.06%/非金属材料+5.8%/自动化设备+5.33%/塑料+5.15%/元件+4.96%)，防御与消费失血(白酒-2.17%/养殖-1.63%)。IV整体仍偏高(平均rank 0.64、信号偏悲观，为10-22/23恐慌余波)，但50ETF rank 0.37正常。外部检索(Investing.com 10-26)提示美联储本周议息，若FOMC决议落在2个交易日内属高影响事件，故新仓一律按Rule 2c取减半仓位。买入候选集中在石油石化/航运港口：热门科技板块候选RPS全部>95%被封顶(h151)，可买标的落在有真实周线动能的能源/港口(中国石油10-26创18年新高，Brent原油月+18.61%)。板块数据仅提供单日涨跌幅。"
+  }
+}

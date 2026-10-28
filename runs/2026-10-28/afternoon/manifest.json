@@ -1,0 +1,81 @@
+{
+  "date": "2026-10-28",
+  "slot": "afternoon",
+  "run_started_at": "2026-10-28T15:05:04.895614+08:00",
+  "status": "success",
+  "exit_code": 0,
+  "total_duration_sec": 600.6,
+  "phases": {
+    "health_check": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "sources": {
+        "sina": {
+          "status": "ok",
+          "latency_ms": 40.3
+        },
+        "cheesefortune": {
+          "status": "ok",
+          "latency_ms": 444.3
+        },
+        "pricedb": {
+          "status": "ok",
+          "latest_date": "2026-10-27",
+          "stale": false
+        }
+      }
+    },
+    "preflight_pricedb": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "latest_date": "2026-10-28",
+      "target": "2026-10-28",
+      "snapshot": "  2026-10-28: 0 → 5570 rows (5570 inserted)",
+      "stock_list": "stock list: 5576 listed, 0 new"
+    },
+    "collect": {
+      "status": "ok",
+      "duration_sec": 48.0,
+      "errors": []
+    },
+    "llm_analysis": {
+      "status": "ok",
+      "duration_sec": 551.5
+    },
+    "apply": {
+      "status": "ok",
+      "duration_sec": 1.1
+    },
+    "validate": {
+      "status": "warnings",
+      "duration_sec": 0.0,
+      "errors": [
+        "RULE check_stop_proximity: 601298 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
+        "RULE check_stop_proximity: 601857 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+      ]
+    }
+  },
+  "gates": {
+    "phase1_to_phase2": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": []
+    },
+    "phase2_to_phase3": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": []
+    },
+    "phase3_to_phase4": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": [
+        "rule check_stop_proximity: 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
+        "rule check_stop_proximity: 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+      ]
+    }
+  }
+}

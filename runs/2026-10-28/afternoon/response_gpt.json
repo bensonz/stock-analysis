@@ -1,0 +1,189 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "通信设备",
+        "5d_pct": 6.06,
+        "trend": "accelerating"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": 5.8,
+        "trend": "accelerating"
+      },
+      {
+        "name": "自动化设备",
+        "5d_pct": 5.33,
+        "trend": "steady"
+      },
+      {
+        "name": "塑料",
+        "5d_pct": 5.15,
+        "trend": "steady"
+      },
+      {
+        "name": "元件",
+        "5d_pct": 4.96,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "白酒Ⅱ",
+        "5d_pct": -2.17,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航海装备Ⅱ",
+        "5d_pct": -1.9,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "农业综合Ⅱ",
+        "5d_pct": -1.77,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "养殖业",
+        "5d_pct": -1.63,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "医疗美容",
+        "5d_pct": -1.43,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/1 positions in today's top5 hot sectors（齐鲁银行属银行，不在今日top5）",
+    "regime": "科技/制造领涨强反弹，防御与消费失血；石油石化与航运港口有周线级动能但单日未入top5"
+  },
+  "position_decisions": [
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "reason": "现价6.68浮盈+0.9%，持有第9日，未触发-5%硬止损(6.29)/首3日-3%/15日时间止损；银行防御主线今日跑输科技但未连续3日入bottom30%；齐鲁银行10-30披露三季报(证券之星日历)为近期催化；维持HOLD不加仓，若城商行连续3日入bottom30%或跌破6.29则卖出",
+      "sector_rank": "中游（银行/城商行，未入今日top5或bottom5）",
+      "new_stop": null,
+      "pnl_pct": 0.9,
+      "days_held": 9,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "entry_price": 13.26,
+      "allocation_pct": 4,
+      "stop": 12.6,
+      "target": 14.6,
+      "thesis": "石油石化龙头，0风险因子，RPS120 94.29扩展区(0风险豁免)+MA距离全部合规(dist_ma5 1.5%/ma10 3.0%/ma20 8.8%)+VCP SETUP(收缩比0.29)；10-26创18年新高(网易/每经)，油价Brent月+18.61%与红利轮动共振；因FOMC临近+扩展区RPS，从强买档减半至4%",
+      "sector": "石油石化",
+      "sector_rank": "周线级上行（今日单日榜未入top5；Brent原油月+18.61%支撑，输入events）",
+      "catalyst": "国际油价强势(Brent周+6.84%/月+18.61%，输入events)；公司10-26创18年新高13.38(网易/每经)",
+      "catalyst_freshness": "ongoing",
+      "rps120": 94.29,
+      "conviction": "moderate"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "entry_price": 9.65,
+      "allocation_pct": 3,
+      "stop": 9.17,
+      "target": 10.6,
+      "thesis": "港口龙头，0风险因子，RPS120 92.49扩展区(0风险豁免)+MA距离全部合规(2.5%/0.5%/-0.5%)+margin adding(chg5+9.05%)+今日创历史新高(10:09达9.98)；因IV 300ETF 0.68偏高+油运运价周线回落，仅小仓",
+      "sector": "航运港口",
+      "sector_rank": "周线级上行但有分歧（今日单日榜未入top5；BDTI月+37.72%但VLCC周-23.01%，输入events 10-23口径）",
+      "catalyst": "青岛港今日创历史新高(9.98，输入events)；油运BDTI指数月+37.72%(输入events)",
+      "catalyst_freshness": "ongoing",
+      "rps120": 92.49,
+      "conviction": "small"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "301550",
+      "name": "斯菱智驱",
+      "reason": "Rule 2b追高拦截：dist_ma5 11.1%/dist_ma10 20.6%/dist_ma20 28.7%，远超MA距离上限(6/8/12%)；虽RPS120 87.77甜点区+人形机器人概念活跃，短线极度超买，等回调",
+      "rps120": 87.77
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "reason": "重入举证不通过：10-15刚以time_decay+航运港口bottom5+个股-9.92%离场@19.35；现价17.09仍低于MA20(19.08，dist_ma20 -10.4%)、rps20仅15.37，形态与离场时无实质变化",
+      "rps120": 85.07
+    },
+    {
+      "code": "601083",
+      "name": "锦江航运",
+      "reason": "09:30冲高13.51创24月新高后收盘12.42(日内回落约-8%)+margin deleveraging(chg5 -1.71%)；RPS120 90.82甜点区但择时信号差",
+      "rps120": 90.82
+    },
+    {
+      "code": "601998",
+      "name": "中信银行",
+      "reason": "银行板块今日资金流出(防御主线失血)+margin deleveraging(chg5 -11.17%)+IV 300ETF 0.68偏高；RPS扩展区豁免虽成立，但板块不在top5且融资盘撤离",
+      "rps120": 92.6
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "Q3净利+842%真实，但缺口已回补、现价6.74低于MA10/MA20(6.89/6.92)短线动能转弱；叠加现金短债比0.29+大股东质押77%两项风险，观望",
+      "rps120": 92.32
+    },
+    {
+      "code": "603228",
+      "name": "景旺电子",
+      "reason": "所属元件板块为今日top5(+4.96%)，但RPS120 95.87>95%封顶(h151不可移除)且dist_ma20 -15.8%已在MA20下方；同簇PCB候选(崇达97.27/金禄97.21/一博98.94)RPS全部>95%被拦——热门板块动量已极致拥挤，无合规买点",
+      "rps120": 95.87
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "今日领涨板块(通信设备+6.06%/元件+4.96%/自动化设备+5.33%)内策略池候选RPS120全部>95%(景旺95.87/崇达97.27/金禄97.21/一博98.94)，被Rule 2封顶规则拦截；通过RPS+MA门槛的候选反而落在石油石化/航运港口/银行。热门板块动量拥挤时，可买标的会自然外溢到次热但有真实产业动能的板块，不必强行买热门板块的高RPS股。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "RPS>95%封顶规则在板块级动量极值时集中触发，导致热门板块无合规买点，资金只能流向动量次一级但有基本面支撑的板块"
+    },
+    {
+      "text": "油运/原油周线级动能与单日板块榜可背离：今日单日top5是科技，但输入events显示Brent原油周+6.84%/月+18.61%、中国石油10-26创18年新高(网易/每经)、BDTI油运指数月+37.72%。判断板块是否trending up需结合商品价格与产业数据，不能只看当日板块涨跌榜。",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "单日板块涨跌受资金轮动主导，周线级板块趋势由商品/运价/景气决定，两者时间尺度不同"
+    },
+    {
+      "text": "锦江航运(601083)今日09:30冲高13.51创24月新高后收盘12.42(日内回落约-8%)，叠加margin deleveraging(chg5 -1.71%)，即使RPS120=90.82在甜点区也应跳过——日内冲高回落是比MA距离更细的择时过滤信号。",
+      "type": "signal",
+      "tags": [
+        "timing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "冲高回落反映上方抛压与承接不足，次日延续下跌概率高"
+    },
+    {
+      "text": "外部检索(Investing.com 10-26)显示美联储本周议息，若FOMC决议落在2个交易日内属高影响事件；输入无未来事件窗口、机械层判定strong/full size，故judgment层主动把新仓减半(中国石油4%、青岛港3%)并点名事件。输入已复测口径：12次FOMC中9次决议次日A股收绿(mean EW -0.45%)。",
+      "type": "rule",
+      "tags": [
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "议息决议存在隔夜跳空风险，决议前夜减半仓位可降低方向性暴露"
+    }
+  ],
+  "market_summary": "今日市场强反弹：上证+0.91%、深成+2.02%、创业板+3.40%、科创50+2.45%，三大指数全红；涨跌比3.35:1(4156涨/1239跌)，涨停74/跌停8，机械层判定strong、sizing×1.0、hard_block=false。领涨为科技制造(通信设备+6.06%/非金属材料+5.8%/自动化设备+5.33%/塑料+5.15%/元件+4.96%)，防御与消费失血(白酒-2.17%/养殖-1.63%)。IV整体仍偏高(平均rank 0.64、信号偏悲观，为10-22/23恐慌余波)，但50ETF rank 0.37正常。外部检索(Investing.com 10-26)提示美联储本周议息，若FOMC决议落在2个交易日内属高影响事件，故新仓一律按Rule 2c取减半仓位。买入候选集中在石油石化/航运港口：热门科技板块候选RPS全部>95%被封顶(h151)，可买标的落在有真实周线动能的能源/港口(中国石油10-26创18年新高，Brent原油月+18.61%)。板块数据仅提供单日涨跌幅。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

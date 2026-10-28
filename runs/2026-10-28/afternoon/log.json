@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-28",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1793171138.328235,
+      "errors": [],
+      "end": 1793171186.3410828,
+      "duration_sec": 48.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 9211,
+      "tokens": {
+        "input_tokens": 215896,
+        "output_tokens": 34323
+      },
+      "rounds": 3,
+      "tool_calls_count": 9,
+      "duration_sec": 551.5,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1793171737.843057,
+      "actions": [
+        "OPEN 601857 @ 13.26",
+        "OPEN 601298 @ 9.65",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h151 (rule): +1 supporting evidence → hitRate=100%, n=18",
+        "Hypothesis: Created h214 (observation): 油运/原油周线级动能与单日板块榜可背离：今日单日top5是科技，但输入events显示Brent原油周+6.84%/月+18.61%、中国石油10-26创18年...",
+        "Hypothesis: Updated h042 (hypothesis): +1 supporting evidence → hitRate=100%, n=4",
+        "Hypothesis: Created h215 (observation): 外部检索(Investing.com 10-26)显示美联储本周议息，若FOMC决议落在2个交易日内属高影响事件；输入无未来事件窗口、机械层判定strong/f...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-10-28",
+        "status": "ok",
+        "checked": 1,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "601298",
+                "name": "青岛港",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 9.65,
+                "stopLoss": 9.17,
+                "distance_pct": 4.97,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "601857",
+                "name": "中国石油",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 13.26,
+                "stopLoss": 12.6,
+                "distance_pct": 4.98,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1793171738.9726489,
+      "duration_sec": 1.1
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 601298 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 601857 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 600.6
+  }
+}
