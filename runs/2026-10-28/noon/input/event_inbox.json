@@ -1,0 +1,64 @@
+{
+  "as_of": "2026-10-28",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 31,
+    "new": 2,
+    "pending": 2,
+    "expired": 0,
+    "ai_retired": 3,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 25,
+    "decided": 2,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 2,
+    "fetch_errors": 0,
+    "empty_days": 17,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 2,
+    "kept": 0,
+    "skipped": 2,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261104-4255f0b5",
+        "name": "马耳他以色列议会选举投票结束，最终结果11月4日正式公布",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "马耳他以色列议会选举为小国政治事件，对A股无系统性影响"
+      },
+      {
+        "id": "wscn-20261104-a5725399",
+        "name": "美国报道：俄罗斯愿在11月4日后恢复俄美乌三方谈判",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "俄美乌谈判恢复为地缘政治动态，非已排定的系统性事件，且对A股传导有限"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1577,
+    "tokens_out": 147
+  },
+  "pending_items": []
+}

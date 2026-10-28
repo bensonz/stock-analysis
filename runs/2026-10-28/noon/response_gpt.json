@@ -1,0 +1,162 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "自动化设备",
+        "5d_pct": 5.82,
+        "trend": "accelerating"
+      },
+      {
+        "name": "塑料",
+        "5d_pct": 5.49,
+        "trend": "accelerating"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": 5.04,
+        "trend": "steady"
+      },
+      {
+        "name": "电机Ⅱ",
+        "5d_pct": 4.93,
+        "trend": "steady"
+      },
+      {
+        "name": "汽车零部件",
+        "5d_pct": 4.77,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "白酒Ⅱ",
+        "5d_pct": -2.3,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": -1.92,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "股份制银行Ⅱ",
+        "5d_pct": -1.14,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/1 持仓在今日热点板块（齐鲁银行属防御侧银行，今日板块走弱）",
+    "regime": "制造成长(机器人/汽车零部件/自动化)领涨，防御红利(白酒/油气/银行)资金流出"
+  },
+  "position_decisions": [
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "reason": "持仓第9日浮盈+0.30%，未触发-5%硬止损(6.29,现价距约5.6%)/首3日-3%/15日时间止损/+10%上移止损；城商行Ⅱ未连续3日入bottom30%。但今日银行板块转弱(股份制银行Ⅱbottom5 -1.14%，输入events显示银行板块逆势回落、中国银行跌超4%)，个股-0.9%跑输创业板+3.0%，防御板块资金流出。维持HOLD不加仓，若银行/城商行连续3日入bottom30%则卖出。",
+      "sector_rank": "中下（城商行Ⅱ未入top5；银行板块今日走弱，股份制银行Ⅱbottom5）",
+      "new_stop": null,
+      "pnl_pct": 0.3,
+      "days_held": 9,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601998",
+      "name": "中信银行",
+      "reason": "股份制银行Ⅱ今日bottom5(-1.14%)，冷区硬禁买(h019)；RPS120 92.26扩展区",
+      "rps120": 92.26
+    },
+    {
+      "code": "601398",
+      "name": "工商银行",
+      "reason": "RPS120 95.99>95%封顶(动量过热)；银行板块今日逆势回落(输入events：中国银行跌超4%)",
+      "rps120": 95.99
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "reason": "RPS120 93.65扩展区；炼化及贸易板块未入今日top5，油气开采Ⅱbottom5(-1.92%)；0风险虽通过扩展区例外但板块不达标",
+      "rps120": 93.65
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "reason": "RPS120 92.5扩展区；0风险符合扩展区例外，但煤炭板块未入今日top5(Rule 1板块优先)",
+      "rps120": 92.5
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "reason": "RPS120 92.43扩展区；港口板块未入今日top5",
+      "rps120": 92.43
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "RPS120 92.59扩展区；油品石化贸易板块未入top5；大股东质押占持股77%风险",
+      "rps120": 92.59
+    },
+    {
+      "code": "601083",
+      "name": "锦江航运",
+      "reason": "RPS120 90.9甜点区且MA合规，但航运港口未入今日top5；margin signal deleveraging",
+      "rps120": 90.9
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "reason": "RPS120 86.24甜点区，但航运港口未入top5；且10-15刚平仓(持有23天+0.31%)，重入需举证价位/形态/催化差异，无→不买",
+      "rps120": 86.24
+    },
+    {
+      "code": "301529",
+      "name": "福赛科技",
+      "reason": "RPS120 99.11>95%封顶；dist_ma20 +30.5%严重超买(Rule 2b)",
+      "rps120": 99.11
+    },
+    {
+      "code": "301080",
+      "name": "百普赛斯",
+      "reason": "RPS120 99.74>95%封顶；dist_ma20 -11.6%已跌破MA20",
+      "rps120": 99.74
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "强breadth(4.91:1)≠可以开仓：今日策略池/enriched候选全部集中在防御板块(银行/石油/煤炭/航运)，而当日领导板块是制造成长(自动化设备/塑料/汽车零部件/电机)。Rule 1板块优先决定空仓——breadth强只决定sizing，不决定方向。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "候选池与市场领导板块错配时，任何个股RPS/MA合格都无法补偿板块重力；板块贝塔是短期收益的主导项。"
+    },
+    {
+      "text": "FOMC 10/29凌晨2点出结果(≤2交易日)，按Rule 2c应为event_imminent状态：不建满仓新仓。与板块错配叠加，今日新建仓被双重压制，空仓是正确选择。",
+      "type": "signal",
+      "tags": [
+        "timing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "输入中已复测的FOMC基准：12次FOMC中9次次日A股低开、均值EW -0.45%，7/29决议前夕建仓被7/30恐慌盘止损。"
+    },
+    {
+      "text": "IV结构分化是重要信号：50ETF iv_rank 0.41(中性) vs 500ETF 0.78/创业板ETF 0.76/300ETF 0.70(偏高~极高)。反弹由中小盘成长驱动且波动率昂贵，此时追入制造成长龙头需更宽止损或更小仓位。",
+      "type": "observation",
+      "tags": [
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "高IV=高机会但也=高波动成本；>75%的宽基代理意味着新仓需要最强setup才值得，否则波动率扩张会吃掉止损缓冲。"
+    }
+  ],
+  "market_summary": "强反弹日：breadth 4.91:1，3/3主要指数收绿，创业板+3.0%领涨，81涨停/1跌停。结构上资金从防御(白酒/油气/银行)轮动至制造成长(自动化设备+5.82%/汽车零部件+4.77%等)，人形机器人+新能源车产业链催化(21经济网/网易)。IV整体偏悲观(avg rank 0.655，500ETF/创业板ETF>0.75)；FOMC 10/29凌晨2点出结果(≤2交易日)。策略池候选全部集中在防御板块、与当日领导板块错配——Rule 1板块优先，今日空仓。",
+  "market_sentiment": "bullish",
+  "market_call": "积极（tape强，但板块错配+FOMC事件抑制新开仓，今日空仓等待）"
+}

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-10-27",
+  "lastUpdated": "2026-10-28",
   "hypotheses": [
     {
       "id": "h001",
@@ -1258,7 +1258,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-10-26",
+      "lastTested": "2026-10-28",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1665,11 +1665,15 @@
           {
             "date": "2026-10-26",
             "detail": "齐鲁银行margin adding(chg5 +4.71%)与银行板块10-23转冷今日企稳背离——个股资金流入不能覆盖板块动量，HOLD不加仓；若城商行连续3日位于bottom30%将触发Rule 1机械卖出。"
+          },
+          {
+            "date": "2026-10-28",
+            "detail": "强breadth(4.91:1)≠可以开仓：今日策略池/enriched候选全部集中在防御板块(银行/石油/煤炭/航运)，而当日领导板块是制造成长(自动化设备/塑料/汽车零部件/电机)。Rule 1板块优先决定空仓——breadth强只决定sizing，不决定方向。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 101,
+      "sampleSize": 102,
       "hitRate": 1.0,
       "confidence": 0.99,
       "tags": [
@@ -6878,7 +6882,7 @@
       "type": "heuristic",
       "status": "validated",
       "created": "2026-08-06",
-      "lastTested": "2026-10-27",
+      "lastTested": "2026-10-28",
       "mechanism": "强基本面的股票在弱市中同样会跟随大盘回调——市场beta在短期压倒alpha。弱breadth环境中开仓应更严格或减半仓位。",
       "evidence": {
         "supporting": [
@@ -6901,6 +6905,10 @@
           {
             "date": "2026-10-27",
             "detail": "breadth 0.45:1+三大指数全绿+IV整体偏悲观(avg 0.65、500ETF/创业板>0.75)时，即使有sector top5的候选(RPS/MA全部合规)也默认持币——青岛港/锦江航运虽过个股门槛，但weak tape下'回撤中'的候选不值得半仓试错"
+          },
+          {
+            "date": "2026-10-28",
+            "detail": "IV结构分化是重要信号：50ETF iv_rank 0.41(中性) vs 500ETF 0.78/创业板ETF 0.76/300ETF 0.70(偏高~极高)。反弹由中小盘成长驱动且波动率昂贵，此时追入制造成长龙头需更宽止损或更小仓位。"
           }
         ],
         "contradicting": [
@@ -6910,9 +6918,9 @@
           }
         ]
       },
-      "sampleSize": 6,
-      "hitRate": 0.833,
-      "confidence": 0.75,
+      "sampleSize": 7,
+      "hitRate": 0.857,
+      "confidence": 0.778,
       "tags": [
         "timing",
         "position-sizing"
@@ -7495,7 +7503,7 @@
       "type": "signal",
       "status": "hypothesis",
       "created": "2026-08-17",
-      "lastTested": "2026-08-27",
+      "lastTested": "2026-10-28",
       "mechanism": "财报结果方向不可预知，披露日前夜建仓等于承担不对称的隔夜跳空风险",
       "evidence": {
         "supporting": [
@@ -7506,13 +7514,17 @@
           {
             "date": "2026-08-27",
             "detail": "业绩事件窗口(≤2个交易日)严格不追：奥士康8/28中报在即且公司已主动降温AI预期(AI业务占比<1%)，按Rule 2c等财报落地后再看，避免业绩与AI叙事错位的隔夜跳空风险"
+          },
+          {
+            "date": "2026-10-28",
+            "detail": "FOMC 10/29凌晨2点出结果(≤2交易日)，按Rule 2c应为event_imminent状态：不建满仓新仓。与板块错配叠加，今日新建仓被双重压制，空仓是正确选择。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 2,
+      "sampleSize": 3,
       "hitRate": 1.0,
-      "confidence": 0.75,
+      "confidence": 0.8,
       "tags": [
         "timing",
         "entry-filter"

@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-28",
+  "actions": [
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "price": 6.64,
+      "pnl_pct": 0.3,
+      "note": "持仓第9日浮盈+0.30%，未触发-5%硬止损(6.29,现价距约5.6%)/首3日-3%/15日时间止损/+10%上移止损；城商行Ⅱ未连续3日入bottom30%。但今日银行板块转弱(股份制银行Ⅱbottom5 -1.14%，输入events显示银行板块逆势回落、中国银行跌超4%)，个股-0.9%跑输创业板+3.0%，防御板块资金流出。维持HOLD不加仓，若银行/城商行连续3日入bottom30%则卖出。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 1,
+    "totalEquity": 965708.94,
+    "dayPnl": -228.0,
+    "dayReturnPct": -0.02,
+    "totalReturnPct": -3.43,
+    "unrealizedPnl": 76.0,
+    "realizedPnl": -34367.06,
+    "cashPct": 97.39
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 4.9105,
+    "up": 4498,
+    "down": 916,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 81,
+    "limit_downs": 1,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 4.91:1, 3/3 major indices green, 81 limit-ups / 1 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "强反弹日：breadth 4.91:1，3/3主要指数收绿，创业板+3.0%领涨，81涨停/1跌停。结构上资金从防御(白酒/油气/银行)轮动至制造成长(自动化设备+5.82%/汽车零部件+4.77%等)，人形机器人+新能源车产业链催化(21经济网/网易)。IV整体偏悲观(avg rank 0.655，500ETF/创业板ETF>0.75)；FOMC 10/29凌晨2点出结果(≤2交易日)。策略池候选全部集中在防御板块、与当日领导板块错配——Rule 1板块优先，今日空仓。"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 179683,
+  "output_tokens": 17682,
+  "rounds": 3,
+  "duration_sec": 220.0,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月28日 自动化设备 塑料 汽车零部件 板块大涨 原因",
+        "max_results": 6
+      },
+      "result_length": 4237
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "齐鲁银行 601665 2026年10月28日 股价 城商行",
+        "max_results": 5
+      },
+      "result_length": 3295
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月28日 银行板块 下跌 白酒 油气 回落",
+        "max_results": 5
+      },
+      "result_length": 3649
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+2026年10月28日",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=美联储+议息+2026年10月+结果+时间"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=汽车零部件+人形机器人+板块+2026年10月28日+上涨"
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}
