@@ -1,0 +1,126 @@
+{
+  "date": "2026-10-29",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1793257527.425619,
+      "errors": [],
+      "end": 1793257571.0907662,
+      "duration_sec": 43.7
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 7324,
+      "tokens": {
+        "input_tokens": 168135,
+        "output_tokens": 11345
+      },
+      "rounds": 3,
+      "tool_calls_count": 6,
+      "duration_sec": 192.0,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1793257763.1506171,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=40",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=48",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=41",
+        "Hypothesis: Created h217 (observation): 中国石油在恐慌日创24个月新高+Q3归母净利+21.6%——红利+业绩催化双驱动在弱市中跑赢，持仓不必因大盘恐慌而主动卖出。...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-10-29",
+        "status": "ok",
+        "checked": 3,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "601298",
+                "name": "青岛港",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 9.65,
+                "stopLoss": 9.17,
+                "distance_pct": 4.97,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1793257763.981236,
+      "duration_sec": 0.8
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 601298 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 236.5
+  }
+}

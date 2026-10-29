@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-29",
+  "actions": [
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "price": 6.95,
+      "pnl_pct": 4.98,
+      "note": "城商行Ⅱ今日top5(+2.38%)，板块重力向上；个股+4.04%（新浪财经：齐鲁银行涨幅居前）；浮盈+4.98%未触发+10%上移止损，止损6.29不变"
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "action": "HOLD",
+      "price": 13.69,
+      "pnl_pct": 3.24,
+      "note": "Q3归母净利+21.6%催化新鲜（10-28公告），今日盘中创近24个月新高（输入events：10:02达13.02）；红利+业绩双驱动，恐慌日逆势+3.24%；未触发任何卖出规则，止损12.60不变"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 9.65,
+      "pnl_pct": 0.0,
+      "note": "平盘0%，未触发-5%硬止损/首3日-3%/15日时间止损；stop_proximity仅WATCH监控级（现价9.65距止损9.17约4.97%）；航运港口未入top/bottom5，板块中性；跌破9.17或板块连续3日入bottom30%则卖出"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 968090.94,
+    "dayPnl": 2230.0,
+    "dayReturnPct": 0.23,
+    "totalReturnPct": -3.19,
+    "unrealizedPnl": 2458.0,
+    "realizedPnl": -34367.06,
+    "cashPct": 90.52
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.1652,
+    "up": 781,
+    "down": 4728,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 39,
+    "limit_downs": 52,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.17:1, 0/3 major indices green, 39 limit-ups / 52 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "恐慌盘：涨跌比0.17:1（781涨/4728跌），52跌停/39涨停，上证-0.82%、深成-2.92%、创业板-4.45%、科创50-4.27%，三大指数全绿。IV整体极度恐慌（均值0.73，500ETF 0.97/创业板ETF 0.90）。科技主线崩塌（通信设备-8.84%、元件-8.07%），资金切向红利防御（国有大行+2.45%、城商行+2.38%、煤炭+2.46%、风电+2.39%、航天装备+6.61%）。导火索为全球存储芯片财报周：三星Q3芯片利润不及预期（-5%）、SK海力士财报、韩国KOSPI-3%，叠加美债收益率上行与公募减持中际旭创超700亿（新浪财经/中证报）。机械层entry_regime=panic hard block，禁止新开仓；三只防御持仓全部收红。"
+  }
+}

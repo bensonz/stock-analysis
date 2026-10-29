@@ -1,0 +1,175 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": 6.61,
+        "trend": "accelerating"
+      },
+      {
+        "name": "煤炭开采",
+        "5d_pct": 2.46,
+        "trend": "steady"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": 2.45,
+        "trend": "steady"
+      },
+      {
+        "name": "风电设备",
+        "5d_pct": 2.39,
+        "trend": "steady"
+      },
+      {
+        "name": "城商行Ⅱ",
+        "5d_pct": 2.38,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "通信设备",
+        "5d_pct": -8.84,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": -8.07,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "医疗美容",
+        "5d_pct": -7.04,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": -5.44,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": -5.35,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "2/3 持仓处于逆势上涨的防御/资源板块（齐鲁银行城商行Ⅱ今日top5、中国石油石油石化收涨+3.24%）；青岛港航运港口中性",
+    "regime": "恐慌盘，科技→红利防御急速轮动（全球存储芯片财报周引发成长股抛售）"
+  },
+  "position_decisions": [
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "reason": "城商行Ⅱ今日top5(+2.38%)，板块重力向上；个股+4.04%（新浪财经：齐鲁银行涨幅居前）；浮盈+4.98%未触发+10%上移止损，止损6.29不变",
+      "sector_rank": "top 5（城商行Ⅱ +2.38%）",
+      "new_stop": null,
+      "pnl_pct": 4.98,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "action": "HOLD",
+      "reason": "Q3归母净利+21.6%催化新鲜（10-28公告），今日盘中创近24个月新高（输入events：10:02达13.02）；红利+业绩双驱动，恐慌日逆势+3.24%；未触发任何卖出规则，止损12.60不变",
+      "sector_rank": "石油石化（未入top5，但资源/红利主线逆势上涨）",
+      "new_stop": null,
+      "pnl_pct": 3.24,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "平盘0%，未触发-5%硬止损/首3日-3%/15日时间止损；stop_proximity仅WATCH监控级（现价9.65距止损9.17约4.97%）；航运港口未入top/bottom5，板块中性；跌破9.17或板块连续3日入bottom30%则卖出",
+      "sector_rank": "航运港口（中性，未入top/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 0.0,
+      "days_held": 2,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "reason": "panic hard block（涨跌比0.17:1、52跌停）：机械层禁止新开仓；虽RPS120=88.44、dist_ma20=9.2%合规、业绩催化真实（10-29收涨7.22%），弱市不新开",
+      "rps120": 88.44
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "panic hard block；Q3归母净利+842%催化虽强，但恐慌盘禁开新仓",
+      "rps120": 92.24
+    },
+    {
+      "code": "601998",
+      "name": "中信银行",
+      "reason": "panic hard block + margin信号deleveraging（chg5 -7.3%、net5_repay_days 5），谨慎叠加",
+      "rps120": 93.06
+    },
+    {
+      "code": "301550",
+      "name": "斯菱智驱",
+      "reason": "Rule 2b 追高：dist_ma5 6.1%>6%、dist_ma10 15.1%、dist_ma20 25%；PE 300，无论盘面均不追",
+      "rps120": 90.44
+    },
+    {
+      "code": "300404",
+      "name": "博济医药",
+      "reason": "panic hard block + IV创业板ETF 0.901（极贵）；医疗服务今日逆势但短线波动风险高",
+      "rps120": 92.76
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌日防御仓位全部收红（齐鲁银行+4.04%、中国石油+3.24%、青岛港0%），而创业板-4.45%、科技板块-8%——验证sector first防御配置在恐慌轮动中的对冲价值；今日正确动作是持币观望而非抄底科技。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "资金避险从高位科技切向低估值红利，防御/资源板块与大盘科技负相关"
+    },
+    {
+      "text": "hard block（涨跌比0.17:1/52跌停）再次阻止了恐慌日对业绩超预期个股（广汇能源Q3+842%、中国广核+7.22%）的FOMO开仓——即便个股催化真实，弱市禁开新仓是正确默认。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "恐慌日隔夜跳空风险高，个股催化无法对抗系统性抛压"
+    },
+    {
+      "text": "全球存储芯片财报周（三星Q3芯片利润不及预期、SK海力士财报、韩KOSPI-3%）是今日科技暴跌的导火索——海外半导体龙头财报是A股硬件链的系统性事件，财报周前应主动降低科技暴露。（来源：新浪财经/中证报）",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "A股光模块/CPO/存储直接映射海外AI硬件需求，龙头财报不及预期引发链条重估"
+    },
+    {
+      "text": "中国石油在恐慌日创24个月新高+Q3归母净利+21.6%——红利+业绩催化双驱动在弱市中跑赢，持仓不必因大盘恐慌而主动卖出。",
+      "type": "observation",
+      "tags": [
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "高分红+业绩兑现提供安全垫，逆势资金抱团"
+    }
+  ],
+  "market_summary": "恐慌盘：涨跌比0.17:1（781涨/4728跌），52跌停/39涨停，上证-0.82%、深成-2.92%、创业板-4.45%、科创50-4.27%，三大指数全绿。IV整体极度恐慌（均值0.73，500ETF 0.97/创业板ETF 0.90）。科技主线崩塌（通信设备-8.84%、元件-8.07%），资金切向红利防御（国有大行+2.45%、城商行+2.38%、煤炭+2.46%、风电+2.39%、航天装备+6.61%）。导火索为全球存储芯片财报周：三星Q3芯片利润不及预期（-5%）、SK海力士财报、韩国KOSPI-3%，叠加美债收益率上行与公募减持中际旭创超700亿（新浪财经/中证报）。机械层entry_regime=panic hard block，禁止新开仓；三只防御持仓全部收红。",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}

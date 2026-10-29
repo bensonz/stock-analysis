@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 168135,
+  "output_tokens": 11345,
+  "rounds": 3,
+  "duration_sec": 192.0,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月29日 大跌 原因 创业板 通信设备",
+        "max_results": 6
+      },
+      "result_length": 3729
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 煤炭 银行 板块 上涨 2026年10月29日 防御",
+        "max_results": 6
+      },
+      "result_length": 4133
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "中国石油 2026年三季报 归母净利润 同比增长",
+        "max_results": 5
+      },
+      "result_length": 3589
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://finance.sina.com.cn/tob/2026-10-29/doc-iniwwaxa2861745.shtml",
+        "maxChars": 4000
+      },
+      "result_length": 3450
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "齐鲁银行 青岛港 2026年10月29日 新闻 三季报",
+        "max_results": 5
+      },
+      "result_length": 3027
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "美股 三星 SK海力士 芯片 财报 2026年10月 科技股 调整 美债收益率",
+        "max_results": 5
+      },
+      "result_length": 2051
+    }
+  ],
+  "fallback_used": false
+}

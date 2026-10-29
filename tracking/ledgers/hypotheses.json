@@ -4799,13 +4799,21 @@
           {
             "date": "2026-10-29",
             "detail": "防御银行主线在恐慌日仍是唯一绿仓：齐鲁银行今日+4.49%、城商行Ⅱ今日top2(+1.9%)；同期科技成长(通信设备-7.23%/半导体-4.33%)大幅杀跌，防御→成长的轮动方向未变。"
+          },
+          {
+            "date": "2026-10-29",
+            "detail": "恐慌日防御仓位全部收红（齐鲁银行+4.04%、中国石油+3.24%、青岛港0%），而创业板-4.45%、科技板块-8%——验证sector first防御配置在恐慌轮动中的对冲价值；今日正确动作是持币观望而非抄底科技。"
+          },
+          {
+            "date": "2026-10-29",
+            "detail": "全球存储芯片财报周（三星Q3芯片利润不及预期、SK海力士财报、韩KOSPI-3%）是今日科技暴跌的导火索——海外半导体龙头财报是A股硬件链的系统性事件，财报周前应主动降低科技暴露。（来源：新浪财经/中证报）"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 39,
+      "sampleSize": 41,
       "hitRate": 1.0,
-      "confidence": 0.976,
+      "confidence": 0.977,
       "tags": [
         "sector",
         "exit-rule"
@@ -5011,11 +5019,15 @@
           {
             "date": "2026-10-29",
             "detail": "今日恐慌盘（涨跌比0.17:1、0/3主要指数绿、entry_regime hard_block）下，中信银行(RPS120 92.6)、广汇能源(92.32)、中国广核(87.64)等多只MA距离合规的RPS甜点区候选全部被硬性阻断——机械层权威有效，避免在深成-2.55%/创业板-3.63%日接飞刀。"
+          },
+          {
+            "date": "2026-10-29",
+            "detail": "hard block（涨跌比0.17:1/52跌停）再次阻止了恐慌日对业绩超预期个股（广汇能源Q3+842%、中国广核+7.22%）的FOMO开仓——即便个股催化真实，弱市禁开新仓是正确默认。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 47,
+      "sampleSize": 48,
       "hitRate": 1.0,
       "confidence": 0.98,
       "tags": [
@@ -9156,6 +9168,33 @@
       "confidence": 0.6,
       "tags": [
         "sector"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h217",
+      "text": "中国石油在恐慌日创24个月新高+Q3归母净利+21.6%——红利+业绩催化双驱动在弱市中跑赢，持仓不必因大盘恐慌而主动卖出。",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-10-29",
+      "lastTested": "2026-10-29",
+      "mechanism": "高分红+业绩兑现提供安全垫，逆势资金抱团",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-10-29",
+            "detail": "中国石油在恐慌日创24个月新高+Q3归母净利+21.6%——红利+业绩催化双驱动在弱市中跑赢，持仓不必因大盘恐慌而主动卖出。"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "position-sizing"
       ],
       "parentRule": null,
       "retiredDate": null,
