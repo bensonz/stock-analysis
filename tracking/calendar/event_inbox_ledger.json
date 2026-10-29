@@ -858,6 +858,36 @@
       "impact": "low",
       "direction": "two_sided",
       "note": ""
+    },
+    {
+      "inbox_id": "wscn-20261106-US121058",
+      "decision": "skip",
+      "decided": "2026-10-29",
+      "name": "美国10月非农就业人口变动(万人)",
+      "date": "2026-11-06",
+      "tz": "US",
+      "decided_by": "ai",
+      "model": "deepseek-v4-pro",
+      "reason": "与日历上11月9日美国非农就业(NFP)重复，同一数据不同表述",
+      "kind": "macro_release",
+      "impact": "medium",
+      "direction": "two_sided",
+      "note": ""
+    },
+    {
+      "inbox_id": "wscn-20261107-CN191467",
+      "decision": "skip",
+      "decided": "2026-10-29",
+      "name": "中国10月外汇储备(亿美元)",
+      "date": "2026-11-07",
+      "tz": "CN",
+      "decided_by": "ai",
+      "model": "deepseek-v4-pro",
+      "reason": "外汇储备数据对A股市场影响有限，非系统性宏观事件",
+      "kind": "macro_release",
+      "impact": "low",
+      "direction": "two_sided",
+      "note": ""
     }
   ]
 }

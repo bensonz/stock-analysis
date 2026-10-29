@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-29",
+  "market_overview": {
+    "shanghai_composite": {
+      "value": 3647.117,
+      "change_pct": -0.93
+    },
+    "shenzhen_component": {
+      "value": 11180.889,
+      "change_pct": -2.55
+    },
+    "chinext": {
+      "value": 2539.044,
+      "change_pct": -3.63
+    },
+    "sentiment": "panic",
+    "hot_sectors": [
+      "航天装备Ⅱ",
+      "城商行Ⅱ",
+      "国有大型银行Ⅱ",
+      "风电设备",
+      "煤炭开采"
+    ],
+    "cold_sectors": [
+      "通信设备",
+      "元件",
+      "医疗美容",
+      "黑色家电",
+      "半导体"
+    ],
+    "notes": "恐慌盘：涨跌比0.17:1（809涨/4701跌），0/3主要指数收绿（上证-0.93%/深成-2.55%/创业板-3.63%），科创50 -4.21%；36涨停/12跌停，entry_regime hard_block（sizing_multiplier 0.0）。IV整体'极度恐慌'（avg_iv_rank 0.72，500ETF 0.916/创业板ETF 0.896/科创50 0.685）。避险主线：航天装备+7.09%领涨，城商行/国有大行/风电/煤炭逆势红盘；科技成长杀跌：通信设备-7.23%、元件-6.63%、半导体-4.33%。主力资金净流出373.72亿，净流入卫星导航/航天装备/军民融合，天孚通信净卖出16.93亿（新浪财经10-29 10:40）。机械层硬阻断新开仓，新仓默认空仓；持仓全部HOLD。"
+  },
+  "strategy_scan": {
+    "total_stocks_scanned": 25,
+    "strategy_name": "小市值-无 20RP",
+    "scan_time": "2026-10-29T11:38:57.142445+08:00"
+  },
+  "recommendations": [
+    {
+      "code": "601998.SH",
+      "name": "中信银行",
+      "price": null,
+      "rps120": 92.6,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600256.SH",
+      "name": "广汇能源",
+      "price": null,
+      "rps120": 92.32,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "003816.SZ",
+      "name": "中国广核",
+      "price": null,
+      "rps120": 87.64,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "301550.SZ",
+      "name": "斯菱智驱",
+      "price": null,
+      "rps120": 87.77,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "601872.SH",
+      "name": "招商轮船",
+      "price": null,
+      "rps120": 85.07,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    }
+  ],
+  "summary": {
+    "total_scanned": 25,
+    "buy_recommendations": 0,
+    "watch_recommendations": 5,
+    "avoid_recommendations": 0,
+    "market_call": "防守观望（硬阻断不开新仓）",
+    "reasoning": "恐慌盘：涨跌比0.17:1（809涨/4701跌），0/3主要指数收绿（上证-0.93%/深成-2.55%/创业板-3.63%），科创50 -4.21%；36涨停/12跌停，entry_regime hard_block（sizing_multiplier 0.0）。IV整体'极度恐慌'（avg_iv_rank 0.72，500ETF 0.916/创业板ETF 0.896/科创50 0.685）。避险主线：航天装备+7.09%领涨，城商行/国有大行/风电/煤炭逆势红盘；科技成长杀跌：通信设备-7.23%、元件-6.63%、半导体-4.33%。主力资金净流出373.72亿，净流入卫星导航/航天装备/军民融合，天孚通信净卖出16.93亿（新浪财经10-29 10:40）。机械层硬阻断新开仓，新仓默认空仓；持仓全部HOLD。"
+  }
+}

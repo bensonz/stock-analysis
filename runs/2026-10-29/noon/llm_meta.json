@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 167230,
+  "output_tokens": 11557,
+  "rounds": 3,
+  "duration_sec": 165.7,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年10月29日 A股 大跌 原因 创业板 科技股",
+        "max_results": 5
+      },
+      "result_length": 1778
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026-10-29 板块 银行 航天装备 上涨 通信设备 下跌",
+        "max_results": 5
+      },
+      "result_length": 3543
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "中国广核 2026年三季报 业绩 核电",
+        "max_results": 3
+      },
+      "result_length": 2475
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "10月29日 A股 收评 三大指数 下跌 航天装备 涨停"
+      },
+      "result_length": 3706
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "max_results": 5,
+        "query": "A股 10月29日 上证指数 创业板 跌 原因 外围 美债"
+      },
+      "result_length": 3763
+    }
+  ],
+  "fallback_used": false
+}

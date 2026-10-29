@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-10-28",
+  "lastUpdated": "2026-10-29",
   "hypotheses": [
     {
       "id": "h001",
@@ -4640,7 +4640,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-10-27",
+      "lastTested": "2026-10-29",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4795,13 +4795,17 @@
           {
             "date": "2026-10-27",
             "detail": "防御轮动是恐慌日唯一alpha：科技/军工/半导体bottom5全线崩，银行四子板块全部top5，齐鲁银行逆势+1.52%。板块动量>个股质量再次验证"
+          },
+          {
+            "date": "2026-10-29",
+            "detail": "防御银行主线在恐慌日仍是唯一绿仓：齐鲁银行今日+4.49%、城商行Ⅱ今日top2(+1.9%)；同期科技成长(通信设备-7.23%/半导体-4.33%)大幅杀跌，防御→成长的轮动方向未变。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 38,
+      "sampleSize": 39,
       "hitRate": 1.0,
-      "confidence": 0.975,
+      "confidence": 0.976,
       "tags": [
         "sector",
         "exit-rule"
@@ -4816,7 +4820,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-10-27",
+      "lastTested": "2026-10-29",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -5003,13 +5007,17 @@
           {
             "date": "2026-10-27",
             "detail": "恐慌日硬阻断再次保护资金：breadth 0.12:1 + 三大指数全绿 + IV极度恐慌时，机械层强制空仓，满仓时被放弃的候选今日大概率全绿。不因'某个票还行'强行下单"
+          },
+          {
+            "date": "2026-10-29",
+            "detail": "今日恐慌盘（涨跌比0.17:1、0/3主要指数绿、entry_regime hard_block）下，中信银行(RPS120 92.6)、广汇能源(92.32)、中国广核(87.64)等多只MA距离合规的RPS甜点区候选全部被硬性阻断——机械层权威有效，避免在深成-2.55%/创业板-3.63%日接飞刀。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 46,
+      "sampleSize": 47,
       "hitRate": 1.0,
-      "confidence": 0.979,
+      "confidence": 0.98,
       "tags": [
         "entry-filter",
         "position-sizing"
@@ -6886,7 +6894,7 @@
       "type": "heuristic",
       "status": "validated",
       "created": "2026-08-06",
-      "lastTested": "2026-10-28",
+      "lastTested": "2026-10-29",
       "mechanism": "强基本面的股票在弱市中同样会跟随大盘回调——市场beta在短期压倒alpha。弱breadth环境中开仓应更严格或减半仓位。",
       "evidence": {
         "supporting": [
@@ -6913,6 +6921,10 @@
           {
             "date": "2026-10-28",
             "detail": "IV结构分化是重要信号：50ETF iv_rank 0.41(中性) vs 500ETF 0.78/创业板ETF 0.76/300ETF 0.70(偏高~极高)。反弹由中小盘成长驱动且波动率昂贵，此时追入制造成长龙头需更宽止损或更小仓位。"
+          },
+          {
+            "date": "2026-10-29",
+            "detail": "青岛港10-28开仓(9.65)今日-1.66%且距止损仅3.37%(stop_proximity WATCH)，同日开仓的中国石油+1.13%——弱市开仓即使标的0风险、创新高，时机仍偏早，验证h144；弱市应更小仓位或等breadth改善再入场。"
           }
         ],
         "contradicting": [
@@ -6922,9 +6934,9 @@
           }
         ]
       },
-      "sampleSize": 7,
-      "hitRate": 0.857,
-      "confidence": 0.778,
+      "sampleSize": 8,
+      "hitRate": 0.875,
+      "confidence": 0.8,
       "tags": [
         "timing",
         "position-sizing"
@@ -9117,6 +9129,33 @@
       "tags": [
         "timing",
         "position-sizing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h216",
+      "text": "航天装备(+7.09%)与通信设备(-7.23%)今日14.3pp极差，主力资金净流出373.72亿但净流入卫星导航/航天装备/军民融合（新浪财经10-29 10:40）——军工航天成为新的避险+题材双属性主线，需跟踪是否连续2-3日稳居top5。",
+      "type": "signal",
+      "status": "observation",
+      "created": "2026-10-29",
+      "lastTested": "2026-10-29",
+      "mechanism": "避险资金与军工题材共振，航天装备板块出现独立于成长的逆势行情",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-10-29",
+            "detail": "航天装备(+7.09%)与通信设备(-7.23%)今日14.3pp极差，主力资金净流出373.72亿但净流入卫星导航/航天装备/军民融合（新浪财经10-29 10:40）——军工航天成为新的避险+题材双属性主线，需跟踪是否连续2-3日稳居top5。"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector"
       ],
       "parentRule": null,
       "retiredDate": null,

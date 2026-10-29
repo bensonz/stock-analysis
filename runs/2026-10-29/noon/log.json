@@ -1,0 +1,127 @@
+{
+  "date": "2026-10-29",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1793244921.988405,
+      "errors": [],
+      "end": 1793244970.9757178,
+      "duration_sec": 49.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 4897,
+      "tokens": {
+        "input_tokens": 167230,
+        "output_tokens": 11557
+      },
+      "rounds": 3,
+      "tool_calls_count": 5,
+      "duration_sec": 165.7,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1793245136.6680892,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=47",
+        "Hypothesis: Updated h144 (validated): +1 supporting evidence → hitRate=88%, n=8",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=39",
+        "Hypothesis: WARN coerced evidence_type='observation' → supporting",
+        "Hypothesis: Created h216 (observation): 航天装备(+7.09%)与通信设备(-7.23%)今日14.3pp极差，主力资金净流出373.72亿但净流入卫星导航/航天装备/军民融合（新浪财经10-29 1...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-10-29",
+        "status": "ok",
+        "checked": 3,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "601298",
+                "name": "青岛港",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 9.49,
+                "stopLoss": 9.17,
+                "distance_pct": 3.37,
+                "suggestion": "🟠 WATCH — 3.4% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1793245137.488579,
+      "duration_sec": 0.8
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 601298 — 🟠 WATCH — 3.4% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 215.5
+  }
+}

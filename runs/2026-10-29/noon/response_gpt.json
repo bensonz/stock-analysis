@@ -1,0 +1,174 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": 7.09,
+        "trend": "accelerating"
+      },
+      {
+        "name": "城商行Ⅱ",
+        "5d_pct": 1.9,
+        "trend": "steady"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": 1.87,
+        "trend": "steady"
+      },
+      {
+        "name": "风电设备",
+        "5d_pct": 1.79,
+        "trend": "steady"
+      },
+      {
+        "name": "煤炭开采",
+        "5d_pct": 1.63,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "通信设备",
+        "5d_pct": -7.23,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": -6.63,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "医疗美容",
+        "5d_pct": -6.14,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "黑色家电",
+        "5d_pct": -4.42,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": -4.33,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "1/3持仓在热门板块（齐鲁银行/城商行Ⅱ top2），2/3在未入榜中性板块（中国石油/石油石化、青岛港/航运港口）",
+    "regime": "恐慌避险：军工航天+防御红利（银行/煤炭/电力）逆势，科技成长（通信/元件/半导体）大幅杀跌，主力净流出373.72亿（新浪财经10-29 10:40）"
+  },
+  "position_decisions": [
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "持有2日浮盈-1.66%，距硬止损9.17约3.37%（stop_proximity WATCH仅监控级），未触发-5%硬止损/首3日-3%/15日时间止损；航运港口未入今日top/bottom5，板块中性；继续持有观察，若跌破9.17或航运港口连续3日入bottom30%则卖出",
+      "sector_rank": "中性（未入今日top/bottom5）",
+      "new_stop": null,
+      "pnl_pct": -1.66,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "reason": "持仓第10日浮盈+5.44%，城商行Ⅱ今日top2(+1.9%)板块重力向上；未触发+10%上移止损；恐慌日防御银行主线仍走强，继续持有，若跌破6.29或城商行连续3日入bottom30%则卖出",
+      "sector_rank": "top 5（城商行Ⅱ +1.9%，今日第2）",
+      "new_stop": null,
+      "pnl_pct": 5.44,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "action": "HOLD",
+      "reason": "持有2日浮盈+1.13%，今日盘中创近24个月新高（输入events：10:02达13.02）；Q3归母净利+21.6%催化新鲜；石油石化未入今日top/bottom5板块中性；未触发任何卖出规则，止损12.6不变",
+      "sector_rank": "中性（未入今日top/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 1.13,
+      "days_held": 2,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601998",
+      "name": "中信银行",
+      "reason": "恐慌盘硬阻断（涨跌比0.17:1、0/3主要指数绿）禁止开新仓；且股份制银行Ⅱ未入今日top5（在榜为城商行/国有大行），margin deleveraging(net5_repay_days=5)。RPS120 92.6、MA合规但时机不对",
+      "rps120": 92.6
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "恐慌盘硬阻断；石油石化未入今日top5；大股东质押占持股77%+现金短债比0.29两项风险叠加。RPS120 92.32、MA距离均不超买",
+      "rps120": 92.32
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "reason": "恐慌盘硬阻断；核电未单列入今日top5（风电设备在榜）；IV极高(500ETF深 iv_rank 0.897)+margin deleveraging形成谨慎集群。RPS120 87.64、业绩超预期(10-29)",
+      "rps120": 87.64
+    },
+    {
+      "code": "301550",
+      "name": "斯菱智驱",
+      "reason": "Rule 2b追高：dist_ma5_pct 9.6%>6%、dist_ma10_pct 19.0%>8%、dist_ma20_pct 27.0%>12%三重超买；汽车零部件非今日top板块。RPS120 87.77",
+      "rps120": 87.77
+    },
+    {
+      "code": "601872",
+      "name": "招商轮船",
+      "reason": "重入标的：10-15因time_decay+航运港口bottom5离场（浮盈仅+0.31%），今日无新价位/形态/催化差异，重入举证不满足；且恐慌盘硬阻断。RPS120 85.07",
+      "rps120": 85.07
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "今日恐慌盘（涨跌比0.17:1、0/3主要指数绿、entry_regime hard_block）下，中信银行(RPS120 92.6)、广汇能源(92.32)、中国广核(87.64)等多只MA距离合规的RPS甜点区候选全部被硬性阻断——机械层权威有效，避免在深成-2.55%/创业板-3.63%日接飞刀。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "panic regime硬阻断拦截FOMO开仓，恐慌日动量股隔夜跳空风险高"
+    },
+    {
+      "text": "青岛港10-28开仓(9.65)今日-1.66%且距止损仅3.37%(stop_proximity WATCH)，同日开仓的中国石油+1.13%——弱市开仓即使标的0风险、创新高，时机仍偏早，验证h144；弱市应更小仓位或等breadth改善再入场。",
+      "type": "observation",
+      "tags": [
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h144",
+      "mechanism": "弱市breadth下缺乏市场beta支撑，个股alpha难以独立兑现"
+    },
+    {
+      "text": "防御银行主线在恐慌日仍是唯一绿仓：齐鲁银行今日+4.49%、城商行Ⅱ今日top2(+1.9%)；同期科技成长(通信设备-7.23%/半导体-4.33%)大幅杀跌，防御→成长的轮动方向未变。",
+      "type": "signal",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "避险资金在恐慌日流向银行/红利防御板块，高估值科技成长被兑现"
+    },
+    {
+      "text": "航天装备(+7.09%)与通信设备(-7.23%)今日14.3pp极差，主力资金净流出373.72亿但净流入卫星导航/航天装备/军民融合（新浪财经10-29 10:40）——军工航天成为新的避险+题材双属性主线，需跟踪是否连续2-3日稳居top5。",
+      "type": "signal",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "observation",
+      "mechanism": "避险资金与军工题材共振，航天装备板块出现独立于成长的逆势行情"
+    }
+  ],
+  "market_summary": "恐慌盘：涨跌比0.17:1（809涨/4701跌），0/3主要指数收绿（上证-0.93%/深成-2.55%/创业板-3.63%），科创50 -4.21%；36涨停/12跌停，entry_regime hard_block（sizing_multiplier 0.0）。IV整体'极度恐慌'（avg_iv_rank 0.72，500ETF 0.916/创业板ETF 0.896/科创50 0.685）。避险主线：航天装备+7.09%领涨，城商行/国有大行/风电/煤炭逆势红盘；科技成长杀跌：通信设备-7.23%、元件-6.63%、半导体-4.33%。主力资金净流出373.72亿，净流入卫星导航/航天装备/军民融合，天孚通信净卖出16.93亿（新浪财经10-29 10:40）。机械层硬阻断新开仓，新仓默认空仓；持仓全部HOLD。",
+  "market_sentiment": "panic",
+  "market_call": "防守观望（硬阻断不开新仓）"
+}
