@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 105418,
+  "output_tokens": 9904,
+  "rounds": 2,
+  "duration_sec": 144.9,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "航运港口板块 上涨 原因 2026年10月",
+        "max_results": 5
+      },
+      "result_length": 1797
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月30日 白酒 医疗服务 白色家电 上涨 原因",
+        "max_results": 5
+      },
+      "result_length": 2347
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "锦江航运 2026年三季报 净利润 增长",
+        "max_results": 5
+      },
+      "result_length": 1060
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "FOMC 2026年10月 议息会议 结果 美联储",
+        "max_results": 5
+      },
+      "result_length": 2133
+    }
+  ],
+  "fallback_used": false
+}

@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-30",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1793331321.768647,
+      "errors": [],
+      "end": 1793331365.532765,
+      "duration_sec": 43.8
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 5084,
+      "tokens": {
+        "input_tokens": 105418,
+        "output_tokens": 9904
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 144.9,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1793331510.44463,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Created h218 (observation): FOMC 10-29按兵不动(3.75%-4.00%)但库克、哈马克两位票委投反对票支持加息25bp，12月加息概率82.5%——鹰派暂停对A股是次日偏空信号，...",
+        "Hypothesis: Updated h144 (validated): +1 supporting evidence → hitRate=89%, n=9",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=67",
+        "Hypothesis: Updated h151 (rule): +1 supporting evidence → hitRate=100%, n=19",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-10-30",
+        "status": "ok",
+        "checked": 3,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "end": 1793331511.44979,
+      "duration_sec": 1.0
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 189.7
+  }
+}

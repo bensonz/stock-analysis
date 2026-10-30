@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-30",
+  "actions": [
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 9.81,
+      "pnl_pct": 1.66,
+      "note": "航运港口今日第2(+3.19%)板块重力向上；现价9.81浮盈+1.66%未触发-5%硬止损(9.17)/首3日-3%/15日时间止损；margin adding(chg5 +2.52%)；维持持有"
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "price": 6.7,
+      "pnl_pct": 1.21,
+      "note": "城商行未入今日top/bottom5板块中性；现价6.70浮盈+1.21%未触发-5%硬止损(6.29)/15日时间止损；今日-3.6%回吐但距止损仍远(约6.5%)；margin adding(chg5 +2.36%)；维持持有，若城商行连续3日入bottom30%或跌破6.29则卖出"
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "action": "HOLD",
+      "price": 13.61,
+      "pnl_pct": 2.64,
+      "note": "现价13.61浮盈+2.64%未触发任何卖出规则；Q3归母净利+21.6%催化新鲜；石油石化未入今日top/bottom5板块中性；margin adding(chg5 +4.45%)；止损12.60不变"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 3,
+    "totalEquity": 967364.94,
+    "dayPnl": -726.0,
+    "dayReturnPct": -0.08,
+    "totalReturnPct": -3.26,
+    "unrealizedPnl": 1732.0,
+    "realizedPnl": -34367.06,
+    "cashPct": 90.59
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.8946,
+    "up": 2522,
+    "down": 2819,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 45,
+    "limit_downs": 18,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.89:1, 0/3 major indices green, 45 limit-ups / 18 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "Breadth 0.89:1偏弱(2522涨/2819跌, 0/3指数绿, 涨停45/跌停18)；IV极度恐慌(avg_iv_rank 0.80, 500ETF/创业板/500ETF深均1.0)；FOMC 10-29按兵不动但鹰派(2票委支持加息, 12月加息概率82.5%, 新浪财经/中信证券固收)压制风险偏好。板块防御化：酒店餐饮(+3.88%)/航运港口(+3.19%, 苏伊士红海航线恢复驱动)/医疗服务/白色家电/白酒走强，数字媒体/影视/游戏领跌。持仓1/3在热门板块，3/10仓位、现金90.59%，弱市默认保现金不开新仓。"
+  }
+}

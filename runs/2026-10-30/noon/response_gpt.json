@@ -1,0 +1,194 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "酒店餐饮",
+        "5d_pct": 3.88,
+        "trend": "defensive rotation"
+      },
+      {
+        "name": "航运港口",
+        "5d_pct": 3.19,
+        "trend": "steady (苏伊士/红海航线恢复驱动)"
+      },
+      {
+        "name": "医疗服务",
+        "5d_pct": 2.99,
+        "trend": "rebounding"
+      },
+      {
+        "name": "白色家电",
+        "5d_pct": 2.07,
+        "trend": "defensive"
+      },
+      {
+        "name": "白酒Ⅱ",
+        "5d_pct": 2.06,
+        "trend": "defensive"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "数字媒体",
+        "5d_pct": -3.69,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电视广播Ⅱ",
+        "5d_pct": -3.65,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "影视院线",
+        "5d_pct": -3.52,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -3.28,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "游戏Ⅱ",
+        "5d_pct": -2.97,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "1/3 positions in hot sectors（青岛港·航运港口今日第2；中国石油·石油石化、齐鲁银行·城商行均未入今日top5）",
+    "regime": "防御/消费（酒店餐饮、白酒、白色家电、医疗服务）+航运港口走强，数字媒体/影视/游戏等科技传媒领跌；FOMC 10-29按兵不动但两位票委支持加息、12月加息概率82.5%（新浪财经/中信证券固收），风险偏好承压"
+  },
+  "position_decisions": [
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "航运港口今日第2(+3.19%)板块重力向上；现价9.81浮盈+1.66%未触发-5%硬止损(9.17)/首3日-3%/15日时间止损；margin adding(chg5 +2.52%)；维持持有",
+      "sector_rank": "top 5%（今日第2）",
+      "new_stop": null,
+      "pnl_pct": 1.66,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "601665",
+      "name": "齐鲁银行",
+      "action": "HOLD",
+      "reason": "城商行未入今日top/bottom5板块中性；现价6.70浮盈+1.21%未触发-5%硬止损(6.29)/15日时间止损；今日-3.6%回吐但距止损仍远(约6.5%)；margin adding(chg5 +2.36%)；维持持有，若城商行连续3日入bottom30%或跌破6.29则卖出",
+      "sector_rank": "中游（未入top/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 1.21,
+      "days_held": 11,
+      "exit_price": null
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "action": "HOLD",
+      "reason": "现价13.61浮盈+2.64%未触发任何卖出规则；Q3归母净利+21.6%催化新鲜；石油石化未入今日top/bottom5板块中性；margin adding(chg5 +4.45%)；止损12.60不变",
+      "sector_rank": "中游（未入top/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 2.64,
+      "days_held": 2,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601083",
+      "name": "锦江航运",
+      "reason": "航运港口热门(今日第2)但dist_ma5_pct=11.9%>6%追高红线，Rule 2b不可协商，跳过等回调",
+      "rps120": 91.3
+    },
+    {
+      "code": "301550",
+      "name": "斯菱智驱",
+      "reason": "dist_ma10_pct=13.5%>8%、dist_ma20_pct=23.2%>12%严重超买，PE 295.7，跳过",
+      "rps120": 90.44
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "Q3净利+842%催化虽新鲜，但弱市(breadth 0.89:1/0指数绿)+margin deleveraging(chg5 -1.14%)+IV 300ETF tight(0.79)+石油石化未入top5构成风险簇，按弱市默认跳过保现金",
+      "rps120": 92.24
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "reason": "核力发电板块未入top5、1风险因子(偿债/现金短债比0.26)、IV 500ETF深=1.0极紧，弱市下不追",
+      "rps120": 88.44
+    },
+    {
+      "code": "601998",
+      "name": "中信银行",
+      "reason": "RPS120=93.06扩展区但无豁免(1风险因子/业绩+4.6%未超50%)+margin deleveraging(chg5 -4.22%)，跳过",
+      "rps120": 93.06
+    },
+    {
+      "code": "002966",
+      "name": "苏州银行",
+      "reason": "margin deleveraging(net5_repay_days=5, chg5 -10.67%)+城商行未入top5+IV tight(1.0)，弱市跳过",
+      "rps120": 91.79
+    },
+    {
+      "code": "301080",
+      "name": "百普赛斯",
+      "reason": "RPS120=99.78>95%封顶(动量过热均值回归风险)+dist_ma5_pct=14.5%追高，跳过",
+      "rps120": 99.78
+    },
+    {
+      "code": "301529",
+      "name": "福赛科技",
+      "reason": "RPS120=99.4>95%封顶+dist_ma10_pct=15.1%/dist_ma20_pct=22.6%严重超买，跳过",
+      "rps120": 99.4
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "FOMC 10-29按兵不动(3.75%-4.00%)但库克、哈马克两位票委投反对票支持加息25bp，12月加息概率82.5%——鹰派暂停对A股是次日偏空信号，弱市勿抢跑（来源：新浪财经/中信证券固收 2026-10-29）",
+      "type": "observation",
+      "tags": [
+        "timing",
+        "macro"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "鹰派会议纪要+加息预期抬升压制风险偏好，A股科技成长次日承压"
+    },
+    {
+      "text": "弱市(breadth 0.89:1、0/3指数绿)+IV极度恐慌(avg rank 0.80)叠加时，即使催化极强(广汇能源Q3净利+842%)+RPS合规也默认跳过——弱市是保现金的充分理由，不必强制开仓",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h144",
+      "mechanism": "弱市中开仓时机偏早，margin deleveraging+高IV+板块未确认构成风险簇"
+    },
+    {
+      "text": "航运港口热门但龙头锦江航运dist_ma5=11.9%被Rule 2b拦截——热门板块不覆盖追高风险，验证h027",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "板块热度推高短期涨幅，偏离均线过远时均值回归风险主导"
+    },
+    {
+      "text": "RPS>95%封顶规则再次过滤策略池约半数候选(百普赛斯99.78/福赛科技99.4/比音勒芬98.8等)——动量极致拥挤时跳过正确，验证h151",
+      "type": "rule",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "RPS>95区间rank-IC为负，顶部动量股前向收益最差"
+    }
+  ],
+  "market_summary": "Breadth 0.89:1偏弱(2522涨/2819跌, 0/3指数绿, 涨停45/跌停18)；IV极度恐慌(avg_iv_rank 0.80, 500ETF/创业板/500ETF深均1.0)；FOMC 10-29按兵不动但鹰派(2票委支持加息, 12月加息概率82.5%, 新浪财经/中信证券固收)压制风险偏好。板块防御化：酒店餐饮(+3.88%)/航运港口(+3.19%, 苏伊士红海航线恢复驱动)/医疗服务/白色家电/白酒走强，数字媒体/影视/游戏领跌。持仓1/3在热门板块，3/10仓位、现金90.59%，弱市默认保现金不开新仓。",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎防守"
+}

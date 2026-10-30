@@ -1,0 +1,56 @@
+{
+  "as_of": "2026-10-30",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 24,
+    "new": 1,
+    "pending": 1,
+    "expired": 0,
+    "ai_retired": 6,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 21,
+    "decided": 2,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 0,
+    "fetch_errors": 0,
+    "empty_days": 6,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 1,
+    "kept": 0,
+    "skipped": 1,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261214-514277a6",
+        "name": "美国G20峰会（迈阿密）",
+        "decision": "skip",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "G20峰会为多边论坛，非系统性政策事件，且与已有关税休战到期等事件重叠，影响有限"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1448,
+    "tokens_out": 88
+  },
+  "pending_items": []
+}

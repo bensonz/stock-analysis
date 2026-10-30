@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-10-29",
+  "lastUpdated": "2026-10-30",
   "hypotheses": [
     {
       "id": "h001",
@@ -2712,7 +2712,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-10-27",
+      "lastTested": "2026-10-30",
       "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes.",
       "evidence": {
         "supporting": [
@@ -2979,13 +2979,17 @@
           {
             "date": "2026-10-27",
             "detail": "Sector heat不等于stock momentum：航运港口今日top5(+1.65%)，但青岛港/锦江航运现价均低于MA5/MA10/MA20(回撤中)，板块指数由涨停龙头拉动而二线标的滞后回撤，说明资金聚焦龙头、二线买点未到"
+          },
+          {
+            "date": "2026-10-30",
+            "detail": "航运港口热门但龙头锦江航运dist_ma5=11.9%被Rule 2b拦截——热门板块不覆盖追高风险，验证h027"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 66,
+      "sampleSize": 67,
       "hitRate": 1.0,
-      "confidence": 0.985,
+      "confidence": 0.986,
       "tags": [
         "entry-filter",
         "timing",
@@ -6906,7 +6910,7 @@
       "type": "heuristic",
       "status": "validated",
       "created": "2026-08-06",
-      "lastTested": "2026-10-29",
+      "lastTested": "2026-10-30",
       "mechanism": "强基本面的股票在弱市中同样会跟随大盘回调——市场beta在短期压倒alpha。弱breadth环境中开仓应更严格或减半仓位。",
       "evidence": {
         "supporting": [
@@ -6937,6 +6941,10 @@
           {
             "date": "2026-10-29",
             "detail": "青岛港10-28开仓(9.65)今日-1.66%且距止损仅3.37%(stop_proximity WATCH)，同日开仓的中国石油+1.13%——弱市开仓即使标的0风险、创新高，时机仍偏早，验证h144；弱市应更小仓位或等breadth改善再入场。"
+          },
+          {
+            "date": "2026-10-30",
+            "detail": "弱市(breadth 0.89:1、0/3指数绿)+IV极度恐慌(avg rank 0.80)叠加时，即使催化极强(广汇能源Q3净利+842%)+RPS合规也默认跳过——弱市是保现金的充分理由，不必强制开仓"
           }
         ],
         "contradicting": [
@@ -6946,9 +6954,9 @@
           }
         ]
       },
-      "sampleSize": 8,
-      "hitRate": 0.875,
-      "confidence": 0.8,
+      "sampleSize": 9,
+      "hitRate": 0.889,
+      "confidence": 0.818,
       "tags": [
         "timing",
         "position-sizing"
@@ -7130,7 +7138,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-08-11",
-      "lastTested": "2026-10-28",
+      "lastTested": "2026-10-30",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -7205,13 +7213,17 @@
           {
             "date": "2026-10-28",
             "detail": "今日领涨板块(通信设备+6.06%/元件+4.96%/自动化设备+5.33%)内策略池候选RPS120全部>95%(景旺95.87/崇达97.27/金禄97.21/一博98.94)，被Rule 2封顶规则拦截；通过RPS+MA门槛的候选反而落在石油石化/航运港口/银行。热门板块动量拥挤时，可买标的会自然外溢到次热但有真实产业动能的板块，不必强行买热门板块的高RPS股。"
+          },
+          {
+            "date": "2026-10-30",
+            "detail": "RPS>95%封顶规则再次过滤策略池约半数候选(百普赛斯99.78/福赛科技99.4/比音勒芬98.8等)——动量极致拥挤时跳过正确，验证h151"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 18,
+      "sampleSize": 19,
       "hitRate": 1.0,
-      "confidence": 0.95,
+      "confidence": 0.952,
       "tags": [
         "entry-filter"
       ],
@@ -9195,6 +9207,34 @@
       "confidence": 0.6,
       "tags": [
         "position-sizing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h218",
+      "text": "FOMC 10-29按兵不动(3.75%-4.00%)但库克、哈马克两位票委投反对票支持加息25bp，12月加息概率82.5%——鹰派暂停对A股是次日偏空信号，弱市勿抢跑（来源：新浪财经/中信证券固收 2026-10-29）",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-10-30",
+      "lastTested": "2026-10-30",
+      "mechanism": "鹰派会议纪要+加息预期抬升压制风险偏好，A股科技成长次日承压",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-10-30",
+            "detail": "FOMC 10-29按兵不动(3.75%-4.00%)但库克、哈马克两位票委投反对票支持加息25bp，12月加息概率82.5%——鹰派暂停对A股是次日偏空信号，弱市勿抢跑（来源：新浪财经/中信证券固收 2026-10-29）"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "timing",
+        "macro"
       ],
       "parentRule": null,
       "retiredDate": null,
