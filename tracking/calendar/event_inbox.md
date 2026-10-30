@@ -14,7 +14,7 @@
 > `date`、`tz` (US=影响其后第一个A股交易日 / CN=当日)、`kind`、`note`。不要改 `ai:`、`src:` 和 `id:` 三行（🤖 可留可删）。
 > 标题日期 = A股影响日，由 date+tz 推算，重写时刷新。规则与局限: docs/EVENT_INBOX/DECISIONS.md
 
-_更新: 2026-10-30 · 共 24 条 · 待定 0 条_
+_更新: 2026-10-30 · 共 25 条 · 待定 0 条_
 
 ## 2026-10-30 (T-0) 美国 — 美国9月核心PCE物价指数环比
 - [x] keep 🤖   impact: medium   direction: two_sided
@@ -87,6 +87,14 @@ _更新: 2026-10-30 · 共 24 条 · 待定 0 条_
   ai: 跳过 · low/supportive · 产品功能上线，非系统性政策或宏观事件，对A股大盘影响有限（deepseek-v4-pro，2026-10-16）
   src: wallstreetcn imp=4 北京 2026-10-31 12:02 |
   id: wscn-20261031-c88c7231
+
+## 2026-11-03 (T-4) 美国 — 美国Marvell洽谈收购Lumentum（最快11月2日当周宣布）
+- [-] keep 🤖   impact: low   direction: two_sided
+  date: 2026-11-02   tz: US   kind: other
+  note:
+  ai: 跳过 · low/two_sided · 单一公司并购事件，非系统性事件，对A股整体影响有限（deepseek-v4-pro，2026-10-30）
+  src: wallstreetcn imp=4 北京 2026-11-02 12:02 |
+  id: wscn-20261102-3b7458b3
 
 ## 2026-11-04 (T-5) 马耳他 — 马耳他以色列议会选举投票结束，最终结果11月4日正式公布
 - [-] keep 🤖   impact: low   direction: two_sided

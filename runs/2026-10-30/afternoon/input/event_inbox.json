@@ -1,0 +1,56 @@
+{
+  "as_of": "2026-10-30",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 25,
+    "new": 1,
+    "pending": 1,
+    "expired": 0,
+    "ai_retired": 0,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 22,
+    "decided": 2,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 0,
+    "fetch_errors": 0,
+    "empty_days": 6,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 1,
+    "kept": 0,
+    "skipped": 1,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261102-3b7458b3",
+        "name": "美国Marvell洽谈收购Lumentum（最快11月2日当周宣布）",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司并购事件，非系统性事件，对A股整体影响有限"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1459,
+    "tokens_out": 78
+  },
+  "pending_items": []
+}

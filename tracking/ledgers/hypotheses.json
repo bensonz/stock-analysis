@@ -2501,7 +2501,7 @@
       "type": "signal",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-10-27",
+      "lastTested": "2026-10-30",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -2612,6 +2612,10 @@
           {
             "date": "2026-10-27",
             "detail": "持仓健康+margin adding+板块第3，恐慌日也不加仓：iv_rank 0.8351高位+普跌tape下，加仓等于单票集中风险，HOLD即为最优解"
+          },
+          {
+            "date": "2026-10-30",
+            "detail": "齐鲁银行持有第11日浮盈仅+1.21%且今日-3.6%回吐，距15日时间止损（<3%浮盈）还剩约4个交易日；今日恰逢Q3披露日，先看业绩是否给催化，若明后日仍无起色应按h024思路提前处理而非等精确触发。"
           }
         ],
         "contradicting": [
@@ -2625,9 +2629,9 @@
           }
         ]
       },
-      "sampleSize": 29,
-      "hitRate": 0.931,
-      "confidence": 0.903,
+      "sampleSize": 30,
+      "hitRate": 0.933,
+      "confidence": 0.906,
       "tags": [
         "exit-rule",
         "timing"
@@ -4644,7 +4648,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-10-29",
+      "lastTested": "2026-10-30",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4811,11 +4815,15 @@
           {
             "date": "2026-10-29",
             "detail": "全球存储芯片财报周（三星Q3芯片利润不及预期、SK海力士财报、韩KOSPI-3%）是今日科技暴跌的导火索——海外半导体龙头财报是A股硬件链的系统性事件，财报周前应主动降低科技暴露。（来源：新浪财经/中证报）"
+          },
+          {
+            "date": "2026-10-30",
+            "detail": "恐慌日热点全在防御板块（酒店餐饮/白酒/航运港口/白电），跌幅榜全是科技（通信设备-7.25%/元件-6.16%），隔夜美股科技重挫（谷歌-12.34%/英特尔-13%，新浪美股热点）放大A股科技卖压——科技→防御轮动延续。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 41,
+      "sampleSize": 42,
       "hitRate": 1.0,
       "confidence": 0.977,
       "tags": [
@@ -4832,7 +4840,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-10-29",
+      "lastTested": "2026-10-30",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -5027,11 +5035,15 @@
           {
             "date": "2026-10-29",
             "detail": "hard block（涨跌比0.17:1/52跌停）再次阻止了恐慌日对业绩超预期个股（广汇能源Q3+842%、中国广核+7.22%）的FOMO开仓——即便个股催化真实，弱市禁开新仓是正确默认。"
+          },
+          {
+            "date": "2026-10-30",
+            "detail": "panic硬封锁再次挡住诱人候选：锦江航运（航运港口top5、RPS120 92.11、今日业绩跳空）即使没有硬封锁也已因dist_ma5 9.2%被Rule 2b拦截；机械层sizing_multiplier=0是正确默认，判断层无条件服从。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 48,
+      "sampleSize": 49,
       "hitRate": 1.0,
       "confidence": 0.98,
       "tags": [

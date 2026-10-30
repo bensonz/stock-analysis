@@ -1,0 +1,52 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 105939,
+  "output_tokens": 12283,
+  "rounds": 2,
+  "duration_sec": 198.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年10月30日 大跌 原因 板块",
+        "max_results": 5
+      },
+      "result_length": 3615
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "齐鲁银行 2026年10月30日 股价 城商行",
+        "max_results": 5
+      },
+      "result_length": 3372
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "航运港口板块 青岛港 2026年10月 上涨",
+        "max_results": 5
+      },
+      "result_length": 3371
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "中国石油 2026年10月30日 油价 三季报",
+        "max_results": 5
+      },
+      "result_length": 1744
+    }
+  ],
+  "fallback_used": false
+}
