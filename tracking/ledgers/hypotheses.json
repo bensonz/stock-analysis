@@ -1088,7 +1088,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-07-31",
+      "lastTested": "2026-11-02",
       "mechanism": "Cheap volatility means trend continuation can persist, but upside surprise from fresh entries comes from proper setup quality, not from paying up far above moving averages.",
       "evidence": {
         "supporting": [
@@ -1203,6 +1203,10 @@
           {
             "date": "2026-07-31",
             "detail": "When IV Rank is extreme (84%+ overall) AND breadth is euphoric (5:1, 0跌停), this historically marks a capitulation bounce. The 0-risk, high-score names in hot sectors are the best vehicles — tight stops handle downside if wrong."
+          },
+          {
+            "date": "2026-11-02",
+            "detail": "'极度恐慌'IV标签≠当下市场恐慌：breadth 5.72:1+3/3指数全绿+132涨停，但iv_sentiment整体signal为'极度恐慌'(avg_iv_rank 0.82)——高rank是7月暴跌残留在252日回看窗口所致；机械层权威，breadth/指数定仓位，IV只做油门，不因标签冻结"
           }
         ],
         "contradicting": [
@@ -1212,9 +1216,9 @@
           }
         ]
       },
-      "sampleSize": 29,
-      "hitRate": 0.966,
-      "confidence": 0.935,
+      "sampleSize": 30,
+      "hitRate": 0.967,
+      "confidence": 0.938,
       "tags": [
         "timing",
         "position-sizing",
@@ -1673,13 +1677,17 @@
           {
             "date": "2026-11-02",
             "detail": "今日强盘(涨跌比6.7:1、创业板+3.28%)领涨板块是数字媒体/游戏/软件，而策略池25只全部是银行/煤炭/石油/港口/核电/医药等防御或周期股——池子与市场领导力结构性错配。在热门板块不在池内时返回空仓是正确的纪律执行，但也暴露了池子来源(cheesefortune_intersection)的防御/价值偏好缺口，应反馈给流水线。"
+          },
+          {
+            "date": "2026-11-02",
+            "detail": "候选池与热点板块零对齐：今日TMT领涨(数字媒体+11.26%/游戏+8.3%/软件开发+6.54%)，而strategy_pool(cheesefortune_intersection)27只无一只属于这些行业，全部为银行/煤炭/航运/能源/汽车/电力——筛选源(基本面交集)滞后于资金驱动的板块轮动，应在流水线层引入板块动量约束，而非决策层强行买入冷门行业"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 103,
+      "sampleSize": 104,
       "hitRate": 1.0,
-      "confidence": 0.99,
+      "confidence": 0.991,
       "tags": [
         "sector",
         "entry-filter"
@@ -4656,7 +4664,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-10-30",
+      "lastTested": "2026-11-02",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4827,13 +4835,17 @@
           {
             "date": "2026-10-30",
             "detail": "恐慌日热点全在防御板块（酒店餐饮/白酒/航运港口/白电），跌幅榜全是科技（通信设备-7.25%/元件-6.16%），隔夜美股科技重挫（谷歌-12.34%/英特尔-13%，新浪美股热点）放大A股科技卖压——科技→防御轮动延续。"
+          },
+          {
+            "date": "2026-11-02",
+            "detail": "risk-on轮动确认：贵金属/城商行/油气/煤炭/工业金属集体bottom5，防御红利主线失血，与近期齐鲁银行/宁波银行止损记录一致；持仓中国石油(油气链)需盯'行业冷3日'卖出规则"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 42,
+      "sampleSize": 43,
       "hitRate": 1.0,
-      "confidence": 0.977,
+      "confidence": 0.978,
       "tags": [
         "sector",
         "exit-rule"
@@ -7245,13 +7257,17 @@
           {
             "date": "2026-11-02",
             "detail": "RPS>95%封顶再次过滤掉策略池约16/25只候选(rps120 96.5-99.8)，与h151一致：动量极致拥挤时均值回归风险高，此规则不可移除。"
+          },
+          {
+            "date": "2026-11-02",
+            "detail": "RPS>95封顶+MA距离纪律继续过滤：池内多只RPS120>95且rule2_over_extended=true(百普赛斯99.83/福赛99.51/国恩98.95/药明康德98.47)，今日无一可买——纪律过滤的是拥挤动量，不是机会"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 20,
+      "sampleSize": 21,
       "hitRate": 1.0,
-      "confidence": 0.955,
+      "confidence": 0.957,
       "tags": [
         "entry-filter"
       ],

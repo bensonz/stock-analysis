@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-02",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1793603138.4263601,
+      "errors": [],
+      "end": 1793603197.8843951,
+      "duration_sec": 59.5
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 9341,
+      "tokens": {
+        "input_tokens": 120898,
+        "output_tokens": 18375
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 380.7,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1793603578.623961,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=104",
+        "Hypothesis: Updated h017 (rule): +1 supporting evidence → hitRate=97%, n=30",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=43",
+        "Hypothesis: Updated h151 (rule): +1 supporting evidence → hitRate=100%, n=21",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-11-02",
+        "status": "ok",
+        "checked": 2,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "end": 1793603579.078031,
+      "duration_sec": 0.5
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 440.7
+  }
+}

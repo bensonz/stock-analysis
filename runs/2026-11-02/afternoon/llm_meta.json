@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 120898,
+  "output_tokens": 18375,
+  "rounds": 2,
+  "duration_sec": 380.7,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月2日 数字媒体 游戏 软件开发 大涨 原因",
+        "max_results": 5
+      },
+      "result_length": 2846
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "航运 港口 运价上调 马士基 达飞 远东 欧洲 2026年11月",
+        "max_results": 5
+      },
+      "result_length": 3377
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "中国广核 2026年三季报 净利润 增长",
+        "max_results": 5
+      },
+      "result_length": 3429
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月 板块轮动 贵金属 银行 煤炭 下跌 科技上涨",
+        "max_results": 5
+      },
+      "result_length": 3281
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "国际油价 布伦特原油 2026年11月 走势",
+        "max_results": 5
+      },
+      "result_length": 3656
+    }
+  ],
+  "fallback_used": false
+}

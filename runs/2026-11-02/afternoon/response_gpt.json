@@ -1,0 +1,183 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "数字媒体",
+        "5d_pct": 11.26,
+        "trend": "accelerating"
+      },
+      {
+        "name": "影视院线",
+        "5d_pct": 9.87,
+        "trend": "accelerating"
+      },
+      {
+        "name": "游戏Ⅱ",
+        "5d_pct": 8.3,
+        "trend": "accelerating"
+      },
+      {
+        "name": "电视广播Ⅱ",
+        "5d_pct": 7.0,
+        "trend": "steady"
+      },
+      {
+        "name": "软件开发",
+        "5d_pct": 6.54,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "贵金属",
+        "5d_pct": -3.16,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "城商行Ⅱ",
+        "5d_pct": -2.09,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": -1.63,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "煤炭开采",
+        "5d_pct": -1.48,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "工业金属",
+        "5d_pct": -1.2,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/2 positions in hot sectors (青岛港=航运港口中性, 中国石油=油气开采Ⅱ bottom5)",
+    "regime": "risk-on: TMT领涨(数字媒体/影视/游戏/软件)，防御红利(贵金属/银行/煤炭/油气)集体流出"
+  },
+  "position_decisions": [
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "航运港口今日未入top/bottom5，板块中性；浮盈+2.59%(第4日)未触发-5%硬止损(9.17)/首3日-3%/15日时间止损；运费上调催化仍新鲜(马士基10-29宣布11-16起上调远东至北欧/地中海运价)；margin neutral，维持持有",
+      "sector_rank": "middle (not in top/bottom5 today)",
+      "new_stop": null,
+      "pnl_pct": 2.59,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "action": "HOLD",
+      "reason": "油气开采Ⅱ今日入bottom5(-1.63%)但仅冷1天，不满足'行业冷3日才卖'；浮盈+5.73%(第4日)未触发任何卖出规则；Q3净利+21.6%催化新鲜，个股+1.3%逆板块抗跌；布伦特$113高位支撑油价逻辑；明日若油气链仍留bottom5则升级关注",
+      "sector_rank": "bottom5 (cold 1d, watch)",
+      "new_stop": null,
+      "pnl_pct": 5.73,
+      "days_held": 4,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "reason": "煤炭开采今日bottom5(-1.48%)，行业冷——Rule 1硬不买区(h019)，个股RPS/VCP再强也不进场",
+      "rps120": 93.89
+    },
+    {
+      "code": "002966",
+      "name": "苏州银行",
+      "reason": "城商行Ⅱ今日bottom5(-2.09%)+融资盘deleveraging(chg5 -21.55%)，行业冷",
+      "rps120": 93.52
+    },
+    {
+      "code": "601998",
+      "name": "中信银行",
+      "reason": "RPS120 94.01处扩展区(92-95)但无豁免(2风险/行业非top10/Q3净利+3.56%<50%)；股份制银行Ⅱ今日不在top5",
+      "rps120": 94.01
+    },
+    {
+      "code": "301550",
+      "name": "斯菱智驱",
+      "reason": "dist_ma20 +14.7%>12%，Rule 2b追高违规；汽车零部件今日不在top5",
+      "rps120": 93.2
+    },
+    {
+      "code": "601083",
+      "name": "锦江航运",
+      "reason": "dist_ma5 +7.4%>6%、dist_ma10 +8.5%>8%，Rule 2b追高违规",
+      "rps120": 92.94
+    },
+    {
+      "code": "603565",
+      "name": "中谷物流",
+      "reason": "航运今日不在top5；RPS120 93.88扩展区需豁免(149%口径待核实)；IV代理300ETF 0.838偏高，暂缓",
+      "rps120": 93.88
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "能源链今日转冷(油气开采Ⅱ-1.63%)；2风险(偿债现金短债比0.29/质押77%)；margin deleveraging，行业不在top5",
+      "rps120": 92.55
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "reason": "RPS120 89.73甜点区+MA全合规+Q3单季净利+36.08%(证券之星/界面新闻)，但电力/核电今日不在top5、IV代理500ETF深1.0极高，缺板块动量确认——WATCH待板块入top5",
+      "rps120": 89.73
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "候选池与热点板块零对齐：今日TMT领涨(数字媒体+11.26%/游戏+8.3%/软件开发+6.54%)，而strategy_pool(cheesefortune_intersection)27只无一只属于这些行业，全部为银行/煤炭/航运/能源/汽车/电力——筛选源(基本面交集)滞后于资金驱动的板块轮动，应在流水线层引入板块动量约束，而非决策层强行买入冷门行业",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "基本面筛选信号(芝士财富交集)天然滞后于资金驱动的板块轮动，导致池子与当日最强板块错位"
+    },
+    {
+      "text": "'极度恐慌'IV标签≠当下市场恐慌：breadth 5.72:1+3/3指数全绿+132涨停，但iv_sentiment整体signal为'极度恐慌'(avg_iv_rank 0.82)——高rank是7月暴跌残留在252日回看窗口所致；机械层权威，breadth/指数定仓位，IV只做油门，不因标签冻结",
+      "type": "heuristic",
+      "tags": [
+        "timing",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h017",
+      "mechanism": "IV rank是相对历史分位，极端行情残留在回看窗口内会系统性抬高rank，与当前盘面脱节"
+    },
+    {
+      "text": "risk-on轮动确认：贵金属/城商行/油气/煤炭/工业金属集体bottom5，防御红利主线失血，与近期齐鲁银行/宁波银行止损记录一致；持仓中国石油(油气链)需盯'行业冷3日'卖出规则",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "风险偏好切换驱动防御/成长跷跷板，防御持仓即使个股抗跌也受板块重力拖累"
+    },
+    {
+      "text": "RPS>95封顶+MA距离纪律继续过滤：池内多只RPS120>95且rule2_over_extended=true(百普赛斯99.83/福赛99.51/国恩98.95/药明康德98.47)，今日无一可买——纪律过滤的是拥挤动量，不是机会",
+      "type": "rule",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "RPS极端高位=均值回归风险；MA偏离过大=短期追高，二者叠加是V1实测最差入场区"
+    }
+  ],
+  "market_summary": "市场强势普涨：上证+1.08%/深成+1.63%/创业板+1.87%/科创50+3.11%，breadth 5.72:1(4681涨/818跌)、132涨停/11跌停，entry_regime=strong允许全仓。IV整体标'极度恐慌'(avg_iv_rank 0.82)为7月暴跌残留，仅作油门不冻结。热点全部集中TMT(数字媒体+11.26%/影视院线+9.87%/游戏+8.3%/电视广播+7.0%/软件开发+6.54%)，防御红利(贵金属-3.16%/城商行-2.09%/油气-1.63%/煤炭-1.48%)集体bottom5，risk-on轮动明确。但strategy_pool 27只无一只TMT，候选池与领涨板块零对齐，故不强行开新仓，持币待热点与候选池对齐。持仓2只均盈利、无卖出触发。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}
