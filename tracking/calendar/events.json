@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-30",
+  "updated": "2026-11-02",
   "note": "手动维护的前瞻事件日历（scripts/event_calendar.py 读取；到期/失效条目请及时清理）。tz=US 的事件影响其后第一个A股交易日。direction: risk(默认)|supportive|two_sided。 【数字纪律】notes 中禁止出现未经复测的数字或\"历史规律\"——任何统计口径的断言必须先用真实数据复测并标注 n 与口径（教训: 2026-08-04 政治局+2%小盘占优系模型folklore, 实测≈0, 见 git log）。 每条必须带 source（URL或可重算的脚本/口径说明）。",
   "events": [
     {
@@ -405,6 +405,20 @@
       "inbox_id": "wscn-20261030-6f9f0b46",
       "decided_by": "ai",
       "reason": "日本央行利率决议影响全球套息交易与亚太风险偏好"
+    },
+    {
+      "date": "2026-11-02",
+      "tz": "CN",
+      "name": "中国金融管理部门11月2日将召开会议，研究推动支持资本市场工具使用",
+      "kind": "other",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "direction": "supportive",
+      "notes": "北京时间 2026-11-02 12:02（华尔街见闻财经日历）",
+      "source": "华尔街见闻财经日历 imp=4",
+      "inbox_id": "wscn-20261102-2f04b95c",
+      "decided_by": "ai",
+      "reason": "金融管理部门研究推动支持资本市场工具使用，政策信号明确，利好A股情绪"
     }
   ]
 }

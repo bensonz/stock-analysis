@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-10-30",
+  "lastUpdated": "2026-11-02",
   "hypotheses": [
     {
       "id": "h001",
@@ -1258,7 +1258,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-10-28",
+      "lastTested": "2026-11-02",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1669,11 +1669,15 @@
           {
             "date": "2026-10-28",
             "detail": "强breadth(4.91:1)≠可以开仓：今日策略池/enriched候选全部集中在防御板块(银行/石油/煤炭/航运)，而当日领导板块是制造成长(自动化设备/塑料/汽车零部件/电机)。Rule 1板块优先决定空仓——breadth强只决定sizing，不决定方向。"
+          },
+          {
+            "date": "2026-11-02",
+            "detail": "今日强盘(涨跌比6.7:1、创业板+3.28%)领涨板块是数字媒体/游戏/软件，而策略池25只全部是银行/煤炭/石油/港口/核电/医药等防御或周期股——池子与市场领导力结构性错配。在热门板块不在池内时返回空仓是正确的纪律执行，但也暴露了池子来源(cheesefortune_intersection)的防御/价值偏好缺口，应反馈给流水线。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 102,
+      "sampleSize": 103,
       "hitRate": 1.0,
       "confidence": 0.99,
       "tags": [
@@ -2501,7 +2505,7 @@
       "type": "signal",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-10-30",
+      "lastTested": "2026-11-02",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -2616,6 +2620,10 @@
           {
             "date": "2026-10-30",
             "detail": "齐鲁银行持有第11日浮盈仅+1.21%且今日-3.6%回吐，距15日时间止损（<3%浮盈）还剩约4个交易日；今日恰逢Q3披露日，先看业绩是否给催化，若明后日仍无起色应按h024思路提前处理而非等精确触发。"
+          },
+          {
+            "date": "2026-11-02",
+            "detail": "齐鲁银行Q3净利+12.47%(网易/每经)却在大盘6.7:1宽度的强盘里-3.28%：业绩利好兑现反跌=板块正在派发，相对弱势比基本面数字更有信息量。"
           }
         ],
         "contradicting": [
@@ -2629,9 +2637,9 @@
           }
         ]
       },
-      "sampleSize": 30,
-      "hitRate": 0.933,
-      "confidence": 0.906,
+      "sampleSize": 31,
+      "hitRate": 0.935,
+      "confidence": 0.909,
       "tags": [
         "exit-rule",
         "timing"
@@ -6771,7 +6779,7 @@
       "type": "observation",
       "status": "hypothesis",
       "created": "2026-08-04",
-      "lastTested": "2026-10-15",
+      "lastTested": "2026-11-02",
       "mechanism": "高IV+强广度=恐慌消退初期的反弹窗口，应参与但控制仓位（本次总仓位~38%，保留62%现金应对高IV冲击）",
       "evidence": {
         "supporting": [
@@ -6782,13 +6790,17 @@
           {
             "date": "2026-10-15",
             "detail": "IV全线极端高位（整体IV Rank均值0.93、创业板/500ETF/深100ETF均=1.0）确认恐慌情绪；按IV>75%只买最强setups的规则，叠加hard block，今日正确动作是持币。"
+          },
+          {
+            "date": "2026-11-02",
+            "detail": "高IV(平均IV rank 0.81，300/500/创业板ETF均>0.83)与强价格盘并存：期权定价的是10月末那波剧烈波动的延续，而非今日方向。IV>75%只买最强setup——今日无候选通过板块+追高门槛，IV约束未生效但不改变空仓结论。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 2,
+      "sampleSize": 3,
       "hitRate": 1.0,
-      "confidence": 0.75,
+      "confidence": 0.8,
       "tags": [
         "timing",
         "position-sizing"
@@ -7150,7 +7162,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-08-11",
-      "lastTested": "2026-10-30",
+      "lastTested": "2026-11-02",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -7229,13 +7241,17 @@
           {
             "date": "2026-10-30",
             "detail": "RPS>95%封顶规则再次过滤策略池约半数候选(百普赛斯99.78/福赛科技99.4/比音勒芬98.8等)——动量极致拥挤时跳过正确，验证h151"
+          },
+          {
+            "date": "2026-11-02",
+            "detail": "RPS>95%封顶再次过滤掉策略池约16/25只候选(rps120 96.5-99.8)，与h151一致：动量极致拥挤时均值回归风险高，此规则不可移除。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 19,
+      "sampleSize": 20,
       "hitRate": 1.0,
-      "confidence": 0.952,
+      "confidence": 0.955,
       "tags": [
         "entry-filter"
       ],

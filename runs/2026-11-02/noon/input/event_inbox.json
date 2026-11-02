@@ -1,0 +1,96 @@
+{
+  "as_of": "2026-11-02",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 23,
+    "new": 6,
+    "pending": 6,
+    "expired": 0,
+    "ai_retired": 6,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 15,
+    "decided": 2,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 0,
+    "fetch_errors": 0,
+    "empty_days": 6,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 6,
+    "kept": 1,
+    "skipped": 5,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261102-2f04b95c",
+        "name": "中国金融管理部门11月2日将召开会议，研究推动支持资本市场工具使用",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "supportive",
+        "reason": "金融管理部门研究推动支持资本市场工具使用，政策信号明确，利好A股情绪"
+      },
+      {
+        "id": "wscn-20261103-dc0bdae3",
+        "name": "美国苹果财报电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报电话会，非系统性事件，对A股整体影响有限"
+      },
+      {
+        "id": "wscn-20261104-cfbf44ca",
+        "name": "美国AMD财报电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报电话会，非系统性事件，对A股整体影响有限"
+      },
+      {
+        "id": "wscn-20261105-64707b65",
+        "name": "美国Coherent财报电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报电话会，非系统性事件，对A股整体影响有限"
+      },
+      {
+        "id": "wscn-20261105-f236f54f",
+        "name": "中国第九届上海进博会 + 虹桥论坛（11月5日-10日）",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "进博会为贸易展会，非系统性政策事件，对A股整体影响有限"
+      },
+      {
+        "id": "wscn-20261106-c0e222c4",
+        "name": "美国Lumentum财报电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报电话会，非系统性事件，对A股整体影响有限"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1647,
+    "tokens_out": 397
+  },
+  "pending_items": []
+}

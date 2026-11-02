@@ -1,7 +1,7 @@
 {
   "code": "601665",
   "name": "齐鲁银行",
-  "status": "active",
+  "status": "closed",
   "thesis": "城商行0风险因子+RPS120=91.14甜点区+MA距离全部合规(无追高)+margin adding；银行板块10月普涨多股创新高(输入events)，房贷贴息政策+三季报窗口催化。IV 0.66偏高+银行未入今日top5→仅3%小仓",
   "entryDate": "2026-10-16",
   "entrySlot": "afternoon",
@@ -188,15 +188,25 @@
       "change_pct": 1.21,
       "action": "HOLD",
       "note": "城商行未入今日top/bottom5板块中性；现价6.70浮盈+1.21%(第11日)，今日-3.6%回吐但距硬止损6.29约6.5%；margin adding。注意15日时间止损(<3%浮盈)还剩约4个交易日，今日为Q3披露日，先看业绩是否给催化，不因一日回吐提前杀跌。"
+    },
+    {
+      "date": "2026-11-02",
+      "slot": "noon",
+      "price": 6.48,
+      "change_pct": -2.11,
+      "action": "SELL",
+      "shares": 3800,
+      "note": "城商行Ⅱ今日入bottom5(-1.42%)，个股-3.28%逆势下跌(大盘涨跌比6.7:1的强势盘)；Q3净利+12.47%利好兑现反跌=板块派发；距硬止损6.29仅2.93%(stop_proximity WARNING)，持仓12日浮亏-2.11%、15日时间止损临近，主动离场不等精确触发(h024)"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-11-02",
+  "exitPrice": 6.48,
+  "exitReason": "城商行Ⅱ今日入bottom5(-1.42%)，个股-3.28%逆势下跌(大盘涨跌比6.7:1的强势盘)；Q3净利+12.47%利好兑现反跌=板块派发；距硬止损6.29仅2.93%(stop_proximity WARNING)，持仓12日浮亏-2.11%、15日时间止损临近，主动离场不等精确触发(h024)",
+  "returnPct": -2.11,
+  "holdingDays": 10,
+  "lessonLearned": "",
   "createdAt": "2026-10-16T16:57:03.796806+08:00",
-  "updatedAt": "2026-10-30T15:10:04.102698+08:00",
-  "trackerVersion": "2.1"
+  "updatedAt": "2026-11-02T11:40:10.824975+08:00",
+  "trackerVersion": "2.1",
+  "exitSlot": "noon"
 }
