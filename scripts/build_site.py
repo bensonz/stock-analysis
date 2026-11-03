@@ -22,7 +22,7 @@ Data sources (数字纪律 — everything re-derivable):
     data/index_cache/sh000001.json, OHLC in sh000001_ohlc.json, so offline
     rebuilds still work (build degrades to cache, then to no overlay)
   - scripts/event_calendar.upcoming() → 未来事件窗口 section
-  - latest run input/regime.json + input/gex.json → header badges
+  - latest run input/gex.json → header badge
 
 Regenerate: python3 scripts/build_site.py
 Also runs automatically at the end of run_daily.py (non-fatal, pre-commit).
@@ -653,16 +653,6 @@ def load_badges(series: list[dict]) -> list[dict]:
     run_dir = next((p.get("run_dir") for p in reversed(series) if p.get("run_dir")), None)
     if not run_dir:
         return badges
-    try:
-        r = _read_json(Path(run_dir) / "input" / "regime.json")
-        if r.get("label"):
-            badges.append({
-                "k": "市场机制(只读)",
-                "v": r["label"],
-                "sub": f"IC20 {r.get('rolling_ic20', '?')} · 止损率10日 {r.get('pool_stop_rate10', '?')}",
-            })
-    except Exception:
-        pass
     try:
         g = _read_json(Path(run_dir) / "input" / "gex.json")
         overall = g.get("overall") or {}

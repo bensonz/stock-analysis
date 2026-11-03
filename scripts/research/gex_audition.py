@@ -18,7 +18,7 @@ Four questions (all point-in-time: state at T → outcome at/after T+1):
   Q2 Direction    — any signed next-session return difference? (expected: no)
   Q3 Dist-to-flip — does spot-vs-flip add anything beyond net-GEX sign?
   Q4 Our book     — does GEX state predict the gate-pool 3-session stop-rate?
-                    (reuses regime_detector.compute_stop_rate_series)
+                    (stop-rate math copied from the retired regime_detector)
 
 Returns are taken from the GEX history's OWN spot series (self-consistent).
 Every number here is regenerable by re-running this script.
@@ -244,14 +244,36 @@ def q3(all_pairs: dict[str, list[dict]]):
 # ----------------------------------------------------------------------------
 # Q4 — does GEX state predict our gate-pool stop-rate?
 # ----------------------------------------------------------------------------
+def _stop_rate_series(panel, stop_pct: float = -5.0, horizon: int = 3):
+    """Per-date share of the gate pool (rps60/120/250 all >= 80) whose
+    close-to-close low breached stop_pct within `horizon` sessions. Copied
+    from regime_detector.compute_stop_rate_series when that module was
+    retired (2026-11-03)."""
+    import pandas as pd
+    closes = panel["closes"]
+    worst = closes.rolling(horizon).min().shift(-horizon)
+    breach = (worst / closes - 1.0) * 100 <= stop_pct
+    gate = ((panel["rps60"] >= 80) & (panel["rps120"] >= 80)
+            & (panel["rps250"] >= 80))
+    out = {}
+    for i, date in enumerate(closes.index):
+        if i + horizon >= len(closes.index):
+            break
+        row_mask = gate.loc[date]
+        pool = row_mask[row_mask].index
+        if len(pool) < 30:
+            continue
+        out[date] = float(breach.loc[date, pool].mean())
+    return pd.Series(out).sort_index()
+
+
 def q4(raw_by_code: dict[str, list[dict]]):
     print("\n" + "=" * 74)
-    print("Q4 我们的池 — GEX状态 vs 门槛池3日止损率 (regime_detector复用)")
+    print("Q4 我们的池 — GEX状态 vs 门槛池3日止损率")
     print("=" * 74)
     import base_rates
-    import regime_detector as rd
     panel = base_rates.get_panel(None)
-    sr = rd.compute_stop_rate_series(panel)          # per-date forward-3d stop rate
+    sr = _stop_rate_series(panel)                    # per-date forward-3d stop rate
     stop = {str(i)[:10]: float(v) for i, v in sr.items()}
 
     # daily GEX aggregates

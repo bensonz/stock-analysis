@@ -3,8 +3,8 @@
 Scope discipline: this must stay a *second opinion* read alongside the
 CheeseForTune pool. It does not touch the hard RPS/MA gate in
 fetch_strategy_pool_local, and a failure must cost nothing but the artifact.
-That mirrors regime.json, which is deliberately display-only until there is
-out-of-sample evidence to graduate it.
+That mirrors the regime detector, which stayed display-only until its
+out-of-sample test failed and it was retired (2026-11-03).
 """
 import sys
 from pathlib import Path

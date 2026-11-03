@@ -1865,7 +1865,8 @@ def fetch_ifind_candidates() -> dict:
     Deliberately NOT wired into the hard RPS/MA gate in fetch_strategy_pool_local
     — this is a second opinion to read alongside the CheeseForTune pool, not a
     new trading trigger. Graduating it into decisions is a separate call that
-    should follow evidence, the same way regime.json is display-only.
+    should follow evidence, the same way the regime detector stayed
+    display-only (and was retired 2026-11-03 when the evidence never came).
     """
     try:
         import ifind_client
