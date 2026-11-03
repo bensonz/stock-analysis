@@ -57,14 +57,14 @@ TEMPERATURE = 1.0
 CLEANUP_TIMEOUT = 900
 MAX_VERIFY_ROUNDS = 2
 
-# Deep-report defaults: Fable 5 writes, DeepSeek judges/cleans. These are
+# Deep-report defaults: Opus 5.5 writes, DeepSeek judges/cleans. These are
 # deliberately LOCAL to deep reports — the daily pipeline keeps its own
 # LLM_PROVIDER default. Override per-run with --provider/--verify-provider,
 # or per-env with DEEP_REPORT_PROVIDER / DEEP_REPORT_VERIFY_PROVIDER;
-# ANTHROPIC_MODEL (env/.env) still wins over the Fable fallback.
+# ANTHROPIC_MODEL (env/.env) still wins over the Opus fallback.
 DEFAULT_WRITER_PROVIDER = "anthropic"
 DEFAULT_VERIFY_PROVIDER = "openai"
-FALLBACK_ANTHROPIC_MODEL = "claude-fable-5"
+FALLBACK_ANTHROPIC_MODEL = "claude-opus-5-5"
 
 
 def _resolve_providers(provider: str | None, verify_provider: str | None) -> tuple:
