@@ -107,7 +107,11 @@ qualitatively instead of inventing precision.
   only if justified by the data, a rough valuation anchor in the label.
 - **Never write a rating number yourself** — no `评级 N/5` anywhere. Code replaces every
   `{{评级}}` with the computed direction and rating, e.g. `看多 ｜ 评级 4/5（W=7.2）`
-  (in the title: just `评级 4/5（W=7.2）`).
+  (in the title: just `评级 4/5（W=7.2）`). That stamp is code output only.
+- **Never write a score in the article body** — no F/V/M/R values, no W, no "7.5 分",
+  no "W≈6.4". Scores live only in the `scorecard` block; in prose, argue from the facts
+  (a score number in prose is an unsourced claim to the verifier, and a W you compute
+  yourself can disagree with the one code stamps).
 - **The rating is computed from your scorecard** (see 评分卡 below), so your prose must agree
   with what the equation gives:
   ```

@@ -382,7 +382,9 @@ def extract_predictions_block(text: str) -> tuple:
         records = raw if isinstance(raw, list) else []
     except json.JSONDecodeError:
         records = []
-    return records, text[:m.start()] + text[m.end():]
+    # "\n", not "": as in extract_scorecard_block, the line above must not end
+    # up directly over the verify footer's "---" (a setext H2).
+    return records, text[:m.start()] + "\n" + text[m.end():]
 
 
 # --------------------------------------------------------------------------- #
@@ -458,20 +460,42 @@ def compute_rating(scores: dict) -> tuple:
     return W, band, direction
 
 
+def _title_h1(lines: list) -> int | None:
+    """Index of the report's title H1: the one carrying {{评级}}, else the one
+    naming 深度研究报告, else the first that is not a stray bare `# 报告`
+    (md_to_pdf.strip_placeholder_title drops that one), else the first H1."""
+    h1s = [i for i, ln in enumerate(lines) if ln.startswith("# ")]
+    for pick in (lambda ln: RATING_TOKEN in ln,
+                 lambda ln: "深度研究报告" in ln,
+                 lambda ln: ln[2:].strip() != "报告"):
+        hit = next((i for i in h1s if pick(lines[i])), None)
+        if hit is not None:
+            return hit
+    return h1s[0] if h1s else None
+
+
 def stamp_rating(text: str, rating, reason: str | None = None) -> str:
     """Write the code-computed rating into the report.
 
     rating = (W, band, direction) or None (scorecard missing/invalid: `reason`).
-    - the H1 gets "评级 {band}/5（W={W}）" in place of {{评级}} (else in place of
-      an old " · 评级 …" suffix, else appended);
+    - the title H1 (see _title_h1) gets "评级 {band}/5（W={W}）" in place of
+      {{评级}} (else in place of an old " · [方向 ｜ ]评级 …" suffix, else
+      appended);
     - every other {{评级}} gets "{direction} ｜ 评级 {band}/5（W={W}）";
-    - a 评级 N/5 the writer wrote anyway becomes the computed one (warned);
-    - if no 结论 line then carries the rating, one is inserted under the H1.
+    - a rating the writer wrote anyway is replaced in place (warned): a
+      "方向 ｜ 评级 N/5" span becomes the full computed form, so the writer's
+      direction never survives beside the computed one; a bare 评级 N/5
+      becomes "评级 {band}/5";
+    - a bold **结论：方向（…）** line with no rating gets its direction replaced;
+    - if no 结论 verdict line then carries the rating, one is inserted under
+      the title.
     None never becomes a guessed number: it stamps a visible 无法计算."""
     import re
     global _MODEL_RATING_RE
     if _MODEL_RATING_RE is None:
-        _MODEL_RATING_RE = re.compile(r"评级\s*[1-5]\s*[/／]\s*5")
+        _MODEL_RATING_RE = re.compile(
+            r"(?:(看多|看空|中性)\s*[｜|]\s*)?评级\s*[1-5]\s*[/／]\s*5"
+            r"(?:\s*[（(]\s*W\s*=\s*[\d.]+\s*[）)])?")
 
     if rating is None:
         head = f"评级 无法计算（scorecard {reason}）"
@@ -483,36 +507,38 @@ def stamp_rating(text: str, rating, reason: str | None = None) -> str:
         body = f"{direction} ｜ {head}"
         leftover = f"评级 {band}/5"
 
-    # Leftovers first, so the stamps below are never mistaken for them.
-    text, n = _MODEL_RATING_RE.subn(leftover, text)
-    if n:
-        print(f"  [deep_report] ⚠️ writer wrote its own 评级 N/5 {n}× — "
-              f"replaced with the computed '{leftover}'", file=sys.stderr)
-
-    h1 = re.search(r"^# .*$", text, re.M)
-    if h1:
-        line = h1.group(0)
-        if RATING_TOKEN in line:
-            line = line.replace(RATING_TOKEN, head, 1)
-        elif re.search(r"\s*·\s*评级.*$", line):
-            line = re.sub(r"\s*·\s*评级.*$", f" · {head}", line)
-        else:
-            line = f"{line.rstrip()} · {head}"
-        text = text[:h1.start()] + line + text[h1.end():]
-    text = text.replace(RATING_TOKEN, body)
-
-    if not any("结论" in ln and head in ln for ln in text.splitlines()):
-        verdict = f"**结论：{body}**\n\n"
-        h1 = re.search(r"^# .*$", text, re.M)
-        if h1:
-            nl = text.find("\n", h1.end())
-            if nl == -1:
-                text = text + "\n" + verdict
+    lines = text.split("\n")
+    t = _title_h1(lines)
+    found = 0
+    for i, ln in enumerate(lines):
+        if i == t:
+            if RATING_TOKEN in ln:
+                ln = ln.replace(RATING_TOKEN, head, 1)
             else:
-                text = text[:nl + 1] + verdict + text[nl + 1:]
+                m = re.search(r"\s*·\s*(?:(?:看多|看空|中性)\s*[｜|]\s*)?评级.*$", ln)
+                if m:
+                    found += bool(_MODEL_RATING_RE.search(m.group(0)))
+                    ln = ln[:m.start()] + f" · {head}"
+                else:
+                    ln = f"{ln.rstrip()} · {head}"
+            lines[i] = ln
+            continue
+        ln, n = _MODEL_RATING_RE.subn(lambda m: body if m.group(1) else leftover, ln)
+        found += n
+        if ln.startswith("**结论") and head not in ln and RATING_TOKEN not in ln:
+            ln = re.sub(r"^(\*\*结论[：:]\s*)(看多|看空|中性)", rf"\g<1>{body}", ln, count=1)
+        lines[i] = ln.replace(RATING_TOKEN, body)
+    if found:
+        print(f"  [deep_report] ⚠️ writer wrote its own 评级 N/5 {found}× — "
+              "replaced with the computed rating", file=sys.stderr)
+
+    if not any(re.match(r"^\**结论[：:]", ln) and head in ln for ln in lines):
+        verdict = [f"**结论：{body}**", ""]
+        if t is None:
+            lines[0:0] = verdict
         else:
-            text = verdict + text
-    return text
+            lines[t + 1:t + 1] = verdict
+    return "\n".join(lines)
 
 
 def log_scorecard(code: str, result: dict, report_path, path=None) -> Path:
@@ -980,10 +1006,12 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
         tout += totals["out"]
         rounds += totals["rounds"]
 
-    # The rating is the DRAFT's judgment: a scorecard a revise/cleanup pass
-    # re-emitted is dropped (revisions fix numbers, not judgments). Stamped
-    # only now, so "W=7.2" never reaches the number verifier.
+    # The rating and the bets are the DRAFT's judgment: a scorecard or
+    # predictions block a revise/cleanup pass re-emitted is dropped (revisions
+    # fix numbers, not judgments). Stamped only now, so "W=7.2" never reaches
+    # the number verifier.
     _, _, text = extract_scorecard_block(text)
+    _, text = extract_predictions_block(text)
     rating = compute_rating(scorecard) if scorecard is not None else None
     text = stamp_rating(text, rating, scorecard_error)
 

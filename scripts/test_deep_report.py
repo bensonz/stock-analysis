@@ -802,10 +802,70 @@ def test_stamp_rating_replaces_model_written_ratings(capsys):
     out = deep_report.stamp_rating(text, _RATING)
     lines = out.splitlines()
     assert lines[0] == "# 甲深度研究报告 · 评级 4/5（W=7.2）"
-    assert lines[1] == "**结论：看多 ｜ 评级 4/5（W=7.2）**"   # no 结论 carried the stamp
-    assert lines[3] == "**结论：看多 ｜ 评级 4/5（龙头）**"     # leftover → computed band
+    assert lines[1] == "**结论：看多 ｜ 评级 4/5（W=7.2）（龙头）**"  # replaced in place
+    assert out.count("结论") == 1                                   # no second verdict
     assert "评级 3" not in out and "我们给予评级 4/5。" in out
     assert "writer wrote its own 评级 N/5 3×" in capsys.readouterr().err
+
+
+def test_stamp_rating_model_direction_never_survives_beside_the_computed_one():
+    # the writer (or a revise pass) dropped the token and wrote 看多; code says 中性
+    text = ("# 甲深度研究报告 · 评级 4/5\n\n**结论：看多 ｜ 评级 4/5（标签）**\n正文\n"
+            "最终结论：看多 ｜ 评级 4/5\n")
+    out = deep_report.stamp_rating(text, (6.4, 3, "中性"))
+    lines = out.splitlines()
+    assert lines[0] == "# 甲深度研究报告 · 评级 3/5（W=6.4）"
+    assert lines[2] == "**结论：中性 ｜ 评级 3/5（W=6.4）（标签）**"
+    assert "最终结论：中性 ｜ 评级 3/5（W=6.4）" in out
+    assert "看多" not in out and out.count("**结论") == 1
+
+
+def test_stamp_rating_none_never_keeps_the_model_direction():
+    text = "# 甲深度研究报告\n**结论：看多 ｜ 评级 4/5（标签）**\n"
+    out = deep_report.stamp_rating(text, None, "missing")
+    assert out.splitlines()[1] == \
+        "**结论：方向 无法计算 ｜ 评级 无法计算（scorecard missing）（标签）**"
+    assert "看多" not in out and out.count("结论") == 1
+
+
+def test_stamp_rating_bold_verdict_without_a_rating_gets_its_direction_replaced():
+    out = deep_report.stamp_rating("# 甲深度研究报告 · {{评级}}\n**结论：看多（标签）**\n",
+                                   (6.4, 3, "中性"))
+    assert out.splitlines()[1] == "**结论：中性 ｜ 评级 3/5（W=6.4）（标签）**"
+    assert "看多" not in out and out.count("结论") == 1
+
+
+def test_stamp_rating_closing_line_does_not_count_as_the_verdict():
+    # only the closing restatement carries a rating: the verdict still goes under the H1
+    out = deep_report.stamp_rating("# 甲深度研究报告 · {{评级}}\n正文\n最终结论：{{评级}}\n",
+                                   _RATING)
+    assert out.splitlines()[1] == "**结论：看多 ｜ 评级 4/5（W=7.2）**"
+
+
+def test_stamp_rating_skips_a_stray_leading_report_heading():
+    import md_to_pdf
+    text = "# 报告\n\n# 乐鑫（688018）深度研究报告 · {{评级}}\n\n**结论：{{评级}}（好公司）**\n"
+    out = deep_report.stamp_rating(text, (6.2, 3, "中性"))
+    lines = out.splitlines()
+    assert lines[0] == "# 报告"
+    assert lines[2] == "# 乐鑫（688018）深度研究报告 · 评级 3/5（W=6.2）"
+    assert lines[4] == "**结论：中性 ｜ 评级 3/5（W=6.2）（好公司）**"
+    # the PDF step still drops the stray heading, leaving the stamped title first
+    assert md_to_pdf.strip_placeholder_title(out).splitlines()[0] == lines[2]
+
+
+def test_stamp_rating_inserts_verdict_under_the_real_title_not_the_stray_one():
+    out = deep_report.stamp_rating("# 报告\n\n# 甲深度研究报告\n正文\n", _RATING)
+    lines = out.splitlines()
+    assert lines[0] == "# 报告"
+    assert lines[2] == "# 甲深度研究报告 · 评级 4/5（W=7.2）"
+    assert lines[3] == "**结论：看多 ｜ 评级 4/5（W=7.2）**"
+
+
+def test_stamp_rating_replaces_a_model_written_title_suffix_with_direction():
+    out = deep_report.stamp_rating("# 甲深度研究报告 · 看多 ｜ 评级 4/5\n**结论：{{评级}}**\n",
+                                   (6.4, 3, "中性"))
+    assert out.splitlines()[0] == "# 甲深度研究报告 · 评级 3/5（W=6.4）"
 
 
 def test_stamp_rating_does_not_warn_on_its_own_stamp(capsys):
@@ -877,6 +937,33 @@ def test_generate_draft_scorecard_stands_over_a_revise_re_emission(monkeypatch):
     assert res["rating"] == {"W": 6.4, "band": 3, "direction": "看多"}
     assert f"**结论：{_CARD_STAMP}（测试）**" in res["text"]
     assert "```scorecard" not in res["text"] and "正文。\n\n---" in res["text"]
+
+
+def test_generate_draft_bets_stand_over_a_revise_re_emitted_predictions_block(monkeypatch):
+    import deep_verify
+    draft_bets = '```predictions\n[{"event": "草稿的赌注", "p_low": 0.1, "p_high": 0.3, "expires": "2027-01-31"}]\n```\n'
+    _openai_fakes(monkeypatch, [(_ok_draft() + draft_bets, 1, 2, 1)])
+
+    def fake_pipeline(draft, data, **kw):
+        # a revise pass re-emitted its bets, glued to the line above the footer
+        return ("# 测试（000703）深度研究报告 · {{评级}}\n**结论：{{评级}}（测试）**\n正文。\n"
+                + '```predictions\n[{"event": "修订的赌注", "p_low": 0.5, "p_high": 0.6, "expires": "2027-01-31"}]\n```\n'
+                + "---\n数据核验：0处数字。\n", {"rounds": []})
+
+    monkeypatch.setattr(deep_verify, "run_pipeline", fake_pipeline)
+    res = deep_report.generate("000703", provider="openai", data={"code": "000703.SZ"},
+                               verify=True, bear=False)
+    assert "```predictions" not in res["text"] and "修订的赌注" not in res["text"]
+    assert "正文。\n\n---" in res["text"]          # never a setext H2 over the footer
+    events = [p["event"] for p in res["predictions"]]
+    assert events == ["草稿的赌注"]
+
+
+def test_spec_keeps_score_numbers_out_of_the_article_body():
+    # a prose "W≈6.4" / "7.5 分" is a naked claim to deep_verify
+    spec = deep_report.SPEC_FILE.read_text(encoding="utf-8")
+    assert "Never write a score in the article body" in spec
+    assert "Scores live only in the `scorecard` block" in spec
 
 
 def test_log_scorecard_writes_a_row(tmp_path):
