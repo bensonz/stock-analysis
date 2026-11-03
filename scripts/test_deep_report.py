@@ -142,9 +142,25 @@ def test_write_report_groups_by_code_and_chinese_name(tmp_path, monkeypatch):
     assert out2.parent == tmp_path / "999999"
 
 
-def _ok_draft(body: str = "") -> str:
-    """Writer-mock draft that clears the 2026-08-07 degenerate-draft floor."""
-    return ("# 测试（000703）深度研究报告 · 评级 3/5\n" + body + "正文。" * 1500)
+_CARD = ('```scorecard\n{"F": 7.5, "F_anchor": "8: 利润加速——净利+35%", '
+         '"V": 5.0, "V_anchor": "4: 分位 70–85%——分位77%", '
+         '"M": 6.5, "M_anchor": "6: 三线过闸——RPS20=23", '
+         '"R": 6.0, "R_anchor": "6: 单一风险点——现金流待验证"}\n```\n')
+# 0.35·7.5 + 0.25·5 + 0.25·6.5 + 0.15·6 = 6.4 → 3/5, F≥6 and M≥5 → 看多
+_CARD_STAMP = "看多 ｜ 评级 3/5（W=6.4）"
+
+
+def _ok_draft(body: str = "", card: str = _CARD) -> str:
+    """Writer-mock draft that clears the 2026-08-07 degenerate-draft floor,
+    in the scoring-equation shape: rating placeholders + a scorecard block."""
+    return ("# 测试（000703）深度研究报告 · {{评级}}\n**结论：{{评级}}（测试）**\n"
+            + body + "正文。" * 1500 + "\n" + card)
+
+
+@pytest.fixture(autouse=True)
+def _scorecard_log_to_tmp(tmp_path, monkeypatch):
+    """main() appends to reports/scorecards.jsonl — never the real one in tests."""
+    monkeypatch.setattr(deep_report, "SCORECARD_LOG", tmp_path / "scorecards.jsonl")
 
 
 def test_generate_openai_orchestration(monkeypatch):
@@ -643,3 +659,270 @@ def test_cleanup_gets_a_long_timeout_and_the_judge_keeps_the_short_one():
     assert calls[0]["timeout"] == llm_client.GPT_TIMEOUT
     assert calls[1]["timeout"] == deep_report.CLEANUP_TIMEOUT
     assert calls[1]["max_tokens"] == deep_report.MAX_TOKENS
+
+
+# --------------------------------------------------------------------------- #
+# Scoring equation (docs/deep_report_scoring/): the writer scores F/V/M/R in a
+# ```scorecard block; code computes W, band, direction and stamps the report.
+# --------------------------------------------------------------------------- #
+def _flat(x):
+    """All four sub-scores equal → W == x (the weights sum to 1)."""
+    return {"F": x, "V": x, "M": x, "R": x}
+
+
+@pytest.mark.parametrize("x, W, band", [
+    (8.5, 8.5, 5), (8.45, 8.5, 5), (8.44, 8.4, 4),
+    (7.0, 7.0, 4), (6.95, 7.0, 4), (6.94, 6.9, 3),
+    (5.5, 5.5, 3), (5.45, 5.5, 3), (5.44, 5.4, 2),
+    (4.0, 4.0, 2), (3.95, 4.0, 2), (3.94, 3.9, 1),
+    (10, 10.0, 5), (0, 0.0, 1),
+])
+def test_compute_rating_band_edges_use_rounded_W(x, W, band):
+    got_W, got_band, _ = deep_report.compute_rating(_flat(x))
+    assert (got_W, got_band) == (W, band)
+
+
+def test_compute_rating_weights_through_the_equation():
+    # 0.35·7.5 + 0.25·5 + 0.25·6.5 + 0.15·6 = 6.4
+    assert deep_report.compute_rating(
+        {"F": 7.5, "V": 5.0, "M": 6.5, "R": 6.0}) == (6.4, 3, "看多")
+    # 0.35·8 + 0.25·7 + 0.25·7 + 0.15·6 = 7.2 → 4/5
+    assert deep_report.compute_rating({"F": 8, "V": 7, "M": 7, "R": 6}) == (7.2, 4, "看多")
+
+
+@pytest.mark.parametrize("F, M, direction", [
+    (6, 5, "看多"), (9, 9, "看多"),
+    (6, 4.9, "中性"), (5.9, 9, "中性"), (4.1, 2, "中性"),
+    (4, 9, "看空"), (0, 0, "看空"),
+])
+def test_compute_rating_direction_rules(F, M, direction):
+    assert deep_report.compute_rating({"F": F, "V": 5, "M": M, "R": 5})[2] == direction
+
+
+def test_compute_rating_bearish_can_pair_with_band_4():
+    """Documented, flagged to owner (DECISIONS D4): F<=4 means 看空 even when
+    high V/M/R lift W into band 4. Assert what the equation gives."""
+    W, band, direction = deep_report.compute_rating({"F": 4, "V": 10, "M": 10, "R": 10})
+    assert (W, band, direction) == (7.9, 4, "看空")
+
+
+_CARD_JSON = {"F": 7.5, "F_anchor": "8: 利润加速——净利+35%", "V": 5, "V_anchor": "4: 分位77%",
+              "M": 6.5, "M_anchor": "6: RPS20=23", "R": 6.0, "R_anchor": "6: 现金流待验证"}
+
+
+def _block(obj) -> str:
+    body = obj if isinstance(obj, str) else json.dumps(obj, ensure_ascii=False)
+    return f"```scorecard\n{body}\n```\n"
+
+
+def test_extract_scorecard_valid_block_is_stripped():
+    text = "# 报告\n正文。\n\n" + _block(_CARD_JSON) + "```predictions\n[]\n```\n"
+    card, err, rest = deep_report.extract_scorecard_block(text)
+    assert err is None
+    assert card["F"] == 7.5 and card["V"] == 5.0 and isinstance(card["V"], float)
+    assert card["M_anchor"] == "6: RPS20=23"
+    assert "scorecard" not in rest and "```predictions" in rest and "正文。" in rest
+
+
+@pytest.mark.parametrize("block, err", [
+    ("", "missing"),
+    (_block("{not json"), "bad json"),
+    (_block("[1, 2]"), "bad json"),
+    (_block({k: v for k, v in _CARD_JSON.items() if k != "M"}), "missing key M"),
+    (_block({**_CARD_JSON, "V": 10.5}), "V not a number in [0,10]"),
+    (_block({**_CARD_JSON, "R": -1}), "R not a number in [0,10]"),
+    (_block({**_CARD_JSON, "F": "7"}), "F not a number in [0,10]"),
+    (_block({**_CARD_JSON, "F": True}), "F not a number in [0,10]"),
+    (_block('{"F": NaN, "F_anchor": "x", "V": 5, "V_anchor": "x", "M": 5, '
+            '"M_anchor": "x", "R": 5, "R_anchor": "x"}'), "F not a number in [0,10]"),
+    (_block({**_CARD_JSON, "R_anchor": "  "}), "R_anchor empty"),
+    (_block({k: v for k, v in _CARD_JSON.items() if k != "V_anchor"}), "V_anchor empty"),
+])
+def test_extract_scorecard_errors(block, err):
+    card, got, rest = deep_report.extract_scorecard_block("# 报告\n正文。\n" + block)
+    assert card is None and got == err
+    assert "```scorecard" not in rest
+
+
+def test_extract_scorecard_two_blocks_last_wins_all_stripped():
+    text = ("# 报告\n" + _block({**_CARD_JSON, "F": 1}) + "正文。\n"
+            + _block({**_CARD_JSON, "F": 9}))
+    card, err, rest = deep_report.extract_scorecard_block(text)
+    assert err is None and card["F"] == 9.0
+    assert "scorecard" not in rest and "正文。" in rest
+
+
+def test_extract_scorecard_strip_keeps_a_blank_line_before_the_footer():
+    """A block glued to the line above must not turn that line into a setext
+    H2 over the verify footer's ---."""
+    _c, _e, rest = deep_report.extract_scorecard_block(
+        "末行。\n" + _block(_CARD_JSON) + "\n---\n数据核验：0处数字。")
+    assert "末行。\n\n---" in rest
+
+
+_RATING = (7.2, 4, "看多")
+
+
+def test_stamp_rating_fills_tokens():
+    text = "# 甲（000001）深度研究报告 · {{评级}}\n**结论：{{评级}}（龙头）**\n正文\n"
+    out = deep_report.stamp_rating(text, _RATING)
+    assert out.splitlines()[0] == "# 甲（000001）深度研究报告 · 评级 4/5（W=7.2）"
+    assert out.splitlines()[1] == "**结论：看多 ｜ 评级 4/5（W=7.2）（龙头）**"
+    assert "{{评级}}" not in out and out.count("结论") == 1
+
+
+def test_stamp_rating_formats_whole_W_with_one_decimal():
+    out = deep_report.stamp_rating("# 甲 · {{评级}}\n**结论：{{评级}}**\n", (7.0, 4, "中性"))
+    assert "评级 4/5（W=7.0）" in out.splitlines()[0]
+
+
+def test_stamp_rating_inserts_verdict_when_token_lost():
+    # a revision dropped the 结论 token; the H1 still has its own
+    text = "# 甲深度研究报告 · {{评级}}\n## 1. 核心观点\n结论：看多，理由如下。\n"
+    out = deep_report.stamp_rating(text, _RATING)
+    lines = out.splitlines()
+    assert lines[0] == "# 甲深度研究报告 · 评级 4/5（W=7.2）"
+    assert lines[1] == "**结论：看多 ｜ 评级 4/5（W=7.2）**"
+    assert lines[2] == "" and lines[3] == "## 1. 核心观点"
+
+
+def test_stamp_rating_finds_h1_under_a_banner_and_appends_when_no_suffix():
+    text = "> ⚠️ **数据核验中断**\n\n# 甲深度研究报告\n正文\n"
+    out = deep_report.stamp_rating(text, _RATING)
+    lines = out.splitlines()
+    assert lines[0].startswith("> ⚠️")
+    assert lines[2] == "# 甲深度研究报告 · 评级 4/5（W=7.2）"
+    assert lines[3] == "**结论：看多 ｜ 评级 4/5（W=7.2）**"
+
+
+def test_stamp_rating_replaces_model_written_ratings(capsys):
+    # legacy-shaped draft: the writer wrote its own 3/5 in the H1, 结论 and prose
+    text = ("# 甲深度研究报告 · 评级 3/5\n**结论：看多 ｜ 评级 3/5（龙头）**\n"
+            "我们给予评级 3／5。\n")
+    out = deep_report.stamp_rating(text, _RATING)
+    lines = out.splitlines()
+    assert lines[0] == "# 甲深度研究报告 · 评级 4/5（W=7.2）"
+    assert lines[1] == "**结论：看多 ｜ 评级 4/5（W=7.2）**"   # no 结论 carried the stamp
+    assert lines[3] == "**结论：看多 ｜ 评级 4/5（龙头）**"     # leftover → computed band
+    assert "评级 3" not in out and "我们给予评级 4/5。" in out
+    assert "writer wrote its own 评级 N/5 3×" in capsys.readouterr().err
+
+
+def test_stamp_rating_does_not_warn_on_its_own_stamp(capsys):
+    deep_report.stamp_rating("# 甲 · {{评级}}\n**结论：{{评级}}**\n", _RATING)
+    assert "writer wrote" not in capsys.readouterr().err
+
+
+def test_stamp_rating_none_is_visible_never_a_number(capsys):
+    import re
+    text = "# 甲深度研究报告 · {{评级}}\n**结论：{{评级}}（龙头）**\n给予评级 4/5。\n"
+    out = deep_report.stamp_rating(text, None, "missing")
+    lines = out.splitlines()
+    assert lines[0] == "# 甲深度研究报告 · 评级 无法计算（scorecard missing）"
+    assert lines[1] == "**结论：方向 无法计算 ｜ 评级 无法计算（scorecard missing）（龙头）**"
+    assert "给予评级 无法计算。" in out
+    assert not re.search(r"[1-5]\s*/\s*5", out)
+    assert "writer wrote" in capsys.readouterr().err
+
+
+def test_stamp_rating_none_inserts_verdict_when_token_lost():
+    out = deep_report.stamp_rating("# 甲深度研究报告\n正文\n", None, "bad json")
+    assert out.splitlines()[1] == "**结论：方向 无法计算 ｜ 评级 无法计算（scorecard bad json）**"
+
+
+def test_generate_stamps_rating_from_the_scorecard(monkeypatch):
+    _openai_fakes(monkeypatch, [(_ok_draft(), 1, 2, 1)])
+    res = deep_report.generate("000703", provider="openai", data={"code": "000703.SZ"},
+                               verify=False, bear=False)
+    assert res["text"].splitlines()[0] == "# 测试（000703）深度研究报告 · 评级 3/5（W=6.4）"
+    assert f"**结论：{_CARD_STAMP}（测试）**" in res["text"]
+    assert "```scorecard" not in res["text"] and "{{评级}}" not in res["text"]
+    assert res["rating"] == {"W": 6.4, "band": 3, "direction": "看多"}
+    assert res["scorecard"]["F"] == 7.5 and res["scorecard_error"] is None
+
+
+def test_generate_without_scorecard_publishes_visible_unrated(monkeypatch):
+    _openai_fakes(monkeypatch, [(_ok_draft(card=""), 1, 2, 1)])
+    res = deep_report.generate("000703", provider="openai", data={"code": "000703.SZ"},
+                               verify=False, bear=False)
+    assert "评级 无法计算（scorecard missing）" in res["text"].splitlines()[0]
+    assert res["rating"] is None and res["scorecard"] is None
+    assert res["scorecard_error"] == "missing"
+
+
+def test_generate_retry_scorecard_replaces_a_missing_one(monkeypatch):
+    _openai_fakes(monkeypatch, [("太短", 1, 1, 1), (_ok_draft(), 1, 2, 1)])
+    res = deep_report.generate("000703", provider="openai", data={"code": "000703.SZ"},
+                               verify=False, bear=False)
+    assert res["rating"]["band"] == 3 and res["scorecard_error"] is None
+
+
+def test_generate_draft_scorecard_stands_over_a_revise_re_emission(monkeypatch):
+    import deep_verify
+    _openai_fakes(monkeypatch, [(_ok_draft(), 1, 2, 1)])
+    seen = {}
+
+    def fake_pipeline(draft, data, **kw):
+        seen["draft"] = draft
+        # a revise pass re-emitted a different scorecard (F=1 → 看空)
+        return ("# 测试（000703）深度研究报告 · {{评级}}\n**结论：{{评级}}（测试）**\n正文。\n"
+                + _block({**_CARD_JSON, "F": 1}) + "\n---\n数据核验：0处数字。\n", {"rounds": []})
+
+    monkeypatch.setattr(deep_verify, "run_pipeline", fake_pipeline)
+    res = deep_report.generate("000703", provider="openai", data={"code": "000703.SZ"},
+                               verify=True, bear=False)
+    # the verifier saw the placeholder, never the stamped W or the scorecard
+    assert "{{评级}}" in seen["draft"] and "W=" not in seen["draft"]
+    assert "```scorecard" not in seen["draft"]
+    assert res["rating"] == {"W": 6.4, "band": 3, "direction": "看多"}
+    assert f"**结论：{_CARD_STAMP}（测试）**" in res["text"]
+    assert "```scorecard" not in res["text"] and "正文。\n\n---" in res["text"]
+
+
+def test_log_scorecard_writes_a_row(tmp_path):
+    path = tmp_path / "sub" / "scorecards.jsonl"
+    result = {"scorecard": {"F": 7.5, "V": 5.0, "M": 6.5, "R": 6.0, "F_anchor": "a"},
+              "rating": {"W": 6.5, "band": 3, "direction": "看多"},
+              "provider": "anthropic", "model": "claude-fable-5"}
+    deep_report.log_scorecard("002293.SZ", result, "/r/002293-deep.md", path=path)
+    deep_report.log_scorecard("002293", {"scorecard_error": "bad json",
+                                         "provider": "openai", "model": "m"}, "/r/x.md", path=path)
+    rows = [json.loads(ln) for ln in path.read_text(encoding="utf-8").splitlines()]
+    assert rows[0] == {"date": rows[0]["date"], "code": "002293", "F": 7.5, "V": 5.0,
+                       "M": 6.5, "R": 6.0, "W": 6.5, "band": 3, "direction": "看多",
+                       "provider": "anthropic", "model": "claude-fable-5",
+                       "report": "/r/002293-deep.md"}
+    assert rows[1]["error"] == "bad json"
+    assert all(rows[1][k] is None for k in ("F", "V", "M", "R", "W", "band", "direction"))
+
+
+def test_cli_logs_scorecard_and_prints_rating(monkeypatch, tmp_path, capsys):
+    import sys as _sys
+
+    def fake(code, **kw):
+        return {"text": "# R", "tool_calls": [], "input_tokens": 1, "output_tokens": 1,
+                "rounds": 1, "provider": "openai", "model": "m", "data": {},
+                "verify_audit": None, "verify_rounds": 0,
+                "scorecard": {"F": 8, "V": 7, "M": 7, "R": 6},
+                "scorecard_error": None,
+                "rating": {"W": 7.2, "band": 4, "direction": "看多"}}
+
+    monkeypatch.setattr(deep_report, "generate", fake)
+    monkeypatch.setattr(_sys, "argv", ["deep_report.py", "600150", "--no-verify",
+                                       "--no-bear", "--output-dir", str(tmp_path)])
+    deep_report.main()
+    assert "[deep_report] rating: 4/5 W=7.2 看多" in capsys.readouterr().err
+    row = json.loads(deep_report.SCORECARD_LOG.read_text(encoding="utf-8"))
+    assert row["code"] == "600150" and row["band"] == 4
+    assert row["report"].endswith("-deep.md")
+
+
+def test_cli_warns_and_logs_when_rating_missing(monkeypatch, tmp_path, capsys):
+    import sys as _sys
+    monkeypatch.setattr(deep_report, "generate", _cli_fake_generate({}))
+    monkeypatch.setattr(_sys, "argv", ["deep_report.py", "600150", "--no-verify",
+                                       "--no-bear", "--output-dir", str(tmp_path)])
+    deep_report.main()
+    assert "⚠️ rating: 无法计算 (missing)" in capsys.readouterr().err
+    row = json.loads(deep_report.SCORECARD_LOG.read_text(encoding="utf-8"))
+    assert row["error"] == "missing" and row["W"] is None

@@ -45,9 +45,9 @@ MAX_TOKENS = 65536
 # with no fundamental change. The owner deliberately wants NO memory between
 # reports (consistency must come from the system, not from anchoring on the
 # previous answer, so the same rubric transfers across models); the hypothesis
-# under test is whether the verdict survives high sampling temperature. If the
-# spread widens, the next lever is a scoring equation (decomposed sub-scores,
-# mechanical combination), not memory.
+# under test is whether the verdict survives high sampling temperature. It
+# did; the band-boundary steepness is handled by the scoring equation
+# (compute_rating, docs/deep_report_scoring/), not by temperature or memory.
 TEMPERATURE = 1.0
 # The cleanup re-emits the whole report in one NON-streaming call. Under the
 # old 16384 cap it was cut off early enough to fit llm_client.GPT_TIMEOUT
@@ -385,6 +385,157 @@ def extract_predictions_block(text: str) -> tuple:
     return records, text[:m.start()] + text[m.end():]
 
 
+# --------------------------------------------------------------------------- #
+# Scoring equation (docs/deep_report_scoring/): the writer scores four anchored
+# dimensions in a ```scorecard block; code computes the headline rating.
+# --------------------------------------------------------------------------- #
+SCORE_WEIGHTS = {"F": 0.35, "V": 0.25, "M": 0.25, "R": 0.15}
+# (min W, band), checked top-down on the ROUNDED W; below the last edge → 1.
+BAND_EDGES = ((8.5, 5), (7.0, 4), (5.5, 3), (4.0, 2))
+RATING_TOKEN = "{{评级}}"
+SCORECARD_LOG = PROJECT_ROOT / "reports" / "scorecards.jsonl"
+SCORECARD_BLOCK_RE = None  # compiled lazily in extract_scorecard_block
+_MODEL_RATING_RE = None    # a 评级 N/5 the writer wrote itself
+
+
+def extract_scorecard_block(text: str) -> tuple:
+    """Split the writer's ```scorecard fenced JSON out of the article.
+    Returns (scorecard_or_None, error_or_None, text_without_blocks).
+
+    Every scorecard block is stripped; the LAST one is parsed (the spec puts
+    it last, as extract_bear_events does for its block). The scorecard holds
+    F/V/M/R (floats, 0–10) and their *_anchor strings."""
+    import re
+    global SCORECARD_BLOCK_RE
+    if SCORECARD_BLOCK_RE is None:
+        SCORECARD_BLOCK_RE = re.compile(
+            r"```scorecard\s*\n(.*?)\n```\s*", re.DOTALL)
+    blocks = SCORECARD_BLOCK_RE.findall(text)
+    # "\n", not "": a block glued to the line above must not leave that line
+    # directly over the verify footer's "---" (a setext H2).
+    stripped = SCORECARD_BLOCK_RE.sub("\n", text)
+    if not blocks:
+        return None, "missing", stripped
+    try:
+        raw = json.loads(blocks[-1])
+    except json.JSONDecodeError:
+        return None, "bad json", stripped
+    if not isinstance(raw, dict):
+        return None, "bad json", stripped
+    card = {}
+    for k in SCORE_WEIGHTS:
+        if k not in raw:
+            return None, f"missing key {k}", stripped
+        v = raw[k]
+        if isinstance(v, bool) or not isinstance(v, (int, float)) or not 0 <= v <= 10:
+            return None, f"{k} not a number in [0,10]", stripped
+        anchor = raw.get(f"{k}_anchor")
+        if not isinstance(anchor, str) or not anchor.strip():
+            return None, f"{k}_anchor empty", stripped
+        card[k] = float(v)
+        card[f"{k}_anchor"] = anchor.strip()
+    return card, None, stripped
+
+
+def compute_rating(scores: dict) -> tuple:
+    """(W, band, direction) from the four sub-scores. Pure.
+
+    W is the weighted sum rounded half-up to one decimal (Decimal on a
+    float-noise-cleaned sum: a plain round() turns 8.45 into 8.4). The band
+    reads the ROUNDED W, so the headline W and band never disagree."""
+    from decimal import ROUND_HALF_UP, Decimal
+
+    raw = sum(w * scores[k] for k, w in SCORE_WEIGHTS.items())
+    W = float(Decimal(repr(round(raw, 9))).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP))
+    band = next((b for edge, b in BAND_EDGES if W >= edge), 1)
+    F, M = scores["F"], scores["M"]
+    if F >= 6 and M >= 5:
+        direction = "看多"
+    elif F <= 4:
+        direction = "看空"
+    else:
+        direction = "中性"
+    return W, band, direction
+
+
+def stamp_rating(text: str, rating, reason: str | None = None) -> str:
+    """Write the code-computed rating into the report.
+
+    rating = (W, band, direction) or None (scorecard missing/invalid: `reason`).
+    - the H1 gets "评级 {band}/5（W={W}）" in place of {{评级}} (else in place of
+      an old " · 评级 …" suffix, else appended);
+    - every other {{评级}} gets "{direction} ｜ 评级 {band}/5（W={W}）";
+    - a 评级 N/5 the writer wrote anyway becomes the computed one (warned);
+    - if no 结论 line then carries the rating, one is inserted under the H1.
+    None never becomes a guessed number: it stamps a visible 无法计算."""
+    import re
+    global _MODEL_RATING_RE
+    if _MODEL_RATING_RE is None:
+        _MODEL_RATING_RE = re.compile(r"评级\s*[1-5]\s*[/／]\s*5")
+
+    if rating is None:
+        head = f"评级 无法计算（scorecard {reason}）"
+        body = f"方向 无法计算 ｜ {head}"
+        leftover = "评级 无法计算"
+    else:
+        W, band, direction = rating
+        head = f"评级 {band}/5（W={W:.1f}）"
+        body = f"{direction} ｜ {head}"
+        leftover = f"评级 {band}/5"
+
+    # Leftovers first, so the stamps below are never mistaken for them.
+    text, n = _MODEL_RATING_RE.subn(leftover, text)
+    if n:
+        print(f"  [deep_report] ⚠️ writer wrote its own 评级 N/5 {n}× — "
+              f"replaced with the computed '{leftover}'", file=sys.stderr)
+
+    h1 = re.search(r"^# .*$", text, re.M)
+    if h1:
+        line = h1.group(0)
+        if RATING_TOKEN in line:
+            line = line.replace(RATING_TOKEN, head, 1)
+        elif re.search(r"\s*·\s*评级.*$", line):
+            line = re.sub(r"\s*·\s*评级.*$", f" · {head}", line)
+        else:
+            line = f"{line.rstrip()} · {head}"
+        text = text[:h1.start()] + line + text[h1.end():]
+    text = text.replace(RATING_TOKEN, body)
+
+    if not any("结论" in ln and head in ln for ln in text.splitlines()):
+        verdict = f"**结论：{body}**\n\n"
+        h1 = re.search(r"^# .*$", text, re.M)
+        if h1:
+            nl = text.find("\n", h1.end())
+            if nl == -1:
+                text = text + "\n" + verdict
+            else:
+                text = text[:nl + 1] + verdict + text[nl + 1:]
+        else:
+            text = verdict + text
+    return text
+
+
+def log_scorecard(code: str, result: dict, report_path, path=None) -> Path:
+    """Append one calibration row to reports/scorecards.jsonl (git-ignored).
+    A run without a valid scorecard is logged too, with its error and nulls."""
+    path = Path(path or SCORECARD_LOG)
+    card = result.get("scorecard") or {}
+    rating = result.get("rating") or {}
+    row = {"date": datetime.now().strftime("%Y-%m-%d"),
+           "code": str(code).split(".")[0]}
+    row.update({k: card.get(k) for k in SCORE_WEIGHTS})
+    row.update({"W": rating.get("W"), "band": rating.get("band"),
+                "direction": rating.get("direction"),
+                "provider": result.get("provider"), "model": result.get("model"),
+                "report": str(report_path)})
+    if not rating:
+        row["error"] = result.get("scorecard_error") or "missing"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(row, ensure_ascii=False) + "\n")
+    return path
+
+
 def build_auto_predictions(data: dict, made: str | None = None) -> list:
     """Mechanically derivable bets from the base_rate tool calls of this run.
 
@@ -477,12 +628,12 @@ def _provider_ctx(resolved: str) -> tuple:
 MIN_DRAFT_CHARS = 3000
 _DRAFT_RETRY_NUDGE = (
     "你上一条回复没有包含完整的报告正文。现在请直接输出完整的深度研究报告"
-    "（从 `# …深度研究报告 · 评级 x/5` 标题行开始，包含全部章节，文末附 predictions 代码块），"
+    "（从 `# …深度研究报告 · {{评级}}` 标题行开始，包含全部章节，文末附 scorecard 与 predictions 代码块），"
     "不要再调用任何工具。"
 )
 _DRAFT_TRUNCATED_NUDGE = (
     "你上一条回复在输出长度上限处被截断，报告不完整。现在请重新输出完整的深度研究报告"
-    "（从 `# …深度研究报告 · 评级 x/5` 标题行开始，包含全部章节，文末附 predictions 代码块），"
+    "（从 `# …深度研究报告 · {{评级}}` 标题行开始，包含全部章节，文末附 scorecard 与 predictions 代码块），"
     "压缩措辞以确保全部章节都能输出完，不要再调用任何工具。"
 )
 
@@ -764,9 +915,10 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
     tout += o0
     rounds += r0
     judgment_bets, text = extract_predictions_block(text)
+    scorecard, scorecard_error, text = extract_scorecard_block(text)
 
     def _rerun_writer(_attempt):
-        nonlocal tin, tout, rounds
+        nonlocal tin, tout, rounds, scorecard, scorecard_error
         nudge = _DRAFT_TRUNCATED_NUDGE if draft_meta.get("truncated") else _DRAFT_RETRY_NUDGE
         messages.append({"role": "user", "content": nudge})
         t2, i2, o2, r2 = _run_writer_pass(
@@ -776,6 +928,9 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
         tout += o2
         rounds += r2
         bets2, t2 = extract_predictions_block(t2)
+        card2, _err2, t2 = extract_scorecard_block(t2)
+        if card2 is not None:
+            scorecard, scorecard_error = card2, None
         return t2, bets2, draft_meta.get("truncated", False)
 
     text, judgment_bets = _ensure_full_draft(text, judgment_bets, _rerun_writer,
@@ -825,6 +980,13 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
         tout += totals["out"]
         rounds += totals["rounds"]
 
+    # The rating is the DRAFT's judgment: a scorecard a revise/cleanup pass
+    # re-emitted is dropped (revisions fix numbers, not judgments). Stamped
+    # only now, so "W=7.2" never reaches the number verifier.
+    _, _, text = extract_scorecard_block(text)
+    rating = compute_rating(scorecard) if scorecard is not None else None
+    text = stamp_rating(text, rating, scorecard_error)
+
     # The prediction ledger: auto bets from base_rate calls (verified against
     # the subject's actual state) + the writer's judgment bets from the
     # ```predictions block. Caller decides whether to log (main() does).
@@ -858,6 +1020,9 @@ def generate(code: str, provider: str | None = None, data: dict | None = None,
         "verify_audit": verify_audit,
         "verify_rounds": verify_rounds,
         "predictions": predictions,
+        "scorecard": scorecard,
+        "scorecard_error": scorecard_error,
+        "rating": (dict(zip(("W", "band", "direction"), rating)) if rating else None),
         "bear_brief": bear_brief,
         "bear_events": extract_bear_events(bear_brief) if bear_brief else [],
     }
@@ -997,6 +1162,15 @@ def main():
             print(f"[deep_report] verify CRASHED — report published UNVERIFIED "
                   f"({result['verify_audit'].get('error', '?')}) | audit {audit_path}",
                   file=sys.stderr)
+
+    log_scorecard(code, result, out)
+    rating = result.get("rating")
+    if rating:
+        print(f"[deep_report] rating: {rating['band']}/5 W={rating['W']:.1f} "
+              f"{rating['direction']}", file=sys.stderr)
+    else:
+        print(f"[deep_report] ⚠️ rating: 无法计算 "
+              f"({result.get('scorecard_error') or 'missing'})", file=sys.stderr)
 
     if result.get("predictions"):
         import prediction_log

@@ -60,6 +60,15 @@ def test_allowlist_passes():
     assert claims == [], f"false positives: {[(c['kind'], c['numbers']) for c in claims]}"
 
 
+def test_rating_placeholder_is_not_a_claim():
+    """docs/deep_report_scoring/: the writer emits {{评级}} and code stamps the
+    rating after verification — the placeholder must never become a claim."""
+    md = ("# 比音勒芬（002832.SZ）深度研究报告 · {{评级}}\n"
+          "**结论：{{评级}}（龙头估值修复）**\n")
+    assert dv.extract_claims(md) == []
+    assert dv.strip_exempt_tags(md) == md
+
+
 def _naked_numbers(md):
     return [c["numbers"] for c in dv.extract_claims(md) if c["kind"] == "naked"]
 

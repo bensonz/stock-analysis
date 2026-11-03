@@ -1,6 +1,6 @@
-# Deep-report scoring equation — proposal (not yet implemented)
+# Deep-report scoring equation — proposal
 
-**Status**: awaiting owner approval
+**Status**: approved 2026-11-03 (owner), implemented — see PLAN.md
 **Date**: 2026-09-01
 
 ## The problem, precisely

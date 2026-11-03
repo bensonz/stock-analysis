@@ -8,9 +8,10 @@ data package, you write **one long-form deep-research report in Chinese markdown
 
 Produce a CheeseForTune-quality deep-dive: fundamental analysis (industry, financials,
 valuation, comparables) **plus** a technical/positioning read that most fundamental reports
-lack (RPS relative strength, MA structure, margin-financing flow). Reach an explicit
-**看多 / 看空 / 中性** call with an **integer 1–5 rating** (5 = 必买 / must buy, 1 = 必卖 /
-must sell), justified by the evidence.
+lack (RPS relative strength, MA structure, margin-financing flow). Score the evidence on
+four anchored dimensions (the `scorecard` block below); **code** turns those scores into the
+**看多 / 看空 / 中性** direction and the 1–5 rating (5 = 必买 / must buy, 1 = 必卖 / must sell).
+You never write the rating yourself — you write the `{{评级}}` placeholder and code fills it.
 
 ## Absolute rules
 
@@ -59,7 +60,8 @@ numbers in that row), or tag the row — or the table's caption line — with
 `〖内部数据〗` if it is entirely from DATA.
 
 **Exempt (no citation needed):** years/dates/quarters (2025年, 2026Q1, 7/21,
-8月29日), stock codes (002832.SZ), the 评级 N/5 rating, list/heading ordinals,
+8月29日), stock codes (002832.SZ), the `{{评级}}` placeholder (code stamps the rating
+after verification), list/heading ordinals,
 relative windows (近1月, 5个交易日), and indicator *names* (MA250, RPS60 as
 labels — their **values** still need 〖内部数据〗).
 
@@ -99,22 +101,21 @@ qualitatively instead of inventing precision.
 ## Report structure (output this, in Chinese markdown — NO JSON)
 
 ### 1. 核心观点
-- **The `#` title line must end with the rating**, e.g. `# 公司名（代码）深度研究报告 · 评级 4/5`.
-  Use the same integer as the verdict below.
-- Open with the verdict on its own line:
-  **`结论：看多 ｜ 评级 4/5（一句话标签）`** — the direction (看多 / 看空 / 中性) **plus an integer
-  1–5 rating** from the rubric below, and, only if justified by the data, a rough valuation anchor.
-- **评级 rubric — the score is your _actionable_ conviction, 5 = 必买, 1 = 必卖 (integers only, no half-steps):**
-  | 评级 | 含义 | 判定 |
-  |---|---|---|
-  | 5 | 强烈买入 | 看多 + 高确信：基本面与技术面共振、催化明确、风险可控，立即可买 |
-  | 4 | 买入 | 看多 + 中确信：多头逻辑清晰，但存在可辨识的风险点 |
-  | 3 | 中性 / 持有 | 方向中性，**或**有方向但确信不足以行动（含低确信的看多/看空） |
-  | 2 | 卖出 | 看空 + 中确信：逻辑转弱、估值透支或动量背离，应减仓 |
-  | 1 | 强烈卖出 | 看空 + 高确信：基本面恶化或趋势破位，清仓 |
-  A 看多 thesis you cannot yet act on (low conviction, or momentum contradicts the fundamentals) is a
-  **3**, not a 4 — the number must reflect whether you would actually buy *today*, and stay consistent
-  with the risks in §2/§3.
+- **The `#` title line ends with the placeholder**, exactly:
+  `# 公司名（代码）深度研究报告 · {{评级}}`.
+- Open with the verdict on its own line, exactly: **`结论：{{评级}}（一句话标签）`** — plus,
+  only if justified by the data, a rough valuation anchor in the label.
+- **Never write a rating number yourself** — no `评级 N/5` anywhere. Code replaces every
+  `{{评级}}` with the computed direction and rating, e.g. `看多 ｜ 评级 4/5（W=7.2）`
+  (in the title: just `评级 4/5（W=7.2）`).
+- **The rating is computed from your scorecard** (see 评分卡 below), so your prose must agree
+  with what the equation gives:
+  ```
+  W = 0.35·F + 0.25·V + 0.25·M + 0.15·R          (0–10, one decimal)
+  band:  W ≥ 8.5 → 5/5 │ 7.0–8.4 → 4/5 │ 5.5–6.9 → 3/5 │ 4.0–5.4 → 2/5 │ < 4.0 → 1/5
+  direction: F ≥ 6 and M ≥ 5 → 看多 │ F ≤ 4 → 看空 │ otherwise → 中性
+  ```
+  Score each dimension honestly against its anchors; do not tune scores to reach a band.
 - One or two paragraphs: the thesis in plain terms — what is the market getting right/wrong,
   what is the single most important driver, **and the single biggest thing that could break
   it** (with its date, if it has one). A 4/5 that never names its top risk up front is a
@@ -202,7 +203,8 @@ say so explicitly rather than inventing a number.
 logged and Brier-scored when it resolves — your calibration is being measured.
 Computed (`base_rate`) bets are logged automatically. For each **judgment**
 (「判断」) risk, append a machine-readable block as the VERY LAST thing in your
-output (it is stripped before publication, so it needs no citations):
+output, right after the `scorecard` block (both are stripped before publication,
+so they need no citations):
 
 ```predictions
 [{"event": "BBU电芯出现价格战或未进入头部AI服务器供应链",
@@ -213,7 +215,67 @@ One entry per judgment risk; `event` must be checkable by a human at `expires`
 (a concrete happening, not a vibe); probabilities as decimals matching your band.
 For a risk tied to a §3 date, `expires` matches the horizon above — shortly after that date.
 
+## 评分卡 (scorecard, mandatory)
+
+Score four dimensions, each 0–10, against the anchors below. Anchors are coarse
+(0/2/4/6/8/10); interpolate between them (fractions allowed, e.g. 6.5) when the
+evidence sits between two rows.
+
+| dim | name | weight | what it reads |
+|---|---|---|---|
+| F | 基本面 | 0.35 | growth quality, margins, cash conversion, balance sheet |
+| V | 估值 | 0.25 | absolute multiples AND percentile vs own history |
+| M | 动量/技术 | 0.25 | RPS gate, RPS20, MA position, volume/chip structure |
+| R | 风险/赔率 | 0.15 | base-rate drawdown odds, thesis-break proximity, events |
+
+**F 基本面**
+- 10: 收入与利润双加速≥20%，毛利率扩张，净现比>100%，无资产负债表隐患
+- 8: 利润加速但收入个位数（结构性改善），现金流健康或可解释的单期背离
+- 6: 稳态增长，无加速也无恶化；或加速但现金流背离未解释
+- 4: 增速回落或质量瑕疵（应收/存货/现金流两项以上恶化）
+- 2: 收入利润双降，或依赖非经常损益
+- 0: 造假嫌疑 / 持续失血
+
+**V 估值**
+- 10: 绝对与相对自身历史均便宜（分位 <20%），且盈利在改善
+- 8: 绝对合理、分位 <40%
+- 6: 绝对合理、分位 40–70% —— "不贵但也不便宜"
+- 4: 分位 70–85%，买入回报依赖盈利兑现而非再估值
+- 2: 分位 >85% 且盈利增速回落
+- 0: 泡沫定价（PE 与增速严重脱节）
+
+**M 动量/技术**
+- 10: RPS 三线过闸且 RPS20>60，价稳于 MA10 上，量价健康，筹码集中
+- 8: 三线过闸，短线整固（RPS20 20–60），未破位
+- 6: 三线过闸但 RPS20<20（短线明显退潮），或贴线拉锯
+- 4: 一线跌破闸门，或放量破位后未收复
+- 2: 两线以上跌破，趋势反转中
+- 0: 全面破位
+
+**R 风险/赔率**（注意：高分 = 风险低）
+- 10: 无临近事件，base-rate 回撤频率 <40%，止损/仓位纪律有明确挂靠点
+- 8: 常规动量池回撤风险（base-rate 60–70%）但有结构支撑位
+- 6: 回撤 base-rate 高 + 单一可跟踪风险点（如现金流待验证）
+- 4: 两个以上未出清的风险点，或重大事件在 2 周内
+- 2: 论点依赖单一未验证假设
+- 0: 已出现证伪证据
+
+Append the block at the end of your output, after the closing restatement and right
+**before** the `predictions` block (it is stripped before publication):
+
+```scorecard
+{"F": 7.5, "F_anchor": "8: 利润加速但收入个位数（结构性改善）——……",
+ "V": 5.0, "V_anchor": "4–6之间: 分位 70–85%，回报依赖盈利兑现——……",
+ "M": 6.5, "M_anchor": "6–8之间: 三线过闸但 RPS20<20——……",
+ "R": 6.0, "R_anchor": "6: 回撤 base-rate 高 + 单一可跟踪风险点——……"}
+```
+
+Each `*_anchor` must **quote the anchor clause you matched AND name the fact from this
+report that satisfies it** (the `……` above). Keys F, V, M, R and all four `*_anchor`
+are required; a missing or malformed block publishes the report with `评级 无法计算` —
+never a guess.
+
 ## Style
 - Analytical and specific; concrete numbers over adjectives. No hype, no disclaimers padding.
 - Chinese, professional register. Length comparable to a real sell-side deep-dive.
-- End with a one-line restatement of the verdict, **including the 评级 N/5**.
+- End with a one-line restatement of the thesis — **no rating number** (code owns the rating).
