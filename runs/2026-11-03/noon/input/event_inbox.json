@@ -1,0 +1,64 @@
+{
+  "as_of": "2026-11-03",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 23,
+    "new": 2,
+    "pending": 2,
+    "expired": 0,
+    "ai_retired": 4,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 19,
+    "decided": 2,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 0,
+    "fetch_errors": 0,
+    "empty_days": 5,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 2,
+    "kept": 1,
+    "skipped": 1,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261103-78f44b7d",
+        "name": "报道：中国央行将启动第三次证券、基金、保险公司互换便利操作招标",
+        "decision": "skip",
+        "impact": "medium",
+        "direction": "supportive",
+        "reason": "互换便利招标为流动性工具操作，非系统性宏观事件，且为报道而非明确日程"
+      },
+      {
+        "id": "wscn-20261115-00b4a7bb",
+        "name": "中国央行：自11月15日起上调金融机构外汇存款准备金率2个百分点",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "risk",
+        "reason": "上调外汇存款准备金率收紧离岸人民币流动性，影响汇率与外资情绪"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1434,
+    "tokens_out": 144
+  },
+  "pending_items": []
+}

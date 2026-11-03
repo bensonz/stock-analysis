@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-03",
+  "actions": [
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 9.77,
+      "pnl_pct": 1.24,
+      "note": "航运港口未入今日top/bottom5，板块中性；现价9.77浮盈+1.24%(第5日)未触发-5%硬止损(9.17)/首3日-3%/15日时间止损；margin neutral；IV 300ETF 0.838高位只收紧新仓标准、不影响持仓，维持持有，止损9.17不变"
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "action": "HOLD",
+      "price": 13.69,
+      "pnl_pct": 3.24,
+      "note": "油气开采Ⅱ连续第2日入bottom5(今日-3.64%，国际油价大跌/Baidu热搜'国际油价大幅下跌')，叠加margin chg5 -5.25% deleveraging；但未满'行业冷3日才卖'，现价13.69浮盈+3.24%未触发任何卖出规则，距止损12.60仍有7.96%。升级警戒：明日若油气链仍留bottom5则机械SELL，不因浮盈或Hormuz紧张豁免"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 2,
+    "totalEquity": 966640.94,
+    "dayPnl": -1288.0,
+    "dayReturnPct": -0.13,
+    "totalReturnPct": -3.34,
+    "unrealizedPnl": 1540.0,
+    "realizedPnl": -34899.06,
+    "cashPct": 93.2
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "balanced",
+    "breadth_ratio": 1.5471,
+    "up": 3303,
+    "down": 2135,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 55,
+    "limit_downs": 4,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime balanced: breadth 1.55:1, 0/3 major indices green, 55 limit-ups / 4 limit-downs. Allow normal sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "三大指数齐跌(上证-0.71%/深成-0.16%/创业板-0.94%/科创50-2.54%)，但个股普涨(涨跌比1.55:1，涨停55家/跌停仅4家)——大盘科技派发、中小盘防御轮动。Breadth 1.55:1尚可但0/3指数翻红，IV极度恐慌(rank均值0.83，500ETF/创业板ETF均1.0)。驱动：美股AI硬件重挫(费半-7.20%、OpenAI估值下修)传导至半导体/通信设备/元件；国际油价大跌使油气开采Ⅱ连2日入bottom5；银行转冷(国有大行bottom5)。热点top5(渔业/电池/工程机械/贵金属/医疗美容)与策略池零交集，sector-first判无票可买，保持现金93.2%"
+  }
+}

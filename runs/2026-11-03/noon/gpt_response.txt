@@ -1,0 +1,177 @@
+## 研究备忘录（Research Memo）
+
+### 1. Market Regime — 指数弱、个股强的分化日
+
+- **指数**：三大指数全部收绿（上证 -0.71% / 深成 -0.16% / 创业板 -0.94%），科创50 更弱 -2.54%。但**个股层面普涨**：涨跌比 3303:2135 = **1.55:1**，涨停 55 家 vs 跌停仅 4 家。典型"大盘权重（科技/AI硬件）派发、中小盘防御轮动"的分化盘。
+- **Breadth 读法**：1.55:1 过了 1.5 门槛，但 0/3 主要指数翻红——机械层给的是 `balanced`（allow_new_positions=true, sizing 1.0），不构成 panic hard block（跌停仅4家，远低于30）。但**判断层选择空仓**：见下文 sector-first 结论。
+- **IV**：整体信号"极度恐慌"，avg IV rank **0.83**；500ETF/创业板ETF/500ETF深 rank 全部 **1.0**，300ETF 0.838、科创50 0.86。高 IV = 新仓油门收紧，不构成持仓卖出理由。
+- **宏观驱动**（web检索）：① 美股 AI 硬件重挫（10/30-31 费半 -7.20%、纳指 -2.86%、OpenAI 估值下修至 1.25 万亿）传导至 A 股半导体/通信设备/元件；② 国际油价今日大跌（百度热搜"国际油价大幅下跌"）压制油气链，尽管 Hormuz 危机仍在发酵（11-02 油轮触雷、ADNOC 称库存消耗近 10 亿桶）；③ 银行板块转冷（国有大行今日 bottom5，延续 11-02 齐鲁/宁波银行派发逻辑）；④ 今日事件：美国中期选举投票、澳洲联储利率决议、央行第三次互换便利操作（>1000亿申报，利好托底但非趋势信号）。
+
+### 2. Sector Analysis
+
+**Hot（今日 top5，仅日频数据，无5日序列）**：渔业 +3.53%、电池 +3.08%、工程机械 +2.80%、贵金属 +2.71%、医疗美容 +2.58%。
+**Cold（bottom5）**：通信设备 -4.94%、元件 -4.17%、油气开采Ⅱ -3.64%、半导体 -3.11%、国有大型银行Ⅱ -2.68%。
+
+**关键结论**：今日五个热点板块与策略池 **零交集**。策略池 27 只股票集中在：银行（4只，其中国有大行今日冷区）、航运港口（3只，中性）、石油石化/煤炭/能源（3只，油气链冷区）、CRO/生物（4只，未入 top5）、半导体/PCB（冷区）。换句话说——**没有一个候选股票处在今天上涨的板块里**。Rule 1 直接判新开仓出局。
+
+### 3. Position Review
+
+**青岛港（601298）**：持仓第 5 日，+1.24%，今日 -1.31%。航运港口未入 top/bottom5（中性）。未触发 -5% 硬止损（9.17）、15 日时间止损、+10% 移动止损。margin neutral。**HOLD**，止损 9.17 不变。
+
+**中国石油（601857）**：持仓第 5 日，+3.24%，今日 -2.35%。**油气开采Ⅱ 连续第 2 日入 bottom5**（11-02 两次 + 今日 -3.64%），叠加国际油价大跌 + margin deleveraging（chg5 -5.25%）。距硬止损 12.60 还有 7.96% 空间，未触发任何卖出规则。按 Rule 1"行业冷 3 日才卖"，今日是第 2 日 → **HOLD，但升级警戒**：明日若油气链仍留 bottom5 即 SELL，不因浮盈或 Hormuz 紧张豁免。
+
+### 4. New Entry Candidates — 全部否决（详见 skip_list）
+
+9 只 enriched 候选逐一过闸：锦江航运 Rule 2b 硬跳过（MA 全超标）；中信/苏州银行板块转冷+deleveraging；广汇能源冷区；斯菱智驱 PE275 估值红旗；中国神华/中谷物流/中国广核虽有亮点（0风险/VCP/甜点区 RPS），但**板块都不在今日热点**，红盘+恐慌 IV 下不追。**new_positions: []**，现金保持 93.2%。
+
+### 5. Skip List
+
+见下方 JSON（8 条，全部引用输入数据中的 RPS/MA/margin/事件）。
+
+### 6. Learnings
+
+见下方 JSON（4 条结构化 learnings）。
+
+### 7. Uncertainty Flags
+
+- **板块只有日频涨跌幅，无 5 日/20 日序列**，无法严格验证"top 30%"与"连续 3 日冷"的精确排名，只能用 top5/bottom5 近似。
+- **中国石油的油气链冷区**：11-02 记为"冷1天"、今日为第2天，若明天再入 bottom5 应机械 SELL——但板块冷度受油价单日波动扰动大，存在"油价反弹、板块一日回温"的假信号风险，需盯紧。
+- **IV 恐慌信号与 breadth 的分歧**：涨跌比 1.55、55 涨停说明情绪未崩，但 IV 全线 1.0 提示对冲成本极高。我对"这是轮动而非顶部"的置信度只有中等——若明日 breadth 掉到 1.0 以下，应立刻转为 panic 应对。
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "渔业", "day_pct": 3.53, "trend": "single-day pop"},
+      {"name": "电池", "day_pct": 3.08, "trend": "single-day pop"},
+      {"name": "工程机械", "day_pct": 2.8, "trend": "single-day pop"},
+      {"name": "贵金属", "day_pct": 2.71, "trend": "single-day pop"},
+      {"name": "医疗美容", "day_pct": 2.58, "trend": "single-day pop"}
+    ],
+    "cold_sectors": [
+      {"name": "通信设备", "day_pct": -4.94, "trend": "deteriorating"},
+      {"name": "元件", "day_pct": -4.17, "trend": "deteriorating"},
+      {"name": "油气开采Ⅱ", "day_pct": -3.64, "trend": "deteriorating (连续2日)"},
+      {"name": "半导体", "day_pct": -3.11, "trend": "deteriorating"},
+      {"name": "国有大型银行Ⅱ", "day_pct": -2.68, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/2 持仓在今日热点板块；青岛港(航运港口)中性，中国石油(油气开采Ⅱ)连续2日bottom5",
+    "regime": "科技/AI硬件派发，资金轮入渔业/电池/工程机械/贵金属/医美，指数红盘+个股普涨的分化日"
+  },
+  "position_decisions": [
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "航运港口未入今日top/bottom5，板块中性；现价9.77浮盈+1.24%(第5日)未触发-5%硬止损(9.17)/首3日-3%/15日时间止损；margin neutral；IV 300ETF 0.838高位只收紧新仓标准、不影响持仓，维持持有，止损9.17不变",
+      "sector_rank": "航运港口：中性（未入top/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 1.24,
+      "days_held": 5,
+      "exit_price": null
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "action": "HOLD",
+      "reason": "油气开采Ⅱ连续第2日入bottom5(今日-3.64%，国际油价大跌/Baidu热搜'国际油价大幅下跌')，叠加margin chg5 -5.25% deleveraging；但未满'行业冷3日才卖'，现价13.69浮盈+3.24%未触发任何卖出规则，距止损12.60仍有7.96%。升级警戒：明日若油气链仍留bottom5则机械SELL，不因浮盈或Hormuz紧张豁免",
+      "sector_rank": "油气开采Ⅱ：bottom5（连续2日）",
+      "new_stop": null,
+      "pnl_pct": 3.24,
+      "days_held": 5,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601083",
+      "name": "锦江航运",
+      "reason": "Rule 2b硬跳过：dist_ma5 12.8%>6%、dist_ma10 14.0%>8%、dist_ma20 12.5%>12%，涨停后过度延伸，追高即接盘；IV 300ETF 0.838极高",
+      "rps120": 92.94
+    },
+    {
+      "code": "601998",
+      "name": "中信银行",
+      "reason": "RPS120 94.01处92-95%扩展区，但1个风险因子(估值历史高位)、无>50%盈利催化(Q3净利+4.6%)、股份制银行非top10%，扩展区豁免不成立；国有大行今日bottom5、margin deleveraging，银行防御主线失血",
+      "rps120": 94.01
+    },
+    {
+      "code": "002966",
+      "name": "苏州银行",
+      "reason": "银行板块转冷(城商行Ⅱ 11-02入bottom5、国有大行今日bottom5)，margin chg5 -19.74% deleveraging、net5_repay_days 5，IV 500ETF深 rank 1.0；板块派发不接",
+      "rps120": 93.52
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "油气开采Ⅱ今日bottom5(-3.64%)冷区禁入(h019)；另有2风险因子(大股东质押占持股77%、现金短债比0.29)，margin deleveraging",
+      "rps120": 92.55
+    },
+    {
+      "code": "301550",
+      "name": "斯菱智驱",
+      "reason": "PE 275.4+净利仅+2.2%增长=估值红旗(PE>200无增长)；dist_ma20 11.2%逼近12%追高阈值；IV创业板ETF rank 1.0；汽车零部件未入今日top5",
+      "rps120": 93.2
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "reason": "0风险+VCP收缩比0.26质量高、MA全合规，但煤炭开采未入今日top5(不满足top30%确认)，margin deleveraging(chg5 -4.13%)；红盘日不追，等板块重回热点再评估",
+      "rps120": 93.89
+    },
+    {
+      "code": "603565",
+      "name": "中谷物流",
+      "reason": "扩展区93.88靠最新季度净利+149%催化豁免，但航运港口今日未入top5、IV 300ETF 0.838极高、含8-25 -7.32%抛压风险因子；板块未共振，不新开",
+      "rps120": 93.88
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "reason": "RPS120 89.73是池内唯一甜点区(80-92%)候选，MA全合规+margin adding(chg5 +8.2%)+10-29业绩超预期；但公用事业/核电未入今日top5，IV 500ETF深 1.0极高，板块未确认前不买",
+      "rps120": 89.73
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "今日'指数弱、个股强'分化日验证sector-first的正确动作是空仓：三大指数齐跌+IV极度恐慌(rank均值0.83)，但涨跌比1.55:1、55涨停；热点板块(渔业/电池/工程机械/贵金属/医美)与策略池零交集——没有任何候选在上涨板块里，机械层'balanced允许开仓'之上，判断层应主动空仓",
+      "type": "observation",
+      "tags": ["sector", "entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "板块动量是收益第一来源；候选池与热点零交集时强开仓只是给冷门板块提供流动性"
+    },
+    {
+      "text": "RPS>95%封顶规则再次过滤策略池约70%候选(百普赛斯99.83/福赛科技99.51/国恩股份98.95等全部>95)，仅中国广核89.73落在甜点区，但其板块(核电/公用)今日未入top5，故甜点区候选也因sector-first不买",
+      "type": "rule",
+      "tags": ["entry-filter", "sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "动量极致拥挤(RPS 98-99)时均值回归风险主导；唯一低RPS候选又缺板块共振"
+    },
+    {
+      "text": "油气开采Ⅱ连续第2日入bottom5(11-02两次+今日-3.64%)且国际油价今日大跌(百度热搜'国际油价大幅下跌')；中国石油margin chg5 -5.25% deleveraging叠加板块降温，触发Rule 1'冷3日即卖'预警——明日若仍留bottom5则SELL，不因+3.24%浮盈或Hormuz紧张豁免",
+      "type": "signal",
+      "tags": ["sector", "exit-rule"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "板块重力>个股表现；油价回落使石油板块估值支撑松动，deleveraging放大下行弹性"
+    },
+    {
+      "text": "IV'极度恐慌'(500ETF/创业板ETF/500ETF深 rank均1.0)是新开仓油门而非持仓卖出信号：青岛港/中国石油均浮盈且未触发任何卖出规则，IV高位只收紧新仓标准、放宽对现有浮盈仓的止损容忍",
+      "type": "observation",
+      "tags": ["position-sizing", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "IV高对应波动大，但卖出由价格/板块规则触发，不由IV单独触发"
+    }
+  ],
+  "market_summary": "三大指数齐跌(上证-0.71%/深成-0.16%/创业板-0.94%/科创50-2.54%)，但个股普涨(涨跌比1.55:1，涨停55家/跌停仅4家)——大盘科技派发、中小盘防御轮动。Breadth 1.55:1尚可但0/3指数翻红，IV极度恐慌(rank均值0.83，500ETF/创业板ETF均1.0)。驱动：美股AI硬件重挫(费半-7.20%、OpenAI估值下修)传导至半导体/通信设备/元件；国际油价大跌使油气开采Ⅱ连2日入bottom5；银行转冷(国有大行bottom5)。热点top5(渔业/电池/工程机械/贵金属/医疗美容)与策略池零交集，sector-first判无票可买，保持现金93.2%",
+  "market_sentiment": "bearish",
+  "market_call": "观望"
+}
+```
