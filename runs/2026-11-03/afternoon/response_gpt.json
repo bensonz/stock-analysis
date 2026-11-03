@@ -1,0 +1,179 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "养殖业",
+        "5d_pct": null,
+        "day_pct": 3.46,
+        "trend": "防御轮动领涨"
+      },
+      {
+        "name": "保险Ⅱ",
+        "5d_pct": null,
+        "day_pct": 2.87,
+        "trend": "大金融强势"
+      },
+      {
+        "name": "工程机械",
+        "5d_pct": null,
+        "day_pct": 2.74,
+        "trend": "顺周期"
+      },
+      {
+        "name": "医疗美容",
+        "5d_pct": null,
+        "day_pct": 2.46,
+        "trend": "消费防御"
+      },
+      {
+        "name": "白酒Ⅱ",
+        "5d_pct": null,
+        "day_pct": 2.38,
+        "trend": "资金避险"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "通信设备",
+        "5d_pct": null,
+        "day_pct": -8.47,
+        "trend": "崩跌"
+      },
+      {
+        "name": "元件",
+        "5d_pct": null,
+        "day_pct": -7.63,
+        "trend": "崩跌"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": null,
+        "day_pct": -5.47,
+        "trend": "崩跌"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": null,
+        "day_pct": -5.09,
+        "trend": "下跌"
+      },
+      {
+        "name": "自动化设备",
+        "5d_pct": null,
+        "day_pct": -4.04,
+        "trend": "下跌"
+      }
+    ],
+    "position_alignment": "0/2 positions in hot sectors（航运港口、石油石化均为中性/偏冷）",
+    "regime": "防御轮动：白酒/保险/养殖领涨，通信/半导体/元件崩跌；美伊和谈致油价大跌（注：输入仅提供当日板块涨跌幅，5日动量未提供）"
+  },
+  "position_decisions": [
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "航运港口今日未入top/bottom5，板块中性；现价9.79浮盈+1.45%(第5日)未触发-5%硬止损(9.17)/首3日-3%/15日时间止损；margin neutral；维持持有，止损9.17不变",
+      "sector_rank": "中性（未入top/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 1.45,
+      "days_held": 5,
+      "exit_price": null
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "action": "HOLD",
+      "reason": "油气链冷streak计2日未满'3日卖出'，收盘bottom5未含油气开采Ⅱ；现价14.0浮盈+5.58%(第5日)未触发任何卖出规则，距硬止损12.60约10%；美伊和谈致油价单日大跌(WTI -7.4%至96.46美元/第一财经)，thesis受损但个股仅-0.14%逆板块抗跌，明日若油气链再入bottom5则按Rule 1机械SELL",
+      "sector_rank": "中性偏冷（午盘入bottom5，收盘未列）",
+      "new_stop": null,
+      "pnl_pct": 5.58,
+      "days_held": 5,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601083",
+      "name": "锦江航运",
+      "reason": "Rule 2b追高拦截：dist_ma5_pct 9.1%(>6%)、dist_ma10_pct 13.1%(>8%)严重超买；另换手率21%短线资金博弈风险",
+      "rps120": 93.86
+    },
+    {
+      "code": "603565",
+      "name": "中谷物流",
+      "reason": "航运板块今日未入top30%(未列top5)；RPS120 94.64处扩展区(仅业绩+149%豁免)但板块不确认+弱市，不追",
+      "rps120": 94.64
+    },
+    {
+      "code": "601998",
+      "name": "中信银行",
+      "reason": "银行未入今日top5(领涨的是保险Ⅱ)；margin信号deleveraging(chg5 -3.74%)；弱市不新增",
+      "rps120": 94.42
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "reason": "煤炭今日未入top5；重入举证不足：10-22刚离场(-3.61%@27.05)，现价27.45无明确价位/形态/催化差异",
+      "rps120": 94.17
+    },
+    {
+      "code": "301550",
+      "name": "斯菱智驱",
+      "reason": "汽车零部件未入top5；PE 269.8无增长sanity红旗；IV 1.0极高；弱市跳过",
+      "rps120": 92.81
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "石油石化未入top5；大股东质押77%+现金短债比0.29风险；margin deleveraging；跳过",
+      "rps120": 92.96
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱市+风格防御切换日(0/3指数绿、涨跌比0.64:1、IV极度恐慌0.85)，策略池无一只候选属于当日领涨板块(养殖/保险/机械/医美/白酒)——Rule 1 sector-first直接给出空仓结论，无需在冷板块挑'相对好'的票",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "板块动量是单票动量的大前提，领涨板块外开仓胜率显著下降"
+    },
+    {
+      "text": "RPS>95封顶规则继续兜底：今日策略池32只中约18只RPS120>95被直接剔除(百普赛斯99.89/福赛99.51/比音勒芬99.03等)，避免在科技抱团瓦解日接飞刀",
+      "type": "rule",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "RPS>95时动量极致拥挤，均值回归风险高"
+    },
+    {
+      "text": "锦江航运进入missed_opportunities但dist_ma5 9.1%/dist_ma10 13.1%严重超买+换手率21%，Rule 2b正确拦截——'错过'≠'可追'",
+      "type": "observation",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "超买位置买入均值回归风险高，追高是另一个方向的错误"
+    },
+    {
+      "text": "中国石油thesis(油价+Hormuz紧张)遭美伊和谈逆转(油价单日-7.4%)，但个股仅-0.14%逆板块抗跌且浮盈+5.58%——卖出规则是价格/时间/板块冷3日，不是叙事；价格未破位不因'thesis坏'提前离场",
+      "type": "signal",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h023",
+      "mechanism": "价格是真相，叙事是噪音；逆势抗跌本身就是相对强度信号"
+    }
+  ],
+  "market_summary": "弱市防御日：0/3指数收绿(上证-0.82%/深成-1.21%/创业板-2.73%)，涨跌比0.64:1(涨2108/跌3309)、涨停52/跌停22；IV极度恐慌(平均IV Rank 0.85)；宏观利空叠加——央行11-15起上调外汇存款准备金率2pp(4%→6%)(金融界)、美中期选举日(财闻网)；风格防御切换：白酒/保险/养殖领涨，通信设备-8.47%领跌(亨通定增66亿引发光通信供给过剩担忧/华尔街见闻，费半-3.37%/金融界)，美伊和谈致油价大跌(WTI -7.4%至96.46美元/第一财经)。板块数据仅当日涨跌幅(非5日)。",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}

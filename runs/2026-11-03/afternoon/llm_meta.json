@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 128336,
+  "output_tokens": 19067,
+  "rounds": 2,
+  "duration_sec": 306.3,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年11月3日 A股 收盘 半导体 通信设备 大跌 原因",
+        "max_results": 5
+      },
+      "result_length": 3209
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年11月3日 国际油价 大跌 中国石油",
+        "max_results": 5
+      },
+      "result_length": 4249
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年11月3日 A股 养殖业 保险 白酒 上涨 板块",
+        "max_results": 5
+      },
+      "result_length": 3578
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=国际油价+大跌+今日",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    }
+  ],
+  "fallback_used": false
+}

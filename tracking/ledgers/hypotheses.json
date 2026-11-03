@@ -1266,7 +1266,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-11-02",
+      "lastTested": "2026-11-03",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1685,11 +1685,15 @@
           {
             "date": "2026-11-02",
             "detail": "候选池与热点板块零对齐：今日TMT领涨(数字媒体+11.26%/游戏+8.3%/软件开发+6.54%)，而strategy_pool(cheesefortune_intersection)27只无一只属于这些行业，全部为银行/煤炭/航运/能源/汽车/电力——筛选源(基本面交集)滞后于资金驱动的板块轮动，应在流水线层引入板块动量约束，而非决策层强行买入冷门行业"
+          },
+          {
+            "date": "2026-11-03",
+            "detail": "弱市+风格防御切换日(0/3指数绿、涨跌比0.64:1、IV极度恐慌0.85)，策略池无一只候选属于当日领涨板块(养殖/保险/机械/医美/白酒)——Rule 1 sector-first直接给出空仓结论，无需在冷板块挑'相对好'的票"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 104,
+      "sampleSize": 105,
       "hitRate": 1.0,
       "confidence": 0.991,
       "tags": [
@@ -2228,7 +2232,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-10-19",
+      "lastTested": "2026-11-03",
       "mechanism": "In a deteriorating market, protecting open profits is more valuable than maximizing upside variance.",
       "evidence": {
         "supporting": [
@@ -2495,13 +2499,17 @@
           {
             "date": "2026-10-19",
             "detail": "+10%移动止损锁盈后必须机械执行：昭衍新药锁+10%(47.14)后今日-9.2%击穿止损，果断卖出而非'CRO政策面仍有利'式等待——事件利好永不覆盖止损规则"
+          },
+          {
+            "date": "2026-11-03",
+            "detail": "中国石油thesis(油价+Hormuz紧张)遭美伊和谈逆转(油价单日-7.4%)，但个股仅-0.14%逆板块抗跌且浮盈+5.58%——卖出规则是价格/时间/板块冷3日，不是叙事；价格未破位不因'thesis坏'提前离场"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 66,
+      "sampleSize": 67,
       "hitRate": 1.0,
-      "confidence": 0.985,
+      "confidence": 0.986,
       "tags": [
         "exit-rule",
         "timing",
@@ -2736,7 +2744,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-10-30",
+      "lastTested": "2026-11-03",
       "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes.",
       "evidence": {
         "supporting": [
@@ -3007,11 +3015,15 @@
           {
             "date": "2026-10-30",
             "detail": "航运港口热门但龙头锦江航运dist_ma5=11.9%被Rule 2b拦截——热门板块不覆盖追高风险，验证h027"
+          },
+          {
+            "date": "2026-11-03",
+            "detail": "锦江航运进入missed_opportunities但dist_ma5 9.1%/dist_ma10 13.1%严重超买+换手率21%，Rule 2b正确拦截——'错过'≠'可追'"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 67,
+      "sampleSize": 68,
       "hitRate": 1.0,
       "confidence": 0.986,
       "tags": [
@@ -7277,13 +7289,17 @@
           {
             "date": "2026-11-03",
             "detail": "RPS>95%封顶规则再次过滤策略池约70%候选(百普赛斯99.83/福赛科技99.51/国恩股份98.95等全部>95)，仅中国广核89.73落在甜点区，但其板块(核电/公用)今日未入top5，故甜点区候选也因sector-first不买"
+          },
+          {
+            "date": "2026-11-03",
+            "detail": "RPS>95封顶规则继续兜底：今日策略池32只中约18只RPS120>95被直接剔除(百普赛斯99.89/福赛99.51/比音勒芬99.03等)，避免在科技抱团瓦解日接飞刀"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 22,
+      "sampleSize": 23,
       "hitRate": 1.0,
-      "confidence": 0.958,
+      "confidence": 0.96,
       "tags": [
         "entry-filter"
       ],
