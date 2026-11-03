@@ -25,7 +25,7 @@ rc=$?
 # Lesson: launchd will not start a new instance of a label while one is still
 # running — the 09-02 noon wrapper sat 4.6h in pit's historical backfill, so
 # the 15:05 afternoon run was silently SKIPPED. "Non-fatal to the exit code"
-# is not the same as "non-fatal to the schedule". PIT now runs as its own
-# label (com.bz.stock-pit, ops/launchd/) where blocking itself is harmless.
+# is not the same as "non-fatal to the schedule". PIT then ran as its own
+# label until it was removed 2026-11-03: nothing ever read archive/.
 echo "=== exit=$rc $(date '+%Y-%m-%d %H:%M:%S %z') ==="
 exit $rc
