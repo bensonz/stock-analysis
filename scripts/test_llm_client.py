@@ -142,3 +142,59 @@ def test_anthropic_loop_reports_a_cut_off_reply(monkeypatch):
     meta = {}
     llm_client._run_tool_loop(object(), [], "m", 100, 0, [], meta=meta)
     assert meta["truncated"] is True
+
+
+def _no_env_files(tmp_path: Path, monkeypatch):
+    monkeypatch.setattr(llm_client, "ENV_FILE", tmp_path / "missing.env")
+    monkeypatch.setattr(llm_client, "CLAUDE_SETTINGS_FILE", tmp_path / "missing.json")
+
+
+def test_relay_proxy_unset_means_direct_and_no_probe(tmp_path: Path, monkeypatch):
+    _no_env_files(tmp_path, monkeypatch)
+    monkeypatch.delenv("ANTHROPIC_PROXY", raising=False)
+    monkeypatch.setattr(llm_client.requests, "get",
+                        lambda *a, **k: (_ for _ in ()).throw(AssertionError("probed")))
+    assert llm_client._relay_proxy("http://relay.example/api") is None
+
+
+def test_relay_proxy_used_when_it_reaches_the_relay(tmp_path: Path, monkeypatch):
+    _no_env_files(tmp_path, monkeypatch)
+    monkeypatch.setenv("ANTHROPIC_PROXY", "http://127.0.0.1:8118")
+    seen = {}
+
+    def fake_get(url, proxies=None, timeout=None):
+        seen.update(url=url, proxies=proxies)
+        return SimpleNamespace(status_code=401)   # any HTTP answer = reachable
+
+    monkeypatch.setattr(llm_client.requests, "get", fake_get)
+    assert llm_client._relay_proxy("http://relay.example/api") == "http://127.0.0.1:8118"
+    assert seen == {"url": "http://relay.example/api",
+                    "proxies": {"http": "http://127.0.0.1:8118", "https": "http://127.0.0.1:8118"}}
+
+
+def test_relay_proxy_that_cannot_reach_the_relay_falls_back_loudly(tmp_path: Path, monkeypatch, capsys):
+    _no_env_files(tmp_path, monkeypatch)
+    monkeypatch.setenv("ANTHROPIC_PROXY", "http://127.0.0.1:8118")
+
+    def fake_get(*a, **k):
+        raise llm_client.requests.ConnectionError("Proxy CONNECT aborted")
+
+    monkeypatch.setattr(llm_client.requests, "get", fake_get)
+    assert llm_client._relay_proxy("http://relay.example/api") is None
+    assert "cannot reach http://relay.example/api" in capsys.readouterr().err
+
+
+def test_build_anthropic_client_routes_only_through_a_working_proxy(tmp_path: Path, monkeypatch):
+    _no_env_files(tmp_path, monkeypatch)
+    monkeypatch.setenv("ANTHROPIC_AUTH_TOKEN", "k")
+    monkeypatch.setenv("ANTHROPIC_BASE_URL", "http://relay.example/api")
+    built = []
+    monkeypatch.setattr(llm_client.anthropic, "Anthropic", lambda **kw: built.append(kw) or kw)
+
+    monkeypatch.setattr(llm_client, "_relay_proxy", lambda url: "http://127.0.0.1:8118")
+    llm_client._build_anthropic_client()
+    monkeypatch.setattr(llm_client, "_relay_proxy", lambda url: None)
+    llm_client._build_anthropic_client()
+
+    assert "http_client" in built[0] and built[0]["base_url"] == "http://relay.example/api"
+    assert "http_client" not in built[1]

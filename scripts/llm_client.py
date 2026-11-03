@@ -847,7 +847,35 @@ def _build_anthropic_client() -> anthropic.Anthropic:
         "ANTHROPIC_BASE_URL",
         default="https://api.anthropic.com",
     )
+    proxy = _relay_proxy(base_url)
+    if proxy:
+        print(f"[llm_client] Claude relay via proxy {proxy}", file=sys.stderr)
+        return anthropic.Anthropic(base_url=base_url, api_key=api_key,
+                                   http_client=anthropic.DefaultHttpxClient(proxy=proxy))
     return anthropic.Anthropic(base_url=base_url, api_key=api_key)
+
+
+def _relay_proxy(base_url: str) -> str | None:
+    """ANTHROPIC_PROXY, if it is set and can reach the Claude relay; else None.
+
+    2026-11-03: the direct link to the relay (an overseas IP, plain HTTP) was
+    cut for ~54s of every ~110s, and four deep-report runs died on "Connection
+    reset by peer". Through MonoProxy, 40 of 40 calls passed. Only the Claude
+    relay goes through the proxy; DeepSeek and the domestic data sources stay
+    direct. Any HTTP answer through the proxy counts as reachable (the relay
+    answers 401 without a key). A proxy that cannot reach the relay is skipped
+    with a warning, so a dead proxy falls back to the direct path.
+    """
+    proxy = _get_env_value("ANTHROPIC_PROXY")
+    if not proxy:
+        return None
+    try:
+        requests.get(base_url, proxies={"http": proxy, "https": proxy}, timeout=5)
+    except requests.RequestException as e:
+        print(f"[llm_client] ⚠️ ANTHROPIC_PROXY {proxy} cannot reach {base_url} "
+              f"({type(e).__name__}) — calling the Claude relay directly", file=sys.stderr)
+        return None
+    return proxy
 
 
 def _build_openai_client() -> openai.OpenAI:

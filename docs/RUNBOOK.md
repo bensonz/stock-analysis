@@ -119,7 +119,7 @@ python3 scripts/research/deep_report.py 002293 --no-bear      # skip the bear-re
 
 Output lands in `reports/<code>-<name>/` as `<code>-<date>-deep.md` plus a
 `-deep-verify.json` audit trail and a `-deep-bear.md` bear brief; falsifiable
-predictions from the article are appended to the prediction log automatically. Writer defaults to Opus 5.5 (`ANTHROPIC_MODEL` in `.env`),
+predictions from the article are appended to the prediction log automatically. Writer defaults to Opus 5.5 (`ANTHROPIC_MODEL` in `.env`; the Claude relay goes through `ANTHROPIC_PROXY` — if every Claude call dies on `Connection reset by peer`, check MonoProxy with `curl -x http://127.0.0.1:8118 -o /dev/null -w '%{http_code}' https://www.google.com`, which should print 200),
 verifier to DeepSeek (`--provider` / `--verify-provider` to override; env
 `DEEP_REPORT_PROVIDER` / `DEEP_REPORT_VERIFY_PROVIDER` set defaults).
 
