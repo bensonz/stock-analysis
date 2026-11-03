@@ -122,8 +122,8 @@ qualitatively instead of inventing precision.
   Score each dimension honestly against its anchors; do not tune scores to reach a band.
 - One or two paragraphs: the thesis in plain terms — what is the market getting right/wrong,
   what is the single most important driver, **and the single biggest thing that could break
-  it** (with its date, if it has one). A 4/5 that never names its top risk up front is a
-  cheerleader's 4/5.
+  it** (with its date, if it has one). A bullish call that never names its top risk up
+  front is a cheerleader's call.
 - A short bullet list of the 3–5 hard numbers that anchor the call.
 
 ### 2. 深度剖析
@@ -268,14 +268,15 @@ Append the block at the end of your output, after the closing restatement and ri
 **before** the `predictions` block (it is stripped before publication):
 
 ```scorecard
-{"F": 7.5, "F_anchor": "8: 利润加速但收入个位数（结构性改善）——……",
- "V": 5.0, "V_anchor": "4–6之间: 分位 70–85%，回报依赖盈利兑现——……",
- "M": 6.5, "M_anchor": "6–8之间: 三线过闸但 RPS20<20——……",
- "R": 6.0, "R_anchor": "6: 回撤 base-rate 高 + 单一可跟踪风险点——……"}
+{"F": <0–10>, "F_anchor": "<匹配的锚点条款>——<本报告中满足它的事实>",
+ "V": <0–10>, "V_anchor": "…",
+ "M": <0–10>, "M_anchor": "…",
+ "R": <0–10>, "R_anchor": "…"}
 ```
 
 Each `*_anchor` must **quote the anchor clause you matched AND name the fact from this
-report that satisfies it** (the `……` above). Keys F, V, M, R and all four `*_anchor`
+report that satisfies it**. Replace every `<0–10>` with your own number — the
+template has no example values on purpose, so nothing anchors your scores. Keys F, V, M, R and all four `*_anchor`
 are required; a missing or malformed block publishes the report with `评级 无法计算` —
 never a guess.
 
