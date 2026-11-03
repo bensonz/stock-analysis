@@ -84,6 +84,62 @@ def test_health_spot_audit_catches_mismatch(monkeypatch):
     assert h["ok"] is False
 
 
+def _klines(days_closes: dict):
+    """Fake _fetch_klines_sina: the given day -> close bars for any code."""
+    return lambda stock, datalen: [
+        (stock["code"], d, c, c, c, c, 1000, None) for d, c in days_closes.items()]
+
+
+def test_spot_audit_noon_verifies_the_latest_date(monkeypatch):
+    conn = _db({D1: 10, D2: 10, D3: 10}, factors_through=D3)
+    _pin_calendar(monkeypatch, D3, [D1, D2, D3])
+    monkeypatch.setattr(pricedb, "_fetch_klines_sina",
+                        _klines({D1: 10.0, D2: 10.0, D3: 10.0}))
+    spot = pricedb.db_health(conn, spot_check=True)["spot_check"]
+    assert spot["date"] == spot["requested"] == D3
+    assert spot["checked"] == 10
+    assert spot["fetch_failures"] == 0
+
+
+def test_spot_audit_falls_back_when_todays_kline_is_not_published(monkeypatch):
+    # Afternoon: the snapshot wrote D3, sina's kline archive still ends at D2.
+    conn = _db({D1: 10, D2: 10, D3: 10}, factors_through=D3)
+    _pin_calendar(monkeypatch, D3, [D1, D2, D3])
+    monkeypatch.setattr(pricedb, "_fetch_klines_sina",
+                        _klines({D1: 10.0, D2: 10.0}))
+    h = pricedb.db_health(conn, spot_check=True)
+    spot = h["spot_check"]
+    assert spot["date"] == D2
+    assert spot["requested"] == D3
+    assert spot["checked"] == 10
+    assert spot["fetch_failures"] == 0
+    assert h["ok"] is True
+
+
+def test_spot_audit_catches_mismatch_on_the_fallback_date(monkeypatch):
+    conn = _db({D1: 10, D2: 10, D3: 10}, factors_through=D3)
+    _pin_calendar(monkeypatch, D3, [D1, D2, D3])
+    monkeypatch.setattr(pricedb, "_fetch_klines_sina",
+                        _klines({D1: 10.0, D2: 12.0}))
+    h = pricedb.db_health(conn, spot_check=True)
+    assert h["spot_check"]["date"] == D2
+    assert len(h["spot_check"]["mismatches"]) == 10
+    assert h["ok"] is False
+    assert any(f"vs sina on {D2}" in w for w in h["warnings"])
+
+
+def test_spot_audit_skips_codes_with_no_bar_on_the_fallback_date(monkeypatch):
+    conn = _db({D1: 10, D2: 10, D3: 10}, factors_through=D3)
+    conn.execute("DELETE FROM daily_prices WHERE code = '600000' AND date = ?", (D2,))
+    _pin_calendar(monkeypatch, D3, [D1, D2, D3])
+    monkeypatch.setattr(pricedb, "_fetch_klines_sina",
+                        _klines({D1: 10.0, D2: 10.0}))
+    spot = pricedb.db_health(conn, spot_check=True)["spot_check"]
+    assert spot["sampled"] == 10
+    assert spot["checked"] == 9
+    assert spot["fetch_failures"] == 0
+
+
 def _gate_data(health: dict) -> dict:
     """Minimal phase-1 data dict that passes every other check."""
     return {

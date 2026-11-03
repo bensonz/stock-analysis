@@ -13,11 +13,18 @@ nothing downstream was listening. A module that only reports is worth being able
 to exercise against synthetic database states, which is what this split buys —
 build a conn, seed a lag, assert the warning.
 
-Two known weak spots, both visible in the audit trail rather than fixed here:
+`spot_check` shipped `sampled: 20, checked: 0, fetch_failures: 20` under
+`ok: true` on every afternoon run for 39 days (to 2026-11-02). At 15:05 the
+latest DB date is today, written by the realtime snapshot; sina's daily-kline
+archive lags hours, so no kline carried today's date and every code counted as
+a fetch failure. Fixed 2026-11-03: the audit verifies the newest date the
+archive has published (one date for the whole sample, `date` beside
+`requested`). Checking today against sina realtime instead would compare the
+snapshot with its own source. `doctor.check_db_health_spot_check` still flags
+any audit that checked nothing.
 
-- `spot_check` has shipped `sampled: 20, checked: 0, fetch_failures: 20` under
-  `ok: true` on six days. Zero mismatches out of zero comparisons is not a clean
-  bill of health, and `doctor.check_db_health_spot_check` now says so.
+One known weak spot, visible here rather than fixed:
+
 - The functions it needs from pricedb (`_fetch_klines_sina`,
   `last_settled_trading_day`, `_get_trade_calendar_cached`) are imported inside
   the function bodies, so the lookup resolves at call time against pricedb's
@@ -115,15 +122,21 @@ def db_health(conn: sqlite3.Connection, spot_check: bool = False) -> dict:
             out["ok"] = False
             out["warnings"].append(
                 f"spot audit: {len(out['spot_check']['mismatches'])} close-price "
-                f"mismatches vs sina on {latest} "
+                f"mismatches vs sina on {out['spot_check']['date']} "
                 f"({','.join(m['code'] for m in out['spot_check']['mismatches'][:5])})")
     return out
 
 def _spot_audit(conn: sqlite3.Connection, date_iso: str, sample: int = 20) -> dict:
-    """Cross-source correctness check: random codes' stored closes on
-    `date_iso` vs sina. Presence checks catch missing data; this catches
+    """Cross-source correctness check: random codes' stored closes vs sina
+    daily klines. Presence checks catch missing data; this catches
     wrong-but-present data (the silent killer). Fetch failures are reported
-    but never counted as mismatches."""
+    but never counted as mismatches.
+
+    Sina's kline archive lags the close by hours, so after the realtime
+    snapshot has written today's bar, the archive's newest day is often
+    yesterday. The first successful fetch fixes the verified date: the newest
+    kline day <= `date_iso`, for every sampled code (one date, never a
+    per-code mix). That lag shows as `date` < `requested`, not as failures."""
     # Deferred: resolves against pricedb's globals at call time.
     from pricedb import _fetch_klines_sina
     import random
@@ -132,22 +145,32 @@ def _spot_audit(conn: sqlite3.Connection, date_iso: str, sample: int = 20) -> di
         "WHERE d.date = ?", (date_iso,))]
     codes = [c for c in codes if _sina_symbol(c, "")]
     picked = random.sample(codes, min(sample, len(codes)))
+    verify_date = None
     checked, mismatches, failures = 0, [], 0
     for code in picked:
-        stored = conn.execute(
-            "SELECT close FROM daily_prices WHERE code = ? AND date = ?",
-            (code, date_iso)).fetchone()[0]
         try:
             rows = _fetch_klines_sina({"code": code, "exchange": ""}, 5)
         except Exception:
             failures += 1
             continue
-        ref = next((r[5] for r in rows if r[1] == date_iso), None)
+        if not rows:
+            failures += 1
+            continue
+        if verify_date is None:
+            verify_date = max((r[1] for r in rows if r[1] <= date_iso),
+                              default=date_iso)
+        stored = conn.execute(
+            "SELECT close FROM daily_prices WHERE code = ? AND date = ?",
+            (code, verify_date)).fetchone()
+        if stored is None:
+            continue  # no stored bar that day (suspended, new listing)
+        ref = next((r[5] for r in rows if r[1] == verify_date), None)
         if ref is None:
             failures += 1
             continue
         checked += 1
-        if abs(ref - stored) > 0.011:  # prices are 2dp; anything more is real
-            mismatches.append({"code": code, "stored": stored, "sina": ref})
-    return {"date": date_iso, "sampled": len(picked), "checked": checked,
+        if abs(ref - stored[0]) > 0.011:  # prices are 2dp; anything more is real
+            mismatches.append({"code": code, "stored": stored[0], "sina": ref})
+    return {"date": verify_date or date_iso, "requested": date_iso,
+            "sampled": len(picked), "checked": checked,
             "fetch_failures": failures, "mismatches": mismatches}

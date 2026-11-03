@@ -513,6 +513,12 @@ def check_db_health_spot_check(v: RunView) -> list[Finding]:
     2026-08-27. Zero mismatches out of zero comparisons is not a clean bill of
     health; it is the absence of one, and reporting it as a pass is the exact
     lie this layer exists to catch.
+
+    Root cause, found 2026-11-03 after 39 afternoons of it: at 15:05 the audit
+    asked sina's daily klines for today's bar, which their archive publishes
+    hours late. `_spot_audit` now verifies the newest published date instead
+    (`date` < `requested` on afternoons). This check stays: any audit that
+    confirms nothing is still a finding.
     """
     spot = (v.need("db_health") or {}).get("spot_check")
     if not spot:
