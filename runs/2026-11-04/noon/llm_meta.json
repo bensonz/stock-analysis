@@ -1,0 +1,82 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 208373,
+  "output_tokens": 18436,
+  "rounds": 3,
+  "duration_sec": 303.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+今日+热门板块+半导体+医疗服务+2026年11月4日",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=国际油价+布伦特+WTI+今日+2026年11月",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=港口航运+集运+运价上调+马士基+2026",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+市场+涨跌+2026年11月4日",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=动力煤+价格+煤炭板块+2026年11月",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月4日 市场 涨跌 板块 半导体 医疗服务",
+        "max_results": 6
+      },
+      "result_length": 4174
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "集运 马士基 达飞 运价上调 远东 欧洲 2026年11月",
+        "max_results": 5
+      },
+      "result_length": 3661
+    }
+  ],
+  "fallback_used": false
+}

@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-04",
+  "actions": [
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 9.78,
+      "pnl_pct": 1.35,
+      "note": "航运港口今日未入top5/bottom5，板块中性；浮盈+1.35%(第6日)未触发-5%硬止损(9.17)/首3日-3%/15日时间止损；margin adding(chg5 +13.75%)；集运运价上调催化仍新鲜(马士基10/29宣布11/16起上调远东至北欧/地中海运价，来源：东方财富网)。维持持有，止损9.17不变"
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "action": "HOLD",
+      "price": 13.94,
+      "pnl_pct": 5.13,
+      "note": "石油石化今日未入bottom5，油气链冷streak(11-02/11-03连续2日)终结，Rule 1'冷3日卖出'不触发；浮盈+5.13%(第6日)未触发任何卖出规则，<+10%无需抬止损；margin deleveraging(chg5 -4.01%)为警示但非卖出信号；油价高位支撑(布伦特117.64/WTI 104.12，11/1，来源：网易)。维持持有，止损12.60不变"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 2,
+    "totalEquity": 967368.94,
+    "dayPnl": -196.0,
+    "dayReturnPct": -0.02,
+    "totalReturnPct": -3.26,
+    "unrealizedPnl": 2268.0,
+    "realizedPnl": -34899.06,
+    "cashPct": 93.13
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.4418,
+    "up": 1656,
+    "down": 3748,
+    "positive_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [
+      "上证指数"
+    ],
+    "limit_ups": 31,
+    "limit_downs": 17,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.44:1, 2/3 major indices green, 31 limit-ups / 17 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "弱市：涨跌比0.44:1(涨1656/跌3748)，跌停17/涨停31，上证-0.1%、深成+0.14%、创业板+0.1%、科创50+0.85%——指数微红靠权重与科创50，宽度极弱。IV均值0.85'极度恐慌'(300ETF 0.87/500ETF 1.0)。热门：医疗服务+2.46%、航天装备Ⅱ+2.13%、半导体+1.99%、出版+1.57%、贵金属+1.48%；冷门：其他家电Ⅱ-3.91%、照明设备Ⅱ-3.48%、渔业-2.66%、房地产服务-2.08%、房地产开发-2.03%。持仓0/2在热门板块(航运港口、石油石化均未入top5)。油价高位(布伦特117.64/WTI 104.12，11/1网易)。策略池31只约20只RPS120>95%被超热封顶，剩余候选均不在今日热门板块。结论：弱市默认空仓，不开新仓，持有现有2仓"
+  }
+}

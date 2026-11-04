@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-11-03",
+  "lastUpdated": "2026-11-04",
   "hypotheses": [
     {
       "id": "h001",
@@ -2744,7 +2744,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-11-03",
+      "lastTested": "2026-11-04",
       "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes.",
       "evidence": {
         "supporting": [
@@ -3019,11 +3019,19 @@
           {
             "date": "2026-11-03",
             "detail": "锦江航运进入missed_opportunities但dist_ma5 9.1%/dist_ma10 13.1%严重超买+换手率21%，Rule 2b正确拦截——'错过'≠'可追'"
+          },
+          {
+            "date": "2026-11-04",
+            "detail": "弱市纪律验证：breadth 0.44:1(跌3748/涨1656)+IV均值0.85'极度恐慌'+今日top5板块(医疗/军工/半导体/出版/贵金属)内无一候选处于RPS甜点区——策略池31只中约20只RPS120>95%被超热封顶拦截，剩余候选全部落在非热门板块。正确决策是new_positions:[]而非勉强开仓"
+          },
+          {
+            "date": "2026-11-04",
+            "detail": "好催化≠好入场点：马士基10/29宣布11/16起上调远东至北欧/地中海运价(东方财富网)，航运为真催化；但锦江航运dist_ma5 6.8%/dist_ma10 10.7%触发Rule 2b，同板块中谷物流MA合规但板块未入top5+margin deleveraging。催化决定方向，MA偏离决定是否已涨过头"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 68,
+      "sampleSize": 70,
       "hitRate": 1.0,
       "confidence": 0.986,
       "tags": [
@@ -4680,7 +4688,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-11-03",
+      "lastTested": "2026-11-04",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4859,13 +4867,17 @@
           {
             "date": "2026-11-03",
             "detail": "油气开采Ⅱ连续第2日入bottom5(11-02两次+今日-3.64%)且国际油价今日大跌(百度热搜'国际油价大幅下跌')；中国石油margin chg5 -5.25% deleveraging叠加板块降温，触发Rule 1'冷3日即卖'预警——明日若仍留bottom5则SELL，不因+3.24%浮盈或Hormuz紧张豁免"
+          },
+          {
+            "date": "2026-11-04",
+            "detail": "油气链冷streak规则验证：中国石油11-02/11-03连续2日行业入bottom5后，今日bottom5不含石油石化，冷streak自动终结、不触发'行业冷3日卖出'。Rule 1是持续性触发而非单日恐慌信号，避免在油价高位因一天下跌就砍掉+5%仓位"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 44,
+      "sampleSize": 45,
       "hitRate": 1.0,
-      "confidence": 0.978,
+      "confidence": 0.979,
       "tags": [
         "sector",
         "exit-rule"
@@ -6811,7 +6823,7 @@
       "type": "observation",
       "status": "hypothesis",
       "created": "2026-08-04",
-      "lastTested": "2026-11-02",
+      "lastTested": "2026-11-04",
       "mechanism": "高IV+强广度=恐慌消退初期的反弹窗口，应参与但控制仓位（本次总仓位~38%，保留62%现金应对高IV冲击）",
       "evidence": {
         "supporting": [
@@ -6826,13 +6838,17 @@
           {
             "date": "2026-11-02",
             "detail": "高IV(平均IV rank 0.81，300/500/创业板ETF均>0.83)与强价格盘并存：期权定价的是10月末那波剧烈波动的延续，而非今日方向。IV>75%只买最强setup——今日无候选通过板块+追高门槛，IV约束未生效但不改变空仓结论。"
+          },
+          {
+            "date": "2026-11-04",
+            "detail": "IV'极度恐慌'(均值0.85)+breadth 0.44:1双弱共振时，即使机械层sizing_multiplier=0.5放行半仓，判断层仍应默认空仓。高IV可能是超卖反弹机会，但配合弱宽度时短期剧烈波动概率高，不宜主动承担新风险"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 3,
+      "sampleSize": 4,
       "hitRate": 1.0,
-      "confidence": 0.8,
+      "confidence": 0.833,
       "tags": [
         "timing",
         "position-sizing"
