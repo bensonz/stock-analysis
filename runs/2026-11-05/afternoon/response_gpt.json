@@ -1,0 +1,173 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "光伏设备",
+        "5d_pct": 6.22,
+        "trend": "accelerating"
+      },
+      {
+        "name": "能源金属",
+        "5d_pct": 5.35,
+        "trend": "accelerating"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": 5.33,
+        "trend": "steady"
+      },
+      {
+        "name": "贵金属",
+        "5d_pct": 5.19,
+        "trend": "steady"
+      },
+      {
+        "name": "广告营销",
+        "5d_pct": 5.09,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": -5.63,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "煤炭开采",
+        "5d_pct": -4.23,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": -2.88,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": -2.36,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "炼化及贸易",
+        "5d_pct": -2.31,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/1 持仓在热点板块",
+    "regime": "新能源/光伏/贵金属领涨，煤炭石油红利资金外流；成长主导的强反弹"
+  },
+  "position_decisions": [
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "浮盈+0.31%第7日，未触发-5%硬止损/首3日-3%/15日时间止损任一卖出规则；航运港口板块中性(不在top5/bottom5)；margin adding(chg5+11.46%)、集运运价上调催化仍在。今日-0.82%逆势跑输7.8:1强势盘属防御方向被抽血，但板块未冷、浮盈为正，不构成机械卖出理由。止损9.17不变。",
+      "sector_rank": "中性(不在top5/bottom5)",
+      "new_stop": null,
+      "pnl_pct": 0.31,
+      "days_held": 7,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "300613",
+      "name": "富瀚微",
+      "reason": "dist_ma5_pct 6.8%>6%，触发Rule 2b追高禁令；尽管Q3净利+621%、margin adding(chg5+13.92%)、10/28收涨20%，MA规则不可协商",
+      "rps120": 94.72
+    },
+    {
+      "code": "301550",
+      "name": "斯菱智驱",
+      "reason": "dist_ma20_pct 13.4%>12%极端延伸；PE 291.6无匹配成长，估值红盘",
+      "rps120": 92.72
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "reason": "板块煤炭开采今日bottom5(-4.23%)，冷区硬禁买(h019)，个股RPS再高也不入场",
+      "rps120": 94.98
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "板块炼化及贸易今日bottom5(-2.31%)，冷区硬禁买",
+      "rps120": 93.73
+    },
+    {
+      "code": "002815",
+      "name": "崇达技术",
+      "reason": "板块元件今日bottom5(-2.36%)，冷区硬禁买；且dist_ma20 -18.6%已跌破中期均线",
+      "rps120": 93.38
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "reason": "RPS91.04甜点区+VCP SETUP+margin adding，但板块电力/核电属今日走弱的红利防御方向，不在top30%动量，板块门槛不满足",
+      "rps120": 91.04
+    },
+    {
+      "code": "600007",
+      "name": "中国国贸",
+      "reason": "0风险+VCP QUALITY(contraction 0.31)+MA全合规，但板块房地产收盘未入top5、5日动量未确认top30%；若板块转强应优先重评",
+      "rps120": 93.19
+    },
+    {
+      "code": "301571",
+      "name": "国科天成",
+      "reason": "RPS86.08甜点区、MA合规，但板块军工电子中性且margin deleveraging(chg5-3.02%)，不满足板块门槛",
+      "rps120": 86.08
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "强盘(涨跌比7.8:1、86涨停/0跌停)但策略池36只候选无一落在当日热点板块(光伏设备/能源金属/数字媒体/贵金属/广告营销)——动量股票池与板块轮动脱节时，正确动作是持币，而不是从非热点板块勉强凑数开仓。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "Rule 1要求板块top30%才能入场；池内候选板块要么bottom5(冷)要么中性，强breadth无法替代板块动量门槛。"
+    },
+    {
+      "text": "富瀚微(Q3净利+621%、margin adding、10/28收涨20%)被dist_ma5_pct 6.8%拦截——再强的业绩催化也必须在Rule 2b追高规则面前让位。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h021",
+      "mechanism": "dist_ma5>6%即短期超买，业绩催化无法消除均值回归风险；MA纪律是硬门槛。"
+    },
+    {
+      "text": "煤炭开采/炼化及贸易/元件同时入bottom5，池内陕西煤业(RPS94.98)、广汇能源(RPS93.73)、崇达技术(RPS93.38)均处RPS扩展区却被板块冷区一票否决——再次验证bottom-list是硬禁买区。",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "板块引力大于个股动量；冷板块中个股RPS再高也只是下跌通道中的反弹。"
+    },
+    {
+      "text": "青岛港今日-0.82%跑输7.8:1强盘(红利/防御方向被抽血进成长)，但margin仍adding(chg5+11.46%)、板块中性、浮盈+0.31%第7日——防御持仓在成长主导反弹中相对跑输是常态，不构成机械卖出理由。",
+      "type": "observation",
+      "tags": [
+        "exit-rule",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "卖出规则是机械的(-5%/-3%前3日/15日时间止损/板块冷3日)，单日相对跑输不在其中；板块未冷就不到Rule 1卖出线。"
+    }
+  ],
+  "market_summary": "市场强势反弹：涨跌比7.8:1(4869涨/624跌)、86涨停/0跌停，三大指数全红(上证+0.10%/深成+1.19%/创业板+0.87%/科创50+1.68%)。资金从煤炭石油红利抽血(中国石油跌近7%，来源：网易/金融界)涌入光伏/电力设备/贵金属(国家能源局Q3光伏装机38.76GW同比+38%，来源：凤凰网)。IV分裂：50ETF IV rank仅0.267而500ETF 0.85/创业板ETF 0.82极高。机械层判strong允许满仓入场，但策略池无一只候选落在今日热点板块，持仓仅青岛港(航运港口中性)0/1在热点。结论：市场可做多，池内无合格标的，持币等待板块轮动到位。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

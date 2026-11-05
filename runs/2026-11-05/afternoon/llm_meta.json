@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 185661,
+  "output_tokens": 16317,
+  "rounds": 3,
+  "duration_sec": 275.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月5日 热点板块 光伏设备 能源金属 大涨 原因",
+        "max_results": 6
+      },
+      "result_length": 3947
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "青岛港 2026年11月 集运运价 航运港口 新闻",
+        "max_results": 6
+      },
+      "result_length": 4316
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "中国广核 2026年11月 核电 新闻 核准",
+        "max_results": 5
+      },
+      "result_length": 3604
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月5日 收盘 沪指 成交额 市场情绪",
+        "max_results": 5
+      },
+      "result_length": 3296
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://finance.ifeng.com/c/8xnqEwZUxIU",
+        "maxChars": 4000
+      },
+      "result_length": 1715
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.163.com/dy/article/LAVHAS6B0519QIKK.html",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}

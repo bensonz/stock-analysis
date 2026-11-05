@@ -332,7 +332,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-03-27",
-      "lastTested": "2026-11-03",
+      "lastTested": "2026-11-05",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -991,6 +991,10 @@
           {
             "date": "2026-11-03",
             "detail": "今日'指数弱、个股强'分化日验证sector-first的正确动作是空仓：三大指数齐跌+IV极度恐慌(rank均值0.83)，但涨跌比1.55:1、55涨停；热点板块(渔业/电池/工程机械/贵金属/医美)与策略池零交集——没有任何候选在上涨板块里，机械层'balanced允许开仓'之上，判断层应主动空仓"
+          },
+          {
+            "date": "2026-11-05",
+            "detail": "强盘(涨跌比7.8:1、86涨停/0跌停)但策略池36只候选无一落在当日热点板块(光伏设备/能源金属/数字媒体/贵金属/广告营销)——动量股票池与板块轮动脱节时，正确动作是持币，而不是从非热点板块勉强凑数开仓。"
           }
         ],
         "contradicting": [
@@ -1000,7 +1004,7 @@
           }
         ]
       },
-      "sampleSize": 165,
+      "sampleSize": 166,
       "hitRate": 0.994,
       "confidence": 0.988,
       "tags": [],
@@ -1697,11 +1701,15 @@
           {
             "date": "2026-11-05",
             "detail": "策略池与当日强势板块完全错位：今日领涨的光伏设备/能源金属/贵金属/电池/广告营销在cheesefortune池33只标的中零覆盖，池中高RPS标的集中于银行/煤炭/油气/航运等正在轮动下跌的价值红利板块。强breadth(7.09:1)本身不构成入场理由——sector-first纪律下，无板块对齐候选时应持币不强迫开仓。"
+          },
+          {
+            "date": "2026-11-05",
+            "detail": "煤炭开采/炼化及贸易/元件同时入bottom5，池内陕西煤业(RPS94.98)、广汇能源(RPS93.73)、崇达技术(RPS93.38)均处RPS扩展区却被板块冷区一票否决——再次验证bottom-list是硬禁买区。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 106,
+      "sampleSize": 107,
       "hitRate": 1.0,
       "confidence": 0.991,
       "tags": [
@@ -1755,7 +1763,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-09-15",
+      "lastTested": "2026-11-05",
       "mechanism": "When price gets too stretched above MA5/MA10/MA20, upside becomes dependent on continued euphoria instead of support-based demand, raising mean-reversion risk.",
       "evidence": {
         "supporting": [
@@ -2182,6 +2190,10 @@
           {
             "date": "2026-09-15",
             "detail": "RPS>95上限继续过滤：策略池27只中18只RPS120>95，今日全部正确skip无一例外；仅7只落入甜区(75-92)，其中多数板块不在top5。上限规则是防均值回归回撤的主闸门"
+          },
+          {
+            "date": "2026-11-05",
+            "detail": "富瀚微(Q3净利+621%、margin adding、10/28收涨20%)被dist_ma5_pct 6.8%拦截——再强的业绩催化也必须在Rule 2b追高规则面前让位。"
           }
         ],
         "contradicting": [
@@ -2195,8 +2207,8 @@
           }
         ]
       },
-      "sampleSize": 108,
-      "hitRate": 0.981,
+      "sampleSize": 109,
+      "hitRate": 0.982,
       "confidence": 0.973,
       "tags": [
         "entry-filter",
@@ -8638,22 +8650,26 @@
       "id": "h194",
       "text": "昭衍新药开仓次日即贴止损（42.32 vs 40.71，距离3.8%）：医疗服务今日-1.12%回落，验证'贴MA5开仓+板块未入top5'的小仓试探风险仍在，明日破40.71无条件离场，不找理由。",
       "type": "observation",
-      "status": "observation",
+      "status": "hypothesis",
       "created": "2026-09-15",
-      "lastTested": "2026-09-15",
+      "lastTested": "2026-11-05",
       "mechanism": "新仓（<3日）无利润垫，任何贴近止损的弱势都要按Rule5机械处理。",
       "evidence": {
         "supporting": [
           {
             "date": "2026-09-15",
             "detail": "昭衍新药开仓次日即贴止损（42.32 vs 40.71，距离3.8%）：医疗服务今日-1.12%回落，验证'贴MA5开仓+板块未入top5'的小仓试探风险仍在，明日破40.71无条件离场，不找理由。"
+          },
+          {
+            "date": "2026-11-05",
+            "detail": "青岛港今日-0.82%跑输7.8:1强盘(红利/防御方向被抽血进成长)，但margin仍adding(chg5+11.46%)、板块中性、浮盈+0.31%第7日——防御持仓在成长主导反弹中相对跑输是常态，不构成机械卖出理由。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 1,
+      "sampleSize": 2,
       "hitRate": 1.0,
-      "confidence": 0.6,
+      "confidence": 0.75,
       "tags": [
         "exit-rule",
         "position-sizing"
