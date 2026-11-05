@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-11-04",
+  "lastUpdated": "2026-11-05",
   "hypotheses": [
     {
       "id": "h001",
@@ -1092,7 +1092,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-11-02",
+      "lastTested": "2026-11-05",
       "mechanism": "Cheap volatility means trend continuation can persist, but upside surprise from fresh entries comes from proper setup quality, not from paying up far above moving averages.",
       "evidence": {
         "supporting": [
@@ -1211,6 +1211,10 @@
           {
             "date": "2026-11-02",
             "detail": "'极度恐慌'IV标签≠当下市场恐慌：breadth 5.72:1+3/3指数全绿+132涨停，但iv_sentiment整体signal为'极度恐慌'(avg_iv_rank 0.82)——高rank是7月暴跌残留在252日回看窗口所致；机械层权威，breadth/指数定仓位，IV只做油门，不因标签冻结"
+          },
+          {
+            "date": "2026-11-05",
+            "detail": "高IV(500ETF 0.85/创业板ETF 0.82/科创50 0.73)与强breadth并存：这是波动率放大下的强反弹而非低波慢牛。此环境下新仓的板块确认门槛应更高——即使有RPS甜点区标的(中国广核91.11)，若板块无法确认top30%且IV>75%，仍应克制。"
           }
         ],
         "contradicting": [
@@ -1220,9 +1224,9 @@
           }
         ]
       },
-      "sampleSize": 30,
-      "hitRate": 0.967,
-      "confidence": 0.938,
+      "sampleSize": 31,
+      "hitRate": 0.968,
+      "confidence": 0.939,
       "tags": [
         "timing",
         "position-sizing",
@@ -1266,7 +1270,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-11-03",
+      "lastTested": "2026-11-05",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1689,11 +1693,15 @@
           {
             "date": "2026-11-03",
             "detail": "弱市+风格防御切换日(0/3指数绿、涨跌比0.64:1、IV极度恐慌0.85)，策略池无一只候选属于当日领涨板块(养殖/保险/机械/医美/白酒)——Rule 1 sector-first直接给出空仓结论，无需在冷板块挑'相对好'的票"
+          },
+          {
+            "date": "2026-11-05",
+            "detail": "策略池与当日强势板块完全错位：今日领涨的光伏设备/能源金属/贵金属/电池/广告营销在cheesefortune池33只标的中零覆盖，池中高RPS标的集中于银行/煤炭/油气/航运等正在轮动下跌的价值红利板块。强breadth(7.09:1)本身不构成入场理由——sector-first纪律下，无板块对齐候选时应持币不强迫开仓。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 105,
+      "sampleSize": 106,
       "hitRate": 1.0,
       "confidence": 0.991,
       "tags": [
@@ -2525,7 +2533,7 @@
       "type": "signal",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-11-02",
+      "lastTested": "2026-11-05",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -2644,6 +2652,10 @@
           {
             "date": "2026-11-02",
             "detail": "齐鲁银行Q3净利+12.47%(网易/每经)却在大盘6.7:1宽度的强盘里-3.28%：业绩利好兑现反跌=板块正在派发，相对弱势比基本面数字更有信息量。"
+          },
+          {
+            "date": "2026-11-05",
+            "detail": "中国石油验证'事件驱动型大宗标的在地缘缓和时应比趋势型更快离场'：油气开采Ⅱ再度入bottom5(-4.96%)且个股-6.98%距硬止损仅0.55%，盘中最低12.48已破12.60止损，美伊和谈令Hormuz地缘溢价thesis破裂。主动止损优于等待精确触发。"
           }
         ],
         "contradicting": [
@@ -2657,9 +2669,9 @@
           }
         ]
       },
-      "sampleSize": 31,
-      "hitRate": 0.935,
-      "confidence": 0.909,
+      "sampleSize": 32,
+      "hitRate": 0.938,
+      "confidence": 0.912,
       "tags": [
         "exit-rule",
         "timing"

@@ -1,7 +1,7 @@
 {
   "code": "601857",
   "name": "中国石油",
-  "status": "active",
+  "status": "closed",
   "thesis": "石油石化龙头，0风险因子，RPS120 94.29扩展区(0风险豁免)+MA距离全部合规(dist_ma5 1.5%/ma10 3.0%/ma20 8.8%)+VCP SETUP(收缩比0.29)；10-26创18年新高(网易/每经)，油价Brent月+18.61%与红利轮动共振；因FOMC临近+扩展区RPS，从强买档减半至4%",
   "entryDate": "2026-10-28",
   "entrySlot": "afternoon",
@@ -100,15 +100,25 @@
       "change_pct": 5.13,
       "action": "HOLD",
       "note": "石油石化今日未入bottom5，油气链冷streak(11-02/11-03连续2日)终结，Rule 1'冷3日卖出'不触发；浮盈+5.13%(第6日)未触发任何卖出规则，<+10%无需抬止损；margin deleveraging(chg5 -4.01%)为警示但非卖出信号；油价高位支撑(布伦特117.64/WTI 104.12，11/1，来源：网易)。维持持有，止损12.60不变"
+    },
+    {
+      "date": "2026-11-05",
+      "slot": "noon",
+      "price": 12.67,
+      "change_pct": -4.45,
+      "action": "SELL",
+      "shares": 2800,
+      "note": "今日-6.98%(现价12.67)，距硬止损12.60仅0.55%(stop_proximity CRITICAL，盘中最低12.48已破止损)；油气开采Ⅱ入bottom5(-4.96%)，美伊和谈令Hormuz地缘溢价thesis破裂(入场thesis依赖油价上行)；主动止损不等精确触发(h024)"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-11-05",
+  "exitPrice": 12.67,
+  "exitReason": "今日-6.98%(现价12.67)，距硬止损12.60仅0.55%(stop_proximity CRITICAL，盘中最低12.48已破止损)；油气开采Ⅱ入bottom5(-4.96%)，美伊和谈令Hormuz地缘溢价thesis破裂(入场thesis依赖油价上行)；主动止损不等精确触发(h024)",
+  "returnPct": -4.45,
+  "holdingDays": 5,
+  "lessonLearned": "",
   "createdAt": "2026-10-28T15:15:38.190459+08:00",
-  "updatedAt": "2026-11-04T11:41:03.252583+08:00",
-  "trackerVersion": "2.1"
+  "updatedAt": "2026-11-05T11:43:31.560879+08:00",
+  "trackerVersion": "2.1",
+  "exitSlot": "noon"
 }

@@ -14,25 +14,9 @@
 > `date`、`tz` (US=影响其后第一个A股交易日 / CN=当日)、`kind`、`note`。不要改 `ai:`、`src:` 和 `id:` 三行（🤖 可留可删）。
 > 标题日期 = A股影响日，由 date+tz 推算，重写时刷新。规则与局限: docs/EVENT_INBOX/DECISIONS.md
 
-_更新: 2026-11-04 · 共 20 条 · 待定 0 条_
+_更新: 2026-11-05 · 共 18 条 · 待定 0 条_
 
-## 2026-11-04 (T-0) 马耳他 — 马耳他以色列议会选举投票结束，最终结果11月4日正式公布
-- [-] keep 🤖   impact: low   direction: two_sided
-  date: 2026-11-04   tz: CN   kind: other
-  note:
-  ai: 跳过 · low/two_sided · 马耳他以色列议会选举为小国政治事件，对A股无系统性影响（deepseek-v4-pro，2026-10-28）
-  src: wallstreetcn imp=4 北京 2026-11-04 12:02 |
-  id: wscn-20261104-4255f0b5
-
-## 2026-11-04 (T-0) 美国 — 美国AMD财报电话会
-- [-] keep 🤖   impact: low   direction: two_sided
-  date: 2026-11-03   tz: US   kind: other
-  note:
-  ai: 跳过 · low/two_sided · 单一公司财报电话会，非系统性事件，对A股整体影响有限（deepseek-v4-pro，2026-11-02）
-  src: wallstreetcn imp=4 北京 2026-11-04 06:00 |
-  id: wscn-20261104-cfbf44ca
-
-## 2026-11-05 (T-1) 美国 — 美国报道：俄罗斯愿在11月4日后恢复俄美乌三方谈判
+## 2026-11-05 (T-0) 美国 — 美国报道：俄罗斯愿在11月4日后恢复俄美乌三方谈判
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-11-04   tz: US   kind: other
   note:
@@ -40,7 +24,7 @@ _更新: 2026-11-04 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-04 12:02 |
   id: wscn-20261104-a5725399
 
-## 2026-11-05 (T-1) 中国 — 第九届中国国际进口博览会
+## 2026-11-05 (T-0) 中国 — 第九届中国国际进口博览会
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-11-05   tz: CN   kind: other
   note:
@@ -48,7 +32,7 @@ _更新: 2026-11-04 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-05 12:02 |
   id: wscn-20261105-6153f180
 
-## 2026-11-05 (T-1) 美国 — 美国Coherent财报电话会
+## 2026-11-05 (T-0) 美国 — 美国Coherent财报电话会
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-11-04   tz: US   kind: other
   note:
@@ -56,7 +40,7 @@ _更新: 2026-11-04 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-05 05:30 |
   id: wscn-20261105-64707b65
 
-## 2026-11-05 (T-1) 中国 — 中国第九届上海进博会 + 虹桥论坛（11月5日-10日）
+## 2026-11-05 (T-0) 中国 — 中国第九届上海进博会 + 虹桥论坛（11月5日-10日）
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-11-05   tz: CN   kind: other
   note:
@@ -64,7 +48,7 @@ _更新: 2026-11-04 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-05 12:02 |
   id: wscn-20261105-f236f54f
 
-## 2026-11-06 (T-2) 美国 — 美国Lumentum财报电话会
+## 2026-11-06 (T-1) 美国 — 美国Lumentum财报电话会
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-11-05   tz: US   kind: other
   note:
@@ -72,7 +56,7 @@ _更新: 2026-11-04 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-06 06:00 |
   id: wscn-20261106-c0e222c4
 
-## 2026-11-09 (T-5) 美国 — 美国10月非农就业人口变动(万人)
+## 2026-11-09 (T-4) 美国 — 美国10月非农就业人口变动(万人)
 - [-] keep 🤖   impact: medium   direction: two_sided
   date: 2026-11-06   tz: US   kind: macro_release
   note:
@@ -80,7 +64,7 @@ _更新: 2026-11-04 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-06 21:30 | https://wallstreetcn.com/calendar/US121058/overview
   id: wscn-20261106-US121058
 
-## 2026-11-09 (T-5) 中国 — 中国10月外汇储备(亿美元)
+## 2026-11-09 (T-4) 中国 — 中国10月外汇储备(亿美元)
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-11-07   tz: CN   kind: macro_release
   note:
@@ -88,7 +72,7 @@ _更新: 2026-11-04 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-07 12:02 | https://wallstreetcn.com/calendar/CN191467/overview
   id: wscn-20261107-CN191467
 
-## 2026-11-16 (T-12) 中国 — 中国央行：自11月15日起上调金融机构外汇存款准备金率2个百分点
+## 2026-11-16 (T-11) 中国 — 中国央行：自11月15日起上调金融机构外汇存款准备金率2个百分点
 - [x] keep 🤖   impact: medium   direction: risk
   date: 2026-11-15   tz: CN   kind: other
   note:
@@ -96,7 +80,7 @@ _更新: 2026-11-04 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-15 00:00 |
   id: wscn-20261115-00b4a7bb
 
-## 2026-11-17 (T-13) 美国 — 美国Anthropic IPO窗口（11月16日当周）
+## 2026-11-17 (T-12) 美国 — 美国Anthropic IPO窗口（11月16日当周）
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-11-16   tz: US   kind: other
   note:
@@ -104,7 +88,7 @@ _更新: 2026-11-04 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-16 12:02 |
   id: wscn-20261116-19ce9494
 
-## 2026-11-17 (T-13) 美国 — 美国沃什：美联储生产率与就业特别工作组将举行听证会
+## 2026-11-17 (T-12) 美国 — 美国沃什：美联储生产率与就业特别工作组将举行听证会
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-11-16   tz: US   kind: other
   note:
@@ -112,7 +96,7 @@ _更新: 2026-11-04 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-16 12:02 |
   id: wscn-20261116-7d533f14
 
-## 2026-11-17 (T-13) 中国 — 中美俄元首将于深圳APEC期间会晤？外交部回应：中方愿同各方一道，共同推动APEC“中国年”取得丰硕成果
+## 2026-11-17 (T-12) 中国 — 中美俄元首将于深圳APEC期间会晤？外交部回应：中方愿同各方一道，共同推动APEC“中国年”取得丰硕成果
 - [-] keep 🤖   impact: medium   direction: two_sided
   date: 2026-11-17   tz: CN   kind: other
   note:
@@ -120,7 +104,7 @@ _更新: 2026-11-04 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-17 12:02 |
   id: wscn-20261117-67281d27
 
-## 2026-11-17 (T-13) 中国 — 中国亚太经合组织会议（APEC）11月17日至18日在深圳举办
+## 2026-11-17 (T-12) 中国 — 中国亚太经合组织会议（APEC）11月17日至18日在深圳举办
 - [-] keep 🤖   impact: medium   direction: two_sided
   date: 2026-11-17   tz: CN   kind: other
   note:
@@ -128,7 +112,7 @@ _更新: 2026-11-04 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-17 12:02 |
   id: wscn-20261117-7268b241
 
-## 2026-11-18 (T-14) 美国 — 美国微软开发者与IT大会（Microsoft Ignite）
+## 2026-11-18 (T-13) 美国 — 美国微软开发者与IT大会（Microsoft Ignite）
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-11-17   tz: US   kind: other
   note:
@@ -136,7 +120,7 @@ _更新: 2026-11-04 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-17 12:02 |
   id: wscn-20261117-befb8c6f
 
-## 2026-11-18 (T-14) 中国 — 中国普京出席APEC领导人非正式会议
+## 2026-11-18 (T-13) 中国 — 中国普京出席APEC领导人非正式会议
 - [-] keep 🤖   impact: medium   direction: two_sided
   date: 2026-11-18   tz: CN   kind: other
   note:
@@ -144,7 +128,7 @@ _更新: 2026-11-04 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-18 00:00 |
   id: wscn-20261118-35908d3e
 
-## 2026-11-27 (T-23) 中国 — 中国商务部：中美双方约定在今年11月底前举行下一次人工智能对话
+## 2026-11-27 (T-22) 中国 — 中国商务部：中美双方约定在今年11月底前举行下一次人工智能对话
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-11-27   tz: CN   kind: other
   note:
@@ -152,7 +136,7 @@ _更新: 2026-11-04 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-27 12:02 |
   id: wscn-20261127-77abe93e
 
-## 2026-12-07 (T-33) 美国 — 美国纳斯达克拟推出全新“23小时”交易时段，美东时间晚9点至凌晨4点
+## 2026-12-07 (T-32) 美国 — 美国纳斯达克拟推出全新“23小时”交易时段，美东时间晚9点至凌晨4点
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-12-06   tz: US   kind: other
   note:
@@ -160,7 +144,7 @@ _更新: 2026-11-04 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-12-06 00:00 |
   id: wscn-20261206-3ba46065
 
-## 2026-12-07 (T-33) 美国 — 美国美股进入每天23小时的“通宵交易”的时代
+## 2026-12-07 (T-32) 美国 — 美国美股进入每天23小时的“通宵交易”的时代
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-12-06   tz: US   kind: other
   note:
@@ -168,7 +152,7 @@ _更新: 2026-11-04 · 共 20 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-12-06 00:00 |
   id: wscn-20261206-e4bdae4a
 
-## 2026-12-15 (T-41) 美国 — 美国G20峰会（迈阿密）
+## 2026-12-15 (T-40) 美国 — 美国G20峰会（迈阿密）
 - [-] keep 🤖   impact: medium   direction: two_sided
   date: 2026-12-14   tz: US   kind: other
   note:

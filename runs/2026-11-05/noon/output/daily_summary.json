@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-05",
+  "actions": [
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "action": "SELL",
+      "price": 12.67,
+      "pnl_pct": -4.45,
+      "note": "今日-6.98%(现价12.67)，距硬止损12.60仅0.55%(stop_proximity CRITICAL，盘中最低12.48已破止损)；油气开采Ⅱ入bottom5(-4.96%)，美伊和谈令Hormuz地缘溢价thesis破裂(入场thesis依赖油价上行)；主动止损不等精确触发(h024)"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 9.7,
+      "pnl_pct": 0.52,
+      "note": "浮盈+0.52%未触发任何卖出规则；航运港口今日入bottom5(-1.50%)为冷streak第1日，未满3日卖出门槛；距止损9.17仍有5.5%缓冲，继续持有但升级警戒"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 1,
+    "totalEquity": 963588.94,
+    "dayPnl": -168.0,
+    "dayReturnPct": -0.02,
+    "totalReturnPct": -3.64,
+    "unrealizedPnl": 140.0,
+    "realizedPnl": -36551.06,
+    "cashPct": 97.18
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 7.0888,
+    "up": 4792,
+    "down": 676,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 62,
+    "limit_downs": 0,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 7.09:1, 3/3 major indices green, 62 limit-ups / 0 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "Breadth 7.09:1强反弹(4792涨/676跌，62涨停/0跌停)，上证+0.10%/深成+1.44%/创业板+1.24%/科创50+2.11%。热门板块：光伏设备+7.05%/能源金属+5.66%/贵金属+5.32%/电池+4.96%/广告营销+4.60%；冷门：油气开采Ⅱ-4.96%/煤炭开采-3.93%/通信设备-2.38%/炼化及贸易-1.70%/航运港口-1.50%。IV整体偏高(avg iv_rank 0.66，500ETF 0.85/创业板 0.82/科创50 0.73)，偏悲观但未block。板块轮动：新能源/资源/贵金属反弹领涨，旧经济价值(油气/煤炭/航运/银行)轮动出清。持仓板块对齐0/2在热门板块，策略池在今日领涨板块零覆盖，故持币不强迫开仓。"
+  }
+}

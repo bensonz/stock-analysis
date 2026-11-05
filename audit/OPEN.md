@@ -16,13 +16,13 @@
         · … 另有 16 次更早的
 
   ▸ manifest_present  [invariant]
-      11 次 / 10 天   2026-02-02 … 2026-10-09   最长连续 3
+      12 次 / 11 天   2026-02-02 … 2026-11-04   最长连续 3
       改这里: scripts/run_daily.py (write the manifest before preflight)
-        · 2026-09-11 afternoon 该时段没有 manifest
         · 2026-09-21 afternoon 该时段没有 manifest
         · 2026-10-06 afternoon 该时段没有 manifest
         · 2026-10-09 noon      该时段没有 manifest
-        · … 另有 7 次更早的
+        · 2026-11-04 afternoon 该时段没有 manifest
+        · … 另有 8 次更早的
 
 
 ## 需要人工操作 (6)

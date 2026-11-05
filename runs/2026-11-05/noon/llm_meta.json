@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 146122,
+  "output_tokens": 23997,
+  "rounds": 2,
+  "duration_sec": 444.5,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月 光伏 能源金属 贵金属 领涨 板块",
+        "max_results": 5
+      },
+      "result_length": 3549
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "国际油价 大跌 美伊和谈 2026年11月",
+        "max_results": 5
+      },
+      "result_length": 3914
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "中国石油 601857 股价 下跌 2026年11月",
+        "max_results": 5
+      },
+      "result_length": 3344
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "航运港口 集装箱运价 青岛港 2026年11月",
+        "max_results": 5
+      },
+      "result_length": 3699
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "中国广核 核电 业绩 2026",
+        "max_results": 5
+      },
+      "result_length": 3514
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 板块轮动 煤炭 油气 银行 资金流出 2026年11月",
+        "max_results": 5
+      },
+      "result_length": 3478
+    }
+  ],
+  "fallback_used": false
+}
