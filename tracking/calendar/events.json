@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03",
+  "updated": "2026-11-06",
   "note": "手动维护的前瞻事件日历（scripts/event_calendar.py 读取；到期/失效条目请及时清理）。tz=US 的事件影响其后第一个A股交易日。direction: risk(默认)|supportive|two_sided。 【数字纪律】notes 中禁止出现未经复测的数字或\"历史规律\"——任何统计口径的断言必须先用真实数据复测并标注 n 与口径（教训: 2026-08-04 政治局+2%小盘占优系模型folklore, 实测≈0, 见 git log）。 每条必须带 source（URL或可重算的脚本/口径说明）。",
   "events": [
     {
@@ -143,6 +143,90 @@
       "inbox_id": "wscn-20261115-00b4a7bb",
       "decided_by": "ai",
       "reason": "上调外汇存款准备金率收紧离岸人民币流动性，影响汇率与外资情绪"
+    },
+    {
+      "date": "2026-11-09",
+      "tz": "CN",
+      "name": "中国10月CPI同比",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "direction": "two_sided",
+      "notes": "北京时间 2026-11-09 09:30（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/CN111275/overview",
+      "inbox_id": "wscn-20261109-CN111275",
+      "decided_by": "ai",
+      "reason": "中国CPI是市场交易的核心通胀数据，影响政策预期与A股风险偏好"
+    },
+    {
+      "date": "2026-11-09",
+      "tz": "CN",
+      "name": "中国10月PPI同比",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "direction": "two_sided",
+      "notes": "北京时间 2026-11-09 09:30（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/CN111291/overview",
+      "inbox_id": "wscn-20261109-CN111291",
+      "decided_by": "ai",
+      "reason": "中国PPI反映工业品价格与企业盈利，对A股周期板块有影响"
+    },
+    {
+      "date": "2026-11-10",
+      "tz": "CN",
+      "name": "中国10月出口同比(按美元计)",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "direction": "two_sided",
+      "notes": "北京时间 2026-11-10 12:02（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/CN131320/overview",
+      "inbox_id": "wscn-20261110-CN131320",
+      "decided_by": "ai",
+      "reason": "中国出口数据影响外需预期与人民币汇率，对A股有传导"
+    },
+    {
+      "date": "2026-11-10",
+      "tz": "CN",
+      "name": "中国10月进口同比(按美元计)",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "direction": "two_sided",
+      "notes": "北京时间 2026-11-10 12:02（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/CN131321/overview",
+      "inbox_id": "wscn-20261110-CN131321",
+      "decided_by": "ai",
+      "reason": "中国进口数据反映内需强度，影响增长预期与A股情绪"
+    },
+    {
+      "date": "2026-11-10",
+      "tz": "US",
+      "name": "美国10月CPI同比",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "high",
+      "direction": "two_sided",
+      "notes": "北京时间 2026-11-10 21:30（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/US111017/overview",
+      "inbox_id": "wscn-20261110-US111017",
+      "decided_by": "ai",
+      "reason": "美国CPI影响美联储政策路径与全球风险资产定价，对A股有系统性影响"
+    },
+    {
+      "date": "2026-11-10",
+      "tz": "US",
+      "name": "美国10月核心CPI同比",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "high",
+      "direction": "two_sided",
+      "notes": "北京时间 2026-11-10 21:30（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/US111018/overview",
+      "inbox_id": "wscn-20261110-US111018",
+      "decided_by": "ai",
+      "reason": "美国核心CPI是美联储关注的核心通胀指标，影响全球流动性预期"
     }
   ]
 }

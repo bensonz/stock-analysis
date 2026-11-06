@@ -1,0 +1,112 @@
+{
+  "as_of": "2026-11-06",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 23,
+    "new": 8,
+    "pending": 8,
+    "expired": 0,
+    "ai_retired": 4,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 14,
+    "decided": 1,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 0,
+    "fetch_errors": 0,
+    "empty_days": 7,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 8,
+    "kept": 6,
+    "skipped": 2,
+    "high": 2,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261109-85d54311",
+        "name": "G7外长会议将于9日至10日在法国巴黎举行",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "G7外长会议非系统性政策事件，对A股影响有限"
+      },
+      {
+        "id": "wscn-20261109-CN111275",
+        "name": "中国10月CPI同比",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "中国CPI是市场交易的核心通胀数据，影响政策预期与A股风险偏好"
+      },
+      {
+        "id": "wscn-20261109-CN111291",
+        "name": "中国10月PPI同比",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "中国PPI反映工业品价格与企业盈利，对A股周期板块有影响"
+      },
+      {
+        "id": "wscn-20261110-CN131320",
+        "name": "中国10月出口同比(按美元计)",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "中国出口数据影响外需预期与人民币汇率，对A股有传导"
+      },
+      {
+        "id": "wscn-20261110-CN131321",
+        "name": "中国10月进口同比(按美元计)",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "中国进口数据反映内需强度，影响增长预期与A股情绪"
+      },
+      {
+        "id": "wscn-20261110-a0ea01cb",
+        "name": "俄罗斯俄美乌三方会谈10日至11日在阿布扎比举行",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "俄美乌三方会谈非系统性事件，对A股直接影响有限"
+      },
+      {
+        "id": "wscn-20261110-US111017",
+        "name": "美国10月CPI同比",
+        "decision": "keep",
+        "impact": "high",
+        "direction": "two_sided",
+        "reason": "美国CPI影响美联储政策路径与全球风险资产定价，对A股有系统性影响"
+      },
+      {
+        "id": "wscn-20261110-US111018",
+        "name": "美国10月核心CPI同比",
+        "decision": "keep",
+        "impact": "high",
+        "direction": "two_sided",
+        "reason": "美国核心CPI是美联储关注的核心通胀指标，影响全球流动性预期"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1731,
+    "tokens_out": 452
+  },
+  "pending_items": []
+}

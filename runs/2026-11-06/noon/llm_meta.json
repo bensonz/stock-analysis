@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 178578,
+  "output_tokens": 10271,
+  "rounds": 3,
+  "duration_sec": 234.7,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月6日 大跌 原因 创业板",
+        "max_results": 6
+      },
+      "result_length": 3744
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "元件 通信设备 板块 大跌 2026-11-06",
+        "max_results": 6
+      },
+      "result_length": 4144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "种植业 养殖业 农业板块 上涨 2026年11月",
+        "max_results": 6
+      },
+      "result_length": 3960
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "青岛港 601298 新闻 2026年11月",
+        "max_results": 6
+      },
+      "result_length": 4009
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://wallstreetcn.com/articles/3784171",
+        "maxChars": 4000
+      },
+      "result_length": 107
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.tmtpost.com/nictation/8195360.html",
+        "maxChars": 4000
+      },
+      "result_length": 2127
+    }
+  ],
+  "fallback_used": false
+}

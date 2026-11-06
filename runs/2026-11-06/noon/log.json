@@ -1,0 +1,56 @@
+{
+  "date": "2026-11-06",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1793936122.212065,
+      "errors": [],
+      "end": 1793936179.345539,
+      "duration_sec": 57.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 5481,
+      "tokens": {
+        "input_tokens": 178578,
+        "output_tokens": 10271
+      },
+      "rounds": 3,
+      "tool_calls_count": 6,
+      "duration_sec": 234.7,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1793936414.045108,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=50",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=46",
+        "Hypothesis: Created h219 (observation): 青岛港(+0.93%)在4549家下跌的恐慌盘里抗跌，验证了当初因IV偏高只给小仓的决策质量：防御型+正现金流标的是恐慌期的稳定器。...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-11-06",
+        "status": "ok",
+        "checked": 1,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "end": 1793936414.48464,
+      "duration_sec": 0.4
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 292.2
+  }
+}

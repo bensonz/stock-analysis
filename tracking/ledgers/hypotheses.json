@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-11-05",
+  "lastUpdated": "2026-11-06",
   "hypotheses": [
     {
       "id": "h001",
@@ -4712,7 +4712,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-11-04",
+      "lastTested": "2026-11-06",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4895,11 +4895,15 @@
           {
             "date": "2026-11-04",
             "detail": "油气链冷streak规则验证：中国石油11-02/11-03连续2日行业入bottom5后，今日bottom5不含石油石化，冷streak自动终结、不触发'行业冷3日卖出'。Rule 1是持续性触发而非单日恐慌信号，避免在油价高位因一天下跌就砍掉+5%仓位"
+          },
+          {
+            "date": "2026-11-06",
+            "detail": "科技→防御轮动加速：种植业+1.96% vs 元件-6.5%(极差8.5pp)，与h076判断一致。农业避险由厄尔尼诺粮价上行催化(来源:财联社/21经济网)。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 45,
+      "sampleSize": 46,
       "hitRate": 1.0,
       "confidence": 0.979,
       "tags": [
@@ -4916,7 +4920,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-10-30",
+      "lastTested": "2026-11-06",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -5115,13 +5119,17 @@
           {
             "date": "2026-10-30",
             "detail": "panic硬封锁再次挡住诱人候选：锦江航运（航运港口top5、RPS120 92.11、今日业绩跳空）即使没有硬封锁也已因dist_ma5 9.2%被Rule 2b拦截；机械层sizing_multiplier=0是正确默认，判断层无条件服从。"
+          },
+          {
+            "date": "2026-11-06",
+            "detail": "panic硬阻断再次拦截FOMO：breadth 0.20:1(阈值0.35:1)、0/3指数绿，机械层直接new_positions=[]。斯菱智驱(RPS甜点区92.72)、中国广核(91.04)若在V1都会被讨论买入，V2正确强制保留现金。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 49,
+      "sampleSize": 50,
       "hitRate": 1.0,
-      "confidence": 0.98,
+      "confidence": 0.981,
       "tags": [
         "entry-filter",
         "position-sizing"
@@ -9355,6 +9363,33 @@
       "tags": [
         "timing",
         "macro"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h219",
+      "text": "青岛港(+0.93%)在4549家下跌的恐慌盘里抗跌，验证了当初因IV偏高只给小仓的决策质量：防御型+正现金流标的是恐慌期的稳定器。",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-11-06",
+      "lastTested": "2026-11-06",
+      "mechanism": "港口业务现金流稳定(Q3经营现金流+28.9%)，估值与盈利不依赖科技AI叙事，风险出清时资金抱团防御资产。",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-11-06",
+            "detail": "青岛港(+0.93%)在4549家下跌的恐慌盘里抗跌，验证了当初因IV偏高只给小仓的决策质量：防御型+正现金流标的是恐慌期的稳定器。"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "position-sizing"
       ],
       "parentRule": null,
       "retiredDate": null,
