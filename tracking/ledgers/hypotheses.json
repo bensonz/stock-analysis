@@ -4899,13 +4899,17 @@
           {
             "date": "2026-11-06",
             "detail": "科技→防御轮动加速：种植业+1.96% vs 元件-6.5%(极差8.5pp)，与h076判断一致。农业避险由厄尔尼诺粮价上行催化(来源:财联社/21经济网)。"
+          },
+          {
+            "date": "2026-11-06",
+            "detail": "青岛港在恐慌盘+0.72%逆势抗跌(上证-1.1%/创业板-3.96%)，验证防御红利资产在科技主导抛售中的相对强度；但航运港口板块今日未进top5，若连续3日滑入bottom30%仍按Rule 1卖出。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 46,
+      "sampleSize": 47,
       "hitRate": 1.0,
-      "confidence": 0.979,
+      "confidence": 0.98,
       "tags": [
         "sector",
         "exit-rule"
@@ -5123,11 +5127,15 @@
           {
             "date": "2026-11-06",
             "detail": "panic硬阻断再次拦截FOMO：breadth 0.20:1(阈值0.35:1)、0/3指数绿，机械层直接new_positions=[]。斯菱智驱(RPS甜点区92.72)、中国广核(91.04)若在V1都会被讨论买入，V2正确强制保留现金。"
+          },
+          {
+            "date": "2026-11-06",
+            "detail": "恐慌盘硬阻断机制正确执行：中国广核(电力top5/RPS91.26/MA全合规)与宝新能源(电力top5)本可通过全部买入门槛，但涨跌比0.16:1+三大指数全绿触发entry_regime hard_block，强制new_positions=[]。防御板块的合格候选在恐慌盘也一律不追。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 50,
+      "sampleSize": 51,
       "hitRate": 1.0,
       "confidence": 0.981,
       "tags": [
@@ -7246,7 +7254,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-08-11",
-      "lastTested": "2026-11-03",
+      "lastTested": "2026-11-06",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -7341,13 +7349,17 @@
           {
             "date": "2026-11-03",
             "detail": "RPS>95封顶规则继续兜底：今日策略池32只中约18只RPS120>95被直接剔除(百普赛斯99.89/福赛99.51/比音勒芬99.03等)，避免在科技抱团瓦解日接飞刀"
+          },
+          {
+            "date": "2026-11-06",
+            "detail": "本轮抛售导火索为阿里AI数据中心泡沫言论(来源:网易/163.com引用盛宝Charu Chanana)，元件-7.06%、通信设备-6.27%领跌；策略池大量RPS120>95%的科技硬件/PCB候选(如崇达技术dist_ma20 -23.2%)对应高拥挤度的均值回归风险，RPS>95封顶规则(h151)再次规避了拥挤科技"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 23,
+      "sampleSize": 24,
       "hitRate": 1.0,
-      "confidence": 0.96,
+      "confidence": 0.962,
       "tags": [
         "entry-filter"
       ],

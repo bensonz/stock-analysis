@@ -1,0 +1,144 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "农商行Ⅱ",
+        "5d_pct": 1.97,
+        "trend": "避险防御"
+      },
+      {
+        "name": "种植业",
+        "5d_pct": 1.41,
+        "trend": "避险防御"
+      },
+      {
+        "name": "铁路公路",
+        "5d_pct": 1.37,
+        "trend": "避险防御"
+      },
+      {
+        "name": "白色家电",
+        "5d_pct": 1.31,
+        "trend": "避险防御"
+      },
+      {
+        "name": "电力",
+        "5d_pct": 1.3,
+        "trend": "避险防御"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "元件",
+        "5d_pct": -7.06,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": -6.27,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": -4.74,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "医疗服务",
+        "5d_pct": -4.25,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": -3.85,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/1 持仓在热门板块（青岛港·航运港口今日中性）",
+    "regime": "AI算力链(元件/通信设备)领跌，资金避险转防御(农商行/电力/白电/种植业)，恐慌盘硬阻断新开仓"
+  },
+  "position_decisions": [
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "浮盈+1.04%(第8日)，未触发-5%硬止损/首3日-3%/15日时间止损；航运港口今日不在top5/bottom5(板块中性)，冷streak未满3日；margin adding(chg5+10.62%)；恐慌盘中防御属性逆势+0.72%抗跌。止损9.17不变。",
+      "sector_rank": "中性（今日未进top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 1.04,
+      "days_held": 8,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "reason": "电力top5(+1.30%)、RPS120 91.26、MA距离全合规(0.7/1.0/2.8)、margin adding，本可通过全部买入门槛；但今日恐慌盘(涨跌比0.16:1，三大指数全绿)触发机械硬阻断，新开仓一律禁止",
+      "rps120": 91.26
+    },
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "reason": "电力top5、RPS120 90.46、MA距离合规(4.0/6.1/5.1)；被恐慌盘机械硬阻断",
+      "rps120": 90.46
+    },
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "reason": "RPS120 94.93甜点区、MA距离合规(5.7/7.0/8.2)、0风险因子；激光设备板块不在今日top5，且恐慌盘机械硬阻断",
+      "rps120": 94.93
+    },
+    {
+      "code": "002815",
+      "name": "崇达技术",
+      "reason": "元件板块今日bottom1(-7.06%)，h019冷区硬禁入；dist_ma20 -23.2%已深度跌破均线，趋势破坏",
+      "rps120": 91.69
+    },
+    {
+      "code": "301550",
+      "name": "斯菱智驱",
+      "reason": "汽车零部件板块不在今日top5；dist_ma20 +10.4%逼近12%扩展阈值；恐慌盘机械硬阻断",
+      "rps120": 92.19
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌盘硬阻断机制正确执行：中国广核(电力top5/RPS91.26/MA全合规)与宝新能源(电力top5)本可通过全部买入门槛，但涨跌比0.16:1+三大指数全绿触发entry_regime hard_block，强制new_positions=[]。防御板块的合格候选在恐慌盘也一律不追。",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "恐慌盘下波动率极端(IV rank 0.87)、隔夜跳空风险高，任何技术面合格的买入都可能被系统性抛售击穿止损；硬阻断防止FOMO入场"
+    },
+    {
+      "text": "青岛港在恐慌盘+0.72%逆势抗跌(上证-1.1%/创业板-3.96%)，验证防御红利资产在科技主导抛售中的相对强度；但航运港口板块今日未进top5，若连续3日滑入bottom30%仍按Rule 1卖出。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "科技筹码出清时资金流入高股息防御，防御持仓获得相对收益；但板块若转冷(3日bottom30%)，板块引力优先于个股表现"
+    },
+    {
+      "text": "本轮抛售导火索为阿里AI数据中心泡沫言论(来源:网易/163.com引用盛宝Charu Chanana)，元件-7.06%、通信设备-6.27%领跌；策略池大量RPS120>95%的科技硬件/PCB候选(如崇达技术dist_ma20 -23.2%)对应高拥挤度的均值回归风险，RPS>95封顶规则(h151)再次规避了拥挤科技",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "AI算力链筹码过度集中+融资盘持续流出(财联社:电子近5日融资净卖302亿)，产业叙事裂痕引发踩踏，高RPS拥挤标的下跌弹性最大"
+    }
+  ],
+  "market_summary": "恐慌盘：涨跌比0.16:1(758涨/4741跌)、三大指数全绿(上证-1.1%/深成-2.57%/创业板-3.96%)、33涨停/15跌停、IV Rank均值0.87极度恐慌(300ETF 0.91/科创50 1.0)。导火索为阿里AI数据中心泡沫言论压制AI算力链(来源:网易/163.com)，元件-7.06%/通信设备-6.27%领跌；资金避险转防御：农商行+1.97%/种植业+1.41%/铁路公路+1.37%/白电+1.31%/电力+1.30%。机械层硬阻断新开仓(entry_regime.allow_new_positions=false)，97%现金，持仓青岛港防御抗跌。等待'成交回升+AI链企稳'双确认后再入场。",
+  "market_sentiment": "panic",
+  "market_call": "防御"
+}
