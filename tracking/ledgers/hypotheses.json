@@ -1278,7 +1278,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-11-05",
+      "lastTested": "2026-11-09",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1709,11 +1709,15 @@
           {
             "date": "2026-11-05",
             "detail": "煤炭开采/炼化及贸易/元件同时入bottom5，池内陕西煤业(RPS94.98)、广汇能源(RPS93.73)、崇达技术(RPS93.38)均处RPS扩展区却被板块冷区一票否决——再次验证bottom-list是硬禁买区。"
+          },
+          {
+            "date": "2026-11-09",
+            "detail": "板块热≠个股可买：元件板块(+2.79%)今日top5，但板块内唯一候选崇达技术RPS20仅3.13、现价15.13低于MA20(18.25)达17.1%，处于下跌趋势，不满足个股动量要求"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 107,
+      "sampleSize": 108,
       "hitRate": 1.0,
       "confidence": 0.991,
       "tags": [
@@ -7030,7 +7034,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-08-06",
-      "lastTested": "2026-11-03",
+      "lastTested": "2026-11-09",
       "mechanism": "强基本面的股票在弱市中同样会跟随大盘回调——市场beta在短期压倒alpha。弱breadth环境中开仓应更严格或减半仓位。",
       "evidence": {
         "supporting": [
@@ -7069,6 +7073,10 @@
           {
             "date": "2026-11-03",
             "detail": "IV'极度恐慌'(500ETF/创业板ETF/500ETF深 rank均1.0)是新开仓油门而非持仓卖出信号：青岛港/中国石油均浮盈且未触发任何卖出规则，IV高位只收紧新仓标准、放宽对现有浮盈仓的止损容忍"
+          },
+          {
+            "date": "2026-11-09",
+            "detail": "弱市(breadth 0.71:1、1/3指数收绿、IV平均0.69)下，即使候选具备0风险+RPS甜点区+MA合规，只要其二级行业未直接进入top5名单，纪律上应保持空仓——锐科激光(自动化设备/激光设备)与国科天成(军工电子)虽有军工题材，但非航天装备Ⅱ，不满足Rule 1行业门槛"
           }
         ],
         "contradicting": [
@@ -7078,9 +7086,9 @@
           }
         ]
       },
-      "sampleSize": 10,
-      "hitRate": 0.9,
-      "confidence": 0.833,
+      "sampleSize": 11,
+      "hitRate": 0.909,
+      "confidence": 0.846,
       "tags": [
         "timing",
         "position-sizing"
@@ -7365,13 +7373,17 @@
           {
             "date": "2026-11-09",
             "detail": "煤炭开采今日top5(+3.0%)但龙头中国神华RPS120=95.71、陕西煤业95.66均超95%封顶，热门板块无合规入场券——RPS>95封顶规则在板块情绪顶点再次挡住过热标的。"
+          },
+          {
+            "date": "2026-11-09",
+            "detail": "RPS>95%封顶规则在热门板块内继续拦截：煤炭开采top5中的中国神华(RPS120=95.63)与陕西煤业(95.87)被挡在门外，验证'热门板块龙头反而因动量过热不可追'"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 25,
+      "sampleSize": 26,
       "hitRate": 1.0,
-      "confidence": 0.963,
+      "confidence": 0.964,
       "tags": [
         "entry-filter"
       ],

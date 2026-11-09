@@ -1,0 +1,92 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 195681,
+  "output_tokens": 17627,
+  "rounds": 3,
+  "duration_sec": 314.5,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月 煤炭 焦炭 板块 上涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3227
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "航天装备 军工 板块 2026年11月 上涨 催化",
+        "max_results": 5
+      },
+      "result_length": 3612
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "青岛港 航运港口 集装箱运价 2026年11月",
+        "max_results": 5
+      },
+      "result_length": 3596
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 今日 热门板块 2026年11月9日 市场",
+        "max_results": 5
+      },
+      "result_length": 3700
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "元件 PCB 板块 2026年11月 上涨 原因",
+        "max_results": 5
+      },
+      "result_length": 3872
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.cls.cn/detail/2528740",
+        "maxChars": 4000
+      },
+      "result_length": 700
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.163.com/dy/article/LB9B0O7E05568W0A.html",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://news.qq.com/rain/a/20261103A069ZC00",
+        "maxChars": 4000
+      },
+      "result_length": 4059
+    }
+  ],
+  "fallback_used": false
+}

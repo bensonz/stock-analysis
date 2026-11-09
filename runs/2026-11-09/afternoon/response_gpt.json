@@ -1,0 +1,169 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "焦炭Ⅱ",
+        "5d_pct": 3.6,
+        "trend": "steady"
+      },
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": 3.48,
+        "trend": "accelerating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": 2.79,
+        "trend": "steady"
+      },
+      {
+        "name": "燃气Ⅱ",
+        "5d_pct": 2.75,
+        "trend": "steady"
+      },
+      {
+        "name": "煤炭开采",
+        "5d_pct": 2.68,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "光伏设备",
+        "5d_pct": -2.27,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "能源金属",
+        "5d_pct": -2.15,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电池",
+        "5d_pct": -2.09,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "医药商业",
+        "5d_pct": -1.98,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "教育",
+        "5d_pct": -1.89,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/1 持仓在热门板块（青岛港·航运港口为中性，未进top5/bottom5）",
+    "regime": "防御资源(煤/燃气/焦炭)+军工商业航天领涨，成长内部分化(元件强、光伏/电池冷)，弱市结构轮动"
+  },
+  "position_decisions": [
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "持有第9日浮盈+0.93%(入场9.65→现价9.74)，未触发-5%硬止损/首3日-3%/15日时间止损；航运港口未进top5/bottom5(中性)，冷streak未满3日；margin adding(chg5+2.11%)；今日-0.1%缩量(成交量低于mavol30)，弱市中防御属性抗跌。止损9.17不变，目标10.6不变",
+      "sector_rank": "中性（未进top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 0.93,
+      "days_held": 9,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "002815",
+      "name": "崇达技术",
+      "reason": "元件板块top5(+2.79%)但个股破位：RPS20仅3.13、现价15.13较MA20(18.25)低17.1%，越跌越便宜的下跌趋势，Rule 2个股动量不成立",
+      "rps120": 90.68
+    },
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "reason": "二级行业自动化设备/激光设备未进top5(航天装备Ⅱ≠其所属行业)，Rule 1不过；RPS120 94.92扩展区、dist_ma10 6.8%逼近追高阈值、IV创业板ETF 0.9115极高；弱市下不追",
+      "rps120": 94.92
+    },
+    {
+      "code": "301571",
+      "name": "国科天成",
+      "reason": "二级行业军工电子Ⅱ未进top5(航天装备Ⅱ≠其所属行业)；RPS20仅69.64短期动量弱、dist_ma10 7.2%逼近8%阈值、IV 0.9115极高；弱市下不追",
+      "rps120": 87.76
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "reason": "煤炭开采top5但RPS120=95.63>95%封顶(超买冷却)，等回撤到90%区间再评估",
+      "rps120": 95.63
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "reason": "煤炭开采top5但RPS120=95.87>95%封顶(超买冷却)，跳过",
+      "rps120": 95.87
+    },
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "reason": "银行/城商行未进top5；RPS120 94.12扩展区无豁免条件(1风险因子、净利增速8.7%<50%)",
+      "rps120": 94.12
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "石油石化/炼化及贸易未进top5；3个风险因子含大股东质押占持股77%",
+      "rps120": 94.1
+    },
+    {
+      "code": "600007",
+      "name": "中国国贸",
+      "reason": "房地产板块今日走低、未进top5；margin signal deleveraging；跳过",
+      "rps120": 93.99
+    },
+    {
+      "code": "688112",
+      "name": "鼎阳科技",
+      "reason": "RPS20仅1.47短期动量极弱、现价58.83较MA20(70.22)低16.2%破位、margin deleveraging",
+      "rps120": 91.89
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱市(breadth 0.71:1、1/3指数收绿、IV平均0.69)下，即使候选具备0风险+RPS甜点区+MA合规，只要其二级行业未直接进入top5名单，纪律上应保持空仓——锐科激光(自动化设备/激光设备)与国科天成(军工电子)虽有军工题材，但非航天装备Ⅱ，不满足Rule 1行业门槛",
+      "type": "rule",
+      "tags": [
+        "sector",
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h144",
+      "mechanism": "弱市中行业β是唯一可靠的进攻方向，个股α无法对抗整体下行广度；板块名单未确认前，动量交易期望值为负"
+    },
+    {
+      "text": "RPS>95%封顶规则在热门板块内继续拦截：煤炭开采top5中的中国神华(RPS120=95.63)与陕西煤业(95.87)被挡在门外，验证'热门板块龙头反而因动量过热不可追'",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "RPS进入98-99%区间时动量已极致拥挤，均值回归风险高于继续上行概率"
+    },
+    {
+      "text": "板块热≠个股可买：元件板块(+2.79%)今日top5，但板块内唯一候选崇达技术RPS20仅3.13、现价15.13低于MA20(18.25)达17.1%，处于下跌趋势，不满足个股动量要求",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "行业β只能提供顺风，个股自身的相对强度(尤其短期RPS20)与均线结构决定买点是否存在"
+    }
+  ],
+  "market_summary": "弱市：breadth 0.71:1(涨2242/跌3148)，三大指数仅上证+0.32%收红(深成-0.27%/创业板-0.27%)，早盘冲高午后回落。IV整体偏悲观(平均IVRank 0.69，创业板ETF 0.91/500ETF 0.87/科创50 0.76)。热点：焦炭(+3.6%)、航天装备(+3.48%)、元件(+2.79%)、燃气(+2.75%)、煤炭开采(+2.68%)，由冬季补库(煤/燃气)与军工商业航天、PCB涨价扩产驱动(来源:财联社/煤炭资源网/新浪财经)；冷门：光伏设备(-2.27%)、能源金属(-2.15%)、电池(-2.09%)。持仓1/1在航运港口(中性)。弱市半仓门槛下无候选同时满足行业top5+个股动量+MA合规，维持空仓。政策面：11/6国常会稳市机制(来源:四大证券报11/9)。",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}
