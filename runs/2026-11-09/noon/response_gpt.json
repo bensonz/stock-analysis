@@ -1,0 +1,190 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": 6.19,
+        "trend": "accelerating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": 4.81,
+        "trend": "steady"
+      },
+      {
+        "name": "焦炭Ⅱ",
+        "5d_pct": 3.31,
+        "trend": "steady"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": 3.25,
+        "trend": "steady"
+      },
+      {
+        "name": "煤炭开采",
+        "5d_pct": 3.0,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "工程机械",
+        "5d_pct": -2.17,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "酒店餐饮",
+        "5d_pct": -1.73,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电池",
+        "5d_pct": -1.63,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "摩托车及其他",
+        "5d_pct": -1.6,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "能源金属",
+        "5d_pct": -1.44,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/1 positions in hot sectors（青岛港-航运港口今日不在top5/bottom5，中性）",
+    "regime": "防御性窄幅轮动：军工(航展抢跑)+煤炭(寒潮备煤)+AI硬件(元件/通信)领涨，新能源/工程机械/消费轮出；宽度弱(0.98:1)+IV恐慌(均值0.72)"
+  },
+  "position_decisions": [
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "持有第9日浮盈+1.35%(入场9.65→现价9.78)，未触发-5%硬止损/首3日-3%/15日时间止损任一卖出规则；航运港口今日不在top5/bottom5(中性)，冷streak未满3日；margin adding(chg5+2.11%)。但集装箱运价指数11-06为3633.45点、周环比-1.46%(来源:tradingeconomics)，防御仓进攻催化不足，维持持有观察。止损9.17不变。",
+      "sector_rank": "中性（不在top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 1.35,
+      "days_held": 9,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "002815",
+      "name": "崇达技术",
+      "reason": "元件板块今日top5(+4.81%)但个股动量崩坏：rps20=3.37、dist_ma20=-15.5%、3个风险因子(抛压/机构关注低/换手21%)——热板块里的下跌股，板块引力托不住个股，不接飞刀",
+      "rps120": 91.69
+    },
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "reason": "Rule 2b超买拦截：dist_ma5=7.2%(>6%)、dist_ma10=8.5%(>8%)，军工领涨但个股已短线远离支撑，追高即接盘",
+      "rps120": 94.93
+    },
+    {
+      "code": "301571",
+      "name": "国科天成",
+      "reason": "dist_ma10=8.1%(>8%)触发Rule 2b；且所属为军工电子Ⅱ而非领涨的航天装备Ⅱ，板块不匹配",
+      "rps120": 86.64
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "reason": "煤炭开采今日top5(+3.0%)但RPS120=95.71超95%封顶，动量拥挤，均值回归风险高",
+      "rps120": 95.71
+    },
+    {
+      "code": "601225",
+      "name": "陕西煤业",
+      "reason": "煤炭开采今日top5但RPS120=95.66超95%封顶，不追",
+      "rps120": 95.66
+    },
+    {
+      "code": "601838",
+      "name": "成都银行",
+      "reason": "银行不在今日top5(板块不达top30%门槛)；margin deleveraging(chg5=-5.35%)叠加IV 0.71偏高，弱市不勉强开仓",
+      "rps120": 94.99
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "reason": "电力/核力发电不在今日top5，板块不达top30%门槛，IV 0.94(tight)过高，不进场",
+      "rps120": 91.26
+    },
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "reason": "火力发电不在今日top5，板块不达top30%门槛，弱市不勉强",
+      "rps120": 90.46
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "炼化及贸易不在top5；3个风险因子(大股东质押占持股77%、现金短债比0.29、2026-11-05大跌-6.84%)，RPS120=93.98处扩展区",
+      "rps120": 93.98
+    },
+    {
+      "code": "600007",
+      "name": "中国国贸",
+      "reason": "房地产板块今日走低(板块短线走低，来源:输入events)，板块不达top30%门槛",
+      "rps120": 93.74
+    },
+    {
+      "code": "688112",
+      "name": "鼎阳科技",
+      "reason": "个股动量崩坏：rps20=2.14、dist_ma20=-16.2%、1个抛压风险(09-28大跌-12.3%)，仪器仪表板块不在top5",
+      "rps120": 92.94
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱市(涨跌比0.98:1)+IV极度恐慌(均值0.72)时，热板块里唯一池内标的崇达技术(元件+4.81%)却rps20=3.37、dist_ma20=-15.5%——'板块热'不等于'个股强'，板块动量与个股动量背离时必须双达标才买，否则即接飞刀。",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "板块向上但个股自身趋势崩坏时，个股自身动量主导短期走势，板块引力无法托住下跌中的个股"
+    },
+    {
+      "text": "煤炭开采今日top5(+3.0%)但龙头中国神华RPS120=95.71、陕西煤业95.66均超95%封顶，热门板块无合规入场券——RPS>95封顶规则在板块情绪顶点再次挡住过热标的。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "热板块领涨股最先进入RPS过热区，95%以上拥挤度对应负向rank-IC，追入均值回归风险最高"
+    },
+    {
+      "text": "锐科激光(dist_ma5=7.2%、dist_ma10=8.5%)与国科天成(dist_ma10=8.1%)因MA偏离触发Rule 2b拦截——军工/航天今日领涨但相关候选已短线超买，板块爆发当日追入即接盘。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "板块爆发当日资金抢筹使个股快速偏离MA5/MA10，次日均值回归风险陡增"
+    },
+    {
+      "text": "珠海航展(第十六届中国国际航空航天博览会,12/7-13)是航天装备Ⅱ今日+6.19%领涨的明确催化，历届航展前军工有抢跑特征(来源:搜狐财经)。军工可纳入后续跟踪，但需等个股回调至MA5/MA10附近再评估，今日不宜追。",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "事件日历类催化在兑现前驱动抢跑行情，板块先行、个股超买后需等回调"
+    }
+  ],
+  "market_summary": "弱市窄幅防御：三大指数全绿(上证+0.46%/深成+0.27%/创业板+0.56%)但涨跌比仅0.98:1(涨2650/跌2707)，涨停51家/跌停1家，多数个股在±2%内窄幅震荡——权重抬指数、宽度不配合。IV情绪'极度恐慌'(平均IV rank 0.72，创业板/科创50高达0.87-0.94)。板块轮动为防御性：军工(珠海航展12/7-13抢跑)+煤炭(寒潮备煤)+AI硬件(元件/通信)领涨，新能源/工程机械/消费轮出。持仓青岛港(航运港口)中性抗跌。机械层允许半仓但判断层选择持币：池内无'板块+个股'双达标且MA不超买的候选，热板块龙头均被RPS>95封顶或Rule 2b拦截，今日不勉强开新仓。",
+  "market_sentiment": "neutral",
+  "market_call": "谨慎"
+}

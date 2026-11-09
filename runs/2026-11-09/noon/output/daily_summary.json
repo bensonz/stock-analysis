@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-09",
+  "actions": [
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 9.78,
+      "pnl_pct": 1.35,
+      "note": "持有第9日浮盈+1.35%(入场9.65→现价9.78)，未触发-5%硬止损/首3日-3%/15日时间止损任一卖出规则；航运港口今日不在top5/bottom5(中性)，冷streak未满3日；margin adding(chg5+2.11%)。但集装箱运价指数11-06为3633.45点、周环比-1.46%(来源:tradingeconomics)，防御仓进攻催化不足，维持持有观察。止损9.17不变。"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 1,
+    "totalEquity": 963812.94,
+    "dayPnl": 84.0,
+    "dayReturnPct": 0.01,
+    "totalReturnPct": -3.62,
+    "unrealizedPnl": 364.0,
+    "realizedPnl": -36551.06,
+    "cashPct": 97.16
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.9789,
+    "up": 2650,
+    "down": 2707,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 51,
+    "limit_downs": 1,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.98:1, 3/3 major indices green, 51 limit-ups / 1 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "弱市窄幅防御：三大指数全绿(上证+0.46%/深成+0.27%/创业板+0.56%)但涨跌比仅0.98:1(涨2650/跌2707)，涨停51家/跌停1家，多数个股在±2%内窄幅震荡——权重抬指数、宽度不配合。IV情绪'极度恐慌'(平均IV rank 0.72，创业板/科创50高达0.87-0.94)。板块轮动为防御性：军工(珠海航展12/7-13抢跑)+煤炭(寒潮备煤)+AI硬件(元件/通信)领涨，新能源/工程机械/消费轮出。持仓青岛港(航运港口)中性抗跌。机械层允许半仓但判断层选择持币：池内无'板块+个股'双达标且MA不超买的候选，热板块龙头均被RPS>95封顶或Rule 2b拦截，今日不勉强开新仓。"
+  }
+}

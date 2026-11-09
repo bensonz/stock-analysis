@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-09",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1794195324.142325,
+      "errors": [],
+      "end": 1794195375.555121,
+      "duration_sec": 51.4
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 7514,
+      "tokens": {
+        "input_tokens": 174283,
+        "output_tokens": 17240
+      },
+      "rounds": 3,
+      "tool_calls_count": 4,
+      "duration_sec": 235.9,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1794195611.420031,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h013 (rule): +1 supporting evidence → hitRate=99%, n=167",
+        "Hypothesis: Updated h151 (rule): +1 supporting evidence → hitRate=100%, n=25",
+        "Hypothesis: Updated h027 (rule): +1 supporting evidence → hitRate=100%, n=71",
+        "Hypothesis: Created h220 (observation): 珠海航展(第十六届中国国际航空航天博览会,12/7-13)是航天装备Ⅱ今日+6.19%领涨的明确催化，历届航展前军工有抢跑特征(来源:搜狐财经)。军工可纳入后续...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-11-09",
+        "status": "ok",
+        "checked": 1,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "end": 1794195612.069532,
+      "duration_sec": 0.6
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 287.9
+  }
+}

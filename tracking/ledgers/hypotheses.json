@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-11-06",
+  "lastUpdated": "2026-11-09",
   "hypotheses": [
     {
       "id": "h001",
@@ -332,7 +332,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-03-27",
-      "lastTested": "2026-11-05",
+      "lastTested": "2026-11-09",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -995,6 +995,10 @@
           {
             "date": "2026-11-05",
             "detail": "强盘(涨跌比7.8:1、86涨停/0跌停)但策略池36只候选无一落在当日热点板块(光伏设备/能源金属/数字媒体/贵金属/广告营销)——动量股票池与板块轮动脱节时，正确动作是持币，而不是从非热点板块勉强凑数开仓。"
+          },
+          {
+            "date": "2026-11-09",
+            "detail": "弱市(涨跌比0.98:1)+IV极度恐慌(均值0.72)时，热板块里唯一池内标的崇达技术(元件+4.81%)却rps20=3.37、dist_ma20=-15.5%——'板块热'不等于'个股强'，板块动量与个股动量背离时必须双达标才买，否则即接飞刀。"
           }
         ],
         "contradicting": [
@@ -1004,7 +1008,7 @@
           }
         ]
       },
-      "sampleSize": 166,
+      "sampleSize": 167,
       "hitRate": 0.994,
       "confidence": 0.988,
       "tags": [],
@@ -2768,7 +2772,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-11-04",
+      "lastTested": "2026-11-09",
       "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes.",
       "evidence": {
         "supporting": [
@@ -3051,11 +3055,15 @@
           {
             "date": "2026-11-04",
             "detail": "好催化≠好入场点：马士基10/29宣布11/16起上调远东至北欧/地中海运价(东方财富网)，航运为真催化；但锦江航运dist_ma5 6.8%/dist_ma10 10.7%触发Rule 2b，同板块中谷物流MA合规但板块未入top5+margin deleveraging。催化决定方向，MA偏离决定是否已涨过头"
+          },
+          {
+            "date": "2026-11-09",
+            "detail": "锐科激光(dist_ma5=7.2%、dist_ma10=8.5%)与国科天成(dist_ma10=8.1%)因MA偏离触发Rule 2b拦截——军工/航天今日领涨但相关候选已短线超买，板块爆发当日追入即接盘。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 70,
+      "sampleSize": 71,
       "hitRate": 1.0,
       "confidence": 0.986,
       "tags": [
@@ -7254,7 +7262,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-08-11",
-      "lastTested": "2026-11-06",
+      "lastTested": "2026-11-09",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -7353,13 +7361,17 @@
           {
             "date": "2026-11-06",
             "detail": "本轮抛售导火索为阿里AI数据中心泡沫言论(来源:网易/163.com引用盛宝Charu Chanana)，元件-7.06%、通信设备-6.27%领跌；策略池大量RPS120>95%的科技硬件/PCB候选(如崇达技术dist_ma20 -23.2%)对应高拥挤度的均值回归风险，RPS>95封顶规则(h151)再次规避了拥挤科技"
+          },
+          {
+            "date": "2026-11-09",
+            "detail": "煤炭开采今日top5(+3.0%)但龙头中国神华RPS120=95.71、陕西煤业95.66均超95%封顶，热门板块无合规入场券——RPS>95封顶规则在板块情绪顶点再次挡住过热标的。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 24,
+      "sampleSize": 25,
       "hitRate": 1.0,
-      "confidence": 0.962,
+      "confidence": 0.963,
       "tags": [
         "entry-filter"
       ],
@@ -9402,6 +9414,34 @@
       "confidence": 0.6,
       "tags": [
         "position-sizing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h220",
+      "text": "珠海航展(第十六届中国国际航空航天博览会,12/7-13)是航天装备Ⅱ今日+6.19%领涨的明确催化，历届航展前军工有抢跑特征(来源:搜狐财经)。军工可纳入后续跟踪，但需等个股回调至MA5/MA10附近再评估，今日不宜追。",
+      "type": "signal",
+      "status": "observation",
+      "created": "2026-11-09",
+      "lastTested": "2026-11-09",
+      "mechanism": "事件日历类催化在兑现前驱动抢跑行情，板块先行、个股超买后需等回调",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-11-09",
+            "detail": "珠海航展(第十六届中国国际航空航天博览会,12/7-13)是航天装备Ⅱ今日+6.19%领涨的明确催化，历届航展前军工有抢跑特征(来源:搜狐财经)。军工可纳入后续跟踪，但需等个股回调至MA5/MA10附近再评估，今日不宜追。"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
+        "timing"
       ],
       "parentRule": null,
       "retiredDate": null,

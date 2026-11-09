@@ -1,0 +1,52 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 174283,
+  "output_tokens": 17240,
+  "rounds": 3,
+  "duration_sec": 235.9,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 今日 热门板块 航天装备 元件 煤炭 上涨原因 2026-11-09",
+        "max_results": 6
+      },
+      "result_length": 4225
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "军工 航天装备 板块 大涨 催化 2026年11月",
+        "max_results": 5
+      },
+      "result_length": 3806
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "青岛港 航运港口 新闻 2026年11月 集装箱 运价",
+        "max_results": 5
+      },
+      "result_length": 3436
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "通信设备 板块 上涨 2026年11月 光模块 算力",
+        "max_results": 5
+      },
+      "result_length": 3792
+    }
+  ],
+  "fallback_used": false
+}
