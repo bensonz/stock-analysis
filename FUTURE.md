@@ -16,6 +16,7 @@ Rules for this file:
 | date | event | future event |
 |---|---|---|
 | 2026-09-01 | deep_report TEMPERATURE 0.5→1.0（同日双跑 4/5+4/5，判定边界陡而非骰子问题） | **2026-09-15 due**: 若评分方程（docs/deep_report_scoring/PROPOSAL.md）已批准落地，跑验证计划（同日 2×2 股 + 跨模型）；未批准则催决策。**2026-11-03 周审**：PROPOSAL 仍"awaiting owner approval"，未实现，验证计划无从跑；新反例 600150 10-03 同日同数据 4/5 vs 3/5 → **2026-11-10 due**: owner 批/驳 PROPOSAL，并定 TEMPERATURE |
+| 2026-11-10 | 日常决策模型 DeepSeek V4 Pro → Fable 5.2 试用一周（owner）。`.env`: `LLM_PROVIDER=anthropic`, `ANTHROPIC_MODEL=claude-fable-5-2`（旧值留作注释；副作用：deep_report 撰写与 event triage 也用 Fable）。首跑 11-10 noon；修复 9f143c5c（relay 吞掉 temperature 400）。切换前 1 例无工具对比（11-09 afternoon）两模型决策相同，不足以下结论 | **2026-11-13 due**（周五收盘后）: 复核 11-10 noon → 11-13 afternoon 共 8 个 slot：运行状态与 doctor 结果、每次 tokens/耗时/成本、`empty stream … retrying` 次数、决策（new_positions/卖出/market_call）、数字是否可回溯。仅作描述，不作盈亏结论（样本太短）。owner 定：保留 / 回退（还原两行注释） |
 
 ## Resolved
 
