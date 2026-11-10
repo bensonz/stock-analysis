@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-10",
+  "actions": [
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 9.85,
+      "pnl_pct": 2.07,
+      "note": "持有第10日浮盈+2.07%(9.65→9.85)，未触发-5%硬止损/15日时间止损；港口航运今日同花顺口径跌幅居前(冷第1日，未满3日)，个股逆势+1.13%；第15日若仍<3%按时间止损离场"
+    },
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "action": "OPEN",
+      "price": 43.02,
+      "note": "RPS120 94.92扩展区(0风险豁免)，MA距离2.1/4.6/4.7%全合规；契合连续2日领涨的商业航天(星间激光通信)+人形机器人双主线；最新季度净利+97%"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 2,
+    "totalEquity": 964008.94,
+    "dayPnl": 308.0,
+    "dayReturnPct": 0.03,
+    "totalReturnPct": -3.6,
+    "unrealizedPnl": 560.0,
+    "realizedPnl": -36551.06,
+    "cashPct": 91.34
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 2.6042,
+    "up": 3862,
+    "down": 1483,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 53,
+    "limit_downs": 0,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 2.60:1, 3/3 major indices green, 53 limit-ups / 0 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [
+    {
+      "code": "300747",
+      "name": "锐科激光"
+    }
+  ],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "Breadth 2.60:1偏强，53涨停/0跌停，三指数收红，但r0_2占2582家、上证仅+0.06%、成交额缩量500亿元(同花顺)，属于结构性上涨。Hot: 影视院线+6.0/其他家电+5.26/照明+4.34/数字媒体+3.73/元件+3.58；人形机器人、商业航天连续2日领涨。Cold: 油气开采-3.01/航海装备-2.2/炼化-2.15/油服-1.99/煤炭-1.45，港口航运亦居跌幅前列。持仓板块对齐0/1。IV整体偏悲观(avg 0.55)，创业板ETF 0.735，选择性入场。新开锐科激光6%；青岛港持有。"
+  }
+}

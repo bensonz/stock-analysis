@@ -1,0 +1,102 @@
+{
+  "provider": "anthropic",
+  "primary_model": "claude-opus-5-5",
+  "decision_source": "Claude primary",
+  "input_tokens": 326826,
+  "output_tokens": 8222,
+  "rounds": 4,
+  "duration_sec": 110.9,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+11月10日+午评+板块",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=锐科激光+2026+11月",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=中国广核+核电+板块+11月",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=青岛港+11月+2026",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=影视院线+元件+涨幅+今日+11月10日",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 11月10日 午盘 影视院线 元件 创业板指 涨",
+        "max_results": 5
+      },
+      "result_length": 3423
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_search",
+      "input": {
+        "query": "电力板块 核电 火电 11月 2026 行情 资金",
+        "max_results": 5
+      },
+      "result_length": 3278
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://m.10jqka.com.cn/20261110/c681645010.shtml",
+        "maxChars": 4000
+      },
+      "result_length": 4059
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_search",
+      "input": {
+        "query": "人形机器人 激光 商业航天 板块 11月10日 涨",
+        "max_results": 5
+      },
+      "result_length": 3168
+    }
+  ],
+  "fallback_used": false
+}

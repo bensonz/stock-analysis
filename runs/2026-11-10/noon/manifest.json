@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-10",
+  "slot": "noon",
+  "run_started_at": "2026-11-10T13:20:21.023881+08:00",
+  "status": "success",
+  "exit_code": 0,
+  "total_duration_sec": 168.2,
+  "phases": {
+    "collect": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "reused_phase1": true,
+      "collected_at": 1794281736.8655412,
+      "reused_duration_sec": 56.8,
+      "errors": []
+    },
+    "llm_analysis": {
+      "status": "ok",
+      "duration_sec": 110.9
+    },
+    "apply": {
+      "status": "ok",
+      "duration_sec": 0.5
+    },
+    "validate": {
+      "status": "warnings",
+      "duration_sec": 0.0,
+      "errors": [
+        "RULE check_stop_proximity: 300747 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+      ]
+    }
+  },
+  "gates": {
+    "phase1_to_phase2": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": []
+    },
+    "phase2_to_phase3": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": []
+    },
+    "phase3_to_phase4": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": [
+        "rule check_stop_proximity: 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+      ]
+    }
+  }
+}

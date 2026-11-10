@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-11-09",
+  "lastUpdated": "2026-11-10",
   "hypotheses": [
     {
       "id": "h001",
@@ -4724,7 +4724,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-11-06",
+      "lastTested": "2026-11-10",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4915,11 +4915,15 @@
           {
             "date": "2026-11-06",
             "detail": "青岛港在恐慌盘+0.72%逆势抗跌(上证-1.1%/创业板-3.96%)，验证防御红利资产在科技主导抛售中的相对强度；但航运港口板块今日未进top5，若连续3日滑入bottom30%仍按Rule 1卖出。"
+          },
+          {
+            "date": "2026-11-10",
+            "detail": "资金从防御板块(港口、煤炭、保险)流向TMT时，防御型持仓应开始计算冷门天数，接近15日时间止损且浮盈<3%时优先离场"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 47,
+      "sampleSize": 48,
       "hitRate": 1.0,
       "confidence": 0.98,
       "tags": [
@@ -7592,7 +7596,7 @@
       "type": "observation",
       "status": "validated",
       "created": "2026-08-17",
-      "lastTested": "2026-09-21",
+      "lastTested": "2026-11-10",
       "mechanism": "RPS甜点区代表中等偏强动量，MA距离合规保证未透支短期涨幅，两者叠加的入场点胜率更高",
       "evidence": {
         "supporting": [
@@ -7619,13 +7623,17 @@
           {
             "date": "2026-09-21",
             "detail": "今日热点板块(医疗服务/化学制药/房地产服务/航海装备)在候选池中无一个'甜点区RPS+MA合规'的可买标的，而煤炭/石化/有色等非热点标的即使RPS合规也不进场——强宽度不强制开仓(h013)，宁可持币85%也不买冷门行业(h019)。"
+          },
+          {
+            "date": "2026-11-10",
+            "detail": "当申万板块排名缺失时，主题连续2日领涨+个股RPS 92-95且0风险+MA合规，可作为板块强度的替代证据，但仓位限中等(≤6%)"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 6,
+      "sampleSize": 7,
       "hitRate": 1.0,
-      "confidence": 0.875,
+      "confidence": 0.889,
       "tags": [
         "entry-filter",
         "sector"

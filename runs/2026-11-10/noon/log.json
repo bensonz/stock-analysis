@@ -1,0 +1,126 @@
+{
+  "date": "2026-11-10",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1794281736.8655412,
+      "errors": [],
+      "end": 1794281793.676398,
+      "duration_sec": 56.8,
+      "reused_phase1": true
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 6181,
+      "tokens": {
+        "input_tokens": 326826,
+        "output_tokens": 8222
+      },
+      "rounds": 4,
+      "tool_calls_count": 9,
+      "duration_sec": 110.9,
+      "fallback_used": false,
+      "provider": "anthropic",
+      "decision_source": "Claude primary",
+      "primary_model": "claude-opus-5-5"
+    },
+    {
+      "phase": "apply",
+      "start": 1794288133.0409741,
+      "actions": [
+        "OPEN 300747 @ 43.02",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h158 (validated): +1 supporting evidence → hitRate=100%, n=7",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=48",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-11-10",
+        "status": "ok",
+        "checked": 1,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "300747",
+                "name": "锐科激光",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 43.02,
+                "stopLoss": 40.87,
+                "distance_pct": 5.0,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1794288133.584778,
+      "duration_sec": 0.5
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 300747 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 168.2
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "影视院线",
+        "5d_pct": 6.0,
+        "trend": "accelerating"
+      },
+      {
+        "name": "其他家电Ⅱ",
+        "5d_pct": 5.26,
+        "trend": "one-day"
+      },
+      {
+        "name": "照明设备Ⅱ",
+        "5d_pct": 4.34,
+        "trend": "one-day"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": 3.73,
+        "trend": "accelerating"
+      },
+      {
+        "name": "元件",
+        "5d_pct": 3.58,
+        "trend": "rebounding"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": -3.01,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航海装备Ⅱ",
+        "5d_pct": -2.2,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "炼化及贸易",
+        "5d_pct": -2.15,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "油服工程",
+        "5d_pct": -1.99,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "煤炭开采",
+        "5d_pct": -1.45,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/1 positions in hot sectors (港口航运今日同花顺口径跌幅居前)",
+    "regime": "TMT/传媒/人形机器人/商业航天领涨(连续2日)，资源与防御(油气、煤炭、保险、港口)流出；注：5d_pct字段为当日涨跌幅，输入未提供5日数据"
+  },
+  "position_decisions": [
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "持有第10日浮盈+2.07%(9.65→9.85)，未触发-5%硬止损/15日时间止损；港口航运今日同花顺口径跌幅居前(冷第1日，未满3日)，个股逆势+1.13%；第15日若仍<3%按时间止损离场",
+      "sector_rank": "bottom-leaning (同花顺午评跌幅居前，申万bottom5未列)",
+      "new_stop": null,
+      "pnl_pct": 2.07,
+      "days_held": 10,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "entry_price": 43.02,
+      "allocation_pct": 6,
+      "stop": 40.87,
+      "target": 55.0,
+      "thesis": "RPS120 94.92扩展区(0风险豁免)，MA距离2.1/4.6/4.7%全合规；契合连续2日领涨的商业航天(星间激光通信)+人形机器人双主线；最新季度净利+97%",
+      "sector": "自动化设备/激光设备(商业航天+人形机器人主题)",
+      "sector_rank": "主题top(人形机器人午盘+3.23%,同花顺)；申万排名未核实",
+      "catalyst": "开源证券报告列为商业航天激光通信受益标的；马斯克StarMind太空算力催化(凤凰网/新浪11-09)；Q净利+97%；管理层增持116万元",
+      "catalyst_freshness": "ongoing",
+      "rps120": 94.92,
+      "conviction": "moderate"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "301571",
+      "name": "国科天成",
+      "reason": "RPS120 87.76甜点区且0风险，但dist_ma10 6.7%接近上限、军工电子板块强度未确认、IV 0.735，等回踩MA5/MA10",
+      "rps120": 87.76
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "炼化及贸易位于bottom5，h019底部板块不买",
+      "rps120": 94.1
+    },
+    {
+      "code": "002815",
+      "name": "崇达技术",
+      "reason": "元件今日热但个股低于MA20达16.3%、rps20仅3.13，趋势破坏，属于反弹而非强势",
+      "rps120": 90.68
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "reason": "电力板块今日不在前列，板块强度无法确认top30%",
+      "rps120": 91.38
+    },
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "reason": "火电板块强度未确认，资金流向TMT",
+      "rps120": 90.83
+    },
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "reason": "银行/证金持股走弱，回购再贷款政策催化(11-04)已过数日",
+      "rps120": 94.12
+    },
+    {
+      "code": "600007",
+      "name": "中国国贸",
+      "reason": "地产板块偏弱，Q3净利仅+8.5%，催化弱",
+      "rps120": 93.99
+    },
+    {
+      "code": "600351",
+      "name": "亚宝药业",
+      "reason": "RPS120 93.43扩展区，但不满足任一豁免条件(有1项风险、板块非top10%)",
+      "rps120": 93.43
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "当申万板块排名缺失时，主题连续2日领涨+个股RPS 92-95且0风险+MA合规，可作为板块强度的替代证据，但仓位限中等(≤6%)",
+      "type": "heuristic",
+      "tags": [
+        "sector",
+        "entry-filter",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h158",
+      "mechanism": "连续多日的主题资金流比单日板块涨幅更能代表持续性，而0风险标的回撤更可控"
+    },
+    {
+      "text": "资金从防御板块(港口、煤炭、保险)流向TMT时，防御型持仓应开始计算冷门天数，接近15日时间止损且浮盈<3%时优先离场",
+      "type": "observation",
+      "tags": [
+        "exit-rule",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "风格轮动期防御仓缺少进攻催化，时间成本上升"
+    }
+  ],
+  "market_summary": "Breadth 2.60:1偏强，53涨停/0跌停，三指数收红，但r0_2占2582家、上证仅+0.06%、成交额缩量500亿元(同花顺)，属于结构性上涨。Hot: 影视院线+6.0/其他家电+5.26/照明+4.34/数字媒体+3.73/元件+3.58；人形机器人、商业航天连续2日领涨。Cold: 油气开采-3.01/航海装备-2.2/炼化-2.15/油服-1.99/煤炭-1.45，港口航运亦居跌幅前列。持仓板块对齐0/1。IV整体偏悲观(avg 0.55)，创业板ETF 0.735，选择性入场。新开锐科激光6%；青岛港持有。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}
