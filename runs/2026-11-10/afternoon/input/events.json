@@ -1,0 +1,275 @@
+{
+  "as_of": "2026-11-10",
+  "window_days": 21,
+  "dated": [
+    {
+      "date": "2026-11-10",
+      "tz": "CN",
+      "name": "中美关税休战到期",
+      "kind": "policy_deadline",
+      "certainty": "scheduled",
+      "impact": "high",
+      "notes": "2025-10北京会晤定一年休战：美对华关税47%暂停升级、中方稀土出口管制暂停。Section 301复审2026夏结束——续约谈判进展是提前信号，临近未续约=系统性风险。",
+      "source": "2025-10中美元首会晤联合声明(新闻多源, 2026-07-31核实)",
+      "decided_by": null,
+      "direction": "risk",
+      "a_share_impact_date": "2026-11-10",
+      "days_until_impact": 0
+    },
+    {
+      "date": "2026-11-10",
+      "tz": "CN",
+      "name": "中国10月出口同比(按美元计)",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "北京时间 2026-11-10 12:02（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/CN131320/overview",
+      "decided_by": "ai",
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-11-10",
+      "days_until_impact": 0
+    },
+    {
+      "date": "2026-11-10",
+      "tz": "CN",
+      "name": "中国10月进口同比(按美元计)",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "北京时间 2026-11-10 12:02（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/CN131321/overview",
+      "decided_by": "ai",
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-11-10",
+      "days_until_impact": 0
+    },
+    {
+      "date": "2026-11-10",
+      "tz": "US",
+      "name": "美国10月CPI同比",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "high",
+      "notes": "北京时间 2026-11-10 21:30（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/US111017/overview",
+      "decided_by": "ai",
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-11-11",
+      "days_until_impact": 1
+    },
+    {
+      "date": "2026-11-10",
+      "tz": "US",
+      "name": "美国10月核心CPI同比",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "high",
+      "notes": "北京时间 2026-11-10 21:30（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/US111018/overview",
+      "decided_by": "ai",
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-11-11",
+      "days_until_impact": 1
+    },
+    {
+      "date": "2026-11-15",
+      "tz": "CN",
+      "name": "中国央行：自11月15日起上调金融机构外汇存款准备金率2个百分点",
+      "kind": "other",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "北京时间 2026-11-15 00:00（华尔街见闻财经日历）",
+      "source": "华尔街见闻财经日历 imp=4",
+      "decided_by": "ai",
+      "direction": "risk",
+      "a_share_impact_date": "2026-11-16",
+      "days_until_impact": 6
+    },
+    {
+      "date": "2026-11-18",
+      "tz": "CN",
+      "name": "中国APEC领导人非正式会议",
+      "kind": "other",
+      "certainty": "scheduled",
+      "impact": "high",
+      "notes": "11-10中美关税休战到期后8天；或有中美元首会晤——续约/升级的关键窗口（owner 2026-10-13 改为high）",
+      "source": "华尔街见闻财经日历 imp=4",
+      "decided_by": null,
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-11-18",
+      "days_until_impact": 8
+    },
+    {
+      "date": "2026-11-20",
+      "tz": "CN",
+      "name": "CFFEX股指期货/期权交割日（第3周五）",
+      "kind": "opex",
+      "certainty": "scheduled",
+      "impact": "low",
+      "notes": "复测(n=48): 当日中证1000均值-0.33% vs 基线+0.03%(26/48收跌, ~1.5se)——偏弱但不显著, 观察项（复测: scripts/research/index_event_study.py --expiry-study）",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "risk",
+      "a_share_impact_date": "2026-11-20",
+      "days_until_impact": 10
+    },
+    {
+      "date": "2026-11-20",
+      "tz": "CN",
+      "name": "LPR报价",
+      "kind": "cb_rate",
+      "certainty": "scheduled",
+      "impact": "low",
+      "notes": "通常已被MLF预告；意外调降=政策信号事件",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-11-20",
+      "days_until_impact": 10
+    },
+    {
+      "date": "2026-11-20",
+      "tz": "US",
+      "name": "美股月度OpEx（期权到期，GEX集中兑现）",
+      "kind": "opex",
+      "certainty": "scheduled",
+      "impact": "low",
+      "notes": "复测(n=48): 次日中证1000均值-0.18% vs 基线+0.03%——无显著效应, 仅作提示（复测: scripts/research/index_event_study.py --expiry-study）",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "risk",
+      "a_share_impact_date": "2026-11-23",
+      "days_until_impact": 13
+    },
+    {
+      "date": "2026-11-25",
+      "tz": "CN",
+      "name": "A股ETF期权到期日（第4周三）",
+      "kind": "opex",
+      "certainty": "scheduled",
+      "impact": "low",
+      "notes": "复测(n=48): 当日中证1000均值-0.01%≈基线——无效应, 仅作日历提示（复测: scripts/research/index_event_study.py --expiry-study）",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "risk",
+      "a_share_impact_date": "2026-11-25",
+      "days_until_impact": 15
+    },
+    {
+      "date": "2026-11-30",
+      "tz": "CN",
+      "name": "官方制造业PMI（9:30，当日盘中）",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "增长脉搏读数——A股实际交易的国内数据",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-11-30",
+      "days_until_impact": 20
+    },
+    {
+      "date": "2026-12-01",
+      "tz": "CN",
+      "name": "财新制造业PMI（9:45，当日盘中）",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "low",
+      "notes": "官方PMI的民企/出口侧补充",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-12-01",
+      "days_until_impact": 21
+    }
+  ],
+  "ongoing": [
+    {
+      "name": "霍尔木兹海峡危机（美伊冲突）",
+      "kind": "geopolitical",
+      "impact": "high",
+      "notes": "2/28美以对伊开战以来海峡断航；4月停火后7/7再度交火，南航道AIS过航归零（7/10）。油价与全球风险偏好的持续压力源——7月中旬A股动量池系统性崩塌与此同窗。观察：停火/协议进展、油轮通行恢复、再升级。",
+      "source": "新闻跟踪(多源); 南航道AIS过航数据见公开船讯平台",
+      "direction": "risk"
+    }
+  ],
+  "recent": [
+    {
+      "date": "2026-11-09",
+      "tz": "CN",
+      "name": "中国10月CPI同比",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "北京时间 2026-11-09 09:30（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/CN111275/overview",
+      "decided_by": "ai",
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-11-09",
+      "days_until_impact": -1
+    },
+    {
+      "date": "2026-11-09",
+      "tz": "CN",
+      "name": "中国10月PPI同比",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "北京时间 2026-11-09 09:30（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/CN111291/overview",
+      "decided_by": "ai",
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-11-09",
+      "days_until_impact": -1
+    },
+    {
+      "date": "2026-11-06",
+      "tz": "US",
+      "name": "美国非农就业(NFP)",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "联储路径预期的主要输入；周五盘后→影响下周一A股",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-11-09",
+      "days_until_impact": -1
+    }
+  ],
+  "risk_window": {
+    "level": "event_imminent",
+    "imminent": [
+      {
+        "name": "中美关税休战到期",
+        "a_share_impact_date": "2026-11-10"
+      },
+      {
+        "name": "美国10月CPI同比",
+        "a_share_impact_date": "2026-11-11"
+      },
+      {
+        "name": "美国10月核心CPI同比",
+        "a_share_impact_date": "2026-11-11"
+      }
+    ],
+    "ongoing_high_impact": [
+      "霍尔木兹海峡危机（美伊冲突）"
+    ],
+    "advice": "高冲击既定事件落地在即：新开仓减半或推迟至事件后一个交易日"
+  },
+  "fomc_next_session_stats": {
+    "n": 13,
+    "sessions_negative": 10,
+    "mean_ew_ret_pct": -0.74,
+    "worst": {
+      "decision": "2026-03-18",
+      "session": "2026-03-19",
+      "ew_ret_pct": -2.43,
+      "up_ratio_pct": 9.0
+    },
+    "note": "样本仅13次（本地价格库范围），供参考不构成概率"
+  }
+}

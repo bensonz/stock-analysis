@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-10",
+  "actions": [
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "action": "HOLD",
+      "price": 43.17,
+      "pnl_pct": 0.35,
+      "note": "今日开仓第1日浮盈+0.35%(43.02→43.17)，未触发任何卖出规则；激光设备板块不在top5/bottom5(中性)；量能高于30日均量；商业航天(星间激光通信)+人形机器人双主线thesis完整；止损40.87不变"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 9.79,
+      "pnl_pct": 1.45,
+      "note": "持有第10日浮盈+1.45%(9.65→9.79)<3%，15日时间止损倒计时中(第15日仍<3%须离场)；航运港口今日入bottom5(-2.03%)但冷streak仅第1日未满3日，暂不触发行业卖出；止损9.17不变"
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "OPEN",
+      "price": 13.79,
+      "note": "传媒板块今日领涨(影视院线top1+6.74%/数字媒体+3.82%)，RPS120=91.65甜点区，0风险，MA距离全部合规，盘中创近24个月新高"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "OPEN",
+      "price": 12.51,
+      "note": "城商行Ⅱ自2026年7月以来持续走强，0风险因子豁免扩展区(RPS120=94.47)，今日盘中创历史新高，IV低(50ETF 0.19)，margin adding"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "OPEN",
+      "price": 4.68,
+      "note": "核电/水电在电力子行业涨幅居前(开源证券)，RPS120=91.37甜点区，MA距离全部合规，margin adding；1偿债风险+IV0.66偏高→小仓"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 964035.94,
+    "dayPnl": -822.0,
+    "dayReturnPct": -0.09,
+    "totalReturnPct": -3.6,
+    "unrealizedPnl": 587.0,
+    "realizedPnl": -36551.06,
+    "cashPct": 79.32
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 3.7189,
+    "up": 4273,
+    "down": 1149,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 95,
+    "limit_downs": 0,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 3.72:1, 3/3 major indices green, 95 limit-ups / 0 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [
+    {
+      "code": "000719",
+      "name": "中原传媒"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核"
+    }
+  ],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "强势盘：涨跌比3.72:1(4273涨/1149跌)，95涨停/0跌停，上证+0.08%/深成+0.86%/创业板+1.46%全绿，entry_regime=strong允许全仓开新仓。IV整体偏悲观(avg rank 0.52)但结构分化：大盘蓝筹IV低(50ETF 0.19)、成长IV高(创业板ETF 0.72)。板块轮动：传媒(AI漫剧/短剧出海)领涨，家电/照明/汽车服务跟随；油气/炼化/航运退潮。组合现金91.3%，持仓2/10，今日部署3只(传媒+城商行+核电)共14%，保持克制。注：板块数据仅提供今日涨跌幅top5/bottom5，无5日/20日序列。"
+  }
+}

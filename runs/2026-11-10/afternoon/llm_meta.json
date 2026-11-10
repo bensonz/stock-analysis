@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 134972,
+  "output_tokens": 25908,
+  "rounds": 2,
+  "duration_sec": 481.5,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月10日 影视院线 数字媒体 领涨 传媒板块",
+        "max_results": 6
+      },
+      "result_length": 3278
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "中原传媒 000719 AI影视 短剧 文化传媒 2026",
+        "max_results": 6
+      },
+      "result_length": 4094
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "南京银行 股票回购增持再贷款 城商行 2026年11月",
+        "max_results": 6
+      },
+      "result_length": 4324
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "中国广核 核电 核准 政策 2026年11月",
+        "max_results": 6
+      },
+      "result_length": 4590
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "锐科激光 300747 商业航天 激光通信 人形机器人 2026",
+        "max_results": 6
+      },
+      "result_length": 3356
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=青岛港+航运港口+集装箱运价+2026年11月",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}

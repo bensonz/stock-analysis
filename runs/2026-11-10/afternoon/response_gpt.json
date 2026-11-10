@@ -1,0 +1,224 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "影视院线",
+        "5d_pct": 6.74,
+        "trend": "accelerating"
+      },
+      {
+        "name": "其他家电Ⅱ",
+        "5d_pct": 5.69,
+        "trend": "steady"
+      },
+      {
+        "name": "照明设备Ⅱ",
+        "5d_pct": 4.36,
+        "trend": "steady"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": 3.82,
+        "trend": "steady"
+      },
+      {
+        "name": "汽车服务",
+        "5d_pct": 3.72,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "油气开采Ⅱ",
+        "5d_pct": -3.07,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "炼化及贸易",
+        "5d_pct": -2.65,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "油服工程",
+        "5d_pct": -2.21,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航运港口",
+        "5d_pct": -2.03,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航海装备Ⅱ",
+        "5d_pct": -1.71,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/2 positions in top5 sectors（锐科激光-激光设备中性；青岛港-航运港口 bottom5 冷第1日）",
+    "regime": "传媒/消费轮动领涨（AI漫剧+短剧催化），资源/航运退潮（油气领跌）"
+  },
+  "position_decisions": [
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "action": "HOLD",
+      "reason": "今日开仓第1日浮盈+0.35%(43.02→43.17)，未触发任何卖出规则；激光设备板块不在top5/bottom5(中性)；量能高于30日均量；商业航天(星间激光通信)+人形机器人双主线thesis完整；止损40.87不变",
+      "sector_rank": "中性(自动化设备/激光设备)",
+      "new_stop": 40.87,
+      "pnl_pct": 0.35,
+      "days_held": 0,
+      "exit_price": null
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "持有第10日浮盈+1.45%(9.65→9.79)<3%，15日时间止损倒计时中(第15日仍<3%须离场)；航运港口今日入bottom5(-2.03%)但冷streak仅第1日未满3日，暂不触发行业卖出；止损9.17不变",
+      "sector_rank": "bottom5(航运港口, 冷第1日)",
+      "new_stop": 9.17,
+      "pnl_pct": 1.45,
+      "days_held": 10,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "entry_price": 13.79,
+      "allocation_pct": 5,
+      "stop": 13.1,
+      "target": 15.2,
+      "thesis": "传媒板块今日领涨(影视院线top1+6.74%/数字媒体+3.82%)，RPS120=91.65甜点区，0风险，MA距离全部合规，盘中创近24个月新高",
+      "sector": "传媒/出版",
+      "sector_rank": "top(传媒板块今日领涨)",
+      "catalyst": "AI影视+短剧主线：公司成立4000万元微短剧产业基金，海外AI漫剧活跃用户超1.5亿，2026海外微短剧市场预测约60亿美元(来源:新浪财经/同花顺财经)",
+      "catalyst_freshness": "ongoing",
+      "rps120": 91.65,
+      "conviction": "moderate"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "entry_price": 12.51,
+      "allocation_pct": 5,
+      "stop": 11.88,
+      "target": 13.76,
+      "thesis": "城商行Ⅱ自2026年7月以来持续走强，0风险因子豁免扩展区(RPS120=94.47)，今日盘中创历史新高，IV低(50ETF 0.19)，margin adding",
+      "sector": "银行/城商行",
+      "sector_rank": "top 30%(城商行7月以来持续走强)",
+      "catalyst": "央行11/4下调股票回购增持再贷款利率至1%并扩围至5家系统重要性城商行(含南京银行)，银行已报送额度申请超2000亿(来源:上证报/东方财富)；QFII三季度持仓超百亿",
+      "catalyst_freshness": "ongoing",
+      "rps120": 94.47,
+      "conviction": "moderate"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "entry_price": 4.68,
+      "allocation_pct": 4,
+      "stop": 4.45,
+      "target": 5.15,
+      "thesis": "核电/水电在电力子行业涨幅居前(开源证券)，RPS120=91.37甜点区，MA距离全部合规，margin adding；1偿债风险+IV0.66偏高→小仓",
+      "sector": "公用事业/核电",
+      "sector_rank": "top 30%(核电/水电涨幅居前)",
+      "catalyst": "7/31国务院核准4项目8台机组(含惠州5/6号)，2030年核电装机1.1亿千瓦目标，十五五碳达峰方案支持沿海核电(来源:中国广核半年报/开源证券)",
+      "catalyst_freshness": "ongoing",
+      "rps120": 91.37,
+      "conviction": "small"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "炼化及贸易今日入bottom5(-2.65%)，硬性禁买区(h019)；RPS扩展区+3风险",
+      "rps120": 94.1
+    },
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "reason": "RPS120=94.34扩展区，1抛压风险+净利+8.7%未达50%豁免，扩展区豁免不成立；同板块优选南京银行",
+      "rps120": 94.34
+    },
+    {
+      "code": "600926",
+      "name": "杭州银行",
+      "reason": "同城商行板块，margin deleveraging(chg5 -2.01%)，信号弱于南京银行",
+      "rps120": 92.48
+    },
+    {
+      "code": "600351",
+      "name": "亚宝药业",
+      "reason": "RPS120=93.78扩展区，1风险(无机构研报)+归母净利-13%，三豁免无一满足",
+      "rps120": 93.78
+    },
+    {
+      "code": "600007",
+      "name": "中国国贸",
+      "reason": "房地产板块短线走低(事件明示)，板块不在上行趋势",
+      "rps120": 94.06
+    },
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "reason": "火电板块今日不在top5，动力煤价+25.74%压制点火价差(开源证券)",
+      "rps120": 91.24
+    },
+    {
+      "code": "301571",
+      "name": "国科天成",
+      "reason": "军工电子板块未确认top30%(开源证券:军工5月以来回撤、业绩筑底)，IV rank 0.72偏高，与持仓锐科激光同属军工/航天主题集中度风险",
+      "rps120": 88.99
+    },
+    {
+      "code": "601919",
+      "name": "中远海控",
+      "reason": "RPS120=98.29高于95%封顶，相对强度过热(h151)，且航运港口在bottom5",
+      "rps120": 98.29
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "今日传媒/消费轮动领涨(影视院线+6.74%、数字媒体+3.82%)，资源/航运全面退潮(油气开采-3.07%、航运港口-2.03%)，与11-05卖出中国石油(油气)的决策方向一致",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h028",
+      "mechanism": "美伊和谈使Hormuz地缘溢价回吐，资金从资源/航运切换到有可量化催化(AI漫剧出海60亿美元市场)的传媒板块"
+    },
+    {
+      "text": "RPS>95%封顶持续有效：策略池中百普赛斯99.87/康龙化成99.52/福赛科技99.42/比音勒芬99.05/中远海控98.29全部被过滤，幸存候选集中于88-95区间",
+      "type": "rule",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "RPS接近99%时动量极致拥挤，均值回归风险高，封顶避免追入最拥挤筹码"
+    },
+    {
+      "text": "扩展区(92-95%)豁免门槛在真实过滤：亚宝药业(1风险+净利-13%)、宁波银行(1抛压风险+净利+8.7%)因不满足0风险/top10%板块/>50%业绩任一豁免被挡；南京银行(0风险)获豁免通过",
+      "type": "rule",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "扩展区买入需要至少一个独立于RPS的强理由，避免对已高企的相对强度无脑追入"
+    },
+    {
+      "text": "青岛港第10日+1.45%<3%，15日时间止损倒计时启动；同时航运港口入bottom5冷第1日——两个卖出触发条件正在逼近，需逐日盯，不因'港口龙头'叙事拖延",
+      "type": "observation",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "时间止损与行业纪律是机械规则，价格/板块没有兑现动量时，持有时间本身就是成本"
+    }
+  ],
+  "market_summary": "强势盘：涨跌比3.72:1(4273涨/1149跌)，95涨停/0跌停，上证+0.08%/深成+0.86%/创业板+1.46%全绿，entry_regime=strong允许全仓开新仓。IV整体偏悲观(avg rank 0.52)但结构分化：大盘蓝筹IV低(50ETF 0.19)、成长IV高(创业板ETF 0.72)。板块轮动：传媒(AI漫剧/短剧出海)领涨，家电/照明/汽车服务跟随；油气/炼化/航运退潮。组合现金91.3%，持仓2/10，今日部署3只(传媒+城商行+核电)共14%，保持克制。注：板块数据仅提供今日涨跌幅top5/bottom5，无5日/20日序列。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

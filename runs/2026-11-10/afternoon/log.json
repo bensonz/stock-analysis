@@ -1,0 +1,129 @@
+{
+  "date": "2026-11-10",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1794294361.873141,
+      "errors": [],
+      "end": 1794294410.261367,
+      "duration_sec": 48.4
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 9542,
+      "tokens": {
+        "input_tokens": 134972,
+        "output_tokens": 25908
+      },
+      "rounds": 2,
+      "tool_calls_count": 6,
+      "duration_sec": 481.5,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1794294891.775569,
+      "actions": [
+        "OPEN 000719 @ 13.79",
+        "OPEN 601009 @ 12.51",
+        "OPEN 003816 @ 4.68",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h028 (rule): +1 supporting evidence → hitRate=99%, n=69",
+        "Hypothesis: Updated h151 (rule): +1 supporting evidence → hitRate=100%, n=27",
+        "Hypothesis: Updated h151 (rule): +1 supporting evidence → hitRate=100%, n=28",
+        "Hypothesis: Updated h203 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-11-10",
+        "status": "ok",
+        "checked": 2,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "003816",
+                "name": "中国广核",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 4.68,
+                "stopLoss": 4.45,
+                "distance_pct": 4.91,
+                "suggestion": "🟠 WATCH — 4.9% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1794294892.782698,
+      "duration_sec": 1.0
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 003816 — 🟠 WATCH — 4.9% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 530.9
+  }
+}

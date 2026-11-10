@@ -3085,7 +3085,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-10-20",
+      "lastTested": "2026-11-10",
       "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally.",
       "evidence": {
         "supporting": [
@@ -3356,6 +3356,10 @@
           {
             "date": "2026-10-20",
             "detail": "VCP QUALITY（江苏金租：contraction 0.38+margin adding+创历史新高）仍被sector-first拦截——VCP是timing工具不是filter，板块不领涨时再好的VCP也不能买"
+          },
+          {
+            "date": "2026-11-10",
+            "detail": "今日传媒/消费轮动领涨(影视院线+6.74%、数字媒体+3.82%)，资源/航运全面退潮(油气开采-3.07%、航运港口-2.03%)，与11-05卖出中国石油(油气)的决策方向一致"
           }
         ],
         "contradicting": [
@@ -3365,9 +3369,9 @@
           }
         ]
       },
-      "sampleSize": 68,
-      "hitRate": 0.985,
-      "confidence": 0.971,
+      "sampleSize": 69,
+      "hitRate": 0.986,
+      "confidence": 0.972,
       "tags": [
         "sector",
         "timing"
@@ -7274,7 +7278,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-08-11",
-      "lastTested": "2026-11-09",
+      "lastTested": "2026-11-10",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -7381,13 +7385,21 @@
           {
             "date": "2026-11-09",
             "detail": "RPS>95%封顶规则在热门板块内继续拦截：煤炭开采top5中的中国神华(RPS120=95.63)与陕西煤业(95.87)被挡在门外，验证'热门板块龙头反而因动量过热不可追'"
+          },
+          {
+            "date": "2026-11-10",
+            "detail": "RPS>95%封顶持续有效：策略池中百普赛斯99.87/康龙化成99.52/福赛科技99.42/比音勒芬99.05/中远海控98.29全部被过滤，幸存候选集中于88-95区间"
+          },
+          {
+            "date": "2026-11-10",
+            "detail": "扩展区(92-95%)豁免门槛在真实过滤：亚宝药业(1风险+净利-13%)、宁波银行(1抛压风险+净利+8.7%)因不满足0风险/top10%板块/>50%业绩任一豁免被挡；南京银行(0风险)获豁免通过"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 26,
+      "sampleSize": 28,
       "hitRate": 1.0,
-      "confidence": 0.964,
+      "confidence": 0.967,
       "tags": [
         "entry-filter"
       ],
@@ -8965,22 +8977,26 @@
       "id": "h203",
       "text": "招商轮船盘中一度跌超7%收盘-3.26%但未破保本止损、板块仅转冷1日即出榜——不因单日盘中波动机械卖出，'冷3日才卖'规则给赢家波动留出空间",
       "type": "rule",
-      "status": "observation",
+      "status": "hypothesis",
       "created": "2026-09-23",
-      "lastTested": "2026-09-23",
+      "lastTested": "2026-11-10",
       "mechanism": "单日情绪波动与趋势转冷是两种信号，需连续确认而非单点触发",
       "evidence": {
         "supporting": [
           {
             "date": "2026-09-23",
             "detail": "招商轮船盘中一度跌超7%收盘-3.26%但未破保本止损、板块仅转冷1日即出榜——不因单日盘中波动机械卖出，'冷3日才卖'规则给赢家波动留出空间"
+          },
+          {
+            "date": "2026-11-10",
+            "detail": "青岛港第10日+1.45%<3%，15日时间止损倒计时启动；同时航运港口入bottom5冷第1日——两个卖出触发条件正在逼近，需逐日盯，不因'港口龙头'叙事拖延"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 1,
+      "sampleSize": 2,
       "hitRate": 1.0,
-      "confidence": 0.6,
+      "confidence": 0.75,
       "tags": [
         "exit-rule"
       ],
