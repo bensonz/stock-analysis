@@ -16,7 +16,7 @@ Rules for this file:
 | date | event | future event |
 |---|---|---|
 | 2026-11-03 | deep_report 评分方程已实现（PLAN.md Stage 1–3）；Stage 4 验证未跑 | **2026-11-17 due**: 跑 docs/deep_report_scoring/PLAN.md Stage 4：002293、605098 各同日 2 次（W 差 ≤ 0.5、同档）；同日 writer=anthropic vs openai（同档、W 差 ≤ 1.0）；手评 002293 08-25 / 08-31 两份旧报告。注意 11-10→11-13 试用期 ANTHROPIC_MODEL=Fable 5.2，anthropic 臂按当时写手记录 |
-| 2026-11-10 | 日常决策模型 DeepSeek V4 Pro → Fable 5.2 试用一周（owner）。`.env`: `LLM_PROVIDER=anthropic`, `ANTHROPIC_MODEL=claude-fable-5-2`（旧值留作注释；副作用：deep_report 撰写与 event triage 也用 Fable）。首跑 11-10 noon；修复 9f143c5c（relay 吞掉 temperature 400）。切换前 1 例无工具对比（11-09 afternoon）两模型决策相同，不足以下结论 | **2026-11-13 due**（周五收盘后）: 复核 11-10 noon → 11-13 afternoon 共 8 个 slot：运行状态与 doctor 结果、每次 tokens/耗时/成本、`empty stream … retrying` 次数、决策（new_positions/卖出/market_call）、数字是否可回溯。仅作描述，不作盈亏结论（样本太短）。owner 定：保留 / 回退（还原两行注释） |
+| 2026-11-10 | 日常决策模型 DeepSeek V4 Pro → Claude 试用一周（owner）。先试 Fable 5.2：11:35 与 12:06 两次均死在工具循环第 2 轮（relay 立即拒绝，错误文本被丢弃，原因未明；已排除 temperature、工具结果内容、请求大小；修复 9f143c5c、0ba165f7）。owner 改试 Opus 5.5：12:20 noon 重跑（--reuse-phase1）成功，4 轮、9 次工具、111s、327k 入 / 8k 出，新开 300747 锐科激光 6%。`.env`: `LLM_PROVIDER=anthropic`, `ANTHROPIC_MODEL=claude-opus-5-5`（effort 默认 medium；旧值留作注释） | **2026-11-13 due**（周五收盘后）: 复核 11-10 → 11-13 各 slot：运行状态与 doctor 结果、每次 tokens/耗时/成本、`empty stream … retry` 次数、决策（new_positions/卖出/market_call）、数字是否可回溯。仅作描述，不作盈亏结论（样本太短）。owner 定：保留 Opus 5.5 / 回退 DeepSeek（`LLM_PROVIDER=openai`）/ 查清 Fable 第 2 轮被拒后再试 |
 
 ## Resolved
 
