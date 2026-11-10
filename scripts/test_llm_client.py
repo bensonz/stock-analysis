@@ -198,3 +198,53 @@ def test_build_anthropic_client_routes_only_through_a_working_proxy(tmp_path: Pa
 
     assert "http_client" in built[0] and built[0]["base_url"] == "http://relay.example/api"
     assert "http_client" not in built[1]
+
+
+class _FakeStream:
+    """messages.stream() stand-in: no events; final message or the SDK's assert."""
+
+    def __init__(self, final):
+        self.final = final
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
+
+    def __iter__(self):
+        return iter(())
+
+    def get_final_message(self):
+        assert self.final is not None
+        return self.final
+
+
+def _fake_client(finals: list, calls: list):
+    def stream(**kwargs):
+        calls.append(dict(kwargs))
+        return _FakeStream(finals.pop(0))
+    return SimpleNamespace(messages=SimpleNamespace(stream=stream))
+
+
+def test_empty_stream_retries_once_without_temperature(monkeypatch):
+    # The relay drops a tools-request 400 ("temperature is deprecated") as a
+    # nameless SSE line: the stream ends empty. Retry without temperature.
+    monkeypatch.setattr(llm_client, "_NO_TEMPERATURE_MODELS", set())
+    calls = []
+    msg = object()
+    client = _fake_client([None, msg], calls)
+    assert llm_client._anthropic_messages_create(client, model="m", temperature=0.3) is msg
+    assert "temperature" in calls[0] and "temperature" not in calls[1]
+    assert "m" in llm_client._NO_TEMPERATURE_MODELS
+
+
+def test_empty_stream_without_temperature_raises(monkeypatch):
+    monkeypatch.setattr(llm_client, "_NO_TEMPERATURE_MODELS", set())
+    client = _fake_client([None], [])
+    try:
+        llm_client._anthropic_messages_create(client, model="m")
+    except llm_client.EmptyStreamError as exc:
+        assert "'m'" in str(exc)
+    else:
+        raise AssertionError("an empty stream must not pass silently")

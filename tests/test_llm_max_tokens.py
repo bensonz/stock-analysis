@@ -78,6 +78,9 @@ def test_anthropic_calls_stream_so_the_sdk_accepts_the_ceiling():
         def __exit__(self, *a):
             return False
 
+        def __iter__(self):
+            return iter(())
+
         def get_final_message(self):
             return "final"
 

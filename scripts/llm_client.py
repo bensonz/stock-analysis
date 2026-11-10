@@ -415,9 +415,25 @@ def execute_tool(name: str, input_data: dict) -> str:
 _NO_TEMPERATURE_MODELS: set = set()
 
 
+class EmptyStreamError(RuntimeError):
+    """The stream ended without a message — the relay dropped the error."""
+
+
 def _stream_final_message(client: anthropic.Anthropic, kwargs: dict):
+    # The relay answers a rejected request with HTTP 200 and an SSE error, in
+    # two shapes (found 2026-11-10 switching the daily run to Fable 5.2):
+    #   `event: error` (no tools)  -> iterating raises it as APIStatusError;
+    #   bare `data: {"type":"error"}` (with tools) -> the SDK drops the line,
+    #   the stream just ends, and get_final_message() asserts with no text.
     with client.messages.stream(**kwargs) as stream:
-        return stream.get_final_message()
+        for _ in stream:
+            pass
+        try:
+            return stream.get_final_message()
+        except AssertionError:
+            raise EmptyStreamError(
+                f"stream for {kwargs.get('model')!r} ended with no message "
+                "(relay error with no event name; its text is lost)") from None
 
 
 def _anthropic_messages_create(client: anthropic.Anthropic, **kwargs):
@@ -436,12 +452,6 @@ def _anthropic_messages_create(client: anthropic.Anthropic, **kwargs):
         kwargs.pop("temperature", None)
     try:
         return _stream_final_message(client, kwargs)
-    except anthropic.BadRequestError as exc:
-        if "temperature" in str(exc) and "deprecated" in str(exc):
-            _NO_TEMPERATURE_MODELS.add(kwargs.get("model"))
-            kwargs.pop("temperature", None)
-            return _stream_final_message(client, kwargs)
-        raise
     except anthropic.InternalServerError as exc:
         message = str(exc)
         if "No available Claude accounts support the requested model" in message:
@@ -451,6 +461,24 @@ def _anthropic_messages_create(client: anthropic.Anthropic, **kwargs):
                 "Set ANTHROPIC_MODEL in .env to a supported model."
             ) from exc
         raise
+    except anthropic.APIStatusError as exc:
+        # BadRequestError from the API; a plain APIStatusError (status 200)
+        # when the relay wraps the same 400 in its SSE stream.
+        if "temperature" in str(exc) and "deprecated" in str(exc):
+            _NO_TEMPERATURE_MODELS.add(kwargs.get("model"))
+            kwargs.pop("temperature", None)
+            return _stream_final_message(client, kwargs)
+        raise
+    except EmptyStreamError:
+        # The lost error is most likely the temperature 400 above; retry once
+        # without it. A second empty stream raises.
+        if "temperature" not in kwargs:
+            raise
+        print(f"  [llm_client] empty stream from {kwargs.get('model')!r}; "
+              "retrying without temperature", file=sys.stderr)
+        _NO_TEMPERATURE_MODELS.add(kwargs.get("model"))
+        kwargs.pop("temperature", None)
+        return _stream_final_message(client, kwargs)
 
 
 # Stop reasons meaning "the model ran out of output budget": openai-compatible
