@@ -239,12 +239,27 @@ def test_empty_stream_retries_once_without_temperature(monkeypatch):
     assert "m" in llm_client._NO_TEMPERATURE_MODELS
 
 
-def test_empty_stream_without_temperature_raises(monkeypatch):
+def test_empty_stream_mid_loop_is_retried(monkeypatch):
+    # 2026-11-10 noon: round 2 (no temperature left) came back empty once;
+    # the same request passed on replay.
     monkeypatch.setattr(llm_client, "_NO_TEMPERATURE_MODELS", set())
-    client = _fake_client([None], [])
+    monkeypatch.setattr(llm_client.time, "sleep", lambda s: None)
+    calls = []
+    msg = object()
+    client = _fake_client([None, None, msg], calls)
+    assert llm_client._anthropic_messages_create(client, model="m") is msg
+    assert len(calls) == 3
+
+
+def test_empty_stream_raises_after_the_retries(monkeypatch):
+    monkeypatch.setattr(llm_client, "_NO_TEMPERATURE_MODELS", set())
+    monkeypatch.setattr(llm_client.time, "sleep", lambda s: None)
+    calls = []
+    client = _fake_client([None] * (1 + llm_client.EMPTY_STREAM_RETRIES), calls)
     try:
         llm_client._anthropic_messages_create(client, model="m")
     except llm_client.EmptyStreamError as exc:
         assert "'m'" in str(exc)
     else:
         raise AssertionError("an empty stream must not pass silently")
+    assert len(calls) == 1 + llm_client.EMPTY_STREAM_RETRIES

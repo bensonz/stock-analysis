@@ -419,6 +419,10 @@ class EmptyStreamError(RuntimeError):
     """The stream ended without a message — the relay dropped the error."""
 
 
+EMPTY_STREAM_RETRIES = 3
+EMPTY_STREAM_BACKOFF_SEC = 15  # waits 15s, 30s, 45s
+
+
 def _stream_final_message(client: anthropic.Anthropic, kwargs: dict):
     # The relay answers a rejected request with HTTP 200 and an SSE error, in
     # two shapes (found 2026-11-10 switching the daily run to Fable 5.2):
@@ -470,15 +474,32 @@ def _anthropic_messages_create(client: anthropic.Anthropic, **kwargs):
             return _stream_final_message(client, kwargs)
         raise
     except EmptyStreamError:
-        # The lost error is most likely the temperature 400 above; retry once
-        # without it. A second empty stream raises.
-        if "temperature" not in kwargs:
-            raise
-        print(f"  [llm_client] empty stream from {kwargs.get('model')!r}; "
-              "retrying without temperature", file=sys.stderr)
-        _NO_TEMPERATURE_MODELS.add(kwargs.get("model"))
-        kwargs.pop("temperature", None)
-        return _stream_final_message(client, kwargs)
+        # The relay lost the error text. Two causes seen 2026-11-10: the
+        # temperature 400 above (round 1 of every Fable run), and a passing
+        # relay error mid-loop (noon run died in round 2; the same loop passed
+        # on replay minutes later). The SDK's own 5xx retries never fire,
+        # since the relay says 200. Retry a few times, loudly, then raise.
+        model = kwargs.get("model")
+        if "temperature" in kwargs:
+            print(f"  [llm_client] empty stream from {model!r}; "
+                  "retrying without temperature", file=sys.stderr)
+            _NO_TEMPERATURE_MODELS.add(model)
+            kwargs.pop("temperature")
+            try:
+                return _stream_final_message(client, kwargs)
+            except EmptyStreamError:
+                pass
+        for attempt in range(1, EMPTY_STREAM_RETRIES + 1):
+            wait = EMPTY_STREAM_BACKOFF_SEC * attempt
+            print(f"  [llm_client] empty stream from {model!r} (relay error, "
+                  f"text lost); retry {attempt}/{EMPTY_STREAM_RETRIES} in {wait}s",
+                  file=sys.stderr)
+            time.sleep(wait)
+            try:
+                return _stream_final_message(client, kwargs)
+            except EmptyStreamError:
+                if attempt == EMPTY_STREAM_RETRIES:
+                    raise
 
 
 # Stop reasons meaning "the model ran out of output budget": openai-compatible
