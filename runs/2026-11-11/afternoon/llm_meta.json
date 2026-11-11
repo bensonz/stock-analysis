@@ -1,0 +1,102 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 238940,
+  "output_tokens": 31902,
+  "rounds": 3,
+  "duration_sec": 586.7,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月11日 通信设备 元件 半导体 板块大涨 原因",
+        "max_results": 6
+      },
+      "result_length": 4283
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月11日 创业板 大涨 3% 原因 市场",
+        "max_results": 6
+      },
+      "result_length": 4406
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "电力板块 火电 煤价 电改 2026年11月 宝新能源",
+        "max_results": 6
+      },
+      "result_length": 4286
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "军工 商业航天 激光 2026年11月 行情 国科天成",
+        "max_results": 6
+      },
+      "result_length": 4442
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=宝新能源+电价+煤价+2026",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+半导体+通信设备+2026年11月11日",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=国科天成+军工电子+商业航天",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=锐科激光+激光+商业航天+机器人",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=银行板块+红利+科技股+跷跷板+2026",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}

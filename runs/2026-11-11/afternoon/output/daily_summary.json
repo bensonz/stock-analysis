@@ -1,0 +1,101 @@
+{
+  "date": "2026-11-11",
+  "actions": [
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "price": 13.83,
+      "pnl_pct": 0.29,
+      "note": "出版板块今日短线拉升（event快讯），个股+0.29%未触发任何卖出规则；margin deleveraging(chg5 -5.84)为警示但非卖出信号"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.61,
+      "pnl_pct": -1.5,
+      "note": "今日-1.50%，距止损4.45仅3.47%(stop_proximity WATCH)，未触-5%硬止损/-3%首3日规则；核电板块今日微跌(搜狐时间线)但冷streak仅第1日，继续监控"
+    },
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "action": "HOLD",
+      "price": 44.09,
+      "pnl_pct": 2.49,
+      "note": "今日+2.13%浮盈+2.49%，商业航天(星间激光通信)+人形机器人双主线thesis完整，量能正常，止损40.87不变"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 12.49,
+      "pnl_pct": -0.16,
+      "note": "今日-0.16%，距止损11.88约4.88%(stop_proximity WATCH)；银行板块今日走弱(科技跷跷板)，但未触发卖出规则，监控"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 9.74,
+      "pnl_pct": 0.93,
+      "note": "持仓第11日浮盈+0.93%(<3%)，15日时间止损倒计时(第15日仍<3%须离场)；margin deleveraging(chg5 -12.3%)警示；航运港口今日未进bottom5(冷streak第1日)不触发行业卖出"
+    },
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "OPEN",
+      "price": 5.7,
+      "note": "11月代理购电价普涨、市场化电价底部反转（界面新闻/上证报），电力板块今日震荡上扬；RPS120 91.32甜点区，0风险因子，MA距离全合规(0.6/2.9/4.2%)；margin deleveraging→小仓"
+    },
+    {
+      "code": "301571",
+      "name": "国科天成",
+      "action": "OPEN",
+      "price": 71.98,
+      "note": "军工电子/商业航天主题（开源证券2027军工布局正当时），RPS120 90.14甜点区，0风险因子，MA合规(3.6/6.9/7.1%)，margin adding(chg5 +10.42%)；IV 0.64偏高+同主题监管警示→最小仓"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 7,
+    "totalEquity": 964673.94,
+    "dayPnl": 638.0,
+    "dayReturnPct": 0.07,
+    "totalReturnPct": -3.53,
+    "unrealizedPnl": 1225.0,
+    "realizedPnl": -36551.06,
+    "cashPct": 73.89
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 1.9365,
+    "up": 3538,
+    "down": 1827,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 85,
+    "limit_downs": 3,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 1.94:1, 3/3 major indices green, 85 limit-ups / 3 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [
+    {
+      "code": "000690",
+      "name": "宝新能源"
+    },
+    {
+      "code": "301571",
+      "name": "国科天成"
+    }
+  ],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "强市：breadth 1.94:1(涨3538/跌1827)，85涨停/3跌停，上证+0.46%/深成+1.32%/创业板+3.11%/科创50+2.80%，三大指数全红，full size regime。主线为AI算力硬件（通信设备+10.07%/元件+7.35%/半导体+3.55%，财联社：全球半导体Q3销售环比+24.1%、Anthropic 630亿美元AI芯片订单催化光模块），红利消费跷跷板走弱（银行-0.18%、白酒Ⅱ-2.77%）。IV整体中性(avg_iv_rank 0.444)但结构分化：50ETF 0.14、创业板ETF 0.64/科创50 0.59偏高。策略池约64%个股RPS120>95过热，甜点区候选集中在电力/军工等非top5板块，故仅小仓部署二线动量。"
+  }
+}

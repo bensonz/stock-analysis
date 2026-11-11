@@ -16,16 +16,16 @@
         · … 另有 16 次更早的
 
   ▸ manifest_present  [invariant]
-      13 次 / 12 天   2026-02-02 … 2026-11-10   最长连续 3
+      13 次 / 12 天   2026-02-02 … 2026-11-11   最长连续 3
       改这里: scripts/run_daily.py (write the manifest before preflight)
         · 2026-10-06 afternoon 该时段没有 manifest
         · 2026-10-09 noon      该时段没有 manifest
         · 2026-11-04 afternoon 该时段没有 manifest
-        · 2026-11-10 noon      该时段没有 manifest
+        · 2026-11-11 noon      该时段没有 manifest
         · … 另有 9 次更早的
 
 
-## 需要人工操作 (6)
+## 需要人工操作 (7)
 
   ▸ db_health_warnings  [env]
       8 次 / 7 天   2026-08-12 … 2026-09-08   最长连续 2
@@ -75,6 +75,12 @@
         · 2026-11-02 afternoon 抽查 20 只、实际核对 0 只
         · 2026-11-03 afternoon 抽查 20 只、实际核对 0 只
         · … 另有 36 次更早的
+
+  ▸ stock_list_fresh  [env]
+      1 次 / 1 天   2026-11-10
+      改这里: scripts/pricedb refresh_stock_list
+      执行:   python3 scripts/pricedb.py stocks && python3 scripts/pricedb.py update
+        · 2026-11-10 noon      股票列表未在当日刷新（最后 2026-11-09）
 
 
 ## 已知并接受 (1)

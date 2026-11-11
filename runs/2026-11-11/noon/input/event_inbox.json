@@ -1,0 +1,228 @@
+{
+  "as_of": "2026-11-11",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 0,
+    "new": 0,
+    "pending": 0,
+    "expired": 0,
+    "ai_retired": 3,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 0,
+    "decided": 0,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 0,
+    "fetch_errors": 46,
+    "empty_days": 0,
+    "errors": [
+      {
+        "date": "20261111",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1794326400&end=1794412800 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261112",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1794412800&end=1794499200 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261113",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1794499200&end=1794585600 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261114",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1794585600&end=1794672000 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261115",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1794672000&end=1794758400 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261116",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1794758400&end=1794844800 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261117",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1794844800&end=1794931200 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261118",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1794931200&end=1795017600 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261119",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1795017600&end=1795104000 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261120",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1795104000&end=1795190400 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261121",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1795190400&end=1795276800 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261122",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1795276800&end=1795363200 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261123",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1795363200&end=1795449600 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261124",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1795449600&end=1795536000 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261125",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1795536000&end=1795622400 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261126",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1795622400&end=1795708800 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261127",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1795708800&end=1795795200 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261128",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1795795200&end=1795881600 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261129",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1795881600&end=1795968000 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261130",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1795968000&end=1796054400 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261201",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1796054400&end=1796140800 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261202",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1796140800&end=1796227200 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261203",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1796227200&end=1796313600 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261204",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1796313600&end=1796400000 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261205",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1796400000&end=1796486400 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261206",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1796486400&end=1796572800 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261207",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1796572800&end=1796659200 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261208",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1796659200&end=1796745600 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261209",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1796745600&end=1796832000 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261210",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1796832000&end=1796918400 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261211",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1796918400&end=1797004800 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261212",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1797004800&end=1797091200 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261213",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1797091200&end=1797177600 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261214",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1797177600&end=1797264000 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261215",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1797264000&end=1797350400 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261216",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1797350400&end=1797436800 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261217",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1797436800&end=1797523200 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261218",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1797523200&end=1797609600 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261219",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1797609600&end=1797696000 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261220",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1797696000&end=1797782400 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261221",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1797782400&end=1797868800 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261222",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1797868800&end=1797955200 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261223",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1797955200&end=1798041600 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261224",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1798041600&end=1798128000 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261225",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1798128000&end=1798214400 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      },
+      {
+        "date": "20261226",
+        "error": "ConnectionError: HTTPSConnectionPool(host='api-one-wscn.awtmt.com', port=443): Max retries exceeded with url: /apiv1/finance/macrodatas?start=1798214400&end=1798300800 (Caused by NameResolutionError(\"HTTPSConnection(host='api-one-wscn.awtmt.com', port=443): Failed to resolve 'api-one-wscn.awtmt.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+      }
+    ],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 0,
+    "kept": 0,
+    "skipped": 0,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": []
+  },
+  "pending_items": []
+}
