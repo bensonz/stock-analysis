@@ -1,7 +1,7 @@
 {
   "code": "301571",
   "name": "国科天成",
-  "status": "active",
+  "status": "closed",
   "thesis": "军工电子/商业航天主题（开源证券2027军工布局正当时），RPS120 90.14甜点区，0风险因子，MA合规(3.6/6.9/7.1%)，margin adding(chg5 +10.42%)；IV 0.64偏高+同主题监管警示→最小仓",
   "entryDate": "2026-11-11",
   "entrySlot": "afternoon",
@@ -36,15 +36,25 @@
       "change_pct": 0.03,
       "action": "HOLD",
       "note": "开仓第1日持平+0.03%；军工电子/商业航天主题，margin adding；未触发任何卖出规则"
+    },
+    {
+      "date": "2026-11-12",
+      "slot": "afternoon",
+      "price": 69.7,
+      "change_pct": -3.17,
+      "action": "SELL",
+      "shares": 300,
+      "note": "入场71.98→收69.70=-3.17%，触发Rule 5首3日-3%止损；且距止损68.38仅1.89%(stop_proximity CRITICAL)。恐慌盘(breadth 0.19:1)下新仓破位，主动离场不等精确触发"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-11-12",
+  "exitPrice": 69.7,
+  "exitReason": "入场71.98→收69.70=-3.17%，触发Rule 5首3日-3%止损；且距止损68.38仅1.89%(stop_proximity CRITICAL)。恐慌盘(breadth 0.19:1)下新仓破位，主动离场不等精确触发",
+  "returnPct": -3.17,
+  "holdingDays": 1,
+  "lessonLearned": "",
   "createdAt": "2026-11-11T16:18:00.140142+08:00",
-  "updatedAt": "2026-11-12T11:39:11.022203+08:00",
-  "trackerVersion": "2.1"
+  "updatedAt": "2026-11-12T15:10:59.642732+08:00",
+  "trackerVersion": "2.1",
+  "exitSlot": "afternoon"
 }

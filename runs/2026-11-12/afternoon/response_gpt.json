@@ -1,0 +1,214 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "林业Ⅱ",
+        "change_pct": 4.74,
+        "trend": "领涨/防御"
+      },
+      {
+        "name": "渔业",
+        "change_pct": 3.49,
+        "trend": "领涨"
+      },
+      {
+        "name": "地面兵装Ⅱ",
+        "change_pct": 3.48,
+        "trend": "领涨/军工"
+      },
+      {
+        "name": "养殖业",
+        "change_pct": 1.09,
+        "trend": "防御"
+      },
+      {
+        "name": "饮料乳品",
+        "change_pct": 0.93,
+        "trend": "防御"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "贵金属",
+        "change_pct": -6.88,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "数字媒体",
+        "change_pct": -5.45,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "影视院线",
+        "change_pct": -5.26,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "游戏Ⅱ",
+        "change_pct": -4.87,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "自动化设备",
+        "change_pct": -4.15,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/7 positions in hot sectors; 2/7 in cold sectors (传媒/出版、自动化设备/激光设备)",
+    "regime": "恐慌盘：防御/农业/军工领涨，前期强势的贵金属与TMT(传媒/游戏)杀跌，科技→防御轮动加剧"
+  },
+  "position_decisions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "reason": "持仓第1日-1.58%，未触发-5%硬止损/-3%首3日规则；距止损5.42仅3.39%(stop_proximity WATCH)；火力发电今日不在top5/bottom5；margin deleveraging(chg5 -4.07%)为警示，恐慌盘下若明日破5.42即离场",
+      "sector_rank": "中性（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": -1.58,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "reason": "持仓第2日+0.07%；传媒大板块今日走弱(数字媒体-5.45%/影视院线-5.26%入bottom5)，出版冷streak第1日未满3日不触发行业卖出；margin deleveraging(chg5 -6.92%)警示；未触任何止损",
+      "sector_rank": "bottom 50%（传媒板块走弱，冷streak第1日）",
+      "new_stop": null,
+      "pnl_pct": 0.07,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "reason": "持仓第2日-0.85%，未触发卖出规则；距止损4.45仅4.09%(stop_proximity WATCH)；核电不在bottom5；东吴/开源研报维持核电成长逻辑；margin adding(chg5 +8.53%)",
+      "sector_rank": "中性（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": -0.85,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "action": "HOLD",
+      "reason": "持仓第2日+4.16%为组合最佳；激光通信/商业航天主线thesis完整(开源证券2027军工研报列其为激光通信受益标的)；止损40.87不变(未到+10%不上移)；注意母板块自动化设备今日入bottom5(-4.15%)冷streak第1日",
+      "sector_rank": "bottom 5%（自动化设备-4.15%，冷streak第1日）",
+      "new_stop": null,
+      "pnl_pct": 4.16,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "301571",
+      "name": "国科天成",
+      "action": "SELL",
+      "reason": "入场71.98→收69.70=-3.17%，触发Rule 5首3日-3%止损；且距止损68.38仅1.89%(stop_proximity CRITICAL)。恐慌盘(breadth 0.19:1)下新仓破位，主动离场不等精确触发",
+      "sector_rank": "中性（军工电子未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": -3.17,
+      "days_held": 1,
+      "exit_price": 69.7
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "reason": "持仓第2日+0.48%；城商行Ⅱ自2026年7月以来上升趋势未破(输入highlights)；银行今日不在top5/bottom5；IV(50ETF 0.15)极低仅影响加仓不触发卖出",
+      "sector_rank": "中性（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 0.48,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "持仓第11日-0.21%(<3%)，15日时间止损倒计时中(第15日仍<3%须离场)；航运港口今日不在bottom5；距止损9.17约4.78%(stop_proximity WATCH)；margin deleveraging(chg5 -3.98%)警示",
+      "sector_rank": "中性（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": -0.21,
+      "days_held": 11,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "reason": "entry_regime=panic硬封锁(breadth 0.19:1, 0/3指数绿)禁新仓；个股RPS120 94.65、MA距离全合规(-1.5/-1.2/-1.3)，仅市场时机问题",
+      "rps120": 94.65
+    },
+    {
+      "code": "600007",
+      "name": "中国国贸",
+      "reason": "entry_regime=panic硬封锁禁新仓；VCP PREMIUM(contraction 0.31)非买入问题，仅市场时机问题",
+      "rps120": 94.19
+    },
+    {
+      "code": "600926",
+      "name": "杭州银行",
+      "reason": "entry_regime=panic硬封锁禁新仓；叠加margin deleveraging(chg5 -1.59%)与50ETF IV rank 0.15极低，双重谨慎",
+      "rps120": 93.12
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "entry_regime=panic硬封锁禁新仓；叠加3风险因子(抛压/偿债/质押77%)，股价在MA20下方(-4.6%)",
+      "rps120": 94.08
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌盘硬封锁验证有效：breadth 0.19:1、0/3指数绿，entry_regime=panic自动禁新仓。宁波银行(RPS94.65全合规)/中国国贸(VCP PREMIUM)等优质候选全部被拦，现金为王正确，未产生FOMO。",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "4635跌vs875涨的系统性负偏压制任何新仓胜率，机械层在LLM之前拦截FOMO入场。"
+    },
+    {
+      "text": "首3日-3%止损在国科天成触发(11-11入场71.98→11-12收69.70，-3.17%，第1日)，同时stop_proximity CRITICAL仅1.89%。两个信号叠加说明开仓时机错误，第1日即离场而非等待-5%硬止损。",
+      "type": "rule",
+      "tags": [
+        "exit-rule",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "新仓次日即亏超3%说明入场点位在短线高位或板块节奏错误，越早认错回撤越小。"
+    },
+    {
+      "text": "今日领涨为防御/农业/军工(林业+4.74%/渔业+3.49%/地面兵装+3.48%/养殖+1.09%)，前期强势的贵金属-6.88%/数字媒体-5.45%/影视院线-5.26%/游戏-4.87%/自动化设备-4.15%全线杀跌。组合0/7在热门板块、2/7已入冷区。",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "科技→防御轮动延续且加剧，轮动通常持续3-5个交易日，冷区持仓需紧盯'冷3日→卖出'纪律。"
+    },
+    {
+      "text": "锐科激光在恐慌盘仍+4.16%(激光通信/商业航天主线)，但其母板块自动化设备今日入bottom5(-4.15%)冷streak第1日。个股强度可短暂对抗板块引力，但不能豁免Rule 1的'冷3日'纪律。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "板块引力通常滞后于个股动量，冷streak满3日必须执行卖出，不管个股多强。"
+    }
+  ],
+  "market_summary": "2026-11-12恐慌盘：涨跌比0.19:1(875涨/4635跌/63平)，上证-0.67%、深成-1.68%、创业板-2.44%三指全绿，涨停37/跌停6；entry_regime=panic硬封锁新仓(sizing 0)。领涨为防御/农业：林业Ⅱ+4.74%、渔业+3.49%、地面兵装Ⅱ+3.48%、养殖业+1.09%、饮料乳品+0.93%；杀跌为贵金属-6.88%、数字媒体-5.45%、影视院线-5.26%、游戏Ⅱ-4.87%、自动化设备-4.15%。IV整体中性(avg rank 0.48)，但创业板ETF 0.71、科创50 0.63、500ETF 0.55偏谨慎。组合0/7在热门板块，2/7已入冷区。策略：不开新仓，防守现有持仓，纪律止损(国科天成首3日-3%离场)。",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}

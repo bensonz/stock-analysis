@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-12",
+  "market_overview": {
+    "shanghai_composite": {
+      "value": 3655.829,
+      "change_pct": -0.67
+    },
+    "shenzhen_component": {
+      "value": 11197.977,
+      "change_pct": -1.68
+    },
+    "chinext": {
+      "value": 2509.429,
+      "change_pct": -2.44
+    },
+    "sentiment": "bearish",
+    "hot_sectors": [
+      "林业Ⅱ",
+      "渔业",
+      "地面兵装Ⅱ",
+      "养殖业",
+      "饮料乳品"
+    ],
+    "cold_sectors": [
+      "贵金属",
+      "数字媒体",
+      "影视院线",
+      "游戏Ⅱ",
+      "自动化设备"
+    ],
+    "notes": "2026-11-12恐慌盘：涨跌比0.19:1(875涨/4635跌/63平)，上证-0.67%、深成-1.68%、创业板-2.44%三指全绿，涨停37/跌停6；entry_regime=panic硬封锁新仓(sizing 0)。领涨为防御/农业：林业Ⅱ+4.74%、渔业+3.49%、地面兵装Ⅱ+3.48%、养殖业+1.09%、饮料乳品+0.93%；杀跌为贵金属-6.88%、数字媒体-5.45%、影视院线-5.26%、游戏Ⅱ-4.87%、自动化设备-4.15%。IV整体中性(avg rank 0.48)，但创业板ETF 0.71、科创50 0.63、500ETF 0.55偏谨慎。组合0/7在热门板块，2/7已入冷区。策略：不开新仓，防守现有持仓，纪律止损(国科天成首3日-3%离场)。"
+  },
+  "strategy_scan": {
+    "total_stocks_scanned": 47,
+    "strategy_name": "小市值-无 20RP",
+    "scan_time": "2026-11-12T15:10:59.666380+08:00"
+  },
+  "recommendations": [
+    {
+      "code": "002142.SZ",
+      "name": "宁波银行",
+      "price": null,
+      "rps120": 94.65,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600007.SH",
+      "name": "中国国贸",
+      "price": null,
+      "rps120": 94.19,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600926.SH",
+      "name": "杭州银行",
+      "price": null,
+      "rps120": 93.12,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600256.SH",
+      "name": "广汇能源",
+      "price": null,
+      "rps120": 94.08,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    }
+  ],
+  "summary": {
+    "total_scanned": 47,
+    "buy_recommendations": 0,
+    "watch_recommendations": 4,
+    "avoid_recommendations": 0,
+    "market_call": "防御",
+    "reasoning": "2026-11-12恐慌盘：涨跌比0.19:1(875涨/4635跌/63平)，上证-0.67%、深成-1.68%、创业板-2.44%三指全绿，涨停37/跌停6；entry_regime=panic硬封锁新仓(sizing 0)。领涨为防御/农业：林业Ⅱ+4.74%、渔业+3.49%、地面兵装Ⅱ+3.48%、养殖业+1.09%、饮料乳品+0.93%；杀跌为贵金属-6.88%、数字媒体-5.45%、影视院线-5.26%、游戏Ⅱ-4.87%、自动化设备-4.15%。IV整体中性(avg rank 0.48)，但创业板ETF 0.71、科创50 0.63、500ETF 0.55偏谨慎。组合0/7在热门板块，2/7已入冷区。策略：不开新仓，防守现有持仓，纪律止损(国科天成首3日-3%离场)。"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "date": "2026-11-12",
+  "actions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "price": 5.61,
+      "pnl_pct": -1.58,
+      "note": "持仓第1日-1.58%，未触发-5%硬止损/-3%首3日规则；距止损5.42仅3.39%(stop_proximity WATCH)；火力发电今日不在top5/bottom5；margin deleveraging(chg5 -4.07%)为警示，恐慌盘下若明日破5.42即离场"
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "price": 13.8,
+      "pnl_pct": 0.07,
+      "note": "持仓第2日+0.07%；传媒大板块今日走弱(数字媒体-5.45%/影视院线-5.26%入bottom5)，出版冷streak第1日未满3日不触发行业卖出；margin deleveraging(chg5 -6.92%)警示；未触任何止损"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.64,
+      "pnl_pct": -0.85,
+      "note": "持仓第2日-0.85%，未触发卖出规则；距止损4.45仅4.09%(stop_proximity WATCH)；核电不在bottom5；东吴/开源研报维持核电成长逻辑；margin adding(chg5 +8.53%)"
+    },
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "action": "HOLD",
+      "price": 44.81,
+      "pnl_pct": 4.16,
+      "note": "持仓第2日+4.16%为组合最佳；激光通信/商业航天主线thesis完整(开源证券2027军工研报列其为激光通信受益标的)；止损40.87不变(未到+10%不上移)；注意母板块自动化设备今日入bottom5(-4.15%)冷streak第1日"
+    },
+    {
+      "code": "301571",
+      "name": "国科天成",
+      "action": "SELL",
+      "price": 69.7,
+      "pnl_pct": -3.17,
+      "note": "入场71.98→收69.70=-3.17%，触发Rule 5首3日-3%止损；且距止损68.38仅1.89%(stop_proximity CRITICAL)。恐慌盘(breadth 0.19:1)下新仓破位，主动离场不等精确触发"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 12.57,
+      "pnl_pct": 0.48,
+      "note": "持仓第2日+0.48%；城商行Ⅱ自2026年7月以来上升趋势未破(输入highlights)；银行今日不在top5/bottom5；IV(50ETF 0.15)极低仅影响加仓不触发卖出"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 9.63,
+      "pnl_pct": -0.21,
+      "note": "持仓第11日-0.21%(<3%)，15日时间止损倒计时中(第15日仍<3%须离场)；航运港口今日不在bottom5；距止损9.17约4.78%(stop_proximity WATCH)；margin deleveraging(chg5 -3.98%)警示"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 6,
+    "totalEquity": 964515.94,
+    "dayPnl": 526.0,
+    "dayReturnPct": 0.05,
+    "totalReturnPct": -3.55,
+    "unrealizedPnl": 1751.0,
+    "realizedPnl": -37235.06,
+    "cashPct": 76.07
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.1888,
+    "up": 875,
+    "down": 4635,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 37,
+    "limit_downs": 6,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.19:1, 0/3 major indices green, 37 limit-ups / 6 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "2026-11-12恐慌盘：涨跌比0.19:1(875涨/4635跌/63平)，上证-0.67%、深成-1.68%、创业板-2.44%三指全绿，涨停37/跌停6；entry_regime=panic硬封锁新仓(sizing 0)。领涨为防御/农业：林业Ⅱ+4.74%、渔业+3.49%、地面兵装Ⅱ+3.48%、养殖业+1.09%、饮料乳品+0.93%；杀跌为贵金属-6.88%、数字媒体-5.45%、影视院线-5.26%、游戏Ⅱ-4.87%、自动化设备-4.15%。IV整体中性(avg rank 0.48)，但创业板ETF 0.71、科创50 0.63、500ETF 0.55偏谨慎。组合0/7在热门板块，2/7已入冷区。策略：不开新仓，防守现有持仓，纪律止损(国科天成首3日-3%离场)。"
+  }
+}

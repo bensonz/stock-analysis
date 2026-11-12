@@ -1721,11 +1721,15 @@
           {
             "date": "2026-11-12",
             "detail": "出版板块今日-1.86%入bottom5，持仓中原传媒需盯紧'冷3日→卖出'规则；传媒链(出版/影视/数字媒体/游戏)同日集体走弱显示板块级派发而非个股问题"
+          },
+          {
+            "date": "2026-11-12",
+            "detail": "锐科激光在恐慌盘仍+4.16%(激光通信/商业航天主线)，但其母板块自动化设备今日入bottom5(-4.15%)冷streak第1日。个股强度可短暂对抗板块引力，但不能豁免Rule 1的'冷3日'纪律。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 109,
+      "sampleSize": 110,
       "hitRate": 1.0,
       "confidence": 0.991,
       "tags": [
@@ -2561,7 +2565,7 @@
       "type": "signal",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-11-05",
+      "lastTested": "2026-11-12",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -2684,6 +2688,10 @@
           {
             "date": "2026-11-05",
             "detail": "中国石油验证'事件驱动型大宗标的在地缘缓和时应比趋势型更快离场'：油气开采Ⅱ再度入bottom5(-4.96%)且个股-6.98%距硬止损仅0.55%，盘中最低12.48已破12.60止损，美伊和谈令Hormuz地缘溢价thesis破裂。主动止损优于等待精确触发。"
+          },
+          {
+            "date": "2026-11-12",
+            "detail": "首3日-3%止损在国科天成触发(11-11入场71.98→11-12收69.70，-3.17%，第1日)，同时stop_proximity CRITICAL仅1.89%。两个信号叠加说明开仓时机错误，第1日即离场而非等待-5%硬止损。"
           }
         ],
         "contradicting": [
@@ -2697,9 +2705,9 @@
           }
         ]
       },
-      "sampleSize": 32,
-      "hitRate": 0.938,
-      "confidence": 0.912,
+      "sampleSize": 33,
+      "hitRate": 0.939,
+      "confidence": 0.914,
       "tags": [
         "exit-rule",
         "timing"
@@ -4748,7 +4756,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-11-10",
+      "lastTested": "2026-11-12",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4943,11 +4951,15 @@
           {
             "date": "2026-11-10",
             "detail": "资金从防御板块(港口、煤炭、保险)流向TMT时，防御型持仓应开始计算冷门天数，接近15日时间止损且浮盈<3%时优先离场"
+          },
+          {
+            "date": "2026-11-12",
+            "detail": "今日领涨为防御/农业/军工(林业+4.74%/渔业+3.49%/地面兵装+3.48%/养殖+1.09%)，前期强势的贵金属-6.88%/数字媒体-5.45%/影视院线-5.26%/游戏-4.87%/自动化设备-4.15%全线杀跌。组合0/7在热门板块、2/7已入冷区。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 48,
+      "sampleSize": 49,
       "hitRate": 1.0,
       "confidence": 0.98,
       "tags": [
@@ -4964,7 +4976,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-11-06",
+      "lastTested": "2026-11-12",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -5171,11 +5183,15 @@
           {
             "date": "2026-11-06",
             "detail": "恐慌盘硬阻断机制正确执行：中国广核(电力top5/RPS91.26/MA全合规)与宝新能源(电力top5)本可通过全部买入门槛，但涨跌比0.16:1+三大指数全绿触发entry_regime hard_block，强制new_positions=[]。防御板块的合格候选在恐慌盘也一律不追。"
+          },
+          {
+            "date": "2026-11-12",
+            "detail": "恐慌盘硬封锁验证有效：breadth 0.19:1、0/3指数绿，entry_regime=panic自动禁新仓。宁波银行(RPS94.65全合规)/中国国贸(VCP PREMIUM)等优质候选全部被拦，现金为王正确，未产生FOMO。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 51,
+      "sampleSize": 52,
       "hitRate": 1.0,
       "confidence": 0.981,
       "tags": [
