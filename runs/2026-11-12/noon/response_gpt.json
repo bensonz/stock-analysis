@@ -1,0 +1,232 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "渔业",
+        "5d_pct": 4.22,
+        "trend": "题材轮动"
+      },
+      {
+        "name": "广告营销",
+        "5d_pct": 3.05,
+        "trend": "题材轮动"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": 2.6,
+        "trend": "加速"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": 2.2,
+        "trend": "题材"
+      },
+      {
+        "name": "元件",
+        "5d_pct": 2.18,
+        "trend": "稳步"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "贵金属",
+        "5d_pct": -4.65,
+        "trend": "恶化"
+      },
+      {
+        "name": "影视院线",
+        "5d_pct": -2.91,
+        "trend": "走弱"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": -2.71,
+        "trend": "走弱"
+      },
+      {
+        "name": "游戏Ⅱ",
+        "5d_pct": -2.33,
+        "trend": "走弱"
+      },
+      {
+        "name": "出版",
+        "5d_pct": -1.86,
+        "trend": "走弱"
+      }
+    ],
+    "position_alignment": "0/7 持仓在今日top5板块；1/7(中原传媒-出版)在bottom5，其余中性",
+    "regime": "科技/半导体领涨(科创50+2.35%)，贵金属/传媒链领跌；渔业、广告营销题材轮动"
+  },
+  "position_decisions": [
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "action": "HOLD",
+      "reason": "今日+3.9%浮盈+6.49%为持仓最佳；商业航天(星间激光通信)+人形机器人双主线成立(开源证券2027军工研报列锐科激光为激光通信受益标的)；止损40.87不变，未到+10%不上移",
+      "sector_rank": "中性(激光设备，科技供应链)",
+      "new_stop": null,
+      "pnl_pct": 6.49,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "reason": "出版今日入bottom5(-1.86%)但冷streak仅第1日，未满3日不触发行业卖出；个股+0.29%未触任何止损；margin deleveraging(chg5 -6.92%)为警示，明日出版若连续第2日走弱需重点复核",
+      "sector_rank": "bottom 5(出版，冷streak第1日)",
+      "new_stop": null,
+      "pnl_pct": 0.58,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "reason": "今日+0.32%；城商行Ⅱ自2026年7月以来持续走强趋势未破(输入highlights)；银行今日不在top5亦不在bottom5；IV(50ETF 0.09)极低仅影响加仓不触发卖出",
+      "sector_rank": "中性(银行/城商行)",
+      "new_stop": null,
+      "pnl_pct": 0.16,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "301571",
+      "name": "国科天成",
+      "action": "HOLD",
+      "reason": "开仓第1日持平+0.03%；军工电子/商业航天主题，margin adding；未触发任何卖出规则",
+      "sector_rank": "中性(国防军工/军工电子)",
+      "new_stop": null,
+      "pnl_pct": 0.03,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "持仓第11日浮盈+0.41%(<3%)，15日时间止损倒计时(第15日仍<3%须离场)；今日-0.51%；航运港口不在bottom5；margin deleveraging(chg5 -3.98%)警示",
+      "sector_rank": "中性(航运港口)",
+      "new_stop": null,
+      "pnl_pct": 0.41,
+      "days_held": 11,
+      "exit_price": null
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "reason": "持仓第2日-1.07%，未触发卖出规则；距止损4.45仅3.89%(stop_proximity WATCH)；核电板块不在bottom5；东吴/开源研报持续看好核电成长",
+      "sector_rank": "中性(公用事业/核电)",
+      "new_stop": null,
+      "pnl_pct": -1.07,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "reason": "持仓第1日-2.28%，未触发-3%首3日规则；距止损5.42仅2.69%(stop_proximity WARNING)，若明日低开破位则离场；火力发电板块中性不在bottom5；margin deleveraging为警示",
+      "sector_rank": "中性(公用事业/火力发电)",
+      "new_stop": null,
+      "pnl_pct": -2.28,
+      "days_held": 1,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "300852",
+      "name": "四会富仕",
+      "reason": "元件板块top5但dist_ma5 8.8%>6%、dist_ma10 9.4%>8%，Rule 2b追高违规，硬性跳过(热板块不豁免追高风险)",
+      "rps120": 91.41
+    },
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "reason": "银行板块今日未入top5，弱tape下无法确认top30%；且有11/2大跌-3.3%抛压风险因子",
+      "rps120": 94.6
+    },
+    {
+      "code": "600926",
+      "name": "杭州银行",
+      "reason": "银行板块未入top5；margin deleveraging(chg5 -1.59%)；IV(50ETF 0.09)<15%再砍半，弱tape下不追",
+      "rps120": 92.89
+    },
+    {
+      "code": "600007",
+      "name": "中国国贸",
+      "reason": "房地产板块短线走低(输入event快讯)，sector冷，不买入",
+      "rps120": 94.18
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "石油石化未入top5；3风险因子(大股东质押77%、现金短债比0.29、11/5抛压-6.84%)",
+      "rps120": 93.84
+    },
+    {
+      "code": "600351",
+      "name": "亚宝药业",
+      "reason": "中药/医药板块未入top5，sector动量不足",
+      "rps120": 93.79
+    },
+    {
+      "code": "301446",
+      "name": "福事特",
+      "reason": "工程机械未入top5；4风险因子(含1/25解禁67%)；dist_ma20 11.1%接近12%阈值",
+      "rps120": 85.44
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱tape(0.78:1)+三指数微涨+科创50+2.35%是典型'指数涨、个股跌'分化盘，此时new_positions应默认空仓，不因个别股票RPS合格而强开仓",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "market-regime"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "breadth<1.0时个股普跌、仅科技权重拉动指数，追入弱势盘中的个股胜率显著下降"
+    },
+    {
+      "text": "四会富仕在top5元件板块内但dist_ma5 8.8%/dist_ma10 9.4%超限被Rule 2b拦截，再次验证热板块不覆盖追高风险",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h027",
+      "mechanism": "板块强势由龙头带动，个股短期偏离均线过远时均值回归风险独立于板块beta"
+    },
+    {
+      "text": "出版板块今日-1.86%入bottom5，持仓中原传媒需盯紧'冷3日→卖出'规则；传媒链(出版/影视/数字媒体/游戏)同日集体走弱显示板块级派发而非个股问题",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "同产业链多子板块同步下跌通常是资金系统性撤离该主题的信号，个股alpha难逆板块beta"
+    },
+    {
+      "text": "策略池大量RPS>95%候选(百普赛斯99.87、康龙化成99.59、福赛科技99.34等)被RPS封顶规则过滤，今日半导体/元件领涨但池内可买标的稀缺，印证动量拥挤",
+      "type": "observation",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "当多数候选RPS进入98-99.9%时，相对强度已极致拥挤，回调风险高，可买标的自然稀缺"
+    }
+  ],
+  "market_summary": "Breadth 0.78:1偏弱(涨2348/跌2997，46涨停/1跌停)，三大指数微涨但科创50+2.35%独强，典型弱分化盘；半导体(+2.6%)/元件(+2.18%)/广告营销领涨，贵金属(-4.65%)/传媒链(影视/数字媒体/出版)领跌；IV整体中性偏高(创业板ETF 0.62、50ETF 0.09极低)。弱tape下默认不加仓，维持7成现金。",
+  "market_sentiment": "neutral",
+  "market_call": "谨慎"
+}

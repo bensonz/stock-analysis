@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-11-11",
+  "lastUpdated": "2026-11-12",
   "hypotheses": [
     {
       "id": "h001",
@@ -332,7 +332,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-03-27",
-      "lastTested": "2026-11-09",
+      "lastTested": "2026-11-12",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -999,6 +999,10 @@
           {
             "date": "2026-11-09",
             "detail": "弱市(涨跌比0.98:1)+IV极度恐慌(均值0.72)时，热板块里唯一池内标的崇达技术(元件+4.81%)却rps20=3.37、dist_ma20=-15.5%——'板块热'不等于'个股强'，板块动量与个股动量背离时必须双达标才买，否则即接飞刀。"
+          },
+          {
+            "date": "2026-11-12",
+            "detail": "弱tape(0.78:1)+三指数微涨+科创50+2.35%是典型'指数涨、个股跌'分化盘，此时new_positions应默认空仓，不因个别股票RPS合格而强开仓"
           }
         ],
         "contradicting": [
@@ -1008,7 +1012,7 @@
           }
         ]
       },
-      "sampleSize": 167,
+      "sampleSize": 168,
       "hitRate": 0.994,
       "confidence": 0.988,
       "tags": [],
@@ -1278,7 +1282,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-11-09",
+      "lastTested": "2026-11-12",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1713,11 +1717,15 @@
           {
             "date": "2026-11-09",
             "detail": "板块热≠个股可买：元件板块(+2.79%)今日top5，但板块内唯一候选崇达技术RPS20仅3.13、现价15.13低于MA20(18.25)达17.1%，处于下跌趋势，不满足个股动量要求"
+          },
+          {
+            "date": "2026-11-12",
+            "detail": "出版板块今日-1.86%入bottom5，持仓中原传媒需盯紧'冷3日→卖出'规则；传媒链(出版/影视/数字媒体/游戏)同日集体走弱显示板块级派发而非个股问题"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 108,
+      "sampleSize": 109,
       "hitRate": 1.0,
       "confidence": 0.991,
       "tags": [
@@ -2776,7 +2784,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-11-11",
+      "lastTested": "2026-11-12",
       "mechanism": "In weak regimes, extended names have less room for upside expansion and much higher snapback risk, so buying pullbacks is superior to buying spikes.",
       "evidence": {
         "supporting": [
@@ -3067,13 +3075,17 @@
           {
             "date": "2026-11-11",
             "detail": "强市(创业板+3.11%、breadth1.94:1)但策略池内top5板块(通信设备/元件/半导体)无干净候选：唯一元件标的四会富仕dist_ma5=8.2%>6%、dist_ma10=8.8%>8%被Rule2b拦截——验证h027：热门板块不豁免追高纪律，龙头单日冲高时宁可小仓买二线动量也不追高"
+          },
+          {
+            "date": "2026-11-12",
+            "detail": "四会富仕在top5元件板块内但dist_ma5 8.8%/dist_ma10 9.4%超限被Rule 2b拦截，再次验证热板块不覆盖追高风险"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 72,
+      "sampleSize": 73,
       "hitRate": 1.0,
-      "confidence": 0.986,
+      "confidence": 0.987,
       "tags": [
         "entry-filter",
         "timing",
@@ -7286,7 +7298,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-08-11",
-      "lastTested": "2026-11-11",
+      "lastTested": "2026-11-12",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -7405,13 +7417,17 @@
           {
             "date": "2026-11-11",
             "detail": "策略池47只中约30只RPS120>95(约64%)，RPS超买封顶规则实际过滤掉多数候选；甜点区(80-95%)仅剩银行/电力/军工/出版等非top5板块——市场处于'龙头过热、二线补涨'阶段，应降低单笔仓位而非强追龙头"
+          },
+          {
+            "date": "2026-11-12",
+            "detail": "策略池大量RPS>95%候选(百普赛斯99.87、康龙化成99.59、福赛科技99.34等)被RPS封顶规则过滤，今日半导体/元件领涨但池内可买标的稀缺，印证动量拥挤"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 29,
+      "sampleSize": 30,
       "hitRate": 1.0,
-      "confidence": 0.968,
+      "confidence": 0.969,
       "tags": [
         "entry-filter"
       ],
