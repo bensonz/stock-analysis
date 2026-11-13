@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-09",
+  "updated": "2026-11-13",
   "note": "手动维护的前瞻事件日历（scripts/event_calendar.py 读取；到期/失效条目请及时清理）。tz=US 的事件影响其后第一个A股交易日。direction: risk(默认)|supportive|two_sided。 【数字纪律】notes 中禁止出现未经复测的数字或\"历史规律\"——任何统计口径的断言必须先用真实数据复测并标注 n 与口径（教训: 2026-08-04 政治局+2%小盘占优系模型folklore, 实测≈0, 见 git log）。 每条必须带 source（URL或可重算的脚本/口径说明）。",
   "events": [
     {
@@ -227,6 +227,48 @@
       "inbox_id": "wscn-20261110-US111018",
       "decided_by": "ai",
       "reason": "美国核心CPI是美联储关注的核心通胀指标，影响全球流动性预期"
+    },
+    {
+      "date": "2026-11-16",
+      "tz": "CN",
+      "name": "中国10月规模以上工业增加值同比",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "direction": "two_sided",
+      "notes": "北京时间 2026-11-16 10:00（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/CN141330/overview",
+      "inbox_id": "wscn-20261116-CN141330",
+      "decided_by": "ai",
+      "reason": "中国10月工业增加值反映经济动能，影响A股周期板块与整体风险偏好"
+    },
+    {
+      "date": "2026-11-16",
+      "tz": "CN",
+      "name": "中国10月社会消费品零售总额同比",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "direction": "two_sided",
+      "notes": "北京时间 2026-11-16 10:00（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/CN171405/overview",
+      "inbox_id": "wscn-20261116-CN171405",
+      "decided_by": "ai",
+      "reason": "中国10月社零反映消费复苏力度，影响A股消费板块与宏观预期"
+    },
+    {
+      "date": "2026-11-17",
+      "tz": "US",
+      "name": "美国英伟达Q3财报与电话会",
+      "kind": "other",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "direction": "two_sided",
+      "notes": "北京时间 2026-11-18 06:00（华尔街见闻财经日历）",
+      "source": "华尔街见闻财经日历 imp=4",
+      "inbox_id": "wscn-20261118-646a4873",
+      "decided_by": "ai",
+      "reason": "英伟达财报影响全球AI产业链情绪，对A股算力与科技板块有传导效应"
     }
   ]
 }

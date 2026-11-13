@@ -1,0 +1,128 @@
+{
+  "as_of": "2026-11-13",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 22,
+    "new": 10,
+    "pending": 10,
+    "expired": 0,
+    "ai_retired": 0,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 8,
+    "decided": 0,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 4,
+    "fetch_errors": 0,
+    "empty_days": 6,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 10,
+    "kept": 3,
+    "skipped": 7,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261116-03051ef9",
+        "name": "中国百度Q3财报与电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报，非系统性事件"
+      },
+      {
+        "id": "wscn-20261116-CN141330",
+        "name": "中国10月规模以上工业增加值同比",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "中国10月工业增加值反映经济动能，影响A股周期板块与整体风险偏好"
+      },
+      {
+        "id": "wscn-20261116-CN171405",
+        "name": "中国10月社会消费品零售总额同比",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "中国10月社零反映消费复苏力度，影响A股消费板块与宏观预期"
+      },
+      {
+        "id": "wscn-20261117-441050e5",
+        "name": "中国京东Q3财报与电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报，非系统性事件"
+      },
+      {
+        "id": "wscn-20261118-646a4873",
+        "name": "美国英伟达Q3财报与电话会",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "英伟达财报影响全球AI产业链情绪，对A股算力与科技板块有传导效应"
+      },
+      {
+        "id": "wscn-20261118-e4445883",
+        "name": "中国腾讯Q3财报与电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报，非系统性事件"
+      },
+      {
+        "id": "wscn-20261118-eb340fe4",
+        "name": "美国Anthropic IPO 定价",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司IPO定价，非系统性事件"
+      },
+      {
+        "id": "wscn-20261119-cddf248a",
+        "name": "美国英伟达临时CEO召开全体员工会议",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司内部会议，非系统性事件"
+      },
+      {
+        "id": "wscn-20261119-d3fe72f1",
+        "name": "中国阿里巴巴Q3财报与电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报，非系统性事件"
+      },
+      {
+        "id": "wscn-20261119-86d16232",
+        "name": "美国Anthropic 纳斯达克上市",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司上市，非系统性事件"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1820,
+    "tokens_out": 520
+  },
+  "pending_items": []
+}

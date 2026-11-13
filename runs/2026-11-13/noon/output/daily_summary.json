@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-13",
+  "actions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "price": 5.78,
+      "pnl_pct": 1.4,
+      "note": "持仓第2日浮盈+1.40%（今+3.03%），未触发-5%硬止损/-3%首3日规则；距止损5.42约6.2%；margin deleveraging(chg5 -2.24%)为警示非卖出信号"
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "price": 14.23,
+      "pnl_pct": 3.19,
+      "note": "持仓第3日浮盈+3.19%（今+3.12%）；传媒大板块今日领涨（影视院线+5.12% top1、电视广播+3.28% top2），thesis成立；未触发任何卖出规则"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.68,
+      "pnl_pct": 0.0,
+      "note": "持仓第3日浮盈0.00%（今+0.86%）；stop_proximity WATCH（距止损4.45约4.91%）但未触发；margin adding(chg5 +7.41%)；核电板块中性未进bottom5"
+    },
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "action": "HOLD",
+      "price": 44.4,
+      "pnl_pct": 3.21,
+      "note": "持仓第3日浮盈+3.21%（今-0.91%）；科技链今日走弱（元件-5.49% bottom1、创业板-1.47%），激光设备板块昨日入bottom5后今日未再现，行业冷streak未满3日不触发卖出；止损40.87不变"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 12.85,
+      "pnl_pct": 2.72,
+      "note": "持仓第3日浮盈+2.72%（今+2.23%）；城商行Ⅱ自2026年7月以来走强趋势未破（输入highlights）；IV(50ETF 0.13)极低仅影响新仓加仓不触发卖出；银行未进bottom5"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 9.71,
+      "pnl_pct": 0.62,
+      "note": "持仓第12日浮盈+0.62%（<3%），15日时间止损倒计时（剩3日，若仍<3%须机械离场）；航运港口未进bottom5不触发行业卖出；margin deleveraging(chg5 -4.5%)警示"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 6,
+    "totalEquity": 967636.94,
+    "dayPnl": 3121.0,
+    "dayReturnPct": 0.32,
+    "totalReturnPct": -3.24,
+    "unrealizedPnl": 4872.0,
+    "realizedPnl": -37235.06,
+    "cashPct": 75.83
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.7817,
+    "up": 2342,
+    "down": 2996,
+    "positive_indices": [
+      "上证指数"
+    ],
+    "negative_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 41,
+    "limit_downs": 8,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.78:1, 1/3 major indices green, 41 limit-ups / 8 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "弱市分化：涨跌比0.78:1（2342涨/2996跌）、涨停41/跌停8，仅上证+0.22%收红，深成指-0.56%、创业板-1.47%，entry_regime=weak（新仓仅半仓门槛）。板块轮动：影视院线(+5.12%)、电视广播(+3.28%)、养殖业(+2.31%)等防御/传媒逆势领涨，科技链退潮（元件-5.49%、通信设备-3.94%领跌，网络检索亦确认高位科技股退潮、影视防御活跃的方向）。IV整体中性（均值0.486），但创业板ETF 0.71、科创50 0.67偏高，50ETF 0.13极低。组合6/10仓、现金75.8%，今日浮盈+3121元。无候选处于今日top5板块，弱市默认不开新仓，保留现金等待板块确认。"
+  }
+}

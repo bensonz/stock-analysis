@@ -1,0 +1,233 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "影视院线",
+        "5d_pct": 5.12,
+        "trend": "accelerating"
+      },
+      {
+        "name": "电视广播Ⅱ",
+        "5d_pct": 3.28,
+        "trend": "steady"
+      },
+      {
+        "name": "养殖业",
+        "5d_pct": 2.31,
+        "trend": "steady"
+      },
+      {
+        "name": "饲料",
+        "5d_pct": 2.26,
+        "trend": "steady"
+      },
+      {
+        "name": "商用车",
+        "5d_pct": 1.93,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "元件",
+        "5d_pct": -5.49,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": -3.94,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -3.56,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "玻璃玻纤",
+        "5d_pct": -3.08,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "5d_pct": -2.34,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "1/6持仓处于热门板块（中原传媒·出版，传媒大板块今日领涨）；锐科激光·激光设备处于科技链偏冷（元件/通信设备领跌）；其余4只（电力/核电/城商行/港口）为中性板块，未进top5/bottom5",
+    "regime": "科技退潮、防御/传媒逆势活跃的轮动市；涨跌比0.78:1弱市，仅上证收红"
+  },
+  "position_decisions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "reason": "持仓第2日浮盈+1.40%（今+3.03%），未触发-5%硬止损/-3%首3日规则；距止损5.42约6.2%；margin deleveraging(chg5 -2.24%)为警示非卖出信号",
+      "sector_rank": "中性（电力，未进top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 1.4,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "reason": "持仓第3日浮盈+3.19%（今+3.12%）；传媒大板块今日领涨（影视院线+5.12% top1、电视广播+3.28% top2），thesis成立；未触发任何卖出规则",
+      "sector_rank": "热门（传媒大板块领涨）",
+      "new_stop": null,
+      "pnl_pct": 3.19,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "reason": "持仓第3日浮盈0.00%（今+0.86%）；stop_proximity WATCH（距止损4.45约4.91%）但未触发；margin adding(chg5 +7.41%)；核电板块中性未进bottom5",
+      "sector_rank": "中性（核电）",
+      "new_stop": null,
+      "pnl_pct": 0.0,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "action": "HOLD",
+      "reason": "持仓第3日浮盈+3.21%（今-0.91%）；科技链今日走弱（元件-5.49% bottom1、创业板-1.47%），激光设备板块昨日入bottom5后今日未再现，行业冷streak未满3日不触发卖出；止损40.87不变",
+      "sector_rank": "偏冷（科技链调整，观察冷streak）",
+      "new_stop": null,
+      "pnl_pct": 3.21,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "reason": "持仓第3日浮盈+2.72%（今+2.23%）；城商行Ⅱ自2026年7月以来走强趋势未破（输入highlights）；IV(50ETF 0.13)极低仅影响新仓加仓不触发卖出；银行未进bottom5",
+      "sector_rank": "中性（城商行）",
+      "new_stop": null,
+      "pnl_pct": 2.72,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "持仓第12日浮盈+0.62%（<3%），15日时间止损倒计时（剩3日，若仍<3%须机械离场）；航运港口未进bottom5不触发行业卖出；margin deleveraging(chg5 -4.5%)警示",
+      "sector_rank": "中性（航运港口）",
+      "new_stop": null,
+      "pnl_pct": 0.62,
+      "days_held": 12,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "300852",
+      "name": "四会富仕",
+      "reason": "所属元件板块今日-5.49%列bottom1，Rule 1一票否决（个股RPS120=90.89甜点区、MA距离全合规也不买入）",
+      "rps120": 90.89
+    },
+    {
+      "code": "600926",
+      "name": "杭州银行",
+      "reason": "RPS120=93.12扩展区(0风险豁免)，但银行/城商行今日未进top5（板块确认缺失）+ IV 50ETF 0.13(<15%需半仓) + margin deleveraging + 弱市，跳过",
+      "rps120": 93.12
+    },
+    {
+      "code": "600007",
+      "name": "中国国贸",
+      "reason": "RPS120=94.19扩展区(0风险豁免)，但房地产板块今日未确认top30%，弱市不追",
+      "rps120": 94.19
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "RPS120=94.08扩展区且有3风险因子(抛压/偿债/质押77%)，石油石化板块今日未进top5，油价背景偏弱，跳过",
+      "rps120": 94.08
+    },
+    {
+      "code": "301571",
+      "name": "国科天成",
+      "reason": "11-12刚止损离场(-3.17%)，今日RPS90.48甜点区再现但属重入：军工板块未热、无新差异化催化、弱市，重入举证责任未满足，跳过",
+      "rps120": 90.48
+    },
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "reason": "RPS120=94.65扩展区，1风险因子(11-02抛压-3.3%)、净利增速8.7%无>50%催化豁免、银行板块今日未进top5，扩展区豁免不成立，跳过",
+      "rps120": 94.65
+    },
+    {
+      "code": "600351",
+      "name": "亚宝药业",
+      "reason": "RPS120=94.06扩展区，1风险因子、中药板块未进top5、无>50%利润催化，扩展区豁免不成立，跳过",
+      "rps120": 94.06
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱市（涨跌比0.78:1、仅1/3指数收红）且无任何候选处于当日top5板块时，正确决策是new_positions空仓——即使entry_regime允许半仓开新，弱市+无板块确认=跳过。",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013, h144",
+      "mechanism": "动量收益来自板块贝塔与个股阿尔法共振；弱市下板块确认缺失时开仓胜率被系统性压制，现金优于勉强入场。"
+    },
+    {
+      "text": "四会富仕RPS120=90.89甜点区、MA距离全合规，但所属元件板块今日-5.49%列bottom1，Rule 1一票否决——个股动量再好也扛不住板块重力。",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "bottom列表板块是硬性禁买区，板块级资金流出会系统性压制个股短期收益。"
+    },
+    {
+      "text": "策略池大量股票RPS120落在94-99.9%扩展区（银行/医药/航运），但所属板块今日无一进入top5——高RPS不等于可买，RPS>95%封顶+板块确认组合继续过滤掉约70%候选。",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "高RPS多因前期板块行情透支，轮动切换后即面临均值回归，封顶规则保护组合。"
+    },
+    {
+      "text": "锐科激光母板块自动化设备昨日入bottom5、今日科技链继续领跌（元件-5.49%、创业板-1.47%），但行业冷streak需连满3日才触发卖出，持仓浮盈+3.21%仍在止损上方，逐日复核即可。",
+      "type": "observation",
+      "tags": [
+        "exit-rule",
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "科技→防御轮动通常持续3-5日，行业滑入bottom30%满3日才卖，避免单日噪音误砍。"
+    },
+    {
+      "text": "国科天成11-12刚止损离场(-3.17%)，今日RPS90.48甜点区再现，但军工板块未热、无新差异化催化、弱市——重入举证责任未满足，跳过。",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h165",
+      "mechanism": "重入n=9均值-3.71%、胜率11%，默认不买，除非价位/形态/催化有实质变化。"
+    }
+  ],
+  "market_summary": "弱市分化：涨跌比0.78:1（2342涨/2996跌）、涨停41/跌停8，仅上证+0.22%收红，深成指-0.56%、创业板-1.47%，entry_regime=weak（新仓仅半仓门槛）。板块轮动：影视院线(+5.12%)、电视广播(+3.28%)、养殖业(+2.31%)等防御/传媒逆势领涨，科技链退潮（元件-5.49%、通信设备-3.94%领跌，网络检索亦确认高位科技股退潮、影视防御活跃的方向）。IV整体中性（均值0.486），但创业板ETF 0.71、科创50 0.67偏高，50ETF 0.13极低。组合6/10仓、现金75.8%，今日浮盈+3121元。无候选处于今日top5板块，弱市默认不开新仓，保留现金等待板块确认。",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}

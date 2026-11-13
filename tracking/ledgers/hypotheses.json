@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-11-12",
+  "lastUpdated": "2026-11-13",
   "hypotheses": [
     {
       "id": "h001",
@@ -1282,7 +1282,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-11-12",
+      "lastTested": "2026-11-13",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1725,11 +1725,15 @@
           {
             "date": "2026-11-12",
             "detail": "锐科激光在恐慌盘仍+4.16%(激光通信/商业航天主线)，但其母板块自动化设备今日入bottom5(-4.15%)冷streak第1日。个股强度可短暂对抗板块引力，但不能豁免Rule 1的'冷3日'纪律。"
+          },
+          {
+            "date": "2026-11-13",
+            "detail": "四会富仕RPS120=90.89甜点区、MA距离全合规，但所属元件板块今日-5.49%列bottom1，Rule 1一票否决——个股动量再好也扛不住板块重力。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 110,
+      "sampleSize": 111,
       "hitRate": 1.0,
       "confidence": 0.991,
       "tags": [
@@ -4756,7 +4760,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-11-12",
+      "lastTested": "2026-11-13",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4955,13 +4959,17 @@
           {
             "date": "2026-11-12",
             "detail": "今日领涨为防御/农业/军工(林业+4.74%/渔业+3.49%/地面兵装+3.48%/养殖+1.09%)，前期强势的贵金属-6.88%/数字媒体-5.45%/影视院线-5.26%/游戏-4.87%/自动化设备-4.15%全线杀跌。组合0/7在热门板块、2/7已入冷区。"
+          },
+          {
+            "date": "2026-11-13",
+            "detail": "锐科激光母板块自动化设备昨日入bottom5、今日科技链继续领跌（元件-5.49%、创业板-1.47%），但行业冷streak需连满3日才触发卖出，持仓浮盈+3.21%仍在止损上方，逐日复核即可。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 49,
+      "sampleSize": 50,
       "hitRate": 1.0,
-      "confidence": 0.98,
+      "confidence": 0.981,
       "tags": [
         "sector",
         "exit-rule"
@@ -7314,7 +7322,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-08-11",
-      "lastTested": "2026-11-12",
+      "lastTested": "2026-11-13",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -7437,13 +7445,17 @@
           {
             "date": "2026-11-12",
             "detail": "策略池大量RPS>95%候选(百普赛斯99.87、康龙化成99.59、福赛科技99.34等)被RPS封顶规则过滤，今日半导体/元件领涨但池内可买标的稀缺，印证动量拥挤"
+          },
+          {
+            "date": "2026-11-13",
+            "detail": "策略池大量股票RPS120落在94-99.9%扩展区（银行/医药/航运），但所属板块今日无一进入top5——高RPS不等于可买，RPS>95%封顶+板块确认组合继续过滤掉约70%候选。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 30,
+      "sampleSize": 31,
       "hitRate": 1.0,
-      "confidence": 0.969,
+      "confidence": 0.97,
       "tags": [
         "entry-filter"
       ],
@@ -7585,7 +7597,7 @@
       "type": "signal",
       "status": "hypothesis",
       "created": "2026-08-13",
-      "lastTested": "2026-09-30",
+      "lastTested": "2026-11-13",
       "mechanism": "指数由大盘权重贡献，breadth为负说明资金高度集中少数板块，此时分散性新开仓胜率低，且易被权重股补跌带崩。",
       "evidence": {
         "supporting": [
@@ -7600,13 +7612,17 @@
           {
             "date": "2026-09-30",
             "detail": "弱tape(涨跌比0.96:1, 半仓multiplier)下，池内热门板块候选要么RPS>95封顶、要么MA超买，正确动作是new_positions:[]而非强行凑一单"
+          },
+          {
+            "date": "2026-11-13",
+            "detail": "弱市（涨跌比0.78:1、仅1/3指数收红）且无任何候选处于当日top5板块时，正确决策是new_positions空仓——即使entry_regime允许半仓开新，弱市+无板块确认=跳过。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 3,
+      "sampleSize": 4,
       "hitRate": 1.0,
-      "confidence": 0.8,
+      "confidence": 0.833,
       "tags": [
         "entry-filter",
         "timing"
@@ -7892,9 +7908,9 @@
       "id": "h165",
       "text": "重入举证责任再次兑现：巨化股份08-13重入后第4日-3.59%且距止损仅1.46%，触发主动止损。与重入统计(n=9均值-3.71%胜率11%)一致——重入不是禁令但默认不买，除非有明确的价位/形态/催化差异。",
       "type": "heuristic",
-      "status": "validated",
+      "status": "rule",
       "created": "2026-08-18",
-      "lastTested": "2026-10-26",
+      "lastTested": "2026-11-13",
       "mechanism": "重入标的往往是已被市场证明弱势的名字，首次离场即是对thesis的否定信号，除非出现新的突破结构，否则大概率延续弱势",
       "evidence": {
         "supporting": [
@@ -7933,13 +7949,17 @@
           {
             "date": "2026-10-26",
             "detail": "重入举证责任再次兑现场景：招商轮船(10-15离场)、药明康德(10-22离场)今日重现候选池，但均无价位/形态/催化差异，默认不买。重入不是禁令，但举证责任在重入一方。"
+          },
+          {
+            "date": "2026-11-13",
+            "detail": "国科天成11-12刚止损离场(-3.17%)，今日RPS90.48甜点区再现，但军工板块未热、无新差异化催化、弱市——重入举证责任未满足，跳过。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 9,
+      "sampleSize": 10,
       "hitRate": 1.0,
-      "confidence": 0.909,
+      "confidence": 0.917,
       "tags": [
         "entry-filter"
       ],
