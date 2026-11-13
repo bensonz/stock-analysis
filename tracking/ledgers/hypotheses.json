@@ -4963,11 +4963,15 @@
           {
             "date": "2026-11-13",
             "detail": "锐科激光母板块自动化设备昨日入bottom5、今日科技链继续领跌（元件-5.49%、创业板-1.47%），但行业冷streak需连满3日才触发卖出，持仓浮盈+3.21%仍在止损上方，逐日复核即可。"
+          },
+          {
+            "date": "2026-11-13",
+            "detail": "科技→防御轮动加速：影视院线+3.55%/白色家电+2.68%/养殖业+2.34%/白酒+1.8%/城商行+1.77%领涨，元件-8.51%/通信设备-6.29%被抛售，极差约11.8pp；持仓锐科激光需盯紧激光设备板块冷streak是否达3日"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 50,
+      "sampleSize": 51,
       "hitRate": 1.0,
       "confidence": 0.981,
       "tags": [
@@ -4984,7 +4988,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-11-12",
+      "lastTested": "2026-11-13",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -5195,13 +5199,17 @@
           {
             "date": "2026-11-12",
             "detail": "恐慌盘硬封锁验证有效：breadth 0.19:1、0/3指数绿，entry_regime=panic自动禁新仓。宁波银行(RPS94.65全合规)/中国国贸(VCP PREMIUM)等优质候选全部被拦，现金为王正确，未产生FOMO。"
+          },
+          {
+            "date": "2026-11-13",
+            "detail": "恐慌盘硬阻断再次验证：breadth 0.16:1、三大指数全绿、39跌停时，任何个股（哪怕杭州银行处在今日热门城商行板块）都不应开新仓，持币是正确动量决策"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 52,
+      "sampleSize": 53,
       "hitRate": 1.0,
-      "confidence": 0.981,
+      "confidence": 0.982,
       "tags": [
         "entry-filter",
         "position-sizing"
@@ -9043,7 +9051,7 @@
       "type": "rule",
       "status": "hypothesis",
       "created": "2026-09-23",
-      "lastTested": "2026-11-10",
+      "lastTested": "2026-11-13",
       "mechanism": "单日情绪波动与趋势转冷是两种信号，需连续确认而非单点触发",
       "evidence": {
         "supporting": [
@@ -9054,13 +9062,17 @@
           {
             "date": "2026-11-10",
             "detail": "青岛港第10日+1.45%<3%，15日时间止损倒计时启动；同时航运港口入bottom5冷第1日——两个卖出触发条件正在逼近，需逐日盯，不因'港口龙头'叙事拖延"
+          },
+          {
+            "date": "2026-11-13",
+            "detail": "青岛港12/15交易日浮盈仅+0.10%，时间止损倒计时中；Rule 5无事件豁免，应提前准备离场预案而非寻找例外理由"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 2,
+      "sampleSize": 3,
       "hitRate": 1.0,
-      "confidence": 0.75,
+      "confidence": 0.8,
       "tags": [
         "exit-rule"
       ],

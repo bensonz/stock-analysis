@@ -1,0 +1,203 @@
+## 研究备忘录（Research Memo）
+
+### 1. Market Regime — 恐慌盘（panic），硬性禁新仓
+机械层判定：`entry_regime = panic`，`allow_new_positions = false`，`hard_block = true`，sizing_multiplier = 0.0。
+- breadth 0.16:1（涨765 / 跌4748），39 跌停 / 38 涨停（f10=39）
+- 三大指数全绿：上证 -0.59%、深证成指 -2.05%、创业板指 -3.32%（科创50 -2.30%），0/3 红盘
+- IV 情绪整体偏悲观（avg iv_rank 0.52）：创业板ETF 0.79（恐慌）、科创50 0.68、500ETF 0.62 偏高；50ETF 0.14 偏低、300ETF 0.39 中性
+
+**结论：唯一正确的动量决策是持币。** 今天没有新的多头敞口可开，任何个股层面"看起来还行"都不能越过硬阻断（呼应 h077/h013）。
+
+### 2. Sector Analysis — 防御性轮动，科技硬件被抛售
+Top5（今日）：影视院线 +3.55%、白色家电 +2.68%、养殖业 +2.34%、白酒Ⅱ +1.8%、城商行Ⅱ +1.77%
+Bottom5（今日）：元件 -8.51%、林业Ⅱ -7.18%、通信设备 -6.29%、玻璃玻纤 -6.2%、非金属材料Ⅱ -5.27%
+
+这是典型的 科技→防御 轮动（消费/影视/银行 vs 元件/通信/玻璃），与 h076 描述的轮动特征一致。注意：本快照板块数据只有今日涨跌幅，无 5/20 日序列，无法按 Rule 1 完整排序 5 日动量——此为一处数据缺口。
+
+持仓板块对齐：2/6 在热门板块（中原传媒-影视院线top1、南京银行-城商行Ⅱtop5），其余中性偏冷。
+
+### 3. Position Review — 全部 HOLD
+| 代码 | 名称 | 盈亏 | 持有日 | 板块 | 判定 |
+|---|---|---|---|---|---|
+| 000690 | 宝新能源 | -0.18% | 2 | 火电(中性) | HOLD，距止损4.75% WATCH |
+| 000719 | 中原传媒 | +1.89% | 3 | 传媒(影视院线top1) | HOLD |
+| 003816 | 中国广核 | -0.21% | 3 | 核电(中性) | HOLD，距止损4.71% WATCH |
+| 300747 | 锐科激光 | +1.70% | 3 | 激光设备(偏冷) | HOLD，科技链走弱但冷streak未满3日 |
+| 601009 | 南京银行 | +2.40% | 3 | 城商行(top5) | HOLD |
+| 601298 | 青岛港 | +0.10% | 12 | 航运港口(中性) | HOLD，时间止损倒计时(12/15) |
+
+无任何持仓触发 -5% 硬止损、-3% 首3日、或行业冷3日卖出。青岛港是唯一需要重点盯的：12/15 交易日浮盈仅 +0.10%，剩 3 个交易日，若仍 <3% 须机械离场（Rule 5 无事件豁免）——提前备好离场预案，而非寻找例外理由。
+
+### 4. New Entry Candidates — 无（硬阻断）
+即使在恐慌盘中仍有个股通过常规门槛（杭州银行 RPS 93.35 且城商行今日 top5；中国国贸 RPS 94.02 甜点区 + 0 风险 + VCP QUALITY），今日一律不开新仓。硬阻断是权威层，我的判断层只能更严、不能更松。
+
+### 5. Skip List
+- 600007 中国国贸：甜点区+0风险+VCP QUALITY，但房地产/商业地产未进今日 top5，且恐慌盘禁新仓
+- 600926 杭州银行：城商行 top5 但 margin deleveraging + IV 低(半仓)，恐慌盘禁新仓
+- 601088 中国神华：VCP PREMIUM，但 RPS120 95.49 >95% 封顶
+- 601857 中国石油：VCP QUALITY，RPS120 96.74 >95% 封顶
+- 600887 伊利股份：VCP QUALITY，RPS120 96.22 >95% 封顶
+
+### 6. Learnings
+见 JSON 中的 new_learnings。
+
+### 7. Uncertainty Flags
+- 外部检索工具今日降级（Tavily 限流、百度返回旧闻），今日大跌的宏观催化剂未能独立核实，本备忘录全部依赖输入的机械数据。
+- 板块数据仅 1 日涨跌幅，缺 5/20 日动量，Rule 1 的完整排序无法执行。
+- 青岛港时间止损只剩 3 个交易日，属高频盯盘项。
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "影视院线", "5d_pct": 3.55, "trend": "今日领涨(仅1日数据)"},
+      {"name": "白色家电", "5d_pct": 2.68, "trend": "今日上涨(仅1日数据)"},
+      {"name": "养殖业", "5d_pct": 2.34, "trend": "今日上涨(仅1日数据)"},
+      {"name": "白酒Ⅱ", "5d_pct": 1.8, "trend": "今日上涨(仅1日数据)"},
+      {"name": "城商行Ⅱ", "5d_pct": 1.77, "trend": "今日上涨(仅1日数据)"}
+    ],
+    "cold_sectors": [
+      {"name": "元件", "5d_pct": -8.51, "trend": "今日暴跌"},
+      {"name": "林业Ⅱ", "5d_pct": -7.18, "trend": "今日下跌"},
+      {"name": "通信设备", "5d_pct": -6.29, "trend": "今日暴跌"},
+      {"name": "玻璃玻纤", "5d_pct": -6.2, "trend": "今日下跌"},
+      {"name": "非金属材料Ⅱ", "5d_pct": -5.27, "trend": "今日下跌"}
+    ],
+    "position_alignment": "2/6 positions in hot sectors (中原传媒-影视院线top1, 南京银行-城商行Ⅱtop5)",
+    "regime": "恐慌盘，防御性轮动(影视/家电/养殖/白酒/城商行领涨，科技硬件被抛售)"
+  },
+  "position_decisions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "reason": "持仓第2日-0.18%，未触发-5%硬止损/-3%首3日；距止损5.42约4.75%(stop_proximity WATCH)；火力发电中性未进bottom5；margin deleveraging(chg5 -2.24%)为警示非卖出",
+      "sector_rank": "中性(未进top5/bottom5)",
+      "new_stop": null,
+      "pnl_pct": -0.18,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "reason": "持仓第3日+1.89%；传媒大板块今日领涨(影视院线+3.55% top1)，thesis成立；未触发任何卖出规则",
+      "sector_rank": "top(影视院线今日top1)",
+      "new_stop": null,
+      "pnl_pct": 1.89,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "reason": "持仓第3日-0.21%，未触发卖出规则；距止损4.45约4.71%(stop_proximity WATCH)；核电中性未进bottom5；margin adding(chg5 +7.41%)",
+      "sector_rank": "中性(未进top5/bottom5)",
+      "new_stop": null,
+      "pnl_pct": -0.21,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "action": "HOLD",
+      "reason": "持仓第3日+1.70%；科技链今日走弱(元件-8.51% bottom1)，激光设备板块未再现bottom5、行业冷streak未满3日不触发卖出；未触止损40.87",
+      "sector_rank": "偏冷(科技链走弱，未进bottom5)",
+      "new_stop": null,
+      "pnl_pct": 1.7,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "reason": "持仓第3日+2.40%；城商行Ⅱ今日top5(+1.77%)，自2026年7月走强趋势未破(输入highlights)；未触发任何卖出规则",
+      "sector_rank": "top 5%(城商行Ⅱ+1.77%)",
+      "new_stop": null,
+      "pnl_pct": 2.4,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "持仓12日浮盈+0.10%(<3%)，15日时间止损倒计时(剩3日，若仍<3%须机械离场)；航运港口未进bottom5；margin deleveraging(chg5 -4.5%)警示。今日不触发，HOLD并备离场预案",
+      "sector_rank": "中性(未进top5/bottom5)",
+      "new_stop": null,
+      "pnl_pct": 0.1,
+      "days_held": 12,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600007",
+      "name": "中国国贸",
+      "reason": "RPS120 94.02甜点区+0风险+VCP QUALITY，但房地产/商业地产未进今日top5；恐慌盘hard block禁新仓",
+      "rps120": 94.02
+    },
+    {
+      "code": "600926",
+      "name": "杭州银行",
+      "reason": "城商行Ⅱ今日top5(+1.77%)，但margin deleveraging(chg5 -3.03%)+IV(50ETF 0.1382低)应半仓；恐慌盘hard block禁新仓",
+      "rps120": 93.35
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "reason": "VCP PREMIUM，但RPS120 95.49>95%封顶(相对强度过热)；且恐慌盘禁新仓",
+      "rps120": 95.49
+    },
+    {
+      "code": "601857",
+      "name": "中国石油",
+      "reason": "VCP QUALITY，RPS120 96.74>95%封顶；且恐慌盘禁新仓",
+      "rps120": 96.74
+    },
+    {
+      "code": "600887",
+      "name": "伊利股份",
+      "reason": "VCP QUALITY，RPS120 96.22>95%封顶；且恐慌盘禁新仓",
+      "rps120": 96.22
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌盘硬阻断再次验证：breadth 0.16:1、三大指数全绿、39跌停时，任何个股（哪怕杭州银行处在今日热门城商行板块）都不应开新仓，持币是正确动量决策",
+      "type": "signal",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "hard_block是权威机械层，个股级亮点无法对冲市场级流动性收缩"
+    },
+    {
+      "text": "科技→防御轮动加速：影视院线+3.55%/白色家电+2.68%/养殖业+2.34%/白酒+1.8%/城商行+1.77%领涨，元件-8.51%/通信设备-6.29%被抛售，极差约11.8pp；持仓锐科激光需盯紧激光设备板块冷streak是否达3日",
+      "type": "signal",
+      "tags": ["sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "风险偏好收缩时资金从高波科技硬件撤向低波防御/红利，轮动通常持续3-5日"
+    },
+    {
+      "text": "青岛港12/15交易日浮盈仅+0.10%，时间止损倒计时中；Rule 5无事件豁免，应提前准备离场预案而非寻找例外理由",
+      "type": "observation",
+      "tags": ["exit-rule"],
+      "evidence_type": "supporting",
+      "mechanism": "长时间横盘消耗机会成本，机械时间止损防止资金被无方向标的占用"
+    }
+  ],
+  "market_summary": "恐慌盘：breadth 0.16:1(765涨/4748跌)、38涨停/39跌停、三大指数全绿(创业板-3.32%/深成指-2.05%/上证-0.59%)，entry_regime=panic硬性禁新仓(sizing 0)。防御轮动：影视院线+3.55%/白色家电+2.68%/养殖业+2.34%/白酒Ⅱ+1.8%/城商行Ⅱ+1.77%领涨；科技硬件被抛售(元件-8.51%/通信设备-6.29%/玻璃玻纤-6.2%)。IV整体偏高(avg rank 0.52)：创业板ETF 0.79恐慌/科创50 0.68/500ETF 0.62偏高，50ETF 0.14低。持仓2/6在热门板块，全部HOLD，新仓关闭持币。注：板块数据仅今日涨跌幅，无5/20日序列。",
+  "market_sentiment": "bearish",
+  "market_call": "观望"
+}
+```

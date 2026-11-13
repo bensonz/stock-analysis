@@ -1,0 +1,86 @@
+{
+  "date": "2026-11-13",
+  "actions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "price": 5.69,
+      "pnl_pct": -0.18,
+      "note": "持仓第2日-0.18%，未触发-5%硬止损/-3%首3日；距止损5.42约4.75%(stop_proximity WATCH)；火力发电中性未进bottom5；margin deleveraging(chg5 -2.24%)为警示非卖出"
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "price": 14.05,
+      "pnl_pct": 1.89,
+      "note": "持仓第3日+1.89%；传媒大板块今日领涨(影视院线+3.55% top1)，thesis成立；未触发任何卖出规则"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.67,
+      "pnl_pct": -0.21,
+      "note": "持仓第3日-0.21%，未触发卖出规则；距止损4.45约4.71%(stop_proximity WATCH)；核电中性未进bottom5；margin adding(chg5 +7.41%)"
+    },
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "action": "HOLD",
+      "price": 43.75,
+      "pnl_pct": 1.7,
+      "note": "持仓第3日+1.70%；科技链今日走弱(元件-8.51% bottom1)，激光设备板块未再现bottom5、行业冷streak未满3日不触发卖出；未触止损40.87"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 12.81,
+      "pnl_pct": 2.4,
+      "note": "持仓第3日+2.40%；城商行Ⅱ今日top5(+1.77%)，自2026年7月走强趋势未破(输入highlights)；未触发任何卖出规则"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 9.66,
+      "pnl_pct": 0.1,
+      "note": "持仓12日浮盈+0.10%(<3%)，15日时间止损倒计时(剩3日，若仍<3%须机械离场)；航运港口未进bottom5；margin deleveraging(chg5 -4.5%)警示。今日不触发，HOLD并备离场预案"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 6,
+    "totalEquity": 965416.94,
+    "dayPnl": 901.0,
+    "dayReturnPct": 0.09,
+    "totalReturnPct": -3.46,
+    "unrealizedPnl": 2652.0,
+    "realizedPnl": -37235.06,
+    "cashPct": 76.0
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.1611,
+    "up": 765,
+    "down": 4748,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 38,
+    "limit_downs": 39,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.16:1, 0/3 major indices green, 38 limit-ups / 39 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "恐慌盘：breadth 0.16:1(765涨/4748跌)、38涨停/39跌停、三大指数全绿(创业板-3.32%/深成指-2.05%/上证-0.59%)，entry_regime=panic硬性禁新仓(sizing 0)。防御轮动：影视院线+3.55%/白色家电+2.68%/养殖业+2.34%/白酒Ⅱ+1.8%/城商行Ⅱ+1.77%领涨；科技硬件被抛售(元件-8.51%/通信设备-6.29%/玻璃玻纤-6.2%)。IV整体偏高(avg rank 0.52)：创业板ETF 0.79恐慌/科创50 0.68/500ETF 0.62偏高，50ETF 0.14低。持仓2/6在热门板块，全部HOLD，新仓关闭持币。注：板块数据仅今日涨跌幅，无5/20日序列。"
+  }
+}
