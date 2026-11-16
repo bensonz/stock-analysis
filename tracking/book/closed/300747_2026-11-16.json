@@ -1,7 +1,7 @@
 {
   "code": "300747",
   "name": "锐科激光",
-  "status": "active",
+  "status": "closed",
   "thesis": "RPS120 94.92扩展区(0风险豁免)，MA距离2.1/4.6/4.7%全合规；契合连续2日领涨的商业航天(星间激光通信)+人形机器人双主线；最新季度净利+97%",
   "entryDate": "2026-11-10",
   "entrySlot": "noon",
@@ -84,15 +84,25 @@
       "change_pct": 0.37,
       "action": "HOLD",
       "note": "持仓4日浮盈+0.37%，今日-1.30%；激光设备未进今日bottom5（航天装备-3.98%为邻域冷区），行业冷streak未满3日不触发卖出；距止损40.87尚有约5.4%缓冲"
+    },
+    {
+      "date": "2026-11-16",
+      "slot": "afternoon",
+      "price": 41.66,
+      "change_pct": -3.16,
+      "action": "SELL",
+      "shares": 1300,
+      "note": "今日-4.78%收41.66，距硬止损40.87仅1.9%(stop_proximity CRITICAL，盘中最低41.21距止损0.8%)；持仓4日浮亏-3.16%；激光设备属科技链，通信设备(-8.69%)/元件(-8.66%)/半导体(-5.99%)全线重挫；机械规则建议主动止损，按h024不等精确触发离场"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-11-16",
+  "exitPrice": 41.66,
+  "exitReason": "今日-4.78%收41.66，距硬止损40.87仅1.9%(stop_proximity CRITICAL，盘中最低41.21距止损0.8%)；持仓4日浮亏-3.16%；激光设备属科技链，通信设备(-8.69%)/元件(-8.66%)/半导体(-5.99%)全线重挫；机械规则建议主动止损，按h024不等精确触发离场",
+  "returnPct": -3.16,
+  "holdingDays": 4,
+  "lessonLearned": "",
   "createdAt": "2026-11-10T13:22:13.407009+08:00",
-  "updatedAt": "2026-11-16T11:40:56.150071+08:00",
-  "trackerVersion": "2.1"
+  "updatedAt": "2026-11-16T15:12:26.416821+08:00",
+  "trackerVersion": "2.1",
+  "exitSlot": "afternoon"
 }

@@ -14,7 +14,7 @@
 > `date`、`tz` (US=影响其后第一个A股交易日 / CN=当日)、`kind`、`note`。不要改 `ai:`、`src:` 和 `id:` 三行（🤖 可留可删）。
 > 标题日期 = A股影响日，由 date+tz 推算，重写时刷新。规则与局限: docs/EVENT_INBOX/DECISIONS.md
 
-_更新: 2026-11-16 · 共 23 条 · 待定 0 条_
+_更新: 2026-11-16 · 共 24 条 · 待定 0 条_
 
 ## 2026-11-16 (T-0) 中国 — 中国央行：自11月15日起上调金融机构外汇存款准备金率2个百分点
 - [x] keep 🤖   impact: medium   direction: risk
@@ -143,6 +143,14 @@ _更新: 2026-11-16 · 共 23 条 · 待定 0 条_
   ai: 跳过 · low/two_sided · 单一公司IPO定价，非系统性事件（deepseek-v4-pro，2026-11-13）
   src: wallstreetcn imp=4 北京 2026-11-18 12:02 |
   id: wscn-20261118-eb340fe4
+
+## 2026-11-19 (T-3) 中国 — 中国习近平将同俄罗斯总统普京、美国总统特朗普举行中俄美元首会晤
+- [x] keep 🤖   impact: high   direction: two_sided
+  date: 2026-11-19   tz: CN   kind: other
+  note:
+  ai: 保留 · high/two_sided · 中俄美元首会晤涉及大国关系与贸易政策走向，可能系统性影响A股风险偏好（deepseek-v4-pro，2026-11-16）
+  src: wallstreetcn imp=4 北京 2026-11-19 12:02 |
+  id: wscn-20261119-6f690f3d
 
 ## 2026-11-19 (T-3) 美国 — 美国英伟达临时CEO召开全体员工会议
 - [-] keep 🤖   impact: low   direction: two_sided

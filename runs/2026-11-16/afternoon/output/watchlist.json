@@ -1,0 +1,102 @@
+{
+  "date": "2026-11-16",
+  "market_overview": {
+    "shanghai_composite": {
+      "value": 3602.57,
+      "change_pct": -0.87
+    },
+    "shenzhen_component": {
+      "value": 10690.778,
+      "change_pct": -2.53
+    },
+    "chinext": {
+      "value": 2320.02,
+      "change_pct": -4.37
+    },
+    "sentiment": "bearish",
+    "hot_sectors": [
+      "小家电",
+      "铁路公路",
+      "电视广播Ⅱ",
+      "城商行Ⅱ",
+      "国有大型银行Ⅱ"
+    ],
+    "cold_sectors": [
+      "通信设备",
+      "元件",
+      "林业Ⅱ",
+      "航天装备Ⅱ",
+      "半导体"
+    ],
+    "notes": "恐慌盘：涨跌比0.26:1（1136涨/4344跌）、68跌停/33涨停、三大指数全绿（上证-0.87%、深成-2.53%、创业板-4.37%，科创50-5.16%）。资金避险涌入银行/公路/小家电等防御板块，科技链（通信设备-8.69%、元件-8.66%、半导体-5.99%）系统性出清。IV整体偏高（avg rank 0.63，创业板ETF rank 1.0、科创50 0.85），市场偏悲观。entry_regime机械层硬封锁新开仓，今日唯一动作为卖出锐科激光（stop_proximity CRITICAL）。"
+  },
+  "strategy_scan": {
+    "total_stocks_scanned": 48,
+    "strategy_name": "小市值-无 20RP",
+    "scan_time": "2026-11-16T15:12:26.493450+08:00"
+  },
+  "recommendations": [
+    {
+      "code": "600926.SH",
+      "name": "杭州银行",
+      "price": null,
+      "rps120": 93.79,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "601088.SH",
+      "name": "中国神华",
+      "price": null,
+      "rps120": 95.53,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "601857.SH",
+      "name": "中国石油",
+      "price": null,
+      "rps120": 96.37,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "603236.SH",
+      "name": "移远通信",
+      "price": null,
+      "rps120": 99.3,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600256.SH",
+      "name": "广汇能源",
+      "price": null,
+      "rps120": 93.07,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "300852.SZ",
+      "name": "四会富仕",
+      "price": null,
+      "rps120": 89.06,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    }
+  ],
+  "summary": {
+    "total_scanned": 48,
+    "buy_recommendations": 0,
+    "watch_recommendations": 6,
+    "avoid_recommendations": 0,
+    "market_call": "防御观望",
+    "reasoning": "恐慌盘：涨跌比0.26:1（1136涨/4344跌）、68跌停/33涨停、三大指数全绿（上证-0.87%、深成-2.53%、创业板-4.37%，科创50-5.16%）。资金避险涌入银行/公路/小家电等防御板块，科技链（通信设备-8.69%、元件-8.66%、半导体-5.99%）系统性出清。IV整体偏高（avg rank 0.63，创业板ETF rank 1.0、科创50 0.85），市场偏悲观。entry_regime机械层硬封锁新开仓，今日唯一动作为卖出锐科激光（stop_proximity CRITICAL）。"
+  }
+}

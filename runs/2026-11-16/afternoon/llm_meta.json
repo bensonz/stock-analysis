@@ -1,0 +1,132 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 293975,
+  "output_tokens": 18884,
+  "rounds": 4,
+  "duration_sec": 297.1,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 大跌 2026年11月16日 原因 创业板 科创50",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "银行板块 逆势上涨 创历史新高 2026年11月",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "锐科激光 300747 股价 2026年11月",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体 元件 通信设备 大跌 2026年11月",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 市场 恐慌 风险规避 防御板块 2026年11月16日",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+大跌+2026年11月16日+创业板+科创50+原因",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=银行板块+逆势上涨+创历史新高+2026年11月",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=锐科激光+300747+2026年11月+最新消息",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=半导体+元件+通信设备+大跌+2026年11月",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+防御板块+银行+铁路公路+小家电+2026年11月16日",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=11月16日+A股+收评+银行+科技+大跌"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=锐科激光+商业航天+激光通信+2026"
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}

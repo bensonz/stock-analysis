@@ -1,0 +1,56 @@
+{
+  "as_of": "2026-11-16",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 21,
+    "new": 1,
+    "pending": 1,
+    "expired": 0,
+    "ai_retired": 0,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 17,
+    "decided": 0,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 3,
+    "fetch_errors": 0,
+    "empty_days": 6,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 1,
+    "kept": 1,
+    "skipped": 0,
+    "high": 1,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261119-6f690f3d",
+        "name": "中国习近平将同俄罗斯总统普京、美国总统特朗普举行中俄美元首会晤",
+        "decision": "keep",
+        "impact": "high",
+        "direction": "two_sided",
+        "reason": "中俄美元首会晤涉及大国关系与贸易政策走向，可能系统性影响A股风险偏好"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1489,
+    "tokens_out": 84
+  },
+  "pending_items": []
+}

@@ -2573,7 +2573,7 @@
       "type": "signal",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-11-12",
+      "lastTested": "2026-11-16",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -2700,6 +2700,10 @@
           {
             "date": "2026-11-12",
             "detail": "首3日-3%止损在国科天成触发(11-11入场71.98→11-12收69.70，-3.17%，第1日)，同时stop_proximity CRITICAL仅1.89%。两个信号叠加说明开仓时机错误，第1日即离场而非等待-5%硬止损。"
+          },
+          {
+            "date": "2026-11-16",
+            "detail": "锐科激光4日内从+3.21%转为-3.16%，单日-4.78%、盘中最低距止损仅0.8%——科技链(通信设备-8.69%/元件-8.66%/半导体-5.99%)轮动出清时，前期强势的激光设备跟随补跌。stop_proximity CRITICAL应主动离场不等精确触发。"
           }
         ],
         "contradicting": [
@@ -2713,9 +2717,9 @@
           }
         ]
       },
-      "sampleSize": 33,
-      "hitRate": 0.939,
-      "confidence": 0.914,
+      "sampleSize": 34,
+      "hitRate": 0.941,
+      "confidence": 0.917,
       "tags": [
         "exit-rule",
         "timing"
@@ -4975,13 +4979,17 @@
           {
             "date": "2026-11-16",
             "detail": "弱势盘中防御板块逆势创新高（今日银行7股新高、电视广播/家电领涨）是避险资金抱团，不是可追的趋势启动——这类板块里的RPS扩展区个股仍不满足'强板块强个股'新仓门槛（无法确认板块top30%排名）。弱市默认不开新仓，不要被'逆势新高'的个股强度误导"
+          },
+          {
+            "date": "2026-11-16",
+            "detail": "今日top5全为防御（小家电/铁路公路/电视广播/城商行/大行），bottom5全为科技成长（通信设备/元件/半导体）——科技→防御轮动加速。持仓应偏向防御，科技链持仓应优先降风险。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 52,
+      "sampleSize": 53,
       "hitRate": 1.0,
-      "confidence": 0.981,
+      "confidence": 0.982,
       "tags": [
         "sector",
         "exit-rule"
@@ -4996,7 +5004,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-11-13",
+      "lastTested": "2026-11-16",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -5211,11 +5219,15 @@
           {
             "date": "2026-11-13",
             "detail": "恐慌盘硬阻断再次验证：breadth 0.16:1、三大指数全绿、39跌停时，任何个股（哪怕杭州银行处在今日热门城商行板块）都不应开新仓，持币是正确动量决策"
+          },
+          {
+            "date": "2026-11-16",
+            "detail": "恐慌盘hard block再次兑现：涨跌比0.26:1、0/3指数红、68跌停，机械层直接锁死新开仓。即使银行/传媒等逆势红盘板块有合格候选（杭州银行RPS120=93.79甜点区、0风险），也不开新仓——恐慌盘不开仓是对的。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 53,
+      "sampleSize": 54,
       "hitRate": 1.0,
       "confidence": 0.982,
       "tags": [
@@ -7338,7 +7350,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-08-11",
-      "lastTested": "2026-11-13",
+      "lastTested": "2026-11-16",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -7465,13 +7477,17 @@
           {
             "date": "2026-11-13",
             "detail": "策略池大量股票RPS120落在94-99.9%扩展区（银行/医药/航运），但所属板块今日无一进入top5——高RPS不等于可买，RPS>95%封顶+板块确认组合继续过滤掉约70%候选。"
+          },
+          {
+            "date": "2026-11-16",
+            "detail": "策略池RPS>95%的科技股今日集体重挫（移远通信rps120 99.3、百普赛斯99.85、福赛科技99.21、满坤科技99.14、比音勒芬99.07），再次验证RPS>95%封顶规则：极致拥挤的动量在板块见顶时回撤最狠。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 31,
+      "sampleSize": 32,
       "hitRate": 1.0,
-      "confidence": 0.97,
+      "confidence": 0.971,
       "tags": [
         "entry-filter"
       ],
@@ -9057,7 +9073,7 @@
       "id": "h203",
       "text": "招商轮船盘中一度跌超7%收盘-3.26%但未破保本止损、板块仅转冷1日即出榜——不因单日盘中波动机械卖出，'冷3日才卖'规则给赢家波动留出空间",
       "type": "rule",
-      "status": "hypothesis",
+      "status": "validated",
       "created": "2026-09-23",
       "lastTested": "2026-11-16",
       "mechanism": "单日情绪波动与趋势转冷是两种信号，需连续确认而非单点触发",
@@ -9078,13 +9094,17 @@
           {
             "date": "2026-11-16",
             "detail": "青岛港13日+1.66%逼近15日<3%时间止损——机械规则无例外，第13日给HOLD仅因未触发，第15日若仍<3%必须无条件离场，不能以'港口逻辑还在'豁免"
+          },
+          {
+            "date": "2026-11-16",
+            "detail": "青岛港13/15日浮盈仅+1.87%，15日时间止损将机械触发（Rule 5无事件例外）。防御板块的'安全'不能豁免时间止损——价格不涨就是timing错，可随时再入。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 4,
+      "sampleSize": 5,
       "hitRate": 1.0,
-      "confidence": 0.833,
+      "confidence": 0.857,
       "tags": [
         "exit-rule"
       ],

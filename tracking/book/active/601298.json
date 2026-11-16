@@ -212,6 +212,14 @@
       "change_pct": 1.66,
       "action": "HOLD",
       "note": "持仓13日浮盈+1.66%（<3%），15日时间止损倒计时中（13/15，剩2日若仍<3%须机械离场，Rule 5无例外）；航运港口未进bottom5；今日+1.55%；今日不触发，备离场预案"
+    },
+    {
+      "date": "2026-11-16",
+      "slot": "afternoon",
+      "price": 9.83,
+      "change_pct": 1.87,
+      "action": "HOLD",
+      "note": "持仓13/15日浮盈+1.87%<3%，时间止损逼近（check_time_decay APPROACHING，若2日内仍<3%须机械离场，Rule 5无事件例外）；今日+1.76%接近3%阈值；航运港口未进bottom5；今日不触发，备离场预案"
     }
   ],
   "exitDate": null,
@@ -221,6 +229,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-10-28T15:15:38.208190+08:00",
-  "updatedAt": "2026-11-16T11:40:56.161576+08:00",
+  "updatedAt": "2026-11-16T15:12:26.459297+08:00",
   "trackerVersion": "2.1"
 }
