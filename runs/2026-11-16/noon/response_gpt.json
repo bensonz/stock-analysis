@@ -1,0 +1,216 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "电视广播Ⅱ",
+        "pct": 3.81,
+        "trend": "加速"
+      },
+      {
+        "name": "小家电",
+        "pct": 3.24,
+        "trend": "走强"
+      },
+      {
+        "name": "汽车服务",
+        "pct": 1.54,
+        "trend": "温和"
+      },
+      {
+        "name": "厨卫电器",
+        "pct": 1.45,
+        "trend": "温和"
+      },
+      {
+        "name": "铁路公路",
+        "pct": 1.42,
+        "trend": "温和"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "通信设备",
+        "pct": -5.02,
+        "trend": "恶化"
+      },
+      {
+        "name": "元件",
+        "pct": -4.76,
+        "trend": "恶化"
+      },
+      {
+        "name": "林业Ⅱ",
+        "pct": -4.34,
+        "trend": "恶化"
+      },
+      {
+        "name": "航天装备Ⅱ",
+        "pct": -3.98,
+        "trend": "恶化"
+      },
+      {
+        "name": "小金属",
+        "pct": -3.61,
+        "trend": "恶化"
+      }
+    ],
+    "position_alignment": "0/6 在今日top5子板块内；2/6 在相对强势方向（中原传媒/传媒-电视广播领涨、南京银行/银行逆势创新高）；无一在今日bottom5",
+    "regime": "防御性轮动：科技成长（通信设备/元件/航天装备）领跌，银行/电力/家电/铁路公路等防御逆势；整体弱势"
+  },
+  "position_decisions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "reason": "持仓3日浮亏-0.53%，未触发-5%硬止损/-3%首3日；距止损5.42约4.4%（stop_proximity WATCH）需盯紧；火力发电未进今日bottom5；margin deleveraging(chg5 -1.89%)为警示非卖出信号",
+      "sector_rank": "中性（火力发电未进今日top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": -0.53,
+      "days_held": 3,
+      "exit_price": null
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "reason": "持仓4日浮盈+3.12%；传媒大板块今日偏热（电视广播Ⅱtop1 +3.81%）；个股+1.21%；未触发任何卖出规则",
+      "sector_rank": "偏热（传媒大板块内电视广播Ⅱ今日+3.81%居首）",
+      "new_stop": null,
+      "pnl_pct": 3.12,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "reason": "持仓4日浮盈+0.64%；核电未进今日bottom5；margin adding(chg5 +7.38%)；未触发任何卖出规则",
+      "sector_rank": "中性（核电未进今日top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 0.64,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "action": "HOLD",
+      "reason": "持仓4日浮盈+0.37%，今日-1.30%；激光设备未进今日bottom5（航天装备-3.98%为邻域冷区），行业冷streak未满3日不触发卖出；距止损40.87尚有约5.4%缓冲",
+      "sector_rank": "中性偏冷（激光设备未进今日bottom5；邻域航天装备-3.98%冷）",
+      "new_stop": null,
+      "pnl_pct": 0.37,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "reason": "持仓4日浮盈+4.08%，今日+1.64%；银行板块逆势拉升、多股创历史新高（输入事件文本）；城商行自2026年7月走强趋势未破；未触发任何卖出规则",
+      "sector_rank": "偏热（银行逆势拉升创历史新高）",
+      "new_stop": null,
+      "pnl_pct": 4.08,
+      "days_held": 4,
+      "exit_price": null
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "持仓13日浮盈+1.66%（<3%），15日时间止损倒计时中（13/15，剩2日若仍<3%须机械离场，Rule 5无例外）；航运港口未进bottom5；今日+1.55%；今日不触发，备离场预案",
+      "sector_rank": "中性（航运港口未进今日top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 1.66,
+      "days_held": 13,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "002142",
+      "name": "宁波银行",
+      "reason": "RPS120 94.68扩展区(92-95%)需豁免：1风险(11-02抛压-3.3%/1.76倍量)+Q3净利+8.7%(无>50%催化)+板块top10%未证实，不满足豁免；弱市(0.50:1)不追",
+      "rps120": 94.68
+    },
+    {
+      "code": "600926",
+      "name": "杭州银行",
+      "reason": "RPS120 93.35扩展区(0风险豁免成立)，但IV Rank 0.12<15%(新仓减半)+margin deleveraging(chg5 -6.91%)+弱市三重叠加，集群风险→跳过",
+      "rps120": 93.35
+    },
+    {
+      "code": "600566",
+      "name": "济川药业",
+      "reason": "RPS120 94.34扩展区；医保目录催化真实(玛硒洛沙韦片/济可舒纳入国家医保)但dist_ma20 +10.2%逼近12%上限+margin deleveraging(chg5 -7.51%)+中药板块无法确认top30%→弱市跳过",
+      "rps120": 94.34
+    },
+    {
+      "code": "600007",
+      "name": "中国国贸",
+      "reason": "RPS120 94.02扩展区(0风险豁免)，VCP QUALITY(contraction 0.31)形态好，但商业地产非今日热点板块，弱市不追",
+      "rps120": 94.02
+    },
+    {
+      "code": "600351",
+      "name": "亚宝药业",
+      "reason": "现价6.43低于MA5/10/20全部(分布-6.8/-7.6/-7.3%)，动量破坏→跳过",
+      "rps120": 94.06
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "3风险(抛压/偿债/质押77%)，现价低于全部MA(分布-2.6/-4.0/-4.9%)→跳过",
+      "rps120": 93.68
+    },
+    {
+      "code": "300852",
+      "name": "四会富仕",
+      "reason": "元件板块bottom5(-4.76%)硬禁止区+RPS20仅4.23动量崩塌→跳过",
+      "rps120": 90.25
+    },
+    {
+      "code": "301571",
+      "name": "国科天成",
+      "reason": "重入：11-12刚止损离场(-3.17%,持有1天)，今日军工电子/航天装备板块bottom5(-3.98%)冷区+margin deleveraging(chg5 -3.07%)，无重入差异→不买",
+      "rps120": 91.33
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱势盘中防御板块逆势创新高（今日银行7股新高、电视广播/家电领涨）是避险资金抱团，不是可追的趋势启动——这类板块里的RPS扩展区个股仍不满足'强板块强个股'新仓门槛（无法确认板块top30%排名）。弱市默认不开新仓，不要被'逆势新高'的个股强度误导",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "弱势盘中避险资金抱团防御板块是卖出成长/买入防御的再平衡，缺乏增量资金支撑，追高次日易被大盘指数下跌拖累"
+    },
+    {
+      "text": "低IV（杭州银行50ETF IV Rank 0.12<15%）在弱市(0.50:1)中不是买入理由，而是波动率回归风险+margin deleveraging+弱势的三重叠加警示；与h017(低IV不冻结)的区别在于h017前提是breadth 5.6:1强势盘，今日是弱盘，条件不同结论应相反",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "position-sizing"
+      ],
+      "evidence_type": "contradicting",
+      "related_hypothesis": "h017",
+      "mechanism": "IV Rank极低意味着期权市场定价波动率处于低位，若大盘处于弱势下跌通道，低IV会均值回归向上，新仓面临波动放大+趋势向下的双重不利"
+    },
+    {
+      "text": "青岛港13日+1.66%逼近15日<3%时间止损——机械规则无例外，第13日给HOLD仅因未触发，第15日若仍<3%必须无条件离场，不能以'港口逻辑还在'豁免",
+      "type": "rule",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "时间止损约束的是'资金效率'：15个交易日无法兑现3%的仓位占用的是机会成本，应当换出给更有动能的标的"
+    }
+  ],
+  "market_summary": "弱势盘：沪指-0.39%/深成-1.31%/创业板-2.34%/科创50-2.91%，涨跌比0.50:1（1787涨/3564跌），33涨停/14跌停，0/3指数翻红。防御性轮动：电视广播+3.81%、小家电+3.24%、铁路公路+1.42%领涨，银行逆势创新高；通信设备-5.02%、元件-4.76%、航天装备-3.98%领跌。IV整体偏悲观（均值Rank 0.577），创业板ETF 0.94/科创50 0.82处于恐慌区。entry_regime=weak仅允许半仓，且候选池无一在今日top5板块内——不开新仓，持仓6只全部HOLD，青岛港时间止损倒计时盯紧。",
+  "market_sentiment": "bearish",
+  "market_call": "防守"
+}

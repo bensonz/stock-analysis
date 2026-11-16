@@ -204,6 +204,14 @@
       "change_pct": 0.1,
       "action": "HOLD",
       "note": "持仓12日浮盈+0.10%(<3%)，15日时间止损倒计时(剩3日，若仍<3%须机械离场)；航运港口未进bottom5；margin deleveraging(chg5 -4.5%)警示。今日不触发，HOLD并备离场预案"
+    },
+    {
+      "date": "2026-11-16",
+      "slot": "noon",
+      "price": 9.81,
+      "change_pct": 1.66,
+      "action": "HOLD",
+      "note": "持仓13日浮盈+1.66%（<3%），15日时间止损倒计时中（13/15，剩2日若仍<3%须机械离场，Rule 5无例外）；航运港口未进bottom5；今日+1.55%；今日不触发，备离场预案"
     }
   ],
   "exitDate": null,
@@ -213,6 +221,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-10-28T15:15:38.208190+08:00",
-  "updatedAt": "2026-11-13T15:10:46.347041+08:00",
+  "updatedAt": "2026-11-16T11:40:56.161576+08:00",
   "trackerVersion": "2.1"
 }

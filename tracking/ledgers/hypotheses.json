@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-16",
   "hypotheses": [
     {
       "id": "h001",
@@ -1104,7 +1104,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-11-05",
+      "lastTested": "2026-11-16",
       "mechanism": "Cheap volatility means trend continuation can persist, but upside surprise from fresh entries comes from proper setup quality, not from paying up far above moving averages.",
       "evidence": {
         "supporting": [
@@ -1233,12 +1233,16 @@
           {
             "date": "2026-07-28",
             "detail": "Yesterday opened 5 positions into a tape where breadth was already deteriorating and tech selloff was accelerating globally. The V2 buy gate correctly blocks new positions today (breadth 1.125:1, 0/4 indices green), but yesterday should have been more cautious. Lesson: when all major IV proxies are >60% and the global semi rout is ongoing, even a passing buy gate should be treated with reduced sizing."
+          },
+          {
+            "date": "2026-11-16",
+            "detail": "低IV（杭州银行50ETF IV Rank 0.12<15%）在弱市(0.50:1)中不是买入理由，而是波动率回归风险+margin deleveraging+弱势的三重叠加警示；与h017(低IV不冻结)的区别在于h017前提是breadth 5.6:1强势盘，今日是弱盘，条件不同结论应相反"
           }
         ]
       },
-      "sampleSize": 31,
-      "hitRate": 0.968,
-      "confidence": 0.939,
+      "sampleSize": 32,
+      "hitRate": 0.938,
+      "confidence": 0.912,
       "tags": [
         "timing",
         "position-sizing",
@@ -4760,7 +4764,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-11-13",
+      "lastTested": "2026-11-16",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4967,11 +4971,15 @@
           {
             "date": "2026-11-13",
             "detail": "科技→防御轮动加速：影视院线+3.55%/白色家电+2.68%/养殖业+2.34%/白酒+1.8%/城商行+1.77%领涨，元件-8.51%/通信设备-6.29%被抛售，极差约11.8pp；持仓锐科激光需盯紧激光设备板块冷streak是否达3日"
+          },
+          {
+            "date": "2026-11-16",
+            "detail": "弱势盘中防御板块逆势创新高（今日银行7股新高、电视广播/家电领涨）是避险资金抱团，不是可追的趋势启动——这类板块里的RPS扩展区个股仍不满足'强板块强个股'新仓门槛（无法确认板块top30%排名）。弱市默认不开新仓，不要被'逆势新高'的个股强度误导"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 51,
+      "sampleSize": 52,
       "hitRate": 1.0,
       "confidence": 0.981,
       "tags": [
@@ -9051,7 +9059,7 @@
       "type": "rule",
       "status": "hypothesis",
       "created": "2026-09-23",
-      "lastTested": "2026-11-13",
+      "lastTested": "2026-11-16",
       "mechanism": "单日情绪波动与趋势转冷是两种信号，需连续确认而非单点触发",
       "evidence": {
         "supporting": [
@@ -9066,13 +9074,17 @@
           {
             "date": "2026-11-13",
             "detail": "青岛港12/15交易日浮盈仅+0.10%，时间止损倒计时中；Rule 5无事件豁免，应提前准备离场预案而非寻找例外理由"
+          },
+          {
+            "date": "2026-11-16",
+            "detail": "青岛港13日+1.66%逼近15日<3%时间止损——机械规则无例外，第13日给HOLD仅因未触发，第15日若仍<3%必须无条件离场，不能以'港口逻辑还在'豁免"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 3,
+      "sampleSize": 4,
       "hitRate": 1.0,
-      "confidence": 0.8,
+      "confidence": 0.833,
       "tags": [
         "exit-rule"
       ],

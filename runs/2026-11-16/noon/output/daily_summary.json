@@ -1,0 +1,86 @@
+{
+  "date": "2026-11-16",
+  "actions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "price": 5.67,
+      "pnl_pct": -0.53,
+      "note": "持仓3日浮亏-0.53%，未触发-5%硬止损/-3%首3日；距止损5.42约4.4%（stop_proximity WATCH）需盯紧；火力发电未进今日bottom5；margin deleveraging(chg5 -1.89%)为警示非卖出信号"
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "price": 14.22,
+      "pnl_pct": 3.12,
+      "note": "持仓4日浮盈+3.12%；传媒大板块今日偏热（电视广播Ⅱtop1 +3.81%）；个股+1.21%；未触发任何卖出规则"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.71,
+      "pnl_pct": 0.64,
+      "note": "持仓4日浮盈+0.64%；核电未进今日bottom5；margin adding(chg5 +7.38%)；未触发任何卖出规则"
+    },
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "action": "HOLD",
+      "price": 43.18,
+      "pnl_pct": 0.37,
+      "note": "持仓4日浮盈+0.37%，今日-1.30%；激光设备未进今日bottom5（航天装备-3.98%为邻域冷区），行业冷streak未满3日不触发卖出；距止损40.87尚有约5.4%缓冲"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 13.02,
+      "pnl_pct": 4.08,
+      "note": "持仓4日浮盈+4.08%，今日+1.64%；银行板块逆势拉升、多股创历史新高（输入事件文本）；城商行自2026年7月走强趋势未破；未触发任何卖出规则"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 9.81,
+      "pnl_pct": 1.66,
+      "note": "持仓13日浮盈+1.66%（<3%），15日时间止损倒计时中（13/15，剩2日若仍<3%须机械离场，Rule 5无例外）；航运港口未进bottom5；今日+1.55%；今日不触发，备离场预案"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 6,
+    "totalEquity": 966481.94,
+    "dayPnl": 1065.0,
+    "dayReturnPct": 0.11,
+    "totalReturnPct": -3.35,
+    "unrealizedPnl": 3717.0,
+    "realizedPnl": -37235.06,
+    "cashPct": 75.92
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.5014,
+    "up": 1787,
+    "down": 3564,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 33,
+    "limit_downs": 14,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.50:1, 0/3 major indices green, 33 limit-ups / 14 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "弱势盘：沪指-0.39%/深成-1.31%/创业板-2.34%/科创50-2.91%，涨跌比0.50:1（1787涨/3564跌），33涨停/14跌停，0/3指数翻红。防御性轮动：电视广播+3.81%、小家电+3.24%、铁路公路+1.42%领涨，银行逆势创新高；通信设备-5.02%、元件-4.76%、航天装备-3.98%领跌。IV整体偏悲观（均值Rank 0.577），创业板ETF 0.94/科创50 0.82处于恐慌区。entry_regime=weak仅允许半仓，且候选池无一在今日top5板块内——不开新仓，持仓6只全部HOLD，青岛港时间止损倒计时盯紧。"
+  }
+}

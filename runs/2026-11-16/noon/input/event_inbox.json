@@ -1,0 +1,56 @@
+{
+  "as_of": "2026-11-16",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 20,
+    "new": 1,
+    "pending": 1,
+    "expired": 0,
+    "ai_retired": 0,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 16,
+    "decided": 0,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 3,
+    "fetch_errors": 0,
+    "empty_days": 6,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 1,
+    "kept": 0,
+    "skipped": 1,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261118-e71c5d98",
+        "name": "黄仁勋出席美国国会听证会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司高管国会听证，非系统性政策事件，且与英伟达财报同日，影响已被覆盖"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1479,
+    "tokens_out": 84
+  },
+  "pending_items": []
+}

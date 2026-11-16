@@ -1,0 +1,138 @@
+{
+  "date": "2026-11-16",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1794800126.4312818,
+      "errors": [],
+      "end": 1794800208.323627,
+      "duration_sec": 81.9
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8832,
+      "tokens": {
+        "input_tokens": 220439,
+        "output_tokens": 19113
+      },
+      "rounds": 3,
+      "tool_calls_count": 11,
+      "duration_sec": 246.4,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1794800454.761523,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=52",
+        "Hypothesis: Updated h017 (rule): +1 contradicting evidence → hitRate=94%, n=32",
+        "Hypothesis: Updated h203 (hypothesis): +1 supporting evidence → hitRate=100%, n=4",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-11-16",
+        "status": "ok",
+        "checked": 6,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "000690",
+                "name": "宝新能源",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 5.67,
+                "stopLoss": 5.42,
+                "distance_pct": 4.41,
+                "suggestion": "🟠 WATCH — 4.4% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "601298",
+                "name": "青岛港",
+                "rule": "time_decay",
+                "severity": "INFO",
+                "trading_days": 13,
+                "threshold": 15,
+                "pnl_pct": 1.66,
+                "is_commodity": false,
+                "suggestion": "APPROACHING threshold — 13/15 trading days, PnL=1.7%. Will trigger in 2 days unless PnL reaches 3%. Prepare exit plan — note that Rule 5 allows no event-driven exception, so plan the exit, not a case for it."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1794800456.5524611,
+      "duration_sec": 1.8
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 000690 — 🟠 WATCH — 4.4% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_time_decay: 601298 — APPROACHING threshold — 13/15 trading days, PnL=1.7%. Will trigger in 2 days unless PnL reaches 3%. Prepare exit plan — note that Rule 5 allows no event-driven exception, so plan the exit, not a case for it."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 330.1
+  }
+}
