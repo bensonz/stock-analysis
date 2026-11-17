@@ -228,6 +228,14 @@
       "change_pct": 2.07,
       "action": "HOLD",
       "note": "时间止损第14/15日，PnL+2.07%<3%，规则引擎明示明日（第15日）若仍<3%机械触发SELL；今日不足15日不触发，备离场预案（Rule 5无事件例外）"
+    },
+    {
+      "date": "2026-11-17",
+      "slot": "afternoon",
+      "price": 9.93,
+      "change_pct": 2.9,
+      "action": "HOLD",
+      "note": "持仓14/15日浮盈+2.90%<3%，时间止损明日（第15日）若仍<3%机械触发SELL（Rule 5无事件例外）；今日不足15日不触发，备离场预案"
     }
   ],
   "exitDate": null,
@@ -237,6 +245,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-10-28T15:15:38.208190+08:00",
-  "updatedAt": "2026-11-17T11:42:38.531346+08:00",
+  "updatedAt": "2026-11-17T15:18:55.461303+08:00",
   "trackerVersion": "2.1"
 }

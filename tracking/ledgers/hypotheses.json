@@ -4987,11 +4987,15 @@
           {
             "date": "2026-11-17",
             "detail": "传媒板块单日从领涨反转为领跌（11-16电视广播Ⅱtop1 +3.81% → 11-17影视院线/电视广播/数字媒体/出版包揽bottom5），持仓的出版板块第1天转冷；Rule 1的'冷3日卖出'必须在明日继续核验，不能因个股今日0.0%抗跌就忽视板块引力"
+          },
+          {
+            "date": "2026-11-17",
+            "detail": "弱市里银行/城商行是资金防御主战场（南京银行+5.52%领跑组合），恐慌日防御板块轮动通常延续3-5日；但板块热≠追高，新仓仍须过RPS+MA距离闸门"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 54,
+      "sampleSize": 55,
       "hitRate": 1.0,
       "confidence": 0.982,
       "tags": [
@@ -5008,7 +5012,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-11-16",
+      "lastTested": "2026-11-17",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -5227,11 +5231,15 @@
           {
             "date": "2026-11-16",
             "detail": "恐慌盘hard block再次兑现：涨跌比0.26:1、0/3指数红、68跌停，机械层直接锁死新开仓。即使银行/传媒等逆势红盘板块有合格候选（杭州银行RPS120=93.79甜点区、0风险），也不开新仓——恐慌盘不开仓是对的。"
+          },
+          {
+            "date": "2026-11-17",
+            "detail": "恐慌硬闸再次正确拦截新开仓：breadth 0.32:1、0/3指数收红、84跌停/38涨停，即便中国国贸/瀚蓝环境(VCP PREMIUM)、杭州银行(银行趋势)个体独立过关，也必须new_positions:[]——现金保护优于FOMO追高"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 54,
+      "sampleSize": 55,
       "hitRate": 1.0,
       "confidence": 0.982,
       "tags": [
@@ -7511,9 +7519,9 @@
       "id": "h152",
       "text": "宏发股份价格与基本面持续背离(7天-1.51%)：H1营收+32%净利+19.9%、QFII重仓>20亿、大宗交易1.03亿，但股价不涨。'价格是真理'——不因thesis有效而放宽止损纪律。",
       "type": "observation",
-      "status": "hypothesis",
+      "status": "validated",
       "created": "2026-08-11",
-      "lastTested": "2026-09-16",
+      "lastTested": "2026-11-17",
       "mechanism": "当优质基本面无法推动股价上涨时，往往意味着资金在别处或有未知风险被定价，止损纪律保护资本。",
       "evidence": {
         "supporting": [
@@ -7532,13 +7540,17 @@
           {
             "date": "2026-09-16",
             "detail": "招商轮船(事件驱动·油运)持有10日浮盈仅+2.9%<3%，逼近15日时间止损线；规则无事件例外，若第15日仍未过3%需机械离场，今日-3.12%跌破MA5(20.19)是警示，不加仓。"
+          },
+          {
+            "date": "2026-11-17",
+            "detail": "青岛港时间止损逼近(14/15日,+2.90%)：明日若仍<3%机械SELL。这是'卖错可重入'的成本，不是需要例外的理由——15日无3%涨幅说明入场时机有误"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 4,
+      "sampleSize": 5,
       "hitRate": 1.0,
-      "confidence": 0.833,
+      "confidence": 0.857,
       "tags": [
         "exit-rule",
         "timing"
@@ -9114,13 +9126,17 @@
           {
             "date": "2026-11-17",
             "detail": "青岛港第14日PnL+2.07%，明日第15日若仍<3%必须机械执行时间止损；不因'只差0.9%就到3%'而拖延，Rule 5无事件例外"
+          },
+          {
+            "date": "2026-11-17",
+            "detail": "出版板块今日-5.08%入bottom5，中原传媒为转冷第1天——Rule 1'冷3天才卖'给赢家(+4.28%)留出波动空间，不因单日板块下跌机械卖出，但需连续3日盯紧"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 6,
+      "sampleSize": 7,
       "hitRate": 1.0,
-      "confidence": 0.875,
+      "confidence": 0.889,
       "tags": [
         "exit-rule"
       ],

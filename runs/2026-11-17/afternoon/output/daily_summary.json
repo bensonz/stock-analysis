@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-17",
+  "actions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "price": 5.83,
+      "pnl_pct": 2.28,
+      "note": "持仓4日浮盈+2.28%，未触发-5%硬止损/-3%首3日；火力发电未进top5/bottom5；margin中性，维持持有"
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "price": 14.38,
+      "pnl_pct": 4.28,
+      "note": "浮盈+4.28%未触发任何止损；出版板块今日-5.08%入bottom5（转冷第1天），Rule 1需连续3日bottom30%才卖，今日仅标记并盯紧"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.68,
+      "pnl_pct": 0.0,
+      "note": "浮盈0.0%未触发止损；现价4.68距止损4.45约4.9%（stop_proximity WATCH）需盯紧；核电未进bottom5"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 13.2,
+      "pnl_pct": 5.52,
+      "note": "浮盈+5.52%，城商行Ⅱ自2026年7月走强趋势未破；margin deleveraging(chg5 -11.0%)为警示非卖出信号"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 9.93,
+      "pnl_pct": 2.9,
+      "note": "持仓14/15日浮盈+2.90%<3%，时间止损明日（第15日）若仍<3%机械触发SELL（Rule 5无事件例外）；今日不足15日不触发，备离场预案"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 966575.94,
+    "dayPnl": 412.0,
+    "dayReturnPct": 0.04,
+    "totalReturnPct": -3.34,
+    "unrealizedPnl": 5579.0,
+    "realizedPnl": -39003.06,
+    "cashPct": 81.52
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.3219,
+    "up": 1326,
+    "down": 4119,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 38,
+    "limit_downs": 84,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.32:1, 0/3 major indices green, 38 limit-ups / 84 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "恐慌盘：breadth 0.32:1（涨1326/跌4119），84跌停/38涨停，三大指数全绿（上证-0.50%/深成-0.49%/创业板-1.20%），entry_regime硬闸关闭新开仓。Hot sectors(今日涨跌幅)：小家电+3.84%、贵金属+2.10%、电子化学品Ⅱ+2.05%、黑色家电+1.43%、酒店餐饮+1.41%；Cold sectors：影视院线-8.57%、电视广播Ⅱ-6.40%、数字媒体-6.17%、出版-5.08%、广告营销-5.05%。持仓板块对齐：0/5在热门板块，1/5(出版)入bottom5。IV整体0.706极度恐慌（创业板ETF 1.00/科创50 0.92 vs 50ETF 0.19），资金从成长撤向蓝筹防御。宏观面APEC深圳会议期间避险情绪升温（百度热搜），TMT/传媒深度回调，仅科创50+0.62%独红。结论：持币观望，不新开仓，盯紧青岛港(明日时间止损)与中国广核(距止损4.9%)。"
+  }
+}
