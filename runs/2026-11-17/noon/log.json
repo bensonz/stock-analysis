@@ -1,0 +1,140 @@
+{
+  "date": "2026-11-17",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1794886527.8062441,
+      "errors": [],
+      "end": 1794886605.5479949,
+      "duration_sec": 77.7
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 9592,
+      "tokens": {
+        "input_tokens": 215298,
+        "output_tokens": 25885
+      },
+      "rounds": 3,
+      "tool_calls_count": 9,
+      "duration_sec": 351.8,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1794886957.323197,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=54",
+        "Hypothesis: Updated h151 (rule): +1 supporting evidence → hitRate=100%, n=33",
+        "Hypothesis: Updated h144 (rule): +1 supporting evidence → hitRate=92%, n=12",
+        "Hypothesis: Updated h203 (validated): +1 supporting evidence → hitRate=100%, n=6",
+        "Hypothesis: Created h222 (observation): IV结构极端分裂：50ETF 0.12（极低/蓝筹）vs 创业板ETF 0.99、科创50 0.88（极高/成长），选股必须用个股iv_proxy而非overa...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-11-17",
+        "status": "ok",
+        "checked": 5,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "003816",
+                "name": "中国广核",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 4.64,
+                "stopLoss": 4.45,
+                "distance_pct": 4.09,
+                "suggestion": "🟠 WATCH — 4.1% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "601298",
+                "name": "青岛港",
+                "rule": "time_decay",
+                "severity": "INFO",
+                "trading_days": 14,
+                "threshold": 15,
+                "pnl_pct": 2.07,
+                "is_commodity": false,
+                "suggestion": "APPROACHING threshold — 14/15 trading days, PnL=2.1%. Will trigger in 1 days unless PnL reaches 3%. Prepare exit plan — note that Rule 5 allows no event-driven exception, so plan the exit, not a case for it."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1794886959.2388248,
+      "duration_sec": 1.9
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 003816 — 🟠 WATCH — 4.1% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_time_decay: 601298 — APPROACHING threshold — 14/15 trading days, PnL=2.1%. Will trigger in 1 days unless PnL reaches 3%. Prepare exit plan — note that Rule 5 allows no event-driven exception, so plan the exit, not a case for it."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 431.40000000000003
+  }
+}

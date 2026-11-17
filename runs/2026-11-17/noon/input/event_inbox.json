@@ -1,0 +1,56 @@
+{
+  "as_of": "2026-11-17",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 17,
+    "new": 1,
+    "pending": 1,
+    "expired": 0,
+    "ai_retired": 4,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 14,
+    "decided": 0,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 2,
+    "fetch_errors": 0,
+    "empty_days": 6,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 1,
+    "kept": 1,
+    "skipped": 0,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261204-fbc64ee6",
+        "name": "美国特朗普将对多晶硅及其衍生产品加征关税",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "risk",
+        "reason": "美国对多晶硅加征关税，直接冲击中国光伏产业链出口，对A股相关板块构成下行风险"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1488,
+    "tokens_out": 79
+  },
+  "pending_items": []
+}

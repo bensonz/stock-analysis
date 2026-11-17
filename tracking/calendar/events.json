@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16",
+  "updated": "2026-11-17",
   "note": "手动维护的前瞻事件日历（scripts/event_calendar.py 读取；到期/失效条目请及时清理）。tz=US 的事件影响其后第一个A股交易日。direction: risk(默认)|supportive|two_sided。 【数字纪律】notes 中禁止出现未经复测的数字或\"历史规律\"——任何统计口径的断言必须先用真实数据复测并标注 n 与口径（教训: 2026-08-04 政治局+2%小盘占优系模型folklore, 实测≈0, 见 git log）。 每条必须带 source（URL或可重算的脚本/口径说明）。",
   "events": [
     {
@@ -283,6 +283,20 @@
       "inbox_id": "wscn-20261119-6f690f3d",
       "decided_by": "ai",
       "reason": "中俄美元首会晤涉及大国关系与贸易政策走向，可能系统性影响A股风险偏好"
+    },
+    {
+      "date": "2026-12-04",
+      "tz": "US",
+      "name": "美国特朗普将对多晶硅及其衍生产品加征关税",
+      "kind": "other",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "direction": "risk",
+      "notes": "北京时间 2026-12-04 00:00（华尔街见闻财经日历）",
+      "source": "华尔街见闻财经日历 imp=4",
+      "inbox_id": "wscn-20261204-fbc64ee6",
+      "decided_by": "ai",
+      "reason": "美国对多晶硅加征关税，直接冲击中国光伏产业链出口，对A股相关板块构成下行风险"
     }
   ]
 }

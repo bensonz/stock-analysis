@@ -1,0 +1,79 @@
+{
+  "date": "2026-11-17",
+  "actions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "price": 5.8,
+      "pnl_pct": 1.75,
+      "note": "火力发电未进top5/bottom5，浮盈+1.75%，未触发-5%硬止损/首3日-3%/时间止损；margin中性，维持持有"
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "price": 14.41,
+      "pnl_pct": 4.5,
+      "note": "浮盈+4.50%未触发任何止损；但出版板块今日-3.28%入bottom5（转冷第1天），Rule 1需连续3日bottom30%才卖，今日仅标记并盯紧"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.64,
+      "pnl_pct": -0.85,
+      "note": "浮亏-0.85%未触-5%硬止损（现价4.64距止损4.45约4.09%，stop_proximity WATCH）；今日-3.13%弱势但无机械卖出触发，持有观察"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 13.03,
+      "pnl_pct": 4.16,
+      "note": "浮盈+4.16%，城商行Ⅱ自2026年7月走强趋势未破（输入highlights），未触发任何卖出规则；margin deleveraging(chg5 -11.0%)为警示非卖出信号"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 9.85,
+      "pnl_pct": 2.07,
+      "note": "时间止损第14/15日，PnL+2.07%<3%，规则引擎明示明日（第15日）若仍<3%机械触发SELL；今日不足15日不触发，备离场预案（Rule 5无事件例外）"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 965452.94,
+    "dayPnl": -711.0,
+    "dayReturnPct": -0.07,
+    "totalReturnPct": -3.45,
+    "unrealizedPnl": 4456.0,
+    "realizedPnl": -39003.06,
+    "cashPct": 81.61
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 1.9816,
+    "up": 3545,
+    "down": 1789,
+    "positive_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [
+      "上证指数"
+    ],
+    "limit_ups": 42,
+    "limit_downs": 25,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 1.98:1, 2/3 major indices green, 42 limit-ups / 25 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "科技反弹领涨：科创50 +3.31%、深成指+0.69%、创业板指+0.72%，上证-0.01%微绿；breadth 1.98:1（涨3545/跌1789），42涨停/25跌停，entry_regime=strong（full size）。但两点警示：整体IV rank 0.63偏悲观（50ETF 0.12极低 vs 创业板ETF 0.99/科创50 0.88极高，结构分裂），涨幅分布偏r0_2（2422只仅0-2%），反弹浅。板块：电子化学品Ⅱ(+5.27)/半导体(+3.71)/光学光电子(+3.13)领涨，传媒整体反转领跌（影视院线-5.68/电视广播Ⅱ-4.54/数字媒体-3.39/出版-3.28），油气开采Ⅱ-3.48。策略池约70%候选被RPS>95封顶过滤，甜点区无新候选（多数为重入或已持仓），今日持币不新增。"
+  }
+}

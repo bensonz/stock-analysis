@@ -1,0 +1,81 @@
+{
+  "date": "2026-11-17",
+  "slot": "noon",
+  "run_started_at": "2026-11-17T11:35:05.482965+08:00",
+  "status": "success",
+  "exit_code": 0,
+  "total_duration_sec": 431.4,
+  "phases": {
+    "health_check": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "sources": {
+        "sina": {
+          "status": "ok",
+          "latency_ms": 77.5
+        },
+        "cheesefortune": {
+          "status": "ok",
+          "latency_ms": 5720.4
+        },
+        "pricedb": {
+          "status": "ok",
+          "latest_date": "2026-11-16",
+          "stale": false
+        }
+      }
+    },
+    "preflight_pricedb": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "latest_date": "2026-11-16",
+      "target": "2026-11-16",
+      "snapshot": null,
+      "stock_list": "stock list: 5580 listed, 1 new (920309)"
+    },
+    "collect": {
+      "status": "ok",
+      "duration_sec": 77.7,
+      "errors": []
+    },
+    "llm_analysis": {
+      "status": "ok",
+      "duration_sec": 351.8
+    },
+    "apply": {
+      "status": "ok",
+      "duration_sec": 1.9
+    },
+    "validate": {
+      "status": "warnings",
+      "duration_sec": 0.0,
+      "errors": [
+        "RULE check_stop_proximity: 003816 — 🟠 WATCH — 4.1% above stop. Monitor closely. No immediate action but be ready.",
+        "RULE check_time_decay: 601298 — APPROACHING threshold — 14/15 trading days, PnL=2.1%. Will trigger in 1 days unless PnL reaches 3%. Prepare exit plan — note that Rule 5 allows no event-driven exception, so plan the exit, not a case for it."
+      ]
+    }
+  },
+  "gates": {
+    "phase1_to_phase2": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": []
+    },
+    "phase2_to_phase3": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": []
+    },
+    "phase3_to_phase4": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": [
+        "rule check_stop_proximity: 🟠 WATCH — 4.1% above stop. Monitor closely. No immediate action but be ready.",
+        "rule check_time_decay: APPROACHING threshold — 14/15 trading days, PnL=2.1%. Will trigger in 1 days unless PnL reaches 3%. Prepare exit plan — note that Rule 5 allows no event-driven exception, so plan the exit, not a case for it."
+      ]
+    }
+  }
+}
