@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-11-17",
+  "lastUpdated": "2026-11-18",
   "hypotheses": [
     {
       "id": "h001",
@@ -5012,7 +5012,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-11-17",
+      "lastTested": "2026-11-18",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -5235,13 +5235,17 @@
           {
             "date": "2026-11-17",
             "detail": "恐慌硬闸再次正确拦截新开仓：breadth 0.32:1、0/3指数收红、84跌停/38涨停，即便中国国贸/瀚蓝环境(VCP PREMIUM)、杭州银行(银行趋势)个体独立过关，也必须new_positions:[]——现金保护优于FOMO追高"
+          },
+          {
+            "date": "2026-11-18",
+            "detail": "恐慌盘硬封锁今日生效：breadth 0.19:1（877涨/4578跌）、0/3主要指数红盘，entry_regime hard_block=true、sizing 0×。即使候选技术形态合格（中国神华VCP PREMIUM、瀚蓝环境VCP PREMIUM RPS120甜点区）也全部跳过——机械层权威，不强行开仓、不抢反弹。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 55,
+      "sampleSize": 56,
       "hitRate": 1.0,
-      "confidence": 0.982,
+      "confidence": 0.983,
       "tags": [
         "entry-filter",
         "position-sizing"
@@ -7966,7 +7970,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-08-18",
-      "lastTested": "2026-11-13",
+      "lastTested": "2026-11-18",
       "mechanism": "重入标的往往是已被市场证明弱势的名字，首次离场即是对thesis的否定信号，除非出现新的突破结构，否则大概率延续弱势",
       "evidence": {
         "supporting": [
@@ -8009,13 +8013,17 @@
           {
             "date": "2026-11-13",
             "detail": "国科天成11-12刚止损离场(-3.17%)，今日RPS90.48甜点区再现，但军工板块未热、无新差异化催化、弱市——重入举证责任未满足，跳过。"
+          },
+          {
+            "date": "2026-11-18",
+            "detail": "青岛港第15个交易日PnL+3.63%（10.00 vs 入场9.65）勉强越过时间止损3%门槛，今日不触发卖出。时间止损是机械规则、无事件例外，只在<3%时触发；越线即离场，不能因'只差一点点'放宽。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 10,
+      "sampleSize": 11,
       "hitRate": 1.0,
-      "confidence": 0.917,
+      "confidence": 0.923,
       "tags": [
         "entry-filter"
       ],
@@ -9672,6 +9680,61 @@
       "confidence": 0.6,
       "tags": [
         "position-sizing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h223",
+      "text": "组合板块对齐度今日为0/5热门板块（5持仓全在未进top5的中性板块）。恐慌日防御板块相对抗跌，但一旦反弹风格切换，组合缺乏与强板块共振的仓位，需在breadth修复后向top5板块轮动。",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-11-18",
+      "lastTested": "2026-11-18",
+      "mechanism": "动量系统收益主要来自'强板块里的强股票'共振；全中性持仓在反弹日会跑输。",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-11-18",
+            "detail": "组合板块对齐度今日为0/5热门板块（5持仓全在未进top5的中性板块）。恐慌日防御板块相对抗跌，但一旦反弹风格切换，组合缺乏与强板块共振的仓位，需在breadth修复后向top5板块轮动。"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector",
+        "position-sizing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h224",
+      "text": "IV极度恐慌（avg IV rank 0.7354，创业板ETF 1.0/科创50 0.95）与breadth 0.19:1共振：波动率高位是潜在超卖反弹机会区，但短期剧烈波动下不抢反弹，等breadth修复到1.0+再评估新仓。",
+      "type": "signal",
+      "status": "observation",
+      "created": "2026-11-18",
+      "lastTested": "2026-11-18",
+      "mechanism": "高IV意味着期权定价已计入大幅波动，单边追空/追多都易被双向打脸；现金等待是最好的表达。",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-11-18",
+            "detail": "IV极度恐慌（avg IV rank 0.7354，创业板ETF 1.0/科创50 0.95）与breadth 0.19:1共振：波动率高位是潜在超卖反弹机会区，但短期剧烈波动下不抢反弹，等breadth修复到1.0+再评估新仓。"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "timing"
       ],
       "parentRule": null,
       "retiredDate": null,

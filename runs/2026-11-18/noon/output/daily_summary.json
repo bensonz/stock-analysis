@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-18",
+  "actions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "price": 5.83,
+      "pnl_pct": 2.28,
+      "note": "持仓5日浮盈+2.28%，未触发-5%硬止损/-3%首3日/时间止损；火力发电未进bottom5；margin deleveraging为警示非卖出信号，恐慌盘下维持小仓观望"
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "price": 14.23,
+      "pnl_pct": 3.19,
+      "note": "持仓6日浮盈+3.19%，未触发任何止损；出版板块昨日转冷仅1日、今日未进bottom5，未达'冷3日才卖'标准；今日-1.04%随大盘走弱，持有观察（传媒兄弟板块影视院线/电视广播仍在冷区，盯紧）"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.7,
+      "pnl_pct": 0.43,
+      "note": "持仓6日浮盈+0.43%，未触发止损；核电未进bottom5；margin adding；恐慌盘下防御属性抗跌，持有观察"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 13.25,
+      "pnl_pct": 5.92,
+      "note": "持仓6日浮盈+5.92%，未触发任何卖出规则；城商行Ⅱ自2026年7月走强趋势未破（输入highlights）；margin deleveraging为警示非卖出信号；今日+0.38%逆势红盘"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 10.0,
+      "pnl_pct": 3.63,
+      "note": "持仓15日（时间止损检查日）浮盈+3.63%，现价10.00已越过3%门槛，今日不触发时间止损（Rule 5无事件例外，仅<3%才卖）；距止损9.17空间充足；航运港口未进bottom5"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 966607.94,
+    "dayPnl": 32.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.34,
+    "unrealizedPnl": 5611.0,
+    "realizedPnl": -39003.06,
+    "cashPct": 81.51
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.1916,
+    "up": 877,
+    "down": 4578,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 34,
+    "limit_downs": 28,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.19:1, 0/3 major indices green, 34 limit-ups / 28 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "恐慌盘：breadth 0.19:1（877涨/4578跌），上证-0.40%/深成-0.75%/创业板-0.58%，仅科创50+0.48%；34涨停/28跌停；IV极度恐慌(avg rank 0.7354)。热门板块黑色家电+3.2%（Q3家电利润高增驱动，来源：网易财经异动情报）、元件+2.93%、通信服务+1.78%、油气开采Ⅱ+1.59%、焦炭Ⅱ+1.4%；冷门板块航空装备Ⅱ-4.96%、贵金属-4.88%、电视广播Ⅱ-4.73%、影视院线-3.91%、医疗服务-3.79%。entry_regime hard_block，今日不开新仓，持有防御仓位观望。"
+  }
+}

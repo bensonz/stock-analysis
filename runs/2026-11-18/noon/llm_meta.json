@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 185053,
+  "output_tokens": 13850,
+  "rounds": 3,
+  "duration_sec": 159.7,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月18日 大跌 原因 涨跌停 板块",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "黑色家电 元件 通信服务 板块 上涨 原因 2026年11月",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "油气开采 焦炭 板块 上涨 原因 2026年11月",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 恐慌 下跌 创业板 上证 2026年11月18日",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+今日+板块+涨跌+2026年11月18日",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=黑色家电+元件+油气开采+板块+上涨",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}

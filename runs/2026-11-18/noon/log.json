@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-18",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1794972921.985078,
+      "errors": [],
+      "end": 1794972964.080218,
+      "duration_sec": 42.1
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 6788,
+      "tokens": {
+        "input_tokens": 185053,
+        "output_tokens": 13850
+      },
+      "rounds": 3,
+      "tool_calls_count": 6,
+      "duration_sec": 159.7,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1794973123.821584,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=56",
+        "Hypothesis: Updated h165 (rule): +1 supporting evidence → hitRate=100%, n=11",
+        "Hypothesis: Created h223 (observation): 组合板块对齐度今日为0/5热门板块（5持仓全在未进top5的中性板块）。恐慌日防御板块相对抗跌，但一旦反弹风格切换，组合缺乏与强板块共振的仓位，需在breadt...",
+        "Hypothesis: Created h224 (observation): IV极度恐慌（avg IV rank 0.7354，创业板ETF 1.0/科创50 0.95）与breadth 0.19:1共振：波动率高位是潜在超卖反弹机会区...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-11-18",
+        "status": "ok",
+        "checked": 5,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "end": 1794973125.375118,
+      "duration_sec": 1.6
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 203.39999999999998
+  }
+}
