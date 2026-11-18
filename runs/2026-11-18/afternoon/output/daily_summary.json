@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-18",
+  "actions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "price": 5.88,
+      "pnl_pct": 3.16,
+      "note": "持仓5日浮盈+3.16%，未触发-5%硬止损/首3日-3%/时间止损；火力发电未进bottom5；margin deleveraging为警示非卖出信号，恐慌盘下防御属性持有观察"
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "price": 14.4,
+      "pnl_pct": 4.42,
+      "note": "持仓6日浮盈+4.42%未触发任何止损；出版板块11-17转冷仅1日、今日未进bottom5，未达'冷3日才卖'标准；关联板块影视院线/电视广播仍在冷区、文化传媒概念午评走弱（新浪财经），需盯紧冷区计数"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.71,
+      "pnl_pct": 0.64,
+      "note": "持仓6日浮盈+0.64%未触发止损；核电未进bottom5；margin adding；IV高位(500ETF深0.88)但恐慌盘下防御属性抗跌，持有观察"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 13.27,
+      "pnl_pct": 6.08,
+      "note": "持仓6日浮盈+6.08%未触发任何卖出规则；城商行Ⅱ自2026年7月走强趋势未破（输入highlights）；margin deleveraging为警示非卖出信号"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 9.98,
+      "pnl_pct": 3.42,
+      "note": "时间止损第15日浮盈+3.42%越过3%门槛，不触发时间止损（Rule 5无事件例外）；航运港口今日+1.96%居top5第4；距止损9.17空间充足"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 967477.94,
+    "dayPnl": 902.0,
+    "dayReturnPct": 0.09,
+    "totalReturnPct": -3.25,
+    "unrealizedPnl": 6481.0,
+    "realizedPnl": -39003.06,
+    "cashPct": 81.44
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.3189,
+    "up": 1318,
+    "down": 4133,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 43,
+    "limit_downs": 48,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.32:1, 3/3 major indices green, 43 limit-ups / 48 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "2026-11-18 市场广度极度弱势：上涨1318家/下跌4133家，涨跌比0.32:1，跌停48家(>30阈值)、涨停43家；上证+0.09%/深成+0.2%/创业板+0.85%/科创50+2.19%三指数翻红但属权重与科技股撑起的窄幅行情（新浪财经午评：沪指半日跌0.4%、超4500只飘绿，影视院线/贵金属/文化传媒走弱）。热门板块：元件+4.86%、通信服务+2.88%、黑色家电+2.76%、航运港口+1.96%、IT服务Ⅱ+1.84%；冷区：贵金属-4.65%、电视广播Ⅱ-4.37%、航空装备Ⅱ-4.13%、医疗美容-3.79%、影视院线-3.33%。持仓5/5均在非冷区，1只(青岛港)在热门板块。IV情绪极度恐慌(平均IV rank 0.728，500ETF/创业板/科创IV rank均>0.88)。entry_regime=panic硬阻断：今日不开新仓。注：输入仅提供当日板块涨跌幅，无5日数据。"
+  }
+}

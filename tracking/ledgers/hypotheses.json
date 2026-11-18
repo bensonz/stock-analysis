@@ -1286,7 +1286,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-11-13",
+      "lastTested": "2026-11-18",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1733,11 +1733,15 @@
           {
             "date": "2026-11-13",
             "detail": "四会富仕RPS120=90.89甜点区、MA距离全合规，但所属元件板块今日-5.49%列bottom1，Rule 1一票否决——个股动量再好也扛不住板块重力。"
+          },
+          {
+            "date": "2026-11-18",
+            "detail": "贵金属-4.65%领跌与元件+4.86%/通信服务+2.88%领涨并存，是前期避险/资源涨幅大的获利了结轮动而非全面离场；冷区板块应视为硬禁区(h019)"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 111,
+      "sampleSize": 112,
       "hitRate": 1.0,
       "confidence": 0.991,
       "tags": [
@@ -5239,11 +5243,19 @@
           {
             "date": "2026-11-18",
             "detail": "恐慌盘硬封锁今日生效：breadth 0.19:1（877涨/4578跌）、0/3主要指数红盘，entry_regime hard_block=true、sizing 0×。即使候选技术形态合格（中国神华VCP PREMIUM、瀚蓝环境VCP PREMIUM RPS120甜点区）也全部跳过——机械层权威，不强行开仓、不抢反弹。"
+          },
+          {
+            "date": "2026-11-18",
+            "detail": "指数与广度背离的交易日（上证+0.09%/科创50+2.19%但下跌4133家、跌停48家）是最危险的开仓环境——机械层breadth 0.32:1硬阻断正确地把新仓降为0，指数红盘不是入场理由"
+          },
+          {
+            "date": "2026-11-18",
+            "detail": "海信视像（黑色家电top3、RPS120=94.82、0风险、MA距离全合规）本可通过全部买入门槛，唯一拦截是恐慌盘硬阻断——这正是硬阻断机制的价值：在最强候选面前仍持现金"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 56,
+      "sampleSize": 58,
       "hitRate": 1.0,
       "confidence": 0.983,
       "tags": [
@@ -9107,7 +9119,7 @@
       "type": "rule",
       "status": "validated",
       "created": "2026-09-23",
-      "lastTested": "2026-11-17",
+      "lastTested": "2026-11-18",
       "mechanism": "单日情绪波动与趋势转冷是两种信号，需连续确认而非单点触发",
       "evidence": {
         "supporting": [
@@ -9138,13 +9150,17 @@
           {
             "date": "2026-11-17",
             "detail": "出版板块今日-5.08%入bottom5，中原传媒为转冷第1天——Rule 1'冷3天才卖'给赢家(+4.28%)留出波动空间，不因单日板块下跌机械卖出，但需连续3日盯紧"
+          },
+          {
+            "date": "2026-11-18",
+            "detail": "青岛港时间止损第15日以+3.42%越过3%门槛幸存，验证'冷3日才卖/时间止损'机械规则给临界赢家留波动空间，避免在临界点情绪化卖出"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 7,
+      "sampleSize": 8,
       "hitRate": 1.0,
-      "confidence": 0.889,
+      "confidence": 0.9,
       "tags": [
         "exit-rule"
       ],

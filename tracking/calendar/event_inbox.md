@@ -14,7 +14,7 @@
 > `date`、`tz` (US=影响其后第一个A股交易日 / CN=当日)、`kind`、`note`。不要改 `ai:`、`src:` 和 `id:` 三行（🤖 可留可删）。
 > 标题日期 = A股影响日，由 date+tz 推算，重写时刷新。规则与局限: docs/EVENT_INBOX/DECISIONS.md
 
-_更新: 2026-11-18 · 共 16 条 · 待定 0 条_
+_更新: 2026-11-18 · 共 17 条 · 待定 0 条_
 
 ## 2026-11-18 (T-0) 美国 — 美国微软开发者与IT大会（Microsoft Ignite）
 - [-] keep 🤖   impact: low   direction: two_sided
@@ -111,6 +111,14 @@ _更新: 2026-11-18 · 共 16 条 · 待定 0 条_
   ai: 跳过 · low/two_sided · 中美AI对话为事务性沟通，非系统性政策事件，对A股整体影响有限（deepseek-v4-pro，2026-10-13）
   src: wallstreetcn imp=4 北京 2026-11-27 12:02 |
   id: wscn-20261127-77abe93e
+
+## 2026-12-02 (T-14) 美国 — 黄仁勋12月1日出席美国国会听证会
+- [-] keep 🤖   impact: low   direction: two_sided
+  date: 2026-12-01   tz: US   kind: other
+  note:
+  ai: 跳过 · low/two_sided · 单一公司高管国会听证，非系统性政策事件，对A股整体影响有限（deepseek-v4-pro，2026-11-18）
+  src: wallstreetcn imp=4 北京 2026-12-01 12:02 |
+  id: wscn-20261201-76439df1
 
 ## 2026-12-07 (T-19) 美国 — 美国特朗普将对多晶硅及其衍生产品加征关税
 - [x] keep 🤖   impact: medium   direction: risk
