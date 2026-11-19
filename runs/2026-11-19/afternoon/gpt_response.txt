@@ -1,0 +1,209 @@
+# 研究备忘录（Research Memo）
+
+**说明**：本轮 web 检索受限——Tavily 检索接口返回 432 用量超限，百度抓取仅返回页面框架、无有效正文。因此本备忘录的所有数字与判断一律回落到输入数据（breadth / entry_regime / position_prices / enriched_candidates），符合 Traceability 纪律。
+
+## 1. Market Regime — 恐慌盘，机械硬封锁
+
+- 涨跌家数 649 / 4876，**breadth = 0.13:1**，3 大指数全绿（上证 -0.28%、深成 -0.71%、创业板 -0.79%），仅科创50 +1.83%。
+- 涨停 28 / **跌停 83**（f10=83）。
+- `entry_regime`：`regime=panic`，`hard_block=true`，`allow_new_positions=false`，`sizing_multiplier=0.0`。
+- 按规则，这是**唯一的机械硬封锁**：up/down < 0.35:1 且 f10≥30 同时满足 → **今日禁止任何新开仓**。判断层叠加后结论一致：new_positions 必须为 `[]`。
+- IV 面：500ETF(iv_rank 0.95)、创业板ETF(0.92)、500ETF深(0.92)、科创50(0.81) 均极高——恐慌情绪浓重；300ETF 0.55 偏高、50ETF 0.26 中性。整体 `overall_sentiment=偏悲观`。
+
+## 2. Sector Analysis — 防御板块抱团，传媒/科技领跌
+
+- Top5（均为防御/消费，涨幅极弱 0.78%~1.37%）：白色家电 +1.37%、航空机场 +1.23%、饮料乳品 +1.23%、摩托车及其他 +0.8%、调味发酵品Ⅱ +0.78%。
+- Bottom5：林业Ⅱ -6.87%、数字媒体 -5.48%、厨卫电器 -5.45%、照明设备Ⅱ -4.5%、影视院线 -4.3%。
+- 轮动信号：资金从科技硬件与传媒撤离、抱团防御消费；这不是进攻性动量，而是避险性防守。涨幅榜没有一条有"加速"动量。
+- **持仓对齐**：5 只持仓全部在中游防御板块（火电/核电/城商行/港口/出版），**0/5 在今日 top5，0/5 在 bottom5**——无一触发"板块冷 3 日才卖"。
+
+## 3. Position Review（5 只全 HOLD）
+
+| 代码 | 名称 | 入场 | 现价 | PnL | 持有日 | 结论 |
+|---|---|---|---|---|---|---|
+| 000690 | 宝新能源 | 5.70 | 5.85 | +2.6% | 6 | HOLD，火电未入bottom5，距止损充足 |
+| 000719 | 中原传媒 | 13.79 | 14.38 | +4.3% | 7 | HOLD，出版未入bottom5（关联子行业数字媒体/影视院线在冷区，盯紧） |
+| 003816 | 中国广核 | 4.68 | 4.64 | -0.9% | 7 | HOLD，**stop_proximity WATCH（距4.45止损仅4.09%）**，盯紧 |
+| 601009 | 南京银行 | 12.51 | 13.25 | +5.9% | 7 | HOLD，城商行走强趋势未破 |
+| 601298 | 青岛港 | 9.65 | 10.07 | +4.4% | 16 | HOLD，时间止损15日但+4.4%>3% → **不触发** |
+
+- 无一只触发 -5% 硬止损、-3% 首3日、+10% 保本上移、15日时间止损（青岛港 +4.4% 越过 3% 门槛）。
+- 换仓纪律检查：positionsUsed=5 < positionsMax=10，未满仓，且恐慌封锁禁止新仓 → **不触发换仓**。
+- 唯一警示：003816 距止损 4.09%（WATCH 级），恐慌盘下有跳空风险，按 h024 若继续下探应主动处理，但今日不卖。
+
+## 4. New Entry Candidates — 全部冻结
+
+恐慌硬封锁下不做个股甄别。策略池/富化候选中有若干"个股层面合格"的标的（600007 中国国贸 VCP PREMIUM、600398 海澜之家 VCP QUALITY、601077 渝农商行、600323 瀚蓝环境 VCP QUALITY），但市场闸门关闭，一律 skip——这正是 h077 反复验证的正确行为（硬封锁阻止 FOMO 入场）。
+
+## 5. Skip List（简因）
+
+- 600007 中国国贸：恐慌硬封锁；房地产/商业地产不在 top30%。
+- 600398 海澜之家：恐慌硬封锁；纺织服饰不在 top30%。
+- 601088 中国神华：RPS120 95.79 > 95%（Rule 2 封顶，过热），且恐慌封锁。
+- 601077 渝农商行：恐慌硬封锁；银行防御但非动量领涨。
+- 600323 瀚蓝环境：恐慌硬封锁；环保不在 top30%。
+- 600060 海信视像：恐慌硬封锁；黑色家电非今日 top1 的"白色家电"。
+
+## 6. Learnings & 7. Uncertainty Flags
+
+见下方 JSON 的 `new_learnings`。不确定性：外部检索不可用，板块轮动背后驱动新闻（如为何恐慌）无法外部验证，仅能依据输入数据下的机械读数；003816 是否会在下个交易日继续下探逼近止损，是唯一需要盯紧的持仓风险点。
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "白色家电", "5d_pct": 1.37, "trend": "defensive"},
+      {"name": "航空机场", "5d_pct": 1.23, "trend": "defensive"},
+      {"name": "饮料乳品", "5d_pct": 1.23, "trend": "defensive"},
+      {"name": "摩托车及其他", "5d_pct": 0.8, "trend": "defensive"},
+      {"name": "调味发酵品Ⅱ", "5d_pct": 0.78, "trend": "defensive"}
+    ],
+    "cold_sectors": [
+      {"name": "林业Ⅱ", "5d_pct": -6.87, "trend": "deteriorating"},
+      {"name": "数字媒体", "5d_pct": -5.48, "trend": "deteriorating"},
+      {"name": "厨卫电器", "5d_pct": -5.45, "trend": "deteriorating"},
+      {"name": "照明设备Ⅱ", "5d_pct": -4.5, "trend": "deteriorating"},
+      {"name": "影视院线", "5d_pct": -4.3, "trend": "deteriorating"}
+    ],
+    "position_alignment": "0/5 持仓在今日top5热门板块；5只持仓全部在中游防御板块（火电/核电/城商行/港口/出版），0只在bottom5",
+    "regime": "恐慌杀跌：资金从科技硬件与传媒撤出，抱团白电/航空/乳品等防御消费，非进攻性动量"
+  },
+  "position_decisions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "reason": "持仓6日浮盈+2.6%，未触发-5%硬止损/-3%首3日/15日时间止损；火力发电未入bottom5；margin deleveraging为警示非卖出信号，恐慌盘下防御属性持有",
+      "sector_rank": "中游（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 2.6,
+      "days_held": 6,
+      "exit_price": null
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "reason": "持仓7日浮盈+4.3%，未触发任何止损；出版本身未入bottom5（数字媒体-5.48%/影视院线-4.3%为关联冷区子行业，需盯冷区计数），11-17曾入bottom5仅1日，未达'冷3日才卖'标准",
+      "sector_rank": "中游偏弱（出版未入bottom5，关联传媒子行业在冷区）",
+      "new_stop": null,
+      "pnl_pct": 4.3,
+      "days_held": 7,
+      "exit_price": null
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "reason": "持仓7日浮亏-0.9%，未触发-5%硬止损；核电未入bottom5；但stop_proximity WATCH（现价4.64距止损4.45仅4.09%），恐慌盘下有跳空风险，按h024若继续下探应主动处理，今日不卖",
+      "sector_rank": "中游（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": -0.9,
+      "days_held": 7,
+      "exit_price": null
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "reason": "持仓7日浮盈+5.9%，未触发任何卖出规则；城商行自2026年7月走强趋势未破（输入highlights）；margin deleveraging为警示非卖出信号",
+      "sector_rank": "中游（未入top5/bottom5，城商行趋势未破）",
+      "new_stop": null,
+      "pnl_pct": 5.9,
+      "days_held": 7,
+      "exit_price": null
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "持仓16日浮盈+4.4%>3%，15日时间止损不触发（Rule 5仅<3%才卖，无事件例外）；航运港口未入bottom5；距止损9.17空间充足",
+      "sector_rank": "中游（未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 4.4,
+      "days_held": 16,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600007",
+      "name": "中国国贸",
+      "reason": "恐慌硬封锁（breadth 0.13:1、83跌停）禁止新开仓；VCP PREMIUM/RPS120 94.88个股层面合格，但房地产/商业地产不在top30%",
+      "rps120": 94.88
+    },
+    {
+      "code": "600398",
+      "name": "海澜之家",
+      "reason": "恐慌硬封锁禁止新开仓；VCP QUALITY/RPS120 93.54合格，但纺织服饰不在top30%",
+      "rps120": 93.54
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "reason": "RPS120 95.79>95%触发Rule 2封顶（过热），且恐慌硬封锁禁止新开仓",
+      "rps120": 95.79
+    },
+    {
+      "code": "601077",
+      "name": "渝农商行",
+      "reason": "恐慌硬封锁禁止新开仓；银行防御但非今日动量领涨方向",
+      "rps120": 93.25
+    },
+    {
+      "code": "600323",
+      "name": "瀚蓝环境",
+      "reason": "恐慌硬封锁禁止新开仓；VCP QUALITY/RPS120 91.95，但环保不在top30%",
+      "rps120": 91.95
+    },
+    {
+      "code": "600060",
+      "name": "海信视像",
+      "reason": "恐慌硬封锁禁止新开仓；黑色家电（彩电）非今日top1的白色家电，且IV(300ETF)0.55偏高",
+      "rps120": 94.77
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌硬封锁（breadth 0.13:1 + 83跌停，0/3指数收红）下 new_positions 必须为空——即使600007中国国贸(VCP PREMIUM)、600398海澜之家(VCP QUALITY)等个股层面合格也必须skip，现金保护优先于任何个股质量",
+      "type": "rule",
+      "tags": ["entry-filter", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "跌停83家表明流动性/情绪双杀，任何新仓都面临次日跳空低开风险，机械硬封锁是唯一正确的防线"
+    },
+    {
+      "text": "15日时间止损只对<3%浮盈触发——青岛港持仓16日+4.4%不触发，'让赢家跑'纪律再次兑现；3%门槛为赢家波动留出空间，避免机械性过早离场",
+      "type": "observation",
+      "tags": ["exit-rule", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "时间止损针对的是'不涨的仓位'，而非'涨得慢的仓位'；+3%以上已证明趋势有效"
+    },
+    {
+      "text": "风险偏好收缩日的防御板块轮动特征：今日top5全部为白电/航空机场/饮料乳品/摩托/调味品等防御消费（涨幅仅0.78~1.37%），bottom5为林业/数字媒体/厨电/照明/影视；5只持仓全在中游防御板块、0只在bottom5，未触发'冷3日才卖'",
+      "type": "observation",
+      "tags": ["sector", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "恐慌日资金抱团防御、撤离科技与传媒；防御持仓因不在冷区而获持有资格，但也不构成加仓理由"
+    },
+    {
+      "text": "中国广核距止损4.09%触发stop_proximity WATCH：恐慌盘下科创板/核电类标的跳空风险会快速吞噬剩余缓冲，应主动盯防而非等精确触发",
+      "type": "signal",
+      "tags": ["exit-rule", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "距止损越近，一笔低开即可击穿；恐慌盘流动性差使机械止损执行价恶化，主动处理优于被动触发"
+    }
+  ],
+  "market_summary": "2026-11-19恐慌杀跌日：上涨649/下跌4876，breadth 0.13:1，0/3主要指数收红（上证-0.28%/深成-0.71%/创业板-0.79%），28涨停/83跌停，entry_regime=panic硬封锁禁止新开仓。资金涌入白电(+1.37%)/航空机场(+1.23%)/饮料乳品(+1.23%)等防御板块，传媒(数字媒体-5.48%/影视院线-4.3%)与科技硬件领跌。IV面500ETF(0.95)/创业板ETF(0.92)/500ETF深(0.92)极高，恐慌情绪浓重。持仓5只均在中游防御板块、0只在bottom5，全部持有；中国广核距止损4.09%需盯紧。",
+  "market_sentiment": "bearish",
+  "market_call": "防守观望"
+}
+```

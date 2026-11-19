@@ -1,0 +1,62 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 144932,
+  "output_tokens": 9926,
+  "rounds": 2,
+  "duration_sec": 187.7,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月19日 大跌 跌停 原因",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "白色家电 板块 上涨 原因 2026年11月",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 市场恐慌 跌停潮 防御板块 轮动",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+今日",
+        "maxChars": 4000
+      },
+      "result_length": 4059
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=白色家电+航空机场+饮料乳品+上涨",
+        "maxChars": 4000
+      },
+      "result_length": 4059
+    }
+  ],
+  "fallback_used": false
+}

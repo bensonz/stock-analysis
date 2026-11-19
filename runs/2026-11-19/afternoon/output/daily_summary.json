@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-19",
+  "actions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "price": 5.85,
+      "pnl_pct": 2.6,
+      "note": "持仓6日浮盈+2.6%，未触发-5%硬止损/-3%首3日/15日时间止损；火力发电未入bottom5；margin deleveraging为警示非卖出信号，恐慌盘下防御属性持有"
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "price": 14.38,
+      "pnl_pct": 4.3,
+      "note": "持仓7日浮盈+4.3%，未触发任何止损；出版本身未入bottom5（数字媒体-5.48%/影视院线-4.3%为关联冷区子行业，需盯冷区计数），11-17曾入bottom5仅1日，未达'冷3日才卖'标准"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.64,
+      "pnl_pct": -0.9,
+      "note": "持仓7日浮亏-0.9%，未触发-5%硬止损；核电未入bottom5；但stop_proximity WATCH（现价4.64距止损4.45仅4.09%），恐慌盘下有跳空风险，按h024若继续下探应主动处理，今日不卖"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 13.25,
+      "pnl_pct": 5.9,
+      "note": "持仓7日浮盈+5.9%，未触发任何卖出规则；城商行自2026年7月走强趋势未破（输入highlights）；margin deleveraging为警示非卖出信号"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 10.07,
+      "pnl_pct": 4.4,
+      "note": "持仓16日浮盈+4.4%>3%，15日时间止损不触发（Rule 5仅<3%才卖，无事件例外）；航运港口未入bottom5；距止损9.17空间充足"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 966966.94,
+    "dayPnl": -511.0,
+    "dayReturnPct": -0.05,
+    "totalReturnPct": -3.3,
+    "unrealizedPnl": 5970.0,
+    "realizedPnl": -39003.06,
+    "cashPct": 81.48
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.1331,
+    "up": 649,
+    "down": 4876,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 28,
+    "limit_downs": 83,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.13:1, 0/3 major indices green, 28 limit-ups / 83 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "2026-11-19恐慌杀跌日：上涨649/下跌4876，breadth 0.13:1，0/3主要指数收红（上证-0.28%/深成-0.71%/创业板-0.79%），28涨停/83跌停，entry_regime=panic硬封锁禁止新开仓。资金涌入白电(+1.37%)/航空机场(+1.23%)/饮料乳品(+1.23%)等防御板块，传媒(数字媒体-5.48%/影视院线-4.3%)与科技硬件领跌。IV面500ETF(0.95)/创业板ETF(0.92)/500ETF深(0.92)极高，恐慌情绪浓重。持仓5只均在中游防御板块、0只在bottom5，全部持有；中国广核距止损4.09%需盯紧。"
+  }
+}

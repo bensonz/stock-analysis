@@ -2577,7 +2577,7 @@
       "type": "signal",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-11-16",
+      "lastTested": "2026-11-19",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -2708,6 +2708,10 @@
           {
             "date": "2026-11-16",
             "detail": "锐科激光4日内从+3.21%转为-3.16%，单日-4.78%、盘中最低距止损仅0.8%——科技链(通信设备-8.69%/元件-8.66%/半导体-5.99%)轮动出清时，前期强势的激光设备跟随补跌。stop_proximity CRITICAL应主动离场不等精确触发。"
+          },
+          {
+            "date": "2026-11-19",
+            "detail": "中国广核距止损4.09%触发stop_proximity WATCH：恐慌盘下科创板/核电类标的跳空风险会快速吞噬剩余缓冲，应主动盯防而非等精确触发"
           }
         ],
         "contradicting": [
@@ -2721,9 +2725,9 @@
           }
         ]
       },
-      "sampleSize": 34,
-      "hitRate": 0.941,
-      "confidence": 0.917,
+      "sampleSize": 35,
+      "hitRate": 0.943,
+      "confidence": 0.919,
       "tags": [
         "exit-rule",
         "timing"
@@ -5255,11 +5259,15 @@
           {
             "date": "2026-11-19",
             "detail": "恐慌盘硬阻断（广度0.19:1、0/3指数红、22跌停）下，瀚蓝环境（PREMIUM VCP+dist_ma20仅1.9%）、中国国贸（QUALITY VCP+dist_ma5仅0.5%）这类高质量候选也不得入场——机械层hard_block正确压制了V1式FOMO"
+          },
+          {
+            "date": "2026-11-19",
+            "detail": "恐慌硬封锁（breadth 0.13:1 + 83跌停，0/3指数收红）下 new_positions 必须为空——即使600007中国国贸(VCP PREMIUM)、600398海澜之家(VCP QUALITY)等个股层面合格也必须skip，现金保护优先于任何个股质量"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 59,
+      "sampleSize": 60,
       "hitRate": 1.0,
       "confidence": 0.984,
       "tags": [
@@ -9470,22 +9478,26 @@
       "id": "h214",
       "text": "油运/原油周线级动能与单日板块榜可背离：今日单日top5是科技，但输入events显示Brent原油周+6.84%/月+18.61%、中国石油10-26创18年新高(网易/每经)、BDTI油运指数月+37.72%。判断板块是否trending up需结合商品价格与产业数据，不能只看当日板块涨跌榜。",
       "type": "signal",
-      "status": "observation",
+      "status": "hypothesis",
       "created": "2026-10-28",
-      "lastTested": "2026-10-28",
+      "lastTested": "2026-11-19",
       "mechanism": "单日板块涨跌受资金轮动主导，周线级板块趋势由商品/运价/景气决定，两者时间尺度不同",
       "evidence": {
         "supporting": [
           {
             "date": "2026-10-28",
             "detail": "油运/原油周线级动能与单日板块榜可背离：今日单日top5是科技，但输入events显示Brent原油周+6.84%/月+18.61%、中国石油10-26创18年新高(网易/每经)、BDTI油运指数月+37.72%。判断板块是否trending up需结合商品价格与产业数据，不能只看当日板块涨跌榜。"
+          },
+          {
+            "date": "2026-11-19",
+            "detail": "风险偏好收缩日的防御板块轮动特征：今日top5全部为白电/航空机场/饮料乳品/摩托/调味品等防御消费（涨幅仅0.78~1.37%），bottom5为林业/数字媒体/厨电/照明/影视；5只持仓全在中游防御板块、0只在bottom5，未触发'冷3日才卖'"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 1,
+      "sampleSize": 2,
       "hitRate": 1.0,
-      "confidence": 0.6,
+      "confidence": 0.75,
       "tags": [
         "sector",
         "timing"
@@ -9762,6 +9774,34 @@
       "hitRate": 1.0,
       "confidence": 0.6,
       "tags": [
+        "timing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h225",
+      "text": "15日时间止损只对<3%浮盈触发——青岛港持仓16日+4.4%不触发，'让赢家跑'纪律再次兑现；3%门槛为赢家波动留出空间，避免机械性过早离场",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-11-19",
+      "lastTested": "2026-11-19",
+      "mechanism": "时间止损针对的是'不涨的仓位'，而非'涨得慢的仓位'；+3%以上已证明趋势有效",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-11-19",
+            "detail": "15日时间止损只对<3%浮盈触发——青岛港持仓16日+4.4%不触发，'让赢家跑'纪律再次兑现；3%门槛为赢家波动留出空间，避免机械性过早离场"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "exit-rule",
         "timing"
       ],
       "parentRule": null,

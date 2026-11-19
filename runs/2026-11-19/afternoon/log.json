@@ -1,0 +1,126 @@
+{
+  "date": "2026-11-19",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1795071967.011169,
+      "errors": [],
+      "end": 1795072022.83794,
+      "duration_sec": 55.8
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 7670,
+      "tokens": {
+        "input_tokens": 144932,
+        "output_tokens": 9926
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 187.7,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1795072210.586661,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=60",
+        "Hypothesis: Created h225 (observation): 15日时间止损只对<3%浮盈触发——青岛港持仓16日+4.4%不触发，'让赢家跑'纪律再次兑现；3%门槛为赢家波动留出空间，避免机械性过早离场...",
+        "Hypothesis: Updated h214 (hypothesis): +1 supporting evidence → hitRate=100%, n=2",
+        "Hypothesis: Updated h024 (rule): +1 supporting evidence → hitRate=94%, n=35",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-11-19",
+        "status": "ok",
+        "checked": 5,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 1,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "003816",
+                "name": "中国广核",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 4.64,
+                "stopLoss": 4.45,
+                "distance_pct": 4.09,
+                "suggestion": "🟠 WATCH — 4.1% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1795072212.483649,
+      "duration_sec": 1.9
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 003816 — 🟠 WATCH — 4.1% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 245.39999999999998
+  }
+}
