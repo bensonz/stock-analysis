@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-19",
+  "actions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "price": 5.91,
+      "pnl_pct": 3.68,
+      "note": "持仓6日浮盈+3.68%，未触发-5%硬止损/首3日-3%/时间止损；火力发电未列top5/bottom5；今日+0.51%逆势收红；margin deleveraging为警示非卖出信号"
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "price": 14.5,
+      "pnl_pct": 5.15,
+      "note": "持仓7日浮盈+5.15%，未触发任何止损；出版板块未列bottom5（数字媒体-3.44%入bottom5但出版为不同子行业），11-17曾入bottom5仅1日，未达'冷3日才卖'；今日+0.69%逆势收红"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.66,
+      "pnl_pct": -0.43,
+      "note": "持仓7日浮亏-0.43%，未触发-5%硬止损；核电未列bottom5；stop_proximity WATCH（现价4.66距止损4.45约4.5%）需盯紧，若继续下探按h024主动处理；今日-1.06%"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 13.22,
+      "pnl_pct": 5.68,
+      "note": "持仓7日浮盈+5.68%，未触发任何卖出规则；城商行自2026年7月走强趋势未破（输入highlights，检索佐证11-13城商行创历史新高但内部个股分化）；margin deleveraging为警示非卖出信号；今日-0.38%"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 10.0,
+      "pnl_pct": 3.63,
+      "note": "持仓16日浮盈+3.63%>3%，时间止损未触发（Rule 5仅<3%才卖，无事件例外）；航运港口未列bottom5；今日+0.20%"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 967497.94,
+    "dayPnl": 20.0,
+    "dayReturnPct": 0.0,
+    "totalReturnPct": -3.25,
+    "unrealizedPnl": 6501.0,
+    "realizedPnl": -39003.06,
+    "cashPct": 81.44
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.1938,
+    "up": 890,
+    "down": 4592,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 23,
+    "limit_downs": 22,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.19:1, 0/3 major indices green, 23 limit-ups / 22 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "广度0.19:1（890涨/4592跌），涨停23/跌停22，上证-0.44%、深成-0.51%、创业板-0.63%全绿，仅科创50+0.98%逆势；IV极度恐慌（avg IV rank 0.72，500ETF/创业板ETF 0.94，300ETF 0.60）。entry_regime=panic机械硬阻断新开仓。板块无真正热点：top5涨幅全部<1.5%（电子化学品Ⅱ+1.48%领涨），bottom5跌幅-3.4%~-4.9%（板块涨跌幅为当日口径，输入未提供5日/20日板块数据）。持仓5只全部HOLD，0只触发卖出规则。"
+  }
+}

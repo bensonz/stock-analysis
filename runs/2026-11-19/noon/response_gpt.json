@@ -1,0 +1,173 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": 1.48,
+        "trend": "勉强收红"
+      },
+      {
+        "name": "摩托车及其他",
+        "5d_pct": 1.26,
+        "trend": "勉强收红"
+      },
+      {
+        "name": "航空机场",
+        "5d_pct": 1.08,
+        "trend": "勉强收红"
+      },
+      {
+        "name": "黑色家电",
+        "5d_pct": 0.97,
+        "trend": "勉强收红"
+      },
+      {
+        "name": "调味发酵品Ⅱ",
+        "5d_pct": 0.93,
+        "trend": "勉强收红"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "厨卫电器",
+        "5d_pct": -4.89,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": -4.63,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "渔业",
+        "5d_pct": -3.63,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": -3.44,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "照明设备Ⅱ",
+        "5d_pct": -3.35,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/5 持仓在当日top5热门板块；火力发电/核电/城商行/出版/航运港口均处中游或偏冷",
+    "regime": "极度恐慌：广度0.19:1，top5板块涨幅全部<1.5%，防御与题材散乱"
+  },
+  "position_decisions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "reason": "持仓6日浮盈+3.68%，未触发-5%硬止损/首3日-3%/时间止损；火力发电未列top5/bottom5；今日+0.51%逆势收红；margin deleveraging为警示非卖出信号",
+      "sector_rank": "中游（火力发电未列当日top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 3.68,
+      "days_held": 6,
+      "exit_price": null
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "reason": "持仓7日浮盈+5.15%，未触发任何止损；出版板块未列bottom5（数字媒体-3.44%入bottom5但出版为不同子行业），11-17曾入bottom5仅1日，未达'冷3日才卖'；今日+0.69%逆势收红",
+      "sector_rank": "偏冷（数字媒体入bottom5，出版未列）",
+      "new_stop": null,
+      "pnl_pct": 5.15,
+      "days_held": 7,
+      "exit_price": null
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "reason": "持仓7日浮亏-0.43%，未触发-5%硬止损；核电未列bottom5；stop_proximity WATCH（现价4.66距止损4.45约4.5%）需盯紧，若继续下探按h024主动处理；今日-1.06%",
+      "sector_rank": "中游（核电未列top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": -0.43,
+      "days_held": 7,
+      "exit_price": null
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "reason": "持仓7日浮盈+5.68%，未触发任何卖出规则；城商行自2026年7月走强趋势未破（输入highlights，检索佐证11-13城商行创历史新高但内部个股分化）；margin deleveraging为警示非卖出信号；今日-0.38%",
+      "sector_rank": "中游偏强（城商行7月以来走强，当日未列top5）",
+      "new_stop": null,
+      "pnl_pct": 5.68,
+      "days_held": 7,
+      "exit_price": null
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "持仓16日浮盈+3.63%>3%，时间止损未触发（Rule 5仅<3%才卖，无事件例外）；航运港口未列bottom5；今日+0.20%",
+      "sector_rank": "中游（航运港口未列top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 3.63,
+      "days_held": 16,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600060",
+      "name": "海信视像",
+      "reason": "dist_ma5 +6.7%>6%，Rule 2b追逐拦截（不追高）；叠加恐慌盘（广度0.19:1）+ margin deleveraging(chg5 -4.25%)",
+      "rps120": 94.82
+    },
+    {
+      "code": "600926",
+      "name": "杭州银行",
+      "reason": "恐慌盘硬阻断（entry_regime panic）；城商行当日未列top5；margin deleveraging(chg5 -10.87%)为减分项",
+      "rps120": 94.67
+    },
+    {
+      "code": "600323",
+      "name": "瀚蓝环境",
+      "reason": "个股质量高（PREMIUM VCP+MA全合规）但被panic硬阻断（0.19:1），环保未列top30%；属'被硬阻断'而非个股问题，留档",
+      "rps120": 91.54
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌盘硬阻断（广度0.19:1、0/3指数红、22跌停）下，瀚蓝环境（PREMIUM VCP+dist_ma20仅1.9%）、中国国贸（QUALITY VCP+dist_ma5仅0.5%）这类高质量候选也不得入场——机械层hard_block正确压制了V1式FOMO",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "广度极端背离时个股alpha无法对抗系统性beta；高质量候选被硬阻断是特征而非bug"
+    },
+    {
+      "text": "青岛港持仓16日浮盈+3.63%越过时间止损3%门槛不卖，验证'15日<3%才卖'的阈值规则给赢家波动留空间",
+      "type": "observation",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h203",
+      "mechanism": "时间止损是阈值规则而非连续规则，越过门槛即重新计时，避免在赢家小幅回踩时机械离场"
+    },
+    {
+      "text": "今日top5板块涨幅全部<1.5%（电子化学品Ⅱ+1.48%为最高），'热点'本身也在降温——恐慌市里不能因板块排名top5就默认可买",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "板块涨幅绝对值是比排名更重要的广度信号；全市场无板块>1.5%时，任何板块排名都只是弱市里的相对排序"
+    }
+  ],
+  "market_summary": "广度0.19:1（890涨/4592跌），涨停23/跌停22，上证-0.44%、深成-0.51%、创业板-0.63%全绿，仅科创50+0.98%逆势；IV极度恐慌（avg IV rank 0.72，500ETF/创业板ETF 0.94，300ETF 0.60）。entry_regime=panic机械硬阻断新开仓。板块无真正热点：top5涨幅全部<1.5%（电子化学品Ⅱ+1.48%领涨），bottom5跌幅-3.4%~-4.9%（板块涨跌幅为当日口径，输入未提供5日/20日板块数据）。持仓5只全部HOLD，0只触发卖出规则。",
+  "market_sentiment": "panic",
+  "market_call": "防守观望"
+}

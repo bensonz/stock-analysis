@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-11-18",
+  "lastUpdated": "2026-11-19",
   "hypotheses": [
     {
       "id": "h001",
@@ -5016,7 +5016,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-11-18",
+      "lastTested": "2026-11-19",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -5251,13 +5251,17 @@
           {
             "date": "2026-11-18",
             "detail": "海信视像（黑色家电top3、RPS120=94.82、0风险、MA距离全合规）本可通过全部买入门槛，唯一拦截是恐慌盘硬阻断——这正是硬阻断机制的价值：在最强候选面前仍持现金"
+          },
+          {
+            "date": "2026-11-19",
+            "detail": "恐慌盘硬阻断（广度0.19:1、0/3指数红、22跌停）下，瀚蓝环境（PREMIUM VCP+dist_ma20仅1.9%）、中国国贸（QUALITY VCP+dist_ma5仅0.5%）这类高质量候选也不得入场——机械层hard_block正确压制了V1式FOMO"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 58,
+      "sampleSize": 59,
       "hitRate": 1.0,
-      "confidence": 0.983,
+      "confidence": 0.984,
       "tags": [
         "entry-filter",
         "position-sizing"
@@ -7709,7 +7713,7 @@
       "type": "signal",
       "status": "hypothesis",
       "created": "2026-08-14",
-      "lastTested": "2026-08-28",
+      "lastTested": "2026-11-19",
       "mechanism": "热点持续性差反映增量资金不足，追热点易被轮动闷杀；此时应收缩到已盈利持仓的管理。",
       "evidence": {
         "supporting": [
@@ -7720,13 +7724,17 @@
           {
             "date": "2026-08-28",
             "detail": "今日top5全部是防御/低beta板块(房地产服务/渔业/饰品/种植业/林业)，strategy_pool无一只股票映射到这些板块——即便tape过关也无候选可买，候选池与市场热点错位"
+          },
+          {
+            "date": "2026-11-19",
+            "detail": "今日top5板块涨幅全部<1.5%（电子化学品Ⅱ+1.48%为最高），'热点'本身也在降温——恐慌市里不能因板块排名top5就默认可买"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 2,
+      "sampleSize": 3,
       "hitRate": 1.0,
-      "confidence": 0.75,
+      "confidence": 0.8,
       "tags": [
         "sector"
       ],
@@ -9119,7 +9127,7 @@
       "type": "rule",
       "status": "validated",
       "created": "2026-09-23",
-      "lastTested": "2026-11-18",
+      "lastTested": "2026-11-19",
       "mechanism": "单日情绪波动与趋势转冷是两种信号，需连续确认而非单点触发",
       "evidence": {
         "supporting": [
@@ -9154,13 +9162,17 @@
           {
             "date": "2026-11-18",
             "detail": "青岛港时间止损第15日以+3.42%越过3%门槛幸存，验证'冷3日才卖/时间止损'机械规则给临界赢家留波动空间，避免在临界点情绪化卖出"
+          },
+          {
+            "date": "2026-11-19",
+            "detail": "青岛港持仓16日浮盈+3.63%越过时间止损3%门槛不卖，验证'15日<3%才卖'的阈值规则给赢家波动留空间"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 8,
+      "sampleSize": 9,
       "hitRate": 1.0,
-      "confidence": 0.9,
+      "confidence": 0.909,
       "tags": [
         "exit-rule"
       ],

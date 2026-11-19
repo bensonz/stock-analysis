@@ -252,6 +252,14 @@
       "change_pct": 3.42,
       "action": "HOLD",
       "note": "时间止损第15日浮盈+3.42%越过3%门槛，不触发时间止损（Rule 5无事件例外）；航运港口今日+1.96%居top5第4；距止损9.17空间充足"
+    },
+    {
+      "date": "2026-11-19",
+      "slot": "noon",
+      "price": 10.0,
+      "change_pct": 3.63,
+      "action": "HOLD",
+      "note": "持仓16日浮盈+3.63%>3%，时间止损未触发（Rule 5仅<3%才卖，无事件例外）；航运港口未列bottom5；今日+0.20%"
     }
   ],
   "exitDate": null,
@@ -261,6 +269,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-10-28T15:15:38.208190+08:00",
-  "updatedAt": "2026-11-18T15:11:13.583137+08:00",
+  "updatedAt": "2026-11-19T11:39:19.151593+08:00",
   "trackerVersion": "2.1"
 }

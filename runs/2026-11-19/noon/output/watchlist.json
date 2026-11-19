@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-19",
+  "market_overview": {
+    "shanghai_composite": {
+      "value": 3571.986,
+      "change_pct": -0.44
+    },
+    "shenzhen_component": {
+      "value": 10604.521,
+      "change_pct": -0.51
+    },
+    "chinext": {
+      "value": 2297.017,
+      "change_pct": -0.63
+    },
+    "sentiment": "panic",
+    "hot_sectors": [
+      "电子化学品Ⅱ",
+      "摩托车及其他",
+      "航空机场",
+      "黑色家电",
+      "调味发酵品Ⅱ"
+    ],
+    "cold_sectors": [
+      "厨卫电器",
+      "林业Ⅱ",
+      "渔业",
+      "数字媒体",
+      "照明设备Ⅱ"
+    ],
+    "notes": "广度0.19:1（890涨/4592跌），涨停23/跌停22，上证-0.44%、深成-0.51%、创业板-0.63%全绿，仅科创50+0.98%逆势；IV极度恐慌（avg IV rank 0.72，500ETF/创业板ETF 0.94，300ETF 0.60）。entry_regime=panic机械硬阻断新开仓。板块无真正热点：top5涨幅全部<1.5%（电子化学品Ⅱ+1.48%领涨），bottom5跌幅-3.4%~-4.9%（板块涨跌幅为当日口径，输入未提供5日/20日板块数据）。持仓5只全部HOLD，0只触发卖出规则。"
+  },
+  "strategy_scan": {
+    "total_stocks_scanned": 52,
+    "strategy_name": "小市值-无 20RP",
+    "scan_time": "2026-11-19T11:39:19.164632+08:00"
+  },
+  "recommendations": [
+    {
+      "code": "600060.SH",
+      "name": "海信视像",
+      "price": null,
+      "rps120": 94.82,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600926.SH",
+      "name": "杭州银行",
+      "price": null,
+      "rps120": 94.67,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600323.SH",
+      "name": "瀚蓝环境",
+      "price": null,
+      "rps120": 91.54,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    }
+  ],
+  "summary": {
+    "total_scanned": 52,
+    "buy_recommendations": 0,
+    "watch_recommendations": 3,
+    "avoid_recommendations": 0,
+    "market_call": "防守观望",
+    "reasoning": "广度0.19:1（890涨/4592跌），涨停23/跌停22，上证-0.44%、深成-0.51%、创业板-0.63%全绿，仅科创50+0.98%逆势；IV极度恐慌（avg IV rank 0.72，500ETF/创业板ETF 0.94，300ETF 0.60）。entry_regime=panic机械硬阻断新开仓。板块无真正热点：top5涨幅全部<1.5%（电子化学品Ⅱ+1.48%领涨），bottom5跌幅-3.4%~-4.9%（板块涨跌幅为当日口径，输入未提供5日/20日板块数据）。持仓5只全部HOLD，0只触发卖出规则。"
+  }
+}
