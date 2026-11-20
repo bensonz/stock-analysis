@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-20",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1795145721.040287,
+      "errors": [],
+      "end": 1795145774.2626848,
+      "duration_sec": 53.2
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 5001,
+      "tokens": {
+        "input_tokens": 216580,
+        "output_tokens": 9293
+      },
+      "rounds": 3,
+      "tool_calls_count": 5,
+      "duration_sec": 105.3,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1795145879.5875142,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=61",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=56",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=113",
+        "Hypothesis: Created h226 (observation): IV极度恐慌(avg_iv_rank 0.82，500ETF/创业板ETF=1.0)，但恐慌硬阻断已覆盖入场闸门，IV此时只作新仓节流、不作恐慌抄底信号...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-11-20",
+        "status": "ok",
+        "checked": 5,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "end": 1795145881.268738,
+      "duration_sec": 1.7
+    }
+  ],
+  "validation_errors": [],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 160.2
+  }
+}

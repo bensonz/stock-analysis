@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-11-19",
+  "lastUpdated": "2026-11-20",
   "hypotheses": [
     {
       "id": "h001",
@@ -1286,7 +1286,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-11-18",
+      "lastTested": "2026-11-20",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1737,11 +1737,15 @@
           {
             "date": "2026-11-18",
             "detail": "贵金属-4.65%领跌与元件+4.86%/通信服务+2.88%领涨并存，是前期避险/资源涨幅大的获利了结轮动而非全面离场；冷区板块应视为硬禁区(h019)"
+          },
+          {
+            "date": "2026-11-20",
+            "detail": "5只持仓全部位于中段板块(未进top5/bottom5)且全部在止损上方，防御属性(银行/公用事业/港口/出版)在普跌日整体抗跌——行业选择比个股择时更抗回撤"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 112,
+      "sampleSize": 113,
       "hitRate": 1.0,
       "confidence": 0.991,
       "tags": [
@@ -4776,7 +4780,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-11-17",
+      "lastTested": "2026-11-20",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -4999,13 +5003,17 @@
           {
             "date": "2026-11-17",
             "detail": "弱市里银行/城商行是资金防御主战场（南京银行+5.52%领跑组合），恐慌日防御板块轮动通常延续3-5日；但板块热≠追高，新仓仍须过RPS+MA距离闸门"
+          },
+          {
+            "date": "2026-11-20",
+            "detail": "防御→资源/军工轮动加速：数字媒体+3.47%/渔业+2.8%领涨 vs 贵金属-3.84%/小金属-3.61%/航天装备-3.58%领跌；数字媒体昨日-5.48%入bottom5今日翻红至top1，属超跌反弹而非趋势启动"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 55,
+      "sampleSize": 56,
       "hitRate": 1.0,
-      "confidence": 0.982,
+      "confidence": 0.983,
       "tags": [
         "sector",
         "exit-rule"
@@ -5020,7 +5028,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-11-19",
+      "lastTested": "2026-11-20",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -5263,11 +5271,15 @@
           {
             "date": "2026-11-19",
             "detail": "恐慌硬封锁（breadth 0.13:1 + 83跌停，0/3指数收红）下 new_positions 必须为空——即使600007中国国贸(VCP PREMIUM)、600398海澜之家(VCP QUALITY)等个股层面合格也必须skip，现金保护优先于任何个股质量"
+          },
+          {
+            "date": "2026-11-20",
+            "detail": "恐慌盘硬阻断再次生效：breadth 0.14:1、0/3主要指数收绿、31涨停/6跌停，机械层直接禁开新仓，避免在普跌中接刀"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 60,
+      "sampleSize": 61,
       "hitRate": 1.0,
       "confidence": 0.984,
       "tags": [
@@ -9803,6 +9815,34 @@
       "tags": [
         "exit-rule",
         "timing"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h226",
+      "text": "IV极度恐慌(avg_iv_rank 0.82，500ETF/创业板ETF=1.0)，但恐慌硬阻断已覆盖入场闸门，IV此时只作新仓节流、不作恐慌抄底信号",
+      "type": "signal",
+      "status": "observation",
+      "created": "2026-11-20",
+      "lastTested": "2026-11-20",
+      "mechanism": "高IV=高机会但也=高波动，恐慌盘下先保现金",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-11-20",
+            "detail": "IV极度恐慌(avg_iv_rank 0.82，500ETF/创业板ETF=1.0)，但恐慌硬阻断已覆盖入场闸门，IV此时只作新仓节流、不作恐慌抄底信号"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "timing",
+        "entry-filter"
       ],
       "parentRule": null,
       "retiredDate": null,

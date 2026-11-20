@@ -1,0 +1,64 @@
+{
+  "as_of": "2026-11-20",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 8,
+    "new": 2,
+    "pending": 2,
+    "expired": 0,
+    "ai_retired": 6,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 6,
+    "decided": 0,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 0,
+    "fetch_errors": 0,
+    "empty_days": 9,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 2,
+    "kept": 1,
+    "skipped": 1,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261125-US111046",
+        "name": "美国10月PCE物价指数环比",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "美联储最关注的通胀指标，影响12月FOMC降息预期，进而影响A股风险偏好"
+      },
+      {
+        "id": "wscn-20261125-US111047",
+        "name": "美国10月核心PCE物价指数环比",
+        "decision": "skip",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "与PCE物价指数同一时间发布，核心PCE已包含在整体PCE数据中，避免重复"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1483,
+    "tokens_out": 135
+  },
+  "pending_items": []
+}

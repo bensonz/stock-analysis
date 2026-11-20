@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-20",
+  "market_overview": {
+    "shanghai_composite": {
+      "value": 3521.396,
+      "change_pct": -1.57
+    },
+    "shenzhen_component": {
+      "value": 10365.758,
+      "change_pct": -2.05
+    },
+    "chinext": {
+      "value": 2245.615,
+      "change_pct": -2.08
+    },
+    "sentiment": "bearish",
+    "hot_sectors": [
+      "数字媒体",
+      "渔业",
+      "林业Ⅱ",
+      "养殖业",
+      "饲料"
+    ],
+    "cold_sectors": [
+      "贵金属",
+      "小金属",
+      "航天装备Ⅱ",
+      "航空装备Ⅱ",
+      "其他电源设备Ⅱ"
+    ],
+    "notes": "恐慌普跌日：上证-1.57%/深成-2.05%/创业板-2.08%，0/3指数收红。Breadth 0.14:1(涨690/跌4808)，31涨停/6跌停，跌4%以上个股约384只(f4_7=331+f7_10=47+f10=6)，普跌为主。IV极度恐慌(avg_iv_rank 0.82，500ETF/创业板ETF=1.0)。板块：数字媒体+3.47%/渔业+2.8%领涨(数字媒体昨日-5.48%入bottom5、今日反弹至top1，超跌反弹性质)，贵金属-3.84%/小金属-3.61%/航天装备-3.58%领跌。持仓5/5均不在bottom5、0/5在top5。入场机制panic硬阻断(sizing 0.0)，今日不开新仓，持币81.5%。"
+  },
+  "strategy_scan": {
+    "total_stocks_scanned": 56,
+    "strategy_name": "小市值-无 20RP",
+    "scan_time": "2026-11-20T11:38:00.908485+08:00"
+  },
+  "recommendations": [
+    {
+      "code": "601000.SH",
+      "name": "唐山港",
+      "price": null,
+      "rps120": 94.99,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600007.SH",
+      "name": "中国国贸",
+      "price": null,
+      "rps120": 94.88,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600398.SH",
+      "name": "海澜之家",
+      "price": null,
+      "rps120": 93.54,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "601088.SH",
+      "name": "中国神华",
+      "price": null,
+      "rps120": 95.79,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    }
+  ],
+  "summary": {
+    "total_scanned": 56,
+    "buy_recommendations": 0,
+    "watch_recommendations": 4,
+    "avoid_recommendations": 0,
+    "market_call": "防御",
+    "reasoning": "恐慌普跌日：上证-1.57%/深成-2.05%/创业板-2.08%，0/3指数收红。Breadth 0.14:1(涨690/跌4808)，31涨停/6跌停，跌4%以上个股约384只(f4_7=331+f7_10=47+f10=6)，普跌为主。IV极度恐慌(avg_iv_rank 0.82，500ETF/创业板ETF=1.0)。板块：数字媒体+3.47%/渔业+2.8%领涨(数字媒体昨日-5.48%入bottom5、今日反弹至top1，超跌反弹性质)，贵金属-3.84%/小金属-3.61%/航天装备-3.58%领跌。持仓5/5均不在bottom5、0/5在top5。入场机制panic硬阻断(sizing 0.0)，今日不开新仓，持币81.5%。"
+  }
+}

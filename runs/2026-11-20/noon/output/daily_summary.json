@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-20",
+  "actions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "price": 5.73,
+      "pnl_pct": 0.53,
+      "note": "持仓7日浮盈+0.53%，未触发-5%硬止损/首3日-3%/15日时间止损；火力发电未进bottom5；今日-2.05%随大盘回撤但仍在止损5.42上方；margin deleveraging为警示非卖出信号"
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "price": 14.22,
+      "pnl_pct": 3.12,
+      "note": "持仓8日浮盈+3.12%，未触发任何卖出规则；出版未列bottom5(关联子行业数字媒体今日+3.47%反弹至top1)；margin deleveraging为警示非卖出信号"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.71,
+      "pnl_pct": 0.64,
+      "note": "持仓8日浮盈+0.64%，未触发-5%硬止损；核电未进bottom5；今日+1.51%逆势收红，距止损4.45仍有约5.5%空间；margin adding"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 13.17,
+      "pnl_pct": 5.28,
+      "note": "持仓8日浮盈+5.28%，未触发任何卖出规则；城商行未进bottom5；margin deleveraging为警示非卖出信号"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 10.16,
+      "pnl_pct": 5.28,
+      "note": "持仓17日浮盈+5.28%>3%，15日时间止损不触发(Rule 5仅<3%才卖，无事件例外)；航运港口未进bottom5；今日+0.89%逆势收红"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 966298.94,
+    "dayPnl": -668.0,
+    "dayReturnPct": -0.07,
+    "totalReturnPct": -3.37,
+    "unrealizedPnl": 5302.0,
+    "realizedPnl": -39003.06,
+    "cashPct": 81.54
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.1435,
+    "up": 690,
+    "down": 4808,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 31,
+    "limit_downs": 6,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.14:1, 0/3 major indices green, 31 limit-ups / 6 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "恐慌普跌日：上证-1.57%/深成-2.05%/创业板-2.08%，0/3指数收红。Breadth 0.14:1(涨690/跌4808)，31涨停/6跌停，跌4%以上个股约384只(f4_7=331+f7_10=47+f10=6)，普跌为主。IV极度恐慌(avg_iv_rank 0.82，500ETF/创业板ETF=1.0)。板块：数字媒体+3.47%/渔业+2.8%领涨(数字媒体昨日-5.48%入bottom5、今日反弹至top1，超跌反弹性质)，贵金属-3.84%/小金属-3.61%/航天装备-3.58%领跌。持仓5/5均不在bottom5、0/5在top5。入场机制panic硬阻断(sizing 0.0)，今日不开新仓，持币81.5%。"
+  }
+}

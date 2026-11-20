@@ -1,0 +1,191 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "数字媒体",
+        "5d_pct": 3.47,
+        "trend": "reversing"
+      },
+      {
+        "name": "渔业",
+        "5d_pct": 2.8,
+        "trend": "steady"
+      },
+      {
+        "name": "林业Ⅱ",
+        "5d_pct": 1.07,
+        "trend": "steady"
+      },
+      {
+        "name": "养殖业",
+        "5d_pct": 0.94,
+        "trend": "steady"
+      },
+      {
+        "name": "饲料",
+        "5d_pct": 0.93,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "贵金属",
+        "5d_pct": -3.84,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "小金属",
+        "5d_pct": -3.61,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航天装备Ⅱ",
+        "5d_pct": -3.58,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "航空装备Ⅱ",
+        "5d_pct": -3.49,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "其他电源设备Ⅱ",
+        "5d_pct": -3.33,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/5持仓在热门top5板块，5/5持仓均不在冷门bottom5板块",
+    "regime": "恐慌普跌，资金切向防御/超跌品种(数字媒体昨日-5.48%入bottom5、今日+3.47%反弹至top1)，贵金属/小金属/军工领跌"
+  },
+  "position_decisions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "reason": "持仓7日浮盈+0.53%，未触发-5%硬止损/首3日-3%/15日时间止损；火力发电未进bottom5；今日-2.05%随大盘回撤但仍在止损5.42上方；margin deleveraging为警示非卖出信号",
+      "sector_rank": "中段（未列top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 0.53,
+      "days_held": 7,
+      "exit_price": null
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "reason": "持仓8日浮盈+3.12%，未触发任何卖出规则；出版未列bottom5(关联子行业数字媒体今日+3.47%反弹至top1)；margin deleveraging为警示非卖出信号",
+      "sector_rank": "中段（出版未列top5/bottom5；数字媒体为关联子行业top1）",
+      "new_stop": null,
+      "pnl_pct": 3.12,
+      "days_held": 8,
+      "exit_price": null
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "reason": "持仓8日浮盈+0.64%，未触发-5%硬止损；核电未进bottom5；今日+1.51%逆势收红，距止损4.45仍有约5.5%空间；margin adding",
+      "sector_rank": "中段（未列top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 0.64,
+      "days_held": 8,
+      "exit_price": null
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "reason": "持仓8日浮盈+5.28%，未触发任何卖出规则；城商行未进bottom5；margin deleveraging为警示非卖出信号",
+      "sector_rank": "中段（未列top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 5.28,
+      "days_held": 8,
+      "exit_price": null
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "持仓17日浮盈+5.28%>3%，15日时间止损不触发(Rule 5仅<3%才卖，无事件例外)；航运港口未进bottom5；今日+0.89%逆势收红",
+      "sector_rank": "中段（未列top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 5.28,
+      "days_held": 17,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601000",
+      "name": "唐山港",
+      "reason": "恐慌盘硬阻断(breadth 0.14:1、0/3指数收绿)禁开新仓；且港口板块未进top5。RPS120=94.99、dist_ma5=3.6%本可通过个股门槛，但机械层block优先",
+      "rps120": 94.99
+    },
+    {
+      "code": "600007",
+      "name": "中国国贸",
+      "reason": "恐慌盘硬阻断禁开新仓；房地产板块非热门。VCP PREMIUM、RPS120=94.88、dist_ma5=-1.6%个股面合格，但今日无入场资格",
+      "rps120": 94.88
+    },
+    {
+      "code": "600398",
+      "name": "海澜之家",
+      "reason": "恐慌盘硬阻断禁开新仓；VCP QUALITY、RPS120=93.54个股面尚可，但机械层block优先",
+      "rps120": 93.54
+    },
+    {
+      "code": "601088",
+      "name": "中国神华",
+      "reason": "恐慌盘硬阻断禁开新仓；且RPS120=95.79已超95%封顶(动量过热，均值回归风险)",
+      "rps120": 95.79
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌盘硬阻断再次生效：breadth 0.14:1、0/3主要指数收绿、31涨停/6跌停，机械层直接禁开新仓，避免在普跌中接刀",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "机械层权威——只有真正恐慌tape才硬阻断，判断层在之上叠加即可"
+    },
+    {
+      "text": "防御→资源/军工轮动加速：数字媒体+3.47%/渔业+2.8%领涨 vs 贵金属-3.84%/小金属-3.61%/航天装备-3.58%领跌；数字媒体昨日-5.48%入bottom5今日翻红至top1，属超跌反弹而非趋势启动",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "恐慌中资金切向防御/超跌品种，资源与军工被系统性减仓"
+    },
+    {
+      "text": "5只持仓全部位于中段板块(未进top5/bottom5)且全部在止损上方，防御属性(银行/公用事业/港口/出版)在普跌日整体抗跌——行业选择比个股择时更抗回撤",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "position-sizing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "板块引力主导个股短期波动"
+    },
+    {
+      "text": "IV极度恐慌(avg_iv_rank 0.82，500ETF/创业板ETF=1.0)，但恐慌硬阻断已覆盖入场闸门，IV此时只作新仓节流、不作恐慌抄底信号",
+      "type": "signal",
+      "tags": [
+        "timing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "高IV=高机会但也=高波动，恐慌盘下先保现金"
+    }
+  ],
+  "market_summary": "恐慌普跌日：上证-1.57%/深成-2.05%/创业板-2.08%，0/3指数收红。Breadth 0.14:1(涨690/跌4808)，31涨停/6跌停，跌4%以上个股约384只(f4_7=331+f7_10=47+f10=6)，普跌为主。IV极度恐慌(avg_iv_rank 0.82，500ETF/创业板ETF=1.0)。板块：数字媒体+3.47%/渔业+2.8%领涨(数字媒体昨日-5.48%入bottom5、今日反弹至top1，超跌反弹性质)，贵金属-3.84%/小金属-3.61%/航天装备-3.58%领跌。持仓5/5均不在bottom5、0/5在top5。入场机制panic硬阻断(sizing 0.0)，今日不开新仓，持币81.5%。",
+  "market_sentiment": "bearish",
+  "market_call": "防御"
+}

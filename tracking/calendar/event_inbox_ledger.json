@@ -1383,6 +1383,36 @@
       "impact": "low",
       "direction": "two_sided",
       "note": ""
+    },
+    {
+      "inbox_id": "wscn-20261125-US111046",
+      "decision": "keep",
+      "decided": "2026-11-20",
+      "name": "美国10月PCE物价指数环比",
+      "date": "2026-11-25",
+      "tz": "US",
+      "decided_by": "ai",
+      "model": "deepseek-v4-pro",
+      "reason": "美联储最关注的通胀指标，影响12月FOMC降息预期，进而影响A股风险偏好",
+      "kind": "macro_release",
+      "impact": "medium",
+      "direction": "two_sided",
+      "note": ""
+    },
+    {
+      "inbox_id": "wscn-20261125-US111047",
+      "decision": "skip",
+      "decided": "2026-11-20",
+      "name": "美国10月核心PCE物价指数环比",
+      "date": "2026-11-25",
+      "tz": "US",
+      "decided_by": "ai",
+      "model": "deepseek-v4-pro",
+      "reason": "与PCE物价指数同一时间发布，核心PCE已包含在整体PCE数据中，避免重复",
+      "kind": "macro_release",
+      "impact": "medium",
+      "direction": "two_sided",
+      "note": ""
     }
   ]
 }

@@ -14,57 +14,9 @@
 > `date`、`tz` (US=影响其后第一个A股交易日 / CN=当日)、`kind`、`note`。不要改 `ai:`、`src:` 和 `id:` 三行（🤖 可留可删）。
 > 标题日期 = A股影响日，由 date+tz 推算，重写时刷新。规则与局限: docs/EVENT_INBOX/DECISIONS.md
 
-_更新: 2026-11-19 · 共 13 条 · 待定 0 条_
+_更新: 2026-11-20 · 共 9 条 · 待定 0 条_
 
-## 2026-11-19 (T-0) 美国 — 黄仁勋出席美国国会听证会，就绯闻作情况说明
-- [-] keep 🤖   impact: low   direction: two_sided
-  date: 2026-11-18   tz: US   kind: other
-  note:
-  ai: 跳过 · low/two_sided · 单一公司高管听证会，非系统性事件，对A股整体影响有限（deepseek-v4-pro，2026-11-09）
-  src: wallstreetcn imp=4 北京 2026-11-18 12:02 |
-  id: wscn-20261118-c425eb3b
-
-## 2026-11-19 (T-0) 美国 — 黄仁勋出席美国国会听证会
-- [-] keep 🤖   impact: low   direction: two_sided
-  date: 2026-11-18   tz: US   kind: other
-  note:
-  ai: 跳过 · low/two_sided · 单一公司高管国会听证，非系统性政策事件，且与英伟达财报同日，影响已被覆盖（deepseek-v4-pro，2026-11-16）
-  src: wallstreetcn imp=4 北京 2026-11-18 12:02 |
-  id: wscn-20261118-e71c5d98
-
-## 2026-11-19 (T-0) 美国 — 美国Anthropic IPO 定价
-- [-] keep 🤖   impact: low   direction: two_sided
-  date: 2026-11-18   tz: US   kind: other
-  note:
-  ai: 跳过 · low/two_sided · 单一公司IPO定价，非系统性事件（deepseek-v4-pro，2026-11-13）
-  src: wallstreetcn imp=4 北京 2026-11-18 12:02 |
-  id: wscn-20261118-eb340fe4
-
-## 2026-11-19 (T-0) 中国 — 中国习近平将同俄罗斯总统普京、美国总统特朗普举行中俄美元首会晤
-- [x] keep 🤖   impact: high   direction: two_sided
-  date: 2026-11-19   tz: CN   kind: other
-  note:
-  ai: 保留 · high/two_sided · 中俄美元首会晤涉及大国关系与贸易政策走向，可能系统性影响A股风险偏好（deepseek-v4-pro，2026-11-16）
-  src: wallstreetcn imp=4 北京 2026-11-19 12:02 |
-  id: wscn-20261119-6f690f3d
-
-## 2026-11-19 (T-0) 美国 — 美国英伟达临时CEO召开全体员工会议
-- [-] keep 🤖   impact: low   direction: two_sided
-  date: 2026-11-18   tz: US   kind: other
-  note:
-  ai: 跳过 · low/two_sided · 单一公司内部会议，非系统性事件（deepseek-v4-pro，2026-11-13）
-  src: wallstreetcn imp=4 北京 2026-11-19 01:00 |
-  id: wscn-20261119-cddf248a
-
-## 2026-11-19 (T-0) 中国 — 中国阿里巴巴Q3财报与电话会
-- [-] keep 🤖   impact: low   direction: two_sided
-  date: 2026-11-19   tz: CN   kind: other
-  note:
-  ai: 跳过 · low/two_sided · 单一公司财报，非系统性事件（deepseek-v4-pro，2026-11-13）
-  src: wallstreetcn imp=4 北京 2026-11-19 20:00 |
-  id: wscn-20261119-d3fe72f1
-
-## 2026-11-20 (T-1) 美国 — 美国Anthropic 纳斯达克上市
+## 2026-11-20 (T-0) 美国 — 美国Anthropic 纳斯达克上市
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-11-19   tz: US   kind: other
   note:
@@ -72,7 +24,23 @@ _更新: 2026-11-19 · 共 13 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-19 21:30 |
   id: wscn-20261119-86d16232
 
-## 2026-11-27 (T-8) 中国 — 中国商务部：中美双方约定在今年11月底前举行下一次人工智能对话
+## 2026-11-26 (T-6) 美国 — 美国10月PCE物价指数环比
+- [x] keep 🤖   impact: medium   direction: two_sided
+  date: 2026-11-25   tz: US   kind: macro_release
+  note:
+  ai: 保留 · medium/two_sided · 美联储最关注的通胀指标，影响12月FOMC降息预期，进而影响A股风险偏好（deepseek-v4-pro，2026-11-20）
+  src: wallstreetcn imp=4 北京 2026-11-25 21:30 | https://wallstreetcn.com/calendar/US111046/overview
+  id: wscn-20261125-US111046
+
+## 2026-11-26 (T-6) 美国 — 美国10月核心PCE物价指数环比
+- [-] keep 🤖   impact: medium   direction: two_sided
+  date: 2026-11-25   tz: US   kind: macro_release
+  note:
+  ai: 跳过 · medium/two_sided · 与PCE物价指数同一时间发布，核心PCE已包含在整体PCE数据中，避免重复（deepseek-v4-pro，2026-11-20）
+  src: wallstreetcn imp=4 北京 2026-11-25 21:30 | https://wallstreetcn.com/calendar/US111047/overview
+  id: wscn-20261125-US111047
+
+## 2026-11-27 (T-7) 中国 — 中国商务部：中美双方约定在今年11月底前举行下一次人工智能对话
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-11-27   tz: CN   kind: other
   note:
@@ -80,7 +48,7 @@ _更新: 2026-11-19 · 共 13 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-11-27 12:02 |
   id: wscn-20261127-77abe93e
 
-## 2026-12-02 (T-13) 美国 — 黄仁勋12月1日出席美国国会听证会
+## 2026-12-02 (T-12) 美国 — 黄仁勋12月1日出席美国国会听证会
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-12-01   tz: US   kind: other
   note:
@@ -88,7 +56,7 @@ _更新: 2026-11-19 · 共 13 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-12-01 12:02 |
   id: wscn-20261201-76439df1
 
-## 2026-12-07 (T-18) 美国 — 美国特朗普将对多晶硅及其衍生产品加征关税
+## 2026-12-07 (T-17) 美国 — 美国特朗普将对多晶硅及其衍生产品加征关税
 - [x] keep 🤖   impact: medium   direction: risk
   date: 2026-12-04   tz: US   kind: other
   note:
@@ -96,7 +64,7 @@ _更新: 2026-11-19 · 共 13 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-12-04 00:00 |
   id: wscn-20261204-fbc64ee6
 
-## 2026-12-07 (T-18) 美国 — 美国纳斯达克拟推出全新“23小时”交易时段，美东时间晚9点至凌晨4点
+## 2026-12-07 (T-17) 美国 — 美国纳斯达克拟推出全新“23小时”交易时段，美东时间晚9点至凌晨4点
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-12-06   tz: US   kind: other
   note:
@@ -104,7 +72,7 @@ _更新: 2026-11-19 · 共 13 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-12-06 00:00 |
   id: wscn-20261206-3ba46065
 
-## 2026-12-07 (T-18) 美国 — 美国美股进入每天23小时的“通宵交易”的时代
+## 2026-12-07 (T-17) 美国 — 美国美股进入每天23小时的“通宵交易”的时代
 - [-] keep 🤖   impact: low   direction: two_sided
   date: 2026-12-06   tz: US   kind: other
   note:
@@ -112,7 +80,7 @@ _更新: 2026-11-19 · 共 13 条 · 待定 0 条_
   src: wallstreetcn imp=4 北京 2026-12-06 00:00 |
   id: wscn-20261206-e4bdae4a
 
-## 2026-12-15 (T-26) 美国 — 美国G20峰会（迈阿密）
+## 2026-12-15 (T-25) 美国 — 美国G20峰会（迈阿密）
 - [-] keep 🤖   impact: medium   direction: two_sided
   date: 2026-12-14   tz: US   kind: other
   note:
