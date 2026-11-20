@@ -1,0 +1,186 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "国有大型银行Ⅱ",
+        "1d_pct": 2.54,
+        "trend": "防御抱团"
+      },
+      {
+        "name": "股份制银行Ⅱ",
+        "1d_pct": 1.29,
+        "trend": "防御抱团"
+      },
+      {
+        "name": "保险Ⅱ",
+        "1d_pct": 1.23,
+        "trend": "防御抱团"
+      },
+      {
+        "name": "炼化及贸易",
+        "1d_pct": 1.09,
+        "trend": "防御抱团"
+      },
+      {
+        "name": "渔业",
+        "1d_pct": 0.69,
+        "trend": "防御抱团"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "其他电子Ⅱ",
+        "1d_pct": -6.93,
+        "trend": "科技链去杠杆"
+      },
+      {
+        "name": "非金属材料Ⅱ",
+        "1d_pct": -6.38,
+        "trend": "科技链去杠杆"
+      },
+      {
+        "name": "金属新材料",
+        "1d_pct": -6.36,
+        "trend": "科技链去杠杆"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "1d_pct": -6.35,
+        "trend": "科技链去杠杆"
+      },
+      {
+        "name": "通用设备",
+        "1d_pct": -5.92,
+        "trend": "科技链去杠杆"
+      }
+    ],
+    "position_alignment": "1/5持仓在热点板块（南京银行-银行），4/5在中性防御板块（火电/核电/港口/出版），无一落入bottom5",
+    "regime": "恐慌普跌：银行/保险/炼化唯一翻红，科技/电子链重挫，避险抱团"
+  },
+  "position_decisions": [
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "reason": "持仓8日浮盈+6.71%(13.35/12.51)，未触发任何止损；城商行属银行板块，今日国有大行+2.54%领涨，处于热点；margin deleveraging为警示非卖出信号",
+      "sector_rank": "top 5%（银行板块领涨）",
+      "new_stop": null,
+      "pnl_pct": 6.71,
+      "days_held": 8,
+      "exit_price": null
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "持仓17日浮盈+5.91%(10.22/9.65)>3%，15日时间止损不触发(Rule 5仅<3%才卖)；航运港口未入bottom5；今日+1.49%逆势收红，赢家让利润奔跑",
+      "sector_rank": "中游（航运港口未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 5.91,
+      "days_held": 17,
+      "exit_price": null
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "reason": "持仓8日浮盈+2.56%(4.80/4.68)，未触发-5%硬止损；核电未入bottom5；今日+3.45%逆势收红，距止损4.45仍有约7.3%空间；margin adding",
+      "sector_rank": "中游（核电未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 2.56,
+      "days_held": 8,
+      "exit_price": null
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "reason": "持仓8日浮盈+1.45%(13.99/13.79)，未触发任何卖出规则；出版未入bottom5（今日-2.71%随大盘回撤但仍浮盈）；margin deleveraging为警示非卖出信号",
+      "sector_rank": "中游（出版未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": 1.45,
+      "days_held": 8,
+      "exit_price": null
+    },
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "reason": "持仓7日浮亏-1.23%(5.63/5.70)，未触发-5%硬止损/首3日-3%/15日时间止损；火力发电未入bottom5；但现价距止损5.42仅3.73%，stop_proximity WATCH——今日不机械卖，明日若继续下探按h024主动处理",
+      "sector_rank": "中游（火力发电未入top5/bottom5）",
+      "new_stop": null,
+      "pnl_pct": -1.23,
+      "days_held": 7,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "601077",
+      "name": "渝农商行",
+      "reason": "银行板块领涨(top5)、RPS120=93.63、VCP SETUP、dist_ma5 -0.6%未追高、margin adding——正常市况下的优选；但entry_regime=panic硬阻断(breadth 0.06:1, 0/3指数绿, 68跌停)，今日禁止新开仓",
+      "rps120": 93.63
+    },
+    {
+      "code": "600007",
+      "name": "中国国贸",
+      "reason": "PREMIUM VCP、RPS120=94.97、dist_ma5 -2.0%未追高；但房地产非当日热点，且entry_regime=panic硬阻断，禁止新开仓",
+      "rps120": 94.97
+    },
+    {
+      "code": "600398",
+      "name": "海澜之家",
+      "reason": "QUALITY VCP、RPS120=94.23、dist_ma5 -0.4%；纺织服饰板块中性，且entry_regime=panic硬阻断，禁止新开仓",
+      "rps120": 94.23
+    },
+    {
+      "code": "603893",
+      "name": "瑞芯微",
+      "reason": "半导体板块cold(其他电子-6.93%/电子化学品-6.35%入bottom5)、RPS120=95.0触及封顶、dist_ma5 -6.4%仍在下行、margin deleveraging；恐慌+冷板块，不碰",
+      "rps120": 95.0
+    },
+    {
+      "code": "600323",
+      "name": "瀚蓝环境",
+      "reason": "QUALITY VCP、RPS120=92.2、dist_ma5 -0.2%；环保板块中性，且entry_regime=panic硬阻断，禁止新开仓",
+      "rps120": 92.2
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌硬阻断机制再次生效：0/3指数翻绿、breadth 0.06:1、68家跌停，银行/保险虽领涨但属避险抱团、无广度支撑——new_positions=[]保护了81.5%的现金。",
+      "type": "observation",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "恐慌盘中的板块红盘由避险资金推动，个股次日跳空止损概率高，开仓性价比极低。"
+    },
+    {
+      "text": "科技→防御轮动持续：top5全为银行/保险/炼化/渔业，bottom5全为电子/材料/通用设备。持仓中仅南京银行处于热点，其余4只(火电/核电/港口/出版)未入bottom5，暂不触发'行业冷3日→卖出'。",
+      "type": "signal",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "避险轮动通常持续3-5个交易日；持仓滑入bottom30%并维持3日才触发卖出，给赢家波动留空间。"
+    },
+    {
+      "text": "宝新能源现价5.63距止损5.42仅3.73%，stop_proximity WATCH触发；恐慌盘个股易跳空，需在硬止损前主动准备，但今日未破位(-3.76%后仍收5.63>5.42)，不机械卖出。",
+      "type": "signal",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "距止损<4%的持仓在恐慌盘中有跳空风险，主动监控比被动等待硬止损更保护资金。"
+    }
+  ],
+  "market_summary": "恐慌性普跌：上证-1.22%、深成-3.09%、创业板-3.54%、科创50-3.12%；涨跌家数313/5236(0.06:1)，跌停68家(f7_10区间1061家)，0/3主要指数翻绿；IV整体极度恐慌(avg iv_rank 0.762，500ETF/创业板ETF iv_rank=1.0)。资金极度防御：国有大行+2.54%、股份制银行+1.29%、保险+1.23%为仅有的上涨板块，科技/电子链重挫(其他电子-6.93%)。entry_regime=panic硬阻断新开仓，维持现金防守(现金占比81.5%)。",
+  "market_sentiment": "极度恐慌",
+  "market_call": "防守（恐慌，禁止新开仓）"
+}

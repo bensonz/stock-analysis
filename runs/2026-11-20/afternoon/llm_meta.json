@@ -1,0 +1,102 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 306358,
+  "output_tokens": 11776,
+  "rounds": 4,
+  "duration_sec": 166.2,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月20日 大跌 原因 创业板 深成指",
+        "max_results": 6
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "银行股 保险 上涨 2026年11月 避险 资金",
+        "max_results": 6
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "宝新能源 火力发电 电价 2026年11月",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "中国广核 核电 新闻 2026年11月",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "南京银行 青岛港 新闻 2026年11月",
+        "max_results": 5
+      },
+      "result_length": 144
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+大跌+原因+2026年11月20日",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=银行股+上涨+保险+2026年11月",
+        "maxChars": 5000
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 5000,
+        "url": "https://www.baidu.com/s?wd=2026年11月20日+A股+银行保险护盘+题材股大跌"
+      },
+      "result_length": 5000
+    },
+    {
+      "pass": "P1",
+      "round": 3,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 5000,
+        "url": "https://www.baidu.com/s?wd=宝新能源+中原传媒+中国广核+南京银行+青岛港+最新消息"
+      },
+      "result_length": 5000
+    }
+  ],
+  "fallback_used": false
+}

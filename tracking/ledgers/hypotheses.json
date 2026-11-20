@@ -2581,7 +2581,7 @@
       "type": "signal",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-11-19",
+      "lastTested": "2026-11-20",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -2716,6 +2716,10 @@
           {
             "date": "2026-11-19",
             "detail": "中国广核距止损4.09%触发stop_proximity WATCH：恐慌盘下科创板/核电类标的跳空风险会快速吞噬剩余缓冲，应主动盯防而非等精确触发"
+          },
+          {
+            "date": "2026-11-20",
+            "detail": "宝新能源现价5.63距止损5.42仅3.73%，stop_proximity WATCH触发；恐慌盘个股易跳空，需在硬止损前主动准备，但今日未破位(-3.76%后仍收5.63>5.42)，不机械卖出。"
           }
         ],
         "contradicting": [
@@ -2729,9 +2733,9 @@
           }
         ]
       },
-      "sampleSize": 35,
-      "hitRate": 0.943,
-      "confidence": 0.919,
+      "sampleSize": 36,
+      "hitRate": 0.944,
+      "confidence": 0.921,
       "tags": [
         "exit-rule",
         "timing"
@@ -5007,11 +5011,15 @@
           {
             "date": "2026-11-20",
             "detail": "防御→资源/军工轮动加速：数字媒体+3.47%/渔业+2.8%领涨 vs 贵金属-3.84%/小金属-3.61%/航天装备-3.58%领跌；数字媒体昨日-5.48%入bottom5今日翻红至top1，属超跌反弹而非趋势启动"
+          },
+          {
+            "date": "2026-11-20",
+            "detail": "科技→防御轮动持续：top5全为银行/保险/炼化/渔业，bottom5全为电子/材料/通用设备。持仓中仅南京银行处于热点，其余4只(火电/核电/港口/出版)未入bottom5，暂不触发'行业冷3日→卖出'。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 56,
+      "sampleSize": 57,
       "hitRate": 1.0,
       "confidence": 0.983,
       "tags": [
@@ -5275,11 +5283,15 @@
           {
             "date": "2026-11-20",
             "detail": "恐慌盘硬阻断再次生效：breadth 0.14:1、0/3主要指数收绿、31涨停/6跌停，机械层直接禁开新仓，避免在普跌中接刀"
+          },
+          {
+            "date": "2026-11-20",
+            "detail": "恐慌硬阻断机制再次生效：0/3指数翻绿、breadth 0.06:1、68家跌停，银行/保险虽领涨但属避险抱团、无广度支撑——new_positions=[]保护了81.5%的现金。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 61,
+      "sampleSize": 62,
       "hitRate": 1.0,
       "confidence": 0.984,
       "tags": [

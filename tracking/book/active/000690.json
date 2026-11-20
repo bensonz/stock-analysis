@@ -132,6 +132,14 @@
       "change_pct": 0.53,
       "action": "HOLD",
       "note": "持仓7日浮盈+0.53%，未触发-5%硬止损/首3日-3%/15日时间止损；火力发电未进bottom5；今日-2.05%随大盘回撤但仍在止损5.42上方；margin deleveraging为警示非卖出信号"
+    },
+    {
+      "date": "2026-11-20",
+      "slot": "afternoon",
+      "price": 5.63,
+      "change_pct": -1.23,
+      "action": "HOLD",
+      "note": "持仓7日浮亏-1.23%(5.63/5.70)，未触发-5%硬止损/首3日-3%/15日时间止损；火力发电未入bottom5；但现价距止损5.42仅3.73%，stop_proximity WATCH——今日不机械卖，明日若继续下探按h024主动处理"
     }
   ],
   "exitDate": null,
@@ -141,6 +149,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-11-11T16:18:00.132661+08:00",
-  "updatedAt": "2026-11-20T11:38:00.839221+08:00",
+  "updatedAt": "2026-11-20T15:09:10.473803+08:00",
   "trackerVersion": "2.1"
 }

@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-20",
+  "actions": [
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 13.35,
+      "pnl_pct": 6.71,
+      "note": "持仓8日浮盈+6.71%(13.35/12.51)，未触发任何止损；城商行属银行板块，今日国有大行+2.54%领涨，处于热点；margin deleveraging为警示非卖出信号"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 10.22,
+      "pnl_pct": 5.91,
+      "note": "持仓17日浮盈+5.91%(10.22/9.65)>3%，15日时间止损不触发(Rule 5仅<3%才卖)；航运港口未入bottom5；今日+1.49%逆势收红，赢家让利润奔跑"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.8,
+      "pnl_pct": 2.56,
+      "note": "持仓8日浮盈+2.56%(4.80/4.68)，未触发-5%硬止损；核电未入bottom5；今日+3.45%逆势收红，距止损4.45仍有约7.3%空间；margin adding"
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "HOLD",
+      "price": 13.99,
+      "pnl_pct": 1.45,
+      "note": "持仓8日浮盈+1.45%(13.99/13.79)，未触发任何卖出规则；出版未入bottom5（今日-2.71%随大盘回撤但仍浮盈）；margin deleveraging为警示非卖出信号"
+    },
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "price": 5.63,
+      "pnl_pct": -1.23,
+      "note": "持仓7日浮亏-1.23%(5.63/5.70)，未触发-5%硬止损/首3日-3%/15日时间止损；火力发电未入bottom5；但现价距止损5.42仅3.73%，stop_proximity WATCH——今日不机械卖，明日若继续下探按h024主动处理"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 5,
+    "totalEquity": 966429.94,
+    "dayPnl": -537.0,
+    "dayReturnPct": -0.06,
+    "totalReturnPct": -3.36,
+    "unrealizedPnl": 5433.0,
+    "realizedPnl": -39003.06,
+    "cashPct": 81.53
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.0598,
+    "up": 313,
+    "down": 5236,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 30,
+    "limit_downs": 68,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.06:1, 0/3 major indices green, 30 limit-ups / 68 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "恐慌性普跌：上证-1.22%、深成-3.09%、创业板-3.54%、科创50-3.12%；涨跌家数313/5236(0.06:1)，跌停68家(f7_10区间1061家)，0/3主要指数翻绿；IV整体极度恐慌(avg iv_rank 0.762，500ETF/创业板ETF iv_rank=1.0)。资金极度防御：国有大行+2.54%、股份制银行+1.29%、保险+1.23%为仅有的上涨板块，科技/电子链重挫(其他电子-6.93%)。entry_regime=panic硬阻断新开仓，维持现金防守(现金占比81.5%)。"
+  }
+}

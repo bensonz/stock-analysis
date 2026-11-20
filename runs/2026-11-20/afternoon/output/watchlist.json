@@ -1,0 +1,93 @@
+{
+  "date": "2026-11-20",
+  "market_overview": {
+    "shanghai_composite": {
+      "value": 3533.793,
+      "change_pct": -1.22
+    },
+    "shenzhen_component": {
+      "value": 10256.389,
+      "change_pct": -3.09
+    },
+    "chinext": {
+      "value": 2212.127,
+      "change_pct": -3.54
+    },
+    "sentiment": "极度恐慌",
+    "hot_sectors": [
+      "国有大型银行Ⅱ",
+      "股份制银行Ⅱ",
+      "保险Ⅱ",
+      "炼化及贸易",
+      "渔业"
+    ],
+    "cold_sectors": [
+      "其他电子Ⅱ",
+      "非金属材料Ⅱ",
+      "金属新材料",
+      "电子化学品Ⅱ",
+      "通用设备"
+    ],
+    "notes": "恐慌性普跌：上证-1.22%、深成-3.09%、创业板-3.54%、科创50-3.12%；涨跌家数313/5236(0.06:1)，跌停68家(f7_10区间1061家)，0/3主要指数翻绿；IV整体极度恐慌(avg iv_rank 0.762，500ETF/创业板ETF iv_rank=1.0)。资金极度防御：国有大行+2.54%、股份制银行+1.29%、保险+1.23%为仅有的上涨板块，科技/电子链重挫(其他电子-6.93%)。entry_regime=panic硬阻断新开仓，维持现金防守(现金占比81.5%)。"
+  },
+  "strategy_scan": {
+    "total_stocks_scanned": 61,
+    "strategy_name": "小市值-无 20RP",
+    "scan_time": "2026-11-20T15:09:10.479720+08:00"
+  },
+  "recommendations": [
+    {
+      "code": "601077.SH",
+      "name": "渝农商行",
+      "price": null,
+      "rps120": 93.63,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600007.SH",
+      "name": "中国国贸",
+      "price": null,
+      "rps120": 94.97,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600398.SH",
+      "name": "海澜之家",
+      "price": null,
+      "rps120": 94.23,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "603893.SH",
+      "name": "瑞芯微",
+      "price": null,
+      "rps120": 95.0,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    },
+    {
+      "code": "600323.SH",
+      "name": "瀚蓝环境",
+      "price": null,
+      "rps120": 92.2,
+      "recommendation": "WATCH",
+      "confidence": "medium",
+      "reasoning": ""
+    }
+  ],
+  "summary": {
+    "total_scanned": 61,
+    "buy_recommendations": 0,
+    "watch_recommendations": 5,
+    "avoid_recommendations": 0,
+    "market_call": "防守（恐慌，禁止新开仓）",
+    "reasoning": "恐慌性普跌：上证-1.22%、深成-3.09%、创业板-3.54%、科创50-3.12%；涨跌家数313/5236(0.06:1)，跌停68家(f7_10区间1061家)，0/3主要指数翻绿；IV整体极度恐慌(avg iv_rank 0.762，500ETF/创业板ETF iv_rank=1.0)。资金极度防御：国有大行+2.54%、股份制银行+1.29%、保险+1.23%为仅有的上涨板块，科技/电子链重挫(其他电子-6.93%)。entry_regime=panic硬阻断新开仓，维持现金防守(现金占比81.5%)。"
+  }
+}
