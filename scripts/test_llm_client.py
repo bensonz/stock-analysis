@@ -276,3 +276,51 @@ def test_web_search_error_flags_every_failure_shape():
     assert llm_client.web_search_error("web_search", "1. [title](url)\ncontent") is None
     assert llm_client.web_search_error("web_search", "No results found.") is None
     assert llm_client.web_search_error("web_fetch", "Tavily HTTP 432") is None
+
+
+# --- web_search fallback (Tavily → Exa) and finance_news (2026-11-21) ---
+
+def test_web_search_uses_tavily_when_it_works(monkeypatch):
+    monkeypatch.setattr(llm_client, "_tavily_search", lambda q, n: "1. [t](u)\nok")
+    monkeypatch.setattr(llm_client, "_exa_search",
+                        lambda q, n: (_ for _ in ()).throw(AssertionError("Exa called")))
+    assert llm_client.execute_web_search("q") == "1. [t](u)\nok"
+
+
+def test_web_search_falls_back_to_exa_and_says_so(monkeypatch):
+    monkeypatch.setattr(llm_client, "_tavily_search", lambda q, n: "Tavily HTTP 432: limit")
+    monkeypatch.setattr(llm_client, "_exa_search", lambda q, n: "1. [t](u)\nexa")
+    out = llm_client.execute_web_search("q")
+    assert out.startswith(llm_client.EXA_FALLBACK_MARK) and out.endswith("exa")
+    assert llm_client.web_search_error("web_search", out) is None   # answered
+
+
+def test_web_search_fails_only_when_both_fail(monkeypatch):
+    monkeypatch.setattr(llm_client, "_tavily_search", lambda q, n: "Tavily HTTP 432: limit")
+    monkeypatch.setattr(llm_client, "_exa_search", lambda q, n: "Exa HTTP 402: no credit")
+    out = llm_client.execute_web_search("q")
+    assert llm_client.web_search_error("web_search", out) == out[:200]
+    assert "Exa HTTP 402" in out
+
+
+def test_finance_news_formats_articles(monkeypatch):
+    import pandas as pd
+    df = pd.DataFrame([{"关键词": "宝新能源", "新闻标题": "<em>宝新能源</em>：分红公告",
+                        "新闻内容": "正文\n第二行", "发布时间": "2026-11-18 20:01:02",
+                        "文章来源": "证券日报", "新闻链接": "http://x/1.html"}])
+    monkeypatch.setattr(llm_client.ak, "stock_news_em", lambda symbol: df)
+    out = llm_client.execute_tool("finance_news", {"query": " 宝新能源 "})
+    assert "2026-11-18 20:01 证券日报｜宝新能源：分红公告" in out
+    assert "正文 第二行" in out and "http://x/1.html" in out and "<em>" not in out
+
+
+def test_finance_news_reports_failure_instead_of_raising(monkeypatch):
+    def boom(symbol):
+        raise ValueError("jsonp changed")
+    monkeypatch.setattr(llm_client.ak, "stock_news_em", boom)
+    assert llm_client.execute_finance_news("x") == "finance_news error: jsonp changed"
+
+
+def test_finance_news_is_offered_to_both_loops():
+    assert "finance_news" in [t["name"] for t in llm_client.TOOLS]
+    assert "finance_news" in [t["function"]["name"] for t in llm_client.OPENAI_TOOLS]

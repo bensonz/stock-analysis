@@ -18,6 +18,7 @@ import time
 from pathlib import Path
 from urllib.parse import quote_plus
 
+import akshare as ak
 import anthropic
 import openai
 import requests
@@ -108,6 +109,15 @@ FETCH_MAX_CHARS = 8000  # max chars per fetch result
 
 # --- Tools ---
 
+FINANCE_NEWS_DESCRIPTION = (
+    "Search Chinese financial news (东方财富 news archive: 财联社, 证券时报, 21财经, 公告解读 …). "
+    "Free and always available — prefer it for any A-share company's recent news, announcements, "
+    "investigations, 调研 and earnings. Returns up to 10 articles (time, source, title, snippet, link). "
+    "Matching is by keyword: search ONE stock NAME (e.g. 宝新能源) — a code also matches other "
+    "codes and indexes, and multi-word queries match loosely."
+)
+FINANCE_NEWS_QUERY_HINT = "One A-share stock name (best), or one short Chinese keyword."
+
 TOOLS = [
     {
         "name": "web_fetch",
@@ -135,8 +145,9 @@ TOOLS = [
     {
         "name": "web_search",
         "description": (
-            "Search the web via Tavily. Returns structured results with titles, URLs, and content snippets. "
-            "Use for finding recent news, sector analysis, stock catalysts, macro events. "
+            "Search the web (Tavily; Exa when Tavily fails). Returns structured results with titles, "
+            "URLs, and content snippets. Use for market-wide news, sector analysis, macro events and "
+            "non-Chinese sources. For one A-share company's news, use finance_news first. "
             "Supports Chinese and English queries."
         ),
         "input_schema": {
@@ -151,6 +162,17 @@ TOOLS = [
                     "description": "Number of results (default 5, max 10).",
                     "default": 5,
                 },
+            },
+            "required": ["query"],
+        },
+    },
+    {
+        "name": "finance_news",
+        "description": FINANCE_NEWS_DESCRIPTION,
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "query": {"type": "string", "description": FINANCE_NEWS_QUERY_HINT},
             },
             "required": ["query"],
         },
@@ -361,7 +383,52 @@ def web_search_error(tool_name: str, result) -> str | None:
     return None
 
 
+#: Marks a web_search answered by Exa because Tavily failed. The tool log
+#: records it as `fallback`, so a dead Tavily stays visible even while Exa
+#: hides it from the doctor's failure check.
+EXA_FALLBACK_MARK = "[web_search: Tavily failed"
+
+
 def execute_web_search(query: str, max_results: int = 5) -> str:
+    """Tavily first; on any Tavily failure, Exa. Fails only if both fail."""
+    tavily = _tavily_search(query, max_results)
+    if not tavily.startswith(WEB_SEARCH_ERROR_PREFIXES):
+        return tavily
+    exa = _exa_search(query, max_results)
+    if exa.startswith("Exa"):
+        return f"{tavily}\nExa fallback also failed: {exa}"
+    return f"{EXA_FALLBACK_MARK} ({tavily[:80]}); results from Exa]\n{exa}"
+
+
+def _exa_search(query: str, max_results: int) -> str:
+    """Exa neural search (free tier: $10 of credit a month, ~$0.007 a search).
+    Every failure message starts with "Exa" so execute_web_search can tell."""
+    api_key = os.environ.get("EXA_API_KEY", "")
+    if not api_key:
+        return "Exa: no EXA_API_KEY"
+    try:
+        resp = requests.post(
+            "https://api.exa.ai/search",
+            headers={"x-api-key": api_key},
+            json={"query": query, "numResults": min(max_results, 10), "type": "auto",
+                  "contents": {"text": {"maxCharacters": 500}}},
+            timeout=20,
+        )
+        if resp.status_code != 200:
+            return f"Exa HTTP {resp.status_code}: {resp.text[:200]}"
+        parts = []
+        for i, r in enumerate(resp.json().get("results", []), 1):
+            date = (r.get("publishedDate") or "")[:10]
+            parts.append(f"{i}. [{r.get('title', '')}]({r.get('url', '')})"
+                         f"{f' ({date})' if date else ''}\n{(r.get('text') or '')[:500]}\n")
+        return "\n".join(parts) if parts else "No results found."
+    except requests.Timeout:
+        return "Exa search timed out (>20s)"
+    except Exception as e:
+        return f"Exa search error: {e}"
+
+
+def _tavily_search(query: str, max_results: int) -> str:
     """Search via Tavily API. Returns structured results."""
     api_key = os.environ.get("TAVILY_API_KEYS") or os.environ.get("TAVILY_API_KEY", "")
     if not api_key:
@@ -403,6 +470,27 @@ def execute_web_search(query: str, max_results: int = 5) -> str:
         return f"Tavily search error: {e}"
 
 
+def execute_finance_news(query: str) -> str:
+    """Keyword search over 东方财富's news archive, via akshare (free, no key).
+
+    akshare calls it stock_news_em and documents a stock code, but the API is
+    a plain keyword search; a stock NAME gives the cleanest results (a code
+    also hits other codes and indexes — 000690 is also a 科创板 index)."""
+    try:
+        df = ak.stock_news_em(symbol=query.strip())
+    except Exception as e:
+        return f"finance_news error: {e}"
+    if df is None or df.empty:
+        return f"finance_news: no articles for {query!r}."
+    parts = []
+    for i, (_, r) in enumerate(df.iterrows(), 1):
+        title = str(r["新闻标题"]).replace("<em>", "").replace("</em>", "")
+        body = str(r["新闻内容"]).replace("<em>", "").replace("</em>", "").replace("\n", " ")
+        parts.append(f"{i}. {str(r['发布时间'])[:16]} {r['文章来源']}｜{title}\n"
+                     f"{body[:300]}\n{r['新闻链接']}\n")
+    return f"东方财富新闻检索「{query}」（按相关度）:\n" + "\n".join(parts)
+
+
 def execute_tool(name: str, input_data: dict) -> str:
     """Dispatch a tool call to its implementation."""
     if name == "web_fetch":
@@ -419,6 +507,8 @@ def execute_tool(name: str, input_data: dict) -> str:
             query=input_data["query"],
             max_results=input_data.get("max_results", 5),
         )
+    elif name == "finance_news":
+        return execute_finance_news(query=input_data["query"])
     else:
         return f"Unknown tool: {name}"
 
@@ -634,6 +724,8 @@ def _run_tool_loop(
             }
             if err := web_search_error(tool_name, result_text):
                 entry["error"] = err
+            elif isinstance(result_text, str) and result_text.startswith(EXA_FALLBACK_MARK):
+                entry["fallback"] = "exa"
             tool_log.append(entry)
 
             tool_results.append({
@@ -706,14 +798,29 @@ OPENAI_TOOLS = [
         "function": {
             "name": "web_search",
             "description": (
-                "Search the web via Tavily. Returns structured results with titles, URLs, and content snippets. "
-                "Use for finding recent news, sector analysis, stock catalysts, macro events."
+                "Search the web (Tavily; Exa when Tavily fails). Returns structured results with titles, "
+                "URLs, and content snippets. Use for market-wide news, sector analysis, macro events and "
+                "non-Chinese sources. For one A-share company's news, use finance_news first."
             ),
             "parameters": {
                 "type": "object",
                 "properties": {
                     "query": {"type": "string", "description": "Search query in Chinese or English."},
                     "max_results": {"type": "integer", "description": "Number of results (default 5, max 10)."},
+                },
+                "required": ["query"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "finance_news",
+            "description": FINANCE_NEWS_DESCRIPTION,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string", "description": FINANCE_NEWS_QUERY_HINT},
                 },
                 "required": ["query"],
             },
@@ -846,6 +953,8 @@ def _run_openai_tool_loop(
             }
             if err := web_search_error(tool_name, result_text):
                 entry["error"] = err
+            elif isinstance(result_text, str) and result_text.startswith(EXA_FALLBACK_MARK):
+                entry["fallback"] = "exa"
             tool_log.append(entry)
 
             messages.append({
