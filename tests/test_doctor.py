@@ -664,3 +664,49 @@ def test_runs_from_before_the_layout_move_are_judged_from_their_own_artifacts(
     src = Path(doc.__file__).read_text(encoding="utf-8")
     assert not re.search(r"^\s*(import|from)\s+(tracking_paths|position_manager)\b",
                          src, re.M)
+
+
+# ── web_search failures (Tavily quota ran out 2026-11-12, unnoticed 14 slots) ─
+
+def _with_searches(p, errors):
+    calls = [{"tool": "web_search", "input": {"query": f"q{i}"}, "result_length": 9,
+              **({"error": e} if e else {})} for i, e in enumerate(errors)]
+    calls.append({"tool": "web_fetch", "input": {"url": "u"}, "result_length": 9})
+    (p / "llm_meta.json").write_text(json.dumps({"tool_calls": calls}), encoding="utf-8")
+
+
+def test_web_search_mostly_failing_is_an_env_finding(tmp_path):
+    runs = tmp_path / "runs"
+    _with_searches(make_run(runs, "2026-11-23", "noon"),
+                   ["Tavily HTTP 432: limit", "Tavily HTTP 432: limit", None])
+    res = audit(runs, "2026-11-23", "noon")
+    f = [x for x in res.findings if x.check == "web_search_failed"]
+    assert [x.id for x in f] == ["web-search-failed"] and f[0].kind == doc.ENV
+    assert "2/3" in f[0].title
+
+
+def test_one_timeout_among_several_searches_is_not_reported(tmp_path):
+    runs = tmp_path / "runs"
+    _with_searches(make_run(runs, "2026-11-23", "noon"),
+                   ["Tavily search timed out (>15s)", None, None, None])
+    res = audit(runs, "2026-11-23", "noon")
+    assert not [x for x in res.findings if x.check == "web_search_failed"]
+
+
+def test_runs_before_error_logging_are_skipped_not_passed(tmp_path):
+    """Before 2026-11-23 llm_meta logged only result_length: a failure is
+    indistinguishable from a short result, so the check must not claim a pass."""
+    runs = tmp_path / "runs"
+    _with_searches(make_run(runs, "2026-11-20", "noon"), [None, None])
+    res = audit(runs, "2026-11-20", "noon")
+    assert any(s["check"] == "check_web_search_failed" for s in res.skipped)
+
+
+def test_web_search_failure_three_slots_running_needs_a_code_change(tmp_path):
+    runs = tmp_path / "runs"
+    for d, s in (("2026-11-23", "noon"), ("2026-11-23", "afternoon"), ("2026-11-24", "noon")):
+        p = make_run(runs, d, s)
+        _with_searches(p, ["Tavily HTTP 432: limit"])
+        res = audit(runs, d, s)
+        doc.write_result(res, p)
+    assert "web-search-failed" in [f.id for f in res.code_findings]

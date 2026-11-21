@@ -346,6 +346,21 @@ def execute_web_screenshot(url: str):
     ]
 
 
+#: How execute_web_search reports a failure. `web_search_error` reads these so
+#: llm_meta.json records the failure per call, for the doctor's
+#: check_web_search_failed (Tavily ran out of quota 2026-11-12 and every run
+#: kept "succeeding" on Baidu scraping for 14 slots before anyone noticed).
+WEB_SEARCH_ERROR_PREFIXES = ("Error: No Tavily", "Tavily HTTP", "Tavily search")
+
+
+def web_search_error(tool_name: str, result) -> str | None:
+    """The failure text of a web_search result, or None if it returned results."""
+    if tool_name == "web_search" and isinstance(result, str) \
+            and result.startswith(WEB_SEARCH_ERROR_PREFIXES):
+        return result[:200]
+    return None
+
+
 def execute_web_search(query: str, max_results: int = 5) -> str:
     """Search via Tavily API. Returns structured results."""
     api_key = os.environ.get("TAVILY_API_KEYS") or os.environ.get("TAVILY_API_KEY", "")
@@ -610,13 +625,16 @@ def _run_tool_loop(
                                  + len(b.get("text", "")) for b in result_text)
             else:
                 logged_len = len(result_text)
-            tool_log.append({
+            entry = {
                 "pass": label.strip(),
                 "round": round_num,
                 "tool": tool_name,
                 "input": tool_input,
                 "result_length": logged_len,
-            })
+            }
+            if err := web_search_error(tool_name, result_text):
+                entry["error"] = err
+            tool_log.append(entry)
 
             tool_results.append({
                 "type": "tool_result",
@@ -819,13 +837,16 @@ def _run_openai_tool_loop(
             result_text = tool_executor(tool_name, tool_input) if tool_executor else None
             if result_text is None:
                 result_text = execute_tool(tool_name, tool_input)
-            tool_log.append({
+            entry = {
                 "pass": label.strip(),
                 "round": round_num,
                 "tool": tool_name,
                 "input": tool_input,
                 "result_length": len(result_text),
-            })
+            }
+            if err := web_search_error(tool_name, result_text):
+                entry["error"] = err
+            tool_log.append(entry)
 
             messages.append({
                 "role": "tool",

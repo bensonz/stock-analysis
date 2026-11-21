@@ -263,3 +263,16 @@ def test_empty_stream_raises_after_the_retries(monkeypatch):
     else:
         raise AssertionError("an empty stream must not pass silently")
     assert len(calls) == 1 + llm_client.EMPTY_STREAM_RETRIES
+
+
+def test_web_search_error_flags_every_failure_shape():
+    """The doctor's web_search check reads this; each return path of
+    execute_web_search that is not results must be caught."""
+    for msg in ("Error: No Tavily API key. Set TAVILY_API_KEYS or TAVILY_API_KEY.",
+                'Tavily HTTP 432: {"detail":{"error":"This request exceeds your plan"}}',
+                "Tavily search timed out (>15s)",
+                "Tavily search error: boom"):
+        assert llm_client.web_search_error("web_search", msg) == msg[:200]
+    assert llm_client.web_search_error("web_search", "1. [title](url)\ncontent") is None
+    assert llm_client.web_search_error("web_search", "No results found.") is None
+    assert llm_client.web_search_error("web_fetch", "Tavily HTTP 432") is None

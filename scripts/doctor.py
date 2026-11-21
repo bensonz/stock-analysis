@@ -78,6 +78,11 @@ ARTIFACT_EPOCHS = {
     "positions_snapshot.json": "2026-03-05",
 }
 
+#: first run whose llm_meta.json carries a per-call `error` on failed
+#: web_search calls. Earlier runs logged only result_length, so a failure there
+#: cannot be told apart from a short result — those runs are skipped, not passed.
+WEB_SEARCH_ERRORS_LOGGED_FROM = "2026-11-23"
+
 #: remind about undecided event-inbox items this close to their A-share impact
 #: date. Mirrors event_inbox.REMIND_WITHIN_DAYS (a test pins them equal) —
 #: not imported, because event_inbox pulls in akshare and the price-DB
@@ -156,6 +161,7 @@ class RunView:
     report: str | None = None
     db_health: dict | None = None
     event_inbox: dict | None = None
+    llm_meta: dict | None = None
 
     @classmethod
     def load(cls, date: str, slot: str, path: Path) -> "RunView":
@@ -185,7 +191,9 @@ class RunView:
                    # Also an input: what the event-inbox step saw THIS run, so
                    # a historical sweep never judges an old run by today's
                    # tracking/calendar/event_inbox.md.
-                   event_inbox=js(path / "input" / "event_inbox.json"))
+                   event_inbox=js(path / "input" / "event_inbox.json"),
+                   # The model's tool calls this run (written by run_daily).
+                   llm_meta=js(path / "llm_meta.json"))
 
     # -- accessors that fail loudly rather than defaulting to something plausible
 
@@ -651,6 +659,40 @@ def check_event_inbox_triage(v: RunView) -> list[Finding]:
                  "python3 scripts/event_inbox.py triage"))]
 
 
+def check_web_search_failed(v: RunView) -> list[Finding]:
+    """Half or more of the run's web_search calls failed.
+
+    The run still succeeds — the model falls back to scraping search pages
+    with web_fetch — so nothing else notices. Tavily's free plan ran out on
+    2026-11-12 and 14 slots in a row decided with degraded news research
+    before an audit found it. ENV with a stable id: one bad run is weather,
+    three in a row is a quota or key problem. "Half or more" so that a single
+    timeout among five searches never starts a streak.
+    """
+    if v.date < WEB_SEARCH_ERRORS_LOGGED_FROM:
+        raise CannotCheck("llm_meta.json predates per-call web_search error logging "
+                          f"({WEB_SEARCH_ERRORS_LOGGED_FROM})")
+    calls = [t for t in v.need("llm_meta").get("tool_calls") or []
+             if t.get("tool") == "web_search"]
+    if not calls:
+        raise CannotCheck("the model made no web_search calls this run")
+    failed = [t for t in calls if t.get("error")]
+    if len(failed) * 2 < len(calls):
+        return []
+    first = str(failed[0]["error"])
+    return [Finding(
+        id="web-search-failed",
+        check="web_search_failed",
+        kind=ENV,
+        title=f"web_search 失败 {len(failed)}/{len(calls)} 次 — {first}"[:90],
+        detail=("本次运行的联网搜索大多失败；模型改用 web_fetch 抓搜索页，"
+                "新闻研究质量下降，但运行仍会显示成功。\n"
+                + "\n".join(f"  - {t.get('input', {}).get('query', '?')}: {t['error']}"
+                             for t in failed[:5])),
+        fix_cmd=("检查 Tavily 额度: https://app.tavily.com (免费档每月1日重置)；"
+                 "或 .env 的 TAVILY_API_KEY"))]
+
+
 CHECKS = [
     # invariant
     check_new_positions_absent_from_snapshot,
@@ -671,6 +713,7 @@ CHECKS = [
     check_stock_list_fresh,
     check_event_inbox_undecided,
     check_event_inbox_triage,
+    check_web_search_failed,
 ]
 
 
