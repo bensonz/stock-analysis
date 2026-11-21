@@ -142,3 +142,35 @@ def test_entries_before_the_epoch_are_excluded(tmp_path):
     got = [e["code"] for e in ea.load_entries(tmp_path, since="2026-07-23")]
     assert got == ["600001"]
     assert len(ea.load_entries(tmp_path)) == 2
+
+
+# --- split(): realized vs the current rules on the same trades (2026-11-21) ---
+
+def test_exit_bucket_first_match_wins():
+    """A trailing-stop exit that also says CRITICAL is a trailing stop."""
+    assert ea.exit_bucket("跌破+10%移动止损, stop_proximity CRITICAL") == "trail/breakeven"
+    assert ea.exit_bucket("Rule 5触发: -3.56%在入场2天内") == "rule5"
+    assert ea.exit_bucket("stop_proximity CRITICAL：距止损仅1.29%") == "proactive"
+    assert ea.exit_bucket("元件板块连续第3个交易日位于bottom5") == "sector"
+    assert ea.exit_bucket(None) == "other"
+
+
+def test_split_separates_entry_fill_from_exit(tmp_path):
+    """Entry at 10, next open 11, closes flat at 11 for the horizon, sold at -4%.
+
+    Rules from our price: +10%. Rules from the next open: 0% → entry effect +10pp
+    (we bought cheaper). Exit effect: -4 - 10 = -14pp, in the rule5 bucket.
+    """
+    closed = tmp_path / "tracking" / "book" / "closed"
+    closed.mkdir(parents=True)
+    (closed / "600000.json").write_text(json.dumps(
+        {"code": "600000", "entryDate": "2026-08-03", "entryPrice": 10.0,
+         "returnPct": -4.0, "exitReason": "Rule 5触发"}))
+    db = tmp_path / "p.db"
+    conn = _db([("600000", f"2026-08-{d:02d}", 11, 11, 11, 11) for d in range(4, 8)], [])
+    conn.commit()
+    conn.execute("VACUUM INTO ?", (str(db),))
+    d = ea.split(horizon=3, root=tmp_path, db_path=db)
+    assert d["n"] == 1
+    assert abs(d["ours_close"] - 10.0) < 1e-9 and abs(d["next_close"]) < 1e-9
+    assert abs(d["buckets"]["rule5"]["gap_sum_close"] - (-14.0)) < 1e-9

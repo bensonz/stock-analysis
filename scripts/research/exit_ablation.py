@@ -28,10 +28,12 @@ cannot validate one in general.
 Usage:
     python3 scripts/research/exit_ablation.py --human
     python3 scripts/research/exit_ablation.py --horizon 20 --human
+    python3 scripts/research/exit_ablation.py --split --horizon 20 --human
 """
 import argparse
 import glob
 import json
+import re
 import sqlite3
 import statistics
 import sys
@@ -55,12 +57,33 @@ POLICIES = [
     ("硬止损 + 头3日-3% (无时间止损)", -5.0, -3.0, 3, None, None),
     # Time-stop grid on top of hard+early. 10d/<3% vs 20d/<5% moves two knobs at
     # once (patience AND the bar); the crosses isolate which one is load-bearing.
-    ("  └ +时间止损 10d/<3% (现行)", -5.0, -3.0, 3, 10, 3.0),
+    ("  └ +时间止损 10d/<3%",       -5.0, -3.0, 3, 10, 3.0),
     ("  └ +时间止损 10d/<5%",       -5.0, -3.0, 3, 10, 5.0),
-    ("  └ +时间止损 15d/<3%",       -5.0, -3.0, 3, 15, 3.0),
+    ("  └ +时间止损 15d/<3% (现行)", -5.0, -3.0, 3, 15, 3.0),
     ("  └ +时间止损 20d/<3%",       -5.0, -3.0, 3, 20, 3.0),
     ("  └ +时间止损 20d/<5% (旧值)", -5.0, -3.0, 3, 20, 5.0),
 ]
+
+# The rules ANALYST.md runs today: Rule 5 (−5% hard, −3% in the first 3
+# sessions) plus the 15-day/<3% time stop. `split()` replays against this.
+CURRENT_POLICY = (-5.0, -3.0, 3, 15, 3.0)
+
+# Exit reasons are free text written by the model. First match wins, so a
+# trailing-stop exit that also says "CRITICAL" is counted as a trailing stop.
+EXIT_BUCKETS = [
+    ("trail/breakeven", r"移动止损|追踪止损|保本止损|盈亏平衡|锁利|trailing|breakeven"),
+    ("rule5", r"硬止损触发|Hard stop|STOP BREACHED|Stop breached|跌破硬止损|Rule ?5"
+              r"|头3日|first 3|首3日|in <3"),
+    ("proactive", r"stop_proximity|CRITICAL|距止损|Proactive"),
+    ("sector", r"bottom ?5|板块|sector"),
+]
+
+
+def exit_bucket(reason):
+    for name, pattern in EXIT_BUCKETS:
+        if re.search(pattern, reason or "", re.I):
+            return name
+    return "other"
 
 
 def load_entries(root=ROOT, since=None):
@@ -75,7 +98,8 @@ def load_entries(root=ROOT, since=None):
             out.append({"code": (r.get("code") or "").split(".")[0],
                         "name": r.get("name"), "entryDate": r.get("entryDate"),
                         "entryPrice": r.get("entryPrice"),
-                        "actual": r.get("returnPct"), "open": False})
+                        "actual": r.get("returnPct"), "open": False,
+                        "exitReason": r.get("exitReason")})
     pos = book.positions
     if pos.exists():
         with open(pos, encoding="utf-8") as fh:
@@ -185,6 +209,71 @@ def run(horizon=10, root=ROOT, db_path=DB_PATH, fill="stop", since=None):
     }
 
 
+def split(horizon=20, root=ROOT, db_path=DB_PATH, since=None):
+    """Realized vs CURRENT_POLICY on the same closed trades, split in two.
+
+    - entry effect: CURRENT_POLICY from our entry price minus the same rules
+      from the next session's open (what a fill-at-next-open system pays).
+    - exit effect: realized minus CURRENT_POLICY from our entry price — how
+      the exits we actually made compare with the written rules, grouped by
+      the exit reason (`exit_bucket`).
+
+    All returns gross (no costs): `returnPct` in the book is gross too. Only
+    trades with a full horizon+1 sessions after entry are used, so every
+    comparison is on one population (the 08-16 audit's mistake was not).
+    """
+    conn = sqlite3.connect(db_path)
+    rows = []
+    for e in load_entries(root, since):
+        if e["open"] or e["actual"] is None:
+            continue
+        bars = bars_after(conn, e["code"], e["entryDate"], horizon + 1)
+        if len(bars) < horizon + 1:
+            continue
+        r = {"code": e["code"], "actual": e["actual"],
+             "bucket": exit_bucket(e.get("exitReason"))}
+        for fill in ("stop", "close"):
+            r["ours_" + fill] = settle(bars[:horizon], e["entryPrice"],
+                                       *CURRENT_POLICY, fill=fill)[0]
+            r["next_" + fill] = settle(bars[1:], bars[0][1],
+                                       *CURRENT_POLICY, fill=fill)[0]
+        rows.append(r)
+    conn.close()
+
+    def mean(key, rs=rows):
+        return statistics.mean(x[key] for x in rs) if rs else None
+
+    buckets = {}
+    for name in sorted({r["bucket"] for r in rows}):
+        rs = [r for r in rows if r["bucket"] == name]
+        buckets[name] = {
+            "n": len(rs), "actual": mean("actual", rs),
+            **{f"gap_sum_{f}": sum(r["actual"] - r["ours_" + f] for r in rs)
+               for f in ("stop", "close")}}
+    return {"horizon": horizon, "n": len(rows), "actual": mean("actual"),
+            **{f"{k}_{f}": mean(f"{k}_{f}") for k in ("ours", "next")
+               for f in ("stop", "close")},
+            "buckets": buckets}
+
+
+def human_split(d):
+    print(f"实际 vs 现行规则 — 同一批 {d['n']} 笔已平仓 (满 {d['horizon']}+1 日行情, 不含成本)")
+    if not d["n"]:
+        return
+    print(f"  实际发生                    {d['actual']:+6.2f}%")
+    for f in ("stop", "close"):
+        print(f"  现行规则, 我们的入场价 [{f:5s}] {d['ours_' + f]:+6.2f}%   "
+              f"次日开盘入场 {d['next_' + f]:+6.2f}%   "
+              f"入场影响 {d['ours_' + f] - d['next_' + f]:+5.2f}pp   "
+              f"出场影响 {d['actual'] - d['ours_' + f]:+5.2f}pp")
+    print(f"\n  {'出场理由':18s} {'n':>3s} {'实际均值':>8s} {'差额合计 close':>14s} {'stop':>8s}")
+    for name, b in d["buckets"].items():
+        print(f"  {name:18s} {b['n']:3d} {b['actual']:+7.2f}% "
+              f"{b['gap_sum_close']:+12.1f}pp {b['gap_sum_stop']:+7.1f}pp")
+    print("\n  注: 差额 = 实际 − 现行规则(同一入场价)。负数 = 我们的出场比规则差。")
+    print("      规则回放持有上限为 horizon 日, 没有移动/保本止损; 理由分类靠正则匹配模型写的文字。")
+
+
 def _summ(v):
     if not v:
         return None
@@ -234,10 +323,20 @@ def main():
                          f"{EVALUATION_EPOCH} — earlier entries are a retired system)")
     ap.add_argument("--all-history", action="store_true",
                     help="replay pre-epoch entries too (forensics only)")
+    ap.add_argument("--split", action="store_true",
+                    help="realized vs CURRENT_POLICY on the same closed trades: "
+                         "entry-fill effect and exit effect by exit reason")
     ap.add_argument("--human", action="store_true")
     args = ap.parse_args()
-    d = run(horizon=args.horizon, fill=args.fill,
-            since=None if args.all_history else args.since)
+    since = None if args.all_history else args.since
+    if args.split:
+        d = split(horizon=args.horizon, since=since)
+        if args.human:
+            human_split(d)
+        else:
+            print(json.dumps(d, ensure_ascii=False, indent=2))
+        return
+    d = run(horizon=args.horizon, fill=args.fill, since=since)
     if args.human:
         human(d)
     else:

@@ -175,3 +175,48 @@ sells (h024, before the stop is hit) −42pp, trailing/breakeven ratchets −34p
 first-3-days −23pp, sector gravity +10pp. About half the shortfall is
 discretionary early exits layered on top of the stop rules, not the stops.
 n=24 in one regime: this can't overturn the full-history ranking.
+
+## 2026-11-21 — entry fill vs exit, on one population
+
+Reproduce: `python3 scripts/research/exit_ablation.py --split --horizon 20 --human`
+
+Asked by the 11-21 weekly audit: realized trails the replay of the same trades
+by about 2.6pp/trade. Is that the entry fill (we only trade at ~11:35 and
+~15:05) or the exits? `--split` takes every closed post-epoch trade with 21
+sessions of data (n=32), and replays the **current** rules (Rule 5 + 15d/<3%)
+from (a) our entry price and (b) the next session's open. All returns gross.
+
+| | stop fill | close fill |
+|---|---|---|
+| Realized | +0.29% | +0.29% |
+| Current rules, our entry price | +2.23% | +1.71% |
+| Current rules, next-open entry | +2.32% | +2.16% |
+| **Entry effect** | −0.09pp | −0.45pp |
+| **Exit effect** | −1.95pp | −1.42pp |
+
+**Entry fill is small** (0.1–0.45pp/trade). Afternoon entries pay about 1pp
+over the next open, noon entries about 0. **Exits are the gap**, by reason
+(sum of realized − rules, close / stop fill):
+
+| exit reason | n | realized mean | gap sum |
+|---|---|---|---|
+| Rule 5 (−5%, −3% in 3 days) | 11 | −4.34% | −25.6 / −38.6pp |
+| trailing / breakeven stop | 8 | +4.20% | −18.3 / −19.5pp |
+| sector cold | 3 | +12.46% | −5.5 / −6.6pp |
+| proactive (near stop) | 10 | −1.41% | **+3.8 / +2.4pp** |
+
+Reading:
+- **Rule 5 at noon reads an intraday price as if it were a close.** 4 of 12
+  Rule 5 exits were noon sales where the same day closed above the trigger
+  (603259 sold −3.56%, closed −0.81%, then +28% in 10 days; 000811 sold
+  −3.85%, closed +0.93%). 603259 alone is about −29pp of the −25.6pp. One
+  trade decides the sign — do not change Rule 5 on this.
+- **Trailing/breakeven ratchets cut winners early** inside a 20-day window.
+  The replay has no trailing stop and caps at 20 sessions, which favours
+  holding in this sample; it cannot say a wider trail is better in general.
+- **Proactive near-stop sells (h024) earn their keep against the rules**
+  (+3.8pp). The 10-01 attribution (−42pp) measured them against a plain
+  10-session hold, not against the rules; both are true.
+- Owner, 2026-11-21: the system is judged on selection, not fills — two runs
+  a day make fill prices structurally poor. This split agrees that fills are
+  a small part; the exit part is real but rests on n=32 and one or two trades.
