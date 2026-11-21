@@ -39,6 +39,7 @@ import json
 import os
 import re
 import shutil
+import signal
 import subprocess
 import sys
 import time
@@ -635,6 +636,16 @@ def list_runs() -> None:
         started = run_started_at(d)
         legacy = " (legacy)" if d.name == date else ""
         print(f"  {date}  {slot:9s}  {started:32s}  {status}{legacy}")
+
+
+#: wait before re-checking when every external source is down at pre-flight
+ALL_DOWN_RECHECK_SEC = 60
+
+
+def all_external_sources_down(health: dict) -> bool:
+    """Both live feeds the run cannot do without are not `ok` (pricedb is local)."""
+    return all((health.get(src) or {}).get("status") != "ok"
+               for src in ("sina", "cheesefortune"))
 
 
 def preflight_pricedb_or_exit(manifest) -> None:
@@ -2235,6 +2246,42 @@ def write_manifest(manifest, run_dir: Path) -> None:
     refresh_site()
 
 
+def begin_run_record(manifest, run_dir: Path) -> None:
+    """Leave a record on disk from the first second of the run.
+
+    Two slots vanished without a manifest: 2026-11-04 afternoon was killed
+    (SIGTERM) mid-LLM call, and 2026-11-11 noon hung 4h20m in phase 1, so the
+    doctor found nothing and reported `manifest-absent`. Now:
+
+    - a START MARKER is written at once: a copy of the manifest with a CRITICAL
+      `unfinished` phase, so it reads `failed` until write_manifest replaces it
+      with the real outcome. The live manifest object is not touched — its
+      finalize() derives status from gates, and an early real write would say
+      "success" for a run that has done nothing yet.
+    - SIGTERM writes the real manifest with a `killed` phase before exiting
+      143. SIGKILL or a power cut still leave the start marker behind.
+    """
+    marker = manifest.to_dict()
+    marker["status"] = PipelineStatus.FAILED.value
+    marker["exit_code"] = None
+    marker["phases"] = {**marker["phases"], "unfinished": {
+        "status": "failed", "duration_sec": 0.0,
+        "errors": [f"CRITICAL: run started {manifest.run_started_at} and has not "
+                   "written its final manifest — still running, or killed/crashed"]}}
+    run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "manifest.json").write_text(
+        json.dumps(marker, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    def _on_sigterm(signum, _frame):
+        manifest.add_phase("killed", "failed", details={"errors": [
+            f"CRITICAL: killed by signal {signum} at {datetime.now().isoformat(timespec='seconds')}"]})
+        write_manifest(manifest, run_dir)
+        print(f"\n✗ killed by signal {signum} — manifest written as failed", file=sys.stderr)
+        sys.exit(128 + signum)
+
+    signal.signal(signal.SIGTERM, _on_sigterm)
+
+
 def phase4_validate_and_log(date: str, logs: list[dict], slot: str) -> list[str]:
     """Phase 4: Validate output and save run log."""
     errors = validate_output(date, slot)
@@ -2489,6 +2536,7 @@ def main():
             for name in ("health_check", "preflight_pricedb"):
                 if name in prior_phases:
                     manifest.phases[name] = prior_phases[name]
+            begin_run_record(manifest, run_dir)
             print(f"\nGate 1: Validating reused Phase 1 data...", file=sys.stderr)
             gate1 = validate_phase1_gate(data)
             manifest.add_gate(gate1)
@@ -2542,12 +2590,33 @@ def main():
                 run_started_at=run_started_at_iso,
             )
             manifest.add_phase("health_check", "ok", details={"sources": health})
+            begin_run_record(manifest, run_dir)
 
-            # Warn if critical sources are all down
-            sina_down = health.get("sina", {}).get("status") != "ok"
-            cf_down = health.get("cheesefortune", {}).get("status") != "ok"
-            if sina_down and cf_down:
-                print("  ✗ ALL external data sources are down — pipeline will likely fail", file=sys.stderr)
+            # Every external source down: stop instead of collecting. On
+            # 2026-11-11 (DNS down) phase 1 went on anyway — the pool fell back
+            # to per-stock fetches that each sat through their timeouts — and
+            # hung 4h20m, which also made launchd skip the 15:05 slot. One
+            # re-check first, so a blip of a few seconds does not cost a run.
+            if all_external_sources_down(health):
+                print(f"  ✗ ALL external data sources are down — re-checking in "
+                      f"{ALL_DOWN_RECHECK_SEC}s", file=sys.stderr)
+                time.sleep(ALL_DOWN_RECHECK_SEC)
+                health = check_source_health()
+                if all_external_sources_down(health):
+                    manifest.add_phase("health_check", "failed", details={
+                        "sources": health,
+                        "errors": ["CRITICAL: all external data sources down (sina, "
+                                   "cheesefortune) twice — aborted before phase 1"]})
+                    write_manifest(manifest, run_dir)
+                    print("Pipeline FAILED at pre-flight: all external sources down. "
+                          "No data collected, no LLM call, no positions modified.",
+                          file=sys.stderr)
+                    print(json.dumps({"date": date, "status": "failed",
+                                      "failed_at": "preflight_all_sources_down"},
+                                     ensure_ascii=False))
+                    sys.exit(1)
+                manifest.add_phase("health_check", "ok", details={"sources": health})
+                print("  ✓ sources back on re-check — continuing", file=sys.stderr)
 
             # Pre-flight: refresh local pricedb and hard-gate on staleness.
             # Done here (not inside phase1) so we refuse to start analysis on stale closes.
