@@ -1,5 +1,18 @@
 # Progress
 
+## 2026-11-21 (Stage 4 validation)
+- Done: 6 reports in `reports/stage4-2026-11-21/` (git-ignored; rows in
+  `reports/scorecards.jsonl`) plus hand scoring of the 08-25/08-31 reports.
+  Repeatability passes (spread 0.3 and 0.0). Writer comparison: 002293 same
+  band; 605098 splits 3/4 across the 7.0 edge (W 6.9 vs 7.3). Hand scoring: no
+  flip (both band 3). Scores do not copy any example values.
+- Caveat: Tavily web search was over quota (1001/1000) for all runs. 5 of 6 bear
+  passes hit 15 tool rounds and returned nothing. One Claude run died on 3
+  relay empty-stream retries and was rerun.
+- Next: owner decides on the 605098 edge case. Optional: rerun the writer pair
+  once Tavily works, to test on full research.
+- Blocked: Tavily quota.
+
 ## 2026-11-03 (review fixes)
 - Done: `stamp_rating` replaces a model-written `方向 ｜ 评级 N/5` in place (no
   second, contradicting 结论 line); it stamps the real title, not a stray

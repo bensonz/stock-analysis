@@ -15,12 +15,12 @@ Rules for this file:
 
 | date | event | future event |
 |---|---|---|
-| 2026-11-03 | deep_report 评分方程已实现（PLAN.md Stage 1–3）；Stage 4 验证未跑 | **2026-11-17 due**: 跑 docs/deep_report_scoring/PLAN.md Stage 4：002293、605098 各同日 2 次（W 差 ≤ 0.5、同档）；同日 writer=anthropic vs openai（同档、W 差 ≤ 1.0）；手评 002293 08-25 / 08-31 两份旧报告。注意 11-10→11-13 试用期 ANTHROPIC_MODEL=Fable 5.2，anthropic 臂按当时写手记录 |
 
 ## Resolved
 
 | date | event | outcome |
 |---|---|---|
+| 2026-11-03 | deep_report 评分方程 Stage 4 验证 (due 11-17) | **2026-11-21 已跑（迟 4 天）**: 同日重复通过（002293 W 6.8/6.5，605098 6.9/6.9，均 3 档）；写手对比 002293 同档，605098 DeepSeek 7.3（4 档）vs Claude 6.9（3 档）——差 0.4 在限内，但跨 7.0 边界，待 owner 定；手评 08-25/08-31 两份均 3 档，不改边界。注意：Tavily 超额（1001/1000），6 份中 5 份 bear 检索为空。详见 docs/deep_report_scoring/PLAN.md |
 | 2026-11-10 | 日常决策模型 DeepSeek V4 Pro → Claude 试用一周（owner） | **2026-11-10 当日结束，回到 DeepSeek（owner）**: Fable 5.2 两次死在工具循环第 2 轮（relay 立即拒绝且丢弃错误文本；已排除 temperature、工具结果内容、请求大小；原因未明，下次先保存失败请求原样重发读错误）。Opus 5.5 跑通 noon 一次（--reuse-phase1，4 轮、9 次工具、111s、327k/8k，新开 300747 锐科激光 6%）。留下的修复：9f143c5c（relay 吞掉 temperature 400）、0ba165f7（空流重试 3 次）。`.env` 已原样恢复 |
 | 2026-09-01 | deep_report TEMPERATURE 0.5→1.0（同日双跑 4/5+4/5，判定边界陡而非骰子问题） | **2026-11-03 落地**: owner 批准 PROPOSAL 并实现（8239546a、293d337c、8ff1785d）——代码按锚定 scorecard 计算评级，模型不再写评级；TEMPERATURE 定为 1.0。11-03 周审写下的 11-10 due 早于批准，属过期条目（11-10 移入）。Stage 4 验证另列 Open，due 2026-11-17 |
 | 2026-09-01 | web_fetch 稀薄结果升级 crawl4ai（预算 3/run）+ web_screenshot 上线 | **2026-11-03 KEEP**: 09-01→11-03 共 72 次运行、153 次 web_fetch，升级触发 8 次、成功 5、失败 3（均 wallstreetcn 60s 超时）、预算耗尽 0。web_screenshot 0 次调用（openai 循环无此工具）——去留列入周审 owner 项。llm_meta.json 不记升级结果，只能从 pipeline.log 反推 |
