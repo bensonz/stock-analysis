@@ -1,4 +1,4 @@
-"""Tests for scripts/research/reentry_stats.py — epoch scoping of compute().
+"""Tests for scripts/reentry.py (moved up from research/reentry_stats.py 2026-11-21) — epoch scoping of compute().
 
 Every test builds its own tracking dir under tmp_path; nothing reads tracking/.
 """
@@ -9,7 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts" / "research"))
 
-import reentry_stats as rs
+import reentry as rs
 
 
 def _trip(code, entry, exit_, ret, entry_px=10.0, exit_px=10.0):
@@ -72,3 +72,31 @@ def test_since_none_is_all_history(tmp_path):
     ])
     out = rs.compute(d, since=None)
     assert (out["reentry"]["n"], out["book"]["n"]) == (1, 2)
+
+
+# --- the prompt prints the live record (was hardcoded n=9 −3.71% until 2026-11-21) ---
+
+def test_prompt_line_reports_the_live_record(monkeypatch):
+    import run_daily
+    monkeypatch.setattr(run_daily.reentry, "compute", lambda since: {
+        "reentry": {"n": 7, "mean_pct": -1.86, "wins": 2, "win_rate_pct": 28.6},
+        "book": {"n": 35, "mean_pct": -0.05, "wins": 9, "win_rate_pct": 25.7}})
+    line = run_daily.reentry_record_line()
+    assert "重入 n=7 均值 -1.86% 胜率 29%" in line and "n=35 均值 -0.05%/笔" in line
+
+
+def test_prompt_line_without_completed_reentries(monkeypatch):
+    import run_daily
+    monkeypatch.setattr(run_daily.reentry, "compute",
+                        lambda since: {"reentry": {"n": 0}, "book": {"n": 0}})
+    assert "尚无已完成的重入" in run_daily.reentry_record_line()
+
+
+def test_prompt_line_says_so_when_it_cannot_compute(monkeypatch, capsys):
+    import run_daily
+
+    def boom(since):
+        raise OSError("closed/ unreadable")
+    monkeypatch.setattr(run_daily.reentry, "compute", boom)
+    assert run_daily.reentry_record_line() == "实测记录: 计算失败 (OSError)"
+    assert "re-entry record unavailable" in capsys.readouterr().err

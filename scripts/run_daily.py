@@ -89,6 +89,8 @@ from position_manager import (
 from tracking_paths import TRACKING_DIR, HYPOTHESES_FILE, LEDGERS_DIR, CALENDAR_DIR
 from report_generator import generate_candidates_md, generate_watchlist_json, generate_report_md
 import corporate_actions
+import reentry
+from evaluation_epoch import EVALUATION_EPOCH
 from run_rules import run_all_rules
 from run_paths import (
     RUNS_DIR,
@@ -1620,8 +1622,7 @@ def phase2_build_prompt(data: dict) -> str:
             f"{rows}\n\n"
             "若今日 new_positions 中出现上列代码, 这是**重入**: 必须在 reason 里写明"
             "「上次为何离场、这次有何不同」(价位/形态/催化变了什么); 说不出差别就不要买。"
-            "实测记录: 重入 n=9 均值 -3.71% 胜率 11%, 全账本对照 -0.78%/笔 —— "
-            "不是禁令, 但举证责任在重入这一边。\n"
+            f"{reentry_record_line()} —— 不是禁令, 但举证责任在重入这一边。\n"
         )
 
     prompt = f"""{analyst_prompt}
@@ -2244,6 +2245,22 @@ def write_manifest(manifest, run_dir: Path) -> None:
         encoding="utf-8",
     )
     refresh_site()
+
+
+def reentry_record_line() -> str:
+    """The live re-entry record for the prompt. It was a hardcoded "n=9
+    −3.71%" from 2026-08-13 until 2026-11-21, three months stale. A failure
+    to compute it is printed, never hidden, and does not stop the run."""
+    try:
+        out = reentry.compute(since=EVALUATION_EPOCH)
+    except Exception as e:
+        print(f"  ⚠ re-entry record unavailable: {e}", file=sys.stderr)
+        return f"实测记录: 计算失败 ({type(e).__name__})"
+    r, b = out["reentry"], out["book"]
+    if not r.get("n"):
+        return f"实测记录 (入场≥{EVALUATION_EPOCH}): 尚无已完成的重入"
+    return (f"实测记录 (入场≥{EVALUATION_EPOCH}): 重入 n={r['n']} 均值 {r['mean_pct']:+.2f}% "
+            f"胜率 {r['win_rate_pct']:.0f}%, 全账本对照 n={b['n']} 均值 {b['mean_pct']:+.2f}%/笔")
 
 
 def begin_run_record(manifest, run_dir: Path) -> None:

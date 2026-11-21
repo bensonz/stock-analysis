@@ -1195,7 +1195,7 @@ def build_summary(phase1_data: dict) -> str:
 
     # Recent exits: the model must not re-buy a name it just stopped out of
     # without saying why this time is different (2026-08-13). Measured record
-    # of re-entries: scripts/reentry_stats.py.
+    # of re-entries: scripts/reentry.py (printed live in the prompt by run_daily).
     exits = phase1_data.get("recent_exits") or []
     if exits:
         lines = ["## 近期已平仓 (last 14 days — 我们自己刚卖出的标的)",
