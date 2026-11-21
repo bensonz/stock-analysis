@@ -54,7 +54,9 @@ Calculate and report:
 ### A. Portfolio Returns
 - Starting capital vs current equity
 - Total return % (realized + unrealized)
-- Compare to benchmark: 沪深300ETF (510300) over same period
+- Compare to benchmark: 沪深300ETF (510300) over same period — daily closes in
+  `data/index_cache/sh510300.json` (refreshed by every site build; raw closes,
+  the yearly distribution is not added back)
 - **Also: return since the evaluation epoch** — equity at the last snapshot on
   or before 2026-07-23 → now, vs 300ETF over the same window. This, not the
   inception number, is the verdict on the current system (the inception

@@ -43,6 +43,11 @@ RUNS_DIR = PROJECT_ROOT / "runs"
 SITE_DIR = PROJECT_ROOT / "site"
 INDEX_CACHE = PROJECT_ROOT / "data" / "index_cache" / "sh000001.json"
 INDEX_OHLC_CACHE = PROJECT_ROOT / "data" / "index_cache" / "sh000001_ohlc.json"
+#: 沪深300ETF closes — the benchmark agents/WEEKLY_AUDIT.md §A names. Cached
+#: here (tracked in git) since 2026-11-21 so audits stop fetching it by hand.
+#: Not shown on the site. Raw closes: the ETF's yearly distribution is not
+#: added back, so it understates the benchmark by that payout.
+BENCHMARK_CACHE = PROJECT_ROOT / "data" / "index_cache" / "sh510300.json"
 PRICE_DB = PROJECT_ROOT / "data" / "pricedb" / "ashare_prices.db"
 
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -433,22 +438,22 @@ def collect_day_details(series: list[dict], trades: list[dict],
 
 # ---------------------------------------------------------------- index overlay
 
-def fetch_index_kline() -> list[dict] | None:
-    """Sina daily kline for 上证指数 (sh000001): [{day, open, high, low, close}].
-    None on any failure — callers fall back to their caches. One call feeds
-    both the close cache and the OHLC cache."""
+def fetch_index_kline(symbol: str = "sh000001") -> list[dict] | None:
+    """Sina daily kline (上证指数 sh000001 by default; also sh510300):
+    [{day, open, high, low, close}]. None on any failure — callers fall back
+    to their caches. One call feeds both the close cache and the OHLC cache."""
     try:
         import requests
         resp = requests.get(
             "https://quotes.sina.cn/cn/api/jsonp_v2.php/x/CN_MarketDataService.getKLineData",
-            params={"symbol": "sh000001", "scale": "240", "ma": "no", "datalen": "1023"},
+            params={"symbol": symbol, "scale": "240", "ma": "no", "datalen": "1023"},
             timeout=12,
             headers={"User-Agent": "Mozilla/5.0",
                      "Referer": "https://finance.sina.com.cn"})
         text = resp.text
         return json.loads(text[text.index("(") + 1: text.rindex(")")])
     except Exception as e:
-        print(f"[site] index fetch failed ({e}); using caches", file=sys.stderr)
+        print(f"[site] {symbol} fetch failed ({e}); using caches", file=sys.stderr)
         return None
 
 
@@ -472,8 +477,8 @@ def _merge_into_cache(cache_path: Path, fresh: dict, parse) -> dict:
 
 def load_index_closes(kline: list[dict] | None,
                       cache_path: Path = INDEX_CACHE) -> dict:
-    """{iso_date: close} for 上证指数: kline merged into the cache, cache alone
-    when the fetch failed, {} when neither exists."""
+    """{iso_date: close}: kline merged into the cache, cache alone when the
+    fetch failed, {} when neither exists. 上证指数 by default."""
     fresh = {d["day"]: float(d["close"]) for d in (kline or [])}
     return _merge_into_cache(cache_path, fresh, float)
 
@@ -1137,6 +1142,7 @@ def build(site_dir: Path = SITE_DIR) -> Path:
     kline = fetch_index_kline()
     index_closes = merge_index_closes(load_index_closes(kline), settled_index_closes())
     index_bars = load_index_bars(kline)
+    load_index_closes(fetch_index_kline("sh510300"), BENCHMARK_CACHE)   # audit benchmark only
     attach_holding_day_pcts(series, sessions=index_closes)   # before details copies holdings
     details = collect_day_details(series, trades, build_open_lookup(active, trades),
                                   booked_divs=booked_dividends())
