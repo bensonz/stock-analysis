@@ -150,3 +150,24 @@ class TestBuildSummary:
         result = build_summary(data)
         assert isinstance(result, str)
         assert len(result) > 500
+
+    def test_sector_rank_lists_both_ends_and_cold_holdings(self):
+        from llm_client import build_summary
+        data = _make_phase1_fixture()
+        data["sector_rank"] = {
+            "asof": "2026-11-20", "basis": "申万二级", "n": 128,
+            "hot": "rank ≤ 39", "cold": "rank ≥ 90",
+            "top": [{"rank5": 1, "name": "国有大型银行Ⅱ", "ret5": 4.79, "ret20": 10.05, "cold_days": 0}],
+            "bottom": [{"rank5": 128, "name": "影视院线", "ret5": -22.53, "ret20": 4.0, "cold_days": 4}],
+            "stocks": {"000719": {"sector": "出版", "rank5": 98, "band": "cold", "ret5": -12.9, "cold_days": 4},
+                       "601009": {"sector": "城商行Ⅱ", "rank5": 5, "band": "hot", "ret5": 0.7, "cold_days": 0}}}
+        result = build_summary(data)
+        assert "#1 国有大型银行Ⅱ +4.8%" in result and "#128 影视院线" in result
+        assert "000719 出版: #98 cold 4 sessions running" in result
+        assert "601009" not in result.split("## Sector Rank")[1].split("##")[0]
+
+    def test_sector_rank_failure_is_stated(self):
+        from llm_client import build_summary
+        data = _make_phase1_fixture()
+        data["sector_rank"] = {"error": "OSError: akshare down"}
+        assert "UNAVAILABLE: OSError: akshare down" in build_summary(data)

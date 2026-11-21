@@ -1250,6 +1250,25 @@ def build_summary(phase1_data: dict) -> str:
                 lines.append(f"- {s.get('name', '?')}: {s.get('change_pct', '?')}%")
         sections.append("\n".join(lines))
 
+    # 申万二级 5-day ranking (sector_rank.py): what ANALYST.md Rule 1 needs
+    rank = phase1_data.get("sector_rank") or {}
+    if rank.get("error"):
+        sections.append(f"## Sector Rank (5d)\n- UNAVAILABLE: {rank['error']}")
+    elif rank:
+        lines = [f"## Sector Rank (5d) — {rank['basis']}, as of {rank['asof']}, "
+                 f"n={rank['n']}, hot {rank['hot']}, cold {rank['cold']}"]
+        for label in ("top", "bottom"):
+            lines.append(f"**{label}:** " + ", ".join(
+                f"#{x['rank5']} {x['name']} {x['ret5']:+.1f}% (20d {x['ret20']}%)"
+                for x in rank.get(label, [])))
+        for code, st in (rank.get("stocks") or {}).items():
+            if st.get("band") == "cold":
+                lines.append(f"- {code} {st['sector']}: #{st['rank5']} cold "
+                             f"{st['cold_days']} sessions running")
+        if rank.get("note"):
+            lines.append(f"- note: {rank['note']}")
+        sections.append("\n".join(lines))
+
     # Strategy pool — compact table
     pool = (phase1_data.get("strategy_pool") or {}).get("stocks", [])
     if pool:

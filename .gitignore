@@ -25,6 +25,8 @@ data/ifind_token.json
 # Derived SW level-1 industry membership cache (refreshed monthly from iFinD's
 # ths_the_sw_industry_stock). Regenerable; see data_collector._load_sw_industry_map.
 data/sw_industry_map.json
+# SW level-2 membership (akshare, refreshed monthly). See scripts/sector_rank.py.
+data/sw_l2_members.json
 
 # Generated portfolio site — pure function of tracking/book/ + runs/ + data/index_cache/.
 # Rebuilt on every run (and by `python3 scripts/build_site.py`); committing it

@@ -90,6 +90,7 @@ from tracking_paths import TRACKING_DIR, HYPOTHESES_FILE, LEDGERS_DIR, CALENDAR_
 from report_generator import generate_candidates_md, generate_watchlist_json, generate_report_md
 import corporate_actions
 import reentry
+import sector_rank
 from evaluation_epoch import EVALUATION_EPOCH
 from run_rules import run_all_rules
 from run_paths import (
@@ -1151,6 +1152,23 @@ def phase1_collect(date: str, slot: str) -> dict:
             print(f"    → skipped: {result.get('reason')}", file=sys.stderr)
         return "ifind_candidates", result
 
+    def _sector_rank():
+        # ANALYST.md Rule 1 + overlay need every sector's 5-day rank and how
+        # long a sector has been cold; the market feed has only today's top-5.
+        print("  [+] Ranking 申万二级 sectors (5-day, local DB)...", file=sys.stderr)
+        codes = sorted({str(c).split(".")[0] for c in
+                        [p.get("code") for p in positions]
+                        + [s.get("code") for s in pool_stocks] if c})
+        result = sector_rank.collect(codes, today=date)
+        (input_dir / "sector_rank.json").write_text(
+            json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        if "error" in result:
+            print(f"    ⚠ sector ranking unavailable: {result['error']}", file=sys.stderr)
+        else:
+            print(f"    → {result['n']} sectors as of {result['asof']}"
+                  + (f" ({result['note']})" if result.get("note") else ""), file=sys.stderr)
+        return "sector_rank", result
+
     def _ma_data():
         print("  [7/7] Fetching MA data...", file=sys.stderr)
         # Fetch MA for ALL pool stocks, not just 75-95% candidates.
@@ -1169,6 +1187,7 @@ def phase1_collect(date: str, slot: str) -> dict:
             executor.submit(_iv_sentiment): "iv_sentiment",
             executor.submit(_ma_data): "ma_data",
             executor.submit(_ifind_candidates): "ifind_candidates",
+            executor.submit(_sector_rank): "sector_rank",
         }
         for future in as_completed(futures):
             task_name = futures[future]
@@ -1191,6 +1210,8 @@ def phase1_collect(date: str, slot: str) -> dict:
                     data["iv_sentiment"] = {"error": str(e)}
                 elif task_name == "ma_data":
                     data["ma_data"] = {}
+                elif task_name == "sector_rank":
+                    data["sector_rank"] = {"error": str(e)}
 
     # Merge MA data into enrichment results AND strategy pool stocks
     ma_data = data.get("ma_data", {})
@@ -1550,6 +1571,9 @@ def phase2_build_prompt(data: dict) -> str:
         "date": data["date"],
         "portfolio": portfolio,
         "market": data.get("market", {}),
+        # every 申万二级 sector ranked by 5-day return + each held/candidate
+        # code's sector band and consecutive cold days (ANALYST.md Rule 1)
+        "sector_rank": data.get("sector_rank", {"error": "not collected"}),
         "strategy_pool": {
             "source": data.get("strategy_pool", {}).get("source"),
             "total_stocks": data.get("strategy_pool", {}).get("total_stocks"),
