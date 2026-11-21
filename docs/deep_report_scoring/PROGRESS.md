@@ -9,6 +9,9 @@
 - Caveat: Tavily web search was over quota (1001/1000) for all runs. 5 of 6 bear
   passes hit 15 tool rounds and returned nothing. One Claude run died on 3
   relay empty-stream retries and was rerun.
+- Side effect: every deep_report run appends to `tracking/ledgers/predictions.jsonl`.
+  The 8 rows from these validation runs were reverted, because they were made
+  on degraded research. Any rerun must do the same.
 - Next: owner decides on the 605098 edge case. Optional: rerun the writer pair
   once Tavily works, to test on full research.
 - Blocked: Tavily quota.
