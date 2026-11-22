@@ -267,6 +267,33 @@ def generate_report_md(date: str, data: dict, decisions: dict, output_dir: Path 
                          f"| {s.get('put_wall')}/{s.get('call_wall')} |")
         lines.append(f"\n〔来源: {gex.get('source', '未标注')}〕\n")
 
+    # 国家队 proxy (etf_shares.py). Absent on runs from before 2026-11-22; a
+    # failed fetch is stated, not dropped.
+    etf = data.get("etf_shares") or {}
+    if etf:
+        lines.append("## 宽基ETF份额（国家队代理）\n")
+        if etf.get("error"):
+            lines.append(f"⚠️ 数据不可用: {etf['error']}\n")
+        else:
+            def _chg(x):
+                return "—" if x is None else f"{x:+.2f}%"
+
+            lines.append(f"截至 **{etf['asof']}** 收盘的份额。份额只因申购/赎回而变, "
+                         "上升=资金净流入, 但不说明买方是谁。\n")
+            lines.append(f"| ETF | 份额(亿份) | 1日 | {etf['long_window']}日 | 汇金占比 |")
+            lines.append("|-----|-----------|-----|-----|----------|")
+            for r in etf["rows"]:
+                label = f"{r['code']} {r['name']}"
+                if r.get("error"):
+                    lines.append(f"| {label} | ⚠️ {r['error']} | — | — | {r['huijin_pct']:.0f}% |")
+                    continue
+                stale = f"（{r['asof']}）" if r["asof"] != etf["asof"] else ""
+                lines.append(f"| {label} | {r['shares_wan'] / 1e4:.2f}{stale} "
+                             f"| {_chg(r['chg1_pct'])} | {_chg(r['chg_long_pct'])} "
+                             f"| {r['huijin_pct']:.0f}% |")
+            lines.append(f"\n〔来源: 上交所/深交所每日ETF份额；汇金占比为 {etf['holder_asof']} "
+                         "各基金年报前十名持有人, 2026年中报起不再披露〕\n")
+
     # 2. Strategy Pool Scan
     lines.append("## 策略池扫描\n")
     pool = data.get("strategy_pool", {})

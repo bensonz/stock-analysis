@@ -175,6 +175,7 @@ def test_phase1_collect_writes_crawl_intersect_rps_and_vcp_artifacts(tmp_path, m
     monkeypatch.setattr(run_daily, "fetch_missed_opportunity_prices", lambda watchlists: [])
     monkeypatch.setattr(run_daily, "fetch_ma_data", lambda pool_stocks: {})
     monkeypatch.setattr(run_daily, "batch_enrich", lambda candidates: [])
+    monkeypatch.setattr(run_daily.etf_shares, "collect", lambda today: {"error": "offline test"})
     monkeypatch.setattr(run_daily, "snapshot_positions", lambda snapshot_type, date: {})
     monkeypatch.setattr(run_daily, "check_snapshot_consistency", lambda date, snap: [])
     monkeypatch.setattr(run_daily, "load_hypotheses", lambda: {})

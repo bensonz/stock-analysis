@@ -91,6 +91,7 @@ from report_generator import generate_candidates_md, generate_watchlist_json, ge
 import corporate_actions
 import reentry
 import sector_rank
+import etf_shares
 from evaluation_epoch import EVALUATION_EPOCH
 from run_rules import run_all_rules
 from run_paths import (
@@ -1169,6 +1170,21 @@ def phase1_collect(date: str, slot: str) -> dict:
                   + (f" ({result['note']})" if result.get("note") else ""), file=sys.stderr)
         return "sector_rank", result
 
+    def _etf_shares():
+        # Report-only context: share counts of the broad ETFs 汇金 dominates,
+        # the proxy for 国家队 buying. Not in the prompt — no rule reads it.
+        print("  [+] Fetching broad-ETF share counts (SSE/SZSE)...", file=sys.stderr)
+        result = etf_shares.collect(date)
+        (input_dir / "etf_shares.json").write_text(
+            json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        if "error" in result:
+            print(f"    ⚠ ETF shares unavailable: {result['error']}", file=sys.stderr)
+        else:
+            failed = [r["code"] for r in result["rows"] if "error" in r]
+            print(f"    → {len(result['rows']) - len(failed)} ETFs as of {result['asof']}"
+                  + (f" (failed: {', '.join(failed)})" if failed else ""), file=sys.stderr)
+        return "etf_shares", result
+
     def _ma_data():
         print("  [7/7] Fetching MA data...", file=sys.stderr)
         # Fetch MA for ALL pool stocks, not just 75-95% candidates.
@@ -1188,6 +1204,7 @@ def phase1_collect(date: str, slot: str) -> dict:
             executor.submit(_ma_data): "ma_data",
             executor.submit(_ifind_candidates): "ifind_candidates",
             executor.submit(_sector_rank): "sector_rank",
+            executor.submit(_etf_shares): "etf_shares",
         }
         for future in as_completed(futures):
             task_name = futures[future]
@@ -1212,6 +1229,8 @@ def phase1_collect(date: str, slot: str) -> dict:
                     data["ma_data"] = {}
                 elif task_name == "sector_rank":
                     data["sector_rank"] = {"error": str(e)}
+                elif task_name == "etf_shares":
+                    data["etf_shares"] = {"error": str(e)}
 
     # Merge MA data into enrichment results AND strategy pool stocks
     ma_data = data.get("ma_data", {})
