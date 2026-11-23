@@ -1,0 +1,222 @@
+# Research Memo — 2026-11-23
+
+## 1. 市场状态 (Market Regime)
+
+**弱市（weak tape），防御轮动延续。**
+
+- 涨跌比 **0.46:1**（上涨1717 / 下跌3763），这是决定性的弱市信号；`entry_regime` 判定 `weak`，机械层允许 0.5× 仓位开新仓但 `hard_block=false`。
+- 指数分化：上证 -0.96%、科创50 -2.65% 绿；深成 +0.24%、创业板 +1.22% 红——成长端内部剧烈分化。
+- 分布集中在 -0~2% 浅跌区（f0_2=2456只），跌停仅7家、涨停63家 → 属于**普跌但非崩盘**，是阴跌型弱市。
+- IV 情绪：`overall_sentiment` 极度恐慌，avg IV rank 0.789；500ETF/创业板/科创50 的 iv_rank 达 1.0 / 0.97 / 0.86。IV>75% 环境下仅允许最强 setup 小仓。
+- 结论：**弱市默认持币**。机械层允许 0.5× 不代表必须出手；judgment 层在 weak tape 的默认倾向是 `new_positions: []`。
+
+## 2. 板块分析 (Sector Analysis)
+
+用 `sector_rank`（申万二级等权5日，asof 11-20）：
+
+- **5日热门**：国有大型银行Ⅱ +4.79%、白色家电 +4.36%、股份制银行Ⅱ +2.26%、保险Ⅱ +1.53%、城商行Ⅱ +0.72% —— 清一色防御/红利。
+- **5日冷门**：影视院线 -22.53%（cold_days 4）、广告营销 -19.46%、航天装备Ⅱ -18.97%、游戏Ⅱ -18.32%、自动化设备 -17.81% —— 前期科技/传媒/军工全线深跌。
+- 今日 `market.sectors.top5`（数字媒体+4.62%/贵金属+4.58%/通信设备+3.25%/影视院线+2.61%）是**超跌反弹**，其5日 rank 仍在倒数（数字媒体123、影视院线128）——不能据此追入冷区。
+- 外部验证（web_search/东方财富）：本周银行/家电分别 +3.21%/+1.13%，传媒/军工暴跌超13%（中财网 11-22）；红利防御抱团是当前主线。
+
+## 3. 持仓回顾 (Position Review)
+
+| 代码 | 名称 | 板块(rank5) | PnL | 持有天数 | 决策 |
+|---|---|---|---|---|---|
+| 000690 | 宝新能源 | 电力 19 hot | -2.28% | 8 | HOLD（stop_proximity WARNING 2.7%） |
+| 000719 | 中原传媒 | 出版 98 **cold** | -3.92% | 9 | **SELL** |
+| 003816 | 中国广核 | 电力 19 hot | -0.85% | 9 | HOLD（WATCH 4.1%） |
+| 601009 | 南京银行 | 城商行Ⅱ 5 hot | +7.03% | 9 | HOLD |
+| 601298 | 青岛港 | 航运港口 6 hot | +4.56% | 18 | HOLD（>3%，15日时间止损不触发） |
+
+**中原传媒 SELL 三重确认**：
+1. **sector gravity**：出版 `cold_days=4 ≥3`（rank5=98），冷3日卖出纪律无条件触发；
+2. **stop_proximity CRITICAL**：现价13.25 距止损13.10 仅 1.13%，按 h024 主动离场不等精确触发；
+3. **新增负面催化**：中国证券报 10-30 报道，高管刘永民**被立案调查并实施留置**，无法保证季报真实准确（来源：finance_news/东方财富）。今日 -5.29%。
+
+## 4. 新入场候选 (New Entry Candidates)
+
+弱市默认不建仓，但按纪律过了门槛的候选记录如下：
+
+- **600872 中炬高新**：调味发酵品 rank9 hot，RPS120 89.18 甜点区，0风险，MA距离全合规（-2.5/-1.9/-1.8%，未追高），Q3净利+60.72% 新鲜催化（东方财富 10-27）。**个股通过全部门槛，但弱市(0.46:1)+板块绝对5日 -1.66%+IV tight(1.0) → 默认持币跳过。**
+- **601077 渝农商行**：农商行 rank8 hot（top10%豁免），RPS 93.63 扩展区，0风险，margin adding，Q3净利+7.86%（界面新闻 10-29）。但已有南京银行（银行仓位），弱市不新增银行。
+- **000429 粤高速A**：铁路公路 rank14 hot，RPS 94.16 扩展区（0风险豁免），但板块绝对5日 -3.22% 负值，弱市跳过。
+
+## 5. Skip List（简）
+
+主要冷区/中区拒绝：瑞芯微(半导体96 cold)、中国国贸(房地产49 mid)、海信视像(黑电42 mid)、海澜之家/森马(服装家纺82 mid)、瀚蓝环境(环境治理77 mid)、锐科激光(自动化124 cold，且11-16刚止损离场)、广汇能源(RPS92.46扩展区无豁免)、渤海租赁(RPS94.25扩展区+4风险+亏损)。
+
+## 6. Learnings & 7. Uncertainty Flags
+
+- **不确定点**：sector_rank asof 11-20，今日单日媒体反弹未计入；但出版 ret5 -12.93 + 三重卖出确认，卖点稳健，不受单日反弹影响。
+- **不确定点**：中炬高新/渝农商行个股全过门槛，仅因弱市被放弃——这是 judgment 层选择，若明日 breadth 修复到 ≥1.5 可重新评估。
+
+---
+
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "国有大型银行Ⅱ", "5d_pct": 4.79, "trend": "steady"},
+      {"name": "白色家电", "5d_pct": 4.36, "trend": "steady"},
+      {"name": "股份制银行Ⅱ", "5d_pct": 2.26, "trend": "steady"},
+      {"name": "保险Ⅱ", "5d_pct": 1.53, "trend": "steady"},
+      {"name": "城商行Ⅱ", "5d_pct": 0.72, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "影视院线", "5d_pct": -22.53, "trend": "deteriorating"},
+      {"name": "广告营销", "5d_pct": -19.46, "trend": "deteriorating"},
+      {"name": "航天装备Ⅱ", "5d_pct": -18.97, "trend": "deteriorating"},
+      {"name": "游戏Ⅱ", "5d_pct": -18.32, "trend": "deteriorating"},
+      {"name": "自动化设备", "5d_pct": -17.81, "trend": "deteriorating"}
+    ],
+    "position_alignment": "4/5 positions in hot sectors（出版1只转冷待卖）",
+    "regime": "防御轮动：银行/保险/白电5日领涨，科技/传媒/军工深跌，今日1日反弹属超跌反弹"
+  },
+  "position_decisions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "reason": "电力板块hot(rank5=19, cold_days 0)；浮亏-2.3%未触发-5%硬止损与15日时间止损；stop_proximity WARNING(距止损5.42仅2.7%)，明日若续跌按h024主动处理，今日不卖",
+      "sector_rank": "电力 rank5=19 hot",
+      "new_stop": null,
+      "pnl_pct": -2.28,
+      "days_held": 8,
+      "exit_price": null
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "action": "SELL",
+      "reason": "出版板块cold(rank5=98, cold_days 4≥3)触发行业冷3日卖出纪律；今日-5.29%距止损13.10仅1.13%(stop_proximity CRITICAL)按h024主动离场；另有高管被立案调查留置负面催化(中国证券报10-30)",
+      "sector_rank": "出版 rank5=98 cold (cold_days 4)",
+      "new_stop": null,
+      "pnl_pct": -3.92,
+      "days_held": 9,
+      "exit_price": 13.25
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "reason": "电力板块hot(rank5=19, cold_days 0)；浮亏-0.9%未触发-5%硬止损；stop_proximity WATCH(距止损4.45约4.1%)，margin deleveraging为警示非卖出信号",
+      "sector_rank": "电力 rank5=19 hot",
+      "new_stop": null,
+      "pnl_pct": -0.85,
+      "days_held": 9,
+      "exit_price": null
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "reason": "城商行Ⅱhot(rank5=5, cold_days 0)；浮盈+7.0%未触发任何卖出规则，未达+10%抬止损线；margin deleveraging为警示非卖出信号",
+      "sector_rank": "城商行Ⅱ rank5=5 hot",
+      "new_stop": null,
+      "pnl_pct": 7.03,
+      "days_held": 9,
+      "exit_price": null
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "航运港口hot(rank5=6, cold_days 0)；浮盈+4.6%>3%，15日时间止损不触发；赢家让利润奔跑",
+      "sector_rank": "航运港口 rank5=6 hot",
+      "new_stop": null,
+      "pnl_pct": 4.56,
+      "days_held": 18,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600872",
+      "name": "中炬高新",
+      "reason": "个股全过门槛(调味发酵品rank9 hot/RPS120 89.18甜点/0风险/MA合规/Q3净利+60.72%催化)，但弱市(涨跌比0.46:1)+板块绝对5日-1.66%+IV tight(1.0)，弱市默认持币",
+      "rps120": 89.18
+    },
+    {
+      "code": "601077",
+      "name": "渝农商行",
+      "reason": "农商行rank8 hot(top10%豁免扩展区)，RPS 93.63，0风险，margin adding；但已持有南京银行(银行仓位)，弱市不新增银行",
+      "rps120": 93.63
+    },
+    {
+      "code": "000429",
+      "name": "粤高速A",
+      "reason": "铁路公路rank14 hot，RPS 94.16扩展区0风险豁免通过；但板块绝对5日-3.22%负值，弱市跳过",
+      "rps120": 94.16
+    },
+    {
+      "code": "603893",
+      "name": "瑞芯微",
+      "reason": "半导体rank5=96 cold(cold_days 1)，RPS120 95.0触及封顶，sector冷无入场",
+      "rps120": 95.0
+    },
+    {
+      "code": "601333",
+      "name": "广深铁路",
+      "reason": "铁路公路rank14 hot但RPS 94.76扩展区，2风险(毛利衰退/收现低)，Q3归母净利-51.35%，不满足扩展区豁免→跳过",
+      "rps120": 94.76
+    },
+    {
+      "code": "000415",
+      "name": "渤海租赁",
+      "reason": "多元金融rank24 hot但RPS 94.25扩展区+4风险+Q3亏损，无豁免→跳过",
+      "rps120": 94.25
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "炼化及贸易rank38 hot(边缘)，RPS 92.46扩展区+3风险，无豁免→跳过",
+      "rps120": 92.46
+    },
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "reason": "自动化设备rank124 cold(cold_days 5)，11-16刚止损离场(-3.16%)，现价32.66低于MA10约20.2%，重入无差别理由→跳过",
+      "rps120": 92.84
+    },
+    {
+      "code": "600007",
+      "name": "中国国贸",
+      "reason": "房地产开发rank49 mid(非top30%)，VCP PREMIUM但板块不达标→跳过",
+      "rps120": 94.97
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱市(涨跌比0.46:1)+IV恐慌(avg 0.79)下，即使中炬高新(RPS89甜点+Q3净利+60.72%+0风险+MA全合规)通过全部个股门槛，仍默认持币new_positions:[]——机械层允许0.5x不等于必须出手",
+      "type": "heuristic",
+      "tags": ["timing", "entry-filter", "position-sizing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h013",
+      "mechanism": "弱市中'hot sector'多为相对抗跌(绝对5日仍为负)而非绝对上行，防御轮动中的新仓胜率低"
+    },
+    {
+      "text": "出版板块cold_days达4天(rank5=98)触发行业冷3日卖出，叠加stop_proximity CRITICAL(距止损1.13%)与高管被留置负面催化，三重确认卖出——sector gravity优先级最高",
+      "type": "rule",
+      "tags": ["exit-rule", "sector"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "行业冷3日规则让板块beta风险优先于个股thesis，避免'个股还好'的持有幻觉"
+    },
+    {
+      "text": "今日1日涨幅榜(数字媒体+4.62%/影视院线+2.61%)是超跌反弹，其5日rank仍倒数(123/128)——不可据此追入冷区；sector_rank(5日)优先于market.sectors(1日)",
+      "type": "observation",
+      "tags": ["sector", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "单日反弹不改5日趋势，冷区底部反弹是均值回归陷阱而非趋势反转"
+    }
+  ],
+  "market_summary": "弱市(涨跌比0.46:1，下跌3763/上涨1717)，上证-0.96%/科创50-2.65%绿，深成+0.24%/创业板+1.22%红，63涨停/7跌停，分布集中在-0~2%浅跌区。IV极度恐慌(avg rank 0.79，500ETF/创业板1.0)。5日维度防御领涨(国有大行+4.79%/白电+4.36%/股份制银行+2.26%)，科技传媒军工深跌(影视院线-22.53%/广告营销-19.46%)；今日数字媒体/通信设备1日反弹属超跌反弹，5日rank仍倒数。持仓4/5在hot板块，出版1只转冷4日+止损临界+高管留置负面催化，执行卖出。弱市默认持币，new_positions空仓等待breadth修复至≥1.5再评估中炬高新/渝农商行等已过门槛候选。",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}
+```

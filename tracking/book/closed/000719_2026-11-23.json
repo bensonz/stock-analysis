@@ -1,7 +1,7 @@
 {
   "code": "000719",
   "name": "中原传媒",
-  "status": "active",
+  "status": "closed",
   "thesis": "传媒板块今日领涨(影视院线top1+6.74%/数字媒体+3.82%)，RPS120=91.65甜点区，0风险，MA距离全部合规，盘中创近24个月新高",
   "entryDate": "2026-11-10",
   "entrySlot": "afternoon",
@@ -148,15 +148,25 @@
       "change_pct": 1.45,
       "action": "HOLD",
       "note": "持仓8日浮盈+1.45%(13.99/13.79)，未触发任何卖出规则；出版未入bottom5（今日-2.71%随大盘回撤但仍浮盈）；margin deleveraging为警示非卖出信号"
+    },
+    {
+      "date": "2026-11-23",
+      "slot": "noon",
+      "price": 13.25,
+      "change_pct": -3.92,
+      "action": "SELL",
+      "shares": 3100,
+      "note": "出版板块cold(rank5=98, cold_days 4≥3)触发行业冷3日卖出纪律；今日-5.29%距止损13.10仅1.13%(stop_proximity CRITICAL)按h024主动离场；另有高管被立案调查留置负面催化(中国证券报10-30)"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-11-23",
+  "exitPrice": 13.25,
+  "exitReason": "出版板块cold(rank5=98, cold_days 4≥3)触发行业冷3日卖出纪律；今日-5.29%距止损13.10仅1.13%(stop_proximity CRITICAL)按h024主动离场；另有高管被立案调查留置负面催化(中国证券报10-30)",
+  "returnPct": -3.92,
+  "holdingDays": 8,
+  "lessonLearned": "",
   "createdAt": "2026-11-10T15:14:52.252657+08:00",
-  "updatedAt": "2026-11-20T15:09:10.470635+08:00",
-  "trackerVersion": "2.1"
+  "updatedAt": "2026-11-23T11:41:24.307030+08:00",
+  "trackerVersion": "2.1",
+  "exitSlot": "noon"
 }

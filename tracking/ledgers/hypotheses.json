@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-11-20",
+  "lastUpdated": "2026-11-23",
   "hypotheses": [
     {
       "id": "h001",
@@ -332,7 +332,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-03-27",
-      "lastTested": "2026-11-12",
+      "lastTested": "2026-11-23",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -1003,6 +1003,10 @@
           {
             "date": "2026-11-12",
             "detail": "弱tape(0.78:1)+三指数微涨+科创50+2.35%是典型'指数涨、个股跌'分化盘，此时new_positions应默认空仓，不因个别股票RPS合格而强开仓"
+          },
+          {
+            "date": "2026-11-23",
+            "detail": "弱市(涨跌比0.46:1)+IV恐慌(avg 0.79)下，即使中炬高新(RPS89甜点+Q3净利+60.72%+0风险+MA全合规)通过全部个股门槛，仍默认持币new_positions:[]——机械层允许0.5x不等于必须出手"
           }
         ],
         "contradicting": [
@@ -1012,7 +1016,7 @@
           }
         ]
       },
-      "sampleSize": 168,
+      "sampleSize": 169,
       "hitRate": 0.994,
       "confidence": 0.988,
       "tags": [],
@@ -1286,7 +1290,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-11-20",
+      "lastTested": "2026-11-23",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1741,11 +1745,15 @@
           {
             "date": "2026-11-20",
             "detail": "5只持仓全部位于中段板块(未进top5/bottom5)且全部在止损上方，防御属性(银行/公用事业/港口/出版)在普跌日整体抗跌——行业选择比个股择时更抗回撤"
+          },
+          {
+            "date": "2026-11-23",
+            "detail": "出版板块cold_days达4天(rank5=98)触发行业冷3日卖出，叠加stop_proximity CRITICAL(距止损1.13%)与高管被留置负面催化，三重确认卖出——sector gravity优先级最高"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 113,
+      "sampleSize": 114,
       "hitRate": 1.0,
       "confidence": 0.991,
       "tags": [
@@ -4784,7 +4792,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-11-20",
+      "lastTested": "2026-11-23",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -5015,11 +5023,15 @@
           {
             "date": "2026-11-20",
             "detail": "科技→防御轮动持续：top5全为银行/保险/炼化/渔业，bottom5全为电子/材料/通用设备。持仓中仅南京银行处于热点，其余4只(火电/核电/港口/出版)未入bottom5，暂不触发'行业冷3日→卖出'。"
+          },
+          {
+            "date": "2026-11-23",
+            "detail": "今日1日涨幅榜(数字媒体+4.62%/影视院线+2.61%)是超跌反弹，其5日rank仍倒数(123/128)——不可据此追入冷区；sector_rank(5日)优先于market.sectors(1日)"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 57,
+      "sampleSize": 58,
       "hitRate": 1.0,
       "confidence": 0.983,
       "tags": [

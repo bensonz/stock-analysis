@@ -1,0 +1,80 @@
+{
+  "as_of": "2026-11-23",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 12,
+    "new": 4,
+    "pending": 4,
+    "expired": 0,
+    "ai_retired": 1,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 8,
+    "decided": 0,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 0,
+    "fetch_errors": 0,
+    "empty_days": 10,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 4,
+    "kept": 0,
+    "skipped": 4,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261123-f0b44cf8",
+        "name": "中国首批18只主动ETF11月23日集体上市",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "首批主动ETF集体上市属产品扩容，对大盘方向影响有限，非系统性事件"
+      },
+      {
+        "id": "wscn-20261124-8d709954",
+        "name": "中国哔哩哔哩Q3电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报电话会，非系统性重要公司，不构成A股整体驱动"
+      },
+      {
+        "id": "wscn-20261124-f6ed35ca",
+        "name": "中国小米集团Q3电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报电话会，非系统性重要公司，不构成A股整体驱动"
+      },
+      {
+        "id": "wscn-20261125-367fd332",
+        "name": "中国美团Q3电话会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司财报电话会，非系统性重要公司，不构成A股整体驱动"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1551,
+    "tokens_out": 243
+  },
+  "pending_items": []
+}

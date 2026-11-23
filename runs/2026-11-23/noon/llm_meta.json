@@ -1,0 +1,49 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 172139,
+  "output_tokens": 20664,
+  "rounds": 2,
+  "duration_sec": 275.5,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "中原传媒"
+      },
+      "result_length": 1980
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "中炬高新"
+      },
+      "result_length": 1945
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "渝农商行"
+      },
+      "result_length": 2096
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月 银行 保险 白色家电 防御板块 轮动"
+      },
+      "result_length": 3149,
+      "fallback": "exa"
+    }
+  ],
+  "fallback_used": false
+}
