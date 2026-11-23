@@ -1,0 +1,253 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "元件",
+        "5d_pct": 2.24,
+        "trend": "bouncing"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": 1.65,
+        "trend": "steady"
+      },
+      {
+        "name": "股份制银行Ⅱ",
+        "5d_pct": 0.55,
+        "trend": "steady"
+      },
+      {
+        "name": "渔业",
+        "5d_pct": 0.41,
+        "trend": "steady"
+      },
+      {
+        "name": "白色家电",
+        "5d_pct": 0.29,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "电视广播Ⅱ",
+        "5d_pct": -15.13,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "影视院线",
+        "5d_pct": -14.65,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "广告营销",
+        "5d_pct": -14.25,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "游戏Ⅱ",
+        "5d_pct": -12.63,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "一般零售",
+        "5d_pct": -11.46,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "4/4 positions in hot sectors",
+    "regime": "政策驱动的强反弹日（融资保证金比例下调至80%、主动ETF首日上市），但5日动量仍由防御板块（银行/港口/电力/白电）主导；1日与5日严重背离，AI应用/人形机器人领涨但属5日cold板块"
+  },
+  "position_decisions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "reason": "电力板块hot(rank5=27/128, cold_days 0)，浮亏-1.40%未触发-5%硬止损/15日时间止损；距止损5.42仅3.56%(stop_proximity WATCH)，次日续跌则按h024主动处理",
+      "sector_rank": "hot 27/128",
+      "new_stop": null,
+      "pnl_pct": -1.4,
+      "days_held": 9,
+      "exit_price": null
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "reason": "电力板块hot(rank5=27/128)，浮亏-1.07%未触发-5%硬止损；但今日-3.54%跌破MA5/10/20均线簇，距止损4.45仅3.89%(stop_proximity WATCH)+margin deleveraging为警示，次日续跌则按h024主动处理",
+      "sector_rank": "hot 27/128",
+      "new_stop": null,
+      "pnl_pct": -1.07,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "reason": "城商行Ⅱhot(rank5=8/128)，浮盈+7.27%未触发任何卖出规则(未达+10%抬止损线)，赢家让利润奔跑",
+      "sector_rank": "hot 8/128",
+      "new_stop": null,
+      "pnl_pct": 7.27,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "航运港口hot(rank5=6/128)，浮盈+3.94%>3%故15日时间止损不触发，赢家让利润奔跑",
+      "sector_rank": "hot 6/128",
+      "new_stop": null,
+      "pnl_pct": 3.94,
+      "days_held": 19,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "600872",
+      "name": "中炬高新",
+      "entry_price": 19.37,
+      "allocation_pct": 5,
+      "stop": 18.4,
+      "target": 22.3,
+      "thesis": "调味发酵品Ⅱhot(rank5=12/128, top 9.4%)，RPS120 89.66甜点区，0风险因子，MA距离全合规(dist_ma5 -1.2%/ma10 -0.2%/ma20 -0.7%已回撤至均线支撑非追高)；IV proxy 500ETF=1.0极高+margin deleveraging→仅5%中等仓",
+      "sector": "调味发酵品Ⅱ",
+      "sector_rank": "hot 12/128 (top 9.4%)",
+      "catalyst": "2026三季报单季净利+59.61%、前三季+60.72%（来源：东方财富10-27三季报/时代财经10-31，11-17业绩说明会确认）",
+      "catalyst_freshness": "ongoing",
+      "rps120": 89.66,
+      "conviction": "moderate"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "603236",
+      "name": "移远通信",
+      "reason": "RPS120 99.45>95%封顶(过热)，且通信设备rank72 mid",
+      "rps120": 99.45
+    },
+    {
+      "code": "601328",
+      "name": "交通银行",
+      "reason": "RPS120 98.66>95%封顶(过热)，国有大行hot但RPS透支",
+      "rps120": 98.66
+    },
+    {
+      "code": "002832",
+      "name": "比音勒芬",
+      "reason": "RPS120 99.29>95%封顶 + 服装家纺rank99 cold",
+      "rps120": 99.29
+    },
+    {
+      "code": "600398",
+      "name": "海澜之家",
+      "reason": "服装家纺rank99 cold，Rule 1禁入",
+      "rps120": 94.54
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "reason": "出版rank112 cold + 今日刚卖出(-3.92%)，重入举证不满足",
+      "rps120": 94.47
+    },
+    {
+      "code": "600007",
+      "name": "中国国贸",
+      "reason": "房地产开发rank79 mid，非hot",
+      "rps120": 94.95
+    },
+    {
+      "code": "600323",
+      "name": "瀚蓝环境",
+      "reason": "环境治理rank84 mid，非hot",
+      "rps120": 92.77
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "炼化及贸易rank54 mid + RPS20仅54.29短期动量弱 + 11-05大跌-6.84%抛压风险",
+      "rps120": 91.96
+    },
+    {
+      "code": "300747",
+      "name": "锐科激光",
+      "reason": "自动化设备rank88 mid + 11-16刚止损离场(-3.16%)，重入无差异",
+      "rps120": 91.85
+    },
+    {
+      "code": "000415",
+      "name": "渤海租赁",
+      "reason": "扩展区RPS(94.60)但4风险(大股东质押99%/商誉/从未分红)且净利润为负，豁免条件不满足",
+      "rps120": 94.6
+    },
+    {
+      "code": "000651",
+      "name": "格力电器",
+      "reason": "大股东质押占持股100% + margin deleveraging，白色家电hot但风险瑕疵重",
+      "rps120": 93.43
+    },
+    {
+      "code": "603893",
+      "name": "瑞芯微",
+      "reason": "半导体hot但现价低于MA10(dist_ma10 -3.1%)、三季报当日-8.15%卖压 + margin deleveraging，技术形态未修复",
+      "rps120": 94.65
+    },
+    {
+      "code": "601077",
+      "name": "渝农商行",
+      "reason": "已持南京银行避免银行板块集中；扩展区RPS且银行今日休整",
+      "rps120": 93.96
+    },
+    {
+      "code": "600060",
+      "name": "海信视像",
+      "reason": "扩展区RPS(94.78)0风险豁免，但RPS20 84.36偏弱、业绩增速仅+13%，等确认",
+      "rps120": 94.78
+    },
+    {
+      "code": "601333",
+      "name": "广深铁路",
+      "reason": "扩展区RPS(94.82)但2风险+无业绩催化，豁免条件(0风险/业绩>50%/top10%)均不满足",
+      "rps120": 94.82
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "今日breadth 5.95:1强反弹由5日cold板块领涨(影视院线rank127今日+6.81%、数字媒体+9.03%、游戏rank125)，而5日hot板块(银行/港口/白电)今日休整或下跌——1日反弹与5日动量严重背离。Rule 1按5日sector_rank过滤，正确拦下了所有传媒/游戏/广告候选。",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "政策驱动的超跌反弹日，领涨的是此前5日跌幅最大的板块(均值回归)而非趋势启动；等权5日涨幅排名识别真实动量，避免把反弹当日当趋势追入。"
+    },
+    {
+      "text": "策略池64只中约七成RPS120>95%被Rule 2封顶；唯一同时满足甜点区(80-92%)+hot sector+新鲜业绩催化的是中炬高新(rps120 89.66、调味发酵品Ⅱrank12、Q3净利+59.61%/前三季+60.72%、0风险、MA距离全合规且回撤至均线支撑)。RPS封顶纪律迫使等待回撤入场点而非追高。",
+      "type": "signal",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "高RPS拥挤时动量过热、均值回归风险高；封顶后资金只能转向刚回撤到均线支撑的甜点区候选，入场风险回报更优。"
+    },
+    {
+      "text": "中国广核今日-3.54%跌破MA5/10/20均线簇，浮亏仅-1.07%但距止损4.45仅3.89%(stop_proximity WATCH)。不因单日阴线机械卖出(未触发-5%硬止损/15日时间止损，电力板块仍hot rank27)，但次日若续跌需按h024主动处理。",
+      "type": "observation",
+      "tags": [
+        "exit-rule",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "单日阴线不等于趋势破坏；冷3日卖出与-5%硬止损给赢家波动留空间，但贴近止损时需提前准备应对跳空风险。"
+    }
+  ],
+  "market_summary": "政策驱动强反弹日：11/22盘后一揽子稳市措施(融资保证金比例下限降至80%、主动ETF首日上市、组合式降费)落地，创业板+3.08%/深成指+1.93%/沪指+0.15%，breadth 5.95:1(4658涨/783跌)，152涨停/7跌停。领涨为AI应用/人形机器人/影视院线等5日cold板块，银行/煤炭/白酒今日休整。IV整体'极度恐慌'(avg rank 0.71，500ETF/创业板IV rank 1.0/0.87)提示高波动、宽止损。5日动量仍以防御(银行/港口/电力/白电)最强，与1日反弹背离——Rule 1按5日sector_rank过滤，不追今日超跌反弹的传媒/游戏；买入闸门开放，开1只甜点区消费股(中炬高新)小仓，其余候选因RPS过热或板块不hot被过滤。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

@@ -2589,7 +2589,7 @@
       "type": "signal",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-11-20",
+      "lastTested": "2026-11-23",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -2728,6 +2728,10 @@
           {
             "date": "2026-11-20",
             "detail": "宝新能源现价5.63距止损5.42仅3.73%，stop_proximity WATCH触发；恐慌盘个股易跳空，需在硬止损前主动准备，但今日未破位(-3.76%后仍收5.63>5.42)，不机械卖出。"
+          },
+          {
+            "date": "2026-11-23",
+            "detail": "中国广核今日-3.54%跌破MA5/10/20均线簇，浮亏仅-1.07%但距止损4.45仅3.89%(stop_proximity WATCH)。不因单日阴线机械卖出(未触发-5%硬止损/15日时间止损，电力板块仍hot rank27)，但次日若续跌需按h024主动处理。"
           }
         ],
         "contradicting": [
@@ -2741,9 +2745,9 @@
           }
         ]
       },
-      "sampleSize": 36,
-      "hitRate": 0.944,
-      "confidence": 0.921,
+      "sampleSize": 37,
+      "hitRate": 0.946,
+      "confidence": 0.923,
       "tags": [
         "exit-rule",
         "timing"
@@ -5027,13 +5031,17 @@
           {
             "date": "2026-11-23",
             "detail": "今日1日涨幅榜(数字媒体+4.62%/影视院线+2.61%)是超跌反弹，其5日rank仍倒数(123/128)——不可据此追入冷区；sector_rank(5日)优先于market.sectors(1日)"
+          },
+          {
+            "date": "2026-11-23",
+            "detail": "今日breadth 5.95:1强反弹由5日cold板块领涨(影视院线rank127今日+6.81%、数字媒体+9.03%、游戏rank125)，而5日hot板块(银行/港口/白电)今日休整或下跌——1日反弹与5日动量严重背离。Rule 1按5日sector_rank过滤，正确拦下了所有传媒/游戏/广告候选。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 58,
+      "sampleSize": 59,
       "hitRate": 1.0,
-      "confidence": 0.983,
+      "confidence": 0.984,
       "tags": [
         "sector",
         "exit-rule"
@@ -7430,7 +7438,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-08-11",
-      "lastTested": "2026-11-17",
+      "lastTested": "2026-11-23",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -7565,13 +7573,17 @@
           {
             "date": "2026-11-17",
             "detail": "今日科技反弹领涨（科创50 +3.31%、半导体+3.71%）但策略池内所有科技候选RPS120均>95%被封顶过滤，甜点区无新候选——错过反弹但不追高，是h151封顶纪律的正确代价"
+          },
+          {
+            "date": "2026-11-23",
+            "detail": "策略池64只中约七成RPS120>95%被Rule 2封顶；唯一同时满足甜点区(80-92%)+hot sector+新鲜业绩催化的是中炬高新(rps120 89.66、调味发酵品Ⅱrank12、Q3净利+59.61%/前三季+60.72%、0风险、MA距离全合规且回撤至均线支撑)。RPS封顶纪律迫使等待回撤入场点而非追高。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 33,
+      "sampleSize": 34,
       "hitRate": 1.0,
-      "confidence": 0.971,
+      "confidence": 0.972,
       "tags": [
         "entry-filter"
       ],
