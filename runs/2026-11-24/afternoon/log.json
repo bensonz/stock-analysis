@@ -1,0 +1,148 @@
+{
+  "date": "2026-11-24",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1795503966.240845,
+      "errors": [],
+      "end": 1795504018.950711,
+      "duration_sec": 52.7
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8901,
+      "tokens": {
+        "input_tokens": 189327,
+        "output_tokens": 26523
+      },
+      "rounds": 2,
+      "tool_calls_count": 5,
+      "duration_sec": 455.8,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1795504474.7720268,
+      "actions": [
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h077 (rule): +1 supporting evidence → hitRate=100%, n=63",
+        "Hypothesis: Created h227 (observation): 银行系连续霸榜5日强度榜但绝对收益已近0/转负(国有大行+2.34%、股份制+0.34%)——'相对强=绝对弱'的分化市里，持有赢家(银行/港口)而非新开仓才是...",
+        "Hypothesis: Updated h019 (rule): +1 supporting evidence → hitRate=100%, n=115",
+        "Hypothesis: Created h228 (observation): 南京银行类：大股东增持(江苏交控至15.09%)+即将中期分红除息(11-25)双重事件下，浮盈+7.9%应继续持有而非因除息跌价恐慌——除息是会计调整(参考价...",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-11-24",
+        "status": "ok",
+        "checked": 6,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 3,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "000690",
+                "name": "宝新能源",
+                "rule": "stop_proximity",
+                "severity": "WARNING",
+                "currentPrice": 5.55,
+                "stopLoss": 5.42,
+                "distance_pct": 2.34,
+                "suggestion": "🟡 WARNING — only 2.3% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+              },
+              {
+                "code": "003816",
+                "name": "中国广核",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 4.61,
+                "stopLoss": 4.45,
+                "distance_pct": 3.47,
+                "suggestion": "🟠 WATCH — 3.5% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "600872",
+                "name": "中炬高新",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 19.35,
+                "stopLoss": 18.4,
+                "distance_pct": 4.91,
+                "suggestion": "🟠 WATCH — 4.9% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1795504476.4373949,
+      "duration_sec": 1.7
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 000690 — 🟡 WARNING — only 2.3% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
+    "RULE check_stop_proximity: 003816 — 🟠 WATCH — 3.5% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 600872 — 🟠 WATCH — 4.9% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 510.2
+  }
+}

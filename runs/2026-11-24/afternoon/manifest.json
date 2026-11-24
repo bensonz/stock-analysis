@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-24",
+  "slot": "afternoon",
+  "run_started_at": "2026-11-24T15:05:05.064540+08:00",
+  "status": "success",
+  "exit_code": 0,
+  "total_duration_sec": 510.2,
+  "phases": {
+    "health_check": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "sources": {
+        "sina": {
+          "status": "ok",
+          "latency_ms": 56.9
+        },
+        "cheesefortune": {
+          "status": "ok",
+          "latency_ms": 506.4
+        },
+        "pricedb": {
+          "status": "ok",
+          "latest_date": "2026-11-23",
+          "stale": false
+        }
+      }
+    },
+    "preflight_pricedb": {
+      "status": "ok",
+      "duration_sec": 0.0,
+      "latest_date": "2026-11-24",
+      "target": "2026-11-24",
+      "snapshot": "  2026-11-24: 0 → 5576 rows (5576 inserted)",
+      "stock_list": "stock list: 5581 listed, 0 new"
+    },
+    "collect": {
+      "status": "ok",
+      "duration_sec": 52.7,
+      "errors": []
+    },
+    "llm_analysis": {
+      "status": "ok",
+      "duration_sec": 455.8
+    },
+    "apply": {
+      "status": "ok",
+      "duration_sec": 1.7
+    },
+    "validate": {
+      "status": "warnings",
+      "duration_sec": 0.0,
+      "errors": [
+        "RULE check_stop_proximity: 000690 — 🟡 WARNING — only 2.3% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
+        "RULE check_stop_proximity: 003816 — 🟠 WATCH — 3.5% above stop. Monitor closely. No immediate action but be ready.",
+        "RULE check_stop_proximity: 600872 — 🟠 WATCH — 4.9% above stop. Monitor closely. No immediate action but be ready."
+      ]
+    }
+  },
+  "gates": {
+    "phase1_to_phase2": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": []
+    },
+    "phase2_to_phase3": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": []
+    },
+    "phase3_to_phase4": {
+      "passed": true,
+      "hard_fails": [],
+      "soft_warns": [],
+      "notes": [
+        "rule check_stop_proximity: 🟡 WARNING — only 2.3% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
+        "rule check_stop_proximity: 🟠 WATCH — 3.5% above stop. Monitor closely. No immediate action but be ready.",
+        "rule check_stop_proximity: 🟠 WATCH — 4.9% above stop. Monitor closely. No immediate action but be ready."
+      ]
+    }
+  }
+}

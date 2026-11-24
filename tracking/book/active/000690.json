@@ -164,6 +164,14 @@
       "change_pct": -2.11,
       "action": "HOLD",
       "note": "电力hot(rank5=27/128, cold_days 0)，收5.58浮亏-2.1%未触-5%硬止损(5.42)，9日未到15日时间止损；但今日盘中低点5.38已瞬时击穿止损5.42后收回、距止损仅2.9%(stop_proximity WARNING)——若明日收盘跌破5.42按h024主动离场，今日HOLD"
+    },
+    {
+      "date": "2026-11-24",
+      "slot": "afternoon",
+      "price": 5.55,
+      "change_pct": -2.63,
+      "action": "HOLD",
+      "note": "收盘5.55高于硬止损5.42(浮亏-2.6%)，未触发-5%止损与15日时间止损(9日)；但stop_proximity WARNING(距止损仅2.3%)、电力板块已滑至rank47中性、margin deleveraging——明日收盘若跌破5.42按h024主动离场，今日HOLD。另今日为分红股权登记日(10派0.5元，明日除息)"
     }
   ],
   "exitDate": null,
@@ -173,6 +181,6 @@
   "holdingDays": null,
   "lessonLearned": null,
   "createdAt": "2026-11-11T16:18:00.132661+08:00",
-  "updatedAt": "2026-11-24T11:45:44.105372+08:00",
+  "updatedAt": "2026-11-24T15:14:35.828493+08:00",
   "trackerVersion": "2.1"
 }

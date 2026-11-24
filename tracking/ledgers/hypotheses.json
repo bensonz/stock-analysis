@@ -1294,7 +1294,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-11-23",
+      "lastTested": "2026-11-24",
       "mechanism": "Relative strength at the stock level decays quickly when sector flow turns against it; sector gravity tends to overwhelm single-name quality.",
       "evidence": {
         "supporting": [
@@ -1753,11 +1753,15 @@
           {
             "date": "2026-11-23",
             "detail": "出版板块cold_days达4天(rank5=98)触发行业冷3日卖出，叠加stop_proximity CRITICAL(距止损1.13%)与高管被留置负面催化，三重确认卖出——sector gravity优先级最高"
+          },
+          {
+            "date": "2026-11-24",
+            "detail": "VCP PREMIUM(瀚蓝环境收缩比0.33)出现在cold行业(环境治理rank104)时，Rule 1行业冷禁买优先级高于VCP结构信号——h019再次验证"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 114,
+      "sampleSize": 115,
       "hitRate": 1.0,
       "confidence": 0.991,
       "tags": [
@@ -5068,7 +5072,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-11-20",
+      "lastTested": "2026-11-24",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -5319,13 +5323,17 @@
           {
             "date": "2026-11-20",
             "detail": "恐慌硬阻断机制再次生效：0/3指数翻绿、breadth 0.06:1、68家跌停，银行/保险虽领涨但属避险抱团、无广度支撑——new_positions=[]保护了81.5%的现金。"
+          },
+          {
+            "date": "2026-11-24",
+            "detail": "弱市(涨跌比0.56:1)下，候选即使通过RPS扩展区豁免(0风险/行业top10%)且行业hot，只要dist_ma5逼近6%追高线或margin deleveraging叠加，都应保持空仓——'weak tape + mediocre setup = skip'，弱市默认new_positions=[]"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 62,
+      "sampleSize": 63,
       "hitRate": 1.0,
-      "confidence": 0.984,
+      "confidence": 0.985,
       "tags": [
         "entry-filter",
         "position-sizing"
@@ -9895,6 +9903,60 @@
       "tags": [
         "timing",
         "entry-filter"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h227",
+      "text": "银行系连续霸榜5日强度榜但绝对收益已近0/转负(国有大行+2.34%、股份制+0.34%)——'相对强=绝对弱'的分化市里，持有赢家(银行/港口)而非新开仓才是正解",
+      "type": "observation",
+      "status": "observation",
+      "created": "2026-11-24",
+      "lastTested": "2026-11-24",
+      "mechanism": "轮动市中领涨板块本身也在减速，安全边际来自已有持仓的浮盈而非追逐新概念",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-11-24",
+            "detail": "银行系连续霸榜5日强度榜但绝对收益已近0/转负(国有大行+2.34%、股份制+0.34%)——'相对强=绝对弱'的分化市里，持有赢家(银行/港口)而非新开仓才是正解"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "sector"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h228",
+      "text": "南京银行类：大股东增持(江苏交控至15.09%)+即将中期分红除息(11-25)双重事件下，浮盈+7.9%应继续持有而非因除息跌价恐慌——除息是会计调整(参考价约降2.5%)，非基本面变化",
+      "type": "heuristic",
+      "status": "observation",
+      "created": "2026-11-24",
+      "lastTested": "2026-11-24",
+      "mechanism": "除息日参考价机械下调不构成卖出理由，赢家让利润奔跑",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-11-24",
+            "detail": "南京银行类：大股东增持(江苏交控至15.09%)+即将中期分红除息(11-25)双重事件下，浮盈+7.9%应继续持有而非因除息跌价恐慌——除息是会计调整(参考价约降2.5%)，非基本面变化"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "exit-rule"
       ],
       "parentRule": null,
       "retiredDate": null,

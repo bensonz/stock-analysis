@@ -1,0 +1,236 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "元件",
+        "5d_pct": 5.28,
+        "trend": "领涨(唯一正动量)"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": 2.34,
+        "trend": "steady"
+      },
+      {
+        "name": "股份制银行Ⅱ",
+        "5d_pct": 0.34,
+        "trend": "steady"
+      },
+      {
+        "name": "保险Ⅱ",
+        "5d_pct": 0.23,
+        "trend": "steady"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": -0.13,
+        "trend": "cooling"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "厨卫电器",
+        "5d_pct": -9.63,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "贸易Ⅱ",
+        "5d_pct": -9.54,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电视广播Ⅱ",
+        "5d_pct": -9.51,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "一般零售",
+        "5d_pct": -9.02,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "游戏Ⅱ",
+        "5d_pct": -8.8,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "4/6持仓在热门行业(南京银行城商行rank11、渝农商行农商行rank28、青岛港航运港口rank7、中炬高新调味发酵品rank14)；2/6在电力rank47中性(宝新能源、中国广核)",
+    "regime": "防御性/高股息轮动：银行系与港口/白电/铁路霸榜5日强度但绝对收益已近0或转负(相对强=绝对弱)，资源(贵金属/工业金属)与消费(零售/游戏/旅游)领跌，科创50逆势+1.81%显示科技权重仍有资金，非进攻性普涨"
+  },
+  "position_decisions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "reason": "收盘5.55高于硬止损5.42(浮亏-2.6%)，未触发-5%止损与15日时间止损(9日)；但stop_proximity WARNING(距止损仅2.3%)、电力板块已滑至rank47中性、margin deleveraging——明日收盘若跌破5.42按h024主动离场，今日HOLD。另今日为分红股权登记日(10派0.5元，明日除息)",
+      "sector_rank": "47/128 中性",
+      "new_stop": null,
+      "pnl_pct": -2.6,
+      "days_held": 9,
+      "exit_price": null
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "reason": "浮亏-1.5%未触发止损，已跌破MA5/10/20均线簇+margin deleveraging，距止损3.5%(WATCH)；持仓10日，15日时间止损尚余5日，HOLD观察",
+      "sector_rank": "47/128 中性",
+      "new_stop": null,
+      "pnl_pct": -1.5,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "600872",
+      "name": "中炬高新",
+      "action": "HOLD",
+      "reason": "新仓1日浮亏-0.1%，调味发酵品Ⅱhot(rank14)，未触发任何止损，HOLD",
+      "sector_rank": "14/128 热门",
+      "new_stop": null,
+      "pnl_pct": -0.1,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "reason": "浮盈+7.9%未达+10%抬止损线，城商行Ⅱhot(rank11)，大股东江苏交控增持至15.09%(财联社11-24)催化新鲜；明日(11-25)中期分红除息(每股0.33122元)属会计调整非卖出理由，赢家让利润奔跑，HOLD",
+      "sector_rank": "11/128 热门",
+      "new_stop": null,
+      "pnl_pct": 7.9,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "601077",
+      "name": "渝农商行",
+      "action": "HOLD",
+      "reason": "今日新开+0.6%，农商行Ⅱhot(rank28)，未触发止损，HOLD",
+      "sector_rank": "28/128 热门",
+      "new_stop": null,
+      "pnl_pct": 0.6,
+      "days_held": 0,
+      "exit_price": null
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "浮盈+3.7%>3%故15日时间止损不触发(19日持仓)，航运港口hot(rank7)，赢家让利润奔跑，HOLD",
+      "sector_rank": "7/128 热门",
+      "new_stop": null,
+      "pnl_pct": 3.7,
+      "days_held": 19,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "603893",
+      "name": "瑞芯微",
+      "reason": "半导体hot(rank18)且RPS120 94.15、0风险因子通过扩展区豁免，端侧AI催化新鲜(11-23涨停、60家机构调研，财联社/东财)；但dist_ma5 +5.7%逼近6%追高线、margin deleveraging(chg5 -7.02%)、VCP收缩比0.84无结构优势，弱市(0.56:1)不追，等回踩MA10",
+      "rps120": 94.15
+    },
+    {
+      "code": "000651",
+      "name": "格力电器",
+      "reason": "白色家电top10%(rank8)、RPS120 93.94通过行业豁免，家电出海催化(10月出口+20.9%，财通证券)；但margin deleveraging(5日净偿还)、大股东质押100%风险，大盘防御属性>动量属性，弱市跳过",
+      "rps120": 93.94
+    },
+    {
+      "code": "000429",
+      "name": "粤高速A",
+      "reason": "铁路公路hot(rank32)、0风险、margin adding、VCP SETUP，技术最干净；但催化仅购买资产公告(无新鲜动量催化)，弱市下跳过",
+      "rps120": 94.04
+    },
+    {
+      "code": "601333",
+      "name": "广深铁路",
+      "reason": "铁路公路hot但RPS120 94.68处扩展区(92-95%)，2风险因子、非top10%行业、无>50%业绩催化，不满足扩展区豁免条件",
+      "rps120": 94.68
+    },
+    {
+      "code": "001965",
+      "name": "招商公路",
+      "reason": "同上，RPS120 94.57扩展区1风险因子无豁免",
+      "rps120": 94.57
+    },
+    {
+      "code": "600323",
+      "name": "瀚蓝环境",
+      "reason": "VCP PREMIUM(收缩比0.33)诱人，但环境治理cold(rank104, cold_days1)，行业冷=禁买区(h019)，Rule 1拦截",
+      "rps120": 92.96
+    },
+    {
+      "code": "600398",
+      "name": "海澜之家",
+      "reason": "服装家纺rank57中性(非前30%)，RPS120 94.97，Rule 1行业门槛拦截",
+      "rps120": 94.97
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "reason": "出版rank39仅边缘热门，dist_ma5 -9.2%深跌破所有均线，11-23刚止损离场(-3.92%)，无变化的重入，跳过",
+      "rps120": 94.37
+    },
+    {
+      "code": "603236",
+      "name": "移远通信",
+      "reason": "RPS120 99.47>95%过热封顶(7/27-31审计验证不可移除)，跳过等回调至90%区",
+      "rps120": 99.47
+    },
+    {
+      "code": "300613",
+      "name": "富瀚微",
+      "reason": "半导体hot但RPS120 96.96>95%过热且dist_ma5 +8.3%超6%追高线，双重拦截",
+      "rps120": 96.96
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "弱市(涨跌比0.56:1)下，候选即使通过RPS扩展区豁免(0风险/行业top10%)且行业hot，只要dist_ma5逼近6%追高线或margin deleveraging叠加，都应保持空仓——'weak tape + mediocre setup = skip'，弱市默认new_positions=[]",
+      "type": "heuristic",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "弱市广度不足时个股alpha被市场beta压制；追高线+杠杆资金撤离提示短期回撤风险高于踏空成本"
+    },
+    {
+      "text": "银行系连续霸榜5日强度榜但绝对收益已近0/转负(国有大行+2.34%、股份制+0.34%)——'相对强=绝对弱'的分化市里，持有赢家(银行/港口)而非新开仓才是正解",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "轮动市中领涨板块本身也在减速，安全边际来自已有持仓的浮盈而非追逐新概念"
+    },
+    {
+      "text": "VCP PREMIUM(瀚蓝环境收缩比0.33)出现在cold行业(环境治理rank104)时，Rule 1行业冷禁买优先级高于VCP结构信号——h019再次验证",
+      "type": "signal",
+      "tags": [
+        "sector",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h019",
+      "mechanism": "行业资金流出拖累个股，单一个股的VCP结构无法对抗行业beta"
+    },
+    {
+      "text": "南京银行类：大股东增持(江苏交控至15.09%)+即将中期分红除息(11-25)双重事件下，浮盈+7.9%应继续持有而非因除息跌价恐慌——除息是会计调整(参考价约降2.5%)，非基本面变化",
+      "type": "heuristic",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "mechanism": "除息日参考价机械下调不构成卖出理由，赢家让利润奔跑"
+    }
+  ],
+  "market_summary": "弱势分化盘：涨跌家数1952/3498(0.56:1)，仅上证+0.27%收红、深成指-0.29%、创业板指-0.05%，科创50逆势+1.81%；涨停64/跌停4。IV整体偏高(均值IV Rank 0.63，500ETF/创业板ETF>0.8)，情绪偏谨慎。银行股持续创新高(南京银行大股东江苏交控增持至15.09%，财联社11-24)，资金回流低估值/高股息；端侧AI/人形机器人(四部门养老场景政策、智元机器人进产线)催化半导体。弱势盘默认不新开仓，保留现金78.7%。",
+  "market_sentiment": "bearish",
+  "market_call": "防守"
+}

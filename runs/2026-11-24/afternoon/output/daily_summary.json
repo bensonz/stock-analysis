@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-24",
+  "actions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "price": 5.55,
+      "pnl_pct": -2.6,
+      "note": "收盘5.55高于硬止损5.42(浮亏-2.6%)，未触发-5%止损与15日时间止损(9日)；但stop_proximity WARNING(距止损仅2.3%)、电力板块已滑至rank47中性、margin deleveraging——明日收盘若跌破5.42按h024主动离场，今日HOLD。另今日为分红股权登记日(10派0.5元，明日除息)"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.61,
+      "pnl_pct": -1.5,
+      "note": "浮亏-1.5%未触发止损，已跌破MA5/10/20均线簇+margin deleveraging，距止损3.5%(WATCH)；持仓10日，15日时间止损尚余5日，HOLD观察"
+    },
+    {
+      "code": "600872",
+      "name": "中炬高新",
+      "action": "HOLD",
+      "price": 19.35,
+      "pnl_pct": -0.1,
+      "note": "新仓1日浮亏-0.1%，调味发酵品Ⅱhot(rank14)，未触发任何止损，HOLD"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 13.5,
+      "pnl_pct": 7.9,
+      "note": "浮盈+7.9%未达+10%抬止损线，城商行Ⅱhot(rank11)，大股东江苏交控增持至15.09%(财联社11-24)催化新鲜；明日(11-25)中期分红除息(每股0.33122元)属会计调整非卖出理由，赢家让利润奔跑，HOLD"
+    },
+    {
+      "code": "601077",
+      "name": "渝农商行",
+      "action": "HOLD",
+      "price": 7.25,
+      "pnl_pct": 0.6,
+      "note": "今日新开+0.6%，农商行Ⅱhot(rank28)，未触发止损，HOLD"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "price": 10.01,
+      "pnl_pct": 3.7,
+      "note": "浮盈+3.7%>3%故15日时间止损不触发(19日持仓)，航运港口hot(rank7)，赢家让利润奔跑，HOLD"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 6,
+    "totalEquity": 962456.94,
+    "dayPnl": -212.0,
+    "dayReturnPct": -0.02,
+    "totalReturnPct": -3.75,
+    "unrealizedPnl": 3134.0,
+    "realizedPnl": -40677.06,
+    "cashPct": 78.68
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.558,
+    "up": 1952,
+    "down": 3498,
+    "positive_indices": [
+      "上证指数"
+    ],
+    "negative_indices": [
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 64,
+    "limit_downs": 4,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.56:1, 1/3 major indices green, 64 limit-ups / 4 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "弱势分化盘：涨跌家数1952/3498(0.56:1)，仅上证+0.27%收红、深成指-0.29%、创业板指-0.05%，科创50逆势+1.81%；涨停64/跌停4。IV整体偏高(均值IV Rank 0.63，500ETF/创业板ETF>0.8)，情绪偏谨慎。银行股持续创新高(南京银行大股东江苏交控增持至15.09%，财联社11-24)，资金回流低估值/高股息；端侧AI/人形机器人(四部门养老场景政策、智元机器人进产线)催化半导体。弱势盘默认不新开仓，保留现金78.7%。"
+  }
+}

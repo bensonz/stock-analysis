@@ -1,0 +1,59 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 189327,
+  "output_tokens": 26523,
+  "rounds": 2,
+  "duration_sec": 455.8,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "南京银行"
+      },
+      "result_length": 2361
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "瑞芯微"
+      },
+      "result_length": 2084
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "宝新能源"
+      },
+      "result_length": 2247
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月24日 银行板块 上涨 原因 市场"
+      },
+      "result_length": 2876,
+      "fallback": "exa"
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体 人形机器人 AI终端 2026年11月 行情 催化"
+      },
+      "result_length": 3167,
+      "fallback": "exa"
+    }
+  ],
+  "fallback_used": false
+}
