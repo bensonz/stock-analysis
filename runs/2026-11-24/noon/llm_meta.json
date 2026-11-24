@@ -1,0 +1,70 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 299222,
+  "output_tokens": 40104,
+  "rounds": 3,
+  "duration_sec": 568.7,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "渝农商行"
+      },
+      "result_length": 2096
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "南京银行"
+      },
+      "result_length": 2357
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 银行板块 上涨 原因 2026年11月"
+      },
+      "result_length": 3111,
+      "fallback": "exa"
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=银行股+上涨+红利+2026年11月",
+        "maxChars": 4000
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=A股+消费电子+反弹+2026年11月24日"
+      },
+      "result_length": 4000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "maxChars": 4000,
+        "url": "https://www.baidu.com/s?wd=农商行+渝农商行+历史新高+2026年11月"
+      },
+      "result_length": 4000
+    }
+  ],
+  "fallback_used": false
+}

@@ -1,0 +1,150 @@
+## Fallback JSON Decision
+
+```json
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {"name": "元件", "5d_pct": 2.24, "trend": "rebound"},
+      {"name": "国有大型银行Ⅱ", "5d_pct": 1.65, "trend": "steady"},
+      {"name": "股份制银行Ⅱ", "5d_pct": 0.55, "trend": "steady"},
+      {"name": "渔业", "5d_pct": 0.41, "trend": "steady"},
+      {"name": "白色家电", "5d_pct": 0.29, "trend": "steady"}
+    ],
+    "cold_sectors": [
+      {"name": "电视广播Ⅱ", "5d_pct": -15.13, "trend": "deteriorating"},
+      {"name": "影视院线", "5d_pct": -14.65, "trend": "deteriorating"},
+      {"name": "广告营销", "5d_pct": -14.25, "trend": "deteriorating"},
+      {"name": "游戏Ⅱ", "5d_pct": -12.63, "trend": "deteriorating"},
+      {"name": "一般零售", "5d_pct": -11.46, "trend": "deteriorating"}
+    ],
+    "position_alignment": "5/5 持仓在hot板块(航运港口rank6/城商行rank8/调味发酵品rank12/电力rank27)",
+    "regime": "5日主线为银行/电力/港口等防御板块，且银行呈'中小行接棒'(南京银行、中信银行创新高，大行歇脚)；今日科创50+2.72%/消费电子+4.42%等成长超跌反弹初现，防御→科技轮动待确认"
+  },
+  "position_decisions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "HOLD",
+      "reason": "电力hot(rank5=27/128, cold_days 0)，收5.58浮亏-2.1%未触-5%硬止损(5.42)，9日未到15日时间止损；但今日盘中低点5.38已瞬时击穿止损5.42后收回、距止损仅2.9%(stop_proximity WARNING)——若明日收盘跌破5.42按h024主动离场，今日HOLD",
+      "sector_rank": "top 21% (rank5=27/128)",
+      "new_stop": null,
+      "pnl_pct": -2.1,
+      "days_held": 9,
+      "exit_price": null
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "reason": "电力hot(rank5=27/128)，收4.62浮亏-1.3%未触-5%硬止损(4.45)，10日未到15日时间止损；跌破MA5/10/20(4.69/4.69/4.70)均线簇+margin deleveraging+距止损3.7%(WATCH)，但今日-0.22%未续跌，HOLD观察",
+      "sector_rank": "top 21% (rank5=27/128)",
+      "new_stop": null,
+      "pnl_pct": -1.3,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "600872",
+      "name": "中炬高新",
+      "action": "HOLD",
+      "reason": "新仓1日，调味发酵品Ⅱhot(rank5=12/128 top9%)，收19.37持平未触任何止损，IV 500ETF 0.85极高故仅5%仓，HOLD",
+      "sector_rank": "top 9% (rank5=12/128)",
+      "new_stop": null,
+      "pnl_pct": 0.0,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "reason": "城商行Ⅱhot(rank5=8/128 top6%)，浮盈+7.6%未达+10%抬止损线，大股东江苏交控增持至15.09%(财联社11-24)催化新鲜，赢家让利润奔跑，HOLD",
+      "sector_rank": "top 6% (rank5=8/128)",
+      "new_stop": null,
+      "pnl_pct": 7.6,
+      "days_held": 10,
+      "exit_price": null
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "航运港口hot(rank5=6/128 top4.7%)，浮盈+3.6%>3%故15日时间止损不触发(19日持仓)，赢家让利润奔跑，HOLD",
+      "sector_rank": "top 4.7% (rank5=6/128)",
+      "new_stop": null,
+      "pnl_pct": 3.6,
+      "days_held": 19,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "601077",
+      "name": "渝农商行",
+      "entry_price": 7.21,
+      "allocation_pct": 4,
+      "stop": 6.85,
+      "target": 7.90,
+      "thesis": "农商行Ⅱhot(rank5=14/128 top11%)，银行股5日/20日持续领涨且'中小行接棒'(深圳商报11-23：大行歇脚、中小行创新高)；RPS120 93.96扩展区(0风险因子豁免)；MA距离全合规(dist_ma5 -1.2%/dist_ma10 -1.2%/dist_ma20 -0.3%，回踩MA20支撑非追高)；margin adding(chg5 +7.16%)；11-06创历史新高7.42后缩量回踩确认；IV 300ETF 0.47正常。软市+IV整体偏高→仅4%小仓",
+      "sector": "农商行Ⅱ",
+      "sector_rank": "top 11% (rank5=14/128)",
+      "catalyst": "银行板块红利/资金回流逻辑(上证报11-02：被动+主动+北向三季度同步加仓银行)；渝农商行Q3归母净利+12.38%/营收+8.47%、不良率1.05%(-0.03pp)、拨备353%(界面/财中社10-29)；11-04大宗交易机构专用席位2604万(证券时报)",
+      "catalyst_freshness": "ongoing",
+      "rps120": 93.96,
+      "conviction": "small"
+    }
+  ],
+  "skip_list": [
+    {"code": "603236", "name": "移远通信", "reason": "RPS120 99.45>95%过热(Rule2封顶)；通信设备rank5=72(mid)；dist_ma5 7.8%>6%追高", "rps120": 99.45},
+    {"code": "601328", "name": "交通银行", "reason": "国有大行hot(rank2)但RPS120 98.66>95%过热，且大行'歇脚'(深圳商报11-23)", "rps120": 98.66},
+    {"code": "601919", "name": "中远海控", "reason": "航运港口hot(rank6)但RPS120 98.22>95%过热", "rps120": 98.22},
+    {"code": "600036", "name": "招商银行", "reason": "股份制银行Ⅱhot(rank3)但RPS120 96.91>95%过热", "rps120": 96.91},
+    {"code": "603893", "name": "瑞芯微", "reason": "半导体hot(rank22)但dist_ma5 8.0%>6%(Rule2b追高)，margin deleveraging(chg5 -7.02%)", "rps120": 94.65},
+    {"code": "300613", "name": "富瀚微", "reason": "半导体hot(rank22)但dist_ma5 10.1%>6%、dist_ma20 8.6%(追高)", "rps120": 96.98},
+    {"code": "000415", "name": "渤海租赁", "reason": "多元金融hot(rank24)但RPS120 94.6扩展区无豁免(4风险因子+净利亏损)，margin deleveraging", "rps120": 94.6},
+    {"code": "601333", "name": "广深铁路", "reason": "铁路公路hot(rank18)但RPS120 94.82扩展区无豁免(2风险、无>50%盈利催化)", "rps120": 94.82},
+    {"code": "600007", "name": "中国国贸", "reason": "房地产开发rank5=79(mid)不入top30%，Rule1否决", "rps120": 94.95},
+    {"code": "600398", "name": "海澜之家", "reason": "服装家纺rank5=99(cold)，Rule1否决", "rps120": 94.54},
+    {"code": "000719", "name": "中原传媒", "reason": "出版rank5=112(cold)且11-23刚平仓(-3.92%)，重入举证不足，不买", "rps120": 94.47},
+    {"code": "600060", "name": "海信视像", "reason": "黑色家电rank5=37(仅刚入top30%)且ret5 -5.75%为负、VCP缺失；软市只取最干净一个(渝农商行)，列第二顺位", "rps120": 94.78},
+    {"code": "000429", "name": "粤高速A", "reason": "铁路公路hot(rank18)、0风险、margin adding、VCP SETUP均通过，但IV 深100ETF 0.65偏高+铁路5日-3.94%，列第三顺位", "rps120": 94.03},
+    {"code": "601000", "name": "唐山港", "reason": "航运港口hot(rank6)通过扩展区(板块top10%)，但与持仓青岛港同板块集中、且缺enriched margin/IV数据", "rps120": 95.84},
+    {"code": "600926", "name": "杭州银行", "reason": "城商行hot(rank8)通过扩展区(板块top10%)、0风险，但缺enriched数据+与持仓南京银行同属银行板块集中", "rps120": 95.66}
+  ],
+  "new_learnings": [
+    {
+      "text": "策略池64只中RPS120>95%的银行/防御股占比极高(工行98.11/建行97.89/交行98.66等)，甜点区(80-92%)几乎只剩持仓股——RPS>95%封顶规则把可买标的压缩到'扩展区92-95%+0风险豁免'的极少数，这是h151'拥挤'的实时印证",
+      "type": "observation",
+      "tags": ["sector", "entry-filter"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "当抱团资金把龙头RPS推到98-99时动量已极致拥挤、均值回归风险高；此时唯一干净的入场是板块内RPS相对不拥挤(93-96)且回踩均线支撑的次龙头"
+    },
+    {
+      "text": "今日1日领涨(消费电子+4.42%/数字媒体+3.94%/航天装备+3.19%)多为5日排名底部板块的超跌反弹(汽车服务5日rank123/航天装备rank121)，5日主线仍是银行/防御——'1日反弹≠5日趋势'，开新仓仍按sector_rank的5日口径",
+      "type": "signal",
+      "tags": ["sector", "timing"],
+      "evidence_type": "observation",
+      "mechanism": "单日领涨的底部板块多为超跌修复、持续性存疑；sector_rank(5日等权)才能区分'趋势'与'反弹'"
+    },
+    {
+      "text": "渝农商行形态=历史新高7.42后回踩MA20支撑(非追高)+margin adding+0风险+IV正常，是软市(1.37:1、分布偏0-2%)+IV偏高(500ETF 0.85)下唯一满足全部门槛的入场；软市只取最干净一个，其余pass",
+      "type": "heuristic",
+      "tags": ["entry-filter", "position-sizing", "timing"],
+      "evidence_type": "supporting",
+      "mechanism": "IV>75%的恐慌环境下'只买最强setup'；回踩支撑的VCP型次龙头比追高龙头回撤空间更小"
+    },
+    {
+      "text": "宝新能源(距止损2.9%、盘中低点5.38已击穿止损5.42)/中国广核(3.7%、跌破MA5/10/20)连续多日stop_proximity WATCH——电力虽hot但两持仓疲弱，次日续跌应按h024主动离场而非等-5%收盘精确触发",
+      "type": "rule",
+      "tags": ["exit-rule", "timing"],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "距止损<4%时缓冲不足，隔夜跳空风险会击穿硬止损，提前主动处理可减小滑点"
+    }
+  ],
+  "market_summary": "三大指数全红(上证+0.47%/深成+0.92%/创业板+1.90%，科创50+2.72%领涨)，Breadth 1.37:1(3123涨/2273跌)、67涨停/5跌停，但涨跌分布集中在0-2%区间(涨1871/跌1988)属普涨但强度有限的平衡偏软格局。5日主线为银行/电力/港口等防御，银行'中小行接棒'(南京银行、中信银行创新高)；今日消费电子+4.42%/数字媒体+3.94%等超跌成长反弹初现。IV整体偏高(均值0.60，500ETF 0.85/创业板0.77恐慌偏高)，对中盘新仓保持挑剔、小仓试探",
+  "market_sentiment": "中性偏谨慎",
+  "market_call": "谨慎"
+}
+```
