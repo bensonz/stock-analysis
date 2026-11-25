@@ -1,0 +1,72 @@
+{
+  "as_of": "2026-11-25",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 13,
+    "new": 3,
+    "pending": 3,
+    "expired": 0,
+    "ai_retired": 2,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 9,
+    "decided": 0,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 1,
+    "fetch_errors": 0,
+    "empty_days": 7,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 3,
+    "kept": 2,
+    "skipped": 1,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261211-ad2c14ce",
+        "name": "12月11日：美国政府拨款到期日",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "risk",
+        "reason": "美国政府拨款到期，若停摆将扰动全球风险偏好，对A股有外溢压力"
+      },
+      {
+        "id": "wscn-20261214-ea87ba7f",
+        "name": "美国2026年迈阿密G20领导人峰会（12月14日–15日）",
+        "decision": "keep",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "G20峰会涉及中美关系与贸易政策，可能释放系统性信号"
+      },
+      {
+        "id": "wscn-20270103-03b7842e",
+        "name": "1月3日：美国第120届国会宣誓就职",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "美国国会换届属常规政治日程，对A股无直接系统性影响"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1491,
+    "tokens_out": 204
+  },
+  "pending_items": []
+}

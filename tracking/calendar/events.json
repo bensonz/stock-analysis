@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-23",
+  "updated": "2026-11-25",
   "note": "手动维护的前瞻事件日历（scripts/event_calendar.py 读取；到期/失效条目请及时清理）。tz=US 的事件影响其后第一个A股交易日。direction: risk(默认)|supportive|two_sided。 【数字纪律】notes 中禁止出现未经复测的数字或\"历史规律\"——任何统计口径的断言必须先用真实数据复测并标注 n 与口径（教训: 2026-08-04 政治局+2%小盘占优系模型folklore, 实测≈0, 见 git log）。 每条必须带 source（URL或可重算的脚本/口径说明）。",
   "events": [
     {
@@ -122,6 +122,34 @@
       "impact": "high",
       "notes": "2/28美以对伊开战以来海峡断航；4月停火后7/7再度交火，南航道AIS过航归零（7/10）。油价与全球风险偏好的持续压力源——7月中旬A股动量池系统性崩塌与此同窗。观察：停火/协议进展、油轮通行恢复、再升级。 【2026-11-21 状态】仍未恢复：UKMTO 称截至11-18当周通行量较战前低约65%，当周6起油轮遇袭；美军对伊朗港口封锁持续，美伊经卡塔尔斡旋未达成协议。",
       "source": "新闻跟踪(多源); 南航道AIS过航数据见公开船讯平台; https://www.iranintl.com/en/202611215184 (UKMTO, 2026-11-21); https://www.unitedagainstnucleariran.com/analysis/iran-shipping-update-november-18-2026"
+    },
+    {
+      "date": "2026-12-11",
+      "tz": "US",
+      "name": "12月11日：美国政府拨款到期日",
+      "kind": "other",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "direction": "risk",
+      "notes": "北京时间 2026-12-11 00:00（华尔街见闻财经日历）",
+      "source": "华尔街见闻财经日历 imp=4",
+      "inbox_id": "wscn-20261211-ad2c14ce",
+      "decided_by": "ai",
+      "reason": "美国政府拨款到期，若停摆将扰动全球风险偏好，对A股有外溢压力"
+    },
+    {
+      "date": "2026-12-14",
+      "tz": "US",
+      "name": "美国2026年迈阿密G20领导人峰会（12月14日–15日）",
+      "kind": "other",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "direction": "two_sided",
+      "notes": "北京时间 2026-12-14 00:00（华尔街见闻财经日历）",
+      "source": "华尔街见闻财经日历 imp=4",
+      "inbox_id": "wscn-20261214-ea87ba7f",
+      "decided_by": "ai",
+      "reason": "G20峰会涉及中美关系与贸易政策，可能释放系统性信号"
     }
   ]
 }

@@ -1,0 +1,221 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "元件",
+        "5d_pct": 5.28,
+        "trend": "超跌反弹(20日-11.57%)"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": 2.34,
+        "trend": "steady"
+      },
+      {
+        "name": "股份制银行Ⅱ",
+        "5d_pct": 0.34,
+        "trend": "steady"
+      },
+      {
+        "name": "保险Ⅱ",
+        "5d_pct": 0.23,
+        "trend": "steady"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": -0.13,
+        "trend": "weak"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "厨卫电器",
+        "5d_pct": -9.63,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "贸易Ⅱ",
+        "5d_pct": -9.54,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "电视广播Ⅱ",
+        "5d_pct": -9.51,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "一般零售",
+        "5d_pct": -9.02,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "游戏Ⅱ",
+        "5d_pct": -8.8,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "4/6 positions in hot sectors(南京银行/渝农商行/中炬高新/青岛港)，2只在mid(宝新能源/中国广核 电力rank47)",
+    "regime": "防御板块(银行/保险/港口/高速/白电)接棒，科技(半导体/电子化学品/电池)今日领跌；今日1日榜渔业+6.56%/旅游+2.88%等消费反弹但5日动量仍cold"
+  },
+  "position_decisions": [
+    {
+      "code": "000690",
+      "name": "宝新能源",
+      "action": "SELL",
+      "reason": "电力板块从hot滑至mid(rank5=47/128)，10个交易日浮亏-3.2%；今日盘中最低5.42已触及止损5.42后收回，stop_proximity CRITICAL(仅1.8%)+breakout_failure规则触发+margin deleveraging(chg5-2.23%)——三项共振，按h024主动离场不等-5%精确触发",
+      "sector_rank": "mid (rank5=47/128)",
+      "new_stop": null,
+      "pnl_pct": -3.2,
+      "days_held": 10,
+      "exit_price": 5.52
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "reason": "浮亏-0.6%未触-5%止损(4.45)，距止损4.3%(WATCH)；电力板块滑至mid(rank47)，margin adding(chg5+4.8%)；今日+0.87%未续跌，HOLD观察，若电力转cold(rank≥90)且cold_days≥3则按行业冷3日纪律卖出",
+      "sector_rank": "mid (rank5=47/128)",
+      "new_stop": null,
+      "pnl_pct": -0.6,
+      "days_held": 11,
+      "exit_price": null
+    },
+    {
+      "code": "600872",
+      "name": "中炬高新",
+      "action": "HOLD",
+      "reason": "新仓2日+0.6%，调味发酵品Ⅱhot(rank5=14/128)，Q3业绩快报净利+59.61%催化新鲜，未触任何止损，HOLD",
+      "sector_rank": "hot (rank5=14/128)",
+      "new_stop": null,
+      "pnl_pct": 0.6,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "reason": "浮盈+4.4%未达+10%抬止损线，城商行Ⅱhot(rank5=11/128)；今日-0.84%为中期分红除息(每股0.33122元)会计调整非卖出理由；大股东江苏交控增持催化新鲜，赢家让利润奔跑，HOLD",
+      "sector_rank": "hot (rank5=11/128)",
+      "new_stop": null,
+      "pnl_pct": 4.4,
+      "days_held": 11,
+      "exit_price": null
+    },
+    {
+      "code": "601077",
+      "name": "渝农商行",
+      "action": "HOLD",
+      "reason": "新仓1日-0.1%，农商行Ⅱhot(rank5=28/128)，margin adding(chg5+3.19%)，未触止损(6.85)，HOLD",
+      "sector_rank": "hot (rank5=28/128)",
+      "new_stop": null,
+      "pnl_pct": -0.1,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "HOLD",
+      "reason": "浮盈+3.0%勉强高于3%故15日时间止损未触发(20日持仓)，航运港口hot(rank5=7/128)，margin adding(chg5+19.75%)；若跌破+3%且持仓>15日则按时间止损离场，HOLD",
+      "sector_rank": "hot (rank5=7/128)",
+      "new_stop": null,
+      "pnl_pct": 3.0,
+      "days_held": 20,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "600323",
+      "name": "瀚蓝环境",
+      "reason": "vcp_quality=PREMIUM(收缩比0.33)技术面全池最佳，但环境治理sector rank5=104/128(cold, bottom30%)——Rule 1硬性否决，行业gravity优先",
+      "rps120": 92.96
+    },
+    {
+      "code": "600398",
+      "name": "海澜之家",
+      "reason": "vcp_quality=QUALITY(收缩比0.37)且dist_ma20=5.8%合规，但服装家纺rank5=57/128(mid非top30%)，Rule 1否决",
+      "rps120": 94.97
+    },
+    {
+      "code": "601333",
+      "name": "广深铁路",
+      "reason": "铁路公路hot(rank32)但RPS120=94.68处92-95%扩展区，2风险因子且Q3净利-51.35%无豁免条件，Rule 2否决",
+      "rps120": 94.68
+    },
+    {
+      "code": "001965",
+      "name": "招商公路",
+      "reason": "铁路公路hot(rank32)但RPS120=94.57扩展区，1风险+Q3净利-6.65%无豁免，Rule 2否决",
+      "rps120": 94.57
+    },
+    {
+      "code": "603893",
+      "name": "瑞芯微",
+      "reason": "半导体rank18(hot)但今日板块-3.74%领跌(输入sectors数据)，RPS94.15仅0风险豁免，VCP收缩比0.84弱+dist_peak12.6%波动大；弱市不追科技退潮",
+      "rps120": 94.15
+    },
+    {
+      "code": "603338",
+      "name": "浙江鼎力",
+      "reason": "工程机械rank12(hot top9.4%)、Q3业绩超预期、0风险，但margin deleveraging(chg5-4.68%)且今日breadth1.08:1/0:3指数红——h144弱市开仓时机偏早，等breadth改善",
+      "rps120": 94.95
+    },
+    {
+      "code": "000429",
+      "name": "粤高速A",
+      "reason": "铁路公路hot(rank32)防御属性，RPS94.04扩展区(0风险豁免通过)，IV深100ETF 0.74偏高，弱市观望",
+      "rps120": 94.04
+    },
+    {
+      "code": "000651",
+      "name": "格力电器",
+      "reason": "白色家电rank8(top6%)RPS93.94扩展区(行业top10%豁免通过)，但大股东质押100%风险+margin deleveraging(net5_repay_days5)，弱市观望",
+      "rps120": 93.94
+    },
+    {
+      "code": "000719",
+      "name": "中原传媒",
+      "reason": "11-23刚止损离场(-3.92%：出版转cold+高管立案调查留置)，dist_ma20=-11.5%下跌中继，重入举证不足，不重入",
+      "rps120": 94.37
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "breadth≈1.08:1且0/3主要指数翻红时，即便出现浙江鼎力这类'hot sector+业绩超预期+0风险'的干净候选也默认不开新仓——h144弱市开仓即使标的优秀时机也偏早(本次breadth1.0754与h144样本一致)",
+      "type": "rule",
+      "tags": [
+        "timing",
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h144",
+      "mechanism": "弱市中优秀标的的alpha会被整体beta拖累，入场即面临回撤与止损压力，等breadth改善可显著降低入场即亏的概率"
+    },
+    {
+      "text": "当5日动量榜前列全是银行/保险/港口/高速/白电等防御板块、而科技(半导体/电子化学品/电池)今日领跌时，这不是新动量而是风险回避式轮动——应降低新开仓意愿并警惕防御持仓的获利回吐",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "防御板块霸榜说明资金在避险而非进攻，动量排名的'hot'是相对概念(多数top5板块ret5为负)，进攻性动量系统此时应收缩"
+    },
+    {
+      "text": "宝新能源10交易日-3.2%且盘中触及止损、stop_proximity CRITICAL(1.8%)+breakout_failure规则同时触发+行业从hot滑至mid——三项共振时主动离场优于等待-5%精确触发，再次验证h024",
+      "type": "rule",
+      "tags": [
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h024",
+      "mechanism": "临近止损的持仓在弱市中出现跳空/阴跌概率高，等待精确触发的尾部风险(隔夜缺口)大于提前离场的踏空成本"
+    }
+  ],
+  "market_summary": "三大指数全线收绿(上证-1.01%/深成-1.19%/创业板-1.72%/科创50-2.58%)，涨跌比1.08:1(2824涨/2626跌)，70涨停/3跌停，0/3主要指数翻红——弱势盘面。IV整体偏悲观(均值IVRank0.68)，500ETF/创业板ETF IVRank 0.94/0.90极高，波动风险集中小盘成长。5日动量前列为银行/保险/港口/高速等防御板块，科技今日领跌——防御接棒、科技退潮。今日new_positions空仓守现金(现金78.8%)。",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}

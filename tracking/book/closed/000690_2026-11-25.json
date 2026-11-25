@@ -1,7 +1,7 @@
 {
   "code": "000690",
   "name": "宝新能源",
-  "status": "active",
+  "status": "closed",
   "thesis": "11月代理购电价普涨、市场化电价底部反转（界面新闻/上证报），电力板块今日震荡上扬；RPS120 91.32甜点区，0风险因子，MA距离全合规(0.6/2.9/4.2%)；margin deleveraging→小仓",
   "entryDate": "2026-11-11",
   "entrySlot": "afternoon",
@@ -172,15 +172,53 @@
       "change_pct": -2.63,
       "action": "HOLD",
       "note": "收盘5.55高于硬止损5.42(浮亏-2.6%)，未触发-5%止损与15日时间止损(9日)；但stop_proximity WARNING(距止损仅2.3%)、电力板块已滑至rank47中性、margin deleveraging——明日收盘若跌破5.42按h024主动离场，今日HOLD。另今日为分红股权登记日(10派0.5元，明日除息)"
+    },
+    {
+      "date": "2026-11-25",
+      "action": "DIVIDEND",
+      "shares": 5300,
+      "cashPer10": 0.5,
+      "grossCash": 265.0,
+      "taxRate": 0.2,
+      "tax": 53.0,
+      "netCash": 212.0,
+      "note": "除息 10派0.5: 税前265.0 税53.0 (20%) 到账212.0"
+    },
+    {
+      "date": "2026-11-25",
+      "slot": "noon",
+      "price": 5.52,
+      "change_pct": -2.46,
+      "action": "SELL",
+      "shares": 5300,
+      "note": "电力板块从hot滑至mid(rank5=47/128)，10个交易日浮亏-3.2%；今日盘中最低5.42已触及止损5.42后收回，stop_proximity CRITICAL(仅1.8%)+breakout_failure规则触发+margin deleveraging(chg5-2.23%)——三项共振，按h024主动离场不等-5%精确触发"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-11-25",
+  "exitPrice": 5.52,
+  "exitReason": "电力板块从hot滑至mid(rank5=47/128)，10个交易日浮亏-3.2%；今日盘中最低5.42已触及止损5.42后收回，stop_proximity CRITICAL(仅1.8%)+breakout_failure规则触发+margin deleveraging(chg5-2.23%)——三项共振，按h024主动离场不等-5%精确触发",
+  "returnPct": -2.46,
+  "holdingDays": 9,
+  "lessonLearned": "",
   "createdAt": "2026-11-11T16:18:00.132661+08:00",
-  "updatedAt": "2026-11-24T15:14:35.828493+08:00",
-  "trackerVersion": "2.1"
+  "updatedAt": "2026-11-25T11:41:23.790381+08:00",
+  "trackerVersion": "2.1",
+  "corporateActions": [
+    {
+      "exDate": "2026-11-25",
+      "cashPer10": 0.5,
+      "bonusPer10": 0.0,
+      "plan": "10派0.50元(含税,扣税后0.45元)",
+      "sharesBefore": 5300,
+      "sharesAfter": 5300,
+      "entryPriceBefore": 5.7,
+      "entryPriceAfter": 5.7,
+      "grossCash": 265.0,
+      "taxRate": 0.2,
+      "tax": 53.0,
+      "netCash": 212.0,
+      "appliedAt": "2026-11-25T11:41:22.165157+08:00"
+    }
+  ],
+  "exitSlot": "noon"
 }

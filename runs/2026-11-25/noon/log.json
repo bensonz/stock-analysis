@@ -1,0 +1,174 @@
+{
+  "date": "2026-11-25",
+  "slot": "noon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1795577729.0019462,
+      "errors": [],
+      "end": 1795577784.99541,
+      "duration_sec": 56.0
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 9493,
+      "tokens": {
+        "input_tokens": 87679,
+        "output_tokens": 22529
+      },
+      "rounds": 1,
+      "tool_calls_count": 0,
+      "duration_sec": 297.2,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1795578082.164971,
+      "actions": [
+        "CORP_ACTION 000690 ex 2026-11-25: cash net 212.0 (gross 265.0, tax 53.0), shares 5300→5300",
+        "CORP_ACTION 601009 ex 2026-11-25: cash net 874.42 (gross 1093.03, tax 218.61), shares 3300→3300",
+        "SELL 000690",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h144 (rule): +1 supporting evidence → hitRate=92%, n=13",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=100%, n=60",
+        "Hypothesis: Updated h024 (rule): +1 supporting evidence → hitRate=95%, n=39",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-11-25",
+        "status": "ok",
+        "checked": 6,
+        "applied": [
+          {
+            "code": "000690",
+            "name": "宝新能源",
+            "exDate": "2026-11-25",
+            "cashPer10": 0.5,
+            "bonusPer10": 0.0,
+            "plan": "10派0.50元(含税,扣税后0.45元)",
+            "sharesBefore": 5300,
+            "sharesAfter": 5300,
+            "entryPriceBefore": 5.7,
+            "entryPriceAfter": 5.7,
+            "grossCash": 265.0,
+            "taxRate": 0.2,
+            "tax": 53.0,
+            "netCash": 212.0,
+            "appliedAt": "2026-11-25T11:41:22.165157+08:00"
+          },
+          {
+            "code": "601009",
+            "name": "南京银行",
+            "exDate": "2026-11-25",
+            "cashPer10": 3.3122,
+            "bonusPer10": 0.0,
+            "plan": "10派3.3122元(含税,扣税后2.981元)",
+            "sharesBefore": 3300,
+            "sharesAfter": 3300,
+            "entryPriceBefore": 12.51,
+            "entryPriceAfter": 12.51,
+            "grossCash": 1093.03,
+            "taxRate": 0.2,
+            "tax": 218.61,
+            "netCash": 874.42,
+            "appliedAt": "2026-11-25T11:41:22.165157+08:00"
+          }
+        ],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 2,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "003816",
+                "name": "中国广核",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 4.65,
+                "stopLoss": 4.45,
+                "distance_pct": 4.3,
+                "suggestion": "🟠 WATCH — 4.3% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "601077",
+                "name": "渝农商行",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 7.2,
+                "stopLoss": 6.85,
+                "distance_pct": 4.86,
+                "suggestion": "🟠 WATCH — 4.9% above stop. Monitor closely. No immediate action but be ready."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1795578084.002924,
+      "duration_sec": 1.8
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 003816 — 🟠 WATCH — 4.3% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 601077 — 🟠 WATCH — 4.9% above stop. Monitor closely. No immediate action but be ready."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 355.0
+  }
+}

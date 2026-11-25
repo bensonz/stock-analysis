@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-11-24",
+  "lastUpdated": "2026-11-25",
   "hypotheses": [
     {
       "id": "h001",
@@ -2597,7 +2597,7 @@
       "type": "signal",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-11-24",
+      "lastTested": "2026-11-25",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -2744,6 +2744,10 @@
           {
             "date": "2026-11-24",
             "detail": "宝新能源(距止损2.9%、盘中低点5.38已击穿止损5.42)/中国广核(3.7%、跌破MA5/10/20)连续多日stop_proximity WATCH——电力虽hot但两持仓疲弱，次日续跌应按h024主动离场而非等-5%收盘精确触发"
+          },
+          {
+            "date": "2026-11-25",
+            "detail": "宝新能源10交易日-3.2%且盘中触及止损、stop_proximity CRITICAL(1.8%)+breakout_failure规则同时触发+行业从hot滑至mid——三项共振时主动离场优于等待-5%精确触发，再次验证h024"
           }
         ],
         "contradicting": [
@@ -2757,9 +2761,9 @@
           }
         ]
       },
-      "sampleSize": 38,
-      "hitRate": 0.947,
-      "confidence": 0.925,
+      "sampleSize": 39,
+      "hitRate": 0.949,
+      "confidence": 0.927,
       "tags": [
         "exit-rule",
         "timing"
@@ -4812,7 +4816,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-11-23",
+      "lastTested": "2026-11-25",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -5051,11 +5055,15 @@
           {
             "date": "2026-11-23",
             "detail": "今日breadth 5.95:1强反弹由5日cold板块领涨(影视院线rank127今日+6.81%、数字媒体+9.03%、游戏rank125)，而5日hot板块(银行/港口/白电)今日休整或下跌——1日反弹与5日动量严重背离。Rule 1按5日sector_rank过滤，正确拦下了所有传媒/游戏/广告候选。"
+          },
+          {
+            "date": "2026-11-25",
+            "detail": "当5日动量榜前列全是银行/保险/港口/高速/白电等防御板块、而科技(半导体/电子化学品/电池)今日领跌时，这不是新动量而是风险回避式轮动——应降低新开仓意愿并警惕防御持仓的获利回吐"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 59,
+      "sampleSize": 60,
       "hitRate": 1.0,
       "confidence": 0.984,
       "tags": [
@@ -7218,7 +7226,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-08-06",
-      "lastTested": "2026-11-17",
+      "lastTested": "2026-11-25",
       "mechanism": "强基本面的股票在弱市中同样会跟随大盘回调——市场beta在短期压倒alpha。弱breadth环境中开仓应更严格或减半仓位。",
       "evidence": {
         "supporting": [
@@ -7265,6 +7273,10 @@
           {
             "date": "2026-11-17",
             "detail": "breadth 1.98:1的'强tape'与整体IV rank 0.63'偏悲观'、涨幅分布偏r0_2（2422只仅0-2%）并存，属浅反弹而非普涨；此类背离下不宜按strong regime追高开新仓"
+          },
+          {
+            "date": "2026-11-25",
+            "detail": "breadth≈1.08:1且0/3主要指数翻红时，即便出现浙江鼎力这类'hot sector+业绩超预期+0风险'的干净候选也默认不开新仓——h144弱市开仓即使标的优秀时机也偏早(本次breadth1.0754与h144样本一致)"
           }
         ],
         "contradicting": [
@@ -7274,9 +7286,9 @@
           }
         ]
       },
-      "sampleSize": 12,
-      "hitRate": 0.917,
-      "confidence": 0.857,
+      "sampleSize": 13,
+      "hitRate": 0.923,
+      "confidence": 0.867,
       "tags": [
         "timing",
         "position-sizing"
