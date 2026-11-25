@@ -1,0 +1,61 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 167598,
+  "output_tokens": 10889,
+  "rounds": 2,
+  "duration_sec": 181.3,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026-11-25 大跌 原因 半导体 电池 科创50",
+        "max_results": 6
+      },
+      "result_length": 3926,
+      "fallback": "exa"
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 银行股 上涨 中小银行 2026-11-25",
+        "max_results": 6
+      },
+      "result_length": 3428,
+      "fallback": "exa"
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "青岛港"
+      },
+      "result_length": 2074
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "南京银行"
+      },
+      "result_length": 2306
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "天味食品"
+      },
+      "result_length": 2177
+    }
+  ],
+  "fallback_used": false
+}

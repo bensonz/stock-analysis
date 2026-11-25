@@ -1,0 +1,187 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "渔业",
+        "5d_pct": 4.86,
+        "trend": "defensive bid"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": 2.99,
+        "trend": "steady"
+      },
+      {
+        "name": "股份制银行Ⅱ",
+        "5d_pct": 0.81,
+        "trend": "steady"
+      },
+      {
+        "name": "数字媒体",
+        "5d_pct": -0.9,
+        "trend": "relative strength only"
+      },
+      {
+        "name": "保险Ⅱ",
+        "5d_pct": -0.99,
+        "trend": "relative strength only"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "厨卫电器",
+        "5d_pct": -12.93,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "军工电子Ⅱ",
+        "5d_pct": -11.26,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "其他电子Ⅱ",
+        "5d_pct": -11.13,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": -11.13,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "其他家电Ⅱ",
+        "5d_pct": -11.04,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "4/5 positions in hot sectors",
+    "regime": "科技/半导体踩踏，资金涌向银行/红利防御；连hot行业5日收益也多为负，属系统性回调中的相对强度"
+  },
+  "position_decisions": [
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "reason": "电力mid(rank5=65/128, cold_days=0)非cold不触发行业卖出；未触-5%硬止损(4.45，现距3.9% WATCH)；margin转adding(chg5+4.8%)；持有约11日未到15日时间止损，HOLD观察",
+      "sector_rank": "电力 mid 65/128",
+      "new_stop": null,
+      "pnl_pct": -1.07,
+      "days_held": 11,
+      "exit_price": null
+    },
+    {
+      "code": "600872",
+      "name": "中炬高新",
+      "action": "HOLD",
+      "reason": "新仓2日，调味发酵品Ⅱhot(rank5=12/128)，Q3业绩快报净利+59.61%催化新鲜，未触任何止损(18.4)，HOLD",
+      "sector_rank": "调味发酵品Ⅱ hot 12/128",
+      "new_stop": null,
+      "pnl_pct": -0.67,
+      "days_held": 2,
+      "exit_price": null
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "reason": "城商行Ⅱhot(rank5=8/128)，大股东江苏交控增持至15.09%催化新鲜(财联社11-23)；今日-0.99%为中期分红除息(每股0.33122元)会计调整非卖出理由；浮盈+4.2%未到+10%抬止损线，赢家让利润奔跑",
+      "sector_rank": "城商行Ⅱ hot 8/128",
+      "new_stop": null,
+      "pnl_pct": 4.24,
+      "days_held": 12,
+      "exit_price": null
+    },
+    {
+      "code": "601077",
+      "name": "渝农商行",
+      "action": "HOLD",
+      "reason": "新仓1日，农商行Ⅱhot(rank5=13/128)，margin adding(chg5+3.19%)，未触止损(6.85)，HOLD",
+      "sector_rank": "农商行Ⅱ hot 13/128",
+      "new_stop": null,
+      "pnl_pct": 0.0,
+      "days_held": 1,
+      "exit_price": null
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "SELL",
+      "reason": "时间止损机械触发：持有20交易日且PnL+2.59%<3%(Rule 5)。行业虽hot(航运港口rank5=15/128)但个股横盘20日未兑现趋势，行业对个股不动=没动量，不恋战",
+      "sector_rank": "航运港口 hot 15/128",
+      "new_stop": null,
+      "pnl_pct": 2.59,
+      "days_held": 20,
+      "exit_price": 9.9
+    }
+  ],
+  "new_positions": [],
+  "skip_list": [
+    {
+      "code": "603317",
+      "name": "天味食品",
+      "reason": "通过全部买入门槛(RPS120 85.13甜点区、调味发酵品Ⅱhot rank5=12、MA距离合规dist_ma5+0.1%/ma10+1.8%/ma20+4.4%)，但今日恐慌硬阻塞(breadth 0.12:1、0/3指数红、跌停49)→禁止开仓；财联社10-28提示Q3归母净利增速降至1.5%催化偏旧",
+      "rps120": 85.13
+    },
+    {
+      "code": "600323",
+      "name": "瀚蓝环境",
+      "reason": "VCP PREMIUM但环境治理cold(rank5=97/128)→行业冷区不买(h019)；叠加恐慌硬阻塞",
+      "rps120": 93.33
+    },
+    {
+      "code": "603893",
+      "name": "瑞芯微",
+      "reason": "半导体cold(rank5=125/128)行业底部30%不买，个股RPS再好也被行业拖累",
+      "rps120": 93.42
+    },
+    {
+      "code": "600007",
+      "name": "中国国贸",
+      "reason": "VCP QUALITY但房地产开发mid(rank5=73/128)非top30%→行业不达标；恐慌硬阻塞",
+      "rps120": 94.69
+    },
+    {
+      "code": "601333",
+      "name": "广深铁路",
+      "reason": "铁路公路hot(rank5=34/128)、RPS120 94.91、MA合规，但margin deleveraging(chg5-3.96%)+恐慌硬阻塞→观望等breadth修复",
+      "rps120": 94.91
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "恐慌硬阻塞继续验证有效：天味食品等通过全部买入门槛(RPS甜点+hot行业+MA合规)的候选也被拦住，避免在0.12:1 breadth下接飞刀",
+      "type": "rule",
+      "tags": [
+        "entry-filter",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h077",
+      "mechanism": "硬阻塞在极端breadth下强制保留现金，防止FOMO追逐在恐慌日仍'看起来合规'的个股"
+    },
+    {
+      "text": "时间止损对'行业对、个股不动'的标的同样有效：青岛港在hot行业内横盘20日仅+2.6%，机械离场正确——行业热不等于个股趋势兑现",
+      "type": "exit-rule",
+      "tags": [
+        "exit-rule",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": null,
+      "mechanism": "15日<3%时间止损强制换手，把资金从'行业强但个股钝化'的仓位移出"
+    },
+    {
+      "text": "今日恐慌由科技踩踏+中美关税忧虑(路透社16贸易伙伴产能过剩调查)驱动，资金涌向银行/红利防御，与sector_rank中银行5日相对强势互相印证",
+      "type": "observation",
+      "tags": [
+        "sector"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "外部风险事件触发科技→防御轮动，红利/银行获增持+中期分红双催化，防御强度可能高于纯避险"
+    }
+  ],
+  "market_summary": "恐慌盘硬阻塞：上证-2.03%/深成-3.24%/创业板-4.19%/科创50-5.12%，586涨4926跌(0.12:1)，49跌停/58涨停，0/3指数红。IV极度恐慌(整体avg rank 0.77，500ETF/创业板ETF/科创50均>0.8)。驱动：隔夜美股科技杀跌+特朗普16贸易伙伴产能过剩调查关税忧虑，半导体/电池/电子化学品领跌，资金切向银行/渔业/医药商业防御。持仓4/5在hot行业，青岛港触发20日时间止损(仅+2.6%)离场；恐慌下不开新仓，持币等breadth修复。",
+  "market_sentiment": "bearish",
+  "market_call": "谨慎"
+}

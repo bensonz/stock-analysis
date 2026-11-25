@@ -1,7 +1,7 @@
 {
   "code": "601298",
   "name": "青岛港",
-  "status": "active",
+  "status": "closed",
   "thesis": "港口龙头，0风险因子，RPS120 92.49扩展区(0风险豁免)+MA距离全部合规(2.5%/0.5%/-0.5%)+margin adding(chg5+9.05%)+今日创历史新高(10:09达9.98)；因IV 300ETF 0.68偏高+油运运价周线回落，仅小仓",
   "entryDate": "2026-10-28",
   "entrySlot": "afternoon",
@@ -324,15 +324,25 @@
       "change_pct": 3.01,
       "action": "HOLD",
       "note": "浮盈+3.0%勉强高于3%故15日时间止损未触发(20日持仓)，航运港口hot(rank5=7/128)，margin adding(chg5+19.75%)；若跌破+3%且持仓>15日则按时间止损离场，HOLD"
+    },
+    {
+      "date": "2026-11-25",
+      "slot": "afternoon",
+      "price": 9.9,
+      "change_pct": 2.59,
+      "action": "SELL",
+      "shares": 2800,
+      "note": "时间止损机械触发：持有20交易日且PnL+2.59%<3%(Rule 5)。行业虽hot(航运港口rank5=15/128)但个股横盘20日未兑现趋势，行业对个股不动=没动量，不恋战"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-11-25",
+  "exitPrice": 9.9,
+  "exitReason": "时间止损机械触发：持有20交易日且PnL+2.59%<3%(Rule 5)。行业虽hot(航运港口rank5=15/128)但个股横盘20日未兑现趋势，行业对个股不动=没动量，不恋战",
+  "returnPct": 2.59,
+  "holdingDays": 20,
+  "lessonLearned": "",
   "createdAt": "2026-10-28T15:15:38.208190+08:00",
-  "updatedAt": "2026-11-25T11:41:23.823175+08:00",
-  "trackerVersion": "2.1"
+  "updatedAt": "2026-11-25T15:09:29.993777+08:00",
+  "trackerVersion": "2.1",
+  "exitSlot": "afternoon"
 }

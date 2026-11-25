@@ -1,0 +1,15 @@
+# 运行审计 2026-11-25 noon
+
+**结论: ✅ 无发现**
+
+_生成于 2026-11-25T11:55:04+08:00_
+
+## 检查覆盖
+
+- 已执行: 16/18
+- 跳过: 2
+  - `check_snapshot_wrote_rows` — no snapshot note in preflight (run predates the writer)
+  - `check_web_search_failed` — the model made no web_search calls this run
+
+> 本审计只发现，不修复；从不写入 tracking/。
+> 它只能抓住已经写了检查的失败形状——没人想过的新 bug 不在覆盖内。

@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-25",
+  "actions": [
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.63,
+      "pnl_pct": -1.07,
+      "note": "电力mid(rank5=65/128, cold_days=0)非cold不触发行业卖出；未触-5%硬止损(4.45，现距3.9% WATCH)；margin转adding(chg5+4.8%)；持有约11日未到15日时间止损，HOLD观察"
+    },
+    {
+      "code": "600872",
+      "name": "中炬高新",
+      "action": "HOLD",
+      "price": 19.24,
+      "pnl_pct": -0.67,
+      "note": "新仓2日，调味发酵品Ⅱhot(rank5=12/128)，Q3业绩快报净利+59.61%催化新鲜，未触任何止损(18.4)，HOLD"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 13.04,
+      "pnl_pct": 4.24,
+      "note": "城商行Ⅱhot(rank5=8/128)，大股东江苏交控增持至15.09%催化新鲜(财联社11-23)；今日-0.99%为中期分红除息(每股0.33122元)会计调整非卖出理由；浮盈+4.2%未到+10%抬止损线，赢家让利润奔跑"
+    },
+    {
+      "code": "601077",
+      "name": "渝农商行",
+      "action": "HOLD",
+      "price": 7.21,
+      "pnl_pct": 0.0,
+      "note": "新仓1日，农商行Ⅱhot(rank5=13/128)，margin adding(chg5+3.19%)，未触止损(6.85)，HOLD"
+    },
+    {
+      "code": "601298",
+      "name": "青岛港",
+      "action": "SELL",
+      "price": 9.9,
+      "pnl_pct": 2.59,
+      "note": "时间止损机械触发：持有20交易日且PnL+2.59%<3%(Rule 5)。行业虽hot(航运港口rank5=15/128)但个股横盘20日未兑现趋势，行业对个股不动=没动量，不恋战"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 961291.36,
+    "dayPnl": -696.0,
+    "dayReturnPct": -0.07,
+    "totalReturnPct": -3.87,
+    "unrealizedPnl": 1136.0,
+    "realizedPnl": -39844.64,
+    "cashPct": 84.82
+  },
+  "entryRegime": {
+    "allow_new_positions": false,
+    "regime": "panic",
+    "breadth_ratio": 0.119,
+    "up": 586,
+    "down": 4926,
+    "positive_indices": [],
+    "negative_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "limit_ups": 58,
+    "limit_downs": 49,
+    "sizing_multiplier": 0.0,
+    "hard_block": true,
+    "reason": "Entry regime panic: breadth 0.12:1, 0/3 major indices green, 58 limit-ups / 49 limit-downs. Block new longs."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "恐慌盘硬阻塞：上证-2.03%/深成-3.24%/创业板-4.19%/科创50-5.12%，586涨4926跌(0.12:1)，49跌停/58涨停，0/3指数红。IV极度恐慌(整体avg rank 0.77，500ETF/创业板ETF/科创50均>0.8)。驱动：隔夜美股科技杀跌+特朗普16贸易伙伴产能过剩调查关税忧虑，半导体/电池/电子化学品领跌，资金切向银行/渔业/医药商业防御。持仓4/5在hot行业，青岛港触发20日时间止损(仅+2.6%)离场；恐慌下不开新仓，持币等breadth修复。"
+  }
+}

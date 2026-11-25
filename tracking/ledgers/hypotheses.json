@@ -5059,11 +5059,15 @@
           {
             "date": "2026-11-25",
             "detail": "当5日动量榜前列全是银行/保险/港口/高速/白电等防御板块、而科技(半导体/电子化学品/电池)今日领跌时，这不是新动量而是风险回避式轮动——应降低新开仓意愿并警惕防御持仓的获利回吐"
+          },
+          {
+            "date": "2026-11-25",
+            "detail": "今日恐慌由科技踩踏+中美关税忧虑(路透社16贸易伙伴产能过剩调查)驱动，资金涌向银行/红利防御，与sector_rank中银行5日相对强势互相印证"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 60,
+      "sampleSize": 61,
       "hitRate": 1.0,
       "confidence": 0.984,
       "tags": [
@@ -5080,7 +5084,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-06-29",
-      "lastTested": "2026-11-24",
+      "lastTested": "2026-11-25",
       "mechanism": "Entry regime gates prevent the most common momentum failure mode: buying good setups into a deteriorating tape. Price is truth — breadth is price.",
       "evidence": {
         "supporting": [
@@ -5335,11 +5339,15 @@
           {
             "date": "2026-11-24",
             "detail": "弱市(涨跌比0.56:1)下，候选即使通过RPS扩展区豁免(0风险/行业top10%)且行业hot，只要dist_ma5逼近6%追高线或margin deleveraging叠加，都应保持空仓——'weak tape + mediocre setup = skip'，弱市默认new_positions=[]"
+          },
+          {
+            "date": "2026-11-25",
+            "detail": "恐慌硬阻塞继续验证有效：天味食品等通过全部买入门槛(RPS甜点+hot行业+MA合规)的候选也被拦住，避免在0.12:1 breadth下接飞刀"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 63,
+      "sampleSize": 64,
       "hitRate": 1.0,
       "confidence": 0.985,
       "tags": [
@@ -9868,22 +9876,26 @@
       "id": "h225",
       "text": "15日时间止损只对<3%浮盈触发——青岛港持仓16日+4.4%不触发，'让赢家跑'纪律再次兑现；3%门槛为赢家波动留出空间，避免机械性过早离场",
       "type": "observation",
-      "status": "observation",
+      "status": "hypothesis",
       "created": "2026-11-19",
-      "lastTested": "2026-11-19",
+      "lastTested": "2026-11-25",
       "mechanism": "时间止损针对的是'不涨的仓位'，而非'涨得慢的仓位'；+3%以上已证明趋势有效",
       "evidence": {
         "supporting": [
           {
             "date": "2026-11-19",
             "detail": "15日时间止损只对<3%浮盈触发——青岛港持仓16日+4.4%不触发，'让赢家跑'纪律再次兑现；3%门槛为赢家波动留出空间，避免机械性过早离场"
+          },
+          {
+            "date": "2026-11-25",
+            "detail": "时间止损对'行业对、个股不动'的标的同样有效：青岛港在hot行业内横盘20日仅+2.6%，机械离场正确——行业热不等于个股趋势兑现"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 1,
+      "sampleSize": 2,
       "hitRate": 1.0,
-      "confidence": 0.6,
+      "confidence": 0.75,
       "tags": [
         "exit-rule",
         "timing"
