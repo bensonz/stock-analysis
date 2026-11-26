@@ -1,0 +1,59 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 174802,
+  "output_tokens": 18961,
+  "rounds": 2,
+  "duration_sec": 369.6,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "天味食品"
+      },
+      "result_length": 2177
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "粤高速A"
+      },
+      "result_length": 2256
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "中国广核"
+      },
+      "result_length": 2076
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月26日 银行 渔业 板块 领涨 半导体 下跌"
+      },
+      "result_length": 2837,
+      "fallback": "exa"
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "调味品 内需 扩大内需 政策 2026年11月"
+      },
+      "result_length": 3174,
+      "fallback": "exa"
+    }
+  ],
+  "fallback_used": false
+}

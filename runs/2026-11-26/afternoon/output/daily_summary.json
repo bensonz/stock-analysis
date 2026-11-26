@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-26",
+  "actions": [
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.62,
+      "pnl_pct": -1.3,
+      "note": "电力rank5=66/128 mid(非cold不触发行业卖出)；浮亏-1.3%未触-5%硬止损(4.45)；12交易日逼近15日时间止损（若3日内未达+3%收益将机械触发）；台山3号机组11-25开工、前三季归母净利+12.75%(中证网)催化仍在但股价未兑现——HOLD观察，3日后机械时间止损"
+    },
+    {
+      "code": "600872",
+      "name": "中炬高新",
+      "action": "HOLD",
+      "price": 18.89,
+      "pnl_pct": -2.5,
+      "note": "调味发酵品Ⅱrank5=33/128 hot；Q3净利+59.61%催化新鲜；浮亏-2.5%未触-5%硬止损(18.4)也未触首3日-3%线(18.79)；但跌破MA5/10/20且距止损仅2.6%(WARNING)，弱市下明日跳空低开即可能穿损——HOLD并备好卖单，破位不找理由"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 13.4,
+      "pnl_pct": 7.1,
+      "note": "城商行Ⅱrank5=7/128 hot(top5.5%)；浮盈+7.1%未达+10%抬止损线；大股东江苏交控增持至15.09%(财联社11-23)催化新鲜、股价续创历史新高(新浪财经11-26)——让赢家奔跑HOLD"
+    },
+    {
+      "code": "601077",
+      "name": "渝农商行",
+      "action": "HOLD",
+      "price": 7.3,
+      "pnl_pct": 1.2,
+      "note": "农商行Ⅱrank5=10/128 hot(top7.8%)；新仓2日+1.2%未触止损(6.85)；margin adding(chg5+8.43%)，银行防御主线仍在——HOLD"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 962063.36,
+    "dayPnl": 772.0,
+    "dayReturnPct": 0.08,
+    "totalReturnPct": -3.79,
+    "unrealizedPnl": 1908.0,
+    "realizedPnl": -39844.64,
+    "cashPct": 84.75
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "weak",
+    "breadth_ratio": 0.4849,
+    "up": 1766,
+    "down": 3642,
+    "positive_indices": [
+      "上证指数",
+      "创业板指"
+    ],
+    "negative_indices": [
+      "深证成指"
+    ],
+    "limit_ups": 70,
+    "limit_downs": 9,
+    "sizing_multiplier": 0.5,
+    "hard_block": false,
+    "reason": "Entry regime weak: breadth 0.48:1, 2/3 major indices green, 70 limit-ups / 9 limit-downs. Allow entries only with 50% sizing."
+  },
+  "newPositions": [],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "弱市：上证+0.01%/深证-0.02%/创业板+0.29%，但涨跌家数1766:3642(0.48:1)、跌9/涨70，三大指数午后一度翻绿、下跌个股超4200家(新浪财经)。IV极度恐慌(avg_iv_rank 0.76)。风格：银行(城商行/农商行/股份行创新高)+贵金属+渔业防御领涨，半导体/电子化学品/电池持续失血。持仓3/4在hot板块、1在mid。breadth 0.48:1下按弱市纪律不新开仓，持有现金84.75%。"
+  }
+}
