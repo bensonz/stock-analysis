@@ -1,0 +1,79 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 284437,
+  "output_tokens": 23324,
+  "rounds": 3,
+  "duration_sec": 380.7,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "南京银行"
+      },
+      "result_length": 2292
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "天味食品"
+      },
+      "result_length": 2177
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "中国广核"
+      },
+      "result_length": 2076
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月 银行板块 防御 市场风格 半导体下跌"
+      },
+      "result_length": 2952,
+      "fallback": "exa"
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "2026年11月26日 A股 行情 板块轮动 银行 高股息"
+      },
+      "result_length": 3123,
+      "fallback": "exa"
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=A股+热门板块+银行+高股息+2026年11月",
+        "maxChars": 4000
+      },
+      "result_length": 4059
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.baidu.com/s?wd=天味食品+2026+三季报+业绩",
+        "maxChars": 4000
+      },
+      "result_length": 4059
+    }
+  ],
+  "fallback_used": false
+}

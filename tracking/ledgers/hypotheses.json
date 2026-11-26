@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-11-25",
+  "lastUpdated": "2026-11-26",
   "hypotheses": [
     {
       "id": "h001",
@@ -2597,7 +2597,7 @@
       "type": "signal",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-11-25",
+      "lastTested": "2026-11-26",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -2748,6 +2748,10 @@
           {
             "date": "2026-11-25",
             "detail": "宝新能源10交易日-3.2%且盘中触及止损、stop_proximity CRITICAL(1.8%)+breakout_failure规则同时触发+行业从hot滑至mid——三项共振时主动离场优于等待-5%精确触发，再次验证h024"
+          },
+          {
+            "date": "2026-11-26",
+            "detail": "中国广核持仓12日-1.5%且跌破全部均线，板块从hot滑至mid(rank65)，时间止损(15日<3%)仅剩3日——'板块滑档+价格破均线簇'是入场逻辑已衰减的早期信号，应提前准备退出计划而非为持仓找理由。"
           }
         ],
         "contradicting": [
@@ -2761,9 +2765,9 @@
           }
         ]
       },
-      "sampleSize": 39,
-      "hitRate": 0.949,
-      "confidence": 0.927,
+      "sampleSize": 40,
+      "hitRate": 0.95,
+      "confidence": 0.929,
       "tags": [
         "exit-rule",
         "timing"
@@ -3165,7 +3169,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-04-06",
-      "lastTested": "2026-11-24",
+      "lastTested": "2026-11-26",
       "mechanism": "When the market sells off broadly but one tech cluster still leads the board, capital is narrowing into perceived growth defensiveness rather than embracing a full risk-on rally.",
       "evidence": {
         "supporting": [
@@ -3448,6 +3452,10 @@
           {
             "date": "2026-11-24",
             "detail": "今日1日领涨(消费电子+4.42%/数字媒体+3.94%/航天装备+3.19%)多为5日排名底部板块的超跌反弹(汽车服务5日rank123/航天装备rank121)，5日主线仍是银行/防御——'1日反弹≠5日趋势'，开新仓仍按sector_rank的5日口径"
+          },
+          {
+            "date": "2026-11-26",
+            "detail": "弱市(breadth<1)下等权5日板块排名失真：'hot'板块(top30%)绝对5日收益仍可为负（调味发酵品Ⅱ rank12但ret5=-3.18%、城商行Ⅱ rank8 ret5=-1.87%）。'hot'只能理解为'跌得少'而非'在涨'，开新仓应额外要求板块绝对动量为正，不能只依赖相对排名。"
           }
         ],
         "contradicting": [
@@ -3457,7 +3465,7 @@
           }
         ]
       },
-      "sampleSize": 71,
+      "sampleSize": 72,
       "hitRate": 0.986,
       "confidence": 0.973,
       "tags": [
@@ -7478,7 +7486,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-08-11",
-      "lastTested": "2026-11-24",
+      "lastTested": "2026-11-26",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -7621,13 +7629,17 @@
           {
             "date": "2026-11-24",
             "detail": "策略池64只中RPS120>95%的银行/防御股占比极高(工行98.11/建行97.89/交行98.66等)，甜点区(80-92%)几乎只剩持仓股——RPS>95%封顶规则把可买标的压缩到'扩展区92-95%+0风险豁免'的极少数，这是h151'拥挤'的实时印证"
+          },
+          {
+            "date": "2026-11-26",
+            "detail": "RPS>95%封顶再次大范围过滤：73只策略池约60只RPS120>95（银行/公路/电力/消费均在96-99.9%），甜点区(80-92)仅个位数。弱市中全市场动量被防御股极致压缩，几乎无可买标的——正是h151预警的拥挤/均值回归风险，封顶规则继续维持。"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 35,
+      "sampleSize": 36,
       "hitRate": 1.0,
-      "confidence": 0.973,
+      "confidence": 0.974,
       "tags": [
         "entry-filter"
       ],
