@@ -1,0 +1,82 @@
+{
+  "date": "2026-11-27",
+  "actions": [
+    {
+      "code": "600872",
+      "name": "中炬高新",
+      "action": "SELL",
+      "price": 18.62,
+      "pnl_pct": -3.87,
+      "note": "距止损18.40仅1.18%(CRITICAL)、浮亏-3.87%跌破MA5/10/20全部均线，按h024主动止损不等-5%精确触发；调味发酵品Ⅱ行业仍hot(rank33)但价格是真理"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.59,
+      "pnl_pct": -1.92,
+      "note": "电力rank66(mid非cold)不触发行业卖出；13/15日逼近时间止损(-1.92%，2日后若仍<3%机械触发)，现价4.59跌破均线簇，预备离场不找理由"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 12.88,
+      "pnl_pct": 2.96,
+      "note": "城商行Ⅱhot(rank7/top5.5%)，浮盈+2.96%(另有中期分红874.42元到账)；今日-3.88%属高股息红利股集体回调(财联社：中国神华配售拖累)，13/15日逼近时间止损但行业强，让赢家奔跑"
+    },
+    {
+      "code": "601077",
+      "name": "渝农商行",
+      "action": "HOLD",
+      "price": 7.06,
+      "pnl_pct": -2.08,
+      "note": "农商行Ⅱhot(rank10/top7.8%)，新仓3日-2.08%未触-3%首3日线(临界)也未触-5%止损6.85(距2.97%WARNING)；今日银行集体回调须警惕红利轮动，破位不找理由"
+    },
+    {
+      "code": "000429",
+      "name": "粤高速A",
+      "action": "OPEN",
+      "price": 13.69,
+      "note": "铁路公路hot(rank27/top21%)，0风险因子豁免RPS94.01扩展区，MA距离全合规(回踩MA20支撑dist_ma20-1.0%)，margin adding(chg5+12.22%)；今日股东会表决14.37亿收购广珠段25%股权。IV0.789>75%+红利股抛售逆风→仅小仓"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 958544.36,
+    "dayPnl": -2952.0,
+    "dayReturnPct": -0.31,
+    "totalReturnPct": -4.15,
+    "unrealizedPnl": -36.0,
+    "realizedPnl": -41419.64,
+    "cashPct": 85.71
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 5.6264,
+    "up": 4653,
+    "down": 827,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 96,
+    "limit_downs": 0,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 5.63:1, 3/3 major indices green, 96 limit-ups / 0 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [
+    {
+      "code": "000429",
+      "name": "粤高速A"
+    }
+  ],
+  "blockedOpens": [],
+  "marketContext": {
+    "summary": "广度5.63:1强势(4653涨/827跌，96涨停/0跌停)，四大指数全红(科创50+4.43%/创业板+3.79%/深成+2.16%/上证+0.28%)，entry_regime=strong。但IV整体极度恐慌(avg_iv_rank 0.70，500ETF/创业板/科创50/深100均>75%)，高波动环境。今日主线为超跌科技反弹(半导体/电子化学品/通信设备1日领涨，财联社：主力净流入电子>66亿)，而5日动量榜首的防御板块(银行/出版/渔业)今日逆势回调(高股息红利股下挫，南京银行-3.58%，中国神华配售拖累)——典型轮动日。5日rank看科技仍处底部(半导体128/128、电子化学品127/128)，Rule 1禁止追科技反弹；防御hot行业回调中开新仓须降size。"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "code": "600872",
   "name": "中炬高新",
-  "status": "active",
+  "status": "closed",
   "thesis": "调味发酵品Ⅱhot(rank5=12/128, top 9.4%)，RPS120 89.66甜点区，0风险因子，MA距离全合规(dist_ma5 -1.2%/ma10 -0.2%/ma20 -0.7%已回撤至均线支撑非追高)；IV proxy 500ETF=1.0极高+margin deleveraging→仅5%中等仓",
   "entryDate": "2026-11-23",
   "entrySlot": "afternoon",
@@ -76,15 +76,25 @@
       "change_pct": -2.48,
       "action": "HOLD",
       "note": "调味发酵品Ⅱrank5=33/128 hot；Q3净利+59.61%催化新鲜；浮亏-2.5%未触-5%硬止损(18.4)也未触首3日-3%线(18.79)；但跌破MA5/10/20且距止损仅2.6%(WARNING)，弱市下明日跳空低开即可能穿损——HOLD并备好卖单，破位不找理由"
+    },
+    {
+      "date": "2026-11-27",
+      "slot": "noon",
+      "price": 18.62,
+      "change_pct": -3.87,
+      "action": "SELL",
+      "shares": 2100,
+      "note": "距止损18.40仅1.18%(CRITICAL)、浮亏-3.87%跌破MA5/10/20全部均线，按h024主动止损不等-5%精确触发；调味发酵品Ⅱ行业仍hot(rank33)但价格是真理"
     }
   ],
-  "exitDate": null,
-  "exitPrice": null,
-  "exitReason": null,
-  "returnPct": null,
-  "holdingDays": null,
-  "lessonLearned": null,
+  "exitDate": "2026-11-27",
+  "exitPrice": 18.62,
+  "exitReason": "距止损18.40仅1.18%(CRITICAL)、浮亏-3.87%跌破MA5/10/20全部均线，按h024主动止损不等-5%精确触发；调味发酵品Ⅱ行业仍hot(rank33)但价格是真理",
+  "returnPct": -3.87,
+  "holdingDays": 3,
+  "lessonLearned": "",
   "createdAt": "2026-11-23T15:15:40.449383+08:00",
-  "updatedAt": "2026-11-26T15:12:42.207365+08:00",
-  "trackerVersion": "2.1"
+  "updatedAt": "2026-11-27T11:44:13.526096+08:00",
+  "trackerVersion": "2.1",
+  "exitSlot": "noon"
 }

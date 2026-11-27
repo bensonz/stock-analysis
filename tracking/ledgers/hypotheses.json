@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-11-26",
+  "lastUpdated": "2026-11-27",
   "hypotheses": [
     {
       "id": "h001",
@@ -2597,7 +2597,7 @@
       "type": "signal",
       "status": "rule",
       "created": "2026-04-02",
-      "lastTested": "2026-11-26",
+      "lastTested": "2026-11-27",
       "mechanism": "Once price is within 1-2% of the stop, randomness and opening gaps dominate; waiting for exact triggers worsens realized exits.",
       "evidence": {
         "supporting": [
@@ -2752,6 +2752,10 @@
           {
             "date": "2026-11-26",
             "detail": "中国广核持仓12日-1.5%且跌破全部均线，板块从hot滑至mid(rank65)，时间止损(15日<3%)仅剩3日——'板块滑档+价格破均线簇'是入场逻辑已衰减的早期信号，应提前准备退出计划而非为持仓找理由。"
+          },
+          {
+            "date": "2026-11-27",
+            "detail": "stop_proximity CRITICAL(距止损<1.2%)+跌破全部均线时主动离场(h024)再次验证：中炬高新-3.87%未触-5%硬止损但已符主动止损条件，不等精确触发"
           }
         ],
         "contradicting": [
@@ -2765,9 +2769,9 @@
           }
         ]
       },
-      "sampleSize": 40,
-      "hitRate": 0.95,
-      "confidence": 0.929,
+      "sampleSize": 41,
+      "hitRate": 0.951,
+      "confidence": 0.93,
       "tags": [
         "exit-rule",
         "timing"
@@ -4824,7 +4828,7 @@
       "type": "observation",
       "status": "rule",
       "created": "2026-06-26",
-      "lastTested": "2026-11-25",
+      "lastTested": "2026-11-27",
       "mechanism": "机构调仓从高估值成长股转向低估值防御股通常需要数个交易日完成,首日极差扩大往往是加速信号而非反转信号。",
       "evidence": {
         "supporting": [
@@ -5071,13 +5075,22 @@
           {
             "date": "2026-11-25",
             "detail": "今日恐慌由科技踩踏+中美关税忧虑(路透社16贸易伙伴产能过剩调查)驱动，资金涌向银行/红利防御，与sector_rank中银行5日相对强势互相印证"
+          },
+          {
+            "date": "2026-11-27",
+            "detail": "1日动量与5日动量背离的轮动日(科技1日领涨但5日rank垫底，防御5日榜首但今日被卖)：Rule 1按5日动量禁止追科技反弹，同时防御hot板块回调中开新仓须降size并警惕红利股集中抛售(中国神华配售引发)"
           }
         ],
-        "contradicting": []
+        "contradicting": [
+          {
+            "date": "2026-11-27",
+            "detail": "银行5日rank仍hot(城商行7/农商行10)但今日主力净流出银行+红利股下挫(财联社)，南京银行/渝农商行均-3%以上回调；持仓暂未触发行业卖出(cold_days=0)，须盯紧明日5日rank是否滑出hot"
+          }
+        ]
       },
-      "sampleSize": 61,
-      "hitRate": 1.0,
-      "confidence": 0.984,
+      "sampleSize": 63,
+      "hitRate": 0.984,
+      "confidence": 0.969,
       "tags": [
         "sector",
         "exit-rule"
@@ -10005,6 +10018,34 @@
       "confidence": 0.6,
       "tags": [
         "exit-rule"
+      ],
+      "parentRule": null,
+      "retiredDate": null,
+      "retiredReason": null
+    },
+    {
+      "id": "h229",
+      "text": "粤高速A：0风险+RPS94扩展区豁免+margin adding+5日hot行业的干净setup，但当前业绩同比下滑(归母净利-15.45%，证券日报/深圳商报)且今日红利股被抛售→只给小仓。催化(14.37亿收购广珠段)是资产扩张非业绩爆发",
+      "type": "signal",
+      "status": "observation",
+      "created": "2026-11-27",
+      "lastTested": "2026-11-27",
+      "mechanism": "公司行动类催化慢热，防御股在轮动日逆风，强setup也须按IV与轮动降size",
+      "evidence": {
+        "supporting": [
+          {
+            "date": "2026-11-27",
+            "detail": "粤高速A：0风险+RPS94扩展区豁免+margin adding+5日hot行业的干净setup，但当前业绩同比下滑(归母净利-15.45%，证券日报/深圳商报)且今日红利股被抛售→只给小仓。催化(14.37亿收购广珠段)是资产扩张非业绩爆发"
+          }
+        ],
+        "contradicting": []
+      },
+      "sampleSize": 1,
+      "hitRate": 1.0,
+      "confidence": 0.6,
+      "tags": [
+        "position-sizing",
+        "sector"
       ],
       "parentRule": null,
       "retiredDate": null,

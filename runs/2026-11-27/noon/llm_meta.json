@@ -1,0 +1,40 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 176575,
+  "output_tokens": 31432,
+  "rounds": 2,
+  "duration_sec": 457.3,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "粤高速A"
+      },
+      "result_length": 2256
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "中炬高新"
+      },
+      "result_length": 2070
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月27日 科技股反弹 半导体 通信设备 板块轮动"
+      },
+      "result_length": 2603,
+      "fallback": "exa"
+    }
+  ],
+  "fallback_used": false
+}

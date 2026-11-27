@@ -1,0 +1,96 @@
+{
+  "as_of": "2026-11-27",
+  "step_errors": [],
+  "promote": {
+    "promoted": 0,
+    "skipped": 0,
+    "reopened": 0,
+    "invalid": [],
+    "overrides": 0,
+    "warnings": [],
+    "pending": 0
+  },
+  "refresh": {
+    "fetched": 14,
+    "new": 6,
+    "pending": 6,
+    "expired": 0,
+    "ai_retired": 2,
+    "dup_existing": 0,
+    "below_threshold": 0,
+    "already_listed": 6,
+    "decided": 0,
+    "past": 0,
+    "dup_id": 0,
+    "dup_fuzzy": 2,
+    "fetch_errors": 0,
+    "empty_days": 1,
+    "errors": [],
+    "warnings": []
+  },
+  "triage": {
+    "attempted": 6,
+    "kept": 0,
+    "skipped": 6,
+    "high": 0,
+    "invalid": [],
+    "missing": [],
+    "unknown_ids": 0,
+    "error": null,
+    "decisions": [
+      {
+        "id": "wscn-20261130-CN151359",
+        "name": "中国11月官方制造业PMI",
+        "decision": "skip",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "官方制造业PMI已在日历中，11月30日重复"
+      },
+      {
+        "id": "wscn-20261201-de5becbc",
+        "name": "美国硅谷人形机器人峰会，特斯拉Optimus Gen 3有望首次亮相",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "产品峰会与单一公司产品亮相，非系统性事件"
+      },
+      {
+        "id": "wscn-20261201-ec4a9673",
+        "name": "美国参议院公开作证前，黄仁勋将接受众议院的闭门问询",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "risk",
+        "reason": "单一公司高管问询，非系统性政策信号"
+      },
+      {
+        "id": "wscn-20261203-afb7318f",
+        "name": "黄仁勋12月3日出席美国参议院听证会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "risk",
+        "reason": "单一公司高管听证会，非系统性事件"
+      },
+      {
+        "id": "wscn-20261204-b13195fe",
+        "name": "美国特斯拉年度股东大会",
+        "decision": "skip",
+        "impact": "low",
+        "direction": "two_sided",
+        "reason": "单一公司股东大会，非系统性事件"
+      },
+      {
+        "id": "wscn-20261204-US121058",
+        "name": "美国11月非农就业人口变动(万人)",
+        "decision": "skip",
+        "impact": "medium",
+        "direction": "two_sided",
+        "reason": "美国非农已在日历中，12月7日重复"
+      }
+    ],
+    "provider": "openai",
+    "model": "deepseek-v4-pro",
+    "tokens_in": 1680,
+    "tokens_out": 351
+  },
+  "pending_items": []
+}
