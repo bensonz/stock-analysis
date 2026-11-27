@@ -1,0 +1,198 @@
+{
+  "sector_analysis": {
+    "hot_sectors": [
+      {
+        "name": "元件",
+        "5d_pct": 15.14,
+        "trend": "accelerating"
+      },
+      {
+        "name": "通信设备",
+        "5d_pct": 11.74,
+        "trend": "accelerating"
+      },
+      {
+        "name": "自动化设备",
+        "5d_pct": 11.72,
+        "trend": "accelerating"
+      },
+      {
+        "name": "电子化学品Ⅱ",
+        "5d_pct": 10.27,
+        "trend": "accelerating"
+      },
+      {
+        "name": "半导体",
+        "5d_pct": 9.72,
+        "trend": "steady"
+      }
+    ],
+    "cold_sectors": [
+      {
+        "name": "航空机场",
+        "5d_pct": -2.52,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "白色家电",
+        "5d_pct": -1.23,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "国有大型银行Ⅱ",
+        "5d_pct": -0.95,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "城商行Ⅱ",
+        "5d_pct": -0.88,
+        "trend": "deteriorating"
+      },
+      {
+        "name": "农商行Ⅱ",
+        "5d_pct": -0.64,
+        "trend": "deteriorating"
+      }
+    ],
+    "position_alignment": "0/4 positions in hot sectors（全部 cold_days=1，行业卖出纪律尚未触发但高度警惕）",
+    "regime": "国产算力/半导体/通信设备领导，红利防御（银行/煤炭/家电/电力）被虹吸单日转冷"
+  },
+  "position_decisions": [
+    {
+      "code": "000429",
+      "name": "粤高速A",
+      "action": "HOLD",
+      "reason": "今日新开(<5日不换仓不churn)；铁路公路收盘转cold(rank111/128,cold_days=1未达3日不触发行业卖出)；浮盈0%未触止损13.01(距4.97% WATCH)。红旗：开仓时rank27 hot今已滑入cold，明日起盯冷3日",
+      "sector_rank": "cold (rank 111/128, cold_days=1)",
+      "new_stop": null,
+      "pnl_pct": 0.0,
+      "days_held": 0,
+      "exit_price": null
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "reason": "电力cold(rank112/128,cold_days=1未触发)；13/15日逼近时间止损且浮亏-1.71%<3%——2日后若仍<3%机械触发(Rule5无例外)，今日不抢跑但预备离场；现价4.60已跌破MA5/10/20均线簇",
+      "sector_rank": "cold (rank 112/128, cold_days=1)",
+      "new_stop": null,
+      "pnl_pct": -1.71,
+      "days_held": 13,
+      "exit_price": null
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "reason": "浮盈+4.32%(另有中期分红874.42到账)未达+10%抬止损线；城商行Ⅱ今日从top5.5%滑至cold(rank123/128,cold_days=1未触发行业卖出)，红利被科技虹吸(格隆汇：南京银行/宁波银行/渝农商行跌超3%)——冷3日才卖纪律给赢家留空间，破位不找理由",
+      "sector_rank": "cold (rank 123/128, cold_days=1)",
+      "new_stop": null,
+      "pnl_pct": 4.32,
+      "days_held": 13,
+      "exit_price": null
+    },
+    {
+      "code": "601077",
+      "name": "渝农商行",
+      "action": "HOLD",
+      "reason": "新仓3日-2.22%未触-3%首3日线(临界)也未触止损6.85(距2.84% WARNING)；农商行Ⅱ转cold(rank122/128,cold_days=1)，银行集体回调(格隆汇)；margin仍adding(chg5+12.1%)。明日若开盘弱，-3%线6.99或止损6.85随时触发，不提前抢跑",
+      "sector_rank": "cold (rank 122/128, cold_days=1)",
+      "new_stop": null,
+      "pnl_pct": -2.22,
+      "days_held": 3,
+      "exit_price": null
+    }
+  ],
+  "new_positions": [
+    {
+      "code": "603893",
+      "name": "瑞芯微",
+      "entry_price": 211.72,
+      "allocation_pct": 4,
+      "stop": 201.13,
+      "target": 232.95,
+      "thesis": "半导体hot(rank8/128 top6.3%)+0风险因子+RPS120 93.7扩展区(行业top10%+业绩催化豁免)；国产算力替代主线(英伟达停发东南亚四国+国常会'平准基金'表态，来源：每经/新浪财经)；MA距离全合规(dist_ma5 5.0%/ma10 6.2%/ma20 3.2%)；因亢奋breadth+IV rank全系1.0主动压至4%小仓",
+      "sector": "半导体",
+      "sector_rank": "top 6.3% (rank 8/128)",
+      "catalyst": "Q3归母净利同比+121.65%(net_profit_yoy=1.2165)；端侧AI 11-23涨停+11/1-11/23接待60家机构调研(东方财富Choice)；11-27当日召开Q3业绩说明会(证券日报)；margin adding(chg5+7.84%)",
+      "catalyst_freshness": "ongoing",
+      "rps120": 93.7,
+      "conviction": "small"
+    }
+  ],
+  "skip_list": [
+    {
+      "code": "300628",
+      "name": "亿联网络",
+      "reason": "通信设备hot(rank3)通过Rule1、RPS120 94.78、0风险，但dist_ma20 8.9%接近上限+margin deleveraging(chg5-7.94%)+Q3净利环比下滑9-18%(大跌原因事件)→IV rank 1.0下只买最强，让位于瑞芯微",
+      "rps120": 94.78
+    },
+    {
+      "code": "600323",
+      "name": "瀚蓝环境",
+      "reason": "环境治理mid(rank76/128)非top30%→Rule 1淘汰(VCP QUALITY但行业不够热)",
+      "rps120": 93.59
+    },
+    {
+      "code": "600256",
+      "name": "广汇能源",
+      "reason": "炼化及贸易cold(rank98/128)→Rule 1淘汰；且margin deleveraging(chg5-10.45%)",
+      "rps120": 91.34
+    },
+    {
+      "code": "600885",
+      "name": "宏发股份",
+      "reason": "电网设备mid(rank74/128)非top30%→Rule 1淘汰",
+      "rps120": 90.25
+    },
+    {
+      "code": "600872",
+      "name": "中炬高新",
+      "reason": "调味发酵品cold(rank113/128)→Rule 1淘汰；且11-27刚-3.87%卖出，重入举证责任不成立",
+      "rps120": 91.75
+    },
+    {
+      "code": "000651",
+      "name": "格力电器",
+      "reason": "白色家电cold(rank125/128)→Rule 1淘汰",
+      "rps120": 94.8
+    }
+  ],
+  "new_learnings": [
+    {
+      "text": "单日内板块级轮动可瞬间完成：国常会'平准基金'表态+英伟达停发东南亚后科技虹吸全市场，城商行Ⅱ一天内从top5.5%(rank7)滑至cold(rank123)、农商行Ⅱ/电力/铁路公路同步转冷。cold_days=1尚不触发行业卖出，但若连续3日cold，Sector Overlay将对全部持仓机械卖出——需提前预备换仓而非临场决策",
+      "type": "observation",
+      "tags": [
+        "sector",
+        "exit-rule"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h076",
+      "mechanism": "强情绪日增量资金从防御板块单边迁移至趋势主线，防御板块5日等权相对强度被一日抹平，冷3日纪律是唯一给赢家留波动的缓冲"
+    },
+    {
+      "text": "全策略池77只中约七成RPS120>95%被cap过滤(再次验证h151)，剩余甜点区+扩展区再经Rule 1 sector过滤仅剩瑞芯微、亿联网络两只过关——候选稀缺时宁可小仓买最强的一只，不摊饼不强凑数",
+      "type": "rule",
+      "tags": [
+        "entry-filter"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h151",
+      "mechanism": "动量极致拥挤+行业轮动集中时，通过全部门槛的候选极少，此时选股质量>数量"
+    },
+    {
+      "text": "亢奋breadth(r4_7+r7_10+r10=4346>500)+IV rank全系1.0极高位环境下，即使mechanical层给full size，也应主动降仓(本次4%而非5-7%)——追在+11.6%创业板日之后的5% MA5偏离，需为次日回撤留余地",
+      "type": "signal",
+      "tags": [
+        "position-sizing",
+        "timing"
+      ],
+      "evidence_type": "supporting",
+      "related_hypothesis": "h017",
+      "mechanism": "高IV+高单日涨幅后次日波动放大、回撤概率上升；小仓在保留趋势敞口的同时控制单笔回撤"
+    }
+  ],
+  "market_summary": "国常会午间力挺资本市场(优化中央汇金'平准基金'功能)+英伟达暂停向东南亚四国发运AI服务器→国产算力替代主线爆发：创业板+11.61%、科创50+15.07%、深成+7.24%，成交额超2万亿(来源：格隆汇/每经/新浪财经)。Breadth 29.7:1(5382涨/181跌/439涨停/1跌停)强多头，但r4_7+r7_10+r10=4346>500进入亢奋区；IV Rank全系1.0极高位(500ETF 0.394/科创50 0.625)→高波动环境只买最强、主动降仓。银行/煤炭/家电等红利防御被虹吸单日转冷，持仓0/4在hot板块，紧盯cold_days累积。",
+  "market_sentiment": "bullish",
+  "market_call": "积极"
+}

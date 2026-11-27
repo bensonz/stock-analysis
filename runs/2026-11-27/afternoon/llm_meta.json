@@ -1,0 +1,102 @@
+{
+  "provider": "openai",
+  "primary_model": "deepseek-v4-pro",
+  "decision_source": "DeepSeek V4 Pro primary",
+  "input_tokens": 286447,
+  "output_tokens": 24841,
+  "rounds": 3,
+  "duration_sec": 467.5,
+  "tool_calls": [
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "A股 2026年11月27日 大涨 原因 科创50 创业板 半导体 算力 通信设备",
+        "max_results": 6
+      },
+      "result_length": 3923,
+      "fallback": "exa"
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "银行股 2026年11月27日 下跌 原因 南京银行 渝农商行 红利股",
+        "max_results": 6
+      },
+      "result_length": 3192,
+      "fallback": "exa"
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "瑞芯微"
+      },
+      "result_length": 2084
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "finance_news",
+      "input": {
+        "query": "南京银行"
+      },
+      "result_length": 1994
+    },
+    {
+      "pass": "P1",
+      "round": 1,
+      "tool": "web_search",
+      "input": {
+        "query": "半导体 通信设备 板块 领涨 2026-11-27 原因 算力 人形机器人",
+        "max_results": 6
+      },
+      "result_length": 4002,
+      "fallback": "exa"
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "finance_news",
+      "input": {
+        "query": "亿联网络"
+      },
+      "result_length": 2297
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.nbd.com.cn/articles/2026-11-27/4661023.html",
+        "maxChars": 3000
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://finance.sina.com.cn/jjxw/2026-11-27/doc-inkaefwe7817348.shtml",
+        "maxChars": 3000
+      },
+      "result_length": 3000
+    },
+    {
+      "pass": "P1",
+      "round": 2,
+      "tool": "web_fetch",
+      "input": {
+        "url": "https://www.gelonghui.com/live/2782534",
+        "maxChars": 3000
+      },
+      "result_length": 1136
+    }
+  ],
+  "fallback_used": false
+}

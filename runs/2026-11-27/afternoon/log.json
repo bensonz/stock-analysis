@@ -1,0 +1,161 @@
+{
+  "date": "2026-11-27",
+  "slot": "afternoon",
+  "runs": [
+    {
+      "phase": "collect",
+      "start": 1795763153.870844,
+      "errors": [],
+      "end": 1795763213.355684,
+      "duration_sec": 59.5
+    },
+    {
+      "phase": "llm_analysis",
+      "response_size_bytes": 8983,
+      "tokens": {
+        "input_tokens": 286447,
+        "output_tokens": 24841
+      },
+      "rounds": 3,
+      "tool_calls_count": 9,
+      "duration_sec": 467.5,
+      "fallback_used": false,
+      "provider": "openai",
+      "decision_source": "DeepSeek V4 Pro primary",
+      "primary_model": "deepseek-v4-pro"
+    },
+    {
+      "phase": "apply",
+      "start": 1795763680.859083,
+      "actions": [
+        "SKIP OPEN 603893: 涨停 (change 10.0%, board limit 10%), cannot buy at daily limit",
+        "Generated watchlist",
+        "Generated report",
+        "Saved daily summary",
+        "Hypothesis: Updated h076 (rule): +1 supporting evidence → hitRate=98%, n=64",
+        "Hypothesis: Updated h151 (rule): +1 supporting evidence → hitRate=100%, n=37",
+        "Hypothesis: Updated h017 (rule): +1 supporting evidence → hitRate=94%, n=34",
+        "Updated LEARNINGS.md (legacy)"
+      ],
+      "corporate_actions": {
+        "date": "2026-11-27",
+        "status": "ok",
+        "checked": 4,
+        "applied": [],
+        "fetch_failed": [],
+        "warnings": []
+      },
+      "post_apply_rule_violations": {
+        "status": "violations",
+        "total_rules": 6,
+        "total_violations": 4,
+        "crashed_rules": 0,
+        "rules": [
+          {
+            "rule": "check_breakout_failure",
+            "file": "scripts/rules/check_breakout_failure.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_iv_filter",
+            "file": "scripts/rules/check_iv_filter.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_overextended_entry",
+            "file": "scripts/rules/check_overextended_entry.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          },
+          {
+            "rule": "check_stop_proximity",
+            "file": "scripts/rules/check_stop_proximity.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "000429",
+                "name": "粤高速A",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 13.69,
+                "stopLoss": 13.01,
+                "distance_pct": 4.97,
+                "suggestion": "🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "003816",
+                "name": "中国广核",
+                "rule": "stop_proximity",
+                "severity": "WATCH",
+                "currentPrice": 4.6,
+                "stopLoss": 4.45,
+                "distance_pct": 3.26,
+                "suggestion": "🟠 WATCH — 3.3% above stop. Monitor closely. No immediate action but be ready."
+              },
+              {
+                "code": "601077",
+                "name": "渝农商行",
+                "rule": "stop_proximity",
+                "severity": "WARNING",
+                "currentPrice": 7.05,
+                "stopLoss": 6.85,
+                "distance_pct": 2.84,
+                "suggestion": "🟡 WARNING — only 2.8% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_time_decay",
+            "file": "scripts/rules/check_time_decay.py",
+            "status": "violations",
+            "exit_code": 1,
+            "violations": [
+              {
+                "code": "003816",
+                "name": "中国广核",
+                "rule": "time_decay",
+                "severity": "INFO",
+                "trading_days": 13,
+                "threshold": 15,
+                "pnl_pct": -1.71,
+                "is_commodity": false,
+                "suggestion": "APPROACHING threshold — 13/15 trading days, PnL=-1.7%. Will trigger in 2 days unless PnL reaches 3%. Prepare exit plan — note that Rule 5 allows no event-driven exception, so plan the exit, not a case for it."
+              }
+            ],
+            "error": null
+          },
+          {
+            "rule": "check_volume_below_mavol30",
+            "file": "scripts/rules/check_volume_below_mavol30.py",
+            "status": "ok",
+            "exit_code": 0,
+            "violations": [],
+            "error": null
+          }
+        ]
+      },
+      "end": 1795763686.108269,
+      "duration_sec": 5.2
+    }
+  ],
+  "validation_errors": [
+    "RULE check_stop_proximity: 000429 — 🟠 WATCH — 5.0% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 003816 — 🟠 WATCH — 3.3% above stop. Monitor closely. No immediate action but be ready.",
+    "RULE check_stop_proximity: 601077 — 🟡 WARNING — only 2.8% above stop. Prepare sell order. If market opens weak tomorrow, may gap through stop.",
+    "RULE check_time_decay: 003816 — APPROACHING threshold — 13/15 trading days, PnL=-1.7%. Will trigger in 2 days unless PnL reaches 3%. Prepare exit plan — note that Rule 5 allows no event-driven exception, so plan the exit, not a case for it."
+  ],
+  "summary": {
+    "totalPhases": 3,
+    "totalDurationSec": 532.2
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "as_of": "2026-11-27",
+  "window_days": 21,
+  "dated": [
+    {
+      "date": "2026-11-30",
+      "tz": "CN",
+      "name": "官方制造业PMI（9:30，当日盘中）",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "增长脉搏读数——A股实际交易的国内数据",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-11-30",
+      "days_until_impact": 3
+    },
+    {
+      "date": "2026-12-01",
+      "tz": "CN",
+      "name": "财新制造业PMI（9:45，当日盘中）",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "low",
+      "notes": "官方PMI的民企/出口侧补充",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-12-01",
+      "days_until_impact": 4
+    },
+    {
+      "date": "2026-12-04",
+      "tz": "US",
+      "name": "美国特朗普将对多晶硅及其衍生产品加征关税",
+      "kind": "other",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "北京时间 2026-12-04 00:00（华尔街见闻财经日历）",
+      "source": "华尔街见闻财经日历 imp=4",
+      "decided_by": "ai",
+      "direction": "risk",
+      "a_share_impact_date": "2026-12-07",
+      "days_until_impact": 10
+    },
+    {
+      "date": "2026-12-04",
+      "tz": "US",
+      "name": "美国非农就业(NFP)",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "联储路径预期的主要输入；周五盘后→影响下周一A股",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-12-07",
+      "days_until_impact": 10
+    },
+    {
+      "date": "2026-12-09",
+      "tz": "US",
+      "name": "FOMC利率决议+点阵图",
+      "kind": "cb_decision",
+      "certainty": "scheduled",
+      "impact": "high",
+      "notes": "年末流动性叠加。影响12/10A股。",
+      "source": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "decided_by": null,
+      "direction": "risk",
+      "a_share_impact_date": "2026-12-10",
+      "days_until_impact": 13
+    },
+    {
+      "date": "2026-12-11",
+      "tz": "CN",
+      "name": "中央经济工作会议（惯例12月中旬，日期待公布）",
+      "kind": "policy_meeting",
+      "certainty": "estimated",
+      "impact": "high",
+      "notes": "定明年增长目标与政策基调。",
+      "source": "惯例推算(近年12/6-12/12开幕)",
+      "decided_by": null,
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-12-11",
+      "days_until_impact": 14
+    },
+    {
+      "date": "2026-12-11",
+      "tz": "US",
+      "name": "12月11日：美国政府拨款到期日",
+      "kind": "other",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "北京时间 2026-12-11 00:00（华尔街见闻财经日历）",
+      "source": "华尔街见闻财经日历 imp=4",
+      "decided_by": "ai",
+      "direction": "risk",
+      "a_share_impact_date": "2026-12-14",
+      "days_until_impact": 17
+    },
+    {
+      "date": "2026-12-14",
+      "tz": "US",
+      "name": "美国2026年迈阿密G20领导人峰会（12月14日–15日）",
+      "kind": "other",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "北京时间 2026-12-14 00:00（华尔街见闻财经日历）",
+      "source": "华尔街见闻财经日历 imp=4",
+      "decided_by": "ai",
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-12-15",
+      "days_until_impact": 18
+    },
+    {
+      "date": "2026-12-18",
+      "tz": "CN",
+      "name": "CFFEX股指期货/期权交割日（第3周五）",
+      "kind": "opex",
+      "certainty": "scheduled",
+      "impact": "low",
+      "notes": "复测(n=48): 当日中证1000均值-0.33% vs 基线+0.03%(26/48收跌, ~1.5se)——偏弱但不显著, 观察项（复测: scripts/research/index_event_study.py --expiry-study）",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "risk",
+      "a_share_impact_date": "2026-12-18",
+      "days_until_impact": 21
+    },
+    {
+      "date": "2026-12-18",
+      "tz": "US",
+      "name": "美股月度OpEx（期权到期，GEX集中兑现）",
+      "kind": "opex",
+      "certainty": "scheduled",
+      "impact": "low",
+      "notes": "复测(n=48): 次日中证1000均值-0.18% vs 基线+0.03%——无显著效应, 仅作提示（复测: scripts/research/index_event_study.py --expiry-study）",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "risk",
+      "a_share_impact_date": "2026-12-21",
+      "days_until_impact": 24
+    }
+  ],
+  "ongoing": [
+    {
+      "name": "霍尔木兹海峡危机（美伊冲突）",
+      "kind": "geopolitical",
+      "impact": "high",
+      "notes": "2/28美以对伊开战以来海峡断航；4月停火后7/7再度交火，南航道AIS过航归零（7/10）。油价与全球风险偏好的持续压力源——7月中旬A股动量池系统性崩塌与此同窗。观察：停火/协议进展、油轮通行恢复、再升级。 【2026-11-21 状态】仍未恢复：UKMTO 称截至11-18当周通行量较战前低约65%，当周6起油轮遇袭；美军对伊朗港口封锁持续，美伊经卡塔尔斡旋未达成协议。",
+      "source": "新闻跟踪(多源); 南航道AIS过航数据见公开船讯平台; https://www.iranintl.com/en/202611215184 (UKMTO, 2026-11-21); https://www.unitedagainstnucleariran.com/analysis/iran-shipping-update-november-18-2026",
+      "direction": "risk"
+    }
+  ],
+  "recent": [
+    {
+      "date": "2026-11-25",
+      "tz": "US",
+      "name": "美国10月PCE物价指数环比",
+      "kind": "macro_release",
+      "certainty": "scheduled",
+      "impact": "medium",
+      "notes": "北京时间 2026-11-25 21:30（华尔街见闻财经日历）",
+      "source": "https://wallstreetcn.com/calendar/US111046/overview",
+      "decided_by": "ai",
+      "direction": "two_sided",
+      "a_share_impact_date": "2026-11-26",
+      "days_until_impact": -1
+    },
+    {
+      "date": "2026-11-25",
+      "tz": "CN",
+      "name": "A股ETF期权到期日（第4周三）",
+      "kind": "opex",
+      "certainty": "scheduled",
+      "impact": "low",
+      "notes": "复测(n=48): 当日中证1000均值-0.01%≈基线——无效应, 仅作日历提示（复测: scripts/research/index_event_study.py --expiry-study）",
+      "source": "公式推算(event_calendar.py:formulaic_events)",
+      "decided_by": null,
+      "direction": "risk",
+      "a_share_impact_date": "2026-11-25",
+      "days_until_impact": -2
+    }
+  ],
+  "risk_window": {
+    "level": "elevated",
+    "imminent": [],
+    "ongoing_high_impact": [
+      "霍尔木兹海峡危机（美伊冲突）"
+    ],
+    "advice": "存在持续性高冲击风险源（背景风险，非临近事件）：单笔规模取谨慎档。注意：这不是停买信号——通过全部规则的标的仍应减量执行；持续性风险不得作为长期零部署的理由"
+  },
+  "fomc_next_session_stats": {
+    "n": 15,
+    "sessions_negative": 11,
+    "mean_ew_ret_pct": -0.81,
+    "worst": {
+      "decision": "2026-10-28",
+      "session": "2026-10-29",
+      "ew_ret_pct": -2.67,
+      "up_ratio_pct": 13.9
+    },
+    "note": "样本仅15次（本地价格库范围），供参考不构成概率"
+  }
+}

@@ -1108,7 +1108,7 @@
       "type": "heuristic",
       "status": "rule",
       "created": "2026-04-01",
-      "lastTested": "2026-11-24",
+      "lastTested": "2026-11-27",
       "mechanism": "Cheap volatility means trend continuation can persist, but upside surprise from fresh entries comes from proper setup quality, not from paying up far above moving averages.",
       "evidence": {
         "supporting": [
@@ -1235,6 +1235,10 @@
           {
             "date": "2026-11-24",
             "detail": "渝农商行形态=历史新高7.42后回踩MA20支撑(非追高)+margin adding+0风险+IV正常，是软市(1.37:1、分布偏0-2%)+IV偏高(500ETF 0.85)下唯一满足全部门槛的入场；软市只取最干净一个，其余pass"
+          },
+          {
+            "date": "2026-11-27",
+            "detail": "亢奋breadth(r4_7+r7_10+r10=4346>500)+IV rank全系1.0极高位环境下，即使mechanical层给full size，也应主动降仓(本次4%而非5-7%)——追在+11.6%创业板日之后的5% MA5偏离，需为次日回撤留余地"
           }
         ],
         "contradicting": [
@@ -1248,9 +1252,9 @@
           }
         ]
       },
-      "sampleSize": 33,
-      "hitRate": 0.939,
-      "confidence": 0.914,
+      "sampleSize": 34,
+      "hitRate": 0.941,
+      "confidence": 0.917,
       "tags": [
         "timing",
         "position-sizing",
@@ -5079,6 +5083,10 @@
           {
             "date": "2026-11-27",
             "detail": "1日动量与5日动量背离的轮动日(科技1日领涨但5日rank垫底，防御5日榜首但今日被卖)：Rule 1按5日动量禁止追科技反弹，同时防御hot板块回调中开新仓须降size并警惕红利股集中抛售(中国神华配售引发)"
+          },
+          {
+            "date": "2026-11-27",
+            "detail": "单日内板块级轮动可瞬间完成：国常会'平准基金'表态+英伟达停发东南亚后科技虹吸全市场，城商行Ⅱ一天内从top5.5%(rank7)滑至cold(rank123)、农商行Ⅱ/电力/铁路公路同步转冷。cold_days=1尚不触发行业卖出，但若连续3日cold，Sector Overlay将对全部持仓机械卖出——需提前预备换仓而非临场决策"
           }
         ],
         "contradicting": [
@@ -5088,9 +5096,9 @@
           }
         ]
       },
-      "sampleSize": 63,
+      "sampleSize": 64,
       "hitRate": 0.984,
-      "confidence": 0.969,
+      "confidence": 0.97,
       "tags": [
         "sector",
         "exit-rule"
@@ -7499,7 +7507,7 @@
       "type": "rule",
       "status": "rule",
       "created": "2026-08-11",
-      "lastTested": "2026-11-26",
+      "lastTested": "2026-11-27",
       "mechanism": null,
       "evidence": {
         "supporting": [
@@ -7646,11 +7654,15 @@
           {
             "date": "2026-11-26",
             "detail": "RPS>95%封顶再次大范围过滤：73只策略池约60只RPS120>95（银行/公路/电力/消费均在96-99.9%），甜点区(80-92)仅个位数。弱市中全市场动量被防御股极致压缩，几乎无可买标的——正是h151预警的拥挤/均值回归风险，封顶规则继续维持。"
+          },
+          {
+            "date": "2026-11-27",
+            "detail": "全策略池77只中约七成RPS120>95%被cap过滤(再次验证h151)，剩余甜点区+扩展区再经Rule 1 sector过滤仅剩瑞芯微、亿联网络两只过关——候选稀缺时宁可小仓买最强的一只，不摊饼不强凑数"
           }
         ],
         "contradicting": []
       },
-      "sampleSize": 36,
+      "sampleSize": 37,
       "hitRate": 1.0,
       "confidence": 0.974,
       "tags": [

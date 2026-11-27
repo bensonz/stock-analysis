@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-27",
+  "actions": [
+    {
+      "code": "000429",
+      "name": "粤高速A",
+      "action": "HOLD",
+      "price": 13.69,
+      "pnl_pct": 0.0,
+      "note": "今日新开(<5日不换仓不churn)；铁路公路收盘转cold(rank111/128,cold_days=1未达3日不触发行业卖出)；浮盈0%未触止损13.01(距4.97% WATCH)。红旗：开仓时rank27 hot今已滑入cold，明日起盯冷3日"
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "action": "HOLD",
+      "price": 4.6,
+      "pnl_pct": -1.71,
+      "note": "电力cold(rank112/128,cold_days=1未触发)；13/15日逼近时间止损且浮亏-1.71%<3%——2日后若仍<3%机械触发(Rule5无例外)，今日不抢跑但预备离场；现价4.60已跌破MA5/10/20均线簇"
+    },
+    {
+      "code": "601009",
+      "name": "南京银行",
+      "action": "HOLD",
+      "price": 13.05,
+      "pnl_pct": 4.32,
+      "note": "浮盈+4.32%(另有中期分红874.42到账)未达+10%抬止损线；城商行Ⅱ今日从top5.5%滑至cold(rank123/128,cold_days=1未触发行业卖出)，红利被科技虹吸(格隆汇：南京银行/宁波银行/渝农商行跌超3%)——冷3日才卖纪律给赢家留空间，破位不找理由"
+    },
+    {
+      "code": "601077",
+      "name": "渝农商行",
+      "action": "HOLD",
+      "price": 7.05,
+      "pnl_pct": -2.22,
+      "note": "新仓3日-2.22%未触-3%首3日线(临界)也未触止损6.85(距2.84% WARNING)；农商行Ⅱ转cold(rank122/128,cold_days=1)，银行集体回调(格隆汇)；margin仍adding(chg5+12.1%)。明日若开盘弱，-3%线6.99或止损6.85随时触发，不提前抢跑"
+    }
+  ],
+  "portfolioStats": {
+    "totalPositions": 4,
+    "totalEquity": 959130.36,
+    "dayPnl": -2630.0,
+    "dayReturnPct": -0.27,
+    "totalReturnPct": -4.09,
+    "unrealizedPnl": 550.0,
+    "realizedPnl": -41419.64,
+    "cashPct": 85.66
+  },
+  "entryRegime": {
+    "allow_new_positions": true,
+    "regime": "strong",
+    "breadth_ratio": 29.7348,
+    "up": 5382,
+    "down": 181,
+    "positive_indices": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "negative_indices": [],
+    "limit_ups": 439,
+    "limit_downs": 1,
+    "sizing_multiplier": 1.0,
+    "hard_block": false,
+    "reason": "Entry regime strong: breadth 29.73:1, 3/3 major indices green, 439 limit-ups / 1 limit-downs. Allow entries at full size; per-stock overextension is filtered individually (dist_ma)."
+  },
+  "newPositions": [],
+  "blockedOpens": [
+    {
+      "code": "603893",
+      "name": "瑞芯微",
+      "reason": "涨停 (change 10.0%, board limit 10%), cannot buy at daily limit"
+    }
+  ],
+  "marketContext": {
+    "summary": "国常会午间力挺资本市场(优化中央汇金'平准基金'功能)+英伟达暂停向东南亚四国发运AI服务器→国产算力替代主线爆发：创业板+11.61%、科创50+15.07%、深成+7.24%，成交额超2万亿(来源：格隆汇/每经/新浪财经)。Breadth 29.7:1(5382涨/181跌/439涨停/1跌停)强多头，但r4_7+r7_10+r10=4346>500进入亢奋区；IV Rank全系1.0极高位(500ETF 0.394/科创50 0.625)→高波动环境只买最强、主动降仓。银行/煤炭/家电等红利防御被虹吸单日转冷，持仓0/4在hot板块，紧盯cold_days累积。"
+  }
+}
